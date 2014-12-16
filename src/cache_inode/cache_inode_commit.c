@@ -115,36 +115,30 @@ cache_inode_commit(cache_entry_t *entry, uint64_t offset, size_t count)
 		   additional error form a close? */
 		if (opened) {
 			PTHREAD_RWLOCK_unlock(&entry->content_lock);
-			PTHREAD_RWLOCK_wrlock(&entry->content_lock);
-			cstatus =
-			    cache_inode_close(entry,
-					      CACHE_INODE_FLAG_CONTENT_HAVE |
-					      CACHE_INODE_FLAG_CONTENT_HOLD);
-
-			PTHREAD_RWLOCK_unlock(&entry->content_lock);
-			opened = false;
 			content_locked = false;
+
+			cstatus = cache_inode_close(entry,
+						    CACHE_INODE_FLAG_NONE);
+
+			opened = false;
 		}
 		goto out;
 	}
 
+	PTHREAD_RWLOCK_unlock(&entry->content_lock);
+	content_locked = false;
+
 	/* Close the FD if we opened it. */
 	if (opened) {
-		PTHREAD_RWLOCK_unlock(&entry->content_lock);
-		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
-		cstatus =
-		    cache_inode_close(entry,
-				      CACHE_INODE_FLAG_CONTENT_HAVE |
-				      CACHE_INODE_FLAG_CONTENT_HOLD);
+		cstatus = cache_inode_close(entry,
+					    CACHE_INODE_FLAG_NONE);
+
 		if (cstatus != CACHE_INODE_SUCCESS) {
 			LogMajor(COMPONENT_CACHE_INODE,
 				 "cache_inode_close = %s",
 				 cache_inode_err_str(cstatus));
 		}
 	}
-
-	PTHREAD_RWLOCK_unlock(&entry->content_lock);
-	content_locked = false;
 
 	/* In other case cache_inode_rdwr call FSAL_Commit */
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);

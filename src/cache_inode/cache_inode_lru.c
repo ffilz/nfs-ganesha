@@ -423,6 +423,58 @@ cache_inode_lru_clean(cache_entry_t *entry)
 }
 
 /**
+ * @brief If an entry is reclaimable, push it to the desired queue.
+ *
+ * @param[in] entry  The entry to reclaim
+ * @param[in] qid    The queue to push to
+ *
+ * @retval true if the entry was reclaimed.
+ */
+bool cache_inode_lru_try_reclaim(cache_entry_t *entry, enum lru_q_id qid)
+{
+	cache_inode_lru_t *lru = &entry->lru;
+	struct lru_q_lane *qlane = &LRU[lru->lane];
+	cih_latch_t latch;
+	uint32_t refcnt;
+	bool reclaimed = false;
+
+	cih_latch_entry(entry, &latch, CIH_GET_WLOCK, __func__, __LINE__);
+
+	QLOCK(qlane);
+
+	refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
+
+	/* there are two cases which permit reclaim,
+	 * entry is:
+	 * 1. reachable but unref'd (refcnt==2)
+	 * 2. unreachable, being removed (plus refcnt==0)
+	 *    for safety, take only the former
+	 */
+	if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
+		/* it worked */
+		struct lru_q *q = lru_queue_of(entry);
+		cih_remove_latched(entry, &latch);
+		LRU_DQ_SAFE(lru, q);
+		entry->lru.qid = qid;
+		reclaimed = true;
+	}
+
+	QUNLOCK(qlane);
+
+	cih_latch_rele(&latch);
+
+	if (reclaimed) {
+		/* Return the sentinel LRU reference. This also assures
+		 * that if the entry had gone stale, it WILL get properly
+		 * cleaned up.
+		 */
+		cache_inode_lru_unref(entry, LRU_FLAG_NONE);
+	}
+
+	return reclaimed;
+}
+
+/**
  * @brief Try to pull an entry off the queue
  *
  * This function examines the end of the specified queue and if the
@@ -446,7 +498,6 @@ lru_reap_impl(enum lru_q_id qid)
 	cache_inode_lru_t *lru;
 	cache_entry_t *entry;
 	uint32_t refcnt;
-	cih_latch_t latch;
 	int ix;
 
 	lane = LRU_NEXT(reap_lane);
@@ -456,55 +507,44 @@ lru_reap_impl(enum lru_q_id qid)
 
 		QLOCK(qlane);
 		lru = glist_first_entry(&lq->q, cache_inode_lru_t, q);
-		if (!lru)
-			goto next_lane;
-		refcnt = atomic_inc_int32_t(&lru->refcnt);
-		entry = container_of(lru, cache_entry_t, lru);
-		if (unlikely(refcnt != (LRU_SENTINEL_REFCOUNT + 1))) {
-			/* cant use it. */
-			cache_inode_lru_unref(entry, LRU_UNREF_QLOCKED);
-			goto next_lane;
-		}
-		/* potentially reclaimable */
-		QUNLOCK(qlane);
-		/* entry must be unreachable from CIH when recycled */
-		if (cih_latch_entry
-		    (entry, &latch, CIH_GET_WLOCK, __func__, __LINE__)) {
-			QLOCK(qlane);
-			refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
-			/* there are two cases which permit reclaim,
-			 * entry is:
-			 * 1. reachable but unref'd (refcnt==2)
-			 * 2. unreachable, being removed (plus refcnt==0)
-			 *  for safety, take only the former
-			 */
-			if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
-				/* it worked */
-				struct lru_q *q = lru_queue_of(entry);
-				cih_remove_latched(entry, &latch,
-						   CIH_REMOVE_QLOCKED);
-				LRU_DQ_SAFE(lru, q);
-				entry->lru.qid = LRU_ENTRY_NONE;
-				QUNLOCK(qlane);
-				cih_latch_rele(&latch);
-				goto out;
-			}
-			cih_latch_rele(&latch);
-			/* return the ref we took above--unref deals
-			 * correctly with reclaim case */
-			cache_inode_lru_unref(entry, LRU_UNREF_QLOCKED);
-		} else {
-			/* ! QLOCKED */
+
+		if (!lru) {
+			QUNLOCK(qlane);
 			continue;
 		}
- next_lane:
+
+		/* Take reference while holding the qlane lock to assure
+		 * it doesn't go away on us.
+		 */
+		refcnt = atomic_inc_int32_t(&lru->refcnt);
+
+		entry = container_of(lru, cache_entry_t, lru);
+
 		QUNLOCK(qlane);
+
+		if (unlikely(refcnt != (LRU_SENTINEL_REFCOUNT + 1))) {
+			/* cant use it, release the reference. */
+			cache_inode_lru_unref(entry, LRU_FLAG_NONE);
+			continue;
+		}
+
+		/* potentially reclaimable */
+
+		/* entry must be unreachable from CIH when recycled */
+		if (cache_inode_lru_try_reclaim(entry, LRU_ENTRY_NONE)) {
+			/* We were able to reclaim an entry, return it to
+			 * the caller for re-use.
+			 */
+			return lru;
+		}
+
+		/* return the ref we took above--unref deals
+		 * correctly with reclaim case */
+		cache_inode_lru_unref(entry, LRU_FLAG_NONE);
 	}			/* foreach lane */
 
 	/* ! reclaimable */
-	lru = NULL;
- out:
-	return lru;
+	return NULL;
 }
 
 static inline cache_inode_lru_t *
@@ -578,33 +618,30 @@ void cache_inode_lru_cleanup_try_push(cache_entry_t *entry)
 	cache_inode_lru_t *lru = &entry->lru;
 	struct lru_q_lane *qlane = &LRU[lru->lane];
 	cih_latch_t latch;
+	uint32_t refcnt;
 
-	if (cih_latch_entry(entry, &latch, CIH_GET_WLOCK,
-			    __func__, __LINE__)) {
-		uint32_t refcnt;
+	cih_latch_entry(entry, &latch, CIH_GET_WLOCK, __func__, __LINE__);
 
-		QLOCK(qlane);
+	QLOCK(qlane);
 
-		refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
-		/* there are two cases which permit reclaim,
-		 * entry is:
-		 * 1. reachable but unref'd (refcnt==2)
-		 * 2. unreachable, being removed (plus refcnt==0)
-		 *    for safety, take only the former
-		 */
-		if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
-			/* it worked */
-			struct lru_q *q = lru_queue_of(entry);
-			cih_remove_latched(entry, &latch,
-					   CIH_REMOVE_QLOCKED);
-			LRU_DQ_SAFE(lru, q);
-			entry->lru.qid = LRU_ENTRY_CLEANUP;
-		}
-
-		QUNLOCK(qlane);
-
-		cih_latch_rele(&latch);
+	refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
+	/* there are two cases which permit reclaim,
+	 * entry is:
+	 * 1. reachable but unref'd (refcnt==2)
+	 * 2. unreachable, being removed (plus refcnt==0)
+	 *    for safety, take only the former
+	 */
+	if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
+		/* it worked */
+		struct lru_q *q = lru_queue_of(entry);
+		cih_remove_latched(entry, &latch);
+		LRU_DQ_SAFE(lru, q);
+		entry->lru.qid = LRU_ENTRY_CLEANUP;
 	}
+
+	QUNLOCK(qlane);
+
+	cih_latch_rele(&latch);
 }
 
 /**
@@ -656,12 +693,6 @@ void cache_inode_lru_cleanup_try_push(cache_entry_t *entry)
  *
  * @param[in] ctx Fridge context
  */
-
-#define CL_FLAGS \
-	(CACHE_INODE_FLAG_REALLYCLOSE| \
-	 CACHE_INODE_FLAG_NOT_PINNED| \
-	 CACHE_INODE_FLAG_CONTENT_HAVE| \
-	 CACHE_INODE_FLAG_CONTENT_HOLD)
 
 static void
 lru_run(struct fridgethr_context *ctx)
@@ -812,12 +843,18 @@ lru_run(struct fridgethr_context *ctx)
 
 					/* check refcnt in range */
 					if (unlikely(refcnt > 2)) {
+						/* We can't hold qlane lock
+						 * while calling
+						 * cache_inode_lru_unref.
+						 */
+						QUNLOCK(qlane);
 						cache_inode_lru_unref(
 							entry,
-							LRU_UNREF_QLOCKED);
+							LRU_FLAG_NONE);
 						workdone++; /* but count it */
 						/* qlane LOCKED, lru refcnt is
 						 * restored */
+						QLOCK(qlane);
 						continue;
 					}
 
@@ -833,33 +870,35 @@ lru_run(struct fridgethr_context *ctx)
 					 * (slow) operations on entry */
 					QUNLOCK(qlane);
 
-					/* Acquire the content lock first; we
-					 * may need to look at fds and close
-					 * it. */
-					PTHREAD_RWLOCK_wrlock(&entry->
-							      content_lock);
-					if (is_open(entry)) {
-						cache_status =
-						    cache_inode_close(
-							    entry, CL_FLAGS);
-						if (cache_status !=
-						    CACHE_INODE_SUCCESS) {
-							LogCrit(
-						      COMPONENT_CACHE_INODE_LRU,
-							"Error closing file in LRU thread.");
-						} else {
-							++totalclosed;
-							++closed;
-						}
+					if (entry->type != REGULAR_FILE)
+						goto unref;
+
+					cache_status = cache_inode_close(
+						entry,
+						CACHE_INODE_FLAG_REALLYCLOSE
+						| CACHE_INODE_FLAG_NOT_PINNED
+						| CACHE_INODE_FLAG_REPORT_OPEN);
+
+					if (cache_status ==
+					    CACHE_INODE_FILE_OPEN) {
+						++totalclosed;
+						++closed;
+					} else if (cache_status !=
+						   CACHE_INODE_SUCCESS) {
+						LogCrit(
+						    COMPONENT_CACHE_INODE_LRU,
+						    "Error %s closing file in LRU thread.",
+						    cache_inode_err_str(
+								cache_status));
 					}
-					PTHREAD_RWLOCK_unlock(&entry->
-							      content_lock);
+
+ unref:
+
+					cache_inode_lru_unref(entry,
+							      LRU_FLAG_NONE);
+					++workdone;
 
 					QLOCK(qlane);	/* QLOCKED */
-					cache_inode_lru_unref(
-						entry,
-						LRU_UNREF_QLOCKED);
-					++workdone;
 				} /* for_each_safe lru */
 
  next_lane:
@@ -1445,10 +1484,9 @@ cache_inode_lru_unref(cache_entry_t *entry, uint32_t flags)
 	bool do_cleanup = false;
 	uint32_t lane = entry->lru.lane;
 	struct lru_q_lane *qlane = &LRU[lane];
-	bool qlocked = flags & LRU_UNREF_QLOCKED;
 	bool other_lock_held = flags & LRU_UNREF_STATE_LOCK_HELD;
 
-	if (!qlocked && !other_lock_held) {
+	if (!other_lock_held) {
 		QLOCK(qlane);
 		if (((entry->lru.flags & LRU_CLEANED) == 0) &&
 		    (entry->lru.qid == LRU_ENTRY_CLEANUP)) {
@@ -1474,14 +1512,12 @@ cache_inode_lru_unref(cache_entry_t *entry, uint32_t flags)
 		struct lru_q *q;
 
 		/* we MUST recheck that refcount is still 0 */
-		if (!qlocked)
-			QLOCK(qlane);
+		QLOCK(qlane);
 
 		refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
 
 		if (unlikely(refcnt > 0)) {
-			if (!qlocked)
-				QUNLOCK(qlane);
+			QUNLOCK(qlane);
 			goto out;
 		}
 
@@ -1493,8 +1529,7 @@ cache_inode_lru_unref(cache_entry_t *entry, uint32_t flags)
 			LRU_DQ_SAFE(&entry->lru, q);
 		}
 
-		if (!qlocked)
-			QUNLOCK(qlane);
+		QUNLOCK(qlane);
 
 		cache_inode_lru_clean(entry);
 		pool_free(cache_inode_entry_pool, entry);
@@ -1513,20 +1548,15 @@ cache_inode_lru_unref(cache_entry_t *entry, uint32_t flags)
  * be used.
  *
  * @param[in] entry  The entry on which to release a reference
- * @param[in] flags  Currently significant are and LRU_FLAG_LOCKED
- *                   (indicating that the caller holds the LRU mutex
- *                   lock for this entry.)
  */
 void
-cache_inode_lru_putback(cache_entry_t *entry, uint32_t flags)
+cache_inode_lru_putback(cache_entry_t *entry)
 {
-	bool qlocked = flags & LRU_UNREF_QLOCKED;
 	uint32_t lane = entry->lru.lane;
 	struct lru_q_lane *qlane = &LRU[lane];
 	struct lru_q *q;
 
-	if (!qlocked)
-		QLOCK(qlane);
+	QLOCK(qlane);
 
 	q = lru_queue_of(entry);
 	if (q) {
@@ -1539,8 +1569,7 @@ cache_inode_lru_putback(cache_entry_t *entry, uint32_t flags)
 	pool_free(cache_inode_entry_pool, entry);
 	atomic_dec_int64_t(&lru_state.entries_used);
 
-	if (!qlocked)
-		QUNLOCK(qlane);
+	QUNLOCK(qlane);
 }
 
 /**

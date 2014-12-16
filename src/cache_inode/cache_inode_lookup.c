@@ -87,21 +87,21 @@ cache_inode_lookup_impl(cache_entry_t *parent,
 	cache_inode_status_t status = CACHE_INODE_SUCCESS;
 
 	if (parent->type != DIRECTORY) {
-		status = CACHE_INODE_NOT_A_DIRECTORY;
 		*entry = NULL;
-		return status;
+		return CACHE_INODE_NOT_A_DIRECTORY;
 	}
-
-	PTHREAD_RWLOCK_rdlock(&parent->content_lock);
 
 	/* if name is ".", use the input value */
 	if (strcmp(name, ".") == 0) {
 		*entry = parent;
 		/* Increment the refcount so the caller's decrementing it
 		   doesn't take us below the sentinel count. */
-		status = cache_inode_lru_ref(*entry, LRU_FLAG_NONE);
-		goto out;
-	} else if (strcmp(name, "..") == 0) {
+		return cache_inode_lru_ref(*entry, LRU_FLAG_NONE);
+	}
+
+	PTHREAD_RWLOCK_rdlock(&parent->content_lock);
+
+	if (strcmp(name, "..") == 0) {
 		/* Directory do only have exactly one parent. This a limitation
 		 * in all FS, which implies that hard link are forbidden on
 		 * directories (so that they exists only in one dir).  Because

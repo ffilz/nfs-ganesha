@@ -461,7 +461,7 @@ cache_inode_new_entry(struct fsal_obj_handle *new_obj,
 			cache_inode_key_delete(&nentry->fh_hk.key);
 
 		/* Release the new entry we acquired. */
-		cache_inode_lru_putback(nentry, LRU_FLAG_NONE);
+		cache_inode_lru_putback(nentry);
 	}
 
 	/* must free new_obj if no new entry was created to reference it. */
@@ -548,7 +548,8 @@ void cache_inode_unexport(struct gsh_export *export)
 			/* If there are no exports referencing this
 			 * entry, attempt to push it to cleanup queue.
 			 */
-			cache_inode_lru_cleanup_try_push(entry);
+			(void) cache_inode_lru_try_reclaim(entry,
+							   LRU_ENTRY_CLEANUP);
 		} else {
 			/* Make sure first export pointer is still valid */
 			atomic_store_voidptr(&entry->first_export,

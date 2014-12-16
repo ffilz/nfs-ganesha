@@ -221,13 +221,11 @@ cache_inode_rdwr_plus(cache_entry_t *entry,
 				     "cache_inode_rdwr: CLOSING entry %p",
 				     entry);
 			PTHREAD_RWLOCK_unlock(&entry->content_lock);
-			PTHREAD_RWLOCK_wrlock(&entry->content_lock);
+			content_locked = false;
 
 			cstatus =
 			    cache_inode_close(entry,
-					      (CACHE_INODE_FLAG_REALLYCLOSE |
-					       CACHE_INODE_FLAG_CONTENT_HAVE |
-					       CACHE_INODE_FLAG_CONTENT_HOLD));
+					      CACHE_INODE_FLAG_REALLYCLOSE);
 
 			if (cstatus != CACHE_INODE_SUCCESS) {
 				LogCrit(COMPONENT_CACHE_INODE,
@@ -246,11 +244,10 @@ cache_inode_rdwr_plus(cache_entry_t *entry,
 
 	if (opened) {
 		PTHREAD_RWLOCK_unlock(&entry->content_lock);
-		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
-		status =
-		    cache_inode_close(entry,
-				      CACHE_INODE_FLAG_CONTENT_HAVE |
-				      CACHE_INODE_FLAG_CONTENT_HOLD);
+		content_locked = false;
+
+		status = cache_inode_close(entry, CACHE_INODE_FLAG_NONE);
+
 		if (status != CACHE_INODE_SUCCESS) {
 			LogEvent(COMPONENT_CACHE_INODE,
 				 "cache_inode_rdwr: cache_inode_close = %d",

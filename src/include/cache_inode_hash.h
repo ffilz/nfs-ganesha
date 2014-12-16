@@ -346,7 +346,7 @@ cih_get_by_key_latched(cache_inode_key_t *key, cih_latch_t *latch,
  *
  * @return void
  */
-static inline bool
+static inline void
 cih_latch_entry(cache_entry_t *entry, cih_latch_t *latch, uint32_t flags,
 		const char *func, int line)
 {
@@ -362,8 +362,6 @@ cih_latch_entry(cache_entry_t *entry, cih_latch_t *latch, uint32_t flags,
 
 	cp->locktrace.func = (char *)func;
 	cp->locktrace.line = line;
-
-	return true;
 }
 
 #define CIH_SET_NONE     0x0000
@@ -438,37 +436,27 @@ cih_remove_checked(cache_entry_t *entry)
 /**
  * @brief Remove cache entry protected by latch
  *
- * Remove cache entry.
+ * Remove cache entry. The sentinel LRU reference must be released by the
+ * caller.
  *
  * @param entry [in] Entry to be removed.0
  *
  * @return true if entry is invalid
  */
-#define CIH_REMOVE_NONE    0x0000
-#define CIH_REMOVE_UNLOCK  0x0001
-#define CIH_REMOVE_QLOCKED 0x0002
 
 static inline bool
-cih_remove_latched(cache_entry_t *entry, cih_latch_t *latch, uint32_t flags)
+cih_remove_latched(cache_entry_t *entry, cih_latch_t *latch)
 {
 	cih_partition_t *cp =
 	    cih_partition_of_scalar(&cih_fhcache, entry->fh_hk.key.hk);
-	uint32_t lflags = LRU_FLAG_NONE;
 
 	if (entry->fh_hk.inavl) {
 		avltree_remove(&entry->fh_hk.node_k, &cp->t);
 		cp->cache[cih_cache_offsetof(&cih_fhcache,
 					     entry->fh_hk.key.hk)] = NULL;
 		entry->fh_hk.inavl = false;
-		if (flags & CIH_REMOVE_QLOCKED)
-			lflags |= LRU_UNREF_QLOCKED;
-		cache_inode_lru_unref(entry, lflags);
-		if (flags & CIH_REMOVE_UNLOCK)
-			PTHREAD_RWLOCK_unlock(&cp->lock);
 		return true;
 	}
-	if (flags & CIH_REMOVE_UNLOCK)
-		PTHREAD_RWLOCK_unlock(&cp->lock);
 
 	return false;
 }

@@ -292,7 +292,8 @@ static nfsstat4 open4_do_open(struct nfs_argop4 *op, compound_data_t *data,
 
 		if (state_status != STATE_SUCCESS) {
 			cache_status =
-			    cache_inode_close(data->current_entry, 0);
+			    cache_inode_close(data->current_entry,
+					      CACHE_INODE_FLAG_NONE);
 
 			if (cache_status != CACHE_INODE_SUCCESS) {
 				/* Log bad close and continue. */
@@ -315,7 +316,8 @@ static nfsstat4 open4_do_open(struct nfs_argop4 *op, compound_data_t *data,
 
 		if (state_status != STATE_SUCCESS) {
 			cache_status =
-			    cache_inode_close(data->current_entry, 0);
+			    cache_inode_close(data->current_entry,
+					      CACHE_INODE_FLAG_NONE);
 
 			if (cache_status != CACHE_INODE_SUCCESS) {
 				/* Log bad close and continue. */

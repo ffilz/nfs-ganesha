@@ -270,19 +270,7 @@ cache_inode_close(cache_entry_t *entry, uint32_t flags)
 	if (entry->type != REGULAR_FILE) {
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "Entry %p File not a REGULAR_FILE", entry);
-		status = CACHE_INODE_BAD_TYPE;
-		goto out;
-	}
-
-	if (!(flags & CACHE_INODE_FLAG_CONTENT_HAVE))
-		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
-
-	/* If nothing is opened, do nothing */
-	if (!is_open(entry)) {
-		LogFullDebug(COMPONENT_CACHE_INODE, "Entry %p File not open",
-			     entry);
-		status = CACHE_INODE_SUCCESS;
-		goto unlock;
+		return CACHE_INODE_BAD_TYPE;
 	}
 
 	/* If file is pinned, do not close it.  This should
@@ -292,10 +280,20 @@ cache_inode_close(cache_entry_t *entry, uint32_t flags)
 	    && cache_inode_is_pinned(entry)) {
 		LogFullDebug(COMPONENT_CACHE_INODE, "Entry %p is pinned",
 			     entry);
+		return CACHE_INODE_SUCCESS;
+	}
+
+	assert((flags & CACHE_INODE_FLAG_CONTENT_HAVE) == 0);
+
+	PTHREAD_RWLOCK_wrlock(&entry->content_lock);
+
+	/* If nothing is opened, do nothing */
+	if (!is_open(entry)) {
+		LogFullDebug(COMPONENT_CACHE_INODE, "Entry %p File not open",
+			     entry);
 		status = CACHE_INODE_SUCCESS;
 		goto unlock;
 	}
-
 
 	if (!cache_inode_lru_caching_fds()
 	    || (flags & CACHE_INODE_FLAG_REALLYCLOSE)
@@ -321,13 +319,15 @@ cache_inode_close(cache_entry_t *entry, uint32_t flags)
 			atomic_dec_size_t(&open_fd_count);
 	}
 
-	status = CACHE_INODE_SUCCESS;
+	if (flags & CACHE_INODE_FLAG_REPORT_OPEN)
+		status = CACHE_INODE_FILE_OPEN;
+	else
+		status = CACHE_INODE_SUCCESS;
 
 unlock:
-	if (!(flags & CACHE_INODE_FLAG_CONTENT_HOLD))
-		PTHREAD_RWLOCK_unlock(&entry->content_lock);
 
-out:
+	PTHREAD_RWLOCK_unlock(&entry->content_lock);
+
 	return status;
 }
 

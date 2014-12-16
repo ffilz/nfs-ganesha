@@ -109,11 +109,6 @@ extern struct lru_state lru_state;
 #define LRU_REQ_STALE_OK  0x0004
 
 /**
- * qlane is locked
- */
-#define LRU_UNREF_QLOCKED 0x0008
-
-/**
  * entry->state_lock is held
  *
  * This will prevent cleanup on unref. The calling thread MUST hold another
@@ -146,10 +141,10 @@ cache_inode_status_t cache_inode_lru_ref(cache_entry_t *entry, uint32_t flags);
 /* XXX */
 void cache_inode_lru_kill(cache_entry_t *entry);
 void cache_inode_lru_cleanup_push(cache_entry_t *entry);
-void cache_inode_lru_cleanup_try_push(cache_entry_t *entry);
+bool cache_inode_lru_try_reclaim(cache_entry_t *entry, enum lru_q_id qid);
 
 void cache_inode_lru_unref(cache_entry_t *entry, uint32_t flags);
-void cache_inode_lru_putback(cache_entry_t *entry, uint32_t flags);
+void cache_inode_lru_putback(cache_entry_t *entry);
 void lru_wake_thread(void);
 cache_inode_status_t cache_inode_inc_pin_ref(cache_entry_t *entry);
 void cache_inode_unpinnable(cache_entry_t *entry);

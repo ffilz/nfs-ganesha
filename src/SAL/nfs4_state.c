@@ -740,7 +740,7 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 		PTHREAD_RWLOCK_unlock(&entry->state_lock);
 
 		/* Close the file in FSAL through the cache inode */
-		cache_inode_close(entry, 0);
+		cache_inode_close(entry, CACHE_INODE_FLAG_NONE);
 
 		cache_inode_lru_unref(entry, LRU_FLAG_NONE);
 
