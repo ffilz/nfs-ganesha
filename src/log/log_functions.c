@@ -61,40 +61,6 @@
 #include "gsh_lttng/logger.h"
 #endif
 
-/*
- * The usual PTHREAD_RWLOCK_xxx macros log messages for tracing if FULL
- * DEBUG is enabled. If such a macro is called from this logging file as
- * part of logging a message, it generates endless loop of lock tracing
- * messages. The following code redefines these lock macros to avoid the
- * loop.
- */
-#ifdef PTHREAD_RWLOCK_wrlock
-#undef PTHREAD_RWLOCK_wrlock
-#endif
-#define PTHREAD_RWLOCK_wrlock(_lock)					\
-	do {								\
-		if (pthread_rwlock_wrlock(_lock) != 0)			\
-			assert(0);					\
-	} while (0)
-
-#ifdef PTHREAD_RWLOCK_rdlock
-#undef PTHREAD_RWLOCK_rdlock
-#endif
-#define PTHREAD_RWLOCK_rdlock(_lock)					\
-	do {								\
-		if (pthread_rwlock_rdlock(_lock) != 0)			\
-			assert(0);					\
-	} while (0)
-
-#ifdef PTHREAD_RWLOCK_unlock
-#undef PTHREAD_RWLOCK_unlock
-#endif
-#define PTHREAD_RWLOCK_unlock(_lock)					\
-	do {								\
-		if (pthread_rwlock_unlock(_lock) != 0)			\
-			assert(0);					\
-	} while (0)
-
 pthread_rwlock_t log_rwlock = PTHREAD_RWLOCK_INITIALIZER;
 
 /* Variables to control log fields */
@@ -242,6 +208,7 @@ typedef struct loglev {
 
 static log_level_t tabLogLevel[] = {
 	[NIV_NULL] = {"NIV_NULL", "NULL", LOG_NOTICE},
+	[NIV_ABORT] = {"NIV_ABORT", "ABORT", LOG_CRIT},
 	[NIV_FATAL] = {"NIV_FATAL", "FATAL", LOG_CRIT},
 	[NIV_MAJ] = {"NIV_MAJ", "MAJ", LOG_CRIT},
 	[NIV_CRIT] = {"NIV_CRIT", "CRIT", LOG_ERR},
@@ -1171,6 +1138,8 @@ void init_logging(const char *log_path, const int debug_level)
 	ArmSignal(SIGUSR2, DecrementLevelDebug);
 }
 
+#define BT_MAX 256
+
 /*
  * Routines for managing error messages
  */
@@ -1218,6 +1187,12 @@ static int log_to_file(log_header_t headers, void *private,
 			(void)close(fd);
 
 			goto error;
+		}
+
+		if (level == NIV_ABORT) {
+			void *trace[BT_MAX];
+			int num = backtrace(trace, BT_MAX);
+			backtrace_symbols_fd(trace, num, fd);
 		}
 
 		rc = close(fd);
@@ -1445,7 +1420,8 @@ void display_log_component_level(log_components_t component, char *file,
 		   component, level, file, line, function, message);
 #endif
 
-	PTHREAD_RWLOCK_rdlock(&log_rwlock);
+	if (pthread_rwlock_rdlock(&log_rwlock) != 0)
+		level = NIV_ABORT;
 
 	glist_for_each(glist, &active_facility_list) {
 		facility = glist_entry(glist, struct log_facility, lf_active);
@@ -1458,7 +1434,11 @@ void display_log_component_level(log_components_t component, char *file,
 					  compstr, message);
 	}
 
-	PTHREAD_RWLOCK_unlock(&log_rwlock);
+	if (pthread_rwlock_unlock(&log_rwlock) != 0)
+		abort();
+
+	if (level == NIV_ABORT)
+		abort();
 
 	if (level == NIV_FATAL)
 		Fatal();
@@ -1986,6 +1966,7 @@ static int format_commit(void *node, void *link_mem, void *self_struct,
 
 static struct config_item_list log_levels[] = {
 	CONFIG_LIST_TOK("NULL", NIV_NULL),
+	CONFIG_LIST_TOK("ABORT", NIV_ABORT),
 	CONFIG_LIST_TOK("FATAL", NIV_FATAL),
 	CONFIG_LIST_TOK("MAJ", NIV_MAJ),
 	CONFIG_LIST_TOK("CRIT", NIV_CRIT),

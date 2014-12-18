@@ -53,6 +53,7 @@
  */
 typedef enum log_levels {
 	NIV_NULL,
+	NIV_ABORT,
 	NIV_FATAL,
 	NIV_MAJ,
 	NIV_CRIT,
@@ -215,6 +216,14 @@ extern struct log_component_info LogComponents[COMPONENT_COUNT];
 	DisplayLogComponentLevel(COMPONENT_ALL, (char *) __FILE__, \
 				 __LINE__,  (char *) __func__, \
 				 NIV_NULL, format, ## args)
+
+#define LogAbort(component, format, args...) \
+	do { \
+		DisplayLogComponentLevel(component, (char *) __FILE__, \
+					 __LINE__, \
+					 (char *) __func__, \
+					 NIV_ABORT, format, ## args); \
+	} while (0)
 
 #define LogFatal(component, format, args...) \
 	DisplayLogComponentLevel(component, (char *) __FILE__, \
