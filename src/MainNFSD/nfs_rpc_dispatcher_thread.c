@@ -1222,9 +1222,8 @@ static inline request_data_t *alloc_nfs_request(SVCXPRT *xprt)
 
 	nfsreq = pool_alloc(request_pool, NULL);
 	if (!nfsreq) {
-		LogMajor(COMPONENT_DISPATCH,
+		LogFatal(COMPONENT_DISPATCH,
 			 "Unable to allocate request. Exiting...");
-		Fatal();
 	}
 
 	/* set the request as NFS already-read */
@@ -1232,9 +1231,8 @@ static inline request_data_t *alloc_nfs_request(SVCXPRT *xprt)
 
 	nfsreq->r_u.nfs = pool_alloc(request_data_pool, NULL);
 	if (!nfsreq->r_u.nfs) {
-		LogMajor(COMPONENT_DISPATCH,
+		LogFatal(COMPONENT_DISPATCH,
 			 "Empty request data pool! Exiting...");
-		Fatal();
 	}
 
 	/* set up req */
