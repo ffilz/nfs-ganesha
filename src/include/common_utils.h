@@ -82,6 +82,32 @@ extern int portable_clock_gettime(struct timespec *ts);
 #define SCANDIR_CONST
 #endif
 
+#define PTHREAD_RWLOCK_init(_lock, _attr)				\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_rwlock_init(_lock, _attr);			\
+		if (rc != 0) {						\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, initializing %p (%s) "	\
+				 "at %s:%d", rc, _lock, #_lock,		\
+				 __FILE__, __LINE__);			\
+		}							\
+	} while (0)							\
+
+#define PTHREAD_RWLOCK_destroy(_lock)					\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_rwlock_destroy(_lock);			\
+		if (rc != 0) {						\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, destroying %p (%s) "	\
+				 "at %s:%d", rc, _lock, #_lock,		\
+				 __FILE__, __LINE__);			\
+		}							\
+	} while (0)							\
+
 /**
  * @brief Logging write-lock
  *
@@ -99,10 +125,10 @@ extern int portable_clock_gettime(struct timespec *ts);
 				     "at %s:%d", _lock, #_lock,		\
 				     __FILE__, __LINE__);		\
 		} else {						\
-			LogCrit(COMPONENT_RW_LOCK,			\
-				"Error %d, write locking %p (%s) "	\
-				"at %s:%d", rc, _lock, #_lock,		\
-				__FILE__, __LINE__);			\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, write locking %p (%s) "	\
+				 "at %s:%d", rc, _lock, #_lock,		\
+				 __FILE__, __LINE__);			\
 		}							\
 	} while (0)							\
 
@@ -123,10 +149,10 @@ extern int portable_clock_gettime(struct timespec *ts);
 				     "at %s:%d", _lock, #_lock,		\
 				     __FILE__, __LINE__);		\
 		} else {						\
-			LogCrit(COMPONENT_RW_LOCK,			\
-				"Error %d, read locking %p (%s) "	\
-				"at %s:%d", rc, _lock, #_lock,		\
-				__FILE__, __LINE__);			\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, read locking %p (%s) "	\
+				 "at %s:%d", rc, _lock, #_lock,		\
+				 __FILE__, __LINE__);			\
 		}							\
 	} while (0)							\
 
@@ -147,10 +173,49 @@ extern int portable_clock_gettime(struct timespec *ts);
 				     _lock, #_lock,			\
 				     __FILE__, __LINE__);		\
 		} else {						\
-			LogCrit(COMPONENT_RW_LOCK,			\
-				"Error %d, unlocking %p (%s) at %s:%d",	\
-				rc, _lock, #_lock,			\
-				__FILE__, __LINE__);			\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, unlocking %p (%s) at %s:%d",\
+				 rc, _lock, #_lock,			\
+				 __FILE__, __LINE__);			\
+		}							\
+	} while (0)							\
+
+#define PTHREAD_MUTEX_init(_lock)					\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_mutex_init(_lock, NULL);			\
+		if (rc != 0) {						\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, initializing %p (%s) "	\
+				 "at %s:%d", rc, _lock, #_lock,		\
+				 __FILE__, __LINE__);			\
+		}							\
+	} while (0)							\
+
+#define PTHREAD_MUTEX_init_attr(_lock, _attr)				\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_mutex_init(_lock, _attr);			\
+		if (rc != 0) {						\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, initializing %p (%s) "	\
+				 "at %s:%d", rc, _lock, #_lock,		\
+				 __FILE__, __LINE__);			\
+		}							\
+	} while (0)							\
+
+#define PTHREAD_MUTEX_destroy(_lock)					\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_mutex_destroy(_lock);			\
+		if (rc != 0) {						\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, destroying %p (%s) "	\
+				 "at %s:%d", rc, _lock, #_lock,		\
+				 __FILE__, __LINE__);			\
 		}							\
 	} while (0)							\
 
@@ -171,10 +236,10 @@ extern int portable_clock_gettime(struct timespec *ts);
 				     _mtx, #_mtx,			\
 				     __FILE__, __LINE__);		\
 		} else{							\
-			LogCrit(COMPONENT_RW_LOCK,			\
-				"Error %d, acquiring mutex %p (%s) "	\
-				"at %s:%d", rc, _mtx, #_mtx,		\
-				__FILE__, __LINE__);			\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, acquiring mutex %p (%s) "	\
+				 "at %s:%d", rc, _mtx, #_mtx,		\
+				 __FILE__, __LINE__);			\
 		}							\
 	} while (0)
 
@@ -195,12 +260,38 @@ extern int portable_clock_gettime(struct timespec *ts);
 				     _mtx, #_mtx,			\
 				     __FILE__, __LINE__);		\
 		} else{							\
-			LogCrit(COMPONENT_RW_LOCK,			\
-				"Error %d, releasing mutex %p (%s) "	\
-				"at %s:%d", rc, _mtx, #_mtx,		\
-				__FILE__, __LINE__);			\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, releasing mutex %p (%s) "	\
+				 "at %s:%d", rc, _mtx, #_mtx,		\
+				 __FILE__, __LINE__);			\
 		}							\
 	} while (0)
+
+#define PTHREAD_COND_init(_cond)					\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_cond_init(_cond, NULL);			\
+		if (rc != 0) {						\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, initializing %p (%s) "	\
+				 "at %s:%d", rc, _cond, #_cond,		\
+				 __FILE__, __LINE__);			\
+		}							\
+	} while (0)							\
+
+#define PTHREAD_COND_destroy(_cond)					\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_cond_destroy(_cond);			\
+		if (rc != 0) {						\
+			LogAbort(COMPONENT_RW_LOCK,			\
+				 "Error %d, destroying %p (%s) "	\
+				 "at %s:%d", rc, _cond, #_cond,		\
+				 __FILE__, __LINE__);			\
+		}							\
+	} while (0)							\
 
 /**
  * @brief Inline functions for timespec math
@@ -349,8 +440,7 @@ static inline void now(struct timespec *ts)
 
 	rc = clock_gettime(CLOCK_REALTIME, ts);
 	if (rc != 0) {
-		LogCrit(COMPONENT_MAIN, "Failed to get timestamp");
-		assert(0);	/* if this is broken, we are toast so die */
+		LogAbort(COMPONENT_MAIN, "Failed to get timestamp");
 	}
 }
 
