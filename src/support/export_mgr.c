@@ -267,7 +267,7 @@ bool insert_gsh_export(struct gsh_export *export)
 		PTHREAD_RWLOCK_unlock(&export_by_id.lock);
 		return false;	/* somebody beat us to it */
 	}
-	pthread_rwlock_init(&export->lock, NULL);
+	PTHREAD_RWLOCK_init(&export->lock, NULL);
 	/* update cache */
 	cache_slot = (void **)
 		&(export_by_id.cache[eid_cache_offsetof(&export_by_id,
@@ -627,10 +627,11 @@ void put_gsh_export(struct gsh_export *export)
 	struct export_stats *export_st;
 	int64_t refcount = atomic_dec_int64_t(&export->refcnt);
 
-	if (refcount != 0) {
-		assert(refcount > 0);
+	if (refcount > 0)
 		return;
-	}
+
+	if (refcount < 0)
+		LogAbort(COMPONENT_EXPORT, "Invalid protocol");
 
 	/* Releasing last reference */
 
@@ -1625,7 +1626,7 @@ void export_pkginit(void)
 		&rwlock_attr,
 		PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
 #endif
-	pthread_rwlock_init(&export_by_id.lock, &rwlock_attr);
+	PTHREAD_RWLOCK_init(&export_by_id.lock, &rwlock_attr);
 	avltree_init(&export_by_id.t, export_id_cmpf, 0);
 	export_by_id.cache_sz = 255;
 	export_by_id.cache =

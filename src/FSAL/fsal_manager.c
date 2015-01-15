@@ -417,7 +417,7 @@ int register_fsal(struct fsal_module *fsal_hdl, const char *name,
 		&attrs,
 		PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
 #endif
-	pthread_rwlock_init(&fsal_hdl->lock, &attrs);
+	PTHREAD_RWLOCK_init(&fsal_hdl->lock, &attrs);
 	glist_init(&fsal_hdl->servers);
 	glist_init(&fsal_hdl->handles);
 	glist_init(&fsal_hdl->exports);
@@ -486,8 +486,6 @@ int unregister_fsal(struct fsal_module *fsal_hdl)
 void *fsal_init(void *link_mem, void *self_struct)
 {
 	struct fsal_args *fp;
-
-	assert(link_mem != NULL || self_struct != NULL);
 
 	if (link_mem == NULL) {
 		return self_struct; /* NOP */

@@ -460,7 +460,6 @@ static inline pool_t *
 pool_basic_initializer(size_t size __attribute__ ((unused)),
 		       void *param __attribute__ ((unused)))
 {
-	assert(param == NULL);	/* We take no parameters */
 	return (pool_t *) gsh_malloc(sizeof(pool_t));
 }
 

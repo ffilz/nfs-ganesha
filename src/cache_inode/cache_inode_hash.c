@@ -88,7 +88,7 @@ cih_pkginit(void)
 	for (ix = 0; ix < npart; ++ix) {
 		cp = &cih_fhcache.partition[ix];
 		cp->part_ix = ix;
-		pthread_rwlock_init(&cp->lock, &rwlock_attr);
+		PTHREAD_RWLOCK_init(&cp->lock, &rwlock_attr);
 		avltree_init(&cp->t, cih_fh_cmpf, 0 /* must be 0 */);
 		cih_fhcache.cache_sz = cache_sz;
 		cp->cache = gsh_calloc(cache_sz, sizeof(struct avltree_node *));

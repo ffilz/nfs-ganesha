@@ -131,12 +131,7 @@ int fridgethr_init(struct fridgethr **frout, const char *s,
 	}
 	/* This always succeeds on Linux (if you believe the manual),
 	   but SUS defines errors. */
-	rc = pthread_mutex_init(&frobj->mtx, NULL);
-	if (rc != 0) {
-		LogMajor(COMPONENT_THREAD,
-			 "Unable to initialize mutex for fridge %s: %d", s, rc);
-		goto out;
-	}
+	PTHREAD_MUTEX_init(&frobj->mtx);
 	mutexinit = true;
 
 	frobj->s = gsh_strdup(s);
@@ -166,7 +161,7 @@ int fridgethr_init(struct fridgethr **frout, const char *s,
 			break;
 
 		case fridgethr_defer_block:
-			pthread_cond_init(&frobj->deferment.block.cond, NULL);
+			PTHREAD_COND_init(&frobj->deferment.block.cond);
 			frobj->deferment.block.waiters = 0;
 			break;
 
@@ -205,7 +200,7 @@ int fridgethr_init(struct fridgethr **frout, const char *s,
 
 	if (rc != 0) {
 		if (mutexinit) {
-			pthread_mutex_destroy(&frobj->mtx);
+			PTHREAD_MUTEX_destroy(&frobj->mtx);
 			mutexinit = false;
 		}
 		if (attrinit) {
@@ -233,7 +228,7 @@ int fridgethr_init(struct fridgethr **frout, const char *s,
 
 void fridgethr_destroy(struct fridgethr *fr)
 {
-	pthread_mutex_destroy(&fr->mtx);
+	PTHREAD_MUTEX_destroy(&fr->mtx);
 	pthread_attr_destroy(&fr->attr);
 	gsh_free(fr->s);
 	gsh_free(fr);
@@ -570,8 +565,8 @@ static void *fridgethr_start_routine(void *arg)
 	if (fr->p.thread_finalize)
 		fr->p.thread_finalize(&fe->ctx);
 
-	pthread_mutex_destroy(&fe->ctx.mtx);
-	pthread_cond_destroy(&fe->ctx.cv);
+	PTHREAD_MUTEX_destroy(&fe->ctx.mtx);
+	PTHREAD_COND_destroy(&fe->ctx.cv);
 	gsh_free(fe);
 	fe = NULL;
 	/* At this point the fridge entry no longer exists and must
@@ -610,22 +605,10 @@ static int fridgethr_spawn(struct fridgethr *fr,
 
 	glist_init(&fe->thread_link);
 	fe->fr = fr;
-	rc = pthread_mutex_init(&fe->ctx.mtx, NULL);
-	if (rc != 0) {
-		LogMajor(COMPONENT_THREAD,
-			 "Unable to initialize mutex for new thread "
-			 "in fridge %s: %d", fr->s, rc);
-		goto create_err;
-	}
+	PTHREAD_MUTEX_init(&fe->ctx.mtx);
 	mutexed = true;
 
-	rc = pthread_cond_init(&fe->ctx.cv, NULL);
-	if (rc != 0) {
-		LogMajor(COMPONENT_THREAD,
-			 "Unable to initialize condition variable "
-			 "for new thread in fridge %s: %d", fr->s, rc);
-		goto create_err;
-	}
+	PTHREAD_COND_init(&fe->ctx.cv);
 	conditioned = true;
 
 	fe->ctx.func = func;
@@ -658,10 +641,10 @@ static int fridgethr_spawn(struct fridgethr *fr,
  create_err:
 
 	if (conditioned)
-		pthread_cond_destroy(&fe->ctx.cv);
+		PTHREAD_COND_destroy(&fe->ctx.cv);
 
 	if (mutexed)
-		pthread_mutex_destroy(&fe->ctx.mtx);
+		PTHREAD_MUTEX_destroy(&fe->ctx.mtx);
 
 	if (fe != NULL)
 		gsh_free(fe);
@@ -1416,22 +1399,8 @@ int fridgethr_populate(struct fridgethr *fr,
 		glist_add_tail(&fr->thread_list, &fe->thread_link);
 
 		fe->fr = fr;
-		rc = pthread_mutex_init(&fe->ctx.mtx, NULL);
-		if (rc != 0) {
-			LogMajor(COMPONENT_THREAD,
-				 "Unable to initialize mutex for new thread "
-				 "in fridge %s: %d", fr->s, rc);
-			PTHREAD_MUTEX_unlock(&fr->mtx);
-			return rc;
-		}
-		rc = pthread_cond_init(&fe->ctx.cv, NULL);
-		if (rc != 0) {
-			LogMajor(COMPONENT_THREAD,
-				 "Unable to initialize condition variable "
-				 "for new thread in fridge %s: %d", fr->s, rc);
-			PTHREAD_MUTEX_unlock(&fr->mtx);
-			return rc;
-		}
+		PTHREAD_MUTEX_init(&fe->ctx.mtx);
+		PTHREAD_COND_init(&fe->ctx.cv);
 
 		fe->ctx.func = func;
 		fe->ctx.arg = arg;

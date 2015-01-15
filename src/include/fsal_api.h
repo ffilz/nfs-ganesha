@@ -2231,7 +2231,8 @@ static inline void fsal_put(struct fsal_module *fsal_hdl)
 
 	refcount = atomic_dec_int32_t(&fsal_hdl->refcount);
 
-	assert(refcount >= 0);
+	if (refcount < 0)
+		LogAbort(COMPONENT_FSAL, "refcount < 0");
 
 	if (refcount == 0) {
 		LogInfo(COMPONENT_FSAL,
@@ -2396,10 +2397,11 @@ static inline void ds_handle_put(struct fsal_ds_handle *const ds_hdl)
 {
 	int64_t refcount = atomic_dec_int64_t(&ds_hdl->refcount);
 
-	if (refcount != 0) {
-		assert(refcount > 0);
+	if (refcount > 0)
 		return;
-	}
+
+	if (refcount < 0)
+		LogAbort(COMPONENT_FSAL, "refcount < 0");
 
 	ds_hdl->dsh_ops.release(ds_hdl);
 }

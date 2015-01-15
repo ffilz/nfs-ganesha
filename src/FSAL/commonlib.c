@@ -148,7 +148,7 @@ void fsal_obj_handle_init(struct fsal_obj_handle *obj, struct fsal_export *exp,
 		&attrs,
 		PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
 #endif
-	pthread_rwlock_init(&obj->lock, &attrs);
+	PTHREAD_RWLOCK_init(&obj->lock, &attrs);
 
 	PTHREAD_RWLOCK_wrlock(&obj->fsal->lock);
 	glist_add(&obj->fsal->handles, &obj->handles);
@@ -182,7 +182,7 @@ void fsal_pnfs_ds_init(struct fsal_pnfs_ds *pds, struct fsal_module *fsal)
 		&attrs,
 		PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
 #endif
-	pthread_rwlock_init(&pds->lock, &attrs);
+	PTHREAD_RWLOCK_init(&pds->lock, &attrs);
 	glist_init(&pds->ds_handles);
 
 	PTHREAD_RWLOCK_wrlock(&fsal->lock);

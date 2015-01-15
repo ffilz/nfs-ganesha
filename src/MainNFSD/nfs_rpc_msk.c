@@ -104,8 +104,8 @@ void *nfs_msk_thread(void *arg)
 		return NULL;
 	}
 
-	pthread_cond_init(&clx.cond, NULL);
-	pthread_mutex_init(&clx.lock, NULL);
+	PTHREAD_COND_init(&clx.cond);
+	PTHREAD_MUTEX_init(&clx.lock);
 
 	pthread_mutex_lock(&clx.lock);
 

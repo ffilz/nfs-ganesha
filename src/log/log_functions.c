@@ -902,7 +902,6 @@ static int set_default_log_facility(const char *name)
 	if (glist_null(&facility->lf_active))
 		glist_add_tail(&active_facility_list, &facility->lf_active);
 	if (default_facility != NULL) {
-		assert(!glist_null(&default_facility->lf_active));
 		glist_del(&default_facility->lf_active);
 		if (facility->lf_headers != max_headers) {
 			struct glist_head *glist;
@@ -1894,8 +1893,6 @@ static struct config_item format_options[] = {
 
 static void *format_init(void *link_mem, void *self_struct)
 {
-	assert(link_mem != NULL || self_struct != NULL);
-
 	if (link_mem == NULL)
 		return NULL;
 	if (self_struct == NULL)
@@ -2097,8 +2094,6 @@ static struct config_item component_levels[] = {
 
 static void *component_init(void *link_mem, void *self_struct)
 {
-	assert(link_mem != NULL || self_struct != NULL);
-
 	if (link_mem == NULL)
 		return NULL;
 	if (self_struct == NULL)
@@ -2188,8 +2183,6 @@ static void *facility_init(void *link_mem, void *self_struct)
 {
 	struct facility_config *facility;
 
-	assert(link_mem != NULL || self_struct != NULL);
-
 	if (link_mem == NULL) {
 		struct glist_head *facility_list;
 		struct logger_config *logger;
@@ -2205,8 +2198,6 @@ static void *facility_init(void *link_mem, void *self_struct)
 		return facility;
 	} else {
 		facility = self_struct;
-
-		assert(glist_null(&facility->fac_list));
 
 		if (facility->facility_name != NULL)
 			gsh_free(facility->facility_name);
@@ -2288,8 +2279,6 @@ out:
 static void *log_conf_init(void *link_mem, void *self_struct)
 {
 	struct logger_config *logger = self_struct;
-
-	assert(link_mem != NULL || self_struct != NULL);
 
 	if (link_mem == NULL)
 		return self_struct;

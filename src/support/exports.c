@@ -440,8 +440,6 @@ static void *client_init(void *link_mem, void *self_struct)
 {
 	struct exportlist_client_entry__ *cli;
 
-	assert(link_mem != NULL || self_struct != NULL);
-
 	if (link_mem == NULL) {
 		struct glist_head *cli_list;
 		struct gsh_export *export;
@@ -461,7 +459,6 @@ static void *client_init(void *link_mem, void *self_struct)
 	} else { /* free resources case */
 		cli = self_struct;
 
-		assert(glist_empty(&cli->cle_list));
 		if (cli->type == RAW_CLIENT_LIST &&
 		    cli->client.raw_client_str != NULL)
 			gsh_free(cli->client.raw_client_str);
@@ -496,7 +493,6 @@ static int client_commit(void *node, void *link_mem, void *self_struct,
 	cli_list = link_mem;
 	export = container_of(cli_list, struct gsh_export, clients);
 	cli = self_struct;
-	assert(cli->type == RAW_CLIENT_LIST);
 
 	client_list = cli->client.raw_client_str;
 	cli->client.raw_client_str = NULL;
@@ -586,7 +582,9 @@ static int fsal_commit(void *node, void *link_mem, void *self_struct,
 		goto err;
 	}
 
-	assert(root_op_context.req_ctx.fsal_export != NULL);
+	if (root_op_context.req_ctx.fsal_export == NULL)
+		LogAbort(COMPONENT_EXPORT, "No fsal_export");
+
 	export->fsal_export = root_op_context.req_ctx.fsal_export;
 	root_op_context.req_ctx.fsal_export->id_exports = export->export_id;
 
@@ -1314,7 +1312,9 @@ static int build_default_root(void)
 
 	}
 
-	assert(root_op_context.req_ctx.fsal_export != NULL);
+	if (root_op_context.req_ctx.fsal_export == NULL)
+		LogAbort(COMPONENT_EXPORT, "No fsal_export");
+
 	export->fsal_export = root_op_context.req_ctx.fsal_export;
 	root_op_context.req_ctx.fsal_export->id_exports = 0;
 
@@ -2168,8 +2168,6 @@ void export_check_access(void)
 	op_ctx->export_perms->set = 0;
 	op_ctx->export_perms->anonymous_uid = (uid_t) ANON_UID;
 	op_ctx->export_perms->anonymous_gid = (gid_t) ANON_GID;
-
-	assert(op_ctx != NULL && op_ctx->export != NULL);
 
 	hostaddr = convert_ipv6_to_ipv4(op_ctx->caller_addr, &alt_hostaddr);
 

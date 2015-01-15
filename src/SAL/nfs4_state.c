@@ -137,7 +137,7 @@ state_status_t state_add_impl(cache_entry_t *entry, enum state_type state_type,
 		goto errout;
 	}
 
-	assert(pthread_mutex_init(&pnew_state->state_mutex, NULL) == 0);
+	PTHREAD_MUTEX_init(&pnew_state->state_mutex);
 
 	mutex_init = true;
 
@@ -239,7 +239,7 @@ state_status_t state_add_impl(cache_entry_t *entry, enum state_type state_type,
 errout:
 
 	if (mutex_init)
-		assert(pthread_mutex_destroy(&pnew_state->state_mutex) == 0);
+		PTHREAD_MUTEX_destroy(&pnew_state->state_mutex);
 
 	if (pnew_state != NULL)
 		pool_free(state_v4_pool, pnew_state);

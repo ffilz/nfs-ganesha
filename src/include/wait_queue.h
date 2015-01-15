@@ -39,6 +39,7 @@
 #include <errno.h>
 #include <pthread.h>
 #include "gsh_list.h"
+#include "common_utils.h"
 
 typedef struct wait_entry {
 	pthread_mutex_t mtx;
@@ -58,27 +59,34 @@ typedef struct wait_q_entry {
 	struct glist_head waitq;
 } wait_q_entry_t;
 
-static inline int gsh_mutex_init(pthread_mutex_t *m,
-				 const pthread_mutexattr_t *a
-				 __attribute__ ((unused)))
+static inline void gsh_mutex_init(pthread_mutex_t *m,
+				  const pthread_mutexattr_t *a
+				  __attribute__ ((unused)))
 {
 	pthread_mutexattr_t attr;
 
-	pthread_mutexattr_init(&attr);
-	pthread_mutexattr_settype(&attr,
+	if (pthread_mutexattr_init(&attr) != 0)
+		LogAbort(COMPONENT_RW_LOCK,
+			 "Failed to initialize mutex attributes");
+
+	if (pthread_mutexattr_settype(&attr,
 #if defined(__linux__)
 				  PTHREAD_MUTEX_ADAPTIVE_NP
 #else
 				  PTHREAD_MUTEX_DEFAULT
 #endif
-	    );
-	return pthread_mutex_init(m, &attr);
+	    ) != 0) {
+		LogAbort(COMPONENT_RW_LOCK,
+			 "Failed to set mutex type");
+	}
+
+	PTHREAD_MUTEX_init_attr(m, &attr);
 }
 
 static inline void init_wait_entry(wait_entry_t *we)
 {
 	gsh_mutex_init(&we->mtx, NULL);
-	pthread_cond_init(&we->cv, NULL);
+	PTHREAD_COND_init(&we->cv);
 }
 
 static inline void init_wait_q_entry(wait_q_entry_t *wqe)

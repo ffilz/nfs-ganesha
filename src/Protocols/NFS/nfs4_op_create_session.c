@@ -323,11 +323,13 @@ int nfs4_op_create_session(struct nfs_argop4 *op, compound_data_t *data,
 	nfs41_session->xprt = data->req->rq_xprt;
 	nfs41_session->flags = false;
 	nfs41_session->cb_program = 0;
-	assert(pthread_mutex_init(&nfs41_session->cb_mutex, NULL) == 0);
-	assert(pthread_cond_init(&nfs41_session->cb_cond, NULL) == 0);
+
+	PTHREAD_MUTEX_init(&nfs41_session->cb_mutex);
+
+	PTHREAD_COND_init(&nfs41_session->cb_cond);
+
 	for (i = 0; i < NFS41_NB_SLOTS; i++)
-		assert(pthread_mutex_init(&nfs41_session->slots[i].lock,
-					  NULL) == 0);
+		PTHREAD_MUTEX_init(&nfs41_session->slots[i].lock);
 
 	/* Take reference to clientid record on behalf the session. */
 	inc_client_id_ref(found);

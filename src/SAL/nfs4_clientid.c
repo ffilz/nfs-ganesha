@@ -328,7 +328,8 @@ bool client_id_has_state(nfs_client_id_t *clientid)
 
 void free_client_id(nfs_client_id_t *clientid)
 {
-	assert(atomic_fetch_int32_t(&clientid->cid_refcount) == 0);
+	if (atomic_fetch_int32_t(&clientid->cid_refcount) != 0)
+		LogAbort(COMPONENT_CLIENTID, "cid_refcount != 0");
 
 	if (clientid->cid_client_record != NULL)
 		dec_client_record_ref(clientid->cid_client_record);
@@ -347,12 +348,11 @@ void free_client_id(nfs_client_id_t *clientid)
 		}
 	}
 
-	assert(pthread_mutex_destroy(&clientid->cid_mutex) == 0);
-	assert(pthread_mutex_destroy(&clientid->cid_owner.so_mutex) == 0);
-	if (clientid->cid_minorversion == 0) {
-		assert(pthread_mutex_destroy(&clientid->cid_cb.v40.cb_chan.mtx)
-								== 0);
-	}
+	PTHREAD_MUTEX_destroy(&clientid->cid_mutex);
+	PTHREAD_MUTEX_destroy(&clientid->cid_owner.so_mutex);
+
+	if (clientid->cid_minorversion == 0)
+		PTHREAD_MUTEX_destroy(&clientid->cid_cb.v40.cb_chan.mtx);
 
 	put_gsh_client(clientid->gsh_client);
 
@@ -398,7 +398,8 @@ int32_t dec_client_id_ref(nfs_client_id_t *clientid)
 		LogCrit(COMPONENT_CLIENTID,
 			"Should not be here, try to remove last ref {%s}", str);
 
-		assert(clientid->cid_confirmed == EXPIRED_CLIENT_ID);
+		if (clientid->cid_confirmed != EXPIRED_CLIENT_ID)
+			LogAbort(COMPONENT_CLIENTID, "Not expired clientid");
 	}
 
 	return cid_refcount;
@@ -490,7 +491,8 @@ int display_client_id_key(struct gsh_buffdesc *buff, char *str)
 {
 	struct display_buffer dspbuf = {DISPLAY_CLIENTID_SIZE, str, str};
 
-	assert(display_clientid(&dspbuf, *((clientid4 *) (buff->addr))) >= 0);
+	if (display_clientid(&dspbuf, *((clientid4 *) (buff->addr))) < 0)
+		LogAbort(COMPONENT_CLIENTID, "display_clientid failed");
 
 	return display_buffer_len(&dspbuf);
 }
@@ -539,16 +541,15 @@ nfs_client_id_t *create_client_id(clientid4 clientid,
 		return NULL;
 	}
 
-	assert(pthread_mutex_init(&client_rec->cid_mutex, NULL) == 0);
+	PTHREAD_MUTEX_init(&client_rec->cid_mutex);
 
 	owner = &client_rec->cid_owner;
 
-	assert(pthread_mutex_init(&owner->so_mutex, NULL) == 0);
+	PTHREAD_MUTEX_init(&owner->so_mutex);
 
 	/* initialize the chan mutex for v4 */
 	if (minorversion == 0) {
-		assert(pthread_mutex_init(&client_rec->cid_cb.v40.cb_chan.mtx,
-					  NULL) == 0);
+		PTHREAD_MUTEX_init(&client_rec->cid_cb.v40.cb_chan.mtx);
 		client_rec->cid_cb.v40.cb_chan_down = true;
 		client_rec->first_path_down_resp_time = 0;
 	}
@@ -1373,7 +1374,7 @@ int32_t inc_client_record_ref(nfs_client_record_t *record)
  */
 void free_client_record(nfs_client_record_t *record)
 {
-	assert(pthread_mutex_destroy(&record->cr_mutex) == 0);
+	PTHREAD_MUTEX_destroy(&record->cr_mutex);
 
 	gsh_free(record);
 }
@@ -1650,7 +1651,7 @@ nfs_client_record_t *get_client_record(const char *const value,
 		return NULL;
 	}
 
-	assert(pthread_mutex_init(&record->cr_mutex, NULL) == 0);
+	PTHREAD_MUTEX_init(&record->cr_mutex);
 
 	/* Use same record for record and key */
 	buffval.addr = record;
