@@ -693,7 +693,9 @@ hashtable_setlatched(struct hash_table *ht,
 	rc = HASHTABLE_SUCCESS;
 
  out:
-	hashtable_releaselatched(ht, latch);
+
+	if (!latch->keep)
+		hashtable_releaselatched(ht, latch);
 
 	if (rc != HASHTABLE_SUCCESS && isDebug(COMPONENT_HASHTABLE)
 	    && isFullDebug(ht->parameter.ht_log_component))
@@ -738,7 +740,8 @@ hashtable_deletelatched(struct hash_table *ht,
 	struct hash_partition *partition = &ht->partitions[latch->index];
 
 	if (!latch->locator) {
-		hashtable_releaselatched(ht, latch);
+		if (!latch->keep)
+			hashtable_releaselatched(ht, latch);
 		return HASHTABLE_SUCCESS;
 	}
 
@@ -803,7 +806,9 @@ hashtable_deletelatched(struct hash_table *ht,
 	pool_free(ht->node_pool, latch->locator);
 	--ht->partitions[latch->index].count;
 
-	hashtable_releaselatched(ht, latch);
+	if (!latch->keep)
+		hashtable_releaselatched(ht, latch);
+
 	return HASHTABLE_SUCCESS;
 }
 

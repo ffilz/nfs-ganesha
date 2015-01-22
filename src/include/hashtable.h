@@ -178,6 +178,7 @@ struct hash_latch {
 	uint32_t index;	/*< Saved partition index */
 	uint64_t rbt_hash; /*< Saved red-black hash */
 	struct rbt_node *locator; /*< Saved location in the tree */
+	bool keep; /*< Retain this latch on any operation except release */
 };
 
 typedef enum hash_set_how {
