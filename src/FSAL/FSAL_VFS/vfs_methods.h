@@ -98,7 +98,7 @@ struct vfs_subfsal_obj_ops {
  * @return FSAL status.
  */
 	fsal_status_t (*getattrs)(struct vfs_fsal_obj_handle *vfs_hdl,
-				  int fd);
+				  int fd, attrmask_t request_mask);
 /**
  * @brief Set sub-fsal attributes on an object
  *
@@ -109,7 +109,8 @@ struct vfs_subfsal_obj_ops {
  * @return FSAL status.
  */
 	fsal_status_t (*setattrs)(struct vfs_fsal_obj_handle *vfs_hdl,
-				  int fd, struct attrlist *attrib_set);
+				  int fd, attrmask_t request_mask,
+				  struct attrlist *attrib_set);
 };
 
 /*
