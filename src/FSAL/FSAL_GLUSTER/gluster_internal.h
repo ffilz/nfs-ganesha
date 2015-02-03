@@ -359,6 +359,8 @@ struct glusterfs_export {
 	bool acl_enable;
 	bool pnfs_ds_enabled;
 	bool pnfs_mds_enabled;
+	bool destroy_mode;
+	pthread_t up_thread; /* upcall thread */
 };
 
 struct glusterfs_handle {
@@ -516,6 +518,7 @@ fsal_status_t mode_bits_to_acl(struct glfs *fs,
 			       struct attrlist *attrs, int *attrs_valid,
 			       glusterfs_fsal_xstat_t *buffxstat,
 			       bool is_dir);
+void *GLUSTERFSAL_UP_Thread(void *Arg);
 
 /*
  * Following have been introduced for pNFS support
