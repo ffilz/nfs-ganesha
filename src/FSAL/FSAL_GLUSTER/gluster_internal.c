@@ -952,6 +952,53 @@ fsal_status_t glusterfs_process_acl(struct glfs *fs,
 	return status;
 }
 
+int initiate_up_thread(struct glusterfs_export *glfsexport)
+{
+
+	pthread_attr_t up_thr_attr;
+	int retval = -1;
+
+	memset(&up_thr_attr, 0, sizeof(up_thr_attr));
+
+	/* Initialization of thread attributes from nfs_init.c */
+	if (pthread_attr_init(&up_thr_attr) != 0) {
+		LogCrit(COMPONENT_THREAD,
+			"can't init pthread's attributes");
+		goto out;
+	}
+
+	if (pthread_attr_setscope(&up_thr_attr, PTHREAD_SCOPE_SYSTEM) != 0) {
+		LogCrit(COMPONENT_THREAD, "can't set pthread's scope");
+		goto out;
+	}
+
+	if (pthread_attr_setdetachstate(&up_thr_attr,
+					PTHREAD_CREATE_JOINABLE) != 0) {
+		LogCrit(COMPONENT_THREAD,
+			"can't set pthread's join state");
+		goto out;
+	}
+
+	if (pthread_attr_setstacksize(&up_thr_attr, 2116488) != 0) {
+		LogCrit(COMPONENT_THREAD,
+			"can't set pthread's stack size");
+		goto out;
+	}
+
+	retval = pthread_create(&glfsexport->up_thread,
+				&up_thr_attr,
+				GLUSTERFSAL_UP_Thread,
+				glfsexport);
+
+out:
+	if (pthread_attr_destroy(&up_thr_attr) != 0) {
+		LogCrit(COMPONENT_THREAD,
+			"can't destroy pthread's attributes");
+	}
+
+	return retval;
+}
+
 #ifdef GLTIMING
 void latency_update(struct timespec *s_time, struct timespec *e_time, int opnum)
 {
