@@ -405,6 +405,7 @@ extern "C" {
 		LAYOUT4_NFSV4_1_FILES = 0x1,
 		LAYOUT4_OSD2_OBJECTS = 0x2,
 		LAYOUT4_BLOCK_VOLUME = 0x3,
+		LAYOUT4_FLEX_FILES = 0x4,
 	};
 	typedef enum layouttype4 layouttype4;
 
@@ -2844,10 +2845,11 @@ extern "C" {
 	};
 	typedef struct LAYOUTERROR4res LAYOUTERROR4res;
 
-	typedef struct {
-		uint32_t      ii_count;
-		uint64_t      ii_bytes;
-	} io_info4;
+	struct io_info4 {
+		uint32_t ii_count;
+		uint64_t ii_bytes;
+	};
+	typedef struct io_info4 io_info4;
 
 	struct LAYOUTSTATS4args {
 		offset4         lsa_offset;
@@ -2864,7 +2866,124 @@ extern "C" {
 	};
 	typedef struct LAYOUTSTATS4res LAYOUTSTATS4res;
 
+	struct ff_device_versions4 {
+		uint32_t ffdv_version;
+		uint32_t ffdv_minorversion;
+		uint32_t ffdv_rsize;
+		uint32_t ffdv_wsize;
+		bool_t ffdv_tightly_coupled;
+	};
+	typedef struct ff_device_versions4 ff_device_versions4;
 
+	struct ff_device_addr4 {
+		multipath_list4 ffda_netaddrs;
+		struct {
+			u_int ffda_versions_len;
+			ff_device_versions4 *ffda_versions_val;
+		} ffda_versions;
+	};
+	typedef struct ff_device_addr4 ff_device_addr4;
+
+	struct ff_data_server4 {
+		deviceid4 ffds_deviceid;
+		uint32_t ffds_efficiency;
+		stateid4 ffds_stateid;
+		struct {
+			u_int ffds_fh_vers_len;
+			nfs_fh4 *ffds_fh_vers_val;
+		} ffds_fh_vers;
+		fattr4_owner ffds_user;
+		fattr4_owner_group ffds_group;
+	};
+	typedef struct ff_data_server4 ff_data_server4;
+
+	struct ff_mirror4 {
+		struct {
+			u_int ffm_data_servers_len;
+			ff_data_server4 *ffm_data_servers_val;
+		} ffm_data_servers;
+	};
+	typedef struct ff_mirror4 ff_mirror4;
+
+	struct ff_layout4 {
+		length4 ffl_stripe_unit;
+		struct {
+			u_int ffl_mirrors_len;
+			ff_mirror4 *ffl_mirrors_val;
+		} ffl_mirrors;
+	};
+	typedef struct ff_layout4 ff_layout4;
+
+	struct ff_ioerr4 {
+		offset4 ffie_offset;
+		length4 ffie_length;
+		stateid4 ffie_stateid;
+		struct {
+			u_int ffie_errors_len;
+			device_error4 *ffie_errors_val;
+		} ffie_errors;
+	};
+	typedef struct ff_ioerr4 ff_ioerr4;
+
+	struct ff_io_latency4 {
+		nfstime4 ffil_min;
+		nfstime4 ffil_max;
+		nfstime4 ffil_avg;
+		uint32_t ffil_count;
+	};
+	typedef struct ff_io_latency4 ff_io_latency4;
+
+	struct ff_layoutupdate4 {
+		netaddr4 ffl_addr;
+		nfs_fh4 ffl_fhandle;
+		ff_io_latency4 ffl_read;
+		ff_io_latency4 ffl_write;
+		nfstime4 ffl_duration;
+		bool_t ffl_local;
+	};
+	typedef struct ff_layoutupdate4 ff_layoutupdate4;
+
+	struct ff_iostats4 {
+		offset4 ffis_offset;
+		length4 ffis_length;
+		stateid4 ffis_stateid;
+		io_info4 ffis_read;
+		io_info4 ffis_write;
+		deviceid4 ffis_deviceid;
+		ff_layoutupdate4 ffis_layoutupdate;
+	};
+	typedef struct ff_iostats4 ff_iostats4;
+
+	struct ff_layoutreturn4 {
+		struct {
+			u_int fflr_ioerr_report_len;
+			ff_ioerr4 *fflr_ioerr_report_val;
+		} fflr_ioerr_report;
+		struct {
+			u_int fflr_iostats_report_len;
+			ff_iostats4 *fflr_iostats_report_val;
+		} fflr_iostats_report;
+	};
+	typedef struct ff_layoutreturn4 ff_layoutreturn4;
+
+	struct ff_mirrors_hint {
+		bool_t ffmc_valid;
+		union {
+			uint32_t ffmc_mirrors;
+		} ff_mirrors_hint_u;
+	};
+	typedef struct ff_mirrors_hint ff_mirrors_hint;
+
+	struct ff_layouthint4 {
+		ff_mirrors_hint fflh_mirrors_hint;
+	};
+	typedef struct ff_layouthint4 ff_layouthint4;
+
+	enum ff_cb_recall_any_mask {
+		FF_RCA4_TYPE_MASK_READ = -2,
+		FF_RCA4_TYPE_MASK_RW = -1,
+	};
+	typedef enum ff_cb_recall_any_mask ff_cb_recall_any_mask;
 
 	struct nfs_argop4 {
 		nfs_opnum4 argop;
@@ -3894,6 +4013,11 @@ extern "C" {
 
 /*
  * LAYOUT4_OSD2_OBJECTS loc_body description
+ * is in a separate .x file
+ */
+
+/*
+ * LAYOUT4_FLEX_FILES loc_body description
  * is in a separate .x file
  */
 
@@ -8935,6 +9059,216 @@ extern "C" {
 			return false;
 		return true;
 	}
+/*
+ * XDR functions for FLEX_FILES loc_body
+ *
+ */
+
+	static inline bool xdr_ff_device_versions4(XDR *xdrs,
+					     ff_device_versions4 *objp)
+	{
+		 if (!xdr_uint32_t (xdrs, &objp->ffdv_version))
+			 return false;
+		 if (!xdr_uint32_t (xdrs, &objp->ffdv_minorversion))
+			 return false;
+		 if (!xdr_uint32_t (xdrs, &objp->ffdv_rsize))
+			 return false;
+		 if (!xdr_uint32_t (xdrs, &objp->ffdv_wsize))
+			 return false;
+		 if (!xdr_bool (xdrs, &objp->ffdv_tightly_coupled))
+			 return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_device_addr4(XDR *xdrs,
+					         ff_device_addr4 *objp)
+	{
+		 if (!xdr_multipath_list4 (xdrs, &objp->ffda_netaddrs))
+			 return false;
+		 if (!xdr_array (xdrs,
+				 (char **)&objp->ffda_versions.ffda_versions_val,
+				 (u_int *) &objp->ffda_versions.ffda_versions_len, ~0,
+				 sizeof(ff_device_versions4),
+				 (xdrproc_t)xdr_ff_device_versions4))
+		 	return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_data_server4(XDR *xdrs, ff_data_server4 *objp)
+	{
+		 if (!xdr_deviceid4 (xdrs, objp->ffds_deviceid))
+			 return false;
+		 if (!xdr_uint32_t (xdrs, &objp->ffds_efficiency))
+			 return false;
+		 if (!xdr_stateid4(xdrs, &objp->ffds_stateid))
+			 return false;
+		 if (!xdr_array(xdrs,
+				(char **)&objp->ffds_fh_vers.ffds_fh_vers_val,
+				(u_int *) &objp->ffds_fh_vers.ffds_fh_vers_len, ~0,
+				sizeof(nfs_fh4),
+				(xdrproc_t) xdr_nfs_fh4))
+		 	return false;
+	 	if (!xdr_fattr4_owner (xdrs, &objp->ffds_user))
+			 return false;
+		 if (!xdr_fattr4_owner_group (xdrs, &objp->ffds_group))
+			 return false;
+		return true;
+	}	
+
+	static inline bool xdr_ff_mirror4(XDR *xdrs, ff_mirror4 *objp)
+	{
+		 if (!xdr_array(xdrs,
+				(char **)&objp->ffm_data_servers.ffm_data_servers_val,
+				(u_int *) &objp->ffm_data_servers.ffm_data_servers_len, ~0,
+				sizeof(ff_data_server4), (xdrproc_t) xdr_ff_data_server4))
+		 	return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_layout4(XDR *xdrs, ff_layout4 *objp)
+	{
+		if (!xdr_length4(xdrs, &objp->ffl_stripe_unit))
+			 return false;
+	 	
+		if (!xdr_array(xdrs,
+			       (char **)&objp->ffl_mirrors.ffl_mirrors_val,
+			       (u_int *) &objp->ffl_mirrors.ffl_mirrors_len, ~0,
+			        sizeof(ff_mirror4), (xdrproc_t) xdr_ff_mirror4))
+		 	return false;
+		return true;
+	}
+
+	static inline bool xdr_device_error4(XDR *xdrs, device_error4 *objp)
+	{
+		if (!xdr_deviceid4(xdrs, objp->de_deviceid))
+			return false;
+		if (!xdr_nfsstat4(xdrs, &objp->de_status))
+			return false;
+		if (!xdr_nfs_opnum4(xdrs, &objp->de_opnum))
+			return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_ioerr4(XDR *xdrs, ff_ioerr4 *objp)
+	{
+		 if (!xdr_offset4(xdrs, &objp->ffie_offset))
+			 return false;
+		 if (!xdr_length4(xdrs, &objp->ffie_length))
+			 return false;
+		 if (!xdr_stateid4(xdrs, &objp->ffie_stateid))
+			 return false;
+		 if (!xdr_array(xdrs,
+				(char **)&objp->ffie_errors.ffie_errors_val,
+				(u_int *) &objp->ffie_errors.ffie_errors_len, ~0,
+				sizeof(device_error4),
+				(xdrproc_t) xdr_device_error4))
+		 	return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_io_latency4(XDR *xdrs, ff_io_latency4 *objp)
+	{
+		 if (!xdr_nfstime4 (xdrs, &objp->ffil_min))
+			 return false;
+		 if (!xdr_nfstime4 (xdrs, &objp->ffil_max))
+			 return false;
+		 if (!xdr_nfstime4 (xdrs, &objp->ffil_avg))
+			 return false;
+		 if (!xdr_uint32_t (xdrs, &objp->ffil_count))
+			 return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_layoutupdate4(XDR *xdrs, ff_layoutupdate4 *objp)
+	{
+		 if (!xdr_netaddr4(xdrs, &objp->ffl_addr))
+			 return false;
+		 if (!xdr_nfs_fh4 (xdrs, &objp->ffl_fhandle))
+			 return false;
+		 if (!xdr_ff_io_latency4 (xdrs, &objp->ffl_read))
+			 return false;
+		 if (!xdr_ff_io_latency4 (xdrs, &objp->ffl_write))
+			 return false;
+		 if (!xdr_nfstime4 (xdrs, &objp->ffl_duration))
+			 return false;
+		 if (!xdr_bool (xdrs, &objp->ffl_local))
+			 return false;
+		return true;
+	}
+
+	static inline bool xdr_io_info4 (XDR *xdrs, io_info4 *objp)
+	{
+		if (!xdr_uint32_t (xdrs, &objp->ii_count))
+			return FALSE;
+		if (!xdr_uint64_t (xdrs, &objp->ii_bytes))
+			return FALSE;
+		return TRUE;
+	}
+
+	static inline bool xdr_ff_iostats4 (XDR *xdrs, ff_iostats4 *objp)
+	{
+		 if (!xdr_offset4 (xdrs, &objp->ffis_offset))
+			 return false;
+		 if (!xdr_length4 (xdrs, &objp->ffis_length))
+			 return false;
+		 if (!xdr_stateid4 (xdrs, &objp->ffis_stateid))
+			 return false;
+		 if (!xdr_io_info4 (xdrs, &objp->ffis_read))
+			 return false;
+		 if (!xdr_io_info4 (xdrs, &objp->ffis_write))
+			 return false;
+		 if (!xdr_deviceid4 (xdrs, objp->ffis_deviceid))
+			 return false;
+		 if (!xdr_ff_layoutupdate4 (xdrs, &objp->ffis_layoutupdate))
+			 return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_layoutreturn4(XDR *xdrs, ff_layoutreturn4 *objp)
+	{
+		 if (!xdr_array (xdrs,
+				 (char **)&objp->fflr_ioerr_report.fflr_ioerr_report_val,
+				 (u_int *) &objp->fflr_ioerr_report.fflr_ioerr_report_len, ~0,
+				sizeof(ff_ioerr4), (xdrproc_t) xdr_ff_ioerr4))
+		 	return false;
+	 	if (!xdr_array (xdrs,
+				(char **)&objp->fflr_iostats_report.fflr_iostats_report_val,
+				 (u_int *) &objp->fflr_iostats_report.fflr_iostats_report_len, ~0,
+				sizeof(ff_iostats4), (xdrproc_t) xdr_ff_iostats4))
+		 	return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_mirrors_hint(XDR *xdrs, ff_mirrors_hint *objp)
+	{
+		if (!xdr_bool (xdrs, &objp->ffmc_valid))
+			return false;
+		switch (objp->ffmc_valid) {
+		case TRUE:
+			 if (!xdr_uint32_t (xdrs, &objp->ff_mirrors_hint_u.ffmc_mirrors))
+				 return false;
+			break;
+		case FALSE:
+			break;
+		default:
+			return false;
+		}
+		return true;
+	}
+
+	static inline bool xdr_ff_layouthint4(XDR * xdrs, ff_layouthint4 *objp)
+	{
+		if (!xdr_ff_mirrors_hint(xdrs, &objp->fflh_mirrors_hint))
+			return false;
+		return true;
+	}
+
+	static inline bool xdr_ff_cb_recall_any_mask(XDR * xdrs, ff_cb_recall_any_mask *objp)
+	{
+		if (!xdr_enum(xdrs, (enum_t *)objp))
+			return false;
+		return true;
+	}
 
 	static inline bool xdr_CB_SEQUENCE4args(XDR * xdrs,
 						CB_SEQUENCE4args *objp)
@@ -9425,6 +9759,21 @@ extern "C" {
 	static inline bool xdr_multipath_list4();
 	static inline bool xdr_nfsv4_1_file_layout_ds_addr4();
 	static inline bool xdr_nfsv4_1_file_layout4();
+	static inline bool xdr_device_error4();
+	static inline bool xdr_ff_device_versions4();
+	static inline bool xdr_ff_device_addr4();
+	static inline bool xdr_ff_data_server4();
+	static inline bool xdr_ff_mirror4();
+	static inline bool xdr_ff_layout4();
+	static inline bool xdr_ff_ioerr4();
+	static inline bool xdr_ff_io_latency4();
+	static inline bool xdr_ff_layoutupdate4();
+	static inline bool xdr_io_info4();
+	static inline bool xdr_ff_iostats4();
+	static inline bool xdr_ff_layoutreturn4();
+	static inline bool xdr_ff_mirrors_hint();
+	static inline bool xdr_ff_layouthint4();
+	static inline bool xdr_ff_cb_recall_any_mask();
 	static inline bool xdr_ACCESS4args();
 	static inline bool xdr_ACCESS4resok();
 	static inline bool xdr_ACCESS4res();
