@@ -165,15 +165,15 @@ nfsstat4 getdeviceinfo(struct fsal_module *fsal_hdl,
 	darg.devid.device_id4 = deviceid->device_id4;
 	darg.devid.devid = deviceid->devid;
 
-	ds_buffer = fs_da_addr_size(NULL);
+	ds_buffer = da_addr_body->x_handy;
 
 	darg.xdr.p = (int *)da_addr_body->x_base;
 	da_beginning = xdr_getpos(da_addr_body);
 	darg.xdr.end = (int *)(darg.xdr.p + ((ds_buffer - da_beginning)>>2));
 
 	LogDebug(COMPONENT_PNFS,
-		"getdeviceinfo p %p end %p da_length %ld seq %d fd %d fsid 0x%lx\n",
-		darg.xdr.p, darg.xdr.end, da_beginning,
+		"getdeviceinfo p %p end %p da_length %ld ds_buffer %ld seq %d fd %d fsid 0x%lx\n",
+		darg.xdr.p, darg.xdr.end, da_beginning, ds_buffer,
 		deviceid->device_id2, deviceid->device_id4,
 		deviceid->devid);
 
