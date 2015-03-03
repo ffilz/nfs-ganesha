@@ -439,6 +439,7 @@ static state_status_t create_file_recall(cache_entry_t *entry,
 	}
 
 	glist_init(&recall->state_list);
+	glist_init(&recall->entry_link);
 	recall->entry = entry;
 	recall->type = type;
 	recall->segment = *segment;
