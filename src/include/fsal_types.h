@@ -36,10 +36,10 @@
 
 #include <stddef.h>
 #include <sys/types.h>
+#include <stdint.h>
+#include <stdbool.h>
 #include <sys/param.h>
 #include <dirent.h>		/* for MAXNAMLEN */
-
-#include "uid2grp.h"
 
 /* Cookie to be used in FSAL_ListXAttrs() to bypass RO xattr */
 static const uint32_t FSAL_XATTR_RW_COOKIE = ~0;

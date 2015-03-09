@@ -31,6 +31,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <sys/socket.h>
+#include "gsh_rpc.h"
 #include "config_parsing.h"
 #include "analyse.h"
 #include "abstract_mem.h"

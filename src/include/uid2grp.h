@@ -41,7 +41,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <pthread.h>
-#include "gsh_rpc.h"
 #include "gsh_types.h"
 
 /**
