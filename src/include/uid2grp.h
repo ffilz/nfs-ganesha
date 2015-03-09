@@ -41,7 +41,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <pthread.h>
-#include "gsh_rpc.h"
 #include "gsh_types.h"
 
 /**
@@ -81,5 +80,6 @@ void uid2grp_unref(struct group_data *gdata);
 void uid2grp_hold_group_data(struct group_data *);
 void uid2grp_release_group_data(struct group_data *);
 
-#endif				/* UID2GRP_H */
 /** @} */
+
+#endif				/* UID2GRP_H */

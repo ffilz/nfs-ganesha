@@ -18,6 +18,7 @@
 
 #include "fsal_convert.h"
 #include "common_utils.h"
+#include "abstract_atomic.h"
 
 /**
  * posix2fsal_error :

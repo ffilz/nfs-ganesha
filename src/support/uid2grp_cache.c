@@ -44,6 +44,7 @@
 #include "avltree.h"
 #include "uid2grp.h"
 #include "abstract_atomic.h"
+#include "abstract_mem.h"
 
 /**
  * @brief User entry in the IDMapper cache
