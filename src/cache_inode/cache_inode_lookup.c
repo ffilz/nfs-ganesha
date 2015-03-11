@@ -57,6 +57,9 @@ static inline bool trust_negative_cache(cache_entry_t *parent)
 		 EXPORT_OPTION_TRUST_READIR_NEGATIVE_CACHE) != 0) &&
 		(parent->icreate_refcnt == 0) &&
 	       ((parent->flags & CACHE_INODE_DIR_POPULATED) != 0);
+  
+  
+  
 }
 
 /**
@@ -163,7 +166,6 @@ cache_inode_lookup_impl(cache_entry_t *parent,
 				PTHREAD_RWLOCK_wrlock(&parent->content_lock);
 			}
 		}
-		assert(*entry == NULL);
 		LogDebug(COMPONENT_CACHE_INODE, "Cache Miss detected");
 	}
 
