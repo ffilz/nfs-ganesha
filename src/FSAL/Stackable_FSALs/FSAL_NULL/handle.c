@@ -45,6 +45,24 @@
 /* helpers
  */
 
+void nullfs_copy_attrlist(struct attrlist *dest, struct attrlist *source)
+{
+	if (source->mask != 0LL) {
+		/* A full copy of the structure is done. It can obviously be
+		 * optimized, but at least it works.
+		 *
+		 * Testing each bit of the mask to copy fields one by one
+		 * doesn't seems efficient either. I think the best way would be
+		 * to check and copy the fields that are likely to be changed in
+		 * each fsal function, and to call a general purpose function
+		 * like this only if unexpected bits remains in the source mask.
+		 */
+		*dest = *source;
+		FSAL_CLEAR_MASK(source->mask);
+	}
+}
+
+
 /* handle methods
  */
 
