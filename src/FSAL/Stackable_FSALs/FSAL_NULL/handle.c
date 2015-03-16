@@ -66,6 +66,42 @@ void nullfs_copy_attrlist(struct attrlist *dest, struct attrlist *source)
 /* handle methods
  */
 
+/**
+ * Allocate and initialize a new nullfs handle.
+ *
+ * This function doesn't free the sub_handle if the allocation fails. It must
+ * be done in the calling function.
+ *
+ * @param[in] export The nullfs export used by the handle.
+ * @param[in] sub_handle The handle used by the subfsal.
+ * @param[in] fs The filesystem of the new handle.
+ *
+ * @return The new handle, or NULL if the allocation failed.
+ */
+static struct nullfs_fsal_obj_handle *nullfs_alloc_handle(
+		struct nullfs_fsal_export *export,
+		struct fsal_obj_handle *sub_handle,
+		struct fsal_filesystem *fs)
+{
+	struct nullfs_fsal_obj_handle *result =
+		gsh_calloc(1, sizeof(struct nullfs_fsal_obj_handle));
+	if (result) {
+		/* default handlers */
+		fsal_obj_handle_init(&result->obj_handle, &export->export,
+				     sub_handle->type);
+		/* nullfs handlers */
+		nullfs_handle_ops_init(&result->obj_handle.obj_ops);
+		result->sub_handle = sub_handle;
+		result->obj_handle.type = sub_handle->type;
+		result->obj_handle.fs = fs;
+		/* attributes */
+		nullfs_copy_attrlist(&result->obj_handle.attributes,
+			&sub_handle->attributes);
+	}
+
+	return result;
+}
+
 /* lookup
  * deprecated NULL parent && NULL path implies root handle
  */
