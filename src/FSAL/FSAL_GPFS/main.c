@@ -203,6 +203,22 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 			"Could not enable GPFS logger (%s)",
 			strerror(-rc));
 
+	/* if the nodeid has not been obtained, get it now */
+	if (!g_nodeid) {
+		struct grace_period_arg gpa;
+		int nodeid;
+
+		gpa.mountdirfd = -1;
+		nodeid = gpfs_ganesha(OPENHANDLE_GET_NODEID, &gpa);
+		if (nodeid >= 0) {
+			/* GPFS starts with 0, we want node ids to be > 0 */
+			g_nodeid = nodeid + 1;
+			LogFullDebug(COMPONENT_FSAL, "nodeid (%hu)", g_nodeid);
+		} else
+			LogCrit(COMPONENT_FSAL,
+			    "OPENHANDLE_GET_NODEID failed rc (%d)", nodeid);
+	}
+
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
