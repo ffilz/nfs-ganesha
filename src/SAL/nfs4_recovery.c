@@ -301,7 +301,7 @@ void nfs4_create_clid_name41(nfs_client_record_t *cl_rec,
 void nfs4_add_clid(nfs_client_id_t *clientid)
 {
 	int err = 0;
-	char path[PATH_MAX] = {0}, segment[NAME_MAX + 1] = {0};
+	char path[PATH_MAX] = {0}, segment[MAXNAMLEN + 1] = {0};
 	int length, position = 0;
 
 	if (clientid->cid_minorversion > 0)
@@ -322,7 +322,7 @@ void nfs4_add_clid(nfs_client_id_t *clientid)
 		/* if the (remaining) clientid is shorter than 255 */
 		/* create the last level of dir and break out */
 		int len = strlen(&clientid->cid_recov_dir[position]);
-		if (len <= NAME_MAX) {
+		if (len <= MAXNAMLEN) {
 			strcat(path, "/");
 			strncat(path, &clientid->cid_recov_dir[position], len);
 			err = mkdir(path, 0700);
@@ -330,13 +330,13 @@ void nfs4_add_clid(nfs_client_id_t *clientid)
 		}
 		/* if (remaining) clientid is longer than 255, */
 		/* get the next 255 bytes and create a subdir */
-		strncpy(segment, &clientid->cid_recov_dir[position], NAME_MAX);
+		strncpy(segment, &clientid->cid_recov_dir[position], MAXNAMLEN);
 		strcat(path, "/");
-		strncat(path, segment, NAME_MAX);
+		strncat(path, segment, MAXNAMLEN);
 		err = mkdir(path, 0700);
 		if (err == -1 && errno != EEXIST)
 			break;
-		position += NAME_MAX;
+		position += MAXNAMLEN;
 	}
 
 	if (err == -1 && errno != EEXIST) {
@@ -410,7 +410,7 @@ void nfs4_rm_clid(const char *recov_dir, char *parent_path, int position)
 		nfs4_rm_revoked_handles(parent_path);
 		return;
 	}
-	segment = gsh_malloc(NAME_MAX+1);
+	segment = gsh_malloc(MAXNAMLEN+1);
 	if (segment == NULL) {
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to remove client in recovery dir (%s), ENOMEM",
@@ -418,8 +418,8 @@ void nfs4_rm_clid(const char *recov_dir, char *parent_path, int position)
 		return;
 	}
 
-	memset(segment, 0, NAME_MAX+1);
-	strncpy(segment, &recov_dir[position], NAME_MAX);
+	memset(segment, 0, MAXNAMLEN+1);
+	strncpy(segment, &recov_dir[position], MAXNAMLEN);
 	segment_len = strlen(segment);
 
 	/* allocate enough memory for the new part of the string */
@@ -1118,8 +1118,8 @@ void nfs4_create_recov_dir(void)
  */
 void nfs4_record_revoke(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 {
-	char rhdlstr[NAME_MAX];
-	char path[PATH_MAX] = {0}, segment[NAME_MAX + 1] = {0};
+	char rhdlstr[MAXNAMLEN];
+	char path[PATH_MAX] = {0}, segment[MAXNAMLEN + 1] = {0};
 	int length, position = 0;
 	int fd;
 	int retval;
@@ -1153,7 +1153,7 @@ void nfs4_record_revoke(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 	length = strlen(delr_clid->cid_recov_dir);
 	while (position < length) {
 		int len = strlen(&delr_clid->cid_recov_dir[position]);
-		if (len <= NAME_MAX) {
+		if (len <= MAXNAMLEN) {
 			strcat(path, "/");
 			strncat(path, &delr_clid->cid_recov_dir[position], len);
 			strcat(path, "/\x1"); /* Prefix 1 to converted fh */
@@ -1168,10 +1168,12 @@ void nfs4_record_revoke(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 			}
 			return;
 		}
-		strncpy(segment, &delr_clid->cid_recov_dir[position], NAME_MAX);
+		strncpy(segment,
+			&delr_clid->cid_recov_dir[position],
+			MAXNAMLEN);
 		strcat(path, "/");
-		strncat(path, segment, NAME_MAX);
-		position += NAME_MAX;
+		strncat(path, segment, MAXNAMLEN);
+		position += MAXNAMLEN;
 	}
 }
 
@@ -1185,7 +1187,7 @@ void nfs4_record_revoke(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
  */
 bool nfs4_check_deleg_reclaim(nfs_client_id_t *clid, nfs_fh4 *fhandle)
 {
-	char rhdlstr[NAME_MAX];
+	char rhdlstr[MAXNAMLEN];
 	struct glist_head *node;
 	rdel_fh_t *rfh_entry;
 	clid_entry_t *clid_ent;
