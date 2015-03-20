@@ -77,6 +77,9 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		     "Initializing FSAL Callback context for %d.",
 		     gpfs_fs->root_fd);
 
+	/* Enable this thread to be cancel-able from gpfs_ganesha() */
+	(void)pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+
 	/* Start querying for events and processing. */
 	while (1) {
 		/* @todo FSF: need to figure out how to exit in new scheme */
@@ -106,7 +109,16 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		       callback.handle->handle_size);
 #endif
 
+		/* We don't want to cancel this thread while it is
+		 * processing an inode update request. So this thread is
+		 * not cancel-able except when making gpfs_ganesha call
+		 * where it ends up sleeping in GPFS kernel module for
+		 * some event to happen.  Enable thread cancellation
+		 * here, and disable it after the gpfs_ganesha call.
+		 */
+		(void)pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
 		rc = gpfs_ganesha(OPENHANDLE_INODE_UPDATE, &callback);
+		(void)pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
 		errsv = errno;
 
 		if (rc != 0) {

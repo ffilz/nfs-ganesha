@@ -39,6 +39,7 @@
 #include <mntent.h>
 #include <sys/statfs.h>
 #include <sys/quota.h>
+#include <signal.h>
 #include "fsal.h"
 #include "fsal_internal.h"
 #include "fsal_convert.h"
@@ -603,6 +604,7 @@ void gpfs_unclaim_filesystem(struct fsal_filesystem *fs)
 	struct gpfs_filesystem *gpfs_fs = fs->private;
 	struct glist_head *glist, *glistn;
 	struct gpfs_filesystem_export_map *map;
+	int retval;
 
 	if (gpfs_fs != NULL) {
 		glist_for_each_safe(glist, glistn, &gpfs_fs->exports) {
@@ -624,6 +626,16 @@ void gpfs_unclaim_filesystem(struct fsal_filesystem *fs)
 			gsh_free(map);
 		}
 
+		/* Stop GPFS upcall thread. The only error pthread_cancel
+		 * can return is ESRCH (thread not found), so we just
+		 * warn if pthread_cancel fails.
+		 */
+		retval = pthread_cancel(gpfs_fs->up_thread);
+		if (retval)
+			LogWarn(COMPONENT_FSAL,
+				"Unable to cancel upcall thread for %s, errno=%d",
+				fs->path, errno);
+		pthread_join(gpfs_fs->up_thread, NULL);
 		free_gpfs_filesystem(gpfs_fs);
 
 		fs->private = NULL;
