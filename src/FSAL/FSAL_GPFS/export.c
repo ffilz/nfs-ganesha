@@ -765,9 +765,8 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl,
 
 		nodeid = gpfs_ganesha(OPENHANDLE_GET_NODEID, &gpa);
 		if (nodeid >= 0) {
-			/* GPFS starts with 0, we want node ids to be > 0 */
-			g_nodeid = nodeid + 1;
-			LogFullDebug(COMPONENT_FSAL, "nodeid %hu", g_nodeid);
+			g_nodeid = nodeid;
+			LogFullDebug(COMPONENT_FSAL, "nodeid %d", g_nodeid);
 		} else
 			LogCrit(COMPONENT_FSAL,
 			    "OPENHANDLE_GET_NODEID failed rc %d", nodeid);
