@@ -40,6 +40,7 @@
 #include "nfs_proto_tools.h"
 #include "idmapper.h"
 #include "export_mgr.h"
+#include "byteswap.h"
 
 /* Define mapping of NFS4 who name and type. */
 static struct {
@@ -985,8 +986,17 @@ static fattr_xdr_result decode_chown_restricted(XDR *xdr,
 static fattr_xdr_result encode_filehandle(XDR *xdr,
 					  struct xdr_attrs_args *args)
 {
+
 	if (args->hdl4 == NULL || args->hdl4->nfs_fh4_val == NULL)
 		return FATTR_XDR_FAILED;
+
+#if (BYTE_ORDER == BIG_ENDIAN)
+	file_handle_v4_t *fh;
+	fh = (file_handle_v4_t *)args->hdl4->nfs_fh4_val;
+
+	bswap_16(fh->flags);
+	bswap_16(fh->id.exports);
+#endif
 	if (!inline_xdr_bytes
 	    (xdr, &args->hdl4->nfs_fh4_val, &args->hdl4->nfs_fh4_len,
 	     NFS4_FHSIZE))
@@ -1012,6 +1022,14 @@ static fattr_xdr_result decode_filehandle(XDR *xdr,
 		    (xdr, &args->hdl4->nfs_fh4_val, &args->hdl4->nfs_fh4_len,
 		     NFS4_FHSIZE))
 			return FATTR_XDR_FAILED;
+
+#if (BYTE_ORDER == BIG_ENDIAN)
+	file_handle_v4_t *fh;
+	fh = (file_handle_v4_t *)args->hdl4->nfs_fh4_val;
+
+	bswap_16(fh->flags);
+	bswap_16(fh->id.exports);
+#endif
 	}
 	return FATTR_XDR_SUCCESS;
 }
