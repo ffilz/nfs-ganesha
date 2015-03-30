@@ -449,6 +449,11 @@ nfs_fh3 *objp;
 	register long __attribute__ ((__unused__)) * buf;
 #endif
 
+#if (BYTE_ORDER == BIG_ENDIAN)
+	file_handle_v3_t *fh = (file_handle_v3_t *)objp->data.data_val;
+
+	bswap_16(fh->exportid);
+#endif
 	if (!xdr_bytes
 	    (xdrs, (char **)&objp->data.data_val,
 	     (u_int *) & objp->data.data_len, 64))

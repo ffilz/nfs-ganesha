@@ -20,6 +20,7 @@ extern "C" {
 #define _AUTH_SYS_DEFINE_FOR_NFSv41
 
 #include "gsh_rpc.h"
+#include "nfs_fh.h"
 
 	typedef struct authsys_parms authsys_parms;
 #endif				/* _AUTH_SYS_DEFINE_FOR_NFSv41 */
@@ -3562,6 +3563,12 @@ extern "C" {
 
 	static inline bool xdr_nfs_fh4(XDR * xdrs, nfs_fh4 *objp)
 	{
+#if (BYTE_ORDER == BIG_ENDIAN)
+		file_handle_v4_t *fh = (file_handle_v4_t *)objp->nfs_fh4_val;
+
+		bswap_16(fh->flags);
+		bswap_16(fh->id.exports);
+#endif
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->nfs_fh4_val,
 		     (u_int *) & objp->nfs_fh4_len, NFS4_FHSIZE))

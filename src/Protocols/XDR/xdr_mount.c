@@ -35,6 +35,11 @@ fhandle3 *objp;
 	register long __attribute__ ((__unused__)) * buf;
 #endif
 
+#if (BYTE_ORDER == BIG_ENDIAN)
+	file_handle_v3_t *fh = (file_handle_v3_t *)objp->data.data_val;
+
+	bswap_16(fh->exportid);
+#endif
 	if (!inline_xdr_bytes
 	    (xdrs, (char **)&objp->fhandle3_val, (u_int *) & objp->fhandle3_len,
 	     NFS3_FHSIZE))
