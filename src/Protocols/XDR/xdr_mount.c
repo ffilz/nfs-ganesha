@@ -7,6 +7,8 @@
 #include "gsh_rpc.h"
 #include "mount.h"
 #include "nfs23.h"
+#include "byteswap.h"
+#include "nfs_file_handle.h"
 
 bool xdr_mountstat3(xdrs, objp)
 register XDR *xdrs;
@@ -35,10 +37,24 @@ fhandle3 *objp;
 	register long __attribute__ ((__unused__)) * buf;
 #endif
 
+#if (BYTE_ORDER == BIG_ENDIAN)
+	if (xdrs->x_op == XDR_ENCODE) {
+		file_handle_v3_t *fh = (file_handle_v3_t *)objp->fhandle3_val;
+		fh->exportid = bswap_16(fh->exportid);
+	}
+#endif
+
 	if (!inline_xdr_bytes
 	    (xdrs, (char **)&objp->fhandle3_val, (u_int *) & objp->fhandle3_len,
 	     NFS3_FHSIZE))
 		return (false);
+
+#if (BYTE_ORDER == BIG_ENDIAN)
+	if (xdrs->x_op == XDR_DECODE) {
+		file_handle_v3_t *fh = (file_handle_v3_t *)objp->fhandle3_val;
+		fh->exportid = bswap_16(fh->exportid);
+	}
+#endif
 	return (true);
 }
 
