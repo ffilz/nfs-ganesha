@@ -6,6 +6,26 @@
 #include "config.h"
 #include "gsh_rpc.h"
 #include "nlm4.h"
+#include "nfs_fh.h"
+
+void xdr_handle(XDR * xdrs, netobj * obj)
+{
+	if (xdrs->x_op == XDR_ENCODE) {
+		file_handle_v3_t *fh = (file_handle_v3_t *)obj->n_bytes;
+		fh->fs_v3len |= mixed_endian;
+		return;
+	}
+	if (xdrs->x_op == XDR_DECODE && mixed_endian) {
+		file_handle_v3_t *fh = (file_handle_v3_t *)obj->n_bytes;
+#if (BYTE_ORDER == BIG_ENDIAN)
+		if (fh->fs_v3len & FH3_LITTLE_ENDIAN)
+			fh->exportid = bswap_16(fh->exportid);
+#else
+		if (fh->fs_v3len & FH3_BIG_ENDIAN)
+			fh->exportid = bswap_16(fh->exportid);
+#endif
+	}
+}
 
 bool xdr_nlm4_stats(XDR * xdrs, nlm4_stats * objp)
 {
@@ -75,6 +95,7 @@ bool xdr_nlm4_lock(XDR * xdrs, nlm4_lock * objp)
 		return false;
 	if (!xdr_netobj(xdrs, &objp->fh))
 		return false;
+	xdr_handle(xdrs, &objp->fh);
 	if (!xdr_netobj(xdrs, &objp->oh))
 		return false;
 	if (!xdr_int32_t(xdrs, &objp->svid))
@@ -156,6 +177,7 @@ bool xdr_nlm4_share(XDR * xdrs, nlm4_share * objp)
 		return false;
 	if (!xdr_netobj(xdrs, &objp->fh))
 		return false;
+	xdr_handle(xdrs, &objp->fh);
 	if (!xdr_netobj(xdrs, &objp->oh))
 		return false;
 	if (!xdr_fsh4_mode(xdrs, &objp->mode))
