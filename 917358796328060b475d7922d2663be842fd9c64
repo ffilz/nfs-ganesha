@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_7c48af2d",
+        "filename": "src/Protocols/XDR/xdr_mount.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-03-31T23:53:12Z",
+      "side": 1,
+      "message": "No it\u0027s fine, it\u0027s only used for casting the value.\n\nHowever, to be correct, the swap needs to be done AFTER for decode...",
+      "parentUuid": "1a106d94_5ccb33a5",
+      "revId": "917358796328060b475d7922d2663be842fd9c64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_fcd5bf43",
         "filename": "src/Protocols/XDR/xdr_nfs23.c",
         "patchSetId": 1
@@ -36,6 +54,40 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_1c5ffbe6",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-03-31T23:53:12Z",
+      "side": 1,
+      "message": "The bswap needs to be before for encode and after for decode...",
+      "revId": "917358796328060b475d7922d2663be842fd9c64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_9c72cb7a",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-03-31T23:53:12Z",
+      "side": 1,
+      "message": "Should cidlen be declared as a uint32_t?",
+      "revId": "917358796328060b475d7922d2663be842fd9c64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_7c938fa3",
         "filename": "src/include/nfs_file_handle.h",
         "patchSetId": 1
@@ -47,6 +99,24 @@
       "writtenOn": "2015-03-31T23:18:03Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+#define FH_BIG_ENDIAN          0x0101  /*\u003c one of this flags is on if in big endian */",
+      "revId": "917358796328060b475d7922d2663be842fd9c64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_9c4beb2a",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-03-31T23:53:12Z",
+      "side": 1,
+      "message": "Instead of changing the DS flag value, how about making the two flags 0x1010 and 0x2020?",
+      "parentUuid": "1a106d94_7c938fa3",
       "revId": "917358796328060b475d7922d2663be842fd9c64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
