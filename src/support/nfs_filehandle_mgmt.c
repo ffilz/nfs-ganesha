@@ -205,6 +205,11 @@ bool nfs4_FSALToFhandle(nfs_fh4 *fh4,
 	}
 
 	file_handle->fhversion = GANESHA_FH_VERSION;
+#if (BYTE_ORDER == BIG_ENDIAN)
+	file_handle->flags |= FH_BIG_ENDIAN;
+#else
+	file_handle->flags |= FH_LITTLE_ENDIAN;
+#endif
 	file_handle->fs_len = fh_desc.len;	/* set the actual size */
 	/* keep track of the export id */
 	file_handle->id.exports = exp->export_id;

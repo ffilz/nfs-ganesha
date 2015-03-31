@@ -41,6 +41,7 @@
 #include "bsd-base64.h"
 #include "client_mgr.h"
 #include "fsal.h"
+#include "byteswap.h"
 
 #define NFS_V4_RECOV_DIR "v4recov"
 #define NFS_V4_OLD_DIR "v4old"
@@ -221,7 +222,14 @@ void nfs4_create_clid_name(nfs_client_record_t *cl_rec,
 					     PATH_MAX) > 0) {
 		/* convert_opaque_value_max_for_dir does not prefix
 		 * the "(<length>:". So we need to do it here */
+#if (BYTE_ORDER == BIG_ENDIAN)
+		long cidlen = strlen(cidstr);
+
+		bswap_32(cidlen);
+		sprintf(cidstr_len, "%ld", cidlen);
+#else
 		sprintf(cidstr_len, "%ld", strlen(cidstr));
+#endif
 		total_len = strlen(cidstr) + strlen(str_client_addr) + 5 +
 			    strlen(cidstr_len);
 		/* hold both long form clientid and IP */

@@ -97,7 +97,9 @@ static inline size_t nfs3_sizeof_handle(struct file_handle_v3 *hdl)
 	return hsize;
 }
 
-#define FILE_HANDLE_V4_FLAG_DS 0x0001
+#define FILE_HANDLE_V4_FLAG_DS 0x0010  /*< handle for a DS */
+#define FH_BIG_ENDIAN          0x0101  /*< one of this flags is on if in big endian */
+#define FH_LITTLE_ENDIAN       0x0202  /*< one of this flags is on if in little endian */
 
 /**
  * @brief An NFSv4 filehandle
