@@ -1168,8 +1168,6 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 				     O_RDONLY, &fsal_error);
 	if (cfd.fd >= 0) {
 		st = posix2fsal_attributes(&stat, &obj_hdl->attributes);
-		if (cfd.close_fd)
-			close(cfd.fd);
 		if (FSAL_IS_ERROR(st)) {
 			FSAL_CLEAR_MASK(obj_hdl->attributes.mask);
 			FSAL_SET_MASK(obj_hdl->attributes.mask,
@@ -1179,6 +1177,18 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 		} else {
 			obj_hdl->attributes.fsid = obj_hdl->fs->fsid;
 		}
+		if (myself->sub_ops && myself->sub_ops->getattrs) {
+			st = myself->sub_ops->getattrs(myself, cfd.fd);
+			if (FSAL_IS_ERROR(st)) {
+				FSAL_CLEAR_MASK(obj_hdl->attributes.mask);
+				FSAL_SET_MASK(obj_hdl->attributes.mask,
+						ATTR_RDATTR_ERR);
+				fsal_error = st.major;
+				retval = st.minor;
+			}
+		}
+		if (cfd.close_fd)
+			close(cfd.fd);
 	} else {
 		LogDebug(COMPONENT_FSAL, "Failed with %s, fsal_error %s",
 			 strerror(-cfd.fd),
@@ -1381,6 +1391,19 @@ static fsal_status_t setattrs(struct fsal_obj_handle *obj_hdl,
 		if (retval != 0)
 			goto fileerr;
 	}
+
+	/** SUBFSAL **/
+	if (myself->sub_ops && myself->sub_ops->setattrs) {
+		fsal_status_t st;
+
+		st = myself->sub_ops->setattrs(myself, cfd.fd, attrs);
+		if (FSAL_IS_ERROR(st)) {
+			fsal_error = st.major;
+			retval = st.minor;
+			goto hdlerr;
+		}
+	}
+
 	goto out;
 
  fileerr:

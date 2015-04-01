@@ -88,6 +88,30 @@ fsal_status_t vfs_create_handle(struct fsal_export *exp_hdl,
 				struct gsh_buffdesc *hdl_desc,
 				struct fsal_obj_handle **handle);
 
+struct vfs_subfsal_obj_ops {
+/**
+ * @brief Gte sub-fsal attributes from an object
+ *
+ * @param[in] vfs_hdl    The VFS object to modify
+ * @param[in] fd		 Open filehandle on object
+ *
+ * @return FSAL status.
+ */
+	fsal_status_t (*getattrs)(struct vfs_fsal_obj_handle *vfs_hdl,
+				  int fd);
+/**
+ * @brief Set sub-fsal attributes on an object
+ *
+ * @param[in] vfs_hdl    The VFS object to modify
+ * @param[in] fd		 Open filehandle on object
+ * @param[in] attrib_set Attributes to set
+ *
+ * @return FSAL status.
+ */
+	fsal_status_t (*setattrs)(struct vfs_fsal_obj_handle *vfs_hdl,
+				  int fd, struct attrlist *attrib_set);
+};
+
 /*
  * VFS internal object handle
  * handle is a pointer because
@@ -106,6 +130,7 @@ struct vfs_fsal_obj_handle {
 	struct fsal_obj_handle obj_handle;
 	fsal_dev_t dev;
 	vfs_file_handle_t *handle;
+	struct vfs_subfsal_obj_ops *sub_ops;	/*< Optional subfsal ops */
 	const struct fsal_up_vector *up_ops;	/*< Upcall operations */
 	union {
 		struct {
