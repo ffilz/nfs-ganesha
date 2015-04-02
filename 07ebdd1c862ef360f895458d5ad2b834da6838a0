@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_a548475c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-02T21:08:31Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this pass along the flags?",
+      "revId": "07ebdd1c862ef360f895458d5ad2b834da6838a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_8541cb3b",
+        "filename": "src/Protocols/NFS/nfs4_op_putfh.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-02T21:08:31Z",
+      "side": 1,
+      "message": "Looks like a small typo here",
+      "revId": "07ebdd1c862ef360f895458d5ad2b834da6838a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_6565afe0",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-02T21:08:31Z",
+      "side": 1,
+      "message": "Didn\u0027t we already swap the exportid when XDRing the handle?",
+      "revId": "07ebdd1c862ef360f895458d5ad2b834da6838a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_059cbbbf",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 3576,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-02T21:08:31Z",
+      "side": 1,
+      "message": "Again, I\u0027m concerned about this with FSAL_PROXY which I think is the only user of these functions.",
+      "revId": "07ebdd1c862ef360f895458d5ad2b834da6838a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
