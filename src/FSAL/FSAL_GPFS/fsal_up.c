@@ -273,79 +273,29 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 			break;
 
 		case INODE_UPDATE:	/* Update Event */
-			{
-				struct attrlist attr;
-
-				LogMidDebug(COMPONENT_FSAL_UP,
-					    "inode update: flags:%x update ino %ld n_link:%d",
-					    flags, callback.buf->st_ino,
-					    (int)callback.buf->st_nlink);
-
-				/* Check for accepted flags, any other changes
-				   just invalidate. */
-				if (flags &
-				    (UP_SIZE | UP_NLINK | UP_MODE | UP_OWN |
-				     UP_TIMES | UP_ATIME | UP_SIZE_BIG)) {
-					attr.mask = 0;
-					if (flags & UP_SIZE)
-						attr.mask |=
-						   ATTR_CHGTIME | ATTR_CHANGE |
-						   ATTR_SIZE | ATTR_SPACEUSED;
-					if (flags & UP_SIZE_BIG) {
-						attr.mask |=
-						   ATTR_CHGTIME | ATTR_CHANGE |
-						   ATTR_SIZE | ATTR_SPACEUSED;
-						upflags |=
-						   fsal_up_update_filesize_inc |
-						   fsal_up_update_spaceused_inc;
-					}
-					if (flags & UP_MODE)
-						attr.mask |=
-						   ATTR_CHGTIME | ATTR_CHANGE |
-						   ATTR_MODE;
-					if (flags & UP_OWN)
-						attr.mask |=
-						   ATTR_CHGTIME | ATTR_CHANGE |
-						   ATTR_OWNER;
-					if (flags & UP_TIMES)
-						attr.mask |=
-						   ATTR_CHGTIME | ATTR_CHANGE |
-						   ATTR_ATIME | ATTR_CTIME |
-						    ATTR_MTIME;
-					if (flags & UP_ATIME)
-						attr.mask |=
-						   ATTR_CHGTIME | ATTR_CHANGE |
-						   ATTR_ATIME;
-
-					posix2fsal_attributes(&buf, &attr);
-					attr.expire_time_attr =
-					    expire_time_attr;
-
-					rc = event_func->
-					    update(gpfs_fs->fs->fsal,
-						   &key, &attr, upflags);
-
-					if ((flags & UP_NLINK)
-					    && (attr.numlinks == 0)) {
-						upflags = fsal_up_nlink;
-						attr.mask = 0;
-						rc = up_async_update
-						    (general_fridge,
-						     event_func,
-						     gpfs_fs->fs->fsal,
-						     &key, &attr,
-						     upflags, NULL, NULL);
-					}
-				} else {
-					rc = event_func->
-					    invalidate(
-						gpfs_fs->fs->fsal, &key,
-						CACHE_INODE_INVALIDATE_ATTRS
-						|
-						CACHE_INODE_INVALIDATE_CONTENT);
-				}
-
-			}
+			/** @todo: This notification is completely
+			 * asynchronous.  If we happen to change some of
+			 * the attributes later, we end up over writing
+			 * those with these possibly stale values as we
+			 * don't know when we get to update with these
+			 * up call values. We should probably use time
+			 * stamp or let the up call always provide
+			 * UP_TIMES flag in which case we can compare
+			 * the current ctime vs up call provided ctime
+			 * before updating the attributes.
+			 *
+			 * For now, just invalidate the attributes and
+			 * let ganesha fetch attributes as needed.
+			 *
+			 * The code that actually changed the attributes
+			 * directly with these up call attribute values
+			 * is deleted as part of this quick fix. Look
+			 * for it in the git history when we really fix
+			 * it using timestamps
+			 */
+			rc = event_func->invalidate(gpfs_fs->fs->fsal, &key,
+					CACHE_INODE_INVALIDATE_ATTRS |
+					CACHE_INODE_INVALIDATE_CONTENT);
 			break;
 
 		case THREAD_STOP:  /* We wanted to terminate this thread */
