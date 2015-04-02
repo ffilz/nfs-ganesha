@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_c290d997",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-02T17:11:06Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+//\t\thdl-\u003ehandle_fsid[0] \u003d bswap_32(hdl-\u003ehandle_fsid[0]);",
+      "revId": "99f4e4838784539f02b53ef18596d5a3800d11c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_a28ddd7d",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-02T17:11:06Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+//\t\thdl-\u003ehandle_fsid[1] \u003d bswap_32(hdl-\u003ehandle_fsid[1]);",
+      "revId": "99f4e4838784539f02b53ef18596d5a3800d11c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_02eaf10e",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-02T17:11:06Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+//\t\thdl-\u003ehandle_fsid[0] \u003d bswap_32(hdl-\u003ehandle_fsid[0]);",
+      "revId": "99f4e4838784539f02b53ef18596d5a3800d11c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_e2eeb521",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-02T17:11:06Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+//\t\thdl-\u003ehandle_fsid[1] \u003d bswap_32(hdl-\u003ehandle_fsid[1]);",
+      "revId": "99f4e4838784539f02b53ef18596d5a3800d11c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
