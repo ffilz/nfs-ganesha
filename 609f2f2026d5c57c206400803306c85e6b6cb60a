@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_656f6f93",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/export.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-02T21:59:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\treturn next_ops.exp_ops.extract_handle(exp_hdl, in_type, fh_desc, flags);",
+      "revId": "609f2f2026d5c57c206400803306c85e6b6cb60a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
