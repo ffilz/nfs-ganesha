@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_4c925858",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3573,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-03T14:52:58Z",
+      "side": 1,
+      "message": "This can not work with FSAL_PROXY, it WILL corrupt FSAL_PROXY handles and make them useless...",
+      "revId": "da82cb6387ba1933323968796c7a7a977d94ffaa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
