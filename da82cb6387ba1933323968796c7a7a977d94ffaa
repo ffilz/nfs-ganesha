@@ -16,6 +16,24 @@
       "revId": "da82cb6387ba1933323968796c7a7a977d94ffaa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_cbc90d7b",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3573,
+      "author": {
+        "id": 1004505
+      },
+      "writtenOn": "2015-04-04T01:02:11Z",
+      "side": 1,
+      "message": "I think the endian flag in the handle will not affect PROXY because the file handle is opaque to PROXY. Changes in xdr_nfs_fh4 are not needed. Other changes in this patch do not matter to PROXY.\nPut it differently, this patch is good if it simply drops changes to this xdr_nfs_fh4 function. Of cause, I assume you guys think the patch is also good to other parts beside PROXY.",
+      "parentUuid": "1a106d94_4c925858",
+      "revId": "da82cb6387ba1933323968796c7a7a977d94ffaa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
