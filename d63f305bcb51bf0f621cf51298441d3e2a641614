@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_1a688986",
+        "filename": "src/Protocols/XDR/xdr_mount.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-07T06:25:26Z",
+      "side": 1,
+      "message": "ERROR: do not use assignment in if condition\n+\t\tif (fh-\u003efs_v3len |\u003d FH3_LITTLE_ENDIAN)",
+      "revId": "d63f305bcb51bf0f621cf51298441d3e2a641614",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_7a06ddcf",
+        "filename": "src/Protocols/XDR/xdr_mount.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-07T06:25:26Z",
+      "side": 1,
+      "message": "ERROR: do not use assignment in if condition\n+\t\tif (fh-\u003efs_v3len |\u003d FH3_BIG_ENDIAN)",
+      "revId": "d63f305bcb51bf0f621cf51298441d3e2a641614",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_5a0961dc",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-07T06:25:26Z",
+      "side": 1,
+      "message": "ERROR: do not use assignment in if condition\n+\t\tif (fh-\u003efs_v3len |\u003d FH3_LITTLE_ENDIAN)",
+      "revId": "d63f305bcb51bf0f621cf51298441d3e2a641614",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_ba105502",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-07T06:25:26Z",
+      "side": 1,
+      "message": "ERROR: do not use assignment in if condition\n+\t\tif (fh-\u003efs_v3len |\u003d FH3_BIG_ENDIAN)",
+      "revId": "d63f305bcb51bf0f621cf51298441d3e2a641614",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_daf431d1",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-07T06:25:26Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I/** Enable mixed endian. Defaults is true. */ $",
+      "revId": "d63f305bcb51bf0f621cf51298441d3e2a641614",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_9a13d90c",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-07T06:25:26Z",
+      "side": 1,
+      "message": "ERROR: do not use assignment in if condition\n+\t\tif (pfile_handle-\u003efs_v3len |\u003d FH3_LITTLE_ENDIAN)",
+      "revId": "d63f305bcb51bf0f621cf51298441d3e2a641614",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_faf92dc9",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-07T06:25:26Z",
+      "side": 1,
+      "message": "ERROR: do not use assignment in if condition\n+\t\tif (pfile_handle-\u003efs_v3len |\u003d FH3_BIG_ENDIAN)",
+      "revId": "d63f305bcb51bf0f621cf51298441d3e2a641614",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
