@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_f7aae3d0",
+        "filename": "src/Protocols/XDR/xdr_mount.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-07T21:35:02Z",
+      "side": 1,
+      "message": "See the comments in xdr_nfs23.c",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_375e3b13",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-07T21:35:02Z",
+      "side": 1,
+      "message": "You are oring in 0x1010 or 0x2020... You need a mixed_endian_v3 variable...",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_979c4fc2",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-07T21:35:02Z",
+      "side": 1,
+      "message": "You will also need to fixup the length to not include the endian flag.",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_b7722bab",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 3589,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-07T21:35:02Z",
+      "side": 1,
+      "message": "Instead of #if you could code:\n\nif ((fh-\u003eflags \u0026 (FH_LITTLE_ENDIAN | FH_BIG_ENDIAN)) !\u003d mixed_endian \u0026\u0026 (fh-\u003eflags \u0026 (FH_LITTLE_ENDIAN | FH_BIG_ENDIAN)) !\u003d 0) {\n     fh-\u003eflags \u003d bswap_16(fh-\u003eflags);\n     fh-\u003eid.exports \u003d bswap_16(fh-\u003eid.exports);\n}\n\nWhat do you do if mixed_endian is 0 and these flags are non-zero? We should make sure we flag a bad handle or something.\n\nBut there\u0027s also a problem here. If the client presents a handle with the other endianess, and then requests a layout or delegation, when we try to recall the layout or delegation, we will send a request that has a different handle than the one the client used, which will make it not match up the recall.",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
