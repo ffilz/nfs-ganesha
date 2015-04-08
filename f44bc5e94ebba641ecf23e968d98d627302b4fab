@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_79e1c2cf",
+        "filename": "src/Protocols/NLM/nlm_util.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1004000
+      },
+      "writtenOn": "2015-04-08T21:18:51Z",
+      "side": 1,
+      "message": "I don\u0027t think this fh goes through extract_handle.",
+      "parentUuid": "1a106d94_b99dfa5b",
+      "revId": "f44bc5e94ebba641ecf23e968d98d627302b4fab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_596de697",
         "filename": "src/Protocols/XDR/xdr_nlm4.c",
         "patchSetId": 17
