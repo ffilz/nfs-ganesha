@@ -46,7 +46,19 @@
  * they come/go are 4 byte aligned.
  */
 
-#define GANESHA_FH_VERSION 0x41
+/* We use odd numbered versions to avoid collision with ancient knfsd handles.
+ */
+#define GANESHA_FH_VERSION_1 0x41
+#define GANESHA_LITTLE_ENDIAN_FH_VERSION 0x43
+#define GANESHA_BIG_ENDIAN_FH_VERSION 0x45
+
+#if (BYTE_ORDER == BIG_ENDIAN)
+#define GANESHA_FH_VERSION GANESHA_BIG_ENDIAN_FH_VERSION
+#define GANESHA_OTHER_ENDIAN_FH_VERSION GANESHA_LITTLE_ENDIAN_FH_VERSION
+#else
+#define GANESHA_FH_VERSION GANESHA_LITTLE_ENDIAN_FH_VERSION
+#define GANESHA_OTHER_ENDIAN_FH_VERSION GANESHA_BIG_ENDIAN_FH_VERSION
+#endif
 
 /**
  * @brief An NFSv3 handle

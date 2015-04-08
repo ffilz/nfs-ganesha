@@ -318,9 +318,14 @@ int nfs4_Is_Fh_Invalid(nfs_fh4 *fh)
 	/* Cast the fh as a non opaque structure */
 	pfile_handle = (file_handle_v4_t *) (fh->nfs_fh4_val);
 
+	if (pfile_handle->fhversion == GANESHA_FH_VERSION_1)
+		LogDebug(COMPONENT_FILEHANDLE,
+			 "Warning request uses legacy handle without explicit endianess.");
+
 	/* validate the filehandle  */
 	if (pfile_handle == NULL || fh->nfs_fh4_len == 0
-	    || pfile_handle->fhversion != GANESHA_FH_VERSION
+	    || (pfile_handle->fhversion != GANESHA_FH_VERSION &&
+		pfile_handle->fhversion != GANESHA_FH_VERSION_1)
 	    || fh->nfs_fh4_len < offsetof(struct file_handle_v4, fsopaque)
 	    || fh->nfs_fh4_len > sizeof(struct alloc_file_handle_v4)
 	    || fh->nfs_fh4_len != nfs4_sizeof_handle(pfile_handle)) {
@@ -331,6 +336,10 @@ int nfs4_Is_Fh_Invalid(nfs_fh4 *fh)
 			} else if (fh->nfs_fh4_len == 0) {
 				LogInfo(COMPONENT_FILEHANDLE,
 					"INVALID HANDLE: zero length handle");
+			} else if (pfile_handle->fhversion ==
+				   GANESHA_OTHER_ENDIAN_FH_VERSION) {
+				LogWarn(COMPONENT_FILEHANDLE,
+					"INVALID HANDLE: Ganesha doesn't handle mixed-endianess currently");
 			} else if (pfile_handle->fhversion !=
 				   GANESHA_FH_VERSION) {
 				LogInfo(COMPONENT_FILEHANDLE,
@@ -394,9 +403,14 @@ int nfs3_Is_Fh_Invalid(nfs_fh3 *fh3)
 	/* Cast the fh as a non opaque structure */
 	pfile_handle = (file_handle_v3_t *) (fh3->data.data_val);
 
+	if (pfile_handle->fhversion == GANESHA_FH_VERSION_1)
+		LogDebug(COMPONENT_FILEHANDLE,
+			 "Warning request uses legacy handle without explicit endianess.");
+
 	/* validate the filehandle  */
 	if (pfile_handle == NULL || fh3->data.data_len == 0
-	    || pfile_handle->fhversion != GANESHA_FH_VERSION
+	    || (pfile_handle->fhversion != GANESHA_FH_VERSION &&
+		pfile_handle->fhversion != GANESHA_FH_VERSION_1)
 	    || fh3->data.data_len < sizeof(file_handle_v3_t)
 	    || fh3->data.data_len > sizeof(struct alloc_file_handle_v3)
 	    || fh3->data.data_len != nfs3_sizeof_handle(pfile_handle)) {
@@ -407,6 +421,10 @@ int nfs3_Is_Fh_Invalid(nfs_fh3 *fh3)
 			} else if (fh3->data.data_len == 0) {
 				LogInfo(COMPONENT_FILEHANDLE,
 					"INVALID HANDLE: zero length handle");
+			} else if (pfile_handle->fhversion ==
+				   GANESHA_OTHER_ENDIAN_FH_VERSION) {
+				LogWarn(COMPONENT_FILEHANDLE,
+					"INVALID HANDLE: Ganesha doesn't handle mixed-endianess currently");
 			} else if (pfile_handle->fhversion !=
 				   GANESHA_FH_VERSION) {
 				LogInfo(COMPONENT_FILEHANDLE,
