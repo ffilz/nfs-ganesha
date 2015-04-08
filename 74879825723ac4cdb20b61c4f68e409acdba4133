@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_575657d3",
+        "filename": "src/Protocols/XDR/xdr_mount.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1004000
+      },
+      "writtenOn": "2015-04-08T00:03:03Z",
+      "side": 1,
+      "message": "see reply in xdr_nfs23.c",
+      "parentUuid": "1a106d94_f7aae3d0",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_375e3b13",
         "filename": "src/Protocols/XDR/xdr_nfs23.c",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-07T21:35:02Z",
       "side": 1,
       "message": "You are oring in 0x1010 or 0x2020... You need a mixed_endian_v3 variable...",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_174cdf41",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1004000
+      },
+      "writtenOn": "2015-04-08T00:03:03Z",
+      "side": 1,
+      "message": "it should work the v4 is 4040 or 8080 and v3 is 40 or 80",
+      "parentUuid": "1a106d94_375e3b13",
       "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_f7466320",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1004000
+      },
+      "writtenOn": "2015-04-08T00:03:03Z",
+      "side": 1,
+      "message": "no, i still need the endian flags.",
+      "parentUuid": "1a106d94_979c4fc2",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_b7722bab",
         "filename": "src/include/nfsv41.h",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-07T21:35:02Z",
       "side": 1,
       "message": "Instead of #if you could code:\n\nif ((fh-\u003eflags \u0026 (FH_LITTLE_ENDIAN | FH_BIG_ENDIAN)) !\u003d mixed_endian \u0026\u0026 (fh-\u003eflags \u0026 (FH_LITTLE_ENDIAN | FH_BIG_ENDIAN)) !\u003d 0) {\n     fh-\u003eflags \u003d bswap_16(fh-\u003eflags);\n     fh-\u003eid.exports \u003d bswap_16(fh-\u003eid.exports);\n}\n\nWhat do you do if mixed_endian is 0 and these flags are non-zero? We should make sure we flag a bad handle or something.\n\nBut there\u0027s also a problem here. If the client presents a handle with the other endianess, and then requests a layout or delegation, when we try to recall the layout or delegation, we will send a request that has a different handle than the one the client used, which will make it not match up the recall.",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_17733f81",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 3589,
+      "author": {
+        "id": 1004000
+      },
+      "writtenOn": "2015-04-08T00:03:03Z",
+      "side": 1,
+      "message": "I prefer that the code will be more clear with the #if\n\nif mixed_endian is 0 and the flag is not it is not and error it will work if you did not mix machines, if you did you will get and error.\n\nThe recall fh will be different only when you failover to another machine, in this case recovery will include recall all layouts and reclaim delegation might fail, and for read delegation it is not a real error.",
+      "parentUuid": "1a106d94_b7722bab",
       "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
