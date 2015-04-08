@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_6a08ca91",
+        "filename": "src/FSAL/FSAL_PSEUDO/export.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-08T03:19:13Z",
+      "side": 1,
+      "message": "There\u0027s also a ushort len that is encoded into the handle.",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_aace42b2",
         "filename": "src/Protocols/XDR/xdr_nlm4.c",
         "patchSetId": 15
@@ -64,6 +81,58 @@
       "writtenOn": "2015-04-08T01:17:53Z",
       "side": 1,
       "message": "ERROR: \"foo * bar\" should be \"foo *bar\"\n+void xdr_handle(XDR * xdrs, netobj * obj)",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_8adee60f",
+        "filename": "src/Protocols/XDR/xdr_nlm4.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-08T03:19:13Z",
+      "side": 1,
+      "message": "Split this into a pre and post function...",
+      "parentUuid": "1a106d94_cacbbea3",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_6ae1eacf",
+        "filename": "src/Protocols/XDR/xdr_nlm4.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-08T03:19:13Z",
+      "side": 1,
+      "message": "You need to do a pre-function for encode and a post function for decode\n\nAnd then somehow, in nlm_process_parameters, we need to be able to copy the unadulterated handle into block_data, or arrange it so the handle reverts.\n\nHmm, since we maintain the flags, the pre-function could see if the flag is already set, and then reverse the endianness.\n\nThe only problem is a legacy handle with flags of 00.\n\nThis is one place where handling the endianess with type would help, because then a legacy handle with implicit endianess has a distinct type different from one with endianness.",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_cae8deb6",
+        "filename": "src/Protocols/XDR/xdr_nlm4.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-08T03:19:13Z",
+      "side": 1,
+      "message": "Same here.",
       "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
