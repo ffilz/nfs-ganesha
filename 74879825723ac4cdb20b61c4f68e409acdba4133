@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_57593759",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-08T00:16:10Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "1a106d94_f7466320",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_b7722bab",
         "filename": "src/include/nfsv41.h",
         "patchSetId": 14
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "I prefer that the code will be more clear with the #if\n\nif mixed_endian is 0 and the flag is not it is not and error it will work if you did not mix machines, if you did you will get and error.\n\nThe recall fh will be different only when you failover to another machine, in this case recovery will include recall all layouts and reclaim delegation might fail, and for read delegation it is not a real error.",
       "parentUuid": "1a106d94_b7722bab",
+      "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_b73fcbd5",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 3589,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2015-04-08T00:16:10Z",
+      "side": 1,
+      "message": "Hmm, ok. If reclaiming the layouts and delegations fails, then you wouldn\u0027t have to recall them using the handle the client provided.",
+      "parentUuid": "1a106d94_17733f81",
       "revId": "74879825723ac4cdb20b61c4f68e409acdba4133",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
