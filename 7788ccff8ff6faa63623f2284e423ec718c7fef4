@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_8ad1c659",
+        "filename": "src/FSAL/FSAL_PSEUDO/export.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-08T01:17:53Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (flags \u0026 FH_LITTLE_ENDIAN) {\n+\t\t\t*hashkey \u003d bswap_64(*hashkey);\n+\t\t}",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_6ad44a47",
+        "filename": "src/FSAL/FSAL_PSEUDO/export.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-08T01:17:53Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (flags \u0026 FH_BIG_ENDIAN) {\n+\t\t\t*hashkey \u003d bswap_64(*hashkey);\n+\t\t}",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_aace42b2",
+        "filename": "src/Protocols/XDR/xdr_nlm4.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-08T01:17:53Z",
+      "side": 1,
+      "message": "ERROR: \"foo * bar\" should be \"foo *bar\"\n+void xdr_handle(XDR * xdrs, netobj * obj)",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_cacbbea3",
+        "filename": "src/Protocols/XDR/xdr_nlm4.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004202
+      },
+      "writtenOn": "2015-04-08T01:17:53Z",
+      "side": 1,
+      "message": "ERROR: \"foo * bar\" should be \"foo *bar\"\n+void xdr_handle(XDR * xdrs, netobj * obj)",
+      "revId": "7788ccff8ff6faa63623f2284e423ec718c7fef4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
