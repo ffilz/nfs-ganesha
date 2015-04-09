@@ -55,6 +55,7 @@
 #include "gss_credcache.h"
 #include "sal_data.h"
 #include <misc/timespec.h>
+#include "gsh_nfsv41_xdr.h"
 
 /**
  * @brief Pool for allocating callbacks.

@@ -45,6 +45,7 @@
 #include "nfs_exports.h"
 #include "nfs_file_handle.h"
 #include "nfs_proto_functions.h"
+#include "gsh_nfsv41_xdr.h"
 
 struct fsal_module *pnfs_fsal[FSAL_ID_COUNT];
 

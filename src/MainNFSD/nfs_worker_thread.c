@@ -60,6 +60,7 @@
 #include "export_mgr.h"
 #include "server_stats.h"
 #include "uid2grp.h"
+#include "gsh_nfsv41_xdr.h"
 
 #ifdef USE_LTTNG
 #include "gsh_lttng/nfs_rpc.h"

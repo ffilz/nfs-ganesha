@@ -40,6 +40,7 @@
 #include "nfs_proto_tools.h"
 #include "idmapper.h"
 #include "export_mgr.h"
+#include "gsh_nfsv41_xdr.h"
 
 /* Define mapping of NFS4 who name and type. */
 static struct {
