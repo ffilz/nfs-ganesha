@@ -1,6 +1,4 @@
 /*
- * vim:expandtab:shiftwidth=8:tabstop=8:
- *
  * Copyright (C) Panasas Inc., 2011
  * Author: Jim Lieb jlieb@panasas.com
  *
@@ -176,4 +174,7 @@ void pseudo_fsal_init(void)
 	myself->m_ops.init_config = init_config;
 	myself->m_ops.unload = unload_pseudo_fsal;
 	myself->name = gsh_strdup("PSEUDO");
+
+	/* initialize our config */
+	(void)myself->m_ops.init_config(myself, NULL, NULL);
 }
