@@ -17,6 +17,7 @@
 #include "nfs4.h"
 
 #include "fsal.h"
+#include "nfsv41_xdr.h"
 #if 0
 #include "fsal_internal.h"
 #include "fsal_convert.h"
