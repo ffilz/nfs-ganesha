@@ -250,7 +250,7 @@ int main(int argc, char *argv[])
 		default:
 			/* display the help */
 			fprintf(stderr, usage, exec_name);
-			exit(0);
+			exit(1);
 			break;
 		}
 	}
