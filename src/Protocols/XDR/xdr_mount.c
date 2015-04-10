@@ -29,23 +29,26 @@ bool xdr_fhandle3(xdrs, objp)
 register XDR *xdrs;
 fhandle3 *objp;
 {
-	file_handle_v3_t *fh = (file_handle_v3_t *)objp->fhandle3_val;
 
 #if defined(_LP64) || defined(_KERNEL)
 	register int __attribute__ ((__unused__)) * buf;
 #else
 	register long __attribute__ ((__unused__)) * buf;
 #endif
-	if (xdrs->x_op == XDR_ENCODE)
+	if (xdrs->x_op == XDR_ENCODE) {
+		file_handle_v3_t *fh = (file_handle_v3_t *)objp->fhandle3_val;
 		fh->exportid = htons(fh->exportid);
+	}
 
 	if (!inline_xdr_bytes
 	    (xdrs, (char **)&objp->fhandle3_val, (u_int *) & objp->fhandle3_len,
 	     NFS3_FHSIZE))
 		return (false);
 
-	if (xdrs->x_op == XDR_DECODE)
+	if (xdrs->x_op == XDR_DECODE) {
+		file_handle_v3_t *fh = (file_handle_v3_t *)objp->fhandle3_val;
 		fh->exportid = ntohs(fh->exportid);
+	}
 
 	return (true);
 }

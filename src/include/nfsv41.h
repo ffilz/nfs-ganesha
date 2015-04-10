@@ -3564,18 +3564,21 @@ extern "C" {
 	static inline bool xdr_nfs_fh4(XDR * xdrs, nfs_fh4 *objp)
 	{
 		file_handle_v4_t *fh;
-		fh = (file_handle_v4_t *)objp->nfs_fh4_val;
 
-		if (xdrs->x_op == XDR_ENCODE)
+		if (xdrs->x_op == XDR_ENCODE) {
+			fh = (file_handle_v4_t *)objp->nfs_fh4_val;
 			fh->id.exports = htons(fh->id.exports);
+		}
 
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->nfs_fh4_val,
 		     (u_int *) & objp->nfs_fh4_len, NFS4_FHSIZE))
 			return false;
 
-		if (xdrs->x_op == XDR_DECODE)
+		if (xdrs->x_op == XDR_DECODE) {
+			fh = (file_handle_v4_t *)objp->nfs_fh4_val;
 			fh->id.exports = ntohs(fh->id.exports);
+		}
 
 		return true;
 	}
