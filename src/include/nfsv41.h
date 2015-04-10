@@ -3433,10 +3433,10 @@ extern "C" {
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define NFSPROC4_NULL 0
-	extern void *nfsproc4_null_4(void *, CLIENT *);
+	extern void *nfsproc4_null_4(void *, CLIENT*);
 	extern void *nfsproc4_null_4_svc(void *, struct svc_req *);
 #define NFSPROC4_COMPOUND 1
-	extern COMPOUND4res *nfsproc4_compound_4(COMPOUND4args *, CLIENT *);
+	extern COMPOUND4res *nfsproc4_compound_4(COMPOUND4args *, CLIENT*);
 	extern COMPOUND4res *nfsproc4_compound_4_svc(COMPOUND4args *,
 						     struct svc_req *);
 	extern int nfs4_program_4_freeresult(SVCXPRT *, xdrproc_t, caddr_t);
@@ -3456,10 +3456,10 @@ extern "C" {
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define CB_NULL 0
-	extern void *cb_null_1(void *, CLIENT *);
+	extern void *cb_null_1(void *, CLIENT*);
 	extern void *cb_null_1_svc(void *, struct svc_req *);
 #define CB_COMPOUND 1
-	extern CB_COMPOUND4res *cb_compound_1(CB_COMPOUND4args *, CLIENT *);
+	extern CB_COMPOUND4res *cb_compound_1(CB_COMPOUND4args *, CLIENT*);
 	extern CB_COMPOUND4res *cb_compound_1_svc(CB_COMPOUND4args *,
 						  struct svc_req *);
 	extern int nfs4_callback_1_freeresult(SVCXPRT *, xdrproc_t, caddr_t);
@@ -3478,14 +3478,14 @@ extern "C" {
 
 #if defined(__STDC__) || defined(__cplusplus)
 
-	static inline bool xdr_nfs_ftype4(XDR * xdrs, nfs_ftype4 *objp)
+	static inline bool xdr_nfs_ftype4(XDR * xdrs, nfs_ftype4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfsstat4(XDR * xdrs, nfsstat4 *objp)
+	static inline bool xdr_nfsstat4(XDR * xdrs, nfsstat4 * objp)
 
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
@@ -3493,11 +3493,11 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_attrlist4(XDR * xdrs, attrlist4 *objp)
+	static inline bool xdr_attrlist4(XDR * xdrs, attrlist4 * objp)
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->attrlist4_val,
-		     (u_int *) & objp->attrlist4_len, ~0))
+		     (u_int *) &objp->attrlist4_len, ~0))
 			return false;
 		return true;
 	}
@@ -3513,55 +3513,55 @@ extern "C" {
 		if (xdrs->x_op == XDR_FREE)
 			return true;
 		if (!xdr_array
-		    (xdrs, &map, (u_int *) & objp->bitmap4_len, ~0,
+		    (xdrs, &map, (u_int *) &objp->bitmap4_len, ~0,
 		     sizeof(uint32_t), (xdrproc_t) xdr_uint32_t))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_changeid4(XDR * xdrs, changeid4 *objp)
+	static inline bool xdr_changeid4(XDR * xdrs, changeid4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_clientid4(XDR * xdrs, clientid4 *objp)
+	static inline bool xdr_clientid4(XDR * xdrs, clientid4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_count4(XDR * xdrs, count4 *objp)
+	static inline bool xdr_count4(XDR * xdrs, count4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_length4(XDR * xdrs, length4 *objp)
+	static inline bool xdr_length4(XDR * xdrs, length4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_mode4(XDR * xdrs, mode4 *objp)
+	static inline bool xdr_mode4(XDR * xdrs, mode4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfs_cookie4(XDR * xdrs, nfs_cookie4 *objp)
+	static inline bool xdr_nfs_cookie4(XDR * xdrs, nfs_cookie4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfs_fh4(XDR * xdrs, nfs_fh4 *objp)
+	static inline bool xdr_nfs_fh4(XDR * xdrs, nfs_fh4 * objp)
 	{
 		file_handle_v4_t *fh;
 		fh = (file_handle_v4_t *)objp->nfs_fh4_val;
@@ -3580,37 +3580,37 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_offset4(XDR * xdrs, offset4 *objp)
+	static inline bool xdr_offset4(XDR * xdrs, offset4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_qop4(XDR * xdrs, qop4 *objp)
+	static inline bool xdr_qop4(XDR * xdrs, qop4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_sec_oid4(XDR * xdrs, sec_oid4 *objp)
+	static inline bool xdr_sec_oid4(XDR * xdrs, sec_oid4 * objp)
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->sec_oid4_val,
-		     (u_int *) & objp->sec_oid4_len, ~0))
+		     (u_int *) &objp->sec_oid4_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_sequenceid4(XDR * xdrs, sequenceid4 *objp)
+	static inline bool xdr_sequenceid4(XDR * xdrs, sequenceid4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_seqid4(XDR * xdrs, seqid4 *objp)
+	static inline bool xdr_seqid4(XDR * xdrs, seqid4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
@@ -3624,62 +3624,62 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_slotid4(XDR * xdrs, slotid4 *objp)
+	static inline bool xdr_slotid4(XDR * xdrs, slotid4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_utf8string(XDR * xdrs, utf8string *objp)
+	static inline bool xdr_utf8string(XDR * xdrs, utf8string * objp)
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->utf8string_val,
-		     (u_int *) & objp->utf8string_len, ~0))
+		     (u_int *) &objp->utf8string_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_utf8str_cis(XDR * xdrs, utf8str_cis *objp)
+	static inline bool xdr_utf8str_cis(XDR * xdrs, utf8str_cis * objp)
 	{
 		if (!xdr_utf8string(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_utf8str_cs(XDR * xdrs, utf8str_cs *objp)
+	static inline bool xdr_utf8str_cs(XDR * xdrs, utf8str_cs * objp)
 	{
 		if (!xdr_utf8string(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_utf8str_mixed(XDR * xdrs, utf8str_mixed *objp)
+	static inline bool xdr_utf8str_mixed(XDR * xdrs, utf8str_mixed * objp)
 	{
 		if (!xdr_utf8string(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_component4(XDR * xdrs, component4 *objp)
+	static inline bool xdr_component4(XDR * xdrs, component4 * objp)
 	{
 		if (!xdr_utf8str_cs(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_linktext4(XDR * xdrs, linktext4 *objp)
+	static inline bool xdr_linktext4(XDR * xdrs, linktext4 * objp)
 	{
 		if (!xdr_utf8str_cs(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_pathname4(XDR * xdrs, pathname4 *objp)
+	static inline bool xdr_pathname4(XDR * xdrs, pathname4 * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->pathname4_val,
-		     (u_int *) & objp->pathname4_len, ~0, sizeof(component4),
+		     (u_int *) &objp->pathname4_len, ~0, sizeof(component4),
 		     (xdrproc_t) xdr_component4))
 			return false;
 		return true;
@@ -3692,7 +3692,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_nfstime4(XDR * xdrs, nfstime4 *objp)
+	static inline bool xdr_nfstime4(XDR * xdrs, nfstime4 * objp)
 	{
 		if (!xdr_int64_t(xdrs, &objp->seconds))
 			return false;
@@ -3701,14 +3701,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_time_how4(XDR * xdrs, time_how4 *objp)
+	static inline bool xdr_time_how4(XDR * xdrs, time_how4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_settime4(XDR * xdrs, settime4 *objp)
+	static inline bool xdr_settime4(XDR * xdrs, settime4 * objp)
 	{
 		if (!xdr_time_how4(xdrs, &objp->set_it))
 			return false;
@@ -3723,14 +3723,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_nfs_lease4(XDR * xdrs, nfs_lease4 *objp)
+	static inline bool xdr_nfs_lease4(XDR * xdrs, nfs_lease4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fsid4(XDR * xdrs, fsid4 *objp)
+	static inline bool xdr_fsid4(XDR * xdrs, fsid4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, &objp->major))
 			return false;
@@ -3739,7 +3739,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_change_policy4(XDR * xdrs, change_policy4 *objp)
+	static inline bool xdr_change_policy4(XDR * xdrs, change_policy4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, &objp->cp_major))
 			return false;
@@ -3748,11 +3748,11 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_fs_location4(XDR * xdrs, fs_location4 *objp)
+	static inline bool xdr_fs_location4(XDR * xdrs, fs_location4 * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->server.server_val,
-		     (u_int *) & objp->server.server_len, ~0,
+		     (u_int *) &objp->server.server_len, ~0,
 		     sizeof(utf8str_cis), (xdrproc_t) xdr_utf8str_cis))
 			return false;
 		if (!xdr_pathname4(xdrs, &objp->rootpath))
@@ -3760,40 +3760,40 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_fs_locations4(XDR * xdrs, fs_locations4 *objp)
+	static inline bool xdr_fs_locations4(XDR * xdrs, fs_locations4 * objp)
 	{
 		if (!xdr_pathname4(xdrs, &objp->fs_root))
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->locations.locations_val,
-		     (u_int *) & objp->locations.locations_len, ~0,
+		     (u_int *) &objp->locations.locations_len, ~0,
 		     sizeof(fs_location4), (xdrproc_t) xdr_fs_location4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_acetype4(XDR * xdrs, acetype4 *objp)
+	static inline bool xdr_acetype4(XDR * xdrs, acetype4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_aceflag4(XDR * xdrs, aceflag4 *objp)
+	static inline bool xdr_aceflag4(XDR * xdrs, aceflag4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_acemask4(XDR * xdrs, acemask4 *objp)
+	static inline bool xdr_acemask4(XDR * xdrs, acemask4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfsace4(XDR * xdrs, nfsace4 *objp)
+	static inline bool xdr_nfsace4(XDR * xdrs, nfsace4 * objp)
 	{
 		if (!xdr_acetype4(xdrs, &objp->type))
 			return false;
@@ -3806,26 +3806,26 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_aclflag4(XDR * xdrs, aclflag4 *objp)
+	static inline bool xdr_aclflag4(XDR * xdrs, aclflag4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfsacl41(XDR * xdrs, nfsacl41 *objp)
+	static inline bool xdr_nfsacl41(XDR * xdrs, nfsacl41 * objp)
 	{
 		if (!xdr_aclflag4(xdrs, &objp->na41_flag))
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->na41_aces.na41_aces_val,
-		     (u_int *) & objp->na41_aces.na41_aces_len, ~0,
+		     (u_int *) &objp->na41_aces.na41_aces_len, ~0,
 		     sizeof(nfsace4), (xdrproc_t) xdr_nfsace4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_mode_masked4(XDR * xdrs, mode_masked4 *objp)
+	static inline bool xdr_mode_masked4(XDR * xdrs, mode_masked4 * objp)
 	{
 		if (!xdr_mode4(xdrs, &objp->mm_value_to_set))
 			return false;
@@ -3834,7 +3834,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_specdata4(XDR * xdrs, specdata4 *objp)
+	static inline bool xdr_specdata4(XDR * xdrs, specdata4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->specdata1))
 			return false;
@@ -3843,7 +3843,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_netaddr4(XDR * xdrs, netaddr4 *objp)
+	static inline bool xdr_netaddr4(XDR * xdrs, netaddr4 * objp)
 	{
 		if (!inline_xdr_string(xdrs, &objp->r_netid, ~0))
 			return false;
@@ -3852,7 +3852,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_nfs_impl_id4(XDR * xdrs, nfs_impl_id4 *objp)
+	static inline bool xdr_nfs_impl_id4(XDR * xdrs, nfs_impl_id4 * objp)
 	{
 		if (!xdr_utf8str_cis(xdrs, &objp->nii_domain))
 			return false;
@@ -3863,7 +3863,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_stateid4(XDR * xdrs, stateid4 *objp)
+	static inline bool xdr_stateid4(XDR * xdrs, stateid4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->seqid))
 			return false;
@@ -3872,7 +3872,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_layouttype4(XDR * xdrs, layouttype4 *objp)
+	static inline bool xdr_layouttype4(XDR * xdrs, layouttype4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -3880,13 +3880,13 @@ extern "C" {
 	}
 
 	static inline bool xdr_layout_content4(XDR * xdrs,
-					       layout_content4 *objp)
+					       layout_content4 * objp)
 	{
 		if (!xdr_layouttype4(xdrs, &objp->loc_type))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->loc_body.loc_body_val,
-		     (u_int *) & objp->loc_body.loc_body_len, ~0))
+		     (u_int *) &objp->loc_body.loc_body_len, ~0))
 			return false;
 		return true;
 	}
@@ -3901,25 +3901,25 @@ extern "C" {
  * is in a separate .x file
  */
 
-	static inline bool xdr_layouthint4(XDR * xdrs, layouthint4 *objp)
+	static inline bool xdr_layouthint4(XDR * xdrs, layouthint4 * objp)
 	{
 		if (!xdr_layouttype4(xdrs, &objp->loh_type))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->loh_body.loh_body_val,
-		     (u_int *) & objp->loh_body.loh_body_len, ~0))
+		     (u_int *) &objp->loh_body.loh_body_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_layoutiomode4(XDR * xdrs, layoutiomode4 *objp)
+	static inline bool xdr_layoutiomode4(XDR * xdrs, layoutiomode4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_layout4(XDR * xdrs, layout4 *objp)
+	static inline bool xdr_layout4(XDR * xdrs, layout4 * objp)
 	{
 		if (!xdr_offset4(xdrs, &objp->lo_offset))
 			return false;
@@ -3939,30 +3939,30 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_device_addr4(XDR * xdrs, device_addr4 *objp)
+	static inline bool xdr_device_addr4(XDR * xdrs, device_addr4 * objp)
 	{
 		if (!xdr_layouttype4(xdrs, &objp->da_layout_type))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->da_addr_body.da_addr_body_val,
-		     (u_int *) & objp->da_addr_body.da_addr_body_len, ~0))
+		     (u_int *) &objp->da_addr_body.da_addr_body_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_layoutupdate4(XDR * xdrs, layoutupdate4 *objp)
+	static inline bool xdr_layoutupdate4(XDR * xdrs, layoutupdate4 * objp)
 	{
 		if (!xdr_layouttype4(xdrs, &objp->lou_type))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->lou_body.lou_body_val,
-		     (u_int *) & objp->lou_body.lou_body_len, ~0))
+		     (u_int *) &objp->lou_body.lou_body_len, ~0))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_layoutreturn_type4(XDR * xdrs,
-						  layoutreturn_type4 *objp)
+						  layoutreturn_type4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -3972,7 +3972,7 @@ extern "C" {
 	/* layouttype4 specific data */
 
 	static inline bool xdr_layoutreturn_file4(XDR * xdrs,
-						  layoutreturn_file4 *objp)
+						  layoutreturn_file4 * objp)
 	{
 		if (!xdr_offset4(xdrs, &objp->lrf_offset))
 			return false;
@@ -3982,12 +3982,12 @@ extern "C" {
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->lrf_body.lrf_body_val,
-		     (u_int *) & objp->lrf_body.lrf_body_len, ~0))
+		     (u_int *) &objp->lrf_body.lrf_body_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_layoutreturn4(XDR * xdrs, layoutreturn4 *objp)
+	static inline bool xdr_layoutreturn4(XDR * xdrs, layoutreturn4 * objp)
 	{
 		if (!xdr_layoutreturn_type4(xdrs, &objp->lr_returntype))
 			return false;
@@ -4004,14 +4004,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_fs4_status_type(XDR * xdrs,
-					       fs4_status_type *objp)
+					       fs4_status_type * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fs4_status(XDR * xdrs, fs4_status *objp)
+	static inline bool xdr_fs4_status(XDR * xdrs, fs4_status * objp)
 	{
 		if (!xdr_bool(xdrs, &objp->fss_absent))
 			return false;
@@ -4065,7 +4065,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_threshold_item4(XDR * xdrs,
-					       threshold_item4 *objp)
+					       threshold_item4 * objp)
 	{
 		if (!xdr_layouttype4(xdrs, &objp->thi_layout_type))
 			return false;
@@ -4073,47 +4073,47 @@ extern "C" {
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->thi_hintlist.thi_hintlist_val,
-		     (u_int *) & objp->thi_hintlist.thi_hintlist_len, ~0))
+		     (u_int *) &objp->thi_hintlist.thi_hintlist_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_mdsthreshold4(XDR * xdrs, mdsthreshold4 *objp)
+	static inline bool xdr_mdsthreshold4(XDR * xdrs, mdsthreshold4 * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->mth_hints.mth_hints_val,
-		     (u_int *) & objp->mth_hints.mth_hints_len, ~0,
+		     (u_int *) &objp->mth_hints.mth_hints_len, ~0,
 		     sizeof(threshold_item4), (xdrproc_t) xdr_threshold_item4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_retention_get4(XDR * xdrs, retention_get4 *objp)
+	static inline bool xdr_retention_get4(XDR * xdrs, retention_get4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, &objp->rg_duration))
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->rg_begin_time.rg_begin_time_val,
-		     (u_int *) & objp->rg_begin_time.rg_begin_time_len, 1,
+		     (u_int *) &objp->rg_begin_time.rg_begin_time_len, 1,
 		     sizeof(nfstime4), (xdrproc_t) xdr_nfstime4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_retention_set4(XDR * xdrs, retention_set4 *objp)
+	static inline bool xdr_retention_set4(XDR * xdrs, retention_set4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->rs_enable))
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->rs_duration.rs_duration_val,
-		     (u_int *) & objp->rs_duration.rs_duration_len, 1,
+		     (u_int *) &objp->rs_duration.rs_duration_len, 1,
 		     sizeof(uint64_t), (xdrproc_t) inline_xdr_u_int64_t))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_fs_charset_cap4(XDR * xdrs,
-					       fs_charset_cap4 *objp)
+					       fs_charset_cap4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
@@ -4129,7 +4129,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_fattr4_type(XDR * xdrs, fattr4_type *objp)
+	static inline bool xdr_fattr4_type(XDR * xdrs, fattr4_type * objp)
 	{
 		if (!xdr_nfs_ftype4(xdrs, objp))
 			return false;
@@ -4145,14 +4145,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_fattr4_change(XDR * xdrs, fattr4_change *objp)
+	static inline bool xdr_fattr4_change(XDR * xdrs, fattr4_change * objp)
 	{
 		if (!xdr_changeid4(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_size(XDR * xdrs, fattr4_size *objp)
+	static inline bool xdr_fattr4_size(XDR * xdrs, fattr4_size * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4160,7 +4160,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_link_support(XDR * xdrs,
-						   fattr4_link_support *objp)
+						   fattr4_link_support * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
@@ -4177,14 +4177,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_named_attr(XDR * xdrs,
-						 fattr4_named_attr *objp)
+						 fattr4_named_attr * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_fsid(XDR * xdrs, fattr4_fsid *objp)
+	static inline bool xdr_fattr4_fsid(XDR * xdrs, fattr4_fsid * objp)
 	{
 		if (!xdr_fsid4(xdrs, objp))
 			return false;
@@ -4201,7 +4201,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_lease_time(XDR * xdrs,
-						 fattr4_lease_time *objp)
+						 fattr4_lease_time * objp)
 	{
 		if (!xdr_nfs_lease4(xdrs, objp))
 			return false;
@@ -4209,32 +4209,32 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_rdattr_error(XDR * xdrs,
-						   fattr4_rdattr_error *objp)
+						   fattr4_rdattr_error * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_acl(XDR * xdrs, fattr4_acl *objp)
+	static inline bool xdr_fattr4_acl(XDR * xdrs, fattr4_acl * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->fattr4_acl_val,
-		     (u_int *) & objp->fattr4_acl_len, ~0, sizeof(nfsace4),
+		     (u_int *) &objp->fattr4_acl_len, ~0, sizeof(nfsace4),
 		     (xdrproc_t) xdr_nfsace4))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_fattr4_aclsupport(XDR * xdrs,
-						 fattr4_aclsupport *objp)
+						 fattr4_aclsupport * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_archive(XDR * xdrs, fattr4_archive *objp)
+	static inline bool xdr_fattr4_archive(XDR * xdrs, fattr4_archive * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
@@ -4242,7 +4242,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_cansettime(XDR * xdrs,
-						 fattr4_cansettime *objp)
+						 fattr4_cansettime * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
@@ -4276,7 +4276,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_fattr4_fileid(XDR * xdrs, fattr4_fileid *objp)
+	static inline bool xdr_fattr4_fileid(XDR * xdrs, fattr4_fileid * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4284,7 +4284,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_files_avail(XDR * xdrs,
-						  fattr4_files_avail *objp)
+						  fattr4_files_avail * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4292,7 +4292,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_filehandle(XDR * xdrs,
-						 fattr4_filehandle *objp)
+						 fattr4_filehandle * objp)
 	{
 		if (!xdr_nfs_fh4(xdrs, objp))
 			return false;
@@ -4300,7 +4300,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_files_free(XDR * xdrs,
-						 fattr4_files_free *objp)
+						 fattr4_files_free * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4308,7 +4308,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_files_total(XDR * xdrs,
-						  fattr4_files_total *objp)
+						  fattr4_files_total * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4316,14 +4316,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_fs_locations(XDR * xdrs,
-						   fattr4_fs_locations *objp)
+						   fattr4_fs_locations * objp)
 	{
 		if (!xdr_fs_locations4(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_hidden(XDR * xdrs, fattr4_hidden *objp)
+	static inline bool xdr_fattr4_hidden(XDR * xdrs, fattr4_hidden * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
@@ -4331,7 +4331,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_homogeneous(XDR * xdrs,
-						  fattr4_homogeneous *objp)
+						  fattr4_homogeneous * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
@@ -4339,28 +4339,28 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_maxfilesize(XDR * xdrs,
-						  fattr4_maxfilesize *objp)
+						  fattr4_maxfilesize * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_maxlink(XDR * xdrs, fattr4_maxlink *objp)
+	static inline bool xdr_fattr4_maxlink(XDR * xdrs, fattr4_maxlink * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_maxname(XDR * xdrs, fattr4_maxname *objp)
+	static inline bool xdr_fattr4_maxname(XDR * xdrs, fattr4_maxname * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_maxread(XDR * xdrs, fattr4_maxread *objp)
+	static inline bool xdr_fattr4_maxread(XDR * xdrs, fattr4_maxread * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4368,7 +4368,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_maxwrite(XDR * xdrs,
-					       fattr4_maxwrite *objp)
+					       fattr4_maxwrite * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4376,14 +4376,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_mimetype(XDR * xdrs,
-					       fattr4_mimetype *objp)
+					       fattr4_mimetype * objp)
 	{
 		if (!xdr_utf8str_cs(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_mode(XDR * xdrs, fattr4_mode *objp)
+	static inline bool xdr_fattr4_mode(XDR * xdrs, fattr4_mode * objp)
 	{
 		if (!xdr_mode4(xdrs, objp))
 			return false;
@@ -4409,7 +4409,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_no_trunc(XDR * xdrs,
-					       fattr4_no_trunc *objp)
+					       fattr4_no_trunc * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
@@ -4417,14 +4417,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_numlinks(XDR * xdrs,
-					       fattr4_numlinks *objp)
+					       fattr4_numlinks * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_owner(XDR * xdrs, fattr4_owner *objp)
+	static inline bool xdr_fattr4_owner(XDR * xdrs, fattr4_owner * objp)
 	{
 		if (!xdr_utf8str_mixed(xdrs, objp))
 			return false;
@@ -4432,7 +4432,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_owner_group(XDR * xdrs,
-						  fattr4_owner_group *objp)
+						  fattr4_owner_group * objp)
 	{
 		if (!xdr_utf8str_mixed(xdrs, objp))
 			return false;
@@ -4458,14 +4458,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_quota_used(XDR * xdrs,
-						 fattr4_quota_used *objp)
+						 fattr4_quota_used * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_rawdev(XDR * xdrs, fattr4_rawdev *objp)
+	static inline bool xdr_fattr4_rawdev(XDR * xdrs, fattr4_rawdev * objp)
 	{
 		if (!xdr_specdata4(xdrs, objp))
 			return false;
@@ -4473,7 +4473,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_space_avail(XDR * xdrs,
-						  fattr4_space_avail *objp)
+						  fattr4_space_avail * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4481,7 +4481,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_space_free(XDR * xdrs,
-						 fattr4_space_free *objp)
+						 fattr4_space_free * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4489,7 +4489,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_space_total(XDR * xdrs,
-						  fattr4_space_total *objp)
+						  fattr4_space_total * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
@@ -4497,14 +4497,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_space_used(XDR * xdrs,
-						 fattr4_space_used *objp)
+						 fattr4_space_used * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_system(XDR * xdrs, fattr4_system *objp)
+	static inline bool xdr_fattr4_system(XDR * xdrs, fattr4_system * objp)
 	{
 		if (!inline_xdr_bool(xdrs, objp))
 			return false;
@@ -4512,7 +4512,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_time_access(XDR * xdrs,
-						  fattr4_time_access *objp)
+						  fattr4_time_access * objp)
 	{
 		if (!xdr_nfstime4(xdrs, objp))
 			return false;
@@ -4529,7 +4529,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_time_backup(XDR * xdrs,
-						  fattr4_time_backup *objp)
+						  fattr4_time_backup * objp)
 	{
 		if (!xdr_nfstime4(xdrs, objp))
 			return false;
@@ -4537,7 +4537,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_time_create(XDR * xdrs,
-						  fattr4_time_create *objp)
+						  fattr4_time_create * objp)
 	{
 		if (!xdr_nfstime4(xdrs, objp))
 			return false;
@@ -4545,7 +4545,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_time_delta(XDR * xdrs,
-						 fattr4_time_delta *objp)
+						 fattr4_time_delta * objp)
 	{
 		if (!xdr_nfstime4(xdrs, objp))
 			return false;
@@ -4562,7 +4562,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_time_modify(XDR * xdrs,
-						  fattr4_time_modify *objp)
+						  fattr4_time_modify * objp)
 	{
 		if (!xdr_nfstime4(xdrs, objp))
 			return false;
@@ -4580,7 +4580,7 @@ extern "C" {
 
 	static inline bool xdr_fattr4_suppattr_exclcreat(
 					XDR * xdrs,
-					fattr4_suppattr_exclcreat *objp)
+					fattr4_suppattr_exclcreat * objp)
 	{
 		if (!xdr_bitmap4(xdrs, objp))
 			return false;
@@ -4598,7 +4598,7 @@ extern "C" {
 
 	static inline bool xdr_fattr4_dirent_notif_delay(
 					XDR * xdrs,
-					fattr4_dirent_notif_delay *objp)
+					fattr4_dirent_notif_delay * objp)
 	{
 		if (!xdr_nfstime4(xdrs, objp))
 			return false;
@@ -4611,14 +4611,14 @@ extern "C" {
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->fattr4_fs_layout_types_val,
-		     (u_int *) & objp->fattr4_fs_layout_types_len, ~0,
+		     (u_int *) &objp->fattr4_fs_layout_types_len, ~0,
 		     sizeof(layouttype4), (xdrproc_t) xdr_layouttype4))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_fattr4_fs_status(XDR * xdrs,
-						fattr4_fs_status *objp)
+						fattr4_fs_status * objp)
 	{
 		if (!xdr_fs4_status(xdrs, objp))
 			return false;
@@ -4653,7 +4653,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_layout_hint(XDR * xdrs,
-						  fattr4_layout_hint *objp)
+						  fattr4_layout_hint * objp)
 	{
 		if (!xdr_layouthint4(xdrs, objp))
 			return false;
@@ -4661,18 +4661,18 @@ extern "C" {
 	}
 
 	static inline bool xdr_fattr4_layout_types(XDR * xdrs,
-						   fattr4_layout_types *objp)
+						   fattr4_layout_types * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->fattr4_layout_types_val,
-		     (u_int *) & objp->fattr4_layout_types_len, ~0,
+		     (u_int *) &objp->fattr4_layout_types_len, ~0,
 		     sizeof(layouttype4), (xdrproc_t) xdr_layouttype4))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_fattr4_mdsthreshold(XDR * xdrs,
-						   fattr4_mdsthreshold *objp)
+						   fattr4_mdsthreshold * objp)
 	{
 		if (!xdr_mdsthreshold4(xdrs, objp))
 			return false;
@@ -4724,14 +4724,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_fattr4_dacl(XDR * xdrs, fattr4_dacl *objp)
+	static inline bool xdr_fattr4_dacl(XDR * xdrs, fattr4_dacl * objp)
 	{
 		if (!xdr_nfsacl41(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_fattr4_sacl(XDR * xdrs, fattr4_sacl *objp)
+	static inline bool xdr_fattr4_sacl(XDR * xdrs, fattr4_sacl * objp)
 	{
 		if (!xdr_nfsacl41(xdrs, objp))
 			return false;
@@ -4757,7 +4757,7 @@ extern "C" {
 
 /* new to NFSV4.1 */
 
-	static inline bool xdr_fattr4(XDR * xdrs, fattr4 *objp)
+	static inline bool xdr_fattr4(XDR * xdrs, fattr4 * objp)
 	{
 		if (!xdr_bitmap4(xdrs, &objp->attrmask))
 			return false;
@@ -4766,7 +4766,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_change_info4(XDR * xdrs, change_info4 *objp)
+	static inline bool xdr_change_info4(XDR * xdrs, change_info4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->atomic))
 			return false;
@@ -4777,14 +4777,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_clientaddr4(XDR * xdrs, clientaddr4 *objp)
+	static inline bool xdr_clientaddr4(XDR * xdrs, clientaddr4 * objp)
 	{
 		if (!xdr_netaddr4(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_cb_client4(XDR * xdrs, cb_client4 *objp)
+	static inline bool xdr_cb_client4(XDR * xdrs, cb_client4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->cb_program))
 			return false;
@@ -4793,67 +4793,67 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_nfs_client_id4(XDR * xdrs, nfs_client_id4 *objp)
+	static inline bool xdr_nfs_client_id4(XDR * xdrs, nfs_client_id4 * objp)
 	{
 		if (!xdr_verifier4(xdrs, objp->verifier))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->id.id_val,
-		     (u_int *) & objp->id.id_len, NFS4_OPAQUE_LIMIT))
+		     (u_int *) &objp->id.id_len, NFS4_OPAQUE_LIMIT))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_client_owner4(XDR * xdrs, client_owner4 *objp)
+	static inline bool xdr_client_owner4(XDR * xdrs, client_owner4 * objp)
 	{
 		if (!xdr_verifier4(xdrs, objp->co_verifier))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->co_ownerid.co_ownerid_val,
-		     (u_int *) & objp->co_ownerid.co_ownerid_len,
+		     (u_int *) &objp->co_ownerid.co_ownerid_len,
 		     NFS4_OPAQUE_LIMIT))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_server_owner4(XDR * xdrs, server_owner4 *objp)
+	static inline bool xdr_server_owner4(XDR * xdrs, server_owner4 * objp)
 	{
 		if (!inline_xdr_u_int64_t(xdrs, &objp->so_minor_id))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->so_major_id.so_major_id_val,
-		     (u_int *) & objp->so_major_id.so_major_id_len,
+		     (u_int *) &objp->so_major_id.so_major_id_len,
 		     NFS4_OPAQUE_LIMIT))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_state_owner4(XDR * xdrs, state_owner4 *objp)
+	static inline bool xdr_state_owner4(XDR * xdrs, state_owner4 * objp)
 	{
 		if (!xdr_clientid4(xdrs, &objp->clientid))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->owner.owner_val,
-		     (u_int *) & objp->owner.owner_len, NFS4_OPAQUE_LIMIT))
+		     (u_int *) &objp->owner.owner_len, NFS4_OPAQUE_LIMIT))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_open_owner4(XDR * xdrs, open_owner4 *objp)
+	static inline bool xdr_open_owner4(XDR * xdrs, open_owner4 * objp)
 	{
 		if (!xdr_state_owner4(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_lock_owner4(XDR * xdrs, lock_owner4 *objp)
+	static inline bool xdr_lock_owner4(XDR * xdrs, lock_owner4 * objp)
 	{
 		if (!xdr_state_owner4(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfs_lock_type4(XDR * xdrs, nfs_lock_type4 *objp)
+	static inline bool xdr_nfs_lock_type4(XDR * xdrs, nfs_lock_type4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -4862,7 +4862,7 @@ extern "C" {
 
 /* Input for computing subkeys */
 
-	static inline bool xdr_ssv_subkey4(XDR * xdrs, ssv_subkey4 *objp)
+	static inline bool xdr_ssv_subkey4(XDR * xdrs, ssv_subkey4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -4872,26 +4872,26 @@ extern "C" {
 /* Input for computing smt_hmac */
 
 	static inline bool xdr_ssv_mic_plain_tkn4(XDR * xdrs,
-						  ssv_mic_plain_tkn4 *objp)
+						  ssv_mic_plain_tkn4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->smpt_ssv_seq))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->smpt_orig_plain.smpt_orig_plain_val,
-		     (u_int *) & objp->smpt_orig_plain.smpt_orig_plain_len, ~0))
+		     (u_int *) &objp->smpt_orig_plain.smpt_orig_plain_len, ~0))
 			return false;
 		return true;
 	}
 
 /* SSV GSS PerMsgToken token */
 
-	static inline bool xdr_ssv_mic_tkn4(XDR * xdrs, ssv_mic_tkn4 *objp)
+	static inline bool xdr_ssv_mic_tkn4(XDR * xdrs, ssv_mic_tkn4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->smt_ssv_seq))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->smt_hmac.smt_hmac_val,
-		     (u_int *) & objp->smt_hmac.smt_hmac_len, ~0))
+		     (u_int *) &objp->smt_hmac.smt_hmac_len, ~0))
 			return false;
 		return true;
 	}
@@ -4899,21 +4899,21 @@ extern "C" {
 /* Input for computing ssct_encr_data and ssct_hmac */
 
 	static inline bool xdr_ssv_seal_plain_tkn4(XDR * xdrs,
-						   ssv_seal_plain_tkn4 *objp)
+						   ssv_seal_plain_tkn4 * objp)
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->sspt_confounder.sspt_confounder_val,
-		     (u_int *) & objp->sspt_confounder.sspt_confounder_len, ~0))
+		     (u_int *) &objp->sspt_confounder.sspt_confounder_len, ~0))
 			return false;
 		if (!inline_xdr_u_int32_t(xdrs, &objp->sspt_ssv_seq))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->sspt_orig_plain.sspt_orig_plain_val,
-		     (u_int *) & objp->sspt_orig_plain.sspt_orig_plain_len, ~0))
+		     (u_int *) &objp->sspt_orig_plain.sspt_orig_plain_len, ~0))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->sspt_pad.sspt_pad_val,
-		     (u_int *) & objp->sspt_pad.sspt_pad_len, ~0))
+		     (u_int *) &objp->sspt_pad.sspt_pad_len, ~0))
 			return false;
 		return true;
 	}
@@ -4928,15 +4928,15 @@ extern "C" {
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->ssct_iv.ssct_iv_val,
-		     (u_int *) & objp->ssct_iv.ssct_iv_len, ~0))
+		     (u_int *) &objp->ssct_iv.ssct_iv_len, ~0))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->ssct_encr_data.ssct_encr_data_val,
-		     (u_int *) & objp->ssct_encr_data.ssct_encr_data_len, ~0))
+		     (u_int *) &objp->ssct_encr_data.ssct_encr_data_len, ~0))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->ssct_hmac.ssct_hmac_val,
-		     (u_int *) & objp->ssct_hmac.ssct_hmac_len, ~0))
+		     (u_int *) &objp->ssct_hmac.ssct_hmac_len, ~0))
 			return false;
 		return true;
 	}
@@ -4949,7 +4949,7 @@ extern "C" {
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->fls_info.fls_info_val,
-		     (u_int *) & objp->fls_info.fls_info_len, ~0))
+		     (u_int *) &objp->fls_info.fls_info_len, ~0))
 			return false;
 		if (!xdr_utf8str_cis(xdrs, &objp->fls_server))
 			return false;
@@ -4957,11 +4957,11 @@ extern "C" {
 	}
 
 	static inline bool xdr_fs_locations_item4(XDR * xdrs,
-						  fs_locations_item4 *objp)
+						  fs_locations_item4 * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->fli_entries.fli_entries_val,
-		     (u_int *) & objp->fli_entries.fli_entries_len, ~0,
+		     (u_int *) &objp->fli_entries.fli_entries_len, ~0,
 		     sizeof(fs_locations_server4),
 		     (xdrproc_t) xdr_fs_locations_server4))
 			return false;
@@ -4971,7 +4971,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_fs_locations_info4(XDR * xdrs,
-						  fs_locations_info4 *objp)
+						  fs_locations_info4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->fli_flags))
 			return false;
@@ -4981,7 +4981,7 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->fli_items.fli_items_val,
-		     (u_int *) & objp->fli_items.fli_items_len, ~0,
+		     (u_int *) &objp->fli_items.fli_items_len, ~0,
 		     sizeof(fs_locations_item4),
 		     (xdrproc_t) xdr_fs_locations_item4))
 			return false;
@@ -4997,7 +4997,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_nfl_util4(XDR * xdrs, nfl_util4 *objp)
+	static inline bool xdr_nfl_util4(XDR * xdrs, nfl_util4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, objp))
 			return false;
@@ -5029,11 +5029,11 @@ extern "C" {
 	}
 
 	static inline bool xdr_multipath_list4(XDR * xdrs,
-					       multipath_list4 *objp)
+					       multipath_list4 * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->multipath_list4_val,
-		     (u_int *) & objp->multipath_list4_len, ~0,
+		     (u_int *) &objp->multipath_list4_len, ~0,
 		     sizeof(netaddr4), (xdrproc_t) xdr_netaddr4))
 			return false;
 		return true;
@@ -5046,13 +5046,13 @@ extern "C" {
 
 	static inline bool xdr_nfsv4_1_file_layout_ds_addr4(
 					XDR * xdrs,
-					nfsv4_1_file_layout_ds_addr4 *objp)
+					nfsv4_1_file_layout_ds_addr4 * objp)
 	{
 		if (!xdr_array
 		    (xdrs,
 		     (char **)&objp->nflda_stripe_indices.
 		     nflda_stripe_indices_val,
-		     (u_int *) & objp->nflda_stripe_indices.
+		     (u_int *) &objp->nflda_stripe_indices.
 		     nflda_stripe_indices_len, ~0, sizeof(uint32_t),
 		     (xdrproc_t) xdr_uint32_t))
 			return false;
@@ -5060,7 +5060,7 @@ extern "C" {
 		    (xdrs,
 		     (char **)&objp->nflda_multipath_ds_list.
 		     nflda_multipath_ds_list_val,
-		     (u_int *) & objp->nflda_multipath_ds_list.
+		     (u_int *) &objp->nflda_multipath_ds_list.
 		     nflda_multipath_ds_list_len, ~0, sizeof(multipath_list4),
 		     (xdrproc_t) xdr_multipath_list4))
 			return false;
@@ -5086,7 +5086,7 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->nfl_fh_list.nfl_fh_list_val,
-		     (u_int *) & objp->nfl_fh_list.nfl_fh_list_len, ~0,
+		     (u_int *) &objp->nfl_fh_list.nfl_fh_list_len, ~0,
 		     sizeof(nfs_fh4), (xdrproc_t) xdr_nfs_fh4))
 			return false;
 		return true;
@@ -5103,14 +5103,14 @@ extern "C" {
  *      Nothing. lrf_body is a zero length array of bytes.
  */
 
-	static inline bool xdr_ACCESS4args(XDR * xdrs, ACCESS4args *objp)
+	static inline bool xdr_ACCESS4args(XDR * xdrs, ACCESS4args * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->access))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_ACCESS4resok(XDR * xdrs, ACCESS4resok *objp)
+	static inline bool xdr_ACCESS4resok(XDR * xdrs, ACCESS4resok * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->supported))
 			return false;
@@ -5119,7 +5119,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_ACCESS4res(XDR * xdrs, ACCESS4res *objp)
+	static inline bool xdr_ACCESS4res(XDR * xdrs, ACCESS4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5134,7 +5134,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CLOSE4args(XDR * xdrs, CLOSE4args *objp)
+	static inline bool xdr_CLOSE4args(XDR * xdrs, CLOSE4args * objp)
 	{
 		if (!xdr_seqid4(xdrs, &objp->seqid))
 			return false;
@@ -5143,7 +5143,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CLOSE4res(XDR * xdrs, CLOSE4res *objp)
+	static inline bool xdr_CLOSE4res(XDR * xdrs, CLOSE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5159,7 +5159,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_COMMIT4args(XDR * xdrs, COMMIT4args *objp)
+	static inline bool xdr_COMMIT4args(XDR * xdrs, COMMIT4args * objp)
 	{
 		if (!xdr_offset4(xdrs, &objp->offset))
 			return false;
@@ -5168,14 +5168,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_COMMIT4resok(XDR * xdrs, COMMIT4resok *objp)
+	static inline bool xdr_COMMIT4resok(XDR * xdrs, COMMIT4resok * objp)
 	{
 		if (!xdr_verifier4(xdrs, objp->writeverf))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_COMMIT4res(XDR * xdrs, COMMIT4res *objp)
+	static inline bool xdr_COMMIT4res(XDR * xdrs, COMMIT4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5190,7 +5190,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_createtype4(XDR * xdrs, createtype4 *objp)
+	static inline bool xdr_createtype4(XDR * xdrs, createtype4 * objp)
 	{
 		if (!xdr_nfs_ftype4(xdrs, &objp->type))
 			return false;
@@ -5214,7 +5214,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CREATE4args(XDR * xdrs, CREATE4args *objp)
+	static inline bool xdr_CREATE4args(XDR * xdrs, CREATE4args * objp)
 	{
 		if (!xdr_createtype4(xdrs, &objp->objtype))
 			return false;
@@ -5225,7 +5225,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CREATE4resok(XDR * xdrs, CREATE4resok *objp)
+	static inline bool xdr_CREATE4resok(XDR * xdrs, CREATE4resok * objp)
 	{
 		if (!xdr_change_info4(xdrs, &objp->cinfo))
 			return false;
@@ -5234,7 +5234,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CREATE4res(XDR * xdrs, CREATE4res *objp)
+	static inline bool xdr_CREATE4res(XDR * xdrs, CREATE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5250,14 +5250,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_DELEGPURGE4args(XDR * xdrs,
-					       DELEGPURGE4args *objp)
+					       DELEGPURGE4args * objp)
 	{
 		if (!xdr_clientid4(xdrs, &objp->clientid))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_DELEGPURGE4res(XDR * xdrs, DELEGPURGE4res *objp)
+	static inline bool xdr_DELEGPURGE4res(XDR * xdrs, DELEGPURGE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5265,7 +5265,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_DELEGRETURN4args(XDR * xdrs,
-						DELEGRETURN4args *objp)
+						DELEGRETURN4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->deleg_stateid))
 			return false;
@@ -5273,28 +5273,28 @@ extern "C" {
 	}
 
 	static inline bool xdr_DELEGRETURN4res(XDR * xdrs,
-					       DELEGRETURN4res *objp)
+					       DELEGRETURN4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_GETATTR4args(XDR * xdrs, GETATTR4args *objp)
+	static inline bool xdr_GETATTR4args(XDR * xdrs, GETATTR4args * objp)
 	{
 		if (!xdr_bitmap4(xdrs, &objp->attr_request))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_GETATTR4resok(XDR * xdrs, GETATTR4resok *objp)
+	static inline bool xdr_GETATTR4resok(XDR * xdrs, GETATTR4resok * objp)
 	{
 		if (!xdr_fattr4(xdrs, &objp->obj_attributes))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_GETATTR4res(XDR * xdrs, GETATTR4res *objp)
+	static inline bool xdr_GETATTR4res(XDR * xdrs, GETATTR4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5310,14 +5310,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_GETFH4resok(XDR * xdrs, GETFH4resok *objp)
+	static inline bool xdr_GETFH4resok(XDR * xdrs, GETFH4resok * objp)
 	{
 		if (!xdr_nfs_fh4(xdrs, &objp->object))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_GETFH4res(XDR * xdrs, GETFH4res *objp)
+	static inline bool xdr_GETFH4res(XDR * xdrs, GETFH4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5332,21 +5332,21 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LINK4args(XDR * xdrs, LINK4args *objp)
+	static inline bool xdr_LINK4args(XDR * xdrs, LINK4args * objp)
 	{
 		if (!xdr_component4(xdrs, &objp->newname))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_LINK4resok(XDR * xdrs, LINK4resok *objp)
+	static inline bool xdr_LINK4resok(XDR * xdrs, LINK4resok * objp)
 	{
 		if (!xdr_change_info4(xdrs, &objp->cinfo))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_LINK4res(XDR * xdrs, LINK4res *objp)
+	static inline bool xdr_LINK4res(XDR * xdrs, LINK4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5362,7 +5362,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_open_to_lock_owner4(XDR * xdrs,
-						   open_to_lock_owner4 *objp)
+						   open_to_lock_owner4 * objp)
 	{
 		if (!xdr_seqid4(xdrs, &objp->open_seqid))
 			return false;
@@ -5376,7 +5376,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_exist_lock_owner4(XDR * xdrs,
-						 exist_lock_owner4 *objp)
+						 exist_lock_owner4 * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->lock_stateid))
 			return false;
@@ -5385,7 +5385,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_locker4(XDR * xdrs, locker4 *objp)
+	static inline bool xdr_locker4(XDR * xdrs, locker4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->new_lock_owner))
 			return false;
@@ -5406,7 +5406,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOCK4args(XDR * xdrs, LOCK4args *objp)
+	static inline bool xdr_LOCK4args(XDR * xdrs, LOCK4args * objp)
 	{
 		if (!xdr_nfs_lock_type4(xdrs, &objp->locktype))
 			return false;
@@ -5421,7 +5421,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOCK4denied(XDR * xdrs, LOCK4denied *objp)
+	static inline bool xdr_LOCK4denied(XDR * xdrs, LOCK4denied * objp)
 	{
 		if (!xdr_offset4(xdrs, &objp->offset))
 			return false;
@@ -5434,14 +5434,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOCK4resok(XDR * xdrs, LOCK4resok *objp)
+	static inline bool xdr_LOCK4resok(XDR * xdrs, LOCK4resok * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->lock_stateid))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_LOCK4res(XDR * xdrs, LOCK4res *objp)
+	static inline bool xdr_LOCK4res(XDR * xdrs, LOCK4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5460,7 +5460,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOCKT4args(XDR * xdrs, LOCKT4args *objp)
+	static inline bool xdr_LOCKT4args(XDR * xdrs, LOCKT4args * objp)
 	{
 		if (!xdr_nfs_lock_type4(xdrs, &objp->locktype))
 			return false;
@@ -5473,7 +5473,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOCKT4res(XDR * xdrs, LOCKT4res *objp)
+	static inline bool xdr_LOCKT4res(XDR * xdrs, LOCKT4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5490,7 +5490,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOCKU4args(XDR * xdrs, LOCKU4args *objp)
+	static inline bool xdr_LOCKU4args(XDR * xdrs, LOCKU4args * objp)
 	{
 		if (!xdr_nfs_lock_type4(xdrs, &objp->locktype))
 			return false;
@@ -5505,7 +5505,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOCKU4res(XDR * xdrs, LOCKU4res *objp)
+	static inline bool xdr_LOCKU4res(XDR * xdrs, LOCKU4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5521,49 +5521,49 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LOOKUP4args(XDR * xdrs, LOOKUP4args *objp)
+	static inline bool xdr_LOOKUP4args(XDR * xdrs, LOOKUP4args * objp)
 	{
 		if (!xdr_component4(xdrs, &objp->objname))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_LOOKUP4res(XDR * xdrs, LOOKUP4res *objp)
+	static inline bool xdr_LOOKUP4res(XDR * xdrs, LOOKUP4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_LOOKUPP4res(XDR * xdrs, LOOKUPP4res *objp)
+	static inline bool xdr_LOOKUPP4res(XDR * xdrs, LOOKUPP4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_NVERIFY4args(XDR * xdrs, NVERIFY4args *objp)
+	static inline bool xdr_NVERIFY4args(XDR * xdrs, NVERIFY4args * objp)
 	{
 		if (!xdr_fattr4(xdrs, &objp->obj_attributes))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_NVERIFY4res(XDR * xdrs, NVERIFY4res *objp)
+	static inline bool xdr_NVERIFY4res(XDR * xdrs, NVERIFY4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_createmode4(XDR * xdrs, createmode4 *objp)
+	static inline bool xdr_createmode4(XDR * xdrs, createmode4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_creatverfattr(XDR * xdrs, creatverfattr *objp)
+	static inline bool xdr_creatverfattr(XDR * xdrs, creatverfattr * objp)
 	{
 		if (!xdr_verifier4(xdrs, objp->cva_verf))
 			return false;
@@ -5572,7 +5572,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_createhow4(XDR * xdrs, createhow4 *objp)
+	static inline bool xdr_createhow4(XDR * xdrs, createhow4 * objp)
 	{
 		if (!xdr_createmode4(xdrs, &objp->mode))
 			return false;
@@ -5597,14 +5597,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_opentype4(XDR * xdrs, opentype4 *objp)
+	static inline bool xdr_opentype4(XDR * xdrs, opentype4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_openflag4(XDR * xdrs, openflag4 *objp)
+	static inline bool xdr_openflag4(XDR * xdrs, openflag4 * objp)
 	{
 		if (!xdr_opentype4(xdrs, &objp->opentype))
 			return false;
@@ -5619,7 +5619,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_limit_by4(XDR * xdrs, limit_by4 *objp)
+	static inline bool xdr_limit_by4(XDR * xdrs, limit_by4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -5627,7 +5627,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_nfs_modified_limit4(XDR * xdrs,
-						   nfs_modified_limit4 *objp)
+						   nfs_modified_limit4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->num_blocks))
 			return false;
@@ -5637,7 +5637,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_nfs_space_limit4(XDR * xdrs,
-						nfs_space_limit4 *objp)
+						nfs_space_limit4 * objp)
 	{
 		if (!xdr_limit_by4(xdrs, &objp->limitby))
 			return false;
@@ -5668,7 +5668,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_open_claim_type4(XDR * xdrs,
-						open_claim_type4 *objp)
+						open_claim_type4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -5686,7 +5686,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_open_claim4(XDR * xdrs, open_claim4 *objp)
+	static inline bool xdr_open_claim4(XDR * xdrs, open_claim4 * objp)
 	{
 		if (!xdr_open_claim_type4(xdrs, &objp->claim))
 			return false;
@@ -5725,7 +5725,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_OPEN4args(XDR * xdrs, OPEN4args *objp)
+	static inline bool xdr_OPEN4args(XDR * xdrs, OPEN4args * objp)
 	{
 		if (!xdr_seqid4(xdrs, &objp->seqid))
 			return false;
@@ -5771,7 +5771,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_why_no_delegation4(XDR * xdrs,
-						  why_no_delegation4 *objp)
+						  why_no_delegation4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -5806,7 +5806,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_open_delegation4(XDR * xdrs,
-						open_delegation4 *objp)
+						open_delegation4 * objp)
 	{
 		if (!xdr_open_delegation_type4(xdrs, &objp->delegation_type))
 			return false;
@@ -5834,7 +5834,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_OPEN4resok(XDR * xdrs, OPEN4resok *objp)
+	static inline bool xdr_OPEN4resok(XDR * xdrs, OPEN4resok * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->stateid))
 			return false;
@@ -5849,7 +5849,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_OPEN4res(XDR * xdrs, OPEN4res *objp)
+	static inline bool xdr_OPEN4res(XDR * xdrs, OPEN4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5864,14 +5864,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_OPENATTR4args(XDR * xdrs, OPENATTR4args *objp)
+	static inline bool xdr_OPENATTR4args(XDR * xdrs, OPENATTR4args * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->createdir))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_OPENATTR4res(XDR * xdrs, OPENATTR4res *objp)
+	static inline bool xdr_OPENATTR4res(XDR * xdrs, OPENATTR4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5879,7 +5879,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_OPEN_CONFIRM4args(XDR * xdrs,
-						 OPEN_CONFIRM4args *objp)
+						 OPEN_CONFIRM4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->open_stateid))
 			return false;
@@ -5889,7 +5889,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_OPEN_CONFIRM4resok(XDR * xdrs,
-						  OPEN_CONFIRM4resok *objp)
+						  OPEN_CONFIRM4resok * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->open_stateid))
 			return false;
@@ -5897,7 +5897,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_OPEN_CONFIRM4res(XDR * xdrs,
-						OPEN_CONFIRM4res *objp)
+						OPEN_CONFIRM4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5914,7 +5914,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_OPEN_DOWNGRADE4args(XDR * xdrs,
-						   OPEN_DOWNGRADE4args *objp)
+						   OPEN_DOWNGRADE4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->open_stateid))
 			return false;
@@ -5937,7 +5937,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_OPEN_DOWNGRADE4res(XDR * xdrs,
-						  OPEN_DOWNGRADE4res *objp)
+						  OPEN_DOWNGRADE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -5953,35 +5953,35 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_PUTFH4args(XDR * xdrs, PUTFH4args *objp)
+	static inline bool xdr_PUTFH4args(XDR * xdrs, PUTFH4args * objp)
 	{
 		if (!xdr_nfs_fh4(xdrs, &objp->object))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_PUTFH4res(XDR * xdrs, PUTFH4res *objp)
+	static inline bool xdr_PUTFH4res(XDR * xdrs, PUTFH4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_PUTPUBFH4res(XDR * xdrs, PUTPUBFH4res *objp)
+	static inline bool xdr_PUTPUBFH4res(XDR * xdrs, PUTPUBFH4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_PUTROOTFH4res(XDR * xdrs, PUTROOTFH4res *objp)
+	static inline bool xdr_PUTROOTFH4res(XDR * xdrs, PUTROOTFH4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_READ4args(XDR * xdrs, READ4args *objp)
+	static inline bool xdr_READ4args(XDR * xdrs, READ4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->stateid))
 			return false;
@@ -5992,18 +5992,18 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_READ4resok(XDR * xdrs, READ4resok *objp)
+	static inline bool xdr_READ4resok(XDR * xdrs, READ4resok * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->eof))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->data.data_val,
-		     (u_int *) & objp->data.data_len, ~0))
+		     (u_int *) &objp->data.data_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_READ4res(XDR * xdrs, READ4res *objp)
+	static inline bool xdr_READ4res(XDR * xdrs, READ4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6018,7 +6018,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_READDIR4args(XDR * xdrs, READDIR4args *objp)
+	static inline bool xdr_READDIR4args(XDR * xdrs, READDIR4args * objp)
 	{
 		if (!xdr_nfs_cookie4(xdrs, &objp->cookie))
 			return false;
@@ -6033,7 +6033,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_entry4(XDR * xdrs, entry4 *objp)
+	static inline bool xdr_entry4(XDR * xdrs, entry4 * objp)
 	{
 		if (!xdr_nfs_cookie4(xdrs, &objp->cookie))
 			return false;
@@ -6048,7 +6048,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_dirlist4(XDR * xdrs, dirlist4 *objp)
+	static inline bool xdr_dirlist4(XDR * xdrs, dirlist4 * objp)
 	{
 		if (!xdr_pointer
 		    (xdrs, (char **)&objp->entries, sizeof(entry4),
@@ -6059,7 +6059,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_READDIR4resok(XDR * xdrs, READDIR4resok *objp)
+	static inline bool xdr_READDIR4resok(XDR * xdrs, READDIR4resok * objp)
 	{
 		if (!xdr_verifier4(xdrs, objp->cookieverf))
 			return false;
@@ -6068,7 +6068,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_READDIR4res(XDR * xdrs, READDIR4res *objp)
+	static inline bool xdr_READDIR4res(XDR * xdrs, READDIR4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6084,14 +6084,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_READLINK4resok(XDR * xdrs, READLINK4resok *objp)
+	static inline bool xdr_READLINK4resok(XDR * xdrs, READLINK4resok * objp)
 	{
 		if (!xdr_linktext4(xdrs, &objp->link))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_READLINK4res(XDR * xdrs, READLINK4res *objp)
+	static inline bool xdr_READLINK4res(XDR * xdrs, READLINK4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6107,21 +6107,21 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_REMOVE4args(XDR * xdrs, REMOVE4args *objp)
+	static inline bool xdr_REMOVE4args(XDR * xdrs, REMOVE4args * objp)
 	{
 		if (!xdr_component4(xdrs, &objp->target))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_REMOVE4resok(XDR * xdrs, REMOVE4resok *objp)
+	static inline bool xdr_REMOVE4resok(XDR * xdrs, REMOVE4resok * objp)
 	{
 		if (!xdr_change_info4(xdrs, &objp->cinfo))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_REMOVE4res(XDR * xdrs, REMOVE4res *objp)
+	static inline bool xdr_REMOVE4res(XDR * xdrs, REMOVE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6136,7 +6136,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_RENAME4args(XDR * xdrs, RENAME4args *objp)
+	static inline bool xdr_RENAME4args(XDR * xdrs, RENAME4args * objp)
 	{
 		if (!xdr_component4(xdrs, &objp->oldname))
 			return false;
@@ -6145,7 +6145,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_RENAME4resok(XDR * xdrs, RENAME4resok *objp)
+	static inline bool xdr_RENAME4resok(XDR * xdrs, RENAME4resok * objp)
 	{
 		if (!xdr_change_info4(xdrs, &objp->source_cinfo))
 			return false;
@@ -6154,7 +6154,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_RENAME4res(XDR * xdrs, RENAME4res *objp)
+	static inline bool xdr_RENAME4res(XDR * xdrs, RENAME4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6169,35 +6169,35 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_RENEW4args(XDR * xdrs, RENEW4args *objp)
+	static inline bool xdr_RENEW4args(XDR * xdrs, RENEW4args * objp)
 	{
 		if (!xdr_clientid4(xdrs, &objp->clientid))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_RENEW4res(XDR * xdrs, RENEW4res *objp)
+	static inline bool xdr_RENEW4res(XDR * xdrs, RENEW4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_RESTOREFH4res(XDR * xdrs, RESTOREFH4res *objp)
+	static inline bool xdr_RESTOREFH4res(XDR * xdrs, RESTOREFH4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_SAVEFH4res(XDR * xdrs, SAVEFH4res *objp)
+	static inline bool xdr_SAVEFH4res(XDR * xdrs, SAVEFH4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_SECINFO4args(XDR * xdrs, SECINFO4args *objp)
+	static inline bool xdr_SECINFO4args(XDR * xdrs, SECINFO4args * objp)
 	{
 		if (!xdr_component4(xdrs, &objp->name))
 			return false;
@@ -6212,7 +6212,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_rpcsec_gss_info(XDR * xdrs,
-					       rpcsec_gss_info *objp)
+					       rpcsec_gss_info * objp)
 	{
 		if (!xdr_sec_oid4(xdrs, &objp->oid))
 			return false;
@@ -6223,7 +6223,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_secinfo4(XDR * xdrs, secinfo4 *objp)
+	static inline bool xdr_secinfo4(XDR * xdrs, secinfo4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->flavor))
 			return false;
@@ -6239,17 +6239,17 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_SECINFO4resok(XDR * xdrs, SECINFO4resok *objp)
+	static inline bool xdr_SECINFO4resok(XDR * xdrs, SECINFO4resok * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->SECINFO4resok_val,
-		     (u_int *) & objp->SECINFO4resok_len, ~0, sizeof(secinfo4),
+		     (u_int *) &objp->SECINFO4resok_len, ~0, sizeof(secinfo4),
 		     (xdrproc_t) xdr_secinfo4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_SECINFO4res(XDR * xdrs, SECINFO4res *objp)
+	static inline bool xdr_SECINFO4res(XDR * xdrs, SECINFO4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6265,7 +6265,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_SETATTR4args(XDR * xdrs, SETATTR4args *objp)
+	static inline bool xdr_SETATTR4args(XDR * xdrs, SETATTR4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->stateid))
 			return false;
@@ -6274,7 +6274,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_SETATTR4res(XDR * xdrs, SETATTR4res *objp)
+	static inline bool xdr_SETATTR4res(XDR * xdrs, SETATTR4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6284,7 +6284,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_SETCLIENTID4args(XDR * xdrs,
-						SETCLIENTID4args *objp)
+						SETCLIENTID4args * objp)
 	{
 		if (!xdr_nfs_client_id4(xdrs, &objp->client))
 			return false;
@@ -6296,7 +6296,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_SETCLIENTID4resok(XDR * xdrs,
-						 SETCLIENTID4resok *objp)
+						 SETCLIENTID4resok * objp)
 	{
 		if (!xdr_clientid4(xdrs, &objp->clientid))
 			return false;
@@ -6306,7 +6306,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_SETCLIENTID4res(XDR * xdrs,
-					       SETCLIENTID4res *objp)
+					       SETCLIENTID4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6347,28 +6347,28 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_VERIFY4args(XDR * xdrs, VERIFY4args *objp)
+	static inline bool xdr_VERIFY4args(XDR * xdrs, VERIFY4args * objp)
 	{
 		if (!xdr_fattr4(xdrs, &objp->obj_attributes))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_VERIFY4res(XDR * xdrs, VERIFY4res *objp)
+	static inline bool xdr_VERIFY4res(XDR * xdrs, VERIFY4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_stable_how4(XDR * xdrs, stable_how4 *objp)
+	static inline bool xdr_stable_how4(XDR * xdrs, stable_how4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_WRITE4args(XDR * xdrs, WRITE4args *objp)
+	static inline bool xdr_WRITE4args(XDR * xdrs, WRITE4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->stateid))
 			return false;
@@ -6378,12 +6378,12 @@ extern "C" {
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->data.data_val,
-		     (u_int *) & objp->data.data_len, ~0))
+		     (u_int *) &objp->data.data_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_WRITE4resok(XDR * xdrs, WRITE4resok *objp)
+	static inline bool xdr_WRITE4resok(XDR * xdrs, WRITE4resok * objp)
 	{
 		if (!xdr_count4(xdrs, &objp->count))
 			return false;
@@ -6394,7 +6394,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_WRITE4res(XDR * xdrs, WRITE4res *objp)
+	static inline bool xdr_WRITE4res(XDR * xdrs, WRITE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6427,7 +6427,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_ILLEGAL4res(XDR * xdrs, ILLEGAL4res *objp)
+	static inline bool xdr_ILLEGAL4res(XDR * xdrs, ILLEGAL4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -6438,13 +6438,13 @@ extern "C" {
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->gsshandle4_t_val,
-		     (u_int *) & objp->gsshandle4_t_len, ~0))
+		     (u_int *) &objp->gsshandle4_t_len, ~0))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_gss_cb_handles4(XDR * xdrs,
-					       gss_cb_handles4 *objp)
+					       gss_cb_handles4 * objp)
 	{
 		if (!xdr_rpc_gss_svc_t(xdrs, &objp->gcbp_service))
 			return false;
@@ -6456,7 +6456,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_callback_sec_parms4(XDR * xdrs,
-						   callback_sec_parms4 *objp)
+						   callback_sec_parms4 * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->cb_secflavor))
 			return false;
@@ -6488,7 +6488,7 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->bca_sec_parms.bca_sec_parms_val,
-		     (u_int *) & objp->bca_sec_parms.bca_sec_parms_len, ~0,
+		     (u_int *) &objp->bca_sec_parms.bca_sec_parms_len, ~0,
 		     sizeof(callback_sec_parms4),
 		     (xdrproc_t) xdr_callback_sec_parms4))
 			return false;
@@ -6496,7 +6496,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_BACKCHANNEL_CTL4res(XDR * xdrs,
-						   BACKCHANNEL_CTL4res *objp)
+						   BACKCHANNEL_CTL4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->bcr_status))
 			return false;
@@ -6505,7 +6505,7 @@ extern "C" {
 
 	static inline bool xdr_channel_dir_from_client4(
 						XDR * xdrs,
-						channel_dir_from_client4 *objp)
+						channel_dir_from_client4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -6513,8 +6513,8 @@ extern "C" {
 	}
 
 	static inline bool xdr_BIND_CONN_TO_SESSION4args(
-						XDR * xdrs,
-						BIND_CONN_TO_SESSION4args *objp)
+					XDR * xdrs,
+					BIND_CONN_TO_SESSION4args * objp)
 	{
 		if (!xdr_sessionid4(xdrs, objp->bctsa_sessid))
 			return false;
@@ -6536,7 +6536,7 @@ extern "C" {
 
 	static inline bool xdr_BIND_CONN_TO_SESSION4resok(
 					XDR * xdrs,
-					BIND_CONN_TO_SESSION4resok *objp)
+					BIND_CONN_TO_SESSION4resok * objp)
 	{
 		if (!xdr_sessionid4(xdrs, objp->bctsr_sessid))
 			return false;
@@ -6567,7 +6567,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_state_protect_ops4(XDR * xdrs,
-						  state_protect_ops4 *objp)
+						  state_protect_ops4 * objp)
 	{
 		if (!xdr_bitmap4(xdrs, &objp->spo_must_enforce))
 			return false;
@@ -6576,18 +6576,18 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_ssv_sp_parms4(XDR * xdrs, ssv_sp_parms4 *objp)
+	static inline bool xdr_ssv_sp_parms4(XDR * xdrs, ssv_sp_parms4 * objp)
 	{
 		if (!xdr_state_protect_ops4(xdrs, &objp->ssp_ops))
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->ssp_hash_algs.ssp_hash_algs_val,
-		     (u_int *) & objp->ssp_hash_algs.ssp_hash_algs_len, ~0,
+		     (u_int *) &objp->ssp_hash_algs.ssp_hash_algs_len, ~0,
 		     sizeof(sec_oid4), (xdrproc_t) xdr_sec_oid4))
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->ssp_encr_algs.ssp_encr_algs_val,
-		     (u_int *) & objp->ssp_encr_algs.ssp_encr_algs_len, ~0,
+		     (u_int *) &objp->ssp_encr_algs.ssp_encr_algs_len, ~0,
 		     sizeof(sec_oid4), (xdrproc_t) xdr_sec_oid4))
 			return false;
 		if (!inline_xdr_u_int32_t(xdrs, &objp->ssp_window))
@@ -6598,7 +6598,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_state_protect_how4(XDR * xdrs,
-						  state_protect_how4 *objp)
+						  state_protect_how4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -6606,7 +6606,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_state_protect4_a(XDR * xdrs,
-						state_protect4_a *objp)
+						state_protect4_a * objp)
 	{
 		if (!xdr_state_protect_how4(xdrs, &objp->spa_how))
 			return false;
@@ -6630,7 +6630,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_EXCHANGE_ID4args(XDR * xdrs,
-						EXCHANGE_ID4args *objp)
+						EXCHANGE_ID4args * objp)
 	{
 		if (!xdr_client_owner4(xdrs, &objp->eia_clientowner))
 			return false;
@@ -6641,14 +6641,14 @@ extern "C" {
 		if (!xdr_array
 		    (xdrs,
 		     (char **)&objp->eia_client_impl_id.eia_client_impl_id_val,
-		     (u_int *) & objp->eia_client_impl_id.
+		     (u_int *) &objp->eia_client_impl_id.
 		     eia_client_impl_id_len, 1, sizeof(nfs_impl_id4),
 		     (xdrproc_t) xdr_nfs_impl_id4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_ssv_prot_info4(XDR * xdrs, ssv_prot_info4 *objp)
+	static inline bool xdr_ssv_prot_info4(XDR * xdrs, ssv_prot_info4 * objp)
 	{
 		if (!xdr_state_protect_ops4(xdrs, &objp->spi_ops))
 			return false;
@@ -6662,14 +6662,14 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->spi_handles.spi_handles_val,
-		     (u_int *) & objp->spi_handles.spi_handles_len, ~0,
+		     (u_int *) &objp->spi_handles.spi_handles_len, ~0,
 		     sizeof(gsshandle4_t), (xdrproc_t) xdr_gsshandle4_t))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_state_protect4_r(XDR * xdrs,
-						state_protect4_r *objp)
+						state_protect4_r * objp)
 	{
 		if (!xdr_state_protect_how4(xdrs, &objp->spr_how))
 			return false;
@@ -6693,7 +6693,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_EXCHANGE_ID4resok(XDR * xdrs,
-						 EXCHANGE_ID4resok *objp)
+						 EXCHANGE_ID4resok * objp)
 	{
 		if (!xdr_clientid4(xdrs, &objp->eir_clientid))
 			return false;
@@ -6708,13 +6708,13 @@ extern "C" {
 		if (!inline_xdr_bytes
 		    (xdrs,
 		     (char **)&objp->eir_server_scope.eir_server_scope_val,
-		     (u_int *) & objp->eir_server_scope.eir_server_scope_len,
+		     (u_int *) &objp->eir_server_scope.eir_server_scope_len,
 		     NFS4_OPAQUE_LIMIT))
 			return false;
 		if (!xdr_array
 		    (xdrs,
 		     (char **)&objp->eir_server_impl_id.eir_server_impl_id_val,
-		     (u_int *) & objp->eir_server_impl_id.
+		     (u_int *) &objp->eir_server_impl_id.
 		     eir_server_impl_id_len, 1, sizeof(nfs_impl_id4),
 		     (xdrproc_t) xdr_nfs_impl_id4))
 			return false;
@@ -6722,7 +6722,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_EXCHANGE_ID4res(XDR * xdrs,
-					       EXCHANGE_ID4res *objp)
+					       EXCHANGE_ID4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->eir_status))
 			return false;
@@ -6738,7 +6738,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_channel_attrs4(XDR * xdrs, channel_attrs4 *objp)
+	static inline bool xdr_channel_attrs4(XDR * xdrs, channel_attrs4 * objp)
 	{
 		if (!xdr_count4(xdrs, &objp->ca_headerpadsize))
 			return false;
@@ -6754,14 +6754,14 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->ca_rdma_ird.ca_rdma_ird_val,
-		     (u_int *) & objp->ca_rdma_ird.ca_rdma_ird_len, 1,
+		     (u_int *) &objp->ca_rdma_ird.ca_rdma_ird_len, 1,
 		     sizeof(uint32_t), (xdrproc_t) xdr_uint32_t))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_CREATE_SESSION4args(XDR * xdrs,
-						   CREATE_SESSION4args *objp)
+						   CREATE_SESSION4args * objp)
 	{
 		if (!xdr_clientid4(xdrs, &objp->csa_clientid))
 			return false;
@@ -6777,7 +6777,7 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->csa_sec_parms.csa_sec_parms_val,
-		     (u_int *) & objp->csa_sec_parms.csa_sec_parms_len, ~0,
+		     (u_int *) &objp->csa_sec_parms.csa_sec_parms_len, ~0,
 		     sizeof(callback_sec_parms4),
 		     (xdrproc_t) xdr_callback_sec_parms4))
 			return false;
@@ -6802,7 +6802,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CREATE_SESSION4res(XDR * xdrs,
-						  CREATE_SESSION4res *objp)
+						  CREATE_SESSION4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->csr_status))
 			return false;
@@ -6828,7 +6828,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_DESTROY_SESSION4res(XDR * xdrs,
-						   DESTROY_SESSION4res *objp)
+						   DESTROY_SESSION4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->dsr_status))
 			return false;
@@ -6836,7 +6836,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_FREE_STATEID4args(XDR * xdrs,
-						 FREE_STATEID4args *objp)
+						 FREE_STATEID4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->fsa_stateid))
 			return false;
@@ -6844,14 +6844,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_FREE_STATEID4res(XDR * xdrs,
-						FREE_STATEID4res *objp)
+						FREE_STATEID4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->fsr_status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_attr_notice4(XDR * xdrs, attr_notice4 *objp)
+	static inline bool xdr_attr_notice4(XDR * xdrs, attr_notice4 * objp)
 	{
 		if (!xdr_nfstime4(xdrs, objp))
 			return false;
@@ -6894,7 +6894,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_gddrnf4_status(XDR * xdrs, gddrnf4_status *objp)
+	static inline bool xdr_gddrnf4_status(XDR * xdrs, gddrnf4_status * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -6903,7 +6903,7 @@ extern "C" {
 
 	static inline bool xdr_GET_DIR_DELEGATION4res_non_fatal(
 					XDR * xdrs,
-					GET_DIR_DELEGATION4res_non_fatal *objp)
+					GET_DIR_DELEGATION4res_non_fatal * objp)
 	{
 		if (!xdr_gddrnf4_status(xdrs, &objp->gddrnf_status))
 			return false;
@@ -6930,7 +6930,7 @@ extern "C" {
 
 	static inline bool xdr_GET_DIR_DELEGATION4res(
 					XDR * xdrs,
-					GET_DIR_DELEGATION4res *objp)
+					GET_DIR_DELEGATION4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->gddr_status))
 			return false;
@@ -6949,7 +6949,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_GETDEVICEINFO4args(XDR * xdrs,
-						  GETDEVICEINFO4args *objp)
+						  GETDEVICEINFO4args * objp)
 	{
 		if (!xdr_deviceid4(xdrs, objp->gdia_device_id))
 			return false;
@@ -6963,7 +6963,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_GETDEVICEINFO4resok(XDR * xdrs,
-						   GETDEVICEINFO4resok *objp)
+						   GETDEVICEINFO4resok * objp)
 	{
 		if (!xdr_device_addr4(xdrs, &objp->gdir_device_addr))
 			return false;
@@ -6973,7 +6973,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_GETDEVICEINFO4res(XDR * xdrs,
-						 GETDEVICEINFO4res *objp)
+						 GETDEVICEINFO4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->gdir_status))
 			return false;
@@ -6995,7 +6995,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_GETDEVICELIST4args(XDR * xdrs,
-						  GETDEVICELIST4args *objp)
+						  GETDEVICELIST4args * objp)
 	{
 		if (!xdr_layouttype4(xdrs, &objp->gdla_layout_type))
 			return false;
@@ -7009,7 +7009,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_GETDEVICELIST4resok(XDR * xdrs,
-						   GETDEVICELIST4resok *objp)
+						   GETDEVICELIST4resok * objp)
 	{
 		if (!xdr_nfs_cookie4(xdrs, &objp->gdlr_cookie))
 			return false;
@@ -7018,7 +7018,7 @@ extern "C" {
 		if (!xdr_array
 		    (xdrs,
 		     (char **)&objp->gdlr_deviceid_list.gdlr_deviceid_list_val,
-		     (u_int *) & objp->gdlr_deviceid_list.
+		     (u_int *) &objp->gdlr_deviceid_list.
 		     gdlr_deviceid_list_len, ~0, sizeof(deviceid4),
 		     (xdrproc_t) xdr_deviceid4))
 			return false;
@@ -7028,7 +7028,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_GETDEVICELIST4res(XDR * xdrs,
-						 GETDEVICELIST4res *objp)
+						 GETDEVICELIST4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->gdlr_status))
 			return false;
@@ -7044,7 +7044,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_newtime4(XDR * xdrs, newtime4 *objp)
+	static inline bool xdr_newtime4(XDR * xdrs, newtime4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->nt_timechanged))
 			return false;
@@ -7061,7 +7061,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_newoffset4(XDR * xdrs, newoffset4 *objp)
+	static inline bool xdr_newoffset4(XDR * xdrs, newoffset4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->no_newoffset))
 			return false;
@@ -7079,7 +7079,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTCOMMIT4args(XDR * xdrs,
-						 LAYOUTCOMMIT4args *objp)
+						 LAYOUTCOMMIT4args * objp)
 	{
 		if (!xdr_offset4(xdrs, &objp->loca_offset))
 			return false;
@@ -7098,7 +7098,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_newsize4(XDR * xdrs, newsize4 *objp)
+	static inline bool xdr_newsize4(XDR * xdrs, newsize4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->ns_sizechanged))
 			return false;
@@ -7116,7 +7116,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTCOMMIT4resok(XDR * xdrs,
-						  LAYOUTCOMMIT4resok *objp)
+						  LAYOUTCOMMIT4resok * objp)
 	{
 		if (!xdr_newsize4(xdrs, &objp->locr_newsize))
 			return false;
@@ -7124,7 +7124,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTCOMMIT4res(XDR * xdrs,
-						LAYOUTCOMMIT4res *objp)
+						LAYOUTCOMMIT4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->locr_status))
 			return false;
@@ -7140,7 +7140,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_LAYOUTGET4args(XDR * xdrs, LAYOUTGET4args *objp)
+	static inline bool xdr_LAYOUTGET4args(XDR * xdrs, LAYOUTGET4args * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->loga_signal_layout_avail))
 			return false;
@@ -7162,7 +7162,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTGET4resok(XDR * xdrs,
-					       LAYOUTGET4resok *objp)
+					       LAYOUTGET4resok * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->logr_return_on_close))
 			return false;
@@ -7170,13 +7170,13 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->logr_layout.logr_layout_val,
-		     (u_int *) & objp->logr_layout.logr_layout_len, ~0,
+		     (u_int *) &objp->logr_layout.logr_layout_len, ~0,
 		     sizeof(layout4), (xdrproc_t) xdr_layout4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_LAYOUTGET4res(XDR * xdrs, LAYOUTGET4res *objp)
+	static inline bool xdr_LAYOUTGET4res(XDR * xdrs, LAYOUTGET4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->logr_status))
 			return false;
@@ -7200,7 +7200,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTRETURN4args(XDR * xdrs,
-						 LAYOUTRETURN4args *objp)
+						 LAYOUTRETURN4args * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->lora_reclaim))
 			return false;
@@ -7234,7 +7234,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTRETURN4res(XDR * xdrs,
-						LAYOUTRETURN4res *objp)
+						LAYOUTRETURN4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->lorr_status))
 			return false;
@@ -7250,7 +7250,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_secinfo_style4(XDR * xdrs, secinfo_style4 *objp)
+	static inline bool xdr_secinfo_style4(XDR * xdrs, secinfo_style4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -7267,14 +7267,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_SECINFO_NO_NAME4res(XDR * xdrs,
-						   SECINFO_NO_NAME4res *objp)
+						   SECINFO_NO_NAME4res * objp)
 	{
 		if (!xdr_SECINFO4res(xdrs, objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_SEQUENCE4args(XDR * xdrs, SEQUENCE4args *objp)
+	static inline bool xdr_SEQUENCE4args(XDR * xdrs, SEQUENCE4args * objp)
 	{
 		if (!xdr_sessionid4(xdrs, objp->sa_sessionid))
 			return false;
@@ -7289,7 +7289,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_SEQUENCE4resok(XDR * xdrs, SEQUENCE4resok *objp)
+	static inline bool xdr_SEQUENCE4resok(XDR * xdrs, SEQUENCE4resok * objp)
 	{
 		if (!xdr_sessionid4(xdrs, objp->sr_sessionid))
 			return false;
@@ -7306,7 +7306,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_SEQUENCE4res(XDR * xdrs, SEQUENCE4res *objp)
+	static inline bool xdr_SEQUENCE4res(XDR * xdrs, SEQUENCE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->sr_status))
 			return false;
@@ -7323,44 +7323,44 @@ extern "C" {
 	}
 
 	static inline bool xdr_ssa_digest_input4(XDR * xdrs,
-						 ssa_digest_input4 *objp)
+						 ssa_digest_input4 * objp)
 	{
 		if (!xdr_SEQUENCE4args(xdrs, &objp->sdi_seqargs))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_SET_SSV4args(XDR * xdrs, SET_SSV4args *objp)
+	static inline bool xdr_SET_SSV4args(XDR * xdrs, SET_SSV4args * objp)
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->ssa_ssv.ssa_ssv_val,
-		     (u_int *) & objp->ssa_ssv.ssa_ssv_len, ~0))
+		     (u_int *) &objp->ssa_ssv.ssa_ssv_len, ~0))
 			return false;
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->ssa_digest.ssa_digest_val,
-		     (u_int *) & objp->ssa_digest.ssa_digest_len, ~0))
+		     (u_int *) &objp->ssa_digest.ssa_digest_len, ~0))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_ssr_digest_input4(XDR * xdrs,
-						 ssr_digest_input4 *objp)
+						 ssr_digest_input4 * objp)
 	{
 		if (!xdr_SEQUENCE4res(xdrs, &objp->sdi_seqres))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_SET_SSV4resok(XDR * xdrs, SET_SSV4resok *objp)
+	static inline bool xdr_SET_SSV4resok(XDR * xdrs, SET_SSV4resok * objp)
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->ssr_digest.ssr_digest_val,
-		     (u_int *) & objp->ssr_digest.ssr_digest_len, ~0))
+		     (u_int *) &objp->ssr_digest.ssr_digest_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_SET_SSV4res(XDR * xdrs, SET_SSV4res *objp)
+	static inline bool xdr_SET_SSV4res(XDR * xdrs, SET_SSV4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->ssr_status))
 			return false;
@@ -7377,30 +7377,30 @@ extern "C" {
 	}
 
 	static inline bool xdr_TEST_STATEID4args(XDR * xdrs,
-						 TEST_STATEID4args *objp)
+						 TEST_STATEID4args * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->ts_stateids.ts_stateids_val,
-		     (u_int *) & objp->ts_stateids.ts_stateids_len, ~0,
+		     (u_int *) &objp->ts_stateids.ts_stateids_len, ~0,
 		     sizeof(stateid4), (xdrproc_t) xdr_stateid4))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_TEST_STATEID4resok(XDR * xdrs,
-						  TEST_STATEID4resok *objp)
+						  TEST_STATEID4resok * objp)
 	{
 		if (!xdr_array
 		    (xdrs,
 		     (char **)&objp->tsr_status_codes.tsr_status_codes_val,
-		     (u_int *) & objp->tsr_status_codes.tsr_status_codes_len,
+		     (u_int *) &objp->tsr_status_codes.tsr_status_codes_len,
 		     ~0, sizeof(nfsstat4), (xdrproc_t) xdr_nfsstat4))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_TEST_STATEID4res(XDR * xdrs,
-						TEST_STATEID4res *objp)
+						TEST_STATEID4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->tsr_status))
 			return false;
@@ -7416,7 +7416,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_deleg_claim4(XDR * xdrs, deleg_claim4 *objp)
+	static inline bool xdr_deleg_claim4(XDR * xdrs, deleg_claim4 * objp)
 	{
 		if (!xdr_open_claim_type4(xdrs, &objp->dc_claim))
 			return false;
@@ -7448,7 +7448,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_WANT_DELEGATION4res(XDR * xdrs,
-						   WANT_DELEGATION4res *objp)
+						   WANT_DELEGATION4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->wdr_status))
 			return false;
@@ -7502,7 +7502,7 @@ extern "C" {
 
 	/* NFSv4.2 */
 	static inline bool xdr_WRITE_SAME4args(XDR * xdrs,
-						WRITE_SAME4args *objp)
+						WRITE_SAME4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->wp_stateid))
 			return false;
@@ -7536,7 +7536,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_WRITE_SAME4resok(XDR * xdrs,
-						write_response4 *objp)
+						write_response4 * objp)
 	{
 		if (!xdr_count4(xdrs, &objp->wr_ids))
 			return false;
@@ -7554,7 +7554,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_READ_PLUS4args(XDR * xdrs, READ_PLUS4args *objp)
+	static inline bool xdr_READ_PLUS4args(XDR * xdrs, READ_PLUS4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->rpa_stateid))
 			return false;
@@ -7566,7 +7566,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_READ_PLUS4resok(XDR * xdrs,
-						read_plus_res4 *objp)
+						read_plus_res4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->rpr_eof))
 			return false;
@@ -7600,7 +7600,7 @@ extern "C" {
 			return false;
 	}
 
-	static inline bool xdr_READ_PLUS4res(XDR * xdrs, READ_PLUS4res *objp)
+	static inline bool xdr_READ_PLUS4res(XDR * xdrs, READ_PLUS4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->rpr_status))
 			return false;
@@ -7616,7 +7616,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_WRITE_SAME4res(XDR * xdrs, WRITE_SAME4res *objp)
+	static inline bool xdr_WRITE_SAME4res(XDR * xdrs, WRITE_SAME4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->wpr_status))
 			return false;
@@ -7632,7 +7632,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_SEEK4args(XDR * xdrs, SEEK4args *objp)
+	static inline bool xdr_SEEK4args(XDR * xdrs, SEEK4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->sa_stateid))
 			return false;
@@ -7643,7 +7643,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_ALLOCATE4args(XDR * xdrs, ALLOCATE4args *objp)
+	static inline bool xdr_ALLOCATE4args(XDR * xdrs, ALLOCATE4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->aa_stateid))
 			return false;
@@ -7655,7 +7655,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_DEALLOCATE4args(XDR * xdrs,
-						DEALLOCATE4args *objp)
+						DEALLOCATE4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->da_stateid))
 			return false;
@@ -7666,7 +7666,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_data_contents(XDR * xdrs, contents *objp)
+	static inline bool xdr_data_contents(XDR * xdrs, contents * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *)&objp->what))
 			return false;
@@ -7691,7 +7691,7 @@ extern "C" {
 			return false;
 	}
 
-	static inline bool xdr_SEEK4resok(XDR * xdrs, seek_res4 *objp)
+	static inline bool xdr_SEEK4resok(XDR * xdrs, seek_res4 * objp)
 	{
 		if (!inline_xdr_bool(xdrs, &objp->sr_eof))
 			return false;
@@ -7700,7 +7700,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_SEEK4res(XDR * xdrs, SEEK4res *objp)
+	static inline bool xdr_SEEK4res(XDR * xdrs, SEEK4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->sr_status))
 			return false;
@@ -7716,21 +7716,21 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_ALLOCATE4res(XDR * xdrs, ALLOCATE4res *objp)
+	static inline bool xdr_ALLOCATE4res(XDR * xdrs, ALLOCATE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->ar_status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_DEALLOCATE4res(XDR * xdrs, DEALLOCATE4res *objp)
+	static inline bool xdr_DEALLOCATE4res(XDR * xdrs, DEALLOCATE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->dr_status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_IO_ADVISE4args(XDR * xdrs, IO_ADVISE4args *objp)
+	static inline bool xdr_IO_ADVISE4args(XDR * xdrs, IO_ADVISE4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->iaa_stateid))
 			return false;
@@ -7743,7 +7743,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_IO_ADVISE4res(XDR * xdrs, IO_ADVISE4res *objp)
+	static inline bool xdr_IO_ADVISE4res(XDR * xdrs, IO_ADVISE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->iaa_status))
 			return false;
@@ -7760,7 +7760,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTERROR4args(XDR * xdrs,
-						LAYOUTERROR4args *objp)
+						LAYOUTERROR4args * objp)
 	{
 		if (!xdr_offset4(xdrs, &objp->lea_offset))
 			return false;
@@ -7778,7 +7778,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTERROR4res(XDR * xdrs,
-						LAYOUTERROR4res *objp)
+						LAYOUTERROR4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->ler_status))
 			return false;
@@ -7786,7 +7786,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTSTATS4args(XDR * xdrs,
-						LAYOUTSTATS4args *objp)
+						LAYOUTSTATS4args * objp)
 	{
 		if (!xdr_offset4(xdrs, &objp->lsa_offset))
 			return false;
@@ -7808,7 +7808,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_LAYOUTSTATS4res(XDR * xdrs,
-						LAYOUTSTATS4res *objp)
+						LAYOUTSTATS4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->lsr_status))
 			return false;
@@ -7817,14 +7817,14 @@ extern "C" {
 
 /* new operations for NFSv4.1 */
 
-	static inline bool xdr_nfs_opnum4(XDR * xdrs, nfs_opnum4 *objp)
+	static inline bool xdr_nfs_opnum4(XDR * xdrs, nfs_opnum4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfs_argop4(XDR * xdrs, nfs_argop4 *objp)
+	static inline bool xdr_nfs_argop4(XDR * xdrs, nfs_argop4 * objp)
 	{
 		struct nfs_request_lookahead slhd = {
 			.flags = 0,
@@ -8177,7 +8177,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_nfs_resop4(XDR * xdrs, nfs_resop4 *objp)
+	static inline bool xdr_nfs_resop4(XDR * xdrs, nfs_resop4 * objp)
 	{
 		if (!xdr_nfs_opnum4(xdrs, &objp->resop))
 			return false;
@@ -8502,7 +8502,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_COMPOUND4args(XDR * xdrs, COMPOUND4args *objp)
+	static inline bool xdr_COMPOUND4args(XDR * xdrs, COMPOUND4args * objp)
 	{
 		if (!xdr_utf8str_cs(xdrs, &objp->tag))
 			return false;
@@ -8513,7 +8513,7 @@ extern "C" {
 			xdrs->x_flags &= ~XDR_FLAG_CKSUM;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->argarray.argarray_val,
-		     (u_int *) & objp->argarray.argarray_len, ~0,
+		     (u_int *) &objp->argarray.argarray_len, ~0,
 		     sizeof(nfs_argop4), (xdrproc_t) xdr_nfs_argop4))
 			return false;
 		return true;
@@ -8527,14 +8527,14 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->resarray.resarray_val,
-		     (u_int *) & objp->resarray.resarray_len, ~0,
+		     (u_int *) &objp->resarray.resarray_len, ~0,
 		     sizeof(nfs_resop4), (xdrproc_t) xdr_nfs_resop4))
 			return false;
 		return true;
 	}
 
 	static inline bool xdr_CB_GETATTR4args(XDR * xdrs,
-					       CB_GETATTR4args *objp)
+					       CB_GETATTR4args * objp)
 	{
 		if (!xdr_nfs_fh4(xdrs, &objp->fh))
 			return false;
@@ -8544,14 +8544,14 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_GETATTR4resok(XDR * xdrs,
-						CB_GETATTR4resok *objp)
+						CB_GETATTR4resok * objp)
 	{
 		if (!xdr_fattr4(xdrs, &objp->obj_attributes))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_CB_GETATTR4res(XDR * xdrs, CB_GETATTR4res *objp)
+	static inline bool xdr_CB_GETATTR4res(XDR * xdrs, CB_GETATTR4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -8567,7 +8567,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CB_RECALL4args(XDR * xdrs, CB_RECALL4args *objp)
+	static inline bool xdr_CB_RECALL4args(XDR * xdrs, CB_RECALL4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->stateid))
 			return false;
@@ -8578,14 +8578,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CB_RECALL4res(XDR * xdrs, CB_RECALL4res *objp)
+	static inline bool xdr_CB_RECALL4res(XDR * xdrs, CB_RECALL4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_CB_ILLEGAL4res(XDR * xdrs, CB_ILLEGAL4res *objp)
+	static inline bool xdr_CB_ILLEGAL4res(XDR * xdrs, CB_ILLEGAL4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->status))
 			return false;
@@ -8593,7 +8593,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_layoutrecall_type4(XDR * xdrs,
-						  layoutrecall_type4 *objp)
+						  layoutrecall_type4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
@@ -8601,7 +8601,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_layoutrecall_file4(XDR * xdrs,
-						  layoutrecall_file4 *objp)
+						  layoutrecall_file4 * objp)
 	{
 		if (!xdr_nfs_fh4(xdrs, &objp->lor_fh))
 			return false;
@@ -8614,7 +8614,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_layoutrecall4(XDR * xdrs, layoutrecall4 *objp)
+	static inline bool xdr_layoutrecall4(XDR * xdrs, layoutrecall4 * objp)
 	{
 		if (!xdr_layoutrecall_type4(xdrs, &objp->lor_recalltype))
 			return false;
@@ -8652,21 +8652,21 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_LAYOUTRECALL4res(XDR * xdrs,
-						   CB_LAYOUTRECALL4res *objp)
+						   CB_LAYOUTRECALL4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->clorr_status))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_notify_type4(XDR * xdrs, notify_type4 *objp)
+	static inline bool xdr_notify_type4(XDR * xdrs, notify_type4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_notify_entry4(XDR * xdrs, notify_entry4 *objp)
+	static inline bool xdr_notify_entry4(XDR * xdrs, notify_entry4 * objp)
 	{
 		if (!xdr_component4(xdrs, &objp->ne_file))
 			return false;
@@ -8675,7 +8675,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_prev_entry4(XDR * xdrs, prev_entry4 *objp)
+	static inline bool xdr_prev_entry4(XDR * xdrs, prev_entry4 * objp)
 	{
 		if (!xdr_notify_entry4(xdrs, &objp->pe_prev_entry))
 			return false;
@@ -8684,7 +8684,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_notify_remove4(XDR * xdrs, notify_remove4 *objp)
+	static inline bool xdr_notify_remove4(XDR * xdrs, notify_remove4 * objp)
 	{
 		if (!xdr_notify_entry4(xdrs, &objp->nrm_old_entry))
 			return false;
@@ -8693,11 +8693,11 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_notify_add4(XDR * xdrs, notify_add4 *objp)
+	static inline bool xdr_notify_add4(XDR * xdrs, notify_add4 * objp)
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->nad_old_entry.nad_old_entry_val,
-		     (u_int *) & objp->nad_old_entry.nad_old_entry_len, 1,
+		     (u_int *) &objp->nad_old_entry.nad_old_entry_len, 1,
 		     sizeof(notify_remove4), (xdrproc_t) xdr_notify_remove4))
 			return false;
 		if (!xdr_notify_entry4(xdrs, &objp->nad_new_entry))
@@ -8706,13 +8706,13 @@ extern "C" {
 		    (xdrs,
 		     (char **)&objp->nad_new_entry_cookie.
 		     nad_new_entry_cookie_val,
-		     (u_int *) & objp->nad_new_entry_cookie.
+		     (u_int *) &objp->nad_new_entry_cookie.
 		     nad_new_entry_cookie_len, 1, sizeof(nfs_cookie4),
 		     (xdrproc_t) xdr_nfs_cookie4))
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->nad_prev_entry.nad_prev_entry_val,
-		     (u_int *) & objp->nad_prev_entry.nad_prev_entry_len, 1,
+		     (u_int *) &objp->nad_prev_entry.nad_prev_entry_len, 1,
 		     sizeof(prev_entry4), (xdrproc_t) xdr_prev_entry4))
 			return false;
 		if (!inline_xdr_bool(xdrs, &objp->nad_last_entry))
@@ -8720,14 +8720,14 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_notify_attr4(XDR * xdrs, notify_attr4 *objp)
+	static inline bool xdr_notify_attr4(XDR * xdrs, notify_attr4 * objp)
 	{
 		if (!xdr_notify_entry4(xdrs, &objp->na_changed_entry))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_notify_rename4(XDR * xdrs, notify_rename4 *objp)
+	static inline bool xdr_notify_rename4(XDR * xdrs, notify_rename4 * objp)
 	{
 		if (!xdr_notify_remove4(xdrs, &objp->nrn_old_entry))
 			return false;
@@ -8737,7 +8737,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_notify_verifier4(XDR * xdrs,
-						notify_verifier4 *objp)
+						notify_verifier4 * objp)
 	{
 		if (!xdr_verifier4(xdrs, objp->nv_old_cookieverf))
 			return false;
@@ -8770,16 +8770,16 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_notifylist4(XDR * xdrs, notifylist4 *objp)
+	static inline bool xdr_notifylist4(XDR * xdrs, notifylist4 * objp)
 	{
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->notifylist4_val,
-		     (u_int *) & objp->notifylist4_len, ~0))
+		     (u_int *) &objp->notifylist4_len, ~0))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_notifylist_dev(XDR * xdrs, notifylist4 *objp,
+	static inline bool xdr_notifylist_dev(XDR * xdrs, notifylist4 * objp,
 					      int type)
 	{
 		if (!xdr_count4(xdrs, &objp->notifylist4_len))
@@ -8798,7 +8798,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_notify4(XDR * xdrs, notify4 *objp)
+	static inline bool xdr_notify4(XDR * xdrs, notify4 * objp)
 	{
 		if (!xdr_bitmap4(xdrs, &objp->notify_mask))
 			return false;
@@ -8807,7 +8807,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_notify_dev(XDR * xdrs, notify4 *objp)
+	static inline bool xdr_notify_dev(XDR * xdrs, notify4 * objp)
 	{
 		if (!xdr_bitmap4(xdrs, &objp->notify_mask))
 			return false;
@@ -8817,7 +8817,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_CB_NOTIFY4args(XDR * xdrs, CB_NOTIFY4args *objp)
+	static inline bool xdr_CB_NOTIFY4args(XDR * xdrs, CB_NOTIFY4args * objp)
 	{
 		if (!xdr_stateid4(xdrs, &objp->cna_stateid))
 			return false;
@@ -8825,13 +8825,13 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->cna_changes.cna_changes_val,
-		     (u_int *) & objp->cna_changes.cna_changes_len, ~0,
+		     (u_int *) &objp->cna_changes.cna_changes_len, ~0,
 		     sizeof(notify4), (xdrproc_t) xdr_notify4))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_CB_NOTIFY4res(XDR * xdrs, CB_NOTIFY4res *objp)
+	static inline bool xdr_CB_NOTIFY4res(XDR * xdrs, CB_NOTIFY4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->cnr_status))
 			return false;
@@ -8839,7 +8839,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_PUSH_DELEG4args(XDR * xdrs,
-						  CB_PUSH_DELEG4args *objp)
+						  CB_PUSH_DELEG4args * objp)
 	{
 		if (!xdr_nfs_fh4(xdrs, &objp->cpda_fh))
 			return false;
@@ -8849,7 +8849,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_PUSH_DELEG4res(XDR * xdrs,
-						 CB_PUSH_DELEG4res *objp)
+						 CB_PUSH_DELEG4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->cpdr_status))
 			return false;
@@ -8857,7 +8857,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_RECALL_ANY4args(XDR * xdrs,
-						  CB_RECALL_ANY4args *objp)
+						  CB_RECALL_ANY4args * objp)
 	{
 		if (!inline_xdr_u_int32_t(xdrs, &objp->craa_objects_to_keep))
 			return false;
@@ -8867,7 +8867,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_RECALL_ANY4res(XDR * xdrs,
-						 CB_RECALL_ANY4res *objp)
+						 CB_RECALL_ANY4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->crar_status))
 			return false;
@@ -8876,7 +8876,7 @@ extern "C" {
 
 	static inline bool xdr_CB_RECALLABLE_OBJ_AVAIL4args(
 					XDR * xdrs,
-					CB_RECALLABLE_OBJ_AVAIL4args *objp)
+					CB_RECALLABLE_OBJ_AVAIL4args * objp)
 	{
 		if (!xdr_CB_RECALL_ANY4args(xdrs, objp))
 			return false;
@@ -8885,7 +8885,7 @@ extern "C" {
 
 	static inline bool xdr_CB_RECALLABLE_OBJ_AVAIL4res(
 					XDR * xdrs,
-					CB_RECALLABLE_OBJ_AVAIL4res *objp)
+					CB_RECALLABLE_OBJ_AVAIL4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->croa_status))
 			return false;
@@ -8893,7 +8893,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_RECALL_SLOT4args(XDR * xdrs,
-						   CB_RECALL_SLOT4args *objp)
+						   CB_RECALL_SLOT4args * objp)
 	{
 		if (!xdr_slotid4(xdrs, &objp->rsa_target_highest_slotid))
 			return false;
@@ -8901,7 +8901,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_RECALL_SLOT4res(XDR * xdrs,
-						  CB_RECALL_SLOT4res *objp)
+						  CB_RECALL_SLOT4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->rsr_status))
 			return false;
@@ -8909,7 +8909,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_referring_call4(XDR * xdrs,
-					       referring_call4 *objp)
+					       referring_call4 * objp)
 	{
 		if (!xdr_sequenceid4(xdrs, &objp->rc_sequenceid))
 			return false;
@@ -8928,7 +8928,7 @@ extern "C" {
 		    (xdrs,
 		     (char **)&objp->rcl_referring_calls.
 		     rcl_referring_calls_val,
-		     (u_int *) & objp->rcl_referring_calls.
+		     (u_int *) &objp->rcl_referring_calls.
 		     rcl_referring_calls_len, ~0, sizeof(referring_call4),
 		     (xdrproc_t) xdr_referring_call4))
 			return false;
@@ -8936,7 +8936,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_SEQUENCE4args(XDR * xdrs,
-						CB_SEQUENCE4args *objp)
+						CB_SEQUENCE4args * objp)
 	{
 		if (!xdr_sessionid4(xdrs, objp->csa_sessionid))
 			return false;
@@ -8952,7 +8952,7 @@ extern "C" {
 		    (xdrs,
 		     (char **)&objp->csa_referring_call_lists.
 		     csa_referring_call_lists_val,
-		     (u_int *) & objp->csa_referring_call_lists.
+		     (u_int *) &objp->csa_referring_call_lists.
 		     csa_referring_call_lists_len, ~0,
 		     sizeof(referring_call_list4),
 		     (xdrproc_t) xdr_referring_call_list4))
@@ -8961,7 +8961,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_SEQUENCE4resok(XDR * xdrs,
-						 CB_SEQUENCE4resok *objp)
+						 CB_SEQUENCE4resok * objp)
 	{
 		if (!xdr_sessionid4(xdrs, objp->csr_sessionid))
 			return false;
@@ -8977,7 +8977,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_SEQUENCE4res(XDR * xdrs,
-					       CB_SEQUENCE4res *objp)
+					       CB_SEQUENCE4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->csr_status))
 			return false;
@@ -9016,7 +9016,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_NOTIFY_LOCK4args(XDR * xdrs,
-						   CB_NOTIFY_LOCK4args *objp)
+						   CB_NOTIFY_LOCK4args * objp)
 	{
 		if (!xdr_nfs_fh4(xdrs, &objp->cnla_fh))
 			return false;
@@ -9026,7 +9026,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_NOTIFY_LOCK4res(XDR * xdrs,
-						  CB_NOTIFY_LOCK4res *objp)
+						  CB_NOTIFY_LOCK4res * objp)
 	{
 		if (!xdr_nfsstat4(xdrs, &objp->cnlr_status))
 			return false;
@@ -9048,7 +9048,7 @@ extern "C" {
 	{
 		if (!xdr_array
 		    (xdrs, (char **)&objp->cnda_changes.cnda_changes_val,
-		     (u_int *) & objp->cnda_changes.cnda_changes_len, ~0,
+		     (u_int *) &objp->cnda_changes.cnda_changes_len, ~0,
 		     sizeof(notify4), (xdrproc_t) xdr_notify_dev))
 			return false;
 		return true;
@@ -9065,14 +9065,14 @@ extern "C" {
 
 /* Callback operations new to NFSv4.1 */
 
-	static inline bool xdr_nfs_cb_opnum4(XDR * xdrs, nfs_cb_opnum4 *objp)
+	static inline bool xdr_nfs_cb_opnum4(XDR * xdrs, nfs_cb_opnum4 * objp)
 	{
 		if (!inline_xdr_enum(xdrs, (enum_t *) objp))
 			return false;
 		return true;
 	}
 
-	static inline bool xdr_nfs_cb_argop4(XDR * xdrs, nfs_cb_argop4 *objp)
+	static inline bool xdr_nfs_cb_argop4(XDR * xdrs, nfs_cb_argop4 * objp)
 	{
 		if (!inline_xdr_u_int(xdrs, &objp->argop))
 			return false;
@@ -9146,7 +9146,7 @@ extern "C" {
 		return true;
 	}
 
-	static inline bool xdr_nfs_cb_resop4(XDR * xdrs, nfs_cb_resop4 *objp)
+	static inline bool xdr_nfs_cb_resop4(XDR * xdrs, nfs_cb_resop4 * objp)
 	{
 		if (!inline_xdr_u_int(xdrs, &objp->resop))
 			return false;
@@ -9224,7 +9224,7 @@ extern "C" {
 	}
 
 	static inline bool xdr_CB_COMPOUND4args(XDR * xdrs,
-						CB_COMPOUND4args *objp)
+						CB_COMPOUND4args * objp)
 	{
 		if (!xdr_utf8str_cs(xdrs, &objp->tag))
 			return false;
@@ -9234,7 +9234,7 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->argarray.argarray_val,
-		     (u_int *) & objp->argarray.argarray_len, ~0,
+		     (u_int *) &objp->argarray.argarray_len, ~0,
 		     sizeof(nfs_cb_argop4), (xdrproc_t) xdr_nfs_cb_argop4))
 			return false;
 		return true;
@@ -9249,7 +9249,7 @@ extern "C" {
 			return false;
 		if (!xdr_array
 		    (xdrs, (char **)&objp->resarray.resarray_val,
-		     (u_int *) & objp->resarray.resarray_len, ~0,
+		     (u_int *) &objp->resarray.resarray_len, ~0,
 		     sizeof(nfs_cb_resop4), (xdrproc_t) xdr_nfs_cb_resop4))
 			return false;
 		return true;
