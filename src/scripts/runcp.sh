@@ -189,7 +189,7 @@ FIND=check_find
 COMMIT=HEAD
 TYPEDEF=""
 
-NO_SPACING_FILES="nfs23.h|nfsv41.h|nlm4.h|nsm.h|rquota.h"
+NO_SPACING_FILES="nfs23.h|nlm4.h|nsm.h|rquota.h"
 
 NO_COMPLEX_MACRO_FILES="include/ganesha_dbus.h|include/server_stats_private.h"
 NO_COMPLEX_MACRO_FILES="$NO_COMPLEX_MACRO_FILES|include/gsh_intrinsic.h"
