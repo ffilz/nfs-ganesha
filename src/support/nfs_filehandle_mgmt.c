@@ -142,7 +142,7 @@ cache_entry_t *nfs3_FhandleToCache(nfs_fh3 *fh3,
 	/* Cast the fh as a non opaque structure */
 	v3_handle = (file_handle_v3_t *) (fh3->data.data_val);
 
-	assert(v3_handle->exportid == op_ctx->export->export_id);
+	assert(ntohs(v3_handle->id_exports) == op_ctx->export->export_id);
 
 	export = op_ctx->fsal_export;
 
@@ -207,7 +207,7 @@ bool nfs4_FSALToFhandle(nfs_fh4 *fh4,
 	file_handle->fhversion = GANESHA_FH_VERSION;
 	file_handle->fs_len = fh_desc.len;	/* set the actual size */
 	/* keep track of the export id */
-	file_handle->id.exports = exp->export_id;
+	file_handle->id.exports = htons(exp->export_id);
 
 	/* Set the len */
 	fh4->nfs_fh4_len = nfs4_sizeof_handle(file_handle);
@@ -258,7 +258,7 @@ bool nfs3_FSALToFhandle(nfs_fh3 *fh3,
 	file_handle->fhversion = GANESHA_FH_VERSION;
 	file_handle->fs_len = fh_desc.len;	/* set the actual size */
 	/* keep track of the export id */
-	file_handle->exportid = exp->export_id;
+	file_handle->id_exports = htons(exp->export_id);
 
 	/* Set the len */
 	/* re-adjust to as built */
@@ -290,7 +290,7 @@ int nfs4_Is_Fh_DSHandle(nfs_fh4 *fh)
 
 	fhandle4 = (file_handle_v4_t *) (fh->nfs_fh4_val);
 
-	return (fhandle4->flags & FILE_HANDLE_V4_FLAG_DS) != 0;
+	return (fhandle4->fhflags_2 & FILE_HANDLE_V4_FLAG_DS) != 0;
 }
 
 /**
@@ -359,7 +359,7 @@ int nfs4_Is_Fh_Invalid(nfs_fh4 *fh)
 			} else {
 				LogInfo(COMPONENT_FILEHANDLE,
 					"INVALID HANDLE: is_pseudofs=%d",
-					pfile_handle->id.exports == 0);
+					ntohs(pfile_handle->id.exports) == 0);
 			}
 		}
 
