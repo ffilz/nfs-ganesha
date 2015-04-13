@@ -46,7 +46,14 @@
  * they come/go are 4 byte aligned.
  */
 
-#define GANESHA_FH_VERSION 0x41
+#define GANESHA_FH_VERSION 0x43
+
+/* Flags for flags byte 1 (used by NFS v3 and NFS v4) */
+#define FH_BIG_ENDIAN		0x80 /*< FH header is big endian */
+#define FH_FSAL_BIG_ENDIAN	0x40 /*< FSAL FH is big endian */
+
+/* Flags for flags byte 2 (used only for NFS v4) */
+#define FILE_HANDLE_V4_FLAG_DS	0x01 /*< handle for a DS */
 
 /**
  * @brief An NFSv3 handle
@@ -55,9 +62,9 @@
  */
 
 typedef struct file_handle_v3 {
-	uint8_t fhversion;	/*< Set to 0x41 to separate from Linux knfsd */
-	uint8_t xattr_pos;	/*< Used for xattr management */
-	uint16_t exportid;	/*< Must be correlated to exportlist_t::id */
+	uint8_t fhversion;	/*< Set to 0x43 to separate from Linux knfsd */
+	uint8_t fhflags_1;	/*< Flags byte 1 */
+	uint16_t id_exports;	/*< Must be correlated to exportlist_t::id */
 	uint8_t fs_len;		/*< Actual length of opaque handle */
 	uint8_t fsopaque[];	/*< Persistent part of FSAL handle,
 				    <= 59 bytes */
@@ -97,8 +104,6 @@ static inline size_t nfs3_sizeof_handle(struct file_handle_v3 *hdl)
 	return hsize;
 }
 
-#define FILE_HANDLE_V4_FLAG_DS 0x0001
-
 /**
  * @brief An NFSv4 filehandle
  *
@@ -107,11 +112,12 @@ static inline size_t nfs3_sizeof_handle(struct file_handle_v3 *hdl)
 
 typedef struct __attribute__ ((__packed__)) file_handle_v4 {
 	uint8_t fhversion;	/*< Set to 0x41 to separate from Linux knfsd */
+	uint8_t fhflags_1;	/*< Flags byte 1 */
 	union {
-		uint16_t exports;	/*< FSAL exports, export_by_id */
-		uint16_t servers;	/*< FSAL servers, server_by_id */
+		uint16_t exports;	/*< FSAL export, export_by_id */
+		uint16_t servers;	/*< FSAL server, server_by_id */
 	} id;
-	uint16_t flags;		/*< To replace things like ds_flag */
+	uint8_t fhflags_2;	/*< Flags byte 2 */
 	uint8_t fs_len;		/*< Length of opaque handle */
 	uint8_t fsopaque[];	/*< FSAL handle */
 } file_handle_v4_t;
@@ -179,7 +185,7 @@ static inline short nfs3_FhandleToExportId(nfs_fh3 *pfh3)
 
 	pfile_handle = (file_handle_v3_t *) (pfh3->data.data_val);
 
-	return pfile_handle->exportid;
+	return ntohs(pfile_handle->id_exports);
 }				/* nfs3_FhandleToExportId */
 
 static inline short nlm4_FhandleToExportId(netobj *pfh3)

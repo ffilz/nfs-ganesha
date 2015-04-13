@@ -108,7 +108,7 @@ int nfs4_op_putfh(struct nfs_argop4 *op, compound_data_t *data,
 		/* Find any existing server by the "id" from the handle,
 		 * before releasing the old DS (to prevent thrashing).
 		 */
-		pds = pnfs_ds_get(v4_handle->id.servers);
+		pds = pnfs_ds_get(ntohs(v4_handle->id.servers));
 		if (pds == NULL) {
 			LogInfoAlt(COMPONENT_DISPATCH, COMPONENT_EXPORT,
 				"NFS4 Request from client (%s) "
@@ -116,7 +116,7 @@ int nfs4_op_putfh(struct nfs_argop4 *op, compound_data_t *data,
 				op_ctx->client
 					? op_ctx->client->hostaddr_str
 					: "unknown",
-				v4_handle->id.servers);
+				ntohs(v4_handle->id.servers));
 
 			res_PUTFH4->status = NFS4ERR_STALE;
 			return res_PUTFH4->status;
@@ -124,7 +124,7 @@ int nfs4_op_putfh(struct nfs_argop4 *op, compound_data_t *data,
 
 		/* If old CurrentFH had a related server, release reference. */
 		if (op_ctx->fsal_pnfs_ds != NULL) {
-			changed = v4_handle->id.servers
+			changed = ntohs(v4_handle->id.servers)
 				!= op_ctx->fsal_pnfs_ds->id_servers;
 			pnfs_ds_put(op_ctx->fsal_pnfs_ds);
 		}
@@ -190,7 +190,7 @@ int nfs4_op_putfh(struct nfs_argop4 *op, compound_data_t *data,
 		/* Find any existing export by the "id" from the handle,
 		 * before releasing the old export (to prevent thrashing).
 		 */
-		exporting = get_gsh_export(v4_handle->id.exports);
+		exporting = get_gsh_export(ntohs(v4_handle->id.exports));
 		if (exporting == NULL) {
 			LogInfoAlt(COMPONENT_DISPATCH, COMPONENT_EXPORT,
 				"NFS4 Request from client (%s) "
@@ -198,7 +198,7 @@ int nfs4_op_putfh(struct nfs_argop4 *op, compound_data_t *data,
 				op_ctx->client
 					? op_ctx->client->hostaddr_str
 					: "unknown",
-				v4_handle->id.exports);
+				ntohs(v4_handle->id.exports));
 
 			res_PUTFH4->status = NFS4ERR_STALE;
 			return res_PUTFH4->status;
@@ -206,7 +206,7 @@ int nfs4_op_putfh(struct nfs_argop4 *op, compound_data_t *data,
 
 		/* If old CurrentFH had a related export, release reference. */
 		if (op_ctx->export != NULL) {
-			changed = v4_handle->id.exports
+			changed = ntohs(v4_handle->id.exports)
 				!= op_ctx->export->export_id;
 			put_gsh_export(op_ctx->export);
 		}
