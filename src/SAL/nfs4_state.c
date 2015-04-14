@@ -697,31 +697,15 @@ void release_openstate(state_owner_t *owner)
 void revoke_owner_delegs(state_owner_t *client_owner)
 {
 	struct glist_head *glist, *glistn;
-	state_t *state, *first;
+	state_t *state;
 	cache_entry_t *entry;
-	bool so_mutex_held;
+	struct glist_head revoke_list; /* delegation states that need revoke */
 
- again:
-	first = NULL;
+	glist_init(&revoke_list);
 	PTHREAD_MUTEX_lock(&client_owner->so_mutex);
-	so_mutex_held = true;
-
 	glist_for_each_safe(glist, glistn,
-			&client_owner->so_owner.so_nfs4_owner.so_state_list) {
+		       &client_owner->so_owner.so_nfs4_owner.so_state_list) {
 		state = glist_entry(glist, state_t, state_owner_list);
-
-		if (first == NULL)
-			first = state;
-		else if (first == state)
-			break; /* TODO all done */
-
-		/* Move entry to end of list to handle errors and skipping of
-		 * non-delegation states.
-		 */
-		glist_del(&state->state_owner_list);
-		glist_add_tail(
-			&client_owner->so_owner.so_nfs4_owner.so_state_list,
-			&state->state_owner_list);
 
 		/* Skip non-delegation states. */
 		if (state->state_type != STATE_TYPE_DELEG)
@@ -740,9 +724,25 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 			continue;
 		}
 
-		PTHREAD_MUTEX_unlock(&client_owner->so_mutex);
-		so_mutex_held = false;
+		glist_del(glist);
+		glist_add(&revoke_list, glist);
 
+	}
+	PTHREAD_MUTEX_unlock(&client_owner->so_mutex);
+
+	while (true) {
+		state = glist_first_entry(&revoke_list, state_t,
+					  state_owner_list);
+		if (state == NULL)
+			break;
+
+		/* Put this list entry at the end of the list to avoid
+		 * processing the same entry in case of errors
+		 */
+		glist_del(&state->state_owner_list);
+		glist_add_tail(&revoke_list, &state->state_owner_list);
+
+		entry = state->state_entry; /* Already ref'ed above */
 		PTHREAD_RWLOCK_wrlock(&entry->state_lock);
 		state_deleg_revoke(entry, state);
 		PTHREAD_RWLOCK_unlock(&entry->state_lock);
@@ -751,13 +751,7 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 		cache_inode_close(entry, 0);
 
 		cache_inode_lru_unref(entry, LRU_FLAG_NONE);
-
-		/* Since we dropped so_mutex, we must restart the loop. */
-		goto again;
 	}
-
-	if (so_mutex_held)
-		PTHREAD_MUTEX_unlock(&client_owner->so_mutex);
 }
 
 /**
