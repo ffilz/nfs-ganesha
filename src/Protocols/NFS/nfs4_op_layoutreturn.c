@@ -104,6 +104,7 @@ int nfs4_op_layoutreturn(struct nfs_argop4 *op, compound_data_t *data,
 	struct root_op_context root_op_context;
 	/* Keep track of so_mutex */
 	bool so_mutex_locked = false;
+	state_t *first;
 
 	resp->resop = NFS4_OP_LAYOUTRETURN;
 
@@ -258,6 +259,10 @@ int nfs4_op_layoutreturn(struct nfs_argop4 *op, compound_data_t *data,
 			layout_state = glist_entry(glist,
 						   state_t,
 						   state_owner_list);
+			if (first == NULL)
+				first = layout_state;
+			else if (first == layout_state) /* We are done */
+				break;
 
 			/* Move to end of list in case of error to ease
 			 * retries and push off dealing with non-layout

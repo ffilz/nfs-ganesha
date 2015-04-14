@@ -164,7 +164,7 @@ state_status_t state_lookup_layout_state(cache_entry_t *entry,
  */
 void revoke_owner_layouts(state_owner_t *client_owner)
 {
-	state_t *state;
+	state_t *state, *first;
 	cache_entry_t *entry;
 	int errcnt = 0;
 	struct glist_head *glist, *glistn;
@@ -174,6 +174,7 @@ void revoke_owner_layouts(state_owner_t *client_owner)
 
 	PTHREAD_MUTEX_lock(&client_owner->so_mutex);
 	so_mutex_held = true;
+	first = NULL;
 
 	glist_for_each_safe(glist, glistn,
 			&client_owner->so_owner.so_nfs4_owner.so_state_list) {
@@ -185,6 +186,15 @@ void revoke_owner_layouts(state_owner_t *client_owner)
 		};
 
 		state = glist_entry(glist, state_t, state_owner_list);
+
+		if (first == NULL)
+			first = state;
+		else if (first == state) {
+			/* We have looked at all the states and not
+			 * encountered any layout state, all done!
+			 */
+			break;
+		}
 
 		/* Move entry to end of list to handle errors and skipping of
 		 * non-layout states.
