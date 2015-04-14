@@ -3568,6 +3568,11 @@ extern "C" {
 		if (xdrs->x_op == XDR_ENCODE) {
 			fh = (file_handle_v4_t *)objp->nfs_fh4_val;
 			fh->id.exports = htons(fh->id.exports);
+#if (BYTE_ORDER == BIG_ENDIAN)
+			fh->fhflags1 |= FH_FSAL_BIG_ENDIAN;
+#else
+			fh->fhflags1 &= ~FH_FSAL_BIG_ENDIAN;
+#endif
 		}
 		if (!inline_xdr_bytes
 		    (xdrs, (char **)&objp->nfs_fh4_val,
