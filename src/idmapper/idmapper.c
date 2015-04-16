@@ -313,6 +313,42 @@ static bool atless2id(char *name, size_t len, uint32_t *id,
 	return false;
 }
 
+static int name_to_gid(const char *name, gid_t *gid)
+{
+	struct group g;
+	struct group *gres = NULL;
+	char *buf;
+	size_t buflen = sysconf(_SC_GETGR_R_SIZE_MAX);
+	int err;
+
+	if (buflen == -1)
+		buflen = PWENT_BEST_GUESS_LEN;
+
+	while (1) {
+		buf = gsh_malloc(buflen);
+		if (buf == NULL)
+			return ENOMEM;
+
+		err = getgrnam_r(name, &g, buf, buflen, &gres);
+		if (err == ERANGE) {
+			buflen *= 2;
+			free(buf);
+		} else {
+			break;
+		}
+	}
+
+	if (err == 0) {
+		if (gres == NULL)
+			err = ENOENT;
+		else
+			*gid = gres->gr_gid;
+	}
+	gsh_free(buf);
+
+	return err;
+}
+
 /**
  * @brief Lookup a name using PAM
  *
@@ -340,23 +376,15 @@ static bool pwentname2id(char *name, size_t len, uint32_t *id,
 		*at = '\0';
 	}
 	if (group) {
-		struct group g;
-		struct group *gres;
-		int size = sysconf(_SC_GETGR_R_SIZE_MAX);
-		char *gbuf;
+		int err;
 
-		if (size == -1)
-			size = PWENT_BEST_GUESS_LEN;
-
-		gbuf = alloca(size);
-
-		if (getgrnam_r(name, &g, gbuf, size, &gres) != 0) {
+		err = name_to_gid(name, id);
+		if (err == 0)
+			return true;
+		else if (err != ENOENT) {
 			LogInfo(COMPONENT_IDMAPPER, "getgrnam_r %s failed",
 				 name);
 			return false;
-		} else if (gres != NULL) {
-			*id = gres->gr_gid;
-			return true;
 		}
 #ifndef USE_NFSIDMAP
 		else {
