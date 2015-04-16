@@ -187,6 +187,8 @@ int _9p_attach(struct _9p_request_data *req9p, void *worker_data,
 			goto errout;
 		}
 
+		check_attrlist_field(pfsal_handle);
+
 		pfsal_handle->obj_ops.handle_to_key(pfsal_handle,
 						 &fsal_data.fh_desc);
 		fsal_data.export = export->fsal_export;

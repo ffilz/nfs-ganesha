@@ -39,6 +39,7 @@
 #include "nfs_proto_functions.h"
 #include "client_mgr.h"
 #include "export_mgr.h"
+#include "cache_inode.h"
 
 /**
  * @brief The Mount proc mount function, for all versions.
@@ -148,6 +149,8 @@ int mnt_Mnt(nfs_arg_t *arg,
 			res->res_mnt3.fhs_status = MNT3ERR_ACCES;
 			goto out;
 		}
+
+		check_attrlist_field(pfsal_handle);
 	}
 
 	/* convert the fsal_handle to a file handle */

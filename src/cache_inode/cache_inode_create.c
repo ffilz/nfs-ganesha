@@ -205,6 +205,7 @@ cache_inode_create(cache_entry_t *parent,
 		*entry = NULL;
 		goto out;
 	}
+	check_attrlist_field(object_handle);
 	status =
 	    cache_inode_new_entry(object_handle, CACHE_INODE_FLAG_CREATE,
 				  entry);
