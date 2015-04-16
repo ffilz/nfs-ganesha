@@ -1030,5 +1030,33 @@ cache_inode_get_changeid4(cache_entry_t *entry)
 	return changeid;
 }
 
+/**
+ * Checks if attrlist field of fsal_obj_handle is correctly set.
+ *
+ * This functions tries to ensures retrocompatibility for fsals which are not
+ * using attrlist pointer yet. It also logs warning messages reporting that the
+ * fsal uses deprecated features.
+ *
+ * If the attrlist value is NULL, we assume the fsal is still using the
+ * deprecated attributes field, so the pointer is set to this field.
+ *
+ * @param[in,out] handle Handle which attrlist field is checked.
+ */
+static inline void check_attrlist_field(struct fsal_obj_handle *handle)
+{
+	if (handle->attrs == &handle->attributes) {
+		LogDebug(COMPONENT_CACHE_INODE,
+			 "FSAL %s is still using deprecated attribute field of fsal_obj_handle type.",
+			 handle->fsal->name);
+	}
+
+	if (handle->attrs == NULL) {
+		LogDebug(COMPONENT_CACHE_INODE,
+			 "FSAL %s hasn't initialized the 'attrlist' field of its handle. Using deprecated 'attributes' field instead.",
+			 handle->fsal->name);
+		handle->attrs = &handle->attributes;
+	}
+}
+
 #endif				/* CACHE_INODE_H */
 /** @} */
