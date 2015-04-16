@@ -185,6 +185,8 @@ cache_inode_lookup_impl(cache_entry_t *parent,
 		goto out;
 	}
 
+	check_attrlist_field(object_handle);
+
 	LogFullDebug(COMPONENT_CACHE_INODE, "Creating entry for %s", name);
 
 	/* Allocation of a new entry in the cache */

@@ -1607,6 +1607,8 @@ int init_export_root(struct gsh_export *export)
 		goto out;
 	}
 
+	check_attrlist_field(root_handle);
+
 	/* Add this entry to the Cache Inode as a "root" entry */
 
 	/* Get the cache inode entry (and an LRU reference */

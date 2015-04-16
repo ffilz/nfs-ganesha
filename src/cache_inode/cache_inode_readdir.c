@@ -400,6 +400,8 @@ populate_dirent(const char *name, void *dir_state,
 		return !cache_param.retry_readdir;
 	}
 
+	check_attrlist_field(entry_hdl);
+
 	LogFullDebug(COMPONENT_NFS_READDIR, "Creating entry for %s", name);
 
 	*state->status =

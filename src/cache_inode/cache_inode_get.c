@@ -246,6 +246,8 @@ cache_inode_get(cache_inode_fsal_data_t *fsdata,
 		return status;
 	}
 
+	check_attrlist_field(new_hdl);
+
 	LogFullDebug(COMPONENT_CACHE_INODE, "Creating entry");
 
 	status = cache_inode_new_entry(new_hdl, CACHE_INODE_FLAG_NONE,
@@ -321,6 +323,8 @@ cache_inode_get_keyed(cache_inode_key_t *key,
 				 cache_inode_err_str(*status));
 			goto out;
 		}
+
+		check_attrlist_field(new_hdl);
 
 		LogFullDebug(COMPONENT_CACHE_INODE, "Creating entry");
 
