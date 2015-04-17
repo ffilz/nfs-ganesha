@@ -312,7 +312,7 @@ LogEntryRefCount(const char *reason, state_lock_entry_t *le, int32_t refcount)
 			     ", blocked=%s/%p, state=%p, refcount=%"PRIu32
 			     ", owner={%s}",
 			     reason, le, le->sle_entry,
-			     (uint64_t) le->sle_entry->obj_handle->attributes.
+			     (uint64_t) get_attrs(le->sle_entry->obj_handle)->
 			     fileid, (unsigned int)le->sle_export->export_id,
 			     str_lockt(le->sle_lock.lock_type),
 			     le->sle_lock.lock_start,
@@ -450,7 +450,7 @@ void log_lock(log_components_t component,
 			", type=%s, start=0x%"PRIx64", end=0x%"PRIx64
 			", owner={%s}",
 			reason, entry,
-			(uint64_t) entry->obj_handle->attributes.fileid,
+			(uint64_t) get_attrs(entry->obj_handle)->fileid,
 			str_lockt(lock->lock_type),
 			lock->lock_start,
 			lock_end(lock), str);
@@ -1191,7 +1191,7 @@ int display_lock_cookie_entry(struct display_buffer *dspbuf,
 
 	b_left = display_printf(dspbuf, " entry {%p fileid=%" PRIu64 "} lock {",
 				he->sce_entry,
-				he->sce_entry->obj_handle->attributes.fileid);
+				get_attrs(he->sce_entry->obj_handle)->fileid);
 
 	if (b_left <= 0)
 		return b_left;
