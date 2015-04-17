@@ -117,12 +117,13 @@ cache_inode_setattr(cache_entry_t *entry,
 	 *     mandatory locking, and is not cleared by a chown().
 	 *
 	 */
+	struct attrlist *entry_attrs = get_attrs(entry->obj_handle);
 	if (creds->caller_uid != 0 &&
 	    (FSAL_TEST_MASK(attr->mask, ATTR_OWNER) ||
 	     FSAL_TEST_MASK(attr->mask, ATTR_GROUP)) &&
-	    ((entry->obj_handle->attributes.mode &
+	    ((entry_attrs->mode &
 	      (S_IXOTH | S_IXUSR | S_IXGRP)) != 0) &&
-	    ((entry->obj_handle->attributes.mode &
+	    ((entry_attrs->mode &
 	      (S_ISUID | S_ISGID)) != 0)) {
 		/* Non-priviledged user changing ownership on an executable
 		 * file with S_ISUID or S_ISGID bit set, need to be cleared.
@@ -131,7 +132,7 @@ cache_inode_setattr(cache_entry_t *entry,
 			/* Mode wasn't being set, so set it now, start with
 			 * the current attributes.
 			 */
-			attr->mode = entry->obj_handle->attributes.mode;
+			attr->mode = entry_attrs->mode;
 			FSAL_SET_MASK(attr->mask, ATTR_MODE);
 		}
 
@@ -139,7 +140,7 @@ cache_inode_setattr(cache_entry_t *entry,
 		 * In that case, S_ISGID indicates mandatory locking and
 		 * is not cleared by chown.
 		 */
-		if ((entry->obj_handle->attributes.mode & S_IXGRP) != 0)
+		if ((entry_attrs->mode & S_IXGRP) != 0)
 			attr->mode &= ~S_ISGID;
 
 		/* Clear S_ISUID. */
@@ -160,13 +161,13 @@ cache_inode_setattr(cache_entry_t *entry,
 	if (creds->caller_uid != 0 &&
 	    FSAL_TEST_MASK(attr->mask, ATTR_MODE) &&
 	    (attr->mode & S_ISGID) != 0 &&
-	    not_in_group_list(entry->obj_handle->attributes.group)) {
+	    not_in_group_list(entry_attrs->group)) {
 		/* Clear S_ISGID */
 		attr->mode &= ~S_ISGID;
 	}
 
-	saved_acl = obj_handle->attributes.acl;
-	before = obj_handle->attributes.change;
+	saved_acl = entry_attrs->acl;
+	before = entry_attrs->change;
 	fsal_status = obj_handle->obj_ops.setattrs(obj_handle, attr);
 	if (FSAL_IS_ERROR(fsal_status)) {
 		status = cache_inode_error_convert(fsal_status);
@@ -178,7 +179,7 @@ cache_inode_setattr(cache_entry_t *entry,
 		goto unlock;
 	}
 	fsal_status = obj_handle->obj_ops.getattrs(obj_handle);
-	*attr = obj_handle->attributes;
+	*attr = *entry_attrs;
 	if (FSAL_IS_ERROR(fsal_status)) {
 		status = cache_inode_error_convert(fsal_status);
 		if (fsal_status.major == ERR_FSAL_STALE) {
@@ -188,8 +189,8 @@ cache_inode_setattr(cache_entry_t *entry,
 		}
 		goto unlock;
 	}
-	if (before == obj_handle->attributes.change)
-		obj_handle->attributes.change++;
+	if (before == entry_attrs->change)
+		entry_attrs->change++;
 	/* Decrement refcount on saved ACL */
 	nfs4_acl_release_entry(saved_acl, &acl_status);
 	if (acl_status != NFS_V4_ACL_SUCCESS)
@@ -200,7 +201,7 @@ cache_inode_setattr(cache_entry_t *entry,
 
 	/* Copy the complete set of new attributes out. */
 
-	*attr = entry->obj_handle->attributes;
+	*attr = *entry_attrs;
 
 	status = CACHE_INODE_SUCCESS;
 

@@ -272,7 +272,7 @@ cache_inode_rdwr_plus(cache_entry_t *entry,
 		if (status != CACHE_INODE_SUCCESS)
 			goto out;
 	} else
-		cache_inode_set_time_current(&obj_hdl->attributes.atime);
+		cache_inode_set_time_current(&get_attrs(obj_hdl)->atime);
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 	attributes_locked = false;
 

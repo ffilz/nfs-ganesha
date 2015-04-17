@@ -879,8 +879,10 @@ void cache_inode_destroyer(void);
 static inline void
 cache_inode_fixup_md(cache_entry_t *entry)
 {
+	struct attrlist *attributes = get_attrs(entry->obj_handle);
+
 	/* Set the refresh time for the cache entry */
-	if (entry->obj_handle->attributes.expire_time_attr > 0)
+	if (attributes->expire_time_attr > 0)
 		entry->attr_time = time(NULL);
 	else
 		entry->attr_time = 0;
@@ -891,10 +893,10 @@ cache_inode_fixup_md(cache_entry_t *entry)
 	 * Also, fsal attrs has a changetime.
 	 * (Matt). */
 	entry->change_time =
-	    timespec_to_nsecs(&entry->obj_handle->attributes.chgtime);
+	    timespec_to_nsecs(&attributes->chgtime);
 
 	/* Almost certainly not necessary */
-	entry->type = entry->obj_handle->attributes.type;
+	entry->type = attributes->type;
 	/* We have just loaded the attributes from the FSAL. */
 	entry->flags |= CACHE_INODE_TRUST_ATTRS;
 }
@@ -910,23 +912,25 @@ cache_inode_fixup_md(cache_entry_t *entry)
 static inline bool
 cache_inode_is_attrs_valid(const cache_entry_t *entry)
 {
+	struct attrlist *attributes = get_attrs(entry->obj_handle);
+
 	if (!(entry->flags & CACHE_INODE_TRUST_ATTRS))
 		return false;
 
-	if (FSAL_TEST_MASK(entry->obj_handle->attributes.mask, ATTR_RDATTR_ERR))
+	if (FSAL_TEST_MASK(attributes->mask, ATTR_RDATTR_ERR))
 		return false;
 
 	if (entry->type == DIRECTORY
 	    && cache_param.getattr_dir_invalidation)
 		return false;
 
-	if (entry->obj_handle->attributes.expire_time_attr == 0)
+	if (attributes->expire_time_attr == 0)
 		return false;
 
-	if (entry->obj_handle->attributes.expire_time_attr > 0) {
+	if (attributes->expire_time_attr > 0) {
 		time_t current_time = time(NULL);
 		if (current_time - entry->attr_time >
-		    entry->obj_handle->attributes.expire_time_attr)
+		    attributes->expire_time_attr)
 			return false;
 	}
 
@@ -950,18 +954,19 @@ cache_inode_refresh_attrs(cache_entry_t *entry)
 {
 	fsal_status_t fsal_status = { ERR_FSAL_NO_ERROR, 0 };
 	cache_inode_status_t cache_status = CACHE_INODE_SUCCESS;
+	struct attrlist *attributes = get_attrs(entry->obj_handle);
 
-	if (entry->obj_handle->attributes.acl) {
+	if (attributes->acl) {
 		fsal_acl_status_t acl_status = 0;
 
-		nfs4_acl_release_entry(entry->obj_handle->attributes.acl,
+		nfs4_acl_release_entry(attributes->acl,
 				       &acl_status);
 		if (acl_status != NFS_V4_ACL_SUCCESS) {
 			LogEvent(COMPONENT_CACHE_INODE,
 				 "Failed to release old acl, status=%d",
 				 acl_status);
 		}
-		entry->obj_handle->attributes.acl = NULL;
+		attributes->acl = NULL;
 	}
 
 	fsal_status =

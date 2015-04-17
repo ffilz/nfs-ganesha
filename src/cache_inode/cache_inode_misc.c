@@ -389,8 +389,8 @@ cache_inode_new_entry(struct fsal_obj_handle *new_obj,
 
 	nentry->obj_handle = new_obj;
 
-	if (nentry->obj_handle->attributes.expire_time_attr == 0) {
-		nentry->obj_handle->attributes.expire_time_attr =
+	if (get_attrs(nentry->obj_handle)->expire_time_attr == 0) {
+		get_attrs(nentry->obj_handle)->expire_time_attr =
 					op_ctx->export->expire_time_attr;
 	}
 
@@ -856,14 +856,14 @@ cache_inode_lock_trust_attrs(cache_entry_t *entry,
 			goto out;
 	}
 
-	oldmtime = entry->obj_handle->attributes.mtime.tv_sec;
+	oldmtime = get_attrs(entry->obj_handle)->mtime.tv_sec;
 
 	cache_status = cache_inode_refresh_attrs(entry);
 	if (cache_status != CACHE_INODE_SUCCESS)
 		goto unlock;
 
 	if ((entry->type == DIRECTORY)
-	    && (oldmtime < entry->obj_handle->attributes.mtime.tv_sec)) {
+	    && (oldmtime < get_attrs(entry->obj_handle)->mtime.tv_sec)) {
 		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
 
 		cache_status = cache_inode_invalidate_all_cached_dirent(entry);
