@@ -137,7 +137,7 @@ int _9p_lcreate(struct _9p_request_data *req9p, void *worker_data,
 		 */
 		if ((cache_status == CACHE_INODE_FSAL_EACCESS)
 		    && (pfid->op_context.creds->caller_uid ==
-			pentry_newfile->obj_handle->attributes.owner)
+			pentry_newfile->obj_handle->attrs->owner)
 		    && ((*mode & 0400) == 0400)) {
 			/* If we reach this piece of code, this means that
 			 * a user did open( O_CREAT, 04xy) on a file the
