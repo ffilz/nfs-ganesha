@@ -675,7 +675,7 @@ fsal_status_t fsal_test_access(struct fsal_obj_handle *obj_hdl,
 			       fsal_accessflags_t *allowed,
 			       fsal_accessflags_t *denied)
 {
-	struct attrlist *attribs = &obj_hdl->attributes;
+	struct attrlist *attribs = obj_hdl->attrs;
 
 	if (attribs->acl && IS_FSAL_ACE4_MASK_VALID(access_type)) {
 		return fsal_check_access_acl(op_ctx->creds,
