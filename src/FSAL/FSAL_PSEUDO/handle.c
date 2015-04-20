@@ -224,6 +224,9 @@ static struct pseudo_fsal_obj_handle
 		return NULL;
 	}
 
+	hdl->obj_handle.attrs = &hdl->attributes;
+	struct attrlist *attributes = hdl->obj_handle.attrs;
+
 	/* Establish tree details for this directory */
 	hdl->name = gsh_strdup(name);
 	hdl->parent = parent;
@@ -251,55 +254,53 @@ static struct pseudo_fsal_obj_handle
 	hdl->obj_handle.type = DIRECTORY;
 
 	/* Fills the output struct */
-	hdl->obj_handle.attributes.type = DIRECTORY;
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_TYPE);
+	attributes->type = DIRECTORY;
+	FSAL_SET_MASK(attributes->mask, ATTR_TYPE);
 
-	hdl->obj_handle.attributes.filesize = 0;
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_SIZE);
+	attributes->filesize = 0;
+	FSAL_SET_MASK(attributes->mask, ATTR_SIZE);
 
 	/* fsid will be supplied later */
-	hdl->obj_handle.attributes.fsid.major = 0;
-	hdl->obj_handle.attributes.fsid.minor = 0;
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_FSID);
+	attributes->fsid.major = 0;
+	attributes->fsid.minor = 0;
+	FSAL_SET_MASK(attributes->mask, ATTR_FSID);
 
-	hdl->obj_handle.attributes.fileid =
-		atomic_postinc_uint64_t(&inode_number);
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_FILEID);
+	attributes->fileid = atomic_postinc_uint64_t(&inode_number);
+	FSAL_SET_MASK(attributes->mask, ATTR_FILEID);
 
-	hdl->obj_handle.attributes.mode = unix2fsal_mode(unix_mode);
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_MODE);
+	attributes->mode = unix2fsal_mode(unix_mode);
+	FSAL_SET_MASK(attributes->mask, ATTR_MODE);
 
-	hdl->obj_handle.attributes.numlinks = 2;
+	attributes->numlinks = 2;
 	hdl->numlinks = 2;
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_NUMLINKS);
+	FSAL_SET_MASK(attributes->mask, ATTR_NUMLINKS);
 
-	hdl->obj_handle.attributes.owner = op_ctx->creds->caller_uid;
+	attributes->owner = op_ctx->creds->caller_uid;
 
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_OWNER);
+	FSAL_SET_MASK(attributes->mask, ATTR_OWNER);
 
-	hdl->obj_handle.attributes.group = op_ctx->creds->caller_gid;
+	attributes->group = op_ctx->creds->caller_gid;
 
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_GROUP);
+	FSAL_SET_MASK(attributes->mask, ATTR_GROUP);
 
 	/* Use full timer resolution */
-	now(&hdl->obj_handle.attributes.atime);
-	hdl->obj_handle.attributes.ctime = hdl->obj_handle.attributes.atime;
-	hdl->obj_handle.attributes.mtime = hdl->obj_handle.attributes.atime;
-	hdl->obj_handle.attributes.chgtime = hdl->obj_handle.attributes.atime;
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_ATIME);
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_CTIME);
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_MTIME);
+	now(&attributes->atime);
+	attributes->ctime = attributes->atime;
+	attributes->mtime = attributes->atime;
+	attributes->chgtime = attributes->atime;
+	FSAL_SET_MASK(attributes->mask, ATTR_ATIME);
+	FSAL_SET_MASK(attributes->mask, ATTR_CTIME);
+	FSAL_SET_MASK(attributes->mask, ATTR_MTIME);
 
-	hdl->obj_handle.attributes.change =
-			timespec_to_nsecs(&hdl->obj_handle.attributes.chgtime);
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_CHGTIME);
+	attributes->change = timespec_to_nsecs(&attributes->chgtime);
+	FSAL_SET_MASK(attributes->mask, ATTR_CHGTIME);
 
-	hdl->obj_handle.attributes.spaceused = 0;
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_SPACEUSED);
+	attributes->spaceused = 0;
+	FSAL_SET_MASK(attributes->mask, ATTR_SPACEUSED);
 
-	hdl->obj_handle.attributes.rawdev.major = 0;
-	hdl->obj_handle.attributes.rawdev.minor = 0;
-	FSAL_SET_MASK(hdl->obj_handle.attributes.mask, ATTR_RAWDEV);
+	attributes->rawdev.major = 0;
+	attributes->rawdev.minor = 0;
+	FSAL_SET_MASK(attributes->mask, ATTR_RAWDEV);
 
 	fsal_obj_handle_init(&hdl->obj_handle, exp_hdl, DIRECTORY);
 	pseudofs_handle_ops_init(&hdl->obj_handle.obj_ops);
@@ -595,14 +596,14 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 	}
 
 	/* We need to update the numlinks under attr lock. */
-	myself->obj_handle.attributes.numlinks =
+	myself->obj_handle.attrs->numlinks =
 		atomic_fetch_uint32_t(&myself->numlinks);
 
 	LogFullDebug(COMPONENT_FSAL,
 		     "hdl=%p, name=%s numlinks %"PRIu32,
 		     myself,
 		     myself->name,
-		     myself->obj_handle.attributes.numlinks);
+		     myself->obj_handle.attrs->numlinks);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
