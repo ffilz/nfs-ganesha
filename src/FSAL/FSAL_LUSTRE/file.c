@@ -91,9 +91,9 @@ fsal_status_t lustre_open(struct fsal_obj_handle *obj_hdl,
 
 	if (fd < 0) {
 		if ((errno == EACCES)
-		    && (((obj_hdl->attributes.mode & 0700) == 0400)
-			|| ((obj_hdl->attributes.mode & 0200) == 0000))
-		    && (obj_hdl->attributes.owner ==
+		    && (((myself->attributes.mode & 0700) == 0400)
+			|| ((myself->attributes.mode & 0200) == 0000))
+		    && (myself->attributes.owner ==
 			op_ctx->creds->caller_uid)) {
 			/* If the file is r-xYYYYYY or --xYYYYYY (a binary c
 			 * copied from another FS it is not writable (because
