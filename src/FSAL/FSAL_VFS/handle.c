@@ -85,6 +85,7 @@ static struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
 	hdl->dev = posix2fsal_devt(stat->st_dev);
 	hdl->up_ops = exp_hdl->up_ops;
 	hdl->obj_handle.fs = fs;
+	hdl->obj_handle.attrlist = &hdl->attributes;
 
 	if (hdl->obj_handle.type == REGULAR_FILE) {
 		hdl->u.file.fd = -1;	/* no open on this yet */
@@ -124,12 +125,12 @@ static struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
 		if (hdl->u.unopenable.name == NULL)
 			goto spcerr;
 	}
-	hdl->obj_handle.attributes.mask =
+	get_attrs(&hdl->obj_handle)->mask =
 	    exp_hdl->exp_ops.fs_supported_attrs(exp_hdl);
-	st = posix2fsal_attributes(stat, &hdl->obj_handle.attributes);
+	st = posix2fsal_attributes(stat, get_attrs(&hdl->obj_handle));
 	if (FSAL_IS_ERROR(st))
 		goto spcerr;
-	hdl->obj_handle.attributes.fsid = fs->fsid;
+	get_attrs(&hdl->obj_handle)->fsid = fs->fsid;
 	fsal_obj_handle_init(&hdl->obj_handle, exp_hdl,
 			     posix2fsal_type(stat->st_mode));
 	vfs_handle_ops_init(&hdl->obj_handle.obj_ops);
@@ -1155,17 +1156,19 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 	cfd = vfs_fsal_open_and_stat(op_ctx->fsal_export, myself, &stat,
 				     O_RDONLY, &fsal_error);
 	if (cfd.fd >= 0) {
-		st = posix2fsal_attributes(&stat, &obj_hdl->attributes);
+		struct attrlist *attrs = get_attrs(obj_hdl);
+
+		st = posix2fsal_attributes(&stat, attrs);
 		if (cfd.close_fd)
 			close(cfd.fd);
 		if (FSAL_IS_ERROR(st)) {
-			FSAL_CLEAR_MASK(obj_hdl->attributes.mask);
-			FSAL_SET_MASK(obj_hdl->attributes.mask,
+			FSAL_CLEAR_MASK(attrs->mask);
+			FSAL_SET_MASK(attrs->mask,
 				      ATTR_RDATTR_ERR);
 			fsal_error = st.major;
 			retval = st.minor;
 		} else {
-			obj_hdl->attributes.fsid = obj_hdl->fs->fsid;
+			attrs->fsid = obj_hdl->fs->fsid;
 		}
 	} else {
 		LogDebug(COMPONENT_FSAL, "Failed with %s, fsal_error %s",
