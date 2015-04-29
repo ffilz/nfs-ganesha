@@ -149,6 +149,8 @@ cache_inode_err_str(cache_inode_status_t err)
 		return "CACHE_INODE_CROSS_JUNCTION";
 	case CACHE_INODE_BADHANDLE:
 		return "CACHE_INODE_BADHANDLE";
+	case CACHE_INODE_ATTRNOTSUPP:
+		return "CACHE_INODE_ATTRNOTSUPP";
 	}
 	return "unknown";
 }
@@ -626,8 +628,10 @@ cache_inode_error_convert(fsal_status_t fsal_status)
 		return CACHE_INODE_FSAL_ERR_SEC;
 
 	case ERR_FSAL_NOTSUPP:
-	case ERR_FSAL_ATTRNOTSUPP:
 		return CACHE_INODE_NOT_SUPPORTED;
+
+	case ERR_FSAL_ATTRNOTSUPP:
+		return CACHE_INODE_ATTRNOTSUPP;
 
 	case ERR_FSAL_UNION_NOTSUPP:
 		return CACHE_INODE_UNION_NOTSUPP;

@@ -239,6 +239,7 @@ state_status_t cache_inode_status_to_state_status(cache_inode_status_t status)
 	case CACHE_INODE_ASYNC_POST_ERROR:
 		return STATE_ASYNC_POST_ERROR;
 	case CACHE_INODE_NOT_SUPPORTED:
+	case CACHE_INODE_ATTRNOTSUPP:
 	case CACHE_INODE_UNION_NOTSUPP:
 		return STATE_NOT_SUPPORTED;
 	case CACHE_INODE_STATE_ERROR:

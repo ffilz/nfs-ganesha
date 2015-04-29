@@ -627,6 +627,9 @@ nfsstat4 nfs4_Errno_verbose(cache_inode_status_t error, const char *where)
 			 error);
 		nfserror = NFS4ERR_INVAL;
 		break;
+	case CACHE_INODE_ATTRNOTSUPP:
+		return NFS4ERR_ATTRNOTSUPP;
+		break;
 	}
 
 	return nfserror;
@@ -727,6 +730,7 @@ nfsstat3 nfs3_Errno_verbose(cache_inode_status_t error, const char *where)
 		break;
 
 	case CACHE_INODE_NOT_SUPPORTED:
+	case CACHE_INODE_ATTRNOTSUPP:
 	case CACHE_INODE_UNION_NOTSUPP:
 		nfserror = NFS3ERR_NOTSUPP;
 		break;
