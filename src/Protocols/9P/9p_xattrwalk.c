@@ -112,7 +112,7 @@ int _9p_xattrwalk(struct _9p_request_data *req9p, void *worker_data,
 				  preply);
 
 	/* set op_ctx, it will be useful if FSAL is later called */
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 
 	/* Initiate xattr's fid by copying file's fid in it */
 	memcpy((char *)pxattrfid, (char *)pfid, sizeof(struct _9p_fid));

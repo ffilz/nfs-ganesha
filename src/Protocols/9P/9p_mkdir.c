@@ -95,7 +95,7 @@ int _9p_mkdir(struct _9p_request_data *req9p, void *worker_data,
 
 	snprintf(dir_name, MAXNAMLEN, "%.*s", *name_len, name_str);
 
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 	/* Create the directory */
 	/* BUGAZOMEU: @todo : the gid parameter is not used yet */
 	cache_status =

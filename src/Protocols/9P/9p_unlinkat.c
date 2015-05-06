@@ -86,7 +86,7 @@ int _9p_unlinkat(struct _9p_request_data *req9p, void *worker_data,
 		return _9p_rerror(req9p, worker_data, msgtag, EROFS, plenout,
 				  preply);
 
-	op_ctx = &pdfid->op_context;
+	memcpy(op_ctx, &pdfid->op_context, sizeof(*op_ctx));
 
 	/* Let's do the job */
 	snprintf(name, MAXNAMLEN, "%.*s", *name_len, name_str);

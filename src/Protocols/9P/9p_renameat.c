@@ -89,7 +89,7 @@ int _9p_renameat(struct _9p_request_data *req9p, void *worker_data,
 				  preply);
 	}
 
-	op_ctx = &poldfid->op_context;
+	memcpy(op_ctx, &poldfid->op_context, sizeof(*op_ctx));
 
 	if (*newfid >= _9P_FID_PER_CONN)
 		return _9p_rerror(req9p, worker_data, msgtag, ERANGE, plenout,

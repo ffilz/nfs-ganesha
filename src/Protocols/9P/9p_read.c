@@ -92,7 +92,7 @@ int _9p_read(struct _9p_request_data *req9p, void *worker_data,
 				  preply);
 	}
 
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 
 	/* Start building the reply already
 	 * So we don't need to use an intermediate data buffer

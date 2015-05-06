@@ -88,7 +88,7 @@ int _9p_link(struct _9p_request_data *req9p, void *worker_data,
 		return _9p_rerror(req9p, worker_data, msgtag, EROFS, plenout,
 				  preply);
 
-	op_ctx = &pdfid->op_context;
+	memcpy(op_ctx, &pdfid->op_context, sizeof(*op_ctx));
 
 	if (*targetfid >= _9P_FID_PER_CONN)
 		return _9p_rerror(req9p, worker_data, msgtag, ERANGE, plenout,

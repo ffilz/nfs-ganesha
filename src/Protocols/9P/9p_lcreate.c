@@ -100,7 +100,7 @@ int _9p_lcreate(struct _9p_request_data *req9p, void *worker_data,
 		return _9p_rerror(req9p, worker_data, msgtag, EROFS, plenout,
 				  preply);
 
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 	snprintf(file_name, MAXNAMLEN, "%.*s", *name_len, name_str);
 
 	/* Create the file */
