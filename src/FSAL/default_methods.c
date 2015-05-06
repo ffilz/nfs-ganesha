@@ -503,7 +503,22 @@ static size_t fs_loc_body_size(struct fsal_export *exp_hdl)
 static void global_verifier(struct gsh_buffdesc *verf_desc)
 {
 	memcpy(verf_desc->addr, &NFS4_write_verifier, verf_desc->len);
-};
+}
+
+/**
+ * @brief Get size of file descriptor
+ *
+ * This function returns the size of the file descriptor for this export.
+ *
+ * @param[in] exp_hdl Export to interrogate
+ *
+ * @retval 0 This export doesn't support multiple file descriptors and
+ *           should use the legacy interface.
+ */
+size_t get_file_descriptor_size(struct fsal_export *exp_hdl)
+{
+	return 0;
+}
 
 /* Default fsal export method vector.
  * copied to allocated vector at register time
@@ -536,7 +551,8 @@ struct export_ops def_export_ops = {
 	.fs_layout_blocksize = fs_layout_blocksize,
 	.fs_maximum_segments = fs_maximum_segments,
 	.fs_loc_body_size = fs_loc_body_size,
-	.get_write_verifier = global_verifier
+	.get_write_verifier = global_verifier,
+	.get_file_descriptor_size = get_file_descriptor_size,
 };
 
 /* fsal_obj_handle common methods
@@ -1047,6 +1063,163 @@ static nfsstat4 layoutcommit(struct fsal_obj_handle *obj_hdl,
 	return NFS4ERR_NOTSUPP;
 }
 
+/* open_fd
+ * default case not supported
+ */
+
+static fsal_status_t open_fd(struct fsal_obj_handle *obj_hdl,
+			     struct fsal_fd *fd,
+			     fsal_openflags_t openflags,
+			     const char *name,
+			     struct attrlist *attrib_set,
+			     fsal_verifier_t *verifier)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* reopen_fd
+ * default case not supported
+ */
+
+static fsal_status_t reopen_fd(struct fsal_fd *fd,
+			       fsal_openflags_t openflags)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* read_fd
+ * default case not supported
+ */
+
+static fsal_status_t read_fd(struct fsal_fd *fd,
+			     struct fsal_fd *share_fd,
+			     struct fsal_fd *lock_fd,
+			     uint64_t seek_descriptor,
+			     size_t buffer_size,
+			     void *buffer, size_t *read_amount,
+			     bool *end_of_file)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* read_plus_fd
+ * default case not supported
+ */
+
+static fsal_status_t read_plus_fd(struct fsal_fd *fd,
+				  struct fsal_fd *share_fd,
+				  struct fsal_fd *lock_fd,
+				  uint64_t seek_descriptor,
+				  size_t buffer_size,
+				  void *buffer,
+				  size_t *read_amount,
+				  bool *end_of_file,
+				  struct io_info *info)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* write_fd
+ * default case not supported
+ */
+
+static fsal_status_t write_fd(struct fsal_fd *fd,
+			      struct fsal_fd *share_fd,
+			      struct fsal_fd *lock_fd,
+			      uint64_t seek_descriptor,
+			      size_t buffer_size,
+			      void *buffer,
+			      size_t *write_amount,
+			      bool *fsal_stable)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* write_plus_fd
+ * default case not supported
+ */
+
+static fsal_status_t write_plus_fd(struct fsal_fd *fd,
+				   struct fsal_fd *share_fd,
+				   struct fsal_fd *lock_fd,
+				   uint64_t seek_descriptor,
+				   size_t buffer_size,
+				   void *buffer,
+				   size_t *write_amount,
+				   bool *fsal_stable,
+				   struct io_info *info)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* seek_fd
+ * default case not supported
+ */
+
+static fsal_status_t seek_fd(struct fsal_fd *fd,
+			     struct io_info *info)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* io io_advise_fd
+ * default case not supported
+ */
+
+static fsal_status_t io_advise_fd(struct fsal_fd *fd,
+				  struct io_hints *hints)
+{
+	hints->hints = 0;
+
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+/* commit_fd
+ * default case not supported
+ */
+
+static fsal_status_t commit_fd(struct fsal_fd *fd,
+			       off_t offset,
+			       size_t len)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* lock_op_fd
+ * default case not supported
+ */
+
+static fsal_status_t lock_op_fd(struct fsal_fd *share_fd,
+				struct fsal_fd *lock_fd,
+				void *p_owner,
+				fsal_lock_op_t lock_op,
+				fsal_lock_param_t *request_lock,
+				fsal_lock_param_t *conflicting_lock)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* setattr_fd
+ * default case not supported
+ */
+
+static fsal_status_t setattr_fd(struct fsal_fd *fd,
+				struct fsal_fd *share_fd,
+				struct fsal_fd *lock_fd,
+				struct attrlist *attrs)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* close_fd
+ * default case not supported
+ */
+
+static fsal_status_t close_fd(struct fsal_fd *fd)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
 /* Default fsal handle object method vector.
  * copied to allocated vector at register time
  */
@@ -1095,7 +1268,19 @@ struct fsal_obj_ops def_handle_ops = {
 	.handle_to_key = handle_to_key,
 	.layoutget = layoutget,
 	.layoutreturn = layoutreturn,
-	.layoutcommit = layoutcommit
+	.layoutcommit = layoutcommit,
+	.open_fd = open_fd,
+	.reopen_fd = reopen_fd,
+	.read_fd = read_fd,
+	.read_plus_fd = read_plus_fd,
+	.write_fd = write_fd,
+	.write_plus_fd = write_plus_fd,
+	.seek_fd = seek_fd,
+	.io_advise_fd = io_advise_fd,
+	.commit_fd = commit_fd,
+	.lock_op_fd = lock_op_fd,
+	.setattr_fd = setattr_fd,
+	.close_fd = close_fd,
 };
 
 /* fsal_pnfs_ds common methods */

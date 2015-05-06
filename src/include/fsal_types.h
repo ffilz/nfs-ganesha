@@ -545,6 +545,10 @@ typedef uint16_t fsal_openflags_t;
 						     * be used as a mask */
 #define FSAL_O_SYNC     0x0004	/* sync */
 #define FSAL_O_RECLAIM  0x0008	/* open reclaim */
+#define FSAL_O_CREATE   0x0010  /* open create */
+#define FSAL_O_EXCL     0x0020  /* exclusive create */
+#define FSAL_O_DENY_READ 0x0100
+#define FSAL_O_DENY_WRITE 0x0200
 
 /** File system static info. */
 
@@ -797,6 +801,8 @@ typedef struct fsal_share_param_t {
 	uint32_t share_deny;
 	bool share_reclaim;
 } fsal_share_param_t;
+
+typedef char fsal_verifier_t[8];
 
 #endif				/* _FSAL_TYPES_H */
 /** @} */
