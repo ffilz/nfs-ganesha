@@ -87,6 +87,11 @@ fsal_status_t vfs_create_handle(struct fsal_export *exp_hdl,
 				struct gsh_buffdesc *hdl_desc,
 				struct fsal_obj_handle **handle);
 
+struct vfs_fd {
+	fsal_openflags_t openflags;
+	int fd;
+};
+
 /*
  * VFS internal object handle
  * handle is a pointer because
@@ -107,10 +112,7 @@ struct vfs_fsal_obj_handle {
 	vfs_file_handle_t *handle;
 	const struct fsal_up_vector *up_ops;	/*< Upcall operations */
 	union {
-		struct {
-			int fd;
-			fsal_openflags_t openflags;
-		} file;
+		struct vfs_fd file;
 		struct {
 			unsigned char *link_content;
 			int link_size;
