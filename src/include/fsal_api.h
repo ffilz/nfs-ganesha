@@ -1047,6 +1047,35 @@ struct export_ops {
 	void (*get_write_verifier)(struct gsh_buffdesc *verf_desc);
 
 /**@}*/
+
+/**@{*/
+/**
+ * multiple file descriptor functions
+ */
+
+/**
+ * @brief Get size of file descriptor
+ *
+ * This function returns the size of the file descriptor for this export.
+ *
+ * @param[in] exp_hdl Export to interrogate
+ *
+ * @retval 0 This export doesn't support multiple file descriptors and
+ *           should use the legacy interface.
+ */
+	size_t (*get_fd_size)(struct fsal_export *exp_hdl);
+
+/**@}*/
+};
+
+/**
+ * @brief Public structure for a file descriptor.
+ */
+struct fsal_fd {
+	/** The object handle for the open file */
+	struct fsal_obj_handle *obj_hdl;
+	/** The open and share mode etc. */
+	fsal_openflags_t openflags;
 };
 
 /**
@@ -1946,6 +1975,303 @@ struct fsal_obj_ops {
 				 const struct fsal_layoutcommit_arg *arg,
 				 struct fsal_layoutcommit_res *res);
 /**@}*/
+
+/**@{*/
+
+/**
+ * multiple file descriptor functions
+ */
+
+/**
+ * @brief Open a file descriptor for read or write
+ *
+ * This function opens a file for read or write.  The file should not
+ * already be opened when this function is called.  The thread calling
+ * this function will have hold the Cache inode content lock
+ * exclusively and the FSAL may assume whatever private state it uses
+ * to manage open/close status is protected.
+ *
+ * If Name is NULL, obj_hdl is the file itself, otherwise obj_hdl is the
+ * parent directory.
+ *
+ * On an exclusive create, the upper layer may know the object handle
+ * already, so it MAY call with name == NULL. In this case, the caller
+ * expects just to check the verifier. The caller must hold the attr_lock
+ * since the FSAL will update the attributes in checking the verifier.
+ *
+ * On a call with an existing object handle for an UNCHECKED create,
+ * we can set the size to 0, because of this, the caller must hold the
+ * attr_lock to update the attributes.
+ *
+ * If attributes are not set on create, the FSAL will set some minimal
+ * attributes (for example, mode might be set to 0600).
+ *
+ * If an open by name succeeds and did not result in Ganesha creating a file,
+ * the caller will need to do a subsequent permission check to confirm the
+ * open. This is because the permission attributes were not available
+ * beforehand.
+ *
+ * @param[in] obj_hdl               File to open or parent directory
+ * @param[in,out] fd                fsal file descriptor object to use
+ * @param[in] openflags             Mode for open
+ * @param[in] createmode            Mode for create
+ * @param[in] name                  Name for file if being created or opened
+ * @param[in] attrib_set            Attributes to set on created file
+ * @param[in] verifier              Verifier to use for exclusive create
+ * @param[in,out] new_obj           Newly created object
+ * @param[in,out] caller_perm_check The caller must do a permission check
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*open_fd)(struct fsal_obj_handle *obj_hdl,
+				  struct fsal_fd *fd,
+				  fsal_openflags_t openflags,
+				  enum fsal_create_mode createmode,
+				  const char *name,
+				  struct attrlist *attrib_set,
+				  fsal_verifier_t verifier,
+				  struct fsal_obj_handle **new_obj,
+				  bool *caller_perm_check);
+
+/**
+ * @brief Check the exclusive create verifier for a file.
+ *
+ * @param[in] obj_hdl     File to check verifier
+ * @param[in] verifier    Verifier to use for exclusive create
+ *
+ * @retval true if verifier matches
+ */
+	 bool (*check_verifier)(struct fsal_obj_handle *obj_hdl,
+				fsal_verifier_t verifier);
+
+/**
+ * @brief Re-open a file that may be already opened
+ *
+ * This function supports changing the access mode of a share reservation and
+ * thus should only be called with a share_fd.
+ *
+ * @param[in] obj_hdl     File on which to operate
+ * @param[in] share_fd    Share reservation to re-open
+ * @param[in] openflags   Mode for re-open
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*reopen_fd)(struct fsal_obj_handle *obj_hdl,
+				    struct fsal_fd *share_fd,
+				    fsal_openflags_t openflags);
+
+/**
+ * @brief Read data from a file
+ *
+ * This function reads data from the given file.
+ *
+ * @note We probably want to keep end_of_file.  There may be reasons
+ * other than end of file while less data are returned than requested
+ * (FSAL_PROXY, for example, might do this depending on the will of
+ * the remote server.) -- ACE
+ *
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  share_fd    Related share reservation fd if any
+ * @param[in]  lock_fd     Related lock fs if any
+ * @param[in]  offset      Position from which to read
+ * @param[in]  buffer_size Amount of data to read
+ * @param[out] buffer      Buffer to which data are to be copied
+ * @param[out] read_amount Amount of data read
+ * @param[out] end_of_file true if the end of file has been reached
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*read_fd)(struct fsal_obj_handle *obj_hdl,
+				  struct fsal_fd *share_fd,
+				  struct fsal_fd *lock_fd,
+				  uint64_t offset,
+				  size_t buffer_size,
+				  void *buffer,
+				  size_t *read_amount,
+				  bool *end_of_file);	/* needed? */
+
+/**
+ * @brief Read data from a file plus
+ *
+ * This function reads data from the given file.
+ *
+ * @note We probably want to keep end_of_file.  There may be reasons
+ * other than end of file while less data are returned than requested
+ * (FSAL_PROXY, for example, might do this depending on the will of
+ * the remote server.) -- ACE
+ *
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  share_fd    Related share reservation fd if any
+ * @param[in]  lock_fd     Related lock fs if any
+ * @param[in]  offset      Position from which to read
+ * @param[in]  buffer_size Amount of data to read
+ * @param[out] buffer      Buffer to which data are to be copied
+ * @param[out] read_amount Amount of data read
+ * @param[out] end_of_file true if the end of file has been reached
+ * @param[in,out] info     more information about the data
+ *
+ * @return FSAL status.
+ */
+	fsal_status_t (*read_plus_fd)(struct fsal_obj_handle *obj_hdl,
+				      struct fsal_fd *share_fd,
+				      struct fsal_fd *lock_fd,
+				      uint64_t offset,
+				      size_t buffer_size,
+				      void *buffer,
+				      size_t *read_amount,
+				      bool *end_of_file,
+				      struct io_info *info);
+
+/**
+ * @brief Write data to a file
+ *
+ * This function writes data to a file.
+ *
+ * @note Should buffer be const? -- ACE
+ *
+ * @param[in]  obj_hdl        File on which to operate
+ * @param[in]  share_fd       Related share reservation fd if any
+ * @param[in]  lock_fd        Related lock fs if any
+ * @param[in]  offset         Position at which to write
+ * @param[in]  buffer         Data to be written
+ * @param[in,out] fsal_stable In, if on, the fsal is requested to write data
+ *                            to stable store. Out, the fsal reports what
+ *                            it did.
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*write_fd)(struct fsal_obj_handle *obj_hdl,
+				   struct fsal_fd *share_fd,
+				   struct fsal_fd *lock_fd,
+				   uint64_t offset,
+				   size_t buffer_size,
+				   void *buffer,
+				   size_t *wrote_amount,
+				   bool *fsal_stable);
+/**
+ * @brief Write data to a file plus
+ *
+ * This function writes data to a file.
+ *
+ * @note Should buffer be const? -- ACE
+ *
+ * @param[in]  obj_hdl        File on which to operate
+ * @param[in]  share_fd       Related share reservation fd if any
+ * @param[in]  lock_fd        Related lock fs if any
+ * @param[in]  offset         Position at which to write
+ * @param[in]  buffer         Data to be written
+ * @param[in,out] fsal_stable In, if on, the fsal is requested to write data
+ *                            to stable store. Out, the fsal reports what
+ *                            it did.
+ * @param[in,out] info        more information about the data
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*write_plus_fd)(struct fsal_obj_handle *obj_hdl,
+					struct fsal_fd *share_fd,
+					struct fsal_fd *lock_fd,
+					uint64_t offset,
+					size_t buffer_size,
+					void *buffer,
+					size_t *wrote_amount,
+					bool *fsal_stable,
+					struct io_info *info);
+/**
+ * @brief Seek to data or hole
+ *
+ * This function seek to data or hole in a file.
+ *
+ * @param[in]  fd           File to be written
+ * @param[in,out] info      Information about the data
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*seek_fd)(struct fsal_fd *fd,
+				  struct io_info *info);
+/**
+ * @brief IO Advise
+ *
+ * This function give hints to fs.
+ *
+ * @param[in]  fd           File to be written
+ * @param[in,out] info      Information about the data
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*io_advise_fd)(struct fsal_fd *fd,
+				       struct io_hints *hints);
+/**
+ * @brief Commit written data
+ *
+ * This function flushes possibly buffered data to a file.
+ *
+ * @param[in] fd      File to commit
+ * @param[in] offset  Start of range to commit
+ * @param[in] len     Length of range to commit
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*commit_fd)(struct fsal_fd *fd,
+				    off_t offset,
+				    size_t len);
+
+/**
+ * @brief Perform a lock operation
+ *
+ * This function performs a lock operation (lock, unlock, test) on a
+ * file.
+ *
+ * @param[in]  obj_hdl          File on which to operate
+ * @param[in]  share_fd         If a share reservation is associated with this
+ *                              lock, the fd associated with that.
+ * @param[in]  lock_fd          An fd for use by the FSAL to use for the
+ *                              locks.
+ * @param[in]  owner            Lock owner
+ * @param[in]  lock_op          Operation to perform
+ * @param[in]  request_lock     Lock to take/release/test
+ * @param[out] conflicting_lock Conflicting lock
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*lock_op_fd)(struct fsal_obj_handle *obj_hdl,
+				     struct fsal_fd *share_fd,
+				     struct fsal_fd *lock_fd,
+				     void *owner,
+				     fsal_lock_op_t lock_op,
+				     fsal_lock_param_t *request_lock,
+				     fsal_lock_param_t *conflicting_lock);
+
+/**
+ * @brief Set attributes on an object
+ *
+ * This function sets attributes on an object.  Which attributes are
+ * set is determined by @c attrib_set->mask.
+ *
+ * @param[in] obj_hdl    File on which to operate
+ * @param[in] share_fd   Related share reservation fd if any
+ * @param[in] lock_fd    Related lock fs if any
+ * @param[in] attrib_set Attributes to set
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*setattr_fd)(struct fsal_obj_handle *obj_hdl,
+				     struct fsal_fd *share_fd,
+				     struct fsal_fd *lock_fd,
+				     struct attrlist *attrib_set);
+
+/**
+ * @brief Close a file
+ *
+ * This function closes a file.  It is protected by the Cache inode
+ * content lock.
+ *
+ * @param[in] fd      File to close
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*close_fd)(struct fsal_fd *fd);
+
+/**@}*/
 };
 
 /**
@@ -2010,6 +2336,14 @@ struct fsal_pnfs_ds_ops {
  * @param[in]  ops	FSAL DS handle operations vector
  */
 	 void (*fsal_dsh_ops)(struct fsal_dsh_ops *ops);
+
+/**@}*/
+
+/**@{*/
+
+/**
+ * multiple file descriptor functions
+ */
 
 /**@}*/
 };
