@@ -55,6 +55,7 @@
 #include "fsal_private.h"
 #include "pnfs_utils.h"
 #include "nfs_creds.h"
+#include "sal_data.h"
 
 /** fsal module method defaults and common methods
  */
@@ -503,7 +504,7 @@ static size_t fs_loc_body_size(struct fsal_export *exp_hdl)
 static void global_verifier(struct gsh_buffdesc *verf_desc)
 {
 	memcpy(verf_desc->addr, &NFS4_write_verifier, verf_desc->len);
-};
+}
 
 /* Default fsal export method vector.
  * copied to allocated vector at register time
@@ -536,7 +537,7 @@ struct export_ops def_export_ops = {
 	.fs_layout_blocksize = fs_layout_blocksize,
 	.fs_maximum_segments = fs_maximum_segments,
 	.fs_loc_body_size = fs_loc_body_size,
-	.get_write_verifier = global_verifier
+	.get_write_verifier = global_verifier,
 };
 
 /* fsal_obj_handle common methods
@@ -1047,6 +1048,197 @@ static nfsstat4 layoutcommit(struct fsal_obj_handle *obj_hdl,
 	return NFS4ERR_NOTSUPP;
 }
 
+/**
+ * @brief Allocate a state_t structure
+ *
+ * @param[in] obj_hdl               File to open or parent directory
+ * @param[in] state_type            Type of state to allocate
+ *
+ * @returns NULL on failure otherwise a state structure.
+ */
+
+struct state_t *alloc_state(struct fsal_obj_handle *obj_hdl,
+			    enum state_type state_type,
+			    struct state_t *related_state)
+{
+	struct state_t *state;
+
+	state = gsh_calloc(1, sizeof(struct state_t));
+
+	if (state != NULL) {
+		state->state_obj = obj_hdl;
+		state->state_type = state_type;
+		if (state_type == STATE_TYPE_LOCK ||
+		    state_type == STATE_TYPE_NLM_LOCK)
+			state->state_data.lock.openstate = related_state;
+	}
+
+	return state;
+}
+
+/**
+ * @brief Free a state_t structure
+ *
+ * @param[in] state                 state_t structure to free.
+ *
+ * @returns NULL on failure otherwise a state structure.
+ */
+
+void free_state(struct state_t *state)
+{
+	gsh_free(state);
+}
+
+/* open2
+ * default case not supported
+ */
+
+static fsal_status_t open2(struct fsal_obj_handle *obj_hdl,
+			   struct state_t *fd,
+			   fsal_openflags_t openflags,
+			   enum fsal_create_mode createmode,
+			   const char *name,
+			   struct attrlist *attrib_set,
+			   fsal_verifier_t verifier,
+			   struct fsal_obj_handle **new_obj,
+			   bool *caller_perm_check)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* check_verifier
+ * default check verifier against atime and mtime.
+ */
+
+static bool check_verifier(struct fsal_obj_handle *obj_hdl,
+			   fsal_verifier_t verifier)
+{
+	uint32_t verf_hi = 0, verf_lo = 0;
+
+	memcpy(&verf_hi,
+	       verifier,
+	       sizeof(uint32_t));
+	memcpy(&verf_lo,
+	       verifier + sizeof(uint32_t),
+	       sizeof(uint32_t));
+
+	return obj_hdl->attrs->atime.tv_sec == verf_hi &&
+	       obj_hdl->attrs->mtime.tv_sec == verf_hi;
+
+}
+
+/* reopen2
+ * default case not supported
+ */
+
+static fsal_status_t reopen2(struct fsal_obj_handle *obj_hdl,
+			     struct state_t *state,
+			     fsal_openflags_t openflags)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* read2
+ * default case not supported
+ */
+
+static fsal_status_t read2(struct fsal_obj_handle *obj_hdl,
+			   struct state_t *state,
+			   uint64_t seek_descriptor,
+			   size_t buffer_size,
+			   void *buffer, size_t *read_amount,
+			   bool *end_of_file,
+			   struct io_info *info)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* write2
+ * default case not supported
+ */
+
+static fsal_status_t write2(struct fsal_obj_handle *obj_hdl,
+			    struct state_t *state,
+			    uint64_t seek_descriptor,
+			    size_t buffer_size,
+			    void *buffer,
+			    size_t *write_amount,
+			    bool *fsal_stable,
+			    struct io_info *info)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* seek2
+ * default case not supported
+ */
+
+static fsal_status_t seek2(struct fsal_obj_handle *obj_hdl,
+			   struct state_t *fd,
+			   struct io_info *info)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* io io_advise2
+ * default case not supported
+ */
+
+static fsal_status_t io_advise2(struct fsal_obj_handle *obj_hdl,
+				struct state_t *fd,
+				struct io_hints *hints)
+{
+	hints->hints = 0;
+
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+/* commit2
+ * default case not supported
+ */
+
+static fsal_status_t commit2(struct fsal_obj_handle *obj_hdl,
+			     struct state_t *fd,
+			     off_t offset,
+			     size_t len)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* lock_op2
+ * default case not supported
+ */
+
+static fsal_status_t lock_op2(struct fsal_obj_handle *obj_hdl,
+			      struct state_t *state,
+			      void *p_owner,
+			      fsal_lock_op_t lock_op,
+			      fsal_lock_param_t *request_lock,
+			      fsal_lock_param_t *conflicting_lock)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* setattr2
+ * default case not supported
+ */
+
+static fsal_status_t setattr2(struct fsal_obj_handle *obj_hdl,
+			      struct state_t *state,
+			      struct attrlist *attrs)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
+/* close2
+ * default case not supported
+ */
+
+static fsal_status_t close2(struct state_t *fd)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
 /* Default fsal handle object method vector.
  * copied to allocated vector at register time
  */
@@ -1095,7 +1287,20 @@ struct fsal_obj_ops def_handle_ops = {
 	.handle_to_key = handle_to_key,
 	.layoutget = layoutget,
 	.layoutreturn = layoutreturn,
-	.layoutcommit = layoutcommit
+	.layoutcommit = layoutcommit,
+	.alloc_state = alloc_state,
+	.free_state = free_state,
+	.open2 = open2,
+	.check_verifier = check_verifier,
+	.reopen2 = reopen2,
+	.read2 = read2,
+	.write2 = write2,
+	.seek2 = seek2,
+	.io_advise2 = io_advise2,
+	.commit2 = commit2,
+	.lock_op2 = lock_op2,
+	.setattr2 = setattr2,
+	.close2 = close2,
 };
 
 /* fsal_pnfs_ds common methods */
