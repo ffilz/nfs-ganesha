@@ -90,7 +90,7 @@ int _9p_walk(struct _9p_request_data *req9p, void *worker_data,
 		return _9p_rerror(req9p, worker_data, msgtag, EIO, plenout,
 				  preply);
 	}
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 	pnewfid = gsh_calloc(1, sizeof(struct _9p_fid));
 	if (pnewfid == NULL)
 		return _9p_rerror(req9p, worker_data, msgtag, ERANGE, plenout,

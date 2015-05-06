@@ -235,7 +235,7 @@ int _9p_tools_clunk(struct _9p_fid *pfid)
 	cache_inode_status_t cache_status;
 
 	/* Set op_ctx */
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 
 
 	/* pentry may be null in the case of an aborted TATTACH

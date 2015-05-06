@@ -72,7 +72,7 @@ int _9p_fsync(struct _9p_request_data *req9p, void *worker_data,
 				  preply);
 	}
 
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 
 	cache_status =
 	    cache_inode_commit(pfid->pentry,

@@ -123,7 +123,7 @@ int _9p_lock(struct _9p_request_data *req9p, void *worker_data,
 		return _9p_rerror(req9p, worker_data, msgtag, EIO, plenout,
 				  preply);
 	}
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 
 	/* Tmp hook to avoid lock issue when compiling kernels.
 	 * This should not impact ONE client only

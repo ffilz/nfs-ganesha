@@ -97,7 +97,7 @@ int _9p_xattrcreate(struct _9p_request_data *req9p, void *worker_data,
 	snprintf(name, MAXNAMLEN, "%.*s", *name_len, name_str);
 
 	/* set op_ctx, it will be useful if FSAL is later called */
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 
 	if (*size == 0LL) {
 		/* Size == 0 : this is in fact a call to removexattr */

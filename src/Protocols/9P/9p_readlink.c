@@ -77,7 +77,7 @@ int _9p_readlink(struct _9p_request_data *req9p, void *worker_data,
 				  preply);
 	}
 
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 
 	/* let's do the job */
 	cache_status =

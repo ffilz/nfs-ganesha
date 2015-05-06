@@ -80,7 +80,7 @@ int _9p_lopen(struct _9p_request_data *req9p, void *worker_data,
 	}
 
 	_9p_openflags2FSAL(flags, &openflags);
-	op_ctx = &pfid->op_context;
+	memcpy(op_ctx, &pfid->op_context, sizeof(*op_ctx));
 	if (pfid->pentry->type == REGULAR_FILE) {
 		/** @todo: Maybe other types (FIFO, SOCKET,...) require
 		 * to be opened too */
