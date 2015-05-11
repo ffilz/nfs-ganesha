@@ -528,7 +528,8 @@ static struct config_item export_params[] = {
 		      glexport_params, glhostname),
 	CONF_ITEM_PATH("volpath", 1, MAXPATHLEN, "/",
 		      glexport_params, glvolpath),
-	CONF_ITEM_PATH("glfs_log", 1, MAXPATHLEN, "/tmp/gfapi.log",
+	CONF_ITEM_PATH("glfs_log", 1, MAXPATHLEN,
+		       "/var/log/glusterfs/nfs-ganesha-gfapi.log",
 		       glexport_params, glfs_log),
 	CONFIG_EOL
 };
