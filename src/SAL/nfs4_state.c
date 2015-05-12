@@ -54,8 +54,6 @@
 #include "nfs_file_handle.h"
 #include "nfs_proto_tools.h"
 
-pool_t *state_v4_pool;		/*< Pool for NFSv4 files's states */
-
 #ifdef DEBUG_SAL
 struct glist_head state_v4_all = GLIST_HEAD_INIT(state_v4_all);
 pthread_mutex_t all_state_v4_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -91,6 +89,7 @@ state_status_t state_add_impl(cache_entry_t *entry, enum state_type state_type,
 	bool got_export_ref = false;
 	state_status_t status = 0;
 	bool mutex_init = false;
+	struct state_t *openstate = NULL;
 
 	/* Take a cache inode reference for the state */
 	cache_status = cache_inode_lru_ref(entry, LRU_FLAG_NONE);
@@ -128,7 +127,12 @@ state_status_t state_add_impl(cache_entry_t *entry, enum state_type state_type,
 		got_pinned = true;
 	}
 
-	pnew_state = pool_alloc(state_v4_pool, NULL);
+	if (state_type == STATE_TYPE_LOCK)
+		openstate = state_data->lock.openstate;
+
+	pnew_state = entry->obj_handle->obj_ops.alloc_state(entry->obj_handle,
+							    state_type,
+							    openstate);
 
 	if (pnew_state == NULL) {
 		LogCrit(COMPONENT_STATE,
@@ -244,7 +248,7 @@ errout:
 		PTHREAD_MUTEX_destroy(&pnew_state->state_mutex);
 
 	if (pnew_state != NULL)
-		pool_free(state_v4_pool, pnew_state);
+		pnew_state->state_obj->obj_ops.free_state(pnew_state);
 
 	if (got_pinned)
 		cache_inode_dec_pin_ref(entry, false);
