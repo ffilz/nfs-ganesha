@@ -353,6 +353,7 @@ int get_nlm_state(enum state_type state_type,
 	hash_error_t rc;
 	struct gsh_buffdesc buffkey, old_key;
 	struct gsh_buffdesc buffval, old_value;
+	size_t fd_size;
 
 	memset(&key, 0, sizeof(key));
 
@@ -433,8 +434,9 @@ int get_nlm_state(enum state_type state_type,
 	if (!nsm_state_applies)
 		return 0;
 
-	state = gsh_malloc(sizeof(*state));
+	fd_size = op_ctx->fsal_export->exp_ops.get_fd_size(op_ctx->fsal_export);
 
+	state = gsh_malloc(sizeof(*state) + fd_size);
 	if (state == NULL) {
 		display_nlm_state(&dspbuf, &key);
 		LogCrit(COMPONENT_STATE, "No memory for {%s}", str);
@@ -446,6 +448,10 @@ int get_nlm_state(enum state_type state_type,
 
 	/* Copy everything over */
 	memcpy(state, &key, sizeof(key));
+
+	/* Associate struct fsal_fd with state_t */
+	if (fd_size != 0)
+		state->state_fd = (struct fsal_fd *)(state + 1);
 
 	assert(pthread_mutex_init(&state->state_mutex, NULL) == 0);
 
