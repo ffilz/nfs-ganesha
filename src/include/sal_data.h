@@ -988,7 +988,6 @@ typedef struct nfs_grace_start {
 /* Memory pools */
 
 extern pool_t *state_owner_pool;	/*< Pool for NFSv4 files's open owner */
-extern pool_t *state_v4_pool;	/*< Pool for NFSv4 files's states */
 
 #ifdef DEBUG_SAL
 extern struct glist_head state_v4_all;
