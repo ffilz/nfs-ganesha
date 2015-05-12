@@ -91,14 +91,6 @@ int _9p_walk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	if (pnewfid == NULL)
 		return _9p_rerror(req9p, msgtag, ERANGE, plenout, preply);
 
-	/* Initialize state_t embeded in fid. The refcount is initialized
-	 * to one to represent the state_t being embeded in the fid. This
-	 * prevents it from ever being reduced to zero by dec_state_t_ref.
-	 */
-	glist_init(&pfid->state.state_data.fid.state_locklist);
-	pfid->state.state_type = STATE_TYPE_9P_FID;
-	pfid->state.state_refcount = 1;
-
 	/* Is this a lookup or a fid cloning operation ? */
 	if (*nwname == 0) {
 		/* Cloning operation */
@@ -159,6 +151,7 @@ int _9p_walk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 
 		cache_status = cache_inode_fileid(pnewfid->pentry, &fileid);
 		if (cache_status != CACHE_INODE_SUCCESS) {
+			cache_inode_put(pentry);
 			gsh_free(pnewfid);
 			return _9p_rerror(req9p, msgtag,
 					  _9p_tools_errno(cache_status),
@@ -194,6 +187,7 @@ int _9p_walk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		default:
 			LogMajor(COMPONENT_9P,
 				 "implementation error, you should not see this message !!!!!!");
+			cache_inode_put(pentry);
 			gsh_free(pnewfid);
 			return _9p_rerror(req9p, msgtag, EINVAL,
 					  plenout, preply);
@@ -201,6 +195,24 @@ int _9p_walk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		}
 
 	}
+
+	/* Initialize state_t embeded in fid. The refcount is initialized
+	 * to one to represent the state_t being embeded in the fid. This
+	 * prevents it from ever being reduced to zero by dec_state_t_ref.
+	 */
+	pnewfid->state = pnewfid->export->fsal_export->exp_ops.alloc_state(
+						pnewfid->export->fsal_export,
+						STATE_TYPE_9P_FID,
+						NULL);
+
+	if (pnewfid->state == NULL) {
+		cache_inode_put(pentry);
+		gsh_free(pnewfid);
+		return _9p_rerror(req9p, msgtag, ENOMEM, plenout, preply);
+	}
+
+	glist_init(&pnewfid->state->state_data.fid.state_locklist);
+	pnewfid->state->state_refcount = 1;
 
 	/* keep info on new fid */
 	req9p->pconn->fids[*newfid] = pnewfid;

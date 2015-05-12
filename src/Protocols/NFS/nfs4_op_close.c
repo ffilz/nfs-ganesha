@@ -267,11 +267,17 @@ int nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 						  state_data.lock.
 						  state_sharelist);
 
+		/* If the FSAL supports extended ops, this will result in
+		 * closing any open files the FSAL has for this lock state.
+		 */
 		state_del_locked(lock_state);
 	}
 
 	/* File is closed, release the share state */
 	if (state_found->state_type == STATE_TYPE_SHARE) {
+		/* Only need to call state_share_remove if extended ops support
+		 * is not enabled for the FSAL.
+		 */
 		state_status = state_share_remove(data->current_entry,
 						  open_owner,
 						  state_found);
@@ -283,7 +289,10 @@ int nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 		}
 	}
 
-	/* File is closed, release the corresponding state */
+	/* File is closed, release the corresponding state. If the FSAL
+	 * supports extended ops, this will result in closing any open files
+	 * the FSAL has for this state.
+	 */
 	state_del_locked(state_found);
 
 	/* Poison the current stateid */
