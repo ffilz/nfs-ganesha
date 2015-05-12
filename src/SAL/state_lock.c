@@ -154,13 +154,6 @@ state_status_t state_lock_init(void)
 				     NULL,
 				     NULL);
 
-	state_v4_pool = pool_init("NFSv4 files states",
-				  sizeof(state_t),
-				  pool_basic_substrate,
-				  NULL,
-				  NULL,
-				  NULL);
-
 	return status;
 }
 
