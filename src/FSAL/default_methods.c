@@ -519,11 +519,14 @@ static void global_verifier(struct gsh_buffdesc *verf_desc)
 /**
  * @brief Allocate a state_t structure
  *
+ * Note that this is not expected to fail since memory allocation is
+ * expected to abort on failure.
+ *
  * @param[in] exp_hdl               Export state_t will be associated with
  * @param[in] state_type            Type of state to allocate
  * @param[in] related_state         Related state if appropriate
  *
- * @returns NULL on failure otherwise a state structure.
+ * @returns a state structure.
  */
 
 struct state_t *alloc_state(struct fsal_export *exp_hdl,
@@ -534,13 +537,12 @@ struct state_t *alloc_state(struct fsal_export *exp_hdl,
 
 	state = gsh_calloc(1, sizeof(struct state_t));
 
-	if (state != NULL) {
-		state->state_exp = exp_hdl;
-		state->state_type = state_type;
-		if (state_type == STATE_TYPE_LOCK ||
-		    state_type == STATE_TYPE_NLM_LOCK)
-			state->state_data.lock.openstate = related_state;
-	}
+	state->state_exp = exp_hdl;
+	state->state_type = state_type;
+
+	if (state_type == STATE_TYPE_LOCK ||
+	    state_type == STATE_TYPE_NLM_LOCK)
+		state->state_data.lock.openstate = related_state;
 
 	return state;
 }
