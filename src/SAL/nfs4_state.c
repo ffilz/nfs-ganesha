@@ -91,6 +91,7 @@ state_status_t state_add_impl(cache_entry_t *entry, enum state_type state_type,
 	bool got_export_ref = false;
 	state_status_t status = 0;
 	bool mutex_init = false;
+	size_t fd_size;
 
 	/* Take a cache inode reference for the state */
 	cache_status = cache_inode_lru_ref(entry, LRU_FLAG_NONE);
@@ -137,6 +138,21 @@ state_status_t state_add_impl(cache_entry_t *entry, enum state_type state_type,
 		/* stat */
 		status = STATE_MALLOC_ERROR;
 		goto errout;
+	}
+
+	fd_size = op_ctx->fsal_export->exp_ops.get_fd_size(op_ctx->fsal_export);
+
+	if (fd_size != 0) {
+		pnew_state->state_fd = gsh_calloc(1, fd_size);
+		if (pnew_state->state_fd == NULL) {
+			LogCrit(COMPONENT_STATE,
+				"Can't allocate a new file state from cache pool");
+
+			pool_free(state_v4_pool, pnew_state);
+			/* stat */
+			status = STATE_MALLOC_ERROR;
+			goto errout;
+		}
 	}
 
 	PTHREAD_MUTEX_init(&pnew_state->state_mutex, NULL);
