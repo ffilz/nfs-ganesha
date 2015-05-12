@@ -255,6 +255,7 @@ void dec_nlm_state_ref(state_t *state)
 	struct gsh_buffdesc old_value;
 	struct gsh_buffdesc old_key;
 	int32_t refcount;
+	cache_entry_t *entry = state->state_entry;
 
 	if (isDebug(COMPONENT_STATE)) {
 		display_nlm_state(&dspbuf, state);
@@ -321,16 +322,16 @@ void dec_nlm_state_ref(state_t *state)
 
 	put_gsh_export(state->state_export);
 
-	cache_inode_lru_unref(state->state_entry, LRU_FLAG_NONE);
+	state->state_obj->obj_ops.free_state(state);
 
-	gsh_free(state);
+	cache_inode_lru_unref(entry, LRU_FLAG_NONE);
 }
 
 /**
  * @brief Get an NLM State
  *
  * @param[in] state_type        type of state (LOCK or SHARE)
- * @param[in] state_entry       cache inode state applies to
+ * @param[in] entry             cache inode state applies to
  * @param[in] state_owner       NLM owner of the state
  * @param[in] nsm_state_applies True if nsm_state is available
  * @param[in] nsm_state         NSM state value for locks
@@ -339,7 +340,7 @@ void dec_nlm_state_ref(state_t *state)
  * @return NLM Status code or 0 if no special return
  */
 int get_nlm_state(enum state_type state_type,
-		  cache_entry_t *state_entry,
+		  cache_entry_t *entry,
 		  state_owner_t *state_owner,
 		  bool nsm_state_applies,
 		  uint32_t nsm_state,
@@ -357,7 +358,7 @@ int get_nlm_state(enum state_type state_type,
 	memset(&key, 0, sizeof(key));
 
 	key.state_type = state_type;
-	key.state_entry = state_entry;
+	key.state_entry = entry;
 	key.state_owner = state_owner;
 	key.state_export = op_ctx->export;
 	key.state_seqid = nsm_state;
@@ -433,7 +434,9 @@ int get_nlm_state(enum state_type state_type,
 	if (!nsm_state_applies)
 		return 0;
 
-	state = gsh_malloc(sizeof(*state));
+	state = entry->obj_handle->obj_ops.alloc_state(entry->obj_handle,
+						       state_type,
+						       NULL);
 
 	if (state == NULL) {
 		display_nlm_state(&dspbuf, &key);
@@ -445,7 +448,10 @@ int get_nlm_state(enum state_type state_type,
 	}
 
 	/* Copy everything over */
-	memcpy(state, &key, sizeof(key));
+	state->state_entry = entry;
+	state->state_owner = state_owner;
+	state->state_export = op_ctx->export;
+	state->state_seqid = nsm_state;
 
 	assert(pthread_mutex_init(&state->state_mutex, NULL) == 0);
 
@@ -464,10 +470,10 @@ int get_nlm_state(enum state_type state_type,
 	buffval.addr = state;
 	buffval.len = sizeof(*state);
 
-	if (cache_inode_lru_ref(state->state_entry, LRU_FLAG_NONE) !=
+	if (cache_inode_lru_ref(entry, LRU_FLAG_NONE) !=
 	    CACHE_INODE_SUCCESS) {
 		*pstate = NULL;
-		gsh_free(state);
+		state->state_obj->obj_ops.free_state(state);
 		return NLM4_STALE_FH;
 	}
 
@@ -484,9 +490,9 @@ int get_nlm_state(enum state_type state_type,
 		assert(pthread_mutex_destroy(&state->state_mutex) == 0);
 
 		/* Free the LRU ref taken above and the state. */
-		cache_inode_lru_unref(state->state_entry, LRU_FLAG_NONE);
+		state->state_obj->obj_ops.free_state(state);
 
-		gsh_free(state);
+		cache_inode_lru_unref(entry, LRU_FLAG_NONE);
 
 		*pstate = NULL;
 
