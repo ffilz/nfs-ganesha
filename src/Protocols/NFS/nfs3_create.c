@@ -224,6 +224,10 @@ int nfs3_create(nfs_arg_t *arg,
 			&& (op_ctx->creds->caller_uid != sattr.owner))
 		    || ((sattr.mask & ATTR_GROUP)
 			&& (op_ctx->creds->caller_gid != sattr.group))) {
+
+			/* mask off flags handled by create */
+			sattr.mask &= NON_CREATE_ATTRS_NFS3;
+
 			/* A call to cache_inode_setattr is required */
 			cache_status = cache_inode_setattr(file_entry,
 							   &sattr,

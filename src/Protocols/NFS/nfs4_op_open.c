@@ -796,6 +796,9 @@ static nfsstat4 open4_create(OPEN4args *arg, compound_data_t *data,
 		    || ((sattr.mask & ATTR_GROUP)
 			&& (op_ctx->creds->caller_gid != sattr.group))) {
 
+			/* mask off flags handled by create */
+			sattr.mask &= NON_CREATE_ATTRS_NFS4;
+
 			cache_status =
 			    cache_inode_setattr(entry_newfile, &sattr,
 					(arg->share_access &

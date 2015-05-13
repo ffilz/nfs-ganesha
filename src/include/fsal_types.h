@@ -387,6 +387,15 @@ typedef uint64_t attrmask_t;
 		      ATTR_ATIME    | ATTR_MTIME    | \
 		      ATTR_CTIME    | ATTR_SPACEUSED)
 
+#define NON_CREATE_ATTRS_NFS3 (ATTR_ATIME | ATTR_MTIME | \
+			       ATTR_CTIME | ATTR_SIZE  | \
+			       ATTR_OWNER | ATTR_GROUP)
+
+#define NON_CREATE_ATTRS_NFS4 (ATTR_ATIME | ATTR_MTIME | \
+			       ATTR_CTIME | ATTR_SIZE  | \
+			       ATTR_OWNER | ATTR_GROUP | \
+			       ATTR_ACL)
+
 /**
  * @brief A list of FS object's attributes.
  */
