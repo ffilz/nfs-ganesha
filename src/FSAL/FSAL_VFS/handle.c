@@ -443,7 +443,8 @@ static fsal_status_t create(struct fsal_obj_handle *dir_hdl,
 	*handle = &hdl->obj_handle;
 	close(dir_fd);
 	close(fd);
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+
+	return (*handle)->obj_ops.setattrs(*handle, attrib);
 
  fileerr:
 	close(fd);
@@ -544,7 +545,7 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 	*handle = &hdl->obj_handle;
 
 	close(dir_fd);
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	return (*handle)->obj_ops.setattrs(*handle, attrib);
 
  fileerr:
 	unlinkat(dir_fd, name, 0);
@@ -659,7 +660,7 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 	if (!retval) {
 		close(dir_fd);	/* done with parent */
 		*handle = &hdl->obj_handle;
-		return fsalstat(ERR_FSAL_NO_ERROR, 0);
+		return (*handle)->obj_ops.setattrs(*handle, attrib);
 	}
 
 	unlinkat(dir_fd, name, 0);
@@ -769,7 +770,7 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 	*handle = &hdl->obj_handle;
 
 	close(dir_fd);
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	return (*handle)->obj_ops.setattrs(*handle, attrib);
 
  linkerr:
 	unlinkat(dir_fd, name, 0);
