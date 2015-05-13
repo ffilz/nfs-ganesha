@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_46d6fe4f",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2015-05-13T22:21:39Z",
+      "side": 1,
+      "message": "I would like to see non_create_attrs initialized here. It also matches with what we are checking in the \"if\" expression.",
+      "revId": "b28114d4cb4206ec5f141b59abe1e94441f0e743",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
