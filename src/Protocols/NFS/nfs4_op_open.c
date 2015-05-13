@@ -610,6 +610,10 @@ static nfsstat4 open4_create(OPEN4args *arg, compound_data_t *data,
 	/* Client provided verifier, split into two piees */
 	uint32_t verf_hi = 0, verf_lo = 0;
 
+	uint32_t non_create_attrs = ATTR_ACL | ATTR_ATIME | ATTR_MTIME |
+				    ATTR_CTIME | ATTR_SIZE | ATTR_OWNER |
+				    ATTR_GROUP;
+
 	*entry = NULL;
 	*created = false;
 
@@ -795,6 +799,9 @@ static nfsstat4 open4_create(OPEN4args *arg, compound_data_t *data,
 			&& (op_ctx->creds->caller_uid != sattr.owner))
 		    || ((sattr.mask & ATTR_GROUP)
 			&& (op_ctx->creds->caller_gid != sattr.group))) {
+
+			/* mask off flags handled by create */
+			sattr.mask &= non_create_attrs;
 
 			cache_status =
 			    cache_inode_setattr(entry_newfile, &sattr,
