@@ -405,6 +405,9 @@ int nfs4_op_create(struct nfs_argop4 *op, compound_data_t *data,
 							   &sattr,
 							   false);
 
+			/* mask off flags handled by create */
+			sattr.mask &= NON_CREATE_ATTRS_NFS4;
+
 			if (cache_status != CACHE_INODE_SUCCESS) {
 				res_CREATE4->status = nfs4_Errno(cache_status);
 				cache_inode_put(entry_new);
