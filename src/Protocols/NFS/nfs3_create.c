@@ -81,6 +81,10 @@ int nfs3_create(nfs_arg_t *arg,
 	fsal_status_t fsal_status;
 	/* Client provided verifier, split into two pieces */
 	uint32_t verf_hi = 0, verf_lo = 0;
+	uint32_t non_create_attrs = ATTR_ATIME | ATTR_MTIME |
+				    ATTR_CTIME | ATTR_SIZE | ATTR_OWNER |
+				    ATTR_GROUP;
+
 
 	if (isDebug(COMPONENT_NFSPROTO)) {
 		char str[LEN_FH_STR];
@@ -224,6 +228,10 @@ int nfs3_create(nfs_arg_t *arg,
 			&& (op_ctx->creds->caller_uid != sattr.owner))
 		    || ((sattr.mask & ATTR_GROUP)
 			&& (op_ctx->creds->caller_gid != sattr.group))) {
+
+			/* mask off flags handled by create */
+			sattr.mask &= non_create_attrs;
+
 			/* A call to cache_inode_setattr is required */
 			cache_status = cache_inode_setattr(file_entry,
 							   &sattr,
