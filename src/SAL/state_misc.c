@@ -378,6 +378,7 @@ state_status_t state_error_convert(fsal_status_t fsal_status)
 	case ERR_FSAL_TOOSMALL:
 	case ERR_FSAL_TIMEOUT:
 	case ERR_FSAL_SERVERFAULT:
+	case ERR_FSAL_NO_ACE:
 		/* These errors should be handled inside state
 		 * (or should never be seen by state)
 		 */
