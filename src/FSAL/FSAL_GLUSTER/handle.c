@@ -657,11 +657,26 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 
 	/* FIXME: Should we hold the fd so that any async op does
 	 * not close it */
-	if (objhandle->openflags != FSAL_O_CLOSED)
-		rc = glfs_fstat(objhandle->glfd, &buffxstat.buffstat);
-	else
-		rc = glfs_h_stat(glfs_export->gl_fs,
-				objhandle->glhandle, &buffxstat.buffstat);
+	/*
+	 * The above comment already hints at the problem which
+	 * results in a crash in getattrs() during iozone runs
+	 * for V3. Holding on to the fd may not be a good thing
+	 * to do.
+	 *
+	 * There is a kind of race here when the glfd part of the
+	 * FSAL GLUSTER object handle is destroyed during a close
+	 * coming in from another NFSv3 WRITE thread which does
+	 * cache_inode_open(). Since the context/fd is destroyed
+	 * we cannot depend on glfs_fstat assuming glfd is valid.
+	 *
+	 * FIXing the issue by removing the glfs_fstat call here.
+	 *
+	 * So default to glfs_h_stat and re-optimize if a better
+	 * way is found - that may involve introducing locks in
+	 * the gfapi's for close and getattrs etc.
+	 */
+	rc = glfs_h_stat(glfs_export->gl_fs,
+			 objhandle->glhandle, &buffxstat.buffstat);
 	if (rc != 0) {
 		if (errno == ENOENT)
 			status = gluster2fsal_error(ESTALE);
