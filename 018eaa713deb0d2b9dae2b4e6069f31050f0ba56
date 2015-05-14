@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_b3c72d44",
+        "filename": "src/Protocols/NFS/nfs3_create.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1003572
+      },
+      "writtenOn": "2015-05-14T19:08:57Z",
+      "side": 1,
+      "message": "Alrighty, I will get an update out",
+      "parentUuid": "1a106d94_d398e9c1",
+      "revId": "018eaa713deb0d2b9dae2b4e6069f31050f0ba56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_737e556b",
         "filename": "src/Protocols/NFS/nfs4_op_create.c",
         "patchSetId": 4
@@ -30,6 +48,47 @@
       "writtenOn": "2015-05-14T17:10:45Z",
       "side": 1,
       "message": "Use the new mask I suggested creating.",
+      "revId": "018eaa713deb0d2b9dae2b4e6069f31050f0ba56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_330a1d8a",
+        "filename": "src/Protocols/NFS/nfs4_op_create.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1003572
+      },
+      "writtenOn": "2015-05-14T19:08:57Z",
+      "side": 1,
+      "message": "I notice this mask does not have the ATTR_SIZE like the others do.  Is that a typo I wonder?",
+      "parentUuid": "1a106d94_737e556b",
+      "revId": "018eaa713deb0d2b9dae2b4e6069f31050f0ba56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_7385b5cd",
+        "filename": "src/Protocols/NFS/nfs4_op_create.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1003572
+      },
+      "writtenOn": "2015-05-14T19:08:57Z",
+      "side": 1,
+      "message": "I guess if non regular objects have no need for size, it might make more since to go back to making the mask a local variable in the function since all 3 masks are unique.  I missed that in my last pass",
+      "range": {
+        "startLine": 400,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 6
+      },
       "revId": "018eaa713deb0d2b9dae2b4e6069f31050f0ba56",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
