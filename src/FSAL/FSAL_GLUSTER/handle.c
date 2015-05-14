@@ -657,11 +657,9 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 
 	/* FIXME: Should we hold the fd so that any async op does
 	 * not close it */
-	if (objhandle->openflags != FSAL_O_CLOSED)
-		rc = glfs_fstat(objhandle->glfd, &buffxstat.buffstat);
-	else
-		rc = glfs_h_stat(glfs_export->gl_fs,
-				objhandle->glhandle, &buffxstat.buffstat);
+	 
+	rc = glfs_h_stat(glfs_export->gl_fs,
+			 objhandle->glhandle, &buffxstat.buffstat);
 	if (rc != 0) {
 		if (errno == ENOENT)
 			status = gluster2fsal_error(ESTALE);
