@@ -473,13 +473,7 @@ static fsal_status_t fsal_check_access_acl(struct user_cred *creds,
 					ace_number,
 					pace,
 					v4mask,
-					(pace->perm & missing_access &
-					 (FSAL_ACE_PERM_WRITE_ATTR |
-					  FSAL_ACE_PERM_WRITE_ACL |
-					  FSAL_ACE_PERM_WRITE_OWNER))
-					    != 0 ?
-					    ERR_FSAL_PERM :
-					    ERR_FSAL_ACCESS,
+					ERR_FSAL_ACCESS,
 					is_dir,
 					creds);
 
@@ -488,23 +482,9 @@ static fsal_status_t fsal_check_access_acl(struct user_cred *creds,
 				if (denied == NULL ||
 				    (v4mask &
 				     FSAL_ACE4_PERM_CONTINUE) == 0) {
-					if ((pace->perm & missing_access &
-					    (FSAL_ACE_PERM_WRITE_ATTR |
-					     FSAL_ACE_PERM_WRITE_ACL |
-					     FSAL_ACE_PERM_WRITE_OWNER))
-					    != 0) {
-						LogDebug(COMPONENT_NFS_V4_ACL,
-							 "access denied (EPERM)");
-						return
-						    fsalstat
-						    (ERR_FSAL_PERM, 0);
-					} else {
-						LogDebug(COMPONENT_NFS_V4_ACL,
-							 "access denied (EACCESS)");
-						return fsalstat(
-						     ERR_FSAL_ACCESS,
-						     0);
-					}
+					LogDebug(COMPONENT_NFS_V4_ACL,
+						 "access denied (EACCESS)");
+					return fsalstat(ERR_FSAL_ACCESS, 0);
 				}
 
 				missing_access &=
@@ -526,17 +506,8 @@ static fsal_status_t fsal_check_access_acl(struct user_cred *creds,
 		LogDebug(COMPONENT_NFS_V4_ACL, "final access unknown (NO_ACE)");
 		return fsalstat(ERR_FSAL_NO_ACE, 0);
 	} else if (missing_access || (denied != NULL && *denied != 0)) {
-		if ((missing_access &
-		     (FSAL_ACE_PERM_WRITE_ATTR | FSAL_ACE_PERM_WRITE_ACL |
-		      FSAL_ACE_PERM_WRITE_OWNER)) != 0) {
-			LogDebug(COMPONENT_NFS_V4_ACL,
-				 "final access denied (EPERM)");
-			return fsalstat(ERR_FSAL_PERM, 0);
-		} else {
-			LogDebug(COMPONENT_NFS_V4_ACL,
-				 "final access denied (EACCESS)");
-			return fsalstat(ERR_FSAL_ACCESS, 0);
-		}
+		LogDebug(COMPONENT_NFS_V4_ACL, "final access denied (EACCESS)");
+		return fsalstat(ERR_FSAL_ACCESS, 0);
 	} else {
 		LogFullDebug(COMPONENT_NFS_V4_ACL, "access granted");
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
