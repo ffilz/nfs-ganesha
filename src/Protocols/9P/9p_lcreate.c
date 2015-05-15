@@ -145,7 +145,15 @@ int _9p_lcreate(struct _9p_request_data *req9p, void *worker_data,
 			 * cache_inode code, but for the mode is 04xy
 			 * the user is not allowed to open it.
 			 * Becoming root override this */
-			uid_t saved_uid = op_ctx->creds->caller_uid;
+
+			/** Saved op_ctx->creds value (shared between threads :
+			 * can't be written directly).*/
+			struct user_cred *saved_creds = op_ctx->creds;
+
+			/** Temporary credentials given to cache_inode. */
+			struct user_cred temp_creds;
+			memcpy(&temp_creds, saved_creds, sizeof(temp_creds));
+			op_ctx->creds = &temp_creds;
 
 			/* Become root */
 			op_ctx->creds->caller_uid = 0;
@@ -155,7 +163,7 @@ int _9p_lcreate(struct _9p_request_data *req9p, void *worker_data,
 			    cache_inode_open(pentry_newfile, openflags, 0);
 
 			/* Back to standard user */
-			op_ctx->creds->caller_uid = saved_uid;
+			op_ctx->creds = saved_creds;
 
 			if (cache_status != CACHE_INODE_SUCCESS)
 				return _9p_rerror(req9p, worker_data, msgtag,
