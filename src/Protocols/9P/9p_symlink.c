@@ -95,12 +95,13 @@ int _9p_symlink(struct _9p_request_data *req9p, void *worker_data,
 				  preply);
 	}
 
-	if ((pfid->op_context.export_perms->options &
+	_9p_init_opctx(pfid, req9p);
+
+	if ((op_ctx->export_perms->options &
 				 EXPORT_OPTION_WRITE_ACCESS) == 0)
 		return _9p_rerror(req9p, worker_data, msgtag, EROFS, plenout,
 				  preply);
 
-	op_ctx = &pfid->op_context;
 	snprintf(symlink_name, MAXNAMLEN, "%.*s", *name_len, name_str);
 
 	create_arg.link_content = gsh_malloc(MAXPATHLEN);

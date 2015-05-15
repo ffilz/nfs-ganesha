@@ -112,7 +112,7 @@ int _9p_xattrwalk(struct _9p_request_data *req9p, void *worker_data,
 				  preply);
 
 	/* set op_ctx, it will be useful if FSAL is later called */
-	op_ctx = &pfid->op_context;
+	_9p_init_opctx(pfid, req9p);
 
 	/* Initiate xattr's fid by copying file's fid in it */
 	memcpy((char *)pxattrfid, (char *)pfid, sizeof(struct _9p_fid));
@@ -266,6 +266,7 @@ int _9p_xattrwalk(struct _9p_request_data *req9p, void *worker_data,
 	/* hold reference on gdata */
 	uid2grp_hold_group_data(pxattrfid->gdata);
 
+	get_gsh_export_ref(pfid->export);
 	get_9p_user_cred_ref(pfid->ucred);
 
 	/* Build the reply */
