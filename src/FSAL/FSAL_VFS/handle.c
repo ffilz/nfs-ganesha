@@ -382,6 +382,12 @@ static fsal_status_t create(struct fsal_obj_handle *dir_hdl,
 			dir_hdl);
 		return fsalstat(ERR_FSAL_NOTDIR, 0);
 	}
+
+	status.major = fsal_inherit_acls(attrib, dir_hdl->attributes.acl,
+				       FSAL_ACE_FLAG_FILE_INHERIT);
+	if (FSAL_IS_ERROR(status))
+		return status;
+
 	myself = container_of(dir_hdl, struct vfs_fsal_obj_handle, obj_handle);
 	if (dir_hdl->fsal != dir_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
@@ -503,6 +509,12 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 		return status;
 #endif /* ENABLE_VFS_DEBUG_ACL */
 
+	status.major = fsal_inherit_acls(attrib, dir_hdl->attributes.acl,
+					 FSAL_ACE_FLAG_DIR_INHERIT);
+	if (FSAL_IS_ERROR(status))
+		return status;
+
+
 	unix_mode = fsal2unix_mode(attrib->mode)
 	    & ~op_ctx->fsal_export->exp_ops.fs_umask(op_ctx->fsal_export);
 	dir_fd = vfs_fsal_open(myself, flags, &status.major);
@@ -590,6 +602,12 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 
 		return fsalstat(ERR_FSAL_NOTDIR, 0);
 	}
+
+	status.major = fsal_inherit_acls(attrib, dir_hdl->attributes.acl,
+				       FSAL_ACE_FLAG_FILE_INHERIT);
+	if (FSAL_IS_ERROR(status))
+		return status;
+
 	myself = container_of(dir_hdl, struct vfs_fsal_obj_handle, obj_handle);
 	if (dir_hdl->fsal != dir_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
@@ -726,6 +744,11 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 	if (FSAL_IS_ERROR(status))
 		return status;
 #endif /* ENABLE_VFS_DEBUG_ACL */
+
+	status.major = fsal_inherit_acls(attrib, dir_hdl->attributes.acl,
+				       FSAL_ACE_FLAG_FILE_INHERIT);
+	if (FSAL_IS_ERROR(status))
+		return status;
 
 	dir_fd = vfs_fsal_open(myself, flags, &status.major);
 	if (dir_fd < 0)
