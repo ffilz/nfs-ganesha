@@ -673,7 +673,14 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 
 	fsalattr = &objhandle->handle.attributes;
 	stat2fsal_attributes(&buffxstat.buffstat, fsalattr);
-
+	switch (obj_hdl->type) {
+	case REGULAR_FILE:
+		buffxstat.is_dir = false; break;
+	case DIRECTORY:
+		buffxstat.is_dir = true; break;
+	default:
+		break;
+	}
 	status = glusterfs_get_acl(glfs_export, objhandle->glhandle,
 				   &buffxstat, fsalattr);
 
@@ -774,6 +781,14 @@ static fsal_status_t setattrs(struct fsal_obj_handle *obj_hdl,
 
 	if (NFSv4_ACL_SUPPORT) {
 		if (FSAL_TEST_MASK(attrs->mask, ATTR_ACL)) {
+			switch (obj_hdl->type) {
+			case REGULAR_FILE:
+				buffxstat.is_dir = false; break;
+			case DIRECTORY:
+				buffxstat.is_dir = true; break;
+			default:
+				break;
+			}
 			FSAL_SET_MASK(attr_valid, XATTR_ACL);
 			status =
 			  glusterfs_process_acl(glfs_export->gl_fs,
@@ -821,9 +836,17 @@ static fsal_status_t setattrs(struct fsal_obj_handle *obj_hdl,
 
 	if (FSAL_TEST_MASK(attr_valid, XATTR_ACL)) {
 		rc = glfs_h_acl_set(glfs_export->gl_fs, objhandle->glhandle,
-					ACL_TYPE_ACCESS, buffxstat.acl);
+					ACL_TYPE_ACCESS, buffxstat.e_acl);
 		if (rc)
 			status = fsalstat(ERR_FSAL_SERVERFAULT, errno);
+		/* For directories consider inherited acl too */
+		if (buffxstat.is_dir && buffxstat.i_acl) {
+			rc = glfs_h_acl_set(glfs_export->gl_fs,
+					objhandle->glhandle, ACL_TYPE_DEFAULT,
+					buffxstat.i_acl);
+			if (rc)
+				status = fsalstat(ERR_FSAL_SERVERFAULT, errno);
+		}
 	}
 out:
 #ifdef GLTIMING
