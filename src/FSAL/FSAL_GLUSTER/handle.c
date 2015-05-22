@@ -821,9 +821,14 @@ static fsal_status_t setattrs(struct fsal_obj_handle *obj_hdl,
 
 	if (FSAL_TEST_MASK(attr_valid, XATTR_ACL)) {
 		rc = glfs_h_acl_set(glfs_export->gl_fs, objhandle->glhandle,
-					ACL_TYPE_ACCESS, buffxstat.acl);
+					ACL_TYPE_ACCESS, buffxstat.e_acl);
 		if (rc)
 			status = fsalstat(ERR_FSAL_SERVERFAULT, errno);
+		/* For directories consider inherited acl too */
+		if (obj_hdl->type == DIRECTORY && buffxstat.i_acl)
+			rc = glfs_h_acl_set(glfs_export->gl_fs,
+					objhandle->glhandle, ACL_TYPE_DEFAULT,
+					buffxstat.i_acl);
 	}
 out:
 #ifdef GLTIMING
