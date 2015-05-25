@@ -724,6 +724,9 @@ cache_inode_check_setattr_perms(cache_entry_t *entry,
 				struct attrlist *attr,
 				bool is_open_write);
 
+cache_inode_status_t
+cache_inode_check_getattr_perms(cache_entry_t *entry);
+
 bool is_open(cache_entry_t *entry);
 bool is_open_for_read(cache_entry_t *entry);
 bool is_open_for_write(cache_entry_t *entry);

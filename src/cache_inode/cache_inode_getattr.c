@@ -117,6 +117,10 @@ cache_inode_getattr(cache_entry_t *entry,
 
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 
+	status = cache_inode_check_getattr_perms(entry);
+	if (status != CACHE_INODE_SUCCESS)
+		return status;
+
 	if (status == CACHE_INODE_CROSS_JUNCTION) {
 		/* Get the root of the export across the junction. */
 		if (junction_export != NULL) {

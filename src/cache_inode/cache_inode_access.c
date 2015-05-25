@@ -387,4 +387,59 @@ cache_inode_check_setattr_perms(cache_entry_t *entry,
 	return status;
 }
 
+/**
+ *
+ * @brief Checks permissions on an entry for getattrs
+ *
+ * This function checks if the supplied credentials
+ * are sufficient to perform the required setattrs.
+ *
+ * @param[in] entry   The object to be checked
+ *
+ * @return CACHE_INODE_SUCCESS if operation is a success
+ */
+cache_inode_status_t
+cache_inode_check_getattr_perms(cache_entry_t *entry)
+{
+	cache_inode_status_t status = CACHE_INODE_SUCCESS;
+	fsal_accessflags_t access_check = 0;
+	bool not_owner;
+	char *note = "";
+	const struct user_cred *creds = op_ctx->creds;
+
+	/* Shortcut, if current user is root, return success*/
+	if (creds->caller_uid == 0) {
+		note = " (Ok for root user)";
+		goto out;
+	}
+	not_owner = (creds->caller_uid != entry->obj_handle->attributes.owner);
+
+	access_check |=
+		FSAL_ACE4_MASK_SET(FSAL_ACE_PERM_READ_ACL);
+
+	if (!not_owner) {
+		note = " (Ok for owner)";
+		goto out;
+	}
+
+	if (entry->obj_handle->attributes.acl) {
+		status =
+			cache_inode_access_no_mutex(entry, access_check);
+
+		note = " (checked ACL)";
+		goto out;
+	}
+
+	status = cache_inode_access_no_mutex(entry, FSAL_R_OK);
+	note = " (checked mode)";
+out:
+
+	LogDebugCIA(COMPONENT_CACHE_INODE, COMPONENT_NFS_V4_ACL,
+		"Access check returned %s%s",
+		cache_inode_err_str(status), note);
+	return status;
+
+}
+
+
 /** @} */
