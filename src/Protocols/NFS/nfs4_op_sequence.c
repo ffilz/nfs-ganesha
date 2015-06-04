@@ -100,7 +100,9 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 
 	PTHREAD_MUTEX_unlock(&session->clientid_record->cid_mutex);
 
-	/* Check is slot is compliant with ca_maxrequests */
+	/* Check is slot is compliant with ca_maxrequest
+	 * @todo: ca_maxrequests looks constant NFS41_NB_SLOTS,
+	 * this probably should be a configuration variable */
 	if (arg_SEQUENCE4->sa_slotid >=
 	    session->fore_channel_attrs.ca_maxrequests) {
 		dec_session_ref(session);
@@ -193,7 +195,7 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_highest_slotid =
 	    NFS41_NB_SLOTS - 1;
 	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_target_highest_slotid =
-	    arg_SEQUENCE4->sa_slotid;	/* Maybe not the best choice */
+	    session->fore_channel_attrs.ca_maxrequests - 1;
 
 	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_status_flags = 0;
 
