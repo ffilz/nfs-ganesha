@@ -69,7 +69,7 @@ static void export_release(struct fsal_export *exp_hdl)
 	/* Wait for up_thread to exit */
 	err = pthread_join(glfs_export->up_thread, (void **)&retval);
 
-	if (*retval) {
+	if (retval && *retval) {
 		LogDebug(COMPONENT_FSAL, "Up_thread join returned value %d",
 			 *retval);
 	}
