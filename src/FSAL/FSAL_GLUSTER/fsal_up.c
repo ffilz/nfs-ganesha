@@ -160,18 +160,18 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 				glfsexport->gl_fs, rc, errsv,
 				strerror(errsv), reason);
 
-			rc = -(rc);
-			/* Could be ENOMEM issues. Retry for couple of times
+			/* if ENOMEM retry for couple of times
 			 * and then exit
 			 */
-			if (retry < 10) {
+			if ((errsv == ENOMEM) && (retry < 10)) {
 				sleep(1);
 				retry++;
 				continue;
 			} else {
-				LogFatal(COMPONENT_FSAL_UP,
-					 "Retry limit for poll_upcall exceeded for (%p).",
-					 glfsexport->gl_fs);
+				if (retry > 10)
+					LogFatal(COMPONENT_FSAL_UP,
+						 "Retry limit for poll_upcall exceeded for (%p).",
+						 glfsexport->gl_fs);
 				return NULL;
 			}
 		}
@@ -182,9 +182,10 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 			     "Received upcall event: reason(%d)",
 			     reason);
 
-		if (!reason)
+		if (!reason) {
+			sleep(1);
 			continue;
-
+		}
 
 		/* Decide what type of event this is
 		 * inode update / invalidate? */
