@@ -1151,6 +1151,7 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
 	fsal_status_t st;
 	int retval = 0;
+	attrmask_t request_mask;
 
 	myself = container_of(obj_hdl, struct vfs_fsal_obj_handle, obj_handle);
 
@@ -1167,6 +1168,7 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 	cfd = vfs_fsal_open_and_stat(op_ctx->fsal_export, myself, &stat,
 				     O_RDONLY, &fsal_error);
 	if (cfd.fd >= 0) {
+		request_mask = obj_hdl->attributes.mask;
 		st = posix2fsal_attributes(&stat, &obj_hdl->attributes);
 		if (FSAL_IS_ERROR(st)) {
 			FSAL_CLEAR_MASK(obj_hdl->attributes.mask);
@@ -1178,7 +1180,8 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl)
 			obj_hdl->attributes.fsid = obj_hdl->fs->fsid;
 		}
 		if (myself->sub_ops && myself->sub_ops->getattrs) {
-			st = myself->sub_ops->getattrs(myself, cfd.fd);
+			st = myself->sub_ops->getattrs(myself, cfd.fd,
+						       request_mask);
 			if (FSAL_IS_ERROR(st)) {
 				FSAL_CLEAR_MASK(obj_hdl->attributes.mask);
 				FSAL_SET_MASK(obj_hdl->attributes.mask,
@@ -1396,7 +1399,8 @@ static fsal_status_t setattrs(struct fsal_obj_handle *obj_hdl,
 	if (myself->sub_ops && myself->sub_ops->setattrs) {
 		fsal_status_t st;
 
-		st = myself->sub_ops->setattrs(myself, cfd.fd, attrs);
+		st = myself->sub_ops->setattrs(myself, cfd.fd, attrs->mask,
+				attrs);
 		if (FSAL_IS_ERROR(st)) {
 			fsal_error = st.major;
 			retval = st.minor;
