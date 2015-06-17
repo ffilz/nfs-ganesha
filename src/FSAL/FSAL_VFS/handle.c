@@ -1062,6 +1062,14 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 	int oldfd = -1, newfd = -1;
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
 	int retval = 0;
+#ifdef ENABLE_VFS_DEBUG_ACL
+	fsal_status_t status;
+
+	status = fsal_rename_access(obj_hdl, olddir_hdl, newdir_hdl,
+			obj_hdl->type == DIRECTORY);
+	if (FSAL_IS_ERROR(status))
+		return status;
+#endif /* ENABLE_VFS_DEBUG_ACL */
 
 	olddir =
 	    container_of(olddir_hdl, struct vfs_fsal_obj_handle, obj_handle);
