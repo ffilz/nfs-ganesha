@@ -40,6 +40,7 @@
 #include "log.h"
 #include "hashtable.h"
 #include "fsal.h"
+#include "FSAL/fsal_commonlib.h"
 #include "cache_inode_lru.h"
 
 #include <unistd.h>
@@ -280,6 +281,24 @@ cache_inode_rename(cache_entry_t *dir_src,
 			 dir_src, oldname, dir_dest, newname);
 		goto out;
 	}
+
+#ifdef ENABLE_RFC_ACL
+	fsal_status = fsal_rename_access(dir_src->obj_handle,
+					 lookup_src->obj_handle,
+					 dir_dest->obj_handle,
+					 lookup_dst ?
+					     lookup_dst->obj_handle : NULL,
+					 lookup_src->type == DIRECTORY);
+	if (FSAL_IS_ERROR(fsal_status)) {
+		status = cache_inode_error_convert(fsal_status);
+
+		LogFullDebug(COMPONENT_CACHE_INODE,
+			     "FSAL rename_access failed with %s",
+			     cache_inode_err_str(status));
+
+		goto out;
+	}
+#endif /* ENABLE_RFC_ACL */
 
 	/* Perform the rename operation in FSAL before doing anything in the
 	 * cache. Indeed, if the FSAL_rename fails unexpectly, the cache would
