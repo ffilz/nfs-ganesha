@@ -257,6 +257,7 @@ state_status_t cache_inode_status_to_state_status(cache_inode_status_t status)
 		return STATE_FSAL_SHARE_DENIED;
 	case CACHE_INODE_FSAL_MLINK:
 		return STATE_MLINK;
+	case CACHE_INODE_NO_DATA:
 	case CACHE_INODE_SERVERFAULT:
 		return STATE_SERVERFAULT;
 	case CACHE_INODE_TOOSMALL:
