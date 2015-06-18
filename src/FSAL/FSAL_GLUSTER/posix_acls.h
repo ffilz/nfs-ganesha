@@ -34,7 +34,7 @@ acl_t
 fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type);
 
 acl_entry_t
-find_entry(acl_t acl, acl_tag_t tag, int id);
+find_entry(acl_t acl, acl_tag_t tag, unsigned int id);
 
 fsal_status_t
 posix_acl_2_fsal_acl_for_dir(acl_t e_acl, acl_t i_acl, fsal_acl_t **p_falacl);
