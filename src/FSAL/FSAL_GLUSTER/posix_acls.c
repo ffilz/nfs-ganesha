@@ -62,33 +62,35 @@ is_ace_valid_for_inherited_acl_entry(fsal_ace_t *ace) {
 
 }
 
-/* add permissions in posix acl entry according to allow ace */
-void
-convert_allow_entry_to_posix(fsal_ace_t *ace, acl_permset_t *p_permset) {
+bool
+isallow(fsal_ace_t *ace, acl_permset_t everyone, acl_perm_t perm) {
 
-	if (IS_FSAL_ACE_READ_DATA(*ace))
-		acl_add_perm(*p_permset, ACL_READ);
-	if (IS_FSAL_ACE_WRITE_DATA(*ace))
-		acl_add_perm(*p_permset, ACL_WRITE);
-	if (IS_FSAL_ACE_EXECUTE(*ace))
-		acl_add_perm(*p_permset, ACL_EXECUTE);
+	bool ret = acl_get_perm(everyone, perm);
+
+	switch (perm) {
+	case ACL_READ:
+		ret |= IS_FSAL_ACE_READ_DATA(*ace);
+		break;
+	case ACL_WRITE:
+		ret |=	IS_FSAL_ACE_WRITE_DATA(*ace);
+		break;
+	case ACL_EXECUTE:
+		ret |=	IS_FSAL_ACE_EXECUTE(*ace);
+		break;
+	}
+
+	return ret;
 }
 
-/* delete permissions in posix acl entry according to deny ace */
-void
-convert_deny_entry_to_posix(fsal_ace_t *ace, acl_permset_t *p_permset) {
+bool
+isdeny(acl_permset_t deny, acl_permset_t everyone, acl_perm_t perm) {
 
-	if (IS_FSAL_ACE_READ_DATA(*ace))
-		acl_delete_perm(*p_permset, ACL_READ);
-	if (IS_FSAL_ACE_WRITE_DATA(*ace))
-		acl_delete_perm(*p_permset, ACL_WRITE);
-	if (IS_FSAL_ACE_EXECUTE(*ace))
-		acl_delete_perm(*p_permset, ACL_EXECUTE);
+	return acl_get_perm(deny, perm) | acl_get_perm(everyone, perm);
 }
 
 /* Finds ACL entry with help of tag and id */
 acl_entry_t
-find_entry(acl_t acl, acl_tag_t tag, int id) {
+find_entry(acl_t acl, acl_tag_t tag,  unsigned int id) {
 	acl_entry_t entry;
 	acl_tag_t entryTag;
 	int ent, ret;
@@ -111,10 +113,34 @@ find_entry(acl_t acl, acl_tag_t tag, int id) {
 		}
 		if (tag == entryTag) {
 			if (tag == ACL_USER || tag == ACL_GROUP)
-				if (id != *(int *)acl_get_qualifier(entry))
+				if (id != *(unsigned int *)acl_get_qualifier(entry))
 					continue;
 			break;
 		}
+	}
+
+	return entry;
+}
+
+acl_entry_t
+get_entry(acl_t acl, acl_tag_t tag, unsigned int id) {
+	acl_entry_t entry;
+	int ret;
+
+	if (!acl)
+		return NULL;
+	entry = find_entry (acl, tag, id);
+
+	if (!entry) {
+		ret = acl_create_entry(&acl, &entry);
+		if (ret) {
+			LogMajor(COMPONENT_FSAL, "Cannot create entry");
+			return NULL;
+		}
+		ret = acl_set_tag_type(entry, tag);
+		if (ret)
+			LogWarn(COMPONENT_FSAL, "Cannot set tag for Entry");
+		ret = acl_set_qualifier(entry, &id);
 	}
 
 	return entry;
@@ -278,154 +304,78 @@ posix_acl_2_fsal_acl(acl_t p_posixacl, fsal_acl_t **p_falacl)
 acl_t
 fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type)
 {
-	int ret = 0, i, u_count = 0, g_count = 0, entries = 0;
-	int d_user = 0, d_group = 0;
-	fsal_ace_t *f_ace, *deny_ace = NULL;
-	acl_t p_acl, dummy_acl;
-	acl_entry_t p_entry, everyone;
-	acl_permset_t p_permset, e_permset;
-	/* FIXME : The no of users/groups is limited to hundred here */
-	uid_t uid[100], tmp_uid;
-	gid_t gid[100], tmp_gid;
-	bool user = false;
-	bool group = false;
-	bool dup_entry = false;
+	int ret = 0, i;
+	fsal_ace_t *f_ace;
+	acl_t allow_acl, deny_acl;
+	acl_entry_t a_entry, everyone_allow, d_entry, everyone_deny;
+	acl_permset_t a_permset, e_a_permset, d_permset, e_d_permset;
+	acl_tag_t tag;
+	unsigned int id;
+	bool mask = false;
+        bool deny_e_r = false, deny_e_w = false, deny_e_x = false;
 
-	if (p_fsalacl == NULL)
+
+	if (p_fsalacl == NULL || p_fsalacl->naces < 0)
 		return NULL;
-	/*
-	 * Calculating no of default entries and access entries
-	 * in the given fsal_acl
-	 */
-	switch (type) {
-	case ACL_TYPE_ACCESS:
-		for (f_ace = p_fsalacl->aces;
-			f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
-			if (is_ace_valid_for_effective_acl_entry(f_ace))
-				entries++;
-		}
-		break;
-	case ACL_TYPE_DEFAULT:
-		for (f_ace = p_fsalacl->aces;
-			f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
-			if (is_ace_valid_for_inherited_acl_entry(f_ace))
-				entries++;
-		}
-		break;
-	default:
-		LogWarn(COMPONENT_FSAL, "Invalid type for the acl");
+
+	/*FIXME: Always allocating more than required, chance of memory leak */
+	allow_acl = acl_init(p_fsalacl->naces + 1);
+	deny_acl = acl_init(p_fsalacl->naces + 1);
+
+	/* ACE EVERYONE@ should handle first */
+	ret = acl_create_entry(&deny_acl, &everyone_deny);
+	if (ret) {
+		LogMajor(COMPONENT_FSAL, "Cannot create entry for other");
 	}
 
-	if (entries > 0)
-		p_acl = acl_init(entries + 1);
-	else
-		return NULL;
+	ret = acl_set_tag_type(everyone_deny, ACL_OTHER);
+	if (ret)
+		LogWarn(COMPONENT_FSAL, "Cannot set tag for ACL Entry");
 
-	/* To store values of EVERYONE ACE, a duumy acl entry is used and
-	 * it freed at the end */
-	dummy_acl = acl_init(1);
-	ret = acl_create_entry(&dummy_acl, &everyone);
+	ret = acl_get_permset(everyone_deny, &e_d_permset);
+
+	ret = acl_create_entry(&allow_acl, &everyone_allow);
 	if (ret) {
 		LogMajor(COMPONENT_FSAL, "Cannot create entry for other");
 		return NULL;
 	}
-	ret = acl_set_tag_type(everyone, ACL_OTHER);
+	ret = acl_set_tag_type(everyone_allow, ACL_OTHER);
 	if (ret)
 		LogWarn(COMPONENT_FSAL, "Cannot set tag for ACL Entry");
 
-	ret = acl_get_permset(everyone, &e_permset);
+	ret = acl_get_permset(everyone_allow, &e_a_permset);
+
 	for (f_ace = p_fsalacl->aces;
 		f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
-			if (IS_FSAL_ACE_SPECIAL_EVERYONE(*f_ace)) {
-				if ((type == ACL_TYPE_ACCESS &&
-				!is_ace_valid_for_effective_acl_entry(f_ace))
-				|| (type == ACL_TYPE_DEFAULT &&
-				!is_ace_valid_for_inherited_acl_entry(f_ace)))
-					continue;
-				if (IS_FSAL_ACE_DENY(*f_ace))
-					deny_ace = f_ace;
-				else if (IS_FSAL_ACE_ALLOW(*f_ace))
-					convert_allow_entry_to_posix(f_ace,
-								&e_permset);
-			}
-	}
-
-	if (deny_ace) {
-		convert_deny_entry_to_posix(deny_ace, &e_permset);
-		deny_ace = NULL;
-	}
-	/*
-	 * Populating list of users and group which are not special.
-	 * Mulitple entries for same users and group is possible, so
-	 * avoid duplicate entries in the array.
-	 * TODO: Use a separate api for performing this function
-	 * Annoymous users/groups (id = -1) should handle properly
-	 */
-	for (f_ace = p_fsalacl->aces;
-	f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
-		if (!IS_FSAL_ACE_SPECIAL_ID(*f_ace)) {
-			if (IS_FSAL_ACE_GROUP_ID(*f_ace)) {
-				tmp_gid = GET_FSAL_ACE_WHO(*f_ace);
-				for (i = 0; i < g_count ; i++) {
-					if (gid[i] == tmp_gid) {
-						dup_entry = true;
-						break;
-					}
-				}
-				if (dup_entry) {
-					dup_entry = false;
-					continue;
-				}
-				gid[g_count++] = tmp_gid;
-			} else {
-				tmp_uid = GET_FSAL_ACE_WHO(*f_ace);
-				for (i = 0; i < u_count ; i++) {
-					if (uid[i] == tmp_uid) {
-						dup_entry = true;
-						break;
-					}
-				}
-				if (dup_entry) {
-					dup_entry = false;
-					continue;
-				}
-				uid[u_count++] = tmp_uid;
+		if (IS_FSAL_ACE_SPECIAL_EVERYONE(*f_ace)) {
+			if ((type == ACL_TYPE_ACCESS &&
+			!is_ace_valid_for_effective_acl_entry(f_ace))
+			|| (type == ACL_TYPE_DEFAULT &&
+			!is_ace_valid_for_inherited_acl_entry(f_ace)))
+				continue;
+			if (IS_FSAL_ACE_DENY(*f_ace)) {
+				if (IS_FSAL_ACE_READ_DATA(*f_ace))
+					deny_e_r = true;
+				if (IS_FSAL_ACE_WRITE_DATA(*f_ace))
+					deny_e_w = true;
+				if (IS_FSAL_ACE_EXECUTE(*f_ace))
+					deny_e_x = true;
+			} else if (IS_FSAL_ACE_ALLOW(*f_ace)) {
+				if (IS_FSAL_ACE_READ_DATA(*f_ace) && !deny_e_r)
+					acl_add_perm(e_a_permset, ACL_READ);
+				if (IS_FSAL_ACE_WRITE_DATA(*f_ace) && !deny_e_w)
+					acl_add_perm(e_a_permset, ACL_WRITE);
+				if (IS_FSAL_ACE_EXECUTE(*f_ace) && !deny_e_x)
+					acl_add_perm(e_a_permset, ACL_EXECUTE);
 			}
 		}
 	}
-	if (u_count > 0)
-		user = true;
-	if (g_count > 0)
-		group = true;
 
-	LogDebug(COMPONENT_FSAL, "u_count = %d g_count = %d entries = %d",
-		       u_count, g_count, entries);
+
 	/*
-	 * The fsal_acl list is unordered, but we need to keep posix_acl in
-	 * a specific order such that users, groups, other.So we will fetch
-	 * ACE's from the fsal_acl in that order and convert it into a
-	 * corresponding posix_acl entry
-	 *
-	 * TODO: Currently there are lots of code duplication in this api
-	 *       So its better implement different api's for :
-	 *             1.) fetching a required ACE from fsal_acl
-	 *             2.) Convert a ACE into corresponding posix_acl_entry
-	 *	and use them
+	 * TODO: Annoymous users/groups (id = -1) should handle properly
 	 */
 
-	ret = acl_create_entry(&p_acl, &p_entry);
-	if (ret) {
-		LogMajor(COMPONENT_FSAL, "Cannot create entry for user");
-		return NULL;
-	}
-
-	ret = acl_set_tag_type(p_entry, ACL_USER_OBJ);
-	if (ret)
-		LogWarn(COMPONENT_FSAL, "Cannot set tag for Entry");
-
-	ret = acl_get_permset(p_entry, &p_permset);
-
-	/* Deny entry is handled at the end */
 	for (f_ace = p_fsalacl->aces;
 		f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
 			if ((type == ACL_TYPE_ACCESS &&
@@ -433,195 +383,64 @@ fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type)
 			|| (type == ACL_TYPE_DEFAULT &&
 			!is_ace_valid_for_inherited_acl_entry(f_ace)))
 				continue;
+			if (IS_FSAL_ACE_SPECIAL_ID(*f_ace)) {
+				id = 0;
+				if (IS_FSAL_ACE_SPECIAL_OWNER(*f_ace))
+					tag = ACL_USER_OBJ;
+				if (IS_FSAL_ACE_SPECIAL_GROUP(*f_ace))
+					tag = ACL_GROUP_OBJ;
 
-			if (IS_FSAL_ACE_SPECIAL_OWNER(*f_ace)) {
-				if (IS_FSAL_ACE_DENY(*f_ace))
-					deny_ace = f_ace;
-				else if (IS_FSAL_ACE_ALLOW(*f_ace))
-					convert_allow_entry_to_posix(f_ace,
-								&p_permset);
+			} else {
+				id = GET_FSAL_ACE_WHO(*f_ace);
+				if (IS_FSAL_ACE_GROUP_ID(*f_ace))
+					tag = ACL_GROUP;
+				else
+					tag = ACL_USER;
+				mask = true;
 			}
-	}
-
-	/* Adding everyone's permission to the permset, if it is applicable */
-	if (acl_get_perm(e_permset, ACL_READ))
-		acl_add_perm(p_permset, ACL_READ);
-	if (acl_get_perm(e_permset, ACL_WRITE))
-		acl_add_perm(p_permset, ACL_WRITE);
-	if (acl_get_perm(e_permset, ACL_EXECUTE))
-		acl_add_perm(p_permset, ACL_EXECUTE);
-
-	if (deny_ace) {
-		convert_deny_entry_to_posix(deny_ace, &p_permset);
-		deny_ace = NULL;
-	}
-
-	if (user) {
-		for (i = 0; i < u_count; i++) {
-			ret = acl_create_entry(&p_acl, &p_entry);
-			if (ret)
-				LogWarn(COMPONENT_FSAL,
-					"Cannot create entry for user id %d",
-					uid[i]);
-			ret = acl_set_tag_type(p_entry, ACL_USER);
-			if (ret)
-				LogWarn(COMPONENT_FSAL,
-					"Cannot set tag for ACL Entry");
-
-			ret = acl_set_qualifier(p_entry, &uid[i]);
-
-			ret = acl_get_permset(p_entry, &p_permset);
-			for (f_ace = p_fsalacl->aces;
-			f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
-				if (IS_FSAL_ACE_USER(*f_ace, uid[i])) {
-					if ((type == ACL_TYPE_ACCESS &&
-					!is_ace_valid_for_effective_acl_entry(
-									f_ace))
-					|| (type == ACL_TYPE_DEFAULT &&
-					!is_ace_valid_for_inherited_acl_entry(
-									f_ace)))
-						continue;
-
-					if (IS_FSAL_ACE_DENY(*f_ace))
-						deny_ace = f_ace;
-					else if (IS_FSAL_ACE_ALLOW(*f_ace))
-						convert_allow_entry_to_posix(
-							f_ace, &p_permset);
+			if (IS_FSAL_ACE_SPECIAL_EVERYONE(*f_ace)) {
+				if (IS_FSAL_ACE_DENY(*f_ace)) {
+					if (deny_e_r)
+						acl_add_perm(e_d_permset, ACL_READ);
+					if (deny_e_w)
+						acl_add_perm(e_d_permset, ACL_WRITE);
+					if (deny_e_x)
+						acl_add_perm(e_d_permset, ACL_EXECUTE);
 				}
-			}
-
-			/* Adding everyone's permission to the permset,
-			 * if it is applicable
-			 */
-			if (acl_get_perm(e_permset, ACL_READ))
-				acl_add_perm(p_permset, ACL_READ);
-			if (acl_get_perm(e_permset, ACL_WRITE))
-				acl_add_perm(p_permset, ACL_WRITE);
-			if (acl_get_perm(e_permset, ACL_EXECUTE))
-				acl_add_perm(p_permset, ACL_EXECUTE);
-
-			if (deny_ace) {
-				convert_deny_entry_to_posix(deny_ace,
-								 &p_permset);
-				deny_ace = NULL;
-			}
-			if (!acl_get_perm(p_permset, ACL_READ)
-				&& !acl_get_perm(p_permset, ACL_WRITE)
-				&& !acl_get_perm(p_permset, ACL_EXECUTE)) {
-				acl_delete_entry(p_acl, p_entry);
-				d_user++;
-			}
-		}
-	}
-	ret = acl_create_entry(&p_acl, &p_entry);
-	if (ret) {
-		LogMajor(COMPONENT_FSAL, "Cannot create entry for group");
-		return NULL;
-	}
-
-	ret = acl_set_tag_type(p_entry, ACL_GROUP_OBJ);
-	if (ret)
-		LogWarn(COMPONENT_FSAL, "Cannot set tag for ACL Entry");
-	ret = acl_get_permset(p_entry, &p_permset);
-
-	for (f_ace = p_fsalacl->aces;
-		f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
-			if (IS_FSAL_ACE_SPECIAL_GROUP(*f_ace)) {
-				if ((type == ACL_TYPE_ACCESS &&
-				!is_ace_valid_for_effective_acl_entry(f_ace))
-				|| (type == ACL_TYPE_DEFAULT &&
-				!is_ace_valid_for_inherited_acl_entry(f_ace)))
 					continue;
-
-				if (IS_FSAL_ACE_DENY(*f_ace))
-					deny_ace = f_ace;
-				else if (IS_FSAL_ACE_ALLOW(*f_ace))
-					convert_allow_entry_to_posix(f_ace,
-								&p_permset);
 			}
-	}
+			a_entry = get_entry(allow_acl, tag, id);
+			d_entry = get_entry(deny_acl, tag, id);
+			ret = acl_get_permset(d_entry, &d_permset);
 
-	/* Adding everyone's permission to the permset, if it is applicable */
-	if (acl_get_perm(e_permset, ACL_READ))
-		acl_add_perm(p_permset, ACL_READ);
-	if (acl_get_perm(e_permset, ACL_WRITE))
-		acl_add_perm(p_permset, ACL_WRITE);
-	if (acl_get_perm(e_permset, ACL_EXECUTE))
-		acl_add_perm(p_permset, ACL_EXECUTE);
+			if (IS_FSAL_ACE_DENY(*f_ace)) {
+				if (IS_FSAL_ACE_READ_DATA(*f_ace))
+					acl_add_perm(d_permset, ACL_READ);
+				if (IS_FSAL_ACE_WRITE_DATA(*f_ace))
+					acl_add_perm(d_permset, ACL_WRITE);
+				if (IS_FSAL_ACE_EXECUTE(*f_ace))
+					acl_add_perm(d_permset, ACL_EXECUTE);
+			}
+			if (IS_FSAL_ACE_ALLOW(*f_ace)) {
+				ret = acl_get_permset(a_entry, &a_permset);
 
-	if (deny_ace) {
-		convert_deny_entry_to_posix(deny_ace, &p_permset);
-		deny_ace = NULL;
-	}
+				if (isallow(f_ace, e_a_permset, ACL_READ)
+				&& !isdeny(d_permset, e_d_permset, ACL_READ))
+					acl_add_perm(a_permset, ACL_READ);
 
-	if (group) {
-		for (i = 0; i < g_count; i++) {
-			ret = acl_create_entry(&p_acl, &p_entry);
-			if (ret)
-				LogWarn(COMPONENT_FSAL,
-				"Cannot create entry for group id %d",
-				gid[i]);
+				if (isallow(f_ace, e_a_permset, ACL_WRITE)
+				&& !isdeny(d_permset, e_d_permset, ACL_WRITE))
+					acl_add_perm(a_permset, ACL_WRITE);
 
-			ret = acl_set_tag_type(p_entry, ACL_GROUP);
-			if (ret)
-				LogWarn(COMPONENT_FSAL,
-				      "Cannot set tag for ACL Entry");
-
-			ret = acl_set_qualifier(p_entry, &gid[i]);
-
-			ret = acl_get_permset(p_entry, &p_permset);
-			for (f_ace = p_fsalacl->aces;
-			f_ace < p_fsalacl->aces + p_fsalacl->naces; f_ace++) {
-				if (IS_FSAL_ACE_GROUP(*f_ace, gid[i])) {
-					if ((type == ACL_TYPE_ACCESS &&
-					!is_ace_valid_for_effective_acl_entry(
-									f_ace))
-					|| (type == ACL_TYPE_DEFAULT &&
-					!is_ace_valid_for_inherited_acl_entry(
-									f_ace)))
-						continue;
-
-				if (IS_FSAL_ACE_DENY(*f_ace))
-					deny_ace = f_ace;
-				else if (IS_FSAL_ACE_ALLOW(*f_ace))
-					convert_allow_entry_to_posix(
-							f_ace, &p_permset);
-				}
+				if (isallow(f_ace, e_a_permset, ACL_EXECUTE)
+				&& !isdeny(d_permset, e_d_permset, ACL_EXECUTE))
+					acl_add_perm(a_permset, ACL_EXECUTE);
 			}
 
-			/* Adding everyone's permission to the permset,
-			 *  if it is applicable
-			 */
-			if (acl_get_perm(e_permset, ACL_READ))
-				acl_add_perm(p_permset, ACL_READ);
-			if (acl_get_perm(e_permset, ACL_WRITE))
-				acl_add_perm(p_permset, ACL_WRITE);
-			if (acl_get_perm(e_permset, ACL_EXECUTE))
-				acl_add_perm(p_permset, ACL_EXECUTE);
-
-			if (deny_ace) {
-				convert_deny_entry_to_posix(deny_ace,
-								 &p_permset);
-				deny_ace = NULL;
-			}
-			if (!acl_get_perm(p_permset, ACL_READ)
-				&& !acl_get_perm(p_permset, ACL_WRITE)
-				&& !acl_get_perm(p_permset, ACL_EXECUTE)) {
-					acl_delete_entry(p_acl, p_entry);
-					d_group++;
-			}
-		}
 	}
-	ret = acl_create_entry(&p_acl, &p_entry);
-	if (ret) {
-		LogMajor(COMPONENT_FSAL, "Cannot create entry for other");
-		return NULL;
-	}
-	acl_copy_entry(p_entry, everyone);
 
-	/* calculate appropriate mask if it is needed*/
-	if ((u_count - d_user) > 0 || (g_count - d_group) > 0) {
-		ret = acl_calc_mask(&p_acl);
+	if (mask) {
+		ret = acl_calc_mask(&allow_acl);
 		if (ret)
 			LogWarn(COMPONENT_FSAL,
 			"Cannot calculate mask for posix");
@@ -632,22 +451,26 @@ fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type)
 	 * ACL_MASK is required only if ACL_USER or
 	 * ACL_GROUP exists
 	 */
-	ret = acl_check(p_acl, &i);
+
+	ret = acl_check(allow_acl, &i);
 	if (ret) {
 		if (ret > 0) {
 			LogWarn(COMPONENT_FSAL,
 			"Error converting ACL: %s at entry no %d",
 			acl_error(ret), i);
 		}
-		return NULL;
+		if (acl_valid(allow_acl))
+			return NULL;
 
 	}
 	LogDebug(COMPONENT_FSAL, "posix acl = %s ",
-				acl_to_any_text(p_acl, NULL, ',',
+				acl_to_any_text(allow_acl, NULL, ',',
 					TEXT_ABBREVIATE |
 					TEXT_NUMERIC_IDS));
-	acl_free(dummy_acl);
-	return p_acl;
+	if (deny_acl)
+		acl_free(deny_acl);
+
+	return allow_acl;
 }
 
 /*
