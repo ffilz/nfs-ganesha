@@ -2295,6 +2295,11 @@ state_status_t do_lock_op(cache_entry_t *entry,
 		 * releasing the state that we need to acquire.
 		 * So let us be little patient to STATE_LOCK_CONFLICT errors
 		 * if the lock is a reclaim and we are in grace.
+		 *
+		 * lock->lock_reclaim is not valid if this is a lock
+		 * test request or unlock request. STATE_LOCK_CONFLICT is
+		 * expected only for the lock request, so let us test it
+		 * first to aviod spurious errors from valgrind.
 		 */
 		do {
 			if (status == STATE_LOCK_CONFLICT)
@@ -2311,8 +2316,8 @@ state_status_t do_lock_op(cache_entry_t *entry,
 
 			status = state_error_convert(fsal_status);
 
-		} while (lock->lock_reclaim &&
-			 status == STATE_LOCK_CONFLICT && nfs_in_grace());
+		} while (status == STATE_LOCK_CONFLICT && lock->lock_reclaim &&
+				nfs_in_grace());
 
 		LogFullDebug(COMPONENT_STATE, "FSAL_lock_op returned %s",
 			     state_err_str(status));
