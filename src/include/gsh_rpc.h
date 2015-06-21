@@ -136,8 +136,8 @@ const char *str_gc_proc(rpc_gss_proc_t);
 /* Private data associated with a new TI-RPC (TCP) SVCXPRT (transport
  * connection), ie, xprt->xp_u1.
  */
-#define XPRT_PRIVATE_FLAG_NONE 0x0000
-#define XPRT_PRIVATE_FLAG_LOCKED 0x0001
+#define XPRT_PRIVATE_FLAG_NONE		SVC_XPRT_FLAG_NONE
+#define XPRT_PRIVATE_FLAG_LOCKED	SVC_XPRT_FLAG_LOCKED
 #define XPRT_PRIVATE_FLAG_INCREQ 0x0002
 #define XPRT_PRIVATE_FLAG_DECREQ 0x0004
 #define XPRT_PRIVATE_FLAG_DECODING 0x0008
@@ -174,35 +174,29 @@ static inline void free_gsh_xprt_private(SVCXPRT *xprt)
 	}
 }
 
-static inline bool gsh_xprt_ref(SVCXPRT *xprt, uint32_t flags,
+static inline void gsh_xprt_ref(SVCXPRT *xprt, uint32_t flags,
 				const char *tag,
 				const int line)
 {
-	bool refd;
-
-	if (!(flags & XPRT_PRIVATE_FLAG_LOCKED))
-		PTHREAD_MUTEX_lock(&xprt->xp_lock);
-
 	if (flags & XPRT_PRIVATE_FLAG_INCREQ)
 		atomic_inc_uint32_t(&xprt->xp_requests);
 
-	refd = SVC_REF2(xprt, SVC_REF_FLAG_LOCKED, tag, line);
-
+	SVC_REF2(xprt, flags, tag, line);
 	/* !LOCKED */
 
 	LogFullDebugAlt(COMPONENT_DISPATCH, COMPONENT_RPC,
-		"xprt %p xp_requests=%u xp_refcnt=%u ag=%s line=%d",
-		xprt, xprt->xp_requests, xprt->xp_refcnt, tag, line);
-
-	return refd;
+		"xprt %p xp_requests=%" PRIu32 " xp_refs=%" PRIu32
+		" tag=%s line=%d",
+		xprt, xprt->xp_requests, xprt->xp_refs, tag, line);
 }
 
 static inline void gsh_xprt_unref(SVCXPRT *xprt, uint32_t flags,
 				  const char *tag, const int line)
 {
 	LogFullDebugAlt(COMPONENT_DISPATCH, COMPONENT_RPC,
-		"xprt %p prerelease xp_requests=%u xp_refcnt=%u tag=%s line=%d",
-		xprt, xprt->xp_requests, xprt->xp_refcnt, tag, line);
+		"xprt %p prerelease xp_requests=%" PRIu32 " xp_refs=%" PRIu32
+		" tag=%s line=%d",
+		xprt, xprt->xp_requests, xprt->xp_refs, tag, line);
 
 	if (!(flags & XPRT_PRIVATE_FLAG_LOCKED))
 		PTHREAD_MUTEX_lock(&xprt->xp_lock);
@@ -217,13 +211,13 @@ static inline void gsh_xprt_unref(SVCXPRT *xprt, uint32_t flags,
 			xu->flags &= ~XPRT_PRIVATE_FLAG_DECODING;
 	}
 
-	/* release xprt refcnt */
 	SVC_RELEASE2(xprt, SVC_RELEASE_FLAG_LOCKED, tag, line);
 	/* !LOCKED */
 
 	LogFullDebugAlt(COMPONENT_DISPATCH, COMPONENT_RPC,
-		"xprt %p postrelease xp_requests=%u xp_refcnt=%u tag=%s line=%d",
-		xprt, xprt->xp_requests, xprt->xp_refcnt, tag, line);
+		"xprt %p postrelease xp_requests=%" PRIu32 " xp_refs=%" PRIu32
+		" tag=%s line=%d",
+		xprt, xprt->xp_requests, xprt->xp_refs, tag, line);
 }
 
 static inline bool gsh_xprt_decoder_guard(SVCXPRT *xprt, uint32_t flags)
