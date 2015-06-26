@@ -53,6 +53,7 @@ char v4_old_dir[PATH_MAX];
  */
 static grace_t grace = {
 	.g_clid_list = GLIST_HEAD_INIT(grace.g_clid_list),
+	.t_mutex = PTHREAD_MUTEX_INITIALIZER,
 	.g_mutex = PTHREAD_MUTEX_INITIALIZER
 };
 
@@ -77,8 +78,7 @@ void nfs4_start_grace(nfs_grace_start_t *gsp)
 		return;
 	}
 
-	PTHREAD_MUTEX_lock(&grace.g_mutex);
-
+	PTHREAD_MUTEX_lock(&grace.t_mutex);
 	/* grace should always be greater than or equal to lease time,
 	 * some clients are known to have problems with grace greater than 60
 	 * seconds Lease_Lifetime should be set to a smaller value for those
@@ -86,6 +86,9 @@ void nfs4_start_grace(nfs_grace_start_t *gsp)
 	 */
 	grace.g_start = time(NULL);
 	grace.g_duration = nfs_param.nfsv4_param.lease_lifetime;
+	PTHREAD_MUTEX_unlock(&grace.t_mutex);
+
+	PTHREAD_MUTEX_lock(&grace.g_mutex);
 
 	LogEvent(COMPONENT_STATE, "NFS Server Now IN GRACE, duration %d",
 		 (int)grace.g_duration);
@@ -126,7 +129,7 @@ int nfs_in_grace(void)
 	if (nfs_param.nfsv4_param.graceless)
 		return 0;
 
-	PTHREAD_MUTEX_lock(&grace.g_mutex);
+	PTHREAD_MUTEX_lock(&grace.t_mutex);
 
 	in_grace = ((grace.g_start + grace.g_duration) > time(NULL));
 
@@ -138,7 +141,7 @@ int nfs_in_grace(void)
 		LogDebug(COMPONENT_STATE, "NFS Server IN GRACE");
 	}
 
-	PTHREAD_MUTEX_unlock(&grace.g_mutex);
+	PTHREAD_MUTEX_unlock(&grace.t_mutex);
 
 	return in_grace;
 }
