@@ -279,9 +279,14 @@ int construct_handle(struct glusterfs_export *glexport, const struct stat *sb,
 
 	if (FSAL_IS_ERROR(status)) {
 		/* TODO: Is the error appropriate */
-		errno = EINVAL;
-		gsh_free(constructing);
-		return -1;
+
+		/* For dead links , we should not return error */
+		if (!(constructing->attributes.type == SYMBOLIC_LINK
+					&& status.minor == ENOENT)) {
+			errno = EINVAL;
+			gsh_free(constructing);
+			return -1;
+		}
 	}
 
 	constructing->glhandle = glhandle;
@@ -491,7 +496,7 @@ fsal_status_t glusterfs_get_acl(struct glusterfs_export *glfs_export,
 		buffxstat->e_acl = glfs_h_acl_get(glfs_export->gl_fs,
 						glhandle,
 						ACL_TYPE_ACCESS);
-		if (buffxstat->e_acl) {
+		if (!errno) {
 			/* rc is the size of buffacl */
 			FSAL_SET_MASK(buffxstat->attr_valid, XATTR_ACL);
 			/* For directories consider inherited acl too */
@@ -499,7 +504,7 @@ fsal_status_t glusterfs_get_acl(struct glusterfs_export *glfs_export,
 				buffxstat->i_acl = glfs_h_acl_get(
 						glfs_export->gl_fs,
 						glhandle, ACL_TYPE_DEFAULT);
-				if (!buffxstat->i_acl)
+				if (errno)
 					LogDebug(COMPONENT_FSAL,
 				"inherited acl is not defined for directory");
 
