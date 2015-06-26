@@ -496,7 +496,7 @@ fsal_status_t glusterfs_get_acl(struct glusterfs_export *glfs_export,
 		buffxstat->e_acl = glfs_h_acl_get(glfs_export->gl_fs,
 						glhandle,
 						ACL_TYPE_ACCESS);
-		if (!errno) {
+		if (buffxstat->e_acl) {
 			/* rc is the size of buffacl */
 			FSAL_SET_MASK(buffxstat->attr_valid, XATTR_ACL);
 			/* For directories consider inherited acl too */
@@ -504,7 +504,7 @@ fsal_status_t glusterfs_get_acl(struct glusterfs_export *glfs_export,
 				buffxstat->i_acl = glfs_h_acl_get(
 						glfs_export->gl_fs,
 						glhandle, ACL_TYPE_DEFAULT);
-				if (errno)
+				if (!buffxstat->i_acl)
 					LogDebug(COMPONENT_FSAL,
 				"inherited acl is not defined for directory");
 
