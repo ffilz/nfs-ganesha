@@ -37,6 +37,9 @@
 #include <pthread.h>
 #include <signal.h>		/* for sigaction */
 #include <errno.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+
 #include "fsal.h"
 #include "log.h"
 #include "nfs_init.h"
@@ -129,10 +132,19 @@ int main(int argc, char *argv[])
 #endif
 	sigset_t signals_to_block;
 	struct config_error_type err_type;
+	struct rlimit rlim;
 
 	/* Set the server's boot time and epoch */
 	now(&ServerBootTime);
 	ServerEpoch = (time_t) ServerBootTime.tv_sec;
+
+	/* setup unlimited core file size */
+	rlim.rlim_cur = RLIM_INFINITY;
+	rlim.rlim_max = RLIM_INFINITY;
+	if (setrlimit(RLIMIT_CORE, &rlim) != 0)
+		fprintf(stderr,
+			"Couldn't set core file size to unlimited: %s\n",
+			strerror(errno));
 
 	tempo_exec_name = strrchr(argv[0], '/');
 	if (tempo_exec_name != NULL) {
