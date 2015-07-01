@@ -50,11 +50,23 @@ char v4_old_dir[PATH_MAX];
 nsecs_elapsed_t current_grace;
 
 /**
+ * @brief Grace period control structure
+ *
+ * This could be expanded to implement grace instances, where a new
+ * grace period is started for every failover.  for now keep it
+ * simple, just a global used by all clients.
+ */
+typedef struct grace {
+	pthread_mutex_t mutex;        /*< Mutex */
+	struct glist_head clid_list;  /*< Clients */
+} grace_t;
+
+/**
  * @brief Grace period control data
  */
 static grace_t grace = {
-	.g_clid_list = GLIST_HEAD_INIT(grace.g_clid_list),
-	.g_mutex = PTHREAD_MUTEX_INITIALIZER
+	.clid_list = GLIST_HEAD_INIT(grace.clid_list),
+	.mutex = PTHREAD_MUTEX_INITIALIZER
 };
 
 static void nfs4_load_recov_clids_nolock(nfs_grace_start_t *gsp);
@@ -80,7 +92,7 @@ void nfs4_start_grace(nfs_grace_start_t *gsp)
 		return;
 	}
 
-	PTHREAD_MUTEX_lock(&grace.g_mutex);
+	PTHREAD_MUTEX_lock(&grace.mutex);
 
 	/* grace should always be greater than or equal to lease time,
 	 * some clients are known to have problems with grace greater than 60
@@ -111,7 +123,7 @@ void nfs4_start_grace(nfs_grace_start_t *gsp)
 				nfs4_load_recov_clids_nolock(gsp);
 		}
 	}
-	PTHREAD_MUTEX_unlock(&grace.g_mutex);
+	PTHREAD_MUTEX_unlock(&grace.mutex);
 }
 
 int last_grace = -1;
@@ -480,7 +492,7 @@ void  nfs4_chk_clid_impl(nfs_client_id_t *clientid, clid_entry_t **clid_ent_arg)
 		return;
 
 	/* If there were no clients at time of restart, we're done */
-	if (glist_empty(&grace.g_clid_list))
+	if (glist_empty(&grace.clid_list))
 		return;
 
 	/*
@@ -488,7 +500,7 @@ void  nfs4_chk_clid_impl(nfs_client_id_t *clientid, clid_entry_t **clid_ent_arg)
 	 * find it, mark it to allow reclaims.  perhaps the client should
 	 * be removed from the list at this point to make the list shorter?
 	 */
-	glist_for_each(node, &grace.g_clid_list) {
+	glist_for_each(node, &grace.clid_list) {
 		clid_ent = glist_entry(node, clid_entry_t, cl_list);
 		LogDebug(COMPONENT_CLIENTID, "compare %s to %s",
 			 clid_ent->cl_name, clientid->cid_recov_dir);
@@ -520,9 +532,9 @@ void  nfs4_chk_clid(nfs_client_id_t *clientid)
 	/* If we aren't in grace period, then reclaim is not possible */
 	if (!nfs_in_grace())
 		return;
-	PTHREAD_MUTEX_lock(&grace.g_mutex);
+	PTHREAD_MUTEX_lock(&grace.mutex);
 	nfs4_chk_clid_impl(clientid, &dummy_clid_ent);
-	PTHREAD_MUTEX_unlock(&grace.g_mutex);
+	PTHREAD_MUTEX_unlock(&grace.mutex);
 }
 
 static void free_heap(char *path, char *new_path, char *build_clid)
@@ -847,7 +859,7 @@ static int nfs4_read_recov_clids(DIR *dp,
 							tgtdir,
 							!takeover);
 				strcpy(new_ent->cl_name, build_clid);
-				glist_add(&grace.g_clid_list,
+				glist_add(&grace.clid_list,
 					  &new_ent->cl_list);
 				LogDebug(COMPONENT_CLIENTID,
 					 "added %s to clid list",
@@ -889,8 +901,8 @@ static void nfs4_load_recov_clids_nolock(nfs_grace_start_t *gsp)
 
 	if (gsp == NULL) {
 		/* when not doing a takeover, start with an empty list */
-		if (!glist_empty(&grace.g_clid_list)) {
-			glist_for_each(node, &grace.g_clid_list) {
+		if (!glist_empty(&grace.clid_list)) {
+			glist_for_each(node, &grace.clid_list) {
 				glist_del(node);
 				clid_entry =
 				    glist_entry(node, clid_entry_t, cl_list);
@@ -990,11 +1002,11 @@ static void nfs4_load_recov_clids_nolock(nfs_grace_start_t *gsp)
  */
 void nfs4_load_recov_clids(nfs_grace_start_t *gsp)
 {
-	PTHREAD_MUTEX_lock(&grace.g_mutex);
+	PTHREAD_MUTEX_lock(&grace.mutex);
 
 	nfs4_load_recov_clids_nolock(gsp);
 
-	PTHREAD_MUTEX_unlock(&grace.g_mutex);
+	PTHREAD_MUTEX_unlock(&grace.mutex);
 }
 
 /**
@@ -1209,10 +1221,10 @@ bool nfs4_check_deleg_reclaim(nfs_client_id_t *clid, nfs_fh4 *fhandle)
 				  rhdlstr, sizeof(rhdlstr));
 	assert(retval != -1);
 
-	PTHREAD_MUTEX_lock(&grace.g_mutex);
+	PTHREAD_MUTEX_lock(&grace.mutex);
 	nfs4_chk_clid_impl(clid, &clid_ent);
 	if (clid_ent == NULL || glist_empty(&clid_ent->cl_rfh_list)) {
-		PTHREAD_MUTEX_unlock(&grace.g_mutex);
+		PTHREAD_MUTEX_unlock(&grace.mutex);
 		return true;
 	}
 
@@ -1220,7 +1232,7 @@ bool nfs4_check_deleg_reclaim(nfs_client_id_t *clid, nfs_fh4 *fhandle)
 		rfh_entry = glist_entry(node, rdel_fh_t, rdfh_list);
 		assert(rfh_entry != NULL);
 		if (!strcmp(rhdlstr, rfh_entry->rdfh_handle_str)) {
-			PTHREAD_MUTEX_unlock(&grace.g_mutex);
+			PTHREAD_MUTEX_unlock(&grace.mutex);
 			LogFullDebug(COMPONENT_CLIENTID,
 				"Can't reclaim revoked fh:%s",
 				rfh_entry->rdfh_handle_str);
@@ -1228,7 +1240,7 @@ bool nfs4_check_deleg_reclaim(nfs_client_id_t *clid, nfs_fh4 *fhandle)
 		}
 	}
 
-	PTHREAD_MUTEX_unlock(&grace.g_mutex);
+	PTHREAD_MUTEX_unlock(&grace.mutex);
 	LogFullDebug(COMPONENT_CLIENTID, "Returning TRUE");
 	return true;
 }
