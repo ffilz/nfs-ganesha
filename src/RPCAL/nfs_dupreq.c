@@ -50,6 +50,11 @@
 #include "gsh_intrinsic.h"
 #include "wait_queue.h"
 
+#ifdef __FreeBSD__
+#define TAILQ_IS_ENQUEUED(elm, field) (((elm)->field.tqe_prev != NULL) || \
+				       ((elm)->field.tqe_next != NULL))
+#endif
+
 #define DUPREQ_BAD_ADDR1 0x01	/* safe for marked pointers, etc */
 #define DUPREQ_NOCACHE   0x02
 

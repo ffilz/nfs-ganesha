@@ -39,7 +39,11 @@
 #include "nfs4.h"
 #include "nfs_core.h"
 #include <misc/rbtree_x.h>
+#ifdef __FreeBSD__
+#include <sys/queue.h>
+#else
 #include <misc/queue.h>
+#endif
 
 enum drc_type {
 	DRC_TCP_V4, /*< safe to use an XID-based, per-connection DRC */
