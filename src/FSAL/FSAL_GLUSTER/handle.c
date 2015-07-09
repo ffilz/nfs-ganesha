@@ -1254,6 +1254,11 @@ static fsal_status_t lock_op(struct fsal_obj_handle *obj_hdl,
 	flock.l_start = request_lock->lock_start;
 	flock.l_whence = SEEK_SET;
 
+	if (flock.l_len < 0)
+		LogCrit(COMPONENT_FSAL,
+			"The requested lock length is negative - flock.l_len(%ld), request_lock_length(%lu)",
+			flock.l_len, request_lock->lock_length);
+
 	rc = glfs_posix_lock(objhandle->glfd, cmd, &flock);
 	if (rc != 0 && lock_op == FSAL_OP_LOCK
 	    && conflicting_lock && (errno == EACCES || errno == EAGAIN)) {
