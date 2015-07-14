@@ -93,7 +93,7 @@ static struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
 
 	if (hdl->obj_handle.type == REGULAR_FILE) {
 		hdl->u.file.fd = -1;	/* no open on this yet */
-		hdl->u.file.openflags = FSAL_O_CLOSED;
+		hdl->u.file.fsal_fd.openflags = FSAL_O_CLOSED;
 	} else if (hdl->obj_handle.type == SYMBOLIC_LINK) {
 		ssize_t retlink;
 		size_t len = stat->st_size + 1;
@@ -913,7 +913,7 @@ static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
 	PTHREAD_RWLOCK_rdlock(&obj_hdl->lock);
 
 	if (obj_hdl->type == REGULAR_FILE &&
-	    myself->u.file.openflags != FSAL_O_CLOSED) {
+	    myself->u.file.fsal_fd.openflags != FSAL_O_CLOSED) {
 		srcfd = myself->u.file.fd;
 	} else {
 		srcfd = vfs_fsal_open(myself, flags, &fsal_error);
@@ -1210,8 +1210,8 @@ static struct closefd vfs_fsal_open_and_stat(struct fsal_export *exp,
 		 * myself->u.file.openflags and thus forces a re-open.
 		 */
 		if (((flags & FSAL_O_ANY) != 0 &&
-		     (myself->u.file.openflags & FSAL_O_RDWR) == 0) ||
-		    ((myself->u.file.openflags & flags) != flags)) {
+		     (myself->u.file.fsal_fd.openflags & FSAL_O_RDWR) == 0) ||
+		    ((myself->u.file.fsal_fd.openflags & flags) != flags)) {
 			/* no file open at the moment */
 			cfd.fd = vfs_fsal_open(myself, open_flags, fsal_error);
 			if (cfd.fd < 0) {

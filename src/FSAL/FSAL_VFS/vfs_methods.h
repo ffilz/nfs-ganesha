@@ -113,6 +113,11 @@ struct vfs_subfsal_obj_ops {
 				  struct attrlist *attrib_set);
 };
 
+struct vfs_fd {
+	struct fsal_fd fsal_fd;
+	int fd;
+};
+
 /*
  * VFS internal object handle
  * handle is a pointer because
@@ -135,10 +140,7 @@ struct vfs_fsal_obj_handle {
 	struct vfs_subfsal_obj_ops *sub_ops;	/*< Optional subfsal ops */
 	const struct fsal_up_vector *up_ops;	/*< Upcall operations */
 	union {
-		struct {
-			int fd;
-			fsal_openflags_t openflags;
-		} file;
+		struct vfs_fd file;
 		struct {
 			unsigned char *link_content;
 			int link_size;
