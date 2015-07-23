@@ -741,6 +741,27 @@ cache_inode_status_t cache_inode_create(cache_entry_t *entry_parent,
 					cache_inode_create_arg_t *create_arg,
 					cache_entry_t **created);
 
+static inline
+enum fsal_create_mode nfs4_createmode_to_fsal(createmode4 createmode)
+{
+	return (enum fsal_create_mode) 1 + (unsigned int) createmode;
+}
+
+static inline
+enum fsal_create_mode nfs3_createmode_to_fsal(createmode3 createmode)
+{
+	return (enum fsal_create_mode) 1 + (unsigned int) createmode;
+}
+
+cache_inode_status_t cache_inode_open_fd(cache_entry_t *in_entry,
+					 struct fsal_fd *fsal_fd,
+					 fsal_openflags_t openflags,
+					 enum fsal_create_mode createmode,
+					 const char *name,
+					 struct attrlist *attr,
+					 fsal_verifier_t verifier,
+					 cache_entry_t **entry);
+
 cache_inode_status_t cache_inode_getattr(cache_entry_t *entry,
 					 void *opaque,
 					 cache_inode_getattr_cb_t cb,

@@ -250,6 +250,302 @@ out:
 }
 
 /**
+ * @brief Opens a file by name or by handle.
+ *
+ * This function accomplishes both a LOOKUP if necessary and an open.
+ *
+ * Returns with an LRU reference held on the entry.
+ *
+ * @param[in]     entry      Parent directory or entry
+ * @param[in/out] fd         fsal filedescriptor to open
+ * @param[in]     openflags  Details of how to open the file
+ * @param[in]     name       If name is not NULL, entry is the parent directory
+ * @param[in]     attr       Attributes to set on the file
+ * @param[in]     verifier   Verifier to use with exclusive create
+ * @param[out]    entry      Cache entry for the opened file
+ *
+ * @return CACHE_INODE_SUCCESS or errors.
+ */
+
+cache_inode_status_t cache_inode_open_fd(cache_entry_t *in_entry,
+					 struct fsal_fd *fsal_fd,
+					 fsal_openflags_t openflags,
+					 enum fsal_create_mode createmode,
+					 const char *name,
+					 struct attrlist *attr,
+					 fsal_verifier_t verifier,
+					 cache_entry_t **entry)
+{
+	cache_inode_status_t status = CACHE_INODE_SUCCESS;
+	fsal_status_t fsal_status = { 0, 0 };
+	struct fsal_obj_handle *object_handle = NULL;
+	struct fsal_obj_handle *obj_handle;
+	bool parent_locked = false;
+	bool attr_update = false;
+	bool caller_perm_check = false;
+	uint32_t cig_flags;
+
+	*entry = NULL;
+
+	if (createmode >= FSAL_EXCLUSIVE && verifier == NULL) {
+		status = CACHE_INODE_INVALID_ARGUMENT;
+		goto out;
+	}
+
+	if (name == NULL) {
+		if (createmode != FSAL_NO_CREATE) {
+			status = CACHE_INODE_INVALID_ARGUMENT;
+			goto out;
+		}
+		/* Get a reference to the entry. */
+		status = cache_inode_lru_ref(in_entry, LRU_FLAG_NONE);
+		if (status == CACHE_INODE_SUCCESS) {
+			*entry = in_entry;
+			goto got_entry;
+		} else {
+			/* return error */
+			goto out;
+		}
+	}
+
+	if (in_entry->type != DIRECTORY) {
+		status = CACHE_INODE_NOT_A_DIRECTORY;
+		goto out;
+	}
+
+	if (strcmp(name, ".") == 0 ||
+	    strcmp(name, "..") == 0) {
+		/* Can't open "." or ".."... */
+		status = CACHE_INODE_IS_A_DIRECTORY;
+		goto out;
+	}
+
+	/* Check directory permission for LOOKUP */
+	status = cache_inode_access(
+			in_entry,
+			FSAL_MODE_MASK_SET(FSAL_X_OK) |
+			FSAL_ACE4_MASK_SET(FSAL_ACE_PERM_EXECUTE));
+
+	if (status != CACHE_INODE_SUCCESS)
+		goto out;
+
+	PTHREAD_RWLOCK_rdlock(&in_entry->content_lock);
+	parent_locked = true;
+
+	if (createmode >= FSAL_GUARDED) {
+		/* If we are doing guarded or exclusive create and dirent
+		 * exists, we will want to continue with finding instantiating
+		 * the entry because if that dirent is valid, then we have to
+		 * return an error to create.
+		 */
+		cig_flags = CIG_KEYED_FLAG_NONE;
+	} else {
+		/* Otherwise, we will deal with instantiating the entry
+		 * during the open process to minimize FSAL calls.
+		 */
+		cig_flags = CIG_KEYED_FLAG_CACHED_ONLY;
+	}
+
+	status = cache_inode_find_by_name(in_entry, name, cig_flags, entry);
+
+	if (status == CACHE_INODE_SUCCESS) {
+		if (*entry == NULL) {
+			/* Negative dirent condition */
+			if (createmode == FSAL_NO_CREATE) {
+				/* On non-create, we're done. */
+				status = CACHE_INODE_NOT_FOUND;
+				goto out;
+			}
+			/* On create, go ahead an create it */
+			goto open_by_name;
+		}
+
+		if (createmode == FSAL_GUARDED) {
+			/* Guarded create, with entry found... */
+			status = CACHE_INODE_ENTRY_EXISTS;
+			goto out;
+		}
+
+		if (createmode >= FSAL_EXCLUSIVE) {
+			/* Exclusive create with entry found, check verifier */
+			obj_handle = (*entry)->obj_handle;
+
+			PTHREAD_RWLOCK_wrlock(&((*entry)->attr_lock));
+
+			status = cache_inode_refresh_attrs(*entry);
+
+			if (status == CACHE_INODE_ESTALE) {
+				/* Entry doesn't exist, go create. */
+				PTHREAD_RWLOCK_unlock(&((*entry)->attr_lock));
+				goto open_by_name;
+			}
+
+			if (!obj_handle->obj_ops.check_verifier(obj_handle,
+								verifier)) {
+				/* Verifier check failed. */
+				PTHREAD_RWLOCK_unlock(&((*entry)->attr_lock));
+				status = CACHE_INODE_ENTRY_EXISTS;
+				goto out;
+
+			PTHREAD_RWLOCK_unlock(&((*entry)->attr_lock));
+
+			/* Else fall through to got_entry to allow FSAL to
+			 * check the verifier for completeness (and complete
+			 * the open if necessary)/
+			 */
+			}
+		}
+		/* Go open the entry as requested */
+		goto got_entry;
+	} else if (status != CACHE_INODE_NOT_FOUND) {
+		/* An error occurred */
+		goto out;
+	}
+
+ open_by_name:
+
+	obj_handle = in_entry->obj_handle;
+
+	fsal_status = obj_handle->obj_ops.open_fd(obj_handle,
+						  fsal_fd,
+						  openflags,
+						  createmode,
+						  name,
+						  attr,
+						  verifier,
+						  &object_handle,
+						  &caller_perm_check);
+
+	if (FSAL_IS_ERROR(fsal_status)) {
+		status = cache_inode_error_convert(fsal_status);
+		if (status == CACHE_INODE_ESTALE) {
+			LogEvent(COMPONENT_CACHE_INODE,
+				 "FSAL returned STALE from a lookup.");
+			cache_inode_kill_entry(in_entry);
+		}
+		LogFullDebug(COMPONENT_CACHE_INODE,
+			     "FSAL %d %s returned %s",
+			     (int) op_ctx->export->export_id,
+			     op_ctx->export->fullpath,
+			     cache_inode_err_str(status));
+		goto out;
+	}
+
+	LogFullDebug(COMPONENT_CACHE_INODE, "Creating entry for %s", name);
+
+	/* Allocation of a new entry in the cache */
+	status = cache_inode_new_entry(object_handle, CACHE_INODE_FLAG_NONE,
+				       entry);
+
+	if (unlikely(*entry == NULL))
+		goto out;
+
+	LogFullDebug(COMPONENT_CACHE_INODE,
+		     "Created entry %p FSAL %s for %s",
+		     *entry, (*entry)->obj_handle->fsal->name, name);
+
+	/* Add this entry to the parent directory */
+	status = cache_inode_add_cached_dirent(in_entry, name, *entry, NULL);
+
+	if (status == CACHE_INODE_ENTRY_EXISTS)
+		status = CACHE_INODE_SUCCESS;
+	else if (status != CACHE_INODE_SUCCESS)
+		goto out;
+
+	if (caller_perm_check) {
+		/** @todo do perm check
+		*/
+	}
+
+	goto out;
+
+ got_entry:
+
+	/* Check type if not a create. */
+	if ((*entry)->type == DIRECTORY) {
+		status = CACHE_INODE_IS_A_DIRECTORY;
+		goto out;
+	} else if ((*entry)->type != REGULAR_FILE) {
+		status = CACHE_INODE_BAD_TYPE;
+		goto out;
+	}
+
+	obj_handle = (*entry)->obj_handle;
+
+	if (createmode != FSAL_EXCLUSIVE ||
+	    (createmode == FSAL_UNCHECKED &&
+	     attr != NULL &&
+	     FSAL_TEST_MASK(attr->mask, ATTR_SIZE) &&
+	     attr->filesize == 0)) {
+		/* FSAL is going to refresh attributes. */
+		PTHREAD_RWLOCK_wrlock(&((*entry)->attr_lock));
+		attr_update = true;
+	}
+
+	/** @todo do permission check */
+
+	/* Open THIS entry, so name must be NULL. The attr are passed in case
+	 * this is a create with size = 0. We pass the verifier because this
+	 * might be an exclusive recreate replay and we want the FSAL to
+	 * check the verifier.
+	 */
+	fsal_status = obj_handle->obj_ops.open_fd(obj_handle,
+						  fsal_fd,
+						  openflags,
+						  createmode,
+						  NULL,
+						  attr,
+						  verifier,
+						  &object_handle,
+						  &caller_perm_check);
+
+	status = cache_inode_error_convert(fsal_status);
+
+	if (attr_update) {
+		/* We tried to refresh attributes. */
+		if (status == CACHE_INODE_SUCCESS ||
+		    status == CACHE_INODE_ENTRY_EXISTS) {
+			/* FSAL has refreshed attributes. */
+			cache_inode_fixup_md(*entry);
+		}
+		PTHREAD_RWLOCK_unlock(&((*entry)->attr_lock));
+	}
+
+	if (status == CACHE_INODE_ESTALE) {
+		/* The entry is stale, so kill it. */
+		cache_inode_kill_entry(*entry);
+
+		if (createmode != FSAL_NO_CREATE) {
+			/* We thought the file existed and we would retry
+			 * create, but it doesn't actually exist, so go
+			 * back and create it.
+			 */
+			goto open_by_name;
+		}
+
+		/* We thought the file existed and tried to open, but failed,
+		 * the entry was stale, but we should return ENOENT to caller
+		 * if this was originally a case of open by name.
+		 */
+		if (name != NULL)
+			status = CACHE_INODE_NOT_FOUND;
+	}
+
+ out:
+
+	if (parent_locked)
+		PTHREAD_RWLOCK_unlock(&in_entry->content_lock);
+
+	if (status != CACHE_INODE_SUCCESS) {
+		if (*entry != NULL)
+			cache_inode_put(*entry);
+		*entry = NULL;
+	}
+
+	return status;
+}
+
+/**
  * @brief Close a file
  *
  * This function calls down to the FSAL to close the file.
