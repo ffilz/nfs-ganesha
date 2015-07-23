@@ -69,13 +69,13 @@ int vfs_fsal_open(struct vfs_fsal_obj_handle *hdl,
  * @param[in] exp_hdl	Export containing new handle
  * @return VFS OBJ handle on success, NULL on failure
  */
-static struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
-						vfs_file_handle_t *fh,
-						struct fsal_filesystem *fs,
-						struct stat *stat,
-						vfs_file_handle_t *dir_fh,
-						const char *path,
-						struct fsal_export *exp_hdl)
+struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
+					 vfs_file_handle_t *fh,
+					 struct fsal_filesystem *fs,
+					 struct stat *stat,
+					 vfs_file_handle_t *dir_fh,
+					 const char *path,
+					 struct fsal_export *exp_hdl)
 {
 	struct vfs_fsal_export *myself =
 	    container_of(exp_hdl, struct vfs_fsal_export, export);
@@ -1166,11 +1166,11 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
  * @return The file descriptor plus indication if it needs to be closed.
  *
  */
-static struct closefd vfs_fsal_open_and_stat(struct fsal_export *exp,
-					     struct vfs_fsal_obj_handle *myself,
-					     struct stat *stat,
-					     fsal_openflags_t flags,
-					     fsal_errors_t *fsal_error)
+struct closefd vfs_fsal_open_and_stat(struct fsal_export *exp,
+				      struct vfs_fsal_obj_handle *myself,
+				      struct stat *stat,
+				      fsal_openflags_t flags,
+				      fsal_errors_t *fsal_error)
 {
 	struct fsal_obj_handle *obj_hdl = &myself->obj_handle;
 	struct closefd cfd = { .fd = -1, .close_fd = false };
@@ -1790,6 +1790,11 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->lru_cleanup = vfs_lru_cleanup;
 	ops->handle_digest = handle_digest;
 	ops->handle_to_key = handle_to_key;
+	ops->open_fd = vfs_open_fd;
+	ops->reopen_fd = vfs_reopen_fd;
+	ops->lock_op_fd = vfs_lock_op_fd;
+	ops->setattr_fd = vfs_setattr_fd;
+	ops->close_fd = vfs_close_fd;
 
 	/* xattr related functions */
 	ops->list_ext_attrs = vfs_list_ext_attrs;
