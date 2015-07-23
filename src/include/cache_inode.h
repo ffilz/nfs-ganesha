@@ -78,6 +78,7 @@ struct fsal_obj_handle;
 struct gsh_export;
 struct io_info;
 struct fsal_fd;
+struct state_t;
 
 /**
  * @defgroup config_cache_inode Structure and defaults for Cache_Inode
@@ -745,6 +746,27 @@ cache_inode_status_t cache_inode_create(cache_entry_t *entry_parent,
 					object_file_type_t type, uint32_t mode,
 					cache_inode_create_arg_t *create_arg,
 					cache_entry_t **created);
+
+static inline
+enum fsal_create_mode nfs4_createmode_to_fsal(createmode4 createmode)
+{
+	return (enum fsal_create_mode) 1 + (unsigned int) createmode;
+}
+
+static inline
+enum fsal_create_mode nfs3_createmode_to_fsal(createmode3 createmode)
+{
+	return (enum fsal_create_mode) 1 + (unsigned int) createmode;
+}
+
+cache_inode_status_t cache_inode_open2(cache_entry_t *in_entry,
+				       struct state_t *state,
+				       fsal_openflags_t openflags,
+				       enum fsal_create_mode createmode,
+				       const char *name,
+				       struct attrlist *attr,
+				       fsal_verifier_t verifier,
+				       cache_entry_t **entry);
 
 cache_inode_status_t cache_inode_getattr(cache_entry_t *entry,
 					 void *opaque,
