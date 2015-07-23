@@ -114,7 +114,9 @@ struct vfs_subfsal_obj_ops {
 };
 
 struct vfs_fd {
+	/** The open and share mode etc. */
 	fsal_openflags_t openflags;
+	/** The kernel file descriptor. */
 	int fd;
 };
 
@@ -208,6 +210,14 @@ int vfs_fsal_open(struct vfs_fsal_obj_handle *hdl,
 		  int openflags,
 		  fsal_errors_t *fsal_error);
 
+struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
+					 vfs_file_handle_t *fh,
+					 struct fsal_filesystem *fs,
+					 struct stat *stat,
+					 vfs_file_handle_t *dir_fh,
+					 const char *path,
+					 struct fsal_export *exp_hdl);
+
 static inline bool vfs_unopenable_type(object_file_type_t type)
 {
 	if ((type == SOCKET_FILE) || (type == CHARACTER_FILE)
@@ -217,6 +227,12 @@ static inline bool vfs_unopenable_type(object_file_type_t type)
 		return false;
 	}
 }
+
+struct closefd vfs_fsal_open_and_stat(struct fsal_export *exp,
+				      struct vfs_fsal_obj_handle *myself,
+				      struct stat *stat,
+				      fsal_openflags_t flags,
+				      fsal_errors_t *fsal_error);
 
 	/* I/O management */
 fsal_status_t vfs_open(struct fsal_obj_handle *obj_hdl,
@@ -242,6 +258,60 @@ fsal_status_t vfs_share_op(struct fsal_obj_handle *obj_hdl, void *p_owner,
 fsal_status_t vfs_close(struct fsal_obj_handle *obj_hdl);
 fsal_status_t vfs_lru_cleanup(struct fsal_obj_handle *obj_hdl,
 			      lru_actions_t requests);
+
+/* Multiple file descriptor methods */
+struct state_t *vfs_alloc_state(struct fsal_obj_handle *obj_hdl,
+				enum state_type state_type,
+				struct state_t *related_state);
+
+fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
+			struct state_t *state,
+			fsal_openflags_t openflags,
+			enum fsal_create_mode createmode,
+			const char *name,
+			struct attrlist *attrib_set,
+			fsal_verifier_t verifier,
+			struct fsal_obj_handle **new_obj,
+			bool *caller_perm_check);
+
+fsal_status_t vfs_reopen2(struct fsal_obj_handle *obj_hdl,
+			  struct state_t *state,
+			  fsal_openflags_t openflags);
+
+fsal_status_t vfs_read2(struct fsal_obj_handle *obj_hdl,
+			struct state_t *state,
+			uint64_t offset,
+			size_t buffer_size,
+			void *buffer,
+			size_t *read_amount,
+			bool *end_of_file,
+			struct io_info *info);
+
+fsal_status_t vfs_write2(struct fsal_obj_handle *obj_hdl,
+			 struct state_t *state,
+			 uint64_t offset,
+			 size_t buffer_size,
+			 void *buffer,
+			 size_t *wrote_amount,
+			 bool *fsal_stable,
+			 struct io_info *info);
+
+fsal_status_t vfs_commit2(struct fsal_obj_handle *obj_hdl,
+			  off_t offset,
+			  size_t len);
+
+fsal_status_t vfs_lock_op2(struct fsal_obj_handle *obj_hdl,
+			   struct state_t *state,
+			   void *owner,
+			   fsal_lock_op_t lock_op,
+			   fsal_lock_param_t *request_lock,
+			   fsal_lock_param_t *conflicting_lock);
+
+fsal_status_t vfs_setattr2(struct fsal_obj_handle *obj_hdl,
+			   struct state_t *state,
+			   struct attrlist *attrib_set);
+
+fsal_status_t vfs_close2(struct state_t *state);
 
 /* extended attributes management */
 fsal_status_t vfs_list_ext_attrs(struct fsal_obj_handle *obj_hdl,
