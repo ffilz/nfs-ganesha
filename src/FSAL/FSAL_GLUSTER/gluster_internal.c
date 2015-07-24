@@ -508,7 +508,7 @@ fsal_status_t glusterfs_get_acl(struct glusterfs_export *glfs_export,
 			i_count = ace_count(buffxstat->i_acl);
 		}
 
-		acldata.naces = e_count + i_count;
+		acldata.naces = 2 * (e_count + i_count);
 
 		LogDebug(COMPONENT_FSAL, "No of aces present in fsal_acl_t = %d"
 					, acldata.naces);

@@ -195,20 +195,20 @@ int
 posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 			fsal_ace_t **ace)
 {
-	int ret = 0, ent;
+	int ret = 0, ent, d_ent;
 	fsal_ace_t *pace = NULL;
-	acl_entry_t entry, mask;
+	acl_t dup_acl;
+	acl_entry_t entry, mask, other, d_entry;
 	acl_tag_t tag;
 	acl_permset_t p_permset;
-	bool readmask = true;
-	bool writemask = true;
-	bool executemask = true;
+	bool readmask = true, readother = false, readcurrent = true;
+	bool writemask = true, writeother = false, writecurrent = true;
+	bool executemask = true, executeother = false, executecurrent = true;
 
 	if (!p_posixacl)
 		return -1;
 
 	pace = *ace;
-
 	/* Store the mask entry values */
 	mask = find_entry(p_posixacl, ACL_MASK, 0);
 	if (mask) {
@@ -222,6 +222,20 @@ posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 			writemask = false;
 		if (acl_get_perm(p_permset, ACL_EXECUTE) == 0)
 			executemask = false;
+	}
+
+	other = find_entry(p_posixacl, ACL_OTHER, 0);
+	if (other) {
+		ret = acl_get_permset(other, &p_permset);
+		if (ret)
+			LogWarn(COMPONENT_FSAL,
+			"Cannot retrieve permission set for the Mask Entry");
+		if (acl_get_perm(p_permset, ACL_READ) == 0)
+			readother = true;
+		if (acl_get_perm(p_permset, ACL_WRITE) == 0)
+			writeother = true;
+		if (acl_get_perm(p_permset, ACL_EXECUTE) == 0)
+			executeother = true;
 	}
 	/* *
 	 * Only ALLOW ACL Entries considered right now
@@ -249,35 +263,36 @@ posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 		if (tag == ACL_MASK)
 			continue;
 
-		pace->type = FSAL_ACE_TYPE_ALLOW;
+		pace->type = FSAL_ACE_TYPE_DENY;
+		(pace + 1)->type = FSAL_ACE_TYPE_ALLOW;
 
 		if (is_inherit)
-			pace->flag = FSAL_ACE_FLAG_INHERIT;
+			(pace + 1)->flag = pace->flag = FSAL_ACE_FLAG_INHERIT;
 		else
-			pace->flag = 0;
+			(pace + 1)->flag = pace->flag = 0;
 
 		/* Finding uid for the fsal_acl entry */
 		switch (tag) {
 		case  ACL_USER_OBJ:
-			pace->who.uid =  FSAL_ACE_SPECIAL_OWNER;
-			pace->iflag = FSAL_ACE_IFLAG_SPECIAL_ID;
+			(pace + 1)->who.uid = pace->who.uid = FSAL_ACE_SPECIAL_OWNER;
+			(pace + 1)->iflag = pace->iflag = FSAL_ACE_IFLAG_SPECIAL_ID;
 			break;
 		case  ACL_GROUP_OBJ:
-			pace->who.uid =  FSAL_ACE_SPECIAL_GROUP;
-			pace->iflag = FSAL_ACE_IFLAG_SPECIAL_ID;
+			(pace + 1)->who.uid = pace->who.uid =  FSAL_ACE_SPECIAL_GROUP;
+			(pace + 1)->iflag = pace->iflag = FSAL_ACE_IFLAG_SPECIAL_ID;
 			break;
 		case  ACL_OTHER:
-			pace->who.uid =  FSAL_ACE_SPECIAL_EVERYONE;
-			pace->iflag = FSAL_ACE_IFLAG_SPECIAL_ID;
+			(pace + 1)->who.uid = pace->who.uid =  FSAL_ACE_SPECIAL_EVERYONE;
+			(pace + 1)->iflag = pace->iflag = FSAL_ACE_IFLAG_SPECIAL_ID;
 			break;
 		case  ACL_USER:
-			pace->who.uid =
+			(pace + 1)->who.uid = pace->who.uid =
 				*(uid_t *)acl_get_qualifier(entry);
 			break;
 		case  ACL_GROUP:
-			pace->who.gid =
+			(pace + 1)->who.uid = pace->who.gid =
 				*(gid_t *)acl_get_qualifier(entry);
-			pace->flag |= FSAL_ACE_FLAG_GROUP_ID;
+			(pace + 1)->flag = pace->flag |= FSAL_ACE_FLAG_GROUP_ID;
 			break;
 		default:
 			LogWarn(COMPONENT_FSAL, "Invalid tag for the acl");
@@ -294,7 +309,8 @@ posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 		 * permissions
 		 * */
 
-		pace->perm = FSAL_ACE_PERM_SET_DEFAULT;
+		(pace + 1)->perm = FSAL_ACE_PERM_SET_DEFAULT;
+		pace->perm = 0;
 
 		ret = acl_get_permset(entry, &p_permset);
 		if (ret) {
@@ -308,23 +324,72 @@ posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 		 * */
 		if (acl_get_perm(p_permset, ACL_READ)) {
 			if (tag == ACL_USER_OBJ || tag == ACL_OTHER || readmask)
-				pace->perm |= FSAL_ACE_PERM_READ_DATA;
-		}
+				(pace + 1)->perm |= FSAL_ACE_PERM_READ_DATA;
+		} else
+			readcurrent = false;
+
 		if (acl_get_perm(p_permset, ACL_WRITE)) {
 			if (tag == ACL_USER_OBJ || tag == ACL_OTHER ||
 						writemask)
-				pace->perm |= FSAL_ACE_PERM_SET_DEFAULT_WRITE;
+				(pace + 1)->perm |= FSAL_ACE_PERM_SET_DEFAULT_WRITE;
 			if (tag == ACL_USER_OBJ)
-				pace->perm |= FSAL_ACE_PERM_SET_OWNER_WRITE;
+				(pace + 1)->perm |= FSAL_ACE_PERM_SET_OWNER_WRITE;
 			if (is_dir)
-				pace->perm |= FSAL_ACE_PERM_DELETE_CHILD;
-		}
+				(pace + 1)->perm |= FSAL_ACE_PERM_DELETE_CHILD;
+		} else
+			writecurrent = false;
+
 		if (acl_get_perm(p_permset, ACL_EXECUTE)) {
 			if (tag == ACL_USER_OBJ || tag == ACL_OTHER ||
 						executemask)
+				(pace + 1)->perm |= FSAL_ACE_PERM_EXECUTE;
+		} else
+			executecurrent = false;
+
+
+		if (tag == ACL_USER_OBJ || tag == ACL_GROUP_OBJ) {
+			dup_acl = acl_dup(p_posixacl);
+			d_entry = find_entry(dup_acl, tag, 0);
+			for(d_ent = ACL_NEXT_ENTRY; ; d_ent = ACL_NEXT_ENTRY) {
+				ret = acl_get_entry(dup_acl, d_ent, &d_entry);
+				if (ret == 0 || ret == -1) {
+					LogDebug(COMPONENT_FSAL,
+						"No more ACL entires remaining");
+					break;
+				}
+				ret = acl_get_permset(d_entry, &p_permset);
+				if (ret) {
+					LogWarn(COMPONENT_FSAL,
+					"Cannot retrieve permission set for the ACL Entry");
+					continue;
+				}
+				if (!readcurrent && acl_get_perm(p_permset, ACL_READ))
+					pace->perm |= FSAL_ACE_PERM_READ_DATA;
+				if (!writecurrent && acl_get_perm(p_permset, ACL_WRITE)) {
+					pace->perm |= FSAL_ACE_PERM_SET_DEFAULT_WRITE;
+					if (tag == ACL_USER_OBJ)
+						pace->perm |= FSAL_ACE_PERM_SET_OWNER_WRITE;
+					if (is_dir)
+						pace->perm |= FSAL_ACE_PERM_DELETE_CHILD;
+				}
+				if (!executecurrent && acl_get_perm(p_permset, ACL_EXECUTE))
+					pace->perm |= FSAL_ACE_PERM_EXECUTE;
+			}
+			acl_free(dup_acl);
+		} else if (tag == ACL_USER || tag == ACL_GROUP) {
+
+			if (!readcurrent && readother)
+				pace->perm |= FSAL_ACE_PERM_READ_DATA;
+			if (!writecurrent && writeother) {
+				pace->perm |= FSAL_ACE_PERM_SET_DEFAULT_WRITE;
+				if (is_dir)
+					pace->perm |= FSAL_ACE_PERM_DELETE_CHILD;
+			}
+			if (!executecurrent && executeother)
 				pace->perm |= FSAL_ACE_PERM_EXECUTE;
 		}
-		pace++;
+		readcurrent = writecurrent = executecurrent = true;
+		pace += 2;
 	}
 
 	*ace = pace;
