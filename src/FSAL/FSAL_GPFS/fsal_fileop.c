@@ -166,9 +166,10 @@ fsal_status_t GPFSFSAL_read(int fd,
 	rarg.options = 0;
 
 	/* read operation */
-
+	fsal_set_credentials(p_context->creds);
 	nb_read = gpfs_ganesha(OPENHANDLE_READ_BY_FD, &rarg);
 	errsv = errno;
+	fsal_restore_ganesha_credentials();
 
 	if (nb_read == -1) {
 		if (errsv == EUNATCH)
