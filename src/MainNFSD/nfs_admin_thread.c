@@ -315,6 +315,10 @@ static void do_shutdown(void)
 
 	LogEvent(COMPONENT_MAIN, "NFS EXIT: stopping NFS service");
 
+	LogEvent(COMPONENT_MAIN, "Unregistering ports used by NFS service");
+	/* finalize RPC package */
+	Clean_RPC();
+
 	LogEvent(COMPONENT_MAIN, "Stopping delayed executor.");
 	delayed_shutdown();
 	LogEvent(COMPONENT_MAIN, "Delayed executor stopped.");
@@ -364,8 +368,6 @@ static void do_shutdown(void)
 			 "Worker threads successfully shut down.");
 	}
 
-	/* finalize RPC package */
-	Clean_RPC(); /* we MUST do this first */
 	(void)svc_shutdown(SVC_SHUTDOWN_FLAG_NONE);
 
 	rc = general_fridge_shutdown();
