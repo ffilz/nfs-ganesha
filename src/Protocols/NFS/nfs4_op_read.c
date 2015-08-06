@@ -223,6 +223,7 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 	bool sync = false;
 	bool anonymous_started = false;
 	state_owner_t *owner = NULL;
+	bool bypass = false;
 
 	/* Say we are managing NFS4_OP_READ */
 	resp->resop = NFS4_OP_READ;
@@ -371,7 +372,9 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 		state_open = NULL;
 
 		/* Special stateid, no open state, check to see if any share
-		   conflicts The stateid is all-0 or all-1 */
+		 * conflicts The stateid is all-0 or all-1
+		 */
+		bypass = arg_READ4->stateid.seqid != 0;
 		res_READ4->status = nfs4_Errno_state(
 				state_share_anonymous_io_start(
 					entry,
@@ -477,8 +480,31 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 		}
 	}
 
-	cache_status = cache_inode_rdwr(entry, io, offset, size, &read_size,
-					bufferdata, &eof_met, &sync, info);
+	if (!op_ctx->fsal_export->exp_ops.fs_supports(op_ctx->fsal_export,
+						      fso_support_ex)) {
+		/* Call legacy cache_inode_rdwr */
+		cache_status = cache_inode_rdwr(entry,
+						io,
+						offset,
+						size,
+						&read_size,
+						bufferdata,
+						&eof_met,
+						&sync,
+						info);
+	} else {
+		/* Call the new cache_inode_read */
+		cache_status = cache_inode_read(entry,
+						bypass,
+						state_found,
+						offset,
+						size,
+						&read_size,
+						bufferdata,
+						&eof_met,
+						info);
+	}
+
 	if (cache_status != CACHE_INODE_SUCCESS) {
 		res_READ4->status = nfs4_Errno(cache_status);
 		gsh_free(bufferdata);

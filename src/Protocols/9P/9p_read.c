@@ -106,10 +106,32 @@ int _9p_read(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 
 		outcount = (u32) *count;
 	} else {
-		cache_status = cache_inode_rdwr(pfid->pentry, CACHE_INODE_READ,
-						*offset, *count, &read_size,
-						databuffer, &eof_met, &sync,
-						NULL);
+		struct fsal_export *fsal_export = op_ctx->fsal_export;
+
+		if (!fsal_export->exp_ops.fs_supports(fsal_export,
+						      fso_support_ex)) {
+			/* Call legacy cache_inode_rdwr */
+			cache_status = cache_inode_rdwr(pfid->pentry,
+							CACHE_INODE_READ,
+							*offset,
+							*count,
+							&read_size,
+							databuffer,
+							&eof_met,
+							&sync,
+							NULL);
+		} else {
+			/* Call the new cache_inode_read */
+			cache_status = cache_inode_read(pfid->pentry,
+							false,
+							pfid->state,
+							*offset,
+							*count,
+							&read_size,
+							databuffer,
+							&eof_met,
+							NULL);
+		}
 
 		/* Get the handle, for stats */
 		struct gsh_client *client = req9p->pconn->client;
