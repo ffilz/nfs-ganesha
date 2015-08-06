@@ -214,6 +214,8 @@ int nfs3_write(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		cache_status = CACHE_INODE_SUCCESS;
 		written_size = 0;
 	} else {
+		struct fsal_export *fsal_export = op_ctx->fsal_export;
+
 		/* An actual write is to be made, prepare it */
 
 		res->res_write3.status = nfs3_Errno_state(
@@ -227,10 +229,31 @@ int nfs3_write(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			goto out;
 		}
 
-		cache_status =
-		    cache_inode_rdwr(entry, CACHE_INODE_WRITE, offset, size,
-				     &written_size, data, &eof_met, &sync,
-				     NULL);
+		if (!fsal_export->exp_ops.fs_supports(fsal_export,
+						      fso_support_ex)) {
+			/* Call legacy cache_inode_rdwr */
+			cache_status = cache_inode_rdwr(entry,
+							CACHE_INODE_WRITE,
+							offset,
+							size,
+							&written_size,
+							data,
+							&eof_met,
+							&sync,
+							NULL);
+		} else {
+			/* Call the new cache_inode_write */
+			/** @todo for now pass NULL state */
+			cache_status = cache_inode_write(entry,
+							 true,
+							 NULL,
+							 offset,
+							 size,
+							 &written_size,
+							 data,
+							 &sync,
+							 NULL);
+		}
 
 		state_share_anonymous_io_done(entry, OPEN4_SHARE_ACCESS_WRITE);
 

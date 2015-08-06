@@ -405,15 +405,30 @@ static int nfs4_write(struct nfs_argop4 *op, compound_data_t *data,
 		}
 	}
 
-	cache_status = cache_inode_rdwr(entry,
-					io,
-					offset,
-					size,
-					&written_size,
-					bufferdata,
-					&eof_met,
-					&sync,
-					info);
+	if (!op_ctx->fsal_export->exp_ops.fs_supports(op_ctx->fsal_export,
+						      fso_support_ex)) {
+		/* Call legacy cache_inode_rdwr */
+		cache_status = cache_inode_rdwr(entry,
+						io,
+						offset,
+						size,
+						&written_size,
+						bufferdata,
+						&eof_met,
+						&sync,
+						info);
+	} else {
+		/* Call the new cache_inode_write */
+		cache_status = cache_inode_write(entry,
+						 false,
+						 state_found,
+						 offset,
+						 size,
+						 &written_size,
+						 bufferdata,
+						 &sync,
+						 info);
+	}
 
 	if (cache_status != CACHE_INODE_SUCCESS) {
 		LogDebug(COMPONENT_NFS_V4,

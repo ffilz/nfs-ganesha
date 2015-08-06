@@ -206,6 +206,8 @@ int nfs3_read(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		rc = NFS_REQ_OK;
 		goto out;
 	} else {
+		struct fsal_export *fsal_export = op_ctx->fsal_export;
+
 		data = gsh_malloc(size);
 		if (data == NULL) {
 			rc = NFS_REQ_DROP;
@@ -224,15 +226,31 @@ int nfs3_read(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			goto out;
 		}
 
-		cache_status = cache_inode_rdwr(entry,
-						CACHE_INODE_READ,
-						offset,
-						size,
-						&read_size,
-						data,
-						&eof_met,
-						&sync,
-						NULL);
+		if (!fsal_export->exp_ops.fs_supports(fsal_export,
+						      fso_support_ex)) {
+			/* Call legacy cache_inode_rdwr */
+			cache_status = cache_inode_rdwr(entry,
+							CACHE_INODE_READ,
+							offset,
+							size,
+							&read_size,
+							data,
+							&eof_met,
+							&sync,
+							NULL);
+		} else {
+			/* Call the new cache_inode_read */
+			/** @todo for now pass NULL state */
+			cache_status = cache_inode_read(entry,
+							true,
+							NULL,
+							offset,
+							size,
+							&read_size,
+							data,
+							&eof_met,
+							NULL);
+		}
 
 		state_share_anonymous_io_done(entry, OPEN4_SHARE_ACCESS_READ);
 
