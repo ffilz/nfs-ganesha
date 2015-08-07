@@ -13,10 +13,10 @@ export DESTDIR=$(CURDIR)/debian/tmp
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 
 %:
-	 dh --with python2 --with quilt $@
+	 dh --parallel --with python2 --with quilt $@
 
 override_dh_auto_configure:
-	 dh_auto_configure -- -DBUILD_CONFIG=debian -DFSAL_DESTINATION=lib/${DEB_HOST_MULTIARCH}/ganesha
+	 dh_auto_configure -- -DBUILD_CONFIG=debian -DFSAL_DESTINATION=lib/${DEB_HOST_MULTIARCH}/ganesha -DCMAKE_INSTALL_PREFIX=/ -DCMAKE_BUILD_TYPE=Release
 
 override_dh_auto_test:
 
