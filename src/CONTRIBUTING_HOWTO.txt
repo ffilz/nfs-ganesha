@@ -1,10 +1,10 @@
+Contributing and Using Git
 
-Contributing and Using Git  -   Paul Sheer <paulsheer@gmail.com>   -   18 October 2012
-
-
+	Paul Sheer <paulsheer@gmail.com> - 18 October 2012
+	Dominique Martinet <dominique.martinet@cea.fr> - 2015-02-26
+	Frank Filz <ffilzlnx@mindspring.com> - 2015-08-12
 
 If you would like to contribute to nfs-ganesha development:
-
 
 There is a process to dumping the source (using git), modifying the
 source, and pushing your changes back. This process is quite simple and
@@ -24,6 +24,10 @@ First you need to fetch the code you wish to work on:
     git clone git://github.com/codeleader/nfs-ganesha.git --branch new-unstable-dev-project
     cd nfs-ganesha
 
+The current (as of 2015-08-12) branch for devlopment is:
+
+    git clone git://githib.com/ffilz/nfs-ganesha/nfs-ganesha.git --branch next
+
 Now check what you have:
 
     git status
@@ -34,11 +38,19 @@ Now fetch the latest updates:
 
     git remote update
 
+You will also need to pull in the libntirpc submodule:
+
+    git submodule update --init
+
+We also have several commit hooks, please install them:
+
+    src/scripts/git_hooks/install_git_hooks.sh
+
 Now do your development work.
 
 When you are developing, testing etc.:
 
-    git commit -a
+    git commit --signoff -a
 
 There may be updates from other developers. Update to their new branch
 "more-stable-dev-project" to include other work other people may have
@@ -60,4 +72,34 @@ Then,
 
 
 
+First, when creating a gerrithub account (first time sign-in), do NOT copy your ganesha repo unless you plan to receive changes from someone else.
+It makes NO sense to push changes to your own repo (except for the
+gatekeeper)
+
+
+Now you have an account, you want to push some patch for us to review to ffilz/nfs-ganesha - you need to start by adding a new remote.
+
+You have a list of targets (anonymous http, ssh, http) to add on the project page:
+https://review.gerrithub.io/#/admin/projects/ffilz/nfs-ganesha
+
+If your network allows it, ssh is easier. http needs you to setup a generated password (settings page, "HTTP Password" menu on the left) Also make sure you use https (not http)
+
+so taking an example:
+ nfs-ganesha$ git remote add gerrit ssh://USERNAMEHERE@review.gerrithub.io:29418/ffilz/nfs-ganesha
+ nfs-ganesha$ git fetch gerrit
+ nfs-ganesha$ git log gerrit/next..HEAD
+ # this should ONLY list the commits you want to push!
+ # Also, all should have a Change-Id, please install the githook (we  # need to update the script on our repo, but use the one gerrit offers:
+ # scp -p -P 29418 USERNAMEHERE@review.gerrithub.io:hooks/commit-msg /path/to/.git/hooks/
+
+ nfs-ganesha$ git push gerrit HEAD:refs/for/next
+
+
+That's it. If you edit a commit, just push it again, gerrit will notice it has the same Change-Id and update your change with a new patch set.
+
+People involved with the review will get a mail (the list won't) and everyone will be happy in a better world!
+
+
+Please note that you can only push changes to another repo that you wrote, gerrithub will check the mail address you're using and ask you to add any different mail address to your profile (settings -> Contact information).
+Well, just read the text if you get an error, it's usually clear enough :)
 
