@@ -46,6 +46,18 @@ We also have several commit hooks, please install them:
 
     src/scripts/git_hooks/install_git_hooks.sh
 
+Install the Gerrithub change id commit hook
+
+    scp -p -P 29418 USERNAMEHERE@review.gerrithub.io:hooks/commit-msg /path/to/.git/hooks/
+
+You may also want to do the following so you don't have to always provide your
+identity:
+
+    git config user.name "Your Real Name"
+    git config user.email "you@some.place"
+
+You can use the --global option to set these for all your git repos.
+
 Now do your development work.
 
 When you are developing, testing etc.:
@@ -58,48 +70,55 @@ done:
 
     git rebase origin/more-stable-dev-project
 
-Then push your work up as follows:
+Then push your work up to your githib as follows:
 
     ssh-keygen
     cat ~/.ssh/id_rsa.pub
 
 Copy the output into your ssh keys in your github.com account.
 
-Then,
+Pushing to your githib is optional, but does provide some backup for your work.
 
-    git remote add paul_github git@github.com:paulsheer/nfs-ganesha.git
-    git push paul_github new-unstable-dev-project:more-stable-dev-project
+To push to the project, we now use Gerrithub for code submission and review.
 
+First, when creating a gerrithub account (first time sign-in), do NOT copy your
+ganesha repo unless you plan to receive changes from someone else. It makes NO
+sense to push changes to your own repo (except for the gatekeeper)
 
+Now you have an account, you want to push some patch for us to review to
+ffilz/nfs-ganesha - you need to start by adding a new remote.
 
-First, when creating a gerrithub account (first time sign-in), do NOT copy your ganesha repo unless you plan to receive changes from someone else.
-It makes NO sense to push changes to your own repo (except for the
-gatekeeper)
+You have a list of targets (anonymous http, ssh, http) to add on the project
+page:
 
+    https://review.gerrithub.io/#/admin/projects/ffilz/nfs-ganesha
 
-Now you have an account, you want to push some patch for us to review to ffilz/nfs-ganesha - you need to start by adding a new remote.
-
-You have a list of targets (anonymous http, ssh, http) to add on the project page:
-https://review.gerrithub.io/#/admin/projects/ffilz/nfs-ganesha
-
-If your network allows it, ssh is easier. http needs you to setup a generated password (settings page, "HTTP Password" menu on the left) Also make sure you use https (not http)
+If your network allows it, ssh is easier. http needs you to setup a generated
+password (settings page, "HTTP Password" menu on the left) Also make sure you
+use https (not http)
 
 so taking an example:
- nfs-ganesha$ git remote add gerrit ssh://USERNAMEHERE@review.gerrithub.io:29418/ffilz/nfs-ganesha
- nfs-ganesha$ git fetch gerrit
- nfs-ganesha$ git log gerrit/next..HEAD
- # this should ONLY list the commits you want to push!
- # Also, all should have a Change-Id, please install the githook (we  # need to update the script on our repo, but use the one gerrit offers:
- # scp -p -P 29418 USERNAMEHERE@review.gerrithub.io:hooks/commit-msg /path/to/.git/hooks/
 
- nfs-ganesha$ git push gerrit HEAD:refs/for/next
+    git remote add gerrit ssh://USERNAMEHERE@review.gerrithub.io:29418/ffilz/nfs-ganesha
+    git fetch gerrit
+    git log gerrit/next..HEAD
 
+This should ONLY list the commits you want to push! Also, all should have a Change-Id.
 
-That's it. If you edit a commit, just push it again, gerrit will notice it has the same Change-Id and update your change with a new patch set.
+Finally push your patches to Gerrithub:
 
-People involved with the review will get a mail (the list won't) and everyone will be happy in a better world!
+    git push gerrit HEAD:refs/for/next
 
+That's it. If you edit a commit, just push it again, gerrit will notice it has
+the same Change-Id and update your change with a new patch set. Please make
+sure you don't change the Change-Id if you update the patch otherwise this
+creates disconnected review.
 
-Please note that you can only push changes to another repo that you wrote, gerrithub will check the mail address you're using and ask you to add any different mail address to your profile (settings -> Contact information).
+If you want specific people to review your code, please go to Gerrithub and
+add them.
+
+Please note that you can only push changes to another repo that you wrote,
+gerrithub will check the mail address you're using and ask you to add any
+different mail address to your profile (settings -> Contact information).
 Well, just read the text if you get an error, it's usually clear enough :)
 
