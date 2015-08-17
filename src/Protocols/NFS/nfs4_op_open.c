@@ -473,7 +473,7 @@ bool open4_open_owner(struct nfs_argop4 *op, compound_data_t *data,
 		LogDebug(COMPONENT_STATE,
 			 "Previously known open_owner is used with seqid=0, ask the client to confirm it again");
 		(*owner)->so_owner.so_nfs4_owner.so_confirmed = false;
-	} else {
+	} else if (data->minorversion == 0) {
 		/* Check for replay */
 		if (!Check_nfs4_seqid(*owner,
 				      arg_OPEN4->seqid,
@@ -1152,7 +1152,6 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 	state_t *file_state = NULL;
 	/* True if the state was newly created */
 	bool new_state = false;
-	cache_entry_t *entry_parent = data->current_entry;
 	int retval;
 	bool created = false;
 
@@ -1202,18 +1201,6 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 	if (res_OPEN4->status != NFS4_OK)
 		return res_OPEN4->status;
 
-	if (data->current_entry == NULL) {
-		/* This should be impossible, as PUTFH fills in the
-		 * current entry and previous checks weed out handles
-		 * in the PseudoFS and DS handles.
-		 */
-		res_OPEN4->status = NFS4ERR_SERVERFAULT;
-		LogCrit(COMPONENT_NFS_V4,
-			"Impossible condition in compound data at %s:%u.",
-			__FILE__, __LINE__);
-		goto out3;
-	}
-
 	/* It this a known client id? */
 	LogDebug(COMPONENT_STATE,
 		 "OPEN Client id = %" PRIx64,
@@ -1229,7 +1216,7 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		res_OPEN4->status = clientid_error_to_nfsstat(retval);
 		LogDebug(COMPONENT_NFS_V4,
 			 "nfs_client_id_get_confirmed failed");
-		goto out3;
+		return res_OPEN4->status;
 	}
 
 	/* Check if lease is expired and reserve it */
@@ -1245,7 +1232,6 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 
 	/* Get the open owner */
-
 	if (!open4_open_owner(op, data, resp, clientid, &owner)) {
 		LogDebug(COMPONENT_NFS_V4, "open4_open_owner failed");
 		goto out2;
@@ -1272,12 +1258,11 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		goto out2;
 	}
 
-	/* So we still have a reference even after we repalce the
-	 * current FH.
-	 */
+	/* So we still have a reference even after we repalce the current FH. */
 	entry_change = data->current_entry;
 	(void) cache_inode_lru_ref(entry_change, LRU_REQ_STALE_OK);
 
+	/* Update the change info for entry_change. */
 	res_OPEN4->OPEN4res_u.resok4.cinfo.before =
 	    cache_inode_get_changeid4(entry_change);
 
@@ -1450,8 +1435,6 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		       data,
 		       open_tag);
 
-
-
  out:
 
 	if (res_OPEN4->status != NFS4_OK) {
@@ -1460,7 +1443,7 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 	}
 
 	/* Save the response in the open owner.
-	 * entry_parent is either the parent directory or for a CLAIM_PREV is
+	 * entry_change is either the parent directory or for a CLAIM_PREV is
 	 * the entry itself. In either case, it's the right entry to use in
 	 * saving the request results.
 	 */
@@ -1468,7 +1451,7 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		Copy_nfs4_state_req(owner,
 				    arg_OPEN4->seqid,
 				    op,
-				    entry_parent,
+				    entry_change,
 				    resp,
 				    open_tag);
 	}
@@ -1481,11 +1464,6 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		update_lease(clientid);
 		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 	}
-
- out3:
-
-	if (clientid != NULL)
-		dec_client_id_ref(clientid);
 
 	if (file_state != NULL)
 		dec_state_t_ref(file_state);
@@ -1504,6 +1482,11 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		/* Need to release the open owner for this call */
 		dec_state_owner_ref(owner);
 	}
+
+ out3:
+
+	if (clientid != NULL)
+		dec_client_id_ref(clientid);
 
 	return res_OPEN4->status;
 }				/* nfs4_op_open */
