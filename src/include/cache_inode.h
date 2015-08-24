@@ -753,6 +753,16 @@ enum fsal_create_mode nfs3_createmode_to_fsal(createmode3 createmode)
 	return (enum fsal_create_mode) 1 + (unsigned int) createmode;
 }
 
+#define cache_inode_close2(entry) \
+	({ \
+		fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};		\
+		struct fsal_obj_handle *obj_hdl = entry->obj_handle;	\
+									\
+		if (entry->obj_handle->type == REGULAR_FILE)		\
+			status = obj_hdl->obj_ops.close(obj_hdl);	\
+		cache_inode_error_convert(status);			\
+	})
+
 cache_inode_status_t cache_inode_open2(cache_entry_t *in_entry,
 				       struct state_t *state,
 				       fsal_openflags_t openflags,
