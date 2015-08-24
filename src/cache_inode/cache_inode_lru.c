@@ -392,17 +392,32 @@ cache_inode_lru_clean(cache_entry_t *entry)
 {
 	cache_inode_status_t cache_status = CACHE_INODE_SUCCESS;
 
-	if (is_open(entry)) {
-		cache_status =
-		    cache_inode_close(entry,
-				      CACHE_INODE_FLAG_REALLYCLOSE |
-				      CACHE_INODE_FLAG_NOT_PINNED |
-				      CACHE_INODE_FLAG_CLEANUP |
-				      CACHE_INODE_DONT_KILL);
+	if (entry->obj_handle->fsal->m_ops.support_ex()) {
+		/* Make sure any FSAL global file descriptor is closed.
+		 */
+		fsal_status_t fsal_status =
+		    entry->obj_handle->obj_ops.close(entry->obj_handle);
+
+		cache_status = cache_inode_error_convert(fsal_status);
+
 		if (cache_status != CACHE_INODE_SUCCESS) {
 			LogCrit(COMPONENT_CACHE_INODE_LRU,
-				"Error closing file in cleanup: %d.",
-				cache_status);
+				"Error closing file in cleanup: %s",
+				cache_inode_err_str(cache_status));
+		}
+	} else {
+		if (is_open(entry)) {
+			cache_status =
+			    cache_inode_close(entry,
+					      CACHE_INODE_FLAG_REALLYCLOSE |
+					      CACHE_INODE_FLAG_NOT_PINNED |
+					      CACHE_INODE_FLAG_CLEANUP |
+					      CACHE_INODE_DONT_KILL);
+			if (cache_status != CACHE_INODE_SUCCESS) {
+				LogCrit(COMPONENT_CACHE_INODE_LRU,
+					"Error closing file in cleanup: %s",
+					cache_inode_err_str(cache_status));
+			}
 		}
 	}
 
@@ -684,13 +699,14 @@ size_t lru_run_lane(size_t lane,
 		 */
 		QUNLOCK(qlane);
 
-		/* Acquire the content lock first; we may need to look at fds
-		 * and close it.
-		 */
-		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
+		if (entry->obj_handle->fsal->m_ops.support_ex()) {
+			/* Make sure any FSAL global file descriptor is closed.
+			 */
+			fsal_status_t fsal_status =
+			    entry->obj_handle->obj_ops.close(entry->obj_handle);
 
-		if (is_open(entry)) {
-			cache_status = cache_inode_close(entry, CL_FLAGS);
+			cache_status = cache_inode_error_convert(fsal_status);
+
 			if (cache_status != CACHE_INODE_SUCCESS) {
 				LogCrit(COMPONENT_CACHE_INODE_LRU,
 					"Error closing file in LRU thread.");
@@ -698,9 +714,27 @@ size_t lru_run_lane(size_t lane,
 				++(*totalclosed);
 				++closed;
 			}
-		}
+		} else {
+			/* Acquire the content lock first; we may need to look
+			 * at fds and close it.
+			 */
+			PTHREAD_RWLOCK_wrlock(&entry->content_lock);
 
-		PTHREAD_RWLOCK_unlock(&entry->content_lock);
+			if (is_open(entry)) {
+				cache_status =
+					cache_inode_close(entry, CL_FLAGS);
+
+				if (cache_status != CACHE_INODE_SUCCESS) {
+					LogCrit(COMPONENT_CACHE_INODE_LRU,
+						"Error closing file in LRU thread.");
+				} else {
+					++(*totalclosed);
+					++closed;
+				}
+			}
+
+			PTHREAD_RWLOCK_unlock(&entry->content_lock);
+		}
 
 		QLOCK(qlane);
 		/* QLOCKED */
