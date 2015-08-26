@@ -92,12 +92,20 @@ int _9p_lopen(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 						  plenout, preply);
 		}
 
-		cache_status =
-		    cache_inode_open(pfid->pentry, openflags, 0);
-		if (cache_status != CACHE_INODE_SUCCESS)
+		if (pfid->pentry->obj_handle->fsal->m_ops.support_ex()) {
+			cache_status = cache_inode_reopen2(pfid->pentry,
+							   pfid->state,
+							   openflags,
+							   true);
+		} else {
+			cache_status = cache_inode_open(pfid->pentry,
+							openflags, 0);
+		}
+		if (cache_status != CACHE_INODE_SUCCESS) {
 			return _9p_rerror(req9p, msgtag,
 					  _9p_tools_errno(cache_status),
 					  plenout, preply);
+		}
 
 	}
 
