@@ -18,8 +18,12 @@ import dbus
 bus = dbus.SystemBus()
 
 # Create an object that will proxy for a particular remote object.
-admin = bus.get_object("org.ganesha.nfsd",
-                       "/org/ganesha/nfsd/admin")
+try:
+	admin = bus.get_object("org.ganesha.nfsd",
+        	               "/org/ganesha/nfsd/admin")
+except:
+	sys.exit("Error: Can't talk to ganesha service on d-bus." \
+		 " Looks like Ganesha is down")
 
 # call method
 ganesha_grace = admin.get_dbus_method('grace',
