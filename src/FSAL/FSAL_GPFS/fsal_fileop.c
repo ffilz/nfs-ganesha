@@ -74,7 +74,6 @@ fsal_status_t GPFSFSAL_open(struct fsal_obj_handle *obj_hdl,
 			    struct attrlist *p_file_attributes,
 			    bool reopen)
 {
-	int rc;
 	fsal_status_t status;
 	int posix_flags = 0;
 	struct gpfs_fsal_obj_handle *myself;
@@ -90,13 +89,7 @@ fsal_status_t GPFSFSAL_open(struct fsal_obj_handle *obj_hdl,
 	gpfs_fs = obj_hdl->fs->private;
 
 	/* convert fsal open flags to posix open flags */
-	rc = fsal2posix_openflags(openflags, &posix_flags);
-	/* flags conflicts. */
-	if (rc) {
-		LogWarn(COMPONENT_FSAL, "Invalid/conflicting flags : %#X",
-			openflags);
-		return fsalstat(rc, 0);
-	}
+	fsal2posix_openflags(openflags, &posix_flags);
 
 	status = fsal_internal_handle2fd(gpfs_fs->root_fd, myself->handle,
 					 file_desc, posix_flags, reopen);
