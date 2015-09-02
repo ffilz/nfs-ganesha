@@ -1563,8 +1563,8 @@ static inline enum auth_stat AuthenticateRequest(nfs_request_t *reqnfs,
 	struct rpc_msg *msg = reqnfs->svc.rq_msg;
 	SVCXPRT *xprt = reqnfs->xprt;
 	enum auth_stat why;
-	bool rlocked = true;
-	bool slocked = false;
+/*	bool rlocked = true;
+*/	bool slocked = false;
 
 	/* A few words of explanation are required here:
 	 * In authentication is AUTH_NONE or AUTH_UNIX, then the value of
@@ -1635,8 +1635,8 @@ static bool is_rpc_call_valid(nfs_request_t *reqnfs)
 	/* This function is only ever called from one point, and the
 	   read-lock is always held at that call.  If this changes,
 	   we'll have to pass in the value of rlocked. */
-	bool rlocked = true;
-	int lo_vers, hi_vers;
+/*	bool rlocked = true;
+*/	int lo_vers, hi_vers;
 
 	if (reqnfs->svc.rq_prog == nfs_param.core_param.program[P_NFS]) {
 		if (reqnfs->svc.rq_vers == NFS_V3) {
@@ -2100,8 +2100,8 @@ static int nfs_rpc_get_args(nfs_request_t *reqnfs)
 {
 	SVCXPRT *xprt = reqnfs->xprt;
 	nfs_arg_t *arg_nfs = &reqnfs->arg_nfs;
-	bool rlocked = true;
-	bool slocked = false;
+/*	bool rlocked = true;
+*/	bool slocked = false;
 
 	memset(arg_nfs, 0, sizeof(nfs_arg_t));
 
