@@ -29,6 +29,14 @@
 #include <rpc/nettype.h>
 #include <netdb.h>
 
+#ifndef TIMEVAL_TO_TIMESPEC
+/* from recent versions of <sys/time.h> */
+#define TIMEVAL_TO_TIMESPEC(tv, ts) {					\
+	(ts)->tv_sec = (tv)->tv_sec;					\
+	(ts)->tv_nsec = (tv)->tv_usec * 1000;				\
+}
+#endif
+
 #include "nfs_core.h"
 #include "nfs_proto_functions.h"
 #include "sal_functions.h"
@@ -219,11 +227,23 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 				gsh_free(buf);
 
 				/* get the IPv4 mapped IPv6 address */
-				getaddrinfo(host->slc_nsm_client->
-					    ssc_nlm_caller_name,
-					    port_str,
-					    &hints,
-					    &result);
+				retval = getaddrinfo(host->slc_nsm_client->
+						     ssc_nlm_caller_name,
+						     port_str,
+						     &hints,
+						     &result);
+				if (retval != 0) {
+					LogMajor(COMPONENT_NLM,
+						 "failed to resolve %s to an address: %s",
+						 host->slc_nsm_client->
+						 ssc_nlm_caller_name,
+						 gai_strerror(retval));
+					/* getaddrinfo() failed, retry */
+					retval = RPC_UNKNOWNADDR;
+					TIMEVAL_TO_TIMESPEC(&tout, &timeout);
+					nanosleep(&timeout, NULL);
+					continue;
+				}
 
 				/* setup the netbuf with in6 address */
 				local_buf.buf = result->ai_addr;
@@ -287,16 +307,16 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 
 		gsh_clnt_destroy(host->slc_callback_clnt);
 		host->slc_callback_clnt = NULL;
+	}
 
-		if (retry == MAX_ASYNC_RETRY) {
-			LogMajor(COMPONENT_NLM,
-				 "NLM async Client exceeded retry count %d",
-				 MAX_ASYNC_RETRY);
-			PTHREAD_MUTEX_lock(&nlm_async_resp_mutex);
-			resp_key = NULL;
-			PTHREAD_MUTEX_unlock(&nlm_async_resp_mutex);
-			return retval;
-		}
+	if (retval != 0 && retry == MAX_ASYNC_RETRY) {
+		LogMajor(COMPONENT_NLM,
+			 "NLM async Client exceeded retry count %d",
+			 MAX_ASYNC_RETRY);
+		PTHREAD_MUTEX_lock(&nlm_async_resp_mutex);
+		resp_key = NULL;
+		PTHREAD_MUTEX_unlock(&nlm_async_resp_mutex);
+		return retval;
 	}
 
 	PTHREAD_MUTEX_lock(&nlm_async_resp_mutex);
