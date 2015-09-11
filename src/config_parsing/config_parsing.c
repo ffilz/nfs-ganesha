@@ -758,13 +758,13 @@ static bool do_block_init(struct config_node *blk_node,
 			  struct config_error_type *err_type)
 {
 	struct config_item *item;
-	caddr_t *param_addr;
+	void *param_addr;
 	sockaddr_t *sock;
 	int rc;
 	int errors = 0;
 
 	for (item = params; item->name != NULL; item++) {
-		param_addr = (caddr_t *)((uint64_t)param_struct + item->off);
+		param_addr = ((char *)param_struct + item->off);
 		LogFullDebug(COMPONENT_CONFIG,
 			     "%p name=%s type=%s",
 			     param_addr, item->name, config_type_str(item->type));
@@ -970,7 +970,7 @@ static int do_block_load(struct config_node *blk,
 			 struct config_error_type *err_type)
 {
 	struct config_item *item;
-	caddr_t *param_addr;
+	void *param_addr;
 	struct config_node *node, *term_node, *next_node = NULL;
 	struct glist_head *ns;
 	int errors = 0;
@@ -1002,8 +1002,7 @@ static int do_block_load(struct config_node *blk,
 				node = next_node;
 				continue;
 			}
-			param_addr = (caddr_t *)((uint64_t)param_struct
-						 + item->off);
+			param_addr = ((char *)param_struct + item->off);
 			LogFullDebug(COMPONENT_CONFIG,
 				     "%p name=%s type=%s",
 				     param_addr, item->name,
@@ -1051,10 +1050,9 @@ static int do_block_load(struct config_node *blk,
 						   &num64, err_type)) {
 					*(int32_t *)param_addr = num64;
 					if (item->flags & CONFIG_MARK_SET) {
-						caddr_t *mask_addr;
-
-						mask_addr = (caddr_t *)
-							((uint64_t)param_struct
+						void *mask_addr;
+						mask_addr =
+							((char *)param_struct
 							 + item->u.i32.set_off);
 						*(uint32_t *)mask_addr
 							|= item->u.i32.bit;
@@ -1081,10 +1079,9 @@ static int do_block_load(struct config_node *blk,
 						   &num64, err_type)) {
 					*(uid_t *)param_addr = num64;
 					if (item->flags & CONFIG_MARK_SET) {
-						caddr_t *mask_addr;
-
-						mask_addr = (caddr_t *)
-							((uint64_t)param_struct
+						void *mask_addr;
+						mask_addr =
+							((char *)param_struct
 							 + item->u.i64.set_off);
 						*(uint32_t *)mask_addr
 							|= item->u.i64.bit;
@@ -1095,9 +1092,9 @@ static int do_block_load(struct config_node *blk,
 				if (convert_fsid(term_node, param_addr,
 						 err_type)) {
 					if (item->flags & CONFIG_MARK_SET) {
-						caddr_t *mask_addr;
-						mask_addr = (caddr_t *)
-							((uint64_t)param_struct
+						void *mask_addr;
+						mask_addr =
+							((char *)param_struct
 							+ item->u.fsid.set_off);
 						*(uint32_t *)mask_addr
 							|= item->u.fsid.bit;
@@ -1137,9 +1134,9 @@ static int do_block_load(struct config_node *blk,
 						*(uint32_t *)param_addr
 							&= ~item->u.bit.bit;
 					if (item->flags & CONFIG_MARK_SET) {
-						caddr_t *mask_addr;
-						mask_addr = (caddr_t *)
-							((uint64_t)param_struct
+						void *mask_addr;
+						mask_addr =
+							((char *)param_struct
 							+ item->u.bit.set_off);
 						*(uint32_t *)mask_addr
 							|= item->u.bit.bit;
@@ -1155,9 +1152,9 @@ static int do_block_load(struct config_node *blk,
 						 err_type)) {
 					*(uint32_t *)param_addr |= num32;
 					if (item->flags & CONFIG_MARK_SET) {
-						caddr_t *mask_addr;
-						mask_addr = (caddr_t *)
-							((uint64_t)param_struct
+						void *mask_addr;
+						mask_addr =
+							((char *)param_struct
 							+ item->u.lst.set_off);
 						*(uint32_t *)mask_addr
 							|= item->u.lst.mask;
@@ -1180,9 +1177,9 @@ static int do_block_load(struct config_node *blk,
 						 err_type)) {
 					*(uint32_t *)param_addr |= num32;
 					if (item->flags & CONFIG_MARK_SET) {
-						caddr_t *mask_addr;
-						mask_addr = (caddr_t *)
-							((uint64_t)param_struct
+						void *mask_addr;
+						mask_addr =
+							((char *)param_struct
 							+ item->u.lst.set_off);
 						*(uint32_t *)mask_addr
 							|= item->u.lst.mask;
@@ -1204,9 +1201,9 @@ static int do_block_load(struct config_node *blk,
 						 err_type)) {
 					*(uint32_t *)param_addr |= num32;
 					if (item->flags & CONFIG_MARK_SET) {
-						caddr_t *mask_addr;
-						mask_addr = (caddr_t *)
-							((uint64_t)param_struct
+						void *mask_addr;
+						mask_addr =
+							((char *)param_struct
 							+ item->u.lst.set_off);
 						*(uint32_t *)mask_addr
 							|= item->u.lst.bit;
