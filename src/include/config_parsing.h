@@ -80,6 +80,7 @@ enum config_type {
 	CONFIG_BOOLBIT,
 	CONFIG_IP_ADDR,
 	CONFIG_INET_PORT,
+	CONFIG_CPU_MASK,
 	CONFIG_CPUS_ALLOWED,
 	CONFIG_BLOCK,
 	CONFIG_PROC
@@ -797,6 +798,12 @@ struct config_item {
 #define CONF_ITEM_CPUS_ALLOWED(_name_, _struct_, _mem_) \
 	{ .name = _name_,			    \
 	  .type = CONFIG_CPUS_ALLOWED,		    \
+	  .off = offsetof(struct _struct_, _mem_)   \
+	}
+
+#define CONF_ITEM_CPU_MASK(_name_, _struct_, _mem_)  \
+	{ .name = _name_,			    \
+	  .type = CONFIG_CPU_MASK,		    \
 	  .off = offsetof(struct _struct_, _mem_)   \
 	}
 

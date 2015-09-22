@@ -206,7 +206,7 @@ typedef struct nfs_core_param {
 	    default and changed with the Nb_Worker option. */
 	uint32_t nb_worker;
 	/** CPU affinity mask of worker threads. Set by the
-	    Worker_Cpus_Allowed option. */
+	    Worker_Cpus_Allowed/Worker_Cpumask option. */
 	cpu_set_t worker_mask;
 	/** Cpus allowed policy of worker threads. Set by the
 	    Worker_Cpus_Allowed_Policy option. */
@@ -330,7 +330,7 @@ typedef struct nfs_core_param {
 		    200 and settable by RPC_Ioq_ThrdMax. */
 		uint32_t ioq_thrd_max;
 		/** CPU affinity mask of send threads. Set by the
-		    Sender_Cpus_Allowed option. */
+		    Sender_Cpus_Allowed/Sender_Cpumask option. */
 		cpu_set_t sender_mask;
 		/** Cpus allowed policy of send threads. Set by the
 		    Sender_Cpus_Allowed_Policy option. */
@@ -344,7 +344,7 @@ typedef struct nfs_core_param {
 	    Decoder_Fridge_Block_Timeout. */
 	time_t decoder_fridge_block_timeout;
 	/** CPU affinity mask of decoder threads. Set by the
-	    Decoder_Cpus_Allowed option. */
+	    Decoder_Cpus_Allowed/Decoder_Cpumask option. */
 	cpu_set_t decoder_mask;
 	/** Cpus allowed policy of decoder threads. Set by the
 	    Decoder_Cpus_Allowed_Policy option. */

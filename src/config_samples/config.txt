@@ -55,6 +55,8 @@ NFS_CORE_PARAM {}
 
 	Nb_Worker(uint32, range 1 to 1024*128, default 16)
 
+	Worker_Cpumask(comma-hexadecimal list of allowed CPUs, default null)
+
 	Worker_Cpus_Allowed(comma-delimited list of CPU numbers, default null)
 
 	Worker_Cpus_Allowed_Policy(enum, values [shared, split], default shared)
@@ -107,6 +109,8 @@ NFS_CORE_PARAM {}
 
 	RPC_Ioq_ThrdMax(uint32, range 1 to 1024*128 default 200)
 
+	Sender_Cpumask(comma-hexadecimal list of allowed CPUs, default null)
+
 	Sender_Cpus_Allowed(comma-delimited list of CPU numbers, default null)
 
 	Sender_Cpus_Allowed_Policy(enum, values [shared, split], default shared)
@@ -114,6 +118,8 @@ NFS_CORE_PARAM {}
 	Decoder_Fridge_Expiration_Delay(int64, range 0 to 7200, default 600)
 
 	Decoder_Fridge_Block_Timeout(int64, range 0 to 7200, default 600)
+
+	Decoder_Cpumask(comma-hexadecimal list of allowed CPUs, default null)
 
 	Decoder_Cpus_Allowed(comma-delimited list of CPU numbers, default null)
 
