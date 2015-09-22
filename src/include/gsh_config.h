@@ -61,6 +61,11 @@ typedef enum protos {
 	P_COUNT			/*< Number of protocols */
 } protos;
 
+enum cpus_allowed_policy {
+	CPUS_SHARED,	/*< All jobs will share the CPU set specified. */
+	CPUS_SPLIT	/*< Each job will get a unique CPU from the CPU set. */
+};
+
 /**
  * @defgroup config_core Structure and defaults for NFS_Core_Param
  *
@@ -326,6 +331,12 @@ typedef struct nfs_core_param {
 	    accept a task before erroring.  Settable with
 	    Decoder_Fridge_Block_Timeout. */
 	time_t decoder_fridge_block_timeout;
+	/** CPU affinity mask of decoder threads. Set by the
+	    Decoder_Cpus_Allowed option. */
+	cpu_set_t decoder_mask;
+	/** Cpus allowed policy of decoder threads. Set by the
+	    Decoder_Cpus_Allowed_Policy option. */
+	uint32_t decoder_policy;
 	/** Protocols to support.  Should probably be renamed.
 	    Defaults to CORE_OPTION_ALL_VERS and is settable with
 	    NFS_Protocols (as a comma-separated list of 3 and 4.) */

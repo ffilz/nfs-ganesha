@@ -71,6 +71,12 @@ static struct config_item_list protocols[] = {
 	CONFIG_LIST_EOL
 };
 
+static struct config_item_list Cpus_Allowed_Policys[] = {
+	CONFIG_LIST_TOK("shared", CPUS_SHARED),
+	CONFIG_LIST_TOK("split", CPUS_SPLIT),
+	CONFIG_LIST_EOL
+};
+
 static struct config_item core_params[] = {
 	CONF_ITEM_UI16("NFS_Port", 0, UINT16_MAX, NFS_PORT,
 		       nfs_core_param, port[P_NFS]),
@@ -146,6 +152,10 @@ static struct config_item core_params[] = {
 		      nfs_core_param, decoder_fridge_expiration_delay),
 	CONF_ITEM_I64("Decoder_Fridge_Block_Timeout", 0, 7200, 600,
 		      nfs_core_param, decoder_fridge_block_timeout),
+	CONF_ITEM_CPUS_ALLOWED("Decoder_Cpus_Allowed", nfs_core_param,
+			       decoder_mask),
+	CONF_ITEM_ENUM("Decoder_Cpus_Allowed_Policy", CPUS_SHARED,
+		       Cpus_Allowed_Policys, nfs_core_param, decoder_policy),
 	CONF_ITEM_LIST("NFS_Protocols", CORE_OPTION_ALL_VERS, protocols,
 		       nfs_core_param, core_options),
 	CONF_ITEM_LIST("Protocols", CORE_OPTION_ALL_VERS, protocols,

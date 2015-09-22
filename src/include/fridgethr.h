@@ -88,6 +88,7 @@ struct fridgethr_entry {
 		uint32_t uflags; /*< Flags (for any use) */
 		bool woke;	/*< Set to false on first run and if wait
 				   in fridgethr_freeze didn't time out. */
+		bool worked;	/*< Set to true after first run */
 	} ctx;
 	uint32_t flags; /*< Thread-fridge flags (for handoff) */
 	bool frozen; /*< Thread is frozen */
