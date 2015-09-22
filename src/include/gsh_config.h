@@ -205,6 +205,12 @@ typedef struct nfs_core_param {
 	/** Number of worker threads.  Set to NB_WORKER_DEFAULT by
 	    default and changed with the Nb_Worker option. */
 	uint32_t nb_worker;
+	/** CPU affinity mask of worker threads. Set by the
+	    Worker_Cpus_Allowed option. */
+	cpu_set_t worker_mask;
+	/** Cpus allowed policy of worker threads. Set by the
+	    Worker_Cpus_Allowed_Policy option. */
+	uint32_t worker_policy;
 	/** For NFSv3, whether to drop rather than reply to requests
 	    yielding I/O errors.  True by default and settable with
 	    Drop_IO_Errors.  As this generally results in client

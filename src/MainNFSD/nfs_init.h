@@ -73,4 +73,6 @@ void nfs_start(nfs_start_info_t *p_start_info);
 
 enum xprt_stat thr_decode_rpc_request(void *context, SVCXPRT *xprt);
 
+void nfs_set_affinity(cpu_set_t *mask, uint32_t policy, uint32_t cpu_index);
+
 #endif				/* !NFS_INIT_H */
