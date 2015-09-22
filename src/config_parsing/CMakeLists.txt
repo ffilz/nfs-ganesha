@@ -1,3 +1,8 @@
+add_definitions(
+  -D__USE_GNU
+  -D_GNU_SOURCE
+)
+
 find_package(BISON)
 find_package(FLEX)
 

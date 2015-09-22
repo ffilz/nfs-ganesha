@@ -26,6 +26,7 @@
 #if HAVE_STRING_H
 #include <string.h>
 #endif
+#include <sched.h>
 #include <sys/types.h>
 #include <ctype.h>
 #include <arpa/inet.h>
@@ -608,6 +609,93 @@ static void convert_inet_addr(struct config_node *node,
 	return;
 }
 
+static void convert_cpus_allowed(struct config_node *node, void *param,
+				 struct config_error_type *err_type)
+{
+	cpu_set_t *mask = (cpu_set_t *)param;
+	struct config_node *sub_node;
+	struct glist_head *nsi, *nsn;
+	long max_cpu = CPU_SETSIZE;
+	int errors = 0;
+
+	glist_for_each_safe(nsi, nsn, &node->u.nterm.sub_nodes) {
+		sub_node = glist_entry(nsi, struct config_node, node);
+		assert(sub_node->type == TYPE_TERM);
+
+		/*
+		 * illegal string has been filtered by yyparse, so we
+		 * don't check the form again here.
+		 */
+		switch (sub_node->u.term.type) {
+		case TERM_DELIMITATION: {
+			char *cpu, *cpu2;
+			int icpu, icpu2;
+
+			cpu = cpu2 = strdup(sub_node->u.term.varvalue);
+			strsep(&cpu2, "-");
+
+			errno = 0;
+			icpu2 = strtol(cpu2, NULL, 0);
+			icpu = strtol(cpu, NULL, 0);
+			if (errno != 0) {
+				config_proc_error(sub_node, err_type,
+						  "cpu id %s is out of range",
+						  sub_node->u.term.varvalue);
+				errors++;
+				break;
+			}
+
+			while (icpu <= icpu2) {
+				if (icpu >= max_cpu) {
+					config_proc_error(sub_node, err_type,
+							  "Only %d CPUs supported",
+							  max_cpu);
+					errors++;
+					break;
+				}
+
+				CPU_SET(icpu, mask);
+				icpu++;
+			}
+
+			free(cpu);
+			break;
+		}
+		case TERM_HEXNUM:
+		case TERM_OCTNUM:
+		case TERM_DECNUM: {
+			int cpu;
+
+			errno = 0;
+			cpu = strtol(sub_node->u.term.varvalue, NULL, 0);
+			if (errno != 0) {
+				config_proc_error(sub_node, err_type,
+						  "cpu id %s is out of range",
+						  sub_node->u.term.varvalue);
+				errors++;
+			} else if (cpu >= max_cpu) {
+				config_proc_error(sub_node, err_type,
+						  "Only %d CPUs supported",
+						  max_cpu);
+				errors++;
+			} else {
+				CPU_SET(cpu, mask);
+			}
+			break;
+		}
+		default:
+			config_proc_error(sub_node, err_type,
+					  "Expected TERM_DELIMITATION/TERM_DECNUM"
+					   "/TERM_HEXNUM/TERM_OCTNUM, got a %s",
+					   config_term_desc(sub_node->u.term.type));
+			errors++;
+			break;
+		}
+	}
+
+	err_type->errors += errors;
+}
+
 /**
  * @brief Walk the term node list and call handler for each node
  *
@@ -748,6 +836,8 @@ static const char *config_type_str(enum config_type type)
 		return "CONFIG_BLOCK";
 	case CONFIG_PROC:
 		return "CONFIG_PROC";
+	case CONFIG_CPUS_ALLOWED:
+		return "CONFIG_CPUS_ALLOWED";
 	}
 	return "unknown";
 }
@@ -890,6 +980,9 @@ static bool do_block_init(struct config_node *blk_node,
 		case CONFIG_PROC:
 			(void) item->u.proc.init(NULL, param_addr);
 			break;
+		case CONFIG_CPUS_ALLOWED:
+			CPU_ZERO(param_addr);
+			break;
 		default:
 			config_proc_error(blk_node, err_type,
 					  "Cannot set default for parameter %s, type(%d) yet",
@@ -1021,7 +1114,8 @@ static int do_block_load(struct config_node *blk,
 						      node);
 			if ((item->type != CONFIG_BLOCK &&
 			     item->type != CONFIG_PROC &&
-			     item->type != CONFIG_LIST) &&
+			     item->type != CONFIG_LIST &&
+			     item->type != CONFIG_CPUS_ALLOWED) &&
 			    glist_length(&node->u.nterm.sub_nodes) > 1) {
 				config_proc_error(node, err_type,
 						  "%s can have only one option.  First one is (%s)",
@@ -1244,6 +1338,10 @@ static int do_block_load(struct config_node *blk,
 				break;
 			case CONFIG_PROC:
 				do_proc(node, item, param_addr,	err_type);
+				break;
+			case CONFIG_CPUS_ALLOWED:
+				convert_cpus_allowed(node, param_addr,
+						     err_type);
 				break;
 			default:
 				config_proc_error(term_node, err_type,
