@@ -56,7 +56,8 @@ enum  term_type {
 	TERM_V6ADDR,
 	TERM_V6CIDR,
 	TERM_FSID,
-	TERM_NETGROUP
+	TERM_NETGROUP,
+	TERM_DELIMITATION
 };
 
 enum config_type {

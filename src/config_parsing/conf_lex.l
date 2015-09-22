@@ -75,6 +75,7 @@ HUH          "\?"
 BANG         "\!"
 DOT          "\."
 AT           "@"
+HYPHEN       "-"
 
 CIDR         \/[1-9][0-9]{0,1}
 V4OCTET      [0-9]{1,3}
@@ -324,6 +325,12 @@ ID_CHARS [a-zA-Z_][a-zA-Z0-9_\-]*
 	DEBUG_LEX("token value:%s",yytext);
 	yylval->token = save_token(yytext, false, stp);
 	return REGEX_TOKEN;
+}
+
+<TERM>({OCTNUM}|{DECNUM}|{HEXNUM}){HYPHEN}({OCTNUM}|{DECNUM}|{HEXNUM}) { /* a delimitation */
+	DEBUG_LEX("delimitation value:%s",yytext);
+	yylval->token = save_token(yytext, false, stp);
+	return TOK_DELIMITATION;
 }
 
    /* Skip over stuff we don't send upstairs */
