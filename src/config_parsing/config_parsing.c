@@ -609,6 +609,58 @@ static void convert_inet_addr(struct config_node *node,
 	return;
 }
 
+static void convert_cpu_mask(struct config_node *node, void *param,
+			     struct config_error_type *err_type)
+{
+	cpu_set_t *mask = (cpu_set_t *)param;
+	struct config_node *sub_node;
+	struct glist_head *nsi, *nsn;
+	uint32_t i, cpu_mask, cpu_index;
+	long max_cpu = CPU_SETSIZE;
+	int errors = 0;
+
+	cpu_index = 0;
+	glist_for_each_safe(nsi, nsn, &node->u.nterm.sub_nodes) {
+		sub_node = glist_entry(nsi, struct config_node, node);
+		assert(sub_node->type == TYPE_TERM);
+
+		if (sub_node->u.term.type != TERM_HEXNUM) {
+			config_proc_error(sub_node, err_type,
+					  "Expected TERM_HEXNUM, got a %s",
+					  config_term_desc(sub_node->u.term.type));
+			errors++;
+			continue;
+		}
+
+		errno = 0;
+		cpu_mask = strtol(sub_node->u.term.varvalue, NULL, 16);
+		if (errno != 0) {
+			config_proc_error(node, err_type,
+					  "cpu mask (%s) is out of range",
+					  node->u.term.varvalue);
+			errors++;
+			continue;
+		}
+
+		for (i = 0; i < 32; i++) {
+			if ((i + cpu_index) >= max_cpu) {
+				config_proc_error(sub_node, err_type,
+						  "Only %d CPUs supported",
+						  max_cpu);
+				errors++;
+				goto out;
+			}
+
+			if (cpu_mask & (1<<i))
+				CPU_SET(i + cpu_index, mask);
+		}
+		cpu_index += 32;
+	}
+
+out:
+	err_type->errors += errors;
+}
+
 static void convert_cpus_allowed(struct config_node *node, void *param,
 				 struct config_error_type *err_type)
 {
@@ -836,6 +888,8 @@ static const char *config_type_str(enum config_type type)
 		return "CONFIG_BLOCK";
 	case CONFIG_PROC:
 		return "CONFIG_PROC";
+	case CONFIG_CPU_MASK:
+		return "CONFIG_CPU_MASK";
 	case CONFIG_CPUS_ALLOWED:
 		return "CONFIG_CPUS_ALLOWED";
 	}
@@ -980,6 +1034,7 @@ static bool do_block_init(struct config_node *blk_node,
 		case CONFIG_PROC:
 			(void) item->u.proc.init(NULL, param_addr);
 			break;
+		case CONFIG_CPU_MASK:
 		case CONFIG_CPUS_ALLOWED:
 			CPU_ZERO(param_addr);
 			break;
@@ -1115,6 +1170,7 @@ static int do_block_load(struct config_node *blk,
 			if ((item->type != CONFIG_BLOCK &&
 			     item->type != CONFIG_PROC &&
 			     item->type != CONFIG_LIST &&
+			     item->type != CONFIG_CPU_MASK &&
 			     item->type != CONFIG_CPUS_ALLOWED) &&
 			    glist_length(&node->u.nterm.sub_nodes) > 1) {
 				config_proc_error(node, err_type,
@@ -1338,6 +1394,9 @@ static int do_block_load(struct config_node *blk,
 				break;
 			case CONFIG_PROC:
 				do_proc(node, item, param_addr,	err_type);
+				break;
+			case CONFIG_CPU_MASK:
+				convert_cpu_mask(node, param_addr, err_type);
 				break;
 			case CONFIG_CPUS_ALLOWED:
 				convert_cpus_allowed(node, param_addr,
