@@ -762,6 +762,9 @@ void nfs_Init_svc(void)
 	svc_params.ioq_thrd_max = /* max ioq worker threads */
 		nfs_param.core_param.rpc.ioq_thrd_max;
 
+	svc_params.cpu_mask = nfs_param.core_param.rpc.sender_mask;
+	svc_params.policy = nfs_param.core_param.rpc.sender_policy;
+
 	if (!svc_init(&svc_params))
 		LogFatal(COMPONENT_INIT, "SVC initialization failed");
 
