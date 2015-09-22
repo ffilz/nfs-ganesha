@@ -60,6 +60,7 @@
 #include "export_mgr.h"
 #include "server_stats.h"
 #include "uid2grp.h"
+#include "nfs_init.h"
 
 #ifdef USE_LTTNG
 #include "gsh_lttng/nfs_rpc.h"
@@ -69,6 +70,7 @@ pool_t *request_pool;
 pool_t *dupreq_pool;
 
 static struct fridgethr *worker_fridge;
+static uint32_t worker_thrd_cnt;
 
 const nfs_function_desc_t invalid_funcdesc = {
 	.service_function = nfs_null,
@@ -1513,6 +1515,18 @@ static void worker_run(struct fridgethr_context *ctx)
 {
 	struct nfs_worker_data *worker_data = &ctx->wd;
 	request_data_t *reqdata;
+	uint32_t thrd_cnt;
+
+	if (CPU_COUNT(&nfs_param.core_param.worker_mask) > 0 &&
+	    unlikely(!ctx->worked)) {
+		thrd_cnt = atomic_postinc_uint32_t(&worker_thrd_cnt);
+		nfs_set_affinity(&nfs_param.core_param.worker_mask,
+				 nfs_param.core_param.worker_policy,
+				 thrd_cnt);
+	}
+
+	if (unlikely(!ctx->worked))
+		ctx->worked = true;
 
 	/* Worker's loop */
 	while (!fridgethr_you_should_break(ctx)) {
