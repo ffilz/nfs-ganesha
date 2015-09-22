@@ -765,9 +765,6 @@ void nfs_Init_svc(void)
 	svc_params.cpu_mask = nfs_param.core_param.rpc.sender_mask;
 	svc_params.policy = nfs_param.core_param.rpc.sender_policy;
 
-	if (!svc_init(&svc_params))
-		LogFatal(COMPONENT_INIT, "SVC initialization failed");
-
 	/* Redirect TI-RPC allocators, log channel */
 	if (!tirpc_control(TIRPC_SET_WARNX, (warnx_t) rpc_warnx))
 		LogCrit(COMPONENT_INIT, "Failed redirecting TI-RPC __warnx");
@@ -777,6 +774,9 @@ void nfs_Init_svc(void)
 
 	if (!tirpc_control(TIRPC_SET_DEBUG_FLAGS, &tirpc_debug_flags))
 		LogCrit(COMPONENT_INIT, "Failed setting TI-RPC debug flags");
+
+	if (!svc_init(&svc_params))
+		LogFatal(COMPONENT_INIT, "SVC initialization failed");
 
 #define TIRPC_SET_ALLOCATORS 0
 #if TIRPC_SET_ALLOCATORS
