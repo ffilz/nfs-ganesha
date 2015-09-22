@@ -77,6 +77,12 @@ static struct config_item_list Cpus_Allowed_Policys[] = {
 	CONFIG_LIST_EOL
 };
 
+static struct config_item_list Svc_Cpus_Allowed_Policys[] = {
+	CONFIG_LIST_TOK("shared", SVC_CPUS_SHARED),
+	CONFIG_LIST_TOK("split", SVC_CPUS_SPLIT),
+	CONFIG_LIST_EOL
+};
+
 static struct config_item core_params[] = {
 	CONF_ITEM_UI16("NFS_Port", 0, UINT16_MAX, NFS_PORT,
 		       nfs_core_param, port[P_NFS]),
@@ -152,6 +158,11 @@ static struct config_item core_params[] = {
 		       nfs_core_param, rpc.max_recv_buffer_size),
 	CONF_ITEM_UI32("RPC_Ioq_ThrdMax", 1, 1024*128, 200,
 		       nfs_core_param, rpc.ioq_thrd_max),
+	CONF_ITEM_CPUS_ALLOWED("Sender_Cpus_Allowed", nfs_core_param,
+			       rpc.sender_mask),
+	CONF_ITEM_ENUM("Sender_Cpus_Allowed_Policy", CPUS_SHARED,
+		       Svc_Cpus_Allowed_Policys, nfs_core_param,
+		       rpc.sender_policy),
 	CONF_ITEM_I64("Decoder_Fridge_Expiration_Delay", 0, 7200, 600,
 		      nfs_core_param, decoder_fridge_expiration_delay),
 	CONF_ITEM_I64("Decoder_Fridge_Block_Timeout", 0, 7200, 600,
