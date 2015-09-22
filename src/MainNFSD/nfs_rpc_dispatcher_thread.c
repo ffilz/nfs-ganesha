@@ -35,6 +35,7 @@
 #include <fcntl.h>
 #include <sys/file.h>		/* for having FNDELAY */
 #include <sys/select.h>
+#include <syscall.h>
 #include <poll.h>
 #include <assert.h>
 #include "hashtable.h"
@@ -75,6 +76,7 @@ struct rpc_evchan {
 #define N_EVENT_CHAN (N_TCP_EVENT_CHAN + 2)
 
 static struct rpc_evchan rpc_evchan[N_EVENT_CHAN];
+static uint32_t decoder_thrd_cnt;
 
 struct fridgethr *req_fridge;	/*< Decoder thread pool */
 struct nfs_req_st nfs_req_st;	/*< Shared request queues */
@@ -1894,12 +1896,64 @@ static inline bool thr_continue_decoding(SVCXPRT *xprt, enum xprt_stat stat)
 	return (stat == XPRT_MOREREQS);
 }
 
+static inline void cpus_split(cpu_set_t *mask, uint32_t cpu_index,
+			      cpu_set_t *per_cpu_mask)
+{
+	uint32_t i, index, cpus_in_mask;
+
+	cpus_in_mask = CPU_COUNT(mask);
+	cpu_index = cpu_index % cpus_in_mask;
+
+	index = 0;
+	for (i = 0; ; i++) {
+		if (!CPU_ISSET(i, mask))
+			continue;
+
+		if (cpu_index == index) {
+			CPU_SET(i, per_cpu_mask);
+			break;
+		}
+
+		index++;
+	}
+}
+
+void nfs_set_affinity(cpu_set_t *mask, uint32_t policy, uint32_t cpu_index)
+{
+	cpu_set_t tmp_mask;
+	int tid;
+
+	CPU_ZERO(&tmp_mask);
+	tid = (int)syscall(SYS_gettid);
+
+	LogDebug(COMPONENT_DISPATCH, "Thread %d set CPU affinity", tid);
+
+	if (policy == CPUS_SPLIT) {
+		cpus_split(mask, cpu_index, &tmp_mask);
+		sched_setaffinity(tid, sizeof(tmp_mask), &tmp_mask);
+	} else {
+		sched_setaffinity(tid, sizeof(*mask), mask);
+	}
+}
+
 void thr_decode_rpc_requests(struct fridgethr_context *thr_ctx)
 {
 	enum xprt_stat stat;
 	SVCXPRT *xprt = (SVCXPRT *) thr_ctx->arg;
+	uint32_t thrd_cnt;
 
 	LogFullDebug(COMPONENT_RPC, "enter xprt=%p", xprt);
+
+	if (CPU_COUNT(&nfs_param.core_param.decoder_mask) > 0 &&
+	    unlikely(!thr_ctx->worked)) {
+		thrd_cnt = atomic_postinc_uint32_t(&decoder_thrd_cnt);
+		nfs_set_affinity(&nfs_param.core_param.decoder_mask,
+				 nfs_param.core_param.decoder_policy,
+				 thrd_cnt);
+	}
+
+	if (unlikely(!thr_ctx->worked))
+		thr_ctx->worked = true;
 
 	do {
 		stat = thr_decode_rpc_request(NULL, xprt);
