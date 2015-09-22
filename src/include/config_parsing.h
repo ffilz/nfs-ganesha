@@ -80,6 +80,7 @@ enum config_type {
 	CONFIG_BOOLBIT,
 	CONFIG_IP_ADDR,
 	CONFIG_INET_PORT,
+	CONFIG_CPUS_ALLOWED,
 	CONFIG_BLOCK,
 	CONFIG_PROC
 };
@@ -790,6 +791,12 @@ struct config_item {
 	  .u.ui64.minval = _min_,		    \
 	  .u.ui64.maxval = _max_,		    \
 	  .u.ui64.def = _def_,			    \
+	  .off = offsetof(struct _struct_, _mem_)   \
+	}
+
+#define CONF_ITEM_CPUS_ALLOWED(_name_, _struct_, _mem_) \
+	{ .name = _name_,			    \
+	  .type = CONFIG_CPUS_ALLOWED,		    \
 	  .off = offsetof(struct _struct_, _mem_)   \
 	}
 
