@@ -55,6 +55,10 @@ NFS_CORE_PARAM {}
 
 	Nb_Worker(uint32, range 1 to 1024*128, default 16)
 
+	Worker_Cpus_allowed(comma-delimited list, no default)
+
+	Worker_Policy(string, no default)
+
 	Drop_IO_Errors(bool, default false)
 
 	Drop_Inval_Errors(bool, default false)
