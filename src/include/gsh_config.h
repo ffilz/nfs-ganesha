@@ -329,6 +329,12 @@ typedef struct nfs_core_param {
 		/** TIRPC ioq max simultaneous io threads.  Defaults to
 		    200 and settable by RPC_Ioq_ThrdMax. */
 		uint32_t ioq_thrd_max;
+		/** CPU affinity mask of send threads. Set by the
+		    Sender_Cpus_Allowed option. */
+		cpu_set_t sender_mask;
+		/** Cpus allowed policy of send threads. Set by the
+		    Sender_Cpus_Allowed_Policy option. */
+		uint32_t sender_policy;
 	} rpc;
 	/** How long (in seconds) to let unused decoder threads wait before
 	    exiting.  Settable with Decoder_Fridge_Expiration_Delay. */
