@@ -326,6 +326,12 @@ ID_CHARS [a-zA-Z_][a-zA-Z0-9_\-]*
 	return REGEX_TOKEN;
 }
 
+<TERM>({OCTNUM}|{DECNUM}|{HEXNUM}){DOT}{DOT}({OCTNUM}|{DECNUM}|{HEXNUM}) { /* a number range */
+	DEBUG_LEX("number range value:%s",yytext);
+	yylval->token = save_token(yytext, false, stp);
+	return TOK_NUM_RANGE;
+}
+
    /* Skip over stuff we don't send upstairs */
 
 {COMMENTEXT}  ;/* ignore */
