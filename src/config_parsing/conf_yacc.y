@@ -129,6 +129,7 @@ struct config_node *config_term(char *opcode,
 %token <token> TOK_V6CIDR
 %token <token> TOK_FSID
 %token <token> TOK_NETGROUP
+%token <token> TOK_RANGE
 
 %type <node> deflist
 %type <node> definition
@@ -313,6 +314,10 @@ expression: /* empty */ {
 | TOK_NETGROUP
 {
   $$ = config_term(NULL, $1, TERM_NETGROUP, &@$, st);
+}
+| TOK_RANGE
+{
+  $$ = config_term(NULL, $1, TERM_RANGE, &@$, st);
 }
 ;
 
