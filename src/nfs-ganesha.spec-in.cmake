@@ -359,6 +359,7 @@ cmake .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DUSE_DBUS=ON					\
 	-DUSE_9P=ON					\
 	-DDISTNAME_HAS_GIT_DATA=OFF			\
+	-DDESTDIR=%{buildroot}				\
 %if %{with jemalloc}
 	-DALLOCATOR=jemalloc
 %endif
@@ -461,6 +462,8 @@ make DESTDIR=%{buildroot} install
 %{_libdir}/libntirpc.so.1.3.0
 %{_libdir}/libntirpc.so.1.3
 %{_libdir}/libntirpc.so
+%{_libdir}/pkgconfig/libntirpc.pc
+%{_includedir}/ntirpc/
 %config %{_sysconfdir}/dbus-1/system.d/org.ganesha.nfsd.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/ganesha
 %config(noreplace) %{_sysconfdir}/logrotate.d/ganesha
