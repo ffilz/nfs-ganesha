@@ -218,8 +218,11 @@ static fsal_status_t create_handle(struct fsal_export *export_pub,
 	}
 
 	i = ceph_ll_get_inode(export->cmount, *vi);
-	if (!i)
-		return ceph2fsal_error(-ESTALE);
+	if (!i) {
+		rc = ceph_ll_lookup_inode(export->cmount, vi->ino, &i);
+		if (!i)
+			return ceph2fsal_error(-ESTALE);
+	}
 
 	/* The ceph_ll_connectable_m should have populated libceph's
 	   cache with all this anyway */
