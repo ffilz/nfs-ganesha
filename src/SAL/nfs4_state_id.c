@@ -344,7 +344,9 @@ int compare_state_entry(struct gsh_buffdesc *buff1, struct gsh_buffdesc *buff2)
 		return 1;
 
 	return state1->state_entry != state2->state_entry ||
-	       compare_nfs4_owner(state1->state_owner, state2->state_owner);
+	       compare_nfs4_owner(state1->state_owner,
+				  state2->state_owner,
+				  false);
 }
 
 /**

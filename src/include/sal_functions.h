@@ -444,7 +444,9 @@ int display_nfs4_owner(struct display_buffer *dspbuf, state_owner_t *owner);
 int display_nfs4_owner_val(struct gsh_buffdesc *buff, char *str);
 int display_nfs4_owner_key(struct gsh_buffdesc *buff, char *str);
 
-int compare_nfs4_owner(state_owner_t *owner1, state_owner_t *owner2);
+int compare_nfs4_owner(state_owner_t *owner1,
+		       state_owner_t *owner2,
+		       bool check_related);
 
 int compare_nfs4_owner_key(struct gsh_buffdesc *buff1,
 			   struct gsh_buffdesc *buff2);

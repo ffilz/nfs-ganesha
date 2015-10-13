@@ -817,7 +817,7 @@ bool different_owners(state_owner_t *owner1, state_owner_t *owner2)
 	case STATE_OPEN_OWNER_NFSV4:
 	case STATE_LOCK_OWNER_NFSV4:
 	case STATE_CLIENTID_OWNER_NFSV4:
-		return compare_nfs4_owner(owner1, owner2);
+		return compare_nfs4_owner(owner1, owner2, false);
 
 	case STATE_LOCK_OWNER_UNKNOWN:
 		break;

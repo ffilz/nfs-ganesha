@@ -160,7 +160,9 @@ int display_nfs4_owner_val(struct gsh_buffdesc *buff, char *str)
  * @retval 0 on equality.
  * @retval 1 on inequality.
  */
-int compare_nfs4_owner(state_owner_t *owner1, state_owner_t *owner2)
+int compare_nfs4_owner(state_owner_t *owner1,
+		       state_owner_t *owner2,
+		       bool check_related)
 {
 	if (isFullDebug(COMPONENT_STATE) && isDebug(COMPONENT_HASHTABLE)) {
 		char str1[LOG_BUFF_LEN / 2];
@@ -179,15 +181,17 @@ int compare_nfs4_owner(state_owner_t *owner1, state_owner_t *owner2)
 	if (owner1 == owner2)
 		return 0;
 
-	if (owner1->so_type == STATE_LOCK_OWNER_NFSV4
+	if (check_related
+	    && owner1->so_type == STATE_LOCK_OWNER_NFSV4
 	    && owner2->so_type == STATE_OPEN_OWNER_NFSV4)
 		return compare_nfs4_owner(owner1->so_owner.so_nfs4_owner.
-					  so_related_owner, owner2);
+					  so_related_owner, owner2, false);
 
-	if (owner2->so_type == STATE_LOCK_OWNER_NFSV4
+	if (check_related
+	    && owner2->so_type == STATE_LOCK_OWNER_NFSV4
 	    && owner1->so_type == STATE_OPEN_OWNER_NFSV4)
 		return compare_nfs4_owner(owner2->so_owner.so_nfs4_owner.
-					  so_related_owner, owner1);
+					  so_related_owner, owner1, false);
 
 	if (owner1->so_type != owner2->so_type)
 		return 1;
@@ -238,7 +242,7 @@ int compare_nfs4_owner_key(struct gsh_buffdesc *buff1,
 	if (pkey1->so_type != pkey2->so_type)
 		return 1;
 
-	return compare_nfs4_owner(pkey1, pkey2);
+	return compare_nfs4_owner(pkey1, pkey2, true);
 }
 
 /**
