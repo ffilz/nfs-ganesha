@@ -32,10 +32,11 @@ PID_FILE=${PID_FILE:=/var/run/${prog}.pid}
 LOCK_FILE=${LOCK_FILE:=/var/lock/subsys/${prog}}
 
 [ -f /etc/sysconfig/ganesha ] && . /etc/sysconfig/ganesha
+[ -f /var/lib/ganesha/epoch ] && . /var/lib/ganesha/epoch
 
 [ -z "$NOFILE" ] && NOFILE=1048576
 
-OPTIONS="-L $LOGFILE -f $CONFFILE -N NIV_EVENT -p $PID_FILE "
+OPTIONS="-L $LOGFILE -f $CONFFILE -N NIV_EVENT -p $PID_FILE $EPOCH"
 RETVAL=0
 
 

@@ -1,1 +1,2 @@
 OPTIONS="-L /var/log/ganesha.log -f /etc/ganesha/ganesha.conf -N NIV_EVENT"
+EPOCH_FILE="/var/lib/ganesha/epoch" # This file is used in the systemd unit of nfs-ganesha too
