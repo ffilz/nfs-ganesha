@@ -21,7 +21,16 @@ Conflicts=nfs.target
 Type=forking
 Environment="NOFILE=1048576"
 EnvironmentFile=/etc/sysconfig/ganesha
-ExecStart=/usr/bin/ganesha.nfsd $OPTIONS
+
+
+# TODO: Have a conditional check before starting ganesha-epoch service
+ExecStartPre=-/bin/bash -c "systemctl start ganesha-epoch; sleep 1"
+
+# TODO: Check if  these variables are set
+#ExecStartPre=-/bin/bash -c "${EPOCH_CMD} ${EPOCH_SCRIPT} ${EPOCH_FILE}"
+
+ExecStart=/bin/bash -c 'if [ -f ${EPOCH_FILE} ]; then source ${EPOCH_FILE} ; fi && /usr/bin/ganesha.nfsd $OPTIONS $${EPOCH} '
+
 ExecStartPost=-/bin/bash -c "prlimit --pid $MAINPID --nofile=$NOFILE:$NOFILE"
 ExecReload=/bin/dbus-send --system   --dest=org.ganesha.nfsd --type=method_call /org/ganesha/nfsd/admin  org.ganesha.nfsd.admin.reload
 ExecStop=/bin/dbus-send --system   --dest=org.ganesha.nfsd --type=method_call /org/ganesha/nfsd/admin org.ganesha.nfsd.admin.shutdown

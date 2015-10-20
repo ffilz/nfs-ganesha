@@ -1,3 +1,6 @@
 LOGFILE=/var/log/ganesha.log
 CONFFILE=/etc/ganesha/ganesha.conf
-
+EPOCH_FILE="/var/lib/ganesha/epoch" # The contents of this file should be in 'EPOCH="-E <epoch_value>"' format
+#EPOCH_SCRIPT="/usr/libexec/ganesha/generate-epoch.py"
+#EPOCH_CMD='/usr/bin/python'
+#EPOCH="-E 6210201433924894720"
