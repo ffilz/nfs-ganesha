@@ -928,7 +928,7 @@ if(USE_9P_RDMA)
 endif(USE_9P_RDMA)
 
 if (USE_SYSTEM_NTIRPC)
-  find_package(NTIRPC 1.3.0 REQUIRED)
+  find_package(NTIRPC 1.3.1 REQUIRED)
 else (USE_SYSTEM_NTIRPC)
   # Set options for submodule
   option(USE_RPC_RDMA "Use RDMA" ${USE_NFS_RDMA})
