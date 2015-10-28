@@ -1,0 +1,505 @@
+NOTE: This does not reflect memory allocated by library functions outside of
+Ganesha such as getaddrinfo
+
+FSAL Object Handles:
+FSAL/FSAL_GPFS/handle.c:65: gsh_malloc(sizeof(struct gpfs_fsal_obj_handle) + sizeof(struct gpfs_file_handle));
+FSAL/FSAL_LUSTRE/handle.c:99: gsh_malloc(sizeof(struct lustre_fsal_obj_handle) + sizeof(struct lustre_file_handle));
+FSAL/FSAL_LUSTRE/handle.c:129: gsh_malloc(sizeof(struct lustre_file_handle));
+FSAL/FSAL_LUSTRE/handle.c:134: hdl->u.sock.sock_name = gsh_malloc(strlen(sock_name) + 1);
+FSAL/FSAL_PSEUDO/handle.c:197: hdl = gsh_calloc(1, sizeof(struct pseudo_fsal_obj_handle) + V4_FH_OPAQUE_SIZE);
+FSAL/FSAL_GLUSTER/gluster_internal.c:260: constructing = gsh_calloc(1, sizeof(struct glusterfs_handle));
+FSAL/FSAL_CEPH/internal.c:151: constructing = gsh_calloc(1, sizeof(struct handle));
+FSAL/FSAL_HPSS/handle.c:55: hdl = malloc(sizeof(struct hpss_fsal_obj_handle) + sizeof(struct hpss_file_handle));
+FSAL/FSAL_VFS/xfs/subfsal_xfs.c:74: hdl = gsh_calloc(1, (sizeof(struct vfs_fsal_obj_handle) + sizeof(vfs_file_handle_t)));
+FSAL/FSAL_VFS/panfs/subfsal_panfs.c:118: hdl = gsh_calloc(1, (sizeof(struct panfs_fsal_obj_handle) + sizeof(vfs_file_handle_t)));
+FSAL/FSAL_VFS/vfs/subfsal_vfs.c:95: hdl = gsh_calloc(1, (sizeof(struct vfs_fsal_obj_handle) + sizeof(vfs_file_handle_t)));
+FSAL/FSAL_VFS/handle.c:126: hdl->u.unopenable.dir = gsh_malloc(sizeof(vfs_file_handle_t));
+include/fsal_handle_syscalls.h:71: (fh) = gsh_calloc(1, sizeof(struct vfs_file_handle));	\
+FSAL/FSAL_PT/handle.c:81: hdl = gsh_malloc(sizeof(struct pt_fsal_obj_handle) + sizeof(ptfsal_handle_t));
+FSAL/FSAL_PT/handle.c:106: hdl->u.unopenable.dir = gsh_malloc(sizeof(ptfsal_handle_t));
+FSAL/FSAL_PT/handle.c:111: gsh_malloc(strlen(unopenable_name) + 1);
+FSAL/Stackable_FSALs/FSAL_NULL/handle.c:70: gsh_calloc(1, sizeof(struct nullfs_fsal_obj_handle));
+FSAL/FSAL_ZFS/handle.c:87: hdl = gsh_malloc(sizeof(struct zfs_fsal_obj_handle) + sizeof(struct zfs_file_handle));
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:63: static digest_pool_entry_t *digest_alloc() {
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:68: p_new = pool_alloc(digest_pool, NULL);
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:85: static handle_pool_entry_t *handle_alloc() {
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:90: p_new = pool_alloc(handle_pool, NULL);
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:183: digest = digest_alloc();
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:188: handle = handle_alloc();
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:275: pool_init(NULL, sizeof(digest_pool_entry_t), pool_basic_substrate, NULL, NULL, NULL);
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping.c:279: pool_init(NULL, sizeof(handle_pool_entry_t), pool_basic_substrate, NULL, NULL, NULL);
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping_db.c:331: pool_init(NULL, sizeof(db_op_item_t), pool_basic_substrate, NULL, NULL, NULL);
+FSAL/FSAL_PROXY/handle.c:2055: struct pxy_obj_handle *n = gsh_malloc(sizeof(*n) + fh->nfs_fh4_len);
+FSAL/FSAL_PSEUDO/handle.c:209: hdl->name = gsh_strdup(name);
+FSAL/FSAL_VFS/handle.c:131: hdl->u.unopenable.name = gsh_strdup(path);
+FSAL/FSAL_VFS/handle.c:1150: obj->u.unopenable.name = gsh_strdup(new_name);
+
+FSAL Export Structures:
+FSAL/commonlib.c:964: fs = gsh_calloc(1, sizeof(*fs));
+FSAL/FSAL_GPFS/export.c:723: myself = gsh_malloc(sizeof(struct gpfs_fsal_export));
+FSAL/FSAL_GPFS/export.c:517: map = gsh_calloc(1, sizeof(*map));
+FSAL/FSAL_GPFS/export.c:545: gpfs_fs = gsh_calloc(1, sizeof(*gpfs_fs));
+FSAL/FSAL_LUSTRE/export.c:486: map = gsh_calloc(1, sizeof(*map));
+FSAL/FSAL_LUSTRE/export.c:723: myself = gsh_malloc(sizeof(struct lustre_fsal_export));
+FSAL/FSAL_LUSTRE/export.c:530: lustre_fs->fsname = gsh_malloc(MAXPATHLEN);
+FSAL/FSAL_LUSTRE/export.c:514: lustre_fs = gsh_calloc(1, sizeof(*lustre_fs));
+FSAL/FSAL_PSEUDO/export.c:318: myself = gsh_calloc(1, sizeof(struct pseudofs_fsal_export));
+FSAL/FSAL_GLUSTER/export.c:123: realpath = gsh_malloc(strlen(glfs_export->export_path) + strlen(path) + 1);
+FSAL/FSAL_GLUSTER/export.c:611: glfsexport = gsh_calloc(1, sizeof(struct glusterfs_export));
+FSAL/FSAL_GLUSTER/export.c:116: realpath = strdup(glfs_export->export_path);
+FSAL/FSAL_CEPH/main.c:156: struct export *export = gsh_calloc(1, sizeof(struct export));
+FSAL/FSAL_HPSS/export.c:295: myself = gsh_calloc(1, sizeof(struct hpss_fsal_export));
+FSAL/FSAL_VFS/export.c:421: map = gsh_calloc(1, sizeof(*map));
+FSAL/FSAL_VFS/export.c:444: vfs_fs = gsh_calloc(1, sizeof(*vfs_fs));
+FSAL/FSAL_VFS/export.c:576: myself = gsh_calloc(1, sizeof(struct vfs_fsal_export));
+FSAL/FSAL_PT/export.c:283: myself = gsh_malloc(sizeof(struct pt_fsal_export));
+FSAL/Stackable_FSALs/FSAL_NULL/export.c:418: myself = gsh_calloc(1, sizeof(struct nullfs_fsal_export));
+FSAL/FSAL_ZFS/export.c:304: myself = gsh_calloc(1, sizeof(struct zfs_fsal_export));
+FSAL/FSAL_ZFS/export.c:361: p_snapshots = gsh_calloc(1, sizeof(*p_snapshots));
+FSAL/FSAL_PROXY/export.c:161: struct pxy_export *exp = gsh_calloc(1, sizeof(*exp));
+FSAL/FSAL_PSEUDO/export.c:350: myself->export_path = gsh_strdup(op_ctx->export->fullpath);
+Protocols/NFS/nfs4_pseudo.c:605: char *pseudopath = gsh_strdup(export->pseudopath);
+FSAL/commonlib.c:972: fs->path = gsh_strdup(mnt->mnt_dir);
+FSAL/commonlib.c:973: fs->device = gsh_strdup(mnt->mnt_fsname);
+FSAL/commonlib.c:974: fs->type = gsh_strdup(mnt->mnt_type);
+
+Symlink Data:
+FSAL/FSAL_CEPH/handle.c:381: content_buf->addr = gsh_malloc(content_buf->len);
+FSAL/FSAL_GLUSTER/handle.c:605: link_content->addr = gsh_malloc(link_content->len);
+FSAL/FSAL_GPFS/handle.c:388: myself->u.symlink.link_content = gsh_malloc(retlink + 1);
+FSAL/FSAL_GPFS/handle.c:402: link_content->addr = gsh_malloc(link_content->len);
+FSAL/FSAL_GPFS/handle.c:85: hdl->u.symlink.link_content = gsh_malloc(len);
+FSAL/FSAL_HPSS/handle.c:689: link_content->addr = gsh_malloc(link_content->len);
+FSAL/FSAL_HPSS/handle.c:76: hdl->u.symlink.link_content = gsh_malloc(len);
+FSAL/FSAL_LUSTRE/handle.c:120: hdl->u.symlink.link_content = gsh_malloc(len);
+FSAL/FSAL_LUSTRE/handle.c:681: myself->u.symlink.link_content = gsh_malloc(retlink + 1);
+FSAL/FSAL_LUSTRE/handle.c:695: link_content->addr = gsh_malloc(link_content->len);
+FSAL/FSAL_PROXY/handle.c:1488: link_content->addr = gsh_malloc(link_content->len);
+FSAL/FSAL_PT/handle.c:802: link_content = gsh_malloc(PATH_MAX);
+FSAL/FSAL_PT/handle.c:99: hdl->u.symlink.link_content = gsh_malloc(len);
+FSAL/FSAL_VFS/handle.c:100: char *link_content = gsh_malloc(len);
+FSAL/FSAL_VFS/handle.c:885: link_content->addr = gsh_malloc(myself->u.symlink.link_size);
+FSAL/FSAL_VFS/handle_syscalls.c:70: gsh_malloc(myself->u.symlink.link_size);
+FSAL/FSAL_VFS/xfs/handle_syscalls.c:220: hdl->u.symlink.link_content = gsh_strdup(ldata);
+FSAL/FSAL_ZFS/handle.c:104: hdl->u.symlink.link_content = gsh_malloc(len);
+FSAL/FSAL_ZFS/handle.c:503: link_content->addr = gsh_malloc(link_content->len);
+
+PNFS DS Handles:
+FSAL/default_methods.c:1153: *handle = gsh_calloc(sizeof(struct fsal_ds_handle), 1);
+FSAL/FSAL_GPFS/fsal_ds.c:512: ds = gsh_calloc(sizeof(struct gpfs_ds), 1);
+FSAL/FSAL_LUSTRE/ds.c:294: ds = gsh_calloc(sizeof(struct lustre_ds), 1);
+FSAL/FSAL_GLUSTER/ds.c:267: ds = gsh_calloc(1, sizeof(struct glfs_ds_handle));
+FSAL/FSAL_CEPH/ds.c:412: ds = gsh_calloc(sizeof(struct ds), 1);
+
+PNFS DS:
+FSAL/FSAL_LUSTRE/main.c:90: child_param = gsh_calloc(1, sizeof(struct lustre_pnfs_ds_parameter));
+FSAL/default_methods.c:201: *handle = pnfs_ds_alloc();
+support/ds.c:90: struct fsal_pnfs_ds *pnfs_ds_alloc(void) {
+support/ds.c:92: return gsh_calloc(sizeof(struct fsal_pnfs_ds), 1);
+support/ds.c:344: return pnfs_ds_alloc();
+
+ACL data:
+FSAL/commonlib.c:1584: attrs->acl = nfs4_acl_alloc();
+FSAL/commonlib.c:1587: attrs->acl->aces = (fsal_ace_t *) nfs4_ace_alloc(naces);
+FSAL/commonlib.c:1794: attrs->acl = nfs4_acl_alloc();
+FSAL/commonlib.c:1798: attrs->acl->aces = (fsal_ace_t *) nfs4_ace_alloc(attrs->acl->naces);
+FSAL/commonlib.c:1850: attrs->acl = nfs4_acl_alloc();
+FSAL/commonlib.c:1853: attrs->acl->aces = (fsal_ace_t *) nfs4_ace_alloc(naces);
+FSAL/FSAL_GPFS/fsal_convert.c:248: acldata.aces = (fsal_ace_t *) nfs4_ace_alloc(acldata.naces);
+FSAL/FSAL_GLUSTER/gluster_internal.c:415: acldata.aces = (fsal_ace_t *) nfs4_ace_alloc(acldata.naces);
+FSAL/FSAL_GLUSTER/gluster_internal.c:434: acldata.aces = (fsal_ace_t *) gsh_realloc(acldata.aces, new_count*sizeof(fsal_ace_t));
+FSAL/FSAL_VFS/panfs/attrs.c:346: acldata.aces = (fsal_ace_t *) nfs4_ace_alloc(acldata.naces);
+FSAL/FSAL_VFS/vfs/attrs.c:92: fa_entry = gsh_calloc(sizeof(struct vfs_acl_entry), 1);
+FSAL/FSAL_VFS/vfs/attrs.c:104: fa_entry->fa_acl.aces = (fsal_ace_t *) nfs4_ace_alloc(0);
+FSAL/FSAL_VFS/vfs/attrs.c:150: acldata.aces = (fsal_ace_t *) nfs4_ace_alloc(acldata.naces);
+FSAL/FSAL_VFS/vfs/attrs.c:178: fa->fa_acl.aces = (fsal_ace_t *) nfs4_ace_alloc(fa->fa_acl.naces);
+
+FSAL Modules:
+FSAL/fsal_manager.c:496: return gsh_calloc(sizeof(struct fsal_args), 1);
+FSAL/FSAL_GLUSTER/main.c:129: glfsal_module = gsh_calloc(1, sizeof(struct glusterfs_fsal_module));
+FSAL/FSAL_PSEUDO/export.c:350: myself->export_path = gsh_strdup(op_ctx->export->fullpath);
+FSAL/fsal_manager.c:108: dl_path = gsh_strdup("Builtin-PseudoFS");
+FSAL/fsal_manager.c:211: dl_path = gsh_strdup(path);
+FSAL/fsal_manager.c:403: new_fsal->name = gsh_strdup(name);
+
+FSAL xattrs:
+FSAL/FSAL_HPSS/xattrs.c:811: attr.Pair = malloc(sizeof(hpss_userattr_t));
+FSAL/FSAL_HPSS/xattrs.c:924: attr.Pair = malloc(sizeof(hpss_userattr_t));
+FSAL/FSAL_ZFS/xattrs.c:378: char *tmp_buf = (char *)gsh_malloc(3 * size_in + 4);
+
+FSAL_UP:
+FSAL_UP/fsal_up_top.c:423: gsh_malloc(sizeof(struct state_layout_recall_file));
+FSAL_UP/fsal_up_top.c:511: gsh_malloc(sizeof(struct recall_state_list));
+FSAL_UP/fsal_up_top.c:624: cb_data = gsh_malloc(sizeof(struct layoutrecall_cb_data));
+FSAL_UP/fsal_up_top.c:1129: arg = gsh_malloc(sizeof(struct cb_notify));
+FSAL_UP/fsal_up_top.c:1179: cb_data = gsh_malloc(sizeof(struct devnotify_cb_data));
+FSAL_UP/fsal_up_top.c:1529: maxfh = gsh_malloc(NFS4_FHSIZE); /* free in cb_completion_func() */
+FSAL_UP/fsal_up_top.c:1777: drc_ctx = gsh_malloc(sizeof(struct delegrecall_context));
+FSAL_UP/fsal_up_async.c:102: args = gsh_malloc(sizeof(struct invalidate_args) + obj->len);
+FSAL_UP/fsal_up_async.c:163: args = gsh_malloc(sizeof(struct update_args) + obj->len);
+FSAL_UP/fsal_up_async.c:226: args = gsh_malloc(sizeof(struct lock_grant_args) + file->len);
+FSAL_UP/fsal_up_async.c:289: args = gsh_malloc(sizeof(struct lock_avail_args) + file->len);
+FSAL_UP/fsal_up_async.c:363: args = gsh_malloc(sizeof(struct layoutrecall_args) + handle->len);
+FSAL_UP/fsal_up_async.c:439: args = gsh_malloc(sizeof(struct notify_device_args));
+FSAL_UP/fsal_up_async.c:511: args = gsh_malloc(sizeof(struct delegrecall_args) + handle->len);
+
+Ganesha System Data (often allocated only once):
+FSAL/access_check.c:858: ganesha_groups = gsh_malloc(ganesha_ngroups * sizeof(gid_t));
+MainNFSD/nfs_rpc_callback_simulator.c:362: gsh_strdup("0xabadcafe");
+MainNFSD/nfs_main.c:139: exec_name = gsh_strdup(tempo_exec_name + 1);
+MainNFSD/nfs_main.c:155: host_name = gsh_strdup(localmachine);
+MainNFSD/nfs_main.c:211: pidfile_path = gsh_strdup(optarg);
+
+SAL Data for Byte Range Locks:
+SAL/state_lock.c:544: new_entry = gsh_malloc(sizeof(*new_entry));
+SAL/state_lock.c:1439: hash_entry = gsh_malloc(sizeof(*hash_entry));
+SAL/state_lock.c:1450: buffkey.addr = gsh_malloc(cookie_size);
+Protocols/NLM/nlm_util.c:102: dst->n_bytes = gsh_malloc(len);
+Protocols/NLM/nlm_util.c:118: dst->n_bytes = gsh_malloc(src->n_len);
+Protocols/NLM/nlm_util.c:364: state_block_data_t *bdat = gsh_malloc(sizeof(*bdat));
+
+SAL Data for Layouts:
+SAL/state_layout.c:85: new_segment = gsh_calloc(1, sizeof(*new_segment));
+
+SAL Data for stateid (also v3) (per owner/file):
+SAL/state_lock.c:157: state_v4_pool = pool_init("NFSv4 files states", sizeof(state_t), pool_basic_substrate, NULL, NULL, NULL);
+SAL/nfs4_state.c:137: pnew_state = pool_alloc(state_v4_pool, NULL);
+SAL/nlm_state.c:438: state = gsh_malloc(sizeof(*state));
+
+SAL Data for State Owners:
+SAL/state_lock.c:150: state_owner_pool = pool_init("NFSv4 state owners", sizeof(state_owner_t), pool_basic_substrate, NULL, NULL, NULL);
+SAL/nfs4_owner.c:537: gsh_malloc(holder->so_owner_len);
+SAL/nfs4_owner.c:590: gsh_malloc(denied_src->owner.owner.owner_len);
+SAL/nlm_owner.c:1267: pclient = gsh_malloc(sizeof(*pclient));
+SAL/nlm_owner.c:1279: pclient->slc_nlm_caller_name = gsh_strdup(key.slc_nlm_caller_name);
+SAL/nlm_owner.c:973: pclient = gsh_malloc(sizeof(*pclient));
+SAL/nlm_owner.c:989: pclient->ssc_nlm_caller_name = gsh_strdup(key.ssc_nlm_caller_name);
+Protocols/NLM/nlm_util.c:667: gsh_strdup(nlm_grant_client->slc_nlm_caller_name);
+Protocols/NLM/nsm.c:53: nodename = gsh_strdup(utsname.nodename);
+SAL/state_misc.c:1177: owner = pool_alloc(state_owner_pool, NULL);
+SAL/state_misc.c:1204: owner->so_owner_val = gsh_malloc(key->so_owner_len);
+
+SAL Data for Clientid
+SAL/nfs4_clientid.c:1287: pool_init("NFS4 Client ID Pool", sizeof(nfs_client_id_t), pool_basic_substrate, NULL, NULL, NULL);
+SAL/nfs4_recovery.c:598: new_ent->rdfh_handle_str = gsh_strdup(dentp->d_name+1);
+SAL/nfs4_recovery.c:224: clientid->cid_recov_dir = gsh_malloc(total_len);
+SAL/nfs4_recovery.c:272: clientid->cid_recov_dir = gsh_malloc(total_len);
+SAL/nfs4_recovery.c:411: segment = gsh_malloc(NAME_MAX+1);
+SAL/nfs4_recovery.c:426: path = gsh_malloc(total_len);
+SAL/nfs4_recovery.c:591: new_ent = gsh_malloc(sizeof(rdel_fh_t));
+SAL/nfs4_recovery.c:691: path = gsh_malloc(total_len);
+SAL/nfs4_recovery.c:710: new_path = gsh_malloc(total_tgt_len);
+SAL/nfs4_recovery.c:736: build_clid = gsh_malloc(total_clid_len);
+SAL/nfs4_recovery.c:829: gsh_malloc(sizeof(clid_entry_t));
+SAL/nfs4_recovery.c:1038: path = gsh_malloc(total_len);
+SAL/nfs4_clientid.c:514: nfs_client_id_t *client_rec = pool_alloc(client_id_pool, NULL);
+SAL/nfs4_clientid.c:1631: record = gsh_malloc(sizeof(nfs_client_record_t) + len);
+SAL/nfs4_clientid.c:1749: cb_arg = gsh_malloc( sizeof(struct client_callback_arg));
+
+READDIR Processing:
+Protocols/NFS/nfs3_readdirplus.c:240: tracker.entries = gsh_calloc(estimated_num_entries, sizeof(entryplus3));
+Protocols/NFS/nfs3_readdirplus.c:452: gsh_malloc(NFS3_FHSIZE);
+Protocols/NFS/nfs3_readdir.c:231: tracker.entries = gsh_calloc(estimated_num_entries, sizeof(entry3));
+Protocols/NFS/nfs4_op_readdir.c:302: tracker_entry->name.utf8string_val = gsh_malloc(namelen + 1);
+Protocols/NFS/nfs4_op_readdir.c:593: entries = gsh_calloc(estimated_num_entries, sizeof(entry4));
+Protocols/NFS/nfs3_readdirplus.c:438: ep3->name = gsh_strdup(cb_parms->name);
+Protocols/NFS/nfs3_readdir.c:416: e3->name = gsh_strdup(cb_parms->name);
+
+Clientid Processing:
+Protocols/NFS/nfs4_op_exchange_id.c:347: temp = gsh_malloc(len);
+Protocols/NFS/nfs4_op_exchange_id.c:363: temp = gsh_malloc(len);
+Protocols/NFS/nfs4_op_setclientid.c:196: gsh_strdup(conf->cid_cb.v40.cb_client_r_addr);
+
+Sessions:
+MainNFSD/nfs_init.c:532: pool_init("NFSv4.1 session pool", sizeof(nfs41_session_t), pool_basic_substrate, NULL, NULL, NULL);
+Protocols/NFS/nfs4_op_create_session.c:306: nfs41_session = pool_alloc(nfs41_session_pool, NULL);
+
+Layouts:
+Protocols/NFS/nfs4_op_getdeviceinfo.c:141: da_buffer = gsh_malloc(da_addr_size);
+Protocols/NFS/nfs4_op_layoutget.c:281: current->lo_content.loc_body.loc_body_val = gsh_malloc(loc_body_size);
+Protocols/NFS/nfs4_op_layoutget.c:426: layouts = gsh_calloc(max_segment_count, sizeof(layout4));
+
+NLM Asynchronous Response and Blocked Lock Granting:
+Protocols/NLM/nlm_async.c:44: state_async_queue_t *arg = gsh_malloc(sizeof(*arg));
+Protocols/NLM/nlm_async.c:80: state_async_queue_t *arg = gsh_malloc(sizeof(*arg));
+Protocols/NLM/nlm_util.c:614: arg = gsh_malloc(sizeof(*arg));
+
+READ Processing:
+Protocols/NFS/nfs3_read.c:209: data = gsh_malloc(size);
+Protocols/NFS/nfs4_op_read.c op_dsread 89 buffer = gsh_malloc_aligned(4096, arg_READ4->count);
+Protocols/NFS/nfs4_op_read.c op_dsread_plus 165 buffer = gsh_malloc_aligned(4096, arg_READ4->count);
+Protocols/NFS/nfs4_op_read.c nfs4_read 464 bufferdata = gsh_malloc_aligned(4096, size);
+
+ACL and Attribute Processing:
+Protocols/NFS/nfs_proto_tools.c:723: acldata.aces = (fsal_ace_t *) nfs4_ace_alloc(acldata.naces);
+Protocols/NFS/nfs_proto_tools.c:3281: gsh_malloc(fattr4tab[FATTR4_RDATTR_ERROR].size_fattr4);
+Protocols/NFS/nfs_proto_tools.c:3360: Fattr->attr_vals.attrlist4_val = gsh_malloc(NFS4_ATTRVALS_BUFFLEN);
+support/nfs4_acls.c:328: pool_init(NULL, sizeof(fsal_acl_t), pool_basic_substrate, NULL, NULL, NULL);
+support/nfs4_acls.c:52: fsal_ace_t *nfs4_ace_alloc(int nace) {
+support/nfs4_acls.c:56: ace = gsh_calloc(nace, sizeof(fsal_ace_t));
+support/nfs4_acls.c:60: fsal_acl_t *nfs4_acl_alloc() {
+support/nfs4_acls.c:64: acl = pool_alloc(fsal_acl_pool, NULL);
+support/nfs4_acls.c:150: acl = nfs4_acl_alloc();
+support/nfs4_acls.c:268: acldata.aces = nfs4_ace_alloc(3);
+support/nfs4_acls.c:288: acldata2.aces = nfs4_ace_alloc(3);
+
+General Request Processing:
+MainNFSD/nfs_init.c:539: pool_init("Request pool", sizeof(request_data_t), pool_basic_substrate, NULL, NULL,  NULL);
+MainNFSD/nfs_rpc_dispatcher_thread.c:1518: request_data_t *reqdata = pool_alloc(request_pool, NULL);
+Protocols/NFS/mnt_Export.c:85: new_expnode = gsh_calloc(1, sizeof(struct exportnode));
+Protocols/NFS/mnt_Export.c:95: group = gsh_calloc(1, sizeof(struct groupnode));
+Protocols/NFS/mnt_Mnt.c:208: gsh_calloc(index_auth, sizeof(int));
+Protocols/NFS/nfs4_Compound.c:482: gsh_malloc(res->res_compound4.tag.utf8string_len + 1);
+Protocols/NFS/nfs4_Compound.c:549: gsh_calloc(argarray_len, sizeof(struct nfs_resop4));
+Protocols/NFS/nfs_proto_tools.c:4182: char *name = gsh_malloc(input->utf8string_len + 1);
+support/nfs_filehandle_mgmt.c:62: fh->data.data_val = gsh_malloc(fh->data.data_len);
+support/nfs_filehandle_mgmt.c:92: fh->nfs_fh4_val = gsh_malloc(fh->nfs_fh4_len);
+support/nfs_creds.c:393: gsh_malloc(op_ctx->creds->caller_glen * sizeof(gid_t));
+Protocols/NFS/nfs4_op_secinfo_no_name.c:100: gsh_calloc(num_entry, sizeof(secinfo4));
+Protocols/NFS/nfs3_lookup.c:105: gsh_malloc(NFS3_FHSIZE);
+Protocols/NFS/nfs4_op_secinfo.c:206: gsh_calloc(num_entry, sizeof(secinfo4));
+Protocols/NFS/mnt_Export.c:88: new_expnode->ex_dir = gsh_strdup(export->fullpath);
+Protocols/NFS/mnt_Export.c:154: group->gr_name = gsh_strdup(grp_name);
+Protocols/NFS/nfs4_op_getdevicelist.c:132: gsh_malloc(cb_opaque.max * sizeof(deviceid4));
+
+9P Specific:
+MainNFSD/9p_dispatcher.c:278: req = pool_alloc(request_pool, NULL);
+Protocols/9P/9p_symlink.c:103: create_arg.link_content = gsh_malloc(MAXPATHLEN);
+Protocols/9P/9p_attach.c:120: pfid = gsh_calloc(1, sizeof(struct _9p_fid));
+Protocols/9P/9p_xattrcreate.c:125: gsh_malloc(XATTR_BUFFERSIZE);
+Protocols/9P/9p_xattrcreate.c:136: gsh_malloc(XATTR_BUFFERSIZE);
+Protocols/9P/9p_proto_tools.c:58: gsh_calloc(sizeof(struct _9p_user_cred), 1);
+Protocols/9P/9p_walk.c:90: pnewfid = gsh_calloc(1, sizeof(struct _9p_fid));
+Protocols/9P/9p_xattrwalk.c:105: pxattrfid = gsh_calloc(1, sizeof(struct _9p_fid));
+Protocols/9P/9p_xattrwalk.c:117: pxattrfid->specdata.xattr.xattr_content = gsh_malloc(XATTR_BUFFERSIZE);
+MainNFSD/9p_dispatcher.c:230: _9pmsg = gsh_malloc(_9p_conn.msize);
+MainNFSD/9p_rdma_dispatcher.c:135: priv = gsh_malloc(sizeof(*priv));
+MainNFSD/9p_rdma_dispatcher.c:146: p_9p_conn = gsh_malloc(sizeof(*p_9p_conn));
+MainNFSD/9p_rdma_dispatcher.c:213: pernic = gsh_malloc(sizeof(*pernic));
+MainNFSD/9p_rdma_dispatcher.c:235: pernic->rdmabuf = gsh_malloc(_9p_param._9p_rdma_inpool_size * _9p_param._9p_rdma_msize);
+MainNFSD/9p_rdma_dispatcher.c:258: pernic->rdata = gsh_malloc(_9p_param._9p_rdma_inpool_size * sizeof(*pernic->rdata));
+MainNFSD/9p_rdma_dispatcher.c:310: outrdmabuf = gsh_malloc(_9p_param._9p_rdma_outpool_size * _9p_param._9p_rdma_msize);
+MainNFSD/9p_rdma_dispatcher.c:319: wdata = gsh_malloc(_9p_param._9p_rdma_outpool_size * sizeof(*wdata));
+MainNFSD/9p_rdma_dispatcher.c:338: outqueue = gsh_malloc(sizeof(*outqueue));
+MainNFSD/nfs_init.c:757: capdata = gsh_calloc(capsz, sizeof(struct __user_cap_data_struct));
+MainNFSD/9p_rdma_callbacks.c:201: req = pool_alloc(request_pool, NULL);
+support/server_stats.c:544: stats->_9p = gsh_calloc(sizeof(struct _9p_stats), 1);
+
+Duplicate Request Processing:
+RPCAL/nfs_dupreq.c:247: gsh_calloc(drc->cachesz, sizeof(struct opr_rbtree_node *));
+RPCAL/nfs_dupreq.c:286: drc_st = gsh_calloc(1, sizeof(struct drc_st));
+RPCAL/nfs_dupreq.c:359: drc_t *drc = pool_alloc(tcp_drc_pool, NULL);
+RPCAL/nfs_dupreq.c:396: gsh_calloc(drc->cachesz, sizeof(struct opr_rbtree_node *));
+RPCAL/nfs_dupreq.c:789: dv = pool_alloc(dupreq_pool, NULL);
+RPCAL/nfs_dupreq.c:265: dupreq_pool = pool_init("Duplicate Request Pool", sizeof(dupreq_entry_t), pool_basic_substrate, NULL, NULL, NULL);
+RPCAL/nfs_dupreq.c:272: nfs_res_pool = pool_init("nfs_res_t pool", sizeof(nfs_res_t), pool_basic_substrate, NULL, NULL, NULL);
+RPCAL/nfs_dupreq.c:279: tcp_drc_pool = pool_init("TCP DRC Pool", sizeof(drc_t), pool_basic_substrate, NULL, NULL, NULL);
+include/nfs_dupreq.h:121: nfs_res_t *res = pool_alloc(nfs_res_pool, NULL);
+
+Cred Cache:
+RPCAL/gss_credcache.c:209: code = krb5_get_init_creds_opt_alloc(context, &init_opts);
+RPCAL/gss_credcache.c:369: ple = gsh_malloc(sizeof(struct gssd_k5_kt_princ));
+RPCAL/gss_credcache.c:375: ple->realm = gsh_malloc(princ->realm.length + 1);
+RPCAL/gss_credcache.c:263: ple->ccname = gsh_strdup(cc_name);
+RPCAL/gss_credcache.c:381: ple->realm = gsh_strdup(princ->realm);
+RPCAL/gss_credcache.c:824: msg = gsh_strdup(origmsg);
+RPCAL/gss_credcache.c:830: return gsh_strdup(error_message(code));
+RPCAL/gss_credcache.c:833: return gsh_strdup(krb5_get_err_text(context, code));
+RPCAL/gss_credcache.c:835: return gsh_strdup(error_message(code));
+
+Client Manager:
+support/client_mgr.c:196: server_st = gsh_calloc(1, (sizeof(struct server_stats) + addr_len));
+support/client_mgr.c:1004: gsh_calloc(client_by_ip.cache_sz, sizeof(struct avltree_node *));
+support/client_mgr.c:207: cl->hostaddr_str = gsh_strdup(hoststr);
+
+Export Manager:
+support/export_mgr.c:221: export_st = gsh_calloc(sizeof(struct export_stats), 1);
+support/exports.c:290: cli = gsh_calloc(sizeof(struct exportlist_client_entry__), 1);
+support/exports.c:371: cli = gsh_calloc( sizeof(struct exportlist_client_entry__), 1);
+support/exports.c:485: cli = gsh_calloc(sizeof(struct exportlist_client_entry__), 1);
+support/exports.c:310: cli->client.netgroup.netgroupname = gsh_strdup(client_tok + 1);
+support/exports.c:339: cli->client.wildcard.wildcard = gsh_strdup(client_tok);
+support/exports.c:1365: export->fullpath = gsh_strdup("/");
+support/exports.c:1368: export->pseudopath = gsh_strdup("/");
+support/nfs_ip_name.c:159: nfs_ip_name = gsh_malloc(sizeof(nfs_ip_name_t));
+support/nfs_ip_name.c:164: pipaddr = gsh_malloc(sizeof(sockaddr_t));
+
+Statistics Collection:
+support/server_stats.c:456: gsh_calloc(sizeof(struct nfsv3_stats), 1);
+support/server_stats.c:468: stats->mnt = gsh_calloc(sizeof(struct mnt_stats), 1);
+support/server_stats.c:480: stats->nlm4 = gsh_calloc(sizeof(struct nlmv4_stats), 1);
+support/server_stats.c:493: gsh_calloc(sizeof(struct rquota_stats), 1);
+support/server_stats.c:506: gsh_calloc(sizeof(struct nfsv40_stats), 1);
+support/server_stats.c:519: gsh_calloc(sizeof(struct nfsv41_stats), 1);
+support/server_stats.c:532: gsh_calloc(sizeof(struct nfsv41_stats), 1);
+support/server_stats.c:857: gsh_calloc(sizeof(struct proto_op), 1);
+support/server_stats.c:1028: gsh_calloc(sizeof(struct proto_op), 1);
+support/server_stats.c:1219: stats->deleg = gsh_calloc( sizeof(struct deleg_stats), 1);
+
+Admin Interface:
+dbus/dbus_server.c:177: gsh_malloc(sizeof(struct dbus_bcast_item));
+dbus/dbus_server.c:580: gsh_malloc(sizeof(struct ganesha_dbus_handler));
+dbus/dbus_server.c:581: handler->name = gsh_strdup(path);
+support/export_mgr.c:974: message = gsh_calloc(1, msg_size);
+support/export_mgr.c:979: message = gsh_calloc(1, msg_size);
+
+Cache Inode:
+cache_inode/cache_inode_init.c:59: pool_init("Entry Pool", sizeof(cache_entry_t), pool_basic_substrate, NULL, NULL, NULL);
+cache_inode/cache_inode_get.c:114: expmap = gsh_calloc(1, sizeof(*expmap));
+cache_inode/cache_inode_hash.c:85: gsh_calloc(cih_fhcache.npart, sizeof(cih_partition_t));
+cache_inode/cache_inode_hash.c:93: gsh_calloc(cih_fhcache.cache_sz, sizeof(struct avltree_node *));
+cache_inode/cache_inode_lru.c:1155: nentry = pool_alloc(cache_inode_entry_pool, NULL);
+cache_inode/cache_inode_readdir.c:224: dirent3 = gsh_malloc(sizeof(cache_inode_dir_entry_t) + newnamesize);
+cache_inode/cache_inode_readdir.c:287: new_dir_entry = gsh_malloc(sizeof(cache_inode_dir_entry_t) + namesize);
+include/cache_inode_hash.h:236: key->kv.addr = gsh_malloc(fh_desc->len);
+include/cache_inode.h:299: tgt->kv.addr = gsh_malloc(src->kv.len);
+
+Config Parsing:
+config_parsing/conf_lex.c:234: * and can realloc() it to grow it, and should free() it to * delete it. */
+config_parsing/conf_lex.c:312: void *ganeshun_yyalloc (yy_size_t ,yyscan_t yyscanner );
+config_parsing/conf_lex.c:313: void *ganeshun_yyrealloc (void *,yy_size_t ,yyscan_t yyscanner );
+config_parsing/conf_lex.c:2209: ganeshun_yyrealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2 ,yyscanner );
+config_parsing/conf_lex.c:2258: YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) ganeshun_yyrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size ,yyscanner );
+config_parsing/conf_lex.c:2488: b = (YY_BUFFER_STATE) ganeshun_yyalloc(sizeof( struct yy_buffer_state ) ,yyscanner );
+config_parsing/conf_lex.c:2497: b->yy_ch_buf = (char *) ganeshun_yyalloc(b->yy_buf_size + 2 ,yyscanner );
+config_parsing/conf_lex.c:2654: yyg->yy_buffer_stack = (struct yy_buffer_state**)ganeshun_yyalloc(num_to_alloc * sizeof(struct yy_buffer_state*) , yyscanner);
+config_parsing/conf_lex.c:2673: yyg->yy_buffer_stack = (struct yy_buffer_state**)ganeshun_yyrealloc(yyg->yy_buffer_stack, num_to_alloc * sizeof(struct yy_buffer_state*) , yyscanner);
+config_parsing/conf_lex.c:2702: b = (YY_BUFFER_STATE) ganeshun_yyalloc(sizeof( struct yy_buffer_state ) ,yyscanner );
+config_parsing/conf_lex.c:2751: buf = (char *) ganeshun_yyalloc(n ,yyscanner );
+config_parsing/conf_lex.c:2984: *ptr_yy_globals = (yyscan_t) ganeshun_yyalloc ( sizeof( struct yyguts_t ), NULL );
+config_parsing/conf_lex.c:3017: *ptr_yy_globals = (yyscan_t) ganeshun_yyalloc ( sizeof( struct yyguts_t ), &dummy_yyguts );
+config_parsing/conf_lex.c:3120: void *ganeshun_yyalloc (yy_size_t  size , yyscan_t yyscanner) {
+config_parsing/conf_lex.c:3122: return (void *) malloc( size );
+config_parsing/conf_lex.c:3125: void *ganeshun_yyrealloc  (void * ptr, yy_size_t  size , yyscan_t yyscanner) {
+config_parsing/conf_lex.c:3134: return (void *) realloc( (char *) ptr, size );
+config_parsing/conf_lex.c:3139: free( (char *) ptr );	/* see ganeshun_yyrealloc() for (char *) cast */
+config_parsing/conf_lex.c:3163: confroot = gsh_calloc(1, sizeof(struct config_root));
+config_parsing/conf_lex.c:3230: fullpath = gsh_calloc(1, (strlen(filename) + strlen(confroot->conf_dir) + 2));
+config_parsing/conf_lex.c:3246: bs = gsh_calloc(1, sizeof(struct bufstack));
+config_parsing/conf_lex.c:3250: flist = gsh_calloc(1, sizeof(struct file_list));
+config_parsing/config_parsing.c:1567: arg = gsh_calloc(1, sizeof(struct expr_parse_arg));
+config_parsing/config_parsing.c:1616: new_node = gsh_calloc(1, sizeof(struct expr_parse));
+config_parsing/config_parsing.c:1805: list = gsh_calloc(1, sizeof(struct config_node_list));
+config_parsing/analyse.c:63: new_tok = gsh_calloc(1, (sizeof(struct token_tab) + strlen(token) + 1));
+config_parsing/conf_yacc.c:441: void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
+config_parsing/conf_yacc.c:464: node = gsh_calloc(1, sizeof(struct config_node));
+config_parsing/conf_yacc.c:2307: node = gsh_calloc(1, sizeof(struct config_node));
+config_parsing/conf_yacc.c:2333: node = gsh_calloc(1, sizeof(struct config_node));
+config_parsing/conf_lex.c:3173: confroot->root.filename = gsh_strdup(srcfile);
+config_parsing/conf_lex.c:3218: confroot->conf_dir = gsh_strdup(dirname(path));
+config_parsing/conf_lex.c:3220: confroot->conf_dir = gsh_strdup(".");
+config_parsing/conf_lex.c:3226: fullpath = gsh_strdup(filename);
+config_parsing/config_parsing.c:114: return gsh_strdup("(no errors)");
+config_parsing/config_parsing.c:805: = gsh_strdup(item->u.str.def);
+config_parsing/config_parsing.c:1111: gsh_strdup(term_node->u.term.varvalue);
+config_parsing/config_parsing.c:1118: gsh_strdup(term_node->u.term.varvalue);
+config_parsing/config_parsing.c:1570: arg->name = gsh_strdup(name);
+config_parsing/config_parsing.c:1571: arg->value = gsh_strdup(val);
+config_parsing/config_parsing.c:1617: new_node->name = gsh_strdup(name);
+FSAL/fsal_manager.c:239: dl_error = gsh_strdup(dlerror());
+FSAL/fsal_manager.c:257: dl_error = gsh_strdup(sym_error);
+MainNFSD/nfs_main.c:201: config_path = gsh_strdup(optarg);
+
+Hash Table Overhead:
+hashtable/hashtable.c:355: pool_init(NULL, sizeof(rbt_node_t), pool_basic_substrate, NULL, NULL, NULL);
+hashtable/hashtable.c:361: pool_init(NULL, sizeof(struct hash_data), pool_basic_substrate, NULL, NULL, NULL);
+hashtable/hashtable.c:318: ht = gsh_calloc(1, sizeof(struct hash_table) + (sizeof(struct hash_partition) * hparam->index_size));
+hashtable/hashtable.c:345: partition->cache = gsh_calloc(1, cache_page_size(ht));
+hashtable/hashtable.c:666: mutator = pool_alloc(ht->node_pool, NULL);
+hashtable/hashtable.c:672: descriptors = pool_alloc(ht->data_pool, NULL);
+
+ID Mapping:
+idmapper/idmapper.c:73: owner_domain.addr = gsh_malloc(NFS4_MAX_DOMAIN_LEN + 1);
+idmapper/idmapper.c:348: buf = gsh_malloc(buflen);
+idmapper/idmapper_cache.c:305: gsh_malloc(sizeof(struct cache_user) + name->len);
+idmapper/idmapper_cache.c:394: gsh_malloc(sizeof(struct cache_group) + name->len);
+idmapper/idmapper.c:86: owner_domain.addr = gsh_strdup(nfs_param.nfsv4_param .domainname);
+support/uid2grp_cache.c:224: info = gsh_malloc(sizeof(struct cache_info));
+support/uid2grp.c:88: static bool my_getgrouplist_alloc(char *user, gid_t gid, struct group_data *gdata)
+support/uid2grp.c:112: groups = gsh_malloc(ngroups * sizeof(gid_t));
+support/uid2grp.c:124: groups2 = gsh_malloc(ngroups * sizeof(gid_t));
+support/uid2grp.c:137: groups = gsh_realloc(groups2, ngroups * sizeof(gid_t));
+support/uid2grp.c:175: gdata = gsh_malloc(sizeof(struct group_data) + strlen(p.pw_name));
+support/uid2grp.c:186: if (!my_getgrouplist_alloc(p.pw_name, p.pw_gid, gdata))
+support/uid2grp.c:218: gdata = gsh_malloc(sizeof(struct group_data) + strlen(p.pw_name));
+support/uid2grp.c:229: if (!my_getgrouplist_alloc(p.pw_name, p.pw_gid, gdata))
+
+CIDR:
+cidr/cidr_get.c:63: toret = gsh_calloc(16, sizeof(uint8_t));
+cidr/cidr_get.c:80: toret = gsh_calloc(16, sizeof(uint8_t));
+cidr/cidr_mem.c:14: CIDR *cidr_alloc(void) {
+cidr/cidr_mem.c:18: toret = gsh_malloc(sizeof(CIDR));
+cidr/cidr_mem.c:33: toret = cidr_alloc();
+cidr/cidr_to_str.c:57: toret = gsh_malloc(128);
+cidr/cidr_to_str.c:315: nmtmp = cidr_alloc();
+cidr/cidr_inaddr.c:30: toret = gsh_malloc(sizeof(struct in_addr));
+cidr/cidr_inaddr.c:61: toret = cidr_alloc();
+cidr/cidr_inaddr.c:117: toret = gsh_malloc(sizeof(struct in6_addr));
+cidr/cidr_inaddr.c:146: toret = cidr_alloc();
+cidr/cidr_from_str.c:42: toret = cidr_alloc();
+cidr/cidr_addr.c:16: toret = cidr_alloc();
+cidr/cidr_addr.c:50: toret = cidr_alloc();
+cidr/cidr_net.c:72: toret = gsh_calloc(2, sizeof(CIDR *));
+
+Nodelist:
+NodeList/nodelist_range.c:128: array->array = gsh_malloc(array->pre_allocated_ranges * sizeof(nl_range_t));
+NodeList/nodelist_range.c:145: array->array = gsh_malloc(array->pre_allocated_ranges * sizeof(nl_range_t));
+NodeList/nodelist_range.c:176: array->array = gsh_realloc(array->array, array->pre_allocated_ranges * sizeof(nl_range_t));
+NodeList/nodelist_range.c:394: work_buffer = gsh_malloc(in_list_size + 1);
+NodeList/nodelist_common.c:134: gsh_malloc((copy_length + 1) * sizeof(char));
+NodeList/nodelist.c:61: prefix = gsh_malloc((strlen(list) + 1) * sizeof(char));
+NodeList/nodelist.c:101: gsh_malloc((idlist_end - idlist_begin + 1) * sizeof(char));
+NodeList/nodelist.c:120: gsh_malloc((list_end - suffix_begin + 1) * sizeof(char));
+NodeList/nodelist.c:361: gsh_malloc(sizeof(nl_nl_t));
+NodeList/nodelist_map.c:57: gsh_malloc(node_string_size * sizeof(char));
+NodeList/nodelist.c:721: np->prefix = gsh_strdup(npin->prefix);
+NodeList/nodelist.c:728: np->suffix = gsh_strdup(npin->suffix);
+NodeList/nodelist.c:788: np->prefix = gsh_strdup(prefix);
+NodeList/nodelist.c:800: np->suffix = gsh_strdup(suffix);
+
+Logging:
+MainNFSD/nfs_main.c:180: log_path = gsh_strdup(optarg);
+log/log_functions.c:736: facility = gsh_calloc(1, sizeof(*facility));
+log/log_functions.c:1917: return gsh_calloc(1, sizeof(struct logfields));
+log/log_functions.c:2120: return gsh_calloc(COMPONENT_COUNT, sizeof(log_levels_t));
+log/log_functions.c:2219: facility = gsh_calloc(1, sizeof(struct facility_config));
+log/log_functions.c:746: facility->lf_name = gsh_strdup(name);
+log/log_functions.c:751: facility->lf_private = gsh_strdup(private);
+log/log_functions.c:1005: logfile = gsh_strdup(dest);
+FSAL/fsal_destroyer.c:218: char *fsal_name = gsh_strdup(m->name);
+
+Free BSD Specific:
+os/freebsd/mntent_compat.c:96: optbuf = gsh_strdup(mnt->mnt_opts);
+os/freebsd/mntent_compat.c:126: cp = gsh_strdup(s1);
+os/freebsd/mntent_compat.c:119: cp = gsh_realloc(s0, newlen);
+os/freebsd/memstream.c:53: buf = gsh_realloc(*ms->cp, newsize + 1);
+os/freebsd/memstream.c:146: ms = gsh_malloc(sizeof(*ms));
+
+Various Thread Management and Async Processing:
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping_db.c:921: new_task = pool_alloc(db_thread[i].dbop_pool, NULL);
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping_db.c:966: new_task = pool_alloc(db_thread[i].dbop_pool, NULL);
+FSAL/FSAL_PROXY/handle_mapping/handle_mapping_db.c:1008: new_task = pool_alloc(db_thread[i].dbop_pool, NULL);
+support/delayed_exec.c:282: gsh_malloc(sizeof(struct delayed_thread));
+support/delayed_exec.c:349: mul = gsh_malloc(sizeof(struct delayed_multi));
+support/delayed_exec.c:357: task = gsh_malloc(sizeof(struct delayed_task));
+support/fridgethr.c:71: struct fridgethr *frobj = gsh_malloc(sizeof(struct fridgethr));
+support/fridgethr.c:606: fe = gsh_calloc(sizeof(struct fridgethr_entry), 1);
+support/fridgethr.c:694: q = gsh_malloc(sizeof(struct fridgethr_work));
+support/fridgethr.c:1404: fe = gsh_calloc(sizeof(struct fridgethr_entry), 1);
+support/fridgethr.c:142: frobj->s = gsh_strdup(s);
+MainNFSD/nfs_rpc_callback.c:903: request_data_t *reqdata = pool_alloc(request_pool, NULL);
+MainNFSD/nfs_rpc_callback.c:1103: gsh_calloc(1, sizeof(referring_call_list4));
+MainNFSD/nfs_rpc_callback.c:1110: ref_call = gsh_malloc(sizeof(referring_call4));
+include/nfs_rpc_callback.h:87: return gsh_calloc(cnt, sizeof(nfs_cb_argop4));
+include/nfs_rpc_callback.h:92: return gsh_calloc(cnt, sizeof(nfs_cb_resop4));
+FSAL/FSAL_VFS/panfs/mds.c:353: _rt = gsh_calloc(1, sizeof(*_rt));
+FSAL/FSAL_PT/pt_ganesha.c:84: p_cur_context = gsh_malloc(sizeof(ptfsal_threadcontext_t));
+
+Miscellaneous Allocations Not Categorized:
+FSAL/FSAL_PT/pt_ganesha.c:1589: gsh_malloc(sizeof(CACHE_TABLE_ENTRY_T) * cacheTableInitParam->maxNumOfCacheEntries);
+FSAL/FSAL_PT/pt_ganesha.c:1764: ptr = gsh_malloc(cacheTable->cacheMetaData.keyLengthInBytes);
+FSAL/FSAL_PT/pt_ganesha.c:1771: ptr = gsh_malloc(cacheTable->cacheMetaData.dataSizeInBytes);
+FSAL/FSAL_PROXY/handle.c:975: gsh_malloc(sizeof(*c) + pm->special.srv_sendsize + pm->special.srv_recvsize);
+include/gsh_rpc.h:159: gsh_xprt_private_t *xu = gsh_malloc(sizeof(gsh_xprt_private_t));
+FSAL/FSAL_GLUSTER/gluster_internal.c:314: fso_dup = gsh_strdup(fs_specific);
+FSAL/FSAL_PROXY/handle.c:2103: pcopy = gsh_strdup(path);
