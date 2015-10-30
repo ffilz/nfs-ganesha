@@ -81,8 +81,18 @@ void nfs4_start_grace(nfs_grace_start_t *gsp)
 	 */
 	atomic_store_time_t(&current_grace, time(NULL));
 
+	if ((int)nfs_param.nfsv4_param.grace_period <
+		(int)nfs_param.nfsv4_param.lease_lifetime) {
+		LogWarn(COMPONENT_STATE,
+		 "NFS Server GRACE duration should atleast match LEASE period");
+
+		/* set it to lease_lifetime */
+		nfs_param.nfsv4_param.grace_period =
+			nfs_param.nfsv4_param.lease_lifetime;
+	}
+
 	LogEvent(COMPONENT_STATE, "NFS Server Now IN GRACE, duration %d",
-		 (int)nfs_param.nfsv4_param.lease_lifetime);
+		 (int)nfs_param.nfsv4_param.grace_period);
 	/*
 	 * if called from failover code and given a nodeid, then this node
 	 * is doing a take over.  read in the client ids from the failing node
@@ -120,7 +130,7 @@ int nfs_in_grace(void)
 		return 0;
 
 	in_grace = ((atomic_fetch_time_t(&current_grace) +
-		     nfs_param.nfsv4_param.lease_lifetime) > time(NULL));
+		     nfs_param.nfsv4_param.grace_period) > time(NULL));
 
 	if (in_grace != last_grace) {
 		LogEvent(COMPONENT_STATE, "NFS Server Now %s",
