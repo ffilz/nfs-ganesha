@@ -46,6 +46,12 @@ start() {
                 failure
         else
 		ulimit -n $NOFILE
+
+                # Generate and read EPOCH value if exists
+                [ -x /etc/init.d/ganesha-epoch ] && /sbin/service ganesha-epoch start
+                [ -f /var/lib/ganesha/epoch ] && . /var/lib/ganesha/epoch
+
+                OPTIONS="$OPTIONS  ${EPOCH}"
                 daemon --pidfile $PID_FILE $PATHPROG $OPTIONS
                 RETVAL=$?
                 if [ $RETVAL -eq 0 ]; then
