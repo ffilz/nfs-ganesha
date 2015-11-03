@@ -69,7 +69,12 @@
 static inline void *
 gsh_malloc(size_t n)
 {
-	return malloc(n);
+	void *p = malloc(n);
+
+	if (p == NULL)
+		abort();
+
+	return p;
 }
 
 /**
@@ -93,7 +98,7 @@ gsh_malloc_aligned(size_t a, size_t n)
 	void *p;
 
 	if (posix_memalign(&p, a, n) != 0)
-		p = NULL;
+		abort();
 
 	return p;
 #endif
@@ -114,7 +119,12 @@ gsh_malloc_aligned(size_t a, size_t n)
 static inline void *
 gsh_calloc(size_t s, size_t n)
 {
-	return calloc(s, n);
+	void *p = calloc(s, n);
+
+	if (p == NULL)
+		abort();
+
+	return p;
 }
 
 /**
@@ -133,7 +143,12 @@ gsh_calloc(size_t s, size_t n)
 static inline void *
 gsh_realloc(void *p, size_t n)
 {
-	return realloc(p, n);
+	void *p2 = realloc(p, n);
+
+	if (p2 == NULL)
+		abort();
+
+	return p2;
 }
 
 /**
@@ -149,7 +164,12 @@ gsh_realloc(void *p, size_t n)
 static inline char *
 gsh_strdup(const char *s)
 {
-	return strdup(s);
+	void *p = strdup(s);
+
+	if (p == NULL)
+		abort();
+
+	return p;
 }
 
 /**
@@ -405,7 +425,7 @@ pool_alloc(pool_t *pool, void *parameters)
 {
 	void *object = pool->substrate_vector->allocator(pool);
 
-	if (object && (pool->constructor))
+	if (pool->constructor)
 		(pool->constructor) (object, parameters);
 
 	return object;
