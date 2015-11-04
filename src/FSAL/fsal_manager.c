@@ -106,8 +106,6 @@ static void load_fsal_pseudo(void)
 	struct fsal_module *fsal;
 
 	dl_path = gsh_strdup("Builtin-PseudoFS");
-	if (dl_path == NULL)
-		LogFatal(COMPONENT_INIT, "Couldn't Register FSAL_PSEUDO");
 
 	PTHREAD_MUTEX_lock(&fsal_lock);
 
@@ -209,8 +207,7 @@ int load_fsal(const char *name,
 		bp++;
 	}
 	dl_path = gsh_strdup(path);
-	if (dl_path == NULL)
-		return ENOMEM;
+
 	PTHREAD_MUTEX_lock(&fsal_lock);
 	if (load_state != idle)
 		goto errout;
@@ -399,13 +396,8 @@ int register_fsal(struct fsal_module *fsal_hdl, const char *name,
 		goto errout;
 	}
 	new_fsal = fsal_hdl;
-	if (name != NULL) {
+	if (name != NULL)
 		new_fsal->name = gsh_strdup(name);
-		if (new_fsal->name == NULL) {
-			so_error = ENOMEM;
-			goto errout;
-		}
-	}
 
 	/* init ops vector to system wide defaults
 	 * from FSAL/default_methods.c
