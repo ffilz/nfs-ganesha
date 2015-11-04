@@ -962,21 +962,9 @@ static void posix_create_file_system(struct mntent *mnt)
 
 	fs = gsh_calloc(1, sizeof(*fs));
 
-	if (fs == NULL) {
-		LogFatal(COMPONENT_FSAL,
-			 "mem alloc for %s failed",
-			 mnt->mnt_dir);
-	}
-
 	fs->path = gsh_strdup(mnt->mnt_dir);
 	fs->device = gsh_strdup(mnt->mnt_fsname);
 	fs->type = gsh_strdup(mnt->mnt_type);
-
-	if (fs->path == NULL) {
-		LogFatal(COMPONENT_FSAL,
-			 "mem alloc for %s failed",
-			 mnt->mnt_dir);
-	}
 
 	if (!posix_get_fsid(fs)) {
 		free_fs(fs);
