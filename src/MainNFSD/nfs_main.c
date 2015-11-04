@@ -136,14 +136,8 @@ int main(int argc, char *argv[])
 	ServerEpoch = (time_t) ServerBootTime.tv_sec;
 
 	tempo_exec_name = strrchr(argv[0], '/');
-	if (tempo_exec_name != NULL) {
+	if (tempo_exec_name != NULL)
 		exec_name = gsh_strdup(tempo_exec_name + 1);
-		if (!exec_name) {
-			fprintf(stderr,
-				"Unable to allocate memory for exec name, exiting...\n");
-			exit(1);
-		}
-	}
 
 	if (*exec_name == '\0')
 		exec_name = argv[0];
@@ -154,11 +148,6 @@ int main(int argc, char *argv[])
 		exit(1);
 	} else {
 		host_name = gsh_strdup(localmachine);
-		if (!host_name) {
-			fprintf(stderr,
-				"Unable to allocate memory for hostname, exiting...\n");
-			exit(1);
-		}
 	}
 
 	/* now parsing options with getopt */
@@ -179,11 +168,6 @@ int main(int argc, char *argv[])
 		case 'L':
 			/* Default Log */
 			log_path = gsh_strdup(optarg);
-			if (!log_path) {
-				fprintf(stderr,
-					"Unable to allocate memory for log path.\n");
-				exit(1);
-			}
 			break;
 
 		case 'N':
@@ -200,22 +184,11 @@ int main(int argc, char *argv[])
 			/* config file */
 
 			config_path = gsh_strdup(optarg);
-			if (!config_path) {
-				fprintf(stderr,
-					"Unable to allocate memory for config path.\n");
-				exit(1);
-			}
 			break;
 
 		case 'p':
 			/* PID file */
 			pidfile_path = gsh_strdup(optarg);
-			if (!pidfile_path) {
-				fprintf(stderr,
-					"Path %s too long for option 'f'.\n",
-					optarg);
-				exit(1);
-			}
 			break;
 
 		case 'F':
