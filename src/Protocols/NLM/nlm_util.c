@@ -94,36 +94,26 @@ inline uint64_t lock_end(uint64_t start, uint64_t len)
 		return start + len - 1;
 }
 
-bool fill_netobj(netobj *dst, char *data, int len)
+void fill_netobj(netobj *dst, char *data, int len)
 {
 	dst->n_len = 0;
 	dst->n_bytes = NULL;
 	if (len != 0) {
 		dst->n_bytes = gsh_malloc(len);
-		if (dst->n_bytes != NULL) {
-			dst->n_len = len;
-			memcpy(dst->n_bytes, data, len);
-		} else
-			return false;
+		dst->n_len = len;
+		memcpy(dst->n_bytes, data, len);
 	}
-	return true;
 }
 
-netobj *copy_netobj(netobj *dst, netobj *src)
+void copy_netobj(netobj *dst, netobj *src)
 {
-	if (dst == NULL)
-		return NULL;
-	dst->n_len = 0;
 	if (src->n_len != 0) {
 		dst->n_bytes = gsh_malloc(src->n_len);
-		if (!dst->n_bytes)
-			return NULL;
 		memcpy(dst->n_bytes, src->n_bytes, src->n_len);
 	} else
 		dst->n_bytes = NULL;
 
 	dst->n_len = src->n_len;
-	return dst;
 }
 
 void netobj_free(netobj *obj)
@@ -612,14 +602,6 @@ state_status_t nlm_granted_callback(cache_entry_t *pentry,
 	state_status_t state_status_int;
 
 	arg = gsh_malloc(sizeof(*arg));
-	if (arg == NULL) {
-		/* If we fail allocation the best is to delete the block entry
-		 * so that client can try again and get the lock. May be
-		 * by then we are able to allocate objects
-		 */
-		state_status = STATE_MALLOC_ERROR;
-		return state_status;
-	}
 
 	memset(arg, 0, sizeof(*arg));
 
@@ -650,24 +632,18 @@ state_status_t nlm_granted_callback(cache_entry_t *pentry,
 	inarg = &arg->state_async_data.state_nlm_async_data.nlm_async_args.
 		nlm_async_grant;
 
-	if (!copy_netobj(&inarg->alock.fh, &nlm_block_data->sbd_nlm_fh))
-		goto grant_fail_malloc;
+	copy_netobj(&inarg->alock.fh, &nlm_block_data->sbd_nlm_fh);
 
-	if (!fill_netobj(&inarg->alock.oh,
-			 lock_entry->sle_owner->so_owner_val,
-			 lock_entry->sle_owner->so_owner_len))
-		goto grant_fail_malloc;
+	fill_netobj(&inarg->alock.oh,
+		    lock_entry->sle_owner->so_owner_val,
+		    lock_entry->sle_owner->so_owner_len);
 
-	if (!fill_netobj(&inarg->cookie,
-			 (char *)&nlm_grant_cookie,
-			 sizeof(nlm_grant_cookie)))
-		goto grant_fail_malloc;
+	fill_netobj(&inarg->cookie,
+		    (char *)&nlm_grant_cookie,
+		    sizeof(nlm_grant_cookie));
 
 	inarg->alock.caller_name =
 	    gsh_strdup(nlm_grant_client->slc_nlm_caller_name);
-
-	if (!inarg->alock.caller_name)
-		goto grant_fail_malloc;
 
 	inarg->exclusive = lock_entry->sle_lock.lock_type == FSAL_LOCK_W;
 	inarg->alock.svid = nlm_grant_owner->so_nlm_svid;
@@ -693,9 +669,6 @@ state_status_t nlm_granted_callback(cache_entry_t *pentry,
 		goto grant_fail;
 
 	return state_status;
-
- grant_fail_malloc:
-	state_status = STATE_MALLOC_ERROR;
 
  grant_fail:
 
