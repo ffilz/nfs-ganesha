@@ -110,8 +110,6 @@ static bool my_getgrouplist_alloc(char *user,
 	 * getgrouplist() a second time to get the actual group list
 	 */
 	groups = gsh_malloc(ngroups * sizeof(gid_t));
-	if (groups == NULL)
-		return false;
 
 	if (getgrouplist(user, gid, groups, &ngroups) == -1) {
 		LogEvent(COMPONENT_IDMAPPER,
@@ -122,8 +120,6 @@ static bool my_getgrouplist_alloc(char *user,
 		/* Try with the largest ngroups we support */
 		ngroups = 1000;
 		groups2 = gsh_malloc(ngroups * sizeof(gid_t));
-		if (groups2 == NULL)
-			return false;
 
 		if (getgrouplist(user, gid, groups2, &ngroups) == -1) {
 			LogWarn(COMPONENT_IDMAPPER,
@@ -135,8 +131,6 @@ static bool my_getgrouplist_alloc(char *user,
 
 		/* Resize the buffer */
 		groups = gsh_realloc(groups2, ngroups * sizeof(gid_t));
-		if (groups == NULL) /* Use the large buffer! */
-			groups = groups2;
 	}
 
 	gdata->groups = groups;
@@ -173,10 +167,6 @@ static struct group_data *uid2grp_allocate_by_name(
 	}
 
 	gdata = gsh_malloc(sizeof(struct group_data) + strlen(p.pw_name));
-	if (gdata == NULL) {
-		LogEvent(COMPONENT_IDMAPPER, "failed to allocate group data");
-		return gdata;
-	}
 
 	gdata->uname.len = strlen(p.pw_name);
 	gdata->uname.addr = (char *)gdata + sizeof(struct group_data);
@@ -216,10 +206,6 @@ static struct group_data *uid2grp_allocate_by_uid(uid_t uid)
 	}
 
 	gdata = gsh_malloc(sizeof(struct group_data) + strlen(p.pw_name));
-	if (gdata == NULL) {
-		LogEvent(COMPONENT_IDMAPPER, "failed to allocate group data");
-		return gdata;
-	}
 
 	gdata->uname.len = strlen(p.pw_name);
 	gdata->uname.addr = (char *)gdata + sizeof(struct group_data);
