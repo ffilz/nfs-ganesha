@@ -1632,6 +1632,15 @@ void DisplayLogComponentLevel(log_components_t component, char *file, int line,
 	va_end(arguments);
 }
 
+void LogMallocFailure(const char *file, int line, const char *function,
+		      char *allocator)
+{
+	DisplayLogComponentLevel(COMPONENT_MEMLEAKS, (char *) file, line,
+				 (char *)function, NIV_NULL,
+				 "Aborting %s due to out of memory",
+				 allocator);
+}
+
 /*
  *  Re-export component logging to TI-RPC internal logging
  */
