@@ -235,14 +235,8 @@ int nfs3_create(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	}
 
 	/* Build file handle */
-	res->res_create3.status =
-	    nfs3_AllocateFH(&res->res_create3.CREATE3res_u.resok.obj.
-			    post_op_fh3_u.handle);
-
-	if (res->res_create3.status != NFS3_OK) {
-		rc = NFS_REQ_OK;
-		goto out;
-	}
+	nfs3_AllocateFH(
+		&res->res_create3.CREATE3res_u.resok.obj.post_op_fh3_u.handle);
 
 	/* Set Post Op Fh3 structure */
 	if (!nfs3_FSALToFhandle(

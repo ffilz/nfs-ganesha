@@ -629,12 +629,7 @@ state_status_t layoutrecall(struct fsal_module *fsal,
 		layout->lor_offset = segment->offset;
 		layout->lor_length = segment->length;
 
-		if (nfs4_AllocateFH(&layout->lor_fh) != NFS4_OK) {
-			PTHREAD_RWLOCK_unlock(&entry->state_lock);
-			gsh_free(cb_data);
-			rc = STATE_MALLOC_ERROR;
-			goto out;
-		}
+		nfs4_AllocateFH(&layout->lor_fh);
 
 		if (!get_state_entry_export_owner_refs(s,
 						       NULL,

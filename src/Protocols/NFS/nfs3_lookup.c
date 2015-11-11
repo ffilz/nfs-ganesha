@@ -101,8 +101,7 @@ int nfs3_lookup(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 
 	if (entry_file && (cache_status == CACHE_INODE_SUCCESS)) {
 		/* Build FH */
-		(void)
-		   nfs3_AllocateFH(&res->res_lookup3.LOOKUP3res_u.resok.object);
+		nfs3_AllocateFH(&res->res_lookup3.LOOKUP3res_u.resok.object);
 
 		if (nfs3_FSALToFhandle(
 			    &res->res_lookup3.LOOKUP3res_u.resok.object,
