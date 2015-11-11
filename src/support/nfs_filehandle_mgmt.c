@@ -45,56 +45,6 @@
 
 /**
  *
- * @brief Allocates a buffer to be used for storing a NFSv4 filehandle.
- *
- * Allocates a buffer to be used for storing a NFSv3 filehandle.
- *
- * @param fh [INOUT] the filehandle to manage.
- *
- * @return NFS3_OK if successful, NFS3ERR_SERVERFAULT, otherwise.
- *
- */
-int nfs3_AllocateFH(nfs_fh3 *fh)
-{
-	/* Allocating the filehandle in memory */
-	fh->data.data_len = NFS3_FHSIZE;
-
-	fh->data.data_val = gsh_malloc(fh->data.data_len);
-
-	memset((char *)fh->data.data_val, 0, fh->data.data_len);
-
-	return NFS3_OK;
-}				/* nfs4_AllocateFH */
-
-/**
- *
- * @brief Allocates a buffer to be used for storing a NFSv4 filehandle.
- *
- * Allocates a buffer to be used for storing a NFSv4 filehandle.
- *
- * @param fh [INOUT] the filehandle to manage.
- *
- * @return NFS4_OK if successful, NFS3ERR_SERVERFAULT, NFS4ERR_RESOURCE or
- *                 NFS4ERR_STALE  otherwise.
- *
- */
-int nfs4_AllocateFH(nfs_fh4 *fh)
-{
-	/* Allocating the filehandle in memory */
-	fh->nfs_fh4_len = NFS4_FHSIZE;
-
-	fh->nfs_fh4_val = gsh_malloc(fh->nfs_fh4_len);
-
-	memset(fh->nfs_fh4_val, 0, fh->nfs_fh4_len);
-
-	LogFullDebugOpaque(COMPONENT_FILEHANDLE, "NFS4 Handle %s", LEN_FH_STR,
-			   fh->nfs_fh4_val, fh->nfs_fh4_len);
-
-	return NFS4_OK;
-}
-
-/**
- *
  *  nfs3_FhandleToCache: gets the cache entry from the NFSv3 file handle.
  *
  * Validates and Converts a V3 file handle and then gets the cache entry.
