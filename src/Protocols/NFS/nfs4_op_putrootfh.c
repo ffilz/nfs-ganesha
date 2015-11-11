@@ -130,11 +130,8 @@ int nfs4_op_putrootfh(struct nfs_argop4 *op, compound_data_t *data,
 	set_current_entry(data, file_entry);
 
 	/* If no currentFH were set, allocate one */
-	if (data->currentFH.nfs_fh4_val == NULL) {
-		res_PUTROOTFH4->status = nfs4_AllocateFH(&(data->currentFH));
-		if (res_PUTROOTFH4->status != NFS4_OK)
-			return res_PUTROOTFH4->status;
-	}
+	if (data->currentFH.nfs_fh4_val == NULL)
+		nfs4_AllocateFH(&data->currentFH);
 
 	/* Convert it to a file handle */
 	if (!nfs4_FSALToFhandle(&data->currentFH,
