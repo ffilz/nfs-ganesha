@@ -172,13 +172,7 @@ int nfs3_mkdir(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	MKDIR3resok *d3ok = &res->res_mkdir3.MKDIR3res_u.resok;
 
 	/* Build file handle */
-	res->res_mkdir3.status =
-	    nfs3_AllocateFH(&d3ok->obj.post_op_fh3_u.handle);
-
-	if (res->res_mkdir3.status != NFS3_OK) {
-		rc = NFS_REQ_OK;
-		goto out;
-	}
+	nfs3_AllocateFH(&d3ok->obj.post_op_fh3_u.handle);
 
 	if (!nfs3_FSALToFhandle(&d3ok->obj.post_op_fh3_u.handle,
 				dir_entry->obj_handle,
