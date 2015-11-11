@@ -352,11 +352,7 @@ int nfs4_op_create(struct nfs_argop4 *op, compound_data_t *data,
 	}			/* switch( arg_CREATE4.objtype.type ) */
 
 	/* Allocation of a new file handle */
-	if (nfs4_AllocateFH(&newfh4) != NFS4_OK) {
-		res_CREATE4->status = NFS4ERR_SERVERFAULT;
-		cache_inode_put(entry_new);
-		goto out;
-	}
+	nfs4_AllocateFH(&newfh4);
 
 	/* Building the new file handle */
 	if (!nfs4_FSALToFhandle(&newfh4,
