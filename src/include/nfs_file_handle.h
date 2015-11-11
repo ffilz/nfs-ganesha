@@ -63,8 +63,39 @@ static inline size_t nfs3_sizeof_handle(struct file_handle_v3 *hdl)
 	return hsize;
 }
 
-int nfs3_AllocateFH(nfs_fh3 *);
-int nfs4_AllocateFH(nfs_fh4 *);
+/**
+ *
+ * @brief Allocates a buffer to be used for storing a NFSv4 filehandle.
+ *
+ * Allocates a buffer to be used for storing a NFSv3 filehandle.
+ *
+ * @param fh [INOUT] the filehandle to manage.
+ *
+ */
+static inline
+void nfs3_AllocateFH(nfs_fh3 *fh)
+{
+	/* Allocating the filehandle in memory */
+	fh->data.data_len = NFS3_FHSIZE;
+	fh->data.data_val = gsh_calloc(1, fh->data.data_len);
+}
+
+/**
+ *
+ * @brief Allocates a buffer to be used for storing a NFSv4 filehandle.
+ *
+ * Allocates a buffer to be used for storing a NFSv4 filehandle.
+ *
+ * @param fh [INOUT] the filehandle to manage.
+ *
+ */
+static inline
+void nfs4_AllocateFH(nfs_fh4 *fh)
+{
+	/* Allocating the filehandle in memory */
+	fh->nfs_fh4_len = NFS4_FHSIZE;
+	fh->nfs_fh4_val = gsh_calloc(1, fh->nfs_fh4_len);
+}
 
 /**
  * @brief Get the actual size of a v4 handle based on the sized fsopaque

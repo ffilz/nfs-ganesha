@@ -223,13 +223,7 @@ int nfs3_mknod(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	MKNOD3resok * const rok = &res->res_mknod3.MKNOD3res_u.resok;
 
 	/* Build file handle */
-	res->res_mknod3.status =
-		nfs3_AllocateFH(&rok->obj.post_op_fh3_u.handle);
-
-	if (res->res_mknod3.status != NFS3_OK) {
-		rc = NFS_REQ_OK;
-		goto out;
-	}
+	nfs3_AllocateFH(&rok->obj.post_op_fh3_u.handle);
 
 	if (nfs3_FSALToFhandle(&rok->obj.post_op_fh3_u.handle,
 			       node_entry->obj_handle,
