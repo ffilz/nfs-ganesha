@@ -128,8 +128,6 @@ struct config_block gpfs_param = {
 /* my module private storage */
 static struct gpfs_fsal_module GPFS;
 
-int gpfs_max_fh_size;
-
 /* private helper for export object */
 struct fsal_staticfsinfo_t *gpfs_staticinfo(struct fsal_module *hdl)
 {
@@ -226,11 +224,6 @@ facility_error:
 MODULE_INIT void gpfs_init(void)
 {
 	struct fsal_module *myself = &GPFS.fsal;
-
-	if (nfs_param.core_param.short_file_handle)
-		gpfs_max_fh_size = OPENHANDLE_SHORT_HANDLE_LEN;
-	else
-		gpfs_max_fh_size = OPENHANDLE_HANDLE_LEN;
 
 	if (register_fsal(myself, myname, FSAL_MAJOR_VERSION,
 			  FSAL_MINOR_VERSION, FSAL_ID_GPFS) != 0) {
