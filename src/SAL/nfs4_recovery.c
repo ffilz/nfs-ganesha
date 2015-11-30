@@ -820,7 +820,7 @@ static int nfs4_read_recov_clids(DIR *dp,
 static void nfs4_load_recov_clids_nolock(nfs_grace_start_t *gsp)
 {
 	DIR *dp;
-	struct glist_head *node;
+	struct glist_head *node, *noden;
 	clid_entry_t *clid_entry;
 	int rc;
 	char path[PATH_MAX];
@@ -830,7 +830,7 @@ static void nfs4_load_recov_clids_nolock(nfs_grace_start_t *gsp)
 	if (gsp == NULL) {
 		/* when not doing a takeover, start with an empty list */
 		if (!glist_empty(&clid_list)) {
-			glist_for_each(node, &clid_list) {
+			glist_for_each_safe(node, noden, &clid_list) {
 				glist_del(node);
 				clid_entry =
 				    glist_entry(node, clid_entry_t, cl_list);
