@@ -61,8 +61,6 @@ struct req_q_pair {
 #define REQ_Q_HIGH_LATENCY 3	/*< READ, WRITE, COMMIT, etc */
 #define N_REQ_QUEUES 4
 
-extern const char *req_q_s[N_REQ_QUEUES];	/* for debug prints */
-
 struct req_q_set {
 	struct req_q_pair qset[N_REQ_QUEUES];
 };
@@ -80,7 +78,6 @@ struct nfs_req_st {
 	struct {
 		pthread_mutex_t mtx;
 		struct glist_head q;
-		uint32_t stalled;
 		bool active;
 	} stallq;
 };
