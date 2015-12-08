@@ -172,7 +172,8 @@ int nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 					data,
 					data->minorversion == 0 ?
 					    STATEID_SPECIAL_FOR_CLOSE_40 :
-					    STATEID_SPECIAL_FOR_CLOSE_41,
+					    (STATEID_SPECIAL_FOR_CLOSE_41 |
+					    STATEID_SPECIAL_CURRENT),
 					arg_CLOSE4->seqid,
 					data->minorversion == 0,
 					close_tag);

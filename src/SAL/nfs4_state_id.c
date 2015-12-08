@@ -811,8 +811,10 @@ nfsstat4 nfs4_Check_Stateid(stateid4 *stateid, cache_entry_t *entry,
 
 			/** @todo FSF: eventually this may want to return an
 			 * actual state for use in temporary locks for I/O.
+			 *
+			 * Special stateid operation should not touch
+			 * transient state.
 			 */
-			data->current_stateid_valid = false;
 			goto success;
 		}
 		if (stateid->seqid == 1
@@ -853,8 +855,10 @@ nfsstat4 nfs4_Check_Stateid(stateid4 *stateid, cache_entry_t *entry,
 
 			/** @todo FSF: eventually this may want to return an
 			 * actual state for use in temporary locks for I/O.
+			 *
+			 * Special stateid operation should not touch
+			 * transient state.
 			 */
-			data->current_stateid_valid = false;
 			goto success;
 		}
 
