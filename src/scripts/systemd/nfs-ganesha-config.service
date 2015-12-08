@@ -1,0 +1,9 @@
+[Unit]
+Description=Process NFS-Ganesha configuration
+Before=nfs-ganesha.service
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/libexec/ganesha/nfs-ganesha-config.sh
