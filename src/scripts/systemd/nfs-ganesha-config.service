@@ -1,0 +1,6 @@
+[Unit]
+Description=Process NFS-Ganesha configuration
+Before=nfs-ganesha.service
+
+[Service]
+ExecStart=/usr/libexec/ganesha/nfs-ganesha-config.sh
