@@ -729,11 +729,7 @@ typedef struct fsal_status__ {
  *  fsalstat (was ReturnCode) :
  *  Macro for returning a fsal_status_t without trace nor stats increment.
  */
-static inline fsal_status_t fsalstat(fsal_errors_t major, uint32_t minor)
-{
-	fsal_status_t status = {major, minor};
-	return status;
-}
+#define fsalstat(__a__, __b__) (fsal_status_t){(__a__), (__b__)}
 
 /******************************************************
  *              FSAL Errors handling.
