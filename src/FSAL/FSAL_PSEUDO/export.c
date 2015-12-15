@@ -46,6 +46,7 @@
 #include "pseudofs_methods.h"
 #include "nfs_exports.h"
 #include "export_mgr.h"
+#include "mdcache.h"
 
 #ifdef __FreeBSD__
 #include <sys/endian.h>
@@ -300,8 +301,6 @@ void pseudofs_export_ops_init(struct export_ops *ops)
 	ops->set_quota = set_quota;
 }
 
-fsal_status_t mdcache_export_init(const struct fsal_up_vector *up_ops);
-
 /* create_export
  * Create an export point and return a handle to it to be kept
  * in the export list.
@@ -328,7 +327,6 @@ fsal_status_t pseudofs_create_export(struct fsal_module *fsal_hdl,
 
 	fsal_export_init(&myself->export);
 	pseudofs_export_ops_init(&myself->export.exp_ops);
-	myself->export.up_ops = up_ops;
 
 	retval = fsal_attach_export(fsal_hdl, &myself->export.exports);
 
@@ -350,7 +348,8 @@ fsal_status_t pseudofs_create_export(struct fsal_module *fsal_hdl,
 	myself->export_path = gsh_strdup(op_ctx->export->fullpath);
 	op_ctx->fsal_export = &myself->export;
 
-        status = mdcache_export_init(up_ops);
+        /* Stack MDCACHE on top */
+        status = mdcache_export_init(up_ops, &myself->export.up_ops);
         if (FSAL_IS_ERROR(status)) {
                 LogDebug(COMPONENT_FSAL, "MDCACHE creation failed for PSEUDO");
                 return status;
