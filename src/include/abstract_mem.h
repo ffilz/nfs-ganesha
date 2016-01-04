@@ -44,6 +44,8 @@
 #include <assert.h>
 #include "log.h"
 
+extern size_t strlcpy(char *dst, const char *src, size_t siz);
+
 /**
  * @page GeneralAllocator General Allocator Shim
  *
@@ -217,6 +219,41 @@ gsh_strdup__(const char *s,
 }
 
 #define gsh_strdup(s) gsh_strdup__(s, __FILE__, __LINE__, __func__)
+
+/**
+ * @brief Duplicate a string to newly allocated memory (bounded)
+ *
+ * This function allocates a new block of memory sufficient to contain
+ * the supplied string, then copies the string into that buffer.
+ *
+ * This function aborts if no memory is available.
+ *
+ * @param[in] s  String to duplicate
+ * @param[in] length returned string shall be <= length+1
+ * @param[out] n number of bytes copied
+ * @param[in] file Calling source file
+ * @param[in] line Calling source line
+ * @param[in] function Calling source function
+ *
+ * @return Pointer to new copy of string.
+ */
+static inline char *
+gsh_strldup__(const char *s, size_t length, size_t *copied,
+	     const char *file, int line, const char *function)
+{
+	void *p = gsh_malloc__(length+1, file, line, function);
+
+	if (p == NULL) {
+		LogMallocFailure(file, line, function, "gsh_strldup");
+		abort();
+	}
+
+	*copied = strlcpy(p, s, length+1);
+	return p;
+}
+
+#define gsh_strldup(s, l, n) gsh_strldup__(s, l, n, __FILE__, __LINE__, \
+						__func__)
 
 /**
  * @brief Free a block of memory
