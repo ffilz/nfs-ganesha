@@ -358,8 +358,11 @@ static fsal_status_t fsal_readlink(struct fsal_obj_handle *link_pub,
 	if (rc < 0)
 		return ceph2fsal_error(rc);
 
-	content_buf->len = (strlen(content) + 1);
-	content_buf->addr = gsh_strdup(content);
+	/* XXX in Ceph through 1/2016, ceph_ll_readlink returns the
+	 * length of the path copied (truncated to 32 bits) in rc,
+	 * and it cannot exceed the passed buffer size */
+	content_buf->addr = gsh_strldup(content, MIN(rc, (PATH_MAX-1)),
+					&content_buf->len);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
