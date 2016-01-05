@@ -166,6 +166,10 @@ void clean_mapping(cache_entry_t *entry)
 		gsh_free(expmap);
 	}
 
+	/* Clean up its export list as the entry may get re-used */
+	glist_del(&entry->export_list);
+	atomic_store_voidptr(&entry->first_export, NULL);
+
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 }
 
