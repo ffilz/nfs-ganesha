@@ -992,9 +992,17 @@ void dec_state_owner_ref(state_owner_t *owner)
 		str_valid = true;
 	}
 
-	refcount = atomic_dec_int32_t(&owner->so_refcount);
+	refcount = atomic_fetch_int32_t(&owner->so_refcount);
 
-	if (refcount != 0) {
+	/* We will only proceed if refcount is currently 1, meaning
+	 * we might release the final reference under latch.
+	 */
+	if (refcount != 1) {
+		/* We are not trying to release the final reference, so now
+		 * actually release our reference.
+		 */
+		refcount = atomic_dec_int32_t(&owner->so_refcount);
+
 		if (str_valid)
 			LogFullDebug(COMPONENT_STATE,
 				     "Decrement refcount now=%" PRId32 " {%s}",
@@ -1048,15 +1056,20 @@ void dec_state_owner_ref(state_owner_t *owner)
 		if (!str_valid)
 			display_owner(&dspbuf, owner);
 
-		LogCrit(COMPONENT_STATE, "Error %s, could not find {%s}",
-			hash_table_err_to_str(rc), str);
+		/* If we REALLY get here, something is really messed up. */
+		LogFatal(COMPONENT_STATE, "Error %s, could not find {%s}",
+			 hash_table_err_to_str(rc), str);
 
 		return;
 	}
 
-	refcount = atomic_fetch_int32_t(&owner->so_refcount);
+	/* Now actually release our reference. */
+	refcount = atomic_dec_int32_t(&owner->so_refcount);
 
 	if (refcount > 0) {
+		/* Someone got a new primary reference while we weren't looking
+		 * so bug out.
+		 */
 		if (str_valid)
 			LogDebug(COMPONENT_STATE,
 				 "Did not release {%s} refcount now=%" PRId32,
@@ -1066,6 +1079,11 @@ void dec_state_owner_ref(state_owner_t *owner)
 
 		return;
 	}
+
+	/* Now we know no one else can get a new primary reference, and no
+	 * other references are outstanding, thus we can safely destroy the
+	 * owner and release memory resources.
+	 */
 
 	/* use the key to delete the entry */
 	hashtable_deletelatched(ht_owner, &buffkey, &latch, &old_key,
