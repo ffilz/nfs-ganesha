@@ -41,13 +41,6 @@
 #include "fsal_api.h"
 
 /**
- * @brief If we don't know how big a buffer we want for a link, use
- * this value.
- */
-
-static const size_t fsal_default_linksize = 4096;
-
-/**
  * @brief Pointer to FSAL module by number.
  * This is actually defined in common_pnfs.c
  */
