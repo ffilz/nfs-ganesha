@@ -46,6 +46,13 @@
 
 #define FSAL_PROXY_NFS_V4 4
 
+/**
+ * @brief If we don't know how big a buffer we want for a link, use
+ * this value.
+ */
+
+static const size_t fsal_default_linksize = 4096;
+
 static clientid4 pxy_clientid;
 static pthread_mutex_t pxy_clientid_mutex = PTHREAD_MUTEX_INITIALIZER;
 static char pxy_hostname[MAXNAMLEN + 1];

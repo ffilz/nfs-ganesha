@@ -48,6 +48,9 @@
 
 #define XATTRS_ARRAY_LEN 100
 
+/* Cookie to be used in FSAL_ListXAttrs() to bypass RO xattr */
+static const uint32_t FSAL_XATTR_RW_COOKIE = ~0;
+
 int _9p_xattrwalk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 {
 	char *cursor = req9p->_9pmsg + _9P_HDR_SIZE + _9P_TYPE_SIZE;

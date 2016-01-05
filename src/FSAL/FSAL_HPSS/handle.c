@@ -35,6 +35,13 @@
 #include "FSAL/fsal_commonlib.h"
 #include <stdbool.h>
 
+/**
+ * @brief If we don't know how big a buffer we want for a link, use
+ * this value.
+ */
+
+static const size_t fsal_default_linksize = 4096;
+
 
 /* helpers
  */
