@@ -180,6 +180,8 @@ int nfs3_create(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	if (((cache_status != CACHE_INODE_SUCCESS)
 	     && (cache_status != CACHE_INODE_ENTRY_EXISTS))
 	    || (file_entry == NULL)) {
+		if (cache_status == CACHE_INODE_SUCCESS)
+			cache_status = CACHE_INODE_INVALID_ARGUMENT;
 		goto out_fail;
 	}
 

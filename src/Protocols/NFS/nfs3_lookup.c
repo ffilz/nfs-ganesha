@@ -120,6 +120,8 @@ int nfs3_lookup(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			res->res_lookup3.status = NFS3ERR_BADHANDLE;
 		}
 	} else {
+		if (cache_status == CACHE_INODE_SUCCESS)
+			cache_status = CACHE_INODE_INVALID_ARGUMENT;
 		/* If we are here, there was an error */
 		if (nfs_RetryableError(cache_status)) {
 			rc = NFS_REQ_DROP;
