@@ -172,7 +172,7 @@ nfsstat4 getdeviceinfo(struct fsal_module *fsal_hdl,
 			+ ((ds_buffer - da_beginning) / BYTES_PER_XDR_UNIT));
 
 	LogDebug(COMPONENT_PNFS,
-		"getdeviceinfo p %p end %p da_length %lu ds_buffer %lu seq %d fd %d fsid 0x%lx\n",
+		"getdeviceinfo p %p end %p da_length %zu ds_buffer %zu seq %d fd %d fsid 0x%" PRIx64,
 		darg.xdr.p, darg.xdr.end, da_beginning, ds_buffer,
 		deviceid->device_id2, deviceid->device_id4,
 		deviceid->devid);
@@ -189,8 +189,8 @@ nfsstat4 getdeviceinfo(struct fsal_module *fsal_hdl,
 	(void)xdr_inline(da_addr_body, rc);
 	da_length = xdr_getpos(da_addr_body) - da_beginning;
 
-	LogDebug(COMPONENT_PNFS, "getdeviceinfo rc %d da_length %ld\n", rc,
-		 da_length);
+	LogDebug(COMPONENT_PNFS, "getdeviceinfo rc %d da_length %zd\n",
+		rc, da_length);
 
 	return NFS4_OK;
 }
@@ -336,7 +336,8 @@ static nfsstat4 layoutget(struct fsal_obj_handle *obj_hdl,
 	deviceid.devid = file_layout.device_id.devid;
 	/* last_possible_byte = NFS4_UINT64_MAX; strict. set but unused */
 
-	LogDebug(COMPONENT_PNFS, "fsal_id %d seq %d fd %d fsid 0x%lx index %d",
+	LogDebug(COMPONENT_PNFS,
+		"fsal_id %d seq %d fd %d fsid 0x%" PRIx64 " index %d",
 		deviceid.fsal_id, deviceid.device_id2,
 		deviceid.device_id4, deviceid.devid,
 		file_layout.lg_first_stripe_index);
