@@ -1967,6 +1967,7 @@ struct fsal_obj_ops {
  * This function sets an extended attribute of an object.
  *
  * @param[in]  obj_hdl  Input object to set
+ * @param[in]  xa_type  Input xattr type
  * @param[in]  xa_name  Input xattr name to set
  * @param[in]  xa_value Input xattr value to set
  *
