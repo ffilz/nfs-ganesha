@@ -1310,6 +1310,7 @@ void server_stats_summary(DBusMessageIter *iter, struct gsh_stats *st)
  * @param op    [IN] pointer to proto op sub-structure of interest
  * @param iter  [IN] interator in reply stream to fill
  */
+#ifdef _USE_9P
 static void server_dbus_op_stats(struct proto_op *op, DBusMessageIter *iter)
 {
 	DBusMessageIter struct_iter;
@@ -1323,6 +1324,7 @@ static void server_dbus_op_stats(struct proto_op *op, DBusMessageIter *iter)
 				       op == NULL ? &zero : &op->errors);
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
+#endif
 
 /**
  * @brief Report I/O statistics as a struct
@@ -1361,6 +1363,7 @@ static void server_dbus_iostats(struct xfer_op *iop, DBusMessageIter *iter)
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
 
+#ifdef _USE_9P
 static void server_dbus_transportstats(struct transport_stats *tstats,
 				       DBusMessageIter *iter)
 {
@@ -1382,6 +1385,7 @@ static void server_dbus_transportstats(struct transport_stats *tstats,
 				       &tstats->tx_err);
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
+#endif
 
 void server_dbus_total(struct export_stats *export_st, DBusMessageIter *iter)
 {
