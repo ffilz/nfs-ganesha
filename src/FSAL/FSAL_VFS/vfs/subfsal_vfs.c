@@ -55,6 +55,10 @@ static struct config_item export_params[] = {
 	CONF_ITEM_ENUM("fsid_type", -1,
 		       fsid_types,
 		       vfs_fsal_export, fsid_type),
+	CONF_ITEM_UI64("fsid_major", 0, UINT64_MAX, 0,
+			vfs_fsal_export, fsid_major),
+	CONF_ITEM_UI64("fsid_minor", 0, UINT64_MAX, 0,
+			vfs_fsal_export, fsid_minor),
 	CONFIG_EOL
 };
 

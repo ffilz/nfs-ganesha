@@ -108,15 +108,34 @@ int vfs_get_root_handle(struct vfs_filesystem *vfs_fs,
 	}
 
 	/* Check if we have to re-index the fsid based on config */
-	if (exp->fsid_type != -1 &&
-	    exp->fsid_type != vfs_fs->fs->fsid_type) {
-		retval = -change_fsid_type(vfs_fs->fs, exp->fsid_type);
-		if (retval != 0) {
-			LogCrit(COMPONENT_FSAL,
-				"Can not change fsid type of %s to %d, error %s",
-				vfs_fs->fs->path, exp->fsid_type,
-				strerror(retval));
-			return retval;
+	if (exp->fsid_type != -1) {
+		if ((exp->fsid_major != 0) || (exp->fsid_minor != 0)) {
+			fsal_fsid_t efsid;
+
+			efsid.major = exp->fsid_major;
+			efsid.minor = exp->fsid_minor;
+			/* re-index based on config */
+			retval = re_index_fs_fsid(vfs_fs->fs, exp->fsid_type,
+						&efsid);
+			if (retval != 0) {
+				LogCrit(COMPONENT_FSAL,
+				    "Can not reindex fs %s to type=%d fsid=0x%016"
+				    PRIx64".0x%016"PRIx64", error %s",
+				    vfs_fs->fs->path,
+				    exp->fsid_type, exp->fsid_major,
+				    exp->fsid_minor,
+				    strerror(retval));
+				return retval;
+			}
+		} else if (exp->fsid_type != vfs_fs->fs->fsid_type) {
+			retval = -change_fsid_type(vfs_fs->fs, exp->fsid_type);
+			if (retval != 0) {
+				LogCrit(COMPONENT_FSAL,
+				    "Can not change fsid type of %s to %d, error %s",
+				    vfs_fs->fs->path, exp->fsid_type,
+				    strerror(retval));
+				return retval;
+			}
 		}
 
 		LogInfo(COMPONENT_FSAL,

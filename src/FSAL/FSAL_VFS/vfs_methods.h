@@ -43,6 +43,8 @@ struct vfs_fsal_export {
 	struct fsal_filesystem *root_fs;
 	struct glist_head filesystems;
 	int fsid_type;
+	uint64_t fsid_major;
+	uint64_t fsid_minor;
 };
 
 #define EXPORT_VFS_FROM_FSAL(fsal) \
