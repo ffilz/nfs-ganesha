@@ -702,7 +702,12 @@ void release_openstate(state_owner_t *owner)
 				 *       expire due to SETCLIENTID.
 				 */
 
-				/* This cached owner has expired, uncache it. */
+				/* This cached owner has expired, uncache it.
+				 * owner can't go away as we have a
+				 * reference, so it is OK to call
+				 * uncache_nfs4_owner while holding
+				 * so_mutex here.
+				 */
 				uncache_nfs4_owner(nfs4_owner);
 			}
 
