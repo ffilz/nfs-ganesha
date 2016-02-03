@@ -27,6 +27,7 @@
  * -------------
  */
 
+#include "config.h"
 #include <assert.h>
 #include "fsal.h"
 #include "FSAL/access_check.h"
@@ -37,23 +38,18 @@
 #include "FSAL/fsal_commonlib.h"
 #include "gpfs_methods.h"
 
-/** @fn static fsal_status_t
- *      gpfs_open2(struct fsal_obj_handle *obj_hdl,
- *		   fsal_openflags_t openflags, bool reopen)
- * @brief common code gpfs_open and gpfs_reopen
- */
 static fsal_status_t
 gpfs_open2(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags,
 	   bool reopen)
 {
 	struct gpfs_fsal_obj_handle *myself =
 		container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-	fsal_status_t status;
 	int fd = -1;
+	fsal_status_t status;
 
 	if (reopen) {
 		assert(myself->u.file.fd >= 0 &&
-		       myself->u.file.openflags != FSAL_O_CLOSED);
+			myself->u.file.openflags != FSAL_O_CLOSED);
 		fd = myself->u.file.fd;
 	} else {
 		assert(myself->u.file.fd == -1 &&
@@ -61,20 +57,21 @@ gpfs_open2(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags,
 	}
 
 	status = GPFSFSAL_open(obj_hdl, op_ctx, openflags, &fd, NULL, reopen);
-	if (FSAL_IS_ERROR(status) == false) {
-		myself->u.file.fd = fd;
-		myself->u.file.openflags = openflags;
-	}
+	if (FSAL_IS_ERROR(status))
+		return status;
+
+	myself->u.file.fd = fd;
+	myself->u.file.openflags = openflags;
 
 	return status;
 }
 
-/** @fn fsal_status_t
- *      gpfs_open(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags)
- *  @brief called with appropriate locks taken at the cache inode level
- *  @param obj_hdl FSAL object handle
- *  @param openflags FSAL open flags
- *  @return FSAL status
+/**
+ * @brief called with appropriate locks taken at the cache inode level
+ *
+ * @param obj_hdl FSAL object handle
+ * @param openflags FSAL open flags
+ * @return FSAL status
  */
 fsal_status_t
 gpfs_open(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags)
@@ -82,13 +79,12 @@ gpfs_open(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags)
 	return gpfs_open2(obj_hdl, openflags, false);
 }
 
-/** @fn fsal_status_t
- *      gpfs_reopen(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags)
+/**
+ *  @brief called with appropriate locks taken at the cache inode level
+ *
  *  @param obj_hdl FSAL object handle
  *  @param openflags FSAL open flags
  *  @return FSAL status
- *
- *  called with appropriate locks taken at the cache inode level
  *
  *  The file may have been already opened, so open the file again with
  *  given open flags without losing any locks associated with the file.
@@ -99,11 +95,13 @@ gpfs_reopen(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags)
 	return gpfs_open2(obj_hdl, openflags, true);
 }
 
-/** @fn fsal_openflags_t gpfs_status(struct fsal_obj_handle *obj_hdl)
- *  @param obj_hdl FSAL object handle
- *  @return FSAL status
+/**
+ * @brief get GPFS status
  *
- *  Let the caller peek into the file's open/close state.
+ * @param obj_hdl FSAL object handle
+ * @return FSAL status
+ *
+ * Let the caller peek into the file's open/close state.
  */
 fsal_openflags_t gpfs_status(struct fsal_obj_handle *obj_hdl)
 {
@@ -113,9 +111,9 @@ fsal_openflags_t gpfs_status(struct fsal_obj_handle *obj_hdl)
 	return myself->u.file.openflags;
 }
 
-/** @fn fsal_status_t
- *      gpfs_read(struct fsal_obj_handle *obj_hdl, uint64_t offset, size_t buffer_size,
- *		  void *buffer, size_t *read_amount, bool *end_of_file)
+/**
+ *  @brief GPFS read command
+ *
  *  @param obj_hdl FSAL object handle
  *  @param offset Offset
  *  @param buffer_size Size of buffer
@@ -139,7 +137,6 @@ gpfs_read(struct fsal_obj_handle *obj_hdl, uint64_t offset, size_t buffer_size,
 
 	status = GPFSFSAL_read(myself->u.file.fd, offset, buffer_size, buffer,
 			       read_amount, end_of_file);
-
 	if (FSAL_IS_ERROR(status))
 		return status;
 
@@ -150,10 +147,9 @@ gpfs_read(struct fsal_obj_handle *obj_hdl, uint64_t offset, size_t buffer_size,
 	return status;
 }
 
-/** @fn fsal_status_t
- *     gpfs_read_plus(struct fsal_obj_handle *obj_hdl, uint64_t offset,
- *	              size_t buffer_size, void *buffer, size_t *read_amount,
- *	              bool *end_of_file, struct io_info *info)
+/**
+ *  @brief GPFS read plus
+ *
  *  @param obj_hdl FSAL object handle
  *  @param offset Offset
  *  @param buffer_size Size of buffer
@@ -209,8 +205,6 @@ gpfs_read_plus(struct fsal_obj_handle *obj_hdl, uint64_t offset,
 			*read_amount = buffer_size;
 			info->io_content.hole.di_length = buffer_size;
 		}
-		info->io_content.what = NFS4_CONTENT_HOLE;
-		info->io_content.hole.di_offset = offset;
 	} else {
 		info->io_content.what = NFS4_CONTENT_DATA;
 		info->io_content.data.d_offset = offset + nb_read;
@@ -221,7 +215,7 @@ gpfs_read_plus(struct fsal_obj_handle *obj_hdl, uint64_t offset,
 
 	if (nb_read != -1 &&
 	    (nb_read == 0 || nb_read < buffer_size ||
-		 (offset + nb_read) >= myself->attributes.filesize))
+		((offset + nb_read) >= myself->attributes.filesize)))
 		*end_of_file = true;
 	else
 		*end_of_file = false;
@@ -229,9 +223,9 @@ gpfs_read_plus(struct fsal_obj_handle *obj_hdl, uint64_t offset,
 	return status;
 }
 
-/** @fn fsal_status_t
- *      gpfs_write(struct fsal_obj_handle *obj_hdl, uint64_t offset, size_t buffer_size,
- *	           void *buffer, size_t *write_amount, bool *fsal_stable)
+/**
+ *  @brief GPFS write command
+ *
  *  @param obj_hdl FSAL object handle
  *  @param offset Offset
  *  @param buffer_size Size of buffer
@@ -256,9 +250,9 @@ gpfs_write(struct fsal_obj_handle *obj_hdl, uint64_t offset, size_t buffer_size,
 			      write_amount, fsal_stable, op_ctx);
 }
 
-/** @fn static fsal_status_t
- *      gpfs_deallocate(struct fsal_obj_handle *obj_hdl, uint64_t offset,
- *		        uint64_t length)
+/**
+ *  @brief GPFS deallocate command
+ *
  *  @param obj_hdl FSAL object handle
  *  @param offset Offset
  *  @param length Length
@@ -279,8 +273,9 @@ gpfs_deallocate(struct fsal_obj_handle *obj_hdl, uint64_t offset,
 	return GPFSFSAL_alloc(myself->u.file.fd, offset, length, false);
 }
 
-/** @fn static fsal_status_t
- *      gpfs_allocate(struct fsal_obj_handle *obj_hdl, uint64_t offset, uint64_t length)
+/**
+ *  @brief GPFS allocate command
+ *
  *  @param obj_hdl FSAL object handle
  *  @param offset Offset
  *  @param length Length
@@ -300,10 +295,9 @@ gpfs_allocate(struct fsal_obj_handle *obj_hdl, uint64_t offset, uint64_t length)
 	return GPFSFSAL_alloc(myself->u.file.fd, offset, length, true);
 }
 
-/** @fn fsal_status_t
- *	gpfs_write_plus(struct fsal_obj_handle *obj_hdl, uint64_t offset,
- *			size_t buffer_size, void *buffer, size_t *write_amount,
- *			bool *fsal_stable, struct io_info *info)
+/**
+ *  @brief GPFS write plus command
+ *
  *  @param obj_hdl FSAL object handle
  *  @param offset Offset
  *  @param buffer_size Size of buffer
@@ -333,20 +327,22 @@ gpfs_write_plus(struct fsal_obj_handle *obj_hdl, uint64_t offset,
 	}
 }
 
-/** @fn fsal_status_t gpfs_seek(struct fsal_obj_handle *obj_hdl,
- *				struct io_info *info)
+/**
+ *  @brief GPFS seek command
+ *
  *  @param obj_hdl FSAL object handle
  *  @param io_info I/O information
  *  @return FSAL status
  *
  *  default case not supported
  */
-fsal_status_t gpfs_seek(struct fsal_obj_handle *obj_hdl, struct io_info *info)
+fsal_status_t
+gpfs_seek(struct fsal_obj_handle *obj_hdl, struct io_info *info)
 {
 	struct gpfs_fsal_obj_handle *myself =
 		container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-	struct gpfs_io_info io_info = {0};
 	struct fseek_arg arg = {0};
+	struct gpfs_io_info io_info = {0};
 
 	assert(myself->u.file.fd >= 0 &&
 	       myself->u.file.openflags != FSAL_O_CLOSED);
@@ -380,10 +376,9 @@ fsal_status_t gpfs_seek(struct fsal_obj_handle *obj_hdl, struct io_info *info)
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-/* io_advise
- */
-/** @fn fsal_status_t
- *      gpfs_io_advise(struct fsal_obj_handle *obj_hdl, struct io_hints *hints)
+/**
+ *  @brief GPFS IO advise
+ *
  *  @param obj_hdl FSAL object handle
  *  @param io_hints I/O information
  *  @return FSAL status
@@ -415,8 +410,9 @@ gpfs_io_advise(struct fsal_obj_handle *obj_hdl, struct io_hints *hints)
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-/** @fn fsal_status_t
- *      gpfs_commit(struct fsal_obj_handle *obj_hdl, off_t offset, size_t len)
+/**
+ *  @brief GPFS commit command
+ *
  *  @param obj_hdl FSAL object handle
  *  @param offset Offset
  *  @param buffer_size Size of buffer
@@ -456,10 +452,9 @@ gpfs_commit(struct fsal_obj_handle *obj_hdl, off_t offset, size_t len)
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-/** @fn fsal_status_t
- *      gpfs_lock_op(struct fsal_obj_handle *obj_hdl, void *owner,
- *		     fsal_lock_op_t lock_op, fsal_lock_param_t *request_lock,
- *		     fsal_lock_param_t *conflicting_lock)
+/**
+ *  @brief GPFS lcok operation
+ *
  *  @param obj_hdl FSAL object handle
  *  @param owner reference to void
  *  @param lock_op FSAL lock
@@ -472,7 +467,7 @@ gpfs_commit(struct fsal_obj_handle *obj_hdl, off_t offset, size_t len)
  *  throw an error if the fd is not open.  The old fsal didn't check this.
  */
 fsal_status_t
-gpfs_lock_op(struct fsal_obj_handle *obj_hdl, void *owner,
+gpfs_lock_op(struct fsal_obj_handle *obj_hdl, void *p_owner,
 	     fsal_lock_op_t lock_op, fsal_lock_param_t *request_lock,
 	     fsal_lock_param_t *conflicting_lock)
 {
@@ -495,19 +490,19 @@ gpfs_lock_op(struct fsal_obj_handle *obj_hdl, void *owner,
 
 	LogFullDebug(COMPONENT_FSAL,
 		     "Locking: op:%d type:%d claim:%d start:%" PRIu64
-		     " length:%lu ", lock_op, request_lock->lock_type,
+		     " length:%" PRIu64, lock_op, request_lock->lock_type,
 		     request_lock->lock_reclaim, request_lock->lock_start,
 		     request_lock->lock_length);
 
-	return GPFSFSAL_lock_op(op_ctx->fsal_export, obj_hdl, owner, lock_op,
+	return GPFSFSAL_lock_op(op_ctx->fsal_export, obj_hdl, p_owner, lock_op,
 				*request_lock, conflicting_lock);
 }
 
-/** @fn fsal_status_t gpfs_close(struct fsal_obj_handle *obj_hdl)
+/**
+ *  @brief Close the file if it is still open.
+ *
  *  @param obj_hdl FSAL object handle
  *  @return FSAL status
- *
- *  @brief Close the file if it is still open.
  *
  *  Yes, we ignor lock status.  Closing a file in POSIX
  *  releases all locks but that is state and cache inode's problem.
@@ -530,14 +525,12 @@ fsal_status_t gpfs_close(struct fsal_obj_handle *obj_hdl)
 	return status;
 }
 
-/** @fn fsal_status_t
- *      gpfs_lru_cleanup(struct fsal_obj_handle *obj_hdl,
- *			 lru_actions_t requests)
+/**
+ *  @brief free non-essential resources at the request of cache inode's
+ *
  *  @param obj_hdl FSAL object handle
  *  @param requests Requests
  *  @return FSAL status
- *
- *  @brief free non-essential resources at the request of cache inode's
  *
  *  LRU processing identifying this handle as stale enough for resource trimming
  */
