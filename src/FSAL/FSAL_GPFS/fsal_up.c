@@ -37,22 +37,21 @@
  * @param Arg reference to void
  *
  */
-void *GPFSFSAL_UP_Thread(void *Arg)
+void *GPFSFSAL_UP_Thread(void *arg)
 {
-	struct gpfs_filesystem *gpfs_fs = Arg;
-	const struct fsal_up_vector *event_func;
+	struct gpfs_filesystem *gpfs_fs = arg;
+	const struct fsal_up_vector *event_func = gpfs_fs->up_ops;
 	char thr_name[16];
-	int rc = 0;
-	struct pnfs_deviceid devid;
-	struct stat buf;
-	struct glock fl;
-	struct callback_arg callback;
-	struct gpfs_file_handle handle;
+	struct pnfs_deviceid devid = {0};
+	struct stat buf = {0};
+	struct glock fl = {0};
+	struct callback_arg callback = {0};
+	struct gpfs_file_handle handle = {0};
 	int reason = 0;
 	int flags = 0;
-	unsigned int *fhP;
+	unsigned int *fh;
 	int retry = 0;
-	struct gsh_buffdesc key;
+	struct gsh_buffdesc key = {0};
 	uint32_t expire_time_attr = 0;
 	uint32_t upflags = 0;
 	int errsv = 0;
@@ -65,18 +64,14 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		memset(&devid, 0, sizeof(devid));
 #endif
 
-	snprintf(thr_name, sizeof(thr_name),
-		 "fsal_up_%"PRIu64".%"PRIu64,
+	snprintf(thr_name, sizeof(thr_name), "fsal_up_%"PRIu64".%"PRIu64,
 		 gpfs_fs->fs->dev.major, gpfs_fs->fs->dev.minor);
 	SetNameFunction(thr_name);
-
-	/* Set the FSAL UP functions that will be used to process events. */
-	event_func = gpfs_fs->up_ops;
 
 	if (event_func == NULL) {
 		LogFatal(COMPONENT_FSAL_UP,
 			 "FSAL up vector does not exist. Can not continue.");
-		gsh_free(Arg);
+		gsh_free(arg);
 		return NULL;
 	}
 
@@ -85,7 +80,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		     gpfs_fs->root_fd);
 
 	/* Start querying for events and processing. */
-	while (1) {
+	while (true) {
 		LogFullDebug(COMPONENT_FSAL_UP,
 			     "Requesting event from FSAL Callback interface for %d.",
 			     gpfs_fs->root_fd);
@@ -94,8 +89,8 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		handle.handle_key_size = OPENHANDLE_KEY_LEN;
 		handle.handle_version = OPENHANDLE_VERSION;
 
-		callback.interface_version =
-		    GPFS_INTERFACE_VERSION + GPFS_INTERFACE_SUB_VER;
+		callback.interface_version = GPFS_INTERFACE_VERSION +
+					     GPFS_INTERFACE_SUB_VER;
 
 		callback.mountdirfd = gpfs_fs->root_fd;
 		callback.handle = &handle;
@@ -107,14 +102,14 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		callback.expire_attr = &expire_time_attr;
 
 		rc = gpfs_ganesha(OPENHANDLE_INODE_UPDATE, &callback);
-		errsv = errno;
-
 		if (rc != 0) {
+			errsv = errno;
 			if (rc == ENOSYS) {
 				LogFatal(COMPONENT_FSAL_UP,
 					 "GPFS was not found, rc ENOSYS");
 				return NULL;
 			}
+
 			LogCrit(COMPONENT_FSAL_UP,
 				"OPENHANDLE_INODE_UPDATE failed for %d. rc %d, errno %d (%s) reason %d",
 				gpfs_fs->root_fd, rc, errsv,
@@ -127,6 +122,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 					 callback.interface_version, rc);
 				return NULL;
 			}
+
 			if (retry < 1000) {
 				retry++;
 				continue;
@@ -136,7 +132,6 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 				LogFatal(COMPONENT_FSAL_UP,
 					 "GPFS file system %d has gone away.",
 					 gpfs_fs->root_fd);
-
 			continue;
 		}
 
@@ -159,11 +154,10 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 
 		callback.handle->handle_version = OPENHANDLE_VERSION;
 
-		fhP = (int *)&(callback.handle->f_handle[0]);
+		fh = (int *)callback.handle->f_handle;
 		LogFullDebug(COMPONENT_FSAL_UP,
 			     " inode update: handle %08x %08x %08x %08x %08x %08x %08x",
-			     fhP[0], fhP[1], fhP[2], fhP[3], fhP[4], fhP[5],
-			     fhP[6]);
+			     fh[0], fh[1], fh[2], fh[3], fh[4], fh[5], fh[6]);
 
 		/* Here is where we decide what type of event this is
 		 * ... open,close,read,...,invalidate? */
@@ -179,11 +173,11 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 			{
 				LogMidDebug(COMPONENT_FSAL_UP,
 					    "%s: owner %p pid %d type %d start %lld len %lld",
-					    reason ==
-					    INODE_LOCK_GRANTED ?
-					    "inode lock granted" :
-					    "inode lock again", fl.lock_owner,
-					    fl.flock.l_pid, fl.flock.l_type,
+					    reason == INODE_LOCK_GRANTED ?
+						"inode lock granted" :
+						"inode lock again",
+					    fl.lock_owner, fl.flock.l_pid,
+					    fl.flock.l_type,
 					    (long long)fl.flock.l_start,
 					    (long long)fl.flock.l_len);
 
@@ -193,6 +187,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 					.lock_start = fl.flock.l_start,
 					.lock_length = fl.flock.l_len
 				};
+
 				if (reason == INODE_LOCK_AGAIN)
 					fsal_status = up_async_lock_avail(
 							 general_fridge,
@@ -235,9 +230,8 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 							event_func->export,
 							&key,
 							LAYOUT4_NFSV4_1_FILES,
-							false, &segment,
-							NULL, NULL, NULL,
-							NULL);
+							false, &segment, NULL,
+							NULL, NULL, NULL);
 			}
 			break;
 
@@ -259,10 +253,8 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		case LAYOUT_NOTIFY_DEVICEID:	/* Device update Event */
 			LogDebug(COMPONENT_FSAL_UP,
 				"layout dev update: flags:%x ino %ld seq %d fd %d fsid 0x%"
-				PRIx64, flags,
-				callback.buf->st_ino,
-				devid.device_id2,
-				devid.device_id4,
+				PRIx64, flags, callback.buf->st_ino,
+				devid.device_id2, devid.device_id4,
 				devid.devid);
 
 			memset(&devid, 0, sizeof(devid));
@@ -272,9 +264,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 						event_func->export,
 						NOTIFY_DEVICEID4_DELETE_MASK,
 						LAYOUT4_NFSV4_1_FILES,
-						&devid,
-						true, NULL,
-						NULL);
+						&devid, true, NULL, NULL);
 			break;
 
 		case INODE_UPDATE:	/* Update Event */
