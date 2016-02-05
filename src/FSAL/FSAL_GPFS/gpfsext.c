@@ -139,9 +139,9 @@ static void valgrind_kganesha(struct kxArgs *args)
 */
 int gpfs_ganesha(int op, void *oarg)
 {
-	int rc;
 	static int gpfs_fd = -1;
-	struct kxArgs args;
+	struct kxArgs args = {0};
+	int rc;
 
 	if (gpfs_fd < 0) {
 		gpfs_fd = open(GPFS_DEVNAMEX, O_RDONLY);
