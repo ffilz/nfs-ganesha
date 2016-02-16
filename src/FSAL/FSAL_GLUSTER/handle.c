@@ -1127,6 +1127,53 @@ static fsal_status_t file_write(struct fsal_obj_handle *obj_hdl,
 }
 
 /**
+ * @brief Implements GLUSTER FSAL objectoperation seek (DATA/HOLE)
+ */
+
+static fsal_status_t seek(struct fsal_obj_handle *obj_hdl, struct io_info *info)
+{
+	off_t ret = 0, offset = info->io_content.hole.di_offset;
+	int what = 0;
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	struct glusterfs_handle *objhandle =
+	    container_of(obj_hdl, struct glusterfs_handle, handle);
+#ifdef GLTIMING
+	struct timespec s_time, e_time;
+
+	now(&s_time);
+#endif
+
+	if (info->io_content.what == NFS4_CONTENT_DATA)
+		what = SEEK_DATA;
+	else if (info->io_content.what == NFS4_CONTENT_HOLE)
+		what = SEEK_HOLE;
+	else
+		return fsalstat(ERR_FSAL_UNION_NOTSUPP, 0);
+
+	ret = glfs_lseek(objhandle->glfd, offset, what);
+	if (ret < 0) {
+		if (errno == ENXIO) {
+			info->io_eof = TRUE;
+			info->io_content.hole.di_offset =
+					objhandle->attributes.filesize;
+		} else {
+			status = gluster2fsal_error(errno);
+		}
+		goto out;
+	} else {
+		info->io_eof = FALSE;
+		info->io_content.hole.di_offset = ret;
+	}
+
+ out:
+#ifdef GLTIMING
+	now(&e_time);
+	latency_update(&s_time, &e_time, lat_file_seek);
+#endif
+	return status;
+}
+
+/**
  * @brief Implements GLUSTER FSAL objectoperation commit
  *
  * This function commits the entire file and ignores the range provided
@@ -1538,6 +1585,7 @@ void handle_ops_init(struct fsal_obj_ops *ops)
 	ops->status = file_status;
 	ops->read = file_read;
 	ops->write = file_write;
+	ops->seek = seek;
 	ops->commit = commit;
 	ops->lock_op = lock_op;
 	ops->close = file_close;
