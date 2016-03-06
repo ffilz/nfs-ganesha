@@ -381,6 +381,11 @@ posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 				d_entry = find_entry(dup_acl, ACL_USER_OBJ, 0);
 				ret = acl_get_entry(dup_acl, ACL_NEXT_ENTRY,
 						&d_entry);
+				if (ret == 0 || ret == -1) {
+					LogDebug(COMPONENT_FSAL,
+					"No more ACL entires remaining");
+					break;
+				}
 			} else
 				d_entry = find_entry(dup_acl, ACL_GROUP_OBJ, 0);
 
