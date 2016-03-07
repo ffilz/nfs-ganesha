@@ -1198,6 +1198,7 @@ static int do_block_load(struct config_node *blk,
 					     item->name,
 					     item->u.lst.mask, num32,
 					     *(uint32_t *)param_addr);
+				break;
 			case CONFIG_ENUM_SET:
 				if (item->u.lst.def ==
 				   (*(uint32_t *)param_addr & item->u.lst.mask))

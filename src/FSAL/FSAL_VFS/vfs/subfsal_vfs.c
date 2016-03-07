@@ -52,7 +52,7 @@ static struct config_item_list fsid_types[] = {
 
 static struct config_item export_params[] = {
 	CONF_ITEM_NOOP("name"),
-	CONF_ITEM_ENUM("fsid_type", -1,
+	CONF_ITEM_ENUM("fsid_type", FSID_NO_TYPE,
 		       fsid_types,
 		       vfs_fsal_export, fsid_type),
 	CONFIG_EOL
