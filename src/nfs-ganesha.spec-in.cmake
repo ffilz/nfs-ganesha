@@ -12,6 +12,11 @@
 %global with_systemd 0
 %endif
 
+%if ( 0%{?suse_version} > 1210 )
+%global with_systemd 1
+%global with_nfsidmap 1
+%endif
+
 # Conditionally enable some FSALs, disable others.
 #
 # 1. rpmbuild accepts these options (gpfs as example):
@@ -100,22 +105,36 @@ BuildRequires:	bison flex
 BuildRequires:	flex
 BuildRequires:	pkgconfig
 BuildRequires:	krb5-devel
+%if ( 0%{?suse_version} > 1210 )
+BuildRequires:	dbus-1-devel
+Requires:	dbus-1
+%else
 BuildRequires:	dbus-devel
+Requires:	dbus
+%endif
+
+%if ( 0%{?suse_version} > 1210 )
+BuildRequires:	systemd-rpm-macros
+%endif
+
 BuildRequires:	libcap-devel
 BuildRequires:	libblkid-devel
 BuildRequires:	libuuid-devel
 %if %{with system_ntirpc}
 BuildRequires: libntirpc-devel >= @NTIRPC_VERSION@
 %endif
-Requires:	dbus
 Requires:	nfs-utils
-%if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 6 )
+%if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 6 ) || ( 0%{?suse_version} > 1210 )
 Requires:	rpcbind
 %else
 Requires:	portmap
 %endif
 %if %{with_nfsidmap}
+%if ( 0%{?suse_version} > 1210 )
+BuildRequires:	nfsidmap-devel
+%else
 BuildRequires:	libnfsidmap-devel
+%endif
 %else
 BuildRequires:	nfs-utils-lib-devel
 %endif
@@ -176,10 +195,19 @@ be used with NFS-Ganesha to support PROXY based filesystems
 %package utils
 Summary: The NFS-GANESHA's util scripts
 Group: Applications/System
+%if ( 0%{?suse_version} > 1210 )
+Requires:	dbus-1-python, python-gobject2
+%else
 Requires:	dbus-python, pygobject2
+%endif
 %if %{with gui_utils}
+%if ( 0%{?suse_version} > 1210 )
+BuildRequires:	python-qt4-devel
+Requires:	python-qt4
+%else
 BuildRequires:	PyQt4-devel
 Requires:	PyQt4
+%endif
 %endif
 Requires: nfs-ganesha = %{version}-%{release}, python
 
@@ -424,6 +452,8 @@ install -m 755 scripts/init.d/nfs-ganesha		%{buildroot}%{_sysconfdir}/init.d/nfs
 install -m 644 scripts/init.d/sysconfig/ganesha		%{buildroot}%{_sysconfdir}/sysconfig/ganesha
 %endif
 
+echo "LIBEXECDIR=%{_libexecdir}/ganesha" >> %{buildroot}%{_sysconfdir}/sysconfig/ganesha
+
 %if %{with utils} && 0%{?rhel} && 0%{?rhel} <= 6
 %{!?__python2: %global __python2 /usr/bin/python2}
 %{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
@@ -466,21 +496,39 @@ install -m 755 scripts/init.d/nfs-ganesha.gpfs		%{buildroot}%{_sysconfdir}/init.
 make DESTDIR=%{buildroot} install
 
 %post
+%if ( 0%{?suse_version} > 1210 )
+%if %{with_systemd}
+%service_add_post nfs-ganesha.service nfs-ganesha-lock.service nfs-ganesha-config.service
+%endif
+%else
 %if %{with_systemd}
 %systemd_post nfs-ganesha.service
 %systemd_post nfs-ganesha-lock.service
 %systemd_post nfs-ganesha-config.service
 %endif
+%endif
 killall -SIGHUP dbus-daemon 2>&1 > /dev/null
 
 %preun
+%if ( 0%{?suse_version} > 1210 )
+%if %{with_systemd}
+%service_del_preun nfs-ganesha-lock.service
+%endif
+%else
 %if %{with_systemd}
 %systemd_preun nfs-ganesha-lock.service
 %endif
+%endif
 
 %postun
+%if ( 0%{?suse_version} > 1210 )
+%if %{with_systemd}
+%service_del_postun nfs-ganesha-lock.service
+%endif
+%else
 %if %{with_systemd}
 %systemd_postun_with_restart nfs-ganesha-lock.service
+%endif
 %endif
 
 %files
@@ -624,8 +672,13 @@ killall -SIGHUP dbus-daemon 2>&1 > /dev/null
 %if %{with utils}
 %files utils
 %defattr(-,root,root,-)
+%if ( 0%{?suse_version} > 0  || 0%{?fedora} )
+%{python_sitelib}/Ganesha/*
+%{python_sitelib}/ganeshactl-*-info
+%else
 %{python2_sitelib}/Ganesha/*
 %{python2_sitelib}/ganeshactl-*-info
+%endif
 %if %{with gui_utils}
 %{_bindir}/ganesha-admin
 %{_bindir}/manage_clients
