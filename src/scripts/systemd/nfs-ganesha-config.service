@@ -3,5 +3,6 @@ Description=Process NFS-Ganesha configuration
 DefaultDependencies=no
 
 [Service]
+EnvironmentFile=-/etc/sysconfig/ganesha
 Type=oneshot
-ExecStart=/usr/libexec/ganesha/nfs-ganesha-config.sh
+ExecStart=/bin/sh -c `$LIBEXECDIR/nfs-ganesha-config.sh`
