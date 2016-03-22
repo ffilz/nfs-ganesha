@@ -431,8 +431,10 @@ struct deleg_stats {
 };
 
 static struct global_stats global_st;
+#if DFG_LATER
 struct cache_stats cache_st;
 struct cache_stats *cache_stp = &cache_st;
+#endif /* DFG_LATER */
 
 /* include the top level server_stats struct definition
  */
@@ -1712,6 +1714,7 @@ void cache_inode_dbus_show(DBusMessageIter *iter)
 
 	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
 					 &struct_iter);
+#if DFG_LATER
 	type = "cache_req";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
@@ -1736,6 +1739,7 @@ void cache_inode_dbus_show(DBusMessageIter *iter)
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
 					&cache_st.inode_mapping);
+#endif /* DFG_LATER */
 
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
