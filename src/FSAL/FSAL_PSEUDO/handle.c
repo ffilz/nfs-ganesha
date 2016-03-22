@@ -524,7 +524,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 		if (hdl->index < seekloc)
 			continue;
 
-		if (!cb(hdl->name, dir_state, hdl->index)) {
+		if (!cb(hdl->name, &hdl->obj_handle, dir_state, hdl->index)) {
 			*eof = false;
 			break;
 		}
