@@ -912,7 +912,6 @@ void gpfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->lock_op = gpfs_lock_op;
 	ops->share_op = share_op;
 	ops->close = gpfs_close;
-	ops->lru_cleanup = gpfs_lru_cleanup;
 	ops->handle_digest = handle_digest;
 	ops->handle_to_key = handle_to_key;
 	handle_ops_pnfs(ops);
