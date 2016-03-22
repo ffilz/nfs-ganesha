@@ -242,6 +242,8 @@ int nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 
 	PTHREAD_MUTEX_unlock(&open_owner->so_mutex);
 
+	PTHREAD_RWLOCK_wrlock(&data->current_obj->state_hdl->state_lock);
+
 	/* Check is held locks remain */
 	glist_for_each(glist, &state_found->state_data.share.share_lockstates) {
 		state_t *lock_state = glist_entry(glist,
@@ -257,6 +259,8 @@ int nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 			 */
 			res_CLOSE4->status = NFS4ERR_LOCKS_HELD;
 
+			PTHREAD_RWLOCK_unlock(
+				&data->current_obj->state_hdl->state_lock);
 			LogDebug(COMPONENT_STATE,
 				 "NFS4 Close with existing locks");
 			goto out;
@@ -327,6 +331,8 @@ int nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 		if (FSAL_IS_ERROR(fsal_status)
 		    && (fsal_status.major != ERR_FSAL_NOT_OPENED)) {
 			res_CLOSE4->status = nfs4_Errno_status(fsal_status);
+			PTHREAD_RWLOCK_unlock(
+				&data->current_obj->state_hdl->state_lock);
 			goto out;
 		}
 	}
@@ -334,6 +340,7 @@ int nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	if (data->minorversion == 0)
 		op_ctx->clientid = NULL;
 
+	PTHREAD_RWLOCK_unlock(&data->current_obj->state_hdl->state_lock);
 	res_CLOSE4->status = NFS4_OK;
 
 	if (isFullDebug(COMPONENT_STATE) && isFullDebug(COMPONENT_MEMLEAKS)) {

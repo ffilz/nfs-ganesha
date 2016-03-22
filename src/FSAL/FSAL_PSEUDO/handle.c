@@ -759,7 +759,6 @@ void pseudofs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->commit = pseudofs_commit;
 	ops->lock_op = pseudofs_lock_op;
 	ops->close = pseudofs_close;
-	ops->lru_cleanup = pseudofs_lru_cleanup;
 	ops->handle_digest = handle_digest;
 	ops->handle_to_key = handle_to_key;
 
