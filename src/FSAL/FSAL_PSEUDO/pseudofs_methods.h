@@ -110,8 +110,6 @@ fsal_status_t pseudofs_lock_op(struct fsal_obj_handle *obj_hdl,
 fsal_status_t pseudofs_share_op(struct fsal_obj_handle *obj_hdl, void *p_owner,
 			      fsal_share_param_t request_share);
 fsal_status_t pseudofs_close(struct fsal_obj_handle *obj_hdl);
-fsal_status_t pseudofs_lru_cleanup(struct fsal_obj_handle *obj_hdl,
-				 lru_actions_t requests);
 
 /* extended attributes management */
 fsal_status_t pseudofs_list_ext_attrs(struct fsal_obj_handle *obj_hdl,
