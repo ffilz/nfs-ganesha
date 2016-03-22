@@ -325,6 +325,9 @@ int nfs4_op_create(struct nfs_argop4 *op, compound_data_t *data,
 	/* Keep the vnode entry for the file in the compound data */
 	set_current_entry(data, obj_new);
 
+	/* Put our ref */
+	obj_new->obj_ops.put_ref(obj_new);
+
 	/* If you reach this point, then no error occured */
 	res_CREATE4->status = NFS4_OK;
 
