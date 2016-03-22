@@ -67,6 +67,7 @@ int nlm4_Granted_Res(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 
 	/*PTHREAD_RWLOCK_wrlock(&cookie_entry->sce_entry->state_lock);*/
 
+	/* XXX dang this does nothing that could require a write lock */
 	if (cookie_entry->sce_lock_entry == NULL
 	    || cookie_entry->sce_lock_entry->sle_block_data == NULL) {
 		/* This must be an old NLM_GRANTED_RES */
