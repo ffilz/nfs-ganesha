@@ -100,10 +100,6 @@ int nfs4_op_savefh(struct nfs_argop4 *op, compound_data_t *data,
 
 	data->savedFH.nfs_fh4_len = data->currentFH.nfs_fh4_len;
 
-	/* Save the current stateid */
-	data->saved_stateid = data->current_stateid;
-	data->saved_stateid_valid = data->current_stateid_valid;
-
 	/* If old SavedFH had a related export, release reference. */
 	if (data->saved_export != NULL)
 		put_gsh_export(data->saved_export);
@@ -116,18 +112,11 @@ int nfs4_op_savefh(struct nfs_argop4 *op, compound_data_t *data,
 	if (data->saved_obj == data->current_obj)
 		goto out;
 
-	if (data->saved_obj) {
-		data->saved_obj->obj_ops.release(data->saved_obj);
-		data->saved_obj = NULL;
-	}
+	set_saved_entry(data, data->current_obj);
 
-	if (data->saved_ds) {
-		ds_handle_put(data->saved_ds);
-		data->saved_ds = NULL;
-	}
-
-	data->saved_obj = data->current_obj;
-	data->saved_filetype = data->current_filetype;
+	/* Save the current stateid */
+	data->saved_stateid = data->current_stateid;
+	data->saved_stateid_valid = data->current_stateid_valid;
 
 	/* Make SAVEFH work right for DS handle */
 	if (data->current_ds != NULL) {
