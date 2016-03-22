@@ -580,7 +580,6 @@ void nullfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->commit = nullfs_commit;
 	ops->lock_op = nullfs_lock_op;
 	ops->close = nullfs_close;
-	ops->lru_cleanup = nullfs_lru_cleanup;
 	ops->handle_digest = handle_digest;
 	ops->handle_to_key = handle_to_key;
 
