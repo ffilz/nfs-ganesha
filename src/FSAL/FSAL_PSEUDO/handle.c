@@ -225,10 +225,6 @@ static struct pseudo_fsal_obj_handle
 
 	hdl->obj_handle.type = DIRECTORY;
 
-	/* State handle */
-	state_hdl_init(&hdl->ostate, DIRECTORY, &hdl->obj_handle);
-	hdl->obj_handle.state_hdl = &hdl->ostate;
-
 	/* Fills the output struct */
 	hdl->attributes.type = DIRECTORY;
 	FSAL_SET_MASK(hdl->attributes.mask, ATTR_TYPE);
@@ -763,7 +759,6 @@ void pseudofs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->commit = pseudofs_commit;
 	ops->lock_op = pseudofs_lock_op;
 	ops->close = pseudofs_close;
-	ops->lru_cleanup = pseudofs_lru_cleanup;
 	ops->handle_digest = handle_digest;
 	ops->handle_to_key = handle_to_key;
 

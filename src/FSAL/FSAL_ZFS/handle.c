@@ -975,7 +975,6 @@ void zfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->commit = tank_commit;
 	ops->lock_op = tank_lock_op;
 	ops->close = tank_close;
-	ops->lru_cleanup = tank_lru_cleanup;
 	ops->handle_digest = tank_handle_digest;
 	ops->handle_to_key = tank_handle_to_key;
 

@@ -658,7 +658,6 @@ void pt_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->write = pt_write;
 	ops->commit = pt_commit;
 	ops->close = pt_close;
-	ops->lru_cleanup = pt_lru_cleanup;
 	ops->handle_digest = handle_digest;
 	ops->handle_to_key = handle_to_key;
 }
