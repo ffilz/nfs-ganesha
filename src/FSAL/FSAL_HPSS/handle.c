@@ -1469,7 +1469,6 @@ void hpss_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->commit = hpss_commit;
 	ops->lock_op = hpss_lock_op;
 	ops->close = hpss_close;
-	ops->lru_cleanup = hpss_lru_cleanup;
 	ops->handle_digest = hpss_handle_digest;
 	ops->handle_to_key = hpss_handle_to_key;
 
