@@ -1232,7 +1232,6 @@ void lustre_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->commit = lustre_commit;
 	ops->lock_op = lustre_lock_op;
 	ops->close = lustre_close;
-	ops->lru_cleanup = lustre_lru_cleanup;
 	ops->handle_digest = lustre_handle_digest;
 	ops->handle_to_key = lustre_handle_to_key;
 
