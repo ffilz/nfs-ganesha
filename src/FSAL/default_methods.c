@@ -1116,16 +1116,6 @@ static fsal_status_t remove_extattr_by_name(struct fsal_obj_handle *obj_hdl,
 	return fsalstat(ERR_FSAL_NOTSUPP, 0);
 }
 
-/* lru_cleanup
- * default case always be happy
- */
-
-static fsal_status_t lru_cleanup(struct fsal_obj_handle *obj_hdl,
-				 lru_actions_t requests)
-{
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
-}
-
 /* handle_digest
  * default case server fault
  */
@@ -1458,7 +1448,6 @@ struct fsal_obj_ops def_handle_ops = {
 	.remove_extattr_by_id = remove_extattr_by_id,
 	.remove_extattr_by_name = remove_extattr_by_name,
 	.handle_is = handle_is,
-	.lru_cleanup = lru_cleanup,
 	.handle_digest = handle_digest,
 	.handle_cmp = handle_cmp,
 	.handle_to_key = handle_to_key,

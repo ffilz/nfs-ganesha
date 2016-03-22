@@ -216,6 +216,7 @@ static void nlm4_send_grant_msg(state_async_queue_t *arg)
 
 	/*PTHREAD_RWLOCK_wrlock(&cookie_entry->sce_entry->state_lock);*/
 
+	/* XXX dang this does nothing that could require a write lock */
 	if (cookie_entry->sce_lock_entry->sle_block_data == NULL) {
 		/* Wow, we're not doing well... */
 		/*PTHREAD_RWLOCK_unlock(&cookie_entry->sce_entry->state_lock);*/

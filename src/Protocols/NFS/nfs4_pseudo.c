@@ -197,8 +197,9 @@ retry:
 		return false;
 	}
 
-	if (strcmp(op_ctx->export->fsal_export->fsal->name,
-		   "PSEUDO") != 0) {
+	if (strncmp(op_ctx->export->fsal_export->exp_ops.get_name(
+				 op_ctx->export->fsal_export),
+		   "PSEUDO", 6) != 0) {
 		/* Only allowed to create directories on FSAL_PSEUDO */
 		LogCrit(COMPONENT_EXPORT,
 			"BUILDING PSEUDOFS: Export_Id %d Path %s Pseudo Path %s LOOKUP %s failed with %s (can't create directory on non-PSEUDO FSAL)",
@@ -347,8 +348,7 @@ bool pseudo_mount_export(struct gsh_export *export)
 		 export->pseudopath, rest);
 
 	/* Get the root inode of the mounted on export */
-	fsal_status = nfs_export_get_root_entry(op_ctx->export,
-						 &state.obj);
+	fsal_status = nfs_export_get_root_entry(op_ctx->export, &state.obj);
 
 	if (FSAL_IS_ERROR(fsal_status)) {
 		LogCrit(COMPONENT_EXPORT,
@@ -416,6 +416,13 @@ bool pseudo_mount_export(struct gsh_export *export)
 	PTHREAD_RWLOCK_unlock(&op_ctx->export->lock);
 
 	PTHREAD_RWLOCK_unlock(&export->lock);
+
+	LogDebug(COMPONENT_EXPORT,
+		 "BUILDING PSEUDOFS: Export_Id %d Path %s Pseudo Path %s junction %p",
+		 state.export->export_id,
+		 state.export->fullpath,
+		 state.export->pseudopath,
+		 state.obj->state_hdl->dir.junction_export);
 
 	return true;
 }
