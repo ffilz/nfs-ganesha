@@ -220,11 +220,11 @@ static void fsal_pnfs_ds_ops(struct fsal_pnfs_ds_ops *ops)
 /**
  * @brief Indicate support for extended operations.
  *
- * @param[in]  fsal_hdl		FSAL module
+ * @param[in]  obj	Object being operated on
  *
  * @retval true if extended operations are supported.
  */
-static bool support_ex(void)
+static bool support_ex(struct fsal_obj_handle *obj)
 {
 	return false;
 }
@@ -1115,16 +1115,6 @@ static fsal_status_t remove_extattr_by_name(struct fsal_obj_handle *obj_hdl,
 	return fsalstat(ERR_FSAL_NOTSUPP, 0);
 }
 
-/* lru_cleanup
- * default case always be happy
- */
-
-static fsal_status_t lru_cleanup(struct fsal_obj_handle *obj_hdl,
-				 lru_actions_t requests)
-{
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
-}
-
 /* handle_digest
  * default case server fault
  */
@@ -1457,7 +1447,6 @@ struct fsal_obj_ops def_handle_ops = {
 	.remove_extattr_by_id = remove_extattr_by_id,
 	.remove_extattr_by_name = remove_extattr_by_name,
 	.handle_is = handle_is,
-	.lru_cleanup = lru_cleanup,
 	.handle_digest = handle_digest,
 	.handle_cmp = handle_cmp,
 	.handle_to_key = handle_to_key,
