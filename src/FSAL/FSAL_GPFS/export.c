@@ -46,6 +46,7 @@
 #include "nfs_exports.h"
 #include "export_mgr.h"
 #include "pnfs_utils.h"
+#include "mdcache.h"
 
 /* export object methods
  */
@@ -743,7 +744,6 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl,
 
 	fsal_export_init(&myself->export);
 	gpfs_export_ops_init(&myself->export.exp_ops);
-	myself->export.up_ops = up_ops;
 
 	status.minor = fsal_attach_export(fsal_hdl, &myself->export.exports);
 	if (status.minor != 0) {
@@ -832,15 +832,20 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl,
 		LogInfo(COMPONENT_FSAL,
 			"gpfs_fsal_create: pnfs ds was enabled for [%s]",
 			op_ctx->export->fullpath);
-	}
-	if (myself->pnfs_mds_enabled) {
-		LogInfo(COMPONENT_FSAL,
-			"gpfs_fsal_create: pnfs mds was enabled for [%s]",
-			op_ctx->export->fullpath);
 		export_ops_pnfs(&myself->export.exp_ops);
 	}
 	myself->use_acl =
 		!(op_ctx->export->options & EXPORT_OPTION_DISABLE_ACL);
+
+	/* Stack MDCACHE on top */
+	status = mdcache_export_init(up_ops, &myself->export.up_ops);
+	if (FSAL_IS_ERROR(status)) {
+		LogDebug(COMPONENT_FSAL, "MDCACHE creation failed for GPFS");
+		if (myself->pnfs_ds_enabled)
+			pnfs_ds_remove(op_ctx->export->export_id, false);
+		goto detach;
+	}
+
 	return status;
 
 detach:
