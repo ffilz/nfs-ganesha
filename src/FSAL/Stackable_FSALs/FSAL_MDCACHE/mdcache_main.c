@@ -178,7 +178,7 @@ mdcache_fsal_init_config(struct fsal_module *fsal_hdl,
  * @return FSAL status
  */
 fsal_status_t mdcache_export_init(const struct fsal_up_vector *super_up_ops,
-				  struct fsal_up_vector **mdc_up_ops)
+				  const struct fsal_up_vector **mdc_up_ops)
 {
 	struct mdcache_fsal_export *exp;
 	struct fsal_up_vector my_up_ops;
@@ -186,7 +186,7 @@ fsal_status_t mdcache_export_init(const struct fsal_up_vector *super_up_ops,
 
 	*mdc_up_ops = NULL;
 	mdcache_export_up_ops_init(&my_up_ops, super_up_ops);
-	status =  mdcache_init_export(&MDCACHE.fsal, &my_up_ops);
+	status =  mdc_init_export(&MDCACHE.fsal, &my_up_ops);
 	if (FSAL_IS_ERROR(status))
 		return status;
 
