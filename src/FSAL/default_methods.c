@@ -250,7 +250,7 @@ struct fsal_ops def_fsal_ops = {
  * default case is to return the name of the FSAL
  */
 
-static char *get_name(struct fsal_export *exp_hdl)
+static const char *get_name(struct fsal_export *exp_hdl)
 {
 	return exp_hdl->fsal->name;
 }

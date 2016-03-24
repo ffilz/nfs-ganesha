@@ -69,7 +69,7 @@ struct fsal_staticfsinfo_t *mdcache_staticinfo(struct fsal_module *hdl);
  * @param[in] exp_hdl	Our export handle
  * @return Name of sub-FSAL
  */
-static char *mdcache_get_name(struct fsal_export *exp_hdl)
+static const char *mdcache_get_name(struct fsal_export *exp_hdl)
 {
 	struct mdcache_fsal_export *exp = mdc_cur_export();
 

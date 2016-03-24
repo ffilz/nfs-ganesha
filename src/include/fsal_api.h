@@ -649,7 +649,7 @@ struct export_ops {
  * @param[in] exp_hdl The export to query.
  * @return Name of FSAL provisioning export
  */
-	 char *(*get_name)(struct fsal_export *exp_hdl);
+	 const char *(*get_name)(struct fsal_export *exp_hdl);
 /**@}*/
 
 /**@{*/
