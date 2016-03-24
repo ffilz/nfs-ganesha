@@ -898,10 +898,7 @@ fsal_status_t fsal_lookupp(struct fsal_obj_handle *obj,
 		fsal_status_t status = {0, 0};
 		struct fsal_obj_handle *root_obj = NULL;
 
-		status = op_ctx->export->fsal_export->exp_ops.lookup_path(
-					op_ctx->export->fsal_export,
-					op_ctx->export->fullpath,
-					&root_obj);
+		status = nfs_export_get_root_entry(op_ctx->export, &root_obj);
 		if (FSAL_IS_ERROR(status))
 			return status;
 
