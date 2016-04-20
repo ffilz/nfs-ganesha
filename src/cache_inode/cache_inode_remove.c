@@ -213,8 +213,11 @@ cache_inode_remove(cache_entry_t *entry, const char *name)
 		goto out;
 	}
 
-	/* Update the attributes for the removed entry */
-	(void)cache_inode_refresh_attrs_locked(to_remove_entry);
+	/* Fetch the attributes only if there are any links to this file */
+	if (to_remove_entry->obj_handle->attrs->numlinks > 1) {
+		/* Update the attributes for the removed entry */
+		(void)cache_inode_refresh_attrs_locked(to_remove_entry);
+	}
 
 	status = status_ref_entry;
 	if (status != CACHE_INODE_SUCCESS) {
