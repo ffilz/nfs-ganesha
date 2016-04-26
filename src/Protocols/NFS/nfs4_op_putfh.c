@@ -181,8 +181,12 @@ static int nfs4_mds_putfh(compound_data_t *data)
 		int status;
 
 		status = nfs4_export_check_access(data->req);
-		if (status != NFS4_OK)
+		if (status != NFS4_OK) {
+			LogFullDebug(COMPONENT_FILEHANDLE,
+				     "Export check access failed %s",
+				     nfsstat4_to_str(status));
 			return status;
+		}
 	}
 
 	op_ctx->fsal_export = fsal_data.export = exporting->fsal_export;
@@ -193,13 +197,25 @@ static int nfs4_mds_putfh(compound_data_t *data)
 	fsal_status = fsal_data.export->exp_ops.extract_handle(fsal_data.export,
 			       FSAL_DIGEST_NFSV4, &fsal_data.fh_desc,
 			       v4_handle->fhflags1);
-	if (FSAL_IS_ERROR(fsal_status))
+	if (FSAL_IS_ERROR(fsal_status)) {
+		LogFullDebug(COMPONENT_FILEHANDLE,
+			     "extract_handle failed %s",
+			     msg_fsal_err(fsal_status.major));
 		return nfs4_Errno(cache_inode_error_convert(fsal_status));
+	}
 
 	/* Build the pentry.  Refcount +1. */
 	cache_status = cache_inode_get(&fsal_data, &file_entry);
-	if (cache_status != CACHE_INODE_SUCCESS)
+	if (cache_status != CACHE_INODE_SUCCESS) {
+		LogFullDebug(COMPONENT_FILEHANDLE,
+			     "cache_inode_get failed %s",
+			     cache_inode_err_str(cache_status));
 		return nfs4_Errno(cache_status);
+	}
+	LogFullDebug(COMPONENT_FILEHANDLE,
+		     "entry=%p refcnt=%"PRIu32,
+		     file_entry,
+		     atomic_fetch_int32_t(&file_entry->lru.refcnt));
 
 	/* Set the current entry using the ref from get */
 	set_current_entry(data, file_entry);
