@@ -213,8 +213,20 @@ cache_inode_remove(cache_entry_t *entry, const char *name)
 		goto out;
 	}
 
-	/* Update the attributes for the removed entry */
-	(void)cache_inode_refresh_attrs_locked(to_remove_entry);
+	/* Update the attributes for the removed entry. We do this to assure
+	 * we know as well as possible if link count went to zero, and if so
+	 * make sure we unhash the cache inode entry.
+	 */
+	PTHREAD_RWLOCK_rdlock(&to_remove_entry->attr_lock);
+	(void)cache_inode_refresh_attrs(to_remove_entry);
+	LogFullDebug(COMPONENT_CACHE_INODE,
+		     "Entry %p numlinks %d",
+		     to_remove_entry,
+		     to_remove_entry->obj_handle->attrs->numlinks);
+	/* Make sure inode goes stale if numlinks goes to 0 */
+	if (to_remove_entry->obj_handle->attrs->numlinks == 0)
+		cache_inode_kill_entry(to_remove_entry);
+	PTHREAD_RWLOCK_unlock(&to_remove_entry->attr_lock);
 
 	status = status_ref_entry;
 	if (status != CACHE_INODE_SUCCESS) {
