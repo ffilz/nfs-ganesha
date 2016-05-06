@@ -785,7 +785,11 @@ void release_openstate(state_owner_t *owner)
 		/* If FSAL supports extended operations, file will be closed by
 		 * state_del_locked.
 		 */
+
+		/* Don't cleanup when ref is dropped inside */
+		obj->state_hdl->no_cleanup = true;
 		state_del_locked(state);
+		obj->state_hdl->no_cleanup = false;
 
 		dec_state_t_ref(state);
 
