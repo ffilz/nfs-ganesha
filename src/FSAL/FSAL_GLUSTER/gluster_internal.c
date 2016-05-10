@@ -48,9 +48,14 @@
 fsal_status_t gluster2fsal_error(const int err)
 {
 	fsal_status_t status;
+	int g_err = err;
 
-	status.minor = err;
-	status.major = posix2fsal_error(err);
+	if (!g_err) {
+		LogWarn(COMPONENT_FSAL, "appropriate errno not set");
+		g_err = EINVAL;
+	}
+	status.minor = g_err;
+	status.major = posix2fsal_error(g_err);
 
 	return status;
 }
