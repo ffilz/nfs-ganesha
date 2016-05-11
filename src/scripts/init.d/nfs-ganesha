@@ -19,7 +19,9 @@
 
 
 # source function library
-. /etc/rc.d/init.d/functions
+#. /etc/rc.d/init.d/functions
+. /lib/lsb/init-functions
+
 
 PATHPROG=/usr/bin/ganesha.nfsd
 
@@ -31,14 +33,11 @@ prog=ganesha.nfsd
 PID_FILE=${PID_FILE:=/var/run/${prog}.pid}
 LOCK_FILE=${LOCK_FILE:=/var/lock/subsys/${prog}}
 
-
-# Generate and read config values
-[ -x /usr/libexec/ganesha/nfs-ganesha-config.sh ] && /usr/libexec/ganesha/nfs-ganesha-config.sh
-[ -f /run/sysconfig/ganesha ] && . /run/sysconfig/ganesha
+[ -f /etc/sysconfig/ganesha ] && . /etc/sysconfig/ganesha
 
 [ -z "$NOFILE" ] && NOFILE=1048576
 
-OPTIONS="-L $LOGFILE -f $CONFFILE -N NIV_EVENT -p $PID_FILE $EPOCH"
+OPTIONS="-L $LOGFILE -f $CONFFILE -N NIV_EVENT -p $PID_FILE "
 RETVAL=0
 
 
@@ -49,13 +48,21 @@ start() {
                 failure
         else
 		ulimit -n $NOFILE
-                daemon --pidfile $PID_FILE $PATHPROG $OPTIONS
-                RETVAL=$?
-                if [ $RETVAL -eq 0 ]; then
-		            touch $LOCK_FILE
-		        else
-		            RETVAL=1
+		log_daemon_msg "Starting nfs-ganesha daemon" nfs-ganesha
+		if ! start-stop-daemon --start --oknodo --quiet --pidfile $PID_FILE --exec $PATHPROG -- $OPTIONS; then
+			log_end_msg 1
+                        exit 1
                 fi
+		touch $LOCK_FILE
+                log_end_msg 0
+
+                #daemon --pidfile $PID_FILE $PATHPROG $OPTIONS
+                #RETVAL=$?
+                #if [ $RETVAL -eq 0 ]; then
+		#	touch $LOCK_FILE
+		#        else
+		#           RETVAL=1
+                #fi
         fi
         echo
 }
@@ -66,18 +73,18 @@ stop() {
                 RETVAL=1
                 failure
         else
+		log_daemon_msg "Stopping nfs-ganesha daemon" nfs-ganesha
+		#start-stop-daemon --stop --quiet --pidfile
                 killproc $PATHPROG
                 RETVAL=$?
                 if [ $RETVAL -eq 0 ]; then
-		  rm -f  $LOCK_FILE
-                  success
+		  log_end_msg 0
+		  rm -rf $LOCK_FILE
 		else
-		  failure
+		  log_end_msg 1
                 fi
-
         fi
         echo
-        return $RETVAL
 }
 
 case "$1" in
