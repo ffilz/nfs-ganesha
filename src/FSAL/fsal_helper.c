@@ -1862,6 +1862,8 @@ fsal_status_t fsal_open(struct fsal_obj_handle *obj_hdl,
  */
 fsal_status_t fsal_close(struct fsal_obj_handle *obj_hdl)
 {
+	fsal_status_t status = {0, 0};
+
 	if (obj_hdl->type != REGULAR_FILE) {
 		LogFullDebug(COMPONENT_FSAL,
 			     "Entry %p File not a REGULAR_FILE", obj_hdl);
@@ -1871,7 +1873,12 @@ fsal_status_t fsal_close(struct fsal_obj_handle *obj_hdl)
 	if (!fsal_is_open(obj_hdl))
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 
-	return obj_hdl->obj_ops.close(obj_hdl);
+	status = obj_hdl->obj_ops.close(obj_hdl);
+
+	if (!FSAL_IS_ERROR(status))
+		atomic_dec_size_t(&open_fd_count);
+
+	return status;
 }
 
 /**
