@@ -1432,6 +1432,235 @@ static inline bool open_correct(struct glusterfs_fd *my_fd,
 		   && (my_fd->openflags & openflags & FSAL_O_RDWR)
 						== (openflags & FSAL_O_RDWR));
 }
+
+/**
+ * @brief Reopen the fd associated with the object handle.
+ *
+ * This function assures that the fd is open in the mode requested. If
+ * the fd was already open, it closes it and reopens with the OR of the
+ * requested modes.
+ *
+ * This function will return with the object handle lock held for read
+ * if successful.
+ *
+ * @param[in]  myself      File on which to operate
+ * @param[in]  check_share Indicates we must check for share conflict
+ * @param[in]  openflags   Mode for open
+ * @param[out] fd          File descriptor that is to be used
+ * @param[out] has_lock    Indicates that obj_hdl->lock is held read
+ * @param[out] closefd     Indicates that file descriptor must be closed
+ *
+ * @return FSAL status.
+ */
+
+fsal_status_t glusterfs_reopen_obj(struct fsal_obj_handle *obj_hdl,
+			     bool check_share,
+			     bool bypass,
+			     fsal_openflags_t openflags,
+			     struct glusterfs_fd *my_fd_arg,
+			     bool *has_lock,
+			     bool *closefd)
+{
+	struct glusterfs_handle *myself;
+	int posix_flags = 0;
+	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+	int rc;
+	bool retried = false;
+	fsal_openflags_t try_openflags;
+	struct glusterfs_fd *my_fd = NULL;
+
+	/* Use the global file descriptor. */
+	myself = container_of(obj_hdl, struct glusterfs_handle, handle);
+	my_fd = &myself->globalfd;
+	*closefd = false;
+
+	/* Take read lock on object to protect file descriptor.
+	 * We only take a read lock because we are not changing the
+	 * state of the file descriptor.
+	 */
+	PTHREAD_RWLOCK_rdlock(&obj_hdl->lock);
+
+	if (check_share) {
+		/* Note we will check again if we drop and re-acquire the lock
+		 * just to be on the safe side.
+		 */
+		status = check_share_conflict(&myself->share,
+					      openflags,
+					      bypass);
+
+		if (FSAL_IS_ERROR(status)) {
+			PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+			*has_lock = false;
+			return status;
+		}
+	}
+
+again:
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "Open mode = %x, desired mode = %x",
+		     (int) my_fd->openflags,
+		     (int) openflags);
+
+	if (not_open_correct(my_fd, openflags)) {
+
+		/* Drop the rwlock */
+		PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+
+		if (retried) {
+			/* This really should never occur, it could occur
+			 * if there was some race with closing the file.
+			 */
+			LogDebug(COMPONENT_FSAL,
+				 "Retry failed, returning EBADF");
+			*has_lock = false;
+			return fsalstat(posix2fsal_error(EBADF), EBADF);
+		}
+
+		/* Switch to write lock on object to protect file descriptor.
+		 * By using trylock, we don't block if another thread is using
+		 * the file descriptor right now. In that case, we just open
+		 * a temporary file descriptor.
+		 *
+		 * This prevents us from blocking for the duration of an
+		 * I/O request.
+		 */
+		rc = pthread_rwlock_trywrlock(&obj_hdl->lock);
+		if (rc == EBUSY) {
+			/* Someone else is using the file descriptor.
+			 * Just provide a temporary file descriptor.
+			 * We still take a read lock so we can protect the
+			 * share reservation for the duration of the caller's
+			 * operation if we needed to check.
+			 */
+			if (check_share) {
+				PTHREAD_RWLOCK_rdlock(&obj_hdl->lock);
+
+				status =
+				    check_share_conflict(&myself->share,
+							 openflags,
+							 bypass);
+
+				if (FSAL_IS_ERROR(status)) {
+					PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+					*has_lock = false;
+					return status;
+				}
+			}
+
+			fsal2posix_openflags(openflags, &posix_flags);
+
+			status = glusterfs_open_my_fd(myself, openflags,
+						      posix_flags, my_fd);
+
+			if (FSAL_IS_ERROR(status)) {
+				LogDebug(COMPONENT_FSAL,
+					 "glusterfs_open failed with %s openflags 0x%08x",
+					 strerror(errno), openflags);
+				*has_lock = false;
+				return status;
+			}
+
+			*closefd = true;
+			*has_lock = check_share;
+			return fsalstat(ERR_FSAL_NO_ERROR, 0);
+
+		} else if (rc != 0) {
+			LogCrit(COMPONENT_RW_LOCK,
+				"Error %d, read locking %p", rc, myself);
+			abort();
+		}
+
+		if (check_share) {
+			status = check_share_conflict(&myself->share,
+						      openflags,
+						      bypass);
+
+			if (FSAL_IS_ERROR(status)) {
+				PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+				*has_lock = false;
+				return status;
+			}
+		}
+
+		LogFullDebug(COMPONENT_FSAL,
+			     "Open mode = %x, desired mode = %x",
+			     (int) my_fd->openflags,
+			     (int) openflags);
+
+		if (not_open_correct(my_fd, openflags)) {
+			if (my_fd->openflags != FSAL_O_CLOSED) {
+				/* Add desired mode to existing mode. */
+				try_openflags = openflags | my_fd->openflags;
+
+				/* Now close the already open descriptor. */
+				status = glusterfs_close_my_fd(my_fd);
+
+				if (FSAL_IS_ERROR(status)) {
+					PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+					LogDebug(COMPONENT_FSAL,
+						 "glusterfs_close_my_fd failed with %s",
+						 strerror(status.minor));
+					*has_lock = false;
+					return status;
+				}
+			} else if (openflags == FSAL_O_ANY) {
+				try_openflags = FSAL_O_READ;
+			} else {
+				try_openflags = openflags;
+			}
+
+			fsal2posix_openflags(try_openflags, &posix_flags);
+
+			LogFullDebug(COMPONENT_FSAL,
+				     "try_openflags = %x, posix_flags = %x",
+				     try_openflags, posix_flags);
+
+			/* Actually open the file */
+			status = glusterfs_open_my_fd(myself, try_openflags,
+						      posix_flags, my_fd);
+
+			if (FSAL_IS_ERROR(status)) {
+				PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+				LogDebug(COMPONENT_FSAL,
+					 "glusterfs_open_my_fd failed with %s",
+					 strerror(status.minor));
+				*has_lock = false;
+				return status;
+			}
+		}
+
+		/* Ok, now we should be in the correct mode.
+		 * Switch back to read lock and try again.
+		 * We don't want to hold the write lock because that would
+		 * block other users of the file descriptor.
+		 * Since we dropped the lock, we need to verify mode is still'
+		 * good after we re-aquire the read lock, thus the retry.
+		 */
+		PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+		PTHREAD_RWLOCK_rdlock(&obj_hdl->lock);
+		retried = true;
+
+		if (check_share) {
+			status = check_share_conflict(&myself->share,
+						      openflags,
+						      bypass);
+
+			if (FSAL_IS_ERROR(status)) {
+				PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+				*has_lock = false;
+				return status;
+			}
+		}
+		goto again;
+	}
+
+	*has_lock = true;
+	my_fd_arg->glfd = my_fd->glfd;
+	my_fd_arg->openflags = my_fd->openflags;
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
 /* open2
  * default case not supported
  */
