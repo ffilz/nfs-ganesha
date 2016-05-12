@@ -2020,13 +2020,15 @@ direrr:
 }
 
 /* status2
- * default case return 0
+ * return openflags of corresponding fd
  */
 
 static fsal_openflags_t glusterfs_status2(struct fsal_obj_handle *obj_hdl,
 					  struct state_t *state)
 {
-	return 0;
+	struct glusterfs_fd *my_fd = (struct glusterfs_fd *)(state + 1);
+
+	return my_fd->openflags;
 }
 
 /* reopen2
