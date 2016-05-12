@@ -1142,17 +1142,18 @@ clientid_status_t nfs_client_id_get(hash_table_t *ht, clientid4 clientid,
 		if (pclientid->cid_confirmed == STALE_CLIENT_ID) {
 			/* Stale client becuse of ip detach and attach to
 			 * same node */
-			status = CLIENT_ID_STALE;
-			pclientid->cid_confirmed = EXPIRED_CLIENT_ID;
-			rc = HashTable_Del(ht, &buffkey, NULL, NULL);
-			if (rc != HASHTABLE_SUCCESS) {
-				LogWarn(COMPONENT_CLIENTID,
-				"Could not remove unconfirmed clientid %" PRIx64
-				" error=%s", pclientid->cid_clientid,
-				hash_table_err_to_str(rc));
-			}
+			nfs_client_record_t *rec = pclientid->cid_client_record;
 
+			inc_client_record_ref(rec);
+
+			PTHREAD_MUTEX_lock(&rec->cr_mutex);
+			nfs_client_id_expire(pclientid, false);
+			PTHREAD_MUTEX_unlock(&rec->cr_mutex);
+
+			dec_client_record_ref(rec);
 			dec_client_id_ref(pclientid);
+
+			status = CLIENT_ID_STALE;
 			*client_rec = NULL;
 		} else {
 			*client_rec = pclientid;
