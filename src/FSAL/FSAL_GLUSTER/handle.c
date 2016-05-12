@@ -1661,6 +1661,187 @@ again:
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+fsal_status_t find_fd(struct glusterfs_fd *my_fd,
+		      struct fsal_obj_handle *obj_hdl,
+		      bool bypass,
+		      struct state_t *state,
+		      fsal_openflags_t openflags,
+		      bool *has_lock,
+		      bool *need_fsync,
+		      bool *closefd,
+		      bool open_for_locks)
+{
+	struct glusterfs_handle *myself;
+	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+	int posix_flags;
+	struct glusterfs_fd  tmp_fd = {0}, *tmp2_fd;
+	struct glusterfs_export *glfs_export =
+	    container_of(op_ctx->fsal_export, struct glusterfs_export, export);
+
+	myself = container_of(obj_hdl, struct glusterfs_handle, handle);
+
+	/* Handle non-regular files */
+	switch (obj_hdl->type) {
+	case SOCKET_FILE:
+	case CHARACTER_FILE:
+	case BLOCK_FILE:
+		/* XXX: check for O_NOACCESS. Refer vfs find_fd */
+		posix_flags = O_PATH;
+		goto regular_open;
+
+	case REGULAR_FILE:
+		/* Handle below */
+		break;
+
+	case SYMBOLIC_LINK:
+		posix_flags |= (O_PATH | O_RDWR | O_NOFOLLOW);
+		goto regular_open;
+
+	case FIFO_FILE:
+		posix_flags |= O_NONBLOCK;
+		/* fall through */
+
+ regular_open:
+		status = glusterfs_open_my_fd(myself,
+					       openflags,
+					       posix_flags,
+					       &tmp_fd);
+		if (FSAL_IS_ERROR(status)) {
+			LogCrit(COMPONENT_FSAL,
+				 "Failed with %s openflags 0x%08x",
+				 strerror(errno), openflags);
+			return fsalstat(posix2fsal_error(errno), errno);
+		}
+
+		my_fd->glfd = tmp_fd.glfd;
+		my_fd->openflags = tmp_fd.openflags;
+
+		LogFullDebug(COMPONENT_FSAL,
+			     "Opened glfd=%p for file of type %s",
+			     my_fd->glfd,
+			     object_file_type_to_str(obj_hdl->type));
+
+		*closefd = true;
+		return status;
+	case DIRECTORY:
+		my_fd->glfd = glfs_h_opendir(glfs_export->gl_fs,
+						myself->glhandle);
+		if (my_fd->glfd == NULL)
+			return gluster2fsal_error(errno);
+		*closefd = true;
+		return status;
+
+	case NO_FILE_TYPE:
+	case EXTENDED_ATTR:
+		return fsalstat(posix2fsal_error(EINVAL), EINVAL);
+	}
+
+	if (state == NULL)
+		goto global;
+
+	/* State was valid, check it's fd */
+	tmp2_fd = (struct glusterfs_fd *)(state + 1);
+
+		my_fd->glfd = tmp2_fd->glfd;
+		my_fd->openflags = tmp2_fd->openflags;
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "my_fd->openflags = %d openflags = %d",
+		     my_fd->openflags, openflags);
+
+	if (open_correct(my_fd, openflags)) {
+		/* It was valid, return it.
+		 * Since we found a valid fd in the sate, no need to
+		 * check deny modes.
+		 */
+		LogFullDebug(COMPONENT_FSAL, "Use state fd");
+		*need_fsync = (openflags & FSAL_O_SYNC) != 0;
+		return status;
+	}
+
+	if (open_for_locks) {
+		if (my_fd->openflags != FSAL_O_CLOSED) {
+			LogCrit(COMPONENT_FSAL,
+				"Conflicting open, can not re-open fd with locks");
+			return fsalstat(posix2fsal_error(EINVAL), EINVAL);
+		}
+
+		/* This is being opened for locks, we will not be able to
+		 * re-open so open for read/write unless openstate indicates
+		 * something different.
+		 */
+		if (state->state_data.lock.openstate != NULL) {
+			struct glusterfs_fd *related_fd =
+					(struct glusterfs_fd *)
+					(state->state_data.lock.openstate + 1);
+
+			openflags = related_fd->openflags & FSAL_O_RDWR;
+		} else {
+			/* No associated open, open read/write. */
+			openflags = FSAL_O_RDWR;
+		}
+
+		fsal2posix_openflags(openflags, &posix_flags);
+
+		status = glusterfs_open_my_fd(myself, openflags,
+					 posix_flags, &tmp_fd);
+
+		if (FSAL_IS_ERROR(status)) {
+			LogCrit(COMPONENT_FSAL,
+				"Open for locking failed");
+		} else {
+			*need_fsync = false;
+		}
+		my_fd->glfd = tmp_fd.glfd;
+		my_fd->openflags = tmp_fd.openflags;
+
+		return status;
+	}
+
+	if ((state->state_type == STATE_TYPE_LOCK ||
+	     state->state_type == STATE_TYPE_NLM_LOCK) &&
+	    state->state_data.lock.openstate != NULL) {
+		tmp2_fd = (struct glusterfs_fd *)
+			  (state->state_data.lock.openstate + 1);
+
+		my_fd->glfd = tmp2_fd->glfd;
+		my_fd->openflags = tmp2_fd->openflags;
+
+		if (open_correct(my_fd, openflags)) {
+			/* It was valid, return it.
+			 * Since we found a valid fd in the state, no need to
+			 * check deny modes.
+			 */
+			LogFullDebug(COMPONENT_FSAL, "Use open state fd");
+			*need_fsync = (openflags & FSAL_O_SYNC) != 0;
+			return status;
+		}
+	}
+
+ global:
+
+	/* No useable state_t so return the global file descriptor. */
+	LogFullDebug(COMPONENT_FSAL,
+		     "Use global fd openflags = %x",
+		     openflags);
+
+	/* We will take the object handle lock in glusterfs_reopen_obj.
+	 * And we won't have to fsync. XXX: what with fsync??
+	 */
+	*need_fsync = false;
+
+	/* Make sure global is open as necessary otherwise return a
+	 * temporary file descriptor. Check share reservation if not
+	 * opening FSAL_O_ANY.
+	 */
+	status = glusterfs_reopen_obj(obj_hdl, openflags != FSAL_O_ANY, bypass,
+			      openflags, &tmp_fd, has_lock, closefd);
+		my_fd->glfd = tmp_fd.glfd;
+		my_fd->openflags = tmp_fd.openflags;
+	return status;
+
+}
+
 /* open2
  * default case not supported
  */
