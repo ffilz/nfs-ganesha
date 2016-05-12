@@ -2608,14 +2608,67 @@ static fsal_status_t glusterfs_write2(struct fsal_obj_handle *obj_hdl,
 }
 
 /* commit2
- * default case not supported
  */
 
 static fsal_status_t glusterfs_commit2(struct fsal_obj_handle *obj_hdl,
 			     off_t offset,
 			     size_t len)
 {
-	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	fsal_status_t status;
+	int retval;
+	struct glusterfs_fd my_fd = {0};
+	bool has_lock = false;
+	bool closefd = false;
+	struct glusterfs_export *glfs_export =
+	    container_of(op_ctx->fsal_export,
+			 struct glusterfs_export, export);
+
+
+	/* Make sure file is open in appropriate mode.
+	 * Do not check share reservation.
+	 */
+	status = glusterfs_reopen_obj(obj_hdl, false, false, FSAL_O_WRITE,
+				&my_fd, &has_lock, &closefd);
+
+	if (!FSAL_IS_ERROR(status)) {
+
+		retval = setglustercreds(glfs_export,
+				&op_ctx->creds->caller_uid,
+				&op_ctx->creds->caller_gid,
+				op_ctx->creds->caller_glen,
+				op_ctx->creds->caller_garray);
+
+		if (retval != 0) {
+			status = gluster2fsal_error(EPERM);
+			LogFatal(COMPONENT_FSAL,
+				 "Could not set Ganesha credentials");
+			goto out;
+		}
+		retval = glfs_fsync(my_fd.glfd);
+
+		if (retval == -1) {
+			retval = errno;
+			status = fsalstat(posix2fsal_error(retval), retval);
+		}
+
+		/* restore credentials */
+		retval = setglustercreds(glfs_export, NULL, NULL, 0, NULL);
+		if (retval != 0) {
+			status = gluster2fsal_error(EPERM);
+			LogFatal(COMPONENT_FSAL,
+				 "Could not set Ganesha credentials");
+			goto out;
+		}
+	}
+
+out:
+	if (closefd)
+		glusterfs_close_my_fd(&my_fd);
+
+	if (has_lock)
+		PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+
+	return status;
 }
 
 /* lock_op2
