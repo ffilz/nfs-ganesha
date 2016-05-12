@@ -28,6 +28,7 @@
 #include "fsal_convert.h"
 #include "pnfs_utils.h"
 #include "nfs_exports.h"
+#include "sal_data.h"
 
 /* fsal_obj_handle common methods
  */
@@ -1309,6 +1310,11 @@ static fsal_status_t file_close(struct fsal_obj_handle *obj_hdl)
 	now(&s_time);
 #endif
 
+	if (!objhandle->globalfd.openflags ||
+	    (objhandle->globalfd.openflags & FSAL_O_CLOSED)) {
+		return status;
+	}
+
 	rc = glfs_close(objhandle->globalfd.glfd);
 	if (rc != 0) {
 		status = gluster2fsal_error(errno);
@@ -1403,6 +1409,29 @@ fsal_status_t glusterfs_close_my_fd(struct glusterfs_fd *my_fd)
 	return status;
 }
 
+static inline bool not_open_correct(struct glusterfs_fd *my_fd,
+				    fsal_openflags_t openflags)
+{
+	/* 1. my_fd->openflags will NEVER be FSAL_O_ANY.
+	 * 2. If openflags == FSAL_O_ANY, the first half will be true if the
+	 *    file is closed, and the second half MUST be true (per statement 1)
+	 * 3. If openflags is anything else, the first half will be true and
+	 *    the second half will be true if my_fd->openflags does not include
+	 *    the requested modes.
+	 */
+	return (openflags != FSAL_O_ANY || my_fd->openflags == FSAL_O_CLOSED)
+	       && ((my_fd->openflags & openflags) != openflags);
+}
+
+
+static inline bool open_correct(struct glusterfs_fd *my_fd,
+				fsal_openflags_t openflags)
+{
+	return (openflags == FSAL_O_ANY && my_fd->openflags != FSAL_O_CLOSED)
+	       || (openflags != FSAL_O_ANY
+		   && (my_fd->openflags & openflags & FSAL_O_RDWR)
+						== (openflags & FSAL_O_RDWR));
+}
 /* open2
  * default case not supported
  */
