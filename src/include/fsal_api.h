@@ -1295,6 +1295,8 @@ struct fsal_obj_ops {
  *
  * This function creates a new regular file.
  *
+ * This method is obsolete with support_ex.
+ *
  * @param[in]     dir_hdl Directory in which to create the file
  * @param[in]     name    Name of file to create
  * @param[in,out] attrib  Attributes to set on newly created
@@ -1314,6 +1316,10 @@ struct fsal_obj_ops {
  *
  * This function creates a new directory.
  *
+ * For support_ex, this method will handle attribute setting. The caller
+ * MUST include the mode attribute and SHOULD NOT include the owner or
+ * group attributes if they are the same as the op_ctx->cred.
+ *
  * @param[in]     dir_hdl Directory in which to create the directory
  * @param[in]     name    Name of directory to create
  * @param[in,out] attrib  Attributes to set on newly created
@@ -1332,6 +1338,10 @@ struct fsal_obj_ops {
  * @brief Create a special file
  *
  * This function creates a new special file.
+ *
+ * For support_ex, this method will handle attribute setting. The caller
+ * MUST include the mode attribute and SHOULD NOT include the owner or
+ * group attributes if they are the same as the op_ctx->cred.
  *
  * @param[in]     dir_hdl  Directory in which to create the object
  * @param[in]     name     Name of object to create
@@ -1357,6 +1367,10 @@ struct fsal_obj_ops {
  * @brief Create a symbolic link
  *
  * This function creates a new symbolic link.
+ *
+ * For support_ex, this method will handle attribute setting. The caller
+ * MUST include the mode attribute and SHOULD NOT include the owner or
+ * group attributes if they are the same as the op_ctx->cred.
  *
  * @param[in]     dir_hdl   Directory in which to create the object
  * @param[in]     name      Name of object to create
