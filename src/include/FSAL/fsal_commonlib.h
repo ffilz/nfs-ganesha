@@ -37,6 +37,8 @@
 #ifndef FSAL_COMMONLIB_H
 #define FSAL_COMMONLIB_H
 
+#include "fsal_api.h"
+
 /*
  * fsal common utility functions
  */
@@ -150,5 +152,55 @@ fsal_status_t check_share_conflict(struct fsal_share *share,
 
 fsal_status_t merge_share(struct fsal_share *orig_share,
 			  struct fsal_share *dupe_share);
+
+/**
+ * @brief Function to open an fsal_obj_handle's global file descriptor.
+ *
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  openflags   Mode for open
+ * @param[out] fd          File descriptor that is to be used
+ *
+ * @return FSAL status.
+ */
+
+typedef fsal_status_t (*fsal_open_func)(struct fsal_obj_handle *obj_hdl,
+					fsal_openflags_t openflags,
+					struct fsal_fd *fd);
+
+/**
+ * @brief Function to close an fsal_obj_handle's global file descriptor.
+ *
+ * @param[in]  fd     File handle to close
+ *
+ * @return FSAL status.
+ */
+
+typedef fsal_status_t (*fsal_close_func)(struct fsal_fd *fd);
+
+fsal_status_t fsal_reopen_obj(struct fsal_obj_handle *obj_hdl,
+			      bool check_share,
+			      bool bypass,
+			      fsal_openflags_t openflags,
+			      struct fsal_fd *my_fd,
+			      struct fsal_share *share,
+			      fsal_open_func open_func,
+			      fsal_close_func close_func,
+			      struct fsal_fd **out_fd,
+			      bool *has_lock,
+			      bool *closefd);
+
+fsal_status_t fsal_find_fd(struct fsal_fd **out_fd,
+			   struct fsal_obj_handle *obj_hdl,
+			   struct fsal_fd *my_fd,
+			   struct fsal_share *share,
+			   bool bypass,
+			   struct state_t *state,
+			   fsal_openflags_t openflags,
+			   fsal_open_func open_func,
+			   fsal_close_func close_func,
+			   bool *has_lock,
+			   bool *need_fsync,
+			   bool *closefd,
+			   bool open_for_locks);
 
 #endif				/* FSAL_COMMONLIB_H */
