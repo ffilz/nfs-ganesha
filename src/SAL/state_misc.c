@@ -1297,6 +1297,9 @@ void state_wipe_file(struct fsal_obj_handle *obj)
 #ifdef DEBUG_SAL
 	dump_all_states();
 #endif
+
+	/* Drop the ref for the lock_list */
+	obj->obj_ops.put_ref(obj);
 }
 
 #ifdef DEBUG_SAL
