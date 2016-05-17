@@ -103,6 +103,8 @@ struct root_op_context {
 	struct export_perms export_perms;
 };
 
+extern size_t open_fd_count;
+
 static inline void init_root_op_context(struct root_op_context *ctx,
 					struct gsh_export *exp,
 					struct fsal_export *fsal_exp,
@@ -397,7 +399,12 @@ static inline fsal_status_t fsal_close(struct fsal_obj_handle *obj_hdl,
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 	} else {
 		/* Otherwise, return the result of close method. */
-		return obj_hdl->obj_ops.close(obj_hdl);
+		fsal_status_t status = obj_hdl->obj_ops.close(obj_hdl);
+
+		if (!FSAL_IS_ERROR(status))
+			atomic_dec_size_t(&open_fd_count);
+
+		return status;
 	}
 }
 
