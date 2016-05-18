@@ -40,6 +40,7 @@
 #include "internal.h"
 #include "nfs_exports.h"
 #include "FSAL/fsal_commonlib.h"
+#include "sal_data.h"
 
 /**
  * @brief Release an object
@@ -936,6 +937,28 @@ static fsal_status_t ceph_fsal_close(struct fsal_obj_handle *handle_pub)
 	handle->fd.openflags = FSAL_O_CLOSED;
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+/**
+ * @brief Allocate a state_t structure
+ *
+ * Note that this is not expected to fail since memory allocation is
+ * expected to abort on failure.
+ *
+ * @param[in] exp_hdl               Export state_t will be associated with
+ * @param[in] state_type            Type of state to allocate
+ * @param[in] related_state         Related state if appropriate
+ *
+ * @returns a state structure.
+ */
+
+struct state_t *ceph_alloc_state(struct fsal_export *exp_hdl,
+				 enum state_type state_type,
+				 struct state_t *related_state)
+{
+	return init_state(gsh_calloc(1, sizeof(struct state_t)
+					 + sizeof(struct ceph_fd)),
+			  exp_hdl, state_type, related_state);
 }
 
 /**
