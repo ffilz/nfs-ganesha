@@ -40,6 +40,7 @@
 #include "internal.h"
 #include "nfs_exports.h"
 #include "FSAL/fsal_commonlib.h"
+#include "sal_data.h"
 
 /**
  * @brief Release an object
@@ -247,19 +248,25 @@ static fsal_status_t ceph_fsal_create(struct fsal_obj_handle *dir_pub,
 /**
  * @brief Create a directory
  *
- * This funcion creates a new directory.
+ * This function creates a new directory.
  *
- * @param[in]  dir_pub The parent in which to create
- * @param[in]  name    Name of the directory to create
- * @param[out] attrib  Attributes of the newly created directory
- * @param[out] obj_pub Handle of the newly created directory
+ * For support_ex, this method will handle attribute setting. The caller
+ * MUST include the mode attribute and SHOULD NOT include the owner or
+ * group attributes if they are the same as the op_ctx->cred.
+ *
+ * @param[in]     dir_hdl Directory in which to create the directory
+ * @param[in]     name    Name of directory to create
+ * @param[in]     attrib  Attributes to set on newly created object
+ * @param[out]    new_obj Newly created object
+ *
+ * @note On success, @a new_obj has been ref'd
  *
  * @return FSAL status.
  */
 
-static fsal_status_t ceph_fsal_mkdir(struct fsal_obj_handle *dir_pub,
+static fsal_status_t ceph_fsal_mkdir(struct fsal_obj_handle *dir_hdl,
 				const char *name, struct attrlist *attrib,
-				struct fsal_obj_handle **obj_pub)
+				struct fsal_obj_handle **new_obj)
 {
 	/* Generic status return */
 	int rc = 0;
@@ -267,13 +274,14 @@ static fsal_status_t ceph_fsal_mkdir(struct fsal_obj_handle *dir_pub,
 	struct export *export =
 	    container_of(op_ctx->fsal_export, struct export, export);
 	/* The private 'full' directory handle */
-	struct handle *dir = container_of(dir_pub, struct handle, handle);
+	struct handle *dir = container_of(dir_hdl, struct handle, handle);
 	/* Stat result */
 	struct stat st;
 	mode_t unix_mode;
 	/* Newly created object */
 	struct handle *obj = NULL;
 	struct Inode *i = NULL;
+	fsal_status_t status;
 
 	unix_mode = fsal2unix_mode(attrib->mode)
 		& ~op_ctx->fsal_export->exp_ops.fs_umask(op_ctx->fsal_export);
@@ -286,10 +294,32 @@ static fsal_status_t ceph_fsal_mkdir(struct fsal_obj_handle *dir_pub,
 
 	construct_handle(&st, i, export, &obj);
 
-	*obj_pub = &obj->handle;
-	*attrib = obj->attributes;
+	*new_obj = &obj->handle;
 
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	/* We handled the mode above. */
+	FSAL_UNSET_MASK(attrib->mask, ATTR_MODE);
+
+	if (attrib->mask) {
+		/* Now per support_ex API, if there are any other attributes
+		 * set, go ahead and get them set now.
+		 */
+		status = (*new_obj)->obj_ops.setattr2(*new_obj, false, NULL,
+						      attrib);
+		if (FSAL_IS_ERROR(status)) {
+			/* Release the handle we just allocated. */
+			LogFullDebug(COMPONENT_FSAL,
+				     "setattr2 status=%s",
+				     fsal_err_txt(status));
+			(*new_obj)->obj_ops.release(*new_obj);
+			*new_obj = NULL;
+		}
+	} else {
+		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+
+	FSAL_SET_MASK(attrib->mask, ATTR_MODE);
+
+	return status;
 }
 
 /**
@@ -297,23 +327,28 @@ static fsal_status_t ceph_fsal_mkdir(struct fsal_obj_handle *dir_pub,
  *
  * This function creates a new special file.
  *
+ * For support_ex, this method will handle attribute setting. The caller
+ * MUST include the mode attribute and SHOULD NOT include the owner or
+ * group attributes if they are the same as the op_ctx->cred.
+ *
  * @param[in]     dir_hdl  Directory in which to create the object
  * @param[in]     name     Name of object to create
  * @param[in]     nodetype Type of special file to create
  * @param[in]     dev      Major and minor device numbers for block or
  *                         character special
- * @param[in,out] attrib   Attributes to set on newly created
- *                         object/attributes you actually got.
+ * @param[in]     attrib   Attributes to set on newly created object
  * @param[out]    new_obj  Newly created object
+ *
+ * @note On success, @a new_obj has been ref'd
  *
  * @return FSAL status.
  */
-static fsal_status_t ceph_fsal_mknode(struct fsal_obj_handle *dir_pub,
+static fsal_status_t ceph_fsal_mknode(struct fsal_obj_handle *dir_hdl,
 				      const char *name,
 				      object_file_type_t nodetype,
 				      fsal_dev_t *dev,
 				      struct attrlist *attrib,
-				      struct fsal_obj_handle **obj_pub)
+				      struct fsal_obj_handle **new_obj)
 {
 #ifdef USE_FSAL_CEPH_MKNOD
 	/* Generic status return */
@@ -322,7 +357,7 @@ static fsal_status_t ceph_fsal_mknode(struct fsal_obj_handle *dir_pub,
 	struct export *export =
 	    container_of(op_ctx->fsal_export, struct export, export);
 	/* The private 'full' directory handle */
-	struct handle *dir = container_of(dir_pub, struct handle, handle);
+	struct handle *dir = container_of(dir_hdl, struct handle, handle);
 	/* Newly opened file descriptor */
 	struct Inode *i = NULL;
 	/* Status after create */
@@ -331,6 +366,7 @@ static fsal_status_t ceph_fsal_mknode(struct fsal_obj_handle *dir_pub,
 	dev_t unix_dev = 0;
 	/* Newly created object */
 	struct handle *obj;
+	fsal_status_t status;
 
 	unix_mode = fsal2unix_mode(attrib->mode)
 	    & ~op_ctx->fsal_export->exp_ops.fs_umask(op_ctx->fsal_export);
@@ -364,33 +400,61 @@ static fsal_status_t ceph_fsal_mknode(struct fsal_obj_handle *dir_pub,
 
 	construct_handle(&st, i, export, &obj);
 
-	*obj_pub = &obj->handle;
-	*attrib = obj->attributes;
+	*new_obj = &obj->handle;
 
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	/* We handled the mode above. */
+	FSAL_UNSET_MASK(attrib->mask, ATTR_MODE);
+
+	if (attrib->mask) {
+		/* Now per support_ex API, if there are any other attributes
+		 * set, go ahead and get them set now.
+		 */
+		status = (*new_obj)->obj_ops.setattr2(*new_obj, false, NULL,
+						      attrib);
+		if (FSAL_IS_ERROR(status)) {
+			/* Release the handle we just allocated. */
+			LogFullDebug(COMPONENT_FSAL,
+				     "setattr2 status=%s",
+				     fsal_err_txt(status));
+			(*new_obj)->obj_ops.release(*new_obj);
+			*new_obj = NULL;
+		}
+	} else {
+		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+
+	FSAL_SET_MASK(attrib->mask, ATTR_MODE);
+
+	return status;
 #else
 	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
 #endif
 }
 
 /**
- * @name Create a symlink
+ * @brief Create a symbolic link
  *
- * This function creates a new symlink with the given content.
+ * This function creates a new symbolic link.
  *
- * @param[in]  dir_pub   Parent directory
- * @param[in]  name      Name of the link
- * @param[in]  link_path Path linked to
- * @param[out] attrib    Attributes of the new symlink
- * @param[out] obj_pub   Handle for new symlink
+ * For support_ex, this method will handle attribute setting. The caller
+ * MUST include the mode attribute and SHOULD NOT include the owner or
+ * group attributes if they are the same as the op_ctx->cred.
+ *
+ * @param[in]     dir_hdl   Directory in which to create the object
+ * @param[in]     name      Name of object to create
+ * @param[in]     link_path Content of symbolic link
+ * @param[in]     attrib    Attributes to set on newly created object
+ * @param[out]    new_obj   Newly created object
+ *
+ * @note On success, @a new_obj has been ref'd
  *
  * @return FSAL status.
  */
 
-static fsal_status_t ceph_fsal_symlink(struct fsal_obj_handle *dir_pub,
+static fsal_status_t ceph_fsal_symlink(struct fsal_obj_handle *dir_hdl,
 				  const char *name, const char *link_path,
 				  struct attrlist *attrib,
-				  struct fsal_obj_handle **obj_pub)
+				  struct fsal_obj_handle **new_obj)
 {
 	/* Generic status return */
 	int rc = 0;
@@ -398,12 +462,13 @@ static fsal_status_t ceph_fsal_symlink(struct fsal_obj_handle *dir_pub,
 	struct export *export =
 	    container_of(op_ctx->fsal_export, struct export, export);
 	/* The private 'full' directory handle */
-	struct handle *dir = container_of(dir_pub, struct handle, handle);
+	struct handle *dir = container_of(dir_hdl, struct handle, handle);
 	/* Stat result */
 	struct stat st;
 	struct Inode *i = NULL;
 	/* Newly created object */
 	struct handle *obj = NULL;
+	fsal_status_t status;
 
 	rc = ceph_ll_symlink(export->cmount, dir->i, name, link_path, &st, &i,
 			     op_ctx->creds->caller_uid,
@@ -413,10 +478,32 @@ static fsal_status_t ceph_fsal_symlink(struct fsal_obj_handle *dir_pub,
 
 	construct_handle(&st, i, export, &obj);
 
-	*obj_pub = &obj->handle;
-	*attrib = obj->attributes;
+	*new_obj = &obj->handle;
 
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	/* We handled the mode above. */
+	FSAL_UNSET_MASK(attrib->mask, ATTR_MODE);
+
+	if (attrib->mask) {
+		/* Now per support_ex API, if there are any other attributes
+		 * set, go ahead and get them set now.
+		 */
+		status = (*new_obj)->obj_ops.setattr2(*new_obj, false, NULL,
+						      attrib);
+		if (FSAL_IS_ERROR(status)) {
+			/* Release the handle we just allocated. */
+			LogFullDebug(COMPONENT_FSAL,
+				     "setattr2 status=%s",
+				     fsal_err_txt(status));
+			(*new_obj)->obj_ops.release(*new_obj);
+			*new_obj = NULL;
+		}
+	} else {
+		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+
+	FSAL_SET_MASK(attrib->mask, ATTR_MODE);
+
+	return status;
 }
 
 /**
@@ -936,6 +1023,28 @@ static fsal_status_t ceph_fsal_close(struct fsal_obj_handle *handle_pub)
 	handle->fd.openflags = FSAL_O_CLOSED;
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+/**
+ * @brief Allocate a state_t structure
+ *
+ * Note that this is not expected to fail since memory allocation is
+ * expected to abort on failure.
+ *
+ * @param[in] exp_hdl               Export state_t will be associated with
+ * @param[in] state_type            Type of state to allocate
+ * @param[in] related_state         Related state if appropriate
+ *
+ * @returns a state structure.
+ */
+
+struct state_t *ceph_alloc_state(struct fsal_export *exp_hdl,
+				 enum state_type state_type,
+				 struct state_t *related_state)
+{
+	return init_state(gsh_calloc(1, sizeof(struct state_t)
+					 + sizeof(struct ceph_fd)),
+			  exp_hdl, state_type, related_state);
 }
 
 /**

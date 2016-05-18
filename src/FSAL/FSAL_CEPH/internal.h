@@ -170,4 +170,8 @@ void export_ops_pnfs(struct export_ops *ops);
 void handle_ops_pnfs(struct fsal_obj_ops *ops);
 #endif				/* CEPH_PNFS */
 
+struct state_t *ceph_alloc_state(struct fsal_export *exp_hdl,
+				 enum state_type state_type,
+				 struct state_t *related_state);
+
 #endif				/* !FSAL_CEPH_INTERNAL_INTERNAL__ */
