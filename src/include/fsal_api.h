@@ -1299,8 +1299,7 @@ struct fsal_obj_ops {
  *
  * @param[in]     dir_hdl Directory in which to create the file
  * @param[in]     name    Name of file to create
- * @param[in,out] attrib  Attributes to set on newly created
- *                        object/attributes you actually got.
+ * @param[in]     attrib  Attributes to set on newly created object
  * @param[out]    new_obj Newly created object
  *
  * @note On success, @a new_obj has been ref'd
@@ -1322,8 +1321,7 @@ struct fsal_obj_ops {
  *
  * @param[in]     dir_hdl Directory in which to create the directory
  * @param[in]     name    Name of directory to create
- * @param[in,out] attrib  Attributes to set on newly created
- *                        object/attributes you actually got.
+ * @param[in]     attrib  Attributes to set on newly created object
  * @param[out]    new_obj Newly created object
  *
  * @note On success, @a new_obj has been ref'd
@@ -1348,8 +1346,7 @@ struct fsal_obj_ops {
  * @param[in]     nodetype Type of special file to create
  * @param[in]     dev      Major and minor device numbers for block or
  *                         character special
- * @param[in,out] attrib   Attributes to set on newly created
- *                         object/attributes you actually got.
+ * @param[in]     attrib   Attributes to set on newly created object
  * @param[out]    new_obj  Newly created object
  *
  * @note On success, @a new_obj has been ref'd
@@ -1375,8 +1372,7 @@ struct fsal_obj_ops {
  * @param[in]     dir_hdl   Directory in which to create the object
  * @param[in]     name      Name of object to create
  * @param[in]     link_path Content of symbolic link
- * @param[in,out] attrib    Attributes to set on newly created
- *                          object/attributes you actually got.
+ * @param[in]     attrib    Attributes to set on newly created object
  * @param[out] new_obj      Newly created object
  *
  * @note On success, @a new_obj has been ref'd
