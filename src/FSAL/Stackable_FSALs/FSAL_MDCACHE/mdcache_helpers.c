@@ -1034,11 +1034,18 @@ mdcache_dirent_add(mdcache_entry_t *parent, const char *name,
 	/* add to avl */
 	code = mdcache_avl_qp_insert(parent, new_dir_entry);
 	if (code < 0) {
-		/* collision, tree not updated--release both pool objects and
-		 * return err */
+		/* collision, tree not updated--release both pool objects.
+		 *
+		 * A direntry for this name may have been already added
+		 * as part of a readdir operation.
+		 * success if code == -2. @todo, sane names for code values?
+		 */
 		gsh_free(new_dir_entry->ckey.kv.addr);
 		gsh_free(new_dir_entry);
-		return fsalstat(ERR_FSAL_EXIST, 0);
+		if (code == -2)
+			return fsalstat(ERR_FSAL_NO_ERROR, 0);
+		else
+			return fsalstat(ERR_FSAL_SERVERFAULT, 0);
 	}
 
 	if (dir_entry)
