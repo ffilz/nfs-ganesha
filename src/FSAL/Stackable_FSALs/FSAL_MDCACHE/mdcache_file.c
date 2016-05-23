@@ -496,6 +496,12 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 		return status;
 	}
 
+	if (sub_handle) {
+		subcall(
+			status = sub_handle->obj_ops.getattrs(sub_handle)
+		       );
+	}
+
 	if (!name || new_entry)
 		/* Wasn't a create and/or entry already found */
 		return status;
