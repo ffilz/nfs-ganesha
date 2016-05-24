@@ -95,7 +95,7 @@ int nfs3_fsstat(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	/* Get statistics and convert from FSAL */
 	fsal_status = fsal_statfs(obj, &dynamicinfo);
 
-	if (FSAL_IS_ERROR(fsal_status)) {
+	if (!FSAL_IS_ERROR(fsal_status)) {
 		LogFullDebug(COMPONENT_NFSPROTO,
 			     "nfs_Fsstat --> dynamicinfo.total_bytes=%" PRIu64
 			     " dynamicinfo.free_bytes=%" PRIu64

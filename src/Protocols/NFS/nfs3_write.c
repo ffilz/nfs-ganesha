@@ -251,7 +251,7 @@ int nfs3_write(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 
 		state_share_anonymous_io_done(obj, OPEN4_SHARE_ACCESS_WRITE);
 
-		if (FSAL_IS_ERROR(fsal_status)) {
+		if (!FSAL_IS_ERROR(fsal_status)) {
 			/* Build Weak Cache Coherency data */
 			nfs_SetWccData(NULL, obj,
 				       &res->res_write3.WRITE3res_u.resok.

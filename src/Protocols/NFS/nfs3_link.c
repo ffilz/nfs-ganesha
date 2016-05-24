@@ -144,7 +144,7 @@ int nfs3_link(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	}
 
 	fsal_status = fsal_link(target_obj, parent_obj, link_name);
-	if (FSAL_IS_ERROR(fsal_status)) {
+	if (!FSAL_IS_ERROR(fsal_status)) {
 		nfs_SetPostOpAttr(target_obj,
 				  &l3_res->LINK3res_u.resok.file_attributes);
 
