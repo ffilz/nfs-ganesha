@@ -194,6 +194,10 @@ int nfs3_setattr(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	}
 
 	rc = NFS_REQ_OK;
+
+	/* Release the attributes (may release an inherited ACL) */
+	fsal_release_attrs(&setattr);
+
  out:
 	/* return references */
 	if (obj)
@@ -202,7 +206,11 @@ int nfs3_setattr(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	return rc;
 
  out_fail:
+
 	LogFullDebug(COMPONENT_NFSPROTO, "nfs_Setattr: failed");
+
+	/* Release the attributes (may release an inherited ACL) */
+	fsal_release_attrs(&setattr);
 
 	nfs_SetWccData(&pre_attr, obj,
 		       &res->res_setattr3.SETATTR3res_u.resfail.obj_wcc);

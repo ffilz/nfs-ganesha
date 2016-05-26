@@ -105,6 +105,10 @@ int nfs3_getattr(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	rc = NFS_REQ_OK;
 
  out:
+
+	/* Done with the attrs */
+	fsal_release_attrs(&attrs);
+
 	/* return references */
 	if (obj)
 		obj->obj_ops.put_ref(obj);
