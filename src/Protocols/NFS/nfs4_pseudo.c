@@ -243,19 +243,6 @@ retry:
 		return false;
 	}
 
-	fsal_status = fsal_refresh_attrs(state->obj);
-
-	if (FSAL_IS_ERROR(fsal_status)) {
-		LogCrit(COMPONENT_EXPORT,
-			"BUILDING PSEUDOFS: Export_Id %d Path %s Pseudo Path %s GETATTR %s failed with %s",
-			state->export->export_id,
-			state->export->fullpath,
-			state->export->pseudopath,
-			name,
-			msg_fsal_err(fsal_status.major));
-		return false;
-	}
-
 	LogDebug(COMPONENT_EXPORT,
 		 "BUILDING PSEUDOFS: Export_Id %d Path %s Pseudo Path %s CREATE %s obj %p state %p succeded",
 		 state->export->export_id,
@@ -388,24 +375,6 @@ bool pseudo_mount_export(struct gsh_export *export)
 		}
 	}
 
-	fsal_status = fsal_refresh_attrs(state.obj);
-
-	if (FSAL_IS_ERROR(fsal_status)) {
-		LogCrit(COMPONENT_EXPORT,
-			"BUILDING PSEUDOFS: Export_Id %d Path %s Pseudo Path %s final GETATTR failed with %s",
-			export->export_id,
-			export->fullpath,
-			export->pseudopath,
-			msg_fsal_err(fsal_status.major));
-
-		/* Release reference on mount point inode
-		 * and the mounted on export
-		 */
-		state.obj->obj_ops.put_ref(state.obj);
-		put_gsh_export(op_ctx->export);
-		return false;
-	}
-
 	/* Now that all entries are added to pseudofs tree, and we are pointing
 	 * to the final node, make it a proper junction.
 	 */
@@ -416,7 +385,7 @@ bool pseudo_mount_export(struct gsh_export *export)
 	/* And fill in the mounted on information for the export. */
 	PTHREAD_RWLOCK_wrlock(&export->lock);
 
-	export->exp_mounted_on_file_id = state.obj->attrs->fileid;
+	export->exp_mounted_on_file_id = state.obj->fileid;
 	/* Pass ref off to export */
 	export->exp_junction_obj = state.obj;
 	export->exp_parent_exp = op_ctx->export;
