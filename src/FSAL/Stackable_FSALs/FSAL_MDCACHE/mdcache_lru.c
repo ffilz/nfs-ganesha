@@ -416,14 +416,8 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 			fsal_err_txt(status));
 	}
 
-	if (entry->obj_handle.type == DIRECTORY) {
-		status = mdcache_dirent_invalidate_all(entry);
-		if (FSAL_IS_ERROR(status)) {
-			LogCrit(COMPONENT_CACHE_INODE_LRU,
-				"Error releasing dirents in cleanup: %s.",
-				fsal_err_txt(status));
-		}
-	}
+	if (entry->obj_handle.type == DIRECTORY)
+		mdcache_dirent_invalidate_all(entry);
 
 	/* Free SubFSAL resources */
 	if (entry->sub_handle) {
