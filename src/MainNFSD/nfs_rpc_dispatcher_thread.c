@@ -195,20 +195,31 @@ static void unregister_rpc(void)
 
 static inline bool test_for_additional_nfs_protocols(protos p)
 {
-	/* always skip VSOCK in scans */
-	if (p == P_NFS_VSOCK)
+	/* In NFSv3 environments, MOUNT, NLM, RQUOTA protocols run over
+	 * different ports. Those protocol requests were made as part NFSv4
+	 * protocol itself, so there is no need to run these as separate
+	 * services in NFSv4 environments.
+	 */
+	if (nfs_param.core_param.core_options & CORE_OPTION_NFSV3 == 0)
 		return false;
 
-	return ((p != P_MNT && p != P_NLM && p != P_RQUOTA) ||
-		(nfs_param.core_param.core_options &
-			(CORE_OPTION_NFSV3 | CORE_OPTION_NFSV4)));
+	if (nfs_param.core_param.enable_NLM && p == P_NLM)
+		return true;
+
+	if (nfs_param.core_param.enable_RQUOTA && p == P_RQUOTA)
+		return true;
+
+	if (p == P_MNT)
+		return true;
+
+	return false;
 }
 
 /**
  * @brief Close file descriptors used for RPC services.
  *
- * So that restarting the NFS server wont encounter issues of "Addres
- * Already In Use" - this has occured even though we set the
+ * So that restarting the NFS server wont encounter issues of "Address
+ * Already In Use" - this has occurred even though we set the
  * SO_REUSEADDR option when restarting the server with a single export
  * (i.e.: a small config) & no logging at all, making the restart very
  * fast.  when closing a listening socket it will be closed
