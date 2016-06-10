@@ -226,6 +226,12 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 			continue;
 		}
 		if (cbk_inode_arg) {
+			if (cbk_inode_arg->object)
+				glfs_h_close(cbk_inode_arg->object);
+			if (cbk_inode_arg->p_object)
+				glfs_h_close(cbk_inode_arg->p_object);
+			if (cbk_inode_arg->oldp_object)
+				glfs_h_close(cbk_inode_arg->oldp_object);
 			free(cbk_inode_arg);
 			cbk_inode_arg = NULL;
 		}
