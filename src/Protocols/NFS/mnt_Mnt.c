@@ -157,10 +157,6 @@ int mnt_Mnt(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		res->res_mnt3.fhs_status = MNT3_OK;
 	}
 
-	/* Release the fsal_obj_handle created for the path */
-	obj->obj_ops.release(obj);
-	obj->obj_ops.put_ref(obj);
-
 	/* Return the supported authentication flavor in V3 based
 	 * on the client's export permissions. These should be listed
 	 * in a preferred order.
