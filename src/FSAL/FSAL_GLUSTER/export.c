@@ -96,7 +96,8 @@ static void export_release(struct fsal_export *exp_hdl)
 
 static fsal_status_t lookup_path(struct fsal_export *export_pub,
 				 const char *path,
-				 struct fsal_obj_handle **pub_handle)
+				 struct fsal_obj_handle **pub_handle,
+				 struct attrlist *attrs_out)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
@@ -220,7 +221,8 @@ static fsal_status_t extract_handle(struct fsal_export *exp_hdl,
 
 static fsal_status_t create_handle(struct fsal_export *export_pub,
 				   struct gsh_buffdesc *fh_desc,
-				   struct fsal_obj_handle **pub_handle)
+				   struct fsal_obj_handle **pub_handle,
+				   struct attrlist *attrs_out)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };

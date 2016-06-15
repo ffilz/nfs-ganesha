@@ -43,28 +43,6 @@
 #include "mdcache_avl.h"
 
 /*
- * Helper functions
- */
-
-static fsal_status_t mdc_add_dirent(mdcache_entry_t *parent, const char *name,
-				    mdcache_entry_t *entry)
-{
-	fsal_status_t status;
-
-	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
-	/* Add this entry to the directory (also takes an internal ref) */
-	status = mdcache_dirent_add(parent, name, entry, NULL);
-	PTHREAD_RWLOCK_unlock(&parent->content_lock);
-
-	/* This function is called after a create, so go ahead and invalidate
-	 * the parent directory attributes.
-	 */
-	atomic_clear_uint32_t_bits(&parent->mde_flags, MDCACHE_TRUST_ATTRS);
-
-	return status;
-}
-
-/*
  * handle methods
  */
 
@@ -74,28 +52,126 @@ static fsal_status_t mdc_add_dirent(mdcache_entry_t *parent, const char *name,
  * This function is a wrapper of mdcache_alloc_handle. It adds error checking
  * and logging. It also cleans objects allocated in the subfsal if it fails.
  *
- * @param[in] export The mdcache export used by the handle.
- * @param[in,out] sub_handle The handle used by the subfsal.
- * @param[in] fs The filesystem of the new handle.
- * @param[in] new_handle Address where the new allocated pointer should be
- * written.
- * @param[in] subfsal_status Result of the allocation of the subfsal handle.
+ * If parent and name are non-NULL, the caller MUST hold the content_lock for
+ * write. This does not cause an ABBA lock conflict with the potential getattrs
+ * if we lose a race to create the cache entry since our caller CAN NOT hold
+ * any locks on the cache entry created.
+ *
+ * @param[in]     export         The mdcache export used by the handle.
+ * @param[in,out] sub_handle     The handle used by the subfsal.
+ * @param[in]     fs             The filesystem of the new handle.
+ * @param[in]     new_handle     Address where the new allocated pointer should
+ *                               be written.
+ * @param[in]     subfsal_status Result of the allocation of the subfsal handle.
+ * @param[in]     new_directory  Indicates a new directory has been created.
+ * @param[in,out] attrs_out      Optional attributes for newly created object.
+ * @param[in]     parent         Optional parent directory to add dirent to.
+ * @param[in]     name           Optional name of the dirent to add.
+ * @param[in]     invalidate     Optional, invalidate parent attr.
  *
  * @note This returns an INITIAL ref'd entry on success
  *
  * @return An error code for the function.
  */
-static fsal_status_t mdcache_alloc_and_check_handle(
+fsal_status_t mdcache_alloc_and_check_handle(
 		struct mdcache_fsal_export *export,
 		struct fsal_obj_handle *sub_handle,
-		mdcache_entry_t **new_handle,
+		struct fsal_obj_handle **new_obj,
 		fsal_status_t subfsal_status,
-		bool new_directory)
+		bool new_directory,
+		struct attrlist *attrs_in,
+		struct attrlist *attrs_out,
+		const char *tag,
+		mdcache_entry_t *parent,
+		const char *name,
+		bool invalidate)
 {
-	if (FSAL_IS_ERROR(subfsal_status))
-		return subfsal_status;
+	bool attrs_valid = false;
+	fsal_status_t status;
+	mdcache_entry_t *new_entry;
+	const char *dispname = name != NULL ? name : "<by-handle>";
 
-	return mdcache_new_entry(export, sub_handle, new_directory, new_handle);
+	if (unlikely(FSAL_IS_ERROR(subfsal_status))) {
+		LogDebug(COMPONENT_CACHE_INODE,
+			 "%s %s failed with %s",
+			 tag, dispname, fsal_err_txt(subfsal_status));
+		if (subfsal_status.major == ERR_FSAL_STALE && parent != NULL) {
+			/* If we got ERR_FSAL_STALE, the previous FSAL call
+			 * must have failed with a bad parent.
+			 */
+			mdcache_kill_entry(parent);
+		}
+		fsal_release_attrs(attrs_in);
+		*new_obj = NULL;
+		return subfsal_status;
+	}
+
+	status = mdcache_new_entry(export, sub_handle, attrs_in, attrs_out,
+				   &attrs_valid, new_directory, &new_entry);
+
+	if (FSAL_IS_ERROR(status)) {
+		*new_obj = NULL;
+		return status;
+	}
+
+	LogFullDebug(COMPONENT_CACHE_INODE,
+		     "Created entry %p FSAL %s for %s",
+		     new_entry, new_entry->sub_handle->fsal->name, dispname);
+
+	/* Add optional dirent. */
+	if (parent != NULL && name != NULL) {
+		if (invalidate) {
+			/* This function is called after a create, so go ahead
+			 * and invalidate the parent directory attributes.
+			 */
+			atomic_clear_uint32_t_bits(&parent->mde_flags,
+						   MDCACHE_TRUST_ATTRS);
+		}
+
+		status = mdcache_dirent_add(parent, name, new_entry, NULL);
+
+		if (FSAL_IS_ERROR(status)) {
+			/** @todo FSF: I don't think a name collision should
+			 *             result in an error here.
+			 */
+			LogDebug(COMPONENT_CACHE_INODE,
+				 "%s %s failed because add dirent failed",
+				 tag, name);
+
+			if (attrs_valid)
+				fsal_release_attrs(attrs_out);
+			mdcache_put(new_entry);
+			*new_obj = NULL;
+			return status;
+		}
+	}
+
+	if (new_entry->obj_handle.type == DIRECTORY && parent != NULL) {
+		/* Insert Parent's key */
+		mdcache_key_dup(&new_entry->fsobj.fsdir.parent,
+				&parent->fh_hk.key);
+	}
+
+	*new_obj = &new_entry->obj_handle;
+
+	/* Now check if we actually got the attributes requested. */
+	if (attrs_out != NULL && !attrs_valid) {
+		/* There was a race to create a new entry, so we need to call
+		 * getattrs to acquire the attributes.
+		 */
+		status = get_optional_attrs(*new_obj, attrs_out);
+
+		if (FSAL_IS_ERROR(status)) {
+			/* Oops, failed to get attributes and ATTR_RDATTR_ERR
+			 * was not requested, so we are failing lookup and
+			 * thus must drop the object reference we got.
+			 */
+			mdcache_put(new_entry);
+			*new_obj = NULL;
+		}
+	}
+
+	return status;
 }
 
 /**
@@ -103,16 +179,18 @@ static fsal_status_t mdcache_alloc_and_check_handle(
  *
  * Lookup a name relative to another object
  *
- * @param[in] parent	Handle of parent
- * @param[in] name	Name to look up
- * @param[out] handle	Handle of found object, on success
+ * @param[in]     parent    Handle of parent
+ * @param[in]     name      Name to look up
+ * @param[out]    handle    Handle of found object, on success
+ * @param[in,out] attrs_out Optional attributes for newly created object
  *
  * @note This returns an INITIAL ref'd entry on success
  * @return FSAL status
  */
 static fsal_status_t mdcache_lookup(struct fsal_obj_handle *parent,
 				    const char *name,
-				    struct fsal_obj_handle **handle)
+				    struct fsal_obj_handle **handle,
+				    struct attrlist *attrs_out)
 {
 	mdcache_entry_t *mdc_parent =
 		container_of(parent, mdcache_entry_t, obj_handle);
@@ -121,7 +199,7 @@ static fsal_status_t mdcache_lookup(struct fsal_obj_handle *parent,
 
 	*handle = NULL;
 
-	status = mdc_lookup(mdc_parent, name, true, &entry);
+	status = mdc_lookup(mdc_parent, name, true, &entry, attrs_out);
 	if (entry)
 		*handle = &entry->obj_handle;
 
@@ -140,22 +218,24 @@ static fsal_status_t mdcache_lookup(struct fsal_obj_handle *parent,
  * @return FSAL status
  */
 static fsal_status_t mdcache_create(struct fsal_obj_handle *dir_hdl,
-			    const char *name, struct attrlist *attrib,
-			    struct fsal_obj_handle **handle)
+				    const char *name, struct attrlist *attrs_in,
+				    struct fsal_obj_handle **new_obj,
+				    struct attrlist *attrs_out)
 {
 	mdcache_entry_t *parent =
 		container_of(dir_hdl, mdcache_entry_t,
 			     obj_handle);
 	struct mdcache_fsal_export *export = mdc_cur_export();
 	struct fsal_obj_handle *sub_handle;
-	mdcache_entry_t *entry;
 	fsal_status_t status;
+	struct attrlist attrs;
 
-	*handle = NULL;
+	fsal_prepare_attrs(&attrs, op_ctx->fsal_export->exp_ops.
+				   fs_supported_attrs(op_ctx->fsal_export));
 
 	subcall_raw(export,
 		status = parent->sub_handle->obj_ops.create(
-			parent->sub_handle, name, attrib, &sub_handle)
+			parent->sub_handle, name, attrs_in, &sub_handle, &attrs)
 	       );
 
 	if (FSAL_IS_ERROR(status) && status.major == ERR_FSAL_STALE) {
@@ -164,22 +244,16 @@ static fsal_status_t mdcache_create(struct fsal_obj_handle *dir_hdl,
 		mdcache_kill_entry(parent);
 	}
 
+	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+
 	status = mdcache_alloc_and_check_handle(export, sub_handle,
-						&entry, status, false);
-	if (FSAL_IS_ERROR(status))
-		return status;
+						new_obj, status, false,
+						&attrs, attrs_out,
+						"create", parent, name, true);
 
-	status = mdc_add_dirent(parent, name, entry);
-	if (FSAL_IS_ERROR(status)) {
-		mdcache_put(entry);
-		*handle = NULL;
-		LogFullDebug(COMPONENT_CACHE_INODE,
-			     "create failed because add dirent failed");
-		return status;
-	}
+	PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
-	*handle = &entry->obj_handle;
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	return status;
 }
 
 /**
@@ -195,21 +269,25 @@ static fsal_status_t mdcache_create(struct fsal_obj_handle *dir_hdl,
  */
 static fsal_status_t mdcache_mkdir(struct fsal_obj_handle *dir_hdl,
 			     const char *name, struct attrlist *attrib,
-			     struct fsal_obj_handle **handle)
+			     struct fsal_obj_handle **handle,
+			     struct attrlist *attrs_out)
 {
 	mdcache_entry_t *parent =
 		container_of(dir_hdl, mdcache_entry_t,
 			     obj_handle);
 	struct mdcache_fsal_export *export = mdc_cur_export();
-	mdcache_entry_t *entry;
 	struct fsal_obj_handle *sub_handle;
 	fsal_status_t status;
+	struct attrlist attrs;
 
 	*handle = NULL;
 
+	fsal_prepare_attrs(&attrs, op_ctx->fsal_export->exp_ops.
+				   fs_supported_attrs(op_ctx->fsal_export));
+
 	subcall_raw(export,
 		status = parent->sub_handle->obj_ops.mkdir(
-			parent->sub_handle, name, attrib, &sub_handle)
+			parent->sub_handle, name, attrib, &sub_handle, &attrs)
 	       );
 
 	if (FSAL_IS_ERROR(status) && status.major == ERR_FSAL_STALE) {
@@ -218,25 +296,16 @@ static fsal_status_t mdcache_mkdir(struct fsal_obj_handle *dir_hdl,
 		mdcache_kill_entry(parent);
 	}
 
+	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+
 	status = mdcache_alloc_and_check_handle(export, sub_handle,
-						&entry, status, true);
-	if (FSAL_IS_ERROR(status))
-		return status;
+						handle, status, true,
+						&attrs, attrs_out,
+						"mkdir", parent, name, true);
 
-	status = mdc_add_dirent(parent, name, entry);
-	if (FSAL_IS_ERROR(status)) {
-		mdcache_put(entry);
-		*handle = NULL;
-		LogFullDebug(COMPONENT_CACHE_INODE,
-			     "create failed because add dirent failed");
-		return status;
-	}
+	PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
-	/* Insert Parent's key */
-	mdcache_key_dup(&entry->fsobj.fsdir.parent, &parent->fh_hk.key);
-
-	*handle = &entry->obj_handle;
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	return status;
 }
 
 /**
@@ -256,22 +325,26 @@ static fsal_status_t mdcache_mknode(struct fsal_obj_handle *dir_hdl,
 			      const char *name, object_file_type_t nodetype,
 			      fsal_dev_t *dev,	/* IN */
 			      struct attrlist *attrib,
-			      struct fsal_obj_handle **handle)
+			      struct fsal_obj_handle **handle,
+			      struct attrlist *attrs_out)
 {
 	mdcache_entry_t *parent =
 		container_of(dir_hdl, mdcache_entry_t,
 			     obj_handle);
 	struct mdcache_fsal_export *export = mdc_cur_export();
 	struct fsal_obj_handle *sub_handle;
-	mdcache_entry_t *entry;
 	fsal_status_t status;
+	struct attrlist attrs;
 
 	*handle = NULL;
+
+	fsal_prepare_attrs(&attrs, op_ctx->fsal_export->exp_ops.
+				   fs_supported_attrs(op_ctx->fsal_export));
 
 	subcall_raw(export,
 		status = parent->sub_handle->obj_ops.mknode(
 			parent->sub_handle, name, nodetype, dev, attrib,
-			&sub_handle)
+			&sub_handle, &attrs)
 	       );
 
 	if (FSAL_IS_ERROR(status) && status.major == ERR_FSAL_STALE) {
@@ -280,22 +353,16 @@ static fsal_status_t mdcache_mknode(struct fsal_obj_handle *dir_hdl,
 		mdcache_kill_entry(parent);
 	}
 
+	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+
 	status = mdcache_alloc_and_check_handle(export, sub_handle,
-						&entry, status, false);
-	if (FSAL_IS_ERROR(status))
-		return status;
+						handle, status, false,
+						&attrs, attrs_out,
+						"mknode", parent, name, true);
 
-	status = mdc_add_dirent(parent, name, entry);
-	if (FSAL_IS_ERROR(status)) {
-		mdcache_put(entry);
-		*handle = NULL;
-		LogFullDebug(COMPONENT_CACHE_INODE,
-			     "create failed because add dirent failed");
-		return status;
-	}
+	PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
-	*handle = &entry->obj_handle;
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	return status;
 }
 
 /**
@@ -313,22 +380,26 @@ static fsal_status_t mdcache_mknode(struct fsal_obj_handle *dir_hdl,
 static fsal_status_t mdcache_symlink(struct fsal_obj_handle *dir_hdl,
 				 const char *name, const char *link_path,
 				 struct attrlist *attrib,
-				 struct fsal_obj_handle **handle)
+				 struct fsal_obj_handle **handle,
+				 struct attrlist *attrs_out)
 {
 	mdcache_entry_t *parent =
 		container_of(dir_hdl, mdcache_entry_t,
 			     obj_handle);
 	struct mdcache_fsal_export *export = mdc_cur_export();
 	struct fsal_obj_handle *sub_handle;
-	mdcache_entry_t *entry;
 	fsal_status_t status;
+	struct attrlist attrs;
 
 	*handle = NULL;
+
+	fsal_prepare_attrs(&attrs, op_ctx->fsal_export->exp_ops.
+				   fs_supported_attrs(op_ctx->fsal_export));
 
 	subcall_raw(export,
 		status = parent->sub_handle->obj_ops.symlink(
 			parent->sub_handle, name, link_path, attrib,
-			&sub_handle)
+			&sub_handle, &attrs)
 	       );
 
 	if (FSAL_IS_ERROR(status) && status.major == ERR_FSAL_STALE) {
@@ -337,22 +408,16 @@ static fsal_status_t mdcache_symlink(struct fsal_obj_handle *dir_hdl,
 		mdcache_kill_entry(parent);
 	}
 
+	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+
 	status = mdcache_alloc_and_check_handle(export, sub_handle,
-						&entry, status, false);
-	if (FSAL_IS_ERROR(status))
-		return status;
+						handle, status, false,
+						&attrs, attrs_out,
+						"symlink", parent, name, true);
 
-	status = mdc_add_dirent(parent, name, entry);
-	if (FSAL_IS_ERROR(status)) {
-		mdcache_put(entry);
-		*handle = NULL;
-		LogFullDebug(COMPONENT_CACHE_INODE,
-			     "create failed because add dirent failed");
-		return status;
-	}
+	PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
-	*handle = &entry->obj_handle;
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	return status;
 }
 
 /**
@@ -426,8 +491,16 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 		return status;
 	}
 
-	/* Add the new entry in the destination directory */
-	status = mdc_add_dirent(dest, name, entry);
+	PTHREAD_RWLOCK_wrlock(&dest->content_lock);
+
+	/** @todo FSF: I don't think a name collision should result in an
+	 *             error here.
+	 */
+	/* Add this entry to the directory (also takes an internal ref)
+	 */
+	status = mdcache_dirent_add(dest, name, entry, NULL);
+
+	PTHREAD_RWLOCK_unlock(&dest->content_lock);
 
 	/* Invalidate attributes, so refresh will be forced */
 	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_ATTRS);
@@ -453,7 +526,8 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 
 static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 				  fsal_cookie_t *whence, void *dir_state,
-				  fsal_readdir_cb cb, bool *eod_met)
+				  fsal_readdir_cb cb, attrmask_t attrmask,
+				  bool *eod_met)
 {
 	mdcache_entry_t *directory = container_of(dir_hdl, mdcache_entry_t,
 						  obj_handle);
@@ -528,10 +602,11 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 					      node_hk);
 
 		/* Get actual entry */
-		status = mdc_try_get_cached(directory, dirent->name, &entry);
+		status =
+		    mdc_try_get_cached(directory, dirent->name, &entry, NULL);
 		if (status.major == ERR_FSAL_STALE) {
 			status = mdc_lookup_uncached(directory, dirent->name,
-						     &entry);
+						     &entry, NULL);
 		}
 		if (FSAL_IS_ERROR(status)) {
 			LogFullDebug(COMPONENT_NFS_READDIR,
@@ -540,8 +615,8 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 			goto unlock_dir;
 		}
 
-		cb_result = cb(dirent->name, &entry->obj_handle, dir_state,
-			       dirent->hk.k);
+		cb_result = cb(dirent->name, &entry->obj_handle, &entry->attrs,
+			       dir_state, dirent->hk.k);
 
 		mdcache_put(entry);
 
@@ -594,7 +669,8 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 	mdcache_entry_t *mdc_lookup_dst = NULL;
 	fsal_status_t status;
 
-	status = mdc_try_get_cached(mdc_newdir, new_name, &mdc_lookup_dst);
+	status =
+	    mdc_try_get_cached(mdc_newdir, new_name, &mdc_lookup_dst, NULL);
 
 	if (!FSAL_IS_ERROR(status) && (mdc_obj == mdc_lookup_dst)) {
 		/* Same source and destination */
@@ -682,6 +758,9 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 		/* Remove the old entry */
 		status = mdcache_dirent_remove(mdc_olddir, old_name);
 		if (FSAL_IS_ERROR(status)) {
+			/** @todo FSF: I don't think a name collision should
+			 *             result in an error here.
+			 */
 			LogDebug(COMPONENT_CACHE_INODE,
 				 "Remove old dirent returned %s",
 				 fsal_err_txt(status));
@@ -763,18 +842,7 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 unlock:
 
 	/* Struct copy */
-	*outattrs = entry->attrs;
-
-	if (outattrs->acl != NULL && (outattrs->mask & ATTR_ACL) != 0) {
-		/* Take reference on ACL if necessary */
-		nfs4_acl_entry_inc_ref(outattrs->acl);
-	} else {
-		/* Make sure acl is NULL and don't pass a ref back (so
-		 * caller when calling fsal_release_attrs will not have to
-		 * release the ACL reference.
-		 */
-		outattrs->acl = NULL;
-	}
+	fsal_copy_attrs(outattrs, &entry->attrs, false);
 
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 
@@ -1131,37 +1199,37 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
  * Lookup in the sub-FSAL, and wrap with a MDCACHE entry.  This is the
  * equivalent of ...lookup_path() followed by mdcache_new_entry()
  *
- * @param[in] exp_hdl	FSAL export to look in
- * @param[in] path	Path to find
- * @param[out] handle	Resulting object handle
+ * @param[in]     exp_hdl   FSAL export to look in
+ * @param[in]     path      Path to find
+ * @param[out]    handle    Resulting object handle
+ * @param[in,out] attrs_out Optional attributes for newly created object
  *
  * @note This returns an INITIAL ref'd entry on success
  * @return FSAL status
  */
 fsal_status_t mdcache_lookup_path(struct fsal_export *exp_hdl,
 				 const char *path,
-				 struct fsal_obj_handle **handle)
+				 struct fsal_obj_handle **handle,
+				 struct attrlist *attrs_out)
 {
 	struct fsal_obj_handle *sub_handle = NULL;
 	struct mdcache_fsal_export *export =
 		container_of(exp_hdl, struct mdcache_fsal_export, export);
-	mdcache_entry_t *entry;
 	fsal_status_t status;
+	struct attrlist attrs;
 
-	*handle = NULL;
+	fsal_prepare_attrs(&attrs, op_ctx->fsal_export->exp_ops.
+				   fs_supported_attrs(op_ctx->fsal_export));
 
 	subcall_raw(export,
 		status = export->sub_export->exp_ops.lookup_path(
-			export->sub_export, path, &sub_handle)
+			export->sub_export, path, &sub_handle, &attrs)
 	       );
 
-	status = mdcache_alloc_and_check_handle(export, sub_handle,
-						&entry, status, false);
-	if (FSAL_IS_ERROR(status))
-		return status;
-
-	*handle = &entry->obj_handle;
-	return status;
+	return mdcache_alloc_and_check_handle(export, sub_handle,
+					      handle, status, false,
+					      &attrs, attrs_out,
+					      "lookup_path", NULL, NULL, false);
 }
 
 /**
@@ -1170,12 +1238,17 @@ fsal_status_t mdcache_lookup_path(struct fsal_export *exp_hdl,
  * This is the equivalent of mdcache_get().  It returns a ref'd entry that
  * must be put using obj_ops.release().
  *
- * @param[in] exp_hdl	Export to search
+ * @param[in]     exp_hdl   The export in which to create the handle
+ * @param[in]     hdl_desc  Buffer descriptor for the "wire" handle
+ * @param[out]    handle    FSAL object handle
+ * @param[in,out] attrs_out Optional attributes for newly created object
+ *
  * @return FSAL status
  */
 fsal_status_t mdcache_create_handle(struct fsal_export *exp_hdl,
 				   struct gsh_buffdesc *hdl_desc,
-				   struct fsal_obj_handle **handle)
+				   struct fsal_obj_handle **handle,
+				   struct attrlist *attrs_out)
 {
 	struct mdcache_fsal_export *export =
 		container_of(exp_hdl, struct mdcache_fsal_export, export);
@@ -1189,7 +1262,7 @@ fsal_status_t mdcache_create_handle(struct fsal_export *exp_hdl,
 	(void) cih_hash_key(&key, export->sub_export->fsal, hdl_desc,
 			    CIH_HASH_KEY_PROTOTYPE);
 
-	status = mdcache_locate_keyed(&key, export, &entry);
+	status = mdcache_locate_keyed(&key, export, &entry, attrs_out);
 	if (FSAL_IS_ERROR(status))
 		return status;
 
