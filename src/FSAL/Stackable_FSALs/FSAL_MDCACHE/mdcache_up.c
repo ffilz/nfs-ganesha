@@ -45,7 +45,7 @@ mdc_up_invalidate(struct fsal_export *export, struct gsh_buffdesc *handle,
 	mdcache_entry_t *entry;
 	fsal_status_t status;
 
-	status = export->exp_ops.create_handle(export, handle, &obj);
+	status = export->exp_ops.create_handle(export, handle, &obj, NULL);
 	if (FSAL_IS_ERROR(status))
 		return status;
 	entry = container_of(obj, mdcache_entry_t, obj_handle);
@@ -99,7 +99,7 @@ mdc_up_update(struct fsal_export *export, struct gsh_buffdesc *handle,
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
-	status = export->exp_ops.create_handle(export, handle, &obj);
+	status = export->exp_ops.create_handle(export, handle, &obj, NULL);
 	if (FSAL_IS_ERROR(status))
 		return status;
 	entry = container_of(obj, mdcache_entry_t, obj_handle);
@@ -270,7 +270,7 @@ mdc_up_invalidate_close(struct fsal_export *export,
 	struct fsal_obj_handle *obj;
 	fsal_status_t status;
 
-	status = export->exp_ops.create_handle(export, handle, &obj);
+	status = export->exp_ops.create_handle(export, handle, &obj, NULL);
 	if (FSAL_IS_ERROR(status))
 		return status;
 

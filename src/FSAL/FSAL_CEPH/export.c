@@ -95,7 +95,8 @@ static void release(struct fsal_export *export_pub)
 
 static fsal_status_t lookup_path(struct fsal_export *export_pub,
 				 const char *path,
-				 struct fsal_obj_handle **pub_handle)
+				 struct fsal_obj_handle **pub_handle,
+				 struct attrlist *attrs_out)
 {
 	/* The 'private' full export handle */
 	struct export *export =
@@ -140,6 +141,9 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 		return ceph2fsal_error(rc);
 
 	construct_handle(&st, i, export, &handle);
+
+	if (attrs_out != NULL)
+		posix2fsal_attributes(&st, attrs_out);
 
 	*pub_handle = &handle->handle;
 	return status;
@@ -187,7 +191,8 @@ static fsal_status_t extract_handle(struct fsal_export *exp_hdl,
  */
 static fsal_status_t create_handle(struct fsal_export *export_pub,
 				   struct gsh_buffdesc *desc,
-				   struct fsal_obj_handle **pub_handle)
+				   struct fsal_obj_handle **pub_handle,
+				   struct attrlist *attrs_out)
 {
 	/* Full 'private' export structure */
 	struct export *export =
@@ -224,6 +229,9 @@ static fsal_status_t create_handle(struct fsal_export *export_pub,
 		return ceph2fsal_error(rc);
 
 	construct_handle(&st, i, export, &handle);
+
+	if (attrs_out != NULL)
+		posix2fsal_attributes(&st, attrs_out);
 
 	*pub_handle = &handle->handle;
 	return status;

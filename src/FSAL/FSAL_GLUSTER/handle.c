@@ -84,7 +84,8 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
  */
 
 static fsal_status_t lookup(struct fsal_obj_handle *parent,
-			    const char *path, struct fsal_obj_handle **handle)
+			    const char *path, struct fsal_obj_handle **handle,
+			    struct attrlist *attrs_out)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
@@ -130,6 +131,9 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 	construct_handle(glfs_export, &sb, glhandle, globjhdl,
 			 GLAPI_HANDLE_LENGTH, &objhandle, vol_uuid);
 
+	if (attrs_out != NULL)
+		posix2fsal_attributes(&sb, attrs_out);
+
 	*handle = &objhandle->handle;
 
  out:
@@ -149,7 +153,8 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 
 static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 				  fsal_cookie_t *whence, void *dir_state,
-				  fsal_readdir_cb cb, bool *eof)
+				  fsal_readdir_cb cb, attrmask_t attrmask,
+				  bool *eof)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
@@ -181,16 +186,26 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
 		rc = glfs_readdir_r(glfd, &de, &pde);
 		if (rc == 0 && pde != NULL) {
+			struct attrlist attrs;
+			bool cb_rc;
+
 			/* skip . and .. */
 			if ((strcmp(de.d_name, ".") == 0)
 			    || (strcmp(de.d_name, "..") == 0)) {
 				continue;
 			}
-			status = lookup(dir_hdl, de.d_name, &obj);
+			fsal_prepare_attrs(&attrs, attrmask);
+
+			status = lookup(dir_hdl, de.d_name, &obj, &attrs);
 			if (FSAL_IS_ERROR(status))
 				goto out;
 
-			if (!cb(de.d_name, obj, dir_state, glfs_telldir(glfd)))
+			cb_rc = cb(de.d_name, obj, &attrs,
+				   dir_state, glfs_telldir(glfd));
+
+			fsal_release_attrs(&attrs);
+
+			if (!cb_rc)
 				goto out;
 		} else if (rc == 0 && pde == NULL) {
 			*eof = true;
@@ -217,7 +232,8 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
 static fsal_status_t create(struct fsal_obj_handle *dir_hdl,
 			    const char *name, struct attrlist *attrib,
-			    struct fsal_obj_handle **handle)
+			    struct fsal_obj_handle **handle,
+			    struct attrlist *attrs_out)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
@@ -278,6 +294,9 @@ static fsal_status_t create(struct fsal_obj_handle *dir_hdl,
 	construct_handle(glfs_export, &sb, glhandle, globjhdl,
 			 GLAPI_HANDLE_LENGTH, &objhandle, vol_uuid);
 
+	if (attrs_out != NULL)
+		posix2fsal_attributes(&sb, attrs_out);
+
 	*handle = &objhandle->handle;
 
  out:
@@ -298,7 +317,8 @@ static fsal_status_t create(struct fsal_obj_handle *dir_hdl,
 
 static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 			     const char *name, struct attrlist *attrib,
-			     struct fsal_obj_handle **handle)
+			     struct fsal_obj_handle **handle,
+			     struct attrlist *attrs_out)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
@@ -359,6 +379,9 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 	construct_handle(glfs_export, &sb, glhandle, globjhdl,
 			 GLAPI_HANDLE_LENGTH, &objhandle, vol_uuid);
 
+	if (attrs_out != NULL)
+		posix2fsal_attributes(&sb, attrs_out);
+
 	*handle = &objhandle->handle;
 
  out:
@@ -379,7 +402,8 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 			      const char *name, object_file_type_t nodetype,
 			      fsal_dev_t *dev, struct attrlist *attrib,
-			      struct fsal_obj_handle **handle)
+			      struct fsal_obj_handle **handle,
+			      struct attrlist *attrs_out)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
@@ -468,6 +492,9 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 	construct_handle(glfs_export, &sb, glhandle, globjhdl,
 			 GLAPI_HANDLE_LENGTH, &objhandle, vol_uuid);
 
+	if (attrs_out != NULL)
+		posix2fsal_attributes(&sb, attrs_out);
+
 	*handle = &objhandle->handle;
 
  out:
@@ -487,7 +514,8 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 				 const char *name, const char *link_path,
 				 struct attrlist *attrib,
-				 struct fsal_obj_handle **handle)
+				 struct fsal_obj_handle **handle,
+				 struct attrlist *attrs_out)
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
@@ -547,6 +575,9 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 
 	construct_handle(glfs_export, &sb, glhandle, globjhdl,
 			 GLAPI_HANDLE_LENGTH, &objhandle, vol_uuid);
+
+	if (attrs_out != NULL)
+		posix2fsal_attributes(&sb, attrs_out);
 
 	*handle = &objhandle->handle;
 
