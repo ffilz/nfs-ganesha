@@ -166,11 +166,12 @@ mdcache_fsal_init_config(struct fsal_module *fsal_hdl,
 /**
  * @brief Enable caching for a FSAL export
  *
- * This is the API to call to enable caching on an export.  The sub-FSAL calls
- * this with with the up_ops that were passed to it, and is wrapped in a
- * FSAL_MDCACHE instance to do caching.  @ref op_ctx should already be
+ * This is the API to call to enable caching on an export.  The sub-FSAL
+ * calls this with the up_ops that were passed to it, and is wrapped in
+ * a FSAL_MDCACHE instance to do caching.  @ref op_ctx should already be
  * initialized by the sub-FSAL.  On success, @a mdc_up_ops will contain
- * the up_ops for the MDCACHE instance, that the sub-FSAL can the specialize.
+ * the up_ops for the MDCACHE instance, that the sub-FSAL can the
+ * specialize.
  *
  * @see mdcache_fsal_create_export
  *

@@ -41,6 +41,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 {
 	struct gpfs_filesystem *gpfs_fs = Arg;
 	const struct fsal_up_vector *event_func;
+	struct req_op_context req_ctx = {0};
 	char thr_name[16];
 	int rc = 0;
 	struct pnfs_deviceid devid;
@@ -72,6 +73,8 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 
 	/* Set the FSAL UP functions that will be used to process events. */
 	event_func = gpfs_fs->up_ops;
+	op_ctx = &req_ctx;
+	op_ctx->fsal_export = event_func->export;
 
 	if (event_func == NULL) {
 		LogFatal(COMPONENT_FSAL_UP,
