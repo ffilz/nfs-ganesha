@@ -45,6 +45,7 @@ mdc_up_invalidate(struct fsal_export *export, struct gsh_buffdesc *handle,
 	mdcache_entry_t *entry;
 	fsal_status_t status;
 	uint32_t mdc_flags = 0;
+	struct req_op_context *save_ctx, req_ctx = {0};
 
 	status = export->exp_ops.create_handle(export, handle, &obj);
 	if (FSAL_IS_ERROR(status))
@@ -58,9 +59,14 @@ mdc_up_invalidate(struct fsal_export *export, struct gsh_buffdesc *handle,
 	if (flags & FSAL_UP_INVALIDATE_CLOSE)
 		mdc_flags |= MDCACHE_INVALIDATE_CLOSE;
 
+	req_ctx.fsal_export = export;
+	save_ctx = op_ctx;
+	op_ctx = &req_ctx;
+
 	status = mdcache_invalidate(entry, mdc_flags);
 
 	obj->obj_ops.put_ref(obj);
+	op_ctx = save_ctx;
 	return status;
 }
 
@@ -83,6 +89,7 @@ mdc_up_update(struct fsal_export *export, struct gsh_buffdesc *handle,
 	fsal_status_t status;
 	/* Have necessary changes been made? */
 	bool mutatis_mutandis = false;
+	struct req_op_context *save_ctx, req_ctx = {0};
 
 	/* These cannot be updated, changing any of them is
 	   tantamount to destroying and recreating the file. */
@@ -107,6 +114,10 @@ mdc_up_update(struct fsal_export *export, struct gsh_buffdesc *handle,
 	if (FSAL_IS_ERROR(status))
 		return status;
 	entry = container_of(obj, mdcache_entry_t, obj_handle);
+
+	req_ctx.fsal_export = export;
+	save_ctx = op_ctx;
+	op_ctx = &req_ctx;
 
 	/* Knock things out if the link count falls to 0. */
 
@@ -249,11 +260,14 @@ mdc_up_update(struct fsal_export *export, struct gsh_buffdesc *handle,
 
  out:
 	obj->obj_ops.put_ref(obj);
+	op_ctx = save_ctx;
 	return status;
 }
 
 /**
  * @brief Invalidate a cached entry
+ *
+ * @note doesn't need op_ctx, handled in mdc_up_invalidate
  *
  * @param[in] key    Key to specify object
  * @param[in] flags  FSAL_UP_INVALIDATE*
