@@ -787,6 +787,81 @@ out:
 }
 
 /**
+ * @brief Refresh the attributes for an mdcache entry.
+ *
+ * NOTE: Caller must hold the attribute lock.
+ *
+ * @param[in] entry     The mdcache entry to refresh attributes for.
+ * @param[in] need_acl  Indicates if the ACL needs updating.
+ */
+
+fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl)
+{
+	struct attrlist attrs;
+	fsal_status_t status = {0, 0};
+
+	/* We always ask for all regular attributes, even if the caller was
+	 * only interested in the ACL.
+	 */
+	fsal_prepare_attrs(&attrs, op_ctx->fsal_export->exp_ops.
+		fs_supported_attrs(op_ctx->fsal_export) | ATTR_RDATTR_ERR);
+
+	if (!need_acl) {
+		/* Don't request the ACL if not necessary. */
+		attrs.mask &= ~ATTR_ACL;
+	}
+
+	subcall(
+		status = entry->sub_handle->obj_ops.getattrs(
+			entry->sub_handle, &attrs)
+	       );
+
+	if (FSAL_IS_ERROR(status)) {
+		if (status.major == ERR_FSAL_STALE)
+			mdcache_kill_entry(entry);
+
+		return status;
+	}
+
+	if (entry->attrs.acl != NULL) {
+		/* We used to have an ACL... */
+		if (need_acl) {
+			/* We requested update of an existing ACL, release the
+			 * old one.
+			 */
+			nfs4_acl_release_entry(entry->attrs.acl);
+		} else {
+			/* The ACL wasn't requested, move it into the
+			 * new attributes so we will retain it.
+			 */
+			attrs.acl = entry->attrs.acl;
+			attrs.mask |= ATTR_ACL;
+		}
+
+		/* ACL was released or moved to new attributes. */
+		entry->attrs.acl = NULL;
+	}
+
+	if (attrs.expire_time_attr == 0) {
+		/* FSAL did not set this, retain what was in the entry. */
+		attrs.expire_time_attr = entry->attrs.expire_time_attr;
+	}
+
+	/* Now move the new attributes into the entry. We don't have to call
+	 * fsal_release_attrs(&attrs) because the copy passed all the references
+	 * so there are none left to release.
+	 */
+	fsal_copy_attrs(&entry->attrs, &attrs, true);
+
+	mdc_fixup_md(entry, attrs.mask);
+
+	LogAttrlist(COMPONENT_CACHE_INODE, NIV_FULL_DEBUG,
+		    "attrs ", &entry->attrs, true);
+
+	return status;
+}
+
+/**
  * @brief Get the attributes for an object
  *
  * If the attribute cache is valid, just return them.  Otherwise, resfresh the
@@ -802,11 +877,10 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status = {0, 0};
 	time_t oldmtime = 0;
-	fsal_acl_t *old_acl;
 
 	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
 
-	if (mdcache_is_attrs_valid(entry)) {
+	if (mdcache_is_attrs_valid(entry, outattrs->mask)) {
 		/* Up-to-date */
 		goto unlock;
 	}
@@ -815,44 +889,28 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
 
-	if (mdcache_is_attrs_valid(entry)) {
+	if (mdcache_is_attrs_valid(entry, outattrs->mask)) {
 		/* Someone beat us to it */
 		goto unlock;
 	}
 
+	/* Use this to detect if we should invalidate a directory. */
 	oldmtime = entry->attrs.mtime.tv_sec;
 
-	old_acl = entry->attrs.acl;
-
-	entry->attrs.mask = op_ctx->fsal_export->exp_ops.
-		fs_supported_attrs(op_ctx->fsal_export);
-
-	subcall(
-		status = entry->sub_handle->obj_ops.getattrs(
-			entry->sub_handle, &entry->attrs)
-	       );
-
-	if (FSAL_IS_ERROR(status) && (status.major == ERR_FSAL_STALE)) {
-		mdcache_kill_entry(entry);
-		goto unlock_no_attrs;
-	}
+	status = mdcache_refresh_attrs(entry, (outattrs->mask & ATTR_ACL) != 0);
 
 	if (FSAL_IS_ERROR(status)) {
 		/* We failed to fetch any attributes. Pass that fact back to
-		 * the caller.
+		 * the caller. We do not change the validity of the current
+		 * entry attributes.
 		 */
 		if (outattrs->mask & ATTR_RDATTR_ERR)
 			outattrs->mask = ATTR_RDATTR_ERR;
 		goto unlock_no_attrs;
 	}
 
-	if (old_acl != NULL)
-		nfs4_acl_release_entry(old_acl);
-
-	mdc_fixup_md(entry);
-
-	if ((obj_hdl->type == DIRECTORY) &&
-	    (oldmtime < entry->attrs.mtime.tv_sec)) {
+	if (obj_hdl->type == DIRECTORY &&
+	    oldmtime < entry->attrs.mtime.tv_sec) {
 
 		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
 		mdcache_dirent_invalidate_all(entry);
@@ -887,7 +945,6 @@ static fsal_status_t mdcache_setattrs(struct fsal_obj_handle *obj_hdl,
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
-	fsal_acl_t *old_acl;
 	uint64_t change;
 
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
@@ -905,35 +962,18 @@ static fsal_status_t mdcache_setattrs(struct fsal_obj_handle *obj_hdl,
 		goto unlock;
 	}
 
-	old_acl = entry->attrs.acl;
+	status = mdcache_refresh_attrs(entry, (attrs->mask & ATTR_ACL) != 0);
 
-	entry->attrs.mask = op_ctx->fsal_export->exp_ops.
-		fs_supported_attrs(op_ctx->fsal_export);
-
-	subcall(
-		status = entry->sub_handle->obj_ops.getattrs(
-			entry->sub_handle, &entry->attrs)
-	       );
-
-	if (FSAL_IS_ERROR(status)) {
-		mdcache_kill_entry(entry);
-		goto unlock;
-	}
-
-	if (old_acl != NULL)
-		nfs4_acl_release_entry(old_acl);
-
-	if (change == entry->attrs.change) {
+	if (!FSAL_IS_ERROR(status) && change == entry->attrs.change) {
 		LogDebug(COMPONENT_CACHE_INODE,
 			 "setattrs did not change change attribute before %lld after = %lld",
 			 (long long int) change,
 			 (long long int) entry->attrs.change);
-		entry->attrs.change++;
+		entry->attrs.change = change + 1;
 	}
 
-	mdc_fixup_md(entry);
-
 unlock:
+
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 
 	return status;
@@ -955,7 +995,6 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
-	fsal_acl_t *old_acl;
 	uint64_t change;
 
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
@@ -973,35 +1012,18 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 		goto unlock;
 	}
 
-	old_acl = entry->attrs.acl;
+	status = mdcache_refresh_attrs(entry, (attrs->mask & ATTR_ACL) != 0);
 
-	entry->attrs.mask = op_ctx->fsal_export->exp_ops.
-		fs_supported_attrs(op_ctx->fsal_export);
-
-	subcall(
-		status = entry->sub_handle->obj_ops.getattrs(
-			entry->sub_handle, &entry->attrs)
-	       );
-
-	if (FSAL_IS_ERROR(status)) {
-		mdcache_kill_entry(entry);
-		goto unlock;
-	}
-
-	if (old_acl != NULL)
-		nfs4_acl_release_entry(old_acl);
-
-	if (change == entry->attrs.change) {
+	if (!FSAL_IS_ERROR(status) && change == entry->attrs.change) {
 		LogDebug(COMPONENT_CACHE_INODE,
 			 "setattr2 did not change change attribute before %lld after = %lld",
 			 (long long int) change,
 			 (long long int) entry->attrs.change);
-		entry->attrs.change++;
+		entry->attrs.change = change + 1;
 	}
 
-	mdc_fixup_md(entry);
-
 unlock:
+
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 
 	return status;

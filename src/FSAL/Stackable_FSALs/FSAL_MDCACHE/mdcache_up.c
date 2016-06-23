@@ -264,7 +264,7 @@ mdc_up_update(struct fsal_export *fsal_export, struct gsh_buffdesc *handle,
 	}
 
 	if (mutatis_mutandis) {
-		mdc_fixup_md(entry);
+		mdc_fixup_md(entry, attr->mask);
 		/* If directory can not trust content anymore. */
 		if (entry->obj_handle.type == DIRECTORY) {
 			atomic_clear_uint32_t_bits(&entry->mde_flags,
