@@ -826,8 +826,10 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 
 out:
 	PTHREAD_RWLOCK_unlock(&mdc_parent->content_lock);
-	if (status.major == ERR_FSAL_STALE)
+	if (status.major == ERR_FSAL_STALE) {
+		mdcache_kill_entry(mdc_parent);
 		status.major = ERR_FSAL_NOENT;
+	}
 	return status;
 }
 
@@ -856,11 +858,6 @@ fsal_status_t mdc_lookup_uncached(mdcache_entry_t *mdc_parent,
 	       );
 
 	if (FSAL_IS_ERROR(status)) {
-		if (status.major == ERR_FSAL_STALE) {
-			LogEvent(COMPONENT_CACHE_INODE,
-				 "FSAL returned STALE from a lookup.");
-			mdcache_kill_entry(mdc_parent);
-		}
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "FSAL %d %s returned %s",
 			     (int) op_ctx->export->export_id,
@@ -1295,11 +1292,6 @@ mdcache_dirent_populate(mdcache_entry_t *dir)
 			mdc_populate_dirent, &eod)
 	       );
 	if (FSAL_IS_ERROR(fsal_status)) {
-		if (fsal_status.major == ERR_FSAL_STALE) {
-			LogEvent(COMPONENT_NFS_READDIR,
-				 "FSAL returned STALE from readdir.");
-			mdcache_kill_entry(dir);
-		}
 
 		LogDebug(COMPONENT_NFS_READDIR, "FSAL readdir status=%s",
 			 fsal_err_txt(fsal_status));
