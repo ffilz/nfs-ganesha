@@ -1647,6 +1647,22 @@ fsal_errors_t fsal_inherit_acls(struct attrlist *attrs, fsal_acl_t *sacl,
 	if (naces == 0)
 		return ERR_FSAL_NO_ERROR;
 
+	if (attrs->acl != NULL) {
+		/* We should never be passed attributes that have an
+		 * ACL attached, but just in case some future code
+		 * path changes that assumption, let's not release the
+		 * old ACL properly.
+		 */
+		int acl_status;
+
+		acl_status = nfs4_acl_release_entry(attrs->acl);
+
+		if (acl_status != NFS_V4_ACL_SUCCESS)
+			LogCrit(COMPONENT_FSAL,
+				"Failed to release old acl, status=%d",
+				acl_status);
+	}
+
 	attrs->acl = nfs4_acl_alloc();
 	attrs->acl->aces = (fsal_ace_t *) nfs4_ace_alloc(naces);
 	dace = attrs->acl->aces;
@@ -1851,6 +1867,22 @@ fsal_mode_gen_set(fsal_ace_t *ace, uint32_t mode)
 static fsal_status_t
 fsal_mode_gen_acl(struct attrlist *attrs)
 {
+	if (attrs->acl != NULL) {
+		/* We should never be passed attributes that have an
+		 * ACL attached, but just in case some future code
+		 * path changes that assumption, let's not release the
+		 * old ACL properly.
+		 */
+		int acl_status;
+
+		acl_status = nfs4_acl_release_entry(attrs->acl);
+
+		if (acl_status != NFS_V4_ACL_SUCCESS)
+			LogCrit(COMPONENT_FSAL,
+				"Failed to release old acl, status=%d",
+				acl_status);
+	}
+
 	attrs->acl = nfs4_acl_alloc();
 	attrs->acl->naces = 6;
 	attrs->acl->aces = (fsal_ace_t *) nfs4_ace_alloc(attrs->acl->naces);
@@ -1899,6 +1931,22 @@ fsal_status_t fsal_mode_to_acl(struct attrlist *attrs, fsal_acl_t *sacl)
 
 	/* Space for generated ACEs at the end */
 	naces += 6;
+
+	if (attrs->acl != NULL) {
+		/* We should never be passed attributes that have an
+		 * ACL attached, but just in case some future code
+		 * path changes that assumption, let's not release the
+		 * old ACL properly.
+		 */
+		int acl_status;
+
+		acl_status = nfs4_acl_release_entry(attrs->acl);
+
+		if (acl_status != NFS_V4_ACL_SUCCESS)
+			LogCrit(COMPONENT_FSAL,
+				"Failed to release old acl, status=%d",
+				acl_status);
+	}
 
 	attrs->acl = nfs4_acl_alloc();
 	attrs->acl->aces = (fsal_ace_t *) nfs4_ace_alloc(naces);
