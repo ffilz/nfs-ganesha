@@ -197,7 +197,7 @@ EXPORT_DEFAULTS {}
 	SecType(enum list, values [none, sys, krb5, krb5i, krb5p],
 	        default [none, sys])
 
-	PrivilegedPort(bool, default false)
+	PrivilegedPort(bool, default true)
 
 	Manage_Gids(bool, default false)
 
