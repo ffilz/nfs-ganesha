@@ -161,6 +161,7 @@ void put_gsh_export(struct gsh_export *export);
 void remove_gsh_export(uint16_t export_id);
 bool foreach_gsh_export(bool(*cb) (struct gsh_export *exp, void *state),
 			void *state);
+bool is_no_privileged_port_export(void);
 
 /**
  * @brief Advisory check of export readiness.

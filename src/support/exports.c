@@ -70,7 +70,8 @@ pthread_rwlock_t export_opt_lock = PTHREAD_RWLOCK_INITIALIZER;
 		       EXPORT_OPTION_AUTH_DEFAULTS |		\
 		       EXPORT_OPTION_PROTO_DEFAULTS |		\
 		       EXPORT_OPTION_XPORT_DEFAULTS |		\
-		       EXPORT_OPTION_NO_DELEGATIONS,		\
+		       EXPORT_OPTION_NO_DELEGATIONS |		\
+		       EXPORT_OPTION_PRIVILEGED_PORT,       \
 	.def.set = UINT32_MAX,					\
 	.expire_time_attr = 60,
 
@@ -1458,7 +1459,7 @@ struct config_item_list deleg_types[] =  {
 		EXPORT_OPTION_AUTH_DEFAULTS, EXPORT_OPTION_AUTH_TYPES,	\
 		sec_types, _struct_, _perms_.options, _perms_.set),	\
 	CONF_ITEM_BOOLBIT_SET("PrivilegedPort",				\
-		false, EXPORT_OPTION_PRIVILEGED_PORT,			\
+		true, EXPORT_OPTION_PRIVILEGED_PORT,			\
 		_struct_, _perms_.options, _perms_.set),		\
 	CONF_ITEM_BOOLBIT_SET("Manage_Gids",				\
 		false, EXPORT_OPTION_MANAGE_GIDS,			\
@@ -1679,10 +1680,12 @@ struct config_block export_defaults_param = {
  * for Pseudo "/" has been specified, build an FSAL_PSEUDO export
  * for the root of the Pseudo FS.
  *
+ * @param no_privileged_port if true, PrivilegedPort export option is set to no
  * @return -1 on error, 0 if we already have one, 1 if created one
  */
 
-static int build_default_root(struct config_error_type *err_type)
+static int build_default_root(struct config_error_type *err_type,
+			      bool no_privileged_port)
 {
 	struct gsh_export *export;
 	struct fsal_module *fsal_hdl = NULL;
@@ -1750,6 +1753,11 @@ static int build_default_root(struct config_error_type *err_type)
 				    EXPORT_OPTION_AUTH_TYPES |
 				    EXPORT_OPTION_PRIVILEGED_PORT;
 
+	if (no_privileged_port) {
+		export->export_perms.options &= ~EXPORT_OPTION_PRIVILEGED_PORT;
+		export->export_perms.set |= EXPORT_OPTION_PRIVILEGED_PORT;
+	}
+
 	export->options = EXPORT_OPTION_USE_COOKIE_VERIFIER;
 	export->options_set = EXPORT_OPTION_FSID_SET |
 			      EXPORT_OPTION_USE_COOKIE_VERIFIER;
@@ -1812,6 +1820,7 @@ err_out:
 	return -1;
 }
 
+
 /**
  * @brief Read the export entries from the parsed configuration file.
  *
@@ -1846,7 +1855,7 @@ int ReadExports(config_file_t in_config,
 		return -1;
 	}
 
-	rc = build_default_root(err_type);
+	rc = build_default_root(err_type, is_no_privileged_port_export());
 	if (rc < 0) {
 		LogCrit(COMPONENT_CONFIG, "No pseudo root!");
 		return -1;

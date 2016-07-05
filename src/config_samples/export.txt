@@ -55,7 +55,7 @@
 #			sys (AUTH_SYS/AUTH_UNIX), krb5 (RPCSEC_GSS),
 #			krb5i (RPCSEC_GSS), krb5p (RCSEC_GSS)
 #
-# PrivilegedPort (false)	If this option is true, client connections
+# PrivilegedPort (true)	If this option is true, client connections
 #				must originate from port < 1024. This is
 #				tradition based on some operating systems
 #				requiring a user to be a privileged user to

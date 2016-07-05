@@ -711,6 +711,34 @@ bool foreach_gsh_export(bool(*cb) (struct gsh_export *exp, void *state),
 	return rc;
 }
 
+/**
+ * Return true if an active export has EXPORT_OPTION_PRIVILEGED_PORT set to no.
+ *
+ * @return true if an export has EXPORT_OPTION_PRIVILEGED_PORT set to no
+ */
+bool is_no_privileged_port_export(void)
+{
+	struct gsh_export *export;
+	struct glist_head *glist;
+	bool no_privileged_port_set = false;
+
+	PTHREAD_RWLOCK_rdlock(&export_by_id.lock);
+
+	glist_for_each(glist, &exportlist) {
+		export = glist_entry(glist, struct gsh_export, exp_list);
+		if (export->export_perms.set & EXPORT_OPTION_PRIVILEGED_PORT &&
+		    (!(EXPORT_OPTION_PRIVILEGED_PORT &
+		       export->export_perms.options))) {
+			no_privileged_port_set = true;
+			break;
+		}
+	}
+
+	PTHREAD_RWLOCK_unlock(&export_by_id.lock);
+
+	return no_privileged_port_set;
+}
+
 bool remove_one_export(struct gsh_export *export, void *state)
 {
 	export_add_to_unexport_work_locked(export);
