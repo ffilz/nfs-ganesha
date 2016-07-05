@@ -424,7 +424,7 @@ static bool pwentname2id(char *name, size_t len, uint32_t *id,
 		buf = alloca(size);
 
 		if (getpwnam_r(name, &p, buf, size, &pres) != 0) {
-			LogInfo(COMPONENT_IDMAPPER, "getpwnam_r %s failed",
+			LogDebug(COMPONENT_IDMAPPER, "getpwnam_r %s failed",
 				name);
 			return false;
 		} else if (pres != NULL) {
@@ -482,7 +482,7 @@ static bool idmapname2id(char *name, size_t len, uint32_t *id,
 	if (rc == 0) {
 		return true;
 	} else {
-		LogInfo(COMPONENT_IDMAPPER,
+		LogDebug(COMPONENT_IDMAPPER,
 			"%s %s failed with %d, using anonymous.",
 			(group ? "nfs4_name_to_gid" : "nfs4_name_to_uid"), name,
 			-rc);
