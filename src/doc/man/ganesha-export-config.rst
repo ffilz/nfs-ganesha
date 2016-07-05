@@ -40,7 +40,7 @@ Protocols(enum list, default [3,4])
 SecType(enum list, default [none, sys])
     Possible values:
         none, sys, krb5, krb5i, krb5p
-        PrivilegedPort(bool, default false)
+        PrivilegedPort(bool, default true)
         Manage_Gids(bool, default false)
 
 Squash(enum, default root_sqaush)

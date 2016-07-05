@@ -71,7 +71,8 @@ pthread_rwlock_t export_opt_lock = PTHREAD_RWLOCK_INITIALIZER;
 		       EXPORT_OPTION_AUTH_DEFAULTS |		\
 		       EXPORT_OPTION_PROTO_DEFAULTS |		\
 		       EXPORT_OPTION_XPORT_DEFAULTS |		\
-		       EXPORT_OPTION_NO_DELEGATIONS,		\
+		       EXPORT_OPTION_NO_DELEGATIONS |		\
+		       EXPORT_OPTION_PRIVILEGED_PORT,       \
 	.def.set = UINT32_MAX,					\
 	.expire_time_attr = 60,
 
@@ -1591,7 +1592,7 @@ struct config_item_list deleg_types[] =  {
 		EXPORT_OPTION_AUTH_DEFAULTS, EXPORT_OPTION_AUTH_TYPES,	\
 		sec_types, _struct_, _perms_.options, _perms_.set),	\
 	CONF_ITEM_BOOLBIT_SET("PrivilegedPort",				\
-		false, EXPORT_OPTION_PRIVILEGED_PORT,			\
+		true, EXPORT_OPTION_PRIVILEGED_PORT,			\
 		_struct_, _perms_.options, _perms_.set),		\
 	CONF_ITEM_BOOLBIT_SET("Manage_Gids",				\
 		false, EXPORT_OPTION_MANAGE_GIDS,			\
@@ -1904,6 +1905,7 @@ static int build_default_root(struct config_error_type *err_type)
 					EXPORT_OPTION_NFSV4 |
 					EXPORT_OPTION_AUTH_TYPES |
 					EXPORT_OPTION_TCP;
+	export->export_perms.options &= ~EXPORT_OPTION_PRIVILEGED_PORT;
 
 	export->export_perms.set = EXPORT_OPTION_SQUASH_TYPES |
 				    EXPORT_OPTION_ACCESS_MASK |
