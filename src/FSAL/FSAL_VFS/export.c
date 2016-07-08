@@ -586,7 +586,7 @@ fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl,
 		goto errout;	/* seriously bad */
 	}
 
-	retval = populate_posix_file_systems();
+	retval = populate_posix_file_systems(false);
 
 	if (retval != 0) {
 		LogCrit(COMPONENT_FSAL,

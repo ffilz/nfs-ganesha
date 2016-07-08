@@ -761,7 +761,7 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl,
 	}
 
 
-	status.minor = populate_posix_file_systems();
+	status.minor = populate_posix_file_systems(false);
 	if (status.minor != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"populate_posix_file_systems returned %s (%d)",

@@ -48,6 +48,7 @@
 #include <assert.h>
 #include <arpa/inet.h>
 #include "fsal.h"
+#include "FSAL/fsal_commonlib.h"
 #include "nfs_core.h"
 #include "log.h"
 #include "avltree.h"
@@ -938,6 +939,22 @@ static bool gsh_export_addexport(DBusMessageIter *args,
 		status = false;
 		goto out;
 	}
+
+	/* Update information about mounted file systems */
+	rc = populate_posix_file_systems(true);
+
+	if (rc != 0) {
+		LogCrit(COMPONENT_EXPORT,
+			"populate_posix_file_systems returned %s (%d)",
+			strerror(rc), rc);
+
+		dbus_set_error(error, DBUS_ERROR_INVALID_ARGS,
+			       "Error reparsing mtab: because %s",
+			       strerror(rc));
+		status = false;
+		goto out;
+	}
+
 	/* Load export entries from list */
 	for (lp = config_list; lp != NULL; lp = lp_next) {
 		lp_next = lp->next;
