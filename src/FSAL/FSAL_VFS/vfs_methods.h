@@ -43,6 +43,7 @@ struct vfs_fsal_export {
 	struct fsal_filesystem *root_fs;
 	struct glist_head filesystems;
 	int fsid_type;
+	bool rescan_mounts;
 };
 
 #define EXPORT_VFS_FROM_FSAL(fsal) \
