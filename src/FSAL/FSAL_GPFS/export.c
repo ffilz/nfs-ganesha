@@ -736,6 +736,7 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl,
 	myself = gsh_calloc(1, sizeof(struct gpfs_fsal_export));
 
 	glist_init(&myself->filesystems);
+	myself->rescan_enabled = true;
 
 	status.minor = fsal_internal_version();
 	LogInfo(COMPONENT_FSAL, "GPFS get version is %d options 0x%X id %d",
@@ -761,7 +762,7 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl,
 	}
 
 
-	status.minor = populate_posix_file_systems();
+	status.minor = populate_posix_file_systems(myself->rescan_enabled);
 	if (status.minor != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"populate_posix_file_systems returned %s (%d)",

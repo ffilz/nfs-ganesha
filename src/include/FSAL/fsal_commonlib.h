@@ -88,7 +88,7 @@ pthread_rwlock_t fs_lock;
 
 void free_fs(struct fsal_filesystem *fs);
 
-int populate_posix_file_systems(void);
+int populate_posix_file_systems(bool fs_refresh);
 
 void release_posix_file_systems(void);
 
