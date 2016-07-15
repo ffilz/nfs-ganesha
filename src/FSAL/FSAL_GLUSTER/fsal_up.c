@@ -190,7 +190,7 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 			     reason);
 
 		if (!reason) {
-			sleep(1);
+			usleep(10);
 			continue;
 		}
 
