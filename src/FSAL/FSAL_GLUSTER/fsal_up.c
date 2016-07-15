@@ -190,7 +190,8 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 			     reason);
 
 		if (!reason) {
-			sleep(1);
+			/** @todo : Do batch processing instead */
+			usleep(10);
 			continue;
 		}
 
