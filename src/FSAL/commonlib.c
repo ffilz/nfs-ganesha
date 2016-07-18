@@ -1155,6 +1155,10 @@ static void posix_find_parent(struct fsal_filesystem *this)
 	struct fsal_filesystem *fs;
 	int plen = 0;
 
+	/* Check if it already has parent */
+	if (this->parent != NULL)
+		return;
+
 	/* Check for root fs, it has no parent */
 	if (this->pathlen == 1 && this->path[0] == '/')
 		return;
@@ -1221,7 +1225,7 @@ void show_tree(struct fsal_filesystem *this, int nest)
 	}
 }
 
-int populate_posix_file_systems(void)
+int populate_posix_file_systems(bool force)
 {
 	FILE *fp;
 	struct mntent *mnt;
@@ -1231,11 +1235,14 @@ int populate_posix_file_systems(void)
 
 	PTHREAD_RWLOCK_wrlock(&fs_lock);
 
-	if (!glist_empty(&posix_file_systems))
+	if (glist_empty(&posix_file_systems)) {
+		LogDebug(COMPONENT_FSAL, "Initializing posix file systems");
+		avltree_init(&avl_fsid, fsal_fs_cmpf_fsid, 0);
+		avltree_init(&avl_dev, fsal_fs_cmpf_dev, 0);
+	} else if (!force) {
+		LogDebug(COMPONENT_FSAL, "File systems are initialized");
 		goto out;
-
-	avltree_init(&avl_fsid, fsal_fs_cmpf_fsid, 0);
-	avltree_init(&avl_dev, fsal_fs_cmpf_dev, 0);
+	}
 
 	/* start looking for the mount point */
 	fp = setmntent(MOUNTED, "r");
@@ -1276,6 +1283,38 @@ int populate_posix_file_systems(void)
  out:
 
 	PTHREAD_RWLOCK_unlock(&fs_lock);
+	return retval;
+}
+
+int resolve_posix_filesystem(const char *path,
+			     struct fsal_module *fsal,
+			     struct fsal_export *exp,
+			     claim_filesystem_cb claim,
+			     unclaim_filesystem_cb unclaim,
+			     struct fsal_filesystem **root_fs,
+			     bool force)
+{
+	int retval = 0;
+
+	retval = populate_posix_file_systems(force);
+	if (retval != 0) {
+		LogCrit(COMPONENT_FSAL,
+			"populate_posix_file_systems returned %s (%d)",
+			strerror(retval), retval);
+		goto out;
+	}
+
+	retval = claim_posix_filesystems(path, fsal, exp,
+					 claim, unclaim, root_fs);
+	if (retval != 0) {
+		LogCrit(COMPONENT_FSAL,
+			"claim_posix_filesystems(%s) returned %s (%d)",
+			path,
+			strerror(retval), retval);
+		goto out;
+	}
+
+out:
 	return retval;
 }
 

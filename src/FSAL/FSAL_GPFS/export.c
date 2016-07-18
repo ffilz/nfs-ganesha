@@ -44,6 +44,7 @@
 #include "FSAL/fsal_config.h"
 #include "gpfs_methods.h"
 #include "nfs_exports.h"
+#include "nfs_core.h"
 #include "export_mgr.h"
 #include "pnfs_utils.h"
 #include "mdcache.h"
@@ -775,24 +776,27 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl,
 		goto detach;
 	}
 
+	status.minor = resolve_posix_filesystem(op_ctx->export->fullpath,
+						fsal_hdl, &myself->export,
+						gpfs_claim_filesystem,
+						gpfs_unclaim_filesystem,
+						&myself->root_fs, false);
 
-	status.minor = populate_posix_file_systems();
-	if (status.minor != 0) {
-		LogCrit(COMPONENT_FSAL,
-			"populate_posix_file_systems returned %s (%d)",
-			strerror(status.minor), status.minor);
-		status.major = posix2fsal_error(status.minor);
-		goto uninit;
+	/* second attempt to resolve file system in case of ganesha isn't
+	 * during startup
+	 */
+	if (status.minor == ENOENT && nfs_initialized == true) {
+		status.minor =
+			resolve_posix_filesystem(op_ctx->export->fullpath,
+						 fsal_hdl, &myself->export,
+						 gpfs_claim_filesystem,
+						 gpfs_unclaim_filesystem,
+						 &myself->root_fs, true);
 	}
 
-	status.minor = claim_posix_filesystems(op_ctx->export->fullpath,
-					       fsal_hdl, &myself->export,
-					       gpfs_claim_filesystem,
-					       gpfs_unclaim_filesystem,
-					       &myself->root_fs);
 	if (status.minor != 0) {
 		LogCrit(COMPONENT_FSAL,
-			"claim_posix_filesystems(%s) returned %s (%d)",
+			"resolve_posix_filesystem(%s) returned %s (%d)",
 			op_ctx->export->fullpath,
 			strerror(status.minor), status.minor);
 		status.major = posix2fsal_error(status.minor);

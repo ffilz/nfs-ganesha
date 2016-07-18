@@ -107,6 +107,8 @@ char *config_path = GANESHA_CONFIG_PATH;
 
 char *pidfile_path = GANESHA_PIDFILE_PATH;
 
+bool nfs_initialized;
+
 /**
  * @brief This thread is in charge of signal management
  *
@@ -807,6 +809,7 @@ void nfs_start(nfs_start_info_t *p_start_info)
 
 	/* Initialize all layers and service threads */
 	nfs_Init(p_start_info);
+	nfs_initialized = true;
 
 	/* Spawns service threads */
 	nfs_Start_threads();
