@@ -902,6 +902,9 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 		}
 	}
 
+	if (*obj == NULL)
+		goto out;
+
 	if (!support_ex) {
 		/* Handle setattr for old API */
 		attrs->mask = orig_mask;
