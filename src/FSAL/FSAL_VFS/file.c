@@ -435,7 +435,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 			if (retval == 0) {
 				LogFullDebug(COMPONENT_FSAL,
-					     "New size = %"PRIx64,
+					     "New size = %ld",
 					     stat.st_size);
 			} else {
 				if (errno == EBADF)
