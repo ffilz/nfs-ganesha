@@ -378,7 +378,10 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 		anonymous_started = true;
 	}
 
-	if (state_open == NULL) {
+	/** @todo this is racy, use cache_inode_lock_trust_attrs and
+	 *        cache_inode_access_no_mutex
+	 */
+	if (entry->obj_handle->attrs->owner != op_ctx->creds->caller_uid) {
 		/* Need to permission check the read. */
 		fsal_status = obj->obj_ops.test_access(obj, FSAL_READ_ACCESS,
 						       NULL, NULL, true);
