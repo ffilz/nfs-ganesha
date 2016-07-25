@@ -527,7 +527,8 @@ int nfs4_op_lock(struct nfs_argop4 *op, compound_data_t *data,
 						 lock_owner,
 						 &lock_state,
 						 data->minorversion > 0 ?
-							&refer : NULL);
+							&refer : NULL,
+						 false);
 
 			if (state_status != STATE_SUCCESS) {
 				res_LOCK4->status = NFS4ERR_RESOURCE;

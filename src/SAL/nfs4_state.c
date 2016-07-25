@@ -278,7 +278,8 @@ state_status_t state_add(struct fsal_obj_handle *obj,
 			 enum state_type state_type,
 			 union state_data *state_data,
 			 state_owner_t *owner_input,
-			 state_t **state, struct state_refer *refer)
+			 state_t **state, struct state_refer *refer,
+			 bool got_lock)
 {
 	state_status_t status = 0;
 
@@ -296,11 +297,13 @@ state_status_t state_add(struct fsal_obj_handle *obj,
 		return STATE_BAD_TYPE;
 	}
 
-	PTHREAD_RWLOCK_wrlock(&obj->state_hdl->state_lock);
+	if (!got_lock)
+		PTHREAD_RWLOCK_wrlock(&obj->state_hdl->state_lock);
 	status =
 	    state_add_impl(obj, state_type, state_data, owner_input, state,
 			   refer);
-	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
+	if (!got_lock)
+		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 	return status;
 }

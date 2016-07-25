@@ -188,7 +188,8 @@ static nfsstat4 acquire_layout_state(compound_data_t *data,
 					      &layout_data,
 					      clientid_owner,
 					      layout_state,
-					      &refer);
+					      &refer,
+					      lock_held);
 
 		if (state_status != STATE_SUCCESS) {
 			nfs_status = nfs4_Errno_state(state_status);

@@ -706,7 +706,8 @@ state_status_t state_add(struct fsal_obj_handle *obj,
 			 enum state_type state_type,
 			 union state_data *state_data,
 			 state_owner_t *owner_input,
-			 state_t **state, struct state_refer *refer);
+			 state_t **state, struct state_refer *refer,
+			 bool got_lock);
 
 state_status_t state_set(state_t *state);
 
