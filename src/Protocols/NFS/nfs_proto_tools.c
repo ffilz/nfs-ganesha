@@ -596,8 +596,8 @@ static fattr_xdr_result encode_fsid(XDR *xdr, struct xdr_attrs_args *args)
 		fsid.major = op_ctx->export->filesystem_id.major;
 		fsid.minor = op_ctx->export->filesystem_id.minor;
 	} else {
-		fsid.major = args->fsid.major;
-		fsid.minor = args->fsid.minor;
+		fsid.major = args->attrs->fsid.major;
+		fsid.minor = args->attrs->fsid.minor;
 	}
 
 	if (!xdr_u_int64_t(xdr, &fsid.major))
