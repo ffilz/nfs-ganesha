@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CURDIR=$(dirname $0)
+CURDIR=$(dirname "$(readlink -m "$0")")
 TOPDIR=$(git rev-parse --show-toplevel)
 HOOKDIR=$TOPDIR/.git/hooks
 
