@@ -100,8 +100,29 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		goto errout;
 	}
 
+	/* Keep track of the export in the req_ctx */
+	pfid->export = export;
+	/** @todo FSF - this gets a 2nd export ref, I'm concerned there's
+	 *              a leak here...
+	 */
+	get_gsh_export_ref(export);
+	op_ctx->export = export;
+	op_ctx->fsal_export = export->fsal_export;
+	op_ctx->caller_addr = &req9p->pconn->addrpeer;
+	op_ctx->export_perms = &req9p->pconn->export_perms;
+
+	export_check_access();
+
+	if ((op_ctx->export_perms->options & EXPORT_OPTION_9P) == 0) {
+		LogInfo(COMPONENT_9P,
+			"9P is not allowed for this export entry, rejecting client");
+		err = EACCES;
+		goto errout;
+	}
+
 	port = get_port(&req9p->pconn->addrpeer);
-	if (export->export_perms.options & EXPORT_OPTION_PRIVILEGED_PORT &&
+
+	if (op_ctx->export_perms->options & EXPORT_OPTION_PRIVILEGED_PORT &&
 	    port >= IPPORT_RESERVED) {
 		LogInfo(COMPONENT_9P,
 			"Port %d is too high for this export entry, rejecting client",
@@ -137,16 +158,6 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		err = EINVAL;
 		goto errout;
 	}
-
-	/* Keep track of the export in the req_ctx */
-	pfid->export = export;
-	get_gsh_export_ref(export);
-	op_ctx->export = export;
-	op_ctx->fsal_export = export->fsal_export;
-	op_ctx->caller_addr = &req9p->pconn->addrpeer;
-	op_ctx->export_perms = &req9p->pconn->export_perms;
-
-	export_check_access();
 
 	if (exppath[0] != '/' ||
 	    !strcmp(exppath, export->fullpath)) {
@@ -214,6 +225,8 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	return 1;
 
 errout:
+
+	_9p_release_opctx();
 
 	if (export != NULL)
 		put_gsh_export(export);
