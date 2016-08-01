@@ -646,8 +646,8 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 #endif
 {
 #ifdef USE_NFSIDMAP
-	uid_t gss_uid = ANON_UID;
-	gid_t gss_gid = ANON_GID;
+	uid_t gss_uid = get_anonymous_uid();
+	gid_t gss_gid = get_anonymous_gid();
 	const gid_t *gss_gidres = NULL;
 	int rc;
 	bool success;
