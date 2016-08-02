@@ -123,10 +123,10 @@ fsal_status_t mdcache_alloc_and_check_handle(
 		return status;
 	}
 
-	if (new_entry->obj_handle.type == DIRECTORY) {
+	if (new_entry->obj_handle.type == DIRECTORY &&
+	    new_entry->fsobj.fsdir.parent.kv.len == 0) {
 		/* Insert Parent's key */
-		mdcache_key_dup(&new_entry->fsobj.fsdir.parent,
-				&parent->fh_hk.key);
+		mdc_dir_add_parent(new_entry, parent);
 	}
 
 	*new_obj = &new_entry->obj_handle;
