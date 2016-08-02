@@ -1127,6 +1127,41 @@ static fsal_status_t file_unlink(struct fsal_obj_handle *dir_hdl,
 }
 
 /**
+ * @brief Implements GLUSTER FSAL objectoperation close
+   @todo: close2() could be used to close globalfd as well.
+ */
+
+static fsal_status_t file_close(struct fsal_obj_handle *obj_hdl)
+{
+	int rc = 0;
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	struct glusterfs_handle *objhandle =
+	    container_of(obj_hdl, struct glusterfs_handle, handle);
+#ifdef GLTIMING
+	struct timespec s_time, e_time;
+
+	now(&s_time);
+#endif
+
+	assert(obj_hdl->type == REGULAR_FILE);
+
+	/* Take write lock on object to protect file descriptor.
+	 * This can block over an I/O operation.
+	 */
+	PTHREAD_RWLOCK_wrlock(&obj_hdl->lock);
+
+	status = glusterfs_close_my_fd(objhandle->globalfd.glfd);
+
+	PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
+
+#ifdef GLTIMING
+	now(&e_time);
+	latency_update(&s_time, &e_time, lat_file_close);
+#endif
+	return status;
+}
+
+/**
  * @brief Implements GLUSTER FSAL objectoperation share_op
  */
 /*
@@ -2900,6 +2935,7 @@ void handle_ops_init(struct fsal_obj_ops *ops)
 	ops->unlink = file_unlink;
 	ops->handle_digest = handle_digest;
 	ops->handle_to_key = handle_to_key;
+	ops->close = file_close;
 
 	/* fops with OpenTracking (multi-fd) enabled */
 	ops->open2 = glusterfs_open2;
