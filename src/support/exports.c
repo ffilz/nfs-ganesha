@@ -2274,7 +2274,10 @@ gid_t get_anonymous_gid(void)
 /**
  * @brief Checks if a machine is authorized to access an export entry
  *
- * Permissions in the op context get updated based on export and client
+ * Permissions in the op context get updated based on export and client.
+ *
+ * Takes the export->lock in read mode to protect the client list and
+ * export permissions while performing this work.
  */
 
 void export_check_access(void)
@@ -2291,7 +2294,10 @@ void export_check_access(void)
 	 */
 	memset(op_ctx->export_perms, 0, sizeof(*op_ctx->export_perms));
 
-	if (op_ctx->export == NULL) {
+	if (op_ctx->export != NULL) {
+		/* Take lock */
+		PTHREAD_RWLOCK_rdlock(&op_ctx->export->lock);
+	} else {
 		/* Shortcut if no export */
 		goto no_export;
 	}
@@ -2420,5 +2426,10 @@ void export_check_access(void)
 		LogMidDebug(COMPONENT_EXPORT,
 			    "Final options   (%s)",
 			    perms);
+	}
+
+	if (op_ctx->export != NULL) {
+		/* Release lock */
+		PTHREAD_RWLOCK_unlock(&op_ctx->export->lock);
 	}
 }
