@@ -2091,7 +2091,10 @@ sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4)
 /**
  * @brief Checks if a machine is authorized to access an export entry
  *
- * Permissions in the op context get updated based on export and client
+ * Permissions in the op context get updated based on export and client.
+ *
+ * Takes the export->lock in read mode to protect the client list and
+ * export permissions while performing this work.
  */
 
 void export_check_access(void)
@@ -2107,6 +2110,8 @@ void export_check_access(void)
 	op_ctx->export_perms->anonymous_gid = (gid_t) ANON_GID;
 
 	assert(op_ctx != NULL && op_ctx->export != NULL);
+
+	PTHREAD_RWLOCK_rdlock(&op_ctx->export->lock);
 
 	hostaddr = convert_ipv6_to_ipv4(op_ctx->caller_addr, &alt_hostaddr);
 
@@ -2219,4 +2224,6 @@ void export_check_access(void)
 			    "Final options   (%s)",
 			    perms);
 	}
-}				/* nfs_export_check_access */
+
+	PTHREAD_RWLOCK_unlock(&op_ctx->export->lock);
+}

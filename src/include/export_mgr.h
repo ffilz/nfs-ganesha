@@ -39,7 +39,7 @@
 #include "gsh_list.h"
 #include "avltree.h"
 #include "abstract_atomic.h"
-#include "fsal_types.h"
+#include "fsal.h"
 
 #ifndef EXPORT_MGR_H
 #define EXPORT_MGR_H
@@ -83,27 +83,27 @@ struct gsh_export {
 	struct gsh_export *exp_parent_exp;
 	/** Pointer to the fsal_export associated with this export */
 	struct fsal_export *fsal_export;
-	/** Exported path */
+	/** Exported path - static option */
 	char *fullpath;
-	/** PseudoFS path for export */
+	/** PseudoFS path for export - static option */
 	char *pseudopath;
 	/** Tag for direct NFS v3 mounting of export */
 	char *FS_tag;
 	/** Node id this is mounted on. Protected by lock */
 	uint64_t exp_mounted_on_file_id;
-	/** Max Read for this entry */
+	/** Max Read for this entry - atomic changeable option */
 	uint64_t MaxRead;
-	/** Max Write for this entry */
+	/** Max Write for this entry - atomic changeable option */
 	uint64_t MaxWrite;
-	/** Preferred Read size */
+	/** Preferred Read size - atomic changeable option */
 	uint64_t PrefRead;
-	/** Preferred Write size */
+	/** Preferred Write size - atomic changeable option */
 	uint64_t PrefWrite;
-	/** Preferred Readdir size */
+	/** Preferred Readdir size - atomic changeable option */
 	uint64_t PrefReaddir;
-	/** Maximum Offset allowed for write */
+	/** Maximum Offset allowed for write - atomic changeable option */
 	uint64_t MaxOffsetWrite;
-	/** Maximum Offset allowed for read */
+	/** Maximum Offset allowed for read - atomic changeable option */
 	uint64_t MaxOffsetRead;
 	/** Filesystem ID for overriding fsid from FSAL*/
 	fsal_fsid_t filesystem_id;
@@ -115,19 +115,29 @@ struct gsh_export {
 	struct export_perms export_perms;
 	/** The last time the export stats were updated */
 	nsecs_elapsed_t last_update;
-	/** Export non-permission options */
+	/** Export non-permission options - atomic changeable option */
 	uint32_t options;
-	/** Export non-permission options set */
+	/** Export non-permission options set - atomic changeable option */
 	uint32_t options_set;
 	/** Expiration time interval in seconds for attributes.  Settable with
-	    Attr_Expiration_Time. */
+	    Attr_Expiration_Time. - atomic changeable option*/
 	int32_t expire_time_attr;
-	/** Export_Id for this export */
+	/** Export_Id for this export - static option */
 	uint16_t export_id;
 
 	uint8_t export_status;		/*< current condition */
 	bool has_pnfs_ds;		/*< id_servers matches export_id */
 };
+
+static inline bool op_ctx_export_has_option(uint32_t option)
+{
+	return atomic_fetch_uint32_t(&op_ctx->export->options) & option;
+}
+
+static inline bool op_ctx_export_has_option_set(uint32_t option)
+{
+	return atomic_fetch_uint32_t(&op_ctx->export->options_set) & option;
+}
 
 void export_pkginit(void);
 #ifdef USE_DBUS
