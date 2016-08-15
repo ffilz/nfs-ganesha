@@ -131,9 +131,6 @@ int display_nfs4_owner(struct display_buffer *dspbuf, state_owner_t *owner)
 			return b_left;
 	}
 
-	if (b_left <= 0)
-		return b_left;
-
 	texpire = atomic_fetch_time_t(&nfs4_owner->cache_expire);
 
 	if (texpire != 0) {
