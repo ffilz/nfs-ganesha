@@ -9,6 +9,7 @@
  */
 
 #include "config.h"
+#include <sys/sysmacros.h>  /* for major(3), minor(3) */
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>

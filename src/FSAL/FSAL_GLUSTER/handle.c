@@ -21,6 +21,7 @@
  * -------------
  */
 
+#include <sys/sysmacros.h> /* for makedev(3) */
 #include <fcntl.h>
 #include "fsal.h"
 #include "gluster_internal.h"
