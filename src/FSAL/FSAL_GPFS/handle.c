@@ -51,11 +51,11 @@
 
 #define ATTR_GPFS_ALLOC_HANDLE (ATTR_TYPE | ATTR_FILEID | ATTR_FSID)
 
-static struct gpfs_fsal_obj_handle *alloc_handle(struct gpfs_file_handle *fh,
-						 struct fsal_filesystem *fs,
-						 struct attrlist *attributes,
-						 const char *link_content,
-						 struct fsal_export *exp_hdl)
+struct gpfs_fsal_obj_handle *alloc_handle(struct gpfs_file_handle *fh,
+					 struct fsal_filesystem *fs,
+					 struct attrlist *attributes,
+					 const char *link_content,
+					 struct fsal_export *exp_hdl)
 {
 	struct gpfs_fsal_export *myself =
 	    container_of(exp_hdl, struct gpfs_fsal_export, export);
@@ -68,8 +68,8 @@ static struct gpfs_fsal_obj_handle *alloc_handle(struct gpfs_file_handle *fh,
 	memcpy(hdl->handle, fh, sizeof(struct gpfs_file_handle));
 	hdl->obj_handle.type = attributes->type;
 	if (hdl->obj_handle.type == REGULAR_FILE) {
-		hdl->u.file.fd = -1;	/* no open on this yet */
-		hdl->u.file.openflags = FSAL_O_CLOSED;
+		hdl->u.file.fd.fd = -1;	/* no open on this yet */
+		hdl->u.file.fd.openflags = FSAL_O_CLOSED;
 	} else if (hdl->obj_handle.type == SYMBOLIC_LINK
 		   && link_content != NULL) {
 		size_t len = strlen(link_content) + 1;
@@ -155,10 +155,10 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 /* create
  * create a regular file and set its attributes
  */
-static fsal_status_t create(struct fsal_obj_handle *dir_hdl,
-			    const char *name, struct attrlist *attr_in,
-			    struct fsal_obj_handle **handle,
-			    struct attrlist *attrs_out)
+fsal_status_t create(struct fsal_obj_handle *dir_hdl,
+		     const char *name, struct attrlist *attr_in,
+		     struct fsal_obj_handle **handle,
+		     struct attrlist *attrs_out)
 {
 	struct gpfs_fsal_obj_handle *hdl;
 	fsal_status_t status;
@@ -783,6 +783,21 @@ static fsal_status_t setattrs(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
+/*
+ * NOTE: this is done under protection of the attributes rwlock in cache entry.
+ */
+fsal_status_t gpfs_setattr2(struct fsal_obj_handle *obj_hdl,
+				   bool bypass,
+				   struct state_t *state,
+				   struct attrlist *attrs)
+{
+	fsal_status_t status;
+
+	status = GPFSFSAL_setattrs(obj_hdl, op_ctx, attrs);
+
+	return status;
+}
+
 /**
  *  @brief compare two handles.
  *
@@ -922,7 +937,7 @@ static fsal_status_t share_op(struct fsal_obj_handle *obj_hdl,
 	struct gpfs_fsal_obj_handle *myself;
 
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-	mntfd = fd = myself->u.file.fd;
+	mntfd = fd = myself->u.file.fd.fd;
 
 	status = GPFSFSAL_share_op(mntfd, fd, p_owner, request_share);
 
@@ -987,6 +1002,14 @@ void gpfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->setxattrs = setxattrs;
 	ops->removexattrs = removexattrs;
 	ops->listxattrs = listxattrs;
+	ops->open2 = gpfs_open2;
+	ops->reopen2 = gpfs_reopen2;
+	ops->read2 = gpfs_read2;
+	ops->write2 = gpfs_write2;
+	ops->commit2 = gpfs_commit2;
+	ops->setattr2 = gpfs_setattr2;
+	ops->close2 = gpfs_close2;
+	ops->lock_op2 = gpfs_lock_op2;
 }
 
 /**
