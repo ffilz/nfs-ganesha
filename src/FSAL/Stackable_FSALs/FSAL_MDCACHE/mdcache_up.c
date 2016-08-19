@@ -311,6 +311,137 @@ mdc_up_invalidate_close(struct fsal_export *sub_export,
 	return status;
 }
 
+/** Grant a lock to a client
+ *
+ * Pass up to upper layer
+ *
+ * @param[in] sub_export	FSAL export owning ops
+ * @param[in] file         The file in question
+ * @param[in] owner        The lock owner
+ * @param[in] lock_param   A description of the lock
+ *
+ */
+state_status_t mdc_up_lock_grant(struct fsal_export *sub_export,
+				 struct gsh_buffdesc *file,
+				 void *owner,
+				 fsal_lock_param_t *lock_param)
+{
+	struct mdcache_fsal_export *export =
+		mdc_export(sub_export->super_export);
+	state_status_t rc;
+	struct req_op_context *save_ctx, req_ctx = {0};
+
+	req_ctx.fsal_export = &export->export;
+	save_ctx = op_ctx;
+	op_ctx = &req_ctx;
+
+	rc = export->super_up_ops.lock_grant(sub_export, file, owner,
+					     lock_param);
+
+	op_ctx = save_ctx;
+
+	return rc;
+}
+
+/** Signal lock availability
+ *
+ * Pass up to upper layer
+ *
+ * @param[in] sub_export	FSAL export owning ops
+ * @param[in] file         The file in question
+ * @param[in] owner        The lock owner
+ * @param[in] lock_param   A description of the lock
+ *
+ */
+state_status_t mdc_up_lock_avail(struct fsal_export *sub_export,
+				 struct gsh_buffdesc *file,
+				 void *owner,
+				 fsal_lock_param_t *lock_param)
+{
+	struct mdcache_fsal_export *export =
+		mdc_export(sub_export->super_export);
+	state_status_t rc;
+	struct req_op_context *save_ctx, req_ctx = {0};
+
+	req_ctx.fsal_export = &export->export;
+	save_ctx = op_ctx;
+	op_ctx = &req_ctx;
+
+	rc = export->super_up_ops.lock_avail(sub_export, file, owner,
+					     lock_param);
+
+	op_ctx = save_ctx;
+
+	return rc;
+}
+
+/** Perform a layoutrecall on a single file
+ *
+ * Pass to upper layer
+ *
+ * @param[in] sub_export	FSAL export owning ops
+ * @param[in] handle       Handle on which the layout is held
+ * @param[in] layout_type  The type of layout to recall
+ * @param[in] changed      Whether the layout has changed and the
+ *                         client ought to finish writes through MDS
+ * @param[in] segment      Segment to recall
+ * @param[in] cookie       A cookie returned with the return that
+ *                         completely satisfies a recall
+ * @param[in] spec         Lets us be fussy about what clients we send
+ *                         to. May beNULL.
+ *
+ */
+state_status_t mdc_up_layoutrecall(struct fsal_export *sub_export,
+				   struct gsh_buffdesc *handle,
+				   layouttype4 layout_type,
+				   bool changed,
+				   const struct pnfs_segment *segment,
+				   void *cookie,
+				   struct layoutrecall_spec *spec)
+{
+	struct mdcache_fsal_export *export =
+		mdc_export(sub_export->super_export);
+	state_status_t rc;
+	struct req_op_context *save_ctx, req_ctx = {0};
+
+	req_ctx.fsal_export = &export->export;
+	save_ctx = op_ctx;
+	op_ctx = &req_ctx;
+
+	rc = export->super_up_ops.layoutrecall(sub_export, handle, layout_type,
+					       changed, segment, cookie, spec);
+
+	op_ctx = save_ctx;
+
+	return rc;
+}
+
+/** Recall a delegation
+ *
+ * Pass to upper layer
+ *
+ * @param[in] sub_export	FSAL export owning ops
+ * @param[in] handle Handle on which the delegation is held
+ */
+state_status_t mdc_up_delegrecall(struct fsal_export *sub_export,
+				  struct gsh_buffdesc *handle)
+{
+	struct mdcache_fsal_export *export =
+		mdc_export(sub_export->super_export);
+	state_status_t rc;
+	struct req_op_context *save_ctx, req_ctx = {0};
+
+	req_ctx.fsal_export = &export->export;
+	save_ctx = op_ctx;
+	op_ctx = &req_ctx;
+
+	rc = export->super_up_ops.delegrecall(sub_export, handle);
+
+	op_ctx = save_ctx;
+
+	return rc;
+}
+
 fsal_status_t
 mdcache_export_up_ops_init(struct fsal_up_vector *my_up_ops,
 			   const struct fsal_up_vector *super_up_ops)
@@ -322,6 +453,13 @@ mdcache_export_up_ops_init(struct fsal_up_vector *my_up_ops,
 	my_up_ops->invalidate = mdc_up_invalidate;
 	my_up_ops->update = mdc_up_update;
 	my_up_ops->invalidate_close = mdc_up_invalidate_close;
+
+	/* These are pass-through calls that set op_ctx */
+	my_up_ops->lock_grant = mdc_up_lock_grant;
+	my_up_ops->lock_avail = mdc_up_lock_avail;
+	my_up_ops->layoutrecall = mdc_up_layoutrecall;
+	/* notify_device cannot call into MDCACHE */
+	my_up_ops->delegrecall = mdc_up_delegrecall;
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
