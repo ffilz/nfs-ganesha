@@ -380,7 +380,6 @@ void state_del_locked(state_t *state)
 		PTHREAD_MUTEX_lock(&state->state_mutex);
 
 		glist_del(&state->state_owner_list);
-		state->state_owner = NULL;
 
 		/* If we are dropping the last open state from an open
 		 * owner, we will want to retain a refcount and let the
@@ -463,6 +462,7 @@ void state_del_locked(state_t *state)
 	PTHREAD_MUTEX_lock(&state->state_mutex);
 	glist_del(&state->state_export_list);
 	state->state_export = NULL;
+	state->state_owner = NULL;
 	PTHREAD_MUTEX_unlock(&state->state_mutex);
 	PTHREAD_RWLOCK_unlock(&export->lock);
 	put_gsh_export(export);
