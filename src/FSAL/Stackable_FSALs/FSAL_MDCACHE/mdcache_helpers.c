@@ -186,6 +186,8 @@ void mdc_clean_entry(mdcache_entry_t *entry)
 		/* Clean up parent key */
 		mdcache_key_delete(&entry->fsobj.fsdir.parent);
 
+		mdcache_lru_cleanup_try_push(entry);
+
 		PTHREAD_RWLOCK_unlock(&entry->content_lock);
 	}
 
