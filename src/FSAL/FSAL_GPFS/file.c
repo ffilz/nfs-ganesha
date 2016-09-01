@@ -200,12 +200,15 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
 	struct gpfs_fsal_obj_handle *myself;
 	struct gpfs_fsal_obj_handle *hdl = NULL;
 	bool truncated;
-	bool setattrs = attrib_set != NULL;
+	bool setattrs;
 	bool created = false;
 	struct attrlist verifier_attr;
 	struct fsal_export *export = op_ctx->fsal_export;
 	struct gpfs_filesystem *gpfs_fs = obj_hdl->fs->private;
 	int *fd = NULL;
+
+	if (attrib_set != NULL)
+		setattrs = true;
 
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
@@ -892,11 +895,6 @@ fsal_status_t gpfs_write2(struct fsal_obj_handle *obj_hdl,
 	bool closefd = false;
 	fsal_openflags_t openflags = FSAL_O_WRITE;
 
-	if (info != NULL) {
-		/* Currently we don't support WRITE_PLUS */
-		return fsalstat(ERR_FSAL_NOTSUPP, 0);
-	}
-
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
 			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
@@ -1543,7 +1541,7 @@ fsal_status_t gpfs_close2(struct fsal_obj_handle *obj_hdl,
 
 		PTHREAD_RWLOCK_unlock(&obj_hdl->lock);
 	}
-	if (state && my_fd->fd > 0) {
+	if (my_fd->fd > 0) {
 		LogFullDebug(COMPONENT_FSAL,
 			     "state %p fd %d", state, my_fd->fd);
 		state_owner = state->state_owner;
