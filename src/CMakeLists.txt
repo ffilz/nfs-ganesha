@@ -660,12 +660,12 @@ IF(USE_FSAL_LUSTRE_UP)
 ENDIF(USE_FSAL_LUSTRE_UP)
 
 if(USE_FSAL_XFS)
-  check_library_exists(
-    handle
-    "open_by_handle"
-    ""
-    HAVE_XFS_LIB
-    )
+  check_library_exists(handle "open_by_handle" "lib" HAVE_XFS_LIB)
+  if (HAVE_XFS_LIB)
+    set(PATH_LIBHANDLE "/lib/libhandle.so")
+  else (HAVE_XFS_LIB)
+    check_library_exists(handle "open_by_handle" "" HAVE_XFS_LIB)
+  endif (HAVE_XFS_LIB)
   check_include_files("xfs/xfs.h" HAVE_XFS_H)
   if((NOT HAVE_XFS_LIB) OR (NOT HAVE_XFS_H))
    if(STRICT_PACKAGE)
