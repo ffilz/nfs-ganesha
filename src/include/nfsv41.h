@@ -3828,23 +3828,37 @@ extern "C" {
 
 	static inline bool xdr_nfs_fh4(XDR * xdrs, nfs_fh4 *objp)
 	{
-		file_handle_v4_t *fh;
 
-		if (xdrs->x_op == XDR_ENCODE &&
-		    objp->nfs_fh4_len >= offsetof(file_handle_v4_t, fsopaque)) {
-			fh = (file_handle_v4_t *)objp->nfs_fh4_val;
-			fh->id.exports = htons(fh->id.exports);
-		}
-		if (!inline_xdr_bytes
-		    (xdrs, (char **)&objp->nfs_fh4_val,
-		     &objp->nfs_fh4_len, NFS4_FHSIZE))
-			return false;
+		if (xdrs->x_op == XDR_ENCODE) {
+			/*original objp need to be protected from htons*/
+			char fh_buf[NFS4_FHSIZE];
+			file_handle_v4_t *fh = (file_handle_v4_t *) fh_buf;
 
-		if (xdrs->x_op == XDR_DECODE &&
-		    objp->nfs_fh4_len >= offsetof(file_handle_v4_t, fsopaque)) {
-			fh = (file_handle_v4_t *)objp->nfs_fh4_val;
-			fh->id.exports = ntohs(fh->id.exports);
+			memcpy(fh, objp->nfs_fh4_val, objp->nfs_fh4_len);
+
+			if (objp->nfs_fh4_len >=
+			    offsetof(file_handle_v4_t, fsopaque))
+				fh->id.exports = htons(fh->id.exports);
+
+			if (!inline_xdr_bytes
+			    (xdrs, (char **)&fh,
+			     &objp->nfs_fh4_len, NFS4_FHSIZE))
+				return false;
+		} else {
+			if (!inline_xdr_bytes
+			    (xdrs, (char **)&objp->nfs_fh4_val,
+			     &objp->nfs_fh4_len, NFS4_FHSIZE))
+				return false;
+
+			if (xdrs->x_op == XDR_DECODE &&
+			    objp->nfs_fh4_len >=
+			    offsetof(file_handle_v4_t, fsopaque)) {
+				file_handle_v4_t *fh =
+					(file_handle_v4_t *) objp->nfs_fh4_val;
+				fh->id.exports = ntohs(fh->id.exports);
+			}
 		}
+
 		return true;
 	}
 
