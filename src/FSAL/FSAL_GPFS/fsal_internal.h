@@ -225,6 +225,13 @@ fsal_status_t GPFSFSAL_create(struct fsal_obj_handle *dir_hdl,
 			      struct gpfs_file_handle *p_object_handle,
 			      struct attrlist *p_object_attributes);
 
+fsal_status_t GPFSFSAL_create2(struct fsal_obj_handle *dir_hdl,
+			      const char *p_filename,
+			      const struct req_op_context *p_context,
+			      mode_t unix_mode,
+			      struct gpfs_file_handle *p_object_handle,
+			      struct attrlist *p_object_attributes);
+
 fsal_status_t GPFSFSAL_mkdir(struct fsal_obj_handle *dir_hdl,
 			     const char *p_dirname,
 			     const struct req_op_context *p_context,
@@ -248,7 +255,7 @@ fsal_status_t GPFSFSAL_mknode(struct fsal_obj_handle *dir_hdl,
 
 fsal_status_t GPFSFSAL_open(struct fsal_obj_handle *obj_hdl,
 			    const struct req_op_context *p_context,
-			    fsal_openflags_t openflags,
+			    int posix_flags,
 			    int *p_file_descriptor,
 			    bool reopen);
 
