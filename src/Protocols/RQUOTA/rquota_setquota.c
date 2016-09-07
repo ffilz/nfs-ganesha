@@ -83,15 +83,24 @@ static int do_rquota_setquota(char *quota_path, int quota_type,
 	fsal_quota_t fsal_quota_out;
 	struct gsh_export *exp;
 	char *qpath;
+	char path[MAXPATHLEN];
 
 	qres->status = Q_EPERM;
-	if (quota_path[0] == '/') {
-		exp = get_gsh_export_by_path(quota_path, false);
-		if (exp == NULL)
-			goto out;
-		qpath = quota_path;
+	if (quota_path[0] != '/') {
+		/* prepend root path */
+		exp = get_gsh_export(0);
+		strcpy(path, exp->fullpath);
+		strcat(path, quota_path);
 	} else {
-		exp = get_gsh_export_by_tag(quota_path);
+		strcpy(path, quota_path);
+	}
+
+	exp = get_gsh_export_by_path(path, false);
+	if (exp != NULL) {
+		qpath = path;
+	} else {
+		exp =
+		    get_gsh_export_by_tag(quota_path);
 		if (exp == NULL)
 			goto out;
 		qpath = exp->fullpath;
