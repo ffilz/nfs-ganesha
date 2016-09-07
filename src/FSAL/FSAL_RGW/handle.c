@@ -238,7 +238,7 @@ static fsal_status_t rgw_fsal_create(struct fsal_obj_handle *dir_hdl,
 		RGW_SETATTR_UID | RGW_SETATTR_GID | RGW_SETATTR_MODE;
 
 	rc = rgw_create(export->rgw_fs, dir->rgw_fh, name, &st, create_mask,
-			&rgw_fh, 0 /* posix flags */, RGW_CREATE_FLAG_NONE);
+			&rgw_fh, RGW_CREATE_FLAG_NONE);
 	if (rc < 0)
 		return rgw2fsal_error(rc);
 
@@ -771,8 +771,8 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 			PTHREAD_RWLOCK_wrlock(&obj_hdl->lock);
 		}
 
-		rc = rgw_open(export->rgw_fs, handle->rgw_fh, posix_flags,
-			(!state) ? RGW_OPEN_FLAG_V3 : RGW_OPEN_FLAG_NONE);
+		rc = rgw_open(export->rgw_fs, handle->rgw_fh,
+			      RGW_OPEN_FLAG_NONE);
 
 		if (rc < 0) {
 			if (!state) {
@@ -922,7 +922,7 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 		RGW_SETATTR_UID | RGW_SETATTR_GID | RGW_SETATTR_MODE;
 
 	rc = rgw_create(export->rgw_fs, handle->rgw_fh, name, &st, create_mask,
-			&rgw_fh, posix_flags, RGW_CREATE_FLAG_NONE);
+			&rgw_fh, RGW_CREATE_FLAG_NONE);
 	if (rc < 0) {
 		LogFullDebug(COMPONENT_FSAL,
 			     "Create %s failed with %s",
@@ -938,8 +938,7 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 		 */
 		posix_flags &= ~O_EXCL;
 		rc = rgw_create(export->rgw_fs, handle->rgw_fh, name, &st,
-				create_mask, &rgw_fh, posix_flags,
-				RGW_CREATE_FLAG_NONE);
+				create_mask, &rgw_fh, RGW_CREATE_FLAG_NONE);
 
 		if (rc < 0) {
 			LogFullDebug(COMPONENT_FSAL,
@@ -984,8 +983,7 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 
 	*new_obj = &obj->handle;
 
-	rc = rgw_open(export->rgw_fs, rgw_fh, posix_flags,
-		(!state) ? RGW_OPEN_FLAG_V3 : RGW_OPEN_FLAG_NONE);
+	rc = rgw_open(export->rgw_fs, rgw_fh, RGW_OPEN_FLAG_NONE);
 
 	if (rc < 0) {
 		goto fileerr;
@@ -1163,8 +1161,6 @@ fsal_status_t rgw_fsal_reopen2(struct fsal_obj_handle *obj_hdl,
 		 * 9P does, V3 does not */
 
 		int rc = rgw_open(export->rgw_fs, handle->rgw_fh,
-				posix_flags,
-				(!state) ? RGW_OPEN_FLAG_V3 :
 				RGW_OPEN_FLAG_NONE);
 
 		if (rc < 0) {
