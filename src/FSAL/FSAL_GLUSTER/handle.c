@@ -2166,15 +2166,6 @@ static fsal_status_t glusterfs_write2(struct fsal_obj_handle *obj_hdl,
 		goto out;
 	}
 
-	/* attempt stability if we aren't using an O_SYNC fd */
-	if (need_fsync) {
-		retval = glfs_fsync(my_fd.glfd);
-		if (retval == -1) {
-			retval = errno;
-			status = fsalstat(posix2fsal_error(retval), retval);
-		}
-	}
-
  out:
 
 	if (closefd)
