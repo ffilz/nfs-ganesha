@@ -71,7 +71,8 @@ struct fsal_staticfsinfo_t global_fs_info;
  */
 fsal_status_t
 fsal_internal_handle2fd(int dirfd, struct gpfs_file_handle *gpfs_fh,
-			int *pfd, int oflags, bool reopen)
+			int *pfd, int oflags, bool reopen,
+			const struct req_op_context *op_ctx)
 {
 	fsal_status_t status;
 
@@ -79,7 +80,7 @@ fsal_internal_handle2fd(int dirfd, struct gpfs_file_handle *gpfs_fh,
 		return fsalstat(ERR_FSAL_FAULT, 0);
 
 	status = fsal_internal_handle2fd_at(dirfd, gpfs_fh, pfd, oflags,
-					    reopen);
+					    reopen, op_ctx);
 
 	if (FSAL_IS_ERROR(status))
 		return status;
@@ -133,7 +134,8 @@ fsal_status_t fsal_internal_close(int fd, void *owner, int cflags)
  */
 fsal_status_t
 fsal_internal_handle2fd_at(int dirfd, struct gpfs_file_handle *gpfs_fh,
-			   int *fd, int oflags, bool reopen)
+			   int *fd, int oflags, bool reopen,
+			   const struct req_op_context *op_ctx)
 {
 	int rc = 0;
 	int errsv = 0;
@@ -144,6 +146,11 @@ fsal_internal_handle2fd_at(int dirfd, struct gpfs_file_handle *gpfs_fh,
 
 	if (!gpfs_fh || !fd)
 		return fsalstat(ERR_FSAL_FAULT, 0);
+
+	if (op_ctx && op_ctx->client && op_ctx->client->hostaddr_str)
+		u.oarg.cli_ip = op_ctx->client->hostaddr_str;
+	else
+		u.oarg.cli_ip = NULL;
 
 	if (reopen) {
 		u.sarg.mountdirfd = dirfd;
@@ -617,7 +624,7 @@ int fsal_internal_version(void)
 	int rc;
 	int errsv = 0;
 
-	rc = gpfs_ganesha(OPENHANDLE_GET_VERSION, &rc);
+	rc = gpfs_ganesha(OPENHANDLE_GET_VERSION2, &rc);
 	errsv = errno;
 
 	if (rc < 0) {

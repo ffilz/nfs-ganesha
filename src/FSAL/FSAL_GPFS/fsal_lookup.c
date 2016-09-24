@@ -76,7 +76,7 @@ GPFSFSAL_lookup(const struct req_op_context *op_ctx,
 					    parent_hdl->handle,
 					    &parent_fd,
 					    O_RDONLY,
-					    0);
+					    0, op_ctx);
 	if (FSAL_IS_ERROR(status))
 		return status;
 

@@ -74,7 +74,7 @@ GPFSFSAL_open(struct fsal_obj_handle *obj_hdl,
 	LogFullDebug(COMPONENT_FSAL, "posix_flags 0x%X", posix_flags);
 
 	status = fsal_internal_handle2fd(gpfs_fs->root_fd, myself->handle,
-					 file_desc, posix_flags, reopen);
+					file_desc, posix_flags, reopen, op_ctx);
 
 	if (FSAL_IS_ERROR(status)) {
 		/** In some environments, "root" is denied write access,
@@ -85,7 +85,7 @@ GPFSFSAL_open(struct fsal_obj_handle *obj_hdl,
 		status = fsal_internal_handle2fd(gpfs_fs->root_fd,
 						 myself->handle,
 						 file_desc, posix_flags,
-						 reopen);
+						 reopen, op_ctx);
 		fsal_restore_ganesha_credentials();
 	}
 

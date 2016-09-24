@@ -126,11 +126,13 @@ fsal_status_t gpfsfsal_xstat_2_fsal_attributes(
  */
 fsal_status_t fsal_internal_handle2fd(int dirfd,
 				      struct gpfs_file_handle *phandle,
-				      int *pfd, int oflags, bool reopen);
+				      int *pfd, int oflags, bool reopen,
+				      const struct req_op_context *op_ctx);
 
 fsal_status_t fsal_internal_handle2fd_at(int dirfd,
 					 struct gpfs_file_handle *phandle,
-					 int *pfd, int oflags, bool reopen);
+					 int *pfd, int oflags, bool reopen,
+					 const struct req_op_context *op_ctx);
 /**
  * Gets a file handle from a parent handle and name
  */
