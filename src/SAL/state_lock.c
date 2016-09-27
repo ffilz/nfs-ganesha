@@ -948,6 +948,13 @@ static void merge_lock_entry(struct state_hdl *ostate,
 		LogEntry("Merged", lock_entry);
 		LogEntry("Merging removing", check_entry);
 		remove_from_locklist(check_entry);
+
+		/* if check_entry was the last lock entry, unpin
+		 * the cache entry */
+		if (glist_empty(&entry->object.file.lock_list)) {
+			cache_inode_dec_pin_ref(entry, false);
+			cache_inode_lru_unref(entry, LRU_FLAG_NONE);
+		}
 	}
 }
 
