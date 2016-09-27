@@ -1127,9 +1127,10 @@ fsal_status_t gpfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 	 */
 	if (lock_args.l_len < 0) {
 		LogCrit(COMPONENT_FSAL,
-			"The requested lock length is out of range- lock_args.l_len(%ld), request_lock_length(%"
-			PRIu64 ")",
-			lock_args.l_len, request_lock->lock_length);
+			"The requested lock length is out of range- lock_args.l_len(%"
+			PRIu64 "), request_lock_length(%" PRIu64 ")",
+			(uint64_t) lock_args.l_len,
+			(uint64_t) request_lock->lock_length);
 		return fsalstat(ERR_FSAL_BAD_RANGE, 0);
 	}
 
@@ -1497,9 +1498,12 @@ gpfs_lock_op(struct fsal_obj_handle *obj_hdl, void *owner,
 	}
 
 	LogFullDebug(COMPONENT_FSAL,
-		     "Locking: op:%d type:%d claim:%d start:%" PRIu64
-		     " length:%lu ", lock_op, request_lock->lock_type,
-		     request_lock->lock_reclaim, request_lock->lock_start,
+		     "Locking: op:%d type:%d claim:%d start:%"
+		     PRIu64 " length:%" PRIu64,
+		     lock_op,
+		     request_lock->lock_type,
+		     request_lock->lock_reclaim,
+		     request_lock->lock_start,
 		     request_lock->lock_length);
 
 	return GPFSFSAL_lock_op(op_ctx->fsal_export, obj_hdl, owner, lock_op,
