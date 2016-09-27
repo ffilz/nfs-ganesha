@@ -106,8 +106,8 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 	const struct fsal_up_vector *event_func;
 	char                        thr_name[16];
 	int                         rc                          = 0;
-	struct callback_arg         callback;
-	struct callback_inode_arg   *cbk_inode_arg              = NULL;
+	struct glfs_callback_arg         callback;
+	struct glfs_callback_inode_arg   *cbk_inode_arg              = NULL;
 	int                         reason                      = 0;
 	int                         retry                       = 0;
 	int                         errsv                       = 0;
@@ -198,7 +198,7 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 			continue;
 		case GFAPI_INODE_INVALIDATE:
 			cbk_inode_arg =
-				(struct callback_inode_arg *)callback.event_arg;
+			  (struct glfs_callback_inode_arg *)callback.event_arg;
 
 			if (!cbk_inode_arg) {
 				/* Could be ENOMEM issues. continue */
