@@ -466,6 +466,7 @@ int get_nlm_state(enum state_type state_type,
 	 */
 	if (!nsm_state_applies) {
 		hashtable_releaselatched(ht_nlm_states, &latch);
+		*pstate = NULL;
 		return 0;
 	}
 
