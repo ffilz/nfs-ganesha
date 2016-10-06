@@ -864,6 +864,7 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl,
 static fsal_status_t setattrs(struct fsal_obj_handle *obj_hdl,
 			      struct attrlist *attrs)
 {
+	assert(0);
 	LogCrit(COMPONENT_FSAL,
 		"Invoking unsupported FSAL operation");
 	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
