@@ -179,7 +179,7 @@ int nfs3_setattr(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		/* For now we don't look for states, so indicate bypass so
 		 * we will get through an NLM_SHARE with deny.
 		 */
-		fsal_status = fsal_setattr(obj, true, NULL, &setattr);
+		fsal_status = fsal_setattr(obj, true, false, NULL, &setattr);
 
 		if (arg->arg_setattr3.new_attributes.size.set_it)
 			state_share_anonymous_io_done(obj,

@@ -303,7 +303,8 @@ struct fsal_readdir_cb_parms {
 };
 
 fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
-			   struct state_t *state, struct attrlist *attr);
+			   bool is_create, struct state_t *state, 
+			   struct attrlist *attr);
 
 fsal_status_t fsal_access(struct fsal_obj_handle *obj,
 			  fsal_accessflags_t access_type,

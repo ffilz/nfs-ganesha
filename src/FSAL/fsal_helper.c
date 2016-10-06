@@ -433,12 +433,14 @@ fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
  *
  * @param[in]     obj    File to set attributes on
  * @param[in]     bypass Bypass share reservation checking
+ * @param[in]     is_create True if called as part of a create
  * @param[in]     state  Possible state associated with the entry
  * @param[in,out] attr   Attributes to set
  * @return FSAL status
  */
 fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
-			   struct state_t *state, struct attrlist *attr)
+			   bool is_create, struct state_t *state, 
+			   struct attrlist *attr)
 {
 	fsal_status_t status = { 0, 0 };
 	const struct user_cred *creds = op_ctx->creds;
@@ -523,6 +525,15 @@ fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
 	    fsal_not_in_group_list(current.group)) {
 		/* Clear S_ISGID */
 		attr->mode &= ~S_ISGID;
+	}
+
+	/* Setting uid/gid works only for root. AIX or Irix NFS clients send
+ 	 * gid on create if the parent directory has setgid bit. 
+ 	 * Clear the OWNER and GROUP attributes for create requests for 
+ 	 * non-root users.
+ 	 */
+	if (is_create && creds->caller_uid != 0) {
+		attr->mask &= ~ (ATTR_OWNER | ATTR_GROUP);
 	}
 
 	if (obj->fsal->m_ops.support_ex(obj)) {
@@ -795,6 +806,7 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 	uint64_t owner = attrs->owner;
 	uint64_t group = attrs->group;
 	bool support_ex = parent->fsal->m_ops.support_ex(parent);
+	bool is_create = true;
 
 	if ((type != REGULAR_FILE) && (type != DIRECTORY)
 	    && (type != SYMBOLIC_LINK) && (type != SOCKET_FILE)
@@ -844,6 +856,7 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 	case SYMBOLIC_LINK:
 		status = parent->obj_ops.symlink(parent, name, link_content,
 						 attrs, obj, attrs_out);
+		is_create = false;
 		break;
 
 	case SOCKET_FILE:
@@ -923,7 +936,7 @@ setattrs:
 
 		if (attrs->mask) {
 			/* If any attributes were left to set, set them now. */
-			status = fsal_setattr(*obj, false, NULL, attrs);
+			status = fsal_setattr(*obj, false, is_create, NULL, attrs);
 		}
 	}
 
