@@ -795,6 +795,7 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 	uint64_t owner = attrs->owner;
 	uint64_t group = attrs->group;
 	bool support_ex = parent->fsal->m_ops.support_ex(parent);
+	bool is_create = true;
 
 	if ((type != REGULAR_FILE) && (type != DIRECTORY)
 	    && (type != SYMBOLIC_LINK) && (type != SOCKET_FILE)
@@ -844,6 +845,7 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 	case SYMBOLIC_LINK:
 		status = parent->obj_ops.symlink(parent, name, link_content,
 						 attrs, obj, attrs_out);
+		is_create = false;
 		break;
 
 	case SOCKET_FILE:
@@ -920,6 +922,14 @@ setattrs:
 		if ((attrs->mask & ATTR_GROUP) &&
 		    (op_ctx->creds->caller_gid == attrs->group))
 			FSAL_UNSET_MASK(attrs->mask, ATTR_GROUP);
+
+		/* Setting uid/gid works only for root. AIX or Irix NFS
+                 * clients send gid on create if the parent directory has
+                 * setgid bit. Clear the OWNER and GROUP attributes for
+                 * create requests for non-root users.
+		 */
+		if (is_create && op_ctx->creds->caller_uid != 0)
+                	FSAL_UNSET_MASK(attrs->mask, ATTR_OWNER|ATTR_GROUP);
 
 		if (attrs->mask) {
 			/* If any attributes were left to set, set them now. */
