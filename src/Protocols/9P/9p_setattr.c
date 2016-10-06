@@ -172,7 +172,8 @@ int _9p_setattr(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	}
 
 	/* Now set the attr */
-	fsal_status = fsal_setattr(pfid->pentry, false, pfid->state, &fsalattr);
+	fsal_status = fsal_setattr(pfid->pentry, false, false,
+                                   pfid->state, &fsalattr);
 
 	/* Release the attributes (may release an inherited ACL) */
 	fsal_release_attrs(&fsalattr);

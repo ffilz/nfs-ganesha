@@ -228,6 +228,7 @@ int nfs4_op_setattr(struct nfs_argop4 *op, compound_data_t *data,
 	 */
 	fsal_status = fsal_setattr(data->current_obj,
 				   false,
+				   false,
 				   state_found,
 				   &sattr);
 
