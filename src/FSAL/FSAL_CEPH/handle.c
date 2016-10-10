@@ -178,7 +178,7 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 				continue;
 			}
 
-			fsal_prepare_attrs(&attrs, attrmask);
+			fsal_prepare_attrs(&attrs, 0);
 
 			fsal_status = lookup(dir_pub, de.d_name, &obj, &attrs);
 			if (FSAL_IS_ERROR(fsal_status)) {
