@@ -332,6 +332,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	struct vfs_fd *my_fd = NULL;
 	struct vfs_fsal_obj_handle *myself, *hdl = NULL;
 	struct stat stat;
+	bool stat_valid = false;
 	vfs_file_handle_t *fh = NULL;
 	bool truncated;
 	bool created = false;
@@ -423,11 +424,10 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 		if (createmode >= FSAL_EXCLUSIVE || truncated) {
 			/* Refresh the attributes */
-			struct stat stat;
-
 			retval = fstat(my_fd->fd, &stat);
 
 			if (retval == 0) {
+				stat_valid = true;
 				LogFullDebug(COMPONENT_FSAL,
 					     "New size = %" PRIx64,
 					     stat.st_size);
@@ -600,6 +600,66 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 		fd = openat(dir_fd, name, posix_flags, unix_mode);
 	}
 
+	if (fd == -1 && errno == EEXIST && createmode >= FSAL_EXCLUSIVE) {
+		/* We tried to create O_EXCL to set attributes and failed.
+		 * In case of an odd race, let's check the existing file
+		 * and determine if the verifier matches such that it indicates
+		 * this is a proper replayed exclusive create.
+		 */
+
+		/* We don't want a permission check since there could have been
+		 * a mode set on the file, and we aren't going to create the
+		 * file. If we raced with an unlink, it's fair to fail the
+		 * exclusive create.
+		 */
+		fsal_restore_ganesha_credentials();
+
+		LogFullDebug(COMPONENT_FSAL,
+			     "File %s exists, EXCLUSIVE create trying to open to check verifier",
+			     name);
+
+		/* Don't create... */
+		posix_flags &= ~(O_CREAT | O_EXCL);
+
+		fd = openat(dir_fd, name, posix_flags);
+
+		if (fd >= 0) {
+			/* Refresh the attributes and check the verifier */
+			retval = fstat(fd, &stat);
+
+			if (retval != 0) {
+				if (errno == EBADF)
+					errno = ESTALE;
+				status = fsalstat(posix2fsal_error(errno),
+						  errno);
+				goto fileerr;
+			}
+
+			stat_valid = true;
+
+			/* Now check verifier for exclusive, but not for
+			 * FSAL_EXCLUSIVE_9P.
+			 */
+			if (!FSAL_IS_ERROR(status) &&
+			    createmode >= FSAL_EXCLUSIVE &&
+			    createmode != FSAL_EXCLUSIVE_9P &&
+			    !check_verifier_stat(&stat, verifier)) {
+				/* Verifier didn't match, return EEXIST */
+				status =
+				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
+				goto fileerr;
+			}
+
+			/* Do a permission check if caller is not the owner. */
+			*caller_perm_check =
+				stat.st_uid != op_ctx->creds->caller_uid;
+
+			/* Verifier checks out, we did create the file. */
+			created = true;
+			goto continue_create;
+		}
+	}
+
 	/* Preserve errno */
 	retval = errno;
 
@@ -652,6 +712,8 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	 */
 	*caller_perm_check = createmode == FSAL_NO_CREATE;
 
+ continue_create:
+
 	vfs_alloc_handle(fh);
 
 	retval = vfs_name_to_handle(dir_fd, obj_hdl->fs, name, fh);
@@ -662,12 +724,16 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 		goto fileerr;
 	}
 
-	retval = fstat(fd, &stat);
+	if (!stat_valid) {
+		retval = fstat(fd, &stat);
 
-	if (retval < 0) {
-		retval = errno;
-		status = fsalstat(posix2fsal_error(retval), retval);
-		goto fileerr;
+		if (retval < 0) {
+			retval = errno;
+			status = fsalstat(posix2fsal_error(retval), retval);
+			goto fileerr;
+		}
+
+		stat_valid = true;
 	}
 
 	/* allocate an obj_handle and fill it up */
