@@ -300,10 +300,12 @@ fsal_ceph_ll_rmdir(struct ceph_mount_info *cmount, struct Inode *in,
 
 static inline int
 fsal_ceph_readdirplus(struct ceph_mount_info *cmount,
-		      struct ceph_dir_result *dirp, struct dirent *de,
-		      struct ceph_statx *stx, unsigned want, unsigned flags)
+		      struct ceph_dir_result *dirp, struct Inode *dir,
+		      struct dirent *de, struct ceph_statx *stx,
+		      unsigned want, unsigned flags,
+		      Inode **out, struct user_cred *cred)
 {
-	return ceph_readdirplus_r(cmount, dirp, de, stx, want, flags, NULL);
+	return ceph_readdirplus_r(cmount, dirp, de, stx, want, flags, out);
 }
 #else /* USE_FSAL_CEPH_STATX */
 
@@ -377,9 +379,10 @@ int fsal_ceph_ll_setattr(struct ceph_mount_info *cmount, Inode *i,
 			 struct ceph_statx *stx, unsigned mask,
 			 const struct user_cred *cred);
 int fsal_ceph_readdirplus(struct ceph_mount_info *cmount,
-			  struct ceph_dir_result *dirp, struct dirent *de,
-			  struct ceph_statx *stx, unsigned want,
-			  unsigned flags);
+			  struct ceph_dir_result *dirp, struct Inode *dir,
+			  struct dirent *de, struct ceph_statx *stx,
+			  unsigned want, unsigned flags, Inode **out,
+			  struct user_cred *cred);
 
 static inline int
 fsal_ceph_ll_readlink(struct ceph_mount_info *cmount, Inode *in, char *buf,
