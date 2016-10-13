@@ -1645,8 +1645,7 @@ fsal_status_t ceph_write2(struct fsal_obj_handle *obj_hdl,
 
 	/* attempt stability if we aren't using an O_SYNC fd */
 	if (need_fsync) {
-		retval = ceph_ll_fsync(export->cmount, my_fd, false);
-
+		retval = ceph_ll_fsync(export->cmount, my_fd, true);
 		if (retval < 0)
 			status = ceph2fsal_error(retval);
 	}
