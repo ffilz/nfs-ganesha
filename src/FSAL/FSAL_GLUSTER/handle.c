@@ -167,6 +167,8 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	struct dirent *pde = NULL;
 	struct glusterfs_export *glfs_export =
 	    container_of(op_ctx->fsal_export, struct glusterfs_export, export);
+	struct glfs_object *glhandle = NULL;
+	struct stat sb;
 	struct glusterfs_handle *objhandle =
 	    container_of(dir_hdl, struct glusterfs_handle, handle);
 #ifdef GLTIMING
@@ -189,7 +191,8 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 		struct dirent de;
 		struct fsal_obj_handle *obj;
 
-		rc = glfs_readdir_r(glfd, &de, &pde);
+		rc = glfs_h_readdirp_r(glfs_export->gl_fs, glfd, &sb, &de,
+					&pde, &glhandle);
 		if (rc == 0 && pde != NULL) {
 			struct attrlist attrs;
 			bool cb_rc;
@@ -199,9 +202,16 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 			    || (strcmp(de.d_name, "..") == 0)) {
 				continue;
 			}
+
+			if (!glhandle) {
+				status = gluster2fsal_error(errno);
+				goto out;
+			}
+
 			fsal_prepare_attrs(&attrs, attrmask);
 
-			status = lookup(dir_hdl, de.d_name, &obj, &attrs);
+			status = create_handle2(glfs_export, glhandle, &obj,
+						 &sb, &attrs);
 			if (FSAL_IS_ERROR(status))
 				goto out;
 
