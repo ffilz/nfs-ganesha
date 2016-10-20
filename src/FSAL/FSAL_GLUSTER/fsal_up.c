@@ -96,7 +96,6 @@ int upcall_inode_invalidate(struct glusterfs_export *glfsexport,
 	}
 
 out:
-	glfs_h_close(object);
 	return rc;
 }
 
