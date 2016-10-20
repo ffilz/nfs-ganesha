@@ -871,7 +871,8 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 		/* ".." doesn't end up in the cache */
 		status =  mdcache_locate_keyed(&mdc_parent->fsobj.fsdir.parent,
 					       export, new_entry, attrs_out);
-		goto out;
+		if (status.major == ERR_FSAL_NO_ERROR)
+			goto out;
 	}
 
 	/* We first try avltree_lookup by name.  If that fails, we dispatch to
