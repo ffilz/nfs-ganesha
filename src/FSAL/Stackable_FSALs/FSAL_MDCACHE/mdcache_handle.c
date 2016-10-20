@@ -1061,7 +1061,7 @@ static fsal_status_t mdcache_setattrs(struct fsal_obj_handle *obj_hdl,
 	}
 
 	status = mdcache_refresh_attrs(
-				entry, (attrs->request_mask & ATTR_ACL) != 0);
+				entry, (attrs->valid_mask & ATTR_ACL) != 0);
 
 	if (!FSAL_IS_ERROR(status) && change == entry->attrs.change) {
 		LogDebug(COMPONENT_CACHE_INODE,
@@ -1118,7 +1118,7 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 		goto unlock;
 
 	status = mdcache_refresh_attrs(
-				entry, (attrs->request_mask & ATTR_ACL) != 0);
+				entry, (attrs->valid_mask & ATTR_ACL) != 0);
 
 	if (!FSAL_IS_ERROR(status) && change == entry->attrs.change) {
 		LogDebug(COMPONENT_CACHE_INODE,
