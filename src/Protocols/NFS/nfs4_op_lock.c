@@ -510,9 +510,13 @@ int nfs4_op_lock(struct nfs_argop4 *op, compound_data_t *data,
 			 * a stateid. Do this here since it's impossible for
 			 * there to be such a state if the lock owner was
 			 * previously unknown.
+			 * Do this only for NFS 4.0 as we can get concurrent
+			 * FREE_STATEID with a new lock on same obj in 4.1+
 			 */
-			lock_state = nfs4_State_Get_Obj(data->current_obj,
-							  lock_owner);
+			if (data->minorversion == 0)
+				lock_state = nfs4_State_Get_Obj(
+						data->current_obj,
+						lock_owner);
 		}
 
 		if (lock_state == NULL) {
