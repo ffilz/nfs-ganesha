@@ -195,4 +195,5 @@ int fsal_ceph_readdirplus(struct ceph_mount_info *cmount,
 #endif
 
 	posix2ceph_statx(&st, stx);
+	return rc;
 }
