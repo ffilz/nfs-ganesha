@@ -246,4 +246,8 @@ bool check_verifier_stat(struct stat *st, fsal_verifier_t verifier);
 
 bool check_verifier_attrlist(struct attrlist *attrs, fsal_verifier_t verifier);
 
+#define TMPNAME_LEN 22
+
+void random_file_name(char *buffer);
+
 #endif				/* FSAL_COMMONLIB_H */

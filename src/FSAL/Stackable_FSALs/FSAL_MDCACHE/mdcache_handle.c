@@ -58,6 +58,9 @@
  * if we lose a race to create the cache entry since our caller CAN NOT hold
  * any locks on the cache entry created.
  *
+ * This could be called with a NULL name in the case of an unnamed create. In
+ * that case, we just skip adding the dirent.
+ *
  * @param[in]     export         The mdcache export used by the handle.
  * @param[in,out] sub_handle     The handle used by the subfsal.
  * @param[in]     fs             The filesystem of the new handle.
@@ -111,16 +114,19 @@ fsal_status_t mdcache_alloc_and_check_handle(
 					   MDCACHE_TRUST_ATTRS);
 	}
 
-	status = mdcache_dirent_add(parent, name, new_entry);
+	if (name != NULL) {
+		/* Add the name into the dirent cache. */
+		status = mdcache_dirent_add(parent, name, new_entry);
 
-	if (FSAL_IS_ERROR(status)) {
-		LogDebug(COMPONENT_CACHE_INODE,
-			 "%s%s failed because add dirent failed",
-			 tag, name);
+		if (FSAL_IS_ERROR(status)) {
+			LogDebug(COMPONENT_CACHE_INODE,
+				 "%s%s failed because add dirent failed",
+				 tag, name);
 
-		mdcache_put(new_entry);
-		*new_obj = NULL;
-		return status;
+			mdcache_put(new_entry);
+			*new_obj = NULL;
+			return status;
+		}
 	}
 
 	if (new_entry->obj_handle.type == DIRECTORY) {

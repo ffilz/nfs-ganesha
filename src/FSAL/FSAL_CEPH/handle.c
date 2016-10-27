@@ -994,7 +994,14 @@ fsal_status_t ceph_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (name == NULL) {
-		/* This is an open by handle */
+		/* This is an open by handle. Because we are currently
+		 * create_not_atomic we will only be called with no name in the
+		 * following situations:
+		 *
+		 * NO_CREATE open
+		 * UNCHECKED create
+		 * EXCLUSIVE or EXCLUSIVE_41 create to check verifier
+		 */
 		if (state != NULL) {
 			/* Prepare to take the share reservation, but only if we
 			 * are called with a valid state (if state is NULL the
@@ -1052,23 +1059,19 @@ fsal_status_t ceph_open2(struct fsal_obj_handle *obj_hdl,
 				LogFullDebug(COMPONENT_FSAL,
 					     "New size = %"PRIx64,
 					     stat.st_size);
+
+				/* Now check verifier for exclusive. */
+				if (createmode >= FSAL_EXCLUSIVE &&
+				    !check_verifier_stat(&stat, verifier)) {
+					/* Verifier didn't match, return EEXIST
+					 */
+					status = posix2fsal_status(EEXIST);
+				}
 			} else {
 				/* Because we have an inode ref, we never
 				 * get EBADF like other FSALs might see.
 				 */
 				status = ceph2fsal_error(retval);
-			}
-
-			/* Now check verifier for exclusive, but not for
-			 * FSAL_EXCLUSIVE_9P.
-			 */
-			if (!FSAL_IS_ERROR(status) &&
-			    createmode >= FSAL_EXCLUSIVE &&
-			    createmode != FSAL_EXCLUSIVE_9P &&
-			    !check_verifier_stat(&stat, verifier)) {
-				/* Verifier didn't match, return EEXIST */
-				status =
-				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
 			}
 		}
 
@@ -1151,10 +1154,6 @@ fsal_status_t ceph_open2(struct fsal_obj_handle *obj_hdl,
 		return status;
 	}
 
-	/* Now add in O_CREAT and O_EXCL.
-	 * Even with FSAL_UNGUARDED we try exclusive create first so
-	 * we can safely set attributes.
-	 */
 	if (createmode != FSAL_NO_CREATE) {
 		/* Now add in O_CREAT and O_EXCL. */
 		posix_flags |= O_CREAT;
@@ -1172,11 +1171,9 @@ fsal_status_t ceph_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (createmode == FSAL_UNCHECKED && (attrib_set->valid_mask != 0)) {
-		/* If we have FSAL_UNCHECKED and want to set more attributes
-		 * than the mode, we attempt an O_EXCL create first, if that
-		 * succeeds, then we will be allowed to set the additional
-		 * attributes, otherwise, we don't know we created the file
-		 * and this can NOT set the attributes.
+		/* This is NOT a simple UNCHECKED create, so create_helper()
+		 * has called with a temporary filename. We use O_EXCL to
+		 * make sure we don't collide with another temporary filename.
 		 */
 		posix_flags |= O_EXCL;
 	}
@@ -1192,38 +1189,18 @@ fsal_status_t ceph_open2(struct fsal_obj_handle *obj_hdl,
 			     name, strerror(-retval));
 	}
 
-	if (retval == -EEXIST && createmode == FSAL_UNCHECKED) {
-		/* We tried to create O_EXCL to set attributes and failed.
-		 * Remove O_EXCL and retry, also remember not to set attributes.
-		 * We still try O_CREAT again just in case file disappears out
-		 * from under us.
-		 *
-		 * Note that because we have dropped O_EXCL, later on we will
-		 * not assume we created the file, and thus will not set
-		 * additional attributes. We don't need to separately track
-		 * the condition of not wanting to set attributes.
-		 */
-		posix_flags &= ~O_EXCL;
-		retval =
-		    ceph_ll_create(export->cmount,  myself->i, name, unix_mode,
-				   posix_flags, &stat, &i, &my_fd->fd,
-				   op_ctx->creds->caller_uid,
-				   op_ctx->creds->caller_gid);
-		if (retval < 0) {
-			LogFullDebug(COMPONENT_FSAL,
-				     "Non-exclusive Create %s failed with %s",
-				     name, strerror(-retval));
-		}
-	}
+	/* Note that if we were called by create_helper() and get EEXIST, then
+	 * we will return that to the caller for retry with a different
+	 * temporary filename.
+	 */
 
 	if (retval < 0) {
 		return ceph2fsal_error(retval);
 	}
 
 	/* Remember if we were responsible for creating the file.
-	 * Note that in an UNCHECKED retry we MIGHT have re-created the
-	 * file and won't remember that. Oh well, so in that rare case we
-	 * leak a partially created file if we have a subsequent error in here.
+	 * Note that O_EXCL is ONLY set if we were called by create_helper().
+	 * This will be relevant below...
 	 */
 	created = (posix_flags & O_EXCL) != 0;
 
@@ -1322,7 +1299,10 @@ fsal_status_t ceph_open2(struct fsal_obj_handle *obj_hdl,
 				my_fd);
 
 	if (created) {
-		/* Remove the file we just created */
+		/* Delete the file if we actually created it. Since we MUST
+		 * have been called by create_helper() (per the notes above),
+		 * what we are unlinking here is the temporary filename.
+		 */
 		ceph_ll_unlink(export->cmount, myself->i, name, 0, 0);
 	}
 

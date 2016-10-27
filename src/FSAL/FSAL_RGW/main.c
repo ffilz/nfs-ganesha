@@ -380,6 +380,12 @@ MODULE_INIT void init(void)
 	myself->m_ops.create_export = create_export;
 	myself->m_ops.init_config = init_config;
 	myself->m_ops.support_ex = support_ex;
+	/** @todo FSAL_RGW needs some work to actually make this correct,
+	 *        but in the meantime, it can not support the other create
+	 *        modes, so pretend to be atomic on create and do the best
+	 *        we can.
+	 */
+	myself->m_ops.create_support = return_create_atomic;
 }
 
 /**
