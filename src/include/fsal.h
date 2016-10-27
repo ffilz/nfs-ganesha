@@ -425,8 +425,8 @@ fsal_status_t fsal_statfs(struct fsal_obj_handle *obj,
 			  fsal_dynamicfsinfo_t *dynamicinfo);
 fsal_status_t fsal_commit(struct fsal_obj_handle *obj_hdl, off_t offset,
 			 size_t len);
-fsal_status_t fsal_verify2(struct fsal_obj_handle *obj,
-			   fsal_verifier_t verifier);
+fsal_status_t fsal_check_verifier(struct fsal_obj_handle *obj,
+				  fsal_verifier_t verifier);
 bool fsal_is_open(struct fsal_obj_handle *obj);
 
 /**
@@ -602,6 +602,10 @@ static inline bool open_correct(fsal_openflags_t fd_openflags,
 		   && (fd_openflags & to_openflags & FSAL_O_RDWR)
 					== (to_openflags & FSAL_O_RDWR));
 }
+
+enum fsal_create_support return_create_not_atomic(void);
+enum fsal_create_support return_create_unnamed(void);
+enum fsal_create_support return_create_atomic(void);
 
 #endif				/* !FSAL_H */
 /** @} */

@@ -336,6 +336,13 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	bool truncated;
 	bool created = false;
 
+	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
+		LogDebug(COMPONENT_FSAL,
+			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
+			 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
+		return posix2fsal_status(EXDEV);
+	}
+
 	if (state != NULL)
 		my_fd = (struct vfs_fd *)(state + 1);
 
@@ -357,18 +364,19 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (name == NULL) {
-		/* This is an open by handle */
-		struct vfs_fsal_obj_handle *myself;
-
-		myself = container_of(obj_hdl,
-				      struct vfs_fsal_obj_handle,
-				      obj_handle);
-
-		if (obj_hdl->fsal != obj_hdl->fs->fsal) {
-			LogDebug(COMPONENT_FSAL,
-				 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
-				 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
-			return fsalstat(posix2fsal_error(EXDEV), EXDEV);
+		/* This is an open by handle. Because we are currently
+		 * create_not_atomic we will only be called with no name in the
+		 * following situations:
+		 *
+		 * NO_CREATE open
+		 * UNCHECKED create
+		 * EXCLUSIVE or EXCLUSIVE_41 create to check verifier
+		 */
+		if (createmode == FSAL_GUARDED) {
+			/* Should not have been called this way, but return
+			 * EEXIST anyway.
+			 */
+			return posix2fsal_status(EEXIST);
 		}
 
 		if (state != NULL) {
@@ -431,23 +439,18 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 				LogFullDebug(COMPONENT_FSAL,
 					     "New size = %" PRIx64,
 					     stat.st_size);
+
+				/* Now check verifier for exclusive. */
+				if (createmode >= FSAL_EXCLUSIVE &&
+				    !check_verifier_stat(&stat, verifier)) {
+					/* Verifier didn't match, return EEXIST
+					 */
+					status = posix2fsal_status(EEXIST);
+				}
 			} else {
 				if (errno == EBADF)
 					errno = ESTALE;
-				status = fsalstat(posix2fsal_error(errno),
-						  errno);
-			}
-
-			/* Now check verifier for exclusive, but not for
-			 * FSAL_EXCLUSIVE_9P.
-			 */
-			if (!FSAL_IS_ERROR(status) &&
-			    createmode >= FSAL_EXCLUSIVE &&
-			    createmode != FSAL_EXCLUSIVE_9P &&
-			    !check_verifier_stat(&stat, verifier)) {
-				/* Verifier didn't match, return EEXIST */
-				status =
-				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
+				status = posix2fsal_status(errno);
 			}
 		}
 
@@ -496,6 +499,13 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	 * open by name), then there CAN NOT be a share conflict, otherwise
 	 * the share conflict will be resolved when the object handles are
 	 * merged.
+	 *
+	 * This could be one of the following cases:
+	 *
+	 *	NO_CREATE open
+	 *	Simple UNCHECKED create
+	 *	Simple GUARDED create
+	 *	Any other create called by create_helper()
 	 */
 
 #ifdef ENABLE_VFS_DEBUG_ACL
@@ -550,11 +560,9 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (createmode == FSAL_UNCHECKED && (attrib_set->valid_mask != 0)) {
-		/* If we have FSAL_UNCHECKED and want to set more attributes
-		 * than the mode, we attempt an O_EXCL create first, if that
-		 * succeeds, then we will be allowed to set the additional
-		 * attributes, otherwise, we don't know we created the file
-		 * and this can NOT set the attributes.
+		/* This is NOT a simple UNCHECKED create, so create_helper()
+		 * has called with a temporary filename. We use O_EXCL to
+		 * make sure we don't collide with another temporary filename.
 		 */
 		posix_flags |= O_EXCL;
 	}
@@ -569,7 +577,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 	if (retval < 0) {
 		retval = errno;
-		status = fsalstat(posix2fsal_error(retval), retval);
+		status = posix2fsal_status(retval);
 		goto direrr;
 	}
 
@@ -583,22 +591,10 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	else
 		fd = openat(dir_fd, name, posix_flags);
 
-	if (fd == -1 && errno == EEXIST && createmode == FSAL_UNCHECKED) {
-		/* We tried to create O_EXCL to set attributes and failed.
-		 * Remove O_EXCL and retry. We still try O_CREAT again just in
-		 * case file disappears out from under us.
-		 *
-		 * Note that because we have dropped O_EXCL, later on we will
-		 * not assume we created the file, and thus will not set
-		 * additional attributes. We don't need to separately track
-		 * the condition of not wanting to set attributes.
-		 */
-		LogFullDebug(COMPONENT_FSAL,
-			     "File %s exists, retrying UNCHECKED create with out O_EXCL",
-			     name);
-		posix_flags &= ~O_EXCL;
-		fd = openat(dir_fd, name, posix_flags, unix_mode);
-	}
+	/* Note that if we were called by create_helper() and get EEXIST, then
+	 * we will return that to the caller for retry with a different
+	 * temporary filename.
+	 */
 
 	/* Preserve errno */
 	retval = errno;
@@ -608,14 +604,13 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 		fsal_restore_ganesha_credentials();
 
 	if (fd < 0) {
-		status = fsalstat(posix2fsal_error(retval), retval);
+		status = posix2fsal_status(retval);
 		goto direrr;
 	}
 
 	/* Remember if we were responsible for creating the file.
-	 * Note that in an UNCHECKED retry we MIGHT have re-created the
-	 * file and won't remember that. Oh well, so in that rare case we
-	 * leak a partially created file if we have a subsequent error in here.
+	 * Note that O_EXCL is ONLY set if we were called by create_helper().
+	 * This will be relevant below...
 	 */
 	created = (posix_flags & O_EXCL) != 0;
 
@@ -658,7 +653,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 	if (retval < 0) {
 		retval = errno;
-		status = fsalstat(posix2fsal_error(retval), retval);
+		status = posix2fsal_status(retval);
 		goto fileerr;
 	}
 
@@ -666,7 +661,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 	if (retval < 0) {
 		retval = errno;
-		status = fsalstat(posix2fsal_error(retval), retval);
+		status = posix2fsal_status(retval);
 		goto fileerr;
 	}
 
@@ -675,7 +670,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 			   op_ctx->fsal_export);
 
 	if (hdl == NULL) {
-		status = fsalstat(posix2fsal_error(ENOMEM), ENOMEM);
+		status = posix2fsal_status(ENOMEM);
 		goto fileerr;
 	}
 
@@ -761,14 +756,18 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 	close(fd);
 
-	/* Delete the file if we actually created it. */
-	if (created)
+	if (created) {
+		/* Delete the file if we actually created it. Since we MUST
+		 * have been called by create_helper() (per the notes above),
+		 * what we are unlinking here is the temporary filename.
+		 */
 		unlinkat(dir_fd, name, 0);
+	}
 
  direrr:
 
 	close(dir_fd);
-	return fsalstat(posix2fsal_error(retval), retval);
+	return posix2fsal_status(retval);
 }
 
 /**
@@ -815,7 +814,7 @@ fsal_status_t vfs_reopen2(struct fsal_obj_handle *obj_hdl,
 		LogDebug(COMPONENT_FSAL,
 			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
 			 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
-		return fsalstat(posix2fsal_error(EXDEV), EXDEV);
+		return posix2fsal_status(EXDEV);
 	}
 
 	/* This can block over an I/O operation. */

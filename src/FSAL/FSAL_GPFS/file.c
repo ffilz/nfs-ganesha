@@ -260,6 +260,13 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
 	struct fsal_export *export = op_ctx->fsal_export;
 	struct gpfs_filesystem *gpfs_fs = obj_hdl->fs->private_data;
 
+	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
+		LogDebug(COMPONENT_FSAL,
+			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
+			 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
+		return posix2fsal_status(EXDEV);
+	}
+
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	if (name)
@@ -283,8 +290,22 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (name == NULL) {
-		/* This is an open by handle */
+		/* This is an open by handle. Because we are currently
+		 * create_not_atomic we will only be called with no name in the
+		 * following situations:
+		 *
+		 * NO_CREATE open
+		 * UNCHECKED create
+		 * EXCLUSIVE or EXCLUSIVE_41 create to check verifier
+		 */
 		int *fd;
+
+		if (createmode == FSAL_GUARDED) {
+			/* Should not have been called this way, but return
+			 * EEXIST anyway.
+			 */
+			return posix2fsal_status(EEXIST);
+		}
 
 		if (state != NULL) {
 		       /* Prepare to take the share reservation, but only if we
@@ -340,21 +361,19 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
 			/* Refresh the attributes */
 			status = GPFSFSAL_getattrs(export, gpfs_fs, op_ctx,
 						   myself->handle, attrs_out);
+
 			if (!FSAL_IS_ERROR(status)) {
 				LogFullDebug(COMPONENT_FSAL,
 					     "New size = %"PRIx64,
 					     attrs_out->filesize);
-			}
-			/* Now check verifier for exclusive, but not for
-			 * FSAL_EXCLUSIVE_9P.
-			 */
-			if (!FSAL_IS_ERROR(status) &&
-			    createmode >= FSAL_EXCLUSIVE &&
-			    createmode != FSAL_EXCLUSIVE_9P &&
-			    !check_verifier_attrlist(attrs_out, verifier)) {
-				/* Verifier didn't match, return EEXIST */
-				status =
-				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
+				/* Now check verifier for exclusive. */
+				if (createmode >= FSAL_EXCLUSIVE &&
+				    !check_verifier_attrlist(attrs_out,
+							     verifier)) {
+					/* Verifier didn't match, return EEXIST
+					 */
+					status = posix2fsal_status(EEXIST);
+				}
 			}
 		}
 
@@ -396,12 +415,20 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
 
 		return status;
 	}
+
 	/* In this path where we are opening by name, we can't check share
 	 * reservation yet since we don't have an object_handle yet. If we
 	 * indeed create the object handle (there is no race with another
 	 * open by name), then there CAN NOT be a share conflict, otherwise
 	 * the share conflict will be resolved when the object handles are
 	 * merged.
+	 *
+	 * This could be one of the following cases:
+	 *
+	 *	NO_CREATE open
+	 *	Simple UNCHECKED create
+	 *	Simple GUARDED create
+	 *	Any other create called by create_helper()
 	 */
 
 	if (createmode == FSAL_NO_CREATE) {
@@ -455,11 +482,9 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
 	FSAL_UNSET_MASK(attrib_set->valid_mask, ATTR_MODE);
 
 	if (createmode == FSAL_UNCHECKED && (attrib_set->valid_mask != 0)) {
-		/* If we have FSAL_UNCHECKED and want to set more attributes
-		 * than the mode, we attempt an O_EXCL create first, if that
-		 * succeeds, then we will be allowed to set the additional
-		 * attributes, otherwise, we don't know we created the file
-		 * and this can NOT set the attributes.
+		/* This is NOT a simple UNCHECKED create, so create_helper()
+		 * has called with a temporary filename. We use O_EXCL to
+		 * make sure we don't collide with another temporary filename.
 		 */
 		posix_flags |= O_EXCL;
 	}
@@ -467,32 +492,17 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
 	status = GPFSFSAL_create2(obj_hdl, name, op_ctx, unix_mode, &fh,
 				  posix_flags, attrs_out);
 
-	if (status.major == ERR_FSAL_EXIST && createmode == FSAL_UNCHECKED) {
-		/* We tried to create O_EXCL to set attributes and failed.
-		 * Remove O_EXCL and retry, also remember not to set attributes.
-		 * We still try O_CREAT again just in case file disappears out
-		 * from under us.
-		 *
-		 * Note that because we have dropped O_EXCL, later on we will
-		 * not assume we created the file, and thus will not set
-		 * additional attributes. We don't need to separately track
-		 * the condition of not wanting to set attributes.
-		 */
-		posix_flags &= ~O_EXCL;
-		status = GPFSFSAL_create2(obj_hdl, name, op_ctx, unix_mode, &fh,
-					  posix_flags, attrs_out);
-		if (FSAL_IS_ERROR(status))
-			return status;
-	}
+	/* Note that if we were called by create_helper() and get EEXIST, then
+	 * we will return that to the caller for retry with a different
+	 * temporary filename.
+	 */
+
+	if (FSAL_IS_ERROR(status))
+		return status;
 
 	/* Remember if we were responsible for creating the file.
-	 * Note that in an UNCHECKED retry we MIGHT have re-created the
-	 * file and won't remember that. Oh well, so in that rare case we
-	 * leak a partially created file if we have a subsequent error in here.
-	 * Since we were able to do the permission check even if we were not
-	 * creating the file, let the caller know the permission check has
-	 * already been done. Note it IS possible in the case of a race between
-	 * an UNCHECKED open and an external unlink, we did create the file.
+	 * Note that O_EXCL is ONLY set if we were called by create_helper().
+	 * This will be relevant below...
 	 */
 	created = (posix_flags & O_EXCL) != 0;
 	*caller_perm_check = false;
@@ -560,7 +570,10 @@ fsal_status_t gpfs_open2(struct fsal_obj_handle *obj_hdl,
  fileerr:
 
 	if (created) {
-		/* Remove the file we just created */
+		/* Delete the file if we actually created it. Since we MUST
+		 * have been called by create_helper() (per the notes above),
+		 * what we are unlinking here is the temporary filename.
+		 */
 		status = GPFSFSAL_unlink(obj_hdl, name, op_ctx);
 	}
 	return status;
