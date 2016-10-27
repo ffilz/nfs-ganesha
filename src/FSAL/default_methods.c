@@ -231,6 +231,26 @@ static bool support_ex(struct fsal_obj_handle *obj)
 	return false;
 }
 
+/**
+ * @brief Indicate the degree of support for atomic create.
+ *
+ * @returns The type of exclusive create supported.
+ */
+enum fsal_create_support return_create_not_atomic(void)
+{
+	return create_not_atomic;
+}
+
+enum fsal_create_support return_create_unnamed(void)
+{
+	return create_unnamed;
+}
+
+enum fsal_create_support return_create_atomic(void)
+{
+	return create_atomic;
+}
+
 /* Default fsal module method vector.
  * copied to allocated vector at register time
  */
@@ -246,6 +266,7 @@ struct fsal_ops def_fsal_ops = {
 	.fsal_pnfs_ds = fsal_pnfs_ds,
 	.fsal_pnfs_ds_ops = fsal_pnfs_ds_ops,
 	.support_ex = support_ex,
+	.create_support = return_create_not_atomic,
 };
 
 /* get_name
@@ -1338,7 +1359,6 @@ static fsal_status_t open2(struct fsal_obj_handle *obj_hdl,
 static bool check_verifier(struct fsal_obj_handle *obj_hdl,
 			   fsal_verifier_t verifier)
 {
-	uint32_t verf_hi = 0, verf_lo = 0;
 	struct attrlist attrs;
 	bool result;
 
@@ -1347,22 +1367,7 @@ static bool check_verifier(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(obj_hdl->obj_ops.getattrs(obj_hdl, &attrs)))
 		return false;
 
-	memcpy(&verf_hi,
-	       verifier,
-	       sizeof(uint32_t));
-	memcpy(&verf_lo,
-	       verifier + sizeof(uint32_t),
-	       sizeof(uint32_t));
-
-	LogFullDebug(COMPONENT_FSAL,
-		     "Passed verifier %"PRIx32" %"PRIx32
-		     " file verifier %"PRIx32" %"PRIx32,
-		     verf_hi, verf_lo,
-		     (uint32_t) attrs.atime.tv_sec,
-		     (uint32_t) attrs.mtime.tv_sec);
-
-	result = attrs.atime.tv_sec == verf_hi &&
-		 attrs.mtime.tv_sec == verf_lo;
+	result = check_verifier_attrlist(&attrs, verifier);
 
 	/* Done with the attrs */
 	fsal_release_attrs(&attrs);
@@ -1513,6 +1518,20 @@ static fsal_status_t close2(struct fsal_obj_handle *obj_hdl,
 	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
 }
 
+/* linkx
+ * default case not supported
+ */
+
+static fsal_status_t linkx(struct fsal_obj_handle *obj_hdl,
+			   struct state_t *state,
+			   struct fsal_obj_handle *dir_hdl,
+			   const char *name)
+{
+	LogCrit(COMPONENT_FSAL,
+		"Invoking unsupported FSAL operation");
+	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
+}
+
 /* Default fsal handle object method vector.
  * copied to allocated vector at register time
  */
@@ -1580,6 +1599,7 @@ struct fsal_obj_ops def_handle_ops = {
 	.lock_op2 = lock_op2,
 	.setattr2 = setattr2,
 	.close2 = close2,
+	.linkx = linkx,
 };
 
 /* fsal_pnfs_ds common methods */

@@ -440,6 +440,9 @@ int display_attrlist(struct display_buffer *dspbuf,
 {
 	int b_left = display_start(dspbuf);
 
+	if (attr == NULL)
+		return display_cat(dspbuf, "<NULL>");
+
 	if (b_left > 0 && attr->request_mask != 0)
 		b_left = display_printf(dspbuf, "Mask = %08x",
 					(unsigned int) attr->request_mask);
@@ -500,11 +503,10 @@ void log_attrlist(log_components_t component, log_levels_t level,
 	char str[LOG_BUFF_LEN];
 	struct display_buffer dspbuf = {sizeof(str), str, str};
 
-	(void) display_attrlist(&dspbuf, attr, is_obj);
-
 	if (!isLevel(component, level))
 		return;
 
+	(void) display_attrlist(&dspbuf, attr, is_obj);
 
 	DisplayLogComponentLevel(component, file, line, function, level,
 		"%s %s attributes %s",
@@ -2844,6 +2846,18 @@ bool check_verifier_attrlist(struct attrlist *attrs, fsal_verifier_t verifier)
 
 	return attrs->atime.tv_sec == verf_hi &&
 	       attrs->mtime.tv_sec == verf_lo;
+}
+
+/** @brief Produce a random filename.
+ *
+ * [in,out] buffer The passed buffer must be at least 22 bytes.
+ *
+ */
+void random_file_name(char *buffer)
+{
+	uint32_t number = random();
+
+	sprintf(buffer, ".nfs_ganesha_%08" PRIx32, number);
 }
 
 /** @} */
