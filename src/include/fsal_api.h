@@ -629,6 +629,13 @@ struct fsal_ops {
  */
 	 bool (*support_ex)(struct fsal_obj_handle *obj);
 
+/**
+ * @brief Indicate the degree of support for exclusive create.
+ *
+ * @returns The type of exclusive create supported.
+ */
+	 enum fsal_create_support (*create_support)(void);
+
 /**@}*/
 };
 
@@ -1656,6 +1663,7 @@ struct fsal_obj_ops {
  * This function renames a file (technically it changes the name of
  * one link, which may be the only link to the file.)
  *
+ * @param[in] obj_hdl    The object being renamed
  * @param[in] olddir_hdl Old parent directory
  * @param[in] old_name   Old name
  * @param[in] newdir_hdl New parent directory
@@ -2322,6 +2330,98 @@ struct fsal_obj_ops {
  * If Name is NULL, obj_hdl is the file itself, otherwise obj_hdl is the
  * parent directory.
  *
+ * If obj_hdl is the file itself, the FSAL expects to ONLY be called
+ * with the following create modes:
+ *
+ *	FSAL_NO_CREATE    - A normal open, this is just fine
+ *	FSAL_UNCHECKED    - Will basically be a normal open, this is just fine
+ *	FSAL_EXCLUSIVE    - Being called just to check the verifier, and then
+ *			    open the file if appropriate.
+ *	FSAL_EXCLUSIVE_41 - Being called just to check the verifier, and then
+ *			    open the file if appropriate.
+ *
+ * The following expectations are put on the FSAL depending on the mode
+ * supported for atomic creation. Note that UNCHECKED creates that have
+ * attributes other than mode (and possibly the FSAL_O_TRUNC openmode) is
+ * expected to use some exclusive create semantics in order to assure the
+ * requested attributes are set only if this request resulted in creation
+ * of the file.
+ *
+ * The following operations are handled without extra help for all modes:
+ *
+ *	* NO_CREATE open (O_TRUNC only).
+ *
+ *	* Simple UNCHECKED create (mode and O_TRUNC only).
+ *
+ *	* Simple GUARDED create (mode and O_TRUNC only).
+ *
+ *      * EXCLUSIVE or EXCLUSIVE_41 where the upper layer already has the
+ *	  object handle (in this case, the upper layer is looking to the
+ *	  FSAL to check the verifier). The upper layer may have also chosen
+ *	  to call check_verifier instead.
+ *
+ * In create_not_atomic mode:
+ *
+ *	In this mode, the FSAL has no way to atomically create files and set
+ *	attributes, nor is it able to create unnamed files.
+ *
+ *	* The FSAL will never be called with the object handle of the file
+ *	  itself. The fsal_helper function, create_helper(), will attempt to
+ *	  open an existing file, and perform a verifier check if appropriate.
+ *
+ *	* The name for the actual create will be a randomly generated name.
+ *
+ *	* The original createmode is passed.
+ *
+ *	* If the create failes with ERR_FSAL_EXIST, the helper function will
+ *	  generate a new name and try again. The helper function may give up
+ *	  retrying.
+ *
+ *	* Assuming success, the FSAL will set all requested attributes and
+ *	  the verifier as appropriate.
+ *
+ *	* The helper function will then call link to attempt to give the
+ *	  file the proper name. If that fails, the helper function will
+ *	  unlink the temporary file.
+ *
+ *	* For an UNCHECKED create, if link fails with ERR_FSAL_EXIST, the
+ *	  helper function will drop the attributes (other than mode and the
+ *	  FSAL_O_TRUNC openmode flag) and retry the open as a simple
+ *	  UNCHECKED create. This attempts to assure we always return with an
+ *	  open file for UNCHECKED if possible.
+ *
+ * In create_unnamed mode:
+ *
+ *	In this mode, the FSAL has no way to atomically create files and set
+ *	attributes, but it is able to create unnamed files.
+ *
+ *	* The FSAL will never be called with the object handle of the file
+ *	  itself. The fsal_helper function, create_helper(), will attempt to
+ *	  open an existing file, and perform a verifier check if appropriate.
+ *
+ *	* The open2 call will be made with the FSAL_O_TMPFILE openmode flag
+ *	  set and a NULL filename.
+ *
+ *	* The original createmode is passed.
+ *
+ *	* Assuming success, the FSAL will set all requested attributes and
+ *	  the verifier as appropriate.
+ *
+ *	* The helper function will then call linkx to attempt to give the
+ *	  file the proper name. If that fails, the unnamed file is expected
+ *	  to be properly cleaned up by the time the fsal_obj_handle is released.
+ *
+ *	* For an UNCHECKED create, if linkx fails with ERR_FSAL_EXIST, the
+ *	  helper function will drop the attributes (other than mode and the
+ *	  FSAL_O_TRUNC openmode flag) and retry the open as a simple
+ *	  UNCHECKED create. This attempts to assure we always return with an
+ *	  open file for UNCHECKED if possible.
+ *
+ * In create_atomic mode:
+ *
+ *	* The FSAL is expected to be able to create a file and set attributes
+ *	  all in a single atomic operation.
+ *
  * On an exclusive create, the upper layer may know the object handle
  * already, so it MAY call with name == NULL. In this case, the caller
  * expects just to check the verifier.
@@ -2603,6 +2703,31 @@ struct fsal_obj_ops {
  */
 	 fsal_status_t (*close2)(struct fsal_obj_handle *obj_hdl,
 				 struct state_t *state);
+
+/**
+ * @brief Create a hard link to the specified file.
+ *
+ * This function is used to support atomic file creation using a temporary
+ * unnamed file, and now it must be linked in. The FSAL must support stateless
+ * operation (in which case, it should use the global file descriptor if it can
+ * not perform the link with just the object handle.
+ *
+ * On failure, any open file descriptor MUST be closed such that the temporary
+ * file should have disappeared.
+ *
+ * This method is only needed if create_unnamed is supported.
+ *
+ * @param[in] obj_hdl    File on which to operate
+ * @param[in] state      state_t to use for this operation
+ * @param[in] dir_hdl    Directory to place the hard link in.
+ * @param[in] name       Name for the hard link.
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*linkx)(struct fsal_obj_handle *obj_hdl,
+				struct state_t *state,
+				struct fsal_obj_handle *dir_hdl,
+				const char *name);
 
 /**@}*/
 };

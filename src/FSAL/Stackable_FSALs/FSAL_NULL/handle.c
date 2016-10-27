@@ -326,6 +326,28 @@ static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
+static fsal_status_t nullfs_linkx(struct fsal_obj_handle *obj_hdl,
+				  struct state_t *state,
+				  struct fsal_obj_handle *dir_hdl,
+				  const char *name)
+{
+	struct nullfs_fsal_obj_handle *handle =
+		(struct nullfs_fsal_obj_handle *) obj_hdl;
+	struct nullfs_fsal_obj_handle *nullfs_dir =
+		(struct nullfs_fsal_obj_handle *) dir_hdl;
+	struct nullfs_fsal_export *export =
+		container_of(op_ctx->fsal_export, struct nullfs_fsal_export,
+			     export);
+
+	/* calling subfsal method */
+	op_ctx->fsal_export = export->export.sub_export;
+	fsal_status_t status = handle->sub_handle->obj_ops.linkx(
+		handle->sub_handle, state, nullfs_dir->sub_handle, name);
+	op_ctx->fsal_export = &export->export;
+
+	return status;
+}
+
 /**
  * Callback function for read_dirents.
  *
@@ -634,6 +656,7 @@ void nullfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->lock_op2 = nullfs_lock_op2;
 	ops->setattr2 = nullfs_setattr2;
 	ops->close2 = nullfs_close2;
+	ops->linkx = nullfs_linkx;
 
 	/* xattr related functions */
 	ops->list_ext_attrs = nullfs_list_ext_attrs;

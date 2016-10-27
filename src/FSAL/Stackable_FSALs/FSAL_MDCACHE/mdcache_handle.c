@@ -59,6 +59,9 @@
  * if we lose a race to create the cache entry since our caller CAN NOT hold
  * any locks on the cache entry created.
  *
+ * This could be called with a NULL name in the case of an unnamed create. In
+ * that case, we just skip adding the dirent.
+ *
  * @param[in]     export         The mdcache export used by the handle.
  * @param[in,out] sub_handle     The handle used by the subfsal.
  * @param[in]     fs             The filesystem of the new handle.
@@ -112,16 +115,19 @@ fsal_status_t mdcache_alloc_and_check_handle(
 					   MDCACHE_TRUST_ATTRS);
 	}
 
-	status = mdcache_dirent_add(parent, name, new_entry);
+	if (name != NULL) {
+		/* Add the name into the dirent cache. */
+		status = mdcache_dirent_add(parent, name, new_entry);
 
-	if (FSAL_IS_ERROR(status)) {
-		LogDebug(COMPONENT_CACHE_INODE,
-			 "%s%s failed because add dirent failed",
-			 tag, name);
+		if (FSAL_IS_ERROR(status)) {
+			LogDebug(COMPONENT_CACHE_INODE,
+				 "%s%s failed because add dirent failed",
+				 tag, name);
 
-		mdcache_put(new_entry);
-		*new_obj = NULL;
-		return status;
+			mdcache_put(new_entry);
+			*new_obj = NULL;
+			return status;
+		}
 	}
 
 	if (new_entry->obj_handle.type == DIRECTORY) {
@@ -522,6 +528,63 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status)) {
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "link failed %s",
+			     fsal_err_txt(status));
+		return status;
+	}
+
+	PTHREAD_RWLOCK_wrlock(&dest->content_lock);
+
+	/* Add this entry to the directory (also takes an internal ref)
+	 */
+	status = mdcache_dirent_add(dest, name, entry);
+
+	PTHREAD_RWLOCK_unlock(&dest->content_lock);
+
+	/* Invalidate attributes, so refresh will be forced */
+	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_ATTRS);
+	atomic_clear_uint32_t_bits(&dest->mde_flags, MDCACHE_TRUST_ATTRS);
+
+	return status;
+}
+
+/**
+ * @brief Create a hard link to the specified file.
+ *
+ * This function is used to support atomic file creation using a temporary
+ * unnamed file, and now it must be linked in. The FSAL must support stateless
+ * operation (in which case, it should use the global file descriptor if it can
+ * not perform the link with just the object handle.
+ *
+ * On failure, any open file descriptor MUST be closed such that the temporary
+ * file should have disappeared.
+ *
+ * This method is only needed if create_unnamed is supported.
+ *
+ * @param[in] obj_hdl    File on which to operate
+ * @param[in] state      state_t to use for this operation
+ * @param[in] dir_hdl    Directory to place the hard link in.
+ * @param[in] name       Name for the hard link.
+ *
+ * @return FSAL status.
+ */
+static fsal_status_t mdcache_linkx(struct fsal_obj_handle *obj_hdl,
+				   struct state_t *state,
+				   struct fsal_obj_handle *dir_hdl,
+				   const char *name)
+{
+	mdcache_entry_t *entry =
+		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+	mdcache_entry_t *dest =
+		container_of(dir_hdl, mdcache_entry_t, obj_handle);
+	fsal_status_t status;
+
+	subcall(
+		status = entry->sub_handle->obj_ops.linkx(
+			entry->sub_handle, state, dest->sub_handle, name)
+	       );
+	if (FSAL_IS_ERROR(status)) {
+		LogFullDebug(COMPONENT_CACHE_INODE,
+			     "linkx failed %s",
 			     fsal_err_txt(status));
 		return status;
 	}
@@ -1591,6 +1654,7 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->lock_op2 = mdcache_lock_op2;
 	ops->setattr2 = mdcache_setattr2;
 	ops->close2 = mdcache_close2;
+	ops->linkx = mdcache_linkx;
 
 	/* xattr related functions */
 	ops->list_ext_attrs = mdcache_list_ext_attrs;

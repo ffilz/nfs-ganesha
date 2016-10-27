@@ -117,12 +117,11 @@ int _9p_lcreate(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		}
 
 		if (*flags & 0x1000) {
-			/* If OEXCL, use FSAL_EXCLUSIVE_9P create mode
+			/* If OEXCL, use FSAL_GUARDED create mode
 			 * so that we can pass the attributes specified
-			 * above. Verifier is ignored for this create mode
-			 * because we don't have to deal with retry.
+			 * above.
 			 */
-			createmode = FSAL_EXCLUSIVE_9P;
+			createmode = FSAL_GUARDED;
 		}
 
 		fsal_status = fsal_open2(pfid->pentry,

@@ -823,11 +823,8 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 			} else {
 				LogFullDebug(COMPONENT_FSAL,
 					"New size = %"PRIx64, st.st_size);
-				/* Now check verifier for exclusive, but not for
-				 * FSAL_EXCLUSIVE_9P.
-				 */
+				/* Now check verifier for exclusive. */
 				if (createmode >= FSAL_EXCLUSIVE &&
-					createmode != FSAL_EXCLUSIVE_9P &&
 					!obj_hdl->obj_ops.check_verifier(
 						obj_hdl, verifier)) {
 					/* Verifier didn't match */
@@ -942,6 +939,8 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	memset(&st, 0, sizeof(struct stat)); /* XXX needed? */
+
+	/** @todo Look into how to make create atomic. */
 
 	st.st_uid = op_ctx->creds->caller_uid;
 	st.st_gid = op_ctx->creds->caller_gid;

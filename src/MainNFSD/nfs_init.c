@@ -226,6 +226,9 @@ void nfs_prereq_init(char *program_name, char *host_name, int debug_level,
 	SetNameHost(host_name);
 
 	init_logging(log_path, debug_level);
+
+	/* Set seed for random to epoch. */
+	srandom(ServerEpoch);
 }
 
 /**
