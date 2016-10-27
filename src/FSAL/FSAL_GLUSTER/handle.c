@@ -1267,8 +1267,22 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (name == NULL) {
-		/* This is an open by handle */
+		/* This is an open by handle. Because we are currently
+		 * create_not_atomic we will only be called with no name in the
+		 * following situations:
+		 *
+		 * NO_CREATE open
+		 * UNCHECKED create
+		 * EXCLUSIVE or EXCLUSIVE_41 create to check verifier
+		 */
 		struct glusterfs_handle *myself;
+
+		if (createmode == FSAL_GUARDED) {
+			/* Should not have been called this way, but return
+			 * EEXIST anyway.
+			 */
+			return posix2fsal_status(EEXIST);
+		}
 
 		myself = container_of(obj_hdl,
 				      struct glusterfs_handle,
@@ -1352,24 +1366,20 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 				LogFullDebug(COMPONENT_FSAL,
 					     "New size = %" PRIx64,
 					     stat.st_size);
+
+				/* Now check verifier for exclusive. */
+				if (createmode >= FSAL_EXCLUSIVE &&
+				    !check_verifier_stat(&stat,
+							 verifier)) {
+					/* Verifier didn't match, return EEXIST
+					 */
+					status = posix2fsal_status(EEXIST);
+				}
 			} else {
 				if (errno == EBADF)
 					errno = ESTALE;
 				status = fsalstat(posix2fsal_error(errno),
 						  errno);
-			}
-
-			/* Now check verifier for exclusive, but not for
-			 * FSAL_EXCLUSIVE_9P.
-			 */
-			if (!FSAL_IS_ERROR(status) &&
-			    createmode >= FSAL_EXCLUSIVE &&
-			    createmode != FSAL_EXCLUSIVE_9P &&
-			    !check_verifier_stat(&stat,
-						 verifier)) {
-				/* Verifier didn't match, return EEXIST */
-				status =
-				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
 			}
 		}
 
@@ -1418,6 +1428,13 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	 * open by name), then there CAN NOT be a share conflict, otherwise
 	 * the share conflict will be resolved when the object handles are
 	 * merged.
+	 *
+	 * This could be one of the following cases:
+	 *
+	 *	NO_CREATE open
+	 *	Simple UNCHECKED create
+	 *	Simple GUARDED create
+	 *	Any other create called by create_helper()
 	 */
 
 	if (createmode != FSAL_NO_CREATE) {
@@ -1437,11 +1454,9 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (createmode == FSAL_UNCHECKED && (attrib_set->valid_mask != 0)) {
-		/* If we have FSAL_UNCHECKED and want to set more attributes
-		 * than the mode, we attempt an O_EXCL create first, if that
-		 * succeeds, then we will be allowed to set the additional
-		 * attributes, otherwise, we don't know we created the file
-		 * and this can NOT set the attributes.
+		/* This is NOT a simple UNCHECKED create, so create_helper()
+		 * has called with a temporary filename. We use O_EXCL to
+		 * make sure we don't collide with another temporary filename.
 		 */
 		p_flags |= O_EXCL;
 	}
@@ -1501,23 +1516,10 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	    glfs_h_creat(glfs_export->gl_fs, parenthandle->glhandle, name,
 			 p_flags, unix_mode, &sb);
 
-	if (glhandle == NULL && errno == EEXIST &&
-		 createmode == FSAL_UNCHECKED) {
-		/* We tried to create O_EXCL to set attributes and failed.
-		 * Remove O_EXCL and retry, also remember not to set attributes.
-		 * We still try O_CREAT again just in case file disappears out
-		 * from under us.
-		 *
-		 * Note that because we have dropped O_EXCL, later on we will
-		 * not assume we created the file, and thus will not set
-		 * additional attributes. We don't need to separately track
-		 * the condition of not wanting to set attributes.
-		 */
-		p_flags &= ~O_EXCL;
-		glhandle =
-		    glfs_h_creat(glfs_export->gl_fs, parenthandle->glhandle,
-				 name, p_flags, unix_mode, &sb);
-	}
+	/* Note that if we were called by create_helper() and get EEXIST, then
+	 * we will return that to the caller for retry with a different
+	 * temporary filename.
+	 */
 
        /* preserve errno */
 	retval = errno;
@@ -1537,23 +1539,15 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	/* Remember if we were responsible for creating the file.
-	 * Note that in an UNCHECKED retry we MIGHT have re-created the
-	 * file and won't remember that. Oh well, so in that rare case we
-	 * leak a partially created file if we have a subsequent error in here.
-	 * Also notify caller to do permission check if we DID NOT create the
-	 * file. Note it IS possible in the case of a race between an UNCHECKED
-	 * open and an external unlink, we did create the file, but we will
-	 * still force a permission check. That permission check might fail
-	 * if the file created after the unlink has a mode that doesn't allow
-	 * the caller/creator to open the file (on the other hand, one hopes
-	 * a non-exclusive open doesn't set a mode that doesn't allow read/write
-	 * since the application clearly expects that another process may have
-	 * created the file). This failure case really isn't too awful since
-	 * it would just look to the caller like someone else had created the
-	 * file with a mode that prevented the open this caller was attempting.
+	 * Note that O_EXCL is ONLY set if we were called by create_helper().
+	 * This will be relevant below...
 	 */
 	created = (p_flags & O_EXCL) != 0;
-	*caller_perm_check = !created;
+
+	/* Since we did the glfs_h_creat using the caller's credentials,
+	 * we don't need to do an additional permission check.
+	 */
+	*caller_perm_check = false;
 
 	/* Since the file is created, remove O_CREAT/O_EXCL flags */
 	p_flags &= ~(O_EXCL | O_CREAT);
@@ -1657,9 +1651,14 @@ fileerr:
 	glusterfs_close_my_fd(my_fd);
 
 direrr:
-	/* Delete the file if we actually created it. */
-	if (created)
+
+	if (created) {
+		/* Delete the file if we actually created it. Since we MUST
+		 * have been called by create_helper() (per the notes above),
+		 * what we are unlinking here is the temporary filename.
+		 */
 		glfs_h_unlink(glfs_export->gl_fs, parenthandle->glhandle, name);
+	}
 
 
 	if (status.major != ERR_FSAL_NO_ERROR)

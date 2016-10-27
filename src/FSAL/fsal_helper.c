@@ -362,6 +362,252 @@ static fsal_status_t fsal_check_setattr_perms(struct fsal_obj_handle *obj,
 	return status;
 }
 
+void close_obj(struct fsal_obj_handle **obj, struct state_t *state)
+{
+	fsal_status_t close_status;
+
+	if (state != NULL)
+		close_status = (*obj)->obj_ops.close2(*obj, state);
+	else
+		close_status = (*obj)->obj_ops.close(*obj);
+
+	if (FSAL_IS_ERROR(close_status)) {
+		/* Just log but don't return this error (we want to
+		 * preserve the error that got us here).
+		 */
+		LogDebug(COMPONENT_FSAL,
+			 "FSAL close2 failed with %s",
+			 fsal_err_txt(close_status));
+	}
+
+	/* We also need to release the object handle reference. */
+	(*obj)->obj_ops.put_ref((*obj));
+}
+
+/**
+ * @brief Create a file when FSAL doesn't support atomic create and set
+ *        attributes
+ *
+ * This function handles creates other than simple UNCHECKED and GUARDED
+ * creates when the FSAL does not support atomic create and set attributes.
+ *
+ * @param[in]     in_obj            Parent directory
+ * @param[in,out] state             state_t to use for this operation
+ * @param[in]     openflags         Mode for open
+ * @param[in]     createmode        Mode for create
+ * @param[in]     name              Name for file if being created or opened
+ * @param[in]     attrs_in          Attributes to set on created file
+ * @param[in]     verifier          Verifier to use for exclusive create
+ * @param[in,out] new_obj           Newly created object
+ * @param[in,out] attrs_out         Optional attributes for newly created object
+ * @param[in,out] caller_perm_check The caller must do a permission check
+ * @param[in]     fsal_create_type  What kind of create support the FSAL has
+ *
+ * @return FSAL status.
+ */
+fsal_status_t create_helper(struct fsal_obj_handle *in_obj,
+			    struct state_t *state,
+			    fsal_openflags_t openflags,
+			    enum fsal_create_mode createmode,
+			    const char *name,
+			    struct attrlist *attrs_in,
+			    fsal_verifier_t verifier,
+			    struct fsal_obj_handle **new_obj,
+			    struct attrlist *attrs_out,
+			    bool *caller_perm_check,
+			    enum fsal_create_support fsal_create_type)
+{
+	char tmpname[TMPNAME_LEN];
+	int retries = 0;
+	bool retried = false;
+	fsal_status_t status;
+
+	/* FSAL does not fully support atomic create and we need it.
+	 */
+	/* First see if the file is already present */
+	if (createmode != FSAL_UNCHECKED) {
+		/* If we are doing a GUARDED or EXCLUSIVE create, O_TRUNC
+		 * doesn't make sense and we don't want to truncate an existing
+		 * file should we be doing a GUARDED or EXCLUSIVE create.
+		 */
+		openflags &= ~FSAL_O_TRUNC;
+	}
+
+retry:
+
+	status = in_obj->obj_ops.open2(in_obj, state, openflags, FSAL_NO_CREATE,
+				       name, NULL, 0, new_obj, attrs_out,
+				       caller_perm_check);
+
+	if (!FSAL_IS_ERROR(status)) {
+		/* There was an existing file and we opened it... */
+		switch (createmode) {
+		case FSAL_NO_CREATE:
+			LogFatal(COMPONENT_FSAL, "oops");
+			break;
+
+		case FSAL_UNCHECKED:
+			/* Unchecked create succeeded in opening
+			 * existing file. Cool beans! Let open2_by_name
+			 * finish up (may have to do permission check).
+			 */
+			return status;
+
+		case FSAL_EXCLUSIVE:
+		case FSAL_EXCLUSIVE_41:
+			if ((*new_obj)->obj_ops.check_verifier(*new_obj,
+							       verifier)) {
+				/* Verifier check succeeded. */
+				/* Exclusive create succeeded in opening
+				 * existing file and verifier matched. Cool
+				 * beans! Let open2_by_name finish up (may have
+				 * to do permission check).
+				 */
+				return status;
+			}
+			/* Verifier check failed, fall through */
+
+		case FSAL_GUARDED:
+			/* Bad job, the file already exists. */
+			close_obj(new_obj, state);
+			*caller_perm_check = false;
+			return fsalstat(ERR_FSAL_EXIST, 0);
+		}
+	}
+
+	/* Ok, so now we need to try crearting the file. If the FSAL supports
+	 * create_tempfile, add FSAL_O_TMPFILE. No matter what, no subseqent
+	 * permission check will be required (ok, there will be one exception).
+	 */
+
+	*caller_perm_check = false;
+
+again:
+
+	if (fsal_create_type == create_unnamed) {
+		/* FSAL supports creating unnamed files. */
+		openflags |= FSAL_O_TMPFILE;
+	} else {
+		/* We need to generate a temporary name. */
+		random_file_name(tmpname);
+	}
+
+	/* Attempt to create the temporary file. Note that when the FSAL
+	 * relies on temporary file creation in support of atomic create,
+	 * it is expected to just do a simple exclusive create and should
+	 * not actually do any verifier checking.
+	 */
+	status = in_obj->obj_ops.open2(in_obj, state, openflags, createmode,
+				       fsal_create_type == create_unnamed
+						? NULL : tmpname,
+				       attrs_in, verifier, new_obj, attrs_out,
+				       caller_perm_check);
+
+	if (status.major == ERR_FSAL_EXIST) {
+		/* Temporary file name collision, try a new temporary file name.
+		 */
+		if (++retries > 10) {
+			LogInfo(COMPONENT_FSAL,
+				"Exclusive create using temporary file name failed due to %d collisions",
+				retries);
+
+			if (createmode == FSAL_UNCHECKED) {
+				/* Don't confuse the caller with ERR_FSAL_EXIST
+				 * which would be an unexpected error.
+				 */
+				status = fsalstat(ERR_FSAL_SERVERFAULT, 0);
+			}
+
+			return status;
+		}
+
+		goto again;
+	}
+
+	if (FSAL_IS_ERROR(status))
+		return status;
+
+	/* The create succeeded. A temporary file exists with the requested
+	 * file name and all attributes including verifier set. To the extent
+	 * the FSAL supports a file descriptor, it is open. Now we must attempt
+	 * to link the file into the proper name to complete the operation.
+	 */
+	if (fsal_create_type == create_not_atomic) {
+		/* We don't support unnamed files, so use link method and
+		 * if it fails, close the file descriptor and unlink.
+		 */
+		status = (*new_obj)->obj_ops.link(*new_obj, in_obj, name);
+
+		if (FSAL_IS_ERROR(status)) {
+			fsal_status_t status2;
+
+			/* Close the file. */
+			close_obj(new_obj, state);
+
+			/* And remove the temporary file */
+			status2 = (*new_obj)->obj_ops.unlink(in_obj, *new_obj,
+							     tmpname);
+
+			if (FSAL_IS_ERROR(status2)) {
+				LogCrit(COMPONENT_FSAL,
+					"Unlink of temporary file %s failed with %s",
+					tmpname, fsal_err_txt(status2));
+			}
+		}
+	} else {
+		/* Use linkx to perform the link. The linkx method may need to
+		 * use the open file descriptor. If it fails, it will close any
+		 * open file descriptors which will assure the unnamed file is
+		 * deleted.
+		 */
+		status = (*new_obj)->obj_ops.linkx(*new_obj, state, in_obj,
+						   name);
+	}
+
+	/* Now we are done with the object handle, release it's reference. */
+	(*new_obj)->obj_ops.put_ref((*new_obj));
+
+	if (status.major != ERR_FSAL_EXIST || createmode == FSAL_GUARDED) {
+		/* Nothing more to do... */
+		if (FSAL_IS_ERROR(status))
+			LogDebug(COMPONENT_FSAL,
+				 "Link step of create %s failed with %s",
+				 name, fsal_err_txt(status));
+		else
+			LogFullDebug(COMPONENT_FSAL,
+				     "Link step of create %s succeeded",
+				     name);
+
+	} else if (!retried && createmode >= FSAL_EXCLUSIVE) {
+		/* We might have raced with another thread creating the file
+		 * with the same verifier, go back and retry the pure open
+		 * so we can also check the verifier. This is a really slim
+		 * chance race, but easy to handle...
+		 */
+		retried = true;
+		goto retry;
+
+	} else if (createmode == FSAL_UNCHECKED) {
+		/* Now, if we were an unchecked create, we seem to have had a
+		 * race and the file now exists... Just do a final unchecked
+		 * open without the attributes other than mode, that way, if
+		 * the file ends up not still being present, it will be
+		 * created with the requested mode.
+		 */
+		struct attrlist modeonly;
+
+		modeonly.valid_mask = ATTR_MODE;
+		modeonly.mode = attrs_in->mode;
+
+		status = in_obj->obj_ops.open2(in_obj, state, openflags,
+					       FSAL_UNCHECKED, name, &modeonly,
+					       0, new_obj, attrs_out,
+					       caller_perm_check);
+	}
+
+	return status;
+}
+
 fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
 			    struct state_t *state,
 			    fsal_openflags_t openflags,
@@ -373,9 +619,9 @@ fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
 			    struct attrlist *attrs_out)
 {
 	fsal_status_t status = { 0, 0 };
-	fsal_status_t close_status = { 0, 0 };
 	bool caller_perm_check = false;
 	char *reason;
+	enum fsal_create_support fsal_create_type;
 
 	*obj = NULL;
 
@@ -395,6 +641,25 @@ fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
 	status = fsal_access(in_obj, FSAL_EXECUTE_ACCESS, NULL, NULL);
 	if (FSAL_IS_ERROR(status))
 		return status;
+
+	if (createmode != FSAL_NO_CREATE) {
+		fsal_create_type = in_obj->fsal->m_ops.create_support();
+
+		if ((createmode >= FSAL_EXCLUSIVE ||
+		     ((attr->request_mask & ~ATTR_MODE) != 0))
+		    && fsal_create_type != create_atomic) {
+			status = create_helper(in_obj, state, openflags,
+					       createmode, name, attr, verifier,
+					       obj, attrs_out,
+					       &caller_perm_check,
+					       fsal_create_type);
+
+			if (caller_perm_check)
+				goto do_perm_check;
+
+			return status;
+		}
+	}
 
 	status = in_obj->obj_ops.open2(in_obj,
 				       state,
@@ -422,6 +687,8 @@ fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
 	if (!caller_perm_check)
 		return status;
 
+do_perm_check:
+
 	/* Do a permission check on the just opened file. */
 	status = check_open_permission(*obj, openflags,
 				       createmode >= FSAL_EXCLUSIVE, &reason);
@@ -433,19 +700,7 @@ fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
 		 "Closing file check_open_permission failed %s-%s",
 		 reason, fsal_err_txt(status));
 
-	if (state != NULL)
-		close_status = (*obj)->obj_ops.close2(*obj, state);
-	else
-		close_status = (*obj)->obj_ops.close(*obj);
-
-	if (FSAL_IS_ERROR(close_status)) {
-		/* Just log but don't return this error (we want to
-		 * preserve the error that got us here).
-		 */
-		LogDebug(COMPONENT_FSAL,
-			 "FSAL close2 failed with %s",
-			 fsal_err_txt(close_status));
-	}
+	close_obj(obj, state);
 
 	return status;
 }
@@ -1970,8 +2225,8 @@ fsal_status_t fsal_commit(struct fsal_obj_handle *obj, off_t offset,
  * @return FSAL status
  */
 
-fsal_status_t fsal_verify2(struct fsal_obj_handle *obj,
-			   fsal_verifier_t verifier)
+fsal_status_t fsal_check_verifier(struct fsal_obj_handle *obj,
+				  fsal_verifier_t verifier)
 {
 	if (!obj->obj_ops.check_verifier(obj, verifier)) {
 		/* Verifier check failed. */

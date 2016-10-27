@@ -587,6 +587,7 @@ typedef uint16_t fsal_openflags_t;
 #define FSAL_O_REOPEN          0x0010  /* re-open */
 #define FSAL_O_ANY             0x0020  /* any open file descriptor is usable */
 #define FSAL_O_TRUNC           0x0040  /* Truncate file on open */
+#define FSAL_O_TMPFILE         0x0080  /* Create an unnamed file */
 #define FSAL_O_DENY_READ       0x0100
 #define FSAL_O_DENY_WRITE      0x0200
 #define FSAL_O_DENY_WRITE_MAND 0x0400  /* Mandatory deny-write (i.e. NFSv4) */
@@ -598,7 +599,15 @@ enum fsal_create_mode {
 	FSAL_GUARDED = 2,
 	FSAL_EXCLUSIVE = 3,
 	FSAL_EXCLUSIVE_41 = 4,
-	FSAL_EXCLUSIVE_9P,
+};
+
+enum fsal_create_support {
+	/** FSAL can not atomically create files and set attributes. */
+	create_not_atomic,
+	/** FSAL is capable of creating unnamed files. */
+	create_unnamed,
+	/** FSAL can create a file and set all attributes atomically. */
+	create_atomic,
 };
 
 /** File system static info. */

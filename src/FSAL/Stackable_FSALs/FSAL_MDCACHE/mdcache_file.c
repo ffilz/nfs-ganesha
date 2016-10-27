@@ -478,8 +478,14 @@ static fsal_status_t mdc_open2_by_name(mdcache_entry_t *mdc_parent,
 	if (createmode == FSAL_GUARDED) {
 		mdcache_put(*new_entry);
 		return fsalstat(ERR_FSAL_EXIST, 0);
-	} else if (createmode == FSAL_EXCLUSIVE) {
-		/* Exclusive create with entry found, check verifier */
+	} else if (createmode == FSAL_EXCLUSIVE ||
+		   createmode == FSAL_EXCLUSIVE_41) {
+		/* Exclusive create with entry found, check verifier.
+		 * Note that we could get here with a temporary file name
+		 * if the FSAL is create_not_atomic. The verifier should not
+		 * be the same if we tripped on another exclusive create in
+		 * progress...
+		 */
 		if (!mdcache_check_verifier(&entry->obj_handle, verifier)) {
 			/* Verifier check failed. */
 			LogFullDebug(COMPONENT_CACHE_INODE,
@@ -491,7 +497,7 @@ static fsal_status_t mdc_open2_by_name(mdcache_entry_t *mdc_parent,
 
 		/* Verifier matches, go ahead and open the file. */
 
-	} /* else UNGUARDED, go ahead and open the file. */
+	} /* else UNCHECKED or NO_CREATE, go ahead and open the file. */
 
 	subcall(
 		status = entry->sub_handle->obj_ops.open2(
@@ -547,7 +553,7 @@ static fsal_status_t mdc_open2_by_name(mdcache_entry_t *mdc_parent,
  * we can set the size to 0.
  *
  * At least the mode attribute must be set if createmode is FSAL_UNCHECKED,
- * FSAL_GUARDED, FSAL_EXCLUSIVE_41, or FSAL_EXCLUSIVE_9P.
+ * FSAL_GUARDED, FSAL_EXCLUSIVE_41.
  *
  * If an open by name succeeds and did not result in Ganesha creating a file,
  * the caller will need to do a subsequent permission check to confirm the
@@ -676,8 +682,10 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 		return status;
 	}
 
-	if (!name) {
-		/* Wasn't a create and/or entry already found */
+	if (!name && ((openflags & FSAL_O_TMPFILE) == 0)) {
+		/* Wasn't a create and/or entry already found. Do not take this
+		 * path for unnamed create.
+		 */
 		if (openflags & FSAL_O_TRUNC) {
 			/* Mark the attributes as not-trusted, so we will
 			 * refresh the attributes.

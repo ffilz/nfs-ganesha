@@ -1457,9 +1457,9 @@ static void open4_ex(OPEN4args *arg,
 		 * state. We still need to verify it, but no need
 		 * to call reopen2.
 		 */
-		LogFullDebug(COMPONENT_STATE, "Calling verify2 ");
+		LogFullDebug(COMPONENT_STATE, "Calling fsal_check_verifier");
 
-		status = fsal_verify2(file_obj, verifier);
+		status = fsal_check_verifier(file_obj, verifier);
 
 		if (FSAL_IS_ERROR(status)) {
 			res_OPEN4->status = nfs4_Errno_status(status);
