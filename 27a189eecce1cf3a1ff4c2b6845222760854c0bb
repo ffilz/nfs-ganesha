@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_0f29d13a",
+        "filename": "src/FSAL/default_methods.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2016-10-28T13:53:11Z",
+      "side": 1,
+      "message": "This appears to be unused.",
+      "revId": "27a189eecce1cf3a1ff4c2b6845222760854c0bb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_4f00f9ab",
+        "filename": "src/FSAL/default_methods.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2016-10-28T13:53:11Z",
+      "side": 1,
+      "message": "Why create_not_atomic and create_atomic?  Aren\u0027t they just opposites?",
+      "revId": "27a189eecce1cf3a1ff4c2b6845222760854c0bb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_2feb75de",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2016-10-28T13:53:11Z",
+      "side": 1,
+      "message": "Why is this an error?",
+      "revId": "27a189eecce1cf3a1ff4c2b6845222760854c0bb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_cf952933",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2016-10-28T13:53:11Z",
+      "side": 1,
+      "message": "Couldn\u0027t tmpname be unset here, if create_unnamed?",
+      "revId": "27a189eecce1cf3a1ff4c2b6845222760854c0bb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
