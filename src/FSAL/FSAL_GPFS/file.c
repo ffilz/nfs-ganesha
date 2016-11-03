@@ -1493,8 +1493,6 @@ gpfs_commit(struct fsal_obj_handle *obj_hdl, off_t offset, size_t len)
 		return fsalstat(posix2fsal_error(retval), retval);
 	}
 
-	set_gpfs_verifier(&writeverf);
-
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
@@ -1522,8 +1520,6 @@ gpfs_commit_fd(int my_fd, struct fsal_obj_handle *obj_hdl,
 			LogFatal(COMPONENT_FSAL, "GPFS Returned EUNATCH");
 		return fsalstat(posix2fsal_error(retval), retval);
 	}
-
-	set_gpfs_verifier(&writeverf);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
