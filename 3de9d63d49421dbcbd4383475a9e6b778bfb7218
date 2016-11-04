@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_6206161e",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2016-11-04T13:32:52Z",
+      "side": 1,
+      "message": "Okay, this puts the ref on new_obj, but that\u0027s an out-arg that is used in open2_by_name() and returned to the ultimate caller unref\u0027d.  This needs to be NULL\u0027d (if it\u0027s not supposed to be returned) or left ref\u0027d for the caller.  Note that this is okay in FSAL_UNCHECKED, because of the open2 below, but otherwise will fall through.  This may cause the 9p issue.",
+      "revId": "3de9d63d49421dbcbd4383475a9e6b778bfb7218",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
