@@ -117,20 +117,6 @@ int nfs3_remove(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		goto out_fail;
 	}
 
-	/* Lookup the child entry to verify that it is not a directory */
-	fsal_status = fsal_lookup(parent_obj, name, &child_obj, NULL);
-
-	if (!FSAL_IS_ERROR(fsal_status)) {
-		/* Sanity check: make sure we are not removing a
-		 * directory
-		 */
-		if (child_obj->type == DIRECTORY) {
-			res->res_remove3.status = NFS3ERR_ISDIR;
-			rc = NFS_REQ_OK;
-			goto out;
-		}
-	}
-
 	LogFullDebug(COMPONENT_NFSPROTO, "Trying to remove file %s", name);
 
 	/* Remove the entry. */

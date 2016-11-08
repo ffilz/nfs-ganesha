@@ -118,21 +118,6 @@ int nfs3_rmdir(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		goto out_fail;
 	}
 
-	/* Lookup to the entry to be removed to check that it is a
-	 * directory
-	 */
-	fsal_status = fsal_lookup(parent_obj, name, &child_obj, NULL);
-
-	if (child_obj != NULL) {
-		/* Sanity check: make sure we are about to remove a
-		 * directory
-		 */
-		if (child_obj->type != DIRECTORY) {
-			res->res_rmdir3.status = NFS3ERR_NOTDIR;
-			rc = NFS_REQ_OK;
-			goto out;
-		}
-	}
 
 	fsal_status = fsal_remove(parent_obj, name);
 
