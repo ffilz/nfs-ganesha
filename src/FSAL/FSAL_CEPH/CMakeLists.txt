@@ -14,7 +14,7 @@ SET(fsalceph_LIB_SRCS
 
 include_directories(${CEPHFS_INCLUDE_DIR})
 
-add_library(fsalceph SHARED ${fsalceph_LIB_SRCS})
+add_library(fsalceph MODULE ${fsalceph_LIB_SRCS})
 
 target_link_libraries(fsalceph ${CEPHFS_LIBRARIES} ${SYSTEM_LIBRARIES})
 
