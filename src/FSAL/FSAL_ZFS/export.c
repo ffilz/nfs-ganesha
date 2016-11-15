@@ -42,7 +42,6 @@
 #include "zfs_methods.h"
 #include "nfs_exports.h"
 #include "export_mgr.h"
-#include "mdcache.h"
 
 libzfswrap_handle_t *p_zhd = NULL;
 size_t i_snapshots = 0;
