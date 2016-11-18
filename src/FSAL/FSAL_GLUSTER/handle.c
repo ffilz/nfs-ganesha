@@ -2312,6 +2312,15 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 			/* mode-bits too if not already passed */
 			FSAL_SET_MASK(mask, GLAPI_SET_ATTR_MODE);
 		}
+
+		/* In case of ACL enabled, any of the below attribute changes
+		 * result in change of ACL set as well. Hence adjust the mask
+		 * accordingly so that md-cache can invalidate the ACL entry.
+		 */
+		if (FSAL_TEST_MASK(attrib_set->valid_mask,
+				   ATTR_MODE | ATTR_OWNER | ATTR_GROUP)) {
+			FSAL_SET_MASK(attrib_set->valid_mask, ATTR_ACL);
+		}
 	} else if (FSAL_TEST_MASK(attrib_set->valid_mask, ATTR_ACL)) {
 		status = fsalstat(ERR_FSAL_ATTRNOTSUPP, 0);
 		goto out;
