@@ -129,7 +129,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-#ifdef CEPH_FS_LOOKUP_ROOT
+#ifdef USE_FSAL_CEPH_LL_LOOKUP_ROOT
 static fsal_status_t find_cephfs_root(struct ceph_mount_info *cmount,
 					Inode **pi)
 {
