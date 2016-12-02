@@ -427,9 +427,6 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 	/* Done with the attrs */
 	fsal_release_attrs(&entry->attrs);
 
-	/* Clean our handle */
-	fsal_obj_handle_fini(&entry->obj_handle);
-
 	/* Clean out the export mapping before deconstruction */
 	mdc_clean_entry(entry);
 
