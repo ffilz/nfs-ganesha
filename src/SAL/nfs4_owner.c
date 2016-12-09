@@ -379,6 +379,7 @@ int Init_nfs4_owner(void)
 static void init_nfs4_owner(state_owner_t *owner)
 {
 	glist_init(&owner->so_owner.so_nfs4_owner.so_state_list);
+	glist_init(&owner->so_owner.so_nfs4_owner.so_cache_entry);
 
 	/* Increment refcount on related owner */
 	if (owner->so_owner.so_nfs4_owner.so_related_owner != NULL)

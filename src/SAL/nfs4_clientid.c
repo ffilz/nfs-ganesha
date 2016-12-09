@@ -581,6 +581,7 @@ nfs_client_id_t *create_client_id(clientid4 clientid,
 	/* Init the lists for the clientid_owner */
 	glist_init(&owner->so_lock_list);
 	glist_init(&owner->so_owner.so_nfs4_owner.so_state_list);
+	glist_init(&owner->so_owner.so_nfs4_owner.so_cache_entry);
 
 	/* Get a reference to the client record */
 	(void)inc_client_record_ref(client_rec->cid_client_record);
