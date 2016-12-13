@@ -1080,6 +1080,7 @@ dupreq_status_t nfs_dupreq_finish(struct svc_req *req, nfs_res_t *res_nfs)
 	struct rbtree_x_part *t;
 	drc_t *drc = NULL;
 	int16_t cnt = 0;
+	uint64_t saved_hk;
 
 	/* do nothing if req is marked no-cache */
 	if (dv == (void *)DUPREQ_NOCACHE)
@@ -1128,11 +1129,30 @@ dq_retry:
 				goto unlock;
 			}
 
+			/* save hk */
+			saved_hk = ov->hk;
+
 			/* remove dict entry */
 			t = rbtx_partition_of_scalar(&drc->xt, ov->hk);
 			/* interlock */
 			PTHREAD_MUTEX_unlock(&drc->mtx);
 			PTHREAD_MUTEX_lock(&t->mtx);	/* partition lock */
+			PTHREAD_MUTEX_lock(&drc->mtx);
+
+			/* @todo: this is a bit ugly, needs improvement!
+			 *
+			 * Since we dropped drc lock and reacquired it,
+			 * need to make sure that we have correct
+			 * partition lock for the dupreq we are going to
+			 * work on.
+			 *
+			 */
+			ov = TAILQ_FIRST(&drc->dupreq_q);
+			if (ov->hk != saved_hk) {
+				/* Not the same key, back out */
+				PTHREAD_MUTEX_unlock(&t->mtx);
+				goto unlock;
+			}
 
 			/* check refcnt again under partition lock.
 			 * nfs_dupreq_start() could use a 0 refcnt
@@ -1140,9 +1160,9 @@ dq_retry:
 			 */
 			if (ov->refcnt > 0) {
 				PTHREAD_MUTEX_unlock(&t->mtx);
-				goto out;
+				goto unlock;
 			}
-			PTHREAD_MUTEX_lock(&drc->mtx);
+
 			/* remove q entry */
 			TAILQ_REMOVE(&drc->dupreq_q, ov, fifo_q);
 			--(drc->size);
