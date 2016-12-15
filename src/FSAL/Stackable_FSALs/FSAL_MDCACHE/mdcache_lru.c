@@ -487,12 +487,9 @@ lru_reap_impl(enum lru_q_id qid)
 			goto next_lane;
 		}
 		/* potentially reclaimable */
-		QUNLOCK(qlane);
 		/* entry must be unreachable from CIH when recycled */
 		if (cih_latch_entry(&entry->fh_hk.key, &latch, CIH_GET_WLOCK,
 				    __func__, __LINE__)) {
-			QLOCK(qlane);
-			refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
 			/* there are two cases which permit reclaim,
 			 * entry is:
 			 * 1. reachable but unref'd (refcnt==2)
@@ -503,12 +500,11 @@ lru_reap_impl(enum lru_q_id qid)
 				/* it worked */
 				struct lru_q *q = lru_queue_of(entry);
 
-				cih_remove_latched(entry, &latch,
-						   CIH_REMOVE_QLOCKED);
+				cih_remove_latched(entry, &latch);
 				LRU_DQ_SAFE(lru, q);
 				entry->lru.qid = LRU_ENTRY_NONE;
-				QUNLOCK(qlane);
 				cih_hash_release(&latch);
+				QUNLOCK(qlane);
 				/* Note, we're not releasing our ref here.
 				 * cih_remove_latched() called
 				 * mdcache_lru_unref(), which released the
@@ -519,14 +515,10 @@ lru_reap_impl(enum lru_q_id qid)
 				goto out;
 			}
 			cih_hash_release(&latch);
-			/* return the ref we took above--unref deals
-			 * correctly with reclaim case */
-			mdcache_lru_unref(entry, LRU_UNREF_QLOCKED);
-		} else {
-			/* ! QLOCKED but needs to be Unref'ed */
-			mdcache_lru_unref(entry, LRU_FLAG_NONE);
-			continue;
 		}
+		/* return the ref we took above--unref deals
+		 * correctly with reclaim case */
+		mdcache_lru_unref(entry, LRU_UNREF_QLOCKED);
  next_lane:
 		QUNLOCK(qlane);
 	}			/* foreach lane */
@@ -609,11 +601,11 @@ mdcache_lru_cleanup_try_push(mdcache_entry_t *entry)
 	struct lru_q_lane *qlane = &LRU[lru->lane];
 	cih_latch_t latch;
 
+	QLOCK(qlane);
+
 	if (cih_latch_entry(&entry->fh_hk.key, &latch, CIH_GET_WLOCK,
 			    __func__, __LINE__)) {
 		uint32_t refcnt;
-
-		QLOCK(qlane);
 
 		refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
 		/* there are two cases which permit reclaim,
@@ -626,8 +618,7 @@ mdcache_lru_cleanup_try_push(mdcache_entry_t *entry)
 			/* it worked */
 			struct lru_q *q = lru_queue_of(entry);
 
-			cih_remove_latched(entry, &latch,
-					   CIH_REMOVE_QLOCKED);
+			cih_remove_latched(entry, &latch);
 			LRU_DQ_SAFE(lru, q);
 			entry->lru.qid = LRU_ENTRY_CLEANUP;
 			atomic_set_uint32_t_bits(&entry->lru.flags,
@@ -637,10 +628,10 @@ mdcache_lru_cleanup_try_push(mdcache_entry_t *entry)
 			 * unref's, that will free this object. */
 		}
 
-		QUNLOCK(qlane);
-
 		cih_hash_release(&latch);
 	}
+
+	QUNLOCK(qlane);
 }
 
 /**
@@ -1479,20 +1470,15 @@ mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags)
  * be used.
  *
  * @param[in] entry  The entry on which to release a reference
- * @param[in] flags  Currently significant are and LRU_FLAG_LOCKED
- *                   (indicating that the caller holds the LRU mutex
- *                   lock for this entry.)
  */
 void
-mdcache_lru_putback(mdcache_entry_t *entry, uint32_t flags)
+mdcache_lru_putback(mdcache_entry_t *entry)
 {
-	bool qlocked = flags & LRU_UNREF_QLOCKED;
 	uint32_t lane = entry->lru.lane;
 	struct lru_q_lane *qlane = &LRU[lane];
 	struct lru_q *q;
 
-	if (!qlocked)
-		QLOCK(qlane);
+	QLOCK(qlane);
 
 	q = lru_queue_of(entry);
 	if (q) {
@@ -1505,8 +1491,7 @@ mdcache_lru_putback(mdcache_entry_t *entry, uint32_t flags)
 	pool_free(mdcache_entry_pool, entry);
 	(void) atomic_dec_int64_t(&lru_state.entries_used);
 
-	if (!qlocked)
-		QUNLOCK(qlane);
+	QUNLOCK(qlane);
 }
 
 /**
