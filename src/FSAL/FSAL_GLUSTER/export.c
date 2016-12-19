@@ -649,8 +649,8 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 	if (!fs) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to create new glfs. Export: %s",
-			op_ctx->ctx_export->fullpath);
+			"Unable to create new glfs. volume: %s for Export : %s",
+			params.glvolname, op_ctx->ctx_export->fullpath);
 		goto out;
 	}
 
@@ -676,8 +676,8 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 	if (rc != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to initialize volume. Export: %s",
-			op_ctx->ctx_export->fullpath);
+			"Unable to initialize volume. volume: %s for Export: %s"
+			, params.glvolname, op_ctx->ctx_export->fullpath);
 		goto out;
 	}
 
