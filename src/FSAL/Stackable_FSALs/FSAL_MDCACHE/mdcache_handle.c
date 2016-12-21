@@ -569,7 +569,7 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 	mdcache_dir_entry_t *dirent = NULL;
 	struct avltree_node *dirent_node = NULL;
 	fsal_status_t status = {0, 0};
-	bool cb_result = true;
+	enum fsal_dir_result cb_result = true;
 
 	if (!(directory->obj_handle.type == DIRECTORY))
 		return fsalstat(ERR_FSAL_NOTDIR, 0);
@@ -688,13 +688,31 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 		cb_result = cb(dirent->name, &entry->obj_handle, &entry->attrs,
 			       dir_state, dirent->hk.k);
 
-		if (!cb_result)
+		if (cb_result != DIR_CONTINUE)
 			break;
 	}
 
-	LogDebug(COMPONENT_NFS_READDIR,
-		 "dirent_node = %p, in_result = %s", dirent_node,
-		 cb_result ? "TRUE" : "FALSE");
+	if (isDebug(COMPONENT_NFS_READDIR)) {
+		const char *result = "<unknown>";
+
+		switch (cb_result) {
+		case DIR_CONTINUE:
+			result = "DIR_CONTINUE";
+			break;
+
+		case DIR_MARK:
+			result = "DIR_MARK";
+			break;
+
+		case DIR_TERMINATE:
+			result = "DIR_TERMINATE";
+			break;
+		}
+
+		LogDebug(COMPONENT_NFS_READDIR,
+			 "dirent_node = %p, cb_result = %s",
+			 dirent_node, result);
+	}
 
 	if (!dirent_node && cb_result)
 		*eod_met = true;

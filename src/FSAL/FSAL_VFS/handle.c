@@ -1109,7 +1109,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 		for (bpos = 0; bpos < nread;) {
 			struct fsal_obj_handle *hdl;
 			struct attrlist attrs;
-			bool cb_rc;
+			enum fsal_dir_result cb_rc;
 
 			if (!to_vfs_dirent(buf, bpos, dentryp, baseloc)
 			    || strcmp(dentryp->vd_name, ".") == 0
@@ -1131,7 +1131,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
 			fsal_release_attrs(&attrs);
 
-			if (!cb_rc)
+			if (cb_rc != DIR_CONTINUE)
 				goto done;
 
  skip:

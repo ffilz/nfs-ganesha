@@ -461,7 +461,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	struct avltree_node *node;
 	fsal_cookie_t seekloc;
 	struct attrlist attrs;
-	bool cb_rc;
+	enum fsal_dir_result cb_rc;
 
 	if (whence != NULL)
 		seekloc = *whence;
@@ -503,7 +503,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
 		fsal_release_attrs(&attrs);
 
-		if (!cb_rc) {
+		if (cb_rc != DIR_CONTINUE) {
 			*eof = false;
 			break;
 		}
