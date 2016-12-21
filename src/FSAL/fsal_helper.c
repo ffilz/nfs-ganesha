@@ -1289,14 +1289,14 @@ fsal_status_t fsal_rdwr(struct fsal_obj_handle *obj,
 struct fsal_populate_cb_state {
 	struct fsal_obj_handle *directory;
 	fsal_status_t *status;
-	fsal_getattr_cb_t cb;
+	helper_readdir_cb cb;
 	void *opaque;
 	enum cb_state cb_state;
 	unsigned int *cb_nfound;
 	attrmask_t attrmask;
 };
 
-static bool
+static enum fsal_dir_result
 populate_dirent(const char *name,
 		struct fsal_obj_handle *obj,
 		struct attrlist *attrs,
@@ -1308,7 +1308,7 @@ populate_dirent(const char *name,
 	struct fsal_readdir_cb_parms cb_parms = { state->opaque, name,
 		true, true };
 	fsal_status_t status = {0, 0};
-	bool retval = true;
+	enum fsal_dir_result retval = DIR_CONTINUE;
 
 	status.major = state->cb(&cb_parms, obj, attrs, attrs->fileid,
 				 cookie, state->cb_state);
@@ -1347,7 +1347,7 @@ populate_dirent(const char *name,
 				state->cb_state = CB_PROBLEM;
 				(void) state->cb(&cb_parms, NULL, NULL, 0,
 						 cookie, state->cb_state);
-				retval = false;
+				retval = DIR_TERMINATE;
 				goto out;
 			}
 		} else {
@@ -1357,7 +1357,7 @@ populate_dirent(const char *name,
 			state->cb_state = CB_PROBLEM;
 			(void) state->cb(&cb_parms, NULL, NULL, 0, cookie,
 					 state->cb_state);
-			retval = false;
+			retval = DIR_TERMINATE;
 			goto out;
 		}
 
@@ -1396,7 +1396,7 @@ populate_dirent(const char *name,
 	}
 
 	if (!cb_parms.in_result) {
-		retval = false;
+		retval = DIR_TERMINATE;
 		goto out;
 	}
 
@@ -1434,7 +1434,7 @@ fsal_status_t fsal_readdir(struct fsal_obj_handle *directory,
 		    unsigned int *nbfound,
 		    bool *eod_met,
 		    attrmask_t attrmask,
-		    fsal_getattr_cb_t cb,
+		    helper_readdir_cb cb,
 		    void *opaque)
 {
 	fsal_status_t fsal_status = {0, 0};
