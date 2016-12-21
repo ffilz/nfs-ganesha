@@ -1207,6 +1207,19 @@ static inline int sizeof_fsid(enum fsid_type type)
 
 typedef uint64_t fsal_cookie_t;
 
+enum fsal_dir_result {
+	/** Continue readdir, call back with another dirent. */
+	DIR_CONTINUE,
+	/** Terminate readdir, mark here for resumption. This will be used
+	 *  to mark the ends of cached directory chunks. When cache is
+	 *  disposed of, the cookie passed for this call back instance will
+	 *  be released with release_dir_cookie.
+	 */
+	DIR_MARK,
+	/** Terminate readdir, no need to mark. */
+	DIR_TERMINATE,
+};
+
 /**
  * @brief Callback to provide readdir caller with each directory entry
  *
@@ -1217,11 +1230,10 @@ typedef uint64_t fsal_cookie_t;
  * @param[in]  dir_state Opaque pointer to be passed to callback
  * @param[in]  cookie    An FSAL generated cookie for the entry
  *
- * @retval true if more entries are required
- * @retval false if no more entries are required (and the current one
- *               has not been consumed)
+ * @returns fsal_dir_result above
  */
-typedef bool (*fsal_readdir_cb)(const char *name, struct fsal_obj_handle *obj,
+typedef enum fsal_dir_result (*fsal_readdir_cb)(
+				const char *name, struct fsal_obj_handle *obj,
 				struct attrlist *attrs,
 				void *dir_state, fsal_cookie_t cookie);
 /**
@@ -1350,6 +1362,23 @@ struct fsal_obj_ops {
 				  fsal_readdir_cb cb,
 				  attrmask_t attrmask,
 				  bool *eof);
+
+/**
+ * @brief Release a cached cookie.
+ *
+ * Some FSALs may need to preserve state in order to easily resume a readdir
+ * from a specific cookie. This function allows the upper layers to indicate
+ * the cookie is no longer needed (presumably because the upper layer has
+ * dropped the cache).
+ *
+ * This methon need only be called if DIR_MARK was returned for the
+ * fsal_readdir_cb callback that provided the cookie in question.
+ *
+ * @param[in]  dir_hdl   Directory cookie belongs to
+ * @param[in]  cookie    The cookie to be released.
+ */
+	void (*release_readdir_cookie)(struct fsal_obj_handle *dir_hdl,
+				       fsal_cookie_t *cookie);
 /**@}*/
 
 /**@{*/

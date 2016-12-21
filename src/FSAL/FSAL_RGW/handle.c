@@ -128,7 +128,7 @@ static bool rgw_cb(const char *name, void *arg, uint64_t offset)
 	struct fsal_obj_handle *obj;
 	fsal_status_t status;
 	struct attrlist attrs;
-	bool cb_rc;
+	enum fsal_dir_result cb_rc;
 
 	fsal_prepare_attrs(&attrs, rgw_cb_arg->attrmask);
 
@@ -140,7 +140,7 @@ static bool rgw_cb(const char *name, void *arg, uint64_t offset)
 
 	fsal_release_attrs(&attrs);
 
-	return cb_rc;
+	return cb_rc == DIR_CONTINUE;
 }
 
 /**

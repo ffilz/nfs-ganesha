@@ -625,7 +625,7 @@ static fsal_status_t tank_readdir(struct fsal_obj_handle *dir_hdl,
 			goto out;
 		for (index = 0; index < MAX_ENTRIES; index++) {
 			struct attrlist attrs;
-			bool cb_rc;
+			enum fsal_dir_result cb_rc;
 
 			/* If psz_filename is NULL,
 			 * that's the end of the list */
@@ -653,7 +653,7 @@ static fsal_status_t tank_readdir(struct fsal_obj_handle *dir_hdl,
 
 			fsal_release_attrs(&attrs);
 
-			if (!cb_rc)
+			if (cb_rc != DIR_CONTINUE)
 				goto done;
 		}
 
