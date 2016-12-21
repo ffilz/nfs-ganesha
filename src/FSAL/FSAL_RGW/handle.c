@@ -128,7 +128,7 @@ static bool rgw_cb(const char *name, void *arg, uint64_t offset)
 	struct fsal_obj_handle *obj;
 	fsal_status_t status;
 	struct attrlist attrs;
-	bool cb_rc;
+	enum fsal_dir_result cb_rc;
 
 	fsal_prepare_attrs(&attrs, rgw_cb_arg->attrmask);
 
@@ -136,11 +136,15 @@ static bool rgw_cb(const char *name, void *arg, uint64_t offset)
 	if (FSAL_IS_ERROR(status))
 		return false;
 
-	cb_rc = rgw_cb_arg->cb(name, obj, &attrs, rgw_cb_arg->fsal_arg, offset);
+	/** @todo FSF - when rgw gains mark capability, need to change this
+	 *              code...
+	 */
+	cb_rc = rgw_cb_arg->cb(name, obj, &attrs, rgw_cb_arg->fsal_arg, offset,
+			       NULL);
 
 	fsal_release_attrs(&attrs);
 
-	return cb_rc;
+	return cb_rc <= DIR_MARK;
 }
 
 /**
