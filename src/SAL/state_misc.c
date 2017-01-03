@@ -1001,8 +1001,10 @@ void uncache_nfs4_owner(struct state_nfs4_owner_t *nfs4_owner)
 		LogFullDebug(COMPONENT_STATE, "Uncache {%s}", str);
 	}
 
+	PTHREAD_MUTEX_lock(&cached_open_owners_lock);
 	/* Remove owner from cached_open_owners */
 	glist_del(&nfs4_owner->so_cache_entry);
+	PTHREAD_MUTEX_unlock(&cached_open_owners_lock);
 
 	atomic_store_time_t(&nfs4_owner->so_cache_expire, 0);
 
