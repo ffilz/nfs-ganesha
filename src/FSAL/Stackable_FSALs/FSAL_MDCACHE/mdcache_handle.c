@@ -1,7 +1,7 @@
 /*
  * vim:noexpandtab:shiftwidth=8:tabstop=8:
  *
- * Copyright 2015-2016 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2015-2017 Red Hat, Inc. and/or its affiliates.
  * Author: Daniel Gryniewicz <dang@redhat.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -846,9 +846,8 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 		if (FSAL_IS_ERROR(status)) {
 			/* We're obviously out of date.  Throw out the cached
 			   directory */
-			PTHREAD_RWLOCK_wrlock(&mdc_newdir->content_lock);
+			/* Protected by mdcache_src_dst_lock() above */
 			mdcache_dirent_invalidate_all(mdc_newdir);
-			PTHREAD_RWLOCK_unlock(&mdc_newdir->content_lock);
 		}
 	} else {
 		LogDebug(COMPONENT_CACHE_INODE,
@@ -863,9 +862,8 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 			LogDebug(COMPONENT_CACHE_INODE,
 				 "Remove stale dirent returned %s",
 				 fsal_err_txt(status));
-			PTHREAD_RWLOCK_wrlock(&mdc_newdir->content_lock);
+			/* Protected by mdcache_src_dst_lock() above */
 			mdcache_dirent_invalidate_all(mdc_newdir);
-			PTHREAD_RWLOCK_unlock(&mdc_newdir->content_lock);
 		}
 
 		status = mdcache_dirent_add(mdc_newdir, new_name, mdc_obj);
@@ -875,9 +873,8 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 			   directory */
 			LogCrit(COMPONENT_CACHE_INODE, "Add dirent returned %s",
 				fsal_err_txt(status));
-			PTHREAD_RWLOCK_wrlock(&mdc_newdir->content_lock);
+			/* Protected by mdcache_src_dst_lock() above */
 			mdcache_dirent_invalidate_all(mdc_newdir);
-			PTHREAD_RWLOCK_unlock(&mdc_newdir->content_lock);
 		}
 
 		/* Remove the old entry */
@@ -886,9 +883,8 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 			LogDebug(COMPONENT_CACHE_INODE,
 				 "Remove old dirent returned %s",
 				 fsal_err_txt(status));
-			PTHREAD_RWLOCK_wrlock(&mdc_olddir->content_lock);
+			/* Protected by mdcache_src_dst_lock() above */
 			mdcache_dirent_invalidate_all(mdc_olddir);
-			PTHREAD_RWLOCK_unlock(&mdc_olddir->content_lock);
 		}
 	}
 
