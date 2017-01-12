@@ -578,6 +578,7 @@ struct glexport_params {
 	char *glhostname;
 	char *glvolpath;
 	char *glfs_log;
+        char *gltransport;
 };
 
 static struct config_item export_params[] = {
@@ -590,6 +591,8 @@ static struct config_item export_params[] = {
 		      glexport_params, glvolpath),
 	CONF_ITEM_PATH("glfs_log", 1, MAXPATHLEN, GFAPI_LOG_LOCATION,
 		       glexport_params, glfs_log),
+	CONF_MAND_STR("transport", 1, MAXPATHLEN, "tcp",
+		      glexport_params, gltransport),
 	CONFIG_EOL
 };
 
@@ -620,7 +623,8 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 		.glvolname = NULL,
 		.glhostname = NULL,
 		.glvolpath = NULL,
-		.glfs_log = NULL};
+		.glfs_log = NULL,
+                .gltransport = NULL};
 
 	LogDebug(COMPONENT_FSAL, "In args: export path = %s",
 		 op_ctx->ctx_export->fullpath);
@@ -654,7 +658,7 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 		goto out;
 	}
 
-	rc = glfs_set_volfile_server(fs, "tcp", params.glhostname, 24007);
+	rc = glfs_set_volfile_server(fs, params.gltransport, params.glhostname, 24007);
 	if (rc != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
