@@ -678,7 +678,8 @@ void nfs_dupreq_put_drc(SVCXPRT *xprt, drc_t *drc, uint32_t flags)
 		break;
 	};
 
-	PTHREAD_MUTEX_unlock(&drc->mtx); /* !LOCKED */
+	if (!(flags & DRC_FLAG_LOCKED))
+		PTHREAD_MUTEX_unlock(&drc->mtx);
 }
 
 /**
@@ -1242,7 +1243,7 @@ dupreq_status_t nfs_dupreq_delete(struct svc_req *req)
 
 	/* release dv's ref and unlock */
 	nfs_dupreq_put_drc(req->rq_xprt, drc, DRC_FLAG_LOCKED);
-	/* !LOCKED */
+	PTHREAD_MUTEX_unlock(&drc->mtx);
 
  out:
 	return status;
