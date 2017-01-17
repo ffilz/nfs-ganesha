@@ -282,6 +282,13 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 					   export,
 					   true,
 					   err_type);
+
+		if ((export->rgw_user_id == NULL) ||
+		(export->rgw_access_key_id == NULL) ||
+		(export->rgw_secret_access_key == NULL))
+			LogCrit(COMPONENT_FSAL,
+			"User_id/Access_key/Secret_access_key required");
+
 		if (rc != 0) {
 			gsh_free(export);
 			return fsalstat(ERR_FSAL_INVAL, 0);
