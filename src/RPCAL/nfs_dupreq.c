@@ -1010,7 +1010,7 @@ dupreq_status_t nfs_dupreq_start(nfs_request_t *reqnfs,
 
 	LogFullDebug(COMPONENT_DUPREQ,
 		"starting dv=%p xid=%u on DRC=%p state=%s, status=%s, refcnt=%d, drc->size=%d",
-		dv, dk->hin.tcp.rq_xid, drc,
+		dv, dv->hin.tcp.rq_xid, drc,
 		dupreq_state_table[dv->state], dupreq_status_table[status],
 		(dv) ? dv->refcnt : 0, drc->size);
 
