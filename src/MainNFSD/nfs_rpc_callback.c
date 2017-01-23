@@ -403,13 +403,19 @@ static inline char *format_host_principal(rpc_call_channel_t *chan, char *buf,
 					  size_t len)
 {
 	char addr_buf[SOCK_NAME_MAX + 1];
-	void *sin = &chan->source.clientid->cid_cb.v40.cb_addr.ss;
 	const char *host = NULL;
+	void *sin;
 
-	if (chan->type != RPC_CHAN_V40)
+	switch (chan->type) {
+	case RPC_CHAN_V40:
+		sin = &chan->source.clientid->cid_cb.v40.cb_addr.ss;
+		break;
+	default:
 		return NULL;
+		break;
+	}
 
-	switch (chan->source.clientid->cid_cb.v40.cb_addr.ss.ss_family) {
+	switch (((struct sockaddr_in *)sin)->sin_family) {
 	case AF_INET:
 		host = inet_ntop(AF_INET,
 				 &((struct sockaddr_in *)sin)->sin_addr,
