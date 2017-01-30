@@ -1267,10 +1267,10 @@ struct fsal_populate_cb_state {
 	struct fsal_obj_handle *directory;
 	fsal_status_t *status;
 	helper_readdir_cb cb;
-	void *opaque;
 	enum cb_state cb_state;
 	unsigned int *cb_nfound;
 	attrmask_t attrmask;
+	struct fsal_readdir_cb_parms cb_parms;
 };
 
 static enum fsal_dir_result
@@ -1282,12 +1282,12 @@ populate_dirent(const char *name,
 {
 	struct fsal_populate_cb_state *state =
 	    (struct fsal_populate_cb_state *)dir_state;
-	struct fsal_readdir_cb_parms cb_parms = { state->opaque, name,
-		true, true };
 	fsal_status_t status = {0, 0};
 	enum fsal_dir_result retval = DIR_CONTINUE;
 
-	status.major = state->cb(&cb_parms, obj, attrs, attrs->fileid,
+	state->cb_parms.name = name;
+
+	status.major = state->cb(&state->cb_parms, obj, attrs, attrs->fileid,
 				 cookie, state->cb_state);
 
 	if (status.major == ERR_FSAL_CROSS_JUNCTION) {
@@ -1322,8 +1322,8 @@ populate_dirent(const char *name,
 					 fsal_err_txt(status));
 				/* Need to signal problem to callback */
 				state->cb_state = CB_PROBLEM;
-				(void) state->cb(&cb_parms, NULL, NULL, 0,
-						 cookie, state->cb_state);
+				(void) state->cb(&state->cb_parms, NULL, NULL,
+						 0, cookie, state->cb_state);
 				retval = DIR_TERMINATE;
 				goto out;
 			}
@@ -1332,8 +1332,8 @@ populate_dirent(const char *name,
 				 "A junction became stale");
 			/* Need to signal problem to callback */
 			state->cb_state = CB_PROBLEM;
-			(void) state->cb(&cb_parms, NULL, NULL, 0, cookie,
-					 state->cb_state);
+			(void) state->cb(&state->cb_parms, NULL, NULL, 0,
+					 cookie, state->cb_state);
 			retval = DIR_TERMINATE;
 			goto out;
 		}
@@ -1352,7 +1352,7 @@ populate_dirent(const char *name,
 		if (!FSAL_IS_ERROR(status)) {
 			/* Now call the callback again with that. */
 			state->cb_state = CB_JUNCTION;
-			status.major = state->cb(&cb_parms,
+			status.major = state->cb(&state->cb_parms,
 						 junction_obj,
 						 &attrs2,
 						 junction_export
@@ -1372,7 +1372,7 @@ populate_dirent(const char *name,
 		put_gsh_export(junction_export);
 	}
 
-	if (!cb_parms.in_result) {
+	if (!state->cb_parms.in_result) {
 		retval = DIR_TERMINATE;
 		goto out;
 	}
@@ -1415,7 +1415,6 @@ fsal_status_t fsal_readdir(struct fsal_obj_handle *directory,
 		    void *opaque)
 {
 	fsal_status_t fsal_status = {0, 0};
-	fsal_status_t attr_status = {0, 0};
 	fsal_status_t cb_status = {0, 0};
 	struct fsal_populate_cb_state state;
 
@@ -1455,17 +1454,24 @@ fsal_status_t fsal_readdir(struct fsal_obj_handle *directory,
 	}
 	if (attrmask != 0) {
 		/* Check for access permission to get attributes */
-		attr_status = fsal_access(directory, access_mask_attr);
+		fsal_status_t attr_status = fsal_access(directory,
+							access_mask_attr);
 		if (FSAL_IS_ERROR(attr_status))
 			LogFullDebug(COMPONENT_NFS_READDIR,
 				     "permission check for attributes status=%s",
-				     fsal_err_txt(fsal_status));
+				     fsal_err_txt(attr_status));
+		state.cb_parms.attr_allowed = !FSAL_IS_ERROR(attr_status);
+	} else {
+		/* No attributes requested. */
+		state.cb_parms.attr_allowed = false;
 	}
 
 	state.directory = directory;
 	state.status = &cb_status;
 	state.cb = cb;
-	state.opaque = opaque;
+	state.cb_parms.opaque = opaque;
+	state.cb_parms.in_result = true;
+	state.cb_parms.name = NULL;
 	state.cb_state = CB_ORIGINAL;
 	state.cb_nfound = nbfound;
 	state.attrmask = attrmask;
