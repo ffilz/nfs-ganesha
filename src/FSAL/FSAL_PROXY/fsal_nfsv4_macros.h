@@ -212,6 +212,21 @@ do { \
 	op->nfs_argop4_u.opreaddir.attr_request = inbitmap;		\
 } while (0)
 
+#define COMPOUNDV4_ARGS_ADD_OP_OPEN(opcnt, args, oo_seqid, __share_access,\
+				    __share_deny, __owner_val, __owner_len, \
+				    __openhow, __claim)			\
+do { \
+	nfs_argop4 *op = args + opcnt; opcnt++;				\
+	op->argop = NFS4_OP_OPEN;					\
+	op->nfs_argop4_u.opopen.seqid = oo_seqid;			\
+	op->nfs_argop4_u.opopen.share_access = __share_access;		\
+	op->nfs_argop4_u.opopen.share_deny = __share_deny;		\
+	op->nfs_argop4_u.opopen.owner.owner.owner_len =  __owner_len;	\
+	op->nfs_argop4_u.opopen.owner.owner.owner_val =  __owner_val;	\
+	op->nfs_argop4_u.opopen.openhow = __openhow;			\
+	op->nfs_argop4_u.opopen.claim = __claim;			\
+} while (0)
+
 #define COMPOUNDV4_ARG_ADD_OP_OPEN_CREATE(opcnt, args, inname, inattrs, \
 					  inclientid, __owner_val, \
 					  __owner_len, oo_seqid)	\
