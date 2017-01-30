@@ -172,7 +172,7 @@ struct gsh_dbus_interface {
 	struct gsh_dbus_signal **signals;
 };
 
-struct gsh_dbus_interface log_interface;
+extern struct gsh_dbus_interface log_interface;
 
 /**
   * @brief Default value for heartbeat frequency in ms
