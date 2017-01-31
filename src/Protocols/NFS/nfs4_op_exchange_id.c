@@ -90,6 +90,7 @@ int nfs4_op_exchange_id(struct nfs_argop4 *op, compound_data_t *data,
 	bool update;
 	uint32_t pnfs_flags;
 	in_addr_t server_addr = 0;
+	char scratch[MAXNAMLEN*2];
 	/* Arguments and response */
 	EXCHANGE_ID4args * const arg_EXCHANGE_ID4 =
 	    &op->nfs_argop4_u.opexchange_id;
@@ -314,10 +315,15 @@ int nfs4_op_exchange_id(struct nfs_argop4 *op, compound_data_t *data,
 		goto out;
 	}
 
-	snprintf(unconf->cid_server_scope,
-		 sizeof(unconf->cid_server_scope),
-		 "%s_NFS-Ganesha",
-		 unconf->cid_server_owner);
+	len = snprintf(scratch, sizeof(scratch),
+		       "%s_NFS-Ganesha", unconf->cid_server_owner);
+	if (len < sizeof(unconf->cid_server_scope)) {
+		strncpy(unconf->cid_server_scope, scratch,
+			sizeof(unconf->cid_server_scope));
+	} else {
+		res_EXCHANGE_ID4->eir_status = NFS4ERR_SERVERFAULT;
+		goto out;
+	}
 
 	LogDebug(COMPONENT_CLIENTID, "Serving IP %s", unconf->cid_server_scope);
 

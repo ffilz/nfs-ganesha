@@ -55,7 +55,7 @@ int _9p_walk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	char *wnames_str;
 	fsal_status_t fsal_status;
 	struct fsal_obj_handle *pentry = NULL;
-	char name[MAXNAMLEN];
+	char name[MAXNAMLEN+1];
 
 	u16 *nwqid;
 
@@ -102,8 +102,8 @@ int _9p_walk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 
 		for (i = 0; i < *nwname; i++) {
 			_9p_getstr(cursor, wnames_len, wnames_str);
-			snprintf(name, MAXNAMLEN, "%.*s", *wnames_len,
-				 wnames_str);
+			snprintf(name, sizeof(name), "%.*s",
+				 (int)((u8)(*wnames_len)), wnames_str);
 
 			LogDebug(COMPONENT_9P,
 				 "TWALK (lookup): tag=%u fid=%u newfid=%u (component %u/%u :%s)",

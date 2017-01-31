@@ -57,7 +57,7 @@ int _9p_mkdir(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	struct _9p_qid qid_newdir;
 
 	struct fsal_obj_handle *pentry_newdir = NULL;
-	char dir_name[MAXNAMLEN];
+	char dir_name[MAXNAMLEN+1];
 	fsal_status_t fsal_status;
 	struct attrlist sattr;
 
@@ -90,7 +90,8 @@ int _9p_mkdir(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 				 EXPORT_OPTION_WRITE_ACCESS) == 0)
 		return _9p_rerror(req9p, msgtag, EROFS, plenout, preply);
 
-	snprintf(dir_name, MAXNAMLEN, "%.*s", *name_len, name_str);
+	snprintf(dir_name, sizeof(dir_name), "%.*s",
+		 (int)((u8)(*name_len)), name_str);
 
 	fsal_prepare_attrs(&sattr, ATTR_MODE);
 

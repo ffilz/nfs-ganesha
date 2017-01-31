@@ -54,7 +54,7 @@ int _9p_rename(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	struct _9p_fid *pfid = NULL;
 	struct _9p_fid *pdfid = NULL;
 
-	char newname[MAXNAMLEN];
+	char newname[MAXNAMLEN+1];
 	fsal_status_t fsal_status;
 
 	/* Get data */
@@ -94,7 +94,8 @@ int _9p_rename(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		return _9p_rerror(req9p, msgtag, EIO, plenout, preply);
 	}
 
-	snprintf(newname, MAXNAMLEN, "%.*s", *name_len, name_str);
+	snprintf(newname, sizeof(newname), "%.*s",
+		 (int)((u8)(*name_len)), name_str);
 
 	fsal_status = fsal_rename(pfid->ppentry, pfid->name, pdfid->pentry,
 				  newname);

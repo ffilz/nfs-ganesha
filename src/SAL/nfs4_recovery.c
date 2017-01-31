@@ -212,7 +212,7 @@ void nfs4_create_clid_name(nfs_client_record_t *cl_rec,
 	const char *str_client_addr = "(unknown)";
 	char cidstr[PATH_MAX] = { 0, };
 	struct display_buffer dspbuf = {sizeof(cidstr), cidstr, cidstr};
-	char cidstr_len[10];
+	char cidstr_len[64];
 	int total_len;
 
 	/* get the caller's IP addr */
@@ -256,7 +256,7 @@ void nfs4_create_clid_name41(nfs_client_record_t *cl_rec,
 	char *buf = "unknown";
 	char cidstr[PATH_MAX] = { 0, };
 	struct display_buffer       dspbuf = {sizeof(cidstr), cidstr, cidstr};
-	char                         cidstr_len[10];
+	char                         cidstr_len[64];
 	int total_len;
 
 	/* get the caller's IP addr */

@@ -59,7 +59,7 @@ int _9p_symlink(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	struct _9p_qid qid_symlink;
 
 	struct fsal_obj_handle *pentry_symlink = NULL;
-	char symlink_name[MAXNAMLEN];
+	char symlink_name[MAXNAMLEN+1];
 	char *link_content = NULL;
 	fsal_status_t fsal_status;
 	uint32_t mode = 0777;
@@ -95,7 +95,8 @@ int _9p_symlink(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 				 EXPORT_OPTION_WRITE_ACCESS) == 0)
 		return _9p_rerror(req9p, msgtag, EROFS, plenout, preply);
 
-	snprintf(symlink_name, MAXNAMLEN, "%.*s", *name_len, name_str);
+	snprintf(symlink_name, sizeof(symlink_name), "%.*s",
+		 (int)((u8)(*name_len)), name_str);
 
 	link_content = gsh_malloc(*linkcontent_len + 1);
 
