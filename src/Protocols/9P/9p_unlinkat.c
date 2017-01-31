@@ -55,7 +55,7 @@ int _9p_unlinkat(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	struct _9p_fid *pdfid = NULL;
 
 	fsal_status_t fsal_status;
-	char name[MAXNAMLEN];
+	char name[MAXNAMLEN*2];
 
 	/* Get data */
 	_9p_getptr(cursor, msgtag, u16);
@@ -85,7 +85,7 @@ int _9p_unlinkat(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		return _9p_rerror(req9p, msgtag, EROFS, plenout, preply);
 
 	/* Let's do the job */
-	snprintf(name, MAXNAMLEN, "%.*s", *name_len, name_str);
+	snprintf(name, sizeof(name), "%.*s", (int)((u8)(*name_len)), name_str);
 
 	fsal_status = fsal_remove(pdfid->pentry, name);
 	if (FSAL_IS_ERROR(fsal_status))

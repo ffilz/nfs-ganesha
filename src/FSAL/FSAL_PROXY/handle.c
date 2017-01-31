@@ -819,6 +819,7 @@ static int pxy_setclientid(clientid4 *resultclientid, uint32_t *lease_time)
 #define FSAL_CLIENTID_NB_OP_ALLOC 2
 	nfs_argop4 arg[FSAL_CLIENTID_NB_OP_ALLOC];
 	nfs_resop4 res[FSAL_CLIENTID_NB_OP_ALLOC];
+	char scratch[16];
 	nfs_client_id4 nfsclientid;
 	cb_client4 cbproxy;
 	char clientid_name[MAXNAMLEN + 1];
@@ -833,7 +834,8 @@ static int pxy_setclientid(clientid4 *resultclientid, uint32_t *lease_time)
 	if (getsockname(rpc_sock, &sin, &slen))
 		return -errno;
 
-	snprintf(clientid_name, MAXNAMLEN, "%s(%d) - GANESHA NFSv4 Proxy",
+	snprintf(clientid_name, sizeof(clientid_name),
+		 "%s(%d) - GANESHA NFSv4 Proxy",
 		 inet_ntop(AF_INET, &sin.sin_addr, addrbuf, sizeof(addrbuf)),
 		 getpid());
 	nfsclientid.id.id_len = strlen(clientid_name);
@@ -841,9 +843,11 @@ static int pxy_setclientid(clientid4 *resultclientid, uint32_t *lease_time)
 	if (sizeof(ServerBootTime.tv_sec) == NFS4_VERIFIER_SIZE)
 		memcpy(&nfsclientid.verifier, &ServerBootTime.tv_sec,
 		       sizeof(nfsclientid.verifier));
-	else
-		snprintf(nfsclientid.verifier, NFS4_VERIFIER_SIZE, "%08x",
-			 (int)ServerBootTime.tv_sec);
+	else {
+		snprintf(scratch, sizeof(scratch), "%08x",
+			(int)ServerBootTime.tv_sec);
+		memcpy(nfsclientid.verifier, scratch, NFS4_VERIFIER_SIZE);
+	}
 
 	cbproxy.cb_program = 0;
 	cbproxy.cb_location.r_netid = "tcp";

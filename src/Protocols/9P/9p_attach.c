@@ -88,7 +88,8 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	 *
 	 * Keep it in the op_ctx.
 	 */
-	snprintf(exppath, MAXPATHLEN, "%.*s", (int)*aname_len, aname_str);
+	snprintf(exppath, sizeof(exppath), "%.*s",
+		 (int)((u8)(*aname_len)), aname_str);
 
 	if (exppath[0] == '/')
 		op_ctx->ctx_export = get_gsh_export_by_path(exppath, false);
