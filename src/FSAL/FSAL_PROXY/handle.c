@@ -812,9 +812,20 @@ void pxy_get_clientid(clientid4 *ret)
 	PTHREAD_MUTEX_unlock(&pxy_clientid_mutex);
 }
 
+/* helper to get the nth least significant byte or 0 */
+static char get_nth_byte_capped(time_t time, int offset_byte)
+{
+	int offset = offset_byte * 8;
+
+	if (offset_byte < sizeof(time_t))
+		return (time >> offset) & 0xff;
+	else
+		return 0;
+}
+
 static int pxy_setclientid(clientid4 *resultclientid, uint32_t *lease_time)
 {
-	int rc;
+	int rc, i;
 	int opcnt = 0;
 #define FSAL_CLIENTID_NB_OP_ALLOC 2
 	nfs_argop4 arg[FSAL_CLIENTID_NB_OP_ALLOC];
@@ -841,9 +852,12 @@ static int pxy_setclientid(clientid4 *resultclientid, uint32_t *lease_time)
 	if (sizeof(ServerBootTime.tv_sec) == NFS4_VERIFIER_SIZE)
 		memcpy(&nfsclientid.verifier, &ServerBootTime.tv_sec,
 		       sizeof(nfsclientid.verifier));
-	else
-		snprintf(nfsclientid.verifier, NFS4_VERIFIER_SIZE, "%08x",
-			 (int)ServerBootTime.tv_sec);
+	else {
+		/* fill as we can and pad */
+		for (i = 0; i < NFS4_VERIFIER_SIZE; i++)
+			nfsclientid.verifier[i] =
+				get_nth_byte_capped(ServerBootTime.tv_sec, i);
+	}
 
 	cbproxy.cb_program = 0;
 	cbproxy.cb_location.r_netid = "tcp";
