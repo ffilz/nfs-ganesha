@@ -90,6 +90,8 @@ int nfs4_op_exchange_id(struct nfs_argop4 *op, compound_data_t *data,
 	bool update;
 	uint32_t pnfs_flags;
 	in_addr_t server_addr = 0;
+	char cid_server_owner[MAXNAMLEN+1]; /* max hostname length */
+	const char cid_server_scope_suffix[] = "_NFS-Ganesha";
 	/* Arguments and response */
 	EXCHANGE_ID4args * const arg_EXCHANGE_ID4 =
 	    &op->nfs_argop4_u.opexchange_id;
@@ -306,20 +308,15 @@ int nfs4_op_exchange_id(struct nfs_argop4 *op, compound_data_t *data,
 	       arg_EXCHANGE_ID4->eia_clientowner.co_verifier,
 	       NFS4_VERIFIER_SIZE);
 
-	if (gethostname(unconf->cid_server_owner,
-			sizeof(unconf->cid_server_owner)) == -1) {
+	if (gethostname(cid_server_owner,
+			sizeof(cid_server_owner)) == -1) {
 		/* Free the clientid record and return */
 		free_client_id(unconf);
 		res_EXCHANGE_ID4->eir_status = NFS4ERR_SERVERFAULT;
 		goto out;
 	}
 
-	snprintf(unconf->cid_server_scope,
-		 sizeof(unconf->cid_server_scope),
-		 "%s_NFS-Ganesha",
-		 unconf->cid_server_owner);
-
-	LogDebug(COMPONENT_CLIENTID, "Serving IP %s", unconf->cid_server_scope);
+	LogDebug(COMPONENT_CLIENTID, "Serving IP %s", cid_server_owner);
 
 	rc = nfs_client_id_insert(unconf);
 
@@ -343,9 +340,9 @@ int nfs4_op_exchange_id(struct nfs_argop4 *op, compound_data_t *data,
 
 	res_EXCHANGE_ID4_ok->eir_state_protect.spr_how = SP4_NONE;
 
-	len = strlen(unconf->cid_server_owner);
+	len = strlen(cid_server_owner);
 	temp = gsh_malloc(len + 1);
-	memcpy(temp, unconf->cid_server_owner, len + 1);
+	memcpy(temp, cid_server_owner, len + 1);
 
 	res_EXCHANGE_ID4_ok->eir_server_owner.so_major_id.so_major_id_len = len;
 	res_EXCHANGE_ID4_ok->eir_server_owner.so_major_id.so_major_id_val =
@@ -353,9 +350,10 @@ int nfs4_op_exchange_id(struct nfs_argop4 *op, compound_data_t *data,
 
 	res_EXCHANGE_ID4_ok->eir_server_owner.so_minor_id = 0;
 
-	len = strlen(unconf->cid_server_scope);
+	len = strlen(cid_server_owner) + strlen(cid_server_scope_suffix);
 	temp = gsh_malloc(len + 1);
-	memcpy(temp, unconf->cid_server_scope, len + 1);
+	snprintf(temp, len + 1, "%s%s", cid_server_owner,
+		 cid_server_scope_suffix);
 
 	res_EXCHANGE_ID4_ok->eir_server_scope.eir_server_scope_len = len;
 	res_EXCHANGE_ID4_ok->eir_server_scope.eir_server_scope_val = temp;
