@@ -299,7 +299,7 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (rgw_status != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to mount RGW cluster for %s.",
+			"Authorization Failed.Unable to mount RGW cluster for %s.",
 			op_ctx->ctx_export->fullpath);
 		goto error;
 	}
