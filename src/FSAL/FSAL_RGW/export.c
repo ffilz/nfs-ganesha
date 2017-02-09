@@ -29,6 +29,7 @@
 #include <limits.h>
 #include <stdint.h>
 #include <sys/statvfs.h>
+#include <libgen.h>
 #include "abstract_mem.h"
 #include "fsal.h"
 #include "fsal_types.h"
@@ -102,6 +103,9 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 	int rc;
 	/* temp filehandle */
 	struct rgw_file_handle *rgw_fh;
+	char *dup_path = gsh_strdup(path);
+	/* relative path of export dir (bucket name)*/
+	char *rel_path = basename(dup_path);
 
 	*pub_handle = NULL;
 
@@ -110,22 +114,28 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 	 * suspicious, so let RGW figure it out (hopefully, that does not
 	 * leak refs)
 	 */
-	rc = rgw_lookup(export->rgw_fs, export->rgw_fs->root_fh, path,
+
+	rc = rgw_lookup(export->rgw_fs, export->rgw_fs->root_fh, rel_path,
 			&rgw_fh, RGW_LOOKUP_FLAG_NONE);
-	if (rc < 0)
+	if (rc < 0) {
+		free(dup_path);
 		return rgw2fsal_error(rc);
+	}
 
 	/* get Unix attrs */
 	rc = rgw_getattr(export->rgw_fs, rgw_fh, &st, RGW_GETATTR_FLAG_NONE);
 	if (rc < 0) {
+		free(dup_path);
 		return rgw2fsal_error(rc);
 	}
 
 	rc = construct_handle(export, rgw_fh, &st, &handle);
 	if (rc < 0) {
+		free(dup_path);
 		return rgw2fsal_error(rc);
 	}
 
+	free(dup_path);
 	*pub_handle = &handle->handle;
 
 	if (attrs_out != NULL) {
