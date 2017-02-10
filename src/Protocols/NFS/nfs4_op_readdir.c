@@ -182,7 +182,7 @@ fsal_errors_t nfs4_readdir_callback(void *opaque,
 			LogDebug(COMPONENT_EXPORT,
 				 "NFS4ERR_ACCESS Skipping Export_Id %d Path %s",
 				 op_ctx->ctx_export->export_id,
-				 op_ctx->ctx_export->fullpath);
+				 export_path(op_ctx->ctx_export));
 
 			/* Restore export and creds */
 			restore_data(tracker);
@@ -212,7 +212,7 @@ fsal_errors_t nfs4_readdir_callback(void *opaque,
 				LogDebug(COMPONENT_EXPORT,
 					 "Ignoring NFS4ERR_WRONGSEC (only asked for MOUNTED_IN_FILEID) On ReadDir Export_Id %d Path %s",
 					 op_ctx->ctx_export->export_id,
-					 op_ctx->ctx_export->fullpath);
+					 export_path(op_ctx->ctx_export));
 
 				/* Because we are not asking for any attributes
 				 * which are a property of the exported file
@@ -238,7 +238,7 @@ fsal_errors_t nfs4_readdir_callback(void *opaque,
 				LogDebug(COMPONENT_EXPORT,
 					 "NFS4ERR_WRONGSEC On ReadDir Export_Id %d Path %s",
 					 op_ctx->ctx_export->export_id,
-					 op_ctx->ctx_export->fullpath);
+					 export_path(op_ctx->ctx_export));
 			}
 		} else if (rdattr_error == NFS4_OK) {
 			/* Now we must traverse the junction to get the
@@ -252,7 +252,7 @@ fsal_errors_t nfs4_readdir_callback(void *opaque,
 			LogDebug(COMPONENT_EXPORT,
 				 "Need to cross junction to Export_Id %d Path %s",
 				op_ctx->ctx_export->export_id,
-				op_ctx->ctx_export->fullpath);
+				export_path(op_ctx->ctx_export));
 			PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 			return ERR_FSAL_CROSS_JUNCTION;
 		}
@@ -265,7 +265,7 @@ fsal_errors_t nfs4_readdir_callback(void *opaque,
 		LogDebug(COMPONENT_EXPORT,
 			 "Need to report error for junction to Export_Id %d Path %s",
 			 op_ctx->ctx_export->export_id,
-			 op_ctx->ctx_export->fullpath);
+			 export_path(op_ctx->ctx_export));
 		restore_data(tracker);
 	}
 

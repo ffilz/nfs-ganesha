@@ -168,7 +168,7 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	}
 
 	if (exppath[0] != '/' ||
-	    !strcmp(exppath, op_ctx->ctx_export->fullpath)) {
+	    !strcmp(exppath, export_path(op_ctx->ctx_export))) {
 		/* Check if root object is correctly set, fetch it, and take an
 		 * LRU reference.
 		 */
