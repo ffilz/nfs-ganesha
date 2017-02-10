@@ -2600,7 +2600,7 @@ bool export_check_security(struct svc_req *req)
 		     EXPORT_OPTION_AUTH_NONE) == 0) {
 			LogInfo(COMPONENT_EXPORT,
 				"Export %s does not support AUTH_NONE",
-				op_ctx->ctx_export->fullpath);
+				export_path(op_ctx->ctx_export));
 			return false;
 		}
 		break;
@@ -2610,7 +2610,7 @@ bool export_check_security(struct svc_req *req)
 		     EXPORT_OPTION_AUTH_UNIX) == 0) {
 			LogInfo(COMPONENT_EXPORT,
 				"Export %s does not support AUTH_UNIX",
-				op_ctx->ctx_export->fullpath);
+				export_path(op_ctx->ctx_export));
 			return false;
 		}
 		break;
@@ -2623,7 +2623,7 @@ bool export_check_security(struct svc_req *req)
 				 EXPORT_OPTION_RPCSEC_GSS_PRIV)) == 0) {
 			LogInfo(COMPONENT_EXPORT,
 				"Export %s does not support RPCSEC_GSS",
-				op_ctx->ctx_export->fullpath);
+				export_path(op_ctx->ctx_export));
 			return false;
 		} else {
 			struct rpc_gss_cred *gc = (struct rpc_gss_cred *)
@@ -2638,7 +2638,8 @@ bool export_check_security(struct svc_req *req)
 				     EXPORT_OPTION_RPCSEC_GSS_NONE) == 0) {
 					LogInfo(COMPONENT_EXPORT,
 						"Export %s does not support RPCSEC_GSS_SVC_NONE",
-						op_ctx->ctx_export->fullpath);
+						export_path(
+							op_ctx->ctx_export));
 					return false;
 				}
 				break;
@@ -2648,7 +2649,8 @@ bool export_check_security(struct svc_req *req)
 				     EXPORT_OPTION_RPCSEC_GSS_INTG) == 0) {
 					LogInfo(COMPONENT_EXPORT,
 						"Export %s does not support RPCSEC_GSS_SVC_INTEGRITY",
-						op_ctx->ctx_export->fullpath);
+						export_path(
+							op_ctx->ctx_export));
 					return false;
 				}
 				break;
@@ -2658,7 +2660,8 @@ bool export_check_security(struct svc_req *req)
 				     EXPORT_OPTION_RPCSEC_GSS_PRIV) == 0) {
 					LogInfo(COMPONENT_EXPORT,
 						"Export %s does not support RPCSEC_GSS_SVC_PRIVACY",
-						op_ctx->ctx_export->fullpath);
+						export_path(
+							op_ctx->ctx_export));
 					return false;
 				}
 				break;
@@ -2666,7 +2669,7 @@ bool export_check_security(struct svc_req *req)
 			default:
 				LogInfo(COMPONENT_EXPORT,
 					"Export %s does not support unknown RPCSEC_GSS_SVC %d",
-					op_ctx->ctx_export->fullpath,
+					export_path(op_ctx->ctx_export),
 					(int)svc);
 				return false;
 			}
@@ -2676,7 +2679,7 @@ bool export_check_security(struct svc_req *req)
 	default:
 		LogInfo(COMPONENT_EXPORT,
 			"Export %s does not support unknown oa_flavor %d",
-			op_ctx->ctx_export->fullpath,
+			export_path(op_ctx->ctx_export),
 			(int)req->rq_msg.cb_cred.oa_flavor);
 		return false;
 	}
@@ -2835,9 +2838,9 @@ void export_check_access(void)
 		(void) sprint_sockip(hostaddr,
 				     ipstring, sizeof(ipstring));
 		LogMidDebug(COMPONENT_EXPORT,
-			    "Check for address %s for export id %u fullpath %s",
+			    "Check for address %s for export id %u path %s",
 			    ipstring, op_ctx->ctx_export->export_id,
-			    op_ctx->ctx_export->fullpath);
+			    export_path(op_ctx->ctx_export));
 	}
 
 	/* Does the client match anyone on the client list? */
