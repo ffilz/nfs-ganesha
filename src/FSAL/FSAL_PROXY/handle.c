@@ -2386,6 +2386,113 @@ static fsal_status_t pxy_close2(struct fsal_obj_handle *obj_hdl,
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+static fsal_status_t pxy_setattr2(struct fsal_obj_handle *obj_hdl,
+				  bool bypass,
+				  struct state_t *state,
+				  struct attrlist *attrib_set)
+{
+	int rc;
+	fattr4 input_attr;
+	uint32_t opcnt = 0;
+	struct pxy_obj_handle *ph;
+	/* PUTFH (OPEN) SETATTR (CLOSE) */
+#define FSAL_SETATTR2_NB_OP_ALLOC 4
+	nfs_argop4 argoparray[FSAL_SETATTR2_NB_OP_ALLOC];
+	nfs_resop4 resoparray[FSAL_SETATTR2_NB_OP_ALLOC];
+	/* special size attribute setattr case : need a surround  open/close */
+	seqid4 open_owner_seqid = 0;
+	char owner_val[128];
+	unsigned int owner_len = 0;
+	uint32_t share_access = 0;
+	uint32_t share_deny = 0;
+	openflag4 openhow;
+	open_claim4 claim;
+	OPEN4resok *opok;
+
+	/*prepare attributes */
+	/*
+	* No way to update CTIME using a NFSv4 SETATTR.
+	* Server will return NFS4ERR_INVAL (22).
+	* time_metadata is a readonly attribute in NFSv4 and NFSv4.1.
+	* (section 5.7 in RFC7530 or RFC5651)
+	* Nevermind : this update is useless, we prevent it.
+	*/
+	FSAL_UNSET_MASK(attrib_set->valid_mask, ATTR_CTIME);
+
+	if (FSAL_TEST_MASK(attrib_set->valid_mask, ATTR_MODE))
+		attrib_set->mode &= ~op_ctx->fsal_export->exp_ops.
+				fs_umask(op_ctx->fsal_export);
+
+	ph = container_of(obj_hdl, struct pxy_obj_handle, obj);
+
+	if (pxy_fsalattr_to_fattr4(attrib_set, &input_attr) == -1)
+		return fsalstat(ERR_FSAL_INVAL, EINVAL);
+
+	/* prepare PUTFH */
+	COMPOUNDV4_ARG_ADD_OP_PUTFH(opcnt, argoparray, ph->fh4);
+
+	/*
+	* setting size needs a surround open/close
+	* to get a current valid state
+	*
+	* Future support_ex version that will manage states
+	* will delete this special case
+	*/
+	if (attrib_set->valid_mask & ATTR_SIZE) {
+		/* prepare OPEN */
+		/* prepare answer */
+		opok =
+		    &resoparray[opcnt].nfs_resop4_u.opopen.OPEN4res_u.resok4;
+		opok->rflags = 0; /* set to NULL for safety */
+		opok->attrset = empty_bitmap; /* set to empty for safety */
+		/* prepare open input args */
+		/* share_access */
+		share_access = OPEN4_SHARE_ACCESS_WRITE;
+		/* owner */
+		snprintf(owner_val, sizeof(owner_val),
+			 "GANESHA/PROXY: pid=%u %" PRIu64, getpid(),
+			 atomic_inc_uint64_t(&fcnt));
+		owner_len = strnlen(owner_val, sizeof(owner_val));
+		/* openhow */
+		openhow.opentype = OPEN4_NOCREATE;
+		/* claim : open by file handle */
+		claim.claim = CLAIM_FH;
+		COMPOUNDV4_ARGS_ADD_OP_OPEN(opcnt, argoparray,
+					    open_owner_seqid, share_access,
+					    share_deny, owner_val, owner_len,
+					    openhow, claim);
+
+		/* prepare SETATTR */
+		resoparray[opcnt].nfs_resop4_u.opsetattr.attrsset =
+				empty_bitmap;
+		COMPOUNDV4_ARG_ADD_OP_COMPOUND_SETATTR(opcnt, argoparray,
+						       input_attr);
+
+		/* prepare CLOSE */
+		COMPOUNDV4_ARG_ADD_OP_COMPOUND_CLOSE(opcnt, argoparray,
+						     open_owner_seqid);
+	} else {
+		/* prepare SETATTR */
+		resoparray[opcnt].nfs_resop4_u.opsetattr.attrsset =
+				empty_bitmap;
+		/*
+		* We don't care about bypass or not.
+		* RFC5651, sections 8.2.3 and 18.30.3, says that special bypass
+		* stateid is only used for READ, and not for write or setattr.
+		*/
+		COMPOUNDV4_ARG_ADD_OP_SETATTR(opcnt, argoparray, input_attr);
+	}
+
+	/* nfs call */
+	rc = pxy_nfsv4_call(op_ctx->fsal_export, op_ctx->creds,
+			    opcnt, argoparray, resoparray);
+	nfs4_Fattr_Free(&input_attr);
+	if (rc != NFS4_OK)
+		return nfsstat4_to_fsal(rc);
+
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
 void pxy_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	ops->release = pxy_hdl_release;
@@ -2414,6 +2521,7 @@ void pxy_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->read2 = pxy_read2;
 	ops->write2 = pxy_write2;
 	ops->close2 = pxy_close2;
+	ops->setattr2 = pxy_setattr2;
 }
 
 #ifdef PROXY_HANDLE_MAPPING
