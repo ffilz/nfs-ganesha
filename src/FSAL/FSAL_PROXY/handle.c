@@ -2502,6 +2502,70 @@ fsal_openflags_t pxy_status2(struct fsal_obj_handle *obj_hdl,
 	return null_flags;
 }
 
+fsal_status_t pxy_reopen2(struct fsal_obj_handle *obj_hdl,
+			  struct state_t *state,
+			  fsal_openflags_t openflags)
+{
+	struct pxy_obj_handle *ph;
+	int rc; /* return code of nfs call */
+	int opcnt = 0; /* nfs arg counter */
+	fsal_status_t st; /* return code of fsal call */
+	seqid4 open_owner_seqid = 0;
+	char owner_val[128];
+	unsigned int owner_len = 0;
+	uint32_t share_access = 0;
+	uint32_t share_deny = 0;
+	openflag4 openhow;
+	open_claim4 claim;
+	/* PUTFH, OPEN, CLOSE */
+#define FSAL_REOPEN2_NB_OP 3
+	nfs_argop4 argoparray[FSAL_REOPEN2_NB_OP];
+	nfs_resop4 resoparray[FSAL_REOPEN2_NB_OP];
+	OPEN4resok *opok;
+
+	/* get back proxy handle */
+	ph = container_of(obj_hdl, struct pxy_obj_handle, obj);
+
+	/* prepare call */
+	/* PUTFH */
+	COMPOUNDV4_ARG_ADD_OP_PUTFH(opcnt, argoparray, ph->fh4);
+	/* OPEN */
+	/* prepare answer */
+	opok = &resoparray[opcnt].nfs_resop4_u.opopen.OPEN4res_u.resok4;
+	opok->rflags = 0; /* set to NULL for safety */
+	opok->attrset = empty_bitmap; /* set to empty for safety */
+	/* prepare open input args */
+	/* share_access and share_deny */
+	st = fill_share_OPEN4args(&share_access, &share_deny, openflags);
+	if (FSAL_IS_ERROR(st))
+		return st;
+
+	/* owner */
+	snprintf(owner_val, sizeof(owner_val),
+		 "GANESHA/PROXY: pid=%u %" PRIu64, getpid(),
+		 atomic_inc_uint64_t(&fcnt));
+	owner_len = strnlen(owner_val, sizeof(owner_val));
+	/* openhow */
+	openhow.opentype = OPEN4_NOCREATE;
+	/* claim : open by file handle */
+	claim.claim = CLAIM_FH;
+	COMPOUNDV4_ARGS_ADD_OP_OPEN(opcnt, argoparray, open_owner_seqid,
+				    share_access, share_deny, owner_val,
+				    owner_len, openhow, claim);
+	/* CLOSE */
+	/* we don't manage state : immediately close state on server */
+	COMPOUNDV4_ARG_ADD_OP_COMPOUND_CLOSE(opcnt, argoparray,
+					     open_owner_seqid);
+
+	/* nfs call*/
+	rc = pxy_nfsv4_call(op_ctx->fsal_export, op_ctx->creds, opcnt,
+			    argoparray, resoparray);
+	if (rc != NFS4_OK)
+		return nfsstat4_to_fsal(rc);
+
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
 void pxy_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	ops->release = pxy_hdl_release;
@@ -2532,6 +2596,7 @@ void pxy_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->close2 = pxy_close2;
 	ops->setattr2 = pxy_setattr2;
 	ops->status2 = pxy_status2;
+	ops->reopen2 = pxy_reopen2;
 }
 
 #ifdef PROXY_HANDLE_MAPPING
