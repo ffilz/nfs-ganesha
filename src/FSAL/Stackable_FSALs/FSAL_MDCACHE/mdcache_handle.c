@@ -43,6 +43,8 @@
 #include "mdcache_hash.h"
 #include "mdcache_avl.h"
 
+static fsal_status_t mdcache_get_valid_attrs(mdcache_entry_t *entry,
+					     attrmask_t mask);
 /*
  * handle methods
  */
@@ -687,6 +689,16 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 			goto unlock_dir;
 		}
 
+		/* Ensure attribute cache is valid.  For now, update non-ACL
+		 * attributes. This means passing some non-ACL attrmask. */
+		status = mdcache_get_valid_attrs(entry, ATTRS_NFS3);
+		if (FSAL_IS_ERROR(status)) {
+			LogFullDebug(COMPONENT_NFS_READDIR,
+				     "attr refresh failed status=%s",
+				     fsal_err_txt(status));
+			goto unlock_dir;
+		}
+
 		cb_result = cb(dirent->name, &entry->obj_handle, &entry->attrs,
 			       dir_state, dirent->hk.k);
 
@@ -919,7 +931,8 @@ out:
  * @param[in] need_acl  Indicates if the ACL needs updating.
  */
 
-fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl)
+static fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry,
+					   bool need_acl)
 {
 	struct attrlist attrs;
 	fsal_status_t status = {0, 0};
@@ -995,6 +1008,66 @@ fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl)
 }
 
 /**
+ * @brief Ensure attributes are valid for an entry
+ *
+ * If the attribute cache is valid, just return them.  Otherwise, resfresh the
+ * cache.
+ *
+ * @param[in]     entry   Object to get attributes from
+ * @param[in]     mask    Attribute mask to validate
+ * @return FSAL status
+ */
+static fsal_status_t mdcache_get_valid_attrs(mdcache_entry_t *entry,
+					     attrmask_t mask)
+{
+	fsal_status_t status = {0, 0};
+	time_t oldmtime = 0;
+
+	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
+
+	if (mdcache_is_attrs_valid(entry, mask)) {
+		/* Up-to-date */
+		goto unlock;
+	}
+
+	/* Promote to write lock */
+	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+
+	if (mdcache_is_attrs_valid(entry, mask)) {
+		/* Someone beat us to it */
+		goto unlock;
+	}
+
+	/* Use this to detect if we should invalidate a directory. */
+	oldmtime = entry->attrs.mtime.tv_sec;
+
+	status = mdcache_refresh_attrs(
+			entry, (mask & ATTR_ACL) != 0);
+
+	if (FSAL_IS_ERROR(status)) {
+		goto unlock;
+	}
+
+	if (entry->obj_handle.type == DIRECTORY &&
+	    oldmtime < entry->attrs.mtime.tv_sec) {
+
+		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
+		mdcache_dirent_invalidate_all(entry);
+		PTHREAD_RWLOCK_unlock(&entry->content_lock);
+	}
+
+unlock:
+
+	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+
+	if (FSAL_IS_ERROR(status) && (status.major == ERR_FSAL_STALE))
+		mdcache_kill_entry(entry);
+
+	return status;
+}
+
+/**
  * @brief Get the attributes for an object
  *
  * If the attribute cache is valid, just return them.  Otherwise, resfresh the
@@ -1010,30 +1083,8 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status = {0, 0};
-	time_t oldmtime = 0;
 
-	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
-
-	if (mdcache_is_attrs_valid(entry, attrs_out->request_mask)) {
-		/* Up-to-date */
-		goto unlock;
-	}
-
-	/* Promote to write lock */
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
-
-	if (mdcache_is_attrs_valid(entry, attrs_out->request_mask)) {
-		/* Someone beat us to it */
-		goto unlock;
-	}
-
-	/* Use this to detect if we should invalidate a directory. */
-	oldmtime = entry->attrs.mtime.tv_sec;
-
-	status = mdcache_refresh_attrs(
-			entry, (attrs_out->request_mask & ATTR_ACL) != 0);
-
+	status = mdcache_get_valid_attrs(entry, attrs_out->request_mask);
 	if (FSAL_IS_ERROR(status)) {
 		/* We failed to fetch any attributes. Pass that fact back to
 		 * the caller. We do not change the validity of the current
@@ -1041,28 +1092,11 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 		 */
 		if (attrs_out->request_mask & ATTR_RDATTR_ERR)
 			attrs_out->valid_mask = ATTR_RDATTR_ERR;
-		goto unlock_no_attrs;
+		return status;
 	}
-
-	if (obj_hdl->type == DIRECTORY &&
-	    oldmtime < entry->attrs.mtime.tv_sec) {
-
-		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
-		mdcache_dirent_invalidate_all(entry);
-		PTHREAD_RWLOCK_unlock(&entry->content_lock);
-	}
-
-unlock:
 
 	/* Struct copy */
 	fsal_copy_attrs(attrs_out, &entry->attrs, false);
-
-unlock_no_attrs:
-
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-
-	if (FSAL_IS_ERROR(status) && (status.major == ERR_FSAL_STALE))
-		mdcache_kill_entry(entry);
 
 	LogAttrlist(COMPONENT_CACHE_INODE, NIV_FULL_DEBUG,
 		    "attrs ", attrs_out, true);
