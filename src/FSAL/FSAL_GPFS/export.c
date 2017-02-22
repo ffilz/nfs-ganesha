@@ -651,10 +651,14 @@ void gpfs_unexport_filesystems(struct gpfs_fsal_export *exp)
 		glist_del(&map->on_exports);
 
 		if (glist_empty(&map->fs->exports)) {
+			struct fsal_filesystem *fs = map->fs->fs;
+
 			LogInfo(COMPONENT_FSAL,
 				"GPFS is no longer exporting filesystem %s",
-				map->fs->fs->path);
-			unclaim_fs(map->fs->fs);
+				fs->path);
+			unclaim_fs(fs);
+
+			release_posix_file_system(fs);
 		}
 
 		/* And free it */
