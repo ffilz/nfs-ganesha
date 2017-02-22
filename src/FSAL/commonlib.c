@@ -1341,7 +1341,7 @@ int resolve_posix_filesystem(const char *path,
 	return retval;
 }
 
-static void release_posix_file_system(struct fsal_filesystem *fs)
+static void release_posix_file_system_locked(struct fsal_filesystem *fs)
 {
 	struct fsal_filesystem *child_fs;
 
@@ -1355,7 +1355,7 @@ static void release_posix_file_system(struct fsal_filesystem *fs)
 	while ((child_fs = glist_first_entry(&fs->children,
 					     struct fsal_filesystem,
 					     siblings))) {
-		release_posix_file_system(child_fs);
+		release_posix_file_system_locked(child_fs);
 	}
 
 	LogDebug(COMPONENT_FSAL,
@@ -1373,9 +1373,16 @@ void release_posix_file_systems(void)
 
 	while ((fs = glist_first_entry(&posix_file_systems,
 				       struct fsal_filesystem, filesystems))) {
-		release_posix_file_system(fs);
+		release_posix_file_system_locked(fs);
 	}
 
+	PTHREAD_RWLOCK_unlock(&fs_lock);
+}
+
+void release_posix_file_system(struct fsal_filesystem *fs)
+{
+	PTHREAD_RWLOCK_wrlock(&fs_lock);
+	release_posix_file_system_locked(fs);
 	PTHREAD_RWLOCK_unlock(&fs_lock);
 }
 
