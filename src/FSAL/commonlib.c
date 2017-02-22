@@ -1379,6 +1379,13 @@ void release_posix_file_systems(void)
 	PTHREAD_RWLOCK_unlock(&fs_lock);
 }
 
+void release_posix_file_system_with_fslock(struct fsal_filesystem *fs)
+{
+	PTHREAD_RWLOCK_wrlock(&fs_lock);
+	release_posix_file_system(fs);
+	PTHREAD_RWLOCK_unlock(&fs_lock);
+}
+
 struct fsal_filesystem *lookup_fsid_locked(struct fsal_fsid__ *fsid,
 					   enum fsid_type fsid_type)
 {

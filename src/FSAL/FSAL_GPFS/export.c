@@ -624,8 +624,6 @@ void gpfs_unclaim_filesystem(struct fsal_filesystem *fs)
 		LogFullDebug(COMPONENT_FSAL, "Thread STOP successful");
 
 	pthread_join(gpfs_fs->up_thread, NULL);
-	free_gpfs_filesystem(gpfs_fs);
-	fs->private_data = NULL;
 
 out:
 	LogInfo(COMPONENT_FSAL, "GPFS Unclaiming %s", fs->path);
@@ -651,10 +649,18 @@ void gpfs_unexport_filesystems(struct gpfs_fsal_export *exp)
 		glist_del(&map->on_exports);
 
 		if (glist_empty(&map->fs->exports)) {
+			struct fsal_filesystem *fs = map->fs->fs;
+			struct gpfs_filesystem *gpfs_fs = fs->private_data;
+
 			LogInfo(COMPONENT_FSAL,
 				"GPFS is no longer exporting filesystem %s",
-				map->fs->fs->path);
-			unclaim_fs(map->fs->fs);
+				fs->path);
+			unclaim_fs(fs);
+
+			release_posix_file_system_with_fslock(fs);
+
+			free_gpfs_filesystem(gpfs_fs);
+			fs->private_data = NULL;
 		}
 
 		/* And free it */
