@@ -569,7 +569,7 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 	mdcache_dir_entry_t *dirent = NULL;
 	struct avltree_node *dirent_node = NULL;
 	fsal_status_t status = {0, 0};
-	enum fsal_dir_result cb_result = true;
+	enum fsal_dir_result cb_result;
 
 	if (!(directory->obj_handle.type == DIRECTORY))
 		return fsalstat(ERR_FSAL_NOTDIR, 0);
@@ -578,6 +578,15 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 		/* Not caching dirents; pass through directly to FSAL */
 		return mdcache_readdir_uncached(directory, whence, dir_state,
 						cb, attrmask, eod_met);
+	}
+
+	if (mdcache_param.dir.avl_chunk > 0) {
+		/* Dirent chunking is enabled. */
+		LogDebug(COMPONENT_NFS_READDIR,
+			 "Calling mdcache_readdir_chunked");
+
+		return mdcache_readdir_chunked(directory, *whence, dir_state,
+					       cb, attrmask, eod_met);
 	}
 
 	/* Dirent's are being cached; check to see if it needs updating */
