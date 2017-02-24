@@ -174,3 +174,5 @@ struct state_t *gpfs_alloc_state(struct fsal_export *exp_hdl,
 				 enum state_type state_type,
 				 struct state_t *related_state);
 
+void gpfs_free_state(struct fsal_export *exp_hdl, struct state_t *state);
+

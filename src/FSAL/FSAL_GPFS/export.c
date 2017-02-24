@@ -411,6 +411,7 @@ void gpfs_export_ops_init(struct export_ops *ops)
 	ops->get_quota = get_quota;
 	ops->set_quota = set_quota;
 	ops->alloc_state = gpfs_alloc_state;
+	ops->free_state = gpfs_free_state;
 }
 
 static void free_gpfs_filesystem(struct gpfs_filesystem *gpfs_fs)
