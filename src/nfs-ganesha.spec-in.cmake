@@ -111,6 +111,7 @@ BuildRequires:	libuuid-devel
 %if %{with system_ntirpc}
 BuildRequires: libntirpc-devel >= @NTIRPC_VERSION@
 %endif
+Requires:	policycoreutils-python
 Requires:	nfs-utils
 %if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 6 ) || ( 0%{?suse_version} )
 Requires:	rpcbind
