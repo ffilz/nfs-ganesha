@@ -15,7 +15,7 @@ LOG { COMPONENTS {} }
 LOG { FACILITY {} }
 LOG { FORMAT {} }
 9P {}
-CACHEINODE
+CACHE_INODE {}
 CEPH {}
 GPFS {}
 RGW {}
@@ -438,8 +438,8 @@ LOG { FORMAT {} }
 	LEVEL(bool, default true)
 
 
-CACHEINODE
-----------
+CACHE_INODE
+-----------
 
 	NParts(uint32, range 1 to 32633, default 7)
 
