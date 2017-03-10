@@ -1665,6 +1665,19 @@ struct fsal_obj_ops {
 				       struct fs_locations4 *fs_locs);
 
 /**
+ * @brief get fs_loc_fsid
+ *
+ * This function returns the fsid for an object.
+ *
+ * @param[in] obj_hdl        Object to get fs locations fsid for
+ * @param[out] uint64_t fsid
+ *
+ * @return FSAL status
+ */
+	 fsal_status_t (*fs_loc_fsid)(struct fsal_obj_handle *obj_hdl,
+				      fsid4 *fsid);
+
+/**
  * @brief Rename a file
  *
  * This function renames a file (technically it changes the name of

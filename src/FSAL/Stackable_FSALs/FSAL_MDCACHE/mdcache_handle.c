@@ -1328,6 +1328,31 @@ static fsal_status_t mdcache_fs_locations(struct fsal_obj_handle *obj_hdl,
 }
 
 /**
+ * @brief get fs_loc_fsid
+ *
+ * This function returns the fs locations fsid for an object.
+ *
+ * @param[in] obj_hdl	Object to get fs locations fsid for
+ * @param[out] fsid	fs locations fsid
+ *
+ * @return FSAL status
+ */
+static fsal_status_t mdcache_fs_loc_fsid(struct fsal_obj_handle *obj_hdl,
+					     fsid4 *fsid)
+{
+	mdcache_entry_t *entry =
+		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+	fsal_status_t status;
+
+	subcall(
+		status = entry->sub_handle->obj_ops.fs_loc_fsid(
+			entry->sub_handle, fsid)
+	       );
+
+	return status;
+}
+
+/**
  * @brief Test handle type
  *
  * All FSALs currently use the default, but delegate in case a FSAL wants to
@@ -1625,6 +1650,7 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->open = mdcache_open;
 	ops->reopen = mdcache_reopen;
 	ops->fs_locations = mdcache_fs_locations;
+	ops->fs_loc_fsid = mdcache_fs_loc_fsid;
 	ops->status = mdcache_status;
 	ops->read = mdcache_read;
 	ops->read_plus = mdcache_read_plus;
