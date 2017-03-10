@@ -1665,6 +1665,19 @@ struct fsal_obj_ops {
 				       struct fs_locations4 *fs_locs);
 
 /**
+ * @brief get fs_loc_exportid
+ *
+ * This function returns the exportid for an object.
+ *
+ * @param[in] obj_hdl        Object to get fs locations exportid for
+ * @param[out] uint64_t exportid
+ *
+ * @return FSAL status
+ */
+	 fsal_status_t (*fs_loc_exportid)(struct fsal_obj_handle *obj_hdl,
+					  uint64_t *exportid);
+
+/**
  * @brief Rename a file
  *
  * This function renames a file (technically it changes the name of

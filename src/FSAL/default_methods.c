@@ -960,6 +960,16 @@ static fsal_status_t fs_locations(struct fsal_obj_handle *obj_hdl,
 	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
 }
 
+/* fs_loc_exportid
+ * default case not supported
+ */
+
+static fsal_status_t fs_loc_exportid(struct fsal_obj_handle *obj_hdl,
+				 uint64_t *exportid)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
+}
+
 /* file_status
  * default case file always closed
  */
@@ -1554,6 +1564,7 @@ struct fsal_obj_ops def_handle_ops = {
 	.open = file_open,
 	.reopen = file_reopen,
 	.fs_locations = fs_locations,
+	.fs_loc_exportid = fs_loc_exportid,
 	.status = file_status,
 	.read = file_read,
 	.read_plus = file_read_plus,
