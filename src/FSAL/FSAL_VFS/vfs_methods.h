@@ -158,6 +158,11 @@ struct vfs_fsal_obj_handle {
 			struct vfs_fd fd;
 		} file;
 		struct {
+			char *path;
+			char *fs_location;
+			uint64_t exportid;
+		} directory;
+		struct {
 			unsigned char *link_content;
 			int link_size;
 		} symlink;
