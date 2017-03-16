@@ -633,6 +633,7 @@ glfs_get_ds_addr(struct glfs *fs, struct glfs_object *object, uint32_t *ds_addr)
 	int             ret                  = 0;
 	char            pathinfo[1024]       = {0, };
 	char            hostname[1024]       = {0, };
+	char		scratch[32]          = {0, };
 	struct addrinfo hints, *res;
 	struct in_addr  addr                 = {0, };
 	const char      *pathinfokey         = "trusted.glusterfs.pathinfo";
@@ -658,7 +659,8 @@ glfs_get_ds_addr(struct glfs *fs, struct glfs_object *object, uint32_t *ds_addr)
 
 	addr.s_addr = ((struct sockaddr_in *)(res->ai_addr))->sin_addr.s_addr;
 
-	LogDebug(COMPONENT_PNFS, "ip address : %s", inet_ntoa(addr));
+	LogDebug(COMPONENT_PNFS, "ip address : %s",
+		 inet_ntop(AF_INET, &addr.s_addr, scratch, sizeof(scratch)));
 
 	freeaddrinfo(res);
 out:
