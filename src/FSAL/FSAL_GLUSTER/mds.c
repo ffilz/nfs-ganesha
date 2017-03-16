@@ -27,6 +27,7 @@
 #include "fsal_types.h"
 #include "fsal_api.h"
 #include "fsal_up.h"
+#include "gsh_rpc.h"
 #include "gluster_internal.h"
 #include "FSAL/fsal_commonlib.h"
 #include "FSAL/fsal_config.h"
@@ -52,8 +53,9 @@
  *                        after export reference is relinquished
  */
 
-static void fs_layouttypes(struct fsal_export *export_pub, int32_t *count,
-			   const layouttype4 **types)
+static void
+fs_layouttypes(struct fsal_export *export_pub, int32_t *count,
+	       const layouttype4 **types)
 {
 	/* Only supported layout type is file */
 	static const layouttype4 supported_layout_type = LAYOUT4_NFSV4_1_FILES;
@@ -71,7 +73,8 @@ static void fs_layouttypes(struct fsal_export *export_pub, int32_t *count,
  * @return 4 MB.
  */
 
-static uint32_t fs_layout_blocksize(struct fsal_export *export_pub)
+static uint32_t
+fs_layout_blocksize(struct fsal_export *export_pub)
 {
 	return 0x400000;
 }
@@ -86,7 +89,8 @@ static uint32_t fs_layout_blocksize(struct fsal_export *export_pub)
  * @return 1
  */
 
-static uint32_t fs_maximum_segments(struct fsal_export *export_pub)
+static uint32_t
+fs_maximum_segments(struct fsal_export *export_pub)
 {
 	return 1;
 }
@@ -101,7 +105,8 @@ static uint32_t fs_maximum_segments(struct fsal_export *export_pub)
  * @return Size of the buffer needed for a loc_body
  */
 
-static size_t fs_loc_body_size(struct fsal_export *export_pub)
+static size_t
+fs_loc_body_size(struct fsal_export *export_pub)
 {
 	return 0x100;
 }
@@ -116,14 +121,15 @@ static size_t fs_loc_body_size(struct fsal_export *export_pub)
  * @return Size of the buffer needed for a ds_addr
  */
 
-size_t fs_da_addr_size(struct fsal_module *fsal_hdl)
+size_t
+fs_da_addr_size(struct fsal_module *fsal_hdl)
 {
 	return 0x1400;
 }
 
+static int
+get_ds_addr(struct glfs *fs, struct glfs_object *object, uint32_t *ds_addr);
 
-int glfs_get_ds_addr(struct glfs *fs, struct glfs_object *object,
-			uint32_t *ds_addr);
 /**
  * @brief Grant a layout segment.
  *
@@ -140,11 +146,12 @@ int glfs_get_ds_addr(struct glfs *fs, struct glfs_object *object,
  * @return Valid error codes in RFC 5661, pp. 366-7.
  */
 
-static nfsstat4 pnfs_layout_get(struct fsal_obj_handle          *obj_pub,
-				struct req_op_context           *req_ctx,
-				XDR                             *loc_body,
-				const struct fsal_layoutget_arg *arg,
-				struct fsal_layoutget_res       *res)
+static nfsstat4
+pnfs_layout_get(struct fsal_obj_handle          *obj_pub,
+		struct req_op_context           *req_ctx,
+		XDR                             *loc_body,
+		const struct fsal_layoutget_arg *arg,
+		struct fsal_layoutget_res       *res)
 {
 
 	struct glusterfs_export *export =
@@ -192,8 +199,9 @@ static nfsstat4 pnfs_layout_get(struct fsal_obj_handle          *obj_pub,
 
 	util |= file_layout.stripe_type | file_layout.stripe_length;
 
-	rc = glfs_get_ds_addr(export->gl_fs->fs, handle->glhandle,
-				&deviceid.device_id4);
+	/* FIXME: need to handle IPv6 here */
+	rc = get_ds_addr(export->gl_fs->fs, handle->glhandle,
+			 &deviceid.device_id4);
 
 	if (rc) {
 		LogMajor(COMPONENT_PNFS, "Invalid hostname for DS");
@@ -257,10 +265,11 @@ out:
  * @return Valid error codes in RFC 5661, p. 367.
  */
 
-static nfsstat4 pnfs_layout_return(struct fsal_obj_handle *obj_pub,
-				   struct req_op_context *req_ctx,
-				   XDR *lrf_body,
-				   const struct fsal_layoutreturn_arg *arg)
+static nfsstat4
+pnfs_layout_return(struct fsal_obj_handle *obj_pub,
+		   struct req_op_context *req_ctx,
+		   XDR *lrf_body,
+		   const struct fsal_layoutreturn_arg *arg)
 {
 
 	if (arg->lo_type != LAYOUT4_NFSV4_1_FILES) {
@@ -288,11 +297,12 @@ static nfsstat4 pnfs_layout_return(struct fsal_obj_handle *obj_pub,
  * @return Valid error codes in RFC 5661, p. 366.
  */
 
-static nfsstat4 pnfs_layout_commit(struct fsal_obj_handle *obj_pub,
-				   struct req_op_context *req_ctx,
-				   XDR *lou_body,
-				   const struct fsal_layoutcommit_arg *arg,
-				   struct fsal_layoutcommit_res *res)
+static nfsstat4
+pnfs_layout_commit(struct fsal_obj_handle *obj_pub,
+		   struct req_op_context *req_ctx,
+		   XDR *lou_body,
+		   const struct fsal_layoutcommit_arg *arg,
+		   struct fsal_layoutcommit_res *res)
 {
 	/* Old stat, so we don't truncate file or reverse time */
 	struct stat old_stat;
@@ -373,9 +383,10 @@ static nfsstat4 pnfs_layout_commit(struct fsal_obj_handle *obj_pub,
  *
  * @return Valid error codes in RFC 5661, p. 365.
  */
-nfsstat4 getdeviceinfo(struct fsal_module *fsal_hdl,
-		       XDR *da_addr_body, const layouttype4 type,
-		       const struct pnfs_deviceid *deviceid)
+nfsstat4
+getdeviceinfo(struct fsal_module *fsal_hdl,
+	      XDR *da_addr_body, const layouttype4 type,
+	      const struct pnfs_deviceid *deviceid)
 {
 	nfsstat4                    nfs_status = 0;
 	/* Stores IP address of DS */
@@ -451,30 +462,34 @@ nfsstat4 getdeviceinfo(struct fsal_module *fsal_hdl,
  *
  * @return Valid error codes in RFC 5661, pp. 365-6.
  */
-static nfsstat4 getdevicelist(struct fsal_export *export_pub, layouttype4 type,
-			      void *opaque,
-			      bool (*cb)(void *opaque, const uint64_t id),
-			      struct fsal_getdevicelist_res *res)
+static nfsstat4
+getdevicelist(struct fsal_export *export_pub, layouttype4 type,
+	      void *opaque,
+	      bool (*cb)(void *opaque, const uint64_t id),
+	      struct fsal_getdevicelist_res *res)
 {
 	res->eof = true;
 	return NFS4_OK;
 }
 
 
-void handle_ops_pnfs(struct fsal_obj_ops *ops)
+void
+handle_ops_pnfs(struct fsal_obj_ops *ops)
 {
 	ops->layoutget     = pnfs_layout_get;
 	ops->layoutreturn  = pnfs_layout_return;
 	ops->layoutcommit  = pnfs_layout_commit;
 }
 
-void fsal_ops_pnfs(struct fsal_ops *ops)
+void
+fsal_ops_pnfs(struct fsal_ops *ops)
 {
 	ops->getdeviceinfo = getdeviceinfo;
 	ops->fs_da_addr_size = fs_da_addr_size;
 }
 
-void export_ops_pnfs(struct export_ops *ops)
+void
+export_ops_pnfs(struct export_ops *ops)
 {
 	ops->getdevicelist              = getdevicelist;
 	ops->fs_layouttypes             = fs_layouttypes;
@@ -486,7 +501,8 @@ void export_ops_pnfs(struct export_ops *ops)
 /* *
  * Calculates  a hash value for a given string buffer
  */
-uint32_t superfasthash(const unsigned char *data, uint32_t len)
+static uint32_t
+superfasthash(const unsigned char *data, uint32_t len)
 {
 	uint32_t hash = len, tmp;
 	int32_t rem;
@@ -543,7 +559,7 @@ uint32_t superfasthash(const unsigned char *data, uint32_t len)
  * Returns zero and valid hostname on success
  */
 
-int
+static int
 select_ds(struct glfs_object *object, char *pathinfo, char *hostname,
 	  size_t size)
 {
@@ -627,17 +643,19 @@ out:
  * On success, returns zero with ip address of
  * the server will be send
  */
-int
-glfs_get_ds_addr(struct glfs *fs, struct glfs_object *object, uint32_t *ds_addr)
+static int
+get_ds_addr(struct glfs *fs, struct glfs_object *object, uint32_t *ds_addr)
 {
-	int             ret                  = 0;
-	char            pathinfo[1024]       = {0, };
-	char            hostname[1024]       = {0, };
-	struct addrinfo hints, *res;
-	struct in_addr  addr                 = {0, };
-	const char      *pathinfokey         = "trusted.glusterfs.pathinfo";
+	int             ret                    = 0;
+	char            pathinfo[1024]         = {0, };
+	char            hostname[256]          = {0, };
+	char		scratch[SOCK_NAME_MAX] = {0, };
+	struct addrinfo hints                  = {0, };
+        struct addrinfo *res                   = NULL;
+	const char      *pathinfokey           = "trusted.glusterfs.pathinfo";
 
-	ret = glfs_h_getxattrs(fs, object, pathinfokey, pathinfo, 1024);
+	ret = glfs_h_getxattrs(fs, object, pathinfokey, pathinfo,
+			       sizeof(pathinfo));
 
 	LogDebug(COMPONENT_PNFS, "pathinfo %s", pathinfo);
 
@@ -647,22 +665,20 @@ glfs_get_ds_addr(struct glfs *fs, struct glfs_object *object, uint32_t *ds_addr)
 		goto out;
 	}
 
-	memset(&hints, 0, sizeof(hints));
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_family = AF_INET;
 	ret = getaddrinfo(hostname, NULL, &hints, &res);
+	/* we trust getaddrinfo() never returns EAI_AGAIN! */
 	if (ret != 0) {
-		LogMajor(COMPONENT_PNFS, "error %d\n", ret);
+		*ds_addr = 0;
+		LogMajor(COMPONENT_PNFS, "error %s\n", 
+			 gai_strerror (ret));
 		goto out;
 	}
-
-	addr.s_addr = ((struct sockaddr_in *)(res->ai_addr))->sin_addr.s_addr;
-
-	LogDebug(COMPONENT_PNFS, "ip address : %s", inet_ntoa(addr));
-
-	freeaddrinfo(res);
+	LogDebug(COMPONENT_PNFS, "ip address : %s",
+		 sprint_sockip (&res->ai_addr, scratch, sizeof (scratch));
+	*ds_addr = ((struct sockaddr_in *)(res->ai_addr))->sin_addr.s_addr;
 out:
-
-	*ds_addr = addr.s_addr;
+	freeaddrinfo(res);
 	return ret;
 }
