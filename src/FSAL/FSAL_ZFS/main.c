@@ -64,6 +64,7 @@ static struct fsal_staticfsinfo_t default_zfs_info = {
 	.homogenous = true,			/* homogenous */
 	.supported_attrs = ZFS_SUPPORTED_ATTRIBUTES, /* supported attributes */
 	.link_supports_permission_checks = true,
+	.rename_keeps_key = true,
 };
 
 static struct config_item zfs_params[] = {

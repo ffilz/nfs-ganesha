@@ -83,6 +83,7 @@ static struct fsal_staticfsinfo_t default_gpfs_info = {
 	.reopen_method = true,
 	.fsal_grace = false,
 	.link_supports_permission_checks = true,
+	.rename_keeps_key = true,
 };
 
 /** @struct gpfs_params
