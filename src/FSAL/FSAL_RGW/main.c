@@ -66,6 +66,7 @@ static struct fsal_staticfsinfo_t default_rgw_info = {
 	.maxread = FSAL_MAXIOSIZE,
 	.maxwrite = FSAL_MAXIOSIZE,
 	.umask = 0,
+	.rename_keeps_key = false,
 };
 
 static struct config_item rgw_items[] = {

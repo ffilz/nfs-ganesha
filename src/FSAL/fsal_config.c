@@ -104,6 +104,8 @@ bool fsal_supports(struct fsal_staticfsinfo_t *info,
 		return !!info->fsal_grace;
 	case fso_link_supports_permission_checks:
 		return !!info->link_supports_permission_checks;
+	case fso_rename_keeps_key:
+		return !!info->rename_keeps_key;
 	default:
 		return false;	/* whatever I don't know about,
 				 * you can't do

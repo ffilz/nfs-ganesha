@@ -63,6 +63,7 @@ static struct fsal_staticfsinfo_t proxy_info = {
 	.homogenous = true,
 	.supported_attrs = SUPPORTED_ATTRIBUTES,
 	.link_supports_permission_checks = true,
+	.rename_keeps_key = true,
 };
 
 #ifdef _USE_GSSRPC
