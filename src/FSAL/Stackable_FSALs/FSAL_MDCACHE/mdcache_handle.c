@@ -792,6 +792,7 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	mdcache_entry_t *mdc_lookup_dst = NULL;
 	fsal_status_t status;
+	bool drop_only = false;
 
 	status = mdc_try_get_cached(mdc_newdir, new_name, &mdc_lookup_dst);
 
@@ -806,8 +807,13 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 			old_name, mdc_newdir->sub_handle, new_name)
 	       );
 
-	if (FSAL_IS_ERROR(status))
+	if (FSAL_IS_ERROR(status)) {
 		goto out;
+	} else {
+		/* special handle for FSAL RGW that changes ino on rename */
+		if (status.minor == ERR_FSAL_BADHANDLE)
+			drop_only = true;
+	}
 
 	/* Now update cached dirents.  Must take locks in the correct order */
 	mdcache_src_dest_lock(mdc_olddir, mdc_newdir);
@@ -845,6 +851,23 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 
 		/* Mark unreachable */
 		mdc_unreachable(mdc_lookup_dst);
+	}
+
+	if (drop_only) {
+		LogDebug(COMPONENT_CACHE_INODE,
+			 "Dropping entry (%p,%s)", mdc_olddir,
+			 old_name);
+
+		/* Remove the old entry */
+		status = mdcache_dirent_remove(mdc_olddir, old_name);
+		if (FSAL_IS_ERROR(status)) {
+			LogDebug(COMPONENT_CACHE_INODE,
+				 "Remove old dirent returned %s",
+				 fsal_err_txt(status));
+			/* Protected by mdcache_src_dst_lock() above */
+			mdcache_dirent_invalidate_all(mdc_olddir);
+		}
+		goto unlock;
 	}
 
 	if (mdc_olddir == mdc_newdir) {
@@ -909,7 +932,7 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 			mdcache_dirent_invalidate_all(mdc_olddir);
 		}
 	}
-
+unlock:
 	/* unlock entries */
 	mdcache_src_dest_unlock(mdc_olddir, mdc_newdir);
 

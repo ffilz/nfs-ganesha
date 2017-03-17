@@ -592,7 +592,8 @@ static fsal_status_t rgw_fsal_rename(struct fsal_obj_handle *obj_hdl,
 	if (rc < 0)
 		return rgw2fsal_error(rc);
 
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	/* TEMP: ERR_FSAL_BADHANDLE to indict mdcache not to add new dentry */
+	return fsalstat(ERR_FSAL_NO_ERROR, ERR_FSAL_BADHANDLE);
 }
 
 /**
