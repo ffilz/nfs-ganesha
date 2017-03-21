@@ -46,27 +46,45 @@
 #include "common_utils.h"
 
 #define FSAL_PROXY_NFS_V4 4
+#define FSAL_PROXY_NFS_V4_MINOR 1
+#define NB_RPC_SLOT 16
+#define NB_MAX_OPERATIONS 10
 
+/**
+ * pxy_clientid_mutex protects pxy_clientid, pxy_client_seqid and
+ * pxy_client_sessionid.
+ */
 static clientid4 pxy_clientid;
+static sequenceid4 pxy_client_seqid;
+static sessionid4 pxy_client_sessionid;
 static pthread_mutex_t pxy_clientid_mutex = PTHREAD_MUTEX_INITIALIZER;
+
 static char pxy_hostname[MAXNAMLEN + 1];
 static pthread_t pxy_recv_thread;
 static pthread_t pxy_renewer_thread;
+
+/**
+ * listlock protects rpc_sock and rpc_xid values, sockless condition and
+ * rpc_calls list.
+ */
 static struct glist_head rpc_calls;
-static struct glist_head free_contexts;
 static int rpc_sock = -1;
 static uint32_t rpc_xid;
 static pthread_mutex_t listlock = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t sockless = PTHREAD_COND_INITIALIZER;
-static pthread_cond_t need_context = PTHREAD_COND_INITIALIZER;
 
 /*
- * Protects the "free_contexts" list and the "need_context" condition.
+ * context_lock protects free_contexts list and need_context condition.
  */
+static struct glist_head free_contexts;
+static pthread_cond_t need_context = PTHREAD_COND_INITIALIZER;
 static pthread_mutex_t context_lock = PTHREAD_MUTEX_INITIALIZER;
 
 /* NB! nfs_prog is just an easy way to get this info into the call
  *     It should really be fetched via export pointer */
+/**
+ * We mutualize rpc_context and slot NFSv4.1.
+ */
 struct pxy_rpc_io_context {
 	pthread_mutex_t iolock;
 	pthread_cond_t iowait;
@@ -79,6 +97,8 @@ struct pxy_rpc_io_context {
 	unsigned int recvbuf_sz;
 	char *sendbuf;
 	char *recvbuf;
+	slotid4 slotid;
+	sequenceid4 seqid;
 };
 
 /* Use this to estimate storage requirements for fattr4 blob */
@@ -778,6 +798,7 @@ int pxy_compoundv4_execute(const char *caller, const struct user_cred *creds,
 	enum clnt_stat rc;
 	struct pxy_rpc_io_context *ctx;
 	COMPOUND4args arg = {
+		.minorversion = FSAL_PROXY_NFS_V4_MINOR,
 		.argarray.argarray_val = argoparray,
 		.argarray.argarray_len = cnt
 	};
@@ -793,6 +814,17 @@ int pxy_compoundv4_execute(const char *caller, const struct user_cred *creds,
 	    glist_first_entry(&free_contexts, struct pxy_rpc_io_context, calls);
 	glist_del(&ctx->calls);
 	PTHREAD_MUTEX_unlock(&context_lock);
+
+	/* fill slotid and sequenceid */
+	if (argoparray->argop == NFS4_OP_SEQUENCE) {
+		SEQUENCE4args *opsequence =
+					&argoparray->nfs_argop4_u.opsequence;
+
+		/* set slotid */
+		opsequence->sa_slotid = ctx->slotid;
+		/* increment and set sequence id */
+		opsequence->sa_sequenceid = ++ctx->seqid;
+	}
 
 	do {
 		rc = pxy_compoundv4_call(ctx, creds, &arg, &res);
@@ -817,74 +849,70 @@ int pxy_compoundv4_execute(const char *caller, const struct user_cred *creds,
 #define pxy_nfsv4_call(exp, creds, cnt, args, resp) \
 	pxy_compoundv4_execute(__func__, creds, cnt, args, resp)
 
-void pxy_get_clientid(clientid4 *ret)
+static inline void pxy_get_clientid(clientid4 *ret)
 {
 	PTHREAD_MUTEX_lock(&pxy_clientid_mutex);
 	*ret = pxy_clientid;
 	PTHREAD_MUTEX_unlock(&pxy_clientid_mutex);
 }
 
-static int pxy_setclientid(clientid4 *resultclientid, uint32_t *lease_time)
+static inline void pxy_get_client_sessionid(sessionid4 ret)
+{
+	PTHREAD_MUTEX_lock(&pxy_clientid_mutex);
+	memcpy(ret, pxy_client_sessionid, sizeof(sessionid4));
+	PTHREAD_MUTEX_unlock(&pxy_clientid_mutex);
+}
+
+static inline void pxy_get_client_seqid(sequenceid4 *ret)
+{
+	PTHREAD_MUTEX_lock(&pxy_clientid_mutex);
+	*ret = pxy_client_seqid;
+	PTHREAD_MUTEX_unlock(&pxy_clientid_mutex);
+}
+
+/**
+ * Confirm pxy_clientid to set a new session.
+ *
+ * @param[out] new_sessionid The new session id
+ * @param[out] new_lease_time Lease time from the background NFSv4.1 server
+ *
+ * @return 0 on success or NFS error code
+ */
+static int pxy_setsessionid(sessionid4 new_sessionid, uint32_t *lease_time,
+			    struct pxy_client_params *info)
 {
 	int rc;
 	int opcnt = 0;
-#define FSAL_CLIENTID_NB_OP_ALLOC 2
-	nfs_argop4 arg[FSAL_CLIENTID_NB_OP_ALLOC];
-	nfs_resop4 res[FSAL_CLIENTID_NB_OP_ALLOC];
-	nfs_client_id4 nfsclientid;
-	uint64_t temp_verifier;
-	cb_client4 cbproxy;
-	char clientid_name[MAXNAMLEN + 1];
-	SETCLIENTID4resok *sok;
-	struct sockaddr_in sin;
-	socklen_t slen = sizeof(sin);
-	char addrbuf[sizeof("255.255.255.255")];
+	/* CREATE_SESSION to set session id */
+	/* SEQUENCE / PUTROOTFH / GETATTR to get lease time */
+#define FSAL_SESSIONID_NB_OP_ALLOC 3 /* CREATE_SESSION */
+	nfs_argop4 arg[FSAL_SESSIONID_NB_OP_ALLOC];
+	nfs_resop4 res[FSAL_SESSIONID_NB_OP_ALLOC];
+	sessionid4 sid;
+	clientid4 cid;
+	sequenceid4 seqid;
+	CREATE_SESSION4res *s_res;
 
-	LogEvent(COMPONENT_FSAL,
-		 "Negotiating a new ClientId with the remote server");
-
-	if (getsockname(rpc_sock, &sin, &slen))
-		return -errno;
-
-	snprintf(clientid_name, MAXNAMLEN, "%s(%d) - GANESHA NFSv4 Proxy",
-		 inet_ntop(AF_INET, &sin.sin_addr, addrbuf, sizeof(addrbuf)),
-		 getpid());
-	nfsclientid.id.id_len = strlen(clientid_name);
-	nfsclientid.id.id_val = clientid_name;
-
-	/* copy to intermediate uint64_t to 0-fill or truncate as needed */
-	temp_verifier = (uint64_t)ServerBootTime.tv_sec;
-	BUILD_BUG_ON(sizeof(nfsclientid.verifier) != sizeof(uint64_t));
-	memcpy(&nfsclientid.verifier, &temp_verifier, sizeof(uint64_t));
-
-	cbproxy.cb_program = 0;
-	cbproxy.cb_location.r_netid = "tcp";
-	cbproxy.cb_location.r_addr = "127.0.0.1";
-
-	sok = &res[0].nfs_resop4_u.opsetclientid.SETCLIENTID4res_u.resok4;
-	arg[0].argop = NFS4_OP_SETCLIENTID;
-	arg[0].nfs_argop4_u.opsetclientid.client = nfsclientid;
-	arg[0].nfs_argop4_u.opsetclientid.callback = cbproxy;
-	arg[0].nfs_argop4_u.opsetclientid.callback_ident = 0;
-
-	rc = pxy_compoundv4_execute(__func__, NULL, 1, arg, res);
+	pxy_get_clientid(&cid);
+	pxy_get_client_seqid(&seqid);
+	LogDebug(COMPONENT_FSAL, "Getting new session id for client id %"PRIx64
+				" with sequence id %"PRIx32, cid, seqid);
+	COMPOUNDV4_ARG_ADD_OP_CREATE_SESSION(opcnt, arg, cid, seqid, info);
+	rc = pxy_compoundv4_execute(__func__, NULL, opcnt, arg, res);
 	if (rc != NFS4_OK)
 		return -1;
 
-	arg[0].argop = NFS4_OP_SETCLIENTID_CONFIRM;
-	arg[0].nfs_argop4_u.opsetclientid_confirm.clientid = sok->clientid;
-	memcpy(arg[0].nfs_argop4_u.opsetclientid_confirm.setclientid_confirm,
-	       sok->setclientid_confirm, NFS4_VERIFIER_SIZE);
-
-	rc = pxy_compoundv4_execute(__func__, NULL, 1, arg, res);
-	if (rc != NFS4_OK)
+	/*get session_id in res*/
+	s_res = &res->nfs_resop4_u.opcreate_session;
+	if (s_res->csr_status != NFS4_OK)
 		return -1;
-
-	/* Keep the confirmed client id */
-	*resultclientid = arg[0].nfs_argop4_u.opsetclientid_confirm.clientid;
+	memcpy(new_sessionid,
+	       s_res->CREATE_SESSION4res_u.csr_resok4.csr_sessionid,
+	       sizeof(sessionid4));
 
 	/* Get the lease time */
 	opcnt = 0;
+	COMPOUNDV4_ARG_ADD_OP_SEQUENCE(opcnt, arg, sid, NB_RPC_SLOT);
 	COMPOUNDV4_ARG_ADD_OP_PUTROOTFH(opcnt, arg);
 	pxy_fill_getattr_reply(res + opcnt, (char *)lease_time,
 			       sizeof(*lease_time));
@@ -899,41 +927,145 @@ static int pxy_setclientid(clientid4 *resultclientid, uint32_t *lease_time)
 	return 0;
 }
 
-static void *pxy_clientid_renewer(void *Arg)
+static int pxy_setclientid(clientid4 *new_clientid, sequenceid4 *new_seqid)
 {
 	int rc;
-	int needed = 1;
-	nfs_argop4 arg;
+#define FSAL_EXCHANGE_ID_NB_OP_ALLOC 1
+	nfs_argop4 arg[FSAL_EXCHANGE_ID_NB_OP_ALLOC];
+	nfs_resop4 res[FSAL_EXCHANGE_ID_NB_OP_ALLOC];
+	client_owner4 clientid;
+	char clientid_name[MAXNAMLEN + 1];
+	uint64_t temp_verifier;
+	EXCHANGE_ID4args opexchange_id;
+	EXCHANGE_ID4res *ei_res;
+	struct sockaddr_in sin;
+	socklen_t slen = sizeof(sin);
+	char addrbuf[sizeof("255.255.255.255")];
+
+	LogEvent(COMPONENT_FSAL,
+		 "Negotiating a new ClientId with the remote server");
+
+	if (getsockname(rpc_sock, &sin, &slen))
+		return -errno;
+
+	snprintf(clientid_name, MAXNAMLEN, "%s(%d) - GANESHA NFSv4 Proxy",
+		 inet_ntop(AF_INET, &sin.sin_addr, addrbuf, sizeof(addrbuf)),
+		 getpid());
+	clientid.co_ownerid.co_ownerid_len = strlen(clientid_name);
+	clientid.co_ownerid.co_ownerid_val = clientid_name;
+
+	/* copy to intermediate uint64_t to 0-fill or truncate as needed */
+	temp_verifier = (uint64_t)ServerBootTime.tv_sec;
+	BUILD_BUG_ON(sizeof(clientid.co_verifier) != sizeof(uint64_t));
+	memcpy(&clientid.co_verifier, &temp_verifier, sizeof(uint64_t));
+
+
+	arg[0].argop = NFS4_OP_SETCLIENTID;
+	opexchange_id.eia_clientowner = clientid;
+	opexchange_id.eia_flags = 0;
+	opexchange_id.eia_state_protect.spa_how = SP4_NONE;
+	opexchange_id.eia_client_impl_id.eia_client_impl_id_len = 0;
+	opexchange_id.eia_client_impl_id.eia_client_impl_id_val = NULL;
+	arg[0].nfs_argop4_u.opexchange_id = opexchange_id;
+
+	rc = pxy_compoundv4_execute(__func__, NULL, 1, arg, res);
+	if (rc != NFS4_OK)
+		return -1;
+
+	/* Keep the confirmed client id and sequence id*/
+	ei_res = &res->nfs_resop4_u.opexchange_id;
+	if (ei_res->eir_status != NFS4_OK)
+		return -1;
+	*new_clientid = ei_res->EXCHANGE_ID4res_u.eir_resok4.eir_clientid;
+	*new_seqid = ei_res->EXCHANGE_ID4res_u.eir_resok4.eir_sequenceid;
+
+	return 0;
+}
+
+static void *pxy_clientid_renewer(void *arg)
+{
+	struct pxy_client_params *info = arg;
+	int rc;
+	int clientid_needed = 1;
+	int sessionid_needed = 1;
+	int opcnt = 0;
+	nfs_argop4 seq_arg;
 	nfs_resop4 res;
 	uint32_t lease_time = 60;
 
 	while (1) {
 		clientid4 newcid = 0;
+		sequenceid4 newseqid = 0;
 
-		if (!needed && pxy_rpc_renewer_wait(lease_time - 5)) {
-			/* Simply renew the client id you've got */
-			LogDebug(COMPONENT_FSAL, "Renewing client id %" PRIx64,
-				 pxy_clientid);
-			arg.argop = NFS4_OP_RENEW;
-			arg.nfs_argop4_u.oprenew.clientid = pxy_clientid;
-			rc = pxy_compoundv4_execute(__func__, NULL, 1, &arg,
+		if (!sessionid_needed && pxy_rpc_renewer_wait(lease_time - 5)) {
+			/* Simply renew the session id you've got */
+			sessionid4 sid;
+			clientid4 cid;
+			SEQUENCE4res *s_res;
+			SEQUENCE4resok *s_resok;
+
+			pxy_get_clientid(&cid);
+			pxy_get_client_sessionid(sid);
+			LogDebug(COMPONENT_FSAL,
+				 "Try renew session id for client id %"PRIx64,
+				 cid);
+			COMPOUNDV4_ARG_ADD_OP_SEQUENCE(opcnt, &seq_arg, sid,
+						       NB_RPC_SLOT);
+			s_res = &res.nfs_resop4_u.opsequence;
+			s_resok = &s_res->SEQUENCE4res_u.sr_resok4;
+			s_resok->sr_status_flags = 0;
+			rc = pxy_compoundv4_execute(__func__, NULL, 1, &seq_arg,
 						    &res);
-			if (rc == NFS4_OK) {
+			if (rc == NFS4_OK && !s_resok->sr_status_flags) {
 				LogDebug(COMPONENT_FSAL,
-					 "Renewed client id %" PRIx64,
-					 pxy_clientid);
+					 "New session id for client id %"PRIu64,
+					 cid);
 				continue;
+			} else if (rc == NFS4_OK &&
+				   s_resok->sr_status_flags) {
+				LogEvent(COMPONENT_FSAL,
+	"sr_status_flags received on renewing session with seqop : %"PRIu32,
+					 s_resok->sr_status_flags);
+			} else if (rc != NFS4_OK) {
+				LogEvent(COMPONENT_FSAL,
+					 "Failed to renew session");
 			}
 		}
 
 		/* We've either failed to renew or rpc socket has been
-		 * reconnected and we need new client id */
-		LogDebug(COMPONENT_FSAL, "Need %d new client id", needed);
+		 * reconnected and we need new clientid or sessionid. */
 		pxy_rpc_need_sock();
-		needed = pxy_setclientid(&newcid, &lease_time);
-		if (!needed) {
+
+		/* We need a new session_id */
+		if (!clientid_needed) {
+			sessionid4 new_sessionid;
+
+			LogDebug(COMPONENT_FSAL, "Need %d new session id",
+				 sessionid_needed);
+			sessionid_needed = pxy_setsessionid(new_sessionid,
+							    &lease_time, info);
+			if (!sessionid_needed) {
+				PTHREAD_MUTEX_lock(&pxy_clientid_mutex);
+				/* Set new session id */
+				memcpy(pxy_client_sessionid, new_sessionid,
+				       sizeof(sessionid4));
+				/*
+				 * We finish our create session request next
+				 * one will use the next client sequence id.
+				 */
+				pxy_client_seqid++;
+				PTHREAD_MUTEX_unlock(&pxy_clientid_mutex);
+				continue;
+			}
+		}
+
+		LogDebug(COMPONENT_FSAL, "Need %d new client id",
+			 clientid_needed);
+		clientid_needed = pxy_setclientid(&newcid, &newseqid);
+		if (!clientid_needed) {
 			PTHREAD_MUTEX_lock(&pxy_clientid_mutex);
 			pxy_clientid = newcid;
+			pxy_client_seqid = newseqid;
 			PTHREAD_MUTEX_unlock(&pxy_clientid_mutex);
 		}
 	}
@@ -956,7 +1088,7 @@ static void free_io_contexts(void)
 int pxy_init_rpc(const struct pxy_fsal_module *pm)
 {
 	int rc;
-	int i = 16;
+	int i = NB_RPC_SLOT;
 
 	glist_init(&rpc_calls);
 	glist_init(&free_contexts);
@@ -975,7 +1107,7 @@ int pxy_init_rpc(const struct pxy_fsal_module *pm)
 		strncpy(pxy_hostname, "NFS-GANESHA/Proxy",
 			sizeof(pxy_hostname));
 
-	for (i = 16; i > 0; i--) {
+	for (i = NB_RPC_SLOT; i > 0; i--) {
 		struct pxy_rpc_io_context *c =
 		    gsh_malloc(sizeof(*c) + pm->special.srv_sendsize +
 			       pm->special.srv_recvsize);
@@ -990,6 +1122,8 @@ int pxy_init_rpc(const struct pxy_fsal_module *pm)
 		c->recvbuf_sz = pm->special.srv_recvsize;
 		c->sendbuf = (char *)(c + 1);
 		c->recvbuf = c->sendbuf + c->sendbuf_sz;
+		c->slotid = i;
+		c->seqid = 0;
 
 		glist_add(&free_contexts, &c->calls);
 	}
@@ -1005,7 +1139,7 @@ int pxy_init_rpc(const struct pxy_fsal_module *pm)
 	}
 
 	rc = pthread_create(&pxy_renewer_thread, NULL, pxy_clientid_renewer,
-			    NULL);
+			    (void *)&pm->special);
 	if (rc) {
 		LogCrit(COMPONENT_FSAL,
 			"Cannot create proxy clientid renewer thread - %s",

@@ -44,6 +44,59 @@ do { \
 do {gsh_free(argcompound.argarray_val); } while (0)
 
 /* OP specific macros */
+
+/**
+ * Notice about NFS4_OP_SEQUENCE argop filling :
+ * As rpc_context and slot are mutualized, sa_slotid and related sa_sequenceid
+ * are place holder filled later on pxy_compoundv4_execute function, only when
+ * the free pxy_rpc_io_context is chosen.
+ */
+#define COMPOUNDV4_ARG_ADD_OP_SEQUENCE(opcnt, argarray, sessionid, nb_slot) \
+do {									\
+	nfs_argop4 *op = argarray + opcnt; opcnt++;			\
+	op->argop = NFS4_OP_SEQUENCE;					\
+	memcpy(op->nfs_argop4_u.opsequence.sa_sessionid, sessionid,	\
+	       sizeof(sessionid4));					\
+	op->nfs_argop4_u.opsequence.sa_highest_slotid = nb_slot;	\
+	op->nfs_argop4_u.opsequence.sa_cachethis = FALSE;		\
+} while (0)
+
+#define COMPOUNDV4_ARG_ADD_OP_CREATE_SESSION(opcnt, argarray, cid, seqid, info)\
+do {									\
+	struct channel_attrs4 *fore_attrs;				\
+	struct channel_attrs4 *back_attrs;				\
+	CREATE_SESSION4args *opcreate_session;				\
+									\
+	nfs_argop4 *op = argarray + opcnt; opcnt++;			\
+	op->argop = NFS4_OP_CREATE_SESSION;				\
+	opcreate_session = &op->nfs_argop4_u.opcreate_session;		\
+	opcreate_session->csa_clientid = cid;				\
+	opcreate_session->csa_sequence = seqid;				\
+	opcreate_session->csa_flags = CREATE_SESSION4_FLAG_CONN_BACK_CHAN; \
+	fore_attrs = &opcreate_session->csa_fore_chan_attrs;		\
+	fore_attrs->ca_headerpadsize = 0;				\
+	fore_attrs->ca_maxrequestsize = info->srv_sendsize;		\
+	fore_attrs->ca_maxresponsesize = info->srv_recvsize;		\
+	fore_attrs->ca_maxresponsesize_cached = info->srv_recvsize;	\
+	fore_attrs->ca_maxoperations = NB_MAX_OPERATIONS;		\
+	fore_attrs->ca_maxrequests = NB_RPC_SLOT;			\
+	fore_attrs->ca_rdma_ird.ca_rdma_ird_len = 0;			\
+	fore_attrs->ca_rdma_ird.ca_rdma_ird_val = NULL;			\
+	back_attrs = &opcreate_session->csa_back_chan_attrs;		\
+	back_attrs->ca_headerpadsize = 0;				\
+	back_attrs->ca_maxrequestsize = info->srv_recvsize;		\
+	back_attrs->ca_maxresponsesize = info->srv_sendsize;		\
+	back_attrs->ca_maxresponsesize_cached = info->srv_recvsize;	\
+	back_attrs->ca_maxoperations = NB_MAX_OPERATIONS;		\
+	back_attrs->ca_maxrequests = NB_RPC_SLOT;			\
+	back_attrs->ca_rdma_ird.ca_rdma_ird_len = 0;			\
+	back_attrs->ca_rdma_ird.ca_rdma_ird_val = NULL;			\
+	opcreate_session->csa_cb_program = info->srv_prognum;		\
+	opcreate_session->csa_sec_parms.csa_sec_parms_len = 1;		\
+	opcreate_session->csa_sec_parms.csa_sec_parms_val[0].cb_secflavor = \
+								AUTH_NONE; \
+} while (0)
+
 #define COMPOUNDV4_ARG_ADD_OP_PUTROOTFH(opcnt, argarray)  \
 do {                                                       \
 	argarray[opcnt].argop = NFS4_OP_PUTROOTFH;	   \
