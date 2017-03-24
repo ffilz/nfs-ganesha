@@ -438,7 +438,7 @@ again:
 			}
 
 			if (isFullDebug(COMPONENT_CACHE_INODE)) {
-				char str[LOG_BUFF_LEN];
+				char str[LOG_BUFF_LEN] = "\0";
 				struct display_buffer dspbuf = {
 							sizeof(str), str, str };
 
@@ -463,8 +463,8 @@ again:
 			 * handle digest. Discard the old dirent and try again.
 			 */
 			if (isFullDebug(COMPONENT_CACHE_INODE)) {
-				char str1[LOG_BUFF_LEN / 2];
-				char str2[LOG_BUFF_LEN / 2];
+				char str1[LOG_BUFF_LEN / 2] = "\0";
+				char str2[LOG_BUFF_LEN / 2] = "\0";
 				struct display_buffer dspbuf1 = {
 						sizeof(str1), str1, str1 };
 				struct display_buffer dspbuf2 = {
@@ -511,7 +511,7 @@ again:
 				v2 = NULL;
 			} else {
 				if (isFullDebug(COMPONENT_CACHE_INODE)) {
-					char str[LOG_BUFF_LEN];
+					char str[LOG_BUFF_LEN] = "\0";
 					struct display_buffer dspbuf = {
 							sizeof(str), str, str };
 
