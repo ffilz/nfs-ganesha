@@ -745,6 +745,35 @@ void release_readdir_cookie(struct fsal_obj_handle *dir_hdl,
 	/* return */
 }
 
+/* compute_readdir_cookie
+ * default is to return 0 which indicates not supported
+ */
+
+fsal_cookie_t compute_readdir_cookie(struct fsal_obj_handle *parent,
+				     const char *name)
+{
+	return 0;
+}
+
+/* dirent_cmp
+ * Sort dirents by name (defaults to numeric cookie order).
+ */
+
+int dirent_cmp(struct fsal_obj_handle *parent,
+	       const char *name1, fsal_cookie_t cookie1,
+	       const char *name2, fsal_cookie_t cookie2)
+{
+	LogFullDebug(COMPONENT_FSAL,
+		     "Comparing %s %016"PRIx64" with %s %016"PRIx64" return %s",
+		     name1, cookie1, name2, cookie2,
+		     cookie1 < cookie2 ? "-1" : cookie1 > cookie2 ? "+1" : "0");
+
+	if (cookie1 < cookie2)
+		return -1;
+	else
+		return cookie1 > cookie2;
+}
+
 /* create
  * default case not supported
  */
@@ -1551,6 +1580,8 @@ struct fsal_obj_ops def_handle_ops = {
 	.lookup = lookup,
 	.readdir = read_dirents,
 	.release_readdir_cookie = release_readdir_cookie,
+	.compute_readdir_cookie = compute_readdir_cookie,
+	.dirent_cmp = dirent_cmp,
 	.create = create,
 	.mkdir = makedir,
 	.mknode = makenode,
