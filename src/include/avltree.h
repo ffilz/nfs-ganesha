@@ -143,20 +143,30 @@ int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t cmp, unsigned long flags);
 /*
  * AVL tree
  */
-#if defined UINTPTR_MAX && UINTPTR_MAX == UINT64_MAX
-
-struct avltree_node {
-	struct avltree_node *left, *right;
-	uintptr_t parent;	/* balance factor [0:4] */
-} __attribute__ ((aligned(8)));
-
-#else
+#if !defined UINTPTR_MAX && UINTPTR_MAX == UINT64_MAX
 
 struct avltree_node {
 	struct avltree_node *left, *right;
 	struct avltree_node *parent;
 	signed balance:3;	/* balance factor [-2:+2] */
 };
+
+static inline signed int get_balance(struct avltree_node *node)
+{
+	return node->balance;
+}
+
+#else
+
+struct avltree_node {
+	struct avltree_node *left, *right;
+	uintptr_t parent;	/* balance factor [0:4] */
+} __attribute__ ((aligned(8)));
+
+static inline signed int get_balance(struct avltree_node *node)
+{
+	return (int)(node->parent & 7) - 2;
+}
 
 #endif
 
@@ -174,19 +184,122 @@ struct avltree {
 #endif
 };
 
-struct avltree_node *avltree_first(const struct avltree *tree);
-struct avltree_node *avltree_last(const struct avltree *tree);
+/*
+ * 'pparent', 'unbalanced' and 'is_left' are only used for
+ * insertions. Normally GCC will notice this and get rid of them for
+ * lookups.
+ *
+ * @param[in]     key         Key to look for
+ * @param[in]     tree        AVL tree to look in
+ * @param[in,out] pparent     Parent of key
+ * @param[in,out] unbalanced  Unbalanced parent
+ * @param[in,out] is_left     True if key would be to left of parent
+ * @param[in]     cmp_fn      Comparison function to use
+ *
+ * @returns The node found if any
+ */
+static inline
+struct avltree_node *avltree_do_lookup(const struct avltree_node *key,
+				       const struct avltree *tree,
+				       struct avltree_node **pparent,
+				       struct avltree_node **unbalanced,
+				       int *is_left,
+				       avltree_cmp_fn_t cmp_fn)
+{
+	struct avltree_node *node = tree->root;
+	int res = 0;
+
+	*pparent = NULL;
+	*unbalanced = node;
+	*is_left = 0;
+
+	while (node) {
+		if (get_balance(node) != 0)
+			*unbalanced = node;
+
+		res = cmp_fn(node, key);
+		if (res == 0)
+			return node;
+		*pparent = node;
+		*is_left = res > 0;
+		if (*is_left)
+			node = node->left;
+		else
+			node = node->right;
+	}
+	return NULL;
+}
+
+static inline
+struct avltree_node *avltree_inline_lookup(const struct avltree_node *key,
+					   const struct avltree *tree,
+					   avltree_cmp_fn_t cmp_fn)
+{
+	struct avltree_node *parent, *unbalanced;
+	int is_left;
+
+	return avltree_do_lookup(key, tree, &parent, &unbalanced, &is_left,
+				 cmp_fn);
+}
+
+static inline
+struct avltree_node *avltree_lookup(const struct avltree_node *key,
+				    const struct avltree *tree)
+{
+	return avltree_inline_lookup(key, tree, tree->cmp_fn);
+}
+
+void avltree_do_insert(struct avltree_node *node,
+		       struct avltree *tree,
+		       struct avltree_node *parent,
+		       struct avltree_node *unbalanced,
+		       int is_left);
+
+static inline
+struct avltree_node *avltree_inline_insert(struct avltree_node *node,
+					   struct avltree *tree,
+					   avltree_cmp_fn_t cmp_fn)
+{
+	struct avltree_node *found, *parent, *unbalanced;
+	int is_left;
+
+	found = avltree_do_lookup(node, tree, &parent, &unbalanced, &is_left,
+				  cmp_fn);
+
+	if (found)
+		return found;
+
+	avltree_do_insert(node, tree, parent, unbalanced, is_left);
+
+	return NULL;
+}
+
+static inline
+struct avltree_node *avltree_insert(struct avltree_node *node,
+				    struct avltree *tree)
+{
+	return avltree_inline_insert(node, tree, tree->cmp_fn);
+}
+
+static inline
+struct avltree_node *avltree_first(const struct avltree *tree)
+{
+	return tree->first;
+}
+
+static inline
+struct avltree_node *avltree_last(const struct avltree *tree)
+{
+	return tree->last;
+}
+
 struct avltree_node *avltree_next(const struct avltree_node *node);
 struct avltree_node *avltree_prev(const struct avltree_node *node);
 uint64_t avltree_size(const struct avltree *tree);
-struct avltree_node *avltree_lookup(const struct avltree_node *key,
-				    const struct avltree *tree);
 struct avltree_node *avltree_inf(const struct avltree_node *key,
 				 const struct avltree *tree);
 struct avltree_node *avltree_sup(const struct avltree_node *key,
 				 const struct avltree *tree);
-struct avltree_node *avltree_insert(struct avltree_node *node,
-				    struct avltree *tree);
 void avltree_remove(struct avltree_node *node, struct avltree *tree);
 void avltree_replace(struct avltree_node *old, struct avltree_node *newe,
 		     struct avltree *tree);
