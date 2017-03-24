@@ -1068,9 +1068,26 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	int nread;
 	struct vfs_dirent dentry, *dentryp = &dentry;
 	char buf[BUF_SIZE];
+	fsal_cookie_t cookie;
+	bool skip_first;
 
 	if (whence != NULL)
 		seekloc = (off_t) *whence;
+	cookie = seekloc;
+
+	/* If we don't start from beginning skip an entry */
+	skip_first = cookie != 0;
+
+	if (cookie == 0) {
+		/* Return a non-zero cookie for the first file. */
+		cookie = FIRST_COOKIE;
+	}
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "whence=%p seekloc=%"PRIx64" cookie=%"PRIx64"%s",
+		     whence, (uint64_t) seekloc, cookie,
+		     skip_first ? " skip_first" : "");
+
 	myself = container_of(dir_hdl, struct vfs_fsal_obj_handle, obj_handle);
 	if (dir_hdl->fsal != dir_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
@@ -1111,10 +1128,24 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 			struct attrlist attrs;
 			enum fsal_dir_result cb_rc;
 
-			if (!to_vfs_dirent(buf, bpos, dentryp, baseloc)
-			    || strcmp(dentryp->vd_name, ".") == 0
-			    || strcmp(dentryp->vd_name, "..") == 0)
+			if (!to_vfs_dirent(buf, bpos, dentryp, baseloc))
+				goto skip;
+
+			LogFullDebug(COMPONENT_FSAL,
+				     "Entry %s last_ck=%"PRIx64
+				     " next_ck=%"PRIx64"%s",
+				     dentryp->vd_name, cookie,
+				     (uint64_t) dentryp->vd_offset,
+				     skip_first ? " skip_first" : "");
+
+			if (strcmp(dentryp->vd_name, ".") == 0 ||
+			    strcmp(dentryp->vd_name, "..") == 0)
 				goto skip;	/* must skip '.' and '..' */
+
+			if (skip_first) {
+				skip_first = false;
+				goto skip;
+			}
 
 			fsal_prepare_attrs(&attrs, attrmask);
 
@@ -1127,7 +1158,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
 			/* callback to cache inode */
 			cb_rc = cb(dentryp->vd_name, hdl, &attrs, dir_state,
-				(fsal_cookie_t) dentryp->vd_offset, NULL);
+				   cookie, NULL);
 
 			fsal_release_attrs(&attrs);
 
@@ -1135,6 +1166,9 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 				goto done;
 
  skip:
+			/* Save this d_off for the next cookie */
+			cookie = (fsal_cookie_t) dentryp->vd_offset;
+
 			bpos += dentryp->vd_reclen;
 		}
 	} while (nread > 0);
@@ -1145,6 +1179,66 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
  out:
 	return status;
+}
+
+fsal_cookie_t compute_readdir_cookie(struct fsal_obj_handle *dir_hdl,
+				     const char *name)
+{
+	struct vfs_fsal_obj_handle *myself;
+	int dirfd;
+	off_t seekloc = 0;
+	off_t baseloc = 0;
+	unsigned int bpos;
+	int nread;
+	struct vfs_dirent dentry, *dentryp = &dentry;
+	char buf[BUF_SIZE];
+	fsal_cookie_t next_ck = 0;
+	fsal_cookie_t last_ck = 0;
+	fsal_errors_t major;
+
+	myself = container_of(dir_hdl, struct vfs_fsal_obj_handle, obj_handle);
+	if (dir_hdl->fsal != dir_hdl->fs->fsal) {
+		LogDebug(COMPONENT_FSAL,
+			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
+			 dir_hdl->fsal->name,
+			 dir_hdl->fs->fsal != NULL
+				? dir_hdl->fs->fsal->name
+				: "(none)");
+		return 0;
+	}
+	dirfd = vfs_fsal_open(myself, O_RDONLY | O_DIRECTORY, &major);
+	if (dirfd < 0)
+		return 0;
+
+	do {
+		baseloc = seekloc;
+		nread = vfs_readents(dirfd, buf, BUF_SIZE, &seekloc);
+
+		for (bpos = 0; bpos < nread; bpos += dentryp->vd_reclen) {
+			if (to_vfs_dirent(buf, bpos, dentryp, baseloc)) {
+				last_ck = next_ck;
+				next_ck = (fsal_cookie_t) dentryp->vd_offset;
+
+				LogFullDebug(COMPONENT_FSAL,
+					     "Entry %s last_ck=%"PRIx64
+					     " next_ck=%"PRIx64,
+					     dentryp->vd_name,
+					     last_ck, next_ck);
+
+				if (strcmp(name, dentryp->vd_name) == 0)
+					break;
+			}
+		}
+	} while (nread > 0);
+
+	close(dirfd);
+
+	if (last_ck == 0 && next_ck != 0) {
+		/* Return a non-zero cookie for the first file. */
+		last_ck = FIRST_COOKIE;
+	}
+
+	return last_ck;
 }
 
 static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
@@ -1532,6 +1626,7 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->merge = vfs_merge;
 	ops->lookup = lookup;
 	ops->readdir = read_dirents;
+	ops->compute_readdir_cookie = compute_readdir_cookie;
 	ops->mkdir = makedir;
 	ops->mknode = makenode;
 	ops->symlink = makesymlink;
