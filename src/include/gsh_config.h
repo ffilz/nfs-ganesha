@@ -426,6 +426,26 @@ typedef struct nfs_core_param {
 #define IDMAPCONF_DEFAULT "/etc/idmapd.conf"
 
 /**
+ * @brief Default value of recover_backend.
+ */
+#define RECOV_BACKEND_DEFAULT "fs"
+
+/**
+ * @brief Default value of recov_root.
+ */
+#define RECOV_ROOT_DEFAULT "/var/lib/nfs/ganesha"
+
+/**
+ * @brief Default value of user_id.
+ */
+#define USER_ID_DEFAULT "admin"
+
+/**
+ * @brief Default value of rados_conf.
+ */
+#define RADOS_CONF_DEFAULT "/etc/ceph/ceph.conf"
+
+/**
  * @brief Default value of deleg_recall_retry_delay.
  */
 #define DELEG_RECALL_RETRY_DELAY_DEFAULT 1
@@ -470,6 +490,14 @@ typedef struct nfs_version4_parameter {
 	bool pnfs_mds;
 	/** Whether this a pNFS DS server. Defaults to false */
 	bool pnfs_ds;
+	/** Recover backend */
+	char *recov_backend;
+	/** Root directory to store client tracking data */
+	char *recov_root;
+	/** User ID to ceph cluster */
+	char *user_id;
+	/** Connection to rados */
+	char *rados_conf;
 } nfs_version4_parameter_t;
 
 /** @} */

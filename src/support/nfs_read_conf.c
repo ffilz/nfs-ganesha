@@ -265,6 +265,14 @@ static struct config_item version4_params[] = {
 		       nfs_version4_parameter, pnfs_mds),
 	CONF_ITEM_BOOL("PNFS_DS", true,
 		       nfs_version4_parameter, pnfs_ds),
+	CONF_ITEM_STR("RecovBackend", 1, MAXPATHLEN, RECOV_BACKEND_DEFAULT,
+		      nfs_version4_parameter, recov_backend),
+	CONF_ITEM_PATH("RecovRoot", 1, MAXPATHLEN, RECOV_ROOT_DEFAULT,
+		       nfs_version4_parameter, recov_root),
+	CONF_ITEM_PATH("UserId", 1, NAME_MAX, USER_ID_DEFAULT,
+		       nfs_version4_parameter, user_id),
+	CONF_ITEM_PATH("RadosConf", 1, MAXPATHLEN, RADOS_CONF_DEFAULT,
+		       nfs_version4_parameter, rados_conf),
 	CONFIG_EOL
 };
 

@@ -186,6 +186,14 @@ NFSV4 {}
 
 	Delegations(bool, default false)
 
+	RecovBackend(path, default "fs")
+
+	RecovRoot(path, default "/var/lib/nfs/ganesha")
+
+	UserId(path, default "admin")
+
+	RadosConf(path, default "/etc/ceph/ceph.conf")
+
 
 EXPORT_DEFAULTS {}
 ------------------
