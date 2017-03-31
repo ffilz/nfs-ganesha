@@ -37,15 +37,6 @@
 #include "FSAL/fsal_init.h"
 #include "pxy_fsal_methods.h"
 
-/* defined the set of attributes supported with POSIX */
-#define SUPPORTED_ATTRIBUTES (                                       \
-		ATTR_TYPE     | ATTR_SIZE     |			     \
-		ATTR_FSID     | ATTR_FILEID   |			     \
-		ATTR_MODE     | ATTR_NUMLINKS | ATTR_OWNER     |     \
-		ATTR_GROUP    | ATTR_ATIME    | ATTR_RAWDEV    |     \
-		ATTR_CTIME    | ATTR_MTIME    | ATTR_SPACEUSED |     \
-		ATTR_CHGTIME)
-
 /* filesystem info for PROXY */
 static struct fsal_staticfsinfo_t proxy_info = {
 	.maxfilesize = UINT64_MAX,
@@ -61,7 +52,7 @@ static struct fsal_staticfsinfo_t proxy_info = {
 	.lease_time = {10, 0},
 	.acl_support = FSAL_ACLSUPPORT_ALLOW,
 	.homogenous = true,
-	.supported_attrs = SUPPORTED_ATTRIBUTES,
+	.supported_attrs = ATTRS_POSIX,
 	.link_supports_permission_checks = true,
 };
 

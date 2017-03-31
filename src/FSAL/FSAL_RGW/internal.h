@@ -108,15 +108,6 @@ struct rgw_open_state {
 };
 
 /**
- * The attributes this FSAL can interpret or supply.
- */
-#define rgw_supported_attributes (const attrmask_t) (			\
-	ATTR_TYPE      | ATTR_SIZE     | ATTR_FSID  | ATTR_FILEID |\
-	ATTR_MODE      | ATTR_NUMLINKS | ATTR_OWNER | ATTR_GROUP  |\
-	ATTR_ATIME     | ATTR_RAWDEV   | ATTR_CTIME | ATTR_MTIME  |\
-	ATTR_SPACEUSED | ATTR_CHGTIME)
-
-/**
  * The attributes this FSAL can set.
  */
 #define rgw_settable_attributes (const attrmask_t) (			\

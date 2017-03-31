@@ -62,7 +62,7 @@ static struct fsal_staticfsinfo_t default_zfs_info = {
 	.acl_support = FSAL_ACLSUPPORT_ALLOW,	/* ACL support */
 	.cansettime = true,
 	.homogenous = true,			/* homogenous */
-	.supported_attrs = ZFS_SUPPORTED_ATTRIBUTES, /* supported attributes */
+	.supported_attrs = ATTRS_POSIX, /* supported attributes */
 	.link_supports_permission_checks = true,
 };
 
@@ -131,7 +131,7 @@ static fsal_status_t zfs_init_config(struct fsal_module *fsal_hdl,
 	display_fsinfo(&zfs_me->fs_info);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes constant = 0x%" PRIx64,
-		     (uint64_t) ZFS_SUPPORTED_ATTRIBUTES);
+		     (uint64_t) ATTRS_POSIX);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes default = 0x%" PRIx64,
 		     default_zfs_info.supported_attrs);

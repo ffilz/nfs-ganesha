@@ -1933,7 +1933,8 @@ fsal_status_t ceph_setattr2(struct fsal_obj_handle *obj_hdl,
 		LogDebug(COMPONENT_FSAL,
 			 "bad mask %"PRIx64" not settable %"PRIx64,
 			 attrib_set->valid_mask,
-			 attrib_set->valid_mask & ~settable_attributes);
+			 attrib_set->valid_mask &
+					(attrmask_t)~settable_attributes);
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 

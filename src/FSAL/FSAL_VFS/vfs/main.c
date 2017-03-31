@@ -45,13 +45,11 @@
  */
 
 /* defined the set of attributes supported with POSIX */
-#define VFS_SUPPORTED_ATTRIBUTES (                                       \
-		ATTR_TYPE     | ATTR_SIZE     |				\
-		ATTR_FSID     | ATTR_FILEID   |				\
-		ATTR_MODE     | ATTR_NUMLINKS | ATTR_OWNER     |	\
-		ATTR_GROUP    | ATTR_ATIME    | ATTR_RAWDEV    |	\
-		ATTR_CTIME    | ATTR_MTIME    | ATTR_SPACEUSED |	\
-		ATTR_CHGTIME)
+#ifndef ENABLE_VFS_DEBUG_ACL
+#define VFS_SUPPORTED_ATTRIBUTES (ATTRS_POSIX)
+#else
+#define VFS_SUPPORTED_ATTRIBUTES (ATTRS_POSIX | ATTR_ACL)
+#endif
 
 struct vfs_fsal_module {
 	struct fsal_module fsal;
@@ -79,7 +77,7 @@ static struct fsal_staticfsinfo_t default_posix_info = {
 	.lease_time = {10, 0},
 	.acl_support = FSAL_ACLSUPPORT_ALLOW,
 	.homogenous = true,
-	.supported_attrs = VFS_SUPPORTED_ATTRIBUTES,
+	.supported_attrs = ATTRS_POSIX,
 	.maxread = FSAL_MAXIOSIZE,
 	.maxwrite = FSAL_MAXIOSIZE,
 	.link_supports_permission_checks = false,

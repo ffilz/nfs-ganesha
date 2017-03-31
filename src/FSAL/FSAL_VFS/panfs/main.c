@@ -44,13 +44,7 @@
  */
 
 /* defined the set of attributes supported with POSIX */
-#define PANFS_SUPPORTED_ATTRIBUTES (                                       \
-		ATTR_TYPE     | ATTR_SIZE     |				\
-		ATTR_FSID     | ATTR_FILEID   |				\
-		ATTR_MODE     | ATTR_NUMLINKS | ATTR_OWNER     |	\
-		ATTR_GROUP    | ATTR_ATIME    | ATTR_RAWDEV    |	\
-		ATTR_CTIME    | ATTR_MTIME    | ATTR_SPACEUSED |	\
-		ATTR_CHGTIME  | ATTR_ACL)
+#define PANFS_SUPPORTED_ATTRIBUTES (ATTRS_POSIX  | ATTR_ACL)
 
 struct panfs_fsal_module {
 	struct fsal_module fsal;
