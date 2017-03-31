@@ -376,7 +376,34 @@ static fattr_xdr_result encode_supported_attrs(XDR *xdr,
 static fattr_xdr_result decode_supported_attrs(XDR *xdr,
 					       struct xdr_attrs_args *args)
 {
-	return FATTR_XDR_NOOP;
+	struct bitmap4 bits;
+	int attr, offset;
+	int max_attr_idx;
+
+	memset(&bits, 0, sizeof(bits));
+	args->attrs->supported = 0;
+
+	/* Extract bitmap from stream */
+	if (!inline_xdr_u_int32_t(xdr, &bits.bitmap4_len))
+		return FATTR_XDR_FAILED;
+	for (offset = 0; offset < bits.bitmap4_len; offset++) {
+		if (!inline_xdr_u_int32_t(xdr, &bits.map[offset]))
+			return FATTR_XDR_FAILED;
+	}
+
+	/* At the moment hard code this, only used by FSAL_PROXY */
+	max_attr_idx = FATTR4_MOUNTED_ON_FILEID;
+
+	for (attr = FATTR4_SUPPORTED_ATTRS; attr <= max_attr_idx;
+	     attr++) {
+		if (attribute_is_set(&bits, attr) &&
+		    fattr4tab[attr].supported) {
+			/* Set the corresponding bit in the attrmask_t */
+			args->attrs->supported |= fattr4tab[attr].attrmask;
+		}
+	}
+
+	return FATTR_XDR_SUCCESS;
 }
 
 /*
