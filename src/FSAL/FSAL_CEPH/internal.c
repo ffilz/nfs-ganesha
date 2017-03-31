@@ -43,28 +43,7 @@
 #include "fsal_convert.h"
 #include "FSAL/fsal_commonlib.h"
 #include "statx_compat.h"
-
-#define CEPH_INTERNAL_C
 #include "internal.h"
-
-/**
- * The attributes tis FSAL can interpret or supply.
- */
-
-const attrmask_t supported_attributes = (
-	ATTR_TYPE      | ATTR_SIZE     | ATTR_FSID  | ATTR_FILEID |
-	ATTR_MODE      | ATTR_NUMLINKS | ATTR_OWNER | ATTR_GROUP  |
-	ATTR_ATIME     | ATTR_RAWDEV   | ATTR_CTIME | ATTR_MTIME  |
-	ATTR_SPACEUSED | ATTR_CHGTIME);
-
-/**
- * The attributes this FSAL can set.
- */
-
-const attrmask_t settable_attributes = (
-	ATTR_MODE  | ATTR_OWNER | ATTR_GROUP | ATTR_ATIME	 |
-	ATTR_CTIME | ATTR_MTIME | ATTR_SIZE  | ATTR_MTIME_SERVER |
-	ATTR_ATIME_SERVER);
 
 /**
  * @brief Construct a new filehandle
