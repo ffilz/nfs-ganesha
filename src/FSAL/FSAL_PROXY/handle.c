@@ -2334,6 +2334,8 @@ static fsal_status_t pxy_open2(struct fsal_obj_handle *obj_hdl,
 		st = pxy_do_close(op_ctx->creds, &fhok->object,
 				  ++open_owner_seqid, &opok->stateid,
 				  op_ctx->fsal_export);
+		if (FSAL_IS_ERROR(st))
+			return st;
 	} else if (attrs_out || openflags & FSAL_O_TRUNC) {
 	/* open by handle */
 	/* we have nothing to do except getattr or truncate */
