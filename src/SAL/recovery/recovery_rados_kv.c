@@ -40,10 +40,40 @@
 #define CMD_LST			"config-key list"
 
 static rados_t cluster;
-static char rados_conf[PATH_MAX];
-static char user_id[NAME_MAX];
 static bool clustered;
 static char myhostname[NI_MAXHOST];
+
+static struct rados_kv_parameter {
+	/** User ID to ceph cluster */
+	char *rados_userid;
+	/** Connection to rados */
+	char *rados_conf;
+} rados_kv_param;
+
+static struct config_item rados_kv_params[] = {
+	CONF_ITEM_STR("RadosUserid", 1, MAXPATHLEN, NULL,
+		       rados_kv_parameter, rados_userid),
+	CONF_ITEM_PATH("RadosConf", 1, MAXPATHLEN, NULL,
+		       rados_kv_parameter, rados_conf),
+	CONFIG_EOL
+};
+
+static void *rados_kv_param_init(void *link_mem, void *self_struct)
+{
+	if (self_struct == NULL)
+		return &rados_kv_param;
+	else
+		return NULL;
+}
+
+struct config_block rados_kv_param_blk = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.rados_kv",
+	.blk_desc.name = "RADOS_KV",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.u.blk.init = rados_kv_param_init,
+	.blk_desc.u.blk.params = rados_kv_params,
+	.blk_desc.u.blk.commit = noop_conf_commit
+};
 
 static int convert_opaque_val(struct display_buffer *dspbuf,
 			      void *value,
@@ -398,12 +428,27 @@ static void append_val_rdfh(char *val, char *rdfh, int rdfh_len)
 	val[rdfhstr_len + 1] = '\0';
 }
 
+int rados_kv_set_param_from_conf(config_file_t parse_tree,
+				 struct config_error_type *err_type)
+{
+	(void) load_config_from_parse(parse_tree,
+				      &rados_kv_param_blk,
+				      NULL,
+				      true,
+				      err_type);
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_INIT,
+			"Error while parsing RadosKV specific configuration");
+		return -1;
+	}
+
+	return 0;
+}
+
 void rados_kv_init(void)
 {
 	int ret;
 
-	snprintf(user_id, NAME_MAX, "%s", "admin");
-	snprintf(rados_conf, PATH_MAX, "%s", "/etc/ceph/ceph.conf");
 	clustered = nfs_param.core_param.clustered;
 	if (!clustered) {
 		ret = gethostname(myhostname, sizeof(myhostname));
@@ -413,12 +458,12 @@ void rados_kv_init(void)
 		}
 	}
 
-	ret = rados_create(&cluster, user_id);
+	ret = rados_create(&cluster, rados_kv_param.rados_userid);
 	if (ret) {
 		LogEvent(COMPONENT_CLIENTID, "Failed to rados create");
 		return;
 	}
-	ret = rados_conf_read_file(cluster, rados_conf);
+	ret = rados_conf_read_file(cluster, rados_kv_param.rados_conf);
 	if (ret) {
 		LogEvent(COMPONENT_CLIENTID, "Failed to read conf");
 		rados_shutdown(cluster);
