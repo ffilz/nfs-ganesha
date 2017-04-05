@@ -74,6 +74,9 @@ Requires: sles-release >= 12
 @BCOND_NTIRPC@ system_ntirpc
 %global use_system_ntirpc %{on_off_switch system_ntirpc}
 
+@BCOND_RADOS_RECOV@ rados_recov
+%global use_rados_recov %{on_off_switch rados_recov}
+
 %global dev_version %{lua: extraver = string.gsub('@GANESHA_EXTRA_VERSION@', '%-', '.'); print(extraver) }
 
 %define sourcename @CPACK_SOURCE_PACKAGE_FILE_NAME@
@@ -215,6 +218,18 @@ This package contains the libganesha_trace.so library. When preloaded
 to the ganesha.nfsd server, it makes it possible to trace using LTTng.
 %endif
 
+%if %{with rados_recov}
+%package rados
+Summary: The NFS-GANESHA's library for recovery backend
+Group: Applications/System
+BuildRequires: librados-devel >= 0.61
+Requires: nfs-ganesha = %{version}-%{release}
+
+%description rados
+This package contains the librados.so library. Ganesha uses it to
+store client tracking data in ceph cluster.
+%endif
+
 # Option packages start here. use "rpmbuild --with gpfs" (or equivalent)
 # for activating this part of the spec file
 
@@ -339,6 +354,7 @@ cmake .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DUSE_LTTNG=%{use_lttng}			\
 	-DUSE_ADMIN_TOOLS=%{use_utils}			\
 	-DUSE_GUI_ADMIN_TOOLS=%{use_gui_utils}		\
+	-DUSE_RADOS_RECOV=%{use_rados_recov}		\
 	-DUSE_FSAL_VFS=ON				\
 	-DUSE_FSAL_PROXY=ON				\
 	-DUSE_DBUS=ON					\
