@@ -728,9 +728,7 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 	/* The status code to return */
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	struct gpfs_fsal_export *gpfs_exp;
-	struct gpfs_filesystem *gpfs_fs;
 	struct fsal_export *exp;
-	gpfsfsal_xstat_t buffxstat;
 
 	gpfs_exp = gsh_calloc(1, sizeof(struct gpfs_fsal_export));
 	exp = &gpfs_exp->export;
@@ -769,27 +767,6 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 			strerror(status.minor), status.minor);
 		status.major = posix2fsal_error(status.minor);
 		goto uninit;
-	}
-
-	gpfs_fs = gpfs_exp->root_fs->private_data;
-	gpfs_fs->root_fd = open_dir_by_path_walk(-1,
-						 op_ctx->ctx_export->fullpath,
-						 &buffxstat.buffstat);
-
-	/* if the nodeid has not been obtained, get it now */
-	if (!g_nodeid) {
-		struct grace_period_arg gpa;
-		int nodeid;
-
-		gpa.mountdirfd = gpfs_fs->root_fd;
-
-		nodeid = gpfs_ganesha(OPENHANDLE_GET_NODEID, &gpa);
-		if (nodeid > 0) {
-			g_nodeid = nodeid;
-			LogFullDebug(COMPONENT_FSAL, "nodeid %d", g_nodeid);
-		} else
-			LogCrit(COMPONENT_FSAL,
-			    "OPENHANDLE_GET_NODEID failed rc %d", nodeid);
 	}
 
 	gpfs_exp->pnfs_ds_enabled =
