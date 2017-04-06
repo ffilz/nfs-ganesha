@@ -377,9 +377,16 @@ void mdcache_clean_dirent_chunk(struct dir_chunk *chunk)
 		parent->fsobj.fsdir.nbactive--;
 	}
 
-	/* Remove chunk from directory and free it */
+	/* Remove chunk from directory. */
 	glist_del(&chunk->chunks);
-	gsh_free(chunk);
+
+	/* At this point the following is true about the chunk:
+	 *
+	 * chunks is {NULL, NULL} do to the glist_del
+	 * dirents is {&dirents, &dirents}, i.e. empty as a result of the
+	 *                                  glist_for_each_safe above
+	 * the other fields are untouched.
+	 */
 }
 
 /**
@@ -396,9 +403,7 @@ void mdcache_clean_dirent_chunks(mdcache_entry_t *entry)
 	struct glist_head *glist, *glistn;
 
 	glist_for_each_safe(glist, glistn, &entry->fsobj.fsdir.chunks) {
-		mdcache_clean_dirent_chunk(glist_entry(glist,
-						       struct dir_chunk,
-						       chunks));
+		lru_remove_chunk(glist_entry(glist, struct dir_chunk, chunks));
 	}
 }
 
@@ -1011,6 +1016,10 @@ fsal_status_t mdc_try_get_cached(mdcache_entry_t *mdc_parent,
 
 	dirent = mdcache_avl_qp_lookup_s(mdc_parent, name, 1);
 	if (dirent) {
+		if (dirent->chunk != NULL) {
+			/* Bump the chunk in the LRU */
+			lru_bump_chunk(dirent->chunk);
+		}
 		status = mdcache_find_keyed(&dirent->ckey, entry);
 		if (!FSAL_IS_ERROR(status))
 			return status;
@@ -1971,6 +1980,9 @@ bool add_dirent_to_chunk(mdcache_entry_t *parent_dir,
 	/* And now increment the number of entries in the chunk. */
 	new_dir_entry->chunk->num_entries++;
 
+	/* And bump the chunk in the LRU */
+	lru_bump_chunk(new_dir_entry->chunk);
+
 	new_dir_entry->flags |= DIR_ENTRY_SORTED;
 
 	return true;
@@ -2512,6 +2524,9 @@ again:
 
 	/* dirent WILL be non-NULL, emember the chunk we are in. */
 	chunk = dirent->chunk;
+
+	/* Bump the chunk in the LRU */
+	lru_bump_chunk(chunk);
 
 	LogFullDebug(COMPONENT_NFS_READDIR,
 		     "About to read directory=%p cookie=%" PRIx64,
