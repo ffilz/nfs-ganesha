@@ -500,8 +500,7 @@ int open_root_fd(struct gpfs_filesystem *gpfs_fs)
 	}
 
 	status = fsal_internal_get_handle_at(gpfs_fs->root_fd,
-					     gpfs_fs->fs->path, &fh, 0,
-					     &gpfs_fs->root_fd);
+					     gpfs_fs->fs->path, &fh, 0, NULL);
 
 	if (FSAL_IS_ERROR(status)) {
 		retval = status.minor;
@@ -728,9 +727,7 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 	/* The status code to return */
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	struct gpfs_fsal_export *gpfs_exp;
-	struct gpfs_filesystem *gpfs_fs;
 	struct fsal_export *exp;
-	gpfsfsal_xstat_t buffxstat;
 
 	gpfs_exp = gsh_calloc(1, sizeof(struct gpfs_fsal_export));
 	exp = &gpfs_exp->export;
@@ -771,13 +768,10 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 		goto uninit;
 	}
 
-	gpfs_fs = gpfs_exp->root_fs->private_data;
-	gpfs_fs->root_fd = open_dir_by_path_walk(-1,
-						 op_ctx->ctx_export->fullpath,
-						 &buffxstat.buffstat);
-
 	/* if the nodeid has not been obtained, get it now */
 	if (!g_nodeid) {
+		struct gpfs_filesystem *gpfs_fs =
+						gpfs_exp->root_fs->private_data;
 		struct grace_period_arg gpa;
 		int nodeid;
 
