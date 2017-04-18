@@ -117,7 +117,7 @@ int fsal_internal_version(void);
 fsal_status_t fsal_internal_get_handle_at(int dfd,
 				const char *p_fsalname,
 				struct gpfs_file_handle *p_handle,
-				int expfd, int *expfdP);
+				int expfd);
 
 fsal_status_t gpfsfsal_xstat_2_fsal_attributes(gpfsfsal_xstat_t *gpfs_buf,
 		struct attrlist *fsal_attr, gpfs_acl_t *acl_buf, bool use_acl);
