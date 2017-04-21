@@ -133,13 +133,19 @@ if(PYTHON)
 endif(PYTHON)
 
 # Man page
-set(man8_file ganesha_conf.man)
-set(man8_page ganesha_conf.8)
+list(APPEND man_files
+ganesha_conf.man
+ganesha_config.man)
+
+foreach(man8_file ${man_files})
+string(REPLACE "man" "8" man8_page ${man8_file})
 add_custom_command(
 	OUTPUT ${man8_page}
 	COMMAND cp "${CMAKE_CURRENT_SOURCE_DIR}/${man8_file}" ${man8_page}
 	DEPENDS ${man8_file}
-	)
-add_custom_target(man ALL DEPENDS ${man8_page})
+)
+
+add_custom_target(${man8_page} ALL DEPENDS ${man8_page})
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${man8_page}
-	DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man8/)
+DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man8/)
+endforeach()

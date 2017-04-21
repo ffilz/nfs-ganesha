@@ -1,0 +1,721 @@
+.Dd $Mdocdate: April 14 2017 $
+.Dt GANESHA_CONFIG 8
+.Os
+.Sh NAME
+.Nm ganesha_config
+.Nd NFS-Ganesha configuration file
+.Sh SYNOPSIS
+.Nm /etc/ganesha/ganesha/conf
+.Sh DESCRIPTION
+.Xr NFS-Ganesha
+obtains configuration data from the
+configuration file:
+.Pp
+.in +4n
+.nf
+/etc/ganesha/ganesha.conf
+.fi
+.in
+.Pp
+The configuration file constitues of following parts:
+.Bl -tag -width Ds
+.It Cm Comments
+Empty lines and lines starting with ‘#’ are comments.
+.Pp
+# This whole line is a comment
+.nf
+Protocol = TCP; # The rest of this line is a comment
+.fi
+.It Cm Blocks
+Related options are grouped together into
+.Dq blocks
+.D1
+A block is a name followed by parameters enclosed between
+.Dq {
+and
+.Dq }
+.D1
+A block can contain other sub blocks as well.
+.Pp
+.in +4n
+.nf
+Export
+{
+  Export_ID = 1;
+  FSAL {
+    Name = VFS:
+  }
+}
+.fi
+.in
+.Pp
+NOTE: FSAL is a sub block.
+.Pp
+Refer to
+.Cm BLOCKS
+section for list
+of blocks and options.
+.It Cm Options
+Configuration options can be of following types.
+.Pp
+.Bl -enum indent -compact
+.It
+Numeric
+.D1
+Numeric options can be defined in octal, decimal, or hexadecimal.
+The format follows ANSI C syntax.
+.Pp
+Examples:
+.D1
+mode = 07555;  # This is octal 0755, 493 (decimal)
+.Pp
+Numeric values can also be negated or logical NOT'd.
+.Pp
+Examples:
+.D1
+anonomousuid = -2; # this is a negative
+.D1
+mask = ~0xff; # Equivalent to 0xffffff00 (for 32 bit integers)
+.Pp
+.It
+Boolean
+.D1
+Possible values are true, false, yes and no.
+1 and 0 are not acceptable.
+.Pp
+.It
+List
+.D1
+The option can contain a list of possible applicable values.
+Protocols = 3, 4, 9p;
+.El
+.Pp
+
+.It Cm Including other config files
+Additional files can be referenced in a configuration using include statement.
+.Pp
+%include <filename>
+.Pp
+The included file is inserted into the configuration text in place of this line.
+The configuration following this line is resumed after the end of the included files.
+File inclusion can be to any depth.
+.Pp
+.in +4n
+.nf Examples:
+.nf
+     %include base.conf
+     %include "base.conf"
+.fi
+.in
+
+
+.Sh BLOCKS
+Supported config blocks and related options:
+.Bl -tag -width Ds
+.Ss NFS_CORE_PARAM {}
+Core parameters:
+.Bl -tag -width Ds
+.It Cm NFS_Port (uint16, range 0 to UINT16_MAX, default 2049)
+Port number used by NFS Protocol.
+.It Cm MNT_Port (uint16, range 0 to UINT16_MAX, default 0)
+Port number used by MNT Protocol.
+.It Cm NLM_Port (uint16, range 0 to UINT16_MAX, default 0)
+Port number used by NLM Protocol.
+.It Cm Bind_addr(IP4 addr, default 0.0.0.0)
+The address to which to bind for our listening port.
+IPv4 only, for now.
+.It Cm NFS_Program(uint32, range 1 to INT32_MAX, default 100003)
+RPC program number for NFS.
+.It Cm MNT_Program(uint32, range 1 to INT32_MAX, default 100005)
+RPC program number for MNT.
+.It Cm NLM_Program(uint32, range 1 to INT32_MAX, default 100021)
+RPC program number for NLM.
+.It Cm Nb_Worker(uint32, range 1 to 1024*128, default 256)
+Number of worker threads.
+.It Cm Drop_IO_Errors(bool, default false)
+For NFSv3, whether to drop rather than reply to requests
+yielding I/O errors. It results in client retry.
+.It Cm Drop_Inval_Errors(bool, default false)
+For NFSv3, whether to drop rather than reply to requests
+yielding invalid argument errors.  False by default and
+settable with Drop_Inval_Errors.
+.It Cm Drop_Delay_Errors(bool, default false)
+For NFSv3, whether to drop rather than reply to requests
+yielding delay errors.  False by default and settable with
+Drop_Delay_Errors.
+.It Cm Dispatch_Max_Reqs(uint32, range 1 to 1024*128*16, default 5000)
+Total number of requests to allow into the dispatcher at once.
+.It Cm Dispatch_Max_Reqs_Xprt(uint32, range 1 to 2048, default 512)
+Number of requests to allow into the dispatcher from one specific transport.
+.It Cm Plugins_Dir(path, default "/usr/lib64/ganesha")
+Path to the directory containing server specific modules
+.It Cm Enable_Fast_Stats(bool, default false)
+Whether to use fast stats.
+.It Cm  Short_File_Handle(bool, default false)
+Whether to use short NFS file handle to accommodate VMware
+NFS client. Enable this if you have a VMware NFSv3 client.
+VMware NFSv3 client has a max limit of 56 byte file handles!
+.It Cm Manage_Gids_Expiration(int64, range 0 to 7*24*60*60, default 30*60)
+How long the server will trust information it got by
+calling getgroups() when "Manage_Gids = TRUE" is
+used in a export entry.
+.It Cm heartbeat_freq(uint32, range 0 to 5000 default 1000)
+Frequency of dbus health heartbeat in ms.
+.It Cm Enable_NLM(bool, default true)
+Whether to support the Network Lock Manager protocol.
+.It Cm Decoder_Fridge_Expiration_Delay(int64, range 0 to 7200, default 600)
+How long (in seconds) to let unused decoder threads wait before
+exiting.
+.It Cm Decoder_Fridge_Block_Timeout(int64, range 0 to 7200, default 600)
+How long (in seconds) to wait for the decoder fridge to
+accept a task before erroring
+.It Cm Blocked_Lock_Poller_Interval(int64, range 0 to 180, default 10)
+Polling interval for blocked lock polling thread
+.It Cm NFS_Protocols(list, valid values [3, 4], default 3,4)
+
+.It Cm NSM_Use_Caller_Name(bool, default false)
+Whether to use the supplied name rather than the IP address in NSM operations.
+.It Cm Clustered(bool, default true)
+Whether this Ganesha is part of a cluster of Ganeshas.
+Its vendor specific option.
+.It Cm fsid_device(bool, default false)
+Whether to use device major/minor for fsid.
+.It Cm mount_path_pseudo(bool, default false)
+Whether to use Pseudo (true) or Path (false) for NFS v3 and 9P
+mounts.
+.El
+.Pp
+Parameters controlling TCP DRC behavior:
+.D1
+----------------------------------------
+.D1
+.Bl -tag -width Ds
+.It Cm DRC_Disabled(bool, default false)
+Whether to disable the DRC entirely.
+.It Cm TCP_Npart(uint32, range 1 to 20, default 1)
+Number of partitions in the tree for the TCP DRC.
+.It Cm DRC_TCP_Size(uint32, range 1 to 32767, default 1024)
+Maximum number of requests in a transport's DRC.
+.It Cm DRC_TCP_Cachesz(uint32, range 1 to 255, default 127)
+Number of entries in the O(1) front-end cache to a
+TCP Duplicate Request Cache.
+.It Cm DRC_TCP_Hiwat(uint32, range 1 to 256, default 64)
+High water mark for a TCP connection's DRC at
+which to start retiring entries if we can.
+.It Cm DRC_TCP_Recycle_Npart(uint32, range 1 to 20, default 7)
+Number of partitions in the recycle tree that holds
+per-connection DRCs so they can be used on reconnection (or
+recycled.)
+.It Cm DRC_TCP_Recycle_Expire_S(uint32, range 0 to 60*60, default 600)
+How long to wait (in seconds) before freeing the DRC of a
+disconnected client.
+.It Cm DRC_TCP_Checksum(bool, default true)
+Whether to use a checksum to match requests as well as the XID
+.El
+.Pp
+Parameters controlling UDP DRC behavior:
+.D1
+----------------------------------------
+.D1
+.Bl -tag -width Ds
+.It Cm DRC_UDP_Npart(uint32, range 1 to 100, default 7)
+Number of partitions in the tree for the UDP DRC.
+.It Cm DRC_UDP_Size(uint32, range 512, to 32768, default 32768)
+Maximum number of requests in the UDP DRC.
+.It Cm DRC_UDP_Cachesz(uint32, range 1 to 2047, default 599)
+Number of entries in the O(1) front-end cache to the
+UDP Duplicate Request Cache.
+.It Cm DRC_UDP_Hiwat(uint32, range 1 to 32768, default 16384)
+High water mark for the UDP DRC at which to start
+retiring entries if we can
+.It Cm DRC_UDP_Checksum(bool, default true)
+Whether to use a checksum to match requests as well as the XID.
+.El
+.Pp
+Parameters affecting the relation with TIRPC:
+.D1
+--------------------------------------------
+.D1
+.Bl -tag -width Ds
+.It Cm RPC_Debug_Flags(uint32, range 0 to UINT32_MAX, default 0)
+Debug flags for TIRPC. *SUPU: Check the default values.
+.It Cm RPC_Max_Connections(uint32, range 1 to 10000, default 1024)
+Maximum number of connections for TIRPC.
+.It Cm RPC_Idle_Timeout_S(uint32, range 0 to 60*60, default 300)
+Idle timeout (seconds). Default to 300 seconds.
+.It Cm MaxRPCSendBufferSize(uint32, range 1 to 1048576*9, default 1048576)
+Size of RPC send buffer.
+.It Cm MaxRPCRecvBufferSize(uint32, range 1 to 1048576*9, default 1048576)
+Size of RPC receive buffer.
+.It Cm RPC_Ioq_ThrdMax(uint32, range 1 to 1024*128 default 200)
+TIRPC ioq max simultaneous io threads
+.It Cm RPC_GSS_Npart(uint32, range 1 to 1021, default 13)
+Partitions in GSS ctx cache table
+.It Cm RPC_GSS_Max_Ctx(uint32, range 1 to 1048576, default 16384)
+Max GSS contexts in cache. Default 16k
+.It Cm RPC_GSS_Max_Gc(uint32, range 1 to 1048576, default 200)
+Max entries to expire in one idle check
+.El
+.Pp
+Parameters for TCP:
+.D1
+------------------
+.D1
+.Bl -tag -width Ds
+.It Cm Enable_TCP_keepalive(bool, default true)
+Whether tcp sockets should use SO_KEEPALIVE
+.It Cm TCP_KEEPCNT(UINT32, range 0 to 255, default 0 -> use system defaults)
+Maximum number of TCP probes before dropping the connection
+.It Cm TCP_KEEPIDLE(UINT32, range 0 to 65535, default 0 -> use system defautls)
+Idle time before TCP starts to send keepalive probes
+.It Cm TCP_KEEPINTVL(INT32, range 0 to 65535, default 0 -> use system defaults)
+Time between each keepalive probe
+.El
+.Ss NFS_IP_NAME {}
+.Bl -tag -width Ds
+.It Cm Index_Size(uint32, range 1 to 51, default 17)
+Configuration for hash table for NFS Name/IP map.
+.It Cm Expiration_Time(uint32, range 1 to 60*60*24, default 3600)
+Expiration time for ip-name mappings.
+.El
+.Ss NFS_KRB5 {}
+.Bl -tag -width Ds
+.It Cm PrincipalName(string, default "nfs")
+.It Cm KeytabPath(path, default "")
+Kerberos keytab.
+.It Cm CCacheDir(path, default "/var/run/ganesha")
+The ganesha credential cache.
+.It Cm Active_krb5(bool, default false)
+Whether to activate Kerberos 5. Defaults to true (if
+Kerberos support is compiled in)
+.El
+.Ss NFSv4 {}
+.Bl -tag -width Ds
+.It Cm Graceless(bool, default false)
+Whether to disable the NFSv4 grace period.
+.It Cm Lease_Lifetime(uint32, range 0 to 120, default 60)
+The NFSv4 lease lifetime.
+.It Cm Grace_Period(uint32, range 0 to 180, default 90)
+The NFS grace period.
+.It Cm DomainName(string, default "localdomain")
+Domain to use if we aren't using the nfsidmap.
+.It Cm IdmapConf(path, default "/etc/idmapd.conf")
+Path to the idmap configuration file.
+.It Cm UseGetpwnam(bool, default false if using idmap, true otherwise)
+Whether to use local password (PAM, on Linux) rather than
+nfsidmap.
+.It Cm Allow_Numeric_Owners(bool, default true)
+Whether to allow bare numeric IDs in NFSv4 owner and
+group identifiers.
+.It Cm Only_Numeric_Owners(bool, default false)
+Whether to ONLY use bare numeric IDs in NFSv4 owner and
+group identifiers.
+.It Cm Delegations(bool, default false)
+Whether to allow delegations.
+.It Cm Deleg_Recall_Retry_Delay(uint32_t, range 0 to 10, default 1)
+Delay after which server will retry a recall in case of failures
+.It Cm pnfs_mds(book, default false)
+Whether this a pNFS MDS server.
+.It Cm pnfs_ds(book, default false)
+Whether this a pNFS DS server.
+.El
+.Ss EXPORT_DEFAULTS {}
+These options are all "export permissions" options, and will be
+repeated in the EXPORT {} and EXPORT { CLIENT {} } blocks.
+
+These options will all be dynamically updateable.
+.Bl -tag -width Ds
+.It Cm Access_Type(enum, default None)
+Possible values:
+.D1
+None, RW, RO, MDONLY, MDONLY_RO
+.It Cm Protocols(enum list, default [3,4])
+Possible values:
+.D1
+3, 4, NFS3, NFS4, V3, V4, NFSv3, NFSv4, 9P
+.It Cm Transports(enum list, values [UDP, TCP, RDMA], default [UDP, TCP])
+.It Cm Anonymous_uid(anonid, range INT32MIN to UINT32MAX, default -2)
+.It Cm Anonymous_gid(anonid, range INT32MIN to UINT32MAX, default -2)
+.It Cm SecType(enum list, default [none, sys])
+Possible values:
+.D1
+none, sys, krb5, krb5i, krb5p
+.It Cm PrivilegedPort(bool, default false)
+.It Cm Manage_Gids(bool, default false)
+.It Cm Squash(enum, default root_sqaush)
+Possible values:
+.D1
+root, root_squash, rootsquash,
+rootid, root_id_squash, rootidsquash,
+all, all_squash, allsquash,
+all_anomnymous, allanonymous,
+no_root_squash, none, noidsquash
+* Each line of defaults above are synonyms
+.It Cm NFS_Commit(bool, default false)
+.It Cm Delegations(enum, default None)
+Possible values:
+.D1
+None, read, write, readwrite, r, w, rw
+.It Cm Attr_Expiration_Time(int32, range -1 to INT32_MAX, default 60)
+.El
+.Ss EXPORT { CLIENT  {} }
+Take all the "export permissions" options from EXPORT_DEFAULTS.
+The client lists are dynamically updateable.
+.Bl -tag -width Ds
+.It Cm Clients(client list, empty)
+Client list entries can take on one of the following forms:
+Match any client
+    @name       Netgroup name
+    x.x.x.x/y   IPv4 network address
+    wildcarded  If the string contains at least one ? or *
+                character (and is not simply "*"), the string is
+                used to pattern match host names. Note that [] may
+                also be used, but the pattern MUST have at least one
+                ? or *
+    hostname    Match a single client (match is by IP address, all
+                addresses returned by getaddrinfo will match, the
+                getaddrinfo call is made at config parsing time)
+    IP address  Match a single client
+.El
+.Ss EXPORT { FSAL {} }
+Name(string, default "VFS")
+.Bl -tag -width -Ds
+.It Cm FSAL_CEPH
+.Bl -tag -width -Ds
+.It Cm User_Id(string, no default)
+cephx userid used to open the MDS session. This string is
+what gets appended to "client.". If not set, the ceph client libs
+will sort this out based on ceph configuration.
+.It Cm Secret_Access_Key(string, no default)
+Key to use for the session (if any). If not set,
+then it uses the normal search path for cephx keyring files to find
+a key.
+.El
+.It Cm FSAL_RGW
+.Bl -tag -width -Ds
+.It Cm User_Id(string, no default)
+.It Cm Access_Key(string, no default)
+.It Cm Secret_Access_Key(string, no default)
+.El
+.It Cm FSAL_GLUSTER
+.Bl -tag -width -Ds
+.It Cm volume(string, no default, must be supplied)
+.It Cm hostname(string, no default, must be supplied)
+.It Cm volpath(path, default "/")
+.It Cm glfs_log(path, default "/tmp/gfapi.log")
+.El
+.It Cm FSAL_VFS
+.Bl -tag -width Ds
+.It Cm pnfs(bool, default false)
+.It Cm fsid_type(enum, values [None, One64, Major64, Two64, uuid, Two32, Dev,
+                            Device], no default)
+.El
+.It Cm FSAL_ZFS
+.Bl -tag -width -Ds
+.It Cm zpool(string, default "tank", must be supplied)
+.El
+.It Cm  FSAL PNFS
+.Bl -tag -width -Ds
+.It Cm Stripe_Unit(uint32, range 1024 to 1024*1024, default 8192)
+.It Cm pnfs_enabled(bool, default false)
+.El
+.It Cm FSAL_NULL:
+.El
+
+EXPORT { FSAL { FSAL {} } }
+describes the stacked FSAL's parameters
+
+.Ss LOG {}
+Default_log_level(token,default EVENT)
+.D1
+The log levels are:
+.D1
+NULL, FATAL, MAJ, CRIT, WARN, EVENT,
+INFO, DEBUG, MID_DEBUG, M_DBG,
+FULL_DEBUG, F_DBG
+
+.Bl -tag -width -Ds
+.It Cm LOG { COMPONENTS {} }
+These entries are of the form:
+COMPONENT = LEVEL;
+.Pp
+The components are:
+ALL, LOG, LOG_EMERG, MEMLEAKS, FSAL, NFSPROTO,
+NFS_V4, EXPORT, FILEHANDLE, DISPATCH, CACHE_INODE,
+CACHE_INODE_LRU, HASHTABLE, HASHTABLE_CACHE, DUPREQ,
+INIT, MAIN, IDMAPPER, NFS_READDIR, NFS_V4_LOCK,
+CONFIG, CLIENTID, SESSIONS, PNFS, RW_LOCK, NLM, RPC,
+NFS_CB, THREAD, NFS_V4_ACL, STATE, 9P, 9P_DISPATCH,
+FSAL_UP, DBUS
+
+Some synonyms are:
+
+FH = FILEHANDLE
+.D1
+HT = HASHTABLE
+.D1
+INODE_LRU = CACHE_INODE_LRU
+.D1
+INODE = CACHE_INODE
+.D1
+DISP = DISPATCH
+.D1
+LEAKS = MEMLEAKS
+.D1
+NFS3 = NFSPROTO
+.D1
+NFS4 = NFS_V4
+.D1
+HT_CACHE = HASHTABLE_CACHE
+.D1
+NFS_STARTUP = INIT
+.D1
+NFS4_LOCK = NFS_V4_LOCK
+.D1
+NFS4_ACL = NFS_V4_ACL
+.D1
+9P_DISP = 9P_DISPATCH
+
+The log levels are:
+NULL, FATAL, MAJ, CRIT, WARN, EVENT,
+INFO, DEBUG, MID_DEBUG, M_DBG,
+FULL_DEBUG, F_DBG
+.D1
+default EVENT
+
+.It Cm LOG { FACILITY {} }
+.Bl -tag width Ds
+.It Cm name(string, no default)
+.It Cm destination(string, no default, must be supplied)
+.It Cm max_level(token,default FULL_DEBUG)
+.D1
+The log levels are:
+.D1
+NULL, FATAL, MAJ, CRIT, WARN, EVENT,
+INFO, DEBUG, MID_DEBUG, M_DBG,
+FULL_DEBUG, F_DBG
+
+.It Cm headers(token, values [none, component, all], default all)
+.It Cm enable(token, values [idle, active, default], default idle)
+.El
+
+.It Cm LOG { FORMAT {} }
+-----------------
+.Bl -tag width Ds
+.It Cm date_format(enum,default ganesha)
+ Possible values:
+ ganesha, true, local, 8601, ISO-8601,
+ ISO 8601, ISO, syslog, syslog_usec,
+ false, none, user_defined
+.It Cm time_format(enum,default ganesha)
+ Possible values:
+ ganesha, true, local, 8601, ISO-8601,
+ ISO 8601, ISO, syslog, syslog_usec,
+ false, none, user_defined
+.It Cm user_date_format(string, no default)
+.It Cm user_time_format(string, no default)
+.It Cm EPOCH(bool, default true)
+.It Cm CLIENTIP(bool, default false)
+.It Cm HOSTNAME(bool, default true)
+.It Cm PROGNAME(bool, default true)
+.It Cm PID(bool, default true)
+.It Cm THREAD_NAME(bool, default true)
+.It Cm FILE_NAME(bool, default true)
+.It Cm LINE_NUM(bool, default true)
+.It Cm FUNCTION_NAME(bool, default true)
+.It Cm COMPONENT(bool, default true)
+.It Cm LEVEL(bool, default t
+.El
+.El
+.Ss CACHEINODE {}
+.Bl -tag -width Ds
+.It Cm NParts (uint32, range 1 to 32633, default 7)
+Partitions in the Cache_Inode tree.
+.It Cm Cache_Size(uint32, range 1 to UINT32_MAX, default 32633)
+Per-partition hash table size.
+.It Cm Use_Getattr_Directory_Invalidation(bool, default false)
+Use getattr for directory invalidation.
+.It Cm Dir_Max_Deleted(uint32, range 1 to UINT32_MAX, default 65536)
+Max size of per-directory cache of removed entries
+.It Cm Dir_Max(uint32, range 1 to UINT32_MAX, default 65536)
+Max size of per-directory dirent cache
+.It Cm Dir_Chunk(uint32, range 0 to UINT32_MAX, default 128)
+Size of per-directory dirent cache chunks, 0 means
+directory chunking is not enabled.
+.It Cm Entries_HWMark(uint32, range 1 to UINT32_MAX, default 100000)
+High water mark for cache entries.
+.It Cm LRU_Run_Interval(uint32, range 1 to 24 * 3600, default 90)
+Base interval in seconds between runs of the LRU cleaner
+thread.
+.It Cm Cache_FDs(bool, default true)
+Whether to cache open files
+.It Cm FD_Limit_Percent(uint32, range 0 to 100, default 99)
+The percentage of the system-imposed maximum of file
+descriptors at which Ganesha will deny requests.
+.It Cm FD_HWMark_Percent(uint32, range 0 to 100, default 90)
+The percentage of the system-imposed maximum of file
+descriptors above which Ganesha will make greater efforts
+at reaping.
+.It Cm FD_LWMark_Percent(uint32, range 0 to 100, default 50)
+The percentage of the system-imposed maximum of file
+descriptors below which Ganesha will not reap file
+descriptonot reap file descriptors.
+.It Cm Reaper_Work(uint32, range 1 to 2000, default 1000)
+Roughly, the amount of work to do on each pass through the
+thread under normal conditions.  (Ideally, a multiple of
+the number of lanes.)
+.It Cm Biggest_Window(uint32, range 1 to 100, default 40)
+The largest window (as a percentage of the system-imposed
+limit on FDs) of work that we will do in extremis.
+.It Cm Required_Progress(uint32, range 1 to 50, default 5)
+Percentage of progress toward the high water mark required
+in in a pass through the thread when in extremis
+.It Cm Futility_Count(uint32, range 1 to 50, default 8)
+Number of failures to approach the high watermark before
+we disable caching, when in extremis.
+.It Cm Retry_Readdir(bool, default false)
+Behavior for when readdir fails for some reason:
+true will ask the client to retry later, false will give the
+.El
+.Ss 9P {}
+.Bl -tag -width Ds
+.It Cm _9P_TCP_Port(uint16, range 1 to UINT16_MAX, default 564)
+.It Cm _9P_RDMA_Port(uint16, range 1 to UINT16_MAX, default 5640)
+.It Cm _9P_TCP_Msize(uint32, range 1024 to UINT32_MAX, default 65536)
+.It Cm _9P_RDMA_Msize(uint32, range 1024 to UINT32_MAX, default 1048576)
+.It Cm _9P_RDMA_Backlog(uint16, range 1 to UINT16_MAX, default 10)
+.It Cm _9P_RDMA_Inpool_size(uint16, range 1 to UINT16_MAX, default 64)
+.It Cm _9P_RDMA_Outpool_Size(uint16, range 1 to UINT16_MAX, default 32)
+.El
+.Ss CEPH {}
+.Bl -tag -width Ds
+.It Cm Ceph_Conf(path, default "")
+.It Cm umask(mode, range 0 to 0777, default 0)
+.It Cm xattr_access_rights(mode, range 0 to 0777, default 0)
+.El
+.Ss GPFS {}
+.Bl -tag -width Ds
+.It Cm link_support(bool, default true)
+.It Cm symlink_support(bool, default true)
+.It Cm cansettime(bool, default true)
+.It Cm umask(mode, range 0 to 0777, default 0)
+.It Cm auth_xdev_export(bool, default false)
+.It Cm xattr_access_rights(mode, range 0 to 0777, default 0400)
+.It Cm Delegations(enum, default read)
+Possible values:
+.D1
+None, read, write, readwrite, r, w, rw
+.It Cm pnfs_file(bool, default false)
+.It Cm fsal_trace(bool, default true)
+.It Cm fsal_grace(bool, default false)
+.El
+.Ss RGW {}
+The following configuration variables customize the
+	startup of the FSAL's radosgw instance.
+.Bl -tag -width Ds
+.It Cm ceph_conf
+optional full-path to the Ceph configuration
+          file (equivalent to passing "-c /path/to/ceph.conf" to any
+	  Ceph binary
+.It Cm name
+optional instance name (equivalent to passing
+"--name ceph.rgw.foohost" to the radosgw binary);  the value
+provided here should be the same as the section name (sans
+brackets) of the radosgw facility in the Ceph configuration
+file (which must exist)
+.It Cm cluster
+optional cluster name (equivalent to passing
+"--cluster foo" to any Ceph binary);  use of a non-default
+value for cluster name is uncommon, but can be verified by
+examining the startup options of Ceph binaries
+.It Cm init_args
+additional argument strings which will be
+passed verbatim to the radosgw instance startup process as
+if they had been given on the radosgw command line;  provided
+for customization in uncommon setups
+.El
+.Ss VFS {}
+.Bl -tag -width Ds
+.It Cm link_support(bool, default true)
+.It Cm symlink_support(bool, default true)
+.It Cm cansettime(bool, default true)
+.It Cm maxread(uint64, range 512 to 64*1024*1024, default 64*1024*1024)
+.It Cm maxwrite(uint64, range 512 to 64*1024*1024, default 64*1024*1024)
+.It Cm umask(mode, range 0 to 0777, default 0)
+.It Cm auth_xdev_export(bool, default false)
+.It Cm xattr_access_rights(mode, range 0 to 0777, default 0400)
+.El
+.Ss XFS {}
+.Bl -tag -width Ds
+.It Cm link_support(bool, default true)
+.It Cm symlink_support(bool, default true)
+.It Cm cansettime(bool, default true)
+.It Cm maxread(uint64, range 512 to 64*1024*1024, default 64*1024*1024)
+.It Cm maxwrite(uint64, range 512 to 64*1024*1024, default 64*1024*1024)
+.It Cm umask(mode, range 0 to 0777, default 0)
+.It Cm auth_xdev_export(bool, default false)
+.It Cm xattr_access_rights(mode, range 0 to 0777, default 0400)
+.El
+.Ss ZFS {}
+.Bl -tag -width Ds
+.It Cm link_support(bool, default true)
+.It Cm symlink_support(bool, default true)
+.It Cm cansettime(bool, default true)
+.It Cm maxread(uint64, range 512 to 64*1024*1024, default 64*1024*1024)
+.It Cm maxwrite(uint64, range 512 to 64*1024*1024, default 64*1024*1024)
+.It Cm umask(mode, range 0 to 0777, default 0)
+.It Cm auth_xdev_export(bool, default false)
+.It Cm xattr_access_rights(mode, range 0 to 0777, default 0400)
+.El
+.Ss PROXY {}
+.Bl -tag -width Ds
+.It Cm link_support(bool, default true)
+.It Cm symlink_support(bool, default true)
+.It Cm cansettime(bool, default true)
+.D1
+MAX_READ_WRITE_SIZE == 1MB
+.D1
+FSAL_MAXIOSIZE = 64 MB
+.D1
+SEND_RECV_HEADER_SPACE == 512 Bytes
+.It Cm maxread(uint64, default MAX_READ_WRITE_SIZE)
+range 512 to FSAL_MAXIOSIZE - SEND_RECV_HEADER_SPACE
+.It Cm maxwrite(uint64, default MAX_READ_WRITE_SIZE)
+range 512 to FSAL_MAXIOSIZE - SEND_RECV_HEADER_SPACE
+.It Cm umask(mode, range 0 to 0777, default 0)
+.It Cm auth_xdev_export(bool, default false)
+.It Cm xattr_access_rights(mode, range 0 to 0777, default 0400)
+.El
+.Ss PROXY { Remote_Server {} }
+.Bl -tag -width Ds
+.It Cm Retry_SleepTime(uint32, range 0 to 60, default 10)
+.It Cm Srv_Addr(ipv4_addr default "127.0.0.1")
+.It Cm NFS_Service(uint32, range 0 to UINT32_MAX, default 100003)
+.D1
+NFS_SendSize must be greater than maxwrite+SEND_RECV_HEADER_SPACE
+.D1
+NFS_RecvSize must be greater than maxread+SEND_RECV_HEADER_SPACE
+.D1
+MAX_READ_WRITE_SIZE == 1 MB
+.D1
+SEND_RECV_HEADER_SPACE == 512 Bytes
+.D1
+FSAL_MAXIOSIZE = 64 MB
+.It Cm NFS_SendSize(uint32, default MAX_READ_WRITE_SIZE + SEND_RECV_HEADER_SPACE)
+range 512 + SEND_RECV_HEADER_SPACE to FSAL_MAXIOSIZE
+.It Cm NFS_RecvSize(uint32, default MAX_READ_WRITE_SIZE + SEND_RECV_HEADER_SPACE)
+range 512 + SEND_RECV_HEADER_SPACE to FSAL_MAXIOSIZE
+.It Cm NFS_Port(uint16, range 0 to UINT16_MAX, default 2049)
+.It Cm Use_Privileged_Client_Port(bool, default false)
+.It Cm RPC_Client_Timeout(uint32, range 1 to 60*4, default 60)
+.It Cm Remote_PrincipalName(string, no default)
+.It Cm KeytabPath(string, default "/etc/krb5.keytab")
+.It Cm Credential_LifeTime(uint32, range 0 to 86400*2, default 86400)
+.It Cm Sec_Type(enum, values [krb5, krb5i, krb5p], default krb5)
+.It Cm Active_krb5(bool, default false)
+.It Cm Enable_Handle_Mapping(bool, default false)
+.It Cm HandleMap_DB_Dir(string, default "/var/ganesha/handlemap")
+.It Cm HandleMap_Tmp_Dir(string, default "/var/ganesha/tmp")
+.It Cm HandleMap_DB_Count(uint32, range 1 to 16, default 8)
+.It Cm HandleMap_HashTable_Size(uint32, range 1 to 127, default 103)
+.El
