@@ -23,6 +23,7 @@
  *
  */
 
+#undef _FILE_OFFSET_BITS
 #include "config.h"
 #include "fsal.h"
 #include "fsal_internal.h"

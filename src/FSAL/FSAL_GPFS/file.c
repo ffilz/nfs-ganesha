@@ -27,6 +27,7 @@
  * -------------
  */
 
+#undef _FILE_OFFSET_BITS
 #include <assert.h>
 #include "fsal.h"
 #include "FSAL/access_check.h"
