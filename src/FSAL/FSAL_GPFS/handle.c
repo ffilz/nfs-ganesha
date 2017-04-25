@@ -420,21 +420,16 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 				 struct gsh_buffdesc *link_content,
 				 bool refresh)
 {
-	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
-	int retval = 0;
 	struct gpfs_fsal_obj_handle *myself = NULL;
 	fsal_status_t status;
 
-	if (obj_hdl->type != SYMBOLIC_LINK) {
-		fsal_error = ERR_FSAL_FAULT;
-		goto out;
-	}
+	if (obj_hdl->type != SYMBOLIC_LINK)
+		return fsalstat(ERR_FSAL_FAULT, 0);
+
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 	if (refresh) {		/* lazy load or LRU'd storage */
-		size_t retlink;
+		size_t retlink = PATH_MAX - 1;
 		char link_buff[PATH_MAX];
-
-		retlink = PATH_MAX - 1;
 
 		if (myself->u.symlink.link_content != NULL) {
 			gsh_free(myself->u.symlink.link_content);
@@ -447,25 +442,19 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 		if (FSAL_IS_ERROR(status))
 			return status;
 
-		myself->u.symlink.link_content = gsh_malloc(retlink + 1);
+		link_buff[retlink] = '\0';
 
-		memcpy(myself->u.symlink.link_content, link_buff, retlink);
-		myself->u.symlink.link_content[retlink] = '\0';
+		myself->u.symlink.link_content = gsh_strdup(link_buff);
 		myself->u.symlink.link_size = retlink + 1;
 	}
-	if (myself->u.symlink.link_content == NULL) {
-		fsal_error = ERR_FSAL_FAULT;	/* probably a better error?? */
-		goto out;
-	}
+
+	if (myself->u.symlink.link_content == NULL)
+		return fsalstat(ERR_FSAL_FAULT, 0);
+
 	link_content->len = myself->u.symlink.link_size;
-	link_content->addr = gsh_malloc(link_content->len);
+	link_content->addr = gsh_strdup(myself->u.symlink.link_content);
 
-	memcpy(link_content->addr, myself->u.symlink.link_content,
-	       link_content->len);
-
- out:
-
-	return fsalstat(fsal_error, retval);
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
 static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
@@ -1218,7 +1207,6 @@ fsal_status_t gpfs_create_handle(struct fsal_export *exp_hdl,
 				 struct fsal_obj_handle **handle,
 				 struct attrlist *attrs_out)
 {
-	int retval = 0;
 	fsal_status_t status;
 	struct gpfs_fsal_obj_handle *hdl;
 	struct gpfs_file_handle *fh;
@@ -1269,19 +1257,11 @@ fsal_status_t gpfs_create_handle(struct fsal_export *exp_hdl,
 		return status;
 
 	if (attrib.type == SYMBOLIC_LINK) {	/* I could lazy eval this... */
-
 		status = fsal_readlink_by_handle(gpfs_fs->root_fd, fh,
 						 link_buff, &retlink);
 		if (FSAL_IS_ERROR(status))
 			return status;
 
-		if (retlink < 0 || retlink == PATH_MAX) {
-			retval = errno;
-			if (retlink == PATH_MAX)
-				retval = ENAMETOOLONG;
-			return fsalstat(posix2fsal_error(retval), retval);
-		}
-		link_buff[retlink] = '\0';
 		link_content = link_buff;
 	}
 
