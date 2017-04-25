@@ -192,6 +192,40 @@ static inline void glist_swap_lists(struct glist_head *l1,
 	l2->prev->next = l2;
 }
 
+/**
+ * @brief Split list l1 into l2 at l3.
+ *
+ * @note l2 is expected to be empty. l1 is expected to be non-empty (i.e.
+ * l3 is NOT l1).
+ *
+ * @param[in,out] l1  Source list.
+ * @param[in,out] l2  Destination list.
+ * @param[in,out] l3  List element in l1 to become first element in l2.
+ *
+ */
+static inline void glist_split(struct glist_head *l1,
+			       struct glist_head *l2,
+			       struct glist_head *l3)
+{
+	/* Set up l2 to contain l3 to the end. */
+	l2->next = l3;
+	l2->prev = l1->prev;
+
+	/* Fixup the last element of l1 to be the last element of l2, even if
+	 * it was l3.
+	 */
+	l2->prev->next = l2;
+
+	/* Now fixup l1 even if l3 was first element of l1. */
+	l1->prev = l3->prev;
+
+	/* Now fixup prev of l3, even if l3 was first element of l1. */
+	l3->prev->next = l1;
+
+	/* Now fixup l3 */
+	l3->prev = l2;
+}
+
 #define glist_for_each(node, head) \
 	for (node = (head)->next; node != head; node = node->next)
 
