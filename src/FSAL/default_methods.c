@@ -317,6 +317,7 @@ static fsal_status_t extract_handle(struct fsal_export *exp_hdl,
 
 static fsal_status_t create_handle(struct fsal_export *exp_hdl,
 				   struct gsh_buffdesc *hdl_desc,
+				   int flags,
 				   struct fsal_obj_handle **handle,
 				   struct attrlist *attrs_out)
 {

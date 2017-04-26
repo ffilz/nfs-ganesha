@@ -47,6 +47,14 @@
 #define FILE_HANDLE_V4_FLAG_DS	0x01 /*< handle for a DS */
 #define FH_FSAL_BIG_ENDIAN	0x40 /*< FSAL FH is big endian */
 
+/* This is a special define for handles that never leave the box, and so are
+ * always in host host order */
+#if (BYTE_ORDER == BIG_ENDIAN)
+#define FH_FSAL_HOST_ENDIAN	FH_FSAL_BIG_ENDIAN,
+#else
+#define FH_FSAL_HOST_ENDIAN	0
+#endif
+
 /**
  * @brief An NFSv3 handle
  *
