@@ -794,6 +794,7 @@ fsal_status_t nullfs_lookup_path(struct fsal_export *exp_hdl,
 
 fsal_status_t nullfs_create_handle(struct fsal_export *exp_hdl,
 				   struct gsh_buffdesc *hdl_desc,
+				   int flags,
 				   struct fsal_obj_handle **handle,
 				   struct attrlist *attrs_out)
 {
@@ -810,7 +811,7 @@ fsal_status_t nullfs_create_handle(struct fsal_export *exp_hdl,
 	op_ctx->fsal_export = export->export.sub_export;
 
 	status = export->export.sub_export->exp_ops.create_handle(
-			export->export.sub_export, hdl_desc, &sub_handle,
+			export->export.sub_export, hdl_desc, flags, &sub_handle,
 			attrs_out);
 
 	op_ctx->fsal_export = &export->export;

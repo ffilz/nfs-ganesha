@@ -21,6 +21,7 @@ fsal_status_t tank_lookup_path(struct fsal_export *exp_hdl,
 
 fsal_status_t tank_create_handle(struct fsal_export *exp_hdl,
 				 struct gsh_buffdesc *hdl_desc,
+				 int flags,
 				 struct fsal_obj_handle **handle,
 				 struct attrlist *attrs_out);
 

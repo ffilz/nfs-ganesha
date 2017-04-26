@@ -88,6 +88,7 @@ fsal_status_t vfs_lookup_path(struct fsal_export *exp_hdl,
 
 fsal_status_t vfs_create_handle(struct fsal_export *exp_hdl,
 				struct gsh_buffdesc *hdl_desc,
+				int bo_flags,
 				struct fsal_obj_handle **handle,
 				struct attrlist *attrs_out);
 

@@ -1855,6 +1855,7 @@ fsal_status_t mdcache_lookup_path(struct fsal_export *exp_hdl,
  *
  * @param[in]     exp_hdl   The export in which to create the handle
  * @param[in]     hdl_desc  Buffer descriptor for the "wire" handle
+ * @param[in]	  flags	    Endianness flags
  * @param[out]    handle    FSAL object handle
  * @param[in,out] attrs_out Optional attributes for newly created object
  *
@@ -1862,23 +1863,19 @@ fsal_status_t mdcache_lookup_path(struct fsal_export *exp_hdl,
  */
 fsal_status_t mdcache_create_handle(struct fsal_export *exp_hdl,
 				   struct gsh_buffdesc *hdl_desc,
+				   int flags,
 				   struct fsal_obj_handle **handle,
 				   struct attrlist *attrs_out)
 {
 	struct mdcache_fsal_export *export =
 		container_of(exp_hdl, struct mdcache_fsal_export, export);
-	struct fsal_export *sub_export = export->export.sub_export;
-	mdcache_key_t key;
 	mdcache_entry_t *entry;
 	fsal_status_t status;
 
 	*handle = NULL;
-	key.fsal = sub_export->fsal;
 
-	(void) cih_hash_key(&key, sub_export->fsal, hdl_desc,
-			    CIH_HASH_KEY_PROTOTYPE);
-
-	status = mdcache_locate_keyed(&key, export, &entry, attrs_out);
+	status = mdcache_locate_wire(hdl_desc, export, flags, &entry,
+				     attrs_out);
 	if (FSAL_IS_ERROR(status))
 		return status;
 

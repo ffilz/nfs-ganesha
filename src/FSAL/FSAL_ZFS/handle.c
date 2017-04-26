@@ -1073,6 +1073,7 @@ void zfs_handle_ops_init(struct fsal_obj_ops *ops)
 
 fsal_status_t tank_create_handle(struct fsal_export *exp_hdl,
 				 struct gsh_buffdesc *hdl_desc,
+				 int flags,
 				 struct fsal_obj_handle **handle,
 				 struct attrlist *attrs_out)
 {
