@@ -278,8 +278,8 @@ struct mdcache_fsal_obj_handle {
 			struct state_hdl dhdl; /**< Storage for dir state */
 			/** Number of known active children */
 			uint32_t nbactive;
-			/** The parent of this directory ('..') */
-			mdcache_key_t parent;
+			/** The parent host-handle of this directory ('..') */
+			struct gsh_buffdesc parent;
 			/** The first dirent cookie in this directory.
 			 *  0 if not known.
 			 */
@@ -562,16 +562,12 @@ mdcache_key_dup(mdcache_key_t *tgt,
 static inline void
 mdc_dir_add_parent(mdcache_entry_t *entry, mdcache_entry_t *mdc_parent)
 {
-	if (entry->fsobj.fsdir.parent.kv.len == 0) {
-		/* The parent key must be a full wire handle so that
+	if (entry->fsobj.fsdir.parent.len == 0) {
+		/* The parent key must be a host-handle so that
 		 * create_handle() works in all cases.
 		 */
 		mdc_get_parent_handle(mdc_cur_export(), entry,
 				      mdc_parent->sub_handle);
-#if 0
-		mdcache_key_dup(&entry->fsobj.fsdir.parent,
-				&mdc_parent->fh_hk.key);
-#endif
 	}
 }
 
@@ -590,6 +586,22 @@ mdcache_key_delete(mdcache_key_t *key)
 	key->kv.len = 0;
 	gsh_free(key->kv.addr);
 	key->kv.addr = NULL;
+}
+
+/* Create a copy of host-handle */
+static inline void
+mdcache_copy_handle(struct gsh_buffdesc *parent, struct gsh_buffdesc *fh_desc)
+{
+	parent->len = fh_desc->len;
+	parent->addr = gsh_malloc(fh_desc->len);
+}
+
+/* Delete stored parent host-handle */
+static inline void
+mdcache_free_handle(struct gsh_buffdesc *parent)
+{
+	parent->len = 0;
+	gsh_free(parent->addr);
 }
 
 /**
