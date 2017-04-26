@@ -409,8 +409,9 @@ fsal_status_t mdcache_new_entry(struct mdcache_fsal_export *export,
 				mdcache_entry_t **entry,
 				struct state_t *state);
 fsal_status_t mdcache_find_keyed(mdcache_key_t *key, mdcache_entry_t **entry);
-fsal_status_t mdcache_locate_keyed(mdcache_key_t *key,
+fsal_status_t mdcache_locate_wire(struct gsh_buffdesc *hdl_desc,
 				   struct mdcache_fsal_export *export,
+				   int flags,
 				   mdcache_entry_t **entry,
 				   struct attrlist *attrs_out);
 fsal_status_t mdc_try_get_cached(mdcache_entry_t *mdc_parent, const char *name,
@@ -819,6 +820,7 @@ fsal_status_t mdcache_lookup_path(struct fsal_export *exp_hdl,
 
 fsal_status_t mdcache_create_handle(struct fsal_export *exp_hdl,
 				   struct gsh_buffdesc *hdl_desc,
+				   int flags,
 				   struct fsal_obj_handle **handle,
 				   struct attrlist *attrs_out);
 

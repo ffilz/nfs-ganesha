@@ -217,7 +217,7 @@ struct state_t;
  * stored or looked up in the cache.
  *
  * The invariant to be maintained is that given an @c fsal_obj_handle,
- * fh, extract_handle(digest_handle(fh)) = handle_to_key(fh).
+ * fh, extract_handle(handle_digest(fh)) = handle_to_key(fh).
  *
  * History and Details
  * ===================
@@ -762,6 +762,7 @@ struct export_ops {
  *                        length of the data contained in the buffer,
  *                        @c fh_desc->len must be updated to the correct
  *                        size.
+ * @param[in]     flags   Endianness flags for handle
  *
  * @return FSAL type.
  */
@@ -789,6 +790,7 @@ struct export_ops {
  *
  * @param[in]     exp_hdl   The export in which to create the handle
  * @param[in]     hdl_desc  Buffer descriptor for the "wire" handle
+ * @param[in]     flags     Endianness flags for handle
  * @param[out]    handle    FSAL object handle
  * @param[in,out] attrs_out Optional attributes for newly created object
  *
@@ -798,6 +800,7 @@ struct export_ops {
  */
 	 fsal_status_t (*create_handle)(struct fsal_export *exp_hdl,
 					struct gsh_buffdesc *hdl_desc,
+					int flags,
 					struct fsal_obj_handle **handle,
 					struct attrlist *attrs_out);
 /**@}*/

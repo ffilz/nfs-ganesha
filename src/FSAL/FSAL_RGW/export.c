@@ -179,12 +179,14 @@ static fsal_status_t extract_handle(struct fsal_export *exp_hdl,
  *
  * @param[in]  export_pub Public export
  * @param[in]  desc       Handle buffer descriptor
+ * @param[in]  flags	  Endianness flags
  * @param[out] pub_handle The created handle
  *
  * @return FSAL status.
  */
 static fsal_status_t create_handle(struct fsal_export *export_pub,
 				   struct gsh_buffdesc *desc,
+				   int flags,
 				   struct fsal_obj_handle **pub_handle,
 				   struct attrlist *attrs_out)
 {

@@ -286,20 +286,6 @@ mdc_get_parent_handle(struct mdcache_fsal_export *export,
 	if (FSAL_IS_ERROR(status))
 		return status;
 
-	/* Make sure wire handle is usable */
-	subcall_raw(export,
-		    status = sub_export->exp_ops.extract_handle(sub_export,
-					FSAL_DIGEST_NFSV4, &fh_desc,
-#if (BYTE_ORDER == BIG_ENDIAN)
-					FH_FSAL_BIG_ENDIAN
-#else
-					0
-#endif
-					);
-		   );
-	if (FSAL_IS_ERROR(status))
-		return status;
-
 	/* And store in the parent pointer */
 	cih_hash_key(&entry->fsobj.fsdir.parent, sub_export->fsal, &fh_desc,
 		     CIH_HASH_NONE);
@@ -835,14 +821,15 @@ mdcache_find_keyed(mdcache_key_t *key, mdcache_entry_t **entry)
 }
 
 /**
- * @brief Find or create a cache entry by it's key
+ * @brief Find or create a cache entry by it's wire handle
  *
- * Locate a cache entry by key.  If it is not in the cache, an attempt will be
- * made to create it and insert it in the cache.
+ * Locate a cache entry by wire handle.  If it is not in the cache, an attempt
+ * will be made to create it and insert it in the cache.
  *
- * @param[in]     key       Cache key to use for lookup
+ * @param[in]     hdl_desc  Wire key to look up
  * @param[in]     export    Export for this cache
  * @param[out]    entry     Entry, if found
+ * @param[in]	  flags	    Endianness flags
  * @param[in,out] attrs_out Optional attributes for newly created object
  *
  * @note This returns an INITIAL ref'd entry on success
@@ -850,17 +837,32 @@ mdcache_find_keyed(mdcache_key_t *key, mdcache_entry_t **entry)
  * @return Status
  */
 fsal_status_t
-mdcache_locate_keyed(mdcache_key_t *key,
-		     struct mdcache_fsal_export *export,
-		     mdcache_entry_t **entry,
-		     struct attrlist *attrs_out)
+mdcache_locate_wire(struct gsh_buffdesc *hdl_desc,
+		    struct mdcache_fsal_export *export,
+		    int flags,
+		    mdcache_entry_t **entry,
+		    struct attrlist *attrs_out)
 {
 	fsal_status_t status;
 	struct fsal_obj_handle *sub_handle;
-	struct fsal_export *sub_export;
+	struct fsal_export *sub_export = export->export.sub_export;
 	struct attrlist attrs;
+	mdcache_key_t key;
 
-	status = mdcache_find_keyed(key, entry);
+	/* Get a key for lookup */
+	status = export->export.exp_ops.extract_handle(&export->export,
+				       FSAL_DIGEST_NFSV4, hdl_desc, flags);
+	if (FSAL_IS_ERROR(status)) {
+		LogFullDebug(COMPONENT_CACHE_INODE, "extract_handle failed %s",
+			     fsal_err_txt(status));
+		return status;
+	}
+
+	key.fsal = sub_export->fsal;
+	(void) cih_hash_key(&key, sub_export->fsal, hdl_desc,
+			    CIH_HASH_KEY_PROTOTYPE);
+
+	status = mdcache_find_keyed(&key, entry);
 
 	if (!FSAL_IS_ERROR(status)) {
 		status = get_optional_attrs(&(*entry)->obj_handle, attrs_out);
@@ -882,7 +884,8 @@ mdcache_locate_keyed(mdcache_key_t *key,
 
 	subcall_raw(export,
 		    status = sub_export->exp_ops.create_handle(sub_export,
-							       &key->kv,
+							       hdl_desc,
+							       flags,
 							       &sub_handle,
 							       &attrs)
 	       );
@@ -1082,8 +1085,9 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "Lookup parent (..) of %p", mdc_parent);
 		/* ".." doesn't end up in the cache */
-		status =  mdcache_locate_keyed(&mdc_parent->fsobj.fsdir.parent,
-					       export, new_entry, attrs_out);
+		status =  mdcache_locate_wire(
+			&mdc_parent->fsobj.fsdir.parent.kv, export,
+			FH_FSAL_HOST_ENDIAN, new_entry, attrs_out);
 		goto out;
 	}
 
