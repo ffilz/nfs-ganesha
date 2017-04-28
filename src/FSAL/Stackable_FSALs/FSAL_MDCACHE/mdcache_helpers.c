@@ -143,6 +143,7 @@ static mdcache_entry_t *mdcache_alloc_handle(
 	result->mde_flags = 0;
 	result->icreate_refcnt = 0;
 	glist_init(&result->export_list);
+	atomic_store_int32_t(&result->first_export_id, -1);
 
 	return result;
 }
@@ -177,10 +178,10 @@ void mdc_clean_entry(mdcache_entry_t *entry)
 		PTHREAD_RWLOCK_unlock(&export->mdc_exp_lock);
 	}
 
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-
 	/* Clear out first_export */
-	atomic_store_voidptr(&entry->first_export, NULL);
+	atomic_store_int32_t(&entry->first_export_id, -1);
+
+	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 
 	if (entry->obj_handle.type == DIRECTORY) {
 		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
@@ -240,7 +241,8 @@ mdc_check_mapping(mdcache_entry_t *entry, bool new_entry)
 	}
 
 	/* Fast path check to see if this export is already mapped */
-	if (atomic_fetch_voidptr(&entry->first_export) == export)
+	if (atomic_fetch_int32_t(&entry->first_export_id) ==
+	    (int32_t) op_ctx->ctx_export->export_id)
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 
 	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
@@ -294,8 +296,10 @@ map_it:
 	expmap = gsh_calloc(1, sizeof(*expmap));
 
 	/* If export_list is empty, store this export as first */
-	if (glist_empty(&entry->export_list))
-		atomic_store_voidptr(&entry->first_export, export);
+	if (glist_empty(&entry->export_list)) {
+		atomic_store_int32_t(&entry->first_export_id,
+				     (int32_t) op_ctx->ctx_export->export_id);
+	}
 
 	expmap->export = export;
 	expmap->entry = entry;
