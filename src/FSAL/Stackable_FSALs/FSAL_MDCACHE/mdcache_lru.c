@@ -369,7 +369,51 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 
 	/* Free SubFSAL resources */
 	if (entry->sub_handle) {
-		/* Make sure any FSAL global file descriptor is closed. */
+		/* Don't trust the current op_ctx, make sure we use a valid
+		 * op context for the entry since we might not be called with
+		 * an op context where this entry belongs to the current
+		 * export.
+		 */
+		struct req_op_context ctx = {0};
+		struct req_op_context *saved_ctx = op_ctx;
+		int32_t export_id;
+		struct gsh_export *export;
+
+		op_ctx = &ctx;
+
+		/* Get a reference to the first export and build an op context
+		 * with it.
+		 */
+		export_id = atomic_fetch_int32_t(&entry->first_export_id);
+
+		if (export_id < 0) {
+			/* No export currently mapped, assume unexport is in
+			 * progress (in which case the open file will be closed
+			 * or has already been closed) or that the object is
+			 * still in the process of being created and hasn't had
+			 * any exports associated in which case there can't be
+			 * any open file.
+			 */
+			goto no_close;
+		}
+
+		export = get_gsh_export(export_id);
+
+		if (export == NULL) {
+			/* The first export_id wasn't found. This means an
+			 * unexport s in progress (in which case the open file
+			 * will be closed or has already been closed).
+			 */
+			goto no_close;
+		}
+
+		op_ctx->fsal_export = export->fsal_export;
+		op_ctx->ctx_export = export;
+
+		/* Make sure any FSAL global file descriptor is closed.
+		 * Don't bother with the content_lock since we have exclusive
+		 * ownership of this entry.
+		 */
 		status = fsal_close(&entry->obj_handle);
 
 		if (FSAL_IS_ERROR(status)) {
@@ -378,10 +422,15 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 				fsal_err_txt(status));
 		}
 
+		put_gsh_export(export);
+
+no_close:
+
 		subcall(
 			entry->sub_handle->obj_ops.release(entry->sub_handle)
 		       );
 		entry->sub_handle = NULL;
+		op_ctx = saved_ctx;
 	}
 
 	/* Done with the attrs */
@@ -636,8 +685,6 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 	uint32_t refcnt;
 	struct req_op_context ctx = {0};
 	struct req_op_context *saved_ctx = op_ctx;
-	struct mdcache_fsal_export *exp;
-	struct fsal_export *export;
 	bool not_support_ex;
 
 	op_ctx = &ctx;
@@ -657,6 +704,8 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 	 * the iteration also adjusts glist and (in particular) glistn */
 	glist_for_each_safe(qlane->iter.glist, qlane->iter.glistn, &q->q) {
 		struct lru_q *q;
+		int32_t export_id;
+		struct gsh_export *export;
 
 		/* check per-lane work */
 		if (workdone >= lru_state.per_lane_work)
@@ -689,13 +738,34 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 		 * entry */
 		QUNLOCK(qlane);
 
-		/** @todo FSF: hmm, this looks hairy, we need a reference
-		 *             to the export somehow?
+		/* Get a reference to the first export and build an op context
+		 * with it.
 		 */
-		exp = atomic_fetch_voidptr(&entry->first_export);
-		export = &exp->export;
-		op_ctx->fsal_export = export;
-		op_ctx->ctx_export = NULL;
+		export_id = atomic_fetch_int32_t(&entry->first_export_id);
+
+		if (export_id < 0) {
+			/* No export currently mapped, assume unexport is in
+			 * progress (in which case the open file will be closed
+			 * or has already been closed) or that the object is
+			 * still in the process of being created and hasn't had
+			 * any exports associated in which case there can't be
+			 * any open file.
+			 */
+			goto no_close;
+		}
+
+		export = get_gsh_export(export_id);
+
+		if (export == NULL) {
+			/* The first export_id wasn't found. This means an
+			 * unexport s in progress (in which case the open file
+			 * will be closed or has already been closed).
+			 */
+			goto no_close;
+		}
+
+		op_ctx->fsal_export = export->fsal_export;
+		op_ctx->ctx_export = export;
 
 		not_support_ex = !entry->obj_handle.fsal->m_ops.support_ex(
 							&entry->obj_handle);
@@ -722,6 +792,12 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 			++(*totalclosed);
 			++closed;
 		}
+
+		put_gsh_export(export);
+		op_ctx->fsal_export = NULL;
+		op_ctx->ctx_export = NULL;
+
+no_close:
 
 		QLOCK(qlane); /* QLOCKED */
 		mdcache_lru_unref(entry, LRU_UNREF_QLOCKED);

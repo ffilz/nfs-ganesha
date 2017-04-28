@@ -95,12 +95,7 @@ static void mdcache_unexport(struct fsal_export *exp_hdl,
 	mdcache_entry_t *entry;
 	struct entry_export_map *expmap;
 	fsal_status_t status;
-	bool rc;
-
-	/* First unexport for the sub-FSAL */
-	subcall_raw(exp,
-		sub_export->exp_ops.unexport(sub_export, root_entry->sub_handle)
-	);
+	bool rc, not_support_ex;
 
 	/* Next, clean up our cache entries on the export */
 	while (true) {
@@ -124,6 +119,29 @@ static void mdcache_unexport(struct fsal_export *exp_hdl,
 			continue;
 		}
 
+		/* First we must close the file if necessary. */
+		not_support_ex = !entry->obj_handle.fsal->m_ops.support_ex(
+							&entry->obj_handle);
+
+		if (not_support_ex) {
+			/* Acquire the content lock first; we may need to look
+			 * at fds and close it.
+			 */
+			PTHREAD_RWLOCK_wrlock(&entry->content_lock);
+		}
+
+		/* Make sure any FSAL global file descriptor is closed. */
+		status = fsal_close(&entry->obj_handle);
+
+		if (not_support_ex) {
+			/* Release the content lock. */
+			PTHREAD_RWLOCK_unlock(&entry->content_lock);
+		}
+
+		if (FSAL_IS_ERROR(status)) {
+			LogCrit(COMPONENT_CACHE_INODE_LRU,
+				"Error closing file in LRU thread.");
+		}
 
 		/* Must get attr_lock before mdc_exp_lock */
 		PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
@@ -136,7 +154,7 @@ static void mdcache_unexport(struct fsal_export *exp_hdl,
 					   export_per_entry);
 		if (expmap == NULL) {
 			/* Clear out first export pointer */
-			atomic_store_voidptr(&entry->first_export, NULL);
+			atomic_store_int32_t(&entry->first_export_id, -1);
 			/* We must not hold entry->attr_lock across
 			 * try_cleanup_push (LRU lane lock order) */
 			PTHREAD_RWLOCK_unlock(&exp->mdc_exp_lock);
@@ -147,8 +165,9 @@ static void mdcache_unexport(struct fsal_export *exp_hdl,
 			mdcache_lru_cleanup_try_push(entry);
 		} else {
 			/* Make sure first export pointer is still valid */
-			atomic_store_voidptr(&entry->first_export,
-					     expmap->export);
+			atomic_store_int32_t(
+				&entry->first_export_id,
+				(int32_t) expmap->export->export.export_id);
 
 			PTHREAD_RWLOCK_unlock(&exp->mdc_exp_lock);
 			PTHREAD_RWLOCK_unlock(&entry->attr_lock);
@@ -157,6 +176,11 @@ static void mdcache_unexport(struct fsal_export *exp_hdl,
 		/* Release above ref */
 		mdcache_put(entry);
 	};
+
+	/* Last unexport for the sub-FSAL */
+	subcall_raw(exp,
+		sub_export->exp_ops.unexport(sub_export, root_entry->sub_handle)
+	);
 
 	/* Unhash the root object */
 	rc = cih_remove_checked(root_entry);
