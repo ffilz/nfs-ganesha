@@ -1147,12 +1147,13 @@ mdcache_entry_t *alloc_cache_entry(void)
  * this function always returns an entry with two references (one for the
  * sentinel, one to allow the caller's use.)
  *
- * @return a usable entry
+ * @return a usable entry or NULL if unexport is in progress.
  */
 mdcache_entry_t *mdcache_lru_get(void)
 {
 	mdcache_lru_t *lru;
 	mdcache_entry_t *nentry = NULL;
+	fsal_status_t status;
 
 	lru = lru_try_reap_entry();
 	if (lru) {
@@ -1177,6 +1178,25 @@ mdcache_entry_t *mdcache_lru_get(void)
 	tracepoint(mdcache, mdc_lru_get,
 		   __func__, __LINE__, nentry, nentry->lru.refcnt);
 #endif
+
+	/* Map the export before we put this entry into the LRU, but after it's
+	 * well enough set up to be able to be unrefed by unexport should there
+	 * be a race.
+	 */
+	status = mdc_check_mapping(nentry);
+
+	if (unlikely(FSAL_IS_ERROR(status))) {
+		/* The current export is in process to be unexported, don't
+		 * create new mdcache entries.
+		 */
+		LogDebug(COMPONENT_CACHE_INODE,
+			 "Trying to allocate a new entry %p for export %p that is in the process of being unexported",
+			 nentry, mdc_cur_export());
+		mdcache_lru_clean(nentry);
+		pool_free(mdcache_entry_pool, nentry);
+		return NULL;
+	}
+
 	/* Enqueue. */
 	lru_insert_entry(nentry, &LRU[nentry->lru.lane].L1, LRU_LRU);
 
