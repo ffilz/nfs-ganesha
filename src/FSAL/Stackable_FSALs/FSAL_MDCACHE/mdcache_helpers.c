@@ -203,6 +203,9 @@ void mdc_clean_entry(mdcache_entry_t *entry)
  *
  * If the entry does not have a mapping for the active export, add one.
  *
+ * If an unexport is in progress, return ERR_FSAL_STALE to prevent the caller
+ * from proceeding.
+ *
  * @param[in]  entry     The cache inode
  * @param[in]  export    The active export
  *
@@ -210,7 +213,7 @@ void mdc_clean_entry(mdcache_entry_t *entry)
  *
  */
 
-static void
+static fsal_status_t
 mdc_check_mapping(mdcache_entry_t *entry)
 {
 	struct mdcache_fsal_export *export = mdc_cur_export();
@@ -218,10 +221,17 @@ mdc_check_mapping(mdcache_entry_t *entry)
 	struct entry_export_map *expmap;
 	bool try_write = false;
 
+	if (atomic_fetch_uint8_t(&export->flags) & MDC_UNEXPORT) {
+		/* In the process of unexporting, don't check export mapping.
+		 * Return a stale error.
+		 */
+		return fsalstat(ERR_FSAL_STALE, ESTALE);
+	}
+
 	/* Fast path check to see if this export is already mapped */
 	if (atomic_fetch_int32_t(&entry->first_export_id) ==
 	    (int32_t) op_ctx->ctx_export->export_id)
-		return;
+		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 
 	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
 
@@ -235,7 +245,7 @@ again:
 		/* Found active export on list */
 		if (expmap->export == export) {
 			PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-			return;
+			return fsalstat(ERR_FSAL_NO_ERROR, 0);
 		}
 	}
 
@@ -252,9 +262,24 @@ again:
 	/* We have the write lock and did not find
 	 * this export on the list, add it.
 	 */
-	expmap = gsh_calloc(1, sizeof(*expmap));
-
 	PTHREAD_RWLOCK_wrlock(&export->mdc_exp_lock);
+
+	/* Check for unexport again, this prevents an interlock issue where
+	 * we passed above, but now unexport is in progress. This is required
+	 * because the various locks are acquired, dropped, and re-acquired
+	 * in such a way that unexport may have started after we made the
+	 * check at the top.
+	 */
+	if (atomic_fetch_uint8_t(&export->flags) & MDC_UNEXPORT) {
+		/* In the process of unexporting, don't allow creating a new
+		 * export mapping. Return a stale error.
+		 */
+		PTHREAD_RWLOCK_unlock(&export->mdc_exp_lock);
+		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+		return fsalstat(ERR_FSAL_STALE, ESTALE);
+	}
+
+	expmap = gsh_calloc(1, sizeof(*expmap));
 
 	/* If export_list is empty, store this export as first */
 	if (glist_empty(&entry->export_list)) {
@@ -270,6 +295,7 @@ again:
 
 	PTHREAD_RWLOCK_unlock(&export->mdc_exp_lock);
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
 fsal_status_t
@@ -623,6 +649,21 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 	/* Validate the attributes we just set. */
 	mdc_fixup_md(nentry, &nentry->attrs);
 
+	/* Map this new entry and the active export, do this before hashing
+	 * because error exit is prepared to remove export mapping but not
+	 * unhash.
+	 */
+	status = mdc_check_mapping(nentry);
+
+	if (unlikely(FSAL_IS_ERROR(status))) {
+		/* The export is being removed. */
+		if (attrs_out != NULL) {
+			/* Release the attrs we just copied. */
+			fsal_release_attrs(attrs_out);
+		}
+		goto out;
+	}
+
 	/* Hash and insert entry, after this would need attr_lock to
 	 * access attributes.
 	 */
@@ -639,9 +680,6 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 		}
 		goto out;
 	}
-
-	/* Map this new entry and the active export */
-	mdc_check_mapping(nentry);
 
 	if (isFullDebug(COMPONENT_CACHE_INODE)) {
 		char str[LOG_BUFF_LEN] = "\0";
@@ -810,12 +848,24 @@ mdcache_find_keyed(mdcache_key_t *key, mdcache_entry_t **entry)
 			return status;
 		}
 
+		status = mdc_check_mapping(*entry);
+
+		if (unlikely(FSAL_IS_ERROR(status))) {
+			/* Export is in the process of being removed, don't
+			 * add this entry to the export, and bail out of the
+			 * operation sooner than later.
+			 */
+			mdcache_put(*entry);
+			*entry = NULL;
+			return status;
+		}
+
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "Found entry %p",
 			     entry);
 
-		mdc_check_mapping(*entry);
 		(void)atomic_inc_uint64_t(&cache_stp->inode_hit);
+
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 	}
 

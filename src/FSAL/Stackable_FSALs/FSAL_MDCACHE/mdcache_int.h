@@ -43,6 +43,8 @@
 
 typedef struct mdcache_fsal_obj_handle mdcache_entry_t;
 
+#define MDC_UNEXPORT 1
+
 /*
  * MDCACHE internal export
  */
@@ -57,6 +59,8 @@ struct mdcache_fsal_export {
 	struct glist_head entry_list;
 	/** Lock protecting entry_list */
 	pthread_rwlock_t mdc_exp_lock;
+	/** Flags for the export. */
+	uint8_t flags;
 };
 
 /**
