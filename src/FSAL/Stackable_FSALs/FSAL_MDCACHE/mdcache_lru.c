@@ -393,7 +393,11 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 	/* Clean out the export mapping before deconstruction */
 	mdc_clean_entry(entry);
 
-	/* Finalize last bits of the cache entry */
+	/* Finalize last bits of the cache entry, note that if we aborted a new
+	 * entry before the key was copied, we are still ok since
+	 * mdcache_key_delete is ok to call with a NULL key (it doesn't
+	 * dereference the key, and gsh_free does nothing with a NULL pointer).
+	 */
 	mdcache_key_delete(&entry->fh_hk.key);
 	PTHREAD_RWLOCK_destroy(&entry->content_lock);
 	PTHREAD_RWLOCK_destroy(&entry->attr_lock);
