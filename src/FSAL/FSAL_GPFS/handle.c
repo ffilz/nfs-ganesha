@@ -495,14 +495,17 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	struct dirent64 *dentry;
 	char buf[BUF_SIZE];
 	struct gpfs_filesystem *gpfs_fs;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	if (whence != NULL)
 		seekloc = (off_t) *whence;
 
 	myself = container_of(dir_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-	gpfs_fs = dir_hdl->fs->private_data;
-
-	status = fsal_internal_handle2fd(gpfs_fs->root_fd, myself->handle,
+	if (export_fd < 1) {
+		gpfs_fs = dir_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
+	status = fsal_internal_handle2fd(export_fd, myself->handle,
 					 &dirfd, O_RDONLY | O_DIRECTORY, 0);
 
 	if (dirfd < 0)

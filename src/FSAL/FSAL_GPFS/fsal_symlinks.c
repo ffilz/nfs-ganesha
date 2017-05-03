@@ -102,6 +102,7 @@ GPFSFSAL_symlink(struct fsal_obj_handle *dir_hdl, const char *linkname,
 	int fd;
 	struct gpfs_fsal_obj_handle *gpfs_hdl;
 	struct gpfs_filesystem *gpfs_fs;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	/* note : link_attr is optional. */
 	if (!dir_hdl || !op_ctx || !gpfs_fh || !linkname
@@ -111,8 +112,10 @@ GPFSFSAL_symlink(struct fsal_obj_handle *dir_hdl, const char *linkname,
 	gpfs_hdl =
 	    container_of(dir_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
-	gpfs_fs = dir_hdl->fs->private_data;
-
+	if (export_fd < 1) {
+		gpfs_fs = dir_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
 	/* Tests if symlinking is allowed by configuration. */
 
 	if (!op_ctx->fsal_export->exp_ops.
@@ -120,7 +123,7 @@ GPFSFSAL_symlink(struct fsal_obj_handle *dir_hdl, const char *linkname,
 			fso_symlink_support))
 		return fsalstat(ERR_FSAL_NOTSUPP, 0);
 
-	status = fsal_internal_handle2fd(gpfs_fs->root_fd, gpfs_hdl->handle,
+	status = fsal_internal_handle2fd(export_fd, gpfs_hdl->handle,
 					 &fd, O_RDONLY | O_DIRECTORY, 0);
 
 	if (FSAL_IS_ERROR(status))
@@ -147,7 +150,7 @@ GPFSFSAL_symlink(struct fsal_obj_handle *dir_hdl, const char *linkname,
 	/* now get the associated handle, while there is a race, there is
 	   also a race lower down  */
 	status = fsal_internal_get_handle_at(fd, linkname, gpfs_fh,
-					     gpfs_fs->root_fd);
+					     export_fd);
 
 	if (FSAL_IS_ERROR(status)) {
 		close(fd);

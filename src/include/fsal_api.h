@@ -3046,6 +3046,7 @@ struct fsal_export {
 	struct export_ops exp_ops;	/*< Vector of operations */
 	struct fsal_export *sub_export;	/*< Sub export for stacking */
 	struct fsal_export *super_export;/*< Super export for stacking */
+	int export_fd;			/*< optional export fd */
 };
 
 /**
