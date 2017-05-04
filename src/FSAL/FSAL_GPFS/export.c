@@ -70,14 +70,17 @@ static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
 	struct statfs buffstatgpfs;
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
 	struct gpfs_filesystem *gpfs_fs;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	if (!infop) {
 		fsal_error = ERR_FSAL_FAULT;
 		goto out;
 	}
-	gpfs_fs = obj_hdl->fs->private_data;
-
-	status = GPFSFSAL_statfs(gpfs_fs->root_fd, obj_hdl, &buffstatgpfs);
+	if (export_fd < 1) {
+		gpfs_fs = obj_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
+	status = GPFSFSAL_statfs(export_fd, obj_hdl, &buffstatgpfs);
 	if (FSAL_IS_ERROR(status))
 		return status;
 

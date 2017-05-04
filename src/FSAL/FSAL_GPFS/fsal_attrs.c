@@ -61,6 +61,10 @@ GPFSFSAL_fs_loc(struct fsal_export *export, struct gpfs_filesystem *gpfs_fs,
 {
 	int errsv, rc;
 	struct fs_loc_arg fs_loc;
+	int export_fd = op_ctx->fsal_export->export_fd;
+
+	if (export_fd < 1)
+		export_fd = gpfs_fs->root_fd;
 
 	fs_loc.fs_path_len = fs_locs->fs_root.pathname4_val->utf8string_len;
 	fs_loc.fs_path = fs_locs->fs_root.pathname4_val->utf8string_val;
@@ -72,7 +76,7 @@ GPFSFSAL_fs_loc(struct fsal_export *export, struct gpfs_filesystem *gpfs_fs,
 					rootpath.pathname4_val->utf8string_len;
 	fs_loc.fs_root = fs_locs->locations.locations_val->
 					rootpath.pathname4_val->utf8string_val;
-	fs_loc.mountdirfd = gpfs_fs->root_fd;
+	fs_loc.mountdirfd = export_fd;
 	fs_loc.handle = gpfs_fh;
 
 	rc = gpfs_ganesha(OPENHANDLE_FS_LOCATIONS, &fs_loc);

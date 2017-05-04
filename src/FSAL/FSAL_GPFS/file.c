@@ -759,9 +759,12 @@ gpfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass, struct state_t *state,
 	bool has_lock = false;
 	bool closefd = false;
 	struct gpfs_filesystem *gpfs_fs;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
-	gpfs_fs = obj_hdl->fs->private_data;
-
+	if (export_fd < 1) {
+		gpfs_fs = obj_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
 			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
@@ -779,11 +782,11 @@ gpfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass, struct state_t *state,
 	if (info)
 		status = gpfs_read_plus_fd(my_fd, offset, buffer_size,
 					buffer, read_amount, end_of_file, info,
-					gpfs_fs->root_fd);
+					export_fd);
 	else
 		status = GPFSFSAL_read(my_fd, offset, buffer_size, buffer,
 					read_amount, end_of_file,
-					gpfs_fs->root_fd);
+					export_fd);
 
  out:
 
@@ -833,6 +836,7 @@ gpfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass, struct state_t *state,
 	bool closefd = false;
 	struct gpfs_filesystem *gpfs_fs;
 	fsal_openflags_t openflags = FSAL_O_WRITE;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
@@ -840,8 +844,10 @@ gpfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass, struct state_t *state,
 			 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
 		return fsalstat(posix2fsal_error(EXDEV), EXDEV);
 	}
-	gpfs_fs = obj_hdl->fs->private_data;
-
+	if (export_fd < 1) {
+		gpfs_fs = obj_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
 	/* Get a usable file descriptor */
 	status = find_fd(&my_fd, obj_hdl, bypass, state, openflags,
 			 &has_lock, &closefd, false);
@@ -854,11 +860,11 @@ gpfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass, struct state_t *state,
 	if (info)
 		status = gpfs_write_plus_fd(my_fd, offset,
 				buffer_size, buffer, wrote_amount,
-				fsal_stable, info, gpfs_fs->root_fd);
+				fsal_stable, info, export_fd);
 	else
 		status = GPFSFSAL_write(my_fd, offset, buffer_size, buffer,
 				wrote_amount, fsal_stable, op_ctx,
-				gpfs_fs->root_fd);
+				export_fd);
 
 
 	if (FSAL_IS_ERROR(status))
@@ -1033,6 +1039,11 @@ gpfs_lock_op2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	bool has_lock = false;
 	bool closefd = false;
 	bool bypass = false;
+	int export_fd = op_ctx->fsal_export->export_fd;
+
+	if (export_fd < 1)
+		export_fd = ((struct gpfs_filesystem *)
+					obj_hdl->fs->private_data)->root_fd;
 
 	LogFullDebug(COMPONENT_FSAL,
 		     "Locking: op:%d sle_type:%d type:%d start:%llu length:%llu owner:%p",
@@ -1128,8 +1139,7 @@ gpfs_lock_op2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 
 	gpfs_sg_arg.lock = &glock_args;
 	gpfs_sg_arg.reclaim = req_lock->lock_reclaim;
-	gpfs_sg_arg.mountdirfd = ((struct gpfs_filesystem *)
-					obj_hdl->fs->private_data)->root_fd;
+	gpfs_sg_arg.mountdirfd = export_fd;
 
 	status = GPFSFSAL_lock_op(export, lock_op, req_lock, conflicting_lock,
 				  &gpfs_sg_arg);

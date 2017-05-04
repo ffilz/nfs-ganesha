@@ -55,6 +55,7 @@ GPFSFSAL_readlink(struct fsal_obj_handle *dir_hdl,
 {
 	struct gpfs_fsal_obj_handle *gpfs_hdl;
 	struct gpfs_filesystem *gpfs_fs;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	/* note : link_attr is optional. */
 	if (!dir_hdl || !op_ctx || !link_content)
@@ -62,10 +63,13 @@ GPFSFSAL_readlink(struct fsal_obj_handle *dir_hdl,
 
 	gpfs_hdl =
 	    container_of(dir_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-	gpfs_fs = dir_hdl->fs->private_data;
 
+	if (export_fd < 1) {
+		gpfs_fs = dir_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
 	/* Read the link on the filesystem */
-	return fsal_readlink_by_handle(gpfs_fs->root_fd, gpfs_hdl->handle,
+	return fsal_readlink_by_handle(export_fd, gpfs_hdl->handle,
 				       link_content, link_len);
 }
 
