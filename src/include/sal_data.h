@@ -1093,5 +1093,28 @@ extern struct glist_head state_v4_all;
 extern struct glist_head state_owners_all;
 #endif
 
+/**
+ * @brief Check to see if an object is a junction
+ *
+ * @param[in] obj	Object to check
+ * @return true if junction, false otherwise
+ */
+static inline bool obj_is_junction(struct fsal_obj_handle *obj)
+{
+	bool res = false;
+
+	if (obj->type != DIRECTORY)
+		return false;
+
+	PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
+
+	if ((obj->state_hdl->dir.junction_export != NULL ||
+	     atomic_fetch_int32_t(&obj->state_hdl->dir.exp_root_refcount) != 0))
+		res = true;
+	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
+
+	return res;
+}
+
 #endif				/* SAL_DATA_H */
 /** @} */

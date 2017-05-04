@@ -556,6 +556,15 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 		container_of(destdir_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
 	bool invalidate = true;
+	mdcache_entry_t *mdc_lookup_dst = NULL;
+
+	status = mdc_try_get_cached(dest, name, &mdc_lookup_dst);
+
+	if (!FSAL_IS_ERROR(status) &&
+	    obj_is_junction(&mdc_lookup_dst->obj_handle)) {
+		/* Cannot link to a junction */
+		return fsalstat(ERR_FSAL_XDEV, 0);
+	}
 
 	subcall(
 		status = entry->sub_handle->obj_ops.link(
@@ -863,9 +872,16 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 
 	status = mdc_try_get_cached(mdc_newdir, new_name, &mdc_lookup_dst);
 
-	if (!FSAL_IS_ERROR(status) && (mdc_obj == mdc_lookup_dst)) {
-		/* Same source and destination */
-		goto out;
+	if (!FSAL_IS_ERROR(status)) {
+		if (mdc_obj == mdc_lookup_dst) {
+			/* Same source and destination */
+			goto out;
+		}
+		if (obj_is_junction(&mdc_lookup_dst->obj_handle)) {
+			/* Cannot rename on top of junction */
+			status = fsalstat(ERR_FSAL_XDEV, 0);
+			goto out;
+		}
 	}
 
 	subcall(
@@ -1354,6 +1370,11 @@ static fsal_status_t mdcache_unlink(struct fsal_obj_handle *dir_hdl,
 	LogFullDebug(COMPONENT_CACHE_INODE,
 		     "Unlink %p/%s (%p)",
 		     parent, name, entry);
+
+	if (obj_is_junction(&entry->obj_handle)) {
+		/* Cannot remove a junction */
+		return fsalstat(ERR_FSAL_XDEV, 0);
+	}
 
 	subcall(
 		status = parent->sub_handle->obj_ops.unlink(
