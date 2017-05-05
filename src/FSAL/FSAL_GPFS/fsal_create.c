@@ -159,6 +159,7 @@ GPFSFSAL_link(struct fsal_obj_handle *dir_hdl, struct gpfs_file_handle *gpfs_fh,
 	struct gpfs_filesystem *gpfs_fs;
 	fsal_status_t status;
 	struct gpfs_fsal_obj_handle *dest_dir;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	/* note : fsal_attr is optional.
 	 */
@@ -167,8 +168,11 @@ GPFSFSAL_link(struct fsal_obj_handle *dir_hdl, struct gpfs_file_handle *gpfs_fh,
 
 	dest_dir =
 		container_of(dir_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-	gpfs_fs = dir_hdl->fs->private_data;
 
+	if (export_fd < 1) {
+		gpfs_fs = dir_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
 	/* Tests if hardlinking is allowed by configuration. */
 
 	if (!op_ctx->fsal_export->exp_ops.
@@ -179,7 +183,7 @@ GPFSFSAL_link(struct fsal_obj_handle *dir_hdl, struct gpfs_file_handle *gpfs_fh,
 	/* Create the link on the filesystem */
 
 	fsal_set_credentials(op_ctx->creds);
-	status = fsal_internal_link_fh(gpfs_fs->root_fd, gpfs_fh,
+	status = fsal_internal_link_fh(export_fd, gpfs_fh,
 				       dest_dir->handle, linkname);
 
 	fsal_restore_ganesha_credentials();

@@ -70,14 +70,17 @@ static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
 	struct statfs buffstatgpfs;
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
 	struct gpfs_filesystem *gpfs_fs;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	if (!infop) {
 		fsal_error = ERR_FSAL_FAULT;
 		goto out;
 	}
-	gpfs_fs = obj_hdl->fs->private_data;
-
-	status = GPFSFSAL_statfs(gpfs_fs->root_fd, obj_hdl, &buffstatgpfs);
+	if (export_fd < 1) {
+		gpfs_fs = obj_hdl->fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
+	status = GPFSFSAL_statfs(export_fd, obj_hdl, &buffstatgpfs);
 	if (FSAL_IS_ERROR(status))
 		return status;
 
@@ -518,6 +521,8 @@ int open_root_fd(struct gpfs_filesystem *gpfs_fs)
 			 gpfs_fs->fs->path, strerror(retval), retval);
 		return retval;
 	}
+	LogFullDebug(COMPONENT_FSAL, "root export_fd %d path %s",
+				gpfs_fs->root_fd, gpfs_fs->fs->path);
 
 	status = fsal_internal_get_handle_at(gpfs_fs->root_fd,
 					     gpfs_fs->fs->path, &fh,
@@ -748,7 +753,9 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 	/* The status code to return */
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	struct gpfs_fsal_export *gpfs_exp;
+	struct gpfs_filesystem *gpfs_fs;
 	struct fsal_export *exp;
+	gpfsfsal_xstat_t buffxstat;
 
 	gpfs_exp = gsh_calloc(1, sizeof(struct gpfs_fsal_export));
 	exp = &gpfs_exp->export;
@@ -789,14 +796,23 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 		goto uninit;
 	}
 
+	exp->export_fd = open_dir_by_path_walk(-1,
+						 op_ctx->ctx_export->fullpath,
+						 &buffxstat.buffstat);
+
+	gpfs_fs = gpfs_exp->root_fs->private_data;
+	if (gpfs_fs->root_fd < 1)
+		gpfs_fs->root_fd = exp->export_fd;
+
+	LogFullDebug(COMPONENT_FSAL, "export_fd %d path %s",
+				exp->export_fd, op_ctx->ctx_export->fullpath);
+
 	/* if the nodeid has not been obtained, get it now */
 	if (!g_nodeid) {
-		struct gpfs_filesystem *gpfs_fs =
-						gpfs_exp->root_fs->private_data;
 		struct grace_period_arg gpa;
 		int nodeid;
 
-		gpa.mountdirfd = gpfs_fs->root_fd;
+		gpa.mountdirfd = exp->export_fd;
 
 		nodeid = gpfs_ganesha(OPENHANDLE_GET_NODEID, &gpa);
 		if (nodeid > 0) {
