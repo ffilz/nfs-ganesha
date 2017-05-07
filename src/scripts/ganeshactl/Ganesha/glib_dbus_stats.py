@@ -251,13 +251,29 @@ class FastStats():
             output = ("Timestamp: " + time.ctime(self.stats[2][0]) + str(self.stats[2][1]) + " nsecs" +
                       "\nGlobal ops:\n" )
             # NFSv3, NFSv4, NLM, MNT, QUOTA self.stats
-            for i in range(0,len(self.stats[3])-1):
-                if ":" in str(self.stats[3][i]):
+	    i = 0
+	    while i < len(self.stats[3])-1:
+		if "RPC" in str(self.stats[3][i]):
+		    output += self.stats[3][i]
+		    output += "%s" % (str(self.stats[3][i+1]).rjust(8))
+		    output += self.stats[3][i+2]
+		    output += "%s" % (str(self.stats[3][i+3]).rjust(8))
+		    output += self.stats[3][i+4]
+		    output += "%s" % (str(self.stats[3][i+5]).rjust(8)) + "\n"
+		    i += 6
+		    output += "\tQueue No\t   Total\t  Active\n"
+		    for j in range(0,4):
+			for k in range(0,3):
+			    output += "\t%s" % (str(self.stats[3][i+j*3+k]).rjust(8))
+			output += "\n"
+		    i += 11
+                elif ":" in str(self.stats[3][i]):
                     output += self.stats[3][i] + "\n"
                 elif str(self.stats[3][i]).isdigit():
                     output += "\t%s" % (str(self.stats[3][i]).rjust(8)) + "\n"
                 else:
                     output += "%s: " % (self.stats[3][i].ljust(20))
+		i += 1
         return output
 
 class ExportIOv3Stats():
