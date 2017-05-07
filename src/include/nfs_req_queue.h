@@ -53,6 +53,7 @@ struct req_q_pair {
 	GSH_CACHE_PAD(1);
 	struct req_q consumer;	/* to executor */
 	GSH_CACHE_PAD(2);
+	uint64_t total;		/* cumulative */
 };
 
 #define REQ_Q_MOUNT 0
@@ -121,5 +122,11 @@ static inline void nfs_rpc_queue_awaken(void *arg)
 	}
 	pthread_spin_unlock(&st->reqs.sp);
 }
+
+uint32_t nfs_rpc_outstanding_reqs_est(void);
+#ifdef USE_DBUS
+uint64_t get_total_rpcq_count(void);
+void reset_rpcq_stats(void);
+#endif
 
 #endif				/* NFS_REQ_QUEUE_H */
