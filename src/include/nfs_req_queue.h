@@ -43,6 +43,7 @@ struct req_q {
 	struct glist_head q;	/* LIFO */
 	uint32_t size;
 	uint32_t max;
+	uint64_t total;		/* cumulative */
 	uint32_t waiters;
 };
 
@@ -121,5 +122,11 @@ static inline void nfs_rpc_queue_awaken(void *arg)
 	}
 	pthread_spin_unlock(&st->reqs.sp);
 }
+
+uint32_t nfs_rpc_outstanding_reqs_est(void);
+#ifdef USE_DBUS
+uint64_t get_total_rpcq_count(void);
+void reset_rpcq_stats(void);
+#endif
 
 #endif				/* NFS_REQ_QUEUE_H */

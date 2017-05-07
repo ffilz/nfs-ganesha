@@ -1470,6 +1470,7 @@ void nfs_rpc_enqueue_req(request_data_t *reqdata)
 	pthread_spin_lock(&q->sp);
 	glist_add_tail(&q->q, &reqdata->req_q);
 	++(q->size);
+	++(q->total);
 	pthread_spin_unlock(&q->sp);
 
 	(void) atomic_inc_uint32_t(&enqueued_reqs);
@@ -2302,3 +2303,39 @@ static void *rpc_dispatcher_thread(void *arg)
 
 	return NULL;
 }				/* rpc_dispatcher_thread */
+
+#ifdef USE_DBUS
+/**
+ *  * @brief Reset RPC Queue related statistics
+ **/
+void reset_rpcq_stats(void)
+{
+	int i;
+	uint64_t lval;
+	struct req_q_pair *qpair;
+
+	/* Here the Q specific total count should be set to the current
+	 * active Q length. It should not be set to 0 */
+	for (i = 0; i < N_REQ_QUEUES; i++) {
+		qpair = &nfs_req_st.reqs.nfs_request_q.qset[i];
+		lval = atomic_fetch_uint32_t(&qpair->producer.size) +
+			atomic_fetch_uint32_t(&qpair->consumer.size);
+		(void)atomic_store_uint64_t(&qpair->producer.total, lval);
+	}
+}
+
+/**
+ *  * @brief Get the RPC queue total count
+ **/
+uint64_t get_total_rpcq_count(void)
+{
+	int i;
+	uint64_t lval = 0;
+
+	for (i = 0; i < N_REQ_QUEUES; i++) {
+		lval += atomic_fetch_uint64_t(
+			&nfs_req_st.reqs.nfs_request_q.qset[i].producer.total);
+	}
+	return lval;
+}
+#endif

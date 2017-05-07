@@ -60,6 +60,7 @@
 #include "server_stats.h"
 #include <abstract_atomic.h>
 #include "nfs_proto_functions.h"
+#include "nfs_req_queue.h"
 
 #define NFS_V3_NB_COMMAND (NFSPROC3_COMMIT + 1)
 #define NFS_V4_NB_COMMAND 2
@@ -1676,6 +1677,9 @@ void global_dbus_fast(DBusMessageIter *iter)
 	char *version;
 	char *op;
 	int i;
+	uint32_t val;
+	uint64_t lval;
+	struct req_q_pair *qpair;
 
 	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
 					 &struct_iter);
@@ -1739,6 +1743,36 @@ void global_dbus_fast(DBusMessageIter *iter)
 			dbus_message_iter_append_basic(&struct_iter,
 					DBUS_TYPE_UINT64, &global_st.qt.op[i]);
 		}
+	}
+	version = "\nRPC Queue:\n    Num Qs : ";
+	val = N_REQ_QUEUES;
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
+				       &version);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT32,
+				       &val);
+	version = ", Total Reqs : ";
+	val = get_total_rpcq_count();
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
+				       &version);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT32,
+				       &val);
+	version = ", Active Reqs : ";
+	val = nfs_rpc_outstanding_reqs_est();
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
+				       &version);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT32,
+				       &val);
+	for (i = 0; i < N_REQ_QUEUES; i++) {
+		qpair = &nfs_req_st.reqs.nfs_request_q.qset[i];
+		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT32,
+					       &i);
+		lval = atomic_fetch_uint64_t(&qpair->producer.total);
+		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+					       &lval);
+		lval = atomic_fetch_uint32_t(&qpair->producer.size) +
+				atomic_fetch_uint32_t(&qpair->consumer.size);
+		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+					       &lval);
 	}
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
@@ -1884,6 +1918,7 @@ void reset_gsh_stats(struct gsh_stats *st)
 void reset_global_stats(void)
 {
 	int i;
+
 	/* Reset all ops counters of nfsv3 */
 	for (i = 0; i < NFSPROC3_COMMIT; i++) {
 		(void)atomic_store_uint64_t(&global_st.v3.op[i], 0);
@@ -1904,6 +1939,7 @@ void reset_global_stats(void)
 	for (i = 0; i < RQUOTAPROC_SETACTIVEQUOTA; i++) {
 		(void)atomic_store_uint64_t(&global_st.qt.op[i], 0);
 	}
+	reset_rpcq_stats();
 	reset_nfsv3_stats(&global_st.nfsv3);
 	reset_nfsv40_stats(&global_st.nfsv40);
 	reset_nfsv41_stats(&global_st.nfsv41);
