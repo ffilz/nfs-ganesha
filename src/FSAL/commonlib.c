@@ -130,6 +130,7 @@ void fsal_export_init(struct fsal_export *exp)
 {
 	memcpy(&exp->exp_ops, &def_export_ops, sizeof(struct export_ops));
 	exp->export_id = op_ctx->ctx_export->export_id;
+	exp->export_fd = -1;
 }
 
 /**
