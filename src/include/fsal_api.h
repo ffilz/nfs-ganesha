@@ -3048,6 +3048,7 @@ struct fsal_export {
 	struct fsal_export *super_export;/*< Super export for stacking */
 	uint16_t export_id; /*< Export ID copied from gsh_export, initialized
 				by  fsal_export_init */
+	int export_fd;                  /*< optional export fd */
 };
 
 /**
