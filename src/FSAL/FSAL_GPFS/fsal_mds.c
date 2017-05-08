@@ -51,14 +51,19 @@ static void fs_layouttypes(struct fsal_export *export_hdl, int32_t *count,
 	struct gpfs_filesystem *gpfs_fs;
 	struct gpfs_fsal_export *myself;
 	int errsv = 0;
+	int export_fd = op_ctx->fsal_export->export_fd;
 
 	/** @todo FSF: needs real getdeviceinfo that gets to the correct
 	 * filesystem, this will not work for sub-mounted filesystems.
 	 */
-	myself = container_of(export_hdl, struct gpfs_fsal_export, export);
-	gpfs_fs = myself->root_fs->private_data;
 
-	arg.mountdirfd = gpfs_fs->root_fd;
+	if (export_fd < 1) {
+		myself = container_of(export_hdl, struct gpfs_fsal_export,
+									export);
+		gpfs_fs = myself->root_fs->private_data;
+		export_fd = gpfs_fs->root_fd;
+	}
+	arg.mountdirfd = export_fd;
 	rc = gpfs_ganesha(OPENHANDLE_LAYOUT_TYPE, &arg);
 	errsv = errno;
 	if (rc < 0 || (rc != LAYOUT4_NFSV4_1_FILES)) {
@@ -274,6 +279,10 @@ static nfsstat4 layoutget(struct fsal_obj_handle *obj_hdl,
 	struct gsh_buffdesc ds_desc;
 	int errsv = 0;
 	struct gpfs_filesystem *gpfs_fs = obj_hdl->fs->private_data;
+	int export_fd = op_ctx->fsal_export->export_fd;
+
+	if (export_fd < 1)
+		export_fd = gpfs_fs->root_fd;
 
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
@@ -293,7 +302,7 @@ static nfsstat4 layoutget(struct fsal_obj_handle *obj_hdl,
 	memcpy(&gpfs_ds_handle, myself->handle,
 	       sizeof(struct gpfs_file_handle));
 
-	larg.fd = gpfs_fs->root_fd;
+	larg.fd = export_fd;
 	larg.args.lg_minlength = arg->minlength;
 	larg.args.lg_sbid = arg->export_id;
 	larg.args.lg_fh = &gpfs_ds_handle;
@@ -373,7 +382,7 @@ static nfsstat4 layoutget(struct fsal_obj_handle *obj_hdl,
 	/* If we failed in encoding the lo_content, relinquish what we
 	   reserved for it. */
 
-	lrarg.mountdirfd = gpfs_fs->root_fd;
+	lrarg.mountdirfd = export_fd;
 	lrarg.handle = &gpfs_ds_handle;
 	lrarg.args.lr_return_type = arg->type;
 	lrarg.args.lr_reclaim = false;
@@ -418,6 +427,10 @@ static nfsstat4 layoutreturn(struct fsal_obj_handle *obj_hdl,
 	struct gpfs_file_handle *gpfs_handle;
 	int errsv = 0;
 	struct gpfs_filesystem *gpfs_fs = obj_hdl->fs->private_data;
+	int export_fd = op_ctx->fsal_export->export_fd;
+
+	if (export_fd < 1)
+		export_fd = gpfs_fs->root_fd;
 
 	int rc = 0;
 
@@ -432,7 +445,7 @@ static nfsstat4 layoutreturn(struct fsal_obj_handle *obj_hdl,
 	gpfs_handle = myself->handle;
 
 	if (arg->dispose) {
-		larg.mountdirfd = gpfs_fs->root_fd;
+		larg.mountdirfd = export_fd;
 		larg.handle = gpfs_handle;
 		larg.args.lr_return_type = arg->lo_type;
 		larg.args.lr_reclaim =
@@ -480,11 +493,14 @@ static nfsstat4 layoutcommit(struct fsal_obj_handle *obj_hdl,
 	struct gpfs_fsal_obj_handle *myself;
 	/* The private 'full' object handle */
 	struct gpfs_file_handle *gpfs_handle;
-
 	int rc = 0;
 	struct layoutcommit_arg targ;
 	int errsv = 0;
 	struct gpfs_filesystem *gpfs_fs = obj_hdl->fs->private_data;
+	int export_fd = op_ctx->fsal_export->export_fd;
+
+	if (export_fd < 1)
+		export_fd = gpfs_fs->root_fd;
 
 	/* Sanity check on type */
 	if (arg->type != LAYOUT4_NFSV4_1_FILES) {
@@ -496,7 +512,7 @@ static nfsstat4 layoutcommit(struct fsal_obj_handle *obj_hdl,
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 	gpfs_handle = myself->handle;
 
-	targ.mountdirfd = gpfs_fs->root_fd;
+	targ.mountdirfd = export_fd;
 	targ.handle = gpfs_handle;
 	targ.xdr = NULL;
 	targ.offset = arg->segment.offset;
