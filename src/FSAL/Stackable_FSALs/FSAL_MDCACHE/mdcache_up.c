@@ -49,6 +49,7 @@ mdc_up_invalidate(struct fsal_export *export, struct gsh_buffdesc *handle,
 	struct mdcache_fsal_export *myself = mdc_export(export);
 
 	req_ctx.fsal_export = &myself->export;
+	req_ctx.ctx_export = op_ctx->ctx_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
 
@@ -121,6 +122,7 @@ mdc_up_update(struct fsal_export *export, struct gsh_buffdesc *handle,
 	}
 
 	req_ctx.fsal_export = &myself->export;
+	req_ctx.ctx_export = op_ctx->ctx_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
 
@@ -334,6 +336,7 @@ state_status_t mdc_up_lock_grant(struct fsal_export *export,
 	struct req_op_context *save_ctx, req_ctx = {0};
 
 	req_ctx.fsal_export = &myself->export;
+	req_ctx.ctx_export = op_ctx->ctx_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
 
@@ -365,6 +368,7 @@ state_status_t mdc_up_lock_avail(struct fsal_export *export,
 	struct req_op_context *save_ctx, req_ctx = {0};
 
 	req_ctx.fsal_export = &myself->export;
+	req_ctx.ctx_export = op_ctx->ctx_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
 
@@ -405,6 +409,7 @@ state_status_t mdc_up_layoutrecall(struct fsal_export *export,
 	struct req_op_context *save_ctx, req_ctx = {0};
 
 	req_ctx.fsal_export = &myself->export;
+	req_ctx.ctx_export = op_ctx->ctx_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
 
@@ -431,6 +436,7 @@ state_status_t mdc_up_delegrecall(struct fsal_export *export,
 	struct req_op_context *save_ctx, req_ctx = {0};
 
 	req_ctx.fsal_export = &myself->export;
+	req_ctx.ctx_export = op_ctx->ctx_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
 
