@@ -36,6 +36,7 @@
 #include <unistd.h>
 #include <utime.h>
 #include <sys/time.h>
+#include <pthread.h>
 
 int upcall_inode_invalidate(struct glusterfs_fs *gl_fs,
 			     struct glfs_object *object)
@@ -102,7 +103,7 @@ out:
 void *GLUSTERFSAL_UP_Thread(void *Arg)
 {
 	struct glusterfs_fs         *gl_fs              = Arg;
-	const struct fsal_up_vector *event_func;
+	struct fsal_up_vector *event_func;
 	char                        thr_name[16];
 	int                         rc                  = 0;
 	struct glfs_upcall          *cbk                = NULL;
@@ -121,7 +122,7 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 	SetNameFunction(thr_name);
 
 	/* Set the FSAL UP functions that will be used to process events. */
-	event_func = gl_fs->up_ops;
+	event_func = (struct fsal_up_vector *)gl_fs->up_ops;
 
 	if (event_func == NULL) {
 		LogFatal(COMPONENT_FSAL_UP,
@@ -139,6 +140,12 @@ void *GLUSTERFSAL_UP_Thread(void *Arg)
 			"FSAL Callback interface - Null glfs context.");
 		goto out;
 	}
+
+	/* wait for upcall readiness */
+	PTHREAD_MUTEX_lock(&event_func->up_mutex);
+	while (!event_func->up_ready)
+		pthread_cond_wait(&event_func->up_cond, &event_func->up_mutex);
+	PTHREAD_MUTEX_unlock(&event_func->up_mutex);
 
 	/* Start querying for events and processing. */
 	/** @todo : Do batch processing instead */

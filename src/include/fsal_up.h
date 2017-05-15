@@ -144,6 +144,11 @@ struct fsal_up_vector {
 	/** The fsal_export this vector lives in */
 	struct fsal_export *up_fsal_export;
 
+	/** ready to take upcalls condition */
+	bool up_ready;
+	pthread_mutex_t up_mutex;
+	pthread_cond_t up_cond;
+
 	/** Invalidate some or all of a cache entry
 	 *
 	 * @param[in] vec	Up ops vector
