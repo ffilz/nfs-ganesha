@@ -2327,6 +2327,16 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 		goto out;
 	}
 
+	retval = setglustercreds(glfs_export, &op_ctx->creds->caller_uid,
+			     &op_ctx->creds->caller_gid,
+			     op_ctx->creds->caller_glen,
+			     op_ctx->creds->caller_garray);
+	if (retval != 0) {
+		status = gluster2fsal_error(EPERM);
+		LogFatal(COMPONENT_FSAL, "Could not set Ganesha credentials");
+		goto out;
+	}
+
 	/* If any stat changed, indicate that */
 	if (mask != 0)
 		FSAL_SET_MASK(attr_valid, XATTR_STAT);
@@ -2342,7 +2352,7 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 				     mask);
 		if (retval != 0) {
 			status = gluster2fsal_error(errno);
-			goto out;
+			goto creds;
 		}
 	}
 
@@ -2352,6 +2362,13 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status)) {
 		LogDebug(COMPONENT_FSAL,
 			 "setting ACL failed");
+	}
+
+creds:
+	retval = setglustercreds(glfs_export, NULL, NULL, 0, NULL);
+	if (retval != 0) {
+		status = gluster2fsal_error(EPERM);
+		LogFatal(COMPONENT_FSAL, "Could not set Ganesha credentials");
 		goto out;
 	}
 
