@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include <utime.h>
 #include <sys/time.h>
+#include <pthread.h>
 
 /**
  * @brief Up Thread
@@ -40,7 +41,7 @@
 void *GPFSFSAL_UP_Thread(void *Arg)
 {
 	struct gpfs_filesystem *gpfs_fs = Arg;
-	const struct fsal_up_vector *event_func;
+	struct fsal_up_vector *event_func;
 	char thr_name[16];
 	int rc = 0;
 	struct pnfs_deviceid devid;
@@ -72,7 +73,13 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 	SetNameFunction(thr_name);
 
 	/* Set the FSAL UP functions that will be used to process events. */
-	event_func = gpfs_fs->up_ops;
+	event_func = (struct fsal_up_vector *)gpfs_fs->up_ops;
+
+	/* wait for upcall readiness */
+	PTHREAD_MUTEX_lock(&event_func->up_mutex);
+	while (!event_func->up_ready)
+		pthread_cond_wait(&event_func->up_cond, &event_func->up_mutex);
+	PTHREAD_MUTEX_unlock(&event_func->up_mutex);
 
 	/* Set up op_ctx for this thread */
 	req_ctx.fsal_export = event_func->up_fsal_export;
