@@ -121,6 +121,21 @@ struct latency_data {
 };
 #endif
 
+#define SET_GLUSTER_CREDS(glfs_export, uid, gid, glen, garray, out)	    \
+	do {								    \
+		int credrc = 0;						    \
+		credrc = setglustercreds(glfs_export, uid, gid, glen,       \
+					 garray);			    \
+									    \
+									    \
+		if (credrc != 0) {					    \
+			status = gluster2fsal_error(EPERM);		    \
+			LogFatal(COMPONENT_FSAL,			    \
+				"Could not set Ganesha credentials");       \
+			goto out;					    \
+		}							    \
+	} while (0)
+
 struct glusterfs_fsal_module {
 	struct fsal_staticfsinfo_t fs_info;
 	struct fsal_module fsal;
