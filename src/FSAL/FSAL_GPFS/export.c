@@ -726,6 +726,11 @@ void gpfs_unexport_filesystems(struct gpfs_fsal_export *exp)
 		map = glist_entry(glist, struct gpfs_filesystem_export_map,
 				  on_filesystems);
 
+		if (exp->export_fd >= 0) {
+			close(exp->export_fd);
+			exp->export_fd = -1;
+		}
+
 		/* Remove this export from mapping */
 		glist_del(&map->on_filesystems);
 		glist_del(&map->on_exports);
