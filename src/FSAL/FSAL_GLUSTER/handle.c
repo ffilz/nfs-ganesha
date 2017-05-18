@@ -1537,6 +1537,13 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
        /* preserve errno */
 	retval = errno;
 
+	/* Do a permission check if we were not attempting to create. If we
+	 * were attempting any sort of create, then the openat call was made
+	 * with the caller's credentials active and as such was permission
+	 * checked.
+	 */
+	*caller_perm_check = (createmode == FSAL_NO_CREATE && !errno);
+
 	/* restore credentials */
 	retval = setglustercreds(glfs_export, NULL, NULL, 0, NULL);
 	if (retval != 0) {
@@ -1567,8 +1574,7 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	 * it would just look to the caller like someone else had created the
 	 * file with a mode that prevented the open this caller was attempting.
 	 */
-	created = (p_flags & O_EXCL) != 0;
-	*caller_perm_check = !created;
+	created = ((p_flags & O_EXCL) != 0 || !*caller_perm_check);
 
 	/* Since the file is created, remove O_CREAT/O_EXCL flags */
 	p_flags &= ~(O_EXCL | O_CREAT);
