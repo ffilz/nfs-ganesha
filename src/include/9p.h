@@ -294,6 +294,12 @@ struct _9p_user_cred {
 			   * creds field). */
 };
 
+enum _9p_xattr_write {
+	_9P_XATTR_READ_ONLY,
+	_9P_XATTR_CAN_WRITE,
+	_9P_XATTR_DID_WRITE
+};
+
 struct _9p_fid {
 	u32 fid;
 	/** Ganesha export of the file (refcounted). */
@@ -313,7 +319,7 @@ struct _9p_fid {
 			caddr_t xattr_content;
 			u64 xattr_size;
 			u64 xattr_offset;
-			bool xattr_write;
+			enum _9p_xattr_write xattr_write;
 		} xattr;
 
 	} specdata;
