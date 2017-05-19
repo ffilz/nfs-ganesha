@@ -128,6 +128,9 @@ heartbeat_freq(uint32, range 0 to 5000 default 1000)
 Enable_NLM(bool, default true)
     Whether to support the Network Lock Manager protocol.
 
+Disable_NLM_SHARE(bool, default false)
+    Whether to disable NLM_SHARE and NLM_UNSHARE.
+
 Blocked_Lock_Poller_Interval(int64, range 0 to 180, default 10)
     Polling interval for blocked lock polling thread
 
