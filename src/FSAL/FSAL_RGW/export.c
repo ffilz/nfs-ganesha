@@ -97,39 +97,25 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 	/* FSAL status structure */
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	/* The buffer in which to store stat info */
-	struct stat st, st_root;
+	struct stat st;
 	/* Return code from Ceph */
 	int rc;
-	/* temp filehandle */
-	struct rgw_file_handle *rgw_fh;
+
+	/**
+	 * for FSAL_RGW, we don't support subdir mount,
+	 * and bucket info is already in root_fh when we do
+	 * rgw_mount, so we don't have to do a rgw_lookup on path
+	 */
 
 	*pub_handle = NULL;
 
-	/* XXX in FSAL_CEPH, the equivalent code here looks for path == "/"
-	 * and returns the root handle with no extra ref.  That seems
-	 * suspicious, so let RGW figure it out (hopefully, that does not
-	 * leak refs)
-	 */
-	rc = rgw_lookup(export->rgw_fs, export->rgw_fs->root_fh, path,
-			&rgw_fh, RGW_LOOKUP_FLAG_NONE);
-	if (rc < 0)
-		return rgw2fsal_error(rc);
-
-	/* get Unix attrs */
-	rc = rgw_getattr(export->rgw_fs, rgw_fh, &st, RGW_GETATTR_FLAG_NONE);
-	if (rc < 0) {
-		return rgw2fsal_error(rc);
-	}
-
-	/* fixup export fsid */
 	rc = rgw_getattr(export->rgw_fs, export->rgw_fs->root_fh,
-			 &st_root, RGW_GETATTR_FLAG_NONE);
+			 &st, RGW_GETATTR_FLAG_NONE);
 	if (rc < 0) {
 		return rgw2fsal_error(rc);
 	}
-	st.st_dev = st_root.st_dev;
 
-	rc = construct_handle(export, rgw_fh, &st, &handle);
+	rc = construct_handle(export, export->rgw_fs->root_fh, &st, &handle);
 	if (rc < 0) {
 		return rgw2fsal_error(rc);
 	}
