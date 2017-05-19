@@ -295,6 +295,7 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 			export->rgw_user_id,
 			export->rgw_access_key_id,
 			export->rgw_secret_access_key,
+			op_ctx->ctx_export->fullpath,
 			&export->rgw_fs,
 			RGW_MOUNT_FLAG_NONE);
 	if (rgw_status != 0) {
