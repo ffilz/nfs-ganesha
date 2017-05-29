@@ -746,11 +746,20 @@ avltree_inline_dev_lookup(const struct avltree_node *key)
 
 void remove_fs(struct fsal_filesystem *fs)
 {
+	struct glist_head *glist, *glistn;
+	struct fsal_filesystem *child;
+
 	if (fs->in_fsid_avl)
 		avltree_remove(&fs->avl_fsid, &avl_fsid);
 
 	if (fs->in_dev_avl)
 		avltree_remove(&fs->avl_dev, &avl_dev);
+
+	glist_for_each_safe(glist, glistn, &fs->children) {
+		child = glist_entry(glist, struct fsal_filesystem, siblings);
+		glist_del(&child->siblings);
+		child->parent = NULL;
+	}
 
 	glist_del(&fs->siblings);
 	glist_del(&fs->filesystems);
