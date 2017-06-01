@@ -1741,6 +1741,24 @@ static struct gsh_dbus_method export_show_v41_layouts = {
 		 END_ARG_LIST}
 };
 
+/* Reset FSAL stats */
+static void reset_fsal_stats(void)
+{
+	/* Module iterator */
+	struct glist_head *mi = NULL;
+	/* Next module */
+	struct glist_head *mn = NULL;
+
+	glist_for_each_safe(mi, mn, &fsal_list) {
+		/* The module to reset stats */
+		struct fsal_module *m = glist_entry(mi,
+						    struct fsal_module,
+						    fsals);
+		if (m->fsal_supports_stats)
+			m->m_ops.fsal_reset_stats(m);
+	}
+}
+
 /**
  * DBUS method to reset all ops statistics
  *
@@ -1756,6 +1774,7 @@ static bool stats_reset(DBusMessageIter *args,
 	dbus_message_iter_init_append(reply, &iter);
 	dbus_status_reply(&iter, success, errormsg);
 
+	reset_fsal_stats();
 	server_reset_stats(&iter);
 
 	return true;
@@ -1766,6 +1785,61 @@ static struct gsh_dbus_method reset_statistics = {
 	.method = stats_reset,
 	.args = {STATUS_REPLY,
 		 TIMESTAMP_REPLY,
+		 END_ARG_LIST}
+};
+
+/**
+ * DBUS method to gather FSAL statistics
+ *
+ */
+static bool stats_fsal(DBusMessageIter *args,
+			DBusMessage *reply,
+			DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "OK";
+	char *fsal_name;
+	DBusMessageIter iter;
+	struct fsal_module *fsal_hdl;
+	struct root_op_context root_op_context;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args == NULL) {
+		success = false;
+		errormsg = "No FSAL name provided";
+		dbus_status_reply(&iter, success, errormsg);
+		return true;
+	}
+	dbus_message_iter_get_basic(args, &fsal_name);
+	init_root_op_context(&root_op_context, NULL, NULL,
+				     0, 0, UNKNOWN_REQUEST);
+	fsal_hdl = lookup_fsal(fsal_name);
+	release_root_op_context();
+	if (fsal_hdl == NULL) {
+		success = false;
+		errormsg = "Incorrect FSAL name";
+		dbus_status_reply(&iter, success, errormsg);
+		return true;
+	}
+	if (!fsal_hdl->fsal_supports_stats) {
+		success = false;
+		errormsg = "FSAL do not support stats counting";
+		dbus_status_reply(&iter, success, errormsg);
+	} else {
+		dbus_status_reply(&iter, success, errormsg);
+		fsal_hdl->m_ops.fsal_extract_stats(fsal_hdl, &iter);
+	}
+	return true;
+}
+
+static struct gsh_dbus_method fsal_statistics = {
+	.name = "GetFSALStats",
+	.method = stats_fsal,
+	.args = {FSAL_ARG,
+		 STATUS_REPLY,
+		 TIMESTAMP_REPLY,
+		 FSAL_OPS_REPLY,
 		 END_ARG_LIST}
 };
 
@@ -1970,6 +2044,7 @@ static struct gsh_dbus_method *export_stats_methods[] = {
 	&cache_inode_show,
 	&export_show_all_io,
 	&reset_statistics,
+	&fsal_statistics,
 	NULL
 };
 
