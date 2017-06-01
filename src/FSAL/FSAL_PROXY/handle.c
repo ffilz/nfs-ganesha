@@ -1602,7 +1602,7 @@ static bool xdr_readdirres(XDR *x, nfs_resop4 *rdres)
 static fsal_status_t pxy_do_readdir(struct pxy_obj_handle *ph,
 				    nfs_cookie4 *cookie, fsal_readdir_cb cb,
 				    void *cbarg, attrmask_t attrmask,
-				    bool *eof)
+				    bool *eof, bool *again)
 {
 	uint32_t opcnt = 0;
 	int rc;
@@ -1641,7 +1641,15 @@ static fsal_status_t pxy_do_readdir(struct pxy_obj_handle *ph,
 		if (nfs4_Fattr_To_FSAL_attr(&attrs, &e4->attrs, NULL))
 			return fsalstat(ERR_FSAL_FAULT, 0);
 
-		*cookie = e4->cookie;
+		/*
+		 *  If *again==false : we are in readahead,
+		 *  we only call cb for next entries but don't update result
+		 *  for calling readdir.
+		 */
+		if (*again) {
+			*cookie = e4->cookie;
+			*eof = rdok->reply.eof && !e4->nextentry;
+		}
 
 		/** @todo FSF: this could be handled by getting handle as part
 		 *             of readdir attributes. However, if acl is
@@ -1657,15 +1665,28 @@ static fsal_status_t pxy_do_readdir(struct pxy_obj_handle *ph,
 
 		fsal_release_attrs(&attrs);
 
-		/* Read ahead not supported by this FSAL. */
-		if (cb_rc >= DIR_READAHEAD)
+		/*
+		 * Read ahead is supported by this FSAL
+		 * but limited to the current background readdir request.
+		 */
+		if (cb_rc >= DIR_READAHEAD && *again) {
+			*again = false;
+		}
+		if (cb_rc >= DIR_TERMINATE) {
+			*again = false;
 			break;
+		}
 	}
 	xdr_free((xdrproc_t) xdr_readdirres, resoparray);
 	return st;
 }
 
 /* What to do about verifier if server needs one? */
+/* Patrice LUCAS : 2017/06/01
+ * That's a good question !!!
+ * Ganesha doesn't store it anywhere !!! No way to provide it back ...
+ * We might add it to the cookie provided ...
+ */
 static fsal_status_t pxy_readdir(struct fsal_obj_handle *dir_hdl,
 				 fsal_cookie_t *whence, void *cbarg,
 				 fsal_readdir_cb cb, attrmask_t attrmask,
@@ -1673,6 +1694,7 @@ static fsal_status_t pxy_readdir(struct fsal_obj_handle *dir_hdl,
 {
 	nfs_cookie4 cookie = 0;
 	struct pxy_obj_handle *ph;
+	bool again = true;
 
 	if (whence)
 		cookie = (nfs_cookie4) *whence;
@@ -1682,10 +1704,11 @@ static fsal_status_t pxy_readdir(struct fsal_obj_handle *dir_hdl,
 	do {
 		fsal_status_t st;
 
-		st = pxy_do_readdir(ph, &cookie, cb, cbarg, attrmask, eof);
+		st = pxy_do_readdir(ph, &cookie, cb, cbarg, attrmask, eof,
+				    &again);
 		if (FSAL_IS_ERROR(st))
 			return st;
-	} while (*eof == false);
+	} while (*eof == false && again);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
