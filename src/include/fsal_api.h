@@ -324,7 +324,7 @@ struct state_t;
  * rules), increment the minor version
  */
 
-#define FSAL_MINOR_VERSION 0
+#define FSAL_MINOR_VERSION 1
 
 /* Forward references for object methods */
 
@@ -627,6 +627,22 @@ struct fsal_ops {
  * @retval true if extended operations are supported.
  */
 	 bool (*support_ex)(struct fsal_obj_handle *obj);
+
+/**
+ * @brief Provides function to extract FSAL stats
+ *
+ * @param[in] fsal_hdl		FSAL module
+ * @param[in] iter		opaque pointer to DBusMessageIter
+ */
+	void (*fsal_extract_stats)(struct fsal_module *const fsal_hdl,
+				   void *iter);
+
+/**
+ * @brief FSAL function to reset FSAL stats
+ *
+ * @param[in] fsal_hdl          FSAL module
+ */
+	void (*fsal_reset_stats)(struct fsal_module *const fsal_hdl);
 
 /**@}*/
 };
@@ -2999,6 +3015,8 @@ struct fsal_module {
 	pthread_rwlock_t lock;		/*< Lock to be held when
 					    manipulating its lists (above). */
 	int32_t refcount;		/*< Reference count */
+	bool fsal_supports_stats;	/*< Indicates stats are supported */
+	struct fsal_stats *stats;   /*< for storing the FSAL specific stats */
 };
 
 /**
