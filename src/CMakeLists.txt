@@ -746,6 +746,10 @@ if(USE_CB_SIMULATOR)
   set(_USE_CB_SIMULATOR ON)
 endif(USE_CB_SIMULATOR)
 
+########### add a "make dist" and a "make rpm"  ###############
+
+set( PKG_NAME "${CPACK_PACKAGE_FILE_NAME}.tar.gz")
+add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 # Find misc system libs
 find_library(LIBRT rt)  # extended Pthreads functions
@@ -883,7 +887,7 @@ if(USE_9P_RDMA)
   link_directories (${MOOSHIKA_LIBRARY_DIRS})
 endif(USE_9P_RDMA)
 
-set(NTIRPC_MIN_VERSION 1.5.3)
+set(NTIRPC_MIN_VERSION 1.6.0)
 if (USE_SYSTEM_NTIRPC)
   find_package(NTIRPC ${NTIRPC_MIN_VERSION} REQUIRED)
 else (USE_SYSTEM_NTIRPC)
@@ -1203,12 +1207,6 @@ configure_file(
   "${PROJECT_SOURCE_DIR}/include/config-h.in.cmake"
   "${PROJECT_BINARY_DIR}/include/config.h"
 )
-
-
-########### add a "make dist" and a "make rpm"  ###############
-
-set( PKG_NAME "${CPACK_PACKAGE_FILE_NAME}.tar.gz")
-add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 # Tweak the "%bcond_<with|without> in the specfile for every
 # optional feature. Take care on the logic of this syntax
