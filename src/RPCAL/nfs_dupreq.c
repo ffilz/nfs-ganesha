@@ -329,6 +329,7 @@ static inline unsigned int get_ipproto_by_xprt(SVCXPRT *xprt)
 {
 	switch (xprt->xp_type) {
 	case XPRT_UDP:
+	case XPRT_UDP_RENDEZVOUS:
 		return IPPROTO_UDP;
 	case XPRT_TCP:
 	case XPRT_TCP_RENDEZVOUS:

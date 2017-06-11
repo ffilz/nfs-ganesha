@@ -107,7 +107,15 @@ static inline void nfs_check_malloc(void)
 
 /* in nfs_rpc_dispatcher_thread.c */
 
-enum xprt_stat thr_decode_rpc_request(void *context, SVCXPRT *xprt);
+int free_nfs_request(request_data_t *);
+enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata);
+
+/* in nfs_worker_thread.c */
+
+enum xprt_stat nfs_rpc_valid_NFS(struct svc_req *);
+enum xprt_stat nfs_rpc_valid_NLM(struct svc_req *);
+enum xprt_stat nfs_rpc_valid_MNT(struct svc_req *);
+enum xprt_stat nfs_rpc_valid_RQUOTA(struct svc_req *);
 
 #ifdef _USE_NFS_RDMA
 /* in nfs_rpc_rdma.c */
