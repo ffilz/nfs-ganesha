@@ -230,7 +230,7 @@ static inline bool nfs_protocol_enabled(protos p)
 }
 
 /**
- * @brief Close file descriptors used for RPC services.
+ * @brief Close transports and file descriptors used for RPC services.
  *
  * So that restarting the NFS server wont encounter issues of "Address
  * Already In Use" - this has occurred even though we set the
@@ -239,19 +239,21 @@ static inline bool nfs_protocol_enabled(protos p)
  * fast.  when closing a listening socket it will be closed
  * immediately if no connection is pending on it, hence drastically
  * reducing the probability for trouble.
+ *
+ * Actually call SVC_DESTROY(), setting SVC_XPRT_FLAG_DESTROYED to stop
+ * new connections.  SVC_*_FLAG_CLOSE will prompt closing the fd.
  */
 static void close_rpc_fd(void)
 {
 	protos p;
 
 	for (p = P_NFS; p < P_COUNT; p++) {
-		if (udp_socket[p] != -1)
-			close(udp_socket[p]);
-		if (tcp_socket[p] != -1)
-			close(tcp_socket[p]);
+		if (udp_xprt[p])
+			SVC_DESTROY(udp_xprt[p]);
+		if (tcp_xprt[p])
+			SVC_DESTROY(tcp_xprt[p]);
 	}
-	if (vsock)
-		close(tcp_socket[P_NFS_VSOCK]);
+	/* no need for special tcp_xprt[P_NFS_VSOCK] treatment */
 }
 
 void Create_udp(protos prot)
@@ -771,12 +773,12 @@ static void Allocate_sockets(void)
 	LogFullDebug(COMPONENT_DISPATCH, "Allocation of the sockets");
 
 	for (p = P_NFS; p < P_COUNT; p++) {
-		if (nfs_protocol_enabled(p)) {
-			/* Initialize all the sockets to -1 because
-			 * it makes some code later easier */
-			udp_socket[p] = -1;
-			tcp_socket[p] = -1;
+		/* Initialize all the sockets to -1 because
+		 * it makes some code later easier */
+		udp_socket[p] = -1;
+		tcp_socket[p] = -1;
 
+		if (nfs_protocol_enabled(p)) {
 			if (v6disabled)
 				goto try_V4;
 
@@ -851,10 +853,6 @@ try_V4:
  * thread */
 void Clean_RPC(void)
 {
-  /**
-   * @todo Consider the need to call Svc_dg_destroy for UDP & ?? for
-   * TCP based services
-   */
 	unregister_rpc();
 	close_rpc_fd();
 }
