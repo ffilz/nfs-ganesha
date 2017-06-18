@@ -340,6 +340,22 @@ BuildRequires:        libattr-devel, libacl-devel
 %description gluster
 This package contains a FSAL shared object to
 be used with NFS-Ganesha to support Gluster
+
+%package gluster-selinux
+Summary: The NFS-GANESHA's GLUSTER FSAL SELinux Support
+Group: Applications/System
+Requires:	nfs-ganesha-gluster = %{version}-%{release}
+%if 0%{?fedora}
+Requires(post): policycoreutils-python-utils
+%else
+Requires(post): policycoreutils-python
+%endif
+%global selinuxbooleans ganesha_use_fusefs=1
+
+%description gluster-selinux
+This package contains extra SELinux policy to allow access
+to the GlusterFS (FUSE) shared-storage volume, used to store
+shared state in clustered deployments of NFS-GANESHA.
 %endif
 
 %prep
@@ -493,6 +509,16 @@ exit 0
 %endif
 %endif
 
+%if %{with gluster}
+%post gluster-selinux
+%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/%{modulename}.pp.bz2
+%selinux_set_booleans -s %{selinuxtype} %{selinuxbooleans}
+
+%postun gluster-selinux
+%selinux_modules_uninstall -s %{selinuxtype} %{modulename}
+%selinux_unset_booleans -s %{selinuxtype} %{selinuxboolean}
+%endif
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/ganesha.nfsd
@@ -626,9 +652,12 @@ exit 0
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/logrotate.d/ganesha-gfapi
 %{_libdir}/ganesha/libfsalgluster*
+
 %if %{with man_page}
 %{_mandir}/*/ganesha-gluster-config.8.gz
 %endif
+
+%files gluster-selinux
 %endif
 
 %if %{with panfs}
