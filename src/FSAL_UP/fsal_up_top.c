@@ -1627,6 +1627,13 @@ void up_ready_wait(struct fsal_up_vector *up_ops)
 	while (!up_ops->up_ready)
 		pthread_cond_wait(&up_ops->up_cond, &up_ops->up_mutex);
 	PTHREAD_MUTEX_unlock(&up_ops->up_mutex);
+
+	/* Currently we create exports and then initialize
+	 * general_fridge. Wait here for the entire nfs init_complete
+	 * to handle upcall events.
+	 */
+	while (!init_complete)
+		;
 }
 
 /**

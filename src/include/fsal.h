@@ -149,7 +149,7 @@ static inline void release_root_op_context(void)
  * @brief init_complete used to indicate if ganesha is during
  * startup or not
  */
-extern bool init_complete;
+extern volatile bool init_complete;
 
 /******************************************************
  *                Structure used to define a fsal
