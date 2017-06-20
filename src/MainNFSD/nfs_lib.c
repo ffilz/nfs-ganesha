@@ -209,6 +209,9 @@ int nfs_libmain(const char *ganesha_conf,
 		goto fatal_die;
 	}
 
+	/* Start service threads now */
+	nfs_start(&my_nfs_start_info);
+
 	/* Load Data Server entries from parsed file
 	 * returns the number of DS entries.
 	 */
@@ -236,9 +239,6 @@ int nfs_libmain(const char *ganesha_conf,
 	/* freeing syntax tree : */
 
 	config_Free(config_struct);
-
-	/* Everything seems to be OK! We can now start service threads */
-	nfs_start(&my_nfs_start_info);
 
 	return 0;
 
