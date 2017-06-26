@@ -160,6 +160,23 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
 
+	/*
+	 * if the entry was invalidated, all attributes need to be refreshed.
+	 */
+	if (entry->mde_flags == 0) {
+		status = mdcache_refresh_attrs(entry,
+					       FSAL_TEST_MASK(attr->valid_mask,
+							      ATTR_ACL),
+					       false);
+
+		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+
+		if (FSAL_IS_ERROR(status) && (status.major == ERR_FSAL_STALE))
+			mdcache_kill_entry(entry);
+
+		goto out;
+	}
+
 	if (attr->expire_time_attr != 0)
 		entry->attrs.expire_time_attr = attr->expire_time_attr;
 
