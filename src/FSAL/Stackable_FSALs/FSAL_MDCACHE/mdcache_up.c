@@ -158,6 +158,13 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 		goto put;
 	}
 
+	/*
+	 * If the entry was invalidated, we cannot update a subset only.
+	 * Instead, bail out and deal with it when the attributes are neeeded.
+	 */
+	if ((entry->mde_flags & FSAL_UP_INVALIDATE_CACHE) == 0)
+		goto put;
+
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
 
 	if (attr->expire_time_attr != 0)
