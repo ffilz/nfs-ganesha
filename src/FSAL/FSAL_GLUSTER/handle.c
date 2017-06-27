@@ -1016,6 +1016,10 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 
 	my_fd->glfd = glfd;
 	my_fd->openflags = openflags;
+	my_fd->creds.caller_uid = op_ctx->creds->caller_uid;
+	my_fd->creds.caller_gid = op_ctx->creds->caller_gid;
+	my_fd->creds.caller_glen = op_ctx->creds->caller_glen;
+	my_fd->creds.caller_garray = op_ctx->creds->caller_garray;
 
 out:
 #ifdef GLTIMING
@@ -1040,10 +1044,11 @@ fsal_status_t glusterfs_close_my_fd(struct glusterfs_fd *my_fd)
 
 	if (my_fd->glfd && my_fd->openflags != FSAL_O_CLOSED) {
 
-		SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-				  &op_ctx->creds->caller_gid,
-				  op_ctx->creds->caller_glen,
-				  op_ctx->creds->caller_garray);
+		/* Use the same credentials which opened up the fd */
+		SET_GLUSTER_CREDS(glfs_export, &my_fd->creds.caller_uid,
+				  &my_fd->creds.caller_gid,
+				  my_fd->creds.caller_glen,
+				  my_fd->creds.caller_garray);
 
 		rc = glfs_close(my_fd->glfd);
 
@@ -1060,6 +1065,10 @@ fsal_status_t glusterfs_close_my_fd(struct glusterfs_fd *my_fd)
 
 	my_fd->glfd = NULL;
 	my_fd->openflags = FSAL_O_CLOSED;
+	my_fd->creds.caller_uid = 0;
+	my_fd->creds.caller_gid = 0;
+	my_fd->creds.caller_glen = 0;
+	my_fd->creds.caller_garray = NULL;
 
 #ifdef GLTIMING
 	now(&e_time);

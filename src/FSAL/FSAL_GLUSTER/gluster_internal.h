@@ -158,6 +158,7 @@ struct glusterfs_fd {
 
 	/** Gluster file descriptor. */
 	struct glfs_fd *glfd;
+	struct user_cred creds; /* user creds opening fd*/
 };
 
 struct glusterfs_handle {
