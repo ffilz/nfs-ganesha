@@ -66,6 +66,10 @@ struct mdcache_parameter {
 		 *  be split. Pre-computed for simplicity.
 		 */
 		uint32_t avl_chunk_split;
+		/** Loose dirent multiplier (of avl_chunk) */
+		uint32_t avl_loose_mult;
+		/** Computed max loose dirents */
+		uint32_t avl_loose_max;
 	} dir;
 	/** High water mark for cache entries.  Defaults to 100000,
 	    settable by Entries_HWMark. */
