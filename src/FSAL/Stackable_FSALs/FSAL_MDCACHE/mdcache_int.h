@@ -270,6 +270,10 @@ struct mdcache_fsal_obj_handle {
 		struct {
 			/** List of chunks in this directory, not ordered */
 			struct glist_head chunks;
+			/** List of detached directory entries. */
+			struct glist_head detached;
+			/** Count of detached directory entries. */
+			int detached_count;
 			/** @todo FSF
 			 *
 			 * This is somewhat fragile, however, a reorganization
@@ -374,6 +378,41 @@ typedef struct mdcache_dir_entry__ {
 	char name[];
 } mdcache_dir_entry_t;
 
+/**
+ * @brief Move a detached dirent to MRU postion in LRU list.
+ *
+ * @note mdc_parent MUST have it's content_lock held for writing
+ *
+ * @param[in]     parent  Parent entry
+ * @param[in]     dirent  Dirent to move to MRU
+ */
+
+static inline void bump_detached_dirent(mdcache_entry_t *parent,
+					mdcache_dir_entry_t *dirent)
+{
+	if (glist_first_entry(&parent->fsobj.fsdir.detached,
+			      mdcache_dir_entry_t, chunk_list) != dirent) {
+		glist_del(&dirent->chunk_list);
+		glist_add(&parent->fsobj.fsdir.detached, &dirent->chunk_list);
+	}
+}
+
+/**
+ * @brief Remove a detached dirent from the LRU list.
+ *
+ * @note mdc_parent MUST have it's content_lock held for writing
+ *
+ * @param[in]     parent  Parent entry
+ * @param[in]     dirent  Dirent to remove
+ */
+
+static inline void rmv_detached_dirent(mdcache_entry_t *parent,
+				       mdcache_dir_entry_t *dirent)
+{
+	glist_del(&dirent->chunk_list);
+	parent->fsobj.fsdir.detached_count--;
+}
+
 /* Helpers */
 fsal_status_t mdcache_alloc_and_check_handle(
 		struct mdcache_fsal_export *export,
@@ -450,8 +489,8 @@ fsal_status_t mdcache_readdir_uncached(mdcache_entry_t *directory, fsal_cookie_t
 				       fsal_readdir_cb cb, attrmask_t attrmask,
 				       bool *eod_met);
 void mdcache_clean_dirent_chunk(struct dir_chunk *chunk);
-bool add_dirent_to_chunk(mdcache_entry_t *parent_dir,
-			 mdcache_dir_entry_t *new_dir_entry);
+void place_new_dirent(mdcache_entry_t *parent_dir,
+		      mdcache_dir_entry_t *new_dir_entry);
 fsal_status_t mdcache_readdir_chunked(mdcache_entry_t *directory,
 				      fsal_cookie_t whence,
 				      void *dir_state,
