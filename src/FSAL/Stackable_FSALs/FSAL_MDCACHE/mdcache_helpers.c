@@ -61,6 +61,28 @@ static inline bool trust_negative_cache(mdcache_entry_t *parent)
 		test_mde_flags(parent, MDCACHE_DIR_POPULATED);
 }
 
+static inline void add_loose_dirent(mdcache_entry_t *parent,
+				    mdcache_dir_entry_t *dirent)
+{
+	if (parent->fsobj.fsdir.loose_count ==
+	    mdcache_param.dir.avl_loose_max) {
+		/* Need to age out oldest loose dirent. */
+		mdcache_dir_entry_t *removed;
+
+		/* Find the oldest loose dirent. */
+		removed = glist_last_entry(&parent->fsobj.fsdir.loose,
+					   mdcache_dir_entry_t,
+					   chunk_list);
+
+		/* Remove from active names tree */
+		mdcache_avl_remove(parent, removed);
+	}
+
+	/* Add new entry to MRU (head) of list */
+	glist_add(&parent->fsobj.fsdir.loose, &dirent->chunk_list);
+	parent->fsobj.fsdir.loose_count++;
+}
+
 /**
  * @brief Fetch optional attributes
  *
@@ -399,21 +421,8 @@ void mdcache_clean_dirent_chunk(struct dir_chunk *chunk)
 
 		dirent = glist_entry(glist, mdcache_dir_entry_t, chunk_list);
 
-		unchunk_dirent(dirent);
-
-		if (dirent->flags & DIR_ENTRY_FLAG_DELETED) {
-			/* Remove from deleted names tree */
-			avltree_remove(&dirent->node_hk,
-				       &parent->fsobj.fsdir.avl.c);
-		} else {
-			/* Remove from active names tree */
-			avltree_remove(&dirent->node_hk,
-				       &parent->fsobj.fsdir.avl.t);
-		}
-
-		if (dirent->ckey.kv.len)
-			mdcache_key_delete(&dirent->ckey);
-		gsh_free(dirent);
+		/* Remove from deleted or active names tree */
+		mdcache_avl_remove(parent, dirent);
 	}
 
 	/* Remove chunk from directory. */
@@ -467,14 +476,11 @@ void mdcache_dirent_invalidate_all(mdcache_entry_t *entry)
 	 */
 	mdcache_clean_dirent_chunks(entry);
 
-	/* First the active tree */
-	mdcache_avl_clean_tree(&entry->fsobj.fsdir.avl.t);
+	/* Clean the active and deleted trees */
+	mdcache_avl_clean_trees(entry);
+
 	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_DIR_POPULATED);
 
-	/* Next the inactive tree */
-	mdcache_avl_clean_tree(&entry->fsobj.fsdir.avl.c);
-
-	/* Now we can trust the content */
 	atomic_set_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_CONTENT |
 						    MDCACHE_TRUST_DIR_CHUNKS);
 }
@@ -639,8 +645,9 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 		/* init avl tree */
 		mdcache_avl_init(nentry);
 
-		/* init chunk list */
+		/* init chunk list and loose dirents list */
 		glist_init(&nentry->fsobj.fsdir.chunks);
+		glist_init(&nentry->fsobj.fsdir.loose);
 		break;
 
 	case SYMBOLIC_LINK:
@@ -1084,6 +1091,9 @@ fsal_status_t mdc_try_get_cached(mdcache_entry_t *mdc_parent,
 		if (dirent->chunk != NULL) {
 			/* Bump the chunk in the LRU */
 			lru_bump_chunk(dirent->chunk);
+		} else {
+			/* Bump the loose dirent. */
+			bump_loose_dirent(mdc_parent, dirent);
 		}
 		status = mdcache_find_keyed(&dirent->ckey, entry);
 		if (!FSAL_IS_ERROR(status))
@@ -1502,6 +1512,12 @@ mdcache_dirent_add(mdcache_entry_t *parent, const char *name,
 			atomic_clear_uint32_t_bits(&entry->mde_flags,
 						   MDCACHE_DIR_POPULATED |
 						   MDCACHE_TRUST_DIR_CHUNKS);
+		} else {
+			/* This is a loose directory entry, add it to the LRU
+			 * list of loose directory entries. This is the one and
+			 * only place a loose dirent can be added.
+			 */
+			add_loose_dirent(entry, new_dir_entry);
 		}
 
 		/* Since we are chunking, we can preserve the dirent cache for
