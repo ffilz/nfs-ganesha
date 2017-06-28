@@ -270,6 +270,10 @@ struct mdcache_fsal_obj_handle {
 		struct {
 			/** List of chunks in this directory, not ordered */
 			struct glist_head chunks;
+			/** List of loose directory entries. */
+			struct glist_head loose;
+			/** Count of loose directory entries. */
+			int loose_count;
 			/** @todo FSF
 			 *
 			 * This is somewhat fragile, however, a reorganization
@@ -373,6 +377,23 @@ typedef struct mdcache_dir_entry__ {
 	/** The NUL-terminated filename */
 	char name[];
 } mdcache_dir_entry_t;
+
+static inline void bump_loose_dirent(mdcache_entry_t *parent,
+				     mdcache_dir_entry_t *dirent)
+{
+	if (glist_first_entry(&parent->fsobj.fsdir.loose,
+			      mdcache_dir_entry_t, chunk_list) != dirent) {
+		glist_del(&dirent->chunk_list);
+		glist_add(&parent->fsobj.fsdir.loose, &dirent->chunk_list);
+	}
+}
+
+static inline void rmv_loose_dirent(mdcache_entry_t *parent,
+				    mdcache_dir_entry_t *dirent)
+{
+	glist_del(&dirent->chunk_list);
+	parent->fsobj.fsdir.loose_count--;
+}
 
 /* Helpers */
 fsal_status_t mdcache_alloc_and_check_handle(
