@@ -170,6 +170,8 @@ void fsal_obj_handle_init(struct fsal_obj_handle *obj, struct fsal_export *exp,
 {
 	pthread_rwlockattr_t attrs;
 
+	obj->fs = NULL;
+	obj->state_hdl = NULL;
 	memcpy(&obj->obj_ops, &def_handle_ops, sizeof(struct fsal_obj_ops));
 	obj->fsal = exp->fsal;
 	obj->type = type;
