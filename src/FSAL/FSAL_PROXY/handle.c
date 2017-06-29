@@ -2751,6 +2751,8 @@ static struct pxy_obj_handle *pxy_alloc_handle(struct fsal_export *exp,
 		}
 #endif
 		fsal_obj_handle_init(&n->obj, exp, attributes.type);
+		n->obj.fs = NULL;
+		n->obj.state_hdl = NULL;
 		n->obj.fsid = attributes.fsid;
 		n->obj.fileid = attributes.fileid;
 		pxy_handle_ops_init(&n->obj.obj_ops);
