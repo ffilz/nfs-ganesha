@@ -1,6 +1,6 @@
 # Building and packaging DBUS scripts for ganesha
 
-find_program(PYTHON NAMES "python3" "python")
+find_program(PYTHON NAMES "python")
 
 # PyQT based class modules
 set(GANESHA_BASE_SRCS
