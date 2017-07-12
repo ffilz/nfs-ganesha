@@ -557,11 +557,14 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 	bool invalidate = true;
 	mdcache_entry_t *mdc_lookup_dst = NULL;
 
+	PTHREAD_RWLOCK_wrlock(&dest->content_lock);
+
 	status = mdc_try_get_cached(dest, name, &mdc_lookup_dst);
 
 	if (!FSAL_IS_ERROR(status) &&
 	    obj_is_junction(&mdc_lookup_dst->obj_handle)) {
 		/* Cannot link to a junction */
+		PTHREAD_RWLOCK_unlock(&dest->content_lock);
 		return fsalstat(ERR_FSAL_XDEV, 0);
 	}
 
@@ -574,10 +577,9 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "link failed %s",
 			     fsal_err_txt(status));
+		PTHREAD_RWLOCK_unlock(&dest->content_lock);
 		return status;
 	}
-
-	PTHREAD_RWLOCK_wrlock(&dest->content_lock);
 
 	/* Add this entry to the directory (also takes an internal ref)
 	 */
@@ -866,17 +868,20 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 	mdcache_entry_t *mdc_lookup_dst = NULL;
 	fsal_status_t status;
 
+	/* Now update cached dirents.  Must take locks in the correct order */
+	mdcache_src_dest_lock(mdc_olddir, mdc_newdir);
+
 	status = mdc_try_get_cached(mdc_newdir, new_name, &mdc_lookup_dst);
 
 	if (!FSAL_IS_ERROR(status)) {
 		if (mdc_obj == mdc_lookup_dst) {
 			/* Same source and destination */
-			goto out;
+			goto unlock;
 		}
 		if (obj_is_junction(&mdc_lookup_dst->obj_handle)) {
 			/* Cannot rename on top of junction */
 			status = fsalstat(ERR_FSAL_XDEV, 0);
-			goto out;
+			goto unlock;
 		}
 	}
 
@@ -887,10 +892,7 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 	       );
 
 	if (FSAL_IS_ERROR(status))
-		goto out;
-
-	/* Now update cached dirents.  Must take locks in the correct order */
-	mdcache_src_dest_lock(mdc_olddir, mdc_newdir);
+		goto unlock;
 
 	if (mdc_lookup_dst != NULL) {
 		/* Mark target file attributes as invalid */
@@ -1065,7 +1067,6 @@ unlock:
 		PTHREAD_RWLOCK_unlock(&mdc_obj->content_lock);
 	}
 
-out:
 	if (mdc_lookup_dst)
 		mdcache_put(mdc_lookup_dst);
 
