@@ -390,6 +390,10 @@ typedef struct mdcache_dir_entry__ {
 static inline void bump_detached_dirent(mdcache_entry_t *parent,
 					mdcache_dir_entry_t *dirent)
 {
+#ifdef DEBUG_MDCACHE
+	assert(parent->content_lock.__data.__writer != 0);
+#endif
+
 	if (glist_first_entry(&parent->fsobj.fsdir.detached,
 			      mdcache_dir_entry_t, chunk_list) != dirent) {
 		glist_del(&dirent->chunk_list);
@@ -409,6 +413,10 @@ static inline void bump_detached_dirent(mdcache_entry_t *parent,
 static inline void rmv_detached_dirent(mdcache_entry_t *parent,
 				       mdcache_dir_entry_t *dirent)
 {
+#ifdef DEBUG_MDCACHE
+	assert(parent->content_lock.__data.__writer != 0);
+#endif
+
 	glist_del(&dirent->chunk_list);
 	parent->fsobj.fsdir.detached_count--;
 }
