@@ -207,6 +207,51 @@ static fsal_status_t rgw_fsal_readdir(struct fsal_obj_handle *dir_hdl,
 }
 
 /**
+ * @brief Project cookie offset for a dirent name
+ *
+ * This optional API function produces the stable offset which
+ * corresponds to a given dirent name (FSALs for which there is
+ * no stable mapping will not implement).
+ *
+ * @param[in]  dir_hdl     The directory to read
+ * @param[in]  whence      The cookie indicating resumption, NULL to start
+ * @param[in]  dir_state   Opaque, passed to cb
+ * @param[in]  cb          Callback that receives directory entries
+ * @param[out] eof         True if there are no more entries
+ *
+ * @return FSAL status.
+ */
+
+static fsal_cookie_t rgw_fsal_compute_cookie(
+	struct fsal_obj_handle *dir_hdl,
+	const char *name)
+{
+	uint64_t offset = 0; /* XXX */
+
+	struct rgw_export *export =
+		container_of(op_ctx->fsal_export, struct rgw_export, export);
+
+	struct rgw_handle *dir = container_of(dir_hdl, struct rgw_handle,
+					handle);
+
+	LogFullDebug(COMPONENT_FSAL,
+		"%s enter dir_hdl %p name %s", __func__, dir_hdl, name);
+
+	if (unlikely(!strcmp(name, ".."))) {
+		return 1;
+	}
+
+	if (unlikely(!strcmp(name, "."))) {
+		return 2;
+	}
+
+	(void) rgw_dirent_offset(export->rgw_fs, dir->rgw_fh, name, &offset,
+				RGW_DIRENT_OFFSET_FLAG_NONE);
+
+	return offset;
+}
+
+/**
  * @brief Create a regular file
  *
  * This function creates an empty, regular file.
@@ -1580,6 +1625,7 @@ void handle_ops_init(struct fsal_obj_ops *ops)
 	ops->create = rgw_fsal_create;
 	ops->mkdir = rgw_fsal_mkdir;
 	ops->readdir = rgw_fsal_readdir;
+	ops->compute_readdir_cookie = rgw_fsal_compute_cookie;
 	ops->getattrs = getattrs;
 	ops->rename = rgw_fsal_rename;
 	ops->unlink = rgw_fsal_unlink;
