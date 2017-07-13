@@ -7,6 +7,9 @@
 #
 
 CONFIGFILE=/etc/sysconfig/ganesha
+if [ -f /etc/default/ganesha ]; then
+  CONFIGFILE=/etc/default/ganesha
+fi
 if test -r ${CONFIGFILE}; then
 	. ${CONFIGFILE}
 	[ -x ${EPOCH_EXEC} ] &&  EPOCHVALUE=`${EPOCH_EXEC}`
