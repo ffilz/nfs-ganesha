@@ -1111,6 +1111,9 @@ static fsal_status_t file_close(struct fsal_obj_handle *obj_hdl)
 
 	assert(obj_hdl->type == REGULAR_FILE);
 
+	if (objhandle->globalfd.openflags == FSAL_O_CLOSED)
+		return fsalstat(ERR_FSAL_NOT_OPENED, 0);
+
 	/* Take write lock on object to protect file descriptor.
 	 * This can block over an I/O operation.
 	 */
@@ -1119,6 +1122,8 @@ static fsal_status_t file_close(struct fsal_obj_handle *obj_hdl)
 	status = glusterfs_close_my_fd(&objhandle->globalfd);
 
 	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+
+	objhandle->globalfd.openflags = FSAL_O_CLOSED;
 
 #ifdef GLTIMING
 	now(&e_time);

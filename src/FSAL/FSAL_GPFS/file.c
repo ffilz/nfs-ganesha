@@ -1253,6 +1253,8 @@ fsal_status_t gpfs_close(struct fsal_obj_handle *obj_hdl)
 		status = fsal_internal_close(myself->u.file.fd.fd, NULL, 0);
 		myself->u.file.fd.fd = -1;
 		myself->u.file.fd.openflags = FSAL_O_CLOSED;
+	} else {
+		return fsalstat(ERR_FSAL_NOT_OPENED, 0);
 	}
 
 	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
