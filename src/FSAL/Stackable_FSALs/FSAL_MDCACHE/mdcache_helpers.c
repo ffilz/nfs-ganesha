@@ -2962,6 +2962,42 @@ again:
 				     "Lookup by key for %s failed, lookup by name now",
 				     dirent->name);
 
+			/* mdc_lookup_uncached needs write lock, dropping the
+			 * read lock means we can no longer trust the dirent or
+			 * the chunk.
+			 */
+			if (!has_write) {
+				/* We will have to re-find this dirent after we
+				 * re-acquire the lock.
+				 */
+				look_ck = dirent->ck;
+
+				PTHREAD_RWLOCK_unlock(&directory->content_lock);
+				PTHREAD_RWLOCK_wrlock(&directory->content_lock);
+				has_write = true;
+
+				/* Since we have dropped the lock, if we are
+				 * using dirent name as cookie, we can't assume
+				 * anything about the dirent cache, so we may
+				 * need to rescan (see logic above that uses
+				 * first pass. We also can no longer trust the
+				 * chunk pointer. Note that if this chunk is
+				 * actually discarded, we will read a new
+				 * chunk that may not start at the same place as
+				 * the previous chunk.
+				 */
+				first_pass = true;
+				chunk = NULL;
+
+				/* Now we need to look for this dirent again.
+				 * We haven't updated next_ck for this dirent
+				 * yet, so it is the right whence to use for a
+				 * repopulation readdir if the chunk is
+				 * discarded.
+				 */
+				goto again;
+			}
+
 			status = mdc_lookup_uncached(directory, dirent->name,
 						     &entry, NULL);
 
