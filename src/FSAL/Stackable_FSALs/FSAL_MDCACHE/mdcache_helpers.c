@@ -2962,6 +2962,14 @@ again:
 				     "Lookup by key for %s failed, lookup by name now",
 				     dirent->name);
 
+			/* mdc_lookup_uncached needs write lock, probably
+			 * should redo a cached lookup just after upgrading
+			 * in case we got raced */
+			if (!has_write) {
+				PTHREAD_RWLOCK_unlock(&directory->content_lock);
+				PTHREAD_RWLOCK_wrlock(&directory->content_lock);
+				has_write = true;
+			}
 			status = mdc_lookup_uncached(directory, dirent->name,
 						     &entry, NULL);
 
