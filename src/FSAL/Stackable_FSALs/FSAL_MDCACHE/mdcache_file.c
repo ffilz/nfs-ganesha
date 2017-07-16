@@ -612,6 +612,13 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 		    "attrs_in ", attrs_in, false);
 
 	if (name) {
+		if (!mdcache_lru_fds_available()) {
+			/* This seems the best idea, let the client
+			 * try again later after the reap.
+			 */
+			return fsalstat(ERR_FSAL_DELAY, 0);
+		}
+
 		/* Check if we have the file already cached, in which case
 		 * we can open by object instead of by name.
 		 */
@@ -835,6 +842,13 @@ fsal_status_t mdcache_read2(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
 
+	if (!mdcache_lru_fds_available()) {
+		/* This seems the best idea, let the client try again later
+		 * after the reap.
+		 */
+		return fsalstat(ERR_FSAL_DELAY, 0);
+	}
+
 	subcall(
 		status = entry->sub_handle->obj_ops.read2(
 			entry->sub_handle, bypass, state, offset, buf_size,
@@ -878,6 +892,13 @@ fsal_status_t mdcache_write2(struct fsal_obj_handle *obj_hdl,
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
+
+	if (!mdcache_lru_fds_available()) {
+		/* This seems the best idea, let the client try again later
+		 * after the reap.
+		 */
+		return fsalstat(ERR_FSAL_DELAY, 0);
+	}
 
 	subcall(
 		status = entry->sub_handle->obj_ops.write2(
@@ -969,6 +990,13 @@ fsal_status_t mdcache_commit2(struct fsal_obj_handle *obj_hdl, off_t offset,
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
 
+	if (!mdcache_lru_fds_available()) {
+		/* This seems the best idea, let the client try again later
+		 * after the reap.
+		 */
+		return fsalstat(ERR_FSAL_DELAY, 0);
+	}
+
 	subcall(
 		status = entry->sub_handle->obj_ops.commit2(
 			entry->sub_handle, offset, len)
@@ -1006,6 +1034,13 @@ fsal_status_t mdcache_lock_op2(struct fsal_obj_handle *obj_hdl,
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
+
+	if (!mdcache_lru_fds_available()) {
+		/* This seems the best idea, let the client try again later
+		 * after the reap.
+		 */
+		return fsalstat(ERR_FSAL_DELAY, 0);
+	}
 
 	subcall(
 		status = entry->sub_handle->obj_ops.lock_op2(
