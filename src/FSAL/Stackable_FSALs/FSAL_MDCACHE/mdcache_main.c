@@ -394,6 +394,19 @@ fsal_status_t mdcache_pkginit(void)
 	return status;
 }
 
+/**
+ * @brief Check if FDs are available.
+ *
+ * This function checks if FDs are available.
+ *
+ * @return true if there are FDs available to serve open requests,
+ * false otherwise.
+ */
+bool mdcache_check_fds_avail(void)
+{
+	return mdcache_lru_fds_available();
+}
+
 #ifdef USE_DBUS
 void mdcache_dbus_show(DBusMessageIter *iter)
 {
