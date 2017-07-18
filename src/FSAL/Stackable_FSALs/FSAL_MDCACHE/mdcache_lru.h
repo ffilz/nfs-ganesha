@@ -214,15 +214,6 @@ static inline bool mdcache_lru_fds_available(void)
 	return true;
 }
 
-/**
- * Return true if we are currently caching file descriptors.
- */
-
-static inline bool mdcache_lru_caching_fds(void)
-{
-	return lru_state.caching_fds;
-}
-
 void lru_remove_chunk(struct dir_chunk *chunk);
 struct dir_chunk *mdcache_get_chunk(mdcache_entry_t *parent);
 void lru_bump_chunk(struct dir_chunk *chunk);
