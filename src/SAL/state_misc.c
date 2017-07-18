@@ -960,13 +960,13 @@ void dec_state_owner_ref(state_owner_t *owner)
 		return;
 	}
 
-	/* Release the latch */
-	hashtable_releaselatched(ht_owner, &latch);
-
 	if (str_valid)
 		LogFullDebug(COMPONENT_STATE, "Free {%s}", str);
 
 	free_state_owner(owner);
+
+	/* Release the latch */
+	hashtable_releaselatched(ht_owner, &latch);
 }
 
 /** @brief Remove an NFS 4 open owner from the cached owners list.
