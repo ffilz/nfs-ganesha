@@ -143,14 +143,6 @@ STRING(SUBSTRING ${_GIT_HEAD_COMMIT} 0  7 _GIT_HEAD_COMMIT_ABBREV )
 # Using git related information, build PACKNAME
 set( PACKNAME "${GANESHA_VERSION}" )
 
-# Define CPACK component (to deal with sub packages)
-set(CPACK_COMPONENTS_ALL daemon fsal headers )
-set(CPACK_COMPONENT_DAEMON_DISPLAY_NAME "NFS-Ganesha daemon")
-
-# Include custom config and cpack module
-include(${CMAKE_SOURCE_DIR}/cmake/cpack_config.cmake)
-include(CPack)
-
 if (FREEBSD)
 #default gcc doesn't like using -Wuninitialized without -O on FreeBSD
     set(PLATFORM "FREEBSD")
@@ -245,6 +237,21 @@ option(ENFORCE_GCC "enforce gcc as a the C compiler used for the project" OFF)
 
 # enable code profiling [-g -pg]
 option(PROFILING "turn on code profiling (-g and -pg)" OFF)
+
+# Define CPACK component (to deal with sub packages)
+set(CPACK_COMPONENTS_ALL daemon fsal headers )
+set(CPACK_COMPONENT_DAEMON_DISPLAY_NAME "NFS-Ganesha daemon")
+if (USE_SYSTEM_NTIRPC)
+  # Don't include libntirpc in the tarball
+  set(CPACK_SOURCE_IGNORE_FILES "libntirpc")
+else(USE_SYSTEM_NTIRPC)
+  # Don't include libntirpc's spec file; this can confuse rpmbuild
+  set(CPACK_SOURCE_IGNORE_FILES "libntirpc.spec$")
+endif(USE_SYSTEM_NTIRPC)
+
+# Include custom config and cpack module
+include(${CMAKE_SOURCE_DIR}/cmake/cpack_config.cmake)
+include(CPack)
 
 # MSPAC support -lwbclient link flag
 if( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" VERSION_GREATER "2.6" )
