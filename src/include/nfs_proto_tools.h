@@ -256,7 +256,7 @@ typedef enum {
 	UTF8_SCAN_NOSLASH = 1,	/* disallow '/' */
 	UTF8_SCAN_NODOT = 2,	/* disallow '.' and '..' */
 	UTF8_SCAN_CKUTF8 = 4,	/* validate utf8 */
-	UTF8_SCAN_SYMLINK = 6,	/* a symlink, allow '/', no "." or "..", utf8 */
+	UTF8_SCAN_SYMLINK = 12,	/* a symlink, allow '/', ".", "..", utf8 */
 	UTF8_SCAN_NAME = 3,	/* a name (no embedded /, "." or "..") */
 	UTF8_SCAN_ALL = 7	/* do the whole thing, name+valid utf8 */
 } utf8_scantype_t;
