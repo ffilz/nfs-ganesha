@@ -168,9 +168,10 @@ int nfs4_op_create(struct nfs_argop4 *op, compound_data_t *data,
 	case NF4LNK:
 		/* Convert the name to link from into a regular string */
 		type = SYMBOLIC_LINK;
+		/* The target should be just valid utf8, dots & slash allowed */
 		res_CREATE4->status = nfs4_utf8string2dynamic(
 				&arg_CREATE4->objtype.createtype4_u.linkdata,
-				UTF8_SCAN_SYMLINK,
+				UTF8_SCAN_CKUTF8,
 				&link_content);
 
 		if (res_CREATE4->status != NFS4_OK)
