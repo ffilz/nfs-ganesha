@@ -1617,10 +1617,8 @@ static void open4_ex(OPEN4args *arg,
 			     (*file_state)->state_data.share.share_deny_prev);
 	}
 
-#if 0
 	/** todo FSF: re-enable delegation when I get more figured out. */
 	do_delegation(arg, res_OPEN4, data, owner, *file_state, clientid);
-#endif
 
  out:
 

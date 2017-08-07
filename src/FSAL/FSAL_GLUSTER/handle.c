@@ -69,6 +69,7 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 				strerror(errno), errno);
 			/* cleanup as much as possible */
 		}
+		objhandle->globalfd.glfd = NULL;
 	}
 
 	if (objhandle->glhandle) {
@@ -1024,6 +1025,8 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 	struct glusterfs_export *glfs_export =
 	    container_of(op_ctx->fsal_export, struct glusterfs_export, export);
 	gid_t **garray_copy = NULL;
+	char lease_id[LEASE_ID_SIZE];
+
 #ifdef GLTIMING
 	struct timespec s_time, e_time;
 
@@ -1045,6 +1048,9 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 			  &op_ctx->creds->caller_gid,
 			  op_ctx->creds->caller_glen,
 			  op_ctx->creds->caller_garray);
+	memcpy(lease_id,
+		op_ctx->client->addr.addr, op_ctx->client->addr.len);
+	glfs_set_fop_attr(0, lease_id);
 
 	glfd = glfs_h_open(glfs_export->gl_fs->fs, objhandle->glhandle,
 			   posix_flags);
@@ -2094,6 +2100,9 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 	struct glusterfs_export *glfs_export =
 	    container_of(op_ctx->fsal_export,
 			 struct glusterfs_export, export);
+	struct glfs_lease lease = {0,};
+	struct state_owner_t *s_owner = (struct state_owner_t *)p_owner;
+
 
 #if 0
 	/** @todo: fsid work */
@@ -2111,6 +2120,11 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 		     lock_op, request_lock->lock_type, request_lock->lock_start,
 		     request_lock->lock_length);
 
+
+	if (request_lock->lock_sle_type == FSAL_LEASE_LOCK)
+		goto deleg;
+
+	/** @todo: setlkowner as well */
 	if (lock_op == FSAL_OP_LOCKT) {
 		/* We may end up using global fd, don't fail on a deny mode */
 		bypass = true;
@@ -2177,7 +2191,6 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 		return status;
 	}
 
-	/** @todo: setlkowner as well */
 	errno = 0;
 	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
 			  &op_ctx->creds->caller_gid,
@@ -2229,6 +2242,65 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 
 
 	/* Fall through (retval == 0) */
+	goto err;
+
+deleg:
+
+	/** @todo: setlkowner as well */
+	if (lock_op == FSAL_OP_LOCKT) {
+		/* We may end up using global fd, don't fail on a deny mode */
+		bypass = true;
+		lease.cmd = GET_LEASE;
+		openflags = FSAL_O_ANY;
+	} else if (lock_op == FSAL_OP_LOCK) {
+		lease.cmd = SET_LEASE;
+
+		if (request_lock->lock_type == FSAL_LOCK_R)
+			openflags = FSAL_O_READ;
+		else if (request_lock->lock_type == FSAL_LOCK_W)
+			openflags = FSAL_O_WRITE;
+	} else if (lock_op == FSAL_OP_UNLOCK) {
+		lease.cmd = UNLK_LEASE;
+		openflags = FSAL_O_ANY;
+	} else {
+		LogDebug(COMPONENT_FSAL,
+			 "ERROR: Lock operation requested was not TEST, READ, or WRITE.");
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	}
+
+	if (request_lock->lock_type == FSAL_LOCK_R) {
+		lease.lease_type = RD_LEASE;
+	} else if (request_lock->lock_type == FSAL_LOCK_W) {
+		lease.lease_type = RW_LEASE;
+	} else {
+		LogDebug(COMPONENT_FSAL,
+			 "ERROR: The requested lock type was not read or write.");
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	}
+
+	/* Get a usable file descriptor */
+	status = find_fd(&my_fd, obj_hdl, bypass, state, openflags,
+			 &has_lock, &closefd, true);
+
+	if (FSAL_IS_ERROR(status)) {
+		LogCrit(COMPONENT_FSAL, "Unable to find fd for lock operation");
+		return status;
+	}
+
+	if (s_owner) { /* convert bytes to string */
+		memcpy(lease.lease_id,
+		op_ctx->client->addr.addr, op_ctx->client->addr.len);
+		/* op_ctx->clientid, sizeof(op_ctx->clientid));
+			//&s_owner->so_owner.so_nfs4_owner.so_clientid,
+			//sizeof(clientid4)); */
+	}
+
+	retval = glfs_lease(my_fd.glfd, &lease, NULL, NULL);
+
+	if (retval /* && lock_op == FSAL_OP_LOCK */) {
+		retval = errno;
+		LogCrit(COMPONENT_FSAL, "Unable to acquire lease");
+	}
 
  err:
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);

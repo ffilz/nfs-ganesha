@@ -71,6 +71,7 @@ static struct fsal_staticfsinfo_t default_gluster_info = {
 	.pnfs_mds = false,
 	.pnfs_ds = true,
 	.link_supports_permission_checks = true,
+	.delegations = FSAL_OPTION_FILE_DELEGATIONS,
 };
 
 static struct config_item glfs_params[] = {
