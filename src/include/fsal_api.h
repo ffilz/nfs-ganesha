@@ -2700,6 +2700,27 @@ struct fsal_obj_ops {
 				   fsal_lock_param_t *conflicting_lock);
 
 /**
+ * @brief Acquire or Release delegation
+ *
+ * This functions acquires/releases delegation/lease_lock.
+ * This method assumes the FSAL is able to support lock owners.
+ * XXX: Maybe we need clientid/leaseid as well??
+ *
+ * @param[in]  obj_hdl          File on which to operate
+ * @param[in]  state            state_t to use for this operation
+ * @param[in]  owner            State owner
+ * @param[in]  deleg_op         Operation to perform
+ * @param[in]  request_params   Params to take/release delegation
+ *
+ * @return FSAL status.
+ */
+	 fsal_status_t (*lease_op2)(struct fsal_obj_handle *obj_hdl,
+				    struct state_t *state,
+				    void *owner,
+				    fsal_deleg_op_t deleg_op,
+				    fsal_deleg_param_t *request_params);
+
+/**
  * @brief Set attributes on an object
  *
  * This function sets attributes on an object.  Which attributes are

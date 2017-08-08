@@ -1025,6 +1025,37 @@ fsal_status_t mdcache_lock_op2(struct fsal_obj_handle *obj_hdl,
 }
 
 /**
+ * @brief Get/Release delegation for a file (new style)
+ *
+ * Delegate to sub-FSAL
+ *
+ * @param[in] obj_hdl	Object owning state
+ * @param[in] state	Open file state to get/release
+ * @param[in] p_owner	Private owner
+ * @param[in] deleg_op	Delegation operation
+ * @param[in] req_params  Parameters for requested delegation
+ * @return FSAL status
+ */
+fsal_status_t mdcache_lease_op2(struct fsal_obj_handle *obj_hdl,
+				struct state_t *state,
+				void *p_owner,
+				fsal_deleg_op_t deleg_op,
+				fsal_deleg_param_t *req_params)
+{
+	mdcache_entry_t *entry =
+		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+	fsal_status_t status;
+
+	subcall(
+		status = entry->sub_handle->obj_ops.lease_op2(
+			entry->sub_handle, state, p_owner, deleg_op,
+			req_params);
+	       );
+
+	return status;
+}
+
+/**
  * @brief Close a file (new style)
  *
  * @param[in] obj_hdl	Object owning state

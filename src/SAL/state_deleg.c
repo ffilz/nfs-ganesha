@@ -153,38 +153,31 @@ void init_new_deleg_state(union state_data *deleg_state,
  */
 state_status_t do_lease_op(struct fsal_obj_handle *obj,
 			  state_t *state,
-			  fsal_lock_op_t lock_op,
+			  fsal_deleg_op_t deleg_op,
 			  state_owner_t *owner,
-			  fsal_lock_param_t *lock)
+			  fsal_deleg_param_t *deleg_p)
 {
 	fsal_status_t fsal_status;
 	state_status_t status;
 
-	LogLock(COMPONENT_STATE, NIV_FULL_DEBUG,
+/*	LogLock(COMPONENT_STATE, NIV_FULL_DEBUG,
 		lock_op == FSAL_OP_LOCK
 			? "FSAL_OP_LOCK  "
 			: "FSAL_OP_UNLOCK",
-		obj, owner, lock);
+		obj, owner, lock); */
 
 	if (!obj->fsal->m_ops.support_ex(obj)) {
-			/* Call legacy lock_op */
-		fsal_status = obj->obj_ops.lock_op(
-				obj,
-				convert_lock_owner(op_ctx->fsal_export, owner),
-				lock_op,
-				lock,
-				NULL);
+		return ENOTSUP;
 	} else {
-		/* Perform this lock operation using the new
-		 * multiple file-descriptors lock op.
+		/* Perform this delegation operation using the new
+		 * multiple file-descriptors.
 		 */
-		fsal_status = obj->obj_ops.lock_op2(
+		fsal_status = obj->obj_ops.lease_op2(
 					obj,
 					state,
 					owner,
-					lock_op,
-					lock,
-					NULL);
+					deleg_op,
+					deleg_p);
 	}
 
 	status = state_error_convert(fsal_status);
@@ -209,21 +202,18 @@ state_status_t acquire_lease_lock(struct state_hdl *ostate,
 				  state_t *state)
 {
 	state_status_t status;
-	fsal_lock_param_t lock_desc;
+	fsal_deleg_param_t deleg_desc;
 
-	lock_desc.lock_start = 0;
-	lock_desc.lock_length = 0;
-	lock_desc.lock_sle_type = FSAL_LEASE_LOCK;
-	lock_desc.lock_reclaim = false;
+	deleg_desc.deleg_reclaim = false;
 
 	if (state->state_data.deleg.sd_type == OPEN_DELEGATE_WRITE)
-		lock_desc.lock_type = FSAL_LOCK_W;
+		deleg_desc.deleg_type = FSAL_DELEG_WRITE;
 	else
-		lock_desc.lock_type = FSAL_LOCK_R;
+		deleg_desc.deleg_type = FSAL_DELEG_READ;
 
 	/* Create a new deleg data object */
-	status = do_lease_op(ostate->file.obj, state, FSAL_OP_LOCK, owner,
-			     &lock_desc);
+	status = do_lease_op(ostate->file.obj, state, FSAL_DELEG_SET, owner,
+			     &deleg_desc);
 
 	if (status == STATE_SUCCESS) {
 		update_delegation_stats(ostate, owner, state);
@@ -245,7 +235,7 @@ state_status_t acquire_lease_lock(struct state_hdl *ostate,
 state_status_t release_lease_lock(struct fsal_obj_handle *obj, state_t *state)
 {
 	state_status_t status;
-	fsal_lock_param_t lock_desc;
+	fsal_deleg_param_t deleg_desc;
 	state_owner_t *owner = get_state_owner_ref(state);
 
 	if (owner == NULL) {
@@ -253,17 +243,19 @@ state_status_t release_lease_lock(struct fsal_obj_handle *obj, state_t *state)
 		return STATE_ESTALE;
 	}
 
-	lock_desc.lock_type = FSAL_LOCK_R;  /* doesn't matter for unlock */
-	lock_desc.lock_start = 0;
-	lock_desc.lock_length = 0;
-	lock_desc.lock_sle_type = FSAL_LEASE_LOCK;
-	lock_desc.lock_reclaim = false;
+	deleg_desc.deleg_reclaim = false;
 
-	LogLock(COMPONENT_NFS_V4_LOCK, NIV_FULL_DEBUG, "DELEGRETURN",
-		obj, owner, &lock_desc);
+	/* deosn't matter for unlock */
+	if (state->state_data.deleg.sd_type == OPEN_DELEGATE_WRITE)
+		deleg_desc.deleg_type = FSAL_DELEG_WRITE;
+	else
+		deleg_desc.deleg_type = FSAL_DELEG_READ;
 
-	status = do_lease_op(obj, state, FSAL_OP_UNLOCK, owner,
-			     &lock_desc);
+/*	LogLock(COMPONENT_NFS_V4_LOCK, NIV_FULL_DEBUG, "DELEGRETURN",
+		obj, owner, &deleg_desc); */
+
+	status = do_lease_op(obj, state, FSAL_DELEG_RELEASE, owner,
+			     &deleg_desc);
 
 	if (status != STATE_SUCCESS)
 		LogMajor(COMPONENT_STATE, "Unable to unlock FSAL, error=%s",

@@ -873,6 +873,22 @@ typedef struct fsal_share_param_t {
 	bool share_reclaim;
 } fsal_share_param_t;
 
+typedef enum {
+	FSAL_DELEG_GET, /* not sure if needed */
+	FSAL_DELEG_SET,
+	FSAL_DELEG_RELEASE
+} fsal_deleg_op_t;
+
+typedef enum {
+	FSAL_DELEG_READ,
+	FSAL_DELEG_WRITE
+} fsal_deleg_t;
+
+typedef struct fsal_deleg_param_t {
+	fsal_deleg_t deleg_type;
+	bool deleg_reclaim;
+} fsal_deleg_param_t;
+
 typedef char fsal_verifier_t[NFS4_VERIFIER_SIZE];
 
 /**
