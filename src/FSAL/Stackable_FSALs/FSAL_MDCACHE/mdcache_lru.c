@@ -1161,11 +1161,11 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 			++closed;
 		}
 
-		put_gsh_export(export);
-		op_ctx = saved_ctx;
 
 		QLOCK(qlane); /* QLOCKED */
 		mdcache_lru_unref(entry, LRU_UNREF_QLOCKED);
+		put_gsh_export(export);
+		op_ctx = saved_ctx;
 		++workdone;
 	} /* for_each_safe lru */
 
