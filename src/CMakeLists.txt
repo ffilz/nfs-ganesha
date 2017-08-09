@@ -1,5 +1,7 @@
 # NFS Ganesha  Cmake
 
+# This is a dumb change - ignore
+
 # Current version as of Fedora 16.  Not tested with earlier.
 
 cmake_minimum_required(VERSION 2.6.3)
