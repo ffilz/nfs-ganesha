@@ -219,18 +219,6 @@ static void fsal_pnfs_ds_ops(struct fsal_pnfs_ds_ops *ops)
 	memcpy(ops, &def_pnfs_ds_ops, sizeof(struct fsal_pnfs_ds_ops));
 }
 
-/**
- * @brief Indicate support for extended operations.
- *
- * @param[in]  obj	Object being operated on
- *
- * @retval true if extended operations are supported.
- */
-static bool support_ex(struct fsal_obj_handle *obj)
-{
-	return false;
-}
-
 /* Default fsal module method vector.
  * copied to allocated vector at register time
  */
@@ -245,7 +233,6 @@ struct fsal_ops def_fsal_ops = {
 	.fs_da_addr_size = fs_da_addr_size,
 	.fsal_pnfs_ds = fsal_pnfs_ds,
 	.fsal_pnfs_ds_ops = fsal_pnfs_ds_ops,
-	.support_ex = support_ex,
 };
 
 /* get_name
