@@ -1780,6 +1780,8 @@ static enum xprt_stat nfs_rpc_decode_request(SVCXPRT *xprt, XDR *xdrs)
 	return stat;
 }
 
+/* WIP */
+
 enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 {
 	const nfs_function_desc_t *reqdesc = reqdata->r_u.req.funcdesc;
