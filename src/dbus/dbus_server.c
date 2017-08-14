@@ -611,53 +611,56 @@ int32_t gsh_dbus_register_path(const char *name,
 
 void gsh_dbus_pkgshutdown(void)
 {
-	struct avltree_node *node, *onode;
+	struct avltree_node *node, *next_node;
 	struct ganesha_dbus_handler *handler;
+	char regbuf[128];
+	int code = 0;
 
 	LogDebug(COMPONENT_DBUS, "shutdown");
 
 	/* remove and free handlers */
-	onode = NULL;
 	node = avltree_first(&thread_state.callouts);
-	do {
-		if (onode) {
-			handler =
-			    avltree_container_of(onode,
-						 struct ganesha_dbus_handler,
-						 node_k);
-			dbus_bus_release_name(thread_state.dbus_conn,
-					      handler->name,
-					      &thread_state.dbus_err);
-			if (dbus_error_is_set(&thread_state.dbus_err)) {
-				LogCrit(COMPONENT_DBUS,
-					"err releasing name (%s, %s)",
-					handler->name,
-					thread_state.dbus_err.message);
-				dbus_error_free(&thread_state.dbus_err);
-			}
-			gsh_free(handler->name);
-			gsh_free(handler);
-		}
-	} while ((onode = node) && (node = avltree_next(node)));
-	if (onode) {
-		handler =
-		    avltree_container_of(onode, struct ganesha_dbus_handler,
+	while (node) {
+		next_node = avltree_next(node);
+		handler = avltree_container_of(node,
+					 struct ganesha_dbus_handler,
 					 node_k);
-		dbus_bus_release_name(thread_state.dbus_conn, handler->name,
-				      &thread_state.dbus_err);
-		if (dbus_error_is_set(&thread_state.dbus_err)) {
-			LogCrit(COMPONENT_DBUS, "err releasing name (%s, %s)",
-				handler->name, thread_state.dbus_err.message);
-			dbus_error_free(&thread_state.dbus_err);
+		/* Unregister handler */
+		code = dbus_connection_unregister_object_path(
+						thread_state.dbus_conn,
+						handler->name);
+		if (!code) {
+			LogCrit(COMPONENT_DBUS,
+				"dbus_connection_unregister_object_path called with no DBUS connection");
 		}
+		avltree_remove(&handler->node_k, &thread_state.callouts);
 		gsh_free(handler->name);
 		gsh_free(handler);
+		node = next_node;
 	}
+
 	avltree_init(&thread_state.callouts, dbus_callout_cmpf, 0);
 
+	/* Unassign the name from dbus connection */
+	snprintf(regbuf, 128, "org.ganesha.nfsd");
+	dbus_bus_release_name(thread_state.dbus_conn,
+			      regbuf,
+			      &thread_state.dbus_err);
+	if (dbus_error_is_set(&thread_state.dbus_err)) {
+		LogCrit(COMPONENT_DBUS, "err releasing name (%s, %s)",
+			handler->name, thread_state.dbus_err.message);
+			dbus_error_free(&thread_state.dbus_err);
+	}
+
 	/* shutdown bus */
+	/* As per D-Bus documentation, a shared connection which are created
+	 * with dbus_connection_open() or dbus_bus_get() should not be closed
+	 * but instead be unref'ed */
 	if (thread_state.dbus_conn)
-		dbus_connection_close(thread_state.dbus_conn);
+		dbus_connection_unref(thread_state.dbus_conn);
+
+	/* Shutdown gsh_dbus_thread */
+	thread_state.flags |= GSH_DBUS_SHUTDOWN;
 }
 
 void *gsh_dbus_thread(void *arg)
