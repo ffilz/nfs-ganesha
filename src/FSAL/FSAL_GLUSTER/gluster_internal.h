@@ -165,6 +165,7 @@ struct glusterfs_fd {
 	/** Gluster file descriptor. */
 	struct glfs_fd *glfd;
 	struct user_cred creds; /* user creds opening fd*/
+	char lease_id[GLFS_LEASE_ID_SIZE];
 };
 
 struct glusterfs_handle {
@@ -222,12 +223,15 @@ struct glusterfs_state_fd {
 
 void setglustercreds(struct glusterfs_export *glfs_export, uid_t *uid,
 		     gid_t *gid, unsigned int ngrps, gid_t *groups,
+		     char *client_addr, unsigned int client_addr_len,
 		     char *file, int line, char *function);
 
-#define SET_GLUSTER_CREDS(glfs_export, uid, gid, glen, garray) do {	\
+#define SET_GLUSTER_CREDS(glfs_export, uid, gid, glen, garray,          \
+                          client_addr, client_addr_len) do {	        \
 	int old_errno = errno;						\
 	((void) setglustercreds(glfs_export, uid, gid, glen,		\
-				garray, (char *) __FILE__,		\
+				garray, client_addr, client_addr_len,   \
+			        (char *) __FILE__,		        \
 				__LINE__, (char *) __func__));		\
 	errno = old_errno;						\
 } while (0)
