@@ -67,21 +67,26 @@
  * @return true if granting delegation would conflict with outstanding
  * OPENs.
  */
-bool state_open_deleg_conflict(struct state_hdl *ostate,
+bool state_open_deleg_conflict(struct fsal_share *oshare,
 			       const state_t *open_state)
 {
 	const struct state_share *share = &open_state->state_data.share;
 
-	assert(open_state->state_type == STATE_TYPE_SHARE);
-
+	LogWarn(COMPONENT_STATE,
+		     "obj %p: share counter: access_read %u, access_write %u, deny_read %u, deny_write %u",
+		     oshare,
+		     oshare->share_access_read,
+		     oshare->share_access_write,
+		     oshare->share_deny_read,
+		     oshare->share_deny_write);
 	switch (share->share_access & OPEN4_SHARE_ACCESS_BOTH) {
 	case OPEN4_SHARE_ACCESS_BOTH:
 		/* We would be granting a write delegation. If this is
 		 * the only outstanding OPEN, then we can grant
 		 * write delegation without a conflict.
 		 */
-		if (ostate->file.share_state.share_access_read == 1 &&
-		    ostate->file.share_state.share_access_write == 1) {
+		if (oshare->share_access_read == 1 &&
+		    oshare->share_access_write == 1) {
 			return false;
 		}
 		break;
@@ -90,8 +95,8 @@ bool state_open_deleg_conflict(struct state_hdl *ostate,
 		 * the only outstanding OPEN, then we can grant
 		 * write delegation without a conflict.
 		 */
-		if (ostate->file.share_state.share_access_read == 0 &&
-		    ostate->file.share_state.share_access_write == 1) {
+		if (oshare->share_access_read == 0 &&
+		    oshare->share_access_write == 1) {
 			return false;
 		}
 		break;
@@ -100,7 +105,7 @@ bool state_open_deleg_conflict(struct state_hdl *ostate,
 		 * no write OPEN, then we can grant read delegation
 		 * without a conflict.
 		 */
-		if (ostate->file.share_state.share_access_write == 0)
+		if (oshare->share_access_write == 0)
 			return false;
 		break;
 	}
@@ -147,6 +152,7 @@ void init_new_deleg_state(union state_data *deleg_state,
  * @return State status.
  */
 state_status_t do_lease_op(struct fsal_obj_handle *obj,
+			  state_t *state,
 			  fsal_lock_op_t lock_op,
 			  state_owner_t *owner,
 			  fsal_lock_param_t *lock)
@@ -160,12 +166,26 @@ state_status_t do_lease_op(struct fsal_obj_handle *obj,
 			: "FSAL_OP_UNLOCK",
 		obj, owner, lock);
 
-	fsal_status = obj->obj_ops.lock_op(
+	if (!obj->fsal->m_ops.support_ex(obj)) {
+			/* Call legacy lock_op */
+		fsal_status = obj->obj_ops.lock_op(
 				obj,
 				convert_lock_owner(op_ctx->fsal_export, owner),
 				lock_op,
 				lock,
 				NULL);
+	} else {
+		/* Perform this lock operation using the new
+		 * multiple file-descriptors lock op.
+		 */
+		fsal_status = obj->obj_ops.lock_op2(
+					obj,
+					state,
+					owner,
+					lock_op,
+					lock,
+					NULL);
+	}
 
 	status = state_error_convert(fsal_status);
 
@@ -202,7 +222,8 @@ state_status_t acquire_lease_lock(struct state_hdl *ostate,
 		lock_desc.lock_type = FSAL_LOCK_R;
 
 	/* Create a new deleg data object */
-	status = do_lease_op(ostate->file.obj, FSAL_OP_LOCK, owner, &lock_desc);
+	status = do_lease_op(ostate->file.obj, state, FSAL_OP_LOCK, owner,
+			     &lock_desc);
 
 	if (status == STATE_SUCCESS) {
 		update_delegation_stats(ostate, owner, state);
@@ -241,7 +262,8 @@ state_status_t release_lease_lock(struct fsal_obj_handle *obj, state_t *state)
 	LogLock(COMPONENT_NFS_V4_LOCK, NIV_FULL_DEBUG, "DELEGRETURN",
 		obj, owner, &lock_desc);
 
-	status = do_lease_op(obj, FSAL_OP_UNLOCK, owner, &lock_desc);
+	status = do_lease_op(obj, state, FSAL_OP_UNLOCK, owner,
+			     &lock_desc);
 
 	if (status != STATE_SUCCESS)
 		LogMajor(COMPONENT_STATE, "Unable to unlock FSAL, error=%s",
@@ -644,13 +666,14 @@ bool can_we_grant_deleg(struct state_hdl *ostate, state_t *open_state)
 	}
 
 	/* Check for outstanding open state that may conflict with granting
-	 * the delegation
+	 * the delegation. These conflict checks now need to be done by FSAL
+	 * as they store the share_access granted to the file.
 	 */
-	if (state_open_deleg_conflict(ostate, open_state)) {
+/*	if (state_open_deleg_conflict(ostate, open_state)) {
 		LogFullDebug(COMPONENT_STATE,
 			     "Conflicting exiting open state, not granting delegation");
 		return false;
-	}
+	}*/
 
 	/* Check for conflicting NLM locks. Write delegation would conflict
 	 * with any kind of NLM lock, and NLM write lock would conflict
