@@ -1068,28 +1068,6 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 		/* get entry early */
 		entry = container_of(lru, mdcache_entry_t, lru);
 
-		/* check refcnt in range */
-		if (unlikely(refcnt > 2)) {
-			/* This unref is ok to be done without a valid op_ctx
-			 * because we always map a new entry to an export before
-			 * we could possibly release references in
-			 * mdcache_new_entry.
-			 */
-			mdcache_lru_unref(entry, LRU_UNREF_QLOCKED);
-			/* but count it */
-			workdone++;
-			/* qlane LOCKED, lru refcnt is restored */
-			continue;
-		}
-
-		/* Move entry to MRU of L2 */
-		q = &qlane->L1;
-		LRU_DQ_SAFE(lru, q);
-		lru->qid = LRU_ENTRY_L2;
-		q = &qlane->L2;
-		lru_insert(lru, q, LRU_MRU);
-		++(q->size);
-
 		/* Get a reference to the first export and build an op context
 		 * with it. By holding the QLANE lock while we get the export
 		 * reference we assure that the entry doesn't get detached from
@@ -1131,6 +1109,26 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 		init_root_op_context(&ctx, export, export->fsal_export, 0, 0,
 				     UNKNOWN_REQUEST);
 
+		/* check refcnt in range */
+		if (unlikely(refcnt > 2)) {
+			/* This unref is ok to be done without a valid op_ctx
+			 * because we always map a new entry to an export before
+			 * we could possibly release references in
+			 * mdcache_new_entry.
+			 */
+			QUNLOCK(qlane);
+			mdcache_lru_unref(entry);
+			goto next_lru;
+		}
+
+		/* Move entry to MRU of L2 */
+		q = &qlane->L1;
+		LRU_DQ_SAFE(lru, q);
+		lru->qid = LRU_ENTRY_L2;
+		q = &qlane->L2;
+		lru_insert(lru, q, LRU_MRU);
+		++(q->size);
+
 		/* Drop the lane lock while performing (slow) operations on
 		 * entry */
 		QUNLOCK(qlane);
@@ -1162,10 +1160,12 @@ static inline size_t lru_run_lane(size_t lane, uint64_t *const totalclosed)
 		}
 
 
-		QLOCK(qlane); /* QLOCKED */
-		mdcache_lru_unref(entry, LRU_UNREF_QLOCKED);
+		mdcache_lru_unref(entry);
+next_lru:
 		put_gsh_export(export);
 		op_ctx = saved_ctx;
+		QLOCK(qlane); /* QLOCKED */
+
 		++workdone;
 	} /* for_each_safe lru */
 
