@@ -33,6 +33,7 @@
 #include "pnfs_utils.h"
 #include "nfs_exports.h"
 #include "sal_data.h"
+#include "sal_functions.h"
 
 /* fsal_obj_handle common methods
  */
@@ -69,6 +70,7 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 				strerror(errno), errno);
 			/* cleanup as much as possible */
 		}
+		objhandle->globalfd.glfd = NULL;
 	}
 
 	if (objhandle->glhandle) {
@@ -1034,6 +1036,8 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 	struct glusterfs_export *glfs_export =
 	    container_of(op_ctx->fsal_export, struct glusterfs_export, export);
 	gid_t **garray_copy = NULL;
+	char lease_id[LEASE_ID_SIZE];
+
 #ifdef GLTIMING
 	struct timespec s_time, e_time;
 
@@ -1055,6 +1059,9 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 			  &op_ctx->creds->caller_gid,
 			  op_ctx->creds->caller_glen,
 			  op_ctx->creds->caller_garray);
+	memcpy(lease_id,
+		op_ctx->client->addr.addr, op_ctx->client->addr.len);
+	glfs_set_fop_attr(0, lease_id);
 
 	glfd = glfs_h_open(glfs_export->gl_fs->fs, objhandle->glhandle,
 			   posix_flags);
@@ -1612,7 +1619,7 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 		    glfs_h_creat(glfs_export->gl_fs->fs, parenthandle->glhandle,
 				 name, p_flags, unix_mode, &sb);
 	} else if (!errno)
-                created = true;
+		created = true;
 
        /* preserve errno */
 	retval = errno;
@@ -1643,7 +1650,7 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	 * file with a mode that prevented the open this caller was attempting.
 	 */
 
-        /* Do a permission check if we were not attempting to create. If we
+	/* Do a permission check if we were not attempting to create. If we
 	 * were attempting any sort of create, then the openat call was made
 	 * with the caller's credentials active and as such was permission
 	 * checked.
@@ -2121,6 +2128,11 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 		     lock_op, request_lock->lock_type, request_lock->lock_start,
 		     request_lock->lock_length);
 
+
+	if (request_lock->lock_sle_type == FSAL_LEASE_LOCK)
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+
+	/** @todo: setlkowner as well */
 	if (lock_op == FSAL_OP_LOCKT) {
 		/* We may end up using global fd, don't fail on a deny mode */
 		bypass = true;
@@ -2187,7 +2199,6 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 		return status;
 	}
 
-	/** @todo: setlkowner as well */
 	errno = 0;
 	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
 			  &op_ctx->creds->caller_gid,
@@ -2239,8 +2250,111 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 
 
 	/* Fall through (retval == 0) */
-
  err:
+	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);
+
+	if (closefd)
+		glusterfs_close_my_fd(&my_fd);
+
+	if (has_lock)
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+
+	return fsalstat(posix2fsal_error(retval), retval);
+}
+
+/* lease_op2
+ * default case not supported
+ */
+
+static fsal_status_t glusterfs_lease_op2(struct fsal_obj_handle *obj_hdl,
+					 struct state_t *state,
+					 void *owner,
+					 fsal_deleg_op_t deleg_op,
+					 fsal_deleg_param_t *request_params)
+{
+	fsal_status_t status = {0, 0};
+	int retval = 0;
+	struct glusterfs_fd my_fd = {0};
+	bool has_lock = false;
+	bool closefd = false;
+	bool bypass = false;
+	fsal_openflags_t openflags = FSAL_O_RDWR;
+	struct glusterfs_export *glfs_export =
+	    container_of(op_ctx->fsal_export,
+			 struct glusterfs_export, export);
+	struct glfs_lease lease = {0,};
+	struct state_owner_t *s_owner = (struct state_owner_t *)owner;
+	struct glusterfs_handle *myself;
+
+	myself = container_of(obj_hdl, struct glusterfs_handle, handle);
+	if (state_open_deleg_conflict(&myself->share, state)) {
+		LogWarn(COMPONENT_FSAL,
+			 "ERROR: Deleg open state conflict.");
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	}
+
+	/** @todo: setlkowner as well */
+	if (deleg_op == FSAL_DELEG_GET) {
+		/* We may end up using global fd, don't fail on a deny mode */
+		bypass = true;
+		lease.cmd = GET_LEASE;
+		openflags = FSAL_O_ANY;
+	} else if (deleg_op == FSAL_DELEG_SET) {
+		lease.cmd = SET_LEASE;
+
+		if (request_params->deleg_type == FSAL_DELEG_READ)
+			openflags = FSAL_O_READ;
+		else if (request_params->deleg_type == FSAL_DELEG_WRITE)
+			openflags = FSAL_O_WRITE;
+	} else if (deleg_op == FSAL_DELEG_RELEASE) {
+		lease.cmd = UNLK_LEASE;
+		openflags = FSAL_O_ANY;
+	} else {
+		LogDebug(COMPONENT_FSAL,
+			 "ERROR: Lease operation requested was not GET, SET or RELEASE.");
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	}
+
+	if (request_params->deleg_type == FSAL_DELEG_READ) {
+		lease.lease_type = RD_LEASE;
+	} else if (request_params->deleg_type == FSAL_DELEG_WRITE) {
+		lease.lease_type = RW_LEASE;
+	} else {
+		LogDebug(COMPONENT_FSAL,
+			 "ERROR: The requested lock type was not read or write.");
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	}
+
+	/* Get a usable file descriptor */
+	status = find_fd(&my_fd, obj_hdl, bypass, state, openflags,
+			 &has_lock, &closefd, true);
+
+	if (FSAL_IS_ERROR(status)) {
+		LogCrit(COMPONENT_FSAL,
+			"Unable to find fd for lease operation");
+		return status;
+	}
+
+	if (s_owner) { /* convert bytes to string */
+		memcpy(lease.lease_id,
+		op_ctx->client->addr.addr, op_ctx->client->addr.len);
+		/* op_ctx->clientid, sizeof(op_ctx->clientid));
+			//&s_owner->so_owner.so_nfs4_owner.so_clientid,
+			//sizeof(clientid4)); */
+	}
+
+	errno = 0;
+	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
+			  &op_ctx->creds->caller_gid,
+			  op_ctx->creds->caller_glen,
+			  op_ctx->creds->caller_garray);
+	retval = glfs_lease(my_fd.glfd, &lease, NULL, NULL);
+
+	if (retval) {
+		retval = errno;
+		LogCrit(COMPONENT_FSAL, "Unable to acquire lease");
+	}
+
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);
 
 	if (closefd)
@@ -2723,6 +2837,7 @@ void handle_ops_init(struct fsal_obj_ops *ops)
 	ops->write2 = glusterfs_write2;
 	ops->commit2 = glusterfs_commit2;
 	ops->lock_op2 = glusterfs_lock_op2;
+	ops->lease_op2 = glusterfs_lease_op2;
 	ops->setattr2 = glusterfs_setattr2;
 	ops->close2 = glusterfs_close2;
 
