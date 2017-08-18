@@ -234,6 +234,8 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
 #ifndef USE_GLUSTER_XREADDIRPLUS
 			status = lookup(dir_hdl, de.d_name, &obj, &attrs);
+			if (FSAL_IS_ERROR(status))
+				goto out;
 #else
 			struct glfs_object *tmp = NULL;
 			struct stat *sb;
@@ -262,10 +264,11 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 			glfs_free(xstat);
 			xstat = NULL;
 
-#endif
-			if (FSAL_IS_ERROR(status))
+			if (FSAL_IS_ERROR(status)) {
+				gluster_cleanup_vars(glhandle);
 				goto out;
-
+			}
+#endif
 			cb_rc = cb(de.d_name, obj, &attrs,
 				   dir_state, glfs_telldir(glfd));
 
@@ -283,6 +286,9 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	}
 
  out:
+	if (xstat)
+		glfs_free(xstat);
+
 	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
 			  &op_ctx->creds->caller_gid,
 			  op_ctx->creds->caller_glen,
