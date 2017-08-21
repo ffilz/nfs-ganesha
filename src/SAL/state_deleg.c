@@ -68,9 +68,9 @@
  * OPENs.
  */
 bool state_open_deleg_conflict(struct fsal_share *oshare,
-			       const state_t *open_state)
+			       const state_t *deleg_state)
 {
-	const struct state_share *share = &open_state->state_data.share;
+	const struct state_deleg *deleg = &deleg_state->state_data.deleg;
 
 	LogWarn(COMPONENT_STATE,
 		     "obj %p: share counter: access_read %u, access_write %u, deny_read %u, deny_write %u",
@@ -79,28 +79,17 @@ bool state_open_deleg_conflict(struct fsal_share *oshare,
 		     oshare->share_access_write,
 		     oshare->share_deny_read,
 		     oshare->share_deny_write);
-	switch (share->share_access & OPEN4_SHARE_ACCESS_BOTH) {
-	case OPEN4_SHARE_ACCESS_BOTH:
+	switch (deleg->sd_type) {
+	case OPEN_DELEGATE_WRITE:
 		/* We would be granting a write delegation. If this is
 		 * the only outstanding OPEN, then we can grant
 		 * write delegation without a conflict.
 		 */
-		if (oshare->share_access_read == 1 &&
-		    oshare->share_access_write == 1) {
+		if (oshare->share_access_write == 1) {
 			return false;
 		}
 		break;
-	case OPEN4_SHARE_ACCESS_WRITE:
-		/* We would be granting a write delegation. If this is
-		 * the only outstanding OPEN, then we can grant
-		 * write delegation without a conflict.
-		 */
-		if (oshare->share_access_read == 0 &&
-		    oshare->share_access_write == 1) {
-			return false;
-		}
-		break;
-	case OPEN4_SHARE_ACCESS_READ:
+	case OPEN_DELEGATE_READ:
 		/* We would be granting a read delegation. If there is
 		 * no write OPEN, then we can grant read delegation
 		 * without a conflict.
@@ -108,8 +97,9 @@ bool state_open_deleg_conflict(struct fsal_share *oshare,
 		if (oshare->share_access_write == 0)
 			return false;
 		break;
+	default:
+		break;
 	}
-
 	return true;
 }
 
