@@ -242,14 +242,14 @@ void setglustercreds(struct glusterfs_export *glfs_export, uid_t *uid,
 	if ((client_addr_len <= GLFS_LEASE_ID_SIZE) && client_addr) {
 		memcpy(lease_id, client_addr, client_addr_len);
 		rc = glfs_setfsleaseid(lease_id);
-	} else
-		rc = glfs_setfsleaseid(NULL);
+	} /*else
+		rc = glfs_setfsleaseid(NULL);*/
  out:
 	if (rc != 0) {
 		DisplayLogComponentLevel(COMPONENT_FSAL, file, line, function,
 			 NIV_FATAL,
 			"Could not set Gluster credentials - uid(%d), gid(%d)",
-			*uid, *gid);
+			uid ? *uid : glfs_export->saveduid, gid ? *gid : glfs_export->savedgid);
 	}
 }
 
