@@ -410,6 +410,28 @@ static void display_clients(struct gsh_export *export)
 	PTHREAD_RWLOCK_unlock(&export->lock);
 }
 
+/*
+ * @brief compare routine used to sort client items
+ *
+ * Function used to sort the client items according
+ * to client type.  Conforms to the glist_compare
+ * function signature so it can be used with glist_insert_sorted
+ *
+ * @param a: Pointer to the glist of a exportlist_client_entry_t
+ * @param b: Pointer to the glist of another exportlist_client_entry_t
+ *           to compare the first to
+ */
+int client_item_compare(struct glist_head *a, struct glist_head *b)
+{
+	struct exportlist_client_entry__ *cli_a;
+	struct exportlist_client_entry__ *cli_b;
+
+	cli_a = glist_entry(a, exportlist_client_entry_t, cle_list);
+	cli_b = glist_entry(b, exportlist_client_entry_t, cle_list);
+
+	return (cli_a->type - cli_b->type);
+}
+
 /**
  * @brief Expand the client name token into one or more client entries
  *
@@ -583,7 +605,8 @@ static int add_client(struct glist_head *client_list,
 						   (char *) __func__,
 						   "",
 						   cli);
-				glist_add_tail(client_list, &cli->cle_list);
+				glist_insert_sorted(client_list, &cli->cle_list,
+						    client_item_compare);
 				cli = NULL; /* let go of it */
 			}
 			freeaddrinfo(info);
@@ -612,7 +635,7 @@ static int add_client(struct glist_head *client_list,
 			   (char *) __func__,
 			   "",
 			   cli);
-	glist_add_tail(client_list, &cli->cle_list);
+	glist_insert_sorted(client_list, &cli->cle_list, client_item_compare);
 	cli = NULL;
 out:
 	if (cli != NULL)
@@ -690,7 +713,13 @@ static int client_commit(void *node, void *link_mem, void *self_struct,
 		err_type->invalid = true;
 		errcnt++;
 	} else {
-		glist_splice_tail(&export->clients, &cli->cle_list);
+		struct glist_head *glist, *glistn;
+
+		glist_for_each_safe(glist, glistn, &cli->cle_list) {
+			glist_del(glist);
+			glist_insert_sorted(&export->clients, glist,
+					    client_item_compare);
+		}
 	}
 	if (errcnt == 0)
 		client_init(link_mem, self_struct);
