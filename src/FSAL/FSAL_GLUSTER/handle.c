@@ -1303,6 +1303,7 @@ fsal_status_t find_fd(struct glusterfs_fd *my_fd,
 	my_fd->creds.caller_gid = tmp2_fd->creds.caller_gid;
 	my_fd->creds.caller_glen = tmp2_fd->creds.caller_glen;
 	my_fd->creds.caller_garray = tmp2_fd->creds.caller_garray;
+	memcpy(my_fd->lease_id, tmp2_fd->lease_id, LEASE_ID_SIZE);
 
 	return status;
 }
@@ -1941,12 +1942,12 @@ static fsal_status_t glusterfs_read2(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status))
 		goto out;
 
-	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-			  &op_ctx->creds->caller_gid,
-			  op_ctx->creds->caller_glen,
-			  op_ctx->creds->caller_garray,
-			  op_ctx->client->addr.addr,
-			  op_ctx->client->addr.len);
+	SET_GLUSTER_CREDS(glfs_export, &my_fd.creds.caller_uid,
+			  &my_fd.creds.caller_gid,
+			  my_fd.creds.caller_glen,
+			  my_fd.creds.caller_garray,
+			  my_fd.lease_id,
+			  LEASE_ID_SIZE);
 
 	nb_read = glfs_pread(my_fd.glfd, buffer, buffer_size,
 			     seek_descriptor, 0);
@@ -2038,12 +2039,12 @@ static fsal_status_t glusterfs_write2(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status))
 		goto out;
 
-	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-			  &op_ctx->creds->caller_gid,
-			  op_ctx->creds->caller_glen,
-			  op_ctx->creds->caller_garray,
-			  op_ctx->client->addr.addr,
-			  op_ctx->client->addr.len);
+	SET_GLUSTER_CREDS(glfs_export, &my_fd.creds.caller_uid,
+			  &my_fd.creds.caller_gid,
+			  my_fd.creds.caller_glen,
+			  my_fd.creds.caller_garray,
+			  my_fd.lease_id,
+			  LEASE_ID_SIZE);
 
 	nb_written = glfs_pwrite(my_fd.glfd, buffer, buffer_size,
 			     seek_descriptor, ((*fsal_stable) ? O_SYNC : 0));
@@ -2239,12 +2240,12 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	errno = 0;
-	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-			  &op_ctx->creds->caller_gid,
-			  op_ctx->creds->caller_glen,
-			  op_ctx->creds->caller_garray,
-			  op_ctx->client->addr.addr,
-			  op_ctx->client->addr.len);
+	SET_GLUSTER_CREDS(glfs_export, &my_fd.creds.caller_uid,
+			  &my_fd.creds.caller_gid,
+			  my_fd.creds.caller_glen,
+			  my_fd.creds.caller_garray,
+			  my_fd.lease_id,
+			  LEASE_ID_SIZE);
 
 	retval = glfs_posix_lock(my_fd.glfd, fcntl_comm, &lock_args);
 
@@ -2379,20 +2380,19 @@ static fsal_status_t glusterfs_lease_op2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	if (s_owner) { /* convert bytes to string */
-		memcpy(lease.lease_id,
-		op_ctx->client->addr.addr, op_ctx->client->addr.len);
+		memcpy(lease.lease_id, my_fd.lease_id, LEASE_ID_SIZE);
 		/* op_ctx->clientid, sizeof(op_ctx->clientid));
 			//&s_owner->so_owner.so_nfs4_owner.so_clientid,
 			//sizeof(clientid4)); */
 	}
 
 	errno = 0;
-	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-			  &op_ctx->creds->caller_gid,
-			  op_ctx->creds->caller_glen,
-			  op_ctx->creds->caller_garray,
-			  op_ctx->client->addr.addr,
-			  op_ctx->client->addr.len);
+	SET_GLUSTER_CREDS(glfs_export, &my_fd.creds.caller_uid,
+			  &my_fd.creds.caller_gid,
+			  my_fd.creds.caller_glen,
+			  my_fd.creds.caller_garray,
+			  my_fd.lease_id,
+			  LEASE_ID_SIZE);
 	retval = glfs_lease(my_fd.glfd, &lease, NULL, NULL);
 
 	if (retval) {
@@ -2484,12 +2484,12 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 		if (FSAL_IS_ERROR(status))
 			goto out;
 
-		SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-				  &op_ctx->creds->caller_gid,
-				  op_ctx->creds->caller_glen,
-				  op_ctx->creds->caller_garray,
-				  op_ctx->client->addr.addr,
-				  op_ctx->client->addr.len);
+		SET_GLUSTER_CREDS(glfs_export, &my_fd.creds.caller_uid,
+				  &my_fd.creds.caller_gid,
+				  my_fd.creds.caller_glen,
+				  my_fd.creds.caller_garray,
+				  my_fd.lease_id,
+				  LEASE_ID_SIZE);
 
 		retval = glfs_ftruncate(my_fd.glfd, attrib_set->filesize);
 
