@@ -74,6 +74,7 @@ static int rpc_sock = -1;
 static uint32_t rpc_xid;
 static pthread_mutex_t listlock = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t sockless = PTHREAD_COND_INITIALIZER;
+static bool close_thread;
 
 /*
  * context_lock protects free_contexts list and need_context condition.
@@ -536,7 +537,7 @@ static void *pxy_rpc_recv(void *arg)
 	memcpy(&addr_rpc.sin_addr, &info_sock->sin_addr,
 	       sizeof(struct in_addr));
 
-	for (;;) {
+	while (!close_thread) {
 		int nsleeps = 0;
 
 		PTHREAD_MUTEX_lock(&listlock);
@@ -1033,7 +1034,7 @@ static void *pxy_clientid_renewer(void *arg)
 	int sessionid_needed = 1;
 	uint32_t lease_time = 60;
 
-	while (1) {
+	while (!close_thread) {
 		clientid4 newcid = 0;
 		sequenceid4 newseqid = 0;
 
@@ -1077,9 +1078,16 @@ static void *pxy_clientid_renewer(void *arg)
 			}
 		}
 
+		/* early stop test */
+		if (close_thread)
+			return NULL;
+
 		/* We've either failed to renew or rpc socket has been
 		 * reconnected and we need new clientid or sessionid. */
 		pxy_rpc_need_sock();
+		/* early stop test */
+		if (close_thread)
+			return NULL;
 
 		/* We need a new session_id */
 		if (!clientid_needed) {
@@ -1116,6 +1124,7 @@ static void *pxy_clientid_renewer(void *arg)
 			PTHREAD_MUTEX_unlock(&pxy_clientid_mutex);
 		}
 	}
+
 	return NULL;
 }
 
@@ -1130,6 +1139,36 @@ static void free_io_contexts(void)
 		glist_del(cur);
 		gsh_free(c);
 	}
+}
+
+int pxy_close_thread(void)
+{
+	int rc;
+
+	/* setting boolean to stop thread */
+	close_thread = true;
+
+	/* waiting threads ends */
+	/* pxy_clientid_renewer is usually waiting on sockless cond : wake up */
+	/* pxy_rpc_recv is usually polling rpc_sock : wake up by closing it */
+	PTHREAD_MUTEX_lock(&listlock);
+	pthread_cond_broadcast(&sockless);
+	close(rpc_sock);
+	PTHREAD_MUTEX_unlock(&listlock);
+	rc = pthread_join(pxy_renewer_thread, NULL);
+	if (rc) {
+		LogWarn(COMPONENT_FSAL,
+			"Error on waiting the pxy_renewer_thread end : %d", rc);
+		return rc;
+	}
+	rc = pthread_join(pxy_recv_thread, NULL);
+	if (rc) {
+		LogWarn(COMPONENT_FSAL,
+			"Error on waiting the pxy_recv_thread end : %d", rc);
+		return rc;
+	}
+
+	return 0;
 }
 
 int pxy_init_rpc(const struct pxy_fsal_module *pm)
