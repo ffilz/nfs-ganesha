@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fa635e6_9c3751dc",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2719,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2017-08-29T07:32:28Z",
+      "side": 1,
+      "message": "I am not sure if we really need in-memory state owner address to be passed here. Have taken it from earlier delegation implementation. At-least FSAL_GLUSTER isn\u0027t using it in any way as of now.",
+      "revId": "1a2dbe28c56aba3ef5da49d9c8deaebfc1e46b72",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
