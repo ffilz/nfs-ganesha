@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bd00dc1_9410cd37",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2017-08-29T17:38:05Z",
+      "side": 1,
+      "message": "I think this function should be moved into FSAL/commonlib.c with the other share handling code.\n\nAlso, this needs to be built on top of my \"gut\" branch that removes non-support_ex. Or at least just assume all FSALs support_ex and not test for it...",
+      "revId": "e328e4e86729f6d15043f159f4cbc9a66be7fcae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
