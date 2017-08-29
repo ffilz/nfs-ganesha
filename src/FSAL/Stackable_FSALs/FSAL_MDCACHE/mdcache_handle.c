@@ -1698,12 +1698,36 @@ static void mdcache_hdl_release(struct fsal_obj_handle *obj_hdl)
 {
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+	struct root_op_context ctx;
+	bool saved_ctx = false;
+
+	if (!op_ctx) {
+		struct gsh_export *export;
+		int32_t export_id;
+		/* We need an op_ctx.  Currently, release() is only called
+		 * during shutdown, and won't have an op_ctx set up.  Set one up
+		 * for us. */
+		export_id = atomic_fetch_int32_t(&entry->first_export_id);
+		export = get_gsh_export(export_id);
+		if (export == NULL) {
+			LogFatal(COMPONENT_CACHE_INODE,
+				 "Cannot cleanup entry with no export");
+		}
+		init_root_op_context(&ctx, export, export->fsal_export, 0, 0,
+				     0);
+		saved_ctx = true;
+	}
 
 	LogDebug(COMPONENT_CACHE_INODE,
 		 "Releasing obj_hdl=%p, entry=%p",
 		 obj_hdl, entry);
 
 	mdcache_kill_entry(entry);
+
+	if (saved_ctx) {
+		put_gsh_export(op_ctx->ctx_export);
+		release_root_op_context();
+	}
 }
 
 /**
