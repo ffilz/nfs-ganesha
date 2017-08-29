@@ -1195,6 +1195,25 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 }
 
 /**
+ * @brief Return open status of the global FD
+ *
+ * This function returns open flags representing the current open
+ * status for the global FD.
+ *
+ * @param[in] obj_hdl     File on which to operate
+ *
+ * @retval Flags representing current open status
+ */
+
+fsal_openflags_t rgw_fsal_status(struct fsal_obj_handle *obj_hdl)
+{
+	struct rgw_handle *handle = container_of(obj_hdl, struct rgw_handle,
+						handle);
+
+	return handle->openflags;
+}
+
+/**
  * @brief Return open status of a state.
  *
  * This function returns open flags representing the current open
@@ -1672,6 +1691,7 @@ void handle_ops_init(struct fsal_obj_ops *ops)
 	ops->getattrs = getattrs;
 	ops->rename = rgw_fsal_rename;
 	ops->unlink = rgw_fsal_unlink;
+	ops->status = rgw_fsal_status;
 	ops->close = rgw_fsal_close;
 	ops->handle_to_wire = handle_to_wire;
 	ops->handle_to_key = handle_to_key;
