@@ -37,6 +37,10 @@
 #include <sys/time.h>
 #include "export_mgr.h"
 
+#ifdef _VALGRIND_MEMCHECK
+#include <valgrind/memcheck.h>
+#endif
+
 extern fsal_status_t
 fsal_acl_2_gpfs_acl(struct fsal_obj_handle *, fsal_acl_t *, gpfsfsal_xstat_t *,
 		    gpfs_acl_t *acl_buf, unsigned int acl_buflen);
@@ -128,10 +132,9 @@ GPFSFSAL_getattrs(struct fsal_export *export, struct gpfs_filesystem *gpfs_fs,
 					struct gpfs_fsal_export, export);
 	int export_fd = exp->export_fd;
 
-	/* Initialize fsal_fsid to 0.0 in case older GPFS */
-	buffxstat.fsal_fsid.major = 0;
-	buffxstat.fsal_fsid.minor = 0;
-
+#ifdef _VALGRIND_MEMCHECK
+	VALGRIND_MAKE_MEM_DEFINED(&buffxstat, sizeof(buffxstat));
+#endif
 	expire = atomic_fetch_uint32_t(
 		&op_ctx->ctx_export->expire_time_attr) > 0;
 

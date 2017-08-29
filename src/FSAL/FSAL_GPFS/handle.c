@@ -43,6 +43,9 @@
 #include "FSAL/fsal_commonlib.h"
 #include "gpfs_methods.h"
 
+#ifdef _VALGRIND_MEMCHECK
+#include <valgrind/memcheck.h>
+#endif
 
 /* alloc_handle
  * allocate and fill in a handle
@@ -988,6 +991,9 @@ fsal_status_t gpfs_lookup_path(struct fsal_export *exp_hdl,
 	bool use_acl;
 	int retry;
 
+#ifdef _VALGRIND_MEMCHECK
+	VALGRIND_MAKE_MEM_DEFINED(&buffxstat, sizeof(buffxstat));
+#endif
 	memset(fh, 0, sizeof(struct gpfs_file_handle));
 	fh->handle_size = GPFS_MAX_FH_SIZE;
 
