@@ -343,6 +343,8 @@ gpfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 
 	fsal2posix_openflags(openflags, &posix_flags);
 
+	memset(&fh, 0, sizeof(fh));
+
 	if (createmode >= FSAL_EXCLUSIVE)
 		/* Now fixup attrs for verifier if exclusive create */
 		set_common_verifier(attr_set, verifier);

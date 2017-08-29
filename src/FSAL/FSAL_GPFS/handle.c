@@ -1064,6 +1064,7 @@ fsal_status_t gpfs_lookup_path(struct fsal_export *exp_hdl,
 
 	*handle = NULL;	/* poison it */
 
+	memset(&buffxstat, 0, sizeof(buffxstat));
 	dir_fd = open_dir_by_path_walk(-1, path, &buffxstat.buffstat);
 
 	fsal_prepare_attrs(&attributes, ATTR_GPFS_ALLOC_HANDLE);

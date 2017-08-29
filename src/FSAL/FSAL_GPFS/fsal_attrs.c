@@ -128,9 +128,9 @@ GPFSFSAL_getattrs(struct fsal_export *export, struct gpfs_filesystem *gpfs_fs,
 					struct gpfs_fsal_export, export);
 	int export_fd = exp->export_fd;
 
-	/* Initialize fsal_fsid to 0.0 in case older GPFS */
-	buffxstat.fsal_fsid.major = 0;
-	buffxstat.fsal_fsid.minor = 0;
+	/* Initialize buffxstat because fsal_fsid needs to be
+	 * initialized for older GPFS anyway */
+	memset(&buffxstat, 0, sizeof(buffxstat));
 
 	expire = atomic_fetch_uint32_t(
 		&op_ctx->ctx_export->expire_time_attr) > 0;
