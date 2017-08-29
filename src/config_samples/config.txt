@@ -470,8 +470,6 @@ CACHEINODE
 
 	Cache_Size(uint32, range 1 to UINT32_MAX, default 32633)
 
-	Attr_Expiration_Time(int32, range -1 to INT32_MAX, default 60)
-
 	Use_Getattr_Directory_Invalidation(bool, default false)
 
 	Dir_Max_Deleted(uint32, range 1 to UINT32_MAX, default 65536)
