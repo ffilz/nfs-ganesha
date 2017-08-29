@@ -43,6 +43,10 @@
 #include <fcntl.h>
 #include "gpfs_methods.h"
 
+#ifdef _VALGRIND_MEMCHECK
+#include <valgrind/memcheck.h>
+#endif
+
 static fsal_status_t
 gpfs_open_func(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags,
 		struct fsal_fd *fd)
@@ -342,6 +346,10 @@ gpfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG, "attrs ", attr_set, false);
 
 	fsal2posix_openflags(openflags, &posix_flags);
+
+#ifdef _VALGRIND_MEMCHECK
+	VALGRIND_MAKE_MEM_DEFINED(&fh, sizeof(fh));
+#endif
 
 	if (createmode >= FSAL_EXCLUSIVE)
 		/* Now fixup attrs for verifier if exclusive create */
