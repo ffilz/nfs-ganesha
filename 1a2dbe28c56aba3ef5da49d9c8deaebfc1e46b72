@@ -16,6 +16,24 @@
       "revId": "1a2dbe28c56aba3ef5da49d9c8deaebfc1e46b72",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95f6f9db_01310daa",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2719,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2017-09-01T13:25:00Z",
+      "side": 1,
+      "message": "FWIW, the Ceph code doesn\u0027t really use it either. I think it really comes down to whether GPFS will need it.",
+      "parentUuid": "8fa635e6_9c3751dc",
+      "revId": "1a2dbe28c56aba3ef5da49d9c8deaebfc1e46b72",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
