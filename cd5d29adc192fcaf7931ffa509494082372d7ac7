@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6f6051b_f5cc2d5a",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2017-09-05T18:35:21Z",
+      "side": 1,
+      "message": "Unless I\u0027m missing something, this looks like a bugfix, not directly related to the rest of the patch. Could you break this out into a separate commit?",
+      "range": {
+        "startLine": 1600,
+        "startChar": 3,
+        "endLine": 1600,
+        "endChar": 9
+      },
+      "revId": "cd5d29adc192fcaf7931ffa509494082372d7ac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
