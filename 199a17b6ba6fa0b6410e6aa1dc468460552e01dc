@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc03fef0_25ab5c60",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2017-09-05T13:20:09Z",
+      "side": 1,
+      "message": "deleg_reclaim is always false, so let\u0027s just not deal with reclaims here. Once we drop that parameter,  fsal_deleg_param_t just has a single value in it. We can just turn that argument into a fsal_deleg_t, or...even better:\n\nJust declare different command values for that and drop the extra argument. FWIW, in the ceph interface I\u0027ve settled on having the caller pass in the desired state. So I have:\n\nCEPH_DELEGATION_NONE\nCEPH_DELEGATION_RD\nCEPH_DELEGATION_RW\n\nWith that we can just pass in the deleg_op and drop the extra argument.",
+      "range": {
+        "startLine": 207,
+        "startChar": 30,
+        "endLine": 207,
+        "endChar": 31
+      },
+      "revId": "199a17b6ba6fa0b6410e6aa1dc468460552e01dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
