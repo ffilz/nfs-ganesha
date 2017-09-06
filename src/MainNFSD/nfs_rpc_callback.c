@@ -56,6 +56,7 @@
 #include "gss_credcache.h"
 #endif /* _HAVE_GSSAPI */
 #include "sal_data.h"
+#include "sal_functions.h"
 #include <misc/timespec.h>
 
 const struct __netid_nc_table netid_nc_table[9] = {
@@ -1190,49 +1191,76 @@ static int nfs_rpc_v41_single(nfs_client_id_t *clientid, nfs_cb_argop4 *op,
 		       void *completion_arg)
 {
 	struct glist_head *glist;
-	nfs41_session_t *session;
-	int scan;
+	nfs41_session_t *scur, *session;
+	int ret = ENOTCONN;
+	bool wait = false;
 
-	for (scan = 0; scan < 2; ++scan) {
-		/**@ todo ??? pthread_mutex_lock(&found->cid_mutex); */
-		glist_for_each(glist, &clientid->cid_cb.v41.cb_session_list) {
-			session = glist_entry(glist, nfs41_session_t,
-					      session_link);
+restart:
+	pthread_mutex_lock(&clientid->cid_mutex);
+	glist_for_each(glist, &clientid->cid_cb.v41.cb_session_list) {
+		rpc_call_channel_t *chan = &session->cb_chan;
+		slotid4 slot = 0;
+		slotid4 highest_slot = 0;
+		rpc_call_t *call = NULL;
 
-			if (!(session->flags & session_bc_up))
-				continue;
+		scur = glist_entry(glist, nfs41_session_t, session_link);
 
-			rpc_call_channel_t *chan = &session->cb_chan;
-
-			slotid4 slot = 0;
-			slotid4 highest_slot = 0;
-			rpc_call_t *call = NULL;
-
-			if (!(find_cb_slot(session, scan == 1, &slot,
-					   &highest_slot))) {
-				continue;
-			}
-
-			call = construct_single_call(session, op, refer, slot,
-						     highest_slot);
-
-			call->call_hook = completion;
-			if (nfs_rpc_submit_call(call, completion_arg,
-						NFS_RPC_FLAG_NONE) != 0) {
-				/* Clean up... */
-				free_single_call(call);
-				release_cb_slot(session, slot, false);
-				PTHREAD_MUTEX_lock(&chan->mtx);
-				_nfs_rpc_destroy_chan(chan);
-				session->flags &= ~session_bc_up;
-				PTHREAD_MUTEX_unlock(&chan->mtx);
-			} else
-				return 0;
+		/* Do quick flag check before taking reference */
+		/* FIXME: should be an atomic fetch? */
+		if (!(scur->flags & session_bc_up)) {
+			LogDebug(COMPONENT_NFS_CB, "bc is down");
+			continue;
 		}
-		/**@ todo ??? pthread_mutex_unlock(&found->cid_mutex); */
+
+		/* Get a reference to the session */
+		if (!nfs41_Session_Get_Pointer(scur->session_id, &session))
+			continue;
+
+		LogDebug(COMPONENT_NFS_CB, "scur=0x%p session=0x%p",
+					scur, session);
+		assert(session == scur);
+
+		if (!(find_cb_slot(session, wait, &slot, &highest_slot))) {
+			LogDebug(COMPONENT_NFS_CB, "can't get slot");
+			continue;
+		}
+
+		/* Drop mutex since we have a session ref */
+		pthread_mutex_unlock(&clientid->cid_mutex);
+
+		call = construct_single_call(session, op, refer, slot,
+					     highest_slot);
+
+		call->call_hook = completion;
+		ret = nfs_rpc_submit_call(call, completion_arg,
+						NFS_RPC_FLAG_NONE);
+		if (ret == 0)
+			return 0;
+
+		/*
+		 * Tear down channel since there is likely something
+		 * wrong with it.
+		 */
+		LogDebug(COMPONENT_NFS_CB, "nfs_rpc_submit_call_failed: %d",
+				ret);
+		free_single_call(call);
+		release_cb_slot(session, slot, false);
+		PTHREAD_MUTEX_lock(&chan->mtx);
+		_nfs_rpc_destroy_chan(chan);
+		session->flags &= ~session_bc_up;
+		PTHREAD_MUTEX_unlock(&chan->mtx);
+		dec_session_ref(session);
+		goto restart;
+	}
+	pthread_mutex_unlock(&clientid->cid_mutex);
+
+	/* If it didn't work, then try again and wait on a slot */
+	if (ret && !wait) {
+		wait = true;
+		goto restart;
 	}
 
-	return ENOTCONN;
+	return ret;
 }
 
 /**
@@ -1244,6 +1272,7 @@ void nfs41_release_single(rpc_call_t *call)
 	release_cb_slot(call->chan->source.session,
 			call->cbt.v_u.v4.args.argarray.argarray_val[0]
 			.nfs_cb_argop4_u.opcbsequence.csa_slotid, true);
+	dec_session_ref(call->chan->source.session);
 	free_single_call(call);
 }
 
