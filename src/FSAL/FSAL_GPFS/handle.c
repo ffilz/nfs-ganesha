@@ -458,7 +458,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	status = fsal_internal_handle2fd(export_fd, myself->handle,
 					 &dirfd, O_RDONLY | O_DIRECTORY);
 
-	if (dirfd < 0)
+	if ((dirfd < 0) || FSAL_IS_ERROR(status))
 		return status;
 
 	seekloc = lseek(dirfd, seekloc, SEEK_SET);
