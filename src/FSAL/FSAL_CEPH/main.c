@@ -77,6 +77,9 @@ static fsal_staticfsinfo_t default_ceph_info = {
 #endif
 	.unique_handles = true,
 	.homogenous = true,
+#ifdef USE_FSAL_CEPH_LL_DELEGATION
+	.delegations = FSAL_OPTION_FILE_READ_DELEG,
+#endif
 };
 
 static struct config_item ceph_items[] = {
