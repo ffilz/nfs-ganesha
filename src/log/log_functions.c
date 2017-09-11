@@ -44,7 +44,6 @@
 
 #include "log.h"
 #include "gsh_list.h"
-#include "rpc/rpc.h"
 #include "gsh_rpc.h"
 #include "common_utils.h"
 #include "abstract_mem.h"
@@ -466,6 +465,42 @@ static void SetLevelDebug(int level_to_set)
 		   ReturnLevelInt(component_log_level[COMPONENT_ALL]));
 }
 
+static void SetNTIRPCLogLevel(int level_to_set)
+{
+	switch (level_to_set) {
+	case NIV_FULL_DEBUG:
+		ntirpc_pp.debug_flags = 0xFFFFFFFF; /* enable all flags */
+		break;
+	case NIV_MID_DEBUG:
+	case NIV_DEBUG:
+		ntirpc_pp.debug_flags = nfs_param.core_param.rpc.debug_flags;
+		break;
+	default:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_DEFAULT;
+		break;
+	case NIV_EVENT:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR |
+					TIRPC_DEBUG_FLAG_WARN |
+					TIRPC_DEBUG_FLAG_EVENT;
+		break;
+	case NIV_WARN:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR |
+					TIRPC_DEBUG_FLAG_WARN;
+		break;
+	case NIV_CRIT:
+	case NIV_MAJ:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR;
+		break;
+	case NIV_FATAL:
+	case NIV_NULL:
+		ntirpc_pp.debug_flags = 0; /* disable all flags */
+		break;
+	}
+
+	if (!tirpc_control(TIRPC_SET_DEBUG_FLAGS, &ntirpc_pp.debug_flags))
+		LogCrit(COMPONENT_CONFIG, "Setting nTI-RPC debug_flags failed");
+}
+
 void SetComponentLogLevel(log_components_t component, int level_to_set)
 {
 
@@ -491,29 +526,8 @@ void SetComponentLogLevel(log_components_t component, int level_to_set)
 		   ReturnLevelInt(level_to_set));
 	component_log_level[component] = level_to_set;
 
-	if (component != COMPONENT_TIRPC)
-		return;
-
-	/* If the admin configured libntirpc debug flags to anything
-	 * other than the default, preserve those and don't modify the
-	 * flags.
-	 */
-	if (nfs_param.core_param.rpc.debug_flags != TIRPC_DEBUG_FLAGS)
-		return;
-
-	/* push TIRPC component log levels into libntirpc.
-	 *
-	 * Implement only FULL_DEBUG for now
-	 */
-	switch (level_to_set) {
-	case NIV_FULL_DEBUG:
-		ntirpc_pp.debug_flags = 0xFFFFFFFF; /* enable all flags */
-		break;
-	default:
-		ntirpc_pp.debug_flags = 0; /* disable all flags */
-		break;
-	}
-	(void)tirpc_control(TIRPC_PUT_PARAMETERS, &ntirpc_pp);
+	if (component == COMPONENT_TIRPC)
+		SetNTIRPCLogLevel(level_to_set);
 }
 
 static inline int ReturnLevelDebug(void)
@@ -1706,13 +1720,14 @@ void rpc_warnx(char *fmt, ...)
 {
 	va_list ap;
 
-	if (component_log_level[COMPONENT_TIRPC] < NIV_DEBUG)
+	if (component_log_level[COMPONENT_TIRPC] <= NIV_FATAL)
 		return;
 
 	va_start(ap, fmt);
 
 	display_log_component_level(COMPONENT_TIRPC, "<no-file>", 0, "rpc",
-				    NIV_DEBUG, fmt, ap);
+				    component_log_level[COMPONENT_TIRPC],
+				    fmt, ap);
 
 	va_end(ap);
 
@@ -2528,6 +2543,7 @@ static int log_conf_commit(void *node, void *link_mem, void *self_struct,
 				gsh_free(component_log_level);
 			component_log_level = logger->comp_log_level;
 		}
+		SetNTIRPCLogLevel(component_log_level[COMPONENT_TIRPC]);
 	} else {
 		if (logger->logfields != NULL) {
 			struct logfields *lf = logger->logfields;
