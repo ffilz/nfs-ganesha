@@ -498,19 +498,26 @@ void SetComponentLogLevel(log_components_t component, int level_to_set)
 	 * other than the default, preserve those and don't modify the
 	 * flags.
 	 */
-	if (nfs_param.core_param.rpc.debug_flags != TIRPC_DEBUG_FLAGS)
+	if (nfs_param.core_param.rpc.debug_flags != TIRPC_DEBUG_FLAG_DEFAULT)
 		return;
 
 	/* push TIRPC component log levels into libntirpc.
-	 *
-	 * Implement only FULL_DEBUG for now
 	 */
 	switch (level_to_set) {
 	case NIV_FULL_DEBUG:
 		ntirpc_pp.debug_flags = 0xFFFFFFFF; /* enable all flags */
 		break;
+	case NIV_WARN:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR |
+					TIRPC_DEBUG_FLAG_WARN;
+		break;
+	case NIV_EVENT:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR |
+					TIRPC_DEBUG_FLAG_WARN |
+					TIRPC_DEBUG_FLAG_EVENT;
+		break;
 	default:
-		ntirpc_pp.debug_flags = 0; /* disable all flags */
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_DEFAULT;
 		break;
 	}
 	(void)tirpc_control(TIRPC_PUT_PARAMETERS, &ntirpc_pp);
