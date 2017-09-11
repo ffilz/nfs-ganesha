@@ -44,7 +44,6 @@
 
 #include "log.h"
 #include "gsh_list.h"
-#include "rpc/rpc.h"
 #include "gsh_rpc.h"
 #include "common_utils.h"
 #include "abstract_mem.h"
@@ -494,26 +493,36 @@ void SetComponentLogLevel(log_components_t component, int level_to_set)
 	if (component != COMPONENT_TIRPC)
 		return;
 
-	/* If the admin configured libntirpc debug flags to anything
-	 * other than the default, preserve those and don't modify the
-	 * flags.
-	 */
-	if (nfs_param.core_param.rpc.debug_flags != TIRPC_DEBUG_FLAGS)
-		return;
-
 	/* push TIRPC component log levels into libntirpc.
-	 *
-	 * Implement only FULL_DEBUG for now
 	 */
 	switch (level_to_set) {
 	case NIV_FULL_DEBUG:
 		ntirpc_pp.debug_flags = 0xFFFFFFFF; /* enable all flags */
 		break;
 	default:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_DEFAULT;
+		break;
+	case NIV_EVENT:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR |
+					TIRPC_DEBUG_FLAG_WARN |
+					TIRPC_DEBUG_FLAG_EVENT;
+		break;
+	case NIV_WARN:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR |
+					TIRPC_DEBUG_FLAG_WARN;
+		break;
+	case NIV_CRIT:
+	case NIV_MAJ:
+		ntirpc_pp.debug_flags = TIRPC_DEBUG_FLAG_ERROR;
+		break;
+	case NIV_FATAL:
+	case NIV_NULL:
 		ntirpc_pp.debug_flags = 0; /* disable all flags */
 		break;
 	}
-	(void)tirpc_control(TIRPC_PUT_PARAMETERS, &ntirpc_pp);
+
+	if (!tirpc_control(TIRPC_SET_DEBUG_FLAGS, &ntirpc_pp.debug_flags))
+		LogCrit(COMPONENT_CONFIG, "Setting nTI-RPC debug_flags failed");
 }
 
 static inline int ReturnLevelDebug(void)
@@ -1706,13 +1715,14 @@ void rpc_warnx(char *fmt, ...)
 {
 	va_list ap;
 
-	if (component_log_level[COMPONENT_TIRPC] < NIV_DEBUG)
+	if (component_log_level[COMPONENT_TIRPC] <= NIV_FATAL)
 		return;
 
 	va_start(ap, fmt);
 
 	display_log_component_level(COMPONENT_TIRPC, "<no-file>", 0, "rpc",
-				    NIV_DEBUG, fmt, ap);
+				    component_log_level[COMPONENT_TIRPC],
+				    fmt, ap);
 
 	va_end(ap);
 
