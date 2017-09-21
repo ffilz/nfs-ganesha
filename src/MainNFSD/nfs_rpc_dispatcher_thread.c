@@ -1008,12 +1008,12 @@ void Register_program(protos prot, int flag, int vers)
 			tags[prot], (int)vers);
 
 		/* XXXX fix svc_register! */
-		if (!UDP_REGISTER(prot, vers, netconfig_udpv4))
-			LogFatal(COMPONENT_DISPATCH,
-				 "Cannot register %s V%d on UDP", tags[prot],
-				 (int)vers);
-
-		if (netconfig_udpv6) {
+		if (v6disabled || !netconfig_udpv6) {
+			if (!UDP_REGISTER(prot, vers, netconfig_udpv4))
+				LogFatal(COMPONENT_DISPATCH,
+					 "Cannot register %s V%d on UDP",
+					 tags[prot], (int)vers);
+		} else {
 			LogInfo(COMPONENT_DISPATCH, "Registering %s V%d/UDPv6",
 				tags[prot], (int)vers);
 			if (!UDP_REGISTER(prot, vers, netconfig_udpv6))
@@ -1026,12 +1026,12 @@ void Register_program(protos prot, int flag, int vers)
 		LogInfo(COMPONENT_DISPATCH, "Registering %s V%d/TCP",
 			tags[prot], (int)vers);
 
-		if (!TCP_REGISTER(prot, vers, netconfig_tcpv4))
-			LogFatal(COMPONENT_DISPATCH,
-				 "Cannot register %s V%d on TCP", tags[prot],
-				 (int)vers);
-
-		if (netconfig_tcpv6) {
+		if (v6disabled || !netconfig_tcpv6) {
+			if (!TCP_REGISTER(prot, vers, netconfig_tcpv4))
+				LogFatal(COMPONENT_DISPATCH,
+					 "Cannot register %s V%d on TCP",
+					 tags[prot], (int)vers);
+		} else {
 			LogInfo(COMPONENT_DISPATCH, "Registering %s V%d/TCPv6",
 				tags[prot], (int)vers);
 			if (!TCP_REGISTER(prot, vers, netconfig_tcpv6))
