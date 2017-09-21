@@ -1624,11 +1624,20 @@ void up_ready_set(struct fsal_up_vector *up_ops)
 	PTHREAD_MUTEX_unlock(&up_ops->up_mutex);
 }
 
+/* This is to cancel waiting and resume Upcall threads */
+void up_ready_cancel(struct fsal_up_vector *up_ops)
+{
+	PTHREAD_MUTEX_lock(&up_ops->up_mutex);
+	up_ops->up_cancel = true;
+	pthread_cond_broadcast(&up_ops->up_cond);
+	PTHREAD_MUTEX_unlock(&up_ops->up_mutex);
+}
+
 /* Upcall threads should call this to wait for upcall readiness */
 void up_ready_wait(struct fsal_up_vector *up_ops)
 {
 	PTHREAD_MUTEX_lock(&up_ops->up_mutex);
-	while (!up_ops->up_ready)
+	while (!up_ops->up_ready && !up_ops->up_cancel)
 		pthread_cond_wait(&up_ops->up_cond, &up_ops->up_mutex);
 	PTHREAD_MUTEX_unlock(&up_ops->up_mutex);
 }
