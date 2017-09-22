@@ -499,6 +499,12 @@ make DESTDIR=%{buildroot} install
 %if ( 0%{?suse_version} )
 %service_add_post nfs-ganesha.service nfs-ganesha-lock.service nfs-ganesha-config.service
 %else
+%if ( 0%{?fedora} || ( 0%{?rhel} && 0%{?rhel} > 6 ) )
+semanage fcontext -a -t ganesha_var_log_t %{_localstatedir}/log/ganesha
+semanage fcontext -a -t ganesha_var_log_t %{_localstatedir}/log/ganesha/ganesha.log
+semanage fcontext -a -t ganesha_var_log_t %{_localstatedir}/log/ganesha/ganesha-gfapi.log
+restorecon %{_localstatedir}/log/ganesha
+%endif
 %if %{with_systemd}
 %systemd_post nfs-ganesha.service
 %systemd_post nfs-ganesha-lock.service
@@ -544,7 +550,7 @@ exit 0
 %dir %{_localstatedir}/run/ganesha
 %dir %{_libexecdir}/ganesha
 %{_libexecdir}/ganesha/nfs-ganesha-config.sh
-%dir %attr(0755,ganesha,ganesha) %{_localstatedir}/log/ganesha
+%dir %attr(0775,ganesha,root) %{_localstatedir}/log/ganesha
 
 %if %{with_systemd}
 %{_unitdir}/nfs-ganesha.service
