@@ -510,6 +510,7 @@ killall -SIGHUP dbus-daemon >/dev/null 2>&1 || :
 %pre
 getent group ganesha > /dev/null || groupadd -r ganesha
 getent passwd ganesha > /dev/null || useradd -r -g ganesha -d /var/run/ganesha -s /sbin/nologin -c "NFS-Ganesha Daemon" ganesha
+semanage fcontext -a -t ganesha_var_log_t %{_localstatedir}/log/ganesha\(/\.\*\)\?
 exit 0
 
 %preun
