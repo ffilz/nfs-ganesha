@@ -499,6 +499,8 @@ make DESTDIR=%{buildroot} install
 %if ( 0%{?suse_version} )
 %service_add_post nfs-ganesha.service nfs-ganesha-lock.service nfs-ganesha-config.service
 %else
+semanage fcontext -a -t ganesha_var_log_t %{_localstatedir}/log/ganesha\(/\.\*\)\?
+restorecon %{_localstatedir}/log/ganesha
 %if %{with_systemd}
 %systemd_post nfs-ganesha.service
 %systemd_post nfs-ganesha-lock.service
