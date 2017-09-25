@@ -39,7 +39,7 @@
 #include "nfs_proto_functions.h"
 #include "include/gpfs_nfs.h"
 
-struct fsal_op_stats gpfs_op_stats[GPFS_STAT_MAX_OPS];
+struct fsal_op_stats gpfs_op_stats[GPFS_MAX_OP - GPFS_MIN_OP + 2];
 struct fsal_stats gpfs_stats;
 
 #ifdef USE_DBUS
@@ -48,7 +48,7 @@ struct fsal_stats gpfs_stats;
  *   *
  *    * @param[in] gpfs opcode
  *     */
-static char *gpfs_opcode_to_str(int opcode)
+static char *gpfs_opcode_to_name(int opcode)
 {
 	switch (opcode) {
 	case OPENHANDLE_GET_VERSION:
@@ -162,16 +162,14 @@ static char *gpfs_opcode_to_str(int opcode)
  *   */
 void prepare_for_stats(struct fsal_module *fsal_hdl)
 {
-	int i;
+	int idx, op;
 
 	gpfs_stats.total_ops = GPFS_TOTAL_OPS;
 	gpfs_stats.op_stats = gpfs_op_stats;
 	fsal_hdl->stats = &gpfs_stats;
-	for (i = 0; i < GPFS_STAT_PH_OP ; i++) {
-		if (i == GPFS_STAT_NO_OP_1 || i == GPFS_STAT_NO_OP_2 ||
-		    i == GPFS_STAT_NO_OP_3)
-			continue;
-		fsal_hdl->stats->op_stats[i].op_code = i + GPFS_MIN_OP_NUM;
+	for (op = GPFS_MIN_OP; op <= GPFS_MAX_OP; op++) {
+		idx = gpfs_op2index(op);
+		fsal_hdl->stats->op_stats[idx].op_code = op;
 	}
 }
 
@@ -212,7 +210,7 @@ void fsal_gpfs_extract_stats(struct fsal_module *fsal_hdl, void *iter)
 		max_resp = atomic_fetch_uint64_t(
 				&gpfs_stats->op_stats[i].resp_time_max);
 
-		message = gpfs_opcode_to_str(gpfs_stats->op_stats[i].op_code);
+		message = gpfs_opcode_to_name(gpfs_stats->op_stats[i].op_code);
 		dbus_message_iter_append_basic(&struct_iter,
 				DBUS_TYPE_STRING, &message);
 		dbus_message_iter_append_basic(&struct_iter,
@@ -239,11 +237,9 @@ void fsal_gpfs_reset_stats(struct fsal_module *fsal_hdl)
 	struct fsal_stats *gpfs_stats;
 
 	gpfs_stats = fsal_hdl->stats;
+
+	/* reset all the counters */
 	for (i = 0; i < GPFS_STAT_PH_OP; i++) {
-		if (i == GPFS_STAT_NO_OP_1 || i == GPFS_STAT_NO_OP_2
-		     || i == GPFS_STAT_NO_OP_3)
-			continue;
-		/* reset all the counters */
 		atomic_store_uint64_t(
 				&gpfs_stats->op_stats[i].num_ops, 0);
 		atomic_store_uint64_t(

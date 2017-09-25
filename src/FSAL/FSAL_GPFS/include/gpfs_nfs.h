@@ -49,9 +49,6 @@ struct flock
 #define GPFS_DEVNAMEX "/dev/ss0"  /* Must be the same as GPFS_DEVNAME */
 #define kGanesha 140             /* Must be the same as Ganesha in enum kxOps */
 
-/* If any new op supported with value less than 100, update below */
-#define GPFS_MIN_OP_NUM           100
-
 #define OPENHANDLE_GET_VERSION    100
 #define OPENHANDLE_GET_VERSION2   1002
 #define OPENHANDLE_NAME_TO_HANDLE 101
@@ -106,7 +103,8 @@ struct flock
 
 /* If there is any change in above constants, then update below values.
  * Currently ignoring opcode 1002 */
-#define GPFS_MAX_OP_NUM           152
+#define GPFS_MIN_OP		 OPENHANDLE_GET_VERSION
+#define GPFS_MAX_OP		 OPENHANDLE_FS_LOCATIONS
 #define GPFS_TOTAL_OPS             51 /* Total ops considered for stats */
 #define GPFS_STAT_NO_OP_1           3
 #define GPFS_STAT_NO_OP_2           4
