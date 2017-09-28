@@ -1171,20 +1171,24 @@ fsal_status_t find_fd(struct glusterfs_fd *my_fd,
 	/* Handle only regular files */
 	if (obj_hdl->type != REGULAR_FILE)
 		return fsalstat(posix2fsal_error(EINVAL), EINVAL);
-
-	status = fsal_find_fd((struct fsal_fd **)&tmp2_fd, obj_hdl,
-			      (struct fsal_fd *)&myself->globalfd,
-			      &myself->share, bypass, state,
-			      openflags, glusterfs_open_func,
-			      glusterfs_close_func,
-			      has_lock, closefd, open_for_locks);
-
-	/* since tmp2_fd is not accessed/closed outside
-	 * this routine, its safe to copy its variables into my_fd
-	 * without taking extra reference or allocating extra
-	 * memory.
-	 */
-	my_fd->glfd = tmp2_fd->glfd;
+	if (state->state_data.lock.openstate != NULL) {
+		tmp2_fd = (struct glusterfs_fd *)
+				(state->state_data.lock.openstate + 1);
+		my_fd->glfd = glfs_dup(tmp2_fd->glfd);
+	} else {
+		status = fsal_find_fd((struct fsal_fd **)&tmp2_fd, obj_hdl,
+					(struct fsal_fd *)&myself->globalfd,
+					&myself->share, bypass, state,
+					openflags, glusterfs_open_func,
+					glusterfs_close_func,
+					has_lock, closefd, open_for_locks);
+		/* since tmp2_fd is not accessed/closed outside
+		* this routine, its safe to copy its variables into my_fd
+		* without taking extra reference or allocating extra
+		* memory.
+		*/
+		my_fd->glfd = tmp2_fd->glfd;
+	}
 	my_fd->openflags = tmp2_fd->openflags;
 	my_fd->creds.caller_uid = tmp2_fd->creds.caller_uid;
 	my_fd->creds.caller_gid = tmp2_fd->creds.caller_gid;
