@@ -2677,7 +2677,8 @@ fsal_status_t fsal_find_fd(struct fsal_fd **out_fd,
 			   fsal_close_func close_func,
 			   bool *has_lock,
 			   bool *closefd,
-			   bool open_for_locks)
+			   bool open_for_locks,
+			   bool *need_dup_fd)
 {
 	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
 	struct fsal_fd *state_fd;
@@ -2761,8 +2762,10 @@ fsal_status_t fsal_find_fd(struct fsal_fd **out_fd,
 			 */
 			LogFullDebug(COMPONENT_FSAL,
 				     "Use related_fd %p", related_fd);
-			if (out_fd)
+			if (out_fd) {
 				*out_fd = related_fd;
+				*need_dup_fd = true;
+			}
 
 			*has_lock = false;
 			return status;
