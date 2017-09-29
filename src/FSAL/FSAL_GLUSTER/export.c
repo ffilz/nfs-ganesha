@@ -631,6 +631,7 @@ struct glexport_params {
 	char *glhostname;
 	char *glvolpath;
 	char *glfs_log;
+	bool enable_upcall;
 };
 
 static struct config_item export_params[] = {
@@ -643,6 +644,8 @@ static struct config_item export_params[] = {
 		      glexport_params, glvolpath),
 	CONF_ITEM_PATH("glfs_log", 1, MAXPATHLEN, GFAPI_LOG_LOCATION,
 		       glexport_params, glfs_log),
+	CONF_ITEM_BOOL("enable_upcall", true, glexport_params,
+		       enable_upcall),
 	CONFIG_EOL
 };
 
@@ -685,6 +688,9 @@ glusterfs_free_fs(struct glusterfs_fs *gl_fs)
 
 	atomic_inc_int8_t(&gl_fs->destroy_mode);
 
+	if (!gl_fs->enable_upcall)
+		goto skip_upcall;
+
 	/* Cancel upcall readiness if not yet done */
 	up_ready_cancel((struct fsal_up_vector *)gl_fs->up_ops);
 
@@ -716,6 +722,7 @@ glusterfs_free_fs(struct glusterfs_fs *gl_fs)
 	}
 #endif
 
+skip_upcall:
 	/* Gluster and memory cleanup */
 	glfs_fini(gl_fs->fs);
 	gsh_free(gl_fs->volname);
@@ -793,6 +800,11 @@ glusterfs_get_fs(struct glexport_params params,
 
 	gl_fs->up_ops = up_ops;
 
+	gl_fs->enable_upcall = params.enable_upcall;
+
+	if (!gl_fs->enable_upcall)
+		goto skip_upcall;
+
 #ifndef USE_GLUSTER_REGISTER_UPCALL
 	rc = initiate_up_thread(gl_fs);
 	if (rc != 0) {
@@ -815,6 +827,7 @@ glusterfs_get_fs(struct glexport_params params,
 	}
 #endif
 
+skip_upcall:
 	glist_add(&GlusterFS.fs_obj, &gl_fs->fs_obj);
 
 found:

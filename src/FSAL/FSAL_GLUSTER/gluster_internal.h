@@ -137,6 +137,7 @@ struct glusterfs_fs {
 	int64_t    refcnt;
 	pthread_t  up_thread; /* upcall thread */
 	int8_t destroy_mode;
+	bool   enable_upcall;
 };
 
 struct glusterfs_export {
