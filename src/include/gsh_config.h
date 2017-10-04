@@ -393,6 +393,10 @@ typedef struct nfs_core_param {
 	/** Whether to use Pseudo (true) or Path (false) for NFS v3 and 9P
 	    mounts. */
 	bool mount_path_pseudo;
+	/** DBus name prefix. Required if one wants to run multiple ganesha
+	    servers on one host. The prefix should be different for every
+	    server */
+	char *dbus_name_prefix;
 } nfs_core_parameter_t;
 
 /** @} */
