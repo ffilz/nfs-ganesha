@@ -329,6 +329,19 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 				    &new_entry->mde_flags, MDCACHE_TRUST_ATTRS);
 			}
 
+			if (attrs_out) {
+				/* Ensure the attribute cache is valid. The
+				 * simplest way to do this is to call getattrs()
+				 */
+				status = new_entry->obj_handle.obj_ops.getattrs(
+					     &new_entry->obj_handle, attrs_out);
+				if (FSAL_IS_ERROR(status)) {
+					LogFullDebug(COMPONENT_CACHE_INODE,
+					     "getattrs failed status=%s",
+					     fsal_err_txt(status));
+				}
+			}
+
 			return status;
 		}
 
