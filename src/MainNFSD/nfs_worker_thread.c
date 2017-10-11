@@ -931,7 +931,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 			svcerr_systemerr(&reqdata->r_u.req.svc);
 			break;
 		}
-		server_stats_nfs_done(reqdata, rc, true);
+		if (nfs_param.core_param.enable_NFSSTATS)
+			server_stats_nfs_done(reqdata, rc, true);
 		goto freeargs;
 	}
 
@@ -1355,8 +1356,9 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 
 /* NFSv4 stats are handled in nfs4_compound()
  */
-	if (reqdata->r_u.req.svc.rq_msg.cb_prog != NFS_program[P_NFS]
-	    || reqdata->r_u.req.svc.rq_msg.cb_vers != NFS_V4)
+	if ((reqdata->r_u.req.svc.rq_msg.cb_prog != NFS_program[P_NFS]
+	     || reqdata->r_u.req.svc.rq_msg.cb_vers != NFS_V4)
+	    && nfs_param.core_param.enable_NFSSTATS)
 		server_stats_nfs_done(reqdata, rc, false);
 
 	/* If request is dropped, no return to the client */

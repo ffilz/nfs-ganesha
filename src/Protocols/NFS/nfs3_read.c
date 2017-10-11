@@ -252,9 +252,10 @@ int nfs3_read(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	if (obj)
 		obj->obj_ops.put_ref(obj);
 
-	server_stats_io_done(size, read_size,
-			     (rc == NFS_REQ_OK) ? true : false,
-			     false);
+	if (nfs_param.core_param.enable_NFSSTATS)
+		server_stats_io_done(size, read_size,
+				     (rc == NFS_REQ_OK) ? true : false,
+				     false);
 	return rc;
 }				/* nfs3_read */
 

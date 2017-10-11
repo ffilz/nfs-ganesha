@@ -496,9 +496,10 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 
  done:
 
-	server_stats_io_done(size, read_size,
-			     (res_READ4->status == NFS4_OK) ? true : false,
-			     false);
+	if (nfs_param.core_param.enable_NFSSTATS)
+		server_stats_io_done(size, read_size,
+				(res_READ4->status == NFS4_OK) ? true : false,
+				false);
 
  out:
 

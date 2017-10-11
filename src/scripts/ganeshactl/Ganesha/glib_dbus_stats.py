@@ -103,6 +103,16 @@ class RetrieveExportStats():
 	stats_op = self.exportmgrobj.get_dbus_method("GetFSALStats",
 				  self.dbus_exportstats_name)
 	return DumpFSALStats(stats_op(fsal))
+    # enable stats
+    def enable_stats(self, stat_type):
+        stats_state = self.exportmgrobj.get_dbus_method("EnableStats",
+                                  self.dbus_exportstats_name)
+        return StatsEnable(stats_state(stat_type))
+    # disable stats
+    def disable_stats(self, stat_type):
+        stats_state = self.exportmgrobj.get_dbus_method("DisableStats",
+                                  self.dbus_exportstats_name)
+        return StatsDisable(stats_state(stat_type))
 
 class RetrieveClientStats():
     def __init__(self):
@@ -384,3 +394,21 @@ class DumpFSALStats():
 		else:
 		    break
 	    return output
+
+class StatsEnable():
+    def __init__(self, status):
+        self.status = status
+    def __str__(self):
+        if self.status[1] != "OK":
+            return "Failed to enable statistics counting, GANESHA RESPONSE STATUS: " + self.status[1]
+        else:
+            return "Successfully enabled statistics counting"
+
+class StatsDisable():
+    def __init__(self, status):
+        self.status = status
+    def __str__(self):
+        if self.status[1] != "OK":
+            return "Failed to disable statistics counting, GANESHA RESPONSE STATUS: " + self.status[1]
+        else:
+            return "Successfully disabled statistics counting"

@@ -280,9 +280,10 @@ int nfs3_write(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	/* return references */
 	obj->obj_ops.put_ref(obj);
 
-	server_stats_io_done(size, written_size,
-			     (rc == NFS_REQ_OK) ? true : false,
-			     true);
+	if (nfs_param.core_param.enable_NFSSTATS)
+		server_stats_io_done(size, written_size,
+				     (rc == NFS_REQ_OK) ? true : false,
+				     true);
 	return rc;
 
 }				/* nfs3_write */

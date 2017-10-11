@@ -426,7 +426,8 @@ static int nfs4_write(struct nfs_argop4 *op, compound_data_t *data,
 
  done:
 
-	server_stats_io_done(size, written_size,
+	if (nfs_param.core_param.enable_NFSSTATS)
+		server_stats_io_done(size, written_size,
 			     (res_WRITE4->status == NFS4_OK) ? true : false,
 			     true);
 

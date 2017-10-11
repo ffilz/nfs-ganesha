@@ -756,7 +756,9 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		 */
 		resarray[i].nfs_resop4_u.opaccess.status = status;
 
-		server_stats_nfsv4_op_done(opcode, op_start_time, status);
+		if (nfs_param.core_param.enable_NFSSTATS)
+			server_stats_nfsv4_op_done(opcode, op_start_time,
+						   status);
 
 		if (status != NFS4_OK) {
 			/* An error occured, we do not manage the other requests
@@ -795,7 +797,8 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		}
 	}			/* for */
 
-	server_stats_compound_done(argarray_len, status);
+	if (nfs_param.core_param.enable_NFSSTATS)
+		server_stats_compound_done(argarray_len, status);
 
 	/* Complete the reply, in particular, tell where you stopped if
 	 * unsuccessfull COMPOUD

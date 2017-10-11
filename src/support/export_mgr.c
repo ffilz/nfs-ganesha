@@ -1503,13 +1503,20 @@ static bool get_nfsv3_export_io(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 	export = lookup_export(args, &errormsg);
-	if (export == NULL) {
+	if (!nfs_param.core_param.enable_NFSSTATS) {
 		success = false;
+		errormsg = "NFS stat counting disabled";
 	} else {
-		export_st = container_of(export, struct export_stats, export);
-		if (export_st->st.nfsv3 == NULL) {
+		if (export == NULL) {
 			success = false;
-			errormsg = "Export does not have any NFSv3 activity";
+		} else {
+			export_st = container_of(export, struct export_stats,
+						 export);
+			if (export_st->st.nfsv3 == NULL) {
+				success = false;
+				errormsg =
+				    "Export does not have any NFSv3 activity";
+			}
 		}
 	}
 	dbus_status_reply(&iter, success, errormsg);
@@ -1548,13 +1555,20 @@ static bool get_nfsv40_export_io(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 	export = lookup_export(args, &errormsg);
-	if (export == NULL) {
+	if (!nfs_param.core_param.enable_NFSSTATS) {
 		success = false;
+		errormsg = "NFS stat counting disabled";
 	} else {
-		export_st = container_of(export, struct export_stats, export);
-		if (export_st->st.nfsv40 == NULL) {
+		if (export == NULL) {
 			success = false;
-			errormsg = "Export does not have any NFSv4.0 activity";
+		} else {
+			export_st = container_of(export, struct export_stats,
+						 export);
+			if (export_st->st.nfsv40 == NULL) {
+				success = false;
+				errormsg =
+				  "Export does not have any NFSv4.0 activity";
+			}
 		}
 	}
 	dbus_status_reply(&iter, success, errormsg);
@@ -1593,13 +1607,20 @@ static bool get_nfsv41_export_io(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 	export = lookup_export(args, &errormsg);
-	if (export == NULL) {
+	if (!nfs_param.core_param.enable_NFSSTATS) {
 		success = false;
+		errormsg = "NFS stat counting disabled";
 	} else {
-		export_st = container_of(export, struct export_stats, export);
-		if (export_st->st.nfsv41 == NULL) {
+		if (export == NULL) {
 			success = false;
-			errormsg = "Export does not have any NFSv4.1 activity";
+		} else {
+			export_st = container_of(export, struct export_stats,
+						 export);
+			if (export_st->st.nfsv41 == NULL) {
+				success = false;
+				errormsg =
+				  "Export does not have any NFSv4.1 activity";
+			}
 		}
 	}
 	dbus_status_reply(&iter, success, errormsg);
@@ -1638,13 +1659,20 @@ static bool get_nfsv41_export_layouts(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 	export = lookup_export(args, &errormsg);
-	if (export == NULL) {
+	if (!nfs_param.core_param.enable_NFSSTATS) {
 		success = false;
+		errormsg = "NFS stat counting disabled";
 	} else {
-		export_st = container_of(export, struct export_stats, export);
-		if (export_st->st.nfsv41 == NULL) {
+		if (export == NULL) {
 			success = false;
-			errormsg = "Export does not have any NFSv4.1 activity";
+		} else {
+			export_st = container_of(export, struct export_stats,
+						 export);
+			if (export_st->st.nfsv41 == NULL) {
+				success = false;
+				errormsg =
+				  "Export does not have any NFSv4.1 activity";
+			}
 		}
 	}
 	dbus_status_reply(&iter, success, errormsg);
@@ -1672,6 +1700,12 @@ static bool get_nfsv_export_total_ops(DBusMessageIter *args,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
+	if (!nfs_param.core_param.enable_NFSSTATS) {
+		success = false;
+		errormsg = "NFS stat counting disabled";
+		dbus_status_reply(&iter, success, errormsg);
+		return true;
+	}
 	export = lookup_export(args, &errormsg);
 	if (export != NULL) {
 		export_st = container_of(export, struct export_stats, export);
@@ -1695,9 +1729,13 @@ static bool get_nfsv_global_total_ops(DBusMessageIter *args,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
+	if (!nfs_param.core_param.enable_NFSSTATS) {
+		success = false;
+		errormsg = "NFS stat counting disabled";
+	}
 	dbus_status_reply(&iter, success, errormsg);
-
-	global_dbus_total_ops(&iter);
+	if (success)
+		global_dbus_total_ops(&iter);
 
 	return true;
 }
@@ -1711,9 +1749,13 @@ static bool get_nfsv_global_fast_ops(DBusMessageIter *args,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
+	if (!nfs_param.core_param.enable_NFSSTATS) {
+		success = false;
+		errormsg = "NFS stat counting disabled";
+	}
 	dbus_status_reply(&iter, success, errormsg);
-
-	server_dbus_fast_ops(&iter);
+	if (success)
+		server_dbus_fast_ops(&iter);
 
 	return true;
 }
@@ -1792,6 +1834,88 @@ static struct gsh_dbus_method reset_statistics = {
 };
 
 /**
+ * DBUS method to disable statistics counting
+ *
+ */
+static bool stats_disable(DBusMessageIter *args,
+			DBusMessage *reply,
+			DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "OK";
+	char *stat_type = NULL;
+	DBusMessageIter iter;
+	struct timespec timestamp;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	dbus_message_iter_get_basic(args, &stat_type);
+	if (strcmp(stat_type, "all") == 0) {
+		nfs_param.core_param.enable_NFSSTATS = false;
+		nfs_param.core_param.enable_FSALSTATS = false;
+	}
+	if (strcmp(stat_type, "nfs") == 0)
+		nfs_param.core_param.enable_NFSSTATS = false;
+	if (strcmp(stat_type, "fsal") == 0)
+		nfs_param.core_param.enable_FSALSTATS = false;
+
+	dbus_status_reply(&iter, success, errormsg);
+	now(&timestamp);
+	dbus_append_timestamp(&iter, &timestamp);
+	return true;
+}
+
+static struct gsh_dbus_method disable_statistics = {
+	.name = "DisableStats",
+	.method = stats_disable,
+	.args = {STAT_TYPE_ARG,
+		 STATUS_REPLY,
+		 TIMESTAMP_REPLY,
+		 END_ARG_LIST}
+};
+
+/**
+ * DBUS method to enable statistics counting
+ *
+ */
+static bool stats_enable(DBusMessageIter *args,
+			DBusMessage *reply,
+			DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "OK";
+	char *stat_type = NULL;
+	DBusMessageIter iter;
+	struct timespec timestamp;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	dbus_message_iter_get_basic(args, &stat_type);
+	if (strcmp(stat_type, "all") == 0) {
+		nfs_param.core_param.enable_NFSSTATS = true;
+		nfs_param.core_param.enable_FSALSTATS = true;
+	}
+	if (strcmp(stat_type, "nfs") == 0)
+		nfs_param.core_param.enable_NFSSTATS = true;
+	if (strcmp(stat_type, "fsal") == 0)
+		nfs_param.core_param.enable_FSALSTATS = true;
+
+	dbus_status_reply(&iter, success, errormsg);
+	now(&timestamp);
+	dbus_append_timestamp(&iter, &timestamp);
+	return true;
+}
+
+static struct gsh_dbus_method enable_statistics = {
+	.name = "EnableStats",
+	.method = stats_enable,
+	.args = {STAT_TYPE_ARG,
+		 STATUS_REPLY,
+		 TIMESTAMP_REPLY,
+		 END_ARG_LIST}
+};
+
+/**
  * DBUS method to gather FSAL statistics
  *
  */
@@ -1808,6 +1932,12 @@ static bool stats_fsal(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 
+	if (!nfs_param.core_param.enable_FSALSTATS) {
+		success = false;
+		errormsg = "FSAL stat counting disabled";
+		dbus_status_reply(&iter, success, errormsg);
+		return true;
+	}
 	if (args == NULL) {
 		success = false;
 		errormsg = "No FSAL name provided";
@@ -2007,7 +2137,12 @@ static bool get_nfs_io(DBusMessageIter *args,
 
 	/* create a reply iterator from the message */
 	dbus_message_iter_init_append(message, &reply_iter);
-
+	if (!nfs_param.core_param.enable_NFSSTATS) {
+		success = false;
+		errormsg = "NFS stat counting disabled";
+		dbus_status_reply(&reply_iter, success, errormsg);
+		return true;
+	}
 	/* status and timestamp reply */
 	dbus_status_reply(&reply_iter, success, errormsg);
 	now(&timestamp);
@@ -2049,6 +2184,8 @@ static struct gsh_dbus_method *export_stats_methods[] = {
 	&export_show_all_io,
 	&reset_statistics,
 	&fsal_statistics,
+	&enable_statistics,
+	&disable_statistics,
 	NULL
 };
 
