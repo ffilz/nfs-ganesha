@@ -329,6 +329,11 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 				    &new_entry->mde_flags, MDCACHE_TRUST_ATTRS);
 			}
 
+			if (attrs_out)
+				fsal_copy_attrs(attrs_out,
+						&new_entry->attrs,
+						false);
+
 			return status;
 		}
 
