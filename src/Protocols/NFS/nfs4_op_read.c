@@ -216,6 +216,7 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 	uint64_t MaxOffsetRead =
 			atomic_fetch_uint64_t(
 				&op_ctx->ctx_export->MaxOffsetRead);
+	uint32_t resp_size;
 
 	/* Say we are managing NFS4_OP_READ */
 	resp->resop = NFS4_OP_READ;
@@ -429,6 +430,18 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 			size = MaxRead;
 		}
 	}
+
+	/* Now check response size.
+	 * size + space for nfsstat4, eof, and data len
+	 */
+	resp_size = RNDUP(size) + sizeof(nfsstat4) + 2 * sizeof(uint32_t);
+
+	res_READ4->status = check_resp_room(data, resp_size);
+
+	if (res_READ4->status != NFS4_OK)
+		goto done;
+
+	data->op_resp_size = resp_size;
 
 	/* If size == 0, no I/O is to be made and everything is
 	   alright */
