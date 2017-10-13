@@ -636,8 +636,6 @@ retry:
 			DRC_ST_UNLOCK();
 			drc->d_u.tcp.recycle_time = 0;
 
-			(void)nfs_dupreq_ref_drc(drc);	/* xprt ref */
-
 			/* try to expire unused DRCs somewhat in proportion to
 			 * new connection arrivals */
 			drc_check_expired = true;
