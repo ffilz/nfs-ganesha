@@ -36,6 +36,7 @@
 #include "nfs_proto_functions.h"
 #include "nfs_proto_tools.h"
 #include "nfs_file_handle.h"
+#include "nfs_convert.h"
 
 /**
  * @brief The NFS4_OP_GETFH operation
@@ -66,7 +67,17 @@ int nfs4_op_getfh(struct nfs_argop4 *op, compound_data_t *data,
 	res_GETFH->status = nfs4_sanity_check_FH(data, NO_FILE_TYPE, true);
 
 	if (res_GETFH->status != NFS4_OK)
-		return res_GETFH->status;
+		goto out;
+
+	/* Fill in and check response size and make sure it fits. */
+	data->op_resp_size = sizeof(nfsstat4) + sizeof(uint32_t) +
+		((data->currentFH.nfs_fh4_len + sizeof(uint32_t) - 1) &
+		~(sizeof(uint32_t) - 1));
+
+	res_GETFH->status = check_resp_room(data, data->op_resp_size);
+
+	if (res_GETFH->status != NFS4_OK)
+		goto out;
 
 	/* Copy the filehandle to the reply structure */
 	nfs4_AllocateFH(&res_GETFH->GETFH4res_u.resok4.object);
@@ -82,8 +93,14 @@ int nfs4_op_getfh(struct nfs_argop4 *op, compound_data_t *data,
 	LogHandleNFS4("NFS4 GETFH AFTER: ",
 		      &res_GETFH->GETFH4res_u.resok4.object);
 
-	res_GETFH->status = NFS4_OK;
-	return NFS4_OK;
+out:
+
+	if (res_GETFH->status != NFS4_OK) {
+		/* Indicate the failed response size. */
+		data->op_resp_size = sizeof(nfsstat4);
+	}
+
+	return res_GETFH->status;
 }				/* nfs4_op_getfh */
 
 /**
