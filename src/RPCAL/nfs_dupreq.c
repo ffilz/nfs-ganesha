@@ -627,8 +627,6 @@ retry:
 				/* assign already-computed hash */
 				drc->d_u.tcp.hk = drc_k.d_u.tcp.hk;
 				PTHREAD_MUTEX_lock(&drc->mtx);	/* LOCKED */
-				/* xprt ref */
-				drc->refcnt = 1;
 				/* insert dict */
 				opr_rbtree_insert(&t->t,
 						  &drc->d_u.tcp.recycle_k);
