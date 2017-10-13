@@ -478,7 +478,7 @@ static inline void drc_free_expired(void)
 		drc = TAILQ_FIRST(&drc_st->tcp_drc_recycle_q);
 		if (drc && (drc->d_u.tcp.recycle_time > 0)
 		    && ((now - drc->d_u.tcp.recycle_time) >
-			drc_st->expire_delta) && (drc->refcnt == 0)) {
+			drc_st->expire_delta)) {
 			LogFullDebug(COMPONENT_DUPREQ,
 				     "remove expired drc %p from recycle queue",
 				     drc);
@@ -627,16 +627,15 @@ retry:
 				/* assign already-computed hash */
 				drc->d_u.tcp.hk = drc_k.d_u.tcp.hk;
 				PTHREAD_MUTEX_lock(&drc->mtx);	/* LOCKED */
-				/* xprt ref */
-				drc->refcnt = 1;
 				/* insert dict */
 				opr_rbtree_insert(&t->t,
 						  &drc->d_u.tcp.recycle_k);
 			}
-			DRC_ST_UNLOCK();
-			drc->d_u.tcp.recycle_time = 0;
 
 			(void)nfs_dupreq_ref_drc(drc);	/* xprt ref */
+
+			DRC_ST_UNLOCK();
+			drc->d_u.tcp.recycle_time = 0;
 
 			/* try to expire unused DRCs somewhat in proportion to
 			 * new connection arrivals */
