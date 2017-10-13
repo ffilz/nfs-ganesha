@@ -1010,6 +1010,8 @@ dupreq_status_t nfs_dupreq_start(nfs_request_t *reqnfs,
 		break;
 	}
 
+	req->rq_u1 = (void *)DUPREQ_BAD_ADDR1;
+	req->rq_u2 = (void *)DUPREQ_BAD_ADDR1;
 
 	drc = nfs_dupreq_get_drc(req);
 	dk = alloc_dupreq();
@@ -1331,7 +1333,7 @@ void nfs_dupreq_rele(struct svc_req *req, const nfs_function_desc_t *func)
 	dupreq_entry_t *dv = (dupreq_entry_t *) req->rq_u1;
 
 	/* no-cache cleanup */
-	if (dv == (void *)DUPREQ_NOCACHE) {
+	if (dv == (void *)DUPREQ_NOCACHE || dv == (void *)DUPREQ_BAD_ADDR1) {
 		LogFullDebug(COMPONENT_DUPREQ, "releasing no-cache res %p",
 			     req->rq_u2);
 		func->free_function(req->rq_u2);
