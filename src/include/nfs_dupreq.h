@@ -48,13 +48,7 @@ enum drc_type {
 };
 
 #define DRC_FLAG_NONE 0x0000
-#define DRC_FLAG_HASH 0x0001
-#define DRC_FLAG_CKSUM 0x0002
-#define DRC_FLAG_ADDR 0x0004
-#define DRC_FLAG_PORT 0x0008
-#define DRC_FLAG_LOCKED 0x0010
 #define DRC_FLAG_RECYCLE 0x0020
-#define DRC_FLAG_RELEASE 0x0040
 
 typedef struct drc {
 	enum drc_type type;
@@ -138,7 +132,7 @@ void dupreq2_pkgshutdown(void);
 
 drc_t *drc_get_tcp_drc(struct svc_req *);
 void drc_release_tcp_drc(drc_t *);
-void nfs_dupreq_put_drc(drc_t *drc, uint32_t flags);
+void nfs_dupreq_put_drc(drc_t *drc, bool locked);
 
 dupreq_status_t nfs_dupreq_start(nfs_request_t *,
 				 struct svc_req *);
