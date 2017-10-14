@@ -1313,12 +1313,6 @@ void nfs_rpc_queue_init(void)
 	/* waitq */
 	glist_init(&nfs_req_st.reqs.wait_list);
 	nfs_req_st.reqs.waiters = 0;
-
-	/* stallq */
-	gsh_mutex_init(&nfs_req_st.stallq.mtx, NULL);
-	glist_init(&nfs_req_st.stallq.q);
-	nfs_req_st.stallq.active = false;
-	nfs_req_st.stallq.stalled = 0;
 }
 
 static uint32_t enqueued_reqs;

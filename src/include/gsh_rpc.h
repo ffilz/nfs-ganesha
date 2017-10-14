@@ -144,7 +144,6 @@ const char *str_gc_proc(rpc_gss_proc_t);
 #define XPRT_PRIVATE_FLAG_NONE		SVC_XPRT_FLAG_NONE
 /* uint16_t actually used */
 #define XPRT_PRIVATE_FLAG_DECODING 0x0008
-#define XPRT_PRIVATE_FLAG_STALLED 0x0010	/* ie, -on stallq- */
 
 /* uint32_t instructions */
 #define XPRT_PRIVATE_FLAG_LOCKED	SVC_XPRT_FLAG_LOCKED
@@ -154,7 +153,6 @@ const char *str_gc_proc(rpc_gss_proc_t);
 
 typedef struct gsh_xprt_private {
 	SVCXPRT *xprt;
-	struct glist_head stallq;
 	uint16_t flags;
 } gsh_xprt_private_t;
 
