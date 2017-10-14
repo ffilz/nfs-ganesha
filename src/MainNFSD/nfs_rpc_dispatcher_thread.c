@@ -385,9 +385,7 @@ void Create_udp(protos prot)
 			  nfs_rpc_free_user_data);
 
 	/* Setup private data */
-	(udp_xprt[prot])->xp_u1 =
-		alloc_gsh_xprt_private(udp_xprt[prot],
-				       XPRT_PRIVATE_FLAG_NONE);
+	(udp_xprt[prot])->xp_u1 = alloc_gsh_xprt_private(udp_xprt[prot]);
 
 	(void)svc_rqst_evchan_reg(rpc_evchan[UDP_UREG_CHAN].chan_id,
 				  udp_xprt[prot], SVC_RQST_FLAG_XPRT_UREG);
@@ -411,9 +409,7 @@ void Create_tcp(protos prot)
 			  nfs_rpc_free_user_data);
 
 	/* Setup private data */
-	(tcp_xprt[prot])->xp_u1 =
-		alloc_gsh_xprt_private(tcp_xprt[prot],
-				       XPRT_PRIVATE_FLAG_NONE);
+	(tcp_xprt[prot])->xp_u1 = alloc_gsh_xprt_private(tcp_xprt[prot]);
 
 	(void)svc_rqst_evchan_reg(rpc_evchan[TCP_UREG_CHAN].chan_id,
 				  tcp_xprt[prot], SVC_RQST_FLAG_XPRT_UREG);
@@ -461,9 +457,7 @@ void Create_RDMA(protos prot)
 			  nfs_rpc_free_user_data);
 
 	/* Setup private data */
-	(tcp_xprt[prot])->xp_u1 =
-		alloc_gsh_xprt_private(tcp_xprt[prot],
-				       XPRT_PRIVATE_FLAG_NONE);
+	(tcp_xprt[prot])->xp_u1 = alloc_gsh_xprt_private(tcp_xprt[prot]);
 
 	(void)svc_rqst_evchan_reg(rpc_evchan[RDMA_UREG_CHAN].chan_id,
 				  tcp_xprt[prot], SVC_RQST_FLAG_XPRT_UREG);
@@ -1229,8 +1223,7 @@ void nfs_Init_svc(void)
 static enum xprt_stat nfs_rpc_tcp_user_data(SVCXPRT *newxprt)
 {
 	/* setup private data (freed when xprt is destroyed) */
-	newxprt->xp_u1 =
-	    alloc_gsh_xprt_private(newxprt, XPRT_PRIVATE_FLAG_NONE);
+	newxprt->xp_u1 = alloc_gsh_xprt_private(newxprt);
 
 	/* NB: xu->drc is allocated on first request--we need shared
 	 * TCP DRC for v3, but per-connection for v4 */
@@ -1313,12 +1306,6 @@ void nfs_rpc_queue_init(void)
 	/* waitq */
 	glist_init(&nfs_req_st.reqs.wait_list);
 	nfs_req_st.reqs.waiters = 0;
-
-	/* stallq */
-	gsh_mutex_init(&nfs_req_st.stallq.mtx, NULL);
-	glist_init(&nfs_req_st.stallq.q);
-	nfs_req_st.stallq.active = false;
-	nfs_req_st.stallq.stalled = 0;
 }
 
 static uint32_t enqueued_reqs;
