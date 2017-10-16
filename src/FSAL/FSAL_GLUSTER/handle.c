@@ -1624,6 +1624,8 @@ open:
 						      attrib_set);
 
 		if (FSAL_IS_ERROR(status)) {
+			if (my_fd == &myself->globalfd)
+				my_fd = NULL;
 			/* Release the handle we just allocated. */
 			(*new_obj)->obj_ops.release(*new_obj);
 			/* We released handle at this point */
@@ -1641,6 +1643,13 @@ open:
 				 * to get the attributes. Otherwise continue
 				 * with attrs_out indicating ATTR_RDATTR_ERR.
 				 */
+				if (my_fd == &myself->globalfd)
+					my_fd = NULL;
+				/* Release the handle we just allocated. */
+				(*new_obj)->obj_ops.release(*new_obj);
+				/* We released handle at this point */
+				glhandle = NULL;
+				*new_obj = NULL;
 				goto fileerr;
 			}
 		}
@@ -1674,7 +1683,8 @@ open:
 
 
 fileerr:
-	glusterfs_close_my_fd(my_fd);
+	if (my_fd)
+		glusterfs_close_my_fd(my_fd);
 
 direrr:
 	/* Delete the file if we actually created it. */
