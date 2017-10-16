@@ -1623,14 +1623,8 @@ open:
 						      state,
 						      attrib_set);
 
-		if (FSAL_IS_ERROR(status)) {
-			/* Release the handle we just allocated. */
-			(*new_obj)->obj_ops.release(*new_obj);
-			/* We released handle at this point */
-			glhandle = NULL;
-			*new_obj = NULL;
+		if (FSAL_IS_ERROR(status))
 			goto fileerr;
-		}
 
 		if (attrs_out != NULL) {
 			status = (*new_obj)->obj_ops.getattrs(*new_obj,
@@ -1674,7 +1668,17 @@ open:
 
 
 fileerr:
-	glusterfs_close_my_fd(my_fd);
+	/* myself->globalfd will be closed in obj_ops.release */
+	if (my_fd != &myself->globalfd)
+		glusterfs_close_my_fd(my_fd);
+
+	/* Release the handle we just allocated. */
+	if (*new_obj) {
+		(*new_obj)->obj_ops.release(*new_obj);
+		/* We released handle at this point */
+		glhandle = NULL;
+		*new_obj = NULL;
+	}
 
 direrr:
 	/* Delete the file if we actually created it. */
