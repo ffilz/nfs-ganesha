@@ -1263,6 +1263,7 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	char vol_uuid[GLAPI_UUID_LENGTH] = {'\0'};
 	bool truncated;
 	bool created = false;
+	bool my_fd_is_globalfd = false;
 	int retval = 0;
 	mode_t unix_mode;
 
@@ -1598,8 +1599,10 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	 * handy since we can then call setattr2 which WILL take the lock
 	 * without a double locking deadlock.
 	 */
-	if (my_fd == NULL)
+	if (my_fd == NULL) {
 		my_fd = &myself->globalfd;
+		my_fd_is_globalfd = true;
+	}
 
 open:
 	/* now open it */
@@ -1641,6 +1644,11 @@ open:
 				 * to get the attributes. Otherwise continue
 				 * with attrs_out indicating ATTR_RDATTR_ERR.
 				 */
+				/* Release the handle we just allocated. */
+				(*new_obj)->obj_ops.release(*new_obj);
+				/* We released handle at this point */
+				glhandle = NULL;
+				*new_obj = NULL;
 				goto fileerr;
 			}
 		}
@@ -1674,7 +1682,8 @@ open:
 
 
 fileerr:
-	glusterfs_close_my_fd(my_fd);
+	if (!my_fd_is_globalfd)
+		glusterfs_close_my_fd(my_fd);
 
 direrr:
 	/* Delete the file if we actually created it. */
