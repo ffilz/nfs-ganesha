@@ -1087,6 +1087,9 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 				 * to get the attributes. Otherwise continue
 				 * with attrs_out indicating ATTR_RDATTR_ERR.
 				 */
+				/* Release the handle we just allocated. */
+				(*new_obj)->obj_ops.release(*new_obj);
+				*new_obj = NULL;
 				goto fileerr;
 			}
 		}
