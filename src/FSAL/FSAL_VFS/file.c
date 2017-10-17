@@ -722,6 +722,8 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 						      attrib_set);
 
 		if (FSAL_IS_ERROR(status)) {
+			if (my_fd == &hdl->u.file.fd)
+				my_fd = NULL;
 			/* Release the handle we just allocated. */
 			(*new_obj)->obj_ops.release(*new_obj);
 			*new_obj = NULL;
@@ -737,6 +739,11 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 				 * to get the attributes. Otherwise continue
 				 * with attrs_out indicating ATTR_RDATTR_ERR.
 				 */
+				if (my_fd == &hdl->u.file.fd)
+					my_fd = NULL;
+				/* Release the handle we just allocated. */
+				(*new_obj)->obj_ops.release(*new_obj);
+				*new_obj = NULL;
 				goto fileerr;
 			}
 		}
@@ -771,7 +778,8 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
  fileerr:
 
-	close(fd);
+	if (my_fd)
+		close(fd);
 
 	/* Delete the file if we actually created it. */
 	if (created)
