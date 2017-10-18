@@ -981,7 +981,8 @@ unlock:
 		mdcache_refresh_attrs_no_invalidate(mdc_newdir);
 
 	/* If we're moving a directory out, update parent hash */
-	if (mdc_olddir != mdc_newdir && obj_hdl->type == DIRECTORY) {
+	if (!FSAL_IS_ERROR(status) && mdc_olddir != mdc_newdir &&
+	    obj_hdl->type == DIRECTORY) {
 		PTHREAD_RWLOCK_wrlock(&mdc_obj->content_lock);
 
 		mdcache_free_fh(&mdc_obj->fsobj.fsdir.parent);
