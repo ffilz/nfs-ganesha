@@ -1193,7 +1193,7 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 {
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
-	fsal_status_t status;
+	fsal_status_t status, status2;
 	uint64_t change;
 	bool need_acl = false;
 
@@ -1218,8 +1218,8 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
-	status = mdcache_refresh_attrs(entry, need_acl, false);
-	if (!FSAL_IS_ERROR(status) && change == entry->attrs.change) {
+	status2 = mdcache_refresh_attrs(entry, need_acl, false);
+	if (!FSAL_IS_ERROR(status2) && change == entry->attrs.change) {
 		LogDebug(COMPONENT_CACHE_INODE,
 			 "setattr2 did not change change attribute before %lld after = %lld",
 			 (long long int) change,
