@@ -80,6 +80,8 @@ void ganesha_yyerror(YYLTYPE *yylloc_param,
 		     void *yyscanner,
 		     char*);
 
+struct config_node *top_rados_urls_node;
+
 struct config_node *config_block(char *blockname,
 				 struct config_node *list,
 				 YYLTYPE *yylloc_param,
@@ -100,6 +102,8 @@ struct config_node *config_term(char *opcode,
 				enum term_type type,
 				 YYLTYPE *yylloc_param,
 				struct parser_state *st);
+
+struct config_node *config_rados_node(void);
 
 }
 
@@ -398,7 +402,16 @@ struct config_node *config_block(char *blockname,
 		glist_add_tail(&list->node, &node->u.nterm.sub_nodes);
 		link_node(node);
 	}
+
+	if (! strcasecmp(blockname, "RADOS_URLS")) {
+		top_rados_urls_node = node;
+	}
 	return node;
+}
+
+void *config_get_rados_node(void)
+{
+	return top_rados_urls_node;
 }
 
 /**

@@ -43,10 +43,11 @@
  * stores it in a memory structure.
  */
 
+struct parser_state st;
+
 config_file_t config_ParseFile(char *file_path,
 			       struct config_error_type *err_type)
 {
-	struct parser_state st;
 	struct config_root *root;
 	int rc;
 
