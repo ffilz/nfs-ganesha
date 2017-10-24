@@ -72,6 +72,21 @@
 
 pool_t *request_pool;
 
+/* Global monotonically increasing request number */
+static uint32_t request_number;
+
+__thread char request_function_name[16];
+__thread uint32_t this_request_number;
+
+static const char *request_function_name_cb(void)
+{
+	snprintf(request_function_name,
+		 sizeof(request_function_name),
+		 "RQ_%"PRIu32,
+		 this_request_number);
+	return request_function_name;
+}
+
 static struct fridgethr *worker_fridge;
 
 const nfs_function_desc_t invalid_funcdesc = {
@@ -694,6 +709,10 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 	int exportid = -1;
 #endif /* _USE_NFS3 */
 	bool no_dispatch = false;
+
+	this_request_number = atomic_inc_uint32_t(&request_number);
+
+	SetNameFunctionCB(request_function_name_cb);
 
 #ifdef USE_LTTNG
 	tracepoint(nfs_rpc, start, reqdata);

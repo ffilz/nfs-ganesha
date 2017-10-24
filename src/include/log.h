@@ -126,9 +126,12 @@ char *get_debug_info(int *size);
 
 /* Function prototypes */
 
+typedef const char * (*function_name_cb_func)(void);
+
 void SetNamePgm(const char *nom);
 void SetNameHost(const char *nom);
 void SetNameFunction(const char *nom);	/* thread safe */
+void SetNameFunctionCB(function_name_cb_func function_name_cb);
 void SetClientIP(char *ip_str);
 
 void init_logging(const char *log_path, const int debug_level);

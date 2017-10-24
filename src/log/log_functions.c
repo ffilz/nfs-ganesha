@@ -265,12 +265,15 @@ static char hostname[256];
 static int syslog_opened;
 
 /*
- * Variables specifiques aux threads.
+ * Thread specific variables.
+ * Note that if thread_name is not set, function_name will be used instead.
  */
 
 __thread char thread_name[16];
+__thread const char *function_name;
 __thread char log_buffer[LOG_BUFF_LEN + 1];
 __thread char *clientip = NULL;
+__thread function_name_cb_func function_name_cb;
 
 /* threads keys */
 #define LogChanges(format, args...) \
@@ -403,6 +406,16 @@ void SetNameFunction(const char *nom)
 			"Thread name %s too long truncated to %s",
 			nom, thread_name);
 	clientip = NULL;
+}
+
+/* Set a callback to set the function name if necessary.
+ * Also clears the function name to "arm" it.
+ */
+void SetNameFunctionCB(function_name_cb_func fncb)
+{
+	/* Clear function name to "arm" this capability. */
+	function_name = NULL;
+	function_name_cb = fncb;
 }
 
 /*
@@ -1429,12 +1442,20 @@ static int display_log_component(struct display_buffer *dsp_log,
 	}
 
 	if (b_left > 0 && logfields->disp_threadname) {
-		if (thread_name[0] != '\0')
+		if (thread_name[0] != '\0') {
 			b_left = display_printf(dsp_log, "[%s] ",
 						thread_name);
-		else
+		} else if (function_name != NULL) {
+			b_left = display_printf(dsp_log, "[%s] ",
+						function_name);
+		} else if (function_name_cb != NULL) {
+			function_name = function_name_cb();
+			b_left = display_printf(dsp_log, "[%s] ",
+						function_name);
+		} else {
 			b_left = display_printf(dsp_log, "[%p] ",
 						thread_name);
+		}
 	}
 
 	if (b_left > 0 && logfields->disp_filename) {
