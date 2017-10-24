@@ -1539,15 +1539,14 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 	} else if (!errno)
                 created = true;
 
-       /* preserve errno */
+	/* preserve errno */
 	retval = errno;
-
 
 	/* restore credentials */
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);
 
 	if (glhandle == NULL) {
-		status = gluster2fsal_error(errno);
+		status = gluster2fsal_error(retval);
 		goto out;
 	}
 
@@ -1702,7 +1701,6 @@ direrr:
 
 	if (status.major != ERR_FSAL_NO_ERROR)
 		gluster_cleanup_vars(glhandle);
-	return fsalstat(posix2fsal_error(retval), retval);
 
  out:
 #ifdef GLTIMING
