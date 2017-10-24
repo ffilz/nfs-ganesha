@@ -43,13 +43,15 @@
  * stores it in a memory structure.
  */
 
+struct parser_state st;
+
 config_file_t config_ParseFile(char *file_path,
 			       struct config_error_type *err_type)
 {
-	struct parser_state st;
 	struct config_root *root;
 	int rc;
 
+	glist_init(&all_blocks);
 	memset(&st, 0, sizeof(struct parser_state));
 	st.err_type = err_type;
 	rc = ganeshun_yy_init_parser(file_path, &st);
@@ -68,6 +70,24 @@ config_file_t config_ParseFile(char *file_path,
 #endif
 	ganeshun_yy_cleanup_parser(&st);
 	return (config_file_t)root;
+}
+
+/**
+ *  Return the first node in the global config block list with
+ *  name == block_name
+ */
+void *config_GetBlockNode(const char *block_name)
+{
+	struct config_node *node;
+	struct glist_head *nsi, *nsn;
+
+	glist_for_each_safe(nsi, nsn, &all_blocks) {
+		node = glist_entry(nsi, struct config_node, node);
+		if (!strcasecmp(node->u.nterm.name, block_name)) {
+			return node;
+		}
+	}
+	return NULL;
 }
 
 /**
@@ -1945,4 +1965,3 @@ int load_config_from_parse(config_file_t config,
 	}
 	return found;
 }
-
