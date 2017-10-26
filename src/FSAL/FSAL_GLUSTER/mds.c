@@ -220,7 +220,7 @@ static nfsstat4 pnfs_layout_get(struct fsal_obj_handle          *obj_pub,
 				   GFAPI_HANDLE_LENGTH);
 	if (rc < 0) {
 		LogMajor(COMPONENT_PNFS, "Invalid glfs_object");
-		return posix2nfs4_error(-rc);
+		return posix2nfs4_error(errno);
 	}
 
 	ds_wire.layout   = file_layout;
