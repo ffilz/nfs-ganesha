@@ -237,6 +237,10 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 		/* skip . and .. */
 		if ((strcmp(de.d_name, ".") == 0)
 		    || (strcmp(de.d_name, "..") == 0)) {
+			if (xstat) {
+				glfs_free(xstat);
+				xstat = NULL;
+			}
 			continue;
 		}
 		fsal_prepare_attrs(&attrs, attrmask);
