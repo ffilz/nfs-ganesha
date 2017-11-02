@@ -335,21 +335,11 @@ void LogClientListEntry(log_levels_t level,
 
 	switch (entry->type) {
 	case HOSTIF_CLIENT:
-		if (inet_ntop(AF_INET,
-			      &entry->client.hostif.clientaddr,
-			      addr,
-			      sizeof(addr)) == NULL) {
-			paddr = "Invalid Host address";
-		}
+		paddr = cidr_to_str(entry->client.network.cidr, CIDR_NOFLAGS);
 		break;
 
 	case NETWORK_CLIENT:
-		if (inet_ntop(AF_INET,
-			      &entry->client.network.netaddr,
-			      addr,
-			      sizeof(addr)) == NULL) {
-			paddr = "Invalid Network address";
-		}
+		paddr = cidr_to_str(entry->client.network.cidr, CIDR_NOFLAGS);
 		break;
 
 	case NETGROUP_CLIENT:
@@ -365,12 +355,7 @@ void LogClientListEntry(log_levels_t level,
 		break;
 
 	case HOSTIF_CLIENT_V6:
-		if (inet_ntop(AF_INET6,
-			      &entry->client.hostif.clientaddr6,
-			      addr,
-			      sizeof(addr)) == NULL) {
-			paddr = "Invalid Host address";
-		}
+		paddr = cidr_to_str(entry->client.network.cidr, CIDR_NOFLAGS);
 		break;
 
 	case MATCH_ANY_CLIENT:
@@ -434,11 +419,11 @@ static int add_client(struct glist_head *client_list,
 	int errcnt = 0;
 	struct addrinfo *info;
 	CIDR *cidr;
-	uint32_t addr;
 	int rc;
 
 	cli = gsh_calloc(1, sizeof(struct exportlist_client_entry__));
 
+	cli->client.network.cidr = 0;
 	glist_init(&cli->cle_list);
 	switch (type_hint) {
 	case TERM_V4_ANY:
@@ -456,7 +441,7 @@ static int add_client(struct glist_head *client_list,
 		cli->client.netgroup.netgroupname = gsh_strdup(client_tok + 1);
 		cli->type = NETGROUP_CLIENT;
 		break;
-	case TERM_V4CIDR:  /* this needs to be migrated to libcidr! (no v6) */
+	case TERM_V4CIDR:
 		cidr = cidr_from_str(client_tok);
 		if (cidr == NULL) {
 			config_proc_error(cnode, err_type,
@@ -466,11 +451,20 @@ static int add_client(struct glist_head *client_list,
 			errcnt++;
 			goto out;
 		}
-		memcpy(&addr, &cidr->addr[12], 4);
-		cli->client.network.netaddr = ntohl(addr);
-		memcpy(&addr, &cidr->mask[12], 4);
-		cli->client.network.netmask = ntohl(addr);
-		cidr_free(cidr);
+		cli->client.network.cidr = cidr;
+		cli->type = NETWORK_CLIENT;
+		break;
+	case TERM_V6CIDR:
+		cidr = cidr_from_str(client_tok);
+		if (cidr == NULL) {
+			config_proc_error(cnode, err_type,
+					  "Expected a IPv6 CIDR address, got (%s)",
+					  client_tok);
+			err_type->invalid = true;
+			errcnt++;
+			goto out;
+		}
+		cli->client.network.cidr = cidr;
 		cli->type = NETWORK_CLIENT;
 		break;
 	case TERM_REGEX:
@@ -486,9 +480,8 @@ static int add_client(struct glist_head *client_list,
 		cli->type = WILDCARDHOST_CLIENT;
 		break;
 	case TERM_V4ADDR:
-		rc = inet_pton(AF_INET, client_tok,
-			       &cli->client.hostif.clientaddr);
-		if (rc != 1) {
+		cidr = cidr_from_str(client_tok);
+		if (cidr == NULL) {
 			config_proc_error(cnode, err_type,
 					  "IPv4 addr (%s) not in presentation format",
 					  client_tok);
@@ -496,12 +489,12 @@ static int add_client(struct glist_head *client_list,
 			errcnt++;
 			goto out;
 		}
+		cli->client.network.cidr = cidr;
 		cli->type = HOSTIF_CLIENT;
 		break;
 	case TERM_V6ADDR:
-		rc = inet_pton(AF_INET6, client_tok,
-			       &cli->client.hostif.clientaddr6);
-		if (rc != 1) {
+		cidr = cidr_from_str(client_tok);
+		if (cidr == NULL) {
 			config_proc_error(cnode, err_type,
 					  "IPv6 addr (%s) not in presentation format",
 					  client_tok);
@@ -509,7 +502,8 @@ static int add_client(struct glist_head *client_list,
 			errcnt++;
 			goto out;
 		}
-		cli->type = HOSTIF_CLIENT_V6;
+		cli->client.network.cidr = cidr;
+		cli->type = NETWORK_CLIENT;
 		break;
 	case TERM_TOKEN: /* only dns names now. */
 		rc = getaddrinfo(client_tok, NULL, NULL, &info);
@@ -546,10 +540,8 @@ static int add_client(struct glist_head *client_list,
 						   &in_addr_last,
 						   sizeof(struct in_addr)) == 0)
 						continue;
-					memcpy(&(cli->client.hostif.clientaddr),
-					       &infoaddr,
-					       sizeof(struct in_addr));
-					cli->type = HOSTIF_CLIENT;
+					cli->client.network.cidr = cidr_from_inaddr(&infoaddr);
+					cli->type = NETWORK_CLIENT;
 					ap_last = ap;
 					in_addr_last = infoaddr;
 
@@ -567,11 +559,8 @@ static int add_client(struct glist_head *client_list,
 						       sizeof(struct in6_addr)))
 						continue;
 					/* IPv6 address */
-					memcpy(
-					    &(cli->client.hostif.clientaddr6),
-					       &infoaddr,
-					       sizeof(struct in6_addr));
-					cli->type = HOSTIF_CLIENT_V6;
+					cli->client.network.cidr = cidr_from_in6addr(&infoaddr);
+					cli->type = NETWORK_CLIENT;
 					ap_last = ap;
 					in6_addr_last = infoaddr;
 				} else
@@ -2422,11 +2411,11 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 					       struct gsh_export *export)
 {
 	struct glist_head *glist;
-	in_addr_t addr = get_in_addr(hostaddr);
 	int rc;
 	int ipvalid = -1;	/* -1 need to print, 0 - invalid, 1 - ok */
 	char hostname[MAXHOSTNAMELEN + 1];
 	char ipstring[SOCK_NAME_MAX + 1];
+	CIDR *export_prefix;
 
 	glist_for_each(glist, &export->clients) {
 		exportlist_client_entry_t *client;
@@ -2442,14 +2431,33 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 
 		switch (client->type) {
 		case HOSTIF_CLIENT:
-			if (client->client.hostif.clientaddr == addr)
+			if (hostaddr->ss_family == AF_INET) {
+				export_prefix = cidr_from_inaddr(
+				&((struct sockaddr_in *)hostaddr)->sin_addr);
+			} else {
+				export_prefix = cidr_alloc();
+			}
+			if (cidr_contains(client->client.network.cidr,
+					  export_prefix) == 0) {
+				cidr_free(export_prefix);
 				return client;
+			}
+			cidr_free(export_prefix);
 			break;
 
 		case NETWORK_CLIENT:
-			if ((client->client.network.netmask & ntohl(addr)) ==
-			    client->client.network.netaddr)
+			if (hostaddr->ss_family == AF_INET) {
+				export_prefix = cidr_from_inaddr(
+				&((struct sockaddr_in *)hostaddr)->sin_addr);
+			} else {
+				export_prefix = cidr_alloc();
+			}
+			if (cidr_contains(client->client.network.cidr,
+					  export_prefix) == 0) {
+				cidr_free(export_prefix);
 				return client;
+			}
+			cidr_free(export_prefix);
 			break;
 
 		case NETGROUP_CLIENT:
@@ -2556,6 +2564,7 @@ static exportlist_client_entry_t *client_matchv6(struct in6_addr *paddrv6,
 						 struct gsh_export *export)
 {
 	struct glist_head *glist;
+	CIDR *export_prefix;
 
 	glist_for_each(glist, &export->clients) {
 		exportlist_client_entry_t *client;
@@ -2571,21 +2580,22 @@ static exportlist_client_entry_t *client_matchv6(struct in6_addr *paddrv6,
 
 		switch (client->type) {
 		case HOSTIF_CLIENT:
+		case HOSTIF_CLIENT_V6:
 		case NETWORK_CLIENT:
+			export_prefix = cidr_from_in6addr(paddrv6);
+			if (cidr_contains(client->client.network.cidr,
+					  export_prefix) == 0) {
+				cidr_free(export_prefix);
+				return client;
+			}
+			break;
+
 		case NETGROUP_CLIENT:
 		case WILDCARDHOST_CLIENT:
 		case GSSPRINCIPAL_CLIENT:
 		case BAD_CLIENT:
 			break;
 
-		case HOSTIF_CLIENT_V6:
-			if (!memcmp(client->client.hostif.clientaddr6.s6_addr,
-				    paddrv6->s6_addr, 16)) {
-				/* Remember that IPv6 address are
-				 * 128 bits = 16 bytes long
-				 */
-				return client;
-			}
 			break;
 
 		case MATCH_ANY_CLIENT:

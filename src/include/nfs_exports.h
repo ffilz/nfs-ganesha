@@ -48,6 +48,7 @@
 #include "export_mgr.h"
 #include "fsal_types.h"
 #include "log.h"
+#include "cidr.h"
 
 /*
  * Export List structure
@@ -86,13 +87,8 @@ typedef struct exportlist_client_entry__ {
 	struct glist_head cle_list;
 	exportlist_client_type_t type;
 	union {
-		union {
-			uint32_t clientaddr; /* wrong! fix to be struct */
-			struct in6_addr clientaddr6;
-		} hostif;
 		struct {
-			unsigned int netaddr;
-			unsigned int netmask;
+			CIDR *cidr;
 		} network;
 		struct {
 			char *netgroupname;
