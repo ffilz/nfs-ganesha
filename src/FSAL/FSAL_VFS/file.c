@@ -269,6 +269,174 @@ fsal_status_t vfs_merge(struct fsal_obj_handle *orig_hdl,
 	return status;
 }
 
+static fsal_status_t vfs_open2_by_handle(struct fsal_obj_handle *obj_hdl,
+					 struct state_t *state,
+					 fsal_openflags_t openflags,
+					 enum fsal_create_mode createmode,
+					 struct attrlist *attrib_set,
+					 fsal_verifier_t verifier,
+					 struct attrlist *attrs_out,
+					 bool *caller_perm_check)
+{
+	fsal_status_t status = {0, 0};
+	struct vfs_fd *my_fd = NULL;
+	int posix_flags = 0;
+	int retval = 0;
+	bool truncated;
+	struct vfs_fsal_obj_handle *myself = container_of(obj_hdl, struct
+					  vfs_fsal_obj_handle, obj_handle);
+
+	if (state != NULL)
+		my_fd = &container_of(state, struct vfs_state_fd,
+				      state)->vfs_fd;
+
+	fsal2posix_openflags(openflags, &posix_flags);
+	truncated = (posix_flags & O_TRUNC) != 0;
+
+	LogFullDebug(COMPONENT_FSAL,
+		     truncated ? "Truncate" : "No truncate");
+
+	if (createmode >= FSAL_EXCLUSIVE) {
+		/* Now fixup attrs for verifier if exclusive create */
+		set_common_verifier(attrib_set, verifier);
+	}
+
+	/* This is an open by handle */
+	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
+		LogDebug(COMPONENT_FSAL,
+			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
+			 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
+		return fsalstat(posix2fsal_error(EXDEV), EXDEV);
+	}
+
+	if (state != NULL) {
+		/* Prepare to take the share reservation, but only if we are
+		 * called with a valid state (if state is NULL the caller is a
+		 * stateless create such as NFS v3 CREATE).
+		 */
+
+		/* This can block over an I/O operation. */
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Check share reservation conflicts. */
+		status = check_share_conflict(&myself->u.file.share,
+					      openflags,
+					      false);
+
+		if (FSAL_IS_ERROR(status)) {
+			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+			return status;
+		}
+
+		/* Take the share reservation now by updating the
+		 * counters.
+		 */
+		update_share_counters(&myself->u.file.share,
+				      FSAL_O_CLOSED,
+				      openflags);
+
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	} else {
+		/* We need to use the global fd to continue, and take
+		 * the lock to protect it.
+		 */
+		my_fd = &myself->u.file.fd;
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+	}
+
+	status = vfs_open_my_fd(myself, openflags, posix_flags, my_fd);
+
+	if (FSAL_IS_ERROR(status)) {
+		if (state == NULL) {
+			/* Release the lock taken above, and return
+			 * since there is nothing to undo.
+			 */
+			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+			return status;
+		} else {
+			/* Error - need to release the share */
+			goto undo_share;
+		}
+	}
+
+	if (createmode >= FSAL_EXCLUSIVE || truncated) {
+		/* Refresh the attributes */
+		struct stat stat;
+
+		retval = fstat(my_fd->fd, &stat);
+
+		if (retval == 0) {
+			LogFullDebug(COMPONENT_FSAL,
+				     "New size = %" PRIx64,
+				     stat.st_size);
+		} else {
+			if (errno == EBADF)
+				errno = ESTALE;
+			status = fsalstat(posix2fsal_error(errno),
+					  errno);
+		}
+
+		/* Now check verifier for exclusive, but not for
+		 * FSAL_EXCLUSIVE_9P.
+		 */
+		if (!FSAL_IS_ERROR(status) &&
+		    createmode >= FSAL_EXCLUSIVE &&
+		    createmode != FSAL_EXCLUSIVE_9P &&
+		    !check_verifier_stat(&stat, verifier)) {
+			/* Verifier didn't match, return EEXIST */
+			status =
+				fsalstat(posix2fsal_error(EEXIST), EEXIST);
+		} else if (attrs_out != NULL) {
+			/* Since we have a stat(), use it */
+			posix2fsal_attributes_all(&stat, attrs_out);
+			attrs_out->fsid = myself->obj_handle.fs->fsid;
+		}
+	} else if (attrs_out != NULL) {
+		/* Need to update attributes */
+		status = obj_hdl->obj_ops.getattrs(obj_hdl, attrs_out);
+		/* Status handled below */
+	}
+
+	if (state == NULL) {
+		/* If no state, release the lock taken above and return
+		 * status. If success, we haven't done any permission
+		 * check so ask the caller to do so.
+		 */
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+		*caller_perm_check = !FSAL_IS_ERROR(status);
+		return status;
+	}
+
+	if (!FSAL_IS_ERROR(status)) {
+		/* Return success. We haven't done any permission
+		 * check so ask the caller to do so.
+		 */
+		*caller_perm_check = true;
+		return status;
+	}
+
+	(void) vfs_close_my_fd(my_fd);
+
+undo_share:
+
+	/* Can only get here with state not NULL and an error */
+
+	/* On error we need to release our share reservation
+	 * and undo the update of the share counters.
+	 * This can block over an I/O operation.
+	 */
+	PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+	update_share_counters(&myself->u.file.share,
+			      openflags,
+			      FSAL_O_CLOSED);
+
+	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+
+	return status;
+}
+
+
 /**
  * @brief Open a file descriptor for read or write and possibly create
  *
@@ -350,7 +518,6 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 	struct vfs_fsal_obj_handle *myself, *hdl = NULL;
 	struct stat stat;
 	vfs_file_handle_t *fh = NULL;
-	bool truncated;
 	bool created = false;
 
 	if (state != NULL)
@@ -365,142 +532,10 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 	fsal2posix_openflags(openflags, &posix_flags);
 
-	truncated = (posix_flags & O_TRUNC) != 0;
-
-	LogFullDebug(COMPONENT_FSAL,
-		     truncated ? "Truncate" : "No truncate");
-
-	if (createmode >= FSAL_EXCLUSIVE) {
-		/* Now fixup attrs for verifier if exclusive create */
-		set_common_verifier(attrib_set, verifier);
-	}
-
 	if (name == NULL) {
-		/* This is an open by handle */
-		if (obj_hdl->fsal != obj_hdl->fs->fsal) {
-			LogDebug(COMPONENT_FSAL,
-				 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
-				 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
-			return fsalstat(posix2fsal_error(EXDEV), EXDEV);
-		}
-
-		if (state != NULL) {
-			/* Prepare to take the share reservation, but only if we
-			 * are called with a valid state (if state is NULL the
-			 * caller is a stateless create such as NFS v3 CREATE).
-			 */
-
-			/* This can block over an I/O operation. */
-			PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
-
-			/* Check share reservation conflicts. */
-			status = check_share_conflict(&myself->u.file.share,
-						      openflags,
-						      false);
-
-			if (FSAL_IS_ERROR(status)) {
-				PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
-				return status;
-			}
-
-			/* Take the share reservation now by updating the
-			 * counters.
-			 */
-			update_share_counters(&myself->u.file.share,
-					      FSAL_O_CLOSED,
-					      openflags);
-
-			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
-		} else {
-			/* We need to use the global fd to continue, and take
-			 * the lock to protect it.
-			 */
-			my_fd = &myself->u.file.fd;
-			PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
-		}
-
-		status = vfs_open_my_fd(myself, openflags, posix_flags, my_fd);
-
-		if (FSAL_IS_ERROR(status)) {
-			if (state == NULL) {
-				/* Release the lock taken above, and return
-				 * since there is nothing to undo.
-				 */
-				PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
-				return status;
-			} else {
-				/* Error - need to release the share */
-				goto undo_share;
-			}
-		}
-
-		if (createmode >= FSAL_EXCLUSIVE || truncated) {
-			/* Refresh the attributes */
-			struct stat stat;
-
-			retval = fstat(my_fd->fd, &stat);
-
-			if (retval == 0) {
-				LogFullDebug(COMPONENT_FSAL,
-					     "New size = %" PRIx64,
-					     stat.st_size);
-			} else {
-				if (errno == EBADF)
-					errno = ESTALE;
-				status = fsalstat(posix2fsal_error(errno),
-						  errno);
-			}
-
-			/* Now check verifier for exclusive, but not for
-			 * FSAL_EXCLUSIVE_9P.
-			 */
-			if (!FSAL_IS_ERROR(status) &&
-			    createmode >= FSAL_EXCLUSIVE &&
-			    createmode != FSAL_EXCLUSIVE_9P &&
-			    !check_verifier_stat(&stat, verifier)) {
-				/* Verifier didn't match, return EEXIST */
-				status =
-				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
-			}
-		}
-
-		if (state == NULL) {
-			/* If no state, release the lock taken above and return
-			 * status. If success, we haven't done any permission
-			 * check so ask the caller to do so.
-			 */
-			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
-			*caller_perm_check = !FSAL_IS_ERROR(status);
-			return status;
-		}
-
-		if (!FSAL_IS_ERROR(status)) {
-			/* Return success. We haven't done any permission
-			 * check so ask the caller to do so.
-			 */
-			*caller_perm_check = true;
-			return status;
-		}
-
-		(void) vfs_close_my_fd(my_fd);
-
- undo_share:
-
-		/* Can only get here with state not NULL and an error */
-
-		/* On error we need to release our share reservation
-		 * and undo the update of the share counters.
-		 * This can block over an I/O operation.
-		 */
-		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
-
-		update_share_counters(&myself->u.file.share,
-				      openflags,
-				      FSAL_O_CLOSED);
-
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
-
-		return status;
+		return vfs_open2_by_handle(obj_hdl, state, openflags,
+					   createmode, attrib_set, verifier,
+					   attrs_out, caller_perm_check);
 	}
 
 	/* In this path where we are opening by name, we can't check share
@@ -748,6 +783,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 		 * we used to create the fsal_obj_handle.
 		 */
 		posix2fsal_attributes_all(&stat, attrs_out);
+		attrs_out->fsid = myself->obj_handle.fs->fsid;
 	}
 
 	LogFullDebug(COMPONENT_FSAL, "Closing Opened fd %d", dir_fd);
