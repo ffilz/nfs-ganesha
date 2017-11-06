@@ -1392,6 +1392,9 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 
+		if (attrs_out != NULL)
+			fsal_copy_attrs(attrs_out, &myself->attrs, false);
+
 		return status;
 	}
 
@@ -1462,6 +1465,9 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 				return status;
 			}
 		}
+
+		if (attrs_out != NULL)
+			fsal_copy_attrs(attrs_out, &myself->attrs, false);
 	}
 
 	if (state != NULL) {
