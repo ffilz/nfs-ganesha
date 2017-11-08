@@ -878,6 +878,10 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 							EEXIST);
 				}
 			}
+
+			if (attrs_out) {
+				posix2fsal_attributes_all(&st, attrs_out);
+			}
 		}
 
 		if (!state) {
@@ -901,6 +905,10 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 		/* close on error */
 		(void) rgw_close(export->rgw_fs, handle->rgw_fh,
 				RGW_CLOSE_FLAG_NONE);
+
+		if (attrs_out && attrs_out->request_mask & ATTR_RDATTR_ERR) {
+			attrs_out->valid_mask &= ATTR_RDATTR_ERR;
+		}
 
  undo_share:
 
