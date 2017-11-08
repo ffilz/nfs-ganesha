@@ -1402,6 +1402,10 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 				status =
 				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
 			}
+
+			if (attrs_out) {
+				stat2fsal_attributes(&stat, attrs_out);
+			}
 		}
 
 		if (state == NULL) {
@@ -1423,6 +1427,11 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 		}
 
 		(void) glusterfs_close_my_fd(my_fd);
+
+		if (attrs_out && attrs_out->request_mask & ATTR_RDATTR_ERR) {
+			attrs_out->valid_mask &= ATTR_RDATTR_ERR;
+		}
+
  undo_share:
 
 		/* Can only get here with state not NULL and an error */
