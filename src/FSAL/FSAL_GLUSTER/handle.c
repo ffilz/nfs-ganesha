@@ -1383,6 +1383,9 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 				LogFullDebug(COMPONENT_FSAL,
 					     "New size = %" PRIx64,
 					     stat.st_size);
+				if (attrs_out) {
+					stat2fsal_attributes(&stat, attrs_out);
+				}
 			} else {
 				if (errno == EBADF)
 					errno = ESTALE;
@@ -1402,6 +1405,10 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 				status =
 				    fsalstat(posix2fsal_error(EEXIST), EEXIST);
 			}
+
+		} else if (attrs_out && attrs_out->request_mask &
+			   ATTR_RDATTR_ERR) {
+			attrs_out->valid_mask &= ATTR_RDATTR_ERR;
 		}
 
 		if (state == NULL) {
@@ -1423,6 +1430,7 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 		}
 
 		(void) glusterfs_close_my_fd(my_fd);
+
  undo_share:
 
 		/* Can only get here with state not NULL and an error */
