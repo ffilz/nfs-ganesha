@@ -2467,25 +2467,32 @@ again:
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 
 		if (retried) {
-			/* This really should never occur, it could occur
-			 * if there was some race with closing the file.
+			/* Since we drop wrlock for 'obj_hdl->obj_lock'
+			 * and acquire rwlock for 'obj_hdl->obj_lock' after
+			 * opening the global file descriptor, some other
+			 * thread could have closed the file causing
+			 * verification of 'openflags' to fail.
+			 *
+			 * We will now attempt to just provide a temporary
+			 * file descriptor
 			 */
 			LogDebug(COMPONENT_FSAL,
-				 "Retry failed, returning EBADF");
+				 "Retry failed.");
 			*has_lock = false;
-			return fsalstat(posix2fsal_error(EBADF), EBADF);
+		} else {
+			/* Switch to write lock on object to protect file
+			 * descriptor.
+			 * By using trylock, we don't block if another thread
+			 * is using the file descriptor right now. In that
+			 * case, we just open a temporary file descriptor.
+			 *
+			 * This prevents us from blocking for the duration of
+			 * an I/O request.
+			 */
+			rc = pthread_rwlock_trywrlock(&obj_hdl->obj_lock);
 		}
 
-		/* Switch to write lock on object to protect file descriptor.
-		 * By using trylock, we don't block if another thread is using
-		 * the file descriptor right now. In that case, we just open
-		 * a temporary file descriptor.
-		 *
-		 * This prevents us from blocking for the duration of an
-		 * I/O request.
-		 */
-		rc = pthread_rwlock_trywrlock(&obj_hdl->obj_lock);
-		if (rc == EBUSY) {
+		if (retried || rc == EBUSY) {
 			/* Someone else is using the file descriptor.
 			 * Just provide a temporary file descriptor.
 			 * We still take a read lock so we can protect the
