@@ -46,6 +46,8 @@ time_t current_grace;
 pthread_mutex_t grace_mutex = PTHREAD_MUTEX_INITIALIZER;        /*< Mutex */
 struct glist_head clid_list = GLIST_HEAD_INIT(clid_list);  /*< Clients */
 struct nfs4_recovery_backend *recovery_backend;
+static int clid_count;
+static int32_t reclaim_completes;
 
 static void nfs4_recovery_load_clids_nolock(nfs_grace_start_t *gsp);
 static void nfs_release_nlm_state(char *release_ip);
@@ -56,7 +58,9 @@ clid_entry_t *nfs4_add_clid_entry(char *cl_name)
 	clid_entry_t *new_ent = gsh_malloc(sizeof(clid_entry_t));
 
 	strcpy(new_ent->cl_name, cl_name);
+	new_ent->cl_reclaim_complete = false;
 	glist_add(&clid_list, &new_ent->cl_list);
+	++clid_count;
 	return new_ent;
 }
 
@@ -78,6 +82,7 @@ void nfs4_cleanup_clid_entrys(void)
 					       cl_list)) != NULL) {
 		glist_del(&clid_entry->cl_list);
 		gsh_free(clid_entry);
+		--clid_count;
 	}
 }
 
@@ -149,19 +154,23 @@ int nfs_in_grace(void)
 {
 	int in_grace;
 	static int last_grace  = -1;
+	int32_t rc_count;
 
 	if (nfs_param.nfsv4_param.graceless)
 		return 0;
 
-	in_grace = ((atomic_fetch_time_t(&current_grace) +
-		     nfs_param.nfsv4_param.grace_period) > time(NULL));
+	rc_count = atomic_fetch_int32_t(&reclaim_completes);
+	in_grace = ((rc_count != clid_count) &&
+		    ((atomic_fetch_time_t(&current_grace) +
+		     nfs_param.nfsv4_param.grace_period) > time(NULL)));
 
 	if (in_grace != last_grace) {
-		LogEvent(COMPONENT_STATE, "NFS Server Now %s",
+		LogEvent(COMPONENT_STATE, "NFS Server Now %s ",
 			 in_grace ? "IN GRACE" : "NOT IN GRACE");
 		last_grace = in_grace;
 	} else if (in_grace) {
-		LogDebug(COMPONENT_STATE, "NFS Server IN GRACE");
+		LogDebug(COMPONENT_STATE, "NFS Server IN GRACE (%d:%d)",
+				clid_count, rc_count);
 	}
 
 	return in_grace;
@@ -204,6 +213,48 @@ static bool check_clid(nfs_client_id_t *clientid, clid_entry_t *clid_ent)
 	return false;
 }
 
+void nfs4_clid_reclaim_complete(nfs_client_id_t *clientid)
+{
+	struct glist_head *node;
+
+	/* If there are no clients */
+	if (clid_count == 0)
+		return;
+
+	/*
+	 * Loop through the list and try to find a matching client that hasn't
+	 * yet sent a reclaim_complete. If we find it, mark its clid_ent
+	 * record, and decrement the reclaim_completes counter.
+	 */
+	PTHREAD_MUTEX_lock(&grace_mutex);
+	glist_for_each(node, &clid_list) {
+		clid_entry_t *clid_ent = glist_entry(node, clid_entry_t,
+						     cl_list);
+
+		/* Skip any that have already sent a reclaim_complete */
+		if (clid_ent->cl_reclaim_complete)
+			continue;
+
+		if (check_clid(clientid, clid_ent)) {
+			if (isDebug(COMPONENT_CLIENTID)) {
+				char str[LOG_BUFF_LEN] = "\0";
+				struct display_buffer dspbuf = {
+					sizeof(str), str, str};
+
+				display_client_id_rec(&dspbuf, clientid);
+
+				LogFullDebug(COMPONENT_CLIENTID,
+					     "RECLAIM_COMPLETE for %s",
+					     str);
+			}
+			clid_ent->cl_reclaim_complete = true;
+			atomic_inc_int32_t(&reclaim_completes);
+			break;
+		}
+	}
+	PTHREAD_MUTEX_unlock(&grace_mutex);
+}
+
 /**
  * @brief Determine whether or not this client may reclaim state
  *
@@ -221,7 +272,7 @@ void  nfs4_chk_clid_impl(nfs_client_id_t *clientid, clid_entry_t **clid_ent_arg)
 		 clientid->cid_clientid);
 
 	/* If there were no clients at time of restart, we're done */
-	if (glist_empty(&clid_list))
+	if (clid_count == 0)
 		return;
 
 	/*
