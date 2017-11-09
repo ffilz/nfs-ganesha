@@ -379,6 +379,8 @@ not_junction:
 		LogDebug(COMPONENT_NFS_READDIR,
 			 "Skipping because of %s",
 			 nfsstat4_to_str(rdattr_error));
+		/* Discard the attributes we had retrieved. */
+		nfs4_Fattr_Free(&tracker_entry->attrs);
 	}
 
  skip:
@@ -421,10 +423,7 @@ not_junction:
 
  failure:
 
-	if (tracker_entry->attrs.attr_vals.attrlist4_val != NULL) {
-		gsh_free(tracker_entry->attrs.attr_vals.attrlist4_val);
-		tracker_entry->attrs.attr_vals.attrlist4_val = NULL;
-	}
+	nfs4_Fattr_Free(&tracker_entry->attrs);
 
 	if (tracker_entry->name.utf8string_val != NULL) {
 		gsh_free(tracker_entry->name.utf8string_val);

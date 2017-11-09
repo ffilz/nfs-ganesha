@@ -135,12 +135,18 @@ int nfs4_op_getattr(struct nfs_argop4 *op, compound_data_t *data,
 			&res_GETATTR4->GETATTR4res_u.resok4.obj_attributes,
 			&arg_GETATTR4->attr_request);
 
-	if (data->current_obj->type == DIRECTORY &&
+	if (res_GETATTR4->status == NFS4_OK &&
+	    data->current_obj->type == DIRECTORY &&
 	    is_sticky_bit_set(data->current_obj, &attrs) &&
 	    !attribute_is_set(&arg_GETATTR4->attr_request,
 			      FATTR4_FS_LOCATIONS) &&
-	    check_fs_locations(data->current_obj))
+	    check_fs_locations(data->current_obj)) {
+		/* Report the referral. */
 		res_GETATTR4->status = NFS4ERR_MOVED;
+		/* The attributes allocated will not be consumed. */
+		nfs4_Fattr_Free(
+			&res_GETATTR4->GETATTR4res_u.resok4.obj_attributes);
+	}
 
 	/* Done with the attrs */
 	fsal_release_attrs(&attrs);
