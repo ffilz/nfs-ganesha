@@ -657,7 +657,7 @@ struct nfs_client_id_t {
 	time_t cid_last_renew;	/*< Time of last renewal */
 	nfs_clientid_confirm_state_t cid_confirmed; /*< Confirm/expire state */
 	nfs_client_cred_t cid_credential;	/*< Client credential */
-	int cid_allow_reclaim;	/*< Whether this client can still
+	bool cid_allow_reclaim;	/*< Whether this client can still
 				   reclaim state */
 	char *cid_recov_tag;	/*< Recovery tag */
 	nfs_client_record_t *cid_client_record;	/*< Record for managing
