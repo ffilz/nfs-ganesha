@@ -173,14 +173,11 @@ state_status_t _state_add_impl(struct fsal_obj_handle *obj,
 			display_stateid_other(&dspbuf,
 					      pnew_state->stateid_other);
 
-		LogCrit(COMPONENT_STATE,
+		LogInfo(COMPONENT_STATE,
 			"Can't create a new state id %s for the obj %p (F)",
 			str, obj);
 
-		/* Return STATE_MALLOC_ERROR since most likely the
-		 * nfs4_State_Set failed to allocate memory.
-		 */
-		status = STATE_MALLOC_ERROR;
+		status = STATE_ENTRY_EXISTS; /* most likely reason */
 		goto errout;
 	}
 
