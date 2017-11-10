@@ -177,7 +177,9 @@ int nfs_in_grace(void)
  */
 void nfs4_add_clid(nfs_client_id_t *clientid)
 {
+	PTHREAD_MUTEX_lock(&clientid->cid_mutex);
 	recovery_backend->add_clid(clientid);
+	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 }
 
 /**
@@ -188,7 +190,9 @@ void nfs4_add_clid(nfs_client_id_t *clientid)
  */
 void nfs4_rm_clid(nfs_client_id_t *clientid)
 {
+	PTHREAD_MUTEX_lock(&clientid->cid_mutex);
 	recovery_backend->rm_clid(clientid);
+	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 }
 
 /**
@@ -349,9 +353,8 @@ void nfs4_record_revoke(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 		PTHREAD_MUTEX_unlock(&delr_clid->cid_mutex);
 		return;
 	}
-	PTHREAD_MUTEX_unlock(&delr_clid->cid_mutex);
-
 	recovery_backend->add_revoke_fh(delr_clid, delr_handle);
+	PTHREAD_MUTEX_unlock(&delr_clid->cid_mutex);
 }
 
 /**
