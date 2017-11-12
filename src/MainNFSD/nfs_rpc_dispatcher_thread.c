@@ -92,7 +92,6 @@ static struct rpc_evchan rpc_evchan[EVCHAN_SIZE];
 struct nfs_req_st nfs_req_st;	/*< Shared request queues */
 
 const char *req_q_s[N_REQ_QUEUES] = {
-	"REQ_Q_CALL",
 	"REQ_Q_LOW_LATENCY",
 };
 
@@ -1307,8 +1306,6 @@ void nfs_rpc_enqueue_req(request_data_t *reqdata)
 	switch (reqdata->rtype) {
 	case NFS_REQUEST:
 	case NFS_CALL:
-		qpair = &(nfs_request_q->qset[REQ_Q_CALL]);
-		break;
 #ifdef _USE_9P
 	case _9P_REQUEST:
 		/* XXX identify high-latency requests and allocate
