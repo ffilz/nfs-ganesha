@@ -1214,6 +1214,74 @@ not_found:
 }
 
 /**
+ * @brief Acquire a reference on a state owner that might be getting freed.
+ *
+ * @param[in] owner Owner to acquire
+ *
+ * inc_state_owner_ref() can be called to hold a reference provided
+ * someone already has a valid refcount. In other words, one can't call
+ * inc_state_owner_ref on a owner whose refcount has possibly gone to
+ * zero.
+ *
+ * If we don't know for sure if the owner refcount is positive, this
+ * function must be called to hold a reference.  This function places a
+ * reference if the owner has a positive refcount already.
+ *
+ * @return True if we are able to hold a reference, False otherwise.
+ */
+bool hold_state_owner(state_owner_t *owner)
+{
+	char str[LOG_BUFF_LEN] = "\0";
+	struct display_buffer dspbuf = {sizeof(str), str, str};
+	bool str_valid = false;
+	hash_table_t *ht_owner;
+	struct gsh_buffdesc buffkey;
+	struct gsh_buffdesc buffval;
+	struct hash_latch latch;
+	hash_error_t rc;
+	int32_t refcount;
+
+	/* We need to increment and possibly decrement the refcount
+	 * atomically. This "increment" to check for the owner refcount
+	 * condition is also done in get_state_owner. Those are done
+	 * under the hash lock, so we do the same here.
+	 */
+	ht_owner = get_state_owner_hash_table(owner);
+	if (ht_owner == NULL) {
+		if (!str_valid)
+			display_owner(&dspbuf, owner);
+		LogCrit(COMPONENT_STATE,
+			"ht=%p Unexpected key {%s}", ht_owner, str);
+		return false;
+	}
+
+	buffkey.addr = owner;
+	buffkey.len = sizeof(*owner);
+	rc = hashtable_getlatch(ht_owner, &buffkey, &buffval, true, &latch);
+	switch (rc) {
+	case HASHTABLE_SUCCESS:
+	case HASHTABLE_ERROR_NO_SUCH_KEY:
+		/* We don't care if this owner is in the hashtable or
+		 * not. We just need the exclusive latch!
+		 */
+		refcount = atomic_inc_int32_t(&owner->so_refcount);
+		if (refcount == 1) {
+			/* This owner is in the process of getting freed */
+			(void)atomic_dec_int32_t(&owner->so_refcount);
+			hashtable_releaselatched(ht_owner, &latch);
+			return false;
+		}
+
+		hashtable_releaselatched(ht_owner, &latch);
+		return true;
+
+	default:
+		assert(0);
+		return false;
+	}
+}
+
+/**
  * @brief Release all state on a file
  *
  * This function may not be called in any context which could hold
