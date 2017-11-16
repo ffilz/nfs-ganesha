@@ -644,18 +644,14 @@ void fs_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 	case EVENT_UPDATE_CLIENTS:
 		snprintf(path, sizeof(path), "%s", v4_recov_dir);
 		break;
-	case EVENT_TAKE_IP:
-		snprintf(path, sizeof(path), "%s/%s/%s",
-			 recov_root, gsp->ipaddr,
-			 NFS_V4_RECOV_DIR);
-		break;
 	case EVENT_TAKE_NODEID:
 		snprintf(path, sizeof(path), "%s/%s/node%d",
 			 recov_root, NFS_V4_RECOV_DIR,
 			 gsp->nodeid);
 		break;
 	default:
-		LogWarn(COMPONENT_STATE, "Recovery unknown event");
+		LogWarn(COMPONENT_STATE, "Recovery unknown event: %d",
+				gsp->event);
 		return;
 	}
 
