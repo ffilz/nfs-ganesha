@@ -15,7 +15,7 @@
 #define NFS_V4_OLD_DIR "v4old"
 
 char v4_recov_dir[PATH_MAX];
-char v4_old_dir[PATH_MAX];
+char v4_recov_link[PATH_MAX];
 char recov_root[PATH_MAX];
 
 /**
@@ -118,10 +118,11 @@ static void fs_create_clid_name(nfs_client_id_t *clientid)
 void fs_create_recov_dir(void)
 {
 	int err;
+	char *newdir;
 
 	snprintf(recov_root, PATH_MAX, "%s", NFS_V4_RECOV_ROOT);
 
-	err = mkdir(recov_root, 0755);
+	err = mkdir(recov_root, 0700);
 	if (err == -1 && errno != EEXIST) {
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to create v4 recovery dir (%s), errno=%d",
@@ -130,41 +131,25 @@ void fs_create_recov_dir(void)
 
 	snprintf(v4_recov_dir, sizeof(v4_recov_dir), "%s/%s", recov_root,
 		 NFS_V4_RECOV_DIR);
-	err = mkdir(v4_recov_dir, 0755);
+	err = mkdir(v4_recov_dir, 0700);
 	if (err == -1 && errno != EEXIST) {
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to create v4 recovery dir(%s), errno=%d",
 			 v4_recov_dir, errno);
 	}
 
-	snprintf(v4_old_dir, sizeof(v4_old_dir), "%s/%s", recov_root,
-		 NFS_V4_OLD_DIR);
-	err = mkdir(v4_old_dir, 0755);
-	if (err == -1 && errno != EEXIST) {
+	/* Populate link path string, but don't try to create it yet */
+	snprintf(v4_recov_link, sizeof(v4_recov_link), "%s/%s/node%d",
+		 recov_root, NFS_V4_RECOV_DIR, g_nodeid);
+
+	snprintf(v4_recov_dir, sizeof(v4_recov_dir), "%s.XXXXXX",
+		 v4_recov_link);
+
+	newdir = mkdtemp(v4_recov_dir);
+	if (newdir != v4_recov_dir) {
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to create v4 recovery dir(%s), errno=%d",
-			 v4_old_dir, errno);
-	}
-	if (nfs_param.core_param.clustered) {
-		snprintf(v4_recov_dir, sizeof(v4_recov_dir), "%s/%s/node%d",
-			 recov_root, NFS_V4_RECOV_DIR, g_nodeid);
-
-		err = mkdir(v4_recov_dir, 0755);
-		if (err == -1 && errno != EEXIST) {
-			LogEvent(COMPONENT_CLIENTID,
-				 "Failed to create v4 recovery dir(%s), errno=%d",
-				 v4_recov_dir, errno);
-		}
-
-		snprintf(v4_old_dir, sizeof(v4_old_dir), "%s/%s/node%d",
-			 recov_root, NFS_V4_OLD_DIR, g_nodeid);
-
-		err = mkdir(v4_old_dir, 0755);
-		if (err == -1 && errno != EEXIST) {
-			LogEvent(COMPONENT_CLIENTID,
-				 "Failed to create v4 recovery dir(%s), errno=%d",
-				 v4_old_dir, errno);
-		}
+			 v4_recov_dir, errno);
 	}
 }
 
@@ -312,96 +297,6 @@ void fs_rm_clid(nfs_client_id_t *clientid)
 }
 
 /**
- * @brief Copy and Populate revoked delegations for this client.
- *
- * Even after delegation revoke, it is possible for the client to
- * contiue its leas and other operatoins. Sever saves revoked delegations
- * in the memory so client will not be granted same delegation with
- * DELEG_CUR ; but it is possible that the server might reboot and has
- * no record of the delegatin. This list helps to reject delegations
- * client is obtaining through DELEG_PREV.
- *
- * @param[in] clientid Clientid that is being created.
- * @param[in] path Path of the directory structure.
- * @param[in] Target dir to copy.
- * @param[in] del Delete after populating
- */
-static void fs_cp_pop_revoked_delegs(clid_entry_t *clid_ent,
-				     char *path,
-				     char *tgtdir,
-				     bool del,
-				     add_rfh_entry_hook add_rfh_entry)
-{
-	struct dirent *dentp;
-	DIR *dp;
-	rdel_fh_t *new_ent;
-
-	glist_init(&clid_ent->cl_rfh_list);
-	/* Read the contents from recov dir of this clientid. */
-	dp = opendir(path);
-	if (dp == NULL) {
-		LogEvent(COMPONENT_CLIENTID, "opendir %s failed errno=%d",
-			path, errno);
-		return;
-	}
-
-	for (dentp = readdir(dp); dentp != NULL; dentp = readdir(dp)) {
-		if (!strcmp(dentp->d_name, ".") || !strcmp(dentp->d_name, ".."))
-			continue;
-		/* All the revoked filehandles stored with \x1 prefix */
-		if (dentp->d_name[0] != '\x1') {
-			/* Something wrong; it should not happen */
-			LogMidDebug(COMPONENT_CLIENTID,
-				"%s showed up along with revoked FHs. Skipping",
-				dentp->d_name);
-			continue;
-		}
-
-		if (tgtdir) {
-			char lopath[PATH_MAX];
-			int fd;
-
-			snprintf(lopath, sizeof(lopath), "%s/", tgtdir);
-			strncat(lopath, dentp->d_name, strlen(dentp->d_name));
-			fd = creat(lopath, 0700);
-			if (fd < 0) {
-				LogEvent(COMPONENT_CLIENTID,
-					"Failed to copy revoked handle file %s to %s errno:%d\n",
-				dentp->d_name, tgtdir, errno);
-			} else {
-				close(fd);
-			}
-		}
-
-		/* Ignore the beginning \x1 and copy the rest (file handle) */
-		new_ent = add_rfh_entry(clid_ent, dentp->d_name + 1);
-
-		LogFullDebug(COMPONENT_CLIENTID,
-			"revoked handle: %s",
-			new_ent->rdfh_handle_str);
-
-		/* Since the handle is loaded into memory, go ahead and
-		 * delete it from the stable storage.
-		 */
-		if (del) {
-			char del_path[PATH_MAX];
-
-			snprintf(del_path, sizeof(del_path), "%s/%s",
-				 path, dentp->d_name);
-
-			if (unlink(del_path) < 0) {
-				LogEvent(COMPONENT_CLIENTID,
-						"unlink of %s failed errno: %d",
-						del_path,
-						errno);
-			}
-		}
-	}
-
-	(void)closedir(dp);
-}
-
-/**
  * @brief Create the client reclaim list
  *
  * When not doing a take over, first open the old state dir and read
@@ -414,14 +309,11 @@ static void fs_cp_pop_revoked_delegs(clid_entry_t *clid_ent,
  *
  * @param[in] dp       Recovery directory
  * @param[in] srcdir   Path to the source directory on failover
- * @param[in] takeover Whether this is a takeover.
  *
  * @return POSIX error codes.
  */
 static int fs_read_recov_clids_impl(const char *parent_path,
 				    char *clid_str,
-				    char *tgtdir,
-				    int takeover,
 				    add_clid_entry_hook add_clid_entry,
 				    add_rfh_entry_hook add_rfh_entry)
 {
@@ -429,7 +321,6 @@ static int fs_read_recov_clids_impl(const char *parent_path,
 	DIR *dp;
 	clid_entry_t *new_ent;
 	char *sub_path = NULL;
-	char *new_path = NULL;
 	char *build_clid = NULL;
 	int rc = 0;
 	int num = 0;
@@ -438,7 +329,6 @@ static int fs_read_recov_clids_impl(const char *parent_path,
 	int cid_len, len;
 	int segment_len;
 	int total_len;
-	int total_tgt_len;
 	int total_clid_len;
 
 	dp = opendir(parent_path);
@@ -461,7 +351,6 @@ static int fs_read_recov_clids_impl(const char *parent_path,
 			continue;
 
 		num++;
-		new_path = NULL;
 
 		/* construct the path by appending the subdir for the
 		 * next readdir. This recursion keeps reading the
@@ -476,25 +365,6 @@ static int fs_read_recov_clids_impl(const char *parent_path,
 		strcpy(sub_path, parent_path);
 		strcat(sub_path, "/");
 		strncat(sub_path, dentp->d_name, segment_len);
-		/* if tgtdir is not NULL, we need to build
-		 * nfs4old/currentnode
-		 */
-		if (tgtdir) {
-			total_tgt_len = segment_len + 2 +
-					strlen(tgtdir);
-			new_path = gsh_malloc(total_tgt_len);
-
-			memset(new_path, 0, total_tgt_len);
-			strcpy(new_path, tgtdir);
-			strcat(new_path, "/");
-			strncat(new_path, dentp->d_name, segment_len);
-			rc = mkdir(new_path, 0700);
-			if ((rc == -1) && (errno != EEXIST)) {
-				LogEvent(COMPONENT_CLIENTID,
-					 "mkdir %s faied errno=%d",
-					 new_path, errno);
-			}
-		}
 		/* keep building the clientid str by recursively */
 		/* reading the directory structure */
 		total_clid_len = segment_len + 1;
@@ -507,11 +377,8 @@ static int fs_read_recov_clids_impl(const char *parent_path,
 
 		rc = fs_read_recov_clids_impl(sub_path,
 					      build_clid,
-					      new_path,
-					      takeover,
 					      add_clid_entry,
 					      add_rfh_entry);
-		gsh_free(new_path);
 
 		/* after recursion, if the subdir has no non-hidden
 		 * directory this is the end of this clientid str. Add
@@ -567,28 +434,12 @@ static int fs_read_recov_clids_impl(const char *parent_path,
 			len = strlen(ptr2);
 			if ((len == (cid_len+2)) && (ptr2[len-1] == ')')) {
 				new_ent = add_clid_entry(build_clid);
-				fs_cp_pop_revoked_delegs(new_ent,
-							 sub_path,
-							 tgtdir,
-							 !takeover,
-							 add_rfh_entry);
 				LogDebug(COMPONENT_CLIENTID,
 					 "added %s to clid list",
 					 new_ent->cl_name);
 			}
 		}
 		gsh_free(build_clid);
-		/* If this is not for takeover, remove the directory
-		 * hierarchy  that represent the current clientid
-		 */
-		if (!takeover) {
-			rc = rmdir(sub_path);
-			if (rc == -1) {
-				LogEvent(COMPONENT_CLIENTID,
-					 "Failed to rmdir (%s), errno=%d",
-					 sub_path, errno);
-			}
-		}
 		gsh_free(sub_path);
 	}
 
@@ -602,23 +453,13 @@ static void fs_read_recov_clids_recover(add_clid_entry_hook add_clid_entry,
 {
 	int rc;
 
-	rc = fs_read_recov_clids_impl(v4_old_dir, NULL, NULL, 0,
+	rc = fs_read_recov_clids_impl(v4_recov_link, NULL,
 				      add_clid_entry,
 				      add_rfh_entry);
 	if (rc == -1) {
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to read v4 recovery dir (%s)",
-			 v4_old_dir);
-		return;
-	}
-
-	rc = fs_read_recov_clids_impl(v4_recov_dir, NULL, v4_old_dir, 0,
-				      add_clid_entry,
-				      add_rfh_entry);
-	if (rc == -1) {
-		LogEvent(COMPONENT_CLIENTID,
-			 "Failed to read v4 recovery dir (%s)",
-			 v4_recov_dir);
+			 v4_recov_link);
 		return;
 	}
 }
@@ -641,9 +482,6 @@ void fs_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 	}
 
 	switch (gsp->event) {
-	case EVENT_UPDATE_CLIENTS:
-		snprintf(path, sizeof(path), "%s", v4_recov_dir);
-		break;
 	case EVENT_TAKE_NODEID:
 		snprintf(path, sizeof(path), "%s/%s/node%d",
 			 recov_root, NFS_V4_RECOV_DIR,
@@ -658,7 +496,7 @@ void fs_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 	LogEvent(COMPONENT_CLIENTID, "Recovery for nodeid %d dir (%s)",
 		 gsp->nodeid, path);
 
-	rc = fs_read_recov_clids_impl(path, NULL, v4_old_dir, 1,
+	rc = fs_read_recov_clids_impl(path, NULL,
 				      add_clid_entry,
 				      add_rfh_entry);
 	if (rc == -1) {
@@ -680,7 +518,7 @@ static void fs_clean_old_recov_dir_impl(char *parent_path)
 	if (dp == NULL) {
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to open old v4 recovery dir (%s), errno=%d",
-			 v4_old_dir, errno);
+			 parent_path, errno);
 		return;
 	}
 
@@ -723,11 +561,52 @@ static void fs_clean_old_recov_dir_impl(char *parent_path)
 		gsh_free(path);
 	}
 	(void)closedir(dp);
+	rc = rmdir(parent_path);
+	if (rc != 0)
+		LogEvent(COMPONENT_CLIENTID, "Failed to remove %s, errno=%d",
+				parent_path, errno);
 }
 
-void fs_clean_old_recov_dir(void)
+void fs_swap_recov_dir(void)
 {
-	fs_clean_old_recov_dir_impl(v4_old_dir);
+	int ret;
+	char old_pathbuf[PATH_MAX];
+	char tmp_link[PATH_MAX];
+	char *old_path;
+
+	/* save off the old link path so we can do some cleanup afterward */
+	old_path = realpath(v4_recov_link, old_pathbuf);
+
+	/* Make a new symlink at a temporary location, pointing to new dir */
+	snprintf(tmp_link, PATH_MAX, "%s.tmp", v4_recov_link);
+
+	/* unlink old symlink, if any */
+	ret = unlink(tmp_link);
+	if (ret != 0 && errno != ENOENT) {
+		LogEvent(COMPONENT_CLIENTID,
+			 "Unable to remove recoverydir symlink: %d", errno);
+		return;
+	}
+
+	/* make a new symlink in a temporary spot */
+	ret = symlink(v4_recov_dir, tmp_link);
+	if (ret != 0) {
+		LogEvent(COMPONENT_CLIENTID,
+			 "Unable to create recoverydir symlink: %d", errno);
+		return;
+	}
+
+	/* rename tmp link into place */
+	ret = rename(tmp_link, v4_recov_link);
+	if (ret != 0) {
+		LogEvent(COMPONENT_CLIENTID,
+			 "Unable to rename recoverydir symlink: %d", errno);
+		return;
+	}
+
+	/* now clean up old path, if any */
+	if (old_path)
+		fs_clean_old_recov_dir_impl(old_path);
 }
 
 void fs_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
@@ -776,7 +655,7 @@ void fs_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 
 struct nfs4_recovery_backend fs_backend = {
 	.recovery_init = fs_create_recov_dir,
-	.recovery_cleanup = fs_clean_old_recov_dir,
+	.recovery_cleanup = fs_swap_recov_dir,
 	.recovery_read_clids = fs_read_recov_clids_takeover,
 	.add_clid = fs_add_clid,
 	.rm_clid = fs_rm_clid,
