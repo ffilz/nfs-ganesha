@@ -57,4 +57,6 @@ int mdcache_set_param_from_conf(config_file_t parse_tree,
 
 bool mdcache_lru_fds_available(void);
 void init_fds_limit(void);
+fsal_status_t get_optional_attrs(struct fsal_obj_handle *obj_hdl,
+				 struct attrlist *attrs_out);
 #endif /* MDCACHE_H */
