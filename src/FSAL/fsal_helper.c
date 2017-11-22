@@ -49,6 +49,7 @@
 #include "sal_data.h"
 #include "sal_functions.h"
 #include "FSAL/fsal_commonlib.h"
+#include "mdcache.h"
 
 /**
  * This is a global counter of files opened.
@@ -675,7 +676,7 @@ fsal_status_t fsal_lookup(struct fsal_obj_handle *parent,
 	if (strcmp(name, ".") == 0) {
 		parent->obj_ops.get_ref(parent);
 		*obj = parent;
-		return fsalstat(ERR_FSAL_NO_ERROR, 0);
+		return get_optional_attrs(*obj, attrs_out);
 	} else if (strcmp(name, "..") == 0)
 		return fsal_lookupp(parent, obj, attrs_out);
 
