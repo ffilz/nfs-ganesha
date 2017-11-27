@@ -140,6 +140,8 @@ void _9p_tcp_process_request(struct _9p_request_data *req9p);
 int _9p_process_buffer(struct _9p_request_data *req9p, char *replydata,
 		       u32 *poutlen);
 
+int _9p_worker_init(void);
+int _9p_worker_shutdown(void);
 void DispatchWork9P(request_data_t *req);
 #endif
 
@@ -155,15 +157,10 @@ void Clean_RPC(void);
 void nfs_Init_svc(void);
 void nfs_rpc_dispatch_stop(void);
 
-request_data_t *nfs_rpc_dequeue_req(nfs_worker_data_t *worker);
-void nfs_rpc_enqueue_req(request_data_t *req);
-uint32_t get_dequeue_count(void);
-uint32_t get_enqueue_count(void);
+/* in dbus_heartbeat.c */
 
-/* in nfs_worker_thread.c */
-
-int worker_init(void);
-int worker_shutdown(void);
+uint64_t enqueued_reqs;
+uint64_t dequeued_reqs;
 
 /* Config parsing routines */
 extern config_file_t config_struct;
