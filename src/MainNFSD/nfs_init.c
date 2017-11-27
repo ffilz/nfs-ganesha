@@ -545,7 +545,7 @@ static void nfs_Start_threads(void)
 	LogDebug(COMPONENT_THREAD, "sigmgr thread started");
 
 #ifdef _USE_9P
-	rc = worker_init();
+	rc = _9p_worker_init();
 	if (rc != 0) {
 		LogFatal(COMPONENT_THREAD, "Could not start worker threads: %d",
 			 errno);

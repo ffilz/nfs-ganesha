@@ -50,7 +50,6 @@
 #include <arpa/inet.h>
 #include "fsal.h"
 #include "nfs_core.h"
-#include "nfs_req_queue.h"
 #include "log.h"
 #include "nfs_rpc_callback.h"
 #include "nfs4.h"

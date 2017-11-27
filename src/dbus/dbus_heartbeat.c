@@ -44,21 +44,24 @@
 #include "abstract_atomic.h"
 #include "gsh_intrinsic.h"
 
+uint64_t enqueued_reqs;
+uint64_t dequeued_reqs;
+
 struct _ganesha_health {
-	uint32_t old_enqueue;
-	uint32_t old_dequeue;
+	uint64_t old_enqueue;
+	uint64_t old_dequeue;
 };
 
 struct _ganesha_health healthstats;
 
 bool get_ganesha_health(struct _ganesha_health *hstats)
 {
-	uint32_t newenq, newdeq;
-	uint32_t dequeue_diff, enqueue_diff;
+	uint64_t newenq, newdeq;
+	uint64_t dequeue_diff, enqueue_diff;
 	bool healthy;
 
-	newenq = get_enqueue_count();
-	newdeq = get_dequeue_count();
+	newenq = enqueued_reqs;
+	newdeq = dequeued_reqs;
 	enqueue_diff = newenq - hstats->old_enqueue;
 	dequeue_diff = newdeq - hstats->old_dequeue;
 
@@ -69,8 +72,10 @@ bool get_ganesha_health(struct _ganesha_health *hstats)
 
 	if (!healthy) {
 		LogWarn(COMPONENT_DBUS,
-			"Health status is unhealthy.enq new: %u, old: %u, "
-			"deq new: %u, old: %u", newenq, hstats->old_enqueue,
+			"Health status is unhealthy. "
+			"enq new: %" PRIu64 ", old: %" PRIu64 "; "
+			"deq new: %" PRIu64 ", old: %" PRIu64,
+			newenq, hstats->old_enqueue,
 			newdeq, hstats->old_dequeue);
 	}
 
