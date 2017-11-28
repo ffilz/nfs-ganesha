@@ -884,14 +884,22 @@ rpc_call_t *alloc_rpc_call(void)
  */
 void free_rpc_call(rpc_call_t *call)
 {
-	request_data_t *reqdata = container_of(call, request_data_t, r_u.call);
-
-	/* see clnt_req_release() */
-	clnt_req_reset(&call->call_req);
-	clnt_req_fini(&call->call_req);
-
 	free_argop(call->cbt.v_u.v4.args.argarray.argarray_val);
 	free_resop(call->cbt.v_u.v4.res.resarray.resarray_val);
+
+	clnt_req_release(&call->call_req);
+}
+
+/**
+ * @brief Free the RPC call context
+ *
+ * @param[in] cc The call context to free
+ */
+static void nfs_rpc_call_free(struct clnt_req *cc, size_t unused)
+{
+	rpc_call_t *call = container_of(cc, rpc_call_t, call_req);
+	request_data_t *reqdata = container_of(call, request_data_t, r_u.call);
+
 	pool_free(request_pool, reqdata);
 }
 
@@ -944,6 +952,8 @@ enum clnt_stat nfs_rpc_call(rpc_call_t *call, uint32_t flags)
 	clnt_req_fill(cc, call->chan->clnt, call->chan->auth, CB_COMPOUND,
 		      (xdrproc_t) xdr_CB_COMPOUND4args, &call->cbt.v_u.v4.args,
 		      (xdrproc_t) xdr_CB_COMPOUND4res, &call->cbt.v_u.v4.res);
+	cc->cc_size = sizeof(request_data_t);
+	cc->cc_free_cb = nfs_rpc_call_free;
 
 	if (!call->chan->clnt) {
 		cc->cc_error.re_status = RPC_INTR;
@@ -953,14 +963,14 @@ enum clnt_stat nfs_rpc_call(rpc_call_t *call, uint32_t flags)
 	if (clnt_req_setup(cc, tout)) {
 		cc->cc_process_cb = nfs_rpc_call_process;
 		cc->cc_error.re_status = CLNT_CALL_BACK(cc);
+	}
 
-		/* If a call fails, we have to assume path down,
-		 * or equally fatal error.  We may need back-off.
-		 */
-		if (cc->cc_error.re_status != RPC_SUCCESS) {
-			_nfs_rpc_destroy_chan(call->chan);
-			call->states |= NFS_CB_CALL_ABORTED;
-		}
+	/* If a call fails, we have to assume path down,
+	 * or equally fatal error.  We may need back-off.
+	 */
+	if (cc->cc_error.re_status != RPC_SUCCESS) {
+		_nfs_rpc_destroy_chan(call->chan);
+		call->states |= NFS_CB_CALL_ABORTED;
 	}
 
  unlock:
@@ -1056,8 +1066,6 @@ static rpc_call_t *construct_single_call(nfs41_session_t *session,
  * @brief Free a CB call and sequence
  *
  * @param[in] call The call to free
- *
- * @return The constructed call or NULL.
  */
 static void free_single_call(rpc_call_t *call)
 {
@@ -1077,7 +1085,6 @@ static void free_single_call(rpc_call_t *call)
 		gsh_free(sequence->csa_referring_call_lists.
 			 csa_referring_call_lists_val);
 	}
-	free_rpc_call(call);
 }
 
 /**
@@ -1236,11 +1243,10 @@ restart:
 				ret);
 		PTHREAD_MUTEX_lock(&session->cb_chan.mtx);
 		session->flags &= ~session_bc_up;
-		_nfs_rpc_destroy_chan(&session->cb_chan);
-		/* session now unusable until bc is reestablished */
 		PTHREAD_MUTEX_unlock(&session->cb_chan.mtx);
 
 		free_single_call(call);
+		free_rpc_call(call);
 
 		release_cb_slot(session, slot, false);
 		dec_session_ref(session);
