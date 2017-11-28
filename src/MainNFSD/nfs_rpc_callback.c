@@ -881,16 +881,24 @@ rpc_call_t *alloc_rpc_call(void)
  *
  * @param[in] call The call to free
  */
-void free_rpc_call(rpc_call_t *call)
+static void free_rpc_call(rpc_call_t *call)
 {
-	request_data_t *reqdata = container_of(call, request_data_t, r_u.call);
-
-	/* see clnt_req_release() */
-	clnt_req_reset(&call->call_req);
-	clnt_req_fini(&call->call_req);
-
 	free_argop(call->cbt.v_u.v4.args.argarray.argarray_val);
 	free_resop(call->cbt.v_u.v4.res.resarray.resarray_val);
+
+	clnt_req_release(&call->call_req);
+}
+
+/**
+ * @brief Free the RPC call context
+ *
+ * @param[in] cc The call context to free
+ */
+static void nfs_rpc_call_free(struct clnt_req *cc, size_t unused)
+{
+	rpc_call_t *call = container_of(cc, rpc_call_t, call_req);
+	request_data_t *reqdata = container_of(call, request_data_t, r_u.call);
+
 	pool_free(request_pool, reqdata);
 }
 
@@ -943,6 +951,8 @@ enum clnt_stat nfs_rpc_call(rpc_call_t *call, uint32_t flags)
 	clnt_req_fill(cc, call->chan->clnt, call->chan->auth, CB_COMPOUND,
 		      (xdrproc_t) xdr_CB_COMPOUND4args, &call->cbt.v_u.v4.args,
 		      (xdrproc_t) xdr_CB_COMPOUND4res, &call->cbt.v_u.v4.res);
+	cc->cc_size = sizeof(request_data_t);
+	cc->cc_free_cb = nfs_rpc_call_free;
 
 	if (!call->chan->clnt) {
 		cc->cc_error.re_status = RPC_INTR;
@@ -1076,7 +1086,6 @@ static void free_single_call(rpc_call_t *call)
 		gsh_free(sequence->csa_referring_call_lists.
 			 csa_referring_call_lists_val);
 	}
-	free_rpc_call(call);
 }
 
 /**
@@ -1312,7 +1321,6 @@ static int nfs_rpc_v40_single(nfs_client_id_t *clientid, nfs_cb_argop4 *op,
 {
 	rpc_call_channel_t *chan;
 	rpc_call_t *call;
-	int rc;
 
 	/* Attempt a recall only if channel state is UP */
 	if (get_cb_chan_down(clientid)) {
@@ -1342,10 +1350,7 @@ static int nfs_rpc_v40_single(nfs_client_id_t *clientid, nfs_cb_argop4 *op,
 	call->call_hook = completion;
 	call->call_arg = completion_arg;
 
-	rc = nfs_rpc_call(call, NFS_RPC_CALL_NONE);
-	if (rc)
-		free_rpc_call(call);
-	return rc;
+	return nfs_rpc_call(call, NFS_RPC_CALL_NONE);
 }
 
 /**
