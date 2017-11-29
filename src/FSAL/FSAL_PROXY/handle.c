@@ -1242,10 +1242,6 @@ int pxy_init_rpc(const struct pxy_fsal_module *pm)
 		struct pxy_rpc_io_context *c =
 		    gsh_malloc(sizeof(*c) + pm->special.srv_sendsize +
 			       pm->special.srv_recvsize);
-		if (!c) {
-			free_io_contexts();
-			return ENOMEM;
-		}
 		PTHREAD_MUTEX_init(&c->iolock, NULL);
 		PTHREAD_COND_init(&c->iowait, NULL);
 		c->nfs_prog = pm->special.srv_prognum;
