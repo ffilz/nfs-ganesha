@@ -352,6 +352,8 @@ EXPORT { FSAL {} }
 
 	enable_upcall(bool, default true)
 
+	transport(enum, values [GLUSTER_TCP_VOL, GLUSTER_RDMA_VOL], default GLUSTER_TCP_VOL)
+
 	FSAL_VFS:
 	---------
 

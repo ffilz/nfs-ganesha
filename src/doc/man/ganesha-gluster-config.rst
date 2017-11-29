@@ -35,6 +35,8 @@ Name(string, "GLUSTER")
 
 **enable_upcall(bool, default true)**
 
+**transport(enum, values [GLUSTER_TCP_VOL, GLUSTER_RDMA_VOL], default GLUSTER_TCP_VOL)**
+
 See also
 ==============================
 :doc:`ganesha-log-config <ganesha-log-config>`\(8)
