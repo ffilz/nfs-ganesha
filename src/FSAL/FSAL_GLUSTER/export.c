@@ -626,6 +626,11 @@ void export_ops_init(struct export_ops *ops)
 	ops->free_state = glusterfs_free_state;
 }
 
+enum transport {
+	TCP,
+	RDMA
+};
+
 struct glexport_params {
 	char *glvolname;
 	char *glhostname;
@@ -633,6 +638,13 @@ struct glexport_params {
 	char *glfs_log;
 	uint64_t up_poll_usec;
 	bool enable_upcall;
+	enum transport gltransport;
+};
+
+static struct config_item_list transportformats[] = {
+	CONFIG_LIST_TOK("tcp", TCP),
+	CONFIG_LIST_TOK("rdma", RDMA),
+	CONFIG_LIST_EOL
 };
 
 static struct config_item export_params[] = {
@@ -649,6 +661,8 @@ static struct config_item export_params[] = {
 		       glexport_params, up_poll_usec),
 	CONF_ITEM_BOOL("enable_upcall", true, glexport_params,
 		       enable_upcall),
+	CONF_ITEM_TOKEN("transport", TCP, transportformats,
+			glexport_params, gltransport),
 	CONFIG_EOL
 };
 
@@ -771,7 +785,15 @@ glusterfs_get_fs(struct glexport_params params,
 		goto out;
 	}
 
-	rc = glfs_set_volfile_server(fs, "tcp", params.glhostname, 24007);
+	switch (params.gltransport) {
+	case RDMA:
+		rc = glfs_set_volfile_server(fs, "rdma", params.glhostname, 24007);
+		break;
+	default:
+		rc = glfs_set_volfile_server(fs, "tcp", params.glhostname, 24007);
+		break;
+	}
+
 	if (rc != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"Unable to set volume file. Volume: %s",
@@ -870,7 +892,8 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 		.glvolname = NULL,
 		.glhostname = NULL,
 		.glvolpath = NULL,
-		.glfs_log = NULL};
+		.glfs_log = NULL,
+		.gltransport = NULL};
 
 	LogDebug(COMPONENT_FSAL, "In args: export path = %s",
 		 op_ctx->ctx_export->fullpath);
