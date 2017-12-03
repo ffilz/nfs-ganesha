@@ -70,6 +70,7 @@ struct gpfs_fd {
 	fsal_openflags_t openflags;
 	/** The gpfsfs file descriptor. */
 	int fd;
+	pthread_rwlock_t fdlock;
 };
 
 struct gpfs_state_fd {
