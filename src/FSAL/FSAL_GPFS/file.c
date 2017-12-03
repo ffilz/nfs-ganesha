@@ -605,11 +605,14 @@ gpfs_reopen2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	status = GPFSFSAL_open(obj_hdl, op_ctx, posix_flags, &my_fd);
 	if (!FSAL_IS_ERROR(status)) {
 		/* Close the existing file descriptor and copy the new
-		 * one over.
+		 * one over. Make sure no one is using the fd that we are
+		 * about to close!
 		 */
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
 		fsal_internal_close(my_share_fd->fd, NULL, 0);
 		my_share_fd->fd = my_fd;
 		my_share_fd->openflags = openflags;
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 	} else {
 		/* We had a failure on open - we need to revert the share.
 		 * This can block over an I/O operation.
@@ -652,7 +655,23 @@ find_fd(int *fd, struct fsal_obj_handle *obj_hdl, bool bypass,
 				      has_lock, closefd, open_for_locks,
 				      &reusing_open_state_fd);
 
-		*fd = out_fd->fd;
+		/* Prevent fd change while doing the operation.
+		 *
+		 * Ideally fsal_find_fd should always come out with the
+		 * lock held. Otherwise OPEN upgrade may open a new fd
+		 * and close the one given here leading to EBADF
+		 * failures while doing the actual read/write operation.
+		 *
+		 * NOTE: If this needed for all FSALs, we could as well
+		 * push this change inside the above fsal_find_fd().
+		 */
+		if (FSAL_IS_SUCCESS(status)) {
+			if (!*has_lock) {
+				*has_lock = true;
+				PTHREAD_RWLOCK_rdlock(&obj_hdl->obj_lock);
+			}
+			*fd = out_fd->fd;
+		}
 		return status;
 
 	case SOCKET_FILE:
