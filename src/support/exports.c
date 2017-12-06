@@ -2396,14 +2396,6 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 	char ipstring[SOCK_NAME_MAX + 1];
 	CIDR *host_prefix;
 
-	if (hostaddr->ss_family == AF_INET6) {
-		host_prefix = cidr_from_in6addr(
-			&((struct sockaddr_in6 *)hostaddr)->sin6_addr);
-	} else {
-		host_prefix = cidr_from_inaddr(
-			&((struct sockaddr_in *)hostaddr)->sin_addr);
-	}
-
 	glist_for_each(glist, &export->clients) {
 		exportlist_client_entry_t *client;
 
@@ -2418,6 +2410,16 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 
 		switch (client->type) {
 		case NETWORK_CLIENT:
+			if (hostaddr->ss_family == AF_INET6) {
+				host_prefix = cidr_from_in6addr(
+					&((struct sockaddr_in6 *)
+					  hostaddr)->sin6_addr);
+			} else {
+				host_prefix = cidr_from_inaddr(
+					&((struct sockaddr_in *)
+					  hostaddr)->sin_addr);
+			}
+
 			if (cidr_contains(client->client.network.cidr,
 					  host_prefix) == 0) {
 				cidr_free(host_prefix);
