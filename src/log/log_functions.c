@@ -286,7 +286,7 @@ __thread char *clientip = NULL;
 						 ## args); \
 	} while (0)
 
-cleanup_list_element *cleanup_list = NULL;
+cleanup_list_element *cleanup_list;
 
 void RegisterCleanup(cleanup_list_element *clean)
 {
