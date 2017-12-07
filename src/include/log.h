@@ -212,7 +212,7 @@ extern struct log_component_info LogComponents[COMPONENT_COUNT];
 	DisplayLogComponentLevel(component, __FILE__, \
 				 __LINE__, \
 				 __func__, \
-				 NIV_NULL, format, ## args); \
+				 NIV_NULL, format, ## args)
 
 #define LogTest(format, args...) \
 	DisplayLogComponentLevel(COMPONENT_ALL, __FILE__, \
