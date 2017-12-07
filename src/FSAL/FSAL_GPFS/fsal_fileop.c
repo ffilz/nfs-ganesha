@@ -33,13 +33,8 @@
 #include "gpfs_methods.h"
 #include "FSAL/access_check.h"
 
-/** @fn fsal_status_t
- *       GPFSFSAL_open(struct fsal_obj_handle *obj_hdl,
- *                     const struct req_op_context *op_ctx,
- *                     fsal_openflags_t openflags, int *file_desc,
- *                     struct attrlist *fsal_attr)
- *
- *  @brief Open a regular file for reading/writing its data content.
+/**
+ * @brief Open a regular file for reading/writing its data content.
  *
  * @param obj_hdl Handle of the file to be read/modified.
  * @param op_ctx Authentication context for the operation (user,...).
@@ -92,18 +87,17 @@ GPFSFSAL_open(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
-/** @fn fsal_status_t
- *	GPFSFSAL_read(int fd, uint64_t offset, size_t buffer_size, caddr_t buffer,
- *		      size_t *p_read_amount, bool *p_end_of_file)
+/**
  *  @brief Perform a read operation on an opened file.
+ *
  *  @param fd The file descriptor returned by FSAL_open.
  *  @offset Offset
  *  @param buf_size Amount (in bytes) of data to be read.
  *  @param buf Address where the read data is to be stored in memory.
- *  @param read_amount Pointer to the amount of data (in bytes) that have been read
- *        during this call.
- *  @param end_of_file Pointer to a boolean that indicates whether the end of file
- *        has been reached during this call.
+ *  @param read_amount Pointer to the amount of data (in bytes) that have been
+ *                     read during this call.
+ *  @param end_of_file Pointer to a boolean that indicates whether the end of
+ *                     file has been reached during this call.
  *
  *  @return ERR_FSAL_NO_ERROR on success, error otherwise.
  */
@@ -154,17 +148,14 @@ GPFSFSAL_read(int fd, uint64_t offset, size_t buf_size, caddr_t buf,
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-/** @fn fsal_status_t
- *	GPFSFSAL_write(int fd, uint64_t offset, size_t buf_size, caddr_t buf,
- *		       size_t *write_amount, bool *fsal_stable,
- *		       const struct req_op_context *op_ctx)
+/**
  *  @brief Perform a write operation on an opened file.
  *
  *  @param fd The file descriptor returned by FSAL_open.
  *  @param buf_size Amount (in bytes) of data to be written.
  *  @param buf Address where the data is in memory.
- *  @param write_amount Pointer to the amount of data (in bytes) that have been written
- *        during this call.
+ *  @param write_amount Pointer to the amount of data (in bytes) that have been
+ *                      written during this call.
  *
  * @return ERR_FSAL_NO_ERROR on success, error otherwise
  */
@@ -208,9 +199,9 @@ GPFSFSAL_write(int fd, uint64_t offset, size_t buf_size, caddr_t buf,
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-/** @fn fsal_status_t
- *	GPFSFSAL_alloc(int fd, uint64_t offset, uint64_t length, bool allocate)
- *  @brief Perform a de/allocc operation on an opened file.
+/**
+ *  @brief Perform a de/allocc operation on an opened file.4
+ *
  *  @param fd The file descriptor returned by FSAL_open.
  *  @param offset Offset
  *  @param length Length
