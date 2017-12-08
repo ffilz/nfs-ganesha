@@ -2394,6 +2394,8 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 	char hostname[MAXHOSTNAMELEN + 1];
 	char ipstring[SOCK_NAME_MAX + 1];
 	CIDR *host_prefix;
+	exportlist_client_entry_t *client;
+
 
 	if (hostaddr->ss_family == AF_INET6) {
 		host_prefix = cidr_from_in6addr(
@@ -2404,8 +2406,6 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 	}
 
 	glist_for_each(glist, &export->clients) {
-		exportlist_client_entry_t *client;
-
 		client = glist_entry(glist, exportlist_client_entry_t,
 				     cle_list);
 		LogClientListEntry(NIV_MID_DEBUG,
@@ -2419,10 +2419,8 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 		case NETWORK_CLIENT:
 			if (cidr_contains(client->client.network.cidr,
 					  host_prefix) == 0) {
-				cidr_free(host_prefix);
-				return client;
+				goto out;
 			}
-			cidr_free(host_prefix);
 			break;
 
 		case NETGROUP_CLIENT:
@@ -2445,7 +2443,7 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 			 */
 			if (ng_innetgr(client->client.netgroup.netgroupname,
 				    hostname)) {
-				return client;
+				goto out;
 			}
 			break;
 
@@ -2460,7 +2458,7 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 			    (fnmatch(client->client.wildcard.wildcard,
 				     ipstring,
 				     FNM_PATHNAME) == 0)) {
-				return client;
+				goto out;
 			}
 
 			/* Try to get the entry from th IP/name cache */
@@ -2488,7 +2486,7 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 			if (fnmatch
 			    (client->client.wildcard.wildcard, hostname,
 			     FNM_PATHNAME) == 0) {
-				return client;
+				goto out;
 			}
 			break;
 
@@ -2499,7 +2497,7 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 			break;
 
 		case MATCH_ANY_CLIENT:
-			return client;
+			goto out;
 
 		case BAD_CLIENT:
 		default:
@@ -2507,8 +2505,14 @@ static exportlist_client_entry_t *client_match(sockaddr_t *hostaddr,
 		}
 	}
 
+	client = NULL;
+
+out:
+
+	cidr_free(host_prefix);
+
 	/* no export found for this option */
-	return NULL;
+	return client;
 
 }
 
