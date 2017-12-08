@@ -1359,6 +1359,9 @@ static fsal_status_t glusterfs_open2(struct fsal_obj_handle *obj_hdl,
 		}
 
 		/* truncate is set in p_flags */
+		if (my_fd->openflags != FSAL_O_CLOSED) {
+			glusterfs_close_my_fd(my_fd);
+		}
 		status = glusterfs_open_my_fd(myself, openflags, p_flags,
 					      my_fd);
 
