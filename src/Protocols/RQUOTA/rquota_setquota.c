@@ -176,6 +176,10 @@ static int do_rquota_setquota(char *quota_path, int quota_type,
 	qres->status = Q_OK;
 
 out:
+
+	if (exp != NULL)
+		put_gsh_export(exp);
+
 	return NFS_REQ_OK;
 }				/* do_rquota_setquota */
 
