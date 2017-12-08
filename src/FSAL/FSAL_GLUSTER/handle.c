@@ -49,7 +49,7 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 	int rc = 0;
 	struct glusterfs_handle *objhandle =
 	    container_of(obj_hdl, struct glusterfs_handle, handle);
-	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	struct glusterfs_fd *my_fd = &objhandle->globalfd;
 #ifdef GLTIMING
 	struct timespec s_time, e_time;
 
@@ -58,17 +58,22 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 
 	fsal_obj_handle_fini(&objhandle->handle);
 
-	if (objhandle->globalfd.glfd) {
+	if (my_fd->glfd && my_fd->openflags != FSAL_O_CLOSED) {
 
 		/* Since handle gets released as part of internal
-		 * operation, we may not need to set credentials */
-		status = glusterfs_close_my_fd(&objhandle->globalfd);
-		if (status.major != ERR_FSAL_NO_ERROR) {
+		 * operation, not need to set credentials */
+		rc = glfs_close(my_fd->glfd);
+		if (rc) {
 			LogCrit(COMPONENT_FSAL,
 				"glfs_close returned %s(%d)",
 				strerror(errno), errno);
 			/* cleanup as much as possible */
 		}
+	}
+
+	if (my_fd->creds.caller_garray) {
+		gsh_free(my_fd->creds.caller_garray);
+		my_fd->creds.caller_garray = NULL;
 	}
 
 	if (objhandle->glhandle) {
