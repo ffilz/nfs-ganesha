@@ -413,13 +413,6 @@ static inline fsal_status_t fsal_close(struct fsal_obj_handle *obj_hdl)
 	/* Return the result of close method. */
 	fsal_status_t status = obj_hdl->obj_ops.close(obj_hdl);
 
-	if (status.major != ERR_FSAL_NOT_OPENED) {
-		(void) atomic_dec_size_t(&open_fd_count);
-	} else {
-		/* Wasn't open.  Not an error, but shouldn't decrement */
-		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
-	}
-
 	return status;
 }
 
