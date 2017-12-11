@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26c67bed_4dcf137c",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2017-12-11T08:32:00Z",
+      "side": 1,
+      "message": "I\u0027m not clear why renaming this function is required",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e04ef61a_61bc0f95",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2017-12-11T08:32:00Z",
+      "side": 1,
+      "message": "why would we have a routine called \"put\" that assumes refcnt is 0?",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a04b2d6a_6071fa30",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2017-12-11T08:32:00Z",
+      "side": 1,
+      "message": "huh?",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19e3ca0f_993dbf0f",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2017-12-11T08:32:00Z",
+      "side": 1,
+      "message": "again here, \"put\" matches \"get\" and returns a reference;  I don\u0027t favor just renaming things--I\u0027m also worried the new semantics are problematic",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "395d3966_fc2f35ab",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1425,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2017-12-11T08:32:00Z",
+      "side": 1,
+      "message": "why is this better open coded?",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
