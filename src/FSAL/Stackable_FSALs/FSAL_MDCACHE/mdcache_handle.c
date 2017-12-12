@@ -114,8 +114,7 @@ fsal_status_t mdcache_alloc_and_check_handle(
 		/* This function is called after a create, so go ahead
 		 * and invalidate the parent directory attributes.
 		 */
-		atomic_clear_uint32_t_bits(&parent->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(parent);
 	}
 
 	/* Add this entry to the directory (also takes an internal ref)
@@ -500,7 +499,7 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 	PTHREAD_RWLOCK_unlock(&dest->content_lock);
 
 	/* Invalidate attributes, so refresh will be forced */
-	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_ATTRS);
+	mdcache_clear_attrs_trust(entry);
 
 	if (!invalidate) {
 		/* Refresh destination directory attributes without
@@ -821,22 +820,17 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 
 	if (mdc_lookup_dst != NULL) {
 		/* Mark target file attributes as invalid */
-		atomic_clear_uint32_t_bits(&mdc_lookup_dst->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(mdc_lookup_dst);
 	}
 
 	/* Mark renamed file attributes as invalid */
-	atomic_clear_uint32_t_bits(&mdc_obj->mde_flags,
-				   MDCACHE_TRUST_ATTRS);
+	mdcache_clear_attrs_trust(mdc_obj);
 
 	/* Mark directory attributes as invalid */
-	atomic_clear_uint32_t_bits(&mdc_olddir->mde_flags,
-				   MDCACHE_TRUST_ATTRS);
+	mdcache_clear_attrs_trust(mdc_olddir);
 
-	if (olddir_hdl != newdir_hdl) {
-		atomic_clear_uint32_t_bits(&mdc_newdir->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
-	}
+	if (olddir_hdl != newdir_hdl)
+		mdcache_clear_attrs_trust(mdc_newdir);
 
 	/* NOTE: Below we mostly don't check if the directory is not
 	 *       cached. The cache manipulation functions we call already
@@ -1043,6 +1037,9 @@ fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl,
 	/* We will want all the requested attributes in the entry */
 	entry->attrs.request_mask = attrs.request_mask;
 
+	/* Start counting the atomic_clear of MDCACHE_TRUST_ATTRS */
+	atomic_store_uint32_t(&entry->clear_trust, 0);
+
 	subcall(
 		status = entry->sub_handle->obj_ops.getattrs(
 			entry->sub_handle, &attrs)
@@ -1187,8 +1184,9 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 	status2 = mdcache_refresh_attrs(entry, need_acl, false);
 	if (FSAL_IS_ERROR(status2)) {
 		/* Assume that the cache is bogus now */
+		mdcache_clear_attrs_trust(entry);
 		atomic_clear_uint32_t_bits(&entry->mde_flags,
-				MDCACHE_TRUST_ATTRS | MDCACHE_TRUST_ACL);
+					   MDCACHE_TRUST_ACL);
 		if (status2.major == ERR_FSAL_STALE)
 			kill_entry = true;
 	} else if (change == entry->attrs.change) {
@@ -1261,10 +1259,8 @@ static fsal_status_t mdcache_unlink(struct fsal_obj_handle *dir_hdl,
 		PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
 		/* Invalidate attributes of parent and entry */
-		atomic_clear_uint32_t_bits(&parent->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
-		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(parent);
+		mdcache_clear_attrs_trust(entry);
 
 		if (entry->obj_handle.type == DIRECTORY) {
 			PTHREAD_RWLOCK_wrlock(&entry->content_lock);
@@ -1505,8 +1501,7 @@ static nfsstat4 mdcache_layoutcommit(struct fsal_obj_handle *obj_hdl,
 	       );
 
 	if (status == NFS4_OK)
-		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(entry);
 
 	return status;
 }

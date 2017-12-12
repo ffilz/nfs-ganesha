@@ -1693,9 +1693,9 @@ mdcache_dirent_rename(mdcache_entry_t *parent, const char *oldname,
 				LogFullDebug(COMPONENT_CACHE_INODE,
 					     "Entry %p Clearing MDCACHE_TRUST_ATTRS, MDCACHE_TRUST_CONTENT, MDCACHE_DIR_POPULATED",
 					     oldentry);
+				mdcache_clear_attrs_trust(oldentry);
 				atomic_clear_uint32_t_bits(
 							&oldentry->mde_flags,
-							MDCACHE_TRUST_ATTRS |
 							MDCACHE_TRUST_CONTENT |
 							MDCACHE_DIR_POPULATED);
 				mdcache_put(oldentry);
