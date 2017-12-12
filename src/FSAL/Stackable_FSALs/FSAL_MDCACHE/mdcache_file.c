@@ -205,8 +205,7 @@ static fsal_status_t mdc_open2_by_name(mdcache_entry_t *mdc_parent,
 
 	if (openflags & FSAL_O_TRUNC) {
 		/* Invalidate the attributes since we just truncated. */
-		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(entry);
 	}
 
 	if (attrs_out) {
@@ -403,8 +402,7 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 			/* Mark the attributes as not-trusted, so we will
 			 * refresh the attributes.
 			 */
-			atomic_clear_uint32_t_bits(&mdc_parent->mde_flags,
-						   MDCACHE_TRUST_ATTRS);
+			mdcache_clear_attrs_trust(mdc_parent);
 		}
 
 		LogFullDebug(COMPONENT_CACHE_INODE,
@@ -518,10 +516,8 @@ fsal_status_t mdcache_reopen2(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status) && (status.major == ERR_FSAL_STALE))
 		mdcache_kill_entry(entry);
 
-	if (truncated && !FSAL_IS_ERROR(status)) {
-		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
-	}
+	if (truncated && !FSAL_IS_ERROR(status))
+		mdcache_clear_attrs_trust(entry);
 
 	return status;
 }
@@ -609,8 +605,7 @@ fsal_status_t mdcache_write2(struct fsal_obj_handle *obj_hdl,
 	if (status.major == ERR_FSAL_STALE)
 		mdcache_kill_entry(entry);
 	else
-		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(entry);
 
 	return status;
 }
@@ -698,8 +693,7 @@ fsal_status_t mdcache_commit2(struct fsal_obj_handle *obj_hdl, off_t offset,
 	if (status.major == ERR_FSAL_STALE)
 		mdcache_kill_entry(entry);
 	else
-		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(entry);
 
 	return status;
 }

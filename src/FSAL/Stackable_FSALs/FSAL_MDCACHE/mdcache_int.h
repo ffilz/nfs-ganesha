@@ -244,6 +244,8 @@ struct mdcache_fsal_obj_handle {
 	} fh_hk;
 	/** Flags for this entry */
 	uint32_t mde_flags;
+	/** Counts of clearing MDCACHE_TRUST_ATTRS when refreshing attrs */
+	uint32_t clear_trust;
 	/** Time at which we last refreshed attributes. */
 	time_t attr_time;
 	/** Time at which we last refreshed acl. */
@@ -712,7 +714,8 @@ mdc_fixup_md(mdcache_entry_t *entry, struct attrlist *attrs)
 	 * attributes. Note that if not all could be provided, we assumed
 	 * that an error occurred.
 	 */
-	if (attrs->request_mask & ~ATTR_ACL)
+	if ((attrs->request_mask & ~ATTR_ACL) &&
+	    !atomic_fetch_uint32_t(&entry->clear_trust))
 		flags |= MDCACHE_TRUST_ATTRS;
 
 	if (attrs->valid_mask == ATTR_RDATTR_ERR) {
@@ -742,6 +745,13 @@ mdc_fixup_md(mdcache_entry_t *entry, struct attrlist *attrs)
 
 	/* We have just loaded the attributes from the FSAL. */
 	atomic_set_uint32_t_bits(&entry->mde_flags, flags);
+}
+
+static inline void
+mdcache_clear_attrs_trust(mdcache_entry_t *entry)
+{
+	atomic_inc_uint32_t(&entry->clear_trust);
+	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_ATTRS);
 }
 
 static inline bool

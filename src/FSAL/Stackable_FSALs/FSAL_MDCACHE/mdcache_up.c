@@ -145,8 +145,8 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "Entry %p Clearing MDCACHE_TRUST_ATTRS, MDCACHE_TRUST_CONTENT, MDCACHE_DIR_POPULATED",
 			     entry);
+		mdcache_clear_attrs_trust(entry);
 		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS |
 					   MDCACHE_TRUST_CONTENT |
 					   MDCACHE_DIR_POPULATED);
 
@@ -289,8 +289,7 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 		}
 		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
 	} else {
-		atomic_clear_uint32_t_bits(&entry->mde_flags,
-					   MDCACHE_TRUST_ATTRS);
+		mdcache_clear_attrs_trust(entry);
 		status = fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
