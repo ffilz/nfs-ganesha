@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53a8db35_24dffd97",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2017-12-13T05:22:51Z",
+      "side": 1,
+      "message": "Suggestion: As part of this change, can we have the check for mdcache_lru_fds_available() before this line to check for global FD availability? If available then proceed to get a new FD. And remove the call to mdcache_lru_fds_available() from other places in code.",
+      "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "729a14c8_a102e9ac",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2017-12-13T05:22:51Z",
+      "side": 1,
+      "message": "Should \u0027open_fd_count\u0027 be incremented for only global FDs? As with the change \u0027open_fd_count\u0027 for state fds would be incremented as well, but as I understand currently LRU works on \u0027open_fd_count\u0027 considering it as a counter for global FDs.",
+      "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
