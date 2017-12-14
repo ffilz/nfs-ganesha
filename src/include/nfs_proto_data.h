@@ -318,13 +318,18 @@ typedef struct compound_data {
 	bool use_drc;		/*< Set to true if session DRC is to be used */
 	uint32_t oppos;		/*< Position of the operation within the
 				    request processed  */
+	const char *opname;	/*< Name of the operation */
 	nfs41_session_t *session;	/*< Related session
 					   (found by OP_SEQUENCE) */
 	sequenceid4 sequence;	/*< Sequence ID of the current compound
 				   (if applicable) */
 	slotid4 slot;		/*< Slot ID of the current compound
 				   (if applicable) */
+	uint32_t resp_size;	/*< Running total response size. */
+	uint32_t op_resp_size;	/*< Current op's response size. */
 } compound_data_t;
+
+#define VARIABLE_RESP_SIZE (0)
 
 typedef int (*nfs4_op_function_t) (struct nfs_argop4 *, compound_data_t *,
 				   struct nfs_resop4 *);
