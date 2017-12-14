@@ -927,7 +927,7 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		}
 
 		/* NFS_V4.1 specific stuff */
-		if (data.use_drc) {
+		if (data.use_slot_cached_result) {
 			/* Replay cache, only true for SEQUENCE or
 			 * CREATE_SESSION w/o SEQUENCE. Since will only be set
 			 * in those cases, no need to check operation or
@@ -938,11 +938,12 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			gsh_free(res->res_compound4.resarray.resarray_val);
 
 			/* Copy the reply from the cache */
-			res->res_compound4_extended = *data.cached_res;
-			status = ((COMPOUND4res *) data.cached_res)->status;
+			res->res_compound4_extended = *data.cached_result;
+			status = ((COMPOUND4res *) data.cached_result)->status;
 			LogFullDebug(COMPONENT_SESSIONS,
 				     "Use session replay cache %p result %s",
-				     data.cached_res, nfsstat4_to_str(status));
+				     data.cached_result,
+				     nfsstat4_to_str(status));
 			break;	/* Exit the for loop */
 		}
 	}			/* for */
@@ -957,25 +958,28 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	/* Manage session's DRC: keep NFS4.1 replay for later use, but don't
 	 * save a replayed result again.
 	 */
-	if (data.cached_res != NULL && !data.use_drc) {
+	if (data.cached_result != NULL && !data.use_slot_cached_result) {
 		/* Pointer has been set by nfs4_op_sequence and points to slot
 		 * to cache result in.
 		 */
 		LogFullDebug(COMPONENT_SESSIONS,
 			     "Save result in session replay cache %p sizeof nfs_res_t=%d",
-			     data.cached_res, (int)sizeof(nfs_res_t));
+			     data.cached_result, (int)sizeof(nfs_res_t));
 
 		/* Indicate to nfs4_Compound_Free that this reply is cached. */
 		res->res_compound4_extended.res_cached = true;
 
 		/* If the cache is already in use, free it. */
-		if (data.cached_res->res_cached) {
-			data.cached_res->res_cached = false;
-			nfs4_Compound_Free((nfs_res_t *) data.cached_res);
+		if (data.cached_result->res_cached) {
+			data.cached_result->res_cached = false;
+			nfs4_Compound_Free((nfs_res_t *) data.cached_result);
 		}
 
-		/* Save the result in the cache. */
-		*data.cached_res = res->res_compound4_extended;
+		/* Save the result in the cache (copy out of the result array
+		 * into the slot cache (which is pointed to by
+		 * data.cached_result).
+		 */
+		*data.cached_result = res->res_compound4_extended;
 	}
 
 	/* If we have reserved a lease, update it and release it */
