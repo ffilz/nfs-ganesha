@@ -34,6 +34,7 @@
 #include "sal_functions.h"
 #include "nfs_rpc_callback.h"
 #include "nfs_convert.h"
+#include "nfs_proto_functions.h"
 
 /**
  * @brief the NFS4_OP_SEQUENCE operation
@@ -52,6 +53,8 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 {
 	SEQUENCE4args * const arg_SEQUENCE4 = &op->nfs_argop4_u.opsequence;
 	SEQUENCE4res * const res_SEQUENCE4 = &resp->nfs_resop4_u.opsequence;
+	uint32_t slotid;
+
 	nfs41_session_t *session;
 	nfs41_session_slot_t *slot;
 
@@ -94,9 +97,10 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 
 	PTHREAD_MUTEX_unlock(&session->clientid_record->cid_mutex);
 
+	slotid = arg_SEQUENCE4->sa_slotid;
+
 	/* Check is slot is compliant with ca_maxrequests */
-	if (arg_SEQUENCE4->sa_slotid >=
-	    session->fore_channel_attrs.ca_maxrequests) {
+	if (slotid >= session->fore_channel_attrs.ca_maxrequests) {
 		dec_session_ref(session);
 		res_SEQUENCE4->sr_status = NFS4ERR_BADSLOT;
 		LogDebugAlt(COMPONENT_SESSIONS, COMPONENT_CLIENTID,
@@ -106,39 +110,38 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 	}
 
 	/* By default, no DRC replay */
-	data->use_drc = false;
-	slot = &session->fc_slots[arg_SEQUENCE4->sa_slotid];
+	data->use_slot_cached_result = false;
+	slot = &session->fc_slots[slotid];
 
 	PTHREAD_MUTEX_lock(&slot->lock);
+
 	if (slot->sequence + 1 != arg_SEQUENCE4->sa_sequenceid) {
+		/* This sequence is NOT the next sequence */
 		if (slot->sequence == arg_SEQUENCE4->sa_sequenceid) {
-#if IMPLEMENT_CACHETHIS
-			/** @todo
-			 *
-			 * Ganesha always caches result anyway so ignore
-			 * cachethis
-			 */
-			if (slot->cache_used) {
-#endif
-				/* Replay operation through the DRC */
-				data->use_drc = true;
-				data->cached_res = &slot->cached_result;
+			/* But it is the previous sequence */
+			if (slot->cached_result.res_cached) {
+				/* And has a cached response.
+				 * Replay operation through the DRC
+				 */
+				data->use_slot_cached_result = true;
+				data->cached_result = &slot->cached_result;
 
 				LogFullDebugAlt(COMPONENT_SESSIONS,
 						COMPONENT_CLIENTID,
 						"Use sesson slot %" PRIu32
 						"=%p for DRC",
-						arg_SEQUENCE4->sa_slotid,
-						data->cached_res);
+						slotid,
+						data->cached_result);
 
 				PTHREAD_MUTEX_unlock(&slot->lock);
+
 				dec_session_ref(session);
 				res_SEQUENCE4->sr_status = NFS4_OK;
 				return res_SEQUENCE4->sr_status;
-#if IMPLEMENT_CACHETHIS
 			} else {
 				/* Illegal replay */
 				PTHREAD_MUTEX_unlock(&slot->lock);
+
 				dec_session_ref(session);
 				res_SEQUENCE4->sr_status =
 				    NFS4ERR_RETRY_UNCACHED_REP;
@@ -149,10 +152,10 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 						res_SEQUENCE4->sr_status));
 				return res_SEQUENCE4->sr_status;
 			}
-#endif
 		}
 
 		PTHREAD_MUTEX_unlock(&slot->lock);
+
 		dec_session_ref(session);
 		res_SEQUENCE4->sr_status = NFS4ERR_SEQ_MISORDERED;
 		LogDebugAlt(COMPONENT_SESSIONS, COMPONENT_CLIENTID,
@@ -166,7 +169,7 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 
 	/* Record the sequenceid and slotid in the COMPOUND's data */
 	data->sequence = arg_SEQUENCE4->sa_sequenceid;
-	data->slot = arg_SEQUENCE4->sa_slotid;
+	data->slot = slotid;
 
 	/* Update the sequence id within the slot */
 	slot->sequence += 1;
@@ -174,8 +177,7 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 	memcpy(res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_sessionid,
 	       arg_SEQUENCE4->sa_sessionid, NFS4_SESSIONID_SIZE);
 	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_sequenceid = slot->sequence;
-	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_slotid =
-	    arg_SEQUENCE4->sa_slotid;
+	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_slotid = slotid;
 	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_highest_slotid =
 	    session->nb_slots - 1;
 	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_target_highest_slotid =
@@ -188,26 +190,25 @@ int nfs4_op_sequence(struct nfs_argop4 *op, compound_data_t *data,
 		    SEQ4_STATUS_CB_PATH_DOWN;
 	}
 
-#if IMPLEMENT_CACHETHIS
-/* Ganesha always caches result anyway so ignore cachethis */
 	if (arg_SEQUENCE4->sa_cachethis) {
-#endif
-		data->cached_res = &slot->cached_result;
-		slot->cache_used = true;
+		data->cached_result = &slot->cached_result;
 
 		LogFullDebugAlt(COMPONENT_SESSIONS, COMPONENT_CLIENTID,
 				"Use sesson slot %" PRIu32 "=%p for DRC",
-				arg_SEQUENCE4->sa_slotid, data->cached_res);
-#if IMPLEMENT_CACHETHIS
+				slotid, data->cached_result);
 	} else {
-		data->cached_res = NULL;
-		slot->cache_used = false;
+		data->cached_result = NULL;
+
+		/* If the slot cache was in use, free it. */
+		if (slot->cached_result.res_cached) {
+			slot->cached_result.res_cached = false;
+			nfs4_Compound_Free((nfs_res_t *) &slot->cached_result);
+		}
 
 		LogFullDebugAlt(COMPONENT_SESSIONS, COMPONENT_CLIENTID,
 				"Don't use sesson slot %" PRIu32
-				"=NULL for DRC", arg_SEQUENCE4->sa_slotid);
+				"=NULL for DRC", slotid);
 	}
-#endif
 
 	PTHREAD_MUTEX_unlock(&slot->lock);
 
