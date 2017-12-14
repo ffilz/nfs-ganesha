@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c773f552_c67de4a7",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2017-12-14T18:50:42Z",
+      "side": 1,
+      "message": "These calls only incr/decr the open_fd_count. Let rest be managed by mdcache at the moment.",
+      "parentUuid": "53a8db35_24dffd97",
+      "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "729a14c8_a102e9ac",
         "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-13T05:22:51Z",
       "side": 1,
       "message": "Should \u0027open_fd_count\u0027 be incremented for only global FDs? As with the change \u0027open_fd_count\u0027 for state fds would be incremented as well, but as I understand currently LRU works on \u0027open_fd_count\u0027 considering it as a counter for global FDs.",
+      "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aba4358_20f03a6c",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2017-12-14T18:50:42Z",
+      "side": 1,
+      "message": "open_fd_count should include all fds (state/tmp/global). The NOFILE parameter is the fd limit (it doesn\u0027t care global vs others). Strictly speaking, counting only global fds is a bug i the current code.",
+      "parentUuid": "729a14c8_a102e9ac",
       "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
