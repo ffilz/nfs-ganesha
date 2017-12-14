@@ -191,10 +191,11 @@ int nfs4_op_create_session(struct nfs_argop4 *op, compound_data_t *data,
 
 	LogDebug(component,
 		 "CREATE_SESSION clientid=%s csa_sequence=%" PRIu32
-		 " clientid_cs_seq=%" PRIu32 " data_oppos=%d data_use_drc=%d",
+		 " clientid_cs_seq=%" PRIu32
+		 " data_oppos=%d data_use_slot_cached_result=%d",
 		 str_clientid4, arg_CREATE_SESSION4->csa_sequence,
 		 found->cid_create_session_sequence, data->oppos,
-		 data->use_drc);
+		 data->use_slot_cached_result);
 
 	if (isFullDebug(component)) {
 		char str[LOG_BUFF_LEN] = "\0";
@@ -204,7 +205,7 @@ int nfs4_op_create_session(struct nfs_argop4 *op, compound_data_t *data,
 		LogFullDebug(component, "Found %s", str);
 	}
 
-	data->use_drc = false;
+	data->use_slot_cached_result = false;
 
 	if ((arg_CREATE_SESSION4->csa_sequence + 1) ==
 	     found->cid_create_session_sequence) {
@@ -212,7 +213,7 @@ int nfs4_op_create_session(struct nfs_argop4 *op, compound_data_t *data,
 
 		LogDebug(component,
 			 "CREATE_SESSION replay=%p special case",
-			 data->cached_res);
+			 data->cached_result);
 		goto out;
 	} else if (arg_CREATE_SESSION4->csa_sequence !=
 		   found->cid_create_session_sequence) {
@@ -386,7 +387,7 @@ int nfs4_op_create_session(struct nfs_argop4 *op, compound_data_t *data,
 	       nfs41_session->session_id,
 	       NFS4_SESSIONID_SIZE);
 
-	LogDebug(component, "CREATE_SESSION replay=%p", data->cached_res);
+	LogDebug(component, "CREATE_SESSION replay=%p", data->cached_result);
 
 	if (!nfs41_Session_Set(nfs41_session)) {
 		LogDebug(component, "Could not insert session into table");
