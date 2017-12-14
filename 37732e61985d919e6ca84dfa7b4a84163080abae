@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4aebd54a_30afc54b",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2017-12-14T19:13:02Z",
+      "side": 1,
+      "message": "You can\u0027t make mdcache calls from other FSALs... though that call could probably be moved out of mdcache (it does look at lru config, but I think that\u0027s still outside mdcache).",
+      "parentUuid": "c773f552_c67de4a7",
+      "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "729a14c8_a102e9ac",
         "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "open_fd_count should include all fds (state/tmp/global). The NOFILE parameter is the fd limit (it doesn\u0027t care global vs others). Strictly speaking, counting only global fds is a bug i the current code.",
       "parentUuid": "729a14c8_a102e9ac",
+      "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e50427d7_5d7b51e3",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2017-12-14T19:13:02Z",
+      "side": 1,
+      "message": "Yea, Malahal has made a good point that we do actually need to count all the fds. We need to do this for all FSALs that have a real resource per open. On the other hand, we also need to divorce it from the limit on file descriptors since sockets also use file descriptors, and some FSALs open resource may NOT use a file descriptor.",
+      "parentUuid": "2aba4358_20f03a6c",
       "revId": "37732e61985d919e6ca84dfa7b4a84163080abae",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
