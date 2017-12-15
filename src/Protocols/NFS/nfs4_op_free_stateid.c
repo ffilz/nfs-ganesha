@@ -101,7 +101,8 @@ int nfs4_op_free_stateid(struct nfs_argop4 *op, compound_data_t *data,
 	}
 
 	PTHREAD_RWLOCK_wrlock(&obj->state_hdl->state_lock);
-
+	save_exp = op_ctx->fsal_export;
+	op_ctx->fsal_export = state->state_exp;
 	if (state->state_type == STATE_TYPE_LOCK &&
 	    glist_empty(&state->state_data.lock.state_locklist)) {
 		/* At the moment, only return success for a lock stateid with
@@ -110,15 +111,10 @@ int nfs4_op_free_stateid(struct nfs_argop4 *op, compound_data_t *data,
 		/** @todo: Do we also have to handle other kinds of stateids?
 		 */
 		res_FREE_STATEID4->fsr_status = NFS4_OK;
+		state_del_locked(state);
 	} else {
 		res_FREE_STATEID4->fsr_status = NFS4ERR_LOCKS_HELD;
 	}
-
-	save_exp = op_ctx->fsal_export;
-	op_ctx->fsal_export = state->state_exp;
-
-	state_del_locked(state);
-
 	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 	dec_state_t_ref(state);
