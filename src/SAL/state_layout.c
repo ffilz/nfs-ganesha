@@ -243,6 +243,8 @@ void revoke_owner_layouts(state_owner_t *client_owner)
 
 		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
+		obj->obj_ops.put_ref(obj);
+
 		if (errcnt < STATE_ERR_MAX) {
 			/* Loop again, but since we droped the so_mutex, we
 			 * must restart.
