@@ -938,7 +938,7 @@ void gpfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->rename = renamefile;
 	ops->unlink = file_unlink;
 	ops->fs_locations = gpfs_fs_locations;
-	ops->seek = gpfs_seek;
+	ops->seek2 = gpfs_seek2;
 	ops->io_advise = gpfs_io_advise;
 	ops->close = gpfs_close;
 	ops->handle_to_wire = handle_to_wire;
