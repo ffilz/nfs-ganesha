@@ -970,6 +970,8 @@ static fsal_status_t file_io_advise(struct fsal_obj_handle *obj_hdl,
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+
+
 /* file_close
  * default case not supported
  */
