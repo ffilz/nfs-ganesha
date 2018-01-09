@@ -61,16 +61,10 @@ static inline int avl_dirent_hk_cmpf(const struct avltree_node *lhs,
 {
 	mdcache_dir_entry_t *lk, *rk;
 
-	lk = avltree_container_of(lhs, mdcache_dir_entry_t, node_hk);
-	rk = avltree_container_of(rhs, mdcache_dir_entry_t, node_hk);
+	lk = avltree_container_of(lhs, mdcache_dir_entry_t, node_name);
+	rk = avltree_container_of(rhs, mdcache_dir_entry_t, node_name);
 
-	if (lk->hk.k < rk->hk.k)
-		return -1;
-
-	if (lk->hk.k == rk->hk.k)
-		return 0;
-
-	return 1;
+	return strcmp(lk->name, rk->name);
 }
 
 static inline int avl_dirent_ck_cmpf(const struct avltree_node *lhs,
