@@ -426,6 +426,16 @@ gpfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	created = (posix_flags & O_EXCL) != 0;
 	*caller_perm_check = false;
 
+	/* Check if the object type is SYMBOLIC_LINK for a state object.
+	 * If yes, then give error ERR_FSAL_SYMLINK.
+	 */
+	if (state != NULL &&
+		attrs_out != NULL && attrs_out->type == SYMBOLIC_LINK) {
+		LogDebug(COMPONENT_FSAL, "Trying to open a SYMBOLIC_LINK");
+		status = fsalstat(ERR_FSAL_SYMLINK, 0);
+		goto fileerr;
+	}
+
 	/* allocate an obj_handle and fill it up */
 	hdl = alloc_handle(&fh, obj_hdl->fs, attrs_out, NULL, export);
 	if (hdl == NULL) {
@@ -475,8 +485,16 @@ gpfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	}
 
 	if (created) {
+		fsal_status_t status2;
+
 		/* Remove the file we just created */
-		status = GPFSFSAL_unlink(obj_hdl, name, op_ctx);
+		status2 = GPFSFSAL_unlink(obj_hdl, name, op_ctx);
+		if (FSAL_IS_ERROR(status2)) {
+			LogEvent(COMPONENT_FSAL,
+				 "GPFSFSAL_unlink failed, error: %s",
+				 msg_fsal_err(status2.major));
+		}
+
 	}
 	return status;
 }
