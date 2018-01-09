@@ -557,6 +557,7 @@ again:
 
 				/* Remove v2 from the detached entry cache */
 				rmv_detached_dirent(entry, v2);
+				code = 0;
 			}
 		} else if (v->chunk != NULL && v2->chunk != NULL) {
 			/* Handle cases where existing entry is in a chunk as
