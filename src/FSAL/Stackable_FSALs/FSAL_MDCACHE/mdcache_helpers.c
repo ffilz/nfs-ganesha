@@ -1459,7 +1459,8 @@ mdcache_dirent_add(mdcache_entry_t *parent, const char *name,
 	new_dir_entry->flags = DIR_ENTRY_FLAG_NONE;
 	allocated_dir_entry = new_dir_entry;
 
-	memcpy(&new_dir_entry->name, name, namesize);
+	memcpy(&new_dir_entry->name_buffer, name, namesize);
+	new_dir_entry->name = new_dir_entry->name_buffer;
 	mdcache_key_dup(&new_dir_entry->ckey, &entry->fh_hk.key);
 
 	/* add to avl */
@@ -2129,7 +2130,8 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 	 *              chunk, posssibly making the chunk larger than normal.
 	 */
 
-	memcpy(&new_dir_entry->name, name, namesize);
+	memcpy(&new_dir_entry->name_buffer, name, namesize);
+	new_dir_entry->name = new_dir_entry->name_buffer;
 	mdcache_key_dup(&new_dir_entry->ckey, &new_entry->fh_hk.key);
 
 	/* add to avl */
