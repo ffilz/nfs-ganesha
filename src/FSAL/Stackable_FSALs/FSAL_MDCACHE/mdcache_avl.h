@@ -56,21 +56,21 @@
 #include "mdcache_int.h"
 #include "avltree.h"
 
-static inline int avl_dirent_hk_cmpf(const struct avltree_node *lhs,
-				     const struct avltree_node *rhs)
+static inline int avl_dirent_name_cmpf(const struct avltree_node *lhs,
+				       const struct avltree_node *rhs)
 {
 	mdcache_dir_entry_t *lk, *rk;
 
-	lk = avltree_container_of(lhs, mdcache_dir_entry_t, node_hk);
-	rk = avltree_container_of(rhs, mdcache_dir_entry_t, node_hk);
+	lk = avltree_container_of(lhs, mdcache_dir_entry_t, node_name);
+	rk = avltree_container_of(rhs, mdcache_dir_entry_t, node_name);
 
-	if (lk->hk.k < rk->hk.k)
+	if (lk->namehash < rk->namehash)
 		return -1;
 
-	if (lk->hk.k == rk->hk.k)
-		return 0;
+	if (lk->namehash > rk->namehash)
+		return 1;
 
-	return 1;
+	return strcmp(lk->name, rk->name);
 }
 
 static inline int avl_dirent_ck_cmpf(const struct avltree_node *lhs,
