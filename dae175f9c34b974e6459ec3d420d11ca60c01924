@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c1f45d1_318986cd",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-01-12T14:52:25Z",
+      "side": 1,
+      "message": "Actually can we add O_NOFOLLOW here? That\u0027s actually what we should set for the openat calls in FSAL_VFS that would stop this.",
+      "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
