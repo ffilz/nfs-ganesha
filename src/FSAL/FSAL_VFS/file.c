@@ -1636,7 +1636,7 @@ fsal_status_t vfs_setattr2(struct fsal_obj_handle *obj_hdl,
 	bool has_lock = false;
 	bool closefd = false;
 	int my_fd;
-	const char *func;
+	const char *func = "none";
 
 	/* apply umask, if mode attribute is to be changed */
 	if (FSAL_TEST_MASK(attrib_set->valid_mask, ATTR_MODE))
