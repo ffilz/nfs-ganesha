@@ -69,6 +69,24 @@
       "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b885fdc_1dbe4cc9",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2018-01-16T15:52:40Z",
+      "side": 1,
+      "message": "For GPFS, in gpfs_open2() the attrs_out is received as non NULL for the code path. And probably that\u0027s why the existing code of alloc_handle() for GPFS doesn\u0027t have a check for \u0027attrs_out\u0027 to check if its not NULL. We can probably remove the check for \u0027attrs_out !\u003d NULL\u0027 here too.",
+      "parentUuid": "a0ed3b84_0afe7bf7",
+      "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
