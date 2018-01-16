@@ -16,6 +16,23 @@
       "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0ed3b84_0afe7bf7",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-01-16T07:35:06Z",
+      "side": 1,
+      "message": "can attrs_out be NULL here? If so, the following alloc_handle() would crash.",
+      "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
