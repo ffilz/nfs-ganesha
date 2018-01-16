@@ -33,6 +33,24 @@
       "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49f84851_cc9e2971",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-01-16T13:03:50Z",
+      "side": 1,
+      "message": "Both 9P and NFS4 call with attrs_out as null, but I\u0027m not sure whether that can hit this codepath or not.",
+      "parentUuid": "a0ed3b84_0afe7bf7",
+      "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
