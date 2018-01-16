@@ -51,6 +51,24 @@
       "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c197cdc4_a393b856",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-01-16T15:08:18Z",
+      "side": 1,
+      "message": "Hmm, it looks like we can have attrs_out \u003d\u003d NULL in this path... We should check all the FSALs for assumptions...",
+      "parentUuid": "49f84851_cc9e2971",
+      "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
