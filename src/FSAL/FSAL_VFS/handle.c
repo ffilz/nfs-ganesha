@@ -323,7 +323,26 @@ static fsal_status_t lookup_with_fd(struct vfs_fsal_obj_handle *parent_hdl,
 		fspath = vfs_fs->fs->path;
 
 		spath = path;
-		if (strncmp(path, fspath, strlen(fspath)) == 0) {
+
+		/* If Path and Pseudo path are not equal replace path with
+		 * pseudo path.
+		 */
+		if (strcmp(op_ctx->ctx_export->fullpath,
+			op_ctx->ctx_export->pseudopath) != 0) {
+			int pseudo_length = strlen(
+				op_ctx->ctx_export->pseudopath);
+			int fullpath_length = strlen(
+				op_ctx->ctx_export->fullpath);
+			char *dirpath = gsh_strdup(spath + fullpath_length);
+
+			memcpy(spath, op_ctx->ctx_export->pseudopath,
+				pseudo_length);
+			memcpy(spath + pseudo_length, dirpath,
+				r - fullpath_length);
+			spath[pseudo_length + (r - fullpath_length)] = '\0';
+
+			gsh_free(dirpath);
+		} else if (strncmp(path, fspath, strlen(fspath)) == 0) {
 			spath += strlen(fspath);
 		}
 		hdl->u.directory.path = gsh_strdup(spath);
