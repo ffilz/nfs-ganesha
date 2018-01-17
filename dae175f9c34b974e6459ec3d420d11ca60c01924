@@ -87,6 +87,24 @@
       "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f441f8a_c60d8b0d",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-01-17T22:14:17Z",
+      "side": 1,
+      "message": "Ok, if attrs_out is assured to be non-NULL then we can just remove the check. It might be worth putting an assert in, though alloc_handle should crash if attrs_out is NULL.",
+      "parentUuid": "5b885fdc_1dbe4cc9",
+      "revId": "dae175f9c34b974e6459ec3d420d11ca60c01924",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
