@@ -3,8 +3,7 @@ add_definitions(
   -D_GNU_SOURCE
 )
 
-SET(fsalvfs_LIB_SRCS
-   main.c
+SET(fsalvfs_LIB_SRCS_common
    ../export.c
    ../handle.c
    ../handle_syscalls.c
@@ -13,20 +12,100 @@ SET(fsalvfs_LIB_SRCS
    ../vfs_methods.h
    ../state.c
    subfsal_vfs.c
-  )
-
-if(ENABLE_VFS_DEBUG_ACL)
-  set(fsalvfs_LIB_SRCS ${fsalvfs_LIB_SRCS} attrs.c)
-endif(ENABLE_VFS_DEBUG_ACL)
-
-add_library(fsalvfs MODULE ${fsalvfs_LIB_SRCS})
-add_sanitizers(fsalvfs)
-
-target_link_libraries(fsalvfs
-  gos
-  fsal_os
-  ${SYSTEM_LIBRARIES}
 )
 
-set_target_properties(fsalvfs PROPERTIES VERSION 4.2.0 SOVERSION 4)
-install(TARGETS fsalvfs COMPONENT fsal DESTINATION ${FSAL_DESTINATION} )
+if(ENABLE_VFS_DEBUG_ACL)
+    set(fsalvfs_LIB_SRCS_common
+        ${fsalvfs_LIB_SRCS_common}
+        attrs.c
+    )
+endif(ENABLE_VFS_DEBUG_ACL)
+
+if(USE_FSAL_VFS)
+
+    set(FSAL_NAME "VFS")
+    configure_file(main-c.in.cmake main.c)
+    set(fsalvfs_LIB_SRCS
+        ${fsalvfs_LIB_SRCS_common}
+        ../empty_check_hsm.c
+        main.c
+    )
+
+    add_library(fsalvfs MODULE ${fsalvfs_LIB_SRCS})
+    add_sanitizers(fsalvfs)
+    set(fsalvfs_TGT_LINK_LIB
+      gos
+      fsal_os
+      ${SYSTEM_LIBRARIES}
+    )
+
+    target_link_libraries(fsalvfs ${fsalvfs_TGT_LINK_LIB})
+    set_target_properties(fsalvfs PROPERTIES VERSION 4.2.0 SOVERSION 4)
+    install(TARGETS fsalvfs COMPONENT fsal DESTINATION ${FSAL_DESTINATION} )
+endif(USE_FSAL_VFS)
+
+#FSAL_LUSTRE OVER FSAL_VFS
+if(USE_FSAL_LUSTRE)
+    ########### lustre hsm version test ##########
+    # Lustre/HSM feature needs Lustre 2.5.0.
+    # As some hsm calls were already landed as empty nutshells in 2.4
+    # we rely on this new call of 2.5.0: llapi_hsm_state_get_fd().
+    ##############################################
+    CHECK_LIBRARY_EXISTS(lustreapi llapi_hsm_state_get_fd "" USE_LLAPI)
+    if(USE_LLAPI)
+    #TRUE FSAL_LUSTRE
+        set(FSAL_NAME "LUSTRE")
+        configure_file(main-c.in.cmake lustre_main.c)
+        set(fsallustre_LIB_SRCS
+            ${fsalvfs_LIB_SRCS_common}
+            lustre_main.c
+            llapi_check_hsm.c
+        )
+
+        add_library(fsallustre MODULE ${fsallustre_LIB_SRCS})
+        add_sanitizers(fsallustre)
+        target_link_libraries(fsallustre
+            ${fsalvfs_TGT_LINK_LIB}
+            lustreapi
+        )
+
+        set_target_properties(fsallustre PROPERTIES
+            VERSION 4.2.0
+            SOVERSION 4
+        )
+
+        install(TARGETS fsallustre
+            COMPONENT fsal
+            DESTINATION ${FSAL_DESTINATION}
+        )
+
+    else(USE_LLAPI)
+    #FSAL_FAKELUSTRE
+    #Even if we lack a good version of lustreapi, we continue to build and link
+    # a fake FSAL_LUSTRE to test the build path.
+        set(FSAL_NAME "FAKELUSTRE")
+        configure_file(main-c.in.cmake fake_lustre_main.c)
+        set(fsallustre_LIB_SRCS
+            ${fsalvfs_LIB_SRCS_common}
+            fake_lustre_main.c
+            llapi_check_hsm.c
+        )
+
+        add_library(fsalfakelustre MODULE ${fsallustre_LIB_SRCS})
+        add_sanitizers(fsalfakelustre)
+        target_link_libraries(fsalfakelustre
+            ${fsalvfs_TGT_LINK_LIB}
+        )
+
+        set_target_properties(fsalfakelustre PROPERTIES
+            VERSION 4.2.0
+            SOVERSION 4
+        )
+
+        install(TARGETS fsalfakelustre
+            COMPONENT fsal
+            DESTINATION ${FSAL_DESTINATION}
+        )
+
+    endif(USE_LLAPI)
+endif(USE_FSAL_LUSTRE)

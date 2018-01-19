@@ -57,7 +57,7 @@ struct vfs_fsal_module {
 	/* vfsfs_specific_initinfo_t specific_info;  placeholder */
 };
 
-const char myname[] = "VFS";
+const char myname[] = "@FSAL_NAME@";
 
 /* filesystem info for VFS */
 static struct fsal_staticfsinfo_t default_posix_info = {

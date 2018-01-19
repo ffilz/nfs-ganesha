@@ -211,6 +211,7 @@ endif ()
 # during the build
 option(USE_FSAL_PROXY "build PROXY FSAL shared library" ON)
 option(USE_FSAL_VFS "build VFS FSAL shared library" ON)
+option(USE_FSAL_LUSTRE "build LUSTRE FSAL shared library" ON)
 option(USE_FSAL_CEPH "build CEPH FSAL shared library" ON)
 option(USE_FSAL_GPFS "build GPFS FSAL" ON)
 option(USE_FSAL_XFS "build XFS support in VFS FSAL" ON)
@@ -1021,6 +1022,7 @@ message(STATUS "BUILD HOST = ${BUILD_HOST_NAME}")
 message(STATUS "-------------------------------------------------------")
 message(STATUS "USE_FSAL_PROXY = ${USE_FSAL_PROXY}")
 message(STATUS "USE_FSAL_VFS = ${USE_FSAL_VFS}")
+message(STATUS "USE_FSAL_LUSTRE = ${USE_FSAL_LUSTRE}")
 message(STATUS "USE_FSAL_CEPH = ${USE_FSAL_CEPH}")
 message(STATUS "USE_FSAL_CEPH_MKNOD = ${USE_FSAL_CEPH_MKNOD}")
 message(STATUS "USE_FSAL_CEPH_SETLK = ${USE_FSAL_CEPH_SETLK}")
@@ -1096,6 +1098,11 @@ message(STATUS "RADOS_URLS = ${RADOS_URLS}")
 set(USE_FSAL_VFS ${USE_FSAL_VFS}
   CACHE BOOL
    "build VFS FSAL shared library"
+   FORCE)
+
+set(USE_FSAL_LUSTRE ${USE_FSAL_LUSTRE}
+  CACHE BOOL
+   "build LUSTRE FSAL shared library"
    FORCE)
 
 set(USE_FSAL_PROXY ${USE_FSAL_PROXY}
@@ -1275,6 +1282,12 @@ if(USE_FSAL_XFS)
 else(USE_FSAL_XFS)
     set(BCOND_XFS "%bcond_with")
 endif(USE_FSAL_XFS)
+
+if(USE_FSAL_LUSTRE)
+    set(BCOND_LUSTRE "%bcond_without")
+else(USE_FSAL_LUSTRE)
+    set(BCOND_LUSTRE "%bcond_with")
+endif(USE_FSAL_LUSTRE)
 
 if(USE_FSAL_PANFS)
     set(BCOND_PANFS "%bcond_without")

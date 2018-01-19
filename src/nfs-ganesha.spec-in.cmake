@@ -51,6 +51,9 @@ Requires: openSUSE-release
 @BCOND_XFS@ xfs
 %global use_fsal_xfs %{on_off_switch xfs}
 
+@BCOND_LUSTRE@ lustre
+%global use_fsal_lustre %{on_off_switch lustre}
+
 @BCOND_CEPH@ ceph
 %global use_fsal_ceph %{on_off_switch ceph}
 
@@ -334,6 +337,21 @@ This package contains a shared object to be used with FSAL_VFS
 to support XFS correctly
 %endif
 
+#LUSTRE
+%if %{with lustre}
+%package lustre
+Summary: The NFS-GANESHA's LUSTRE FSAL
+Group: Applications/System
+BuildRequires: libattr-devel
+BuildRequires: lustre-client
+Requires: nfs-ganesha = %{version}-%{release}
+Requires: lustre-client
+
+%description lustre
+This package contains a FSAL shared object to
+be used with NFS-Ganesha to support LUSTRE based filesystems
+%endif
+
 # PANFS
 %if %{with panfs}
 %package panfs
@@ -407,6 +425,7 @@ cmake .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DUSE_FSAL_NULL=%{use_fsal_null}		\
 	-DUSE_FSAL_MEM=%{use_fsal_mem}			\
 	-DUSE_FSAL_XFS=%{use_fsal_xfs}			\
+	-DUSE_FSAL_LUSTRE=%{use_fsal_lustre}			\
 	-DUSE_FSAL_CEPH=%{use_fsal_ceph}		\
 	-DUSE_FSAL_RGW=%{use_fsal_rgw}			\
 	-DUSE_FSAL_GPFS=%{use_fsal_gpfs}		\
