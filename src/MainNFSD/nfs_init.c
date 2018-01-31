@@ -722,10 +722,10 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	}			/*  if( nfs_param.krb5_param.active_krb5 ) */
 #endif				/* HAVE_KRB5 */
 #endif				/* _HAVE_GSSAPI */
-
-	/* RPC Initialisation - exits on failure */
-	nfs_Init_svc();
-	LogInfo(COMPONENT_INIT, "RPC resources successfully initialized");
+	/* Init duplicate request cache */
+	dupreq2_pkginit();
+	LogInfo(COMPONENT_INIT,
+		"duplicate request hash table cache successfully initialized");
 
 	/* Admin initialisation */
 	nfs_Init_admin_thread();
@@ -739,11 +739,6 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	}
 	LogInfo(COMPONENT_INIT,
 		"NFSv4 clientid cache successfully initialized");
-
-	/* Init duplicate request cache */
-	dupreq2_pkginit();
-	LogInfo(COMPONENT_INIT,
-		"duplicate request hash table cache successfully initialized");
 
 	/* Init The NFSv4 State id cache */
 	LogDebug(COMPONENT_INIT, "Now building NFSv4 State Id cache");
@@ -819,6 +814,10 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 
 	LogInfo(COMPONENT_INIT,
 		"NFSv4 pseudo file system successfully initialized");
+
+	/* RPC Initialisation - exits on failure */
+	nfs_Init_svc();
+	LogInfo(COMPONENT_INIT, "RPC resources successfully initialized");
 
 	/* Save Ganesha thread credentials with Frank's routine for later use */
 	fsal_save_ganesha_credentials();
