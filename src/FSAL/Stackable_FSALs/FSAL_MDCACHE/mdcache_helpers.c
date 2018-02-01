@@ -545,6 +545,7 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 	bool has_hashkey = false;
 	int rc = 0;
 	mdcache_key_t key;
+	bool freed = false;
 
 	*entry = NULL;
 
@@ -588,6 +589,8 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 		 * go ahead and bail out now.
 		 */
 		status = fsalstat(ERR_FSAL_STALE, 0);
+		/* At this point FSAL subhandle is also freed */
+		freed = true;
 		goto out_no_new_entry_yet;
 	}
 
@@ -761,6 +764,8 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 	 */
 	mdcache_put(nentry);
 	mdcache_put(nentry);
+	/* sub_handle would have been freed by now */
+	freed = true;
 
  out_no_new_entry_yet:
 
@@ -784,6 +789,8 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 			*entry = NULL;
 		}
 	}
+	if (freed)
+		return status;
 
 	if (!FSAL_IS_ERROR(status)) {
 		/* Give the FSAL a chance to merge new_obj into
