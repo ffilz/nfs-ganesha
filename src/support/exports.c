@@ -728,11 +728,21 @@ static int fsal_cfg_commit(void *node, void *link_mem, void *self_struct,
 
 	clean_export_paths(export);
 
-	/* The handle cache (currently MDCACHE) must be at the top of the stack
-	 * of FSALs.  To achieve this, call directly into MDCACHE, passing the
-	 * sub-FSAL's fsal_module.  MDCACHE will stack itself on top of that
-	 * FSAL, continuing down the chain. */
-	status = mdcache_fsal_create_export(fsal, node, err_type, &fsal_up_top);
+	if (strcmp(fsal->name, "PSEUDO") == 0) {
+		/* FSAL_PSEUDO exports already handle being stacked under
+		 * MDCACHE.
+		 */
+		status = fsal->m_ops.create_export(fsal, node, err_type,
+						   &fsal_up_top);
+	} else {
+		/* The handle cache (currently MDCACHE) must be at the top of
+		 * the stack of FSALs.  To achieve this, call directly into
+		 * MDCACHE, passing the sub-FSAL's fsal_module.  MDCACHE will
+		 * stack itself on top of that FSAL, continuing down the chain.
+		 */
+		status = mdcache_fsal_create_export(fsal, node, err_type,
+						    &fsal_up_top);
+	}
 
 	PTHREAD_RWLOCK_rdlock(&export_opt_lock);
 
