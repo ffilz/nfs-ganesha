@@ -1,7 +1,7 @@
 /*
  * vim:noexpandtab:shiftwidth=8:tabstop=8:
  *
- * Copyright 2015-2017 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2015-2018 Red Hat, Inc. and/or its affiliates.
  * Author: Daniel Gryniewicz <dang@redhat.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -913,7 +913,6 @@ mdc_init_export(struct fsal_module *fsal_hdl,
 	namelen = strlen(op_ctx->fsal_export->fsal->name) + 5;
 	myself->name = gsh_calloc(1, namelen);
 
-	fsal_get(op_ctx->fsal_export->fsal);
 	snprintf(myself->name, namelen, "%s/MDC",
 		 op_ctx->fsal_export->fsal->name);
 
