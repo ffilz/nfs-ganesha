@@ -1372,6 +1372,12 @@ else(RADOS_URLS)
     set(BCOND_RADOS_URLS "%bcond_with")
 endif(RADOS_URLS)
 
+if(_NO_PORTMAPPER)
+    set(BCOND_RPCBIND "%bcond_with")
+else(_NO_PORTMAPPER)
+    set(BCOND_RPCBIND "%bcond_without")
+endif(_NO_PORTMAPPER)
+
 # Now create a useable specfile
 configure_file(
   "${PROJECT_SOURCE_DIR}/nfs-ganesha.spec-in.cmake"
