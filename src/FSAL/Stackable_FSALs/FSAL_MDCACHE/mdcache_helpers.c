@@ -1249,6 +1249,10 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 		PTHREAD_RWLOCK_wrlock(&mdc_parent->content_lock);
 
 		status = mdc_try_get_cached(mdc_parent, name, new_entry);
+		if (status.major == ERR_FSAL_STALE) {
+			/* Failed again. Now get ready for sub-FSAL call */
+			uncached = true;
+		}
 	}
 	if (!FSAL_IS_ERROR(status)) {
 		/* Success! Now fetch attr if requested, drop content_lock
