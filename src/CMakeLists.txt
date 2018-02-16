@@ -216,6 +216,7 @@ option(USE_FSAL_GPFS "build GPFS FSAL" ON)
 option(USE_FSAL_XFS "build XFS support in VFS FSAL" ON)
 option(USE_FSAL_PANFS "build PanFS support in VFS FSAL" OFF)
 option(USE_FSAL_GLUSTER "build GLUSTER FSAL shared library" ON)
+option(USE_FSAL_LIZARDFS "build LIZARDFS FSAL shared library" ON)
 option(USE_FSAL_NULL "build NULL FSAL shared library" ON)
 option(USE_FSAL_RGW "build RGW FSAL shared library" OFF)
 option(USE_FSAL_MEM "build Memory FSAL shared library" ON)
@@ -628,6 +629,20 @@ if(USE_FSAL_GLUSTER)
   endif(USE_FSAL_GLUSTER)
 endif(USE_FSAL_GLUSTER)
 
+if(USE_FSAL_LIZARDFS)
+  find_library(LIZARDFS_CLIENT_LIB lizardfs-client)
+  if (LIZARDFS_CLIENT_LIB)
+    message(STATUS "Found LizardFS client library: ${LIZARDFS_CLIENT_LIB}")
+  else(LIZARDFS_CLIENT_LIB)
+    if(STRICT_PACKAGE)
+      message(FATAL_ERROR "STRICT_PACKAGE: Cannot find LizardFS client lib. Disabling lizardfs fsal")
+    else(STRICT_PACKAGE)
+      message(WARNING "Cannot find LizardFS client lib. Disabling lizardfs fsal")
+      set(USE_FSAL_LIZARDFS OFF)
+    endif(STRICT_PACKAGE)
+  endif(NOT LIZARDFS_CLIENT_LIB)
+endif()
+
 if(USE_FSAL_CEPH)
   find_package(CephFS)
   if(NOT CEPHFS_FOUND)
@@ -1032,6 +1047,7 @@ message(STATUS "USE_FSAL_XFS = ${USE_FSAL_XFS}")
 message(STATUS "USE_FSAL_PANFS = ${USE_FSAL_PANFS}")
 message(STATUS "USE_FSAL_GPFS = ${USE_FSAL_GPFS}")
 message(STATUS "USE_FSAL_GLUSTER = ${USE_FSAL_GLUSTER}")
+message(STATUS "USE_FSAL_LIZARDFS = ${USE_FSAL_LIZARDFS}")
 message(STATUS "USE_FSAL_NULL = ${USE_FSAL_NULL}")
 message(STATUS "USE_FSAL_MEM = ${USE_FSAL_MEM}")
 message(STATUS "USE_SYSTEM_NTIRPC = ${USE_SYSTEM_NTIRPC}")
@@ -1131,6 +1147,11 @@ set(USE_FSAL_GPFS ${USE_FSAL_GPFS}
 set(USE_FSAL_GLUSTER ${USE_FSAL_GLUSTER}
   CACHE BOOL
    "build GLUSTER FSAL"
+   FORCE)
+
+set(USE_FSAL_LIZARDFS ${USE_FSAL_LIZARDFS}
+  CACHE BOOL
+   "build LIZARDFS FSAL"
    FORCE)
 
 set(USE_FSAL_MEM ${USE_FSAL_MEM}
