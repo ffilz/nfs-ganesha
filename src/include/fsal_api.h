@@ -2502,6 +2502,19 @@ struct fsal_obj_ops {
 				 struct state_t *state);
 
 /**@}*/
+
+/**
+ * @brief Determine if the given handle is a referral point
+ *
+ * @param[in] obj_hdl    Handle on which to operate
+ * @param[in] attrs	 Attributes of the handle
+ *
+ * @return true if it is a referral point, false otherwise
+ */
+
+	 bool (*is_referral)(struct fsal_obj_handle *obj_hdl,
+			     struct attrlist *attrs);
+
 };
 
 /**
