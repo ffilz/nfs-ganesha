@@ -56,6 +56,7 @@ int nfs4_op_getfh(struct nfs_argop4 *op, compound_data_t *data,
 		  struct nfs_resop4 *resp)
 {
 	GETFH4res * const res_GETFH = &resp->nfs_resop4_u.opgetfh;
+	struct attrlist attrs;
 
 	resp->resop = NFS4_OP_GETFH;
 	res_GETFH->status = NFS4_OK;
@@ -67,6 +68,15 @@ int nfs4_op_getfh(struct nfs_argop4 *op, compound_data_t *data,
 
 	if (res_GETFH->status != NFS4_OK)
 		return res_GETFH->status;
+
+	fsal_prepare_attrs(&attrs, ATTR_MODE | ATTR_TYPE);
+
+	bool result = data->current_obj->obj_ops.is_referral(data->current_obj,
+				&attrs);
+	if (result) {
+		res_GETFH->status = NFS4ERR_MOVED;
+		goto out;
+	}
 
 	/* Copy the filehandle to the reply structure */
 	nfs4_AllocateFH(&res_GETFH->GETFH4res_u.resok4.object);
@@ -82,8 +92,9 @@ int nfs4_op_getfh(struct nfs_argop4 *op, compound_data_t *data,
 	LogHandleNFS4("NFS4 GETFH AFTER: ",
 		      &res_GETFH->GETFH4res_u.resok4.object);
 
-	res_GETFH->status = NFS4_OK;
-	return NFS4_OK;
+out:
+	fsal_release_attrs(&attrs);
+	return res_GETFH->status;
 }				/* nfs4_op_getfh */
 
 /**
