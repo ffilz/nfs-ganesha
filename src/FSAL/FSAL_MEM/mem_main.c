@@ -52,6 +52,7 @@ const char memname[] = "MEM";
 
 /* filesystem info for MEM */
 static struct fsal_staticfsinfo_t default_mem_info = {
+	.fsal_name = "MEM",
 	.maxfilesize = UINT64_MAX,
 	.maxlink = 0,
 	.maxnamelen = MAXNAMLEN,

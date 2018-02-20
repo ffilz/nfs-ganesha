@@ -644,8 +644,10 @@ typedef enum enum_fsal_fsinfo_options {
 
 /* The largest maxread and maxwrite value */
 #define FSAL_MAXIOSIZE XDR_BYTES_MAXLEN_IO
+#define FSAL_NAME_LENGTH 20
 
 typedef struct fsal_staticfsinfo_t {
+	char fsal_name[FSAL_NAME_LENGTH]; /* fsal name */
 	uint64_t maxfilesize;	/*< maximum allowed filesize     */
 	uint32_t maxlink;	/*< maximum hard links on a file */
 	uint32_t maxnamelen;	/*< maximum name length */

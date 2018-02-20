@@ -52,6 +52,7 @@ static const char *module_name = "RGW";
 
 /* filesystem info for RGW */
 static struct fsal_staticfsinfo_t default_rgw_info = {
+	.fsal_name = "RGW",
 	.maxfilesize = UINT64_MAX,
 	.maxlink = _POSIX_LINK_MAX,
 	.maxnamelen = 1024,
@@ -134,6 +135,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
+	display_fsinfo(&myself->fs_info);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 

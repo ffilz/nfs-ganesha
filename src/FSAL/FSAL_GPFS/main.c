@@ -49,6 +49,7 @@ struct gpfs_fsal_module {
  *  @brief filesystem info for GPFS
  */
 static struct fsal_staticfsinfo_t default_gpfs_info = {
+	.fsal_name = "GPFS",
 	.maxfilesize = UINT64_MAX,
 	.maxlink = _POSIX_LINK_MAX,
 	.maxnamelen = 1024,

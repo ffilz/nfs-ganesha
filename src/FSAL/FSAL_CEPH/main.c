@@ -66,6 +66,7 @@ static fsal_staticfsinfo_t default_ceph_info = {
 	.xattr_access_rights = 0,
 #endif
 	/* fixed */
+	.fsal_name = "CEPH",
 	.symlink_support = true,
 	.link_support = true,
 	.cansettime = true,
@@ -128,6 +129,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
+	display_fsinfo(&myself->fs_info);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 

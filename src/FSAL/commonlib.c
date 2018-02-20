@@ -401,7 +401,8 @@ const char *fsal_dir_result_str(enum fsal_dir_result result)
  */
 void display_fsinfo(struct fsal_staticfsinfo_t *info)
 {
-	LogDebug(COMPONENT_FSAL, "FileSystem info: {");
+	LogDebug(COMPONENT_FSAL, "FileSystem info for FSAL %s {",
+					 info->fsal_name);
 	LogDebug(COMPONENT_FSAL, "  maxfilesize  = %" PRIX64 "    ",
 		 (uint64_t) info->maxfilesize);
 	LogDebug(COMPONENT_FSAL, "  maxlink  = %" PRIu32, info->maxlink);

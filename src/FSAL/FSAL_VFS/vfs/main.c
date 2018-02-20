@@ -61,6 +61,7 @@ const char myname[] = "VFS";
 
 /* filesystem info for VFS */
 static struct fsal_staticfsinfo_t default_posix_info = {
+	.fsal_name = "VFS",
 	.maxfilesize = UINT64_MAX,
 	.maxlink = _POSIX_LINK_MAX,
 	.maxnamelen = 1024,
