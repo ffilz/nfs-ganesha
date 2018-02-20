@@ -1591,6 +1591,23 @@ static fsal_status_t mdcache_merge(struct fsal_obj_handle *orig_hdl,
 	return status;
 }
 
+
+static bool mdcache_is_referral(struct fsal_obj_handle *obj_hdl,
+				const struct attrlist *attrs)
+{
+	mdcache_entry_t *entry =
+		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+	bool result;
+
+	subcall(
+		result = entry->sub_handle->obj_ops.is_referral(
+							entry->sub_handle,
+							attrs);
+	       );
+
+	return result;
+}
+
 void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	ops->get_ref = mdcache_get_ref;
@@ -1651,6 +1668,7 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->removexattrs = mdcache_removexattrs;
 	ops->listxattrs = mdcache_listxattrs;
 
+	ops->is_referral = mdcache_is_referral;
 }
 
 /*

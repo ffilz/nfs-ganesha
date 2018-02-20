@@ -46,7 +46,7 @@
 
 /* defined the set of attributes supported with POSIX */
 #ifndef ENABLE_VFS_DEBUG_ACL
-#define VFS_SUPPORTED_ATTRIBUTES ((const attrmask_t) (ATTRS_POSIX))
+#define VFS_SUPPORTED_ATTRIBUTES ((const attrmask_t) (ATTRS_POSIX | ATTR4_FS_LOCATIONS))
 #else
 #define VFS_SUPPORTED_ATTRIBUTES ((const attrmask_t) (ATTRS_POSIX | ATTR_ACL))
 #endif
