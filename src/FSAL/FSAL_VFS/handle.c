@@ -161,6 +161,19 @@ struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
 	return NULL;
 }
 
+static bool vfs_is_referral(struct fsal_obj_handle *obj_hdl,
+			    const struct attrlist *attrs)
+{
+	if (!obj_hdl->obj_ops.handle_is(obj_hdl, DIRECTORY))
+		return false;
+
+	if (!is_sticky_bit_set(obj_hdl, attrs))
+		return false;
+
+	LogDebug(COMPONENT_FSAL, "VFS referral found for handle %p", obj_hdl);
+	return true;
+}
+
 static fsal_status_t lookup_with_fd(struct vfs_fsal_obj_handle *parent_hdl,
 				    int dirfd, const char *path,
 				    struct fsal_obj_handle **handle,
@@ -275,9 +288,8 @@ static fsal_status_t lookup_with_fd(struct vfs_fsal_obj_handle *parent_hdl,
 	 * let's look for referral information
 	 */
 
-	if (hdl->obj_handle.type == DIRECTORY &&
-	    attrs_out != NULL &&
-	    is_sticky_bit_set(&hdl->obj_handle, attrs_out) &&
+	if (attrs_out != NULL &&
+	    hdl->obj_handle.obj_ops.is_referral(&hdl->obj_handle, attrs_out) &&
 	    hdl->obj_handle.fs->private_data != NULL) {
 
 		caddr_t xattr_content;
@@ -1752,6 +1764,7 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->remove_extattr_by_id = vfs_remove_extattr_by_id;
 	ops->remove_extattr_by_name = vfs_remove_extattr_by_name;
 
+	ops->is_referral = vfs_is_referral;
 }
 
 /* export methods that create object handles
