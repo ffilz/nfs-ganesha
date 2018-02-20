@@ -61,7 +61,7 @@ static void _9p_read_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 			  void *read_data, void *caller_data)
 {
 	struct _9p_read_data *data = caller_data;
-	struct fsal_read_arg *read_arg = read_data;
+	struct fsal_io_arg *read_arg = read_data;
 
 	data->ret = ret;
 
@@ -69,7 +69,7 @@ static void _9p_read_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 		op_ctx->client = data->client;
 
 		server_stats_io_done(read_arg->iov[0].iov_len,
-				     read_arg->read_amount, FSAL_IS_ERROR(ret),
+				     read_arg->io_amount, FSAL_IS_ERROR(ret),
 				     false);
 	}
 }
@@ -141,7 +141,7 @@ int _9p_read(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		outcount = read_size;
 	} else {
 		struct _9p_read_data read_data;
-		struct fsal_read_arg *read_arg = alloca(sizeof(*read_arg) +
+		struct fsal_io_arg *read_arg = alloca(sizeof(*read_arg) +
 							sizeof(struct iovec));
 
 		read_arg->info = NULL;
@@ -150,7 +150,7 @@ int _9p_read(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		read_arg->iov_count = 1;
 		read_arg->iov[0].iov_len = *count;
 		read_arg->iov[0].iov_base = databuffer;
-		read_arg->read_amount = 0;
+		read_arg->io_amount = 0;
 
 		read_data.client = req9p->pconn->client;
 
@@ -163,7 +163,7 @@ int _9p_read(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 					  _9p_tools_errno(read_data.ret),
 					  plenout, preply);
 
-		outcount = (u32) read_arg->read_amount;
+		outcount = (u32) read_arg->io_amount;
 	}
 	_9p_setfilledbuffer(cursor, outcount);
 
