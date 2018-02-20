@@ -139,7 +139,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 				      err_type);
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
-	display_fsinfo(&panfs_me->fs_info);
+	display_fsinfo(&panfs_me->fs_info, fsal_hdl->name);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes constant = 0x%" PRIx64,
 		     PANFS_SUPPORTED_ATTRIBUTES);

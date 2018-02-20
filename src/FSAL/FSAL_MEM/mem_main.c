@@ -142,7 +142,7 @@ static fsal_status_t mem_init_config(struct fsal_module *fsal_hdl,
 		return status;
 	}
 
-	display_fsinfo(&mem_me->fs_info);
+	display_fsinfo(&mem_me->fs_info, fsal_hdl->name);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes constant = 0x%" PRIx64,
 		     (uint64_t) MEM_SUPPORTED_ATTRIBUTES);

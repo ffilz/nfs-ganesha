@@ -399,9 +399,10 @@ const char *fsal_dir_result_str(enum fsal_dir_result result)
  *
  * @param[in] info The info to dump
  */
-void display_fsinfo(struct fsal_staticfsinfo_t *info)
+void display_fsinfo(struct fsal_staticfsinfo_t *info, char *fsal_name)
 {
-	LogDebug(COMPONENT_FSAL, "FileSystem info: {");
+	LogDebug(COMPONENT_FSAL, "FileSystem info for FSAL %s {",
+					 fsal_name);
 	LogDebug(COMPONENT_FSAL, "  maxfilesize  = %" PRIX64 "    ",
 		 (uint64_t) info->maxfilesize);
 	LogDebug(COMPONENT_FSAL, "  maxlink  = %" PRIu32, info->maxlink);

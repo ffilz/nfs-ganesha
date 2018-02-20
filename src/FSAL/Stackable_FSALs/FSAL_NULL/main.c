@@ -122,7 +122,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 	 * diverse exports.
 	 */
 
-	display_fsinfo(&nullfs_me->fs_info);
+	display_fsinfo(&nullfs_me->fs_info, fsal_hdl->name);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes default = 0x%" PRIx64,
 		     default_posix_info.supported_attrs);

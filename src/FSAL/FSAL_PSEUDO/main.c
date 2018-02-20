@@ -104,7 +104,7 @@ static void init_config(struct fsal_module *fsal_hdl)
 	 * params.
 	 */
 
-	display_fsinfo(&pseudofs_me->fs_info);
+	display_fsinfo(&pseudofs_me->fs_info, fsal_hdl->name);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes default = 0x%" PRIx64,
 		     default_posix_info.supported_attrs);

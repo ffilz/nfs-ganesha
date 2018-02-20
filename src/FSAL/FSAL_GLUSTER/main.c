@@ -112,7 +112,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 	if (!config_error_is_harmless(err_type))
 		LogDebug(COMPONENT_FSAL, "Parsing Export Block failed");
 
-	display_fsinfo(&glfsal_module->fs_info);
+	display_fsinfo(&glfsal_module->fs_info, fsal_hdl->name);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
