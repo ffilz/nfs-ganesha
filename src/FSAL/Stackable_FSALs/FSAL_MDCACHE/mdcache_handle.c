@@ -1591,6 +1591,37 @@ static fsal_status_t mdcache_merge(struct fsal_obj_handle *orig_hdl,
 	return status;
 }
 
+
+static bool mdcache_is_referral(struct fsal_obj_handle *obj_hdl,
+				struct attrlist *attrs)
+{
+	mdcache_entry_t *entry =
+		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+	bool result;
+
+	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+
+	if (mdcache_is_attrs_valid(entry, attrs->request_mask)) {
+		/* Up-to-date */
+		fsal_copy_attrs(attrs, &entry->attrs, false);
+	}
+
+	subcall(
+		result = entry->sub_handle->obj_ops.is_referral(
+							entry->sub_handle,
+							attrs);
+	       );
+
+	/* Check if is_referral added any new attrs and update them in the
+	 * cache */
+	if (!mdcache_is_attrs_valid(entry, attrs->request_mask)) {
+		mdc_update_attr_cache(entry, attrs);
+	}
+
+	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	return result;
+}
+
 void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	ops->get_ref = mdcache_get_ref;
@@ -1651,6 +1682,7 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->removexattrs = mdcache_removexattrs;
 	ops->listxattrs = mdcache_listxattrs;
 
+	ops->is_referral = mdcache_is_referral;
 }
 
 /*
