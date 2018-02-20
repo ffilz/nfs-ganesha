@@ -1591,6 +1591,63 @@ static fsal_status_t mdcache_merge(struct fsal_obj_handle *orig_hdl,
 	return status;
 }
 
+
+static bool mdcache_is_referral(struct fsal_obj_handle *obj_hdl,
+				struct attrlist *attrs)
+{
+	mdcache_entry_t *entry =
+		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+	bool result, locked = false;
+	attrmask_t current_valid_mask = 0;
+
+	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
+	locked = true;
+
+	if (mdcache_is_attrs_valid(entry, attrs->request_mask)) {
+		/* Up-to-date */
+		goto unlock;
+	}
+
+	/* Promote to write lock */
+	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+
+	if (!mdcache_is_attrs_valid(entry, attrs->request_mask)) {
+		/* Do not unlock if attrs were not found */
+		goto no_unlock;
+	}
+
+unlock:
+	/* Since we request for all the supported attrs from FSAL, release the
+	 * lock if the attrs were found */
+	fsal_copy_attrs(attrs, &entry->attrs, false);
+	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	locked = false;
+
+no_unlock:
+	current_valid_mask = attrs->valid_mask;
+	subcall(
+		result = entry->sub_handle->obj_ops.is_referral(
+							entry->sub_handle,
+							attrs);
+	       );
+
+	/* Check if is_referral added any new attrs and update them in the
+	 * cache */
+	if (attrs->valid_mask != current_valid_mask) {
+		/* This should be true only if the requested attrs were not
+		 * found */
+		assert(current_valid_mask == 0);
+		mdc_update_attr_cache(entry, attrs);
+	}
+
+	if (locked) {
+		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	}
+
+	return result;
+}
+
 void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	ops->get_ref = mdcache_get_ref;
@@ -1651,6 +1708,7 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->removexattrs = mdcache_removexattrs;
 	ops->listxattrs = mdcache_listxattrs;
 
+	ops->is_referral = mdcache_is_referral;
 }
 
 /*
