@@ -157,3 +157,18 @@ target_link_libraries(test_rename_latency
   )
 set_target_properties(test_rename_latency PROPERTIES COMPILE_FLAGS
   "${UNITTEST_CXX_FLAGS}")
+
+
+set(test_getattrs_latency_SRCS
+  test_getattrs_latency.cc
+  )
+
+add_executable(test_getattrs_latency
+  ${test_getattrs_latency_SRCS})
+add_sanitizers(test_getattrs_latency)
+
+target_link_libraries(test_getattrs_latency
+  ${GTEST_LIBRARIES}
+  )
+set_target_properties(test_getattrs_latency PROPERTIES COMPILE_FLAGS
+  "${UNITTEST_CXX_FLAGS}")
