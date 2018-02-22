@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9348287_f54b03e7",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-02-22T18:24:08Z",
+      "side": 1,
+      "message": "Are there any calls to fsal_read2 left?",
+      "revId": "2f029d815d19d4058d86dc4e9c3af6cc9a81af2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbf7b7fb_5584cbfd",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2350,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-02-22T18:24:08Z",
+      "side": 1,
+      "message": "Would it make sense to just put bypass and caller arg into read_arg? I was originally going to ask if we even needed caller_arg since caller could wrap the object and do a container_of, but I see mdcache needs it\u0027s own caller_arg to resolve stacking",
+      "revId": "2f029d815d19d4058d86dc4e9c3af6cc9a81af2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
