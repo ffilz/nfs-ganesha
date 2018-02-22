@@ -34,6 +34,24 @@
       "revId": "fa922d07ab1b23b7032cb41a35f23ddcc7908d24",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2a80b4d_43afe372",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-02-22T18:47:51Z",
+      "side": 1,
+      "message": "Ok, but then how does caller know when the read is done so it can reply to client? Or will true async be handled by the response being sent from the callback?",
+      "parentUuid": "dcedeec3_5936fedf",
+      "revId": "fa922d07ab1b23b7032cb41a35f23ddcc7908d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
