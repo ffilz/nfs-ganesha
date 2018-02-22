@@ -16,6 +16,24 @@
       "revId": "fa922d07ab1b23b7032cb41a35f23ddcc7908d24",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcedeec3_5936fedf",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-02-22T18:29:19Z",
+      "side": 1,
+      "message": "More than safe, it has to be done, if we\u0027re actually async.  We can\u0027t release it before calling read2(), and we need it in the callback, and the caller can\u0027t know when the callback is complete.",
+      "parentUuid": "9a5c20ca_26375c55",
+      "revId": "fa922d07ab1b23b7032cb41a35f23ddcc7908d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
