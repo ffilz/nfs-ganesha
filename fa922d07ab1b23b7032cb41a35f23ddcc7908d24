@@ -52,6 +52,24 @@
       "revId": "fa922d07ab1b23b7032cb41a35f23ddcc7908d24",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9395a4fa_78e4efa9",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-02-22T18:52:15Z",
+      "side": 1,
+      "message": "For nfsv3, yes.  For nfsv4, it requires coordination between the callbacks and nfs4_Compound().",
+      "parentUuid": "f2a80b4d_43afe372",
+      "revId": "fa922d07ab1b23b7032cb41a35f23ddcc7908d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
