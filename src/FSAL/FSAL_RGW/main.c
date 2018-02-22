@@ -134,6 +134,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
+	display_fsinfo(&myself->fs_info, module_in->name);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
