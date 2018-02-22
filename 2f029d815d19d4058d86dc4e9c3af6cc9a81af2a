@@ -69,6 +69,24 @@
       "revId": "2f029d815d19d4058d86dc4e9c3af6cc9a81af2a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "156f49a6_dd26f64e",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2350,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-02-22T18:47:51Z",
+      "side": 1,
+      "message": "Oh yea, caller_arg has to be out of it for stacking...\n\nSounds fine as is then. I\u0027d be ok with bypass inside read_arg, but it\u0027s also fine outside. The nice thing about all the params in a struct is fewer code changes if params are added (on the other hand, you might miss a place that did need updating to handle a new param...)",
+      "parentUuid": "7fa6355e_027f386a",
+      "revId": "2f029d815d19d4058d86dc4e9c3af6cc9a81af2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
