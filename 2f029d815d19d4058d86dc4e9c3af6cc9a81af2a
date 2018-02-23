@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a6f9a3a9_0ac08424",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1005377
+      },
+      "writtenOn": "2018-02-23T15:00:11Z",
+      "side": 1,
+      "message": "No sense in making in one patch and then removing in the next patch. Cleaner.",
+      "parentUuid": "4814e22a_649695d2",
+      "revId": "2f029d815d19d4058d86dc4e9c3af6cc9a81af2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbf7b7fb_5584cbfd",
         "filename": "src/include/fsal_api.h",
         "patchSetId": 3
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I\u0027ll leave it as is for now.  It can always be moved in later.",
       "parentUuid": "156f49a6_dd26f64e",
+      "revId": "2f029d815d19d4058d86dc4e9c3af6cc9a81af2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62b85b06_40ca33f9",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2350,
+      "author": {
+        "id": 1005377
+      },
+      "writtenOn": "2018-02-23T15:00:11Z",
+      "side": 1,
+      "message": "I\u0027d made this same suggestion to an earlier draft a few weeks ago. Same for write2.",
+      "parentUuid": "7cc17769_7be75735",
       "revId": "2f029d815d19d4058d86dc4e9c3af6cc9a81af2a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
