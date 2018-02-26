@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9363493a_78adfcb2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3535,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-02-26T13:47:10Z",
+      "side": 1,
+      "message": "Hmm... I don\u0027t think we can do this unless we start tracking ACL expiration separately from ATTR expiration.  Most of the getattr updates will likely not include ACLs, so one ACL refresh could last much much longer than a timeout period without actually being refreshed.",
+      "revId": "5b3a3e0768392a00c8478e3056b194ff3e2efdce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
