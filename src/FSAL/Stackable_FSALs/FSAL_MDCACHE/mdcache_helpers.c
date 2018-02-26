@@ -3528,6 +3528,11 @@ void mdc_update_attr_cache(mdcache_entry_t *entry, struct attrlist *attrs)
 			 */
 			attrs->acl = entry->attrs.acl;
 			attrs->valid_mask |= ATTR_ACL;
+			/* As no ACLs received, most likely ACLs were not
+			 * requested. Set the request mask, so that
+			 * fsal_copy_attrs preserves old ACLs by copying
+			 */
+			entry->attrs.request_mask |= ATTR_ACL;
 		}
 
 		/* NOTE: Because we already had an ACL,
