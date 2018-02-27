@@ -16,6 +16,24 @@
       "revId": "19a61929e7438fdc54dbb9e5c90bc9da9a191187",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81e7e9c4_c0209d5f",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-02-27T13:19:56Z",
+      "side": 1,
+      "message": "This is how it is in fsal_write2() now (I forgot to move it over), and OPEN27 depends on it.",
+      "parentUuid": "53f3adec_3cb6012b",
+      "revId": "19a61929e7438fdc54dbb9e5c90bc9da9a191187",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
