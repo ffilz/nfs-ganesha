@@ -3696,7 +3696,7 @@ extern "C" {
 	extern COMPOUND4res *nfsproc4_compound_4(COMPOUND4args *, CLIENT *cl);
 	extern COMPOUND4res *nfsproc4_compound_4_svc(COMPOUND4args *,
 						     struct svc_req *r);
-	extern int nfs4_program_4_freeresult(SVCXPRT *, xdrproc_t, caddr_t);
+	extern int nfs4_program_4_freeresult(SVCXPRT *, xdrproc_t, void *);
 
 #else				/* K&R C */
 #define NFSPROC4_NULL 0
@@ -3719,7 +3719,7 @@ extern "C" {
 	extern CB_COMPOUND4res *cb_compound_1(CB_COMPOUND4args *, CLIENT *);
 	extern CB_COMPOUND4res *cb_compound_1_svc(CB_COMPOUND4args *,
 						  struct svc_req *);
-	extern int nfs4_callback_1_freeresult(SVCXPRT *, xdrproc_t, caddr_t);
+	extern int nfs4_callback_1_freeresult(SVCXPRT *, xdrproc_t, void *);
 
 #else				/* K&R C */
 #define CB_NULL 0
