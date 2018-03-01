@@ -91,9 +91,9 @@ static struct config_item rgw_items[] = {
 	CONF_ITEM_STR("init_args", 1, MAXPATHLEN, NULL,
 		rgw_fsal_module, init_args),
 	CONF_ITEM_MODE("umask", 0,
-			rgw_fsal_module, fs_info.umask),
+			rgw_fsal_module, fsal.fs_info.umask),
 	CONF_ITEM_MODE("xattr_access_rights", 0,
-			rgw_fsal_module, fs_info.xattr_access_rights),
+			rgw_fsal_module, fsal.fs_info.xattr_access_rights),
 	CONFIG_EOL
 };
 
@@ -125,7 +125,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	LogDebug(COMPONENT_FSAL,
 		 "RGW module setup.");
 
-	myself->fs_info = default_rgw_info;
+	myself->fsal.fs_info = default_rgw_info;
 	(void) load_config_from_parse(config_struct,
 				      &rgw_block,
 				      myself,
@@ -134,6 +134,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
+	display_fsinfo(&myself->fsal);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 

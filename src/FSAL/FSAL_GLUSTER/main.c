@@ -97,10 +97,10 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 	    container_of(fsal_hdl, struct glusterfs_fsal_module, fsal);
 
 
-	glfsal_module->fs_info = default_gluster_info;
+	glfsal_module->fsal.fs_info = default_gluster_info;
 	(void) load_config_from_parse(config_struct,
 				      &glfs_param,
-				      &glfsal_module->fs_info,
+					  &glfsal_module->fsal.fs_info,
 				      true,
 				      err_type);
 
@@ -112,7 +112,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 	if (!config_error_is_harmless(err_type))
 		LogDebug(COMPONENT_FSAL, "Parsing Export Block failed");
 
-	display_fsinfo(&glfsal_module->fs_info);
+	display_fsinfo(&glfsal_module->fsal);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
