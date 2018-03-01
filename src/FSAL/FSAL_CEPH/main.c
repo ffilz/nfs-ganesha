@@ -87,9 +87,9 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_PATH("ceph_conf", 1, MAXPATHLEN, NULL,
 		ceph_fsal_module, conf_path),
 	CONF_ITEM_MODE("umask", 0,
-			ceph_fsal_module, fs_info.umask),
+			ceph_fsal_module, fsal.fs_info.umask),
 	CONF_ITEM_MODE("xattr_access_rights", 0,
-			ceph_fsal_module, fs_info.xattr_access_rights),
+			ceph_fsal_module, fsal.fs_info.xattr_access_rights),
 	CONFIG_EOL
 };
 
@@ -119,7 +119,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	LogDebug(COMPONENT_FSAL,
 		 "Ceph module setup.");
 
-	myself->fs_info = default_ceph_info;
+	myself->fsal.fs_info = default_ceph_info;
 	(void) load_config_from_parse(config_struct,
 				      &ceph_block,
 				      myself,
@@ -128,6 +128,7 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
+	display_fsinfo(&myself->fsal);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
