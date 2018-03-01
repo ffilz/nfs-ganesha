@@ -46,12 +46,6 @@
 /* defined the set of attributes supported with POSIX */
 #define PANFS_SUPPORTED_ATTRIBUTES ((const attrmask_t) (ATTRS_POSIX | ATTR_ACL))
 
-struct panfs_fsal_module {
-	struct fsal_module fsal;
-	struct fsal_staticfsinfo_t fs_info;
-	/* panfs_specific_initinfo_t specific_info;  placeholder */
-};
-
 const char myname[] = "PANFS";
 
 /* filesystem info for PANFS */
@@ -106,17 +100,6 @@ struct config_block panfs_param = {
 	.blk_desc.u.blk.commit = noop_conf_commit
 };
 
-/* private helper for export object
- */
-
-struct fsal_staticfsinfo_t *vfs_staticinfo(struct fsal_module *hdl)
-{
-	struct panfs_fsal_module *myself;
-
-	myself = container_of(hdl, struct panfs_fsal_module, fsal);
-	return &myself->fs_info;
-}
-
 /* Module methods
  */
 
@@ -124,31 +107,29 @@ struct fsal_staticfsinfo_t *vfs_staticinfo(struct fsal_module *hdl)
  * must be called with a reference taken (via lookup_fsal)
  */
 
-static fsal_status_t init_config(struct fsal_module *fsal_hdl,
+static fsal_status_t init_config(struct fsal_module *panfs_fsal_module,
 				 config_file_t config_struct,
 				 struct config_error_type *err_type)
 {
-	struct panfs_fsal_module *panfs_me =
-	    container_of(fsal_hdl, struct panfs_fsal_module, fsal);
-
-	panfs_me->fs_info = default_posix_info;	/* copy the consts */
+	/* copy the consts */
+	panfs_fsal_module->fs_info = default_posix_info;
 	(void) load_config_from_parse(config_struct,
 				      &panfs_param,
-				      &panfs_me->fs_info,
+				      &panfs_fsal_module->fs_info,
 				      true,
 				      err_type);
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
-	display_fsinfo(&panfs_me->fs_info);
+	display_fsinfo(panfs_fsal_module);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes constant = 0x%" PRIx64,
 		     PANFS_SUPPORTED_ATTRIBUTES);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes default = 0x%" PRIx64,
-		     default_posix_info.supported_attrs);
+				 default_posix_info.supported_attrs);
 	LogDebug(COMPONENT_FSAL,
 		 "FSAL INIT: Supported attributes mask = 0x%" PRIx64,
-		 panfs_me->fs_info.supported_attrs);
+		 panfs_fsal_module->fs_info.supported_attrs);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
@@ -168,7 +149,7 @@ fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl,
 /* my module private storage
  */
 
-static struct panfs_fsal_module PANFS;
+static struct fsal_module PANFS;
 
 /* linkage to the exports and handle ops initializers
  */
@@ -176,7 +157,7 @@ static struct panfs_fsal_module PANFS;
 MODULE_INIT void panfs_init(void)
 {
 	int retval;
-	struct fsal_module *myself = &PANFS.fsal;
+	struct fsal_module *myself = &PANFS;
 
 	retval = register_fsal(myself, myname, FSAL_MAJOR_VERSION,
 			       FSAL_MINOR_VERSION, FSAL_ID_PANFS);
@@ -192,7 +173,7 @@ MODULE_FINI void panfs_unload(void)
 {
 	int retval;
 
-	retval = unregister_fsal(&PANFS.fsal);
+	retval = unregister_fsal(&PANFS);
 	if (retval != 0) {
 		fprintf(stderr, "PANFS module failed to unregister");
 		return;
