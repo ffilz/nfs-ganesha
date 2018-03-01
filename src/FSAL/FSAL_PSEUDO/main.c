@@ -39,15 +39,6 @@
 #include "pseudofs_methods.h"
 #include "../fsal_private.h"
 
-/* PSEUDOFS FSAL module private storage
- */
-
-struct pseudo_fsal_module {
-	struct fsal_module fsal;
-	struct fsal_staticfsinfo_t fs_info;
-	/* pseudofsfs_specific_initinfo_t specific_info;  placeholder */
-};
-
 const char pseudoname[] = "PSEUDO";
 
 /* filesystem info for PSEUDOFS */
@@ -82,35 +73,24 @@ static struct fsal_staticfsinfo_t default_posix_info = {
 /* private helper for export object
  */
 
-struct fsal_staticfsinfo_t *pseudofs_staticinfo(struct fsal_module *hdl)
-{
-	struct pseudo_fsal_module *myself;
-
-	myself = container_of(hdl, struct pseudo_fsal_module, fsal);
-	return &myself->fs_info;
-}
-
 /* Initialize pseudo fs info */
-static void init_config(struct fsal_module *fsal_hdl)
+static void init_config(struct fsal_module *pseudo_fsal_module)
 {
-	struct pseudo_fsal_module *pseudofs_me =
-	    container_of(fsal_hdl, struct pseudo_fsal_module, fsal);
-
 	/* get a copy of the defaults */
-	pseudofs_me->fs_info = default_posix_info;
+	pseudo_fsal_module->fs_info = default_posix_info;
 
 	/* if we have fsal specific params, do them here
 	 * fsal_hdl->name is used to find the block containing the
 	 * params.
 	 */
 
-	display_fsinfo(&pseudofs_me->fs_info);
+	display_fsinfo(pseudo_fsal_module);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes default = 0x%" PRIx64,
 		     default_posix_info.supported_attrs);
 	LogDebug(COMPONENT_FSAL,
 		 "FSAL INIT: Supported attributes mask = 0x%" PRIx64,
-		 pseudofs_me->fs_info.supported_attrs);
+		 pseudo_fsal_module->fs_info.supported_attrs);
 }
 
 /* Module initialization.
@@ -121,7 +101,7 @@ static void init_config(struct fsal_module *fsal_hdl)
 /* my module private storage
  */
 
-static struct pseudo_fsal_module PSEUDOFS;
+static struct fsal_module PSEUDOFS;
 
 /* linkage to the exports and handle ops initializers
  */
@@ -130,7 +110,7 @@ int unload_pseudo_fsal(struct fsal_module *fsal_hdl)
 {
 	int retval;
 
-	retval = unregister_fsal(&PSEUDOFS.fsal);
+	retval = unregister_fsal(&PSEUDOFS);
 	if (retval != 0)
 		fprintf(stderr, "PSEUDO module failed to unregister");
 
@@ -140,7 +120,7 @@ int unload_pseudo_fsal(struct fsal_module *fsal_hdl)
 void pseudo_fsal_init(void)
 {
 	int retval;
-	struct fsal_module *myself = &PSEUDOFS.fsal;
+	struct fsal_module *myself = &PSEUDOFS;
 
 	retval = register_fsal(myself, pseudoname, FSAL_MAJOR_VERSION,
 			       FSAL_MINOR_VERSION, FSAL_ID_NO_PNFS);

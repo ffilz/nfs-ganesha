@@ -50,12 +50,6 @@
 #define XFS_SUPPORTED_ATTRIBUTES ((const attrmask_t) (ATTRS_POSIX | ATTR_ACL))
 #endif
 
-struct xfs_fsal_module {
-	struct fsal_module fsal;
-	struct fsal_staticfsinfo_t fs_info;
-	/* xfsfs_specific_initinfo_t specific_info;  placeholder */
-};
-
 const char myname[] = "XFS";
 
 /* filesystem info for XFS */
@@ -110,16 +104,6 @@ struct config_block xfs_param = {
 	.blk_desc.u.blk.commit = noop_conf_commit
 };
 
-/* private helper for export object
- */
-
-struct fsal_staticfsinfo_t *vfs_staticinfo(struct fsal_module *hdl)
-{
-	struct xfs_fsal_module *myself;
-
-	myself = container_of(hdl, struct xfs_fsal_module, fsal);
-	return &myself->fs_info;
-}
 
 /* Module methods
  */
@@ -128,19 +112,17 @@ struct fsal_staticfsinfo_t *vfs_staticinfo(struct fsal_module *hdl)
  * must be called with a reference taken (via lookup_fsal)
  */
 
-static fsal_status_t init_config(struct fsal_module *fsal_hdl,
+static fsal_status_t init_config(struct fsal_module *xfs_fsal_module,
 				 config_file_t config_struct,
 				 struct config_error_type *err_type)
 {
-	struct xfs_fsal_module *xfs_me =
-	    container_of(fsal_hdl, struct xfs_fsal_module, fsal);
 #ifdef F_OFD_GETLK
 	int fd, rc;
 	struct flock lock;
 	char *temp_name;
 #endif
 
-	xfs_me->fs_info = default_posix_info;	/* copy the consts */
+	xfs_fsal_module->fs_info = default_posix_info;	/* copy the consts */
 
 #ifdef F_OFD_GETLK
 	/* If on a system that might support OFD locks, verify them.
@@ -159,7 +141,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 		rc = fcntl(fd, F_OFD_GETLK, &lock);
 
 		if (rc == 0)
-			xfs_me->fs_info.lock_support = true;
+			xfs_fsal_module->fs_info.lock_support = true;
 		else
 			LogInfo(COMPONENT_FSAL, "Could not use OFD locks");
 
@@ -173,19 +155,19 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 	gsh_free(temp_name);
 #endif
 
-	if (xfs_me->fs_info.lock_support)
+	if (xfs_fsal_module->fs_info.lock_support)
 		LogInfo(COMPONENT_FSAL, "FSAL_XFS enabling OFD Locks");
 	else
 		LogInfo(COMPONENT_FSAL, "FSAL_XFS disabling lock support");
 
 	(void) load_config_from_parse(config_struct,
 				      &xfs_param,
-				      &xfs_me->fs_info,
+				      &xfs_fsal_module->fs_info,
 				      true,
 				      err_type);
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
-	display_fsinfo(&xfs_me->fs_info);
+	display_fsinfo(xfs_fsal_module);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes constant = 0x%" PRIx64,
 		     XFS_SUPPORTED_ATTRIBUTES);
@@ -194,7 +176,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 		     default_posix_info.supported_attrs);
 	LogDebug(COMPONENT_FSAL,
 		 "FSAL INIT: Supported attributes mask = 0x%" PRIx64,
-		 xfs_me->fs_info.supported_attrs);
+		 xfs_fsal_module->fs_info.supported_attrs);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
@@ -214,7 +196,7 @@ fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl,
 /* my module private storage
  */
 
-static struct xfs_fsal_module XFS;
+static struct fsal_module XFS;
 
 /* linkage to the exports and handle ops initializers
  */
@@ -222,7 +204,7 @@ static struct xfs_fsal_module XFS;
 MODULE_INIT void xfs_init(void)
 {
 	int retval;
-	struct fsal_module *myself = &XFS.fsal;
+	struct fsal_module *myself = &XFS;
 
 	retval = register_fsal(myself, myname, FSAL_MAJOR_VERSION,
 			       FSAL_MINOR_VERSION, FSAL_ID_NO_PNFS);
@@ -238,7 +220,7 @@ MODULE_FINI void xfs_unload(void)
 {
 	int retval;
 
-	retval = unregister_fsal(&XFS.fsal);
+	retval = unregister_fsal(&XFS);
 	if (retval != 0) {
 		fprintf(stderr, "XFS module failed to unregister");
 		return;
