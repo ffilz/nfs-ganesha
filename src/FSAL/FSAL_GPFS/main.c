@@ -36,15 +36,6 @@
 
 static const char myname[] = "GPFS";
 
-/** @struct gpfs_fsal_module
- *  @brief GPFS FSAL module private storage
- */
-struct gpfs_fsal_module {
-	struct fsal_module fsal;
-	struct fsal_staticfsinfo_t fs_info;
-	/** gpfsfs_specific_initinfo_t specific_info;  placeholder */
-};
-
 /** @struct default_gpfs_info
  *  @brief filesystem info for GPFS
  */
@@ -131,20 +122,7 @@ static struct config_block gpfs_param = {
 /** @struct GPFS
  *  @brief my module private storage
  */
-static struct gpfs_fsal_module GPFS;
-
-
-/** @fn struct fsal_staticfsinfo_t *gpfs_staticinfo(struct fsal_module *hdl)
- *  @brief private helper for export object
- *  @param hdl handle to fsal_module
- */
-struct fsal_staticfsinfo_t *gpfs_staticinfo(struct fsal_module *hdl)
-{
-	struct gpfs_fsal_module *gpfs_me =
-		container_of(hdl, struct gpfs_fsal_module, fsal);
-
-	return &gpfs_me->fs_info;
-}
+static struct fsal_module GPFS;
 
 /** @fn static int
  *      log_to_gpfs(log_header_t headers, void *private, log_levels_t level,
@@ -171,24 +149,27 @@ log_to_gpfs(log_header_t headers, void *private, log_levels_t level,
  *	config_file_t config_struct, struct config_error_type *err_type)
  *  @brief must be called with a reference taken (via lookup_fsal)
  */
-static fsal_status_t init_config(struct fsal_module *fsal_hdl,
+static fsal_status_t init_config(struct fsal_module *gpfs_fsal_module,
 				 config_file_t config_struct,
 				 struct config_error_type *err_type)
 {
-	struct gpfs_fsal_module *gpfs_me =
-	    container_of(fsal_hdl, struct gpfs_fsal_module, fsal);
 	int rc;
 
-	(void) prepare_for_stats(fsal_hdl);
-	gpfs_me->fs_info = default_gpfs_info;  /** get a copy of the defaults */
+	(void) prepare_for_stats(gpfs_fsal_module);
 
-	(void) load_config_from_parse(config_struct, &gpfs_param,
-				      &gpfs_me->fs_info, true, err_type);
+	/** get a copy of the defaults */
+	gpfs_fsal_module->fs_info = default_gpfs_info;
+
+	(void) load_config_from_parse(config_struct,
+					&gpfs_param,
+					&gpfs_fsal_module->fs_info,
+					true,
+					err_type);
 
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
-	display_fsinfo(&gpfs_me->fs_info);
+	display_fsinfo(gpfs_fsal_module);
 
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes constant = 0x%" PRIx64,
@@ -198,7 +179,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 		     default_gpfs_info.supported_attrs);
 	LogDebug(COMPONENT_FSAL,
 		 "FSAL INIT: Supported attributes mask = 0x%" PRIx64,
-		 gpfs_me->fs_info.supported_attrs);
+		 gpfs_fsal_module->fs_info.supported_attrs);
 
 	rc = create_log_facility(myname, log_to_gpfs,
 				 NIV_FULL_DEBUG, LH_COMPONENT, NULL);
@@ -208,7 +189,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
-	if (gpfs_me->fs_info.fsal_trace) {
+	if (gpfs_fsal_module->fs_info.fsal_trace) {
 		rc = enable_log_facility(myname);
 		if (rc == 0)
 			return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -236,7 +217,7 @@ static fsal_status_t init_config(struct fsal_module *fsal_hdl,
  */
 MODULE_INIT void gpfs_init(void)
 {
-	struct fsal_module *myself = &GPFS.fsal;
+	struct fsal_module *myself = &GPFS;
 
 	if (register_fsal(myself, myname, FSAL_MAJOR_VERSION,
 			  FSAL_MINOR_VERSION, FSAL_ID_GPFS) != 0) {
@@ -263,6 +244,6 @@ MODULE_FINI void gpfs_unload(void)
 {
 	release_log_facility(myname);
 
-	if (unregister_fsal(&GPFS.fsal) != 0)
+	if (unregister_fsal(&GPFS) != 0)
 		fprintf(stderr, "GPFS module failed to unregister");
 }
