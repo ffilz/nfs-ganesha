@@ -1285,6 +1285,14 @@ fsal_status_t fsal_rename(struct fsal_obj_handle *dir_src,
 		goto out;
 	}
 
+	/* Make sure the source file is closed since rename an
+	 * open file is not permitted in FSAL RGW. In object store
+	 * there is no inode, name is the key to the object.
+	 */
+	if (pnfs_fsal[FSAL_ID_RGW]) {
+		fsal_status = fsal_close(lookup_src);
+	}
+
 	/* Don't allow rename of an object as parent of itself */
 	if (dir_dest == lookup_src) {
 		fsal_status = fsalstat(ERR_FSAL_INVAL, 0);
