@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "edfb8661_09b8dcd5",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2018-03-09T16:41:30Z",
+      "side": 1,
+      "message": "get/put are commonly used for ref/unref or ref/rele, those other terms would have been fine from the beginning, but I don\u0027t want to change the meaning of these now;  Use a different notation for putting a DRC on a queue",
+      "parentUuid": "741c96f8_5cc111a2",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e04ef61a_61bc0f95",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "d0c8799a_bd4da4ce",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2018-03-09T16:41:30Z",
+      "side": 1,
+      "message": "All refcounting in nfs-ganesha and ntirpc today have (or think they have) an invariant that objects that are reachable must have a refcnt of at least 1 (sometimes I called that the sentinel refcnt).  I believed that the recycle drc logic maintained this, but if not, I\u0027d like us to fix the refcnting to be at least 1 whenever a DRC object is reachable, with the corollary that when the refcnt on an object reaches one after previously being greater than 1, it can and should be really freed.",
+      "parentUuid": "0a8657fa_2f210223",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19e3ca0f_993dbf0f",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -142,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "a1d19ec7_623380a2",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2018-03-09T16:41:30Z",
+      "side": 1,
+      "message": "ok, but see my more detailed comment on nomenclature of put and get in this module",
+      "parentUuid": "940591b4_0779070f",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "395d3966_fc2f35ab",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -171,6 +225,24 @@
       "side": 1,
       "message": "Earlier the refcnt of the dupreq wasn\u0027t protected. Now, with this change the refcnt of the dupreq will always be protected with the tree lock. Here, as part of rele we want to decrement the refcnt but not release the object back to the cache.",
       "parentUuid": "395d3966_fc2f35ab",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2592eacc_34d8eaea",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1425,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2018-03-09T16:41:30Z",
+      "side": 1,
+      "message": "as long as that\u0027s consistent (and I think that is intended, after much older changes by Malahal), that\u0027s fine",
+      "parentUuid": "c5e65ad0_e2fddfc1",
       "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
