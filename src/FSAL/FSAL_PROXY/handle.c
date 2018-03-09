@@ -1741,7 +1741,9 @@ static fsal_status_t pxy_link(struct fsal_obj_handle *obj_hdl,
 
 static bool xdr_readdirres(XDR *x, nfs_resop4 *rdres)
 {
-	return xdr_nfs_resop4(x, rdres) && xdr_nfs_resop4(x, rdres + 1);
+	return xdr_nfs_resop4(x, rdres) &&
+		xdr_nfs_resop4(x, rdres + 1) &&
+		xdr_nfs_resop4(x, rdres + 2);
 }
 
 /*
