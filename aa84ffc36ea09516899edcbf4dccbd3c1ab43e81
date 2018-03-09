@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "741c96f8_5cc111a2",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1013053
+      },
+      "writtenOn": "2018-03-09T16:32:43Z",
+      "side": 1,
+      "message": "I added functions which will exactly do as the name suggests. Put will return it back to the cache and not unref while ref_drc/unref_drc will increment/decrement the ref.",
+      "parentUuid": "26c67bed_4dcf137c",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e04ef61a_61bc0f95",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-11T08:32:00Z",
       "side": 1,
       "message": "why would we have a routine called \"put\" that assumes refcnt is 0?",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3407cfcb_e4d1ac53",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1013053
+      },
+      "writtenOn": "2018-03-09T16:32:43Z",
+      "side": 1,
+      "message": "I wanted put to blindly return the object back to the cache (which means the object refcnt should be 0).",
+      "parentUuid": "e04ef61a_61bc0f95",
       "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0a8657fa_2f210223",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1013053
+      },
+      "writtenOn": "2018-03-09T16:32:43Z",
+      "side": 1,
+      "message": "Because put will only be called on the object when the refcnt reaches 0.",
+      "parentUuid": "a04b2d6a_6071fa30",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19e3ca0f_993dbf0f",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "940591b4_0779070f",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1013053
+      },
+      "writtenOn": "2018-03-09T16:32:43Z",
+      "side": 1,
+      "message": "We do not want to release the drc back to the cache here but just unref it. I made the intention explicit. Sorry, if that\u0027s confusing.",
+      "parentUuid": "19e3ca0f_993dbf0f",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "395d3966_fc2f35ab",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2017-12-11T08:32:00Z",
       "side": 1,
       "message": "why is this better open coded?",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5e65ad0_e2fddfc1",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1425,
+      "author": {
+        "id": 1013053
+      },
+      "writtenOn": "2018-03-09T16:32:43Z",
+      "side": 1,
+      "message": "Earlier the refcnt of the dupreq wasn\u0027t protected. Now, with this change the refcnt of the dupreq will always be protected with the tree lock. Here, as part of rele we want to decrement the refcnt but not release the object back to the cache.",
+      "parentUuid": "395d3966_fc2f35ab",
       "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
