@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e7dd677_cdc98e7e",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-03-09T12:22:10Z",
+      "side": 1,
+      "message": "I think the above stanza is probably wrong. Why do we want to break out of the loop here just because the offset we\u0027re reading from is 0? This causes noticeable breakage: READ replies with no data in them when reading from the start of the file. I think we can just remove the \"else if\" stanza here.",
+      "revId": "82148ac99a6c835f3abc053cbf561f6c297cd484",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
