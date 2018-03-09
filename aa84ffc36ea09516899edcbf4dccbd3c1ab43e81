@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6fec0a57_f1abef5a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1013053
+      },
+      "writtenOn": "2018-03-09T17:48:10Z",
+      "side": 1,
+      "message": "I can rename nfs_dupreq_put_drc to nfs_dupreq_recycle_drc.",
+      "parentUuid": "edfb8661_09b8dcd5",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e04ef61a_61bc0f95",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "All refcounting in nfs-ganesha and ntirpc today have (or think they have) an invariant that objects that are reachable must have a refcnt of at least 1 (sometimes I called that the sentinel refcnt).  I believed that the recycle drc logic maintained this, but if not, I\u0027d like us to fix the refcnting to be at least 1 whenever a DRC object is reachable, with the corollary that when the refcnt on an object reaches one after previously being greater than 1, it can and should be really freed.",
       "parentUuid": "0a8657fa_2f210223",
+      "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a417fb84_b574e8f8",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1013053
+      },
+      "writtenOn": "2018-03-09T17:48:10Z",
+      "side": 1,
+      "message": "drc_free_expired is freeing drcs only if the refcnt \u003d 0. I can initialize it to 3 if you would want to keep it consistent throughout.",
+      "parentUuid": "d0c8799a_bd4da4ce",
       "revId": "aa84ffc36ea09516899edcbf4dccbd3c1ab43e81",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
