@@ -982,12 +982,14 @@ dupreq_status_t nfs_dupreq_start(nfs_request_t *reqnfs,
 	dupreq_status_t status = DUPREQ_SUCCESS;
 	dupreq_entry_t *dv = NULL, *dk = NULL;
 	drc_t *drc;
-	enum drc_type dtype = get_drc_type(req);
+
+	if (!(reqnfs->funcdesc->dispatch_behaviour & CAN_BE_DUP))
+		goto no_cache;
 
 	if (nfs_param.core_param.drc.disabled)
 		goto no_cache;
 
-	switch (dtype) {
+	switch (get_drc_type(req)) {
 	case DRC_TCP_V4:
 		if (reqnfs->funcdesc->service_function == nfs4_Compound) {
 			if (!nfs_dupreq_v4_cacheable(reqnfs)) {
@@ -1002,11 +1004,8 @@ dupreq_status_t nfs_dupreq_start(nfs_request_t *reqnfs,
 	default:
 		/* likewise for other protocol requests we may not or choose not
 		 * to cache */
-		if (!(reqnfs->funcdesc->dispatch_behaviour & CAN_BE_DUP))
-			goto no_cache;
 		break;
 	}
-
 
 	drc = nfs_dupreq_get_drc(req);
 	dk = alloc_dupreq();
