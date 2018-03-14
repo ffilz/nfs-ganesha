@@ -151,7 +151,7 @@ MODULE_INIT void glusterfs_init(void)
 	PTHREAD_MUTEX_init(&GlusterFS.lock, NULL);
 	glist_init(&GlusterFS.fs_obj);
 
-	LogDebug(COMPONENT_FSAL, "FSAL Gluster initialized");
+	LogDebug(COMPONENT_FSAL, "FSAL Gluster Initialized");
 }
 
 MODULE_FINI void glusterfs_unload(void)
