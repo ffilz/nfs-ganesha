@@ -53,48 +53,70 @@ enum drc_type {
 #define DRC_FLAG_ADDR 0x0004
 #define DRC_FLAG_PORT 0x0008
 #define DRC_FLAG_LOCKED 0x0010
-#define DRC_FLAG_RECYCLE 0x0020
-#define DRC_FLAG_RELEASE 0x0040
+#define DRC_FLAG_UNLOCK 0x0020
+#define DRC_FLAG_RECYCLE 0x0040
+#define DRC_FLAG_RELEASE 0x0080
+
+typedef struct drc_lane {
+	CACHE_PAD(0);
+	pthread_spinlock_t sp;
+	struct rbtree_x xt;
+	TAILQ_HEAD(drc_tailq, dupreq_entry) dupreq_q;
+	TAILQ_HEAD(drc_freeq, dupreq_entry) dupreq_free_q;
+	uint32_t refcnt; /* call path refs */
+	uint32_t size;
+	uint32_t nfree;
+	uint32_t allocs;
+	uint32_t recycles;
+} drc_lane_t;
 
 typedef struct drc {
 	enum drc_type type;
-	struct rbtree_x xt;
-	/* Define the tail queue */
-	TAILQ_HEAD(drc_tailq, dupreq_entry) dupreq_q;
-	pthread_mutex_t mtx;
 	uint32_t npart;
+	uint32_t nlane;
 	uint32_t cachesz;
-	uint32_t size;
 	uint32_t maxsize;
-	uint32_t hiwat;
+	uint32_t lane_max;
+	uint32_t lane_hiwat;
 	uint32_t flags;
-	uint32_t refcnt; /* call path refs */
-	uint32_t retwnd;
+	int32_t retwnd;
 	union {
 		struct {
 			sockaddr_t addr;
 			struct opr_rbtree_node recycle_k;
-
 			TAILQ_ENTRY(drc) recycle_q; /* XXX drc */
 			time_t recycle_time;
 			uint64_t hk; /* hash key */
 		} tcp;
 	} d_u;
+	drc_lane_t lanes[];
 } drc_t;
 
+#define drc_idx_of_scalar(drc, k) ((k)%((drc)->nlane))
+#define drc_lane_of_ix(drc, ix) ((drc)->lanes+(ix))
+#define drc_lane_of_scalar(drc, k) \
+	(drc_lane_of_ix((drc), drc_idx_of_scalar((drc), (k))))
+
 typedef enum dupreq_state {
-	DUPREQ_START = 0,
+	DUPREQ_INIT = 0,
+	DUPREQ_START,
 	DUPREQ_COMPLETE,
 	DUPREQ_DELETED
 } dupreq_state_t;
+
+#define DV_FLAG_NONE      0x0000
+#define DV_FLAG_INUSE     0x0001
+#define DV_FLAG_FREELIST  0x0002
+#define DV_FLAG_DESTROYED 0x0004
 
 struct dupreq_entry {
 	struct opr_rbtree_node rbt_k;
 	/* Define the tail queue */
 	TAILQ_ENTRY(dupreq_entry) fifo_q;
-	pthread_mutex_t mtx;
+	pthread_spinlock_t sp;
 	struct {
 		drc_t *drc;
+		drc_lane_t *lane;
 		sockaddr_t addr;
 		struct {
 			uint32_t rq_xid;
@@ -106,9 +128,9 @@ struct dupreq_entry {
 	} hin;
 	uint64_t hk;		/* hash key */
 	dupreq_state_t state;
+	uint32_t flags;
 	uint32_t refcnt;
 	nfs_res_t *res;
-	time_t timestamp;
 };
 
 typedef struct dupreq_entry dupreq_entry_t;
@@ -117,7 +139,7 @@ extern pool_t *nfs_res_pool;
 
 static inline nfs_res_t *alloc_nfs_res(void)
 {
-	return pool_alloc(nfs_res_pool);
+	return (nfs_res_t *) pool_alloc(nfs_res_pool);
 }
 
 static inline void free_nfs_res(nfs_res_t *res)
@@ -135,11 +157,7 @@ typedef enum dupreq_status {
 
 void dupreq2_pkginit(void);
 void dupreq2_pkgshutdown(void);
-
-drc_t *drc_get_tcp_drc(struct svc_req *);
-void drc_release_tcp_drc(drc_t *);
-void nfs_dupreq_put_drc(drc_t *drc, uint32_t flags);
-
+void nfs_dupreq_dispose_drc(drc_t *);
 dupreq_status_t nfs_dupreq_start(nfs_request_t *,
 				 struct svc_req *);
 dupreq_status_t nfs_dupreq_finish(struct svc_req *, nfs_res_t *);
