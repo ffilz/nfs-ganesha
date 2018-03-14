@@ -24,7 +24,7 @@ set(GTEST_LIBRARIES
   ${UNITTEST_LIBS}
   ${LTTNG_LIBRARIES}
   ${LTTNG_CTL_LIBRARIES}
-  )
+)
 
 # generic test
 set(test_example_SRCS
@@ -174,6 +174,7 @@ add_sanitizers(test_rbt)
 
 target_link_libraries(test_rbt
   ${GTEST_LIBRARIES}
+  ${GPERFTOOLS_LIBRARIES}
   )
 set_target_properties(test_rbt PROPERTIES COMPILE_FLAGS
   "${UNITTEST_CXX_FLAGS}")
@@ -192,7 +193,6 @@ target_link_libraries(test_getattrs_latency
 set_target_properties(test_getattrs_latency PROPERTIES COMPILE_FLAGS
   "${UNITTEST_CXX_FLAGS}")
 
-
 set(test_close_latency_SRCS
   test_close_latency.cc
   )
@@ -206,3 +206,20 @@ target_link_libraries(test_close_latency
   )
 set_target_properties(test_close_latency PROPERTIES COMPILE_FLAGS
   "${UNITTEST_CXX_FLAGS}")
+
+set(test_drc_SRCS
+  test_drc.cc
+  )
+
+add_executable(test_drc
+  ${test_drc_SRCS})
+add_sanitizers(test_drc)
+
+target_link_libraries(test_drc
+  ${GTEST_LIBRARIES}
+  ${GPERFTOOLS_LIBRARIES}
+  )
+
+set_target_properties(test_drc PROPERTIES COMPILE_FLAGS
+  "${UNITTEST_CXX_FLAGS}"
+  )
