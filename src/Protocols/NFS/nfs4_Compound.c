@@ -684,6 +684,7 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		if (i > 0 && argarray[i].argop == NFS4_OP_DESTROY_SESSION) {
 			bool session_compare;
 			bool bad_pos;
+			log_levels_t loglevel = NIV_DEBUG;
 
 			session_compare = memcmp(
 			    argarray[0].nfs_argop4_u.opsequence.sa_sessionid,
@@ -692,9 +693,10 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			    NFS4_SESSIONID_SIZE) == 0;
 
 			bad_pos = session_compare && i != (argarray_len - 1);
+			if (unlikely(bad_pos))
+				loglevel = NIV_INFO;
 
-			LogAtLevel(COMPONENT_SESSIONS,
-				   bad_pos ? NIV_INFO : NIV_DEBUG,
+			LogAtLevel(COMPONENT_SESSIONS, loglevel,
 				   "DESTROY_SESSION in position %u out of 0-%"
 				   PRIi32 " %s is %s",
 				   i, argarray_len - 1, session_compare
