@@ -179,6 +179,8 @@ struct entry_export_map {
 #define MDCACHE_DIR_POPULATED FSAL_UP_INVALIDATE_DIR_POPULATED
 /** The directory chunks are considered valid */
 #define MDCACHE_TRUST_DIR_CHUNKS FSAL_UP_INVALIDATE_DIR_CHUNKS
+/** The fs locaitons are considered calid */
+#define MDCACHE_TRUST_FS_LOCATIONS FSAL_UP_INVALIDATE_FS_LOCATIONS
 /** The entry has been removed, but not unhashed due to state */
 static const uint32_t MDCACHE_UNREACHABLE = 0x100;
 
@@ -246,6 +248,8 @@ struct mdcache_fsal_obj_handle {
 	time_t attr_time;
 	/** Time at which we last refreshed acl. */
 	time_t acl_time;
+	/** Time at which we last refreshed fs locations */
+	time_t fs_locations_time;
 	/** New style LRU link */
 	mdcache_lru_t lru;
 	/** Exports per entry (protected by attr_lock) */
@@ -709,19 +713,33 @@ mdc_fixup_md(mdcache_entry_t *entry, struct attrlist *attrs)
 		return;
 	}
 
+	if (attrs->request_mask & ATTR4_FS_LOCATIONS &&
+		attrs->fs_locations != NULL) {
+		flags |= MDCACHE_TRUST_FS_LOCATIONS;
+	}
+
+	time_t cur_time = time(NULL);
+
 	/* Set the refresh time for the cache entry */
 	if (flags & MDCACHE_TRUST_ACL) {
 		if (entry->attrs.expire_time_attr > 0)
-			entry->acl_time = time(NULL);
+			entry->acl_time = cur_time;
 		else
 			entry->acl_time = 0;
 	}
 
 	if (flags & MDCACHE_TRUST_ATTRS) {
 		if (entry->attrs.expire_time_attr > 0)
-			entry->attr_time = time(NULL);
+			entry->attr_time = cur_time;
 		else
 			entry->attr_time = 0;
+	}
+
+	if (flags & MDCACHE_TRUST_FS_LOCATIONS) {
+		if (entry->attrs.expire_time_attr > 0)
+			entry->fs_locations_time = cur_time;
+		else
+			entry->fs_locations_time = 0;
 	}
 
 	/* We have just loaded the attributes from the FSAL. */
@@ -739,6 +757,9 @@ mdcache_test_attrs_trust(mdcache_entry_t *entry, attrmask_t mask)
 
 	if (mask & ~ATTR_ACL)
 		flags |= MDCACHE_TRUST_ATTRS;
+
+	if (mask & ATTR4_FS_LOCATIONS)
+		flags |= MDCACHE_TRUST_FS_LOCATIONS;
 
 	/* If any of the requested attributes are not valid, return. */
 	if (!test_mde_flags(entry, flags))

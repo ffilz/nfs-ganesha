@@ -966,7 +966,8 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status2)) {
 		/* Assume that the cache is bogus now */
 		atomic_clear_uint32_t_bits(&entry->mde_flags,
-				MDCACHE_TRUST_ATTRS | MDCACHE_TRUST_ACL);
+				MDCACHE_TRUST_ATTRS | MDCACHE_TRUST_ACL |
+				MDCACHE_TRUST_FS_LOCATIONS);
 		if (status2.major == ERR_FSAL_STALE)
 			kill_entry = true;
 	} else if (change == entry->attrs.change) {
@@ -1057,31 +1058,6 @@ static fsal_status_t mdcache_unlink(struct fsal_obj_handle *dir_hdl,
 		     "Unlink %s %p/%s (%p)",
 		     FSAL_IS_ERROR(status) ? "failed" : "done",
 		     parent, name, entry);
-
-	return status;
-}
-
-/**
- * @brief get fs_locations
- *
- * This function returns the fs locations for an object.
- *
- * @param[in] obj_hdl	Object to get fs locations for
- * @param[out] fs_locs	fs locations
- *
- * @return FSAL status
- */
-static fsal_status_t mdcache_fs_locations(struct fsal_obj_handle *obj_hdl,
-					  struct fs_locations4 *fs_locs)
-{
-	mdcache_entry_t *entry =
-		container_of(obj_hdl, mdcache_entry_t, obj_handle);
-	fsal_status_t status;
-
-	subcall(
-		status = entry->sub_handle->obj_ops.fs_locations(
-			entry->sub_handle, fs_locs)
-	       );
 
 	return status;
 }
@@ -1462,7 +1438,6 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->link = mdcache_link;
 	ops->rename = mdcache_rename;
 	ops->unlink = mdcache_unlink;
-	ops->fs_locations = mdcache_fs_locations;
 	ops->seek = mdcache_seek;
 	ops->io_advise = mdcache_io_advise;
 	ops->close = mdcache_close;
