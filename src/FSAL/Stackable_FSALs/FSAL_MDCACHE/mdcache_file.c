@@ -362,7 +362,8 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 	fsal_prepare_attrs(&attrs,
 			   (op_ctx->fsal_export->exp_ops.fs_supported_attrs(
 							op_ctx->fsal_export)
-				& ~ATTR_ACL) | ATTR_RDATTR_ERR);
+				& ~(ATTR_ACL | ATTR4_FS_LOCATIONS)) |
+				ATTR_RDATTR_ERR);
 
 	subcall(
 		status = mdc_parent->sub_handle->obj_ops.open2(
