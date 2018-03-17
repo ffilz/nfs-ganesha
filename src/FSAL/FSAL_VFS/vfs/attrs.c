@@ -37,6 +37,7 @@
 #include "attrs.h"
 #include "nfs4_acls.h"
 
+#ifdef ENABLE_VFS_DEBUG_ACL
 struct vfs_acl_entry {
 	struct gsh_buffdesc	fa_key;		/**< Key for tree */
 	struct avltree_node	fa_node;	/**< AVL tree node */
@@ -123,11 +124,19 @@ void vfs_acl_release(struct gsh_buffdesc *key)
 	avltree_remove(&fa_entry->fa_node, &vfs_acl_tree);
 	gsh_free(fa_entry);
 }
+#endif /* ENABLE_VFS_DEBUG_ACL */
 
 fsal_status_t vfs_sub_getattrs(struct vfs_fsal_obj_handle *vfs_hdl,
 			       int fd, attrmask_t request_mask,
 			       struct attrlist *attrib)
 {
+	fsal_status_t fsal_st = {ERR_FSAL_NO_ERROR, 0};
+
+#ifdef ENABLE_VFS_DEBUG_ACL
+	if (!FSAL_TEST_MASK(request_mask, ATTR_ACL)) {
+		goto fetch_fslocations;
+	}
+
 	fsal_acl_status_t status;
 	struct vfs_acl_entry *fa;
 	fsal_acl_data_t acldata;
@@ -175,6 +184,23 @@ fsal_status_t vfs_sub_getattrs(struct vfs_fsal_obj_handle *vfs_hdl,
 	attrib->acl = acl;
 	FSAL_SET_MASK(attrib->valid_mask, ATTR_ACL);
 
+fetch_fslocations:
+#endif /* ENABLE_VFS_DEBUG_ACL */
+
+	if (!FSAL_TEST_MASK(request_mask, ATTR4_FS_LOCATIONS)) {
+		LogDebug(COMPONENT_FSAL, "fs locations not requested");
+		goto out;
+	}
+
+	fsal_st = vfs_get_fs_locations(vfs_hdl, attrib);
+	if (FSAL_IS_ERROR(fsal_st)) {
+		/* No error should be returned here, any major error should have
+		 * been caught before this */
+		LogEvent(COMPONENT_FSAL, "Could not get the fs locations for "
+			 "vfs handle: %p", vfs_hdl);
+	}
+
+out:
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
@@ -182,6 +208,7 @@ fsal_status_t vfs_sub_setattrs(struct vfs_fsal_obj_handle *vfs_hdl,
 			       int fd, attrmask_t request_mask,
 			       struct attrlist *attrib)
 {
+#ifdef ENABLE_VFS_DEBUG_ACL
 	struct vfs_acl_entry *fa;
 
 	if (!FSAL_TEST_MASK(request_mask, ATTR_ACL) || !attrib || !attrib->acl)
@@ -201,6 +228,7 @@ fsal_status_t vfs_sub_setattrs(struct vfs_fsal_obj_handle *vfs_hdl,
 		vfs_hdl->mode = attrib->mode;
 
 	FSAL_SET_MASK(attrib->valid_mask, ATTR_ACL);
+#endif /* ENABLE_VFS_DEBUG_ACL */
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }

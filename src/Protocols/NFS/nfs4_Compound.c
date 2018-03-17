@@ -694,7 +694,7 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			bad_pos = session_compare && i != (argarray_len - 1);
 
 			LogAtLevel(COMPONENT_SESSIONS,
-				   bad_pos ? NIV_INFO : NIV_DEBUG,
+				   (bad_pos ? NIV_INFO : NIV_DEBUG),
 				   "DESTROY_SESSION in position %u out of 0-%"
 				   PRIi32 " %s is %s",
 				   i, argarray_len - 1, session_compare
