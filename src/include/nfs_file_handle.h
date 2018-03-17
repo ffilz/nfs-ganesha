@@ -39,6 +39,7 @@
 #include "sal_data.h"
 #include "export_mgr.h"
 #include "nfs_fh.h"
+#include "nfs_proto_data.h"
 
 /**
  * @brief Get the actual size of a v3 handle based on the sized fsopaque

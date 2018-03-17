@@ -292,7 +292,7 @@ int nfs4_Fattr_To_FSAL_attr(struct attrlist *, fattr4 *, compound_data_t *);
 int nfs4_Fattr_To_fsinfo(fsal_dynamicfsinfo_t *, fattr4 *);
 
 int nfs4_Fattr_Fill_Error(compound_data_t *, fattr4 *, nfsstat4,
-			  struct bitmap4 *);
+			  struct bitmap4 *, struct xdr_attrs_args *args);
 
 int nfs4_FSALattr_To_Fattr(struct xdr_attrs_args *, struct bitmap4 *,
 			   fattr4 *);
@@ -309,4 +309,14 @@ void nfs4_pathname4_alloc(pathname4 *, char *);
 
 void nfs4_pathname4_free(pathname4 *);
 
+/* fs locations related functions */
+/*
+fsal_fs_locations_t *nfs4_fs_locations_alloc();
+void nfs4_fs_locations_free(fsal_fs_locations_t *);
+void nfs4_fs_locations_get_ref(fsal_fs_locations_t *);
+void nfs4_fs_locations_release(fsal_fs_locations_t *);
+
+fsal_fs_locations_t *nfs4_fs_locations_new(const char *path,
+					   const char *locations);
+*/
 #endif				/* _NFS_PROTO_TOOLS_H */
