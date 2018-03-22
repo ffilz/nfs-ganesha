@@ -149,35 +149,35 @@ void nfs_rpc_cb_pkgshutdown(void)
 nc_type nfs_netid_to_nc(const char *netid)
 {
 	if (!strncmp(netid, netid_nc_table[_NC_TCP6].netid,
-		     netid_nc_table[_NC_TCP6].netid_len))
+		     netid_nc_table[_NC_TCP6].netid_len+1))
 		return _NC_TCP6;
 
 	if (!strncmp(netid, netid_nc_table[_NC_TCP].netid,
-		     netid_nc_table[_NC_TCP].netid_len))
+		     netid_nc_table[_NC_TCP].netid_len+1))
 		return _NC_TCP;
 
 	if (!strncmp(netid, netid_nc_table[_NC_UDP6].netid,
-		     netid_nc_table[_NC_UDP6].netid_len))
+		     netid_nc_table[_NC_UDP6].netid_len+1))
 		return _NC_UDP6;
 
 	if (!strncmp(netid, netid_nc_table[_NC_UDP].netid,
-		     netid_nc_table[_NC_UDP].netid_len))
+		     netid_nc_table[_NC_UDP].netid_len+1))
 		return _NC_UDP;
 
 	if (!strncmp(netid, netid_nc_table[_NC_RDMA6].netid,
-		     netid_nc_table[_NC_RDMA6].netid_len))
+		     netid_nc_table[_NC_RDMA6].netid_len+1))
 		return _NC_RDMA6;
 
 	if (!strncmp(netid, netid_nc_table[_NC_RDMA].netid,
-		     netid_nc_table[_NC_RDMA].netid_len))
+		     netid_nc_table[_NC_RDMA].netid_len+1))
 		return _NC_RDMA;
 
 	if (!strncmp(netid, netid_nc_table[_NC_SCTP6].netid,
-		     netid_nc_table[_NC_SCTP6].netid_len))
+		     netid_nc_table[_NC_SCTP6].netid_len+1))
 		return _NC_SCTP6;
 
 	if (!strncmp(netid, netid_nc_table[_NC_SCTP].netid,
-		     netid_nc_table[_NC_SCTP].netid_len))
+		     netid_nc_table[_NC_SCTP].netid_len+1))
 		return _NC_SCTP;
 
 	return _NC_ERR;

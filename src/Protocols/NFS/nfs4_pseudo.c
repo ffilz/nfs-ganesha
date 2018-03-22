@@ -231,9 +231,9 @@ retry:
 		return false;
 	}
 
-	if (strncmp(op_ctx->ctx_export->fsal_export->exp_ops.get_name(
+	if (strcmp(op_ctx->ctx_export->fsal_export->exp_ops.get_name(
 				op_ctx->ctx_export->fsal_export),
-			"PSEUDO", 6) != 0) {
+			"PSEUDO") != 0) {
 		/* Only allowed to create directories on FSAL_PSEUDO */
 		LogCrit(COMPONENT_EXPORT,
 			"BUILDING PSEUDOFS: Export_Id %d Path %s Pseudo Path %s LOOKUP %s failed with %s (can't create directory on non-PSEUDO FSAL)",

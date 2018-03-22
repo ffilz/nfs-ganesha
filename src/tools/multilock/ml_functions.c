@@ -321,7 +321,7 @@ char *get_client(char *line, struct client **pclient, bool create,
 		if (strlen(client->c_name) != len)
 			continue;
 
-		if (strncmp(t, client->c_name, len) == 0)
+		if (strncmp(t, client->c_name, len+1) == 0)
 			break;
 	}
 

@@ -370,7 +370,7 @@ static fsal_status_t lookup_with_fd(struct vfs_fsal_obj_handle *parent_hdl,
 				r - fullpath_length);
 			proclnk[pseudo_length + (r - fullpath_length)] = '\0';
 			spath = proclnk;
-		} else if (strncmp(path, fspath, strlen(fspath)) == 0) {
+		} else if (strncmp(path, fspath, strlen(fspath)+1) == 0) {
 			spath += strlen(fspath);
 		}
 		hdl->u.directory.path = gsh_strdup(spath);

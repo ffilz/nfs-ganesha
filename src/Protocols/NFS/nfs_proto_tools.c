@@ -836,7 +836,7 @@ static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)
 		for (i = 0; i < FSAL_ACE_SPECIAL_EVERYONE; i++) {
 			if (strncmp
 			    (buffer, whostr_2_type_map[i].string,
-			     strlen(buffer)) == 0) {
+			     whostr_2_type_map[i].stringlen+1) == 0) {
 				who = whostr_2_type_map[i].type;
 				break;
 			}

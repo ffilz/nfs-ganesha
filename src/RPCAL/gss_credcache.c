@@ -472,9 +472,9 @@ static int realm_and_service_match(krb5_principal p, const char *realm,
 		return 0;
 
 	if ((strlen(realm) == p->realm.length)
-	    && (strncmp(realm, p->realm.data, p->realm.length) == 0)
+	    && (strncmp(realm, p->realm.data, p->realm.length+1) == 0)
 	    && (strlen(service) == p->data[0].length)
-	    && (strncmp(service, p->data[0].data, p->data[0].length) == 0))
+	    && (strncmp(service, p->data[0].data, p->data[0].length+1) == 0))
 		return 1;
 
 	return 0;
