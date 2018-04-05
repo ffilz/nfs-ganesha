@@ -1455,7 +1455,6 @@ out:
 	return status;
 }
 
-#ifdef F_OFD_GETLK
 /**
  * @brief Perform a lock operation
  *
@@ -1509,19 +1508,30 @@ fsal_status_t vfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 		     request_lock->lock_length);
 
 	if (lock_op == FSAL_OP_LOCKT) {
+		#ifdef F_OFD_GETLK
 		fcntl_comm = F_OFD_GETLK;
+		#else
+		fcntl_comm = F_GETLK;
+		#endif
 		/* We may end up using global fd, don't fail on a deny mode */
 		bypass = true;
 		openflags = FSAL_O_ANY;
 	} else if (lock_op == FSAL_OP_LOCK) {
+		#ifdef F_OFD_GETLK
 		fcntl_comm = F_OFD_SETLK;
-
+		#else
+		fcntl_comm = F_SETLK;
+		#endif
 		if (request_lock->lock_type == FSAL_LOCK_R)
 			openflags = FSAL_O_READ;
 		else if (request_lock->lock_type == FSAL_LOCK_W)
 			openflags = FSAL_O_WRITE;
 	} else if (lock_op == FSAL_OP_UNLOCK) {
+		#ifdef F_OFD_GETLK
 		fcntl_comm = F_OFD_SETLK;
+		#else
+		fcntl_comm = F_SETLK;
+		#endif
 		openflags = FSAL_O_ANY;
 	} else {
 		LogDebug(COMPONENT_FSAL,
@@ -1647,7 +1657,6 @@ fsal_status_t vfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 
 	return fsalstat(posix2fsal_error(retval), retval);
 }
-#endif
 
 /**
  * @brief Get attributes
