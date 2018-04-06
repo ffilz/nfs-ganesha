@@ -38,9 +38,6 @@ if(RADOS_URLS)
     ${config_parsing_STAT_SRCS}
     conf_url_rados.c
     )
-
-  include_directories(${RADOS_INCLUDE_DIR})
-  target_link_libraries(${RADOS_LIBRARIES})
 endif(RADOS_URLS)
 
 add_library(config_parsing STATIC
@@ -48,6 +45,12 @@ add_library(config_parsing STATIC
   ${BISON_ConfigParser_OUTPUTS}
   ${FLEX_ConfigScanner_OUTPUTS}
 )
+
+if(RADOS_URLS)
+  include_directories(config_parsing ${RADOS_INCLUDE_DIR})
+  target_link_libraries(config_parsing ${RADOS_LIBRARIES})
+endif(RADOS_URLS)
+
 add_sanitizers(config_parsing)
 
 ########### next target ###############
