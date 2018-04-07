@@ -36,8 +36,7 @@ check_library_exists(
 # the stdint and stdbool includes are required (silly Cmake)
 check_include_files("stdint.h;stdbool.h;wbclient.h" WBCLIENT_H)
 
-# XXX this check is doing the heavy lifting
-LIST(APPEND CMAKE_REQUIRED_LIBRARIES ${WBCLIENT_LIBRARIES})
+# now see if this is a winbind 4 header
 if(WBCLIENT_H)
   check_c_source_compiles("
 /* do the enum */
@@ -53,9 +52,10 @@ int main(void)
 }" WBCLIENT4_H)
 endif(WBCLIENT_H)
 
-if(WBCLIENT_LIB_OK AND WBCLIENT4_H)
+if(WBCLIENT4_H)
   set(WBCLIENT_FOUND 1)
+  LIST(APPEND CMAKE_REQUIRED_LIBRARIES ${WBCLIENT_LIBRARIES})
   message(STATUS "Found Winbind4 client: ${WBCLIENT_LIB}")
-else(WBCLIENT_LIB_OK AND WBCLIENT4_H)
+else(WBCLIENT4_H)
   message(STATUS "Winbind4 client not found ${SAMBA4_PREFIX}/lib")
-endif(WBCLIENT_LIB_OK AND WBCLIENT4_H)
+endif(WBCLIENT4_H)
