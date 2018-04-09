@@ -1205,8 +1205,13 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	#endif
 
 	do {
+		#ifdef __FreeBSD__
+		nread = vfs_readents(dirfd, buf, BUF_SIZE, &seekloc);
+		baseloc = seekloc;
+		#else
 		baseloc = seekloc;
 		nread = vfs_readents(dirfd, buf, BUF_SIZE, &seekloc);
+		#endif
 		if (nread < 0) {
 			retval = errno;
 			status = posix2fsal_status(retval);
