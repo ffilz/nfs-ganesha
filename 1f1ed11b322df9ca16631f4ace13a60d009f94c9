@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51c3b0a8_b005c81f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-04-09T19:53:25Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nOn 32-core E5-2630, observed \u003e2.5M DRC retires/s w/2 threads (4.5M w/1 thread)",
+      "revId": "1f1ed11b322df9ca16631f4ace13a60d009f94c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60b6052d_e0d98889",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-04-09T19:53:25Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tdrc_lane_t *lane;\n+\tint code __attribute__ ((unused));",
+      "revId": "1f1ed11b322df9ca16631f4ace13a60d009f94c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f14bb37f_4c96a42d",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-04-09T19:53:25Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+\tint code __attribute__ ((unused));",
+      "revId": "1f1ed11b322df9ca16631f4ace13a60d009f94c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
