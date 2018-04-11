@@ -63,6 +63,7 @@
 #cmakedefine USE_FSAL_CEPH_STATX 1
 #cmakedefine USE_FSAL_CEPH_LL_DELEGATION 1
 #cmakedefine USE_FSAL_CEPH_LL_SYNC_INODE 1
+#cmakedefine USE_FSAL_CEPH_RECLAIM_RESET 1
 #cmakedefine USE_FSAL_RGW_MOUNT2 1
 #cmakedefine ENABLE_LOCKTRACE 1
 #cmakedefine SANITIZE_ADDRESS 1
