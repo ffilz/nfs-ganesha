@@ -204,6 +204,7 @@ int vfs_extract_fsid(vfs_file_handle_t *fh,
 int vfs_encode_dummy_handle(vfs_file_handle_t *fh,
 			    struct fsal_filesystem *fs)
 {
+#ifdef __PanFS__
 	struct v_fhandle *hdl = (struct v_fhandle *) fh->handle_data;
 	int rc;
 
@@ -227,13 +228,20 @@ int vfs_encode_dummy_handle(vfs_file_handle_t *fh,
 	LogVFSHandle(fh);
 
 	return 0;
+#else
+	return EINVAL;
+#endif
 }
 
 bool vfs_is_dummy_handle(vfs_file_handle_t *fh)
 {
+#ifdef __PanFS__
 	struct v_fhandle *hdl = (struct v_fhandle *) fh->handle_data;
 
 	return hdl->fh_fid.fid_reserved != 0;
+#else
+	return false;
+#endif
 }
 
 bool vfs_valid_handle(struct gsh_buffdesc *desc)
