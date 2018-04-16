@@ -64,10 +64,12 @@
 int nfs4_op_test_stateid(struct nfs_argop4 *op, compound_data_t *data,
 			 struct nfs_resop4 *resp)
 {
-	TEST_STATEID4args * const arg_TEST_STATEID4 __attribute__ ((unused))
-	    = &op->nfs_argop4_u.optest_stateid;
+	TEST_STATEID4args * const arg_TEST_STATEID4 =
+	    &op->nfs_argop4_u.optest_stateid;
 	TEST_STATEID4res * const res_TEST_STATEID4 =
 	    &resp->nfs_resop4_u.optest_stateid;
+	u_int nr_stateids, i;
+	state_t *state;
 
 	/* Lock are not supported */
 	resp->resop = NFS4_OP_TEST_STATEID;
@@ -78,9 +80,18 @@ int nfs4_op_test_stateid(struct nfs_argop4 *op, compound_data_t *data,
 		return res_TEST_STATEID4->tsr_status;
 	}
 
-	/* Do basic checks on a filehandle */
-	res_TEST_STATEID4->tsr_status =
-	    nfs4_sanity_check_FH(data, NO_FILE_TYPE, false);
+	nr_stateids = arg_TEST_STATEID4->ts_stateids.ts_stateids_len;
+	res_TEST_STATEID4->TEST_STATEID4res_u.tsr_resok4.tsr_status_codes.tsr_status_codes_val =
+		gsh_calloc(nr_stateids, sizeof(nfsstat4));
+
+	for (i = 0; i < nr_stateids; i++) {
+		res_TEST_STATEID4->TEST_STATEID4res_u.tsr_resok4.tsr_status_codes.tsr_status_codes_val[i] =
+			nfs4_Check_Stateid(&arg_TEST_STATEID4->ts_stateids.ts_stateids_val[i],
+					   NULL, &state, data, STATEID_NO_SPECIAL, 0, false, "TEST_STATEID");
+	}
+
+	res_TEST_STATEID4->TEST_STATEID4res_u.tsr_resok4.tsr_status_codes.tsr_status_codes_len =
+		nr_stateids;
 
 	return res_TEST_STATEID4->tsr_status;
 }				/* nfs41_op_lock */
@@ -95,5 +106,9 @@ int nfs4_op_test_stateid(struct nfs_argop4 *op, compound_data_t *data,
  */
 void nfs4_op_test_stateid_Free(nfs_resop4 *resp)
 {
-	/* Nothing to be done */
+	TEST_STATEID4res * const res_TEST_STATEID4 =
+	    &resp->nfs_resop4_u.optest_stateid;
+
+	if (res_TEST_STATEID4->TEST_STATEID4res_u.tsr_resok4.tsr_status_codes.tsr_status_codes_val)
+		gsh_free(res_TEST_STATEID4->TEST_STATEID4res_u.tsr_resok4.tsr_status_codes.tsr_status_codes_val);
 }
