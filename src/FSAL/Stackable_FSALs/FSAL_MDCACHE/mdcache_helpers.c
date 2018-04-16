@@ -513,7 +513,7 @@ void mdcache_dirent_invalidate_all(mdcache_entry_t *entry)
 
 	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_DIR_POPULATED);
 
-	atomic_set_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_CONTENT |
+	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_CONTENT |
 						    MDCACHE_TRUST_DIR_CHUNKS);
 }
 
