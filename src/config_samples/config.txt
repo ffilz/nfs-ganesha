@@ -44,8 +44,6 @@ NFS_CORE_PARAM {}
 
 	Bind_addr(IP4 addr, default 0.0.0.0)
 
-	* This eventually needs to support IPv6
-
 	NFS_Program(uint32, range 1 to INT32_MAX, default  100003)
 
 	MNT_Program(uint32, range 1 to INT32_MAX, default  100005)
