@@ -206,3 +206,18 @@ target_link_libraries(test_close_latency
   )
 set_target_properties(test_close_latency PROPERTIES COMPILE_FLAGS
   "${UNITTEST_CXX_FLAGS}")
+
+
+set(test_write2_latency_SRCS
+  test_write2_latency.cc
+  )
+
+add_executable(test_write2_latency
+  ${test_write2_latency_SRCS})
+add_sanitizers(test_write2_latency)
+
+target_link_libraries(test_write2_latency
+  ${GTEST_LIBRARIES}
+  )
+set_target_properties(test_write2_latency PROPERTIES COMPILE_FLAGS
+  "${UNITTEST_CXX_FLAGS}")
