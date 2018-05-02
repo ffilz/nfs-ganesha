@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2caed436_855ffe85",
+        "filename": "src/gtest/test_open2_latency.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-02T17:05:18Z",
+      "side": 1,
+      "message": "BIG and LOOP seem to be the same test?  Did I miss something?",
+      "revId": "cc4b99af7113c2b8e7ff12a5365d2b86e1a70d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c05f063_45585bee",
+        "filename": "src/gtest/test_open2_latency.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-02T17:05:18Z",
+      "side": 1,
+      "message": "Can we have one more test where the files are created using fsal_create() and then opened in non-create mode?  The timestamps should only include the open loop, not the create loop.  (I know, create is also done with open, but I\u0027m interested in the latency difference)  You should be able to replace either LOOP or BIG.",
+      "revId": "cc4b99af7113c2b8e7ff12a5365d2b86e1a70d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
