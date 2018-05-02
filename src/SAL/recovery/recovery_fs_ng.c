@@ -33,10 +33,18 @@ static void legacy_fs_db_migrate(void)
 	if (!ret && S_ISDIR(st.st_mode)) {
 		char pathbuf[PATH_MAX];
 		char *dname;
+		size_t len;
 
 		/* create empty tmpdir in same parent */
-		snprintf(pathbuf, sizeof(pathbuf), "%s.XXXXXX",
-			 v4_recov_link);
+		len = snprintf(pathbuf, sizeof(pathbuf), "%s.XXXXXX",
+				v4_recov_link);
+		if (len >= sizeof(v4_recov_link)) {
+			LogEvent(COMPONENT_CLIENTID,
+				"v4_recov_link pathname overflow (len=%zd)",
+				len);
+			return;
+		}
+
 		dname = mkdtemp(pathbuf);
 		if (!dname) {
 			LogEvent(COMPONENT_CLIENTID,
@@ -68,6 +76,7 @@ static void fs_ng_create_recov_dir(void)
 	int err;
 	char *newdir;
 	char host[NI_MAXHOST];
+	size_t len;
 
 	err = mkdir(NFS_V4_RECOV_ROOT, 0700);
 	if (err == -1 && errno != EEXIST) {
@@ -101,8 +110,13 @@ static void fs_ng_create_recov_dir(void)
 	snprintf(v4_recov_link, sizeof(v4_recov_link), "%s/%s/%s",
 		 NFS_V4_RECOV_ROOT, NFS_V4_RECOV_DIR, host);
 
-	snprintf(v4_recov_dir, sizeof(v4_recov_dir), "%s.XXXXXX",
-		 v4_recov_link);
+	len = snprintf(v4_recov_dir, sizeof(v4_recov_dir), "%s.XXXXXX",
+			v4_recov_link);
+	if (len >= sizeof(v4_recov_dir)) {
+		LogEvent(COMPONENT_CLIENTID, "v4_recov_dir overflow (len=%zd)",
+			 len);
+		return;
+	}
 
 	newdir = mkdtemp(v4_recov_dir);
 	if (newdir != v4_recov_dir) {
@@ -327,12 +341,18 @@ static void fs_ng_swap_recov_dir(void)
 	char old_pathbuf[PATH_MAX];
 	char tmp_link[PATH_MAX];
 	char *old_path;
+	size_t len;
 
 	/* save off the old link path so we can do some cleanup afterward */
 	old_path = realpath(v4_recov_link, old_pathbuf);
 
 	/* Make a new symlink at a temporary location, pointing to new dir */
-	snprintf(tmp_link, PATH_MAX, "%s.tmp", v4_recov_link);
+	len = snprintf(tmp_link, PATH_MAX, "%s.tmp", v4_recov_link);
+	if (len >= sizeof(tmp_link)) {
+		LogEvent(COMPONENT_CLIENTID,
+			 "tmp_link overflow (len=%zd)", len);
+		return;
+	}
 
 	/* unlink old symlink, if any */
 	ret = unlink(tmp_link);
