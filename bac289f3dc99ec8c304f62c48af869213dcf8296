@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c2f8838_890e6e6f",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-05-03T00:02:40Z",
+      "side": 1,
+      "message": "technically should be NAME_MAX + 1\n\nBut a base64 NFS4_FH should not use anywhere near NAME_MAX (do we run on anything with NAME_MAX less than 255?)\n\nWe should at most use like 171 bytes for base64 encoding of 128 byte file handle",
+      "revId": "bac289f3dc99ec8c304f62c48af869213dcf8296",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
