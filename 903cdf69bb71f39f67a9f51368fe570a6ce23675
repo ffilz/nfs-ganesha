@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd1bbc92_664a12b0",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-03T14:31:59Z",
+      "side": 1,
+      "message": "This needs an extra 1 for the null termination, according to the man page:\n\nTherefore, the size of dest must be at least strlen(dest)+n+1.",
+      "revId": "903cdf69bb71f39f67a9f51368fe570a6ce23675",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
