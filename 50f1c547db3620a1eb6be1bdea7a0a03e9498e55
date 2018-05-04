@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e218d117_2808754c",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-04T15:59:50Z",
+      "side": 1,
+      "message": "You should just be able to just remove the cast, since seconds is already uint64_t",
+      "revId": "50f1c547db3620a1eb6be1bdea7a0a03e9498e55",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
