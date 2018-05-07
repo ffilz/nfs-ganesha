@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce023b2f_6d31747c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-05-07T18:10:54Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \u003e\u003d since the test below is for \u003d\u003d",
+      "revId": "6face95fd8f06a38a6d63609189ca36eeae333c3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc5733cf_12aecb79",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-05-07T18:10:54Z",
+      "side": 1,
+      "message": "Technically this is just \"reached\" not exceeded... Could change to postincrement rather than preincrement (making that change would also make \u003e be the right test for above...)",
+      "revId": "6face95fd8f06a38a6d63609189ca36eeae333c3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
