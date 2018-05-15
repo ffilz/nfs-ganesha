@@ -1765,14 +1765,24 @@ mdcache_entry_t *mdcache_lru_get(void)
 /**
  * @brief Insert a new entry into the LRU.
  *
- * Entry is inserted into LRU of L1 queue.
+ * Entry is inserted the LRU.  For scans, insert into the MRU of L2, to avoid
+ * having entries recycled before they're used during readdir.  For everything
+ * else, insert into LRU of L1, so that a single ref promotes to the MRU of L1.
  *
- * @param [in] ntry  Entry to insert.
+ * @param [in] entry  Entry to insert.
+ * @param [in] reason Reason we're inserting
  */
-void mdcache_lru_insert(mdcache_entry_t *entry)
+void mdcache_lru_insert(mdcache_entry_t *entry, mdc_insert_reason_t reason)
 {
 	/* Enqueue. */
-	lru_insert_entry(entry, &LRU[entry->lru.lane].L1, LRU_LRU);
+	switch (reason) {
+	case MDC_INSERT_DEFAULT:
+		lru_insert_entry(entry, &LRU[entry->lru.lane].L1, LRU_LRU);
+		break;
+	case MDC_INSERT_SCAN:
+		lru_insert_entry(entry, &LRU[entry->lru.lane].L2, LRU_MRU);
+		break;
+	}
 }
 
 /**

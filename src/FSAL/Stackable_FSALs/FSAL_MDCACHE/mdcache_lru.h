@@ -142,13 +142,21 @@ extern pool_t *mdcache_entry_pool;
  */
 #define LRU_N_Q_LANES  17
 
+/**
+ * @brief Reason an entry is being inserted
+ */
+typedef enum {
+	MDC_INSERT_DEFAULT,	/**< Default insertion */
+	MDC_INSERT_SCAN		/**< Is being inserted by a scan */
+} mdc_insert_reason_t;
+
 fsal_status_t mdcache_lru_pkginit(void);
 fsal_status_t mdcache_lru_pkgshutdown(void);
 
 extern size_t open_fd_count;
 
 mdcache_entry_t *mdcache_lru_get(void);
-void mdcache_lru_insert(mdcache_entry_t *entry);
+void mdcache_lru_insert(mdcache_entry_t *entry, mdc_insert_reason_t reason);
 #define mdcache_lru_ref(e, f) _mdcache_lru_ref(e, f, __func__, __LINE__)
 fsal_status_t _mdcache_lru_ref(mdcache_entry_t *entry, uint32_t flags,
 			       const char *func, int line);
