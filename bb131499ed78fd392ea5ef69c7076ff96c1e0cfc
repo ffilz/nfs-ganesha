@@ -16,6 +16,24 @@
       "revId": "bb131499ed78fd392ea5ef69c7076ff96c1e0cfc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e20f7e77_3fcc4d76",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-15T18:46:24Z",
+      "side": 1,
+      "message": "Well, mdcache_lru.h isn\u0027t widely included, so I did it this way.  I don\u0027t have a strong opinion, but I was thinking keeping the new enum as limited scope as possible was useful.",
+      "parentUuid": "9a2ecdf4_ef2872b7",
+      "revId": "bb131499ed78fd392ea5ef69c7076ff96c1e0cfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
