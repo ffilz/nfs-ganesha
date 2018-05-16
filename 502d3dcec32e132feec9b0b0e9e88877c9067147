@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f152cb1b_a08ff13b",
+        "filename": "src/gtest/test_mknode_latency.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-16T12:39:32Z",
+      "side": 1,
+      "message": "Can we not do this in the root directory, but instead in a subdirectory like the other tests?  The reason I did this originally was that, if we run on a non-MEM FSAL, it will actually create all these objects in the real filesystem, and cleanup on failure is a lot easier if it\u0027s all in a subdir-per-test.  I know it complicates this test a bit, but I feel it\u0027s worth it.",
+      "revId": "502d3dcec32e132feec9b0b0e9e88877c9067147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
