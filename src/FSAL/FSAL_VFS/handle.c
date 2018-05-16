@@ -1195,12 +1195,14 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 		status = posix2fsal_status(retval);
 		goto out;
 	}
+	#ifndef __FreeBSD__
 	seekloc = lseek(dirfd, seekloc, SEEK_SET);
 	if (seekloc < 0) {
 		retval = errno;
 		status = posix2fsal_status(retval);
 		goto done;
 	}
+	#endif
 
 	do {
 		baseloc = seekloc;
