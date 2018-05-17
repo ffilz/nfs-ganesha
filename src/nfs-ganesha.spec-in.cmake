@@ -136,6 +136,7 @@ BuildRequires:	systemd-rpm-macros
 BuildRequires:	libcap-devel
 BuildRequires:	libblkid-devel
 BuildRequires:	libuuid-devel
+BuildRequires:	libwbclient-devel
 BuildRequires:	gcc-c++
 %if %{with system_ntirpc}
 BuildRequires: libntirpc-devel >= @NTIRPC_MIN_VERSION@
