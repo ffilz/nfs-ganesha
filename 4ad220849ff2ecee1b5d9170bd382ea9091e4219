@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea04b799_4389ea4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-05-18T13:32:02Z",
+      "side": 1,
+      "message": "Hmm, so that means no matter when a readdir happens, we don\u0027t promote the entries. That maybe actually makes sense, there\u0027s no commitment the client will do anything again with any of the entries so enumerated, and if it DOES, it will do something relatively quickly, promoting them at that point.\n\nSo basically if all you do is readdir, the entries will just live in L2, which seems fine. They are more prone to reaping than in L1 (assuming a good mix of entries in L1 and L2), but are done so in MRU order (from original scan, because they ALSO don\u0027t even get promoted to MRU of L2.\n\nYou may want to add comments to describe what happens here in the code...",
+      "revId": "4ad220849ff2ecee1b5d9170bd382ea9091e4219",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
