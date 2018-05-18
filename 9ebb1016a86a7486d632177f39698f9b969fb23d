@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7592a5dc_0391bca1",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-05-18T12:43:49Z",
+      "side": 1,
+      "message": "I think you want to wrap that inside a if(MSPAC_SUPPORT)\nconditional like the RPCBIND one above it?",
+      "range": {
+        "startLine": 1369,
+        "startChar": 4,
+        "endLine": 1369,
+        "endChar": 23
+      },
+      "revId": "9ebb1016a86a7486d632177f39698f9b969fb23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
