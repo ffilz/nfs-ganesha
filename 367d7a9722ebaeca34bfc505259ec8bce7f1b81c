@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8b28a12_bb5ccc6b",
+        "filename": "src/gtest/test_lock_op2_latency.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-22T13:01:52Z",
+      "side": 1,
+      "message": "This should be root_entry-\u003eobj_ops (the entry used always matches the first argument).  It will work, because they\u0027re in the same FSAL, but it\u0027s technically incorrect.",
+      "revId": "367d7a9722ebaeca34bfc505259ec8bce7f1b81c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
