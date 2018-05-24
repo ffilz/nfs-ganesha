@@ -132,13 +132,11 @@ void nfs_start_grace(nfs_grace_start_t *gsp)
 {
 	bool was_grace;
 
-	PTHREAD_MUTEX_lock(&grace_mutex);
-
 	if (nfs_param.nfsv4_param.graceless) {
 		nfs_lift_grace_locked(atomic_fetch_time_t(&current_grace));
 		LogEvent(COMPONENT_STATE,
 			 "NFS Server skipping GRACE (Graceless is true)");
-		goto out;
+		return;
 	}
 
 	/* grace should always be greater than or equal to lease time,
@@ -175,7 +173,9 @@ void nfs_start_grace(nfs_grace_start_t *gsp)
 	 * existing grace period.
 	 */
 	if (!gsp && !was_grace) {
+		PTHREAD_MUTEX_lock(&grace_mutex);
 		nfs4_recovery_load_clids(NULL);
+		PTHREAD_MUTEX_unlock(&grace_mutex);
 	} else if (gsp && gsp->event != EVENT_JUST_GRACE) {
 		/*
 		 * if called from failover code and given a nodeid, then this
@@ -192,13 +192,13 @@ void nfs_start_grace(nfs_grace_start_t *gsp)
 			nfs_release_nlm_state(gsp->ipaddr);
 			if (gsp->event == EVENT_RELEASE_IP)
 				nfs_release_v4_client(gsp->ipaddr);
-			else
+			else {
+				PTHREAD_MUTEX_lock(&grace_mutex);
 				nfs4_recovery_load_clids(gsp);
+				PTHREAD_MUTEX_unlock(&grace_mutex);
+			}
 		}
 	}
-
-out:
-	PTHREAD_MUTEX_unlock(&grace_mutex);
 }
 
 /**
