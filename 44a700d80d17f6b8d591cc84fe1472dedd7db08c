@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "761d8b87_6ea56bb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-05-24T07:25:43Z",
+      "side": 1,
+      "message": "arises?",
+      "revId": "44a700d80d17f6b8d591cc84fe1472dedd7db08c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4766ec01_48ef9561",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-05-24T07:25:43Z",
+      "side": 1,
+      "message": "\"new client approaching Ganesha for the IP to be released\" \u003d\u003d \"a client sending setclientid_confirm request\"",
+      "revId": "44a700d80d17f6b8d591cc84fe1472dedd7db08c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53f91023_9dc434cb",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-05-24T07:25:43Z",
+      "side": 1,
+      "message": "The function nfs4_recovery_load_clids() says that grace_mutex should be held although it may not be needed if this is called with NULL pointer. We can acquire/release the lock around this code to be consistent with the documentation. Or you could change the documentation.",
+      "revId": "44a700d80d17f6b8d591cc84fe1472dedd7db08c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
