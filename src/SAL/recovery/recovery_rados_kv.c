@@ -26,7 +26,7 @@ char rados_recov_old_oid[NI_MAXHOST + 4];
 struct rados_kv_parameter rados_kv_param;
 
 static struct config_item rados_kv_params[] = {
-	CONF_ITEM_PATH("ceph_conf", 1, MAXPATHLEN, NULL,
+	CONF_MAND_PATH("ceph_conf", 1, MAXPATHLEN, NULL,
 		       rados_kv_parameter, ceph_conf),
 	CONF_ITEM_STR("userid", 1, MAXPATHLEN, NULL,
 		       rados_kv_parameter, userid),
@@ -301,6 +301,12 @@ int rados_kv_connect(rados_ioctx_t *io_ctx, const char *userid,
 			const char *conf, const char *pool)
 {
 	int ret;
+
+	if (conf == NULL) {
+		LogEvent(COMPONENT_CLIENTID,
+			"RADSO_KV: conf parameter missing");
+		return -1;
+	}
 
 	ret = rados_create(&clnt, userid);
 	if (ret < 0) {
