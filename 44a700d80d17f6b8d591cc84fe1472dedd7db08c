@@ -50,6 +50,24 @@
       "revId": "44a700d80d17f6b8d591cc84fe1472dedd7db08c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43b4a136_83bdce54",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-05-24T11:13:35Z",
+      "side": 1,
+      "message": "It is needed. The grace_mutex is what protects the clid_list, AFAICT.",
+      "parentUuid": "53f91023_9dc434cb",
+      "revId": "44a700d80d17f6b8d591cc84fe1472dedd7db08c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
