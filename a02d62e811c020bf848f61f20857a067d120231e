@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "f5fe4ec5_afcf3de2",
+        "filename": "src/gtest/gtest_nfs4.hh",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-05-24T17:22:51Z",
+      "side": 1,
+      "message": "Yea, pulling it out",
+      "parentUuid": "7ad084b7_492c15e5",
+      "revId": "a02d62e811c020bf848f61f20857a067d120231e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "09b7e008_87ac04c7",
         "filename": "src/gtest/gtest_nfs4.hh",
         "patchSetId": 2
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "da8ce6da_8ed7a453",
+        "filename": "src/gtest/gtest_nfs4.hh",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-05-24T17:22:51Z",
+      "side": 1,
+      "message": "Ok, will fix, needs fixing compound_data_free to not clean up op_ctx-\u003ectx_export.",
+      "parentUuid": "09b7e008_87ac04c7",
+      "revId": "a02d62e811c020bf848f61f20857a067d120231e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "574af122_ceeaa049",
         "filename": "src/gtest/gtest_nfs4.hh",
         "patchSetId": 2
@@ -64,6 +100,24 @@
       "writtenOn": "2018-05-24T12:52:42Z",
       "side": 1,
       "message": "Are all tests going to need a lookup OP?  Should this be in common code?",
+      "revId": "a02d62e811c020bf848f61f20857a067d120231e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bd78239_9d0d5b79",
+        "filename": "src/gtest/gtest_nfs4.hh",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-05-24T17:22:51Z",
+      "side": 1,
+      "message": "I admit I\u0027m still thinking this through. I\u0027m thinking that there will later be some tests that build up lengthier compounds and run through them, as such, LOOKUP may well be a building block.",
+      "parentUuid": "574af122_ceeaa049",
       "revId": "a02d62e811c020bf848f61f20857a067d120231e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
