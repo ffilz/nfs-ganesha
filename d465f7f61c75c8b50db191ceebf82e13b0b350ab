@@ -68,6 +68,24 @@
       "revId": "d465f7f61c75c8b50db191ceebf82e13b0b350ab",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d58b95b8_4ec17ae2",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-05-25T10:34:33Z",
+      "side": 1,
+      "message": "The atomic store is sufficient to allow readers of that variable to be able to see changes to it without locking, but changes to the grace period need to be serialized with the other operations involved (loading the recovery db, for instance). There could be another thread with a racing call to nfs_lift_grace_locked, for instance.",
+      "parentUuid": "8239c485_df37e334",
+      "revId": "d465f7f61c75c8b50db191ceebf82e13b0b350ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
