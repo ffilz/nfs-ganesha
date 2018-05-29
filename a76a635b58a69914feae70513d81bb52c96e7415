@@ -33,6 +33,24 @@
       "revId": "a76a635b58a69914feae70513d81bb52c96e7415",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69772015_b77922ca",
+        "filename": "src/support/rados_grace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-05-29T17:49:16Z",
+      "side": 1,
+      "message": "This is mostly to support the \"rados_grace_tool dump\" command so I don\u0027t think we want to log it. What I think I\u0027ll do is make this fprintf to a particular FILE, and let the caller pass in that in. I\u0027ll change it to do that.",
+      "parentUuid": "246af310_3ea4d24c",
+      "revId": "a76a635b58a69914feae70513d81bb52c96e7415",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
