@@ -16,6 +16,23 @@
       "revId": "41acbc4e69041563a631cdedc1b4b0a33a629881",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bc19f22_0a804c49",
+        "filename": "src/gtest/test_release_latency.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-05-29T13:18:24Z",
+      "side": 1,
+      "message": "I\u0027m not sure we can do a bypass of release.  That will free the sub-handle, but MDCACHE still has a pointer to it, and will try to release it again.  This will result in use-after-free and double-free.\n\nIf we\u0027re going to test bypass of release, we\u0027ll have to add more debug code to MDCACHE.  If you want to take a stab at it, you can try adding (and testing, with ASAN) this code.  You\u0027ll need to add a function to mdcache_debug.h that takes a handle and NULLs out the sub_handle inside it.  You\u0027ll need to call it on each handle right after you call the sub-handle\u0027s release() method.  After you call this, you can\u0027t do anything on that handle except put_ref() (including unlink() or fsal_remove()).  To unlink(), you\u0027d need to do a new lookup() and get a new handle that works.  I *think* this should work, but it might also fail, which is why testing with ASAN and/or valgrind is a must for this code.\n\nIf you\u0027d prefer, you can just remove the bypass tests with a comment that we can\u0027t bypass release, and leave it at that for now.",
+      "revId": "41acbc4e69041563a631cdedc1b4b0a33a629881",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
