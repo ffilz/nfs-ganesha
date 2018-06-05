@@ -1317,6 +1317,9 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 	if (retval < 0) {
 		retval = errno;
 		fsal_error = posix2fsal_error(retval);
+		fsal_restore_ganesha_credentials();
+		LogDebug(COMPONENT_FSAL, "renameat returned %d (%s)",
+			 retval, strerror(retval));
 	} else if (vfs_unopenable_type(obj->obj_handle.type)) {
 		/* A block, char, or socket has been renamed. Fixup
 		 * our information in the handle so we can still stat it.
@@ -1328,8 +1331,9 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 		memcpy(obj->u.unopenable.dir, newdir->handle,
 		       sizeof(vfs_file_handle_t));
 		obj->u.unopenable.name = gsh_strdup(new_name);
+		fsal_restore_ganesha_credentials();
 	}
-	fsal_restore_ganesha_credentials();
+
  out:
 	if (oldfd >= 0)
 		close(oldfd);
