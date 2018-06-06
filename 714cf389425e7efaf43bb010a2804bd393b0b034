@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5dfc3fdf_2681ecfb",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-06-06T13:26:25Z",
+      "side": 1,
+      "message": "Yea, I considered that. Will probably change it. May leave it calling through these functions though in case FreeBSD ends up needing something different if anyone ever gets serious with FreeBSD again...",
+      "parentUuid": "c64e80ba_a3d3570d",
+      "revId": "714cf389425e7efaf43bb010a2804bd393b0b034",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd0f9dbf_6e0ebcc7",
         "filename": "src/os/linux/subr.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-06T00:34:40Z",
       "side": 1,
       "message": "No need to initialize rc here.",
+      "revId": "714cf389425e7efaf43bb010a2804bd393b0b034",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2be73a98_585c3012",
+        "filename": "src/os/linux/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-06-06T13:26:25Z",
+      "side": 1,
+      "message": "Hmm, yea...",
+      "parentUuid": "fd0f9dbf_6e0ebcc7",
       "revId": "714cf389425e7efaf43bb010a2804bd393b0b034",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
