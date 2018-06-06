@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81ed2848_ad4165b9",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-06-06T23:18:52Z",
+      "side": 1,
+      "message": "Oops, missing a condition so if no error and not special, we don\u0027t restore credentials...",
+      "revId": "d73630951c7230e74050ddc6ee0077ca2713114c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
