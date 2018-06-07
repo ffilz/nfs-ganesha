@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "42fb4b2d_c368e508",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-06-07T12:59:22Z",
+      "side": 1,
+      "message": "Makes sense to have a wrapper for this function, if only to make it simpler to port to other platforms later, should the need arise.",
+      "parentUuid": "5dfc3fdf_2681ecfb",
+      "revId": "714cf389425e7efaf43bb010a2804bd393b0b034",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd0f9dbf_6e0ebcc7",
         "filename": "src/os/linux/subr.c",
         "patchSetId": 1
