@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "922f3506_55f0e637",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-06-07T18:03:31Z",
+      "side": 1,
+      "message": "You only need these functions if you actually can use FSAL_MEM without mdcache stacking.\n\nOptionally, we could require all FSALs to implement ref counting and have mdcache do refcounting...\n\nOtherwise your solution of internal ref counting seems reasonable.",
+      "revId": "41fd11ff1b58bcc6cb5e84ee752889dc9b5bd4ae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb365313_bdddcfa1",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2135,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-06-07T18:03:31Z",
+      "side": 1,
+      "message": "If FSAL_MEM does share reservation stuff, merge has to merge share reservations (see what vfs_merge does).",
+      "revId": "41fd11ff1b58bcc6cb5e84ee752889dc9b5bd4ae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
