@@ -86,11 +86,19 @@ static inline bool trust_negative_cache(mdcache_entry_t *parent)
 static inline void add_detached_dirent(mdcache_entry_t *parent,
 				       mdcache_dir_entry_t *dirent)
 {
+	/* Reserve a dirent for the new detached dirent. */
+	uint64_t dirents_used = atomic_inc_uint64_t(&lru_state.dirents_used);
+
 #ifdef DEBUG_MDCACHE
 	assert(parent->content_lock.__data.__writer != 0);
 #endif
+
+	/* If we have max detached dirents for directory OR we have exceeded
+	 * entries_hiwat nunber of dirents, reap a detached dirent.
+	 */
 	if (parent->fsobj.fsdir.detached_count ==
-	    mdcache_param.dir.avl_detached_max) {
+	    mdcache_param.dir.avl_detached_max ||
+	    dirents_used > lru_state.entries_hiwat) {
 		/* Need to age out oldest detached dirent. */
 		mdcache_dir_entry_t *removed;
 
@@ -109,8 +117,17 @@ static inline void add_detached_dirent(mdcache_entry_t *parent,
 
 		pthread_spin_unlock(&parent->fsobj.fsdir.spin);
 
-		/* Remove from active names tree */
-		mdcache_avl_remove(parent, removed);
+		if (removed) {
+			/* Remove from active names tree */
+			mdcache_avl_remove(parent, removed);
+		} else {
+			/* We were trying to reap for exceeding entries_hiwat
+			 * but failed, so now we need to reap a chunk. Since
+			 * a chunk can never be empty, this must alwasy free at
+			 * least one dirent.
+			 */
+			mdcache_reap_and_free_chunk(parent);
+		}
 	}
 
 	/* Add new entry to MRU (head) of list */
@@ -459,6 +476,9 @@ void mdcache_clean_dirent_chunk(struct dir_chunk *chunk)
 	 *                                  glist_for_each_safe above
 	 * the other fields are untouched.
 	 */
+
+	/* Now release the count of entries in the chunk. */
+	atomic_sub_uint64_t(&lru_state.dirents_used, chunk->num_entries);
 
 	/* This chunk is about to be freed or reused, clean up a few more
 	 * things.
@@ -1661,6 +1681,7 @@ void place_new_dirent(mdcache_entry_t *parent_dir,
 	fsal_cookie_t ck, nck;
 	struct dir_chunk *chunk;
 	bool invalidate_chunks = true;
+	uint64_t dirents_used;
 
 #ifdef DEBUG_MDCACHE
 	assert(parent_dir->content_lock.__data.__writer != 0);
@@ -1933,12 +1954,19 @@ void place_new_dirent(mdcache_entry_t *parent_dir,
 		}
 	}
 
-	/* And now increment the number of entries in the chunk. */
+	/* And now increment the number of entries in the chunk. Also, we need
+	 * to bump the number of dirents_used.
+	 */
 	chunk->num_entries++;
+	dirents_used = atomic_inc_uint64_t(&lru_state.dirents_used);
 
 	/* And bump the chunk in the LRU */
 	lru_bump_chunk(chunk);
 
+	/* Check if we need to split. Note that if dirents_used went over
+	 * entries_hiwat, the act of splitting will release at least one
+	 * dirent and set us straight again.
+	 */
 	if (chunk->num_entries == mdcache_param.dir.avl_chunk_split) {
 		/* Create a new chunk */
 		struct dir_chunk *split;
@@ -1947,7 +1975,11 @@ void place_new_dirent(mdcache_entry_t *parent_dir,
 		int i = 0;
 		uint32_t split_count = mdcache_param.dir.avl_chunk_split / 2;
 
-		split = mdcache_get_chunk(parent_dir);
+		/* We don't need to reserve any entries since we aren't
+		 * adding any more. This WILL reap additional chunks however if
+		 * we had managed to go too far above entries_hiwat.
+		 */
+		split = mdcache_get_chunk(parent_dir, 0);
 		split->prev_chunk = chunk;
 		split->next_ck = chunk->next_ck;
 
@@ -1985,6 +2017,11 @@ void place_new_dirent(mdcache_entry_t *parent_dir,
 		 * first dirent in the new split chunk.
 		 */
 		chunk->next_ck = here->ck;
+	} else if (dirents_used > lru_state.entries_hiwat) {
+		/* We didn't split, but dirents_used went over entries_hiwat so
+		 * we need to free a chunk to get back below hi water mark.
+		 */
+		mdcache_reap_and_free_chunk(parent_dir);
 	}
 
 	new_dir_entry->flags |= DIR_ENTRY_SORTED;
@@ -2057,7 +2094,8 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 			       &chunk->chunks);
 
 		/* Now start a new chunk. */
-		new_chunk = mdcache_get_chunk(chunk->parent);
+		new_chunk = mdcache_get_chunk(chunk->parent,
+					      mdcache_param.dir.avl_chunk);
 
 		/* Setup new chunk. */
 		new_chunk->prev_chunk = chunk;
@@ -2229,7 +2267,18 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 			 */
 			chunk->prev_chunk->next_ck = cookie;
 		}
+
 		chunk->num_entries++;
+
+		if (new_dir_entry != allocated_dir_entry) {
+			/* We reused a detached dirent that was already
+			 * accounted for in dirents_used, meanwhile the chunk
+			 * in progress has also reserved dirents_used which will
+			 * be fixed up if this chunk doesn't fill up, so we need
+			 * to decrement dirents_used.
+			 */
+			atomic_dec_uint64_t(&lru_state.dirents_used);
+		}
 	}
 
 	if (new_dir_entry->chunk != chunk) {
@@ -2363,7 +2412,8 @@ fsal_status_t mdcache_populate_dir_chunk(mdcache_entry_t *directory,
 	fsal_status_t status = {0, 0};
 	fsal_status_t readdir_status = {0, 0};
 	struct mdcache_populate_cb_state state;
-	struct dir_chunk *first_chunk = mdcache_get_chunk(directory);
+	struct dir_chunk *first_chunk = mdcache_get_chunk(
+					directory, mdcache_param.dir.avl_chunk);
 	struct dir_chunk *chunk = first_chunk;
 	attrmask_t attrmask;
 	fsal_cookie_t *whence_ptr = &whence;
@@ -2478,6 +2528,15 @@ again:
 	 * it might have changed.
 	 */
 	chunk = state.dir_state;
+
+	/* Now fixup the dirents_used count, we had reserved avl_chunk entries
+	 * but we only have num_entries, so subtract the difference. This only
+	 * needs to be done with the last chunk, and will be the correct count
+	 * even if num_entries is 0, in which case we WILL dispose of the chunk
+	 * even for empty directories.
+	 */
+	atomic_sub_uint64_t(&lru_state.dirents_used,
+			    mdcache_param.dir.avl_chunk - chunk->num_entries);
 
 	if (chunk->num_entries == 0) {
 		/* Save the previous chunk in case we need it. */
@@ -2600,7 +2659,8 @@ again:
 				prev_chunk);
 
 		/* And we need to allocate a fresh chunk. */
-		chunk = mdcache_get_chunk(directory);
+		chunk = mdcache_get_chunk(directory,
+					  mdcache_param.dir.avl_chunk);
 
 		/* And switch over to new chunk. */
 		state.dir_state = chunk;
