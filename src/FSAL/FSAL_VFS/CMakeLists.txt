@@ -3,6 +3,10 @@ add_definitions(
   -D_GNU_SOURCE
 )
 
+include_directories(
+  "."
+)
+
 set(LIB_PREFIX 64)
 
 add_subdirectory(os)
