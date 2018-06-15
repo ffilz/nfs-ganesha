@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53c3da48_2faae240",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2018-06-15T13:38:00Z",
+      "side": 1,
+      "message": "setfsuid",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0daee83_c68e691d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2018-06-15T13:38:00Z",
+      "side": 1,
+      "message": "setfsgid",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "428da2d4_96639ae2",
+        "filename": "src/FSAL/FSAL_VFS/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2018-06-15T13:38:00Z",
+      "side": 1,
+      "message": "OK but requires a comment to explain why it\u0027s needed",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c889774f_a888d3b0",
+        "filename": "src/FSAL/FSAL_VFS/panfs/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2018-06-15T13:38:00Z",
+      "side": 1,
+      "message": "I can\u0027t figure out why this line has to be changed in this commit. Can you explain ?",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
