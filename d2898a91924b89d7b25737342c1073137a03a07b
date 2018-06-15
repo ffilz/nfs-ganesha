@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5cc8bee2_77a1f199",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-06-15T18:40:45Z",
+      "side": 1,
+      "message": "Actually, we have changed to using setresuid/setresgid to change euid/egid and no longer use fsuid/fsgid",
+      "parentUuid": "f0daee83_c68e691d",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "428da2d4_96639ae2",
         "filename": "src/FSAL/FSAL_VFS/CMakeLists.txt",
         "patchSetId": 1
