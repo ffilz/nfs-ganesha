@@ -519,7 +519,10 @@ install -m 644 config_samples/xfs.conf %{buildroot}%{_sysconfdir}/ganesha
 
 %if %{with ceph}
 install -m 644 config_samples/ceph.conf %{buildroot}%{_sysconfdir}/ganesha
-install -m 755 tools/ganesha-rados-grace	%{buildroot}%{_sbindir}/ganesha-rados-grace
+%endif
+
+%if %{with rados_recov}
+install -m 755 tools/ganesha-rados-grace	%{buildroot}%{_bindir}/ganesha-rados-grace
 %endif
 
 %if %{with rgw}
@@ -604,6 +607,9 @@ exit 0
 %dir %{_libexecdir}/ganesha
 %{_libexecdir}/ganesha/nfs-ganesha-config.sh
 %dir %attr(0775,ganesha,root) %{_localstatedir}/log/ganesha
+%if %{with rados_recov}
+%{_bindir}/ganesha-rados-grace
+%endif
 
 %if %{with_systemd}
 %{_unitdir}/nfs-ganesha.service
@@ -622,6 +628,10 @@ exit 0
 %{_mandir}/*/ganesha-export-config.8.gz
 %{_mandir}/*/ganesha-cache-config.8.gz
 %{_mandir}/*/ganesha-log-config.8.gz
+%if %{with rados_recov}
+%{_mandir}/*/ganesha-rados-grace.8.gz
+%{_mandir}/*/ganesha-rados-cluster-design.8.gz
+%endif
 %endif
 
 %files mount-9P
@@ -702,10 +712,8 @@ exit 0
 %defattr(-,root,root,-)
 %{_libdir}/ganesha/libfsalceph*
 %config(noreplace) %{_sysconfdir}/ganesha/ceph.conf
-%{_sbindir}/ganesha-rados-grace
 %if %{with man_page}
 %{_mandir}/*/ganesha-ceph-config.8.gz
-%{_mandir}/*/ganesha-rados-grace.8.gz
 %endif
 %endif
 
