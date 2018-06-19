@@ -774,6 +774,12 @@ typedef enum state_blocking_t {
 	STATE_CANCELED
 } state_blocking_t;
 
+static inline bool is_blocking(state_blocking_t blocking)
+{
+	return (blocking == STATE_NLM_BLOCKING ||
+		blocking == STATE_NFSV4_BLOCKING);
+}
+
 /**
  * @brief Grant callback
  *

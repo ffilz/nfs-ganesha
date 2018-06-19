@@ -2486,7 +2486,7 @@ state_status_t state_lock(struct fsal_obj_handle *obj,
 	}
 
 	/* Decide how to proceed */
-	if (blocking == STATE_NLM_BLOCKING) {
+	if (is_blocking(blocking)) {
 		/* do_lock_op will handle FSAL_OP_LOCKB for those FSALs that
 		 * do not support async blocking locks. It will make a
 		 * non-blocking call in that case, and it will return
