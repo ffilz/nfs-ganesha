@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "72f91133_fb17fb04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2018-06-19T08:28:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53c3da48_2faae240",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0daee83_c68e691d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "b62cb115_529d6e96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2018-06-19T08:28:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cc8bee2_77a1f199",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "428da2d4_96639ae2",
         "filename": "src/FSAL/FSAL_VFS/CMakeLists.txt",
         "patchSetId": 1
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "e4edca62_784831fb",
+        "filename": "src/FSAL/FSAL_VFS/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2018-06-19T08:28:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "428da2d4_96639ae2",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c889774f_a888d3b0",
         "filename": "src/FSAL/FSAL_VFS/panfs/main.c",
         "patchSetId": 1
@@ -85,6 +139,24 @@
       "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1438486e_cac25b75",
+        "filename": "src/FSAL/FSAL_VFS/panfs/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2018-06-19T08:28:02Z",
+      "side": 1,
+      "message": "Done\n\nThis patch adds the new option \"only_user_mode\" to these VFS subfsal module. This option is stored as a new boolean added as a new \"only_user_mode\" field to a new vfs_fsal_module structure. PANFS is not anymore a \"struct fsal_module\" instance. PANFS module is now a \"struct vfs_fsal_module\" instance which contains as module field a global \"struct fsal_module\" . This mechanism is a common one through all ganesha structures (handle, export, module ...) : structure dedicated to one FSAL usually contains as first field a pointer to the corresponding structure common to all FSALs. (The macro container_of is often used to retrieve specific structure from the global one.)",
+      "parentUuid": "c889774f_a888d3b0",
+      "revId": "d2898a91924b89d7b25737342c1073137a03a07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
