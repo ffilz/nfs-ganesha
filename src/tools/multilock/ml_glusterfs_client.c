@@ -382,7 +382,7 @@ void do_read(struct response *resp)
 	if (resp->r_length > MAXSTR)
 		resp->r_length = MAXSTR;
 
-	rc = glfs_read(fds[resp->r_fpos], resp->r_data, resp->r_length, 0);
+	rc = glfs_read(fds[resp->r_fpos], resp->r_data, resp->r_length, 0, NULL);
 
 	if (rc < 0) {
 		resp->r_status = STATUS_ERRNO;

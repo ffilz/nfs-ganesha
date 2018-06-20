@@ -223,7 +223,7 @@ static nfsstat4 ds_commit(struct fsal_ds_handle *const ds_pub,
 			return NFS4ERR_SERVERFAULT;
 		}
 
-		rc = glfs_fsync(glfd);
+		rc = glfs_fsync(glfd, NULL, NULL);
 		if (rc != 0)
 			LogMajor(COMPONENT_PNFS,
 				 "glfs_fsync failed %d", errno);
