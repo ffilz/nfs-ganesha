@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef950dca_80622e7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-20T09:42:20Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe https://github.com/gluster/glusterfs/issues/389 add support to fetch stat in fsync and",
+      "revId": "85d77f6ecef09c16af1b21df6ae444481f306306",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5bd63d31_3b2e3103",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-20T09:42:20Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tretval \u003d glfs_ftruncate(my_fd.glfd, attrib_set-\u003efilesize, NULL, NULL);",
+      "revId": "85d77f6ecef09c16af1b21df6ae444481f306306",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4a701bf_830a47a7",
+        "filename": "src/tools/multilock/ml_glusterfs_client.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-20T09:42:20Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\trc \u003d glfs_read(fds[resp-\u003er_fpos], resp-\u003er_data, resp-\u003er_length, 0, NULL);",
+      "revId": "85d77f6ecef09c16af1b21df6ae444481f306306",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
