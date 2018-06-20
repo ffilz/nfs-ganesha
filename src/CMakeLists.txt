@@ -640,6 +640,12 @@ if(USE_FSAL_GLUSTER)
     # missing directory not provided by current version of GlusterFS
     include_directories(${GFAPI_PREFIX}/include)
     link_directories (${GFAPI_LIBRARY_DIRS})
+    pkg_check_modules(STAT_FETCH_GFAPI glusterfs-api>=7.4.2)
+    if(STAT_FETCH_GFAPI_FOUND)
+        set(USE_GLUSTER_STAT_FETCH_API ON)
+    else()
+        message(STATUS "tuning off stat api")
+    endif(STAT_FETCH_GFAPI_FOUND)
   endif(NOT GFAPI_FOUND)
 
   if(USE_FSAL_GLUSTER)
@@ -1164,7 +1170,6 @@ message(STATUS "USE_MAN_PAGE = ${USE_MAN_PAGE}")
 message(STATUS "USE_RADOS_RECOV = ${USE_RADOS_RECOV}")
 message(STATUS "RADOS_URLS = ${RADOS_URLS}")
 message(STATUS "USE_CUNIT = ${USE_CUNIT}")
-
 set(USE_CB_SIMULATOR ${USE_CB_SIMULATOR}
   CACHE BOOL
    "enable callback simulator thread"
