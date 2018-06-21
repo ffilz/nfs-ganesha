@@ -2362,11 +2362,11 @@ static void release_export(struct gsh_export *export)
 	 */
 	pseudo_unmount_export(export);
 
-	/* Release state belonging to this export */
-	state_release_export(export);
-
 	/* Flush FSAL-specific state */
 	export->fsal_export->exp_ops.unexport(export->fsal_export, obj);
+
+	/* Release state belonging to this export */
+	state_release_export(export);
 
 	/* Remove the mapping to the export now that cleanup is complete. */
 	remove_gsh_export(export->export_id);
