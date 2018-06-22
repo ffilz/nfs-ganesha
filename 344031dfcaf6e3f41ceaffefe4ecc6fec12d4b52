@@ -16,6 +16,24 @@
       "revId": "344031dfcaf6e3f41ceaffefe4ecc6fec12d4b52",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df45b974_24b84f13",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2018-06-22T09:37:04Z",
+      "side": 1,
+      "message": "\u003e I think the additional `if (mask)` is sufficient, no need to call find_entry() again?\n\nNo, it\u0027s needed.\n\nacl_dup returns new allocated acls that are different from p_posixacl,\nso without a new find_entry, the mask will be deleted from p_posixacl, not from dup_acl.",
+      "parentUuid": "a9ed44f8_5437c9a1",
+      "revId": "344031dfcaf6e3f41ceaffefe4ecc6fec12d4b52",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
