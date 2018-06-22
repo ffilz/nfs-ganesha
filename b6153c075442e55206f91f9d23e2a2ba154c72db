@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89d01e87_69810793",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-22T19:34:38Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst char *grp_name;\n+\tswitch (client-\u003etype) {",
+      "revId": "b6153c075442e55206f91f9d23e2a2ba154c72db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1ea0f79_10dbf695",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-22T19:34:38Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        }$",
+      "revId": "b6153c075442e55206f91f9d23e2a2ba154c72db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8afa61ea_2da18aa0",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-22T19:34:38Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        }$",
+      "revId": "b6153c075442e55206f91f9d23e2a2ba154c72db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdbe2707_dcda636a",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1375,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-22T19:34:38Z",
+      "side": 1,
+      "message": "WARNING: Avoid multiple line dereference - prefer \u0027client_array_iter.export_iter\u0027\n+\tdbus_message_iter_close_container(\u0026struct_iter, \u0026client_array_iter.\n+\t\t\t\t\t  export_iter);",
+      "revId": "b6153c075442e55206f91f9d23e2a2ba154c72db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
