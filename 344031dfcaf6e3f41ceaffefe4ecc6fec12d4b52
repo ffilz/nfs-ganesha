@@ -52,6 +52,24 @@
       "revId": "344031dfcaf6e3f41ceaffefe4ecc6fec12d4b52",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dd004c7_b6f98a1d",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2018-06-22T10:31:50Z",
+      "side": 1,
+      "message": "Maybe it is better to check mask before find_entry, that avoid useless find when mask isn\u0027t exist.\n\n+                       if (mask) {\n+                               mask \u003d find_entry(dup_acl, ACL_MASK, 0);\n+                               if (mask)\n+                                       acl_delete_entry(dup_acl, mask);\n+                       }",
+      "parentUuid": "886c001e_97779999",
+      "revId": "344031dfcaf6e3f41ceaffefe4ecc6fec12d4b52",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
