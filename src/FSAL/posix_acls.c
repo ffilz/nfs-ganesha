@@ -375,7 +375,10 @@ int posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 			/*
 			 * Do not consider ACL_MASK entry in the following loop
 			 */
-			acl_delete_entry(dup_acl, mask);
+			mask = find_entry(dup_acl, ACL_MASK, 0);
+			if (mask)
+				acl_delete_entry(dup_acl, mask);
+
 			if (tag == ACL_USER_OBJ) {
 				d_entry = find_entry(dup_acl, ACL_USER_OBJ, 0);
 				ret = acl_get_entry(dup_acl, ACL_NEXT_ENTRY,
