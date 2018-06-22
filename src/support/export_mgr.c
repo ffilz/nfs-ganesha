@@ -1277,6 +1277,68 @@ static struct gsh_dbus_method export_display_export = {
 		 END_ARG_LIST}
 };
 
+
+
+static void client_of_export(exportlist_client_entry_t *client, void *state)
+{
+	struct showexports_state *client_array_iter =
+		(struct showexports_state *)state;
+	DBusMessageIter client_struct_iter;
+	const char *grp_name;
+
+	switch (client->type) {
+	case NETWORK_CLIENT:
+		grp_name = cidr_to_str(client->client.network.cidr,
+				       CIDR_NOFLAGS);
+		if (grp_name == NULL) {
+			grp_name = "Invalid Network Address";
+		}
+		break;
+	case NETGROUP_CLIENT:
+		grp_name = client->client.netgroup.netgroupname;
+		break;
+	case GSSPRINCIPAL_CLIENT:
+		grp_name = client->client.gssprinc.princname;
+		break;
+	case MATCH_ANY_CLIENT:
+		grp_name = "*";
+		break;
+	case WILDCARDHOST_CLIENT:
+		grp_name = client->client.wildcard.wildcard;
+		break;
+	default:
+		grp_name = "<unknown>";
+	}
+	dbus_message_iter_open_container(&client_array_iter->export_iter,
+					 DBUS_TYPE_STRUCT, NULL,
+					 &client_struct_iter);
+	// Client type
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_STRING,
+				       &grp_name);
+	// Client Cidr block
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_INT32,
+				       &client->client.network.cidr->version);
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_BYTE,
+				       &client->client.network.cidr->addr);
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_BYTE,
+				       &client->client.network.cidr->mask);
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_INT32,
+				       &client->client.network.cidr->proto);
+	// Client Export Permissions
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_UINT32,
+				       &client->client_perms.anonymous_uid);
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_UINT32,
+				       &client->client_perms.anonymous_gid);
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_UINT32,
+				       &client->client_perms.expire_time_attr);
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_UINT32,
+				       &client->client_perms.options);
+	dbus_message_iter_append_basic(&client_struct_iter, DBUS_TYPE_UINT32,
+				       &client->client_perms.set);
+	dbus_message_iter_close_container(&client_array_iter->export_iter,
+					  &client_struct_iter);
+}
+
 static bool export_to_dbus(struct gsh_export *exp_node, void *state)
 {
 	struct showexports_state *iter_state =
@@ -1285,6 +1347,8 @@ static bool export_to_dbus(struct gsh_export *exp_node, void *state)
 	DBusMessageIter struct_iter;
 	struct timespec last_as_ts = ServerBootTime;
 	const char *path;
+	struct showexports_state client_array_iter;
+	struct glist_head *glist;
 
 	exp = container_of(exp_node, struct export_stats, export);
 	path = (exp_node->pseudopath != NULL) ?
@@ -1296,6 +1360,20 @@ static bool export_to_dbus(struct gsh_export *exp_node, void *state)
 				       &exp_node->export_id);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &path);
 	server_stats_summary(&struct_iter, &exp->st);
+	dbus_message_iter_open_container(&struct_iter, DBUS_TYPE_ARRAY,
+					 "(siyyiuuuuu)",
+					 &client_array_iter.export_iter);
+	PTHREAD_RWLOCK_rdlock(&exp_node->lock);
+	glist_for_each(glist, &exp_node->clients) {
+		exportlist_client_entry_t *client;
+
+		client = glist_entry(glist, exportlist_client_entry_t,
+				     cle_list);
+		client_of_export(client, (void *)&client_array_iter);
+	}
+	PTHREAD_RWLOCK_unlock(&exp_node->lock);
+	dbus_message_iter_close_container(&struct_iter,
+					  &client_array_iter.export_iter);
 	dbus_append_timestamp(&struct_iter, &last_as_ts);
 	dbus_message_iter_close_container(&iter_state->export_iter,
 					  &struct_iter);
@@ -1315,7 +1393,7 @@ static bool gsh_export_showexports(DBusMessageIter *args,
 	dbus_message_iter_init_append(reply, &iter);
 	dbus_append_timestamp(&iter, &timestamp);
 	dbus_message_iter_open_container(&iter, DBUS_TYPE_ARRAY,
-					 "(qsbbbbbbbb(tt))",
+					 "(qsbbbbbbbba(siyyiuuuuu)(tt))",
 					 &iter_state.export_iter);
 
 	(void)foreach_gsh_export(export_to_dbus, false, (void *)&iter_state);
@@ -1330,7 +1408,7 @@ static struct gsh_dbus_method export_show_exports = {
 	.args = {TIMESTAMP_REPLY,
 		 {
 		  .name = "exports",
-		  .type = "a(qsbbbbbbbb(tt))",
+		  .type = "a(qsbbbbbbbba(siyyiuuuuu)(tt))",
 		  .direction = "out"},
 		 END_ARG_LIST}
 };
