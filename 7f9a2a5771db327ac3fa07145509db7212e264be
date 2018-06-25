@@ -16,6 +16,24 @@
       "revId": "7f9a2a5771db327ac3fa07145509db7212e264be",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36bafcde_da4bfe01",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1012876
+      },
+      "writtenOn": "2018-06-25T09:36:39Z",
+      "side": 1,
+      "message": "yea, it\u0027ll access un-initialized memory for other type. And only putting it in switch will break signature. May be can put this cidr block in if condition or have to put both client type and cidr block code in switch.",
+      "parentUuid": "82f31862_cc927d62",
+      "revId": "7f9a2a5771db327ac3fa07145509db7212e264be",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
