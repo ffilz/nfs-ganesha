@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82f31862_cc927d62",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-06-25T06:04:03Z",
+      "side": 1,
+      "message": "Won\u0027t this bit be conditional on the client type?  maybe it should live in the switch statement above.  Or would that break the signature?  Regardless, this will access un-initialized memory for other types, since that\u0027s a union.",
+      "revId": "7f9a2a5771db327ac3fa07145509db7212e264be",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
