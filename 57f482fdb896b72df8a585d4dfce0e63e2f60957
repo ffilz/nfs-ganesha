@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc3f3d52_79bb093a",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-26T04:15:25Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\t\t\t\t\t       DBUS_TYPE_INT32,\u0026dummy_val1);\n \t\t\t\t\t                       ^",
+      "revId": "57f482fdb896b72df8a585d4dfce0e63e2f60957",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95f45cf5_4d9884ab",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-26T04:15:25Z",
+      "side": 1,
+      "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxO)\n+\t\t\t\t\t       DBUS_TYPE_INT32,\u0026dummy_val1);\n \t\t\t\t\t                      ^",
+      "revId": "57f482fdb896b72df8a585d4dfce0e63e2f60957",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9501ee69_124d760a",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-06-26T04:15:25Z",
+      "side": 1,
+      "message": "ERROR: space prohibited before that close parenthesis \u0027)\u0027\n+\t\t\t\t\t       DBUS_TYPE_BYTE, \u0026dummy_val2 );",
+      "revId": "57f482fdb896b72df8a585d4dfce0e63e2f60957",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
