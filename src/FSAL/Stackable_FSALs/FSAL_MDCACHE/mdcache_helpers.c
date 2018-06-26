@@ -120,6 +120,9 @@ static inline void add_detached_dirent(mdcache_entry_t *parent,
 	pthread_spin_unlock(&parent->fsobj.fsdir.spin);
 }
 
+#define mdcache_alloc_handle(export, sub_handle, fs, reason) \
+	_mdcache_alloc_handle(export, sub_handle, fs, reason, \
+			      __func__, __LINE__)
 /**
  * Allocate and initialize a new mdcache handle.
  *
@@ -133,16 +136,17 @@ static inline void add_detached_dirent(mdcache_entry_t *parent,
  *
  * @return The new handle, or NULL if the unexport in progress.
  */
-static mdcache_entry_t *mdcache_alloc_handle(
+static mdcache_entry_t *_mdcache_alloc_handle(
 		struct mdcache_fsal_export *export,
 		struct fsal_obj_handle *sub_handle,
 		struct fsal_filesystem *fs,
-		mdc_reason_t reason)
+		mdc_reason_t reason,
+		const char *func, int line)
 {
 	mdcache_entry_t *result;
 	fsal_status_t status;
 
-	result = mdcache_lru_get();
+	result = mdcache_lru_get(sub_handle);
 
 	if (result == NULL) {
 		/* Should never happen, but our caller will handle... */
@@ -2502,7 +2506,8 @@ again:
 
 #ifdef USE_LTTNG
 	tracepoint(mdcache, mdc_readdir_populate,
-		   __func__, __LINE__, directory, directory->sub_handle);
+		   __func__, __LINE__, &directory->obj_handle,
+		   directory->sub_handle, whence);
 #endif
 	subcall(
 		readdir_status = directory->sub_handle->obj_ops.readdir(
@@ -3095,7 +3100,7 @@ again:
 
 #ifdef USE_LTTNG
 	tracepoint(mdcache, mdc_readdir_cb,
-		   __func__, __LINE__, entry, entry->sub_handle,
+		   __func__, __LINE__, dirent->name, entry, entry->sub_handle,
 		   entry->lru.refcnt);
 #endif
 		cb_result = cb(dirent->name, &entry->obj_handle, &entry->attrs,
