@@ -2107,8 +2107,13 @@ static bool stats_fsal(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 
-	if (!nfs_param.core_param.enable_FSALSTATS)
+	if (!nfs_param.core_param.enable_FSALSTATS) {
 		errormsg = "FSAL stat counting disabled";
+		success = false;
+		dbus_status_reply(&iter, success, errormsg);
+		return true;
+	}
+
 	dbus_message_iter_get_basic(args, &fsal_name);
 	init_root_op_context(&root_op_context, NULL, NULL,
 				     0, 0, UNKNOWN_REQUEST);
@@ -2131,6 +2136,10 @@ static bool stats_fsal(DBusMessageIter *args,
 	return true;
 }
 
+/* Note that just after enabling FSAL stats, we may not have any
+ * stats to return, hence added another message to deal with such
+ * situations.
+ */
 static struct gsh_dbus_method fsal_statistics = {
 	.name = "GetFSALStats",
 	.method = stats_fsal,
@@ -2138,6 +2147,7 @@ static struct gsh_dbus_method fsal_statistics = {
 		 STATUS_REPLY,
 		 TIMESTAMP_REPLY,
 		 FSAL_OPS_REPLY,
+		 MESSAGE_REPLY,
 		 END_ARG_LIST}
 };
 

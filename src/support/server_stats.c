@@ -435,9 +435,8 @@ struct deleg_stats {
 
 static struct global_stats global_st;
 
-/* Global pointers for maintaining memory pool allocation list */
-struct pool_alloc_list *pool_list;		/* Head of the list */
-struct pool_alloc_list *pool_list_current;	/* Current list pointer */
+/* Head for maintaining memory pool allocation list */
+struct glist_head mpool_list = GLIST_HEAD_INIT(mpool_list);
 
 
 /* include the top level server_stats struct definition
@@ -2089,27 +2088,28 @@ void server_dbus_delegations(struct deleg_stats *ds, DBusMessageIter *iter)
 void server_dbus_mem_pool(DBusMessageIter *iter)
 {
 	struct timespec timestamp;
-	struct pool_alloc_list *current = pool_list;
 	DBusMessageIter array_iter;
 	char *errormsg;
+	struct glist_head *glist;
+	struct pool *pool_ptr;
 
 	now(&timestamp);
 	dbus_append_timestamp(iter, &timestamp);
 	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
 					 NULL, &array_iter);
-	while (current) {
-		if (current->pool_ptr->name == NULL) {
+	glist_for_each(glist, &mpool_list) {
+		pool_ptr = glist_entry(glist, struct pool, mpool_list);
+		if (pool_ptr->name == NULL) {
 			errormsg = "Hash Table Related";
 			dbus_message_iter_append_basic(&array_iter,
 						DBUS_TYPE_STRING, &errormsg);
 		} else
 			dbus_message_iter_append_basic(&array_iter,
-				DBUS_TYPE_STRING, &current->pool_ptr->name);
+					  DBUS_TYPE_STRING, &pool_ptr->name);
 		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
-						&current->pool_ptr->cnt);
+							&pool_ptr->cnt);
 		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
-					&current->pool_ptr->object_size);
-		current = current->next;
+						&pool_ptr->object_size);
 	}
 	dbus_message_iter_close_container(iter, &array_iter);
 }
