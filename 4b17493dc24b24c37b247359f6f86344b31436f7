@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5db20fa6_8620e8b7",
+        "filename": "src/FSAL/common_pnfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-07-05T14:47:36Z",
+      "side": 1,
+      "message": "nit: this is also the length of the ds_ids array, it might be good to mention that in the comments here. Also, having num_fhs in between the two arrays is a little odd, maybe reorder the arguments?",
+      "revId": "4b17493dc24b24c37b247359f6f86344b31436f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc4522e1_830efe5f",
+        "filename": "src/FSAL/common_pnfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-07-05T14:47:36Z",
+      "side": 1,
+      "message": "Why 12 here? Maybe phrase this in terms of sizeof(ffds_stateid.other). Also, this can just use memset():\n\n    memset(\u0026ffds_stateid.other, \u0027\\0\u0027, sizeof(ffds_stateid.other));",
+      "revId": "4b17493dc24b24c37b247359f6f86344b31436f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
