@@ -435,6 +435,10 @@ struct deleg_stats {
 
 static struct global_stats global_st;
 
+/* Head for maintaining memory pool allocation list */
+struct glist_head mpool_list = GLIST_HEAD_INIT(mpool_list);
+pthread_rwlock_t mpool_lock;
+
 /* include the top level server_stats struct definition
  */
 #include "server_stats_private.h"
@@ -2075,6 +2079,41 @@ void server_dbus_delegations(struct deleg_stats *ds, DBusMessageIter *iter)
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT32,
 				       &ds->num_revokes);
 	dbus_message_iter_close_container(iter, &struct_iter);
+}
+
+
+/**
+ * @brief Report memory pool allocations
+ */
+void server_dbus_mem_pool(DBusMessageIter *iter)
+{
+	struct timespec timestamp;
+	DBusMessageIter array_iter;
+	char *errormsg;
+	struct glist_head *glist;
+	struct pool *pool_ptr;
+
+	now(&timestamp);
+	dbus_append_timestamp(iter, &timestamp);
+	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
+					 NULL, &array_iter);
+	PTHREAD_RWLOCK_rdlock(&mpool_lock);
+	glist_for_each(glist, &mpool_list) {
+		pool_ptr = glist_entry(glist, struct pool, mpool_next);
+		if (pool_ptr->name == NULL) {
+			errormsg = "Hash Table Related";
+			dbus_message_iter_append_basic(&array_iter,
+						DBUS_TYPE_STRING, &errormsg);
+		} else
+			dbus_message_iter_append_basic(&array_iter,
+					DBUS_TYPE_STRING, &pool_ptr->name);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_INT64,
+						&pool_ptr->cnt);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+						&pool_ptr->object_size);
+	}
+	PTHREAD_RWLOCK_unlock(&mpool_lock);
+	dbus_message_iter_close_container(iter, &array_iter);
 }
 
 #endif				/* USE_DBUS */

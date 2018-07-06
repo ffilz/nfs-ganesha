@@ -1982,6 +1982,33 @@ static struct gsh_dbus_method reset_statistics = {
 };
 
 /**
+ * DBUS method to get pool allocation numbers
+ */
+static bool stats_pool(DBusMessageIter *args,
+			DBusMessage *reply,
+			DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "OK";
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+	dbus_status_reply(&iter, success, errormsg);
+	server_dbus_mem_pool(&iter);
+
+	return true;
+}
+
+static struct gsh_dbus_method pool_statistics = {
+	.name = "PoolStats",
+	.method = stats_pool,
+	.args = {STATUS_REPLY,
+		 TIMESTAMP_REPLY,
+		 POOL_STATUS_REPLY,
+		 END_ARG_LIST}
+};
+
+/**
  * DBUS method to disable statistics counting
  *
  */
@@ -2317,6 +2344,7 @@ static struct gsh_dbus_method *export_stats_methods[] = {
 	&cache_inode_show,
 	&export_show_all_io,
 	&reset_statistics,
+	&pool_statistics,
 	&fsal_statistics,
 	&enable_statistics,
 	&disable_statistics,

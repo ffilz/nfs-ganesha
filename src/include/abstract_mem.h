@@ -42,7 +42,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <abstract_atomic.h>
 #include "log.h"
+#include "gsh_list.h"
+#include "common_utils.h"
 
 /**
  * @page GeneralAllocator General Allocator Shim
@@ -302,7 +305,12 @@ gsh_free_size(void *p, size_t n __attribute__ ((unused)))
 typedef struct pool {
 	char *name; /*< The name of the pool */
 	size_t object_size; /*< The size of the objects created */
+	int64_t cnt;  /* < counter to keep track of allocations */
+	struct glist_head mpool_next;	/*< list pointer for pools */
 } pool_t;
+
+extern struct glist_head mpool_list; /* head of pool list */
+extern pthread_rwlock_t mpool_lock;
 
 /**
  * @brief Create a basic object pool
@@ -333,7 +341,7 @@ static inline pool_t *
 pool_basic_init__(const char *name, size_t object_size,
 		  const char *file, int line, const char *function)
 {
-	pool_t *pool = (pool_t *) gsh_malloc__(sizeof(pool_t), file, line,
+	pool_t *pool = (pool_t *) gsh_calloc__(1, sizeof(pool_t), file, line,
 					function);
 
 	pool->object_size = object_size;
@@ -343,6 +351,9 @@ pool_basic_init__(const char *name, size_t object_size,
 	else
 		pool->name = NULL;
 
+	PTHREAD_RWLOCK_wrlock(&mpool_lock);
+	glist_add_tail(&mpool_list, &pool->mpool_next);
+	PTHREAD_RWLOCK_unlock(&mpool_lock);
 	return pool;
 }
 
@@ -361,6 +372,9 @@ pool_basic_init__(const char *name, size_t object_size,
 static inline void
 pool_destroy(pool_t *pool)
 {
+	PTHREAD_RWLOCK_wrlock(&mpool_lock);
+	glist_del(&pool->mpool_next);
+	PTHREAD_RWLOCK_unlock(&mpool_lock);
 	gsh_free(pool->name);
 	gsh_free(pool);
 }
@@ -392,7 +406,11 @@ pool_destroy(pool_t *pool)
 static inline void *
 pool_alloc__(pool_t *pool, const char *file, int line, const char *function)
 {
-	return gsh_calloc__(1, pool->object_size, file, line, function);
+	void *ptr;
+
+	ptr = gsh_calloc__(1, pool->object_size, file, line, function);
+	(void)atomic_inc_int64_t(&pool->cnt);
+	return ptr;
 }
 
 #define pool_alloc(pool) \
@@ -417,7 +435,10 @@ pool_alloc__(pool_t *pool, const char *file, int line, const char *function)
 static inline void
 pool_free(pool_t *pool, void *object)
 {
-	gsh_free(object);
+	if (object) {
+		gsh_free(object);
+		(void)atomic_dec_int64_t(&pool->cnt);
+	}
 }
 
 #endif /* ABSTRACT_MEM_H */

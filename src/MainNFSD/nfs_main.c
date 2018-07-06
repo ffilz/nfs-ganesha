@@ -46,6 +46,7 @@
 #include "config_parsing.h"
 #include "conf_url.h"
 #include "sal_functions.h"
+#include "common_utils.h"
 
 /**
  * @brief LTTng trace enabling magic
@@ -462,6 +463,9 @@ int main(int argc, char *argv[])
 			 "Error setting parameters from configuration file.");
 		goto fatal_die;
 	}
+
+	/* initialize mpool_lock */
+	PTHREAD_RWLOCK_init(&mpool_lock, NULL);
 
 	/* initialize core subsystems and data structures */
 	if (init_server_pkgs() != 0) {

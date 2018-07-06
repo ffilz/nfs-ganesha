@@ -208,6 +208,13 @@ struct export_stats {
 	.direction = "out"	\
 }
 
+#define POOL_STATUS_REPLY	\
+{				\
+	.name = "pool_status",	\
+	.type = "a(sxt)",	\
+	.direction = "out"	\
+}
+
 /* number of delegations, number of sent recalls,
  * number of failed recalls, number of revokes */
 #define DELEG_REPLY		       \
@@ -259,6 +266,7 @@ void global_dbus_total_ops(DBusMessageIter *iter);
 void server_dbus_fast_ops(DBusMessageIter *iter);
 void mdcache_dbus_show(DBusMessageIter *iter);
 void server_reset_stats(DBusMessageIter *iter);
+void server_dbus_mem_pool(DBusMessageIter *iter);
 void reset_export_stats(void);
 void reset_client_stats(void);
 void reset_gsh_stats(struct gsh_stats *st);
