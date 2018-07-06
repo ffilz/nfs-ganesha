@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ec595f9_f53abf5b",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-06T15:23:43Z",
+      "side": 1,
+      "message": "I don\u0027t think this move is a good idea.  Having op_ctx point to garbage is harder to debug than having it be null.  The 2 calls that were before it are set must be safe, since they\u0027re used to get the exports to set op_ctx.",
+      "revId": "ca6898d90ab6147ef46fc886beb8739e7a296c8a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3c491fc_da8018b3",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-06T15:23:43Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "ca6898d90ab6147ef46fc886beb8739e7a296c8a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05377a44_49756f56",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1463,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-06T15:23:43Z",
+      "side": 1,
+      "message": "I think the better solution here is to move the dec_state_t_ref() above the put_gsh_export(), so that op_ctx is fully valid.  Calling into mdcache with ctx_export and/or fsal_export NULL is likely to cause problems.",
+      "revId": "ca6898d90ab6147ef46fc886beb8739e7a296c8a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
