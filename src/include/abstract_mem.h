@@ -42,7 +42,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <abstract_atomic.h>
 #include "log.h"
+#include "gsh_list.h"
 
 /**
  * @page GeneralAllocator General Allocator Shim
@@ -302,7 +304,15 @@ gsh_free_size(void *p, size_t n __attribute__ ((unused)))
 typedef struct pool {
 	char *name; /*< The name of the pool */
 	size_t object_size; /*< The size of the objects created */
+	uint64_t cnt;  /* < counter to keep track of allocations */
+	struct glist_head mpool_next;	/*< list pointer for pools */
 } pool_t;
+
+extern struct glist_head mpool_list; /* head of pool list */
+extern pthread_mutex_t pool_mutex; /* Mutex to protect lists of pools */
+
+pool_t *pool_basic_init__(const char *name, size_t object_size,
+			  const char *file, int line, const char *function);
 
 /**
  * @brief Create a basic object pool
@@ -318,10 +328,6 @@ typedef struct pool {
  *
  * @param[in] name             The name of this pool
  * @param[in] object_size      The size of objects to allocate
- * @param[in] file             Calling source file
- * @param[in] line             Calling source line
- * @param[in] function         Calling source function
- *
  * @return A pointer to the pool object.  This pointer must not be
  *         dereferenced.  It may be stored or supplied as an argument
  *         to the other pool functions.  It must not be supplied as an
@@ -329,41 +335,10 @@ typedef struct pool {
  *         pool_destroy.
  */
 
-static inline pool_t *
-pool_basic_init__(const char *name, size_t object_size,
-		  const char *file, int line, const char *function)
-{
-	pool_t *pool = (pool_t *) gsh_malloc__(sizeof(pool_t), file, line,
-					function);
-
-	pool->object_size = object_size;
-
-	if (name)
-		pool->name = gsh_strdup__(name, file, line, function);
-	else
-		pool->name = NULL;
-
-	return pool;
-}
-
 #define pool_basic_init(name, object_size) \
 	pool_basic_init__(name, object_size, __FILE__, __LINE__, __func__)
 
-/**
- * @brief Destroy a memory pool
- *
- * This function destroys a memory pool.  All objects must be returned
- * to the pool before this function is called.
- *
- * @param[in] pool The pool to be destroyed.
- */
-
-static inline void
-pool_destroy(pool_t *pool)
-{
-	gsh_free(pool->name);
-	gsh_free(pool);
-}
+void pool_destroy(pool_t *pool);
 
 /**
  * @brief Allocate an object from a pool
@@ -392,7 +367,11 @@ pool_destroy(pool_t *pool)
 static inline void *
 pool_alloc__(pool_t *pool, const char *file, int line, const char *function)
 {
-	return gsh_calloc__(1, pool->object_size, file, line, function);
+	void *ptr;
+
+	ptr = gsh_calloc__(1, pool->object_size, file, line, function);
+	(void)atomic_inc_uint64_t(&pool->cnt);
+	return ptr;
 }
 
 #define pool_alloc(pool) \
@@ -418,6 +397,13 @@ static inline void
 pool_free(pool_t *pool, void *object)
 {
 	gsh_free(object);
+	if (object != NULL) {
+		/* We allow pool_free to be called when object is NULL because
+		 * it was never allocated. In that case, we MUST NOT decrement
+		 * the counter since it was never incremented.
+		 */
+		(void)atomic_dec_uint64_t(&pool->cnt);
+	}
 }
 
 #endif /* ABSTRACT_MEM_H */

@@ -63,6 +63,7 @@ SET(support_STAT_SRCS
    server_stats.c
    export_mgr.c
    nfs4_fs_locations.c
+   mem_pools.c
 )
 
 if(ERROR_INJECTION)

@@ -2077,6 +2077,39 @@ void server_dbus_delegations(struct deleg_stats *ds, DBusMessageIter *iter)
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
 
+
+/**
+ * @brief Report memory pool allocations
+ */
+void server_dbus_mem_pool(DBusMessageIter *iter)
+{
+	struct timespec timestamp;
+	DBusMessageIter array_iter;
+	struct glist_head *glist;
+	struct pool *pool_ptr;
+
+	now(&timestamp);
+	dbus_append_timestamp(iter, &timestamp);
+	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
+					 NULL, &array_iter);
+
+	PTHREAD_MUTEX_lock(&pool_mutex);
+
+	glist_for_each(glist, &mpool_list) {
+		pool_ptr = glist_entry(glist, struct pool, mpool_next);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_STRING,
+					       &pool_ptr->name);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+					       &pool_ptr->cnt);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+					       &pool_ptr->object_size);
+	}
+
+	PTHREAD_MUTEX_unlock(&pool_mutex);
+
+	dbus_message_iter_close_container(iter, &array_iter);
+}
+
 #endif				/* USE_DBUS */
 
 /**
