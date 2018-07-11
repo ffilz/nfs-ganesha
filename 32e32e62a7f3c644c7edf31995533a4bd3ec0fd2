@@ -16,6 +16,23 @@
       "revId": "32e32e62a7f3c644c7edf31995533a4bd3ec0fd2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc255eba_8a8ee79b",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-11T14:31:51Z",
+      "side": 1,
+      "message": "Hmm, vfs_readents is not much more than a wrapper, should we just eliminate it and call the appropriate function here (may cause problems if the right include file isn\u0027t included though). Optionally, we could move the baseloc logic into vfs_readents.\n\nWe should also document in comments, someone looking at the above code is going to wonder why it matters if baseloc is set before or after the call to vfs_readents.",
+      "revId": "32e32e62a7f3c644c7edf31995533a4bd3ec0fd2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
