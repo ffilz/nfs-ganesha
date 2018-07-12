@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d1ca12ed_22353ece",
+        "filename": "src/FSAL/fsal_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-07-12T02:37:21Z",
+      "side": 1,
+      "message": "I\u0027m actually not sure what the need was to strdup it, it won\u0027t get freed unless something calls in to dlopen() again...?\nDoesn\u0027t really matter for LogFatal but I\u0027ll just remove that gsh_strdup unless someone sees a reason to keep it",
+      "parentUuid": "bc2435b5_6a27f512",
+      "revId": "869fa6d21bb6df5bdf621b2de4b5dc72c01a1a6f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8b4766f_72995df1",
         "filename": "src/FSAL/fsal_manager.c",
         "patchSetId": 1
