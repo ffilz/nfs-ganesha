@@ -123,7 +123,7 @@ static fsal_status_t lookup(struct fsal_obj_handle *dir_hdl,
 			struct attrlist *attrs_out)
 {
 	return lookup_int(dir_hdl, path, obj_hdl, attrs_out,
-			RGW_LOOKUP_FLAG_NONE);
+			RGW_LOOKUP_FLAG_RCB);
 }
 
 struct rgw_cb_arg {
