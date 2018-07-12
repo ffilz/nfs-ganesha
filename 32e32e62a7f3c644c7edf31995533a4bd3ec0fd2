@@ -33,6 +33,24 @@
       "revId": "32e32e62a7f3c644c7edf31995533a4bd3ec0fd2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31436691_786fad8d",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2018-07-12T14:30:36Z",
+      "side": 1,
+      "message": "Actually that\u0027s not the proper fix for the caching issue, I will abandon this commit.\nd_off is computed on FreeBSD (see os/freebsd/subr.c) since the dirent struct does not have a d_off field, but the computation is wrong (at least on vanilla FreeBSD, don\u0027t know about PanFS). We have to find a proper way to retrieve offsets or do things differently on FreeBSD, I will think about a solution.\n\nI\u0027ll document in comments for this kind of cases in next commits, thanks.",
+      "parentUuid": "fc255eba_8a8ee79b",
+      "revId": "32e32e62a7f3c644c7edf31995533a4bd3ec0fd2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
