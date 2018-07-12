@@ -240,8 +240,9 @@ int load_fsal(const char *name,
 		retval = EPERM;	/* ELIBACC does not exist on MacOS */
 #endif
 		dl_error = gsh_strdup(dlerror());
-		LogCrit(COMPONENT_INIT, "Could not dlopen module:%s Error:%s",
-			path, dl_error);
+		LogFatal(COMPONENT_INIT,
+			 "Could not dlopen module:%s Error:%s. You might want to install the nfs-ganesha-%s package",
+			 path, dl_error, name);
 		goto errout;
 	}
 	dlerror();	/* clear it */
