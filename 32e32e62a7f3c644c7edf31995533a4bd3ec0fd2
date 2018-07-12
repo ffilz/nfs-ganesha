@@ -51,6 +51,24 @@
       "revId": "32e32e62a7f3c644c7edf31995533a4bd3ec0fd2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1490994_23aae077",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-12T15:21:05Z",
+      "side": 1,
+      "message": "With the new mechanism for managing the dirent cache and readdir (even if the dirent cache is skipped entirely), we need to have a stable \"cookie\" for each dirent.\n\nAt least EXT4 on Linux (and probably others) compute d_off as a hash of the filename. Unfortunately the way d_off is specified, it\u0027s the value to seek to to get to the NEXT dirent, which may cause skipping dirents during readdir on a changing directory, or even duplicate d_off values in some cases. FSAL_VFS now \"remembers\" the last d_off to attempt to get the \"offset\" of the entry in question to use as it\u0027s cookie. And then we skip that entry on a readdir that starts from a cookie.",
+      "parentUuid": "31436691_786fad8d",
+      "revId": "32e32e62a7f3c644c7edf31995533a4bd3ec0fd2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
