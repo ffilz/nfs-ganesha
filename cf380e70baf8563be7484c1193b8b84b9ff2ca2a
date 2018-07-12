@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5a92f26_a0431754",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-12T13:57:18Z",
+      "side": 1,
+      "message": "So, looking at the Ceph code, it looks like this callpath should *not* be setting this flag, so that it gets an exact match, rather than a partial match.  This smells like a bug in Ceph, rather than in Ganesha.",
+      "revId": "cf380e70baf8563be7484c1193b8b84b9ff2ca2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
