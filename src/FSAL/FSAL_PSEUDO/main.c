@@ -72,6 +72,8 @@ static struct fsal_module PSEUDOFS = {
 	}
 };
 
+struct fsal_obj_ops pseudo_ops;
+
 /* private helper for export object
  */
 
@@ -121,6 +123,9 @@ void pseudo_fsal_init(void)
 	}
 	myself->m_ops.create_export = pseudofs_create_export;
 	myself->m_ops.unload = unload_pseudo_fsal;
+
+	/* Initialize the fsal_obj_handle ops for FSAL PSEUDO */
+	pseudofs_handle_ops_init(&pseudo_ops);
 
 	/* initialize our config */
 	init_config(myself);

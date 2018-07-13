@@ -76,6 +76,8 @@ static struct fsal_module NULLFS = {
 	}
 };
 
+struct fsal_obj_ops null_ops;
+
 /* Module methods
  */
 
@@ -135,6 +137,9 @@ MODULE_INIT void nullfs_init(void)
 	}
 	myself->m_ops.create_export = nullfs_create_export;
 	myself->m_ops.init_config = init_config;
+
+	/* Initialize the fsal_obj_handle ops for FSAL NULL */
+	nullfs_handle_ops_init(&null_ops);
 }
 
 MODULE_FINI void nullfs_unload(void)

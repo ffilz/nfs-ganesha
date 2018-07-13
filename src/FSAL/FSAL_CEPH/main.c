@@ -91,6 +91,8 @@ struct ceph_fsal_module CephFSM = {
 	}
 };
 
+struct fsal_obj_ops ceph_ops;
+
 static struct config_item ceph_items[] = {
 	CONF_ITEM_PATH("ceph_conf", 1, MAXPATHLEN, NULL,
 		ceph_fsal_module, conf_path),
@@ -396,6 +398,9 @@ MODULE_INIT void init(void)
 #endif				/* CEPH_PNFS */
 	myself->m_ops.create_export = create_export;
 	myself->m_ops.init_config = init_config;
+
+	/* Initialize the fsal_obj_handle ops for FSAL CEPH */
+	handle_ops_init(&ceph_ops);
 }
 
 /**

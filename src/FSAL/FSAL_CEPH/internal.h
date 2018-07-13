@@ -64,6 +64,8 @@ struct ceph_fsal_module {
 };
 extern struct ceph_fsal_module CephFSM;
 
+extern struct fsal_obj_ops ceph_ops;
+
 /**
  * Ceph private export object
  */

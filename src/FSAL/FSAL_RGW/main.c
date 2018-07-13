@@ -86,6 +86,8 @@ struct rgw_fsal_module RGWFSM = {
 	}
 };
 
+struct fsal_obj_ops rgw_ops;
+
 static struct config_item rgw_items[] = {
 	CONF_ITEM_PATH("ceph_conf", 1, MAXPATHLEN, NULL,
 		rgw_fsal_module, conf_path),
@@ -412,6 +414,9 @@ MODULE_INIT void init(void)
 	/* Set up module operations */
 	myself->m_ops.create_export = create_export;
 	myself->m_ops.init_config = init_config;
+
+	/* Initialize the fsal_obj_handle ops for FSAL xxxx */
+	handle_ops_init(&rgw_ops);
 }
 
 /**
