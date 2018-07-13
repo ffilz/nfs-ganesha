@@ -31,6 +31,8 @@
 #ifndef FSAL_RGW_INTERNAL_INTERNAL
 #define FSAL_RGW_INTERNAL_INTERNAL
 
+extern struct fsal_obj_ops rgw_ops;
+
 #include <stdbool.h>
 #include <uuid/uuid.h>
 #include <dirent.h> /* NAME_MAX */

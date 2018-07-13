@@ -34,6 +34,8 @@
 
 struct mem_fsal_obj_handle;
 
+extern struct fsal_obj_ops mem_ops;
+
 /**
  * MEM internal export
  */

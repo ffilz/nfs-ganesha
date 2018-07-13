@@ -77,6 +77,8 @@ struct mem_fsal_module MEM = {
 	}
 };
 
+struct fsal_obj_ops mem_ops;
+
 static struct config_item mem_items[] = {
 	CONF_ITEM_UI32("Inode_Size", 0, 0x200000, 0,
 		       mem_fsal_module, inode_size),
@@ -173,6 +175,9 @@ MODULE_INIT void init(void)
 	myself->m_ops.init_config = mem_init_config;
 	glist_init(&MEM.mem_exports);
 	MEM.next_inode = 0xc0ffee;
+
+	/* Initialize the fsal_obj_handle ops for FSAL xxxx */
+	mem_handle_ops_init(&mem_ops);
 }
 
 MODULE_FINI void finish(void)

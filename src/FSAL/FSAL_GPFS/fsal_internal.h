@@ -46,6 +46,9 @@
 
 struct gpfs_filesystem;
 
+extern struct fsal_obj_ops gpfs_ops;
+extern struct fsal_obj_ops gpfs_ops_with_pnfs;
+
 void gpfs_handle_ops_init(struct fsal_obj_ops *ops);
 
 bool fsal_error_is_event(fsal_status_t status);

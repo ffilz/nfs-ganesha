@@ -77,6 +77,8 @@ struct glusterfs_fsal_module GlusterFS = {
 	}
 };
 
+struct fsal_obj_ops gluster_ops;
+
 static struct config_item glfs_params[] = {
 	CONF_ITEM_BOOL("pnfs_mds", false,
 		       fsal_staticfsinfo_t, pnfs_mds),
@@ -145,6 +147,9 @@ MODULE_INIT void glusterfs_init(void)
 	 */
 	myself->m_ops.getdeviceinfo = getdeviceinfo;
 	myself->m_ops.fsal_pnfs_ds_ops = pnfs_ds_ops_init;
+
+	/* Initialize the fsal_obj_handle ops for FSAL xxxx */
+	handle_ops_init(&gluster_ops);
 
 	PTHREAD_MUTEX_init(&GlusterFS.lock, NULL);
 	glist_init(&GlusterFS.fs_obj);

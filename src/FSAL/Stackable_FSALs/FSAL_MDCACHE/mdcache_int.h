@@ -45,6 +45,8 @@ typedef struct mdcache_fsal_obj_handle mdcache_entry_t;
 
 #define MDC_UNEXPORT 1
 
+extern struct fsal_obj_ops mdcache_ops;
+
 /**
  * @brief Reason an entry is being inserted/looked up
  */

@@ -86,6 +86,8 @@ static struct fsal_module MDCACHE = {
 	}
 };
 
+struct fsal_obj_ops mdcache_ops;
+
 /* private helper for export object
  */
 
@@ -285,6 +287,9 @@ void mdcache_fsal_init(void)
 	/*myself->m_ops.create_export = mdcache_fsal_create_export;*/
 	myself->m_ops.init_config = mdcache_fsal_init_config;
 	myself->m_ops.unload = mdcache_fsal_unload;
+
+	/* Initialize the fsal_obj_handle ops for FSAL MDCACHE */
+	mdcache_handle_ops_init(&mdcache_ops);
 }
 
 /**

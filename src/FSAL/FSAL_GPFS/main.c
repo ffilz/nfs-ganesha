@@ -76,6 +76,9 @@ static struct fsal_module GPFS = {
 	}
 };
 
+struct fsal_obj_ops gpfs_ops;
+struct fsal_obj_ops gpfs_ops_with_pnfs;
+
 /** @struct gpfs_params
  *  @brief Configuration items
  */
@@ -228,6 +231,11 @@ MODULE_INIT void gpfs_init(void)
 	myself->m_ops.fsal_extract_stats = fsal_gpfs_extract_stats;
 #endif
 	myself->m_ops.fsal_reset_stats = fsal_gpfs_reset_stats;
+
+	/* Initialize the fsal_obj_handle ops for FSAL GPFS */
+	gpfs_handle_ops_init(&gpfs_ops);
+	gpfs_handle_ops_init(&gpfs_ops_with_pnfs);
+	handle_ops_pnfs(&gpfs_ops_with_pnfs);
 }
 
 /** @fn MODULE_FINI void gpfs_unload(void)

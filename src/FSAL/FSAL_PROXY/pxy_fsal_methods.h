@@ -18,6 +18,8 @@ struct pxy_fsal_module {
 	struct fsal_module module;
 };
 
+extern struct fsal_obj_ops proxy_ops;
+
 struct pxy_client_params {
 	uint32_t retry_sleeptime;
 	sockaddr_t srv_addr;

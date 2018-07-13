@@ -25,6 +25,7 @@ struct nullfs_readdir_state {
 
 extern struct next_ops next_ops;
 extern struct fsal_up_vector fsal_up_top;
+extern struct fsal_obj_ops null_ops;
 void nullfs_handle_ops_init(struct fsal_obj_ops *ops);
 
 /*
