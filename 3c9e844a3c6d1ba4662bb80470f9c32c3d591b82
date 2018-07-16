@@ -108,6 +108,24 @@
       "revId": "3c9e844a3c6d1ba4662bb80470f9c32c3d591b82",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acb0eb73_bb85d464",
+        "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-16T15:02:27Z",
+      "side": 1,
+      "message": "Yea, I can change all of them to use this mechanism, it does clarify that for those FSALs where there is a single ops vector or at least a default ops vector.",
+      "parentUuid": "cec1f5d3_ce38225d",
+      "revId": "3c9e844a3c6d1ba4662bb80470f9c32c3d591b82",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
