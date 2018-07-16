@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3951ef_4318341f",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-16T17:14:21Z",
+      "side": 1,
+      "message": "I admit, I don\u0027t know how these modules work in FreeBSD; that said, doing a lookup for the module on each call seems to have high latency.  Would it be possible to look these modules up once on startup, and save the syscall_num for each one, and just call that syscall directly?",
+      "revId": "32b09069f599aab975cc243620468aee68f737c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
