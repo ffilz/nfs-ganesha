@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "bd6f4e1b_9650c7d2",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-16T18:06:55Z",
+      "side": 1,
+      "message": "next doesn\u0027t use STRICT_PACKAGE anymore, it uses the gopt stuff, so the USE_FSAL_GLUSTER_REQUIRED was correct.",
+      "revId": "22b67c9295a24a62e4b218a35c094b901545c291",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44e8d6ad_55debea8",
         "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
         "patchSetId": 1
@@ -30,6 +47,24 @@
       "writtenOn": "2018-07-16T17:48:14Z",
       "side": 1,
       "message": "Standard C say that \u0027#include \u003c...\u003e\u0027 searches for the file ... under control of the implementation [of the compiler], i.e. in /usr/include/...  (And gcc has -isys for adding to the system header search path.)\n\nAnd \u0027#include \"...\"\u0027 searches for the file not controlled by the implementation. E.g. by using -I../include.\n\nIf there happened to be a /usr/include/os/xattr.h then using #include \u003cos/xattr.h\u003e in our source tree would be ambiguous.\n\nAs I said in the commit message, all those other uses of \u0027#include \u003cos/xattr.h\u003e\u0027 are a (nit) error, and hence I fixed them.",
+      "revId": "22b67c9295a24a62e4b218a35c094b901545c291",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "990ead0d_50c112c0",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-16T18:06:55Z",
+      "side": 1,
+      "message": "\"os/xattr.h\" is one of our headers, not a system header.",
+      "parentUuid": "4e3c327f_fa7b1bdc",
       "revId": "22b67c9295a24a62e4b218a35c094b901545c291",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
