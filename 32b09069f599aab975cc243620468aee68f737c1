@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "e29480a1_1c197b2c",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2018-07-17T09:42:48Z",
+      "side": 1,
+      "message": "Indeed, this is actually what we are doing in our internal fork for better performance.\nBut the issue here is that syscall numbers are dynamically allocated, it would lead to errors if one of the module is somehow reloaded with a different syscall number while ganesha is running.\nThe syscall code is a copy of what is done in os/freebsd/atsyscalls.c.",
+      "parentUuid": "1ea12c67_28d8875f",
+      "revId": "32b09069f599aab975cc243620468aee68f737c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e63c6d3d_7fb1bb7e",
         "filename": "src/os/freebsd/subr.c",
         "patchSetId": 2
