@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83fcad6f_a174ae80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:27:17Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nwe cannot make use of fid_reserved like on PanFS since it may be used internally by other filesystems",
+      "revId": "44c85278cbc7119879e43bd40abe2a9343d254ef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53143421_74e48754",
+        "filename": "src/include/os/freebsd/fsal_handle_syscalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:27:17Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define v_to_fhandle(hdl) (struct fhandle *) \\\n+\t\t\t  ((char *)hdl + offsetof(struct v_fhandle, fh_fsid))",
+      "revId": "44c85278cbc7119879e43bd40abe2a9343d254ef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
