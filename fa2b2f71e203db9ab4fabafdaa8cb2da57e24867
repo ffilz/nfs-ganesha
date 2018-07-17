@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36451ef2_0970eb48",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1955,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:36:40Z",
+      "side": 1,
+      "message": "ERROR: else should follow close brace \u0027}\u0027\n+\t\t\t}\n+\t\t\telse",
+      "revId": "fa2b2f71e203db9ab4fabafdaa8cb2da57e24867",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5829b9b1_f5656a68",
+        "filename": "src/FSAL/FSAL_VFS/handle_syscalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:36:40Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct fhandle *handle \u003d v_to_fhandle(myself-\u003ehandle-\u003ehandle_data);\n+\tretval \u003d fhstat(handle, \u0026st);",
+      "revId": "fa2b2f71e203db9ab4fabafdaa8cb2da57e24867",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
