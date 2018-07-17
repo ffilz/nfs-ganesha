@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35bbf5b6_7ce1798f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:29:26Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nthere\u0027s some computation done in to_vfs_dirent for FreeBSD but it\u0027s not valid for upstream filesystems",
+      "revId": "fd208e547f845c5b3e874fd9c7882c78b2d2dd4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69267f9c_0c2e19d2",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:29:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t * This is a very inefficient workaround to retrieve directory offsets.",
+      "revId": "fd208e547f845c5b3e874fd9c7882c78b2d2dd4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc4d2134_a6f8a8c5",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:29:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t * We rewind dirfd\u0027s to its previous offset in order read the directory",
+      "revId": "fd208e547f845c5b3e874fd9c7882c78b2d2dd4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9861dd86_d4813e44",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-17T06:29:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tnreadent \u003d vfs_readents(dirfd, entbuf, dentryp-\u003evd_reclen, \u0026entloc);",
+      "revId": "fd208e547f845c5b3e874fd9c7882c78b2d2dd4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
