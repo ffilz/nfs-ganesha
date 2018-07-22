@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42dbf34e_4b4404b5",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-22T18:25:21Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027setthreaduid\u0027, this function\u0027s name, in a string\n+\tmod \u003d modfind(\"sys/setthreaduid\");",
+      "revId": "2c8ef872c7c96ccbe22a725c33905358baae266f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "323f5922_5c93a8bd",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-22T18:25:21Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027setthreadgid\u0027, this function\u0027s name, in a string\n+\tmod \u003d modfind(\"sys/setthreadgid\");",
+      "revId": "2c8ef872c7c96ccbe22a725c33905358baae266f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01507a3_4710c0b8",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-22T18:25:21Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027setthreadgroups\u0027, this function\u0027s name, in a string\n+\tmod \u003d modfind(\"sys/setthreadgroups\");",
+      "revId": "2c8ef872c7c96ccbe22a725c33905358baae266f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
