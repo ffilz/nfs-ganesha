@@ -46,6 +46,7 @@
 struct nfs4_write_data {
 	WRITE4res *res_WRITE4;		/**< Results for write */
 	state_owner_t *owner;		/**< Owner of state */
+	struct fsal_io_arg write_arg;	/**< Arguments for write call */
 };
 
 /**

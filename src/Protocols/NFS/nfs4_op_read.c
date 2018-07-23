@@ -49,8 +49,14 @@
 #include "export_mgr.h"
 
 struct nfs4_read_data {
-	READ4res *res_READ4;		/**< Results for read */
-	state_owner_t *owner;		/**< Owner of state */
+	/** Results for read */
+	READ4res *res_READ4;
+	/** Owner of state */
+	state_owner_t *owner;
+	/** Indicator if operation has completed or not. */
+	bool complete;
+	/** Arguments for read call - must be last */
+	struct fsal_io_arg read_arg;
 };
 
 /**
@@ -314,7 +320,7 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 	uint64_t MaxOffsetRead =
 			atomic_fetch_uint64_t(
 				&op_ctx->ctx_export->MaxOffsetRead);
-	struct nfs4_read_data read_data;
+	struct nfs4_read_data *read_data;
 	struct fsal_io_arg *read_arg = alloca(sizeof(*read_arg) +
 						sizeof(struct iovec));
 	uint32_t resp_size;
@@ -563,7 +569,9 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 		}
 	}
 
-	/* Set up args */
+	/* Set up args, allocate from heap */
+	read_data = gsh_calloc(1, sizeof(*read_data) + sizeof(struct iovec));
+	read_arg = &read_data->read_arg;
 	read_arg->info = info;
 	read_arg->state = state_found;
 	read_arg->offset = offset;
@@ -573,11 +581,11 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 	read_arg->io_amount = 0;
 	read_arg->end_of_file = false;
 
-	read_data.res_READ4 = res_READ4;
-	read_data.owner = owner;
+	read_data->res_READ4 = res_READ4;
+	read_data->owner = owner;
 
 	/* Do the actual read */
-	obj->obj_ops->read2(obj, bypass, nfs4_read_cb, read_arg, &read_data);
+	obj->obj_ops->read2(obj, bypass, nfs4_read_cb, read_arg, read_data);
 
  out:
 	if (state_open != NULL)
