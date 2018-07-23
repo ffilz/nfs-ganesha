@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1d843d71_82261e2b",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-07-23T12:37:33Z",
+      "side": 1,
+      "message": "Defnitely not. It sounds like we should be checking BLOCKS. That said, should we be doing the same in the WRITE handling codepaths as well? nfs4_write shouldn\u0027t involve creating files either...",
+      "parentUuid": "4d757a8e_f67ef72b",
+      "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1fab76fe_10f041a0",
         "filename": "src/Protocols/NFS/nfs4_op_write.c",
         "patchSetId": 1
@@ -98,6 +116,24 @@
       "writtenOn": "2018-07-22T18:02:12Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tint status;\n+\tALLOCATE4args * const arg_ALLOCATE4 \u003d \u0026op-\u003enfs_argop4_u.opallocate;",
+      "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8f003aa_f575fb49",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-07-23T12:37:33Z",
+      "side": 1,
+      "message": "This warning seems to be bogus. There is a blank line after the declarations. I guess maybe checkpatch isn\u0027t recognizing the ALLOCATE4args line as a declaration?",
+      "parentUuid": "802c49b5_3eb80324",
       "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
