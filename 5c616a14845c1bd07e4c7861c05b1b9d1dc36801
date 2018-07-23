@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0d98e3e_ed583d94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-23T11:54:36Z",
+      "side": 1,
+      "message": "Can you add that this is for NFS 4.2 OP_ALLOCATE?",
+      "revId": "5c616a14845c1bd07e4c7861c05b1b9d1dc36801",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3b3cee6_5c76e042",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-23T11:54:36Z",
+      "side": 1,
+      "message": "Could we call this fallocate?  allocate is too generic.",
+      "revId": "5c616a14845c1bd07e4c7861c05b1b9d1dc36801",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
