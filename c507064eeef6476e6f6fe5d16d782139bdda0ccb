@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "4d757a8e_f67ef72b",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-23T12:08:15Z",
+      "side": 1,
+      "message": "Can op_allocate create a new file?  Or should this be checking BLOCKS?",
+      "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fab76fe_10f041a0",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-23T12:08:15Z",
+      "side": 1,
+      "message": "Deref the state?  (or goto out)",
+      "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa5eed05_dde84c7f",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-23T12:08:15Z",
+      "side": 1,
+      "message": "Deref the state? (or goto out)",
+      "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33f1af4b_a7400cbb",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-23T12:08:15Z",
+      "side": 1,
+      "message": "This is a duplicate of the data logged at line 672",
+      "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bad34e8_4611b02a",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-23T12:08:15Z",
+      "side": 1,
+      "message": "These should probably get their own file(s).  They were here because they used write.",
+      "revId": "c507064eeef6476e6f6fe5d16d782139bdda0ccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "802c49b5_3eb80324",
         "filename": "src/Protocols/NFS/nfs4_op_write.c",
         "patchSetId": 1
