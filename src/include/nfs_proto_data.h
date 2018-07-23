@@ -308,6 +308,10 @@ typedef struct compound_data {
 	struct export_perms saved_export_perms; /*< Permissions for export for
 					       savedFH */
 	struct svc_req *req;	/*< RPC Request related to the compound */
+	nfs_argop4 *argarray;
+	nfs_res_t *res;
+	nfs_resop4 *resarray;
+	uint32_t argarray_len;
 	nfs_client_cred_t credential;	/*< Raw RPC credentials */
 	nfs_client_id_t *preserved_clientid;	/*< clientid that has lease
 						   reserved, if any */
@@ -318,6 +322,7 @@ typedef struct compound_data {
 					    used */
 	bool sa_cachethis;	/*< True if cachethis was specified in
 				    SEQUENCE op. */
+	nfs_opnum4 opcode;	/*< Current NFS4 OP */
 	uint32_t oppos;		/*< Position of the operation within the
 				    request processed  */
 	const char *opname;	/*< Name of the operation */
