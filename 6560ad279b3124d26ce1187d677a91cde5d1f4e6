@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c36e0022_0378e33b",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-23T14:06:06Z",
+      "side": 1,
+      "message": "Probably should change written to allocated/deallocated",
+      "revId": "6560ad279b3124d26ce1187d677a91cde5d1f4e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0e3a722_a0682378",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-23T14:06:06Z",
+      "side": 1,
+      "message": "Change comment",
+      "revId": "6560ad279b3124d26ce1187d677a91cde5d1f4e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac75f869_eb0992cb",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-23T14:06:06Z",
+      "side": 1,
+      "message": "Maybe a comment as to why we don\u0027t use the delegation or layout stateid going forward? Could that trigger recall?",
+      "revId": "6560ad279b3124d26ce1187d677a91cde5d1f4e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f721bd11_b286f0c0",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-23T14:06:06Z",
+      "side": 1,
+      "message": "This is the branch for all-0 or all-1 stateid, which doesn\u0027t match up with the comment...",
+      "revId": "6560ad279b3124d26ce1187d677a91cde5d1f4e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
