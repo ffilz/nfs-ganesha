@@ -36,7 +36,18 @@
 #include <sys/types.h>
 #include <sys/param.h>
 
+#include "nfs_core.h"
 #include "sal_data.h"
+
+enum nfs_req_result {
+	NFS_REQ_OK = 0,
+	NFS_REQ_DROP = 1,
+	NFS_REQ_ASYNC_WAIT = 2,
+	/** This value is used in NFSv4 Compound processing to indicate the
+	 *  processing should stop.
+	 */
+	NFS_REQ_STOP = 3,
+};
 
 extern const nfs_function_desc_t nfs3_func_desc[];
 extern const nfs_function_desc_t nfs4_func_desc[];
@@ -375,9 +386,6 @@ void nfs4_op_removexattr_Free(nfs_resop4 *resp);
 /* @}
  * -- End of NFS protocols functions. --
  */
-
-#define NFS_REQ_OK   0
-#define NFS_REQ_DROP 1
 
 /* Free functions */
 void mnt1_Mnt_Free(nfs_res_t *);
