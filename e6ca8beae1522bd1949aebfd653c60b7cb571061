@@ -22,6 +22,30 @@
       "revId": "e6ca8beae1522bd1949aebfd653c60b7cb571061",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2f68867_a53f0de3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2018-07-24T10:31:43Z",
+      "side": 1,
+      "message": "All the FSALs install their own (sample) config in /etc/ganesha.\n\nAll the other FSALs sample config files that are installed in /etc/ganesha are documented here.\n\nTo be foolishly consistent with all the other FSALs, gluster.conf is (already) installed in /etc/ganesha and this merely adds a reference here, like all the other FSALs.\n\nChanging where (all) the FSALs install their configs is beyond the scope of this change.",
+      "parentUuid": "94419bbf_03d11013",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 43
+      },
+      "revId": "e6ca8beae1522bd1949aebfd653c60b7cb571061",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
