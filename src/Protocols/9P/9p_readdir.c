@@ -236,21 +236,21 @@ int _9p_readdir(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 
 		/* Deal with "." and ".." */
 		cursor = fill_entry(cursor, _9P_QTDIR,
-			       pfid->pentry->fileid, 1LL,
+			       pfid->pentry->fileid, -1ULL,
 			       DT_DIR, strlen(pathdot), pathdot);
 		dcount += 24 + strlen(pathdot);
 
 		cursor =
 		    fill_entry(cursor, _9P_QTDIR,
-			       pentry_dot_dot->fileid,
-			       2LL, DT_DIR, strlen(pathdotdot), pathdotdot);
+			       pentry_dot_dot->fileid, -2ULL,
+			       DT_DIR, strlen(pathdotdot), pathdotdot);
 		dcount += 24 + strlen(pathdotdot);
 
 		/* put the parent */
 		pentry_dot_dot->obj_ops->put_ref(pentry_dot_dot);
 
 		cookie = 0LL;
-	} else if (*offset == 1LL) {
+	} else if (*offset == -1ULL) {
 		/* compute the parent entry */
 		fsal_status = fsal_lookupp(pfid->pentry, &pentry_dot_dot, NULL);
 		if (FSAL_IS_ERROR(fsal_status))
@@ -260,15 +260,15 @@ int _9p_readdir(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 
 		cursor =
 		    fill_entry(cursor, _9P_QTDIR,
-			       pentry_dot_dot->fileid,
-			       2LL, DT_DIR, strlen(pathdotdot), pathdotdot);
+			       pentry_dot_dot->fileid, -2ULL,
+			       DT_DIR, strlen(pathdotdot), pathdotdot);
 		dcount += 24 + strlen(pathdotdot);
 
 		/* put the parent */
 		pentry_dot_dot->obj_ops->put_ref(pentry_dot_dot);
 
 		cookie = 0LL;
-	} else if (*offset == 2LL) {
+	} else if (*offset == -2ULL) {
 		cookie = 0LL;
 	} else {
 		cookie = (uint64_t) (*offset);
