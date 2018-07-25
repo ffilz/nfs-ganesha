@@ -660,6 +660,168 @@ const nfs_function_desc_t rquota2_func_desc[] = {
 				       .dispatch_behaviour = NEEDS_CRED}
 };
 
+void auth_failure(request_data_t *reqdata, enum auth_stat auth_rc)
+{
+	svcerr_auth(&reqdata->r_u.req.svc, auth_rc);
+	/* nb, a no-op when req is uncacheable */
+	if (nfs_dupreq_delete(&reqdata->r_u.req.svc) != DUPREQ_SUCCESS) {
+		LogCrit(COMPONENT_DISPATCH,
+			"Attempt to delete duplicate request failed on line %d",
+			__LINE__);
+	}
+}
+
+void free_args(request_data_t *reqdata)
+{
+	const nfs_function_desc_t *reqdesc = reqdata->r_u.req.funcdesc;
+
+	/* Free the allocated resources once the work is done */
+	/* Free the arguments */
+	if ((reqdata->r_u.req.svc.rq_msg.cb_vers == 2)
+	 || (reqdata->r_u.req.svc.rq_msg.cb_vers == 3)
+	 || (reqdata->r_u.req.svc.rq_msg.cb_vers == 4)) {
+		if (!xdr_free(reqdesc->xdr_decode_func,
+			      &reqdata->r_u.req.arg_nfs)) {
+			LogCrit(COMPONENT_DISPATCH,
+				"%s FAILURE: Bad xdr_free for %s",
+				__func__,
+				reqdesc->funcname);
+		}
+	}
+
+	/* Finalize the request. */
+	nfs_dupreq_rele(&reqdata->r_u.req.svc, reqdesc);
+
+	SetClientIP(NULL);
+
+	/* Clean up the op_ctx */
+	if (op_ctx->client != NULL) {
+		put_gsh_client(op_ctx->client);
+		op_ctx->client = NULL;
+	}
+
+	if (op_ctx->ctx_export != NULL) {
+		put_gsh_export(op_ctx->ctx_export);
+		op_ctx->ctx_export = NULL;
+	}
+
+	clean_credentials();
+	op_ctx = NULL;
+
+#ifdef USE_LTTNG
+	tracepoint(nfs_rpc, end, reqdata);
+#endif
+}
+
+void complete_request(request_data_t *reqdata,
+		      int rc,
+		      dupreq_status_t dpq_status)
+{
+	SVCXPRT *xprt = reqdata->r_u.req.svc.rq_xprt;
+	nfs_res_t *res_nfs = reqdata->r_u.req.res_nfs;
+	const nfs_function_desc_t *reqdesc = reqdata->r_u.req.funcdesc;
+
+	/* NFSv4 stats are handled in nfs4_compound() */
+	if (reqdata->r_u.req.svc.rq_msg.cb_prog != NFS_program[P_NFS]
+	    || reqdata->r_u.req.svc.rq_msg.cb_vers != NFS_V4)
+		server_stats_nfs_done(reqdata, rc, false);
+
+	/* If request is dropped, no return to the client */
+	if (rc == NFS_REQ_DROP) {
+		/* The request was dropped */
+		LogDebug(COMPONENT_DISPATCH,
+			 "Drop request rpc_xid=%" PRIu32
+			 ", program %" PRIu32
+			 ", version %" PRIu32
+			 ", function %" PRIu32,
+			 reqdata->r_u.req.svc.rq_msg.rm_xid,
+			 reqdata->r_u.req.svc.rq_msg.cb_prog,
+			 reqdata->r_u.req.svc.rq_msg.cb_vers,
+			 reqdata->r_u.req.svc.rq_msg.cb_proc);
+
+		/* If the request is not normally cached, then the entry
+		 * will be removed later.  We only remove a reply that is
+		 * normally cached that has been dropped.
+		 */
+		if (nfs_dupreq_delete(&reqdata->r_u.req.svc)
+		    != DUPREQ_SUCCESS) {
+			LogCrit(COMPONENT_DISPATCH,
+				"Attempt to delete duplicate request failed on line %d",
+				__LINE__);
+		}
+		return;
+	} else {
+		LogFullDebug(COMPONENT_DISPATCH,
+			     "Before svc_sendreply on socket %d", xprt->xp_fd);
+
+		reqdata->r_u.req.svc.rq_msg.RPCM_ack.ar_results.where = res_nfs;
+		reqdata->r_u.req.svc.rq_msg.RPCM_ack.ar_results.proc =
+					reqdesc->xdr_encode_func;
+
+		if (svc_sendreply(&reqdata->r_u.req.svc) >= XPRT_DIED) {
+			LogDebug(COMPONENT_DISPATCH,
+				 "NFS DISPATCHER: FAILURE: Error while calling svc_sendreply on a new request. rpcxid=%"
+				 PRIu32
+				 " socket=%d function:%s client:%s program:%"
+				 PRIu32
+				 " nfs version:%" PRIu32
+				 " proc:%" PRIu32
+				 " errno: %d",
+				 reqdata->r_u.req.svc.rq_msg.rm_xid,
+				 xprt->xp_fd,
+				 reqdesc->funcname,
+				 op_ctx->client->hostaddr_str,
+				 reqdata->r_u.req.svc.rq_msg.cb_prog,
+				 reqdata->r_u.req.svc.rq_msg.cb_vers,
+				 reqdata->r_u.req.svc.rq_msg.cb_proc,
+				 errno);
+			SVC_DESTROY(xprt);
+			return;
+		}
+
+		LogFullDebug(COMPONENT_DISPATCH,
+			     "After svc_sendreply on socket %d", xprt->xp_fd);
+
+	}			/* rc == NFS_REQ_DROP */
+
+	/* Finish any request not already deleted */
+	if (dpq_status == DUPREQ_SUCCESS)
+		(void) nfs_dupreq_finish(&reqdata->r_u.req.svc, res_nfs);
+}
+
+void complete_request_instrumentation(request_data_t *reqdata)
+{
+#ifdef USE_LTTNG
+	tracepoint(nfs_rpc, op_end, reqdata);
+#endif
+
+#if defined(HAVE_BLKIN)
+	BLKIN_TIMESTAMP(
+		&reqdata->r_u.req.svc.bl_trace,
+		&reqdata->r_u.req.svc.rq_xprt->blkin.endp,
+		"nfs_rpc_process_request-post-service");
+#endif
+}
+
+/** @brief Completion of async RPC dispatch
+ *
+ * This function is called by an RPC op handler that has previously returned
+ * NFS_REQ_ASYNC to complete the operation and send the reply and clean up the
+ * RPC transport.
+ *
+ * @param[in] reqdata    The request data for the operation
+ * @param[in] rc         NFS_REQ_OK or NFS_REQ_DROP
+ */
+void nfs_rpc_complete_async_request(request_data_t *reqdata,
+				    enum nfs_req_result rc)
+{
+	complete_request_instrumentation(reqdata);
+	complete_request(reqdata, rc, DUPREQ_SUCCESS);
+	free_args(reqdata);
+
+	/** @todo FSF - what do we need to do to finish up with ntirpc? */
+}
+
 /**
  * @brief Main RPC dispatcher routine
  *
@@ -1108,8 +1270,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 				reqdata->r_u.req.svc.rq_msg.cb_vers,
 				reqdata->r_u.req.svc.rq_msg.cb_proc);
 
-			auth_rc = AUTH_TOOWEAK;
-			goto auth_failure;
+			auth_failure(reqdata, AUTH_TOOWEAK);
+			goto freeargs;
 		}
 
 		if ((EXPORT_OPTION_NFSV3 & export_perms.options) == 0) {
@@ -1122,8 +1284,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 				op_ctx_export_path(op_ctx->ctx_export),
 				client_ip);
 
-			auth_rc = AUTH_FAILED;
-			goto auth_failure;
+			auth_failure(reqdata, AUTH_FAILED);
+			goto freeargs;
 		}
 
 		/* Check transport type */
@@ -1141,8 +1303,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 				op_ctx_export_path(op_ctx->ctx_export),
 				client_ip);
 
-			auth_rc = AUTH_FAILED;
-			goto auth_failure;
+			auth_failure(reqdata, AUTH_FAILED);
+			goto freeargs;
 		}
 
 		/* Test if export allows the authentication provided */
@@ -1157,8 +1319,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 				op_ctx_export_path(op_ctx->ctx_export),
 				client_ip);
 
-			auth_rc = AUTH_TOOWEAK;
-			goto auth_failure;
+			auth_failure(reqdata, AUTH_TOOWEAK);
+			goto freeargs;
 		}
 
 		/* Check if client is using a privileged port,
@@ -1172,8 +1334,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 				op_ctx_export_path(op_ctx->ctx_export),
 				client_ip);
 
-			auth_rc = AUTH_TOOWEAK;
-			goto auth_failure;
+			auth_failure(reqdata, AUTH_TOOWEAK);
+			goto freeargs;
 		}
 	}
 
@@ -1252,8 +1414,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 			op_ctx_export_path(op_ctx->ctx_export),
 			reqdata->r_u.req.svc.rq_msg.cb_vers,
 			reqdata->r_u.req.svc.rq_msg.cb_proc);
-		auth_rc = AUTH_TOOWEAK;
-		goto auth_failure;
+		auth_failure(reqdata, AUTH_TOOWEAK);
+		goto freeargs;
 	} else {
 		/* Get user credentials */
 		if (reqdesc->dispatch_behaviour & NEEDS_CRED) {
@@ -1268,8 +1430,8 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 					"could not get uid and gid, rejecting client %s",
 					client_ip);
 
-				auth_rc = AUTH_TOOWEAK;
-				goto auth_failure;
+				auth_failure(reqdata, AUTH_TOOWEAK);
+				goto freeargs;
 			}
 		}
 
@@ -1329,133 +1491,19 @@ static enum xprt_stat nfs_rpc_process_request(request_data_t *reqdata)
 		rc = reqdesc->service_function(arg_nfs, &reqdata->r_u.req.svc,
 					res_nfs);
 
-#ifdef USE_LTTNG
-	tracepoint(nfs_rpc, op_end, reqdata);
-#endif
-
-#if defined(HAVE_BLKIN)
-		BLKIN_TIMESTAMP(
-			&reqdata->r_u.req.svc.bl_trace,
-			&reqdata->r_u.req.svc.rq_xprt->blkin.endp,
-			"nfs_rpc_process_request-post-service");
-#endif
+		complete_request_instrumentation(reqdata);
 	}
 
 #ifdef _USE_NFS3
  req_error:
 #endif /* _USE_NFS3 */
 
-/* NFSv4 stats are handled in nfs4_compound()
- */
-	if (reqdata->r_u.req.svc.rq_msg.cb_prog != NFS_program[P_NFS]
-	    || reqdata->r_u.req.svc.rq_msg.cb_vers != NFS_V4)
-		server_stats_nfs_done(reqdata, rc, false);
-
-	/* If request is dropped, no return to the client */
-	if (rc == NFS_REQ_DROP) {
-		/* The request was dropped */
-		LogDebug(COMPONENT_DISPATCH,
-			 "Drop request rpc_xid=%" PRIu32
-			 ", program %" PRIu32
-			 ", version %" PRIu32
-			 ", function %" PRIu32,
-			 reqdata->r_u.req.svc.rq_msg.rm_xid,
-			 reqdata->r_u.req.svc.rq_msg.cb_prog,
-			 reqdata->r_u.req.svc.rq_msg.cb_vers,
-			 reqdata->r_u.req.svc.rq_msg.cb_proc);
-
-		/* If the request is not normally cached, then the entry
-		 * will be removed later.  We only remove a reply that is
-		 * normally cached that has been dropped.
-		 */
-		if (nfs_dupreq_delete(&reqdata->r_u.req.svc)
-		    != DUPREQ_SUCCESS) {
-			LogCrit(COMPONENT_DISPATCH,
-				"Attempt to delete duplicate request failed on line %d",
-				__LINE__);
-		}
-		goto freeargs;
-	} else {
-		LogFullDebug(COMPONENT_DISPATCH,
-			     "Before svc_sendreply on socket %d", xprt->xp_fd);
-
-		reqdata->r_u.req.svc.rq_msg.RPCM_ack.ar_results.where = res_nfs;
-		reqdata->r_u.req.svc.rq_msg.RPCM_ack.ar_results.proc =
-					reqdesc->xdr_encode_func;
-		xprt_rc = svc_sendreply(&reqdata->r_u.req.svc);
-		if (xprt_rc >= XPRT_DIED) {
-			LogDebug(COMPONENT_DISPATCH,
-				 "NFS DISPATCHER: FAILURE: Error while calling svc_sendreply on a new request. rpcxid=%"
-				 PRIu32
-				 " socket=%d function:%s client:%s program:%"
-				 PRIu32
-				 " nfs version:%" PRIu32
-				 " proc:%" PRIu32
-				 " errno: %d",
-				 reqdata->r_u.req.svc.rq_msg.rm_xid,
-				 xprt->xp_fd,
-				 reqdesc->funcname,
-				 client_ip,
-				 reqdata->r_u.req.svc.rq_msg.cb_prog,
-				 reqdata->r_u.req.svc.rq_msg.cb_vers,
-				 reqdata->r_u.req.svc.rq_msg.cb_proc,
-				 errno);
-			SVC_DESTROY(xprt);
-			goto freeargs;
-		}
-
-		LogFullDebug(COMPONENT_DISPATCH,
-			     "After svc_sendreply on socket %d", xprt->xp_fd);
-
-	}			/* rc == NFS_REQ_DROP */
-
-	/* Finish any request not already deleted */
-	if (dpq_status == DUPREQ_SUCCESS)
-		dpq_status = nfs_dupreq_finish(&reqdata->r_u.req.svc, res_nfs);
-	goto freeargs;
-
- auth_failure:
-	svcerr_auth(&reqdata->r_u.req.svc, auth_rc);
-	/* nb, a no-op when req is uncacheable */
-	if (nfs_dupreq_delete(&reqdata->r_u.req.svc) != DUPREQ_SUCCESS) {
-		LogCrit(COMPONENT_DISPATCH,
-			"Attempt to delete duplicate request failed on line %d",
-			__LINE__);
-	}
+	complete_request(reqdata, rc, dpq_status);
 
  freeargs:
-	/* Free the allocated resources once the work is done */
-	/* Free the arguments */
-	if ((reqdata->r_u.req.svc.rq_msg.cb_vers == 2)
-	 || (reqdata->r_u.req.svc.rq_msg.cb_vers == 3)
-	 || (reqdata->r_u.req.svc.rq_msg.cb_vers == 4)) {
-		if (!xdr_free(reqdesc->xdr_decode_func, arg_nfs)) {
-			LogCrit(COMPONENT_DISPATCH,
-				"%s FAILURE: Bad xdr_free for %s",
-				__func__,
-				reqdesc->funcname);
-		}
-	}
 
-	/* Finalize the request. */
-	if (res_nfs)
-		nfs_dupreq_rele(&reqdata->r_u.req.svc, reqdesc);
+	free_args(reqdata);
 
-	SetClientIP(NULL);
-	if (op_ctx->client != NULL) {
-		put_gsh_client(op_ctx->client);
-		op_ctx->client = NULL;
-	}
-	if (op_ctx->ctx_export != NULL) {
-		put_gsh_export(op_ctx->ctx_export);
-		op_ctx->ctx_export = NULL;
-	}
-	clean_credentials();
-	op_ctx = NULL;
-
-#ifdef USE_LTTNG
-	tracepoint(nfs_rpc, end, reqdata);
-#endif
 	return SVC_STAT(xprt);
 }
 

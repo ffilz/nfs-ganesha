@@ -49,6 +49,9 @@ enum nfs_req_result {
 	NFS_REQ_STOP = 3,
 };
 
+void nfs_rpc_complete_async_request(request_data_t *reqdata,
+				    enum nfs_req_result rc);
+
 extern const nfs_function_desc_t nfs3_func_desc[];
 extern const nfs_function_desc_t nfs4_func_desc[];
 extern const nfs_function_desc_t mnt1_func_desc[];
