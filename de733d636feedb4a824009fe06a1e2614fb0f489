@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f8dfa50_528b6169",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-26T21:59:31Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint status;\n+\tALLOCATE4args * const arg_ALLOCATE4 \u003d \u0026op-\u003enfs_argop4_u.opallocate;",
+      "revId": "de733d636feedb4a824009fe06a1e2614fb0f489",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5ecf1a7_c397d1ee",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-07-26T21:59:31Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint status;\n+\tDEALLOCATE4args * const arg_DEALLOC \u003d \u0026op-\u003enfs_argop4_u.opdeallocate;",
+      "revId": "de733d636feedb4a824009fe06a1e2614fb0f489",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
