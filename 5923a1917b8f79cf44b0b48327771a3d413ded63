@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1c214c64_d20100f3",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-27T14:26:07Z",
+      "side": 1,
+      "message": "I thought about this a bit in my review, and then I considered that we never remove list entries. With that we just need a single linked list. Of course saving 8 bytes per pool out of less than 100 pools (if we go wild and put more things into pools) really isn\u0027t much memory.",
+      "parentUuid": "f740a1ee_0d299196",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a5d057b_ce731bb1",
         "filename": "src/support/server_stats.c",
         "patchSetId": 2
