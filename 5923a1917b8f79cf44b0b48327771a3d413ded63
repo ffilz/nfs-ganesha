@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "171f768d_f1857cf3",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-07-27T16:06:41Z",
+      "side": 1,
+      "message": "No reason to have two globals here. \"struct pool\" should have list element embedded.",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d4055ff_5bdb283e",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-07-27T16:06:41Z",
+      "side": 1,
+      "message": "Maybe \"Unnamed\" if the name is not provided. Not much memory, and no need to have conditional statements at other places.",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f740a1ee_0d299196",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 2
@@ -31,6 +65,41 @@
       "side": 1,
       "message": "I thought about this a bit in my review, and then I considered that we never remove list entries. With that we just need a single linked list. Of course saving 8 bytes per pool out of less than 100 pools (if we go wild and put more things into pools) really isn\u0027t much memory.",
       "parentUuid": "f740a1ee_0d299196",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "031bbb71_2e524a9f",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-07-27T16:06:41Z",
+      "side": 1,
+      "message": "We could do \"struct pool *next\" within struct pool if wasting memory is a motivation.",
+      "parentUuid": "1c214c64_d20100f3",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5777fd42_175e7de1",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-07-27T16:06:41Z",
+      "side": 1,
+      "message": "All this code will be reduced to a couple lines with embedded \"list\" element in \"struct pool\"",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
