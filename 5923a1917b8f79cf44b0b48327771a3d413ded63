@@ -195,6 +195,23 @@
     },
     {
       "key": {
+        "uuid": "b7e817df_ab1b7c95",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-27T17:41:40Z",
+      "side": 1,
+      "message": "pool_destroy IS called - you need to handle removal from the list, with that we definitely need double linked list.\n\npool_destroy should also throw a LogCrit if the count isn\u0027t 0.",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a5d057b_ce731bb1",
         "filename": "src/support/server_stats.c",
         "patchSetId": 2
