@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a1ee956_e78e9a1d",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-27T17:06:49Z",
+      "side": 1,
+      "message": "Just ad glist_head list to this structure",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "171f768d_f1857cf3",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 2
@@ -19,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5851d401_e723970c",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-27T17:06:49Z",
+      "side": 1,
+      "message": "With glist this just becomes glist_head",
+      "parentUuid": "171f768d_f1857cf3",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d4055ff_5bdb283e",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 2
@@ -30,6 +65,24 @@
       "writtenOn": "2018-07-27T16:06:41Z",
       "side": 1,
       "message": "Maybe \"Unnamed\" if the name is not provided. Not much memory, and no need to have conditional statements at other places.",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a512489_5f29eb83",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-27T17:06:49Z",
+      "side": 1,
+      "message": "If we do this, it should use a global constant string so that if we do down the road remove pools, we can properly clean up (check if (name !\u003d unnamed) gsh_free(name)).",
+      "parentUuid": "5d4055ff_5bdb283e",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -89,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "1eb3d30d_56996625",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-27T17:06:49Z",
+      "side": 1,
+      "message": "Memory really isn\u0027t a concern, lets just use glist",
+      "parentUuid": "031bbb71_2e524a9f",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5777fd42_175e7de1",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 2
@@ -100,6 +171,24 @@
       "writtenOn": "2018-07-27T16:06:41Z",
       "side": 1,
       "message": "All this code will be reduced to a couple lines with embedded \"list\" element in \"struct pool\"",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f710e3c7_f4342510",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-27T17:06:49Z",
+      "side": 1,
+      "message": "Yes, it just becomes glist_append(\u0026pool_list, \u0026pool-\u003elist)",
+      "parentUuid": "5777fd42_175e7de1",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
