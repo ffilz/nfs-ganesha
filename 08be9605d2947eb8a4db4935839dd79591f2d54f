@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fab56144_a3ed960b",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_stats_gpfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-07-30T12:21:01Z",
+      "side": 1,
+      "message": "I\u0027m confused.  total_resp is currently in nanoseconds (10^-9).  Multiplying it by 0.000001 changes it to 10s of femtoseconds (10^-14), correct?  I think you want to multiply it by 1000000 to convert it to milliseconds (10^-3).",
+      "revId": "08be9605d2947eb8a4db4935839dd79591f2d54f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
