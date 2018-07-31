@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "98ebc4a2_cc9c56b5",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-31T15:04:52Z",
+      "side": 1,
+      "message": "Let\u0027s change to gsh_calloc to automatically zero",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37c11ba6_2452ee63",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-31T15:04:52Z",
+      "side": 1,
+      "message": "And then we don\u0027t need to init here",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d99aaa9f_c158cc0a",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 5
