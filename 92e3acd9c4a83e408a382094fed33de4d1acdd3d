@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93f4bfa1_8dedf558",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-31T15:03:02Z",
+      "side": 1,
+      "message": "This needs to be initialized to {\u0026mpool_list, \u0026mpool_list}",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d99aaa9f_c158cc0a",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-07-31T15:03:02Z",
+      "side": 1,
+      "message": "Let\u0027s add an if (object) test...\n\nWe are trending away from testing for NULL when calling memory free functions.",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
