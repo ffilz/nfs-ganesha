@@ -435,6 +435,57 @@ pool_free(pool_t *pool, void *object)
 }
 
 /**
+ * @brief Allocate an array of objects from a pool
+ *
+ * NOTE: The caller MUST keep track of the size of the array for freeing.
+ *
+ * This function allocates an array of objects from the pool and returns a
+ * pointer to it.
+ *
+ * This function aborts if no memory is available.
+ *
+ * @param[in] pool       The pool from which to allocate
+ * @param[in] count      Count of objects to allocate
+ * @param[in] file       Calling source file
+ * @param[in] line       Calling source line
+ * @param[in] function   Calling source function
+ *
+ * @return A pointer to the allocated pool item.
+ */
+
+static inline void *
+pool_array_alloc__(pool_t *pool, int count, const char *file, int line,
+		   const char *function)
+{
+	void *ptr;
+
+	ptr = gsh_calloc__(count, pool->object_size, file, line, function);
+	(void)atomic_add_uint64_t(&pool->cnt, count);
+	return ptr;
+}
+
+#define pool_array_alloc(pool, count) \
+	pool_array_alloc__(pool, count, __FILE__, __LINE__, __func__)
+
+/**
+ * @brief Return an object array to a pool
+ *
+ * This function returns an array of objects to the pool.
+ *
+ * @param[in] pool   Pool to which to return the object
+ * @param[in] count  Count of objects to free
+ * @param[in] object Object to return.
+ */
+
+static inline void
+array_pool_free(pool_t *pool, void *object, int count)
+{
+	gsh_free(object);
+	if (object != NULL)
+		(void)atomic_sub_uint64_t(&pool->cnt, count);
+}
+
+/**
  * @brief Type representing a variable pool
  *
  * This type represents a memory pool of variable size objects.  it should be
