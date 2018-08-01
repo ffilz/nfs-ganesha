@@ -56,7 +56,7 @@ static void release(struct fsal_ds_handle *const ds_pub)
 				 strerror(errno), errno);
 		}
 	}
-	gsh_free(ds);
+	pool_free(gluster_ds_handle_pool, ds);
 }
 
 /**
@@ -283,7 +283,7 @@ static nfsstat4 make_ds_handle(struct fsal_pnfs_ds *const pds,
 	if (hdl_desc->len != sizeof(struct glfs_ds_wire))
 		return NFS4ERR_BADHANDLE;
 
-	ds = gsh_calloc(1, sizeof(struct glfs_ds_handle));
+	ds = pool_alloc(gluster_ds_handle_pool);
 
 	*handle = &ds->ds;
 	fsal_ds_handle_init(*handle, pds);

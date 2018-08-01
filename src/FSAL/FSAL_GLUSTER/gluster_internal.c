@@ -140,7 +140,7 @@ void construct_handle(struct glusterfs_export *glexport, const struct stat *st,
 
 	memset(&buffxstat, 0, sizeof(glusterfs_fsal_xstat_t));
 
-	constructing = gsh_calloc(1, sizeof(struct glusterfs_handle));
+	constructing = pool_alloc(gluster_handle_pool);
 
 	constructing->glhandle = glhandle;
 	memcpy(constructing->globjhdl, vol_uuid, GLAPI_UUID_LENGTH);

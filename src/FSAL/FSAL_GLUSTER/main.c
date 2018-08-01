@@ -41,6 +41,11 @@
 
 const char glfsal_name[] = "GLUSTER";
 
+struct pool *gluster_handle_pool;
+struct pool *gluster_ds_handle_pool;
+struct pool *gluster_export_pool;
+struct pool *gluster_state_pool;
+
 /**
  * Gluster global module object
  */
@@ -155,11 +160,25 @@ MODULE_INIT void glusterfs_init(void)
 	PTHREAD_MUTEX_init(&GlusterFS.lock, NULL);
 	glist_init(&GlusterFS.fs_obj);
 
+	gluster_handle_pool = pool_basic_init("FSAL_GLUSTER_obj_handles",
+					      sizeof(struct glusterfs_handle));
+	gluster_ds_handle_pool = pool_basic_init("FSAL_GLUSTER_ds_handles",
+						 sizeof(struct glfs_ds_handle));
+	gluster_export_pool = pool_basic_init("FSAL_GLUSTER_exports",
+					      sizeof(struct glusterfs_export));
+	gluster_state_pool = pool_basic_init("FSAL_GLUSTER_states",
+					     sizeof(struct glusterfs_state_fd));
+
 	LogDebug(COMPONENT_FSAL, "FSAL Gluster initialized");
 }
 
 MODULE_FINI void glusterfs_unload(void)
 {
+	pool_destroy(gluster_handle_pool);
+	pool_destroy(gluster_ds_handle_pool);
+	pool_destroy(gluster_export_pool);
+	pool_destroy(gluster_state_pool);
+
 	if (unregister_fsal(&GlusterFS.fsal) != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"FSAL Gluster unable to unload.  Dying ...");
