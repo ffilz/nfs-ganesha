@@ -115,6 +115,13 @@ struct ceph_handle {
 #endif				/* CEPH_PNFS */
 };
 
+extern struct pool *ceph_handle_pool;
+#ifdef CEPH_PNFS
+extern struct pool *ceph_ds_handle_pool;
+#endif
+extern struct pool *ceph_export_pool;
+extern struct pool *ceph_state_pool;
+
 #ifdef CEPH_PNFS
 
 /**

@@ -75,7 +75,7 @@ static void release(struct fsal_export *export_pub)
 
 	ceph_shutdown(export->cmount);
 	export->cmount = NULL;
-	gsh_free(export);
+	pool_free(ceph_export_pool, export);
 	export = NULL;
 }
 

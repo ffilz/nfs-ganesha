@@ -885,7 +885,7 @@ struct state_t *ceph_alloc_state(struct fsal_export *exp_hdl,
 	struct state_t *state;
 	struct ceph_fd *my_fd;
 
-	state = init_state(gsh_calloc(1, sizeof(struct ceph_state_fd)),
+	state = init_state(pool_alloc(ceph_state_pool),
 			   exp_hdl, state_type, related_state);
 
 	my_fd = &container_of(state, struct ceph_state_fd, state)->ceph_fd;
@@ -913,7 +913,7 @@ void ceph_free_state(struct fsal_export *exp_hdl, struct state_t *state)
 
 	PTHREAD_RWLOCK_destroy(&my_fd->fdlock);
 
-	gsh_free(state_fd);
+	pool_free(ceph_state_pool, state_fd);
 }
 
 /**
