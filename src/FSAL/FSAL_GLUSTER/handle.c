@@ -97,7 +97,7 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 		objhandle->glhandle = NULL;
 	}
 
-	gsh_free(objhandle);
+	pool_free(gluster_handle_pool, objhandle);
 
 #ifdef GLTIMING
 	now(&e_time);

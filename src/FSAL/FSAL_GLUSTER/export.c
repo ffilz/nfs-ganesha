@@ -69,7 +69,7 @@ static void export_release(struct fsal_export *exp_hdl)
 	glfs_export->gl_fs = NULL;
 	gsh_free(glfs_export->export_path);
 	glfs_export->export_path = NULL;
-	gsh_free(glfs_export);
+	pool_free(gluster_export_pool, glfs_export);
 	glfs_export = NULL;
 }
 
@@ -375,7 +375,7 @@ struct state_t *glusterfs_alloc_state(struct fsal_export *exp_hdl,
 	struct state_t *state;
 	struct glusterfs_fd *my_fd;
 
-	state = init_state(gsh_calloc(1, sizeof(struct glusterfs_state_fd)),
+	state = init_state(pool_alloc(gluster_state_pool),
 			   exp_hdl, state_type, related_state);
 
 	my_fd = &container_of(state, struct glusterfs_state_fd,
@@ -403,7 +403,7 @@ void glusterfs_free_state(struct fsal_export *exp_hdl, struct state_t *state)
 
 	PTHREAD_RWLOCK_destroy(&my_fd->fdlock);
 
-	gsh_free(state_fd);
+	pool_free(gluster_state_pool, state_fd);
 }
 
 /** @todo: We have gone POSIX way for the APIs below, can consider the CEPH way
@@ -752,7 +752,7 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 	LogDebug(COMPONENT_FSAL, "In args: export path = %s",
 		 op_ctx->ctx_export->fullpath);
 
-	glfsexport = gsh_calloc(1, sizeof(struct glusterfs_export));
+	glfsexport = pool_alloc(gluster_export_pool);
 
 	rc = load_config_from_node(parse_node,
 				   &export_param,
@@ -851,7 +851,7 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 					   &glfsexport->export.exports);
 		if (glfsexport->gl_fs)
 			glusterfs_free_fs(glfsexport->gl_fs);
-		gsh_free(glfsexport);
+		pool_free(gluster_export_pool, glfsexport);
 	}
 
 	return status;

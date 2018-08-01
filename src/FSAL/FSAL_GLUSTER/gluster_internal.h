@@ -220,6 +220,11 @@ struct glusterfs_state_fd {
 	struct glusterfs_fd glusterfs_fd;
 };
 
+extern struct pool *gluster_handle_pool;
+extern struct pool *gluster_ds_handle_pool;
+extern struct pool *gluster_export_pool;
+extern struct pool *gluster_state_pool;
+
 void setglustercreds(struct glusterfs_export *glfs_export, uid_t *uid,
 		     gid_t *gid, unsigned int ngrps, gid_t *groups,
 		     char *file, int line, char *function);
