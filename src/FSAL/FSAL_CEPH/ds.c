@@ -79,7 +79,7 @@ static void ds_release(struct fsal_ds_handle *const ds_pub)
 	struct ds *ds = container_of(ds_pub, struct ds, ds);
 
 	fsal_ds_handle_fini(&ds->ds);
-	gsh_free(ds);
+	pool_free(ceph_ds_handle_pool, ds);
 }
 
 /**
@@ -408,7 +408,7 @@ static nfsstat4 make_ds_handle(struct fsal_pnfs_ds *const pds,
 	if (dsw->layout.fl_stripe_unit == 0)
 		return NFS4ERR_BADHANDLE;
 
-	ds = gsh_calloc(1, sizeof(struct ds));
+	ds = pool_alloc(ceph_ds_handle_pool);
 
 	*handle = &ds->ds;
 	fsal_ds_handle_init(*handle, pds);
