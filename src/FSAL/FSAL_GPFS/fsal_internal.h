@@ -90,6 +90,11 @@ struct gpfs_state_fd {
 	struct gpfs_fd gpfs_fd;
 };
 
+extern struct pool *gpfs_handle_pool;
+extern struct pool *gpfs_ds_handle_pool;
+extern struct pool *gpfs_export_pool;
+extern struct pool *gpfs_state_pool;
+
 /* defined the set of attributes supported with POSIX */
 #define GPFS_SUPPORTED_ATTRIBUTES ((const attrmask_t) (         \
 		ATTRS_POSIX | ATTR_ACL | ATTR4_SPACE_RESERVED | \

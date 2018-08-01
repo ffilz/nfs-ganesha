@@ -61,8 +61,7 @@ struct gpfs_fsal_obj_handle *alloc_handle(struct gpfs_file_handle *fh,
 	struct gpfs_fsal_export *myself =
 	    container_of(exp_hdl, struct gpfs_fsal_export, export);
 	struct gpfs_fsal_obj_handle *hdl =
-	    gsh_calloc(1, sizeof(struct gpfs_fsal_obj_handle) +
-			  sizeof(struct gpfs_file_handle));
+	    pool_alloc(gpfs_handle_pool);
 
 	hdl->handle = (struct gpfs_file_handle *)&hdl[1];
 	hdl->obj_handle.fs = fs;
@@ -943,7 +942,7 @@ static void release(struct fsal_obj_handle *obj_hdl)
 	if (type == SYMBOLIC_LINK) {
 		gsh_free(myself->u.symlink.link_content);
 	}
-	gsh_free(myself);
+	pool_free(gpfs_handle_pool, myself);
 }
 
 static bool
