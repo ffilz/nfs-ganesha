@@ -316,10 +316,6 @@ extern struct glist_head mpool_list; /* head of pool list */
  * This function creates a new object pool, given a name, object size,
  * constructor and destructor.
  *
- * This particular implementation throws the name away, but other
- * implementations that do tracking or keep counts of allocated or
- * de-allocated objects will likely wish to use it in log messages.
- *
  * This initializer function is expected to abort if it fails.
  *
  * @param[in] name             The name of this pool
@@ -378,15 +374,7 @@ pool_destroy(pool_t *pool)
  * @brief Allocate an object from a pool
  *
  * This function allocates a single object from the pool and returns a
- * pointer to it.  If a constructor was specified at pool creation, it
- * is called on that pointer.  This function must be thread safe.  If
- * the underlying pool abstraction requires a lock, this function must
- * take and release it.
- *
- * This function returns void pointers.  Programmers who wish for more
- * type safety can easily create static inline wrappers (alloc_client
- * or similar) to return pointers of a specific type (and omitting the
- * pool parameter).
+ * pointer to it.
  *
  * This function aborts if no memory is available.
  *
@@ -414,17 +402,10 @@ pool_alloc__(pool_t *pool, const char *file, int line, const char *function)
 /**
  * @brief Return an entry to a pool
  *
- * This function returns a single object to the pool.  If a destructor
- * was defined at pool creation time, it is called before the object
- * is freed.  This function must be thread-safe.  If the underlying
- * pool abstract requires a lock, this function must take and release
- * it.
+ * This function returns a single object to the pool.
  *
  * @param[in] pool   Pool to which to return the object
- * @param[in] object Object to return.  This is a void pointer.
- *                   Programmers wishing more type safety could create
- *                   a static inline wrapper taking an object of a
- *                   specific type (and omitting the pool parameter.)
+ * @param[in] object Object to return.
  */
 
 static inline void
