@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f9c6056d_16f99367",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-08-01T21:30:58Z",
+      "side": 1,
+      "message": "Hey, can we make the counter int64_t so we can detect a situation where free is called more than alloc?",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93f4bfa1_8dedf558",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 5
