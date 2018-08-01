@@ -67,7 +67,7 @@ void construct_handle(const struct ceph_statx *stx, struct Inode *i,
 
 	assert(i);
 
-	constructing = gsh_calloc(1, sizeof(struct ceph_handle));
+	constructing = pool_alloc(ceph_handle_pool);
 
 	constructing->vi.ino.val = stx->stx_ino;
 #ifdef CEPH_NOSNAP
@@ -97,7 +97,7 @@ void deconstruct_handle(struct ceph_handle *obj)
 {
 	ceph_ll_put(obj->export->cmount, obj->i);
 	fsal_obj_handle_fini(&obj->handle);
-	gsh_free(obj);
+	pool_free(ceph_handle_pool, obj);
 }
 
 unsigned int

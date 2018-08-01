@@ -54,6 +54,13 @@
  */
 static const char *module_name = "Ceph";
 
+struct pool *ceph_handle_pool;
+#ifdef CEPH_PNFS
+struct pool *ceph_ds_handle_pool;
+#endif
+struct pool *ceph_export_pool;
+struct pool *ceph_state_pool;
+
 /**
  * Ceph global module object.
  */
@@ -238,7 +245,7 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	/* The status code to return */
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	/* The internal export object */
-	struct ceph_export *export = gsh_calloc(1, sizeof(struct ceph_export));
+	struct ceph_export *export = pool_alloc(ceph_export_pool);
 	/* The 'private' root handle */
 	struct ceph_handle *handle = NULL;
 	/* Root inode */
@@ -261,7 +268,7 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 					   true,
 					   err_type);
 		if (rc != 0) {
-			gsh_free(export);
+			pool_free(ceph_export_pool, export);
 			return fsalstat(ERR_FSAL_INVAL, 0);
 		}
 	}
@@ -362,7 +369,7 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (export) {
 		if (export->cmount)
 			ceph_shutdown(export->cmount);
-		gsh_free(export);
+		pool_free(ceph_export_pool, export);
 	}
 	return status;
 }
@@ -400,6 +407,16 @@ MODULE_INIT void init(void)
 
 	/* Initialize the fsal_obj_handle ops for FSAL CEPH */
 	handle_ops_init(&CephFSM.handle_ops);
+	ceph_handle_pool = pool_basic_init("FSAL_CEPH_obj_handles",
+					   sizeof(struct ceph_handle));
+#ifdef CEPH_PNFS
+	ceph_ds_handle_pool = pool_basic_init("FSAL_CEPH_ds_handles",
+					      sizeof(struct ds));
+#endif
+	ceph_export_pool = pool_basic_init("FSAL_CEPH_exports",
+					   sizeof(struct ceph_export));
+	ceph_state_pool = pool_basic_init("FSAL_CEPH_states",
+					  sizeof(struct ceph_state_fd));
 }
 
 /**
@@ -414,6 +431,13 @@ MODULE_FINI void finish(void)
 {
 	LogDebug(COMPONENT_FSAL,
 		 "Ceph module finishing.");
+
+	pool_destroy(ceph_handle_pool);
+#ifdef CEPH_PNFS
+	pool_destroy(ceph_ds_handle_pool);
+#endif
+	pool_destroy(ceph_export_pool);
+	pool_destroy(ceph_state_pool);
 
 	if (unregister_fsal(&CephFSM.fsal) != 0) {
 		LogCrit(COMPONENT_FSAL,
