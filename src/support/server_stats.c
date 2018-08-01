@@ -437,6 +437,7 @@ static struct global_stats global_st;
 
 /* Head for maintaining memory pool allocation list */
 struct glist_head mpool_list = GLIST_HEAD_INIT(mpool_list);
+struct glist_head vpool_list = GLIST_HEAD_INIT(vpool_list);
 
 /* include the top level server_stats struct definition
  */
@@ -2090,13 +2091,15 @@ void server_dbus_mem_pool(DBusMessageIter *iter)
 	DBusMessageIter array_iter;
 	char *errormsg;
 	struct glist_head *glist;
-	struct pool *pool_ptr;
 
 	now(&timestamp);
 	dbus_append_timestamp(iter, &timestamp);
 	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
 					 NULL, &array_iter);
+
 	glist_for_each(glist, &mpool_list) {
+		struct pool *pool_ptr;
+
 		pool_ptr = glist_entry(glist, struct pool, mpool_next);
 		if (pool_ptr->name == NULL) {
 			errormsg = "Hash Table Related";
@@ -2110,6 +2113,37 @@ void server_dbus_mem_pool(DBusMessageIter *iter)
 		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
 						&pool_ptr->object_size);
 	}
+
+	glist_for_each(glist, &vpool_list) {
+		struct variable_pool *pool_ptr;
+		uint64_t current, allocations, frees, total_allocation, avg;
+
+		pool_ptr = glist_entry(glist, struct variable_pool, vpool_next);
+		if (pool_ptr->name == NULL) {
+			errormsg = "Hash Table Related";
+			dbus_message_iter_append_basic(&array_iter,
+						DBUS_TYPE_STRING, &errormsg);
+		} else
+			dbus_message_iter_append_basic(&array_iter,
+					DBUS_TYPE_STRING, &pool_ptr->name);
+
+		allocations = atomic_fetch_uint64_t(&pool_ptr->allocations);
+		frees = atomic_fetch_uint64_t(&pool_ptr->frees);
+		total_allocation =
+			atomic_fetch_uint64_t(&pool_ptr->total_allocation);
+		if (allocations > frees)
+			current = allocations - frees;
+		else
+			current = UINT64_MAX;
+
+		avg = total_allocation / allocations;
+
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+						&current);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+						&avg);
+	}
+
 	dbus_message_iter_close_container(iter, &array_iter);
 }
 
