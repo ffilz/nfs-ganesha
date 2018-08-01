@@ -61,7 +61,7 @@ static void release(struct fsal_export *exp_hdl)
 	free_export_ops(exp_hdl);
 	close(myself->export_fd);
 
-	gsh_free(myself);		/* elvis has left the building */
+	pool_free(gpfs_export_pool, myself); /* elvis has left the building */
 }
 
 static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
@@ -334,7 +334,7 @@ gpfs_alloc_state(struct fsal_export *exp_hdl, enum state_type state_type,
 	struct state_t *state;
 	struct gpfs_fd *my_fd;
 
-	state = init_state(gsh_calloc(1, sizeof(struct gpfs_state_fd)),
+	state = init_state(pool_alloc(gpfs_state_pool),
 			   exp_hdl, state_type, related_state);
 
 	my_fd = &container_of(state, struct gpfs_state_fd, state)->gpfs_fd;
@@ -362,7 +362,7 @@ gpfs_free_state(struct fsal_export *exp_hdl, struct state_t *state)
 	struct gpfs_fd *my_fd = &state_fd->gpfs_fd;
 
 	PTHREAD_RWLOCK_destroy(&my_fd->fdlock);
-	gsh_free(state_fd);
+	pool_free(gpfs_state_pool, state_fd);
 }
 
 /**
@@ -687,7 +687,7 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 	struct gpfs_fsal_export *gpfs_exp;
 	struct fsal_export *exp;
 
-	gpfs_exp = gsh_calloc(1, sizeof(struct gpfs_fsal_export));
+	gpfs_exp = pool_alloc(gpfs_export_pool);
 	exp = &gpfs_exp->export;
 
 	glist_init(&gpfs_exp->filesystems);
@@ -790,6 +790,6 @@ detach:
 	fsal_detach_export(fsal_hdl, &exp->exports);
 free:
 	free_export_ops(exp);
-	gsh_free(gpfs_exp);
+	pool_free(gpfs_export_pool, gpfs_exp);
 	return status;
 }

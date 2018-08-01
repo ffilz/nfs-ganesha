@@ -36,6 +36,11 @@
 
 static const char myname[] = "GPFS";
 
+struct pool *gpfs_handle_pool;
+struct pool *gpfs_ds_handle_pool;
+struct pool *gpfs_export_pool;
+struct pool *gpfs_state_pool;
+
 /** @struct GPFS
  *  @brief my module private storage
  */
@@ -236,6 +241,16 @@ MODULE_INIT void gpfs_init(void)
 	gpfs_handle_ops_init(&GPFS.handle_ops);
 	gpfs_handle_ops_init(&GPFS.handle_ops_with_pnfs);
 	handle_ops_pnfs(&GPFS.handle_ops_with_pnfs);
+
+	gpfs_handle_pool = pool_basic_init("FSAL_GPFS_obj_handles",
+					   sizeof(struct gpfs_fsal_obj_handle) +
+					   sizeof(struct gpfs_file_handle));
+	gpfs_ds_handle_pool = pool_basic_init("FSAL_GPFS_ds_handles",
+						 sizeof(struct gpfs_ds));
+	gpfs_export_pool = pool_basic_init("FSAL_GPFS_exports",
+					      sizeof(struct gpfs_fsal_export));
+	gpfs_state_pool = pool_basic_init("FSAL_GPFS_states",
+					     sizeof(struct gpfs_state_fd));
 }
 
 /** @fn MODULE_FINI void gpfs_unload(void)
@@ -244,6 +259,11 @@ MODULE_INIT void gpfs_init(void)
 MODULE_FINI void gpfs_unload(void)
 {
 	release_log_facility(myname);
+
+	pool_destroy(gpfs_handle_pool);
+	pool_destroy(gpfs_ds_handle_pool);
+	pool_destroy(gpfs_export_pool);
+	pool_destroy(gpfs_state_pool);
 
 	if (unregister_fsal(&GPFS.module) != 0)
 		fprintf(stderr, "GPFS module failed to unregister");
