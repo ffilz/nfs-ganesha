@@ -163,6 +163,7 @@ target_link_libraries(ganesha_nfsd
   ${SYSTEM_LIBRARIES}
   ${LTTNG_LIBRARIES}
   ${MOOSHIKA_LIBRARIES}
+  ${BCC_LIBRARIES}
 )
 
 if(SANITIZE_ADDRESS)
