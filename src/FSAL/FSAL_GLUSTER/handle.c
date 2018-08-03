@@ -2582,15 +2582,15 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 		goto out;
 	}
 
-	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-			  &op_ctx->creds->caller_gid,
-			  op_ctx->creds->caller_glen,
-			  op_ctx->creds->caller_garray);
-
 	/* If any stat changed, indicate that */
 	if (mask != 0)
 		FSAL_SET_MASK(attr_valid, XATTR_STAT);
 	if (FSAL_TEST_MASK(attr_valid, XATTR_STAT)) {
+		SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
+				  &op_ctx->creds->caller_gid,
+				  op_ctx->creds->caller_glen,
+				  op_ctx->creds->caller_garray);
+
 		/* Only if there is any change in attrs send them down to fs */
 		/** @todo: instead use glfs_fsetattr().... looks like there is
 		 * fix needed in there..it doesn't convert the mask flags
@@ -2600,9 +2600,12 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 				     myself->glhandle,
 				     &buffxstat.buffstat,
 				     mask);
+
+		SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);
+
 		if (retval != 0) {
 			status = gluster2fsal_error(errno);
-			goto creds;
+			goto out;
 		}
 	}
 
@@ -2613,9 +2616,6 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 		LogDebug(COMPONENT_FSAL,
 			 "setting ACL failed");
 	}
-
-creds:
-	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);
 
 out:
 	if (FSAL_IS_ERROR(status)) {
