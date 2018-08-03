@@ -27,6 +27,7 @@
 #cmakedefine PROXY_HANDLE_MAPPING 1
 #cmakedefine _USE_9P 1
 #cmakedefine _USE_9P_RDMA 1
+#cmakedefine _USE_9P_KCM 1
 #cmakedefine _USE_NFS_RDMA 1
 #cmakedefine _USE_NFS3 1
 #cmakedefine _USE_NLM 1
