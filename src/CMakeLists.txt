@@ -325,6 +325,7 @@ option(USE_NFS_RDMA "enable NFS/RDMA support" OFF)
 # Enable 9P Support
 option(USE_9P "enable 9P support" ON)
 option(USE_9P_RDMA "enable 9P_RDMA support" OFF)
+option(USE_9P_KCM "use KCM for 9P TCP" OFF)
 
 # Enable NFSv3 Support
 option(USE_NFS3 "enable NFSv3 support" ON)
@@ -863,6 +864,7 @@ endif (HAVE_KRB5)
 # Fixup loose bits of autotools legacy
 set(_USE_9P ${USE_9P})
 set(_USE_9P_RDMA ${USE_9P_RDMA})
+set(_USE_9P_KCM ${USE_9P_KCM})
 set(_USE_NFS3 ${USE_NFS3})
 set(_USE_NLM ${USE_NLM})
 set(_USE_CB_SIMULATOR ${USE_CB_SIMULATOR})

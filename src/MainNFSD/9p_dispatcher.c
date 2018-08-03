@@ -61,6 +61,13 @@
 #include "9p.h"
 #include <stdbool.h>
 
+#ifdef _USE_9P_KCM
+#include <sys/ioctl.h>
+#include <linux/kcm.h>
+#include <bcc/bpf_common.h>
+#include <bcc/libbpf.h>
+#endif
+
 #define P_FAMILY AF_INET6
 
 static struct fridgethr *worker_fridge;
@@ -590,6 +597,47 @@ void *_9p_socket_thread(void *Arg)
 	unsigned int i = 0;
 	char *_9pmsg = NULL;
 	uint32_t msglen;
+#ifdef _USE_9P_KCM
+	int kcm_fd, bpf_prog_fd;
+
+	/* bpf program; load_half does ntohl internally so swap again to get
+	 * little endian length on x86
+	 */
+	static const char *bpf_prog_string = "             \
+ssize_t p9_msg_size(struct __sk_buff *skb)                 \
+{                                                          \
+	return bpf_htonl(load_word(skb, 0));	           \
+}";
+
+	void *mod = bpf_module_create_c_from_string(bpf_prog_string, 0,
+						    NULL, 0);
+	bpf_prog_fd = bpf_prog_load(BPF_PROG_TYPE_SOCKET_FILTER,
+				    "p9_msg_size",
+				    bpf_function_start(mod, "p9_msg_size"),
+				    bpf_function_size(mod, "p9_msg_size"),
+				    bpf_module_license(mod),
+				    bpf_module_kern_version(mod),
+				    0, NULL, 0);
+	if (bpf_prog_fd < 0) {
+		LogCrit(COMPONENT_9P, "Could not load bpf program");
+		goto end;
+	}
+
+	kcm_fd = socket(AF_KCM, SOCK_DGRAM, KCMPROTO_CONNECTED);
+	if (kcm_fd < 0) {
+		LogCrit(COMPONENT_9P, "Could create kcm socket");
+		goto end;
+	}
+
+	struct kcm_attach attach_info = {
+		.fd = tcp_sock,
+		.bpf_fd = bpf_prog_fd,
+	};
+	if (ioctl(kcm_fd, SIOCKCMATTACH, &attach_info) < 0) {
+		LogCrit(COMPONENT_9P, "Could not attach to kcm socket");
+		goto end;
+	}
+#endif
 
 	struct _9p_conn _9p_conn;
 	socklen_t addrpeerlen;
@@ -656,7 +704,11 @@ void *_9p_socket_thread(void *Arg)
 
 	/* Set up the structure used by poll */
 	memset((char *)fds, 0, sizeof(struct pollfd));
+#ifdef _USE_9P_KCM
+	fds[0].fd = kcm_fd;
+#else
 	fds[0].fd = tcp_sock;
+#endif
 	fds[0].events =
 	    POLLIN | POLLPRI | POLLRDBAND | POLLRDNORM | POLLRDHUP | POLLHUP |
 	    POLLERR | POLLNVAL;
@@ -695,6 +747,28 @@ void *_9p_socket_thread(void *Arg)
 		/* Prepare to read the message */
 		_9pmsg = gsh_malloc(_9p_conn.msize);
 
+#ifdef _USE_9P_KCM
+		struct iovec iov = {
+			.iov_base = _9pmsg,
+			.iov_len = _9p_conn.msize,
+		};
+		struct msghdr msg = {
+			.msg_iov = &iov,
+			.msg_iovlen = 1,
+		};
+
+		msglen = recvmsg(kcm_fd, &msg, 0);
+		if ((int)msglen < 0) {
+			LogCrit(COMPONENT_9P, "Recvmsg failed with %d", errno);
+			goto badmsg;
+		}
+		if (msglen != *(uint32_t *) _9pmsg || msglen > _9p_conn.msize) {
+			LogCrit(COMPONENT_9P,
+				"Bad message size, got %u expected %u",
+				msglen, *(uint32_t *) _9pmsg);
+			goto badmsg;
+		}
+#else
 		/* An incoming 9P request: the msg has a 4 bytes header
 		   showing the size of the msg including the header */
 		readlen = recv(fds[0].fd, _9pmsg,
@@ -730,6 +804,7 @@ void *_9p_socket_thread(void *Arg)
 				goto badmsg;
 		}	/* while */
 
+#endif
 		server_stats_transport_done(_9p_conn.client,
 					    total_readlen, 1, 0,
 					    0, 0, 0);

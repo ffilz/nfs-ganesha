@@ -36,6 +36,10 @@ if(USE_9P AND USE_9P_RDMA)
     9p_rdma_callbacks.c)
 endif(USE_9P AND USE_9P_RDMA)
 
+if(USE_9P AND USE_9P_KCM)
+  list(APPEND GANESHA_CORE "bcc")
+endif(USE_9P AND USE_9P_KCM)
+
 if(USE_NFS_RDMA)
   add_definitions(-D_USE_NFS_RDMA)
 endif(USE_NFS_RDMA)
