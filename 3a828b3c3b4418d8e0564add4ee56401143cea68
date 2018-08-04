@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d274d92b_848e7fba",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-08-04T14:00:38Z",
+      "side": 1,
+      "message": "I don\u0027t remember having a list lock here, we do need in this version as well as in the regular pool version. Can you please correct both.",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04f59af8_ce30e914",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-08-04T14:00:38Z",
+      "side": 1,
+      "message": "Lock here too.",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc2b3132_313d40c8",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-08-04T14:00:38Z",
+      "side": 1,
+      "message": "Don\u0027t we want the object size here and account total_allocation size?",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3e4da73_54255464",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-08-04T14:00:38Z",
+      "side": 1,
+      "message": "variable_pool_alloc() never returns a NULL, so no one should be calling this with a NULL pointer either, so an assert would be better.",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d5ad999_7c3693cf",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-08-04T14:00:38Z",
+      "side": 1,
+      "message": "frees is declared as uint64_t, so not the right call here.",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a72a8157_d89b77dd",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-08-04T14:00:38Z",
+      "side": 1,
+      "message": "Need locks for these two lists while manipulating list insertion and removals...",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a6d8f32_e6d43979",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-08-04T14:00:38Z",
+      "side": 1,
+      "message": "Sachin found that hash tables were passing a NULL name, so added as \u0027hash table Related\u0027. I don\u0027t think vpools are used by hash tables to name them here! \n\nWe should always insist on using a name in pool_basic_init and remove these checks.",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
