@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3966b2ee_e90aa14a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-08-05T23:53:57Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nwrite           1.47       1.30       1.35       0.05    2.96137 0 32 32 10 1 0 1 0 0 1 131072 32 4194304 POSIX 0",
+      "revId": "c01c3361e42846f6307cf091937744e763be8a28",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2a3f604_5d1f829f",
+        "filename": "src/MainNFSD/9p_dispatcher.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-08-05T23:53:57Z",
+      "side": 1,
+      "message": "WARNING: Avoid line continuations in quoted strings\n+\tstatic const char *bpf_prog_string \u003d \"             \\",
+      "revId": "c01c3361e42846f6307cf091937744e763be8a28",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
