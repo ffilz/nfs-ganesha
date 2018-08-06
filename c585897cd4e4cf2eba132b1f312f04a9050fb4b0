@@ -33,6 +33,24 @@
       "revId": "c585897cd4e4cf2eba132b1f312f04a9050fb4b0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ad6c8f_a969830d",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-08-06T13:57:24Z",
+      "side": 1,
+      "message": "This IS needed, because we CAN call pool_free on a never allocated object (so object is NULL, not because malloc failed, but because we never called). Since pool_alloc was never called, we MUST NOT decrement the counter since it was never incremented.",
+      "parentUuid": "f97eecc0_d4ca3281",
+      "revId": "c585897cd4e4cf2eba132b1f312f04a9050fb4b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
