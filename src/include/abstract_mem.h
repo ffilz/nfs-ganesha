@@ -462,4 +462,106 @@ pool_array_free(pool_t *pool, void *object, int count)
 	}
 }
 
+/**
+ * @brief Type representing a variable pool
+ *
+ * This type represents a memory pool of variable size objects.  it should be
+ * treated, by all callers, as a completely abstract type.  The pointer should
+ * only be stored or passed to pool functions.  The pointer should never be
+ * referenced.  No assumptions about the size of the pointed-to type
+ * should be made.
+ *
+ * This allows for flexible growth in the future.
+ */
+
+struct variable_pool {
+	char *name; /*< The name of the pool */
+	uint64_t total_allocation; /*< The size of the objects created */
+	uint64_t allocations;  /* < counter to keep track of allocations */
+	uint64_t frees; /*< Counter to keep track of calls to free */
+	struct glist_head vpool_next;	/*< list pointer for pools */
+};
+
+/* head of pool list */
+extern struct glist_head vpool_list;
+
+struct variable_pool *variable_pool_basic_init__(const char *name,
+						 const char *file,
+						 int line,
+						 const char *function);
+
+/**
+ * @brief Create a basic variable pool
+ *
+ * This function creates a new object pool, given a name, object size,
+ * constructor and destructor.
+ *
+ * @param[in] name             The name of this pool
+ *
+ * @return A pointer to the pool object.  This pointer must not be
+ *         dereferenced.  It may be stored or supplied as an argument
+ *         to the other pool functions.  It must not be supplied as an
+ *         argument to gsh_free, rather it must be disposed of with
+ *         pool_destroy.
+ */
+
+#define variable_pool_basic_init(name) \
+	variable_pool_basic_init__(name, __FILE__, __LINE__, __func__)
+
+void variable_pool_destroy(struct variable_pool *pool);
+
+/**
+ * @brief Allocate an object from a variable pool
+ *
+ * This function allocates a single object from the pool and returns a
+ * pointer to it.
+ *
+ * This function aborts if no memory is available.
+ *
+ * @param[in] pool       The pool from which to allocate
+ * @param[in] file       Calling source file
+ * @param[in] line       Calling source line
+ * @param[in] function   Calling source function
+ *
+ * @return A pointer to the allocated pool item.
+ */
+
+static inline void *
+variable_pool_alloc__(struct variable_pool *pool, size_t size,
+	     const char *file, int line, const char *function)
+{
+	void *ptr;
+
+	ptr = gsh_calloc__(1, size, file, line, function);
+	(void)atomic_inc_uint64_t(&pool->allocations);
+	(void)atomic_add_uint64_t(&pool->total_allocation, (uint64_t)size);
+	return ptr;
+}
+
+#define variable_pool_alloc(pool, size) \
+	variable_pool_alloc__(pool, size, __FILE__, __LINE__, __func__)
+
+/**
+ * @brief Return an entry to a pool
+ *
+ * This function returns a single object to the pool.
+ *
+ * @param[in] pool   Pool to which to return the object
+ * @param[in] object Object to return.
+ */
+
+static inline void
+variable_pool_free(struct variable_pool *pool, void *object)
+{
+	gsh_free(object);
+
+	if (object != NULL) {
+		/* We allow variable_pool_free to be called when object is NULL
+		 * because it was never allocated. In that case, we MUST NOT
+		 * decrement the counter since it was never incremented.
+		 */
+		(void)atomic_inc_uint64_t(&pool->frees);
+	}
+}
+
 #endif /* ABSTRACT_MEM_H */

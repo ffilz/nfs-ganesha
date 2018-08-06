@@ -2086,7 +2086,6 @@ void server_dbus_mem_pool(DBusMessageIter *iter)
 	struct timespec timestamp;
 	DBusMessageIter array_iter;
 	struct glist_head *glist;
-	struct pool *pool_ptr;
 
 	now(&timestamp);
 	dbus_append_timestamp(iter, &timestamp);
@@ -2096,6 +2095,8 @@ void server_dbus_mem_pool(DBusMessageIter *iter)
 	PTHREAD_MUTEX_lock(&pool_mutex);
 
 	glist_for_each(glist, &mpool_list) {
+		struct pool *pool_ptr;
+
 		pool_ptr = glist_entry(glist, struct pool, mpool_next);
 		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_STRING,
 					       &pool_ptr->name);
@@ -2103,6 +2104,31 @@ void server_dbus_mem_pool(DBusMessageIter *iter)
 					       &pool_ptr->cnt);
 		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
 					       &pool_ptr->object_size);
+	}
+
+	glist_for_each(glist, &vpool_list) {
+		struct variable_pool *pool_ptr;
+		uint64_t current, allocations, frees, total_allocation, avg;
+
+		pool_ptr = glist_entry(glist, struct variable_pool, vpool_next);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_STRING,
+					       &pool_ptr->name);
+
+		allocations = atomic_fetch_uint64_t(&pool_ptr->allocations);
+		frees = atomic_fetch_uint64_t(&pool_ptr->frees);
+		total_allocation =
+			atomic_fetch_uint64_t(&pool_ptr->total_allocation);
+		if (allocations > frees)
+			current = allocations - frees;
+		else
+			current = UINT64_MAX;
+
+		avg = total_allocation / allocations;
+
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+					       &current);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+					       &avg);
 	}
 
 	PTHREAD_MUTEX_unlock(&pool_mutex);

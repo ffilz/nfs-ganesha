@@ -40,6 +40,7 @@ pthread_mutex_t pool_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 /* Lists of memory pools */
 struct glist_head mpool_list = GLIST_HEAD_INIT(mpool_list);
+struct glist_head vpool_list = GLIST_HEAD_INIT(vpool_list);
 
 /**
  * @brief Create a basic object pool
@@ -93,6 +94,60 @@ void pool_destroy(pool_t *pool)
 {
 	PTHREAD_MUTEX_lock(&pool_mutex);
 	glist_del(&pool->mpool_next);
+	PTHREAD_MUTEX_unlock(&pool_mutex);
+	gsh_free(pool->name);
+	gsh_free(pool);
+}
+
+/**
+ * @brief Create a basic variable pool
+ *
+ * This function creates a new object pool, given a name, object size,
+ * constructor and destructor.
+ *
+ * @param[in] name             The name of this pool
+ * @param[in] file             Calling source file
+ * @param[in] line             Calling source line
+ * @param[in] function         Calling source function
+ *
+ * @return A pointer to the pool object.  This pointer must not be
+ *         dereferenced.  It may be stored or supplied as an argument
+ *         to the other pool functions.  It must not be supplied as an
+ *         argument to gsh_free, rather it must be disposed of with
+ *         pool_destroy.
+ */
+
+struct variable_pool *variable_pool_basic_init__(const char *name,
+						 const char *file,
+						 int line,
+						 const char *function)
+{
+	struct variable_pool *pool = gsh_calloc__(1, sizeof(pool_t), file,
+						  line, function);
+
+	assert(name);
+
+	pool->name = gsh_strdup__(name, file, line, function);
+
+	PTHREAD_MUTEX_lock(&pool_mutex);
+	glist_add_tail(&vpool_list, &pool->vpool_next);
+	PTHREAD_MUTEX_unlock(&pool_mutex);
+	return pool;
+}
+
+/**
+ * @brief Destroy a variable pool
+ *
+ * This function destroys a memory pool.  All objects must be returned
+ * to the pool before this function is called.
+ *
+ * @param[in] pool The pool to be destroyed.
+ */
+
+void variable_pool_destroy(struct variable_pool *pool)
+{
+	PTHREAD_MUTEX_lock(&pool_mutex);
+	glist_del(&pool->vpool_next);
 	PTHREAD_MUTEX_unlock(&pool_mutex);
 	gsh_free(pool->name);
 	gsh_free(pool);
