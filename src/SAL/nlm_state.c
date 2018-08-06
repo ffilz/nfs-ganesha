@@ -231,6 +231,7 @@ static hash_parameter_t nlm_state_hash_param = {
 	.key_to_str = display_nlm_state_key,
 	.val_to_str = display_nlm_state_val,
 	.flags = HT_FLAG_NONE,
+	.ht_name = "NLM State Table",
 };
 
 /**

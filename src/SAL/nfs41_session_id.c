@@ -194,6 +194,7 @@ static hash_parameter_t session_id_param = {
 	.key_to_str = display_session_id_key,
 	.val_to_str = display_session_id_val,
 	.flags = HT_FLAG_CACHE,
+	.ht_name = "NFSv4.1 Session Table",
 };
 
 /**

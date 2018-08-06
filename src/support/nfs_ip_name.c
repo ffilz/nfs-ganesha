@@ -335,6 +335,8 @@ static struct ip_name_cache ip_name_cache = {
 	.hash_param.key_to_str = display_ip_name_key,
 	.hash_param.val_to_str = display_ip_name_val,
 	.hash_param.flags = HT_FLAG_NONE,
+	.hash_param.ht_name = "IP Name Cache",
+
 };
 
 /**

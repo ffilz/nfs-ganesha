@@ -350,6 +350,7 @@ static hash_parameter_t nfs4_owner_param = {
 	.key_to_str = display_nfs4_owner_key,
 	.val_to_str = display_nfs4_owner_val,
 	.flags = HT_FLAG_CACHE,
+	.ht_name = "NFS4 Owner Table",
 };
 
 /**

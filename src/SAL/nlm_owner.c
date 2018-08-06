@@ -698,6 +698,7 @@ static hash_parameter_t nsm_client_hash_param = {
 	.key_to_str = display_nsm_client_key,
 	.val_to_str = display_nsm_client_val,
 	.flags = HT_FLAG_NONE,
+	.ht_name = "NSM Client Table",
 };
 
 static hash_parameter_t nlm_client_hash_param = {
@@ -708,6 +709,7 @@ static hash_parameter_t nlm_client_hash_param = {
 	.key_to_str = display_nlm_client_key,
 	.val_to_str = display_nlm_client_val,
 	.flags = HT_FLAG_NONE,
+	.ht_name = "NLM Client Table",
 };
 
 static hash_parameter_t nlm_owner_hash_param = {
@@ -718,6 +720,7 @@ static hash_parameter_t nlm_owner_hash_param = {
 	.key_to_str = display_nlm_owner_key,
 	.val_to_str = display_nlm_owner_val,
 	.flags = HT_FLAG_NONE,
+	.ht_name = "NLM Owner Table",
 };
 
 /**

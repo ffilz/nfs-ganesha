@@ -227,7 +227,8 @@ static hash_parameter_t handle_hash_config = {
 	.hash_func_rbt = hash_digest_rbt,
 	.compare_key = cmp_digest,
 	.key_to_str = print_digest,
-	.val_to_str = print_handle
+	.val_to_str = print_handle,
+	.ht_name = "Proxy Handle Table",
 };
 
 /**

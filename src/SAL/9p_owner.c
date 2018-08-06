@@ -251,6 +251,7 @@ static hash_parameter_t _9p_owner_hash_param = {
 	.key_to_str = display_9p_owner_key,
 	.val_to_str = display_9p_owner_val,
 	.flags = HT_FLAG_NONE,
+	.ht_name = "9P Owner Table",
 };
 
 /**
