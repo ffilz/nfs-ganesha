@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "066f5575_24d2214a",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-08-06T12:58:27Z",
+      "side": 1,
+      "message": "It\u0027s missing much more than that to land this, it\u0027s really as the topic say \"RFC\" :)\nAt the very least if we were to merge this change I\u0027d want runtime fallback if socket creation failed, kernels that support KCM right now are rather rare...",
+      "parentUuid": "ee37da7b_2148289a",
+      "revId": "4e02cefeba1ed2b7828c49df7c670c0a0ef5d6f9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f921cef0_331b162b",
         "filename": "src/MainNFSD/9p_dispatcher.c",
         "patchSetId": 2
