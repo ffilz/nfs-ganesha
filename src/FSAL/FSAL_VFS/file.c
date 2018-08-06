@@ -198,7 +198,7 @@ struct state_t *vfs_alloc_state(struct fsal_export *exp_hdl,
 	struct state_t *state;
 	struct vfs_fd *my_fd;
 
-	state = init_state(gsh_calloc(1, sizeof(struct vfs_state_fd)),
+	state = init_state(pool_alloc(vfs_state_pool),
 			   exp_hdl, state_type, related_state);
 
 	my_fd = &container_of(state, struct vfs_state_fd, state)->vfs_fd;
@@ -225,7 +225,7 @@ void vfs_free_state(struct fsal_export *exp_hdl, struct state_t *state)
 
 	PTHREAD_RWLOCK_destroy(&my_fd->fdlock);
 
-	gsh_free(state_fd);
+	pool_free(vfs_state_pool, state_fd);
 }
 
 /**

@@ -94,7 +94,7 @@ static void release(struct fsal_export *exp_hdl)
 	fsal_detach_export(exp_hdl->fsal, &exp_hdl->exports);
 	free_export_ops(exp_hdl);
 
-	gsh_free(myself);	/* elvis has left the building */
+	pool_free(vfs_export_pool, myself); /* elvis has left the building */
 }
 
 static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
@@ -472,7 +472,7 @@ fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl,
 
 	vfs_state_init();
 
-	myself = gsh_calloc(1, sizeof(struct vfs_fsal_export));
+	myself = pool_alloc(vfs_export_pool);
 
 	glist_init(&myself->filesystems);
 
@@ -529,6 +529,6 @@ err_cleanup:
 	fsal_detach_export(fsal_hdl, &myself->export.exports);
 err_free:
 	free_export_ops(&myself->export);
-	gsh_free(myself);	/* elvis has left the building */
+	pool_free(vfs_export_pool, myself); /* elvis has left the building */
 	return fsal_status;
 }

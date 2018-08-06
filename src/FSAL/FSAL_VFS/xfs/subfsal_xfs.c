@@ -71,9 +71,7 @@ struct vfs_fsal_obj_handle *vfs_sub_alloc_handle(void)
 {
 	struct vfs_fsal_obj_handle *hdl;
 
-	hdl = gsh_calloc(1,
-			 (sizeof(struct vfs_fsal_obj_handle) +
-			  sizeof(vfs_file_handle_t)));
+	hdl = pool_alloc(vfs_handle_pool);
 
 	hdl->handle = (vfs_file_handle_t *) &hdl[1];
 

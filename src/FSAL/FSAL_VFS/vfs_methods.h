@@ -186,6 +186,10 @@ struct vfs_fsal_obj_handle {
 #define OBJ_VFS_FROM_FSAL(fsal) \
 	container_of((fsal), struct vfs_fsal_obj_handle, obj_handle)
 
+extern struct pool *vfs_handle_pool;
+extern struct pool *vfs_export_pool;
+extern struct pool *vfs_state_pool;
+
 /* default vex ops */
 int vfs_fd_to_handle(int fd, struct fsal_filesystem *fs,
 		     vfs_file_handle_t *fh);

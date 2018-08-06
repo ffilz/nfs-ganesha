@@ -156,7 +156,7 @@ struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
 		gsh_free(hdl->u.unopenable.name);
 		gsh_free(hdl->u.unopenable.dir);
 	}
-	gsh_free(hdl);		/* elvis has left the building */
+	pool_free(vfs_handle_pool, hdl); /* elvis has left the building */
 	return NULL;
 }
 
@@ -1706,7 +1706,7 @@ static void release(struct fsal_obj_handle *obj_hdl)
 		 "Releasing obj_hdl=%p, myself=%p",
 		 obj_hdl, myself);
 
-	gsh_free(myself);
+	pool_free(vfs_handle_pool, myself);
 }
 
 void vfs_handle_ops_init(struct fsal_obj_ops *ops)

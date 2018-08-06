@@ -46,6 +46,10 @@
 /* VFS FSAL module private storage
  */
 
+struct pool *vfs_handle_pool;
+struct pool *vfs_export_pool;
+struct pool *vfs_state_pool;
+
 /* defined the set of attributes supported with POSIX */
 #ifndef ENABLE_VFS_DEBUG_ACL
 #define VFS_SUPPORTED_ATTRIBUTES ((const attrmask_t) (ATTRS_POSIX | \
@@ -224,11 +228,23 @@ MODULE_INIT void vfs_init(void)
 
 	/* Initialize the fsal_obj_handle ops for FSAL VFS/LUSTRE */
 	vfs_handle_ops_init(&VFS.handle_ops);
+
+	vfs_handle_pool = pool_basic_init("FSAL_VFS_obj_handles",
+					   sizeof(struct vfs_fsal_obj_handle) +
+					   sizeof(struct vfs_file_handle));
+	vfs_export_pool = pool_basic_init("FSAL_VFS_exports",
+					      sizeof(struct vfs_fsal_export));
+	vfs_state_pool = pool_basic_init("FSAL_VFS_states",
+					     sizeof(struct vfs_state_fd));
 }
 
 MODULE_FINI void vfs_unload(void)
 {
 	int retval;
+
+	pool_destroy(vfs_handle_pool);
+	pool_destroy(vfs_export_pool);
+	pool_destroy(vfs_state_pool);
 
 	retval = unregister_fsal(&VFS.module);
 	if (retval != 0) {
