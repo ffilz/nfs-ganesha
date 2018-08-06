@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a53041dd_ba6a0ac0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-08-06T01:08:16Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nOperation   Max(MiB)   Min(MiB)  Mean(MiB)     StdDev    Mean(s) Test# #Tasks tPN reps fPP reord reordoff reordrand seed segcnt blksiz xsize aggsize API RefNum",
+      "revId": "4e02cefeba1ed2b7828c49df7c670c0a0ef5d6f9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f921cef0_331b162b",
+        "filename": "src/MainNFSD/9p_dispatcher.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-08-06T01:08:16Z",
+      "side": 1,
+      "message": "WARNING: Avoid line continuations in quoted strings\n+\tstatic const char *bpf_prog_string \u003d \"             \\",
+      "revId": "4e02cefeba1ed2b7828c49df7c670c0a0ef5d6f9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
