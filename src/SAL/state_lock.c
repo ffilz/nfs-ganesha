@@ -131,6 +131,7 @@ static hash_parameter_t cookie_param = {
 	.key_to_str = display_lock_cookie_key,
 	.val_to_str = display_lock_cookie_val,
 	.flags = HT_FLAG_NONE,
+	.ht_name = "Lock Cookie Table",
 };
 
 static hash_table_t *ht_lock_cookies;
