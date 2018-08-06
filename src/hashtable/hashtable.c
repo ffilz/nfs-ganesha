@@ -296,6 +296,8 @@ hashtable_init(struct hash_param *hparam)
 	struct hash_partition *partition = NULL;
 	/* The number of fully initialized partitions */
 	uint32_t completed = 0;
+	char *pool_name;
+	int name_len;
 
 	if (pthread_rwlockattr_init(&rwlockattr) != 0)
 		return NULL;
@@ -342,8 +344,19 @@ hashtable_init(struct hash_param *hparam)
 		completed++;
 	}
 
-	ht->node_pool = pool_basic_init(NULL, sizeof(rbt_node_t));
-	ht->data_pool = pool_basic_init(NULL, sizeof(struct hash_data));
+	assert(hparam->ht_name != NULL);
+
+	name_len = strlen(hparam->ht_name);
+	pool_name = gsh_malloc(name_len + 6 + 1);
+	strcpy(pool_name, hparam->ht_name);
+
+	strcpy(pool_name + name_len, " NODES");
+	ht->node_pool = pool_basic_init(pool_name, sizeof(rbt_node_t));
+
+	strcpy(pool_name + name_len, " DATA");
+	ht->data_pool = pool_basic_init(pool_name, sizeof(struct hash_data));
+
+	gsh_free(pool_name);
 
 	pthread_rwlockattr_destroy(&rwlockattr);
 	return ht;
