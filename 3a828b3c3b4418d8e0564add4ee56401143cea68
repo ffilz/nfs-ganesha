@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4429fe38_901058d3",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-08-06T14:05:21Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "04f59af8_ce30e914",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bc2b3132_313d40c8",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2018-08-04T14:00:38Z",
       "side": 1,
       "message": "Don\u0027t we want the object size here and account total_allocation size?",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36bdbe92_04829904",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-08-06T14:05:21Z",
+      "side": 1,
+      "message": "my thought was we may not know the size of the object being freed. If it turns out that looks like it\u0027s available for all variable pools, then we could do proper accounting",
+      "parentUuid": "bc2b3132_313d40c8",
       "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "b98f7d32_4087b0f4",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-08-06T14:05:21Z",
+      "side": 1,
+      "message": "For the same reason as the other patch, we may have an object that was never allocated, yet pool_free is called for, so we MUST NOT decrement the counter.",
+      "parentUuid": "d3e4da73_54255464",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d5ad999_7c3693cf",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2018-08-04T14:00:38Z",
       "side": 1,
       "message": "frees is declared as uint64_t, so not the right call here.",
+      "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4062af9f_b0cc613c",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-08-06T14:05:21Z",
+      "side": 1,
+      "message": "oops...",
+      "parentUuid": "8d5ad999_7c3693cf",
       "revId": "3a828b3c3b4418d8e0564add4ee56401143cea68",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
