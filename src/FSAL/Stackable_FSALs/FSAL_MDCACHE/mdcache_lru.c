@@ -600,6 +600,8 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 
 	if (entry->obj_handle.type == DIRECTORY)
 		pthread_spin_destroy(&entry->fsobj.fsdir.spin);
+
+	PTHREAD_RWLOCK_destroy(&entry->obj_handle.state_hdl->state_lock);
 }
 
 /**
