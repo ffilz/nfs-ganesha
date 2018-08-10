@@ -206,7 +206,8 @@ cih_hash_key(mdcache_key_t *key,
 	} else {
 		/* XXX dups fh_desc */
 		key->kv.len = fh_desc->len;
-		key->kv.addr = gsh_malloc(fh_desc->len);
+		key->kv.addr =
+			variable_pool_alloc(mdcache_fh_pool, fh_desc->len);
 		memcpy(key->kv.addr, fh_desc->addr, fh_desc->len);
 	}
 

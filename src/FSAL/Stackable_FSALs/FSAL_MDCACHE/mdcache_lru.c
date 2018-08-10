@@ -893,7 +893,7 @@ struct dir_chunk *mdcache_get_chunk(mdcache_entry_t *parent,
 			     "Recycling chunk at %p.", chunk);
 	} else {
 		/* alloc chunk (if fails, aborts) */
-		chunk = gsh_calloc(1, sizeof(struct dir_chunk));
+		chunk = pool_alloc(mdcache_dir_chunk_pool);
 		glist_init(&chunk->dirents);
 		LogFullDebug(COMPONENT_CACHE_INODE,
 			     "New chunk %p.", chunk);
@@ -1996,7 +1996,7 @@ void lru_remove_chunk(struct dir_chunk *chunk)
 
 	/* And now we can free the chunk. */
 	LogFullDebug(COMPONENT_CACHE_INODE, "Freeing chunk %p", chunk);
-	gsh_free(chunk);
+	pool_free(mdcache_dir_chunk_pool, chunk);
 }
 
 /**

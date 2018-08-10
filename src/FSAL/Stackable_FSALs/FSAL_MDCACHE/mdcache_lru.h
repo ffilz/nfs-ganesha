@@ -95,6 +95,7 @@ extern struct lru_state lru_state;
 
 /** Cache entries pool */
 extern pool_t *mdcache_entry_pool;
+extern struct variable_pool *mdcache_dirent_pool;
 
 /**
  * Flags for functions in the LRU package

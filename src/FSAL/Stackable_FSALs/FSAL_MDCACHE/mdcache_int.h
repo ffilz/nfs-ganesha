@@ -389,6 +389,13 @@ typedef struct mdcache_dir_entry__ {
 	char name_buffer[];
 } mdcache_dir_entry_t;
 
+/** Cache entries pool */
+extern pool_t *mdcache_entry_pool;
+extern struct variable_pool *mdcache_dirent_pool;
+extern struct pool *mdcache_dir_chunk_pool;
+extern struct variable_pool *mdcache_fh_pool;
+extern struct variable_pool *mdcache_key_pool;
+
 /**
  * @brief Move a detached dirent to MRU postion in LRU list.
  *
@@ -609,7 +616,7 @@ mdcache_key_dup(mdcache_key_t *tgt,
 		    mdcache_key_t *src)
 {
 	tgt->kv.len = src->kv.len;
-	tgt->kv.addr = gsh_malloc(src->kv.len);
+	tgt->kv.addr = variable_pool_alloc(mdcache_key_pool, src->kv.len);
 
 	memcpy(tgt->kv.addr, src->kv.addr, src->kv.len);
 	tgt->hk = src->hk;
@@ -649,7 +656,7 @@ static inline void
 mdcache_key_delete(mdcache_key_t *key)
 {
 	key->kv.len = 0;
-	gsh_free(key->kv.addr);
+	variable_pool_free(mdcache_key_pool, key->kv.addr);
 	key->kv.addr = NULL;
 }
 
@@ -658,7 +665,7 @@ static inline void
 mdcache_copy_fh(struct gsh_buffdesc *dest, struct gsh_buffdesc *src)
 {
 	dest->len = src->len;
-	dest->addr = gsh_malloc(dest->len);
+	dest->addr = variable_pool_alloc(mdcache_fh_pool, dest->len);
 	(void)memcpy(dest->addr, src->addr, dest->len);
 }
 
@@ -667,7 +674,7 @@ static inline void
 mdcache_free_fh(struct gsh_buffdesc *fh_desc)
 {
 	fh_desc->len = 0;
-	gsh_free(fh_desc->addr);
+	variable_pool_free(mdcache_fh_pool, fh_desc->addr);
 	fh_desc->addr = NULL;
 }
 

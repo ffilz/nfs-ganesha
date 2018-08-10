@@ -49,6 +49,10 @@
 #include "mdcache_lru.h"
 
 pool_t *mdcache_entry_pool;
+struct variable_pool *mdcache_dirent_pool;
+struct pool *mdcache_dir_chunk_pool;
+struct variable_pool *mdcache_fh_pool;
+struct variable_pool *mdcache_key_pool;
 
 struct mdcache_stats cache_st;
 struct mdcache_stats *cache_stp = &cache_st;
@@ -263,6 +267,14 @@ mdcache_fsal_unload(struct fsal_module *fsal_hdl)
 	/* Destroy the cache inode entry pool */
 	pool_destroy(mdcache_entry_pool);
 	mdcache_entry_pool = NULL;
+	variable_pool_destroy(mdcache_dirent_pool);
+	mdcache_dirent_pool = NULL;
+	pool_destroy(mdcache_dir_chunk_pool);
+	mdcache_dir_chunk_pool = NULL;
+	variable_pool_destroy(mdcache_fh_pool);
+	mdcache_fh_pool = NULL;
+	variable_pool_destroy(mdcache_key_pool);
+	mdcache_key_pool = NULL;
 
 	retval = unregister_fsal(&MDCACHE.module);
 	if (retval != 0)
@@ -309,6 +321,15 @@ fsal_status_t mdcache_pkginit(void)
 
 	mdcache_entry_pool = pool_basic_init("MDCACHE Entry Pool",
 					     sizeof(mdcache_entry_t));
+
+	mdcache_dirent_pool = variable_pool_basic_init("MDCACHE Dirent Pool");
+
+	mdcache_dir_chunk_pool = pool_basic_init("MDCACHE Dir Chunk Pool",
+						 sizeof(struct dir_chunk));
+
+	mdcache_fh_pool = variable_pool_basic_init("MDCACHE FH Pool");
+
+	mdcache_key_pool = variable_pool_basic_init("MDCACHE Key Pool");
 
 	status = mdcache_lru_pkginit();
 	if (FSAL_IS_ERROR(status)) {

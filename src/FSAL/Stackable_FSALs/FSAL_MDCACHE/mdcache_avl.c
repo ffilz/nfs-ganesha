@@ -224,7 +224,7 @@ void mdcache_avl_remove(mdcache_entry_t *parent,
 	if (dirent->ckey.kv.len)
 		mdcache_key_delete(&dirent->ckey);
 
-	gsh_free(dirent);
+	variable_pool_free(mdcache_dirent_pool, dirent);
 
 	LogFullDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_CACHE_INODE,
 			"Just freed dirent %p from chunk %p parent %p",
@@ -481,7 +481,7 @@ again:
 out:
 
 	mdcache_key_delete(&v->ckey);
-	gsh_free(v);
+	variable_pool_free(mdcache_dirent_pool, v);
 	*dirent = v2;
 
 	return code;

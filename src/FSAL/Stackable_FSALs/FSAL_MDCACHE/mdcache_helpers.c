@@ -1451,7 +1451,9 @@ mdcache_dirent_add(mdcache_entry_t *parent, const char *name,
 #endif
 
 	/* in cache avl, we always insert on pentry_parent */
-	new_dir_entry = gsh_calloc(1, sizeof(mdcache_dir_entry_t) + namesize);
+	new_dir_entry = variable_pool_alloc(mdcache_dirent_pool,
+					    sizeof(mdcache_dir_entry_t)
+								+ namesize);
 	new_dir_entry->flags = DIR_ENTRY_FLAG_NONE;
 	allocated_dir_entry = new_dir_entry;
 
@@ -2117,7 +2119,9 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 			new_entry, name, new_entry->sub_handle->fsal->name);
 
 	/* in cache avl, we always insert on mdc_parent */
-	new_dir_entry = gsh_calloc(1, sizeof(mdcache_dir_entry_t) + namesize);
+	new_dir_entry = variable_pool_alloc(mdcache_dirent_pool,
+					    sizeof(mdcache_dir_entry_t)
+								+ namesize);
 	new_dir_entry->flags = DIR_ENTRY_FLAG_NONE;
 	new_dir_entry->chunk = chunk;
 	new_dir_entry->ck = cookie;
