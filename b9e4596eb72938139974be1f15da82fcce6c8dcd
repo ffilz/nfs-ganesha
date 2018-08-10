@@ -16,6 +16,24 @@
       "revId": "b9e4596eb72938139974be1f15da82fcce6c8dcd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ef6934c_0a27b4db",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-08-10T18:54:51Z",
+      "side": 1,
+      "message": "Yes, I think it\u0027s safe (but please do sanity check me):\n\nThere are a lot of pointer shenanigans here, but the old code used to copy the string from fs_locations-\u003eserver into the on-stack \"server\" buffer declared near the beginning of the function. That then gets stuffed into the fs_location4 and fs_locations4 structures that are also declared on the stack and then the whole shebang is passed to xdr_fs_locations4 to be marshalled into the xdr buffer.\n\nSo, those strings only need to exist until xdr_fs_locations4 returns. This just cuts out that copy into the on-stack \"server\" buffer and just passes pointer/length directly from the fsal_fs_locations_t.",
+      "parentUuid": "049bc0a2_b8b895de",
+      "revId": "b9e4596eb72938139974be1f15da82fcce6c8dcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
