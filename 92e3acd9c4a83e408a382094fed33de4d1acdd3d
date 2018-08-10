@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "b7ee505d_12e9b8fa",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2018-08-10T06:36:06Z",
+      "side": 1,
+      "message": "Initialization is done in server_stats.c file (line no 439).",
+      "parentUuid": "93f4bfa1_8dedf558",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98ebc4a2_cc9c56b5",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2018-07-31T15:04:52Z",
       "side": 1,
       "message": "Let\u0027s change to gsh_calloc to automatically zero",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6718960_fa8c7295",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2018-08-10T06:36:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "98ebc4a2_cc9c56b5",
       "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "3f52485d_1e500e61",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2018-08-10T06:36:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "37c11ba6_2452ee63",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d99aaa9f_c158cc0a",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 5
@@ -81,6 +135,24 @@
       "writtenOn": "2018-07-31T15:03:02Z",
       "side": 1,
       "message": "Let\u0027s add an if (object) test...\n\nWe are trending away from testing for NULL when calling memory free functions.",
+      "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0afba02_53dfa6a4",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2018-08-10T06:36:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d99aaa9f_c158cc0a",
       "revId": "92e3acd9c4a83e408a382094fed33de4d1acdd3d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
