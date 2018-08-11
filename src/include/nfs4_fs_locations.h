@@ -32,8 +32,7 @@ void nfs4_fs_locations_free(fsal_fs_locations_t *);
 void nfs4_fs_locations_get_ref(fsal_fs_locations_t *);
 void nfs4_fs_locations_release(fsal_fs_locations_t *);
 
-fsal_fs_locations_t *nfs4_fs_locations_new(const char *fs_root,
-					   const char *server,
+fsal_fs_locations_t *nfs4_fs_locations_new(const char *server,
 					   const char *rootpath);
 
 #endif
