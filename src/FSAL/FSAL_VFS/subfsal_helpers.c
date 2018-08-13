@@ -118,8 +118,12 @@ fsal_status_t vfs_get_fs_locations(struct vfs_fsal_obj_handle *hdl,
 
 		nfs4_fs_locations_release(attrs_out->fs_locations);
 
-		attrs_out->fs_locations = nfs4_fs_locations_new(spath, server,
-								path);
+		attrs_out->fs_locations = nfs4_fs_locations_new(spath, path, 1);
+		attrs_out->fs_locations->server[0].utf8string_len =
+							strlen(server);
+		attrs_out->fs_locations->server[0].utf8string_val =
+							gsh_strdup(server);
+		attrs_out->fs_locations->nservers = 1;
 		FSAL_SET_MASK(attrs_out->valid_mask, ATTR4_FS_LOCATIONS);
 	}
 	gsh_free(xattr_content);
