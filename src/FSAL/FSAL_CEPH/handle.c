@@ -57,7 +57,7 @@
  * @return FSAL status codes.
  */
 
-static void release(struct fsal_obj_handle *obj_pub)
+static void ceph_fsal_release(struct fsal_obj_handle *obj_pub)
 {
 	/* The private 'full' handle */
 	struct ceph_handle *obj =
@@ -78,9 +78,10 @@ static void release(struct fsal_obj_handle *obj_pub)
  *
  * @return FSAL status codes.
  */
-static fsal_status_t lookup(struct fsal_obj_handle *dir_pub,
-			    const char *path, struct fsal_obj_handle **obj_pub,
-			    struct attrlist *attrs_out)
+static fsal_status_t ceph_fsal_lookup(struct fsal_obj_handle *dir_pub,
+				      const char *path,
+				      struct fsal_obj_handle **obj_pub,
+				      struct attrlist *attrs_out)
 {
 	/* Generic status return */
 	int rc = 0;
@@ -560,8 +561,8 @@ static fsal_status_t ceph_fsal_readlink(struct fsal_obj_handle *link_pub,
  * @return FSAL status.
  */
 
-static fsal_status_t getattrs(struct fsal_obj_handle *handle_pub,
-			      struct attrlist *attrs)
+static fsal_status_t ceph_fsal_getattrs(struct fsal_obj_handle *handle_pub,
+					struct attrlist *attrs)
 {
 	/* Generic status return */
 	int rc = 0;
@@ -2330,9 +2331,10 @@ fsal_status_t ceph_close2(struct fsal_obj_handle *obj_hdl,
  * @return FSAL status.
  */
 
-static fsal_status_t handle_to_wire(const struct fsal_obj_handle *handle_pub,
-				    uint32_t output_type,
-				    struct gsh_buffdesc *fh_desc)
+static fsal_status_t
+ceph_handle_to_wire(const struct fsal_obj_handle *handle_pub,
+		    uint32_t output_type,
+		    struct gsh_buffdesc *fh_desc)
 {
 	/* The private 'full' object handle */
 	const struct ceph_handle *handle =
@@ -2369,8 +2371,9 @@ static fsal_status_t handle_to_wire(const struct fsal_obj_handle *handle_pub,
  * @param[out] fh_desc    Address and length of key
  */
 
-static void handle_to_key(struct fsal_obj_handle *handle_pub,
-			  struct gsh_buffdesc *fh_desc)
+static void
+ceph_handle_to_key(struct fsal_obj_handle *handle_pub,
+		   struct gsh_buffdesc *fh_desc)
 {
 	/* The private 'full' object handle */
 	struct ceph_handle *handle =
@@ -2455,21 +2458,21 @@ void handle_ops_init(struct fsal_obj_ops *ops)
 {
 	fsal_default_obj_ops_init(ops);
 
-	ops->release = release;
+	ops->release = ceph_fsal_release;
 	ops->merge = ceph_merge;
-	ops->lookup = lookup;
+	ops->lookup = ceph_fsal_lookup;
 	ops->mkdir = ceph_fsal_mkdir;
 	ops->mknode = ceph_fsal_mknode;
 	ops->readdir = ceph_fsal_readdir;
 	ops->symlink = ceph_fsal_symlink;
 	ops->readlink = ceph_fsal_readlink;
-	ops->getattrs = getattrs;
+	ops->getattrs = ceph_fsal_getattrs;
 	ops->link = ceph_fsal_link;
 	ops->rename = ceph_fsal_rename;
 	ops->unlink = ceph_fsal_unlink;
 	ops->close = ceph_fsal_close;
-	ops->handle_to_wire = handle_to_wire;
-	ops->handle_to_key = handle_to_key;
+	ops->handle_to_wire = ceph_handle_to_wire;
+	ops->handle_to_key = ceph_handle_to_key;
 	ops->open2 = ceph_open2;
 	ops->status2 = ceph_status2;
 	ops->reopen2 = ceph_reopen2;
