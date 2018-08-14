@@ -508,9 +508,9 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 		/* Find the first export id. */
 		export_id = atomic_fetch_int32_t(&entry->first_export_id);
 
-		if (export_id >= 0 && op_ctx != NULL &&
-		    op_ctx->ctx_export != NULL &&
-		    op_ctx->ctx_export->export_id != export_id) {
+		if (export_id >= 0 && (op_ctx == NULL ||
+		    op_ctx->ctx_export == NULL ||
+		    op_ctx->ctx_export->export_id != export_id)) {
 			/* We can't be sure the op_ctx has a valid export_id for
 			 * this entry, so we'll use the first export_id and set
 			 * up a new op_ctx.
