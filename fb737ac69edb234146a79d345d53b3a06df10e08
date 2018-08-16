@@ -16,6 +16,47 @@
       "revId": "fb737ac69edb234146a79d345d53b3a06df10e08",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96b93a1c_501cd322",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2018-08-16T16:51:52Z",
+      "side": 1,
+      "message": "This change is correct. \"fsal_internal_close\" takes care of fd \u003c 3",
+      "parentUuid": "91c13a45_bbaf75da",
+      "revId": "fb737ac69edb234146a79d345d53b3a06df10e08",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a1b5a5e_097a142f",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2018-08-16T16:51:52Z",
+      "side": 1,
+      "message": "This else part is not required, as due to assert in \"fsal_internal_close\", this code section will never get executed.",
+      "range": {
+        "startLine": 1420,
+        "startChar": 3,
+        "endLine": 1420,
+        "endChar": 8
+      },
+      "revId": "fb737ac69edb234146a79d345d53b3a06df10e08",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
