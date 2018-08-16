@@ -960,6 +960,8 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 
 	LogFullDebug(COMPONENT_FSAL, "Closing Opened fd %d", dir_fd);
 	close(dir_fd);
+	if (retval == 0 && FSAL_IS_ERROR(status))
+		return status;
 	return fsalstat(posix2fsal_error(retval), retval);
 }
 
