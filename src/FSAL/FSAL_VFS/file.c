@@ -892,8 +892,10 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 						      state,
 						      attrib_set);
 
-		if (FSAL_IS_ERROR(status))
+		if (FSAL_IS_ERROR(status)) {
+			retval = status.minor;
 			goto fileerr;
+		}
 
 		if (attrs_out != NULL) {
 			status = (*new_obj)->obj_ops->getattrs(*new_obj,
@@ -904,6 +906,7 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl,
 				 * to get the attributes. Otherwise continue
 				 * with attrs_out indicating ATTR_RDATTR_ERR.
 				 */
+				retval = status.minor;
 				goto fileerr;
 			}
 		}
