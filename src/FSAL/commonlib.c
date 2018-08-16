@@ -1284,6 +1284,12 @@ int populate_posix_file_systems(bool force)
 		if (mnt->mnt_dir == NULL)
 			continue;
 
+		struct stat st;
+
+		if (stat(mnt->mnt_dir, &st) == 0 && !S_ISDIR(st.st_mode)) {
+			continue;
+		}
+
 		posix_create_file_system(mnt);
 	}
 
