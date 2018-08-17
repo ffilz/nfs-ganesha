@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1d0b5a2_b1a44f38",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-08-17T13:00:28Z",
+      "side": 1,
+      "message": "This won\u0027t work, since vfs_setattr2() can (via fsal_mod_to_acl()) return failure with status.minor \u003d\u003d 0.  You will need to audit the entire callpath of vfs_setattr2() to make sure it always sets status.minor, or better yet, fix this function so that a full status is set before jumping to the labels.",
+      "revId": "9d83326138964fcd47803115b885071df2496230",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
