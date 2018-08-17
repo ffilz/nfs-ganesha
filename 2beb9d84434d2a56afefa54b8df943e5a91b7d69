@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be2b95de_930aec33",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-08-17T12:51:04Z",
+      "side": 1,
+      "message": "We probably want to skip if stat fails...  So maybe:\nif (stat(mnt-\u003emnt_dir \u0026st) \u003c 0 || !S_ISDIR(st.st_mode)) {",
+      "revId": "2beb9d84434d2a56afefa54b8df943e5a91b7d69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
