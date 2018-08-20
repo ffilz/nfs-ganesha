@@ -266,6 +266,10 @@ void nfs_try_lift_grace(void)
 	if (!current)
 		return;
 
+	/* Don't lift the grace period unless everyone is enforcing */
+	if (!nfs_grace_enforcing())
+		return;
+
 	/*
 	 * If we know there are no NLM clients, then we can consider the grace
 	 * period done when all previous clients have sent a RECLAIM_COMPLETE.
