@@ -42,6 +42,7 @@
 #include "nsm.h"
 #include "log.h"
 #include "fsal.h"
+#include "nfs_core.h"
 
 /**
  * @brief NLM States
@@ -266,6 +267,8 @@ void dec_nlm_state_ref(state_t *state)
 	struct gsh_buffdesc old_value;
 	int32_t refcount;
 	struct fsal_obj_handle *obj;
+	bool op_ctx_set = false;
+	struct root_op_context ctx;
 
 	if (isDebug(COMPONENT_STATE)) {
 		display_nlm_state(&dspbuf, state);
@@ -323,6 +326,12 @@ void dec_nlm_state_ref(state_t *state)
 
 	LogFullDebug(COMPONENT_STATE, "Free {%s}", str);
 
+	if (!op_ctx) {
+		init_root_op_context(&ctx, state->state_export,
+		      state->state_export->fsal_export, 0, 0, UNKNOWN_REQUEST);
+		op_ctx_set = true;
+	}
+
 	dec_state_owner_ref(state->state_owner);
 
 	put_gsh_export(state->state_export);
@@ -339,6 +348,9 @@ void dec_nlm_state_ref(state_t *state)
 	(void) obj->obj_ops->close2(obj, state);
 
 	state->state_exp->exp_ops.free_state(state->state_exp, state);
+
+	if (op_ctx_set)
+		release_root_op_context();
 
 	/* Release 2 refs: our sentinal one, plus the one from
 	 * get_state_obj_ref() */
