@@ -92,8 +92,6 @@ bool fsal_supports(struct fsal_staticfsinfo_t *info,
 		return !!info->pnfs_mds;
 	case fso_pnfs_ds_supported:
 		return !!info->pnfs_ds;
-	case fso_grace_method:
-		return !!info->fsal_grace;
 	case fso_link_supports_permission_checks:
 		return !!info->link_supports_permission_checks;
 	case fso_rename_changes_key:

@@ -659,7 +659,6 @@ typedef enum enum_fsal_fsinfo_options {
 	fso_delegations_w,
 	fso_pnfs_ds_supported,
 	fso_pnfs_mds_supported,
-	fso_grace_method,
 	fso_link_supports_permission_checks,
 	fso_rename_changes_key,
 	fso_compute_readdir_cookie,
@@ -705,7 +704,6 @@ typedef struct fsal_staticfsinfo_t {
 	bool pnfs_mds;		/*< fsal supports file pnfs MDS */
 	bool pnfs_ds;		/*< fsal supports file pnfs DS */
 	bool fsal_trace;	/*< fsal trace supports */
-	bool fsal_grace;	/*< fsal will handle grace */
 	bool link_supports_permission_checks;
 	bool rename_changes_key;/*< Handle key is changed across rename */
 	bool compute_readdir_cookie;

@@ -73,7 +73,6 @@ struct gpfs_fsal_module GPFS = {
 			.pnfs_mds = true,
 			.pnfs_ds = true,
 			.fsal_trace = true,
-			.fsal_grace = false,
 			.link_supports_permission_checks = true,
 		}
 	}
@@ -104,8 +103,6 @@ static struct config_item gpfs_params[] = {
 		       fsal_staticfsinfo_t, pnfs_ds),
 	CONF_ITEM_BOOL("fsal_trace", true,
 		       fsal_staticfsinfo_t, fsal_trace),
-	CONF_ITEM_BOOL("fsal_grace", false,
-		       fsal_staticfsinfo_t, fsal_grace),
 	CONFIG_EOL
 };
 

@@ -54,8 +54,6 @@ int nlm4_Share(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	state_t *nlm_state;
 	int rc;
 	bool grace = nfs_in_grace();
-	/* Indicate if we let FSAL to handle requests during grace. */
-	bool_t fsal_grace = false;
 
 	/* NLM doesn't have a BADHANDLE error, nor can rpc_execute deal with
 	 * responding to an NLM_*_MSG call, so we check here if the export is
@@ -92,10 +90,7 @@ int nlm4_Share(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	 * have a reclaim flag, so we will honor the reclaim flag if used.
 	 */
 	if (grace) {
-		if (op_ctx->fsal_export->exp_ops.fs_supports(
-					op_ctx->fsal_export, fso_grace_method))
-			fsal_grace = true;
-		if (!fsal_grace && !arg->reclaim) {
+		if (!arg->reclaim) {
 			res->res_nlm4share.stat = NLM4_DENIED_GRACE_PERIOD;
 			LogDebug(COMPONENT_NLM,
 				 "REQUEST RESULT: NLM4_SHARE %s",

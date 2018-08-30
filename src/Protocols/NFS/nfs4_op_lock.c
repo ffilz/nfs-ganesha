@@ -99,7 +99,6 @@ int nfs4_op_lock(struct nfs_argop4 *op, compound_data_t *data,
 	/* Tracking data for the lock state */
 	struct state_refer refer;
 	/* Indicate if we let FSAL to handle requests during grace. */
-	bool_t fsal_grace = false;
 	int rc;
 	struct fsal_obj_handle *obj = data->current_obj;
 	bool state_lock_held = false;
@@ -454,19 +453,14 @@ int nfs4_op_lock(struct nfs_argop4 *op, compound_data_t *data,
 	 * the other and non-NULL at this point - so makes for a better log).
 	 */
 	if (nfs_in_grace()) {
-		if (op_ctx->fsal_export->exp_ops.fs_supports(
-					op_ctx->fsal_export, fso_grace_method))
-			fsal_grace = true;
-
-		if (!fsal_grace && !arg_LOCK4->reclaim) {
+		if (!arg_LOCK4->reclaim) {
 			LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
 			"LOCK failed, non-reclaim while in grace",
 				obj, resp_owner, &lock_desc);
 			res_LOCK4->status = NFS4ERR_GRACE;
 			goto out;
 		}
-		if (!fsal_grace && arg_LOCK4->reclaim
-		    && !clientid->cid_allow_reclaim) {
+		if (arg_LOCK4->reclaim && !clientid->cid_allow_reclaim) {
 			LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
 				"LOCK failed, invalid reclaim while in grace",
 				obj, resp_owner, &lock_desc);

@@ -57,8 +57,6 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	state_block_data_t *pblock_data;
 	const char *proc_name = "nlm4_Lock";
 	care_t care = CARE_MONITOR;
-	/* Indicate if we let FSAL to handle requests during grace. */
-	bool_t fsal_grace = false;
 
 	if (req->rq_msg.cb_proc == NLMPROC4_NM_LOCK) {
 		/* If call is a NM lock, indicate that we care about NLM
@@ -89,11 +87,7 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	copy_netobj(&res->res_nlm4test.cookie, &arg->cookie);
 
 	if (grace) {
-		/* allow only reclaim lock request during recovery */
-		if (op_ctx->fsal_export->exp_ops.fs_supports(
-					op_ctx->fsal_export, fso_grace_method))
-			fsal_grace = true;
-		if (!fsal_grace && !arg->reclaim) {
+		if (!arg->reclaim) {
 			res->res_nlm4.stat.stat = NLM4_DENIED_GRACE_PERIOD;
 			LogDebug(COMPONENT_NLM,
 				 "REQUEST RESULT: in grace %s %s",
