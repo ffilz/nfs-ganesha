@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c7b71f5_2ffe6475",
+        "filename": "src/Protocols/9P/9p_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-08-31T14:20:10Z",
+      "side": 1,
+      "message": "It won\u0027t hurt to add this, but I\u0027ll note that the 9P callback function doesn\u0027t seem to look at this field.",
+      "range": {
+        "startLine": 158,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 32
+      },
+      "revId": "924d3bc7da573b313382bad81707df897be98329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
