@@ -467,9 +467,6 @@ void  nfs4_chk_clid(nfs_client_id_t *clientid)
 {
 	clid_entry_t *dummy_clid_ent;
 
-	/* If we aren't in grace period, then reclaim is not possible */
-	if (!nfs_in_grace())
-		return;
 	PTHREAD_MUTEX_lock(&grace_mutex);
 	nfs4_chk_clid_impl(clientid, &dummy_clid_ent);
 	PTHREAD_MUTEX_unlock(&grace_mutex);
