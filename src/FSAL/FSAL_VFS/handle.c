@@ -1210,10 +1210,8 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 			struct attrlist attrs;
 			enum fsal_dir_result cb_rc;
 
-			if (!to_vfs_dirent(buf, bpos, dentryp, baseloc)
-			    || strcmp(dentryp->vd_name, ".") == 0
-			    || strcmp(dentryp->vd_name, "..") == 0)
-				goto skip;	/* must skip '.' and '..' */
+			if (!to_vfs_dirent(buf, bpos, dentryp, baseloc))
+				goto skip;
 
 #ifdef __FreeBSD__
 			/* Re-read the entry and fetch its offset. */
@@ -1224,8 +1222,18 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 				status = posix2fsal_status(retval);
 				goto done;
 			}
+			entloc = lseek(dirfd, 0, SEEK_CUR);
+			if (entloc < 0) {
+				retval = errno;
+				status = posix2fsal_status(retval);
+				goto done;
+			}
 			dentryp->vd_offset = entloc;
 #endif
+
+			if (strcmp(dentryp->vd_name, ".") == 0
+			    || strcmp(dentryp->vd_name, "..") == 0)
+				goto skip;	/* must skip '.' and '..' */
 
 			fsal_prepare_attrs(&attrs, attrmask);
 
