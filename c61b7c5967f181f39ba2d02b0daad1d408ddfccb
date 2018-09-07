@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e75a1efa_8e0d0b9d",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2018-09-07T10:17:16Z",
+      "side": 1,
+      "message": "Need to move these checks below the FreeBSD ifdef, otherwise the doff workaround does not work...",
+      "revId": "c61b7c5967f181f39ba2d02b0daad1d408ddfccb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
