@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce75b436_5b564b81",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-09-12T19:37:21Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tuid ? *uid : glfs_export-\u003esaveduid, gid ? *gid : glfs_export-\u003esavedgid);",
+      "revId": "99b7e9d5391015a3d9a1277845d5506fe8d33cf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
