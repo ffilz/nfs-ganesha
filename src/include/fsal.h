@@ -373,6 +373,29 @@ fsal_status_t fsal_reopen2(struct fsal_obj_handle *obj,
 			   bool check_permission);
 fsal_status_t get_optional_attrs(struct fsal_obj_handle *obj_hdl,
 				 struct attrlist *attrs_out);
+
+/**
+ * @brief Open a directory
+ *
+ * Open a directory for reading.  A directory is closed with @ref fsal_close
+ *
+ * @param[in] dir_hdl	Handle of directory to open
+ * @return FSAL status
+ */
+static inline fsal_status_t fsal_opendir(struct fsal_obj_handle *dir_hdl)
+{
+	struct fsal_obj_handle *out_hdl;
+	bool caller_perm_check = false;
+
+	if (dir_hdl->type != DIRECTORY) {
+		return fsalstat(ERR_FSAL_NOTDIR, 0);
+	}
+
+	return dir_hdl->obj_ops->open2(dir_hdl, NULL, FSAL_O_RDWR,
+				       FSAL_NO_CREATE, NULL, NULL, NULL,
+				       &out_hdl, NULL, &caller_perm_check);
+}
+
 /**
  * @brief Close a file
  *
@@ -388,15 +411,16 @@ fsal_status_t get_optional_attrs(struct fsal_obj_handle *obj_hdl,
  */
 static inline fsal_status_t fsal_close(struct fsal_obj_handle *obj_hdl)
 {
-	if (obj_hdl->type != REGULAR_FILE) {
-		/* Can only close a regular file */
+	if (obj_hdl->type != REGULAR_FILE && obj_hdl->type != DIRECTORY) {
+		/* Can only close a regular file or a directory */
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 	}
 
 	/* Return the result of close method. */
 	fsal_status_t status = obj_hdl->obj_ops->close(obj_hdl);
 
-	if (status.major != ERR_FSAL_NOT_OPENED) {
+	/* Directory handles don't count towards open FDs */
+	if (status.major != ERR_FSAL_NOT_OPENED && obj_hdl->type != DIRECTORY) {
 		ssize_t count;
 
 		count = atomic_dec_size_t(&open_fd_count);

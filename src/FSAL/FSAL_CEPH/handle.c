@@ -143,7 +143,7 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 	struct ceph_handle *dir =
 		container_of(dir_pub, struct ceph_handle, handle);
 	/* The director descriptor */
-	struct ceph_dir_result *dir_desc = NULL;
+	struct ceph_fd *my_fd = NULL;
 	/* Cookie marking the start of the readdir */
 	uint64_t start = 0;
 	/* ceph_statx want mask */
@@ -151,27 +151,27 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 	/* Return status */
 	fsal_status_t fsal_status = { ERR_FSAL_NO_ERROR, 0 };
 
-	rc = fsal_ceph_ll_opendir(export->cmount, dir->i, &dir_desc,
-				  op_ctx->creds);
-	if (rc < 0)
-		return ceph2fsal_error(rc);
+	my_fd = &dir->fd;
+	if (my_fd->openflags == FSAL_O_CLOSED) {
+		return fsalstat(ERR_FSAL_NOT_OPENED, 0);
+	}
 
 	if (whence != NULL)
 		start = *whence;
 
-	ceph_seekdir(export->cmount, dir_desc, start);
+	ceph_seekdir(export->cmount, my_fd->dir_desc, start);
 
 	while (!(*eof)) {
 		struct ceph_statx stx;
 		struct dirent de;
 		struct Inode *i = NULL;
 
-		rc = fsal_ceph_readdirplus(export->cmount, dir_desc, dir->i,
-					   &de, &stx, want, 0, &i,
+		rc = fsal_ceph_readdirplus(export->cmount, my_fd->dir_desc,
+					   dir->i, &de, &stx, want, 0, &i,
 					   op_ctx->creds);
 		if (rc < 0) {
 			fsal_status = ceph2fsal_error(rc);
-			goto closedir;
+			return fsal_status;
 		} else if (rc == 1) {
 			struct ceph_handle *obj;
 			struct attrlist attrs;
@@ -195,7 +195,7 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 
 			/* Read ahead not supported by this FSAL. */
 			if (cb_rc >= DIR_READAHEAD)
-				goto closedir;
+				return fsal_status;
 
 		} else if (rc == 0) {
 			*eof = true;
@@ -204,13 +204,6 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 			abort();
 		}
 	}
-
- closedir:
-
-	rc = ceph_ll_releasedir(export->cmount, dir_desc);
-
-	if (rc < 0)
-		fsal_status = ceph2fsal_error(rc);
 
 	return fsal_status;
 }
@@ -845,13 +838,28 @@ static fsal_status_t ceph_close_func(struct fsal_obj_handle *obj_hdl,
 
 static fsal_status_t ceph_fsal_close(struct fsal_obj_handle *obj_hdl)
 {
-	fsal_status_t status;
+	fsal_status_t status = {0, 0};
 	/* The private 'full' object handle */
 	struct ceph_handle *handle =
 			container_of(obj_hdl, struct ceph_handle, handle);
 
 	if (handle->fd.openflags == FSAL_O_CLOSED)
 		return fsalstat(ERR_FSAL_NOT_OPENED, 0);
+
+	if (obj_hdl->type == DIRECTORY) {
+		int rc = 0;
+		struct ceph_export *export =
+			container_of(op_ctx->fsal_export, struct ceph_export,
+				     export);
+
+		rc = ceph_ll_releasedir(export->cmount, myself->fd.dir_desc);
+		myself->fd.dir_desc = NULL;
+
+		if (rc < 0)
+			status = ceph2fsal_error(rc);
+
+		return status;
+	}
 
 	/* Take write lock on object to protect file descriptor.
 	 * This can block over an I/O operation.
@@ -1048,14 +1056,33 @@ static fsal_status_t ceph_fsal_open2(struct fsal_obj_handle *obj_hdl,
 	struct Inode *i = NULL;
 	Fh *fd;
 
+	myself = container_of(obj_hdl, struct ceph_handle, handle);
+
+	if (obj_hdl->type == DIRECTORY && !name) {
+		int rc = 0;
+
+		my_fd = &myself->fd;
+		if (my_fd->openflags != FSAL_O_CLOSED) {
+			return fsalstat(ERR_FSAL_FILE_OPEN, 0);
+		}
+
+		assert(my_fd->dir_desc == 0);
+
+		rc = fsal_ceph_ll_opendir(export->cmount, myself->i,
+					  &my_fd->dir_desc, op_ctx->creds);
+		if (rc < 0)
+			return ceph2fsal_error(rc);
+
+		my_fd->openflags = openflags;
+		return status;
+	}
+
 	LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG,
 		    "attrs ", attrib_set, false);
 
 	if (state != NULL)
 		my_fd = &container_of(state, struct ceph_state_fd,
 				      state)->ceph_fd;
-
-	myself = container_of(obj_hdl, struct ceph_handle, handle);
 
 	fsal2posix_openflags(openflags, &posix_flags);
 

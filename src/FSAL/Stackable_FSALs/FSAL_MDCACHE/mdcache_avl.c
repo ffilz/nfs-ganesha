@@ -207,8 +207,9 @@ void mdcache_avl_remove(mdcache_entry_t *parent,
 			mdcache_dir_entry_t *dirent)
 {
 	struct dir_chunk *chunk = dirent->chunk;
+	bool deleted = dirent->flags & DIR_ENTRY_FLAG_DELETED;
 
-	if ((dirent->flags & DIR_ENTRY_FLAG_DELETED) == 0) {
+	if (!deleted) {
 		/* Remove from active names tree */
 		avltree_remove(&dirent->node_name, &parent->fsobj.fsdir.avl.t);
 	}
@@ -227,8 +228,9 @@ void mdcache_avl_remove(mdcache_entry_t *parent,
 	gsh_free(dirent);
 
 	LogFullDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_CACHE_INODE,
-			"Just freed dirent %p from chunk %p parent %p",
-			dirent, chunk, (chunk) ? chunk->parent : NULL);
+			"Just freed dirent %p (%s) from chunk %p parent %p",
+			dirent, dirent->name, chunk,
+			(chunk) ? chunk->parent : NULL);
 }
 
 /**

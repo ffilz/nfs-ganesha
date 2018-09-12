@@ -1637,11 +1637,17 @@ mdcache_readdir_uncached(mdcache_entry_t *directory, fsal_cookie_t *whence,
 	state.cb = cb;
 	state.dir_state = dir_state;
 
+	status = fsal_opendir(&directory->obj_handle);
+	if (FSAL_IS_ERROR(status))
+		return status;
+
 	subcall(
 		readdir_status = directory->sub_handle->obj_ops->readdir(
 			directory->sub_handle, whence, &state,
 			mdc_readdir_uncached_cb, attrmask, eod_met)
 	       );
+
+	fsal_close(&directory->obj_handle);
 
 	if (FSAL_IS_ERROR(readdir_status))
 		return readdir_status;
@@ -2433,13 +2439,23 @@ fsal_status_t mdcache_populate_dir_chunk(mdcache_entry_t *directory,
 					 struct dir_chunk *prev_chunk,
 					 bool *eod_met)
 {
-	fsal_status_t status = {0, 0};
+	fsal_status_t status;
 	fsal_status_t readdir_status = {0, 0};
 	struct mdcache_populate_cb_state state;
 	struct dir_chunk *first_chunk;
 	struct dir_chunk *chunk;
 	attrmask_t attrmask;
 	fsal_cookie_t *whence_ptr = &whence;
+
+	/* Open the directory, in case it's not open */
+	status = fsal_opendir(&directory->obj_handle);
+	if (FSAL_IS_ERROR(status) && status.major != ERR_FSAL_FILE_OPEN) {
+		/* Actual error */
+		return status;
+	}
+
+	/* Clean up possible ERR_FSAL_FILE_OPEN from above */
+	status = fsalstat(0, 0);
 
 	first_chunk = mdcache_get_chunk(directory, prev_chunk);
 	chunk = first_chunk;
@@ -3146,12 +3162,18 @@ again:
 			 */
 			*eod_met = cb_result != DIR_TERMINATE && dirent->eod;
 
-			if (*eod_met && whence == 0) {
-				/* Since eod is true and whence is 0, we know
-				 * the entire directory is populated.
-				 */
-				atomic_set_uint32_t_bits(&directory->mde_flags,
-							 MDCACHE_DIR_POPULATED);
+			if (*eod_met) {
+				if (whence == 0) {
+					/* Since eod is true and whence is 0, we
+					 * know the entire directory is
+					 * populated.
+					 */
+					atomic_set_uint32_t_bits(
+							&directory->mde_flags,
+							MDCACHE_DIR_POPULATED);
+				}
+				/* Close the directory, in case it was opened */
+				(void)fsal_close(&directory->obj_handle);
 			}
 
 			LogDebugAlt(COMPONENT_NFS_READDIR,

@@ -103,6 +103,9 @@ struct gpfs_fsal_obj_handle {
 			unsigned char *link_content;
 			int link_size;
 		} symlink;
+		struct {
+			struct gpfs_fd fd;
+		} dir;
 	} u;
 };
 

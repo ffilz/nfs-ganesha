@@ -126,6 +126,33 @@ fsal_status_t gpfs_merge(struct fsal_obj_handle *orig_hdl,
 	return status;
 }
 
+static fsal_status_t open_dir(struct fsal_obj_handle *obj_hdl,
+			     fsal_openflags_t openflags)
+{
+	struct gpfs_fsal_export *exp = container_of(op_ctx->fsal_export,
+					struct gpfs_fsal_export, export);
+	struct gpfs_fsal_obj_handle *gpfs_hdl;
+	struct gpfs_fd *my_fd;
+	fsal_status_t status;
+
+	gpfs_hdl = container_of(obj_hdl, struct gpfs_fsal_obj_handle,
+				obj_handle);
+
+	my_fd = &gpfs_hdl->u.dir.fd;
+
+	if (my_fd->openflags != FSAL_O_CLOSED) {
+		return fsalstat(ERR_FSAL_FILE_OPEN, 0);
+	}
+
+	status = fsal_internal_handle2fd(exp->export_fd, gpfs_hdl->handle,
+					 &my_fd->fd, O_RDONLY | O_DIRECTORY);
+	if (FSAL_IS_ERROR(status))
+		return status;
+
+	my_fd->openflags = openflags;
+	return status;
+}
+
 static fsal_status_t
 open_by_handle(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	       fsal_openflags_t openflags, int posix_flags,
@@ -349,10 +376,14 @@ gpfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		/* Now fixup attrs for verifier if exclusive create */
 		set_common_verifier(attr_set, verifier);
 
-	if (name == NULL)
+	if (name == NULL) {
+		if (obj_hdl->type == DIRECTORY)
+			return open_dir(obj_hdl, openflags);
+
 		return open_by_handle(obj_hdl, state, openflags, posix_flags,
 				      verifier, attrs_out, createmode,
 				      caller_perm_check);
+	}
 
 	/* In this path where we are opening by name, we can't check share
 	 * reservation yet since we don't have an object_handle yet. If we
@@ -1392,6 +1423,13 @@ fsal_status_t gpfs_close(struct fsal_obj_handle *obj_hdl)
 	struct gpfs_fsal_obj_handle *myself =
 		container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+
+	if (obj_hdl->type == DIRECTORY) {
+		status = fsal_internal_close(myself->u.dir.fd.fd, NULL, 0);
+		myself->u.dir.fd.fd = 0;
+		myself->u.dir.fd.openflags = FSAL_O_CLOSED;
+		return status;
+	}
 
 	assert(obj_hdl->type == REGULAR_FILE);
 

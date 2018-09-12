@@ -453,27 +453,23 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
 	int retval = 0;
 	struct gpfs_fsal_obj_handle *myself;
-	int dirfd;
+	struct gpfs_fd *my_fd;
 	fsal_status_t status;
 	off_t seekloc = 0;
 	int bpos, cnt, nread;
 	struct dirent64 *dentry;
 	char buf[BUF_SIZE];
-	struct gpfs_fsal_export *exp = container_of(op_ctx->fsal_export,
-					struct gpfs_fsal_export, export);
-	int export_fd = exp->export_fd;
 
 	if (whence != NULL)
 		seekloc = (off_t) *whence;
 
 	myself = container_of(dir_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-	status = fsal_internal_handle2fd(export_fd, myself->handle,
-					 &dirfd, O_RDONLY | O_DIRECTORY);
+	my_fd = &myself->u.dir.fd;
+	if (my_fd->openflags == FSAL_O_CLOSED) {
+		return fsalstat(ERR_FSAL_NOT_OPENED, 0);
+	}
 
-	if (FSAL_IS_ERROR(status))
-		return status;
-
-	seekloc = lseek(dirfd, seekloc, SEEK_SET);
+	seekloc = lseek(my_fd->fd, seekloc, SEEK_SET);
 	if (seekloc < 0) {
 		retval = errno;
 		fsal_error = posix2fsal_error(retval);
@@ -481,7 +477,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	}
 	cnt = 0;
 	do {
-		nread = syscall(SYS_getdents64, dirfd, buf, BUF_SIZE);
+		nread = syscall(SYS_getdents64, my_fd->fd, buf, BUF_SIZE);
 		if (nread < 0) {
 			retval = errno;
 			fsal_error = posix2fsal_error(retval);
@@ -524,7 +520,6 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 
 	*eof = true;
  done:
-	fsal_internal_close(dirfd, NULL, 0);
 
 	return fsalstat(fsal_error, retval);
 }

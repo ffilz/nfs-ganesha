@@ -1271,7 +1271,11 @@ fsal_status_t mem_close(struct fsal_obj_handle *obj_hdl)
 {
 	struct mem_fsal_obj_handle *myself = container_of(obj_hdl,
 				  struct mem_fsal_obj_handle, obj_handle);
-	fsal_status_t status;
+	fsal_status_t status = {0, 0};
+
+	if (obj_hdl->type == DIRECTORY) {
+		return status;
+	}
 
 	assert(obj_hdl->type == REGULAR_FILE);
 
@@ -1405,10 +1409,16 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 	bool created = false;
 	struct attrlist verifier_attr;
 
+	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
+
+	if (obj_hdl->type == DIRECTORY && !name) {
+		/* Just return success */
+		*new_obj = obj_hdl;
+		return status;
+	}
+
 	if (state != NULL)
 		my_fd = (struct fsal_fd *)(state + 1);
-
-	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 	if (setattrs)
 		LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG,

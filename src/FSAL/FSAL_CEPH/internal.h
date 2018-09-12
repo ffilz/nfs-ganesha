@@ -84,8 +84,12 @@ struct ceph_fd {
 	fsal_openflags_t openflags;
 	/* rw lock to protect the file descriptor */
 	pthread_rwlock_t fdlock;
-	/** The cephfs file descriptor. */
-	Fh *fd;
+	union {
+		/** The cephfs file descriptor for files */
+		Fh *fd;
+		/** The dir handle for directories */
+		struct ceph_dir_result *dir_desc;
+	};
 };
 
 struct ceph_state_fd {
