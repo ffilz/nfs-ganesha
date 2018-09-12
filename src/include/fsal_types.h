@@ -487,6 +487,7 @@ struct attrlist {
 					   for attributes. Settable by FSAL. */
 	fsal_fs_locations_t *fs_locations;	/*< fs locations for this
 						    object if any */
+	struct sec_label4 sec_label;
 };
 
 /******************************************************
