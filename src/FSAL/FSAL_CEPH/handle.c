@@ -577,18 +577,40 @@ static fsal_status_t ceph_fsal_getattrs(struct fsal_obj_handle *handle_pub,
 
 	rc = fsal_ceph_ll_getattr(export->cmount, handle->i, &stx,
 				CEPH_STATX_ATTR_MASK, op_ctx->creds);
+	if (rc < 0)
+		goto out_err;
+
 	LogDebug(COMPONENT_FSAL, "getattr returned %d", rc);
-	if (rc < 0) {
-		if (attrs->request_mask & ATTR_RDATTR_ERR) {
-			/* Caller asked for error to be visible. */
-			attrs->valid_mask = ATTR_RDATTR_ERR;
+	if (FSAL_TEST_MASK(attrs->request_mask, ATTR4_SEC_LABEL)) {
+		char label[NFS4_OPAQUE_LIMIT];
+
+		rc = fsal_ceph_ll_getxattr(export->cmount, handle->i,
+					   export->sec_label_xattr, label,
+					   NFS4_OPAQUE_LIMIT, op_ctx->creds);
+		if (rc < 0) {
+			/* If there's no label then just do zero-length one */
+			if (rc != -ENODATA)
+				goto out_err;
+			rc = 0;
 		}
-		return ceph2fsal_error(rc);
+
+		attrs->sec_label.slai_data.slai_data_len = rc;
+		gsh_free(attrs->sec_label.slai_data.slai_data_val);
+		if (rc > 0)
+			attrs->sec_label.slai_data.slai_data_val =
+				gsh_memdup(label, rc);
+		else
+			attrs->sec_label.slai_data.slai_data_val = NULL;
 	}
 
 	ceph2fsal_attributes(&stx, attrs);
-
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+out_err:
+	if (attrs->request_mask & ATTR_RDATTR_ERR) {
+		/* Caller asked for error to be visible. */
+		attrs->valid_mask = ATTR_RDATTR_ERR;
+	}
+	return ceph2fsal_error(rc);
 }
 
 /**
@@ -2256,12 +2278,30 @@ static fsal_status_t ceph_fsal_setattr2(struct fsal_obj_handle *obj_hdl,
 		LogDebug(COMPONENT_FSAL,
 			 "setattrx returned %s (%d)",
 			 strerror(-rc), -rc);
-		status = ceph2fsal_error(rc);
-	} else {
-		/* Success */
-		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+		goto out;
 	}
 
+	if (FSAL_TEST_MASK(attrib_set->valid_mask, ATTR4_SEC_LABEL)) {
+		if (attrib_set->sec_label.slai_data.slai_data_val) {
+			rc = fsal_ceph_ll_setxattr(export->cmount,
+				myself->i, export->sec_label_xattr,
+				attrib_set->sec_label.slai_data.slai_data_val,
+				attrib_set->sec_label.slai_data.slai_data_len,
+				0, op_ctx->creds);
+		} else {
+			rc = fsal_ceph_ll_removexattr(export->cmount,
+						      myself->i,
+						      export->sec_label_xattr,
+						      op_ctx->creds);
+		}
+		if (rc < 0) {
+			status = ceph2fsal_error(rc);
+			goto out;
+		}
+	}
+
+	/* Success */
+	status = fsalstat(ERR_FSAL_NO_ERROR, 0);
  out:
 
 	if (has_lock)
