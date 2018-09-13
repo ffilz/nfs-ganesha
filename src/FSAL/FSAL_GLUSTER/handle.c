@@ -2045,13 +2045,14 @@ static fsal_status_t seek2(struct fsal_obj_handle *obj_hdl,
 				struct state_t *state,
 				struct io_info *info)
 {
-	off_t ret = 0, offset = info->io_content.hole.di_offset;
+	off_t ret = 0, offset = info->io_content.hole.di_offset, seek_pos = 0;
 	int what = 0;
 	bool has_lock = false;
 	bool closefd = false;
 	fsal_openflags_t openflags = FSAL_O_READ;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	struct glusterfs_fd my_fd = {0};
+	struct stat sbuf = {0};
 	struct glusterfs_export *glfs_export =
 	   container_of(op_ctx->fsal_export, struct glusterfs_export, export);
 
@@ -2082,23 +2083,26 @@ static fsal_status_t seek2(struct fsal_obj_handle *obj_hdl,
 		goto out;
 	}
 
-	ret = glfs_lseek(my_fd.glfd, offset, what);
+	seek_pos = glfs_lseek(my_fd.glfd, offset, what);
 
 	 /* restore credentials */
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);
 
-	if (ret < 0) {
-		if (errno == ENXIO) {
-			info->io_eof = TRUE;
-		} else {
-			status = gluster2fsal_error(errno);
-		}
+	if (seek_pos < 0) {
+		status = gluster2fsal_error(errno);
 		goto out;
-	} else {
-		info->io_eof = FALSE;
-		info->io_content.hole.di_offset = ret;
 	}
 
+	ret = glfs_fstat(my_fd.glfd, &sbuf);
+	if (ret != 0) {
+		if (errno == EBADF)
+			errno = ESTALE;
+		status = gluster2fsal_error(errno);
+		goto out;
+	}
+
+	info->io_eof = (seek_pos >= sbuf.st_size) ? TRUE : FALSE;
+	info->io_content.hole.di_offset = seek_pos;
  out:
 #ifdef GLTIMING
 	now(&e_time);
