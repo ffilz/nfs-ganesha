@@ -2088,17 +2088,16 @@ static fsal_status_t seek2(struct fsal_obj_handle *obj_hdl,
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL);
 
 	if (ret < 0) {
-		if (errno == ENXIO) {
-			info->io_eof = TRUE;
-		} else {
-			status = gluster2fsal_error(errno);
-		}
+		status = gluster2fsal_error(errno);
 		goto out;
-	} else {
-		info->io_eof = FALSE;
-		info->io_content.hole.di_offset = ret;
 	}
 
+	/* XXX set io_eof to TRUE when di_offset reachs filesize.
+	 * NFS client just skips the io_eof now, after io_eof is requested,
+	 * check di_offset with filesize using glfs_fstat().
+	 */
+	info->io_eof = FALSE;
+	info->io_content.hole.di_offset = ret;
  out:
 #ifdef GLTIMING
 	now(&e_time);
