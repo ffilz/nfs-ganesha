@@ -33,6 +33,24 @@
       "revId": "c127276d9059a972900dd21e9994d551c6cb303a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5156eca7_544d2a63",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2095,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2018-09-14T08:00:23Z",
+      "side": 1,
+      "message": "\u003e While we are fixing this, why not check for filesize as well using glfs_fstat..\n\nNFS client just drops the io_eof when receiving SEEK reply now.\nSo I don\u0027t add the glfs_fstat call for setting an unused option here.\nIf it\u0027s needed really, I will add it.",
+      "parentUuid": "94fcd3f0_75a13f2e",
+      "revId": "c127276d9059a972900dd21e9994d551c6cb303a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
