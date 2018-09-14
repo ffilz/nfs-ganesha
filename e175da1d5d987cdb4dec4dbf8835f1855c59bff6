@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c56849a_9dd580ea",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_int.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-09-14T13:56:32Z",
+      "side": 1,
+      "message": "With the addition of FS_LOCATION and SEC_LABEL, this is no longer correct.  I believe it should be:\n\nif (attrs-\u003erequest_mask \u0026 ~(ATTR_ACL | ATTR4_FS_LOCATIONS | ATTR4_SEC_LABEL))\n\nAnd maybe ATTR_RDATTR_ERR also?",
+      "revId": "e175da1d5d987cdb4dec4dbf8835f1855c59bff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f65a28fc_14bebe06",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-09-14T13:56:32Z",
+      "side": 1,
+      "message": "Don\u0027t you need to set slai_data_len here?",
+      "revId": "e175da1d5d987cdb4dec4dbf8835f1855c59bff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
