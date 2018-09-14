@@ -69,6 +69,24 @@
       "revId": "c127276d9059a972900dd21e9994d551c6cb303a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f21a5aec_8a0b4104",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2095,
+      "author": {
+        "id": 1003523
+      },
+      "writtenOn": "2018-09-14T08:52:09Z",
+      "side": 1,
+      "message": "We do not know if all NFS clients (vmware, oracle, windows, ..) do that.\n\nI have a strong preference to be RFC complaint and set is_eof correctly.",
+      "parentUuid": "37dac368_c597c0b4",
+      "revId": "c127276d9059a972900dd21e9994d551c6cb303a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
