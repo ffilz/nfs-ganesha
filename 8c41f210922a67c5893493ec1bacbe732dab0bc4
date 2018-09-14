@@ -16,6 +16,23 @@
       "revId": "8c41f210922a67c5893493ec1bacbe732dab0bc4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b1b1e11_1603be76",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2097,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-09-14T09:07:18Z",
+      "side": 1,
+      "message": "As suggested by Niels, please add checks to set io_eof as other distributions\u0027 NFS clients may depend on it.",
+      "revId": "8c41f210922a67c5893493ec1bacbe732dab0bc4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
