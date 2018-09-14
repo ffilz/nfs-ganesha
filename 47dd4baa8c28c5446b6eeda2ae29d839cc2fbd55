@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f5f8d21_01ba243c",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2091,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-09-14T13:48:25Z",
+      "side": 1,
+      "message": "IIUC, Frank mentioned that \n\"An NFS server could check the filesize and if sa_offset is \u003c filesize and a SEEK_DATA returns ENXIO, it could translate that to NFS4_OK and set sr_eof to TRUE.\"\n\nThat would mean we need a check for file size only when the underlying filesystem returns ENXIO error right?",
+      "revId": "47dd4baa8c28c5446b6eeda2ae29d839cc2fbd55",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
