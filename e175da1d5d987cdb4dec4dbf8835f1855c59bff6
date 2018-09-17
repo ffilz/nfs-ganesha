@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "13a37a01_760d3ef5",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_int.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-09-17T18:08:42Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll fix that in a separate patch ordered earlier than this one.",
+      "parentUuid": "2c56849a_9dd580ea",
+      "revId": "e175da1d5d987cdb4dec4dbf8835f1855c59bff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f65a28fc_14bebe06",
         "filename": "src/include/fsal.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-09-14T13:56:32Z",
       "side": 1,
       "message": "Don\u0027t you need to set slai_data_len here?",
+      "revId": "e175da1d5d987cdb4dec4dbf8835f1855c59bff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "947a582c_d817abb6",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-09-17T18:08:42Z",
+      "side": 1,
+      "message": "It should already be set due to the copy that happens at the beginning of this function.",
+      "parentUuid": "f65a28fc_14bebe06",
       "revId": "e175da1d5d987cdb4dec4dbf8835f1855c59bff6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
