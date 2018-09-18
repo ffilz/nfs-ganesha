@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0715b40e_7a2dab2f",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1004330
+      },
+      "writtenOn": "2018-09-18T04:57:55Z",
+      "side": 1,
+      "message": "This will be same selinux context, why do we need a config param for the xattr",
+      "range": {
+        "startLine": 162,
+        "startChar": 1,
+        "endLine": 163,
+        "endChar": 33
+      },
+      "revId": "ac95177ae914ca2008a0ce1d3dbbd713d7a92f51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
