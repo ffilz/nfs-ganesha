@@ -768,11 +768,9 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 
 	/* We raced or failed, release the new entry we acquired, this will
 	 * result in inline deconstruction. This will release the attributes, we
-	 * may not have copied yet, in which case mask and acl are 0/NULL.  This
-	 * entry is not yet in the hash or LRU, so just put it's sentinal ref.
+	 * may not have copied yet, in which case mask and acl are 0/NULL.
 	 */
 	nentry->sub_handle = NULL;
-	mdcache_put(nentry);
 	mdcache_put(nentry);
 
  out_no_new_entry_yet:
