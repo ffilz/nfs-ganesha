@@ -312,6 +312,10 @@ fsal_status_t vfs_seek2(struct fsal_obj_handle *obj_hdl,
 			struct state_t *state,
 			struct io_info *info);
 
+fsal_status_t vfs_fallocate(struct fsal_obj_handle *obj_hdl,
+			    struct state_t *state, uint64_t offset,
+			    uint64_t length, bool allocate);
+
 fsal_status_t vfs_commit2(struct fsal_obj_handle *obj_hdl,
 			  off_t offset,
 			  size_t len);

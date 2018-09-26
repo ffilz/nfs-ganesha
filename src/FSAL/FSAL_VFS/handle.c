@@ -1677,6 +1677,7 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->rename = renamefile;
 	ops->unlink = file_unlink;
 	ops->close = vfs_close;
+	ops->fallocate = vfs_fallocate;
 	ops->handle_to_wire = handle_to_wire;
 	ops->handle_to_key = handle_to_key;
 	ops->open2 = vfs_open2;
