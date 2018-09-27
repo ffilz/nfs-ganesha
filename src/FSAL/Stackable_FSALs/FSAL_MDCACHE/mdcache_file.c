@@ -843,5 +843,7 @@ fsal_status_t mdcache_fallocate(struct fsal_obj_handle *obj_hdl,
 							allocate);
 	       );
 
+	atomic_clear_uint32_t_bits(&entry->mde_flags, MDCACHE_TRUST_ATTRS);
+
 	return status;
 }
