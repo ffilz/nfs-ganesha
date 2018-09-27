@@ -16,6 +16,24 @@
       "revId": "1e6c8261160eb403290e19a62a1f042120edae73",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52ac8dc7_f0ede1a3",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2328,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-09-27T15:24:52Z",
+      "side": 1,
+      "message": "If slai_data_len is zero here, then the pointer must also be zero. This is in setattr so the label would have come from the client. xdr_bytes_decode does not allocate memory for slai_data_val if the length is zero.\n\nThat said, you\u0027re probably right that it would be clearer to phrase this in terms of slai_data_len being zero. I\u0027ll do that.",
+      "parentUuid": "86d88197_aa036715",
+      "revId": "1e6c8261160eb403290e19a62a1f042120edae73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
