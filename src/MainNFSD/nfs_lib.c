@@ -80,12 +80,12 @@ nfs_start_info_t my_nfs_start_info = {
 	.drop_caps = false
 };
 
-config_file_t config_struct;
-char *log_path;
-char *exec_name = "nfs-ganesha";
-char *host_name = "localhost";
-int debug_level = -1;
-int detach_flag = true;
+config_file_t nfs_config_struct;
+static char *log_path;
+static char *exec_name = "nfs-ganesha";
+char *nfs_host_name = "localhost";
+static int debug_level = -1;
+static int detach_flag = true;
 
 /**
  * nfs_libmain: library initializer
@@ -105,11 +105,11 @@ int nfs_libmain(const char *ganesha_conf,
 	struct config_error_type err_type;
 
 	/* Set the server's boot time and epoch */
-	now(&ServerBootTime);
-	ServerEpoch = (time_t) ServerBootTime.tv_sec;
+	now(&nfs_ServerBootTime);
+	nfs_ServerEpoch = (time_t) nfs_ServerBootTime.tv_sec;
 
 	if (ganesha_conf)
-		config_path = gsh_strdup(ganesha_conf);
+		nfs_config_path = gsh_strdup(ganesha_conf);
 
 	if (lpath)
 		log_path = gsh_strdup(lpath);
@@ -121,8 +121,8 @@ int nfs_libmain(const char *ganesha_conf,
 		fprintf(stderr, "Could not get local host name, exiting...\n");
 		exit(1);
 	} else {
-		host_name = gsh_strdup(localmachine);
-		if (!host_name) {
+		nfs_host_name = gsh_strdup(localmachine);
+		if (!nfs_host_name) {
 			fprintf(stderr,
 				"Unable to allocate memory for hostname, exiting...\n");
 			exit(1);
@@ -130,7 +130,7 @@ int nfs_libmain(const char *ganesha_conf,
 	}
 
 	/* initialize memory and logging */
-	nfs_prereq_init(exec_name, host_name, debug_level, log_path, false);
+	nfs_prereq_init(exec_name, nfs_host_name, debug_level, log_path, false);
 #if GANESHA_BUILD_RELEASE
 	LogEvent(COMPONENT_MAIN, "%s Starting: Ganesha Version %s",
 		 exec_name, GANESHA_VERSION);
@@ -168,12 +168,13 @@ int nfs_libmain(const char *ganesha_conf,
 	if (!init_error_type(&err_type))
 		goto fatal_die;
 
-	if (config_path == NULL || config_path[0] == '\0') {
+	if (nfs_config_path == NULL || nfs_config_path[0] == '\0') {
 		LogWarn(COMPONENT_INIT,
 			"No configuration file named.");
-		config_struct = NULL;
+		nfs_config_struct = NULL;
 	} else
-		config_struct = config_ParseFile(config_path, &err_type);
+		nfs_config_struct =
+			config_ParseFile(nfs_config_path, &err_type);
 
 	if (!config_error_no_error(&err_type)) {
 		char *errstr = err_type_str(&err_type);
@@ -182,7 +183,7 @@ int nfs_libmain(const char *ganesha_conf,
 			LogCrit(COMPONENT_INIT,
 				 "Error %s while parsing (%s)",
 				 errstr != NULL ? errstr : "unknown",
-				 config_path);
+				 nfs_config_path);
 			if (errstr != NULL)
 				gsh_free(errstr);
 			goto fatal_die;
@@ -190,12 +191,12 @@ int nfs_libmain(const char *ganesha_conf,
 			LogWarn(COMPONENT_INIT,
 				"Error %s while parsing (%s)",
 				errstr != NULL ? errstr : "unknown",
-				config_path);
+				nfs_config_path);
 		if (errstr != NULL)
 			gsh_free(errstr);
 	}
 
-	if (read_log_config(config_struct, &err_type) < 0) {
+	if (read_log_config(nfs_config_struct, &err_type) < 0) {
 		LogCrit(COMPONENT_INIT,
 			 "Error while parsing log configuration");
 		goto fatal_die;
@@ -208,7 +209,7 @@ int nfs_libmain(const char *ganesha_conf,
 
 	/* parse configuration file */
 
-	if (nfs_set_param_from_conf(config_struct,
+	if (nfs_set_param_from_conf(nfs_config_struct,
 				    &my_nfs_start_info,
 				    &err_type)) {
 		LogCrit(COMPONENT_INIT,
@@ -226,7 +227,7 @@ int nfs_libmain(const char *ganesha_conf,
 	/* Load Data Server entries from parsed file
 	 * returns the number of DS entries.
 	 */
-	dsc = ReadDataServers(config_struct, &err_type);
+	dsc = ReadDataServers(nfs_config_struct, &err_type);
 	if (dsc < 0) {
 		LogCrit(COMPONENT_INIT,
 			"Error while parsing DS entries");
@@ -253,7 +254,7 @@ int nfs_libmain(const char *ganesha_conf,
 	/* Load export entries from parsed file
 	 * returns the number of export entries.
 	 */
-	rc = ReadExports(config_struct, &err_type);
+	rc = ReadExports(nfs_config_struct, &err_type);
 	if (rc < 0) {
 		LogCrit(COMPONENT_INIT,
 			  "Error while parsing export entries");
@@ -266,7 +267,7 @@ int nfs_libmain(const char *ganesha_conf,
 
 	/* freeing syntax tree : */
 
-	config_Free(config_struct);
+	config_Free(nfs_config_struct);
 
 	/* Everything seems to be OK! We can now start service threads */
 	nfs_start(&my_nfs_start_info);
