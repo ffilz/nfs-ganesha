@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e00b18b1_0500fbfc",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-09-28T18:31:53Z",
+      "side": 1,
+      "message": "No objection here, but: mdcache_commit2 has some special handling for ESTALE here. Do we need to do the same for fallocate?\n\nAlso, lock2 doesn\u0027t do this, though the NFS client traditionally considers locking to be a cache coherency point. Might it be a good idea to consider clearing the cache after acquiring a lock?",
+      "range": {
+        "startLine": 846,
+        "startChar": 47,
+        "endLine": 846,
+        "endChar": 66
+      },
+      "revId": "8c668f25a39ae888f0741746133ec8bd42f9efa5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
