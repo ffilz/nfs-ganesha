@@ -664,6 +664,17 @@ glusterfs_get_fs(struct glexport_params params,
 		goto out;
 	}
 
+	if (NFSv4_ACL_SUPPORT) {
+		rc = glfs_set_xlator_option(fs, "*-md-cache", "cache-posix-acl",
+					    "true");
+		if (rc < 0) {
+			LogCrit(COMPONENT_FSAL,
+				"Unable to set xlator option. Volume: %s",
+				params.glvolname);
+			goto out;
+		}
+	}
+
 	rc = glfs_init(fs);
 	if (rc != 0) {
 		LogCrit(COMPONENT_FSAL,
