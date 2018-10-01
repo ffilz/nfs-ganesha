@@ -852,8 +852,8 @@ static fsal_status_t ceph_fsal_close(struct fsal_obj_handle *obj_hdl)
 			container_of(op_ctx->fsal_export, struct ceph_export,
 				     export);
 
-		rc = ceph_ll_releasedir(export->cmount, myself->fd.dir_desc);
-		myself->fd.dir_desc = NULL;
+		rc = ceph_ll_releasedir(export->cmount, handle->fd.dir_desc);
+		handle->fd.dir_desc = NULL;
 
 		if (rc < 0)
 			status = ceph2fsal_error(rc);
@@ -1480,7 +1480,7 @@ static fsal_status_t ceph_fsal_reopen2(struct fsal_obj_handle *obj_hdl,
 				       fsal_openflags_t openflags)
 {
 	struct ceph_fd temp_fd = {
-			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, NULL };
+			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, { NULL } };
 	struct ceph_fd *my_fd = &temp_fd, *my_share_fd;
 	struct ceph_handle *myself =
 			container_of(obj_hdl, struct ceph_handle, handle);
@@ -1560,7 +1560,7 @@ static fsal_status_t ceph_find_fd(Fh **fd,
 	struct ceph_handle *myself =
 			container_of(obj_hdl, struct ceph_handle, handle);
 	struct ceph_fd temp_fd = {
-			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, NULL };
+			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, { NULL } };
 	struct ceph_fd *out_fd = &temp_fd;
 	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
 	bool reusing_open_state_fd = false;
@@ -1817,7 +1817,7 @@ static fsal_status_t ceph_fsal_commit2(struct fsal_obj_handle *obj_hdl,
 	fsal_status_t status;
 	int retval;
 	struct ceph_fd temp_fd = {
-			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, NULL };
+			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, { NULL } };
 	struct ceph_fd *out_fd = &temp_fd;
 	bool has_lock = false;
 	bool closefd = false;
