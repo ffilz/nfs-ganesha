@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e78be0bb_4cdcb633",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-02T12:47:26Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n\u003d\u003d7480\u003d\u003dERROR: AddressSanitizer: stack-use-after-scope on address 0x7fffea684340 at pc 0x7fffecec1e9c bp 0x7fffea683510 sp 0x7fffea683500",
+      "revId": "567a2d9bae91b000e59b160aac59bb101e2e64ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09474ea8_23acb108",
         "filename": "src/FSAL/FSAL_PROXY/fsal_nfsv4_macros.h",
         "patchSetId": 1
