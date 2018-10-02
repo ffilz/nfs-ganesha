@@ -912,8 +912,12 @@ struct dir_chunk *mdcache_get_chunk(mdcache_entry_t *parent,
 	chunk->parent = parent;
 	if (prev_chunk) {
 		glist_add(&prev_chunk->chunks, &chunk->chunks);
+		chunk->reload_ck = glist_last_entry(&prev_chunk->dirents,
+				mdcache_dir_entry_t,
+				chunk_list)->ck;
 	} else {
 		glist_add(&chunk->parent->fsobj.fsdir.chunks, &chunk->chunks);
+		chunk->reload_ck = 0;
 	}
 
 	/* Chunk refcnt is not used (chunks are always protected by content_lock
