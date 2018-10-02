@@ -2891,6 +2891,11 @@ fsal_status_t pxy_lookup_path(struct fsal_export *exp_hdl,
 	pcopy = gsh_strdup(path);
 
 	p = strtok_r(pcopy, "/", &saved);
+	if (!p) {
+		LogInfo(COMPONENT_FSAL, "Cannot lookup /");
+		gsh_free(pcopy);
+		return fsalstat(ERR_FSAL_INVAL, EINVAL);
+	}
 	while (p) {
 		if (strcmp(p, "..") == 0) {
 			/* Don't allow lookup of ".." */
