@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "704be7e5_60717c3e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-03T14:32:38Z",
+      "side": 1,
+      "message": "Once we know where the split happens, we need to set reload_ck for the split chunk (after allocating the new chunk for the split, reload_ck will be the last entry of the original unsplit chunk).\n\nAlso, not directly related, but maybe we should have protection against an odd value of avl_chunk_split by making split-\u003enum_entries \u003d avl_chunk_split - split_count",
+      "revId": "1ac6dd9b4f0b9bcd14336c68701fc7b124f37a3a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
