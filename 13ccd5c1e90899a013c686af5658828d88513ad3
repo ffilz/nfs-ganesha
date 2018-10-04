@@ -16,6 +16,24 @@
       "revId": "13ccd5c1e90899a013c686af5658828d88513ad3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a13a9425_9a2ba56b",
+        "filename": "src/Protocols/NFS/nfs4_op_test_stateid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-04T16:02:43Z",
+      "side": 1,
+      "message": "We could do it that way too, but if tsr_status is not NFS4_OK, then tsr_resok4 is technically not a valid part of the response structure.\n\nThis change makes this work the same way all the other Free functions work.\n\nNote that some Free functions could conceivably actually have to pay even closer attention to the status to determine which form of the response structure to use.",
+      "parentUuid": "1bc5b5a4_294af71f",
+      "revId": "13ccd5c1e90899a013c686af5658828d88513ad3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
