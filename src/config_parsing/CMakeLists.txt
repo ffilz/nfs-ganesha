@@ -47,6 +47,7 @@ add_library(config_parsing STATIC
   ${BISON_ConfigParser_OUTPUTS}
   ${FLEX_ConfigScanner_OUTPUTS}
 )
+set_property(TARGET config_parsing PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if(RADOS_URLS)
   target_link_libraries(config_parsing ${RADOS_LIBRARIES})
@@ -79,6 +80,5 @@ add_executable(test_parsing EXCLUDE_FROM_ALL ${test_parsing_SRCS})
 add_sanitizers(test_parsing)
 
 target_link_libraries(test_parsing config_parsing log ${CMAKE_THREAD_LIBS_INIT})
-
 
 ########### install files ###############

@@ -23,6 +23,7 @@ SET(log_STAT_SRCS
 )
 
 add_library(log STATIC ${log_STAT_SRCS})
+set_property(TARGET log PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(log)
 
 

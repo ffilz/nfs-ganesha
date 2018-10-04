@@ -98,6 +98,7 @@ if(USE_NFS3)
 endif(USE_NFS3)
 
 add_library(nfsproto STATIC ${nfsproto_STAT_SRCS})
+set_property(TARGET nfsproto PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(nfsproto)
 
 set(nfs4callbackSRCS
@@ -105,5 +106,6 @@ set(nfs4callbackSRCS
 )
 
 add_library(nfs4callbacks STATIC ${nfs4callbackSRCS})
+set_property(TARGET nfs4callbacks PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(nfs4callbacks)
 

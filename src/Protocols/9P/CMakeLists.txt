@@ -38,6 +38,7 @@ SET(9p_STAT_SRCS
 )
 
 add_library(9p STATIC ${9p_STAT_SRCS})
+set_property(TARGET 9p PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(9p)
 
 ########### install files ###############

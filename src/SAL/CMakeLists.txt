@@ -43,6 +43,7 @@ if(USE_RADOS_RECOV)
 endif(USE_RADOS_RECOV)
 
 add_library(sal STATIC ${sal_STAT_SRCS})
+set_property(TARGET sal PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(sal)
 
 if(USE_RADOS_RECOV)

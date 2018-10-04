@@ -12,6 +12,7 @@ set(ganesha_trace_LIB_SRCS
 )
 
 add_library(ganesha_trace MODULE ${ganesha_trace_LIB_SRCS})
+set_property(TARGET ganesha_trace PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(ganesha_trace)
 
 target_link_libraries(ganesha_trace

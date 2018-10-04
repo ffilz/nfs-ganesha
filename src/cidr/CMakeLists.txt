@@ -16,6 +16,7 @@ SET(cidr_STAT_SRCS
 )
 
 add_library(cidr STATIC ${cidr_STAT_SRCS})
+set_property(TARGET cidr PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(cidr)
 
 ########### install files ###############

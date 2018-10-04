@@ -29,9 +29,10 @@ if(USE_FSAL_VFS)
     add_library(fsalvfs MODULE ${fsalvfs_LIB_SRCS})
     add_sanitizers(fsalvfs)
     set(fsalvfs_TGT_LINK_LIB
-      gos
-      fsal_os
-      ${SYSTEM_LIBRARIES}
+       "-L ${CMAKE_BINARY_DIR}/MainNFSD -l ganesha_nfsd"
+       fsal_os
+       ${SYSTEM_LIBRARIES}
+       ${LTTNG_LIBRARIES}
     )
 
     target_link_libraries(fsalvfs ${fsalvfs_TGT_LINK_LIB})
@@ -53,10 +54,7 @@ if(USE_FSAL_LUSTRE)
 
         add_library(fsallustre MODULE ${fsallustre_LIB_SRCS})
         add_sanitizers(fsallustre)
-        target_link_libraries(fsallustre
-            ${fsalvfs_TGT_LINK_LIB}
-            lustreapi
-        )
+        target_link_libraries(fsallustre ${fsalvfs_TGT_LINK_LIB} lustreapi)
 
         set_target_properties(fsallustre PROPERTIES
             VERSION 4.2.0
@@ -82,9 +80,7 @@ if(USE_FSAL_LUSTRE)
 
         add_library(fsaldummylustre MODULE ${fsallustre_LIB_SRCS})
         add_sanitizers(fsaldummylustre)
-        target_link_libraries(fsaldummylustre
-            ${fsalvfs_TGT_LINK_LIB}
-        )
+        target_link_libraries(fsaldummylustre ${fsalvfs_TGT_LINK_LIB})
 
         set_target_properties(fsaldummylustre PROPERTIES
             VERSION 4.2.0

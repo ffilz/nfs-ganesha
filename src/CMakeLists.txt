@@ -971,6 +971,7 @@ set(GANESHA_CORE
   hashtable
   rpcal
   support
+  gos
   nfs4callbacks
   cidr
   string_utils
@@ -981,10 +982,6 @@ set(GANESHA_CORE
   fsalpseudo
   fsalmdcache
   )
-
-if(USE_CACHE_INODE)
-  set(GANESHA_CORE ${GANESHA_CORE} cache_inode)
-endif(USE_CACHE_INODE)
 
 if(USE_DBUS)
   set(GANESHA_CORE ${GANESHA_CORE} gshdbus)
@@ -1035,7 +1032,6 @@ include_directories(${NTIRPC_INCLUDE_DIR})
 set(SYSTEM_LIBRARIES
   ${NTIRPC_LIBRARY}
   ${SYSTEM_LIBRARIES}
-  gos
   ${LIBDL}
   ${KRB5_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
@@ -1060,32 +1056,27 @@ add_subdirectory(cidr)
 add_subdirectory(test)
 add_subdirectory(avl)
 add_subdirectory(hashtable)
-if(USE_CACHE_INODE)
-  add_subdirectory(cache_inode)
-endif(USE_CACHE_INODE)
+if(USE_DBUS)
+  add_subdirectory(dbus)
+endif(USE_DBUS)
+if(USE_LTTNG)
+  add_subdirectory(tracing)
+endif(USE_LTTNG)
 add_subdirectory(SAL)
 add_subdirectory(RPCAL)
 add_subdirectory(Protocols)
 add_subdirectory(support)
 add_subdirectory(os)
-
-add_subdirectory(FSAL)
 add_subdirectory(idmapper)
-
+add_subdirectory(FSAL/FSAL_PSEUDO)
+add_subdirectory(FSAL/Stackable_FSALs/FSAL_MDCACHE)
 add_subdirectory(MainNFSD)
+add_subdirectory(FSAL)
 add_subdirectory(tools)
 
 if(USE_GTEST)
   add_subdirectory(gtest)
 endif(USE_GTEST)
-
-if(USE_DBUS)
-  add_subdirectory(dbus)
-endif(USE_DBUS)
-
-if(USE_LTTNG)
-  add_subdirectory(tracing)
-endif(USE_LTTNG)
 
 add_subdirectory(scripts)
 add_subdirectory(doc)

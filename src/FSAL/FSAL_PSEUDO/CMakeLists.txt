@@ -15,6 +15,7 @@ SET(fsalpseudo_LIB_SRCS
 )
 
 add_library(fsalpseudo STATIC ${fsalpseudo_LIB_SRCS})
+set_property(TARGET fsalpseudo PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(fsalpseudo)
 
 ########### install files ###############

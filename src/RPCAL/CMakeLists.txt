@@ -10,6 +10,7 @@ if(_HAVE_GSSAPI)
 endif(_HAVE_GSSAPI)
 
 add_library(rpcal STATIC ${rpcal_STAT_SRCS})
+set_property(TARGET rpcal PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(rpcal)
 
 ########### install files ###############

@@ -19,7 +19,6 @@ set(GANESHA_LIBRARIES
   FsalCore
   fsalpseudo
   FsalCore
-  ${LIBTIRPC_LIBRARIES}
   ${SYSTEM_LIBRARIES}
   )
 

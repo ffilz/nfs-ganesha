@@ -17,11 +17,7 @@ if(LINUX)
 endif(LINUX)
 
 add_library(fsal_os STATIC ${fsal_os_STAT_SRCS})
+set_property(TARGET fsal_os PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(fsal_os)
 
 ########### install files ###############
-
-# This is GCC specific to force PIC compiles.
-# cmake 2.8.9 has a portable POSITION_INDEPENDENT_CODE property that can be
-# used when it is available
-set_target_properties(fsal_os PROPERTIES COMPILE_FLAGS "-fPIC")

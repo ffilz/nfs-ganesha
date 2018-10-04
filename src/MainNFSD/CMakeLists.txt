@@ -18,7 +18,6 @@ SET(MainServices_STAT_SRCS
    nfs_rpc_dispatcher_thread.c
    nfs_rpc_tcp_socket_manager_thread.c
    nfs_init.c
-   nfs_lib.c
    nfs_reaper_thread.c
    ../support/client_mgr.c
 )
@@ -61,6 +60,7 @@ if(USE_CB_SIMULATOR)
 endif(USE_CB_SIMULATOR)
 
 add_library(MainServices STATIC ${MainServices_STAT_SRCS})
+set_property(TARGET MainServices PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(MainServices)
 
 # FSAL core sources
@@ -88,8 +88,27 @@ if (USE_ACL_MAPPING)
   )
 endif(USE_ACL_MAPPING)
 
-add_library(FsalCore STATIC ${fsal_CORE_SRCS})
-add_sanitizers(FsalCore)
+########### next target ###############
+
+add_library(ganesha_nfsd SHARED ${fsal_CORE_SRCS})
+add_sanitizers(ganesha_nfsd)
+target_link_libraries(ganesha_nfsd
+  "-Wl,--whole-archive"
+  MainServices
+  ${PROTOCOLS}
+  ${GANESHA_CORE}
+  config_parsing
+  "-Wl,--no-whole-archive"
+  ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
+)
+
+set_target_properties(ganesha_nfsd PROPERTIES
+  VERSION "${GANESHA_MAJOR_VERSION}.${GANESHA_MINOR_VERSION}"
+  SOVERSION "${GANESHA_MAJOR_VERSION}.${GANESHA_MINOR_VERSION}"
+)
+
+install(TARGETS ganesha_nfsd DESTINATION ${LIB_INSTALL_DIR})
 
 ########### next target ###############
 
@@ -99,22 +118,16 @@ SET(ganesha.nfsd_SRCS
 
 add_executable(ganesha.nfsd
   ${ganesha.nfsd_SRCS}
-  ${fsal_CORE_SRCS}
 )
 add_sanitizers(ganesha.nfsd)
 
 target_link_libraries(ganesha.nfsd
-  MainServices
-  ${PROTOCOLS}
-  ${GANESHA_CORE}
-  config_parsing
-  ${LIBTIRPC_LIBRARIES}
+  ganesha_nfsd
   ${SYSTEM_LIBRARIES}
   ${LTTNG_LIBRARIES}
 )
 
 install(TARGETS ganesha.nfsd COMPONENT daemon DESTINATION bin)
-
 
 ########### install files ###############
 

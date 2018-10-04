@@ -1,9 +1,6 @@
 # Add the directory for stackable FSALs
 add_subdirectory(Stackable_FSALs)
 
-# Add the directory for Pseudo FSAL
-add_subdirectory(FSAL_PSEUDO)
-
 # All we need to do here is control the
 # build of chosen fsals
 

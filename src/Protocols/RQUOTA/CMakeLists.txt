@@ -11,10 +11,7 @@ SET(rquota_STAT_SRCS
 )
 
 add_library(rquota STATIC ${rquota_STAT_SRCS})
+set_property(TARGET rquota PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(rquota)
-
-target_link_libraries(rquota
-  string_utils
-)
 
 ########### install files ###############

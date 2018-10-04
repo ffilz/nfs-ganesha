@@ -25,8 +25,7 @@ set_target_properties(handle PROPERTIES IMPORTED_LOCATION ${PATH_LIBHANDLE})
 endif(PATH_LIBHANDLE)
 
 target_link_libraries(fsalxfs
-  gos
-  ${SYSTEM_LIBRARIES}
+  "-L ${CMAKE_BINARY_DIR}/MainNFSD -l ganesha_nfsd"
 )
 target_link_libraries(fsalxfs handle)
 

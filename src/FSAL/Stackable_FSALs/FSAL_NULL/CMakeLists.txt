@@ -16,12 +16,16 @@ SET(fsalnull_LIB_SRCS
    export.c
 )
 
+SET(GANESHA_NFSD_LIBS
+  "-L ${CMAKE_BINARY_DIR}/MainNFSD -l ganesha_nfsd"
+  ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
+)
+
 add_library(fsalnull MODULE ${fsalnull_LIB_SRCS})
 add_sanitizers(fsalnull)
 
-target_link_libraries(fsalnull
-  gos
-)
+target_link_libraries(fsalnull ${GANESHA_NFSD_LIBS})
 
 set_target_properties(fsalnull PROPERTIES VERSION 4.2.0 SOVERSION 4)
 install(TARGETS fsalnull COMPONENT fsal DESTINATION ${FSAL_DESTINATION} )

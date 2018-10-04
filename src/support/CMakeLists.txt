@@ -13,6 +13,7 @@ set(string_utils_STAT_SRCS
 )
 
 add_library(string_utils STATIC ${string_utils_STAT_SRCS})
+set_property(TARGET string_utils PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(string_utils)
 
 # hash function libraries
@@ -23,6 +24,7 @@ set(hash_SRCS
 )
 
 add_library(hash STATIC ${hash_SRCS})
+set_property(TARGET hash PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(hash)
 
 # uid2grp mapper
@@ -32,6 +34,7 @@ set( uid2grp_SRCS
 )
 
 add_library(uid2grp STATIC ${uid2grp_SRCS})
+set_property(TARGET uid2grp PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(uid2grp)
 
 # netgroup cache
@@ -39,10 +42,12 @@ set(netgroup_cache_SRCS
     netgroup_cache.c
 )
 add_library(netgroup_cache STATIC ${netgroup_cache_SRCS})
+set_property(TARGET netgroup_cache PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(netgroup_cache)
 
 if (USE_RADOS_RECOV)
    add_library(rados_grace STATIC rados_grace.c)
+   set_property(TARGET rados_grace PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(USE_RADOS_RECOV)
 
 ########### next target ###############
@@ -80,6 +85,7 @@ if(APPLE)
 endif(APPLE)
 
 add_library(support STATIC ${support_STAT_SRCS})
+set_property(TARGET support PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(support)
 
 ########### install files ###############

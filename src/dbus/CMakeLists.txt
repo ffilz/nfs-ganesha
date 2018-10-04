@@ -17,6 +17,7 @@ SET(gshdbus_STAT_SRCS
 )
 
 add_library(gshdbus STATIC ${gshdbus_STAT_SRCS})
+set_property(TARGET gshdbus PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(gshdbus)
 
 

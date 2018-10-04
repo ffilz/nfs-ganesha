@@ -33,6 +33,7 @@ SET(fsalmdcache_LIB_SRCS
 	)
 
 add_library(fsalmdcache STATIC ${fsalmdcache_LIB_SRCS})
+set_property(TARGET fsalmdcache PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(fsalmdcache)
 
 ########### install files ###############

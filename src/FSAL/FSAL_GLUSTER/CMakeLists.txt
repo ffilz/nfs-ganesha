@@ -6,12 +6,6 @@ add_definitions(
 
 set( LIB_PREFIX 64)
 
-#add_subdirectory(pnfs_panfs)
-
-#if(USE_FSAL_XFS)
-#    add_subdirectory(xfs)
-#endif(USE_FSAL_XFS)
-
 ########### next target ###############
 
 SET(fsalgluster_LIB_SRCS
@@ -29,8 +23,10 @@ add_library(fsalgluster MODULE ${fsalgluster_LIB_SRCS})
 add_sanitizers(fsalgluster)
 
 target_link_libraries(fsalgluster
-  ${SYSTEM_LIBRARIES}
+  "-L ${CMAKE_BINARY_DIR}/MainNFSD -l ganesha_nfsd"
   ${GFAPI_LIBRARIES}
+  ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
 )
 
 set_target_properties(fsalgluster PROPERTIES VERSION 4.2.0 SOVERSION 4)

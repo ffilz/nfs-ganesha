@@ -17,6 +17,7 @@ SET(nlm_STAT_SRCS
 )
 
 add_library(nlm STATIC ${nlm_STAT_SRCS})
+set_property(TARGET nlm PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(nlm)
 
 ########### next target ###############
@@ -26,12 +27,13 @@ if(LINUX)
       sm_notify.c
    )
 
-   add_executable(sm_notify.ganesha ${sm_notify_SRCS})
+   add_executable(sm_notify.ganesha
+      ${sm_notify_SRCS}
+   )
    add_sanitizers(sm_notify.ganesha)
 
    target_link_libraries(sm_notify.ganesha
       ${PROTOCOLS}
-      ${LIBTIRPC_LIBRARIES}
       ${SYSTEM_LIBRARIES}
    )
 

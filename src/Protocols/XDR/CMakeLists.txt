@@ -11,6 +11,7 @@ SET(nfs_mnt_xdr_STAT_SRCS
 )
 
 add_library(nfs_mnt_xdr STATIC ${nfs_mnt_xdr_STAT_SRCS})
+set_property(TARGET nfs_mnt_xdr PROPERTY POSITION_INDEPENDENT_CODE ON)
 add_sanitizers(nfs_mnt_xdr)
 
 
