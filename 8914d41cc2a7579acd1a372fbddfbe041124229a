@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "35efa094_c8c50e09",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-10-04T17:35:31Z",
+      "side": 1,
+      "message": "Can we use something other than new?  That\u0027s a reserved C++ keyword.",
+      "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3081b82a_49349f1e",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 2
@@ -31,6 +48,23 @@
       "side": 1,
       "message": "Because current_grace is still time_t at this point in the series. It only gets converted to struct timespec at the end.",
       "parentUuid": "3081b82a_49349f1e",
+      "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1cddb18_2fb36b9b",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-10-04T17:35:31Z",
+      "side": 1,
+      "message": "Same here, w.r.t. new",
       "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -101,6 +135,23 @@
       "side": 1,
       "message": "current_grace !\u003d grace_status. One of the main reasons for this patch is to stop using current_grace to track whether we\u0027re in a grace period, and only use it to determine when the most recent grace period expires.",
       "parentUuid": "6b5ad72e_11b32184",
+      "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "155a4e1f_38fd1932",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-10-04T17:35:31Z",
+      "side": 1,
+      "message": "Same here",
       "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
