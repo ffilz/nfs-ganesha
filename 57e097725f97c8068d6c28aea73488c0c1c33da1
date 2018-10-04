@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bce76f6_9ed9c66d",
+        "filename": "src/FSAL/FSAL_VFS/vfs/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-10-04T22:45:34Z",
+      "side": 1,
+      "message": "If we reorder fsals after MainNFSD we should be able to use ganesha_nfsd directly, that will let cmake order the dependencies properly. I\u0027m worried this might lead to a FSAL being compiled too early on a clean build and failing build.",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caf38434_01f1bb71",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-10-04T22:45:34Z",
+      "side": 1,
+      "message": "This feels a bit weird to have to turn this on for all targets, I wonder if we\u0027re missing something..",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fb8cd4f_f8085509",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-10-04T22:45:34Z",
+      "side": 1,
+      "message": "I think we should be more strict than this somehow, to avoid problems where someone has a local \u0027make install\u0027 in some directory, rpm in another and dynamic linker takes the wrong libganesha_nfsd.so...\nWe can\u0027t really do that with SOVERSION but some version check in nfs_prereq_init or nfs_init_init might be useful - for example add an argument that takes some version string we\u0027d pass in main() and strcmp it in the function to make sure the build matches (not sure what to use for that string though, checksum of make dist? Unless we also make a .syms file but that will probably be some work to keep up to date)",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
