@@ -16,6 +16,24 @@
       "revId": "f7202c20cb28a56e58cd0d6adf71baf00255740e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88c7441c_0fb1589c",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-04T18:42:05Z",
+      "side": 1,
+      "message": "Oof, this was really broken -- good catch. Fixed in my tree and I\u0027ll repush after re-testing. I\u0027m not sure what I was thinking there.",
+      "parentUuid": "2b65dd61_a40b3afc",
+      "revId": "f7202c20cb28a56e58cd0d6adf71baf00255740e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
