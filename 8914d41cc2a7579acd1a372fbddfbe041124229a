@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "04876118_4cd251b4",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-04T12:50:26Z",
+      "side": 1,
+      "message": "Because current_grace is still time_t at this point in the series. It only gets converted to struct timespec at the end.",
+      "parentUuid": "3081b82a_49349f1e",
+      "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a48cf71f_2f9cc755",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d6c643dc_b12b4827",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-04T12:50:26Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "a48cf71f_2f9cc755",
+      "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6b5ad72e_11b32184",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2018-10-04T12:46:36Z",
       "side": 1,
       "message": "this is what I was expecting",
+      "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72e394f4_f985bb00",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-04T12:50:26Z",
+      "side": 1,
+      "message": "current_grace !\u003d grace_status. One of the main reasons for this patch is to stop using current_grace to track whether we\u0027re in a grace period, and only use it to determine when the most recent grace period expires.",
+      "parentUuid": "6b5ad72e_11b32184",
       "revId": "8914d41cc2a7579acd1a372fbddfbe041124229a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
