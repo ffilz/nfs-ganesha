@@ -1034,6 +1034,15 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 
 		/* Indicate that this reply is cached in slot cache. */
 		data.cached_result->res_cached = true;
+
+		/* There are two res_compound4_extended structures here.
+		 * One is allocated in alloc_nfs_res() and the other is
+		 * in the slot table table
+		 *
+		 * We need to make sure that res_cached is set in both
+		 * to avoid nfs_dupreq_rele() freeing cached stuff.
+		 */
+		res->res_compound4_extended.res_cached = true;
 	}
 
 	/* If we have reserved a lease, update it and release it */
