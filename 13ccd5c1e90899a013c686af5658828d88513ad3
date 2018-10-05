@@ -52,6 +52,24 @@
       "revId": "13ccd5c1e90899a013c686af5658828d88513ad3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "622d5f80_7098dc17",
+        "filename": "src/Protocols/NFS/nfs4_op_test_stateid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-05T19:15:54Z",
+      "side": 1,
+      "message": "LOCK and LOCKT response can have a conflicting lock holder on NFS4ERR_DENIED that would have to be freed. SETCLIENTID gives information on NFS4ERR_CLID_INUSE. All from RFC 7530. I don\u0027t know if any of the 4.1 or 4.2 ops have non-success return info.\n\nSo we always call the op free function... so the special knowledge is coded there rather than in the op dispatch\n\nNLM_LOCK and NLM_LOCKT should have the same thing.",
+      "parentUuid": "9a4ff0ce_771a8a60",
+      "revId": "13ccd5c1e90899a013c686af5658828d88513ad3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
