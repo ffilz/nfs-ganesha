@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1a80db_c59b19f8",
+        "filename": "src/FSAL/FSAL_VFS/vfs/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2018-10-05T02:08:13Z",
+      "side": 1,
+      "message": "When I used just \u0027ganesha_nfsd\u0027 here, not only did it link with libganesha_nsfd.so, but with all the .a libs that make up libganesha_nfsd.so. Perhaps someone who knows cmake better than I  knows how to do this so that it doesn\u0027t link with all the .a libs.\n\nI\u0027m not a cmake expert so I\u0027m not sure what exactly you mean by reorder the fsals. I did move the FSALS subdir after MainNFSD in the top-level CMakeLists.txt. Is that not what you\u0027re suggesting.",
+      "parentUuid": "8bce76f6_9ed9c66d",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "caf38434_01f1bb71",
         "filename": "src/MainNFSD/CMakeLists.txt",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5ba465e3_53a95688",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2018-10-05T02:08:13Z",
+      "side": 1,
+      "message": "No, it\u0027s really not that strange. And it\u0027s actually not _every_ target. Everything going into a DSO needs to be compiled with -fPIC. We just don\u0027t have very many targets that aren\u0027t going into the DSO.\n\nIt\u0027s only unusual in the sense that historically we have bundled things up into .a libs. To create a DSO many people would probably skip the .a libs and link all the .o files to make the .so. I didn\u0027t want to retool all of that.\n\nAnd maybe is seems strange to put PIC files into a .a lib, but on some arches, e.g. MIPS, everything is compiled PIC, even if it\u0027s for an executable for a static lib.",
+      "parentUuid": "caf38434_01f1bb71",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8fb8cd4f_f8085509",
         "filename": "src/MainNFSD/CMakeLists.txt",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2018-10-04T22:45:34Z",
       "side": 1,
       "message": "I think we should be more strict than this somehow, to avoid problems where someone has a local \u0027make install\u0027 in some directory, rpm in another and dynamic linker takes the wrong libganesha_nfsd.so...\nWe can\u0027t really do that with SOVERSION but some version check in nfs_prereq_init or nfs_init_init might be useful - for example add an argument that takes some version string we\u0027d pass in main() and strcmp it in the function to make sure the build matches (not sure what to use for that string though, checksum of make dist? Unless we also make a .syms file but that will probably be some work to keep up to date)",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4edc60c_7cae7597",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2018-10-05T02:08:13Z",
+      "side": 1,
+      "message": "ELF does all that for you already. The compile-time linker links with libganesha_nfsd.so (a symlink to libganesha_nfsd.so.2.7.) The SO_NAME in the DSO is \"libganesha_nfsd.so.2.7; you can see this with `objdump -x libganesha_nfsd.so(.2.7) The compile-time linker records the SO_NAME in executable (ganesha.nsfd); you can see this with ldd or objdump.\n\nAt runtime, the RTlinker reads the SO_NAME recorded in the executable (libganesha_nfsd.so.2.7) and loads the exact DSO (from the DSOs in the ld.so.cache). And IIRC also verifies that the SO_NAME in the DSO matches. If you have a libganesha_nfsd.so.2.8 on the box, the RTlinker won\u0027t use it, even if you rename it to libganesha_nfsd.so.2.7.\n\nBuilding the DSO with a .sym file is the next level. You find out pretty quickly when you forget to add a new symbol to the .sym file. It\u0027s really not as burdensome as you might think to keep it in sync. And using it makes you think carefully (sometimes) about adding new APIs.\n\nAnd the next level after that is to use versioned symbols. Using versioned symbols is slightly more work to maintain in the simple case where you don\u0027t change the API/ABI. It starts to be real work when you change parameters to functions. I\u0027m not convinced we would ever need or want to go to that level.",
+      "parentUuid": "8fb8cd4f_f8085509",
       "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
