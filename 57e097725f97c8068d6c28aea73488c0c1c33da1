@@ -158,6 +158,24 @@
       "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a5fd822_9b870a81",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2018-10-05T10:47:38Z",
+      "side": 1,
+      "message": "As it is now – in this patch – there is no libganesha_nfsd.so.2 and objdump and ldd and strace show that the executable links at runtime explicitly with libganesha_nfsd.so.2.7, not with libganesha_nfsd.so.2.\n\nThe SO_NAME is just a string. If the SO_NAME in the library is libganesha_nfsd.so.renault then that\u0027s what recorded in the executable and that\u0027s what is linked at runtime. (But the convention is that numbers are used.)\n\nIt is possible to make DSOs named libganesha_nfsd.so.2.[789...] that have an SO_NAME libganesha_nfsd.so.2 (and create the symlink libganesha_nfsd.so.2 -\u003e libganesha_nfsd.so.2.[780]) which would behave the way you describe. But this patch doesn\u0027t do that.\n\nThis has been true of ELF DSOs for a long as I\u0027ve been writing software on Unix and Linux, over 25 years now. Also SunOS 4, which had similar, if not exactly the same shared library semantics going back nearly 30 years. \n\nDo give it a try, don\u0027t just take my word. (Even though I\u0027ve been doing this for a long time. :-))",
+      "parentUuid": "d1cade07_a91eb82c",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
