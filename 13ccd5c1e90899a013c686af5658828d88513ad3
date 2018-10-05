@@ -34,6 +34,24 @@
       "revId": "13ccd5c1e90899a013c686af5658828d88513ad3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a4ff0ce_771a8a60",
+        "filename": "src/Protocols/NFS/nfs4_op_test_stateid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-10-05T18:43:22Z",
+      "side": 1,
+      "message": "Actually, I would expect the NFSv4 op to free all resources if there was a failure while processing itself and no need to call this. The caller of this Free function should call only on success.",
+      "parentUuid": "a13a9425_9a2ba56b",
+      "revId": "13ccd5c1e90899a013c686af5658828d88513ad3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
