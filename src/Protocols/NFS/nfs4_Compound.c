@@ -1034,6 +1034,9 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 
 		/* Indicate that this reply is cached in slot cache. */
 		data.cached_result->res_cached = true;
+
+		/* Indicate to nfs4_Compound_Free that this reply is cached */
+		res->res_compound4_extended.res_cached = true;
 	}
 
 	/* If we have reserved a lease, update it and release it */
