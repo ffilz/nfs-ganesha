@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4493b9c4_9163420b",
+        "filename": "src/FSAL/FSAL_VFS/vfs/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-10-05T02:23:18Z",
+      "side": 1,
+      "message": "Yeah that\u0027s the reorderign I meant, sorry I didn\u0027t check - I thought that\u0027d be enough.\nIf it links with the static intermediate libs as well it\u0027s not what we want I agree, will need to think about that...",
+      "parentUuid": "4e1a80db_c59b19f8",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "caf38434_01f1bb71",
         "filename": "src/MainNFSD/CMakeLists.txt",
         "patchSetId": 1
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "a678d00d_829da5f5",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-10-05T02:23:18Z",
+      "side": 1,
+      "message": "No, that\u0027s not what I find strange - I know why we need PIC here (and I understand it\u0027s not actually every target); I just find it strange that there isn\u0027t a more \"natural\" way of doing that with cmake, I don\u0027t think what we\u0027re trying to do here (compile files from multiple subdirs into a single .so) is that unusual...\n\nTogether with the other linking in the fsal you had to do manually I think maybe we just shouldn\u0027t define the subtargets, and point all the sources to the new ganesha_nfsd shared lib -- that way cmake will turn fPIC on automatically (along with other shared-lib only specific things if there are more), it\u0027ll do the dependencies I was worried about, and the result should be pretty much the same.\nThe question I have is if we can just set(foo_SRCS) in one directory as relative path and use it in another and cmake would figure it out, I guess we\u0027d have to try... I got spoiled with meson lately so it\u0027s hard coming back to cmake :P",
+      "parentUuid": "5ba465e3_53a95688",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8fb8cd4f_f8085509",
         "filename": "src/MainNFSD/CMakeLists.txt",
         "patchSetId": 1
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "ELF does all that for you already. The compile-time linker links with libganesha_nfsd.so (a symlink to libganesha_nfsd.so.2.7.) The SO_NAME in the DSO is \"libganesha_nfsd.so.2.7; you can see this with `objdump -x libganesha_nfsd.so(.2.7) The compile-time linker records the SO_NAME in executable (ganesha.nsfd); you can see this with ldd or objdump.\n\nAt runtime, the RTlinker reads the SO_NAME recorded in the executable (libganesha_nfsd.so.2.7) and loads the exact DSO (from the DSOs in the ld.so.cache). And IIRC also verifies that the SO_NAME in the DSO matches. If you have a libganesha_nfsd.so.2.8 on the box, the RTlinker won\u0027t use it, even if you rename it to libganesha_nfsd.so.2.7.\n\nBuilding the DSO with a .sym file is the next level. You find out pretty quickly when you forget to add a new symbol to the .sym file. It\u0027s really not as burdensome as you might think to keep it in sync. And using it makes you think carefully (sometimes) about adding new APIs.\n\nAnd the next level after that is to use versioned symbols. Using versioned symbols is slightly more work to maintain in the simple case where you don\u0027t change the API/ABI. It starts to be real work when you change parameters to functions. I\u0027m not convinced we would ever need or want to go to that level.",
       "parentUuid": "8fb8cd4f_f8085509",
+      "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1cade07_a91eb82c",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2018-10-05T02:23:18Z",
+      "side": 1,
+      "message": "No, as far as I understand things the only thing ld checks if the first digit (e.g. see so_name bumps on fedora-devel - foo.so.2.7 and foo.so.2.8 are compatible; you can confirm with ldd on the binary it only links with foo.so.2)\n\nLinking with a .sym file won\u0027t solve that, but it will give a good thing to verify (e.g. as long as the .sym file didn\u0027t change it\u0027s probably fine even if we load a slightly different lib... even if it\u0027s probably not great)\n\nUltimately it\u0027s users hygiene and we can\u0027t (and generally I don\u0027t like to try to) prevent users from shooting themselves in the foot, but this feels like something users might run into",
+      "parentUuid": "f4edc60c_7cae7597",
       "revId": "57e097725f97c8068d6c28aea73488c0c1c33da1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
