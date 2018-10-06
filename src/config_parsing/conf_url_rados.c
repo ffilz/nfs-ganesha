@@ -38,6 +38,8 @@ static struct rados_url_parameter {
 	char *ceph_conf;
 	/** Userid (?) */
 	char *userid;
+	/** Namespace */
+	char *namespace;
 } rados_url_param;
 
 static struct config_item rados_url_params[] = {
@@ -45,6 +47,8 @@ static struct config_item rados_url_params[] = {
 		       rados_url_parameter, ceph_conf),
 	CONF_ITEM_STR("userid", 1, MAXPATHLEN, NULL,
 		       rados_url_parameter, userid),
+	CONF_ITEM_STR("namespace", 1, NAME_MAX, NULL,
+			rados_url_parameter, namespace),
 	CONFIG_EOL
 };
 
@@ -262,6 +266,8 @@ static int cu_rados_url_fetch(const char *url, FILE **f, char **fbuf)
 		cu_rados_url_shutdown();
 		goto out;
 	}
+	rados_ioctx_set_namespace(io_ctx, rados_url_param.namespace);
+
 	do {
 		int nread, wrt, nwrt;
 
