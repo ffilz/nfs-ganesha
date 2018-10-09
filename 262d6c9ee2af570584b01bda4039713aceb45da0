@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "175df174_58ddc120",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1817,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-09T17:02:56Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tfsal_status_t status \u003d populate_fs_locations(hdl, attrs_out);\n+\t\tif (FSAL_IS_ERROR(status)) {",
+      "revId": "262d6c9ee2af570584b01bda4039713aceb45da0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
