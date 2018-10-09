@@ -22,6 +22,30 @@
       "revId": "811458808ce66b239a39d7e28d085d9a0eb1ce83",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbd84d49_41fe9c25",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2018-10-09T09:11:51Z",
+      "side": 1,
+      "message": "\u003e Do mdcache glusterfs.posix.acl or glusterfs.posix.default.acl?\n\nglusterfs md-cache caches \"system.posix_acl_access\"/\"system.posix_acl_default\" and \"glusterfs.posix.acl\"/\"glusterfs.posix.default_acl\" when cache-posix-acl on.\n\n    if (conf-\u003ecache_posix_acl)\n        strcat(mdc_xattr_str, POSIX_ACL_ACCESS_XATTR\n               \",\" POSIX_ACL_DEFAULT_XATTR \",\" GF_POSIX_ACL_ACCESS\n               \",\" GF_POSIX_ACL_DEFAULT \",\");\n\nI will update code splitting them depends on two options,\n\"cache-posix-acl\" controls \"system.posix_acl_access\"/\"system.posix_acl_default\";\n\"cache-glusterfs-acl\" controls \"glusterfs.posix.acl\"/\"glusterfs.posix.default_acl\".\n\nAfter that, the fixing will be \n\nrc \u003d glfs_set_xlator_option(fs, \"*-md-cache\", \"cache-glusterfs-acl\", \"true\");",
+      "parentUuid": "4832e1c6_a0163f85",
+      "range": {
+        "startLine": 668,
+        "startChar": 2,
+        "endLine": 669,
+        "endChar": 17
+      },
+      "revId": "811458808ce66b239a39d7e28d085d9a0eb1ce83",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
