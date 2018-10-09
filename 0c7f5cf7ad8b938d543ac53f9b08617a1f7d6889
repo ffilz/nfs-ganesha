@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e87f481_2d60d77f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-09T14:18:09Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nWith the current implementation, the export directories cannot act as referral",
+      "revId": "0c7f5cf7ad8b938d543ac53f9b08617a1f7d6889",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60c4f321_f549459b",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-09T14:18:09Z",
+      "side": 1,
+      "message": "WARNING: break quoted strings at a space character\n+\t\t\tLogEvent(COMPONENT_FSAL, \"Could not get the referral\"\n+\t\t\t\t \"locations the path: %d, %s\", dirfd, path);",
+      "revId": "0c7f5cf7ad8b938d543ac53f9b08617a1f7d6889",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "538f38b5_23e24cea",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-09T14:18:09Z",
+      "side": 1,
+      "message": "WARNING: break quoted strings at a space character\n+\t\t\tLogEvent(COMPONENT_FSAL, \"Could not get the referral\"\n+\t\t\t\t \"locations for the exported path: %s\", path);",
+      "revId": "0c7f5cf7ad8b938d543ac53f9b08617a1f7d6889",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2c84867_46fe242d",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-09T14:18:09Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^Iclose(dir_fd);^I$",
+      "revId": "0c7f5cf7ad8b938d543ac53f9b08617a1f7d6889",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
