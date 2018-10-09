@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "178bf569_68333ff3",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-10-09T15:04:07Z",
+      "side": 1,
+      "message": "This is going to overwrite the request mask of the passed-in attributes.  I understand that it\u0027s not desirable to re-fetch all the attributes; but this should either be saved and restored, or dummy attributes passed in and the the results copied.",
+      "revId": "0c7f5cf7ad8b938d543ac53f9b08617a1f7d6889",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60c4f321_f549459b",
         "filename": "src/FSAL/FSAL_VFS/handle.c",
         "patchSetId": 1
@@ -64,6 +81,23 @@
       "writtenOn": "2018-10-09T14:18:09Z",
       "side": 1,
       "message": "ERROR: trailing whitespace\n+^Iclose(dir_fd);^I$",
+      "revId": "0c7f5cf7ad8b938d543ac53f9b08617a1f7d6889",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb69daed_40c110fd",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-10-09T15:04:07Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like dir_fd is used in the new code?  If so, it can be closed above where it was before.",
       "revId": "0c7f5cf7ad8b938d543ac53f9b08617a1f7d6889",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
