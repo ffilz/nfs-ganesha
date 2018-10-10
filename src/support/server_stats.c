@@ -1001,10 +1001,10 @@ static void record_compound(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
  */
 
 static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
-			 request_data_t *reqdata, nsecs_elapsed_t request_time,
+			 nfs_request_t *reqdata, nsecs_elapsed_t request_time,
 			 bool success, bool dup, bool global)
 {
-	struct svc_req *req = &reqdata->r_u.req.svc;
+	struct svc_req *req = &reqdata->svc;
 	uint32_t proto_op = req->rq_msg.cb_proc;
 	uint32_t program_op = req->rq_msg.cb_prog;
 
@@ -1159,12 +1159,12 @@ void server_stats_9p_done(u8 opc, struct _9p_request_data *req9p)
  * Called from nfs_rpc_process_request at operation/command completion
  */
 
-void server_stats_nfs_done(request_data_t *reqdata, int rc, bool dup)
+void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 {
 	struct gsh_client *client = op_ctx->client;
 	struct timespec current_time;
 	nsecs_elapsed_t stop_time;
-	struct svc_req *req = &reqdata->r_u.req.svc;
+	struct svc_req *req = &reqdata->svc;
 	uint32_t proto_op = req->rq_msg.cb_proc;
 	uint32_t program_op = req->rq_msg.cb_prog;
 
