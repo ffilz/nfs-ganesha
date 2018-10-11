@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e8e9b1ef_fea2c8b8",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-11T17:57:40Z",
+      "side": 1,
+      "message": "When I used localhost as both the server and client, client_addr contained all 0s but \u00271\u0027 in the last byte. It looked strange and I hadn\u0027t checked further, but assumed we need to memcpy every byte. Even gluster/gfapi treats it as opaque string though of type char array and does memcpy of each byte (I hope there are no string operations - will get to know when I test multi-client scenarios).",
+      "parentUuid": "38e93adc_e695a453",
+      "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "493c296e_78e3fce4",
         "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
         "patchSetId": 2
