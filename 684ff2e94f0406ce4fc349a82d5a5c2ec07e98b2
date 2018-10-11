@@ -34,6 +34,24 @@
       "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00490751_55002c17",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-11T13:26:07Z",
+      "side": 1,
+      "message": "Beyond this point, permissions are checked by the gluster server. Hence we need to set the right credentials (of the caller doing fop) at this point.\n\n\u003e\u003e  but why do we need to do this for a setattr?\n\na) Do you mean why do we need to set credentials for setattr?  or\nFor any I/O operation, gluster/gfapi expects applications (NFS-Ganesha) to set right credentials to pass through glusterfs server permission checks. Hence we set and reset credentials before and after each fop.\n\nb) why I changed it to read from my_fd now instead of op_ctx?\nThis particular change was more needed for fops which can happen without client intervention like  locks, leases, etc ( callbacks from backend) or close (while purging entry from cache). To maintain uniformity, I changed for other fops as well as \"find_fd()\" makes sure we set right credentials (in this case of setattr from op_ctx) and there shouldn\u0027t be any issues reading them back from my_fd.",
+      "parentUuid": "7e83389b_fe56a50f",
+      "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
