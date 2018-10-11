@@ -52,6 +52,24 @@
       "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "137b92ee_495ea40f",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-11T13:32:30Z",
+      "side": 1,
+      "message": "My worry is this:\n\nSuppose we get an ATTR_SIZE SETATTR RPC, with credentials that would be denied. We then go and find an existing file descriptor (my_fd), and proceed to use the credentials associated with it, which do have permissions to truncate the file. File is truncated even though it should have failed.\n\nWhat prevents the above situation?",
+      "parentUuid": "00490751_55002c17",
+      "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
