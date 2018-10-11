@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "38e93adc_e695a453",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-11T14:42:45Z",
+      "side": 1,
+      "message": "Don\u0027t you need to NUL terminate?",
+      "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "493c296e_78e3fce4",
         "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
         "patchSetId": 2
