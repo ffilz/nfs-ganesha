@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "493c296e_78e3fce4",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-11T12:54:27Z",
+      "side": 1,
+      "message": "Would it not be better to get rid of the else here, and just assume that if that constant is not available then the interface isn\u0027t usable? I\u0027d be leery of building this in against older (possibly more questionable?) library versions.",
+      "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
