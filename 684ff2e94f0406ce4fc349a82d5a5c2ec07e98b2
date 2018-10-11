@@ -88,6 +88,24 @@
       "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "164ae41d_636ced4b",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-11T14:38:16Z",
+      "side": 1,
+      "message": "Ganesha has already fully permission checked setattr before calling into the FSAL.\n\nThe FSAL primarily needs to set credentials for calls into the filesystem for the following cases:\n\nDirectory operations (create, link, unlink, rename) - because Ganesha can\u0027t atomically check permissions and perform the operation, this is particularly an issue for rename.\n\nOperations (particularly I/O and create) that have quota implications.\n\nOperations (like create) that need the credentials to properly set or update metadata.\n\nThere\u0027s probably some other corner cases I\u0027m missing...",
+      "parentUuid": "137b92ee_495ea40f",
+      "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
