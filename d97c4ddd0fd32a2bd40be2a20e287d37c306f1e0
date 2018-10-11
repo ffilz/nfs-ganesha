@@ -34,6 +34,24 @@
       "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "160bd78c_210aedca",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-11T14:03:12Z",
+      "side": 1,
+      "message": "Anyways, from your latest comments - https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/376082/3/src/FSAL/FSAL_GLUSTER/handle.c#2653, I will revert some of those changes and restrict using my_fd creds to lease_op2() and close() calls for now. So I should be able to check this macro at just those few places and maybe get rid of this else part. Thanks!",
+      "parentUuid": "c592f21c_2781e447",
+      "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
