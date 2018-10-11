@@ -70,6 +70,24 @@
       "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "077fafa9_2325ea32",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-11T14:00:23Z",
+      "side": 1,
+      "message": "Hmm..right! For my understanding -\nmy_fd refers to \ncase (a) an existing fd associated with the state sent by client \ncase (b) or a global fd \ncase (c) or a temporary one. In case if its temporary, we set creds from op_ctx. So we are safe\n\nBut if its global fd (case b), then we may be using credentials which were initially used to open it which are incorrect. \n\nIn case of (a), can it happen that client had a particular open/lock state on a file but changed creds while doing setattr and in ganesha we found fd associated with that outstanding state with incorrect creds? If so, can it happen for any other fops too? \n\nPlease provide your inputs.",
+      "parentUuid": "137b92ee_495ea40f",
+      "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
