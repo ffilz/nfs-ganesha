@@ -67,6 +67,24 @@
       "revId": "b500a0fdcfc30094129c4bc77f8f85603aaa0959",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c50bf950_bf2fc68a",
+        "filename": "src/include/nfs_core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-11T14:13:57Z",
+      "side": 1,
+      "message": "See subsequent patch... request_data_t goes completely away and NFS path uses nfs_request_t directly.",
+      "parentUuid": "32badd1b_702add5a",
+      "revId": "b500a0fdcfc30094129c4bc77f8f85603aaa0959",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
