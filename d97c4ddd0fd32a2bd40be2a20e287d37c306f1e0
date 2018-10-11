@@ -16,6 +16,24 @@
       "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c592f21c_2781e447",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-11T13:32:54Z",
+      "side": 1,
+      "message": "Agree.. But I thought it will be cumbersome to add this macro check everywhere SETGLUSTERCREDS is used (which is almost for all fops) - https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/376082/3/src/FSAL/FSAL_GLUSTER/handle.c \n\nAny suggestions?",
+      "parentUuid": "493c296e_78e3fce4",
+      "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
