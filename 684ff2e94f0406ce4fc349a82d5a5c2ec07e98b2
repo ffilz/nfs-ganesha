@@ -16,6 +16,24 @@
       "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e83389b_fe56a50f",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-11T13:00:08Z",
+      "side": 1,
+      "message": "I don\u0027t know gluster well at all, but why do we need to do this for a setattr? If this change is to handle state being torn down, then do we really need to change truncate behavior? We shouldn\u0027t need to do any truncating to handle that situation.",
+      "parentUuid": "7b70cf9a_30547e28",
+      "revId": "684ff2e94f0406ce4fc349a82d5a5c2ec07e98b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
