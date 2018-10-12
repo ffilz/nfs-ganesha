@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a99e88d_45e54f58",
+        "filename": "src/include/9p_req_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-12T05:05:13Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst char *s;\n+\tGSH_CACHE_PAD(0);",
+      "revId": "84a467336833dbd4bb90602c854c746d66f5ce34",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33c0c98c_f08204a2",
+        "filename": "src/include/9p_req_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-12T05:05:13Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct req_q producer;\t/* from decoder */\n+\tGSH_CACHE_PAD(1);",
+      "revId": "84a467336833dbd4bb90602c854c746d66f5ce34",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9f1c2e2_cde0bccf",
+        "filename": "src/include/9p_req_queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-10-12T05:05:13Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct req_q consumer;\t/* to executor */\n+\tGSH_CACHE_PAD(2);",
+      "revId": "84a467336833dbd4bb90602c854c746d66f5ce34",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
