@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d60ce416_3e522eb9",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-12T04:27:41Z",
+      "side": 1,
+      "message": "Ack..will do \u0027memset\u0027.\nglfs_setfsleaseid expects fixed length (GLFS_LEASE_ID_SIZE) char array",
+      "parentUuid": "590cd23d_f430aa84",
+      "revId": "d97c4ddd0fd32a2bd40be2a20e287d37c306f1e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "493c296e_78e3fce4",
         "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
         "patchSetId": 2
