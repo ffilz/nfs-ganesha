@@ -918,8 +918,6 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 
 		state_deleg_revoke(obj, state);
 
-		/* Release refs we held */
-		obj->obj_ops->put_ref(obj);
 		put_gsh_export(op_ctx->ctx_export);
 		op_ctx->ctx_export = NULL;
 		op_ctx->fsal_export = NULL;
@@ -927,6 +925,9 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 		release_root_op_context();
 
 		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
+
+                /* Release refs we held */
+		obj->obj_ops->put_ref(obj);
 
 		/* Since we dropped so_mutex, we must restart the loop. */
 		goto again;
