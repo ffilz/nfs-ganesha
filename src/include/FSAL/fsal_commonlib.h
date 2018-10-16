@@ -106,6 +106,8 @@ pthread_rwlock_t fs_lock;
 
 void free_fs(struct fsal_filesystem *fs);
 
+void remove_fs(struct fsal_filesystem *fs);
+
 int populate_posix_file_systems(bool force);
 
 int resolve_posix_filesystem(const char *path,

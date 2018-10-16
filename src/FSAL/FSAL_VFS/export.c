@@ -445,6 +445,8 @@ void vfs_unexport_filesystems(struct vfs_fsal_export *exp)
 				"VFS is no longer exporting filesystem %s",
 				map->fs->fs->path);
 			unclaim_fs(map->fs->fs);
+			remove_fs(map->fs->fs);
+			free_fs(map->fs->fs);
 		}
 
 		/* And free it */
