@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86fd0190_65a2c5a2",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2018-10-16T08:12:14Z",
+      "side": 0,
+      "message": "The global PROXY{} block still exists for the module. The PROXY { Remote_Server{} } sub-block is now defined by export.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "aadf499cf09ddc1c38d425a494a97a98453f840d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4924c141_bf8f2334",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2018-10-16T08:12:14Z",
+      "side": 0,
+      "message": "This block still exists. Theses options are linked to the module FSAL_PROXY, they are not managed by export.",
+      "range": {
+        "startLine": 689,
+        "startChar": 6,
+        "endLine": 689,
+        "endChar": 8
+      },
+      "revId": "aadf499cf09ddc1c38d425a494a97a98453f840d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b8814bc_a3bb80d8",
+        "filename": "src/doc/man/ganesha-proxy-config.rst",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2018-10-16T08:12:14Z",
+      "side": 0,
+      "message": "This block still exists and contains all options by module.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 5
+      },
+      "revId": "aadf499cf09ddc1c38d425a494a97a98453f840d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
