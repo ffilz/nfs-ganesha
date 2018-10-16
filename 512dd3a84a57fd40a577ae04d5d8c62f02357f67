@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41691284_17e5289d",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-10-16T13:30:03Z",
+      "side": 1,
+      "message": "This could cause a problem because we\u0027ve already released the op_ctx.  You\u0027ll need to move the \"release_root_op_context()\" below this, I think.",
+      "revId": "512dd3a84a57fd40a577ae04d5d8c62f02357f67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
