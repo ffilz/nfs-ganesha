@@ -428,6 +428,9 @@ void vfs_unexport_filesystems(struct vfs_fsal_export *exp)
 {
 	struct glist_head *glist, *glistn;
 	struct vfs_filesystem_export_map *map;
+	struct fsal_filesystem *unexportfs;
+
+	unexportfs = NULL;
 
 	PTHREAD_RWLOCK_wrlock(&fs_lock);
 
@@ -444,11 +447,16 @@ void vfs_unexport_filesystems(struct vfs_fsal_export *exp)
 			LogInfo(COMPONENT_FSAL,
 				"VFS is no longer exporting filesystem %s",
 				map->fs->fs->path);
-			unclaim_fs(map->fs->fs);
+			unexportfs = map->fs->fs;
 		}
 
 		/* And free it */
 		gsh_free(map);
+	}
+
+	/* now safely unexport fs if any (assumes singleton) */
+	if (unexportfs != NULL) {
+		release_posix_file_system(unexportfs);
 	}
 
 	PTHREAD_RWLOCK_unlock(&fs_lock);
