@@ -64,6 +64,7 @@ static void *_9p_rdma_cleanup_conn_thread(void *arg)
 	msk_trans_t *trans = arg;
 	struct _9p_rdma_priv *priv = _9p_rdma_priv_of(trans);
 
+	rcu_register_thread();
 	if (priv) {
 		if (priv->pconn) {
 			LogDebug(COMPONENT_9P,
@@ -93,6 +94,7 @@ static void *_9p_rdma_cleanup_conn_thread(void *arg)
 	}
 
 	msk_destroy_trans(&trans);
+	rcu_unregister_thread();
 	pthread_exit(NULL);
 }
 
@@ -139,6 +141,7 @@ void *_9p_rdma_thread(void *Arg)
 	struct _9p_outqueue *outqueue = trans->private_data;
 	struct sockaddr *addrpeer;
 
+	rcu_register_thread();
 	priv = gsh_calloc(1, sizeof(*priv));
 
 	trans->private_data = priv;
@@ -188,14 +191,14 @@ void *_9p_rdma_thread(void *Arg)
 			 rc);
 		goto error;
 	}
-
+out:
+	rcu_unregister_thread();
 	pthread_exit(NULL);
 
- error:
+error:
 
 	_9p_rdma_cleanup_conn_thread(trans);
-
-	pthread_exit(NULL);
+	goto out;
 }				/* _9p_rdma_handle_trans */
 
 static void _9p_rdma_setup_pernic(msk_trans_t *trans, uint8_t *outrdmabuf)
@@ -329,6 +332,7 @@ void *_9p_rdma_dispatcher_thread(void *Arg)
 #define PORT_MAX_LEN 6
 	char port[PORT_MAX_LEN];
 
+	rcu_register_thread();
 	memset(&trans_attr, 0, sizeof(msk_trans_attr_t));
 
 	trans_attr.server = _9p_param._9p_rdma_backlog;
@@ -419,5 +423,6 @@ void *_9p_rdma_dispatcher_thread(void *Arg)
 		}
 	}			/* for( ;; ) */
 
+	rcu_unregister_thread();
 	pthread_exit(NULL);
 }				/* _9p_rdma_dispatcher_thread */
