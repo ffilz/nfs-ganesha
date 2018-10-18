@@ -16,6 +16,24 @@
       "revId": "d0a1d8218d012c7c25d2c207c1ff35a1147007a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "143482bd_176ce8ef",
+        "filename": "src/os/freebsd/xattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2018-10-18T14:53:03Z",
+      "side": 1,
+      "message": "Right, I have double checked and it builds unconditionally. I will remove this, thanks.",
+      "parentUuid": "277e08c0_e49fee61",
+      "revId": "d0a1d8218d012c7c25d2c207c1ff35a1147007a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
