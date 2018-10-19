@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0dfa411c_a49d37fb",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-19T15:24:15Z",
+      "side": 1,
+      "message": "Do something like:\n\nmap \u003d glist_first_entry(...)\nwhile (map) {\n...\nrelease_posix_file_system(map-\u003efs-\u003efs)\nmap \u003d glist_first_entry(...)\n\nSo you loop while you pull entries of the head of the list to process. Any filesystems that were mounted under another filesystem will have already been released.",
+      "revId": "c819ba36cc7ee27b24cee63bb7cc0e4e2e189ab1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6df252df_42b2e678",
         "filename": "src/FSAL/FSAL_VFS/export.c",
         "patchSetId": 3
@@ -16,6 +33,23 @@
       "revId": "c819ba36cc7ee27b24cee63bb7cc0e4e2e189ab1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96dceb26_237b8271",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-19T15:24:15Z",
+      "side": 1,
+      "message": "We need to think about how this is going to work if there\u0027s an export underneath. I\u0027m not exactly sure what happens if we have two exports:\n\n/export/fs1\n/export/fs1/some/path/fs2\n\nand we unexport fs1 without exporting fs2, we need to handle that situation properly here, and not pull fs2 out from under the fs2 export...",
+      "revId": "c819ba36cc7ee27b24cee63bb7cc0e4e2e189ab1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
