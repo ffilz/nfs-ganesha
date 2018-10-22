@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e86fb15_670a4736",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2488,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-10-22T13:07:46Z",
+      "side": 1,
+      "message": "So, maybe this should be defined.  The only thing I can find that would prevent this is lack of state.  That may be sufficient, I\u0027m not sure.  But Ceph (not FSAL_CEPH, which doesn\u0027t handle this, but Ceph itself) does *not* return an error in this case.  We should probably decide if we want an error or not, and be consistent.",
+      "revId": "4880f76d945b5c07452c92c6cb35580359e1ffb6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
