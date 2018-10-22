@@ -16,6 +16,24 @@
       "revId": "4880f76d945b5c07452c92c6cb35580359e1ffb6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f87c143e_d0f185c7",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2488,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-22T14:08:16Z",
+      "side": 1,
+      "message": "ACK. The behavior should be consistent across FSALs. Thinking again, maybe there could be legitimate cases where in FSAL can receive request twice (for suppose DelegReturn by client and revocation by server around the same time) and since its UNLK, it may be safe return success for both the requests.",
+      "parentUuid": "6e86fb15_670a4736",
+      "revId": "4880f76d945b5c07452c92c6cb35580359e1ffb6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
