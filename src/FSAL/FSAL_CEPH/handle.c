@@ -1480,6 +1480,10 @@ static fsal_openflags_t ceph_fsal_status2(struct fsal_obj_handle *obj_hdl,
 {
 	struct ceph_fd *my_fd = (struct ceph_fd *)(state + 1);
 
+	/* Do not pass back O_TRUNC flag */
+	if (my_fd->openflags && FSAL_O_TRUNC)
+		my_fd->openflags &= ~FSAL_O_TRUNC;
+
 	return my_fd->openflags;
 }
 

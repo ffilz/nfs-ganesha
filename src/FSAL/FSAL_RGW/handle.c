@@ -1162,6 +1162,10 @@ fsal_openflags_t rgw_fsal_status2(struct fsal_obj_handle *obj_hdl,
 
 	/* normal FSALs recover open state in "state" */
 
+	/* Do not pass back O_TRUNC flag */
+	if (handle->openflags && FSAL_O_TRUNC)
+		handle->openflags &= ~FSAL_O_TRUNC;
+
 	return handle->openflags;
 }
 

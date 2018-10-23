@@ -1298,6 +1298,10 @@ static fsal_openflags_t status2(struct fsal_obj_handle *obj_hdl,
 {
 	struct fsal_fd *fd = (struct fsal_fd *)(state + 1);
 
+	/* Do not pass back O_TRUNC flag */
+	if (fd->openflags && FSAL_O_TRUNC)
+		fd->openflags &= ~FSAL_O_TRUNC;
+
 	return fd->openflags;
 }
 
