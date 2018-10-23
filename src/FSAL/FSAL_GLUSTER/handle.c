@@ -1200,6 +1200,10 @@ fsal_status_t find_fd(struct glusterfs_fd *my_fd,
 				glusterfs_close_func,
 				has_lock, closefd, open_for_locks,
 				&reusing_open_state_fd);
+
+	if (FSAL_IS_ERROR(status))
+		goto out;
+
 	/* since tmp2_fd is not accessed/closed outside
 	* this routine, its safe to copy its variables into my_fd
 	* without taking extra reference or allocating extra
@@ -1222,6 +1226,7 @@ fsal_status_t find_fd(struct glusterfs_fd *my_fd,
 	my_fd->creds.caller_gid = tmp2_fd->creds.caller_gid;
 	my_fd->creds.caller_glen = tmp2_fd->creds.caller_glen;
 
+out:
 	return status;
 }
 
@@ -2309,7 +2314,7 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 
 	if (FSAL_IS_ERROR(status)) {
 		LogCrit(COMPONENT_FSAL, "Unable to find fd for lock operation");
-		return status;
+		goto err;
 	}
 
 	errno = 0;
@@ -2394,7 +2399,10 @@ static fsal_status_t glusterfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 	if (has_lock)
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 
-	return fsalstat(posix2fsal_error(retval), retval);
+	if (retval)
+		status = gluster2fsal_error(retval);
+
+	return status;
 }
 
 /**
