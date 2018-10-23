@@ -1011,6 +1011,10 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 		goto out;
 	}
 
+	/* Do not store the FSAL_O_TRUNC flag as it is transient */
+	if (openflags & FSAL_O_TRUNC)
+		openflags &= ~FSAL_O_TRUNC;
+
 	my_fd->glfd = glfd;
 	my_fd->openflags = openflags;
 	my_fd->creds.caller_uid = op_ctx->creds->caller_uid;

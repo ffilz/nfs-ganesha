@@ -1059,6 +1059,10 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 
 	my_fd->fd = fd;
 #endif
+	/* Do not store the FSAL_O_TRUNC flag as it is transient */
+	if (openflags & FSAL_O_TRUNC)
+		openflags &= ~FSAL_O_TRUNC;
+
 	handle->openflags = openflags;
 
 	*new_obj = &obj->handle;

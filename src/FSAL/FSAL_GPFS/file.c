@@ -60,6 +60,10 @@ gpfs_open_func(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags,
 	if (FSAL_IS_ERROR(status))
 		return status;
 
+	/* Do not store the FSAL_O_TRUNC flag as it is transient */
+	if (openflags & FSAL_O_TRUNC)
+		openflags &= ~FSAL_O_TRUNC;
+
 	my_fd->openflags = openflags;
 	LogFullDebug(COMPONENT_FSAL, "new fd %d", my_fd->fd);
 
@@ -191,6 +195,11 @@ open_by_handle(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		/* assert(state == NULL); */
 		(void)fsal_internal_close(my_fd->fd, NULL, 0);
 	}
+
+	/* Do not store the FSAL_O_TRUNC flag as it is transient */
+	if (openflags & FSAL_O_TRUNC)
+		openflags &= ~FSAL_O_TRUNC;
+
 	my_fd->fd = fd;
 	my_fd->openflags = openflags;
 
@@ -640,6 +649,11 @@ gpfs_reopen2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		PTHREAD_RWLOCK_wrlock(&my_share_fd->fdlock);
 
 		fsal_internal_close(my_share_fd->fd, NULL, 0);
+
+		/* Do not store the FSAL_O_TRUNC flag as it is transient */
+		if (openflags & FSAL_O_TRUNC)
+			openflags &= ~FSAL_O_TRUNC;
+
 		my_share_fd->fd = my_fd;
 		my_share_fd->openflags = openflags;
 

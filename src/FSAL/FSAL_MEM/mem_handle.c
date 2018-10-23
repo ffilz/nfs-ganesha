@@ -475,6 +475,9 @@ static void mem_copy_attrs_mask(struct attrlist *attrs_in,
 static fsal_status_t mem_open_my_fd(struct fsal_fd *fd,
 				    fsal_openflags_t openflags)
 {
+	/* Do not store the FSAL_O_TRUNC flag as it is transient */
+	if (openflags & FSAL_O_TRUNC)
+		openflags &= ~FSAL_O_TRUNC;
 	fd->openflags = openflags;
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);

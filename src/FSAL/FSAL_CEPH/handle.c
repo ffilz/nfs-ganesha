@@ -815,6 +815,10 @@ static fsal_status_t ceph_open_my_fd(struct ceph_handle *myself,
 		return ceph2fsal_error(rc);
 	}
 
+	/* Do not store the FSAL_O_TRUNC flag as it is transient */
+	if (openflags & FSAL_O_TRUNC)
+		openflags &= ~FSAL_O_TRUNC;
+
 	/* Save the file descriptor, make sure we only save the
 	 * open modes that actually represent the open file.
 	 */
@@ -1385,6 +1389,10 @@ static fsal_status_t ceph_fsal_open2(struct fsal_obj_handle *obj_hdl,
 	 */
 	if (my_fd == NULL)
 		my_fd = &hdl->fd;
+
+	/* Do not store the FSAL_O_TRUNC flag as it is transient */
+	if (openflags & FSAL_O_TRUNC)
+		openflags &= ~FSAL_O_TRUNC;
 
 	my_fd->fd = fd;
 	my_fd->openflags = openflags;
