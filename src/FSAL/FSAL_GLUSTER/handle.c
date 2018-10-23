@@ -1012,7 +1012,7 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 	}
 
 	my_fd->glfd = glfd;
-	my_fd->openflags = openflags;
+	my_fd->openflags = (openflags & FSAL_O_RDWR);
 	my_fd->creds.caller_uid = op_ctx->creds->caller_uid;
 	my_fd->creds.caller_gid = op_ctx->creds->caller_gid;
 	my_fd->creds.caller_glen = op_ctx->creds->caller_glen;
