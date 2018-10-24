@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "976ef039_7c76fdf1",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-24T15:14:52Z",
+      "side": 1,
+      "message": "These changes were done couple of releases back. There was a crash seen while releasing handle - dont remember exactly which path maybe as part of the export cleanup or cache entry purge which dint have op_ctx set. Maybe that is no more the case with the current code.",
+      "parentUuid": "201a60cb_91c7b0a3",
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57e23a0c_772c7511",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 6
@@ -162,6 +180,30 @@
     },
     {
       "key": {
+        "uuid": "dfe381af_12295576",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-24T15:14:52Z",
+      "side": 1,
+      "message": "Okay. Will update.",
+      "parentUuid": "db134ffe_5ab61bc3",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 34
+      },
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7201d0db_6ce42bca",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 6
@@ -176,6 +218,24 @@
       "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c3529e9_43cd376e",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-24T15:14:52Z",
+      "side": 1,
+      "message": "This comment is not valid anymore. When leases were initially being implemented in gluster, a common API was provided to set both lkowner and leaseid. But now we have separate APIs to set either of these. And we do not need to set lkowner as gluster does lease conflict checks based on leaseid and gluster client id. I will remove it.",
+      "parentUuid": "7201d0db_6ce42bca",
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
