@@ -46,6 +46,30 @@
       "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "658078a0_deafbc09",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1004330
+      },
+      "writtenOn": "2018-10-24T07:09:02Z",
+      "side": 1,
+      "message": "My question was glfs_close will happen inside only in else part right, is it ok to set objhandle-\u003eglobalfd.glfd set to NULL without closing it, or Am I reading it incorrectly",
+      "parentUuid": "6746eb3d_e397dfef",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 34
+      },
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
