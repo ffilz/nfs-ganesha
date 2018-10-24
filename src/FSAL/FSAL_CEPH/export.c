@@ -180,12 +180,17 @@ static fsal_status_t wire_to_host(struct fsal_export *exp_hdl,
 				  struct gsh_buffdesc *fh_desc,
 				  int flags)
 {
+	struct ceph_handle_key *key = fh_desc->addr;
+
 	switch (in_type) {
 		/* Digested Handles */
 	case FSAL_DIGEST_NFSV3:
 	case FSAL_DIGEST_NFSV4:
 		/* wire handles */
-		fh_desc->len = sizeof(vinodeno_t);
+		if (key->chk_fscid)
+			fh_desc->len = sizeof(*key);
+		else
+			fh_desc->len = sizeof(key->chk_vi);
 		break;
 	default:
 		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
@@ -216,9 +221,11 @@ static fsal_status_t create_handle(struct fsal_export *export_pub,
 			container_of(export_pub, struct ceph_export, export);
 	/* FSAL status to return */
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	/* handle key */
 	/* The FSAL specific portion of the handle received by the
 	   client */
-	vinodeno_t *vi = desc->addr;
+	struct ceph_handle_key *key = desc->addr;
+	vinodeno_t *vi = &key->chk_vi;
 	/* Ceph return code */
 	int rc = 0;
 	/* Stat buffer */
@@ -230,7 +237,8 @@ static fsal_status_t create_handle(struct fsal_export *export_pub,
 
 	*pub_handle = NULL;
 
-	if (desc->len != sizeof(vinodeno_t)) {
+	if (desc->len != sizeof(*key) &&
+	    desc->len != sizeof(*vi)) {
 		status.major = ERR_FSAL_INVAL;
 		return status;
 	}
