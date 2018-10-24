@@ -70,6 +70,30 @@
       "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88b88b82_13e30003",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-24T09:07:00Z",
+      "side": 1,
+      "message": "Ah okay..glfd gets closed in if part as well but as part of glusterfs_close_my_fd()",
+      "parentUuid": "658078a0_deafbc09",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 34
+      },
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
