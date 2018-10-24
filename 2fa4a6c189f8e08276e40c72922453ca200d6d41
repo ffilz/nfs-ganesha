@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "201a60cb_91c7b0a3",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-24T14:44:18Z",
+      "side": 1,
+      "message": "I\u0027m curious why we need to distinguish here? Actually, this path might never get called. We should have a valid op_ctx and export now.",
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57e23a0c_772c7511",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 6
@@ -118,6 +135,47 @@
       "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db134ffe_5ab61bc3",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-24T14:44:18Z",
+      "side": 1,
+      "message": "To be consistent with code above, this probably should be my_fd_\u003eglfd \u003d NULL.",
+      "parentUuid": "63f8ae62_10c9266a",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 34
+      },
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7201d0db_6ce42bca",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-24T14:44:18Z",
+      "side": 1,
+      "message": "Are we ok leaving this todo?",
+      "revId": "2fa4a6c189f8e08276e40c72922453ca200d6d41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
