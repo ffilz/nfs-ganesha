@@ -479,6 +479,10 @@ fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
 			obj->type);
 		return fsalstat(ERR_FSAL_BADTYPE, 0);
 	}
+	if ((attr->valid_mask & (ATTR_SIZE | ATTR_MODE))) {
+		if (state_deleg_conflict(obj, true))
+			return fsalstat(ERR_FSAL_DELAY, 0);
+	}
 
 	/* Is it allowed to change times ? */
 	if (!op_ctx->fsal_export->exp_ops.fs_supports(op_ctx->fsal_export,
