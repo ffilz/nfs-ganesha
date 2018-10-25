@@ -114,15 +114,16 @@ done:
  *
  */
 
-static int op_dswrite(struct nfs_argop4 *op, compound_data_t *data,
-		      struct nfs_resop4 *resp)
+static enum nfs_req_result op_dswrite(struct nfs_argop4 *op,
+				      compound_data_t *data,
+				      struct nfs_resop4 *resp)
 {
 	WRITE4args * const arg_WRITE4 = &op->nfs_argop4_u.opwrite;
 	WRITE4res * const res_WRITE4 = &resp->nfs_resop4_u.opwrite;
 	/* NFSv4 return code */
 	nfsstat4 nfs_status = 0;
 
-	nfs_status = data->current_ds->dsh_ops.write(
+	res_WRITE4->status = data->current_ds->dsh_ops.write(
 				data->current_ds,
 				op_ctx,
 				&arg_WRITE4->stateid,
@@ -135,7 +136,7 @@ static int op_dswrite(struct nfs_argop4 *op, compound_data_t *data,
 				&res_WRITE4->WRITE4res_u.resok4.committed);
 
 	res_WRITE4->status = nfs_status;
-	return res_WRITE4->status;
+	return nfsstat4_to_nfs_req_result(res_WRITE4->status);
 }
 
 /**
@@ -151,8 +152,8 @@ static int op_dswrite(struct nfs_argop4 *op, compound_data_t *data,
  * @return per RFC5661, p. 376
  */
 
-int nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
-		  struct nfs_resop4 *resp)
+enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
+				  struct nfs_resop4 *resp)
 {
 	WRITE4args * const arg_WRITE4 = &op->nfs_argop4_u.opwrite;
 	WRITE4res * const res_WRITE4 = &resp->nfs_resop4_u.opwrite;
@@ -188,7 +189,7 @@ int nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 	 */
 	res_WRITE4->status = nfs4_sanity_check_FH(data, REGULAR_FILE, true);
 	if (res_WRITE4->status != NFS4_OK)
-		return res_WRITE4->status;
+		return NFS_REQ_ERROR;
 
 	/* if quota support is active, then we should check is the FSAL
 	   allows inode creation or not */
@@ -199,7 +200,7 @@ int nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 
 	if (FSAL_IS_ERROR(fsal_status)) {
 		res_WRITE4->status = NFS4ERR_DQUOT;
-		return res_WRITE4->status;
+		return NFS_REQ_ERROR;
 	}
 
 
@@ -219,7 +220,7 @@ int nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 						"WRITE");
 
 	if (res_WRITE4->status != NFS4_OK)
-		return res_WRITE4->status;
+		return NFS_REQ_ERROR;
 
 	/* NB: After this points, if state_found == NULL, then
 	 * the stateid is all-0 or all-1
@@ -256,7 +257,7 @@ int nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 					sdeleg->sd_type,
 					sdeleg->sd_state);
 				res_WRITE4->status = NFS4ERR_BAD_STATEID;
-				return res_WRITE4->status;
+				return NFS_REQ_ERROR;
 			}
 
 			state_open = NULL;
@@ -267,7 +268,7 @@ int nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 			LogDebug(COMPONENT_NFS_V4_LOCK,
 				 "WRITE with invalid stateid of type %d",
 				 (int)state_found->state_type);
-			return res_WRITE4->status;
+			return NFS_REQ_ERROR;
 		}
 
 		/* This is a write operation, this means that the file
@@ -401,7 +402,7 @@ int nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 	if (state_open != NULL)
 		dec_state_t_ref(state_open);
 
-	return res_WRITE4->status;
+	return nfsstat4_to_nfs_req_result(res_WRITE4->status);
 }				/* nfs4_op_write */
 
 /**
@@ -430,15 +431,16 @@ void nfs4_op_write_Free(nfs_resop4 *resp)
  *
  */
 
-int nfs4_op_write_same(struct nfs_argop4 *op, compound_data_t *data,
-		  struct nfs_resop4 *resp)
+enum nfs_req_result nfs4_op_write_same(struct nfs_argop4 *op,
+				       compound_data_t *data,
+				       struct nfs_resop4 *resp)
 {
 	WRITE_SAME4res * const res_WSAME = &resp->nfs_resop4_u.opwrite_same;
 
 	resp->resop = NFS4_OP_WRITE_SAME;
 	res_WSAME->wpr_status =  NFS4ERR_NOTSUPP;
 
-	return res_WSAME->wpr_status;
+	return NFS_REQ_ERROR;
 }
 
 /**
