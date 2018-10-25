@@ -1188,8 +1188,8 @@ static void open4_ex(OPEN4args *arg,
  * @return per RFC5661, pp. 369-70
  */
 
-int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
-		 struct nfs_resop4 *resp)
+enum nfs_req_result nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
+				 struct nfs_resop4 *resp)
 {
 	/* Shorter alias for OPEN4 arguments */
 	OPEN4args * const arg_OPEN4 = &(op->nfs_argop4_u.opopen);
@@ -1244,7 +1244,7 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		LogDebug(COMPONENT_NFS_V4,
 			 "Status of OP_OPEN due to export permissions = %s",
 			 nfsstat4_to_str(res_OPEN4->status));
-		return res_OPEN4->status;
+		return NFS_REQ_ERROR;
 	}
 
 	/* Check export permissions if OPEN4_SHARE_ACCESS_WRITE */
@@ -1257,14 +1257,14 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 			 "Status of OP_OPEN due to export permissions = %s",
 			 nfsstat4_to_str(res_OPEN4->status));
 
-		return res_OPEN4->status;
+		return NFS_REQ_ERROR;
 	}
 
 	/* Do basic checks on a filehandle */
 	res_OPEN4->status = nfs4_sanity_check_FH(data, NO_FILE_TYPE, false);
 
 	if (res_OPEN4->status != NFS4_OK)
-		return res_OPEN4->status;
+		return NFS_REQ_ERROR;
 
 	if (data->current_obj == NULL) {
 		/* This should be impossible, as PUTFH fills in the
@@ -1275,7 +1275,7 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		LogCrit(COMPONENT_NFS_V4,
 			"Impossible condition in compound data at %s:%u.",
 			__FILE__, __LINE__);
-		return res_OPEN4->status;
+		return NFS_REQ_ERROR;
 	}
 
 	/* It this a known client id? */
@@ -1293,7 +1293,7 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		res_OPEN4->status = clientid_error_to_nfsstat(retval);
 		LogDebug(COMPONENT_NFS_V4,
 			 "nfs_client_id_get_confirmed failed");
-		return res_OPEN4->status;
+		return NFS_REQ_ERROR;
 	}
 
 	/* Check if lease is expired and reserve it */
@@ -1457,7 +1457,7 @@ int nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 
 	dec_client_id_ref(clientid);
 
-	return res_OPEN4->status;
+	return nfsstat4_to_nfs_req_result(res_OPEN4->status);
 }				/* nfs4_op_open */
 
 /**
