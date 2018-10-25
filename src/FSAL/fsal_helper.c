@@ -633,6 +633,11 @@ fsal_status_t fsal_link(struct fsal_obj_handle *obj,
 		if (FSAL_IS_ERROR(status))
 			return status;
 	}
+	if (state_deleg_conflict(obj, true)) {
+		LogDebug (COMPONENT_FSAL, "Found an existing delegation for %s",
+			  name);
+		return fsalstat(ERR_FSAL_DELAY, 0);
+	}
 
 	/* Rather than performing a lookup first, just try to make the
 	   link and return the FSAL's error if it fails. */
