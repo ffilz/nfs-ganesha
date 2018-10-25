@@ -1307,7 +1307,12 @@ fsal_status_t fsal_rename(struct fsal_obj_handle *dir_src,
 		fsal_status = fsalstat(ERR_FSAL_INVAL, 0);
 		goto out;
 	}
-
+	if (state_deleg_conflict(lookup_src, true)) {
+		LogDebug (COMPONENT_FSAL, "Found an existing delegation for %s",
+			  oldname);
+		fsal_status = fsalstat(ERR_FSAL_DELAY, 0);
+		goto out;
+	}
 	LogFullDebug(COMPONENT_FSAL, "about to call FSAL rename");
 
 	fsal_status = dir_src->obj_ops->rename(lookup_src, dir_src, oldname,
