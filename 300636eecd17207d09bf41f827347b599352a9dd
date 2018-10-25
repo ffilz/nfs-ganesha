@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "68e229e6_5126957b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-25T14:39:07Z",
+      "side": 1,
+      "message": "We could change the FSAL API so rename also takes the destination object and do that in fsal_rename instead of mdc_rename (mdc_rename immediately looks up the destination)",
+      "revId": "300636eecd17207d09bf41f827347b599352a9dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1da489d_c06f1889",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-25T14:39:07Z",
+      "side": 1,
+      "message": "I don\u0027t think so...",
+      "revId": "300636eecd17207d09bf41f827347b599352a9dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d18c7dec_1b25a12a",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
