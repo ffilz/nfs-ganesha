@@ -49,6 +49,7 @@
 #include "sal_data.h"
 #include "sal_functions.h"
 #include "FSAL/fsal_commonlib.h"
+#include "sal_functions.h"
 
 /**
  * This is a global counter of files opened.
@@ -1200,6 +1201,12 @@ fsal_remove(struct fsal_obj_handle *parent, const char *name)
 		goto out;
 	}
 
+	if (state_deleg_conflict(to_remove_obj, true)) {
+		LogDebug (COMPONENT_FSAL, "Found an existing delegation for %s",
+			  name);
+		status = fsalstat(ERR_FSAL_DELAY, 0);
+		goto out;
+	}
 	LogFullDebug(COMPONENT_FSAL, "%s", name);
 
 	/* Make sure the to_remove_obj is closed since unlink of an
