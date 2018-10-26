@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56f5f098_5e9ea2d9",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-26T22:56:42Z",
+      "side": 1,
+      "message": "These two lines need to be protected by the lock also.",
+      "revId": "4c6356290e78301b46255c24d479a7ed76383ee7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
