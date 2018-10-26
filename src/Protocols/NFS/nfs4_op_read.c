@@ -305,8 +305,6 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 						sizeof(struct iovec));
 	uint32_t resp_size;
 
-	/* Say we are managing NFS4_OP_READ */
-	resp->resop = NFS4_OP_READ;
 	res_READ4->status = NFS4_OK;
 
 	/* Do basic checks on a filehandle Only files can be read */
@@ -590,11 +588,10 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 int nfs4_op_read(struct nfs_argop4 *op, compound_data_t *data,
 		 struct nfs_resop4 *resp)
 {
-	int err;
+	/* Say we are managing NFS4_OP_READ */
+	resp->resop = NFS4_OP_READ;
 
-	err = nfs4_read(op, data, resp, FSAL_IO_READ, NULL);
-
-	return err;
+	return nfs4_read(op, data, resp, FSAL_IO_READ, NULL);
 }
 
 /**
@@ -631,6 +628,9 @@ void nfs4_op_read_Free(nfs_resop4 *res)
 int nfs4_op_read_plus(struct nfs_argop4 *op, compound_data_t *data,
 		      struct nfs_resop4 *resp)
 {
+	/* Create a response frame on the stack to pass into nfs4_read
+	 * we will then copy out of it into actual response frame.
+	 */
 	struct nfs_resop4 res;
 	struct io_info info;
 	/* Response */
