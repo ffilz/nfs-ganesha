@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "71b277b5_e45d6d7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004330
+      },
+      "writtenOn": "2018-10-26T05:43:32Z",
+      "side": 1,
+      "message": "Then we change all the renames  api\u0027s including FSAL\u0027s, right?",
+      "parentUuid": "68e229e6_5126957b",
+      "revId": "300636eecd17207d09bf41f827347b599352a9dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1da489d_c06f1889",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-10-25T14:39:07Z",
       "side": 1,
       "message": "I don\u0027t think so...",
+      "revId": "300636eecd17207d09bf41f827347b599352a9dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b69b4e8_b5436302",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1004330
+      },
+      "writtenOn": "2018-10-26T05:43:32Z",
+      "side": 1,
+      "message": "Following is mentioned in RFC\n\"\n Whether a RENAME of a directory in the path leading to the file results in the recall of an open delegation depends on the semantics of the server file system.  If that file system denies such RENAMEs when a file is open, the recall must be performed to determine whether the file in question is, in fact, open.\" \nI am not whether above fact is true with ganesha or it just relies  on backend filesystem behavior",
+      "parentUuid": "f1da489d_c06f1889",
       "revId": "300636eecd17207d09bf41f827347b599352a9dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
