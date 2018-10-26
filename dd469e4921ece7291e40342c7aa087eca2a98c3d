@@ -16,6 +16,24 @@
       "revId": "dd469e4921ece7291e40342c7aa087eca2a98c3d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "531a5cf7_07fe672c",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-26T23:29:12Z",
+      "side": 1,
+      "message": "Yea, that might be a good addition. At some future time, an FSAL might actually keep track of the deny flags (PROXY might do this for example), but then that FSAL has to be prepared for them to be there, so in the meantime, I think it\u0027s good we only keep O_RDONLY/O_WRONLY/O_RDWR.",
+      "parentUuid": "f1c25939_e08529c7",
+      "revId": "dd469e4921ece7291e40342c7aa087eca2a98c3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
