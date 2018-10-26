@@ -16,6 +16,24 @@
       "revId": "38a5bf660925519a97e30a69fe6b238b674c1cb8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a29a3c2c_e0a3929b",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4383,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2018-10-26T13:55:42Z",
+      "side": 1,
+      "message": "792 static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)\n 793 {\n ... ...\n 807         if (acldata.naces \u003d\u003d 0)\n 808                 return FATTR_XDR_SUCCESS;       /* no acls is not a crime *\n\nIf a request with zero naces, it return FATTR_XDR_SUCCESS that set ATTR_ACL but acl is NULL.",
+      "parentUuid": "3085e3bd_fac3dd19",
+      "revId": "38a5bf660925519a97e30a69fe6b238b674c1cb8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
