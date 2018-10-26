@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "bd1b80dc_b0fac295",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-26T22:50:39Z",
+      "side": 1,
+      "message": "It just relies on backend behavior which for the most part for us, a rename should not be denied on an open file. I guess if we proxied a Windows 4.1 server...",
+      "parentUuid": "7b69b4e8_b5436302",
+      "revId": "300636eecd17207d09bf41f827347b599352a9dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d18c7dec_1b25a12a",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
