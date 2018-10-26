@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1c25939_e08529c7",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-10-26T12:34:03Z",
+      "side": 1,
+      "message": "Most of the *_fd structs have something like this comment over the openflags field:\n\n/** The open and share mode etc. */\n\nbut...it seems like with this change we just hold whether it\u0027s O_RDONLY/O_WRONLY/O_RDWR. It might be good to clarify these comments as well, to make it clear that the result is and\u0027ed against FSAL_O_RDWR and doesn\u0027t hold deny flags.",
+      "revId": "dd469e4921ece7291e40342c7aa087eca2a98c3d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
