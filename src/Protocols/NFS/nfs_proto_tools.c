@@ -4373,8 +4373,14 @@ static int Fattr4_To_FSAL_attr(struct attrlist *attrs, fattr4 *Fattr,
 			goto decodeerr;
 		}
 	}
-	if (xdr_getpos(&attr_body) < Fattr->attr_vals.attrlist4_len)
+	if (xdr_getpos(&attr_body) < Fattr->attr_vals.attrlist4_len) {
 		nfs_status = NFS4ERR_BADXDR;	/* underrun on attribute */
+		goto decodeerr;
+	}
+
+	/* FSAL layer needs attrs->acl if ATTR_ACL is set. */
+	if (attrs && (attrs->valid_mask & ATTR_ACL) && !attrs->acl)
+		attrs->valid_mask &= ~ATTR_ACL;
 decodeerr:
 	xdr_destroy(&attr_body);
 	return nfs_status;
