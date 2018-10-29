@@ -54,6 +54,22 @@ static enum nfs_req_result nfs4_default_resume(struct nfs_argop4 *op,
 	return NFS_REQ_OK;
 }
 
+/**
+ * @brief Simple resume for when all we need to do is return status and free
+ *        any op-specific data.
+ */
+static enum nfs_req_result nfs4_simple_resume(struct nfs_argop4 *op,
+					      compound_data_t *data,
+					      struct nfs_resop4 *resp)
+{
+	/* If the operation had any specific data preserved, we can free it. */
+	gsh_free(data->op_data);
+
+	/* All the operations, like NFS4_OP_ACCESS, have a first replied
+	 * field called .status
+	 */
+	return nfsstat4_to_nfs_req_result(resp->nfs_resop4_u.opaccess.status);
+}
 
 /**
  * #brief Structure to map out how each compound op is managed.
@@ -289,7 +305,7 @@ static const struct nfs4_op_desc optabv4[] = {
 	[NFS4_OP_READ] = {
 		.name = "OP_READ",
 		.funct = nfs4_op_read,
-		.resume = nfs4_default_resume,
+		.resume = nfs4_simple_resume,
 		.free_res = nfs4_op_read_Free,
 		.resp_size = VARIABLE_RESP_SIZE,
 		.exp_perm_flags = EXPORT_OPTION_READ_ACCESS},
@@ -380,7 +396,7 @@ static const struct nfs4_op_desc optabv4[] = {
 	[NFS4_OP_WRITE] = {
 		.name = "OP_WRITE",
 		.funct = nfs4_op_write,
-		.resume = nfs4_default_resume,
+		.resume = nfs4_simple_resume,
 		.free_res = nfs4_op_write_Free,
 		.resp_size = sizeof(WRITE4res),
 		.exp_perm_flags = EXPORT_OPTION_WRITE_ACCESS},
@@ -592,7 +608,7 @@ static const struct nfs4_op_desc optabv4[] = {
 	[NFS4_OP_READ_PLUS] = {
 		.name = "OP_READ_PLUS",
 		.funct = nfs4_op_read_plus,
-		.resume = nfs4_default_resume,
+		.resume = nfs4_simple_resume,
 		.free_res = nfs4_op_read_plus_Free,
 		.resp_size = sizeof(READ_PLUS4res),
 		.exp_perm_flags = 0},
