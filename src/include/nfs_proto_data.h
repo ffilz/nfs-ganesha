@@ -345,6 +345,7 @@ struct compound_data {
 				    request processed  */
 	const char *opname;	/*< Name of the operation */
 	char *tagname;
+	void *op_data;		/*< operation specific data for resume */
 	nfs41_session_t *session;	/*< Related session
 					   (found by OP_SEQUENCE) */
 	sequenceid4 sequence;	/*< Sequence ID of the current compound
