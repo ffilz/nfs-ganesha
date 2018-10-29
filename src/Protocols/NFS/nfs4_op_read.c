@@ -49,9 +49,20 @@
 #include "export_mgr.h"
 
 struct nfs4_read_data {
-	READ4res *res_READ4;		/**< Results for read */
-	state_owner_t *owner;		/**< Owner of state */
+	/** Results for read */
+	READ4res *res_READ4;
+	/** Owner of state */
+	state_owner_t *owner;
+	/* Pointer to compound data */
+	compound_data_t *data;
+	/** Arguments for read call - must be last */
+	struct fsal_io_arg read_arg;
+	/** Flags to control synchronization */
+	uint32_t flags;
 };
+
+#define READ_DONE 1
+#define READ_EXIT 2
 
 /**
  * Indicate type of read operation this is.
@@ -76,6 +87,7 @@ static void nfs4_read_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 	struct nfs4_read_data *data = caller_data;
 	struct fsal_io_arg *read_arg = read_data;
 	int i;
+	uint32_t flags;
 
 	/* Fixup FSAL_SHARE_DENIED status */
 	if (ret.major == ERR_FSAL_SHARE_DENIED)
@@ -141,6 +153,15 @@ done:
 
 	if (read_arg->state)
 		dec_state_t_ref(read_arg->state);
+
+	flags = atomic_postset_uint32_t_bits(&data->flags, READ_DONE);
+
+	if ((flags & READ_EXIT) == READ_EXIT) {
+		/* nfs4_read has already exited, we will need to reschedule
+		 * the request for completion.
+		 */
+		svc_resume(data->data->req);
+	}
 }
 
 /**
@@ -314,10 +335,13 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 	uint64_t MaxOffsetRead =
 			atomic_fetch_uint64_t(
 				&op_ctx->ctx_export->MaxOffsetRead);
-	struct nfs4_read_data read_data;
-	struct fsal_io_arg *read_arg = alloca(sizeof(*read_arg) +
-						sizeof(struct iovec));
+	struct nfs4_read_data *read_data;
+	struct fsal_io_arg *read_arg;
 	uint32_t resp_size;
+	/* In case we don't call read2, we indicate the I/O as already done
+	 * since in that case we should go ahead and exit as expected.
+	 */
+	uint32_t flags = READ_DONE;
 
 	res_READ4->status = NFS4_OK;
 
@@ -563,7 +587,9 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 		}
 	}
 
-	/* Set up args */
+	/* Set up args, allocate from heap, iov_len will be 1 */
+	read_data = gsh_calloc(1, sizeof(*read_data) + sizeof(struct iovec));
+	read_arg = &read_data->read_arg;
 	read_arg->info = info;
 	read_arg->state = state_found;
 	read_arg->offset = offset;
@@ -573,15 +599,29 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 	read_arg->io_amount = 0;
 	read_arg->end_of_file = false;
 
-	read_data.res_READ4 = res_READ4;
-	read_data.owner = owner;
+	read_data->res_READ4 = res_READ4;
+	read_data->owner = owner;
+	read_data->data = data;
 
 	/* Do the actual read */
-	obj->obj_ops->read2(obj, bypass, nfs4_read_cb, read_arg, &read_data);
+	obj->obj_ops->read2(obj, bypass, nfs4_read_cb, read_arg, read_data);
+
+	/* Only atomically set the flags if we actually call read2, otherwise
+	 * we will have indicated as having been DONE.
+	 */
+	flags = atomic_postset_uint32_t_bits(&read_data->flags, READ_EXIT);
 
  out:
 	if (state_open != NULL)
 		dec_state_t_ref(state_open);
+
+	if ((flags & READ_DONE) != READ_DONE) {
+		/* The read was not finished before we got here. When the
+		 * read completes, nfs4_read_cb() will have to reschedule the
+		 * request for completion.
+		 */
+		return NFS_REQ_ASYNC_WAIT;
+	}
 
 	return nfsstat4_to_nfs_req_result(res_READ4->status);
 }				/* nfs4_op_read */
