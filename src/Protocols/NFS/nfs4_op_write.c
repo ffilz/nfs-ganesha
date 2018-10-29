@@ -44,8 +44,16 @@
 #include "export_mgr.h"
 
 struct nfs4_write_data {
-	WRITE4res *res_WRITE4;		/**< Results for write */
-	state_owner_t *owner;		/**< Owner of state */
+	/** Results for write */
+	WRITE4res *res_WRITE4;
+	/** Owner of state */
+	state_owner_t *owner;
+	/* Pointer to compound data */
+	compound_data_t *data;
+	/** Flags to control synchronization */
+	uint32_t flags;
+	/** Arguments for write call - must be last */
+	struct fsal_io_arg write_arg;
 };
 
 /**
@@ -62,6 +70,7 @@ static void nfs4_write_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 	struct nfs4_write_data *data = caller_data;
 	struct fsal_io_arg *write_arg = write_data;
 	struct gsh_buffdesc verf_desc;
+	uint32_t flags;
 
 	/* Fixup ERR_FSAL_SHARE_DENIED status */
 	if (ret.major == ERR_FSAL_SHARE_DENIED)
@@ -98,6 +107,15 @@ done:
 
 	if (write_arg->state)
 		dec_state_t_ref(write_arg->state);
+
+	flags = atomic_postset_uint32_t_bits(&data->flags, ASYNC_PROC_DONE);
+
+	if ((flags & ASYNC_PROC_EXIT) == ASYNC_PROC_EXIT) {
+		/* nfs4_op_write has already exited, we will need to reschedule
+		 * the request for completion.
+		 */
+		svc_resume(data->data->req);
+	}
 }
 
 /**
@@ -170,9 +188,12 @@ enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 		atomic_fetch_uint64_t(&op_ctx->ctx_export->MaxWrite);
 	uint64_t MaxOffsetWrite =
 		atomic_fetch_uint64_t(&op_ctx->ctx_export->MaxOffsetWrite);
-	struct nfs4_write_data write_data;
-	struct fsal_io_arg *write_arg = alloca(sizeof(*write_arg) +
-						sizeof(struct iovec));
+	struct nfs4_write_data *write_data = NULL;
+	struct fsal_io_arg *write_arg;
+	/* In case we don't call write2, we indicate the I/O as already done
+	 * since in that case we should go ahead and exit as expected.
+	 */
+	uint32_t flags = ASYNC_PROC_DONE;
 
 	/* Lock are not supported */
 	resp->resop = NFS4_OP_WRITE;
@@ -377,7 +398,9 @@ enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 		}
 	}
 
-	/* Set up args */
+	/* Set up args, allocate from heap, iov_len will be 1 */
+	write_data = gsh_calloc(1, sizeof(*write_data) + sizeof(struct iovec));
+	write_arg = &write_data->write_arg;
 	write_arg->info = NULL;
 	write_arg->state = state_found;
 	write_arg->offset = offset;
@@ -391,16 +414,39 @@ enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 		write_arg->fsal_stable = true;
 
 
-	write_data.res_WRITE4 = res_WRITE4;
-	write_data.owner = owner;
+	write_data->res_WRITE4 = res_WRITE4;
+	write_data->owner = owner;
+	write_data->data = data;
+
+	data->op_data = write_data;
 
 	/* Do the actual write */
-	obj->obj_ops->write2(obj, false, nfs4_write_cb, write_arg, &write_data);
+	obj->obj_ops->write2(obj, false, nfs4_write_cb, write_arg, write_data);
+
+	/* Only atomically set the flags if we actually call write2, otherwise
+	 * we will have indicated as having been DONE.
+	 */
+	flags =
+	    atomic_postset_uint32_t_bits(&write_data->flags, ASYNC_PROC_EXIT);
 
  out:
 
 	if (state_open != NULL)
 		dec_state_t_ref(state_open);
+
+	if ((flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+		/* The write was not finished before we got here. When the
+		 * write completes, nfs4_write_cb() will have to reschedule the
+		 * request for completion. The resume will be resolved by
+		 * nfs4_simple_resume() which will free write_data and return
+		 * the appropriate return result. We will NOT go async again for
+		 * the write op (but could for a subsequent op in the compound).
+		 */
+		return NFS_REQ_ASYNC_WAIT;
+	}
+
+	/* Since we're actually done, we can free write_data. */
+	gsh_free(write_data);
 
 	return nfsstat4_to_nfs_req_result(res_WRITE4->status);
 }				/* nfs4_op_write */
