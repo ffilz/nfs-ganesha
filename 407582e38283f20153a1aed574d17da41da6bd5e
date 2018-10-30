@@ -88,6 +88,24 @@
       "revId": "407582e38283f20153a1aed574d17da41da6bd5e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2417bff8_0feedb9f",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-10-30T06:39:53Z",
+      "side": 1,
+      "message": "\"my_fd\" here is not closed or used anywhere else. Hence it seems safe to copy the pointer as is. Otherwise we shall leak memory right (having two copies of caller_garray).",
+      "parentUuid": "49674e60_51d1d29f",
+      "revId": "407582e38283f20153a1aed574d17da41da6bd5e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
