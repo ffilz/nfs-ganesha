@@ -68,9 +68,13 @@ bool to_vfs_dirent(char *buf, int bpos, struct vfs_dirent *vd, off_t base)
 	vd->vd_ino = dp->d_fileno;
 	vd->vd_reclen = dp->d_reclen;
 	vd->vd_type = dp->d_type;
+#if defined(__FreeBSD_version__) && __FreeBSD_version__ < 1200500
 	vd->vd_offset = base + bpos + dp->d_reclen;
+#else
+	vd->vd_offset = dp->d_off;
+#endif
 	vd->vd_name = dp->d_name;
-	return (dp->d_fileno != 0) ? true : false;
+	return (dp->d_fileno != 0);
 }
 
 /**
