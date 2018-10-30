@@ -874,6 +874,19 @@ if (HAVE_KRB5)
     )
 endif (HAVE_KRB5)
 
+# check for d_off support, FreeBSD doesn't support it before 1200500
+add_definitions(-DHAS_DOFF)
+if(FREEBSD)
+  EXECUTE_PROCESS(
+    COMMAND uname -K
+    OUTPUT_VARIABLE FREEBSD_VERSION
+    ERROR_QUIET
+  )
+  if (FREEBSD_VERSION LESS 1200501)
+    remove_definitions(-DHAS_DOFF)
+  endif ()
+endif ()
+
 # Fixup loose bits of autotools legacy
 set(_USE_9P ${USE_9P})
 set(_USE_9P_RDMA ${USE_9P_RDMA})
