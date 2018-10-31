@@ -384,6 +384,8 @@ static void _9p_worker_run(struct fridgethr_context *ctx)
 {
 	struct _9p_worker_data *worker_data = &ctx->wd;
 	struct _9p_request_data *reqdata;
+	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 	/* Worker's loop */
 	while (!fridgethr_you_should_break(ctx)) {
@@ -391,6 +393,9 @@ static void _9p_worker_run(struct fridgethr_context *ctx)
 
 		if (!reqdata)
 			continue;
+
+		reqdata->mutex = &mutex;
+		reqdata->cond = &cond;
 
 		_9p_execute(reqdata);
 		_9p_free_reqdata(reqdata);
@@ -402,6 +407,9 @@ static void _9p_worker_run(struct fridgethr_context *ctx)
 		gsh_free(reqdata);
 		(void) atomic_inc_uint64_t(&nfs_health_.dequeued_reqs);
 	}
+
+	PTHREAD_MUTEX_destroy(&mutex);
+	PTHREAD_COND_destroy(&cond);
 }
 
 int _9p_worker_init(void)
