@@ -16,6 +16,24 @@
       "revId": "29553888e0c1ff57471db8d0fd992e5f46013242",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61d6108e_6f87bbb1",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-10-31T14:53:38Z",
+      "side": 1,
+      "message": "Unlinks can definitely happen during a readdir. The content_lock prevents unlinks within an instance of Ganesha from happening during a Ganesha readdir, however, an unlink from another process (which might be a Ganesha instance on another node) will not be protected against.",
+      "parentUuid": "68beac17_28d7d2b9",
+      "revId": "29553888e0c1ff57471db8d0fd992e5f46013242",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
