@@ -1042,6 +1042,7 @@ message(${NTIRPC_INCLUDE_DIR})
 include_directories(${NTIRPC_INCLUDE_DIR})
 
 find_library(LIBURCU urcu)
+check_symbol_exists(urcu_ref_get_unless_zero urcu/ref.h HAVE_URCU_REF_GET_UNLESS_ZERO)
 
 # All the plumbing in the basement
 set(SYSTEM_LIBRARIES
