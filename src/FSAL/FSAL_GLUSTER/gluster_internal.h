@@ -172,6 +172,7 @@ struct glusterfs_fd {
 #ifdef USE_GLUSTER_DELEGATION
 	char lease_id[GLAPI_LEASE_ID_SIZE];
 #endif
+	bool is_dir; /* It's a dir fd, opendir/closedir */
 };
 
 struct glusterfs_handle {

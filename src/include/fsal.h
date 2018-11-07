@@ -388,8 +388,8 @@ fsal_status_t get_optional_attrs(struct fsal_obj_handle *obj_hdl,
  */
 static inline fsal_status_t fsal_close(struct fsal_obj_handle *obj_hdl)
 {
-	if (obj_hdl->type != REGULAR_FILE) {
-		/* Can only close a regular file */
+	if (obj_hdl->type != REGULAR_FILE && obj_hdl->type != DIRECTORY) {
+		/* Can only close a regular file or a directory */
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 	}
 

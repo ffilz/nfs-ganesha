@@ -35,6 +35,15 @@
 #include "sal_data.h"
 #include "sal_functions.h"
 
+fsal_status_t find_fd(struct glusterfs_fd *my_fd,
+		      struct fsal_obj_handle *obj_hdl,
+		      bool bypass,
+		      struct state_t *state,
+		      fsal_openflags_t openflags,
+		      bool *has_lock,
+		      bool *closefd,
+		      bool open_for_locks);
+
 /* fsal_obj_handle common methods
  */
 
@@ -74,7 +83,10 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 				/* cleanup as much as possible */
 			}
 		} else if (my_fd->openflags != FSAL_O_CLOSED) {
-			rc = glfs_close(my_fd->glfd);
+			if (my_fd->is_dir)
+				rc = glfs_closedir(my_fd->glfd);
+			else
+				rc = glfs_close(my_fd->glfd);
 			if (rc) {
 				LogCrit(COMPONENT_FSAL,
 					"glfs_close returned %s(%d)",
@@ -183,13 +195,14 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 {
 	int rc = 0;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	struct glusterfs_fd my_fd = {0};
 	struct glfs_fd *glfd = NULL;
 	long offset = 0;
+	bool has_lock = false;
+	bool closefd = false;
 	struct dirent *pde = NULL;
 	struct glusterfs_export *glfs_export =
 	    container_of(op_ctx->fsal_export, struct glusterfs_export, export);
-	struct glusterfs_handle *objhandle =
-	    container_of(dir_hdl, struct glusterfs_handle, handle);
 
 #ifdef USE_GLUSTER_XREADDIRPLUS
 	struct glfs_object *glhandle = NULL;
@@ -206,20 +219,15 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	now(&s_time);
 #endif
 
-	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-			  &op_ctx->creds->caller_gid,
-			  op_ctx->creds->caller_glen,
-			  op_ctx->creds->caller_garray,
-			  op_ctx->client->addr.addr,
-			  op_ctx->client->addr.len);
+	/* Get a usable file descriptor */
+	status = find_fd(&my_fd, dir_hdl, true, NULL, FSAL_O_ANY,
+			 &has_lock, &closefd, false);
+	if (FSAL_IS_ERROR(status))
+		return status;
 
-	/** @todo : Can we use globalfd instead */
-	glfd = glfs_h_opendir(glfs_export->gl_fs->fs, objhandle->glhandle);
-
-	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
-
+	glfd = my_fd.glfd;
 	if (glfd == NULL)
-		return gluster2fsal_error(errno);
+		return gluster2fsal_error(EINVAL);
 
 	if (whence != NULL)
 		offset = *whence;
@@ -320,16 +328,11 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	if (xstat)
 		glfs_free(xstat);
 #endif
-	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
-			  &op_ctx->creds->caller_gid,
-			  op_ctx->creds->caller_glen,
-			  op_ctx->creds->caller_garray,
-			  op_ctx->client->addr.addr,
-			  op_ctx->client->addr.len);
+	if (closefd)
+		glusterfs_close_my_fd(&my_fd);
+	if (has_lock)
+		PTHREAD_RWLOCK_unlock(&dir_hdl->obj_lock);
 
-	rc = glfs_closedir(glfd);
-
-	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
 	if (rc < 0)
 		status = gluster2fsal_error(errno);
 #ifdef GLTIMING
@@ -1025,8 +1028,12 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 			  op_ctx->client->addr.addr,
 			  op_ctx->client->addr.len);
 
-	glfd = glfs_h_open(glfs_export->gl_fs->fs, objhandle->glhandle,
-			   posix_flags);
+	if (my_fd->is_dir)
+		glfd = glfs_h_opendir(glfs_export->gl_fs->fs,
+				      objhandle->glhandle);
+	else
+		glfd = glfs_h_open(glfs_export->gl_fs->fs, objhandle->glhandle,
+				   posix_flags);
 
 	/* restore credentials */
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
@@ -1100,7 +1107,10 @@ fsal_status_t glusterfs_close_my_fd(struct glusterfs_fd *my_fd)
 				  NULL, 0);
 #endif
 
-		rc = glfs_close(my_fd->glfd);
+		if (my_fd->is_dir)
+			rc = glfs_closedir(my_fd->glfd);
+		else
+			rc = glfs_close(my_fd->glfd);
 
 		/* restore credentials */
 		SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
@@ -1149,7 +1159,7 @@ static fsal_status_t file_close(struct fsal_obj_handle *obj_hdl)
 	now(&s_time);
 #endif
 
-	assert(obj_hdl->type == REGULAR_FILE);
+	assert(obj_hdl->type == REGULAR_FILE || obj_hdl->type == DIRECTORY);
 
 	if (objhandle->globalfd.openflags == FSAL_O_CLOSED)
 		return fsalstat(ERR_FSAL_NOT_OPENED, 0);
@@ -1185,15 +1195,18 @@ fsal_status_t glusterfs_open_func(struct fsal_obj_handle *obj_hdl,
 				  fsal_openflags_t openflags,
 				  struct fsal_fd *fd)
 {
+	struct glusterfs_fd *glfd = (struct glusterfs_fd *)fd;
 	struct glusterfs_handle *myself;
 	int posix_flags = 0;
 
 	myself = container_of(obj_hdl, struct glusterfs_handle, handle);
 
+	if (obj_hdl->type == DIRECTORY)
+		glfd->is_dir = true;
+
 	fsal2posix_openflags(openflags, &posix_flags);
 
-	return glusterfs_open_my_fd(myself, openflags, posix_flags,
-				   (struct glusterfs_fd *)fd);
+	return glusterfs_open_my_fd(myself, openflags, posix_flags, glfd);
 }
 
 /**
@@ -1233,8 +1246,8 @@ fsal_status_t find_fd(struct glusterfs_fd *my_fd,
 
 	myself = container_of(obj_hdl, struct glusterfs_handle, handle);
 
-	/* Handle only regular files */
-	if (obj_hdl->type != REGULAR_FILE)
+	/* Handle only regular files or directories */
+	if (obj_hdl->type != REGULAR_FILE && obj_hdl->type != DIRECTORY)
 		return fsalstat(posix2fsal_error(EINVAL), EINVAL);
 	status = fsal_find_fd((struct fsal_fd **)&tmp2_fd, obj_hdl,
 				(struct fsal_fd *)&myself->globalfd,
@@ -1264,6 +1277,7 @@ fsal_status_t find_fd(struct glusterfs_fd *my_fd,
 		my_fd->creds.caller_garray = tmp2_fd->creds.caller_garray;
 	}
 
+	my_fd->is_dir = tmp2_fd->is_dir;
 	my_fd->openflags = tmp2_fd->openflags;
 	my_fd->creds.caller_uid = tmp2_fd->creds.caller_uid;
 	my_fd->creds.caller_gid = tmp2_fd->creds.caller_gid;
