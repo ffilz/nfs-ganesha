@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da0cbad4_4bb613f8",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-11-07T14:41:29Z",
+      "side": 1,
+      "message": "Since (unlike librt) this is an optional library, it\u0027s probably worth putting code in to check if it wasn\u0027t found, and print a useful message.",
+      "revId": "7862997ddbae6e864b3298d26b0817a0d4b432e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
