@@ -16,6 +16,24 @@
       "revId": "19c3f6c3772886b4c0d6f11bd101f8ff9ab215c0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbb6dec7_935f5914",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-11-08T14:46:30Z",
+      "side": 1,
+      "message": "It converts it from a bit-flag into a boolean.  Probably not strictly necessary, but...",
+      "parentUuid": "b69f78c3_5bdfe06f",
+      "revId": "19c3f6c3772886b4c0d6f11bd101f8ff9ab215c0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
