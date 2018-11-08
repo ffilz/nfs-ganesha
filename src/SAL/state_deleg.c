@@ -505,22 +505,27 @@ bool state_deleg_conflict(struct fsal_obj_handle *obj, bool write)
 	if (obj->type != REGULAR_FILE)
 		return false;
 
-	deleg_stats = &obj->state_hdl->file.fdeleg_stats;
-	if (deleg_stats->fds_curr_delegations > 0
-	    && ((deleg_stats->fds_deleg_type == OPEN_DELEGATE_READ
-		 && write)
-		|| (deleg_stats->fds_deleg_type == OPEN_DELEGATE_WRITE))
-	    ) {
-		LogDebug(COMPONENT_STATE,
-			 "While trying to perform a %s op, found a conflicting %s delegation",
-			 write ? "write" : "read",
-			 (deleg_stats->fds_deleg_type
-			  == OPEN_DELEGATE_WRITE) ? "WRITE" : "READ");
-		if (async_delegrecall(general_fridge, obj) != 0)
-			LogCrit(COMPONENT_STATE,
-				"Failed to start thread to recall delegation from conflicting operation.");
-		return true;
-	}
+        deleg_stats = &obj->state_hdl->file.fdeleg_stats;
+        if (deleg_stats->fds_curr_delegations > 0) {
+                switch (deleg_stats->fds_deleg_type) {
+                        case OPEN_DELEGATE_READ:
+                                if (deleg_stats->share_deny_write || !write)
+                                        return false;
+                        case OPEN_DELEGATE_WRITE:
+                                LogDebug(COMPONENT_STATE,
+                                                "While trying to perform a %s op, found a conflicting"
+                                                " %s delegation", write ? "write" : "read",
+                                                (deleg_stats->fds_deleg_type == OPEN_DELEGATE_WRITE) ?
+                                                "WRITE" : "READ");
+                                if (async_delegrecall(general_fridge, obj) != 0)
+                                        LogCrit(COMPONENT_STATE,
+                                                        "Failed to start thread to recall delegation from "
+                                                        "conflicting operation.");
+                                return true;
+                        default:
+                                break;
+                }
+        }
 	return false;
 }
 
