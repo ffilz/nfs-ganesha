@@ -511,6 +511,9 @@ bool state_deleg_conflict(struct fsal_obj_handle *obj, bool write)
 		 && write)
 		|| (deleg_stats->fds_deleg_type == OPEN_DELEGATE_WRITE))
 	    ) {
+		if (deleg_stats->fds_deleg_type == OPEN_DELEGATE_READ
+		    && deleg_stats->share_deny_write)
+			return false;
 		LogDebug(COMPONENT_STATE,
 			 "While trying to perform a %s op, found a conflicting %s delegation",
 			 write ? "write" : "read",

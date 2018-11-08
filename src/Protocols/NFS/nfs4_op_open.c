@@ -523,7 +523,8 @@ static void get_delegation(compound_data_t *data, OPEN4args *args,
 		readres->recall = prerecall;
 		get_deleg_perm(&readres->permissions, deleg_type);
 	}
-
+	ostate->file.fdeleg_stats.share_deny_write =
+		((args->share_deny & OPEN4_SHARE_DENY_WRITE) != 0);
 	if (isDebug(COMPONENT_NFS_V4_LOCK)) {
 		char str1[LOG_BUFF_LEN / 2] = "\0";
 		char str2[LOG_BUFF_LEN / 2] = "\0";
