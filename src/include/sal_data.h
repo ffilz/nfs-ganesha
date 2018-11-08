@@ -870,6 +870,8 @@ struct file_deleg_stats {
 	uint32_t fds_num_opens;         /* total num of opens so far. */
 	time_t fds_first_open;          /* time that we started recording
 					   num_opens */
+	bool share_deny_write;		/* mentions write denied during
+					   open call for read*/
 };
 
 /**
