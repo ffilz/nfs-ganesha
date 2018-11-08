@@ -16,6 +16,23 @@
       "revId": "51abf5a752961e8a7ad88c1fc50fb6213008cc22",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbb248bb_27b212de",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-11-08T15:48:34Z",
+      "side": 1,
+      "message": "I don\u0027t see anything wrong with this right offhand, but I see this as more of an optimization than something that fixes a bug. If we know that there is a conflicting delegation then we should certainly return DELAY here.\n\nWhat if this returns false though? I don\u0027t see anything that prevents another thread from handing out a conflicting delegation after you pass this point but before the actual operation.\n\nMaybe we ought to consider something like that. knfsd has a Bloom filter that prevents handing out a delegation on an inode for several seconds after there has been a conflict. We could do something similar here, but we have the freedom to grow our internal handle struct. We don\u0027t need a bloom filter here. We could just track a timestamp per fh.\n\nNote though that all of this sidesteps the fact that none of this helps with a clustered filesystem. What if a client of another cluster node holds the delegation? All of this still has to be handled by the lower filesystem in clustered configurations, regardless.",
+      "revId": "51abf5a752961e8a7ad88c1fc50fb6213008cc22",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
