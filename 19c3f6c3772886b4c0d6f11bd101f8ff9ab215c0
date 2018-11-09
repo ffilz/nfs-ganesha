@@ -34,6 +34,23 @@
       "revId": "19c3f6c3772886b4c0d6f11bd101f8ff9ab215c0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebebae24_c654e9bb",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-11-09T18:56:42Z",
+      "side": 1,
+      "message": "What if client re-opens same file (open_upgrade/downgrade) and clears this share_mode_bit. This function doesnt get called in the second open if clients sets CLAIM_DELEGATE_CUR and hence we will not clear fdeleg_stats.share_deny_write field. \n\nMay be its good to have a reference to open_state in fdeleg_stats instead and read from state_data.share which will fetch updated share* flags anytime. Thoughts?",
+      "revId": "19c3f6c3772886b4c0d6f11bd101f8ff9ab215c0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
