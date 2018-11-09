@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed794e5e_b1e6aaea",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-11-09T16:17:25Z",
+      "side": 1,
+      "message": "Hmm, I think we need to do something if assert is compiled as a no-op, otherwise, the code will continue with an invalid assumption. Perhaps this should be a LogFatal instead of an assert?",
+      "revId": "ff8204b032af65060a9150e0ad6445a41d6b686c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
