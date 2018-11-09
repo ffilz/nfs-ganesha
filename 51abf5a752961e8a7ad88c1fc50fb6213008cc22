@@ -33,6 +33,24 @@
       "revId": "51abf5a752961e8a7ad88c1fc50fb6213008cc22",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12ff2d39_04fc8bbd",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 1004330
+      },
+      "writtenOn": "2018-11-09T06:15:01Z",
+      "side": 1,
+      "message": "I am bit curious about this case, here client thinks it has delegation and performs i/o\u0027s on that file, even though file is removed from the backend?",
+      "parentUuid": "bbb248bb_27b212de",
+      "revId": "51abf5a752961e8a7ad88c1fc50fb6213008cc22",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
