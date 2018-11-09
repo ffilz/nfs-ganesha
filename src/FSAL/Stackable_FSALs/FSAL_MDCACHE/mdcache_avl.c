@@ -514,20 +514,17 @@ bool mdcache_avl_lookup_ck(mdcache_entry_t *entry, uint64_t ck,
 				     avl_dirent_ck_cmpf);
 
 	if (node) {
-		struct dir_chunk *chunk;
 		/* This is the entry we are looking for... This function is
 		 * passed the cookie of the next entry of interest in the
 		 * directory.
 		 */
 		ent = avltree_container_of(node, mdcache_dir_entry_t, node_ck);
-		chunk = ent->chunk;
-		if (chunk == NULL) {
-			/* This entry doesn't belong to a chunk, something
-			 * is horribly wrong.
-			 */
-			assert(!chunk);
-			return false;
-		}
+
+		/* This entry doesn't belong to a chunk, something
+		 * is horribly wrong.
+		 */
+		assert(ent->chunk != NULL);
+
 		*dirent = ent;
 		return true;
 	}
