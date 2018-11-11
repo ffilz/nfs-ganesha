@@ -16,6 +16,24 @@
       "revId": "ff8204b032af65060a9150e0ad6445a41d6b686c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7dce6fa2_6174d5be",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2018-11-11T02:42:59Z",
+      "side": 1,
+      "message": "LogFatal prints a message and exit with -2.\nComparing with the message, I think a coredump is better which can be analyzed by gdb.",
+      "parentUuid": "ed794e5e_b1e6aaea",
+      "revId": "ff8204b032af65060a9150e0ad6445a41d6b686c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
