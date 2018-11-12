@@ -52,6 +52,24 @@
       "revId": "ff8204b032af65060a9150e0ad6445a41d6b686c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8d948fc_24914ae7",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-11-12T15:50:26Z",
+      "side": 1,
+      "message": "Yea, that\u0027s my thought.\n\nOne can also do:\nassert(xxx)\nLogFatal(yyy)\n\nAt one time I was working on a LogAbort but never completed it. The idea would be to log a message, and abort. Always compiled so avoiding the debug only nature of assert and also putting a reasonable message in the log file before dropping core.",
+      "parentUuid": "ca4c55de_24098305",
+      "revId": "ff8204b032af65060a9150e0ad6445a41d6b686c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
