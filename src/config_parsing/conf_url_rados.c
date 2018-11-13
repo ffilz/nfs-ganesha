@@ -209,7 +209,7 @@ static int cu_rados_url_fetch(const char *url, FILE **f, char **fbuf)
 	regmatch_t match[3];
 	size_t streamsz;
 	uint64_t off1 = 0;
-	uint64_t off2 = 0;
+	uint64_t off2;
 	int ret;
 
 	if (!initialized) {
@@ -277,6 +277,7 @@ static int cu_rados_url_fetch(const char *url, FILE **f, char **fbuf)
 			streamsz = 1024;
 			stream = open_memstream(&streambuf, &streamsz);
 		}
+		off2 = 0;
 		do {
 			wrt = fwrite(buf+off2, nread, 1, stream);
 			if (wrt > 0) {
