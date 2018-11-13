@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26c5bebd_05a08c60",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-11-13T15:04:49Z",
+      "side": 1,
+      "message": "Why not declare off2 here to clarify the scope of it is local to a loop iteration?",
+      "revId": "151972b09e1305fca6eea46cad9c4dfbdba44486",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "164ce7a7_17f23c5c",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-11-13T15:04:49Z",
+      "side": 1,
+      "message": "hmm, shouldn\u0027t this have an \u0026\u0026 nread \u003e 0? Otherwise we will loop around and do an fwrite of 0 bytes at the end.",
+      "revId": "151972b09e1305fca6eea46cad9c4dfbdba44486",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
