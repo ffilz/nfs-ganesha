@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b2f743f_36363022",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-11-14T08:51:12Z",
+      "side": 1,
+      "message": "How about?\n\n\"\"\"\nRemove idmap entry only if it is present in uid_tree\n\nA user\u0027s idmap entry may not be present in uid_tree especially with krb5 authentication. Avoid trying to remove an entry that doesn\u0027t exist in uid_tree leading to a crash while purging the idmap cache.\n\"\"\"",
+      "revId": "edc7d67bfe7779e2ea9eef36eadf63e3fff13ba3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
