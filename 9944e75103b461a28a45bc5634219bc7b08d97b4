@@ -16,6 +16,24 @@
       "revId": "9944e75103b461a28a45bc5634219bc7b08d97b4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5831ce4_1dec15c7",
+        "filename": "src/doc/man/ganesha-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-11-16T18:40:20Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll add that into the doc.\n\nWhile the URL parsing code seems to allow you to leave out the pool, doing so gives you a segfault (at least in my testing). I don\u0027t think that has ever worked. We should probably just disallow any single-component URLs. I may spin up an extra patch for that.",
+      "parentUuid": "0b0822c5_ce123b20",
+      "revId": "9944e75103b461a28a45bc5634219bc7b08d97b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
