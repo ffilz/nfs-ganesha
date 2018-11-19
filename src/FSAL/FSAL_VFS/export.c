@@ -530,3 +530,59 @@ err_free:
 	gsh_free(myself);	/* elvis has left the building */
 	return fsal_status;
 }
+
+/* create_export
+ * Create an export point and return a handle to it to be kept
+ * in the export list.
+ * First lookup the fsal, then create the export and then put the fsal back.
+ * returns the export with one reference taken.
+ */
+
+fsal_status_t vfs_update_export(struct fsal_module *fsal_hdl,
+				void *parse_node,
+				struct config_error_type *err_type,
+				struct fsal_export *original,
+				struct fsal_module *updated_super)
+{
+	struct vfs_fsal_export myself;
+	int retval = 0;
+	bool invalid = false;
+	struct vfs_fsal_export *orig =
+		container_of(original, struct vfs_fsal_export, export);
+	fsal_status_t status;
+
+	/* Check for changes in stacking by calling default update_export. */
+	status = update_export(fsal_hdl, parse_node, err_type,
+			       original, updated_super);
+
+	if (FSAL_IS_ERROR(status))
+		return status;
+
+	memset(&myself, 0, sizeof(myself));
+
+	retval = load_config_from_node(parse_node,
+				       vfs_sub_export_param,
+				       &myself,
+				       true,
+				       err_type);
+
+	if (retval != 0) {
+		return posix2fsal_status(EINVAL);
+	}
+
+	if (orig->fsid_type != myself.fsid_type) {
+		LogCrit(COMPONENT_FSAL,
+			"Can not change fsid_type without restart.");
+		invalid = true;
+	}
+
+	if (orig->async_hsm_restore != myself.async_hsm_restore) {
+		LogCrit(COMPONENT_FSAL,
+			"Can not change async_hsm_restore without restart.");
+		invalid = true;
+	}
+
+	return invalid
+		? posix2fsal_status(EINVAL)
+		: fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
