@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "573dac8e_ccd7d667",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-11-20T13:49:10Z",
+      "side": 1,
+      "message": "This check is redundant with update_export()",
+      "revId": "f3a93f6c462e1f715b7b8c04612d11a99958d48a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58318454_9a0143ed",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/main.c",
         "patchSetId": 1
