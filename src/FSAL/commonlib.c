@@ -2962,7 +2962,7 @@ bool check_verifier_attrlist(struct attrlist *attrs, fsal_verifier_t verifier)
 bool fsal_common_is_referral(struct fsal_obj_handle *obj_hdl,
 			     struct attrlist *attrs, bool cache_attrs)
 {
-	if ((attrs->valid_mask & (ATTR_TYPE | ATTR_MODE)) == 0) {
+	if ((attrs->valid_mask & (ATTR_TYPE | ATTR_MODE | FATTR4_FS_LOCATIONS)) == 0) {
 		/* Required attributes are not available, need to fetch them */
 		fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
 
@@ -2981,6 +2981,9 @@ bool fsal_common_is_referral(struct fsal_obj_handle *obj_hdl,
 		return false;
 
 	if (!is_sticky_bit_set(obj_hdl, attrs))
+		return false;
+
+	if (!attrs->fs_locations)
 		return false;
 
 	LogDebug(COMPONENT_FSAL, "Referral found for handle %p", obj_hdl);
