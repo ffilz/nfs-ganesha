@@ -16,6 +16,24 @@
       "revId": "d334548db184690283e3d34d8d23d37efc1764c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "455c5e10_c998d006",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2965,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-11-21T15:33:32Z",
+      "side": 1,
+      "message": "You need to fix the long line here.\n\nHave you installed the commit hooks per src/COMPILING_HOWTO.txt\n\nThere is a hook to run checkpatch.pl and a hook to add Gerrit ChangeID",
+      "parentUuid": "6969ec81_422868d1",
+      "revId": "d334548db184690283e3d34d8d23d37efc1764c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
