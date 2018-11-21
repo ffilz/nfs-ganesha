@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6969ec81_422868d1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2965,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-11-21T13:23:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif ((attrs-\u003evalid_mask \u0026 (ATTR_TYPE | ATTR_MODE | FATTR4_FS_LOCATIONS)) \u003d\u003d 0) {",
+      "revId": "d334548db184690283e3d34d8d23d37efc1764c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
