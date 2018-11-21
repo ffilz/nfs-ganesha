@@ -34,6 +34,41 @@
       "revId": "d334548db184690283e3d34d8d23d37efc1764c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7e1da43_389c2ea4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2965,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-11-21T15:52:18Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand here. In what situations would you have fs_locations but not type or mode?",
+      "parentUuid": "455c5e10_c998d006",
+      "revId": "d334548db184690283e3d34d8d23d37efc1764c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e144d45c_97471a67",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2987,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2018-11-21T15:52:18Z",
+      "side": 1,
+      "message": "This seems like it introduces a chicken-and-egg situation.\n\nThe whole point of this function is to see if the thing is a directory with the correct mode-bit combo. If it matches then the caller generally tries to fetch fs_locations xattr (or whatever, depending on FSAL).\n\nWith this change I don\u0027t see how you\u0027d populate -\u003efs_locations in the first place, especially with something like FSAL_VFS.",
+      "revId": "d334548db184690283e3d34d8d23d37efc1764c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
