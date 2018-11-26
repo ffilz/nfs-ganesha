@@ -1444,7 +1444,12 @@ static void delegrecall_task(void *ctx)
 	op_ctx->ctx_export = export;
 	op_ctx->fsal_export = export->fsal_export;
 
+	/* state_del_locked is called from deleg_revoke, take the lock. */
+	PTHREAD_RWLOCK_wrlock(&obj->state_hdl->state_lock);
+
 	delegrecall_one(obj, state, deleg_ctx);
+
+	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 	/* Release the obj ref and export ref. */
 	obj->obj_ops->put_ref(obj);
