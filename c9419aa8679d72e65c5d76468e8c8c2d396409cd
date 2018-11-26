@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8903d85_60202b03",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-11-26T18:14:28Z",
+      "side": 1,
+      "message": "Maybe even just a LogInfo?\n\nWhy is this failing? It might be better to understand before just blindly not reporting as an error, on the other hand, LogInfo or LogEvent should be sufficient for sysadmin to diagnose why a filesystem being exported isn\u0027t showing up.",
+      "revId": "c9419aa8679d72e65c5d76468e8c8c2d396409cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
