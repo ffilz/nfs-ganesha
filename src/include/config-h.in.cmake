@@ -79,7 +79,10 @@
  */
 #define DEFAULT_NFS_CCACHE_DIR "@SYSSTATEDIR@/run/ganesha"
 
-/* We're LGPL'd */
-#define _LGPL_SOURCE 1
+/*
+ * We're LGPL'd, but defining this is currently problematic when both lttng
+ * and liburcu are used together. See: https://bugs.lttng.org/issues/1156
+ */
+#undef _LGPL_SOURCE
 
 #endif /* CONFIG_H */
