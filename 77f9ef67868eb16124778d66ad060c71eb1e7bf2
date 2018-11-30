@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df5d59d0_860e7121",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-11-30T14:25:17Z",
+      "side": 1,
+      "message": "How about:\nif(LINUX)\n  add_definitions(-DHAS_DOFF)\nelsif(FREEBSD)\n...\n\nThat way, it\u0027s clear that Linux has d_off support.",
+      "revId": "77f9ef67868eb16124778d66ad060c71eb1e7bf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
