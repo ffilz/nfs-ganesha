@@ -34,6 +34,24 @@
       "revId": "4b5e0af6a0e4c4bf168f392670155bc01517ec54",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b30a4b3_ab008b21",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-07T18:51:50Z",
+      "side": 1,
+      "message": "I\u0027ll take this as is. In reality anyone actually trying to run Ganesha on another OS has a lot to do to get it working. Looking everywhere in the code and cmake files for OS specific stuff will reveal places that should be looked at before even attempting to compile and run...",
+      "parentUuid": "ba52c3ef_7fb9f107",
+      "revId": "4b5e0af6a0e4c4bf168f392670155bc01517ec54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
