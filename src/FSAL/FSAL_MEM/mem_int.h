@@ -34,6 +34,13 @@
 
 struct mem_fsal_obj_handle;
 
+enum async_types {
+	MEM_INLINE,
+	MEM_RANDOM_OR_INLINE,
+	MEM_RANDOM,
+	MEM_FIXED,
+};
+
 /**
  * MEM internal export
  */
@@ -50,6 +57,12 @@ struct mem_fsal_export {
 	pthread_rwlock_t mfe_exp_lock;
 	/** List of all the objects in this export */
 	struct glist_head mfe_objs;
+	/** Async delay */
+	uint32_t async_delay;
+	/** Async Stall delay */
+	uint32_t async_stall_delay;
+	/** Type of async */
+	enum async_types async_type;
 };
 
 fsal_status_t mem_lookup_path(struct fsal_export *exp_hdl,
@@ -181,8 +194,12 @@ struct mem_fsal_module {
 	uint32_t up_interval;
 	/** Next unused inode */
 	uint64_t next_inode;
+	/** Config - number of async threads */
+	uint32_t async_threads;
 };
 
+/* ASYNC testing */
+extern struct fridgethr *mem_async_fridge;
 
 /* UP testing */
 fsal_status_t mem_up_pkginit(void);
