@@ -34,6 +34,42 @@
       "revId": "c6950b430fb8a87728f01eb5f7b0640d84d34e19",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9313274c_337ed6a9",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-07T18:44:56Z",
+      "side": 1,
+      "message": "The SAL code only uses ctx_export and fsal_export",
+      "parentUuid": "79e23f14_bf52bd04",
+      "revId": "c6950b430fb8a87728f01eb5f7b0640d84d34e19",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8bb627b_3a182d69",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-07T18:44:56Z",
+      "side": 1,
+      "message": "Hmm, is this true for FSAL_GLUSTER? A lock_grant racing with a lock cancel can result in SAL making a call back into the FSAL to release the granted lock (that is no longer wanted by the client).",
+      "parentUuid": "eadb7f3f_8db01322",
+      "revId": "c6950b430fb8a87728f01eb5f7b0640d84d34e19",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
