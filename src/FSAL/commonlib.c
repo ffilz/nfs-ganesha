@@ -1087,6 +1087,7 @@ static void posix_create_file_system(struct mntent *mnt)
 
 	fs->pathlen = strlen(mnt->mnt_dir);
 
+fsid_retry_insert:
 	node = avltree_insert(&fs->avl_fsid, &avl_fsid);
 
 	if (node != NULL) {
@@ -1096,6 +1097,20 @@ static void posix_create_file_system(struct mntent *mnt)
 		fs1 = avltree_container_of(node,
 					   struct fsal_filesystem,
 					   avl_fsid);
+
+		if (!fs1->exported) {
+			LogDebug(COMPONENT_FSAL,
+				 "Removing unused duplicate %s namelen=%u "
+				 "fsid=0x%016"PRIx64".0x%016"PRIx64
+				 " %"PRIu64".%"PRIu64, fs1->path,
+				 fs1->namelen, fs1->fsid.major,
+				 fs1->fsid.minor, fs1->fsid.major,
+				 fs1->fsid.minor);
+
+			release_posix_file_system(fs1);
+			goto fsid_retry_insert;
+		}
+
 
 		LogDebug(COMPONENT_FSAL,
 			 "Skipped duplicate %s namelen=%d fsid=0x%016"PRIx64
@@ -1123,6 +1138,7 @@ static void posix_create_file_system(struct mntent *mnt)
 
 	fs->in_fsid_avl = true;
 
+dev_retry_insert:
 	node = avltree_insert(&fs->avl_dev, &avl_dev);
 
 	if (node != NULL) {
@@ -1132,6 +1148,19 @@ static void posix_create_file_system(struct mntent *mnt)
 		fs1 = avltree_container_of(node,
 					   struct fsal_filesystem,
 					   avl_dev);
+
+		if (!fs1->exported) {
+			LogDebug(COMPONENT_FSAL,
+				 "Removing unused duplicate %s namelen=%u "
+				 "fsid=0x%016"PRIx64".0x%016"PRIx64
+				 " %"PRIu64".%"PRIu64, fs1->path,
+				 fs1->namelen, fs1->fsid.major,
+				 fs1->fsid.minor, fs1->fsid.major,
+				 fs1->fsid.minor);
+
+			release_posix_file_system(fs1);
+			goto dev_retry_insert;
+		}
 
 		LogDebug(COMPONENT_FSAL,
 			 "Skipped duplicate %s namelen=%d dev=%"

@@ -329,6 +329,14 @@ int vfs_claim_filesystem(struct fsal_filesystem *fs, struct fsal_export *exp)
 	int retval;
 	struct vfs_fsal_export *myself;
 	struct vfs_filesystem_export_map *map;
+	char *found_fs_path = strstr(op_ctx->ctx_export->fullpath, fs->path);
+
+	if (found_fs_path != op_ctx->ctx_export->fullpath) {
+		LogDebug(COMPONENT_FSAL, "Ignoring the file system because the "
+			 "paths don't match: FS path: %s, export path: %s",
+			 fs->path, op_ctx->ctx_export->fullpath);
+		return EAGAIN;
+	}
 
 	myself = EXPORT_VFS_FROM_FSAL(exp);
 
