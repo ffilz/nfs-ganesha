@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df91edc1_e4419825",
+        "filename": "src/scripts/ganeshactl/knfs2ganesha-exports.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-10T15:27:49Z",
+      "side": 1,
+      "message": "Should be spit out some kind of warning that these options are being dropped?",
+      "revId": "f34d4b64e4c10a7b4df9940aa5d2c80ba864c177",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41cf745a_da473941",
+        "filename": "src/scripts/ganeshactl/knfs2ganesha-exports.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-10T15:27:49Z",
+      "side": 1,
+      "message": "This one too, I\u0027m not sure for this one if there are ever a good reason to convert to filesystem_id",
+      "revId": "f34d4b64e4c10a7b4df9940aa5d2c80ba864c177",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
