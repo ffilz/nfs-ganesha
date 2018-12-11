@@ -16,6 +16,24 @@
       "revId": "c9419aa8679d72e65c5d76468e8c8c2d396409cd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8aba02c_e33d63ca",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2018-12-11T15:27:16Z",
+      "side": 1,
+      "message": "If it looks odd, then it must be due to SELinux, right? Root can\u0027t stat but the owner can!\n\nSee this:\n# stat /run/user/1001/gvfs \nstat: cannot stat ‘/run/user/1001/gvfs’: Permission denied\n\n# su - malahal -c \"stat /run/user/1001/gvfs\"\n  File: ‘/run/user/1001/gvfs’\n  Size: 0         \tBlocks: 0          IO Block: 4096   directory\nDevice: 35h/53d\tInode: 1           Links: 2\nAccess: (0500/dr-x------)  Uid: ( 1001/ malahal)   Gid: ( 1001/ malahal)\nContext: system_u:object_r:fusefs_t:s0\nAccess: 2018-12-10 11:15:27.000000000 +0530\nModify: 2018-12-10 11:15:27.000000000 +0530\nChange: 2018-12-10 11:15:27.000000000 +0530",
+      "parentUuid": "b8903d85_60202b03",
+      "revId": "c9419aa8679d72e65c5d76468e8c8c2d396409cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
