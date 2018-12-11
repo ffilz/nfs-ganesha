@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f35142fe_8aca08cf",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-12-11T14:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23085925_34ead57f",
+      "revId": "db3e945446ac7cbf046e6305c54a8467186a9551",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c66bd45f_debdd51b",
         "filename": "src/include/sal_data.h",
         "patchSetId": 1
@@ -68,6 +86,24 @@
       "revId": "db3e945446ac7cbf046e6305c54a8467186a9551",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bce11e1_2848e4a9",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2018-12-11T14:57:12Z",
+      "side": 1,
+      "message": "Even share_deny shall be used like in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/432426 for some cases.",
+      "parentUuid": "c66bd45f_debdd51b",
+      "revId": "db3e945446ac7cbf046e6305c54a8467186a9551",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
