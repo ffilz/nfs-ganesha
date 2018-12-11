@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8a19e69_02e29e75",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2018-12-11T07:29:17Z",
+      "side": 1,
+      "message": "ok",
+      "revId": "db3e945446ac7cbf046e6305c54a8467186a9551",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce676f8f_dcbce78b",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2018-12-11T07:29:17Z",
+      "side": 1,
+      "message": "do we not use stdint types (e.g., uint32_t, uint64_t) for variables used as bitsets?",
+      "revId": "db3e945446ac7cbf046e6305c54a8467186a9551",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
