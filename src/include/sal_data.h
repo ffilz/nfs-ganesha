@@ -329,6 +329,8 @@ struct state_deleg {
 	open_delegation_type4 sd_type;
 	enum deleg_state sd_state;
 	struct cf_deleg_stats sd_clfile_stats;  /* client specific */
+	unsigned int share_access;	/*< The NFSv4 Share Access state */
+	unsigned int share_deny;	/*< The NFSv4 Share Deny state */
 };
 
 /**
