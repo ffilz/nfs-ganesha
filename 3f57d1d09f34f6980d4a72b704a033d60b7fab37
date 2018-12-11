@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5ef23ff8_593b4140",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1010034
+      },
+      "writtenOn": "2018-12-11T05:43:49Z",
+      "side": 1,
+      "message": "But, do we call claim_filesystem for an export path \u003d /export/fs1/some?\n\nFor export paths, /export/fs1, /export/fs1/some, /export/fs1/some/path the claim_filesystem will be called with /export/fs1 and in this case the condition is not met because it is subpath of the export path.\n\nFor export path /export/fs1/some/path/fs2, claim filesystem will be called with /export/fs1/som/path/fs2 and again the condition will not be true because it is subpath of export path.\n\nSo, in all these cases we will proceed if we have the correct file system. Isn\u0027t it?",
+      "parentUuid": "daa5fb5a_bfcd8a8f",
+      "revId": "3f57d1d09f34f6980d4a72b704a033d60b7fab37",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb432758_f49a898b",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-12-10T18:22:47Z",
       "side": 1,
       "message": "Hmm, so this just fully replaces a filesystem with the last one found. I\u0027m still not sure about that.",
+      "revId": "3f57d1d09f34f6980d4a72b704a033d60b7fab37",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0bd58e2_6c067f6a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1010034
+      },
+      "writtenOn": "2018-12-11T05:43:49Z",
+      "side": 1,
+      "message": "Because we find a duplicate fsid/device id we can assume that the previous file system no longer exists.",
+      "parentUuid": "cb432758_f49a898b",
       "revId": "3f57d1d09f34f6980d4a72b704a033d60b7fab37",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
