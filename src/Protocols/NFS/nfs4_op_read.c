@@ -296,6 +296,7 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 	state_t *state_open = NULL;
 	struct fsal_obj_handle *obj = NULL;
 	bool anonymous_started = false;
+	bool read_started = false;
 	state_owner_t *owner = NULL;
 	bool bypass = false;
 	struct nfs4_read_data read_data;
@@ -566,12 +567,26 @@ static int nfs4_read(struct nfs_argop4 *op, compound_data_t *data,
 	read_data.res_READ4 = res_READ4;
 	read_data.owner = owner;
 
+	read_started = true;
+
 	/* Do the actual read */
 	obj->obj_ops->read2(obj, bypass, nfs4_read_cb, read_arg, &read_data);
 
  out:
 	if (state_open != NULL)
 		dec_state_t_ref(state_open);
+
+	if (!read_started) {
+		/* Need to clean up */
+		if (owner != NULL) {
+			op_ctx->clientid = NULL;
+			dec_state_owner_ref(owner);
+		}
+		if (state_found != NULL) {
+			dec_state_t_ref(state_found);
+		}
+
+	}
 
 	return res_READ4->status;
 }				/* nfs4_op_read */

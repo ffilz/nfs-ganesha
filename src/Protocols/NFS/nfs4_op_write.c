@@ -216,6 +216,7 @@ static int nfs4_write(struct nfs_argop4 *op, compound_data_t *data,
 	fsal_status_t fsal_status = {0, 0};
 	struct fsal_obj_handle *obj = NULL;
 	bool anonymous_started = false;
+	bool write_started = false;
 	struct gsh_buffdesc verf_desc;
 	state_owner_t *owner = NULL;
 	uint64_t MaxWrite =
@@ -455,6 +456,8 @@ static int nfs4_write(struct nfs_argop4 *op, compound_data_t *data,
 	write_data.res_WRITE4 = res_WRITE4;
 	write_data.owner = owner;
 
+	write_started = true;
+
 	/* Do the actual write */
 	obj->obj_ops->write2(obj, false, nfs4_write_cb, write_arg, &write_data);
 
@@ -462,6 +465,18 @@ static int nfs4_write(struct nfs_argop4 *op, compound_data_t *data,
 
 	if (state_open != NULL)
 		dec_state_t_ref(state_open);
+
+	if (!write_started) {
+		/* Need to clean up */
+		if (owner != NULL) {
+			op_ctx->clientid = NULL;
+			dec_state_owner_ref(owner);
+		}
+		if (state_found != NULL) {
+			dec_state_t_ref(state_found);
+		}
+
+	}
 
 	return res_WRITE4->status;
 }				/* nfs4_op_write */
