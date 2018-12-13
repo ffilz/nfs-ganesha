@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcb3f715_05f45b11",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-13T00:49:29Z",
+      "side": 1,
+      "message": "So here, we have state_found !\u003d NULL but we jump to out, bypassing the call to write2 which means nfs4_write_cb won\u0027t be called, which means we won\u0027t release the reference to state_found....",
+      "revId": "f12bcbe38deeafe3f6dfd0b0d9a59256bfca8165",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "270bfb34_2550879a",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-13T00:49:29Z",
+      "side": 1,
+      "message": "And again here...",
+      "revId": "f12bcbe38deeafe3f6dfd0b0d9a59256bfca8165",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c41f8da4_84b13568",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-13T00:49:29Z",
+      "side": 1,
+      "message": "And again here....",
+      "revId": "f12bcbe38deeafe3f6dfd0b0d9a59256bfca8165",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a553d454_cec1ed26",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-13T00:49:29Z",
+      "side": 1,
+      "message": "And again here...",
+      "revId": "f12bcbe38deeafe3f6dfd0b0d9a59256bfca8165",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e53e1af_25d6e2c6",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-13T00:49:29Z",
+      "side": 1,
+      "message": "This ref is ok because once we get get here we WILL call write2 which means nfs4_write_cb WILL be called.",
+      "revId": "f12bcbe38deeafe3f6dfd0b0d9a59256bfca8165",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
