@@ -34,6 +34,24 @@
       "revId": "ad8b07445f2fe1d6421fae53f2c75d03a5a05e45",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b11a5bd_52338233",
+        "filename": "src/FSAL/FSAL_MEM/mem_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2018-12-14T17:57:43Z",
+      "side": 1,
+      "message": "What I meant was, if you choose 10, you\u0027re creating all 10 threads immediately, rather than creating 1 and allowing it to grow as necessary.  I was suggesting that thr_min should always be 1 (since you check for async_threads\u003d\u003d0 above)",
+      "parentUuid": "035d50b7_805aff81",
+      "revId": "ad8b07445f2fe1d6421fae53f2c75d03a5a05e45",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
