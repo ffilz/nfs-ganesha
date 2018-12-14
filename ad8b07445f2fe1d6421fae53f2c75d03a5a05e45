@@ -16,6 +16,24 @@
       "revId": "ad8b07445f2fe1d6421fae53f2c75d03a5a05e45",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "035d50b7_805aff81",
+        "filename": "src/FSAL/FSAL_MEM/mem_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2018-12-14T15:49:39Z",
+      "side": 1,
+      "message": "If you aren\u0027t using the async, no need for a thread\nI should actually check and async type parm should be INLINE if threads is 0...",
+      "parentUuid": "b7603b0d_f9ae1ed5",
+      "revId": "ad8b07445f2fe1d6421fae53f2c75d03a5a05e45",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
