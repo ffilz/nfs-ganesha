@@ -411,27 +411,24 @@ Summary: The NFS-GANESHA SELINUX targeted policy
 Group: Applications/System
 BuildArch:	noarch
 Requires:	nfs-ganesha = %{version}-%{release}
-BuildRequires:        selinux-policy-devel
-Requires(post):       selinux-policy-base >= 3.14.1
-Requires(post):       libselinux-utils
-Requires(post):       policycoreutils
+%selinux_requires
 
 %description selinux
 This package contains an selinux policy for running ganesha.nfsd
 
 %post selinux
-%selinux_modules_install -s %{selinuxtype} %{_datadir}/selinux/packages/ganesha.pp.bz2
+%selinux_modules_install %{_datadir}/selinux/packages/ganesha.pp.bz2
 
 %pre selinux
-%selinux_relabel_pre -s %{selinuxtype}
+%selinux_relabel_pre
 
 %postun selinux
 if [ $1 -eq 0 ]; then
-    %selinux_modules_uninstall -s contrib ganesha
+    %selinux_modules_uninstall ganesha
 fi
 
 %posttrans
-%selinux_relabel_post -s contrib
+%selinux_relabel_post
 %endif
 
 # NTIRPC (if built-in)
