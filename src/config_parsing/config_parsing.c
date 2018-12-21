@@ -1221,10 +1221,12 @@ static int do_block_load(struct config_node *blk,
 				break;
 			case CONFIG_BLOCK:
 				if (!proc_block(node, item, param_addr,
-						err_type))
+						err_type)) {
 					config_proc_error(node, err_type,
 							  "Errors processing block (%s)",
 							  node->u.nterm.name);
+					errors = ++err_type->errors;
+				}
 				break;
 			case CONFIG_PROC:
 				do_proc(node, item, param_addr,	err_type);
