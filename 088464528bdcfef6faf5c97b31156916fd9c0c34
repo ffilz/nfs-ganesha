@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb3e6a74_0710a1f1",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-12-22T21:27:17Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tREAD4res * const res_READ4 \u003d \u0026resp-\u003enfs_resop4_u.opread;\n+\tREAD_PLUS4res * const res_RPLUS \u003d \u0026resp-\u003enfs_resop4_u.opread_plus;",
+      "revId": "088464528bdcfef6faf5c97b31156916fd9c0c34",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
