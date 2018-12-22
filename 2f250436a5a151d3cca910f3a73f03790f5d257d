@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a98d20ec_46716480",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2018-12-22T21:01:14Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define STATS_STATUS_REPLY      \\\n+{                               \\\n+\t.name \u003d \"nfs_status\",   \\\n+\t.type \u003d \"b(tt)\",        \\\n+\t.direction \u003d \"out\"      \\\n+},                              \\\n+{                               \\\n+\t.name \u003d \"fsal_status\",  \\\n+\t.type \u003d \"b(tt)\",        \\\n+\t.direction \u003d \"out\"      \\\n+},\t\t\t\t\\\n+{                               \\\n+\t.name \u003d \"v3_full_status\",  \\\n+\t.type \u003d \"b(tt)\",        \\\n+\t.direction \u003d \"out\"      \\\n+}",
+      "revId": "2f250436a5a151d3cca910f3a73f03790f5d257d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
