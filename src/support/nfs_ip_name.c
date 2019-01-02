@@ -157,6 +157,7 @@ int nfs_ip_name_add(sockaddr_t *ipaddr, char *hostname, size_t size)
 	struct timeval tv0, tv1, dur;
 	int rc;
 	char ipstring[SOCK_NAME_MAX + 1];
+	hash_error_t hash_rc;
 
 	nfs_ip_name = gsh_malloc(sizeof(nfs_ip_name_t));
 
@@ -207,11 +208,26 @@ int nfs_ip_name_add(sockaddr_t *ipaddr, char *hostname, size_t size)
 	buffdata.addr = nfs_ip_name;
 	buffdata.len = sizeof(nfs_ip_name_t);
 
-	if (HashTable_Set(ht_ip_name, &buffkey, &buffdata) != HASHTABLE_SUCCESS)
+	/* Multiple threads may try to add the same IP/name to cache. Need to
+	 * return success if we get HASHTABLE_ERROR_KEY_ALREADY_EXISTS or
+	 * HASHTABLE_OVERWRITTEN as return status
+	 */
+	hash_rc = HashTable_Set(ht_ip_name, &buffkey, &buffdata);
+	if ((hash_rc != HASHTABLE_SUCCESS) ||
+	    (hash_rc != HASHTABLE_ERROR_KEY_ALREADY_EXISTS)) {
+		gsh_free(nfs_ip_name);
+		gsh_free(pipaddr);
 		return IP_NAME_INSERT_MALLOC_ERROR;
+	}
 
 	/* Copy the value for the caller */
 	strmaxcpy(hostname, nfs_ip_name->hostname, size);
+
+	/* We should free up allocations which are not required anymore */
+	if (hash_rc == HASHTABLE_ERROR_KEY_ALREADY_EXISTS) {
+		gsh_free(nfs_ip_name);
+		gsh_free(pipaddr);
+	}
 
 	return IP_NAME_SUCCESS;
 }				/* nfs_ip_name_add */
