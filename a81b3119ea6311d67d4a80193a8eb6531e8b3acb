@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c45ee47_b332ef79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-01-03T06:45:34Z",
+      "side": 1,
+      "message": "This is NOT really a netgroup cache. It is IP-name cache. This is used by netgroup as well as wildcard client stanzas.",
+      "revId": "a81b3119ea6311d67d4a80193a8eb6531e8b3acb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d45fc6f_ce2bc33b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-01-03T06:45:34Z",
+      "side": 1,
+      "message": "We will not get OVERWRITTEN. BTW, overwritten and already exists are mutually exclusive error codes!",
+      "revId": "a81b3119ea6311d67d4a80193a8eb6531e8b3acb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdbff00a_071bfb14",
+        "filename": "src/support/nfs_ip_name.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-01-03T06:45:34Z",
+      "side": 1,
+      "message": "You can remove OVERWRITTEN check here, but we also need to free nfs_ip_name and pipaddr that were allocated above in some cases!\n\nAlso, nfs_ip_name_remove() is buggy as it doesn\u0027t free the key and it never gets called. We could auto expire just like netgroup cache or idmapper cache. It is a bit more work though!",
+      "revId": "a81b3119ea6311d67d4a80193a8eb6531e8b3acb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
