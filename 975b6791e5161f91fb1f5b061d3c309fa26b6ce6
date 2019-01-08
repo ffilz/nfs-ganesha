@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a13df73b_5cde3899",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/main.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-08T08:43:57Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+fsal_status_t nullfs_update_export(struct fsal_module *fsal_hdl,",
+      "revId": "975b6791e5161f91fb1f5b061d3c309fa26b6ce6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
