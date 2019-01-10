@@ -38,6 +38,8 @@
 #include "syscalls.h"
 #include <sys/module.h>
 
+//#error
+
 /**
  * @brief Read system directory entries into the buffer
  *
