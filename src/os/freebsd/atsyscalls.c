@@ -34,7 +34,10 @@
 #include <sys/types.h>
 #include <sys/module.h>
 
-#if __FreeBSD_cc_version  >= 800001
+#if __FreeBSD_cc_version > 0
+# error
+#endif
+#if __FreeBSD_cc_version  >= 800001 && __FreeBSD_cc_
 /* Fllowing syscalls are not yet implemented in vanilla FreeBSD kernels  */
 int getfhat(int dir_fd, char *fname, struct fhandle *fhp, int flag)
 {
