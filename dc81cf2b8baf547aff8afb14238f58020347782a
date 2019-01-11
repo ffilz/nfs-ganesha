@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66b7c581_ffdba9b9",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2827,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-11T17:45:17Z",
+      "side": 1,
+      "message": "Can we update this comment to say that first_pass \u003d\u003d true -\u003e chunk \u003d\u003d NULL?  I had to look through the code to convince myself of this, and first_pass isn\u0027t checked directly, but is referenced in the comment.",
+      "revId": "dc81cf2b8baf547aff8afb14238f58020347782a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
