@@ -38,7 +38,7 @@
 #include "syscalls.h"
 #include <sys/module.h>
 
-#error
+//#error
 
 /**
  * @brief Read system directory entries into the buffer
