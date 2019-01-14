@@ -43,6 +43,7 @@
 #include "nfs_proto_tools.h"
 #include "nfs_file_handle.h"
 #include "nfs_convert.h"
+#include "sal_functions.h"
 
 /**
  * @brief Gets attributes for an entry in the FSAL.
@@ -67,6 +68,7 @@ int nfs4_op_getattr(struct nfs_argop4 *op, compound_data_t *data,
 	bool current_obj_is_referral = false;
 	fattr4 *obj_attributes =
 		&res_GETATTR4->GETATTR4res_u.resok4.obj_attributes;
+	struct gsh_client *deleg_client = NULL;
 
 	/* This is a NFS4_OP_GETTAR */
 	resp->resop = NFS4_OP_GETATTR;
@@ -104,6 +106,23 @@ int nfs4_op_getattr(struct nfs_argop4 *op, compound_data_t *data,
 	fsal_prepare_attrs(&attrs, mask | ATTR_MODE);
 
 	nfs4_bitmap4_Remove_Unsupported(&arg_GETATTR4->attr_request);
+
+	/* As per rfc 7530, section:10.4.3
+	 * The server needs to employ special handling for a GETATTR where the
+	 * target is a file that has an OPEN_DELEGATE_WRITE delegation in
+	 * effect.
+	 *
+	 * The server may use CB_GETATTR to fetch the right attributes from the
+	 * client holding the delegation or may simply recall the delegation.
+	 * Till then send EDELAY error.
+	 */
+
+	if (is_write_delegated(data->current_obj, &deleg_client) &&
+	    (deleg_client != op_ctx->client)) {
+		res_GETATTR4->status = handle_deleg_getattr(data->current_obj);
+		if (res_GETATTR4->status != NFS4_OK)
+			goto out;
+	}
 
 	res_GETATTR4->status = file_To_Fattr(
 			data, mask, &attrs,
