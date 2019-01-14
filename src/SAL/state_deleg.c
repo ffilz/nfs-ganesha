@@ -558,6 +558,32 @@ bool state_deleg_conflict(struct fsal_obj_handle *obj, bool write)
 	return false;
 }
 
+nfsstat4 handle_deleg_getattr(struct fsal_obj_handle *obj)
+{
+	nfsstat4 status = NFS4_OK;
+#ifndef CB_GETATTR
+	/* Check for delegation conflict.
+	 *
+	 * @todo: do we need to check if its the same client holding
+	 * delegation which sent this getattr request. Ideally client
+	 * holding delegation doesnt send getattr. But what if getattr
+	 * is part of the same compound request following OPEN?
+	 *
+	 * Confirm from the tests.  */
+	LogDebug(COMPONENT_STATE,
+		 "While trying to perform a GETATTR op, found a conflicting WRITE delegation");
+	if (async_delegrecall(general_fridge, obj) != 0) {
+		LogCrit(COMPONENT_STATE,
+			"Failed to start thread to recall delegation from conflicting operation.");
+		status = NFS4ERR_DELAY;
+		goto out;
+	}
+#endif
+
+out:
+	return status;
+}
+
 bool deleg_supported(struct fsal_obj_handle *obj,
 		     struct fsal_export *fsal_export,
 		     struct export_perms *export_perms, uint32_t share_access)

@@ -907,6 +907,7 @@ void state_deleg_revoke(struct fsal_obj_handle *obj, state_t *state);
 bool state_deleg_conflict(struct fsal_obj_handle *obj, bool write);
 bool is_write_delegated(struct fsal_obj_handle *obj,
 			struct gsh_client **client);
+nfsstat4 handle_deleg_getattr(struct fsal_obj_handle *obj);
 
 /******************************************************************************
  *
