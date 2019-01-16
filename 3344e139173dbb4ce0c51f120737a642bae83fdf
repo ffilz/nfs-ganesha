@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5eacfee0_3f28e29d",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-16T18:46:55Z",
+      "side": 1,
+      "message": "Does this need to be protected by the state_lock?",
+      "revId": "3344e139173dbb4ce0c51f120737a642bae83fdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
