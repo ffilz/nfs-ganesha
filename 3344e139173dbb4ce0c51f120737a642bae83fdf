@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c8eaef7e_6468efde",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-17T07:33:20Z",
+      "side": 1,
+      "message": "I checked the callers of _state_add_impl and state_del_locked. We are holding state_hdl-\u003estate_lock before calling these routines.",
+      "parentUuid": "5eacfee0_3f28e29d",
+      "revId": "3344e139173dbb4ce0c51f120737a642bae83fdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a4f96af_efadbc40",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-01-16T18:50:54Z",
       "side": 1,
       "message": "I think this needs to return a refcounted client, so the client doesn\u0027t go away before it\u0027s used.",
+      "revId": "3344e139173dbb4ce0c51f120737a642bae83fdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "defdc3b8_35df1bfb",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-17T07:33:20Z",
+      "side": 1,
+      "message": "Right.\nI am thinking it may be appropriate to acquire state_lock (similar to state_deleg_conflict) here before verifying these fields. And we can mandate callers to take the lock, that should protect client as well.",
+      "parentUuid": "9a4f96af_efadbc40",
       "revId": "3344e139173dbb4ce0c51f120737a642bae83fdf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
