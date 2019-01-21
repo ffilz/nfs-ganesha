@@ -522,6 +522,8 @@ static struct config_item export_params[] = {
 		       enable_upcall),
 	CONF_ITEM_TOKEN("transport", GLUSTER_TCP_VOL, transportformats,
 			glexport_params, gltransport),
+	CONF_ITEM_STR("sec_label_xattr", 0, 256, "security.selinux",
+			glusterfs_export, sec_label_xattr),
 	CONFIG_EOL
 };
 
