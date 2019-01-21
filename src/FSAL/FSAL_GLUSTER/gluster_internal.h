@@ -48,7 +48,7 @@
 ATTR_MODE     | ATTR_OWNER	  | ATTR_GROUP	      |  \
 ATTR_ATIME    | ATTR_CTIME	  | ATTR_MTIME	      |  \
 ATTR_SIZE     | ATTR_MTIME_SERVER | ATTR_ATIME_SERVER |  \
-ATTR_ACL)
+ATTR_ACL      | ATTR4_SEC_LABEL)
 
 /**
  * Override internal Gluster defines for the time being.
@@ -151,6 +151,7 @@ struct glusterfs_export {
 	struct fsal_export export;
 	bool pnfs_ds_enabled;
 	bool pnfs_mds_enabled;
+	char *sec_label_xattr;
 };
 
 #ifdef USE_GLUSTER_DELEGATION
