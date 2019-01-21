@@ -60,6 +60,7 @@
 #include "export_mgr.h"
 #include "server_stats.h"
 #include "uid2grp.h"
+#include "sal_functions.h"
 
 #ifdef USE_LTTNG
 #include "gsh_lttng/nfs_rpc.h"
@@ -691,6 +692,17 @@ void free_args(nfs_request_t *reqdata)
 
 	/* Finalize the request. */
 	nfs_dupreq_rele(&reqdata->svc, reqdesc);
+
+	/* Decrement the session refcount here.
+	 *
+	 * The session cache/slots can be freed here if there is a client owner
+	 * conflict. So, we should decrement the refcount only after sending
+	 * reply.
+	 */
+	if (op_ctx->session) {
+		dec_session_ref(op_ctx->session);
+		op_ctx->session = NULL;
+	}
 
 	SetClientIP(NULL);
 
