@@ -54,6 +54,7 @@ struct gsh_client;
 struct gsh_export;
 struct fsal_up_vector;		/* From fsal_up.h */
 struct state_t;
+struct nfs41_session;
 
 /**
  * @page newapi New FSAL API
@@ -414,6 +415,8 @@ struct req_op_context {
 	void *fsal_private;		/*< private for FSAL use */
 	struct fsal_module *fsal_module;	/*< current fsal module */
 	struct fsal_pnfs_ds *fsal_pnfs_ds;	/*< current pNFS DS */
+
+	struct nfs41_session *session;
 	/* add new context members here */
 };
 
