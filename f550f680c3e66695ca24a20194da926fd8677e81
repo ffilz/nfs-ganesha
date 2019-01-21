@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "125fc394_a161cee0",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-21T08:39:20Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+glusterfs_fsal_get_sec_label(struct glusterfs_handle *glhandle, struct attrlist *attrs)",
+      "revId": "f550f680c3e66695ca24a20194da926fd8677e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab182080_4bdae888",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-21T08:39:20Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tcontainer_of(op_ctx-\u003efsal_export, struct glusterfs_export, export);",
+      "revId": "f550f680c3e66695ca24a20194da926fd8677e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0829f557_60e0d9ae",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-21T08:39:20Z",
+      "side": 1,
+      "message": "ERROR: else should follow close brace \u0027}\u0027\n+\t\t}\n+\t\telse {",
+      "revId": "f550f680c3e66695ca24a20194da926fd8677e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1894256_e879fcd4",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2889,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-21T08:39:20Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tattrib_set-\u003esec_label.slai_data.slai_data_len, 0);",
+      "revId": "f550f680c3e66695ca24a20194da926fd8677e81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
