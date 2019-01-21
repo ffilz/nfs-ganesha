@@ -34,6 +34,7 @@
 #include "nfs_exports.h"
 #include "sal_data.h"
 #include "sal_functions.h"
+#include "fsal_types.h"
 
 /* fsal_obj_handle common methods
  */
@@ -172,6 +173,65 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 	return status;
 }
 
+static int
+glusterfs_fsal_get_sec_label(struct glusterfs_handle *glhandle, struct attrlist *attrs)
+{
+	int rc = 0;
+	struct glusterfs_export *export =
+		container_of(op_ctx->fsal_export, struct glusterfs_export, export);
+
+	if (FSAL_TEST_MASK(attrs->request_mask, ATTR4_SEC_LABEL) &&
+			op_ctx_export_has_option(EXPORT_OPTION_SECLABEL_SET)) {
+
+		char label[NFS4_OPAQUE_LIMIT];
+
+		/*
+		 * It's possible that the user won't have permission to fetch
+		 * the xattrs, so use root creds to get them since it's
+		 * supposed to be part of the inode metadata.
+		 */
+
+		SET_GLUSTER_CREDS(export, NULL, NULL,
+				op_ctx->creds->caller_glen,
+				op_ctx->creds->caller_garray,
+				op_ctx->client->addr.addr,
+				op_ctx->client->addr.len);
+
+		rc = glfs_h_getxattrs(export->gl_fs->fs, glhandle->glhandle,
+				export->sec_label_xattr, label,
+				NFS4_OPAQUE_LIMIT);
+
+		SET_GLUSTER_CREDS(export, &op_ctx->creds->caller_uid,
+				&op_ctx->creds->caller_gid,
+				op_ctx->creds->caller_glen,
+				op_ctx->creds->caller_garray,
+				op_ctx->client->addr.addr,
+				op_ctx->client->addr.len);
+
+		if (rc < 0) {
+			/* If there's no label then just do zero-length one */
+			if (errno != ENODATA) {
+				rc = -errno;
+				goto out_err;
+			}
+			rc = 0;
+		}
+
+		attrs->sec_label.slai_data.slai_data_len = rc;
+		gsh_free(attrs->sec_label.slai_data.slai_data_val);
+		if (rc > 0) {
+			attrs->sec_label.slai_data.slai_data_val =
+				gsh_memdup(label, rc);
+			FSAL_SET_MASK(attrs->valid_mask, ATTR4_SEC_LABEL);
+		} else {
+			attrs->sec_label.slai_data.slai_data_val = NULL;
+			FSAL_UNSET_MASK(attrs->valid_mask, ATTR4_SEC_LABEL);
+		}
+	}
+out_err:
+	return rc;
+}
+
 /**
  * @brief Implements GLUSTER FSAL objectoperation readdir
  */
@@ -278,6 +338,12 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 #else
 		if (!xstat || !(rc & GFAPI_XREADDIRP_HANDLE)) {
 			status = gluster2fsal_error(errno);
+			goto out;
+		}
+
+		rc = glusterfs_fsal_get_sec_label(objhandle, &attrs);
+		if (rc < 0) {
+			status = gluster2fsal_error(rc);
 			goto out;
 		}
 
@@ -785,6 +851,20 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl,
 		else
 			status = gluster2fsal_error(errno);
 
+		if (attrs->request_mask & ATTR_RDATTR_ERR) {
+			/* Caller asked for error to be visible. */
+			attrs->valid_mask = ATTR_RDATTR_ERR;
+		}
+		goto out;
+	}
+
+	rc = glusterfs_fsal_get_sec_label(objhandle, attrs);
+
+	if (rc < 0) {
+		if (errno == ENOENT)
+			status = gluster2fsal_error(ESTALE);
+		else
+			status = gluster2fsal_error(errno);
 		if (attrs->request_mask & ATTR_RDATTR_ERR) {
 			/* Caller asked for error to be visible. */
 			attrs->valid_mask = ATTR_RDATTR_ERR;
@@ -2799,6 +2879,18 @@ static fsal_status_t glusterfs_setattr2(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status)) {
 		LogDebug(COMPONENT_FSAL,
 			 "setting ACL failed");
+	}
+
+	if (FSAL_TEST_MASK(attrib_set->valid_mask, ATTR4_SEC_LABEL)) {
+		retval = glfs_h_setxattrs(glfs_export->gl_fs->fs,
+				myself->glhandle,
+				glfs_export->sec_label_xattr,
+				attrib_set->sec_label.slai_data.slai_data_val,
+				attrib_set->sec_label.slai_data.slai_data_len, 0);
+		if (retval < 0) {
+			status = gluster2fsal_error(errno);
+			goto out;
+		}
 	}
 
 creds:
