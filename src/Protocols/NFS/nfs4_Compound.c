@@ -1414,7 +1414,8 @@ void compound_data_Free(compound_data_t *data)
 			PTHREAD_MUTEX_unlock(&slot->lock);
 		}
 
-		dec_session_ref(data->session);
+		// Set session in op_ctx to decrement ref after sending reply
+		op_ctx->session = data->session;
 		data->session = NULL;
 	}
 
