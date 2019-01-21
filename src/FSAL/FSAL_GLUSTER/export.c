@@ -790,6 +790,7 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 	glfsexport->saveduid = geteuid();
 	glfsexport->savedgid = getegid();
 	glfsexport->export.fsal = fsal_hdl;
+	glfsexport->sec_label_xattr = "security.selinux";
 
 	op_ctx->fsal_export = &glfsexport->export;
 
