@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0a2c092_cde1fa49",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-21T12:51:30Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+glusterfs_fsal_get_sec_label(struct glusterfs_handle *glhandle, struct attrlist *attrs)",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "371896b9_681ed2cd",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-21T12:51:30Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tcontainer_of(op_ctx-\u003efsal_export, struct glusterfs_export, export);",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6a40e1f_62bd7f4a",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2888,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-21T12:51:30Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tattrib_set-\u003esec_label.slai_data.slai_data_len, 0);",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
