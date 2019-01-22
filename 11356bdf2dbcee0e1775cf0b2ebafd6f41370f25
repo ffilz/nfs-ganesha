@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4777b7b8_ca489e5e",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-22T14:22:55Z",
+      "side": 1,
+      "message": "ATTR4_SEC_LABEL needs to be added to supported attrs as well.",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a0a2c092_cde1fa49",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 2
@@ -33,6 +50,57 @@
       "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b7fbe8c_09cb9cbd",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-22T14:22:55Z",
+      "side": 1,
+      "message": "It looks from the Gluster code like glfs_h_getxattrs returns 0 on success, and -1 on failure with errno containing the error.  So rc won\u0027t ever have ENODATA, you\u0027ll need to check errno, and it will be positive, not negative.",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fada933d_3fbdde12",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-22T14:22:55Z",
+      "side": 1,
+      "message": "rc won\u0027t ever be greater than zero if I\u0027m reading the code in glfs_h_getxattrs_common() correctly.  It will be 0 on success, and -1 on failure.",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08f771c8_8507603b",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-22T14:22:55Z",
+      "side": 1,
+      "message": "So, this will work, but it\u0027s a bit fragile.  If any other function is called between the call to glfs_h_getxattrs() and here, it will reset errno, and you will lose the error.  It might be better to have glusterfs_fsal_get_sec_label() return -errno on error, so that it\u0027s safely stored on the stack.",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     },
     {
       "key": {
