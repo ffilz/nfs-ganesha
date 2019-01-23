@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a319f10e_a21426d3",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-23T13:21:07Z",
+      "side": 1,
+      "message": "You should probably set rc \u003d -errno; here, and return rc.  errno is used in almost all library functions, and will be overwritten by most of them, so it\u0027s not safe to trust it to stay the same.  Even logging will overwrite errno. So, it\u0027s always safest to save errno to another variable, and work with that one.\n\nAlso not that errno is positive, so you\u0027ll have to make it negative for the error case.",
+      "revId": "91f07579ef30af36f36580cc4a632ed087b05827",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0662e272_5f5de6b9",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-23T13:21:07Z",
+      "side": 1,
+      "message": "As currently written, this would have to be \"errno \u003d 0;\", but if you switch to returning rc as I suggested above, this will work.",
+      "revId": "91f07579ef30af36f36580cc4a632ed087b05827",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}

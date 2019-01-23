@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "fc8515e6_31ecc604",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-23T13:21:07Z",
+      "side": 1,
+      "message": "Okay, you\u0027re correct.  I stopped after looking at glfs_h_getxattrs_common() and didn\u0027t look at glfs_*xattr_process().",
+      "parentUuid": "f4989a3c_9bfe7b8b",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fada933d_3fbdde12",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 2
@@ -170,6 +188,24 @@
       "side": 1,
       "message": "Does returning the errno solve the problem you stated? Not really sure what you meant exactly but I think this is what you wanted, if not please restate what you meant by \u0027between glfs_h_getxattr and here\u0027.",
       "parentUuid": "08f771c8_8507603b",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5060bd92_382afc5e",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-23T13:21:07Z",
+      "side": 1,
+      "message": "This works, as long as you return -errno, since errno is positive.",
+      "parentUuid": "0bd6acca_b7073924",
       "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
