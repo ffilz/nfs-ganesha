@@ -71,6 +71,8 @@ enum nfs_req_result nfs4_op_getattr(struct nfs_argop4 *op,
 		&res_GETATTR4->GETATTR4res_u.resok4.obj_attributes;
 	nfs_client_id_t *deleg_client = NULL;
 	struct fsal_obj_handle *obj = data->current_obj;
+	bool cbgetattr_resp = false;
+	bool state_lock_held = false;
 
 	/* This is a NFS4_OP_GETTAR */
 	resp->resop = NFS4_OP_GETATTR;
@@ -118,23 +120,30 @@ enum nfs_req_result nfs4_op_getattr(struct nfs_argop4 *op,
 	 * Till then send EDELAY error.
 	 */
 
-	PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
+	PTHREAD_RWLOCK_wrlock(&obj->state_hdl->state_lock);
+	state_lock_held = true;
 	if (is_write_delegated(obj, &deleg_client) &&
 	    deleg_client && (deleg_client->gsh_client != op_ctx->client)) {
 
-		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
-		res_GETATTR4->status = handle_deleg_getattr(obj);
+		res_GETATTR4->status = handle_deleg_getattr(obj, deleg_client);
 
-		if (res_GETATTR4->status != NFS4_OK)
+		if (res_GETATTR4->status != NFS4_OK) {
 			goto out;
-	} else
+		} else {
+			/* serve from CB_GETATTR resp.*/
+			cbgetattr_resp = true;
+		}
+	} else {
+		/* release state_lock */
 		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
-
+		state_lock_held = false;
+	}
 
 	res_GETATTR4->status = file_To_Fattr(
 			data, mask, &attrs,
 			obj_attributes,
-			&arg_GETATTR4->attr_request);
+			&arg_GETATTR4->attr_request,
+			cbgetattr_resp);
 
 	current_obj_is_referral = obj->obj_ops->is_referral(
 					obj, &attrs, false);
@@ -194,6 +203,9 @@ out:
 
 	if (deleg_client)
 		dec_client_id_ref(deleg_client);
+
+	if (state_lock_held)
+		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 	if (res_GETATTR4->status != NFS4_OK) {
 		/* The attributes that may have been allocated will not be

@@ -271,7 +271,8 @@ nfsstat4 file_To_Fattr(compound_data_t *data,
 		       attrmask_t mask,
 		       struct attrlist *attr,
 		       fattr4 *Fattr,
-		       struct bitmap4 *Bitmap);
+		       struct bitmap4 *Bitmap,
+		       bool cbgetattr_resp);
 
 bool nfs4_Fattr_Check_Access(fattr4 *, int);
 bool nfs4_Fattr_Check_Access_Bitmap(struct bitmap4 *, int);
@@ -296,6 +297,9 @@ int nfs4_Fattr_Fill_Error(compound_data_t *, fattr4 *, nfsstat4,
 
 int nfs4_FSALattr_To_Fattr(struct xdr_attrs_args *, struct bitmap4 *,
 			   fattr4 *);
+int process_cbgetattr_resp(compound_data_t *data, fattr4 *Fattr,
+			    struct bitmap4 *req_attrmask,
+			    struct attrlist *attr);
 
 void nfs4_bitmap4_Remove_Unsupported(struct bitmap4 *);
 

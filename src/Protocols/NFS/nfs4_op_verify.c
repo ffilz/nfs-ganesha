@@ -96,7 +96,7 @@ enum nfs_req_result nfs4_op_verify(struct nfs_argop4 *op,
 
 	res_VERIFY4->status =
 		file_To_Fattr(data, attrs.request_mask, &attrs, &file_attr4,
-			      &arg_VERIFY4->obj_attributes.attrmask);
+			      &arg_VERIFY4->obj_attributes.attrmask, false);
 
 	if (res_VERIFY4->status != NFS4_OK)
 		return NFS_REQ_ERROR;

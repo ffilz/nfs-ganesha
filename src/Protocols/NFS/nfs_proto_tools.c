@@ -3429,7 +3429,8 @@ nfsstat4 file_To_Fattr(compound_data_t *data,
 		       attrmask_t request_mask,
 		       struct attrlist *attr,
 		       fattr4 *Fattr,
-		       struct bitmap4 *Bitmap)
+		       struct bitmap4 *Bitmap,
+		       bool cbgetattr_resp)
 {
 	fsal_status_t status;
 	struct xdr_attrs_args args = {
@@ -3508,6 +3509,11 @@ nfsstat4 file_To_Fattr(compound_data_t *data,
 	if (FSAL_IS_ERROR(status))
 		return nfs4_Errno_status(status);
 
+	if (cbgetattr_resp) {
+		if (process_cbgetattr_resp(data, Fattr, Bitmap, attr))
+			return NFS4ERR_SERVERFAULT;
+	}
+
 	/* Restore originally requested mask */
 	attr->request_mask = request_mask;
 
@@ -3536,6 +3542,75 @@ static fattr_xdr_result decode_fattr(XDR *xdr,
 	}
 
 	return res;
+}
+
+/*
+ * @brief Fill in attributes received via CB_GETATTR
+ *
+ * As per rfc7530, if either of the filesize or Change attributes
+ * change, server should consider that file is modified by
+ * the client and should always send those attributes as received
+ * from the client. If not modified, fill in cached attributes.
+ */
+int process_cbgetattr_resp(compound_data_t *data, fattr4 *Fattr,
+			    struct bitmap4 *req_attrmask,
+			    struct attrlist *attr)
+{
+	cbgetattr_t *cbgetattr;
+	struct timespec	timeo = { .tv_sec = time(NULL) + 5,
+				  .tv_nsec = 0 };
+	bool is_modified_size = false;
+	bool is_modified_change = false;
+
+	cbgetattr = &data->current_obj->state_hdl->file.cbgetattr;
+
+	if (cbgetattr->state != CB_GETATTR_RSP_OK)
+		return 0;
+
+	/* reset cbgetattr state */
+	cbgetattr->state = CB_GETATTR_NONE;
+
+	if (cbgetattr->is_modified)
+		goto is_modified;
+
+	/* otherwise verify if the file is modified */
+	if (attribute_is_set(req_attrmask, FATTR4_SIZE)) {
+		if (attr->filesize != cbgetattr->filesize)
+			is_modified_size = true;
+	}
+
+	if (attribute_is_set(req_attrmask, FATTR4_CHANGE)) {
+		/* check if size/change attr changed */
+		if (attr->change != cbgetattr->change)
+			is_modified_change = true;
+	}
+
+	if (is_modified_size || is_modified_change) {
+		cbgetattr->is_modified = true;
+	} else {
+		/* nothing to update. return cached attr */
+		return 0;
+	}
+
+is_modified:
+	if (attribute_is_set(req_attrmask, FATTR4_SIZE)) {
+		attr->filesize = cbgetattr->filesize;
+	}
+
+	if (attribute_is_set(req_attrmask, FATTR4_CHANGE)) {
+		attr->change = cbgetattr->change + 1;
+	}
+
+	if (attribute_is_set(req_attrmask, FATTR4_TIME_MODIFY)) {
+		attr->mtime = timeo;
+	}
+	if (attribute_is_set(req_attrmask, FATTR4_TIME_METADATA)) {
+		attr->ctime = timeo;
+	}
+
+	/* @todo: update above times in mdcache as well */
+
+	return 0;
 }
 
 /*
