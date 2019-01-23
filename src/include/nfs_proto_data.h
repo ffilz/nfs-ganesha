@@ -102,7 +102,7 @@ typedef union nfs_arg__ {
 
 struct COMPOUND4res_extended {
 	COMPOUND4res res_compound4;
-	bool res_cached;
+	int32_t res_refcnt;
 };
 
 typedef union nfs_res__ {
@@ -127,8 +127,7 @@ typedef union nfs_res__ {
 	FSINFO3res res_fsinfo3;
 	PATHCONF3res res_pathconf3;
 	COMMIT3res res_commit3;
-	COMPOUND4res res_compound4;
-	struct COMPOUND4res_extended res_compound4_extended;
+	struct COMPOUND4res_extended *res_compound4_extended;
 
 	/* mount */
 	fhstatus2 res_mnt1;
@@ -339,9 +338,8 @@ struct compound_data {
 	nfs_client_cred_t credential;	/*< Raw RPC credentials */
 	nfs_client_id_t *preserved_clientid;	/*< clientid that has lease
 						   reserved, if any */
-	struct COMPOUND4res_extended *cached_result;	/*< NFv41: pointer to
-							   cached RPC result in
-							   a session's slot */
+	struct nfs41_session_slot__ *slot;	/*< NFv41: pointer to the
+							session's slot */
 	bool use_slot_cached_result;	/*< Set to true if session DRC is to be
 					    used */
 	bool sa_cachethis;	/*< True if cachethis was specified in
@@ -356,7 +354,7 @@ struct compound_data {
 					   (found by OP_SEQUENCE) */
 	sequenceid4 sequence;	/*< Sequence ID of the current compound
 				   (if applicable) */
-	slotid4 slot;		/*< Slot ID of the current compound
+	slotid4 slotid;		/*< Slot ID of the current compound
 				   (if applicable) */
 	uint32_t resp_size;	/*< Running total response size. */
 	uint32_t op_resp_size;	/*< Current op's response size. */

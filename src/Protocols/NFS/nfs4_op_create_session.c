@@ -219,7 +219,7 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 
 		LogDebug(component,
 			 "CREATE_SESSION replay=%p special case",
-			 data->cached_result);
+			 data->slot->cached_result);
 		goto out;
 	} else if (arg_CREATE_SESSION4->csa_sequence !=
 		   found->cid_create_session_sequence) {
@@ -393,7 +393,8 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 	       nfs41_session->session_id,
 	       NFS4_SESSIONID_SIZE);
 
-	LogDebug(component, "CREATE_SESSION replay=%p", data->cached_result);
+	LogDebug(component, "CREATE_SESSION replay=%p",
+		 data->slot->cached_result);
 #ifdef USE_LTTNG
 	tracepoint(nfs4, session_ref, __func__, __LINE__, nfs41_session, 2);
 #endif
