@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "82300f60_c02e589c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-23T18:34:37Z",
+      "side": 1,
+      "message": "No, the locks will keep that from happening.  The only issue I can see is the recursion here.",
+      "parentUuid": "8fe2e462_872952ef",
+      "revId": "cb4bee971e6ced84f4686af3933caeec2e17b152",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82e1ced2_bc9d6c3e",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-01-23T16:00:16Z",
       "side": 1,
       "message": "Is there any obligation to cih_hash_release here?",
+      "revId": "cb4bee971e6ced84f4686af3933caeec2e17b152",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f092142_d7f3cd6a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-23T18:34:37Z",
+      "side": 1,
+      "message": "You\u0027re right, good catch.  I\u0027ll update.",
+      "parentUuid": "82e1ced2_bc9d6c3e",
       "revId": "cb4bee971e6ced84f4686af3933caeec2e17b152",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
