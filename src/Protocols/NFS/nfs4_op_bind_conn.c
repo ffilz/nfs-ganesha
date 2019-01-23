@@ -108,7 +108,7 @@ enum nfs_req_result nfs4_op_bind_conn(struct nfs_argop4 *op,
 	 * slots...
 	 */
 	data->session = session;
-	data->slot = UINT32_MAX;
+	data->slotid = UINT32_MAX;
 
 	memcpy(resok_BIND_CONN_TO_SESSION4->bctsr_sessid,
 	       arg_BIND_CONN_TO_SESSION4->bctsa_sessid,

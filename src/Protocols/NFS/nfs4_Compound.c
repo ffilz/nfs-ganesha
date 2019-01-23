@@ -680,6 +680,9 @@ enum nfs_req_result complete_op(compound_data_t *data, nfsstat4 *status,
 				enum nfs_req_result result)
 {
 	nfs_resop4 *thisres = &data->resarray[data->oppos];
+	COMPOUND4res *res_compound4;
+
+	res_compound4 = &data->res->res_compound4_extended->res_compound4;
 
 	/* All the operations, like NFS4_OP_ACCESS, have a first replied
 	 * field called .status
@@ -718,8 +721,7 @@ enum nfs_req_result complete_op(compound_data_t *data, nfsstat4 *status,
 		/* An error occurred, we do not manage the other requests
 		 * in the COMPOUND, this may be a regular behavior
 		 */
-		data->res->res_compound4.resarray.resarray_len =
-								data->oppos + 1;
+		res_compound4->resarray.resarray_len = data->oppos + 1;
 		return NFS_REQ_ERROR;
 	}
 
@@ -734,12 +736,13 @@ enum nfs_req_result complete_op(compound_data_t *data, nfsstat4 *status,
 		/* Free the reply allocated above */
 		gsh_free(data->resarray);
 
-		/* Copy the reply from the cache */
-		data->res->res_compound4_extended = *data->cached_result;
-		*status = ((COMPOUND4res *) data->cached_result)->status;
+		/* Copy the reply from the cache and take a reference */
+		data->res->res_compound4_extended = data->slot->cached_result;
+		atomic_inc_int32_t(&data->slot->cached_result->res_refcnt);
+		*status = ((COMPOUND4res *) data->slot->cached_result)->status;
 		LogFullDebug(COMPONENT_SESSIONS,
 			     "Use session replay cache %p result %s",
-			     data->cached_result,
+			     data->slot->cached_result,
 			     nfsstat4_to_str(*status));
 		return NFS_REQ_ERROR;	/* Exit the for loop */
 	}
@@ -757,6 +760,9 @@ enum nfs_req_result process_one_op(compound_data_t *data, nfsstat4 *status)
 	nfs_argop4 *thisarg = &data->argarray[data->oppos];
 	nfs_resop4 *thisres = &data->resarray[data->oppos];
 	enum nfs_req_result result;
+	COMPOUND4res *res_compound4;
+
+	res_compound4 = &data->res->res_compound4_extended->res_compound4;
 
 	/* Used to check if OP_SEQUENCE is the first operation */
 	data->op_resp_size = sizeof(nfsstat4);
@@ -902,8 +908,7 @@ enum nfs_req_result process_one_op(compound_data_t *data, nfsstat4 *status)
 		thisres->resop = data->opcode;
 
 		/* Do not manage the other requests in the COMPOUND. */
-		data->res->res_compound4.resarray.resarray_len =
-								data->oppos + 1;
+		res_compound4->resarray.resarray_len = data->oppos + 1;
 		return NFS_REQ_ERROR;
 	}
 
@@ -929,12 +934,16 @@ enum nfs_req_result process_one_op(compound_data_t *data, nfsstat4 *status)
 
 void complete_nfs4_compound(compound_data_t *data, int status)
 {
+	COMPOUND4res *res_compound4;
+
+	res_compound4 = &data->res->res_compound4_extended->res_compound4;
+
 	server_stats_compound_done(data->argarray_len, status);
 
 	/* Complete the reply, in particular, tell where you stopped if
 	 * unsuccessful COMPOUD
 	 */
-	data->res->res_compound4.status = status;
+	res_compound4->status = status;
 
 	/* Manage session's DRC: keep NFS4.1 replay for later use, but don't
 	 * save a replayed result again.
@@ -945,36 +954,35 @@ void complete_nfs4_compound(compound_data_t *data, int status)
 		 */
 		LogFullDebug(COMPONENT_SESSIONS,
 			     "Save result in session replay cache %p sizeof nfs_res_t=%d",
-			     data->cached_result, (int)sizeof(nfs_res_t));
+			     data->slot->cached_result, (int)sizeof(nfs_res_t));
 
-		/* Indicate to nfs4_Compound_Free that this reply is cached. */
-		data->res->res_compound4_extended.res_cached = true;
+		/* Take a reference to indicate that this reply is cached. */
+		atomic_inc_int32_t(&data->slot->cached_result->res_refcnt);
 
-		/* Save the result in the cache (copy out of the result array
-		 * into the slot cache (which is pointed to by
-		 * data->cached_result).
+		/* Save the result pointer in the slot cache (the correct slot
+		 * is pointed to by data->cached_result).
 		 */
-		*data->cached_result = data->res->res_compound4_extended;
+		data->slot->cached_result = data->res->res_compound4_extended;
 	} else if (data->minorversion > 0 && !data->use_slot_cached_result &&
 		   data->argarray[0].argop == NFS4_OP_SEQUENCE &&
-		   data->cached_result != NULL) {
+		   data->slot != NULL) {
 		/* We need to cache an "uncached" response. The length is
 		 * 1 if only one op processed, otherwise 2. */
 		struct COMPOUND4res *c_res;
 		u_int resarray_len =
-		    data->res->res_compound4.resarray.resarray_len == 1 ? 1 : 2;
+		    res_compound4->resarray.resarray_len == 1 ? 1 : 2;
 		struct nfs_resop4 *res0;
 
-		c_res = &data->cached_result->res_compound4;
+		c_res = &data->slot->cached_result->res_compound4;
 
 		c_res->resarray.resarray_len = resarray_len;
 		c_res->resarray.resarray_val =
 			gsh_calloc(resarray_len, sizeof(struct nfs_resop4));
-		copy_tag(&c_res->tag, &data->res->res_compound4.tag);
+		copy_tag(&c_res->tag, &res_compound4->tag);
 		res0 = c_res->resarray.resarray_val;
 
 		/* Copy the sequence result. */
-		*res0 = data->res->res_compound4.resarray.resarray_val[0];
+		*res0 = res_compound4->resarray.resarray_val[0];
 		c_res->status = res0->nfs_resop4_u.opillegal.status;
 
 		if (resarray_len == 2) {
@@ -984,8 +992,7 @@ void complete_nfs4_compound(compound_data_t *data, int status)
 			 * resok or any negative response that might have
 			 * allocated data.
 			 */
-			*res1 =
-			    data->res->res_compound4.resarray.resarray_val[1];
+			*res1 = res_compound4->resarray.resarray_val[1];
 
 			/* Override NFS4_OK and NFS4ERR_DENIED. We MUST override
 			 * NFS4_OK since we aren't caching a full response and
@@ -1014,8 +1021,8 @@ void complete_nfs4_compound(compound_data_t *data, int status)
 			c_res->status = res1->nfs_resop4_u.opillegal.status;
 		}
 
-		/* Indicate that this reply is cached in slot cache. */
-		data->cached_result->res_cached = true;
+		/* Take a reference for reply saved in the slot cache. */
+		atomic_inc_int32_t(&data->slot->cached_result->res_refcnt);
 	}
 
 	/* If we have reserved a lease, update it and release it */
@@ -1130,13 +1137,22 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	bool drop = false;
 	nfs_request_t *reqdata = container_of(req, nfs_request_t, svc);
 	SVCXPRT *xprt = req->rq_xprt;
+	struct COMPOUND4res *res_compound4;
+
+	/* Allocate (and zero) the COMPOUND4res_extended */
+	res->res_compound4_extended =
+			gsh_calloc(1, sizeof(*res->res_compound4_extended));
+	res_compound4 = &res->res_compound4_extended->res_compound4;
+
+	/* Take initial reference to response. */
+	res->res_compound4_extended->res_refcnt = 1;
 
 	if (compound4_minor > 2) {
 		LogCrit(COMPONENT_NFS_V4, "Bad Minor Version %d",
 			compound4_minor);
 
-		res->res_compound4.status = NFS4ERR_MINOR_VERS_MISMATCH;
-		res->res_compound4.resarray.resarray_len = 0;
+		res_compound4->status = NFS4ERR_MINOR_VERS_MISMATCH;
+		res_compound4->resarray.resarray_len = 0;
 		goto out;
 	}
 
@@ -1144,8 +1160,8 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			(1 << compound4_minor)) == 0) {
 		LogInfo(COMPONENT_NFS_V4, "Unsupported minor version %d",
 			compound4_minor);
-		res->res_compound4.status = NFS4ERR_MINOR_VERS_MISMATCH;
-		res->res_compound4.resarray.resarray_len = 0;
+		res_compound4->status = NFS4ERR_MINOR_VERS_MISMATCH;
+		res_compound4->resarray.resarray_len = 0;
 		goto out;
 	}
 
@@ -1163,29 +1179,29 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	data->minorversion = compound4_minor;
 
 	/* Keeping the same tag as in the arguments */
-	copy_tag(&res->res_compound4.tag, &arg->arg_compound4.tag);
+	copy_tag(&res_compound4->tag, &arg->arg_compound4.tag);
 
-	if (res->res_compound4.tag.utf8string_len > 0) {
+	if (res_compound4->tag.utf8string_len > 0) {
 		/* Check if the tag is a valid utf8 string */
 		if (nfs4_utf8string2dynamic(
-				&res->res_compound4.tag,
+				&res_compound4->tag,
 				UTF8_SCAN_ALL, &data->tagname) != 0) {
 			char str[LOG_BUFF_LEN];
 			struct display_buffer dspbuf = {sizeof(str), str, str};
 
 			display_opaque_bytes(
 				&dspbuf,
-				res->res_compound4.tag.utf8string_val,
-				res->res_compound4.tag.utf8string_len);
+				res_compound4->tag.utf8string_val,
+				res_compound4->tag.utf8string_len);
 
 			LogCrit(COMPONENT_NFS_V4,
 				"COMPOUND: bad tag %p len %d bytes %s",
-				res->res_compound4.tag.utf8string_val,
-				res->res_compound4.tag.utf8string_len,
+				res_compound4->tag.utf8string_val,
+				res_compound4->tag.utf8string_len,
 				str);
 
-			res->res_compound4.status = NFS4ERR_INVAL;
-			res->res_compound4.resarray.resarray_len = 0;
+			res_compound4->status = NFS4ERR_INVAL;
+			res_compound4->resarray.resarray_len = 0;
 			goto out;
 		}
 	} else {
@@ -1203,8 +1219,8 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		LogMajor(COMPONENT_NFS_V4,
 			 "An empty COMPOUND (no operation in it) was received");
 
-		res->res_compound4.status = NFS4_OK;
-		res->res_compound4.resarray.resarray_len = 0;
+		res_compound4->status = NFS4_OK;
+		res_compound4->resarray.resarray_len = 0;
 		goto out;
 	}
 
@@ -1214,8 +1230,8 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			 "A COMPOUND with too many operations (%d) was received",
 			 argarray_len);
 
-		res->res_compound4.status = NFS4ERR_RESOURCE;
-		res->res_compound4.resarray.resarray_len = 0;
+		res_compound4->status = NFS4ERR_RESOURCE;
+		res_compound4->resarray.resarray_len = 0;
 		goto out;
 	}
 
@@ -1230,15 +1246,14 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	}
 
 	/* Keeping the same tag as in the arguments */
-	res->res_compound4.tag.utf8string_len =
+	res_compound4->tag.utf8string_len =
 	    arg->arg_compound4.tag.utf8string_len;
 
 	/* Allocating the reply nfs_resop4 */
-	res->res_compound4.resarray.resarray_val =
-		gsh_calloc(argarray_len, sizeof(struct nfs_resop4));
+	data->resarray = gsh_calloc(argarray_len, sizeof(struct nfs_resop4));
 
-	res->res_compound4.resarray.resarray_len = argarray_len;
-	data->resarray = res->res_compound4.resarray.resarray_val;
+	res_compound4->resarray.resarray_len = argarray_len;
+	res_compound4->resarray.resarray_val = data->resarray;
 
 	/* Manage errors NFS4ERR_OP_NOT_IN_SESSION and NFS4ERR_NOT_ONLY_OP.
 	 * These checks apply only to 4.1 */
@@ -1252,8 +1267,8 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		    && argarray[0].argop != NFS4_OP_DESTROY_SESSION
 		    && argarray[0].argop != NFS4_OP_BIND_CONN_TO_SESSION
 		    && argarray[0].argop != NFS4_OP_DESTROY_CLIENTID) {
-			res->res_compound4.status = NFS4ERR_OP_NOT_IN_SESSION;
-			res->res_compound4.resarray.resarray_len = 0;
+			res_compound4->status = NFS4ERR_OP_NOT_IN_SESSION;
+			res_compound4->resarray.resarray_len = 0;
 			goto out;
 		}
 
@@ -1276,8 +1291,8 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			    argarray[0].argop == NFS4_OP_DESTROY_CLIENTID ||
 			    argarray[0].argop == NFS4_OP_DESTROY_SESSION ||
 			    argarray[0].argop == NFS4_OP_BIND_CONN_TO_SESSION) {
-				res->res_compound4.status = NFS4ERR_NOT_ONLY_OP;
-				res->res_compound4.resarray.resarray_len = 0;
+				res_compound4->status = NFS4ERR_NOT_ONLY_OP;
+				res_compound4->resarray.resarray_len = 0;
 				goto out;
 			}
 		}
@@ -1340,6 +1355,43 @@ void nfs4_Compound_FreeOne(nfs_resop4 *res)
 	optabv4[opcode].free_res(res);
 }
 
+void release_nfs4_res_compound(struct COMPOUND4res_extended *res_compound4_ex)
+{
+	unsigned int i = 0;
+	int32_t refcnt = atomic_dec_int32_t(&res_compound4_ex->res_refcnt);
+	struct COMPOUND4res *res_compound4 = &res_compound4_ex->res_compound4;
+
+	if (refcnt > 0) {
+		LogFullDebugAlt(COMPONENT_NFS_V4, COMPONENT_SESSIONS,
+			     "Skipping free of NFS4 result %p refcnt %"PRIi32,
+			     res_compound4_ex, refcnt);
+		return;
+	}
+
+	LogFullDebugAlt(COMPONENT_NFS_V4, COMPONENT_SESSIONS,
+		     "Compound Free %p (resarraylen=%i)",
+		     res_compound4_ex, res_compound4->resarray.resarray_len);
+
+	for (i = 0; i < res_compound4->resarray.resarray_len; i++) {
+		nfs_resop4 *val = &res_compound4->resarray.resarray_val[i];
+
+		if (val) {
+			/* !val is an error case, but it can occur, so avoid
+			 * indirect on NULL
+			 */
+			nfs4_Compound_FreeOne(val);
+		}
+	}
+
+	gsh_free(res_compound4->resarray.resarray_val);
+	res_compound4->resarray.resarray_val = NULL;
+
+	gsh_free(res_compound4->tag.utf8string_val);
+	res_compound4->tag.utf8string_val = NULL;
+
+	gsh_free(res_compound4_ex);
+}
+
 /**
  *
  * @brief Free the result for NFS4PROC_COMPOUND
@@ -1351,39 +1403,7 @@ void nfs4_Compound_FreeOne(nfs_resop4 *res)
  */
 void nfs4_Compound_Free(nfs_res_t *res)
 {
-	unsigned int i = 0;
-	log_components_t component = COMPONENT_NFS_V4;
-
-	if (isFullDebug(COMPONENT_SESSIONS))
-		component = COMPONENT_SESSIONS;
-
-	if (res->res_compound4_extended.res_cached) {
-		LogFullDebug(component,
-			     "Skipping free of NFS4 result %p",
-			     res);
-		return;
-	}
-
-	LogFullDebug(component,
-		     "Compound Free %p (resarraylen=%i)",
-		     res, res->res_compound4.resarray.resarray_len);
-
-	for (i = 0; i < res->res_compound4.resarray.resarray_len; i++) {
-		nfs_resop4 *val = &res->res_compound4.resarray.resarray_val[i];
-
-		if (val) {
-			/* !val is an error case, but it can occur, so avoid
-			 * indirect on NULL
-			 */
-			nfs4_Compound_FreeOne(val);
-		}
-	}
-
-	gsh_free(res->res_compound4.resarray.resarray_val);
-	res->res_compound4.resarray.resarray_val = NULL;
-
-	gsh_free(res->res_compound4.tag.utf8string_val);
-	res->res_compound4.tag.utf8string_val = NULL;
+	release_nfs4_res_compound(res->res_compound4_extended);
 }
 
 /**
@@ -1406,11 +1426,11 @@ void compound_data_Free(compound_data_t *data)
 	gsh_free(data->tagname);
 
 	if (data->session) {
-		if (data->slot != UINT32_MAX) {
+		if (data->slotid != UINT32_MAX) {
 			nfs41_session_slot_t *slot;
 
 			/* Release the slot if in use */
-			slot = &data->session->fc_slots[data->slot];
+			slot = &data->session->fc_slots[data->slotid];
 			PTHREAD_MUTEX_unlock(&slot->lock);
 		}
 
@@ -1580,28 +1600,22 @@ void nfs4_Compound_CopyResOne(nfs_resop4 *res_dst, nfs_resop4 *res_src)
 }
 
 /**
+ * @brief Handle the xdr encode of the COMPOUND respinse
  *
- * @brief Copy the result for NFS4PROC_COMPOUND
- *
- * This function copies a single COMPOUND result.
- *
- * @param[out] res_dst Buffer to which to copy the result
- * @param[in]  res_src Result to copy
+ * @param(in) xdrs  The XDR object
+ * @param(in) objp  The response pointer
  *
  */
-void nfs4_Compound_CopyRes(nfs_res_t *res_dst, nfs_res_t *res_src)
+
+bool xdr_COMPOUND4res_extended(XDR *xdrs, struct COMPOUND4res_extended **objp)
 {
-	unsigned int i = 0;
+	/* Since the response in nfs_res_t is a pointer, we must dereference it
+	 * to complete the encode.
+	 */
+	struct COMPOUND4res_extended *res_compound4_extended = *objp;
 
-	LogFullDebug(COMPONENT_NFS_V4,
-		     "Copy result of %p to %p (resarraylen : %i)",
-		     res_src, res_dst,
-		     res_src->res_compound4.resarray.resarray_len);
-
-	for (i = 0; i < res_src->res_compound4.resarray.resarray_len; i++)
-		nfs4_Compound_CopyResOne(
-			&res_dst->res_compound4.resarray.resarray_val[i],
-			&res_src->res_compound4.resarray.resarray_val[i]);
+	/* And we must pass the actual COMPOUND4res */
+	return xdr_COMPOUND4res(xdrs, &res_compound4_extended->res_compound4);
 }
 
 /* @} */
