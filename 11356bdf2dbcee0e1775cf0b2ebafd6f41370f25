@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "699cacda_b6629061",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2019-01-23T12:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4777b7b8_ca489e5e",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0a2c092_cde1fa49",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 2
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "f4989a3c_9bfe7b8b",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2019-01-23T12:53:41Z",
+      "side": 1,
+      "message": "I went through the glfs_h_getxattr func, but the way I see, it returns -1 on failure and length(I think) otherwise which is stored in ret after calling the glfs_getxattr_process func or glfs_listxattr_process func. Tell me if I am wrong.",
+      "parentUuid": "6b7fbe8c_09cb9cbd",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fada933d_3fbdde12",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 2
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "78833b10_902e2b25",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2019-01-23T12:53:41Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "fada933d_3fbdde12",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08f771c8_8507603b",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 2
@@ -98,6 +152,24 @@
       "writtenOn": "2019-01-22T14:22:55Z",
       "side": 1,
       "message": "So, this will work, but it\u0027s a bit fragile.  If any other function is called between the call to glfs_h_getxattrs() and here, it will reset errno, and you will lose the error.  It might be better to have glusterfs_fsal_get_sec_label() return -errno on error, so that it\u0027s safely stored on the stack.",
+      "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bd6acca_b7073924",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2019-01-23T12:53:41Z",
+      "side": 1,
+      "message": "Does returning the errno solve the problem you stated? Not really sure what you meant exactly but I think this is what you wanted, if not please restate what you meant by \u0027between glfs_h_getxattr and here\u0027.",
+      "parentUuid": "08f771c8_8507603b",
       "revId": "11356bdf2dbcee0e1775cf0b2ebafd6f41370f25",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
