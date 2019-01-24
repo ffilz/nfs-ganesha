@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9217db2_9054b088",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1010034
+      },
+      "writtenOn": "2019-01-24T06:50:45Z",
+      "side": 1,
+      "message": "This will make refcount \u003d 3\n\n1. Initial refcnt \u003d 1 (data-\u003eres-\u003eres_compound4_extended-\u003erefcnt)\n2. OP_SEQUENCE increments the slot-\u003ecached_result-\u003erefcnt \u003d 2\n3. Here, we again assign and increment the refcnt\ndata-\u003eres-\u003eres_compound4_extended \u003d data-\u003eslot-\u003ecached_result;\nrefcnt \u003d 3 (for both)\n4. At the end of the request in release_nfs4_res_compound we decement the ref cnt\nrefcnt \u003d 2\n\nLooks like every time we replay a requests its refcnt will be incremented by one at the end of the request.",
+      "revId": "37453e936ae3606600f7be9c8f8a91aeb3c128c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7dd7a8cb_7da8ddea",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1010034
+      },
+      "writtenOn": "2019-01-24T06:50:45Z",
+      "side": 1,
+      "message": "It is better to have separate method for increment and decrement. Makes it clear where the refcnt is being changed and easier to search.",
+      "revId": "37453e936ae3606600f7be9c8f8a91aeb3c128c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
