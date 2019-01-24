@@ -159,11 +159,7 @@ struct response;
 
 long int get_global_tag(bool increment);
 
-#define array_strcpy(dest, src)				\
-	do {						\
-		strncpy(dest, src, sizeof(dest) - 1);	\
-		dest[sizeof(dest) - 1] = '\0';		\
-	} while (0)
+#define array_strcpy(dest, src) strlcpy(dest, src, sizeof(dest))
 
 #define array_strncpy(dest, src, len)			\
 	do {						\
