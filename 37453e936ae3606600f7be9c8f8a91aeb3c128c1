@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e441944_74179d0c",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-01-24T14:28:45Z",
+      "side": 1,
+      "message": "Oh, yes, good point... will fix",
+      "parentUuid": "c9217db2_9054b088",
+      "revId": "37453e936ae3606600f7be9c8f8a91aeb3c128c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7dd7a8cb_7da8ddea",
         "filename": "src/Protocols/NFS/nfs4_Compound.c",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2019-01-24T06:50:45Z",
       "side": 1,
       "message": "It is better to have separate method for increment and decrement. Makes it clear where the refcnt is being changed and easier to search.",
+      "revId": "37453e936ae3606600f7be9c8f8a91aeb3c128c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "072b2a7f_23178610",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-01-24T14:28:45Z",
+      "side": 1,
+      "message": "We have just used the raw atomic_inc in plenty of places, though I see the point. It looks like mostly we only have a separate function for the SAL refcounts",
+      "parentUuid": "7dd7a8cb_7da8ddea",
       "revId": "37453e936ae3606600f7be9c8f8a91aeb3c128c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
