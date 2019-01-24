@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0f0ddc3a_170b117c",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2700,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2019-01-24T07:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4e3fd3d_dcce2d56",
+      "range": {
+        "startLine": 2700,
+        "startChar": 1,
+        "endLine": 2700,
+        "endChar": 12
+      },
+      "revId": "6aff5bc75d04eaf1731ac285a6b8116baf703e64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c7daa0c_a270804d",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-24T04:27:59Z",
       "side": 1,
       "message": "lot of cases glfs_h_setxattrs return -1 and sets errno than returning the error value. IMO u need to use errno instead of rc for returning the status",
+      "range": {
+        "startLine": 2886,
+        "startChar": 2,
+        "endLine": 2886,
+        "endChar": 24
+      },
+      "revId": "6aff5bc75d04eaf1731ac285a6b8116baf703e64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a1643d9_c1c25f5b",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2886,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2019-01-24T07:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c7daa0c_a270804d",
       "range": {
         "startLine": 2886,
         "startChar": 2,
