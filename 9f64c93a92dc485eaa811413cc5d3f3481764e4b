@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "afaa11ba_8beb5a46",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:14:21Z",
+      "side": 1,
+      "message": "BTW what is the use of providing this option to user? The way storage stores and retrieves labels can be internal like in case of ACLs.\n\nAlso making a note that we shall need manpage/doc changes for this new option...maybe in another patch.",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1908aad2_83f7e107",
         "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
         "patchSetId": 5
