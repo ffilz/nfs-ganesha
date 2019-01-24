@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1908aad2_83f7e107",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:11:01Z",
+      "side": 1,
+      "message": "I may be failing to see..but where exactly is this variable initialized and set to the valuw configured by user?",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24195048_fcf2b068",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:11:01Z",
+      "side": 1,
+      "message": "Even ACLs are stored in xattr and can be fetched by any user IIRC. Why is this special case for this xattr.\n\nAlso I feel SET_GLUSTER-CREDS usage is incorrect here. None of the callers (getattrs, read_dirents) are setting credentials before calling this function. so resetting them to op_ctx-\u003ecreds at line 204 is incorrect.",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f33a6a6_728548ba",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:11:01Z",
+      "side": 1,
+      "message": "this code-path should be common for both if and else parts..better to move it line:374 before calling cb.\n\nnot related to this patch - just thinking out loud..we do not fetch ACL here in readdir response. Wonder if md-cache makes another getattr call (if acls are enabled) for each dirent or waits till nfs client actually makes a request. Probably 2nd case.",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d627ef7_ec5df51b",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:11:01Z",
+      "side": 1,
+      "message": "earlier it was falling through..but now we need to include \"goto creds\" here to rest creds.",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b724d10b_0f54d4cd",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2884,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:11:01Z",
+      "side": 1,
+      "message": "Dont we need \"op_ctx_export_has_option(EXPORT_OPTION_SECLABEL_SET)\" check here as well?",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21a7e490_ff42e9d5",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2891,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:11:01Z",
+      "side": 1,
+      "message": "Please include a log message here.",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf69bb71_44de41cc",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2892,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-24T08:11:01Z",
+      "side": 1,
+      "message": "we should reset creds ..so better to fall through here..or include \"goto creds\"",
+      "revId": "9f64c93a92dc485eaa811413cc5d3f3481764e4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
