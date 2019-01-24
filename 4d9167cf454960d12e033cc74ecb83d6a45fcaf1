@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e19fbb3b_21902ddc",
+        "filename": "src/FSAL/FSAL_VFS/xattrs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-24T14:55:25Z",
+      "side": 1,
+      "message": "How about just making the size MAXNAMELEN now?",
+      "revId": "4d9167cf454960d12e033cc74ecb83d6a45fcaf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b062ff5f_f6b1a74e",
+        "filename": "src/Protocols/9P/9p_walk.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-24T14:55:25Z",
+      "side": 1,
+      "message": "Again, I\u0027d vote for changing length to MAXNAMELEN.",
+      "revId": "4d9167cf454960d12e033cc74ecb83d6a45fcaf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b091491f_5707da0d",
+        "filename": "src/Protocols/9P/9p_xattrcreate.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-24T14:55:25Z",
+      "side": 1,
+      "message": "This one too.  There\u0027s a FSAL field with this name that\u0027s MAXNAMELEN+1, but it doesn\u0027t appear to be related to this one.",
+      "revId": "4d9167cf454960d12e033cc74ecb83d6a45fcaf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9755a857_0aaaf360",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-24T14:55:25Z",
+      "side": 1,
+      "message": "I don\u0027t think +1 is valid here, looking at the Ceph code.  I think it was wrong before.",
+      "revId": "4d9167cf454960d12e033cc74ecb83d6a45fcaf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
