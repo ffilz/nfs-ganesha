@@ -47,6 +47,8 @@
 #include <stdbool.h>
 #include <sys/param.h>
 
+#include "common_utils.h"
+
 #define MAXSTR 1024
 #define MAXDATA MAX(PATH_MAX, MAXSTR + 1)
 /* Define the maximum request/response */
@@ -159,11 +161,7 @@ struct response;
 
 long int get_global_tag(bool increment);
 
-#define array_strcpy(dest, src)				\
-	do {						\
-		strncpy(dest, src, sizeof(dest) - 1);	\
-		dest[sizeof(dest) - 1] = '\0';		\
-	} while (0)
+#define array_strcpy(dest, src) strlcpy(dest, src, sizeof(dest))
 
 #define array_strncpy(dest, src, len)			\
 	do {						\
