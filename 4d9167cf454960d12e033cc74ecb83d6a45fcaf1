@@ -67,6 +67,24 @@
       "revId": "4d9167cf454960d12e033cc74ecb83d6a45fcaf1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8405e181_9f557bd9",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-01-24T16:06:00Z",
+      "side": 1,
+      "message": "I don\u0027t know what rados_omap_get_next returns but it makes sense to return val_out as a non-null terminated string and its actual length that doesn\u0027t include null byte. Since we return \"val\" as true C-string, it is natural to add +1. Since the code was setting val[val_len_out] to NULL, I made an equivalent change here.",
+      "parentUuid": "9755a857_0aaaf360",
+      "revId": "4d9167cf454960d12e033cc74ecb83d6a45fcaf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
