@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e1ff48c7_014db161",
+        "filename": "src/FSAL/FSAL_VFS/xattrs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-01-25T19:11:06Z",
+      "side": 1,
+      "message": "web search shows that NAME_MAX (posix) is more portable than freebsd\u0027s MAXNAMELEN. Let us do that as a separate commit if needed.",
+      "parentUuid": "e19fbb3b_21902ddc",
+      "revId": "4d9167cf454960d12e033cc74ecb83d6a45fcaf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b062ff5f_f6b1a74e",
         "filename": "src/Protocols/9P/9p_walk.c",
         "patchSetId": 3
