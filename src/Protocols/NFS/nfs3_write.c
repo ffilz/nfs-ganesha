@@ -336,11 +336,14 @@ int nfs3_write(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	/* An actual write is to be made, prepare it */
 
 	/* Check for delegation conflict. */
+	PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
 	if (state_deleg_conflict(obj, true)) {
+		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 		res->res_write3.status = NFS3ERR_JUKEBOX;
 		rc = NFS_REQ_OK;
 		goto putref;
 	}
+	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 	/* Set up args, allocate from heap, iov_count will be 1 */
 	write_data = gsh_calloc(1, sizeof(*write_data) + sizeof(struct iovec));

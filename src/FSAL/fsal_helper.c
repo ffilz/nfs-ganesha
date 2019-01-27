@@ -480,8 +480,12 @@ fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
 		return fsalstat(ERR_FSAL_BADTYPE, 0);
 	}
 	if ((attr->valid_mask & (ATTR_SIZE | ATTR_MODE))) {
-		if (state_deleg_conflict(obj, true))
+		PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
+		if (state_deleg_conflict(obj, true)) {
+			PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 			return fsalstat(ERR_FSAL_DELAY, 0);
+		}
+		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 	}
 
 	/* Is it allowed to change times ? */
@@ -637,11 +641,15 @@ fsal_status_t fsal_link(struct fsal_obj_handle *obj,
 		if (FSAL_IS_ERROR(status))
 			return status;
 	}
+
+	PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
 	if (state_deleg_conflict(obj, true)) {
+		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 		LogDebug(COMPONENT_FSAL, "Found an existing delegation for %s",
 			  name);
 		return fsalstat(ERR_FSAL_DELAY, 0);
 	}
+	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 	/* Rather than performing a lookup first, just try to make the
 	   link and return the FSAL's error if it fails. */
@@ -1216,12 +1224,16 @@ fsal_remove(struct fsal_obj_handle *parent, const char *name)
 		goto out;
 	}
 
+	PTHREAD_RWLOCK_rdlock(&to_remove_obj->state_hdl->state_lock);
 	if (state_deleg_conflict(to_remove_obj, true)) {
+		PTHREAD_RWLOCK_unlock(&to_remove_obj->state_hdl->state_lock);
 		LogDebug(COMPONENT_FSAL, "Found an existing delegation for %s",
 			  name);
 		status = fsalstat(ERR_FSAL_DELAY, 0);
 		goto out;
 	}
+	PTHREAD_RWLOCK_unlock(&to_remove_obj->state_hdl->state_lock);
+
 	LogFullDebug(COMPONENT_FSAL, "%s", name);
 
 	/* Make sure the to_remove_obj is closed since unlink of an
@@ -1316,12 +1328,16 @@ fsal_status_t fsal_rename(struct fsal_obj_handle *dir_src,
 	/* *
 	 * added conflictsi check for destination in MDCACHE layer
 	 */
+	PTHREAD_RWLOCK_rdlock(&lookup_src->state_hdl->state_lock);
 	if (state_deleg_conflict(lookup_src, true)) {
+		PTHREAD_RWLOCK_unlock(&lookup_src->state_hdl->state_lock);
 		LogDebug(COMPONENT_FSAL, "Found an existing delegation for %s",
 			  oldname);
 		fsal_status = fsalstat(ERR_FSAL_DELAY, 0);
 		goto out;
 	}
+	PTHREAD_RWLOCK_unlock(&lookup_src->state_hdl->state_lock);
+
 	LogFullDebug(COMPONENT_FSAL, "about to call FSAL rename");
 
 	fsal_status = dir_src->obj_ops->rename(lookup_src, dir_src, oldname,

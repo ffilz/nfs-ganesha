@@ -151,10 +151,13 @@ static enum nfs_req_result allocate_deallocate(compound_data_t *data,
 		 * We have an anonymous stateid -- ensure that it doesn't
 		 * conflict with an outstanding delegation.
 		 */
+		PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
 		if (state_deleg_conflict(obj, true)) {
+			PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 			*status = NFS4ERR_DELAY;
 			goto out;
 		}
+		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 	}
 
 	/* Same permissions as required for a WRITE */

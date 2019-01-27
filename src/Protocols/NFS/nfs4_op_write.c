@@ -350,10 +350,13 @@ enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 		state_open = NULL;
 
 		/* Check for delegation conflict. */
+		PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
 		if (state_deleg_conflict(obj, true)) {
+			PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 			res_WRITE4->status = NFS4ERR_DELAY;
 			goto out;
 		}
+		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 		anonymous_started = true;
 	}
