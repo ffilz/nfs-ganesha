@@ -81,6 +81,63 @@ out:
 	return status;
 }
 
+/*
+ * @brief Fill in attributes received via CB_GETATTR
+ *
+ * As per rfc7530, if either of the filesize or Change attributes
+ * change, server should consider that file is modified by
+ * the client and should always send those attributes as received
+ * from the client. If not modified, fill in cached attributes.
+ *
+ * should be called under state_lock
+ */
+static void process_cbgetattr_resp(struct fsal_obj_handle *obj,
+			 mdcache_entry_t *entry, struct attrlist **attr)
+{
+	cbgetattr_t *cbgetattr;
+	struct timespec	timeo = { .tv_sec = time(NULL) + 5,
+				  .tv_nsec = 0 };
+	struct attrlist *ca = NULL;
+
+	cbgetattr = &obj->state_hdl->file.cbgetattr;
+
+	if (cbgetattr->state != CB_GETATTR_RSP_OK)
+		return;
+
+	if (!attr || (*attr)) {
+		cbgetattr->state = CB_GETATTR_FAILED;
+		return;
+	}
+
+	ca = *attr;
+
+	if (cbgetattr->modified)
+		goto modified;
+
+	/* otherwise verify if the file is modified */
+
+	if ((entry->attrs.filesize != cbgetattr->filesize) ||
+		(entry->attrs.change != cbgetattr->change)) {
+		cbgetattr->modified = true;
+	} else {
+		/* nothing to update. return cached attr */
+		return;
+	}
+
+modified:
+	ca->filesize = cbgetattr->filesize;
+	ca->valid_mask |= ATTR_SIZE;
+
+	ca->change = entry->attrs.change + 1;
+	ca->valid_mask |= ATTR_CHANGE;
+
+	ca->mtime = timeo;
+	ca->valid_mask |= ATTR_MTIME;
+
+	ca->ctime = timeo;
+	ca->valid_mask |= ATTR_CTIME;
+}
+
 /**
  * @brief Update cached attributes
  *
@@ -118,7 +175,8 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 	    ~(fsal_up_update_filesize_inc | fsal_up_update_atime_inc |
 	      fsal_up_update_creation_inc | fsal_up_update_ctime_inc |
 	      fsal_up_update_mtime_inc | fsal_up_update_chgtime_inc |
-	      fsal_up_update_spaceused_inc | fsal_up_nlink)) {
+	      fsal_up_update_spaceused_inc | fsal_up_nlink |
+	      fsal_up_cbgetattr)) {
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
@@ -156,6 +214,10 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 
 		if (FSAL_IS_ERROR(status))
 			goto put;
+	}
+
+	if (flags & fsal_up_cbgetattr) {
+		process_cbgetattr_resp(&entry->obj_handle, entry, &attr);
 	}
 
 	if (attr->valid_mask == 0) {

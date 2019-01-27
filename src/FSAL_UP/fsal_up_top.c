@@ -1673,6 +1673,13 @@ cbgetattr_state handle_getattr_response(struct cbgetattr_context *cbg_ctx,
 	nfs_client_id_t *clid = cbg_ctx->clid;
 	nfs_cb_resop4 *cbr = NULL;
 	CB_GETATTR4res *res = NULL;
+	const struct fsal_up_vector *event_func;
+	struct attrlist up_attr = {0, };
+	uint32_t upflags = 0;
+	struct gsh_buffdesc key;
+	fsal_status_t fsal_status = {0,};
+	struct req_op_context *save_ctx = op_ctx;
+	struct root_op_context root_ctx;
 
 	if (clid->cid_minorversion == 0)
 		cbr = &call->cbt.v_u.v4.res.resarray.resarray_val[0];
@@ -1694,8 +1701,27 @@ cbgetattr_state handle_getattr_response(struct cbgetattr_context *cbg_ctx,
 
 	obj->state_hdl->file.cbgetattr.filesize = rsp_attr.filesize;
 
+	event_func = (cbg_ctx->ctx_export->fsal_export->up_ops);
+
+	init_root_op_context(&root_ctx, cbg_ctx->ctx_export,
+			 cbg_ctx->ctx_export->fsal_export,
+			 0, 0, UNKNOWN_REQUEST);
+
+	/* @todo : log message if event_func is NULL */
+	obj->obj_ops->handle_to_key(obj, &key);
+
+	fsal_status = event_func->update(event_func, &key,
+					 &up_attr, upflags);
+	if (FSAL_IS_ERROR(fsal_status)) {
+		cb_state = CB_GETATTR_FAILED;
+		/* log message */
+		return CB_GETATTR_FAILED;
+	}
+
+	op_ctx = save_ctx;
 	return cb_state;
 out:
+	op_ctx = save_ctx;
 	return CB_GETATTR_FAILED;
 
 }

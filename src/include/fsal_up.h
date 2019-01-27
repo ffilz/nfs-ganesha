@@ -85,6 +85,9 @@ enum {
 
 	/* The file link count is zero. */
 	fsal_up_nlink = 0x0080,
+
+	/* Update CB_GETATTR attrs */
+	fsal_up_cbgetattr = 0x0100,
 };
 
 /**

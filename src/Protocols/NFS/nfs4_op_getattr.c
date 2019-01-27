@@ -72,6 +72,7 @@ enum nfs_req_result nfs4_op_getattr(struct nfs_argop4 *op,
 	nfs_client_id_t *deleg_client = NULL;
 	struct fsal_obj_handle *obj = data->current_obj;
 	bool state_lock_held = false;
+	cbgetattr_t *cbgetattr = NULL;
 
 	/* This is a NFS4_OP_GETTAR */
 	resp->resop = NFS4_OP_GETATTR;
@@ -130,7 +131,11 @@ enum nfs_req_result nfs4_op_getattr(struct nfs_argop4 *op,
 			goto out;
 		} else {
 			/* CB_GETATTR response handler must have updated the
-			 * attributes in md-cache. fall through. */
+			 * attributes in md-cache. reset cbgetattr state and
+			 * fall through. state_lock is held till we finish
+			 * sending response*/
+			cbgetattr = &obj->state_hdl->file.cbgetattr;
+			cbgetattr->state = CB_GETATTR_NONE;
 		}
 	} else {
 		/* release state_lock */
