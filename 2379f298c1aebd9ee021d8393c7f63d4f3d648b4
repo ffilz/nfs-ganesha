@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5d0e4e0e_19c1ad17",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-28T19:00:10Z",
+      "side": 1,
+      "message": "yes... we request for only change and size (partial) attributes via cb_getattr. As Frank mentioned, other attributes will not change for write-delegated file.\n\nas per rfc 7530, below is the pseudo code \n\u003e\u003e\n       if (!modified) {\n           do CB_GETATTR for change and size;\n\n           if (cc !\u003d sc)\n               modified \u003d TRUE;\n       } else {\n           do CB_GETATTR for size;\n       }\n\n       if (modified) {\n           sc \u003d sc + 1;\n           time_modify \u003d time_metadata \u003d current_time;\n           update sc, time_modify, time_metadata into file\u0027s metadata;\n       }\n\n\u003c\u003c\n\n\n@Frank,\nAgree. We discussed about it briefly over thurs call last week. I thought of adding checks in md-cache to not refresh the attributes if the file is write-delegated so that we do not over-write the attributes we just updated post CB_GETATTR. \n\nBut lately was thinking if it can be avoided to not complicate further. Here in mdc_up_update(), we can update entry-\u003eattr-\u003eexpire_time_attr to current time. Assuming the nfs-client\u0027s retry GETATTR request comes within the md-cache attribute cache timeout period, we shall serve these updated cb attrs.\n\nThoughts?",
+      "parentUuid": "7e4847de_604d741d",
+      "revId": "2379f298c1aebd9ee021d8393c7f63d4f3d648b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "405fb175_9b8dbf68",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2019-01-28T13:53:14Z",
       "side": 1,
       "message": "You should use release_root_op_context() here.  You don\u0027t need a save_ctx with these functions.",
+      "revId": "2379f298c1aebd9ee021d8393c7f63d4f3d648b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ef0df47_140f4ab7",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-28T19:00:10Z",
+      "side": 1,
+      "message": "will fix it.",
+      "parentUuid": "18febd9b_9df1ff9e",
       "revId": "2379f298c1aebd9ee021d8393c7f63d4f3d648b4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
