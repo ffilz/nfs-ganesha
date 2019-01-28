@@ -1,4 +1,6 @@
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include "config.h"
 #include "log.h"
 #include "nfs_core.h"
