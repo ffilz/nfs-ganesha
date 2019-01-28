@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7e4847de_604d741d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-01-28T15:56:11Z",
+      "side": 1,
+      "message": "If it only does partial attributes, it may be worth making the validity more granular, the cost otherwise is to recall the delegation so we can do a full getattr from the filesystem. It would be better to be able to refresh just these attributes.\n\nOf course if a client requests other attributes we may have to consider something different (though maybe the other attributes could be considered \"stable\" while in delegation).\n\nSo that\u0027s another possible solution to the partial validation - don\u0027t expire attributes while a delegation is held. We should have valid attributes when the delegation is taken.\n\nThat idea may need care with FSALs where we don\u0027t generally want to cache attributes (in which case we should cache attributes during a delegation...).",
+      "parentUuid": "ee31cff9_8919b972",
+      "revId": "2379f298c1aebd9ee021d8393c7f63d4f3d648b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "405fb175_9b8dbf68",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
         "patchSetId": 1
