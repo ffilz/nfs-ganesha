@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee31cff9_8919b972",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-28T13:53:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure how this interacts with attribute validity.  Does CB_GETATTR really only return SIZE, CHANGE, MTIME, and CTIME?  If so, I think we have to ignore it if the cached attributes are not valid (call mdcache_is_attrs_valid() to check).  If it returns them all, we should just call mdc_update_attr_cache() to update them.  Note you need the entry-\u003eattr_lock to check or update attributes.",
+      "revId": "2379f298c1aebd9ee021d8393c7f63d4f3d648b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "405fb175_9b8dbf68",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-28T13:53:14Z",
+      "side": 1,
+      "message": "I\u0027m wondering about this.  You\u0027re about to test all the attributes below regardless.  Why do we need a special check just for the few in process_cbdetattr_resp() ?",
+      "revId": "2379f298c1aebd9ee021d8393c7f63d4f3d648b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18febd9b_9df1ff9e",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-01-28T13:53:14Z",
+      "side": 1,
+      "message": "You should use release_root_op_context() here.  You don\u0027t need a save_ctx with these functions.",
+      "revId": "2379f298c1aebd9ee021d8393c7f63d4f3d648b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
