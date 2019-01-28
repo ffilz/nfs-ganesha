@@ -643,6 +643,7 @@ exit 0
 
 %files
 %{_bindir}/ganesha.nfsd
+%{_libdir}/libganesha_nfsd.*
 %config %{_sysconfdir}/dbus-1/system.d/org.ganesha.nfsd.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/ganesha
 %config(noreplace) %{_sysconfdir}/logrotate.d/ganesha
