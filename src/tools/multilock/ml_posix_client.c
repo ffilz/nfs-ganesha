@@ -551,6 +551,8 @@ bool do_lock(struct response *resp, enum thread_type thread_type)
 				return false;
 			}
 			resp->r_status = STATUS_DENIED;
+		} else if ((errno == EACCES) && (cmd == F_SETLK)) {
+			resp->r_status = STATUS_DENIED;
 		} else if (errno == EINTR) {
 			resp->r_status = STATUS_CANCELED;
 		} else if (errno == EDEADLK) {
@@ -610,7 +612,8 @@ void do_hop(struct response *resp)
 		rc = fcntl(fno[resp->r_fpos], cmd, &lock);
 
 		if (rc == -1) {
-			if (errno == EAGAIN) {
+			if ((errno == EAGAIN) ||
+			   ((errno == EACCES) && (cmd == F_SETLK))) {
 				resp->r_start = lock.l_start;
 				resp->r_length = 1;
 				resp->r_status = STATUS_DENIED;
