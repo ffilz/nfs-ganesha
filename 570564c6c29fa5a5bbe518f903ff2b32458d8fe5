@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6e398a8_929a5b51",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-01-29T14:03:17Z",
+      "side": 1,
+      "message": "Is this really ok? I\u0027m not 100% clear on how client expiration works, but I thought that in general the client holds a reference to the state. Will this not cause a circular dependency?",
+      "revId": "570564c6c29fa5a5bbe518f903ff2b32458d8fe5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
