@@ -16,6 +16,23 @@
       "revId": "589b6fd0c572040b78b779c373405a51cf73571e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbd89e8d_752b4b9e",
+        "filename": "src/tools/multilock/ml_posix_client.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-01-29T16:18:16Z",
+      "side": 1,
+      "message": "Yeah, this check should be merged with the first conditional expression. Also, a comment would be good why this is needed in the code (git commit message is not enough!)",
+      "revId": "589b6fd0c572040b78b779c373405a51cf73571e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
