@@ -16,6 +16,40 @@
       "revId": "4387da8c70be4d4dec88a2238c99728b2214182c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "129a2c8c_f3ad41b8",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-01-29T15:52:21Z",
+      "side": 1,
+      "message": "Do you need to hold the state_lock beyond this point?",
+      "revId": "4387da8c70be4d4dec88a2238c99728b2214182c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1333b966_d2b8333b",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-01-29T15:52:21Z",
+      "side": 1,
+      "message": "Why not just enable it universally?",
+      "revId": "4387da8c70be4d4dec88a2238c99728b2214182c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
