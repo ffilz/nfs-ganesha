@@ -1,0 +1,752 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19feaf27_6537ec6c",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        deleg_stats \u003d \u0026obj-\u003estate_hdl-\u003efile.fdeleg_stats;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51fc55e9_0ef7fc8a",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        deleg_stats \u003d \u0026obj-\u003estate_hdl-\u003efile.fdeleg_stats;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1bc8b65_5fbae04c",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        if (deleg_stats-\u003efds_curr_delegations \u003e 0) {$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77c10164_1ad9c53d",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        if (deleg_stats-\u003efds_curr_delegations \u003e 0) {$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ce9d60e_733a17c3",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                switch (deleg_stats-\u003efds_deleg_type) {$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1df4a922_abf3686e",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: switch and case should be at the same indent\n+                switch (deleg_stats-\u003efds_deleg_type) {\n+                        case OPEN_DELEGATE_READ:\n[...]\n+                        case OPEN_DELEGATE_WRITE:\n[...]\n+                        default:",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbf316aa_16fb17ad",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                switch (deleg_stats-\u003efds_deleg_type) {$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c239d757_48c52103",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        case OPEN_DELEGATE_READ:$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b4ff338_d823cb47",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        case OPEN_DELEGATE_READ:$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "461dc835_2a05b70b",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                if (deleg_stats-\u003eshare_deny_write || !write)$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1825c4b7_10fda852",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                if (deleg_stats-\u003eshare_deny_write || !write)$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c84c1b6_a1e36da1",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                        return false;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcda9450_20510d6b",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                        return false;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fc51564_0f6b73c3",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        case OPEN_DELEGATE_WRITE:$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "076cbbbd_f55ce3d3",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        case OPEN_DELEGATE_WRITE:$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39ac079f_aa08b3d6",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                LogDebug(COMPONENT_STATE,$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9846f983_1b03d4d3",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                LogDebug(COMPONENT_STATE,$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29d26791_635f246e",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                \"While trying to perform a %s op, found a conflicting\"$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9302fe57_1c9a5956",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                \"While trying to perform a %s op, found a conflicting\"$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c27dc7a8_4cf3fd30",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                \" %s delegation\", write ? \"write\" : \"read\",$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dba9bf84_7396fc35",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                \" %s delegation\", write ? \"write\" : \"read\",$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2bf43570_7a5ed428",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+                                                \" %s delegation\", write ? \"write\" : \"read\",",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "634df21d_241e3923",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                (deleg_stats-\u003efds_deleg_type \u003d\u003d OPEN_DELEGATE_WRITE) ?$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8134cd3b_a39b1fe5",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                (deleg_stats-\u003efds_deleg_type \u003d\u003d OPEN_DELEGATE_WRITE) ?$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5271ffc5_6f84d597",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+                                                (deleg_stats-\u003efds_deleg_type \u003d\u003d OPEN_DELEGATE_WRITE) ?",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93c1ab4a_5604c5e0",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                \"WRITE\" : \"READ\");$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ebe8e5d_0ffa864c",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                \"WRITE\" : \"READ\");$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecbc4668_026da138",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                if (async_delegrecall(general_fridge, obj) !\u003d 0)$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29dcbd11_6e777402",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                if (async_delegrecall(general_fridge, obj) !\u003d 0)$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f48d9588_661667af",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                        LogCrit(COMPONENT_STATE,$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b2045d6_de015ebf",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                        LogCrit(COMPONENT_STATE,$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4dce8441_0a3a71d4",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                        \"Failed to start thread to recall delegation from \"$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d0eb24f_b9a8c621",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                        \"Failed to start thread to recall delegation from \"$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "322acda4_592a65f5",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                        \"conflicting operation.\");$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9cfc462_ed34b0e8",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                        \"conflicting operation.\");$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19973a82_5019fadf",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                return true;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64650a61_e3838b72",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                return true;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "095b822e_6a02ec8f",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        default:$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49ff7aa3_0603810a",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                break;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e436676_bea093c2",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                break;$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65b0093b_47bd5ae0",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                }$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb26be2d_6f1e6af0",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                }$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4feeeea6_894ce7bb",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        }$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38618c73_ace4f54c",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T04:47:12Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        }$",
+      "revId": "e98426fa329c750cc0e7fb327f9dcf25fc6ec8c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
