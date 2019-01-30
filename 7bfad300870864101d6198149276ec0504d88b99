@@ -16,6 +16,23 @@
       "revId": "7bfad300870864101d6198149276ec0504d88b99",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8474070_613a425f",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T20:53:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\top_ctx_export_has_option(EXPORT_OPTION_SECLABEL_SET)) {",
+      "revId": "7bfad300870864101d6198149276ec0504d88b99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
