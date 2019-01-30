@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8fed424_8e2758bb",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T03:46:36Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define GLUSTERFS_SUPPORTED_ATTRIBUTES (ATTRS_POSIX | ATTR_ACL | ATTR4_SEC_LABEL)",
+      "revId": "c72bac88e841c15552cb19b0b98a0a669f474721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01a10b68_14c2477a",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T03:46:36Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+glusterfs_fsal_get_sec_label(struct glusterfs_handle *glhandle, struct attrlist *attrs)",
+      "revId": "c72bac88e841c15552cb19b0b98a0a669f474721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c0f46a3_acd7bc8c",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T03:46:36Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tcontainer_of(op_ctx-\u003efsal_export, struct glusterfs_export, export);",
+      "revId": "c72bac88e841c15552cb19b0b98a0a669f474721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff1cc362_d9554de6",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2878,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-01-30T03:46:36Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tattrib_set-\u003esec_label.slai_data.slai_data_len, 0);",
+      "revId": "c72bac88e841c15552cb19b0b98a0a669f474721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
