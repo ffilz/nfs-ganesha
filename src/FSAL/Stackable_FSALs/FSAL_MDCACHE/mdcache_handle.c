@@ -810,16 +810,25 @@ fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl,
 	struct attrlist attrs;
 	fsal_status_t status = {0, 0};
 	struct timespec oldmtime;
+	bool file_deleg = false;
 
 	/* Use this to detect if we should invalidate a directory. */
 	oldmtime = entry->attrs.mtime;
 
 	/* We always ask for all regular attributes, even if the caller was
-	 * only interested in the ACL.
+	 * only interested in the ACL unless the file is delegated.
 	 */
 	fsal_prepare_attrs(&attrs,
-			   op_ctx->fsal_export->exp_ops.fs_supported_attrs(
-					op_ctx->fsal_export) | ATTR_RDATTR_ERR);
+			op_ctx->fsal_export->exp_ops.fs_supported_attrs(
+			op_ctx->fsal_export) | ATTR_RDATTR_ERR);
+
+	file_deleg = (entry->sub_handle->state_hdl &&
+	  entry->sub_handle->state_hdl->file.fdeleg_stats.fds_curr_delegations);
+
+	if (file_deleg && entry->attrs.expire_time_attr) {
+		/* Do not request for ATTRS_POSIX if file is delegated */
+		attrs.request_mask &= ~ATTRS_POSIX;
+	}
 
 	if (!need_acl) {
 		/* Don't request the ACL if not necessary. */
