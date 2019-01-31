@@ -34,6 +34,24 @@
       "revId": "570564c6c29fa5a5bbe518f903ff2b32458d8fe5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c483e9e6_f7dcfbad",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-31T06:43:51Z",
+      "side": 1,
+      "message": "Thats correct and this ref is released when we reset the write_deleg_client pointer post releasing the lease_lock.",
+      "parentUuid": "5114dd48_508c6b64",
+      "revId": "570564c6c29fa5a5bbe518f903ff2b32458d8fe5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
