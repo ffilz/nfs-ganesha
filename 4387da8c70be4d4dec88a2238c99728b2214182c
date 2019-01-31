@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "13402d1e_867ddde6",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-31T18:56:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09e08f07_48efd5f9",
+      "revId": "4387da8c70be4d4dec88a2238c99728b2214182c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "129a2c8c_f3ad41b8",
         "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b463526d_ebd638fa",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-31T18:56:14Z",
+      "side": 1,
+      "message": "No. We need state_lock only till we reset cbgetattr state. Addressed in next patchset- https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/442206",
+      "parentUuid": "129a2c8c_f3ad41b8",
+      "revId": "4387da8c70be4d4dec88a2238c99728b2214182c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1333b966_d2b8333b",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2019-01-29T15:52:21Z",
       "side": 1,
       "message": "Why not just enable it universally?",
+      "revId": "4387da8c70be4d4dec88a2238c99728b2214182c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ce61c10_9c346f09",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-31T18:56:14Z",
+      "side": 1,
+      "message": "Since its optional to support CB_GETATTR, I am thinking if it will benefit users to provide an option to disable it if that helps in performance. Thoughts?",
+      "parentUuid": "1333b966_d2b8333b",
       "revId": "4387da8c70be4d4dec88a2238c99728b2214182c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
