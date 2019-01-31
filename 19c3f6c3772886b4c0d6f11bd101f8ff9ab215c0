@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "d569052f_ae7686b4",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-01-31T03:35:09Z",
+      "side": 1,
+      "message": "yes thats right. From the current implementation, we end up calling do_delegation again if the second OPEN (without CLAIM_DELEG_PREV) is requested from the client. However I am not sure if it is the right way to do it as we shall either end up recalling earlier delegation or grant two conflicting delegations to the same client. RFC doesnt state about it clearly on how delegation states should be handled for OPEN upgrade or downgrade. However it does state that share_access should be updated with the latest OPEN share mode. \n\nBut if the open mode is CLAIM_DELEGATE_CUR in do_delegation-\u003eshould_we_grant_deleg(), we return false and  hence do not grant new delegation.",
+      "parentUuid": "4d6c9c46_f5432e01",
+      "revId": "19c3f6c3772886b4c0d6f11bd101f8ff9ab215c0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a79ac376_58280528",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 1
