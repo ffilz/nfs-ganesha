@@ -69,6 +69,24 @@
       "revId": "ef22648bd764ee458d33782987fca35493dae6d8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daea4ff9_e4b74f84",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-02-01T15:21:44Z",
+      "side": 1,
+      "message": "Edge triggered, AFAIK. I\u0027ve not seen any evidence of a spurious callback when things get set up.\n\nBasically this sets up a watch on the primary OSD, and when another program calls rados_notify() on the object, the OSD will issue a notify message to all of its watchers. The librados client will then issue the callback for each watch that was set up. If the watch is set up after the notification occurs, then I don\u0027t think it\u0027ll get a notification.",
+      "parentUuid": "ee5f62ff_1dc32156",
+      "revId": "ef22648bd764ee458d33782987fca35493dae6d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
