@@ -52,6 +52,24 @@
       "revId": "a467d21bfbaab1c6741d6b10a4f5ccce487530d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69063729_66289450",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-02-01T14:45:30Z",
+      "side": 1,
+      "message": "Yes, valid_mask is the bits that we think contain data.  That data may be out of data (see mdcache_is_attrs_valid()), and valid_mask may have ATTR_RDATTR_ERR set (making them all invalid).\n\nLooking at mdc_up_update(), it seems we don\u0027t update valid_mask in the entry when we set new data from the upcall.  That should probably be fixed.",
+      "parentUuid": "7f096870_06bf6c68",
+      "revId": "a467d21bfbaab1c6741d6b10a4f5ccce487530d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
