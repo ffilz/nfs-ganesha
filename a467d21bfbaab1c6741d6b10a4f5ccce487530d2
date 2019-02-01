@@ -34,6 +34,24 @@
       "revId": "a467d21bfbaab1c6741d6b10a4f5ccce487530d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f096870_06bf6c68",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-02-01T11:28:38Z",
+      "side": 1,
+      "message": "Okay..I am thinking if any other attribute(like ACL) was not fetched earlier, we should let that be fetched and not ignore it if delegated. \n\n@Dan,\nIs it right to assume that at anytime entry-\u003eattrs.valid_mask contains the attributes bits updated so far?",
+      "parentUuid": "b5a5aaf0_13fcebb1",
+      "revId": "a467d21bfbaab1c6741d6b10a4f5ccce487530d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
