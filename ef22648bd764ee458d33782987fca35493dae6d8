@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "336a3611_3362937a",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-02-01T15:15:07Z",
+      "side": 1,
+      "message": "The problem there though is that this runs in the context of a thread spawned by librados. I don\u0027t really want to do reread_config from that context. Sending a signal ensures that we do that from the context of the sigmgr thread instead which is already known to be safe.\n\nWe could have some alternate way to wake up and internally signal that the config should be reread, but really...what\u0027s the problem with using signals here? Are you concerned about an actual issue, or is this just an aesthetic thing?",
+      "parentUuid": "b7c9bdfe_e5ab85ba",
+      "revId": "ef22648bd764ee458d33782987fca35493dae6d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee5f62ff_1dc32156",
         "filename": "src/config_parsing/conf_url_rados.c",
         "patchSetId": 1
