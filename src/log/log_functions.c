@@ -42,6 +42,7 @@
 #include <libgen.h>
 #include <sys/resource.h>
 #include <execinfo.h>
+#include <assert.h>
 
 #include "log.h"
 #include "gsh_list.h"
@@ -2662,4 +2663,40 @@ void gsh_backtrace(void)
 		}
 	}
 	PTHREAD_RWLOCK_unlock(&log_rwlock);
+}
+
+bool ___ratelimit(struct ratelimit_state *rs)
+{
+	bool ret;
+	bool cas;
+	time_t now;
+
+	/* compare exchange as a lightweight lock.
+	 * Or use try_mutex
+	 *
+	 * If we fail to acquire the lock, then we are alreday busy,
+	 * so don't log message (aka return false)
+	 */
+	cas = __sync_bool_compare_and_swap(&rs->lock, 0, 1);
+	if (!cas)
+		return false;
+
+	now = time(NULL);
+	if (now > rs->begin + rs->interval) {
+		rs->begin = now;
+		rs->printed = 0;
+		rs->missed = 0;
+	}
+
+	if (rs->burst > rs->printed) {
+		rs->printed++;
+		ret = true;
+	} else {
+		rs->missed++;
+		ret = false;
+	}
+	cas = __sync_bool_compare_and_swap(&rs->lock, 1, 0);
+	assert(cas);
+
+	return ret;
 }
