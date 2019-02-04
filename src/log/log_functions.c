@@ -42,6 +42,7 @@
 #include <libgen.h>
 #include <sys/resource.h>
 #include <execinfo.h>
+#include <assert.h>
 
 #include "log.h"
 #include "gsh_list.h"
@@ -2663,4 +2664,32 @@ void gsh_backtrace(void)
 		}
 	}
 	PTHREAD_RWLOCK_unlock(&log_rwlock);
+}
+
+bool _ratelimit(struct ratelimit_state *rs)
+{
+	bool ret;
+	time_t now;
+
+	/* If we fail to acquire the mutex, then we are alreday busy,
+	 * so don't log message (aka return false)
+	 */
+	if (pthread_mutex_trylock(&rs->mutex))
+		return false;
+
+	now = time(NULL);
+	if (now > rs->begin + rs->interval) {
+		rs->begin = now;
+		rs->printed = 0;
+	}
+
+	if (rs->burst > rs->printed) {
+		rs->printed++;
+		ret = true;
+	} else {
+		ret = false;
+	}
+	(void)pthread_mutex_unlock(&rs->mutex);
+
+	return ret;
 }
