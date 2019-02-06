@@ -72,14 +72,14 @@ enum nfs_req_result nfs4_op_rename(struct nfs_argop4 *op, compound_data_t *data,
 
 	/* Read and validate oldname and newname from uft8 strings. */
 	res_RENAME4->status = nfs4_utf8string2dynamic(&arg_RENAME4->oldname,
-						      UTF8_SCAN_ALL,
+						      UTF8_SCAN_NAME,
 						      &oldname);
 
 	if (res_RENAME4->status != NFS4_OK)
 		goto out;
 
 	res_RENAME4->status = nfs4_utf8string2dynamic(&arg_RENAME4->newname,
-						      UTF8_SCAN_ALL,
+						      UTF8_SCAN_NAME,
 						      &newname);
 
 	if (res_RENAME4->status != NFS4_OK)

@@ -127,7 +127,7 @@ enum nfs_req_result nfs4_op_create(struct nfs_argop4 *op, compound_data_t *data,
 
 	/* Validate and convert the UFT8 objname to a regular string */
 	res_CREATE4->status = nfs4_utf8string2dynamic(&arg_CREATE4->objname,
-						      UTF8_SCAN_ALL,
+						      UTF8_SCAN_NAME,
 						      &name);
 
 	if (res_CREATE4->status != NFS4_OK)

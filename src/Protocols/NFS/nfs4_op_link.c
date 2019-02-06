@@ -100,7 +100,7 @@ enum nfs_req_result nfs4_op_link(struct nfs_argop4 *op, compound_data_t *data,
 
 	/* Validate and convert the UFT8 objname to a regular string */
 	res_LINK4->status = nfs4_utf8string2dynamic(&arg_LINK4->newname,
-						    UTF8_SCAN_ALL,
+						    UTF8_SCAN_NAME,
 						    &newname);
 
 	if (res_LINK4->status != NFS4_OK)
