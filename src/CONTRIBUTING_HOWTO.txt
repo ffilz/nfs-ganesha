@@ -47,6 +47,16 @@ We also have several commit hooks, please install them:
 
     src/scripts/git_hooks/install_git_hooks.sh
 
+If you haven't already, generate ssh keys and install them for Github and
+Gerrithub:
+
+    ssh-keygen
+    cat ~/.ssh/id_rsa.pub
+
+Copy the output into:
+    Your Github account in "Settings" -> "SSH and GPG keys".
+    Your Gerrithub account in Settings -> "SSH Keys"
+
 Install the Gerrithub change id commit hook
 
     scp -p -P 29418 USERNAMEHERE@review.gerrithub.io:hooks/commit-msg .git/hooks/
@@ -72,11 +82,6 @@ done:
     git rebase origin/more-stable-dev-project
 
 Then push your work up to your github as follows:
-
-    ssh-keygen
-    cat ~/.ssh/id_rsa.pub
-
-Copy the output into your ssh keys in your github.com account.
 
 Pushing to your github is optional, but does provide some backup for your work.
 
