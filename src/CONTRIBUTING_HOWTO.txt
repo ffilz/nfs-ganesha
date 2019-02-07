@@ -88,10 +88,6 @@ done:
 
     git rebase origin/more-stable-dev-project
 
-Then push your work up to your Github as follows:
-
-Pushing to your Github is optional, but does provide some backup for your work.
-
 To push to the project, we now use Gerrithub for code submission and review.
 
 First, when creating a Gerrithub account (first time sign-in), do NOT copy your
@@ -129,7 +125,7 @@ creates disconnected review.
 
 To re-use a Change-Id, add the --amend option:
 
-    git commit --signoff --amend
+    git commit --amend
 
 If you want specific people to review your code, please go to Gerrithub and
 add them.
