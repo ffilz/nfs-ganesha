@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b7c996d0_5dc2eceb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-02-07T09:35:29Z",
+      "side": 1,
+      "message": "Ah, sorry - noticed this just now. There\u0027s one more git specificity here; please add a blank line after the inital commit line.\n\nThis is because most tools (like gerrit, see change title. but also git log --oneline and similar) will include everything up to the first blank line in the \"subject\", so you need to properly separate the commit subject from the rest of the message.\nI was just thinking how good your message was, too; thanks for spelling things out :)",
+      "revId": "2db05b3d438beb37592c5e357d93a87731ef8c12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd6aa197_dbaeb099",
         "filename": "src/CONTRIBUTING_HOWTO.txt",
         "patchSetId": 7
