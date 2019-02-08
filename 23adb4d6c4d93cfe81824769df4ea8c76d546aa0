@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43650535_d63d99fe",
+        "filename": "src/config_samples/proxy.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1008040
+      },
+      "writtenOn": "2019-02-08T08:30:16Z",
+      "side": 1,
+      "message": "Your\u0027re trying to push back the old syntax ! Ganesha FSAL_PROXY has been providing the ability to serve multiple exports since V2.7-dev.13 (the spring of 2018) and the following patch :\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\ncommit ef0cad22d8df5e940e0efafdcb56a59af43b0285\nAuthor: Patrice LUCAS \u003cpatrice.lucas@cea.fr\u003e\nDate:   Fri Apr 6 14:57:43 2018 +0200\n    FSAL_PROXY : multi-export\n    This patch allows several Proxy exports for one\n    ganesha server.\n    Move backend nfs server conf from module to export.\n    One RPC connection is set by export.\n    Change-Id: I8ccd723d93d5521864061e759d0a1cabcc7d1914\n    Signed-off-by: Patrice LUCAS \u003cpatrice.lucas@cea.fr\u003e\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n\nTo allow multiple exports, the nfs backend configuration is set in the export and not in the proxy module conf.\n\nFSAL_PROXY conf is now split in two parts: Global proxy parameters (valid and uniform among all proxy exports) are set in the global PROXY conf block. Proxy parameters specific to each proxy export (as nfs backend server address) are set in the proxy conf subblock of the export conf block.\n\nRegards,\nPatrice",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 3
+      },
+      "revId": "23adb4d6c4d93cfe81824769df4ea8c76d546aa0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
