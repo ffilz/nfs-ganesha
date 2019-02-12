@@ -918,7 +918,8 @@ struct dir_chunk *mdcache_get_chunk(mdcache_entry_t *parent,
 						    mdcache_dir_entry_t,
 						    chunk_list)->ck;
 	} else {
-		glist_add(&chunk->parent->fsobj.fsdir.chunks, &chunk->chunks);
+		glist_add_tail(&chunk->parent->fsobj.fsdir.chunks,
+			       &chunk->chunks);
 		chunk->reload_ck = whence;
 	}
 
