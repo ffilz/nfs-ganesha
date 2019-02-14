@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ba50f4c_5c6bc4e9",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-02-14T17:45:37Z",
+      "side": 1,
+      "message": "Doesnt sec_label_xattr need memory allocation first before copying string over?",
+      "revId": "7ec78fd34329d28bfb0928942864596648e1a331",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
