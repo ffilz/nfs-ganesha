@@ -42,6 +42,7 @@
 #endif
 #include "../Stackable_FSALs/FSAL_MDCACHE/mdcache_ext.h"
 #include "nfs_core.h"
+#include "common_utils.h"
 
 static void mem_release(struct fsal_obj_handle *obj_hdl);
 
@@ -301,6 +302,20 @@ mem_dirent_lookup(struct mem_fsal_obj_handle *dir, const char *name)
 }
 
 /**
+ * @brief Update the change attribute of the FSAL object
+ *
+ * @note Call must hold the obj_lock on the obj
+ *
+ * @param[in] obj	FSAL obj which was modified
+ */
+static void mem_update_change_locked(struct mem_fsal_obj_handle *obj)
+{
+	now(&obj->attrs.mtime);
+	obj->attrs.ctime = obj->attrs.mtime;
+	obj->attrs.change = timespec_to_nsecs(&obj->attrs.mtime);
+}
+
+/**
  * @brief Remove an obj from it's parent's tree
  *
  * @note Caller must hold the obj_lock on the parent
@@ -334,6 +349,8 @@ static void mem_remove_dirent_locked(struct mem_fsal_obj_handle *parent,
 	gsh_free(dirent);
 
 	mem_int_put_ref(child);
+
+	mem_update_change_locked(parent);
 }
 
 /**
@@ -465,8 +482,10 @@ static void mem_copy_attrs_mask(struct attrlist *attrs_in,
 
 	/* XXX TODO copy ACL */
 
-	attrs_out->chgtime = attrs_out->ctime;
-	attrs_out->change = timespec_to_nsecs(&attrs_out->chgtime);
+	/** @todo FSF - this calculation may be different than what particular
+	 *              FSALs use. Is that a problem?
+	 */
+	attrs_out->change = timespec_to_nsecs(&attrs_out->ctime);
 }
 
 /**
@@ -601,7 +620,6 @@ _mem_alloc_handle(struct mem_fsal_obj_handle *parent,
 
 	/* Use full timer resolution */
 	now(&hdl->attrs.ctime);
-	hdl->attrs.chgtime = hdl->attrs.ctime;
 
 	if ((attrs && attrs->valid_mask & ATTR_ATIME) != 0)
 		hdl->attrs.atime = attrs->atime;
@@ -613,8 +631,12 @@ _mem_alloc_handle(struct mem_fsal_obj_handle *parent,
 	else
 		hdl->attrs.mtime = hdl->attrs.ctime;
 
+
+	/** @todo FSF - this calculation may be different than what particular
+	 *              FSALs use. Is that a problem?
+	 */
 	hdl->attrs.change =
-		timespec_to_nsecs(&hdl->attrs.chgtime);
+		timespec_to_nsecs(&hdl->attrs.ctime);
 
 	switch (type) {
 	case REGULAR_FILE:
@@ -1946,9 +1968,13 @@ void mem_write2(struct fsal_obj_handle *obj_hdl,
 
 	/* Update change stats */
 	now(&myself->attrs.mtime);
-	myself->attrs.chgtime = myself->attrs.mtime;
+
+	/** @todo FSF - this calculation may be different than what particular
+	 *              FSALs use. Is that a problem? Also, above, ctime is used
+	 *              not mtime...
+	 */
 	myself->attrs.change =
-		timespec_to_nsecs(&myself->attrs.chgtime);
+		timespec_to_nsecs(&myself->attrs.mtime);
 
 	if (has_lock)
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
