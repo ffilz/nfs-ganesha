@@ -410,8 +410,6 @@ enum nfs_req_result nfs4_op_setclientid_confirm(struct nfs_argop4 *op,
 				"setclid confirm: Callback channel is UP");
 		}
 
-		/* Release our reference to the confirmed clientid. */
-		dec_client_id_ref(conf);
 	} else {
 		/* This is a new clientid */
 		if (isFullDebug(COMPONENT_CLIENTID)) {
@@ -463,7 +461,14 @@ enum nfs_req_result nfs4_op_setclientid_confirm(struct nfs_argop4 *op,
 				"setclid confirm: Callback channel is UP");
 		}
 
-		/* Release our reference to the now confirmed record */
+	}
+
+	/* Bump the lease timer and release our reference to the confirmed */
+	if (conf != NULL) {
+		conf->cid_last_renew = time(NULL);
+		dec_client_id_ref(conf);
+	} else {
+		unconf->cid_last_renew = time(NULL);
 		dec_client_id_ref(unconf);
 	}
 
