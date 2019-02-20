@@ -34,6 +34,24 @@
       "revId": "a63c77c233eb6bc5d41af7949f6507109124ecaa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20cd88ff_5fa23e22",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-02-20T16:54:08Z",
+      "side": 1,
+      "message": "Oops, got confused by the diff between versions...\n\nAnyway, I think the first version of your patch is cleaner.\n\nYea, CREATE_SESSION has found which makes doing the dec_client_id_ref farther down cleaner.",
+      "parentUuid": "113de5e7_acffaef9",
+      "revId": "a63c77c233eb6bc5d41af7949f6507109124ecaa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
