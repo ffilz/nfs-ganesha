@@ -16,6 +16,24 @@
       "revId": "a63c77c233eb6bc5d41af7949f6507109124ecaa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "113de5e7_acffaef9",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1015438
+      },
+      "writtenOn": "2019-02-20T16:27:57Z",
+      "side": 1,
+      "message": "I didn\u0027t add dec_client_id_ref() even in the first patch. It was always there..I have only moved both the calls down in the second patch.\n\nThe only difference between my first and second patch is that lease timer is bumped even for a new clientid now...I thought you wanted that.\n\nIf yes then a cleaner option is my first patch AND\nunconf-\u003ecid_last_renew \u003d time(NULL);  in its new client section.\n\nThe code for CREATE_SESSION was bit different. There we have \u0027found\u0027 at various places and we use that for dec_client_id_ref() etc.",
+      "parentUuid": "8205789c_c3c0cc4b",
+      "revId": "a63c77c233eb6bc5d41af7949f6507109124ecaa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
