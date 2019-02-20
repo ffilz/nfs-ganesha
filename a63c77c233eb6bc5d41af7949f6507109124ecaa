@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8205789c_c3c0cc4b",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-02-20T16:09:27Z",
+      "side": 1,
+      "message": "Oops, I hadn\u0027t noticed that you ALSO added a dec_client_id_ref which indeed is missing.\n\nSorry, given this, the fist version of the patch is actually cleaner, let\u0027s revert back to that...",
+      "revId": "a63c77c233eb6bc5d41af7949f6507109124ecaa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
