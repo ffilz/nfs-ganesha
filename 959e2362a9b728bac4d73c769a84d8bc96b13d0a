@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2cea781e_2f276d3a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/handle.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-02-22T07:11:37Z",
+      "side": 1,
+      "message": "Ah, is it a static vs non-static thing? We have a few of these static with the prefix so I didn\u0027t really pay attention; I\u0027ve always found these generic function names without prefix to be annoying when debugging (e.g. on a server with two different FSALs loaded, it\u0027s difficult to break on a specific FSAL\u0027s operation or even just annoying to read a stack trace and not see which implem is called)\n\nI\u0027ll leave that comment to decide something to Frank though - tag, you\u0027re it! :)",
+      "parentUuid": "42e5c87b_6fb79695",
+      "revId": "959e2362a9b728bac4d73c769a84d8bc96b13d0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dc22368c_cb346a46",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/nullfs_methods.h",
         "patchSetId": 8
