@@ -222,6 +222,9 @@ goption(USE_FSAL_XFS "build XFS support in VFS FSAL" ON)
 goption(USE_FSAL_PANFS "build PanFS support in VFS FSAL" OFF)
 goption(USE_FSAL_GLUSTER "build GLUSTER FSAL shared library" ON)
 goption(USE_FSAL_NULL "build NULL FSAL shared library" ON)
+goption(USE_FSAL_NULLCACHE "build NULLCACHE FSAL shared library" ON)
+goption(USE_FSAL_DISKCACHE "build DISKCACHE FSAL shared library" ON)
+goption(USE_FSAL_MEMCACHE "build MEMCACHE FSAL shared library" ON)
 goption(USE_FSAL_RGW "build RGW FSAL shared library" ON)
 goption(USE_FSAL_MEM "build Memory FSAL shared library" ON)
 
@@ -705,6 +708,18 @@ endif(USE_FSAL_GLUSTER)
 gopt_test(USE_FSAL_NULL)
 # NULL has no dependencies
 
+gopt_test(USE_FSAL_NULLCACHE)
+# Fix dependencies:
+# NULLCACHE depends on DATACACHE
+# DATACACHE depends on libprotobuf-c
+
+gopt_test(USE_FSAL_MEMCACHE)
+# MEMCACHE depends on DATACACHE
+# MEMCACHE depends on libmemcached
+
+gopt_test(USE_FSAL_MEMCACHE)
+# MEMCACHE depends on DATACACHE
+
 gopt_test(USE_FSAL_RGW)
 if(USE_FSAL_RGW)
   # require RGW w/API version 1.1.x
@@ -1151,6 +1166,9 @@ message(STATUS "USE_FSAL_PANFS = ${USE_FSAL_PANFS}")
 message(STATUS "USE_FSAL_GPFS = ${USE_FSAL_GPFS}")
 message(STATUS "USE_FSAL_GLUSTER = ${USE_FSAL_GLUSTER}")
 message(STATUS "USE_FSAL_NULL = ${USE_FSAL_NULL}")
+message(STATUS "USE_FSAL_NULLCACHE = ${USE_FSAL_NULLCACHE}")
+message(STATUS "USE_FSAL_DISKCACHE = ${USE_FSAL_DISKCACHE}")
+message(STATUS "USE_FSAL_MEMCACHE = ${USE_FSAL_MEMCACHE}")
 message(STATUS "USE_FSAL_MEM = ${USE_FSAL_MEM}")
 message(STATUS "USE_SYSTEM_NTIRPC = ${USE_SYSTEM_NTIRPC}")
 message(STATUS "USE_DBUS = ${USE_DBUS}")
@@ -1344,6 +1362,24 @@ if(USE_FSAL_NULL)
 else(USE_FSAL_NULL)
     set(BCOND_NULLFS "%bcond_with")
 endif(USE_FSAL_NULL)
+
+if(USE_FSAL_NULLCACHE)
+    set(BCOND_NULLCACHE "%bcond_without")
+else(USE_FSAL_NULLCACHE)
+    set(BCOND_NULLCACHE "%bcond_with")
+endif(USE_FSAL_NULLCACHE)
+
+if(USE_FSAL_DISKCACHE)
+    set(BCOND_DISKCACHE "%bcond_without")
+else(USE_FSAL_DISKCACHE)
+    set(BCOND_DISKCACHE "%bcond_with")
+endif(USE_FSAL_DISKCACHE)
+
+if(USE_FSAL_MEMCACHE)
+    set(BCOND_MEMCACHE "%bcond_without")
+else(USE_FSAL_MEMCACHE)
+    set(BCOND_MEMCACHE "%bcond_with")
+endif(USE_FSAL_MEMCACHE)
 
 if(USE_FSAL_MEM)
     set(BCOND_MEM "%bcond_without")

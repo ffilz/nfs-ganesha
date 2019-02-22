@@ -14,6 +14,7 @@ SET(fsalnull_LIB_SRCS
    nullfs_methods.h
    main.c
    export.c
+   nullfs.c
 )
 
 add_library(fsalnull MODULE ${fsalnull_LIB_SRCS})
