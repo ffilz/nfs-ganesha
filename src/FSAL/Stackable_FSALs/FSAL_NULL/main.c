@@ -45,83 +45,6 @@
 /* FSAL name determines name of shared library: libfsal<name>.so */
 const char myname[] = "NULL";
 
-/* my module private storage
- */
-
-struct null_fsal_module NULLFS = {
-	.module = {
-		.fs_info = {
-			.maxfilesize = UINT64_MAX,
-			.maxlink = _POSIX_LINK_MAX,
-			.maxnamelen = 1024,
-			.maxpathlen = 1024,
-			.no_trunc = true,
-			.chown_restricted = true,
-			.case_insensitive = false,
-			.case_preserving = true,
-			.link_support = true,
-			.symlink_support = true,
-			.lock_support = true,
-			.lock_support_async_block = false,
-			.named_attr = true,
-			.unique_handles = true,
-			.acl_support = FSAL_ACLSUPPORT_ALLOW,
-			.cansettime = true,
-			.homogenous = true,
-			.supported_attrs = ALL_ATTRIBUTES,
-			.maxread = FSAL_MAXIOSIZE,
-			.maxwrite = FSAL_MAXIOSIZE,
-			.umask = 0,
-			.auth_exportpath_xdev = false,
-			.link_supports_permission_checks = true,
-		}
-	}
-};
-
-/* Module methods
- */
-
-/* init_config
- * must be called with a reference taken (via lookup_fsal)
- */
-
-static fsal_status_t init_config(struct fsal_module *nullfs_fsal_module,
-				 config_file_t config_struct,
-				 struct config_error_type *err_type)
-{
-	/* Configuration setting options:
-	 * 1. there are none that are changeable. (this case)
-	 *
-	 * 2. we set some here.  These must be independent of whatever
-	 *    may be set by lower level fsals.
-	 *
-	 * If there is any filtering or change of parameters in the stack,
-	 * this must be done in export data structures, not fsal params because
-	 * a stackable could be configured above multiple fsals for multiple
-	 * diverse exports.
-	 */
-
-	display_fsinfo(nullfs_fsal_module);
-	LogDebug(COMPONENT_FSAL,
-		 "FSAL INIT: Supported attributes mask = 0x%" PRIx64,
-		 nullfs_fsal_module->fs_info.supported_attrs);
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
-}
-
-/* Internal NULLFS method linkage to export object
- */
-
-fsal_status_t nullfs_create_export(struct fsal_module *fsal_hdl,
-				   void *parse_node,
-				   struct config_error_type *err_type,
-				   const struct fsal_up_vector *up_ops);
-
-fsal_status_t nullfs_update_export(struct fsal_module *fsal_hdl,
-				   void *parse_node,
-				   struct config_error_type *err_type,
-				   struct fsal_export *original,
-				   struct fsal_module *updated_super);
-
 /* Module initialization.
  * Called by dlopen() to register the module
  * keep a private pointer to me in myself
@@ -142,7 +65,7 @@ MODULE_INIT void nullfs_init(void)
 	}
 	myself->m_ops.create_export = nullfs_create_export;
 	myself->m_ops.update_export = nullfs_update_export;
-	myself->m_ops.init_config = init_config;
+	myself->m_ops.init_config = nullfs_init_config;
 
 	/* Initialize the fsal_obj_handle ops for FSAL NULL */
 	nullfs_handle_ops_init(&NULLFS.handle_ops);

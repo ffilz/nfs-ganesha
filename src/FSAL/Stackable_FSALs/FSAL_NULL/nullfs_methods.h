@@ -32,6 +32,8 @@
 #ifndef NULLFS_METHODS_H
 #define NULLFS_METHODS_H
 
+#include "fsal.h"
+
 struct null_fsal_module {
 	struct fsal_module module;
 	struct fsal_obj_ops handle_ops;
@@ -57,11 +59,32 @@ extern struct fsal_up_vector fsal_up_top;
 void nullfs_handle_ops_init(struct fsal_obj_ops *ops);
 
 /*
+ * Internal NULLFS method linkage to export object
+ */
+fsal_status_t nullfs_create_export(struct fsal_module *fsal_hdl,
+				   void *parse_node,
+				   struct config_error_type *err_type,
+				   const struct fsal_up_vector *up_ops);
+
+fsal_status_t nullfs_update_export(struct fsal_module *fsal_hdl,
+				   void *parse_node,
+				   struct config_error_type *err_type,
+				   struct fsal_export *original,
+				   struct fsal_module *updated_super);
+
+fsal_status_t nullfs_init_config(struct fsal_module *nullfs_fsal_module,
+				 config_file_t config_struct,
+				 struct config_error_type *err_type);
+
+
+/*
  * NULLFS internal export
  */
 struct nullfs_fsal_export {
 	struct fsal_export export;
 	/* Other private export data goes here */
+	void *config; /*< Sub FSAL module configuration. */
+
 };
 
 fsal_status_t nullfs_lookup_path(struct fsal_export *exp_hdl,
@@ -114,6 +137,8 @@ static inline bool nullfs_unopenable_type(object_file_type_t type)
 }
 
 /* I/O management */
+fsal_status_t nullfs_getattrs(struct fsal_obj_handle *obj_hdl,
+			      struct attrlist *attrib_get);
 fsal_status_t nullfs_close(struct fsal_obj_handle *obj_hdl);
 
 /* Multi-FD */

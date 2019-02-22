@@ -125,9 +125,10 @@ fsal_status_t nullfs_alloc_and_check_handle(
  * deprecated NULL parent && NULL path implies root handle
  */
 
-static fsal_status_t lookup(struct fsal_obj_handle *parent,
-			    const char *path, struct fsal_obj_handle **handle,
-			    struct attrlist *attrs_out)
+static fsal_status_t nullfs_lookup(struct fsal_obj_handle *parent,
+				   const char *path,
+				   struct fsal_obj_handle **handle,
+				   struct attrlist *attrs_out)
 {
 	/** Parent as nullfs handle.*/
 	struct nullfs_fsal_obj_handle *null_parent =
@@ -154,10 +155,10 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 					     handle, status);
 }
 
-static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
-			     const char *name, struct attrlist *attrs_in,
-			     struct fsal_obj_handle **new_obj,
-			     struct attrlist *attrs_out)
+static fsal_status_t nullfs_makedir(struct fsal_obj_handle *dir_hdl,
+				    const char *name, struct attrlist *attrs_in,
+				    struct fsal_obj_handle **new_obj,
+				    struct attrlist *attrs_out)
 {
 	*new_obj = NULL;
 	/** Parent directory nullfs handle. */
@@ -183,12 +184,12 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 					     new_obj, status);
 }
 
-static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
-			      const char *name,
-			      object_file_type_t nodetype,
-			      struct attrlist *attrs_in,
-			      struct fsal_obj_handle **new_obj,
-			      struct attrlist *attrs_out)
+static fsal_status_t nullfs_makenode(struct fsal_obj_handle *dir_hdl,
+				     const char *name,
+				     object_file_type_t nodetype,
+				     struct attrlist *attrs_in,
+				     struct fsal_obj_handle **new_obj,
+				     struct attrlist *attrs_out)
 {
 	/** Parent directory nullfs handle. */
 	struct nullfs_fsal_obj_handle *nullfs_dir =
@@ -216,18 +217,18 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 					     new_obj, status);
 }
 
-/** makesymlink
+/** nullfs_makesymlink
  *  Note that we do not set mode bits on symlinks for Linux/POSIX
  *  They are not really settable in the kernel and are not checked
  *  anyway (default is 0777) because open uses that target's mode
  */
 
-static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
-				 const char *name,
-				 const char *link_path,
-				 struct attrlist *attrs_in,
-				 struct fsal_obj_handle **new_obj,
-				 struct attrlist *attrs_out)
+static fsal_status_t nullfs_makesymlink(struct fsal_obj_handle *dir_hdl,
+					const char *name,
+					const char *link_path,
+					struct attrlist *attrs_in,
+					struct fsal_obj_handle **new_obj,
+					struct attrlist *attrs_out)
 {
 	/** Parent directory nullfs handle. */
 	struct nullfs_fsal_obj_handle *nullfs_dir =
@@ -255,9 +256,9 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 					     new_obj, status);
 }
 
-static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
-				 struct gsh_buffdesc *link_content,
-				 bool refresh)
+static fsal_status_t nullfs_readsymlink(struct fsal_obj_handle *obj_hdl,
+					struct gsh_buffdesc *link_content,
+					bool refresh)
 {
 	struct nullfs_fsal_obj_handle *handle =
 		(struct nullfs_fsal_obj_handle *) obj_hdl;
@@ -275,9 +276,9 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
-static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
-			      struct fsal_obj_handle *destdir_hdl,
-			      const char *name)
+static fsal_status_t nullfs_linkfile(struct fsal_obj_handle *obj_hdl,
+				     struct fsal_obj_handle *destdir_hdl,
+				     const char *name)
 {
 	struct nullfs_fsal_obj_handle *handle =
 		(struct nullfs_fsal_obj_handle *) obj_hdl;
@@ -310,10 +311,10 @@ static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
  * @return Result coming from the upper layer.
  */
 static enum fsal_dir_result nullfs_readdir_cb(
-					const char *name,
-					struct fsal_obj_handle *sub_handle,
-					struct attrlist *attrs,
-					void *dir_state, fsal_cookie_t cookie)
+	const char *name,
+	struct fsal_obj_handle *sub_handle,
+	struct attrlist *attrs,
+	void *dir_state, fsal_cookie_t cookie)
 {
 	struct nullfs_readdir_state *state =
 		(struct nullfs_readdir_state *) dir_state;
@@ -334,7 +335,7 @@ static enum fsal_dir_result nullfs_readdir_cb(
 }
 
 /**
- * read_dirents
+ * nullfs_read_dirents
  * read the directory and call through the callback function for
  * each entry.
  * @param dir_hdl [IN] the directory to read
@@ -344,10 +345,10 @@ static enum fsal_dir_result nullfs_readdir_cb(
  * @param eof [OUT] eof marker true == end of dir
  */
 
-static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
-				  fsal_cookie_t *whence, void *dir_state,
-				  fsal_readdir_cb cb, attrmask_t attrmask,
-				  bool *eof)
+static fsal_status_t nullfs_read_dirents(struct fsal_obj_handle *dir_hdl,
+					 fsal_cookie_t *whence, void *dir_state,
+					 fsal_readdir_cb cb,
+					 attrmask_t attrmask, bool *eof)
 {
 	struct nullfs_fsal_obj_handle *handle =
 		container_of(dir_hdl, struct nullfs_fsal_obj_handle,
@@ -393,8 +394,8 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
  * @returns The cookie value.
  */
 
-fsal_cookie_t compute_readdir_cookie(struct fsal_obj_handle *parent,
-				     const char *name)
+fsal_cookie_t nullfs_compute_readdir_cookie(struct fsal_obj_handle *parent,
+					    const char *name)
 {
 	fsal_cookie_t cookie;
 	struct nullfs_fsal_obj_handle *handle =
@@ -424,20 +425,20 @@ fsal_cookie_t compute_readdir_cookie(struct fsal_obj_handle *parent,
  * Although the cookies could be computed, the caller will already have them
  * and thus will provide them to save compute time.
  *
- * @param[in]  parent   Directory entries belong to.
- * @param[in]  name1    File name of first dirent
- * @param[in]  cookie1  Cookie of first dirent
- * @param[in]  name2    File name of second dirent
- * @param[in]  cookie2  Cookie of second dirent
+ * @param[in]  parent	Directory entries belong to.
+ * @param[in]  name1	File name of first dirent
+ * @param[in]  cookie1	Cookie of first dirent
+ * @param[in]  name2	File name of second dirent
+ * @param[in]  cookie2	Cookie of second dirent
  *
  * @retval < 0 if name1 sorts before name2
  * @retval == 0 if name1 sorts the same as name2
  * @retval >0 if name1 sorts after name2
  */
 
-int dirent_cmp(struct fsal_obj_handle *parent,
-	       const char *name1, fsal_cookie_t cookie1,
-	       const char *name2, fsal_cookie_t cookie2)
+int nullfs_dirent_cmp(struct fsal_obj_handle *parent,
+		      const char *name1, fsal_cookie_t cookie1,
+		      const char *name2, fsal_cookie_t cookie2)
 {
 	int rc;
 	struct nullfs_fsal_obj_handle *handle =
@@ -457,7 +458,7 @@ int dirent_cmp(struct fsal_obj_handle *parent,
 	return rc;
 }
 
-static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
+static fsal_status_t nullfs_renamefile(struct fsal_obj_handle *obj_hdl,
 				struct fsal_obj_handle *olddir_hdl,
 				const char *old_name,
 				struct fsal_obj_handle *newdir_hdl,
@@ -487,7 +488,7 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
-static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl,
+fsal_status_t nullfs_getattrs(struct fsal_obj_handle *obj_hdl,
 			      struct attrlist *attrib_get)
 {
 	struct nullfs_fsal_obj_handle *handle =
@@ -530,13 +531,13 @@ static fsal_status_t nullfs_setattr2(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
-/* file_unlink
+/* nullfs_file_unlink
  * unlink the named file in the directory
  */
 
-static fsal_status_t file_unlink(struct fsal_obj_handle *dir_hdl,
-				 struct fsal_obj_handle *obj_hdl,
-				 const char *name)
+static fsal_status_t nullfs_file_unlink(struct fsal_obj_handle *dir_hdl,
+					struct fsal_obj_handle *obj_hdl,
+					const char *name)
 {
 	struct nullfs_fsal_obj_handle *nullfs_dir =
 		container_of(dir_hdl, struct nullfs_fsal_obj_handle,
@@ -557,16 +558,17 @@ static fsal_status_t file_unlink(struct fsal_obj_handle *dir_hdl,
 	return status;
 }
 
-/* handle_to_wire
+/* nullfs_handle_to_wire
  * fill in the opaque f/s file handle part.
- * we zero the buffer to length first.  This MAY already be done above
+ * we zero the buffer to length first.	This MAY already be done above
  * at which point, remove memset here because the caller is zeroing
  * the whole struct.
  */
 
-static fsal_status_t handle_to_wire(const struct fsal_obj_handle *obj_hdl,
-				    fsal_digesttype_t output_type,
-				    struct gsh_buffdesc *fh_desc)
+static fsal_status_t nullfs_handle_to_wire(
+		const struct fsal_obj_handle *obj_hdl,
+		fsal_digesttype_t output_type,
+		struct gsh_buffdesc *fh_desc)
 {
 	struct nullfs_fsal_obj_handle *handle =
 		container_of(obj_hdl, struct nullfs_fsal_obj_handle,
@@ -586,13 +588,13 @@ static fsal_status_t handle_to_wire(const struct fsal_obj_handle *obj_hdl,
 }
 
 /**
- * handle_to_key
+ * nullfs_handle_to_key
  * return a handle descriptor into the handle in this object handle
  * @TODO reminder.  make sure things like hash keys don't point here
  * after the handle is released.
  */
 
-static void handle_to_key(struct fsal_obj_handle *obj_hdl,
+static void nullfs_handle_to_key(struct fsal_obj_handle *obj_hdl,
 			  struct gsh_buffdesc *fh_desc)
 {
 	struct nullfs_fsal_obj_handle *handle =
@@ -610,11 +612,11 @@ static void handle_to_key(struct fsal_obj_handle *obj_hdl,
 }
 
 /*
- * release
+ * nullfs_release
  * release our handle first so they know we are gone
  */
 
-static void release(struct fsal_obj_handle *obj_hdl)
+static void nullfs_release(struct fsal_obj_handle *obj_hdl)
 {
 	struct nullfs_fsal_obj_handle *hdl =
 		container_of(obj_hdl, struct nullfs_fsal_obj_handle,
@@ -660,22 +662,22 @@ void nullfs_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	fsal_default_obj_ops_init(ops);
 
-	ops->release = release;
-	ops->lookup = lookup;
-	ops->readdir = read_dirents;
-	ops->compute_readdir_cookie = compute_readdir_cookie,
-	ops->dirent_cmp = dirent_cmp,
-	ops->mkdir = makedir;
-	ops->mknode = makenode;
-	ops->symlink = makesymlink;
-	ops->readlink = readsymlink;
-	ops->getattrs = getattrs;
-	ops->link = linkfile;
-	ops->rename = renamefile;
-	ops->unlink = file_unlink;
+	ops->release = nullfs_release;
+	ops->lookup = nullfs_lookup;
+	ops->readdir = nullfs_read_dirents;
+	ops->compute_readdir_cookie = nullfs_compute_readdir_cookie,
+	ops->dirent_cmp = nullfs_dirent_cmp,
+	ops->mkdir = nullfs_makedir;
+	ops->mknode = nullfs_makenode;
+	ops->symlink = nullfs_makesymlink;
+	ops->readlink = nullfs_readsymlink;
+	ops->getattrs = nullfs_getattrs;
+	ops->link = nullfs_linkfile;
+	ops->rename = nullfs_renamefile;
+	ops->unlink = nullfs_file_unlink;
 	ops->close = nullfs_close;
-	ops->handle_to_wire = handle_to_wire;
-	ops->handle_to_key = handle_to_key;
+	ops->handle_to_wire = nullfs_handle_to_wire;
+	ops->handle_to_key = nullfs_handle_to_key;
 
 	/* Multi-FD */
 	ops->open2 = nullfs_open2;
