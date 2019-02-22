@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf639ce4_6f958d6d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/handle.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-02-22T06:52:29Z",
+      "side": 1,
+      "message": "how annoying would it be to prefix the other ops? It feels a bit odd to only have this one prefixed by nullfs for no apparent reason",
+      "revId": "959e2362a9b728bac4d73c769a84d8bc96b13d0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc22368c_cb346a46",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/nullfs_methods.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-02-22T06:52:29Z",
+      "side": 1,
+      "message": "(nitpick) prefer doxygen-style comment e.g.\n\n  void *config; /*\u003c Sub-FSAL module cnofiguration */\n\nAlso I don\u0027t see it used, but I guess you intend to share this with other subfsals?",
+      "revId": "959e2362a9b728bac4d73c769a84d8bc96b13d0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
