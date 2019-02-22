@@ -487,7 +487,7 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
-static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl,
+fsal_status_t nullfs_getattrs(struct fsal_obj_handle *obj_hdl,
 			      struct attrlist *attrib_get)
 {
 	struct nullfs_fsal_obj_handle *handle =
@@ -669,7 +669,7 @@ void nullfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->mknode = makenode;
 	ops->symlink = makesymlink;
 	ops->readlink = readsymlink;
-	ops->getattrs = getattrs;
+	ops->getattrs = nullfs_getattrs;
 	ops->link = linkfile;
 	ops->rename = renamefile;
 	ops->unlink = file_unlink;
