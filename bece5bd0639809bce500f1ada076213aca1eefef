@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28a3fa61_def2295a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/nullfs.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-02-22T13:36:44Z",
+      "side": 1,
+      "message": "Why are these split into a separate file, rather than being in main.c like the other FSALs?",
+      "revId": "bece5bd0639809bce500f1ada076213aca1eefef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
