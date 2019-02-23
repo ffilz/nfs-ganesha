@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da2620d2_1c1094af",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3089,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-02-23T23:01:54Z",
+      "side": 1,
+      "message": "2 or more threads doing a readdir of the same directory, all holding a read lock on the directory can result in race condition where it ends up doing multiple unrefs of the entry here. \n\nSuggest: \nuint32_t dflags \u003d atomic_postclear_uint32_t_bits(\u0026dirent-\u003eflags, DIR_ENTRY_REFFED);\nif (dflags \u0026 DIR_ENTRY_REFFED)\n \tmdcache_put(entry);",
+      "range": {
+        "startLine": 3083,
+        "startChar": 1,
+        "endLine": 3089,
+        "endChar": 0
+      },
+      "revId": "03ee21eae53f33e49a993f14309fadcb271a0cd4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
