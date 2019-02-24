@@ -72,6 +72,25 @@ avltree_inline_lookup_hk(const struct avltree_node *key,
 	return avltree_inline_lookup(key, tree, avl_dirent_name_cmpf);
 }
 
+/* Must be called with content lock held */
+static void
+mdcache_drop_dirent_ref(mdcache_dir_entry_t *dirent)
+{
+	mdcache_entry_t *entry = NULL;
+	fsal_status_t status;
+
+	if (dirent->flags & DIR_ENTRY_REFFED) {
+		/* We have a ref, so the entry must exist */
+		status = mdcache_find_keyed_reason(&dirent->ckey, &entry,
+						   MDC_REASON_SCAN);
+		assert(FSAL_IS_SUCCESS(status));
+
+		mdcache_put(entry);  /* Ref for dirent */
+		mdcache_put(entry);  /* Ref gotten above */
+		dirent->flags &= ~DIR_ENTRY_REFFED;
+	}
+}
+
 void
 avl_dirent_set_deleted(mdcache_entry_t *entry, mdcache_dir_entry_t *v)
 {
@@ -93,6 +112,7 @@ avl_dirent_set_deleted(mdcache_entry_t *entry, mdcache_dir_entry_t *v)
 	avltree_remove(&v->node_name, &entry->fsobj.fsdir.avl.t);
 
 	v->flags |= DIR_ENTRY_FLAG_DELETED;
+	mdcache_drop_dirent_ref(v);
 	mdcache_key_delete(&v->ckey);
 
 	/* Do stuff if chunked... */
@@ -212,24 +232,13 @@ void mdcache_avl_remove(mdcache_entry_t *parent,
 			mdcache_dir_entry_t *dirent)
 {
 	struct dir_chunk *chunk = dirent->chunk;
-	fsal_status_t status;
-	mdcache_entry_t *entry = NULL;
 
 	if ((dirent->flags & DIR_ENTRY_FLAG_DELETED) == 0) {
 		/* Remove from active names tree */
 		avltree_remove(&dirent->node_name, &parent->fsobj.fsdir.avl.t);
 	}
 
-	if (dirent->flags & DIR_ENTRY_REFFED) {
-		/* We have a ref, so the entry must exist */
-		status = mdcache_find_keyed_reason(&dirent->ckey, &entry,
-						   MDC_REASON_SCAN);
-		assert(FSAL_IS_SUCCESS(status));
-
-		mdcache_put(entry);  /* Ref for dirent */
-		mdcache_put(entry);  /* Ref gotten above */
-		dirent->flags &= ~DIR_ENTRY_REFFED;
-	}
+	mdcache_drop_dirent_ref(dirent);
 
 	if (dirent->chunk != NULL) {
 		/* Dirent belongs to a chunk so remove it from the chunk. */
