@@ -16,6 +16,24 @@
       "revId": "bece5bd0639809bce500f1ada076213aca1eefef",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "746c47b1_bba62ae7",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/nullfs.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2019-02-25T00:02:08Z",
+      "side": 1,
+      "message": "The main.c file now only contains the MODULE_INIT and MODULE_FINI functions that cannot be included in other FSAL modules, that need their own init and unload functions. The code from main.c that is used was therefore moved to this file.\n\nPut another way, the CMakeLists.txt files for the following modules look like this. Note that absence of FSAL_NULL/main.c\n\n...\nSET(fsalnullcache_LIB_SRCS\n   ../FSAL_NULL/export.c\n   ../FSAL_NULL/file.c\n   ../FSAL_NULL/handle.c\n   ../FSAL_NULL/nullfs.c\n   ../FSAL_NULL/nullfs_methods.h\n   ../FSAL_NULL/xattrs.c\n   # Other new files...\n)\n...",
+      "parentUuid": "28a3fa61_def2295a",
+      "revId": "bece5bd0639809bce500f1ada076213aca1eefef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
