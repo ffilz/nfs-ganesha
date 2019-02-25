@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "539853f0_2f9a4a61",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1016062
+      },
+      "writtenOn": "2019-02-25T13:57:35Z",
+      "side": 1,
+      "message": "@Daniel\nThis assert doesn\u0027t seems to be correct for the hardlinks case. In case of multiple dirents pointing to same mdcache_entry and when we are removing a link for v3, we are making the entry unreachable. We will hit this assert than if the dirents are reffed and we are trying to invalidate the parent chunk. mdc_try_get_cached()-\u003emdcache_find_keyed() is handling ENOENT. Can we do something similar here?",
+      "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
