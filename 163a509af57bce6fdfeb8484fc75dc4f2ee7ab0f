@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ded1a843_dfb610e6",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_convert.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-02-26T17:04:03Z",
+      "side": 1,
+      "message": "This probably should just be a LogInfo or even a LogDebug (the client will see the attribute rejection and it should be easy for the end user or sysadmin to figure it out without needing to fire off alerts because some monitor sees a CRIT error).",
+      "revId": "163a509af57bce6fdfeb8484fc75dc4f2ee7ab0f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6877f1c0_18012859",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-02-26T17:04:03Z",
+      "side": 1,
+      "message": "Same comment about INFO vs CRIT",
+      "revId": "163a509af57bce6fdfeb8484fc75dc4f2ee7ab0f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
