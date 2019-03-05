@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "493f2088_04568fa3",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-03-05T07:00:06Z",
+      "side": 1,
+      "message": "IMO, switching to root creds is not the right approach to fix this issue. The error for this particular use-case is generated from posix-acl xlator on glusterfs server stack. \n\nMaybe we are missing to pass a flag to allow owner to create the file. Could you please check what is expected in posix-acl xlator. Maybe there is a bug there.",
+      "revId": "3fcd762a7eaff988b8d80a6c543016e27130f115",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
