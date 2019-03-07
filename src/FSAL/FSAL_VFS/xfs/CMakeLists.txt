@@ -24,11 +24,16 @@ add_sanitizers(handle)
 set_target_properties(handle PROPERTIES IMPORTED_LOCATION ${PATH_LIBHANDLE})
 endif(PATH_LIBHANDLE)
 
-target_link_libraries(fsalxfs
+target_link_libraries(
+  fsalxfs
+  ganesha_nfsd
   gos
   ${SYSTEM_LIBRARIES}
 )
-target_link_libraries(fsalxfs handle)
+target_link_libraries(
+  fsalxfs
+  ganesha_nfsd
+  handle)
 
 set_target_properties(fsalxfs PROPERTIES VERSION 4.2.0 SOVERSION 4)
 install(TARGETS fsalxfs COMPONENT fsal DESTINATION  ${FSAL_DESTINATION} )
