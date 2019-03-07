@@ -1825,6 +1825,7 @@ fsal_status_t vfs_lookup_path(struct fsal_export *exp_hdl,
 		if (FSAL_IS_ERROR(status)) {
 			LogEvent(COMPONENT_FSAL, "Could not get the referral "
 				 "locations for the exported path: %s", path);
+			gsh_free(hdl);
 			return status;
 		}
 	}
