@@ -28,9 +28,11 @@ SET(fsalgluster_LIB_SRCS
 add_library(fsalgluster MODULE ${fsalgluster_LIB_SRCS})
 add_sanitizers(fsalgluster)
 
-target_link_libraries(fsalgluster
-  ${SYSTEM_LIBRARIES}
+target_link_libraries(
+  fsalgluster
+  ganesha_nfsd
   ${GFAPI_LIBRARIES}
+  ${SYSTEM_LIBRARIES}
 )
 
 set_target_properties(fsalgluster PROPERTIES VERSION 4.2.0 SOVERSION 4)

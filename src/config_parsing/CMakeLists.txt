@@ -10,7 +10,7 @@ BISON_TARGET(
   ConfigParser
   ${CMAKE_CURRENT_SOURCE_DIR}/conf_yacc.y
   ${CMAKE_CURRENT_BINARY_DIR}/conf_yacc.c
-  COMPILE_FLAGS "--defines -pganesha_yy"
+  COMPILE_FLAGS "--defines=${CMAKE_CURRENT_BINARY_DIR}/conf_yacc.h -pganesha_yy"
 )
 
 FLEX_TARGET(
