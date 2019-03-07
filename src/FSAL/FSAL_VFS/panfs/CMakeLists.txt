@@ -23,7 +23,9 @@ SET(fsalpanfs_LIB_SRCS
 add_library(fsalpanfs MODULE ${fsalpanfs_LIB_SRCS})
 add_sanitizers(fsalpanfs)
 
-target_link_libraries(fsalpanfs
+target_link_libraries(
+  fsalpanfs
+  ganesha_nfsd
   gos
   fsal_os
   ${SYSTEM_LIBRARIES}
