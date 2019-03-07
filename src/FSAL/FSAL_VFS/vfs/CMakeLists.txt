@@ -34,7 +34,11 @@ if(USE_FSAL_VFS)
       ${SYSTEM_LIBRARIES}
     )
 
-    target_link_libraries(fsalvfs ${fsalvfs_TGT_LINK_LIB})
+    target_link_libraries(
+      fsalvfs
+      ganesha_nfsd
+      ${fsalvfs_TGT_LINK_LIB}
+    )
     set_target_properties(fsalvfs PROPERTIES VERSION 4.2.0 SOVERSION 4)
     install(TARGETS fsalvfs COMPONENT fsal DESTINATION ${FSAL_DESTINATION} )
 endif(USE_FSAL_VFS)
@@ -53,7 +57,9 @@ if(USE_FSAL_LUSTRE)
 
         add_library(fsallustre MODULE ${fsallustre_LIB_SRCS})
         add_sanitizers(fsallustre)
-        target_link_libraries(fsallustre
+        target_link_libraries(
+            fsallustre
+            ganesha_nfsd
             ${fsalvfs_TGT_LINK_LIB}
             lustreapi
         )
@@ -82,7 +88,9 @@ if(USE_FSAL_LUSTRE)
 
         add_library(fsaldummylustre MODULE ${fsallustre_LIB_SRCS})
         add_sanitizers(fsaldummylustre)
-        target_link_libraries(fsaldummylustre
+        target_link_libraries(
+            fsaldummylustre
+            ganesha_nfsd
             ${fsalvfs_TGT_LINK_LIB}
         )
 
