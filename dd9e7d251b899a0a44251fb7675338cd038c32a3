@@ -16,6 +16,24 @@
       "revId": "dd9e7d251b899a0a44251fb7675338cd038c32a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "855eced7_e4b1384a",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-03-08T14:04:33Z",
+      "side": 1,
+      "message": "yes, cmake-3.13 is in EPEL7 and cmake-3.6 is in EPEL6 (as cmake3).\nDebian 9/jessie has cmake-3.7\nUbuntu 16.04/xenial has cmake-3.5\nSLES12 has cmake-3.5\n\nEvery other platform that (I think) we care about has a newer version. As such I don\u0027t believe it\u0027s necessary, per se, to require it; it\u0027s already everywhere. It would only be considered a requirement if someone wants to try to build on things like RHEL5 or SLES11 or Ubuntu 14.04.\n\nI\u0027ll look at target_sources(). I don\u0027t know cmake, so part of the rationale of posting this patch is to elicit just these sorts of suggestions. But if target_sources() isn\u0027t useful then we might be stuck with this.\n\nAnd no, I\u0027m not going to rewrite to meson.",
+      "parentUuid": "0bfc5c38_14f5b702",
+      "revId": "dd9e7d251b899a0a44251fb7675338cd038c32a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
