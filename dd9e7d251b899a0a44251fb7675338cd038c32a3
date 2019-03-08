@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bfc5c38_14f5b702",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-03-08T13:03:33Z",
+      "side": 1,
+      "message": "Hmm I don\u0027t really like having to point to all sources in a single CMakeLists file, it\u0027s usually a better practice to have files listed in the directory they\u0027re in like we currently do.\nI was thinking of just defining variables with sources from other directories but then cmake wouldn\u0027t manage the path relativity on its own easily, or we\u0027d need to stick $CMAKE_CURRENT_SOURCE_DIR everywhere which is just as ugly :/\n\ncmake \u003e\u003d 3.1 has a \"target_sources()\" command that would let us define the main DSO early on then add the files to it from each dir easily, but can we require cmake 3? It\u0027s in EPEL, so I guess it might be OK even for el7? That would let us keep a build architecture much closer to what we currently have than this current rework.\nAlternatively I\u0027m almost tempted to bring up meson if we\u0027re going to do such a major change, but that\u0027s just my dislike of cmake speaking and it has the same problem (epel only) :P",
+      "revId": "dd9e7d251b899a0a44251fb7675338cd038c32a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
