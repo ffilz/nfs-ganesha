@@ -322,6 +322,53 @@ class AdminInterface():
         msg = reply[1]
         return status, msg
 
+
+FileSys = namedtuple('FileSys',
+                     ['Path',
+                      'MajorDevId',
+                      'MinorDevId'])
+
+class CacheMgr():
+    '''
+    org.ganesha.nfsd.cachemgr
+    '''
+    def __init__(self, service, path, interface):
+        self.dbus_service_name = service
+        self.dbus_path = path
+        self.dbus_interface = interface
+
+        self.bus = dbus.SystemBus()
+        try:
+            self.dbusobj = self.bus.get_object(self.dbus_service_name,
+                                self.dbus_path)
+        except:
+            sys.exit("Error: Can't talk to ganesha service on d-bus." \
+                     " Looks like Ganesha is down")
+
+    def ShowFileSys(self):
+        show_filesys_method = self.dbusobj.get_dbus_method("ShowFileSys",
+                                                           self.dbus_interface)
+        try:
+           reply = show_filesys_method()
+        except dbus.exceptions.DBusException as e:
+           return False, e, []
+
+        time = reply[0]
+        fs_array = reply[1]
+
+        ts = (time[0],
+              time[1])
+
+        filesyss = []
+        for filesys in fs_array:
+            fs = filesys
+            filesys1 = FileSys(Path = str(fs[0]),
+                          MajorDevId = fs[1],
+                          MinorDevId = fs[2])
+            filesyss.append(filesys1)
+        return True, "Done", [ts, filesyss]
+
+
 LOGGER_PROPS = 'org.ganesha.nfsd.log.component'
 
 class LogManager():

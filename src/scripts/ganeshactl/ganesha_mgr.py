@@ -26,6 +26,7 @@ from Ganesha.ganesha_mgr_utils import ClientMgr
 from Ganesha.ganesha_mgr_utils import ExportMgr
 from Ganesha.ganesha_mgr_utils import AdminInterface
 from Ganesha.ganesha_mgr_utils import LogManager
+from Ganesha.ganesha_mgr_utils import CacheMgr
 
 SERVICE = 'org.ganesha.nfsd'
 
@@ -200,6 +201,39 @@ class ServerAdmin():
     def status_message(self, status, errormsg):
         print("Returns: status = %s, %s" % (str(status), errormsg))
 
+class ManageCache():
+
+    def __init__(self, parent=None):
+        self.cachemgr = CacheMgr(SERVICE,
+                                        '/org/ganesha/nfsd/CacheMgr',
+                                        'org.ganesha.nfsd.cachemgr')
+
+    def status_message(self, status, errormsg):
+        print "Returns: status = %s, %s" % (str(status), errormsg)
+
+    def showfs(self):
+        print "Show filesystems"
+        status, errormsg, reply = self.cachemgr.ShowFileSys()
+        if status == True:
+           ts = reply[0]
+           fss = reply[1]
+           self.proc_fs(ts, fss)
+        else:
+           self.status_message(status, errormsg)
+
+    def proc_fs(self, ts, fss):
+        print "Timestamp: ", time.ctime(ts[0]), ts[1], " nsecs"
+        if len(fss) == 0:
+            print "No filesystems"
+        else:
+            print "Filesystems:"
+            print " Path,  MajorDevId, MinorDevId"
+            for fs in fss:
+                print (" %s,  %s,  %s" %
+                       (fs.Path,
+                        fs.MajorDevId,
+                        fs.MinorDevId))
+
 class ManageLogs():
 
     def __init__(self, parent=None):
@@ -244,6 +278,7 @@ if __name__ == '__main__':
     clientmgr = ManageClients()
     ganesha = ServerAdmin()
     logmgr = ManageLogs()
+    cachemgr = ManageCache()
 
     USAGE = \
        "\nganesha_mgr.py command [OPTIONS]\n\n"                                \
@@ -269,6 +304,7 @@ if __name__ == '__main__':
        "   purge netgroups: Purges netgroups cache\n\n"                      \
        "   purge idmap: Purges idmapper cache\n\n"                      \
        "   purge gids: Purges gids cache\n\n"                      \
+       "   get_fscache: Shows the device ids for the filesystem cache\n\n"   \
        "   grace ipaddr: Begins grace for the given IP\n\n"                  \
        "   get_log component: Gets the log level for the given component\n\n"\
        "   set_log component level: \n"                                      \
@@ -359,6 +395,8 @@ if __name__ == '__main__':
         logmgr.get(sys.argv[2])
     elif sys.argv[1] == "getall_logs":
         logmgr.getall()
+    elif sys.argv[1] == "get_fscache":
+    	cachemgr.showfs()
 
     elif sys.argv[1] == "help":
        print(USAGE)
