@@ -34,6 +34,24 @@
       "revId": "dd9e7d251b899a0a44251fb7675338cd038c32a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4aed7ab8_fee17573",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-03-09T01:43:35Z",
+      "side": 1,
+      "message": "It\u0027s in epel but on el7 you need to explicitely install and run \u0027cmake3\u0027; the default cmake is still a (very old) cmake 2.8, hence my question.\nThat needs updating the spec file require and %cmake command at least (and lead to some more distro specific branching in the spec file, hence why I brought it up :)",
+      "parentUuid": "855eced7_e4b1384a",
+      "revId": "dd9e7d251b899a0a44251fb7675338cd038c32a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
