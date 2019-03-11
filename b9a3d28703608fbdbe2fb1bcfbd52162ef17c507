@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df32696d_50920bb4",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-03-11T13:28:41Z",
+      "side": 1,
+      "message": "This, unfortunately, isn\u0027t sufficient to avoid a leak.  If you look at the release() method (or the cleanup for a failed alloc_handle() call), there\u0027s other things inside the handle that are freed.  Probably, you\u0027ll need to create a \"free_handle()\" call that does the correct thing, and call it from here, from alloc_handle() on failure, and from release()",
+      "revId": "b9a3d28703608fbdbe2fb1bcfbd52162ef17c507",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
