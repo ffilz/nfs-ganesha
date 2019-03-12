@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "436e87e3_b968fb62",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-03-12T18:17:59Z",
+      "side": 1,
+      "message": "Probably right.  I\u0027ll look into this in the next day or so.",
+      "parentUuid": "8b64ff26_0fa517ef",
+      "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6043c7ec_44f5a9cf",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Yea, that might work. We just need to make sure the right thing happens if a LOOKUP finds the key?",
       "parentUuid": "6043c7ec_44f5a9cf",
+      "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c6a54c9_fae68934",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-03-12T18:17:59Z",
+      "side": 1,
+      "message": "Deleting the key is unrelated to whether or not lookup finds it, that depends on whether it\u0027s in the tree.",
+      "parentUuid": "d0d45b1a_59380c35",
       "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
