@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8b64ff26_0fa517ef",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-03-12T17:41:19Z",
+      "side": 1,
+      "message": "That might work. If the dirent is holding a ref, it can also hold a pointer for the lifetime of the ref.\n\nThe DIR_ENTRY_REFFED flag would indicate if the pointer is valid.\n\nOptionally, the pointer could replace the flag.",
+      "parentUuid": "7f675aa4_9c6f2f9a",
+      "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6043c7ec_44f5a9cf",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2019-03-12T14:56:14Z",
       "side": 1,
       "message": "I think a better solution is to just not free ckey here, and let mdcache_avl_remove() put the ref when it\u0027s eventually called (which it will be).",
+      "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0d45b1a_59380c35",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-03-12T17:41:19Z",
+      "side": 1,
+      "message": "Yea, that might work. We just need to make sure the right thing happens if a LOOKUP finds the key?",
+      "parentUuid": "6043c7ec_44f5a9cf",
       "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
