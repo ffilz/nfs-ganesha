@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06fd1310_0ffe14c5",
+        "filename": "src/support/nfs_filehandle_mgmt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-03-13T14:29:56Z",
+      "side": 1,
+      "message": "Let\u0027s actually just remove this.\n\nIn line 281, we have logged all the bytes of the file handle. If someone is debugging some weird file handle issue, they have the whole thing already logged.\n\nIf a handle is too short, it might not have fhflags1 or id.exports...\n\nIf the handle is malformed, the validation below is done safely and also safely logs the issue.\n\nThis log message just adds extra verbosity.\n\nThis same message was also added on line 164, let\u0027s get rid of that one also (again, the whole file handle is logged).",
+      "revId": "474b2467b61d21ca5f05a5d2de7b8ed642e24a70",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
