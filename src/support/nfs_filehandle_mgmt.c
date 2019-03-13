@@ -284,8 +284,11 @@ int nfs4_Is_Fh_Invalid(nfs_fh4 *fh)
 	/* Cast the fh as a non opaque structure */
 	pfile_handle = (file_handle_v4_t *) (fh->nfs_fh4_val);
 
-	LogFullDebug(COMPONENT_FILEHANDLE, "NFS4 Handle 0x%X export id %d",
-		pfile_handle->fhflags1, ntohs(pfile_handle->id.exports));
+	if (pfile_handle != NULL)
+		LogFullDebug(COMPONENT_FILEHANDLE,
+			     "NFS4 Handle 0x%X export id %d",
+			     pfile_handle->fhflags1,
+			     ntohs(pfile_handle->id.exports));
 
 	/* validate the filehandle  */
 	if (pfile_handle == NULL || fh->nfs_fh4_len == 0
