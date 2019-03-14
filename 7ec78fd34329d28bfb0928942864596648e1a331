@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "3b89ca78_06ecb9dd",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-03-14T14:00:55Z",
+      "side": 1,
+      "message": "Because we want to allow people to change the value at runtime (via the config file). There are other Linux Security Modules available. If someone wants to use SMACK, for instance, we need to allow them to set this to \"security.smack\". I don\u0027t think we\u0027ll want to force them to recompile for that.",
+      "parentUuid": "e1c15755_7d4ab4d5",
+      "revId": "7ec78fd34329d28bfb0928942864596648e1a331",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "20a27d68_e6546481",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 10
