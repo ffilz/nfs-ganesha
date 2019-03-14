@@ -141,6 +141,24 @@
       "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2a5a961_a07e4367",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-03-14T16:06:02Z",
+      "side": 1,
+      "message": "Okay, I\u0027ve done this here: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/448058\nThat change should make this one unnecessary, since it removes the lookup in mdcache_avl_remove().",
+      "parentUuid": "9b5ab2e4_672d64e2",
+      "revId": "eb13f3584d399ad491cfbc0b4892e47f65a78a65",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
