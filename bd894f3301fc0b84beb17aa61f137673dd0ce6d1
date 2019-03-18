@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de4c104e_8b6b977d",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-03-18T17:01:54Z",
+      "side": 1,
+      "message": "Do we care about SuSE here? FWIW, the test for this in the ceph tree seems to be:\n\n    %if 0%{?fedora} \u003e\u003d 29 || 0%{?suse_version} \u003e\u003d 1500 || 0%{?rhel} \u003e\u003d 8",
+      "revId": "bd894f3301fc0b84beb17aa61f137673dd0ce6d1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
