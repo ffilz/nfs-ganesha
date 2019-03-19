@@ -25,7 +25,7 @@ set_target_properties(handle PROPERTIES IMPORTED_LOCATION ${PATH_LIBHANDLE})
 endif(PATH_LIBHANDLE)
 
 target_link_libraries(fsalxfs
-  gos
+  ganesha_nfsd
   ${SYSTEM_LIBRARIES}
 )
 target_link_libraries(fsalxfs handle)
