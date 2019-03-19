@@ -46,6 +46,30 @@
       "revId": "8e50557bd8c46453a03f65193d7b9219b0ecd08a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3aff6f2_3f2ebf09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-03-19T15:16:25Z",
+      "side": 1,
+      "message": "Do you mean when you run ltp on nfs mounts, it ends up creating files without gfid on gluster bricks?\n\nChanges look good to me. But would like to understand the use-case better.",
+      "parentUuid": "f712ae49_08513184",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 14,
+        "endChar": 20
+      },
+      "revId": "8e50557bd8c46453a03f65193d7b9219b0ecd08a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
