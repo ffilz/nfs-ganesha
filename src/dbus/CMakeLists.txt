@@ -16,8 +16,8 @@ SET(gshdbus_STAT_SRCS
    ${FBSD_SUBR}
 )
 
-add_library(gshdbus STATIC ${gshdbus_STAT_SRCS})
+add_library(gshdbus OBJECT ${gshdbus_STAT_SRCS})
 add_sanitizers(gshdbus)
-
+set_target_properties(gshdbus PROPERTIES COMPILE_FLAGS "-fPIC")
 
 ########### install files ###############
