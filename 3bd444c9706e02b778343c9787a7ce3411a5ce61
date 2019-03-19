@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "e1dc3cb3_42c39888",
+        "filename": "src/dbus/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2019-03-19T13:35:22Z",
+      "side": 0,
+      "message": "I\u0027d remove this.",
+      "revId": "3bd444c9706e02b778343c9787a7ce3411a5ce61",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a887a4e8_e08b7671",
+        "filename": "src/dbus/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2019-03-19T13:35:22Z",
+      "side": 0,
+      "message": "And this.",
+      "revId": "3bd444c9706e02b778343c9787a7ce3411a5ce61",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2191d91_5e4c028e",
         "filename": "src/os/CMakeLists.txt",
         "patchSetId": 5
@@ -13,6 +47,24 @@
       "writtenOn": "2019-03-19T12:44:32Z",
       "side": 0,
       "message": "Why is this one being removed?",
+      "revId": "3bd444c9706e02b778343c9787a7ce3411a5ce61",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaa04f1e_4072688e",
+        "filename": "src/os/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2019-03-19T13:35:22Z",
+      "side": 0,
+      "message": "I guess this is due to compilation errors seen here: https://ganesha-ci.gandi-cloud.net/#builders/2/builds/530\n\nHowever I would remove the memstream part in dbus instead, otherwise we can\u0027t build using -DUSE_DBUS\u003dOFF.",
+      "parentUuid": "a2191d91_5e4c028e",
       "revId": "3bd444c9706e02b778343c9787a7ce3411a5ce61",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true

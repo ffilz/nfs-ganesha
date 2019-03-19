@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "08e9d50c_89183e40",
+        "filename": "src/FSAL/FSAL_VFS/xfs/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2019-03-19T13:35:22Z",
+      "side": 1,
+      "message": "Typo",
+      "revId": "df1647c1b9d3592af511db3e7ac282477311dc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0978c6f0_9f22bae9",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1014381
+      },
+      "writtenOn": "2019-03-19T13:35:22Z",
+      "side": 1,
+      "message": "Can\u0027t compile using -DUSE_DBUS\u003dOFF because of this. Maybe you should check that all compile-time options still work fine.",
+      "revId": "df1647c1b9d3592af511db3e7ac282477311dc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8ceb612b_68f950bc",
         "filename": "src/tools/CMakeLists.txt",
         "patchSetId": 5
