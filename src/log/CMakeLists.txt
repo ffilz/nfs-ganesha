@@ -22,9 +22,9 @@ SET(log_STAT_SRCS
    log_functions.c
 )
 
-add_library(log STATIC ${log_STAT_SRCS})
+add_library(log OBJECT ${log_STAT_SRCS})
 add_sanitizers(log)
-
+set_target_properties(log PROPERTIES COMPILE_FLAGS "-fPIC")
 
 ########### next target ###############
 
