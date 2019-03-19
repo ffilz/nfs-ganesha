@@ -29,7 +29,7 @@ if(USE_FSAL_VFS)
     add_library(fsalvfs MODULE ${fsalvfs_LIB_SRCS})
     add_sanitizers(fsalvfs)
     set(fsalvfs_TGT_LINK_LIB
-      gos
+      ganesha_nfsd
       fsal_os
       ${SYSTEM_LIBRARIES}
     )
