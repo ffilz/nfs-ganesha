@@ -319,9 +319,13 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 		if (FSAL_IS_ERROR(status))
 			goto out;
 #else
-		if (!xstat || !(rc & GFAPI_XREADDIRP_HANDLE)) {
-			status = gluster2fsal_error(errno);
-			goto out;
+		if (!xstat || !(rc & GFAPI_XREADDIRP_HANDLE) ||
+		    !(rc & GFAPI_XREADDIRP_STAT)) {
+			/* Fallback to lookup */
+			status = lookup(dir_hdl, de.d_name, &obj, &attrs);
+			if (FSAL_IS_ERROR(status))
+				goto out;
+			goto fill_cb;
 		}
 
 		sb = glfs_xreaddirplus_get_stat(xstat);
@@ -348,6 +352,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 			goto out;
 		}
 #endif
+fill_cb:
 		rc = glusterfs_fsal_get_sec_label(objhandle, &attrs);
 		if (rc < 0) {
 			status = gluster2fsal_error(errno);
