@@ -29,6 +29,7 @@ add_library(fsalgluster MODULE ${fsalgluster_LIB_SRCS})
 add_sanitizers(fsalgluster)
 
 target_link_libraries(fsalgluster
+  ganesha_nfsd
   ${SYSTEM_LIBRARIES}
   ${GFAPI_LIBRARIES}
 )

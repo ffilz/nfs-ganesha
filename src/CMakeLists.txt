@@ -1494,6 +1494,63 @@ if(COVERAGE)
 	endif(LCOV_EXEC AND GENHTML_EXEC)
 endif(COVERAGE)
 
+########### next target ###############
+
+add_executable(ganesha.nfsd ./MainNFSD/nfs_main.c)
+add_sanitizers(ganesha.nfsd)
+
+target_link_libraries(ganesha.nfsd
+  ganesha_nfsd
+  ${LIBTIRPC_LIBRARIES}
+  ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
+)
+
+install(TARGETS ganesha.nfsd COMPONENT daemon DESTINATION bin)
+
+########### next target ###############
+
+if(LINUX)
+
+  add_executable(sm_notify.ganesha ./Protocols/NLM/sm_notify.c)
+  add_sanitizers(sm_notify.ganesha)
+
+  target_link_libraries(sm_notify.ganesha
+    ganesha_nfsd
+    ${LIBTIRPC_LIBRARIES}
+    ${SYSTEM_LIBRARIES}
+    ${LTTNG_LIBRARIES}
+  )
+
+  if( USE_ADMIN_TOOLS )
+    install(TARGETS sm_notify.ganesha COMPONENT daemon DESTINATION bin)
+  endif( USE_ADMIN_TOOLS )
+endif(LINUX)
+
+########### next target ###############
+
+add_executable(verif_syntax EXCLUDE_FROM_ALL ./config_parsing/verif_syntax.c)
+add_sanitizers(verif_syntax)
+
+target_link_libraries(verif_syntax
+  ganesha_nfsd
+  ${LIBTIRPC_LIBRARIES}
+  ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
+)
+
+########### next target ###############
+
+add_executable(test_parsing EXCLUDE_FROM_ALL ./config_parsing/test_parse.c)
+add_sanitizers(test_parsing)
+
+target_link_libraries(test_parsing
+  ganesha_nfsd
+  ${LIBTIRPC_LIBRARIES}
+  ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
+)
+
 ########### add a "make doc" target to call Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
