@@ -94,6 +94,30 @@
       "revId": "8e50557bd8c46453a03f65193d7b9219b0ecd08a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92fbd3c2_86a1ebc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-03-20T06:49:29Z",
+      "side": 1,
+      "message": "Then I guess it could be an issue with glusterfs. Ideally any file  created on gluster(/client) mounts should have gfid associated with it. I request to report this issue in bugzilla and gluster-users ML.\n\nMaybe there are some races in dht which is resulting in this situation. We could take an opinion from other gluster experts to check if we need to address this in application layer.",
+      "parentUuid": "95fb3fac_3d9d6757",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 14,
+        "endChar": 20
+      },
+      "revId": "8e50557bd8c46453a03f65193d7b9219b0ecd08a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
