@@ -70,6 +70,30 @@
       "revId": "8e50557bd8c46453a03f65193d7b9219b0ecd08a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95fb3fac_3d9d6757",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2019-03-20T01:50:27Z",
+      "side": 1,
+      "message": "Yes, when I testing ltp on nfs mount, it ends up with some files without gfid some time, they are not listed at nfs mount and gets \"Directory not empty\" when removing their parent.",
+      "parentUuid": "a3aff6f2_3f2ebf09",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 14,
+        "endChar": 20
+      },
+      "revId": "8e50557bd8c46453a03f65193d7b9219b0ecd08a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
