@@ -16,6 +16,24 @@
       "revId": "c7fd7b5a14e2874d7fc19bead9852726e3f04e63",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8da4432b_f63c2d34",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 10
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-03-21T17:53:08Z",
+      "side": 1,
+      "message": "it\u0027s already installed by the install_target() in the .../src/CMakeLists.txt file. This is redundant here in the .spec file.",
+      "parentUuid": "b95d8729_60c5d1f1",
+      "revId": "c7fd7b5a14e2874d7fc19bead9852726e3f04e63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
