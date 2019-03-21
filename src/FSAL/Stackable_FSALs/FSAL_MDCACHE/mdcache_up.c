@@ -74,6 +74,13 @@ mdc_up_invalidate(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 	if (flags & FSAL_UP_INVALIDATE_CLOSE)
 		status = fsal_close(&entry->obj_handle);
 
+	if (entry->obj_handle.type == DIRECTORY) {
+		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
+		/* Clean up parent key */
+		mdcache_free_fh(&entry->fsobj.fsdir.parent);
+		PTHREAD_RWLOCK_unlock(&entry->content_lock);
+	}
+
 	mdcache_put(entry);
 
 out:
