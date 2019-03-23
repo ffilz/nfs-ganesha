@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3cf0fcd8_d6e450b1",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2019-03-23T00:48:04Z",
+      "side": 1,
+      "message": "If XREADDIRPLUS is not enabled, gluster calls lookup in which ACLs are filled, so re-fill acls is unneeded.",
+      "parentUuid": "7b8db00d_1c808f54",
+      "revId": "17efadf3feeeda055e837e7caf90448d8f978ea4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5cd350e_b1b0de90",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-03-22T15:43:11Z",
       "side": 1,
       "message": "was it intentional not to bail out here in case of error?",
+      "revId": "17efadf3feeeda055e837e7caf90448d8f978ea4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6ebaee2_4d14e89e",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2019-03-23T00:48:04Z",
+      "side": 1,
+      "message": "Yes, I think bail out it unneeded.\nBut, I need recheck the code of gettattrs filling acl, maybe a bail out is better.",
+      "parentUuid": "a5cd350e_b1b0de90",
       "revId": "17efadf3feeeda055e837e7caf90448d8f978ea4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
