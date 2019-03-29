@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a0ba8e1_0744d054",
+        "filename": "src/FSAL/FSAL_VFS/os/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-03-29T14:51:59Z",
+      "side": 1,
+      "message": "I\u0027m surprised cmake doesn\u0027t set -fPIC for us? But it seems a lot of these were here before so it\u0027s nothing new anyway, can be discussed separately..",
+      "revId": "c994510a9b0ba69e457fb025905e6c22bc9e5088",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcf521b0_63974791",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2019-03-29T14:51:59Z",
+      "side": 1,
+      "message": "nice, I like this with objects much better than the previous version - thanks for figuring this out.",
+      "revId": "c994510a9b0ba69e457fb025905e6c22bc9e5088",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
