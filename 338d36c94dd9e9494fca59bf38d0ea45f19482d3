@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14e787a9_55377074",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-03-29T04:03:31Z",
+      "side": 1,
+      "message": "I think we should talk about this user interface in the call. I like \"ganesha_mgr show exports\", \"ganesha_mgr show fscache\" etc. A \"show\" sub command to show things.\n\nIt already has \"ganesha_mgr purge netgroups\" or ganesha_mgr purge gids\" etc...",
+      "revId": "338d36c94dd9e9494fca59bf38d0ea45f19482d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "652b8cd5_758aa53d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-03-29T04:03:31Z",
+      "side": 1,
+      "message": "The function get_posix_fs_dev_ids() is filling in the dbus fields. It might be cleaner to put those dbus initializations here to make the code easy to understand?\n\nNot sure why showfs_state struct is needed.",
+      "revId": "338d36c94dd9e9494fca59bf38d0ea45f19482d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23819db9_fc92d6e7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-03-29T04:03:31Z",
+      "side": 1,
+      "message": "The existing code uses CamelCase, should we follow it? Why not just \"showfs\" OR \"posix_showfs\" just like its method.",
+      "revId": "338d36c94dd9e9494fca59bf38d0ea45f19482d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "169626d5_75a1231c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1738,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-03-29T04:03:31Z",
+      "side": 1,
+      "message": "Another CamelCase, can it be just \"cachemgr\" ?",
+      "revId": "338d36c94dd9e9494fca59bf38d0ea45f19482d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12ad8370_7f20ddbc",
+        "filename": "src/scripts/ganeshactl/Ganesha/ganesha_mgr_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-03-29T04:03:31Z",
+      "side": 1,
+      "message": "Since you are immediately assigning, why not use \"fs\" as the loop variable itself? (e.g. for fs in fs_array:). Maybe, use \"fss\" rather than \"filesyss\" as used elsewhere!",
+      "revId": "338d36c94dd9e9494fca59bf38d0ea45f19482d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
