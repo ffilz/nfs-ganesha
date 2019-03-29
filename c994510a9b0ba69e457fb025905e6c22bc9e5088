@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "695abbb4_9e6e1bb9",
+        "filename": "src/FSAL/FSAL_VFS/os/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-03-29T15:28:10Z",
+      "side": 1,
+      "message": "it automatically sets -fPIC on SHARED and MODULE libs, not on OBJECT libs.\n\nThere\u0027s some magic where it will set -fPIC globally, but I couldn\u0027t find how to do it, and I don\u0027t think we actually want it globally. There\u0027s also some other way to set properties on targets but that is also poorly documented and in the end it\u0027s nearly the same as doing this.",
+      "parentUuid": "2a0ba8e1_0744d054",
+      "revId": "c994510a9b0ba69e457fb025905e6c22bc9e5088",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fcf521b0_63974791",
         "filename": "src/MainNFSD/CMakeLists.txt",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-03-29T14:51:59Z",
       "side": 1,
       "message": "nice, I like this with objects much better than the previous version - thanks for figuring this out.",
+      "revId": "c994510a9b0ba69e457fb025905e6c22bc9e5088",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd217ae4_aa2a377d",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-03-29T15:28:10Z",
+      "side": 1,
+      "message": "yes, I like this better too.",
+      "parentUuid": "fcf521b0_63974791",
       "revId": "c994510a9b0ba69e457fb025905e6c22bc9e5088",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
