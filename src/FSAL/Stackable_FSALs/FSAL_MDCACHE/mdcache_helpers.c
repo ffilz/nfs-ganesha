@@ -389,6 +389,12 @@ mdc_get_parent_handle(struct mdcache_fsal_export *export,
 	/* And store in the parent host-handle */
 	mdcache_copy_fh(&entry->fsobj.fsdir.parent, &fh_desc);
 
+	if (op_ctx->fsal_export->exp_ops.fs_expiretimeparent(
+	    op_ctx->fsal_export) != -1)
+		entry->fsobj.fsdir.parent_time = time(NULL);
+	else
+		entry->fsobj.fsdir.parent_time = 0;
+
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
@@ -398,6 +404,7 @@ mdc_get_parent(struct mdcache_fsal_export *export, mdcache_entry_t *entry)
 {
 	struct fsal_obj_handle *sub_handle;
 	fsal_status_t status;
+	int32_t expire_time_parent;
 
 #ifdef DEBUG_MDCACHE
 	assert(entry->content_lock.__data.__cur_writer);
@@ -410,7 +417,13 @@ mdc_get_parent(struct mdcache_fsal_export *export, mdcache_entry_t *entry)
 
 	if (entry->fsobj.fsdir.parent.len != 0) {
 		/* Already has a parent pointer */
-		return;
+		expire_time_parent =
+			op_ctx->fsal_export->exp_ops.fs_expiretimeparent(
+							op_ctx->fsal_export);
+		if (expire_time_parent == -1 ||
+		    mdcache_is_parent_valid(entry, expire_time_parent)) {
+			return;
+		}
 	}
 
 	subcall_raw(export,
@@ -423,6 +436,9 @@ mdc_get_parent(struct mdcache_fsal_export *export, mdcache_entry_t *entry)
 		return;
 	}
 
+	if (entry->fsobj.fsdir.parent.len != 0) {
+		mdcache_free_fh(&entry->fsobj.fsdir.parent);
+	}
 	mdc_get_parent_handle(export, entry, sub_handle);
 
 	/* Release parent handle */
@@ -1157,12 +1173,10 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 		LogFullDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_CACHE_INODE,
 				"Lookup parent (..) of %p", mdc_parent);
 
-		if (mdc_parent->fsobj.fsdir.parent.len == 0) {
-			/* we need write lock */
-			PTHREAD_RWLOCK_unlock(&mdc_parent->content_lock);
-			PTHREAD_RWLOCK_wrlock(&mdc_parent->content_lock);
-			mdc_get_parent(export, mdc_parent);
-		}
+		/* we need write lock */
+		PTHREAD_RWLOCK_unlock(&mdc_parent->content_lock);
+		PTHREAD_RWLOCK_wrlock(&mdc_parent->content_lock);
+		mdc_get_parent(export, mdc_parent);
 
 		/* We need to drop the content lock around the locate, as that
 		 * will try to take the attribute lock on the parent to refresh

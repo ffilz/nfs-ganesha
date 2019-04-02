@@ -310,6 +310,10 @@ struct mdcache_fsal_obj_handle {
 			struct state_hdl dhdl; /**< Storage for dir state */
 			/** The parent host-handle of this directory ('..') */
 			struct gsh_buffdesc parent;
+			/** Time at which we last refreshed parent
+			  * host-handle.
+			  */
+			time_t parent_time;
 			/** The first dirent cookie in this directory.
 			 *  0 if not known.
 			 */
@@ -505,6 +509,8 @@ void mdc_get_parent(struct mdcache_fsal_export *exp,
 
 void mdc_update_attr_cache(mdcache_entry_t *entry, struct attrlist *attrs);
 
+static inline void mdcache_free_fh(struct gsh_buffdesc *fh_desc);
+
 /**
  * @brief Atomically test the bits in mde_flags.
  *
@@ -621,6 +627,26 @@ mdcache_key_dup(mdcache_key_t *tgt,
 }
 
 /**
+ * @brief Check if the parent key of an entry has expired.
+ *
+ * If the parent key is valid return true else return false.
+ *
+ * @param[in] entry     Entry whose parent key may have expired.
+ * @param[in] expire_time_parent Expiration time interval (seconds) for parent
+ * @return Return true if valid, false if invalid.
+ */
+static inline bool
+mdcache_is_parent_valid(mdcache_entry_t *entry, int32_t expire_time_parent)
+{
+	time_t current_time = time(NULL);
+
+	if (current_time - entry->fsobj.fsdir.parent_time >
+	    expire_time_parent)
+		return false;
+	return true;
+}
+
+/**
  * @brief Set the parent key of an entry
  *
  * If the parent key is not set, set it.  This keeps keys from being leaked.
@@ -631,13 +657,27 @@ mdcache_key_dup(mdcache_key_t *tgt,
 static inline void
 mdc_dir_add_parent(mdcache_entry_t *entry, mdcache_entry_t *mdc_parent)
 {
-	if (entry->fsobj.fsdir.parent.len == 0) {
-		/* The parent key must be a host-handle so that
-		 * create_handle() works in all cases.
-		 */
-		mdc_get_parent_handle(mdc_cur_export(), entry,
-				      mdc_parent->sub_handle);
+	int32_t expire_time_parent;
+
+	if (entry->fsobj.fsdir.parent.len != 0) {
+		/* Already has a parent pointer */
+		expire_time_parent =
+			op_ctx->fsal_export->exp_ops.fs_expiretimeparent(
+							op_ctx->fsal_export);
+		if (expire_time_parent == -1 ||
+		    mdcache_is_parent_valid(entry, expire_time_parent)) {
+			return;
+		} else {
+			/* Clean up parent key */
+			mdcache_free_fh(&entry->fsobj.fsdir.parent);
+		}
 	}
+
+	/* The parent key must be a host-handle so that
+	 * create_handle() works in all cases.
+	 */
+	mdc_get_parent_handle(mdc_cur_export(), entry,
+			      mdc_parent->sub_handle);
 }
 
 /**
