@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2982511a_7302df4b",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-04-03T18:22:37Z",
+      "side": 1,
+      "message": "This code is not taking into account requests that are active (entries whose RPC was still executing, i.e., those in the DUPREQ_START state) before retiring them.  A subsequent RPC retx by the client is then NOT recognized as a duplicate.  A high rate of RPCs from the client causes the cache size to exceed its high water mark which in turn triggers the retirement of old cache entries.\n\nSuggest adding a check for DUPREQ_START before TAILQ_INIT_ENTRY:\n+\n+                       /* if entry is still active, move it to the tail and go\n+                         * around for another try */\n+                       if (ov-\u003estate \u003d\u003d DUPREQ_START) {\n+                               TAILQ_INSERT_TAIL(\u0026drc-\u003edupreq_q, ov, fifo_q);\n+                               PTHREAD_MUTEX_unlock(\u0026t-\u003emtx);\n+\n+                               LogDebug(COMPONENT_DUPREQ,\n+                                        \"not retiring active ov\u003d%p xid\u003d%\" PRIu32\n+                                        \" on DRC\u003d%p state\u003d%s, status\u003d%s, refcnt\u003d%d\",\n+                                        ov, ov-\u003ehin.tcp.rq_xid,\n+                                        ov-\u003ehin.drc, dupreq_state_table[ov-\u003estate],\n+                                        dupreq_status_table[status], ov-\u003erefcnt);\n+\n+                               /* conditionally retire another */\n+                               if (cnt++ \u003c DUPREQ_MAX_RETRIES) {\n+                                       goto dq_again;\n+                               }\n+                               goto unlock;\n+                       }\n+",
+      "revId": "ad7e774c6ead55d579a2af55e38567eecf3daac8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a0a886f_a27a9f16",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-04-03T18:22:37Z",
+      "side": 1,
+      "message": "dv-\u003estate \u003d\u003d\u003e ov-\u003estate? Typo?",
+      "revId": "ad7e774c6ead55d579a2af55e38567eecf3daac8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
