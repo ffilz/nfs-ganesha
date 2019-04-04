@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9c0f35fb_ecd167d2",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-04-04T00:56:06Z",
+      "side": 1,
+      "message": "DRC in NFSv3 and NFSv4.0 is a best effort case. Linux NFS client retries after 60 seconds by default. Tell me a network in 2019 which can do only 1024 commands (max dupreqs on a connection in the current code)? Of course, not all RPC commands fall into DRC though. Still, no amount of blind DRC is really going to help in fast networks. Checking for DUPREQ_START state is not going to keep in the cache when its retry comes after 60 seconds. It will be long gone! You really need NFSv4.1\u0027s \"exactly once\" sematics.\n\nHaving said that, this comment doesn\u0027t apply to the code change done with this patch.",
+      "parentUuid": "2982511a_7302df4b",
+      "revId": "ad7e774c6ead55d579a2af55e38567eecf3daac8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a0a886f_a27a9f16",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-04-03T18:22:37Z",
       "side": 1,
       "message": "dv-\u003estate \u003d\u003d\u003e ov-\u003estate? Typo?",
+      "revId": "ad7e774c6ead55d579a2af55e38567eecf3daac8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d699c9f6_56e29c4e",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-04-04T00:56:06Z",
+      "side": 1,
+      "message": "Appears to be a typo. Can you please provide a patch as you spotted it.",
+      "parentUuid": "5a0a886f_a27a9f16",
       "revId": "ad7e774c6ead55d579a2af55e38567eecf3daac8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
