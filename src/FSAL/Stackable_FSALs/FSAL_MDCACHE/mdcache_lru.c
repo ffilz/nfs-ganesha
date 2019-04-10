@@ -797,8 +797,8 @@ lru_reap_chunk_impl(enum lru_q_id qid, mdcache_entry_t *parent)
 
 		if (refcnt != (LRU_SENTINEL_REFCOUNT + 1)) {
 			/* We can't reap a chunk with a ref */
-			QUNLOCK(qlane);
 			mdcache_lru_unref_chunk(chunk, false);
+			QUNLOCK(qlane);
 			continue;
 		}
 
@@ -857,8 +857,8 @@ lru_reap_chunk_impl(enum lru_q_id qid, mdcache_entry_t *parent)
 		 * doing something with dirents... This chunk is not
 		 * eligible for reaping. Try the next lane...
 		 */
-		QUNLOCK(qlane);
 		mdcache_lru_unref_chunk(chunk, false);
+		QUNLOCK(qlane);
 	}			/* foreach lane */
 
 	/* ! reclaimable */
@@ -1483,8 +1483,8 @@ static inline size_t chunk_lru_run_lane(size_t lane)
 		refcnt = atomic_inc_int32_t(&chunk->chunk_lru.refcnt);
 
 		if (unlikely(refcnt > 2)) {
-			QUNLOCK(qlane);
 			mdcache_lru_unref_chunk(chunk, false);
+			QUNLOCK(qlane);
 			goto next_lru;
 		}
 
@@ -1495,8 +1495,8 @@ static inline size_t chunk_lru_run_lane(size_t lane)
 		q = &qlane->L2;
 		lru_insert(lru, q, LRU_MRU);
 
-		QUNLOCK(qlane);
 		mdcache_lru_unref_chunk(chunk, false);
+		QUNLOCK(qlane);
 
 next_lru:
 		QLOCK(qlane);
@@ -2073,10 +2073,13 @@ void mdcache_lru_unref_chunk(struct dir_chunk *chunk, bool locked)
 
 	if (!locked) {
 		PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+	} else {
+		/* If content_lock is not held, then qlane lock must be
+		 * held by the caller to prevent parent from getting reused
+		 */
+		qlane = &CHUNK_LRU[lane];
+		QLOCK(qlane);
 	}
-
-	qlane = &CHUNK_LRU[lane];
-	QLOCK(qlane);
 
 	refcnt = atomic_dec_int32_t(&chunk->chunk_lru.refcnt);
 	if (refcnt == 0) {
@@ -2086,10 +2089,11 @@ void mdcache_lru_unref_chunk(struct dir_chunk *chunk, bool locked)
 		LogFullDebug(COMPONENT_CACHE_INODE, "Freeing chunk %p", chunk);
 		gsh_free(chunk);
 	}
-	QUNLOCK(qlane);
 
 	if (!locked) {
 		PTHREAD_RWLOCK_unlock(&parent->content_lock);
+	} else {
+		QUNLOCK(qlane);
 	}
 }
 
