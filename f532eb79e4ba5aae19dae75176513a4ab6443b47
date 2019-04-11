@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "378e75e9_6a1b53ed",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-04-11T12:23:45Z",
+      "side": 1,
+      "message": "You can\u0027t do this, because mdcache_lru_unref_chunk takes the qlane lock, so it will double lock and assert.  You can change it to keep the qlane lock, because it takes the content lock, and that must be taken before the qlane lock.  I don\u0027t see a way keep this lock here, we\u0027re going to have to come up with some other way.",
+      "revId": "f532eb79e4ba5aae19dae75176513a4ab6443b47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
