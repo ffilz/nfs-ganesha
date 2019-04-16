@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5b7a1329_a59efb3e",
+        "filename": "src/Protocols/NLM/nlm_Lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-04-16T16:50:01Z",
+      "side": 1,
+      "message": "I don\u0027t see any way for state_lock() to return STATE_LOCK_BLOCKED without using the block_data.  What am I missing?",
+      "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9f598413_38299fb2",
         "filename": "src/Protocols/NLM/nlm_Lock.c",
         "patchSetId": 1
