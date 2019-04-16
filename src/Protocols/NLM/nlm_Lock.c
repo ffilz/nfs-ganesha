@@ -53,7 +53,7 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	state_t *nlm_state;
 	fsal_lock_param_t lock, conflict;
 	int rc;
-	state_block_data_t *pblock_data;
+	state_block_data_t *pblock_data = NULL;
 	const char *proc_name = "nlm4_Lock";
 	care_t care = CARE_MONITOR;
 	/* Indicate if we let FSAL to handle requests during grace. */
@@ -111,7 +111,7 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 				    &nsm_client,
 				    &nlm_client,
 				    &nlm_owner,
-				    &pblock_data,
+				    arg->block ? &pblock_data : NULL,
 				    arg->state,
 				    &nlm_state);
 
@@ -133,6 +133,8 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 		LogDebug(COMPONENT_NLM,
 			 "NLM lock request DROPPED due to delegation conflict");
 		rc = NFS_REQ_DROP;
+		if (pblock_data)
+			gsh_free(pblock_data);
 		goto out_dec;
 	} else {
 		(void) atomic_inc_uint32_t(&obj->state_hdl->file.anon_ops);
@@ -171,16 +173,23 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 			    &conflict);
 		}
 
-		/* If we didn't block, release the block data */
-		if (state_status != STATE_LOCK_BLOCKED && pblock_data != NULL)
-			gsh_free(pblock_data);
-
 		if (state_status == STATE_IN_GRACE)
 			res->res_nlm4.stat.stat = NLM4_DENIED_GRACE_PERIOD;
 	} else {
 		res->res_nlm4.stat.stat = NLM4_GRANTED;
 	}
 	rc = NFS_REQ_OK;
+
+	/* If we didn't block, release the block data */
+
+	/* NOTE: we seem to receive STATE_LOCK_BLOCKED from state_lock
+	 * for a second blocking request and we don't use the block
+	 * data. How to make state_lock to return something which we can
+	 * depend on to free block_data here?
+	 */
+	if (state_status != STATE_LOCK_BLOCKED && pblock_data != NULL)
+		gsh_free(pblock_data);
+
  out_dec:
 	/* Release the NLM Client and NLM Owner references we have */
 	dec_nsm_client_ref(nsm_client);
