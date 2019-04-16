@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f598413_38299fb2",
+        "filename": "src/Protocols/NLM/nlm_Lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-16T16:48:01Z",
+      "side": 1,
+      "message": "How about we simplify and refcount the block_data? If it\u0027s held, then increment the refcount?",
+      "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
