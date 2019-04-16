@@ -87,6 +87,24 @@
       "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44395131_af465897",
+        "filename": "src/Protocols/NLM/nlm_Lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-16T18:47:21Z",
+      "side": 1,
+      "message": "state_lock doesn\u0027t know what goes in it... It\u0027s nlm specific (and if we ever implement 4.1 lock call backs we\u0027ll need a 4.1 specific block data).\n\nWe could pass in a stack struct, and then state_lock copies to a dynamic struct if it actually needs it. That would save allocation when not needed in exchange for a copy when needed.",
+      "parentUuid": "ead49d70_a419512e",
+      "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
