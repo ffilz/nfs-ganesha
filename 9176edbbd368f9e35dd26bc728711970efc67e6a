@@ -141,6 +141,24 @@
       "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffe0b628_e5347fb3",
+        "filename": "src/Protocols/NLM/nlm_Lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-17T14:38:06Z",
+      "side": 1,
+      "message": "Yea, the parameter being state_block_data_t ** and then set to NULL by state_lock if it\u0027s not consumed sounds like the most effective path, don\u0027t add a new parameter, and the code in the caller is simple (just gsh_free(pblock_data) not need to make any checks).\n\nThen there can be a single gsh_fee(pblock_data) after the out_dec label (since it\u0027s initialized to NULL).",
+      "parentUuid": "2ca50907_ebffbf89",
+      "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
