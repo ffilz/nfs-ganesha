@@ -123,6 +123,24 @@
       "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ca50907_ebffbf89",
+        "filename": "src/Protocols/NLM/nlm_Lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-04-17T11:53:36Z",
+      "side": 1,
+      "message": "Or just pass in \u0026pblock_data and NULL it out if we use it.  Then we can unconditionally free it if it\u0027s not NULL.",
+      "parentUuid": "f841f0d4_259daaee",
+      "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
