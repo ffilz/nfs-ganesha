@@ -105,6 +105,24 @@
       "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f841f0d4_259daaee",
+        "filename": "src/Protocols/NLM/nlm_Lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-04-17T02:52:53Z",
+      "side": 1,
+      "message": "Refcounts is a big hammer, if there is no other use except this, I would rather pass a used/not boolean as an OUT value from state_lock. What do you guys think?",
+      "parentUuid": "9f598413_38299fb2",
+      "revId": "9176edbbd368f9e35dd26bc728711970efc67e6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
