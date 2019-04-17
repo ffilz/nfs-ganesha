@@ -798,7 +798,7 @@ lru_reap_chunk_impl(enum lru_q_id qid, mdcache_entry_t *parent)
 		if (refcnt != (LRU_SENTINEL_REFCOUNT + 1)) {
 			/* We can't reap a chunk with a ref */
 			QUNLOCK(qlane);
-			mdcache_lru_unref_chunk(chunk, false);
+			mdcache_lru_unref_chunk(chunk, false, false);
 			continue;
 		}
 
@@ -849,7 +849,7 @@ lru_reap_chunk_impl(enum lru_q_id qid, mdcache_entry_t *parent)
 				PTHREAD_RWLOCK_unlock(&entry->content_lock);
 				mdcache_put(entry);
 			}
-			mdcache_lru_unref_chunk(chunk, true);
+			mdcache_lru_unref_chunk(chunk, true, false);
 			return lru;
 		}
 
@@ -858,7 +858,7 @@ lru_reap_chunk_impl(enum lru_q_id qid, mdcache_entry_t *parent)
 		 * eligible for reaping. Try the next lane...
 		 */
 		QUNLOCK(qlane);
-		mdcache_lru_unref_chunk(chunk, false);
+		mdcache_lru_unref_chunk(chunk, false, false);
 	}			/* foreach lane */
 
 	/* ! reclaimable */
@@ -924,7 +924,7 @@ struct dir_chunk *mdcache_get_chunk(mdcache_entry_t *parent,
 		/* unref prev_chunk as we had got a ref on prev_chunk
 		 * at the beginning of this function
 		 */
-		mdcache_lru_unref_chunk(prev_chunk, true);
+		mdcache_lru_unref_chunk(prev_chunk, true, false);
 	} else {
 		chunk->reload_ck = whence;
 	}
@@ -1484,7 +1484,7 @@ static inline size_t chunk_lru_run_lane(size_t lane)
 
 		if (unlikely(refcnt > 2)) {
 			QUNLOCK(qlane);
-			mdcache_lru_unref_chunk(chunk, false);
+			mdcache_lru_unref_chunk(chunk, false, false);
 			goto next_lru;
 		}
 
@@ -1496,7 +1496,7 @@ static inline size_t chunk_lru_run_lane(size_t lane)
 		lru_insert(lru, q, LRU_MRU);
 
 		QUNLOCK(qlane);
-		mdcache_lru_unref_chunk(chunk, false);
+		mdcache_lru_unref_chunk(chunk, false, false);
 
 next_lru:
 		QLOCK(qlane);
@@ -2064,14 +2064,17 @@ void mdcache_lru_ref_chunk(struct dir_chunk *chunk)
  * @param [in] chunk	The chunk to unref
  * @param [in] locked	True if content_lock is held for write
  */
-void mdcache_lru_unref_chunk(struct dir_chunk *chunk, bool locked)
+void mdcache_lru_unref_chunk(struct dir_chunk *chunk, bool locked,
+			     bool force_clean)
 {
 	int refcnt;
 	uint32_t lane = chunk->chunk_lru.lane;
 	struct lru_q_lane *qlane;
 	mdcache_entry_t *parent = chunk->parent;
+	bool locked_flag = locked;
 
-	if (!locked) {
+try_again:
+	if (!locked_flag) {
 		PTHREAD_RWLOCK_wrlock(&parent->content_lock);
 	}
 
@@ -2085,7 +2088,15 @@ void mdcache_lru_unref_chunk(struct dir_chunk *chunk, bool locked)
 		/* And now we can free the chunk. */
 		LogFullDebug(COMPONENT_CACHE_INODE, "Freeing chunk %p", chunk);
 		gsh_free(chunk);
+	} else if (force_clean) {
+		atomic_inc_uint32_t(&chunk->chunk_lru.refcnt);
+		/* Drop all locks and yield to other threads */
+		QUNLOCK(qlane);
+		PTHREAD_RWLOCK_unlock(&parent->content_lock);
+		locked_flag = false;
+		goto try_again;
 	}
+		
 	QUNLOCK(qlane);
 
 	if (!locked) {
