@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ddd1c106_2e7439c7",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-18T14:30:15Z",
+      "side": 1,
+      "message": "Yea, unless it at all makes sense to duplicate the way expire_time_attr is handled.",
+      "parentUuid": "0aa2b9aa_12d57bb9",
+      "revId": "3c25681263088f5ae8bb09d3ec7a54c8d12f606e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "906a42db_e105738d",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8a460cb9_c9a532df",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-18T14:30:15Z",
+      "side": 1,
+      "message": "Good call on that.",
+      "parentUuid": "c960ae55_9287f568",
+      "revId": "3c25681263088f5ae8bb09d3ec7a54c8d12f606e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "814462bc_61454c47",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2019-04-18T13:46:31Z",
       "side": 1,
       "message": "And then this can unconditionally write-lock",
+      "revId": "3c25681263088f5ae8bb09d3ec7a54c8d12f606e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e93ef26_14d6b86a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-18T14:30:15Z",
+      "side": 1,
+      "message": "And actually a bit more re-org might be worthwhile. This is the only caller of mdc_get_parent that holds the content_lock for any longer than the call, and only long enough to copy out the handle. Add an optional copy out of the handle to mdc_get_parent (the other callers don\u0027t use the handle) and then all the locking can be handled inside mdc_get_parent (where it might actually still be worthwhile to only take the content_lock exclusive if actually necessary.",
+      "parentUuid": "814462bc_61454c47",
       "revId": "3c25681263088f5ae8bb09d3ec7a54c8d12f606e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
