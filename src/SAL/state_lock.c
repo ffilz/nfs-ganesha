@@ -2576,6 +2576,14 @@ state_status_t state_lock(struct fsal_obj_handle *obj,
 		 * a blocking lock within Ganesha, no need to make an
 		 * FSAL call that will just return denied.
 		 */
+
+		/* Not allow implies that we have processed a conflict.
+		 * Undo it here as we are not sending
+		 * STATE_LOCK_CONFLICT. TODO: Should we not process the
+		 * conflict for blocking locks in the first place?
+		 */
+		if (!allow)
+			dec_state_owner_ref(*holder);
 		status = STATE_LOCK_BLOCKED;
 	}
 
