@@ -2169,7 +2169,7 @@ static bool stats_disable(DBusMessageIter *args,
 			DBusMessage *reply,
 			DBusError *error)
 {
-	bool success = true;
+	bool success = false;
 	char *errormsg = "OK";
 	char *stat_type = NULL;
 	DBusMessageIter iter;
@@ -2177,7 +2177,16 @@ static bool stats_disable(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 
-	dbus_message_iter_get_basic(args, &stat_type);
+	if (args == NULL) {
+		errormsg = "message has no arguments";
+		goto error;
+	} else if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_STRING) {
+		errormsg = "arg not string";
+		goto error;
+	} else {
+		dbus_message_iter_get_basic(args, &stat_type);
+	}
+
 	if (strcmp(stat_type, "all") == 0) {
 		nfs_param.core_param.enable_NFSSTATS = false;
 		nfs_param.core_param.enable_FSALSTATS = false;
@@ -2223,9 +2232,13 @@ static bool stats_disable(DBusMessageIter *args,
 		reset_v4_full_stats();
 	}
 
+	success = true;
 	dbus_status_reply(&iter, success, errormsg);
 	now(&timestamp);
 	dbus_append_timestamp(&iter, &timestamp);
+	return true;
+error:
+	dbus_status_reply(&iter, success, errormsg);
 	return true;
 }
 
@@ -2246,7 +2259,7 @@ static bool stats_enable(DBusMessageIter *args,
 			DBusMessage *reply,
 			DBusError *error)
 {
-	bool success = true;
+	bool success = false;
 	char *errormsg = "OK";
 	char *stat_type = NULL;
 	DBusMessageIter iter;
@@ -2254,7 +2267,16 @@ static bool stats_enable(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 
-	dbus_message_iter_get_basic(args, &stat_type);
+	if (args == NULL) {
+		errormsg = "message has no arguments";
+		goto error;
+	} else if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_STRING) {
+		errormsg = "arg not string";
+		goto error;
+	} else {
+		dbus_message_iter_get_basic(args, &stat_type);
+	}
+
 	if (strcmp(stat_type, "all") == 0) {
 		if (!nfs_param.core_param.enable_NFSSTATS) {
 			nfs_param.core_param.enable_NFSSTATS = true;
@@ -2299,7 +2321,7 @@ static bool stats_enable(DBusMessageIter *args,
 			!nfs_param.core_param.enable_FULLV3STATS) {
 		if (!nfs_param.core_param.enable_NFSSTATS) {
 			errormsg = "First enable NFS stats counting";
-			success = false;
+			goto error;
 		} else {
 			nfs_param.core_param.enable_FULLV3STATS = true;
 			LogEvent(COMPONENT_CONFIG,
@@ -2311,7 +2333,7 @@ static bool stats_enable(DBusMessageIter *args,
 			!nfs_param.core_param.enable_FULLV4STATS) {
 		if (!nfs_param.core_param.enable_NFSSTATS) {
 			errormsg = "First enable NFS stats counting";
-			success = false;
+			goto error;
 		} else {
 			nfs_param.core_param.enable_FULLV4STATS = true;
 			LogEvent(COMPONENT_CONFIG,
@@ -2319,10 +2341,13 @@ static bool stats_enable(DBusMessageIter *args,
 			now(&v4_full_stats_time);
 		}
 	}
-
+	success = true;
 	dbus_status_reply(&iter, success, errormsg);
 	now(&timestamp);
 	dbus_append_timestamp(&iter, &timestamp);
+	return true;
+error:
+	dbus_status_reply(&iter, success, errormsg);
 	return true;
 }
 
@@ -2343,7 +2368,7 @@ static bool stats_fsal(DBusMessageIter *args,
 			DBusMessage *reply,
 			DBusError *error)
 {
-	bool success = true;
+	bool success = false;
 	char *errormsg = "OK";
 	char *fsal_name;
 	DBusMessageIter iter;
@@ -2352,33 +2377,44 @@ static bool stats_fsal(DBusMessageIter *args,
 
 	dbus_message_iter_init_append(reply, &iter);
 
-	if (!nfs_param.core_param.enable_FSALSTATS)
+	if (args == NULL) {
+		errormsg = "message has no arguments";
+		goto error;
+	} else if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_STRING) {
+		errormsg = "arg not string";
+		goto error;
+	} else {
+		dbus_message_iter_get_basic(args, &fsal_name);
+	}
+
+	if (!nfs_param.core_param.enable_FSALSTATS) {
 		errormsg = "FSAL stat counting disabled";
-	dbus_message_iter_get_basic(args, &fsal_name);
+		goto error;
+	}
+
 	init_root_op_context(&root_op_context, NULL, NULL,
 				     0, 0, UNKNOWN_REQUEST);
 	fsal_hdl = lookup_fsal(fsal_name);
 	release_root_op_context();
 	if (fsal_hdl == NULL) {
-		success = false;
 		errormsg = "Incorrect FSAL name";
-		dbus_status_reply(&iter, success, errormsg);
-		return true;
+		goto error;
 	}
 	if (fsal_hdl->stats == NULL) {
-		success = false;
 		errormsg = "FSAL do not support stats counting";
-		dbus_status_reply(&iter, success, errormsg);
+		goto error;
 	} else {
 		if (nfs_param.core_param.enable_FSALSTATS != true) {
-			success = false;
 			errormsg = "FSAL stats disabled";
-			dbus_status_reply(&iter, success, errormsg);
-			return true;
+			goto error;
 		}
+		success = true;
 		dbus_status_reply(&iter, success, errormsg);
 		fsal_hdl->m_ops.fsal_extract_stats(fsal_hdl, &iter);
+		return true;
 	}
+error:
+	dbus_status_reply(&iter, success, errormsg);
 	return true;
 }
 
