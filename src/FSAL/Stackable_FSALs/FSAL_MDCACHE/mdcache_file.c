@@ -539,13 +539,14 @@ static void mdc_read_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 	if (ret.major == ERR_FSAL_SHARE_DENIED)
 		ret = fsalstat(ERR_FSAL_LOCKED, 0);
 
+	if (!FSAL_IS_ERROR(ret))
+		mdc_set_time_current(&entry->attrs.atime);
+
 	supercall(
 		  arg->cb(arg->obj_hdl, ret, obj_data, arg->cb_arg);
 		 );
 
-	if (!FSAL_IS_ERROR(ret))
-		mdc_set_time_current(&entry->attrs.atime);
-	else if (ret.major == ERR_FSAL_DELAY)
+	if (ret.major == ERR_FSAL_DELAY)
 		mdcache_kill_entry(entry);
 
 	gsh_free(arg);
