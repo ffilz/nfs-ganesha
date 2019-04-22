@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7e9bde8_74f4bd10",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2236,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-22T16:38:26Z",
+      "side": 1,
+      "message": "Why not replace success with true here",
+      "revId": "abfacaaccf48cd1ca360c5e09b711c4ed85acd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e000d026_770d4e45",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-22T16:38:26Z",
+      "side": 1,
+      "message": "And replace success with false here\n\nAnd then get rid of the success variable",
+      "revId": "abfacaaccf48cd1ca360c5e09b711c4ed85acd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "986d7aef_8ad4856d",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2345,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-22T16:38:26Z",
+      "side": 1,
+      "message": "Why not replace success with true here",
+      "revId": "abfacaaccf48cd1ca360c5e09b711c4ed85acd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0bcc1589_3840cde1",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2350,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-22T16:38:26Z",
+      "side": 1,
+      "message": "And replace success with false here\n\nAnd then get rid of the success variable",
+      "revId": "abfacaaccf48cd1ca360c5e09b711c4ed85acd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4d8c28c_8b2a720d",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2406,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-22T16:38:26Z",
+      "side": 1,
+      "message": "Since there\u0027s a goto from if block and a return at end of else block, no need for else here, just un-indent this code like the other functions",
+      "revId": "abfacaaccf48cd1ca360c5e09b711c4ed85acd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34b70bb4_a7120bff",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2411,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-22T16:38:26Z",
+      "side": 1,
+      "message": "Why not replace success with true here",
+      "revId": "abfacaaccf48cd1ca360c5e09b711c4ed85acd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f1a5973_114984b9",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-04-22T16:38:26Z",
+      "side": 1,
+      "message": "And replace success with false here\n\nAnd then get rid of the success variable",
+      "revId": "abfacaaccf48cd1ca360c5e09b711c4ed85acd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
