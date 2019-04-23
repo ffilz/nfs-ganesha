@@ -284,5 +284,9 @@ int nlm4_Lock_Message(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
  */
 void nlm4_Lock_Free(nfs_res_t *res)
 {
+	nlm4_testrply *test_stat = &res->res_nlm4test.test_stat;
+
 	netobj_free(&res->res_nlm4test.cookie);
+	if (test_stat->stat == NLM4_DENIED)
+		netobj_free(&test_stat->nlm4_testrply_u.holder.oh);
 }
