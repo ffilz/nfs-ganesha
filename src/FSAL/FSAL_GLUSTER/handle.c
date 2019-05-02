@@ -35,6 +35,9 @@
 #include "sal_data.h"
 #include "sal_functions.h"
 #include "fsal_types.h"
+#ifdef USE_LTTNG
+#include "gsh_lttng/fsal_gluster.h"
+#endif
 
 /* fsal_obj_handle common methods
  */
@@ -60,6 +63,10 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 #endif
 
 	fsal_obj_handle_fini(&objhandle->handle);
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_handle_release, __func__, __LINE__);
+#endif
 
 	if (my_fd->glfd) {
 
@@ -158,6 +165,10 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 	construct_handle(glfs_export, &sb, glhandle, globjhdl,
 			 &objhandle, vol_uuid);
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_lookup, __func__, __LINE__);
+#endif
+
 	if (attrs_out != NULL) {
 		posix2fsal_attributes_all(&sb, attrs_out);
 
@@ -218,6 +229,10 @@ glusterfs_fsal_get_sec_label(struct glusterfs_handle *glhandle,
 				export->sec_label_xattr, label,
 				NFS4_OPAQUE_LIMIT);
 
+#ifdef USE_LTTNG
+		tracepoint(fsalgl, gl_sec_label, __func__, __LINE__);
+#endif
+
 		if (rc < 0) {
 			/* If there's no label then just do zero-length one */
 			if (errno != ENODATA) {
@@ -275,6 +290,10 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 	struct timespec s_time, e_time;
 
 	now(&s_time);
+#endif
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_readdir, __func__, __LINE__);
 #endif
 
 	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
@@ -479,6 +498,10 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 	    glfs_h_mkdir(glfs_export->gl_fs->fs, parenthandle->glhandle, name,
 			 fsal2unix_mode(attrib->mode), &sb);
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_mkdir, __func__, __LINE__);
+#endif
+
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
 
 	if (glhandle == NULL) {
@@ -607,6 +630,10 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 	    glfs_h_mknod(glfs_export->gl_fs->fs, parenthandle->glhandle, name,
 			 create_mode | fsal2unix_mode(attrib->mode), ndev, &sb);
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_mknod, __func__, __LINE__);
+#endif
+
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
 
 	if (glhandle == NULL) {
@@ -710,6 +737,10 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 	    glfs_h_symlink(glfs_export->gl_fs->fs, parenthandle->glhandle, name,
 			   link_path, &sb);
 
+#ifdef
+	tracepoint(fsalgl, gl_make_symlink, __func__, __LINE__);
+#endif
+
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
 
 	if (glhandle == NULL) {
@@ -805,6 +836,10 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 	rc = glfs_h_readlink(glfs_export->gl_fs->fs, objhandle->glhandle,
 			     link_content->addr, link_content->len);
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_read_link, __func__, __LINE__);
+#endif
+
 	SET_GLUSTER_CREDS(glfs_export, NULL, NULL, 0, NULL, NULL, 0);
 
 	if (rc < 0) {
@@ -878,6 +913,10 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl,
 	 * If the ganesha service is started by non-root user, that user
 	 * may get restricted from reading ACL.
 	 */
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_getattrs, __func__, __LINE__);
+#endif
 
 	rc = glfs_h_stat(glfs_export->gl_fs->fs,
 			 objhandle->glhandle, &buffxstat.buffstat);
@@ -978,6 +1017,11 @@ static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
 	now(&s_time);
 #endif
 
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_link, __func__, __LINE__);
+#endif
+
 	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
 			  &op_ctx->creds->caller_gid,
 			  op_ctx->creds->caller_glen,
@@ -1029,6 +1073,11 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 	now(&s_time);
 #endif
 
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_rename, __func__, __LINE__);
+#endif
+
 	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
 			  &op_ctx->creds->caller_gid,
 			  op_ctx->creds->caller_glen,
@@ -1073,6 +1122,12 @@ static fsal_status_t file_unlink(struct fsal_obj_handle *dir_hdl,
 	struct timespec s_time, e_time;
 
 	now(&s_time);
+#endif
+
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_unlink, __func__, __LINE__);
+
 #endif
 
 	SET_GLUSTER_CREDS(glfs_export, &op_ctx->creds->caller_uid,
@@ -1123,6 +1178,11 @@ fsal_status_t glusterfs_open_my_fd(struct glusterfs_handle *objhandle,
 	struct timespec s_time, e_time;
 
 	now(&s_time);
+#endif
+
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_open_fd, __func__, __LINE__);
 #endif
 
 	LogFullDebug(COMPONENT_FSAL,
@@ -1202,6 +1262,11 @@ fsal_status_t glusterfs_close_my_fd(struct glusterfs_fd *my_fd)
 	struct timespec s_time, e_time;
 
 	now(&s_time);
+#endif
+
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_close_fd, __func__, __LINE__);
 #endif
 
 	if (my_fd->glfd && my_fd->openflags != FSAL_O_CLOSED) {
@@ -1306,6 +1371,10 @@ fsal_status_t glusterfs_open_func(struct fsal_obj_handle *obj_hdl,
 	struct glusterfs_handle *myself;
 	int posix_flags = 0;
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_open_global_fd, __func__, __LINE__);
+#endif
+
 	myself = container_of(obj_hdl, struct glusterfs_handle, handle);
 
 	fsal2posix_openflags(openflags, &posix_flags);
@@ -1326,6 +1395,10 @@ fsal_status_t glusterfs_open_func(struct fsal_obj_handle *obj_hdl,
 fsal_status_t glusterfs_close_func(struct fsal_obj_handle *obj_hdl,
 				   struct fsal_fd *fd)
 {
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_close_global_fd, __func__, __LINE__);
+#endif
+
 	return glusterfs_close_my_fd((struct glusterfs_fd *)fd);
 }
 
@@ -1361,6 +1434,10 @@ fsal_status_t find_fd(struct glusterfs_fd *my_fd,
 				glusterfs_close_func,
 				has_lock, closefd, open_for_locks,
 				&reusing_open_state_fd);
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_find_fd, __func__, __LINE__);
+#endif
 
 	if (FSAL_IS_ERROR(status))
 		goto out;
@@ -1422,6 +1499,11 @@ fsal_status_t glusterfs_merge(struct fsal_obj_handle *orig_hdl,
 
 	if (orig_hdl->type == REGULAR_FILE &&
 	    dupe_hdl->type == REGULAR_FILE) {
+
+#ifdef USE_LTTNG
+		tracepoint(fsalgl, gl_handle_merge, __func__, __LINE__);
+#endif
+
 		/* We need to merge the share reservations on this file.
 		 * This could result in ERR_FSAL_SHARE_DENIED.
 		 */

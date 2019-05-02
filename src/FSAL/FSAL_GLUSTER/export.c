@@ -42,6 +42,9 @@
 #include "export_mgr.h"
 #include "pnfs_utils.h"
 #include "sal_data.h"
+#ifdef USE_LTTNG
+#include "gsh_lttng/fsal_gluster.h"
+#endif
 
 /* The default location of gfapi log
  * if glfs_log param is not defined in
@@ -57,6 +60,9 @@ static void export_release(struct fsal_export *exp_hdl)
 	struct glusterfs_export *glfs_export =
 	    container_of(exp_hdl, struct glusterfs_export, export);
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_export_release, __func__, __LINE__);
+#endif
 	/* check activity on the export */
 
 	/* detach the export */
@@ -98,6 +104,10 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 	LogFullDebug(COMPONENT_FSAL, "In args: path = %s", path);
 
 	*pub_handle = NULL;
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_export_lookup, __func__, __LINE__);
+#endif
 
 	if (strcmp(path, glfs_export->mount_path) == 0) {
 		realpath = gsh_strdup(glfs_export->export_path);
@@ -184,6 +194,10 @@ static fsal_status_t wire_to_host(struct fsal_export *exp_hdl,
 	if (!fh_desc || !fh_desc->addr)
 		return fsalstat(ERR_FSAL_FAULT, 0);
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_export_wire, __func__, __LINE__);
+#endif
+
 	fh_size = GLAPI_HANDLE_LENGTH;
 	if (fh_desc->len != fh_size) {
 		LogMajor(COMPONENT_FSAL,
@@ -226,6 +240,10 @@ static fsal_status_t create_handle(struct fsal_export *export_pub,
 #endif
 
 	*pub_handle = NULL;
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_create_handle, __func__, __LINE__);
+#endif
 
 	if (fh_desc->len != GLAPI_HANDLE_LENGTH) {
 		status.major = ERR_FSAL_INVAL;
@@ -342,6 +360,11 @@ static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
 
 	rc = glfs_statvfs(glfs_export->gl_fs->fs, glfs_export->export_path,
 			  &vfssb);
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_dynamic_info, __func__, __LINE__);
+#endif
+
 	if (rc != 0)
 		return gluster2fsal_error(errno);
 
@@ -771,6 +794,10 @@ fsal_status_t glusterfs_create_export(struct fsal_module *fsal_hdl,
 	}
 	LogEvent(COMPONENT_FSAL, "Volume %s exported at : '%s'",
 		 params.glvolname, params.glvolpath);
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_export, __func__, __LINE__);
+#endif
 
 	fsal_export_init(&glfsexport->export);
 	export_ops_init(&glfsexport->export.exp_ops);

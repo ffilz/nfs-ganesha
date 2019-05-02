@@ -34,6 +34,9 @@
 #include "FSAL/fsal_commonlib.h"
 #include "posix_acls.h"
 #include "nfs_exports.h"
+#ifdef USE_LTTNG
+#include "gsh_lttng/fsal_gluster.h"
+#endif
 
 /**
  * @brief FSAL status mapping from GlusterFS errors
@@ -161,6 +164,9 @@ void gluster_cleanup_vars(struct glfs_object *glhandle)
 	if (glhandle) {
 		/* Error ignored, this is a cleanup operation, can't do much. */
 		/** @todo: Useful point for logging? */
+#ifdef USE_LTTNG
+		tracepoint(fsalgl, gl_cleanup, __func__, __LINE__);
+#endif
 		glfs_h_close(glhandle);
 	}
 }
@@ -291,6 +297,10 @@ fsal_status_t glusterfs_get_acl(struct glusterfs_export *glfs_export,
 		fsalattr->acl = NULL;
 	}
 
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_acl, __func__, __LINE__);
+#endif
+
 	if (NFSv4_ACL_SUPPORT) {
 
 		buffxstat->e_acl = glfs_h_acl_get(glfs_export->gl_fs->fs,
@@ -373,6 +383,11 @@ fsal_status_t glusterfs_set_acl(struct glusterfs_export *glfs_export,
 
 	rc = glfs_h_acl_set(glfs_export->gl_fs->fs, objhandle->glhandle,
 				ACL_TYPE_ACCESS, buffxstat->e_acl);
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_setxattr_acl, __func__, __LINE__, rc);
+#endif
+
 	if (rc < 0) {
 		/** @todo: check if error is appropriate.*/
 		LogMajor(COMPONENT_FSAL, "failed to set access type posix acl");
@@ -400,6 +415,10 @@ fsal_status_t glusterfs_process_acl(struct glfs *fs,
 				    glusterfs_fsal_xstat_t *buffxstat)
 {
 	LogDebug(COMPONENT_FSAL, "setattr acl = %p", attrs->acl);
+
+#ifdef USE_LTTNG
+	tracepoint(fsalgl, gl_setattr_acl, __func__, __LINE__);
+#endif
 
 	/* Convert FSAL ACL to POSIX ACL */
 	buffxstat->e_acl = fsal_acl_2_posix_acl(attrs->acl, ACL_TYPE_ACCESS);
