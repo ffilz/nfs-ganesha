@@ -166,6 +166,7 @@ if(USE_RADOS_RECOV)
 endif(USE_RADOS_RECOV)
 
 add_sanitizers(ganesha_nfsd)
+set_target_properties(ganesha_nfsd PROPERTIES LINK_FLAGS "-Wl,--version-script=${CMAKE_SOURCE_DIR}/MainNFSD/libganesha_nfsd.ver -Wl,--no-undefined")
 set_target_properties(ganesha_nfsd PROPERTIES
   VERSION "${GANESHA_MAJOR_VERSION}.${GANESHA_MINOR_VERSION}"
   SOVERSION "${GANESHA_MAJOR_VERSION}.${GANESHA_MINOR_VERSION}"
