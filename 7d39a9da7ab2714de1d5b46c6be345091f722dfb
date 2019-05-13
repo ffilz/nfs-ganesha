@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48098afe_6a089c96",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2019-05-13T17:20:03Z",
+      "side": 1,
+      "message": "Would \"Recommends:\" be better here? That would allow it to be installable without selinux being enabled in a pinch. We might also be able to drop the version checks as well that way.",
+      "revId": "7d39a9da7ab2714de1d5b46c6be345091f722dfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
