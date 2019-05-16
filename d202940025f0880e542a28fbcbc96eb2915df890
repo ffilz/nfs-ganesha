@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c86e526e_5c650fed",
+        "filename": "src/scripts/ganeshactl/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-05-16T16:06:02Z",
+      "side": 1,
+      "message": "this is okay for rhel8. It should be okay too for rhel7 and rhel6.\nfor fedora30 and later it needs to be \"python2\" only (or \"python2\" \"python\"), otherwise it will change the shebangs to /usr/bin/python and rpmbuild/rpmlint will throw errors. It might be okay to be python2 only for earlier fedora.\nI don\u0027t know what SUSE, Debian, or Ubuntu need.",
+      "revId": "d202940025f0880e542a28fbcbc96eb2915df890",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
