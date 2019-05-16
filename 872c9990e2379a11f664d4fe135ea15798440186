@@ -52,6 +52,23 @@
       "revId": "872c9990e2379a11f664d4fe135ea15798440186",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e59e678b_5759e34b",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-05-16T19:53:53Z",
+      "side": 1,
+      "message": "Madhu - alloc_handle depends on attrs_out being non-NULL, if it doesn\u0027t have attributes, it can\u0027t create the obj handle.\n\nThe other FSALs get the attributes into a stack variable, and convert them to struct attrlist in attrs_out if that is non-NULL, but they have the attributes for creating the obj handle.",
+      "revId": "872c9990e2379a11f664d4fe135ea15798440186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
