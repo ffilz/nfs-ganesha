@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f0ef93b_e4c39d8e",
+        "filename": "src/support/nfs_ip_name.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-05-17T20:01:02Z",
+      "side": 0,
+      "message": "I think using local sockaddr_t is necessary, as the sockaddr_t* passed in here is actually a sockaddr_in or sockaddr_in6 created in convert_ipv6_to_ipv4(), and so is not the full size of a sockaddr_t (which is a sockaddr_storage)",
+      "revId": "872c9990e2379a11f664d4fe135ea15798440186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
