@@ -16,6 +16,24 @@
       "revId": "872c9990e2379a11f664d4fe135ea15798440186",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0ceefa1_f56ed14a",
+        "filename": "src/support/nfs_ip_name.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-05-17T20:28:34Z",
+      "side": 0,
+      "message": "It\u0027s a sockaddr_t or struct sockaddr_storage all the way back to setting op_ctx-\u003ecaller_addr.\n\nconvert_ipv6_to_ipv4 casts the sockaddr_t to sockaddr_in or sockaddr_in6 to do it\u0027s work, but the actual buffer is always a sockaddr_storage (which sockaddr_t is).\n\nSo ipaddr is fine to pass to getnameinfo.\n\nAnd for buffkey.addr it\u0027s a gsh_memdup(ipaddr) which really is the same as the code it\u0027s replacing, just simplifying the code and moving the allocation to after the call to getnameinfo so we haven\u0027t allocated any memory when we make that call.",
+      "parentUuid": "1f0ef93b_e4c39d8e",
+      "revId": "872c9990e2379a11f664d4fe135ea15798440186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
