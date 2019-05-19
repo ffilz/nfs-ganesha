@@ -16,6 +16,24 @@
       "revId": "d202940025f0880e542a28fbcbc96eb2915df890",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58a85120_474d95db",
+        "filename": "src/scripts/ganeshactl/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-05-19T08:44:47Z",
+      "side": 1,
+      "message": "This fix is for RHEL8 and doesn\u0027t break any others. If fedora30 needs to avoid \"python\", then we need to investigate if we can safely replace \"python\" by \"python2\" without breaking others like SLES/Ubunu. Worse case, we may need to have some conditional stuff here for making it work with fedora30 in the future.",
+      "parentUuid": "c86e526e_5c650fed",
+      "revId": "d202940025f0880e542a28fbcbc96eb2915df890",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
