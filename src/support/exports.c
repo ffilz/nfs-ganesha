@@ -955,7 +955,7 @@ static void *export_init(void *link_mem, void *self_struct)
 			 * other thread racing here. So no need
 			 * to take lock. */
 			export->has_pnfs_ds = false;
-			pnfs_ds_remove(export->export_id, true);
+			pnfs_ds_remove(export->export_id);
 		} else {
 			assert(export->refcnt == 0);
 			export_cleanup(export);

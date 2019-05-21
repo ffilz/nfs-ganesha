@@ -213,7 +213,7 @@ void export_revert(struct gsh_export *export)
 	if (export->has_pnfs_ds) {
 		/* once-only, so no need for lock here */
 		export->has_pnfs_ds = false;
-		pnfs_ds_remove(export->export_id, true);
+		pnfs_ds_remove(export->export_id);
 	}
 	put_gsh_export(export); /* Release sentinel ref */
 
@@ -747,7 +747,7 @@ void remove_gsh_export(uint16_t export_id)
 		if (export->has_pnfs_ds) {
 			/* once-only, so no need for lock here */
 			export->has_pnfs_ds = false;
-			pnfs_ds_remove(export->export_id, true);
+			pnfs_ds_remove(export->export_id);
 		}
 
 		/* Release sentinel reference to the export.

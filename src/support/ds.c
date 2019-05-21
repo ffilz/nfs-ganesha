@@ -232,7 +232,7 @@ void pnfs_ds_put(struct fsal_pnfs_ds *pds)
  * @param final        [IN] Also drop from FSAL.
  */
 
-void pnfs_ds_remove(uint16_t id_servers, bool final)
+void pnfs_ds_remove(uint16_t id_servers)
 {
 	struct fsal_pnfs_ds v;
 	struct avltree_node *node;
@@ -281,13 +281,6 @@ void pnfs_ds_remove(uint16_t id_servers, bool final)
 		 * Which may or may not be from this call.
 		 */
 		pnfs_ds_put(pds);
-
-		if (final) {
-			/* Also drop from FSAL.  Instead of pDS thread,
-			 * relying on export cleanup thread.
-			 */
-			pnfs_ds_put(pds);
-		}
 	}
 }
 
@@ -314,7 +307,7 @@ void remove_all_dss(void)
 	/* Now we can safely process the list without the lock */
 	glist_for_each_safe(glist, glistn, &tmplist) {
 		pds = glist_entry(glist, struct fsal_pnfs_ds, ds_list);
-		pnfs_ds_remove(pds->id_servers, true);
+		pnfs_ds_remove(pds->id_servers);
 	}
 }
 
