@@ -401,6 +401,8 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 		 */
 		dec_session_ref(nfs41_session);
 
+		nfs41_session = NULL;
+
 		/* Maybe a more precise status would be better */
 		res_CREATE_SESSION4->csr_status = NFS4ERR_SERVERFAULT;
 		goto out;
