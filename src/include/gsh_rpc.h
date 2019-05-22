@@ -18,6 +18,7 @@
 #include <rpc/rpc.h>
 #include <rpc/svc.h>
 #include <rpc/clnt.h>
+#include <arpa/inet.h>
 
 #include <rpc/svc_auth.h>
 #ifdef _HAVE_GSSAPI
@@ -73,6 +74,11 @@ struct nfs_request_lookahead {
 
 typedef struct sockaddr_storage sockaddr_t;
 
+/* Allow much more space than we really need for a sock name. An IPV4 address
+ * embedded in IPv6 could use 45 bytes and then if we add a port, that would be
+ * an additional 6 bytes (:65535) for a total of 51, and then one more for NUL
+ * termination. We could use 64 instead of 128.
+ */
 #define SOCK_NAME_MAX 128
 
 struct netconfig *getnetconfigent(const char *);
@@ -142,26 +148,28 @@ bool copy_xprt_addr(sockaddr_t *, SVCXPRT *);
 
 int display_sockaddr(struct display_buffer *dspbuf, sockaddr_t *addr);
 
-static inline void sprint_sockaddr(sockaddr_t *addr, char *buf, size_t len)
+static inline
+bool sprint_sockip(sockaddr_t *addr, char *buf, int len)
 {
-	struct display_buffer dspbuf = {len, buf, buf};
+	if (addr->ss_family != AF_INET && addr->ss_family != AF_INET6)
+		return NULL;
 
-	buf[0] = '\0';
-	display_sockaddr(&dspbuf, addr);
+	return inet_ntop(addr->ss_family,
+			 addr->ss_family == AF_INET
+				? (void *)
+				  &(((struct sockaddr_in *)addr)->sin_addr)
+				: (void *)
+				  &(((struct sockaddr_in6 *)addr)->sin6_addr),
+			 buf, len) != NULL;
 }
 
-int sprint_sockip(sockaddr_t *, char *, int);
 const char *xprt_type_to_str(xprt_type_t);
 
 int cmp_sockaddr(sockaddr_t *, sockaddr_t *, bool);
 int sockaddr_cmpf(sockaddr_t *, sockaddr_t *, bool);
 uint64_t hash_sockaddr(sockaddr_t *, bool);
 
-in_addr_t get_in_addr(sockaddr_t *);
 int get_port(sockaddr_t *);
-
-/* Returns an EAI value, accepts only numeric strings */
-extern int ipstring_to_sockaddr(const char *, sockaddr_t *);
 
 extern tirpc_pkg_params ntirpc_pp;
 #endif /* GSH_RPC_H */
