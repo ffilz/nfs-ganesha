@@ -151,6 +151,13 @@ int display_sockaddr(struct display_buffer *dspbuf, sockaddr_t *addr);
 static inline
 bool sprint_sockip(sockaddr_t *addr, char *buf, int len)
 {
+#ifdef RPC_VSOCK
+	if (addr->ss_family == AF_VSOCK) {
+		snprintf(buf, len, "%d", ((struct sockaddr_vm *)addr)->svm_cid);
+		return true;
+	}
+#endif /* VSOCK */
+
 	if (addr->ss_family != AF_INET && addr->ss_family != AF_INET6)
 		return NULL;
 
