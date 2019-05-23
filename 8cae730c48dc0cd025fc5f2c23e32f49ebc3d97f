@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b10ab9c_447aae67",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-05-23T12:47:46Z",
+      "side": 1,
+      "message": "This one looks wrong.  The GLAPI_* should be outside the socket_addr_len() call.",
+      "revId": "8cae730c48dc0cd025fc5f2c23e32f49ebc3d97f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
