@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c1bbe91_283db64e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-05-24T16:31:32Z",
+      "side": 1,
+      "message": "Will this also handle the case where the old dirent (also the local variable \"dirent\") is freed in the mdc_lookup_uncached() path and the insert of the new dirent is successful? \nCirca line 387 in mdcache_avl.c  -- mdcache_avl_insert()\n        if (mdcache_key_cmp(\u0026v-\u003eckey, \u0026v2-\u003eckey) !\u003d 0) {\n                  /* The two names don\u0027t seem to have the same object\n                   * handle digest. Discard the old dirent and try again.\n                   */",
+      "range": {
+        "startLine": 3094,
+        "startChar": 0,
+        "endLine": 3104,
+        "endChar": 0
+      },
+      "revId": "fdaebeec28365494bb571a53dd7d6a071b59736a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
