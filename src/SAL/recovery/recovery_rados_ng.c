@@ -121,13 +121,13 @@ static int rados_ng_init(void)
 	rados_write_op_t op;
 
 	if (nfs_param.core_param.clustered) {
-		snprintf(host, sizeof(host), "node%d", g_nodeid);
+		(void) snprintf(host, sizeof(host), "node%d", g_nodeid);
 	} else {
 		ret = gethostname(host, sizeof(host));
 		if (ret) {
 			LogEvent(COMPONENT_CLIENTID,
-				 "Failed to gethostname: %s",
-				 strerror(errno));
+				 "Failed to gethostname: %s (%d)",
+				 strerror(errno), errno);
 			return -errno;
 		}
 	}
@@ -135,7 +135,7 @@ static int rados_ng_init(void)
 	len = strlen(host) + 6 + 1;
 	recov_oid = gsh_refstr_alloc(len);
 	gsh_refstr_get(recov_oid);
-	snprintf(recov_oid->gr_val, len, "%s_recov", host);
+	(void) snprintf(recov_oid->gr_val, len, "%s_recov", host);
 	rcu_set_pointer(&rados_recov_oid, recov_oid);
 
 	ret = rados_kv_connect(&rados_recov_io_ctx, rados_kv_param.userid,
@@ -176,10 +176,8 @@ static void rados_ng_add_clid(nfs_client_id_t *clientid)
 	char *cval;
 	int ret;
 
-	cval = gsh_malloc(RADOS_VAL_MAX_LEN);
-
-	rados_kv_create_key(clientid, ckey);
-	rados_kv_create_val(clientid, cval);
+	rados_kv_create_key(clientid, ckey, sizeof(ckey));
+	cval = rados_kv_create_val(clientid, NULL);
 
 	LogDebug(COMPONENT_CLIENTID, "adding %s :: %s", ckey, cval);
 	rcu_read_lock();
@@ -190,11 +188,10 @@ static void rados_ng_add_clid(nfs_client_id_t *clientid)
 	if (ret < 0) {
 		LogEvent(COMPONENT_CLIENTID, "Failed to add clid %lu",
 			 clientid->cid_clientid);
+		gsh_free(cval);
 	} else {
-		clientid->cid_recov_tag = gsh_strdup(cval);
+		clientid->cid_recov_tag = cval;
 	}
-
-	gsh_free(cval);
 }
 
 static void rados_ng_rm_clid(nfs_client_id_t *clientid)
@@ -203,7 +200,7 @@ static void rados_ng_rm_clid(nfs_client_id_t *clientid)
 	int ret;
 	struct gsh_refstr *recov_oid;
 
-	rados_kv_create_key(clientid, ckey);
+	rados_kv_create_key(clientid, ckey, sizeof(ckey));
 
 	LogDebug(COMPONENT_CLIENTID, "removing %s", ckey);
 	rcu_read_lock();
