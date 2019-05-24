@@ -64,8 +64,8 @@ int rados_kv_get(char *key, char *val, char *object);
 void rados_kv_add_clid(nfs_client_id_t *clientid);
 void rados_kv_rm_clid(nfs_client_id_t *clientid);
 void rados_kv_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle);
-void rados_kv_create_key(nfs_client_id_t *clientid, char *key);
-void rados_kv_create_val(nfs_client_id_t *clientid, char *val);
+void rados_kv_create_key(nfs_client_id_t *clientid, char *key, size_t size);
+char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *len);
 int rados_kv_traverse(pop_clid_entry_t callback, struct pop_args *args,
 			const char *object);
 void rados_kv_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle);
