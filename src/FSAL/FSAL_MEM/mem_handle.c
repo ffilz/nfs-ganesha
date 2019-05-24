@@ -579,12 +579,20 @@ static fsal_status_t mem_open_my_fd(struct fsal_fd *fd,
  */
 static fsal_status_t mem_close_my_fd(struct fsal_fd *fd)
 {
-	if (fd->openflags == FSAL_O_CLOSED)
-		return fsalstat(ERR_FSAL_NOT_OPENED, 0);
+	fsal_status_t status;
 
-	fd->openflags = FSAL_O_CLOSED;
+	PTHREAD_RWLOCK_wrlock(&dir_hdl->obj_lock);
 
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	if (fd->openflags == FSAL_O_CLOSED) {
+		status = fsalstat(ERR_FSAL_NOT_OPENED, 0);
+	} else {
+		fd->openflags = FSAL_O_CLOSED;
+		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+
+	PTHREAD_RWLOCK_unlock(&parent->obj_lock);
+
+	return status;
 }
 
 /**
