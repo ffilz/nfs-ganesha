@@ -22,6 +22,30 @@
       "revId": "fdaebeec28365494bb571a53dd7d6a071b59736a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0accbee2_bcf5452b",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-05-24T17:13:35Z",
+      "side": 1,
+      "message": "No, but that can only happen if the FSAL supports whence_is_name.  Only RGW supports this, and it has stable keys, so the key for a file cannot change, to the old dirent will always be reused.",
+      "parentUuid": "8c1bbe91_283db64e",
+      "range": {
+        "startLine": 3094,
+        "startChar": 0,
+        "endLine": 3104,
+        "endChar": 0
+      },
+      "revId": "fdaebeec28365494bb571a53dd7d6a071b59736a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
