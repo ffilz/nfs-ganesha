@@ -373,6 +373,7 @@ fsal_status_t glusterfs_set_acl(struct glusterfs_export *glfs_export,
 
 	rc = glfs_h_acl_set(glfs_export->gl_fs->fs, objhandle->glhandle,
 				ACL_TYPE_ACCESS, buffxstat->e_acl);
+
 	if (rc < 0) {
 		/** @todo: check if error is appropriate.*/
 		LogMajor(COMPONENT_FSAL, "failed to set access type posix acl");
