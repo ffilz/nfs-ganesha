@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "c628cd8e_6bdf320b",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-05-30T12:22:23Z",
+      "side": 1,
+      "message": "my_fd is zeroed out by glusterfs_close_my_fd(), so this trace should probably go before the call.",
+      "revId": "e9d82f855a76678cece75999eed65a27861d5700",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0d5e4289_ce7cab5b",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 3
@@ -36,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "b021ec22_8c9ec841",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-05-30T12:22:23Z",
+      "side": 1,
+      "message": "Tracing does not include a backtrace; it only includes what you pass to the trace function.  This is handled in MDCACHE by either tracing at the callpoint, or by wrapping the function with a macro that passes in __func__ and tracing that.  See mdcache_lru_ref() for an example.",
+      "parentUuid": "0d5e4289_ce7cab5b",
+      "revId": "e9d82f855a76678cece75999eed65a27861d5700",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6ac96db2_01659911",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 3
@@ -47,6 +82,24 @@
       "writtenOn": "2019-05-30T05:47:33Z",
       "side": 1,
       "message": "Have you tested these traces? Could you please paste sample of the results. In glusterfs_close_my_fd(), we reset my_fd-\u003eglfd to NULL. Accessing that variable here is not right and may lead to crash.",
+      "revId": "e9d82f855a76678cece75999eed65a27861d5700",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de2fb839_b52063f8",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-05-30T12:22:23Z",
+      "side": 1,
+      "message": "Right, this trace should come before the call to glusterfs_close_my_fd(), I think.",
+      "parentUuid": "6ac96db2_01659911",
       "revId": "e9d82f855a76678cece75999eed65a27861d5700",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
