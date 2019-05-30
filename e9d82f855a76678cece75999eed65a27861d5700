@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ed0bbe5_af91653c",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-05-30T05:47:33Z",
+      "side": 1,
+      "message": "If its just a blank line, could you please revert changes on this file.",
+      "revId": "e9d82f855a76678cece75999eed65a27861d5700",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d5e4289_ce7cab5b",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-05-30T05:47:33Z",
+      "side": 1,
+      "message": "I have never enabled traces. So I am not sure. Does the traces print entire backtrace function? From debugging point of view I would be more interested in knowing callers of this routine which resulted in opening up the glfd.",
+      "revId": "e9d82f855a76678cece75999eed65a27861d5700",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ac96db2_01659911",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-05-30T05:47:33Z",
+      "side": 1,
+      "message": "Have you tested these traces? Could you please paste sample of the results. In glusterfs_close_my_fd(), we reset my_fd-\u003eglfd to NULL. Accessing that variable here is not right and may lead to crash.",
+      "revId": "e9d82f855a76678cece75999eed65a27861d5700",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
