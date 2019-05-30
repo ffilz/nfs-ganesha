@@ -118,7 +118,13 @@ int _9p_xattrwalk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	memcpy((char *)pxattrfid, (char *)pfid, sizeof(struct _9p_fid));
 	pxattrfid->state = NULL;
 
-	snprintf(name, sizeof(name), "%.*s", *name_len, name_str);
+	if (snprintf(name, sizeof(name), "%.*s", *name_len, name_str)
+	    >= sizeof(name)) {
+		LogDebug(COMPONENT_9P, "request with name too long (%u)",
+			 *name_len);
+		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
+				  preply);
+	}
 
 	pxattrfid->xattr = gsh_malloc(sizeof(*pxattrfid->xattr) +
 				      XATTR_BUFFERSIZE);
