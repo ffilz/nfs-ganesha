@@ -96,7 +96,14 @@ int _9p_mkdir(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
 				  preply);
 	}
-	snprintf(dir_name, sizeof(dir_name), "%.*s", *name_len, name_str);
+
+	if (snprintf(dir_name, sizeof(dir_name), "%.*s", *name_len, name_str)
+	    >= sizeof(dir_name)) {
+		LogDebug(COMPONENT_9P, "request with name too long (%u)",
+			 *name_len);
+		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
+				  preply);
+	}
 
 	fsal_prepare_attrs(&sattr, ATTR_MODE);
 

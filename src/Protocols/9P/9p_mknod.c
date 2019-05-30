@@ -103,7 +103,14 @@ int _9p_mknod(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
 				  preply);
 	}
-	snprintf(obj_name, sizeof(obj_name), "%.*s", *name_len, name_str);
+
+	if (snprintf(obj_name, sizeof(obj_name), "%.*s", *name_len, name_str)
+	    >= sizeof(obj_name)) {
+		LogDebug(COMPONENT_9P, "request with name too long (%u)",
+			 *name_len);
+		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
+				  preply);
+	}
 
 	/* Set the nodetype */
 	if (S_ISDIR(*mode))
