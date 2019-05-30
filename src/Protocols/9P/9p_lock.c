@@ -129,7 +129,14 @@ int _9p_lock(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
 				  preply);
 	}
-	snprintf(name, sizeof(name), "%.*s", *client_id_len, client_id_str);
+
+	if (snprintf(name, sizeof(name), "%.*s", *client_id_len, client_id_str)
+	    >= sizeof(name)) {
+		LogDebug(COMPONENT_9P, "request with name too long (%u)",
+			 *client_id_len);
+		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
+				  preply);
+	}
 
 	memset((char *)&hints, 0, sizeof(struct addrinfo));
 	hints.ai_family = AF_INET;

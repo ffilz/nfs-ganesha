@@ -104,7 +104,14 @@ int _9p_lcreate(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
 				  preply);
 	}
-	snprintf(file_name, sizeof(file_name), "%.*s", *name_len, name_str);
+
+	if (snprintf(file_name, sizeof(file_name), "%.*s", *name_len, name_str)
+	    >= sizeof(file_name)) {
+		LogDebug(COMPONENT_9P, "request with name too long (%u)",
+			 *name_len);
+		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
+				  preply);
+	}
 
 	_9p_openflags2FSAL(flags, &openflags);
 	pfid->state->state_data.fid.share_access =

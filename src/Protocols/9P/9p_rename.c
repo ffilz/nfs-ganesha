@@ -109,7 +109,14 @@ int _9p_rename(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
 				  preply);
 	}
-	snprintf(newname, sizeof(newname), "%.*s", *name_len, name_str);
+
+	if (snprintf(newname, sizeof(newname), "%.*s", *name_len, name_str)
+	    >= sizeof(newname)) {
+		LogDebug(COMPONENT_9P, "request with name too long (%u)",
+			 *name_len);
+		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
+				  preply);
+	}
 
 	fsal_status = fsal_rename(pfid->ppentry, pfid->name, pdfid->pentry,
 				  newname);
