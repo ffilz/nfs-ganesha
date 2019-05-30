@@ -92,7 +92,15 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		err = ENAMETOOLONG;
 		goto errout;
 	}
-	snprintf(exppath, sizeof(exppath), "%.*s", (int)*aname_len, aname_str);
+
+	if (snprintf(exppath, sizeof(exppath), "%.*s",
+		     (int)*aname_len, aname_str)
+	    >= sizeof(exppath)) {
+		LogDebug(COMPONENT_9P, "request with name too long (%u)",
+			 (unsigned int)*aname_len);
+		return _9p_rerror(req9p, msgtag, ENAMETOOLONG, plenout,
+				  preply);
+	}
 
 	/*  Find the export for the dirname (using as well Path, Pseudo, or Tag)
 	 */
