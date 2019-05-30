@@ -403,17 +403,18 @@ mdc_get_parent_handle(struct mdcache_fsal_export *export,
 
 /* entry's content_lock must not be held, this function will
 get the content_lock in exclusive mode */
-void
+fsal_status_t
 mdc_get_parent(struct mdcache_fsal_export *export, mdcache_entry_t *entry,
 	       struct gsh_buffdesc *parent_out)
 {
 	struct fsal_obj_handle *sub_handle = NULL;
-	fsal_status_t status;
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 
 	PTHREAD_RWLOCK_wrlock(&entry->content_lock);
 
 	if (entry->obj_handle.type != DIRECTORY) {
 		/* Parent pointer only for directories */
+		status.major = ERR_FSAL_INVAL;
 		goto out;
 	}
 
@@ -442,6 +443,7 @@ copy_parent_out:
 	if (parent_out != NULL  && entry->fsobj.fsdir.parent.len != 0) {
 		/* Copy the parent handle to parent_out */
 		mdcache_copy_fh(parent_out, &entry->fsobj.fsdir.parent);
+		status.major = ERR_FSAL_NO_ERROR;
 	}
 
 out:
@@ -453,6 +455,7 @@ out:
 			    sub_handle->obj_ops->release(sub_handle)
 			   );
 	}
+	return status;
 }
 
 /**
@@ -1179,12 +1182,13 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 		LogFullDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_CACHE_INODE,
 				"Lookup parent (..) of %p", mdc_parent);
 
-		mdc_get_parent(export, mdc_parent, &tmpfh);
+		status = mdc_get_parent(export, mdc_parent, &tmpfh);
 
-		status =  mdcache_locate_host(&tmpfh, export, new_entry,
-					      attrs_out);
-
-		mdcache_free_fh(&tmpfh);
+		if (!FSAL_IS_ERROR(status)) {
+			status =  mdcache_locate_host(&tmpfh, export, new_entry,
+						      attrs_out);
+			mdcache_free_fh(&tmpfh);
+		}
 
 		if (status.major == ERR_FSAL_STALE)
 			status.major = ERR_FSAL_NOENT;
