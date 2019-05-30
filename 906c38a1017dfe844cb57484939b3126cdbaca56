@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "fadbb505_b01a0bd4",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1325,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-05-30T15:32:07Z",
+      "side": 1,
+      "message": "Should we check the return status (to make sure glfd is not NULL) here? Or will LTTNG ignore the NULL values?",
+      "revId": "906c38a1017dfe844cb57484939b3126cdbaca56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "02efdbb8_0df52daf",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 4
