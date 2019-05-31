@@ -2901,9 +2901,14 @@ fsal_status_t fsal_find_fd(struct fsal_fd **out_fd,
 		status = open_func(obj_hdl, openflags, state_fd);
 
 		if (status.major == ERR_FSAL_ACCESS &&
+		   (state->state_type == STATE_TYPE_LOCK ||
+		    state->state_type == STATE_TYPE_NLM_LOCK) &&
 		    state->state_data.lock.openstate != NULL) {
 			/* Got an EACCESS and openstate is available, try
 			 * again with it's openflags.
+			 *
+			 * Shall we retry for STATE_TYPE_DELEG too by
+			 * openstate to state_data.deleg?
 			 */
 			struct fsal_fd *related_fd = (struct fsal_fd *)
 					(state->state_data.lock.openstate + 1);
