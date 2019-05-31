@@ -3000,16 +3000,20 @@ again:
 
 		status.major = ERR_FSAL_NO_ERROR;
 		/* We have the content_lock for at least read. */
-		if (dirent->entry) {
-			/* Take a ref for our use */
-			entry = dirent->entry;
-			mdcache_get(entry);
-		} else {
-			/* Not cached, get actual entry using the dirent ckey */
-			status = mdcache_find_keyed_reason(&dirent->ckey,
-							   &entry,
-							   MDC_REASON_SCAN);
+		entry = dirent->entry;
+		if (entry) {
+			void *desired = NULL;
+
+			if (has_write ||
+			    atomic_cmp_and_xchg((void **)&dirent->entry,
+						(void **)&entry,
+						 &desired)) {
+				mdcache_put(entry);
+				dirent->entry = NULL;
+			}
 		}
+		status = mdcache_find_keyed_reason(&dirent->ckey,
+						   &entry, MDC_REASON_SCAN);
 
 		if (FSAL_IS_ERROR(status)) {
 			/* Failed using ckey, do full lookup. */
