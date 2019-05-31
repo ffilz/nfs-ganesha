@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cecd701_ae03f93f",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-05-31T13:32:22Z",
+      "side": 1,
+      "message": "Should this be done under the state_mutex?  Or is it somehow otherwise thread safe?",
+      "revId": "310f90269ed0be90f1e2ac9f050e0b5ebd3e7cbf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
