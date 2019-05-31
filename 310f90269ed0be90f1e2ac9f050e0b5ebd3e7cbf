@@ -16,6 +16,24 @@
       "revId": "310f90269ed0be90f1e2ac9f050e0b5ebd3e7cbf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4b17669_3b669c76",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-05-31T14:02:30Z",
+      "side": 1,
+      "message": "I checked the code.. obj-\u003estate_hdl-\u003estate_lock is held before calling - _state_add_impl and _state_del_locked (two places where this variable is set/reset). Also to be cautious have added an extra check to ensure state_lock is taken before adding deleg state.",
+      "parentUuid": "3cecd701_ae03f93f",
+      "revId": "310f90269ed0be90f1e2ac9f050e0b5ebd3e7cbf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
