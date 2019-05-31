@@ -2999,17 +2999,28 @@ again:
 		}
 
 		status.major = ERR_FSAL_NO_ERROR;
-		/* We have the content_lock for at least read. */
-		if (dirent->entry) {
-			/* Take a ref for our use */
-			entry = dirent->entry;
-			mdcache_get(entry);
-		} else {
-			/* Not cached, get actual entry using the dirent ckey */
-			status = mdcache_find_keyed_reason(&dirent->ckey,
-							   &entry,
-							   MDC_REASON_SCAN);
+		/*
+		 * If we have a valid, non null entry pointry, we have to
+		 * free the ref which we took while populating the dirent
+		 * in mdcache_dirent_add and set the entry pointer of dirent
+		 * to NULL. We also have to take care that if the content
+		 * lock is held for read (has_write is false), only one thread
+		 * should drop the ref.
+		 */
+		entry = dirent->entry;
+		if (entry) {
+			void *desired = NULL;
+
+			if (has_write ||
+			    atomic_cmp_and_xchg((void **)&dirent->entry,
+						(void **)&entry,
+						 &desired)) {
+				mdcache_put(entry);
+				dirent->entry = NULL;
+			}
 		}
+		status = mdcache_find_keyed_reason(&dirent->ckey,
+						   &entry, MDC_REASON_SCAN);
 
 		if (FSAL_IS_ERROR(status)) {
 			/* Failed using ckey, do full lookup. */
@@ -3101,19 +3112,6 @@ again:
 				 */
 				goto restart;
 			}
-		}
-
-		if (has_write && dirent->entry) {
-			/* If we get here, we have the write lock, have an
-			 * entry, and took a ref on it above.  The dirent also
-			 * has a ref on the entry.  Drop that ref now.  This can
-			 * only be done under the write lock.  If we don't have
-			 * the write lock, then this was not the readdir that
-			 * took the ref, and another readdir will drop the ref,
-			 * or it will be dropped when the dirent is cleaned up.
-			 * */
-			mdcache_put(dirent->entry);
-			dirent->entry = NULL;
 		}
 
 		if (reload_chunk && look_ck != 0 && dirent->ck !=

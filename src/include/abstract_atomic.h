@@ -73,6 +73,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <time.h>
+#include <stdbool.h>
 
 #undef GCC_SYNC_FUNCTIONS
 #undef GCC_ATOMIC_FUNCTIONS
@@ -95,6 +96,27 @@
 #error This verison of GCC does not support atomics.
 #endif				/* Version check */
 #endif				/* __GNUC__ */
+
+/*
+ * @brief Atomically do cmp and swap operation.
+ *
+ * If *ptr == *expected, than *ptr = *desired and true will be returned.
+ * Else false will be returned.
+ */
+#ifdef GCC_ATOMIC_FUNCTIONS
+static inline bool atomic_cmp_and_xchg(void **ptr, void **expected,
+				       void **desired)
+{
+	return __atomic_compare_exchange(ptr, expected, desired, false,
+					 __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+}
+#elif defined(GCC_SYNC_FUNCTIONS)
+static inline bool atomic_cmp_and_xchg(void **ptr, void **expected,
+				       void **desired)
+{
+	return __sync_bool_compare_and_swap(ptr, *expected, *desired);
+}
+#endif
 
 /*
  * Preaddition, presubtraction, preincrement, predecrement (return the
