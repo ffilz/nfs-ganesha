@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a7f8a50_cc18df1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-06-11T19:26:17Z",
+      "side": 1,
+      "message": "If I recall, drc was stored in the xprt as well as in the dupreq for TCP and only in dupreq in the case of UDP.\n\nCode was mostly using drc stored in the dupreq (nfs_rpc_free_user_data uses it but checks for NULL!), so it wasn\u0027t an issue before. Commit 7068cd8ae moved it out of dupreq and solely used it from xprt resulting in this crash for UDP.",
+      "revId": "0e31abc3763ff0750047d8fc44599f66914c9f5f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
