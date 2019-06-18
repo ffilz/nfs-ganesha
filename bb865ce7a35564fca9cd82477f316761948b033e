@@ -51,6 +51,24 @@
       "revId": "bb865ce7a35564fca9cd82477f316761948b033e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cf3650_a447d7bf",
+        "filename": "src/include/gsh_rpc.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-18T18:54:41Z",
+      "side": 1,
+      "message": "Hmm, there would be a problem if snprintf ever returned -1. Can it ever do so? Obviously it can\u0027t have errors like EBADF, EIO, ENOSPC, can it ever return EINVAL?",
+      "parentUuid": "73bb2b5c_93c60e59",
+      "revId": "bb865ce7a35564fca9cd82477f316761948b033e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
