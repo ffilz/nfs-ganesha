@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6907473_5c67c0d7",
+        "filename": "src/include/gsh_rpc.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-06-18T18:39:37Z",
+      "side": 1,
+      "message": "This won\u0027t work, since success is bytes writte (so true) and failure is negative error code (so also true).",
+      "revId": "bb865ce7a35564fca9cd82477f316761948b033e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
