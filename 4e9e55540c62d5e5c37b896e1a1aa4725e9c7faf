@@ -86,6 +86,24 @@
       "revId": "4e9e55540c62d5e5c37b896e1a1aa4725e9c7faf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4170dc5d_da450cb5",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-19T22:31:04Z",
+      "side": 1,
+      "message": "Ok, I think I\u0027ll add auditing utf8str to all the strings stuff I\u0027m doing. Despite the XDR definition, let\u0027s just make all of them NUL terminated. That makes it easier to log them anyway... And less use of strncpy which has been used to \"safely\" copy them. They will just happen to be strings we get a length carried along for free...",
+      "parentUuid": "f8336b90_ba463f28",
+      "revId": "4e9e55540c62d5e5c37b896e1a1aa4725e9c7faf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
