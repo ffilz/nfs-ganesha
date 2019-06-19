@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "514c9f54_0786a8ba",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-19T21:00:47Z",
+      "side": 1,
+      "message": "Ah, that\u0027s a good catch.",
+      "revId": "4e9e55540c62d5e5c37b896e1a1aa4725e9c7faf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4cfb004a_03a8a66a",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-19T21:00:47Z",
+      "side": 1,
+      "message": "Thus needs to be path - server - 1, path points 1 past where the colon was, so path - server is 1 too many bytes, for example \"abc:def\", path now points to the \u0027d\u0027 and server points to the \u0027a\u0027, the difference between those pointers is 4, yet the string is 3 bytes long.",
+      "revId": "4e9e55540c62d5e5c37b896e1a1aa4725e9c7faf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd650b7b_ce0ca7bf",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-19T21:00:47Z",
+      "side": 1,
+      "message": "We can either make this path - server - 1 or leave it, if we leave it obviously the copied string is NUL terminated which is fine.",
+      "revId": "4e9e55540c62d5e5c37b896e1a1aa4725e9c7faf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
