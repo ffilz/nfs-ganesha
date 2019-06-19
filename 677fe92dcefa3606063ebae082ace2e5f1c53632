@@ -16,6 +16,24 @@
       "revId": "677fe92dcefa3606063ebae082ace2e5f1c53632",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6b9a4ec_eaa4fee4",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-06-19T19:26:17Z",
+      "side": 1,
+      "message": "to me that would imply that the location\u0027s \u0027server\u0027 array be changed from an array of utf8string type (len+val) to an array of asciiz strings and abandon the not-null-terminated semantics of these kinds of strings.\n\nffilz\u0027s comment on IRC makes me think he would not approve of that.",
+      "parentUuid": "3d17cfa4_f54231be",
+      "revId": "677fe92dcefa3606063ebae082ace2e5f1c53632",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
