@@ -68,6 +68,24 @@
       "revId": "4e9e55540c62d5e5c37b896e1a1aa4725e9c7faf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8336b90_ba463f28",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-06-19T22:14:31Z",
+      "side": 1,
+      "message": "copying the (unnecessary) terminating null is, AFAICT, what silences the coverity warning.",
+      "parentUuid": "dd650b7b_ce0ca7bf",
+      "revId": "4e9e55540c62d5e5c37b896e1a1aa4725e9c7faf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
