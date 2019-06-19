@@ -2911,6 +2911,15 @@ fsal_status_t mdcache_readdir_chunked(mdcache_entry_t *directory,
 		has_write = false;
 	}
 
+	if (whence_is_name) {
+		/* While we're getting active readdirs, we don't want to
+		 * invalidate a whence-is-name directory.  This will cause the
+		 * entire directory to be reloaded, causing a huge delay that
+		 * can cause the readdir to time out on the client.  To avoid
+		 * this, bump the expire time on the directory */
+		directory->attrs.expire_time_attr += 15;
+	}
+
 restart:
 	if (look_ck == 0) {
 		/* If starting from beginning, use the first_ck from the
@@ -3005,6 +3014,11 @@ again:
 				 */
 				atomic_set_uint32_t_bits(&directory->mde_flags,
 							 MDCACHE_DIR_POPULATED);
+			}
+
+			if (whence_is_name) {
+				directory->attrs.expire_time_attr =
+					op_ctx->export_perms->expire_time_attr;
 			}
 
 			PTHREAD_RWLOCK_unlock(&directory->content_lock);
@@ -3250,6 +3264,11 @@ again:
 		status = entry->obj_handle.obj_ops->getattrs(&entry->obj_handle,
 							    &attrs);
 		if (FSAL_IS_ERROR(status)) {
+			if (whence_is_name) {
+				directory->attrs.expire_time_attr =
+					op_ctx->export_perms->expire_time_attr;
+			}
+
 			PTHREAD_RWLOCK_unlock(&directory->content_lock);
 
 			LogFullDebugAlt(COMPONENT_NFS_READDIR,
@@ -3330,6 +3349,11 @@ again:
 				 * hang around until the directory is
 				 * invalidated. */
 				mdc_unref_chunk_dirents(chunk, dirent);
+			}
+
+			if (*eod_met && whence_is_name) {
+				directory->attrs.expire_time_attr =
+					op_ctx->export_perms->expire_time_attr;
 			}
 
 			LogDebugAlt(COMPONENT_NFS_READDIR,
