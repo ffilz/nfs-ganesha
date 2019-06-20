@@ -456,6 +456,15 @@ void _state_del_locked(state_t *state, const char *func, int line)
 	if (state->state_type == STATE_TYPE_LOCK)
 		glist_del(&state->state_data.lock.state_sharelist);
 
+	if (state->state_type == STATE_TYPE_SHARE) {
+		/* The OPEN state can have lock states anchored with
+		 * Remove the OPEN state from the list -
+		 * so it can be deleted before the lock states
+		 * If there are no lock stats, glist_del does nothing
+		 */
+		glist_del(&state->state_data.share.share_lockstates);
+	}
+
 	/* Reset write delegated and release client ref if this is a
 	 * write delegation */
 	if (state->state_type == STATE_TYPE_DELEG &&
