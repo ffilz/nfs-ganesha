@@ -34,6 +34,24 @@
       "revId": "d1f7d03b76c69c4d16b1336f513b233a9aeda426",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c00b9be_884284c9",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-20T16:58:07Z",
+      "side": 1,
+      "message": "Yea, this is not right. This is a head of list, so you would need to do a glist_for_each_safe on the list. But that would be problematical. We need to understand why we are getting here without an empty list (which is {\u0026state-\u003estate_data.share.share_lockstates, \u0026state-\u003estate_data.share.share_lockstates} not {NULL, NULL})\n\nIf the list was actually non-empty, glist_del would remove the list head from the list, leaving a now orphaned dangling list.\n\nOn an empty list, glist_del will first set next to prev and prev to next, which of course does nothing. Then it sets prev and next to NULL, but a head of list should NEVER be {NULL, NULL}",
+      "parentUuid": "eff90615_8b57374d",
+      "revId": "d1f7d03b76c69c4d16b1336f513b233a9aeda426",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
