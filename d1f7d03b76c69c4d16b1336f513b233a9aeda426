@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5181b1c_3cef2fa6",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-06-20T14:09:20Z",
+      "side": 1,
+      "message": "I don\u0027t think this is right.  share_lockstates is the head of the list, not an entry, so it should not be removed; instead, every entry on the list must be removed from it, or they will leak.",
+      "revId": "d1f7d03b76c69c4d16b1336f513b233a9aeda426",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
