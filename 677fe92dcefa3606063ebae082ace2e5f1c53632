@@ -34,6 +34,24 @@
       "revId": "677fe92dcefa3606063ebae082ace2e5f1c53632",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "481fd3d6_3921e0cc",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-06-20T14:16:02Z",
+      "side": 1,
+      "message": "Every other place I looked, utf8string_val is set with gsh_strdup(), and server here is null terminated (because strsep()) so just changing gsh_memdup() to gsh_strdup() puts this in line with the rest of the Ganesha code.",
+      "parentUuid": "e6b9a4ec_eaa4fee4",
+      "revId": "677fe92dcefa3606063ebae082ace2e5f1c53632",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
