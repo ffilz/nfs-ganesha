@@ -650,6 +650,14 @@ void state_nfs4_state_wipe(struct state_hdl *ostate)
 		state = glist_entry(glist, state_t, state_list);
 		if (state->state_type > STATE_TYPE_LAYOUT)
 			continue;
+		if (state->state_type == STATE_TYPE_SHARE) {
+			/* The OPEN state can have lock states anchored with
+			 * Remove the OPEN state from the list -
+			 * so it can be deleted before the lock states
+			 * If there are no lock stats, glist_del does nothing
+			 */
+			glist_del(&state->state_data.share.share_lockstates);
+		}
 		state_del_locked(state);
 	}
 }
