@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_4e92904c",
+        "filename": "src/Protocols/NFS/nfs4_op_create.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-21T23:47:53Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m not sure I\u0027d worry about including size here.\n\nSomewhere an NFS4ERR_INVAL should be reported. Since it isn\u0027t being reported here, and the old code would have passed it to FSAL as long as one of these other attributes were set, I\u0027m not sure I\u0027d worry about letting size slip through here.",
+      "parentUuid": "1a106d94_7385b5cd",
+      "range": {
+        "startLine": 400,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 6
+      },
+      "revId": "018eaa713deb0d2b9dae2b4e6069f31050f0ba56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_937b117a",
         "filename": "src/Protocols/NFS/nfs4_op_open.c",
         "patchSetId": 4
