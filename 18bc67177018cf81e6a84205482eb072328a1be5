@@ -52,6 +52,24 @@
       "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c236cc27_67ea4352",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-06-24T17:04:03Z",
+      "side": 1,
+      "message": "Hmmm... The only caller that actually checks the result is nlm4_send_grant_msg(), and it seems to believe the result will be a RPC_* value.  I don\u0027t have a strong opinion, since is only checks for 0 \u003d\u003d success.  -1 should be fine.",
+      "parentUuid": "fbfc8847_a3073940",
+      "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
