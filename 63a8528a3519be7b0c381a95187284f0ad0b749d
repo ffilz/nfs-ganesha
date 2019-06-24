@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3364ac5_ee7d5720",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-24T14:55:24Z",
+      "side": 1,
+      "message": "WARNING: \u0027informations\u0027 may be misspelled - perhaps \u0027information\u0027?\nversion informations (the same informations that are gathered and",
+      "revId": "63a8528a3519be7b0c381a95187284f0ad0b749d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "192a7623_7cc5874e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-24T14:55:24Z",
+      "side": 1,
+      "message": "WARNING: \u0027informations\u0027 may be misspelled - perhaps \u0027information\u0027?\nversion informations (the same informations that are gathered and",
+      "revId": "63a8528a3519be7b0c381a95187284f0ad0b749d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fecefac_6f8590da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-24T14:55:24Z",
+      "side": 1,
+      "message": "WARNING: \u0027informations\u0027 may be misspelled - perhaps \u0027information\u0027?\nCurrently one can use `nfs-ganesha -v` to get informations about",
+      "revId": "63a8528a3519be7b0c381a95187284f0ad0b749d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "535c9e66_a5400601",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-24T14:55:24Z",
+      "side": 1,
+      "message": "WARNING: \u0027diplay\u0027 may be misspelled - perhaps \u0027display\u0027?\nAdding properties to `org.ganesha.nfsd.admin` in order to diplay",
+      "revId": "63a8528a3519be7b0c381a95187284f0ad0b749d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57ece21c_45fb542f",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-24T14:55:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+static bool dbus_prop_get_VERSION_##prop_name(DBusMessageIter *reply) \\\n                                                               ^",
+      "revId": "63a8528a3519be7b0c381a95187284f0ad0b749d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aeb33af_2946d829",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-24T14:55:24Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__DATE__\u0027 macro makes the build non-deterministic\n+HANDLE_VERSION_PROP(COMPILE_DATE, __DATE__);",
+      "revId": "63a8528a3519be7b0c381a95187284f0ad0b749d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbfc48db_3e0a8e03",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-24T14:55:24Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__TIME__\u0027 macro makes the build non-deterministic\n+HANDLE_VERSION_PROP(COMPILE_TIME, __TIME__);",
+      "revId": "63a8528a3519be7b0c381a95187284f0ad0b749d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
