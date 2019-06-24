@@ -120,7 +120,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 	char *t;
 	struct timeval start, now;
 	struct timespec timeout;
-	int retval, retry;
+	int retval = 0, retry;
 	char *caller_name = host->slc_nsm_client->ssc_nlm_caller_name;
 	const char *client_type_str = xprt_type_to_str(host->slc_client_type);
 
@@ -268,10 +268,12 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 
 		if (cc->cc_error.re_status == RPC_TIMEDOUT ||
 		    cc->cc_error.re_status == RPC_SUCCESS) {
-			cc->cc_error.re_status = RPC_SUCCESS;
+			retval = RPC_SUCCESS;
 			clnt_req_release(cc);
 			break;
 		}
+
+		retval = cc->cc_error.re_status;
 
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogCrit(COMPONENT_NLM,
