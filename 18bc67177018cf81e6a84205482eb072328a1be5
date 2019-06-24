@@ -34,6 +34,24 @@
       "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbfc8847_a3073940",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-06-24T16:22:38Z",
+      "side": 1,
+      "message": "Every return here in nlm_send_async() is either \u0027return -1;\u0027 or \u0027return retval;\u0027\n\nAre they all wrong? Or should cc-\u003ecc_error.re_status be set to something, e.g. RPC_TIMEDOUT, before this return?",
+      "parentUuid": "bda34c36_d9802f0f",
+      "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
