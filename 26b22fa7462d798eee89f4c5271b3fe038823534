@@ -16,6 +16,24 @@
       "revId": "26b22fa7462d798eee89f4c5271b3fe038823534",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7655fd2e_2d61a73a",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-06-24T14:04:51Z",
+      "side": 1,
+      "message": "in the previous patch Frank mentioned that gsh_malloc() isn\u0027t in scope here.\n\nAnd I inferred from his comment that he didn\u0027t want to include \u003cabstract_mem.h\u003e to achieve that.",
+      "parentUuid": "44d779ac_2aeab8d4",
+      "revId": "26b22fa7462d798eee89f4c5271b3fe038823534",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
