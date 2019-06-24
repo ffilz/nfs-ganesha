@@ -120,7 +120,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 	char *t;
 	struct timeval start, now;
 	struct timespec timeout;
-	int retval, retry;
+	int retval = 0, retry;
 	char *caller_name = host->slc_nsm_client->ssc_nlm_caller_name;
 	const char *client_type_str = xprt_type_to_str(host->slc_client_type);
 
