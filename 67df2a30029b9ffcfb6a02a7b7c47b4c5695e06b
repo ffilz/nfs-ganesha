@@ -16,6 +16,24 @@
       "revId": "67df2a30029b9ffcfb6a02a7b7c47b4c5695e06b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7282152_b214633e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2920,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-06-24T14:02:34Z",
+      "side": 1,
+      "message": "You\u0027re right, I was thinking this was an expire time, not an offset.  I\u0027ll have to rethink this a bit.",
+      "parentUuid": "98f086d9_71a07901",
+      "revId": "67df2a30029b9ffcfb6a02a7b7c47b4c5695e06b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
