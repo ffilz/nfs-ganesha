@@ -70,6 +70,24 @@
       "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0976dbc_904efa38",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-06-24T18:14:01Z",
+      "side": 1,
+      "message": "nlm4_send_grant_mesg() is only checking for RPC_SUCCESS (i.e. 0). Seems a little bit strange to have used RPC_SUCCESS there.\n\nSo it just called LogMajor (between LogCrit and LogFatal in severity?) but then return SUCCESS anyway?  Maybe it\u0027s not really a LogMajor severity after all?  Maybe it\u0027s only worthy of a LogWarn, LogEvent or LogInfo instead?",
+      "parentUuid": "c236cc27_67ea4352",
+      "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
