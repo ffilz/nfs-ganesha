@@ -1,0 +1,5138 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a1b001f_f1032c34",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_lookup(liz_t *instance, struct user_cred *cred,\n+\t\t    liz_inode_t parent, const char *path,\n+\t\t    struct liz_entry *entry) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e29f68eb_bb6233a8",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8c552e7_d345a1f1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_lookup(instance, ctx, parent, path, entry);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc16c68d_37fe1441",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_mknod(liz_t *instance, struct user_cred *cred, liz_inode_t parent,\n+\t\t   const char *path, mode_t mode, dev_t rdev,\n+\t\t   struct liz_entry *entry) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af2bf0ac_cac204e3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74b9caa9_367a0bdf",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_mknod(instance, ctx, parent, path, mode, rdev, entry);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62bac65f_b9ef7349",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+liz_fileinfo_t *liz_cred_open(liz_t *instance, struct user_cred *cred,\n+\t\t\t      liz_inode_t inode, int flags) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27424374_8272467a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3263f05a_6b7854eb",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_fileinfo_t *ret \u003d liz_open(instance, ctx, inode, flags);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62ae0e73_da375f84",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+ssize_t liz_cred_read(liz_t *instance, struct user_cred *cred,\n+\t\t      liz_fileinfo_t *fileinfo, off_t offset, size_t size,\n+\t\t      char *buffer) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad3b0fd8_d67cce9e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9a04c6d_96a83ea9",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tssize_t ret \u003d liz_read(instance, ctx, fileinfo, offset, size, buffer);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8220ee9_cf0073de",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+ssize_t liz_cred_write(liz_t *instance, struct user_cred *cred,\n+\t\t       liz_fileinfo_t *fileinfo, off_t offset, size_t size,\n+\t\t       const char *buffer) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a89a392_b12a3fdf",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0cd2ac39_34e68b32",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tssize_t ret \u003d liz_write(instance, ctx, fileinfo, offset, size, buffer);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bad88a7_5756eba7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_flush(liz_t *instance, struct user_cred *cred,\n+\t\t   liz_fileinfo_t *fileinfo) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f44e02f0_597a4bec",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba34eab1_47f8fd49",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_flush(instance, ctx, fileinfo);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6afec45b_ca6283ea",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_getattr(liz_t *instance, struct user_cred *cred,\n+\t\t     liz_inode_t inode, struct liz_attr_reply *reply) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26a96dc8_1bedadf3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b89b476_8a10203e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_getattr(instance, ctx, inode, reply);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d04743_d69b1c8c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+liz_fileinfo_t *liz_cred_opendir(liz_t *instance, struct user_cred *cred,\n+\t\t\t\t liz_inode_t inode) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f996533a_1fb469c0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39e745e3_0dae8519",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_fileinfo_t *ret \u003d liz_opendir(instance, ctx, inode);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d1eefb6_d5e9c727",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_readdir(liz_t *instance, struct user_cred *cred,\n+\t\t     struct liz_fileinfo *fileinfo, off_t offset,\n+\t\t     size_t max_entries, struct liz_direntry *buf,\n+\t\t     size_t *num_entries) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f5fe476_53c8fe02",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2cdcd07_bee092a9",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tint rc \u003d liz_readdir(instance, ctx, fileinfo, offset, max_entries, buf, num_entries);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68ba2c27_04d034e1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_readdir(instance, ctx, fileinfo, offset, max_entries, buf, num_entries);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e449454_52ddaabb",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_mkdir(liz_t *instance, struct user_cred *cred, liz_inode_t parent,\n+\t\t   const char *name, mode_t mode, struct liz_entry *out_entry) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2bc059e_e3ccf941",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adf1fe9_df82cd0e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_mkdir(instance, ctx, parent, name, mode, out_entry);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "841e9e0c_68e550ec",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_rmdir(liz_t *instance, struct user_cred *cred, liz_inode_t parent,\n+\t\t   const char *name) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61dc96e9_b07eb036",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cecb3241_bb650862",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_rmdir(instance, ctx, parent, name);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ae3e150_3d814729",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_unlink(liz_t *instance, struct user_cred *cred,\n+\t\t    liz_inode_t parent, const char *name) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf9a753c_7e8ca272",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa937ec7_fb60747b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_unlink(instance, ctx, parent, name);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "685b7b6f_23a84091",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_setattr(liz_t *instance, struct user_cred *cred,\n+\t\t     liz_inode_t inode, struct stat *stbuf, int to_set,\n+\t\t     struct liz_attr_reply *reply) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2bde45_1a9816eb",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22c8c373_ff3a24fd",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_setattr(instance, ctx, inode, stbuf, to_set, reply);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f9e2fcb_60fd874f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_fsync(liz_t *instance, struct user_cred *cred,\n+\t\t   struct liz_fileinfo *fileinfo) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0cae3a5c_b211eaea",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28ce3f0e_718548de",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_fsync(instance, ctx, fileinfo);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "484d9909_da442a89",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_rename(liz_t *instance, struct user_cred *cred,\n+\t\t    liz_inode_t parent, const char *name,\n+\t\t    liz_inode_t new_parent, const char *new_name) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6e105f2_19e5c5d0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2adbd14_df98ee6c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_rename(instance, ctx, parent, name, new_parent, new_name);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef5da5a5_6731aeb5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_symlink(liz_t *instance, struct user_cred *cred, const char *link,\n+\t\t     liz_inode_t parent, const char *name,\n+\t\t     struct liz_entry *entry) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16478eea_519ec375",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abb8b079_3273cf85",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_symlink(instance, ctx, link, parent, name, entry);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "372c2996_23c195a6",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_readlink(liz_t *instance, struct user_cred *cred,\n+\t\t      liz_inode_t inode, char *buf, size_t size) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fec62561_e1a39de0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9c15b1e_ac387546",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_readlink(instance, ctx, inode, buf, size);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "314e515e_6b547974",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_link(liz_t *instance, struct user_cred *cred, liz_inode_t inode,\n+\t\t  liz_inode_t parent, const char *name,\n+\t\t  struct liz_entry *entry) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9694257b_cd4167e3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3e36872_5fbd573b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_link(instance, ctx, inode, parent, name, entry);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60ab317f_506400bc",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_get_chunks_info(liz_t *instance, struct user_cred *cred,\n+\t\t\t     liz_inode_t inode, uint32_t chunk_index,\n+\t\t\t     liz_chunk_info_t *buffer, uint32_t buffer_size,\n+\t\t\t     uint32_t *reply_size) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3b42cb0_f4b05f08",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dae3c22_e37e7cec",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tliz_get_chunks_info(instance, ctx, inode, chunk_index, buffer, buffer_size, reply_size);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c14d7dc_fe382977",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_setacl(liz_t *instance, struct user_cred *cred, liz_inode_t inode,\n+\t\t    const liz_acl_t *acl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c906bfcf_e4f17555",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "295d98b0_606dd163",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_setacl(instance, ctx, inode, acl);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35d4d885_a845765a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_getacl(liz_t *instance, struct user_cred *cred, liz_inode_t inode,\n+\t\t    liz_acl_t **acl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b67ab4e_77822a1c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b16b898b_8bea5fc1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_getacl(instance, ctx, inode, acl);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5b0226b_6e3c6b73",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_setlk(liz_t *instance, struct user_cred *cred,\n+\t\t   liz_fileinfo_t *fileinfo, const liz_lock_info_t *lock) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea22c628_b2ab5c5a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f70929a_80deea06",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d liz_setlk(instance, ctx, fileinfo, lock, NULL, NULL);\n+\tliz_destroy_context(ctx);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d19aa8c_e3c326c7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+int liz_cred_getlk(liz_t *instance, struct user_cred *cred,\n+\t\t   liz_fileinfo_t *fileinfo, liz_lock_info_t *lock) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29d7a91f_80c820bf",
+        "filename": "src/FSAL/FSAL_LIZARDFS/context_wrap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(instance, cred);\n+\tif (ctx \u003d\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "065b644d_f479e165",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static void lzfs_int_clear_fileinfo_cache(struct lzfs_fsal_export *lzfs_export,\n+\t\t\t\t\t  int count) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d87fe892_faa16086",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tcache_handle \u003d liz_fileinfo_cache_pop_expired(lzfs_export-\u003efileinfo_cache);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c79878a_954faeac",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static void lzfs_fsal_ds_handle_release(struct fsal_ds_handle *const ds_pub) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc80f70c_f1d2eb8a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_int_openfile(struct lzfs_fsal_export *lzfs_export,\n+\t\t\t\t  struct lzfs_fsal_ds_handle *lzfs_ds) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf064de3_7ffc87ca",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tliz_fileinfo_t *file_handle \u003d liz_extract_fileinfo(lzfs_ds-\u003ecache_handle);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af5a132f_5a002a2b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_fileinfo_t *file_handle \u003d liz_extract_fileinfo(lzfs_ds-\u003ecache_handle);\n+\tif (file_handle !\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7167d0fa_0636b4d1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_ds_handle_read(struct fsal_ds_handle *const ds_hdl,\n+\t\t\t\t\t struct req_op_context *const req_ctx,\n+\t\t\t\t\t const stateid4 *stateid,\n+\t\t\t\t\t const offset4 offset,\n+\t\t\t\t\t const count4 requested_length,\n+\t\t\t\t\t void *const buffer,\n+\t\t\t\t\t count4 *const supplied_length,\n+\t\t\t\t\t bool *const end_of_file) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a18bef9d_544b2c58",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_ds_handle_write(struct fsal_ds_handle *const ds_hdl,\n+\t\t\t\t\t  struct req_op_context *const req_ctx,\n+\t\t\t\t\t  const stateid4 *stateid,\n+\t\t\t\t\t  const offset4 offset,\n+\t\t\t\t\t  const count4 write_length,\n+\t\t\t\t\t  const void *buffer,\n+\t\t\t\t\t  const stable_how4 stability_wanted,\n+\t\t\t\t\t  count4 *const written_length,\n+\t\t\t\t\t  verifier4 *const writeverf,\n+\t\t\t\t\t  stable_how4 *const stability_got) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d66e1e3_7752ed5c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\t\t\t\t  verifier4 *const writeverf,\n \t\t\t\t\t            ^",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a6fec78_2171aba1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint rc \u003d 0;\n+\tif (stability_wanted !\u003d UNSTABLE4) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aedc878a_f5bb0e5f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\trc \u003d liz_cred_flush(lzfs_export-\u003elzfs_instance, NULL, file_handle);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc201d15_ecb320a5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_ds_handle_commit(struct fsal_ds_handle *const ds_hdl,\n+\t\t\t\t\t   struct req_op_context *const req_ctx,\n+\t\t\t\t\t   const offset4 offset,\n+\t\t\t\t\t   const count4 count,\n+\t\t\t\t\t   verifier4 *const writeverf) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0349efcf_19e2ca97",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\t\t\t\t   verifier4 *const writeverf) {\n \t\t\t\t\t             ^",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afb7e4ac_08841154",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_ds_read_plus(struct fsal_ds_handle *const ds_hdl,\n+\t\t\t\t       struct req_op_context *const req_ctx,\n+\t\t\t\t       const stateid4 *stateid,\n+\t\t\t\t       const offset4 offset,\n+\t\t\t\t       const count4 requested_length,\n+\t\t\t\t       void *const buffer,\n+\t\t\t\t       const count4 supplied_length,\n+\t\t\t\t       bool *const end_of_file,\n+\t\t\t\t       struct io_info *info) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca38c27c_e82e8f8f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_ds_write_plus(struct fsal_ds_handle *const ds_hdl,\n+\t\t\t\t\tstruct req_op_context *const req_ctx,\n+\t\t\t\t\tconst stateid4 *stateid,\n+\t\t\t\t\tconst offset4 offset,\n+\t\t\t\t\tconst count4 write_length,\n+\t\t\t\t\tconst void *buffer,\n+\t\t\t\t\tconst stable_how4 stability_wanted,\n+\t\t\t\t\tcount4 *const written_length,\n+\t\t\t\t\tverifier4 *const writeverf,\n+\t\t\t\t\tstable_how4 *const stability_got,\n+\t\t\t\t\tstruct io_info *info) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13eba538_b03695ad",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\t\t\t\tverifier4 *const writeverf,\n \t\t\t\t\t          ^",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad169059_f6754ac2",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static void lzfs_fsal_dsh_ops_init(struct fsal_dsh_ops *ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fe6c8a1_da1e8cc0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_make_ds_handle(struct fsal_pnfs_ds *const pds,\n+\t\t\t\t\t const struct gsh_buffdesc *const desc,\n+\t\t\t\t\t struct fsal_ds_handle **const handle,\n+\t\t\t\t\t int flags) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45950a4a_84335044",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static void lzfs_fsal_pds_release(struct fsal_pnfs_ds *const pds) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c4d5153_1a6de90d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_pds_permissions(struct fsal_pnfs_ds *const pds,\n+\t\t\t\t\t  struct svc_req *req) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04257719_eb61c956",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+void lzfs_fsal_ds_handle_ops_init(struct fsal_pnfs_ds_ops *ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa50a9c4_30af5518",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static void lzfs_fsal_release(struct fsal_export *export_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37de090f_47b377dd",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct lzfs_fsal_export *lzfs_export;\n+\tlzfs_export \u003d container_of(export_hdl, struct lzfs_fsal_export, export);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c698da3c_476a2653",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tliz_reset_fileinfo_cache_params(lzfs_export-\u003efileinfo_cache, 0, 0);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d371d68_77610fd5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tliz_fileinfo_t *file_handle;\n+\t\t\tcache_handle \u003d liz_fileinfo_cache_pop_expired(lzfs_export-\u003efileinfo_cache);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "428c5139_9c997fb0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tcache_handle \u003d liz_fileinfo_cache_pop_expired(lzfs_export-\u003efileinfo_cache);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51fd7d51_8d747f60",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_lookup_path(struct fsal_export *export_hdl,\n+\t\t\t\t\t   const char *path,\n+\t\t\t\t\t   struct fsal_obj_handle **pub_handle,\n+\t\t\t\t\t   struct attrlist *attrs_out) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73b01862_98268816",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t// set the real_path to the path without the prefix from ctx_export-\u003efullpath",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5770e75f_e380199e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_entry_t result;\n+\trc \u003d liz_cred_lookup(lzfs_export-\u003elzfs_instance, op_ctx-\u003ecreds,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2373943d_d56682d5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_wire_to_host(struct fsal_export *exp_hdl,\n+\t\t\t\t\t    fsal_digesttype_t in_type,\n+\t\t\t\t\t    struct gsh_buffdesc *fh_desc,\n+\t\t\t\t\t    int flags) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fe1c052_5a85264f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_create_handle(struct fsal_export *exp_hdl,\n+\t\t\t\t\t     struct gsh_buffdesc *desc,\n+\t\t\t\t\t     struct fsal_obj_handle **pub_handle,\n+\t\t\t\t\t     struct attrlist *attrs_out) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48710582_7362308a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t     struct fsal_obj_handle **pub_handle,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9402111_a0ac63e0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_get_fs_dynamic_info(struct fsal_export *exp_hdl,\n+\t\t\t\t\t\t   struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\t\t   fsal_dynamicfsinfo_t *info) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "517920fc_3b825e4c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t   struct fsal_obj_handle *obj_hdl,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c7d7044_778ce2f0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static bool lzfs_fsal_fs_supports(struct fsal_export *exp_hdl,\n+\t\t\t\t  fsal_fsinfo_options_t option) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd0f52d9_a85633e8",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint64_t lzfs_fsal_fs_maxfilesize(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f4d8810_02837a23",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_maxread(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cd6fe5e_daf214f2",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_maxwrite(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ee7a9b2_ec396f03",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_maxlink(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71e4b9d6_28608a3f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_maxnamelen(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8e8c4d2_69b32350",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_maxpathlen(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbfd5c92_c3d0c352",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static struct timespec lzfs_fsal_fs_lease_time(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d90abb0f_c82f7768",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static fsal_aclsupp_t lzfs_fsal_fs_acl_support(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84530a61_811cf50b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static attrmask_t lzfs_fsal_fs_supported_attrs(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7e53b14_acf87a98",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_umask(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b571c255_626ff70f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_xattr_access_rights(struct fsal_export *exp_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dde5f5a0_def33dd0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+struct state_t *lzfs_fsal_alloc_state(struct fsal_export *exp_hdl,\n+\t\t\t\t      enum state_type state_type,\n+\t\t\t\t      struct state_t *related_state) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35f64e31_61ad1c79",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+void lzfs_fsal_free_state(struct fsal_export *exp_hdl, struct state_t *state) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98e5d7cc_daebb43d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t   struct lzfs_fsal_state_fd,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "288d6218_d42a93ee",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+void lzfs_fsal_export_ops_init(struct export_ops *ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e11c9f9b_60dac80e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static void lzfs_fsal_release(struct fsal_obj_handle *obj_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42bc6585_e3b7b1d1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_lookup(struct fsal_obj_handle *dir_hdl,\n+\t\t\t\t      const char *path,\n+\t\t\t\t      struct fsal_obj_handle **obj_hdl,\n+\t\t\t\t      struct attrlist *attrs_out) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf7dfea_ea8c7b0d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_readdir(struct fsal_obj_handle *dir_hdl,\n+\t\t\t\t       fsal_cookie_t *whence,\n+\t\t\t\t       void *dir_state,\n+\t\t\t\t       fsal_readdir_cb cb,\n+\t\t\t\t       attrmask_t attrmask,\n+\t\t\t\t       bool *eof) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cb45a61_e5c1a93b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tliz_context_t *ctx \u003d lzfs_fsal_create_context(lzfs_export-\u003elzfs_instance,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae74885f_f6c08eda",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tdir_desc \u003d liz_opendir(lzfs_export-\u003elzfs_instance, ctx, lzfs_dir-\u003einode);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aec5ddd9_5b0b4de4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_mkdir(struct fsal_obj_handle *dir_hdl,\n+\t\t\t\t     const char *name,\n+\t\t\t\t     struct attrlist *attrib,\n+\t\t\t\t     struct fsal_obj_handle **new_obj,\n+\t\t\t\t     struct attrlist *attrs_out) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07e324dd_2f1320fa",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tunix_mode \u003d fsal2unix_mode(attrib-\u003emode) \u0026 ~op_ctx-\u003efsal_export-\u003eexp_ops.fs_umask(op_ctx-\u003efsal_export);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5c8691_31df83de",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_mknode(struct fsal_obj_handle *dir_hdl,\n+\t\t\t\t      const char *name,\n+\t\t\t\t      object_file_type_t nodetype,\n+\t\t\t\t      struct attrlist *attrib,\n+\t\t\t\t      struct fsal_obj_handle **new_obj,\n+\t\t\t\t      struct attrlist *attrs_out) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f251ad71_0f2a4434",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tunix_mode \u003d fsal2unix_mode(attrib-\u003emode) \u0026 ~op_ctx-\u003efsal_export-\u003eexp_ops.fs_umask(op_ctx-\u003efsal_export);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7d9e531_6e6a6290",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_symlink(struct fsal_obj_handle *dir_hdl,\n+\t\t\t\t       const char *name,\n+\t\t\t\t       const char *link_path,\n+\t\t\t\t       struct attrlist *attrib,\n+\t\t\t\t       struct fsal_obj_handle **new_obj,\n+\t\t\t\t       struct attrlist *attrs_out) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2bbb76_c1a764d6",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_readlink(struct fsal_obj_handle *link_hdl,\n+\t\t\t\t\tstruct gsh_buffdesc *content_buf,\n+\t\t\t\t\tbool refresh) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6f94266_0dd1a6e4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_getattrs(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\tstruct attrlist *attrs) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2610233_04229762",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_rename(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t      struct fsal_obj_handle *olddir_hdl,\n+\t\t\t\t      const char *old_name,\n+\t\t\t\t      struct fsal_obj_handle *newdir_hdl,\n+\t\t\t\t      const char *new_name) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40903539_a12b1339",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_unlink(struct fsal_obj_handle *dir_hdl,\n+\t\t\t\t      struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t      const char *name) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7910b0cf_410dbfa4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_handle_to_wire(\n+\t\tconst struct fsal_obj_handle *obj_hdl,\n+\t\tuint32_t output_type,\n+\t\tstruct gsh_buffdesc *fh_desc) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "017c1399_aa178631",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_inode_t inode;\n+\tinode \u003d lzfs_obj-\u003einode;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29a49d5b_738d88aa",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static void lzfs_fsal_handle_to_key(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t    struct gsh_buffdesc *fh_desc) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68fd69cf_afea3fe6",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_int_open_fd(struct lzfs_fsal_handle *lzfs_obj,\n+\t\t\t\t      fsal_openflags_t openflags,\n+\t\t\t\t      struct lzfs_fsal_fd *lzfs_fd,\n+\t\t\t\t      bool no_access_check) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e39ad06_a495089d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_int_close_fd(struct lzfs_fsal_handle *lzfs_obj,\n+\t\t\t\t       struct lzfs_fsal_fd *fd) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8b59eee_463c4a68",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint rc \u003d liz_release(lzfs_obj-\u003eexport-\u003elzfs_instance, fd-\u003efd);\n+\t\tfd-\u003efd \u003d NULL;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6c4c3ff_717c6c47",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_int_open_by_handle(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\t     struct state_t *state,\n+\t\t\t\t\t     fsal_openflags_t openflags,\n+\t\t\t\t\t     enum fsal_create_mode createmode,\n+\t\t\t\t\t     fsal_verifier_t verifier,\n+\t\t\t\t\t     struct attrlist *attrs_out,\n+\t\t\t\t\t     bool *caller_perm_check,\n+\t\t\t\t\t     bool after_mknod) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4084b02_3e6eb17f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tupdate_share_counters(\u0026lzfs_hdl-\u003eshare, FSAL_O_CLOSED, openflags);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1675d47e_56933c5c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_int_open_by_name(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\t   struct state_t *state,\n+\t\t\t\t\t   fsal_openflags_t openflags,\n+\t\t\t\t\t   const char *name,\n+\t\t\t\t\t   fsal_verifier_t verifier,\n+\t\t\t\t\t   struct attrlist *attrs_out,\n+\t\t\t\t\t   bool *caller_perm_check) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "deeb34a4_2cfac8d9",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_open2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t     struct state_t *state,\n+\t\t\t\t     fsal_openflags_t openflags,\n+\t\t\t\t     enum fsal_create_mode createmode,\n+\t\t\t\t     const char *name,\n+\t\t\t\t     struct attrlist *attr_set,\n+\t\t\t\t     fsal_verifier_t verifier,\n+\t\t\t\t     struct fsal_obj_handle **new_obj,\n+\t\t\t\t     struct attrlist *attrs_out,\n+\t\t\t\t     bool *caller_perm_check) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51a02fb3_35e7e94d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t   ~op_ctx-\u003efsal_export-\u003eexp_ops.fs_umask(op_ctx-\u003efsal_export);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbd80e9c_5b73933b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct liz_entry lzfs_attrs;\n+\trc \u003d liz_cred_mknod(lzfs_export-\u003elzfs_instance, op_ctx-\u003ecreds,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72221a43_0990def5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif (rc \u003c 0 \u0026\u0026 liz_last_err() \u003d\u003d LIZARDFS_ERROR_EEXIST \u0026\u0026 createmode \u003d\u003d FSAL_UNCHECKED) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49ceb90b_8505e289",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_openflags_t lzfs_fsal_status2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\t  struct state_t *state) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "faffd429_11b75c21",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tlzfs_fd \u003d \u0026container_of(state, struct lzfs_fsal_state_fd, state)-\u003elzfs_fd;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b93915b3_e0ef323c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct lzfs_fsal_fd *lzfs_fd;\n+\tlzfs_fd \u003d \u0026container_of(state, struct lzfs_fsal_state_fd, state)-\u003elzfs_fd;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2741ebb4_8acb77be",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_reopen2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t       struct state_t *state,\n+\t\t\t\t       fsal_openflags_t openflags) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33ff19c3_98467e93",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_int_open_func(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\tfsal_openflags_t openflags,\n+\t\t\t\t\tstruct fsal_fd *fd) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a13afb9_4d731c59",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_int_close_func(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\t struct fsal_fd *fd) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52824224_e0e1c849",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct lzfs_fsal_handle *lzfs_hdl;\n+\tlzfs_hdl \u003d container_of(obj_hdl, struct lzfs_fsal_handle, handle);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "147f2e39_2d81d540",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_int_find_fd(struct lzfs_fsal_fd *fd,\n+\t\t\t\t      struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t      bool bypass,\n+\t\t\t\t      struct state_t *state,\n+\t\t\t\t      fsal_openflags_t openflags,\n+\t\t\t\t      bool *has_lock,\n+\t\t\t\t      bool *closefd,\n+\t\t\t\t      bool open_for_locks) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90ea3688_0eabb07d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tbool reusing_open_state_fd \u003d false;\n+\tstatus \u003d fsal_find_fd((struct fsal_fd **)\u0026out_fd, obj_hdl,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "809811a8_4380c81e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_read2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t     bool bypass, struct state_t *state,\n+\t\t\t\t     uint64_t offset, size_t buffer_size,\n+\t\t\t\t     void *buffer, size_t *read_amount,\n+\t\t\t\t     bool *end_of_file, struct io_info *info) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c0c44e1_6fe5afe5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_write2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t      bool bypass, struct state_t *state,\n+\t\t\t\t      uint64_t offset, size_t buffer_size,\n+\t\t\t\t      void *buffer, size_t *wrote_amount,\n+\t\t\t\t      bool *fsal_stable, struct io_info *info) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51f53159_68739c5c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_commit2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t       off_t offset, size_t len) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c83e8ddf_ed5d18aa",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint rc \u003d liz_release(lzfs_export-\u003elzfs_instance, out_fd-\u003efd);\n+\t\tif (rc \u003c 0) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efb046fb_66bd2cc2",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static fsal_status_t lzfs_fsal_close(struct fsal_obj_handle *obj_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6af325ff_06b5bb73",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_merge(struct fsal_obj_handle *orig_hdl,\n+\t\t\t\t     struct fsal_obj_handle *dupe_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6706fadb_d03d6532",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_setattr2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t\tbool bypass,\n+\t\t\t\t\tstruct state_t *state,\n+\t\t\t\t\tstruct attrlist *attrib_set) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b2d207f_1b19d849",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tLogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG, \"attrs \", attrib_set, false);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44639d7e_c3f779d8",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tattrib_set-\u003emode \u0026\u003d ~op_ctx-\u003efsal_export-\u003eexp_ops.fs_umask(op_ctx-\u003efsal_export);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46161a28_c3113cc5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tbool reusing_open_state_fd \u003d false;\n+\t\tstatus \u003d fsal_find_fd(NULL, obj_hdl, NULL, \u0026lzfs_obj-\u003eshare,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93dc1cba_bfed1c9a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_close2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t      struct state_t *state) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7051553_7301d24d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+fsal_status_t lzfs_fsal_lock_op2(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t struct state_t *state,\n+\t\t\t \t void *owner, fsal_lock_op_t lock_op,\n+\t\t\t\t fsal_lock_param_t *request_lock,\n+\t\t\t\t fsal_lock_param_t *conflicting_lock) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7eb805c6_d3fafcc0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I^I ^I void *owner, fsal_lock_op_t lock_op,$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a02d5497_eafa7e93",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+^I^I^I ^I void *owner, fsal_lock_op_t lock_op,$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "910bd024_2869f321",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1479,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_link(struct fsal_obj_handle *obj_hdl,\n+\t\t\t\t    struct fsal_obj_handle *destdir_hdl,\n+\t\t\t\t    const char *name) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7a623f0_28774b25",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+void lzfs_fsal_handle_ops_init(struct lzfs_fsal_export *lzfs_export,\n+\t\t\t      struct fsal_obj_ops *ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9878058d_0c4b7b84",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+liz_acl_t *lzfs_int_convert_fsal_acl(const fsal_acl_t *fsal_acl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08f2fa17_fda42d43",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027unsigned int\u0027 to bare use of \u0027unsigned\u0027\n+\tfor (unsigned i \u003d 0; i \u003c fsal_acl-\u003enaces; ++i) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6254c853_87902489",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint count \u003d 0;\n+\tfor (unsigned i \u003d 0; i \u003c fsal_acl-\u003enaces; ++i) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc6e750a_25e91fd4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tcount +\u003d (IS_FSAL_ACE_ALLOW(*fsal_ace) || IS_FSAL_ACE_DENY(*fsal_ace)) ? 1 : 0;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f932eb0_e0b266b3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tfsal_ace_t *fsal_ace \u003d fsal_acl-\u003eaces + i;\n+\t\tcount +\u003d (IS_FSAL_ACE_ALLOW(*fsal_ace) || IS_FSAL_ACE_DENY(*fsal_ace)) ? 1 : 0;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "498740c2_b7b44dcb",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027unsigned int\u0027 to bare use of \u0027unsigned\u0027\n+\tfor (unsigned i \u003d 0; i \u003c fsal_acl-\u003enaces; ++i) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b051814_bbd81840",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tfsal_ace_t *fsal_ace \u003d fsal_acl-\u003eaces + i;\n+\t\tif (!(IS_FSAL_ACE_ALLOW(*fsal_ace) ||",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb9b6b8_2da4869c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tliz_acl_ace_t ace;\n+\t\tace.flags \u003d fsal_ace-\u003eflag \u0026 0xFF;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ea858dd_5192845b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+fsal_acl_t *lzfs_int_convert_lzfs_acl(const liz_acl_t *lzfs_acl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0f2ed2a_9f42678c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027unsigned int\u0027 to bare use of \u0027unsigned\u0027\n+\tfor (unsigned i \u003d 0; i \u003c acl_data.naces; ++i) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4573a8e7_afa52099",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tfsal_ace-\u003eiflag \u003d (lzfs_ace.flags \u0026 LIZ_ACL_SPECIAL_WHO) ? FSAL_ACE_IFLAG_SPECIAL_ID : 0;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b743e1b_79904e82",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027unsigned int\u0027 to bare use of \u0027unsigned\u0027\n+\t\t\t\t\t(unsigned)lzfs_ace.id);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f829c07e_5aeb29bf",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+fsal_status_t lzfs_int_getacl(struct lzfs_fsal_export *lzfs_export,\n+\t\t\t      uint32_t inode, uint32_t owner_id,\n+\t\t\t      fsal_acl_t **fsal_acl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4faf85d_acc6c43b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint acl_status \u003d nfs4_acl_release_entry(*fsal_acl);\n+\t\tif (acl_status !\u003d NFS_V4_ACL_SUCCESS) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c289c5a_09991b79",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+fsal_status_t lzfs_int_setacl(struct lzfs_fsal_export *lzfs_export,\n+\t\t\t      uint32_t inode, const fsal_acl_t *fsal_acl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edf8b5ee_f8a66eb7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_acl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_acl_t *lzfs_acl \u003d lzfs_int_convert_fsal_acl(fsal_acl);\n+\tif (!lzfs_acl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e6f2904_e75ea4ba",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+fsal_status_t lizardfs2fsal_error(int ec) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35fdc798_4ce2616a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+nfsstat4 lizardfs2nfs4_error(int ec) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54e890b1_80428479",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+fsal_status_t lzfs_fsal_last_err() {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4fc01c8_7fd28239",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - fsal_status_t lzfs_fsal_last_err() should probably be fsal_status_t lzfs_fsal_last_err(void)\n+fsal_status_t lzfs_fsal_last_err() {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4cd297d2_d0b99c2f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+nfsstat4 lzfs_nfs4_last_err() {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5372bb71_bf1ba6fd",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - nfsstat4 lzfs_nfs4_last_err() should probably be nfsstat4 lzfs_nfs4_last_err(void)\n+nfsstat4 lzfs_nfs4_last_err() {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce2bdbd8_e1c1aa1d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+liz_context_t *lzfs_fsal_create_context(liz_t *instance, struct user_cred *cred) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c05cfe8_328a7dad",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+liz_context_t *lzfs_fsal_create_context(liz_t *instance, struct user_cred *cred) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aee99e5c_f86d15e9",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tuid_t uid \u003d (cred-\u003ecaller_uid \u003d\u003d op_ctx-\u003eexport_perms-\u003eanonymous_uid) ? 0 : cred-\u003ecaller_uid;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3078b8e1_e11c8ee0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tgid_t gid \u003d (cred-\u003ecaller_gid \u003d\u003d op_ctx-\u003eexport_perms-\u003eanonymous_gid) ? 0 : cred-\u003ecaller_gid;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d4e037e_45feef23",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tgid_t *garray \u003d malloc((cred-\u003ecaller_glen + 1) * sizeof(gid_t));",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4af5e825_6467b437",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tgid_t *garray \u003d malloc((cred-\u003ecaller_glen + 1) * sizeof(gid_t));\n+\t\t\tif (garray !\u003d NULL) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b361e30_bc77a596",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tgid_t garray[kLocalGArraySize + 1];\n+\t\tgarray[0] \u003d gid;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a512601_095b9c85",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint count \u003d MIN(cred-\u003ecaller_glen, kLocalGArraySize);\n+\t\tmemcpy(garray + 1, cred-\u003ecaller_garray, sizeof(gid_t) * count);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b04753ac_48846f58",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+fsal_staticfsinfo_t *lzfs_fsal_staticinfo(struct fsal_module *module_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "000bbb50_2955fc22",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+struct lzfs_fsal_handle *lzfs_fsal_new_handle(\n+\t\tconst struct stat *attr, struct lzfs_fsal_export *lzfs_export) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39667233_4a14a9ec",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+void lzfs_fsal_delete_handle(struct lzfs_fsal_handle *obj) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d529110c_3f8cf289",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define LIZARDFS_VERSION(major, minor, micro) (0x010000 * major + 0x0100 * minor + micro)",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58e74f5a_58fc3824",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: macros should not use a trailing semicolon\n+#define kDisconnectedChunkserverVersion LIZARDFS_VERSION(256, 0, 0);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ef7019d_3f4e768a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define MFSCHUNKSIZE 65536 * 1024",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d0aa83b_4cbd393c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct fsal_module fsal;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "241d3b88_bad3f17b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    fsal_staticfsinfo_t fs_info;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55d4a038_d3b78dc2",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct fsal_export export; /*\u003c The public export object */$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1af2374f_4ccc8ad3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    liz_t *lzfs_instance;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "acba3cd1_1e87f0b4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct lzfs_fsal_handle *root; /*\u003c The root handle */$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b8e3334_b45d3ffb",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    liz_fileinfo_cache_t *fileinfo_cache;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1288ced1_00ca59e5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    bool pnfs_mds_enabled;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40ef7546_ef845456",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    bool pnfs_ds_enabled;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02944a25_28a7a463",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint32_t fileinfo_cache_timeout;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "694c2a68_59c2e2e4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint32_t fileinfo_cache_max_size;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "171184c7_9fc4773f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    liz_init_params_t lzfs_params;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a309b86d_f950a828",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    fsal_openflags_t openflags;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5caff260_e15f9a67",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct liz_fileinfo *fd;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2090006_f8498184",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct state_t state;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05115644_a1537cbe",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct lzfs_fsal_fd lzfs_fd;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08f7f22a_a482531b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint16_t module_id;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "193724bb_0d12c3b7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint16_t export_id;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "594d0fb0_ae5ce5d7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    liz_inode_t inode;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "494cf7a3_f7c5a463",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct fsal_obj_handle handle; /*\u003c The public handle */$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "956dc9fc_30c0764d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct lzfs_fsal_fd fd;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0c6f782_7fc54ed3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    liz_inode_t inode;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04ca29f7_dcec8743",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct lzfs_fsal_key unique_key;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f70a1cd3_0d1283ec",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct lzfs_fsal_export *export;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "297b2fb5_dea94bcd",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct fsal_share share;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42b55dd3_d55efd6c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint32_t inode;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88318f55_a2d23d7e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    struct fsal_ds_handle ds;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f50c6ead_41d5f0a3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint32_t inode;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fee9d8d5_88be196f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    liz_fileinfo_entry_t *cache_handle;$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "582cbde8_7cf0270d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    (ATTR_TYPE | ATTR_SIZE | ATTR_FSID | ATTR_FILEID | ATTR_MODE |^I      \\$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "448048f4_d23dc7e8",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+     ATTR_NUMLINKS | ATTR_OWNER | ATTR_GROUP | ATTR_ATIME | ATTR_CTIME |      \\$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b95890fb_4ce3e5d4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+     ATTR_MTIME | ATTR_CHGTIME | ATTR_CHANGE | ATTR_SPACEUSED | ATTR_RAWDEV | \\$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ac3867a_5095fb87",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+     ATTR_ACL)$",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43630349_0f3ad395",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - fsal_status_t lzfs_fsal_last_err() should probably be fsal_status_t lzfs_fsal_last_err(void)\n+fsal_status_t lzfs_fsal_last_err();",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5441a47_1c5da816",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - nfsstat4 lzfs_nfs4_last_err() should probably be nfsstat4 lzfs_nfs4_last_err(void)\n+nfsstat4 lzfs_nfs4_last_err();",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "571c3934_72c10df3",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_create_export(\n+\t\t\t\t\tstruct fsal_module *fsal_hdl,\n+\t\t\t\t\tvoid *parse_node,\n+\t\t\t\t\tstruct config_error_type *err_type,\n+\t\t\t\t\tconst struct fsal_up_vector *up_ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bc1df3b_46b04eeb",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tlzfs_export-\u003elzfs_instance \u003d liz_init_with_params(\u0026lzfs_export-\u003elzfs_params);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "382e67f2_f3a81777",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_attr_reply_t ret;\n+\trc \u003d liz_cred_getattr(lzfs_export-\u003elzfs_instance,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b463986_81abb22a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t lzfs_fsal_init_config(struct fsal_module *module_in,\n+\t\t\t\t\t   config_file_t config_struct,\n+\t\t\t\t\t   struct config_error_type *err_type) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54e2e625_ddba552f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+MODULE_INIT void init(void) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a266f99_710dd908",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+MODULE_FINI void finish(void) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f289c884_a7eda717",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static int cmp_func(const void *a, const void *b) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecf226a0_cc707fcb",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif (((const liz_chunkserver_info_t *)a)-\u003eip \u003c ((const liz_chunkserver_info_t *)b)-\u003eip) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68a7e0e7_0b29d514",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif (((const liz_chunkserver_info_t *)a)-\u003eip \u003e ((const liz_chunkserver_info_t *)b)-\u003eip) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13ed596f_918733bc",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static int is_disconnected(const void *a, void *unused) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cd79c09_b00436fe",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\treturn ((const liz_chunkserver_info_t *)a)-\u003eversion \u003d\u003d kDisconnectedChunkserverVersion;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e538606_33176b7b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static int is_same_ip(const void *a, void *base) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3effe677_a92bd95e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\treturn ((const liz_chunkserver_info_t *)a)-\u003eip \u003d\u003d ((const liz_chunkserver_info_t *)a - 1)-\u003eip;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b290c549_d099f8e7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static size_t remove_if(void *base,\n+\t\t\tsize_t num,\n+\t\t\tsize_t size,\n+\t\t\tint (*predicate)(const void *a, void *work_data),\n+\t\t\tvoid *work_data) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd85e9e4_582608b0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tsize_t i, j;\n+\tj \u003d 0;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51a9d2d9_037bc220",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tmemcpy((uint8_t *)base + i * size, (uint8_t *)base + j * size, size);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d7f49ac_604b17be",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static void shuffle(void *base, size_t num, size_t size) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9952ece0_5ae0d373",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tmemcpy((uint8_t *)base + i * size, (uint8_t *)base + j * size, size);",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6874765_7e006fee",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static liz_chunkserver_info_t *lzfs_int_get_randomized_chunkserver_list(\n+\tstruct lzfs_fsal_export *lzfs_export, uint32_t *chunkserver_count) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f410fd27_d2d480d1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tchunkserver_info \u003d gsh_malloc(LZFS_BIGGEST_STRIPE_COUNT * sizeof(liz_chunkserver_info_t));",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a691e80_2b87c74a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static int lzfs_int_fill_chunk_ds_list(XDR *da_addr_body,\n+\t\t\t\t       liz_chunk_info_t *chunk_info,\n+\t\t\t\t       liz_chunkserver_info_t *chunkserver_info,\n+\t\t\t\t       uint32_t chunk_count,\n+\t\t\t\t       uint32_t stripe_count,\n+\t\t\t\t       uint32_t chunkserver_count,\n+\t\t\t\t       uint32_t *chunkserver_index) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7662a17f_7e092be1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tfor (uint32_t chunk_index \u003d 0; chunk_index \u003c MIN(chunk_count, stripe_count); ++chunk_index) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bb51968_340c7b66",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint server_count \u003d 0;\n+\t\tmemset(host, 0, LZFS_EXPECTED_BACKUP_DS_COUNT * sizeof(fsal_multipath_member_t));",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be173478_3b34c35f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tmemset(host, 0, LZFS_EXPECTED_BACKUP_DS_COUNT * sizeof(fsal_multipath_member_t));",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1caa1cd2_2f85ce63",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tfor (int i \u003d 0; i \u003c chunk-\u003eparts_size \u0026\u0026 server_count \u003c LZFS_EXPECTED_BACKUP_DS_COUNT;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb609514_bb40ce97",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (chunk-\u003eparts[i].part_type_id !\u003d LZFS_STD_CHUNK_PART_TYPE) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e661e76_1cdcda2d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tfor (int i \u003d 0; i \u003c chunk-\u003eparts_size \u0026\u0026 server_count \u003c LZFS_EXPECTED_BACKUP_DS_COUNT;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebdeeff9_66aa73f5",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (chunk-\u003eparts[i].part_type_id \u003d\u003d LZFS_STD_CHUNK_PART_TYPE) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e3c4348_179c57cd",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t// fill unused entries with the servers from randomized chunkserver list",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2574d6c8_cf02ac4c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\thost[server_count].addr \u003d chunkserver_info[*chunkserver_index].ip;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a6db869_40cf4659",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t*chunkserver_index \u003d (*chunkserver_index + 1) % chunkserver_count;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c85a1868_ff6b19f8",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+/*! \\brief Fill unused part of DS list with servers from randomized chunkserver list */",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c16cfc26_4a472a83",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static int lzfs_int_fill_unused_ds_list(XDR *da_addr_body,\n+\t\t\t\t\tliz_chunkserver_info_t *chunkserver_info,\n+\t\t\t\t\tuint32_t chunk_count,\n+\t\t\t\t\tuint32_t stripe_count,\n+\t\t\t\t\tuint32_t chunkserver_count,\n+\t\t\t\t\tuint32_t *chunkserver_index) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b2b0e86_6d467d9b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tliz_chunkserver_info_t *chunkserver_info,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81ac5d54_631dcaf2",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tfor (uint32_t chunk_index \u003d MIN(chunk_count, stripe_count); chunk_index \u003c stripe_count;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87f9b0a8_dc24d497",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tmemset(host, 0, LZFS_EXPECTED_BACKUP_DS_COUNT * sizeof(fsal_multipath_member_t));",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2732982e_0fbc9374",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint server_count \u003d 0, index;\n+\t\tmemset(host, 0, LZFS_EXPECTED_BACKUP_DS_COUNT * sizeof(fsal_multipath_member_t));",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e081d31d_c4e7bf39",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tindex \u003d (*chunkserver_index + server_count) % chunkserver_count;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "262f8bac_13ff2216",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t*chunkserver_index \u003d (*chunkserver_index + 1) % chunkserver_count;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c16970b_ceae6276",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * Linux pNFS client imposes limit on stripe size (LZFS_BIGGEST_STRIPE_COUNT \u003d 4096).",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c54776a_3f95ace4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_getdeviceinfo(struct fsal_module *fsal_hdl,\n+\t\t\t\t\tXDR *da_addr_body,\n+\t\t\t\t\tconst layouttype4 type,\n+\t\t\t\t\tconst struct pnfs_deviceid *deviceid) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35029a57_d1ca1464",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tuint32_t chunk_count, chunkserver_count, stripe_count, chunkserver_index;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e225ac7c_6d7e36a2",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tuint16_t export_id \u003d deviceid-\u003edevice_id2;\n+\tglist_for_each_safe(glist, glistn, \u0026fsal_hdl-\u003eexports) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da091eeb_a83f6588",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tchunk_info \u003d gsh_malloc(LZFS_BIGGEST_STRIPE_COUNT * sizeof(liz_chunk_info_t));",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d7e5b4c_ac05c2c1",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tfor (uint32_t chunk_index \u003d 0; chunk_index \u003c stripe_count; ++chunk_index) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec2fd21_512bf1e7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_getdevicelist(struct fsal_export *export_hdl,\n+\t\t\t\t\tlayouttype4 type,\n+\t\t\t\t\tvoid *opaque,\n+\t\t\t\t\tbool (*cb)(void *opaque,\n+\t\t\t\t\tconst uint64_t id),\n+\t\t\t\t\tstruct fsal_getdevicelist_res *res) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bcecbc2_bc43d048",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static void lzfs_fsal_fs_layouttypes(struct fsal_export *export_hdl,\n+\t\t\t\t     int32_t *count,\n+\t\t\t\t     const layouttype4 **types) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e60b2612_94fe5b3d",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_layout_blocksize(struct fsal_export *export_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaf13121_86a44dc0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static uint32_t lzfs_fsal_fs_maximum_segments(struct fsal_export *export_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "beb5a597_b2b5f75c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static size_t lzfs_fsal_fs_loc_body_size(struct fsal_export *export_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65282a8f_3decf39e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static size_t lzfs_fsal_fs_da_addr_size(struct fsal_module *fsal_hdl) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eafd435_5502689c",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t// one stripe index + number of addresses + LZFS_EXPECTED_BACKUP_DS_COUNT",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6175aa73_a40586da",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\treturn LZFS_BIGGEST_STRIPE_COUNT * (4 + (4 + LZFS_EXPECTED_BACKUP_DS_COUNT * 40)) + 32;",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91a92e29_2c8ed154",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+void lzfs_fsal_export_ops_pnfs(struct export_ops *ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3577a7cc_2c5ab9ac",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+void lzfs_fsal_ops_pnfs(struct fsal_ops *ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20723321_cfde6232",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_layoutget(struct fsal_obj_handle *obj_pub,\n+\t\t\t\t    struct req_op_context *req_ctx,\n+\t\t\t\t    XDR *loc_body,\n+\t\t\t\t    const struct fsal_layoutget_arg *arg,\n+\t\t\t\t    struct fsal_layoutget_res *res) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "876b8fd0_0f098eea",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogMajor(COMPONENT_PNFS, \"Failed to encode nfsv4_1_file_layout.\");",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "adc72f1e_1bbe7eb7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_layoutreturn(\n+\t\t\t\tstruct fsal_obj_handle *obj_pub,\n+\t\t\t\tstruct req_op_context *req_ctx, XDR *lrf_body,\n+\t\t\t\tconst struct fsal_layoutreturn_arg *arg) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd893447_ae3ad902",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static nfsstat4 lzfs_fsal_layoutcommit(\n+\t\t\t\tstruct fsal_obj_handle *obj_pub,\n+\t\t\t\tstruct req_op_context *req_ctx, XDR *lou_body,\n+\t\t\t\tconst struct fsal_layoutcommit_arg *arg,\n+\t\t\t\tstruct fsal_layoutcommit_res *res) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9064d8c_6aab0290",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tliz_attr_reply_t reply;\n+\trc \u003d liz_cred_setattr(lzfs_export-\u003elzfs_instance,",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "737af853_bbf102e4",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-26T07:40:15Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+void lzfs_fsal_handle_ops_pnfs(struct fsal_obj_ops *ops) {",
+      "revId": "bbca0d97cf18a81f8286b58624aa5205fa3f8c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
