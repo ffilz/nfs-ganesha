@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "969f8b49_6c4a5ee4",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-27T18:18:26Z",
+      "side": 1,
+      "message": "This should be retval \u003d RPC_SUCCESS;",
+      "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d42634a_600b1fe7",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-27T18:18:26Z",
+      "side": 1,
+      "message": "And here we should set:\nretval \u003d cc-\u003ecc_error.re_status;\n\nI think with those two changes, retval becomes always initialized",
+      "revId": "18bc67177018cf81e6a84205482eb072328a1be5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "669362d1_efa49a28",
         "filename": "src/Protocols/NLM/nlm_async.c",
         "patchSetId": 1
