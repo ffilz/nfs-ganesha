@@ -34,6 +34,24 @@
       "revId": "67df2a30029b9ffcfb6a02a7b7c47b4c5695e06b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e936a55_4d27006c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2920,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-27T16:16:06Z",
+      "side": 1,
+      "message": "Hmm, could you bump the attr_time instead? I worry that the reset of the expirt_time_attr will get missed. It does have the advantage that if someone checks the attr validity immediately after the readdir completes, if the attr expired during the readdir, they will immediately become invalid rather than waiting some time to expire.",
+      "parentUuid": "d7282152_b214633e",
+      "revId": "67df2a30029b9ffcfb6a02a7b7c47b4c5695e06b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
