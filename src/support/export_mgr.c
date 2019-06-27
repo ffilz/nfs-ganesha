@@ -1162,38 +1162,16 @@ static struct gsh_dbus_method export_add_export = {
 		 END_ARG_LIST}
 };
 
-/**
- * @brief Remove an export
- *
- * @param "id"  [IN] the id of the export to remove
- *
- * @return           As above, use DBusError to return errors.
- */
 
-static bool gsh_export_removeexport(DBusMessageIter *args,
-				    DBusMessage *reply,
-				    DBusError *error)
+static bool remove_export(struct gsh_export *export, DBusError *error)
 {
-	struct gsh_export *export = NULL;
-	char *errormsg;
 	bool rc = false;
 	bool op_ctx_set = false;
 	struct root_op_context ctx;
 
-	export = lookup_export(args, &errormsg);
-	if (export == NULL) {
-		LogDebug(COMPONENT_EXPORT, "lookup_export failed with %s",
-			errormsg);
-		dbus_set_error(error, DBUS_ERROR_INVALID_ARGS,
-			       "lookup_export failed with %s",
-			       errormsg);
-		goto out;
-	}
-
 	if (export->export_id == 0) {
 		LogDebug(COMPONENT_EXPORT,
 			"Cannot remove export with id 0");
-		put_gsh_export(export);
 		dbus_set_error(error, DBUS_ERROR_INVALID_ARGS,
 			       "Cannot remove export with id 0");
 		goto out;
@@ -1205,7 +1183,6 @@ static bool gsh_export_removeexport(DBusMessageIter *args,
 	if (!rc) {
 		LogDebug(COMPONENT_EXPORT,
 			"Cannot remove export with submounts");
-		put_gsh_export(export);
 		dbus_set_error(error, DBUS_ERROR_INVALID_ARGS,
 			       "Cannot remove export with submounts");
 		goto out;
@@ -1224,10 +1201,41 @@ static bool gsh_export_removeexport(DBusMessageIter *args,
 	LogInfo(COMPONENT_EXPORT, "Removed export with id %d",
 		export->export_id);
 
-	put_gsh_export(export);
-
 	if (op_ctx_set)
 		release_root_op_context();
+
+out:
+	return rc;
+}
+
+/**
+ * @brief Remove an export
+ *
+ * @param "id"  [IN] the id of the export to remove
+ *
+ * @return           As above, use DBusError to return errors.
+ */
+
+static bool gsh_export_removeexport(DBusMessageIter *args,
+				    DBusMessage *reply,
+				    DBusError *error)
+{
+	struct gsh_export *export;
+	char *errormsg;
+	bool rc = false;
+
+	export = lookup_export(args, &errormsg);
+	if (export == NULL) {
+		LogDebug(COMPONENT_EXPORT, "lookup_export failed with %s",
+			errormsg);
+		dbus_set_error(error, DBUS_ERROR_INVALID_ARGS,
+			       "lookup_export failed with %s",
+			       errormsg);
+		goto out;
+	}
+
+	rc = remove_export(export, error);
+	put_gsh_export(export);
 
 out:
 	return rc;
@@ -1682,12 +1690,67 @@ static struct gsh_dbus_method export_update_export = {
 		 END_ARG_LIST}
 };
 
+
+static bool gsh_export_remove_multiple_exports(DBusMessageIter *args,
+					       DBusMessage *reply,
+					       DBusError *error)
+{
+	char *errormsg = "Failed";
+	bool success = false;
+	bool rc = true;
+	int count, i;
+	uint16_t *export_list, export_id;
+	struct gsh_export *export;
+	DBusMessageIter iter;
+	DBusMessageIter id_iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	/* Parse the export id array from dbus argument */
+	dbus_message_iter_recurse(args, &id_iter);
+	dbus_message_iter_get_fixed_array(&id_iter, &export_list, &count);
+
+	for (i = 0; i < count; i++) {
+		export_id = export_list[i];
+		LogFullDebug(COMPONENT_EXPORT, "id: %u", export_id);
+
+		export = get_gsh_export(export_id);
+		if (!export) {
+			LogDebug(COMPONENT_EXPORT, "get_export failed for %d",
+				export_id);
+			dbus_set_error(error, DBUS_ERROR_INVALID_ARGS,
+				       "get_export failed for %d with %s",
+				       export_id, errormsg);
+			goto out;
+		}
+		rc = remove_export(export, error);
+		put_gsh_export(export);
+		if (!rc)
+			goto out;
+	}
+
+	errormsg = "OK";
+	success = true;
+out:
+	dbus_status_reply(&iter, success, errormsg);
+	return rc;
+}
+
+static struct gsh_dbus_method export_remove_multiple_exports = {
+	.name = "RemoveMultipleExports",
+	.method = gsh_export_remove_multiple_exports,
+	.args =	{ID_ARG_ARRAY,
+		 MESSAGE_REPLY,
+		 END_ARG_LIST}
+};
+
 static struct gsh_dbus_method *export_mgr_methods[] = {
 	&export_add_export,
 	&export_remove_export,
 	&export_display_export,
 	&export_show_exports,
 	&export_update_export,
+	&export_remove_multiple_exports,
 	NULL
 };
 

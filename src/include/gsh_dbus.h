@@ -109,6 +109,13 @@
 	.direction = "in"	\
 }
 
+#define ID_ARG_ARRAY		\
+{				\
+	.name = "id_array",	\
+	.type = "aq",		\
+	.direction = "in"	\
+}
+
 #define PATH_ARG		\
 {				\
 	.name = "path",		\
