@@ -16,6 +16,24 @@
       "revId": "764ef53500e1f5a7f4733ded23dea48a8d22e12a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88b52772_a9a6a4e0",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-06-28T18:25:16Z",
+      "side": 1,
+      "message": "In this case, the fsal_filesystem for the filesystem is known, but not claimed, so we don\u0027t need to go through a whole re-load rigamarole, we just need to claim the single filesystem. Of course if there\u0027s a whole complex tree that got added, we\u0027ll discover them one at a time (where the reload would get them all)...",
+      "parentUuid": "0dfb77a9_f3999988",
+      "revId": "764ef53500e1f5a7f4733ded23dea48a8d22e12a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
