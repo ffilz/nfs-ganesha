@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d05cb3b_0f004364",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-28T23:42:44Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+static bool dbus_prop_get_VERSION_##prop_name(DBusMessageIter *reply) \\\n                                                               ^",
+      "revId": "df1e579809b9cc125a96787acd564b2be1ff75cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d63e214c_be243285",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-28T23:42:44Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__DATE__\u0027 macro makes the build non-deterministic\n+HANDLE_VERSION_PROP(COMPILE_DATE, __DATE__);",
+      "revId": "df1e579809b9cc125a96787acd564b2be1ff75cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8500af_d8d784a6",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-06-28T23:42:44Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__TIME__\u0027 macro makes the build non-deterministic\n+HANDLE_VERSION_PROP(COMPILE_TIME, __TIME__);",
+      "revId": "df1e579809b9cc125a96787acd564b2be1ff75cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
