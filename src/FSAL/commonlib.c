@@ -1326,6 +1326,38 @@ int populate_posix_file_systems(bool force)
 	return retval;
 }
 
+int reload_posix_filesystems(const char *path,
+			     struct fsal_module *fsal,
+			     struct fsal_export *exp,
+			     claim_filesystem_cb claim,
+			     unclaim_filesystem_cb unclaim,
+			     struct fsal_filesystem **root_fs)
+{
+	int retval = 0;
+
+	retval = populate_posix_file_systems(true);
+
+	if (retval != 0) {
+		LogCrit(COMPONENT_FSAL,
+			"populate_posix_file_systems returned %s (%d)",
+			strerror(retval), retval);
+		return retval;
+	}
+
+	retval = claim_posix_filesystems(path, fsal, exp,
+					 claim, unclaim, root_fs);
+
+	if (retval != 0) {
+		if (retval == EAGAIN)
+			retval = ENOENT;
+		LogCrit(COMPONENT_FSAL,
+			"claim_posix_filesystems(%s) returned %s (%d)",
+			path, strerror(retval), retval);
+	}
+
+	return retval;
+}
+
 int resolve_posix_filesystem(const char *path,
 			     struct fsal_module *fsal,
 			     struct fsal_export *exp,
@@ -1349,30 +1381,22 @@ int resolve_posix_filesystem(const char *path,
 	/* second attempt to resolve file system with force option in case of
 	 * ganesha isn't during startup.
 	 */
-	if (!nfs_init.init_complete || retval != EAGAIN)
+	if (!nfs_init.init_complete || retval != EAGAIN) {
+		LogDebug(COMPONENT_FSAL,
+			 "Not trying to claim filesystems again because %s %s(%d)",
+			 nfs_init.init_complete
+				? "retval != EAGAIN"
+				: "init is not complete",
+			 strerror(retval), retval);
 		return retval;
+	}
 
 	LogDebug(COMPONENT_FSAL,
-		 "Call populate_posix_file_systems one more time");
+		 "Attempting to find a filesystem for %s, reload filesystems",
+		 path);
 
-	retval = populate_posix_file_systems(true);
-	if (retval != 0) {
-		LogCrit(COMPONENT_FSAL,
-			"populate_posix_file_systems returned %s (%d)",
-			strerror(retval), retval);
-		return retval;
-	}
-
-	retval = claim_posix_filesystems(path, fsal, exp,
-					 claim, unclaim, root_fs);
-
-	if (retval != 0) {
-		if (retval == EAGAIN)
-			retval = ENOENT;
-		LogCrit(COMPONENT_FSAL,
-			"claim_posix_filesystems(%s) returned %s (%d)",
-			path, strerror(retval), retval);
-	}
+	retval =
+	    reload_posix_filesystems(path, fsal, exp, claim, unclaim, root_fs);
 
 	return retval;
 }
