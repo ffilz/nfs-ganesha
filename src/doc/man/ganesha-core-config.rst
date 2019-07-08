@@ -173,6 +173,10 @@ Getattrs_In_Complete_Read(bool, default true)
     validate the EOF flag correctness. Needed for ESXi client compatibility
     when FSAL's don't set it correctly.
 
+Enable_malloc_trim(bool, default false)
+    Set true to enable dynamic malloc_trim support.
+
+
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
 

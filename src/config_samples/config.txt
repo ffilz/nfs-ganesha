@@ -163,6 +163,8 @@ NFS_CORE_PARAM {}
 
 	Getattrs_In_Complete_Read(bool, default true)
 
+	Enable_malloc_trim(bool, default false)
+
 NFS_IP_NAME {}
 --------------
 
