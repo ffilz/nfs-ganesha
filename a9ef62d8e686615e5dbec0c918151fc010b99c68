@@ -22,6 +22,52 @@
       "revId": "a9ef62d8e686615e5dbec0c918151fc010b99c68",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d91bf64b_3812d8fa",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3201,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-07-11T15:44:42Z",
+      "side": 1,
+      "message": "Should the lock be dropped only after the unref?",
+      "range": {
+        "startLine": 3190,
+        "startChar": 0,
+        "endLine": 3201,
+        "endChar": 1
+      },
+      "revId": "a9ef62d8e686615e5dbec0c918151fc010b99c68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8aeebde_f53c95e1",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3271,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-07-11T15:44:42Z",
+      "side": 1,
+      "message": "Does the unlock need to be after the unref of the chunk?",
+      "range": {
+        "startLine": 3263,
+        "startChar": 0,
+        "endLine": 3271,
+        "endChar": 34
+      },
+      "revId": "a9ef62d8e686615e5dbec0c918151fc010b99c68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
