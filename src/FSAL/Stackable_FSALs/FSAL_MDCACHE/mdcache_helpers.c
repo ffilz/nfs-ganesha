@@ -3135,20 +3135,20 @@ again:
 				 */
 				look_ck = dirent->ck;
 
-				PTHREAD_RWLOCK_unlock(&directory->content_lock);
-				PTHREAD_RWLOCK_wrlock(&directory->content_lock);
-				has_write = true;
-
-				/* Dropping the content_lock may have
-				 * invalidated some or all of the dirents and/or
-				 * chunks in this directory.  We need to start
-				 * over from this point.  look_ck is now correct
-				 * if the dirent is still cached, and we haven't
-				 * changed next_ck, so it's still correct for
-				 * reloading the chunk.
+				/* Dropping the content_lock may invalidate some
+				 * or all of the dirents and/or chunks in this
+				 * directory.  We need to start over from this
+				 * point.  look_ck is now correct if the dirent
+				 * is still cached, and we haven't changed
+				 * next_ck, so it's still correct for reloading
+				 * the chunk.
 				 */
 				mdcache_lru_unref_chunk(chunk);
 				chunk = NULL;
+
+				PTHREAD_RWLOCK_unlock(&directory->content_lock);
+				PTHREAD_RWLOCK_wrlock(&directory->content_lock);
+				has_write = true;
 
 				/* Now we need to look for this dirent again.
 				 * We haven't updated next_ck for this dirent
