@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "897848a1_d4ff8705",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-12T14:43:01Z",
+      "side": 1,
+      "message": "So down here, change\nexclusive_create\nto\nexclusive_create | (openflags \u0026 FSAL_O_RECLAIM)",
+      "revId": "e97c3281a6164c4a4b4ef88d57b501ba9d7bcf11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
