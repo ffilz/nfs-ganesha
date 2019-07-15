@@ -16,6 +16,24 @@
       "revId": "e97c3281a6164c4a4b4ef88d57b501ba9d7bcf11",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b28def3_5fdc3d7c",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1015522
+      },
+      "writtenOn": "2019-07-15T09:04:42Z",
+      "side": 1,
+      "message": "Okay. shall I also revert https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/449537 so FSAL_O_RECLAIM flag is available?",
+      "parentUuid": "897848a1_d4ff8705",
+      "revId": "e97c3281a6164c4a4b4ef88d57b501ba9d7bcf11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
