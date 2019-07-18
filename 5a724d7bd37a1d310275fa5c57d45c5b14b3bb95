@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa3648de_ca5daacd",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-18T14:23:52Z",
+      "side": 1,
+      "message": "Could we name the function LogEventLimited? It makes it easier to scan the code for all the logging.",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db1e6d3_3bd23a92",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-18T14:23:52Z",
+      "side": 1,
+      "message": "Do you want to modify the format so it logs how many messages were missed?",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11df8b82_3592cdf0",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-18T14:23:52Z",
+      "side": 1,
+      "message": "Should we make missed an atomic so we can count \"can\u0027t get the lock\" as missed messages?",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
