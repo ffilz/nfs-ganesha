@@ -153,6 +153,9 @@ int main(int argc, char *argv[])
 	sigset_t signals_to_block;
 	struct config_error_type err_type;
 
+	/* Sky of green and sea of blue, in our yellow subaru */
+	/* We all live in a yellow subaru */
+
 	/* Set the server's boot time and epoch */
 	now(&nfs_ServerBootTime);
 	nfs_ServerEpoch = (time_t) nfs_ServerBootTime.tv_sec;
