@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41e8c381_273deecc",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-26T18:13:40Z",
+      "side": 1,
+      "message": "This is only called from one place, with both flags CIH_SET_HASHED and CIH_SET_UNLOCK set. See below for additional simplification if flags parameter is removed.",
+      "revId": "5e63f0468c153ff1497b5f91b6b6d9148b439770",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeb17bb7_d1225118",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-26T18:13:40Z",
+      "side": 1,
+      "message": "This will never happen",
+      "revId": "5e63f0468c153ff1497b5f91b6b6d9148b439770",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b982d571_fbc59d97",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-26T18:13:40Z",
+      "side": 1,
+      "message": "This will always happen",
+      "revId": "5e63f0468c153ff1497b5f91b6b6d9148b439770",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
