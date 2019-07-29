@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4df2a517_9887eea1",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-29T20:11:31Z",
+      "side": 1,
+      "message": "add int *missed to the param list",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fa3648de_ca5daacd",
         "filename": "src/include/log.h",
         "patchSetId": 1
@@ -13,6 +30,40 @@
       "writtenOn": "2019-07-18T14:23:52Z",
       "side": 1,
       "message": "Could we name the function LogEventLimited? It makes it easier to scan the code for all the logging.",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "add85b4e_544ee4b6",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-29T20:11:31Z",
+      "side": 1,
+      "message": "add int missed; \\",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9292fa95_ba94b3e6",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-29T20:11:31Z",
+      "side": 1,
+      "message": "add \u0026missed to param list",
       "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -54,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "27ac3f4e_63199cc4",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-29T20:11:31Z",
+      "side": 1,
+      "message": "#define rated_LogEvent(fmt, args...) ({ \\\n...\nLogEvent(\"Rate Limit Missed %d \" fmt, missed, ## args); \\\n...",
+      "parentUuid": "4f30465b_ee26a77e",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47439f97_dca8dcf3",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
@@ -83,6 +152,23 @@
       "side": 1,
       "message": "As long as gcc is used, it should work! But try mutex might be good as it should be quick as well. I will change it",
       "parentUuid": "47439f97_dca8dcf3",
+      "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26498a2b_b5e0b737",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2683,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-07-29T20:11:31Z",
+      "side": 1,
+      "message": "add\n   *missed \u003d rs-\u003emissed;",
       "revId": "5a724d7bd37a1d310275fa5c57d45c5b14b3bb95",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
