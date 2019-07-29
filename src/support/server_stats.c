@@ -692,6 +692,31 @@ static void record_op(struct proto_op *op, nsecs_elapsed_t request_time,
 	record_latency(op, request_time, dup);
 }
 
+/**
+ * @brief count the protocol operation only & no latency
+ *
+ * Use atomic ops to avoid locks. We don't lock for the max
+ * and min because if there is a collision, over the long haul,
+ * the error is near zero...
+ *
+ * @param op           [IN] pointer to specific protocol struct
+ * @param request_time [IN] wallclock time (nsecs) for this op
+ * @param success      [IN] protocol error code == OK
+ * @param dup          [IN] true if op was detected duplicate
+ */
+
+static void record_op_only(struct proto_op *op, nsecs_elapsed_t request_time,
+		      bool success, bool dup)
+{
+	/* count the op */
+	(void)atomic_inc_uint64_t(&op->total);
+	/* also count it as an error if protocol not happy */
+	if (!success)
+		(void)atomic_inc_uint64_t(&op->errors);
+	if (unlikely(dup))
+		(void)atomic_inc_uint64_t(&op->dups);
+}
+
 #ifdef USE_DBUS
 /**
  *  @brief reset the counts for protocol operation
@@ -903,7 +928,7 @@ static void record_layout(struct nfsv41_stats *sp, int proto_op, int status)
 static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 			    int proto_op, int minorversion,
 			    nsecs_elapsed_t request_time,
-			    int status)
+			    int status, bool for_export)
 {
 	if (minorversion == 0) {
 		struct nfsv40_stats *sp = get_v40(gsh_st, lock);
@@ -911,14 +936,28 @@ static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		/* record stuff */
 		switch (nfsv40_optype[proto_op]) {
 		case READ_OP:
-			record_latency(&sp->read.cmd, request_time, false);
+			if (for_export)
+				record_latency(&sp->read.cmd, request_time,
+						false);
+			else
+				record_op_only(&sp->read.cmd, request_time,
+						status == NFS4_OK, false);
 			break;
 		case WRITE_OP:
-			record_latency(&sp->write.cmd, request_time, false);
+			if (for_export)
+				record_latency(&sp->write.cmd, request_time,
+						false);
+			else
+				record_op_only(&sp->write.cmd, request_time,
+						status == NFS4_OK, false);
 			break;
 		default:
-			record_op(&sp->compounds, request_time,
-				  status == NFS4_OK, false);
+			if (for_export)
+				record_op(&sp->compounds, request_time,
+						status == NFS4_OK, false);
+			else
+				record_op_only(&sp->compounds, request_time,
+						status == NFS4_OK, false);
 		}
 	} else if (minorversion == 1) {
 		struct nfsv41_stats *sp = get_v41(gsh_st, lock);
@@ -926,17 +965,31 @@ static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		/* record stuff */
 		switch (nfsv41_optype[proto_op]) {
 		case READ_OP:
-			record_latency(&sp->read.cmd, request_time, false);
+			if (for_export)
+				record_latency(&sp->read.cmd, request_time,
+						false);
+			else
+				record_op_only(&sp->read.cmd, request_time,
+						status == NFS4_OK, false);
 			break;
 		case WRITE_OP:
-			record_latency(&sp->write.cmd, request_time, false);
+			if (for_export)
+				record_latency(&sp->write.cmd, request_time,
+						false);
+			else
+				record_op_only(&sp->write.cmd, request_time,
+						status == NFS4_OK, false);
 			break;
 		case LAYOUT_OP:
 			record_layout(sp, proto_op, status);
 			break;
 		default:
-			record_op(&sp->compounds, request_time,
-				  status == NFS4_OK, false);
+			if (for_export)
+				record_op(&sp->compounds, request_time,
+						status == NFS4_OK, false);
+			else
+				record_op_only(&sp->compounds, request_time,
+						status == NFS4_OK, false);
 		}
 	} else if (minorversion == 2) {
 		struct nfsv41_stats *sp = get_v42(gsh_st, lock);
@@ -944,17 +997,31 @@ static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		/* record stuff */
 		switch (nfsv42_optype[proto_op]) {
 		case READ_OP:
-			record_latency(&sp->read.cmd, request_time, false);
+			if (for_export)
+				record_latency(&sp->read.cmd, request_time,
+						false);
+			else
+				record_op_only(&sp->read.cmd, request_time,
+						status == NFS4_OK, false);
 			break;
 		case WRITE_OP:
-			record_latency(&sp->write.cmd, request_time, false);
+			if (for_export)
+				record_latency(&sp->write.cmd, request_time,
+						false);
+			else
+				record_op_only(&sp->write.cmd, request_time,
+						status == NFS4_OK, false);
 			break;
 		case LAYOUT_OP:
 			record_layout(sp, proto_op, status);
 			break;
 		default:
-			record_op(&sp->compounds, request_time,
-				  status == NFS4_OK, false);
+			if (for_export)
+				record_op(&sp->compounds, request_time,
+						status == NFS4_OK, false);
+			else
+				record_op_only(&sp->compounds, request_time,
+						status == NFS4_OK, false);
 		}
 	}
 
@@ -1008,7 +1075,7 @@ static void record_compound(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 
 static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 			 nfs_request_t *reqdata, nsecs_elapsed_t request_time,
-			 bool success, bool dup, bool global)
+			 bool success, bool dup, bool global, bool for_export)
 {
 	struct svc_req *req = &reqdata->svc;
 	uint32_t proto_op = req->rq_msg.cb_proc;
@@ -1026,16 +1093,28 @@ static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 					  success, dup);
 			switch (nfsv3_optype[proto_op]) {
 			case READ_OP:
-				record_latency(&sp->read.cmd, request_time,
-					       dup);
+				if (for_export)
+					record_latency(&sp->read.cmd,
+						request_time, dup);
+				else
+					record_op_only(&sp->read.cmd,
+						request_time, success, dup);
 				break;
 			case WRITE_OP:
-				record_latency(&sp->write.cmd, request_time,
-					       dup);
+				if (for_export)
+					record_latency(&sp->write.cmd,
+						request_time, dup);
+				else
+					record_op_only(&sp->write.cmd,
+						request_time, success, dup);
 				break;
 			default:
-				record_op(&sp->cmds, request_time, success,
-					  dup);
+				if (for_export)
+					record_op(&sp->cmds, request_time,
+					  success, dup);
+				else
+					record_op_only(&sp->cmds, request_time,
+					  success, dup);
 			}
 		} else {
 			/* We don't do V4 here and V2 is toast */
@@ -1208,7 +1287,7 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 		server_st = container_of(client, struct server_stats, client);
 		record_stats(&server_st->st, &client->lock, reqdata,
 			     stop_time - op_ctx->start_time,
-			     rc == NFS_REQ_OK, dup, true);
+			     rc == NFS_REQ_OK, dup, true, false);
 		(void)atomic_store_uint64_t(&client->last_update, stop_time);
 	}
 	if (!dup && op_ctx->ctx_export != NULL) {
@@ -1219,7 +1298,7 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 			    export);
 		record_stats(&exp_st->st, &op_ctx->ctx_export->lock, reqdata,
 			     stop_time - op_ctx->start_time,
-			     rc == NFS_REQ_OK, dup, false);
+			     rc == NFS_REQ_OK, dup, false, true);
 		(void)atomic_store_uint64_t(&op_ctx->ctx_export->last_update,
 					    stop_time);
 	}
@@ -1259,7 +1338,7 @@ void server_stats_nfsv4_op_done(int proto_op,
 		server_st = container_of(client, struct server_stats, client);
 		record_nfsv4_op(&server_st->st, &client->lock, proto_op,
 				op_ctx->nfs_minorvers, stop_time - start_time,
-				status);
+				status, false);
 		(void)atomic_store_uint64_t(&client->last_update, stop_time);
 	}
 
@@ -1282,7 +1361,7 @@ void server_stats_nfsv4_op_done(int proto_op,
 		record_nfsv4_op(&exp_st->st, &op_ctx->ctx_export->lock,
 				proto_op,
 				op_ctx->nfs_minorvers, stop_time - start_time,
-				status);
+				status, true);
 		(void)atomic_store_uint64_t(&op_ctx->ctx_export->last_update,
 					    stop_time);
 	}
