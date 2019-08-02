@@ -16,6 +16,24 @@
       "revId": "f33706bba82119ec84071a02212d34d380106b23",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "960b777d_10a25e47",
+        "filename": "src/scripts/systemd/nfs-ganesha.service.el7",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-02T07:25:12Z",
+      "side": 1,
+      "message": "/var/run is just a symlink to /run in recent releases!",
+      "parentUuid": "52520487_46b5d49a",
+      "revId": "f33706bba82119ec84071a02212d34d380106b23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
