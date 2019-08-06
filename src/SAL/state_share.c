@@ -179,14 +179,8 @@ state_status_t state_nlm_share(struct fsal_obj_handle *obj,
 	}
 
 	LogFullDebugAlt(COMPONENT_STATE, COMPONENT_NLM,
-			"%s share_access_counts[%d] = %d, total = %d, share_deny_counts[%d] = %d, total = %d",
-			unshare ? "UNSHARE" : "SHARE",
-			share_access,
-			nlm_share->share_access_counts[share_access],
-			acount,
-			share_deny,
-			nlm_share->share_deny_counts[share_deny],
-			dcount);
+			"%s share access total = %d, share deny total = %d",
+			unshare ? "UNSHARE" : "SHARE", acount, dcount);
 
 	if (new_access == old_access && new_deny == old_deny) {
 		/* The share or unshare did not affect the union of shares so
