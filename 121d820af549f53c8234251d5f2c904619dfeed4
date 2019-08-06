@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3684fc9_d4224bd2",
+        "filename": "src/SAL/state_share.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-08-06T14:48:58Z",
+      "side": 1,
+      "message": "The individual count is still useful. Let\u0027s use both the original Log and your new one. Use the new one if (share_access \u003d\u003d OPEN4_SHARE_ACCESS_ALL || share_deny \u003d\u003d OPEN4_SHARE_DENY_ALL) and the old one otherwise.",
+      "revId": "121d820af549f53c8234251d5f2c904619dfeed4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
