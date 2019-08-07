@@ -16,6 +16,24 @@
       "revId": "fa9175edd63d76c3028b2e88d1444297071b4282",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f57b33_555e15ca",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-08-07T14:37:57Z",
+      "side": 1,
+      "message": "Does the config reject an empty string for this option? If not, then we should probably do that (and then not check here for empty string).\n\nAlso if you must copy the string, you need to use strncpy and check the resulting length for overflow - see recent strcpy validation work... It would be good to length check the string on config also, but you still need to do a strncpy (though if config assures string is never too long, you can do (void) strncpy(....) which lets reviewers know the string can never actually overflow.",
+      "parentUuid": "62631000_e0ab070c",
+      "revId": "fa9175edd63d76c3028b2e88d1444297071b4282",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
