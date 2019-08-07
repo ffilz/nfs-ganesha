@@ -16,6 +16,24 @@
       "revId": "6203003a53a0d1035871d86cea504cfd481477d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c03ba77_2930d372",
+        "filename": "src/dbus/properties_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-08-07T14:28:53Z",
+      "side": 1,
+      "message": "Yea, let\u0027s make this if (prop \u003d\u003d NULL || *prop \u003d\u003d NULL) in both places",
+      "parentUuid": "90d5d9b2_bacb2490",
+      "revId": "6203003a53a0d1035871d86cea504cfd481477d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
