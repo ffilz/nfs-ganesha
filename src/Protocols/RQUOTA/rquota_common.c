@@ -39,27 +39,31 @@ char *check_handle_lead_slash(char *quota_path, char *temp_path,
 		int qpathlen;
 
 		exp = get_gsh_export(0);
-		pathlen = strlen(exp->fullpath);
-		if (pathlen >= temp_path_size) {
+		if (exp) {
+			pathlen = strlen(exp->fullpath);
+			if (pathlen >= temp_path_size) {
+				put_gsh_export(exp);
+				return NULL;
+			}
+			memcpy(temp_path, exp->fullpath, pathlen);
 			put_gsh_export(exp);
+
+			/* Add trailing slash if it is missing */
+			if ((pathlen > 0) &&
+			    (temp_path[pathlen - 1] != '/'))
+				temp_path[pathlen++] = '/';
+
+			qpathlen = strlen(quota_path);
+			if ((pathlen + qpathlen) >= temp_path_size) {
+				LogInfo(COMPONENT_NFSPROTO,
+					"Quota path %s too long", quota_path);
+				return NULL;
+			}
+			memcpy(temp_path + pathlen, quota_path, qpathlen + 1);
+			return temp_path;
+		} else {
 			return NULL;
 		}
-		memcpy(temp_path, exp->fullpath, pathlen);
-		put_gsh_export(exp);
-
-		/* Add trailing slash if it is missing */
-		if ((pathlen > 0) &&
-		    (temp_path[pathlen - 1] != '/'))
-			temp_path[pathlen++] = '/';
-
-		qpathlen = strlen(quota_path);
-		if ((pathlen + qpathlen) >= temp_path_size) {
-			LogInfo(COMPONENT_NFSPROTO,
-				"Quota path %s too long", quota_path);
-			return NULL;
-		}
-		memcpy(temp_path + pathlen, quota_path, qpathlen + 1);
-		return temp_path;
 	} else {
 		return quota_path;
 	}
