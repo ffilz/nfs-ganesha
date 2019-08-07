@@ -91,6 +91,7 @@
 #include "common_utils.h"
 #include "abstract_mem.h"
 #include "gss_credcache.h"
+#include "nfs_core.h"
 
 /*
  * Hide away some of the MIT vs. Heimdal differences
@@ -132,7 +133,6 @@ struct gssd_k5_kt_princ {
 typedef void (*gssd_err_func_t)(const char *, ...);
 
 
-static char keytabfile[PATH_MAX] = GSSD_DEFAULT_KEYTAB_FILE;
 static int use_memcache;
 static struct gssd_k5_kt_princ *gssd_k5_kt_princ_list;
 static pthread_mutex_t ple_mtx = PTHREAD_MUTEX_INITIALIZER;
@@ -863,6 +863,12 @@ int gssd_refresh_krb5_machine_credential(char *hostname,
 	int retval = 0;
 	char *k5err = NULL;
 	const char *svcnames[5] = { "$", "root", "nfs", "host", NULL };
+	char keytabfile[PATH_MAX];
+
+	if (*nfs_param.krb5_param.keytab != '\0')
+		strcpy(keytabfile, nfs_param.krb5_param.keytab);
+	else
+		strcpy(keytabfile, GSSD_DEFAULT_KEYTAB_FILE);
 
 	/*
 	 * If a specific service name was specified, use it.
