@@ -204,6 +204,8 @@ bool dbus_proc_property(const char *method, DBusMessage *msg,
 		if (*iface == NULL)
 			goto err_out;
 		prop = lookup_property(prop_name, iface, error);
+		if (prop == NULL)
+			goto err_out;
 		if (*prop == NULL)
 			goto err_out;
 		if ((*prop)->access == DBUS_PROP_READ
@@ -260,6 +262,8 @@ bool dbus_proc_property(const char *method, DBusMessage *msg,
 		if (*iface == NULL)
 			goto err_out;
 		prop = lookup_property(prop_name, iface, error);
+		if (prop == NULL)
+			goto err_out;
 		if (*prop == NULL)
 			goto err_out;
 		if ((*prop)->access == DBUS_PROP_WRITE
