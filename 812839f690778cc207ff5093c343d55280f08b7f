@@ -16,6 +16,23 @@
       "revId": "812839f690778cc207ff5093c343d55280f08b7f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e55b8442_45ec4acb",
+        "filename": "src/Protocols/NFS/nfs4_op_reclaim_complete.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-08-08T16:34:30Z",
+      "side": 0,
+      "message": "This check is actually redundant, nfs4_Compound.c assures that 4.1+ requests start with a SEQUENCE op (or are a specific set of operations that can be the only op in the compound).",
+      "revId": "812839f690778cc207ff5093c343d55280f08b7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
