@@ -862,15 +862,6 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 		status = parent->obj_ops->mknode(parent, name, type,
 						attrs, obj, attrs_out);
 		break;
-
-	case NO_FILE_TYPE:
-	case EXTENDED_ATTR:
-		/* we should never go there */
-		status = fsalstat(ERR_FSAL_BADTYPE, 0);
-		*obj = NULL;
-		LogFullDebug(COMPONENT_FSAL,
-			     "create failed because inconsistent entry");
-		goto out;
 	}
 
 	/* Check for the result */
