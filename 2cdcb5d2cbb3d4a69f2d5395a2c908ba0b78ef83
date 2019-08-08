@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "55f7be03_b7f8f48a",
+        "filename": "src/dbus/properties_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-08-08T16:44:47Z",
+      "side": 1,
+      "message": "And return NULL here",
+      "revId": "2cdcb5d2cbb3d4a69f2d5395a2c908ba0b78ef83",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "884642c8_94aee075",
         "filename": "src/dbus/properties_handler.c",
         "patchSetId": 2
@@ -13,6 +30,24 @@
       "writtenOn": "2019-08-08T14:58:54Z",
       "side": 1,
       "message": "I think a better fix is to change lookup_property() to return NULL if *prop \u003d\u003d NULL.  It looks like it intends to check this.",
+      "revId": "2cdcb5d2cbb3d4a69f2d5395a2c908ba0b78ef83",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f3b7369_2b168f0b",
+        "filename": "src/dbus/properties_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-08-08T16:44:47Z",
+      "side": 1,
+      "message": "Yea, that would be better",
+      "parentUuid": "884642c8_94aee075",
       "revId": "2cdcb5d2cbb3d4a69f2d5395a2c908ba0b78ef83",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
