@@ -244,7 +244,7 @@ fsal_acl_status_t nfs4_acl_release_entry(fsal_acl_t *acl)
 	return status;
 }
 
-static void nfs4_acls_test(void)
+static fsal_acl_status_t nfs4_acls_test(void)
 {
 	int i = 0;
 	fsal_acl_data_t acldata, acldata2;
@@ -267,6 +267,11 @@ static void nfs4_acls_test(void)
 	}
 
 	acl = nfs4_acl_new_entry(&acldata, &status);
+	if (status != NFS_V4_ACL_SUCCESS || status != NFS_V4_ACL_EXISTS) {
+		LogDebug(COMPONENT_NFS_V4_ACL, "status = %u", status);
+		goto out;
+	}
+
 	PTHREAD_RWLOCK_rdlock(&acl->lock);
 	LogDebug(COMPONENT_NFS_V4_ACL, "acl = %p, ref = %u, status = %u", acl,
 		 acl->ref, status);
@@ -288,12 +293,19 @@ static void nfs4_acls_test(void)
 	}
 
 	acl = nfs4_acl_new_entry(&acldata2, &status);
+	if (status != NFS_V4_ACL_SUCCESS || status != NFS_V4_ACL_EXISTS) {
+		LogDebug(COMPONENT_NFS_V4_ACL,
+			 "re-access: status = %u", status);
+		goto out;
+	}
+
 	PTHREAD_RWLOCK_rdlock(&acl->lock);
 	LogDebug(COMPONENT_NFS_V4_ACL,
 		 "re-access: acl = %p, ref = %u, status = %u", acl, acl->ref,
 		 status);
 	PTHREAD_RWLOCK_unlock(&acl->lock);
 
+out:
 	status = nfs4_acl_release_entry(acl);
 	PTHREAD_RWLOCK_rdlock(&acl->lock);
 	LogDebug(COMPONENT_NFS_V4_ACL,
@@ -302,6 +314,8 @@ static void nfs4_acls_test(void)
 	PTHREAD_RWLOCK_unlock(&acl->lock);
 
 	status = nfs4_acl_release_entry(acl);
+
+	return status;
 }
 
 int nfs4_acls_init(void)
@@ -323,7 +337,5 @@ int nfs4_acls_init(void)
 		return NFS_V4_ACL_INTERNAL_ERROR;
 	}
 
-	nfs4_acls_test();
-
-	return NFS_V4_ACL_SUCCESS;
+	return nfs4_acls_test();
 }
