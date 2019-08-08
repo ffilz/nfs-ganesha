@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "884642c8_94aee075",
+        "filename": "src/dbus/properties_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-08-08T14:58:54Z",
+      "side": 1,
+      "message": "I think a better fix is to change lookup_property() to return NULL if *prop \u003d\u003d NULL.  It looks like it intends to check this.",
+      "revId": "2cdcb5d2cbb3d4a69f2d5395a2c908ba0b78ef83",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
