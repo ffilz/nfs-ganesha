@@ -1608,20 +1608,39 @@ fsal_status_t mdcache_create_handle(struct fsal_export *exp_hdl,
 		container_of(exp_hdl, struct mdcache_fsal_export, mfe_exp);
 	mdcache_entry_t *entry;
 	fsal_status_t status;
+	struct fsal_obj_handle *obj;
 
 	*handle = NULL;
 	status = mdcache_locate_host(fh_desc, export, &entry, attrs_out);
 	if (FSAL_IS_ERROR(status))
 		return status;
 
-	/* Make sure this entry has a parent pointer */
+	obj = &entry->obj_handle;
+
+	/* Make sure this entry has a parent pointer. But first check if the
+	 * entry->obj_handle points to a root object. Never lookup for parent
+	 * of a root object.
+	 */
+	if (obj->type == DIRECTORY) {
+		struct fsal_obj_handle *root_obj = NULL;
+
+		status = nfs_export_get_root_entry(op_ctx->ctx_export,
+						   &root_obj);
+		if (!FSAL_IS_ERROR(status) && obj == root_obj) {
+			/* This entry is the root of the current export, so we
+			 * shouldn't call mdc_get_parent()
+			 */
+			goto out;
+		}
+	}
 	mdc_get_parent(export, entry, NULL);
 
+out:
 	if (attrs_out != NULL) {
 		LogAttrlist(COMPONENT_CACHE_INODE, NIV_FULL_DEBUG,
 			    "create_handle ", attrs_out, true);
 	}
 
-	*handle = &entry->obj_handle;
+	*handle = obj;
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
