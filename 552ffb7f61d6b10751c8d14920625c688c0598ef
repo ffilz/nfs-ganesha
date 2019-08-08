@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e67fdc6_651d2801",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-08T05:38:12Z",
+      "side": 1,
+      "message": "Now, the default case is a dead code! I think removing the \"if\" condition at the beginning is a good fix rather than fixing this switch statement.",
+      "revId": "552ffb7f61d6b10751c8d14920625c688c0598ef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
