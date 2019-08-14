@@ -249,7 +249,7 @@ Summary: The NFS-GANESHA util scripts
 Group: Applications/System
 %if ( 0%{?suse_version} )
 Requires:	dbus-1-python, python-gobject2, python-pyparsing
-Requires: 	gpfs.nfs-ganesha = %{version}-%{release}, python
+Requires: 	nfs-ganesha-gpfs = %{version}-%{release}, python
 BuildRequires:  python-devel
 %else
 %if ( 0%{?rhel} >= 8 )
@@ -258,7 +258,7 @@ Requires: 	gpfs.nfs-ganesha = %{version}-%{release}, python3
 BuildRequires:  python3-devel
 %else
 Requires:       dbus-python, pygobject2, pyparsing
-Requires: 	gpfs.nfs-ganesha = %{version}-%{release}, python2
+Requires: 	nfs-ganesha-gpfs = %{version}-%{release}, python2
 BuildRequires:  python2-devel
 %endif
 %endif
