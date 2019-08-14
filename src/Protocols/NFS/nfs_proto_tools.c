@@ -3338,6 +3338,10 @@ nfsstat4 path_filter(const char *name, utf8_scantype_t scan)
 					goto error;
 				}
 			}
+		} else if (unlikely(nfs_param.nfsv4_param.skip_utf8_vld)) {
+			/* skip utf8 validation if set
+			 * ignore garbled filename
+			 */
 		} else if (likely(scan & UTF8_SCAN_CKUTF8)) {
 			/* UTF-8 range */
 			if ((c & 0xe0) == 0xc0) {

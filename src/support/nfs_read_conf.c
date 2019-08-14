@@ -286,6 +286,8 @@ static struct config_item version4_params[] = {
 		       minor_versions, nfs_version4_parameter, minor_versions),
 	CONF_ITEM_UI32("slot_table_size", 1, 1024, NFS41_NB_SLOTS_DEF,
 		       nfs_version4_parameter, nb_slots),
+	CONF_ITEM_BOOL("Skip_UTF8_Validation", false,
+		       nfs_version4_parameter, skip_utf8_vld),
 	CONFIG_EOL
 };
 
