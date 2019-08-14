@@ -248,16 +248,15 @@ be used with NFS-Ganesha to support PROXY based filesystems
 Summary: The NFS-GANESHA util scripts
 Group: Applications/System
 %if ( 0%{?suse_version} )
-Requires:	dbus-1-python, python-gobject2, python-pyparsing
-Requires: 	python
-BuildRequires:  python-devel
+Requires:	python, dbus-1-python, python-gobject2, python-pyparsing
+BuildRequires:	python-devel
 %else
 %if ( 0%{?rhel} >= 8 )
 Requires:	python3-dbus, python3-gobject, python3-pyparsing
-BuildRequires:  python3-devel
+BuildRequires:	python3-devel
 %else
-Requires:       dbus-python, pygobject2, pyparsing
-BuildRequires:  python2-devel
+Requires:	dbus-python, pygobject2, pyparsing
+BuildRequires:	python2-devel
 %endif
 %endif
 
