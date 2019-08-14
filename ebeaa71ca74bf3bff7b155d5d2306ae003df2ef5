@@ -16,6 +16,24 @@
       "revId": "ebeaa71ca74bf3bff7b155d5d2306ae003df2ef5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0b5eddf_62509a49",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-08-14T15:20:54Z",
+      "side": 1,
+      "message": "I\u0027m not sure it matters, but may be good practice.\n\nlookup_path should never resolve to the root of an export (NFS v3 MOUNT has already determined which export the path is a sub-directory of).\n\nHmm, but before putting it in for lookup of .. on the root of an export, we should make sure that doesn\u0027t break any test cases. I don\u0027t remember what NFS v4 specifies for lookup from Pseudo Root, I think that fails but I think NFS v3 traditionally returns the root of an export for a lookup .. from the root, but I can\u0027t find the documentation to support that...",
+      "parentUuid": "4979654e_78e304a4",
+      "revId": "ebeaa71ca74bf3bff7b155d5d2306ae003df2ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
