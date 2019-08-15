@@ -88,6 +88,24 @@
       "revId": "ebeaa71ca74bf3bff7b155d5d2306ae003df2ef5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cf4eda0_ddd29bc4",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-08-15T16:05:53Z",
+      "side": 1,
+      "message": "The issue is that mdc_get_parent() can also be called by mdcache_lookup_path() and mdcache_create_handle(), which don\u0027t have that protection, I think.  Better to get the root entry twice.",
+      "parentUuid": "fa99b2c5_a9b99d2e",
+      "revId": "ebeaa71ca74bf3bff7b155d5d2306ae003df2ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
