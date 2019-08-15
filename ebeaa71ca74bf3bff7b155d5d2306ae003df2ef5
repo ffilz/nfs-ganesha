@@ -70,6 +70,24 @@
       "revId": "ebeaa71ca74bf3bff7b155d5d2306ae003df2ef5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa99b2c5_a9b99d2e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2019-08-15T15:12:58Z",
+      "side": 1,
+      "message": "Can move the logic to mdc_get_parent() but had following comment:\nWhen there is lookup of parent of a non-root object then code execution path will be:\nfsal_lookupp() -\u003e mdcache_lookup() -\u003e mdc_lookup() -\u003e mdc_get_parent()\nHere, fsal_lookupp() already checks if we are doing lookup for a parent of a root object or not. If now this logic is added to mdc_get_parent() then won\u0027t the same check happen twice in this code path ?\n\nI added the change in mdcache_create_handle() as it was getting called in the following code path which doesn\u0027t have a check to find if we are going todo lookup for a parent of a root object or not prior to calling mdc_get_parent().\nnfs3_getattr() -\u003e nfs3_FhandleToCache() -\u003e mdcache_create_handle() -\u003e mdc_get_parent()",
+      "parentUuid": "b2463116_310155dd",
+      "revId": "ebeaa71ca74bf3bff7b155d5d2306ae003df2ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
