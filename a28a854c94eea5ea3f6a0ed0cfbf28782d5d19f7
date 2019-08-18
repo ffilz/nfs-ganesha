@@ -16,6 +16,24 @@
       "revId": "a28a854c94eea5ea3f6a0ed0cfbf28782d5d19f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b21f329_7bc50d03",
+        "filename": "src/scripts/gpfs-epoch",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-08-18T15:32:16Z",
+      "side": 1,
+      "message": "Actually it won\u0027t.  The setup.py run during the build (or install) will rewrite the shebang on py2 distributions. AFAIK anyway. Pretty sure I\u0027ve seen it. And all the other .py files in 2.8 have /usr/bin/python3 shebangs.\n\nOn some py3 distributions (fedora30, rhel8) setup.py will change the shebangs to something like /usr/distribution/python, i.e. the python the distribution ships, which should be some flavor of python3. I talked to one of our python gurus and he described a very convoluted process to keep setup.py from changing it. Whoever reported the bug though said it had not been changed on his or her py3 distribution, probably because setup.py didn\u0027t detect that it was a python program because it\u0027s not gpfs-epoch.py. Which is something else we might want to address separately.",
+      "parentUuid": "83eb2acd_1f8223ef",
+      "revId": "a28a854c94eea5ea3f6a0ed0cfbf28782d5d19f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
