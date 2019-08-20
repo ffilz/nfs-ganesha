@@ -607,6 +607,20 @@ install -p -m 644 selinux/ganesha.if %{buildroot}%{_selinux_store_path}/devel/in
 install -m 0644 selinux/ganesha.pp.bz2 %{buildroot}%{_selinux_store_path}/packages
 %endif
 
+rm -f %{_bindir}/gpfs-epoch
+%if ( 0%{?suse_version} )
+rm -f %{python2_sitelib}/gpfs*
+rm -f %{python2_sitelib}/__init__.*
+%else
+%if ( 0%{?rhel} >= 8 )
+rm -f %{python3_sitelib}/gpfs*
+rm -f %{python3_sitelib}/__init__.*
+%else
+rm -f %{python2_sitelib}/gpfs*
+rm -f %{python2_sitelib}/__init__.*
+%endif
+%endif
+
 %post
 %if ( 0%{?suse_version} )
 %service_add_post nfs-ganesha.service nfs-ganesha-lock.service nfs-ganesha-config.service
