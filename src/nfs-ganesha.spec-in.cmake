@@ -596,6 +596,19 @@ install -m 644 config_samples/gpfs.ganesha.exports.conf	%{buildroot}%{_sysconfdi
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 755 scripts/init.d/nfs-ganesha.gpfs		%{buildroot}%{_sysconfdir}/init.d/nfs-ganesha-gpfs
 %endif
+rm -f %{_bindir}/gpfs-epoch
+%if ( 0%{?suse_version} )
+rm -f %{python2_sitelib}/gpfs*
+rm -f %{python2_sitelib}/__init__.*
+%else
+%if ( 0%{?rhel} >= 8 )
+rm -f %{python3_sitelib}/gpfs*
+rm -f %{python3_sitelib}/__init__.*
+%else
+rm -f %{python2_sitelib}/gpfs*
+rm -f %{python2_sitelib}/__init__.*
+%endif
+%endif
 %endif
 
 make DESTDIR=%{buildroot} install
