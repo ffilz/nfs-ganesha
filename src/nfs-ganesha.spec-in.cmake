@@ -829,15 +829,22 @@ exit 0
 %if ( 0%{?suse_version} )
 %{python_sitelib}/Ganesha/*
 %{python_sitelib}/ganeshactl-*-info
+%exclude %{python2_sitelib}/gpfs*
+%exclude %{python2_sitelib}/__init__.*
 %else
 %if ( 0%{?rhel} >= 8 )
 %{python3_sitelib}/Ganesha/*
 %{python3_sitelib}/ganeshactl-*-info
+%exclude %{python3_sitelib}/gpfs*
+%exclude %{python3_sitelib}/__init__.*
 %else
 %{python2_sitelib}/Ganesha/*
 %{python2_sitelib}/ganeshactl-*-info
+%exclude %{python2_sitelib}/gpfs*
+%exclude %{python2_sitelib}/__init__.*
 %endif
 %endif
+%exclude %{_bindir}/gpfs-epoch
 %if %{with gui_utils}
 %{_bindir}/ganesha-admin
 %{_bindir}/manage_clients
@@ -851,6 +858,19 @@ exit 0
 %exclude %{_bindir}/client_stats_9pOps
 %exclude %{_bindir}/export_stats_9pOps
 %endif
+%if ( 0%{?suse_version} )
+%exclude %{python2_sitelib}/gpfs*
+%exclude %{python2_sitelib}/__init__.*
+%else
+%if ( 0%{?rhel} >= 8 )
+%exclude %{python3_sitelib}/gpfs*
+%exclude %{python3_sitelib}/__init__.*
+%else
+%exclude %{python2_sitelib}/gpfs*
+%exclude %{python2_sitelib}/__init__.*
+%endif
+%endif
+%exclude %{_bindir}/gpfs-epoch
 %endif
 %{_bindir}/fake_recall
 %{_bindir}/get_clientids
