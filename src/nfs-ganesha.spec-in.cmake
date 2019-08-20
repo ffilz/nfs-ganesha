@@ -682,6 +682,19 @@ exit 0
 %{_mandir}/*/ganesha-log-config.8.gz
 %endif
 
+%exclude %{_bindir}/gpfs-epoch
+%if ( 0%{?suse_version} )
+%exclude /%{python2_sitelib}/gpfs*
+%exclude /%{python2_sitelib}/__init__.*
+%else
+%if ( 0%{?rhel} >= 8 )
+%exclude /%{python3_sitelib}/gpfs*
+%exclude /%{python3_sitelib}/__init__.*
+%else
+%exclude /%{python2_sitelib}/gpfs*
+%exclude /%{python2_sitelib}/__init__.*
+%endif
+%endif
 
 %if %{with rados_recov}
 %files rados-grace
