@@ -860,6 +860,19 @@ exit 0
 %{_bindir}/ganesha_mgr
 %{_bindir}/ganesha_conf
 %{_mandir}/*/ganesha_conf.8.gz
+%exclude %{_bindir}/gpfs-epoch
+%if ( 0%{?suse_version} )
+%exclude %{python2_sitelib}/gpfs*
+%exclude %{python2_sitelib}/__init__.*
+%else
+%if ( 0%{?rhel} >= 8 )
+%exclude %{python3_sitelib}/gpfs*
+%exclude %{python3_sitelib}/__init__.*
+%else
+%exclude %{python2_sitelib}/gpfs*
+%exclude %{python2_sitelib}/__init__.*
+%endif
+%endif
 %endif
 
 %changelog
