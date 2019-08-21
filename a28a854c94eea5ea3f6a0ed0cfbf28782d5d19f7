@@ -52,6 +52,24 @@
       "revId": "a28a854c94eea5ea3f6a0ed0cfbf28782d5d19f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e59b9d6d_d93f1cdf",
+        "filename": "src/scripts/gpfs-epoch",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-21T11:23:43Z",
+      "side": 1,
+      "message": "I think setup.py is not run on gpfs-epoch.py, so yum might pull in python3 as a required package. python3 should be available in most distros.",
+      "parentUuid": "d101d321_1da7cef6",
+      "revId": "a28a854c94eea5ea3f6a0ed0cfbf28782d5d19f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
