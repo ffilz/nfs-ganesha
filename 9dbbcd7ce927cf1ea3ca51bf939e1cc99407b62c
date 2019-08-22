@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c86650f5_5ecf0782",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 11
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-22T18:03:16Z",
+      "side": 1,
+      "message": "The following is same as suse, so can we simplify?",
+      "revId": "9dbbcd7ce927cf1ea3ca51bf939e1cc99407b62c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff125fe0_69b34df4",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 11
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-22T18:03:16Z",
+      "side": 1,
+      "message": "This is now same as suse, so SuSE condition can be avoided.",
+      "revId": "9dbbcd7ce927cf1ea3ca51bf939e1cc99407b62c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a2c063f_4fbe8974",
+        "filename": "src/scripts/CMakeLists.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-22T18:03:16Z",
+      "side": 1,
+      "message": "Why find_program again? This was called couple lines before.",
+      "revId": "9dbbcd7ce927cf1ea3ca51bf939e1cc99407b62c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
