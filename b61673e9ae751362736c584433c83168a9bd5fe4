@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "860b2a9a_a9173131",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T16:49:36Z",
+      "side": 1,
+      "message": "Yes, IBM. I am OK with this though.",
+      "parentUuid": "ca82ad07_3b2f7b3a",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ef062f2_33abd8a3",
         "filename": "src/nfs-ganesha.spec-in.cmake",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "442d0cd3_09d50505",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T16:49:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b89e9cb7_bd2f7351",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "I do use\n  %if ( 0%{?rhel} \u0026\u0026 0%{?rhel} \u003c 7 )\nin the glusterfs.spec because I thought it was clearer, but that was never a thing here.",
       "parentUuid": "595e2a26_6835bd73",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "900947bc_157a51b0",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T16:49:36Z",
+      "side": 1,
+      "message": "Yes, having \"%if ( 0%{?rhel} \u0026\u0026 0%{?rhel} \u003c 8 )\" will make things clear. I like it.",
+      "parentUuid": "a5304c05_aa4f500a",
       "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
