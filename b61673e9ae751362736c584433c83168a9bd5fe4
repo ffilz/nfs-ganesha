@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "595e2a26_6835bd73",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T15:06:21Z",
+      "side": 1,
+      "message": "oh, ( 0%{?rhel} \u003c 8 ) return TRUE on a sles distro? Then this looks OK, but a bit hard to read! if (rhrl and rhel \u003c 8) kind of expression would make it clear.",
+      "parentUuid": "cdfdc104_cd5eee10",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5b3598eb_a39770a6",
         "filename": "src/nfs-ganesha.spec-in.cmake",
         "patchSetId": 1
