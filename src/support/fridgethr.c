@@ -417,9 +417,7 @@ static bool fridgethr_freeze(struct fridgethr *fr,
 				rc = pthread_cond_timedwait(&fe->ctx.cv,
 							    &fe->ctx.mtx,
 							    &fe->timeout);
-			} else
-				rc = pthread_cond_wait(&fe->ctx.cv,
-						       &fe->ctx.mtx);
+			}
 		}
 
 		if (rc == ETIMEDOUT)
