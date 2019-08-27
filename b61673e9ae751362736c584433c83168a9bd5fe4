@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a2546e0_adfe93b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T14:56:34Z",
+      "side": 1,
+      "message": "We support SLES12 SP3, I believe.",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ef062f2_33abd8a3",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T14:56:34Z",
+      "side": 1,
+      "message": "The \"if\" and the \"esle\" block is doing the same stuff. Why is the need to have this conditional, then? Having sles version check (like rhel 8) would be my preference.",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdfdc104_cd5eee10",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T14:56:34Z",
+      "side": 1,
+      "message": "If built on sles, do we need dbus-1-python but python3-object?",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b3598eb_a39770a6",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-08-27T14:56:34Z",
+      "side": 1,
+      "message": "hmm, python3 for rhel \u003c 8 ?",
+      "revId": "b61673e9ae751362736c584433c83168a9bd5fe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
