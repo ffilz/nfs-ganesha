@@ -1107,6 +1107,18 @@ void state_export_release_nfs4_state(void)
 			continue;
 		}
 
+		if (state->state_type == STATE_TYPE_SHARE &&
+		    !glist_empty(&state->state_data.share.share_lockstates)) {
+			/* We need to delete this state but just not yet.
+			 * It is moved to end of list and will get processed
+			 * when all the related lock states are deleted.
+			 */
+			LogFullDebug(COMPONENT_STATE,
+				"Skipping STATE_TYPE_SHARE %p for lock states",
+				state);
+			continue;
+		}
+
 		inc_state_t_ref(state);
 
 		PTHREAD_RWLOCK_unlock(&op_ctx->ctx_export->lock);
