@@ -971,4 +971,59 @@ restart:
 	}
 }
 
+/**
+ * @brief Check if we are in the grace period for this client
+ *
+ * @param[in] c Client information
+ *
+ * @retval true if so.
+ * @retval false if not.
+ */
+bool
+nfs_client_in_grace(nfs_client_id_t *c)
+{
+	if (c->cid_cb.v41.cid_reclaim_complete)
+		return false;
+
+	struct timespec timeout, now;
+	int ret = clock_gettime(CLOCK_MONOTONIC, &now);
+
+	if (ret != 0) {
+		LogCrit(COMPONENT_MAIN, "Failed to get timestamp");
+		assert(0);
+	}
+
+	timeout = c->cid_cb.v41.cid_exchange_time;
+	timeout.tv_sec += nfs_param.nfsv4_param.grace_period;
+
+	return (gsh_time_cmp(&timeout, &now) > 0);
+}
+
+/**
+ * @brief Start the grace period for client. Called when exchange id is
+ *	  successful
+ *
+ * @param[in] c Client information
+ *
+ */
+void nfs_client_start_grace(nfs_client_id_t *c)
+{
+	int ret = clock_gettime(CLOCK_MONOTONIC, &c->cid_cb.v41.cid_exchange_time);
+	if (ret != 0) {
+		LogCrit(COMPONENT_MAIN, "Failed to get timestamp");
+		assert(0);
+	}
+}
+
+/**
+ * @brief End the grace period for the client
+ *
+ * @param[in] c Client information
+ *
+ */
+void nfs_client_end_grace(nfs_client_id_t *c)
+{
+	c->cid_cb.v41.cid_exchange_time.tv_sec = 0;
+}
+
 /** @} */
