@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efd1ce33_8e2866d2",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-09-15T18:51:37Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tint ret \u003d clock_gettime(CLOCK_MONOTONIC, \u0026c-\u003ecid_cb.v41.cid_exchange_time);",
+      "revId": "8aa212e7774475c9863e856729f5d131ba32a4eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7984e0c6_3c2d7fcf",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-09-15T18:51:37Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint ret \u003d clock_gettime(CLOCK_MONOTONIC, \u0026c-\u003ecid_cb.v41.cid_exchange_time);\n+\tif (ret !\u003d 0) {",
+      "revId": "8aa212e7774475c9863e856729f5d131ba32a4eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
