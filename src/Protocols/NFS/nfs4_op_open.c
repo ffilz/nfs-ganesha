@@ -145,8 +145,7 @@ static nfsstat4 open4_validate_claim(compound_data_t *data,
 
 	switch (claim) {
 	case CLAIM_NULL:
-		if ((data->minorversion > 0)
-		    && !clientid->cid_cb.v41.cid_reclaim_complete)
+		if ((data->minorversion > 0) && nfs_client_in_grace(clientid))
 			status = NFS4ERR_GRACE;
 		break;
 
@@ -163,7 +162,7 @@ static nfsstat4 open4_validate_claim(compound_data_t *data,
 		want_grace = true;
 		if (!clientid->cid_allow_reclaim ||
 		    ((data->minorversion > 0) &&
-		    clientid->cid_cb.v41.cid_reclaim_complete))
+		    !nfs_client_in_grace(clientid)))
 			status = NFS4ERR_NO_GRACE;
 		break;
 

@@ -699,6 +699,8 @@ struct nfs_client_id_t {
 		struct {
 			bool cid_reclaim_complete; /*< reclaim complete
 						       indication */
+			/* Client exchange id time */
+			struct timespec cid_exchange_time;
 			/** All sessions */
 			struct glist_head cb_session_list;
 		} v41;		/*< v4.1 callback information */

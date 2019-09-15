@@ -886,6 +886,10 @@ void nfs_try_lift_grace(void);
 void nfs_wait_for_grace_enforcement(void);
 void nfs_notify_grace_waiters(void);
 
+bool nfs_client_in_grace(nfs_client_id_t *);
+void nfs_client_start_grace(nfs_client_id_t *);
+void nfs_client_end_grace(nfs_client_id_t *);
+
 /* v4 Client stable-storage database management */
 void nfs4_add_clid(nfs_client_id_t *);
 void nfs4_rm_clid(nfs_client_id_t *);
