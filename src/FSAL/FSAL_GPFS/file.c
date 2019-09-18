@@ -668,6 +668,12 @@ gpfs_reopen2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 
 	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 
+	/* No need to reopen the file if the openflags are same */
+	if (!(openflags & ~(FSAL_O_OPENFLAGS)) &&
+		(my_share_fd->openflags == openflags)) {
+		return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+
 	fsal2posix_openflags(openflags, &posix_flags);
 
 	status = GPFSFSAL_open(obj_hdl, op_ctx, posix_flags, &my_fd);
