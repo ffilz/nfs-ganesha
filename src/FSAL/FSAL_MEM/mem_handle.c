@@ -1747,10 +1747,17 @@ fsal_status_t mem_reopen2(struct fsal_obj_handle *obj_hdl,
 			   false);
 #endif
 
-	old_openflags = my_fd->openflags;
-
 	/* This can block over an I/O operation. */
 	PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+	old_openflags = my_fd->openflags;
+
+	/* No need to reopen the file if the openflags are same */
+	if (!(openflags & ~(FSAL_O_OPENFLAGS)) &&
+		(old_openflags == openflags)) {
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+		return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
 
 	/* We can conflict with old share, so go ahead and check now. */
 	status = check_share_conflict(&myself->mh_file.share, openflags, false);
