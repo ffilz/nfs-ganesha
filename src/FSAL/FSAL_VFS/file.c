@@ -1028,6 +1028,12 @@ fsal_status_t vfs_reopen2(struct fsal_obj_handle *obj_hdl,
 
 	old_openflags = my_share_fd->openflags;
 
+	/* No need to reopen the file if the openflags are same */
+	if (old_openflags == openflags) {
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+		return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+
 	/* We can conflict with old share, so go ahead and check now. */
 	status = check_share_conflict(&myself->u.file.share, openflags, false);
 

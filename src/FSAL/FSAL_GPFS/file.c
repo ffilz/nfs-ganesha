@@ -653,6 +653,12 @@ gpfs_reopen2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	/* This can block over an I/O operation. */
 	PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
 
+	/* No need to reopen the file if the openflags are same */
+	if (my_share_fd->openflags == openflags) {
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+		return fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+
 	/* We can conflict with old share, so go ahead and check now. */
 	status = check_share_conflict(share, openflags, false);
 
