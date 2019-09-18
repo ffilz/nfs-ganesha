@@ -565,7 +565,8 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 		 */
 		status = fsal_close(&entry->obj_handle);
 
-		if (FSAL_IS_ERROR(status)) {
+		if (FSAL_IS_ERROR(status) &&
+		    status.major != ERR_FSAL_NOT_OPENED) {
 			LogCrit(COMPONENT_CACHE_INODE_LRU,
 				"Error closing file in cleanup: %s",
 				fsal_err_txt(status));
