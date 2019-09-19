@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9477bbfb_7c9c49bc",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-09-19T14:22:48Z",
+      "side": 1,
+      "message": "It looks like reopen2() can bee called with transient flags like FSAL_O_RECLAIM and FSAL_O_TRUNC.  Since the stored openflags uses FSAL_O_NFS_FLAGS() to filter these out, this will cause a mismatch.  I\u0027m not sure if this is desired.  Probably, a reopen2() with TRUNC should not match, and should trigger a proper re-open.  What about RECLAIM?",
+      "revId": "f31d659975dd6769f24c2543b9363b92d3c20ab8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
