@@ -16,6 +16,24 @@
       "revId": "ea1379ec637119212925c4403d3ecd72b71ce77b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5737d87b_253e9879",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2019-09-20T08:04:51Z",
+      "side": 1,
+      "message": "This patch can be merged only after the new API gets added to gluster. Once https://review.gluster.org/#/c/glusterfs/+/23448/ gets merged, I need to add a build option to check for that new API availability for FSAL_GLUSTER.",
+      "parentUuid": "7c4f562d_4dc5f31e",
+      "revId": "ea1379ec637119212925c4403d3ecd72b71ce77b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
