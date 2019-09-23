@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be7cbab8_e22f9079",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-09-23T11:14:56Z",
+      "side": 1,
+      "message": "Overwriting op_ctx in this function might be OK, but the best way is to save op_ctx and use yours just before calling nfs_req_creds() and then restore it back.\n\nsave_ctx \u003d op_ctx\nop_ctx \u003d \u0026req_ctx;\n\nthen initialize op_ctx with values you need before calling nfs_req_cred(). Then restore the op_ctx by doing \"op_ctx \u003d save_ctx;\"\n\nSee src/FSAL_UP/fsal_up_top.c for this kind of usage. It should few lines change as well as you can keep the existing exp.",
+      "revId": "143c4037e64a166021fa23fb6a684849acdd1216",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
