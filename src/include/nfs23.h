@@ -818,6 +818,7 @@ typedef struct entryplus3 entryplus3;
 
 struct dirlistplus3 {
 	entryplus3 *entries;
+	xdr_uio *uio;
 	bool_t eof;
 };
 typedef struct dirlistplus3 dirlistplus3;
@@ -1128,6 +1129,8 @@ extern bool xdr_READDIR3resfail(XDR *, READDIR3resfail *);
 extern bool xdr_READDIR3res(XDR *, READDIR3res *);
 extern bool xdr_READDIRPLUS3args(XDR *, READDIRPLUS3args *);
 extern bool xdr_entryplus3(XDR *, entryplus3 *);
+extern void xdr_dirlistplus3_uio_release(struct xdr_uio *, u_int);
+extern bool xdr_encode_entryplus3(XDR *, entryplus3 *, const fattr3 *);
 extern bool xdr_dirlistplus3(XDR *, dirlistplus3 *);
 extern bool xdr_READDIRPLUS3resok(XDR *, READDIRPLUS3resok *);
 extern bool xdr_READDIRPLUS3resfail(XDR *, READDIRPLUS3resfail *);
