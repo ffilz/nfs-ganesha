@@ -880,20 +880,13 @@ static void nfs_release_nlm_state(char *release_ip)
 
 static int ip_match(char *ip, nfs_client_id_t *cid)
 {
-	char *haystack;
-	char *value = cid->cid_client_record->cr_client_val;
-	int len = cid->cid_client_record->cr_client_val_len;
-
-	LogDebug(COMPONENT_STATE, "NFS Server V4 match ip %s with (%.*s)",
-		 ip, len, value);
+	LogDebug(COMPONENT_STATE, "NFS Server V4 match ip %s with (%s)",
+		 ip, cid->cid_client_record->cr_client_val);
 
 	if (strlen(ip) == 0)	/* No IP all are matching */
 		return 1;
 
-	haystack = alloca(len + 1);
-	memcpy(haystack, value, len);
-	haystack[len] = '\0';
-	if (strstr(haystack, ip) != NULL)
+	if (strstr(cid->cid_client_record->cr_client_val, ip) != NULL)
 		return 1;
 
 	return 0;		/* no match */

@@ -42,7 +42,6 @@
 #include <libgen.h>
 #include <sys/resource.h>
 #include <execinfo.h>
-#include <assert.h>
 
 #include "log.h"
 #include "gsh_list.h"
@@ -2543,16 +2542,9 @@ static int log_conf_commit(void *node, void *link_mem, void *self_struct,
 		if (logger->comp_log_level != NULL) {
 			LogEvent(COMPONENT_CONFIG,
 				 "Switching to new component log levels");
-			if (component_log_level == default_log_levels) {
-				/* First time change from default log level */
-				component_log_level = logger->comp_log_level;
-				logger->comp_log_level = NULL;
-			} else {
-				/* update exisiting component_log_level */
-				memcpy(component_log_level,
-				  logger->comp_log_level,
-				  (sizeof(log_levels_t) * COMPONENT_COUNT));
-			}
+			if (component_log_level != default_log_levels)
+				gsh_free(component_log_level);
+			component_log_level = logger->comp_log_level;
 		}
 		ntirpc_pp.debug_flags = logger->rpc_debug_flags;
 		SetNTIRPCLogLevel(component_log_level[COMPONENT_TIRPC]);
@@ -2566,9 +2558,9 @@ static int log_conf_commit(void *node, void *link_mem, void *self_struct,
 				gsh_free(lf->user_time_fmt);
 			gsh_free(lf);
 		}
+		if (logger->comp_log_level != NULL)
+			gsh_free(logger->comp_log_level);
 	}
-	if (logger->comp_log_level != NULL)
-		gsh_free(logger->comp_log_level);
 	logger->logfields = NULL;
 	logger->comp_log_level = NULL;
 	return errcnt;
@@ -2671,37 +2663,4 @@ void gsh_backtrace(void)
 		}
 	}
 	PTHREAD_RWLOCK_unlock(&log_rwlock);
-}
-
-bool _ratelimit(struct ratelimit_state *rs, int *missed)
-{
-	bool ret;
-	time_t now;
-
-	/* If we fail to acquire the mutex, then we are alreday busy,
-	 * so don't log message (aka return false)
-	 */
-	if (pthread_mutex_trylock(&rs->mutex))
-		return false;
-
-	now = time(NULL);
-	if (now > rs->begin + rs->interval) { /* new interval */
-		*missed = rs->missed;
-		rs->begin = now;
-		rs->printed = 0;
-		rs->missed = 0;
-	} else {
-		*missed = 0;
-	}
-
-	if (rs->burst > rs->printed) {
-		rs->printed++;
-		ret = true;
-	} else {
-		rs->missed++;
-		ret = false;
-	}
-	(void)pthread_mutex_unlock(&rs->mutex);
-
-	return ret;
 }

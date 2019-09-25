@@ -1099,7 +1099,7 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 	if (state) {
 		open_state->openflags = FSAL_O_NFS_FLAGS(openflags);
 	} else {
-		obj->openflags = FSAL_O_NFS_FLAGS(openflags);
+		handle->openflags = FSAL_O_NFS_FLAGS(openflags);
 	}
 
 	*new_obj = &obj->handle;
