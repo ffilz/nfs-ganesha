@@ -1,5 +1,5 @@
 #
-# exports_table.py - ExportTableModel class.
+# clients_table.py - ClientTableModel model class.
 #
 # Copyright (C) 2014 Panasas Inc.
 #
@@ -18,20 +18,20 @@
 #
 # Author: Jim Lieb <jlieb@panasas.com>
 #-*- coding: utf-8 -*-
+
 import sys, time
-from PyQt4.QtCore import *
-from PyQt4 import QtDBus, QtGui
-from PyQt4.QtGui import QColor
+from ${PYQTX}.QtCore import *
+from ${PYQTX} import QtDBus, QtGui
+from ${PYQTX}.QtGui import QColor
 
-class ExportTableModel(QAbstractTableModel):
+class ClientTableModel(QAbstractTableModel):
     '''
-    Exports Table Model to match its table view
+    Clients Table Model to match its table view
     '''
 
-    def __init__(self, exportmgr, parent=None):
-        super(ExportTableModel, self).__init__(parent)
-        self.header = ['Export ID',
-                       'Export Path',
+    def __init__(self, clientmgr, parent=None):
+        super(ClientTableModel, self).__init__(parent)
+        self.header = ['Client IP',
                        'NFSv3',
                        'MNT',
                        'NLMv4',
@@ -40,22 +40,22 @@ class ExportTableModel(QAbstractTableModel):
                        'NFSv4.1',
                        '9P',
                        'Last Stats Update']
-        self.exportmgr = exportmgr
-        self.exportmgr.show_exports.connect(self.FetchExports_done)
-        self.exports = []
+        self.clientmgr = clientmgr
+        self.clientmgr.show_clients.connect(self.FetchClients_done)
+        self.clients = []
         self.ts = (0, 0)
 
-    # Fetch current exports
-    def FetchExports(self):
-        self.exportmgr.ShowExports()
+    # Fetch current clients
+    def FetchClients(self):
+        self.clientmgr.ShowClients()
 
-    def FetchExports_done(self, ts, exports):
-        if len(self.exports) != len(exports):
-            if len(self.exports) > 0:
-                self.removeRows(0, len(self.exports))
-            self.insertRows(0, len(exports))
-        for i in xrange(len(exports)):
-            exp = exports[i]
+    def FetchClients_done(self, ts, clients):
+        if len(self.clients) != len(clients):
+            if len(self.clients) > 0:
+                self.removeRows(0, len(self.clients))
+            self.insertRows(0, len(clients))
+        for i in xrange(len(clients)):
+            exp = clients[i]
             for j in xrange(len(exp)):
                 if isinstance(exp[j], bool):
                     if exp[j]:
@@ -73,7 +73,7 @@ class ExportTableModel(QAbstractTableModel):
         if role == Qt.EditRole:
             row = index.row()
             col = index.column()
-            t_ = self.exports[row]
+            t_ = self.clients[row]
             if row > self.rowCount() or col > self.columnCount():
                 return False
             t_[col] = value
@@ -87,7 +87,7 @@ class ExportTableModel(QAbstractTableModel):
     def insertRows(self, row, count, parent=QModelIndex()):
         self.beginInsertRows(parent, row, row + count - 1)
         for i in xrange(count):
-            self.exports.insert(row, ['',]*self.columnCount())
+            self.clients.insert(row, ['',]*self.columnCount())
         self.endInsertRows()
         return True
 
@@ -97,11 +97,11 @@ class ExportTableModel(QAbstractTableModel):
     def removeRows(self, row, count, parent=QModelIndex()):
         self.beginRemoveRows(parent, row, row + count -1)
         for i in reversed(xrange(count)):
-            self.exports.pop(row + i)
+            self.clients.pop(row + i)
         self.endRemoveRows()
 
     def rowCount(self, parent=QModelIndex()):
-        return len(self.exports)
+        return len(self.clients)
 
     def columnCount(self, parent=QModelIndex()):
         return len(self.header)
@@ -118,12 +118,12 @@ class ExportTableModel(QAbstractTableModel):
         if not index.isValid():
             return QVariant()
         elif role == Qt.DisplayRole:
-            return QVariant(self.exports[index.row()][index.column()])
+            return QVariant(self.clients[index.row()][index.column()])
         elif role == Qt.TextAlignmentRole:
             align = Qt.AlignVCenter
             if index.column() == 0:
                 align = align + Qt.AlignRight
-            elif index.column() == 1 or index.column() == 9:
+            elif index.column() == 9:
                 align = align + Qt.AlignLeft
             else:
                 align = align + Qt.AlignCenter

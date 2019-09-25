@@ -115,6 +115,18 @@ if(PYTHON)
   endif()
 
   configure_file(${SETUP_PY_IN} ${SETUP_PY})
+  configure_file(ganesha-admin.py.in ganesha-admin.py)
+  configure_file(ganeshactl.py.in ganeshactl.py)
+  configure_file(manage_clients.py.in manage_clients.py)
+  configure_file(manage_exports.py.in manage_exports.py)
+  configure_file(manage_logger.py.in manage_logger.py)
+  configure_file(Ganesha/admin.py.in Ganesha/admin.py)
+  configure_file(Ganesha/client_mgr.py.in Ganesha/client_mgr.py)
+  configure_file(Ganesha/export_mgr.py.in Ganesha/export_mgr.py)
+  configure_file(Ganesha/log_mgr.py.in Ganesha/log_mgr.py)
+  configure_file(Ganesha/QtUI/clients_table.py.in Ganesha/QtUI/clients_table.py)
+  configure_file(Ganesha/QtUI/exports_table.py.in Ganesha/QtUI/exports_table.py)
+  configure_file(Ganesha/QtUI/log_settings.py.in Ganesha/QtUI/log_settings.py)
 
   add_custom_command(
     OUTPUT ${OUTPUT}

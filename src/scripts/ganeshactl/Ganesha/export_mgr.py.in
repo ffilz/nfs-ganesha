@@ -20,8 +20,8 @@
 #-*- coding: utf-8 -*-
 
 import sys, time
-from PyQt4.QtCore import *
-from PyQt4 import QtDBus, QtGui
+from ${PYQTX}.QtCore import *
+from ${PYQTX} import QtDBus, QtGui
 from collections import namedtuple
 
 Export = namedtuple('Export',
