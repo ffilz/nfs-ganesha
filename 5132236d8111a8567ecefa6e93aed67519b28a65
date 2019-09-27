@@ -34,6 +34,24 @@
       "revId": "5132236d8111a8567ecefa6e93aed67519b28a65",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c60335f_f830ed7b",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-09-27T18:48:39Z",
+      "side": 1,
+      "message": "I don\u0027t think we should change all arrays to alloca\u0027s. It is just that this dbus interface seems bogus! I don\u0027t know why that functions takes an address, the param is IN only (never OUT). Maybe, i am wrong though.",
+      "parentUuid": "a10c9567_b6f38886",
+      "revId": "5132236d8111a8567ecefa6e93aed67519b28a65",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
