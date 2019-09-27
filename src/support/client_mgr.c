@@ -425,6 +425,7 @@ static bool client_to_dbus(struct gsh_client *cl_node, void *state)
 	    (struct showclients_state *)state;
 	struct server_stats *cl;
 	char ipaddr[SOCK_NAME_MAX];
+	char *addr = ipaddr;
 	DBusMessageIter struct_iter;
 	struct timespec last_as_ts = nfs_ServerBootTime;
 
@@ -436,7 +437,7 @@ static bool client_to_dbus(struct gsh_client *cl_node, void *state)
 	timespec_add_nsecs(cl_node->last_update, &last_as_ts);
 	dbus_message_iter_open_container(&iter_state->client_iter,
 					 DBUS_TYPE_STRUCT, NULL, &struct_iter);
-	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &ipaddr);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &addr);
 	server_stats_summary(&struct_iter, &cl->st);
 	gsh_dbus_append_timestamp(&struct_iter, &last_as_ts);
 	dbus_message_iter_close_container(&iter_state->client_iter,
