@@ -424,7 +424,7 @@ static bool client_to_dbus(struct gsh_client *cl_node, void *state)
 	struct showclients_state *iter_state =
 	    (struct showclients_state *)state;
 	struct server_stats *cl;
-	char ipaddr[SOCK_NAME_MAX];
+	char *ipaddr = alloca(SOCK_NAME_MAX);
 	DBusMessageIter struct_iter;
 	struct timespec last_as_ts = nfs_ServerBootTime;
 
