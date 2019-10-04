@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eec3b1d3_a2b8e041",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-10-04T03:52:02Z",
+      "side": 1,
+      "message": "We need this script to compute EPOCH for Ganesha (part of configuration rather than utils). This is always needed with \"gpfs\" fsal, so I would like this condition to be removed.",
+      "revId": "49ccdb02950a3799b9d9db3c6577959b415270cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
