@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07b30bf2_a0ecda34",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-10-07T13:17:11Z",
+      "side": 1,
+      "message": "You took out the setting of namelen above, but you\u0027re using it here.  Am I missing it getting set somewhere?",
+      "revId": "bf60e71283890f6a69a6bfdcf55f68cadc58cf0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
