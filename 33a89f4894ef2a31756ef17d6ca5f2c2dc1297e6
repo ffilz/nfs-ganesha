@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5d5aa2a_4daf9805",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-10-09T22:59:43Z",
+      "side": 1,
+      "message": "Is there a case where cid_minorversion \u003d\u003d 0 \u0026\u0026 share_access has OPEN4_SHARE_ACCESS_WANT_NO_DELEG that requires the delegation_type to be reset here?  Otherwise the check on line 573 will be true for OPEN4_SHARE_ACCESS_WANT_NO_DELEG.",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 1
+      },
+      "revId": "33a89f4894ef2a31756ef17d6ca5f2c2dc1297e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
