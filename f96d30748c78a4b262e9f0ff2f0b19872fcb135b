@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58b97db0_3e208643",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-10-10T12:34:27Z",
+      "side": 1,
+      "message": "changing an array to pointer needs sizeof() changes! Replace the above couple of sizeof(ipaddr) with SOCK_NAME_MAX",
+      "revId": "f96d30748c78a4b262e9f0ff2f0b19872fcb135b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
