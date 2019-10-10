@@ -46,6 +46,30 @@
       "revId": "33a89f4894ef2a31756ef17d6ca5f2c2dc1297e6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c2578d1_e6a9defb",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1015789
+      },
+      "writtenOn": "2019-10-10T03:40:06Z",
+      "side": 1,
+      "message": "Line 574 will already set delegation_type to OPEN_DELEGATE_NONE_EXT.  Why reset it again on line 580?",
+      "parentUuid": "16af4583_60b36f81",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 1
+      },
+      "revId": "33a89f4894ef2a31756ef17d6ca5f2c2dc1297e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
