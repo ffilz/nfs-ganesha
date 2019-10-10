@@ -22,6 +22,30 @@
       "revId": "33a89f4894ef2a31756ef17d6ca5f2c2dc1297e6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16af4583_60b36f81",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-10-10T03:35:50Z",
+      "side": 1,
+      "message": "OPEN4_SHARE_ACCESS_WANT_xxx are NFS v4.1+",
+      "parentUuid": "c5d5aa2a_4daf9805",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 1
+      },
+      "revId": "33a89f4894ef2a31756ef17d6ca5f2c2dc1297e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
