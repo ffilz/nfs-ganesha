@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42dc9707_91690ff2",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-10-11T12:47:09Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define CEIOSTATS_REPLY    \\\n+{                          \\\n+\t.name \u003d \"read\",    \\\n+\t.type \u003d \"(ttdt)\",  \\\n+\t.direction \u003d \"out\" \\\n+},                         \\\n+{                          \\\n+\t.name \u003d \"write\",   \\\n+\t.type \u003d \"(ttdt)\",  \\\n+\t.direction \u003d \"out\" \\\n+},                         \\\n+{                          \\\n+\t.name \u003d \"other\",   \\\n+\t.type \u003d \"(ttd)\",   \\\n+\t.direction \u003d \"out\" \\\n+}",
+      "revId": "6f5614cce554218b142a311696ba2235c4437cc5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38ab5128_e9159d3f",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-10-11T12:47:09Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define CE_STATS_REPLY      \\\n+{                           \\\n+\t.name \u003d \"clnt_v3\",  \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n+CEIOSTATS_REPLY,            \\\n+{                           \\\n+\t.name \u003d \"clnt_v40\", \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n+CEIOSTATS_REPLY,            \\\n+{                           \\\n+\t.name \u003d \"clnt_v41\", \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n+CEIOSTATS_REPLY,            \\\n+CELOSTATS_REPLY,            \\\n+{                           \\\n+\t.name \u003d \"clnt_v42\", \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n+CEIOSTATS_REPLY,            \\\n+CELOSTATS_REPLY",
+      "revId": "6f5614cce554218b142a311696ba2235c4437cc5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
