@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47f1e0b5_0068e8c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-10-16T07:48:45Z",
+      "side": 1,
+      "message": "fsal_internal_handle2fd() is used to open the symbolic links, so we should close with fsal_internal_close()\" is good enough. Specifically, reference to open_fd_count manipulation should be avoided as it is incorrect.",
+      "revId": "f6f3fe72a48fcdbcd47fafec5dbf2eecb57e4cfe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
