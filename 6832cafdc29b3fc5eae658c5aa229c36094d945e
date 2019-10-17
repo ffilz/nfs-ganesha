@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f49bb321_2bdd8b05",
+        "filename": "src/SAL/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-10-17T23:18:45Z",
+      "side": 1,
+      "message": "Looks like this should be a parenthesis not a space.",
+      "parentUuid": "de29405c_30ab0315",
+      "revId": "6832cafdc29b3fc5eae658c5aa229c36094d945e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6cf1e34_0551ad8f",
         "filename": "src/config_parsing/conf_url.c",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2019-10-17T20:59:23Z",
       "side": 1,
       "message": "ERROR: code indent should use tabs where possible\n+                    !rados_urls.shutdown_watch) {$",
+      "revId": "6832cafdc29b3fc5eae658c5aa229c36094d945e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7d1b6ef_c87a3e85",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-10-17T23:18:45Z",
+      "side": 1,
+      "message": "Please fix the spacing here.",
+      "parentUuid": "e6cf1e34_0551ad8f",
       "revId": "6832cafdc29b3fc5eae658c5aa229c36094d945e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
