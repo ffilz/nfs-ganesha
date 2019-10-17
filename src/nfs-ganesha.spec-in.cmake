@@ -666,6 +666,9 @@ exit 0
 %files
 %{_bindir}/ganesha.nfsd
 %{_libdir}/libganesha_nfsd.so*
+%if %{with rados_urls}
+%{_libdir}/libganesha_rados_urls.so*
+%endif
 %config %{_sysconfdir}/dbus-1/system.d/org.ganesha.nfsd.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/ganesha
 %config(noreplace) %{_sysconfdir}/logrotate.d/ganesha
@@ -698,6 +701,7 @@ exit 0
 %if %{with rados_recov}
 %files rados-grace
 %{_bindir}/ganesha-rados-grace
+%{_libdir}/libganesha-rados-recov.so*
 %if %{with man_page}
 %{_mandir}/*/ganesha-rados-grace.8.gz
 %{_mandir}/*/ganesha-rados-cluster-design.8.gz
