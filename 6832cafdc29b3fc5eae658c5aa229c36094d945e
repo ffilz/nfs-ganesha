@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d34d4beb_e7a7e2f3",
+        "filename": "src/SAL/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-10-18T13:25:22Z",
+      "side": 1,
+      "message": "The end paren is in the next line, so that\u0027s okay.  Just remove the space.",
+      "parentUuid": "f49bb321_2bdd8b05",
+      "revId": "6832cafdc29b3fc5eae658c5aa229c36094d945e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6cf1e34_0551ad8f",
         "filename": "src/config_parsing/conf_url.c",
         "patchSetId": 1
@@ -86,6 +104,23 @@
       "revId": "6832cafdc29b3fc5eae658c5aa229c36094d945e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3463e71_33286169",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-10-18T13:25:22Z",
+      "side": 1,
+      "message": "If the dlopen fails, won\u0027t this call a NULL function?  I think we should either abort if the dlopen fails, or check for success before calling here.",
+      "revId": "6832cafdc29b3fc5eae658c5aa229c36094d945e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
