@@ -34,6 +34,24 @@
       "revId": "1087e21778df0e643bcdc44123166a83c44bd4c9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c235032_79ca051f",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-10-21T17:11:31Z",
+      "side": 1,
+      "message": "(I\u0027m actually of the opinion that main() should be deleted and nfs_libmain() kept...)\n\nIn this case, the config file explicitly asks for a recovery backend that we can\u0027t load.  If this is a restart, then our restart will fail, but silently.  I\u0027d rather we failed to run if we can\u0027t start with our desired recovery backend, since recovery is fundamental to startup.\n\nI\u0027m willing to be convinced/outvoted.",
+      "parentUuid": "186db626_53fbdeb4",
+      "revId": "1087e21778df0e643bcdc44123166a83c44bd4c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
