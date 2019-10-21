@@ -16,6 +16,24 @@
       "revId": "1087e21778df0e643bcdc44123166a83c44bd4c9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "186db626_53fbdeb4",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2019-10-21T16:36:42Z",
+      "side": 1,
+      "message": "probably not. Returning -1 would eventually \"abort\" at fatal_die in main(). (Also in nfs_libmain(), but that looks like dead code that should be deleted.)\n\nI kinda prefer having a default no-op init() function for the recovery_backend. And we probably need a default no-op methods for the other fn ptrs in recovery_backend. Or else wrap those calls with tests for NULL.",
+      "parentUuid": "fcf78d93_e5977753",
+      "revId": "1087e21778df0e643bcdc44123166a83c44bd4c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
