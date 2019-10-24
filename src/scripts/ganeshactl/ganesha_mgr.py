@@ -324,6 +324,7 @@ if __name__ == '__main__':
        "   add_client ipaddr: Adds the client with the given IP\n\n"         \
        "   remove_client ipaddr: Removes the client with the given IP\n\n"   \
        "   show clients: Displays the current clients\n\n"                   \
+       "   show_version: Displays ganesha release infomation\n\n"            \
        "   show posix_fs: Displays the mounted POSIX filesystems\n\n"        \
        "   show exports: Displays all current exports\n\n"                   \
        "   show idmap: Displays the idmapper cache\n\n"                      \
@@ -368,6 +369,9 @@ if __name__ == '__main__':
         clientmgr.removeclient(sys.argv[2])
     elif sys.argv[1] == "show_client":
         clientmgr.showclients()
+
+    elif sys.argv[1] == "show_version":
+        ganesha.show_version()
 
     elif sys.argv[1] == "add_export":
         if len(sys.argv) < 4:
