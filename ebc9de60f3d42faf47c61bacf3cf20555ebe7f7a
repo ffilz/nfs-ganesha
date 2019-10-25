@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "719cab60_abe4a164",
+        "filename": "src/scripts/ganeshactl/ganesha_mgr.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-10-25T14:26:33Z",
+      "side": 1,
+      "message": "There is an inconsistency here, the single token option is show_client rather than show_clients\nAlso, I feel like we should either have show xyz or show_xyz, not really both",
+      "revId": "ebc9de60f3d42faf47c61bacf3cf20555ebe7f7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77d0dbb1_f7a49012",
+        "filename": "src/scripts/ganeshactl/ganesha_mgr.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-10-25T14:26:33Z",
+      "side": 1,
+      "message": "There is no show_posix_fs option",
+      "revId": "ebc9de60f3d42faf47c61bacf3cf20555ebe7f7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc7ec9f6_7082b31b",
+        "filename": "src/scripts/ganeshactl/ganesha_mgr.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-10-25T14:26:33Z",
+      "side": 1,
+      "message": "There is no show_idmap option",
+      "revId": "ebc9de60f3d42faf47c61bacf3cf20555ebe7f7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fbfe7b9_6e4dee50",
+        "filename": "src/scripts/ganeshactl/ganesha_mgr.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-10-25T14:26:33Z",
+      "side": 1,
+      "message": "There are no purge_xyz options...",
+      "revId": "ebc9de60f3d42faf47c61bacf3cf20555ebe7f7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
