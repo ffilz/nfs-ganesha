@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5810933_e82b7da4",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_lookup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2019-10-29T07:08:50Z",
+      "side": 1,
+      "message": "With recent code changes we now call fsal_internal_close(parent_fd,..) at line 119. So call to fsal_internal_close(parent_fd,..) can be removed here.",
+      "revId": "ca5bb5e1d05d615f50088a4d21216653846899c0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
