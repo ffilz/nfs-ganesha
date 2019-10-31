@@ -16,6 +16,24 @@
       "revId": "18e032c4a001c2c6dac796b829d227405c439f0c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb5f72bf_5f5be844",
+        "filename": "src/scripts/ganeshactl/ganesha_mgr.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1017099
+      },
+      "writtenOn": "2019-10-31T13:04:07Z",
+      "side": 1,
+      "message": "Hello, I think it\u0027s better not to map \"getall logs\" to \"get logs\" and completely remove \"getall\". I am not sure if we are going to have \"getall\" subcommand for anything either, but we should reserve this interface(getall) for extensibility in the future.",
+      "parentUuid": "8c5c195c_cfe793fb",
+      "revId": "18e032c4a001c2c6dac796b829d227405c439f0c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
