@@ -690,7 +690,8 @@ void free_args(nfs_request_t *reqdata)
 	}
 
 	/* Finalize the request. */
-	nfs_dupreq_rele(&reqdata->svc, reqdesc);
+	if (reqdata->res_nfs)
+		nfs_dupreq_rele(&reqdata->svc, reqdesc);
 
 	SetClientIP(NULL);
 
