@@ -92,6 +92,8 @@
 #include "abstract_mem.h"
 #include "gss_credcache.h"
 #include "nfs_core.h"
+#include "idmapper.h"
+#include "gsh_config.h"
 
 /*
  * Hide away some of the MIT vs. Heimdal differences
@@ -446,20 +448,24 @@ static int get_full_hostname(const char *inhost, char *outhost, int outhostlen)
 	struct addrinfo hints;
 	int retval;
 	char *c;
+	struct timespec s_time, e_time;
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_family = PF_UNSPEC;
 	hints.ai_flags = AI_CANONNAME;
 
+	now(&s_time);
 	/* Get full target hostname */
 	retval = getaddrinfo(inhost, NULL, &hints, &addrs);
+	now(&e_time);
 
 	if (retval) {
 		printerr(1, "%s while getting full hostname for '%s'\n",
 			 gai_strerror(retval), inhost);
 		return retval;
-	}
+	} else if (nfs_param.core_param.enable_AUTHSTATS)
+		dns_stats_update(&s_time, &e_time);
 
 	if (strlcpy(outhost, addrs->ai_canonname, outhostlen) >= outhostlen) {
 		retval = -1;
@@ -657,6 +663,7 @@ static int find_keytab_entry(krb5_context context, krb5_keytab kt,
 	char *k5err = NULL;
 	int tried_all = 0, tried_default = 0;
 	krb5_principal princ;
+	struct timespec s_time, e_time;
 
 	/* Get full target hostname */
 	retval =
@@ -664,14 +671,17 @@ static int find_keytab_entry(krb5_context context, krb5_keytab kt,
 	if (retval)
 		goto out;
 
+	now(&s_time);
 	/* Get full local hostname */
 	retval = gethostname(myhostname, sizeof(myhostname));
+	now(&e_time);
 	if (retval) {
 		k5err = gssd_k5_err_msg(context, retval);
 		printerr(1, "%s while getting local hostname\n", k5err);
 		gsh_free(k5err);
 		goto out;
-	}
+	} else if (nfs_param.core_param.enable_AUTHSTATS)
+		dns_stats_update(&s_time, &e_time);
 
 	/* Compute the active directory machine name HOST$ */
 	strcpy(myhostad, myhostname);

@@ -38,6 +38,7 @@
 #include "nfs_proto_tools.h"
 #include "sal_functions.h"
 #include "nfs_creds.h"
+#include "idmapper.h"
 
 int get_raddr(SVCXPRT *xprt)
 {
@@ -112,6 +113,7 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 	bool update;
 	uint32_t pnfs_flags;
 	in_addr_t server_addr = 0;
+	struct timespec s_time, e_time;
 	/* Arguments and response */
 	EXCHANGE_ID4args * const arg_EXCHANGE_ID4 =
 	    &op->nfs_argop4_u.opexchange_id;
@@ -141,12 +143,16 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 	}
 
 	if (cid_server_owner[0] == '\0') {
+		now(&s_time);
 		/* Set up the server owner string */
 		if (gethostname(cid_server_owner,
 				sizeof(cid_server_owner)) == -1) {
 			res_EXCHANGE_ID4->eir_status = NFS4ERR_SERVERFAULT;
 			return NFS_REQ_ERROR;
 		}
+		now(&e_time);
+		if (nfs_param.core_param.enable_AUTHSTATS)
+			dns_stats_update(&s_time, &e_time);
 	}
 
 	/* Now check that the response will fit. Use 0 for

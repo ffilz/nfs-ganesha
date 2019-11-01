@@ -52,6 +52,7 @@
 #include "pnfs_utils.h"
 #include "netgroup_cache.h"
 #include "mdcache.h"
+#include "idmapper.h"
 
 /**
  * @brief Protect EXPORT_DEFAULTS structure for dynamic update.
@@ -428,6 +429,7 @@ static int add_client(struct glist_head *client_list,
 	struct addrinfo *info;
 	CIDR *cidr;
 	int rc;
+	struct timespec s_time, e_time;
 
 	cli = gsh_calloc(1, sizeof(struct exportlist_client_entry__));
 
@@ -499,12 +501,16 @@ static int add_client(struct glist_head *client_list,
 		cli->type = WILDCARDHOST_CLIENT;
 		break;
 	case TERM_TOKEN: /* only dns names now. */
+		now(&s_time);
 		rc = getaddrinfo(client_tok, NULL, NULL, &info);
+		now(&e_time);
 		if (rc == 0) {
 			struct addrinfo *ap, *ap_last = NULL;
 			struct in_addr in_addr_last;
 			struct in6_addr in6_addr_last;
 
+			if (nfs_param.core_param.enable_AUTHSTATS)
+				dns_stats_update(&s_time, &e_time);
 			for (ap = info; ap != NULL; ap = ap->ai_next) {
 				LogFullDebug(COMPONENT_EXPORT,
 					     "flags=%d family=%d socktype=%d protocol=%d addrlen=%d name=%s",

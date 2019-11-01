@@ -34,6 +34,7 @@
 #include "sal_functions.h"
 #include "nlm_util.h"
 #include "nlm_async.h"
+#include "idmapper.h"
 
 pthread_mutex_t nlm_async_resp_mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t nlm_async_resp_cond = PTHREAD_COND_INITIALIZER;
@@ -118,11 +119,13 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 {
 	struct clnt_req *cc;
 	char *t;
-	struct timeval start, now;
+	struct timeval start, t_now;
 	struct timespec timeout;
+	struct timespec s_time, e_time;
 	int retval, retry;
 	char *caller_name = host->slc_nsm_client->ssc_nlm_caller_name;
 	const char *client_type_str = xprt_type_to_str(host->slc_client_type);
+	bool stats = nfs_param.core_param.enable_AUTHSTATS;
 
 	for (retry = 0; retry < MAX_ASYNC_RETRY; retry++) {
 		if (host->slc_callback_clnt == NULL) {
@@ -187,11 +190,13 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 				gsh_free(buf->buf);
 				gsh_free(buf);
 
+				now(&s_time);
 				/* get the IPv4 mapped IPv6 address */
 				retval = getaddrinfo(caller_name,
 						     port_str,
 						     &hints,
 						     &result);
+				now(&e_time);
 
 				/* retry for spurious EAI_NONAME errors */
 				if (retval == EAI_NONAME ||
@@ -210,7 +215,8 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 						 caller_name,
 						 gai_strerror(retval));
 					return -1;
-				}
+				} else if (stats)
+					dns_stats_update(&s_time, &e_time);
 
 				/* setup the netbuf with in6 address */
 				local_buf.buf = result->ai_addr;
@@ -301,14 +307,14 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 	if (resp_key != NULL) {
 		/* Wait for 5 seconds or a signal */
 		gettimeofday(&start, NULL);
-		gettimeofday(&now, NULL);
+		gettimeofday(&t_now, NULL);
 		timeout.tv_sec = 5 + start.tv_sec;
 		timeout.tv_nsec = 0;
 
 		LogFullDebug(COMPONENT_NLM,
 			     "About to wait for signal for key %p", resp_key);
 
-		while (resp_key != NULL && now.tv_sec < (start.tv_sec + 5)) {
+		while (resp_key != NULL && t_now.tv_sec < (start.tv_sec + 5)) {
 			int rc;
 
 			rc = pthread_cond_timedwait(&nlm_async_resp_cond,
@@ -317,7 +323,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 			LogFullDebug(COMPONENT_NLM,
 				     "pthread_cond_timedwait returned %d",
 				     rc);
-			gettimeofday(&now, NULL);
+			gettimeofday(&t_now, NULL);
 		}
 		LogFullDebug(COMPONENT_NLM, "Done waiting");
 	}

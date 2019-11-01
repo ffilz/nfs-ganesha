@@ -42,6 +42,7 @@
 #include "bsd-base64.h"
 #include "client_mgr.h"
 #include "fsal.h"
+#include "idmapper.h"
 
 /* The grace_mutex protects current_grace, clid_list, and clid_count */
 static pthread_mutex_t grace_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -422,6 +423,7 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	int rc;
 	long maxlen;
 	char *nodeid = NULL;
+	struct timespec s_time, e_time;
 
 	if (recovery_backend->get_nodeid) {
 		rc = recovery_backend->get_nodeid(&nodeid);
@@ -443,13 +445,17 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	 */
 	maxlen = sysconf(_SC_HOST_NAME_MAX);
 	nodeid = gsh_malloc(maxlen);
+	now(&s_time);
 	rc = gethostname(nodeid, maxlen);
+	now(&e_time);
 	if (rc != 0) {
 		LogEvent(COMPONENT_CLIENTID, "gethostname failed: %d", errno);
 		rc = -errno;
 		gsh_free(nodeid);
 	} else {
 		*pnodeid = nodeid;
+		if (nfs_param.core_param.enable_AUTHSTATS)
+			dns_stats_update(&s_time, &e_time);
 	}
 	return rc;
 }
