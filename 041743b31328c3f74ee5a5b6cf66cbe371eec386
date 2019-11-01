@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7deaecde_5053b52e",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-11-01T11:50:45Z",
+      "side": 1,
+      "message": "res_nfs is set by nfs_dupreq_start(), so the check looks OK but under what conditions reqdata-\u003eres_nfs would be false?\n\nIs this patch applicable to Ganesha2.8 or 2.7 release?",
+      "revId": "041743b31328c3f74ee5a5b6cf66cbe371eec386",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
