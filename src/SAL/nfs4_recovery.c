@@ -1088,7 +1088,7 @@ int gsh_rados_kv_set_param_from_conf(config_file_t parse_tree,
 	return rados.kv_set_param ?
 		rados.kv_set_param(parse_tree, err_type) : -1;
 #else
-	return -1;
+	return 0;
 #endif
 }
 
