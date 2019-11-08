@@ -489,14 +489,18 @@ static int pxy_connect(struct pxy_export *pxy_exp,
 		int priv_port = 0;
 
 		sock = rresvport_af(&priv_port, dest->ss_family);
-		if (sock < 0)
+		if (sock < 0) {
 			LogCrit(COMPONENT_FSAL,
 				"Cannot create TCP socket on privileged port");
+			return -1;
+		}
 	} else {
 		sock = socket(dest->ss_family, SOCK_STREAM, IPPROTO_TCP);
-		if (sock < 0)
+		if (sock < 0) {
 			LogCrit(COMPONENT_FSAL, "Cannot create TCP socket - %d",
 				errno);
+			return -1;
+		}
 	}
 
 	switch (dest->ss_family) {
