@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4924e0b2_be3a5567",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1011834
+      },
+      "writtenOn": "2019-11-08T08:21:51Z",
+      "side": 1,
+      "message": "Should it return -1 for error? Return 0 is wrong here for pnodeid is not filled.",
+      "revId": "4535fb499a008425d7dc6bcb3ac4f6a0216b0a4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
