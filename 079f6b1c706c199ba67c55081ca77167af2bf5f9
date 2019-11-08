@@ -16,6 +16,24 @@
       "revId": "079f6b1c706c199ba67c55081ca77167af2bf5f9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4073f61_61adf647",
+        "filename": "src/FSAL/FSAL_PROXY/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-11-08T16:10:11Z",
+      "side": 1,
+      "message": "Yes, Daniel is correct, well, minor nit, if ss_family is not AF_INET or AF_INET6 and the socket wasn\u0027t opened, we will call close(-1) which is harmless (but maybe that\u0027s what Coverity is flagging).\n\nThe switch statement above however could be done before opening the socket (and then non-AF_INET or AF_INET6 ss_family wouldn\u0027t need to close).",
+      "parentUuid": "3cfdfc33_28bd0610",
+      "revId": "079f6b1c706c199ba67c55081ca77167af2bf5f9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
