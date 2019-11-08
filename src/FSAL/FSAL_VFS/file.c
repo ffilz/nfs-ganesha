@@ -1872,6 +1872,9 @@ fsal_status_t vfs_getattr2(struct fsal_obj_handle *obj_hdl,
 	status = find_fd(&my_fd, obj_hdl, false, NULL, FSAL_O_ANY,
 			 &has_lock, &closefd, false);
 
+	if (FSAL_IS_ERROR(status))
+		goto out;
+
 	LogFullDebug(COMPONENT_FSAL, "Got fd %d closefd = %s",
 		     my_fd, closefd ? "true" : "false");
 
