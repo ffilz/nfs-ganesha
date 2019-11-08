@@ -442,6 +442,12 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	 * NULL pointer. Just use hostname.
 	 */
 	maxlen = sysconf(_SC_HOST_NAME_MAX);
+	/* If sysconf() failed, -1 to maxlen */
+	if (maxlen == -1) {
+		LogEvent(COMPONENT_STATE, "sysconf failed: %d", errno);
+		return 0;
+	}
+
 	nodeid = gsh_malloc(maxlen);
 	rc = gethostname(nodeid, maxlen);
 	if (rc != 0) {
