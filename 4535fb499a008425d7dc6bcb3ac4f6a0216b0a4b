@@ -16,6 +16,24 @@
       "revId": "4535fb499a008425d7dc6bcb3ac4f6a0216b0a4b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31884a39_3dad0bdb",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-11-08T14:36:42Z",
+      "side": 1,
+      "message": "Presumably, it should return -ERRNO, not 0.  However, I don\u0027t think this call can fail, if I\u0027m reading the man pages correctly.  _SC_HOST_NAME_MAX is valid (so no EINVAL) and it\u0027s not indeterminate (which is the only other failure case for limits).  So I don\u0027t think the check is necessary.\n\nIf you are seeing it return -1, then there\u0027s more to do here.  You\u0027ll have to set errno to zero first, and check it after, and if it\u0027s still zero, that means it\u0027s indeterminate, and we need to use _POSIX_HOST_NAME_MAX.",
+      "parentUuid": "4924e0b2_be3a5567",
+      "revId": "4535fb499a008425d7dc6bcb3ac4f6a0216b0a4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
