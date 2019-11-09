@@ -515,14 +515,8 @@ void state_deleg_revoke(struct fsal_obj_handle *obj, state_t *state)
 bool is_write_delegated(struct fsal_obj_handle *obj, nfs_client_id_t **client)
 {
 	bool write_delegated = false;
-	struct file_deleg_stats *deleg_stats;
 
 	if (obj->type != REGULAR_FILE)
-		return false;
-
-	deleg_stats = &obj->state_hdl->file.fdeleg_stats;
-
-	if (deleg_stats->fds_curr_delegations < 0)
 		return false;
 
 	write_delegated = obj->state_hdl->file.write_delegated;
