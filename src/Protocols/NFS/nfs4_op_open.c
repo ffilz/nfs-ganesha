@@ -89,9 +89,6 @@ static nfsstat4 open4_create_fh(compound_data_t *data,
 		return NFS4ERR_SERVERFAULT;
 	}
 
-	/* Update the current entry */
-	set_current_entry(data, obj);
-
 	if (state_lock_held) {
 		/* Make sure we don't do cleanup holding the state_lock.
 		 * there will be an additional put_ref without the state_lock
@@ -100,6 +97,9 @@ static nfsstat4 open4_create_fh(compound_data_t *data,
 		obj->state_hdl->no_cleanup = true;
 		set_no_cleanup = true;
 	}
+
+	/* Update the current entry */
+	set_current_entry(data, obj);
 
 	/* Put our ref */
 	obj->obj_ops->put_ref(obj);
