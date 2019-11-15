@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae841c3d_b443736f",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-11-15T16:20:16Z",
+      "side": 1,
+      "message": "This definitely won\u0027t work for an ntirpc installed in a non-standard location (Like in a prefix).  NTIRPC_INCLUDE_DIR has to be findable in the prefix.",
+      "revId": "3b54e9b83e2e71726c9051aaa6b102234cde118e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f0a35e7_972e78af",
+        "filename": "src/cmake/modules/FindNTIRPC.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-11-15T16:20:16Z",
+      "side": 1,
+      "message": "Maybe just remove lib/ from this",
+      "revId": "3b54e9b83e2e71726c9051aaa6b102234cde118e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8780af35_10383c20",
+        "filename": "src/cmake/modules/FindNTIRPC.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-11-15T16:20:16Z",
+      "side": 1,
+      "message": "And this?",
+      "revId": "3b54e9b83e2e71726c9051aaa6b102234cde118e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "212aff7b_e9a02041",
+        "filename": "src/cmake/modules/FindNTIRPC.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-11-15T16:20:16Z",
+      "side": 1,
+      "message": "This definitely breaks installing in a non-standard location.",
+      "revId": "3b54e9b83e2e71726c9051aaa6b102234cde118e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
