@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "021c1289_fddefa52",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-12-02T15:27:00Z",
+      "side": 1,
+      "message": "I think it\u0027s okay to just check no_dispatch here.  It should only be set for GSS, but even if it\u0027s set in some future auth scheme, it means we shouldn\u0027t process the message.",
+      "revId": "dc3535eeec3671d3cdbbfddce8c488b618ccbeeb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
