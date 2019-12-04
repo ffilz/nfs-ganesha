@@ -16,6 +16,24 @@
       "revId": "a2f4d1b1249ce2a05a3230f1667909d23bd2707e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cf2be2f_2a7b8da3",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-12-04T14:29:16Z",
+      "side": 1,
+      "message": "I think this is okay, as svc_auth_authenticate() specifically says in it\u0027s comments this is the correct auth bit, and it is set in several of the callpaths in there.",
+      "parentUuid": "5a831ec2_74783856",
+      "revId": "a2f4d1b1249ce2a05a3230f1667909d23bd2707e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
