@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "449f9dc5_1a77d876",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2019-12-04T18:17:20Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define CLNT_ALL_OPS_REPLY\t\t\\\n+{\t\t\t\t\t\\\n+\t.name \u003d \"clnt_v3\",\t\t\\\n+\t.type \u003d \"b\",\t\t\t\\\n+\t.direction \u003d \"out\"\t\t\\\n+},\t\t\t\t\t\\\n+CLNT_V3NLM_OPS_REPLY,\t\t\t\\\n+{\t\t\t\t\t\\\n+\t.name \u003d \"clnt_nlm\",\t\t\\\n+\t.type \u003d \"b\",\t\t\t\\\n+\t.direction \u003d \"out\"\t\t\\\n+},\t\t\t\t\t\\\n+CLNT_V3NLM_OPS_REPLY,\t\t\t\\\n+{\t\t\t\t\t\\\n+\t.name \u003d \"clnt_v4\",\t\t\\\n+\t.type \u003d \"b\",\t\t\t\\\n+\t.direction \u003d \"out\"\t\t\\\n+},\t\t\t\t\t\\\n+CLNT_V4_OPS_REPLY,\t\t\t\\\n+{\t\t\t\t\t\\\n+\t.name \u003d \"clnt_cmp\",\t\t\\\n+\t.type \u003d \"b\",\t\t\t\\\n+\t.direction \u003d \"out\"\t\t\\\n+},\t\t\t\t\t\\\n+CLNT_CMP_OPS_REPLY",
+      "revId": "fde8b7c4da096bd6d70583f529c177ed2c2cbfdb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
