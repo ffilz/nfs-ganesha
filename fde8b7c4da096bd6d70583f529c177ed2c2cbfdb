@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "9e7171e2_cced9248",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-12-05T13:26:14Z",
+      "side": 1,
+      "message": "I wonder if we should revisit the config for these stats.  It\u0027s grown ad-hoc, and doesn\u0027t seem to make much sense to me.  What\u0027s \"Full\" vs. \"AllOps\", for example?  How about a default set on, the rest off, and the fine-grained control via ganesha_stats?  Or maybe some form of flagset on a single option that turns coherent sets on and off?  (Note, this may not be a gating factor for this commit, but let\u0027s discuss.)",
+      "revId": "fde8b7c4da096bd6d70583f529c177ed2c2cbfdb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "449f9dc5_1a77d876",
         "filename": "src/include/server_stats_private.h",
         "patchSetId": 1
