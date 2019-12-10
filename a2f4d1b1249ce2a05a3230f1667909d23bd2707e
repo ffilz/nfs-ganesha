@@ -52,6 +52,24 @@
       "revId": "a2f4d1b1249ce2a05a3230f1667909d23bd2707e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c528ae90_c819767e",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1015438
+      },
+      "writtenOn": "2019-12-10T13:30:56Z",
+      "side": 1,
+      "message": "Now that we introduced a new block checking only for \"no_dispatch\"...maybe we can remove this existing block \"else if (reqdata-\u003esvc.rq_msg.RPCM_ack.ar_verf.oa_flavor)\" totally.\n\nIf that is fine..I can post another patch for it.",
+      "parentUuid": "6aceb6d0_8f09f02b",
+      "revId": "a2f4d1b1249ce2a05a3230f1667909d23bd2707e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
