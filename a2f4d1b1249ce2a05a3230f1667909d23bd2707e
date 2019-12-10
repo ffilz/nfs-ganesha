@@ -34,6 +34,24 @@
       "revId": "a2f4d1b1249ce2a05a3230f1667909d23bd2707e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aceb6d0_8f09f02b",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-10T09:45:43Z",
+      "side": 1,
+      "message": "Comments in the code say that the auth flavor is correctly set if svc_auth_authenticate() returns AUTH_OK. If this is indeed the case, then there is no need for this patch at all (where it checks \"no_dispatch\" in the \"else\" part of the \"if statement\").\n\nIt looks as though that this auth flavor is correctly set only if the function returns AUTH_OK and no_dispatch is false and this is indeed RPCSEC_GSS.\n\nWhy can\u0027t we use svc.rq_verf.oa_flavor as in older Ganesha releases?",
+      "parentUuid": "0cf2be2f_2a7b8da3",
+      "revId": "a2f4d1b1249ce2a05a3230f1667909d23bd2707e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
