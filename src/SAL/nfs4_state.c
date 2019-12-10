@@ -492,7 +492,6 @@ void _state_del_locked(state_t *state, const char *func, int line)
 #endif
 
 	/* Don't cleanup when ref is dropped, as this could recurse into here.
-	 * Caller must have a ref anyway.
 	 */
 	obj->state_hdl->no_cleanup = true;
 
@@ -514,9 +513,9 @@ void _state_del_locked(state_t *state, const char *func, int line)
 	/* Remove the sentinel reference */
 	dec_state_t_ref(state);
 
-	obj->obj_ops->put_ref(obj);
-	/* Can cleanup now */
+	/* We're unlinked. Can cleanup now */
 	obj->state_hdl->no_cleanup = false;
+	obj->obj_ops->put_ref(obj);
 }
 
 /**
