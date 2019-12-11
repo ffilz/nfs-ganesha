@@ -16,6 +16,24 @@
       "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3b0cb17_66f2afc2",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-12-11T13:53:41Z",
+      "side": 1,
+      "message": "This raises an interesting point.  Yes, the state_lock *should* be held on this obj, but I\u0027m not sure it is in this case.  The call stack here comes from nfs4_op_close(), which got it\u0027s state from nfs4_Check_Stateid().  This looks up a state by ID, with no reference to the obj that owns it.  It *should* be owned by data-\u003ecurrent_obj.  It gets a ref on the actual owner obj, but drops it again quickly.  What if the stateID doesn\u0027t match a state on the current object?",
+      "parentUuid": "f4bcd74d_38d36a33",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
