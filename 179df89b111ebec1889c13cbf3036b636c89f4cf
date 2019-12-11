@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4bcd74d_38d36a33",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-11T10:45:35Z",
+      "side": 1,
+      "message": "Looks like the \"obj\" is getting freed here due to its refcount going to zero?  We do hold obj-\u003estate_hdl-\u003estate_lock while calling this function. The caller will access the lock to unlock which should have been freed here, correct?",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
