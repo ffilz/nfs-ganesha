@@ -52,6 +52,24 @@
       "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c329bdbe_b39e4aa2",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-12-11T18:08:31Z",
+      "side": 1,
+      "message": "I think the issue may be this:  The handle was made invalid (mdcache_kill_entry() was called).  Usually, this is because of something the FSAL did, like return EINVAL.  However, something was using the handle, so it wasn\u0027t immediately cleaned up.  A new close op came in, and the putfh associated with it made a new handle (since the old one was unlinked).  It then looked up the state ID, and got back the old handle (linked from the state).  Therefore, the state lock and ref that nfs4_op_close() kept on the new handle didn\u0027t protect the old handle, which was freed as soon as the state\u0027s last ref was dropped.\n\nDoes this seem sane?  If so, I think we need to return the correct handle out of nfs4_Check_Stateid(), and keep a ref on it, and use it for locking.",
+      "parentUuid": "bbc8cab2_eaecc1b1",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
