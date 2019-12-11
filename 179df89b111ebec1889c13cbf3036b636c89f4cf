@@ -34,6 +34,24 @@
       "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbc8cab2_eaecc1b1",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-11T15:01:02Z",
+      "side": 1,
+      "message": "Should we do pointer comparison of obj and obj2 instead of the following? The following check does compare file handles, so this is an issue if there are multiple objects with same handle (which was true with GPFS in the past, but at least we tried to avoid in 2.7).\n\n/* Sanity check : Is this the right file ? */\n        if (fsal_obj \u0026\u0026 !fsal_obj-\u003eobj_ops-\u003ehandle_cmp(fsal_obj, obj2)) {",
+      "parentUuid": "a3b0cb17_66f2afc2",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
