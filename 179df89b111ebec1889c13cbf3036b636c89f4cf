@@ -106,6 +106,24 @@
       "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d03deb05_ecc4ee19",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2019-12-12T18:14:32Z",
+      "side": 1,
+      "message": "Some thoughts here:\n1. The caller of nfs4_Check_Stateid doesn\u0027t always pass data-\u003ecurrent_obj, sometimes it passes obj which has been set from data-\u003ecurrent_obj, so if you changed that, there might be problems, we\u0027d need to fix all those callers.\n\n2. If fsal_obj (which is either NULL, obj, or data-\u003ecurrent_obj) doesn\u0027t match obj2 because a new object got created when the old one went stale, maybe the stateid should be made stale also? So if fsal_obj is non-NULL and doesn\u0027t match obj2, maybe that\u0027s a stale stateid?\n\nHmm, the handle_cmp was introduced during the conversion of cache_inode to FSAL_MDCACHE... \n\nIn commit: cafbe60c47c4ed4ac4abe8f78083d88f4e5bbbec - Napalm - Rip out cache_inode\nsee:\n        /* Sanity check : Is this the right file ? */\n-       if ((entry !\u003d NULL) \u0026\u0026 (entry2 !\u003d entry)) {\n+       if (fsal_obj \u0026\u0026 !fsal_obj-\u003eobj_ops.handle_cmp(fsal_obj, obj2)) {\n\nI think we can safely revert to a pointer comparison. This is all at the protocol level and this should only ever have MDCACHE objs.",
+      "parentUuid": "15688f2d_f910bd3f",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
