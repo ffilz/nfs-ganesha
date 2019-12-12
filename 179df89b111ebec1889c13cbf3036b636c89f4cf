@@ -88,6 +88,24 @@
       "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15688f2d_f910bd3f",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-12T05:35:35Z",
+      "side": 1,
+      "message": "I was thinking the same about a file being deleted before the close may get us into this or some other scenario. Should we just call set_current_entry(data, obj2) if they differ in nfs4_Check_Stateid()?",
+      "parentUuid": "1178917d_46283776",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
