@@ -70,6 +70,24 @@
       "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1178917d_46283776",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-12T05:20:36Z",
+      "side": 1,
+      "message": "The obj and data-\u003ecurrent_obj are indeed different from the crash, but have same fileid (inode). Will look at it further.",
+      "parentUuid": "bbc8cab2_eaecc1b1",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
