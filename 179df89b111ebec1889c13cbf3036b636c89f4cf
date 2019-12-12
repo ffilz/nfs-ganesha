@@ -124,6 +124,24 @@
       "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1991ddf6_cbef18b7",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-12-12T18:25:22Z",
+      "side": 1,
+      "message": "Apparently I never posted my last comment.  \u003csigh\u003e  I wasn\u0027t planning on changing current_obj, I don\u0027t think we should ever change that outside of putfh.  I was planning on adding another returned obj, that the caller would be responsible for putting the ref on it.\n\nThe handle_cmp was specifically added to handle the case where the handle changed for some reason between calls.  I believe that was before the state kept a ref on the obj, but in this case, I think it\u0027s still doing the right thing.\n\nI don\u0027t think we want to return an error, I think we want to close the state on the old handle, so we don\u0027t leak handles (and FDs).",
+      "parentUuid": "d03deb05_ecc4ee19",
+      "revId": "179df89b111ebec1889c13cbf3036b636c89f4cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
