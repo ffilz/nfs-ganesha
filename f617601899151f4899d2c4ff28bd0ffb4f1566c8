@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c788ad7_67d7afcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-16T07:10:22Z",
+      "side": 1,
+      "message": "What is the use case? Would like to see how this gets used. There was some effort to push extended attributes into NFS, do we know which version has them? Also, Ganesha doesn\u0027t support POSIX ACLs.",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ed3ebc9_b9ec49ef",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-16T07:10:22Z",
+      "side": 1,
+      "message": "Someone needs to remember the size if the buffer is passed around? Why not put in the acl_ea_header?",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "368e50f0_cc731744",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-16T07:10:22Z",
+      "side": 1,
+      "message": "Why not pass acl_ea_header instead of void * ?",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7142aaf3_a2b9aa9b",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-16T07:10:22Z",
+      "side": 1,
+      "message": "typedefs are discourages unless there is a clear benefit. Why not use struct acl_ea_header...",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "529ec855_19f9c3dc",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-16T07:10:22Z",
+      "side": 1,
+      "message": "Why not use ea_entry \u003d \u0026ea_header-\u003ea_entries[0]",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dd02afe_d2234412",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-16T07:10:22Z",
+      "side": 1,
+      "message": "Can value be NULL? If not, remove this and let the code crash if there is a bug.",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "530dc566_1a3907bd",
+        "filename": "src/include/posix_acls.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-16T07:10:22Z",
+      "side": 1,
+      "message": "I don\u0027t see this getting used in the current patch, but you should use it!",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
