@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "1adc1e86_2b8636a4",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-16T12:14:02Z",
+      "side": 1,
+      "message": "Maybe use a_entries[0] to have better readability. 😊",
+      "parentUuid": "f29f0489_e30c91ad",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0dd02afe_d2234412",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 4
