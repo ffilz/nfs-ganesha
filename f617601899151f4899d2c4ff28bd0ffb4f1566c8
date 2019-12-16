@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9b0ec802_90e8008e",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-16T12:03:48Z",
+      "side": 1,
+      "message": "We always need calculate the ACL count by xattr size, because we don\u0027t know the ACL count in a buffer.",
+      "parentUuid": "4ed3ebc9_b9ec49ef",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "368e50f0_cc731744",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 4
@@ -65,6 +83,24 @@
       "writtenOn": "2019-12-16T07:10:22Z",
       "side": 1,
       "message": "Why not pass acl_ea_header instead of void * ?",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a027e3a_835d70d9",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-16T12:03:48Z",
+      "side": 1,
+      "message": "In fact, the *value is acl_ea_header+acl_ea_entries, and the acl_ea_entries can be is zero or more.",
+      "parentUuid": "368e50f0_cc731744",
       "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -88,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "25779ea3_a3f06e1c",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-16T12:03:48Z",
+      "side": 1,
+      "message": "Only less input than \"struct acl_ea_header\".",
+      "parentUuid": "7142aaf3_a2b9aa9b",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "529ec855_19f9c3dc",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 4
@@ -99,6 +153,24 @@
       "writtenOn": "2019-12-16T07:10:22Z",
       "side": 1,
       "message": "Why not use ea_entry \u003d \u0026ea_header-\u003ea_entries[0]",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f29f0489_e30c91ad",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-16T12:03:48Z",
+      "side": 1,
+      "message": "It\u0027s OK also that uses a_entries[0] in here. I think that current usage has better readability.",
+      "parentUuid": "529ec855_19f9c3dc",
       "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
