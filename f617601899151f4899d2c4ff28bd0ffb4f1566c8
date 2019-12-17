@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "f89ab54b_d33913e4",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-17T01:00:55Z",
+      "side": 1,
+      "message": "The API is a generic interface, any value can be passed to the API. If the value is set as NULL and passed to the API, we will return NULL to caller instead of crash(Because illegal access).",
+      "parentUuid": "0dd02afe_d2234412",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "530dc566_1a3907bd",
         "filename": "src/include/posix_acls.h",
         "patchSetId": 4
