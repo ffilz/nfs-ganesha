@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "5fd6f1ca_34cd5073",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-18T09:16:29Z",
+      "side": 1,
+      "message": "Yes. I see, you\u0027re right. So we may replace \"const void *value\" with \"const acl_ea_header *ea_header\", and that \"if (!value)\" could be removed also. Good idea. Thanks.",
+      "parentUuid": "2d993f86_f0b7b420",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7142aaf3_a2b9aa9b",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 4
@@ -172,6 +190,24 @@
       "side": 1,
       "message": "Linux coding style recommends to use struct which ganesha follows. \"less input\" is not something anyone should care!",
       "parentUuid": "25779ea3_a3f06e1c",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bfa4f52_edb448fe",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-18T09:16:29Z",
+      "side": 1,
+      "message": "OK. We\u0027ll follow this coding style.",
+      "parentUuid": "8be1d086_2434dd56",
       "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -314,6 +350,24 @@
       "side": 1,
       "message": "Do you have a real use for passing NULL here? If not, no code will intentionally pass NULL and this is really going to be a dead-code. This kind of thing is useful in Linux kernel code where buggy modules could pass NULLs and you don\u0027t want Linux kernel to crash. I am OK if you keep it but I would rather crash the daemon in this buggy case and fix the bug.",
       "parentUuid": "f89ab54b_d33913e4",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67e8dc4f_cc4e0f00",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2019-12-18T09:16:29Z",
+      "side": 1,
+      "message": "When we use the API, the NULL isn\u0027t passed to it. Indeed, this is a dead-code in our case.",
+      "parentUuid": "3afdd86b_4b0e9936",
       "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
