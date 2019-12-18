@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "2d993f86_f0b7b420",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-18T08:31:25Z",
+      "side": 1,
+      "message": "So? How is \"void *\" better than acl_ea_header? In fact, you have a_entries (flexible array) declaration as part of the acl_ea_header itself.",
+      "parentUuid": "7a027e3a_835d70d9",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7142aaf3_a2b9aa9b",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 4
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Only less input than \"struct acl_ea_header\".",
       "parentUuid": "7142aaf3_a2b9aa9b",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8be1d086_2434dd56",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-18T08:31:25Z",
+      "side": 1,
+      "message": "Linux coding style recommends to use struct which ganesha follows. \"less input\" is not something anyone should care!",
+      "parentUuid": "25779ea3_a3f06e1c",
       "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -213,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "19970f2e_fdcaf0c5",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-18T08:31:25Z",
+      "side": 1,
+      "message": "\u0026ea_header-\u003ea_entries[0] AND (ea_header + 1) may NOT point to the same area (you should be OK as long as you are consistent every time though).  See https://en.wikipedia.org/wiki/Flexible_array_member\n\nYou did make this change anyway, so just an FYI.",
+      "parentUuid": "228b0d73_7ef972cd",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0dd02afe_d2234412",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 4
@@ -242,6 +296,24 @@
       "side": 1,
       "message": "The API is a generic interface, any value can be passed to the API. If the value is set as NULL and passed to the API, we will return NULL to caller instead of crash(Because illegal access).",
       "parentUuid": "0dd02afe_d2234412",
+      "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3afdd86b_4b0e9936",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2019-12-18T08:31:25Z",
+      "side": 1,
+      "message": "Do you have a real use for passing NULL here? If not, no code will intentionally pass NULL and this is really going to be a dead-code. This kind of thing is useful in Linux kernel code where buggy modules could pass NULLs and you don\u0027t want Linux kernel to crash. I am OK if you keep it but I would rather crash the daemon in this buggy case and fix the bug.",
+      "parentUuid": "f89ab54b_d33913e4",
       "revId": "f617601899151f4899d2c4ff28bd0ffb4f1566c8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
