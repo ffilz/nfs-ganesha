@@ -77,7 +77,7 @@ struct ceph_fsal_module CephFSM = {
 			.maxlink = 1024,
 			.maxnamelen = NAME_MAX,
 			.maxpathlen = PATH_MAX,
-			.acl_support = 0,
+			.acl_support = FSAL_ACLSUPPORT_ALLOW,
 			.supported_attrs = CEPH_SUPPORTED_ATTRS,
 		#ifdef USE_FSAL_CEPH_SETLK
 			.lock_support = true,
