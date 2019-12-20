@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cec00756_2ded1696",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2019-12-20T13:36:20Z",
+      "side": 1,
+      "message": "This is not generally how build options work in Ganesha.  Rather than just checking to see if something exists, we have an option that we use do determine if something should exist.  The GOPT framework allows a default, or a force on or a force off.  If the feature is forced on, then CMake will fail if the dependencies are missing.  Please use this framework instead of just turning things on or off based on library availability.",
+      "revId": "9ef46cb74bf0460045f24349208049926f2446e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
