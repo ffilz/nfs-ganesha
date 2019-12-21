@@ -155,6 +155,7 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	state_t *state_found = NULL;
 	/* The open owner of the open state being closed */
 	state_owner_t *open_owner = NULL;
+	struct fsal_obj_handle *state_obj;
 	/* Iterator over the state list */
 	struct glist_head *glist = NULL;
 	/* Secondary safe iterator to continue traversal on delete */
@@ -218,6 +219,11 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 		goto out3;
 	}
 
+	/* We hold the state, so state object can't go away as long as
+	 * the state is with us!
+	 */
+	state_obj = state_found->state_obj;
+
 	PTHREAD_MUTEX_lock(&open_owner->so_mutex);
 
 	/* Check seqid */
@@ -225,7 +231,7 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 		if (!Check_nfs4_seqid(open_owner,
 				      arg_CLOSE4->seqid,
 				      op,
-				      data->current_obj,
+				      state_obj,
 				      resp,
 				      close_tag)) {
 			/* Response is all setup for us and LogDebug
@@ -238,7 +244,7 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 
 	PTHREAD_MUTEX_unlock(&open_owner->so_mutex);
 
-	PTHREAD_RWLOCK_wrlock(&data->current_obj->state_hdl->state_lock);
+	PTHREAD_RWLOCK_wrlock(&state_obj->state_hdl->state_lock);
 
 	/* Check is held locks remain */
 	glist_for_each(glist, &state_found->state_data.share.share_lockstates) {
@@ -255,7 +261,7 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 			res_CLOSE4->status = NFS4ERR_LOCKS_HELD;
 
 			PTHREAD_RWLOCK_unlock(
-				&data->current_obj->state_hdl->state_lock);
+				&state_obj->state_hdl->state_lock);
 			LogDebug(COMPONENT_STATE,
 				 "NFS4 Close with existing locks");
 			goto out;
@@ -291,11 +297,18 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 		state_del_locked(lock_state);
 	}
 
+	PTHREAD_RWLOCK_unlock(&state_obj->state_hdl->state_lock);
+	res_CLOSE4->status = NFS4_OK;
+
 	/* File is closed, release the corresponding state. If the FSAL
 	 * supports extended ops, this will result in closing any open files
 	 * the FSAL has for this state.
+	 *
+	 * state_obj may cease to exist after deleting the state, poison
+	 * the pointer!
 	 */
-	state_del_locked(state_found);
+	state_obj = NULL;
+	state_del(state_found);
 
 	/* Poison the current stateid */
 	data->current_stateid_valid = false;
@@ -303,17 +316,8 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	if (data->minorversion > 0)
 		cleanup_layouts(data);
 
-	/* Fill in the clientid for NFSv4.0 */
-	if (data->minorversion == 0) {
-		op_ctx->clientid =
-		    &open_owner->so_owner.so_nfs4_owner.so_clientid;
-	}
-
 	if (data->minorversion == 0)
 		op_ctx->clientid = NULL;
-
-	PTHREAD_RWLOCK_unlock(&data->current_obj->state_hdl->state_lock);
-	res_CLOSE4->status = NFS4_OK;
 
 	if (isFullDebug(COMPONENT_STATE) && isFullDebug(COMPONENT_MEMLEAKS)) {
 		nfs_State_PrintAll();
