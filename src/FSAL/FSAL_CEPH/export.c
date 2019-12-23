@@ -315,6 +315,16 @@ static fsal_status_t get_fs_dynamic_info(struct fsal_export *export_pub,
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+#ifdef CEPHFS_POSIX_ACL
+static fsal_aclsupp_t fs_acl_support(struct fsal_export *exp_hdl)
+{
+	if (NFS_ACL_SUPPORT)
+		return fsal_acl_support(&exp_hdl->fsal->fs_info);
+	else
+		return 0;
+}
+#endif				/* CEPHFS_POSIX_ACL */
+
 void ceph_prepare_unexport(struct fsal_export *export_pub)
 {
 	struct ceph_export *export =
@@ -354,6 +364,9 @@ void export_ops_init(struct export_ops *ops)
 	ops->get_fs_dynamic_info = get_fs_dynamic_info;
 	ops->alloc_state = ceph_alloc_state;
 	ops->free_state = ceph_free_state;
+#ifdef CEPHFS_POSIX_ACL
+	ops->fs_acl_support = fs_acl_support;
+#endif				/* CEPHFS_POSIX_ACL */
 #ifdef CEPH_PNFS
 	export_ops_pnfs(ops);
 #endif				/* CEPH_PNFS */
