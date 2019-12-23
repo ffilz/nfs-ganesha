@@ -47,12 +47,20 @@
 #include <uuid/uuid.h>
 #include "statx_compat.h"
 #include "FSAL/fsal_commonlib.h"
+#ifdef CEPHFS_POSIX_ACL
+#include "nfs_exports.h"
+#endif				/* CEPHFS_POSIX_ACL */
 
 /* Max length of a user_id string that we pass to ceph_mount */
 #define MAXUIDLEN	(64)
 
 /* Max length of a secret key for this user */
 #define MAXSECRETLEN	(88)
+
+#ifdef CEPHFS_POSIX_ACL
+/* Flags to determine if ACLs are supported */
+#define NFS_ACL_SUPPORT (!op_ctx_export_has_option(EXPORT_OPTION_DISABLE_ACL))
+#endif				/* CEPHFS_POSIX_ACL */
 
 /**
  * Ceph Main (global) module object
