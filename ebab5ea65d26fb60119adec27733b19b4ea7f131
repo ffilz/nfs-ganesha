@@ -16,6 +16,24 @@
       "revId": "ebab5ea65d26fb60119adec27733b19b4ea7f131",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5920a68_7bf892c2",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1603,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-01-02T13:54:03Z",
+      "side": 1,
+      "message": "Ganesha only supports NFSv3 and NFSv4. If it doesn\u0027t support NFSv4, it better support NFSv3 or just not come up while processing such config. And vice versa.\n\nI will let the code flow fall through as you indicated though.",
+      "parentUuid": "59a7a0c2_3fd5f067",
+      "revId": "ebab5ea65d26fb60119adec27733b19b4ea7f131",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
