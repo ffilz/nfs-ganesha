@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59a7a0c2_3fd5f067",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1603,
+      "author": {
+        "id": 1017468
+      },
+      "writtenOn": "2020-01-02T10:02:14Z",
+      "side": 1,
+      "message": "Note that even if `!(NFS_options \u0026 CORE_OPTION_NFSV3)`, you\u0027ll still return as if it does support NFS_V3.\nI think it would be better to just let the flow fall through to the `nfs_rpc_novers()` section below which takes care of filling it out properly.",
+      "revId": "ebab5ea65d26fb60119adec27733b19b4ea7f131",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
