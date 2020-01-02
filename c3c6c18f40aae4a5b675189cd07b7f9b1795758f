@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09bb8dc8_cb4e99c3",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 12
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-01-02T14:44:12Z",
+      "side": 1,
+      "message": "Do we really want to disable CEPH if we can\u0027t find libacl?  Usually, we\u0027d just disable CEPHFS_POSIX_ACL.  I see this is just copied from the GLUSTER section, but GLUSTER is different, since it has full support for ACLs, and requires them for proper operation.",
+      "revId": "c3c6c18f40aae4a5b675189cd07b7f9b1795758f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
