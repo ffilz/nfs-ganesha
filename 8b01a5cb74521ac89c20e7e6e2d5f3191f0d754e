@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ae066b3_db2966a4",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2020-01-03T17:42:19Z",
+      "side": 1,
+      "message": "As we now do PTHREAD_RWLOCK_wrlock(\u0026state_obj-\u003estate_hdl-\u003estate_lock);\nSo for unlock we should use \"\u0026state_obj\" instead of \"\u0026data-\u003ecurrent_obj\"",
+      "revId": "8b01a5cb74521ac89c20e7e6e2d5f3191f0d754e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
