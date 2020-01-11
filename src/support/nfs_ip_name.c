@@ -41,6 +41,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include "idmapper.h"
 
 /* Hashtable used to cache the hostname, accessed by their IP addess */
 hash_table_t *ht_ip_name;
@@ -150,13 +151,20 @@ int nfs_ip_name_add(sockaddr_t *ipaddr, char *hostname, size_t maxsize)
 	char ipstring[SOCK_NAME_MAX];
 	char *hn = hostname;
 	hash_error_t hash_rc;
+	struct timespec s_time, e_time;
 
 	gettimeofday(&tv0, NULL);
 
+	if (nfs_param.core_param.enable_AUTHSTATS)
+		now(&s_time);
 	/* Speculatively get the hostname into our caller's buffer... */
 	rc = getnameinfo((struct sockaddr *)ipaddr, sizeof(sockaddr_t),
 			 hostname, maxsize,
 			 NULL, 0, 0);
+	if (nfs_param.core_param.enable_AUTHSTATS) {
+		now(&e_time);
+		dns_stats_update(&s_time, &e_time);
+	}
 	gettimeofday(&tv1, NULL);
 	timersub(&tv1, &tv0, &dur);
 
