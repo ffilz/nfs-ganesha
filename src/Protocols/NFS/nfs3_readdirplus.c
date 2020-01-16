@@ -134,8 +134,7 @@ int nfs3_readdirplus(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			  "");
 
 	/* to avoid setting it on each error case */
-	res->res_readdir3.READDIR3res_u.resfail.dir_attributes.attributes_follow
-		= FALSE;
+	resfail->dir_attributes.attributes_follow = FALSE;
 
 	memset(&tracker, 0, sizeof(tracker));
 
