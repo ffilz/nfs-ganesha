@@ -1051,13 +1051,6 @@ void complete_nfs4_compound(compound_data_t *data, int status,
 	if (status != NFS4_OK)
 		LogDebug(COMPONENT_NFS_V4, "End status = %s lastindex = %d",
 			 nfsstat4_to_str(status), data->oppos);
-
-	/* release current active export in op_ctx. */
-	if (op_ctx->ctx_export) {
-		put_gsh_export(op_ctx->ctx_export);
-		op_ctx->ctx_export = NULL;
-		op_ctx->fsal_export = NULL;
-	}
 }
 
 static enum xprt_stat nfs4_compound_resume(struct svc_req *req)
@@ -1425,8 +1418,9 @@ void nfs4_Compound_Free(nfs_res_t *res)
  */
 void compound_data_Free(compound_data_t *data)
 {
-	if (data == NULL)
-		return;
+	if (data == NULL) {
+		goto out;
+	}
 
 	/* Release refcounted cache entries */
 	set_current_entry(data, NULL);
@@ -1460,6 +1454,14 @@ void compound_data_Free(compound_data_t *data)
 		gsh_free(data->savedFH.nfs_fh4_val);
 
 	gsh_free(data);
+out:
+	/* release current active export in op_ctx. */
+	if (op_ctx->ctx_export) {
+		put_gsh_export(op_ctx->ctx_export);
+		op_ctx->ctx_export = NULL;
+		op_ctx->fsal_export = NULL;
+	}
+
 }				/* compound_data_Free */
 
 /**
