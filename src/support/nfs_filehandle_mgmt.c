@@ -360,7 +360,9 @@ int nfs3_Is_Fh_Invalid(nfs_fh3 *fh3)
 	    || pfile_handle->fhversion != GANESHA_FH_VERSION
 	    || fh3->data.data_len < offsetof(file_handle_v3_t, fsopaque)
 	    || fh3->data.data_len > NFS3_FHSIZE
-	    || fh3->data.data_len != nfs3_sizeof_handle(pfile_handle)) {
+	    || fh3->data.data_len != nfs3_sizeof_handle(pfile_handle)
+	    || fh3->data.data_len < offsetof(file_handle_v3_t, fsopaque) +
+					pfile_handle->fs_len) {
 		if (isInfo(COMPONENT_FILEHANDLE)) {
 			if (pfile_handle == NULL) {
 				LogInfo(COMPONENT_FILEHANDLE,
@@ -392,6 +394,13 @@ int nfs3_Is_Fh_Invalid(nfs_fh3 *fh3)
 					"INVALID HANDLE: data.data_len=%d, should be %d",
 					fh3->data.data_len,
 					(int)nfs3_sizeof_handle(pfile_handle));
+			} else if (fh3->data.data_len <
+				   offsetof(file_handle_v3_t, fsopaque) +
+					   pfile_handle->fs_len) {
+				LogInfo(COMPONENT_FILEHANDLE,
+					"INVALID HANDLE: data.data_len=%d, fs_len=%d",
+					fh3->data.data_len,
+					pfile_handle->fs_len);
 			}
 		}
 
