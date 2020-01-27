@@ -131,10 +131,10 @@ avl_dirent_set_deleted(mdcache_entry_t *entry, mdcache_dir_entry_t *v)
 				    mdcache_avl_lookup_ck(parent,
 							  chunk->next_ck,
 							  &next)) {
-					chunk = next->chunk;
 					/* We don't need the ref, we have the
 					 * content lock */
 					mdcache_lru_unref_chunk(chunk);
+					chunk = next->chunk;
 				}
 			}
 
