@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a45588a7_afb9a3cb",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-07T18:38:52Z",
+      "side": 1,
+      "message": "(I\u0027m curious what would require that one, do you have an idea?)",
+      "revId": "ee801d6f5c977374f6fca2595bcbc0f8aa65997e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bec5ab7e_4b8ef859",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-07T18:38:52Z",
+      "side": 1,
+      "message": "Most of these look like some scan of stuff in /dev with stat on everything, I wouldn\u0027t think ganesha really needs that?.\n\nWould be handy to figure what, I just tried running a vfs FSAL and according to strace it only stats block devices.. but I recall seeing all of these on a production ganesha and I just let selinux block it all, e.g. mark these as dontaudit instead of allow, without really digging where they came from... For us it\u0027d probably be better to understand a bit what does that...",
+      "revId": "ee801d6f5c977374f6fca2595bcbc0f8aa65997e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
