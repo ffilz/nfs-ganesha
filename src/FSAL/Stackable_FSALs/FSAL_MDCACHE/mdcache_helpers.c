@@ -2405,6 +2405,14 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 		 * If there's actually any readahead, chunk->next_ck will get
 		 * filled in.
 		 */
+		if (state->prev_chunk) {
+			uint64_t next_ck;
+
+			next_ck = glist_first_entry(&state->cur_chunk->dirents,
+						mdcache_dir_entry_t,
+						chunk_list)->ck;
+			state->prev_chunk->next_ck = next_ck;
+		}
 		result = DIR_READAHEAD;
 	}
 
