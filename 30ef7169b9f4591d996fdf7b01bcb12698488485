@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "060b1d9c_0dcbba7b",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "These ceph ones need to be allow, since Ganesha actually reads/writes ceph files.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12b785ca_d9c38327",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "The device_t ones probably need to be allow also.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ead71470_73ec0b6d",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "fs_t:filesystem also?",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a829887_100c8909",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "Do we want ganesha to be able to export removable devices?  If so, then this should be allow",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3ae8499_4bcd431c",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "We probably want to be able to export tmpfs, so these should be allow.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2599bebd_be2f2b02",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "virtio devices also?",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5fa2f71_27354631",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "These should definitely be allow, they\u0027re ganesha files.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46c71766_cb1510ff",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-10T15:17:09Z",
+      "side": 1,
+      "message": "This too, we need access to the rpcbind socket.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
