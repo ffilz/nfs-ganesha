@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "3a27feeb_f6e087db",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-10T15:23:57Z",
+      "side": 1,
+      "message": "The ceph ones very definitely should be allowed; I was referring to all the \u0027/dev/*\u0027 fluff with dontaudit",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6765c66_6d2abced",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-10T15:23:57Z",
+      "side": 1,
+      "message": "This one and cgroup I really don\u0027t know.\nI don\u0027t see what would need to read cgroups in the direct ganesha code, but something in ceph might?\nThe user_t file map seem \"big\" and look more like some file was mislabeled at the time you got your logs for audit2allow though and I would be curious to see what breaks if we don\u0027t allow it...",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b4c3200_646b5776",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-10T15:23:57Z",
+      "side": 1,
+      "message": "That one we probably want to allow as well, looks like state directory info setup.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12b785ca_d9c38327",
         "filename": "src/selinux/ganesha.te",
         "patchSetId": 2
@@ -30,6 +81,24 @@
       "writtenOn": "2020-02-10T15:17:09Z",
       "side": 1,
       "message": "The device_t ones probably need to be allow also.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfc4745a_5871438f",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-10T15:23:57Z",
+      "side": 1,
+      "message": "Not replying to each of Dan\u0027s comments on this section but device_t, fs_t, removable_device_t and virtio_device_t are really stuff in /dev we don\u0027t care about; I don\u0027t think anything would break if we block these.\nBut once again, I\u0027d rather understand what needs them; and why in my simple vfs setup nothing tried to access them... I do realize it\u0027s more work though, and not necessarily trivial :/",
+      "parentUuid": "12b785ca_d9c38327",
       "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -70,6 +139,23 @@
     },
     {
       "key": {
+        "uuid": "a15d0877_98cd7742",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-10T15:23:57Z",
+      "side": 1,
+      "message": "sysfs might be some ceph thing too?",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d3ae8499_4bcd431c",
         "filename": "src/selinux/ganesha.te",
         "patchSetId": 2
@@ -81,6 +167,24 @@
       "writtenOn": "2020-02-10T15:17:09Z",
       "side": 1,
       "message": "We probably want to be able to export tmpfs, so these should be allow.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bacef81_38284d9b",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-10T15:23:57Z",
+      "side": 1,
+      "message": "yes to this one.",
+      "parentUuid": "d3ae8499_4bcd431c",
       "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -132,6 +236,23 @@
       "writtenOn": "2020-02-10T15:17:09Z",
       "side": 1,
       "message": "This too, we need access to the rpcbind socket.",
+      "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b767172d_a8db0513",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-02-10T15:23:57Z",
+      "side": 1,
+      "message": "This one isn\u0027t about accessing rpcbind, but about rpcbind setting up the listener; it\u0027s weird to see it here imo.",
       "revId": "30ef7169b9f4591d996fdf7b01bcb12698488485",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
