@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "df7d9495_683b8859",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2020-02-10T14:32:49Z",
+      "side": 1,
+      "message": "Nope. :-/",
+      "parentUuid": "a45588a7_afb9a3cb",
+      "revId": "ee801d6f5c977374f6fca2595bcbc0f8aa65997e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bec5ab7e_4b8ef859",
         "filename": "src/selinux/ganesha.te",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-02-07T18:38:52Z",
       "side": 1,
       "message": "Most of these look like some scan of stuff in /dev with stat on everything, I wouldn\u0027t think ganesha really needs that?.\n\nWould be handy to figure what, I just tried running a vfs FSAL and according to strace it only stats block devices.. but I recall seeing all of these on a production ganesha and I just let selinux block it all, e.g. mark these as dontaudit instead of allow, without really digging where they came from... For us it\u0027d probably be better to understand a bit what does that...",
+      "revId": "ee801d6f5c977374f6fca2595bcbc0f8aa65997e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68a7d198_72d04a94",
+        "filename": "src/selinux/ganesha.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2020-02-10T14:32:49Z",
+      "side": 1,
+      "message": "If you think dontaudit is better I can change it to that instead.\n\nI really don\u0027t know anything about selinux policies and the selinux people have been remarkably unhelpful, despite having promised to help maintain this when it was unbundled from the selinux-policies package.",
+      "parentUuid": "bec5ab7e_4b8ef859",
       "revId": "ee801d6f5c977374f6fca2595bcbc0f8aa65997e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
