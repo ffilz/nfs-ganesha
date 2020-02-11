@@ -34,6 +34,24 @@
       "revId": "096624cdb8de4403ed355cf5623389b62efb8110",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "750a808f_29db58c2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-02-11T12:20:09Z",
+      "side": 1,
+      "message": "The chunk reaper code takes QLANE lock followed by content lock. The unref path does take the content_lock for a directory (followed by QLANE lock) while cleaning up its chunks. So what is said in the commit is true for directory objects.\n\nFrank/Dan, initially I tried checking for refcnt and directly decrementing if the refcnt was zero (comparision to 1) and call mdcache_put() otherwise (same as the existing code). This won\u0027t work as Frank noticed because two threads doing chunk reaping could increment at the same time leading to one chunk reaping thread racing with another request thread (like rmdir) that actually was trying to free the entry.  We did a similar check with other hash implementations to prevent 0-\u003e1 issue but that is done under a lock (hashtable lock). So a lock in chunk reap function while doing atomic incr/dec will work but that is unnecessary as I said for directories. I do need a comment in the code to explain it  better.",
+      "parentUuid": "3dcb2dd3_df7b2510",
+      "revId": "096624cdb8de4403ed355cf5623389b62efb8110",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
