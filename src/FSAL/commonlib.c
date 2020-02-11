@@ -1267,6 +1267,57 @@ int populate_posix_file_systems(bool force)
 	} else if (!force) {
 		LogDebug(COMPONENT_FSAL, "File systems are initialized");
 		goto out;
+	} else {
+		/* We should clean out any file systems that can't be resolved.
+		 *
+		 * @todo FSF: The code below will not work if file systems are
+		 *            ever re-indexed with re_index_fs_dev since the
+		 *            device id will not be correct. It should work ok
+		 *            in the case of duplicate skipping since it looks
+		 *            at the file system actually retained.
+		 */
+again:
+		glist_for_each(glist, &posix_file_systems) {
+			struct fsal_dev__ new_dev;
+
+			fs = glist_entry(glist, struct fsal_filesystem,
+					 filesystems);
+
+			if (fs->unclaim != NULL) {
+				/* File system is claimed by an export, skip
+				 * checking it.
+				 */
+				continue;
+			}
+
+			retval = stat(fs->path, &st);
+
+			if (retval == 0)
+				new_dev = posix2fsal_devt(st.st_dev);
+
+			if (retval < 0 || !S_ISDIR(st.st_mode) ||
+			    new_dev.major != fs->dev.major ||
+			    new_dev.minor != fs->dev.minor) {
+				/* A file system that was previously mounted no
+				 * longer is mounted. Release it and any file
+				 * systems mounted underneath it that aren't
+				 * claimed.
+				 */
+				(void) release_posix_file_system(fs,
+								 UNCLAIM_SKIP);
+
+				/* Since this may release sub-mounted file
+				 * systems, we can't trust the linked list any
+				 * more, so restart.
+				 *
+				 * Note that we MAY as a result stat file
+				 * systems that are still present multiple
+				 * times as a result, not much we can do about
+				 * that.
+				 */
+				goto again;
+			}
+		}
 	}
 
 	/* start looking for the mount point */
@@ -1410,28 +1461,68 @@ int resolve_posix_filesystem(const char *path,
 	return retval;
 }
 
-void release_posix_file_system(struct fsal_filesystem *fs)
+/**
+ * @brief release a POSIX file system and all it's children
+ *
+ * @param[in] fs         the file system to release
+ * @param[in] unclaim_ok it's ok to release claimed file systems
+ *
+ * @returns true if a child was not released because it was a claimed file
+ *               system or a child underneath was a claimed file system.
+ *
+ */
+bool release_posix_file_system(struct fsal_filesystem *fs,
+			       enum release_claims release_claims)
 {
 	struct fsal_filesystem *child_fs;
+	bool claimed = false; /* Assume no claimed children. */
 
 	if (fs->unclaim != NULL) {
-		LogWarn(COMPONENT_FSAL,
-			"Filesystem %s is still claimed",
-			fs->path);
+		if (release_claims == UNCLAIM_WARN)
+			LogWarn(COMPONENT_FSAL,
+				"Filesystem %s is still claimed",
+				fs->path);
+		else
+			LogDebug(COMPONENT_FSAL,
+				 "Filesystem %s is still claimed",
+				 fs->path);
+		if (release_claims != UNCLAIM_OK)
+			return true;
 		unclaim_fs(fs);
 	}
 
 	while ((child_fs = glist_first_entry(&fs->children,
 					     struct fsal_filesystem,
 					     siblings))) {
-		release_posix_file_system(child_fs);
+		/* If a child or child underneath was not released because it
+		 * was claimed, propagate that up.
+		 */
+		claimed |= release_posix_file_system(child_fs, release_claims);
 	}
 
-	LogDebug(COMPONENT_FSAL,
-		 "Releasing filesystem %s (%p)",
-		 fs->path, fs);
+	if (claimed) {
+		if (release_claims == UNCLAIM_WARN)
+			LogWarn(COMPONENT_FSAL,
+				"Filesystem %s had at least one child still claimed",
+				fs->path);
+		else
+			LogDebug(COMPONENT_FSAL,
+				 "Filesystem %s had at least one child still claimed",
+				 fs->path);
+		return true;
+	}
+
+	LogInfo(COMPONENT_FSAL,
+		"Removed filesystem %s namelen=%d dev=%"PRIu64".%"PRIu64
+		" fsid=0x%016"PRIx64".0x%016"PRIx64" %"PRIu64".%"PRIu64
+		" type=%s",
+		fs->path, (int) fs->namelen, fs->dev.major, fs->dev.minor,
+		fs->fsid.major, fs->fsid.minor, fs->fsid.major, fs->fsid.minor,
+		fs->type);
 	remove_fs(fs);
 	free_fs(fs);
+
+	return false;
 }
 
 void release_posix_file_systems(void)
@@ -1442,7 +1533,7 @@ void release_posix_file_systems(void)
 
 	while ((fs = glist_first_entry(&posix_file_systems,
 				       struct fsal_filesystem, filesystems))) {
-		release_posix_file_system(fs);
+		(void) release_posix_file_system(fs, UNCLAIM_WARN);
 	}
 
 	PTHREAD_RWLOCK_unlock(&fs_lock);
