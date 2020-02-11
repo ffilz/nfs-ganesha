@@ -1255,8 +1255,8 @@ int populate_posix_file_systems(bool force)
 	struct mntent *mnt;
 	struct stat st;
 	int retval = 0;
-	struct glist_head *glist;
-	struct fsal_filesystem *fs;
+	struct glist_head *glist, *glistn;
+	struct fsal_filesystem *fs, *fsn;
 
 	PTHREAD_RWLOCK_wrlock(&fs_lock);
 
@@ -1267,6 +1267,95 @@ int populate_posix_file_systems(bool force)
 	} else if (!force) {
 		LogDebug(COMPONENT_FSAL, "File systems are initialized");
 		goto out;
+	} else {
+		/* We should clean out any file systems that can't be resolved.
+		 *
+		 * @todo FSF: The code below will not work if file systems are
+		 *            ever re-indexed with re_index_fs_dev since the
+		 *            device id will not be correct. It should work ok
+		 *            in the case of duplicate skipping since it looks
+		 *            at the file system actually retained.
+		 */
+
+		glist = posix_file_systems.next;
+
+		/* Scan the list for the first top level file system that is
+		 * not claimed.
+		 *
+		 * NOTE: the following two loops are similar to
+		 *       glist_for_each_safe but instead of just taking the
+		 *       next list entry, we take the next list entry that is
+		 *       a top level file system that isn't claimed. This way
+		 *       even if the glist->next was a descendant file system
+		 *       that was going to be released, before we release a
+		 *       file system and it's descendants, we look for the next
+		 *       top level file system that is not claimed, since it's
+		 *       a top level file system it MUST NOT be released when we
+		 *       release fs and it's descendants.
+		 */
+		while (glist != &posix_file_systems) {
+			fs = glist_entry(glist,
+					 struct fsal_filesystem,
+					 filesystems);
+
+			if (fs->parent != NULL && fs->unclaim == NULL) {
+				/* Not a top level file system, skip it */
+				continue;
+			}
+
+			glist = glist->next;
+		}
+
+		/* Now, while we still have a top level file system to process
+		 */
+		while (glist != &posix_file_systems) {
+			struct fsal_dev__ new_dev;
+
+			/* First, find the NEXT top level file system that is
+			 * not claimed.
+			 */
+			glistn = glist->next;
+
+			while (glistn != &posix_file_systems) {
+				fsn = glist_entry(glistn,
+						  struct fsal_filesystem,
+						  filesystems);
+				if (fsn->parent == NULL && fsn->unclaim == NULL)
+					break;
+
+				glistn = glistn->next;
+			}
+
+			/* Now glistn/fsn is either the next top level file
+			 * system that is not claimed or glistn is
+			 * &posix_file_systems.
+			 *
+			 * fs is the file system to process now.
+			 */
+
+			retval = stat(fs->path, &st);
+
+			if (retval == 0)
+				new_dev = posix2fsal_devt(st.st_dev);
+
+			if (retval < 0 || !S_ISDIR(st.st_mode) ||
+			    new_dev.major != fs->dev.major ||
+			    new_dev.minor != fs->dev.minor) {
+				/* A file system that was previously mounted no
+				 * longer is mounted. Release it and any file
+				 * systems mounted underneath it that aren't
+				 * claimed.
+				 */
+				(void) release_posix_file_system(fs,
+								 UNCLAIM_SKIP);
+			}
+
+			/* Now ready to start processing the next top level
+			 * file system that is not claimed.
+			 */
+			glist = glistn;
+			fs = fsn;
+		}
 	}
 
 	/* start looking for the mount point */
@@ -1410,28 +1499,68 @@ int resolve_posix_filesystem(const char *path,
 	return retval;
 }
 
-void release_posix_file_system(struct fsal_filesystem *fs)
+/**
+ * @brief release a POSIX file system and all it's descendants
+ *
+ * @param[in] fs             the file system to release
+ * @param[in] release_claims what to do about claimed file systems
+ *
+ * @returns true if a descendant was not released because it was a claimed
+ *          file system or a descendant underneath was a claimed file system.
+ *
+ */
+bool release_posix_file_system(struct fsal_filesystem *fs,
+			       enum release_claims release_claims)
 {
 	struct fsal_filesystem *child_fs;
+	bool claimed = false; /* Assume no claimed children. */
 
 	if (fs->unclaim != NULL) {
-		LogWarn(COMPONENT_FSAL,
-			"Filesystem %s is still claimed",
-			fs->path);
+		if (release_claims == UNCLAIM_WARN)
+			LogWarn(COMPONENT_FSAL,
+				"Filesystem %s is still claimed",
+				fs->path);
+		else
+			LogDebug(COMPONENT_FSAL,
+				 "Filesystem %s is still claimed",
+				 fs->path);
+		if (release_claims != UNCLAIM_OK)
+			return true;
 		unclaim_fs(fs);
 	}
 
 	while ((child_fs = glist_first_entry(&fs->children,
 					     struct fsal_filesystem,
 					     siblings))) {
-		release_posix_file_system(child_fs);
+		/* If a child or child underneath was not released because it
+		 * was claimed, propagate that up.
+		 */
+		claimed |= release_posix_file_system(child_fs, release_claims);
 	}
 
-	LogDebug(COMPONENT_FSAL,
-		 "Releasing filesystem %s (%p)",
-		 fs->path, fs);
+	if (claimed) {
+		if (release_claims == UNCLAIM_WARN)
+			LogWarn(COMPONENT_FSAL,
+				"Filesystem %s had at least one child still claimed",
+				fs->path);
+		else
+			LogDebug(COMPONENT_FSAL,
+				 "Filesystem %s had at least one child still claimed",
+				 fs->path);
+		return true;
+	}
+
+	LogInfo(COMPONENT_FSAL,
+		"Removed filesystem %s namelen=%d dev=%"PRIu64".%"PRIu64
+		" fsid=0x%016"PRIx64".0x%016"PRIx64" %"PRIu64".%"PRIu64
+		" type=%s",
+		fs->path, (int) fs->namelen, fs->dev.major, fs->dev.minor,
+		fs->fsid.major, fs->fsid.minor, fs->fsid.major, fs->fsid.minor,
+		fs->type);
 	remove_fs(fs);
 	free_fs(fs);
+
+	return false;
 }
 
 void release_posix_file_systems(void)
@@ -1442,7 +1571,7 @@ void release_posix_file_systems(void)
 
 	while ((fs = glist_first_entry(&posix_file_systems,
 				       struct fsal_filesystem, filesystems))) {
-		release_posix_file_system(fs);
+		(void) release_posix_file_system(fs, UNCLAIM_WARN);
 	}
 
 	PTHREAD_RWLOCK_unlock(&fs_lock);
