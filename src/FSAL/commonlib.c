@@ -1255,7 +1255,7 @@ int populate_posix_file_systems(bool force)
 	struct mntent *mnt;
 	struct stat st;
 	int retval = 0;
-	struct glist_head *glist;
+	struct glist_head *glist, *glistn;
 	struct fsal_filesystem *fs;
 
 	PTHREAD_RWLOCK_wrlock(&fs_lock);
@@ -1267,6 +1267,46 @@ int populate_posix_file_systems(bool force)
 	} else if (!force) {
 		LogDebug(COMPONENT_FSAL, "File systems are initialized");
 		goto out;
+	} else {
+		/* We should clean out any file systems that can't be resolved.
+		 *
+		 * @todo FSF: The code below will not work if file systems are
+		 *            ever re-indexed with re_index_fs_dev since the
+		 *            device id will not be correct. It should work ok
+		 *            in the case of duplicate skipping since it looks
+		 *            at the file system actually retained.
+		 */
+		glist_for_each_safe(glist, glistn, &posix_file_systems) {
+			struct fsal_dev__ new_dev;
+
+			fs = glist_entry(glist, struct fsal_filesystem,
+					 filesystems);
+
+			retval = stat(fs->path, &st);
+
+			if (retval == 0)
+				new_dev = posix2fsal_devt(st.st_dev);
+
+			if (retval < 0 || !S_ISDIR(st.st_mode) ||
+			    new_dev.major != fs->dev.major ||
+			    new_dev.minor != fs->dev.minor) {
+				/* A file system that was previously mounted no
+				 * longer is mounted.
+				 */
+				LogInfo(COMPONENT_FSAL,
+					"Removed filesystem %s namelen=%d dev=%"
+					PRIu64".%"PRIu64" fsid=0x%016"PRIx64
+					".0x%016"PRIx64" %"PRIu64".%"PRIu64
+					" type=%s",
+					fs->path, (int) fs->namelen,
+					fs->dev.major, fs->dev.minor,
+					fs->fsid.major, fs->fsid.minor,
+					fs->fsid.major, fs->fsid.minor,
+					fs->type);
+				remove_fs(fs);
+				free_fs(fs);
+			}
+		}
 	}
 
 	/* start looking for the mount point */
