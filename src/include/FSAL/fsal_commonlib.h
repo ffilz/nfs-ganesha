@@ -124,7 +124,7 @@ int resolve_posix_filesystem(const char *path,
 
 void release_posix_file_systems(void);
 
-void release_posix_file_system(struct fsal_filesystem *fs);
+void release_posix_file_system(struct fsal_filesystem *fs, bool unclaim_ok);
 
 int re_index_fs_fsid(struct fsal_filesystem *fs,
 		     enum fsid_type fsid_type,
