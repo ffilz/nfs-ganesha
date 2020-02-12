@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d636ed2e_ad991786",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-12T15:10:30Z",
+      "side": 1,
+      "message": "So, I\u0027m not sure why this is necessary.  It looks like posix_acl_2_fsal_acl() will just return 0 if there\u0027s no ACEs in the ACL.  Is there some problem I\u0027m missing?",
+      "revId": "1ef6ac8433a6478b7c8bc7816a0c5dd1e77d87d5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbf651f4_5b61267e",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-12T15:10:30Z",
+      "side": 1,
+      "message": "This else block is wrong, it will log if new_count \u003e\u003d 0, not if e_count \u003c\u003d 0.",
+      "revId": "1ef6ac8433a6478b7c8bc7816a0c5dd1e77d87d5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
