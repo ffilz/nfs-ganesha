@@ -387,10 +387,15 @@ int ceph_get_acl(struct ceph_export *export, struct ceph_handle *objhandle,
 	acldata.aces = (fsal_ace_t *) nfs4_ace_alloc(acldata.naces);
 	pace = acldata.aces;
 
-	new_count = posix_acl_2_fsal_acl(e_acl, is_dir, false, &pace);
-	if (new_count < 0) {
-		rc = -EFAULT;
-		goto out;
+	if (e_count > 0) {
+		new_count = posix_acl_2_fsal_acl(e_acl, is_dir, false, &pace);
+		if (new_count < 0) {
+			rc = -EFAULT;
+			goto out;
+		} else {
+			LogDebug(COMPONENT_FSAL,
+				"access acl is not set for this object");
+		}
 	}
 
 	if (i_count > 0) {
