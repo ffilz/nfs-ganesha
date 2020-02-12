@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d37f151_1bf741f9",
+        "filename": "src/scripts/ganeshactl/ganesha_stats.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-02-12T15:01:49Z",
+      "side": 1,
+      "message": "Looks like python triple quoted strings is a good candidate here! Of course, not a problem with your patch as it was there before as well though.",
+      "revId": "4af9c8e992446f8e0cc9fc9b01c7ffce02fbc171",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcfc4ac1_15afca09",
+        "filename": "src/scripts/ganeshactl/ganesha_stats.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-02-12T15:01:49Z",
+      "side": 1,
+      "message": "Wondering if usage() followed by sys.exit(1) is better than having \u0027print_usage_exit\u0027 function. usage() itself will print the usage message and doesn\u0027t exit (we need to correct the existing function to not exit...)",
+      "revId": "4af9c8e992446f8e0cc9fc9b01c7ffce02fbc171",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
