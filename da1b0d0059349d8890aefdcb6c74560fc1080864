@@ -34,6 +34,24 @@
       "revId": "da1b0d0059349d8890aefdcb6c74560fc1080864",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "173f7603_dad18f9e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1306,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-13T22:09:35Z",
+      "side": 1,
+      "message": "I think I\u0027ve resolved this by calling release_posix_file_system() instead to take care of sub-mounted file systems. I added a parameter because we DON\u0027T want to unclaim in this case (and in fact want to skip any claimed sub-mounted file systems). I also put a skip of any claimed file systems.",
+      "parentUuid": "d7e36e05_02b115a7",
+      "revId": "da1b0d0059349d8890aefdcb6c74560fc1080864",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
