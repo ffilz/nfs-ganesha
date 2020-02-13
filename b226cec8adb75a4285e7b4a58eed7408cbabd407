@@ -16,6 +16,24 @@
       "revId": "b226cec8adb75a4285e7b4a58eed7408cbabd407",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84dd3bb5_ff4e2853",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-13T22:06:50Z",
+      "side": 1,
+      "message": "Yea, it changed when you moved the skipping to posix_create_filesystems from posix_create_filesystem so that it could be before the stat. I\u0027ll restore it so it catches nfs, nfs4, and nfsd",
+      "parentUuid": "9cbc4a39_d026eb79",
+      "revId": "b226cec8adb75a4285e7b4a58eed7408cbabd407",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
