@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cbc4a39_d026eb79",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-02-13T14:02:56Z",
+      "side": 1,
+      "message": "nfs4 appears as a file system too. So having strncasecmp to avoid all file systems with prefix \"nfs\" should help. BTW, I may have broken this when I changed some string compares from strncmp to strcmp!",
+      "revId": "b226cec8adb75a4285e7b4a58eed7408cbabd407",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
