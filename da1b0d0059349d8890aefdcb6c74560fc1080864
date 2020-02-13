@@ -16,6 +16,24 @@
       "revId": "da1b0d0059349d8890aefdcb6c74560fc1080864",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7e36e05_02b115a7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1306,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-13T14:30:01Z",
+      "side": 1,
+      "message": "Hmm, yea, good point. Also, we\u0027re in a pickle if we think a filesystem isn\u0027t accessible but is still exported.\n\nWe need to do something like release, but if the filesystem is claimed, leave it alone (the rescan may change something on it which may fix it)",
+      "parentUuid": "66e4b561_e7b631ff",
+      "revId": "da1b0d0059349d8890aefdcb6c74560fc1080864",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
