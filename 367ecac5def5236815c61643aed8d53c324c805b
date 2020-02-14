@@ -16,6 +16,24 @@
       "revId": "367ecac5def5236815c61643aed8d53c324c805b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3aeaf86_698a88c2",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1014817
+      },
+      "writtenOn": "2020-02-14T00:43:43Z",
+      "side": 0,
+      "message": "Yes. In the if (i_count \u003e 0) block, posix_acl_2_fsal_acl could return 1 or 2 only. The i_count will return -1 or 0 when the i_acl is NULL or no ACE.",
+      "parentUuid": "2c706bcf_aad2beb2",
+      "revId": "367ecac5def5236815c61643aed8d53c324c805b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
