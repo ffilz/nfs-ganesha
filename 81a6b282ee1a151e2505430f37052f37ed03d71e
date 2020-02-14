@@ -16,6 +16,24 @@
       "revId": "81a6b282ee1a151e2505430f37052f37ed03d71e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce4e8a9f_74ecb2cd",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-14T15:24:30Z",
+      "side": 1,
+      "message": "We won\u0027t call on a claimed file system (because the caller is already skipping claimed file systems), but if an unclaimed file system has claimed children, we won\u0027t release them.\n\nAnd crud, we need to know if it returned having skipped a claimed file system because we then can\u0027t release the parent...",
+      "parentUuid": "08e7ec33_55c34adb",
+      "revId": "81a6b282ee1a151e2505430f37052f37ed03d71e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
