@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08e7ec33_55c34adb",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-14T13:45:47Z",
+      "side": 1,
+      "message": "This means that unclaim_ok \u003d\u003d False will not recurse on claimed filesystems, and will also not release.  Is this intended?  It basically means that calling this on a claimed FS is a no-op.  In that case, we should just not call it, rather than calling with unclaim_ok \u003d\u003d False.",
+      "revId": "81a6b282ee1a151e2505430f37052f37ed03d71e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
