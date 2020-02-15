@@ -40,8 +40,19 @@ struct proxyv3_client_params {
 struct proxyv3_export {
    struct fsal_export export;
    struct proxyv3_client_params params;
+
+   char root_handle[NFS3_FHSIZE];
+   size_t root_handle_len;
 };
 
 extern struct proxyv3_fsal_module PROXY_V3;
+
+bool proxyv3_nfs_call(const char *host, const rpcproc_t nfsProc,
+                      const xdrproc_t encodeFunc, const void *args,
+                      const xdrproc_t decodeFunc, void *output);
+
+bool proxyv3_mount_call(const char *host, const rpcproc_t mountProc,
+                        const xdrproc_t encodeFunc, const void *args,
+                        const xdrproc_t decodeFunc, void *output);
 
 #endif

@@ -6,10 +6,11 @@ add_definitions(
 ########### next target ###############
 
 SET(fsalproxy_v3_LIB_SRCS
-   main.c
+  main.c
+  rpc.c
 )
 
-add_library(fsalproxy_v3 MODULE ${fsalproxy_v3_LIB_SRCS})
+add_library(fsalproxy_v3 MODULE ${fsalproxy_v3_LIB_SRCS} $<TARGET_OBJECTS:nfs_mnt_xdr>)
 add_sanitizers(fsalproxy_v3)
 
 target_link_libraries(fsalproxy_v3

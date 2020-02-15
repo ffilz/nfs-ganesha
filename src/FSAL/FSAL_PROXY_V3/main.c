@@ -22,15 +22,15 @@
 
 #include "config.h"
 
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-
 #include "fsal.h"
 #include "FSAL/fsal_commonlib.h"
 #include "FSAL/fsal_config.h"
 #include "FSAL/fsal_init.h"
+
 #include "proxyv3_fsal_methods.h"
+
+static const char* kFilestoreHost = "192.168.1.4"; // nfsd by hand
+//static const char* kFilestoreHost = "10.150.103.122"; // My filestore instance
 
 struct proxyv3_fsal_module PROXY_V3 = {
    .module = {
@@ -117,6 +117,47 @@ static fsal_status_t proxyv3_init_config(struct fsal_module *fsal_handle,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+// Given an existing export and a path, try to lookup the file or directory.
+fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
+                                  const char *path,
+                                  struct fsal_obj_handle **handle,
+                                  struct attrlist *attrs_out) {
+   LOOKUP3args args;
+   LOOKUP3res result;
+
+   struct proxyv3_export *export =
+      container_of(export_handle, struct proxyv3_export, export);
+
+   LogDebug(COMPONENT_FSAL, "PROXY_V3: Looking up path '%s'", path);
+
+   // For the *root*, pass in the root handle as the "what".
+   args.what.dir.data.data_val = export->root_handle;
+   args.what.dir.data.data_len = export->root_handle_len;
+
+   // Remove the const via cast, which is okay as args is actually
+   // const LOOKUP3arg and the callee won't modify it. TODO(boulos):
+   // Is it actually right that we have to first strip the mount point
+   // for NFSv3?
+   args.what.name = (char*) (path + strlen("/testy"));
+
+   if (!proxyv3_nfs_call(kFilestoreHost, NFSPROC3_LOOKUP,
+                         (xdrproc_t) xdr_LOOKUP3args, &args,
+                         (xdrproc_t) xdr_LOOKUP3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_call failed");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // Okay, let's see what we got.
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Got back status %u", result.status);
+
+   // TODO(boulos): Fill in the attrs_out appropriately.
+
+   return fsalstat(ERR_FSAL_INVAL, 0);
+}
+
+// Setup our NFSv3 Proxy for a given NFS Export.
 static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
                                            void *parse_node,
                                            struct config_error_type *error_type,
@@ -126,6 +167,7 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
 
    // NOTE(boulos): fsal_export_init sets the export ops to defaults.
    fsal_export_init(&export->export);
+   export->export.exp_ops.lookup_path = proxyv3_lookup_path;
 
    // Try to load the config. If it fails (say they didn't provide
    // Srv_Addr), exit early and free the allocated export.
@@ -155,6 +197,56 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
       gsh_free(export);
       return fsalstat(ERR_FSAL_INVAL, ret);
    }
+
+   // Try to mount. TODO(boulos): Grab this from the parameters.
+   mnt3_dirpath dirpath = "/testy";
+   mountres3 result;
+   memset(&result, 0, sizeof(result));
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Going to try to issue a NULL MOUNT at %s",
+            kFilestoreHost);
+
+   // Be nice and try a MOUNT NULL first.
+   if (!proxyv3_mount_call(kFilestoreHost, MOUNTPROC3_NULL,
+                           (xdrproc_t) xdr_void, NULL,
+                           (xdrproc_t) xdr_void, NULL)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_mount_call for NULL failed");
+      gsh_free(export);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Going to try to mount '%s' on %s",
+            dirpath, kFilestoreHost);
+
+   if (!proxyv3_mount_call(kFilestoreHost, MOUNTPROC3_MNT,
+                           (xdrproc_t) xdr_dirpath, &dirpath,
+                           (xdrproc_t) xdr_mountres3, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_mount_call for path '%s' failed", dirpath);
+      gsh_free(export);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   if (result.fhs_status != MNT3_OK) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Mount failed. Got back %u for path '%s'",
+              result.fhs_status, dirpath);
+      gsh_free(export);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Mount successful. Got back a %u len fhandle",
+            result.mountres3_u.mountinfo.fhandle.fhandle3_len);
+
+   // Copy the result for later use.
+   export->root_handle_len = result.mountres3_u.mountinfo.fhandle.fhandle3_len;
+   memcpy(export->root_handle,
+          result.mountres3_u.mountinfo.fhandle.fhandle3_val,
+          export->root_handle_len);
 
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
