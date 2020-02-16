@@ -30,12 +30,31 @@
 #include "proxyv3_fsal_methods.h"
 
 static unsigned rand_seed = 123451;
+static char rpcMachineName[MAXHOSTNAMELEN + 1] = { 0 };
+
+bool proxyv3_rpc_init() {
+   // Cache our hostname for client auth later.
+   if (gethostname(rpcMachineName, sizeof(rpcMachineName)) != 0) {
+      const char* kClientName = "192.168.1.2";
+
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: gethostname() failed. Errno %d (%s)."
+              "Hardcoding a client IP instead.",
+              errno, strerror(errno));
+      memcpy(rpcMachineName, kClientName, strlen(kClientName) + 1 /* For NUL */);
+   }
+
+   // TODO(boulos): Setup some buffers and mutexes for rand_seed, open
+   // sockets, etc.
+   return true;
+}
 
 
 // NOTE(boulos): This is basically rpc_call redone by hand, because
 // ganesha's "nfsd" hijacks the RPC setup to the point where we can't
 // issue our own NFS-related rpcs as a simple client.
 bool proxyv3_call(const char *host, uint16_t port,
+                  const struct user_cred *creds,
                   const rpcprog_t rpcProgram,
                   const rpcvers_t rpcVersion,
                   const rpcproc_t rpcProc,
@@ -93,20 +112,16 @@ bool proxyv3_call(const char *host, uint16_t port,
    const int kBufSize = 4096;
    char *msgbuf = gsh_calloc(1, kBufSize);
 
-   // TODO(boulos): There are lots of ways to fill in AUTH for NFS. I
-   // think we will eventually need to plumb in the optionally passed
-   // in per-user values, so keep this code here.
-#if 0
-   char machineName[MAXHOSTNAMELEN + 1] = { 0 };
-   const char* kClientName = "192.168.1.2";
-   strlcpy(machineName, kClientName, strlen(kClientName));
-
-   AUTH *au = authunix_ncreate(machineName, 0, 0, 0, NULL);
-#else
-   // Let ganesha do lots of syscalls to figure out our machiine name,
-   // uid, gid and so on.
-   AUTH *au = authunix_ncreate_default();
-#endif
+   AUTH *au;
+   if (creds != NULL) {
+      au = authunix_ncreate(rpcMachineName,
+                            creds->caller_uid, creds->caller_gid,
+                            creds->caller_glen, creds->caller_garray);
+   } else {
+      // Let ganesha do lots of syscalls to figure out our machiine name,
+      // uid, gid and so on.
+      au = authunix_ncreate_default();
+   }
 
    // We need some transaction ID, so how about a random one.
    u_int xid = rand_r(&rand_seed);
@@ -308,6 +323,7 @@ bool proxyv3_call(const char *host, uint16_t port,
 // Helpful wrappers around the generic RPC call so that we don't need
 // to repeatedly pass in the program and version constants.
 bool proxyv3_nfs_call(const char *host,
+                      const struct user_cred *creds,
                       const rpcproc_t nfsProc,
                       const xdrproc_t encodeFunc, const void *args,
                       const xdrproc_t decodeFunc, void *output) {
@@ -315,12 +331,13 @@ bool proxyv3_nfs_call(const char *host,
    const int kVersionNFSv3 = NFS_V3;
    const int kPortNFS = 2049;
 
-   return proxyv3_call(host, kPortNFS,
+   return proxyv3_call(host, kPortNFS, creds,
                        kProgramNFS, kVersionNFSv3,
                        nfsProc, encodeFunc, args, decodeFunc, output);
 }
 
 bool proxyv3_mount_call(const char *host,
+                        const struct user_cred *creds,
                         const rpcproc_t mountProc,
                         const xdrproc_t encodeFunc, const void *args,
                         const xdrproc_t decodeFunc, void *output) {
@@ -328,7 +345,7 @@ bool proxyv3_mount_call(const char *host,
    const int kVersionMountv3 = MOUNT_V3;
    const int kPortMount = 2050;
 
-   return proxyv3_call(host, kPortMount,
+   return proxyv3_call(host, kPortMount, creds,
                        kProgramMount, kVersionMountv3,
                        mountProc, encodeFunc, args, decodeFunc, output);
 }

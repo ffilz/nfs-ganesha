@@ -140,7 +140,8 @@ fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
    // for NFSv3?
    args.what.name = (char*) (path + strlen("/testy"));
 
-   if (!proxyv3_nfs_call(kFilestoreHost, NFSPROC3_LOOKUP,
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_LOOKUP,
                          (xdrproc_t) xdr_LOOKUP3args, &args,
                          (xdrproc_t) xdr_LOOKUP3res, &result)) {
       LogCrit(COMPONENT_FSAL,
@@ -208,7 +209,8 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
             kFilestoreHost);
 
    // Be nice and try a MOUNT NULL first.
-   if (!proxyv3_mount_call(kFilestoreHost, MOUNTPROC3_NULL,
+   if (!proxyv3_mount_call(kFilestoreHost, op_ctx->creds,
+                           MOUNTPROC3_NULL,
                            (xdrproc_t) xdr_void, NULL,
                            (xdrproc_t) xdr_void, NULL)) {
       LogCrit(COMPONENT_FSAL,
@@ -221,7 +223,8 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
             "PROXY_V3: Going to try to mount '%s' on %s",
             dirpath, kFilestoreHost);
 
-   if (!proxyv3_mount_call(kFilestoreHost, MOUNTPROC3_MNT,
+   if (!proxyv3_mount_call(kFilestoreHost, op_ctx->creds,
+                           MOUNTPROC3_MNT,
                            (xdrproc_t) xdr_dirpath, &dirpath,
                            (xdrproc_t) xdr_mountres3, &result)) {
       LogCrit(COMPONENT_FSAL,
@@ -256,6 +259,12 @@ MODULE_INIT void proxy_v3_init(void) {
    // Try to register our FSAL. If it fails, exit.
    if (register_fsal(&PROXY_V3.module, "PROXY_V3", FSAL_MAJOR_VERSION,
                      FSAL_MINOR_VERSION, FSAL_ID_NO_PNFS) != 0) {
+      return;
+   }
+
+   if (!proxyv3_rpc_init()) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: RPC system failed to initialize");
       return;
    }
 

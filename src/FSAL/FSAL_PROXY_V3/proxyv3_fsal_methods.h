@@ -47,11 +47,15 @@ struct proxyv3_export {
 
 extern struct proxyv3_fsal_module PROXY_V3;
 
-bool proxyv3_nfs_call(const char *host, const rpcproc_t nfsProc,
+bool proxyv3_rpc_init();
+
+bool proxyv3_nfs_call(const char *host, const struct user_cred *creds,
+                      const rpcproc_t nfsProc,
                       const xdrproc_t encodeFunc, const void *args,
                       const xdrproc_t decodeFunc, void *output);
 
-bool proxyv3_mount_call(const char *host, const rpcproc_t mountProc,
+bool proxyv3_mount_call(const char *host, const struct user_cred *creds,
+                        const rpcproc_t mountProc,
                         const xdrproc_t encodeFunc, const void *args,
                         const xdrproc_t decodeFunc, void *output);
 
