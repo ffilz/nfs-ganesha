@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "591bb734_bb967887",
+        "filename": "src/include/nfs_init.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-02-20T15:08:22Z",
+      "side": 1,
+      "message": "This is actually correct as written.  True, malloc() returned NULL, but the statement says that Ganesha assumes malloc() always returns non-NULL.  It could be clearer, but it is correct.",
+      "revId": "3fc1f5993719caa0525fd8749aacc7b09744a4e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
