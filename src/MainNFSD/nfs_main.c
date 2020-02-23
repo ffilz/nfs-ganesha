@@ -530,5 +530,11 @@ fatal_die:
 	LogFatal(COMPONENT_INIT,
 		 "Fatal errors.  Server exiting...");
 	/* NOT REACHED */
+
+	if (tempo_exec_name)
+		free(exec_name);
+	if (log_path)
+		free(log_path);
+
 	return 2;
 }
