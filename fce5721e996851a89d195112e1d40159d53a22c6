@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b1292c1_52759772",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1318,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-24T22:37:23Z",
+      "side": 1,
+      "message": "So Malahal pointed out a problem that if we have skipped claimed file systems, the loop can never terminate. One solution is that we remember the fs that made us go back and try again if release_posix_file_system returns true. We have to try again because any unclaimed file system children of this file system WERE removed so it\u0027s not safe to continue the loop. If we have a saved fs, and we hit true again, then we KNOW we\u0027re checking that fs a 2nd time, in which case all the file systems that could be released were released the first time, and thus this time none are freed and it\u0027s safe to continue the loop.\n\nOptionally the return could be an enum:\nNONE_RELEASED,\nSOME_RELEASED,\nALL_RELEASED\n\nSo if we get a NONE_RELEASED we know file systems were claimed (for other callers) but it\u0027s safe to continue the loop because no file systems were released. For SOME_RELEASED, any caller that just cares if file systems were claimed or not treats this as if at least one file system was claimed. For this loop, we must retry. ALL_RELEASED of course also means we need to retry.",
+      "revId": "fce5721e996851a89d195112e1d40159d53a22c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e31930fa_0eb227a5",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-24T22:37:23Z",
+      "side": 1,
+      "message": "Need to document release_claims instead of unclaim_ok",
+      "revId": "fce5721e996851a89d195112e1d40159d53a22c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c02a866_0e36ff0b",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-24T22:37:23Z",
+      "side": 1,
+      "message": "Replace bool claimed with enum release_result result, init to ALL_RELEASED\n(we haven\u0027t actually released anything yet, but if all goes well, we will release this fs and all it\u0027s children)",
+      "revId": "fce5721e996851a89d195112e1d40159d53a22c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8304d6a1_e34867a5",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-24T22:37:23Z",
+      "side": 1,
+      "message": "This becomes return NONE_RELEASED",
+      "revId": "fce5721e996851a89d195112e1d40159d53a22c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33d0a398_fcc4ae9d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-24T22:37:23Z",
+      "side": 1,
+      "message": "If result is SOME_RELEASED, ignore the return\nIf result is ALL_RELEASED and the return is not ALL_RELEASED, change result to return (if it was SOME_RELEASED that\u0027s true, if it\u0027s NONE_RELEASED, then we can\u0027t release this fs so if nothing changes, there will still be NONE_RELEASED)\nIf the result is NONE_RELEASED and the return is not NONE_RELEASED, change the result to SOME_RELEASED, any previous descendants were not released, but now we have at least one descendant that has been released, so now our state will be SOME_RELEASED",
+      "revId": "fce5721e996851a89d195112e1d40159d53a22c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
