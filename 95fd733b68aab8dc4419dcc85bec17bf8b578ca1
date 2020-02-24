@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "9973f1af_e86b1f5a",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2020-02-24T15:26:54Z",
+      "side": 1,
+      "message": "These changes are good from coding perspective, but with no impact.\nAnyway Ganesha is exiting so freeing up memory has no play at this stage.",
+      "revId": "95fd733b68aab8dc4419dcc85bec17bf8b578ca1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "93100932_f690c352",
         "filename": "src/MainNFSD/nfs_main.c",
         "patchSetId": 1
