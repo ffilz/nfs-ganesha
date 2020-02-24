@@ -59,4 +59,20 @@ bool proxyv3_mount_call(const char *host, const struct user_cred *creds,
                         const xdrproc_t encodeFunc, const void *args,
                         const xdrproc_t decodeFunc, void *output);
 
+
+// Helpers for translating from nfsv3 structs to Ganesha data. These could go in
+// Protocols/NFS/nfs_proto_tools.c if someone wanted them.
+
+// Return the closest match from the NFSv3 status to Ganesha's fsal_status_t
+// (mostly overlapping).
+fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status);
+
+// Convert from an NFSv3 "fattr3" (Ganesha typedef's this to attrlist, while
+// keeping fattr3_wire for the "real" one) to a Ganesha attrlist. This function
+// also checks that the fsal_attrs_out destination is only asking for NFSv3
+// attributes at most.
+bool fattr3_to_fsalattr(const fattr3 *attrs,
+                        struct attrlist *fsal_attrs_out);
+
+
 #endif

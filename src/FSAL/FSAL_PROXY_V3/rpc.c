@@ -120,6 +120,8 @@ bool proxyv3_call(const char *host, uint16_t port,
    } else {
       // Let ganesha do lots of syscalls to figure out our machiine name,
       // uid, gid and so on.
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: rpc, no creds given => authunix_ncreate_default()");
       au = authunix_ncreate_default();
    }
 

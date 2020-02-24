@@ -23,6 +23,7 @@
 #include "config.h"
 
 #include "fsal.h"
+#include "fsal_types.h"
 #include "FSAL/fsal_commonlib.h"
 #include "FSAL/fsal_config.h"
 #include "FSAL/fsal_init.h"
@@ -31,6 +32,18 @@
 
 static const char* kFilestoreHost = "192.168.1.4"; // nfsd by hand
 //static const char* kFilestoreHost = "10.150.103.122"; // My filestore instance
+
+// The little struct we want Ganesha to hold for us.
+struct proxyv3_obj_handle {
+   struct fsal_obj_handle obj;
+   nfs_fh3 fh3;
+   fattr3 attrs;
+   // Optional pointer to the parent of this object, NULL for the root.
+   const struct proxyv3_obj_handle *parent;
+};
+
+static struct proxyv3_obj_handle *kRootObjHandle;
+
 
 struct proxyv3_fsal_module PROXY_V3 = {
    .module = {
@@ -47,7 +60,7 @@ struct proxyv3_fsal_module PROXY_V3 = {
          .unique_handles = true,
          .acl_support = FSAL_ACLSUPPORT_ALLOW,
          .homogenous = true,
-         .supported_attrs = ((const attrmask_t) ATTRS_POSIX),
+         .supported_attrs = ((const attrmask_t) ATTRS_NFS3),
          .link_supports_permission_checks = true,
          .expire_time_parent = -1,
       }
@@ -117,46 +130,311 @@ static fsal_status_t proxyv3_init_config(struct fsal_module *fsal_handle,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-// Given an existing export and a path, try to lookup the file or directory.
-fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
-                                  const char *path,
-                                  struct fsal_obj_handle **handle,
-                                  struct attrlist *attrs_out) {
+
+// Given a filehandle and corresponding attributes for a given export, produce a
+// new object handle (and optionally fill-in fsal_attrs_out).
+static struct proxyv3_obj_handle *
+proxyv3_alloc_handle(struct fsal_export *export_handle,
+                     const nfs_fh3 *fh3,
+                     const fattr3 *attrs,
+                     const struct proxyv3_obj_handle *parent,
+                     struct attrlist *fsal_attrs_out) {
+   // Fill the attributes first to avoid an alloc on failure.
+   struct attrlist local_attributes;
+   struct attrlist *attrs_out;
+
+   // If we aren't given a destination, make up our own.
+   if (fsal_attrs_out != NULL) {
+      attrs_out = fsal_attrs_out;
+   } else {
+      // Pretend we are just requesting the NFSv3 attributes we can fill in.
+      memset(&local_attributes, 0, sizeof(struct attrlist));
+      attrs_out = &local_attributes;
+      FSAL_SET_MASK(attrs_out->request_mask, ATTRS_NFS3);
+   }
+
+   if (!fattr3_to_fsalattr(attrs, attrs_out)) {
+      // NOTE(boulos): The callee already warned, no need for a repeat.
+      return NULL;
+   }
+
+   // Alright, ready to go. Instead of being fancy like the NFSv4 proxy, we'll
+   // allocate the nested fh3 with an additional calloc call.
+   struct proxyv3_obj_handle *result = gsh_calloc(1, sizeof(*result));
+
+   // Copy the fh3 struct.
+   result->fh3.data.data_len = fh3->data.data_len;
+   result->fh3.data.data_val = gsh_calloc(1, fh3->data.data_len);
+   memcpy(result->fh3.data.data_val, fh3->data.data_val, fh3->data.data_len);
+
+   // Copy the NFSv3 attrs.
+   memcpy(&result->attrs, attrs, sizeof(*attrs));
+
+   fsal_obj_handle_init(&result->obj, export_handle, attrs_out->type);
+   // Just doing what pxy_alloc_handle does...
+   result->obj.fs = NULL;
+   result->obj.state_hdl = NULL;
+   result->obj.fsid = attrs_out->fsid;
+   result->obj.fileid = attrs_out->fileid;
+   result->obj.obj_ops = &PROXY_V3.handle_ops;
+
+   result->parent = parent;
+
+   return result;
+}
+
+// Given a path, parent handle, and so on, do a *single* object lookup.
+static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
+                                             const char *path,
+                                             struct fsal_obj_handle *parent,
+                                             struct fsal_obj_handle **handle,
+                                             struct attrlist *attrs_out) {
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Doing a lookup of '%s'",
+            path);
+
+   if (parent == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Error, expected a parent handle.");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   if (parent->type != DIRECTORY) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Error, expected parent to be a directory. Got %u",
+              parent->type);
+      return fsalstat(ERR_FSAL_NOTDIR, 0);
+   }
+
+   if (handle == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Error, expected an output handle.");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   if (path == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Error, received garbage path");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   if (*path == '\0') {
+      // TODO(boulos): What does an empty path mean? We shouldn't have gotten
+      // here...
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Error. Path is NUL. Should have exited earlier.");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   if (strchr(path, '/') != NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Path contains embedded forward slash.");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   struct proxyv3_obj_handle *parent_obj =
+      container_of(parent, struct proxyv3_obj_handle, obj);
+
+   if (strcmp(path, ".") == 0 ||
+       strcmp(path, "..") == 0) {
+      // They just want the current/parent directory. Give it to
+      // them. TODO(boulos): Should this force a copy? Should this force a
+      // LOOKUP to the server to re-request the attributes?
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Got a lookup for '%s' returning the directory handle",
+               path);
+      struct proxyv3_obj_handle *which_dir;
+      if (strcmp(path, ".") == 0) {
+         which_dir = parent_obj;
+      } else {
+         // Sigh, cast away the const here. FSAL shouldn't be asking to edit
+         // parent handles...
+         which_dir = (struct proxyv3_obj_handle* ) parent_obj->parent;
+         // Check that there was a valid parent directory.
+         if (which_dir == NULL) {
+            LogCrit(COMPONENT_FSAL,
+                    "PROXY_V3: Asked for '..' but no parent directory exists");
+            return fsalstat(ERR_FSAL_FAULT, 0);
+         }
+      }
+
+      *handle = &which_dir->obj;
+
+      if (attrs_out != NULL) {
+         if (!fattr3_to_fsalattr(&which_dir->attrs, attrs_out)) {
+            LogCrit(COMPONENT_FSAL,
+                    "PROXY_V3: failed to copy attributes");
+            return fsalstat(ERR_FSAL_FAULT, 0);
+         }
+      }
+
+      return fsalstat(ERR_FSAL_NO_ERROR, 0);
+   }
+
    LOOKUP3args args;
    LOOKUP3res result;
 
-   struct proxyv3_export *export =
-      container_of(export_handle, struct proxyv3_export, export);
-
-   LogDebug(COMPONENT_FSAL, "PROXY_V3: Looking up path '%s'", path);
-
-   // For the *root*, pass in the root handle as the "what".
-   args.what.dir.data.data_val = export->root_handle;
-   args.what.dir.data.data_len = export->root_handle_len;
-
-   // Remove the const via cast, which is okay as args is actually
-   // const LOOKUP3arg and the callee won't modify it. TODO(boulos):
-   // Is it actually right that we have to first strip the mount point
-   // for NFSv3?
-   args.what.name = (char*) (path + strlen("/testy"));
+   // The directory is the parent's fh3 handle.
+   args.what.dir = parent_obj->fh3;
+   // TODO(boulos): Is it actually safe to const cast this away?
+   args.what.name = (char*) path;
 
    if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
                          NFSPROC3_LOOKUP,
                          (xdrproc_t) xdr_LOOKUP3args, &args,
                          (xdrproc_t) xdr_LOOKUP3res, &result)) {
       LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: proxyv3_call failed");
+              "PROXY_V3: LOOKUP3 failed");
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
 
-   // Okay, let's see what we got.
-   LogDebug(COMPONENT_FSAL,
-            "PROXY_V3: Got back status %u", result.status);
+   if (result.status != NFS3_OK) {
+      // Okay, let's see what we got.
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: LOOKUP3 failed, got %u", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
 
-   // TODO(boulos): Fill in the attrs_out appropriately.
+   // We really need the attributes.
+   if (!result.LOOKUP3res_u.resok.obj_attributes.attributes_follow) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: LOOKUP3 didn't return attributes");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
 
-   return fsalstat(ERR_FSAL_INVAL, 0);
+   const nfs_fh3* obj_fh =
+      &result.LOOKUP3res_u.resok.object;
+
+   const fattr3* obj_attrs =
+      &result.LOOKUP3res_u.resok.obj_attributes.post_op_attr_u.attributes;
+
+   struct proxyv3_obj_handle *result_handle =
+      proxyv3_alloc_handle(export_handle,
+                           obj_fh,
+                           obj_attrs,
+                           parent_obj,
+                           attrs_out);
+
+   if (result_handle == NULL) {
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
+
+   *handle = &result_handle->obj;
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
+
+// Do a specialized lookup for the root of an export via GETATTR3.
+fsal_status_t proxyv3_lookup_root(struct fsal_export *export_handle,
+                                  struct fsal_obj_handle **handle,
+                                  struct attrlist *attrs_out) {
+   // Doing a "lookup" on the root, do a GETATTR3 instead.
+   GETATTR3args args;
+   GETATTR3res result;
+
+   struct proxyv3_export *export =
+      container_of(export_handle, struct proxyv3_export, export);
+
+   char *fh_copy = gsh_calloc(1, NFS3_FHSIZE);
+   memcpy(fh_copy, export->root_handle, export->root_handle_len);
+   args.object.data.data_val = fh_copy;
+   args.object.data.data_len = export->root_handle_len;
+
+   memset(&result, 0, sizeof(result));
+
+   // If the call fails for any reason, exit.
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_GETATTR,
+                         (xdrproc_t) xdr_GETATTR3args, &args,
+                         (xdrproc_t) xdr_GETATTR3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call failed (%u)",
+              result.status);
+      gsh_free(fh_copy);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // If we didn't get back NFS3_OK, return the appropriate error.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: GETATTR failed. %u",
+               result.status);
+      gsh_free(fh_copy);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   // Bundle up the result into a new object handle.
+   struct proxyv3_obj_handle *result_handle =
+      proxyv3_alloc_handle(export_handle,
+                           &args.object,
+                           &result.GETATTR3res_u.resok.obj_attributes,
+                           NULL /* no parent */,
+                           attrs_out);
+
+   // No matter what, clean up the fh_copy we made for args.
+   gsh_free(fh_copy);
+
+   // If we couldn't allocate the handle, fail.
+   if (result_handle == NULL) {
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
+
+   // Make a copy for future lookups.
+   kRootObjHandle = result_handle;
+   *handle = &(result_handle->obj);
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+// Given an existing export and a path, try to lookup the file or directory.
+fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
+                                  const char *path,
+                                  struct fsal_obj_handle **handle,
+                                  struct attrlist *attrs_out) {
+   LogDebug(COMPONENT_FSAL, "PROXY_V3: Looking up path '%s'", path);
+
+   // Check that the first part of the path matches our root.
+   const char *kRootPath = "/testy";
+   const size_t root_len = strlen(kRootPath);
+
+   const char *p = path;
+
+   // Check that the path matches our root prefix.
+   if (strncmp(path, kRootPath, root_len) != 0) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: path ('%s') doesn't match our root ('%s')",
+               path, kRootPath);
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
+
+   // The prefix matches our root path, move forward.
+   p += root_len;
+
+   if (*p == '\0') {
+      // Nothing left. Must have been just the root.
+      LogDebug(COMPONENT_FSAL, "PROXY_V3: Root Lookup. Doing GETATTR instead");
+      return proxyv3_lookup_root(export_handle, handle, attrs_out);
+   }
+
+   // Okay, we've got a potential path with slashes. TODO(boulos): Split it up,
+   // calling our lookup internal function on each segment.
+   return proxyv3_lookup_internal(export_handle, p,
+                                  &kRootObjHandle->obj, handle, attrs_out);
+
+}
+
+static fsal_status_t
+proxyv3_lookup_handle(struct fsal_obj_handle *parent,
+                      const char *path,
+                      struct fsal_obj_handle **handle,
+                      struct attrlist *attrs_out)
+{
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: lookup_handle for path '%s'", path);
+   return proxyv3_lookup_internal(op_ctx->fsal_export, path,
+                                  parent, handle, attrs_out);
+}
+
 
 // Setup our NFSv3 Proxy for a given NFS Export.
 static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
@@ -273,4 +551,5 @@ MODULE_INIT void proxy_v3_init(void) {
 
    // Fill in the objecting handling ops with the default "Hey! NOT IMPLEMENTED!!" ones.
    fsal_default_obj_ops_init(&PROXY_V3.handle_ops);
+   PROXY_V3.handle_ops.lookup = proxyv3_lookup_handle;
 }

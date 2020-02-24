@@ -8,6 +8,7 @@ add_definitions(
 SET(fsalproxy_v3_LIB_SRCS
   main.c
   rpc.c
+  utils.c
 )
 
 add_library(fsalproxy_v3 MODULE ${fsalproxy_v3_LIB_SRCS} $<TARGET_OBJECTS:nfs_mnt_xdr>)
