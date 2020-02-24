@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f05215ca_af7c574c",
+        "filename": "src/include/nfs_init.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-24T15:18:18Z",
+      "side": 1,
+      "message": "A better wording would then be:\n\nGanesha\u0027s assumption that malloc(0) returns a non-NULL pointer is not true, Ganesha can not work with the memory allocator in use. Aborting.",
+      "revId": "b6a7c57ec0e8045d7324769a568ba63ce907b219",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
