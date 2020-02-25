@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf288249_5d662629",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-25T01:14:04Z",
+      "side": 1,
+      "message": "I wonder if we actually need to skip claimed file systems, release_posix_file_system is going to skip them anyway.",
+      "revId": "785c4512462fc1ff70386bf3f7508572e9db659c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bdeb92b_0f33636e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-02-25T01:14:04Z",
+      "side": 1,
+      "message": "I wonder if we actually need to do this. We could just release all unclaimed file systems. If an unclaimed file system still exists, it will just get re-populated.\n\nOn the other hand, should we be checking claimed file systems? Probably not, that would be odd to force an error on an add export...",
+      "revId": "785c4512462fc1ff70386bf3f7508572e9db659c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
