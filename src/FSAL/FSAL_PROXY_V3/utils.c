@@ -79,10 +79,13 @@ bool fattr3_to_fsalattr(const fattr3 *attrs,
                         struct attrlist *fsal_attrs_out) {
    // NOTE(boulos): Consider contributing this as FSAL_ONLY_MASK or something.
    attrmask_t requested = fsal_attrs_out->request_mask;
-   if (FSAL_UNSET_MASK(requested, ATTRS_NFS3) != 0) {
+   if (FSAL_UNSET_MASK(requested, ATTRS_NFS3 | ATTR_RDATTR_ERR) != 0) {
       LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG,
                   "Requested attrs > NFSv3 ",
                   fsal_attrs_out, false);
+      LogDebug(COMPONENT_FSAL,
+               "requested = %0lx\tNFS3 = %0lx\tExtra = %0lx",
+               fsal_attrs_out->request_mask, (attrmask_t) ATTRS_NFS3, requested);
       return false;
    }
 
@@ -93,5 +96,7 @@ bool fattr3_to_fsalattr(const fattr3 *attrs,
 
    // Claim that only the NFSv3 attributes are valid.
    FSAL_SET_MASK(fsal_attrs_out->valid_mask, ATTRS_NFS3);
+   // XXX(boulos): Do we have to even do this? The CEPH FSAL does..
+   FSAL_SET_MASK(fsal_attrs_out->supported, ATTRS_NFS3);
    return true;
 }

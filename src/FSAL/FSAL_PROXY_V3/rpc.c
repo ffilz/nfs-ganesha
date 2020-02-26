@@ -258,6 +258,10 @@ bool proxyv3_call(const char *host, uint16_t port,
    // Write the xid into the buffer.
    memcpy(msgbuf, &xid, sizeof(xid));
 
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Going to read the remaining %zu bytes",
+            bytes_to_read - total_bytes_read);
+
    while (total_bytes_read < bytes_to_read) {
       ssize_t bytes_read =
          read(fd, msgbuf + total_bytes_read, bytes_to_read - total_bytes_read);
@@ -282,6 +286,9 @@ bool proxyv3_call(const char *host, uint16_t port,
       AUTH_DESTROY(au);
       return false;
    }
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Got all the bytes, time to decode");
 
    // Lets decode the reply.
    memset(&x, 0, sizeof(x));

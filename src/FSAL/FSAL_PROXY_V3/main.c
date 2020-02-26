@@ -183,6 +183,23 @@ proxyv3_alloc_handle(struct fsal_export *export_handle,
    return result;
 }
 
+// Clean up a handle.
+static void proxyv3_handle_release(struct fsal_obj_handle *obj_hdl)
+{
+   struct proxyv3_obj_handle *handle =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   // Free the underlying filehandle bytes.
+   gsh_free(handle->fh3.data.data_val);
+
+   // Finish the outer object.
+   fsal_obj_handle_fini(obj_hdl);
+
+   // Free our allocated handle.
+   gsh_free(handle);
+}
+
+
 // Given a path, parent handle, and so on, do a *single* object lookup.
 static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
                                              const char *path,
@@ -279,6 +296,8 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
    // TODO(boulos): Is it actually safe to const cast this away?
    args.what.name = (char*) path;
 
+   memset(&result, 0, sizeof(result));
+
    if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
                          NFSPROC3_LOOKUP,
                          (xdrproc_t) xdr_LOOKUP3args, &args,
@@ -320,6 +339,54 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
    }
 
    *handle = &result_handle->obj;
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+// Do just GETATTR3 for an object.
+static fsal_status_t proxyv3_getattrs(struct fsal_obj_handle *obj_hdl,
+                                      struct attrlist *attrs_out) {
+   GETATTR3args args;
+   GETATTR3res result;
+
+   struct proxyv3_obj_handle *handle =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+
+   args.object.data.data_val = handle->fh3.data.data_val;
+   args.object.data.data_len = handle->fh3.data.data_len;
+
+   memset(&result, 0, sizeof(result));
+
+   // If the call fails for any reason, exit.
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_GETATTR,
+                         (xdrproc_t) xdr_GETATTR3args, &args,
+                         (xdrproc_t) xdr_GETATTR3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call failed (%u)",
+              result.status);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // If we didn't get back NFS3_OK, return the appropriate error.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: GETATTR failed. %u",
+               result.status);
+      // If the request wants to know about errors, let them know.
+      if (FSAL_TEST_MASK(attrs_out->request_mask, ATTR_RDATTR_ERR)) {
+         FSAL_SET_MASK(attrs_out->valid_mask, ATTR_RDATTR_ERR);
+      }
+
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   if (!fattr3_to_fsalattr(&result.GETATTR3res_u.resok.obj_attributes,
+                           attrs_out)) {
+      // NOTE(boulos): The callee already complained, just exit.
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
 
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
@@ -435,6 +502,153 @@ proxyv3_lookup_handle(struct fsal_obj_handle *parent,
                                   parent, handle, attrs_out);
 }
 
+static fsal_status_t
+proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
+                         struct fsal_obj_handle *obj_hdl,
+                         fsal_dynamicfsinfo_t *infop) {
+   struct proxyv3_obj_handle *obj =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   if (obj != kRootObjHandle) {
+      // Let's just check if the handles actually match.
+      if (obj->fh3.data.data_len != kRootObjHandle->fh3.data.data_len ||
+          memcmp(obj->fh3.data.data_val,
+                 kRootObjHandle->fh3.data.data_val,
+                 obj->fh3.data.data_len)) {
+         LogCrit(COMPONENT_FSAL,
+                 "PROXY_V3: fsinfo called w/ handle %p != root (%p)",
+                 obj, kRootObjHandle);
+         // Didn't match, exit now.
+         return fsalstat(ERR_FSAL_INVAL, 0);
+      } else {
+         LogDebug(COMPONENT_FSAL,
+                  "PROXY_V3: fsinfo called w/ handle %p != root (%p),"
+                  "but data matches",
+                  obj, kRootObjHandle);
+         // Continue onwards.
+      }
+   }
+
+   FSSTAT3args args;
+   FSSTAT3res result;
+
+   char *fh_copy = gsh_calloc(1, NFS3_FHSIZE);
+   memcpy(fh_copy, obj->fh3.data.data_val, obj->fh3.data.data_len);
+   args.fsroot.data.data_val = fh_copy;
+   args.fsroot.data.data_len = obj->fh3.data.data_len;
+
+   memset(&result, 0, sizeof(result));
+   // If the call fails for any reason, exit.
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_FSSTAT,
+                         (xdrproc_t) xdr_FSSTAT3args, &args,
+                         (xdrproc_t) xdr_FSSTAT3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call for FSSTAT3 failed (%u)",
+              result.status);
+      gsh_free(fh_copy);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // If we didn't get back NFS3_OK, return the appropriate error.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: FSSTAT3 failed. %u",
+               result.status);
+      gsh_free(fh_copy);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+
+   infop->total_bytes = result.FSSTAT3res_u.resok.tbytes;
+   infop->free_bytes = result.FSSTAT3res_u.resok.fbytes;
+   infop->avail_bytes = result.FSSTAT3res_u.resok.abytes;
+   infop->total_files = result.FSSTAT3res_u.resok.tfiles;
+   infop->free_files = result.FSSTAT3res_u.resok.ffiles;
+   infop->avail_files = result.FSSTAT3res_u.resok.afiles;
+   // maxread/maxwrite are *static* not dynamic info
+   infop->time_delta.tv_sec = result.FSSTAT3res_u.resok.invarsec;
+   infop->time_delta.tv_nsec = 0;
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+// Take our FSAL Object handle and fill in an nfs_fh3 equivalent.
+static fsal_status_t
+proxyv3_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
+                       fsal_digesttype_t output_type,
+                       struct gsh_buffdesc *fh_desc) {
+   struct proxyv3_obj_handle *handle =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   if (fh_desc == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: received null output buffer");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   if (output_type != FSAL_DIGEST_NFSV3) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Asked for an FH digest other than NFSv3");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   size_t len = handle->fh3.data.data_len;
+   const char* bytes = handle->fh3.data.data_val;
+
+   // Make sure the output buffer can handle our filehandle.
+   if (fh_desc->len < len) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: not given enough buffer (%zu) for fh (%zu)",
+              fh_desc->len, len);
+      return fsalstat(ERR_FSAL_TOOSMALL, 0);
+   }
+
+
+   memcpy(fh_desc->addr, bytes, len);
+   fh_desc->len = len;
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+// Take an input NFSv3 fh3 and tell Ganesha we're okay with that.
+static fsal_status_t
+proxyv3_wire_to_host(struct fsal_export *exp_hdl,
+                     fsal_digesttype_t in_type,
+                     struct gsh_buffdesc *fh_desc,
+                     int flags) {
+   if (fh_desc == NULL || fh_desc->addr == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Got NULL input pointers");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   if (in_type != FSAL_DIGEST_NFSV3) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Asked to convert an NFSv4 handle");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // Otherwise fh_desc->addr and fh_desc->len are already the nfs_fh3 we want.
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+// Given our FSAL object, point to the fh3 data as a hash input for MDCACHE.
+static void
+proxyv3_handle_to_key(struct fsal_obj_handle *obj_hdl,
+                      struct gsh_buffdesc *fh_desc) {
+   struct proxyv3_obj_handle *handle =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   if (fh_desc == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: received null output buffer");
+      return;
+   }
+
+   fh_desc->addr = handle->fh3.data.data_val;
+   fh_desc->len = handle->fh3.data.data_len;
+}
+
 
 // Setup our NFSv3 Proxy for a given NFS Export.
 static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
@@ -447,6 +661,8 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
    // NOTE(boulos): fsal_export_init sets the export ops to defaults.
    fsal_export_init(&export->export);
    export->export.exp_ops.lookup_path = proxyv3_lookup_path;
+   export->export.exp_ops.get_fs_dynamic_info = proxyv3_get_dynamic_info;
+   export->export.exp_ops.wire_to_host = proxyv3_wire_to_host;
 
    // Try to load the config. If it fails (say they didn't provide
    // Srv_Addr), exit early and free the allocated export.
@@ -552,4 +768,8 @@ MODULE_INIT void proxy_v3_init(void) {
    // Fill in the objecting handling ops with the default "Hey! NOT IMPLEMENTED!!" ones.
    fsal_default_obj_ops_init(&PROXY_V3.handle_ops);
    PROXY_V3.handle_ops.lookup = proxyv3_lookup_handle;
+   PROXY_V3.handle_ops.handle_to_wire = proxyv3_handle_to_wire;
+   PROXY_V3.handle_ops.handle_to_key = proxyv3_handle_to_key;
+   PROXY_V3.handle_ops.release = proxyv3_handle_release;
+   PROXY_V3.handle_ops.getattrs = proxyv3_getattrs;
 }
