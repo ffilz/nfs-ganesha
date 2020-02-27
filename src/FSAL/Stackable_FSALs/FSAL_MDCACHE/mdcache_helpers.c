@@ -422,11 +422,12 @@ mdc_get_parent_handle(struct mdcache_fsal_export *export,
 #ifdef DEBUG_MDCACHE
 	assert(entry->content_lock.__data.__cur_writer);
 #endif
-
+	fsal_digesttype_t digest_type =
+		(op_ctx->nfs_vers == 3) ? FSAL_DIGEST_NFSV3 : FSAL_DIGEST_NFSV4;
 	/* Get a wire handle that can be used with create_handle() */
 	subcall_raw(export,
 		    status = sub_parent->obj_ops->handle_to_wire(sub_parent,
-					FSAL_DIGEST_NFSV4, &fh_desc)
+					digest_type, &fh_desc)
 		   );
 	if (FSAL_IS_ERROR(status))
 		return status;
