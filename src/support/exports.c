@@ -1095,6 +1095,9 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 	probe_exp = get_gsh_export(export->export_id);
 
 	if (commit_type == update_export && probe_exp != NULL) {
+		bool mount_pseudo_export = false, unmount_pseudo_export = false;
+		struct gsh_export *exp_copy = NULL;
+
 		/* We have an actual update case, probe_exp is the target
 		 * to update. Check all the options that MUST match.
 		 * Note that Path/fullpath will not be NULL, but we compare
@@ -1180,6 +1183,16 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 		/* Grab config_generation for this config */
 		probe_exp->config_gen = get_parse_root_generation(node);
 
+		if ((export->export_perms.options & EXPORT_OPTION_NFSV4) &&
+		    (probe_exp->export_perms.options & EXPORT_OPTION_NFSV4) == 0) {
+			mount_pseudo_export = true;
+			exp_copy = alloc_export();
+			memcpy(exp_copy, probe_exp, sizeof(struct gsh_export));
+		} else if ((probe_exp->export_perms.options & EXPORT_OPTION_NFSV4) &&
+			   (export->export_perms.options & EXPORT_OPTION_NFSV4) == 0) {
+			unmount_pseudo_export = true;
+		}
+
 		/* Update atomic fields */
 		update_atomic_fields(probe_exp, export);
 
@@ -1206,6 +1219,19 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 		 * updated the existing export.
 		 */
 		err_type->dispose = true;
+
+		if (mount_pseudo_export && !mount_gsh_export(probe_exp)) {
+			err_type->internal = true;
+			errcnt++;
+
+			/* Restoring the old export properties */
+			memcpy(probe_exp, exp_copy, sizeof(struct gsh_export));
+			gsh_free(exp_copy);
+
+			return errcnt;
+		} else if (unmount_pseudo_export) {
+			unmount_gsh_export(probe_exp);
+		}
 
 		/* Release the reference to the updated export. */
 		put_gsh_export(probe_exp);
