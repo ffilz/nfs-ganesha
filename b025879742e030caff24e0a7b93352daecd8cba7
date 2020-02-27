@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1a1daa4_4e212d8a",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1187,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-02-27T19:23:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t    (probe_exp-\u003eexport_perms.options \u0026 EXPORT_OPTION_NFSV4) \u003d\u003d 0) {",
+      "revId": "b025879742e030caff24e0a7b93352daecd8cba7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "815e931c_45d53b95",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-02-27T19:23:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t} else if ((probe_exp-\u003eexport_perms.options \u0026 EXPORT_OPTION_NFSV4) \u0026\u0026",
+      "revId": "b025879742e030caff24e0a7b93352daecd8cba7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b60ed00_c27f46e1",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-02-27T19:23:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t   (export-\u003eexport_perms.options \u0026 EXPORT_OPTION_NFSV4) \u003d\u003d 0) {",
+      "revId": "b025879742e030caff24e0a7b93352daecd8cba7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
