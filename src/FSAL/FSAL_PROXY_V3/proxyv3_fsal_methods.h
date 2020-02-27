@@ -67,6 +67,9 @@ bool proxyv3_mount_call(const char *host, const struct user_cred *creds,
 // (mostly overlapping).
 fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status);
 
+// Check that the mask is just asking for NFSv3 and maybe the error bit.
+bool attrmask_is_nfs3(attrmask_t mask);
+
 // Convert from an NFSv3 "fattr3" (Ganesha typedef's this to attrlist, while
 // keeping fattr3_wire for the "real" one) to a Ganesha attrlist. This function
 // also checks that the fsal_attrs_out destination is only asking for NFSv3

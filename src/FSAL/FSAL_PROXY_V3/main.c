@@ -343,18 +343,14 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-// Do just GETATTR3 for an object.
-static fsal_status_t proxyv3_getattrs(struct fsal_obj_handle *obj_hdl,
-                                      struct attrlist *attrs_out) {
+// The core "Do a GETATTR3" routine.
+static fsal_status_t proxyv3_getattr_from_fh3(struct nfs_fh3 *fh3,
+                                              struct attrlist *attrs_out) {
    GETATTR3args args;
    GETATTR3res result;
 
-   struct proxyv3_obj_handle *handle =
-      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
-
-
-   args.object.data.data_val = handle->fh3.data.data_val;
-   args.object.data.data_len = handle->fh3.data.data_len;
+   args.object.data.data_val = fh3->data.data_val;
+   args.object.data.data_len = fh3->data.data_len;
 
    memset(&result, 0, sizeof(result));
 
@@ -391,55 +387,44 @@ static fsal_status_t proxyv3_getattrs(struct fsal_obj_handle *obj_hdl,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+// Do just GETATTR3 for an object.
+static fsal_status_t proxyv3_getattrs(struct fsal_obj_handle *obj_hdl,
+                                      struct attrlist *attrs_out) {
+   struct proxyv3_obj_handle *handle =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   return proxyv3_getattr_from_fh3(&handle->fh3, attrs_out);
+}
+
 // Do a specialized lookup for the root of an export via GETATTR3.
 fsal_status_t proxyv3_lookup_root(struct fsal_export *export_handle,
                                   struct fsal_obj_handle **handle,
                                   struct attrlist *attrs_out) {
-   // Doing a "lookup" on the root, do a GETATTR3 instead.
-   GETATTR3args args;
-   GETATTR3res result;
-
    struct proxyv3_export *export =
       container_of(export_handle, struct proxyv3_export, export);
 
-   char *fh_copy = gsh_calloc(1, NFS3_FHSIZE);
-   memcpy(fh_copy, export->root_handle, export->root_handle_len);
-   args.object.data.data_val = fh_copy;
-   args.object.data.data_len = export->root_handle_len;
+   nfs_fh3 fh3;
+   fh3.data.data_val = export->root_handle;
+   fh3.data.data_len = export->root_handle_len;
 
-   memset(&result, 0, sizeof(result));
-
-   // If the call fails for any reason, exit.
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
-                         NFSPROC3_GETATTR,
-                         (xdrproc_t) xdr_GETATTR3args, &args,
-                         (xdrproc_t) xdr_GETATTR3res, &result)) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: proxyv3_nfs_call failed (%u)",
-              result.status);
-      gsh_free(fh_copy);
-      return fsalstat(ERR_FSAL_INVAL, 0);
+   struct attrlist tmp_attrs;
+   memset(&tmp_attrs, 0, sizeof(tmp_attrs));
+   if (attrs_out != NULL) {
+      FSAL_SET_MASK(tmp_attrs.request_mask, attrs_out->request_mask);
    }
 
-   // If we didn't get back NFS3_OK, return the appropriate error.
-   if (result.status != NFS3_OK) {
-      LogDebug(COMPONENT_FSAL,
-               "PROXY_V3: GETATTR failed. %u",
-               result.status);
-      gsh_free(fh_copy);
-      return nfsstat3_to_fsalstat(result.status);
+   fsal_status_t rc = proxyv3_getattr_from_fh3(&fh3, &tmp_attrs);
+   if (FSAL_IS_ERROR(rc)) {
+      return rc;
    }
 
    // Bundle up the result into a new object handle.
    struct proxyv3_obj_handle *result_handle =
       proxyv3_alloc_handle(export_handle,
-                           &args.object,
-                           &result.GETATTR3res_u.resok.obj_attributes,
+                           &fh3,
+                           &tmp_attrs,
                            NULL /* no parent */,
                            attrs_out);
-
-   // No matter what, clean up the fh_copy we made for args.
-   gsh_free(fh_copy);
 
    // If we couldn't allocate the handle, fail.
    if (result_handle == NULL) {
@@ -604,7 +589,6 @@ proxyv3_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
       return fsalstat(ERR_FSAL_TOOSMALL, 0);
    }
 
-
    memcpy(fh_desc->addr, bytes, len);
    fh_desc->len = len;
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -629,6 +613,49 @@ proxyv3_wire_to_host(struct fsal_export *exp_hdl,
    }
 
    // Otherwise fh_desc->addr and fh_desc->len are already the nfs_fh3 we want.
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+// Given a handle (an nfs_fh3 for us), do a GETATTR to make an object.
+static fsal_status_t
+proxyv3_create_handle(struct fsal_export *export_handle,
+                      struct gsh_buffdesc *hdl_desc,
+                      struct fsal_obj_handle **handle,
+                      struct attrlist *attrs_out) {
+   nfs_fh3 fh3;
+
+   // In case we die along the way.
+   *handle = NULL;
+
+   fh3.data.data_val = hdl_desc->addr;
+   fh3.data.data_len = hdl_desc->len;
+
+   struct attrlist tmp_attrs;
+   memset(&tmp_attrs, 0, sizeof(tmp_attrs));
+   if (attrs_out != NULL) {
+      FSAL_SET_MASK(tmp_attrs.request_mask, attrs_out->request_mask);
+   }
+
+   fsal_status_t rc = proxyv3_getattr_from_fh3(&fh3, &tmp_attrs);
+   if (FSAL_IS_ERROR(rc)) {
+      return rc;
+   }
+
+   // Bundle up the result into a new object handle.
+   struct proxyv3_obj_handle *result_handle =
+      proxyv3_alloc_handle(export_handle,
+                           &fh3,
+                           &tmp_attrs,
+                           NULL /* XXX(boulos): How do we fill in parent? */,
+                           attrs_out);
+
+   // If we couldn't allocate the handle, fail.
+   if (result_handle == NULL) {
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
+
+   *handle = &(result_handle->obj);
+
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
@@ -663,6 +690,7 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
    export->export.exp_ops.lookup_path = proxyv3_lookup_path;
    export->export.exp_ops.get_fs_dynamic_info = proxyv3_get_dynamic_info;
    export->export.exp_ops.wire_to_host = proxyv3_wire_to_host;
+   export->export.exp_ops.create_handle = proxyv3_create_handle;
 
    // Try to load the config. If it fails (say they didn't provide
    // Srv_Addr), exit early and free the allocated export.

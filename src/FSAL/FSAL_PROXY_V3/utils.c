@@ -72,20 +72,24 @@ fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status) {
    return fsalstat(rc, (rc == ERR_FSAL_INVAL) ? (int) status : 0);
 }
 
+bool attrmask_is_nfs3(attrmask_t mask) {
+   // NOTE(boulos): Consider contributing this as FSAL_ONLY_MASK or something.
+   attrmask_t orig = mask;
+   if (FSAL_UNSET_MASK(mask, ATTRS_NFS3 | ATTR_RDATTR_ERR) != 0) {
+      LogDebug(COMPONENT_FSAL,
+               "requested = %0lx\tNFS3 = %0lx\tExtra = %0lx",
+               orig, (attrmask_t) ATTRS_NFS3, mask);
+      return false;
+   }
+   return true;
+}
+
 // Fill in the FSAL attrlist (fsal_attrs_out) given the input NFSv3
 // attributes. This function returns false if the requested attributes
 // are greater than those supported by NFSv3.
 bool fattr3_to_fsalattr(const fattr3 *attrs,
                         struct attrlist *fsal_attrs_out) {
-   // NOTE(boulos): Consider contributing this as FSAL_ONLY_MASK or something.
-   attrmask_t requested = fsal_attrs_out->request_mask;
-   if (FSAL_UNSET_MASK(requested, ATTRS_NFS3 | ATTR_RDATTR_ERR) != 0) {
-      LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG,
-                  "Requested attrs > NFSv3 ",
-                  fsal_attrs_out, false);
-      LogDebug(COMPONENT_FSAL,
-               "requested = %0lx\tNFS3 = %0lx\tExtra = %0lx",
-               fsal_attrs_out->request_mask, (attrmask_t) ATTRS_NFS3, requested);
+   if (!attrmask_is_nfs3(fsal_attrs_out->request_mask)) {
       return false;
    }
 
