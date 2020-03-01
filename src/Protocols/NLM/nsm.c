@@ -33,7 +33,7 @@
 pthread_mutex_t nsm_mutex = PTHREAD_MUTEX_INITIALIZER;
 CLIENT *nsm_clnt;
 AUTH *nsm_auth;
-unsigned long nsm_count;
+unsigned long nsm_count = 1;
 char *nodename;
 
 /* retry timeout default to the moon and back */
