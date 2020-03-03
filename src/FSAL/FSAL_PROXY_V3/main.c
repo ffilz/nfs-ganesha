@@ -504,6 +504,149 @@ fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
 
 }
 
+// Do a readdir for the given directory (dir_hdl), possibly picking up where
+// `whence` left off.
+static fsal_status_t
+proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
+                fsal_cookie_t *whence, void *cbarg,
+                fsal_readdir_cb cb, attrmask_t attrmask,
+                bool *eof) {
+   struct proxyv3_obj_handle *dir =
+      container_of(dir_hdl, struct proxyv3_obj_handle, obj);
+
+   // "This should be set to 0 on the first request to read a directory."
+   cookie3 cookie = (whence == NULL) ? 0 : *whence;
+   // TODO(boulos): Ganesha doesn't seem to have any way to pass this in
+   // alongside whence... The comments in the Ganesha NFSD implementation for
+   // READDIRPLUS suggest that most clients just ignore it / expect 0s.
+   cookieverf3 cookie_verf;
+   memset(&cookie_verf, 0, sizeof(cookie_verf));
+
+   LogDebug(COMPONENT_FSAL,
+            "Doing READDIR for dir %p (cookie = %lu)",
+            dir, cookie);
+
+   // Check that attrmask is at most NFSv3
+   if (!attrmask_is_nfs3(attrmask)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: readdir asked for incompatible output attrs");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   *eof = false;
+
+   while (!(*eof)) {
+      READDIRPLUS3args args;
+      READDIRPLUS3res result;
+
+      memset(&result, 0, sizeof(result));
+
+      args.dir.data.data_val = dir->fh3.data.data_val;
+      args.dir.data.data_len = dir->fh3.data.data_len;
+      args.cookie = cookie;
+      memcpy(&args.cookieverf, &cookie_verf, sizeof(args.cookieverf));
+      // We need to let the server know how much data to return per chunk. The
+      // V4 proxy uses 4KB and 16KB.
+      args.dircount = 4096;
+      args.maxcount = 16384;
+
+      LogDebug(COMPONENT_FSAL,
+               "Calling READDIRPLUS with cookie %lu",
+               cookie);
+
+      if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                            NFSPROC3_READDIRPLUS,
+                            (xdrproc_t) xdr_READDIRPLUS3args, &args,
+                            (xdrproc_t) xdr_READDIRPLUS3res, &result))  {
+         LogCrit(COMPONENT_FSAL,
+                 "PROXY_V3: proxyv3_nfs_call for READDIRPLUS failed (%u)",
+                 result.status);
+         return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+      }
+
+      if (result.status != NFS3_OK) {
+         LogDebug(COMPONENT_FSAL,
+                  "PROXY_V3: READDIRPLUS failed. %u",
+                  result.status);
+         return nfsstat3_to_fsalstat(result.status);
+      }
+
+      LogDebug(COMPONENT_FSAL,
+               "READDIRPLUS succeeded, looping over dirents");
+
+      READDIRPLUS3resok* resok = &result.READDIRPLUS3res_u.resok;
+
+      // Mark EOF now, if true.
+      *eof = resok->reply.eof;
+      // Update the cookie verifier for the next iteration.
+      memcpy(&cookie_verf, &resok->cookieverf, sizeof(cookie_verf));
+
+      // Loop over all the entries, making fsal objects from the results and
+      // calling the given callback.
+      for (entryplus3 *entry = resok->reply.entries;
+           entry != NULL;
+           entry = entry->nextentry) {
+         // Don't forget to update the cookie (we *could* do this just at the
+         // end, but why bother?).
+         cookie = entry->cookie;
+         if (strcmp(entry->name, ".") == 0 ||
+             strcmp(entry->name, "..") == 0) {
+            LogDebug(COMPONENT_FSAL,
+                     "Skipping special dir value of '%s'",
+                     entry->name);
+            continue;
+         }
+
+         if (!entry->name_handle.handle_follows) {
+            LogCrit(COMPONENT_FSAL,
+                    "PROXY_V3: READDIRPLUS didn't return a handle for '%s'",
+                    entry->name);
+            return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+         }
+
+         if (!entry->name_attributes.attributes_follow) {
+            LogCrit(COMPONENT_FSAL,
+                    "PROXY_V3: READDIRPLUS didn't return attributes for '%s'",
+                    entry->name);
+            return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+         }
+
+         nfs_fh3 *fh3 = &entry->name_handle.post_op_fh3_u.handle;
+         fattr3 *attrs = &entry->name_attributes.post_op_attr_u.attributes;
+         // Tell alloc_handle we just want the requested attributes.
+
+         struct attrlist cb_attrs;
+         memset(&cb_attrs, 0, sizeof(cb_attrs));
+         FSAL_SET_MASK(cb_attrs.request_mask, attrmask);
+
+         struct proxyv3_obj_handle *result_handle =
+            proxyv3_alloc_handle(op_ctx->fsal_export, fh3, attrs, dir,
+                                 &cb_attrs);
+
+         if (result_handle == NULL) {
+            LogCrit(COMPONENT_FSAL,
+                    "PROXY_V3: Failed to make a handle for READDIRPLUS result "
+                    "for file '%s'",
+                    entry->name);
+            return fsalstat(ERR_FSAL_FAULT, 0);
+         }
+
+         enum fsal_dir_result cb_rc =
+            cb(entry->name, &result_handle->obj, &cb_attrs, cbarg, entry->cookie);
+
+         // Other FSALs do this as >= DIR_READAHEAD, but I prefer an explicit
+         // switch with no default.
+         switch (cb_rc) {
+         case DIR_CONTINUE: continue; // Next entry.
+         case DIR_READAHEAD: break; // We don't do read-ahead, just exit.
+         case DIR_TERMINATE: break; // Okay, all done.
+         }
+      }
+   }
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
 static fsal_status_t
 proxyv3_lookup_handle(struct fsal_obj_handle *parent,
                       const char *path,
@@ -860,4 +1003,5 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.handle_to_key = proxyv3_handle_to_key;
    PROXY_V3.handle_ops.release = proxyv3_handle_release;
    PROXY_V3.handle_ops.getattrs = proxyv3_getattrs;
+   PROXY_V3.handle_ops.readdir = proxyv3_readdir;
 }
