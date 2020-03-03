@@ -326,6 +326,9 @@ bool proxyv3_call(const char *host, uint16_t port,
       return false;
    }
 
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: RPC completed successfully");
+
    return true;
 }
 

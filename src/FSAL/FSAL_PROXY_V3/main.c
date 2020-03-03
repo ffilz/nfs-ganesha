@@ -24,6 +24,7 @@
 
 #include "fsal.h"
 #include "fsal_types.h"
+#include "nfs_file_handle.h"
 #include "FSAL/fsal_commonlib.h"
 #include "FSAL/fsal_config.h"
 #include "FSAL/fsal_init.h"
@@ -143,6 +144,14 @@ proxyv3_alloc_handle(struct fsal_export *export_handle,
    struct attrlist local_attributes;
    struct attrlist *attrs_out;
 
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Making handle from fh3 %p with parent %p",
+            fh3, parent);
+
+   LogFullDebugOpaque(COMPONENT_FSAL, " fh3 handle is %s", LEN_FH_STR,
+                      fh3->data.data_val, fh3->data.data_len);
+
+
    // If we aren't given a destination, make up our own.
    if (fsal_attrs_out != NULL) {
       attrs_out = fsal_attrs_out;
@@ -160,7 +169,8 @@ proxyv3_alloc_handle(struct fsal_export *export_handle,
 
    // Alright, ready to go. Instead of being fancy like the NFSv4 proxy, we'll
    // allocate the nested fh3 with an additional calloc call.
-   struct proxyv3_obj_handle *result = gsh_calloc(1, sizeof(*result));
+   struct proxyv3_obj_handle *result =
+      gsh_calloc(1, sizeof(struct proxyv3_obj_handle));
 
    // Copy the fh3 struct.
    result->fh3.data.data_len = fh3->data.data_len;
@@ -168,12 +178,10 @@ proxyv3_alloc_handle(struct fsal_export *export_handle,
    memcpy(result->fh3.data.data_val, fh3->data.data_val, fh3->data.data_len);
 
    // Copy the NFSv3 attrs.
-   memcpy(&result->attrs, attrs, sizeof(*attrs));
+   memcpy(&result->attrs, attrs, sizeof(fattr3));
 
    fsal_obj_handle_init(&result->obj, export_handle, attrs_out->type);
-   // Just doing what pxy_alloc_handle does...
-   result->obj.fs = NULL;
-   result->obj.state_hdl = NULL;
+
    result->obj.fsid = attrs_out->fsid;
    result->obj.fileid = attrs_out->fileid;
    result->obj.obj_ops = &PROXY_V3.handle_ops;
@@ -188,6 +196,9 @@ static void proxyv3_handle_release(struct fsal_obj_handle *obj_hdl)
 {
    struct proxyv3_obj_handle *handle =
       container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Cleaning up handle %p", handle);
 
    // Free the underlying filehandle bytes.
    gsh_free(handle->fh3.data.data_val);
@@ -228,6 +239,9 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
               "PROXY_V3: Error, expected an output handle.");
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
+
+   // Mark as NULL in case we fail along the way.
+   *handle = NULL;
 
    if (path == NULL) {
       LogCrit(COMPONENT_FSAL,
@@ -275,15 +289,19 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
          }
       }
 
-      *handle = &which_dir->obj;
+      // Make a copy for tthe result.
+      struct proxyv3_obj_handle *result_handle =
+         proxyv3_alloc_handle(export_handle,
+                              &which_dir->fh3,
+                              &which_dir->attrs,
+                              which_dir->parent,
+                              attrs_out);
 
-      if (attrs_out != NULL) {
-         if (!fattr3_to_fsalattr(&which_dir->attrs, attrs_out)) {
-            LogCrit(COMPONENT_FSAL,
-                    "PROXY_V3: failed to copy attributes");
-            return fsalstat(ERR_FSAL_FAULT, 0);
-         }
+      if (result_handle == NULL) {
+         return fsalstat(ERR_FSAL_FAULT, 0);
       }
+
+      *handle = &result_handle->obj;
 
       return fsalstat(ERR_FSAL_NO_ERROR, 0);
    }
@@ -349,6 +367,13 @@ static fsal_status_t proxyv3_getattr_from_fh3(struct nfs_fh3 *fh3,
    GETATTR3args args;
    GETATTR3res result;
 
+   LogDebug(COMPONENT_FSAL,
+            "Doing a getattr on fh3 (%p) with len %u",
+            fh3->data.data_val, fh3->data.data_len);
+
+   LogFullDebugOpaque(COMPONENT_FSAL, " fh3 handle is %s", LEN_FH_STR,
+                      fh3->data.data_val, fh3->data.data_len);
+
    args.object.data.data_val = fh3->data.data_val;
    args.object.data.data_len = fh3->data.data_len;
 
@@ -392,6 +417,10 @@ static fsal_status_t proxyv3_getattrs(struct fsal_obj_handle *obj_hdl,
                                       struct attrlist *attrs_out) {
    struct proxyv3_obj_handle *handle =
       container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Responding to GETATTR request for handle %p",
+            handle);
 
    return proxyv3_getattr_from_fh3(&handle->fh3, attrs_out);
 }
@@ -578,6 +607,12 @@ proxyv3_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
 
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: handle_to_wire %p, with len %u",
+            handle->fh3.data.data_val, handle->fh3.data.data_len);
+   LogFullDebugOpaque(COMPONENT_FSAL, " fh3 value is %s", LEN_FH_STR,
+                      handle->fh3.data.data_val, handle->fh3.data.data_len);
+
    size_t len = handle->fh3.data.data_len;
    const char* bytes = handle->fh3.data.data_val;
 
@@ -600,9 +635,21 @@ proxyv3_wire_to_host(struct fsal_export *exp_hdl,
                      fsal_digesttype_t in_type,
                      struct gsh_buffdesc *fh_desc,
                      int flags) {
-   if (fh_desc == NULL || fh_desc->addr == NULL) {
+   if (fh_desc == NULL) {
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: Got NULL input pointers");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: wire_to_host of %p, with len %zu",
+            fh_desc->addr, fh_desc->len);
+   LogFullDebugOpaque(COMPONENT_FSAL, " fh3 handle is %s", LEN_FH_STR,
+                      fh_desc->addr, fh_desc->len);
+
+   if (fh_desc->addr == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: wire_to_host received NULL address");
       return fsalstat(ERR_FSAL_SERVERFAULT, 0);
    }
 
@@ -623,6 +670,13 @@ proxyv3_create_handle(struct fsal_export *export_handle,
                       struct fsal_obj_handle **handle,
                       struct attrlist *attrs_out) {
    nfs_fh3 fh3;
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Creating handle from %p with len %zu",
+            hdl_desc->addr, hdl_desc->len);
+
+   LogFullDebugOpaque(COMPONENT_FSAL, " fh3 handle is %s", LEN_FH_STR,
+                      hdl_desc->addr, hdl_desc->len);
 
    // In case we die along the way.
    *handle = NULL;
@@ -666,11 +720,17 @@ proxyv3_handle_to_key(struct fsal_obj_handle *obj_hdl,
    struct proxyv3_obj_handle *handle =
       container_of(obj_hdl, struct proxyv3_obj_handle, obj);
 
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: handle to key for %p", handle);
+
    if (fh_desc == NULL) {
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: received null output buffer");
       return;
    }
+
+   LogFullDebugOpaque(COMPONENT_FSAL, " fh3 handle is %s", LEN_FH_STR,
+                      handle->fh3.data.data_val, handle->fh3.data.data_len);
 
    fh_desc->addr = handle->fh3.data.data_val;
    fh_desc->len = handle->fh3.data.data_len;
