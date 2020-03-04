@@ -57,7 +57,7 @@ struct proxyv3_fsal_module PROXY_V3 = {
          .chown_restricted = true,
          .case_preserving = true,
          .lock_support = false,
-         .named_attr = true,
+         .named_attr = false,
          .unique_handles = true,
          .acl_support = FSAL_ACLSUPPORT_ALLOW,
          .homogenous = true,
@@ -289,7 +289,7 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
          }
       }
 
-      // Make a copy for tthe result.
+      // Make a copy for the result.
       struct proxyv3_obj_handle *result_handle =
          proxyv3_alloc_handle(export_handle,
                               &which_dir->fh3,
@@ -501,7 +501,133 @@ fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
    // calling our lookup internal function on each segment.
    return proxyv3_lookup_internal(export_handle, p,
                                   &kRootObjHandle->obj, handle, attrs_out);
+}
 
+// Perform an "open" (really CREATE3).
+static fsal_status_t
+proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
+              struct state_t *state,
+              fsal_openflags_t openflags,
+              enum fsal_create_mode createmode,
+              const char *name,
+              struct attrlist *attrib_set,
+              fsal_verifier_t verifier,
+              struct fsal_obj_handle **new_obj,
+              struct attrlist *attrs_out,
+              bool *caller_perm_check) {
+   struct proxyv3_obj_handle *parent_obj =
+      container_of(fsal_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: open2 for handle %p with flags %x and createmode %u",
+            fsal_hdl, openflags, createmode);
+
+   if (state != NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Asked for a stateful open2(). Probably a mistake");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   if (name == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Asked for an open by handle, rather than name. NOTYET");
+      return fsalstat(ERR_FSAL_NOTSUPP, 0);
+   }
+
+   CREATE3args args;
+   CREATE3res result;
+   CREATE3resok *resok = &result.CREATE3res_u.resok;
+
+   memset(&result, 0, sizeof(result));
+
+   // The passed in handle is our parent dir. TODO(boulos): Change this for the
+   // mode where name == NULL to include a lookup by handle (or something).
+   args.where.dir.data.data_val = parent_obj->fh3.data.data_val;
+   args.where.dir.data.data_len = parent_obj->fh3.data.data_len;
+   // We can safely const-cast away, this is an input.
+   args.where.name = (char*) name;
+
+   switch (createmode) {
+   case FSAL_NO_CREATE:
+   case FSAL_EXCLUSIVE_41:
+   case FSAL_EXCLUSIVE_9P:
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Invalid createmode (%u) for NFSv3. Must be one of "
+              "UNCHECKED, GUARDED, or EXCLUSIVE",
+              createmode);
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   case FSAL_UNCHECKED:
+      args.how.mode = UNCHECKED;
+      break;
+   case FSAL_GUARDED:
+      args.how.mode = GUARDED;
+      break;
+   case FSAL_EXCLUSIVE:
+      args.how.mode = EXCLUSIVE;
+      break;
+   }
+
+   if (createmode == FSAL_EXCLUSIVE) {
+      // Set the verifier
+      memcpy(&args.how.createhow3_u.verf, verifier, sizeof(fsal_verifier_t));
+   } else {
+      // Otherwise, set the attributes for the file.
+      if (attrib_set == NULL) {
+         LogCrit(COMPONENT_FSAL,
+                 "PROXY_V3: Non-exclusive CREATE() without attributes.");
+         return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+      }
+
+      if (!fsalattr_to_sattr3(attrib_set, &args.how.createhow3_u.obj_attributes)) {
+         LogCrit(COMPONENT_FSAL,
+                 "PROXY_V3: CREATE() with invalid attributes");
+         return fsalstat(ERR_FSAL_INVAL, 0);
+      }
+   }
+
+
+   // Issue the CREATE3 call.
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_CREATE,
+                         (xdrproc_t) xdr_CREATE3args, &args,
+                         (xdrproc_t) xdr_CREATE3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: CREATE3 failed");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   if (result.status != NFS3_OK) {
+      // Okay, let's see what we got.
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: CREATE3 failed, got %u", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   // We need both the handle and attributes to fill in the results.
+   if (!resok->obj_attributes.attributes_follow ||
+       !resok->obj.handle_follows) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: CREATE3 didn't return obj attributes or handle");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   const nfs_fh3 *obj_fh   = &resok->obj.post_op_fh3_u.handle;
+   const fattr3 *obj_attrs = &resok->obj_attributes.post_op_attr_u.attributes;
+
+   struct proxyv3_obj_handle *result_handle =
+      proxyv3_alloc_handle(op_ctx->fsal_export,
+                           obj_fh,
+                           obj_attrs,
+                           parent_obj,
+                           attrs_out);
+
+   if (result_handle == NULL) {
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
+
+   *new_obj = &result_handle->obj;
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
 // Do a readdir for the given directory (dir_hdl), possibly picking up where
@@ -1112,4 +1238,5 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.getattrs = proxyv3_getattrs;
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
+   PROXY_V3.handle_ops.open2 = proxyv3_open2;
 }

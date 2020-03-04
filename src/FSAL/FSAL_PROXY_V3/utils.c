@@ -84,6 +84,39 @@ bool attrmask_is_nfs3(attrmask_t mask) {
    return true;
 }
 
+static bool attrmask_valid_setattr(const attrmask_t mask) {
+   attrmask_t temp = mask;
+   const attrmask_t possible =
+      /* mode, uid, gid, size, atime, mtime */
+      ATTRS_SET_TIME | ATTRS_CREDS | ATTR_SIZE | ATTR_MODE;
+   if (FSAL_UNSET_MASK(temp, possible)) {
+      LogDebug(COMPONENT_FSAL,
+               "requested = %0lx\tNFS3 = %0lx\tExtra = %0lx",
+               mask, possible, temp);
+      return false;
+   }
+
+   // Make sure that only one of ATIME | ATIME_SERVER is set.
+   if (FSAL_TEST_MASK(mask, ATTR_ATIME) &&
+       FSAL_TEST_MASK(mask, ATTR_ATIME_SERVER)) {
+      LogDebug(COMPONENT_FSAL,
+               "Error: mask %0lx has both ATIME and ATIME_SERVER",
+               mask);
+      return false;
+   }
+
+   // Make sure that only one of MTIME | MTIME_SERVER is set.
+   if (FSAL_TEST_MASK(mask, ATTR_MTIME) &&
+       FSAL_TEST_MASK(mask, ATTR_MTIME_SERVER)) {
+      LogDebug(COMPONENT_FSAL,
+               "Error: mask %0lx has both MTIME and MTIME_SERVER",
+               mask);
+      return false;
+   }
+
+   return true;
+}
+
 // Fill in the FSAL attrlist (fsal_attrs_out) given the input NFSv3
 // attributes. This function returns false if the requested attributes
 // are greater than those supported by NFSv3.
@@ -102,5 +135,54 @@ bool fattr3_to_fsalattr(const fattr3 *attrs,
    FSAL_SET_MASK(fsal_attrs_out->valid_mask, ATTRS_NFS3);
    // XXX(boulos): Do we have to even do this? The CEPH FSAL does..
    FSAL_SET_MASK(fsal_attrs_out->supported, ATTRS_NFS3);
+   return true;
+}
+
+// Fill in the sattr3 (sattr3_out) given the input FSAL attrlist input.
+bool fsalattr_to_sattr3(const struct attrlist *fsal_attrs, sattr3 *attrs_out) {
+   // Zero the struct so that all the "set_it" optionals are false by default.
+   memset(attrs_out, 0, sizeof(*attrs_out));
+
+   // Make sure there aren't any additional options we aren't expecting.
+   if (!attrmask_valid_setattr(fsal_attrs->valid_mask)) {
+      return false;
+   }
+
+   if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_MODE)) {
+      attrs_out->mode.set_it = true;
+      attrs_out->mode.set_mode3_u.mode = fsal_attrs->mode;
+   }
+
+   if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_OWNER)) {
+      attrs_out->uid.set_it = true;
+      attrs_out->uid.set_uid3_u.uid = fsal_attrs->owner;
+   }
+
+   if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_GROUP)) {
+      attrs_out->gid.set_it = true;
+      attrs_out->gid.set_gid3_u.gid = fsal_attrs->group;
+   }
+
+   if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_SIZE)) {
+      attrs_out->size.set_it = true;
+      attrs_out->size.set_size3_u.size = fsal_attrs->filesize;
+   }
+
+   if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_ATIME)) {
+      attrs_out->atime.set_it = SET_TO_CLIENT_TIME;
+      attrs_out->atime.set_atime_u.atime.tv_sec = fsal_attrs->atime.tv_sec;
+      attrs_out->atime.set_atime_u.atime.tv_nsec = fsal_attrs->atime.tv_nsec;
+   } else if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_ATIME_SERVER)) {
+      attrs_out->atime.set_it = SET_TO_SERVER_TIME;
+   }
+
+   if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_MTIME)) {
+      attrs_out->mtime.set_it = SET_TO_CLIENT_TIME;
+      attrs_out->mtime.set_mtime_u.mtime.tv_sec = fsal_attrs->mtime.tv_sec;
+      attrs_out->mtime.set_mtime_u.mtime.tv_nsec = fsal_attrs->mtime.tv_nsec;
+   } else if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_MTIME_SERVER)) {
+      attrs_out->mtime.set_it = SET_TO_SERVER_TIME;
+   }
+
    return true;
 }

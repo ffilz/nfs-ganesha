@@ -77,5 +77,7 @@ bool attrmask_is_nfs3(attrmask_t mask);
 bool fattr3_to_fsalattr(const fattr3 *attrs,
                         struct attrlist *fsal_attrs_out);
 
+// Convert from the FSAL attrlist to an NFSv3 setattr3 struct.
+bool fsalattr_to_sattr3(const struct attrlist *fsal_attrs, sattr3 *attrs_out);
 
 #endif
