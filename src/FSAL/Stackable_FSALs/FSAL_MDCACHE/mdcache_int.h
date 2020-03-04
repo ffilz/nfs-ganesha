@@ -1,7 +1,7 @@
 /*
  * vim:noexpandtab:shiftwidth=8:tabstop=8:
  *
- * Copyright 2015-2019 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2015-2020 Red Hat, Inc. and/or its affiliates.
  * Author: Daniel Gryniewicz <dang@redhat.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -162,6 +162,7 @@ enum lru_q_id {
 
 #define LRU_CLEANUP 0x00000001 /* Entry is on cleanup queue */
 #define LRU_CLEANED 0x00000002 /* Entry has been cleaned */
+#define LRU_DESTROY 0x00000004 /* Entry is being destroyed */
 
 typedef struct mdcache_lru__ {
 	struct glist_head q;	/*< Link in the physical deque

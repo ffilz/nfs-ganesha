@@ -325,9 +325,9 @@ cih_get_by_key_latch(mdcache_key_t *key, cih_latch_t *latch,
  found:
 	entry = avltree_container_of(node, mdcache_entry_t, fh_hk.node_k);
 
-	if (atomic_fetch_int32_t(&entry->lru.refcnt) == 0) {
-		/* If refcount is 0, this entry is being freed, but has not yet
-		 * been removed from the hashtable.  Don't return it */
+	if (entry->lru.flags & LRU_DESTROY) {
+		/* This entry is being freed, but has not yet been removed from
+		 * the hashtable.  Don't return it */
 		LogDebug(COMPONENT_HASHTABLE_CACHE, "entry %p being freed",
 			 entry);
 		entry = NULL;

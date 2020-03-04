@@ -652,14 +652,19 @@ lru_reap_impl(enum lru_q_id qid)
 		refcnt = atomic_inc_int32_t(&lru->refcnt);
 		entry = container_of(lru, mdcache_entry_t, lru);
 #ifdef USE_LTTNG
-	tracepoint(mdcache, mdc_lru_ref,
-		   __func__, __LINE__, &entry->obj_handle, entry->sub_handle,
-		   refcnt);
+		tracepoint(mdcache, mdc_lru_ref,
+			   __func__, __LINE__, &entry->obj_handle,
+			   entry->sub_handle, refcnt);
 #endif
 		QUNLOCK(qlane);
+		if (unlikely(entry->lru.flags & LRU_DESTROY)) {
+			/* Is being destroyed; can't put, have to decrement */
+			atomic_dec_int32_t(&entry->lru.refcnt);
+			continue;
+		}
 
 		if (unlikely(refcnt != (LRU_SENTINEL_REFCOUNT + 1))) {
-			/* cant use it. */
+			/* cant use it, but had a valid ref.  Put. */
 			mdcache_put(entry);
 			continue;
 		}
@@ -1909,6 +1914,12 @@ _mdcache_lru_ref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 		   func, line, &entry->obj_handle, entry->sub_handle, refcnt);
 #endif
 
+	if (entry->lru.flags & LRU_DESTROY) {
+		/* Refcount already went to zero, don't use this entry */
+		atomic_dec_int32_t(&entry->lru.refcnt);
+		return fsalstat(ERR_FSAL_STALE, 0);
+	}
+
 	/* adjust LRU on initial refs */
 	if (flags & LRU_REQ_INITIAL) {
 
@@ -1992,8 +2003,17 @@ _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 #endif
 
 	if (unlikely(refcnt == 0)) {
-
 		struct lru_q *q;
+		uint32_t flags;
+
+		/* Set the destroy flag indicating refcnt went do 0 */
+		flags = atomic_postset_uint32_t_bits(&entry->lru.flags,
+						     LRU_DESTROY);
+		if (unlikely(flags & LRU_DESTROY)) {
+			/* This has already gone to 0, lest the first in clean
+			 * it up */
+			goto out;
+		}
 
 		/* we MUST recheck that refcount is still 0 */
 		QLOCK(qlane);
