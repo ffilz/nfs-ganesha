@@ -649,8 +649,22 @@ lru_reap_impl(enum lru_q_id qid)
 			QUNLOCK(qlane);
 			continue;
 		}
+
+		/* If this entry is about to be destroyed, bail out
+		 *
+		 * @TODO: Should we call mdcache_lru_ref() with a
+		 * different flag to do what the following code does?
+		 * Similar to LRU_REQ_INITIAL but without chaging queue
+		 * placement!
+		 */
 		refcnt = atomic_inc_int32_t(&lru->refcnt);
+		if (refcnt == 1) {
+			(void)atomic_dec_int32_t(&lru->refcnt);
+			QUNLOCK(qlane);
+			continue;
+		}
 		entry = container_of(lru, mdcache_entry_t, lru);
+
 #ifdef USE_LTTNG
 	tracepoint(mdcache, mdc_lru_ref,
 		   __func__, __LINE__, &entry->obj_handle, entry->sub_handle,
@@ -1890,7 +1904,7 @@ void mdcache_lru_insert(mdcache_entry_t *entry, mdc_reason_t reason)
  * should take an LRU_REQ_INITIAL ref, and all subsequent callpaths should take
  * LRU_FLAG_NONE refs.
  *
- * @return FSAL status
+ * @return FSAL status: TODO: could this be just a bool?
  */
 fsal_status_t
 _mdcache_lru_ref(mdcache_entry_t *entry, uint32_t flags, const char *func,
@@ -1899,10 +1913,7 @@ _mdcache_lru_ref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 	mdcache_lru_t *lru = &entry->lru;
 	struct lru_q_lane *qlane = &LRU[lru->lane];
 	struct lru_q *q;
-#ifdef USE_LTTNG
-	int32_t refcnt =
-#endif
-		atomic_inc_int32_t(&entry->lru.refcnt);
+	int32_t refcnt = atomic_inc_int32_t(&entry->lru.refcnt);
 
 #ifdef USE_LTTNG
 	tracepoint(mdcache, mdc_lru_ref,
@@ -1911,6 +1922,15 @@ _mdcache_lru_ref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 
 	/* adjust LRU on initial refs */
 	if (flags & LRU_REQ_INITIAL) {
+		/* Initial ref requires us to make sure that this entry
+		 * is not about to be freed. Once refcount goes zero,
+		 * The first thread that made the refcount zero will free
+		 * the entry. We just bail out here.
+		 */
+		if (refcnt == 1) {
+			(void)atomic_dec_int32_t(&entry->lru.refcnt);
+			return fsalstat(ERR_FSAL_INVAL, 0);
+		}
 
 		QLOCK(qlane);
 
@@ -1995,15 +2015,6 @@ _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 
 		struct lru_q *q;
 
-		/* we MUST recheck that refcount is still 0 */
-		QLOCK(qlane);
-		refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
-
-		if (unlikely(refcnt > 0)) {
-			QUNLOCK(qlane);
-			goto out;
-		}
-
 		/* Really zero.  Remove entry and mark it as dead. */
 		q = lru_queue_of(entry);
 		if (q) {
@@ -2020,7 +2031,6 @@ _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 
 		(void) atomic_dec_int64_t(&lru_state.entries_used);
 	}			/* refcnt == 0 */
- out:
 	return freed;
 }
 

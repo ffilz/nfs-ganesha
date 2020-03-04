@@ -726,22 +726,23 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 
 		/* Ref it */
 		status = mdcache_lru_ref(*entry, LRU_REQ_INITIAL);
-		if (!FSAL_IS_ERROR(status)) {
-			/* We used to return ERR_FSAL_EXIST but all callers
-			 * just converted that to ERR_FSAL_NO_ERROR, so
-			 * leave the status alone.
-			 */
+		if (FSAL_IS_SUCCESS(status)) {
 			(void)atomic_inc_uint64_t(&cache_stp->inode_conf);
+			/* It it was unreachable before, mark it reachable */
+			atomic_clear_uint32_t_bits(&(*entry)->mde_flags,
+					MDCACHE_UNREACHABLE);
+
+			/* Release the subtree hash table lock */
+			cih_hash_release(&latch);
+
+			goto out_release_new_entry;
+		} else {
+			/* @TODO: The entry is about to be freed, should we try
+			 * again or should we ref in the hash function itself.
+			 * It is better to not have any zero ref entries
+			 * in the hash table though. Can we do that?
+			 */
 		}
-
-		/* It it was unreachable before, mark it reachable */
-		atomic_clear_uint32_t_bits(&(*entry)->mde_flags,
-					 MDCACHE_UNREACHABLE);
-
-		/* Release the subtree hash table lock */
-		cih_hash_release(&latch);
-
-		goto out_release_new_entry;
 	}
 
 	/* We won the race. */
