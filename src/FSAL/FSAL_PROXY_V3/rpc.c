@@ -254,7 +254,11 @@ bool proxyv3_call(const char *host, uint16_t port,
    // We've already read the header (record mark) and xid.
    size_t bytes_to_read = response_header.recmark;
    size_t total_bytes_read = 4;
-   memset(msgbuf, 0, kBufSize);
+   size_t read_buffer_size = bytes_to_read + sizeof(xid);
+
+   // Resize the buffer to let us slurp the whole response back.
+   msgbuf = gsh_realloc(msgbuf, read_buffer_size);
+   memset(msgbuf, 0, read_buffer_size);
    // Write the xid into the buffer.
    memcpy(msgbuf, &xid, sizeof(xid));
 

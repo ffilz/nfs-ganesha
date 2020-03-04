@@ -71,10 +71,10 @@ struct proxyv3_fsal_module PROXY_V3 = {
 // Global/server-wide parameters for NFSv3 proxying.
 static struct config_item proxy_params[] = {
    // Maximum read/write size in bytes
-   CONF_ITEM_UI64("maxwread", 1024, FSAL_MAXIOSIZE,
+   CONF_ITEM_UI64("maxread", 1024, FSAL_MAXIOSIZE,
                   1048576,
                   proxyv3_fsal_module,
-                  module.fs_info.maxwrite),
+                  module.fs_info.maxread),
 
    CONF_ITEM_UI64("maxwrite", 1024, FSAL_MAXIOSIZE,
                   1048576,
@@ -659,6 +659,113 @@ proxyv3_lookup_handle(struct fsal_obj_handle *parent,
                                   parent, handle, attrs_out);
 }
 
+// Handle a read from `obj_hdl` at offset read_arg->offset. When done, let
+// done_cb know how it went. NOTE(boulos): This function allows for lots of
+// fancy read options like NFSv4 delegations and so on, but as we only allow v3
+// callers none of that should apply.
+static void
+proxyv3_read2(struct fsal_obj_handle *obj_hdl,
+              bool bypass /* unused */,
+              fsal_async_cb done_cb,
+              struct fsal_io_arg *read_arg,
+              void *cb_arg) {
+   struct proxyv3_obj_handle *obj =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Doing read2 at offset %zu in handle %p of len %zu",
+            read_arg->offset, obj_hdl, read_arg->iov[0].iov_len);
+
+   // Signal that we've read 0 bytes.
+   read_arg->io_amount = 0;
+
+   // Like Ceph, we don't handle READ_PLUS.
+   if (read_arg->info != NULL) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Got a READPLUS request. Not supported");
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0), read_arg, cb_arg);
+      return;
+   }
+
+   // Since we're just a V3 proxy, we are stateless. If we get a stateful
+   // request, something bad must have happened.
+   if (read_arg->state != NULL) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Got a stateful READ request. Not supported");
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0), read_arg, cb_arg);
+      return;
+   }
+
+   // NOTE(boulos): Ganesha doesn't actually have a useful readv() equivalent,
+   // since it only allows a single offset (read_arg->offset), so read2
+   // implementations can just uselessly fill in different amounts at an
+   // offset. NFSv3 doesn't have a readv() equivalent, and Ganesha's NFSD won't
+   // generate it from clients anyway, but warn here.
+   if (read_arg->iov_count > 1) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Got asked for multiple reads at once. Unexpected.");
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0), read_arg, cb_arg);
+      return;
+   }
+
+   char *dst = read_arg->iov[0].iov_base;
+   uint64_t offset = read_arg->offset;
+   size_t bytes_to_read = read_arg->iov[0].iov_len;
+   // TODO(boulos): Clamp read size against maxRead (but again, Ganesha's NFSD
+   // layer will have already done so).
+
+   READ3args args;
+   READ3res result;
+   READ3resok *resok = &result.READ3res_u.resok;
+
+   memset(&result, 0, sizeof(result));
+
+   args.file.data.data_val = obj->fh3.data.data_val;
+   args.file.data.data_len = obj->fh3.data.data_len;
+   args.offset = offset;
+   args.count = bytes_to_read;
+
+   // Issue the read.
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_READ,
+                         (xdrproc_t) xdr_READ3args, &args,
+                         (xdrproc_t) xdr_READ3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call failed (%u)",
+              result.status);
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0), read_arg, cb_arg);
+      return;
+   }
+
+   // If the read failed, tell the callback about the error.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: READ failed: %u", result.status);
+      done_cb(obj_hdl, nfsstat3_to_fsalstat(result.status), read_arg, cb_arg);
+      return;
+   }
+
+   // NOTE(boulos): data_len is not part of the NFS spec, but Ganesha should be
+   // getting the same number of bytes in the result.
+   if (resok->count != resok->data.data_len) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Did a read of len %u (resok.count) but buf says %u",
+              resok->count, resok->data.data_len);
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0), read_arg, cb_arg);
+      return;
+   }
+
+   read_arg->end_of_file = resok->eof;
+   read_arg->io_amount = resok->count;
+
+   // Copy the bytes into the output buffer.
+   memcpy(dst, resok->data.data_val, resok->data.data_len);
+
+   // Let the caller know that we're done.
+   done_cb(obj_hdl, fsalstat(ERR_FSAL_NO_ERROR, 0), read_arg, cb_arg);
+}
+
+
 static fsal_status_t
 proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
                          struct fsal_obj_handle *obj_hdl,
@@ -1004,4 +1111,5 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.release = proxyv3_handle_release;
    PROXY_V3.handle_ops.getattrs = proxyv3_getattrs;
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
+   PROXY_V3.handle_ops.read2 = proxyv3_read2;
 }
