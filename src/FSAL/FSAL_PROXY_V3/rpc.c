@@ -109,7 +109,8 @@ bool proxyv3_call(const char *host, uint16_t port,
    // Make a little buffer that's big enough for handling most
    // requests/responses. TODO(boulos): Move this into a
    // per-<something> allocator / reuse it.
-   const int kBufSize = 4096;
+   const uint kHeaderPadding = 512;
+   const uint kBufSize = PROXY_V3.module.fs_info.maxwrite + kHeaderPadding;
    char *msgbuf = gsh_calloc(1, kBufSize);
 
    AUTH *au;

@@ -891,6 +891,103 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
    done_cb(obj_hdl, fsalstat(ERR_FSAL_NO_ERROR, 0), read_arg, cb_arg);
 }
 
+// Handle a write to `obj_hdl` at offset writte_arg->offset. When done, let
+// done_cb know how it went. NOTE(boulos): This function allows for lots of
+// fancy options like NFSv4 delegations and so on, but as we only allow v3
+// callers none of that should apply.
+static void
+proxyv3_write2(struct fsal_obj_handle *obj_hdl,
+               bool bypass /* unused */,
+               fsal_async_cb done_cb,
+               struct fsal_io_arg *write_arg,
+               void *cb_arg) {
+   struct proxyv3_obj_handle *obj =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Doing write2 at offset %zu in handle %p of len %zu",
+            write_arg->offset, obj_hdl, write_arg->iov[0].iov_len);
+
+   // Signal that we've written 0 bytes so far.
+   write_arg->io_amount = 0;
+
+   // If into is only for READPLUS, it should definitely be NULL.
+   if (write_arg->info != NULL) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Write had 'readplus' info. Something went wrong");
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0), write_arg, cb_arg);
+      return;
+   }
+
+   // Since we're just a V3 proxy, we are stateless. If we get a stateful
+   // request, something bad must have happened.
+   if (write_arg->state != NULL) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Got a stateful WRITE request. Not supported");
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0), write_arg, cb_arg);
+      return;
+   }
+
+   // NOTE(boulos): Ganesha doesn't actually have a useful readv() equivalent,
+   // since it only allows a single offset (read_arg->offset), so read2
+   // implementations can just uselessly fill in different amounts at an
+   // offset. NFSv3 doesn't have a readv() equivalent, and Ganesha's NFSD won't
+   // generate it from clients anyway, but warn here.
+   if (write_arg->iov_count > 1) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Got asked for multiple writes at once. Unexpected.");
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0), write_arg, cb_arg);
+      return;
+   }
+
+   char *src = write_arg->iov[0].iov_base;
+   uint64_t offset = write_arg->offset;
+   size_t bytes_to_write = write_arg->iov[0].iov_len;
+   // TODO(boulos): Clamp read size against maxRead (but again, Ganesha's NFSD
+   // layer will have already done so).
+
+   WRITE3args args;
+   WRITE3res result;
+   WRITE3resok *resok = &result.WRITE3res_u.resok;
+
+   memset(&result, 0, sizeof(result));
+
+   args.file.data.data_val = obj->fh3.data.data_val;
+   args.file.data.data_len = obj->fh3.data.data_len;
+   args.offset = offset;
+   args.count = bytes_to_write;
+   args.data.data_len = bytes_to_write;
+   args.data.data_val = src;
+   // If the request is for a stable write, ask for FILE_SYNC (rather than just
+   // DATA_SYNC), like nfs3_write.c does.
+   args.stable = (write_arg->fsal_stable) ? FILE_SYNC : UNSTABLE;
+
+   // Issue the read.
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_WRITE,
+                         (xdrproc_t) xdr_WRITE3args, &args,
+                         (xdrproc_t) xdr_WRITE3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call failed (%u)",
+              result.status);
+      done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0), write_arg, cb_arg);
+      return;
+   }
+
+   // If the read failed, tell the callback about the error.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: WRITE failed: %u", result.status);
+      done_cb(obj_hdl, nfsstat3_to_fsalstat(result.status), write_arg, cb_arg);
+      return;
+   }
+
+   // Signal that we wrote resok->count bytes.
+   write_arg->io_amount = resok->count;
+
+   // Let the caller know that we're done.
+   done_cb(obj_hdl, fsalstat(ERR_FSAL_NO_ERROR, 0), write_arg, cb_arg);
+}
 
 static fsal_status_t
 proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
@@ -1239,4 +1336,5 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
+   PROXY_V3.handle_ops.write2 = proxyv3_write2;
 }
