@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d55a17a7_9ab68e80",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-03-05T18:51:24Z",
+      "side": 1,
+      "message": "Making sure that we will never have zero ref objects in this hash table and increasing the ref here itself is a good idea.\n\nThe caller will have to deal with insertion failure if we return NULL with an actual entry in the cache. I see that code but better to avoid such things.",
+      "parentUuid": "7d1aab27_e77379aa",
+      "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1986de4c_a7ec4cf4",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 1
