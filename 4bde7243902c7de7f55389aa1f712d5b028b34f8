@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7d1aab27_e77379aa",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-03-05T14:14:01Z",
+      "side": 1,
+      "message": "We can\u0027t delete this code, it resolved an actual bug (hit by IBM, if I remember correctly).  We need something like this.  We have the latch on the hash table, maybe we can do something with that.",
+      "parentUuid": "2787a815_be012bcf",
+      "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1986de4c_a7ec4cf4",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f0dccaf5_8accf6cd",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-03-05T14:14:01Z",
+      "side": 1,
+      "message": "True.  I\u0027ll think about this.",
+      "parentUuid": "1986de4c_a7ec4cf4",
+      "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd9b506c_cceb2b03",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2020-03-05T04:20:34Z",
       "side": 1,
       "message": "If this ever happens, we are doomed! The refcount went to zero at one time in its life and then this thread also set the DESTROY flag. If we don\u0027t destroy, no one else will destroy (a clear leak).",
+      "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e37e507_50ef28fc",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2024,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-03-05T14:14:01Z",
+      "side": 1,
+      "message": "This can be removed, it should be covered by the check above.  I just didn\u0027t bother, as it\u0027s harmless.",
+      "parentUuid": "bd9b506c_cceb2b03",
       "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
