@@ -177,14 +177,15 @@ bool proxyv3_call(const char *host, uint16_t port,
 
    size_t total_bytes_written = 0;
    while (total_bytes_written < bytes_to_send) {
+      size_t remaining = bytes_to_send - total_bytes_written;
       ssize_t bytes_written =
          write(fd,
                msgbuf + total_bytes_written,
-               bytes_to_send - total_bytes_written);
+               remaining);
       if (bytes_written < 0) {
          LogCrit(COMPONENT_FSAL,
-                 "PROXY_V3: Write at %zu failed. Errno %d (%s)",
-                 total_bytes_written, errno, strerror(errno));
+                 "PROXY_V3: Write at %zu failed (remaining was %zu). Errno %d (%s)",
+                 total_bytes_written, remaining, errno, strerror(errno));
          gsh_free(msgbuf);
          AUTH_DESTROY(au);
          return false;

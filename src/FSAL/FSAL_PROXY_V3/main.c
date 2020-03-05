@@ -962,7 +962,7 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
    // DATA_SYNC), like nfs3_write.c does.
    args.stable = (write_arg->fsal_stable) ? FILE_SYNC : UNSTABLE;
 
-   // Issue the read.
+   // Issue the write.
    if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
                          NFSPROC3_WRITE,
                          (xdrproc_t) xdr_WRITE3args, &args,
@@ -974,7 +974,7 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
       return;
    }
 
-   // If the read failed, tell the callback about the error.
+   // If the write failed, tell the callback about the error.
    if (result.status != NFS3_OK) {
       LogDebug(COMPONENT_FSAL,
                "PROXY_V3: WRITE failed: %u", result.status);
@@ -988,6 +988,50 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
    // Let the caller know that we're done.
    done_cb(obj_hdl, fsalstat(ERR_FSAL_NO_ERROR, 0), write_arg, cb_arg);
 }
+
+// Handle COMMIT requests.
+static fsal_status_t
+proxyv3_commit2(struct fsal_obj_handle *obj_hdl,
+                off_t offset,
+                size_t len) {
+   struct proxyv3_obj_handle *obj =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Doing commit at offset %zu in handle %p of len %zu",
+            offset, obj_hdl, len);
+   COMMIT3args args;
+   COMMIT3res result;
+
+   memset(&result, 0, sizeof(result));
+
+   args.file.data.data_val = obj->fh3.data.data_val;
+   args.file.data.data_len = obj->fh3.data.data_len;
+   args.offset = offset;
+   args.count = len;
+
+   // Issue the COMMIT.
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_COMMIT,
+                         (xdrproc_t) xdr_COMMIT3args, &args,
+                         (xdrproc_t) xdr_COMMIT3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call failed (%u)",
+              result.status);
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   // If the commit failed, report the error upwards.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: COMMIT failed: %u", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   // Commit happened, no problems to report.
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
 
 static fsal_status_t
 proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
@@ -1210,6 +1254,67 @@ proxyv3_handle_to_key(struct fsal_obj_handle *obj_hdl,
 }
 
 
+// Fill in various static paramters from the given root file handle.
+static fsal_status_t
+proxyv3_fill_fsinfo(nfs_fh3 *fh3) {
+   // Now issue an FSINFO to ask the server about its max read/write sizes.
+   FSINFO3args args;
+   FSINFO3res result;
+   FSINFO3resok *resok = &result.FSINFO3res_u.resok;
+   fsal_staticfsinfo_t *fsinfo = &PROXY_V3.module.fs_info;
+
+   memcpy(&args.fsroot, fh3, sizeof(*fh3));
+   memset(&result, 0, sizeof(result));
+
+   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+                         NFSPROC3_FSINFO,
+                         (xdrproc_t) xdr_FSINFO3args, &args,
+                         (xdrproc_t) xdr_FSINFO3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: FSINFO failed");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   if (result.status != NFS3_OK) {
+      // Okay, let's see what we got.
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: FSINFO failed, got %u", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: FSINFO3 returned maxread %u maxwrite %u maxfilesize %zu",
+            resok->rtmax, resok->wtmax, resok->maxfilesize);
+
+   // Lower any values we need to. NOTE(boulos): The export manager code reads
+   // fsinfo->maxread/maxwrite/maxfilesize, but the *real* values are the
+   // op_ctx->ctx_export->MaxRead/MaxWrite/PrefRead/PrefWrite fields (which it
+   // feels gross to go writing into...).
+   if (resok->rtmax != 0 && fsinfo->maxread > resok->rtmax) {
+      LogWarn(COMPONENT_FSAL,
+              "Changing maxread from %zu to %u",
+              fsinfo->maxread, resok->rtmax);
+      fsinfo->maxread = resok->rtmax;
+   }
+
+   if (resok->wtmax != 0 && fsinfo->maxwrite > resok->wtmax) {
+      LogWarn(COMPONENT_FSAL,
+              "Reducing maxwrite from %zu to %u",
+              fsinfo->maxwrite, resok->wtmax);
+      fsinfo->maxwrite = resok->wtmax;
+   }
+
+   if (resok->maxfilesize != 0 && fsinfo->maxfilesize > resok->maxfilesize) {
+      LogWarn(COMPONENT_FSAL,
+              "Changing maxfilesize from %zu to %zu",
+              fsinfo->maxfilesize, resok->maxfilesize);
+      fsinfo->maxfilesize = resok->maxfilesize;
+   }
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+
 // Setup our NFSv3 Proxy for a given NFS Export.
 static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
                                            void *parse_node,
@@ -1296,17 +1401,18 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
 
+   nfs_fh3 *fh3 = (nfs_fh3*) &result.mountres3_u.mountinfo.fhandle;
+
    LogDebug(COMPONENT_FSAL,
             "PROXY_V3: Mount successful. Got back a %u len fhandle",
-            result.mountres3_u.mountinfo.fhandle.fhandle3_len);
+            fh3->data.data_len);
 
    // Copy the result for later use.
-   export->root_handle_len = result.mountres3_u.mountinfo.fhandle.fhandle3_len;
-   memcpy(export->root_handle,
-          result.mountres3_u.mountinfo.fhandle.fhandle3_val,
-          export->root_handle_len);
+   export->root_handle_len = fh3->data.data_len;
+   memcpy(export->root_handle, fh3->data.data_val, fh3->data.data_len);
 
-   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+   // Now fill in the fsinfo and we're done.
+   return proxyv3_fill_fsinfo(fh3);
 }
 
 
@@ -1337,4 +1443,5 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
    PROXY_V3.handle_ops.write2 = proxyv3_write2;
+   PROXY_V3.handle_ops.commit2 = proxyv3_commit2;
 }
