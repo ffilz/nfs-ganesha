@@ -31,9 +31,6 @@
 
 #include "proxyv3_fsal_methods.h"
 
-static const char* kFilestoreHost = "192.168.1.4"; // nfsd by hand
-//static const char* kFilestoreHost = "10.150.103.122"; // My filestore instance
-
 // The little struct we want Ganesha to hold for us.
 struct proxyv3_obj_handle {
    struct fsal_obj_handle obj;
@@ -43,9 +40,11 @@ struct proxyv3_obj_handle {
    const struct proxyv3_obj_handle *parent;
 };
 
+// TODO(boulos): I should probably shove this into the module or something...
 static struct proxyv3_obj_handle *kRootObjHandle;
 
-
+// This struct tells Ganesha which things we can handle or not. Some of the
+// fields are filled in *later* with an FSINFO call.
 struct proxyv3_fsal_module PROXY_V3 = {
    .module = {
       .fs_info = {
@@ -110,6 +109,29 @@ struct config_block proxy_export_param = {
    .blk_desc.u.blk.commit = noop_conf_commit
 };
 
+// Grab the sockaddr from our params via op_ctx.
+static const struct sockaddr* proxyv3_sockaddr() {
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
+
+   return export->params.sockaddr;
+}
+
+// Grab the socklen from our params via op_ctx.
+static const socklen_t proxyv3_socklen() {
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
+
+   return export->params.socklen;
+}
+
+// Grab the debugging sockname from our params via op_ctx.
+static const char* proxyv3_sockname() {
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
+
+   return export->params.sockname;
+}
 
 // Load our configuration from the config file and do any validation we need to.
 static fsal_status_t proxyv3_init_config(struct fsal_module *fsal_handle,
@@ -117,6 +139,9 @@ static fsal_status_t proxyv3_init_config(struct fsal_module *fsal_handle,
                                          struct config_error_type *error_type) {
    struct proxyv3_fsal_module *proxy_v3 =
       container_of(fsal_handle, struct proxyv3_fsal_module, module);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Handling our config");
 
    (void) load_config_from_parse(config_file,
                                  &proxy_param,
@@ -316,7 +341,9 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
 
    memset(&result, 0, sizeof(result));
 
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_LOOKUP,
                          (xdrproc_t) xdr_LOOKUP3args, &args,
                          (xdrproc_t) xdr_LOOKUP3res, &result)) {
@@ -380,7 +407,9 @@ static fsal_status_t proxyv3_getattr_from_fh3(struct nfs_fh3 *fh3,
    memset(&result, 0, sizeof(result));
 
    // If the call fails for any reason, exit.
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_GETATTR,
                          (xdrproc_t) xdr_GETATTR3args, &args,
                          (xdrproc_t) xdr_GETATTR3res, &result)) {
@@ -475,16 +504,16 @@ fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
    LogDebug(COMPONENT_FSAL, "PROXY_V3: Looking up path '%s'", path);
 
    // Check that the first part of the path matches our root.
-   const char *kRootPath = "/testy";
-   const size_t root_len = strlen(kRootPath);
+   const char *root_path = op_ctx->ctx_export->fullpath;
+   const size_t root_len = strlen(root_path);
 
    const char *p = path;
 
    // Check that the path matches our root prefix.
-   if (strncmp(path, kRootPath, root_len) != 0) {
+   if (strncmp(path, root_path, root_len) != 0) {
       LogDebug(COMPONENT_FSAL,
                "PROXY_V3: path ('%s') doesn't match our root ('%s')",
-               path, kRootPath);
+               path, root_path);
       return fsalstat(ERR_FSAL_FAULT, 0);
    }
 
@@ -587,7 +616,9 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
 
 
    // Issue the CREATE3 call.
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_CREATE,
                          (xdrproc_t) xdr_CREATE3args, &args,
                          (xdrproc_t) xdr_CREATE3res, &result)) {
@@ -680,7 +711,9 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
                "Calling READDIRPLUS with cookie %lu",
                cookie);
 
-      if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+      if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                            proxyv3_socklen(),
+                            op_ctx->creds,
                             NFSPROC3_READDIRPLUS,
                             (xdrproc_t) xdr_READDIRPLUS3args, &args,
                             (xdrproc_t) xdr_READDIRPLUS3res, &result))  {
@@ -852,7 +885,9 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
    args.count = bytes_to_read;
 
    // Issue the read.
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_READ,
                          (xdrproc_t) xdr_READ3args, &args,
                          (xdrproc_t) xdr_READ3res, &result)) {
@@ -963,7 +998,9 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
    args.stable = (write_arg->fsal_stable) ? FILE_SYNC : UNSTABLE;
 
    // Issue the write.
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_WRITE,
                          (xdrproc_t) xdr_WRITE3args, &args,
                          (xdrproc_t) xdr_WRITE3res, &result)) {
@@ -1011,7 +1048,9 @@ proxyv3_commit2(struct fsal_obj_handle *obj_hdl,
    args.count = len;
 
    // Issue the COMMIT.
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_COMMIT,
                          (xdrproc_t) xdr_COMMIT3args, &args,
                          (xdrproc_t) xdr_COMMIT3res, &result)) {
@@ -1070,7 +1109,9 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
 
    memset(&result, 0, sizeof(result));
    // If the call fails for any reason, exit.
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_FSSTAT,
                          (xdrproc_t) xdr_FSSTAT3args, &args,
                          (xdrproc_t) xdr_FSSTAT3res, &result)) {
@@ -1266,7 +1307,9 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3) {
    memcpy(&args.fsroot, fh3, sizeof(*fh3));
    memset(&result, 0, sizeof(result));
 
-   if (!proxyv3_nfs_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
                          NFSPROC3_FSINFO,
                          (xdrproc_t) xdr_FSINFO3args, &args,
                          (xdrproc_t) xdr_FSINFO3res, &result)) {
@@ -1359,17 +1402,38 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
       return fsalstat(ERR_FSAL_INVAL, ret);
    }
 
-   // Try to mount. TODO(boulos): Grab this from the parameters.
-   mnt3_dirpath dirpath = "/testy";
+   // Setup the pointer and socklen arguments.
+   sockaddr_t *sockaddr = &export->params.srv_addr;
+   export->params.sockaddr = (struct sockaddr*) sockaddr;
+   if (sockaddr->ss_family == AF_INET) {
+      export->params.socklen = sizeof(struct sockaddr_in);
+   } else {
+      export->params.socklen = sizeof(struct sockaddr_in6);
+   }
+
+   // String-ify the "name" for debugging statements.
+   struct display_buffer dspbuf = {
+      sizeof(export->params.sockname),
+      export->params.sockname,
+      export->params.sockname
+   };
+   display_sockaddr(&dspbuf, &export->params.srv_addr);
+
+   LogDebug(COMPONENT_FSAL,
+            "Got sockaddr %s", export->params.sockname);
+
+   mnt3_dirpath dirpath = op_ctx->ctx_export->fullpath;
    mountres3 result;
    memset(&result, 0, sizeof(result));
 
    LogDebug(COMPONENT_FSAL,
             "PROXY_V3: Going to try to issue a NULL MOUNT at %s",
-            kFilestoreHost);
+            proxyv3_sockname());
 
    // Be nice and try a MOUNT NULL first.
-   if (!proxyv3_mount_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_mount_call(proxyv3_sockaddr(),
+                           proxyv3_socklen(),
+                           op_ctx->creds,
                            MOUNTPROC3_NULL,
                            (xdrproc_t) xdr_void, NULL,
                            (xdrproc_t) xdr_void, NULL)) {
@@ -1381,9 +1445,11 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
 
    LogDebug(COMPONENT_FSAL,
             "PROXY_V3: Going to try to mount '%s' on %s",
-            dirpath, kFilestoreHost);
+            dirpath, proxyv3_sockname());
 
-   if (!proxyv3_mount_call(kFilestoreHost, op_ctx->creds,
+   if (!proxyv3_mount_call(proxyv3_sockaddr(),
+                           proxyv3_socklen(),
+                           op_ctx->creds,
                            MOUNTPROC3_MNT,
                            (xdrproc_t) xdr_dirpath, &dirpath,
                            (xdrproc_t) xdr_mountres3, &result)) {

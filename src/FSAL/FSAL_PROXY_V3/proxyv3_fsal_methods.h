@@ -26,6 +26,7 @@
 #include "config.h"
 #include "fsal.h"
 #include "FSAL/fsal_init.h"
+#include <sys/socket.h>
 
 struct proxyv3_fsal_module {
    struct fsal_module module;
@@ -34,7 +35,13 @@ struct proxyv3_fsal_module {
 
 // Start with just needing the Srv_Addr parameter to an NFSv3 server.
 struct proxyv3_client_params {
+   // This is the actual server address.
    sockaddr_t srv_addr;
+
+   // These is *derived* from srv_addr and points to it.
+   const struct sockaddr *sockaddr;
+   socklen_t socklen;
+   char sockname[SOCK_NAME_MAX];
 };
 
 struct proxyv3_export {
@@ -49,12 +56,16 @@ extern struct proxyv3_fsal_module PROXY_V3;
 
 bool proxyv3_rpc_init();
 
-bool proxyv3_nfs_call(const char *host, const struct user_cred *creds,
+bool proxyv3_nfs_call(const struct sockaddr *host,
+                      const socklen_t socklen,
+                      const struct user_cred *creds,
                       const rpcproc_t nfsProc,
                       const xdrproc_t encodeFunc, const void *args,
                       const xdrproc_t decodeFunc, void *output);
 
-bool proxyv3_mount_call(const char *host, const struct user_cred *creds,
+bool proxyv3_mount_call(const struct sockaddr *host,
+                        const socklen_t socklen,
+                        const struct user_cred *creds,
                         const rpcproc_t mountProc,
                         const xdrproc_t encodeFunc, const void *args,
                         const xdrproc_t decodeFunc, void *output);

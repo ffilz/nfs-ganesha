@@ -53,7 +53,9 @@ bool proxyv3_rpc_init() {
 // NOTE(boulos): This is basically rpc_call redone by hand, because
 // ganesha's "nfsd" hijacks the RPC setup to the point where we can't
 // issue our own NFS-related rpcs as a simple client.
-bool proxyv3_call(const char *host, uint16_t port,
+bool proxyv3_call(const struct sockaddr *host,
+                  const socklen_t socklen,
+                  uint16_t port,
                   const struct user_cred *creds,
                   const rpcprog_t rpcProgram,
                   const rpcvers_t rpcVersion,
@@ -64,9 +66,55 @@ bool proxyv3_call(const char *host, uint16_t port,
    struct rpc_msg rmsg;
    struct rpc_msg reply;
 
-   int fd = socket(PF_INET /* IPv4 */,
+   if (host->sa_family != AF_INET &&
+       host->sa_family != AF_INET6) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: passed a host with sa_family %u",
+              host->sa_family);
+      return false;
+   }
+
+   char addrForErrors[INET6_ADDRSTRLEN] = { 0 };
+   // Strangely, inet_ntop takes the length of the *buffer* not the length of
+   // the socket (perhaps it just uses the sa_family for socklen)
+   if (!inet_ntop(host->sa_family, host, addrForErrors, INET6_ADDRSTRLEN)) {
+      LogCrit(COMPONENT_FSAL,
+              "Couldn't decode host socket for debugging");
+      return false;
+   }
+
+   bool ipv6 = host->sa_family == AF_INET6;
+   if ((ipv6 && socklen != sizeof(struct sockaddr_in6)) ||
+       (!ipv6 && socklen != sizeof(struct sockaddr_in))) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Given an ipv%s sockaddr (%s) with len %u != %zu",
+              (ipv6) ? "6" : "4",
+              addrForErrors,
+              socklen,
+              (ipv6) ? sizeof(struct sockaddr_in6) : sizeof(struct sockaddr_in));
+      return false;
+   }
+
+   struct sockaddr hostAndPort;
+   memset(&hostAndPort, 0, sizeof(hostAndPort));
+   // Copy the input, and then override the port.
+   memcpy(&hostAndPort, host, socklen);
+   struct sockaddr_in  *hostv4 = (struct sockaddr_in*) &hostAndPort;
+   struct sockaddr_in6 *hostv6 = (struct sockaddr_in6*) &hostAndPort;
+
+   // Check that the caller is letting us slip the port in.
+   if ((ipv6 && hostv6->sin6_port != 0) ||
+       (!ipv6 && hostv4->sin_port != 0)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: passed an address (%s) with non-zero port %u",
+              addrForErrors,
+              (ipv6) ? hostv6->sin6_port : hostv4->sin_port);
+      return false;
+   }
+
+   int fd = socket((ipv6) ? PF_INET6 /* IPv6 */ : PF_INET /* IPv4 */,
                    SOCK_STREAM /* TCP */,
-                   IPPROTO_TCP /* TCP */);
+                   0 /* Pick it up from TCP */);
    if (fd < 0) {
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: Failed to create a socket. %d %s",
@@ -84,23 +132,16 @@ bool proxyv3_call(const char *host, uint16_t port,
       return false;
    }
 
-   struct sockaddr_in hostAddr = {
-      .sin_family = AF_INET,
-   };
-
-   hostAddr.sin_port = htons(port);
-
-   // Grr, inet_aton et al. return 0 if the input was *invalid*.
-   if (inet_aton(host, &hostAddr.sin_addr) == 0) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Failed to parse host '%s'.", host);
-      return false;
+   if (ipv6) {
+      hostv6->sin6_port = htons(port);
+   } else {
+      hostv4->sin_port = htons(port);
    }
 
-   if (connect(fd, &hostAddr, sizeof(struct sockaddr_in)) < 0) {
+   if (connect(fd, &hostAndPort, socklen) < 0) {
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: Failed to connect to host '%s'. errno %d (%s)",
-              host, errno, strerror(errno));
+              addrForErrors, errno, strerror(errno));
       close(fd);
       return false;
    }
@@ -340,7 +381,8 @@ bool proxyv3_call(const char *host, uint16_t port,
 
 // Helpful wrappers around the generic RPC call so that we don't need
 // to repeatedly pass in the program and version constants.
-bool proxyv3_nfs_call(const char *host,
+bool proxyv3_nfs_call(const struct sockaddr *host,
+                      const socklen_t socklen,
                       const struct user_cred *creds,
                       const rpcproc_t nfsProc,
                       const xdrproc_t encodeFunc, const void *args,
@@ -349,12 +391,13 @@ bool proxyv3_nfs_call(const char *host,
    const int kVersionNFSv3 = NFS_V3;
    const int kPortNFS = 2049;
 
-   return proxyv3_call(host, kPortNFS, creds,
+   return proxyv3_call(host, socklen, kPortNFS, creds,
                        kProgramNFS, kVersionNFSv3,
                        nfsProc, encodeFunc, args, decodeFunc, output);
 }
 
-bool proxyv3_mount_call(const char *host,
+bool proxyv3_mount_call(const struct sockaddr *host,
+                        const socklen_t socklen,
                         const struct user_cred *creds,
                         const rpcproc_t mountProc,
                         const xdrproc_t encodeFunc, const void *args,
@@ -363,7 +406,7 @@ bool proxyv3_mount_call(const char *host,
    const int kVersionMountv3 = MOUNT_V3;
    const int kPortMount = 2050;
 
-   return proxyv3_call(host, kPortMount, creds,
+   return proxyv3_call(host, socklen, kPortMount, creds,
                        kProgramMount, kVersionMountv3,
                        mountProc, encodeFunc, args, decodeFunc, output);
 }
