@@ -193,8 +193,16 @@ int compare_nfs4_owner(state_owner_t *owner1, state_owner_t *owner2)
 	if (owner1->so_owner_len != owner2->so_owner_len)
 		return 1;
 
-	return memcmp(owner1->so_owner_val, owner2->so_owner_val,
-		      owner1->so_owner_len);
+	if (memcmp(owner1->so_owner_val, owner2->so_owner_val,
+		   owner1->so_owner_len) != 0)
+		return 1;
+
+	if ((owner1->so_type == STATE_LOCK_OWNER_NFSV4) &&
+	    (owner1->so_owner.so_nfs4_owner.so_related_owner !=
+	     owner2->so_owner.so_nfs4_owner.so_related_owner))
+		return 1;
+
+	return 0;
 }
 
 /**
@@ -254,6 +262,7 @@ uint32_t nfs4_owner_value_hash_func(hash_parameter_t *hparam,
 	uint32_t res = 0;
 
 	state_owner_t *pkey = key->addr;
+	state_owner_t *r_owner = pkey->so_owner.so_nfs4_owner.so_related_owner;
 
 	/* Compute the sum of all the characters */
 	for (i = 0; i < pkey->so_owner_len; i++) {
@@ -261,6 +270,13 @@ uint32_t nfs4_owner_value_hash_func(hash_parameter_t *hparam,
 		sum += c;
 	}
 
+	if (pkey->so_type == STATE_LOCK_OWNER_NFSV4 && r_owner) {
+		for (i = 0; i < r_owner->so_owner_len; i++) {
+			c = ((char *)r_owner->so_owner_val)[i];
+			sum += c;
+		}
+		sum += r_owner->so_owner_len;
+	}
 	res =
 	    ((uint32_t) pkey->so_owner.so_nfs4_owner.so_clientid +
 	     (uint32_t) sum + pkey->so_owner_len +
@@ -286,6 +302,7 @@ uint64_t nfs4_owner_rbt_hash_func(hash_parameter_t *hparam,
 				  struct gsh_buffdesc *key)
 {
 	state_owner_t *pkey = key->addr;
+	state_owner_t *r_owner = pkey->so_owner.so_nfs4_owner.so_related_owner;
 
 	unsigned int sum = 0;
 	unsigned int i = 0;
@@ -296,6 +313,14 @@ uint64_t nfs4_owner_rbt_hash_func(hash_parameter_t *hparam,
 	for (i = 0; i < pkey->so_owner_len; i++) {
 		c = ((char *)pkey->so_owner_val)[i];
 		sum += c;
+	}
+
+	if (pkey->so_type == STATE_LOCK_OWNER_NFSV4 && r_owner) {
+		for (i = 0; i < r_owner->so_owner_len; i++) {
+			c = ((char *)r_owner->so_owner_val)[i];
+			sum += c;
+		}
+		sum += r_owner->so_owner_len;
 	}
 
 	res =
