@@ -454,6 +454,65 @@ static fsal_status_t proxyv3_getattrs(struct fsal_obj_handle *obj_hdl,
    return proxyv3_getattr_from_fh3(&handle->fh3, attrs_out);
 }
 
+// Do a SETATTR3 for obj_hdl of the attributes in attrib_set.
+static fsal_status_t
+proxyv3_setattr2(struct fsal_obj_handle *obj_hdl,
+                 bool bypass /* ignored, since we'll happily "bypass" */,
+                 struct state_t *state,
+                 struct attrlist *attrib_set) {
+   struct proxyv3_obj_handle *handle =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   SETATTR3args args;
+   SETATTR3res result;
+
+   memset(&result, 0, sizeof(result));
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Responding to SETATTR request for handle %p",
+            handle);
+
+   if (state != NULL) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: Asked for a stateful SETATTR2, probably a mistake");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   nfs_fh3 *fh3 = &handle->fh3;
+   args.object.data.data_val = fh3->data.data_val;
+   args.object.data.data_len = fh3->data.data_len;
+   // NOTE(boulos): Ganesha's NFSD handles this above us in nfs3_setattr.
+   args.guard.check = false;
+   if (!fsalattr_to_sattr3(attrib_set, &args.new_attributes)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: SETATTR3() with invalid attributes");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // If the call fails for any reason, exit.
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
+                         NFSPROC3_SETATTR,
+                         (xdrproc_t) xdr_SETATTR3args, &args,
+                         (xdrproc_t) xdr_SETATTR3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call failed (%u)",
+              result.status);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // If we didn't get back NFS3_OK, return the appropriate error.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: SETATTR failed. %u", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   // Must have worked :).
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
 // Do a specialized lookup for the root of an export via GETATTR3.
 fsal_status_t proxyv3_lookup_root(struct fsal_export *export_handle,
                                   struct fsal_obj_handle **handle,
@@ -1505,6 +1564,7 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.handle_to_key = proxyv3_handle_to_key;
    PROXY_V3.handle_ops.release = proxyv3_handle_release;
    PROXY_V3.handle_ops.getattrs = proxyv3_getattrs;
+   PROXY_V3.handle_ops.setattr2 = proxyv3_setattr2;
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
