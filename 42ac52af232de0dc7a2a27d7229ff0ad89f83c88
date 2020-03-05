@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5aa6df_d78dd8f5",
+        "filename": "src/SAL/nfs4_owner.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-03-05T18:09:13Z",
+      "side": 1,
+      "message": "You should do this compare before the memcmp for speed\n\nAnd you could leave out the check for lock owner since for other owner types so_related_owner should be NULL",
+      "revId": "42ac52af232de0dc7a2a27d7229ff0ad89f83c88",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51fa1705_ed7bd473",
+        "filename": "src/SAL/nfs4_owner.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-03-05T18:09:13Z",
+      "side": 1,
+      "message": "You could just hash the pointer value rather than the whole related owner string. And you could just unconditionally hash in pkey-\u003eso_owner.so_nfs4_owner.so_related_owner since it will be NULL for non-lock owners",
+      "revId": "42ac52af232de0dc7a2a27d7229ff0ad89f83c88",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
