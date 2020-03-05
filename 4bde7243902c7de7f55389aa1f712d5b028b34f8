@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2787a815_be012bcf",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-03-05T04:20:34Z",
+      "side": 1,
+      "message": "We are checking this flag here. It may NOT have been set when we checked above, but it could be set right after the execution of our check above. Unless someone guaranties that once NOT set here, then it will NOT be set for some time, there is NO use of this check.\n\nIf this flag could be set right after our check above, I would rather delete the code.",
+      "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1986de4c_a7ec4cf4",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-03-05T04:20:34Z",
+      "side": 1,
+      "message": "A thread that sets the above bit already dropped the refcount to zero. It won\u0027t set this bit and then drop the refcount. So there is a small window where refcount goes to zero and this is bit is set. If this code were to execute in that window, we miss this check and end up calling mdcache_put() below. Note that the above bit is NOT set under a lock (just an atomic bit).",
+      "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd9b506c_cceb2b03",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2024,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-03-05T04:20:34Z",
+      "side": 1,
+      "message": "If this ever happens, we are doomed! The refcount went to zero at one time in its life and then this thread also set the DESTROY flag. If we don\u0027t destroy, no one else will destroy (a clear leak).",
+      "revId": "4bde7243902c7de7f55389aa1f712d5b028b34f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
