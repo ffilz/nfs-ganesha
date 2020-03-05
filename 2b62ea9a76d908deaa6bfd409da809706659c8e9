@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90a7ed28_accb48d1",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1930,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-03-05T18:47:42Z",
+      "side": 1,
+      "message": "I think this has the same race.  Ref goes to 1, and before we check and decrement, another thread gets a ref, and it\u0027s ref goes to 2, so it passes this check, and use-after-free.  Matt and I discussed a possibility this morning, I\u0027ll try and code it up.",
+      "revId": "2b62ea9a76d908deaa6bfd409da809706659c8e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
