@@ -193,6 +193,10 @@ int compare_nfs4_owner(state_owner_t *owner1, state_owner_t *owner2)
 	if (owner1->so_owner_len != owner2->so_owner_len)
 		return 1;
 
+	if (owner1->so_owner.so_nfs4_owner.so_related_owner !=
+	    owner2->so_owner.so_nfs4_owner.so_related_owner)
+		return 1;
+
 	return memcmp(owner1->so_owner_val, owner2->so_owner_val,
 		      owner1->so_owner_len);
 }
@@ -254,6 +258,7 @@ uint32_t nfs4_owner_value_hash_func(hash_parameter_t *hparam,
 	uint32_t res = 0;
 
 	state_owner_t *pkey = key->addr;
+	uint64_t r = (uint64_t) pkey->so_owner.so_nfs4_owner.so_related_owner;
 
 	/* Compute the sum of all the characters */
 	for (i = 0; i < pkey->so_owner_len; i++) {
@@ -264,6 +269,7 @@ uint32_t nfs4_owner_value_hash_func(hash_parameter_t *hparam,
 	res =
 	    ((uint32_t) pkey->so_owner.so_nfs4_owner.so_clientid +
 	     (uint32_t) sum + pkey->so_owner_len +
+	     (uint32_t) r +
 	     (uint32_t) pkey->so_type) % (uint32_t) hparam->index_size;
 
 	if (isDebug(COMPONENT_HASHTABLE))
@@ -300,6 +306,7 @@ uint64_t nfs4_owner_rbt_hash_func(hash_parameter_t *hparam,
 
 	res =
 	    (uint64_t) pkey->so_owner.so_nfs4_owner.so_clientid +
+	    (uint64_t) pkey->so_owner.so_nfs4_owner.so_related_owner +
 	    (uint64_t) sum + pkey->so_owner_len + (uint64_t) pkey->so_type;
 
 	if (isDebug(COMPONENT_HASHTABLE))
