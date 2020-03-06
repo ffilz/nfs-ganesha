@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c8a251a_7ddab5ba",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-03-06T04:55:37Z",
+      "side": 1,
+      "message": "I just realized we have the infrastructure now to actually correctly remove an export that has a nested export under it. We will just unclaim any file systems we can, and any unclaimed file system that has no descendant file systems that are claimed can be removed.\n\nThe only other step necessary for this to properly work is to build any missing PseudoFS entries.\n\nThe reverse should also be possible, we should be able to insert an export.\n\nNote that in either of these cases, clients that had handles for files and directories that are now \"owned\" by a different export (including the PseudoFS) would have stale handles.\n\nOn the other hand, this would allow removing an export and a nested export in one export update and it would be ok if the top export was removed first (just like on add export we work no matter which is added first).",
+      "revId": "5fef3db3119f19e76a208ce70c16f0a1ac63872a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
