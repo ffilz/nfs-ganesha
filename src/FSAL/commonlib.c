@@ -679,6 +679,7 @@ struct glist_head posix_file_systems = {
 	&posix_file_systems, &posix_file_systems
 };
 
+bool fs_initialized;
 struct avltree avl_fsid;
 struct avltree avl_dev;
 
@@ -970,10 +971,9 @@ int change_fsid_type(struct fsal_filesystem *fs,
 	return re_index_fs_fsid(fs, fsid_type, &fsid);
 }
 
-static bool posix_get_fsid(struct fsal_filesystem *fs)
+static bool posix_get_fsid(struct fsal_filesystem *fs, struct stat *mnt_stat)
 {
 	struct statfs stat_fs;
-	struct stat mnt_stat;
 #ifdef USE_BLKID
 	char *dev_name;
 	char *uuid_str;
@@ -993,14 +993,7 @@ static bool posix_get_fsid(struct fsal_filesystem *fs)
 	fs->namelen = stat_fs.f_namelen;
 #endif
 
-	if (stat(fs->path, &mnt_stat) != 0) {
-		LogEvent(COMPONENT_FSAL,
-			"stat of %s resulted in error %s(%d)",
-			fs->path, strerror(errno), errno);
-		return false;
-	}
-
-	fs->dev = posix2fsal_devt(mnt_stat.st_dev);
+	fs->dev = posix2fsal_devt(mnt_stat->st_dev);
 
 	if (nfs_param.core_param.fsid_device) {
 		fs->fsid_type = FSID_DEVICE;
@@ -1013,13 +1006,13 @@ static bool posix_get_fsid(struct fsal_filesystem *fs)
 	if (cache == NULL)
 		goto out;
 
-	dev_name = blkid_devno_to_devname(mnt_stat.st_dev);
+	dev_name = blkid_devno_to_devname(mnt_stat->st_dev);
 
 	if (dev_name == NULL) {
 		LogDebug(COMPONENT_FSAL,
 			 "blkid_devno_to_devname of %s failed for dev %d.%d",
-			 fs->path, major(mnt_stat.st_dev),
-			 minor(mnt_stat.st_dev));
+			 fs->path, major(mnt_stat->st_dev),
+			 minor(mnt_stat->st_dev));
 		goto out;
 	}
 
@@ -1070,7 +1063,7 @@ out:
 	return true;
 }
 
-static void posix_create_file_system(struct mntent *mnt)
+static void posix_create_file_system(struct mntent *mnt, struct stat *mnt_stat)
 {
 	struct fsal_filesystem *fs;
 	struct avltree_node *node;
@@ -1081,7 +1074,7 @@ static void posix_create_file_system(struct mntent *mnt)
 	fs->device = gsh_strdup(mnt->mnt_fsname);
 	fs->type = gsh_strdup(mnt->mnt_type);
 
-	if (!posix_get_fsid(fs)) {
+	if (!posix_get_fsid(fs, mnt_stat)) {
 		free_fs(fs);
 		return;
 	}
@@ -1228,6 +1221,7 @@ static void posix_find_parent(struct fsal_filesystem *this)
 		this->path, this->parent->path);
 }
 
+#if 0
 void show_tree(struct fsal_filesystem *this, int nest)
 {
 	struct glist_head *glist;
@@ -1248,25 +1242,124 @@ void show_tree(struct fsal_filesystem *this, int nest)
 			  nest + 1);
 	}
 }
+#endif
 
-int populate_posix_file_systems(bool force)
+bool path_is_subset(const char *path, const char *of)
+{
+	int len_path = strlen(path);
+	int len_of = strlen(of);
+	int len_cmp = MIN(len_path, len_of);
+
+	/* We can handle special case of "/" trivially, so check for it */
+	if ((len_path == 1 && path[0] == '/') ||
+	    (len_of == 1 && of[0] == '/')) {
+		/* One of the paths is "/" so subset MUST be true */
+		return true;
+	}
+
+
+	if (len_path != len_of &&
+	    ((len_cmp != len_path && path[len_cmp] != '/') ||
+	     (len_cmp != len_of && of[len_cmp] != '/'))) {
+		/* The character in the longer path just past the length of the
+		 * shorter path must be '/' in order to be a valid subset path.
+		 */
+		return false;
+	}
+
+	/* Compare the two strings to the length of the shorter one */
+	if (strncmp(path, of, len_cmp) != 0) {
+		/* Since the shortest doesn't match to the start of the longer
+		 * neither path is a subset of the other.
+		 */
+		return false;
+	}
+
+	return true;
+}
+
+int populate_posix_file_systems(const char *path)
 {
 	FILE *fp;
 	struct mntent *mnt;
 	struct stat st;
 	int retval = 0;
-	struct glist_head *glist;
-	struct fsal_filesystem *fs;
+	struct glist_head *glist, *glistn;
+	struct fsal_filesystem *fs, *fsn;
 
 	PTHREAD_RWLOCK_wrlock(&fs_lock);
 
-	if (glist_empty(&posix_file_systems)) {
+	if (!fs_initialized) {
 		LogDebug(COMPONENT_FSAL, "Initializing posix file systems");
 		avltree_init(&avl_fsid, fsal_fs_cmpf_fsid, 0);
 		avltree_init(&avl_dev, fsal_fs_cmpf_dev, 0);
-	} else if (!force) {
-		LogDebug(COMPONENT_FSAL, "File systems are initialized");
-		goto out;
+		fs_initialized = true;
+	}
+
+	/* We are about to rescan mtab, remove unclaimed file systems.
+	 * release_posix_filesystem will actually do the depth first
+	 * search for unclaimed file systems.
+	 */
+
+	glist = posix_file_systems.next;
+
+	/* Scan the list for the first top level file system that is not
+	 * claimed.
+	 *
+	 * NOTE: the following two loops are similar to glist_for_each_safe but
+	 *       instead of just taking the next list entry, we take the next
+	 *       list entry that is a top level file system. This way even if
+	 *       the glist->next was a descendant file system that was going to
+	 *       be released, before we release a file system or it's
+	 *       descendants, we look for the next top level file system, since
+	 *       it's a top level file system it WILL NOT be released when we
+	 *       release fs or it's descendants.
+	 */
+	while (glist != &posix_file_systems) {
+		fs = glist_entry(glist,
+				 struct fsal_filesystem,
+				 filesystems);
+
+		if (fs->parent == NULL) {
+			/* Top level file system done */
+			break;
+		}
+
+		glist = glist->next;
+	}
+
+	/* Now, while we still have a top level file system to process
+	 */
+	while (glist != &posix_file_systems) {
+		/* First, find the NEXT top level file system. */
+		glistn = glist->next;
+
+		while (glistn != &posix_file_systems) {
+			fsn = glist_entry(glistn,
+					  struct fsal_filesystem,
+					  filesystems);
+			if (fsn->parent == NULL) {
+				/* Top level file system done */
+				break;
+			}
+
+			glistn = glistn->next;
+		}
+
+		/* Now glistn/fsn is either the next top level file
+		 * system or glistn is &posix_file_systems.
+		 *
+		 * fs is the file system to try releasing on, try to
+		 * release this file system or it's descendants.
+		 */
+
+		(void) release_posix_file_system(fs, UNCLAIM_SKIP);
+
+		/* Now ready to start processing the next top level
+		 * file system that is not claimed.
+		 */
+		glist = glistn;
+		fs = fsn;
 	}
 
 	/* start looking for the mount point */
@@ -1288,6 +1381,13 @@ int populate_posix_file_systems(bool force)
 		if (mnt->mnt_dir == NULL)
 			continue;
 
+		if (!path_is_subset(path, mnt->mnt_dir)) {
+			LogDebug(COMPONENT_FSAL,
+				 "Ignoring %s because is is not a subset or superset of path %s",
+				 mnt->mnt_dir, path);
+			continue;
+		}
+
 		/* stat() on NFS mount points is prone to get stuck in
 		 * kernel due to unavailable NFS servers. Since we don't
 		 * support them anyway, check this early and avoid
@@ -1306,7 +1406,7 @@ int populate_posix_file_systems(bool force)
 			continue;
 		}
 
-		posix_create_file_system(mnt);
+		posix_create_file_system(mnt, &st);
 	}
 
 #ifdef USE_BLKID
@@ -1323,47 +1423,17 @@ int populate_posix_file_systems(bool force)
 		posix_find_parent(glist_entry(glist, struct fsal_filesystem,
 					      filesystems));
 
+#if 0
 	/* show tree */
 	glist_for_each(glist, &posix_file_systems) {
 		fs = glist_entry(glist, struct fsal_filesystem, filesystems);
 		if (fs->parent == NULL)
 			show_tree(fs, 0);
 	}
+#endif
 
  out:
 	PTHREAD_RWLOCK_unlock(&fs_lock);
-	return retval;
-}
-
-int reload_posix_filesystems(const char *path,
-			     struct fsal_module *fsal,
-			     struct fsal_export *exp,
-			     claim_filesystem_cb claim,
-			     unclaim_filesystem_cb unclaim,
-			     struct fsal_filesystem **root_fs)
-{
-	int retval = 0;
-
-	retval = populate_posix_file_systems(true);
-
-	if (retval != 0) {
-		LogCrit(COMPONENT_FSAL,
-			"populate_posix_file_systems returned %s (%d)",
-			strerror(retval), retval);
-		return retval;
-	}
-
-	retval = claim_posix_filesystems(path, fsal, exp,
-					 claim, unclaim, root_fs);
-
-	if (retval != 0) {
-		if (retval == EAGAIN)
-			retval = ENOENT;
-		LogCrit(COMPONENT_FSAL,
-			"claim_posix_filesystems(%s) returned %s (%d)",
-			path, strerror(retval), retval);
-	}
-
 	return retval;
 }
 
@@ -1374,9 +1444,35 @@ int resolve_posix_filesystem(const char *path,
 			     unclaim_filesystem_cb unclaim,
 			     struct fsal_filesystem **root_fs)
 {
-	int retval = 0;
+	int retval = EAGAIN;
+	struct stat statbuf;
 
-	retval = populate_posix_file_systems(false);
+	while (retval == EAGAIN) {
+		/* Need to retry stat on path until we don't get EAGAIN in case
+		 * autofs needed to mount the file system.
+		 */
+		retval = stat(path, &statbuf);
+		if (retval != 0) {
+			LogDebug(COMPONENT_FSAL,
+				 "stat returned %s (%d) while resolving export path %s %s",
+				 strerror(retval), retval, path,
+				 retval == EAGAIN ? "(may retry)" : "(failed");
+			retval = errno;
+		}
+	}
+
+	if (retval != 0) {
+		/* Since we failed a stat on the path, we might as well bail
+		 * now...
+		 */
+		LogCrit(COMPONENT_FSAL,
+			"stat returned %s (%d) while resolving export path %s",
+			strerror(retval), retval, path);
+		return retval;
+	}
+
+	retval = populate_posix_file_systems(path);
+
 	if (retval != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"populate_posix_file_systems returned %s (%d)",
@@ -1385,53 +1481,79 @@ int resolve_posix_filesystem(const char *path,
 	}
 
 	retval = claim_posix_filesystems(path, fsal, exp,
-					 claim, unclaim, root_fs);
-
-	/* second attempt to resolve file system with force option in case of
-	 * ganesha isn't during startup.
-	 */
-	if (!nfs_init.init_complete || retval != EAGAIN) {
-		LogDebug(COMPONENT_FSAL,
-			 "Not trying to claim filesystems again because %s %s(%d)",
-			 nfs_init.init_complete
-				? "retval != EAGAIN"
-				: "init is not complete",
-			 strerror(retval), retval);
-		return retval;
-	}
-
-	LogDebug(COMPONENT_FSAL,
-		 "Attempting to find a filesystem for %s, reload filesystems",
-		 path);
-
-	retval =
-	    reload_posix_filesystems(path, fsal, exp, claim, unclaim, root_fs);
+					 claim, unclaim, root_fs, &statbuf);
 
 	return retval;
 }
 
-void release_posix_file_system(struct fsal_filesystem *fs)
+/**
+ * @brief release a POSIX file system and all it's descendants
+ *
+ * @param[in] fs             the file system to release
+ * @param[in] release_claims what to do about claimed file systems
+ *
+ * @returns true if a descendant was not released because it was a claimed
+ *          file system or a descendant underneath was a claimed file system.
+ *
+ */
+bool release_posix_file_system(struct fsal_filesystem *fs,
+			       enum release_claims release_claims)
 {
-	struct fsal_filesystem *child_fs;
+	bool claimed = false; /* Assume no claimed children. */
+	struct glist_head *glist, *glistn;
+
+	/* Note: Check this file system AFTER we check the descendants, we will
+	 *       thus release any descendants that are not claimed.
+	 */
+
+	glist_for_each_safe(glist, glistn, &fs->children) {
+		struct fsal_filesystem *child_fs;
+
+		child_fs = glist_entry(glist, struct fsal_filesystem, siblings);
+
+		/* If a child or child underneath was not released because it
+		 * was claimed, propagate that up.
+		 */
+		claimed |= release_posix_file_system(child_fs, release_claims);
+	}
 
 	if (fs->unclaim != NULL) {
-		LogWarn(COMPONENT_FSAL,
-			"Filesystem %s is still claimed",
-			fs->path);
+		if (release_claims == UNCLAIM_WARN)
+			LogWarn(COMPONENT_FSAL,
+				"Filesystem %s is still claimed",
+				fs->path);
+		else
+			LogDebug(COMPONENT_FSAL,
+				 "Filesystem %s is still claimed",
+				 fs->path);
+		if (release_claims != UNCLAIM_OK)
+			return true;
 		unclaim_fs(fs);
 	}
 
-	while ((child_fs = glist_first_entry(&fs->children,
-					     struct fsal_filesystem,
-					     siblings))) {
-		release_posix_file_system(child_fs);
+	if (claimed) {
+		if (release_claims == UNCLAIM_WARN)
+			LogWarn(COMPONENT_FSAL,
+				"Filesystem %s had at least one child still claimed",
+				fs->path);
+		else
+			LogDebug(COMPONENT_FSAL,
+				 "Filesystem %s had at least one child still claimed",
+				 fs->path);
+		return true;
 	}
 
-	LogDebug(COMPONENT_FSAL,
-		 "Releasing filesystem %s (%p)",
-		 fs->path, fs);
+	LogInfo(COMPONENT_FSAL,
+		"Removed filesystem %s namelen=%d dev=%"PRIu64".%"PRIu64
+		" fsid=0x%016"PRIx64".0x%016"PRIx64" %"PRIu64".%"PRIu64
+		" type=%s",
+		fs->path, (int) fs->namelen, fs->dev.major, fs->dev.minor,
+		fs->fsid.major, fs->fsid.minor, fs->fsid.major, fs->fsid.minor,
+		fs->type);
 	remove_fs(fs);
 	free_fs(fs);
+
+	return false;
 }
 
 void release_posix_file_systems(void)
@@ -1442,7 +1564,7 @@ void release_posix_file_systems(void)
 
 	while ((fs = glist_first_entry(&posix_file_systems,
 				       struct fsal_filesystem, filesystems))) {
-		release_posix_file_system(fs);
+		(void) release_posix_file_system(fs, UNCLAIM_WARN);
 	}
 
 	PTHREAD_RWLOCK_unlock(&fs_lock);
@@ -1620,23 +1742,17 @@ int claim_posix_filesystems(const char *path,
 			    struct fsal_export *exp,
 			    claim_filesystem_cb claim,
 			    unclaim_filesystem_cb unclaim,
-			    struct fsal_filesystem **root_fs)
+			    struct fsal_filesystem **root_fs,
+			    struct stat *statbuf)
 {
 	int retval = 0;
 	struct fsal_filesystem *fs, *root = NULL;
 	struct glist_head *glist;
-	struct stat statbuf;
 	struct fsal_dev__ dev;
 
 	PTHREAD_RWLOCK_wrlock(&fs_lock);
 
-	if (stat(path, &statbuf) != 0) {
-		retval = errno;
-		LogCrit(COMPONENT_FSAL,
-			"Could not stat directory for path %s", path);
-		goto out;
-	}
-	dev = posix2fsal_devt(statbuf.st_dev);
+	dev = posix2fsal_devt(statbuf->st_dev);
 
 	/* Scan POSIX file systems to find export root fs */
 	glist_for_each(glist, &posix_file_systems) {
@@ -1649,7 +1765,7 @@ int claim_posix_filesystems(const char *path,
 
 	/* Check if we found a filesystem */
 	if (root == NULL) {
-		retval = EAGAIN;
+		retval = ENOENT;
 		goto out;
 	}
 

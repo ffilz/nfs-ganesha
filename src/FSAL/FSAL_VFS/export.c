@@ -442,7 +442,8 @@ void vfs_unexport_filesystems(struct vfs_fsal_export *exp)
 		glist_del(&map->on_filesystems);
 		glist_del(&map->on_exports);
 		if (glist_empty(&map->fs->exports)) {
-			release_posix_file_system(map->fs->fs);
+			(void) release_posix_file_system(map->fs->fs,
+							 UNCLAIM_OK);
 		}
 
 		/* And free it */
