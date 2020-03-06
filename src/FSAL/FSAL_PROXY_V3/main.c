@@ -739,6 +739,85 @@ proxyv3_close2(struct fsal_obj_handle *obj_hdl,
 }
 
 
+// Issue a MKDIR.
+static fsal_status_t
+proxyv3_mkdir(struct fsal_obj_handle *dir_hdl,
+              const char *name, struct attrlist *attrs_in,
+              struct fsal_obj_handle **new_obj,
+              struct attrlist *attrs_out) {
+   struct proxyv3_obj_handle *parent_obj =
+      container_of(dir_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: mkdir of %s in parent %p",
+            name, dir_hdl);
+
+   // In case we fail along the way.
+   *new_obj = NULL;
+
+   MKDIR3args args;
+   MKDIR3res result;
+   MKDIR3resok *resok = &result.MKDIR3res_u.resok;
+
+   memset(&result, 0, sizeof(result));
+
+   args.where.dir.data.data_val = parent_obj->fh3.data.data_val;
+   args.where.dir.data.data_len = parent_obj->fh3.data.data_len;
+   args.where.name = (char*) name;
+
+   if (!fsalattr_to_sattr3(attrs_in, &args.attributes)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: MKDIR() with invalid attributes");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+      // Issue the CREATE3 call.
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
+                         NFSPROC3_MKDIR,
+                         (xdrproc_t) xdr_MKDIR3args, &args,
+                         (xdrproc_t) xdr_MKDIR3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: MKDIR3 failed");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   if (result.status != NFS3_OK) {
+      // Okay, let's see what we got.
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: MKDIR3 failed, got %u", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   // We need both the handle and attributes to fill in the results.
+   if (!resok->obj_attributes.attributes_follow ||
+       !resok->obj.handle_follows) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: MKDIR3 didn't return obj attributes or handle");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   const nfs_fh3 *obj_fh   = &resok->obj.post_op_fh3_u.handle;
+   const fattr3 *obj_attrs = &resok->obj_attributes.post_op_attr_u.attributes;
+
+   struct proxyv3_obj_handle *result_handle =
+      proxyv3_alloc_handle(op_ctx->fsal_export,
+                           obj_fh,
+                           obj_attrs,
+                           parent_obj,
+                           attrs_out);
+
+   if (result_handle == NULL) {
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
+
+   *new_obj = &result_handle->obj;
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+
 // Do a readdir for the given directory (dir_hdl), possibly picking up where
 // `whence` left off.
 static fsal_status_t
@@ -1630,6 +1709,7 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.release = proxyv3_handle_release;
    PROXY_V3.handle_ops.getattrs = proxyv3_getattrs;
    PROXY_V3.handle_ops.setattr2 = proxyv3_setattr2;
+   PROXY_V3.handle_ops.mkdir = proxyv3_mkdir;
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
