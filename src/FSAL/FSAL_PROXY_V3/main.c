@@ -720,6 +720,25 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+// Let Ganesha tell us to "close" a file. This should always be stateless for
+// NFSv3, therefore nothing to do but check that and say "Sure!".
+static fsal_status_t
+proxyv3_close2(struct fsal_obj_handle *obj_hdl,
+               struct state_t *state) {
+   LogDebug(COMPONENT_FSAL,
+            "Asking for CLOSE of handle %p (state is %p)",
+            obj_hdl, state);
+
+   if (state != NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Received stateful CLOSE request. Likely NFSv4.");
+      return fsalstat(ERR_FSAL_NOTSUPP, 0);
+   }
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+
 // Do a readdir for the given directory (dir_hdl), possibly picking up where
 // `whence` left off.
 static fsal_status_t
@@ -1130,7 +1149,53 @@ proxyv3_commit2(struct fsal_obj_handle *obj_hdl,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+// Handle REMOVE3 requests.
+static fsal_status_t
+proxyv3_unlink(struct fsal_obj_handle *dir_hdl,
+               struct fsal_obj_handle *obj_hdl,
+               const char* name) {
+   struct proxyv3_obj_handle *dir =
+      container_of(dir_hdl, struct proxyv3_obj_handle, obj);
 
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: REMOVE request for dir %p of file %s",
+            dir_hdl, name);
+
+   REMOVE3args args;
+   REMOVE3res result;
+
+   memset(&result, 0, sizeof(result));
+
+   args.object.dir.data.data_val = dir->fh3.data.data_val;
+   args.object.dir.data.data_len = dir->fh3.data.data_len;
+   args.object.name = (char*) name;
+
+   // Issue the REMOVE.
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         op_ctx->creds,
+                         NFSPROC3_REMOVE,
+                         (xdrproc_t) xdr_REMOVE3args, &args,
+                         (xdrproc_t) xdr_REMOVE3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call failed (%u)",
+              result.status);
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   // If the commit failed, report the error upwards.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: REMOVE failed: %u", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   // Remove happened, no problems to report.
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+
+// Run FSSTAT to learn about how mch space the volume has available.
 static fsal_status_t
 proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
                          struct fsal_obj_handle *obj_hdl,
@@ -1568,6 +1633,8 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
+   PROXY_V3.handle_ops.close2 = proxyv3_close2;
    PROXY_V3.handle_ops.write2 = proxyv3_write2;
    PROXY_V3.handle_ops.commit2 = proxyv3_commit2;
+   PROXY_V3.handle_ops.unlink = proxyv3_unlink;
 }
