@@ -42,6 +42,10 @@ struct proxyv3_client_params {
    const struct sockaddr *sockaddr;
    socklen_t socklen;
    char sockname[SOCK_NAME_MAX];
+
+   // Get the ports from portmapper and shove them here.
+   uint mountd_port;
+   uint nfsd_port;
 };
 
 struct proxyv3_export {
@@ -56,8 +60,14 @@ extern struct proxyv3_fsal_module PROXY_V3;
 
 bool proxyv3_rpc_init();
 
+bool proxyv3_find_ports(const struct sockaddr *host,
+                        const socklen_t socklen,
+                        u_int *mountd_port,
+                        u_int *nfsd_port);
+
 bool proxyv3_nfs_call(const struct sockaddr *host,
                       const socklen_t socklen,
+                      const uint nfsdPort,
                       const struct user_cred *creds,
                       const rpcproc_t nfsProc,
                       const xdrproc_t encodeFunc, const void *args,
@@ -65,6 +75,7 @@ bool proxyv3_nfs_call(const struct sockaddr *host,
 
 bool proxyv3_mount_call(const struct sockaddr *host,
                         const socklen_t socklen,
+                        const uint mountdPort,
                         const struct user_cred *creds,
                         const rpcproc_t mountProc,
                         const xdrproc_t encodeFunc, const void *args,

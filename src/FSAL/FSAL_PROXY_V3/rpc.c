@@ -20,6 +20,7 @@
  * -------------
  */
 
+#include <rpc/pmap_prot.h>
 #include <rpc/rpc.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -383,30 +384,81 @@ bool proxyv3_call(const struct sockaddr *host,
 // to repeatedly pass in the program and version constants.
 bool proxyv3_nfs_call(const struct sockaddr *host,
                       const socklen_t socklen,
+                      const uint nfsdPort,
                       const struct user_cred *creds,
                       const rpcproc_t nfsProc,
                       const xdrproc_t encodeFunc, const void *args,
                       const xdrproc_t decodeFunc, void *output) {
    const int kProgramNFS = NFS_PROGRAM;
    const int kVersionNFSv3 = NFS_V3;
-   const int kPortNFS = 2049;
 
-   return proxyv3_call(host, socklen, kPortNFS, creds,
+   return proxyv3_call(host, socklen, nfsdPort, creds,
                        kProgramNFS, kVersionNFSv3,
                        nfsProc, encodeFunc, args, decodeFunc, output);
 }
 
 bool proxyv3_mount_call(const struct sockaddr *host,
                         const socklen_t socklen,
+                        const uint mountdPort,
                         const struct user_cred *creds,
                         const rpcproc_t mountProc,
                         const xdrproc_t encodeFunc, const void *args,
                         const xdrproc_t decodeFunc, void *output) {
    const int kProgramMount = MOUNTPROG;
    const int kVersionMountv3 = MOUNT_V3;
-   const int kPortMount = 2050;
 
-   return proxyv3_call(host, socklen, kPortMount, creds,
+   return proxyv3_call(host, socklen, mountdPort, creds,
                        kProgramMount, kVersionMountv3,
                        mountProc, encodeFunc, args, decodeFunc, output);
+}
+
+// Ask portmapd for where MOUNTD and NFSD are running.
+bool proxyv3_find_ports(const struct sockaddr *host,
+                        const socklen_t socklen,
+                        u_int *mountd_port,
+                        u_int *nfsd_port) {
+   struct pmap mountd_query = {
+      .pm_prog = MOUNTPROG,
+      .pm_vers = MOUNT_V3,
+      .pm_prot = IPPROTO_TCP,
+      .pm_port = 0 /* ignored for getport */
+   };
+
+   struct pmap nfsd_query = {
+      .pm_prog = NFS_PROGRAM,
+      .pm_vers = NFS_V3,
+      .pm_prot = IPPROTO_TCP,
+      .pm_port = 0 /* ignored */
+   };
+
+   LogDebug(COMPONENT_FSAL,
+            "Asking portmap to tell us what the mountd/tcp port is");
+
+   if (!proxyv3_call(host, socklen, PMAPPORT, NULL /* no auth for portmapd */,
+                     PMAPPROG, PMAPVERS,
+                     PMAPPROC_GETPORT,
+                     (xdrproc_t) xdr_pmap, &mountd_query,
+                     (xdrproc_t) xdr_u_int, mountd_port)) {
+      LogDebug(COMPONENT_FSAL,
+               "Failed to find mountd");
+      return false;
+   }
+
+   LogDebug(COMPONENT_FSAL, "Got back mountd port of %u", *mountd_port);
+
+   LogDebug(COMPONENT_FSAL,
+            "Asking portmap to tell us what the nfsd/tcp port is");
+
+   if (!proxyv3_call(host, socklen, PMAPPORT, NULL /* no auth for portmapd */,
+                     PMAPPROG, PMAPVERS,
+                     PMAPPROC_GETPORT,
+                     (xdrproc_t) xdr_pmap, &nfsd_query,
+                     (xdrproc_t) xdr_u_int, nfsd_port)) {
+      LogDebug(COMPONENT_FSAL,
+               "Failed to find nfsd");
+      return false;
+   }
+
+   LogDebug(COMPONENT_FSAL, "Got back nfsd port of %u", *nfsd_port);
+   return true;
 }

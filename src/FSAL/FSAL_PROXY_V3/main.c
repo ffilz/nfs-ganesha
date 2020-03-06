@@ -133,6 +133,23 @@ static const char* proxyv3_sockname() {
    return export->params.sockname;
 }
 
+// Get the current mountd port.
+static const uint proxyv3_mountd_port() {
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
+
+   return export->params.mountd_port;
+}
+
+// Get the current nfsd port.
+static const uint proxyv3_nfsd_port() {
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
+
+   return export->params.nfsd_port;
+}
+
+
 // Load our configuration from the config file and do any validation we need to.
 static fsal_status_t proxyv3_init_config(struct fsal_module *fsal_handle,
                                          config_file_t config_file,
@@ -343,6 +360,7 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
 
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_LOOKUP,
                          (xdrproc_t) xdr_LOOKUP3args, &args,
@@ -409,6 +427,7 @@ static fsal_status_t proxyv3_getattr_from_fh3(struct nfs_fh3 *fh3,
    // If the call fails for any reason, exit.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_GETATTR,
                          (xdrproc_t) xdr_GETATTR3args, &args,
@@ -492,6 +511,7 @@ proxyv3_setattr2(struct fsal_obj_handle *obj_hdl,
    // If the call fails for any reason, exit.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_SETATTR,
                          (xdrproc_t) xdr_SETATTR3args, &args,
@@ -677,6 +697,7 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
    // Issue the CREATE3 call.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_CREATE,
                          (xdrproc_t) xdr_CREATE3args, &args,
@@ -774,6 +795,7 @@ proxyv3_mkdir(struct fsal_obj_handle *dir_hdl,
       // Issue the CREATE3 call.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_MKDIR,
                          (xdrproc_t) xdr_MKDIR3args, &args,
@@ -870,6 +892,7 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 
       if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                             proxyv3_socklen(),
+                            proxyv3_nfsd_port(),
                             op_ctx->creds,
                             NFSPROC3_READDIRPLUS,
                             (xdrproc_t) xdr_READDIRPLUS3args, &args,
@@ -1044,6 +1067,7 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
    // Issue the read.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_READ,
                          (xdrproc_t) xdr_READ3args, &args,
@@ -1157,6 +1181,7 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
    // Issue the write.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_WRITE,
                          (xdrproc_t) xdr_WRITE3args, &args,
@@ -1207,6 +1232,7 @@ proxyv3_commit2(struct fsal_obj_handle *obj_hdl,
    // Issue the COMMIT.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_COMMIT,
                          (xdrproc_t) xdr_COMMIT3args, &args,
@@ -1271,6 +1297,7 @@ proxyv3_unlink(struct fsal_obj_handle *dir_hdl,
    // Issue the REMOVE.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          method,
                          enc, args,
@@ -1335,6 +1362,7 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
    // If the call fails for any reason, exit.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_FSSTAT,
                          (xdrproc_t) xdr_FSSTAT3args, &args,
@@ -1533,6 +1561,7 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3) {
 
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
                          op_ctx->creds,
                          NFSPROC3_FSINFO,
                          (xdrproc_t) xdr_FSINFO3args, &args,
@@ -1646,6 +1675,19 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
    LogDebug(COMPONENT_FSAL,
             "Got sockaddr %s", export->params.sockname);
 
+   u_int mountd_port = 0;
+   u_int nfsd_port = 0;
+   if (!proxyv3_find_ports(proxyv3_sockaddr(),
+                           proxyv3_socklen(),
+                           &mountd_port,
+                           &nfsd_port)) {
+      LogDebug(COMPONENT_FSAL,
+               "Failed to find mountd/nfsd, oh well");
+   }
+   // Copy into our param struct.
+   export->params.mountd_port = mountd_port;
+   export->params.nfsd_port = nfsd_port;
+
    mnt3_dirpath dirpath = op_ctx->ctx_export->fullpath;
    mountres3 result;
    memset(&result, 0, sizeof(result));
@@ -1657,6 +1699,7 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
    // Be nice and try a MOUNT NULL first.
    if (!proxyv3_mount_call(proxyv3_sockaddr(),
                            proxyv3_socklen(),
+                           proxyv3_mountd_port(),
                            op_ctx->creds,
                            MOUNTPROC3_NULL,
                            (xdrproc_t) xdr_void, NULL,
@@ -1673,6 +1716,7 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
 
    if (!proxyv3_mount_call(proxyv3_sockaddr(),
                            proxyv3_socklen(),
+                           proxyv3_mountd_port(),
                            op_ctx->creds,
                            MOUNTPROC3_MNT,
                            (xdrproc_t) xdr_dirpath, &dirpath,
