@@ -1228,7 +1228,7 @@ proxyv3_commit2(struct fsal_obj_handle *obj_hdl,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-// Handle REMOVE3 requests.
+// Handle REMOVE3/RMDIR3 requests.
 static fsal_status_t
 proxyv3_unlink(struct fsal_obj_handle *dir_hdl,
                struct fsal_obj_handle *obj_hdl,
@@ -1240,33 +1240,54 @@ proxyv3_unlink(struct fsal_obj_handle *dir_hdl,
             "PROXY_V3: REMOVE request for dir %p of file %s",
             dir_hdl, name);
 
-   REMOVE3args args;
-   REMOVE3res result;
+   bool is_rmdir = obj_hdl->type == DIRECTORY;
 
-   memset(&result, 0, sizeof(result));
+   REMOVE3args regular_args;
+   REMOVE3res regular_result;
 
-   args.object.dir.data.data_val = dir->fh3.data.data_val;
-   args.object.dir.data.data_len = dir->fh3.data.data_len;
-   args.object.name = (char*) name;
+   RMDIR3args dir_args;
+   RMDIR3res dir_result;
+
+   diropargs3 *diropargs = (is_rmdir) ? &dir_args.object : &regular_args.object;
+
+   memset(&regular_result, 0, sizeof(regular_result));
+   memset(&dir_result, 0, sizeof(dir_result));
+
+   diropargs->dir.data.data_val = dir->fh3.data.data_val;
+   diropargs->dir.data.data_len = dir->fh3.data.data_len;
+   diropargs->name = (char*) name;
+
+   rpcproc_t method = (is_rmdir) ? NFSPROC3_RMDIR : NFSPROC3_REMOVE;
+   xdrproc_t enc = (is_rmdir) ? (xdrproc_t) xdr_RMDIR3args :
+      (xdrproc_t) xdr_REMOVE3args;
+   xdrproc_t dec = (is_rmdir) ? (xdrproc_t) xdr_RMDIR3res :
+      (xdrproc_t) xdr_REMOVE3res;
+
+   void *args   = (is_rmdir) ? (void*) &dir_args : (void*) &regular_args;
+   void *result = (is_rmdir) ? (void*) &dir_result : (void*) &regular_result;
+
+   nfsstat3 *status = (is_rmdir) ? &dir_result.status : &regular_result.status;
 
    // Issue the REMOVE.
    if (!proxyv3_nfs_call(proxyv3_sockaddr(),
                          proxyv3_socklen(),
                          op_ctx->creds,
-                         NFSPROC3_REMOVE,
-                         (xdrproc_t) xdr_REMOVE3args, &args,
-                         (xdrproc_t) xdr_REMOVE3res, &result)) {
+                         method,
+                         enc, args,
+                         dec, result)) {
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: proxyv3_nfs_call failed (%u)",
-              result.status);
+              *status);
       return fsalstat(ERR_FSAL_SERVERFAULT, 0);
    }
 
-   // If the commit failed, report the error upwards.
-   if (result.status != NFS3_OK) {
+   // If the REMOVE/RMDIR failed, report the error upwards.
+   if (*status != NFS3_OK) {
       LogDebug(COMPONENT_FSAL,
-               "PROXY_V3: REMOVE failed: %u", result.status);
-      return nfsstat3_to_fsalstat(result.status);
+               "PROXY_V3: %s failed: %u",
+               (is_rmdir) ? "RMDIR" : "REMOVE",
+               *status);
+      return nfsstat3_to_fsalstat(*status);
    }
 
    // Remove happened, no problems to report.
