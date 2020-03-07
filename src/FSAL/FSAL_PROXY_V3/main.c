@@ -744,6 +744,16 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
 // Let Ganesha tell us to "close" a file. This should always be stateless for
 // NFSv3, therefore nothing to do but check that and say "Sure!".
 static fsal_status_t
+proxyv3_close(struct fsal_obj_handle *obj_hdl) {
+   LogDebug(COMPONENT_FSAL,
+            "Asking for stateless CLOSE of handle %p",
+            obj_hdl);
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+
+static fsal_status_t
 proxyv3_close2(struct fsal_obj_handle *obj_hdl,
                struct state_t *state) {
    LogDebug(COMPONENT_FSAL,
@@ -1778,6 +1788,7 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
+   PROXY_V3.handle_ops.close = proxyv3_close;
    PROXY_V3.handle_ops.close2 = proxyv3_close2;
    PROXY_V3.handle_ops.write2 = proxyv3_write2;
    PROXY_V3.handle_ops.commit2 = proxyv3_commit2;
