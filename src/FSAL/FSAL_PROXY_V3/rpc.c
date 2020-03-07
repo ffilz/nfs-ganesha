@@ -33,6 +33,25 @@
 static unsigned rand_seed = 123451;
 static char rpcMachineName[MAXHOSTNAMELEN + 1] = { 0 };
 
+static pthread_mutex_t rpcLock;
+
+const unsigned kMaxSockets = 32;
+
+struct fd_entry {
+   bool in_use;
+   bool is_open;
+
+   // Need to match the socket/socklen/port.
+   sockaddr_t socket;
+   socklen_t socklen;
+   uint16_t port;
+
+   int fd;
+};
+
+// TODO(boulos): Replace with free list / hash table / whatever.
+struct fd_entry *fd_entries;
+
 bool proxyv3_rpc_init() {
    // Cache our hostname for client auth later.
    if (gethostname(rpcMachineName, sizeof(rpcMachineName)) != 0) {
@@ -45,10 +64,325 @@ bool proxyv3_rpc_init() {
       memcpy(rpcMachineName, kClientName, strlen(kClientName) + 1 /* For NUL */);
    }
 
-   // TODO(boulos): Setup some buffers and mutexes for rand_seed, open
-   // sockets, etc.
+   if (pthread_mutex_init(&rpcLock, NULL) != 0) {
+      LogCrit(COMPONENT_FSAL,
+              "Failed to initialize a mutex... Errno %d (%s).",
+              errno, strerror(errno));
+      return false;
+   }
+
+   // Initialize the fd_entries with not in use sockets.
+   fd_entries = gsh_calloc(kMaxSockets, sizeof(struct fd_entry));
    return true;
 }
+
+// Do the actual raw socket opening of an fd of host:port.
+static int
+proxyv3_openfd(const struct sockaddr *host,
+               const socklen_t socklen,
+               uint16_t port) {
+   LogDebug(COMPONENT_FSAL,
+            "Opening a new socket");
+
+   if (host->sa_family != AF_INET &&
+       host->sa_family != AF_INET6) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: passed a host with sa_family %u",
+              host->sa_family);
+      return -1;
+   }
+
+   char addrForErrors[INET6_ADDRSTRLEN] = { 0 };
+   // Strangely, inet_ntop takes the length of the *buffer* not the length of
+   // the socket (perhaps it just uses the sa_family for socklen)
+   if (!inet_ntop(host->sa_family, host, addrForErrors, INET6_ADDRSTRLEN)) {
+      LogCrit(COMPONENT_FSAL,
+              "Couldn't decode host socket for debugging");
+      return -1;
+   }
+
+   bool ipv6 = host->sa_family == AF_INET6;
+   if ((ipv6 && socklen != sizeof(struct sockaddr_in6)) ||
+       (!ipv6 && socklen != sizeof(struct sockaddr_in))) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Given an ipv%s sockaddr (%s) with len %u != %zu",
+              (ipv6) ? "6" : "4",
+              addrForErrors,
+              socklen,
+              (ipv6) ? sizeof(struct sockaddr_in6) : sizeof(struct sockaddr_in));
+      return -1;
+   }
+
+   struct sockaddr hostAndPort;
+   memset(&hostAndPort, 0, sizeof(hostAndPort));
+   // Copy the input, and then override the port.
+   memcpy(&hostAndPort, host, socklen);
+   struct sockaddr_in  *hostv4 = (struct sockaddr_in*) &hostAndPort;
+   struct sockaddr_in6 *hostv6 = (struct sockaddr_in6*) &hostAndPort;
+
+   // Check that the caller is letting us slip the port in.
+   if ((ipv6 && hostv6->sin6_port != 0) ||
+       (!ipv6 && hostv4->sin_port != 0)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: passed an address (%s) with non-zero port %u",
+              addrForErrors,
+              (ipv6) ? hostv6->sin6_port : hostv4->sin_port);
+      return -1;
+   }
+
+   int fd = socket((ipv6) ? PF_INET6 /* IPv6 */ : PF_INET /* IPv4 */,
+                   SOCK_STREAM /* TCP */,
+                   0 /* Pick it up from TCP */);
+   if (fd < 0) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Failed to create a socket. %d %s",
+              errno, strerror(errno));
+      return -1;
+   }
+
+   // NOTE(boulos): NFS daemons like nfsd in Linux require that the
+   // clients come from a privileged port, so that they "must" be run
+   // as root on the client.
+   if (bindresvport_sa(fd, NULL) < 0) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Failed to reserve a privileged port. %d %s",
+              errno, strerror(errno));
+      close(fd);
+      return -1;
+   }
+
+   if (ipv6) {
+      hostv6->sin6_port = htons(port);
+   } else {
+      hostv4->sin_port = htons(port);
+   }
+
+   if (connect(fd, &hostAndPort, socklen) < 0) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Failed to connect to host '%s'. errno %d (%s)",
+              addrForErrors, errno, strerror(errno));
+      close(fd);
+      return -1;
+   }
+
+   LogDebug(COMPONENT_FSAL,
+            "Got a new socket (%d) open to host %s",
+            fd, addrForErrors);
+
+   return fd;
+}
+
+static int proxyv3_getfd(const struct sockaddr *host,
+                         const socklen_t socklen,
+                         uint16_t port) {
+   if (pthread_mutex_lock(&rpcLock) != 0) {
+      LogCrit(COMPONENT_FSAL,
+              "pthread_mutex_lock failed %d %s",
+              errno, strerror(errno));
+      return -1;
+   }
+
+   int fd = -1;
+   LogDebug(COMPONENT_FSAL,
+            "Looking for an open socket for port %u",
+            port);
+
+   // Find the first free, preferably open socket
+   struct fd_entry *first_free = NULL;
+   struct fd_entry *first_open = NULL;
+
+   for (size_t i = 0; i < kMaxSockets; i++) {
+      struct fd_entry *entry = &fd_entries[i];
+
+      if (entry->in_use) continue;
+
+      // Remember that we saw a free slot.
+      if (first_free == NULL) {
+         first_free = entry;
+      }
+
+      if (!entry->is_open) {
+         // This is a free and not even opened slot, prefer that so other people
+         // can get socket reuse.
+         first_free = entry;
+      } else {
+         // See if this open socket matches what we need.
+         if (entry->socklen == socklen &&
+             entry->port == port &&
+             memcmp(&entry->socket, host, socklen) == 0) {
+            LogDebug(COMPONENT_FSAL,
+                     "Found an already open socket, will reuse that");
+            first_open = entry;
+            break;
+         }
+      }
+   }
+
+   // The list is full! The caller needs to block.
+   if (first_free == NULL) {
+      LogDebug(COMPONENT_FSAL,
+               "No available sockets, tell the caller to wait a while");
+
+      if (pthread_mutex_unlock(&rpcLock) != 0) {
+         LogCrit(COMPONENT_FSAL,
+                 "pthread_mutex_unlock failed %d %s",
+                 errno, strerror(errno));
+      }
+
+      return -2;
+   }
+
+   if (first_open != NULL) {
+      // If we found an open one for us, use that.
+      first_open->in_use = true;
+      fd = first_open->fd;
+   } else {
+      // Otherwise, replace first_free with a new one.
+      if (first_free->is_open) {
+         // We should first close the existing socket.
+         LogDebug(COMPONENT_FSAL,
+                  "Closing fd %d before we re-use the slot",
+                  first_free->fd);
+
+         if (close(first_free->fd) != 0) {
+            LogCrit(COMPONENT_FSAL,
+                    "close(%d) of re-used fd failed. Continuing. Errno %d (%s)",
+                    first_free->fd, errno, strerror(errno));
+         }
+      }
+
+      // Clear all the fields.
+      memset(first_free, 0, sizeof(*first_free));
+
+      fd = proxyv3_openfd(host, socklen, port);
+      if (fd > 0) {
+         // Record the entry in our list.
+         first_free->fd = fd;
+         first_free->port = port;
+         first_free->in_use = true;
+         first_free->is_open = true;
+         memcpy(&first_free->socket, host, socklen);
+         first_free->socklen = socklen;
+         first_free->port = port;
+      } // otherwise, fall through to cleanup below.
+   }
+
+   // Release the lock before we exit.
+   if (pthread_mutex_unlock(&rpcLock) != 0) {
+      LogCrit(COMPONENT_FSAL,
+              "pthread_mutex_unlock failed %d %s",
+              errno, strerror(errno));
+      return -1;
+   }
+
+   return fd;
+}
+
+
+static int
+proxyv3_getfd_blocking(const struct sockaddr *host,
+                       const socklen_t socklen,
+                      uint16_t port) {
+   // Keep trying to get an fd with exponential backoff up to kMaxIterations.
+   const unsigned kMaxIterations = 100;
+   // So, within a datacenter, it's likely that we'll need to wait about 1
+   // millisecond for someone to finish. Let's start the backoff sooner though
+   // at 256 microseconds, because while an end-to-end op is 1ms, people should
+   // be finishing all the time.
+   size_t numMicros = 256;
+
+   for (size_t i = 0; i < kMaxIterations; i++) {
+      int fd = proxyv3_getfd(host, socklen, port);
+
+      // If we got back a valid fd, return it immediately.
+      if (fd > 0) return fd;
+
+      // We got back an error, return it.
+      if (fd != -2) return fd;
+
+      // We were told to pause.
+      struct timespec how_long = {
+         .tv_sec  = numMicros / 1000000, /* 1M micros per second */
+         .tv_nsec = (numMicros % 1000000) * 1000 /* Remainder => nanoseconds */
+      };
+
+      LogDebug(COMPONENT_FSAL,
+               "Going to sleep for %zu microseconds",
+               numMicros);
+
+      if (nanosleep(&how_long, NULL) != 0) {
+         // Let interrupts wake us up and not care. Anything else should be fatal.
+         if (errno != EINTR) {
+            LogCrit(COMPONENT_FSAL,
+                    "nanosleep failed. Asked for %zu micros. Errno %d (%s)",
+                    numMicros, errno, strerror(errno));
+            return -1;
+         }
+      }
+
+      // Next time around, double it. TODO(boulos): Jitter?
+      numMicros *= 2;
+   }
+
+   LogCrit(COMPONENT_FSAL,
+           "Failed to ever acquire a new fd, dying");
+   return -1;
+}
+
+
+// Release an fd back to our pool.
+static bool proxyv3_releasefd(int fd, bool force_close) {
+   LogDebug(COMPONENT_FSAL,
+            "Releasing fd %d back into the pool (close = %s)",
+            fd, (force_close) ? "T" : "F");
+
+   if (pthread_mutex_lock(&rpcLock) != 0) {
+      LogCrit(COMPONENT_FSAL,
+              "pthread_mutex_lock failed %d %s",
+              errno, strerror(errno));
+      return false;
+   }
+
+   struct fd_entry *entry = NULL;
+   for (size_t i = 0; i < kMaxSockets; i++) {
+      if (!fd_entries[i].in_use) continue;
+      if (fd_entries[i].fd != fd) continue;
+
+      entry = &fd_entries[i];
+      break;
+   }
+
+   if (entry == NULL) {
+      LogCrit(COMPONENT_FSAL,
+              "proxyv3_closefd: fd %d wasn't in the list",
+              fd);
+   } else {
+      // Mark it as no longer in use. (But leave it open, unless asked not to).
+      entry->in_use = false;
+      if (force_close) {
+         // Close the socket first.
+         if (close(entry->fd) < 0) {
+            LogCrit(COMPONENT_FSAL,
+                    "close(%d) failed. Errno %d (%s)",
+                    entry->fd, errno, strerror(errno));
+         }
+         // Blast all the state (marks it as neither open nor in use).
+         memset(entry, 0, sizeof(*entry));
+      }
+   }
+
+   if (pthread_mutex_unlock(&rpcLock) != 0) {
+      LogCrit(COMPONENT_FSAL,
+              "pthread_mutex_unlock failed %d %s",
+              errno, strerror(errno));
+      return false;
+   }
+
+   // If we didn't find it, return false.
+   return entry != NULL;
+}
+
+
 
 
 // NOTE(boulos): This is basically rpc_call redone by hand, because
@@ -66,87 +400,6 @@ bool proxyv3_call(const struct sockaddr *host,
    XDR x;
    struct rpc_msg rmsg;
    struct rpc_msg reply;
-
-   if (host->sa_family != AF_INET &&
-       host->sa_family != AF_INET6) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: passed a host with sa_family %u",
-              host->sa_family);
-      return false;
-   }
-
-   char addrForErrors[INET6_ADDRSTRLEN] = { 0 };
-   // Strangely, inet_ntop takes the length of the *buffer* not the length of
-   // the socket (perhaps it just uses the sa_family for socklen)
-   if (!inet_ntop(host->sa_family, host, addrForErrors, INET6_ADDRSTRLEN)) {
-      LogCrit(COMPONENT_FSAL,
-              "Couldn't decode host socket for debugging");
-      return false;
-   }
-
-   bool ipv6 = host->sa_family == AF_INET6;
-   if ((ipv6 && socklen != sizeof(struct sockaddr_in6)) ||
-       (!ipv6 && socklen != sizeof(struct sockaddr_in))) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Given an ipv%s sockaddr (%s) with len %u != %zu",
-              (ipv6) ? "6" : "4",
-              addrForErrors,
-              socklen,
-              (ipv6) ? sizeof(struct sockaddr_in6) : sizeof(struct sockaddr_in));
-      return false;
-   }
-
-   struct sockaddr hostAndPort;
-   memset(&hostAndPort, 0, sizeof(hostAndPort));
-   // Copy the input, and then override the port.
-   memcpy(&hostAndPort, host, socklen);
-   struct sockaddr_in  *hostv4 = (struct sockaddr_in*) &hostAndPort;
-   struct sockaddr_in6 *hostv6 = (struct sockaddr_in6*) &hostAndPort;
-
-   // Check that the caller is letting us slip the port in.
-   if ((ipv6 && hostv6->sin6_port != 0) ||
-       (!ipv6 && hostv4->sin_port != 0)) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: passed an address (%s) with non-zero port %u",
-              addrForErrors,
-              (ipv6) ? hostv6->sin6_port : hostv4->sin_port);
-      return false;
-   }
-
-   int fd = socket((ipv6) ? PF_INET6 /* IPv6 */ : PF_INET /* IPv4 */,
-                   SOCK_STREAM /* TCP */,
-                   0 /* Pick it up from TCP */);
-   if (fd < 0) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Failed to create a socket. %d %s",
-              errno, strerror(errno));
-      return false;
-   }
-
-   // NOTE(boulos): NFS daemons like nfsd in Linux require that the
-   // clients come from a privileged port, so that they "must" be run
-   // as root on the client.
-   if (bindresvport(fd, NULL) < 0) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Failed to reserve a privileged port. %d %s",
-              errno, strerror(errno));
-      return false;
-   }
-
-   if (ipv6) {
-      hostv6->sin6_port = htons(port);
-   } else {
-      hostv4->sin_port = htons(port);
-   }
-
-   if (connect(fd, &hostAndPort, socklen) < 0) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Failed to connect to host '%s'. errno %d (%s)",
-              addrForErrors, errno, strerror(errno));
-      close(fd);
-      return false;
-   }
-
 
    // Make a little buffer that's big enough for handling most
    // requests/responses. TODO(boulos): Move this into a
@@ -217,6 +470,16 @@ bool proxyv3_call(const struct sockaddr *host,
             "PROXY_V3: Sending XID %u with %zu bytes",
             rmsg.rm_xid, bytes_to_send);
 
+   // Ready to start sending, let's get an open socket.
+   int fd = proxyv3_getfd_blocking(host, socklen, port);
+   if (fd < 0) {
+      LogCrit(COMPONENT_FSAL,
+              "Failed to get open fd");
+      gsh_free(msgbuf);
+      AUTH_DESTROY(au);
+      return false;
+   }
+
    size_t total_bytes_written = 0;
    while (total_bytes_written < bytes_to_send) {
       size_t remaining = bytes_to_send - total_bytes_written;
@@ -230,11 +493,15 @@ bool proxyv3_call(const struct sockaddr *host,
                  total_bytes_written, remaining, errno, strerror(errno));
          gsh_free(msgbuf);
          AUTH_DESTROY(au);
+         proxyv3_releasefd(fd, true /* force close, likely busted */);
          return false;
       }
 
       total_bytes_written += bytes_written;
    }
+
+   // We can cleanup the auth struct, we'll just be reading from here on out.
+   AUTH_DESTROY(au);
 
    // Aww, short write. Exit.
    if (total_bytes_written != bytes_to_send) {
@@ -242,7 +509,7 @@ bool proxyv3_call(const struct sockaddr *host,
               "PROXY_V3: Only wrote %zu bytes out of %zu",
               total_bytes_written, bytes_to_send);
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
+      proxyv3_releasefd(fd, true /* force close, likely busted */);
       return false;
    }
 
@@ -261,7 +528,7 @@ bool proxyv3_call(const struct sockaddr *host,
               "PROXY_V3: Didn't get a response header. errno %d, errstring %s",
               errno, strerror(errno));
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
+      proxyv3_releasefd(fd, true /* force close, likely busted */);
       return false;
    }
 
@@ -280,7 +547,7 @@ bool proxyv3_call(const struct sockaddr *host,
               "PROXY_V3: Response xid (%u) doesn't match request %u",
               response_header.xid, xid);
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
+      proxyv3_releasefd(fd, true /* force close, likely busted */);
       return false;
    }
 
@@ -291,7 +558,7 @@ bool proxyv3_call(const struct sockaddr *host,
               "PROXY_V3: Response claims to only have %u bytes",
               response_header.recmark);
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
+      proxyv3_releasefd(fd, true /* force close, likely busted */);
       return false;
    }
 
@@ -318,12 +585,15 @@ bool proxyv3_call(const struct sockaddr *host,
                  "PROXY_V3: Read at %zu failed. Errno %d (%s)",
                  total_bytes_read, errno, strerror(errno));
          gsh_free(msgbuf);
-         AUTH_DESTROY(au);
+         proxyv3_releasefd(fd, true /* force close, likely busted */);
          return false;
       }
 
       total_bytes_read += bytes_read;
    }
+
+   // All done reading, release the fd back to the pool.
+   proxyv3_releasefd(fd, false /* the socket is reusable */);
 
    // Aww, short read. Exit.
    if (total_bytes_read != bytes_to_read) {
@@ -331,7 +601,6 @@ bool proxyv3_call(const struct sockaddr *host,
               "PROXY_V3: Only read %zu bytes out of %zu",
               total_bytes_read, bytes_to_read);
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
       return false;
    }
 
@@ -350,7 +619,6 @@ bool proxyv3_call(const struct sockaddr *host,
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: Failed to do xdr_replymsg");
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
       return false;
    }
 
@@ -360,7 +628,6 @@ bool proxyv3_call(const struct sockaddr *host,
               "PROXY_V3: Reply received but not accepted. REJ %d",
               reply.rm_reply.rp_rjct.rj_stat);
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
       return false;
    }
 
@@ -370,9 +637,10 @@ bool proxyv3_call(const struct sockaddr *host,
               "PROXY_V3: Reply accepted but unsuccesful. Reason %d",
               reply.rm_reply.rp_acpt.ar_stat);
       gsh_free(msgbuf);
-      AUTH_DESTROY(au);
       return false;
    }
+
+   gsh_free(msgbuf);
 
    LogDebug(COMPONENT_FSAL,
             "PROXY_V3: RPC completed successfully");
