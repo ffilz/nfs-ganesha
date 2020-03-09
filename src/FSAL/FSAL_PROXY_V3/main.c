@@ -308,8 +308,11 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
    struct proxyv3_obj_handle *parent_obj =
       container_of(parent, struct proxyv3_obj_handle, obj);
 
+   // Small optimization to avoid a round-trip: if we know the answer, hand it back.
    if (strcmp(path, ".") == 0 ||
-       strcmp(path, "..") == 0) {
+       // We may not have the parent pointer information (could be from a
+       // create_handle from key thing, so let the backend respond)
+       (strcmp(path, "..") == 0 && parent_obj->parent != NULL)) {
       // They just want the current/parent directory. Give it to
       // them. TODO(boulos): Should this force a copy? Should this force a
       // LOOKUP to the server to re-request the attributes?
@@ -322,13 +325,7 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
       } else {
          // Sigh, cast away the const here. FSAL shouldn't be asking to edit
          // parent handles...
-         which_dir = (struct proxyv3_obj_handle* ) parent_obj->parent;
-         // Check that there was a valid parent directory.
-         if (which_dir == NULL) {
-            LogCrit(COMPONENT_FSAL,
-                    "PROXY_V3: Asked for '..' but no parent directory exists");
-            return fsalstat(ERR_FSAL_FAULT, 0);
-         }
+         which_dir = (struct proxyv3_obj_handle*) parent_obj->parent;
       }
 
       // Make a copy for the result.
@@ -1340,6 +1337,7 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
    struct proxyv3_obj_handle *obj =
       container_of(obj_hdl, struct proxyv3_obj_handle, obj);
 
+   // FSSTAT is supposed to be called with the root handle.
    if (obj != kRootObjHandle) {
       // Let's just check if the handles actually match.
       if (obj->fh3.data.data_len != kRootObjHandle->fh3.data.data_len ||
@@ -1363,9 +1361,7 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
    FSSTAT3args args;
    FSSTAT3res result;
 
-   char *fh_copy = gsh_calloc(1, NFS3_FHSIZE);
-   memcpy(fh_copy, obj->fh3.data.data_val, obj->fh3.data.data_len);
-   args.fsroot.data.data_val = fh_copy;
+   args.fsroot.data.data_val = obj->fh3.data.data_val;
    args.fsroot.data.data_len = obj->fh3.data.data_len;
 
    memset(&result, 0, sizeof(result));
@@ -1380,7 +1376,6 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: proxyv3_nfs_call for FSSTAT3 failed (%u)",
               result.status);
-      gsh_free(fh_copy);
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
 
@@ -1389,7 +1384,6 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
       LogDebug(COMPONENT_FSAL,
                "PROXY_V3: FSSTAT3 failed. %u",
                result.status);
-      gsh_free(fh_copy);
       return nfsstat3_to_fsalstat(result.status);
    }
 
