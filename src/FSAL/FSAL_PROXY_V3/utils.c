@@ -21,6 +21,7 @@
  */
 
 #include "nfs23.h"
+#include "fsal_convert.h"
 
 #include "proxyv3_fsal_methods.h"
 
@@ -150,7 +151,7 @@ bool fsalattr_to_sattr3(const struct attrlist *fsal_attrs, sattr3 *attrs_out) {
 
    if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_MODE)) {
       attrs_out->mode.set_it = true;
-      attrs_out->mode.set_mode3_u.mode = fsal_attrs->mode;
+      attrs_out->mode.set_mode3_u.mode = fsal2unix_mode(fsal_attrs->mode);
    }
 
    if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_OWNER)) {
