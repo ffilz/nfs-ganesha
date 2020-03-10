@@ -819,6 +819,57 @@ proxyv3_symlink(struct fsal_obj_handle *dir_hdl,
                                    attrs_out);
 }
 
+// Handle readlink requests.
+static fsal_status_t
+proxyv3_readlink(struct fsal_obj_handle *obj_hdl,
+                 struct gsh_buffdesc *link_content,
+                 bool refresh) {
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: readlink of %p of type %d",
+            obj_hdl, obj_hdl->type);
+
+   READLINK3args args;
+   READLINK3res result;
+   memset(&result, 0, sizeof(result));
+
+   struct proxyv3_obj_handle *obj =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   if (obj_hdl->type != SYMBOLIC_LINK) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: Symlink called with obj %p type %d != symlink (%d)",
+              obj_hdl, obj_hdl->type, SYMBOLIC_LINK);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   args.symlink.data.data_val = obj->fh3.data.data_val;
+   args.symlink.data.data_len = obj->fh3.data.data_len;
+
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
+                         op_ctx->creds,
+                         NFSPROC3_READLINK,
+                         (xdrproc_t) xdr_READLINK3args, &args,
+                         (xdrproc_t) xdr_READLINK3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: rpc for READLINK3 failed.");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: READLINK3 failed (%u)", result.status);
+      return nfsstat3_to_fsalstat(result.status);
+   }
+
+   // The result is a char*.
+   link_content->addr = gsh_strdup(result.READLINK3res_u.resok.data);
+   link_content->len = strlen(link_content->addr);
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+
 // Let Ganesha tell us to "close" a file. This should always be stateless for
 // NFSv3, therefore nothing to do but check that and say "Sure!".
 static fsal_status_t
@@ -1843,6 +1894,7 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.setattr2 = proxyv3_setattr2;
    PROXY_V3.handle_ops.mkdir = proxyv3_mkdir;
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
+   PROXY_V3.handle_ops.readlink = proxyv3_readlink;
    PROXY_V3.handle_ops.symlink = proxyv3_symlink;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
