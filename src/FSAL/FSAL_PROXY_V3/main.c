@@ -623,10 +623,6 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
    struct proxyv3_obj_handle *parent_obj =
       container_of(fsal_hdl, struct proxyv3_obj_handle, obj);
 
-   LogDebug(COMPONENT_FSAL,
-            "PROXY_V3: open2 for handle %p with flags %x and createmode %u",
-            fsal_hdl, openflags, createmode);
-
    if (state != NULL) {
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: Asked for a stateful open2(). Probably a mistake");
@@ -638,6 +634,10 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
               "PROXY_V3: Asked for an open by handle, rather than name. NOTYET");
       return fsalstat(ERR_FSAL_NOTSUPP, 0);
    }
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: open2 of parent %p, name %s with flags %x and mode %u",
+            fsal_hdl, name, openflags, createmode);
 
    CREATE3args args;
    CREATE3res result;
@@ -743,10 +743,10 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
 static fsal_status_t
 proxyv3_close(struct fsal_obj_handle *obj_hdl) {
    LogDebug(COMPONENT_FSAL,
-            "Asking for stateless CLOSE of handle %p",
+            "Asking for stateless CLOSE of handle %p. Say its not 'opened'!",
             obj_hdl);
 
-   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+   return fsalstat(ERR_FSAL_NOT_OPENED, 0);
 }
 
 
@@ -763,7 +763,9 @@ proxyv3_close2(struct fsal_obj_handle *obj_hdl,
       return fsalstat(ERR_FSAL_NOTSUPP, 0);
    }
 
-   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+   // Stateless close through the other door, say it's not opened (avoid's the
+   // decref in fsal_close).
+   return fsalstat(ERR_FSAL_NOT_OPENED, 0);
 }
 
 
@@ -1270,8 +1272,20 @@ proxyv3_unlink(struct fsal_obj_handle *dir_hdl,
       container_of(dir_hdl, struct proxyv3_obj_handle, obj);
 
    LogDebug(COMPONENT_FSAL,
-            "PROXY_V3: REMOVE request for dir %p of file %s",
-            dir_hdl, name);
+            "PROXY_V3: REMOVE request for dir %p of %s %s",
+            dir_hdl, (obj_hdl->type == DIRECTORY) ? "directory" : "file", name);
+
+   /*
+    * NOTE(boulos): While the NFSv3 spec says:
+    *
+    *  In general, REMOVE is intended to remove non-directory file
+    *  objects and RMDIR is to be used to remove directories.  However, REMOVE
+    *  can be used to remove directories, subject to restrictions imposed by
+    *  either the client or server interfaces."
+    *
+    *  It seems that in practice, Linux's kNFSd at least does not go in for
+    *  using REMOVE3 for directories and returns NFS3_ISDIR.
+    */
 
    bool is_rmdir = obj_hdl->type == DIRECTORY;
 
