@@ -1476,10 +1476,12 @@ proxyv3_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
    }
 
    if (output_type != FSAL_DIGEST_NFSV3) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Asked for an FH digest other than NFSv3");
-      abort();
-      return fsalstat(ERR_FSAL_INVAL, 0);
+      // The MDCACHE has an explicit FSAL_DIGEST_V4 hard coded into it
+      // (mdc_get_parent_handle) that my op_ctx->nfs_vers == 4 check there
+      // doesn't handle: the case of starting the export (there is no
+      // "op"). Just warn about this and move on.
+      LogWarn(COMPONENT_FSAL,
+              "PROXY_V3: Asked for an NFSv4 rather NFSv3 handle! Proceeding.");
    }
 
    LogDebug(COMPONENT_FSAL,
