@@ -301,7 +301,7 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
 
    if (strchr(path, '/') != NULL) {
       LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Path contains embedded forward slash.");
+              "PROXY_V3: Path (%s) contains embedded forward slash.", path);
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
 
@@ -309,10 +309,11 @@ static fsal_status_t proxyv3_lookup_internal(struct fsal_export *export_handle,
       container_of(parent, struct proxyv3_obj_handle, obj);
 
    // Small optimization to avoid a round-trip: if we know the answer, hand it back.
-   if (strcmp(path, ".") == 0 ||
+   if (true && /* TODO(boulos): Turn this into a flag */
+       (strcmp(path, ".") == 0 ||
        // We may not have the parent pointer information (could be from a
        // create_handle from key thing, so let the backend respond)
-       (strcmp(path, "..") == 0 && parent_obj->parent != NULL)) {
+        (strcmp(path, "..") == 0 && parent_obj->parent != NULL))) {
       // They just want the current/parent directory. Give it to
       // them. TODO(boulos): Should this force a copy? Should this force a
       // LOOKUP to the server to re-request the attributes?
@@ -608,6 +609,70 @@ fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
                                   &kRootObjHandle->obj, handle, attrs_out);
 }
 
+// Issue a CREATE3/MKDIR3/SYMLINK style operation, handling all the "make sure
+// we got back the attributes" and so on.
+static fsal_status_t
+proxyv3_issue_createlike(struct proxyv3_obj_handle *parent_obj,
+                         const rpcproc_t nfsProc, const char* procName,
+                         xdrproc_t encFunc, const void *encArgs,
+                         xdrproc_t decFunc, void *decArgs,
+                         nfsstat3 *status,
+                         post_op_fh3 *op_f3,
+                         post_op_attr *op_attr,
+                         struct fsal_obj_handle **new_obj,
+                         struct attrlist *attrs_out) {
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: Issuing a %s", procName);
+
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
+                         op_ctx->creds,
+                         nfsProc,
+                         encFunc, encArgs,
+                         decFunc, decArgs)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: %s failed", procName);
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // Okay, let's see what we got.
+   if (*status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: %s failed, got %u", procName, *status);
+      return nfsstat3_to_fsalstat(*status);
+   }
+
+   // We need both the handle and attributes to fill in the results.
+   if (!op_attr->attributes_follow ||
+       !op_f3->handle_follows) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: %s didn't return obj attributes (%s) or handle (%s)",
+               procName,
+               op_attr->attributes_follow ? "T" : "F",
+               op_f3->handle_follows ? "T" : "F");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   const nfs_fh3 *obj_fh   = &op_f3->post_op_fh3_u.handle;
+   const fattr3 *obj_attrs = &op_attr->post_op_attr_u.attributes;
+
+   struct proxyv3_obj_handle *result_handle =
+      proxyv3_alloc_handle(op_ctx->fsal_export,
+                           obj_fh,
+                           obj_attrs,
+                           parent_obj,
+                           attrs_out);
+
+   if (result_handle == NULL) {
+      return fsalstat(ERR_FSAL_FAULT, 0);
+   }
+
+   *new_obj = &result_handle->obj;
+
+   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
 // Perform an "open" (really CREATE3).
 static fsal_status_t
 proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
@@ -690,52 +755,68 @@ proxyv3_open2(struct fsal_obj_handle *fsal_hdl,
       }
    }
 
-
    // Issue the CREATE3 call.
-   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
-                         proxyv3_socklen(),
-                         proxyv3_nfsd_port(),
-                         op_ctx->creds,
-                         NFSPROC3_CREATE,
-                         (xdrproc_t) xdr_CREATE3args, &args,
-                         (xdrproc_t) xdr_CREATE3res, &result)) {
+   return proxyv3_issue_createlike(parent_obj,
+                                   NFSPROC3_CREATE, "CREATE3",
+                                   (xdrproc_t) xdr_CREATE3args, &args,
+                                   (xdrproc_t) xdr_CREATE3res, &result,
+                                   &result.status,
+                                   &resok->obj,
+                                   &resok->obj_attributes,
+                                   new_obj,
+                                   attrs_out);
+}
+
+// Make a new symlink from dir/name => link_path.
+static fsal_status_t
+proxyv3_symlink(struct fsal_obj_handle *dir_hdl,
+                const char *name,
+                const char *link_path,
+                struct attrlist *attrs_in,
+                struct fsal_obj_handle **new_obj,
+                struct attrlist *attrs_out) {
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: symlink of parent %p, name %s to => %s",
+            dir_hdl, name, link_path);
+
+   SYMLINK3args args;
+   SYMLINK3res result;
+   SYMLINK3resok *resok = &result.SYMLINK3res_u.resok;
+   memset(&result, 0, sizeof(result));
+
+   struct proxyv3_obj_handle *parent_obj =
+      container_of(dir_hdl, struct proxyv3_obj_handle, obj);
+
+   args.where.dir.data.data_val = parent_obj->fh3.data.data_val;
+   args.where.dir.data.data_len = parent_obj->fh3.data.data_len;
+   // We can safely const-cast away, this is an input.
+   args.where.name = (char*) name;
+
+   if (attrs_in == NULL) {
       LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: CREATE3 failed");
-      return fsalstat(ERR_FSAL_INVAL, 0);
-   }
-
-   if (result.status != NFS3_OK) {
-      // Okay, let's see what we got.
-      LogDebug(COMPONENT_FSAL,
-               "PROXY_V3: CREATE3 failed, got %u", result.status);
-      return nfsstat3_to_fsalstat(result.status);
-   }
-
-   // We need both the handle and attributes to fill in the results.
-   if (!resok->obj_attributes.attributes_follow ||
-       !resok->obj.handle_follows) {
-      LogDebug(COMPONENT_FSAL,
-               "PROXY_V3: CREATE3 didn't return obj attributes or handle");
-      return fsalstat(ERR_FSAL_INVAL, 0);
-   }
-
-   const nfs_fh3 *obj_fh   = &resok->obj.post_op_fh3_u.handle;
-   const fattr3 *obj_attrs = &resok->obj_attributes.post_op_attr_u.attributes;
-
-   struct proxyv3_obj_handle *result_handle =
-      proxyv3_alloc_handle(op_ctx->fsal_export,
-                           obj_fh,
-                           obj_attrs,
-                           parent_obj,
-                           attrs_out);
-
-   if (result_handle == NULL) {
+              "PROXY_V3: symlink called without attributes. Unexpected");
       return fsalstat(ERR_FSAL_FAULT, 0);
    }
 
-   *new_obj = &result_handle->obj;
+   if (!fsalattr_to_sattr3(attrs_in, &args.symlink.symlink_attributes)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: SYMLINK3 with invalid attributes");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
 
-   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+   // Again, we can safely const-cast away, because this is an input.
+   args.symlink.symlink_data = (char*) link_path;
+
+   // Issue the SYMLINK3 call.
+   return proxyv3_issue_createlike(parent_obj,
+                                   NFSPROC3_SYMLINK, "SYMLINK3",
+                                   (xdrproc_t) xdr_SYMLINK3args, &args,
+                                   (xdrproc_t) xdr_SYMLINK3res, &result,
+                                   &result.status,
+                                   &resok->obj,
+                                   &resok->obj_attributes,
+                                   new_obj,
+                                   attrs_out);
 }
 
 // Let Ganesha tell us to "close" a file. This should always be stateless for
@@ -801,51 +882,16 @@ proxyv3_mkdir(struct fsal_obj_handle *dir_hdl,
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
 
-      // Issue the CREATE3 call.
-   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
-                         proxyv3_socklen(),
-                         proxyv3_nfsd_port(),
-                         op_ctx->creds,
-                         NFSPROC3_MKDIR,
-                         (xdrproc_t) xdr_MKDIR3args, &args,
-                         (xdrproc_t) xdr_MKDIR3res, &result)) {
-      LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: MKDIR3 failed");
-      return fsalstat(ERR_FSAL_INVAL, 0);
-   }
-
-   if (result.status != NFS3_OK) {
-      // Okay, let's see what we got.
-      LogDebug(COMPONENT_FSAL,
-               "PROXY_V3: MKDIR3 failed, got %u", result.status);
-      return nfsstat3_to_fsalstat(result.status);
-   }
-
-   // We need both the handle and attributes to fill in the results.
-   if (!resok->obj_attributes.attributes_follow ||
-       !resok->obj.handle_follows) {
-      LogDebug(COMPONENT_FSAL,
-               "PROXY_V3: MKDIR3 didn't return obj attributes or handle");
-      return fsalstat(ERR_FSAL_INVAL, 0);
-   }
-
-   const nfs_fh3 *obj_fh   = &resok->obj.post_op_fh3_u.handle;
-   const fattr3 *obj_attrs = &resok->obj_attributes.post_op_attr_u.attributes;
-
-   struct proxyv3_obj_handle *result_handle =
-      proxyv3_alloc_handle(op_ctx->fsal_export,
-                           obj_fh,
-                           obj_attrs,
-                           parent_obj,
-                           attrs_out);
-
-   if (result_handle == NULL) {
-      return fsalstat(ERR_FSAL_FAULT, 0);
-   }
-
-   *new_obj = &result_handle->obj;
-
-   return fsalstat(ERR_FSAL_NO_ERROR, 0);
+   // Issue the MKDIR3 call.
+   return proxyv3_issue_createlike(parent_obj,
+                                   NFSPROC3_MKDIR, "MKDIR3",
+                                   (xdrproc_t) xdr_MKDIR3args, &args,
+                                   (xdrproc_t) xdr_MKDIR3res, &result,
+                                   &result.status,
+                                   &resok->obj,
+                                   &resok->obj_attributes,
+                                   new_obj,
+                                   attrs_out);
 }
 
 
@@ -1432,6 +1478,7 @@ proxyv3_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
    if (output_type != FSAL_DIGEST_NFSV3) {
       LogCrit(COMPONENT_FSAL,
               "PROXY_V3: Asked for an FH digest other than NFSv3");
+      abort();
       return fsalstat(ERR_FSAL_INVAL, 0);
    }
 
@@ -1794,6 +1841,7 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.setattr2 = proxyv3_setattr2;
    PROXY_V3.handle_ops.mkdir = proxyv3_mkdir;
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
+   PROXY_V3.handle_ops.symlink = proxyv3_symlink;
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
    PROXY_V3.handle_ops.close = proxyv3_close;
