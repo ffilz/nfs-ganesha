@@ -819,6 +819,54 @@ proxyv3_symlink(struct fsal_obj_handle *dir_hdl,
                                    attrs_out);
 }
 
+// Make a hardlink from obj => dir/name.
+static fsal_status_t
+proxyv3_hardlink(struct fsal_obj_handle *obj_hdl,
+                 struct fsal_obj_handle *dir_hdl,
+                 const char *name) {
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: (hard)link of object %p to %p/%s",
+            obj_hdl, dir_hdl, name);
+
+   LINK3args args;
+   LINK3res result;
+   memset(&result, 0, sizeof(result));
+
+   struct proxyv3_obj_handle *obj =
+      container_of(obj_hdl, struct proxyv3_obj_handle, obj);
+
+   struct proxyv3_obj_handle *dir =
+      container_of(dir_hdl, struct proxyv3_obj_handle, obj);
+
+   args.file.data.data_val = obj->fh3.data.data_val;
+   args.file.data.data_len = obj->fh3.data.data_len;
+   args.link.dir.data.data_val = dir->fh3.data.data_val;
+   args.link.dir.data.data_len = dir->fh3.data.data_len;
+   // We can safely const-cast away, this is an input.
+   args.link.name = (char*) name;
+
+   // If the call fails for any reason, exit.
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
+                         op_ctx->creds,
+                         NFSPROC3_LINK,
+                         (xdrproc_t) xdr_LINK3args, &args,
+                         (xdrproc_t) xdr_LINK3res, &result)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: LINK3 failed");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // If we didn't get back NFS3_OK, leave a debugging note.
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "PROXY_V3: SETATTR failed. %u", result.status);
+   }
+
+   return nfsstat3_to_fsalstat(result.status);
+}
+
 // Handle readlink requests.
 static fsal_status_t
 proxyv3_readlink(struct fsal_obj_handle *obj_hdl,
@@ -1886,21 +1934,37 @@ MODULE_INIT void proxy_v3_init(void) {
 
    // Fill in the objecting handling ops with the default "Hey! NOT IMPLEMENTED!!" ones.
    fsal_default_obj_ops_init(&PROXY_V3.handle_ops);
-   PROXY_V3.handle_ops.lookup = proxyv3_lookup_handle;
+
+
+   // FSAL handle-related ops.
    PROXY_V3.handle_ops.handle_to_wire = proxyv3_handle_to_wire;
    PROXY_V3.handle_ops.handle_to_key = proxyv3_handle_to_key;
    PROXY_V3.handle_ops.release = proxyv3_handle_release;
+
+   // Attributes.
+   PROXY_V3.handle_ops.lookup = proxyv3_lookup_handle;
    PROXY_V3.handle_ops.getattrs = proxyv3_getattrs;
    PROXY_V3.handle_ops.setattr2 = proxyv3_setattr2;
+
+   // Mkdir/Readir. (RMDIR is under unlink).
    PROXY_V3.handle_ops.mkdir = proxyv3_mkdir;
    PROXY_V3.handle_ops.readdir = proxyv3_readdir;
+
+   // Symlink and hardlink.
+   PROXY_V3.handle_ops.link = proxyv3_hardlink;
    PROXY_V3.handle_ops.readlink = proxyv3_readlink;
    PROXY_V3.handle_ops.symlink = proxyv3_symlink;
+
+   // Read/write/flush
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
+   PROXY_V3.handle_ops.write2 = proxyv3_write2;
+   PROXY_V3.handle_ops.commit2 = proxyv3_commit2;
+
+   // Open/close.
    PROXY_V3.handle_ops.open2 = proxyv3_open2;
    PROXY_V3.handle_ops.close = proxyv3_close;
    PROXY_V3.handle_ops.close2 = proxyv3_close2;
-   PROXY_V3.handle_ops.write2 = proxyv3_write2;
-   PROXY_V3.handle_ops.commit2 = proxyv3_commit2;
+
+   // Remove (and RMDIR).
    PROXY_V3.handle_ops.unlink = proxyv3_unlink;
 }
