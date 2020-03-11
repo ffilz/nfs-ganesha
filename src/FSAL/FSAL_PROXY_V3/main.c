@@ -1628,27 +1628,6 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
    struct proxyv3_obj_handle *obj =
       container_of(obj_hdl, struct proxyv3_obj_handle, obj);
 
-   // FSSTAT is supposed to be called with the root handle.
-   if (obj != kRootObjHandle) {
-      // Let's just check if the handles actually match.
-      if (obj->fh3.data.data_len != kRootObjHandle->fh3.data.data_len ||
-          memcmp(obj->fh3.data.data_val,
-                 kRootObjHandle->fh3.data.data_val,
-                 obj->fh3.data.data_len)) {
-         LogCrit(COMPONENT_FSAL,
-                 "PROXY_V3: fsinfo called w/ handle %p != root (%p)",
-                 obj, kRootObjHandle);
-         // Didn't match, exit now.
-         return fsalstat(ERR_FSAL_INVAL, 0);
-      } else {
-         LogDebug(COMPONENT_FSAL,
-                  "PROXY_V3: fsinfo called w/ handle %p != root (%p),"
-                  "but data matches",
-                  obj, kRootObjHandle);
-         // Continue onwards.
-      }
-   }
-
    FSSTAT3args args;
    FSSTAT3res result;
 
@@ -1678,14 +1657,14 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
       return nfsstat3_to_fsalstat(result.status);
    }
 
-
    infop->total_bytes = result.FSSTAT3res_u.resok.tbytes;
    infop->free_bytes = result.FSSTAT3res_u.resok.fbytes;
    infop->avail_bytes = result.FSSTAT3res_u.resok.abytes;
    infop->total_files = result.FSSTAT3res_u.resok.tfiles;
    infop->free_files = result.FSSTAT3res_u.resok.ffiles;
    infop->avail_files = result.FSSTAT3res_u.resok.afiles;
-   // maxread/maxwrite are *static* not dynamic info
+   // maxread/maxwrite are *static* not dynamic info, we picked them up on
+   // export init.
    infop->time_delta.tv_sec = result.FSSTAT3res_u.resok.invarsec;
    infop->time_delta.tv_nsec = 0;
 
