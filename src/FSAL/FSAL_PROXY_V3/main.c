@@ -1570,6 +1570,56 @@ proxyv3_unlink(struct fsal_obj_handle *dir_hdl,
 }
 
 
+// Ask to rename obj_hdl from olddir/old_name to newdir/new_name.
+static fsal_status_t
+proxyv3_rename(struct fsal_obj_handle *obj_hdl,
+               struct fsal_obj_handle *olddir_hdl,
+               const char *old_name,
+               struct fsal_obj_handle *newdir_hdl,
+               const char *new_name) {
+   LogDebug(COMPONENT_FSAL,
+            "Rename of obj %p which is at %p/%s => %p/%s",
+            obj_hdl, olddir_hdl, old_name, newdir_hdl, new_name);
+
+   RENAME3args args;
+   RENAME3res result;
+   memset(&result, 0, sizeof(result));
+
+   struct proxyv3_obj_handle *old_dir =
+      container_of(olddir_hdl, struct proxyv3_obj_handle, obj);
+
+   struct proxyv3_obj_handle *new_dir =
+      container_of(newdir_hdl, struct proxyv3_obj_handle, obj);
+
+   args.from.dir.data.data_val = old_dir->fh3.data.data_val;
+   args.from.dir.data.data_len = old_dir->fh3.data.data_len;
+   args.from.name = (char*) old_name;
+
+   args.to.dir.data.data_val = new_dir->fh3.data.data_val;
+   args.to.dir.data.data_len = new_dir->fh3.data.data_len;
+   args.to.name = (char*) new_name;
+
+   if (!proxyv3_nfs_call(proxyv3_sockaddr(),
+                         proxyv3_socklen(),
+                         proxyv3_nfsd_port(),
+                         op_ctx->creds,
+                         NFSPROC3_RENAME,
+                         (xdrproc_t) xdr_RENAME3args, &args,
+                         (xdrproc_t) xdr_RENAME3res, &result))  {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: proxyv3_nfs_call for RENAME failed");
+      return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+   }
+
+   if (result.status != NFS3_OK) {
+      LogDebug(COMPONENT_FSAL,
+               "Rename failed! Got %d", result.status);
+   }
+
+   return nfsstat3_to_fsalstat(result.status);
+}
+
+
 // Run FSSTAT to learn about how mch space the volume has available.
 static fsal_status_t
 proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
@@ -2050,6 +2100,7 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.close = proxyv3_close;
    PROXY_V3.handle_ops.close2 = proxyv3_close2;
 
-   // Remove (and RMDIR).
+   // Remove (and RMDIR) and rename.
    PROXY_V3.handle_ops.unlink = proxyv3_unlink;
+   PROXY_V3.handle_ops.rename = proxyv3_rename;
 }
