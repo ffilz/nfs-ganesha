@@ -993,6 +993,88 @@ proxyv3_mkdir(struct fsal_obj_handle *dir_hdl,
                                    attrs_out);
 }
 
+// Issue a MKNOD
+static fsal_status_t
+proxyv3_mknode(struct fsal_obj_handle *dir_hdl,
+               const char *name,
+               object_file_type_t nodetype,
+               struct attrlist *attrs_in,
+               struct fsal_obj_handle **new_obj,
+               struct attrlist *attrs_out) {
+   struct proxyv3_obj_handle *parent_obj =
+      container_of(dir_hdl, struct proxyv3_obj_handle, obj);
+
+   LogDebug(COMPONENT_FSAL,
+            "PROXY_V3: mknod of %s in parent %p (type is %d)",
+            name, dir_hdl, nodetype);
+
+   // In case we fail along the way.
+   *new_obj = NULL;
+
+   MKNOD3args args;
+   MKNOD3res result;
+   MKNOD3resok *resok = &result.MKNOD3res_u.resok;
+
+   memset(&result, 0, sizeof(result));
+
+   args.where.dir.data.data_val = parent_obj->fh3.data.data_val;
+   args.where.dir.data.data_len = parent_obj->fh3.data.data_len;
+   // Const-cast away is okay here, as it's an input.
+   args.where.name = (char*) name;
+
+   switch (nodetype) {
+   case CHARACTER_FILE:
+      args.what.type = NF3CHR;
+      break;
+   case BLOCK_FILE:
+      args.what.type = NF3BLK;
+      break;
+   case SOCKET_FILE:
+      args.what.type = NF3SOCK;
+      break;
+   case FIFO_FILE:
+      args.what.type = NF3FIFO;
+      break;
+   default:
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: mknode got invalid MKNOD type %d",
+              nodetype);
+   }
+
+   sattr3 *attrs;
+   switch (nodetype) {
+   case CHARACTER_FILE:
+   case BLOCK_FILE:
+      attrs = &args.what.mknoddata3_u.device.dev_attributes;
+      break;
+   case SOCKET_FILE:
+   case FIFO_FILE:
+      attrs = &args.what.mknoddata3_u.pipe_attributes;
+      break;
+   default:
+      // Unreachable.
+      attrs = NULL;
+      break;
+   }
+
+   if (!fsalattr_to_sattr3(attrs_in, attrs)) {
+      LogCrit(COMPONENT_FSAL,
+              "PROXY_V3: MKNOD() with invalid attributes");
+      return fsalstat(ERR_FSAL_INVAL, 0);
+   }
+
+   // Issue the MKNODE3 call.
+   return proxyv3_issue_createlike(parent_obj,
+                                   NFSPROC3_MKNOD, "MKNODE3",
+                                   (xdrproc_t) xdr_MKNOD3args, &args,
+                                   (xdrproc_t) xdr_MKNOD3res, &result,
+                                   &result.status,
+                                   &resok->obj,
+                                   &resok->obj_attributes,
+                                   new_obj,
+                                   attrs_out);
+}
+
 
 // Do a readdir for the given directory (dir_hdl), possibly picking up where
 // `whence` left off.
@@ -1954,6 +2036,9 @@ MODULE_INIT void proxy_v3_init(void) {
    PROXY_V3.handle_ops.link = proxyv3_hardlink;
    PROXY_V3.handle_ops.readlink = proxyv3_readlink;
    PROXY_V3.handle_ops.symlink = proxyv3_symlink;
+
+   // Block/Character/Fifo/Device files.
+   PROXY_V3.handle_ops.mknode = proxyv3_mknode;
 
    // Read/write/flush
    PROXY_V3.handle_ops.read2 = proxyv3_read2;
