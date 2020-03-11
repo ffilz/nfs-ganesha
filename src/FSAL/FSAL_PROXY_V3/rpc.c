@@ -680,11 +680,28 @@ bool proxyv3_mount_call(const struct sockaddr *host,
                        mountProc, encodeFunc, args, decodeFunc, output);
 }
 
+bool proxyv3_nlm_call(const struct sockaddr *host,
+                      const socklen_t socklen,
+                      const uint nlmPort,
+                      const struct user_cred *creds,
+                      const rpcproc_t nlmProc,
+                      const xdrproc_t encodeFunc, const void *args,
+                      const xdrproc_t decodeFunc, void *output) {
+   const int kProgramNLM = NLMPROG;
+   const int kVersionNLMv4 = NLM4_VERS;
+
+   return proxyv3_call(host, socklen, nlmPort, creds,
+                       kProgramNLM, kVersionNLMv4,
+                       nlmProc, encodeFunc, args, decodeFunc, output);
+}
+
+
 // Ask portmapd for where MOUNTD and NFSD are running.
 bool proxyv3_find_ports(const struct sockaddr *host,
                         const socklen_t socklen,
                         u_int *mountd_port,
-                        u_int *nfsd_port) {
+                        u_int *nfsd_port,
+                        u_int *nlm_port) {
    struct pmap mountd_query = {
       .pm_prog = MOUNTPROG,
       .pm_vers = MOUNT_V3,
@@ -699,34 +716,43 @@ bool proxyv3_find_ports(const struct sockaddr *host,
       .pm_port = 0 /* ignored */
    };
 
-   LogDebug(COMPONENT_FSAL,
-            "Asking portmap to tell us what the mountd/tcp port is");
+   struct pmap nlm_query = {
+      .pm_prog = NLMPROG,
+      .pm_vers = NLM4_VERS,
+      .pm_prot = IPPROTO_TCP,
+      .pm_port = 0 /* ignored */
+   };
 
-   if (!proxyv3_call(host, socklen, PMAPPORT, NULL /* no auth for portmapd */,
-                     PMAPPROG, PMAPVERS,
-                     PMAPPROC_GETPORT,
-                     (xdrproc_t) xdr_pmap, &mountd_query,
-                     (xdrproc_t) xdr_u_int, mountd_port)) {
+   struct {
+      struct pmap *input;
+      u_int *port;
+      const char *name;
+   } queries[] = {
+      { &mountd_query, mountd_port, "mountd" },
+      { &nfsd_query, nfsd_port, "nfsd" },
+      // If we put NLM last, we can technically let it just warn in debug mode.
+      { &nlm_query, nlm_port, "nlm" }
+   };
+
+   for (size_t i = 0; i < sizeof(queries)/sizeof(queries[0]); i++) {
       LogDebug(COMPONENT_FSAL,
-               "Failed to find mountd");
-      return false;
+               "Asking portmap to tell us what the %s/tcp port is",
+               queries[i].name);
+
+      if (!proxyv3_call(host, socklen, PMAPPORT, NULL /* no auth for portmapd */,
+                        PMAPPROG, PMAPVERS,
+                        PMAPPROC_GETPORT,
+                        (xdrproc_t) xdr_pmap, queries[i].input,
+                        (xdrproc_t) xdr_u_int, queries[i].port)) {
+         LogDebug(COMPONENT_FSAL,
+                  "Failed to find %s", queries[i].name);
+         return false;
+      }
+
+      LogDebug(COMPONENT_FSAL,
+               "Got back %s port %u",
+               queries[i].name, *queries[i].port);
    }
 
-   LogDebug(COMPONENT_FSAL, "Got back mountd port of %u", *mountd_port);
-
-   LogDebug(COMPONENT_FSAL,
-            "Asking portmap to tell us what the nfsd/tcp port is");
-
-   if (!proxyv3_call(host, socklen, PMAPPORT, NULL /* no auth for portmapd */,
-                     PMAPPROG, PMAPVERS,
-                     PMAPPROC_GETPORT,
-                     (xdrproc_t) xdr_pmap, &nfsd_query,
-                     (xdrproc_t) xdr_u_int, nfsd_port)) {
-      LogDebug(COMPONENT_FSAL,
-               "Failed to find nfsd");
-      return false;
-   }
-
-   LogDebug(COMPONENT_FSAL, "Got back nfsd port of %u", *nfsd_port);
    return true;
 }

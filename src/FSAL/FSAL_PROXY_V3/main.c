@@ -149,6 +149,14 @@ static const uint proxyv3_nfsd_port() {
    return export->params.nfsd_port;
 }
 
+// Get the current nlm port.
+static const uint proxyv3_nlm_port() {
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
+
+   return export->params.nlm_port;
+}
+
 
 // Load our configuration from the config file and do any validation we need to.
 static fsal_status_t proxyv3_init_config(struct fsal_module *fsal_handle,
@@ -1954,16 +1962,19 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
 
    u_int mountd_port = 0;
    u_int nfsd_port = 0;
+   u_int nlm_port = 0;
    if (!proxyv3_find_ports(proxyv3_sockaddr(),
                            proxyv3_socklen(),
                            &mountd_port,
-                           &nfsd_port)) {
+                           &nfsd_port,
+                           &nlm_port)) {
       LogDebug(COMPONENT_FSAL,
-               "Failed to find mountd/nfsd, oh well");
+               "Failed to find mountd/nfsd/nlm, oh well");
    }
    // Copy into our param struct.
    export->params.mountd_port = mountd_port;
    export->params.nfsd_port = nfsd_port;
+   export->params.nlm_port = nlm_port;
 
    mnt3_dirpath dirpath = op_ctx->ctx_export->fullpath;
    mountres3 result;
@@ -2021,6 +2032,23 @@ static fsal_status_t proxyv3_create_export(struct fsal_module *fsal_handle,
    // Copy the result for later use.
    export->root_handle_len = fh3->data.data_len;
    memcpy(export->root_handle, fh3->data.data_val, fh3->data.data_len);
+
+   if (proxyv3_nlm_port() != 0) {
+      // Try to send a NULL to NLM.
+      if (!proxyv3_nlm_call(proxyv3_sockaddr(),
+                            proxyv3_socklen(),
+                            proxyv3_nlm_port(),
+                            op_ctx->creds,
+                            NLMPROC4_NULL,
+                            (xdrproc_t) xdr_void, NULL,
+                            (xdrproc_t) xdr_void, NULL)) {
+         LogCrit(COMPONENT_FSAL,
+                 "NLM NULL procedure failed against NLM port %u",
+                 proxyv3_nlm_port());
+         gsh_free(export);
+         return fsalstat(ERR_FSAL_INVAL, 0);
+      }
+   }
 
    // Now fill in the fsinfo and we're done.
    return proxyv3_fill_fsinfo(fh3);
