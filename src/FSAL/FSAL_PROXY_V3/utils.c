@@ -25,6 +25,7 @@
 
 #include "proxyv3_fsal_methods.h"
 
+
 // Map from nfsstat3 error codes to the FSAL error codes where appropriate.
 static fsal_errors_t nfsstat3_to_fsal(nfsstat3 status) {
    switch (status) {
@@ -68,10 +69,35 @@ static fsal_errors_t nfsstat3_to_fsal(nfsstat3 status) {
    return ERR_FSAL_INVAL;
 }
 
+static fsal_errors_t nlm4stat_to_fsal(nlm4_stats status) {
+   switch (status) {
+   case NLM4_GRANTED:             return ERR_FSAL_NO_ERROR;
+   // We want NLM4_DENIED to convert to STATE_LOCK_CONFLICT in state_error_convert.
+   case NLM4_DENIED:              return ERR_FSAL_DELAY;
+   case NLM4_DENIED_NOLOCKS:      return ERR_FSAL_NOSPC; /* No "space" to allocate. */
+   case NLM4_BLOCKED:             return ERR_FSAL_BLOCKED;
+   case NLM4_DENIED_GRACE_PERIOD: return ERR_FSAL_IN_GRACE;
+   case NLM4_DEADLCK:             return ERR_FSAL_DEADLOCK;
+   case NLM4_ROFS:                return ERR_FSAL_ROFS;
+   case NLM4_STALE_FH:            return ERR_FSAL_STALE;
+   case NLM4_FBIG:                return ERR_FSAL_FBIG;
+   case NLM4_FAILED:              return ERR_FSAL_PERM; /* Don't retry. */
+   }
+
+   // Shouldn't get here.
+   return ERR_FSAL_INVAL;
+}
+
 fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status) {
    fsal_errors_t rc = nfsstat3_to_fsal(status);
    return fsalstat(rc, (rc == ERR_FSAL_INVAL) ? (int) status : 0);
 }
+
+fsal_status_t nlm4stat_to_fsalstat(nlm4_stats status) {
+   fsal_errors_t rc = nlm4stat_to_fsal(status);
+   return fsalstat(rc, (rc == ERR_FSAL_INVAL) ? (int) status : 0);
+}
+
 
 bool attrmask_is_nfs3(attrmask_t mask) {
    // NOTE(boulos): Consider contributing this as FSAL_ONLY_MASK or something.

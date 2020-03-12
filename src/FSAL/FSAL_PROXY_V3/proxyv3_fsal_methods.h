@@ -57,9 +57,24 @@ struct proxyv3_export {
    size_t root_handle_len;
 };
 
+// The little struct we want Ganesha to hold for us.
+struct proxyv3_obj_handle {
+   struct fsal_obj_handle obj;
+   nfs_fh3 fh3;
+   fattr3 attrs;
+   // Optional pointer to the parent of this object, NULL for the root.
+   const struct proxyv3_obj_handle *parent;
+};
+
+
 extern struct proxyv3_fsal_module PROXY_V3;
 
 bool proxyv3_rpc_init();
+
+const struct sockaddr* proxyv3_sockaddr();
+const socklen_t proxyv3_socklen();
+const uint proxyv3_nlm_port();
+
 
 bool proxyv3_find_ports(const struct sockaddr *host,
                         const socklen_t socklen,
@@ -91,6 +106,15 @@ bool proxyv3_nlm_call(const struct sockaddr *host,
                       const xdrproc_t encodeFunc, const void *args,
                       const xdrproc_t decodeFunc, void *output);
 
+// All the NLM operations funnel through lock_op2, and it's complicated enough
+// to need its own file.
+fsal_status_t proxyv3_lock_op2(struct fsal_obj_handle *obj_hdl,
+                               struct state_t *state,
+                               void *owner,
+                               fsal_lock_op_t lock_op,
+                               fsal_lock_param_t *request_lock,
+                               fsal_lock_param_t *conflicting_lock);
+
 
 
 // Helpers for translating from nfsv3 structs to Ganesha data. These could go in
@@ -99,6 +123,9 @@ bool proxyv3_nlm_call(const struct sockaddr *host,
 // Return the closest match from the NFSv3 status to Ganesha's fsal_status_t
 // (mostly overlapping).
 fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status);
+
+// Return the closest match from the NLMv4 status to Ganesha's fsal_status_t.
+fsal_status_t nlm4stat_to_fsalstat(nlm4_stats status);
 
 // Check that the mask is just asking for NFSv3 and maybe the error bit.
 bool attrmask_is_nfs3(attrmask_t mask);

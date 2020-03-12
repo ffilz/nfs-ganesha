@@ -7,6 +7,7 @@ add_definitions(
 
 SET(fsalproxy_v3_LIB_SRCS
   main.c
+  nlm.c
   rpc.c
   utils.c
 )

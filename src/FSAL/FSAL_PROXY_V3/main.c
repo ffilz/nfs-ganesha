@@ -31,15 +31,6 @@
 
 #include "proxyv3_fsal_methods.h"
 
-// The little struct we want Ganesha to hold for us.
-struct proxyv3_obj_handle {
-   struct fsal_obj_handle obj;
-   nfs_fh3 fh3;
-   fattr3 attrs;
-   // Optional pointer to the parent of this object, NULL for the root.
-   const struct proxyv3_obj_handle *parent;
-};
-
 // TODO(boulos): I should probably shove this into the module or something...
 static struct proxyv3_obj_handle *kRootObjHandle;
 
@@ -55,13 +46,20 @@ struct proxyv3_fsal_module PROXY_V3 = {
          .no_trunc = true,
          .chown_restricted = true,
          .case_preserving = true,
-         .lock_support = false,
+         .lock_support = true,
+         // The wording on "lock_support_async_block" is super confusing. The
+         // comment in the fsal_staticfsinfo_t definition in fsal_types.h says
+         // "FS supports blocking locks?" (which to me is the *opposite* of
+         // supporting async *locking*). Really the problem is the combination
+         // of "async" and "block".
+         .lock_support_async_block = false,
          .named_attr = false,
          .unique_handles = true,
          .acl_support = FSAL_ACLSUPPORT_ALLOW,
          .homogenous = true,
          .supported_attrs = ((const attrmask_t) ATTRS_NFS3),
          .link_supports_permission_checks = true,
+         .readdir_plus = true,
          .expire_time_parent = -1,
       }
    }
@@ -110,7 +108,7 @@ struct config_block proxy_export_param = {
 };
 
 // Grab the sockaddr from our params via op_ctx.
-static const struct sockaddr* proxyv3_sockaddr() {
+const struct sockaddr* proxyv3_sockaddr() {
    struct proxyv3_export *export =
       container_of(op_ctx->fsal_export, struct proxyv3_export, export);
 
@@ -118,7 +116,7 @@ static const struct sockaddr* proxyv3_sockaddr() {
 }
 
 // Grab the socklen from our params via op_ctx.
-static const socklen_t proxyv3_socklen() {
+const socklen_t proxyv3_socklen() {
    struct proxyv3_export *export =
       container_of(op_ctx->fsal_export, struct proxyv3_export, export);
 
@@ -150,7 +148,7 @@ static const uint proxyv3_nfsd_port() {
 }
 
 // Get the current nlm port.
-static const uint proxyv3_nlm_port() {
+const uint proxyv3_nlm_port() {
    struct proxyv3_export *export =
       container_of(op_ctx->fsal_export, struct proxyv3_export, export);
 
@@ -1679,6 +1677,7 @@ proxyv3_get_dynamic_info(struct fsal_export *exp_hdl,
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+
 // Take our FSAL Object handle and fill in an nfs_fh3 equivalent.
 static fsal_status_t
 proxyv3_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
@@ -2110,4 +2109,7 @@ MODULE_INIT void proxy_v3_init(void) {
    // Remove (and RMDIR) and rename.
    PROXY_V3.handle_ops.unlink = proxyv3_unlink;
    PROXY_V3.handle_ops.rename = proxyv3_rename;
+
+   // Locking (and TODO: grace handling of reclaim)
+   PROXY_V3.handle_ops.lock_op2 = proxyv3_lock_op2;
 }
