@@ -944,8 +944,16 @@ proxyv3_close2(struct fsal_obj_handle *obj_hdl,
             obj_hdl, state);
 
    if (state != NULL) {
+      if (state->state_type == STATE_TYPE_NLM_LOCK) {
+         // This is a cleanup of our lock. Callers don't seem to care about the
+         // result. Stick with ERR_FSAL_NOT_OPENED like close().
+         return fsalstat(ERR_FSAL_NOT_OPENED, 0);
+      }
+
       LogCrit(COMPONENT_FSAL,
-              "PROXY_V3: Received stateful CLOSE request. Likely NFSv4.");
+              "PROXY_V3: Received unexpected stateful CLOSE with state_type %d",
+              state->state_type);
+
       return fsalstat(ERR_FSAL_NOTSUPP, 0);
    }
 
