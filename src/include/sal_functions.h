@@ -874,7 +874,7 @@ void blocked_lock_polling(struct fridgethr_context *ctx);
 
 /* Grace period handling */
 extern int32_t reclaim_completes; /* atomic */
-void nfs_start_grace(nfs_grace_start_t *gsp);
+int nfs_start_grace(nfs_grace_start_t *gsp);
 void nfs_end_grace(void);
 bool nfs_in_grace(void);
 bool nfs_get_grace_status(bool want_grace);
