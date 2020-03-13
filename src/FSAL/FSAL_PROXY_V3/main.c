@@ -1886,9 +1886,24 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3) {
 
    if (resok->maxfilesize != 0 && fsinfo->maxfilesize > resok->maxfilesize) {
       LogWarn(COMPONENT_FSAL,
-              "Changing maxfilesize from %zu to %zu",
+              "SKIPPING: Asked for changing maxfilesize from %zu to %zu",
               fsinfo->maxfilesize, resok->maxfilesize);
-      fsinfo->maxfilesize = resok->maxfilesize;
+
+      // NOTE(boulos): nlm_util tries to enforce the NFSv4 "offset + length" >
+      // UINT_64_MAX => error but nothing else. This is best described in the
+      // description of the LOCK op in NFSv4 in RFC 5661, Section 18.10.3
+      // (https://tools.ietf.org/html/rfc5661#section-18.10.3). Ganesha's change
+      // in behavior was introduced in c811fe9323, and means that if you set
+      // maxfilesize to what the backend NFSd reports, we'll incorrectly fail
+      // various Lock requests as NLM4_FBIG.
+
+      // TODO(boulos): Fix the ganesha handling of maxfilesize if possible, by
+      // having a separate concept of "the maximum thing I could ever support"
+      // (which isn't maxfilesize) and "the maximum thing my export supports"
+      // (which might have restrictions). dang@redhat.com worked around this for
+      // the NFSv4 handlers in 3d069bf, but didn't do the same for nlm_util.
+
+      //fsinfo->maxfilesize = resok->maxfilesize;
    }
 
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
