@@ -1204,7 +1204,7 @@ fsal_remove(struct fsal_obj_handle *parent, const char *name)
 	/* Do not remove a junction node or an export root. */
 	if (obj_is_junction(to_remove_obj)) {
 		LogCrit(COMPONENT_FSAL, "Attempt to remove export %s", name);
-		status = fsalstat(ERR_FSAL_NOTEMPTY, 0);
+		status = fsalstat(ERR_FSAL_ACCESS, 0);
 		goto out;
 	}
 
@@ -1297,7 +1297,7 @@ fsal_status_t fsal_rename(struct fsal_obj_handle *dir_src,
 	/* Do not rename a junction node or an export root. */
 	if (obj_is_junction(lookup_src)) {
 		LogCrit(COMPONENT_FSAL, "Attempt to rename export %s", oldname);
-		fsal_status = fsalstat(ERR_FSAL_NOTEMPTY, 0);
+		fsal_status = fsalstat(ERR_FSAL_ACCESS, 0);
 		goto out;
 	}
 
