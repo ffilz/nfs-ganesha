@@ -16,6 +16,24 @@
       "revId": "3309b1bad4cc45e049699253b4ae75d7ad634dda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc394768_ff3eb15c",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2020-03-17T17:04:09Z",
+      "side": 1,
+      "message": "Yes we can wait in loop in nfs_start_grace, I thought that may not be acceptable.\nWe can do something like this,\n\nagain:\n        cur \u003d atomic_fetch_uint32_t(\u0026grace_status);\n        do {\n                old \u003d cur;\n                was_grace \u003d cur \u0026 GRACE_STATUS_ACTIVE;\n\n                /* If we\u0027re already in a grace period then we\u0027re done */\n                if (was_grace)\n                        break;\n\n                /*\n                 * Are there outstanding refs? If so, then set the change req\n                 * flag and nothing else. If not, then clear the change req\n                 * flag and flip the active bit.\n                 */\n                if (old \u0026 GRACE_STATUS_COUNT_MASK) {\n                        pro \u003d old | GRACE_STATUS_CHANGE_REQ;\n                } else {\n                        pro \u003d old | GRACE_STATUS_ACTIVE;\n                        pro \u0026\u003d ~GRACE_STATUS_CHANGE_REQ;\n                }\n\n                /* If there are no changes, then we don\u0027t need to update */\n                if (pro \u003d\u003d old)\n                        break;\n                cur \u003d __sync_val_compare_and_swap(\u0026grace_status, old, pro);\n        } while (cur !\u003d old);\n\n        \n        if (!was_grace \u0026\u0026 (old \u0026 GRACE_STATUS_COUNT_MASK)) {\n                sleep(1);\n                 goto again;\n        }",
+      "parentUuid": "83ab964f_d772886b",
+      "revId": "3309b1bad4cc45e049699253b4ae75d7ad634dda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
