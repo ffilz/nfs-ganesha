@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a5dfd13_4c48989b",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-03-17T20:45:24Z",
+      "side": 1,
+      "message": "That works, though it might be less brittle long term to check explicitly for -EAGAIN, and return some sort of failure in any other case.\n\n1s is a pretty long time too. You may want to go with a shorter timeout just to avoid too many NFSERR_JUKEBOX returns. Alternately, you could consider some sort of completion variable here. This value is modified under the grace_mutex, so you could add a global completion var to wait on.",
+      "revId": "8c872579e31b6e1566f85c0a9e25a269e7d395cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be12fcf1_619f107f",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-03-17T20:45:24Z",
+      "side": 1,
+      "message": "Given that nfs_grace_start_t exists solely for this function, it might be better to just add must_enforce to the struct instead of a separate argument here. That would probably mean a smaller patch.\n\nOTOH, you could also go the other direction and get rid of nfs_grace_start_t altogether, and just have the callers pass in separate arguments. Splitting up the arguments like this makes it harder to follow. I\u0027d do one or the other.",
+      "revId": "8c872579e31b6e1566f85c0a9e25a269e7d395cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0646fd9f_a8502430",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-03-17T20:45:24Z",
+      "side": 1,
+      "message": "-EAGAIN, please",
+      "revId": "8c872579e31b6e1566f85c0a9e25a269e7d395cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
