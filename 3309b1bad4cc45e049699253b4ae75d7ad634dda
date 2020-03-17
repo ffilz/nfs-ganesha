@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83ab964f_d772886b",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-03-17T10:52:42Z",
+      "side": 1,
+      "message": "NAK. If a grace period is requested, then we absolutely don\u0027t want to give up just because there are outstanding references. The right thing to do is to wait until the refcount goes to zero and then allow the grace period to take effect once it does. It\u0027s not clear to me why that isn\u0027t a suitable approach for what you\u0027re doing.\n\nIf you want special behavior for the dbus event, then you need to make this specific to that codepath because this will break other users.\n\nIn any case, the above change looks racy. Trying to clear the flag after it has been set might allow other tasks to race in and take action based on that information. If you need to do something like this, then you need to do this inside the do/while loop above it, so that the flag change never occurs in the first place unless the conditions are right.",
+      "revId": "3309b1bad4cc45e049699253b4ae75d7ad634dda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
