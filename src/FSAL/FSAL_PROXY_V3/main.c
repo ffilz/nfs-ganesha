@@ -45,7 +45,11 @@ struct proxyv3_fsal_module PROXY_V3 = {
          .maxpathlen = 1024,
          .no_trunc = true,
          .chown_restricted = true,
+         .cansettime = true,
+         .case_insensitive = false,
          .case_preserving = true,
+         .link_support = true,
+         .symlink_support = true,
          .lock_support = true,
          // The wording on "lock_support_async_block" is super confusing. The
          // comment in the fsal_staticfsinfo_t definition in fsal_types.h says
@@ -153,6 +157,24 @@ const uint proxyv3_nlm_port() {
       container_of(op_ctx->fsal_export, struct proxyv3_export, export);
 
    return export->params.nlm_port;
+}
+
+// Get the preferred bytes per READDIRPLUS call.
+const uint proxyv3_readdir_preferred() {
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
+   fsal_staticfsinfo_t *fsinfo = &PROXY_V3.module.fs_info;
+
+   uint preferred = export->params.readdir_preferred;
+   uint maxread = fsinfo->maxread;
+
+   // If it's 0, just return maxread.
+   if (preferred == 0) return maxread;
+
+   // If it's too big, clamp it.
+   if (preferred > maxread) return maxread;
+
+   return preferred;
 }
 
 
@@ -1132,9 +1154,10 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
       args.cookie = cookie;
       memcpy(&args.cookieverf, &cookie_verf, sizeof(args.cookieverf));
       // We need to let the server know how much data to return per chunk. The
-      // V4 proxy uses 4KB and 16KB.
-      args.dircount = 4096;
-      args.maxcount = 16384;
+      // V4 proxy uses 4KB and 16KB, but we should have picked up the preferred
+      // amount from fsinfo. Use that for both the dircount (we'll read all the
+      // data) and maxcount.
+      args.dircount = args.maxcount = proxyv3_readdir_preferred();
 
       LogDebug(COMPONENT_FSAL,
                "Calling READDIRPLUS with cookie %lu",
@@ -1164,7 +1187,7 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
                "READDIRPLUS succeeded, looping over dirents");
 
       READDIRPLUS3resok* resok = &result.READDIRPLUS3res_u.resok;
-
+      uint count = 0;
       // Mark EOF now, if true.
       *eof = resok->reply.eof;
       // Update the cookie verifier for the next iteration.
@@ -1174,10 +1197,11 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
       // calling the given callback.
       for (entryplus3 *entry = resok->reply.entries;
            entry != NULL;
-           entry = entry->nextentry) {
+           entry = entry->nextentry, count++) {
          // Don't forget to update the cookie (we *could* do this just at the
          // end, but why bother?).
          cookie = entry->cookie;
+
          if (strcmp(entry->name, ".") == 0 ||
              strcmp(entry->name, "..") == 0) {
             LogDebug(COMPONENT_FSAL,
@@ -1185,6 +1209,7 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
                      entry->name);
             continue;
          }
+
 
          if (!entry->name_handle.handle_follows) {
             LogCrit(COMPONENT_FSAL,
@@ -1231,6 +1256,10 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
          case DIR_TERMINATE: break; // Okay, all done.
          }
       }
+
+      LogDebug(COMPONENT_FSAL,
+               "Finished reading %u entries. EOF is %s",
+               count, (*eof) ? "T" : "F");
    }
 
    return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -1847,6 +1876,8 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3) {
    FSINFO3res result;
    FSINFO3resok *resok = &result.FSINFO3res_u.resok;
    fsal_staticfsinfo_t *fsinfo = &PROXY_V3.module.fs_info;
+   struct proxyv3_export *export =
+      container_of(op_ctx->fsal_export, struct proxyv3_export, export);
 
    memcpy(&args.fsroot, fh3, sizeof(*fh3));
    memset(&result, 0, sizeof(result));
@@ -1912,6 +1943,35 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3) {
       // the NFSv4 handlers in 3d069bf, but didn't do the same for nlm_util.
 
       //fsinfo->maxfilesize = resok->maxfilesize;
+   }
+
+   // Pickup the preferred maxcount parameter for READDIR.
+   if (resok->dtpref != 0) {
+      LogDebug(COMPONENT_FSAL,
+               "Setting dtpref to %u based on fsinfo result",
+               resok->dtpref);
+      export->params.readdir_preferred = resok->dtpref;
+   }
+
+   // Check that our assumptions about the filesystem are true or warn loudly.
+   if ((resok->properties & FSF3_LINK) == 0) {
+      LogWarn(COMPONENT_FSAL,
+              "FSINFO says this backend doesn't support hard links");
+   }
+
+   if ((resok->properties & FSF3_SYMLINK) == 0) {
+      LogWarn(COMPONENT_FSAL,
+              "FSINFO says this backend doesn't support symlinks");
+   }
+
+   if ((resok->properties & FSF3_HOMOGENEOUS) == 0) {
+      LogWarn(COMPONENT_FSAL,
+              "FSINFO says this backend is not homogeneous");
+   }
+
+   if ((resok->properties & FSF3_CANSETTIME) == 0) {
+      LogWarn(COMPONENT_FSAL,
+              "FSINFO says this backend cannot set time in setattr");
    }
 
    return fsalstat(ERR_FSAL_NO_ERROR, 0);

@@ -47,6 +47,7 @@ struct proxyv3_client_params {
    uint mountd_port;
    uint nfsd_port;
    uint nlm_port;
+   uint readdir_preferred;
 };
 
 struct proxyv3_export {
