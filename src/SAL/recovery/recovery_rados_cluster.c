@@ -359,7 +359,7 @@ static void rados_cluster_maybe_start_grace(void)
 	}
 
 	/* Start a new grace period */
-	nfs_start_grace(&gsp);
+	nfs_start_grace(&gsp, false);
 }
 
 static void rados_cluster_shutdown(void)

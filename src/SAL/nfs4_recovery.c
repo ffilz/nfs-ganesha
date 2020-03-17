@@ -232,10 +232,12 @@ static void nfs4_set_enforcing(void)
  * will be passed to this routine inside of the grace start structure.
  *
  * @param[in] gsp Grace period start information
+ * @param[in[ must_enforce if true, then fail if cannot enforce.
+ * Returns 0 on success, EAGAIN on failure to enforce if must_enforce.
  */
-void nfs_start_grace(nfs_grace_start_t *gsp)
+int nfs_start_grace(nfs_grace_start_t *gsp, bool must_enforce)
 {
-	int ret;
+	int ret = 0;
 	bool was_grace;
 	uint32_t cur, old, pro;
 
@@ -300,9 +302,16 @@ void nfs_start_grace(nfs_grace_start_t *gsp)
 	/*
 	 * If we were not in a grace period before and there were still
 	 * references outstanding, then we can't do anything else.
+	 * Fail with EAGAIN only if must_enforce so that caller can
+	 * retry.
 	 */
-	if (!was_grace && (old & GRACE_STATUS_COUNT_MASK))
+	if (!was_grace && (old & GRACE_STATUS_COUNT_MASK) && must_enforce) {
+		LogEvent(COMPONENT_STATE,
+			 "Unable to start grace, grace status %u",
+			 grace_status);
+		ret = EAGAIN;
 		goto out;
+	}
 
 	__sync_synchronize();
 
@@ -345,7 +354,7 @@ void nfs_start_grace(nfs_grace_start_t *gsp)
 			if (gsp->event == EVENT_RELEASE_IP) {
 				PTHREAD_MUTEX_unlock(&grace_mutex);
 				nfs_release_v4_clients(gsp->ipaddr);
-				return;
+				return ret;
 			}
 			else {
 				nfs4_recovery_load_clids(gsp);
@@ -354,6 +363,7 @@ void nfs_start_grace(nfs_grace_start_t *gsp)
 	}
 out:
 	PTHREAD_MUTEX_unlock(&grace_mutex);
+	return ret;
 }
 
 /**
@@ -550,7 +560,7 @@ void nfs_wait_for_grace_enforcement(void)
 						&timeo);
 
 		pthread_mutex_unlock(&enforcing_mutex);
-		nfs_start_grace(&gsp);
+		nfs_start_grace(&gsp, false);
 		nfs_try_lift_grace();
 		pthread_mutex_lock(&enforcing_mutex);
 	}

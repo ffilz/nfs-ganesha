@@ -492,7 +492,7 @@ int main(int argc, char *argv[])
 	}
 
 	/* Start grace period */
-	nfs_start_grace(NULL);
+	nfs_start_grace(NULL, false);
 
 	/* Wait for enforcement to begin */
 	nfs_wait_for_grace_enforcement();

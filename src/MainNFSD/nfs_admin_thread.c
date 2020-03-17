@@ -171,7 +171,10 @@ static bool admin_dbus_grace(DBusMessageIter *args,
 		if (gsp.event == EVENT_TAKE_NODEID)
 			gsp.nodeid = atoi(gsp.ipaddr);
 	}
-	nfs_start_grace(&gsp);
+	while (nfs_start_grace(&gsp, true)) {
+		LogEvent(COMPONENT_DBUS, "Retry start grace");
+		sleep(1);
+	}
  out:
 	gsh_dbus_status_reply(&iter, success, errormsg);
 	return success;
