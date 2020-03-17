@@ -1100,6 +1100,7 @@ typedef struct nfs_grace_start {
 	int event;		/*< Reason for grace period, see EVENT_nnn */
 	int nodeid;		/*< Node from which we are taking over */
 	char *ipaddr;		/*< IP of failed node */
+	bool must_enforce;	/*< Fail grace if cannot enforce */
 } nfs_grace_start_t;
 
 /* Memory pools */

@@ -277,7 +277,8 @@ static void rados_cluster_maybe_start_grace(void)
 {
 	int ret, i;
 	size_t len;
-	nfs_grace_start_t gsp = { .event = EVENT_JUST_GRACE };
+	nfs_grace_start_t gsp = { .event = EVENT_JUST_GRACE,
+				  .must_enforce = false };
 	rados_write_op_t wop;
 	uint64_t cur, rec;
 	struct gsh_refstr *recov_oid, *old_oid, *prev_recov_oid;
