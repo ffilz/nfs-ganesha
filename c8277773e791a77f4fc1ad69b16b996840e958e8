@@ -1,0 +1,2860 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c21bcefd_72809b93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nLike opening a socket, it\u0027s worthwhile to just malloc the bytes once and reuse",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f8b818_04caae80",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   char *buf;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4432001e_0a6936fb",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   size_t capacity;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa9d12ad_4426ffc3",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   size_t len;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90f8b325_d5e7d7aa",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   struct rpc_buf rpc_buf;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a7c1884_a2a01b0c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static void\n+proxyv3_rpcBuf_create(struct rpc_buf *rpc_buf, size_t capacity) {",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d1f9a5c_9319261a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   rpc_buf-\u003ebuf \u003d gsh_calloc(1, capacity);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "155442bf_b761c292",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   rpc_buf-\u003ecapacity \u003d capacity;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec567ae8_45743b61",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   rpc_buf-\u003elen \u003d 0;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d88577d_6609ead1",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static char*\n+proxyv3_rpcBuf_resize(struct rpc_buf *rpc_buf, size_t len) {",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "148a2a85_22bc37a3",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n+   if (rpc_buf-\u003ecapacity \u003c len) {\n[...]\n+      rpc_buf-\u003ebuf \u003d gsh_realloc(rpc_buf-\u003ebuf, len);",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec853d5c_0967068a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (rpc_buf-\u003ecapacity \u003c len) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76f861b8_42ae5c38",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      rpc_buf-\u003ebuf \u003d gsh_realloc(rpc_buf-\u003ebuf, len);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cfb5c593_9728e73e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      rpc_buf-\u003ecapacity \u003d len;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f6af221_81b18497",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   }$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2bff889_ab03b44a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   rpc_buf-\u003elen \u003d len;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f58dfc3_d63c86dd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   return rpc_buf-\u003ebuf;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddc2b71d_8361eb50",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static struct fd_entry*\n+proxyv3_getfdentry(const struct sockaddr *host,\n+                   const socklen_t socklen,\n+                   uint16_t port,\n+                   bool *retry) {",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4270a154_434e884f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                   const socklen_t socklen,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a82d42ec_d7d23c9e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                   const socklen_t socklen,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e4468e3_642b1149",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                   uint16_t port,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59df6194_a35721cd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                   uint16_t port,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74e5022e_a8b83624",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                   bool *retry) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c882587_165acaeb",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                   bool *retry) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9830f7ca_49a16a09",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   *retry \u003d false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "258ee7a0_cb4a0e9d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5baf5ce6_7022bb37",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   struct fd_entry *result \u003d NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87635694_65ac2dfd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (6, 9)\n       if (!entry-\u003eis_open) {\n[...]\n+         if (first_free-\u003eis_open \u003d\u003d true) {",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10bbe3a4_eec7ea1a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         // This entry is a free and not even opened slot, prefer that over our$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f325d3bc_c30bc0ce",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         // existing first_free if that one was open, so we allow socket reuse$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d5a7fca_f8b34eb2",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         // by others.$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc03e06a_fbd70704",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         if (first_free-\u003eis_open \u003d\u003d true) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebc3408a_80a53ee3",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         if (first_free-\u003eis_open \u003d\u003d true) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e16da01_537d97b9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (9, 12)\n+         if (first_free-\u003eis_open \u003d\u003d true) {\n+            first_free \u003d entry;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "798f06ba_1607bb19",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+            first_free \u003d entry;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44b2333e_aebded06",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+            first_free \u003d entry;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43441f85_a5eddad9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         }$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5f8ea65_54a47535",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         }$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb3c302b_347242a6",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "461943c9_73077612",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ea2fa44_5b5ce605",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      *retry \u003d true;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ac9f516_9327ee1b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efc14cf7_411c484f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   result \u003d (first_open !\u003d NULL) ? first_open : first_free;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25a74b34_fe48b6d0",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   result-\u003ein_use \u003d true;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20622417_429bb3b7",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n+   if (pthread_mutex_unlock(\u0026rpcLock) !\u003d 0) {\n+      LogCrit(COMPONENT_FSAL,",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2e21b08_42059d51",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (pthread_mutex_unlock(\u0026rpcLock) !\u003d 0) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ad2d91e_deab921d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      LogCrit(COMPONENT_FSAL,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f789dd4_ea71b436",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              \"pthread_mutex_unlock failed %d %s\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53428bbd_0fc2d396",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              \"pthread_mutex_unlock failed %d %s\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6476727_54d26b13",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              errno, strerror(errno));$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a01bd4a1_cfff698c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              errno, strerror(errno));$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b393c8ce_0106376f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      result-\u003ein_use \u003d false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae66a9c7_7c326c70",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c554eec_52c64f83",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   }$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fa3dfe7_a35c56a5",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (first_open !\u003d NULL) return result;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf8ee31f_1b4a02b9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+   if (first_open !\u003d NULL) return result;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc3c09e1_cc327e71",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (result-\u003eis_open) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "551a72c9_f2393181",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n+   if (result-\u003eis_open) {\n[...]\n+      LogDebug(COMPONENT_FSAL,",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "897bf75d_cd689e54",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      LogDebug(COMPONENT_FSAL,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06798d79_198fa4b7",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+               \"Closing fd %d before we re-use the slot\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d7bb6e1_91eac1db",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+               \"Closing fd %d before we re-use the slot\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e90a4a83_769c7d24",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+               result-\u003efd);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcb6ba37_2d14ae0c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+               result-\u003efd);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09b87058_9239db52",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (6, 9)\n+      if (close(result-\u003efd) !\u003d 0) {\n+         LogCrit(COMPONENT_FSAL,",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f26a777_3f9266b9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      if (close(result-\u003efd) !\u003d 0) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300e0119_d2b287af",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         LogCrit(COMPONENT_FSAL,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b323b28_20cf148d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         LogCrit(COMPONENT_FSAL,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e614da0_9e42dc93",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                 \"close(%d) of re-used fd failed. Continuing. Errno %d (%s)\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48c52089_79b4bc08",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 \"close(%d) of re-used fd failed. Continuing. Errno %d (%s)\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9eeab1bb_7d66aec9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                 result-\u003efd, errno, strerror(errno));$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0866b76_9dc38dc7",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 result-\u003efd, errno, strerror(errno));$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0830480_cde656b1",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      result-\u003eis_open \u003d false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d7ad4a3_e1c8b8fd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   }$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf166f24_a492af56",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (result-\u003erpc_buf.buf \u003d\u003d NULL) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40db6815_e392d708",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n+   if (result-\u003erpc_buf.buf \u003d\u003d NULL) {\n[...]\n+      const uint kHeaderPadding \u003d 512;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e0f6e0b_450f5012",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      const uint kHeaderPadding \u003d 512;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ec75d48_96a3f2b4",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      const uint kBufSize \u003d PROXY_V3.module.fs_info.maxwrite + kHeaderPadding;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e598503_7655638a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+      const uint kBufSize \u003d PROXY_V3.module.fs_info.maxwrite + kHeaderPadding;\n+      proxyv3_rpcBuf_create(\u0026result-\u003erpc_buf, kBufSize);",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d17a5f1d_84ba821c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_rpcBuf_create(\u0026result-\u003erpc_buf, kBufSize);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "815049cc_3c5888b0",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   proxyv3_rpcBuf_resize(\u0026result-\u003erpc_buf, 0);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "225d7de9_559314b5",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   int fd \u003d proxyv3_openfd(host, socklen, port);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1214ba32_47a627e5",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (fd \u003c 0) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86e864a3_368142c6",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+   int fd \u003d proxyv3_openfd(host, socklen, port);\n+   if (fd \u003c 0) {",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20558277_eea34390",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n+   if (fd \u003c 0) {\n[...]\n+      result-\u003ein_use \u003d false;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7868f241_56f59872",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      result-\u003ein_use \u003d false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce4399f0_7b3d1aeb",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc8b7ef2_63bb24b4",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   result-\u003efd \u003d fd;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a57d1ad_ca435628",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   result-\u003eis_open \u003d true;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8beaa1_641d2624",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   memcpy(\u0026result-\u003esocket, host, socklen);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b6e6956_0a1d1c3c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   result-\u003esocklen \u003d socklen;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75fbb183_877f1ad4",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   result-\u003eport \u003d port;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907cda63_cbc9e07c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   return result;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4114568b_4492ebc8",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static struct fd_entry*\n proxyv3_getfd_blocking(const struct sockaddr *host,\n                        const socklen_t socklen,\n+                       uint16_t port) {",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c3b14fd_4e2c4fc8",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                       uint16_t port) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84fea013_127522aa",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                       uint16_t port) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309073ce_3cee10bd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n    for (size_t i \u003d 0; i \u003c kMaxIterations; i++) {\n+      bool retry \u003d false;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e8fa945_ecf145d2",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      bool retry \u003d false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1915dab5_214d216c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: \"foo* bar\" should be \"foo *bar\"\n+      struct fd_entry* entry \u003d proxyv3_getfdentry(host, socklen, port, \u0026retry);",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddb45040_1fa2d301",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      struct fd_entry* entry \u003d proxyv3_getfdentry(host, socklen, port, \u0026retry);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f5c1a88_0ca11a08",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      if (entry !\u003d NULL) return entry;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fc54b24_f714f69f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+      if (entry !\u003d NULL) return entry;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2297e627_a1c33e89",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+      if (!retry) return NULL;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a1ecfed_fe6c6820",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      if (!retry) return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50923c88_286e6f64",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+            return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c32f28f_12480a9b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+            return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "891799f6_99ddbd9c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   return NULL;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d45ecd88_dfb17753",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static bool proxyv3_release_fdentry(struct fd_entry *entry, bool force_close) {",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ee00299_62fd99db",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+            entry-\u003efd, (force_close) ? \"T\" : \"F\");$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "136027d2_1bf84ba5",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+            entry-\u003efd, (force_close) ? \"T\" : \"F\");$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01b19b7d_4fbcf665",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n+   if (entry-\u003ein_use !\u003d true) {\n       LogCrit(COMPONENT_FSAL,",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c492cbe_a70a810f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (entry-\u003ein_use !\u003d true) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc757f85_6ec09879",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              \"Tried to release entry (fd %d) that wasn\u0027t in_use!\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14dcfd97_bf79e16b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              \"Tried to release entry (fd %d) that wasn\u0027t in_use!\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dfd2ac0_f49ecd23",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              entry-\u003efd);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a44b8ac_733c0309",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              entry-\u003efd);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4285953a_fff9f8b1",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+      // Mark the entry as no longer in use. (But leave it open, unless asked not to).",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86bf3ec0_3568070f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         // Clear the bytes that were *touched* not allocated.$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0880a54_50da9631",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         memset(entry-\u003erpc_buf.buf, 0, entry-\u003erpc_buf.len);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e1a4c2d_a7379472",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         memset(entry-\u003erpc_buf.buf, 0, entry-\u003erpc_buf.len);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b434d48e_49e9f65e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         entry-\u003eis_open \u003d false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb5a7932_95ff7281",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         entry-\u003eis_open \u003d false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "176e840c_3e5c0b43",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   return true;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfc304d8_0a83153f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   struct fd_entry *fd_entry \u003d proxyv3_getfd_blocking(host, socklen, port);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc7d3d82_9bc596c6",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+   if (fd_entry \u003d\u003d NULL) return false;",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b4eddbf_368b3378",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (fd_entry \u003d\u003d NULL) return false;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd2bee7e_e81b50b9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   int fd \u003d fd_entry-\u003efd;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c7089fb_2eae4848",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   char *msgBuf \u003d fd_entry-\u003erpc_buf.buf;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2f81d9a_6317eacf",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   size_t bufSize \u003d fd_entry-\u003erpc_buf.capacity;$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2aed027_1b8d825f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                 msgBuf + sizeof(u_int),$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcf924d2_950fde1a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 msgBuf + sizeof(u_int),$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cacbb15f_4899b5fb",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 bufSize - sizeof(u_int),$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32aaf9d6_8c49e0fd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                 bufSize - sizeof(u_int),$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "735c1af1_26ede75a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "686887b5_ab75adff",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8a89f23_b2948dbe",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   memcpy(msgBuf, \u0026recmark, sizeof(recmark));$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3a2fab9_ce906c5b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   if (fd_entry-\u003erpc_buf.capacity \u003c bytes_to_send) {$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f395196_12364526",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n+   if (fd_entry-\u003erpc_buf.capacity \u003c bytes_to_send) {\n       LogCrit(COMPONENT_FSAL,",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8423ea8a_69ab8b7a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              \"xdrmem_create produced %zu bytes to send for a %zu buffer\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15c2d1b0_3a7dd2c1",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              \"xdrmem_create produced %zu bytes to send for a %zu buffer\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53234076_a9f5517e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              bytes_to_send, fd_entry-\u003erpc_buf.capacity);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e72d69d_d3fe6e80",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              bytes_to_send, fd_entry-\u003erpc_buf.capacity);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1240b02a_1f41b516",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74f95d23_3d5b9197",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   (void) proxyv3_rpcBuf_resize(\u0026fd_entry-\u003erpc_buf, bytes_to_send);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2006a7f2_d6aa8e3d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   LogDebug(COMPONENT_FSAL,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e25c0786_75f6e932",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+            \"PROXY_V3: Sending XID %u with %zu bytes\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78d5117f_eb5c6592",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+            \"PROXY_V3: Sending XID %u with %zu bytes\",$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d83846b9_88449b6e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+            rmsg.rm_xid, bytes_to_send);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4b4cdea_32710b7d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+            rmsg.rm_xid, bytes_to_send);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c7d4fab_0e64f7a8",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+               msgBuf + total_bytes_written,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47c868c_2b61c422",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+               msgBuf + total_bytes_written,$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fc0d31b_8dc7bd6d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7bf268f7_d39df625",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea670df_e0302e96",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4dd4c84a_cb0365ad",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82747c3c_be61ab50",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ce1c3ec_953bab31",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3de5ded_62f5af71",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   msgBuf \u003d proxyv3_rpcBuf_resize(\u0026fd_entry-\u003erpc_buf, read_buffer_size);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7477f516_f8a5a10a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   memcpy(msgBuf, \u0026xid, sizeof(xid));$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5deec64_0e6fc6fd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         read(fd, msgBuf + total_bytes_read, bytes_to_read - total_bytes_read);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fffa12a9_3657de80",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         read(fd, msgBuf + total_bytes_read, bytes_to_read - total_bytes_read);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3fef5cd_d034c3db",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2fc730b_7ce68a38",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c692f770_b1c78f87",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93055766_7d665de3",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   xdrmem_create(\u0026x, msgBuf, total_bytes_read, XDR_DECODE);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c888950_1d2062da",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e522152_da1d5221",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3989ff28_f1534627",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      proxyv3_release_fdentry(fd_entry, true /* force close */);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41112c09_5c881c2e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:26:41Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   proxyv3_release_fdentry(fd_entry, false);$",
+      "revId": "c8277773e791a77f4fc1ad69b16b996840e958e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
