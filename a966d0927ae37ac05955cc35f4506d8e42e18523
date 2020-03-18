@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc94c6dd_262faaa1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe MDCACHE issues close2 requests with state, which I thought was for NFSv4",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2094be1a_4c411212",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n    if (state !\u003d NULL) {\n+      if (state-\u003estate_type \u003d\u003d STATE_TYPE_NLM_LOCK) {",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67d18c9d_85eab982",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (6, 9)\n+      if (state-\u003estate_type \u003d\u003d STATE_TYPE_NLM_LOCK) {\n[...]\n+         return fsalstat(ERR_FSAL_NOT_OPENED, 0);",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46e6b55c_c1013c79",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      if (state-\u003estate_type \u003d\u003d STATE_TYPE_NLM_LOCK) {$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f804bfbd_729a826f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         // This is a cleanup of our lock. Callers don\u0027t seem to care about the$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b23b7f4_66969ab6",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         // result. Stick with ERR_FSAL_NOT_OPENED like close().$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d496d5a0_d5ffd583",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         return fsalstat(ERR_FSAL_NOT_OPENED, 0);$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2449286_c755b382",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         return fsalstat(ERR_FSAL_NOT_OPENED, 0);$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "263d3a32_724f219a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      }$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17e09bf8_c124ba13",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              \"PROXY_V3: Received unexpected stateful CLOSE with state_type %d\",$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e2ea21e_f1bb5a69",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              \"PROXY_V3: Received unexpected stateful CLOSE with state_type %d\",$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e65ef35_46fec5f2",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              state-\u003estate_type);$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "024e0c19_db3d2e5b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:15:49Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              state-\u003estate_type);$",
+      "revId": "a966d0927ae37ac05955cc35f4506d8e42e18523",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
