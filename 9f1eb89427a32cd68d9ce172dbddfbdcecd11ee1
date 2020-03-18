@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8353632_a7c3e982",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe MDCACHE FSAL expects to call fsal_close() to clean up entries in the LRU of",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aacbe2fb_ec37da5e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   LogDebug(COMPONENT_FSAL,$",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcc62938_f205fc56",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+            \"Asking for stateless CLOSE of handle %p\",$",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc1945ab_08c2c8ca",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+            \"Asking for stateless CLOSE of handle %p\",$",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "faea4095_40dc2774",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+            obj_hdl);$",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6ed4e5d_789b952e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+            obj_hdl);$",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb2a5556_57217691",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   return fsalstat(ERR_FSAL_NO_ERROR, 0);$",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbf0d177_74694305",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static fsal_status_t\n proxyv3_close2(struct fsal_obj_handle *obj_hdl,\n                struct state_t *state) {",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a78e10a6_87b38809",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T04:59:13Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   PROXY_V3.handle_ops.close \u003d proxyv3_close;$",
+      "revId": "9f1eb89427a32cd68d9ce172dbddfbdcecd11ee1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
