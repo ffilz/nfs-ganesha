@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64241e57_69c17bcd",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-03-18T11:32:58Z",
+      "side": 1,
+      "message": "nit: you don\u0027t need this delta. The other fields will be initialized to 0 if they aren\u0027t set.",
+      "revId": "8898d93fa9e9bbe65d9e20158bbf8a6caedc7c26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
