@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1c9aa3e_5fcb50ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nI mistakenly tried to follow what the v4 proxy does, but should have allowed the",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d889d706_3df2bd5e",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+   // Small optimization to avoid a round-trip: if we know the answer, hand it back.",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73ace7e7_bdb75525",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       (strcmp(path, \"..\") \u003d\u003d 0 \u0026\u0026 parent_obj-\u003eparent !\u003d NULL)) {$",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c1aa11c_926a370c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (6, 9)\n       } else {\n[...]\n+         which_dir \u003d (struct proxyv3_obj_handle*) parent_obj-\u003eparent;",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1011e6db_f9252f44",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+         which_dir \u003d (struct proxyv3_obj_handle*) parent_obj-\u003eparent;$",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ecf90d8_92d85df1",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "ERROR: \"(foo*)\" should be \"(foo *)\"\n+         which_dir \u003d (struct proxyv3_obj_handle*) parent_obj-\u003eparent;",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a5488ed_f0eee60d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+         which_dir \u003d (struct proxyv3_obj_handle*) parent_obj-\u003eparent;$",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edafb6ce_b10dc423",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:00:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   args.fsroot.data.data_val \u003d obj-\u003efh3.data.data_val;$",
+      "revId": "6e0697cfe45d7fc0bf4df8260812999fbbb1e76d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
