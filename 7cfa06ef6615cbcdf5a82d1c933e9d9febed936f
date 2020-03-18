@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11b33ef9_b71e6596",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:10:11Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\npreviously worked around with an innocuous (\"V3 requests should be V3, V4 should",
+      "revId": "7cfa06ef6615cbcdf5a82d1c933e9d9febed936f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7fa70ba_79367ac6",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:10:11Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (3, 6)\n    if (output_type !\u003d FSAL_DIGEST_NFSV3) {\n[...]\n+      LogWarn(COMPONENT_FSAL,",
+      "revId": "7cfa06ef6615cbcdf5a82d1c933e9d9febed936f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40ae3b98_83cf907d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:10:11Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      LogWarn(COMPONENT_FSAL,$",
+      "revId": "7cfa06ef6615cbcdf5a82d1c933e9d9febed936f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "291e7c13_59b9ec03",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:10:11Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+              \"PROXY_V3: Asked for an NFSv4 rather NFSv3 handle! Proceeding.\");$",
+      "revId": "7cfa06ef6615cbcdf5a82d1c933e9d9febed936f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9644e016_05b2767f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:10:11Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+              \"PROXY_V3: Asked for an NFSv4 rather NFSv3 handle! Proceeding.\");$",
+      "revId": "7cfa06ef6615cbcdf5a82d1c933e9d9febed936f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
