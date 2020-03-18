@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f91cbebf_ce18c575",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:28:07Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        fsal_digesttype_t digest_type \u003d$",
+      "revId": "a06779e36eaacddb49e892f992c971800c705b5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "218f4d7c_38a82d6f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:28:07Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        fsal_digesttype_t digest_type \u003d$",
+      "revId": "a06779e36eaacddb49e892f992c971800c705b5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1466b8_0f88dea7",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:28:07Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+           (op_ctx-\u003enfs_vers \u003d\u003d 3) ? FSAL_DIGEST_NFSV3 : FSAL_DIGEST_NFSV4;$",
+      "revId": "a06779e36eaacddb49e892f992c971800c705b5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "198cfcb7_c0ecd039",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-18T05:28:07Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+           (op_ctx-\u003enfs_vers \u003d\u003d 3) ? FSAL_DIGEST_NFSV3 : FSAL_DIGEST_NFSV4;$",
+      "revId": "a06779e36eaacddb49e892f992c971800c705b5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
