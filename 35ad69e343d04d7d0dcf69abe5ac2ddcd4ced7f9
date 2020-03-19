@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b7249f1_1389c994",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1010034
+      },
+      "writtenOn": "2020-03-19T20:37:55Z",
+      "side": 1,
+      "message": "We should have only a fixed number of retries here otherwise this is an infinite loop in worst case.",
+      "revId": "35ad69e343d04d7d0dcf69abe5ac2ddcd4ced7f9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
