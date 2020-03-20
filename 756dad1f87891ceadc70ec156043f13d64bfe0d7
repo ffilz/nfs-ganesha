@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e36b1fd_68f4a158",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-20T18:28:05Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nCurrently client specific stats, \"client_all_ops\" option, provides statistics",
+      "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f7e4192_39126f6a",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-20T18:28:05Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define CLNT_ALL_V3_OPS_REPLY    \\\n+{                           \\\n+\t.name \u003d \"clnt_v3\",  \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n+CLNT_V3NLM_OPS_REPLY,            \\\n+{                           \\\n+\t.name \u003d \"clnt_nlm\",  \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n+CLNT_V3NLM_OPS_REPLY",
+      "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58c401cc_aec00fa1",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-03-20T18:28:05Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define CLNT_ALL_V4_OPS_REPLY  \\\n+{                           \\\n+\t.name \u003d \"clnt_v4\",  \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n+CLNT_V4_OPS_REPLY,            \\\n+{                           \\\n+\t.name \u003d \"clnt_cmp\",  \\\n+\t.type \u003d \"b\",        \\\n+\t.direction \u003d \"out\"  \\\n+},                          \\\n CLNT_CMP_OPS_REPLY",
+      "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
