@@ -497,14 +497,15 @@ void reset_client_stats(void)
 		clnt = container_of(cl, struct server_stats, client);
 		reset_gsh_stats(&clnt->st);
 		/* reset stats counter for allops structs */
-		reset_gsh_allops_stats(&clnt->c_all);
+		reset_gsh_allV3ops_stats(&clnt->c_all);
+		reset_gsh_allV4ops_stats(&clnt->c_all);
 	}
 	PTHREAD_RWLOCK_unlock(&client_by_ip.lock);
 }
 
-/* Reset Client specific stats counters for allops
+/* Reset Client specific stats counters for all NFSv3 ops
  */
-void reset_clnt_allops_stats(void)
+void reset_clnt_allV3ops_stats(void)
 {
 	struct avltree_node *client_node;
 	struct gsh_client *cl;
@@ -516,7 +517,26 @@ void reset_clnt_allops_stats(void)
 		cl = avltree_container_of(client_node, struct gsh_client,
 					  node_k);
 		clnt = container_of(cl, struct server_stats, client);
-		reset_gsh_allops_stats(&clnt->c_all);
+		reset_gsh_allV3ops_stats(&clnt->c_all);
+	}
+	PTHREAD_RWLOCK_unlock(&client_by_ip.lock);
+}
+
+/* Reset Client specific stats counters for all NFSv4 ops
+ */
+void reset_clnt_allV4ops_stats(void)
+{
+	struct avltree_node *client_node;
+	struct gsh_client *cl;
+	struct server_stats *clnt;
+
+	PTHREAD_RWLOCK_rdlock(&client_by_ip.lock);
+	for (client_node = avltree_first(&client_by_ip.t); client_node != NULL;
+	     client_node = avltree_next(client_node)) {
+		cl = avltree_container_of(client_node, struct gsh_client,
+					  node_k);
+		clnt = container_of(cl, struct server_stats, client);
+		reset_gsh_allV4ops_stats(&clnt->c_all);
 	}
 	PTHREAD_RWLOCK_unlock(&client_by_ip.lock);
 }
@@ -597,9 +617,9 @@ static struct gsh_dbus_method cltmgr_client_io_ops = {
 };
 
 /**
- * DBUS method to get all ops statistics for a client
+ * DBUS method to get all NFSv3 ops statistics for a client
  */
-static bool gsh_client_all_ops(DBusMessageIter *args,
+static bool gsh_client_all_V3_ops(DBusMessageIter *args,
 				  DBusMessage *reply,
 				  DBusError *error)
 {
@@ -609,8 +629,9 @@ static bool gsh_client_all_ops(DBusMessageIter *args,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
-	if (!nfs_param.core_param.enable_CLNTALLSTATS) {
-		errormsg = "Stat counting for all ops for a client is disabled";
+	if (!nfs_param.core_param.enable_CLNTALLV3STATS) {
+		errormsg =
+		      "Stat counting for Client Specific NFSv3 ops is disabled";
 		success = false;
 	} else {
 		client = lookup_client(args, &errormsg);
@@ -622,20 +643,64 @@ static bool gsh_client_all_ops(DBusMessageIter *args,
 
 	gsh_dbus_status_reply(&iter, success, errormsg);
 	if (success) {
-		server_dbus_client_all_ops(&iter, client);
+		server_dbus_client_all_V3_ops(&iter, client);
 		put_gsh_client(client);
 	}
 
 	return true;
 }
 
-static struct gsh_dbus_method cltmgr_client_all_ops = {
-	.name = "GetClientAllops",
-	.method = gsh_client_all_ops,
+static struct gsh_dbus_method cltmgr_client_all_v3_ops = {
+	.name = "GetClientAllV3ops",
+	.method = gsh_client_all_V3_ops,
 	.args = {IPADDR_ARG,
 		 STATUS_REPLY,
 		 TIMESTAMP_REPLY,
-		 CLNT_ALL_OPS_REPLY,
+		 CLNT_ALL_V3_OPS_REPLY,
+		 END_ARG_LIST}
+};
+
+/**
+ * DBUS method to get all NFSv4 ops statistics for a client
+ */
+static bool gsh_client_all_V4_ops(DBusMessageIter *args,
+				  DBusMessage *reply,
+				  DBusError *error)
+{
+	char *errormsg = "OK";
+	struct gsh_client *client = NULL;
+	bool success = true;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+	if (!nfs_param.core_param.enable_CLNTALLV4STATS) {
+		errormsg =
+		      "Stat counting for Client Specific NFSv4 ops is disabled";
+		success = false;
+	} else {
+		client = lookup_client(args, &errormsg);
+		if (client == NULL) {
+			success = false;
+			errormsg = "Client IP address not found";
+		}
+	}
+
+	gsh_dbus_status_reply(&iter, success, errormsg);
+	if (success) {
+		server_dbus_client_all_V4_ops(&iter, client);
+		put_gsh_client(client);
+	}
+
+	return true;
+}
+
+static struct gsh_dbus_method cltmgr_client_all_v4_ops = {
+	.name = "GetClientAllV4ops",
+	.method = gsh_client_all_V4_ops,
+	.args = {IPADDR_ARG,
+		 STATUS_REPLY,
+		 TIMESTAMP_REPLY,
+		 CLNT_ALL_V4_OPS_REPLY,
 		 END_ARG_LIST}
 };
 
@@ -1037,7 +1102,8 @@ static struct gsh_dbus_method *cltmgr_stats_methods[] = {
 	&cltmgr_show_v41_layouts,
 	&cltmgr_show_delegations,
 	&cltmgr_client_io_ops,
-	&cltmgr_client_all_ops,
+	&cltmgr_client_all_v3_ops,
+	&cltmgr_client_all_v4_ops,
 #ifdef _USE_9P
 	&cltmgr_show_9p_io,
 	&cltmgr_show_9p_trans,

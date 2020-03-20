@@ -170,10 +170,14 @@ class RetrieveClientStats():
         stats_op = self.clientmgrobj.get_dbus_method("GetClientIOops",
                           self.dbus_clientstats_name)
         return ClientIOops(stats_op(ip))
-    def client_all_ops_stats(self, ip):
-        stats_op = self.clientmgrobj.get_dbus_method("GetClientAllops",
+    def client_all_v3_ops_stats(self, ip):
+        stats_op = self.clientmgrobj.get_dbus_method("GetClientAllV3ops",
                           self.dbus_clientstats_name)
-        return ClientAllops(stats_op(ip))
+        return ClientAllV3ops(stats_op(ip))
+    def client_all_v4_ops_stats(self, ip):
+        stats_op = self.clientmgrobj.get_dbus_method("GetClientAllV4ops",
+                          self.dbus_clientstats_name)
+        return ClientAllV4ops(stats_op(ip))
 
 
 class Clients():
@@ -277,7 +281,7 @@ class ClientIOops():
                 j += 1
             return output
 
-class ClientAllops():
+class ClientAllV3ops():
     def __init__(self, stats):
         self.stats = stats
         self.status = stats[1]
@@ -320,6 +324,22 @@ class ClientAllops():
             else:
                 output += "\n\tNo NLMv4 activity"
                 cnt += 1
+            return output
+
+
+class ClientAllV4ops():
+    def __init__(self, stats):
+        self.stats = stats
+        self.status = stats[1]
+        if stats[1] == "OK":
+            self.timestamp = (stats[2][0], stats[2][1])
+    def __str__(self):
+        output = ""
+        cnt = 3
+        if self.status != "OK":
+            return ("GANESHA RESPONSE STATUS: " + self.status)
+        else:
+            output += "\nClient last active at: " + time.ctime(self.timestamp[0]) + str(self.timestamp[1]) + " nsecs"
             if self.stats[cnt]:
                 output += "\n\t\tNFSv4 Operations"
                 output += "\nOp Name    \t\t total \t errors"
@@ -675,10 +695,15 @@ class StatsStatus():
             else:
                 output += "Stats counting for authentication is currently disabled \n"
             if self.status[7][0]:
-                output += "Stats counting of all ops for client is enabled since: \n\t"
+                output += "Stats counting of all NFSv3 ops for client is enabled since: \n\t"
                 output += time.ctime(self.status[7][1][0]) + str(self.status[7][1][1]) + " nsecs\n"
             else:
-                output += "Stats counting of all ops for client is currently disabled \n"
+                 output += "Stats counting of all NFSv3 ops for client is currently disabled \n"
+            if self.status[8][0]:
+                output += "Stats counting of all NFSv4 ops for client is enabled since: \n\t"
+                output += time.ctime(self.status[8][1][0]) + str(self.status[8][1][1]) + " nsecs\n"
+            else:
+                 output += "Stats counting of all NFSv4 ops for client is currently disabled \n"
             return output
 
 

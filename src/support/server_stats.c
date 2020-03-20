@@ -213,6 +213,7 @@ static const struct op_name optabv4[] = {
 	[NFS4_OP_DEALLOCATE] = {.name = "DEALLOCATE",},
 	[NFS4_OP_IO_ADVISE] = {.name = "IO_ADVISE",},
 	[NFS4_OP_LAYOUTERROR] = {.name = "LAYOUTERROR",},
+	[NFS4_OP_LAYOUTSTATS] = {.name = "LAYOUTSTATS",},
 	[NFS4_OP_OFFLOAD_CANCEL] = {.name = "OFFLOAD_CANCEL",},
 	[NFS4_OP_OFFLOAD_STATUS] = {.name = "OFFLOAD_STATUS",},
 	[NFS4_OP_READ_PLUS] = {.name = "READ_PLUS",},
@@ -1426,7 +1427,7 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 		server_st = container_of(client, struct server_stats, client);
 		record_clnt_stats(&server_st->st, &client->lock, reqdata,
 			     rc == NFS_REQ_OK, dup);
-		if (nfs_param.core_param.enable_CLNTALLSTATS)
+		if (nfs_param.core_param.enable_CLNTALLV3STATS)
 			record_clnt_all_stats(&server_st->c_all, &client->lock,
 					program_op, proto_op, NFS_V3,
 					rc == NFS_REQ_OK, dup);
@@ -1481,7 +1482,7 @@ void server_stats_nfsv4_op_done(int proto_op,
 		record_nfsv4_op(&server_st->st, &client->lock, proto_op,
 				op_ctx->nfs_minorvers, stop_time - start_time,
 				status, false);
-		if (nfs_param.core_param.enable_CLNTALLSTATS)
+		if (nfs_param.core_param.enable_CLNTALLV4STATS)
 			record_clnt_all_stats(&server_st->c_all, &client->lock,
 				NFS_program[P_NFS], proto_op, NFS_V4,
 				status == NFS_REQ_OK, false);
@@ -1960,7 +1961,68 @@ void server_dbus_client_io_ops(DBusMessageIter *iter,
 	}
 }
 
-void server_dbus_client_all_ops(DBusMessageIter *iter,
+void server_dbus_client_all_V3_ops(DBusMessageIter *iter,
+				struct gsh_client *client)
+{
+	struct server_stats *svr = NULL;
+	struct gsh_clnt_allops_stats *c_all;
+	dbus_bool_t stats_available;
+	struct timespec last_as_ts = nfs_ServerBootTime;
+	int i;
+	DBusMessageIter array_iter;
+
+	svr = container_of(client, struct server_stats, client);
+	c_all = &svr->c_all;
+	timespec_add_nsecs(client->last_update, &last_as_ts);
+
+	gsh_dbus_append_timestamp(iter, &last_as_ts);
+
+	/* Stats of NFSv3 ops */
+	stats_available = c_all->nfsv3 != 0;
+	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
+				       &stats_available);
+	if (c_all->nfsv3) {
+		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
+						 NULL, &array_iter);
+		for (i = 0; i < NFSPROC3_COMMIT + 1; i++) {
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_STRING, &optabv3[i].name);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64, &c_all->nfsv3->cmds[i].total);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64,
+				&c_all->nfsv3->cmds[i].errors);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64, &c_all->nfsv3->cmds[i].dups);
+		}
+		dbus_message_iter_close_container(iter, &array_iter);
+	}
+
+	/* Stats of NLMv4 ops */
+	stats_available = c_all->nlm4 != 0;
+	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
+				       &stats_available);
+	if (c_all->nlm4) {
+		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
+						 NULL, &array_iter);
+		for (i = 0; i < NLMPROC4_FREE_ALL + 1; i++) {
+			if (i == 17 || i == 18 || i == 19)
+				continue;
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_STRING, &optnlm[i].name);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64, &c_all->nlm4->cmds[i].total);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64, &c_all->nlm4->cmds[i].errors);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64, &c_all->nlm4->cmds[i].dups);
+		}
+		dbus_message_iter_close_container(iter, &array_iter);
+	}
+}
+
+
+void server_dbus_client_all_V4_ops(DBusMessageIter *iter,
 				struct gsh_client *client)
 {
 	struct server_stats *svr = NULL;
@@ -1979,56 +2041,6 @@ void server_dbus_client_all_ops(DBusMessageIter *iter,
 
 	gsh_dbus_append_timestamp(iter, &last_as_ts);
 
-	/* Stats of NFSv3 ops */
-	stats_available = c_all->nfsv3 != 0;
-	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
-				       &stats_available);
-	if (c_all->nfsv3) {
-		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
-						 NULL, &array_iter);
-		for (i = 0; i < NFSPROC3_COMMIT + 1; i++) {
-			if (c_all->nfsv3->cmds[i].total) {
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_STRING, &optabv3[i].name);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nfsv3->cmds[i].total);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nfsv3->cmds[i].errors);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nfsv3->cmds[i].dups);
-			}
-		}
-		dbus_message_iter_close_container(iter, &array_iter);
-	}
-
-	/* Stats of NLMv4 ops */
-	stats_available = c_all->nlm4 != 0;
-	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
-				       &stats_available);
-	if (c_all->nlm4) {
-		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
-						 NULL, &array_iter);
-		for (i = 0; i < NLMPROC4_FREE_ALL + 1; i++) {
-			if (c_all->nlm4->cmds[i].total) {
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_STRING, &optnlm[i].name);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nlm4->cmds[i].total);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nlm4->cmds[i].errors);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nlm4->cmds[i].dups);
-			}
-		}
-		dbus_message_iter_close_container(iter, &array_iter);
-	}
-
 	/* Stats of NFSv4 ops */
 	stats_available = c_all->nfsv4 != 0;
 	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
@@ -2037,16 +2049,14 @@ void server_dbus_client_all_ops(DBusMessageIter *iter,
 		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
 						 NULL, &array_iter);
 		for (i = 0; i < NFS4_OP_LAST_ONE; i++) {
-			if (c_all->nfsv4->cmds[i].total) {
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_STRING, &optabv4[i].name);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nfsv4->cmds[i].total);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
-					&c_all->nfsv4->cmds[i].errors);
-			}
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_STRING, &optabv4[i].name);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64,
+				&c_all->nfsv4->cmds[i].total);
+			dbus_message_iter_append_basic(&array_iter,
+				DBUS_TYPE_UINT64,
+				&c_all->nfsv4->cmds[i].errors);
 		}
 		dbus_message_iter_close_container(iter, &array_iter);
 	}
@@ -2433,7 +2443,7 @@ void reset_gsh_stats(struct gsh_stats *st)
 #endif
 }
 
-void reset_gsh_allops_stats(struct gsh_clnt_allops_stats *st)
+void reset_gsh_allV3ops_stats(struct gsh_clnt_allops_stats *st)
 {
 	int i;
 
@@ -2442,14 +2452,20 @@ void reset_gsh_allops_stats(struct gsh_clnt_allops_stats *st)
 			reset_op_count(&(st->nfsv3->cmds[i]));
 		}
 	}
-	if (st->nfsv4) {
-		for (i = 0; i < NFS4_OP_LAST_ONE ; i++) {
-			reset_op_count(&(st->nfsv4->cmds[i]));
-		}
-	}
 	if (st->nlm4) {
 		for (i = 0; i < NLMPROC4_FREE_ALL + 1 ; i++) {
 			reset_op_count(&(st->nlm4->cmds[i]));
+		}
+	}
+}
+
+void reset_gsh_allV4ops_stats(struct gsh_clnt_allops_stats *st)
+{
+	int i;
+
+	if (st->nfsv4) {
+		for (i = 0; i < NFS4_OP_LAST_ONE ; i++) {
+			reset_op_count(&(st->nfsv4->cmds[i]));
 		}
 	}
 }
