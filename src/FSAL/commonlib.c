@@ -3161,11 +3161,57 @@ bool fsal_common_is_referral(struct fsal_obj_handle *obj_hdl,
 	return true;
 }
 
-static void set_op_context_export_fsal_no_release(struct gsh_export *exp,
-						  struct fsal_export *fsal_exp)
+struct gsh_refstr *no_export;
+
+void init_ctx_refstr(void)
 {
+	no_export = gsh_refstr_dup("No Export");
+}
+
+void destroy_ctx_refstr(void)
+{
+	gsh_refstr_put(no_export);
+}
+
+static void set_op_context_export_fsal_no_release(struct gsh_export *exp,
+						  struct fsal_export *fsal_exp,
+						  bool discard_refstr)
+{
+	if (discard_refstr) {
+		gsh_refstr_put(op_ctx->ctx_fullpath);
+		gsh_refstr_put(op_ctx->ctx_pseudopath);
+	}
+
 	op_ctx->ctx_export = exp;
 	op_ctx->fsal_export = fsal_exp;
+
+	rcu_read_lock();
+
+	if (op_ctx->ctx_export != NULL &&
+	    op_ctx->ctx_export->fullpath) {
+		op_ctx->ctx_fullpath = gsh_refstr_get(rcu_dereference(
+					op_ctx->ctx_export->fullpath));
+	} else {
+		/* Normally an export always has a fullpath refstr, however
+		 * we might be called from free_export_resources before the
+		 * refstr is set up. Or we may be called with no export.
+		 */
+		op_ctx->ctx_fullpath = gsh_refstr_get(no_export);
+	}
+
+	if (op_ctx->ctx_export != NULL &&
+	    op_ctx->ctx_export->pseudopath != NULL) {
+		op_ctx->ctx_pseudopath = gsh_refstr_get(rcu_dereference(
+					op_ctx->ctx_export->pseudopath));
+	} else {
+		/* Normally an export always has a pseudopath refstr, however
+		 * we might be called from free_export_resources before the
+		 * refstr is set up. Or we may be called with no export.
+		 */
+		op_ctx->ctx_pseudopath = gsh_refstr_get(no_export);
+	}
+
+	rcu_read_unlock();
 
 	if (fsal_exp)
 		op_ctx->fsal_module = fsal_exp->fsal;
@@ -3179,21 +3225,43 @@ void set_op_context_export_fsal(struct gsh_export *exp,
 	if (op_ctx->ctx_export != NULL)
 		put_gsh_export(op_ctx->ctx_export);
 
-	set_op_context_export_fsal_no_release(exp, fsal_exp);
+	set_op_context_export_fsal_no_release(exp, fsal_exp, true);
 }
 
-void clear_op_context_export(void)
+static inline void clear_op_context_export_impl(bool final)
 {
 	if (op_ctx->ctx_export != NULL)
 		put_gsh_export(op_ctx->ctx_export);
 
+	if (op_ctx->ctx_fullpath != NULL)
+		gsh_refstr_put(op_ctx->ctx_fullpath);
+
+	if (op_ctx->ctx_pseudopath != NULL)
+		gsh_refstr_put(op_ctx->ctx_pseudopath);
+
 	op_ctx->ctx_export = NULL;
 	op_ctx->fsal_export = NULL;
+
+	if (final) {
+		op_ctx->ctx_fullpath = NULL;
+		op_ctx->ctx_pseudopath = NULL;
+	} else {
+		/* An active op context will always have refstr */
+		op_ctx->ctx_fullpath = gsh_refstr_get(no_export);
+		op_ctx->ctx_pseudopath = gsh_refstr_get(no_export);
+	}
+}
+
+void clear_op_context_export(void)
+{
+	clear_op_context_export_impl(false);
 }
 
 void save_op_context_export(struct saved_export_context *saved)
 {
 	saved->saved_export = op_ctx->ctx_export;
+	saved->saved_fullpath = op_ctx->ctx_fullpath;
+	saved->saved_pseudopath = op_ctx->ctx_pseudopath;
 	saved->saved_fsal_export = op_ctx->fsal_export;
 	saved->saved_fsal_module = op_ctx->fsal_module;
 	saved->saved_export_perms = op_ctx->export_perms;
@@ -3205,7 +3273,7 @@ void save_op_context_export_and_set_export(struct saved_export_context *saved,
 	save_op_context_export(saved);
 
 	/* Don't release op_ctx->ctx_export since it's saved */
-	set_op_context_export_fsal_no_release(exp, exp->fsal_export);
+	set_op_context_export_fsal_no_release(exp, exp->fsal_export, false);
 }
 
 void save_op_context_export_and_clear(struct saved_export_context *saved)
@@ -3219,6 +3287,8 @@ void restore_op_context_export(struct saved_export_context *saved)
 {
 	clear_op_context_export();
 	op_ctx->ctx_export = saved->saved_export;
+	op_ctx->ctx_fullpath = saved->saved_fullpath;
+	op_ctx->ctx_pseudopath = saved->saved_pseudopath;
 	op_ctx->fsal_export = saved->saved_fsal_export;
 	op_ctx->fsal_module = saved->saved_fsal_module;
 	op_ctx->export_perms = saved->saved_export_perms;
@@ -3228,6 +3298,12 @@ void discard_op_context_export(struct saved_export_context *saved)
 {
 	if (saved->saved_export)
 		put_gsh_export(saved->saved_export);
+
+	if (saved->saved_fullpath != NULL)
+		gsh_refstr_put(saved->saved_fullpath);
+
+	if (saved->saved_pseudopath != NULL)
+		gsh_refstr_put(saved->saved_pseudopath);
 }
 
 void init_op_context(struct req_op_context *ctx,
@@ -3250,7 +3326,9 @@ void init_op_context(struct req_op_context *ctx,
 	ctx->nfs_minorvers = nfs_minorvers;
 	ctx->req_type = req_type;
 
-	set_op_context_export_fsal(exp, fsal_exp);
+	/* Since this is a brand new op context, no need to release anything.
+	 */
+	set_op_context_export_fsal_no_release(exp, fsal_exp, false);
 
 	ctx->export_perms.set = root_op_export_set;
 	ctx->export_perms.options = root_op_export_options;
@@ -3258,7 +3336,7 @@ void init_op_context(struct req_op_context *ctx,
 
 void release_op_context(void)
 {
-	clear_op_context_export();
+	clear_op_context_export_impl(true);
 	op_ctx = op_ctx->saved_op_ctx;
 	op_ctx->saved_op_ctx = NULL;
 }
