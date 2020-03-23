@@ -168,6 +168,8 @@ void revoke_owner_layouts(state_owner_t *client_owner)
 	struct fsal_obj_handle *obj;
 	struct gsh_export *saved_export = op_ctx->ctx_export;
 	struct gsh_export *export;
+	struct gsh_refstr *saved_fullpath = op_ctx->ctx_fullpath;
+	struct gsh_refstr *saved_pseudopath = op_ctx->ctx_pseudopath;
 	int errcnt = 0;
 	struct glist_head *glist, *glistn;
 	bool so_mutex_held;
@@ -222,6 +224,7 @@ void revoke_owner_layouts(state_owner_t *client_owner)
 		/* Set up the op_context with the proper export */
 		op_ctx->ctx_export = export;
 		op_ctx->fsal_export = export->fsal_export;
+		ctx_get_exp_paths(op_ctx);
 
 		PTHREAD_MUTEX_unlock(&client_owner->so_mutex);
 		so_mutex_held = false;
@@ -247,6 +250,7 @@ void revoke_owner_layouts(state_owner_t *client_owner)
 
 		/* Release the reference taken above */
 		obj->obj_ops->put_ref(obj);
+		ctx_put_exp_paths(op_ctx);
 		put_gsh_export(export);
 		dec_state_t_ref(state);
 
@@ -279,6 +283,9 @@ void revoke_owner_layouts(state_owner_t *client_owner)
 
 	if (saved_export != NULL)
 		op_ctx->fsal_export = op_ctx->ctx_export->fsal_export;
+
+	op_ctx->ctx_fullpath = saved_fullpath;
+	op_ctx->ctx_pseudopath = saved_pseudopath;
 }
 
 /** @} */

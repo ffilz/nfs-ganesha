@@ -107,44 +107,14 @@ struct root_op_context {
 
 extern size_t open_fd_count;
 
-static inline void init_root_op_context(struct root_op_context *ctx,
-					struct gsh_export *exp,
-					struct fsal_export *fsal_exp,
-					uint32_t nfs_vers,
-					uint32_t nfs_minorvers,
-					uint32_t req_type)
-{
-	/* Initialize req_ctx.
-	 * Note that a zeroed creds works just fine as root creds.
-	 */
-	memset(ctx, 0, sizeof(*ctx));
-	ctx->req_ctx.creds = &ctx->creds;
-	ctx->req_ctx.nfs_vers = nfs_vers;
-	ctx->req_ctx.nfs_minorvers = nfs_minorvers;
-	ctx->req_ctx.req_type = req_type;
+void init_root_op_context(struct root_op_context *ctx,
+			  struct gsh_export *exp,
+			  struct fsal_export *fsal_exp,
+			  uint32_t nfs_vers,
+			  uint32_t nfs_minorvers,
+			  uint32_t req_type);
 
-	ctx->req_ctx.ctx_export = exp;
-	ctx->req_ctx.fsal_export = fsal_exp;
-	if (fsal_exp)
-		ctx->req_ctx.fsal_module = fsal_exp->fsal;
-	else if (op_ctx)
-		ctx->req_ctx.fsal_module = op_ctx->fsal_module;
-
-	ctx->req_ctx.export_perms = &ctx->export_perms;
-	ctx->export_perms.set = root_op_export_set;
-	ctx->export_perms.options = root_op_export_options;
-
-	ctx->old_op_ctx = op_ctx;
-	op_ctx = &ctx->req_ctx;
-}
-
-static inline void release_root_op_context(void)
-{
-	struct root_op_context *ctx;
-
-	ctx = container_of(op_ctx, struct root_op_context, req_ctx);
-	op_ctx = ctx->old_op_ctx;
-}
+void release_root_op_context(void);
 
 /******************************************************
  *                Structure used to define a fsal

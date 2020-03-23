@@ -694,6 +694,8 @@ enum nfsstat4 release_lock_owner(state_owner_t *owner)
 		state_t *state;
 		struct fsal_export *save_exp;
 		struct gsh_export *save_export;
+		struct gsh_refstr *saved_fullpath = NULL;
+		struct gsh_refstr *saved_pseudopath = NULL;
 
 		state = glist_first_entry(&owner->so_owner.so_nfs4_owner
 								.so_state_list,
@@ -710,18 +712,28 @@ enum nfsstat4 release_lock_owner(state_owner_t *owner)
 
 		PTHREAD_MUTEX_unlock(&owner->so_mutex);
 
-		/* Set the fsal_export properly, since this can be called from
-		 * ops that don't do a putfh */
+		/* Save the export stuff from the op_ctx to be restored later.
+		 */
 		save_exp = op_ctx->fsal_export;
 		save_export = op_ctx->ctx_export;
+		saved_fullpath = op_ctx->ctx_fullpath;
+		saved_pseudopath = op_ctx->ctx_pseudopath;
+
+		/* Set the fsal_export properly, since this can be called from
+		 * ops that don't do a putfh
+		 */
 		op_ctx->fsal_export = state->state_exp;
 		op_ctx->ctx_export = state->state_export;
+		ctx_get_exp_paths(op_ctx);
 
 		state_del(state);
 
-		/* Restore export */
+		/* Restore export stuff */
+		ctx_put_exp_paths(op_ctx);
 		op_ctx->fsal_export = save_exp;
 		op_ctx->ctx_export = save_export;
+		op_ctx->ctx_fullpath = saved_fullpath;
+		op_ctx->ctx_pseudopath = saved_pseudopath;
 
 		dec_state_t_ref(state);
 
@@ -840,6 +852,7 @@ void release_openstate(state_owner_t *owner)
 		/* op_ctx may be used by state_del_locked and others */
 		op_ctx->ctx_export = export;
 		op_ctx->fsal_export = export->fsal_export;
+		ctx_get_exp_paths(op_ctx);
 
 		/* If FSAL supports extended operations, file will be closed by
 		 * state_del_locked.
@@ -853,6 +866,7 @@ void release_openstate(state_owner_t *owner)
 
 		/* Release refs we held during state_del */
 		obj->obj_ops->put_ref(obj);
+		ctx_put_exp_paths(op_ctx);
 		put_gsh_export(op_ctx->ctx_export);
 		op_ctx->ctx_export = NULL;
 		op_ctx->fsal_export = NULL;
@@ -933,27 +947,24 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 		PTHREAD_MUTEX_unlock(&client_owner->so_mutex);
 		so_mutex_held = false;
 
+		/* Initialize req_ctx */
+		init_root_op_context(&ctx, export, export->fsal_export,
+				     0, 0, UNKNOWN_REQUEST);
+
 		/* If FSAL supports extended operations, file will be closed by
 		 * state_del_locked which is called from deleg_revoke.
 		 */
 		PTHREAD_RWLOCK_wrlock(&obj->state_hdl->state_lock);
 
-		/* Initialize req_ctx */
-		init_root_op_context(&ctx, export, export->fsal_export,
-				     0, 0, UNKNOWN_REQUEST);
-
 		state_deleg_revoke(obj, state);
-
-		put_gsh_export(op_ctx->ctx_export);
-		op_ctx->ctx_export = NULL;
-		op_ctx->fsal_export = NULL;
 
 		PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 
 		/* Release refs we held */
 		obj->obj_ops->put_ref(obj);
-
 		release_root_op_context();
+		put_gsh_export(op_ctx->ctx_export);
+
 		/* Since we dropped so_mutex, we must restart the loop. */
 		goto again;
 	}
@@ -1073,7 +1084,7 @@ static void release_export_nfs4_state(enum state_type type)
 	if (errcnt == STATE_ERR_MAX) {
 		LogFatal(COMPONENT_STATE,
 			 "Could not complete cleanup of layouts for export %s",
-			 op_ctx->ctx_export->pseudopath);
+			 CTX_PSEUDOPATH(op_ctx));
 	}
 }
 

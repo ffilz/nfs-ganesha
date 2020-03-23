@@ -98,6 +98,7 @@ TEST(CI_HASH_DIST1, INIT)
   req_ctx.ctx_export = a_export;
   req_ctx.fsal_export = a_export->fsal_export;
   req_ctx.creds = &user_credentials;
+  ctx_get_exp_paths(&req_ctx);
 
   /* stashed in tls */
   op_ctx = &req_ctx;

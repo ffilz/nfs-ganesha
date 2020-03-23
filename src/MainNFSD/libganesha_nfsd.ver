@@ -112,6 +112,7 @@
   ht_confirmed_client_id;
   infs_set_param_from_conf;
   init_error_type;
+  init_root_op_context;
   init_server_pkgs;
   load_config_from_node;
   load_config_from_parse;
@@ -186,6 +187,7 @@
   register_url_provider;
   release_log_facility;
   release_posix_file_system;
+  release_root_op_context;
   read_log_config;
   report_config_errors;
   claim_posix_filesystems;
