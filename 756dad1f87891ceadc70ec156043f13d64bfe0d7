@@ -50,6 +50,40 @@
       "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64bc8a86_ab2b2422",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-03-23T14:19:19Z",
+      "side": 1,
+      "message": "This bit worries me a little.  Upgrading with the old config set will result in no stats being collected.  Should we maybe keep the old config, and have it enable the new config settings if they\u0027re present, at least for one major version?  This would help with backporting, as well, if we do that.",
+      "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b37babe_898fe15a",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-03-23T14:19:19Z",
+      "side": 1,
+      "message": "Is this accidental?  Or is there a reason for it?",
+      "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
