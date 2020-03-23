@@ -149,6 +149,7 @@ void _9p_init_opctx(struct _9p_fid *pfid, struct _9p_request_data *req9p)
 void _9p_release_opctx(void)
 {
 	if (op_ctx->ctx_export != NULL) {
+		ctx_put_exp_paths(op_ctx);
 		put_gsh_export(op_ctx->ctx_export);
 		op_ctx->ctx_export = NULL;
 	}

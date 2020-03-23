@@ -95,6 +95,7 @@ enum nfs_req_result nfs4_op_putrootfh(struct nfs_argop4 *op,
 	}
 
 	op_ctx->fsal_export = op_ctx->ctx_export->fsal_export;
+	ctx_get_exp_paths(op_ctx);
 
 	/* Build credentials */
 	res_PUTROOTFH4->status = nfs4_export_check_access(data->req);

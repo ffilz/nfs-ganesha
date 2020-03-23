@@ -64,6 +64,7 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	struct gsh_buffdesc fh_desc;
 	struct fsal_obj_handle *pfsal_handle;
 	int port;
+	const char *path;
 
 	/* Get data */
 	_9p_getptr(cursor, msgtag, u16);
@@ -123,6 +124,7 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	/* Fill in more of the op_ctx */
 	op_ctx->fsal_export = op_ctx->ctx_export->fsal_export;
 	op_ctx->caller_addr = &req9p->pconn->addrpeer;
+	ctx_get_exp_paths(op_ctx);
 
 	/* We store the export_perms in pconn so we only have to evaluate
 	 * them once.
@@ -182,8 +184,9 @@ int _9p_attach(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 		goto errout;
 	}
 
-	if (exppath[0] != '/' ||
-	    !strcmp(exppath, export_path(op_ctx->ctx_export))) {
+	path = ctx_export_path(op_ctx);
+
+	if (exppath[0] != '/' || !strcmp(exppath, path)) {
 		/* Check if root object is correctly set, fetch it, and take an
 		 * LRU reference.
 		 */

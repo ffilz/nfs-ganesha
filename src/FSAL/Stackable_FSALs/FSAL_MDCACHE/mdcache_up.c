@@ -53,6 +53,7 @@ mdc_up_invalidate(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 	req_ctx.fsal_export = vec->up_fsal_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
+	ctx_get_exp_paths(op_ctx);
 
 	key.fsal = vec->up_fsal_export->sub_export->fsal;
 	cih_hash_key(&key, vec->up_fsal_export->sub_export->fsal, handle,
@@ -85,6 +86,8 @@ mdc_up_invalidate(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 	mdcache_put(entry);
 
 out:
+
+	ctx_put_exp_paths(op_ctx);
 	op_ctx = save_ctx;
 	return status;
 }
@@ -135,6 +138,7 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 	req_ctx.fsal_export = vec->up_fsal_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
+	ctx_get_exp_paths(op_ctx);
 
 	key.fsal = vec->up_fsal_export->sub_export->fsal;
 	cih_hash_key(&key, vec->up_fsal_export->sub_export->fsal, handle,
@@ -334,6 +338,8 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 put:
 	mdcache_put(entry);
 out:
+
+	ctx_put_exp_paths(op_ctx);
 	op_ctx = save_ctx;
 	return status;
 }
@@ -456,10 +462,12 @@ state_status_t mdc_up_layoutrecall(const struct fsal_up_vector *vec,
 	req_ctx.fsal_export = vec->up_fsal_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
+	ctx_get_exp_paths(op_ctx);
 
 	rc = myself->super_up_ops.layoutrecall(vec, handle, layout_type,
 					       changed, segment, cookie, spec);
 
+	ctx_put_exp_paths(op_ctx);
 	op_ctx = save_ctx;
 
 	return rc;
@@ -483,9 +491,11 @@ state_status_t mdc_up_delegrecall(const struct fsal_up_vector *vec,
 	req_ctx.fsal_export = vec->up_fsal_export;
 	save_ctx = op_ctx;
 	op_ctx = &req_ctx;
+	ctx_get_exp_paths(op_ctx);
 
 	rc = myself->super_up_ops.delegrecall(vec, handle);
 
+	ctx_put_exp_paths(op_ctx);
 	op_ctx = save_ctx;
 
 	return rc;
