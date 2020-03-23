@@ -444,11 +444,9 @@ nfsstat4 deleg_revoke(struct fsal_obj_handle *obj, struct state_t *deleg_state)
 	reset_cbgetattr_stats(obj);
 
 	/* Build op_context for state_unlock_locked */
-	init_root_op_context(&root_op_context, NULL, NULL, 0, 0,
-			     UNKNOWN_REQUEST);
+	init_root_op_context(&root_op_context, export, export->fsal_export,
+			     0, 0, UNKNOWN_REQUEST);
 	root_op_context.req_ctx.clientid = &clid->cid_clientid;
-	root_op_context.req_ctx.ctx_export = export;
-	root_op_context.req_ctx.fsal_export = export->fsal_export;
 
 	/* release_lease_lock() returns delegation to FSAL */
 	state_status = release_lease_lock(obj, deleg_state);

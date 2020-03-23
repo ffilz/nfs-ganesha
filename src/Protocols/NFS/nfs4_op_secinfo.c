@@ -79,6 +79,8 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 	int num_entry = 0;
 	struct export_perms save_export_perms = { 0, };
 	struct gsh_export *saved_gsh_export = NULL;
+	struct gsh_refstr *saved_fullpath = NULL;
+	struct gsh_refstr *saved_pseudopath = NULL;
 	uint32_t resp_size = RESP_SIZE;
 	int idx = 0;
 
@@ -127,7 +129,7 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 			LogDebug(COMPONENT_EXPORT,
 				 "NFS4ERR_STALE On Export_Id %d Pseudo %s",
 				 junction_export->export_id,
-				 junction_export->pseudopath);
+				 JCT_PSEUDOPATH(obj_src->state_hdl));
 			res_SECINFO4->status = NFS4ERR_STALE;
 			PTHREAD_RWLOCK_unlock(&obj_src->state_hdl->jct_lock);
 			goto out;
@@ -140,9 +142,12 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 		/* Save the compound data context */
 		save_export_perms = *op_ctx->export_perms;
 		saved_gsh_export = op_ctx->ctx_export;
+		saved_fullpath = op_ctx->ctx_fullpath;
+		saved_pseudopath = op_ctx->ctx_pseudopath;
 
 		op_ctx->ctx_export = junction_export;
 		op_ctx->fsal_export = op_ctx->ctx_export->fsal_export;
+		ctx_get_exp_paths(op_ctx);
 
 		/* Build credentials */
 		res_SECINFO4->status = nfs4_export_check_access(data->req);
@@ -156,7 +161,7 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 			LogDebug(COMPONENT_EXPORT,
 				 "NFS4ERR_ACCESS Hiding Export_Id %d Pseudo %s with NFS4ERR_NOENT",
 				 op_ctx->ctx_export->export_id,
-				 op_ctx->ctx_export->pseudopath);
+				 CTX_PSEUDOPATH(op_ctx));
 			res_SECINFO4->status = NFS4ERR_NOENT;
 			goto out;
 		}
@@ -170,7 +175,7 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 		if (FSAL_IS_ERROR(fsal_status)) {
 			LogMajor(COMPONENT_EXPORT,
 				 "PSEUDO FS JUNCTION TRAVERSAL: Failed to get root for %s, id=%d, status = %s",
-				 op_ctx->ctx_export->pseudopath,
+				 CTX_PSEUDOPATH(op_ctx),
 				 op_ctx->ctx_export->export_id,
 				 fsal_err_txt(fsal_status));
 
@@ -180,7 +185,7 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 
 		LogDebug(COMPONENT_EXPORT,
 			 "PSEUDO FS JUNCTION TRAVERSAL: Crossed to %s, id=%d for name=%s",
-			 op_ctx->ctx_export->pseudopath,
+			 CTX_PSEUDOPATH(op_ctx),
 			 op_ctx->ctx_export->export_id,
 			 arg_SECINFO4->name.utf8string_val);
 
@@ -280,6 +285,7 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 
 		/* Release CurrentFH reference to export. */
 		if (op_ctx->ctx_export) {
+			ctx_put_exp_paths(op_ctx);
 			put_gsh_export(op_ctx->ctx_export);
 			op_ctx->ctx_export = NULL;
 			op_ctx->fsal_export = NULL;
@@ -287,6 +293,12 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 
 		if (saved_gsh_export != NULL) {
 			/* Don't need saved export */
+			if (saved_fullpath != NULL)
+				gsh_refstr_put(saved_fullpath);
+
+			if (saved_pseudopath != NULL)
+				gsh_refstr_put(saved_pseudopath);
+
 			put_gsh_export(saved_gsh_export);
 			saved_gsh_export = NULL;
 		}
@@ -298,12 +310,15 @@ enum nfs_req_result nfs4_op_secinfo(struct nfs_argop4 *op,
 
 	if (saved_gsh_export != NULL) {
 		/* Restore export stuff */
+		ctx_put_exp_paths(op_ctx);
 		if (op_ctx->ctx_export)
 			put_gsh_export(op_ctx->ctx_export);
 
 		*op_ctx->export_perms = save_export_perms;
 		op_ctx->ctx_export = saved_gsh_export;
 		op_ctx->fsal_export = op_ctx->ctx_export->fsal_export;
+		op_ctx->ctx_fullpath = saved_fullpath;
+		op_ctx->ctx_pseudopath = saved_pseudopath;
 
 		/* Restore creds */
 		if (nfs_req_creds(data->req) != NFS4_OK) {

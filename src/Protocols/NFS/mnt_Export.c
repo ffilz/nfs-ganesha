@@ -65,25 +65,27 @@ static bool proc_export(struct gsh_export *export, void *arg)
 	 */
 	op_ctx->ctx_export = export;
 	op_ctx->fsal_export = export->fsal_export;
+	ctx_get_exp_paths(op_ctx);
+
 	export_check_access();
+
 	if (!(op_ctx->export_perms->options & EXPORT_OPTION_ACCESS_MASK)) {
 		LogFullDebug(COMPONENT_NFSPROTO,
 			     "Client is not allowed to access Export_Id %d %s",
-			     export->export_id, export_path(export));
+			     export->export_id, ctx_export_path(op_ctx));
 
-		return true;
+		goto out;
 	}
 
 	if (!(op_ctx->export_perms->options & EXPORT_OPTION_NFSV3)) {
 		LogFullDebug(COMPONENT_NFSPROTO,
 			     "Not exported for NFSv3, Export_Id %d %s",
-			     export->export_id, export_path(export));
+			     export->export_id, ctx_export_path(op_ctx));
 
-		return true;
+		goto out;
 	}
 
 	new_expnode = gsh_calloc(1, sizeof(struct exportnode));
-	new_expnode->ex_dir = gsh_strdup(export_path(export));
 
 	PTHREAD_RWLOCK_rdlock(&op_ctx->ctx_export->lock);
 
@@ -128,13 +130,29 @@ static bool proc_export(struct gsh_export *export, void *arg)
 		}
 		LogFullDebug(COMPONENT_NFSPROTO,
 			     "Export %s client %s",
-			     export_path(export), grp_name);
+			     ctx_export_path(op_ctx), grp_name);
 		group->gr_name = gsh_strdup(grp_name);
 		if (free_grp_name)
 			gsh_free(grp_name);
 	}
 
 	PTHREAD_RWLOCK_unlock(&op_ctx->ctx_export->lock);
+
+	/* Now that we are almost done, we have a gsh_refstr to the path that is
+	 * about to be freed, but we need it for ex_dir, so steal it from the
+	 * op_ctx which is ok because nothing else happens before we put the
+	 * refstr from the op_ctx.
+	 */
+	if (nfs_param.core_param.mount_path_pseudo) {
+		new_expnode->ex_refdir = op_ctx->ctx_pseudopath;
+		op_ctx->ctx_pseudopath = NULL;
+	} else {
+		new_expnode->ex_refdir = op_ctx->ctx_fullpath;
+		op_ctx->ctx_fullpath = NULL;
+	}
+
+	new_expnode->ex_dir = new_expnode->ex_refdir ?
+		new_expnode->ex_refdir->gr_val : "<none>";
 
 	if (state->head == NULL)
 		state->head = new_expnode;
@@ -143,6 +161,9 @@ static bool proc_export(struct gsh_export *export, void *arg)
 
 	state->tail = new_expnode;
 
+out:
+
+	ctx_put_exp_paths(op_ctx);
 	return true;
 }
 
@@ -201,7 +222,8 @@ void mnt_Export_Free(nfs_res_t *res)
 			gsh_free(grp);
 			grp = next_grp;
 		}
-		gsh_free(exp->ex_dir);
+		if (exp->ex_refdir != NULL)
+			gsh_refstr_put(exp->ex_refdir);
 		gsh_free(exp);
 		exp = next_exp;
 	}

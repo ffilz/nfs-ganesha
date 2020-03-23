@@ -1102,6 +1102,7 @@ static enum xprt_stat nfs4_compound_resume(struct svc_req *req)
 	compound_data_Free(data);
 	/* release current active export in op_ctx. */
 	if (op_ctx->ctx_export) {
+		ctx_put_exp_paths(op_ctx);
 		put_gsh_export(op_ctx->ctx_export);
 		op_ctx->ctx_export = NULL;
 		op_ctx->fsal_export = NULL;
@@ -1345,6 +1346,7 @@ out:
 
 	/* release current active export in op_ctx. */
 	if (op_ctx->ctx_export) {
+		ctx_put_exp_paths(op_ctx);
 		put_gsh_export(op_ctx->ctx_export);
 		op_ctx->ctx_export = NULL;
 		op_ctx->fsal_export = NULL;

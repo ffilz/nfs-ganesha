@@ -139,6 +139,7 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op,
 				file_obj->state_hdl->dir.junction_export);
 
 			/* Release any old export reference */
+			ctx_put_exp_paths(op_ctx);
 			if (op_ctx->ctx_export != NULL)
 				put_gsh_export(op_ctx->ctx_export);
 
@@ -146,6 +147,7 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op,
 			op_ctx->ctx_export =
 				file_obj->state_hdl->dir.junction_export;
 			op_ctx->fsal_export = op_ctx->ctx_export->fsal_export;
+			ctx_get_exp_paths(op_ctx);
 
 			PTHREAD_RWLOCK_unlock(&file_obj->state_hdl->jct_lock);
 			/* Build credentials */
@@ -163,7 +165,7 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op,
 				LogDebug(COMPONENT_EXPORT,
 					"NFS4ERR_ACCESS Hiding Export_Id %d Pseudo %s with NFS4ERR_NOENT",
 					op_ctx->ctx_export->export_id,
-					op_ctx->ctx_export->pseudopath);
+					CTX_PSEUDOPATH(op_ctx));
 				res_LOOKUP4->status = NFS4ERR_NOENT;
 				goto out;
 			}
@@ -181,7 +183,7 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op,
 				LogMajor(COMPONENT_EXPORT,
 					"PSEUDO FS JUNCTION TRAVERSAL: Failed with %s for %s, id=%d",
 					nfsstat4_to_str(res_LOOKUP4->status),
-					op_ctx->ctx_export->pseudopath,
+					CTX_PSEUDOPATH(op_ctx),
 					op_ctx->ctx_export->export_id);
 				goto out;
 			}
@@ -192,7 +194,7 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op,
 			if (FSAL_IS_ERROR(status)) {
 				LogMajor(COMPONENT_EXPORT,
 					"PSEUDO FS JUNCTION TRAVERSAL: Failed to get root for %s, id=%d, status = %s",
-					op_ctx->ctx_export->pseudopath,
+					CTX_PSEUDOPATH(op_ctx),
 					op_ctx->ctx_export->export_id,
 					msg_fsal_err(status.major));
 
@@ -202,7 +204,7 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op,
 
 			LogDebug(COMPONENT_EXPORT,
 				"PSEUDO FS JUNCTION TRAVERSAL: Crossed to %s, id=%d for name=%s",
-				op_ctx->ctx_export->pseudopath,
+				CTX_PSEUDOPATH(op_ctx),
 				op_ctx->ctx_export->export_id,
 				arg_LOOKUP4->objname.utf8string_val);
 

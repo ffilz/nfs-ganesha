@@ -329,7 +329,7 @@ again:
 			LogInfo(COMPONENT_FSAL,
 				"Filesystem %s will be added to export %d:%s",
 				fs->path, op_ctx->ctx_export->export_id,
-				op_ctx_export_path(op_ctx->ctx_export));
+				op_ctx_export_path(op_ctx));
 		}
 	}
 
@@ -341,7 +341,7 @@ again:
 			"Lookup of %s crosses filesystem boundary to unclaimed file system %s - attempt to claim it",
 			path, fs->path);
 
-		retval = claim_posix_filesystems(op_ctx->ctx_export->fullpath,
+		retval = claim_posix_filesystems(CTX_FULLPATH(op_ctx),
 						 parent_hdl->obj_handle.fsal,
 						 op_ctx->fsal_export,
 						 vfs_claim_filesystem,

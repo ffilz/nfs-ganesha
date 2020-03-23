@@ -52,6 +52,7 @@ static bool setup_up_vector(struct gpfs_filesystem *gpfs_fs)
 	op_ctx = &gpfs_fs->req_ctx;
 	op_ctx->fsal_export = gpfs_fs->up_vector->up_fsal_export;
 	op_ctx->ctx_export = gpfs_fs->up_vector->up_gsh_export;
+	ctx_get_exp_paths(op_ctx);
 
 	return true;
 }
@@ -472,6 +473,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		}
 	}
 out:
+	ctx_put_exp_paths(op_ctx);
 	rcu_unregister_thread();
 	return NULL;
 }				/* GPFSFSAL_UP_Thread */

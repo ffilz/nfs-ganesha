@@ -420,6 +420,8 @@ static inline void set_saved_entry(compound_data_t *data,
 {
 	struct gsh_export *current_export = op_ctx->ctx_export;
 	struct export_perms current_export_perms = *op_ctx->export_perms;
+	struct gsh_refstr *saved_fullpath = op_ctx->ctx_fullpath;
+	struct gsh_refstr *saved_pseudopath = op_ctx->ctx_pseudopath;
 	bool restore_op_ctx = false;
 
 	if (data->saved_ds != NULL || data->saved_obj != NULL) {
@@ -429,6 +431,7 @@ static inline void set_saved_entry(compound_data_t *data,
 					? data->saved_export->fsal_export
 					: NULL;
 		*op_ctx->export_perms = data->saved_export_perms;
+		ctx_get_exp_paths(op_ctx);
 		restore_op_ctx = true;
 	}
 
@@ -448,11 +451,14 @@ static inline void set_saved_entry(compound_data_t *data,
 
 	if (restore_op_ctx) {
 		/* Restore op_ctx */
+		ctx_put_exp_paths(op_ctx);
 		op_ctx->ctx_export = current_export;
 		op_ctx->fsal_export = current_export
 					? current_export->fsal_export
 					: NULL;
 		*op_ctx->export_perms = current_export_perms;
+		op_ctx->ctx_fullpath = saved_fullpath;
+		op_ctx->ctx_pseudopath = saved_pseudopath;
 	}
 
 	data->saved_obj = obj;

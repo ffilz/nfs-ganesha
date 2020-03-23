@@ -95,6 +95,7 @@ static int nfs4_ds_putfh(compound_data_t *data)
 		 */
 		op_ctx->ctx_export = pds->mds_export;
 		op_ctx->fsal_export = pds->mds_fsal_export;
+		ctx_get_exp_paths(op_ctx);
 	} else {
 		/* export reference has been dropped. */
 		put_gsh_export(pds->mds_export);
@@ -163,8 +164,7 @@ static int nfs4_mds_putfh(compound_data_t *data)
 
 	/* If old CurrentFH had a related export, release reference. */
 	if (op_ctx->ctx_export != NULL) {
-		changed = ntohs(v4_handle->id.exports) !=
-				 op_ctx->ctx_export->export_id;
+		changed = exporting->export_id != op_ctx->ctx_export->export_id;
 		put_gsh_export(op_ctx->ctx_export);
 	}
 
@@ -180,6 +180,7 @@ static int nfs4_mds_putfh(compound_data_t *data)
 	/* update _ctx fields needed by nfs4_export_check_access */
 	op_ctx->ctx_export = exporting;
 	op_ctx->fsal_export = export = exporting->fsal_export;
+	ctx_get_exp_paths(op_ctx);
 
 	if (changed) {
 		int status;
