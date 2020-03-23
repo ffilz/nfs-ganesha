@@ -1110,7 +1110,6 @@ static void delegrecall_completion_func(rpc_call_t *call)
 		goto out_free_drc;
 	}
 
-
 	init_op_context_simple(&op_context, export, export->fsal_export);
 	used_ctx = true;
 
