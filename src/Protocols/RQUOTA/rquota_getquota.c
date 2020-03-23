@@ -83,19 +83,11 @@ int rquota_getquota(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			     "Searching for export by tag for %s",
 			     quota_path);
 		exp = get_gsh_export_by_tag(quota_path);
-		if (exp != NULL) {
-			/* By Tag must use fullpath for actual request. */
-			quota_path = exp->fullpath;
-		}
 	} else if (nfs_param.core_param.mount_path_pseudo) {
 		LogFullDebug(COMPONENT_NFSPROTO,
 			     "Searching for export by pseudo for %s",
 			     quota_path);
 		exp = get_gsh_export_by_pseudo(quota_path, false);
-		if (exp != NULL) {
-			/* By Pseudo must use fullpath for actual request. */
-			quota_path = exp->fullpath;
-		}
 	} else {
 		LogFullDebug(COMPONENT_NFSPROTO,
 			     "Searching for export by path for %s",
@@ -115,9 +107,6 @@ int rquota_getquota(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	init_root_op_context(&root_ctx, exp, exp->fsal_export, 0, 0,
 			     UNKNOWN_REQUEST);
 
-	op_ctx->ctx_export = exp;
-	op_ctx->fsal_export = exp->fsal_export;
-
 	/* Get creds */
 	if (nfs_req_creds(req) == NFS4ERR_ACCESS) {
 		const char *client_ip = "<unknown client>";
@@ -129,10 +118,10 @@ int rquota_getquota(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		goto out;
 	}
 
-	fsal_status =
-	    exp->fsal_export->exp_ops.get_quota(exp->fsal_export,
-					     quota_path, quota_type,
-					     quota_id, &fsal_quota);
+	fsal_status = exp->fsal_export->exp_ops.get_quota(
+				exp->fsal_export, CTX_FULLPATH(op_ctx),
+				quota_type, quota_id, &fsal_quota);
+
 	if (FSAL_IS_ERROR(fsal_status)) {
 		if (fsal_status.major == ERR_FSAL_NO_QUOTA)
 			qres->status = Q_NOQUOTA;

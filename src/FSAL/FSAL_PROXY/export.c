@@ -182,7 +182,7 @@ fsal_status_t pxy_create_export(struct fsal_module *fsal_hdl,
 	if (rc != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"Incorrect or missing parameters for export %s",
-			op_ctx->ctx_export->fullpath);
+			CTX_FULLPATH(op_ctx));
 		fsal_status = fsalstat(ERR_FSAL_INVAL, rc);
 		goto err_free;
 	}

@@ -231,6 +231,7 @@ namespace gtest {
       req_ctx.fsal_export = a_export->fsal_export;
       req_ctx.creds = &user_credentials;
       req_ctx.export_perms = &exp_perms;
+      ctx_get_exp_paths(&req_ctx);
 
       /* stashed in tls */
       op_ctx = &req_ctx;
@@ -263,6 +264,7 @@ namespace gtest {
       root_entry->obj_ops->put_ref(root_entry);
       root_entry = NULL;
 
+      ctx_put_exp_paths(&req_ctx);
       put_gsh_export(a_export);
       a_export = NULL;
       req_ctx.ctx_export = NULL;

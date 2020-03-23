@@ -279,11 +279,11 @@ enum nfs_req_result nfs4_op_layoutreturn(struct nfs_argop4 *op,
 			}
 
 			/* Set up the root op context for this state */
-			root_op_context.req_ctx.clientid =
+			op_ctx->clientid =
 			    &clientid_owner->so_owner.so_nfs4_owner.so_clientid;
-			root_op_context.req_ctx.ctx_export = export;
-			root_op_context.req_ctx.fsal_export =
-							export->fsal_export;
+			op_ctx->ctx_export = export;
+			op_ctx->fsal_export = export->fsal_export;
+			ctx_get_exp_paths(op_ctx);
 
 			/* Take a reference on the state_t */
 			inc_state_t_ref(layout_state);
@@ -350,12 +350,7 @@ enum nfs_req_result nfs4_op_layoutreturn(struct nfs_argop4 *op,
 		res_LAYOUTRETURN4->lorr_status = NFS4ERR_INVAL;
 	}
 
-	if (arg_LAYOUTRETURN4->lora_layoutreturn.lr_returntype ==
-							LAYOUTRETURN4_FSID
-	    ||
-	    arg_LAYOUTRETURN4->lora_layoutreturn.lr_returntype ==
-							LAYOUTRETURN4_ALL
-	    ) {
+	if (op_ctx == &root_op_context.req_ctx) {
 		/* Release the root op context we setup above */
 		release_root_op_context();
 	}
