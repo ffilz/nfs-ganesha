@@ -40,12 +40,14 @@
 #ifndef FSAL_API
 #define FSAL_API
 
+#include <urcu-bp.h>
 #include "fsal_types.h"
 #include "fsal_pnfs.h"
 #include "sal_shared.h"
 #include "config_parsing.h"
 #include "avltree.h"
 #include "abstract_atomic.h"
+#include "gsh_refstr.h"
 
 /**
 ** Forward declarations to resolve circular dependency conflicts
@@ -411,6 +413,8 @@ struct req_op_context {
 	uint32_t req_type;	/*< request_type NFS | 9P */
 	struct gsh_client *client;	/*< client host info including stats */
 	struct gsh_export *ctx_export;	/*< current export */
+	struct gsh_refstr *ctx_fullpath;		/*< current fullpath */
+	struct gsh_refstr *ctx_pseudopath;	/*< current pseudopath */
 	struct fsal_export *fsal_export;	/*< current fsal export */
 	struct export_perms *export_perms;	/*< Effective export perms */
 	nsecs_elapsed_t start_time;	/*< start time of this op/request */
@@ -419,6 +423,12 @@ struct req_op_context {
 	struct fsal_pnfs_ds *fsal_pnfs_ds;	/*< current pNFS DS */
 	/* add new context members here */
 };
+
+#define CTX_PSEUDOPATH(ctx) (ctx->ctx_pseudopath ? \
+	ctx->ctx_pseudopath->gr_val : "")
+
+#define CTX_FULLPATH(ctx) (ctx->ctx_fullpath ? \
+	ctx->ctx_fullpath->gr_val : "")
 
 /**
  * @brief FSAL module methods

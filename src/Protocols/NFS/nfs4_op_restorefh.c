@@ -111,6 +111,8 @@ enum nfs_req_result nfs4_op_restorefh(struct nfs_argop4 *op,
 
 	data->currentFH.nfs_fh4_len = data->savedFH.nfs_fh4_len;
 
+	ctx_put_exp_paths(op_ctx);
+
 	if (op_ctx->ctx_export != NULL)
 		put_gsh_export(op_ctx->ctx_export);
 
@@ -118,6 +120,8 @@ enum nfs_req_result nfs4_op_restorefh(struct nfs_argop4 *op,
 	op_ctx->ctx_export = data->saved_export;
 	if (op_ctx->ctx_export != NULL)
 		op_ctx->fsal_export = op_ctx->ctx_export->fsal_export;
+
+	ctx_get_exp_paths(op_ctx);
 
 	*op_ctx->export_perms = data->saved_export_perms;
 
