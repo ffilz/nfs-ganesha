@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "7d488a16_7b9b6f89",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2020-03-24T05:24:48Z",
+      "side": 1,
+      "message": "I agree with you. \nIn one of our community call we have decided to have 3 levels of stats, minimal (FAST_STATS), default, and full.\nI will work on this.",
+      "parentUuid": "64bc8a86_ab2b2422",
+      "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4b37babe_898fe15a",
         "filename": "src/support/server_stats.c",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2020-03-23T14:19:19Z",
       "side": 1,
       "message": "Is this accidental?  Or is there a reason for it?",
+      "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a09d3dd6_1679bd97",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2020-03-24T05:24:48Z",
+      "side": 1,
+      "message": "The particular op is present in \"include/nfs41.h\" file, but missing from this file.\nWhile getting op-name for op\u003d65, Ganesha was crashing due to missing entry from this array.",
+      "parentUuid": "4b37babe_898fe15a",
       "revId": "756dad1f87891ceadc70ec156043f13d64bfe0d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
