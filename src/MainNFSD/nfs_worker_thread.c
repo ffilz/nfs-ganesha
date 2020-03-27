@@ -779,7 +779,6 @@ void complete_request(nfs_request_t *reqdata,
 				 reqdata->svc.rq_msg.cb_proc,
 				 errno);
 			SVC_DESTROY(xprt);
-			return;
 		}
 
 		LogFullDebug(COMPONENT_DISPATCH,
