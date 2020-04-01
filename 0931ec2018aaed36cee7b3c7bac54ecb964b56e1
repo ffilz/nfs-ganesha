@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "485af8a7_0dd26d06",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-01T14:58:47Z",
+      "side": 1,
+      "message": "Please make these comments /** @todo, we don\u0027t use // comments",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3107c335_e5cb777f",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-01T14:58:47Z",
+      "side": 1,
+      "message": "The cookie is used to match a grant message with the original lock request. Are you implementing async blocking locks (should be easy, though you need a way to catch the callbacks...)?",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1cb8f06_f76c2686",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-01T14:58:47Z",
+      "side": 1,
+      "message": "Please make sure all todo are in their own comment /** @todo\n\nIt makes it easier to search the code for todo work...",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dfcd5c0_dc86b2e3",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-01T14:58:47Z",
+      "side": 1,
+      "message": "Say more on this....\n\nCan we fix that?",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
