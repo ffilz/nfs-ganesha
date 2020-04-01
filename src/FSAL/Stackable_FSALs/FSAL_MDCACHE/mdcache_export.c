@@ -187,9 +187,8 @@ static void mdcache_exp_release(struct fsal_export *exp_hdl)
 
 	fsal_hdl = sub_export->fsal;
 
-	LogInfo(COMPONENT_FSAL, "Releasing %s export %" PRIu16 " for %s",
-		fsal_hdl->name, op_ctx->ctx_export->export_id,
-		export_path(op_ctx->ctx_export));
+	LogInfo(COMPONENT_FSAL, "Releasing %s export %" PRIu16,
+		fsal_hdl->name, exp_hdl->export_id);
 
 	/* Stop the dirmap thread */
 	dirmap_lru_stop(exp);
