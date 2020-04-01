@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a31c6298_edad020c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-01T15:33:18Z",
+      "side": 1,
+      "message": "Huh, checkpatch said nothing :). Will do.",
+      "parentUuid": "485af8a7_0dd26d06",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3107c335_e5cb777f",
         "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-01T14:58:47Z",
       "side": 1,
       "message": "The cookie is used to match a grant message with the original lock request. Are you implementing async blocking locks (should be easy, though you need a way to catch the callbacks...)?",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9c6fc35_2d744463",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-01T15:33:18Z",
+      "side": 1,
+      "message": "I didn\u0027t think there was any way to receive the callbacks in a FSAL (so no).",
+      "parentUuid": "3107c335_e5cb777f",
       "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "28ecaf9b_e3d484cd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-01T15:33:18Z",
+      "side": 1,
+      "message": "Ack, will do. (Would you mind putting both the C-style and @todo style suggestions on the wiki somewhere?)",
+      "parentUuid": "d1cb8f06_f76c2686",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2dfcd5c0_dc86b2e3",
         "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2020-04-01T14:58:47Z",
       "side": 1,
       "message": "Say more on this....\n\nCan we fix that?",
+      "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eea7e76_88f48af9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-01T15:33:18Z",
+      "side": 1,
+      "message": "I could not figure it out after multiple days of sadness. I had hoped to just use rpc_call!\n\nAFAICT, there is no way to use clnt_call or rpc_call from within a Ganesha FSAL (and luckily, I  looked at the V4 proxy and said \"Oh, they just rolled their own, too\").\n\nI *think* it\u0027s because of something the main NFSD does in setting up the listening code (via svc_create or similar). I tried wading through the libntirpc code to understand if there\u0027s also something particularly different about that.",
+      "parentUuid": "2dfcd5c0_dc86b2e3",
       "revId": "0931ec2018aaed36cee7b3c7bac54ecb964b56e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
