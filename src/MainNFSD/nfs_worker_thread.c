@@ -664,11 +664,7 @@ void auth_failure(nfs_request_t *reqdata, enum auth_stat auth_rc)
 {
 	svcerr_auth(&reqdata->svc, auth_rc);
 	/* nb, a no-op when req is uncacheable */
-	if (nfs_dupreq_delete(&reqdata->svc) != DUPREQ_SUCCESS) {
-		LogCrit(COMPONENT_DISPATCH,
-			"Attempt to delete duplicate request failed on line %d",
-			__LINE__);
-	}
+	nfs_dupreq_delete(&reqdata->svc);
 }
 
 void free_args(nfs_request_t *reqdata)
@@ -721,6 +717,8 @@ void complete_request(nfs_request_t *reqdata,
 	nfs_res_t *res_nfs = reqdata->res_nfs;
 	const nfs_function_desc_t *reqdesc = reqdata->funcdesc;
 
+	assert(dpq_status == DUPREQ_SUCCESS);
+
 	/* NFSv4 stats are handled in nfs4_compound() */
 	if (reqdata->svc.rq_msg.cb_prog != NFS_program[P_NFS]
 	    || reqdata->svc.rq_msg.cb_vers != NFS_V4)
@@ -743,56 +741,45 @@ void complete_request(nfs_request_t *reqdata,
 		 * will be removed later.  We only remove a reply that is
 		 * normally cached that has been dropped.
 		 */
-		if (nfs_dupreq_delete(&reqdata->svc)
-		    != DUPREQ_SUCCESS) {
-			LogCrit(COMPONENT_DISPATCH,
-				"Attempt to delete duplicate request failed on line %d",
-				__LINE__);
-		}
+		nfs_dupreq_delete(&reqdata->svc);
 		return;
-	} else {
-		LogFullDebug(COMPONENT_DISPATCH,
-			     "Before svc_sendreply on socket %d", xprt->xp_fd);
+	}
 
-		reqdata->svc.rq_msg.RPCM_ack.ar_results.where = res_nfs;
-		reqdata->svc.rq_msg.RPCM_ack.ar_results.proc =
-					reqdesc->xdr_encode_func;
+	LogFullDebug(COMPONENT_DISPATCH,
+		     "Before svc_sendreply on socket %d", xprt->xp_fd);
+
+	reqdata->svc.rq_msg.RPCM_ack.ar_results.where = res_nfs;
+	reqdata->svc.rq_msg.RPCM_ack.ar_results.proc =
+				reqdesc->xdr_encode_func;
 
 #ifdef USE_LTTNG
-		tracepoint(nfs_rpc, before_reply, __func__, __LINE__, xprt);
+	tracepoint(nfs_rpc, before_reply, __func__, __LINE__, xprt);
 #endif
-		if (svc_sendreply(&reqdata->svc) >= XPRT_DIED) {
-			LogDebug(COMPONENT_DISPATCH,
-				 "NFS DISPATCHER: FAILURE: Error while calling svc_sendreply on a new request. rpcxid=%"
-				 PRIu32
-				 " socket=%d function:%s client:%s program:%"
-				 PRIu32
-				 " nfs version:%" PRIu32
-				 " proc:%" PRIu32
-				 " errno: %d",
-				 reqdata->svc.rq_msg.rm_xid,
-				 xprt->xp_fd,
-				 reqdesc->funcname,
-				 op_ctx->client->hostaddr_str,
-				 reqdata->svc.rq_msg.cb_prog,
-				 reqdata->svc.rq_msg.cb_vers,
-				 reqdata->svc.rq_msg.cb_proc,
-				 errno);
-			SVC_DESTROY(xprt);
-			/* We failed to send the response, but the
-			 * request is complete, so we should mark
-			 * the same in our DRC.
-			 */
-		}
+	if (svc_sendreply(&reqdata->svc) >= XPRT_DIED) {
+		LogDebug(COMPONENT_DISPATCH,
+			 "NFS DISPATCHER: FAILURE: Error while calling svc_sendreply on a new request. rpcxid=%"
+			 PRIu32
+			 " socket=%d function:%s client:%s program:%"
+			 PRIu32
+			 " nfs version:%" PRIu32
+			 " proc:%" PRIu32
+			 " errno: %d",
+			 reqdata->svc.rq_msg.rm_xid,
+			 xprt->xp_fd,
+			 reqdesc->funcname,
+			 op_ctx->client->hostaddr_str,
+			 reqdata->svc.rq_msg.cb_prog,
+			 reqdata->svc.rq_msg.cb_vers,
+			 reqdata->svc.rq_msg.cb_proc,
+			 errno);
+		SVC_DESTROY(xprt);
+	}
 
-		LogFullDebug(COMPONENT_DISPATCH,
-			     "After svc_sendreply on socket %d", xprt->xp_fd);
-
-	}			/* rc == NFS_REQ_DROP */
+	LogFullDebug(COMPONENT_DISPATCH,
+		     "After svc_sendreply on socket %d", xprt->xp_fd);
 
 	/* Finish any request not already deleted */
-	if (dpq_status == DUPREQ_SUCCESS)
-		(void) nfs_dupreq_finish(&reqdata->svc, res_nfs);
+	nfs_dupreq_finish(&reqdata->svc, res_nfs);
 }
 
 void complete_request_instrumentation(nfs_request_t *reqdata)
