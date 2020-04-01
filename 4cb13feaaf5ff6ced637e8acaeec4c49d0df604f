@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a970acf3_ce94d57f",
+        "filename": "src/FSAL/FSAL_PROXY_V4/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+target_link_libraries(fsalproxy $",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "759b56a5_cba9d8bc",
+        "filename": "src/FSAL/FSAL_PROXY_V4/fsal_nfsv4_macros.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "WARNING: \u0027Usefull\u0027 may be misspelled - perhaps \u0027Useful\u0027?\n+ * @brief   Usefull macros to manage NFSv4 call from FSAL_PROXY",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91738a9f_04d80d50",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+#^I^I^I^I^I$(top_srcdir)/Common/libcommon_utils.la -lsqlite3 $",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43b0452c_0c9107fe",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+#^I^I^I^I^I$(top_srcdir)/Common/libcommon_utils.la -lsqlite3 $",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25994578_e5994f51",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CheckTable(_p_conn_, _code_, _msg_str_, _result_) \\\n+do { \\\n+\tif ((_code_) !\u003d SQLITE_OK) { \\\n+\t\tLogCrit(COMPONENT_FSAL, \\\n+\t\t\t\"SQLite command failed in %s line %i\", \\\n+\t\t\t__func__, __LINE__);\t\t\\\n+\t\tLogCrit(COMPONENT_FSAL, \"%s (%d)\", \\\n+\t\t\t(_msg_str_ ? _msg_str_ : sqlite3_errmsg(_p_conn_)), \\\n+\t\t\t_code_);\t\t\t\t\t\\\n+\t\tif (_msg_str_) {\t\t\t\t\t\\\n+\t\t\tsqlite3_free(_msg_str_);\t\t\t\\\n+\t\t\t_msg_str_ \u003d NULL;\t\t\t\t\\\n+\t\t}\t\t\t\t\t\t\t\\\n+\t\tif (_result_) {\t\t\t\t\t\t\\\n+\t\t\tsqlite3_free_table(_result_);\t\t\t\\\n+\t\t\t_result_ \u003d NULL;\t\t\t\t\\\n+\t\t}\t\t\t\t\t\t\t\\\n+\t\treturn HANDLEMAP_DB_ERROR;\t\t\t\t\\\n+\t}\t\t\t\t\t\t\t\t\\\n+} while (0)",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea8fd280_aec9f25c",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CheckCommand(_p_conn_, _code_, _msg_str_) \\\n+do { \\\n+\tif ((_code_) !\u003d SQLITE_OK) { \\\n+\t\tLogCrit(COMPONENT_FSAL, \\\n+\t\t\t\"SQLite command failed in %s line %i\", \\\n+\t\t\t__func__, __LINE__);\t\t\t\\\n+\t\tLogCrit(COMPONENT_FSAL, \"%s (%d)\", \\\n+\t\t\t(_msg_str_ ? _msg_str_ : sqlite3_errmsg(_p_conn_)), \\\n+\t\t\t_code_);\t\t\t\t\t\\\n+\t\tif (_msg_str_) { \\\n+\t\t\tsqlite3_free(_msg_str_); \\\n+\t\t\t_msg_str_ \u003d NULL; \\\n+\t\t}\t\t\t  \\\n+\t\treturn HANDLEMAP_DB_ERROR;\t\\\n+\t}\t\t\t\t\t\\\n+} while (0)",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "194405f6_78ba2c90",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CheckPrepare(_p_conn_, _code_) \\\n+do { \\\n+\tif ((_code_) !\u003d SQLITE_OK) {\t\\\n+\t\tLogCrit(COMPONENT_FSAL,\t\t\t\t\t\\\n+\t\t\t\"SQLite prepare statement failed in %s line %i\", \\\n+\t\t\t__func__, __LINE__);\t\t\t\t\\\n+\t\tLogCrit(COMPONENT_FSAL, \"%s (%d)\",\t\t\t\\\n+\t\t\tsqlite3_errmsg(_p_conn_), _code_);\t\t\\\n+\t\treturn HANDLEMAP_DB_ERROR;\t\t\t\t\\\n+\t}\t\t\t\t\t\t\t\t\\\n+} while (0)",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3e59d87_7f600d75",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CheckBind(_p_conn_, _code_, _stmt_) \\\n+do { \\\n+\tif ((_code_) !\u003d SQLITE_OK) { \\\n+\t\tLogCrit(COMPONENT_FSAL,\t\t\t\t \\\n+\t\t\t\"SQLite parameter binding failed in %s line %i\", \\\n+\t\t\t__func__, __LINE__);\t\t\t\t\\\n+\t\tLogCrit(COMPONENT_FSAL, \"%s (%d)\",\t\t\t\\\n+\t\t\tsqlite3_errmsg(_p_conn_), _code_);\t\t\\\n+\t\tsqlite3_clear_bindings(_stmt_);\t\t\t\t\\\n+\t\treturn HANDLEMAP_DB_ERROR;\t\t\t\t\\\n+\t}\t\t\t\t\t\t\t\t\\\n+} while (0)",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a69538c_908a8c26",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-01T02:38:23Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CheckStep(_p_conn_, _code_, _stmt_) \\\n+do { \\\n+\tif ((_code_) !\u003d SQLITE_OK  \u0026\u0026 (_code_) !\u003d \\\n+\t    SQLITE_ROW \u0026\u0026 (_code_) !\u003d SQLITE_DONE) {\t\t\t\\\n+\t\tLogCrit(COMPONENT_FSAL,\t\t\t\t\t\\\n+\t\t\t\"SQLite command failed in %s line %i\",\t\t\\\n+\t\t\t__func__, __LINE__);\t\t\t\\\n+\t\tLogCrit(COMPONENT_FSAL, \"%s (%d)\",\t\t\t\\\n+\t\t\tsqlite3_errmsg(_p_conn_), _code_);\t\t\\\n+\t\tsqlite3_reset(_stmt_);\t\t\t\t\t\\\n+\t\treturn HANDLEMAP_DB_ERROR;\t\t\t\t\\\n+\t}\t\t\t\t\t\t\t\t\\\n+} while (0)",
+      "revId": "4cb13feaaf5ff6ced637e8acaeec4c49d0df604f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
