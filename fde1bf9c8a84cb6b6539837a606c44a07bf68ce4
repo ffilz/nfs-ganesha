@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcadea87_648d9ad4",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-02T16:21:30Z",
+      "side": 1,
+      "message": "I wonder if you should put the assert here? It would be nice if we could descope dpq_status here...",
+      "revId": "fde1bf9c8a84cb6b6539837a606c44a07bf68ce4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a62e8fc6_cc57aa14",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-02T16:21:30Z",
+      "side": 1,
+      "message": "I think some comments might be helpful to indicate that any dpq_status other than DUPREQ_SUCCESS results in a goto freeargs.\n\nOptionally just get rid of the assert completely... If we don\u0027t call attention to the status here then people will see it\u0027s only used in a tight scope and not worry about it...",
+      "revId": "fde1bf9c8a84cb6b6539837a606c44a07bf68ce4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
