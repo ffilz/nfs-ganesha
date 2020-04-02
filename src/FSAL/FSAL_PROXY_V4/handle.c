@@ -1882,6 +1882,7 @@ static fsal_status_t proxyv4_do_readdir(struct proxyv4_obj_handle *ph,
 	sessionid4 sid;
 	nfs_argop4 argoparray[FSAL_READDIR_NB_OP_ALLOC];
 	nfs_resop4 resoparray[FSAL_READDIR_NB_OP_ALLOC];
+	READDIR4res *result;
 	READDIR4resok *rdok;
 	fsal_status_t st = { ERR_FSAL_NO_ERROR, 0 };
 
@@ -1890,8 +1891,13 @@ static fsal_status_t proxyv4_do_readdir(struct proxyv4_obj_handle *ph,
 	COMPOUNDV4_ARG_ADD_OP_SEQUENCE(opcnt, argoparray, sid, NB_RPC_SLOT);
 	/* PUTFH */
 	COMPOUNDV4_ARG_ADD_OP_PUTFH(opcnt, argoparray, ph->fh4);
-	rdok = &resoparray[opcnt].nfs_resop4_u.opreaddir.READDIR4res_u.resok4;
-	rdok->reply.entries = NULL;
+
+	/* Before pushing the READDIR op, grab the result pointer */
+	result = &resoparray[opcnt].nfs_resop4_u.opreaddir;
+	/* Make sure our result object is clean */
+	memset(result, 0, sizeof(*result));
+	rdok = &result->READDIR4res_u.resok4;
+
 	/* READDIR */
 	COMPOUNDV4_ARG_ADD_OP_READDIR(opcnt, argoparray, *cookie,
 				      proxyv4_bitmap_getattr);
@@ -1952,6 +1958,7 @@ static fsal_status_t proxyv4_do_readdir(struct proxyv4_obj_handle *ph,
 			*again = false;
 		}
 	}
+
 	xdr_free((xdrproc_t) xdr_readdirres, resoparray);
 	return st;
 }
