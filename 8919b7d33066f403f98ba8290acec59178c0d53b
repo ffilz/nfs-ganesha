@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb0506b9_3cdeb61d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "Convert to init_root_op_context() for the entire file?",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cede18d_a3f23355",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "Does this need to put the previous paths?",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "beb3e942_3e118cd6",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "Can we change this one to use init_root_op_context() while we\u0027re at it?",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b93d8d3d_74bdbb72",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "This one too",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ac4ded2_188f522f",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "This is the same pattern as before.  ctx_get_exp_paths() drops the refs, so you need to call it again, rather than put + save",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6fc4b61_75b8b48c",
+        "filename": "src/SAL/state_layout.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ecb137f_25fb9172",
+        "filename": "src/include/nfs_proto_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "I don\u0027t think this is correct.  You dropped refs on op_ctx-\u003ectx_fullpath when you called ctx_get_exp_paths() above, so those refs are gone, and we need to get new ones.  I think you need to call ctx_get_exp_paths() here, instead.",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0b99f24_3a69739e",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "Won\u0027t this be a use-after-free on path?  I think this needs to go at the end.",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3790cfa6_b1728332",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2508,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-02T14:15:26Z",
+      "side": 1,
+      "message": "Remove instead of ifdefing out?",
+      "revId": "8919b7d33066f403f98ba8290acec59178c0d53b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
