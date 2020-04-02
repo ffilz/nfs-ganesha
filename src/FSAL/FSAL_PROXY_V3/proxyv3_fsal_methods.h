@@ -33,42 +33,53 @@ struct proxyv3_fsal_module {
 	struct fsal_obj_ops handle_ops;
 };
 
-// Start with just needing the Srv_Addr parameter to an NFSv3 server.
+/* Our global PROXY_V3 struct */
+extern struct proxyv3_fsal_module PROXY_V3;
+
+/* Start with just needing the Srv_Addr parameter to an NFSv3 server. */
 struct proxyv3_client_params {
-	// This is the actual server address.
+	/* This is the actual server address. */
 	sockaddr_t srv_addr;
 
-	// These is *derived* from srv_addr and points to it.
+	/* These is *derived* from srv_addr and points to it. */
 	const struct sockaddr *sockaddr;
 	socklen_t socklen;
 	char sockname[SOCK_NAME_MAX];
 
-	// Get the ports from portmapper and shove them here.
+	/* Get the ports from portmapper and shove them here. */
 	uint mountd_port;
 	uint nfsd_port;
 	uint nlm_port;
 	uint readdir_preferred;
 };
 
+/*
+ * Our private handle for fsal_obj_handle just keeps the fh3/fattr3 that we've
+ * found, plus a parent pointer if we've got it. If the parent pointer is NULL,
+ * that does *not* mean there isn't a parent (just that we don't know who the
+ * parent is).
+ */
+
+struct proxyv3_obj_handle {
+	struct fsal_obj_handle obj;
+	nfs_fh3 fh3;
+	fattr3 attrs;
+	/* Optional pointer to the parent of this object, NULL for the root. */
+	const struct proxyv3_obj_handle *parent;
+};
+
+/* Each export needs some params and a root handle. */
 struct proxyv3_export {
 	struct fsal_export export;
 	struct proxyv3_client_params params;
+
+	struct proxyv3_obj_handle *root_handle_obj;
 
 	char root_handle[NFS3_FHSIZE];
 	size_t root_handle_len;
 };
 
-// The little struct we want Ganesha to hold for us.
-struct proxyv3_obj_handle {
-	struct fsal_obj_handle obj;
-	nfs_fh3 fh3;
-	fattr3 attrs;
-	// Optional pointer to the parent of this object, NULL for the root.
-	const struct proxyv3_obj_handle *parent;
-};
 
-
-extern struct proxyv3_fsal_module PROXY_V3;
 
 bool proxyv3_rpc_init(void);
 bool proxyv3_nlm_init(void);
@@ -108,8 +119,11 @@ bool proxyv3_nlm_call(const struct sockaddr *host,
 		      const xdrproc_t encodeFunc, const void *args,
 		      const xdrproc_t decodeFunc, void *output);
 
-// All the NLM operations funnel through lock_op2, and it's complicated enough
-// to need its own file.
+/*
+ * All the NLM operations funnel through lock_op2, and it's complicated enough
+ * to need its own file.
+ */
+
 fsal_status_t proxyv3_lock_op2(struct fsal_obj_handle *obj_hdl,
 			       struct state_t *state,
 			       void *owner,
@@ -119,27 +133,17 @@ fsal_status_t proxyv3_lock_op2(struct fsal_obj_handle *obj_hdl,
 
 
 
-// Helpers for translating from nfsv3 structs to Ganesha data. These could go in
-// Protocols/NFS/nfs_proto_tools.c if someone wanted them.
+/*
+ * Helpers for translating from nfsv3 structs to Ganesha data. These could go in
+ * Protocols/NFS/nfs_proto_tools.c if someone wanted them. The doxygen comments
+ * are in the implementation files.
+ */
 
-// Return the closest match from the NFSv3 status to Ganesha's fsal_status_t
-// (mostly overlapping).
 fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status);
-
-// Return the closest match from the NLMv4 status to Ganesha's fsal_status_t.
 fsal_status_t nlm4stat_to_fsalstat(nlm4_stats status);
-
-// Check that the mask is just asking for NFSv3 and maybe the error bit.
 bool attrmask_is_nfs3(attrmask_t mask);
-
-// Convert from an NFSv3 "fattr3" (Ganesha typedef's this to attrlist, while
-// keeping fattr3_wire for the "real" one) to a Ganesha attrlist. This function
-// also checks that the fsal_attrs_out destination is only asking for NFSv3
-// attributes at most.
 bool fattr3_to_fsalattr(const fattr3 *attrs,
 			struct attrlist *fsal_attrs_out);
-
-// Convert from the FSAL attrlist to an NFSv3 setattr3 struct.
 bool fsalattr_to_sattr3(const struct attrlist *fsal_attrs, sattr3 *attrs_out);
 
 #endif

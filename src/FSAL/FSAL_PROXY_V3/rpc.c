@@ -32,23 +32,22 @@
 
 static unsigned int rand_seed = 123451;
 static char rpcMachineName[MAXHOSTNAMELEN + 1] = { 0 };
-
 static pthread_mutex_t rpcLock;
-
 const unsigned int kMaxSockets = 32;
 
-// Resizable buffer (capacity is allocated, len is used).
+/* Resizable buffer (capacity is allocated, len is used). */
 struct rpc_buf {
 	char *buf;
 	size_t capacity;
 	size_t len;
 };
 
+/* An entry in our pool of sockets/buffers */
 struct fd_entry {
 	bool in_use;
 	bool is_open;
 
-	// Need to match the socket/socklen/port.
+	/* Reuse needs to match the socket/socklen/port. */
 	sockaddr_t socket;
 	socklen_t socklen;
 	uint16_t port;
@@ -58,12 +57,19 @@ struct fd_entry {
 	struct rpc_buf rpc_buf;
 };
 
-// TODO(boulos): Replace with free list / hash table / whatever.
+/* @todo Replace with free list / hash table / whatever. */
 struct fd_entry *fd_entries;
+
+/**
+ * @brief Setup our RPC "stack" for PROXY_V3.
+ *
+ * @return - True, if no error.
+ *         - False, with emitted warnings, otherwise.
+ */
 
 bool proxyv3_rpc_init(void)
 {
-	// Cache our hostname for client auth later.
+	/* Cache our hostname for client auth later. */
 	if (gethostname(rpcMachineName, sizeof(rpcMachineName)) != 0) {
 		const char *kClientName = "127.0.0.1";
 
@@ -82,12 +88,22 @@ bool proxyv3_rpc_init(void)
 		return false;
 	}
 
-	// Initialize the fd_entries with not in use sockets.
+	/* Initialize the fd_entries with not in_use sockets. */
 	fd_entries = gsh_calloc(kMaxSockets, sizeof(struct fd_entry));
 	return true;
 }
 
-// Do the actual raw socket opening of an fd of host:port.
+
+/**
+ * @brief Given a host:port pair, try to open a socket.
+ *
+ * @param host Backend NFS host (as a sockaddr)
+ * @param socklen Length of the host sockaddr (for IPv6 vs IPv4).
+ * @param port Port to connect to.
+ *
+ * @return - A valid fd on success, -1 otherwise.
+ */
+
 static int
 proxyv3_openfd(const struct sockaddr *host,
 	       const socklen_t socklen,
@@ -105,8 +121,12 @@ proxyv3_openfd(const struct sockaddr *host,
 	}
 
 	char addrForErrors[INET6_ADDRSTRLEN] = { 0 };
-	// Strangely, inet_ntop takes the length of the *buffer* not the length
-	// of the socket (perhaps it just uses the sa_family for socklen)
+
+	/*
+	 * Strangely, inet_ntop takes the length of the *buffer* not the length
+	 * of the socket (perhaps it just uses the sa_family for socklen)
+	 */
+
 	if (!inet_ntop(host->sa_family, host,
 		       addrForErrors, INET6_ADDRSTRLEN)) {
 		LogCrit(COMPONENT_FSAL,
@@ -130,13 +150,13 @@ proxyv3_openfd(const struct sockaddr *host,
 	struct sockaddr hostAndPort;
 
 	memset(&hostAndPort, 0, sizeof(hostAndPort));
-	// Copy the input, and then override the port.
+	/* Copy the input, and then override the port. */
 	memcpy(&hostAndPort, host, socklen);
 
 	struct sockaddr_in  *hostv4 = (struct sockaddr_in *) &hostAndPort;
 	struct sockaddr_in6 *hostv6 = (struct sockaddr_in6 *) &hostAndPort;
 
-	// Check that the caller is letting us slip the port in.
+	/* Check that the caller is letting us slip the port in. */
 	if ((ipv6 && hostv6->sin6_port != 0) ||
 	    (!ipv6 && hostv4->sin_port != 0)) {
 		LogCrit(COMPONENT_FSAL,
@@ -157,9 +177,11 @@ proxyv3_openfd(const struct sockaddr *host,
 		return -1;
 	}
 
-	// NOTE(boulos): NFS daemons like nfsd in Linux require that the
-	// clients come from a privileged port, so that they "must" be run
-	// as root on the client.
+	/*
+	 * NOTE(boulos): NFS daemons like nfsd in Linux require that the
+	 * clients come from a privileged port, so that they "must" be run
+	 * as root on the client.
+	 */
 	if (bindresvport_sa(fd, NULL) < 0) {
 		LogCrit(COMPONENT_FSAL,
 			"Failed to reserve a privileged port. %d %s",
@@ -189,8 +211,13 @@ proxyv3_openfd(const struct sockaddr *host,
 	return fd;
 }
 
+/**
+ * @brief Create an rpc_buf with a given capacity.
+ *
+ * @param rpc_buf Input rpc_buf pointer.
+ * @param capacity The desired capacity in bytes.
+ */
 
-// Fill in an rpc_buf by allocating the underlying memory.
 static void
 proxyv3_rpcBuf_create(struct rpc_buf *rpc_buf, size_t capacity)
 {
@@ -199,15 +226,25 @@ proxyv3_rpcBuf_create(struct rpc_buf *rpc_buf, size_t capacity)
 	rpc_buf->len = 0;
 }
 
-// Try to
+/**
+ * @brief Resize an rpc_buf to be len bytes long (realloc'ing if needed).
+ *
+ * @param rpc_buf Input rpc_buf pointer.
+ * @param len The desired length in bytes.
+ *
+ * @return - The underlying buffer pointer (potentially realloc'ed).
+ */
 static char*
 proxyv3_rpcBuf_resize(struct rpc_buf *rpc_buf, size_t len)
 {
 	if (rpc_buf->capacity < len) {
-		// Need to grow the buffer. NOTE(boulos): Unlike std::vector
-		// this isn't going to be used in a loop growing byte by byte or
-		// something, so while we could round up the requested length,
-		// we're unlikely to get N^2 style re-allocs.
+		/*
+		 * Need to grow the buffer. NOTE(boulos): Unlike std::vector
+		 * this isn't going to be used in a loop growing byte by byte or
+		 * something, so while we could round up the requested length,
+		 * we're unlikely to get N^2 style re-allocs.
+		 */
+
 		rpc_buf->buf = gsh_realloc(rpc_buf->buf, len);
 		rpc_buf->capacity = len;
 	}
@@ -216,16 +253,24 @@ proxyv3_rpcBuf_resize(struct rpc_buf *rpc_buf, size_t len)
 	return rpc_buf->buf;
 }
 
-// Given a host:port pair, find or allocate an fd_entry from our fixed set. If
-// none are available (e.g., we've opened too many sockets), return NULL and set
-// retry to true.
+/**
+ * @brief Given a host:port pair, try to get/open an fd_entry from our pool.
+ *
+ * @param host Backend NFS host (as a sockaddr)
+ * @param socklen Length of the host sockaddr (for IPv6 vs IPv4).
+ * @param port Port to connect to.
+ * @param retry Whether or not the caller should retry later.
+ *
+ * @return - A valid fd_entry on success, NULL otherwise.
+ */
+
 static struct fd_entry*
 proxyv3_getfdentry(const struct sockaddr *host,
 		   const socklen_t socklen,
 		   uint16_t port,
 		   bool *retry)
 {
-	// In case we fail catastrophically, don't suggest a retry.
+	/* In case we fail catastrophically, don't suggest a retry. */
 	*retry = false;
 
 	if (pthread_mutex_lock(&rpcLock) != 0) {
@@ -239,7 +284,7 @@ proxyv3_getfdentry(const struct sockaddr *host,
 		 "Looking for an open socket for port %u",
 		 port);
 
-	// Find the first free, preferably open socket
+	/* Find the first free, preferably open socket */
 	struct fd_entry *first_free = NULL;
 	struct fd_entry *first_open = NULL;
 	struct fd_entry *result = NULL;
@@ -252,21 +297,23 @@ proxyv3_getfdentry(const struct sockaddr *host,
 			continue;
 		}
 
-		// Remember that we saw a free slot.
+		/* Remember that we saw a free slot. */
 		if (first_free == NULL) {
 			first_free = entry;
 		}
 
-		// NOTE(boulos): first_free is now definitely not NULL.
+		/* NOTE(boulos): first_free is now definitely not NULL. */
 		if (!entry->is_open) {
-			// This entry is a free and not even opened slot, prefer
-			// that over our existing first_free if that one was
-			// open, so we allow socket reuse by others.
+			/*
+			 * This entry is a free and not even opened slot, prefer
+			 * that over our existing first_free if that one was
+			 * open, so we allow socket reuse by others.
+			 */
 			if (first_free->is_open == true) {
 				first_free = entry;
 			}
 		} else {
-			// See if this open socket matches what we need.
+			/* See if this open socket matches what we need. */
 			if (entry->socklen == socklen &&
 			    entry->port == port &&
 			    memcmp(&entry->socket, host, socklen) == 0) {
@@ -279,7 +326,7 @@ proxyv3_getfdentry(const struct sockaddr *host,
 		}
 	}
 
-	// The list is full! The caller needs to block.
+	/* The list is full! The caller needs to block. */
 	if (first_free == NULL) {
 		LogDebug(COMPONENT_FSAL,
 			 "No available sockets. Tell the caller to wait");
@@ -295,31 +342,35 @@ proxyv3_getfdentry(const struct sockaddr *host,
 		return NULL;
 	}
 
-	// Grab our result entry, and mark it as in use.
+	/* Grab our result entry, and mark it as in use. */
 	result = (first_open != NULL) ? first_open : first_free;
 	result->in_use = true;
 
-	// Release the lock now that we got our entry.
+	/* Release the lock now that we got our entry. */
 	if (pthread_mutex_unlock(&rpcLock) != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"pthread_mutex_unlock failed %d %s",
 			errno, strerror(errno));
-		// Return the entry to the list, since we aren't going to end up
-		// using it.
+		/*
+		 * Return the entry to the list, since we aren't going to end up
+		 * using it.
+		 */
 		result->in_use = false;
 		return NULL;
 	}
 
-	// If we already got one, return it.
+	/* If we already got one, return it. */
 	if (first_open != NULL) {
-		// TODO(boulos): If it's been a long time since we opened the
-		// socket, the other end probably hung up. We should probably
-		// test here, so that callers receive a definitely open socket.
+		/*
+		 * @todo If it's been a long time since we opened the socket,
+		 * the other end probably hung up. We should probably test here,
+		 * so that callers receive a definitely open socket.
+		 */
 		return result;
 	}
 
 	if (result->is_open) {
-		// We should first close the existing socket.
+		/* We should first close the existing socket. */
 		LogDebug(COMPONENT_FSAL,
 			 "Closing fd %d before we re-use the slot",
 			 result->fd);
@@ -330,35 +381,43 @@ proxyv3_getfdentry(const struct sockaddr *host,
 				result->fd, errno, strerror(errno));
 		}
 
-		// Mark the entry as no longer open.
+		/* Mark the entry as no longer open. */
 		result->is_open = false;
 	}
 
-	// Allocate a buffer, if we've never done so.
+	/* Allocate a buffer, if we've never done so. */
 	if (result->rpc_buf.buf == NULL) {
-		// First time create. NOTE(boulos): We wait to allocate this
-		// until its needed, because we want maxwrite to be filled in to
-		// match the NFS FSINFO result (which it's not during rpc init).
+		/*
+		 * First time create. NOTE(boulos): We wait to allocate this
+		 * until its needed, because we want maxwrite to be filled in to
+		 * match the NFS FSINFO result (which it's not during rpc init).
+		 */
+
 		const uint kHeaderPadding = 512;
 		const uint kBufSize =
 			PROXY_V3.module.fs_info.maxwrite + kHeaderPadding;
+
 		proxyv3_rpcBuf_create(&result->rpc_buf, kBufSize);
 	}
 
-	// No matter what, mark the buffer as having 0 bytes in use so far
-	// (capacity will remain unchanged).
+	/*
+	 * No matter what, mark the buffer as having 0 bytes in use so far
+	 * (capacity will remain unchanged).
+	 */
 	proxyv3_rpcBuf_resize(&result->rpc_buf, 0);
 
 	int fd = proxyv3_openfd(host, socklen, port);
 
 	if (fd < 0) {
-		// Failed for some reason. Mark this slot as empty, but leave
-		// the memory buffer alone. NOTE(boulos): retry is still false.
+		/*
+		 * Failed for some reason. Mark this slot as empty, but leave
+		 * the memory buffer alone. NOTE(boulos): retry is still false.
+		 */
 		result->in_use = false;
 		return NULL;
 	}
 
-	// Fill in the socket info.
+	/* Fill in the socket info. */
 	result->fd = fd;
 	result->is_open = true;
 	memcpy(&result->socket, host, socklen);
@@ -368,20 +427,30 @@ proxyv3_getfdentry(const struct sockaddr *host,
 	return result;
 }
 
+/**
+ * @brief Given a host:port pair, try to open a socket (w/ exponential backoff).
+ *
+ * @param host Backend NFS host (as a sockaddr)
+ * @param socklen Length of the host sockaddr (for IPv6 vs IPv4).
+ * @param port Port to connect to.
+ *
+ * @return - A valid fd_entry pointer on success
+ *         - NULL, otherwise.
+ */
 
 static struct fd_entry*
 proxyv3_getfd_blocking(const struct sockaddr *host,
 		       const socklen_t socklen,
 		       uint16_t port)
 {
-	// Keep trying to get an fd with exponential backoff up to
-	// kMaxIterations.
 	const size_t kMaxIterations = 100;
-	// So, within a datacenter, it's likely that we'll need to wait about 1
-	// millisecond for someone to finish. Let's start the backoff sooner
-	// though at 256 microseconds, because while an end-to-end op is 1ms,
-	// people should be finishing all the time. For folks across a WAN,
-	// we'll back off quickly enough anyway.
+	/*
+	 * So, within a datacenter, it's likely that we'll need to wait about 1
+	 * millisecond for someone to finish. Let's start the backoff sooner
+	 * though at 256 microseconds, because while an end-to-end op is 1ms,
+	 * people should be finishing all the time. For folks across a WAN,
+	 *  we'll back off quickly enough anyway.
+	 */
 	size_t numMicros = 256;
 	size_t i;
 
@@ -390,17 +459,17 @@ proxyv3_getfd_blocking(const struct sockaddr *host,
 		struct fd_entry *entry =
 			proxyv3_getfdentry(host, socklen, port, &retry);
 
-		// If we got back a valid entry, return it.
+		/* If we got back a valid entry, return it. */
 		if (entry != NULL) {
 			return entry;
 		}
 
-		// If we not told to retry, exit.
+		/* If we not told to retry, exit. */
 		if (!retry) {
 			return NULL;
 		}
 
-		// We were told to retry, let's wait.
+		/* We were told to retry, let's wait. */
 		struct timespec how_long = {
 			/* 1M micros per second */
 			.tv_sec  = numMicros / 1000000,
@@ -413,8 +482,11 @@ proxyv3_getfd_blocking(const struct sockaddr *host,
 			 numMicros);
 
 		if (nanosleep(&how_long, NULL) != 0) {
-			// Let interrupts wake us up and not care. Anything else
-			// should be fatal.
+			/*
+			 * Let interrupts wake us up and not care. Anything else
+			 * should be fatal.
+			 */
+
 			if (errno != EINTR) {
 				LogCrit(COMPONENT_FSAL,
 					"nanosleep failed."
@@ -424,7 +496,7 @@ proxyv3_getfd_blocking(const struct sockaddr *host,
 			}
 		}
 
-		// Next time around, double it. TODO(boulos): Jitter?
+		/* Next time around, double it. */
 		numMicros *= 2;
 	}
 
@@ -433,8 +505,16 @@ proxyv3_getfd_blocking(const struct sockaddr *host,
 	return NULL;
 }
 
+/**
+ * @brief Release an fd_entry to our pool (optionally closing the socket).
+ *
+ * @param entry An fd_entry pointer for an entry in our pool.
+ * @param force_close Whether to always close the socket.
+ *
+ * @return - True, if we successfully cleaned up the entry.
+ *         - False, otherwise.
+ */
 
-// Release an fd back to our pool.
 static bool proxyv3_release_fdentry(struct fd_entry *entry, bool force_close)
 {
 	LogDebug(COMPONENT_FSAL,
@@ -453,18 +533,20 @@ static bool proxyv3_release_fdentry(struct fd_entry *entry, bool force_close)
 			"Tried to release entry (fd %d) that wasn't in_use!",
 			entry->fd);
 	} else {
-		// Mark the entry as no longer in use. (But leave it open,
-		// unless asked not to).
+		/*
+		 * Mark the entry as no longer in use. (But leave it open,
+		 * unless asked not to).
+		 */
 		entry->in_use = false;
 
 		if (force_close) {
-			// Close the socket first.
+			/* Close the socket first. */
 			if (close(entry->fd) < 0) {
 				LogCrit(COMPONENT_FSAL,
 					"close(%d) failed. Errno %d (%s)",
 					entry->fd, errno, strerror(errno));
 			}
-			// Clear the bytes that were *touched* not allocated.
+			/* Clear the bytes that were *touched* not allocated. */
 			memset(entry->rpc_buf.buf, 0, entry->rpc_buf.len);
 			entry->is_open = false;
 		}
@@ -480,9 +562,32 @@ static bool proxyv3_release_fdentry(struct fd_entry *entry, bool force_close)
 	return true;
 }
 
-// NOTE(boulos): This is basically rpc_call redone by hand, because
-// ganesha's "nfsd" hijacks the RPC setup to the point where we can't
-// issue our own NFS-related rpcs as a simple client.
+/*
+ * NOTE(boulos): proxyv3_call is basically rpc_call redone by hand, because
+ * ganesha's NFSD hijacks the RPC setup to the point where we can't issue our
+ * own NFS-related rpcs as a simple client via clnt_ncreate (internally,
+ * svc_exprt_lookup explodes saying "fd %d max_connections 0 exceeded").
+ */
+
+/**
+ * @brief Send an RPC to host and get a reply, handling XDR encode/decode.
+ *
+ * @param host Backend NFS host (as a sockaddr)
+ * @param socklen Length of the host sockaddr (for IPv6 vs IPv4).
+ * @param port Port to connect to.
+ * @param creds Optional credentials for auth.
+ * @param rpcProgram The RPC Program (e.g., MOUNTPROG).
+ * @param rpcVersion The RPC Version (e.g., NFS_V3).
+ * @param rpcProc The RPC Procedure (e.g., NFSPROC3_LOOKUP).
+ * @param encodeFunc The XDR encoding function (e.g., xdr_LOOKUP3args).
+ * @param args The arg data (passed to encodeFunc).
+ * @param decodeFunc The XDR decoding function (e.g., xdr_LOOKUP3res)
+ * @param output The output buffer (passed to decodeFunc).
+ *
+ * @return - True, if no error.
+ *         - False, with emitted warnings, otherwise.
+ */
+
 bool proxyv3_call(const struct sockaddr *host,
 		  const socklen_t socklen,
 		  uint16_t port,
@@ -499,8 +604,10 @@ bool proxyv3_call(const struct sockaddr *host,
 	struct fd_entry *fd_entry = proxyv3_getfd_blocking(host, socklen, port);
 
 	if (fd_entry == NULL) {
-		// Failed to get an fd even after blocking for a
-		// while. Something probably went wrong.
+		/*
+		 * Failed to get an fd even after blocking. Something probably
+		 * went wrong.
+		 */
 		return false;
 	}
 
@@ -515,16 +622,20 @@ bool proxyv3_call(const struct sockaddr *host,
 				      creds->caller_uid, creds->caller_gid,
 				      creds->caller_glen, creds->caller_garray);
 	} else {
-		// Let ganesha do lots of syscalls to figure out our machiine
-		// name, uid, gid and so on.
+		/*
+		 * Let ganesha do lots of syscalls to figure out our machiine
+		 * name, uid, gid and so on.
+		 */
 		LogDebug(COMPONENT_FSAL,
 			 "rpc, no creds given => authunix_ncreate_default()");
 		au = authunix_ncreate_default();
 	}
 
-	// We need some transaction ID, so how about a random one. Note that
-	// while this isn't threadsafe, we're not particularly concerned about
-	// it since we just want random bytes.
+	/*
+	 * We need some transaction ID, so how about a random one. Note that
+	 * while this isn't threadsafe, we're not particularly concerned about
+	 * it since we just want random bytes.
+	 */
 	u_int xid = rand_r(&rand_seed);
 
 	rmsg.rm_xid = xid;
@@ -538,8 +649,11 @@ bool proxyv3_call(const struct sockaddr *host,
 
 	memset(&x, 0, sizeof(x));
 
-	// Setup x with our buffer for encoding. Keep space at the front
-	// for the u_int recmark.
+	/*
+	 * Setup x with our buffer for encoding. Keep space at the front for the
+	 * u_int recmark.
+	 */
+
 	xdrmem_create(&x,
 		      msgBuf + sizeof(u_int),
 		      bufSize - sizeof(u_int),
@@ -561,16 +675,18 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// Extract out the position to encode the record marker.
+	/* Extract out the position to encode the record marker. */
 	u_int pos = xdr_getpos(&x);
 	u_int recmark = ntohl(pos | (1U << 31));
-	// Write the recmark at the start of the buffer
+	/* Write the recmark at the start of the buffer */
 	memcpy(msgBuf, &recmark, sizeof(recmark));
-	// Send the message plus the recmark.
+	/* Send the message plus the recmark. */
 	size_t bytes_to_send = pos + sizeof(recmark);
 
-	// xdrmem_create should have respected our length parameter. Make sure,
-	// before we note via resize how many bytes we filled in.
+	/*
+	 * xdrmem_create should have respected our length parameter. Make sure,
+	 * before we note via resize how many bytes we filled in.
+	 */
 	if (fd_entry->rpc_buf.capacity < bytes_to_send) {
 		LogCrit(COMPONENT_FSAL,
 			"xdrmem_create produced %zu bytes to send "
@@ -581,7 +697,7 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// Do the actual "resize".
+	/* Do the actual "resize". */
 	(void) proxyv3_rpcBuf_resize(&fd_entry->rpc_buf, bytes_to_send);
 
 	LogDebug(COMPONENT_FSAL,
@@ -611,11 +727,10 @@ bool proxyv3_call(const struct sockaddr *host,
 		total_bytes_written += bytes_written;
 	}
 
-	// We can cleanup the auth struct, we'll just be reading from here on
-	// out.
+	/* Cleanup the auth struct. We're just reading from here on out. */
 	AUTH_DESTROY(au);
 
-	// Aww, short write. Exit.
+	/* Aww, short write. Exit. */
 	if (total_bytes_written != bytes_to_send) {
 		LogCrit(COMPONENT_FSAL,
 			"Only wrote %zu bytes out of %zu",
@@ -624,7 +739,7 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// Now flip it around and get the reply.
+	/* Now flip it around and get the reply. */
 	struct {
 		uint recmark;
 		uint xid;
@@ -633,7 +748,7 @@ bool proxyv3_call(const struct sockaddr *host,
 	LogDebug(COMPONENT_FSAL,
 		 "Let's go ask for a response.");
 
-	// First try to read just the response "header".
+	/* First try to read just the response "header". */
 	if (read(fd, &response_header, 8) != 8) {
 		LogCrit(COMPONENT_FSAL,
 			"Didn't get a response header. errno %d, errstring %s",
@@ -642,7 +757,7 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// Flip endian-ness if required
+	/* Flip endian-ness if required */
 	response_header.recmark = ntohl(response_header.recmark);
 	response_header.xid = ntohl(response_header.xid);
 
@@ -660,7 +775,7 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// Clear the top bit of the recmark
+	/* Clear the top bit of the recmark */
 	response_header.recmark &= ~(1U << 31);
 	if (response_header.recmark < 8) {
 		LogCrit(COMPONENT_FSAL,
@@ -670,16 +785,18 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// We've already read the header (record mark) and xid.
+	/* We've already read the header (record mark) and xid. */
 	size_t bytes_to_read = response_header.recmark;
 	size_t total_bytes_read = 4;
 	size_t read_buffer_size = bytes_to_read + sizeof(xid);
 
-	// We're going to need to read `read_buffer_size` bytes. Resize the
-	// buffer if needed to let us slurp the whole response back.
+	/*
+	 * We're going to need to read `read_buffer_size` bytes. Resize the
+	 * buffer if needed to let us slurp the whole response back.
+	 */
 	msgBuf = proxyv3_rpcBuf_resize(&fd_entry->rpc_buf, read_buffer_size);
 
-	// Write the xid into the buffer.
+	/* Write the xid into the buffer. */
 	memcpy(msgBuf, &xid, sizeof(xid));
 
 	LogDebug(COMPONENT_FSAL,
@@ -704,7 +821,7 @@ bool proxyv3_call(const struct sockaddr *host,
 		total_bytes_read += bytes_read;
 	}
 
-	// Aww, short read. Exit.
+	/* Aww, short read. Exit. */
 	if (total_bytes_read != bytes_to_read) {
 		LogCrit(COMPONENT_FSAL,
 			"Only read %zu bytes out of %zu",
@@ -717,7 +834,7 @@ bool proxyv3_call(const struct sockaddr *host,
 	LogDebug(COMPONENT_FSAL,
 		 "Got all the bytes, time to decode");
 
-	// Lets decode the reply.
+	/* Lets decode the reply. */
 	memset(&x, 0, sizeof(x));
 	xdrmem_create(&x, msgBuf, total_bytes_read, XDR_DECODE);
 
@@ -733,7 +850,7 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// Check that it was accepted, if not, say why not.
+	/* Check that it was accepted, if not, say why not. */
 	if (reply.rm_reply.rp_stat != MSG_ACCEPTED) {
 		LogCrit(COMPONENT_FSAL,
 			"Reply received but not accepted. REJ %d",
@@ -743,7 +860,7 @@ bool proxyv3_call(const struct sockaddr *host,
 		return false;
 	}
 
-	// Check that it was accepted with success.
+	/* Check that it was accepted with success. */
 	if (reply.rm_reply.rp_acpt.ar_stat != SUCCESS) {
 		LogCrit(COMPONENT_FSAL,
 			"Reply accepted but unsuccesful. Reason %d",
@@ -761,8 +878,9 @@ bool proxyv3_call(const struct sockaddr *host,
 	return true;
 }
 
-// Helpful wrappers around the generic RPC call so that we don't need
-// to repeatedly pass in the program and version constants.
+/**
+ * @brief Wrapper around proxyv3_call for NFS v3.
+ */
 bool proxyv3_nfs_call(const struct sockaddr *host,
 		      const socklen_t socklen,
 		      const uint nfsdPort,
@@ -779,6 +897,9 @@ bool proxyv3_nfs_call(const struct sockaddr *host,
 			    nfsProc, encodeFunc, args, decodeFunc, output);
 }
 
+/**
+ * @brief Wrapper around proxyv3_call for MOUNT v3.
+ */
 bool proxyv3_mount_call(const struct sockaddr *host,
 			const socklen_t socklen,
 			const uint mountdPort,
@@ -795,6 +916,9 @@ bool proxyv3_mount_call(const struct sockaddr *host,
 			    mountProc, encodeFunc, args, decodeFunc, output);
 }
 
+/**
+ * @brief Wrapper around proxyv3_call for NLM v4.
+ */
 bool proxyv3_nlm_call(const struct sockaddr *host,
 		      const socklen_t socklen,
 		      const uint nlmPort,
@@ -811,8 +935,18 @@ bool proxyv3_nlm_call(const struct sockaddr *host,
 			    nlmProc, encodeFunc, args, decodeFunc, output);
 }
 
-
-// Ask portmapd for where MOUNTD and NFSD are running.
+/**
+ * @brief Ask portmapd for where MOUNTD and NFSD are running.
+ *
+ * @param host Backend NFS host (as a sockaddr)
+ * @param socklen Length of the host sockaddr (for IPv6 vs IPv4).
+ * @param mountd_port Port for MOUNTD.
+ * @param nfsd_port Port for NFS (v3).
+ * @param nlm_port Port for NLM.
+ *
+ * @return - True, if no error.
+ *         - False, with emitted warnings, otherwise.
+ */
 bool proxyv3_find_ports(const struct sockaddr *host,
 			const socklen_t socklen,
 			u_int *mountd_port,
@@ -847,8 +981,7 @@ bool proxyv3_find_ports(const struct sockaddr *host,
 	} queries[] = {
 		{ &mountd_query, mountd_port, "mountd" },
 		{ &nfsd_query, nfsd_port, "nfsd" },
-		// If we put NLM last, we can technically let it just warn in
-		// debug mode.
+		/* If we put NLM last, we can let it just warn in debug mode. */
 		{ &nlm_query, nlm_port, "nlm" }
 	};
 

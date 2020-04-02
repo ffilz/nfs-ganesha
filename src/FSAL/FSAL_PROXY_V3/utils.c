@@ -26,12 +26,21 @@
 #include "proxyv3_fsal_methods.h"
 
 
-// Map from nfsstat3 error codes to the FSAL error codes where appropriate.
+/**
+ * @brief Map from nfsstat3 error codes to the FSAL error codes.
+ * @param status Input status as an nfsstat3.
+ *
+ * @return - A corresponding fsal_errors_t, if one makes sense.
+ *         - ERR_FSAL_INVAL, otherwise.
+ */
+
 static fsal_errors_t nfsstat3_to_fsal(nfsstat3 status)
 {
 	switch (status) {
-		// Most of these have identical enum values, but do this
-		// explicitly anyway.
+		/*
+		 * Most of these have identical enum values, but do this
+		 * explicitly anyway.
+		 */
 	case NFS3_OK:        return ERR_FSAL_NO_ERROR;
 	case NFS3ERR_PERM:      return ERR_FSAL_PERM;
 	case NFS3ERR_NOENT:     return ERR_FSAL_NOENT;
@@ -40,8 +49,10 @@ static fsal_errors_t nfsstat3_to_fsal(nfsstat3 status)
 	case NFS3ERR_ACCES:  return ERR_FSAL_ACCESS;
 	case NFS3ERR_EXIST:  return ERR_FSAL_EXIST;
 	case NFS3ERR_XDEV:   return ERR_FSAL_XDEV;
-		// FSAL doesn't have NODEV, but NXIO is "No such device or
-		// address"
+		/*
+		 * FSAL doesn't have NODEV, but NXIO is "No such device or
+		 * address"
+		 */
 	case NFS3ERR_NODEV:  return ERR_FSAL_NXIO;
 	case NFS3ERR_NOTDIR: return ERR_FSAL_NOTDIR;
 	case NFS3ERR_ISDIR:  return ERR_FSAL_ISDIR;
@@ -54,32 +65,46 @@ static fsal_errors_t nfsstat3_to_fsal(nfsstat3 status)
 	case NFS3ERR_NOTEMPTY:    return ERR_FSAL_NOTEMPTY;
 	case NFS3ERR_DQUOT:       return ERR_FSAL_DQUOT;
 	case NFS3ERR_STALE:       return ERR_FSAL_STALE;
-		// FSAL doesn't have REMOTE (too many remotes), so just return
-		// NAMETOOLONG.
+		/*
+		 * FSAL doesn't have REMOTE (too many remotes), so just return
+		 * NAMETOOLONG.
+		 */
 	case NFS3ERR_REMOTE:      return ERR_FSAL_NAMETOOLONG;
 	case NFS3ERR_BADHANDLE:   return ERR_FSAL_BADHANDLE;
-		// FSAL doesn't have NOT_SYNC, so... INVAL?
+		/* FSAL doesn't have NOT_SYNC, so... INVAL? */
 	case NFS3ERR_NOT_SYNC:    return ERR_FSAL_INVAL;
 	case NFS3ERR_BAD_COOKIE:  return ERR_FSAL_BADCOOKIE;
 	case NFS3ERR_NOTSUPP:     return ERR_FSAL_NOTSUPP;
 	case NFS3ERR_TOOSMALL:    return ERR_FSAL_TOOSMALL;
 	case NFS3ERR_SERVERFAULT: return ERR_FSAL_SERVERFAULT;
 	case NFS3ERR_BADTYPE:     return ERR_FSAL_BADTYPE;
-		// FSAL doesn't have a single JUKEBOX error, so choose
-		// ERR_FSAL_LOCKED
+		/*
+		 * FSAL doesn't have a single JUKEBOX error, so choose
+		 * ERR_FSAL_LOCKED.
+		 */
 	case NFS3ERR_JUKEBOX:     return ERR_FSAL_LOCKED;
 	}
 
-	// Shouldn't have gotten here with valid input.
+	/* Shouldn't have gotten here with valid input. */
 	return ERR_FSAL_INVAL;
 }
+
+/**
+ * @brief Map from nlm4_stats error codes to the FSAL error codes.
+ * @param status Input status as an nlm4_stats.
+ *
+ * @return - A corresponding fsal_errors_t, if one makes sense.
+ *         - ERR_FSAL_INVAL, otherwise.
+ */
 
 static fsal_errors_t nlm4stat_to_fsal(nlm4_stats status)
 {
 	switch (status) {
 	case NLM4_GRANTED:             return ERR_FSAL_NO_ERROR;
-		// We want NLM4_DENIED to convert to STATE_LOCK_CONFLICT in
-		// state_error_convert.
+		/*
+		 * We want NLM4_DENIED to convert to STATE_LOCK_CONFLICT in
+		 * state_error_convert.
+		 */
 	case NLM4_DENIED:              return ERR_FSAL_DELAY;
 		/* No "space" to allocate. */
 	case NLM4_DENIED_NOLOCKS:      return ERR_FSAL_NOSPC;
@@ -93,9 +118,16 @@ static fsal_errors_t nlm4stat_to_fsal(nlm4_stats status)
 	case NLM4_FAILED:              return ERR_FSAL_PERM;
 	}
 
-	// Shouldn't get here.
+	/* Shouldn't get here. */
 	return ERR_FSAL_INVAL;
 }
+
+/**
+ * @brief Map from nfsstat3 error codes to fsal_status_t.
+ * @param status Input nfsstat3 status.
+ *
+ * @return - Corresponding fsal_status_t.
+ */
 
 fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status)
 {
@@ -104,6 +136,13 @@ fsal_status_t nfsstat3_to_fsalstat(nfsstat3 status)
 	return fsalstat(rc, (rc == ERR_FSAL_INVAL) ? (int) status : 0);
 }
 
+/**
+ * @brief Map from nlm4_stats error codes to fsal_status_t.
+ * @param status Input nlm4_stats status.
+ *
+ * @return - Corresponding fsal_status_t.
+ */
+
 fsal_status_t nlm4stat_to_fsalstat(nlm4_stats status)
 {
 	fsal_errors_t rc = nlm4stat_to_fsal(status);
@@ -111,11 +150,20 @@ fsal_status_t nlm4stat_to_fsalstat(nlm4_stats status)
 	return fsalstat(rc, (rc == ERR_FSAL_INVAL) ? (int) status : 0);
 }
 
+/**
+ * @brief Determine if an attribute mask is NFSv3 only.
+ * @param mask Input attrmask_t of attributes.
+ *
+ * @return - True, if the attributes are representable in NFSv3.
+ *         - False, otherwise.
+ */
 
 bool attrmask_is_nfs3(attrmask_t mask)
 {
-	// NOTE(boulos): Consider contributing this as FSAL_ONLY_MASK or
-	// something.
+	/*
+	 * NOTE(boulos): Consider contributing this as FSAL_ONLY_MASK or
+	 * something.
+	 */
 	attrmask_t orig = mask;
 
 	if (FSAL_UNSET_MASK(mask, ATTRS_NFS3 | ATTR_RDATTR_ERR) != 0) {
@@ -127,6 +175,14 @@ bool attrmask_is_nfs3(attrmask_t mask)
 
 	return true;
 }
+
+/**
+ * @brief Determine if an attribute mask is valid for NFSv3 SETATTR3.
+ * @param mask Input attrmask_t of attributes.
+ *
+ * @return - True, if the attributes are suitable for SETATTR3.
+ *         - False, otherwise.
+ */
 
 static bool attrmask_valid_setattr(const attrmask_t mask)
 {
@@ -142,7 +198,7 @@ static bool attrmask_valid_setattr(const attrmask_t mask)
 		return false;
 	}
 
-	// Make sure that only one of ATIME | ATIME_SERVER is set.
+	/* Make sure that only one of ATIME | ATIME_SERVER is set. */
 	if (FSAL_TEST_MASK(mask, ATTR_ATIME) &&
 	    FSAL_TEST_MASK(mask, ATTR_ATIME_SERVER)) {
 		LogDebug(COMPONENT_FSAL,
@@ -151,7 +207,7 @@ static bool attrmask_valid_setattr(const attrmask_t mask)
 		return false;
 	}
 
-	// Make sure that only one of MTIME | MTIME_SERVER is set.
+	/* Make sure that only one of MTIME | MTIME_SERVER is set. */
 	if (FSAL_TEST_MASK(mask, ATTR_MTIME) &&
 	    FSAL_TEST_MASK(mask, ATTR_MTIME_SERVER)) {
 		LogDebug(COMPONENT_FSAL,
@@ -163,9 +219,15 @@ static bool attrmask_valid_setattr(const attrmask_t mask)
 	return true;
 }
 
-// Fill in the FSAL attrlist (fsal_attrs_out) given the input NFSv3
-// attributes. This function returns false if the requested attributes
-// are greater than those supported by NFSv3.
+/**
+ * @brief Convert an fattr3 to FSAL attrlist.
+ * @param attrs Input attributes as fattr3.
+ * @param fsal_attrs_out Output attributes in FSAL form.
+ *
+ * @return - True, if the attributes are suitable for NFSv3.
+ *         - False, otherwise.
+ */
+
 bool fattr3_to_fsalattr(const fattr3 *attrs,
 			struct attrlist *fsal_attrs_out)
 {
@@ -173,26 +235,38 @@ bool fattr3_to_fsalattr(const fattr3 *attrs,
 		return false;
 	}
 
-	// NOTE(boulos): Since nfs23.h typedefs fattr3 to attrlist (leaving
-	// fattr3_wire for the real fattr3 from the protocol) this is just a
-	// simple copy.
+	/*
+	 * NOTE(boulos): Since nfs23.h typedefs fattr3 to attrlist (leaving
+	 * fattr3_wire for the real fattr3 from the protocol) this is just a
+	 * simple copy.
+	 */
 	*fsal_attrs_out = *attrs;
 
-	// Claim that only the NFSv3 attributes are valid.
+	/* Claim that only the NFSv3 attributes are valid. */
 	FSAL_SET_MASK(fsal_attrs_out->valid_mask, ATTRS_NFS3);
-	// XXX(boulos): Do we have to even do this? The CEPH FSAL does..
+	/* @todo Do we have to even do this? The CEPH FSAL does... */
 	FSAL_SET_MASK(fsal_attrs_out->supported, ATTRS_NFS3);
 	return true;
 }
 
-// Fill in the sattr3 (sattr3_out) given the input FSAL attrlist input.
+/**
+ * @brief Convert an FSAL attrlist to sattr3.
+ * @param fsal_attrs Input attributes as in FSAL attrlist form.
+ * @param attrs_out Output attributes as sattr3.
+ *
+ * @return - True, if the attributes are suitable for SETATTR3.
+ *         - False, otherwise.
+ */
+
 bool fsalattr_to_sattr3(const struct attrlist *fsal_attrs, sattr3 *attrs_out)
 {
-	// Zero the struct so that all the "set_it" optionals are false by
-	// default.
+	/*
+	 * Zero the struct so that all the "set_it" optionals are false by
+	 * default.
+	 */
 	memset(attrs_out, 0, sizeof(*attrs_out));
 
-	// Make sure there aren't any additional options we aren't expecting.
+	/* Make sure there aren't any additional options we aren't expecting. */
 	if (!attrmask_valid_setattr(fsal_attrs->valid_mask)) {
 		return false;
 	}
