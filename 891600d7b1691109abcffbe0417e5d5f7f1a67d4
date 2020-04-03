@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "4b00bf25_b2dc9e02",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-04-03T19:59:25Z",
+      "side": 1,
+      "message": "Welcome to shuffling patchs arround hell.. This line should be removed here and added back in a later commit",
+      "revId": "891600d7b1691109abcffbe0417e5d5f7f1a67d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3000a4c3_0bd83c51",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-04-03T19:59:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "891600d7b1691109abcffbe0417e5d5f7f1a67d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "329ffa84_46f0ed2d",
+        "filename": "src/FSAL/FSAL_PROXY_V4/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-04-03T19:59:25Z",
+      "side": 1,
+      "message": "I didn\u0027t see it being discussed so bringing it up for confirmation: are we sure we want to keep the lib `fsalproxy` here? It means the config FSAL name and directory won\u0027t match...\nThe config block in a later file did get renamed so I would go all the way.",
+      "revId": "891600d7b1691109abcffbe0417e5d5f7f1a67d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "582aecdd_d3e883ee",
         "filename": "src/FSAL/FSAL_PROXY_V4/fsal_nfsv4_macros.h",
         "patchSetId": 9
