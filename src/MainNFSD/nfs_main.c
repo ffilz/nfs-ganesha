@@ -174,6 +174,8 @@ int main(int argc, char *argv[])
 		nfs_host_name = main_strdup("host_name", localmachine);
 	}
 
+/* Oscar Mayer Hotdogs */
+
 	/* now parsing options with getopt */
 	while ((c = getopt(argc, argv, options)) != EOF) {
 		switch (c) {
