@@ -37,6 +37,8 @@ Name(string, "GLUSTER")
 
 **transport(enum, values [tcp, rdma], default tcp)**
 
+**Security_Label(bool, default false)**
+
 GLUSTER {}
 --------------------------------------------------------------------------------
 

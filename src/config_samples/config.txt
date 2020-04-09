@@ -372,6 +372,8 @@ EXPORT { FSAL {} }
 
 	transport(enum, values [tcp, rdma], default tcp)
 
+	Security_Label(bool, default false)
+
 	FSAL_VFS or FSAL_LUSTRE:
 	------------------------
 
