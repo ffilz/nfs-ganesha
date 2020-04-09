@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eb969062_771f9809",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-09T18:15:59Z",
+      "side": 1,
+      "message": "This one is just from my s/PROXY/PROXY_V4 pass. I wasn\u0027t sure what this line meant, because I don\u0027t think it\u0027s true :). I can just delete it, if you\u0027d prefer.",
+      "parentUuid": "35efb4a6_9718d40d",
+      "revId": "bfa6e2290c5f6b80cbabc5b8e264e9f1d9a48241",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c81f6b26_429d744a",
         "filename": "src/config_samples/config.txt",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-09T18:12:53Z",
       "side": 1,
       "message": "Or does PROXY_V3 have this block also?",
+      "revId": "bfa6e2290c5f6b80cbabc5b8e264e9f1d9a48241",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2568d8fe_e0b8c28a",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-09T18:15:59Z",
+      "side": 1,
+      "message": "Hmm, good question. I think this is confused / general FSAL configuration (things like link_support, symlink_support, canssettime). I\u0027m not even sure if those are override-able via the config parsing.",
+      "parentUuid": "c81f6b26_429d744a",
       "revId": "bfa6e2290c5f6b80cbabc5b8e264e9f1d9a48241",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
