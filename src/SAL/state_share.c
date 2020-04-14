@@ -262,10 +262,15 @@ state_status_t state_nlm_share(struct fsal_obj_handle *obj,
 		goto out_unlock;
 	}
 
+	/* Make sure we don't do cleanup holding the state_lock. */
+	obj->state_hdl->no_cleanup = true;
+
 	/* Use reopen2 to open or re-open the file and check for share
 	 * conflict.
 	 */
 	fsal_status = fsal_reopen2(obj, state, openflags, false);
+
+	obj->state_hdl->no_cleanup = false;
 
 	if (FSAL_IS_ERROR(fsal_status)) {
 		LogDebugAlt(COMPONENT_STATE, COMPONENT_NLM,

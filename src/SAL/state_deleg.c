@@ -599,7 +599,10 @@ bool state_deleg_conflict(struct fsal_obj_handle *obj, bool write)
 	bool status = false;
 
 	PTHREAD_RWLOCK_rdlock(&obj->state_hdl->state_lock);
+	/* Make sure we don't do cleanup holding the state_lock. */
+	obj->state_hdl->no_cleanup = true;
 	status = state_deleg_conflict_impl(obj, write);
+	obj->state_hdl->no_cleanup = false;
 	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
 	return status;
 }

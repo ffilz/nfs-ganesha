@@ -2693,8 +2693,12 @@ state_status_t state_unlock(struct fsal_obj_handle *obj,
 	 * placed. Do this here just in case subtract_lock_from_list has made
 	 * list empty even if it failed.
 	 */
-	if (glist_empty(&obj->state_hdl->file.lock_list))
+	if (glist_empty(&obj->state_hdl->file.lock_list)) {
+		/* Make sure we don't do cleanup holding the state_lock. */
+		obj->state_hdl->no_cleanup = true;
 		obj->obj_ops->put_ref(obj);
+		obj->state_hdl->no_cleanup = false;
+	}
 
 	if (status != STATE_SUCCESS) {
 		/* The unlock has not taken affect (other than canceling any
