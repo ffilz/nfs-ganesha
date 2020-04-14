@@ -1300,7 +1300,7 @@ void state_wipe_file(struct fsal_obj_handle *obj)
 	if (obj->type != REGULAR_FILE)
 		return;
 
-	PTHREAD_RWLOCK_wrlock(&obj->state_hdl->state_lock);
+	get_wrstatelock_set_nocleanup(obj->state_hdl);
 
 	release = state_lock_wipe(obj->state_hdl);
 #ifdef _USE_NLM
@@ -1308,7 +1308,7 @@ void state_wipe_file(struct fsal_obj_handle *obj)
 #endif /* _USE_NLM */
 	state_nfs4_state_wipe(obj->state_hdl);
 
-	PTHREAD_RWLOCK_unlock(&obj->state_hdl->state_lock);
+	drop_statelock_clear_nocleanup(obj->state_hdl);
 
 #ifdef DEBUG_SAL
 	dump_all_states();
