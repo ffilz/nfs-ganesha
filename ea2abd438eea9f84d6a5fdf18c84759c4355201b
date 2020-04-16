@@ -53,6 +53,41 @@
     },
     {
       "key": {
+        "uuid": "d2b4a989_5c8051c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-16T17:45:40Z",
+      "side": 1,
+      "message": "I prefer Daniel\u0027s suggestion of STATELOCK_lock() and STATELOCK_unlock()",
+      "parentUuid": "5bf86a21_dcdf9016",
+      "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c164f204_1edef598",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-16T17:45:40Z",
+      "side": 1,
+      "message": "That looks fine to me.",
+      "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edfdd8c5_e1d03b6a",
         "filename": "src/include/sal_functions.h",
         "patchSetId": 2
@@ -64,6 +99,24 @@
       "writtenOn": "2020-04-16T17:09:26Z",
       "side": 1,
       "message": "I vote for STATELOCK_lock() and STATELOCK_unlock()",
+      "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6144bb3_76791578",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-16T17:45:40Z",
+      "side": 1,
+      "message": "I agree, those would be better macro names.",
+      "parentUuid": "edfdd8c5_e1d03b6a",
       "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
