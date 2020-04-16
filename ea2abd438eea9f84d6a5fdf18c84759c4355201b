@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "a04b5db0_41a42d74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-04-16T17:14:20Z",
+      "side": 1,
+      "message": "How does this sound for the summary:\n\"Avoid acquiring the state_lock recursively in some code paths\"",
+      "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2aec1c9_b44b7a91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-04-16T17:14:20Z",
+      "side": 1,
+      "message": "After taking exclusive state_lock, set no_cleanup\u003dtrue to",
+      "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bf86a21_dcdf9016",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-04-16T17:14:20Z",
+      "side": 1,
+      "message": "How about nocleanup_state_wrlock() and nocleanup_state_unlock().",
+      "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edfdd8c5_e1d03b6a",
         "filename": "src/include/sal_functions.h",
         "patchSetId": 2
@@ -13,6 +64,23 @@
       "writtenOn": "2020-04-16T17:09:26Z",
       "side": 1,
       "message": "I vote for STATELOCK_lock() and STATELOCK_unlock()",
+      "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "511a34bc_93fe3640",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-04-16T17:14:20Z",
+      "side": 1,
+      "message": "state_hdl should be parenthesis, in both of the above uses as well as in unlock macro as well.",
       "revId": "ea2abd438eea9f84d6a5fdf18c84759c4355201b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
