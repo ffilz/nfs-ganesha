@@ -491,6 +491,55 @@ state_status_t mdc_up_delegrecall(const struct fsal_up_vector *vec,
 	return rc;
 }
 
+/** Kill a cache entry if it's otherwise idle
+ *
+ * Pass to upper layer
+ *
+ * @param[in] vec	Up ops vector
+ * @param[in] handle Handle that should be vetted and possibly removed
+ */
+static void
+mdc_up_shrink(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle)
+{
+	mdcache_entry_t *entry;
+	mdcache_key_t key;
+	cih_latch_t latch;
+	int32_t refcnt;
+
+	/*
+	 * Find the entry, and keep the wrlock on the partition. This ensures
+	 * that no other caller can find this entry in the hashtable and
+	 * race in to take a reference.
+	 */
+	key.fsal = vec->up_fsal_export->sub_export->fsal;
+	cih_hash_key(&key, vec->up_fsal_export->sub_export->fsal, handle,
+		     CIH_HASH_KEY_PROTOTYPE);
+
+	entry = cih_get_by_key_latch(&key, &latch,
+				     CIH_GET_WLOCK | CIH_GET_UNLOCK_ON_MISS,
+				     __func__, __LINE__);
+	if (!entry) {
+		LogDebug(COMPONENT_CACHE_INODE, "no entry found");
+		return;
+	}
+
+	/*
+	 * We can remove it if the only ref is the sentinel. We can't put
+	 * the last ref while holding the latch though, so we must take an
+	 * extra reference, remove it and then put the extra ref after
+	 * releasing the latch.
+	 */
+	refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
+	LogDebug(COMPONENT_CACHE_INODE, "entry %p has refcnt of %d", entry,
+		 refcnt);
+	if (refcnt == 1) {
+		mdcache_get(entry);
+		cih_remove_latched(entry, &latch, 0);
+	}
+	cih_hash_release(&latch);
+	mdcache_put(entry);
+}
+
 fsal_status_t
 mdcache_export_up_ops_init(struct fsal_up_vector *my_up_ops,
 			   const struct fsal_up_vector *super_up_ops)
@@ -511,6 +560,7 @@ mdcache_export_up_ops_init(struct fsal_up_vector *my_up_ops,
 	my_up_ops->layoutrecall = mdc_up_layoutrecall;
 	/* notify_device cannot call into MDCACHE */
 	my_up_ops->delegrecall = mdc_up_delegrecall;
+	my_up_ops->shrink = mdc_up_shrink;
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }

@@ -1992,6 +1992,16 @@ void up_ready_wait(struct fsal_up_vector *up_ops)
 	PTHREAD_MUTEX_unlock(&up_ops->up_mutex);
 }
 
+/** Release a mdcache entry if otherwise unused
+ *
+ * @param[in] vec    Up ops vector
+ * @param[in] handle Handle being conditionally released
+ */
+static void shrink(const struct fsal_up_vector *vec,
+		   struct gsh_buffdesc *handle)
+{
+}
+
 /**
  * @brief The top level vector of operations
  *
@@ -2010,7 +2020,8 @@ struct fsal_up_vector fsal_up_top = {
 	.layoutrecall = layoutrecall,
 	.notify_device = notify_device,
 	.delegrecall = delegrecall,
-	.invalidate_close = invalidate_close
+	.invalidate_close = invalidate_close,
+	.shrink = shrink,
 };
 
 /** @} */
