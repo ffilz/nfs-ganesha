@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ad45371_e07a1d7e",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-20T16:54:03Z",
+      "side": 1,
+      "message": "s/and/any/",
+      "revId": "d6050132b58dfc7594599701785669cc2de970f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c0a0c94_4ce052ae",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-20T16:54:03Z",
+      "side": 1,
+      "message": "again, should we microsleep instead of hard looping?",
+      "revId": "d6050132b58dfc7594599701785669cc2de970f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96ee082f_57e0beb1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1444,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-20T16:54:03Z",
+      "side": 1,
+      "message": "Should this just be removed?",
+      "revId": "d6050132b58dfc7594599701785669cc2de970f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "294ee3a5_6962829a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-20T16:54:03Z",
+      "side": 1,
+      "message": "Do we want to hard-loop?  Or do we want a microsleep?",
+      "revId": "d6050132b58dfc7594599701785669cc2de970f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
