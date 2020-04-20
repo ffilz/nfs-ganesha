@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5f3d49fe_94fda553",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-20T18:17:32Z",
+      "side": 1,
+      "message": "Because we can\u0027t hold it and take the state_lock, though I\u0027d actually have to look closer as to when we hold the export lock and the junction_lock (the state_lock is overloaded for junctions...).\n\n_state_del_locked definitely takes the export lock while holding the state_lock, but that\u0027s the real state_lock and not the \"junction_lock\" and _state_del_locked should never be called on an object that is a directory and thus possibly a junction...\n\nThis might be a good reason to bite the bullet and have a separate junction_lock...\n\ninit_export_root and release_export do take state_lock (as \"junction_lock\") then export lock, but there it could easily be re-ordered.",
+      "parentUuid": "89726876_37867486",
+      "revId": "25518e31d8d85636a52d79ce1c676bc5dc63415a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a02a54c9_36357aa6",
         "filename": "src/include/export_mgr.h",
         "patchSetId": 2
