@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e574b3b3_a74198e2",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-20T17:54:31Z",
+      "side": 1,
+      "message": "This seems to be leaking?",
+      "revId": "442167abcc4aaa4912e01c110a43a57adcc0af93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77c98cd3_418730c1",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-20T17:54:31Z",
+      "side": 1,
+      "message": "Why not convert these to init_root_ob_context() while here?",
+      "revId": "442167abcc4aaa4912e01c110a43a57adcc0af93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03dccd7b_d3859638",
+        "filename": "src/support/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-20T17:54:31Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "442167abcc4aaa4912e01c110a43a57adcc0af93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
