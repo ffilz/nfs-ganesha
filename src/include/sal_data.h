@@ -376,7 +376,7 @@ extern char all_ones[OTHERSIZE];
  * Each state is identified by stateid and represents some resource or
  * set of resources.
  *
- * The lists are protected by the state_lock
+ * The lists are protected by the st_lock
  */
 
 struct state_t {
@@ -897,21 +897,21 @@ typedef struct cbgetattr_rsp  cbgetattr_t;
 struct state_file {
 	/** File owning state */
 	struct fsal_obj_handle *obj;
-	/** NFSv4 states on this file. Protected by state_lock */
+	/** NFSv4 states on this file. Protected by st_lock */
 	struct glist_head list_of_states;
-	/** Layout recalls on this file. Protected by state_lock */
+	/** Layout recalls on this file. Protected by st_lock */
 	struct glist_head layoutrecall_list;
-	/** Pointers for lock list. Protected by state_lock */
+	/** Pointers for lock list. Protected by st_lock */
 	struct glist_head lock_list;
-	/** Pointers for NLM share list. Protected by state_lock */
+	/** Pointers for NLM share list. Protected by st_lock */
 	struct glist_head nlm_share_list;
-	/** true iff write delegated. Protected by state_lock */
+	/** true iff write delegated. Protected by st_lock */
 	bool write_delegated;
-	/** client holding write_deleg. Protected by state_lock */
+	/** client holding write_deleg. Protected by st_lock */
 	nfs_client_id_t *write_deleg_client;
-	/** Delegation statistics. Protected by state_lock */
+	/** Delegation statistics. Protected by st_lock */
 	struct file_deleg_stats fdeleg_stats;
-	/* cbgetattr stats. Protected by state_lock */
+	/* cbgetattr stats. Protected by st_lock */
 	cbgetattr_t cbgetattr;
 	uint32_t anon_ops;   /* number of anonymous operations
 			      * happening at the moment which
@@ -926,10 +926,10 @@ struct state_file {
  */
 struct state_dir {
 	/** If this is a junction, the export this node points to.
-	 * Protected by state_lock. */
+	 * Protected by jct_lock. */
 	struct gsh_export *junction_export;
 	/** List of exports that have this cache inode as their root.
-	 * Protected by state_lock */
+	 * Protected by jct_lock */
 	struct glist_head export_roots;
 	/** There is one export root reference counted for each export
 	    for which this entry is a root for. This field is used
@@ -939,7 +939,10 @@ struct state_dir {
 
 struct state_hdl {
 	/** Lock protecting state */
-	pthread_rwlock_t state_lock;
+	union {
+		pthread_mutex_t st_lock;
+		pthread_rwlock_t jct_lock;
+	};
 	bool no_cleanup;
 	union {
 		struct state_file	file;
