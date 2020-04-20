@@ -270,6 +270,7 @@ dontaudit ganesha_t xserver_misc_device_t:chr_file getattr;
 
 #============= init_t ==============
 allow init_t ganesha_var_log_t:dir setattr;
+allow init_t ganesha_var_log_t:file setattr;
 allow init_t var_lib_nfs_t:dir create;
 
 #============= rpcbind_t ==============
