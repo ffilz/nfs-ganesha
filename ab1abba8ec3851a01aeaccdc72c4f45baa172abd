@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18d0fc31_07ab3f91",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-21T17:29:18Z",
+      "side": 1,
+      "message": "That seems like a lot to inline. Maybe this should be a normal function?",
+      "revId": "ab1abba8ec3851a01aeaccdc72c4f45baa172abd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1775d43_7291dcbf",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-21T17:29:18Z",
+      "side": 1,
+      "message": "If this is RCU protected, then you may want to be careful about chasing pointers here. Could \"fullpath\" become a NULL pointer after you\u0027ve tested it, but before you\u0027ve dereferenced it in the call below? If so, you may want to fetch the pointer into a local variable and dereference it afterward.",
+      "revId": "ab1abba8ec3851a01aeaccdc72c4f45baa172abd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
