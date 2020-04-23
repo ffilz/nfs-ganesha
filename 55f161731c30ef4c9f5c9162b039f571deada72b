@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aba3a377_2e7ce258",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-04-23T15:59:06Z",
+      "side": 1,
+      "message": "Hmm, this is the ONLY place in Ganesha code where it uses ar_verf.oa_flavor instead of cb_cred.oa_flavor. Is that actually correct? Maybe the code change should be to fix this and do the svcerr_auth here if no_dispatch?",
+      "revId": "55f161731c30ef4c9f5c9162b039f571deada72b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
