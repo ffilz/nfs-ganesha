@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3236c0eb_67deba1f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-23T20:12:34Z",
+      "side": 1,
+      "message": "Yeah, new patch uses fsal_status_t. It\u0027s not the best fit, but should give the caller a way to tell what happened.",
+      "parentUuid": "d6991014_f644545f",
+      "range": {
+        "startLine": 522,
+        "startChar": 0,
+        "endLine": 522,
+        "endChar": 52
+      },
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12fc6b7d_c6a38843",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "91991e3a_c09588e4",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-23T20:12:34Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow what you\u0027re suggesting. Releasing an entry that is still in use is problematic. It could be outstanding references due to being an open file, that may not be released for a very long time. If we unhash it and move on, then we could end up with duplicate entries in the heap (some of which don\u0027t live in the hash). That\u0027s probably worse from a memory consumption standpoint, so I\u0027m not planning to release the entry unless it really looks unused.",
+      "parentUuid": "12fc6b7d_c6a38843",
+      "range": {
+        "startLine": 527,
+        "startChar": 0,
+        "endLine": 527,
+        "endChar": 66
+      },
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb4e9945_e777f334",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
         "patchSetId": 3
@@ -59,6 +107,24 @@
       "writtenOn": "2020-04-23T17:40:45Z",
       "side": 1,
       "message": "actually, perhaps in the special case where reclaim is impossible, we should mark this entry so that it is released when the last ref is returned?",
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d9df389_0c1fddae",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-23T20:12:34Z",
+      "side": 1,
+      "message": "I considered that but I\u0027m not sure it\u0027s really that helpful. At least with libcephfs, it\u0027s not terribly particular about which caps it shoots down. It basically just walks a the whole pile of them and tries to release each until the cache size is under the limit.\n\nIf there are outstanding references then that\u0027s a good indication that it\u0027s actively being used and releasing it may not help much. By the time that occurs we may already be under the limit. libcephfs can always call back again and request that the same inode be released later if it\u0027s really unused and it needs to shrink the cache again.\n\nIn any case, I\u0027ve added a (so far unused) flags field. If someone wants to plumb in a modifier for this behavior in the future, then they should be able to do so.",
+      "parentUuid": "fb4e9945_e777f334",
       "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -139,6 +205,24 @@
       "writtenOn": "2020-04-23T17:32:39Z",
       "side": 1,
       "message": "I think I\u0027d prefer another name for this.  \"reclaim\" or \"release\" would seem more appropriate.\n\nMatt",
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04c861de_3bb00e10",
+        "filename": "src/include/fsal_up.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-23T20:12:34Z",
+      "side": 1,
+      "message": "Hah! I had originally called this \"release\" but that seemed a bit too generic. Maybe \"try_release\" would be more appropriate. We really don\u0027t want to drop the thing if it can\u0027t go away.",
+      "parentUuid": "30ca8864_e15aa5b9",
       "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
