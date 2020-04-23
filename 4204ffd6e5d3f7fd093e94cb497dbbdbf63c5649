@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "d6991014_f644545f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-23T17:47:32Z",
+      "side": 1,
+      "message": "This case suggests potentially more than just a return false for this (\"What are you talking about...\"). I don\u0027t love it, but fsal_status_t?",
+      "range": {
+        "startLine": 522,
+        "startChar": 0,
+        "endLine": 522,
+        "endChar": 52
+      },
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12fc6b7d_c6a38843",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-23T17:47:32Z",
+      "side": 1,
+      "message": "Hmm. Does this \"only if \u003d 1\" mean that the contract with the layer below is \"You only get to remove it, if I agree?\".\n\nIt seems to me like if someone is saying try_release(), they\u0027re also saying something like \"and I\u0027m dropping it\".",
+      "range": {
+        "startLine": 527,
+        "startChar": 0,
+        "endLine": 527,
+        "endChar": 66
+      },
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb4e9945_e777f334",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
         "patchSetId": 3
@@ -13,6 +59,69 @@
       "writtenOn": "2020-04-23T17:40:45Z",
       "side": 1,
       "message": "actually, perhaps in the special case where reclaim is impossible, we should mark this entry so that it is released when the last ref is returned?",
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "636292eb_b0c104a0",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-23T17:47:32Z",
+      "side": 1,
+      "message": "Could you make this less specific to mdcache?\n\nIt does seem specific to caching (we\u0027ve got an IRC discussion going about try_release), but since this is a \"generic upcall\" interface, it would be nice if it didn\u0027t explicitly assume only MDCACHE.",
+      "range": {
+        "startLine": 1995,
+        "startChar": 0,
+        "endLine": 1995,
+        "endChar": 47
+      },
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d5785b8_b19310d0",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2000,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-23T17:47:32Z",
+      "side": 1,
+      "message": "If you move to try_release / similar, could / should this return a bool saying if it was released? (or any other sort of response)",
+      "range": {
+        "startLine": 2000,
+        "startChar": 7,
+        "endLine": 2000,
+        "endChar": 11
+      },
+      "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6703d39_d8986a7d",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2002,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-23T17:47:32Z",
+      "side": 1,
+      "message": "It would be nice if somewhere (either here in the body as an example, or above in the comments) you described the \"rules\" for this.\n\nLike:\n\n\"Try to release a potentially cached entry.\n\n This function may fail / return false, if for example the ref_cnt is \u003e1.\n\"",
       "revId": "4204ffd6e5d3f7fd093e94cb497dbbdbf63c5649",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
