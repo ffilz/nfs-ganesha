@@ -67,14 +67,14 @@ static void state_blocked_lock_caller(struct fridgethr_context *ctx)
 	state_block_data_t *block = ctx->arg;
 	struct gsh_export *export;
 	bool set_op_ctx = false;
-	struct root_op_context root_ctx;
+	struct req_op_context root_ctx;
 
 	export = block->sbd_lock_entry->sle_export;
 	if (export_ready(export)) {
 		get_gsh_export_ref(export);
 		/* Initialize a root context, need to get a valid export. */
-		init_root_op_context(&root_ctx, export,
-				 export->fsal_export, 0, 0, UNKNOWN_REQUEST);
+		init_op_context(&root_ctx, export, export->fsal_export,
+				NULL, 0, 0, UNKNOWN_REQUEST);
 		set_op_ctx = true;
 	}
 
@@ -82,7 +82,7 @@ static void state_blocked_lock_caller(struct fridgethr_context *ctx)
 
 	if (set_op_ctx) {
 		put_gsh_export(export);
-		release_root_op_context();
+		release_op_context();
 	}
 }
 
