@@ -875,7 +875,7 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 	struct fsal_obj_handle *obj;
 	bool so_mutex_held;
 	struct gsh_export *export = NULL;
-	struct root_op_context ctx;
+	struct req_op_context ctx;
 	bool ok;
 
  again:
@@ -932,8 +932,7 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 		STATELOCK_lock(obj);
 
 		/* Initialize req_ctx */
-		init_root_op_context(&ctx, export, export->fsal_export,
-				     0, 0, UNKNOWN_REQUEST);
+		init_op_context_simple(&ctx, export, export->fsal_export);
 
 		state_deleg_revoke(obj, state);
 
@@ -946,7 +945,7 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 		/* Release refs we held */
 		obj->obj_ops->put_ref(obj);
 
-		release_root_op_context();
+		release_op_context();
 		/* Since we dropped so_mutex, we must restart the loop. */
 		goto again;
 	}
