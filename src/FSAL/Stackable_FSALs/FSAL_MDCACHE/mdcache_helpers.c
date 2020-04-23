@@ -2873,7 +2873,7 @@ fsal_status_t mdcache_readdir_chunked(mdcache_entry_t *directory,
 	mdcache_dir_entry_t *dirent = NULL;
 	bool has_write, set_first_ck;
 	fsal_cookie_t next_ck = whence, look_ck = whence;
-	fsal_cookie_t save_ck = 0;
+	fsal_cookie_t save_ck = 0, chunk_next_ck = 0;
 	struct dir_chunk *chunk = NULL;
 	bool eod = false;
 	bool reload_chunk = false;
@@ -3067,6 +3067,16 @@ again:
 
 		chunk = dirent->chunk;
 
+		if (reload_chunk && chunk_next_ck) {
+			/*reload chunk need reset next_ck*/
+			chunk->next_ck = chunk_next_ck;
+			chunk_next_ck = 0;
+			LogFullDebugAlt(COMPONENT_NFS_READDIR,
+					COMPONENT_CACHE_INODE,
+					"Resetting chunk %p next_ck=%"PRIx64,
+					chunk, chunk->next_ck);
+		}
+
 		LogFullDebugAlt(COMPONENT_NFS_READDIR,
 				COMPONENT_CACHE_INODE,
 				"mdcache_populate_dir_chunk finished chunk %p dirent %p %s",
@@ -3193,6 +3203,7 @@ again:
 				 * chunk, and reload it using readdir_plus */
 				look_ck = dirent->ck;
 				next_ck = chunk->reload_ck;
+				chunk_next_ck = chunk->next_ck;
 				reload_chunk = true;
 				LogFullDebugAlt(COMPONENT_NFS_READDIR,
 						COMPONENT_CACHE_INODE,
