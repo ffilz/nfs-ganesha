@@ -2873,8 +2873,9 @@ fsal_status_t mdcache_readdir_chunked(mdcache_entry_t *directory,
 	mdcache_dir_entry_t *dirent = NULL;
 	bool has_write, set_first_ck;
 	fsal_cookie_t next_ck = whence, look_ck = whence;
-	fsal_cookie_t save_ck = 0;
-	struct dir_chunk *chunk = NULL;
+	fsal_cookie_t save_ck = 0, last_ck = 0;
+	struct dir_chunk *chunk = NULL, *next_chunk = NULL;
+	struct glist_head *glist, *glistn;
 	bool eod = false;
 	bool reload_chunk = false;
 	bool whence_is_name = op_ctx->fsal_export->exp_ops.fs_supports(
@@ -3066,6 +3067,30 @@ again:
 		}
 
 		chunk = dirent->chunk;
+
+		if (reload_chunk) {
+			last_ck = glist_last_entry(&chunk->dirents,
+						mdcache_dir_entry_t,
+						chunk_list)->ck;
+			glist_for_each_safe(glist, glistn,
+					&directory->fsobj.fsdir.chunks) {
+				next_chunk = glist_entry(glist, struct dir_chunk,chunks);
+				if (!next_chunk)
+					continue;
+				if (next_chunk->reload_ck == last_ck) {
+					/*reset chunk->next_ck if next_chunk exists*/
+					chunk->next_ck = glist_first_entry(&next_chunk->dirents,
+									mdcache_dir_entry_t,
+									chunk_list)->ck;
+					LogFullDebugAlt(COMPONENT_NFS_READDIR,
+							COMPONENT_CACHE_INODE,
+							"Resetting chunk %p next_ck=%"PRIx64,
+							chunk, chunk->next_ck);
+					break;
+				}
+			}
+
+		}
 
 		LogFullDebugAlt(COMPONENT_NFS_READDIR,
 				COMPONENT_CACHE_INODE,
