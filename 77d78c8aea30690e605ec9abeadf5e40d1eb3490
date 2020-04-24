@@ -117,6 +117,29 @@
     },
     {
       "key": {
+        "uuid": "6816ed1a_0119fe68",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:58:32Z",
+      "side": 1,
+      "message": "As in the mdcache code, could you move this up to be adjacent to invalidate (as they\u0027re highly related)",
+      "range": {
+        "startLine": 1995,
+        "startChar": 0,
+        "endLine": 1995,
+        "endChar": 47
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "69467530_a345b8fa",
         "filename": "src/FSAL_UP/fsal_up_top.c",
         "patchSetId": 5
@@ -157,6 +180,53 @@
         "startChar": 0,
         "endLine": 2004,
         "endChar": 38
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b54d158_3d214ff9",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:58:32Z",
+      "side": 1,
+      "message": "I mean more as an example for other FSALs. If an FSAL already implements upcalls, this is their default implementation, right? (not that it particularly matters, like you said, but it seems out of style with invalidate).",
+      "parentUuid": "e2f078d3_e7c90fe0",
+      "range": {
+        "startLine": 2004,
+        "startChar": 0,
+        "endLine": 2004,
+        "endChar": 38
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a22bdd9b_2b29d5f8",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:58:32Z",
+      "side": 1,
+      "message": "Seems like invalidate, invalidate_close and try_release should all be grouped together, fwiw.",
+      "range": {
+        "startLine": 2025,
+        "startChar": 2,
+        "endLine": 2025,
+        "endChar": 18
       },
       "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
