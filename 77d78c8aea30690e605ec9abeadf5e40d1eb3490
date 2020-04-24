@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1312ff98_9106b6aa",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:39:58Z",
+      "side": 1,
+      "message": "So this is the main distinction between invalidate (violently reset to 0) and \"try_release\" right? (if last ref \u003d\u003e drop). Up to you if you want to have these share more logic then, but I\u0027d leave a note about the similarities and differences here (or in the try_release code).",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 46
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9262078c_fb955ffe",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:39:58Z",
+      "side": 1,
+      "message": "s/Kill/Release/",
+      "range": {
+        "startLine": 494,
+        "startChar": 4,
+        "endLine": 494,
+        "endChar": 8
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de8e0c9d_34e425f3",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:39:58Z",
+      "side": 1,
+      "message": "I think this comment is out of date?",
+      "range": {
+        "startLine": 496,
+        "startChar": 0,
+        "endLine": 496,
+        "endChar": 22
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55b78a9b_2a937352",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:39:58Z",
+      "side": 1,
+      "message": "Could you move this to be adjacent to mdc_up_invalidate which is quite similar?",
+      "range": {
+        "startLine": 503,
+        "startChar": 0,
+        "endLine": 503,
+        "endChar": 52
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de159f28_fded7d38",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:39:58Z",
+      "side": 1,
+      "message": "This should also be next to invalidate/invalidate_close.",
+      "range": {
+        "startLine": 575,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 45
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69467530_a345b8fa",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-04-24T18:39:58Z",
+      "side": 1,
+      "message": "Hmm. Do you think this is the right default? Or maybe a \"no error\"? (That is, like default_methods or whatever it\u0027s called in the FSAL regular ops, most should be \"you probably don\u0027t have to fill this in, and callers shouldn\u0027t have to care\").\n\n[I do agree that NOTSUPP is clearer, and that way a caller who thinks so can say \"Ahh, they\u0027re never going to help me\".]",
+      "range": {
+        "startLine": 2004,
+        "startChar": 0,
+        "endLine": 2004,
+        "endChar": 38
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
