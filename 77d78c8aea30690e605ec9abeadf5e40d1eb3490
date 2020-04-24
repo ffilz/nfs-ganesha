@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "b6a4e39e_fbf282a1",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-24T19:09:44Z",
+      "side": 1,
+      "message": "Ok.\n\nNote that the header has these in a completely random order. A cleanup patch after this might be nice, but I\u0027d rather not do it before as we may need to backport this to earlier releases, and that would change the ABI unnecessarily.",
+      "parentUuid": "55b78a9b_2a937352",
+      "range": {
+        "startLine": 503,
+        "startChar": 0,
+        "endLine": 503,
+        "endChar": 52
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de159f28_fded7d38",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
         "patchSetId": 5
@@ -198,6 +222,30 @@
       "writtenOn": "2020-04-24T18:58:32Z",
       "side": 1,
       "message": "I mean more as an example for other FSALs. If an FSAL already implements upcalls, this is their default implementation, right? (not that it particularly matters, like you said, but it seems out of style with invalidate).",
+      "parentUuid": "e2f078d3_e7c90fe0",
+      "range": {
+        "startLine": 2004,
+        "startChar": 0,
+        "endLine": 2004,
+        "endChar": 38
+      },
+      "revId": "77d78c8aea30690e605ec9abeadf5e40d1eb3490",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7fb0baf_6c6e882f",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-24T19:09:44Z",
+      "side": 1,
+      "message": "For now I think a distinct error code is better, as if you see this, then it\u0027s most likely that something has gone wrong. If we do get the ability to run w/o mdcache in the future and changing it to return success makes things cleaner, we can always do it then.",
       "parentUuid": "e2f078d3_e7c90fe0",
       "range": {
         "startLine": 2004,
