@@ -2922,14 +2922,13 @@ state_status_t state_nlm_notify(state_nsm_client_t *nsmclient,
 		export = found_entry->sle_export;
 		state = found_entry->sle_state;
 
-		set_op_context_export(export);
-
 		/* Get a reference to the export while we still hold the
 		 * ssc_mutex. This assures that the export definitely can
 		 * not have had it's last refcount released. We will check
 		 * later to see if the export is being removed.
 		 */
 		get_gsh_export_ref(export);
+		set_op_context_export(export);
 
 		/* Get a reference to the owner */
 		inc_state_owner_ref(owner);
@@ -2971,9 +2970,10 @@ state_status_t state_nlm_notify(state_nsm_client_t *nsmclient,
 		}
 
 		/* Release the refcounts we took above. */
-		put_gsh_export(export);
 		dec_state_owner_ref(owner);
 		obj->obj_ops->put_ref(obj);
+		put_gsh_export(export);
+		clear_op_context_export();
 
 		if (!state_unlock_err_ok(status)) {
 			/* Increment the error count and try the next lock,
@@ -3024,14 +3024,13 @@ state_status_t state_nlm_notify(state_nsm_client_t *nsmclient,
 		owner = found_share->state_owner;
 		export = found_share->state_export;
 
-		set_op_context_export(export);
-
 		/* Get a reference to the export while we still hold the
 		 * ssc_mutex. This assures that the export definitely can
 		 * not have had it's last refcount released. We will check
 		 * later to see if the export is being removed.
 		 */
 		get_gsh_export_ref(export);
+		set_op_context_export(export);
 
 		/* Get a reference to the owner */
 		inc_state_owner_ref(owner);
@@ -3070,10 +3069,11 @@ state_status_t state_nlm_notify(state_nsm_client_t *nsmclient,
 		}
 
 		/* Release the refcounts we took above. */
-		put_gsh_export(export);
 		dec_state_owner_ref(owner);
 		obj->obj_ops->put_ref(obj);
 		dec_state_t_ref(found_share);
+		put_gsh_export(export);
+		clear_op_context_export();
 
 		if (!state_unlock_err_ok(status)) {
 			/* Increment the error count and try the next share,
@@ -3522,8 +3522,8 @@ void cancel_all_nlm_blocked(void)
 
 		PTHREAD_MUTEX_unlock(&blocked_locks_mutex);
 
-		set_op_context_export(found_entry->sle_export);
 		get_gsh_export_ref(op_ctx->ctx_export);
+		set_op_context_export(found_entry->sle_export);
 
 		/** @todo also look at the LRU ref for pentry */
 
@@ -3537,9 +3537,10 @@ void cancel_all_nlm_blocked(void)
 
 		LogEntry("Canceled Lock", found_entry);
 
-		put_gsh_export(op_ctx->ctx_export);
-
 		lock_entry_dec_ref(found_entry);
+
+		put_gsh_export(op_ctx->ctx_export);
+		clear_op_context_export();
 
 		PTHREAD_MUTEX_lock(&blocked_locks_mutex);
 
