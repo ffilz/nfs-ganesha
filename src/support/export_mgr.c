@@ -137,24 +137,6 @@ struct gsh_export *export_take_mount_work(void)
 	return export;
 }
 
-struct gsh_export *export_take_unexport_work(void)
-{
-	struct gsh_export *export;
-
-	PTHREAD_RWLOCK_wrlock(&export_by_id.lock);
-
-	export = glist_first_entry(&unexport_work, struct gsh_export, exp_work);
-
-	if (export != NULL) {
-		glist_del(&export->exp_work);
-		get_gsh_export_ref(export);
-	}
-
-	PTHREAD_RWLOCK_unlock(&export_by_id.lock);
-
-	return export;
-}
-
 /**
  * @brief Compute cache slot for an entry
  *
@@ -808,6 +790,24 @@ bool remove_one_export(struct gsh_export *export, void *state)
 	return true;
 }
 
+struct gsh_export *export_take_unexport_work(void)
+{
+	struct gsh_export *export;
+
+	PTHREAD_RWLOCK_wrlock(&export_by_id.lock);
+
+	export = glist_first_entry(&unexport_work, struct gsh_export, exp_work);
+
+	if (export != NULL) {
+		glist_del(&export->exp_work);
+		get_gsh_export_ref(export);
+	}
+
+	PTHREAD_RWLOCK_unlock(&export_by_id.lock);
+
+	return export;
+}
+
 static void process_unexports(void)
 {
 	struct gsh_export *export;
@@ -834,13 +834,12 @@ void remove_all_exports(void)
 	struct gsh_export *export;
 	struct req_op_context op_context;
 
-	/* Initialize req_ctx */
-	init_op_context(&op_context, NULL, NULL, NULL, NFS_V4, 0, NFS_REQUEST);
-
 	/* Get a reference to the PseudoFS Root Export */
 	export = get_gsh_export_by_pseudo("/", true);
 
-	set_op_context_export(export);
+	/* Initialize req_ctx */
+	init_op_context(&op_context, export, export->fsal_export,
+			NULL, NFS_V4, 0, NFS_REQUEST);
 
 	/* Clean up the whole PseudoFS */
 	pseudo_unmount_export(export);

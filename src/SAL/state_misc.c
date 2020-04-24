@@ -1364,7 +1364,8 @@ void state_release_export(struct gsh_export *export)
 {
 	struct req_op_context op_context;
 
-	/* Initialize req_ctx */
+	/* Get a ref to the export and initialize req_ctx */
+	get_gsh_export_ref(export);
 	init_op_context_simple(&op_context, export, export->fsal_export);
 
 	state_export_unlock_all();
