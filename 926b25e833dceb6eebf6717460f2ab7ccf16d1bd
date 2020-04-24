@@ -16,6 +16,24 @@
       "revId": "926b25e833dceb6eebf6717460f2ab7ccf16d1bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "725d0cfe_de779cd6",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-04-24T14:54:50Z",
+      "side": 1,
+      "message": "It\u0027s ok to be inlined here. The callback from ceph is queued to a finisher (something like a workqueue) and is executed there without holding any locks, so this should be fine. We probably don\u0027t want to queue the cleanup to another workqueue if we can help it.\n\nOther users may have different needs, so we might need it eventually, but this case doesn\u0027t.",
+      "parentUuid": "83b535e8_0454b551",
+      "revId": "926b25e833dceb6eebf6717460f2ab7ccf16d1bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
