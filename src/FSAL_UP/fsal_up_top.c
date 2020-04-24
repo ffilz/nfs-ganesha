@@ -1119,7 +1119,6 @@ static void delegrecall_completion_func(rpc_call_t *call)
 		goto out_free_drc;
 	}
 
-
 	init_op_context_simple(&op_context, export, export->fsal_export);
 	used_ctx = true;
 
@@ -1532,7 +1531,10 @@ state_status_t delegrecall_impl(struct fsal_obj_handle *obj)
 			continue;
 		}
 
-		/* op_ctx may be used by state_del_locked and others */
+		/* Get a ref to the drc_ctx->drc_exp and initialize req_ctx
+		 * in case state_del_locks and others need it.
+		 */
+		get_gsh_export_ref(drc_ctx->drc_exp);
 		init_op_context_simple(&op_context, drc_ctx->drc_exp,
 				       drc_ctx->drc_exp->fsal_export);
 
@@ -1700,6 +1702,8 @@ cbgetattr_state handle_getattr_response(struct cbgetattr_context *cbg_ctx,
 
 	event_func = (cbg_ctx->ctx_export->fsal_export->up_ops);
 
+	/* Get a ref to the cbg_ctx->ctx_export and initialize req_ctx */
+	get_gsh_export_ref(cbg_ctx->ctx_export);
 	init_op_context_simple(&op_context, cbg_ctx->ctx_export,
 			       cbg_ctx->ctx_export->fsal_export);
 
@@ -1818,6 +1822,8 @@ int send_cbgetattr(struct fsal_obj_handle *obj,
 	bitmap4	*cb_attr_req;
 	struct req_op_context op_context;
 
+	/* Get a ref to the p_cargs->ctx_export and initialize req_ctx */
+	get_gsh_export_ref(p_cargs->ctx_export);
 	init_op_context_simple(&op_context, p_cargs->ctx_export,
 			       p_cargs->ctx_export->fsal_export);
 
@@ -1849,10 +1855,12 @@ int send_cbgetattr(struct fsal_obj_handle *obj,
 
 	ret = nfs_rpc_cb_single(p_cargs->clid, &argop, NULL,
 				cbgetattr_completion_func, p_cargs);
-	if (ret == 0)
-		return 0;
+
 	LogDebug(COMPONENT_FSAL_UP, "CB_GETATTR nfs_rpc_cb_single returned %d",
 		 ret);
+
+	if (ret == 0)
+		goto out_exp;
 
 out:
 	nfs4_freeFH(&argop.nfs_cb_argop4_u.opcbgetattr.fh);
@@ -1861,6 +1869,10 @@ out:
 		p_cargs->clid->gsh_client->hostaddr_str);
 
 	free_cbgetattr_context(p_cargs);
+
+out_exp:
+
+	put_gsh_export(op_ctx->ctx_export);
 	release_op_context();
 	return ret;
 }
