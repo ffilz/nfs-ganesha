@@ -667,8 +667,14 @@ void state_nfs4_state_wipe(struct state_hdl *ostate)
  */
 enum nfsstat4 release_lock_owner(state_owner_t *owner)
 {
-	struct gsh_export *save_export = op_ctx->ctx_export;
-	struct fsal_export *save_exp = op_ctx->fsal_export;
+	struct saved_export_context saved;
+
+	/* Save the current export and clear it from op context (so if there is
+	 * no call to set_op_context_export_fsal before a call to
+	 * restore_op_context_export we don't call clear_op_context_export() on
+	 * the saved export...
+	 */
+	save_op_context_export_and_clear(&saved);
 
 	PTHREAD_MUTEX_lock(&owner->so_mutex);
 
@@ -697,7 +703,7 @@ enum nfsstat4 release_lock_owner(state_owner_t *owner)
 		if (state == NULL) {
 			PTHREAD_MUTEX_unlock(&owner->so_mutex);
 			/* Restore export */
-			set_op_context_export_fsal(save_export, save_exp);
+			restore_op_context_export(&saved);
 			return NFS4_OK;
 		}
 
@@ -716,6 +722,11 @@ enum nfsstat4 release_lock_owner(state_owner_t *owner)
 		dec_state_t_ref(state);
 
 		PTHREAD_MUTEX_lock(&owner->so_mutex);
+
+		/* Note the op context set above will either be cleaned up by
+		 * the set_op_context_export_fsal for the next state or by
+		 * restore_op_context_export just before exiting the loop.
+		 */
 	}
 }
 
