@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e06c4116_3ce64a7a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3077,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:22:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tnext_chunk \u003d glist_entry(glist, struct dir_chunk,chunks);",
+      "revId": "af88592cea0a714489f68eb79a61722ea65a9dde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cae27081_8b2e51df",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3077,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:22:50Z",
+      "side": 1,
+      "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxV)\n+\t\t\t\tnext_chunk \u003d glist_entry(glist, struct dir_chunk,chunks);\n \t\t\t\t                                                ^",
+      "revId": "af88592cea0a714489f68eb79a61722ea65a9dde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "995fda29_22b7f385",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3081,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:22:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t/*reset chunk-\u003enext_ck if next_chunk exists*/",
+      "revId": "af88592cea0a714489f68eb79a61722ea65a9dde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a72fba1_62ff3873",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3082,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:22:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tchunk-\u003enext_ck \u003d glist_first_entry(\u0026next_chunk-\u003edirents,",
+      "revId": "af88592cea0a714489f68eb79a61722ea65a9dde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7444a92d_f8e91330",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3083,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:22:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t\tmdcache_dir_entry_t,",
+      "revId": "af88592cea0a714489f68eb79a61722ea65a9dde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2701af15_9885309f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3084,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:22:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t\tchunk_list)-\u003eck;",
+      "revId": "af88592cea0a714489f68eb79a61722ea65a9dde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e48cbec_6bd1903c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3087,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:22:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\"Resetting chunk %p next_ck\u003d%\"PRIx64,",
+      "revId": "af88592cea0a714489f68eb79a61722ea65a9dde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
