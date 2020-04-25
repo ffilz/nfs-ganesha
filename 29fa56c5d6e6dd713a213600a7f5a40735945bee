@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5859d111_7c07c1c2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3077,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:29:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tnext_chunk \u003d glist_entry(glist, struct dir_chunk,",
+      "revId": "29fa56c5d6e6dd713a213600a7f5a40735945bee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d937bd1_f3380692",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3082,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:29:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t/*reset chunk-\u003enext_ck if next_chunk exists*/",
+      "revId": "29fa56c5d6e6dd713a213600a7f5a40735945bee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fdca431_527eac77",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3084,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:29:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t\u0026next_chunk-\u003edirents,",
+      "revId": "29fa56c5d6e6dd713a213600a7f5a40735945bee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c65b8c1e_2812f0b4",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3085,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-04-25T11:29:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\tmdcache_dir_entry_t,",
+      "revId": "29fa56c5d6e6dd713a213600a7f5a40735945bee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
