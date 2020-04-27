@@ -802,13 +802,13 @@ class DumpFULLV3Stats():
             i = 0
             tot_len = len(self.stats[3])
             while (i+7) <= tot_len:
-                output += "\n" + (self.stats[3][i+0]).ljust(11)
-                output += " %s" % (str(self.stats[3][i+1]).rjust(9))
-                output += " %s" % (str(self.stats[3][i+2]).rjust(9))
-                output += " %s |" % (str(self.stats[3][i+3]).rjust(9))
-                output += " %12.6f" % (self.stats[3][i+4])
-                output += " %12.6f" % (self.stats[3][i+5])
-                output += " %12.6f" % (self.stats[3][i+6])
+                output += "\n" + (self.stats[3][i+0][0]).ljust(11)
+                output += " %s" % (str(self.stats[3][i+1][1]).rjust(9))
+                output += " %s" % (str(self.stats[3][i+2][2]).rjust(9))
+                output += " %s |" % (str(self.stats[3][i+3][3]).rjust(9))
+                output += " %12.6f" % (self.stats[3][i+4][4])
+                output += " %12.6f" % (self.stats[3][i+5][5])
+                output += " %12.6f" % (self.stats[3][i+6][6])
                 i += 7
             return output
 
@@ -835,11 +835,11 @@ class DumpFULLV4Stats():
             i = 0
             tot_len = len(self.stats[3])
             while (i+6) <= tot_len:
-                output += "\n" + (self.stats[3][i+0]).ljust(23)
-                output += " %s" % (str(self.stats[3][i+1]).rjust(9))
-                output += " %s  |" % (str(self.stats[3][i+2]).rjust(9))
-                output += " %12.6f" % (self.stats[3][i+3])
-                output += " %12.6f" % (self.stats[3][i+4])
-                output += " %12.6f" % (self.stats[3][i+5])
+                output += "\n" + (self.stats[3][i+0][0]).ljust(23)
+                output += " %s" % (str(self.stats[3][i+1][1]).rjust(9))
+                output += " %s  |" % (str(self.stats[3][i+2][2]).rjust(9))
+                output += " %12.6f" % (self.stats[3][i+3][3])
+                output += " %12.6f" % (self.stats[3][i+4][4])
+                output += " %12.6f" % (self.stats[3][i+5][5])
                 i += 6
             return output
