@@ -833,12 +833,9 @@ void release_openstate(state_owner_t *owner)
 
 		STATELOCK_lock(obj);
 
-		/* In case op_ctx->export is not NULL... */
-		if (op_ctx->ctx_export != NULL) {
-			put_gsh_export(op_ctx->ctx_export);
-		}
-
-		/* op_ctx may be used by state_del_locked and others */
+		/* op_ctx may be used by state_del_locked and others set export
+		 * from the state and release any old ctx_export reference.
+		 */
 		set_op_context_export(export);
 
 		/* If FSAL supports extended operations, file will be closed by
@@ -853,7 +850,6 @@ void release_openstate(state_owner_t *owner)
 
 		/* Release refs we held during state_del */
 		obj->obj_ops->put_ref(obj);
-		put_gsh_export(op_ctx->ctx_export);
 		clear_op_context_export();
 	}
 
@@ -942,7 +938,6 @@ void revoke_owner_delegs(state_owner_t *client_owner)
 
 		state_deleg_revoke(obj, state);
 
-		put_gsh_export(op_ctx->ctx_export);
 		clear_op_context_export();
 
 		STATELOCK_unlock(obj);
