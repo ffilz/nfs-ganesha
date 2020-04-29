@@ -506,9 +506,15 @@ gpfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 
 	/* Restore posix_flags as it was modified for create above */
 	fsal2posix_openflags(openflags, &posix_flags);
-	return open_by_handle(&hdl->obj_handle, state, openflags, posix_flags,
+	status = open_by_handle(&hdl->obj_handle, state, openflags, posix_flags,
 			verifier, attrs_out, createmode,
 			caller_perm_check);
+	/* We created a file with the caller's credentials active, so as such
+	 * permission check was done. Let the caller know the permission check
+	 * has already been done.
+	 */
+	*caller_perm_check = false;
+	return status;
 
  fileerr:
 	if (hdl != NULL) {
