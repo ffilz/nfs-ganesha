@@ -182,8 +182,8 @@ void export_revert(struct gsh_export *export)
 		export->has_pnfs_ds = false;
 		pnfs_ds_remove(export->export_id, true);
 	}
-	put_gsh_export(export); /* Release sentinel ref */
 
+	/* Release the sentinel refcount */
 	release_op_context();
 }
 
@@ -788,7 +788,6 @@ static void process_unexports(void)
 
 		set_op_context_export(export);
 		release_export(export);
-		put_gsh_export(export);
 		clear_op_context_export();
 	}
 }
@@ -811,7 +810,6 @@ void remove_all_exports(void)
 
 	/* Clean up the whole PseudoFS */
 	pseudo_unmount_export(export);
-	put_gsh_export(export);
 	clear_op_context_export();
 
 	/* Put all exports on the unexport work list.
@@ -1192,8 +1190,6 @@ static bool gsh_export_removeexport(DBusMessageIter *args,
 
 	LogInfo(COMPONENT_EXPORT, "Removed export with id %d",
 		export->export_id);
-
-	put_gsh_export(export);
 
 	release_op_context();
 
