@@ -1197,7 +1197,6 @@ static bool mdcache_handle_cmp(struct fsal_obj_handle *obj_hdl1,
  *
  * @param[in]     obj_hdl  The handle of the file on which the layout is
  *                         requested.
- * @param[in]     req_ctx  Request context
  * @param[out]    loc_body An XDR stream to which the FSAL must encode
  *                         the layout specific portion of the granted
  *                         layout segment.
@@ -1207,7 +1206,6 @@ static bool mdcache_handle_cmp(struct fsal_obj_handle *obj_hdl1,
  * @return Valid error codes in RFC 5661, pp. 366-7.
  */
 static nfsstat4 mdcache_layoutget(struct fsal_obj_handle *obj_hdl,
-				  struct req_op_context *req_ctx,
 				  XDR *loc_body,
 				  const struct fsal_layoutget_arg *arg,
 				  struct fsal_layoutget_res *res)
@@ -1218,7 +1216,7 @@ static nfsstat4 mdcache_layoutget(struct fsal_obj_handle *obj_hdl,
 
 	subcall(
 		status = entry->sub_handle->obj_ops->layoutget(
-			entry->sub_handle, req_ctx, loc_body, arg, res)
+			entry->sub_handle, loc_body, arg, res)
 	       );
 
 	return status;
@@ -1230,7 +1228,6 @@ static nfsstat4 mdcache_layoutget(struct fsal_obj_handle *obj_hdl,
  * Delegate to sub-FSAL
  *
  * @param[in] obj_hdl  The object on which a segment is to be returned
- * @param[in] req_ctx  Request context
  * @param[in] lrf_body In the case of a non-synthetic return, this is
  *                     an XDR stream corresponding to the layout
  *                     type-specific argument to LAYOUTRETURN.  In
@@ -1241,7 +1238,6 @@ static nfsstat4 mdcache_layoutget(struct fsal_obj_handle *obj_hdl,
  * @return Valid error codes in RFC 5661, p. 367.
  */
 static nfsstat4 mdcache_layoutreturn(struct fsal_obj_handle *obj_hdl,
-				     struct req_op_context *req_ctx,
 				     XDR *lrf_body,
 				     const struct fsal_layoutreturn_arg *arg)
 {
@@ -1251,7 +1247,7 @@ static nfsstat4 mdcache_layoutreturn(struct fsal_obj_handle *obj_hdl,
 
 	subcall(
 		status = entry->sub_handle->obj_ops->layoutreturn(
-			entry->sub_handle, req_ctx, lrf_body, arg)
+			entry->sub_handle, lrf_body, arg)
 	       );
 
 	return status;
@@ -1263,7 +1259,6 @@ static nfsstat4 mdcache_layoutreturn(struct fsal_obj_handle *obj_hdl,
  * Delegate to sub-FSAL
  *
  * @param[in]     obj_hdl  The object on which to commit
- * @param[in]     req_ctx  Request context
  * @param[in]     lou_body An XDR stream containing the layout
  *                         type-specific portion of the LAYOUTCOMMIT
  *                         arguments.
@@ -1273,7 +1268,6 @@ static nfsstat4 mdcache_layoutreturn(struct fsal_obj_handle *obj_hdl,
  * @return Valid error codes in RFC 5661, p. 366.
  */
 static nfsstat4 mdcache_layoutcommit(struct fsal_obj_handle *obj_hdl,
-				     struct req_op_context *req_ctx,
 				     XDR *lou_body,
 				     const struct fsal_layoutcommit_arg *arg,
 				     struct fsal_layoutcommit_res *res)
@@ -1284,7 +1278,7 @@ static nfsstat4 mdcache_layoutcommit(struct fsal_obj_handle *obj_hdl,
 
 	subcall(
 		status = entry->sub_handle->obj_ops->layoutcommit(
-			entry->sub_handle, req_ctx, lou_body, arg, res)
+			entry->sub_handle, lou_body, arg, res)
 	       );
 
 	if (status == NFS4_OK)
