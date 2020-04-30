@@ -1875,6 +1875,7 @@ struct fsal_obj_ops {
 	 fsal_status_t (*getextattr_id_by_name)(struct fsal_obj_handle *obj_hdl,
 						const char *xattr_name,
 						unsigned int *xattr_id);
+
 /**
  * @brief Get content of an attribute by name
  *
