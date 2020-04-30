@@ -1875,6 +1875,60 @@ struct fsal_obj_ops {
 	 fsal_status_t (*getextattr_id_by_name)(struct fsal_obj_handle *obj_hdl,
 						const char *xattr_name,
 						unsigned int *xattr_id);
+
+/**
+ * @brief Implementing getxattr call
+ *
+ * This function returns the value of the extended attribute
+ * against the name of the xattr.
+ *
+ * @param[in]  obj_hdl   File to be interrogated
+ * @param[in]  attrs     List of attributes
+ * @param[in]  xa_name   Name of the xattr to look up for value
+ * @param[out] xa_value  Value identifying the xattr against
+ * 			 xa_name
+ */
+
+         fsal_status_t (*get_xattrs)(struct fsal_obj_handle *obj_hdl,
+                                     struct attrlist *attrs,
+                                     xattrname4 *xa_name,
+                                     xattrvalue4 *xa_value);
+
+/**
+ * @brief Implementing setxattr call
+ *
+ * This function changes the extended attribute of the desired file
+ * system object.
+ *
+ * @param[in]  obj_hdl  File to be interrogated
+ * @param[in]  attrs    List of attributes
+ * @param[in]  sa_type  Option specifying the desired change
+ * @param[in]  xa_name	Name of the xattr for which the value
+ * 			is to be set
+ * @param[in]  xa_value Value of the xattr to be set
+ */
+
+         fsal_status_t (*set_xattrs)(struct fsal_obj_handle *obj_hdl,
+                                    struct attrlist *attrs,
+                                    setxattr_type4 sa_type,
+                                    xattrname4 *xa_name,
+                                    xattrname4 *xa_value);
+
+/**
+ * @brief Implementing removexattr call
+ *
+ * This function removes the extended attribute of the file system
+ * object.
+ *
+ * @param[in]  obj_hdl  File to be interrogated
+ * @param[in]  attrs    List of attributes
+ * @param[in]  xa_name  Name of the xattr to be removed
+ */
+
+         fsal_status_t (*remove_xattrs)(struct fsal_obj_handle *obj_hdl,
+                                       struct attrlist *attrs,
+                                       xattrname4 *xa_name);
+
 /**
  * @brief Get content of an attribute by name
  *

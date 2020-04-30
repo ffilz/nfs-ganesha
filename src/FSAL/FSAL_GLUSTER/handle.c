@@ -3283,6 +3283,147 @@ static fsal_status_t glusterfs_close2(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
+/*
+ * get_xattrs
+ */
+static fsal_status_t get_xattrs(struct fsal_obj_handle *obj_hdl,
+			        struct attrlist *attrs,
+                                xattrname4 *xa_name,
+                                xattrvalue4 *xa_value)
+{
+        int rc = 0;
+        int errsv = 0;
+	fsal_status_t status = {0,0};
+	struct glusterfs_export *export =
+		container_of(op_ctx->fsal_export,
+			     struct glusterfs_export, export);
+	struct glusterfs_handle *glhandle =
+		container_of(obj_hdl, struct glusterfs_handle, handle);
+
+	if (FSAL_TEST_MASK(attrs->request_mask, ATTR4_XATTR)) {
+
+		rc = glfs_h_getxattrs(export->gl_fs->fs, glhandle->glhandle,
+				      xa_name->utf8string_val,
+				      xa_value->utf8string_val,
+				      xa_value->utf8string_len);
+
+		if (rc < 0) {
+			errsv = errno;
+			LogDebug(COMPONENT_FSAL,
+				 "GETXATTRS returned rc %d errsv %d",
+				 rc, errsv);
+
+			if (errsv == ERANGE) {
+				status = fsalstat(ERR_FSAL_TOOSMALL, 0);
+				goto out;
+			}
+			if (errsv == ENODATA) {
+				status = fsalstat(ERR_FSAL_NOENT, 0);
+				goto out;
+			}
+			status = fsalstat(posix2fsal_error(errsv), errsv);
+		}
+
+		/* Make sure utf8string is null terminated */
+		xa_value->utf8string_val[xa_value->utf8string_len] = '\0';
+
+		LogDebug(COMPONENT_FSAL,
+			 "GETXATTRS returned value %s length %d rc %d",
+			 xa_value->utf8string_val,
+			 xa_value->utf8string_len, rc);
+
+		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+	else
+		status = fsalstat(ERR_FSAL_NOTSUPP, 0);
+
+
+out:
+	return status;
+}
+
+/*
+ * set_xattrs
+ */
+
+static fsal_status_t set_xattrs(struct fsal_obj_handle *obj_hdl,
+			        struct attrlist *attrs,
+                                setxattr_type4 sa_type,
+                                xattrname4 *xa_name,
+                                xattrvalue4 *xa_value)
+{
+	int rc = 0;
+	int errsv = 0;
+	fsal_status_t status = {0,0};
+	struct glusterfs_export *export =
+		container_of(op_ctx->fsal_export,
+			     struct glusterfs_export, export);
+	struct glusterfs_handle *glhandle =
+		container_of(obj_hdl, struct glusterfs_handle, handle);
+
+	if (FSAL_TEST_MASK(attrs->request_mask, ATTR4_XATTR)) {
+
+		rc = glfs_h_setxattrs(export->gl_fs->fs, glhandle->glhandle,
+				      xa_name->utf8string_val,
+				      xa_value->utf8string_val,
+				      xa_value->utf8string_len, sa_type);
+
+		if (rc < 0) {
+			errsv = errno;
+			LogDebug(COMPONENT_FSAL,
+				 "SETXATTRS returned rc %d errsv %d",
+				 rc, errsv);
+			status = fsalstat(posix2fsal_error(errsv), errsv);
+			goto out;
+		}
+		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+	else
+		status = fsalstat(ERR_FSAL_NOTSUPP, 0);
+
+
+out:
+	return status;
+}
+
+/*
+ * remove_xattrs
+ */
+
+static fsal_status_t remove_xattrs(struct fsal_obj_handle *obj_hdl,
+				   struct attrlist *attrs,
+                                   xattrname4 *xa_name)
+{
+        int rc = 0;
+        int errsv = 0;
+	fsal_status_t status = {0,0};
+        struct glusterfs_export *export = container_of(op_ctx->fsal_export,
+                                        struct glusterfs_export, export);
+	struct glusterfs_handle *glhandle =
+		container_of(obj_hdl, struct glusterfs_handle, handle);
+
+        if (FSAL_TEST_MASK(attrs->request_mask, ATTR4_XATTR)) {
+		rc = glfs_h_removexattrs(export->gl_fs->fs,
+					 glhandle->glhandle,
+					 xa_name->utf8string_val);
+		if (rc < 0) {
+			errsv = errno;
+			LogDebug(COMPONENT_FSAL,
+				 "REMOVEXATTRS returned rc %d errsv %d",
+				 rc, errsv);
+			status = fsalstat(posix2fsal_error(errsv), errsv);
+			goto out;
+		}
+		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	}
+	else
+		status = fsalstat(ERR_FSAL_NOTSUPP, 0);
+
+
+out:
+	return status;
+}
+
 /**
  * @brief Implements GLUSTER FSAL objectoperation list_ext_attrs
  */
@@ -3491,6 +3632,9 @@ void handle_ops_init(struct fsal_obj_ops *ops)
 	ops->symlink = makesymlink;
 	ops->readlink = readsymlink;
 	ops->getattrs = getattrs;
+	ops->get_xattrs = get_xattrs;
+	ops->set_xattrs = set_xattrs;
+	ops->remove_xattrs = remove_xattrs;
 	ops->link = linkfile;
 	ops->rename = renamefile;
 	ops->unlink = file_unlink;
