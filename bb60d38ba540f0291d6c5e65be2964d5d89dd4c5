@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e3f6ead_fa7f2e73",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-04-30T15:54:06Z",
+      "side": 1,
+      "message": "Is ESTALE a common error on a lock op?  It\u0027s not a valid return from lockf() or flock(), so I can\u0027t tell what it\u0027s supposed to mean.",
+      "revId": "bb60d38ba540f0291d6c5e65be2964d5d89dd4c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
