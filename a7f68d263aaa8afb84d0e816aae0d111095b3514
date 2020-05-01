@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2bd9e0f_20ef40d9",
+        "filename": "src/Protocols/9P/9p_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-01T14:28:32Z",
+      "side": 1,
+      "message": "Maybe set_op_ctx_creds()? get_* sounds like you\u0027re getting it from the op_ctx, not getting it *for* the op_ctx.",
+      "revId": "a7f68d263aaa8afb84d0e816aae0d111095b3514",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
