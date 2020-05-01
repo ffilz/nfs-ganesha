@@ -51,6 +51,24 @@
       "revId": "0efc5aa773b30a8971a5803283d941558014be18",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73de6342_24c534e0",
+        "filename": "src/Protocols/NFS/nfs4_op_savefh.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-01T15:10:45Z",
+      "side": 1,
+      "message": "No, it should never be used by a FSAL unless gtest would need it exported? Otherwise it\u0027s only used in this file and nfs4_Compound.c so even if we did more breaking up of libraries it would be used in a single library (but then the gtest use maybe would be outside the library).",
+      "parentUuid": "1fc95399_dce5afe4",
+      "revId": "0efc5aa773b30a8971a5803283d941558014be18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
