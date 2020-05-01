@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "44249a48_435d0a46",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-01T14:24:36Z",
+      "side": 1,
+      "message": "Why are we adding a new API for xattr to the FSAL? And using NFSv4 specific types?",
+      "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf54f645_b4bb49ca",
         "filename": "src/include/fsal_api.h",
         "patchSetId": 2
