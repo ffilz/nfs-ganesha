@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6a6c8b7c_f1786f42",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3303,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2020-05-01T14:31:39Z",
+      "side": 1,
+      "message": "Can\u0027t this be checked in nfs4_op_getxattr() itself using op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs()...",
+      "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5e1c938_5a324afa",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1891,
+      "author": {
+        "id": 1004333
+      },
+      "writtenOn": "2020-05-01T14:31:39Z",
+      "side": 1,
+      "message": "I may not have the context. But could you please give more details (in commit message) on where these new APIs are used when compared to already existing getxattrs/setxattrs/... functions. I do not see any callers of these definitions. Is it still todo?",
+      "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb0d9bc2_0dcd08c7",
         "filename": "src/include/fsal_api.h",
         "patchSetId": 2
