@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a1d33c36_435476f9",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-01T20:00:17Z",
+      "side": 1,
+      "message": "Gack... fixed",
+      "parentUuid": "06d9b6b0_5c5bafd4",
+      "revId": "347f1bf025fe318e4e02695db6254eb7b1257a54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8cecdd9_abce2246",
         "filename": "src/include/export_mgr.h",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2020-05-01T12:47:34Z",
       "side": 1,
       "message": "Which lock?",
+      "revId": "347f1bf025fe318e4e02695db6254eb7b1257a54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59922d66_40ec8e8c",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-01T20:00:17Z",
+      "side": 1,
+      "message": "I modified the comment to call out export_admin_mutex as the lock",
+      "parentUuid": "f8cecdd9_abce2246",
       "revId": "347f1bf025fe318e4e02695db6254eb7b1257a54",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
