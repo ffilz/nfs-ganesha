@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c577af45_6c88b46f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3177,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-05-01T19:49:41Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing something in the object lifecycle, but why have this take 2 arguments here? gsh_export has a pointer to the fsal_export. Is there ever a case where fsal_exp !\u003d exp-\u003efsal_export ?",
+      "revId": "0d0f316d753cff56ef098dba5be9d49a4bbdfcfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
