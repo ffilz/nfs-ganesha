@@ -16,6 +16,41 @@
       "revId": "bb60d38ba540f0291d6c5e65be2964d5d89dd4c5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0de59260_5b795be9",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-01T14:29:27Z",
+      "side": 1,
+      "message": "Yea, I\u0027m wondering why this is necessary. More description in the commit message of why ESTALE needs special handling. And maybe a comment here.\n\nAlso is it appropriate for this to just be an event?",
+      "parentUuid": "2e3f6ead_fa7f2e73",
+      "revId": "bb60d38ba540f0291d6c5e65be2964d5d89dd4c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "967251f9_d0c8428c",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-01T14:29:27Z",
+      "side": 1,
+      "message": "You probably want a break here.",
+      "revId": "bb60d38ba540f0291d6c5e65be2964d5d89dd4c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
