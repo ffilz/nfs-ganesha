@@ -16,6 +16,24 @@
       "revId": "0d0f316d753cff56ef098dba5be9d49a4bbdfcfc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c089cd50_956c5e81",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3177,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-02T02:51:07Z",
+      "side": 1,
+      "message": "I could do another refactoring... There is some stuff that saves both ctx_export and fsal_export and then needs to set it again.\n\nAlso, during creation of the export, before calling FSAL create_export method, we have a gsh_export to put in ctx_export but no fsal_export yet (the fsal_export is returned in op_ctx-\u003efsal_export). But that COULD be handled by a single case.\n\nOtherwise, fsal_export SHOULD always be export-\u003efsal_export...\n\nAnd even that special case could still just pass export, and fsal_export will be set to NULL anyway...\n\nOh, wait, there\u0027s probably some upcall stuff where fsal_export !\u003d ctx_export-\u003efsal_export...\n\nctx_export-\u003efsal_export is the mdcache struct fsal_export, but during an upcall, there may be a point where op_ctx-\u003efsal_export has to be the FSAL_VFS or whatever struct fsal_export...\n\nI know on a subcall, op_ctx-\u003efsal_export is replaced with the FSAL_VFS or whatever fsal_export\n\nIt might be worth factoring out all the places where fsal_export IS ctx_export-\u003efsal_export though so the exceptions are more visible.",
+      "parentUuid": "c577af45_6c88b46f",
+      "revId": "0d0f316d753cff56ef098dba5be9d49a4bbdfcfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
