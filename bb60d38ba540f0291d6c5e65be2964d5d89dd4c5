@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "cc2e8276_fdbd1df2",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-05-03T13:44:21Z",
+      "side": 1,
+      "message": "Not a common thing, but one client trying to place a lock while another one deleting the same file should cause this error. If a simple application can cause this, I would think LogMaj() is a wrong thing to do, correct?",
+      "parentUuid": "0de59260_5b795be9",
+      "revId": "bb60d38ba540f0291d6c5e65be2964d5d89dd4c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "967251f9_d0c8428c",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 1
