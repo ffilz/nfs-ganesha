@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "55e64a4a_6aff3d35",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2020-05-06T12:03:31Z",
+      "side": 1,
+      "message": "background about this change: a customer has different kind of workload, their NFS clients do add and remove of files frequently. They see ESTALEs for NFSv4 file open, getattrs and LOCK requests. Their logs show lots of \"state_test :STATE :MAJ :Got error from FSAL lock operation, error\u003dSTATE_ESTALE\" and \"state_lock :STATE :MAJ :Unable to lock FSAL, error\u003dSTATE_ESTALE\" trace\nSo had made the trace as LogEventLimited(..) for ESTALE error. A reason to have it as EVENT was because had observed that in fsal_common_is_referral(..) if ESTALE (or any other error) is returned by getattrs() then we are reporting the error with LogEvent(..). We see ESTALE error frequently reported with EVENT trace in fsal_common_is_referral(..) when using test tool like racer. Infact one customer had reported that they see many EVENTs from fsal_common_is_referral(..) frequently for ESTALE error, so as of now have changed LogEvent(..) to LogEventLimited(..) in fsal_common_is_referral(..) for ibm2.7 branch, and would like to make same change in upstream code.\nUsing LogDebug(..) would look fine too over here. Should I change it to LogDebug(..) ?",
+      "parentUuid": "078b1b14_dce80c0d",
+      "revId": "bb60d38ba540f0291d6c5e65be2964d5d89dd4c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "967251f9_d0c8428c",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 1
