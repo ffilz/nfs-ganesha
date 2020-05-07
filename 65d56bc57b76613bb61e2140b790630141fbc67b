@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "697b17a6_1fe6b3a8",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3303,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2020-05-07T15:26:46Z",
+      "side": 1,
+      "message": "This would help me eliminate the need to write the new get_xattrs(), set_xattrs() etc. I\u0027ll make this change.",
+      "parentUuid": "6a6c8b7c_f1786f42",
+      "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5e1c938_5a324afa",
         "filename": "src/include/fsal_api.h",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-05-01T14:31:39Z",
       "side": 1,
       "message": "I may not have the context. But could you please give more details (in commit message) on where these new APIs are used when compared to already existing getxattrs/setxattrs/... functions. I do not see any callers of these definitions. Is it still todo?",
+      "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4edbe274_9ae2b968",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1891,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2020-05-07T15:26:46Z",
+      "side": 1,
+      "message": "I thought we had to test whether the xattr mask was set or not for which I think we need the attrlist struct (which is absent in the getxattrs()), hence I wrote the new get_xattrs() accepting this argument.\n\nAs you mention in your other comment regarding the checking of the mask in the nfs4_op_getxattr() (I was unaware of it), I can just use the already written getxattrs().\n\nmakes sense?",
+      "parentUuid": "c5e1c938_5a324afa",
       "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -81,6 +117,24 @@
       "writtenOn": "2020-05-01T14:24:36Z",
       "side": 1,
       "message": "Why are we adding a new API for xattr to the FSAL? And using NFSv4 specific types?",
+      "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e774704_a4160f2d",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2020-05-07T15:26:46Z",
+      "side": 1,
+      "message": "I hope my reply to Soumya\u0027s query answers this, yeah?",
+      "parentUuid": "44249a48_435d0a46",
       "revId": "65d56bc57b76613bb61e2140b790630141fbc67b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
