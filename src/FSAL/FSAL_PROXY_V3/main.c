@@ -381,8 +381,7 @@ proxyv3_lookup_internal(struct fsal_export *export_handle,
 			struct attrlist *attrs_out)
 {
 	LogDebug(COMPONENT_FSAL,
-		 "Doing a lookup of '%s'",
-		 path);
+		 "Doing a lookup of '%s'", path);
 
 	if (parent == NULL) {
 		LogCrit(COMPONENT_FSAL,
@@ -553,7 +552,7 @@ proxyv3_getattr_from_fh3(struct nfs_fh3 *fh3,
 	GETATTR3res result;
 
 	LogDebug(COMPONENT_FSAL,
-		 "Doing a getattr on fh3 (%p) with len %u",
+		 "Doing a getattr on fh3 (%p) with len %" PRIu32,
 		 fh3->data.data_val, fh3->data.data_len);
 
 	LogFullDebugOpaque(COMPONENT_FSAL, " fh3 handle is %s", LEN_FH_STR,
@@ -921,7 +920,7 @@ proxyv3_open_by_handle(struct fsal_obj_handle *obj_hdl,
 		       bool *caller_perm_check)
 {
 	LogDebug(COMPONENT_FSAL,
-		 "open2 of obj_hdl %p flags %x and mode %u",
+		 "open2 of obj_hdl %p flags %" PRIx16 " and mode %u",
 		 obj_hdl, openflags, createmode);
 
 	if (createmode != FSAL_NO_CREATE) {
@@ -971,7 +970,8 @@ proxyv3_open2(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, struct proxyv3_obj_handle, obj);
 
 	LogDebug(COMPONENT_FSAL,
-		 "open2 of obj_hdl %p, name %s with flags %x and mode %u",
+		 "open2 of obj_hdl %p, name %s "
+		 "with flags %" PRIx16 " and mode %u",
 		 obj_hdl, name, openflags, createmode);
 
 	/* @todo Do we need to check the openflags, too? */
@@ -1465,7 +1465,7 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 	memset(&cookie_verf, 0, sizeof(cookie_verf));
 
 	LogDebug(COMPONENT_FSAL,
-		 "Doing READDIR for dir %p (cookie = %lu)",
+		 "Doing READDIR for dir %p (cookie = %" PRIu64 ")",
 		 dir, cookie);
 
 	/* Check that attrmask is at most NFSv3 */
@@ -1497,9 +1497,9 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 
 		args.dircount = args.maxcount = proxyv3_readdir_preferred();
 
-		LogDebug(COMPONENT_FSAL,
-			 "Calling READDIRPLUS with cookie %lu",
-			 cookie);
+		LogFullDebug(COMPONENT_FSAL,
+			     "Calling READDIRPLUS with cookie %" PRIu64,
+			     cookie);
 
 		xdrproc_t encFunc = (xdrproc_t) xdr_READDIRPLUS3args;
 		xdrproc_t decFunc = (xdrproc_t) xdr_READDIRPLUS3res;
@@ -1524,12 +1524,12 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 			return nfsstat3_to_fsalstat(result.status);
 		}
 
-		LogDebug(COMPONENT_FSAL,
-			 "READDIRPLUS succeeded, looping over dirents");
+		LogFullDebug(COMPONENT_FSAL,
+			     "READDIRPLUS succeeded, looping over dirents");
 
 		entryplus3 *entry;
 		READDIRPLUS3resok *resok = &result.READDIRPLUS3res_u.resok;
-		uint count = 0;
+		int count = 0;
 		bool readahead = false;
 		/* Mark EOF now, if true. */
 		*eof = resok->reply.eof;
@@ -1554,9 +1554,9 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 
 			if (strcmp(entry->name, ".") == 0 ||
 			    strcmp(entry->name, "..") == 0) {
-				LogDebug(COMPONENT_FSAL,
-					 "Skipping special dir value of '%s'",
-					 entry->name);
+				LogFullDebug(COMPONENT_FSAL,
+					     "Skipping special value of '%s'",
+					     entry->name);
 				continue;
 			}
 
@@ -1630,9 +1630,9 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 			}
 		}
 
-		LogDebug(COMPONENT_FSAL,
-			 "Finished reading %u entries. EOF is %s",
-			 count, (*eof) ? "T" : "F");
+		LogFullDebug(COMPONENT_FSAL,
+			     "Finished reading %d entries. EOF is %s",
+			     count, (*eof) ? "T" : "F");
 	}
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -1663,7 +1663,7 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, struct proxyv3_obj_handle, obj);
 
 	LogDebug(COMPONENT_FSAL,
-		 "Doing read2 at offset %zu in handle %p of len %zu",
+		 "Doing read2 at offset %" PRIu64 " in handle %p of len %zu",
 		 read_arg->offset, obj_hdl, read_arg->iov[0].iov_len);
 
 	/* Signal that we've read 0 bytes. */
@@ -1671,8 +1671,8 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 
 	/* Like Ceph, we don't handle READ_PLUS. */
 	if (read_arg->info != NULL) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got a READPLUS request. Not supported");
+		LogCrit(COMPONENT_FSAL,
+			"Got a READPLUS request. Not supported");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			read_arg, cb_arg);
 		return;
@@ -1686,9 +1686,9 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 	if (read_arg->state != NULL &&
 	    (read_arg->state->state_type != STATE_TYPE_SHARE &&
 	     read_arg->state->state_type != STATE_TYPE_LOCK)) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got a stateful READ w/ type %d. Not supported",
-			 read_arg->state->state_type);
+		LogCrit(COMPONENT_FSAL,
+			"Got a stateful READ w/ type %d. Not supported",
+			read_arg->state->state_type);
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			read_arg, cb_arg);
 		return;
@@ -1704,8 +1704,8 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 	 */
 
 	if (read_arg->iov_count > 1) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got asked for multiple reads at once. Unexpected.");
+		LogCrit(COMPONENT_FSAL,
+			"Got asked for multiple reads at once. Unexpected.");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			read_arg, cb_arg);
 		return;
@@ -1762,7 +1762,8 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 	 */
 	if (resok->count != resok->data.data_len) {
 		LogCrit(COMPONENT_FSAL,
-			"Did a read of len %u (resok.count) but buf says %u",
+			"Did a read of len %" PRIu32 " (resok.count) "
+			"but buf says %" PRIu32,
 			resok->count, resok->data.data_len);
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0),
 			read_arg, cb_arg);
@@ -1795,7 +1796,7 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, struct proxyv3_obj_handle, obj);
 
 	LogDebug(COMPONENT_FSAL,
-		 "Doing write2 at offset %zu in handle %p of len %zu",
+		 "Doing write2 at offset %" PRIu64 " in handle %p of len %zu",
 		 write_arg->offset, obj_hdl, write_arg->iov[0].iov_len);
 
 	/* Signal that we've written 0 bytes so far. */
@@ -1803,8 +1804,8 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 
 	/* If info is only for READPLUS, it should definitely be NULL. */
 	if (write_arg->info != NULL) {
-		LogDebug(COMPONENT_FSAL,
-			 "Write had 'readplus' info. Something went wrong");
+		LogCrit(COMPONENT_FSAL,
+			"Write had 'readplus' info. Something went wrong");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0),
 			write_arg, cb_arg);
 		return;
@@ -1817,9 +1818,9 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 	if (write_arg->state != NULL &&
 	    (write_arg->state->state_type != STATE_TYPE_SHARE &&
 	     write_arg->state->state_type != STATE_TYPE_LOCK)) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got a stateful WRITE of type %d. Not supported",
-			 write_arg->state->state_type);
+		LogCrit(COMPONENT_FSAL,
+			"Got a stateful WRITE of type %d. Not supported",
+			write_arg->state->state_type);
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			write_arg, cb_arg);
 		return;
@@ -1834,8 +1835,8 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 	 * but warn here.
 	 */
 	if (write_arg->iov_count > 1) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got asked for multiple writes at once. Unexpected.");
+		LogCrit(COMPONENT_FSAL,
+			"Got asked for multiple writes at once. Unexpected.");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			write_arg, cb_arg);
 		return;
@@ -1915,7 +1916,7 @@ proxyv3_commit2(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, struct proxyv3_obj_handle, obj);
 
 	LogDebug(COMPONENT_FSAL,
-		 "Doing commit at offset %zu in handle %p of len %zu",
+		 "Doing commit at offset %" PRIu64 " in handle %p of len %zu",
 		 offset, obj_hdl, len);
 	COMMIT3args args;
 	COMMIT3res result;
@@ -2189,7 +2190,7 @@ proxyv3_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
 	}
 
 	LogDebug(COMPONENT_FSAL,
-		 "handle_to_wire %p, with len %u",
+		 "handle_to_wire %p, with len %" PRIu32,
 		 handle->fh3.data.data_val, handle->fh3.data.data_len);
 	LogFullDebugOpaque(COMPONENT_FSAL, " fh3 value is %s", LEN_FH_STR,
 			   handle->fh3.data.data_val,
@@ -2404,7 +2405,8 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3)
 	}
 
 	LogDebug(COMPONENT_FSAL,
-		 "FSINFO3 returned maxread %u maxwrite %u maxfilesize %zu",
+		 "FSINFO3 returned maxread %" PRIu32
+		 "maxwrite %" PRIu32 " maxfilesize %" PRIu64,
 		 resok->rtmax, resok->wtmax, resok->maxfilesize);
 
 	/*
@@ -2416,14 +2418,14 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3)
 
 	if (resok->rtmax != 0 && fsinfo->maxread > resok->rtmax) {
 		LogWarn(COMPONENT_FSAL,
-			"Changing maxread from %zu to %u",
+			"Changing maxread from %" PRIu64 " to %" PRIu32,
 			fsinfo->maxread, resok->rtmax);
 		fsinfo->maxread = resok->rtmax;
 	}
 
 	if (resok->wtmax != 0 && fsinfo->maxwrite > resok->wtmax) {
 		LogWarn(COMPONENT_FSAL,
-			"Reducing maxwrite from %zu to %u",
+			"Reducing maxwrite from %" PRIu64 " to %" PRIu32,
 			fsinfo->maxwrite, resok->wtmax);
 		fsinfo->maxwrite = resok->wtmax;
 	}
@@ -2431,7 +2433,8 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3)
 	if (resok->maxfilesize != 0 &&
 	    fsinfo->maxfilesize > resok->maxfilesize) {
 		LogWarn(COMPONENT_FSAL,
-			"SKIPPING: Asked to change maxfilesize from %zu to %zu",
+			"SKIPPING: Asked to change maxfilesize "
+			"from %" PRIu64 "to %" PRIu64,
 			fsinfo->maxfilesize, resok->maxfilesize);
 
 		/*
@@ -2462,7 +2465,7 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3)
 	/* Pickup the preferred maxcount parameter for READDIR. */
 	if (resok->dtpref != 0) {
 		LogDebug(COMPONENT_FSAL,
-			 "Setting dtpref to %u based on fsinfo result",
+			 "Setting dtpref to %" PRIu32 " based on fsinfo result",
 			 resok->dtpref);
 		export->params.readdir_preferred = resok->dtpref;
 	}
@@ -2646,7 +2649,7 @@ proxyv3_create_export(struct fsal_module *fsal_handle,
 	nfs_fh3 *fh3 = (nfs_fh3 *) &result.mountres3_u.mountinfo.fhandle;
 
 	LogDebug(COMPONENT_FSAL,
-		 "Mount successful. Got back a %u len fhandle",
+		 "Mount successful. Got back a %" PRIu32 " len fhandle",
 		 fh3->data.data_len);
 
 	/* Copy the result for later use. */
@@ -2662,9 +2665,7 @@ proxyv3_create_export(struct fsal_module *fsal_handle,
 				      NLMPROC4_NULL,
 				      (xdrproc_t) xdr_void, NULL,
 				      (xdrproc_t) xdr_void, NULL)) {
-			LogCrit(COMPONENT_FSAL,
-				"NLM NULL procedure failed against NLM port %u",
-				proxyv3_nlm_port());
+			/* nlm_call will already have said the RPC failed. */
 			gsh_free(export);
 			return fsalstat(ERR_FSAL_INVAL, 0);
 		}
