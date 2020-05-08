@@ -238,7 +238,7 @@ proxyv3_nlm_commonrpc(rpcproc_t nlmProc, const char *procName,
 		      struct nlm4_lock *lock)
 {
 	LogDebug(COMPONENT_FSAL,
-		 "Issuing an %s. Lock info: offset %zu and len %zu",
+		 "Issuing an %s. Lock info: offset %" PRIu64 ", len %" PRIu64,
 		 procName, lock->l_offset, lock->l_len);
 
 	if (!proxyv3_nlm_call(proxyv3_sockaddr(),
