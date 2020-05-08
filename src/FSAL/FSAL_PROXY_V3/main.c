@@ -381,8 +381,7 @@ proxyv3_lookup_internal(struct fsal_export *export_handle,
 			struct attrlist *attrs_out)
 {
 	LogDebug(COMPONENT_FSAL,
-		 "Doing a lookup of '%s'",
-		 path);
+		 "Doing a lookup of '%s'", path);
 
 	if (parent == NULL) {
 		LogCrit(COMPONENT_FSAL,
@@ -1497,9 +1496,9 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 
 		args.dircount = args.maxcount = proxyv3_readdir_preferred();
 
-		LogDebug(COMPONENT_FSAL,
-			 "Calling READDIRPLUS with cookie %lu",
-			 cookie);
+		LogFullDebug(COMPONENT_FSAL,
+			     "Calling READDIRPLUS with cookie %lu",
+			     cookie);
 
 		xdrproc_t encFunc = (xdrproc_t) xdr_READDIRPLUS3args;
 		xdrproc_t decFunc = (xdrproc_t) xdr_READDIRPLUS3res;
@@ -1524,8 +1523,8 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 			return nfsstat3_to_fsalstat(result.status);
 		}
 
-		LogDebug(COMPONENT_FSAL,
-			 "READDIRPLUS succeeded, looping over dirents");
+		LogFullDebug(COMPONENT_FSAL,
+			     "READDIRPLUS succeeded, looping over dirents");
 
 		entryplus3 *entry;
 		READDIRPLUS3resok *resok = &result.READDIRPLUS3res_u.resok;
@@ -1554,9 +1553,9 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 
 			if (strcmp(entry->name, ".") == 0 ||
 			    strcmp(entry->name, "..") == 0) {
-				LogDebug(COMPONENT_FSAL,
-					 "Skipping special dir value of '%s'",
-					 entry->name);
+				LogFullDebug(COMPONENT_FSAL,
+					     "Skipping special value of '%s'",
+					     entry->name);
 				continue;
 			}
 
@@ -1630,9 +1629,9 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 			}
 		}
 
-		LogDebug(COMPONENT_FSAL,
-			 "Finished reading %u entries. EOF is %s",
-			 count, (*eof) ? "T" : "F");
+		LogFullDebug(COMPONENT_FSAL,
+			     "Finished reading %u entries. EOF is %s",
+			     count, (*eof) ? "T" : "F");
 	}
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -1671,8 +1670,8 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 
 	/* Like Ceph, we don't handle READ_PLUS. */
 	if (read_arg->info != NULL) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got a READPLUS request. Not supported");
+		LogCrit(COMPONENT_FSAL,
+			"Got a READPLUS request. Not supported");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			read_arg, cb_arg);
 		return;
@@ -1686,9 +1685,9 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 	if (read_arg->state != NULL &&
 	    (read_arg->state->state_type != STATE_TYPE_SHARE &&
 	     read_arg->state->state_type != STATE_TYPE_LOCK)) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got a stateful READ w/ type %d. Not supported",
-			 read_arg->state->state_type);
+		LogCrit(COMPONENT_FSAL,
+			"Got a stateful READ w/ type %d. Not supported",
+			read_arg->state->state_type);
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			read_arg, cb_arg);
 		return;
@@ -1704,8 +1703,8 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 	 */
 
 	if (read_arg->iov_count > 1) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got asked for multiple reads at once. Unexpected.");
+		LogCrit(COMPONENT_FSAL,
+			"Got asked for multiple reads at once. Unexpected.");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			read_arg, cb_arg);
 		return;
@@ -1803,8 +1802,8 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 
 	/* If info is only for READPLUS, it should definitely be NULL. */
 	if (write_arg->info != NULL) {
-		LogDebug(COMPONENT_FSAL,
-			 "Write had 'readplus' info. Something went wrong");
+		LogCrit(COMPONENT_FSAL,
+			"Write had 'readplus' info. Something went wrong");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0),
 			write_arg, cb_arg);
 		return;
@@ -1817,9 +1816,9 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 	if (write_arg->state != NULL &&
 	    (write_arg->state->state_type != STATE_TYPE_SHARE &&
 	     write_arg->state->state_type != STATE_TYPE_LOCK)) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got a stateful WRITE of type %d. Not supported",
-			 write_arg->state->state_type);
+		LogCrit(COMPONENT_FSAL,
+			"Got a stateful WRITE of type %d. Not supported",
+			write_arg->state->state_type);
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			write_arg, cb_arg);
 		return;
@@ -1834,8 +1833,8 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 	 * but warn here.
 	 */
 	if (write_arg->iov_count > 1) {
-		LogDebug(COMPONENT_FSAL,
-			 "Got asked for multiple writes at once. Unexpected.");
+		LogCrit(COMPONENT_FSAL,
+			"Got asked for multiple writes at once. Unexpected.");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			write_arg, cb_arg);
 		return;
