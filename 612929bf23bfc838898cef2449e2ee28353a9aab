@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc215d22_556b2dab",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-12T14:32:32Z",
+      "side": 1,
+      "message": "I\u0027m surprised check patch didn\u0027t complain about the split message, checkpatch and our style prefers a single string to not be broken up and it is allowed to exceed 80 columns (unfortunately the PRI macros break that rule...). Just a note for the future no need to change this.",
+      "revId": "612929bf23bfc838898cef2449e2ee28353a9aab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
