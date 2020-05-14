@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8b61f5b_88e8e814",
+        "filename": "src/libntirpc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-14T12:43:27Z",
+      "side": 1,
+      "message": "This is reverting the ntirpc submodule.  Make sure you submodule update to get the new one.\n\nI think you don\u0027t have the git_hooks installed, they should have warned about this.  Please see src/scripts/git_hooks/install_git_hooks.sh",
+      "revId": "27f879b2b31a2284f91bc9d714e01ee799452426",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
