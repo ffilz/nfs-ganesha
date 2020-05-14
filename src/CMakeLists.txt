@@ -373,7 +373,7 @@ goption(USE_RADOS_RECOV "Enable Rados KV Recovery" ON)
 goption(RADOS_URLS "Enable config file inclusion from RADOS objects" ON)
 
 # Enable CephFS POSIX ACL
-goption(CEPHFS_POSIX_ACL "Enable CephFS POSIX ACL" OFF)
+goption(CEPHFS_POSIX_ACL "Enable CephFS POSIX ACL" ON)
 
 # Enable NFSv4 and POSIX acls mapping
 option(USE_ACL_MAPPING "Build NFSv4 to POSIX ACL mapping" OFF)
