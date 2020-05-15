@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15b4abb3_e3bdf330",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3467,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027+\u003d\u0027 (ctx:WxV)\n+\t\tnext +\u003d1;\n \t\t     ^",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd852566_25ca8f43",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3490,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                if (lr_names-\u003eentryCount \u003d\u003d 0) {$",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03a5af27_193519bd",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3490,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                if (lr_names-\u003eentryCount \u003d\u003d 0) {$",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e2e6386_a8d63f5c",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3506,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tentryCount, val, entry, entry-\u003eutf8string_len,",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5263bb3e_5ddc27b7",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3507,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tentry-\u003eutf8string_val, entry-\u003eutf8string_val);",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdfbd848_8b114e3c",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f071a38d_3445f34d",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fc76a99_cd7d8aaa",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6197589d_226945c9",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94a5a41a_2cee0c90",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        }$",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeca2329_2909a2b6",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        }$",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66cf8b90_52f6a734",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2338d59_e661aec8",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6959d5e8_884e76ce",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58fa3979_64e0a0a0",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T19:57:18Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(!(op_ctx-\u003efsal_export-\u003eexp_ops.fs_supported_attrs(op_ctx-\u003efsal_export)",
+      "revId": "23a844d4fc91a981677a02e12afb1b5d06ff870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
