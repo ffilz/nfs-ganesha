@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17f4b3b4_0a924fce",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3505,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-15T20:44:08Z",
+      "side": 1,
+      "message": "WARNING: break quoted strings at a space character\n+\t\t\tLogFullDebug(COMPONENT_FSAL, \"entry %d val %p\"\n+\t\t\t\t     \"at %p len %d at %p name %s\",",
+      "revId": "c2f3c59215bdc07718eb0f07c3d54a80b84f3fea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
