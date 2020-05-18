@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf6adf32_542b5163",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-18T14:40:13Z",
+      "side": 1,
+      "message": "What happens if this isn\u0027t found?  None of the code is conditional.  Presumably compilation will fail?",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "748e2803_df7d7a93",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-18T14:40:13Z",
+      "side": 1,
+      "message": "This should be deleted, rather than commented out.",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83035aab_a761d1f5",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-18T14:40:13Z",
+      "side": 1,
+      "message": "readmask, writemask, and executemask are bools, so they should be boolean negated (!) rather than bitwise negated (~)",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bd744c2_6277cb8d",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-18T14:40:13Z",
+      "side": 1,
+      "message": "This looks backwards?  The other check allow and !deny, and this checks deny?",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c87d9ff_f9467a9c",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-18T14:40:13Z",
+      "side": 1,
+      "message": "This needs to be removed",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
