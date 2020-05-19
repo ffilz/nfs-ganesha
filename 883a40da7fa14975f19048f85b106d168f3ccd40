@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "384df120_485e8963",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2020-05-19T08:08:25Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "748e2803_df7d7a93",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "83035aab_a761d1f5",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2020-05-18T14:40:13Z",
       "side": 1,
       "message": "readmask, writemask, and executemask are bools, so they should be boolean negated (!) rather than bitwise negated (~)",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0624a148_a888800f",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2020-05-19T08:08:25Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "83035aab_a761d1f5",
       "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "68e6b871_f49619de",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2020-05-19T08:08:25Z",
+      "side": 1,
+      "message": "No, it\u0027s right.   \nThe macro(FSAL_ACE_FLAG_MASK_READ_DENY) represents a posix_acl entry has (r) flag but restrict (r) permission by mask entry in fsal_acls.  \nWe should restore (r) flag for this posix_acl entry who has (FSAL_ACE_FLAG_MASK_READ_DENY) flag when fsal_acl -\u003eposix_acl.  \nSo is the following(FSAL_ACE_FLAG_MASK_WRITE_DENY,  FSAL_ACE_FLAG_MASK_EXECUTE_DENY).",
+      "parentUuid": "2bd744c2_6277cb8d",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8c87d9ff_f9467a9c",
         "filename": "src/MainNFSD/nfs_worker_thread.c",
         "patchSetId": 6
@@ -81,6 +135,24 @@
       "writtenOn": "2020-05-18T14:40:13Z",
       "side": 1,
       "message": "This needs to be removed",
+      "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a8c3cd5_ce50562a",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2020-05-19T08:08:25Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "8c87d9ff_f9467a9c",
       "revId": "883a40da7fa14975f19048f85b106d168f3ccd40",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
