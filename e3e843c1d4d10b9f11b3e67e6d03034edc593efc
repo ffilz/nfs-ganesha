@@ -16,6 +16,47 @@
       "revId": "e3e843c1d4d10b9f11b3e67e6d03034edc593efc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92aba315_fd36c9db",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2020-05-19T12:48:39Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "ff4b348f_495032dc",
+      "revId": "e3e843c1d4d10b9f11b3e67e6d03034edc593efc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f90dc346_240659ae",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2020-05-19T12:48:39Z",
+      "side": 1,
+      "message": "I\u0027d like it to be false here. But when I set it to false and set true in CORE_PARAM setion in ganesha.conf. It does not work. Is there anything else that needs to be configured? Can you give me some advice. Thanks.",
+      "range": {
+        "startLine": 165,
+        "startChar": 33,
+        "endLine": 165,
+        "endChar": 37
+      },
+      "revId": "e3e843c1d4d10b9f11b3e67e6d03034edc593efc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
