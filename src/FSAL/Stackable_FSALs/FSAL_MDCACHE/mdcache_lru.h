@@ -74,6 +74,7 @@ enum fd_states {
 struct lru_state {
 	uint64_t entries_hiwat;
 	uint64_t entries_used;
+	uint32_t entries_release_size;
 	uint64_t chunks_hiwat;
 	uint64_t chunks_used;
 	uint32_t fds_system_imposed;

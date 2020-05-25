@@ -1715,6 +1715,9 @@ mdcache_lru_pkginit(void)
 	lru_state.entries_hiwat = mdcache_param.entries_hwmark;
 	lru_state.entries_used = 0;
 
+	/* set lru release entries size */
+	lru_state.entries_release_size = mdcache_param.entries_release_size;
+
 	/* Set high and low watermark for chunks.  XXX This seems a
 	   bit fishy, so come back and revisit this. */
 	lru_state.chunks_hiwat = mdcache_param.chunks_hwmark;
