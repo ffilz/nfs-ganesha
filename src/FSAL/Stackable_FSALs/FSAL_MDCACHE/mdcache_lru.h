@@ -159,6 +159,8 @@ void mdcache_lru_kill(mdcache_entry_t *entry);
 void mdcache_lru_cleanup_push(mdcache_entry_t *entry);
 void mdcache_lru_cleanup_try_push(mdcache_entry_t *entry);
 
+size_t mdcache_lru_release_entries(void);
+
 #define mdcache_lru_unref(e) _mdcache_lru_unref(e, LRU_FLAG_NONE, \
 						__func__, __LINE__)
 bool _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags,
