@@ -1375,6 +1375,27 @@ lru_run(struct fridgethr_context *ctx)
 		}
 	}
 
+	/* LRU release entries
+ 	 * enable release entries if entries_release_size > 0
+ 	 * disable if entries_release_size = 0
+ 	 */
+	if(lru_state.entries_release_size > 0) {
+		if(lru_state.entries_used > lru_state.entries_hiwat) {
+			size_t released = 0;
+
+			LogFullDebug(COMPONENT_CACHE_INODE_LRU,"Entries used is %" PRIu64
+				" and above water mark, LRU want release %d entries",
+				lru_state.entries_used,lru_state.entries_release_size);
+
+			released = mdcache_lru_release_entries();
+			LogFullDebug(COMPONENT_CACHE_INODE_LRU,"Actually release %zd entries",released);
+		}else {
+			LogFullDebug(COMPONENT_CACHE_INODE_LRU,
+				"Entries used is %" PRIu64
+				" and low water mark: not releasing",lru_state.entries_used);
+		}
+	}
+
 	/* The following calculation will progressively garbage collect
 	 * more frequently as these two factors increase:
 	 * 1. current number of open file descriptors
@@ -1583,6 +1604,38 @@ void lru_cleanup_entries(void)
 			mdcache_lru_unref(entry);
 		}
 	}
+}
+
+/**
+ * @brief Release entries if entries used are above the high-water mark
+ *
+ * If something refs a lot of entries at the same time and above the
+ * high water mark. Every time we can try best to release the number
+ * of entries, the max number is lru_state.entries_release_size.
+ *
+ * @return Return the number of really released
+ */
+size_t mdcache_lru_release_entries(void)
+{
+	mdcache_lru_t *lru;
+	mdcache_entry_t *entry = NULL;
+	size_t workdone=0,released=0;
+	int32_t refcnt;
+
+	while ((lru = lru_try_reap_entry())) {
+		if(lru) {
+			entry = container_of(lru, mdcache_entry_t, lru);
+			refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
+			if((refcnt == 1) && mdcache_lru_unref(entry)) /*really freed*/
+				++released;
+		}
+		++workdone;
+		if(workdone >= lru_state.entries_release_size)
+			break;
+	}
+	if(0 == released)
+		LogDebug(COMPONENT_CACHE_INODE_LRU,"Can not release any entries");
+	return released;
 }
 
 void init_fds_limit(void)
