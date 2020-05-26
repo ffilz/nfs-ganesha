@@ -169,9 +169,12 @@ static void mdcache_unexport(struct fsal_export *exp_hdl,
 		sub_export->exp_ops.unexport(sub_export, root_entry->sub_handle)
 	);
 
-	/* Unhash the root object */
-	rc = cih_remove_checked(root_entry);
-	assert(!rc);
+	if (!is_export_pin(&root_entry->obj_handle)) {
+		/* There are no exports referencing this entry,
+		 * Unhash the root object */
+		rc = cih_remove_checked(root_entry);
+		assert(!rc);
+	}
 }
 
 /**
