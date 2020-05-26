@@ -2917,6 +2917,8 @@ struct fsal_obj_handle {
 				   the scope of the fsid, (e.g. inode number) */
 
 	struct state_hdl *state_hdl;	/*< State related to this handle */
+	bool export_pin;	/* Mark it when referenced by export root
+				   or pseudoFS export */
 };
 
 /**

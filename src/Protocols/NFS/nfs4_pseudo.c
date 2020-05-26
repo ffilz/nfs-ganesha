@@ -216,6 +216,7 @@ retry:
 
 		state->obj->obj_ops->put_ref(state->obj);
 		/* Make new node the current node */
+		new_node->export_pin = true;
 		state->obj = new_node;
 		return true;
 	}
@@ -290,6 +291,7 @@ retry:
 	state->obj->obj_ops->put_ref(state->obj);
 
 	/* Make new node the current node */
+	new_node->export_pin = true;
 	state->obj = new_node;
 	return true;
 }
@@ -540,6 +542,7 @@ void pseudo_unmount_export(struct gsh_export *export)
 
 		/* Detach the export from the inode */
 		PTHREAD_RWLOCK_wrlock(&export->lock);
+		export->exp_junction_obj->export_pin = false;
 		export->exp_junction_obj = NULL;
 	}
 
