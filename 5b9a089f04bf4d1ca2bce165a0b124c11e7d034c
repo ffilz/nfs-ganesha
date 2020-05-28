@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca7ce53c_b5902e42",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2020-05-28T02:47:31Z",
+      "side": 1,
+      "message": "since the target entries to release discrete, this approach seems unable to break the constant-time processing invariant, so seems ok",
+      "revId": "5b9a089f04bf4d1ca2bce165a0b124c11e7d034c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
