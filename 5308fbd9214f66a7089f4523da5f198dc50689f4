@@ -16,6 +16,41 @@
       "revId": "5308fbd9214f66a7089f4523da5f198dc50689f4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed56204a_580da154",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_ext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-28T15:21:23Z",
+      "side": 1,
+      "message": "Also the comments are above the struct member, not below, so you have inserted this in the wrong place.",
+      "parentUuid": "3e41a658_4c986593",
+      "revId": "5308fbd9214f66a7089f4523da5f198dc50689f4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bab4e144_f9b8b4f1",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-28T15:21:23Z",
+      "side": 1,
+      "message": "You also need to add documentation to doc/man/ganesha-cache-config.rst",
+      "revId": "5308fbd9214f66a7089f4523da5f198dc50689f4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
