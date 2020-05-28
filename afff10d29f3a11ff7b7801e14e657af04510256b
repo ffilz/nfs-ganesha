@@ -34,6 +34,24 @@
       "revId": "afff10d29f3a11ff7b7801e14e657af04510256b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "923c3d99_93cd5184",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2020-05-28T12:34:26Z",
+      "side": 1,
+      "message": "I need to discuss with more people, but my intuition is, losing the fast detection of a req already being processed (i.e., fast detect and fail of DUPREQ_BEING_PROCESSED) is a wrong turn.  As the comment says, the new request is a re-send, and there is only one expected reply for this one and the earlier one(s) that have rendezvoused here.  The underlying issue you\u0027re currently ii fixing (I think?) is what happens when the -original- request finally finishes and finds the client gone.  I\u0027m not sure there\u0027s anything wrong with that scenario, except insofar as ganesha accesses freed memory or something.  The original request is the best approximation of the one, real request the client has sent--in particular, for nfsv{2,3}--there\u0027s not a good reason to move the reply obligation to the resend(s), and trying to do so is inefficient.  That said, there may be additional things that we could now think about, now that ganesha has more async processing capabilities, I\u0027m not sure.  But to start, I am unsure the original intent of this whole change is cogent.",
+      "parentUuid": "5755eab9_de8fe65c",
+      "revId": "afff10d29f3a11ff7b7801e14e657af04510256b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
