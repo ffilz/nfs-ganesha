@@ -36,6 +36,74 @@
     },
     {
       "key": {
+        "uuid": "0cd8b6cb_91b65e54",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-28T15:35:25Z",
+      "side": 1,
+      "message": "Hmm, there should be a space between if and (",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1733116_b7f983f6",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1698,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-28T15:35:25Z",
+      "side": 1,
+      "message": "Note that an inode\u0027s \"first_export_id\" is not necessarily the export that has the inode as a root.\n\nIf you have two exports:\n\n/export/fs1 (NFS v3 and NFS v4)\nand\n/export/fs1/some/path/fs2 (NFS v4 only)\n\nand the v4 export was added dynamically\n\nAn NFS v3 client could have caused /export/fs1/some/path/fs2 to be in the mdcache before the export was added, and thus first_export_id is NOT the new export and the inode doesn\u0027t appear to be a root inode",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77743b26_f087a484",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-28T15:35:25Z",
+      "side": 1,
+      "message": "I know some folks like this convention as it makes it harder for a typo to accidentally result in an assignment instead of a comparison but I find it clunky to read.\n\nAlso, PseudoFS is not guaranteed to be export_id 0, if you define an explicit PseudoFS export, it can have any export_id you like.",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1e40e54_3ee4f501",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-05-28T15:35:25Z",
+      "side": 1,
+      "message": "You\u0027re leaking an export reference.",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7b7b2e47_768dcb08",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 3
