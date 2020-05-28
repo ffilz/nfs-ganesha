@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e41a658_4c986593",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_ext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-28T13:23:15Z",
+      "side": 1,
+      "message": "This isn\u0027t a great description.  It sounds like maybe it\u0027s a limit on the number of entries the LRU will ever release.  Maybe something like:\n\nWhen the handle cache is over the high water mark, attempt to release this number of entries in each pass until it\u0027s back below the high water mark.",
+      "revId": "5308fbd9214f66a7089f4523da5f198dc50689f4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
