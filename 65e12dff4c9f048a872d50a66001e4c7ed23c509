@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8f67b21_be97c37e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-28T13:23:39Z",
+      "side": 1,
+      "message": "There is already a function (lru_cleanup_entries()) that does this, but it keeps going until it can\u0027t do any more.  Maybe combine this with that, passing in the max number of entries to release, or -1 to not stop?\n\n(Note, that\u0027s called in gtest code, so you\u0027ll need to fix up that call if you\u0027re not building it.)",
+      "revId": "65e12dff4c9f048a872d50a66001e4c7ed23c509",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69cce6d4_a7bb04ea",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1626,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-28T13:23:39Z",
+      "side": 1,
+      "message": "The while() above already ensured lru was not NULL, or it would have aborted.",
+      "revId": "65e12dff4c9f048a872d50a66001e4c7ed23c509",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebad61fa_7a615957",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-28T13:23:39Z",
+      "side": 1,
+      "message": "refcnt must be 1 here, or lru_try_reap_entry() would not have returned it.",
+      "revId": "65e12dff4c9f048a872d50a66001e4c7ed23c509",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
