@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "746f9488_6e33dbc0",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-28T13:23:28Z",
+      "side": 1,
+      "message": "This should probably be static.",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2af39763_0f3843dc",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-28T13:23:28Z",
+      "side": 1,
+      "message": "The LRU doesn\u0027t have a \"head\" or a \"tail\", it has an MRU and an LRU end.  Please try to use MRU and LRU rather than \"head\" or \"tail\", to avoid confusion.",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b7b2e47_768dcb08",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1706,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-05-28T13:23:28Z",
+      "side": 1,
+      "message": "You don\u0027t need to get the inode of the sub_handle, and that might not even be right, if there\u0027s another stacked FSAL.  You can check this:\n\n(export-\u003eexp_root_obj \u003d\u003d \u0026entry-\u003eobj_handle)",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
