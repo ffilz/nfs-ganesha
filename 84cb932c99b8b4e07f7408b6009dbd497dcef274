@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4f2056d1_ed66c84d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-05-28T06:03:04Z",
+      "side": 1,
+      "message": "\u003e 1. this is old code, but why is this unlikely?\nYes，the code of adjust_lru is indeed duplicate of the _mdcache_lru_ref, i will merge the duplicate code. Thank you very much.\n\u003e 2. there is only 1 root object, why does this code make it the common case (or am I misreading)?\nIn addition to the root object \u0027/\u0027, we also need to consider the export root object and NFSv4 pseduo root object. There is not only 1 here, it should be related to the number of configured export path.",
+      "parentUuid": "80d4282e_4b91f4d1",
+      "revId": "84cb932c99b8b4e07f7408b6009dbd497dcef274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bc443ee9_f9cce884",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 2
