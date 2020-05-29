@@ -19,6 +19,74 @@
     },
     {
       "key": {
+        "uuid": "c3425b2b_003ac450",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1654,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "ERROR: switch and case should be at the same indent\n+\tswitch (lru-\u003eqid) {\n+\t\tcase LRU_ENTRY_L1:\n[...]\n+\t\tcase LRU_ENTRY_L2:\n[...]\n+\t\tdefault:",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e6e2d65_4f83d2a9",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        }^I^I/* switch qid */$",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3147c9b2_aed8bb2f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        }^I^I/* switch qid */$",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "716a9d1e_25435c30",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1679,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * During the entries release process，the root object of export(Not releasable)",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2af39763_0f3843dc",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 3
@@ -36,6 +104,23 @@
     },
     {
       "key": {
+        "uuid": "292cd428_c1bf21ef",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * may block the head of LRU queue，we can adjust it to tail of LRU and make sure",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cd8b6cb_91b65e54",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 3
@@ -50,6 +135,23 @@
       "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcaf8a0a_e906218e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(q-\u003esize \u003c 2)",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +207,57 @@
     },
     {
       "key": {
+        "uuid": "6b955bd0_aa9fdfc5",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(0 \u003d\u003d export_id)",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28286527_b7bac988",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "WARNING: Comparisons should place the constant on the right side of the test\n+\tif(0 \u003d\u003d export_id)",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa910a4_80848970",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(export_id \u003e 0) {",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1e40e54_3ee4f501",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 3
@@ -154,6 +307,74 @@
       "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7f7f6b7_234b0098",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1706,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\t\tif(ino \u003d\u003d export-\u003eexp_root_obj-\u003efileid)",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71ec0289_61b98fc8",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        }$",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70c172ad_4e119152",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        }$",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff74dcda_894cd87a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-05-29T09:11:17Z",
+      "side": 1,
+      "message": "WARNING: labels should not be indented\n+\tout:",
+      "revId": "26266e20d0d49984a00dca7d1fd11b74fd324ba6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
