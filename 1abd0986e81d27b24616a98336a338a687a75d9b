@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e67c0b4_87079336",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2921,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-02T16:22:23Z",
+      "side": 1,
+      "message": "This needs to be a counter, it is possible for a node to be root of more than one export (for example, if pseudo or tag is different).",
+      "revId": "1abd0986e81d27b24616a98336a338a687a75d9b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
