@@ -64,12 +64,14 @@
   fsal_export_init;
   fsal_export_stack;
   fsal_find_fd;
+  fsal_inherit_acls;
   fsal_init;
   fsal_link;
   fsal_lookup;
   fsal_obj_handle_init;
   fsal_obj_handle_fini;
   fsal_open2;
+  fsal_print_acl_int;
   open_fd_count;
   fsal_pnfs_ds_fini;
   fsal_read;
@@ -128,6 +130,7 @@
   msg_fsal_err;
   nfs_notify_grace_waiters;
   nfs4_ace_alloc;
+  nfs4_ace_free;
   nfs4_acl_entry_inc_ref;
   nfs4_acl_new_entry;
   nfs4_Compound_FreeOne;
