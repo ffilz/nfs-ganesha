@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "270bdd0c_e77a447a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-04T22:21:56Z",
+      "side": 1,
+      "message": "Oops, I was looking at the wrong function... This uses cih_remove_checked which only returns true if mdcache_lru_unref frees the entry, which will never happen because our caller always has a reference.\n\nI actually tried to break things, I created two exports of the same path but different pseudo and tag and then unexported the first, it did unhash the entry, but try as I might, I couldn\u0027t actually break anything because of that... At some point though, a client will try and use the handle and something will go not right because it can\u0027t find the handle in the hash table any more. With some added debug I can definitely see this unhashing when it shouldn\u0027t, but because the existence of an export on the inode, the entry itself is safe until that export is unexported.\n\nIn any case, this call to cih_remove_checked is NOT necessary, and won\u0027t do anything in the case of a single export using the node.",
+      "parentUuid": "7b09ea99_f9103d82",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77191f98_7903c7a0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 8
