@@ -22,6 +22,57 @@
       "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77191f98_7903c7a0",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2020-06-04T14:02:30Z",
+      "side": 1,
+      "message": "this seems like a good idea",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "483c7e69_45a9279e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2020-06-04T14:02:30Z",
+      "side": 1,
+      "message": "as before, this doesn\u0027t look right to me;  as I think Frank proposed, let\u0027s mark or otherwise make \"rootness\" explicit",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "925679d3_1ba57d29",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2002,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2020-06-04T14:02:30Z",
+      "side": 1,
+      "message": "this is a nice cleanup",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
