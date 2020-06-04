@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9a976ce_cd751542",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-06-04T11:54:05Z",
+      "side": 1,
+      "message": "If an object to be root of multiple exports, here should not release the sentinel reference and set entry as invalid when the first export unmount, but occur in the last export release.",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
