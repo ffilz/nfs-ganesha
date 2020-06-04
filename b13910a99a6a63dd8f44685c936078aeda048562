@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b718acbb_b8643c1e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-04T15:43:58Z",
+      "side": 1,
+      "message": "This is a good catch, I actually saw this yesterday, I\u0027m not sure this really is the right fix, let\u0027s leave this bit out of this patch. Even if this is the right fix, I\u0027d rather it be in a separate patch. I will also be testing in this area.\n\nI think actually the loop above should take care of the root entry of an export. I\u0027ll resolve this with the work I\u0027m doing on export update/add/remove.",
+      "parentUuid": "f9a976ce_cd751542",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77191f98_7903c7a0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 8
@@ -59,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "690dac1b_cee66c4c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-04T15:43:58Z",
+      "side": 1,
+      "message": "Matt, I\u0027m not quite sure what you are concerned about.\n\nIt might be more clear if adjust_lru_root_object was just straight coded here though.",
+      "parentUuid": "483c7e69_45a9279e",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "925679d3_1ba57d29",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 8
@@ -70,6 +112,40 @@
       "writtenOn": "2020-06-04T14:02:30Z",
       "side": 1,
       "message": "this is a nice cleanup",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66efbcfc_8f334485",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-04T15:43:58Z",
+      "side": 1,
+      "message": "You shouldn\u0027t need this (and you don\u0027t have a matching put when pseudofs entries are deleted). PseudoFS entries that are not junctions should be able to be released from mdcache, FSAL_PSEUDO keeps track of them and create_handle will revive them into mdcache.",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "413f549c_5fd94db7",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 2921,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-04T15:43:58Z",
+      "side": 1,
+      "message": "This just needs to count root nodes and junction nodes, it doesn\u0027t need to count pseudofs nodes",
       "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
