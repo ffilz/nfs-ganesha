@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "7b09ea99_f9103d82",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-04T21:45:08Z",
+      "side": 1,
+      "message": "Ok, in fact, if the entry is no longer the root of any export, it WILL have been unhashed above by mdcache_lru_cleanup_try_push (in which case cih_remove_checked does nothing, and in fact, this is pretty much guaranteed... the assert looks for a false return from cih_remove_checked which means it does nothing, in fact, basically the assertion asserts that cih_remove_checked is not necessary! So in fact, if an entry ever was the root of more than one export, the assert should fail...\n\nI will be removing this call to cih_remove_checked in my patches.\n\nI think the code that added this call to cih_remove_checked actually fixed the issue it was expecting to fix by other parts of the change.",
+      "parentUuid": "b718acbb_b8643c1e",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77191f98_7903c7a0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 8
