@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "c64fae0b_47bf0a40",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-06-05T13:37:00Z",
+      "side": 1,
+      "message": "Or just remove the call of cih_remove_checked(root_entry)? When all exports are released, the root object remain hold sentinel reference(of course, it can be released at the point), right?",
+      "parentUuid": "84809adf_c399053a",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77191f98_7903c7a0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 8
