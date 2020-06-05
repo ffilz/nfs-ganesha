@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "2794979e_0bd3f7f7",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-05T15:16:07Z",
+      "side": 1,
+      "message": "I am continuing some testing, but I\u0027m pretty sure we can just remove this. I added the following comment:\n\n        /* NOTE: we do NOT need to unhash the root entry, it was unhashed above\n         *       (if it was not used by another export) in the loop since it is\n         *       an entry that belongs to the export.\n         */\n\nIf you would like to put that change into a separate patch that would be really helpful.\n\nIf I end up with something different by the time I\u0027m done with my export update patch set and before we actually merge your patches (which at this point is pretty much going to be next week), I\u0027ll deal with merging my additions into your patch or suggest them in review comments.\n\nThanks for calling this out, I had noticed the issue and then forgot about it.",
+      "parentUuid": "c64fae0b_47bf0a40",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77191f98_7903c7a0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 8
@@ -243,6 +267,24 @@
       "side": 1,
       "message": "I don\u0027t understand why it\u0027s shouldn\u0027t need here as you said, make_pseudofs_node either already exists in sub_FSAL or create in PseudoFS, but in either case, the object will be referenced by PseudoFS export, so I think it needs to be mark(export_root_object_put) here as well. Both above cases can match export_root_object_put in pseudo_unmount_export.\nIt would be more appropriate to modify it into pseudo_mount_export().",
       "parentUuid": "66efbcfc_8f334485",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a85a64fc_231085ff",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-05T15:16:07Z",
+      "side": 1,
+      "message": "This function can create intermediate nodes in the PseudoFS that are not junctions. For example, if you have the following exports:\n\n/export/exp1\n/export/exp2\n\n/ is the root of the FSAL_PSEUDO file system so it will be an export root\n/export is just a plain directory in the FSAL_PSEUDO filesystem\n/export/exp1 and /export/exp2 are junctions in the FSAL_PSEUDO filesystem,and export roots in the exported filesystem(s)\n\n/export does not need to be treated specially in the mdcache, it can go down to only the sentinel refcount and be reclaimed without any problem. If a client does a PUTFH of the handle, or does a PUTROOTFH, LOOKUP export, with inode will be recreated in mdcache from FSAL_PSEUDO\u0027s internal representation of the pseudo filesystem.\n\nThis would be the same if the pseudofs happened to be a real filesystem, at which point of course this code won\u0027t be creating the directory entries, but assuming they already exist, there is no problem with the inode for /export being flushed from the mdcache. Ganesha does not depend on the entire path to an export being pinned.",
+      "parentUuid": "4036cf30_0e82d4a5",
       "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true

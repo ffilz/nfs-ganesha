@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e16905f5_7927b31d",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-05T15:16:07Z",
+      "side": 1,
+      "message": "Yep, this is all we need to do in the pseudofs, or any other FSAL filesystem inode that serves as a junction.\n\nNote that with FSAL_VFS (and FSAL_GPFS I think) a node can be BOTH a junction and an export root because Ganesha can\u0027t get to the underlying inode on filesystem boundaries, plus you can place an export junction not at a filesystem boundary. Also, if FSAL_VFS or FSAL_XFS have an export submounted that is the other FSAL, or FSAL_GPFS, FSAL_VFS/XFS needs to invent a handle for the junction because we can\u0027t actually get the underlying inode that is the mount point for the mounted on filesystem. A little bit of arcane trickery there...",
+      "revId": "6151ad3f6066c8f45c61038f8a02b29aa065da67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
