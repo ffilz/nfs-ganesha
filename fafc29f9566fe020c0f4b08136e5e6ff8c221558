@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f3b8c65d_1c9e25ce",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2338,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-05T15:22:40Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "3d8b58c0_a39b6934",
+      "revId": "fafc29f9566fe020c0f4b08136e5e6ff8c221558",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "87c7f1a3_456c8b9c",
         "filename": "src/support/server_stats.c",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Hi Frank, \n\nI think the current way to achieve it is good, count the number of IO operations in one second and calculate the current bandwidth of each export instance.\n\nIf you set this time configurable or a dbus paramenter, when the time parameter is large, ganesha_stats operation will \"hang\" for the same time, and it may return an average value. The real-time performance change of each export instance cannot be displayed. What do you think?",
       "parentUuid": "87c7f1a3_456c8b9c",
+      "revId": "fafc29f9566fe020c0f4b08136e5e6ff8c221558",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a63b400c_4dafaa83",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2504,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-05T15:22:40Z",
+      "side": 1,
+      "message": "I was just wondering if 1 second is necessarily always enough time for a good snapshot. I\u0027m sure most of the time it is good (hmm, any consideration that someone might need/want a SHORTER time where nanosleep would then be more appropriate?). I\u0027m sure in general use, the 1 second interval will be good.",
+      "parentUuid": "34ce61ce_4c6b03c2",
       "revId": "fafc29f9566fe020c0f4b08136e5e6ff8c221558",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
