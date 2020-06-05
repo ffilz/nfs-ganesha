@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "84809adf_c399053a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-06-05T10:13:45Z",
+      "side": 1,
+      "message": "Yes, I agree that make a separate patch here. The reason I modified it in this patch is：\nI create two exports of the same path(root_object), when remove one of the export(such as export1) by dbus, here will release the sentinel reference and set root entry as invalid, in the end, there is only reference count in root object and its cache status is invalid, but it exists LRU lane. This will lead to the object to fail both of entry recycle and release,mainly block in LRU of lru lane and prevents the next entries from being released.\nBesides, I think release the sentinel reference should occur in the last export release not first.\nShould I keep this modification? At least for now, the entry release function can be guaranteed.",
+      "parentUuid": "270bdd0c_e77a447a",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77191f98_7903c7a0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 8
@@ -177,6 +201,24 @@
       "writtenOn": "2020-06-04T15:43:58Z",
       "side": 1,
       "message": "You shouldn\u0027t need this (and you don\u0027t have a matching put when pseudofs entries are deleted). PseudoFS entries that are not junctions should be able to be released from mdcache, FSAL_PSEUDO keeps track of them and create_handle will revive them into mdcache.",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4036cf30_0e82d4a5",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-06-05T10:13:45Z",
+      "side": 1,
+      "message": "I don\u0027t understand why it\u0027s shouldn\u0027t need here as you said, make_pseudofs_node either already exists in sub_FSAL or create in PseudoFS, but in either case, the object will be referenced by PseudoFS export, so I think it needs to be mark(export_root_object_put) here as well. Both above cases can match export_root_object_put in pseudo_unmount_export.\nIt would be more appropriate to modify it into pseudo_mount_export().",
+      "parentUuid": "66efbcfc_8f334485",
       "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
