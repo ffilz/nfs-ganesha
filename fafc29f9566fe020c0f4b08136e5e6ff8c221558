@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3d8b58c0_a39b6934",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2338,
+      "author": {
+        "id": 1017099
+      },
+      "writtenOn": "2020-06-05T02:33:05Z",
+      "side": 1,
+      "message": "Sure. Previously, I found some functions appear twice in org.ganesha.nfsd.clientstats and org.ganesha.nfsd.exportstats. \nThe iomon has not been used in org.ganesha.nfsd.clientstats.\nI have changed it in Patchset4.",
+      "parentUuid": "bb4df42a_4d10ad3f",
+      "revId": "fafc29f9566fe020c0f4b08136e5e6ff8c221558",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "87c7f1a3_456c8b9c",
         "filename": "src/support/server_stats.c",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "fafc29f9566fe020c0f4b08136e5e6ff8c221558",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34ce61ce_4c6b03c2",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2504,
+      "author": {
+        "id": 1017099
+      },
+      "writtenOn": "2020-06-05T02:33:05Z",
+      "side": 1,
+      "message": "Hi Frank, \n\nI think the current way to achieve it is good, count the number of IO operations in one second and calculate the current bandwidth of each export instance.\n\nIf you set this time configurable or a dbus paramenter, when the time parameter is large, ganesha_stats operation will \"hang\" for the same time, and it may return an average value. The real-time performance change of each export instance cannot be displayed. What do you think?",
+      "parentUuid": "87c7f1a3_456c8b9c",
+      "revId": "fafc29f9566fe020c0f4b08136e5e6ff8c221558",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
