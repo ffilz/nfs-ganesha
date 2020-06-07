@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4e30708_9a767f82",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2343,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-06-07T11:42:47Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_stats gsh_st \u003d export_st-\u003est;\n+\tif (gsh_st.nfsv3 !\u003d NULL) {",
+      "revId": "50795cbcd31d51f5cd01652b6b9bd1026fb9c960",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27133966_8c848873",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2432,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-06-07T11:42:47Z",
+      "side": 1,
+      "message": "ERROR: \"(foo*)\" should be \"(foo *)\"\n+\top_preread \u003d (struct xfer_op*)gsh_calloc(1, sizeof(struct xfer_op));",
+      "revId": "50795cbcd31d51f5cd01652b6b9bd1026fb9c960",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6003456a_8e294823",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2433,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-06-07T11:42:47Z",
+      "side": 1,
+      "message": "ERROR: \"(foo*)\" should be \"(foo *)\"\n+\top_prewrite \u003d (struct xfer_op*)gsh_calloc(1, sizeof(struct xfer_op));",
+      "revId": "50795cbcd31d51f5cd01652b6b9bd1026fb9c960",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0c1ba43_8bb01c52",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2434,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-06-07T11:42:47Z",
+      "side": 1,
+      "message": "ERROR: \"(foo*)\" should be \"(foo *)\"\n+\top_read \u003d (struct xfer_op*)gsh_calloc(1, sizeof(struct xfer_op));",
+      "revId": "50795cbcd31d51f5cd01652b6b9bd1026fb9c960",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1425fcdf_c04d5b00",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2435,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-06-07T11:42:47Z",
+      "side": 1,
+      "message": "ERROR: \"(foo*)\" should be \"(foo *)\"\n+\top_write \u003d (struct xfer_op*)gsh_calloc(1, sizeof(struct xfer_op));",
+      "revId": "50795cbcd31d51f5cd01652b6b9bd1026fb9c960",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
