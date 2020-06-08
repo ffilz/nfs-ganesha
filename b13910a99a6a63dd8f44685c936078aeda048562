@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "4ce57284_47ab232e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-06-08T11:41:09Z",
+      "side": 1,
+      "message": "Okay, I\u0027m going to restore this part of the modification, and then try remove the call of cih_remove_checked(root_entry) with a separate patch. Then this patch will not change.",
+      "parentUuid": "2794979e_0bd3f7f7",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "77191f98_7903c7a0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 8
@@ -285,6 +309,24 @@
       "side": 1,
       "message": "This function can create intermediate nodes in the PseudoFS that are not junctions. For example, if you have the following exports:\n\n/export/exp1\n/export/exp2\n\n/ is the root of the FSAL_PSEUDO file system so it will be an export root\n/export is just a plain directory in the FSAL_PSEUDO filesystem\n/export/exp1 and /export/exp2 are junctions in the FSAL_PSEUDO filesystem,and export roots in the exported filesystem(s)\n\n/export does not need to be treated specially in the mdcache, it can go down to only the sentinel refcount and be reclaimed without any problem. If a client does a PUTFH of the handle, or does a PUTROOTFH, LOOKUP export, with inode will be recreated in mdcache from FSAL_PSEUDO\u0027s internal representation of the pseudo filesystem.\n\nThis would be the same if the pseudofs happened to be a real filesystem, at which point of course this code won\u0027t be creating the directory entries, but assuming they already exist, there is no problem with the inode for /export being flushed from the mdcache. Ganesha does not depend on the entire path to an export being pinned.",
       "parentUuid": "4036cf30_0e82d4a5",
+      "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46617a32_34d76d25",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-06-08T11:41:09Z",
+      "side": 1,
+      "message": "Frank, thank you very much for your careful explanation. I didn\u0027t even think about it. Now i understand. Thanks",
+      "parentUuid": "a85a64fc_231085ff",
       "revId": "b13910a99a6a63dd8f44685c936078aeda048562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
