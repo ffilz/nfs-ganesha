@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69fe421d_e1f131b5",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 3004,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-08T14:25:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure if valgrind will complain, you could do:\nint32_t ref \u003d atomic_dec_int32_t (\u0026obj_hdl-\u003eexp_refcnt);\nassert(ref \u003e\u003d 0);",
+      "revId": "e0a5e230e9ba9cab4ec1e073a3d6daa5b34558a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
