@@ -742,7 +742,7 @@ static bool show_idmapper(DBusMessageIter *args,
 	struct avltree_node *node;
 	uint32_t val;
 	DBusMessageIter iter, sub_iter, id_iter;
-	char *namebuff = malloc(1024);
+	char *namebuff = gsh_malloc(1024);
 	dbus_bool_t gid_set;
 
 	dbus_message_iter_init_append(reply, &iter);
@@ -791,7 +791,7 @@ static bool show_idmapper(DBusMessageIter *args,
 				&id_iter);
 	}
 	PTHREAD_RWLOCK_unlock(&idmapper_user_lock);
-	free(namebuff);
+	gsh_free(namebuff);
 	dbus_message_iter_close_container(&iter, &sub_iter);
 	return true;
 }
