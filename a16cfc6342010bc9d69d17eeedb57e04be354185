@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5443de0c_cb81ff08",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-06-09T13:25:09Z",
+      "side": 1,
+      "message": "The last argument here should be MIN() of either buffer lengths",
+      "revId": "a16cfc6342010bc9d69d17eeedb57e04be354185",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b58d025f_7a3d4dbe",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-06-09T13:25:09Z",
+      "side": 1,
+      "message": "Why limit at 255 when we have allocated 1024?",
+      "revId": "a16cfc6342010bc9d69d17eeedb57e04be354185",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99214273_dd93e859",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-06-09T13:25:09Z",
+      "side": 1,
+      "message": "This should be gsh_free()",
+      "revId": "a16cfc6342010bc9d69d17eeedb57e04be354185",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
