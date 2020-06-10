@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "766c4e17_ae5e1e93",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-10T20:49:43Z",
+      "side": 1,
+      "message": "But why truncate to 255? If appropriate let\u0027s actually use a constant. And make sure to account for the NUL terminator in the size of the string.\n\nIf there actually doesn\u0027t need to be a limit, let\u0027s gsh_malloc(user-\u003ename.len + 1); and then the string always fits\n\nActually, I\u0027m not sure this should actually need to make a copy of the string. We should actually make sure that uname.addr is allocated enough memory to NUL terminate the name (uname.len+1) and then make sure it\u0027s NUL terminated, even if it doesn\u0027t come from a NUL terminated string. A while ago I attempted to make all strings within Ganesha NUL terminated even if they were also stored with a length. Let\u0027s fix it all since we\u0027re touching stuff here.",
+      "revId": "fad8c38198aadc2d8f28cc70ef12c8d139b75a99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
