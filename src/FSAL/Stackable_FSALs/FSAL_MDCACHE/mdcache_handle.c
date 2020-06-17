@@ -945,8 +945,8 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 	}
 
 	status = mdcache_refresh_attrs(
-			entry, (attrs_out->request_mask & ATTR_ACL) != 0,
-			(attrs_out->request_mask & ATTR4_FS_LOCATIONS) != 0,
+			entry, (entry->attrs.request_mask & ATTR_ACL) != 0,
+			(entry->attrs.request_mask & ATTR4_FS_LOCATIONS) != 0,
 			true);
 
 	if (FSAL_IS_ERROR(status)) {
