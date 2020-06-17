@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2e0c55e_a663ab0f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-17T20:46:44Z",
+      "side": 1,
+      "message": "I think we may need to set these flags if either the entry-\u003eattrs has ACL/FS_LOCATIONS OR the attrs_out-\u003erequest_mask asks for them.\n\nAlso, we should look at the other callers to mdcache_refresh_attrs.\n\nI think the big problem is while ACL may be requested if not present and a permission check is needed, we don\u0027t see the same kind of logic that forces a refresh of the fs_locations attribute.",
+      "revId": "15e32daa67ae5964c2398689671c83b5189c1277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
