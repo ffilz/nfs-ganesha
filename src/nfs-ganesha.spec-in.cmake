@@ -557,13 +557,13 @@ install -m 644 config_samples/vfs.conf %{buildroot}%{_sysconfdir}/ganesha
 
 mkdir -p %{buildroot}%{_unitdir}
 %if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 8 )
-mkdir -p %{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha.d
+mkdir -p %{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha-lock.service.d
 %endif
 
 install -m 644 scripts/systemd/nfs-ganesha.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha.service
 %if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 8 )
 install -m 644 scripts/systemd/nfs-ganesha-lock.service.el8	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
-install -m 644 scripts/systemd/rpc-statd.conf.el8	%{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha.d/rpc-statd.conf
+install -m 644 scripts/systemd/rpc-statd.conf.el8	%{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha-lock.service.d/rpc-statd.conf
 %else
 install -m 644 scripts/systemd/nfs-ganesha-lock.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
 %endif
