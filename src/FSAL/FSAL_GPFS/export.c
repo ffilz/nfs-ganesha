@@ -384,7 +384,7 @@ void gpfs_export_ops_init(struct export_ops *ops)
 	ops->free_state = gpfs_free_state;
 }
 
-static void free_gpfs_filesystem(struct gpfs_filesystem *gpfs_fs)
+void free_gpfs_filesystem(struct gpfs_filesystem *gpfs_fs)
 {
 	if (gpfs_fs->root_fd >= 0)
 		close(gpfs_fs->root_fd);
@@ -537,6 +537,14 @@ int gpfs_claim_filesystem(struct fsal_filesystem *fs, struct fsal_export *exp)
 		goto errout;
 	}
 
+	gpfs_fs->stop_thread = false;
+
+	/* save copy of device major, minor numbers, to be used
+	 * in GPFSFSAL_UP_Thread()
+	 **/
+	gpfs_fs->dev.major = fs->dev.major;
+	gpfs_fs->dev.minor = fs->dev.minor;
+
 	if (pthread_attr_init(&attr_thr) != 0)
 		LogCrit(COMPONENT_THREAD, "can't init pthread's attributes");
 
@@ -624,8 +632,11 @@ void gpfs_unclaim_filesystem(struct fsal_filesystem *fs)
 	else
 		LogFullDebug(COMPONENT_FSAL, "Thread STOP successful");
 
-	pthread_join(gpfs_fs->up_thread, NULL);
-	free_gpfs_filesystem(gpfs_fs);
+	/* We set stop_thread=true, so that upcall thread detects that
+	 * it needs to exit */
+	gpfs_fs->stop_thread = true;
+	gpfs_fs->fs = NULL;
+
 	fs->private_data = NULL;
 
 out:

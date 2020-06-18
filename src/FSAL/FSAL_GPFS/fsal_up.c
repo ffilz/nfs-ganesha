@@ -94,7 +94,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 
 	(void) snprintf(thr_name, sizeof(thr_name),
 			"fsal_up_%"PRIu64".%"PRIu64,
-			gpfs_fs->fs->dev.major, gpfs_fs->fs->dev.minor);
+			gpfs_fs->dev.major, gpfs_fs->dev.minor);
 	SetNameFunction(thr_name);
 
 	LogFullDebug(COMPONENT_FSAL_UP,
@@ -107,7 +107,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 	nfs_init_wait();
 
 	/* Start querying for events and processing. */
-	while (1) {
+	while (!gpfs_fs->stop_thread) {
 		LogFullDebug(COMPONENT_FSAL_UP,
 			     "Requesting event from FSAL Callback interface for %d.",
 			     gpfs_fs->root_fd);
@@ -472,6 +472,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		}
 	}
 out:
+	free_gpfs_filesystem(gpfs_fs);
 	rcu_unregister_thread();
 	return NULL;
 }				/* GPFSFSAL_UP_Thread */

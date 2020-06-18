@@ -350,4 +350,6 @@ void fsal_gpfs_reset_stats(struct fsal_module *fsal_hdl);
 void prepare_for_stats(struct fsal_module *fsal_hdl);
 
 int gpfs_op2index(int op);
+
+void free_gpfs_filesystem(struct gpfs_filesystem *gpfs_fs);
 #endif

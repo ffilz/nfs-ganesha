@@ -46,7 +46,7 @@ struct gpfs_filesystem {
 	struct fsal_filesystem *fs;
 	int root_fd;
 	struct glist_head exports;
-	bool up_thread_started;
+	bool stop_thread;
 	pthread_t up_thread; /* upcall thread */
 
 	/* we have an upcall thread for each file system. The upcall
@@ -58,6 +58,7 @@ struct gpfs_filesystem {
 	pthread_mutex_t upvector_mutex;
 	struct fsal_up_vector *up_vector;
 	struct req_op_context req_ctx;
+	fsal_dev_t dev; /* device filesystem is on */
 };
 
 /*
