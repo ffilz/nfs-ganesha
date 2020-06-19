@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b57703e_ac4506e9",
+        "filename": "src/FSAL/FSAL_GPFS/gpfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-19T15:15:11Z",
+      "side": 1,
+      "message": "Should this be atomic since it\u0027s accessed by more than one thread (or am I confused)?",
+      "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
