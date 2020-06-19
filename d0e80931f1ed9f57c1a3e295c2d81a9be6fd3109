@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "97e26de8_3459f39f",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-06-19T15:58:14Z",
+      "side": 1,
+      "message": "So, gpfs_fs-\u003efs doesn\u0027t seem to be used in the upcall thread except to set the name on startup.  So how about this:\n\nHere, we just unlink fs from gpfs_fs, and signal the upcall thread to exit, then return.  The upcall thread can then free gpfs_fs when it exits.  Since gpfs_fs seems to be the only reason for this pthread_join, that should maybe work?",
+      "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b57703e_ac4506e9",
         "filename": "src/FSAL/FSAL_GPFS/gpfs_methods.h",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "Probably good to have as atomic, although one thread would make it true and upcall thread would check for it. A barrier is needed (it is there implicitly with condition currently).",
       "parentUuid": "2b57703e_ac4506e9",
+      "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c3220d0_59a29c15",
+        "filename": "src/FSAL/FSAL_GPFS/gpfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-06-19T15:58:14Z",
+      "side": 1,
+      "message": "bools are automatically atomic for read and write.  You only need explicit atomic if your doing test-and-set or set-and-test.",
+      "parentUuid": "a2d0086c_7e2ec579",
       "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
