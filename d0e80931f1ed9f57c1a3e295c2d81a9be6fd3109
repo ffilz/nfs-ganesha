@@ -69,6 +69,24 @@
       "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "828181bc_5ee031d1",
+        "filename": "src/FSAL/FSAL_GPFS/gpfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-19T18:26:21Z",
+      "side": 1,
+      "message": "Sure, the memory access for a bool is atomic, but the atomic functions also add the memory barrier\n\nIdeally the atomic function should resolve to only a memory barrier for bools (or anything else where alignment doesn\u0027t matter).",
+      "parentUuid": "8c3220d0_59a29c15",
+      "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
