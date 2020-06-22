@@ -274,6 +274,11 @@ void pnfs_ds_remove(uint16_t id_servers, bool final)
 			 * once-only, so no need for lock here.
 			 * do not pre-clear related export (mds_export).
 			 * always check pnfs_ds_status instead.
+			 *
+			 * We need an op_context to release an export ref, since
+			 * we are using this op context to release a reference
+			 * via release_op_context, we don't need to take a
+			 * reference here.
 			 */
 			init_op_context_simple(&op_context, pds->mds_export,
 					       pds->mds_export->fsal_export);
