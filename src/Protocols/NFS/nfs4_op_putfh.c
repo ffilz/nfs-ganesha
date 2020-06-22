@@ -83,8 +83,7 @@ static int nfs4_ds_putfh(compound_data_t *data)
 	 * to the old export will be released below.
 	 */
 	if (op_ctx->ctx_export != NULL) {
-		changed = op_ctx->ctx_export != pds->mds_export;
-		put_gsh_export(op_ctx->ctx_export);
+		changed |= op_ctx->ctx_export != pds->mds_export;
 	}
 
 	if (pds->mds_export == NULL) {
@@ -95,6 +94,7 @@ static int nfs4_ds_putfh(compound_data_t *data)
 		 * get_gsh_export_ref() was bumped in pnfs_ds_get()
 		 * Also drop any original export reference.
 		 */
+		get_gsh_export_ref(pds->mds_export);
 		set_op_context_export(pds->mds_export);
 	} else {
 		/* export reference will be dropped. */
