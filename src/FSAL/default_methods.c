@@ -1566,7 +1566,7 @@ static void pds_release(struct fsal_pnfs_ds *const pds)
 {
 	LogDebug(COMPONENT_PNFS, "Default pNFS DS release!");
 	fsal_pnfs_ds_fini(pds);
-	gsh_free(pds);
+	pnfs_ds_free(pds);
 }
 
 /**
