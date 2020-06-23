@@ -493,6 +493,7 @@ static inline void fsal_copy_attrs(struct attrlist *dest,
 	attrmask_t save_request_mask = dest->request_mask;
 
 	/* Copy source to dest, but retain dest->request_mask */
+	assert(dest->acl == NULL);
 	*dest = *src;
 	dest->request_mask = save_request_mask;
 
