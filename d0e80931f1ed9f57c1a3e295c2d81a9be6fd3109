@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "028b8331_2367f115",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2020-06-23T13:53:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f10f8e36_0194bae6",
+      "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b57703e_ac4506e9",
         "filename": "src/FSAL/FSAL_GPFS/gpfs_methods.h",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Sure, the memory access for a bool is atomic, but the atomic functions also add the memory barrier\n\nIdeally the atomic function should resolve to only a memory barrier for bools (or anything else where alignment doesn\u0027t matter).",
       "parentUuid": "8c3220d0_59a29c15",
+      "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "082ae347_b330ee30",
+        "filename": "src/FSAL/FSAL_GPFS/gpfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1008177
+      },
+      "writtenOn": "2020-06-23T13:53:18Z",
+      "side": 1,
+      "message": "In most places in existing code saw \u0027bool\u0027 variables set under lock. Didn\u0027t find a function to set \u0027bool\u0027 atomically, or did I miss checking something ?\nAs of now have kept assignment to this variable to \u0027true\u0027 as it is, because it is set to \u0027true\u0027  at only one place.",
+      "parentUuid": "828181bc_5ee031d1",
       "revId": "d0e80931f1ed9f57c1a3e295c2d81a9be6fd3109",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
