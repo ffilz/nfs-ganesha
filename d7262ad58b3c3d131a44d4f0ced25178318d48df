@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e72206fc_acf1380e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3195,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-06-24T13:23:14Z",
+      "side": 1,
+      "message": "I don\u0027t really understand the protection for fullpath and pseudopath here.\n\nIn this function, you\u0027re taking the rcu_read_lock and then using rcu_dereference to fetch the fullpath pointer, but there are calls all over the code to CTX_FULLPATH which seem to dereference the same pointer without any such protection. Why is it safe there but not here?",
+      "revId": "d7262ad58b3c3d131a44d4f0ced25178318d48df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
