@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "cf55613e_9add9c90",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3195,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-24T14:22:31Z",
+      "side": 1,
+      "message": "Should I add some comments to describe how it\u0027s being used better?",
+      "parentUuid": "a03367d7_5eb7c16e",
+      "revId": "d7262ad58b3c3d131a44d4f0ced25178318d48df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74e9ccd1_f368288e",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 10
@@ -66,6 +84,24 @@
       "writtenOn": "2020-06-24T14:12:49Z",
       "side": 1,
       "message": "There are only two callers of this function -- one of which calls it with \"true\" and the other \"false\". You could easily eliminate the bool argument here by moving the \"if (final)\" conditions into the callers.",
+      "revId": "d7262ad58b3c3d131a44d4f0ced25178318d48df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38f229a5_b9a431e2",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3233,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-24T14:22:31Z",
+      "side": 1,
+      "message": "Good point, I\u0027ll make that change.",
+      "parentUuid": "74e9ccd1_f368288e",
       "revId": "d7262ad58b3c3d131a44d4f0ced25178318d48df",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
