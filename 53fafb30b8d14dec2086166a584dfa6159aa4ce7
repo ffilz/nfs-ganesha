@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "3c58c558_6c122ad9",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1537,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-06-24T18:00:21Z",
+      "side": 1,
+      "message": "Where does this extra reference get put? Also, I don\u0027t see a req_ctx symbol (aside frome one in a gtest) -- can you clarify the comment?",
+      "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6be2fedb_fb040502",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-06-24T18:00:21Z",
+      "side": 1,
+      "message": "Where did we get this reference? We did an init_op_context_simple above, but it\u0027s initializing the local \"ctx\" var.",
+      "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e66e6e6e_9d996685",
         "filename": "src/SAL/state_misc.c",
         "patchSetId": 4
