@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0b119bf5_6043d8ca",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1537,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-24T20:19:24Z",
+      "side": 1,
+      "message": "Cut and paste error on the ref to req_ctx...\n\nAnd darn it, here\u0027s another place I didn\u0027t add the put_gsh_export before the release_op_context...\n\nIt eventually gets fixed when release_op_context does a put_gsh_export...",
+      "parentUuid": "3c58c558_6c122ad9",
+      "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6be2fedb_fb040502",
         "filename": "src/SAL/nfs4_state.c",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-24T18:00:21Z",
       "side": 1,
       "message": "Where did we get this reference? We did an init_op_context_simple above, but it\u0027s initializing the local \"ctx\" var.",
+      "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42d1d123_ad540336",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-24T20:19:24Z",
+      "side": 1,
+      "message": "This one is ok, see the comment for init_op_context_simple for where the ref came from. And init_op_context_simple sets op_ctx, in this case to \u0026ctx. Eventually this put_gsh_export gets merged into release_op_context.",
+      "parentUuid": "6be2fedb_fb040502",
       "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
