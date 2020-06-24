@@ -16,6 +16,24 @@
       "revId": "d7262ad58b3c3d131a44d4f0ced25178318d48df",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b55d05c_67408c69",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3195,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-06-24T14:04:18Z",
+      "side": 1,
+      "message": "The protection is to access op_ctx-\u003ectx_export-\u003efullpath and op_ctx-\u003ectx_export-\u003epseudopath. That is fetching from the struct gsh_export which can be messed with by other threads.\n\nOnce a refstr is stored in op_ctx-\u003ectx_fullpath or op_ctx-\u003ectx_pseudopath, those refstr are safe because no other thread accesses this thread\u0027s op_ctx. CTX_FULLPATH accesses this thread\u0027s refstr: ctx-\u003ectx_fullpath-\u003egr_val.",
+      "parentUuid": "e72206fc_acf1380e",
+      "revId": "d7262ad58b3c3d131a44d4f0ced25178318d48df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
