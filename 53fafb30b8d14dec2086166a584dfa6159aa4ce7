@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dbcb394e_fb38c855",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1537,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-06-26T13:21:51Z",
+      "side": 1,
+      "message": "NVM, I see now that it gets handed off to the op_context.\n\nI think it\u0027d be more evident what\u0027s going on if init_op_context took a reference to the export itself, rather than expecting to be handed one like this. Some of the callers might have to put an extra reference, but that would make it more evident what\u0027s going on to people reading the code.",
+      "parentUuid": "3c58c558_6c122ad9",
+      "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6be2fedb_fb040502",
         "filename": "src/SAL/nfs4_state.c",
         "patchSetId": 4
@@ -69,6 +87,24 @@
       "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7d0ecf2_f19960ae",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-06-26T13:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42d1d123_ad540336",
+      "revId": "53fafb30b8d14dec2086166a584dfa6159aa4ce7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
