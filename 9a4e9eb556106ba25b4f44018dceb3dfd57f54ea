@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46027475_f521438f",
+        "filename": "src/FSAL/FSAL_KVSFS/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "FSALs are MODULE now, not SHARED.  Also, do you want sanitizer support?  If so, you need a line:\n\nadd_sanitizers(fsalkvsfs)",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fcac64e_7736e46b",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_ds.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "Copyright is, presumably, wrong.",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75cf4592_cc299cf3",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "s/ZFS/KVSFS/",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "741ca722_f5393909",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "So the writes are unstable, and commit is a no-op?",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eeaec14_80c7c396",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_fsal_internal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "No copyright/license",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12b4a562_fc610a95",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_fsal_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "No copyright/license",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8b2d962_9530d0f3",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "I\u0027m assuming there can\u0027t be more than one instance of kvsfs?  If there can, maybe require a configured fsid?",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d856224_b0fbc4e1",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_methods.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "No copyright/license",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6615d90b_a9e57e19",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_xattrs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-01T14:10:04Z",
+      "side": 1,
+      "message": "Should these all be the default functions, which return NOTSUPP, rather than returning NO_ERROR?",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
