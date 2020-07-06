@@ -361,11 +361,69 @@ proxyv3_getfdentry(const struct sockaddr *host,
 	/* If we already got one, return it. */
 	if (first_open != NULL) {
 		/*
-		 * @todo If it's been a long time since we opened the socket,
-		 * the other end probably hung up. We should probably test here,
-		 * so that callers receive a definitely open socket.
+		 * If it's been a long time since we opened the socket, the
+		 * other end probably hung up. We peek at the recv buffer here,
+		 * to ensure that the socket is still open. If we happen to find
+		 * bytes, something horrible must have happened.
 		 */
-		return result;
+
+		char buf[1];
+		ssize_t bytes_read;
+
+		/*
+		 * We need both DONTWAIT for non-blocking and PEEK, so we don't
+		 * actually pull any data off.
+		 */
+
+		bytes_read = recv(result->fd, buf, sizeof(buf),
+				  MSG_DONTWAIT | MSG_PEEK);
+
+		if (bytes_read == -1) {
+			if (errno == EAGAIN || errno == EWOULDBLOCK) {
+				/* We would block => the socket is open! */
+				LogFullDebug(COMPONENT_FSAL,
+					     "Socket %d was still open. Reusing",
+					     result->fd);
+				return result;
+			}
+		}
+
+
+		/* Some other error. Log and exit. */
+		if (bytes_read == -1) {
+			LogCrit(COMPONENT_FSAL,
+				"Checking that socket %d was open had an error: %d '%s'. Closing and retrying.",
+				result->fd, errno, strerror(errno));
+		} else if (bytes_read == 0) {
+			/* The other end closed at some point. */
+			LogDebug(COMPONENT_FSAL,
+				 "Socket %d was closed by the backend. Closing and retrying.",
+				 result->fd);
+		} else if (bytes_read > 0) {
+			LogCrit(COMPONENT_FSAL,
+				"Unexpected data left in socket %d. Closing and retrying.",
+				result->fd);
+		} else {
+			LogCrit(COMPONENT_FSAL,
+				"Unexpected return code from recv %zd for socket %d. Closing and retrying.",
+				bytes_read, result->fd);
+		}
+
+		/*
+		 * Go back and mark the entry as no longer open, but tell the
+		 * caller to try again (it'll re-open this connection). We need
+		 * to hold the lock, in case some other thread is looking for
+		 * the in_use bits. (We could just do an mfence and put in_use =
+		 * false at the end, but this is straightforward).
+		 */
+
+		(void) pthread_mutex_lock(&rpcLock);
+		(void) close(result->fd);
+		result->in_use = false;
+		result->is_open = false;
+		*retry = true;
+		(void) pthread_mutex_unlock(&rpcLock);
+		return NULL;
 	}
 
 	if (result->is_open) {
