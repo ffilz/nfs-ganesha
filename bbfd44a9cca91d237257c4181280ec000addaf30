@@ -16,6 +16,57 @@
       "revId": "bbfd44a9cca91d237257c4181280ec000addaf30",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b3dac5e_893a55d9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-07T17:01:00Z",
+      "side": 1,
+      "message": "This section can go in the above if()",
+      "revId": "bbfd44a9cca91d237257c4181280ec000addaf30",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1e7b785_213a187b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-07T17:01:00Z",
+      "side": 1,
+      "message": "You can just treat \u003c0 as an error, no need to treat \u003c-1 separately from -1",
+      "revId": "bbfd44a9cca91d237257c4181280ec000addaf30",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cd81d68_b1987b10",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-07-07T17:01:00Z",
+      "side": 1,
+      "message": "close() isn\u0027t necessary here, it will be called in the next section, because we set is_open to false.",
+      "revId": "bbfd44a9cca91d237257c4181280ec000addaf30",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
