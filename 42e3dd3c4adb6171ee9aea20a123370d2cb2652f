@@ -16,6 +16,24 @@
       "revId": "42e3dd3c4adb6171ee9aea20a123370d2cb2652f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecdee8b7_e03f0c3e",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1010034
+      },
+      "writtenOn": "2020-07-17T18:13:39Z",
+      "side": 1,
+      "message": "If the client does not ask for any pNFS roles, then server should return all the valid combination of roles that it can support. So, if the client does not request any roles, server can return that it can support DS and NON_PNFS roles.\n\nRFC excerpts:\n\n   In the case of a server with concurrent pNFS roles that are served by\n   a common client ID, if the EXCHANGE_ID request from the client has\n   zero or a combination of the bits set in eia_flags, the server result\n   should set bits that represent the higher of the acceptable\n   combination of the server roles, with a preference to match the roles\n   requested by the client.  Thus, if a client request has\n   (EXCHGID4_FLAG_USE_NON_PNFS | EXCHGID4_FLAG_USE_PNFS_MDS |\n   EXCHGID4_FLAG_USE_PNFS_DS) flags set, and the server is both a\n   metadata server and a data server, serving both the roles by a common\n   client ID, the server SHOULD return with (EXCHGID4_FLAG_USE_PNFS_MDS\n   | EXCHGID4_FLAG_USE_PNFS_DS) set.",
+      "parentUuid": "c9a32bcc_7fdaa34d",
+      "revId": "42e3dd3c4adb6171ee9aea20a123370d2cb2652f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
