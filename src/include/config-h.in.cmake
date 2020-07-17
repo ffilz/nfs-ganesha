@@ -74,12 +74,12 @@
 #define NFS_GANESHA 1
 
 #define GANESHA_CONFIG_PATH "@SYSCONFDIR@/ganesha/ganesha.conf"
-#define GANESHA_PIDFILE_PATH "@SYSSTATEDIR@/run/ganesha.pid"
+#define GANESHA_PIDFILE_PATH "/run/ganesha.pid"
 #define NFS_V4_RECOV_ROOT "@SYSSTATEDIR@/lib/nfs/ganesha"
 /**
  * @brief Default value for krb5_param.ccache_dir
  */
-#define DEFAULT_NFS_CCACHE_DIR "@SYSSTATEDIR@/run/ganesha"
+#define DEFAULT_NFS_CCACHE_DIR "/run/ganesha"
 
 /* We're LGPL'd */
 #define _LGPL_SOURCE 1
