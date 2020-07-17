@@ -5,7 +5,7 @@
 #
 # processname: /usr/bin/ganesha.nfsd
 # config: /etc/ganesha/ganesha.nfsd.conf
-# pidfile: /var/run/ganesha.nfsd.pid
+# pidfile: /run/ganesha.nfsd.pid
 #
 ### BEGIN INIT INFO
 # Provides: ganesha
@@ -28,7 +28,7 @@ LOGFILE=/var/log/ganesha/ganesha.log
 CONFFILE=/etc/ganesha/ganesha.conf
 
 prog=ganesha.nfsd
-PID_FILE=${PID_FILE:=/var/run/${prog}.pid}
+PID_FILE=${PID_FILE:=/run/${prog}.pid}
 LOCK_FILE=${LOCK_FILE:=/var/lock/subsys/${prog}}
 
 
@@ -48,6 +48,7 @@ start() {
                 RETVAL=1
                 failure
         else
+		[ -d /run/ganesha ] || mkdir /run/ganesha
 		ulimit -n $NOFILE
                 daemon --pidfile $PID_FILE $PATHPROG $OPTIONS
                 RETVAL=$?

@@ -6,7 +6,7 @@
 #
 # processname: /usr/bin/ganesha.nfsd
 # config: /etc/ganesha/gpfs.ganesha.nfsd.conf
-# pidfile: /var/run/ganesha.nfsd.pid
+# pidfile: /run/ganesha.nfsd.pid
 #
 ### BEGIN INIT INFO
 # Provides: ganesha.gpfgpfs.s
@@ -37,7 +37,7 @@ LOGFILE=SYSLOG
 #LOGFILE=STDERR
 #LOGFILE=STDOUT
 EPOCHFILE=/var/lib/nfs/ganesha-epoch
-PIDFILE=/var/run/ganesha.nfsd.pid
+PIDFILE=/run/ganesha.nfsd.pid
 
 CONFFILE=/etc/ganesha/gpfs.ganesha.nfsd.conf
 
@@ -115,6 +115,10 @@ start() {
 	if status rpc.rquotad > /dev/null ; then
 		echo "rquotad already running."
 		start_rquotad=0
+	fi
+
+	if [ ! -d /run/ganesha ]; then
+		mkdir /run/ganesha
 	fi
 
 	# Check if a Ganesha configuration file is available

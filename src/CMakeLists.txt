@@ -1107,8 +1107,6 @@ if( ${DISTRO} MATCHES "SLES" )
 else( ${DISTRO} MATCHES "SLES" )
   install(DIRECTORY config_samples DESTINATION share/doc/ganesha)
 endif( ${DISTRO} MATCHES "SLES" )
-# pre-create PREFIX/var/run/ganesha
-install(DIRECTORY DESTINATION ${SYSSTATEDIR}/run/ganesha)
 
 add_subdirectory(log)
 add_subdirectory(config_parsing)
