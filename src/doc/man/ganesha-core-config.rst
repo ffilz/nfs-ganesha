@@ -256,7 +256,7 @@ NFS_KRB5 {}
 KeytabPath(path, default "")
     Kerberos keytab.
 
-CCacheDir(path, default "/var/run/ganesha")
+CCacheDir(path, default "/run/ganesha")
     The ganesha credential cache.
 
 Active_krb5(bool, default false)
