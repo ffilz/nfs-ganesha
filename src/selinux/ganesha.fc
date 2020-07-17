@@ -8,4 +8,4 @@
 
 /var/log/ganesha(/.*)?		gen_context(system_u:object_r:ganesha_var_log_t,s0)
 
-/var/run/ganesha(/.*)?		gen_context(system_u:object_r:ganesha_var_run_t,s0)
+/run/ganesha(/.*)?		gen_context(system_u:object_r:ganesha_var_run_t,s0)
