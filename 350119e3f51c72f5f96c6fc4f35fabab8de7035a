@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "465b6473_659e705c",
+        "filename": "src/libntirpc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-07-17T18:03:17Z",
+      "side": 1,
+      "message": "woops, here\u0027s what happen when you get away from ganesha for a while :) Thanks!",
+      "parentUuid": "965da59a_995c51cf",
+      "revId": "350119e3f51c72f5f96c6fc4f35fabab8de7035a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3b36d1cd_b0fe80ab",
         "filename": "src/scripts/init.d/nfs-ganesha.gpfs",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2020-07-17T16:17:53Z",
       "side": 1,
       "message": "nit: you could just replace this with \u0027mkdir -p /run/ganesha\u0027.",
+      "revId": "350119e3f51c72f5f96c6fc4f35fabab8de7035a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "425a2cf4_5ea15f65",
+        "filename": "src/scripts/init.d/nfs-ganesha.gpfs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2020-07-17T18:03:17Z",
+      "side": 1,
+      "message": "It\u0027s not strictly equivalent, mkdir -p will not check directory existence and always issue mkdir /run and /run/ganesha.\nThis most probably doesn\u0027t matter for /run, but I\u0027ve taken the habit to check and issue individual mkdirs after problems with lustre so I tend to prefer it that way now. I don\u0027t feel too strongly about it though so can change if I get another push :)",
+      "parentUuid": "3b36d1cd_b0fe80ab",
       "revId": "350119e3f51c72f5f96c6fc4f35fabab8de7035a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
