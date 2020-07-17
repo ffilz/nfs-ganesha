@@ -16,6 +16,40 @@
       "revId": "350119e3f51c72f5f96c6fc4f35fabab8de7035a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "965da59a_995c51cf",
+        "filename": "src/libntirpc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-07-17T16:17:53Z",
+      "side": 1,
+      "message": "Was this intentional? Usually we want to pull these in as separate commits.",
+      "revId": "350119e3f51c72f5f96c6fc4f35fabab8de7035a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b36d1cd_b0fe80ab",
+        "filename": "src/scripts/init.d/nfs-ganesha.gpfs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-07-17T16:17:53Z",
+      "side": 1,
+      "message": "nit: you could just replace this with \u0027mkdir -p /run/ganesha\u0027.",
+      "revId": "350119e3f51c72f5f96c6fc4f35fabab8de7035a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
