@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03cdbc9e_6d28c01c",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-07-28T15:19:46Z",
+      "side": 1,
+      "message": "WARNING: \u0027desactivate\u0027 may be misspelled - perhaps \u0027deactivate\u0027?\n+  # will desactivate the associated feature :",
+      "revId": "bf69691c926e471dfec65c2f7a5b1f2821f4af2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4bf5c00e_81b92df2",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-07-28T15:19:46Z",
+      "side": 1,
+      "message": "WARNING: \u0027writting\u0027 may be misspelled - perhaps \u0027writing\u0027?\n+ *\t- FSAL_O_WRONLY: opening file for writting only.",
+      "revId": "bf69691c926e471dfec65c2f7a5b1f2821f4af2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
