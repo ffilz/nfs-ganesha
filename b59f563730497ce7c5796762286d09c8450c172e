@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f880b474_3b6a0a40",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "This option should be documented in src/config_samples/config.txt and in a .rst file",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b57f48ed_a7449d58",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Does PNFS currently work with Ganesha? I think it may be stale and if it doesn\u0027t work, we shouldn\u0027t show PNFS in a sample config.",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9f52faf_e827d058",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "/pseudo is an odd PseudoFS path for an export.",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba355473_1e473a2a",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Internally you define an fsid, please don\u0027t use Filesystem_Id unless absolutely necessary. It may be necessary if you support multiple KVSFS exports and can\u0027t derive a unique fsid inside the FSAL.",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a19defc_e8d794b1",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Do you actually need Tag anymore? If not, let\u0027s not specify it, it just confuses people...",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ada640d_f86c5a7c",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "These options are better specified just at the export level instead of adding a single client block for \"*\".",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f02b7f7_cdb0ecfb",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Is this parameter necessary any more?",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06e1dcaf_0f9f0d2f",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Does this block even exist anywhere?",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5d458e3_a2fece10",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "I suggest leaving out these commented out options. We have config.txt and man pages to document the options, let\u0027s not document them in sample config files any more unless they are specific to the FSAL or an example being shared via a sample config file.",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17a4b380_5d9f22d7",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Please leave out these options, I actually would like to get rid of them...",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0aeb60f5_5214b661",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "These are now just 9P worker threads.\n\nAlso, this file should be in src/config_samples\n\nAnd it should have the minimum config suggested for running with KVSFS",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1cfd413_367e9a5b",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "The above options should be left out of sample configs.",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d65101_047a33a3",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "How is this used, should we be specifying it other than the default?",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53db9f11_09fd086a",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Not sure any of these should be in a sample config",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baba6ecb_03fb2fdd",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-28T17:52:03Z",
+      "side": 1,
+      "message": "Sample config should not turn on debug messaging...",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
