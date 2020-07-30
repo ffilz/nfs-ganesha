@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7b3ad8e_d9376ee0",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-30T20:48:16Z",
+      "side": 1,
+      "message": "You have a mix of copyrights.\nAny files that are copied pretty much verbatim from another FSAL I guess should maintain that FSAL\u0027s copyright.\nAny that are copied but significantly modified should at least include an update for 2020",
+      "revId": "cc5712faeb0ccedf5011569caff5b1bbc0fd8f22",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a69986b_9c5f946c",
+        "filename": "src/doc/man/ganesha-kvsfs-config.rst",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-30T20:48:16Z",
+      "side": 1,
+      "message": "Could you also document these in src/config_samples/config.txt",
+      "revId": "cc5712faeb0ccedf5011569caff5b1bbc0fd8f22",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
