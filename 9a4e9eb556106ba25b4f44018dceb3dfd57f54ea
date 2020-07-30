@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0666a3b5_d6f2c5e1",
+        "filename": "src/FSAL/FSAL_KVSFS/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "adaaec9d_223e43f8",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fcac64e_7736e46b",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs_ds.c",
         "patchSetId": 3
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ddda0c6a_f7cc2913",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_ds.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "That\u0027s right. FSAL new files are made from template taken into other FSALs. By looking at other FSAL\u0027s, it seems like more than 50% of the files\u0027s copyright are wrong. \nAnyway, that\u0027s an easy fix and I\u0027ll correct this in FSAL_KVSFS",
+      "parentUuid": "343efe77_404cc03c",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75cf4592_cc299cf3",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs_file.c",
         "patchSetId": 3
@@ -86,6 +122,24 @@
       "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ddf662d_041a0a6d",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Good catch !",
+      "parentUuid": "75cf4592_cc299cf3",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "cb69d06f_f2bc2e46",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_fsal_internal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eb0360c_152be3da",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12b4a562_fc610a95",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs_fsal_internal.h",
         "patchSetId": 3
@@ -173,6 +245,24 @@
       "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50ec544f_95ec30e8",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_fsal_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94f3befb_9bc6e173",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -243,6 +333,24 @@
       "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f027e21_1f414007",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_methods.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9004fa24_26d977dd",
+      "revId": "9a4e9eb556106ba25b4f44018dceb3dfd57f54ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {

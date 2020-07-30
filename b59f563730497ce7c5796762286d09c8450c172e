@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "740f56fc_176c3eef",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b57f48ed_a7449d58",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d9f52faf_e827d058",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
         "patchSetId": 6
@@ -50,6 +68,24 @@
       "revId": "b59f563730497ce7c5796762286d09c8450c172e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9f10e0d_8b170ca2",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "/kvsfs is a better choice",
+      "parentUuid": "d9f52faf_e827d058",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "c5fe990b_d0233a38",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "In the very early years of Ganesha, I implemented the Tag to have different export entries addressing the same directory in NFSv3 (e.g. : mounting \"/my_share\" on /mnt/ro for Read-Only access and /mnt/rw for Read-Write access (one of our applications required this)). KVSFS should support this, but it is not required to have it displayed in the config file. I remove this line.",
+      "parentUuid": "2a19defc_e8d794b1",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ada640d_f86c5a7c",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
         "patchSetId": 6
@@ -121,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "e67419a6_76891325",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "That\u0027s a bug : this is the path that I use for debugging. It has no reason to be in a template file. I remove this.",
+      "parentUuid": "0f02b7f7_cdb0ecfb",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06e1dcaf_0f9f0d2f",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
         "patchSetId": 6
@@ -135,6 +207,24 @@
       "revId": "b59f563730497ce7c5796762286d09c8450c172e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f5a45b_522c0029",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "actually, it is successfully parsed. Maybe not the most useful stuff and it may confuse people.",
+      "parentUuid": "06e1dcaf_0f9f0d2f",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "1a7919b4_0a15c45c",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "I agree. I have removed this whole block.",
+      "parentUuid": "e5d458e3_a2fece10",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17a4b380_5d9f22d7",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
         "patchSetId": 6
@@ -169,6 +277,24 @@
       "revId": "b59f563730497ce7c5796762286d09c8450c172e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "270fe049_0ac8eedb",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "I agree. Block was removed.",
+      "parentUuid": "17a4b380_5d9f22d7",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "a2dad7b9_675426aa",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "I agree. I remove this.",
+      "parentUuid": "0aeb60f5_5214b661",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1cfd413_367e9a5b",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
         "patchSetId": 6
@@ -203,6 +347,24 @@
       "revId": "b59f563730497ce7c5796762286d09c8450c172e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03816443_252fc261",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1cfd413_367e9a5b",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +385,24 @@
     },
     {
       "key": {
+        "uuid": "f5e85d40_68f26f0d",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "That\u0027s a debug stuff, it has no reason to be here. I remove this.",
+      "parentUuid": "30d65101_047a33a3",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53db9f11_09fd086a",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
         "patchSetId": 6
@@ -240,6 +420,24 @@
     },
     {
       "key": {
+        "uuid": "74e0873e_f896488c",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53db9f11_09fd086a",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baba6ecb_03fb2fdd",
         "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
         "patchSetId": 6
@@ -254,6 +452,24 @@
       "revId": "b59f563730497ce7c5796762286d09c8450c172e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdb7b762_15c1dd95",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003517
+      },
+      "writtenOn": "2020-07-30T07:36:10Z",
+      "side": 1,
+      "message": "OK.",
+      "parentUuid": "baba6ecb_03fb2fdd",
+      "revId": "b59f563730497ce7c5796762286d09c8450c172e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
