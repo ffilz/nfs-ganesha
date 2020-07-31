@@ -22,6 +22,30 @@
       "revId": "463a8f3035294eab7452fc973cf9fbeb16ce66f1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07f5554c_9467a981",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 0,
+      "message": "It is used inside at least one FSAL so thus IS part of the FSAL_API. Ganesha v4 will bump the FSAL_API version. That would be an issue for back port, but in practice I know we\u0027ve made other changes in back port that would break ABI...",
+      "parentUuid": "7be18efa_a7ad9b02",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 349,
+        "endChar": 26
+      },
+      "revId": "463a8f3035294eab7452fc973cf9fbeb16ce66f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }

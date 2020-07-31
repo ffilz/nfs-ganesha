@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9212a8c4_9878e246",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 1,
+      "message": "Just staying consistent with the rest of the file... I guess we could have a separate patch to clean those all up.",
+      "parentUuid": "9b67db3f_ca26519c",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 350,
+        "endChar": 14
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4eaa32f3_15a10373",
         "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-07-31T19:44:42Z",
       "side": 1,
       "message": "Do you want to add a Debug/Info/Warning for people who have protocols\u003d3 but the build has them compiled out? (This seems like the right place to do it)",
+      "range": {
+        "startLine": 1336,
+        "startChar": 0,
+        "endLine": 1336,
+        "endChar": 16
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bbc837f_e8814c0b",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 1,
+      "message": "Yea, it might be good for the config to trip if Protocols\u003d3 is used. I\u0027m not sure that\u0027s easy to do.",
+      "parentUuid": "4eaa32f3_15a10373",
       "range": {
         "startLine": 1336,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b1831b5b_18d4b909",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 1,
+      "message": "Hmm, doxygen would probably spit out both, I don\u0027t think it\u0027s fed the conditional compile defines.",
+      "parentUuid": "c173b63b_ad07c7ca",
+      "range": {
+        "startLine": 201,
+        "startChar": 10,
+        "endLine": 201,
+        "endChar": 17
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0bf04e1_74904d4b",
         "filename": "src/include/nfs_proto_functions.h",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "fd0122c4_5a01e3d4",
+        "filename": "src/include/nfs_proto_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 1,
+      "message": "Might be worth it, maybe as a separate patch.",
+      "parentUuid": "b0bf04e1_74904d4b",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 50
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab6d81f4_513bf06f",
         "filename": "src/include/server_stats_private.h",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2020-07-31T19:44:42Z",
       "side": 1,
       "message": "I think this is wrong / CEIOSTATS_REPLY comes *after* the name/type/direction \"heading\"? (or something).\n\nI think it\u0027d make more sense to nest the #ifdef _USE_NFS3 here within the CE_STATS_REPLY #defin (so it controls putting the \"v3 prefix\" into the output)",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 29
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd5a1791_b0164330",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 1,
+      "message": "Hmm, yea, that probably should have been deleted. I wonder why in some cases there are two CELOSTATS_REPLY in a row and other times only one? These macros are suspicious and probably fragile.\n\nIn order to replace the cut and paste, I could also straight code these where the macro is used instead. I had to do that for another macro that had both nfs3 and nlm bits in it so couldn\u0027t just be two options.",
+      "parentUuid": "ab6d81f4_513bf06f",
       "range": {
         "startLine": 234,
         "startChar": 0,
@@ -152,6 +272,23 @@
     },
     {
       "key": {
+        "uuid": "5ed640aa_29d7ae7a",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 1,
+      "message": "See here 3 isn\u0027t even and option for protocols anymore.\n\nHmm, I didn\u0027t catch the Protocols in EXPORT...",
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2b544c5_c7de6a32",
         "filename": "src/support/server_stats.c",
         "patchSetId": 1
@@ -163,6 +300,30 @@
       "writtenOn": "2020-07-31T19:44:42Z",
       "side": 1,
       "message": "I\u0027d probably move this up next to the reset_nfsv3_stats? (and or make reset_nfsv3_stats reset both the NLM and MNT ones too)",
+      "range": {
+        "startLine": 2712,
+        "startChar": 1,
+        "endLine": 2712,
+        "endChar": 16
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73cca7a2_9e420db7",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2712,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-07-31T20:42:47Z",
+      "side": 1,
+      "message": "Yea, also all the stats functions for each protocol could be collected together. Reorg like this probably in a separate patch.",
+      "parentUuid": "b2b544c5_c7de6a32",
       "range": {
         "startLine": 2712,
         "startChar": 1,
