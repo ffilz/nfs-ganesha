@@ -2,6 +2,121 @@
   "comments": [
     {
       "key": {
+        "uuid": "9b67db3f_ca26519c",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-07-31T19:44:42Z",
+      "side": 1,
+      "message": "Note that in even quite old cmake versions, you don\u0027t need the USE_NFS3 in the else or endif anymore (and it\u0027s considered an anti-pattern these days, they should never have done it).",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 350,
+        "endChar": 14
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eaa32f3_15a10373",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-07-31T19:44:42Z",
+      "side": 1,
+      "message": "Do you want to add a Debug/Info/Warning for people who have protocols\u003d3 but the build has them compiled out? (This seems like the right place to do it)",
+      "range": {
+        "startLine": 1336,
+        "startChar": 0,
+        "endLine": 1336,
+        "endChar": 16
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c173b63b_ad07c7ca",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-07-31T19:44:42Z",
+      "side": 1,
+      "message": "This comment should probably go inside the #ifdef (is the doxygen build smart enough for that?) with the #else having just NFSv4 mentioned.",
+      "range": {
+        "startLine": 201,
+        "startChar": 10,
+        "endLine": 201,
+        "endChar": 17
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0bf04e1_74904d4b",
+        "filename": "src/include/nfs_proto_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-07-31T19:44:42Z",
+      "side": 1,
+      "message": "Maybe re-order these so that nfs4_func_desc comes first and then you don\u0027t have a pair of _USE_NFS3s right next to each other?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 50
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab6d81f4_513bf06f",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-07-31T19:44:42Z",
+      "side": 1,
+      "message": "I think this is wrong / CEIOSTATS_REPLY comes *after* the name/type/direction \"heading\"? (or something).\n\nI think it\u0027d make more sense to nest the #ifdef _USE_NFS3 here within the CE_STATS_REPLY #defin (so it controls putting the \"v3 prefix\" into the output)",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 29
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5fe8667_642fbaee",
         "filename": "src/include/server_stats_private.h",
         "patchSetId": 1
@@ -16,6 +131,47 @@
       "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d6cfb56_5087e54f",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-07-31T19:44:42Z",
+      "side": 1,
+      "message": "(As above, I\u0027d probably not copy/paste but rather put the #ifdef inside, it\u0027s too easy to mess up the else case)",
+      "parentUuid": "e5fe8667_642fbaee",
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2b544c5_c7de6a32",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2712,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-07-31T19:44:42Z",
+      "side": 1,
+      "message": "I\u0027d probably move this up next to the reset_nfsv3_stats? (and or make reset_nfsv3_stats reset both the NLM and MNT ones too)",
+      "range": {
+        "startLine": 2712,
+        "startChar": 1,
+        "endLine": 2712,
+        "endChar": 16
+      },
+      "revId": "0d584f5cb2398430450cdf2bbc76be00b33082f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
