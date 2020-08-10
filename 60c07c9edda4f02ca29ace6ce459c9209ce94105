@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "78ef27ac_5df91038",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3338,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-08-10T21:52:04Z",
+      "side": 1,
+      "message": "Oops, need to pass pds instead of NULL here...",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "432e00d1_72960280",
         "filename": "src/Protocols/NFS/nfs4_op_savefh.c",
         "patchSetId": 5
@@ -31,6 +48,40 @@
       "side": 1,
       "message": "Good catch:\n\ndata-\u003esaved_pnfs_ds \u003d op_ctx-\u003ectx_pnfs_ds;\n\nbelow should be moved out of the conditional.",
       "parentUuid": "432e00d1_72960280",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94833f49_4eb50080",
+        "filename": "src/Protocols/NFS/nfs4_op_savefh.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-08-10T21:52:04Z",
+      "side": 1,
+      "message": "Moved this out to above to assure saved_pnfs_ds is set to NULL if the new SAVEDFH isn\u0027t a ds handle",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b67afc17_b35f6c46",
+        "filename": "src/support/ds.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-08-10T21:52:04Z",
+      "side": 1,
+      "message": "Moved fsal_put out of the conditional, create_fsal_pnfs_ds takes an extra reference for the pnfs ds.",
       "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -102,6 +153,24 @@
       "side": 1,
       "message": "No I want to keep init_op_context always balanced with release_op_context",
       "parentUuid": "64bee1a5_62fce029",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "485f2872_441401f8",
+        "filename": "src/support/ds.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-08-10T21:52:04Z",
+      "side": 1,
+      "message": "Resolved by actually having create_fsal_pnfs_ds NOT put the pnfs ds into the op_context since there\u0027s no need for it there.",
+      "parentUuid": "0aeecfe4_788b52e8",
       "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
