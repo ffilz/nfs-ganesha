@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66d84f6d_da7f296b",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-08-10T13:18:50Z",
+      "side": 1,
+      "message": "This one is wrong.  fd is set to 0, and only set to another value on success, so it should not be closed on failure.",
+      "revId": "5ecdef82df67f96c94b2f2c82a3576e3f6ed62b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71f5e77f_7edcd999",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-08-10T13:18:50Z",
+      "side": 1,
+      "message": "This one is good.",
+      "revId": "5ecdef82df67f96c94b2f2c82a3576e3f6ed62b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6daca235_2652d627",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-08-10T13:18:50Z",
+      "side": 1,
+      "message": "By this point, the fd has been passed off to the client, so we probably need to call CLNT_DESTROY() instead of closing fd?",
+      "revId": "5ecdef82df67f96c94b2f2c82a3576e3f6ed62b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
