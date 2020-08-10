@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "25b3294a_e31736b9",
+        "filename": "src/Protocols/NFS/nfs4_op_savefh.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-08-10T18:24:30Z",
+      "side": 1,
+      "message": "Good catch:\n\ndata-\u003esaved_pnfs_ds \u003d op_ctx-\u003ectx_pnfs_ds;\n\nbelow should be moved out of the conditional.",
+      "parentUuid": "432e00d1_72960280",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "66fb9944_e01449e8",
         "filename": "src/support/ds.c",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2020-08-10T12:43:54Z",
       "side": 1,
       "message": "This appears to be unconditional.  Is another ref takes somewhere?",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "558eea36_61c9ddf3",
+        "filename": "src/support/ds.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-08-10T18:24:30Z",
+      "side": 1,
+      "message": "Ok, I think this needs to either take an additional ds reference, or remove the ds from the op_ctx so release_op_context() doesn\u0027t drop a reference.\n\nAlso the fsal reference returned by fsal_load_init needs to be unconditionally put, fsal_pnfs_ds_init will take a fsal reference for the ds.",
+      "parentUuid": "66fb9944_e01449e8",
       "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
