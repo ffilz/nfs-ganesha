@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "432e00d1_72960280",
+        "filename": "src/Protocols/NFS/nfs4_op_savefh.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-08-10T12:43:54Z",
+      "side": 1,
+      "message": "This drops the ref, but doesn\u0027t null the pointer, and the pointer is only conditionally set below.  I think this means we might have a double ref?",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66fb9944_e01449e8",
+        "filename": "src/support/ds.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-08-10T12:43:54Z",
+      "side": 1,
+      "message": "This appears to be unconditional.  Is another ref takes somewhere?",
+      "revId": "60c07c9edda4f02ca29ace6ce459c9209ce94105",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
