@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a7fe8a8e_44030560",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-08-11T15:48:42Z",
+      "side": 1,
+      "message": "setting to zero is a bug by itself, maybe, we can change it to -1 as part this patch itself.",
+      "parentUuid": "66d84f6d_da7f296b",
+      "revId": "5ecdef82df67f96c94b2f2c82a3576e3f6ed62b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71f5e77f_7edcd999",
         "filename": "src/MainNFSD/nfs_rpc_callback.c",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2020-08-10T13:18:50Z",
       "side": 1,
       "message": "By this point, the fd has been passed off to the client, so we probably need to call CLNT_DESTROY() instead of closing fd?",
+      "revId": "5ecdef82df67f96c94b2f2c82a3576e3f6ed62b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15559649_2ce4d046",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-08-11T15:48:42Z",
+      "side": 1,
+      "message": "Probably both? We should be careful not to close an already closed fd though!",
+      "parentUuid": "6daca235_2652d627",
       "revId": "5ecdef82df67f96c94b2f2c82a3576e3f6ed62b0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
