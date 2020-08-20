@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0213304f_497afc30",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-08-20T16:58:33Z",
+      "side": 1,
+      "message": "Return value will still be positive on failure, but the fd will be negative.  So this should stay the same, I think.",
+      "revId": "146e400ed74e9ec6ba8d600b6433d3606a6ad242",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
