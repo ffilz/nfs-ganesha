@@ -316,12 +316,22 @@ static void ino_release_cb(void *handle, vinodeno_t vino)
 	export->export.up_ops->try_release(export->export.up_ops, &fh_desc, 0);
 }
 
+static void dentry_release_cb(void *handle, vinodeno_t dirino,
+			      vinodeno_t ino, const char *name, size_t len)
+{
+	LogDebug(COMPONENT_FSAL,
+		"libcephfs asking to release entry, name:%s, inode:0x%lx",
+		name, ino.ino.val);
+	ino_release_cb(handle, ino);
+}
+
 static void register_callbacks(struct ceph_export *export)
 {
 	struct ceph_client_callback_args args = {
-						.handle = export,
-						.ino_release_cb = ino_release_cb
-					};
+					.handle = export,
+					.ino_release_cb = ino_release_cb,
+					.dentry_cb = dentry_release_cb
+				};
 	ceph_ll_register_callbacks(export->cmount, &args);
 }
 #else /* USE_FSAL_CEPH_REGISTER_CALLBACKS */
