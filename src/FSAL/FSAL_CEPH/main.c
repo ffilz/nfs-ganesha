@@ -325,12 +325,22 @@ static void dentry_release_cb(void *handle, vinodeno_t dirino,
 	ino_release_cb(handle, ino);
 }
 
+static mode_t umask_cb(void *handle)
+{
+	mode_t umask = CephFSM.fsal.fs_info.umask;
+
+	LogDebug(COMPONENT_FSAL,
+		"libcephfs set umask = %04o by umask callback", umask);
+	return umask;
+}
+
 static void register_callbacks(struct ceph_export *export)
 {
 	struct ceph_client_callback_args args = {
 					.handle = export,
 					.ino_release_cb = ino_release_cb,
-					.dentry_cb = dentry_release_cb
+					.dentry_cb = dentry_release_cb,
+					.umask_cb = umask_cb
 				};
 	ceph_ll_register_callbacks(export->cmount, &args);
 }
