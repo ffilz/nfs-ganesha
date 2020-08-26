@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23e3b196_30ebfc77",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3506,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-08-26T15:00:48Z",
+      "side": 1,
+      "message": "You can just put the whole string in one set of quotes on line 3506, so:\n\nLogFullDebug(COMPONENT_FSAL,\n             \"entry %d val %p at %p len %d at %p name %s\",\n\nCheckpatch will not complain that the string exceeds the line length (and actually both of your broken strings were missing a blank around the \"at\"...",
+      "revId": "36a6e2b2100c7b7accc18e7b5dfd93128b82522a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
