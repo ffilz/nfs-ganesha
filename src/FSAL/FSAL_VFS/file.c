@@ -1467,6 +1467,7 @@ fsal_status_t vfs_seek2(struct fsal_obj_handle *obj_hdl,
 	if (ret < 0) {
 		if (errno == ENXIO) {
 			info->io_eof = TRUE;
+			status = posix2fsal_status(errno);
 		} else {
 			status = posix2fsal_status(errno);
 		}
