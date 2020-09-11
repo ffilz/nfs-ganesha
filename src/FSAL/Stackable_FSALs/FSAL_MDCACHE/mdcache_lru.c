@@ -1681,6 +1681,25 @@ size_t mdcache_lru_release_entries(int32_t want_release)
 	return released;
 }
 
+/* A portable wrapper for getrlimit(RLIMIT_NOFILE, rlim). */
+static int get_open_file_limit(struct rlimit *rlim)
+{
+	if (getrlimit(RLIMIT_NOFILE, rlim) != 0)
+		return -1;
+
+#if defined(__APPLE__)
+	/*
+	 * macOS has unusual semantics for the RLIMIT_NOFILE hard limit. See
+	 * the COMPATIBILITY section of the getrlimit man page.
+	 * https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/getrlimit.2.html
+	 */
+	if (rlim->rlim_max > OPEN_MAX)
+		rlim->rlim_max = OPEN_MAX;
+#endif
+
+	return 0;
+}
+
 void init_fds_limit(void)
 {
 	int code = 0;
@@ -1691,7 +1710,7 @@ void init_fds_limit(void)
 	};
 
 	/* Find out the system-imposed file descriptor limit */
-	if (getrlimit(RLIMIT_NOFILE, &rlim) != 0) {
+	if (!get_open_file_limit(&rlim) != 0) {
 		code = errno;
 		LogCrit(COMPONENT_CACHE_INODE_LRU,
 			"Call to getrlimit failed with error %d. This should not happen.  Assigning default of %d.",
