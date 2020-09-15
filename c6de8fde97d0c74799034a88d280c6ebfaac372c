@@ -52,6 +52,24 @@
       "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f619f69e_2e99ff64",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2020-09-15T17:45:41Z",
+      "side": 1,
+      "message": "Ok got it.\nWe can do nfs4_Errno_status after seek2, like other ops, that\u0027s what I was doing in first patch. But we are converting ENXIO to EIO, so calling nfs4_Errno_status to convert fsal error after seek2 will break it if we want to return ENXIO to client.\n        case ERR_FSAL_NXIO:\n                LogCrit(COMPONENT_NFS_V4,\n                        \"Error %s in %s converted to NFS4ERR_IO but was set non-retryable\",\n                        msg_fsal_err(error), where);\n                nfserror \u003d NFS4ERR_IO;\n                break;\nIs it safe to return NFS4ERR_XIO for ERR_FSAL_NXIO? I am not sure whats the history behind this change of converting it to NFS4ERR_IO.",
+      "parentUuid": "bd96e932_e337e76a",
+      "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
