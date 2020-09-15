@@ -34,6 +34,24 @@
       "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd96e932_e337e76a",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-15T15:14:19Z",
+      "side": 1,
+      "message": "We need to follow the RFC until it is changed. I think the RFC should be changed to match the system call (assuming the system call is implemented the same way on other POSIX based operating systems).\n\nOn the other hand, I\u0027m not sure why the NFS level code in Ganesha is converting all errors to ENXIO, that is almost certainly wrong and should be fixed. Your original patch had a fix to that which would be welcome.\n\nThe NFS client SHOULD accept anything the RFC allows and convert that to what the system call expects.",
+      "parentUuid": "f6661dac_ad25f128",
+      "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
