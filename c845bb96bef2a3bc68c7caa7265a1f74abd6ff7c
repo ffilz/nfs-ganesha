@@ -16,6 +16,24 @@
       "revId": "c845bb96bef2a3bc68c7caa7265a1f74abd6ff7c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82ce2879_30c5e7dd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-15T18:45:28Z",
+      "side": 1,
+      "message": "In testing this with lower numbers of connections, I found that since I hadn\u0027t clamped this backoff, the threads would commonly get to *massive* backoff (so agreed, it\u0027s unrelated to this specific fix; happy to make it a separate change if you prefer)",
+      "parentUuid": "539b8d04_b4ae52d7",
+      "revId": "c845bb96bef2a3bc68c7caa7265a1f74abd6ff7c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
