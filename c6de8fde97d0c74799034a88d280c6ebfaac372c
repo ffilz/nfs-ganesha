@@ -70,6 +70,24 @@
       "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cead92b6_cb906309",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-15T21:17:13Z",
+      "side": 1,
+      "message": "NFS4ERR_NXIO per RFC 7530 is supposed to only be valid for WRITE so that may be an issue with conversion in general. On the other hand, I doubt many clients and the applications above are actually picky about IO vs NXIO, and if the FSAL_VFS system call made on behalf of whatever NFS operation generates ENXIO, the application on the client would likely be making that same system call or a different one that would produce ENXIO in the same circumstance on a local filesystem. So I would hazard that it\u0027s ok.\n\nI don\u0027t see any reason why we don\u0027t use NFS3ERR_NXIO and NFS4ERR_NXIO, it seems to predate use of git with the code. I\u0027d suggest we fixup the conversion to NFS3 and NFS4 errors convert NXIO properly.\n\nI guess the conversion producing NFS4ERR_IO for ENXIO is why the read code converts all errors to NFS4ERR_NXIO because SEEK actually NEEDS to return that error.\n\nSo let\u0027s fix up the read code AND the error conversion code. Leave the seek2 code alone.",
+      "parentUuid": "f619f69e_2e99ff64",
+      "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
