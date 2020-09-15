@@ -16,6 +16,24 @@
       "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6661dac_ad25f128",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2020-09-15T08:17:42Z",
+      "side": 1,
+      "message": "This is as per lseek man page\n\"ENXIO  whence is SEEK_DATA or SEEK_HOLE, and offset is beyond the end of the file, or whence is SEEK_DATA and offset is within a hole at the end of the file.\"\n\n\"whence is SEEK_DATA or SEEK_HOLE, and offset is beyond the end of the file\"\nThis part is already handled in offset check above, which is as per RFC\n\n\"whence is SEEK_DATA and offset is within a hole at the end of the file.\"\nFixing this part, Its not clear in RFC, but true as per lseek man page, so its better to match man page behaviour as applications will expect that from lseek on nfs mount.\n\nIn Ganesha also we are returning ENXIO for any seek2 error.\n                fsal_status \u003d obj-\u003eobj_ops-\u003eseek2(obj, state_found, \u0026info);\n                if (FSAL_IS_ERROR(fsal_status)) {\n                        res_SEEK-\u003esr_status \u003d NFS4ERR_NXIO;\n                        goto done;\n                }",
+      "parentUuid": "56e898df_2d6f95f3",
+      "revId": "c6de8fde97d0c74799034a88d280c6ebfaac372c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
