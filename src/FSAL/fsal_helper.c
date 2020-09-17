@@ -41,8 +41,10 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include "gsh_config.h"
 #include "log.h"
 #include "fsal.h"
+#include "fsal_convert.h"
 #include "nfs_convert.h"
 #include "nfs_exports.h"
 #include "nfs4_acls.h"
@@ -692,6 +694,162 @@ fsal_status_t fsal_lookup(struct fsal_obj_handle *parent,
 
 
 	return parent->obj_ops->lookup(parent, name, obj, attrs_out);
+}
+
+/**
+ * @brief Look up a directory using a fully qualifief path that is contained
+ *        within the export in op_ctx->ctx_export.
+ *
+ * NOTE: This is pretty efficient to use even if the path IS the export. Our
+ *       caller would have to do about the same having found the export, so
+ *       we might as well have that logic in common code. In fact, we do it
+ *       without using strcmp (the function that found the export has already
+ *       done that...).
+ *
+ * @param[in]  path    Relative path to the directory
+ * @param[out] obj     Found directory
+ *
+ * @note On success, @a handle has been ref'd
+ *
+ * NOTE: By the nature of who calls this function, we don't check that the
+ *       path is relative.
+ *
+ * NOTE: Since this does the path walk through MDCACHE, any intermediary
+ *       nodes will be in the cache, since there are not extraneous LRU events
+ *       if the cache is full, the intermediary entries are likely to be reaped
+ *       as we walk the path, reducing churn in the cache.
+ *
+ * @return FSAL status
+ */
+
+fsal_status_t fsal_lookup_path(const char *path,
+			       struct fsal_obj_handle **dirobj)
+{
+	fsal_status_t fsal_status = { 0, 0 };
+	struct fsal_obj_handle *parent, *obj;
+	char *name, *rest, *p;
+	const char *start, *exppath;
+	int len;
+
+	/* First we need to strip off the export path, paying heed to
+	 * nfs_param.core_param.mount_path_pseudo. Since our callers have used
+	 * get_gsh_export_by_pseudo or get_gsh_export_by_path to find the
+	 * export, the path MUST be proper.
+	 */
+	exppath = ctx_export_path(op_ctx);
+
+	/* So now we can point start at the portion of the path beyond the
+	 * export path. This will point start at the '\0' or '/' following the
+	 * export path. We will be nice and skip all '/' characters that follow
+	 * the export path.
+	 */
+	start = path + strlen(exppath);
+
+	while (*start == '/')
+		start++;
+
+	/* Now get the length of the remaining relative path */
+	len = strlen(start);
+
+	/* Strip terminating '/' by shrinking length */
+	while (start[len-1] == '/' && len > 1)
+		len--;
+
+	/* Initialize parent to root of export. */
+	fsal_status = nfs_export_get_root_entry(op_ctx->ctx_export, &parent);
+
+	if (FSAL_IS_ERROR(fsal_status))
+		return fsal_status;
+
+	if (len == 0) {
+		/* The path we were passed is effectively the export path, so
+		 * just return the export root object with a reference.
+		 */
+		*dirobj = parent;
+		return fsal_status;
+	}
+
+	/* Allocate space for duplicate */
+	name = alloca(len + 1);
+
+	/* Copy the string without any extraneous '/' at begin or end. */
+	memcpy(name, start, len);
+
+	/* Terminate it */
+	name[len] = '\0';
+
+	rest = name;
+
+	while (*rest != '\0') {
+		/* Find the end of this path element */
+		p = index(rest, '/');
+
+		/* NUL terminate element (if not at end of string */
+		if (p != NULL)
+			*p = '\0';
+
+		/* Skip extra '/' */
+		if (*rest == '\0') {
+			rest++;
+			continue;
+		}
+
+		/* Disallow .. elements... */
+		if (strcmp(rest, "..") == 0) {
+			parent->obj_ops->put_ref(parent);
+			LogInfo(COMPONENT_FSAL,
+				"Failed due to '..' element in path %s",
+				path);
+			return posix2fsal_status(EACCES);
+		}
+
+		/* Skip "." elements... */
+		if (rest[0] == '.' && rest[1] == '\0')
+			goto skip;
+
+		/* Open the next directory in the path */
+		fsal_status = parent->obj_ops->lookup(parent,
+						      rest,
+						      &obj,
+						      NULL);
+
+		/* No matter what, we're done with the parent reference */
+		parent->obj_ops->put_ref(parent);
+
+		if (FSAL_IS_ERROR(fsal_status)) {
+			LogDebug(COMPONENT_FSAL,
+				 "Failed due to %s element in path %s error %s",
+				 rest, path, fsal_err_txt(fsal_status));
+			return fsal_status;
+		}
+
+		if (obj->type != DIRECTORY) {
+			obj->obj_ops->put_ref(obj);
+			LogDebug(COMPONENT_FSAL,
+				 "Failed due to %s element in path %s not a directory",
+				 rest, path);
+			return posix2fsal_status(ENOTDIR);
+		}
+
+		/* Set up for next lookup */
+		parent = obj;
+
+skip:
+
+		/* Done, break out */
+		if (p == NULL)
+			break;
+
+		/* Skip the '/' */
+		rest = p + 1;
+	}
+
+	/* Now parent is the object we're looking for and we already knmow it's
+	 * a directory. Return it with the reference we are holding.
+	 */
+	*dirobj = parent;
+
+	return fsal_status;
 }
 
 /**
