@@ -757,47 +757,93 @@ fsal_status_t proxyv3_lookup_root(struct fsal_export *export_handle,
  */
 
 fsal_status_t proxyv3_lookup_path(struct fsal_export *export_handle,
-				  const char *path,
+				  const char *full_path,
 				  struct fsal_obj_handle **handle,
 				  struct attrlist *attrs_out)
 {
+	fsal_status_t result;
 	struct proxyv3_export *export =
 		container_of(export_handle, struct proxyv3_export, export);
 
-	LogDebug(COMPONENT_FSAL, "Looking up path '%s'", path);
+	LogDebug(COMPONENT_FSAL, "lookup_path for full path '%s'", full_path);
 
 	/* Check that the first part of the path matches our root. */
 	const char *root_path = CTX_FULLPATH(op_ctx);
 	const size_t root_len = strlen(root_path);
 
-	const char *p = path;
-
 	/*  Check that the path matches our root prefix. */
-	if (strncmp(path, root_path, root_len) != 0) {
+	if (strncmp(full_path, root_path, root_len) != 0) {
 		LogDebug(COMPONENT_FSAL,
-			 "path ('%s') doesn't match our root ('%s')",
-			 path, root_path);
-		return fsalstat(ERR_FSAL_FAULT, 0);
+			 "path ('%s') doesn't begin with our root ('%s')",
+			 full_path, root_path);
+		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
-	/* The prefix matches our root path, move forward. */
-	p += root_len;
+	/* The prefix matches our root path, start after that. */
+	const char *p = full_path + root_len;
 
 	if (*p == '\0') {
-		/* Nothing left. Must have been just the root. */
+		/* Nothing left. This is a root lookup. */
 		LogDebug(COMPONENT_FSAL, "Root Lookup. Doing GETATTR instead");
 		return proxyv3_lookup_root(export_handle, handle, attrs_out);
+	} else if (*p != '/') {
+		LogDebug(COMPONENT_FSAL,
+			 "Non-root lookup, but first character (%c) of %s isn't a forward slash",
+			 *p, p);
+		return fsalstat(ERR_FSAL_INVAL, 0);
+	}
+
+	LogDebug(COMPONENT_FSAL,
+		 "LOOKUP_PATH: After root path ('%s'), we have %s left over",
+		 root_path, p);
+
+	/* Skip the first slash */
+	p++;
+
+	/*
+	 * Okay, we've got a path with potentially multiple subdirectories
+	 * (separeated by forward slashes). Split the path on '/' as we go,
+	 * while updating parent_dir.
+	 */
+
+	struct fsal_obj_handle *parent_dir = &export->root_handle_obj->obj;
+
+	/* Make a copy of the path (post root), so we can NUL-smash slashes. */
+	char *path_copy = gsh_strdup(p);
+	char *next_slash = strchr(path_copy, '/');
+
+	p = path_copy;
+
+	while (next_slash != NULL) {
+		/* NUL-terminate this portion of the path to lookup the dir. */
+		*next_slash = '\0';
+
+		result = proxyv3_lookup_internal(export_handle,
+						 p, parent_dir,
+						 handle, attrs_out);
+		if (FSAL_IS_ERROR(result)) {
+			/* Note: lookup will have warned, just cleanup here. */
+			gsh_free(path_copy);
+			return result;
+		}
+
+		/* Update parent_dir to be the directory we just looked up */
+		parent_dir = *handle;
+		/* Skip over the forward slash */
+		p = next_slash + 1;
+		/* Find the (possible) next slash after that */
+		next_slash = strchr(p, '/');
 	}
 
 	/*
-	 * Okay, we've got a potential path with slashes.
-	 *
-	 * @todo Split up path, calling lookup internal on each part.
+	 * We now have a slash free, final path under parent_dir.
 	 */
 
-	return proxyv3_lookup_internal(export_handle, p,
-				       &export->root_handle_obj->obj,
-				       handle, attrs_out);
+	result = proxyv3_lookup_internal(export_handle, p,
+					 parent_dir,
+					 handle, attrs_out);
+	gsh_free(path_copy);
+	return result;
 }
 
 /**
