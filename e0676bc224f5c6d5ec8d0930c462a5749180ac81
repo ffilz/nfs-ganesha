@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79126420_f550aede",
+        "filename": "src/Protocols/9P/9p_attach.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-17T22:34:48Z",
+      "side": 0,
+      "message": "In case it looks odd to remove the code below, lookup_path didn\u0027t necessarily cache the object in MDCACHE, the code below assures that.\n\nThe new fsal_lookup_path uses normal lookup calls and thus does not bypass MDCACHE.\n\nI think lookup_path with MDCACHE may have cached them anyway...",
+      "revId": "e0676bc224f5c6d5ec8d0930c462a5749180ac81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
