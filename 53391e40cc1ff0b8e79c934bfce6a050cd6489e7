@@ -19,6 +19,328 @@
     },
     {
       "key": {
+        "uuid": "37bb4a28_798d63b2",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "I\u0027d actually add a debug-only check for it (I don\u0027t know if you do debug-only builds with debug checking like that, but seems worthwhile to \"assert\" / \"check\" that strncmp of path and exppath matches).\n\nI just realized something amusing: what does NFS say / do about case-*insensitive* filesystems? Does NFS dictate case sensitivity?",
+      "range": {
+        "startLine": 714,
+        "startChar": 0,
+        "endLine": 714,
+        "endChar": 74
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bc5860f_b3d8c187",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "This initialization is unnecessary (and would have tricked the compiler into not warning you about incorrect uninitialized returns / usage)",
+      "range": {
+        "startLine": 728,
+        "startChar": 0,
+        "endLine": 728,
+        "endChar": 38
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08312f0f_a7acb43b",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "I wouldn\u0027t declare obj up here (it causes it to \"leak\" across iterations)",
+      "range": {
+        "startLine": 729,
+        "startChar": 34,
+        "endLine": 729,
+        "endChar": 37
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7d85ef1_855c5954",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "Up to you, but it\u0027s sort of less error prone to always just pass in dirobj instead of \u0026parent to the \"fill in the object\" functions. That way, if you return early, you don\u0027t have to remember \"oh right, *dirobj \u003d parent\". At the same time, this way you could be setting *dirobj *only* on success. Up to you.",
+      "range": {
+        "startLine": 729,
+        "startChar": 25,
+        "endLine": 729,
+        "endChar": 31
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fcf8427_a7eb4c69",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "I don\u0027t see why there\u0027s both \"name\" and \"rest\". name is only temporarily used to hold the alloca and be the target for the memcpy/strlcpy, and then rest is used forever after.",
+      "range": {
+        "startLine": 730,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 23
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa9cb57a_48ba7cb7",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "Hmm. I think this is error prone.\n\nDoes kfnsd also allow you to pass an arbitrary number of extraneous slashes?\n\nThat is, mount against \"\u003croot\u003e/////foo\" seems like it should just return an error instead.",
+      "range": {
+        "startLine": 743,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 72
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "021016fa_a627df9c",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "Same thing. Maybe you could make it an option to allow poorly specified paths, but silently trimming is \"dangerous\".",
+      "range": {
+        "startLine": 754,
+        "startChar": 0,
+        "endLine": 754,
+        "endChar": 48
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d35808b3_8ce97ab3",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "\u003e *0*. or !\u003d 0, whichever you prefer.",
+      "range": {
+        "startLine": 755,
+        "startChar": 0,
+        "endLine": 755,
+        "endChar": 39
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa6d88db_f8250daa",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "I\u0027d personally do this up at the top, rather than messing with the strings first to keep all the string games closer together.",
+      "range": {
+        "startLine": 758,
+        "startChar": 1,
+        "endLine": 762,
+        "endChar": 21
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "310dabb3_dea4d30a",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "LogDebug here that you\u0027re just returning the root, please.",
+      "range": {
+        "startLine": 767,
+        "startChar": 0,
+        "endLine": 767,
+        "endChar": 5
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20129e87_25f8979a",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "What limits are there on the length of len? (I get nervous anytime a naked alloca is present)",
+      "range": {
+        "startLine": 773,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 24
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b593352_b502a499",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "Prefer strlcpy?",
+      "range": {
+        "startLine": 776,
+        "startChar": 1,
+        "endLine": 776,
+        "endChar": 7
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "690e609d_f070ce76",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "I think doing this as while (next_slash !\u003d NULL) is easier to follow, even though it results in a \"duplicate\" lookup call outside the loop.",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 24
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eebbfa3_21625297",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "prefer strchr to index (index is deprecated).\n\nAlso, is p in your code more accurately \"next_slash\"?",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 23
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c0651b2e_29acbb14",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
@@ -54,6 +376,70 @@
     },
     {
       "key": {
+        "uuid": "39173141_5b565bf2",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "As above though, I think this warrants at *least* warning / Debug logs that you\u0027re eating up embedded extraneous slashes.",
+      "parentUuid": "6d42c6d4_b6ee7ab9",
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "385c2186_d8395b3f",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "This is hard to follow with your alternate goto skip variant...",
+      "range": {
+        "startLine": 794,
+        "startChar": 0,
+        "endLine": 794,
+        "endChar": 12
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "935e2f83_a56a640b",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "What\u0027s this putref for? Is it because you got the root by reference at the start? (If so, I think this code would still be wrong, because you\u0027d need to putref on all the parents along the way, right?)",
+      "range": {
+        "startLine": 799,
+        "startChar": 0,
+        "endLine": 799,
+        "endChar": 36
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74bdf648_bdc2c073",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
@@ -65,6 +451,47 @@
       "writtenOn": "2020-09-17T22:34:48Z",
       "side": 1,
       "message": "Hmm, we could use fsal_lookup here. Maybe we should be permission checking the component lookup...\n\nIn exchange, we would get an extraneous directory check (we could move the directory check to just verifying the terminal node).",
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd6f4241_dac05072",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "Checking !\u003d DIRECTORY isn\u0027t so bad :).",
+      "parentUuid": "74bdf648_bdc2c073",
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3c7447b_7712b64f",
+        "filename": "src/Protocols/NFS/mnt_Mnt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2020-09-18T17:08:36Z",
+      "side": 1,
+      "message": "Hmm. Should there be some other helper for \"lookup by tag or path\"? (Duplicating this logic here, in 9p, etc. seems error prone)",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 30
+      },
       "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
