@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7b3f3f30_5e74e2d9",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdbf5e72_3aa21e93",
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37bb4a28_798d63b2",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "6e7c4183_0eae0044",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "Ok, done. I don\u0027t think NFSv3 has much to say about case sensitivity...\n\nGanesha is case sensitive though...",
+      "parentUuid": "37bb4a28_798d63b2",
+      "range": {
+        "startLine": 714,
+        "startChar": 0,
+        "endLine": 714,
+        "endChar": 74
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bc5860f_b3d8c187",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2020-09-18T17:08:36Z",
       "side": 1,
       "message": "This initialization is unnecessary (and would have tricked the compiler into not warning you about incorrect uninitialized returns / usage)",
+      "range": {
+        "startLine": 728,
+        "startChar": 0,
+        "endLine": 728,
+        "endChar": 38
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec3101f0_aad1a167",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "4bc5860f_b3d8c187",
       "range": {
         "startLine": 728,
         "startChar": 0,
@@ -135,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "478903dd_31811097",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "08312f0f_a7acb43b",
+      "range": {
+        "startLine": 729,
+        "startChar": 34,
+        "endLine": 729,
+        "endChar": 37
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1fcf8427_a7eb4c69",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
@@ -158,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "720c149c_8a977153",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "yea, got rid of name, that\u0027s the nice thing about alloca, you don\u0027t have to remember the original pointer",
+      "parentUuid": "1fcf8427_a7eb4c69",
+      "range": {
+        "startLine": 730,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 23
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa9cb57a_48ba7cb7",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
@@ -169,6 +283,30 @@
       "writtenOn": "2020-09-18T17:08:36Z",
       "side": 1,
       "message": "Hmm. I think this is error prone.\n\nDoes kfnsd also allow you to pass an arbitrary number of extraneous slashes?\n\nThat is, mount against \"\u003croot\u003e/////foo\" seems like it should just return an error instead.",
+      "range": {
+        "startLine": 743,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 72
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17d68b69_b130c62d",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "Yep knfsd allows it...",
+      "parentUuid": "aa9cb57a_48ba7cb7",
       "range": {
         "startLine": 743,
         "startChar": 0,
@@ -215,6 +353,30 @@
       "writtenOn": "2020-09-18T17:08:36Z",
       "side": 1,
       "message": "\u003e *0*. or !\u003d 0, whichever you prefer.",
+      "range": {
+        "startLine": 755,
+        "startChar": 0,
+        "endLine": 755,
+        "endChar": 39
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c385f707_791668e0",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "Oops, this was a left over from copying the open_dir_by_path_walk that had to leave the root string, \"/\" alone.",
+      "parentUuid": "d35808b3_8ce97ab3",
       "range": {
         "startLine": 755,
         "startChar": 0,
@@ -284,6 +446,30 @@
       "writtenOn": "2020-09-18T17:08:36Z",
       "side": 1,
       "message": "What limits are there on the length of len? (I get nervous anytime a naked alloca is present)",
+      "range": {
+        "startLine": 773,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 24
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7915db2e_9cf75783",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "Will check len for \u003e MAXPATHLEN",
+      "parentUuid": "20129e87_25f8979a",
       "range": {
         "startLine": 773,
         "startChar": 0,
@@ -413,6 +599,30 @@
     },
     {
       "key": {
+        "uuid": "f6a4aa9f_7935171c",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "Done for both",
+      "parentUuid": "5eebbfa3_21625297",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 23
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c0651b2e_29acbb14",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 1
@@ -500,6 +710,30 @@
       "writtenOn": "2020-09-18T17:08:36Z",
       "side": 1,
       "message": "What\u0027s this putref for? Is it because you got the root by reference at the start? (If so, I think this code would still be wrong, because you\u0027d need to putref on all the parents along the way, right?)",
+      "range": {
+        "startLine": 799,
+        "startChar": 0,
+        "endLine": 799,
+        "endChar": 36
+      },
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "301bebff_632d976a",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T18:44:34Z",
+      "side": 1,
+      "message": "I putref all the parents now after using them in lookup. If the lookup fails, we aren\u0027t returning anything so it\u0027s appropriate to putref the parent (note that nfs_export_get_root_entry gets the ref for the initial parent).",
+      "parentUuid": "935e2f83_a56a640b",
       "range": {
         "startLine": 799,
         "startChar": 0,
