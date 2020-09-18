@@ -475,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "98d1520a_c765cc2e",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-18T17:18:59Z",
+      "side": 1,
+      "message": "Since the existing code doesn\u0027t do permission checks, I\u0027ll keep this as is. Note that we DO check for DIRECTORY below, so each lookup will be from a DIRECTORY (since we start with the export root which MUST be a directory).\n\nNote this code and the old code does not handle referrals, but then they are irrelevant for NFS v3 and 9P anyway...",
+      "parentUuid": "bd6f4241_dac05072",
+      "revId": "53391e40cc1ff0b8e79c934bfce6a050cd6489e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d3c7447b_7712b64f",
         "filename": "src/Protocols/NFS/mnt_Mnt.c",
         "patchSetId": 1
