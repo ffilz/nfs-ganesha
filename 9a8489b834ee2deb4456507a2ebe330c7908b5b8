@@ -1,0 +1,1534 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f837602e_c886b0be",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8400f50b_57c65003",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a94d285d_83b1ed4c",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed4fc63a_b3c67bd8",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3f8c690_d8e8c8e7",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "202198e1_a2be48ae",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a62579c2_e469746d",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4de3fd8e_b80d065f",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51977c47_f92f992a",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be346685_403fe1b4",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "366913bc_1dad4d99",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "724a0fb9_1c88230d",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovq %%rcx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "718643d7_cac6e0aa",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovq %%rdx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6976b0a_a32209f6",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovq %%rdx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93eec8b3_da403a98",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovq %%rdx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "346c479e_985091ad",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovq %%rdx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d801dcd_0a5fdeaf",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovq %%rdx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cafec99_4ac97ed9",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovq %%rdx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55f3301e_973a0c52",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c0a527_b26515ff",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad8ed0f4_58540c31",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1628f5da_5c8a3d58",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce45df96_ed5dd1fd",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09dca677_9c0f7c83",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "507a261e_16829666",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f3e1744_ddcc08a6",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12b2ddbb_8345b7d1",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65f57bfe_dac627f9",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca2f561a_6c4b0a7d",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9de5afb9_1610e1d1",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eccdcc67_cefd15a3",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "571e693d_821e4c48",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "480ac6c5_51578e05",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ad41cca_14c32cbd",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64e6994f_a9f1b3d9",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ec1569b_5e3a5fef",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbef4170_7bdde202",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ca46323_bd7f91ef",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6a275c_01d09609",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85493d93_19478a07",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63f3bb6d_9630cbba",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcb19404_dede8530",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a0aa2e6_26f4fab7",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ad1f703_e584ed65",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0755643d_53955aba",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "184cb0cc_4c7eb6e8",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6305088d_0d4236d7",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "408e9bf9_d8b5ec31",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8183102e_3ca4e6a1",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e30ccea2_c5b52025",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "daf80792_fa47bd3b",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12e0f6e8_56a1fa96",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f87ef36_1e0182e2",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a56721ca_f7fcc216",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7fbbdf8_cd1b818f",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e750a4_b7079194",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e17ba26_d8142d8c",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b158e116_2f5f69df",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08d26777_773e5523",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de91ee81_6c2433b1",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5372bfc8_f4fa1076",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f72c4b35_8e0dcba2",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f6e6cbf_9a30e52a",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b5ecd55_79103d32",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52dc749b_c391aacc",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e698132f_4d3abe8d",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c214caf3_fac2e617",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a8e32a1_6faa17ce",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dc105c7_ed4e9d73",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8ab536_5effafb9",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07d890e2_7aacd814",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8fa3c4bd_8faf43a8",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f7a55da_35ac52a5",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76417ee9_0c8c6fab",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10ee40b1_490f6de4",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b01ad22b_0c728e0b",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be95c8f1_fa90d238",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a5f6637_63ad567e",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3894b4a2_90c1b486",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c19702bc_337fc0fe",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eee4847_d1ba11ef",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c19bf5dd_2b847c1a",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0479e2c7_d6bd8946",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a590b79_bc6aa7ab",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%ecx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23931b57_59f009b3",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: space required before that \u0027\u0026\u0027 (ctx:OxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                  ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58bbd91e_17a9c2c2",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                 ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71a4b97f_da360216",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                      ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88fdb284_f46f9a59",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n               ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bc4864f_db0bfd32",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027%\u0027 (ctx:WxO)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n        ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca855419_47eee895",
+        "filename": "src/include/atomic_x86_64.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-09-19T00:33:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\\tmovl %%edx, %1\\n\":\"\u003dm\" (*p), \"\u003d\u0026a\"(t), \"\u003dr\"(v)\n                                           ^",
+      "revId": "9a8489b834ee2deb4456507a2ebe330c7908b5b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
