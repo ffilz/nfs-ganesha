@@ -981,6 +981,9 @@ bool ip_str_match(char *release_ip, char *server_ip)
 static void nfs_release_nlm_state(char *release_ip)
 {
 #ifdef _USE_NLM
+	if (!nfs_param.core_param.enable_NLM)
+		return;
+
 	hash_table_t *ht = ht_nlm_client;
 	state_nlm_client_t *nlm_cp;
 	state_nsm_client_t *nsm_cp;
