@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baaa1604_3b3d7d9d",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_xattrs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-24T14:09:47Z",
+      "side": 1,
+      "message": "Why not just leave these out for now and let the FSAL/default_methods.c methods be used for now. Then add these when implemented. Or does it actually make sense to do nothing but return success?",
+      "revId": "6ede4521361ab1becba2b95300dfa005f4598a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1a0d3dc_97bb7898",
+        "filename": "src/config_samples/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-24T14:09:47Z",
+      "side": 1,
+      "message": "Does FSAL_KVSFS have any way of generating an fsid? We are really trying to deprecate this option except for situations where there really is no way to get an fsid from the filesystem. We have already had an issue with the default Filesystem_Id used for the PseudoFS colliding with a VM provisioner\u0027s assignment for Filesystem_Id\u0027s (which wouldn\u0027t have been a problem if they just didn\u0027t set Filesystem_If for their exports...).",
+      "revId": "6ede4521361ab1becba2b95300dfa005f4598a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50ca16ba_57239e2c",
+        "filename": "src/config_samples/kvsfs.ganesha.nfsd.conf",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-09-24T14:09:47Z",
+      "side": 1,
+      "message": "No need to duplicate protocols for the client, and really this could be done without a client block. Also, I would hesitate to put no_root_squash into a sample config...",
+      "revId": "6ede4521361ab1becba2b95300dfa005f4598a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
