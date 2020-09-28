@@ -16,6 +16,24 @@
       "revId": "724f817f00794b7311961309b7649af104da165a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f80c58e5_1af381f6",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-09-28T16:48:34Z",
+      "side": 1,
+      "message": "Yeah, looking closer, I think if you do this you\u0027re going to break the EVENT_TAKE_NODEID case. That\u0027s supposedly there to allow a server head to take over the addresses and client list for another. I think that can happen while you\u0027re already in a grace period too, so that could mean cleaning out entries for clients that may not have reclaimed yet.",
+      "parentUuid": "23f10f94_e717c13b",
+      "revId": "724f817f00794b7311961309b7649af104da165a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
