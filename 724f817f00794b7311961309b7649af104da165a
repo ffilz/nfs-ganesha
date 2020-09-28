@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23f10f94_e717c13b",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-09-28T15:24:11Z",
+      "side": 1,
+      "message": "This code is only reached when this is called from admin_dbus_grace(). I don\u0027t have a personal objection to this myself since none of the code I\u0027m interested in uses dbus to initiate grace periods, but there are some that do.\n\nFurthermore, ISTR that some of those solutions (gluster\u0027s clustering maybe?) rely on being able to merge in-memory databases, so I wonder if this change would play well there?\n\nIn any case, if this is what is desired, a better fix might be to just remove the special case in nfs4_recovery_load_clids(), and have it always do nfs4_cleanup_clid_entries(). This is the only place that passes that function a gsp value.",
+      "revId": "724f817f00794b7311961309b7649af104da165a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
