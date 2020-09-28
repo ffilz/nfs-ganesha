@@ -357,6 +357,14 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 				return ret;
 			}
 			else {
+				/*
+				 * If we're already in a grace period,
+				 * it can not break the existing count,
+				 * other case, which should not be affected
+				 * by the last count, should be cleanup.
+				 */
+				if (!was_grace)
+					nfs4_cleanup_clid_entries();
 				nfs4_recovery_load_clids(gsp);
 			}
 		}
