@@ -357,6 +357,7 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 				return ret;
 			}
 			else {
+				nfs4_cleanup_clid_entries();
 				nfs4_recovery_load_clids(gsp);
 			}
 		}
