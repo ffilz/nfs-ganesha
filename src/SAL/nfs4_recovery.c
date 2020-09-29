@@ -117,8 +117,27 @@ static void nfs_release_v4_clients(char *ip);
 
 clid_entry_t *nfs4_add_clid_entry(char *cl_name)
 {
-	clid_entry_t *new_ent = gsh_malloc(sizeof(clid_entry_t));
+	clid_entry_t *new_ent = NULL;
+	struct glist_head *node;
+	char *old_cl_name;
 
+	PTHREAD_MUTEX_lock(&grace_mutex);
+	glist_for_each(node, &clid_list) {
+		new_ent = glist_entry(node, clid_entry_t, cl_list);
+		old_cl_name = new_ent->cl_name;
+		assert(cl_name != NULL);
+		if (strcmp(cl_name, old_cl_name) == 0) {
+			/*
+			 * if client entry already exists in
+			 * clid_list,don't need to add new entry.
+			 */
+			PTHREAD_MUTEX_unlock(&grace_mutex);
+			return new_ent;
+		}
+	}
+	PTHREAD_MUTEX_unlock(&grace_mutex);
+
+	new_ent = gsh_malloc(sizeof(clid_entry_t));
 	glist_init(&new_ent->cl_rfh_list);
 	(void) strlcpy(new_ent->cl_name, cl_name, sizeof(new_ent->cl_name));
 	glist_add(&clid_list, &new_ent->cl_list);
