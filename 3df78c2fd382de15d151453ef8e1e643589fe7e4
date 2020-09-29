@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf250271_10272ed2",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-09-29T13:53:05Z",
+      "side": 1,
+      "message": "The change looks reasonable, but if you\u0027re going to do this, then it\u0027s probably best to move the call to nfs4_cleanup_clid_entries() out of nfs4_recovery_load_clids() altogether, and just have this function call it at the appropriate times.",
+      "revId": "3df78c2fd382de15d151453ef8e1e643589fe7e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
