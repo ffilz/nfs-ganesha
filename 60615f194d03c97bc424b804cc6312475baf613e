@@ -16,6 +16,58 @@
       "revId": "60615f194d03c97bc424b804cc6312475baf613e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d4aa2bd_67bf14c0",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-01T19:30:54Z",
+      "side": 1,
+      "message": "We have been moving away from using typedefs so this would be an opportunity to use struct clid_entry * for both declarations.",
+      "parentUuid": "f6a19003_72a092ea",
+      "revId": "60615f194d03c97bc424b804cc6312475baf613e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7b63e8b_96dfe821",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-01T19:30:54Z",
+      "side": 1,
+      "message": "I don\u0027t see anything that advances through the list. This probably should use glist_for_each to loop through the list. Does it need a lock? I think the grace lock is held but it\u0027s not clear, please add comments to the function headers that use clid_list indicating that the grace lock MUST be held...",
+      "revId": "60615f194d03c97bc424b804cc6312475baf613e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c46f033_973c4c71",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-01T19:30:54Z",
+      "side": 1,
+      "message": "Instead of break, why not just return clid_entry?",
+      "revId": "60615f194d03c97bc424b804cc6312475baf613e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
