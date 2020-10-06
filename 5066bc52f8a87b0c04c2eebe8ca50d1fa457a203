@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "012f2f1a_059de963",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1608,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-06T18:04:09Z",
+      "side": 1,
+      "message": "So one of the questions is what to do in this failure case. If the GETATTR fails, then this failure will cause the entire READDIR to fail.\n\nMy feeling is we need to propagate this error up as a rdattr_err and allow the consumer of the readir up in the protocol layer deal with it.\n\nMy though also is that we could actually defer the GETATTR retry for either the protocol layer or MDCACHE, then the retry will only occur if and when an upper layer actually needs the attributes (we might not need them yet, we\u0027re just filling a chunk when FSAL readdir is called).\n\nBoth NFSv3 and NFSv4 are capable of returning READDIR entries without attributes.",
+      "revId": "5066bc52f8a87b0c04c2eebe8ca50d1fa457a203",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
