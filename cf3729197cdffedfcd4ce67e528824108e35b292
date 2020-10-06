@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f16107d7_b2923c0c",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-10-06T11:26:31Z",
+      "side": 1,
+      "message": "This mutex is already held when this function is called from nfs_start_grace.",
+      "revId": "cf3729197cdffedfcd4ce67e528824108e35b292",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "402f14b4_267ce5db",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-10-06T11:26:31Z",
+      "side": 1,
+      "message": "No need to test for NULL cl_name on every iteration. Just do it once at the beginning, outside the loop if you want to check for that.",
+      "revId": "cf3729197cdffedfcd4ce67e528824108e35b292",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4589f9b3_b1a52f4a",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-10-06T11:26:31Z",
+      "side": 1,
+      "message": "If you\u0027re going to change how this works, then you may want to consider reworking the API to indicate to the caller that the entry already existed. Currently it just returns new_ent and the callers all assume that a new entry was added (e.g. see fs_read_recov_clids_impl).",
+      "revId": "cf3729197cdffedfcd4ce67e528824108e35b292",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
