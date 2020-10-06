@@ -116,6 +116,8 @@ struct ceph_handle {
 	struct ceph_fd fd;
 	struct Inode *i;	/*< The Ceph inode */
 	const struct fsal_up_vector *up_ops;	/*< Upcall operations */
+	struct ceph_export *export;		/*< The first export this handle
+						 *< belongs to */
 	struct ceph_handle_key key;
 	struct fsal_share share;
 #ifdef CEPH_PNFS

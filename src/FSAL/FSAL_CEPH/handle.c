@@ -63,8 +63,7 @@ static void ceph_fsal_release(struct fsal_obj_handle *obj_pub)
 	/* The private 'full' handle */
 	struct ceph_handle *obj =
 			container_of(obj_pub, struct ceph_handle, handle);
-	struct ceph_export *export =
-		container_of(op_ctx->fsal_export, struct ceph_export, export);
+	struct ceph_export *export = obj->export;
 
 	if (obj != export->root)
 		deconstruct_handle(obj);
