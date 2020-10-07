@@ -99,6 +99,10 @@ struct export_perms {
 	    Attr_Expiration_Time (should never be set for client export_perms.
 	 */
 	int32_t  expire_time_attr;
+	/** Default FSAL name in EXPORT_DEFAULTS.
+	 *  Used for exports as default FSAL.
+	 */
+	char *default_fsal_name;
 	/** available export options */
 	uint32_t options;
 	/** Permission Options that have been set */

@@ -87,6 +87,7 @@ enum config_type {
 #define CONFIG_RELAX		0x008  /*< this block has extra params
 					*  so don't complain about them */
 #define CONFIG_MARK_SET		0x010  /*< Mark this param as set */
+#define CONFIG_OPTIONAL		0x020  /*< Params are optional */
 
 /**
  * @brief Config file processing error type
@@ -491,6 +492,28 @@ struct config_item {
 	  .type = CONFIG_BLOCK,		   	    \
 	  .flags = CONFIG_RELAX,		    \
 	  .u.blk.init = _init_,		    \
+	  .u.blk.params = _params_,		    \
+	  .u.blk.commit = _commit_,		    \
+	  .off = offsetof(struct _struct_, _mem_)   \
+	}
+
+#define CONF_RELAX_OPTIONAL_BLOCK(_name_, _params_, _init_, _commit_, \
+				  _struct_, _mem_) \
+	{ .name = _name_,			    \
+	  .type = CONFIG_BLOCK,			    \
+	  .flags = CONFIG_RELAX | CONFIG_OPTIONAL,		    \
+	  .u.blk.init = _init_,		    \
+	  .u.blk.params = _params_,		    \
+	  .u.blk.commit = _commit_,		    \
+	  .off = offsetof(struct _struct_, _mem_)   \
+	}
+
+#define CONF_OPTIONAL_BLOCK(_name_, _params_, _init_, _commit_, \
+			    _struct_, _mem_) \
+	{ .name = _name_,			    \
+	  .type = CONFIG_BLOCK,			    \
+	  .flags = CONFIG_OPTIONAL,		    \
+	  .u.blk.init = _init_,			    \
 	  .u.blk.params = _params_,		    \
 	  .u.blk.commit = _commit_,		    \
 	  .off = offsetof(struct _struct_, _mem_)   \
