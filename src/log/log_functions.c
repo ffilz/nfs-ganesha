@@ -2596,7 +2596,8 @@ struct config_block logging_param = {
 	.dbus_interface_name = "org.ganesha.nfsd.config.log",
 	.blk_desc.name = "LOG",
 	.blk_desc.type = CONFIG_BLOCK,
-	.blk_desc.flags = CONFIG_UNIQUE,  /* too risky to have more */
+	/* too risky to have more and it could be empty */
+	.blk_desc.flags = CONFIG_UNIQUE | CONFIG_EMPTY,
 	.blk_desc.u.blk.init = log_conf_init,
 	.blk_desc.u.blk.params = logging_params,
 	.blk_desc.u.blk.commit = log_conf_commit
