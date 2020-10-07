@@ -2580,13 +2580,13 @@ static struct config_item logging_params[] = {
 	CONF_ITEM_UI32("RPC_Debug_Flags", 0, UINT32_MAX,
 		       TIRPC_DEBUG_FLAG_DEFAULT,
 		       logger_config, rpc_debug_flags),
-	CONF_ITEM_BLOCK("Facility", facility_params,
+	CONF_EMPTY_BLOCK("Facility", facility_params,
 			facility_init, facility_commit,
 			logger_config, facility_list),
-	CONF_ITEM_BLOCK("Format", format_options,
+	CONF_EMPTY_BLOCK("Format", format_options,
 			format_init, format_commit,
 			logger_config, logfields),
-	CONF_ITEM_BLOCK("Components", component_levels,
+	CONF_EMPTY_BLOCK("Components", component_levels,
 			component_init, component_commit,
 			logger_config, comp_log_level),
 	CONFIG_EOL
@@ -2596,7 +2596,8 @@ struct config_block logging_param = {
 	.dbus_interface_name = "org.ganesha.nfsd.config.log",
 	.blk_desc.name = "LOG",
 	.blk_desc.type = CONFIG_BLOCK,
-	.blk_desc.flags = CONFIG_UNIQUE,  /* too risky to have more */
+	/* too risky to have more and it could be empty */
+	.blk_desc.flags = CONFIG_UNIQUE | CONFIG_EMPTY,
 	.blk_desc.u.blk.init = log_conf_init,
 	.blk_desc.u.blk.params = logging_params,
 	.blk_desc.u.blk.commit = log_conf_commit
