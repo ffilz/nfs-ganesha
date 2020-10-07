@@ -1020,7 +1020,10 @@ static int do_block_load(struct config_node *blk,
 				     "%p name=%s type=%s",
 				     param_addr, item->name,
 				     config_type_str(item->type));
-			if (glist_empty(&node->u.nterm.sub_nodes)) {
+			/* Sub config block could be empty if params have
+			 * default values */
+			if ((item->type != CONFIG_BLOCK) &&
+			    glist_empty(&node->u.nterm.sub_nodes)) {
 				LogInfo(COMPONENT_CONFIG,
 					"%s %s is empty",
 					(node->type == TYPE_STMT
