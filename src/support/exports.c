@@ -731,6 +731,7 @@ void clean_export_paths(struct gsh_export *export)
  *
  * Use the Name parameter passed in via the link_mem to lookup the
  * fsal.  If the fsal is not loaded (yet), load it and call its init.
+ * If Name is missing, use fsal name from EXPORT_DEFAULTS conf.
  *
  * Create an export and pass the FSAL sub-block to it so that the
  * fsal method can process the rest of the parameters in the block
@@ -752,6 +753,9 @@ static int fsal_cfg_commit(void *node, void *link_mem, void *self_struct,
 	/* Get a ref to the export and initialize op_context */
 	get_gsh_export_ref(export);
 	init_op_context_simple(&op_context, export, NULL);
+
+	if (!fp->name)
+		fp->name = export_opt_cfg.conf.fsal_name;
 
 	errcnt = fsal_load_init(node, fp->name, &fsal, err_type);
 	if (errcnt > 0)
@@ -825,6 +829,7 @@ err:
  *
  * Use the Name parameter passed in via the link_mem to lookup the
  * fsal.  If the fsal is not loaded (yet), load it and call its init.
+ * If Name is missing, use fsal name from EXPORT_DEFAULTS conf.
  *
  * Create an export and pass the FSAL sub-block to it so that the
  * fsal method can process the rest of the parameters in the block
@@ -854,6 +859,9 @@ static int fsal_update_cfg_commit(void *node, void *link_mem, void *self_struct,
 
 	/* Initialize op_context from the probe_exp */
 	init_op_context_simple(&op_context, probe_exp, probe_exp->fsal_export);
+
+	if (!fp->name)
+		fp->name = export_opt_cfg.conf.fsal_name;
 
 	errcnt = fsal_load_init(node, fp->name, &fsal, err_type);
 
@@ -1804,6 +1812,8 @@ static struct config_item export_defaults_params[] = {
 	CONF_ITEM_I32_SET("Attr_Expiration_Time", -1, INT32_MAX, 60,
 		       global_export_perms, conf.expire_time_attr,
 		       EXPORT_OPTION_EXPIRE_SET, conf.set),
+	CONF_ITEM_STR("FSAL", 1, 10, NULL,
+		       global_export_perms, conf.fsal_name),
 	CONFIG_EOL
 };
 
@@ -1888,7 +1898,7 @@ static struct config_item export_params[] = {
 	CONF_ITEM_BLOCK("Client", client_params,
 			client_init, client_commit,
 			gsh_export, clients),
-	CONF_RELAX_BLOCK("FSAL", fsal_params,
+	CONF_RELAX_EMPTY_BLOCK("FSAL", fsal_params,
 			 fsal_init, fsal_cfg_commit,
 			 gsh_export, fsal_export),
 	CONFIG_EOL
@@ -1913,7 +1923,7 @@ static struct config_item export_update_params[] = {
 	CONF_ITEM_BLOCK("Client", client_params,
 			client_init, client_commit,
 			gsh_export, clients),
-	CONF_RELAX_BLOCK("FSAL", fsal_params,
+	CONF_RELAX_EMPTY_BLOCK("FSAL", fsal_params,
 			 fsal_init, fsal_update_cfg_commit,
 			 gsh_export, fsal_export),
 	CONFIG_EOL
