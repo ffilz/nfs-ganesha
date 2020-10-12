@@ -386,7 +386,10 @@ bool pseudo_mount_export(struct gsh_export *export)
 		 tmp_pseudopath);
 
 	/* Now find the export we are mounted on */
-	set_op_context_export(get_gsh_export_by_pseudo(tmp_pseudopath, false));
+	struct gsh_export *cur_export =
+		get_gsh_export_by_pseudo(tmp_pseudopath, false);
+
+	set_op_context_export(cur_export);
 
 	if (op_ctx->ctx_export == NULL) {
 		LogFatal(COMPONENT_EXPORT,
