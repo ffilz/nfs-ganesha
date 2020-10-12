@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e978f3b_cf0142c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T14:46:18Z",
+      "side": 1,
+      "message": "Can we even skip the FSAL block now? Probably not because we need to do some work on committing it.\n\nIt would be neat if we could skip the block completely.\n\nOn the other hand, maybe it\u0027s handy to be able to find these blocks.",
+      "revId": "af9651bffde1bebcb7bb657eb91930074950391f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04a7e22f_a1d6b69e",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T14:46:18Z",
+      "side": 1,
+      "message": "Maybe comment that this field is ONLY used for EXPORT_DEFAULTS",
+      "revId": "af9651bffde1bebcb7bb657eb91930074950391f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0dfe9f7_5f582511",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T14:46:18Z",
+      "side": 1,
+      "message": "It might be worth a comment that fsal_load_init will handle the name completely missing.",
+      "revId": "af9651bffde1bebcb7bb657eb91930074950391f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32c94619_e67ef268",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T14:46:18Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "af9651bffde1bebcb7bb657eb91930074950391f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
