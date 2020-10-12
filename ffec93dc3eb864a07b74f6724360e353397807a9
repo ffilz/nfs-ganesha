@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e0236f02_a15e415f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T19:32:55Z",
+      "side": 1,
+      "message": "Yea, there should be a title (I think it can actually be up to 70 or 75 chars) that is a single line with a blank line following. The title gets used in various git logs that show one line per commit",
+      "parentUuid": "c0562b0d_82d5908a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "ffec93dc3eb864a07b74f6724360e353397807a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "61e3ec3e_c13bf4ee",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -117,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "fa2d0521_23e53607",
+        "filename": "src/include/config_parsing.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T19:32:55Z",
+      "side": 1,
+      "message": "Or CONFIG_OPIONAL to match the suggestion of CONF_OPTIONAL_BLOCK below",
+      "parentUuid": "b2d67a16_4dfbea85",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 20
+      },
+      "revId": "ffec93dc3eb864a07b74f6724360e353397807a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c3c3c68_cdde24e0",
         "filename": "src/include/config_parsing.h",
         "patchSetId": 5
@@ -128,6 +176,30 @@
       "writtenOn": "2020-10-12T19:03:04Z",
       "side": 1,
       "message": "I think this should be CONF_OPTIONAL_BLOCK or something (CONF_EMPTY_BLOCK sounds like it\u0027s an empty block)",
+      "range": {
+        "startLine": 512,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 79
+      },
+      "revId": "ffec93dc3eb864a07b74f6724360e353397807a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02c71a3e_e173b0a2",
+        "filename": "src/include/config_parsing.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T19:32:55Z",
+      "side": 1,
+      "message": "Yea, I like that better, also RELAX_OPTIONAL...",
+      "parentUuid": "3c3c3c68_cdde24e0",
       "range": {
         "startLine": 512,
         "startChar": 0,
@@ -163,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "8fa01c71_a7c96a3b",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T19:32:55Z",
+      "side": 1,
+      "message": "Unfortunately the way all the config stuff works, this is the only place it can really go.\n\nNotice expire_time_attr is already in here... But it is also tied to the options and set bitfields...\n\nWe could move fsal_name into the struct in nfs_exports.h currently called global_export_perms and rename that global_export_conf (which will then have two export_perms sub-structures and fsal_name)",
+      "parentUuid": "fd3b828c_17619a31",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "ffec93dc3eb864a07b74f6724360e353397807a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "264c8b6d_29978b69",
         "filename": "src/log/log_functions.c",
         "patchSetId": 5
@@ -180,6 +276,23 @@
         "endLine": 2583,
         "endChar": 17
       },
+      "revId": "ffec93dc3eb864a07b74f6724360e353397807a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77b962e5_4bf7f6f8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-12T19:32:55Z",
+      "side": 1,
+      "message": "But this would still be odd...",
       "revId": "ffec93dc3eb864a07b74f6724360e353397807a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
