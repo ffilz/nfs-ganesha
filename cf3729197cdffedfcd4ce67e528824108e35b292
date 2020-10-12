@@ -50,6 +50,24 @@
       "revId": "cf3729197cdffedfcd4ce67e528824108e35b292",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10c1bf50_00649e00",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1016888
+      },
+      "writtenOn": "2020-10-12T14:04:10Z",
+      "side": 1,
+      "message": "On the whole, it is necessary to indicate the caller that client entry already exists or is newly added. there is indicate by the return value.",
+      "parentUuid": "4589f9b3_b1a52f4a",
+      "revId": "cf3729197cdffedfcd4ce67e528824108e35b292",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
