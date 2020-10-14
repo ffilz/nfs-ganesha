@@ -16,6 +16,24 @@
       "revId": "10874a528283a949deb190adfa695059f9e84a32",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9e4496f_094f651e",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-14T14:45:56Z",
+      "side": 1,
+      "message": "I tried, but that would mean pulling the definition of struct gsh_export into here, or figuring out how to change the order of includes...",
+      "parentUuid": "fb8f277b_e063049e",
+      "revId": "10874a528283a949deb190adfa695059f9e84a32",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
