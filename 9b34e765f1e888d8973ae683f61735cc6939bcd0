@@ -16,6 +16,24 @@
       "revId": "9b34e765f1e888d8973ae683f61735cc6939bcd0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fb426e8_0e8b9b7d",
+        "filename": "src/FSAL/FSAL_MEM/mem_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-14T15:14:29Z",
+      "side": 1,
+      "message": "The idea was to allow the block to be present but empty. This should be allowed for any block that has defaults for all parameters.",
+      "parentUuid": "b9c6d3e7_8538d20d",
+      "revId": "9b34e765f1e888d8973ae683f61735cc6939bcd0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
