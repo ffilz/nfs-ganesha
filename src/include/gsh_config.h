@@ -417,6 +417,10 @@ typedef struct nfs_core_param {
 	bool mount_path_pseudo;
 	/** Whether to disable UDP listeners */
 	bool enable_UDP;
+	/** Whether to disable UDP listeners for mount protocol
+	 * UDP lister for mount protocol will be ebabled if any of enable_UDP or
+	 * enable_UDP_Mount is True */
+	bool enable_UDP_Mount;
 	/** DBus name prefix. Required if one wants to run multiple ganesha
 	    instances on single host. The prefix should be different for every
 	    ganesha instance. If this is set, dbus name will be

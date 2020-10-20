@@ -946,7 +946,8 @@ static int alloc_socket_setopts(int p)
 static int Allocate_sockets_V4(int p)
 {
 	udp_socket[p] = tcp_socket[p] = -1;
-	if (nfs_param.core_param.enable_UDP) {
+	if (nfs_param.core_param.enable_UDP ||
+	    (nfs_param.core_param.enable_UDP_Mount && p == P_MNT)) {
 		udp_socket[p] = socket(AF_INET,
 				       SOCK_DGRAM,
 				       IPPROTO_UDP);
@@ -1032,7 +1033,9 @@ static void Allocate_sockets(void)
 			if (v6disabled)
 				goto try_V4;
 
-			if (nfs_param.core_param.enable_UDP) {
+			if (nfs_param.core_param.enable_UDP ||
+			    (nfs_param.core_param.enable_UDP_Mount &&
+			     p == P_MNT)) {
 				udp_socket[p] = socket(AF_INET6,
 						       SOCK_DGRAM,
 						       IPPROTO_UDP);
@@ -1137,7 +1140,8 @@ void Clean_RPC(void)
 #ifdef RPCBIND
 static bool __Register_program(protos prot, int vers)
 {
-	if (nfs_param.core_param.enable_UDP) {
+	if (nfs_param.core_param.enable_UDP ||
+	    (nfs_param.core_param.enable_UDP_Mount && prot == P_MNT)) {
 		LogInfo(COMPONENT_DISPATCH, "Registering %s V%d/UDP",
 			tags[prot], (int)vers);
 
