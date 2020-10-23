@@ -16,6 +16,24 @@
       "revId": "cf35cf9a700f605678d67d1d3f6b1c225cfa5155",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78573e7d_987c7856",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1018453
+      },
+      "writtenOn": "2020-10-23T19:15:21Z",
+      "side": 1,
+      "message": "This is an environment with nslcd talking to ldap proxy. nslcd doesn\u0027t cache group list and with the slowness of ldap proxy server, getgrouplist calls seemed really expensive. Hence took this route to reduce the number of calls to getgrouplist with the assumption that realloc would be cheaper than RPCs to NSS modules.\nOut of curiosity, even when the backend module serves group list from cache, it still would involve communication between two different processes, no? Shouldn\u0027t realloc be faster?",
+      "parentUuid": "837f3b6d_09fdd265",
+      "revId": "cf35cf9a700f605678d67d1d3f6b1c225cfa5155",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
