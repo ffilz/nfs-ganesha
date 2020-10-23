@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "837f3b6d_09fdd265",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-10-23T18:34:45Z",
+      "side": 1,
+      "message": "The realloc is usually a no-op in the old code, but we most likely free some memory with this approach here. group list is usually cached (by sssd/winbind), so calling it twice to get the number of entries should be pretty quick unless you have an env where there is no cache of these.\n\nAt least that was the reason for doing this way in the first place. malloc() is not cheap!",
+      "revId": "cf35cf9a700f605678d67d1d3f6b1c225cfa5155",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
