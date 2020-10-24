@@ -228,8 +228,9 @@ fsal_acl_status_t nfs4_acl_release_entry(fsal_acl_t *acl)
 
 	default:
 		LogCrit(COMPONENT_NFS_V4_ACL,
-			"ACL entry could not be deleted, status=%s",
-			hash_table_err_to_str(rc));
+			"ACL entry could not be deleted, status=%s, ACL table=%s",
+			hash_table_err_to_str(rc),
+			fsal_acl_hash->parameter.ht_name);
 		return NFS_V4_ACL_ERROR;
 	}
 
