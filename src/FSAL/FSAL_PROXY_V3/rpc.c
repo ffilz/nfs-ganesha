@@ -150,14 +150,15 @@ proxyv3_openfd(const struct sockaddr *host,
 		return -1;
 	}
 
-	struct sockaddr hostAndPort;
 
-	memset(&hostAndPort, 0, sizeof(hostAndPort));
+	char hostAndPort[sizeof(struct sockaddr_in6)];
+
+	memset(hostAndPort, 0, sizeof(hostAndPort));
 	/* Copy the input, and then override the port. */
-	memcpy(&hostAndPort, host, socklen);
+	memcpy(hostAndPort, host, socklen);
 
-	struct sockaddr_in  *hostv4 = (struct sockaddr_in *) &hostAndPort;
-	struct sockaddr_in6 *hostv6 = (struct sockaddr_in6 *) &hostAndPort;
+	struct sockaddr_in  *hostv4 = (struct sockaddr_in *) hostAndPort;
+	struct sockaddr_in6 *hostv6 = (struct sockaddr_in6 *) hostAndPort;
 
 	/* Check that the caller is letting us slip the port in. */
 	if ((ipv6 && hostv6->sin6_port != 0) ||
@@ -224,7 +225,7 @@ proxyv3_openfd(const struct sockaddr *host,
 		hostv4->sin_port = htons(port);
 	}
 
-	if (connect(fd, &hostAndPort, socklen) < 0) {
+	if (connect(fd, (struct sockaddr *)hostAndPort, socklen) < 0) {
 		LogCrit(COMPONENT_FSAL,
 			"Failed to connect to host '%s'. errno %d (%s)",
 			addrForErrors, errno, strerror(errno));
