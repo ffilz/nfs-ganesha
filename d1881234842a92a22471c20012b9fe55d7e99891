@@ -16,6 +16,23 @@
       "revId": "d1881234842a92a22471c20012b9fe55d7e99891",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66d16c83_e10da651",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-26T14:32:35Z",
+      "side": 1,
+      "message": "There\u0027s a struct sockaddr_storage that should be used here, and you shouldn\u0027t need to do the char array, just declare struct sockaddr_storage instead of struct sockaddr.",
+      "revId": "d1881234842a92a22471c20012b9fe55d7e99891",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
