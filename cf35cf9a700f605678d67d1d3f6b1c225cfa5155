@@ -34,6 +34,24 @@
       "revId": "cf35cf9a700f605678d67d1d3f6b1c225cfa5155",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68c8e5b7_9a396b4e",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003947
+      },
+      "writtenOn": "2020-10-28T03:54:52Z",
+      "side": 1,
+      "message": "realloc() should be faster provided cache is not maintained by glibc itself. I am skeptical of malloc subsystem itself where we have seen a 4GB memory use by ganesha actually eneded up with with 60-70GB of actuall RSS against ganesha process. We are fine with this change though.",
+      "parentUuid": "78573e7d_987c7856",
+      "revId": "cf35cf9a700f605678d67d1d3f6b1c225cfa5155",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
