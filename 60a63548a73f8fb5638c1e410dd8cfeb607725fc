@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5064cf65_7dcd4236",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-10-29T14:43:40Z",
+      "side": 1,
+      "message": "The valid true tokens are \"yes\" \"true\" and \"on\".  The valid false tokens are \"no\", \"false\", and \"off\"  It doesn\u0027t appear that 0 and 1 are valid tokens.  See line 274 or so in src/config_parsing/conf_lex.l",
+      "revId": "60a63548a73f8fb5638c1e410dd8cfeb607725fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
