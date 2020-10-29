@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e734dc75_1ad40549",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-29T22:58:23Z",
+      "side": 1,
+      "message": "You need to document this in\nsrc/config_samples/config.txt\nand\nsrc/doc/man/ganesha-core-config.rst",
+      "revId": "cf35cf9a700f605678d67d1d3f6b1c225cfa5155",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "837f3b6d_09fdd265",
         "filename": "src/support/uid2grp.c",
         "patchSetId": 2
