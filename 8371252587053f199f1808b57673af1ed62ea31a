@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94bb6614_91fd051b",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-10-30T16:10:16Z",
+      "side": 1,
+      "message": "One little thing, if this ever gets more complex, this will want to be a bit mask with UDP_LISTENER_ALL setting all the bits... (if we had to support certain old clients, we might want to separately enable NLM for UDP).\n\nIn the meantime, this is fine.",
+      "revId": "8371252587053f199f1808b57673af1ed62ea31a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
