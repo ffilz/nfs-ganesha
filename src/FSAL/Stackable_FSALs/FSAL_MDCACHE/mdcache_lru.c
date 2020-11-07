@@ -747,15 +747,13 @@ lru_reap_impl(enum lru_q_id qid)
 			LRU_DQ_SAFE(lru, q);
 			entry->lru.qid = LRU_ENTRY_NONE;
 			QUNLOCK(qlane);
-			cih_remove_latched(entry, &latch,
-					   CIH_REMOVE_UNLOCK);
-			/* Note, we're not releasing our ref here.
-			 * cih_remove_latched() called
-			 * mdcache_lru_unref(), which released the
-			 * sentinal ref, leaving just the one ref we
-			 * took earlier.  Returning this as is leaves it
-			 * with a ref of 1 (ie, just the sentinal ref)
-			 * */
+			if (unlikely(!cih_remove_latched(entry, &latch,
+							 CIH_REMOVE_UNLOCK))) {
+				abort();
+			}
+			/* Remove sentinel ref, leaving only the one ref we
+			 * took earlier. */
+			mdcache_lru_unref(entry);
 			goto out;
 		}
 		cih_hash_release(&latch);
@@ -1086,6 +1084,8 @@ mdcache_lru_cleanup_try_push(mdcache_entry_t *entry)
 		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 		QUNLOCK(qlane);
 		cih_remove_latched(entry, &latch, CIH_REMOVE_NONE);
+		/* Drop sentinel ref. */
+		mdcache_lru_unref(entry);
 	} else {
 		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 		QUNLOCK(qlane);

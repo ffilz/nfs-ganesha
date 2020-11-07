@@ -3459,7 +3459,8 @@ _mdcache_kill_entry(mdcache_entry_t *entry,
 					 entry, &entry->obj_handle);
 	}
 
-	freed = cih_remove_checked(entry); /* !reachable, drop sentinel ref */
+	/* !reachable, drop sentinel ref */
+	freed = cih_remove_checked(entry) && mdcache_lru_unref(entry);
 #ifdef USE_LTTNG
 	tracepoint(mdcache, mdc_kill_entry,
 		   function, line, &entry->obj_handle, entry->lru.refcnt,
