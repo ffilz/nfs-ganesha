@@ -1012,10 +1012,10 @@ static void open4_ex(OPEN4args *arg,
 				res_OPEN4->status = nfs4_Errno_status(status);
 				goto out;
 			}
-
-			/* We need an extra reference below. */
-			file_obj->obj_ops->get_ref(file_obj);
 		}
+
+		/* We need an extra reference below. */
+		file_obj->obj_ops->get_ref(file_obj);
 	}
 
 	if (file_obj == NULL) {
