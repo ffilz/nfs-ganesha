@@ -2922,6 +2922,12 @@ struct xattr4 {
 };
 typedef struct xattr4 xattr4;
 
+struct xattrlist {
+	xattr4 *xattrs;
+	uint32_t xattr_cnt;
+};
+typedef struct xattrlist xattrlist;
+
 struct xattrlist4 {
 	count4 entryCount;
 	component4 *entries;
