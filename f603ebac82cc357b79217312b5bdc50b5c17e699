@@ -1,0 +1,803 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "106f54e0_d547edad",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1707,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: do not use assignment in if condition\n+\t\tif (errsv \u003d ENODATA) {",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a38bc885_806e42b8",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        rgw_xattrlist.xattr_cnt \u003d 1;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36e64c2b_0acf2b35",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        rgw_xattrlist.xattr_cnt \u003d 1;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df1ff40d_863cdf7b",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        rgw_xattrlist-\u003exattrs-\u003exa_name \u003d xa_name;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4cf105b7_024a0cfc",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        rgw_xattrlist-\u003exattrs-\u003exa_name \u003d xa_name;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "411208a7_a7155cac",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        rgw_xattrlist-\u003exattrs-\u003exa_value \u003d xa_value;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70ccd1a6_208e0009",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        rgw_xattrlist-\u003exattrs-\u003exa_value \u003d xa_value;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d43dffc5_630776e3",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1758,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tstruct rgw_handle *handle \u003d container_of(obj_hdl, struct rgw_handle, handle);",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a79dea55_882ac62a",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\tint rc\u003d0;\n \t      ^",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4972d50d_81a423cf",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        fsal_status_t status \u003d {0, 0};$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50b7c250_c70d0fa0",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        fsal_status_t status \u003d {0, 0};$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07e77d69_4f8de4aa",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1800,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        struct rgw_export *export \u003d$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ac63b1c_1ff3077c",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1800,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        struct rgw_export *export \u003d$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1299c938_08f2a823",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                container_of(op_ctx-\u003efsal_export,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3104285_8afe63a0",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                container_of(op_ctx-\u003efsal_export,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3777d34_e2226d4b",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1802,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                             struct rgw_export, export);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97e57e58_3cb7f8cd",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1802,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                             struct rgw_export, export);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54ee2142_04bd871d",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1803,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        struct rgw_handle *handle \u003d$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e094e670_23fe06b4",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1803,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        struct rgw_handle *handle \u003d$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88291a4c_e4e5377d",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1804,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                container_of(obj_hdl, struct rgw_handle, handle);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b39d474d_e5025053",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1804,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                container_of(obj_hdl, struct rgw_handle, handle);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69b2b95b_a750292b",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        rc \u003d rgw_rmxattrs(export-\u003ergw-\u003efs,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "058b9f88_0869770d",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1806,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        rc \u003d rgw_rmxattrs(export-\u003ergw-\u003efs,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3bea5c4_0c2494bc",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                          handle-\u003ergw_fh,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5bd6915_53d80330",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                          handle-\u003ergw_fh,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4413f244_f30f836b",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1808,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                          \u0026rgw_xattrlist, RGW_RMXATTR_FLAG_NONE);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea8f3e1d_49919bc8",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1808,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                          \u0026rgw_xattrlist, RGW_RMXATTR_FLAG_NONE);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "646a68a3_0b4c833f",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1810,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        if (rc \u003c 0) {$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a87b9173_cef98e3c",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1810,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        if (rc \u003c 0) {$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81b195e5_2a3ec2d9",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1811,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                errsv \u003d errno;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c2c0b3d_a5ce8611",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1811,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                errsv \u003d errno;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e64e5549_2b7e08e5",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1812,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                LogDebug(COMPONENT_FSAL,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c27cee15_f90fc521",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1812,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                LogDebug(COMPONENT_FSAL,$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b01e0a1e_0bf7cbb1",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1813,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                         \"REMOVEXATTRS returned rc %d errsv %d\",$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9027982_3ca66dfe",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1813,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                         \"REMOVEXATTRS returned rc %d errsv %d\",$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d2500cd_093d8f8c",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1814,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                         rc, errsv);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53fa9eac_d8cd6b93",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1814,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                         rc, errsv);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ce24f03_a72b59a1",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1815,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                status \u003d fsalstat(posix2fsal_error(errsv), errsv);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a7f5b8e_8147cb16",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1815,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                status \u003d fsalstat(posix2fsal_error(errsv), errsv);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca4c6072_e22dfb0f",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                goto out;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9484fca_d66a610a",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                goto out;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "699aa7f2_3de71534",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1817,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        }$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f87795d_40e05a25",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1817,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        }$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb679026_accf44e7",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1818,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        status \u003d fsalstat(ERR_FSAL_NO_ERROR, 0);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7cfedad_ad850731",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1818,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        status \u003d fsalstat(ERR_FSAL_NO_ERROR, 0);$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a954e28e_28214108",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        return status;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fd5debb_4ac6151f",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-11-20T15:14:09Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        return status;$",
+      "revId": "f603ebac82cc357b79217312b5bdc50b5c17e699",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
