@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5d905ec9_0290af1a",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1017949
+      },
+      "writtenOn": "2020-11-20T10:26:02Z",
+      "side": 1,
+      "message": "Yep, this is new in C99, right? I\u0027ve seen coding patterns where the missing last comma indicates the use as a LENGTH for the enum.",
+      "parentUuid": "2a1b6dd7_5b638d5f",
+      "revId": "4ea258a44b9ed8b63470ee14eeef3a55abaf0245",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1217b0ef_23b047e4",
         "filename": "src/FSAL/FSAL_CEPH/handle.c",
         "patchSetId": 2
