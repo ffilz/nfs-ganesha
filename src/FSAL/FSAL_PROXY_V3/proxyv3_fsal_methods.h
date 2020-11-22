@@ -46,6 +46,9 @@ struct proxyv3_client_params {
 	socklen_t socklen;
 	char sockname[SOCK_NAME_MAX];
 
+	/* An optional mount path (if none is provided, use the export path). */
+	const char *mount_path;
+
 	/* Get the ports from portmapper and shove them here. */
 	uint mountd_port;
 	uint nfsd_port;

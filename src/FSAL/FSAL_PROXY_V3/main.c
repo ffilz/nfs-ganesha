@@ -93,6 +93,9 @@ static struct config_item proxyv3_export_params[] = {
 	CONF_ITEM_NOOP("name"),
 	CONF_MAND_IP_ADDR("Srv_Addr", "127.0.0.1",
 			  proxyv3_client_params, srv_addr),
+	/* Optional mount path. */
+	CONF_ITEM_STR("Mount_Path", 0, MAXPATHLEN, NULL,
+		      proxyv3_client_params, mount_path),
 	CONFIG_EOL
 };
 
@@ -124,6 +127,26 @@ struct config_block proxyv3_export_param = {
 	.blk_desc.u.blk.commit = noop_conf_commit
 };
 
+
+/**
+ * @brief Get our mount path either from CTX_FULLPATH or the optional config.
+ */
+const char *proxyv3_mountpath(void)
+{
+	struct proxyv3_export *export =
+		container_of(op_ctx->fsal_export,
+			     struct proxyv3_export, export);
+
+	/* If we got an explicit mount_path, use that. */
+	const char *path = export->params.mount_path;
+
+	if (path != NULL) {
+		return path;
+	}
+
+	/* Otherwise, use the the export path (mirroring the backend). */
+	return CTX_FULLPATH(op_ctx);
+}
 
 /**
  * @brief Grab the sockaddr from our params via op_ctx->fsal_export.
@@ -2685,7 +2708,8 @@ proxyv3_create_export(struct fsal_module *fsal_handle,
 	export->params.nfsd_port = nfsd_port;
 	export->params.nlm_port = nlm_port;
 
-	mnt3_dirpath dirpath = CTX_FULLPATH(op_ctx);
+	/* Get our path for mounting */
+	const char *dirpath = proxyv3_mountpath();
 	mountres3 result;
 
 	memset(&result, 0, sizeof(result));
