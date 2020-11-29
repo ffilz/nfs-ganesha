@@ -537,7 +537,7 @@ acl_t fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type)
 	ret = acl_get_permset(a_entry, &e_a_permset);
 	if (ret)	{
 		LogWarn(COMPONENT_FSAL,
-				“Cannot retrieve permission set”);
+				"Cannot retrieve permission set");
 	}
 
 	/*
@@ -556,7 +556,7 @@ acl_t fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type)
 	ret = acl_get_permset(d_entry, &e_d_permset);
 	if (ret) {
 		LogWarn(COMPONENT_FSAL,
-				“Cannot retrieve permission set”)
+				"Cannot retrieve permission set");
 	}
 
 	for (f_ace = p_fsalacl->aces;
@@ -683,7 +683,7 @@ acl_t fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type)
 		ret = acl_get_permset(a_entry, &a_permset);
 		if (ret) {
 			LogWarn(COMPONENT_FSAL,
-					“Cannot retrieve permission set”);
+					"Cannot retrieve permission set");
 		}
 
 		if (IS_FSAL_ACE_SPECIAL_MASK(*f_ace)) {
