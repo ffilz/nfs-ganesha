@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8941e8ad_d868893a",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-11-30T20:13:07Z",
+      "side": 0,
+      "message": "This one I\u0027m not sure of.  On the one hand, mem_left isn\u0027t used after this, and the spec is unlikely to change such that we put other info into a readdir reply.\n\nOn the other hand, the subtraction goes with the use, an taking it out could lead to bugs later if we wanted to use mem_left for something.",
+      "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
