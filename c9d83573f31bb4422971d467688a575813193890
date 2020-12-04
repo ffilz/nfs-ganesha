@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "4a5ed050_c6f07429",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-12-04T15:10:55Z",
+      "side": 1,
+      "message": "Can we name this something more specific, like \"struct lsxattr_cb_arg\" or something?",
+      "revId": "c9d83573f31bb4422971d467688a575813193890",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "876fdad0_f9a41022",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-12-04T15:10:55Z",
+      "side": 1,
+      "message": "cb_arg will need to be cast to a struct lxattrs befor you can de-ref it.",
+      "revId": "c9d83573f31bb4422971d467688a575813193890",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c9b5c398_f847edf7",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
         "patchSetId": 5
@@ -13,6 +47,23 @@
       "writtenOn": "2020-12-04T13:20:15Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^I^Isize is double the size of la_maxcount$",
+      "revId": "c9d83573f31bb4422971d467688a575813193890",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce410aca_8dfe2881",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-12-04T15:10:55Z",
+      "side": 1,
+      "message": "These should be fixed.",
       "revId": "c9d83573f31bb4422971d467688a575813193890",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -33,6 +84,23 @@
       "revId": "c9d83573f31bb4422971d467688a575813193890",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "272ad3fc_1e7dfd36",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2020-12-04T15:10:55Z",
+      "side": 1,
+      "message": "This arg should be null for now.  Eventually it will be taken from la_cookie, when it\u0027s implemented in RGW.",
+      "revId": "c9d83573f31bb4422971d467688a575813193890",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
