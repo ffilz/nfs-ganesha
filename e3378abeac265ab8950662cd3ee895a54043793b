@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe21e633_cd1202e9",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1844,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-09T18:27:08Z",
+      "side": 1,
+      "message": "Please fix this with a blank line between the declarations and the first line of code.",
+      "parentUuid": "58dd938b_c82b0e07",
+      "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6316b40a_8a04cc1a",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2020-12-09T16:55:51Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^I^Isize is double the size of la_maxcount$",
+      "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55d5e2f3_ab5f38b8",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1866,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-09T18:27:08Z",
+      "side": 1,
+      "message": "Please remove the space after the * on these two lines.",
+      "parentUuid": "6316b40a_8a04cc1a",
       "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -50,6 +86,23 @@
       "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e9eadf6_8d0fa27b",
+        "filename": "src/FSAL/FSAL_RGW/internal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-09T18:27:08Z",
+      "side": 1,
+      "message": "Please, like the definition below, move ATTRS_POSIX to the next line.\n\nOptionally, I\u0027m not sure the cast is really necessary here which would make it all fit on one line.",
+      "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
