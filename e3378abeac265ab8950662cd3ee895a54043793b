@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58dd938b_c82b0e07",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1844,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-12-09T16:55:51Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct lxattr_cb_arg *cb \u003d (struct lxattr_cb_arg *)cb_arg;\n+\tcb-\u003enames.entries[cb-\u003enames-\u003eentryCount] \u003d attrs-\u003exattrs[0].xa_name;",
+      "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6316b40a_8a04cc1a",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1866,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-12-09T16:55:51Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^I^Isize is double the size of la_maxcount$",
+      "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "940e13da_78c60f09",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-12-09T16:55:51Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^I^Ito allow for component4 overhead$",
+      "revId": "e3378abeac265ab8950662cd3ee895a54043793b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
