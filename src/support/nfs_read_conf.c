@@ -127,11 +127,8 @@ static struct config_item_list protocols[] = {
 #define DEFAULT_INCLUDES_VSOCK		CORE_OPTION_NONE
 #endif
 
-#define DEFAULT_ALL_PROTOCOLS  (DEFAULT_INCLUDES_NFSV3 | \
-				DEFAULT_INCLUDES_NFSV4 | \
-				DEFAULT_INCLUDES_NFS_RDMA | \
-				DEFAULT_INCLUDES_9P | \
-				DEFAULT_INCLUDES_VSOCK)
+#define DEFAULT_PROTOCOLS  (DEFAULT_INCLUDES_NFSV3 | \
+			    DEFAULT_INCLUDES_NFSV4)
 
 static struct config_item core_params[] = {
 	CONF_ITEM_UI16("NFS_Port", 0, UINT16_MAX, NFS_PORT,
@@ -225,9 +222,9 @@ static struct config_item core_params[] = {
 		       nfs_core_param, rpc.gss.max_gc),
 	CONF_ITEM_I64("Blocked_Lock_Poller_Interval", 0, 180, 10,
 		      nfs_core_param, blocked_lock_poller_interval),
-	CONF_ITEM_LIST("NFS_Protocols", DEFAULT_ALL_PROTOCOLS, protocols,
+	CONF_ITEM_LIST("NFS_Protocols", DEFAULT_PROTOCOLS, protocols,
 		       nfs_core_param, core_options),
-	CONF_ITEM_LIST("Protocols", DEFAULT_ALL_PROTOCOLS, protocols,
+	CONF_ITEM_LIST("Protocols", DEFAULT_PROTOCOLS, protocols,
 		       nfs_core_param, core_options),
 	CONF_ITEM_BOOL("Clustered", true,
 		       nfs_core_param, clustered),
