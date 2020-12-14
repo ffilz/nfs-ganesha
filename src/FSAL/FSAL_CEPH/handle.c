@@ -2643,19 +2643,22 @@ ceph_fsal_handle_to_wire(const struct fsal_obj_handle *handle_pub,
 		/* Digested Handles */
 	case FSAL_DIGEST_NFSV3:
 	case FSAL_DIGEST_NFSV4:
-		if (fh_desc->len < sizeof(handle->key.hhdl)) {
+		if (fh_desc->len < sizeof(handle->key)) {
 			LogMajor(COMPONENT_FSAL,
 				 "digest_handle: space too small for handle.  Need %zu, have %zu",
-				 sizeof(handle->key.hhdl), fh_desc->len);
+				 sizeof(handle->key), fh_desc->len);
 			return fsalstat(ERR_FSAL_TOOSMALL, 0);
 		} else {
-			struct ceph_host_handle *hhdl = fh_desc->addr;
+			struct ceph_handle_key *key = fh_desc->addr;
 
 			/* See comments in wire_to_host */
-			hhdl->chk_ino = htole64(handle->key.hhdl.chk_ino);
-			hhdl->chk_snap = htole64(handle->key.hhdl.chk_snap);
-			hhdl->chk_fscid = htole64(handle->key.hhdl.chk_fscid);
-			fh_desc->len = sizeof(*hhdl);
+			/* export_id would be filled later */
+			key->export_id = 0;
+			key->hhdl.chk_ino = htole64(handle->key.hhdl.chk_ino);
+			key->hhdl.chk_snap = htole64(handle->key.hhdl.chk_snap);
+			key->hhdl.chk_fscid =
+				htole64(handle->key.hhdl.chk_fscid);
+			fh_desc->len = sizeof(*key);
 		}
 		break;
 
