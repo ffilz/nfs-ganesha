@@ -16,6 +16,24 @@
       "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93bbc084_088930e8",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2655,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-14T20:19:51Z",
+      "side": 1,
+      "message": "Hmm, actually, why is export_id even in the handle key? That can result in two mdcache entries for the same file if the same Ceph filesystem is exported multiple times.\n\nI see it set in wire_to_host and construct_handle",
+      "parentUuid": "387368c1_1e412eaa",
+      "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
