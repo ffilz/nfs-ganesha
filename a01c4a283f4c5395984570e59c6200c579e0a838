@@ -52,6 +52,24 @@
       "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87d84dd3_77b56231",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2655,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-14T20:29:13Z",
+      "side": 1,
+      "message": "Oh, grumble... ok, I\u0027m a little bit remembering some conversation about this. So there is an issue in doing so that at least state conflicts may not be visible, especially for state not reflected into the filesystem (maybe just share reservations). There might also be issues with directories (since there would be two separate instances of the directory cache).\n\nLong term we may need to find a different solution for the cephx credentials issue...",
+      "parentUuid": "2760b391_9e9a784a",
+      "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
