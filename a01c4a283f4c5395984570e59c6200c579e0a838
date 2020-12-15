@@ -70,6 +70,24 @@
       "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80c81220_d5eee34d",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2655,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2020-12-15T08:21:17Z",
+      "side": 1,
+      "message": "Actually, I confuse with fill export id timing. (Is there any chance that the op_ctx contains different export id once we export successfully?)\nI trace the Jeff\u0027s commits, looks like we want to fill export id by wire_to_host (that would take wire-handle opaque and translate to host-handle).\n\nAnd handle_to_wire does the things like the inverse of wire_to_host.\nThat would describe the full opaque. I am not sure should we fill export id in this moment.\n\nIn this patch set, I just want to keep the original behavior means does not fill export id when handle_to_wire. Calling wire_to_host and construct_handle would set up export id.\n\nAfter I trace again, I found that will check several times about export id before calling wire_to_host. I think maybe we could also fill export id when handle_to_wire? It should not have different between op_ctx and opaque.\n\nBTW, I afraid that I am misunderstanding with cephx cred issues, this means different export id with own cache would cause the above issues like frank says?",
+      "parentUuid": "87d84dd3_77b56231",
+      "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
