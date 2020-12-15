@@ -88,6 +88,23 @@
       "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c76d72b_f3a6ef04",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2020-12-15T20:16:31Z",
+      "side": 1,
+      "message": "This patch looks wrong to me. IIUC, this function is supposed to be marshaling up the \"opaque\" section of the filehandle for the network. So we _should_ be passing back a host handle here, which does not include an export_id field. The export ID gets mixed in later by the upper ganesha layers.",
+      "revId": "a01c4a283f4c5395984570e59c6200c579e0a838",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
