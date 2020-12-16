@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2c86373c_9b1d3dd9",
+        "filename": "src/FSAL/FSAL_CEPH/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1017949
+      },
+      "writtenOn": "2020-12-16T16:41:34Z",
+      "side": 1,
+      "message": "Maybe, we could add the export_id to struct ceph_host_handle directly, setting it to zero for the use as ceph_host_handle and the actual export_id when used inside ceph_handle_key.",
+      "parentUuid": "09fa38dd_efdecbd3",
+      "revId": "2530915b568ca972d1fd5df4d84946bec3e7aeef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1d19b5d_5c41fe61",
         "filename": "src/FSAL/FSAL_CEPH/export.c",
         "patchSetId": 2
