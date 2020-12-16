@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "09fa38dd_efdecbd3",
+        "filename": "src/FSAL/FSAL_CEPH/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-16T15:40:32Z",
+      "side": 1,
+      "message": "Crud, you\u0027re probably right. Actually it\u0027s always made me nervous appending to the handle.\n\nMaybe we really need to bite the bullet and have a per-export flag that tells mdcache to also hash by export_id?",
+      "parentUuid": "c8b7e715_d22c1836",
+      "revId": "2530915b568ca972d1fd5df4d84946bec3e7aeef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1d19b5d_5c41fe61",
         "filename": "src/FSAL/FSAL_CEPH/export.c",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "d1d19b5d_5c41fe61",
+      "revId": "2530915b568ca972d1fd5df4d84946bec3e7aeef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8fcb88d3_43a9a898",
+        "filename": "src/FSAL/FSAL_CEPH/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-16T15:40:32Z",
+      "side": 1,
+      "message": "Oops... that\u0027s what happens when you try to fix code you can\u0027t run...",
+      "parentUuid": "382fe49e_07b41546",
       "revId": "2530915b568ca972d1fd5df4d84946bec3e7aeef",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
