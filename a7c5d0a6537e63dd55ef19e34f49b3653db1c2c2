@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f296f6ab_93b0d9c3",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-12-16T21:40:11Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\txattrvalue4 *cb_arg \u003d (xattrvalue4 *)arg;\n+\tcb_arg-\u003eutf8string_val \u003d",
+      "revId": "a7c5d0a6537e63dd55ef19e34f49b3653db1c2c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca8eba17_dd29b8db",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1698,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-12-16T21:40:11Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\trgw_xattrlist attrs \u003d {NULL, 1};\n+\tattrs.xattrs-\u003ekey.val \u003d",
+      "revId": "a7c5d0a6537e63dd55ef19e34f49b3653db1c2c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c36eded8_89b1debb",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1765,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-12-16T21:40:11Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\trgw_xattrlist attrs \u003d {NULL, 1};\n+\tattrs.xattrs-\u003ekey.val \u003d",
+      "revId": "a7c5d0a6537e63dd55ef19e34f49b3653db1c2c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49046f58_1d553883",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1814,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2020-12-16T21:40:11Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\trgw_xattrlist attrs \u003d {NULL, 1};\n+\tattrs.xattr_cnt \u003d 1;",
+      "revId": "a7c5d0a6537e63dd55ef19e34f49b3653db1c2c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
