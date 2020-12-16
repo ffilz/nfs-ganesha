@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1d19b5d_5c41fe61",
+        "filename": "src/FSAL/FSAL_CEPH/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1017949
+      },
+      "writtenOn": "2020-12-16T09:58:53Z",
+      "side": 1,
+      "message": "You forgot to register host_to_key in export_ops_init():\n\n  @@ -389,6 +421,7 @@ void export_ops_init(struct export_ops *ops)\n        ops-\u003eprepare_unexport \u003d ceph_prepare_unexport,\n        ops-\u003erelease \u003d release;\n        ops-\u003elookup_path \u003d lookup_path;\n  +     ops-\u003ehost_to_key \u003d host_to_key;\n        ops-\u003ewire_to_host \u003d wire_to_host;\n        ops-\u003ecreate_handle \u003d create_handle;\n        ops-\u003eget_fs_dynamic_info \u003d get_fs_dynamic_info;",
+      "revId": "2530915b568ca972d1fd5df4d84946bec3e7aeef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
