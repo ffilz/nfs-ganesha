@@ -33,6 +33,24 @@
       "revId": "01be95b67ad86a77aa16ce82630dcbd80207b4ad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6aad5d1_9f334c43",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2020-12-17T15:01:31Z",
+      "side": 1,
+      "message": "See the next patch. Since this patch doesn\u0027t support extending the handle-key, I held off mention of that to the next patch that adds that capability (and as of this patch, FSAL_CEPH is modifying the host handle...). Then the 3rd patch modifies FSAL_CEPH to use the new capacity to extend the handle-key.",
+      "parentUuid": "9c2ab204_092c867a",
+      "revId": "01be95b67ad86a77aa16ce82630dcbd80207b4ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
