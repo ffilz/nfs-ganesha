@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "d1b0395f_84ee3373",
         "filename": "/COMMIT_MSG",
@@ -14,10 +15,27 @@
       "side": 1,
       "message": "WARNING: \u0027assigments\u0027 may be misspelled - perhaps \u0027assignments\u0027?\nSubject: [PATCH] remove unused assigments",
       "revId": "2a7589a2fa60954ccbe564862f4981e213c9a158",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24037e60_e5aa22cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-01-12T19:53:18Z",
+      "side": 1,
+      "message": "It looks like maybe this patch was updated without retaining the ChangeID? This is causing some confusion. If this patch has indeed been replaced, please abandon it and make sure that a checkout of the \"top\" patch will get all the correct patches for the submission.",
+      "revId": "2a7589a2fa60954ccbe564862f4981e213c9a158",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "2a038a86_fdc78bb2",
         "filename": "src/Protocols/NFS/nfs_proto_tools.c",
@@ -31,8 +49,7 @@
       "side": 1,
       "message": "We don\u0027t use C99 // comment and actually should just remove this unused code.",
       "revId": "2a7589a2fa60954ccbe564862f4981e213c9a158",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
