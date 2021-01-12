@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba77da68_08150cec",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-01-12T19:50:07Z",
+      "side": 0,
+      "message": "This one has been suggested to remove before. For completeness of how mem_left is used, I\u0027d prefer it stay, but obviously mem_left is not used after this. Maybe if it was at least logged? I don\u0027t have strong opinions but the last time someone proposed removing this line we ended up leaving it.",
+      "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876ed2e8_9bee219f",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-01-12T19:50:07Z",
+      "side": 0,
+      "message": "Maybe we should change the name of this to len_prev_match. Then it will make more sense when it is and is not set.",
+      "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

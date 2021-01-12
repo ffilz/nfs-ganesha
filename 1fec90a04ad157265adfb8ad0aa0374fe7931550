@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae63f897_e1877af8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-01-12T19:50:07Z",
+      "side": 1,
+      "message": "Some discussion...\n\nAlso, it looks like you have pushed a branch with some earlier patches. Please make sure if you are submitting patches that are on a branch together that you submit a branch containing all patches. I navigate between related patches when doing merges and if multiple patches are submitted I prefer to checkout the \"top\" patch which gets all the others and then rebase that branch rather than cherry pick each patch individually, but if checking out the \"top\" patch doesn\u0027t get the latest version of all patches, then the resulting merge is incorrect.",
+      "revId": "1fec90a04ad157265adfb8ad0aa0374fe7931550",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "431ca0ee_a2325fd5",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-01-12T19:50:07Z",
+      "side": 1,
+      "message": "What is the actual change here and the other changes in this file?",
+      "revId": "1fec90a04ad157265adfb8ad0aa0374fe7931550",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
