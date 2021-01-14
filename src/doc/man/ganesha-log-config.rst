@@ -18,9 +18,18 @@ NFS-Ganesha reads the configuration data from:
 
 This file lists NFS-Ganesha Log config options.
 
+These options may be dynamically updated by issuing a SIGHUP to the ganesha.nfsd
+process.
+
 LOG {}
 --------------------------------------------------------------------------------
 Default_log_level(token,default EVENT)
+
+    If -N option is specified on the command line, that will set the initial
+    value for this option, otherwise it will be set to EVENT.
+
+    If a SIGHUP is issued, any components not specified in LOG { COMPONENTS {} }
+    will be reset to this value.
 
 The log levels are:
 
@@ -31,6 +40,8 @@ FULL_DEBUG, F_DBG
 RPC_Debug_Flags(uint32, range 0 to UINT32_MAX, default 7)
     Debug flags for TIRPC (default 7 matches log level default EVENT).
 
+    These flags are only used if the TIRPC component is set to DEBUG
+
 LOG { COMPONENTS {} }
 --------------------------------------------------------------------------------
 **Default_log_level(token,default EVENT)**
@@ -38,13 +49,13 @@ LOG { COMPONENTS {} }
         COMPONENT = LEVEL;
 
     The components are:
-        ALL, LOG, LOG_EMERG, MEMLEAKS, FSAL, NFSPROTO,
+        ALL, LOG, MEMLEAKS, FSAL, NFSPROTO,
         NFS_V4, EXPORT, FILEHANDLE, DISPATCH, CACHE_INODE,
         CACHE_INODE_LRU, HASHTABLE, HASHTABLE_CACHE, DUPREQ,
         INIT, MAIN, IDMAPPER, NFS_READDIR, NFS_V4_LOCK,
         CONFIG, CLIENTID, SESSIONS, PNFS, RW_LOCK, NLM, RPC,
-        NFS_CB, THREAD, NFS_V4_ACL, STATE, 9P, 9P_DISPATCH,
-        FSAL_UP, DBUS
+        TIRPC, NFS_CB, THREAD, NFS_V4_ACL, STATE, 9P,
+        9P_DISPATCH, FSAL_UP, DBUS, NFS_MSK
 
     Some synonyms are:
         FH = FILEHANDLE
