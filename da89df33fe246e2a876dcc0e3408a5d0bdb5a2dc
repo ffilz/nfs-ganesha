@@ -16,6 +16,41 @@
       "message": "Can we resolve the comments on this patch and understand if it should still be under consideration?",
       "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d62659c_1ba91969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018659
+      },
+      "writtenOn": "2021-02-04T19:33:27Z",
+      "side": 1,
+      "message": "For Line 538: a_entry will never be invalid. But just as how acl_set_tag_type() handles errors. maybe we can add comments like “// this branch will not hit”?\n\nFor Line 556: d_entry could be invalid if because deny_acl initialization fails in Line 525 ‘deny_acl \u003d acl_init(p_fsalacl-\u003enaces + 1);’. So I think here we should return NULL or we add after Line 550 ‘return NULL;’, just as did in Line 531.\n\nLine 669:\na_entry \u003d get_entry(deny_acl, tag, id); // same as Line538, maybe we can add comments saying it’s not get hit in fact.\n\nLine 683:\nd_entry \u003d get_entry(deny_acl, tag, id); // this could be NULL if deny_acl is invalid, so the error handle is necessary\n\nIn fact, I think in this function fsal_acl_2_posix_acl(), what lacks is some unified error handler like the ‘out’ label in xattr_2_posix_acl() so that for any potential error, we can ‘goto out’. Though by reasoning whether it’s possible to trigger the error, some of the LogWarn will never get hit, it’s still dangerous to leave them as they are and it will make it harder if new code is added to this function.",
+      "parentUuid": "6fd0fadb_3ca0088f",
+      "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d843cd_3f84d1b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018659
+      },
+      "writtenOn": "2021-02-04T19:33:27Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e Hmm, what is the consequence of not fetching the permission set? It seems like if there is a real chance of failure there we should do something. If we really don\u0027t need to do anything, we should have  a comment to that effect.\n\nFor Line 538: a_entry will never be invalid. But just as how acl_set_tag_type() handles errors. maybe we can add comments like “// this branch will not hit”?\n\nFor Line 556: d_entry could be invalid if because deny_acl initialization fails in Line 525 ‘deny_acl \u003d acl_init(p_fsalacl-\u003enaces + 1);’. So I think here we should return NULL or we add after Line 550 ‘return NULL;’, just as did in Line 531.\n\nLine 669:\na_entry \u003d get_entry(deny_acl, tag, id); // same as Line538, maybe we can add comments saying it’s not get hit in fact.\n\nLine 683:\nd_entry \u003d get_entry(deny_acl, tag, id); // this could be NULL if deny_acl is invalid, so the error handle is necessary\n\nIn fact, I think in this function fsal_acl_2_posix_acl(), what lacks is some unified error handler like the ‘out’ label in xattr_2_posix_acl() so that for any potential error, we can ‘goto out’. Though by reasoning whether it’s possible to trigger the error, some of the LogWarn will never get hit, it’s still dangerous to leave them as they are and it will make it harder if new code is added to this function.\n",
+      "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
