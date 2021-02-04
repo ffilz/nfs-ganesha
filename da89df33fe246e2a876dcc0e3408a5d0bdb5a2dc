@@ -33,6 +33,24 @@
       "message": "Maybe we should change the name of this to len_prev_match. Then it will make more sense when it is and is not set.",
       "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d6c819_fffd1869",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1018659
+      },
+      "writtenOn": "2021-02-04T19:30:18Z",
+      "side": 0,
+      "message": "How about change name of len_ret variable in line 378 and line 517 to \u0027len_prev_match\u0027? That will make the unsued set variable make more sense",
+      "parentUuid": "876ed2e8_9bee219f",
+      "revId": "da89df33fe246e2a876dcc0e3408a5d0bdb5a2dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
