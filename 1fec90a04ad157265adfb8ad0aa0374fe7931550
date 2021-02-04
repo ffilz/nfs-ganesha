@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9fa56fa_ab552ff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018659
+      },
+      "writtenOn": "2021-02-04T19:28:27Z",
+      "side": 1,
+      "message": "Thanks for reminding! I separate the commit of \u0027remove unused assignments\u0027 in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/510245, which may make the patch version more clear.",
+      "parentUuid": "ae63f897_e1877af8",
+      "revId": "1fec90a04ad157265adfb8ad0aa0374fe7931550",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "431ca0ee_a2325fd5",
         "filename": "src/FSAL/posix_acls.c",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-12T19:50:07Z",
       "side": 1,
       "message": "What is the actual change here and the other changes in this file?",
+      "revId": "1fec90a04ad157265adfb8ad0aa0374fe7931550",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a7598a_eade9437",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1018659
+      },
+      "writtenOn": "2021-02-04T19:28:27Z",
+      "side": 1,
+      "message": "That\u0027s handle the set id fail and get permission fail. I think I\u0027d better seperate these commits instead of batching them",
+      "parentUuid": "431ca0ee_a2325fd5",
       "revId": "1fec90a04ad157265adfb8ad0aa0374fe7931550",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
