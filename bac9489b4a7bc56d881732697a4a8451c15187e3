@@ -16,6 +16,24 @@
       "message": "Is this necessary? ISTR that NLM allows setting locks on directories...",
       "revId": "bac9489b4a7bc56d881732697a4a8451c15187e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0138262e_1c4225ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-02-09T15:36:51Z",
+      "side": 1,
+      "message": "I take it back. The kernel won\u0027t set fcntl locks on directories (though you may be able to set flock locks).",
+      "parentUuid": "85e0c862_0e4e3410",
+      "revId": "bac9489b4a7bc56d881732697a4a8451c15187e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
