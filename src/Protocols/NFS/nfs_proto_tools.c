@@ -3678,6 +3678,11 @@ bool xdr_fattr4_encode(XDR *xdrs, struct xdr_attrs_args *args,
 		if (attribute_to_set > max_attr_idx)
 			break;	/* skip out of bounds */
 
+		if (fattr4tab[attribute_to_set].attrmask &&
+		    !(fattr4tab[attribute_to_set].attrmask &
+		      args->attrs->valid_mask))
+			continue;
+
 		/* Check for special cases */
 		if (fattr4tab[attribute_to_set].encoded &&
 		    (args->data != NULL ||
