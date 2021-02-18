@@ -16,6 +16,24 @@
       "message": "Should we make this FATTR4_MAX_ATTR_INDEX_V42 just in case 4.3 ever comes along?",
       "revId": "ca8b9e59e70adb16d5a5f546be0d63229cd416f4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06915bf0_bd313dc9",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-02-18T21:21:14Z",
+      "side": 1,
+      "message": "NFSv4.3 _is_ coming along (the xattr support is part of it, as I understand it), but that shouldn\u0027t materially change how the attribute numbering works.\n\nIf there is some reason to keep track of what attrs are supported by which NFS 4 minorversions, then we can always make that change then.",
+      "parentUuid": "7658e76e_51d4c95a",
+      "revId": "ca8b9e59e70adb16d5a5f546be0d63229cd416f4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
