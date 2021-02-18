@@ -67,7 +67,9 @@ enum nfs_req_result nfs4_op_access(struct nfs_argop4 *op, compound_data_t *data,
 	fsal_status_t status;
 	uint32_t max_access = (ACCESS4_READ | ACCESS4_LOOKUP |
 			       ACCESS4_MODIFY | ACCESS4_EXTEND |
-			       ACCESS4_DELETE | ACCESS4_EXECUTE);
+			       ACCESS4_DELETE | ACCESS4_EXECUTE |
+			       ACCESS4_XAREAD | ACCESS4_XAWRITE |
+			       ACCESS4_XALIST);
 
 	/* initialize output */
 	res_ACCESS4->ACCESS4res_u.resok4.supported = 0;
