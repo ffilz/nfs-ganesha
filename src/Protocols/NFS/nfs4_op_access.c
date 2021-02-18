@@ -69,6 +69,12 @@ enum nfs_req_result nfs4_op_access(struct nfs_argop4 *op, compound_data_t *data,
 			       ACCESS4_MODIFY | ACCESS4_EXTEND |
 			       ACCESS4_DELETE | ACCESS4_EXECUTE);
 
+	if (data->minorversion > 0) {
+		max_access |= ACCESS4_XAREAD |
+			      ACCESS4_XAWRITE |
+			      ACCESS4_XALIST;
+	}
+
 	/* initialize output */
 	res_ACCESS4->ACCESS4res_u.resok4.supported = 0;
 	res_ACCESS4->ACCESS4res_u.resok4.access = 0;
