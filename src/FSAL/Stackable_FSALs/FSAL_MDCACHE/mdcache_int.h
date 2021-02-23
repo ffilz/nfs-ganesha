@@ -440,8 +440,8 @@ static inline void bump_detached_dirent(mdcache_entry_t *parent,
 	pthread_spin_lock(&parent->fsobj.fsdir.spin);
 	if (glist_first_entry(&parent->fsobj.fsdir.detached,
 			      mdcache_dir_entry_t, chunk_list) != dirent) {
-		glist_del(&dirent->chunk_list);
-		glist_add(&parent->fsobj.fsdir.detached, &dirent->chunk_list);
+		glist_move_tail(&parent->fsobj.fsdir.detached,
+				&dirent->chunk_list);
 	}
 	pthread_spin_unlock(&parent->fsobj.fsdir.spin);
 }
