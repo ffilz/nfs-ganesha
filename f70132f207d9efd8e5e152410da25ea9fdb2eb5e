@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f64fa210_a4dfce08",
+        "filename": "src/Protocols/NFS/nfs4_op_access.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-03-08T15:23:40Z",
+      "side": 1,
+      "message": "Note that I\u0027m not 100% sure that this is what we want. Currently this relies on ACCESS4_READ being specified when ACCESS4_XAREAD is. If the client just requests ACCESS4_XAREAD, then this may not work right. I suspect we might need to plumb support for these bits into nfs_access_op.",
+      "revId": "f70132f207d9efd8e5e152410da25ea9fdb2eb5e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
