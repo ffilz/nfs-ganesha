@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f814072e_e6704f07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-03-08T22:08:06Z",
+      "side": 1,
+      "message": "Since we\u0027re touching all the printerr invocations, could we just convert them all directly to the appropriate LogWarn etc rather than obscuring via a macro?",
+      "revId": "d7c37b1d49b2c6b6f63f2b4f812a260240d6f8ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
