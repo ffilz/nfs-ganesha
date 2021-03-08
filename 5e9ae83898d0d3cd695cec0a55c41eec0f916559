@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5392cb7a_fe813110",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2571,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-03-08T14:45:24Z",
+      "side": 1,
+      "message": "We\u0027re trying to avoid the C++ keyword export in variable names.  We usually use exp instead.",
+      "revId": "5e9ae83898d0d3cd695cec0a55c41eec0f916559",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
