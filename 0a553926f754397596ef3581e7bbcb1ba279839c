@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de8b589c_9720d850",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-03-09T11:56:21Z",
+      "side": 1,
+      "message": "I\u0027ll look into that, thanks.",
+      "parentUuid": "78005e13_248940b0",
+      "revId": "0a553926f754397596ef3581e7bbcb1ba279839c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4528ad61_9ccf7926",
         "filename": "src/include/nfsv41.h",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-08T22:15:19Z",
       "side": 1,
       "message": "Hmm, should we just make it an opaque then? utf8string get\u0027s some processing by xdr I think, maybe not in this use though. Someone might also be inclined to log the value as a string instead of an opaque also. Minor bit, just something to think about before committing.",
+      "revId": "0a553926f754397596ef3581e7bbcb1ba279839c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86da474_d1292bee",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2924,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-03-09T11:56:21Z",
+      "side": 1,
+      "message": "I don\u0027t think they actually do get anything special. A utf8string is just this:\n\ntypedef struct {                                                                                    \n        u_int utf8string_len;\n        char *utf8string_val;  \n} utf8string;\n\n...and I don\u0027t think that gets any special treatment by the XDR code. The other opaque types just define it the same way and give it a different name. e.g.:\n\ntypedef struct {\n        u_int attrlist4_len;\n        char *attrlist4_val;\n} attrlist4;\n\nWe could do that here, but I\u0027m not sure it\u0027ll be of any real benefit.",
+      "parentUuid": "4528ad61_9ccf7926",
       "revId": "0a553926f754397596ef3581e7bbcb1ba279839c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
