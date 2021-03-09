@@ -34,6 +34,24 @@
       "parentUuid": "5fc4cd0d_02da8a44",
       "revId": "2193e12cff8a84a1e406464b4d2c5850afc3d665",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b27b43d_48390df1",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-03-09T18:37:06Z",
+      "side": 1,
+      "message": "With the display buffer stuff we do have a way to log opaque arrays, but probably not worth it for this one",
+      "parentUuid": "d3d89ffb_78793a56",
+      "revId": "2193e12cff8a84a1e406464b4d2c5850afc3d665",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
