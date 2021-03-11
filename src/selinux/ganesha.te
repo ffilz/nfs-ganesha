@@ -325,3 +325,10 @@ ifdef(`ceph_read_lib_files',`
                ceph_read_lib_files(ganesha_t)
        ')
 ')
+
+########################################
+#
+# ganesha local policy rhbz#tbd
+
+allow ganesha_t cluster_t:dbus send_msg;
+allow init_t var_lib_nfs_t:lnk_file read;
