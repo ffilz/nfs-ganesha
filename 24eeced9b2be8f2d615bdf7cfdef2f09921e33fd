@@ -16,6 +16,24 @@
       "message": "Oops, this needs to be modified to only allow these for the correct minor version.\n\nAs is it breaks pynfs 4.0 test cases:\n\nACC4s    st_access.testInvalidsSocket                             : FAILURE\n           ACCESS with invalid argument 0x40 returned\n           supported\u003d0x40, access\u003d0x40.\nACC4a    st_access.testInvalidsLink                               : FAILURE\n           ACCESS with invalid argument 0x40 returned\n           supported\u003d0x40, access\u003d0x40.\nACC4r    st_access.testInvalidsFile                               : FAILURE\n           ACCESS with invalid argument 0x40 returned\n           supported\u003d0x40, access\u003d0x40.\nACC4f    st_access.testInvalidsFifo                               : FAILURE\n           ACCESS with invalid argument 0x40 returned\n           supported\u003d0x40, access\u003d0x40.\nACC4d    st_access.testInvalidsDir                                : FAILURE\n           ACCESS with invalid argument 0x40 returned\n           supported\u003d0x40, access\u003d0x40.\nACC4c    st_access.testInvalidsChar                               : FAILURE\n           ACCESS with invalid argument 0x40 returned\n           supported\u003d0x40, access\u003d0x40.\nACC4b    st_access.testInvalidsBlock                              : FAILURE\n           ACCESS with invalid argument 0x40 returned\n           supported\u003d0x40, access\u003d0x40.",
       "revId": "24eeced9b2be8f2d615bdf7cfdef2f09921e33fd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29ba817_c595008b",
+        "filename": "src/Protocols/NFS/nfs4_op_access.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-03-15T19:26:09Z",
+      "side": 1,
+      "message": "Fixed. We only want to set those in the allowed mask for v4.2+.",
+      "parentUuid": "94dbb0f2_f47df981",
+      "revId": "24eeced9b2be8f2d615bdf7cfdef2f09921e33fd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
