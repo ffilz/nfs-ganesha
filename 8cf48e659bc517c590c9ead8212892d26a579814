@@ -16,6 +16,24 @@
       "message": "\u003e Patch Set 6: Verified-1\n\u003e \n\u003e https://ci.centos.org//job/nfs_ganesha_cthon04/5947/console : FAILED\n\nLooks like infrastructure failure?",
       "revId": "8cf48e659bc517c590c9ead8212892d26a579814",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c514912_e6353c0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-03-16T22:41:38Z",
+      "side": 1,
+      "message": "Yea, the CI is almost useless (it does catch compile issues and checkpatch, and occasionally the test failure is real).",
+      "parentUuid": "9f09071f_803c5147",
+      "revId": "8cf48e659bc517c590c9ead8212892d26a579814",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
