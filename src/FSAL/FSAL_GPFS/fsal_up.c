@@ -489,8 +489,7 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		release_op_context();
 		PTHREAD_MUTEX_unlock(&gpfs_fs->upvector_mutex);
 
-		if (FSAL_IS_ERROR(fsal_status) &&
-		    fsal_status.major != ERR_FSAL_NOENT) {
+		if (!FSAL_IS_NOENT(fsal_status)) {
 			LogWarn(COMPONENT_FSAL_UP,
 				"Event %d could not be processed for fd %d rc %s",
 				reason, gpfs_fs->root_fd,

@@ -500,7 +500,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 			 * errors!
 			 */
 			if (FSAL_IS_ERROR(status)) {
-				if (status.major == ERR_FSAL_NOENT ||
+				if (FSAL_IS_NOENT(status) ||
 				    status.major == ERR_FSAL_STALE ||
 				    status.major == ERR_FSAL_XDEV) {
 					goto skip;
