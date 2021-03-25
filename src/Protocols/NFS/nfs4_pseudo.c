@@ -241,7 +241,7 @@ retry:
 			state->st_pseudopath,
 			name,
 			msg_fsal_err(fsal_status.major),
-			fsal_status.major == ERR_FSAL_NOENT
+			FSAL_IS_NOENT(fsal_status)
 				? " (can't create directory on non-PSEUDO FSAL)"
 				: ""
 			);

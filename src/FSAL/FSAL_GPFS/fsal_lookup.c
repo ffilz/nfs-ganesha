@@ -117,7 +117,7 @@ GPFSFSAL_lookup(struct fsal_obj_handle *parent, const char *filename,
 	 */
 	fsal_internal_close(parent_fd, NULL, 0);
 
-	if (status.major == ERR_FSAL_NOENT && strcmp(filename, "..") == 0) {
+	if (FSAL_IS_NOENT(status) && strcmp(filename, "..") == 0) {
 		unsigned long long pinode;
 
 		pinode = get_handle2inode(parent_hdl->handle);

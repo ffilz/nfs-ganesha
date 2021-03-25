@@ -97,8 +97,7 @@ int up_process_event_object(struct glusterfs_fs *gl_fs,
 					&key,
 					FSAL_UP_INVALIDATE_CACHE);
 		rc = fsal_status.major;
-		if (FSAL_IS_ERROR(fsal_status) &&
-			 fsal_status.major != ERR_FSAL_NOENT) {
+		if (!FSAL_IS_NOENT(fsal_status)) {
 			LogWarn(COMPONENT_FSAL_UP,
 			"UP event:GLFS_EVENT_INODE_INVALIDATE could not be processed for fs (%p), rc(%d)",
 			gl_fs->fs, rc);

@@ -61,7 +61,7 @@ mdc_up_invalidate(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 		     CIH_HASH_KEY_PROTOTYPE);
 
 	status = mdcache_find_keyed(&key, &entry);
-	if (status.major == ERR_FSAL_NOENT) {
+	if (FSAL_IS_NOENT(status)) {
 		/* Not cached, so invalidate is a success */
 		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
 		goto out;
@@ -207,7 +207,7 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 		     CIH_HASH_KEY_PROTOTYPE);
 
 	status = mdcache_find_keyed(&key, &entry);
-	if (status.major == ERR_FSAL_NOENT) {
+	if (FSAL_IS_NOENT(status)) {
 		/* Not cached, so invalidate is a success */
 		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
 		goto out;

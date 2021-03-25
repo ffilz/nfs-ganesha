@@ -694,7 +694,7 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 
 		/* Don't need a new sub_handle ref */
 		goto out_no_new_entry_yet;
-	} else if (status.major != ERR_FSAL_NOENT) {
+	} else if (!FSAL_IS_NOENT(status)) {
 		/* Real error , don't need a new sub_handle ref */
 		goto out_no_new_entry_yet;
 	}
@@ -1074,7 +1074,7 @@ mdcache_locate_host(struct gsh_buffdesc *fh_desc,
 	if (!FSAL_IS_ERROR(status)) {
 		status = get_optional_attrs(&(*entry)->obj_handle, attrs_out);
 		return status;
-	} else if (status.major != ERR_FSAL_NOENT) {
+	} else if (!FSAL_IS_NOENT(status)) {
 		/* Actual error */
 		return status;
 	}

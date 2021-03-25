@@ -222,7 +222,7 @@ int _9p_xattrwalk(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 			gsh_free(pxattrfid);
 
 			/* ENOENT for xattr is ENOATTR */
-			if (fsal_status.major == ERR_FSAL_NOENT)
+			if (FSAL_IS_NOENT(fsal_status))
 				return _9p_rerror(req9p, msgtag, ENOATTR,
 						  plenout, preply);
 
