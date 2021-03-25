@@ -360,7 +360,7 @@ fsal_status_t mdcache_open2(struct fsal_obj_handle *obj_hdl,
 			return status;
 		}
 
-		if (status.major != ERR_FSAL_NOENT) {
+		if (!FSAL_IS_NOENT(status)) {
 			/* Return the error */
 			*new_obj = NULL;
 			return status;

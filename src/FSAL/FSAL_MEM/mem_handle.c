@@ -837,7 +837,7 @@ static fsal_status_t mem_create_obj(struct mem_fsal_obj_handle *parent,
 	if (!FSAL_IS_ERROR(status)) {
 		/* It already exists */
 		return fsalstat(ERR_FSAL_EXIST, 0);
-	} else if (status.major != ERR_FSAL_NOENT) {
+	} else if (!FSAL_IS_NOENT(status)) {
 		/* Some other error */
 		return status;
 	}
@@ -1262,7 +1262,7 @@ fsal_status_t mem_link(struct fsal_obj_handle *obj_hdl,
 	if (!FSAL_IS_ERROR(status)) {
 		/* It already exists */
 		return fsalstat(ERR_FSAL_EXIST, 0);
-	} else if (status.major != ERR_FSAL_NOENT) {
+	} else if (!FSAL_IS_NOENT(status)) {
 		/* Some other error */
 		return status;
 	}
@@ -1630,7 +1630,7 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_IS_ERROR(status)) {
 		struct fsal_obj_handle *create;
 
-		if (status.major != ERR_FSAL_NOENT) {
+		if (!FSAL_IS_NOENT(status)) {
 			/* Actual error from lookup */
 			return status;
 		}

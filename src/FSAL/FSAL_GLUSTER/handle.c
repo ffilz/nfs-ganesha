@@ -188,7 +188,7 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 			status = glusterfs_get_acl(glfs_export,
 						   glhandle,
 						   &buffxstat, attrs_out);
-			if (status.major == ERR_FSAL_NOENT) {
+			if (FSAL_IS_NOENT(status)) {
 				if (attrs_out->type == SYMBOLIC_LINK)
 					status = fsalstat(ERR_FSAL_NO_ERROR, 0);
 				else
@@ -396,7 +396,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 			status = glusterfs_get_acl(glfs_export,
 						   glhandle,
 						   &buffxstat, &attrs);
-			if (status.major == ERR_FSAL_NOENT) {
+			if (FSAL_IS_NOENT(status)) {
 				if (attrs.type == SYMBOLIC_LINK)
 					status = fsalstat(ERR_FSAL_NO_ERROR, 0);
 				else
@@ -922,7 +922,7 @@ static fsal_status_t getattrs(struct fsal_obj_handle *obj_hdl,
 	* it calls GETATTRS on removed file. But for dead links
 	* we should not return error
 	* */
-	if (status.major == ERR_FSAL_NOENT) {
+	if (FSAL_IS_NOENT(status)) {
 		if (obj_hdl->type == SYMBOLIC_LINK)
 			status = fsalstat(ERR_FSAL_NO_ERROR, 0);
 		else

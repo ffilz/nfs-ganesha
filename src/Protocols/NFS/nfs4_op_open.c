@@ -834,7 +834,7 @@ static void open4_ex(OPEN4args *arg,
 			 */
 			looked_up_file_obj = true;
 			filename = NULL;
-		} else if (status.major != ERR_FSAL_NOENT ||
+		} else if (!FSAL_IS_NOENT(status) ||
 			   arg->openhow.opentype != OPEN4_CREATE) {
 			/* A real error occurred */
 			res_OPEN4->status = nfs4_Errno_status(status);
