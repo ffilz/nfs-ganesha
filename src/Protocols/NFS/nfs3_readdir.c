@@ -113,6 +113,9 @@ nfsstat3 nfs_readdir_dot_entry(struct fsal_obj_handle *obj, const char *name,
 
 int nfs3_readdir(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 {
+/* capped to almost 2.8M entries */
+#define MAX_ENTRIES (XDR_BYTES_MAXLEN_IO / (sizeof(entry3) - sizeof(char *)))
+
 	struct fsal_obj_handle *dir_obj = NULL;
 	struct fsal_obj_handle *parent_dir_obj = NULL;
 	unsigned long count = 0;
@@ -166,7 +169,7 @@ int nfs3_readdir(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	count = arg->arg_readdir3.count;
 	cookie = arg->arg_readdir3.cookie;
 	estimated_num_entries =
-	    MIN(count / (sizeof(entry3) - sizeof(char *)), 120);
+	    MIN(count / (sizeof(entry3) - sizeof(char *)), MAX_ENTRIES);
 	LogDebug(COMPONENT_NFS_READDIR,
 		 "---> NFS3_READDIR: count=%lu  cookie=%" PRIu64
 		 " estimated_num_entries=%lu",
@@ -329,6 +332,7 @@ int nfs3_readdir(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	}
 
 	return rc;
+#undef MAX_ENTRIES
 }				/* nfs3_readdir */
 
 /**
