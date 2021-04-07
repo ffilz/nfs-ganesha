@@ -4618,13 +4618,29 @@ bool is_sticky_bit_set(struct fsal_obj_handle *obj,
 	return true;
 }
 
+static inline uint32_t default_max_resp_room(void)
+{
+	uint32_t room;
+
+	if (op_ctx && op_ctx->ctx_export) {
+		room = atomic_fetch_uint64_t(&op_ctx->ctx_export->MaxRead);
+	} else {
+		room = XDR_BYTES_MAXLEN_IO;
+	}
+
+	/* Add the space for the opnum4 for this response plus at
+	 * least one more opnum and status.
+	 */
+	room += sizeof(nfs_opnum4) + sizeof(nfs_opnum4) + sizeof(nfsstat4);
+	return room;
+}
+
 uint32_t resp_room(compound_data_t *data)
 {
 	uint32_t room;
 
 	if (data->minorversion == 0 || data->session == NULL) {
-		/* No response size checking */
-		return UINT32_MAX;
+		return default_max_resp_room();
 	}
 
 	/* Start with max response size */
@@ -4646,8 +4662,11 @@ nfsstat4 check_resp_room(compound_data_t *data, uint32_t op_resp_size)
 				      sizeof(nfs_opnum4) + sizeof(nfsstat4);
 
 	if (data->minorversion == 0 || data->session == NULL) {
-		/* No response size checking */
-		return NFS4_OK;
+		if (test_response_size > default_max_resp_room()) {
+			return NFS4ERR_RESOURCE;
+		} else {
+			return NFS4_OK;
+		}
 	}
 
 	/* Check that op_resp_size plus nfs_opnum4 plus at least another
