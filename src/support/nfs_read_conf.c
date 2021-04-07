@@ -357,12 +357,20 @@ static struct config_item version4_params[] = {
 	CONF_ITEM_TOKEN("RecoveryBackend", RECOVERY_BACKEND_DEFAULT,
 			recovery_backend_types, nfs_version4_parameter,
 			recovery_backend),
+	CONF_ITEM_PATH("RecoveryRoot", 1, MAXPATHLEN, NFS_V4_RECOV_ROOT,
+		       nfs_version4_parameter, recov_root),
+	CONF_ITEM_PATH("RecoveryDir", 1, MAXNAMLEN, NFS_V4_RECOV_DIR,
+		       nfs_version4_parameter, recov_dir),
+	CONF_ITEM_PATH("RecoveryOldDir", 1, MAXNAMLEN, NFS_V4_OLD_DIR,
+		       nfs_version4_parameter, recov_old_dir),
 	CONF_ITEM_LIST("minor_versions", NFSV4_MINOR_VERSION_ALL,
 		       minor_versions, nfs_version4_parameter, minor_versions),
 	CONF_ITEM_UI32("slot_table_size", 1, 1024, NFS41_NB_SLOTS_DEF,
 		       nfs_version4_parameter, nb_slots),
 	CONF_ITEM_BOOL("Enforce_UTF8_Validation", false,
 		       nfs_version4_parameter, enforce_utf8_vld),
+	CONF_ITEM_PATH("IdmapConf", 1, MAXPATHLEN, IDMAPCONF_DEFAULT,
+		       nfs_version4_parameter, idmapconf),
 	CONFIG_EOL
 };
 
