@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36552c0_a2ef6df4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-07T15:13:37Z",
+      "side": 1,
+      "message": "This resolves the security issue, however, I\u0027d rather see READDIR converted to the same buffering as READDIRPLUS which will maximize the number of entries returned while staying within the response size limit the client requested.",
+      "revId": "b29d8e60cbcdf5cf3521926ba44c4de63e166d1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
