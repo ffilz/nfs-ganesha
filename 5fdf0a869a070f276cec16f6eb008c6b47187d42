@@ -16,6 +16,24 @@
       "message": "Do we want to remove the duplicate CACHE_INODE config?  It was deprecated in 2.8.",
       "revId": "5fdf0a869a070f276cec16f6eb008c6b47187d42",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c5a0de0_4b594b49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-08T18:11:51Z",
+      "side": 1,
+      "message": "I dunno, has everyone (besides me apparently) converted over to using MDCACHE config blocks? Maybe a separate patch to resolve all the sysadmin visible instances of cache inode (though not sure what would break for dbus there...)",
+      "parentUuid": "194540a1_fc3b2dcf",
+      "revId": "5fdf0a869a070f276cec16f6eb008c6b47187d42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
