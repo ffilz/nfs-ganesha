@@ -16,6 +16,24 @@
       "message": "This won\u0027t work, because that variable points to this cmakelists.txt, not the top level for Ganesha.  I think you\u0027ll have to create a new variable in the top level cmakelists.txt that points to that directory, and consistently use it everywhere.",
       "revId": "e52cc02b01eaf58edd454ce4b2e417d9a1fc734c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "966438ba_9f31370c",
+        "filename": "src/MainNFSD/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-09T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b0c3471_96861216",
+      "revId": "e52cc02b01eaf58edd454ce4b2e417d9a1fc734c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
