@@ -33,6 +33,41 @@
       "message": "Hmm, this doesn\u0027t work right. The pynfs 4.0 tests WRT5a and RD4 which test maxread and maxwrite don\u0027t work right with this patch.",
       "revId": "7be421d17bbd315f4b51b043fa7da301ccdc88a0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1448463_80b1f3b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019066
+      },
+      "writtenOn": "2021-04-12T13:45:46Z",
+      "side": 1,
+      "message": "Hi Frank,\n\nI can see 2 problems:\n\nThe test uses a (legitimate) compound operation: PUTFH + READ\nWe should probably cap the maximum response size to something greater than MaxRead.\n\nWhat do you suggest ?\n\nand\n\nIn nfs4_read we add:\n/* Now check response size.\n * size + space for nfsstat4, eof, and data len\n */\nresp_size \u003d RNDUP(size) + sizeof(nfsstat4) + 2 * sizeof(uint32_t);\n\nwe also add thoses in check_resp_room\n\nI don\u0027t know which one should remain...",
+      "parentUuid": "6bcb5520_25471987",
+      "revId": "7be421d17bbd315f4b51b043fa7da301ccdc88a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1fefe8a_6cdaeb63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019066
+      },
+      "writtenOn": "2021-04-12T13:45:46Z",
+      "side": 1,
+      "message": "Hi,\n\nI\u0027m not sure how I should fix this.\n",
+      "revId": "7be421d17bbd315f4b51b043fa7da301ccdc88a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
