@@ -16,6 +16,41 @@
       "message": "Looks good, thanks. Did you verify with the pynfs 4.0 test cases WRT5a and RD4?",
       "revId": "59e8d75cffcecacf963268a676c5691b169f91fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d105a41_c588cdcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019066
+      },
+      "writtenOn": "2021-04-13T16:32:58Z",
+      "side": 1,
+      "message": "I tested with the pynfs 4.0 and 4.1 on a VFS share.\nWRT5a is OK RD4 also but I cannot see RD4 fail with the previous versions of the patch.",
+      "parentUuid": "ab56202b_9427a1fd",
+      "revId": "59e8d75cffcecacf963268a676c5691b169f91fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "323158d4_b589dec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019066
+      },
+      "writtenOn": "2021-04-13T16:32:58Z",
+      "side": 1,
+      "message": "Hi,\n\nI\u0027ve run pynfs tests.\nThere is some failure but I can see the same on the \u0027next\u0027 branch is that known ?\n",
+      "revId": "59e8d75cffcecacf963268a676c5691b169f91fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
