@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf0220f_d97bccd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2021-04-27T18:52:32Z",
+      "side": 1,
+      "message": "There is the line (#85 or so)\n\n  gen_tunable(ganesha_use_fusefs, false)\n\nwhich could be changed to true instead.\n\nI don\u0027t know whether that would be better? Does doing it this way give more fine grain control over which fusefs ops ganesha is allowed to do? Are we going to be bitten in rhel8.5 when something else changes and we have to add more fusefs ops?\n",
+      "revId": "05e3e002fb56b86cbc25af81e30ef5ac6362436b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
