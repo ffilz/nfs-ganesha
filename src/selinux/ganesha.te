@@ -334,3 +334,12 @@ ifdef(`ceph_read_lib_files',`
 
 allow ganesha_t cluster_t:dbus send_msg;
 allow init_t var_lib_nfs_t:lnk_file read;
+
+########################################
+#
+# ganesha local policy rhbz#1954137 (rhel8)
+
+#!!!! This avc can be allowed using the boolean 'ganesha_use_fusefs'
+allow ganesha_t fusefs_t:dir { add_name create getattr open read remove_name rmdir search write };
+allow ganesha_t fusefs_t:file { getattr ioctl open read };
+allow ganesha_t fusefs_t:lnk_file read;
