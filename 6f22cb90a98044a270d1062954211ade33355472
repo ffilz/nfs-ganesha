@@ -16,6 +16,108 @@
       "message": "LGTM",
       "revId": "6f22cb90a98044a270d1062954211ade33355472",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a212310e_4e4312ef",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-04-28T14:07:19Z",
+      "side": 1,
+      "message": "Is this a filename space or a file namespace?  Or a filename namespace?",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71329c66_92e25ee5",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-04-28T14:07:19Z",
+      "side": 1,
+      "message": "FSAL_VFS",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6cee07_78ba35e7",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-04-28T14:07:19Z",
+      "side": 1,
+      "message": "s/and are/which are/ maybe?",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e186b2e_4acdbaff",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-04-28T14:07:19Z",
+      "side": 1,
+      "message": "Since man pages are associated with a specific version, do we need to discuss history?  Anyone reading this manpage has v4.0 or later already.",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825f3eef_cc0feeea",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-04-28T14:07:19Z",
+      "side": 1,
+      "message": "What happens if I try to change the Path but not the Export ID?",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d8260da_d3ae27e0",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-04-28T14:07:19Z",
+      "side": 1,
+      "message": "I think this needs clarification.  Maybe \"This means that an ongoing operation, such as a write, from a client that used to have access to an Export, but now does not, will continue until the next time that client performs a PUTFS or LOOKUP.\"",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
