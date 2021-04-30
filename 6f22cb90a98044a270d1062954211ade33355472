@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c03e7af_4f875e60",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-30T14:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a212310e_4e4312ef",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71329c66_92e25ee5",
@@ -52,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bed2a95c_3c966a01",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-30T14:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71329c66_92e25ee5",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be6cee07_78ba35e7",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-04-28T14:07:19Z",
       "side": 1,
       "message": "s/and are/which are/ maybe?",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eaecb4f_2c1c5d25",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-30T14:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be6cee07_78ba35e7",
       "revId": "6f22cb90a98044a270d1062954211ade33355472",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c9cdd44_2a3e8a25",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-30T14:52:51Z",
+      "side": 1,
+      "message": "I have seen other man pages indicate which version something is introduced.\n\nAlso, our wiki now points to the latest rst files as the documentation, so having version information in the rst file will help there. This is the area I\u0027m least confident how we should handle... One of the problems is we need most of this additional documentation for the stable branches, yet we can\u0027t retrofit it into the particular tagged versions folks are using... So by pointing to the latest, and indicating the versions things were introduced, we have a hope of providing up to date documentation on the wiki...",
+      "parentUuid": "4e186b2e_4acdbaff",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "825f3eef_cc0feeea",
         "filename": "src/doc/man/ganesha-export-config.rst",
         "patchSetId": 1
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "346ccd3b_e213ca93",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-30T14:52:51Z",
+      "side": 1,
+      "message": "We throw a CRIT identifying the problem and fail the update of the export with an error.",
+      "parentUuid": "825f3eef_cc0feeea",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d8260da_d3ae27e0",
         "filename": "src/doc/man/ganesha-export-config.rst",
         "patchSetId": 1
@@ -116,6 +206,24 @@
       "writtenOn": "2021-04-28T14:07:19Z",
       "side": 1,
       "message": "I think this needs clarification.  Maybe \"This means that an ongoing operation, such as a write, from a client that used to have access to an Export, but now does not, will continue until the next time that client performs a PUTFS or LOOKUP.\"",
+      "revId": "6f22cb90a98044a270d1062954211ade33355472",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc43e749_eb1ef115",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-04-30T14:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d8260da_d3ae27e0",
       "revId": "6f22cb90a98044a270d1062954211ade33355472",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
