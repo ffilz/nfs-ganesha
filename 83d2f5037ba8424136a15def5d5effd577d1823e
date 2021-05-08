@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed33e491_c06d140b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2021-05-08T00:05:08Z",
+      "side": 1,
+      "message": "So our chat on IRC got me curious as I\u0027ve been building ganesha with a recent gcc for a while and never had this problem (this specific error is in multilock, which I wasn\u0027t building)... And I don\u0027t get it.\n\nEnabling -Wformat-truncation\u003d2 yields a lot more in the main ganesha code as I would have expected, there are other places where we don\u0027t care about this...\nSo it looks like multilock complains about -Wformat-truncation\u003d1 which is what we compile with (through -Wformat)\n\naccording to https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html , the distinction is -Wformat-truncation\u003d1 warns if the string is most certainly going to be overflowed (ints assumed to be of length 1, strings to be empty) while the \u003d2 variant assumes the worst (max int, max string lengths when known) -- but for some reason it seems to assume max length there, perhaps because the string is used as a format?\n\n\nAnyway on a purely esthetic level I think it\u0027s better to ignore format trucation warnings with -Wformat-truncation\u003d0 in our cflags rather than try to work it around in the code... But if we want to keep this, any operation with the return value seems to work so this is fine too (note the comparison to 0 is voided, not the return value directly); but that\u0027d deserve a comment:\n\n diff --git a/src/tools/multilock/multilock.h b/src/tools/multilock/multilock.h\n index 14780213b984..b2d4d6bd36c2 100644\n --- a/src/tools/multilock/multilock.h\n +++ b/src/tools/multilock/multilock.h\n @@ -175,7 +175,7 @@ long int get_global_tag(bool increment);\n         } while (0)\n  \n  #define array_sprintf(buf, fmt, args...)               \\\n -       snprintf(buf, sizeof(buf) - 1, fmt, ## args)    \\\n +       (void)(snprintf(buf, sizeof(buf) - 1, fmt, ## args) \u003c 0)\n  \n  #define sprint_left(buf, left, fmt, args...)                   \\\n         do {                                                    \\\n\n\nFWIW I also very briefly tried to actually fix this by making errdetail big enough but there are cases it\u0027s also used as input so that just overflows other strings; it might be possible to work around these as well but it\u0027s probably a waste of time given what multilock is for debugging...",
+      "revId": "83d2f5037ba8424136a15def5d5effd577d1823e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
