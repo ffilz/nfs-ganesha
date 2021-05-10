@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c53d8b5_66b476dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-05-10T14:59:36Z",
+      "side": 1,
+      "message": "This seems like the simplest way of shutting up this particular warning...\n\nMaybe there\u0027s more work for later? I dunno...\n\np.s. Multilock is not for debugging... It\u0027s actually intended for testing... I think IBM DOES actually use it. Other folks invent their own lock test tools that don\u0027t do anything close to what multilock does...",
+      "parentUuid": "ed33e491_c06d140b",
+      "revId": "83d2f5037ba8424136a15def5d5effd577d1823e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44a0d2bc_a3eda190",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-05-10T13:53:57Z",
       "side": 1,
       "message": "Why jump through these hoops?   Why not just \"(void) snprintf(...\"",
+      "revId": "83d2f5037ba8424136a15def5d5effd577d1823e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35774382_f223c91f",
+        "filename": "src/tools/multilock/multilock.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-05-10T14:59:36Z",
+      "side": 1,
+      "message": "I tried that first. It didn\u0027t work...",
+      "parentUuid": "44a0d2bc_a3eda190",
       "revId": "83d2f5037ba8424136a15def5d5effd577d1823e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
