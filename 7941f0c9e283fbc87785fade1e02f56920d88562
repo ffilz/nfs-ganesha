@@ -51,6 +51,24 @@
       "parentUuid": "4871c101_d59d65a8",
       "revId": "7941f0c9e283fbc87785fade1e02f56920d88562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21345368_83661ef4",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1011997
+      },
+      "writtenOn": "2021-05-12T16:08:48Z",
+      "side": 1,
+      "message": "One question. Since last_update is updated using atomic update, we cannot do that for struct timespec which has two uint64_t\u0027s. We can two two atomic updates; but the whole\nwon\u0027t be atomic (two threads can step on each other). This may not be a big issue as both should be very close.\nlast_update is only used for display purpose in dbus output. So, the other approach is to only keep tv_sec part in last_update.\nWhich do you think make more sense?",
+      "parentUuid": "32f1c81a_eb13ea1d",
+      "revId": "7941f0c9e283fbc87785fade1e02f56920d88562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
