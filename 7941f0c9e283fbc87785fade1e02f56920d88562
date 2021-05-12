@@ -33,6 +33,24 @@
       "message": "It looks like stop_time and last_update should be changed to timespec as well, since last_update is always converted back to a timespec before it\u0027s used.",
       "revId": "7941f0c9e283fbc87785fade1e02f56920d88562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32f1c81a_eb13ea1d",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1011997
+      },
+      "writtenOn": "2021-05-12T15:37:06Z",
+      "side": 1,
+      "message": "Thanks Dan. I will update the patch.",
+      "parentUuid": "4871c101_d59d65a8",
+      "revId": "7941f0c9e283fbc87785fade1e02f56920d88562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
