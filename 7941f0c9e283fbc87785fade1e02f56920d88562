@@ -87,6 +87,24 @@
       "parentUuid": "21345368_83661ef4",
       "revId": "7941f0c9e283fbc87785fade1e02f56920d88562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e46bc54_2159298a",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-05-13T13:37:49Z",
+      "side": 1,
+      "message": "I think that two atomics is fine.  The seconds are what\u0027s really important, the sub-second could be wrong, but it will still be within a second.",
+      "parentUuid": "21345368_83661ef4",
+      "revId": "7941f0c9e283fbc87785fade1e02f56920d88562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
