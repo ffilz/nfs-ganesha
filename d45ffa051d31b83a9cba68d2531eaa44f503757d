@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc442c63_fa3118d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-05-17T15:00:38Z",
+      "side": 1,
+      "message": "Could you add more explanation to the commit message.\n\nI think this is OK, but I am worried about some side effects:\n\n1. If a client has some old unpadded handles cached, a new handle for the same file will not match, possibly confusing the clients.\n\n2. When PROXY is used to proxy a Ganeaha server, the increase in handle size due to padding could possibly cause an overflow of the maximum handle size when previously it was fine. Note that the padding presumably generally adds 3 bytes to the handle since the Ganesha header is 5 bytes and often the opaque part of the handle is a multiple of 4 bytes.\n\nThis may be something that should be a configurable option to avoid the unintended consequences when the need is not there.",
+      "revId": "d45ffa051d31b83a9cba68d2531eaa44f503757d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
