@@ -16,6 +16,24 @@
       "message": "Could you add more explanation to the commit message.\n\nI think this is OK, but I am worried about some side effects:\n\n1. If a client has some old unpadded handles cached, a new handle for the same file will not match, possibly confusing the clients.\n\n2. When PROXY is used to proxy a Ganeaha server, the increase in handle size due to padding could possibly cause an overflow of the maximum handle size when previously it was fine. Note that the padding presumably generally adds 3 bytes to the handle since the Ganesha header is 5 bytes and often the opaque part of the handle is a multiple of 4 bytes.\n\nThis may be something that should be a configurable option to avoid the unintended consequences when the need is not there.",
       "revId": "d45ffa051d31b83a9cba68d2531eaa44f503757d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02b74bd9_b6e6d466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2021-05-20T20:29:01Z",
+      "side": 1,
+      "message": "we are handling both new and old file handles , we check for unpadded file handle size and handle them gracefully. If client sends cached old FH, we call nfs4_sizeof_handle_nopadding( and accept it.\nIsn\u0027t the same problem exists already for NFSv3  which  only supports 64 bytes ?  NFSv4 supports 128 byte FH.\n\nAFM stores file handles as part of inode and uses them for replication. For example, if there is a write to existing file, AFM uses VFS interface to convert  stored file handle to dentry and then dentry is opened for the writing.  This is to support existing AFM filesets which stored NFSv3 file handles  to work with  NFSv4 mount. kNFS already supports this and does not change file handle size between v3 and v4. For ganesha , file handle size is changed causing the existing filesets not to work with NFSv4 support.",
+      "parentUuid": "bc442c63_fa3118d2",
+      "revId": "d45ffa051d31b83a9cba68d2531eaa44f503757d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
