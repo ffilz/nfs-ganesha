@@ -34,6 +34,24 @@
       "parentUuid": "bc442c63_fa3118d2",
       "revId": "d45ffa051d31b83a9cba68d2531eaa44f503757d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6fd13ae_46389c71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-05-21T22:51:12Z",
+      "side": 1,
+      "message": "So one of my concerns is a plain old Linux client that has cached a handle for some file. Then it does a lookup for a different link to the same file and gets the new handle. How is the client going to deal with having two different handles for what is ultimately the same inode (and the client will know the fsid and fileid match). Or what happens when a READDIR returns new handles?\n\nAnd then for those who might be using FSAL_PROXY (V3 or V4), what kind of impact is there? MDCACHE will cache the object as a separate object, and there\u0027s also the possibility the increased handle size causes some kind of problem with being able to wrap the proxied handle and still fit, especially for V3.\n\nThat\u0027s why I wonder if this should be a configurable behavior.",
+      "parentUuid": "02b74bd9_b6e6d466",
+      "revId": "d45ffa051d31b83a9cba68d2531eaa44f503757d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
