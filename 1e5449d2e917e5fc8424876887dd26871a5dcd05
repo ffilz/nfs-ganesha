@@ -16,6 +16,24 @@
       "message": "This actually looks simpler.  Have you tested with various compile options?  I\u0027m interested in NFSv3/NLM on/off and 9P on/off.",
       "revId": "1e5449d2e917e5fc8424876887dd26871a5dcd05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "147e6366_ac42bbb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017949
+      },
+      "writtenOn": "2021-05-24T19:17:58Z",
+      "side": 1,
+      "message": "Tried with 9P off, it compiles and runtime seems ok. Type string has one boolean less as expected.\nI did not manage to compile with -DUSE_NFS3\u003dOFF -DUSE_NLM\u003dOFF, got errors in nfs_rpc_dispatcher_thread.c and other parts not related to export_show_exports. How do I build without v3/NLM?",
+      "parentUuid": "5754f35e_48e55a5f",
+      "revId": "1e5449d2e917e5fc8424876887dd26871a5dcd05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
