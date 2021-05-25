@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "1abe8746_2ea1ac60",
         "filename": "/COMMIT_MSG",
@@ -14,10 +15,27 @@
       "side": 1,
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nSome workloads cause us to get referral info on deleted files leading to flood of",
       "revId": "4d6b2b30651cba23e59b5e0a01c279204c359515",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d878e24f_c77027a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-05-25T17:29:36Z",
+      "side": 1,
+      "message": "Yogendra, could you please review this patch and indicate if it seems relevant and if so, please address my comment about catching ESTALE errors sooner and rebase the patch, otherwise we should abandon it.\n\nOne further thought - we DID just catch some spots where we were killing entries for ERR_FSAL_DELAY instead of ERR_FSAL_STALE so maybe this actually is now not relevant (if so it suggests I was on the right track, instead of burying the issue discover why stale entries weren\u0027t being killed).",
+      "revId": "4d6b2b30651cba23e59b5e0a01c279204c359515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "539998fe_aa41f987",
         "filename": "src/FSAL/commonlib.c",
@@ -31,8 +49,7 @@
       "side": 1,
       "message": "Can you change the message on this one to reference that it\u0027s a deleted file?",
       "revId": "4d6b2b30651cba23e59b5e0a01c279204c359515",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
