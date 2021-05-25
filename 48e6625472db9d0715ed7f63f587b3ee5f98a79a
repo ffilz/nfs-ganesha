@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "b7306581_94ff2119",
         "filename": "/COMMIT_MSG",
@@ -14,10 +15,27 @@
       "side": 1,
       "message": "Also patch title needs to be separated from more detailed description by a blank line.",
       "revId": "48e6625472db9d0715ed7f63f587b3ee5f98a79a",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d2f4ff_ac71f5c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-05-25T17:57:21Z",
+      "side": 1,
+      "message": "This patch has been idle for over 6 months and really does not seem necessary. Abandoning.",
+      "revId": "48e6625472db9d0715ed7f63f587b3ee5f98a79a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "481d618e_ae6bc02a",
         "filename": "src/support/nfs4_acls.c",
@@ -31,8 +49,7 @@
       "side": 1,
       "message": "What purpose does this serve? There\u0027s only a single ACL table, named \"ACL Table\" so this log message will always output \"ACL table\u003dACL Table\"",
       "revId": "48e6625472db9d0715ed7f63f587b3ee5f98a79a",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
