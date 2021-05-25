@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bec6689_372d5a3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-05-25T17:59:39Z",
+      "side": 1,
+      "message": "Daniel, could you take a look at this one and see what you think? Perhaps we really do need to address this.",
+      "revId": "15e32daa67ae5964c2398689671c83b5189c1277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a2e0c55e_a663ab0f",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
@@ -14,10 +32,10 @@
       "side": 1,
       "message": "I think we may need to set these flags if either the entry-\u003eattrs has ACL/FS_LOCATIONS OR the attrs_out-\u003erequest_mask asks for them.\n\nAlso, we should look at the other callers to mdcache_refresh_attrs.\n\nI think the big problem is while ACL may be requested if not present and a permission check is needed, we don\u0027t see the same kind of logic that forces a refresh of the fs_locations attribute.",
       "revId": "15e32daa67ae5964c2398689671c83b5189c1277",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e077dba4_3cdc006f",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
@@ -32,8 +50,7 @@
       "message": "Ok, I\u0027m really not sure how to resolve this, and I don\u0027t have an ACL enabled setup... Or really a referral setup...\n\nI\u0027m almost certain it attrs_out-\u003erequest_mask needs to be checked for ACL. And we shouldn\u0027t necessarily refresh the ACL every time we refresh the attributes.",
       "parentUuid": "a2e0c55e_a663ab0f",
       "revId": "15e32daa67ae5964c2398689671c83b5189c1277",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
