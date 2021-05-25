@@ -68,6 +68,24 @@
       "message": "Could we make all type as definitions? That would make more convenient and clear.\nLike `q` means TYPE_EXPORT_ID, `s` means TYPE_PATH, `bbb` means STAT_TYPE_NFSV4, `(tt)` means TYPE_TIMESTAMP?",
       "revId": "1e5449d2e917e5fc8424876887dd26871a5dcd05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f09b9da7_f3cb36f7",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1017949
+      },
+      "writtenOn": "2021-05-25T07:30:43Z",
+      "side": 1,
+      "message": "Yes, that would be desirable. But as for the \"qs\" and \"(tt)\" patterns have several other occurrences, this should be done in a more general and consistent way, which is well beyond the scope of this patch. Before addressing this we may even want to discuss how to make the dbus API more stable across different sets of compile time options.",
+      "parentUuid": "c5be3472_0e82c60c",
+      "revId": "1e5449d2e917e5fc8424876887dd26871a5dcd05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
