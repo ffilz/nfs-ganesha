@@ -16,6 +16,40 @@
       "message": "Jeff, could you weigh in as to whether this makes any sense at all? If so, someone could pick this up and address the issues, otherwise it should be abandoned.",
       "revId": "5ceb365f9583ce4d9f39d190b2150708e3f158f6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb6b91f_2ce04de9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-05-26T11:33:04Z",
+      "side": 1,
+      "message": "I don\u0027t know whether this makes sense or not, tbqh, as I don\u0027t have a great grasp of the overall design of the clustered configurations that are driven by dbus. It would be _really_ nice for someone who\u0027s familiar with that stuff to do an overall design document -- something like ganesha-rados-cluster-design.rst but for the dbus-driven design.\n\nThe fs_ng and rados_ng backends are not really suitable for the dbus-managed clustering backends (since they lack some of the takeover operations) so it\u0027s not clear to me that they\u0027d need any changes (aside from following suit on prototype changes).\n\nEither way, this has clearly never been tested since the nfs4_add_clid_entry prototype is completely broken. I\u0027d say we drop this unless and until sepia-liu (or someone else) clearly articulates why this is needed and maybe until we have a clearer explanation of how this clustering works.",
+      "revId": "5ceb365f9583ce4d9f39d190b2150708e3f158f6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ed84f5_28293f1f",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-05-26T11:33:04Z",
+      "side": 1,
+      "message": "This looks pretty broken. It looks like you\u0027re trying to make this fill out \"cli_entry\" with a pointer to the entry, but to do that you\u0027d need to make that a double pointer. Like:\n\n    int nfs4_add_clid_entry(char *cl_name, clid_entry_t **cli_entry)\n\nThis will fill out the cli_entry pointer, but the callers will never see the new value.",
+      "revId": "5ceb365f9583ce4d9f39d190b2150708e3f158f6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
