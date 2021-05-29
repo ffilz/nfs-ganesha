@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07d49e56_935e6747",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2021-05-29T01:12:54Z",
+      "side": 1,
+      "message": "\u003e So my understanding is that you are using PREFIX, but want RUNTIMEDIR to be handled differently than SYSSTATEDIR and the rest?  That is, have it be outside the PREFIX, even if it\u0027s given?\n\nExactly, I use prefix to install in a read-only location, so runtime data cannot be there.\nI don\u0027t mind where the default is as long as it can be set at compile time -- these could also be overriden by config but that\u0027s annoying.",
+      "revId": "32459d4b6c3687893d1aebb2db5075f8e37be625",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "900bd618_68d06aff",
         "filename": "src/CMakeLists.txt",
@@ -14,8 +32,25 @@
       "side": 1,
       "message": "I\u0027d prefer this be handled like SYSSTATEDIR, but more later",
       "revId": "32459d4b6c3687893d1aebb2db5075f8e37be625",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2110e867_87937973",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2021-05-29T01:12:54Z",
+      "side": 1,
+      "message": "A bit late but I didn\u0027t understand this one -- do you mean you actively want it within prefix?\nI\u0027m in the same opinion as Kaleb that prefix has no influence on runtimedir for me, but I don\u0027t really mind either way as long as default is coherent (default \"prefix\" is /usr/local, but there is no /usr/local/run so it should still be /run) and it can be overriden if desired.",
+      "parentUuid": "900bd618_68d06aff",
+      "revId": "32459d4b6c3687893d1aebb2db5075f8e37be625",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
