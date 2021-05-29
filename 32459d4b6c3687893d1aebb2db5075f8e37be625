@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb3f402a_72a2d0fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2021-05-29T01:33:50Z",
+      "side": 1,
+      "message": "Alright, sorry for the multiple updates, writing this made me realize I want to move SYSSTATEDIR anyway -- so the main point of this patch for me is just to not have cmake create the directory.\n\nThe latest update removes the path change (although I still think /run is preferred over /var/run on systemd distros, most have a symlink so it should be fine), I kept the separate setting because it somewhat makes sense to have but not fussy about it either way.\nOther than that default path doesn\u0027t change, it\u0027s really just a mkdir being removed and pushed down to init scripts or packagers to do as they see fit.",
+      "parentUuid": "07d49e56_935e6747",
+      "revId": "32459d4b6c3687893d1aebb2db5075f8e37be625",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "900bd618_68d06aff",
         "filename": "src/CMakeLists.txt",
         "patchSetId": 5
