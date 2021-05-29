@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfead483_aed46d9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2021-05-29T01:00:54Z",
+      "side": 1,
+      "message": "Abandonned as discussed on IRC\nHere\u0027s some text for punch list; just ripping off the commit message basically\n\n----------------\n# Investigate KCM (Kernel Connexion Multiplexer)\n\nKCM is a framework that lets the application specify how messages are constructed in a BPF program, so that the kernel can split messages at proper length for us.\n\nThe main advantage of this is that it saves us one user-space \u003c-\u003e kernel round-trip of read(hdr) then read(rest-of-the-size), as a single recvmsg() will always give us a full message: less syscalls \u003d better performance\n\n9P poc: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/421314\n----------------",
+      "revId": "912dd19648cd0c189a00ce074aa41b0ff2379a4e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
