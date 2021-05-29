@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff81b5a7_3b653c6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2021-05-29T04:24:59Z",
+      "side": 1,
+      "message": "tail failure: \n29/05/2021 04:46:48 : epoch 60b1b928 : n60.pufty.ci.centos.org : ganesha.nfsd-16439[main] main :MAIN :FATAL :Can\u0027t open pid file /var/run/ganesha/ganesha.pid for writing\n\n\nApparently the RuntimeDirectory statement was removed in 0455e7eb8ea32b1870b4af695b25c693b56c33a2 -- but then that\u0027d break the ccachedir setting?\nKaleb, do you still have a link to a downstream issue or anything? I\u0027m pretty sure I ran ganesha on el7 before without problem...",
+      "revId": "3cd40977ac5a983d69cd915f3526d2aaf0accf8d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
