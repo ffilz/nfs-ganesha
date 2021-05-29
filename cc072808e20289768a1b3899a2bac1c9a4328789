@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "5062037e_c55c2c93",
         "filename": "/COMMIT_MSG",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe main motivation for this change is that /run is not dependent on SYSCONFDIR,",
       "revId": "cc072808e20289768a1b3899a2bac1c9a4328789",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "a79f55b3_6577a920",
         "filename": "src/libntirpc",
@@ -31,8 +32,25 @@
       "side": 1,
       "message": "Is this on purpose?",
       "revId": "cc072808e20289768a1b3899a2bac1c9a4328789",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb6d66e2_ca7f8f2e",
+        "filename": "src/libntirpc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003556
+      },
+      "writtenOn": "2021-05-29T01:15:05Z",
+      "side": 1,
+      "message": "(ditto)",
+      "parentUuid": "a79f55b3_6577a920",
+      "revId": "cc072808e20289768a1b3899a2bac1c9a4328789",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
