@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "debc0238_88dedbe1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis is to support existing AFM filesets which stored NFSv3 file handles  to work with  NFSv4 mount.",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb04047b_b091dc7b",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       return offsetof(struct file_handle_v4, fsopaque) + hdl-\u003efs_len;$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e70e1b4_91ddbb19",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       int hsize;$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7488e9_6e6c0c3a",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       int aligned_hsize;$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c61926_da786044",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       hsize \u003d offsetof(struct file_handle_v4, fsopaque) + hdl-\u003efs_len;$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "504c75d6_7f6fb2c2",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       aligned_hsize \u003d roundup(hsize, 4);$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a0ac3be_ad062acb",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (7, 15)\n+       if (aligned_hsize \u003c\u003d NFS4_FHSIZE)\n+               hsize \u003d aligned_hsize;",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a351403_3c40b4ac",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       if (aligned_hsize \u003c\u003d NFS4_FHSIZE)$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3026e67_40c7e0a1",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+               hsize \u003d aligned_hsize;$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d894ea8_a6fd42f7",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+               hsize \u003d aligned_hsize;$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db43243_ef4578ae",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       return hsize;$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35965fa6_9e9b87f0",
+        "filename": "src/support/nfs_filehandle_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      || (fh-\u003enfs_fh4_len !\u003d nfs4_sizeof_handle(pfile_handle) \u0026\u0026$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd12baf_69cc6ddb",
+        "filename": "src/support/nfs_filehandle_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+          fh-\u003enfs_fh4_len !\u003d nfs4_sizeof_handle_nopadding(pfile_handle))) {$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c7186d_cff9c72b",
+        "filename": "src/support/nfs_filehandle_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-02T14:49:24Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+          fh-\u003enfs_fh4_len !\u003d nfs4_sizeof_handle_nopadding(pfile_handle))) {$",
+      "revId": "70d56d1aab76f0676dd9011f63b0001a029917d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
