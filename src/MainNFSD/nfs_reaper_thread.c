@@ -44,6 +44,7 @@
 unsigned int reaper_delay = REAPER_DELAY;
 
 static struct fridgethr *reaper_fridge;
+static struct fridgethr *trim_free_fridge;
 
 static int reap_hash_table(hash_table_t *ht_reap)
 {
@@ -310,5 +311,46 @@ void trim_free_memory(struct fridgethr_context *ctx)
 /* fix me */
 #endif
 	}
+}
+
+static struct reaper_state trim_free_state;
+
+int trim_memory_init(void)
+{
+	struct fridgethr_params frp;
+	unsigned int trim_delay;
+	int rc = 0;
+
+	/* Interval should not be set too small,
+	   trim too frequently affects performance */
+	trim_delay = nfs_param.core_param.trim_free_memory_interval;
+	if (trim_delay < REAPER_DELAY)
+		trim_delay = REAPER_DELAY;
+
+	memset(&frp, 0, sizeof(struct fridgethr_params));
+	frp.thr_max = 1;
+	frp.thr_min = 1;
+	frp.thread_delay = trim_delay;
+	frp.flavor = fridgethr_flavor_looper;
+
+	rc = fridgethr_init(&trim_free_fridge, "trim_free_memory", &frp);
+	if (rc != 0) {
+		LogMajor(COMPONENT_THREAD,
+			"Unable to initialize trim free memory fridge, error code %d.",
+			rc);
+		return rc;
+	}
+
+	rc = fridgethr_submit(trim_free_fridge, trim_free_memory,
+			      &trim_free_state);
+	if (rc != 0) {
+		LogMajor(COMPONENT_THREAD,
+			"Unable to start trim free memory thread, error code %d.",
+			rc);
+		return rc;
+	}
+
+	return 0;
+
 }
 

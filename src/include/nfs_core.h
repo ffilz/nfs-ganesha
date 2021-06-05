@@ -173,6 +173,7 @@ int reaper_init(void);
 void reaper_wake(void);
 int reaper_shutdown(void);
 
+int trim_memory_init(void);
 void trim_free_memory(struct fridgethr_context *ctx);
 
 #endif				/* !NFS_CORE_H */
