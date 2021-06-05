@@ -261,6 +261,8 @@ static struct config_item core_params[] = {
 		       nfs_core_param, dbus_name_prefix),
 	CONF_ITEM_UI32("Max_Uid_To_Group_Reqs", 0, INT32_MAX, 0,
 		       nfs_core_param, max_uid_to_grp_reqs),
+	CONF_ITEM_UI32("Trim_Free_Memory_Interval", 0, UINT32_MAX, 90,
+			   nfs_core_param, trim_free_memory_interval),
 	CONFIG_EOL
 };
 

@@ -596,6 +596,19 @@ static void nfs_Start_threads(void)
 	}
 	LogEvent(COMPONENT_THREAD, "reaper thread was started successfully");
 
+#ifdef USE_TCMALLOC
+	if (nfs_param.core_param.trim_free_memory_interval > 0) {
+		rc = trim_memory_init();
+		if (rc != 0) {
+			LogFatal(COMPONENT_THREAD,
+				 "Could not create trim_free_memory_thread, "
+				 "error = %d (%s)", errno, strerror(errno));
+		}
+		LogEvent(COMPONENT_THREAD,
+			 "trim_free_memory thread was started successfully");
+	}
+#endif
+
 	/* Starting the general fridge */
 	rc = general_fridge_init();
 	if (rc != 0) {
