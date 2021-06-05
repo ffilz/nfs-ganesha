@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84b19524_f3db6b63",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2310,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   bool success \u003d true;$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7605687c_99be1cdc",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2311,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   char *errormsg \u003d \"OK\";$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bfc10d8_89e814a6",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   DBusMessageIter iter;$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7d0c281_b041d0f7",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2313,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   struct timespec timestamp;$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e55ef20_5c2b1110",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2315,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   now(\u0026timestamp);$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f72c04_fd4b08fc",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2316,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   dbus_message_iter_init_append(reply, \u0026iter);$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1cf2200_81b01f8b",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   gsh_dbus_status_reply(\u0026iter, success, errormsg);$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e643c036_3763745b",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   gsh_dbus_append_timestamp(\u0026iter, \u0026timestamp);$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ecd0ed_b4a0bc8d",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2320,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   memory_stats_dump(\u0026iter);$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1625cdd0_a12856c3",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2322,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-05T03:31:23Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+   return true;$",
+      "revId": "b35306ef32ad18c13bf300fc645a348298ab3075",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
