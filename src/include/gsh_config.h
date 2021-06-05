@@ -434,6 +434,10 @@ typedef struct nfs_core_param {
 	    environment where users are part of large number of groups.
 	*/
 	uint32_t max_uid_to_grp_reqs;
+	/** Trigger GC to release memory to OS. Defaults to 90s.
+    	Set it to 0 does not attempt to release. settable with
+    	Trim_Free_Memory_Interval. */
+	uint32_t trim_free_memory_interval;
 } nfs_core_parameter_t;
 
 /** @} */
