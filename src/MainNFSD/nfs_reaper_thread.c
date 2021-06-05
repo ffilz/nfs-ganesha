@@ -37,6 +37,10 @@
 #ifdef USE_TCMALLOC
 #include <gperftools/tcmalloc.h>
 #include <gperftools/malloc_extension_c.h>
+#define HEAP_PROFILER_STATS_SIZE 2048
+#endif
+#ifdef USE_JEMALLOC
+#include <jemalloc/jemalloc.h>
 #endif
 
 #define REAPER_DELAY 10
@@ -310,5 +314,32 @@ void trim_free_memory(struct fridgethr_context *ctx)
 /* fix me */
 #endif
 	}
+}
+
+void memory_stats_dump(DBusMessageIter *iter)
+{
+#ifdef USE_TCMALLOC
+	DBusMessageIter struct_iter;
+	char *type, *allocator, *stats;
+	char heap_stats[HEAP_PROFILER_STATS_SIZE];
+	allocator = " tcmalloc ";
+	MallocExtension_GetStats(heap_stats, sizeof(heap_stats));
+	heap_stats[0] = '\n';
+	heap_stats[HEAP_PROFILER_STATS_SIZE-1] = '\0';
+	stats = heap_stats;
+	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
+					 &struct_iter);
+	type = " Allocator : ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
+					&allocator);
+	type = " Memory dump : ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &stats);
+	dbus_message_iter_close_container(iter, &struct_iter);
+#endif
+#ifdef USE_JEMALLOC
+/* fix me*/
+#endif
 }
 

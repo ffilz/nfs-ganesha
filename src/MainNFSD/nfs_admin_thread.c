@@ -270,6 +270,32 @@ static struct gsh_dbus_method method_release_free_memory = {
 		 END_ARG_LIST}
 };
 
+static bool show_memory_stats(DBusMessageIter *args,
+				  DBusMessage *reply,
+				  DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "OK";
+	DBusMessageIter iter;
+	struct timespec timestamp;
+	now(&timestamp);
+	dbus_message_iter_init_append(reply, &iter);
+	gsh_dbus_status_reply(&iter, success, errormsg);
+	gsh_dbus_append_timestamp(&iter, &timestamp);
+	memory_stats_dump(&iter);
+	return true;
+}
+
+static struct gsh_dbus_method memory_stats_show = {
+	.name = "ShowMemoryStats",
+	.method = show_memory_stats,
+	.args = {STATUS_REPLY,
+		 TIMESTAMP_REPLY,
+		 TOTAL_OPS_REPLY,
+		 LRU_UTILIZATION_REPLY,
+		 END_ARG_LIST}
+};
+
 /**
  * @brief Dbus method for flushing manage gids cache
  *
@@ -520,6 +546,7 @@ static struct gsh_dbus_method *admin_methods[] = {
 	&method_malloc_trace,
 	&method_malloc_untrace,
 	&method_release_free_memory,
+	&memory_stats_show,
 	NULL
 };
 
