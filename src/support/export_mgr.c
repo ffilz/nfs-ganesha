@@ -2303,6 +2303,25 @@ static bool show_cache_inode_stats(DBusMessageIter *args,
 	return true;
 }
 
+static bool show_memory_stats(DBusMessageIter *args,
+				  DBusMessage *reply,
+				  DBusError *error)
+{
+   bool success = true;
+   char *errormsg = "OK";
+   DBusMessageIter iter;
+   struct timespec timestamp;
+
+   now(&timestamp);
+   dbus_message_iter_init_append(reply, &iter);
+   gsh_dbus_status_reply(&iter, success, errormsg);
+   gsh_dbus_append_timestamp(&iter, &timestamp);
+
+   memory_stats_dump(&iter);
+
+   return true;
+}
+
 static struct gsh_dbus_method export_show_v41_layouts = {
 	.name = "GetNFSv41Layouts",
 	.method = get_nfsv41_export_layouts,
@@ -2997,6 +3016,16 @@ static struct gsh_dbus_method cache_inode_show = {
 		 END_ARG_LIST}
 };
 
+static struct gsh_dbus_method memory_stats_show = {
+	.name = "ShowMemoryStats",
+	.method = show_memory_stats,
+	.args = {STATUS_REPLY,
+		 TIMESTAMP_REPLY,
+		 TOTAL_OPS_REPLY,
+		 LRU_UTILIZATION_REPLY,
+		 END_ARG_LIST}
+};
+
 /**
  * @brief Report all IO stats of all exports in one call
  *
@@ -3067,6 +3096,7 @@ static struct gsh_dbus_method *export_stats_methods[] = {
 	&export_show_9p_op_stats,
 #endif
 	&global_show_total_ops,
+	&memory_stats_show,
 	&global_show_fast_ops,
 	&cache_inode_show,
 	&export_show_all_io,

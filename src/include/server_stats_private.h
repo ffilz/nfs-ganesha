@@ -524,6 +524,7 @@ void global_dbus_total_ops(DBusMessageIter *iter);
 void server_dbus_fast_ops(DBusMessageIter *iter);
 void mdcache_dbus_show(DBusMessageIter *iter);
 void mdcache_utilization(DBusMessageIter *iter);
+void memory_stats_dump(DBusMessageIter *iter);
 #ifdef _USE_NFS3
 void server_dbus_v3_full_stats(DBusMessageIter *iter);
 #endif
