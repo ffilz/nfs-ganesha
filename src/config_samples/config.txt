@@ -155,6 +155,8 @@ NFS_CORE_PARAM {}
 
 	Max_Uid_To_Group_Reqs(uint32, range 0 to INT32_MAX, default 0)
 
+	Trim_Free_Memory_Interval(uint32, range 10 to 24 * 3600, default 90)
+
 NFS_IP_NAME {}
 --------------
 

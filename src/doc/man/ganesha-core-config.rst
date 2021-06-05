@@ -147,6 +147,9 @@ Enable_UDP(enum, values [False, True, Mount], default True)
     them with portmapper. Set to false, e.g., to run as non-root. Set to Mount
     to enable only Mount UDP listener.
 
+Trim_Free_Memory_Interval(uint32, range 10 to 24 * 3600, default 90)
+    Base interval in seconds between runs of the trim free memory thread.
+
 Max_Uid_To_Group_Reqs(uint32, range 0 to INT32_MAX, default 0)
     Maximum number of concurrent uid2grp requests that can be made by ganesha.
     In environments with a slow Directory Service Provider, where users are
