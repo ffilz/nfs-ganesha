@@ -34,6 +34,10 @@
 #include "nfs_core.h"
 #include "log.h"
 #include "fridgethr.h"
+#ifdef USE_TCMALLOC
+#include <gperftools/tcmalloc.h>
+#include <gperftools/malloc_extension_c.h>
+#endif
 
 #define REAPER_DELAY 10
 
@@ -291,3 +295,20 @@ int reaper_shutdown(void)
 	}
 	return rc;
 }
+
+void trim_free_memory(struct fridgethr_context *ctx)
+{
+	SetNameFunction("trim_free_memory");
+	if (!admin_shutdown) {
+#ifdef USE_TCMALLOC
+		MallocExtension_ReleaseFreeMemory();
+		LogMajor(COMPONENT_MEM_ALLOC,
+			 "tcmalloc release free memory to OS!!!");
+#endif
+
+#ifdef USE_JEMALLOC
+/* fix me */
+#endif
+	}
+}
+

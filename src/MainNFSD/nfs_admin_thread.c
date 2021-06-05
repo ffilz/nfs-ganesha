@@ -240,6 +240,36 @@ static struct gsh_dbus_method method_shutdown = {
 		 END_ARG_LIST}
 };
 
+static bool release_free_memory(DBusMessageIter *args,
+				DBusMessage *reply,
+				DBusError *error)
+{
+	char *errormsg = "release free memory to OS";
+	bool success = true;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+	if (args != NULL) {
+		errormsg = "Release_Free_Memory takes no arguments.";
+		success = false;
+		LogWarn(COMPONENT_DBUS, "%s", errormsg);
+		goto out;
+	}
+
+	trim_free_memory(NULL);
+
+ out:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+	return success;
+}
+
+static struct gsh_dbus_method method_release_free_memory = {
+	.name = "ReleaseFreeMemory",
+	.method = release_free_memory,
+	.args = {STATUS_REPLY,
+		 END_ARG_LIST}
+};
+
 /**
  * @brief Dbus method for flushing manage gids cache
  *
@@ -489,6 +519,7 @@ static struct gsh_dbus_method *admin_methods[] = {
 	&method_purge_idmapper_cache,
 	&method_malloc_trace,
 	&method_malloc_untrace,
+	&method_release_free_memory,
 	NULL
 };
 
