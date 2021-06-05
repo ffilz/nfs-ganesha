@@ -36,6 +36,8 @@
 #cmakedefine _USE_NLM 1
 #cmakedefine _USE_RQUOTA 1
 #cmakedefine USE_NFSACL3 1
+#cmakedefine USE_JEMALLOC 1
+#cmakedefine USE_TCMALLOC 1
 #cmakedefine DEBUG_SAL 1
 #cmakedefine _VALGRIND_MEMCHECK 1
 #cmakedefine _NO_TCP_REGISTER 1

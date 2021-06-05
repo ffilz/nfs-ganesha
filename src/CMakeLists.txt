@@ -384,6 +384,12 @@ goption(CEPHFS_POSIX_ACL "Enable CephFS POSIX ACL" ON)
 # Enable NFSv4 and POSIX acls mapping
 option(USE_ACL_MAPPING "Build NFSv4 to POSIX ACL mapping" OFF)
 
+# Enable Use Tcmalloc Allocator
+option(USE_TCMALLOC "use tcmalloc allocator" OFF)
+
+# Enable Use Jemalloc Allocator
+option(USE_JEMALLOC "use jemalloc allocator" OFF)
+
 #
 # End build options
 #
@@ -805,6 +811,7 @@ gopt_test(USE_FSAL_MEM)
 if(${ALLOCATOR} STREQUAL "jemalloc")
   find_package(JeMalloc)
   if(JEMALLOC_FOUND)
+    set(USE_JEMALLOC ON)
     set(SYSTEM_LIBRARIES ${JEMALLOC_LIBRARIES} ${SYSTEM_LIBRARIES})
   else(JEMALLOC_FOUND)
     message(WARNING "jemalloc not found, falling back to libc")
@@ -813,6 +820,7 @@ if(${ALLOCATOR} STREQUAL "jemalloc")
 elseif(${ALLOCATOR} STREQUAL "tcmalloc")
   find_package(TcMalloc)
   if(TCMALLOC_FOUND)
+    set(USE_TCMALLOC ON)
     set(SYSTEM_LIBRARIES ${TCMALLOC_LIBRARIES} ${SYSTEM_LIBRARIES})
   else(TCMALLOC_FOUND)
     message(WARNING "tcmalloc not found, falling back to libc")
@@ -1231,6 +1239,8 @@ message(STATUS "_GIT_HEAD_COMMIT = ${_GIT_HEAD_COMMIT}")
 message(STATUS "_GIT_HEAD_COMMIT_ABBREV = ${_GIT_HEAD_COMMIT_ABBREV}")
 message(STATUS "_GIT_DESCRIBE = ${_GIT_DESCRIBE}")
 message(STATUS "ALLOCATOR = ${ALLOCATOR}")
+message(STATUS "USE_TCMALLOC = ${USE_TCMALLOC}")
+message(STATUS "USE_JEMALLOC = ${USE_JEMALLOC}")
 message(STATUS "GOLD_LINKER = ${GOLD_LINKER}")
 message(STATUS "CMAKE_INSTALL_PREFIX = ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "FSAL_DESTINATION = ${FSAL_DESTINATION}")
