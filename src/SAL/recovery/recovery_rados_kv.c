@@ -104,8 +104,8 @@ static int convert_opaque_val(struct display_buffer *dspbuf,
 
 char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *size)
 {
-	char *src = clientid->cid_client_record->cr_client_val;
-	int src_len = clientid->cid_client_record->cr_client_val_len;
+	char *src = NULL;
+	int src_len = 0;
 	const char *str_client_addr = "(unknown)";
 	char cidstr[PATH_MAX] = { 0, }, *val;
 	struct display_buffer dspbuf = {sizeof(cidstr), cidstr, cidstr};
@@ -119,6 +119,11 @@ char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *size)
 		str_client_addr = clientid->gsh_client->hostaddr_str;
 
 	str_client_addr_len = strlen(str_client_addr);
+
+	if (clientid->cid_client_record != NULL) {
+	    src = clientid->cid_client_record->cr_client_val;
+	    src_len = clientid->cid_client_record->cr_client_val_len;
+	}
 
 	ret = convert_opaque_val(&dspbuf, src, src_len, sizeof(cidstr));
 	assert(ret > 0);
