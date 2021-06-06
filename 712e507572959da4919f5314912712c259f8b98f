@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9bf2f39_246ea179",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-06T06:25:12Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (8, 12)\n+\tif (clientid-\u003ecid_client_record !\u003d NULL) {\n+\t    src \u003d clientid-\u003ecid_client_record-\u003ecr_client_val;",
+      "revId": "712e507572959da4919f5314912712c259f8b98f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
