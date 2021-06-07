@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12daca9d_eed75663",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-07T14:40:21Z",
+      "side": 1,
+      "message": "Instead of a return value that just causes a LogFatal, do the LogFatal in trim_memory_init.",
+      "revId": "073d844ae2903a8d4332c2a4d7f5482557142944",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766339d3_12b40081",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-07T14:40:21Z",
+      "side": 1,
+      "message": "Rather than quietly changing, adjust the minimum value in the option.\n\nHmm, we may want a config flag that allows 0 when min value is \u003e 0",
+      "revId": "073d844ae2903a8d4332c2a4d7f5482557142944",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea265c87_cf13aad9",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-07T14:40:21Z",
+      "side": 1,
+      "message": "That max is not reflected in the code, and should document the real min.",
+      "revId": "073d844ae2903a8d4332c2a4d7f5482557142944",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
