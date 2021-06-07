@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30991334_40431f48",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-07T23:53:01Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to false\n+static bool disp_utc_timestamp \u003d false;",
+      "revId": "a420bea2c414f931c6d44274b29e1f90afccbf2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
