@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c711c2ac_1e2098b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-08T18:47:34Z",
+      "side": 1,
+      "message": "OK, looks good other than the checkpatch error.\n\nIt looks like log plays a bit loosey goosey with thread safety... Maybe there should be some atomics in there...",
+      "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ff2b413c_f3e53dfe",
         "filename": "src/log/log_functions.c",
         "patchSetId": 2
@@ -31,6 +48,24 @@
       "writtenOn": "2021-06-08T17:49:29Z",
       "side": 1,
       "message": "ERROR: do not initialise statics to false\n+static bool disp_utc_timestamp \u003d false;",
+      "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77ec8660_68eec002",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-08T18:47:34Z",
+      "side": 1,
+      "message": "Oops. please fix this.",
+      "parentUuid": "ff2b413c_f3e53dfe",
       "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
