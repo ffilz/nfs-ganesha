@@ -86,6 +86,24 @@
       "parentUuid": "77ec8660_68eec002",
       "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0609a3e1_4215f891",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-08T21:11:18Z",
+      "side": 1,
+      "message": "Oh, but we still want it to default to false, you can leave it uninitialized (it will be initialized to 0 \"for free\")",
+      "parentUuid": "16bbca5f_4b77bcf4",
+      "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
