@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18590b51_a91d8647",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-08T17:49:29Z",
+      "side": 1,
+      "message": "WARNING: Duplicate signature\nSigned-off-by: Pradeep \u003cpradeepthomas@gmail.com\u003e",
+      "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2b413c_f3e53dfe",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-08T17:49:29Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to false\n+static bool disp_utc_timestamp \u003d false;",
+      "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
