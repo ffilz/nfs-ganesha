@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f3f34a_37bce2bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011997
+      },
+      "writtenOn": "2021-06-08T00:31:18Z",
+      "side": 1,
+      "message": "Hi Frank,\nFrom code, it looks like TD_LOCAL maps to \"%c\" equivalent of strftime(). strftime() cannot change timezone (I could not find any options in strftime to display time in UTC format). That is why I added a flag outside of Format block. It looks like Format is only to change the display format of \"struct tm\". But what is inside the \"struct tm\" is already decided when we call Localtime_r(). So, I\u0027m not sure if we can use format for displaying in UTC.\n\nMissed adding to ganesha-log-config.rst. Once you confirm where to add the flag, I will fix it.",
+      "parentUuid": "583b96b5_d5a60375",
+      "revId": "a420bea2c414f931c6d44274b29e1f90afccbf2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "30991334_40431f48",
