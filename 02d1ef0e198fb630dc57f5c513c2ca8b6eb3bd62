@@ -104,6 +104,24 @@
       "parentUuid": "16bbca5f_4b77bcf4",
       "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60f9998b_8b2d373c",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1011997
+      },
+      "writtenOn": "2021-06-08T21:57:58Z",
+      "side": 1,
+      "message": "Left it uninitialized as you suggested.\nIt is ok to be set to true also as the initialization would take care of setting it to false.",
+      "parentUuid": "0609a3e1_4215f891",
+      "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
