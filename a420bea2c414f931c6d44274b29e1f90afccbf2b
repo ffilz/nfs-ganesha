@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "58279293_f1af2a43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011997
+      },
+      "writtenOn": "2021-06-08T21:00:17Z",
+      "side": 1,
+      "message": "That is a good question. It is possible if there is a requirement to consolidate logs in different geographic locations to a central server and all logs to be unified with one timezone.\n\nCurrently, we use time() to get epoch and use either localtime or gmtime to convert to timezone specific structure (struct tm). If we were to use a different timezone other than local/utc, then we will have to use gettimeofday(), right?",
+      "parentUuid": "8b7ef2a9_030086c0",
+      "revId": "a420bea2c414f931c6d44274b29e1f90afccbf2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "30991334_40431f48",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
