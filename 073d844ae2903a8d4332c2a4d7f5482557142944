@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ba3032_84ffab49",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-08T14:19:42Z",
+      "side": 1,
+      "message": "Hmm, I guess so, I\u0027m not sure why it evolved this way, but since it has, leave this one as coded.",
+      "parentUuid": "ab6221d5_46fdad22",
+      "revId": "073d844ae2903a8d4332c2a4d7f5482557142944",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "766339d3_12b40081",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "In general, a CONF_ITEM_UI32 configuration option is limited between minval and maxval, and no structure is seen to do so.\nDo you mean to add another config option to do this. Eg.Enable_Trim.....",
       "parentUuid": "766339d3_12b40081",
+      "revId": "073d844ae2903a8d4332c2a4d7f5482557142944",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dbee221_8abc376c",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-08T14:19:42Z",
+      "side": 1,
+      "message": "I was thinking in terms of adding to the config code to allow a flag indicating that despite the range allowed, 0 was also allowed. So the end result would be to add a CONF_ITEM_UI32_ZERO or something like that rather than a separate enable flag (though that would also work). Definitely though we should not silently change the value to some actual minimum (and if we stick with changing the value, log it, but also document the range as 0, min-max or something like that - i.e. document it as if we had the new CONF_ITEM_UI32_ZERO)",
+      "parentUuid": "9dc269eb_4af98149",
       "revId": "073d844ae2903a8d4332c2a4d7f5482557142944",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
