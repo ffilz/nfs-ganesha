@@ -122,6 +122,24 @@
       "parentUuid": "0609a3e1_4215f891",
       "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf61f64_eadceafb",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-08T23:22:12Z",
+      "side": 1,
+      "message": "True, but then no real need to be initialized anyway, well except to have some value before log config is processed.",
+      "parentUuid": "60f9998b_8b2d373c",
+      "revId": "02d1ef0e198fb630dc57f5c513c2ca8b6eb3bd62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
