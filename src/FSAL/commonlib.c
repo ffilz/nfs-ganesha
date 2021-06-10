@@ -62,7 +62,7 @@
 
 #include "common_utils.h"
 #ifdef HAVE_MNTENT_H
-#include <mntent.h>
+#include <os/mntent.h>
 #endif
 #include "gsh_config.h"
 #include "gsh_list.h"

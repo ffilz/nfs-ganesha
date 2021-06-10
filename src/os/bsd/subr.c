@@ -23,7 +23,7 @@
  */
 
 /**
- * @file os/freebsd/subr.c
+ * @file os/bsd/subr.c
  * @author Sachin Bhamare <sbhamare@panasas.com>
  * @brief Platform dependant subroutines for FreeBSD
  */

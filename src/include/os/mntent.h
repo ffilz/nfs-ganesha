@@ -30,8 +30,8 @@
 
 #ifdef LINUX
 #include <mntent.h>
-#elif FREEBSD
-#include <os/freebsd/mntent.h>
+#elif BSDBASED
+#include <os/bsd/mntent.h>
 #endif
 
 #endif				/* MNTENT_H */
