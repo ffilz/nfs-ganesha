@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "999b77ef_74e43e3c",
+        "filename": "src/include/os/bsd/mntent.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-10T23:24:34Z",
+      "side": 1,
+      "message": "WARNING: \u0027compatability\u0027 may be misspelled - perhaps \u0027compatibility\u0027?\n+ *  mntent.h - compatability header for FreeBSD",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4f82ebd_df5d4d92",
+        "filename": "src/include/os/bsd/mntent.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-10T23:24:34Z",
+      "side": 1,
+      "message": "WARNING: Unnecessary typecast of c90 int constant\n+#define endmntent(x) ((void)(int)1)",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5223098_bf70f105",
+        "filename": "src/os/bsd/mntent_compat.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-10T23:24:34Z",
+      "side": 1,
+      "message": "WARNING: \u0027acknowledgement\u0027 may be misspelled - perhaps \u0027acknowledgment\u0027?\n+ *    must display the following acknowledgement:",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f01f95_e4754823",
+        "filename": "src/os/bsd/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-10T23:24:34Z",
+      "side": 1,
+      "message": "WARNING: \u0027dependant\u0027 may be misspelled - perhaps \u0027dependent\u0027?\n+ * @brief Platform dependant subroutines for FreeBSD",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa54f04c_81cc755e",
+        "filename": "src/os/bsd/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-10T23:24:34Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027setthreaduid\u0027, this function\u0027s name, in a string\n+\tmod \u003d modfind(\"sys/setthreaduid\");",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3894b55d_83c308db",
+        "filename": "src/os/bsd/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-10T23:24:34Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027setthreadgid\u0027, this function\u0027s name, in a string\n+\tmod \u003d modfind(\"sys/setthreadgid\");",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94021295_f289cdb5",
+        "filename": "src/os/bsd/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-06-10T23:24:34Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027setthreadgroups\u0027, this function\u0027s name, in a string\n+\tmod \u003d modfind(\"sys/setthreadgroups\");",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
