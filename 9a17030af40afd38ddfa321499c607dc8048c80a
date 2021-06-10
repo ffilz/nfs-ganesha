@@ -16,6 +16,24 @@
       "message": "Hi Frank, The default date/time format (TD_GANESHA) is \"%d/%m/%Y %H:%M:%S\". Do you see a reason to append timezone to it - \"%d/%m/%Y %H:%M:%S %Z\"?",
       "revId": "9a17030af40afd38ddfa321499c607dc8048c80a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "787af6e7_72ae26fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-10T14:22:35Z",
+      "side": 1,
+      "message": "Let\u0027s add a boolean format flag for timezone, that way we don\u0027t change existing logs (it defaults to false) but those who need to clarify their logs can easily do so.",
+      "parentUuid": "8d0495f1_0bd934f5",
+      "revId": "9a17030af40afd38ddfa321499c607dc8048c80a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
