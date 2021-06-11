@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8880b408_ed77c8ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018277
+      },
+      "writtenOn": "2021-06-11T02:11:41Z",
+      "side": 1,
+      "message": "Don\u0027t review this yet - I\u0027m realizing that I don\u0027t need the functionality of subr.c--probably not at all--since that functionality ultimately supports the VFS FSAL, which I\u0027m not using.\n\nI think I\u0027d rather make the build more modular to allow not compiling this unneeded code at all, when USE_FSAL_VFS is off.",
+      "revId": "e5cf36b4788ac71d1803ecdf668b819b6df9461f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "999b77ef_74e43e3c",
         "filename": "src/include/os/bsd/mntent.h",
         "patchSetId": 1
