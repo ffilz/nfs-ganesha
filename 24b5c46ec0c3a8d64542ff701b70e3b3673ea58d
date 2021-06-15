@@ -34,6 +34,24 @@
       "parentUuid": "d371975e_67ee6927",
       "revId": "24b5c46ec0c3a8d64542ff701b70e3b3673ea58d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7339838_1672f69b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018277
+      },
+      "writtenOn": "2021-06-15T17:18:20Z",
+      "side": 1,
+      "message": "The version check which guarded include(CheckSymbolExists) does not pass on the CI, since it is v2.8\n\nI would guess that CheckSymbolExists used to be pulled in transitively. Now it is no longer happening in time, since I\u0027ve moved it earlier in the CMakeLists.txt file. 2.8 apparently requires the `include` as well, is in the CheckSymbolExists module even in 2.8 [0], and 2.8 is over a decade old [1], so I just removed the version check.\n\n[0] https://cmake.org/cmake/help/v2.8.12/cmake.html#module:CheckSymbolExists\n[1] https://github.com/Kitware/CMake/tags?after\u003dv2.8.10",
+      "parentUuid": "ec9194b8_77f77a5f",
+      "revId": "24b5c46ec0c3a8d64542ff701b70e3b3673ea58d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
