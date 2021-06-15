@@ -16,6 +16,24 @@
       "message": "\u003e Patch Set 1: Verified-1\n\u003e \n\u003e https://ci.centos.org/job/nfs-ganesha_trigger-fsal_gluster/8198//console : FAILED\n\nNot sure what\u0027s up with the other CIs, but this one is failing due to this change:\n\nCMake Error at CMakeLists.txt:445 (check_symbol_exists):",
       "revId": "24b5c46ec0c3a8d64542ff701b70e3b3673ea58d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9194b8_77f77a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-06-15T12:11:30Z",
+      "side": 1,
+      "message": "Not sure how it worked before and is failing now, though.",
+      "parentUuid": "d371975e_67ee6927",
+      "revId": "24b5c46ec0c3a8d64542ff701b70e3b3673ea58d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
