@@ -1007,7 +1007,6 @@ set( PKG_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}.tar.gz")
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 # Find misc system libs
-find_library(LIBRT rt)  # extended Pthreads functions
 
 goption(USE_CAPS "Enable capability management" ON)
 gopt_test(USE_CAPS)
@@ -1134,7 +1133,6 @@ set(SYSTEM_LIBRARIES
   ${LIBDL}
   ${KRB5_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
-  ${LIBRT}
   ${LIBURCU}
 )
 
