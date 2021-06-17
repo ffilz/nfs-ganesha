@@ -60,6 +60,7 @@
 #cmakedefine USE_GLUSTER_UPCALL_REGISTER 1
 #cmakedefine USE_GLUSTER_DELEGATION 1
 #cmakedefine GSH_CAN_SET_PROC_CREDS 1
+#cmakedefine GSH_CAN_HOST_LOCAL_FS 1
 #cmakedefine USE_FSAL_CEPH_MKNOD 1
 #cmakedefine USE_FSAL_CEPH_SETLK 1
 #cmakedefine USE_FSAL_CEPH_LL_LOOKUP_ROOT 1
