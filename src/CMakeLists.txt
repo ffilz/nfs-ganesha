@@ -254,6 +254,9 @@ else()
   message(WARNING "Unhandled architecture ${ARCH}")
 endif ()
 
+# Internal capabilities required by some FSALs
+option(GSH_CAN_SET_PROC_CREDS "Ganesha supports setting proc credentials" ON)
+
 # FSAL selection
 # FSALs which are enabled by default but could be disabled
 # during the build
