@@ -748,7 +748,8 @@ void complete_request(nfs_request_t *reqdata, int rc)
 	/* NFSv4 stats are handled in nfs4_compound() */
 	if (reqdata->svc.rq_msg.cb_prog != NFS_program[P_NFS]
 	    || reqdata->svc.rq_msg.cb_vers != NFS_V4)
-		server_stats_nfs_done(reqdata, rc, false);
+		server_stats_nfs_done(reqdata,
+		(reqdata->res_nfs->res_getattr3.status | rc), false);
 
 	/* If request is dropped, no return to the client */
 	if (rc == NFS_REQ_DROP) {
