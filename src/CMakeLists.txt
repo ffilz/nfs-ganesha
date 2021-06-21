@@ -629,8 +629,7 @@ if (USE_FSAL_PROXY_V4)
   endif(PROXYV4_HANDLE_MAPPING)
 endif (USE_FSAL_PROXY_V4)
 
-# VFS has no required dependencies but has an optional dependency for
-# libbtrfsutil
+# VFS has an optional dependency for libbtrfsutil
 gopt_test(USE_FSAL_VFS)
 if(USE_FSAL_VFS)
   find_library(BTRFSUTIL_LIB btrfsutil)
@@ -714,7 +713,24 @@ gopt_test(USE_NFSACL3)
   endif(USE_NFSACL3)
 
 gopt_test(USE_FSAL_GPFS)
-# GPFS has no dependencies
+
+# VFS and GPFS require ability to 1. set user and group of proc and 2. use
+# syscalls which enable hosting the local filesystem.
+if(NOT GSH_CAN_SET_PROC_CREDS OR NOT GSH_CAN_HOST_LOCAL_FS)
+  if(USE_FSAL_VFS AND USE_FSAL_VFS_REQUIRED)
+    message(FATAL_ERROR "USE_FSAL_VFS requested but proc credential setting is not enabled")
+  elseif(USE_FSAL_VFS)
+    message(WARNING "Cannot set proc creds. Disabling USE_FSAL_VFS.")
+    set(USE_FSAL_VFS OFF)
+  endif(USE_FSAL_VFS AND USE_FSAL_VFS_REQUIRED)
+
+  if(USE_FSAL_GPFS AND USE_FSAL_GPFS_REQUIRED)
+    message(FATAL_ERROR "USE_FSAL_GPFS requested but proc credential setting is not enabled")
+  elseif(USE_FSAL_GPFS)
+    message(WARNING "Cannot set proc creds. Disabling USE_FSAL_GPFS.")
+    set(USE_FSAL_GPFS OFF)
+  endif(USE_FSAL_GPFS AND USE_FSAL_GPFS_REQUIRED)
+endif(NOT GSH_CAN_SET_PROC_CREDS OR NOT GSH_CAN_HOST_LOCAL_FS)
 
 gopt_test(USE_FSAL_XFS)
 if(USE_FSAL_XFS)
