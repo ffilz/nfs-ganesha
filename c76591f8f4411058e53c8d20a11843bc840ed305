@@ -33,6 +33,24 @@
       "message": "I think we either need to assure disabling the FSALs that use this if this is disabled, or fail cmake, or optionally work the FSALs that use this to ignore creds when this is disabled (in theory they should be able to operate as non-root with either rejecting any user other than the user they run as or doing all_squash). Well, they might need some caps to do open_by_handle and name_to_handle_at.",
       "revId": "c76591f8f4411058e53c8d20a11843bc840ed305",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4905af52_213159ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018277
+      },
+      "writtenOn": "2021-06-21T23:08:49Z",
+      "side": 1,
+      "message": "I did the former - failing cmake only if the GPFS and VFS components were explicitly requested. See https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/519308/2\n\nTwo questions - 1. how do you feel about these flag names (GSH_CAN_...)? They are kind of non-standard. But I couldn\u0027t find any other flags that they were similar to.\n\n2. Do you want to just merge these two flags into a single one? I at first thought GPFS doesn\u0027t need proc-cred-setting, but it turns out it does. So both flags are treated exactly the same.",
+      "parentUuid": "940918ed_a7e082ec",
+      "revId": "c76591f8f4411058e53c8d20a11843bc840ed305",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
