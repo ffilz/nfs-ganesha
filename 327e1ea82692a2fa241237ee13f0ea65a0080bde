@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1f7027_c74f68fb",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1018277
+      },
+      "writtenOn": "2021-06-21T23:22:41Z",
+      "side": 1,
+      "message": "This is not really robust since USE_FSAL_GPFS and USE_FSAL_PANFS also require USE_FSAL_VFS, which means they transitively require GSH_CAN_... features.\n\nI guess I could also add an equivalent check which verifies that USE_FSAL_GPFS/PANFS, if explicitly required, will implicitly require USE_FSAL_VFS, and also error out if _VFS is explicitly disabled. Though this doesn\u0027t feel like it will scale very well, and the mechanism I\u0027ve added here already seems over-engineered.",
+      "range": {
+        "startLine": 720,
+        "startChar": 0,
+        "endLine": 720,
+        "endChar": 44
+      },
+      "revId": "327e1ea82692a2fa241237ee13f0ea65a0080bde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
