@@ -23,7 +23,7 @@
  * -------------
  */
 
-/* export_panfs.c
+/* export_xfs.c
  * XFS Sub-FSAL export object
  */
 
