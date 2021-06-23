@@ -39,6 +39,30 @@
       },
       "revId": "327e1ea82692a2fa241237ee13f0ea65a0080bde",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf08611_db0df537",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-06-23T13:41:51Z",
+      "side": 1,
+      "message": "We\u0027ve been planning on removing PANFS for a while, so we can do that now, and reduce this to VFS/GPFS/LUSTRE.  I suspect something like this is necessary.  I had to write the gopt_test stuff because CMake couldn\u0027t natively tell between default-on and explicitly on.  This is more of that kind of thing, I think.",
+      "parentUuid": "bf1f7027_c74f68fb",
+      "range": {
+        "startLine": 720,
+        "startChar": 0,
+        "endLine": 720,
+        "endChar": 44
+      },
+      "revId": "327e1ea82692a2fa241237ee13f0ea65a0080bde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
