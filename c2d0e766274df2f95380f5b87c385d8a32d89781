@@ -16,6 +16,24 @@
       "message": "WARNING: Possible switch case/default not preceded by break or fallthrough comment\n+\tcase FSID_TWO_UINT32:",
       "revId": "c2d0e766274df2f95380f5b87c385d8a32d89781",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb31e172_c0f27995",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-24T03:11:00Z",
+      "side": 1,
+      "message": "Could you add a comment indicating fall through",
+      "parentUuid": "a36ed307_e635c59b",
+      "revId": "c2d0e766274df2f95380f5b87c385d8a32d89781",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
