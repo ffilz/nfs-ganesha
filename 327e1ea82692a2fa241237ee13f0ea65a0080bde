@@ -111,6 +111,30 @@
       },
       "revId": "327e1ea82692a2fa241237ee13f0ea65a0080bde",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "755c2775_7f2c14c4",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-06-24T03:07:34Z",
+      "side": 1,
+      "message": "Let\u0027s leave FSAL_XFS for now, but we should mark it deprecated and remove it next release. I know some folks do actually use it though they might as well use FSAL_VFS now.",
+      "parentUuid": "448476f5_ceeaca4e",
+      "range": {
+        "startLine": 720,
+        "startChar": 0,
+        "endLine": 720,
+        "endChar": 44
+      },
+      "revId": "327e1ea82692a2fa241237ee13f0ea65a0080bde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
