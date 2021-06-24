@@ -87,6 +87,30 @@
       },
       "revId": "327e1ea82692a2fa241237ee13f0ea65a0080bde",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "448476f5_ceeaca4e",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1018277
+      },
+      "writtenOn": "2021-06-24T00:07:24Z",
+      "side": 1,
+      "message": "Done re:LUSTRE check. I cleaned up the CMake code a bit.\n\nI pushed a change to remove PANFS: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/519465\n\nThis is based on a `grep -ir panfs` in the source tree.\n\nIf that looks reasonable and we are all OK with it, I can send one for XFS too.\n\nI looked up PanFS and it appears to still be used in some quarters. Can you tell me more about why it\u0027s being dropped here (just curious) ?",
+      "parentUuid": "4d6b2447_0deba526",
+      "range": {
+        "startLine": 720,
+        "startChar": 0,
+        "endLine": 720,
+        "endChar": 44
+      },
+      "revId": "327e1ea82692a2fa241237ee13f0ea65a0080bde",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
