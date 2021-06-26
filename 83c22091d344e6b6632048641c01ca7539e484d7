@@ -16,6 +16,24 @@
       "message": "Still have this question: Does this actually allow override of the automatic pick of allocator?",
       "revId": "83c22091d344e6b6632048641c01ca7539e484d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbe8ac67_62707e57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2021-06-26T06:32:46Z",
+      "side": 1,
+      "message": "My idea is that we don\u0027t need to actively configure whether USE_JEMALLOC and USE_TCMALLOC are on or off.  \nAll we need to do is just select an allocator, then the macro(USE_TCMALLOC or USE_JEMALLOC) will be turn on automatically.  \nBecause we just added a few new DBUS interfaces that we need to operate actively, and the MemoryTrim thread can also be closed by configuration option. It doesn\u0027t seem to have much effect on anything else.",
+      "parentUuid": "7bbf53d0_b81c4bbf",
+      "revId": "83c22091d344e6b6632048641c01ca7539e484d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
