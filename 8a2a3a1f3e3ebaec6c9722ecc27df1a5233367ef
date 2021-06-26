@@ -84,6 +84,24 @@
       "message": "Add a note that 0 disables, hmm, and should the default be 0 or do you feel that everyone will want this feature?",
       "revId": "8a2a3a1f3e3ebaec6c9722ecc27df1a5233367ef",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef1d517_2e1062ac",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1017944
+      },
+      "writtenOn": "2021-06-26T07:01:23Z",
+      "side": 1,
+      "message": "Yeah.You are right. 90 is my current usage value. After testing, the overall performance does decline a little. The default setting of 0 is probably more appropriate and more appropriate for most people.\nCurrently,I\u0027m testing a value that will allow timed trim with minimal performance impact , so we\u0027ll adjust it to turn on by default until then",
+      "parentUuid": "7842ad64_756d9d48",
+      "revId": "8a2a3a1f3e3ebaec6c9722ecc27df1a5233367ef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
