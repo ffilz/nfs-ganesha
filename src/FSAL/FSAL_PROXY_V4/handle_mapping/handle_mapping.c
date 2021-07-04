@@ -344,7 +344,7 @@ int HandleMap_GetFH(const nfs23_map_handle_t *nfs23_digest,
 	if (rc == HASHTABLE_SUCCESS) {
 		handle_pool_entry_t *h = (handle_pool_entry_t *) buffval.addr;
 
-		if (h->fh_len < fsal_handle->len) {
+		if (h->fh_len < PROXYV4_HANDLE_MAXLEN) {
 			fsal_handle->len = h->fh_len;
 			memcpy(fsal_handle->addr, h->fh_data, h->fh_len);
 			rc = HANDLEMAP_SUCCESS;

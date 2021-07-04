@@ -70,6 +70,9 @@ typedef struct nfs23_map_handle__ {
 
 } nfs23_map_handle_t;
 
+/* The maximum length of a file handle. */
+#define PROXYV4_HANDLE_MAXLEN (NFS4_FHSIZE + 2)
+
 /* Error codes */
 #define HANDLEMAP_SUCCESS        0
 #define HANDLEMAP_STALE          1
