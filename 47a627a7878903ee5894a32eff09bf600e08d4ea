@@ -16,6 +16,24 @@
       "message": "Could you also use this macro where the original buffer is allocated as that size?",
       "revId": "47a627a7878903ee5894a32eff09bf600e08d4ea",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc22d248_fea6fbc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019273
+      },
+      "writtenOn": "2021-07-06T19:59:46Z",
+      "side": 1,
+      "message": "I\u0027m not even entirely sure what the logic is behind NFS4_FHSIZE + 2, and I don\u0027t really see that value used anywhere else.\n\nI do see fh_data being allocated as NFS4_FHSIZE in handle_mapping.c. So, I guess the question would be: should we allocate fh_data with this new macro (PROXYV4_HANDLE_MAXLEN) as it is (NFS4_FHSIZE + 2), or should we just use NFS4_FHSIZE across the board and change the check to \u003c\u003d instead of \u003c?",
+      "parentUuid": "a5dea676_552f7a72",
+      "revId": "47a627a7878903ee5894a32eff09bf600e08d4ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
