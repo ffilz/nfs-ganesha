@@ -156,6 +156,7 @@
   nfs_export_get_root_entry;
   nfs_grace_is_member;
   nfs_init_init;
+  nfs_Init_svc;
   nfs_init_wait;
   nfs_init_wait_timeout;
   nfs_libmain;
@@ -169,6 +170,7 @@
   nfs_start;
   nfs_start_grace;
   nfs_wait_for_grace_enforcement;
+  nfsstat3_to_str;
   noop_conf_commit;
   noop_conf_init;
   object_file_type_to_str;
@@ -236,6 +238,13 @@
   vfs_utimes;
   vfs_utimesat;
   xattr_2_posix_acl;
+  xdr_CREATE3args;
+  xdr_CREATE3res;
+  xdr_MKDIR3args;
+  xdr_MKDIR3res;
+  xdr_dirpath;
+  xdr_fhandle3;
+  xdr_mountres3;
   xdr_notify;
   xdr_READ4res_uio_setup;
   _get_gsh_export_ref;
