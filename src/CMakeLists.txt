@@ -1595,6 +1595,21 @@ install(TARGETS ganesha.nfsd COMPONENT daemon DESTINATION bin)
 
 ########### next target ###############
 
+add_executable(testv3 ./MainNFSD/testv3.c)
+add_sanitizers(testv3)
+
+target_link_libraries(testv3
+  ganesha_nfsd
+  ${LIBTIRPC_LIBRARIES}
+  ${SYSTEM_LIBRARIES}
+  ${LTTNG_LIBRARIES}
+  ${LDFLAG_DISALLOW_UNDEF}
+)
+set_target_properties(testv3 PROPERTIES COMPILE_FLAGS "-fPIC")
+install(TARGETS testv3 COMPONENT daemon DESTINATION bin)
+
+########### next target ###############
+
 if (USE_RADOS_RECOV)
   add_executable(ganesha-rados-grace
     ./tools/ganesha-rados-grace.c ./support/rados_grace.c)
