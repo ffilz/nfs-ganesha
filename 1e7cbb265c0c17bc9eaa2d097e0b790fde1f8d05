@@ -33,6 +33,24 @@
       "message": "This looks like a prime candidate for using a testing framework like gtest, rather than rolling our own.",
       "revId": "1e7cbb265c0c17bc9eaa2d097e0b790fde1f8d05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f997f9_6728670f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-07-16T14:55:02Z",
+      "side": 1,
+      "message": "Well, really we should get NFSv3 testing ability into pynfs.\n\nIn the meantime, making this work in the gtest framework might be helpful if we start to develop more than a test or two.\n\nNote that these are not code unit tests, they actually fire off tests at a running server (doesn\u0027t even need to be a Ganesha server).\n\nIf I add more, I will take into consideration using gtest, in the meantime, this is a proof of concept of the bits of Ganesha that need to be set up in order to use ntirpc and Ganesha\u0027s xdr code to fire off specific sequences of RPC calls. I think to use gtest, all of this just needs to be made to work under the gtest framework.",
+      "parentUuid": "a262c075_fbdc2f5d",
+      "revId": "1e7cbb265c0c17bc9eaa2d097e0b790fde1f8d05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
