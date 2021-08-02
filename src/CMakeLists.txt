@@ -186,6 +186,8 @@ ENDIF( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
 
 STRING(SUBSTRING ${_GIT_HEAD_COMMIT} 0  7 _GIT_HEAD_COMMIT_ABBREV )
 
+set(CMAKE_C_FLAGS "{CMAKE_C_FLAGS} -Werror=uninitialized")
+
 if (BSDBASED)
 #default gcc doesn't like using -Wuninitialized without -O on FreeBSD
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -ggdb")
