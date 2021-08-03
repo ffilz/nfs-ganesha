@@ -16,6 +16,24 @@
       "message": "Did you build this with all various optional things turned on? (At the very least, folks with out of tree stuff may want to chime in)",
       "revId": "9fed2a11c7c45a4fba10c446d6d2e3ab54c02c17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4643c3fa_a499fe8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018277
+      },
+      "writtenOn": "2021-08-03T16:32:49Z",
+      "side": 1,
+      "message": "I mistakenly was building with much fewer optional components than I believed.\n\nI tried this flag with more components enabled and I no longer think it\u0027s obviously the right thing to do.\n\nSometimes, a casual reading can prove that a variable is initialized - but the compiler is not able to analyze the flow well enough to see that it will be, e.g.:\n\n```\nret \u003d function();\nif (ret) val \u003d 42;\n\n...\n\nif (ret) val +\u003d 99;\n```\n\nI\u0027ve scaled back this change to only fix the obvious error. If this happens again we can reconsider the flag.",
+      "parentUuid": "050eeaf9_9396f866",
+      "revId": "9fed2a11c7c45a4fba10c446d6d2e3ab54c02c17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
