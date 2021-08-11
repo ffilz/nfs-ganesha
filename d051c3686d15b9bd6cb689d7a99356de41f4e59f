@@ -16,6 +16,24 @@
       "message": "this check will not work for the case where op_ctx-\u003eclient is originally NULL \u0026 so saved_client. Then op_ctx-\u003eclient will not be reset to NULL right?",
       "revId": "d051c3686d15b9bd6cb689d7a99356de41f4e59f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0841393e_a8ecb520",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-08-11T14:11:00Z",
+      "side": 1,
+      "message": "Good point.  Maybe unconditionally save/restore the client?",
+      "parentUuid": "79e927c6_b10c77af",
+      "revId": "d051c3686d15b9bd6cb689d7a99356de41f4e59f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
