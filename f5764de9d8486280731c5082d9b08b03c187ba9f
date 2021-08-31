@@ -16,6 +16,24 @@
       "message": "Just a nit on your commit message: PROXY_V3 just proxies whatever the backend says (https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/FSAL/FSAL_PROXY_V3/main.c#L2274).\n\nSeems like you could try it out, if you wanted to test this.",
       "revId": "f5764de9d8486280731c5082d9b08b03c187ba9f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86619a50_9512540f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-08-31T20:51:30Z",
+      "side": 1,
+      "message": "Oops...\n\nSo for PROXY_V3 of Linux knfsd... It will be 1s... knfsd v3 hard codes it to 1s also...\n\nknfsd v4 sets it to the higher of NSEC_PER_SEC/HZ or the time granularity from the super block, so PROXY_V4 COULD get a more usable number.\n\nNote that the nfs client just always sets the granularity in the super block to 1ns and it ignores the value...\n\nLooking through the kernel code, s_time_gran is 1 for many file systems so NSEC_PER_SEC/HZ is going to be the limit most of the time.\n\nIt looks like HZ is likely to be 1024, but I\u0027m not sure if there\u0027s a way to get it from the kernel... That would result in approximately usec time granularity.",
+      "parentUuid": "f529f043_26fd867b",
+      "revId": "f5764de9d8486280731c5082d9b08b03c187ba9f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
