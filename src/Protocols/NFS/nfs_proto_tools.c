@@ -2080,16 +2080,15 @@ static fattr_xdr_result decode_createtime(XDR *xdr,
  */
 
 /* According to RFC3530, this is "the smallest usefull server time granularity".
- * I set this to 1s.  note: dynamicfsinfo has this value.  use it???
  */
 
 static fattr_xdr_result encode_deltatime(XDR *xdr, struct xdr_attrs_args *args)
 {
-	struct timespec ts;
+	if (!args->statfscalled)
+		if (!encode_fetch_fsinfo(args))
+			return FATTR_XDR_FAILED;
 
-	ts.tv_sec = 1LL;
-	ts.tv_nsec = 0;
-	return encode_time(xdr, &ts);
+	return encode_time(xdr, &args->dynamicinfo->time_delta);
 }
 
 static fattr_xdr_result decode_deltatime(XDR *xdr, struct xdr_attrs_args *args)
