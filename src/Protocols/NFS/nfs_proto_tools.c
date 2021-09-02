@@ -1147,7 +1147,7 @@ static fattr_xdr_result encode_fetch_fsinfo(struct xdr_attrs_args *args)
 		args->dynamicinfo->maxread = 65536;
 		args->dynamicinfo->maxwrite = 65536;
 		args->dynamicinfo->time_delta.tv_sec = 0;
-		args->dynamicinfo->time_delta.tv_nsec
+		args->dynamicinfo->time_delta.tv_nsec =
 						 FSAL_DEFAULT_TIME_DELTA_NSEC;
 	}
 	if (FSAL_IS_ERROR(fsal_status))
