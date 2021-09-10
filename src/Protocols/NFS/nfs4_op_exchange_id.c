@@ -84,7 +84,8 @@ int get_raddr(SVCXPRT *xprt)
 				    sizeof(uint64_t) + 3 * BYTES_PER_XDR_UNIT)
 
 char cid_server_owner[MAXNAMLEN+1]; /* max hostname length */
-char *cid_server_scope_suffix = "_NFS-Ganesha";
+char *cid_server_scope;
+int owner_len, scope_len;
 
 /**
  * @brief The NFS4_OP_EXCHANGE_ID operation
@@ -107,7 +108,6 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 	nfs_client_id_t *conf;
 	nfs_client_id_t *unconf;
 	int rc;
-	int owner_len, scope_len;
 	char *temp;
 	bool update;
 	uint32_t pnfs_flags;
@@ -149,14 +149,26 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 			res_EXCHANGE_ID4->eir_status = NFS4ERR_SERVERFAULT;
 			return NFS_REQ_ERROR;
 		}
+
+		owner_len = strlen(cid_server_owner);
+
+		/* use server_owner as server_scope if server_scope not
+		 * mentioned in main config file
+		 */
+		if (nfs_param.nfsv4_param.server_scope == NULL ||
+				nfs_param.nfsv4_param.server_scope == '\0') {
+			cid_server_scope = cid_server_owner;
+			scope_len = owner_len;
+		} else {
+			cid_server_scope = nfs_param.nfsv4_param.server_scope;
+			scope_len = strlen(cid_server_scope);
+		}
 	}
 
 	/* Now check that the response will fit. Use 0 for
 	 * eir_server_impl_id_len
 	 */
-	owner_len = strlen(cid_server_owner);
-	scope_len = strlen(cid_server_scope_suffix);
-	resp_size += RNDUP(owner_len) + RNDUP(owner_len + scope_len) + 0;
+	resp_size += RNDUP(owner_len) + RNDUP(scope_len) + 0;
 
 	res_EXCHANGE_ID4->eir_status = check_resp_room(data, resp_size);
 
@@ -408,12 +420,11 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 
 	res_EXCHANGE_ID4_ok->eir_server_owner.so_minor_id = 0;
 
-	temp = gsh_malloc(owner_len + scope_len + 1);
-	memcpy(temp, cid_server_owner, owner_len);
-	memcpy(temp + owner_len, cid_server_scope_suffix, scope_len + 1);
+	/* copy server scope to eir_server_scope */
+	temp = gsh_malloc(scope_len + 1);
+	memcpy(temp, cid_server_scope, scope_len + 1);
 
-	res_EXCHANGE_ID4_ok->eir_server_scope.eir_server_scope_len =
-	    owner_len + scope_len + 1;
+	res_EXCHANGE_ID4_ok->eir_server_scope.eir_server_scope_len = scope_len;
 	res_EXCHANGE_ID4_ok->eir_server_scope.eir_server_scope_val = temp;
 
 	res_EXCHANGE_ID4_ok->eir_server_impl_id.eir_server_impl_id_len = 0;
