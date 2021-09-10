@@ -83,7 +83,10 @@ int get_raddr(SVCXPRT *xprt)
 				    + STATE_PROTECT4_R_BASE_SIZE + \
 				    sizeof(uint64_t) + 3 * BYTES_PER_XDR_UNIT)
 
+#define NFSv4_SERVER_SCOPE nfs_param.nfsv4_param.server_scope
+
 char cid_server_owner[MAXNAMLEN+1]; /* max hostname length */
+char cid_server_scope[MAXNAMLEN+1]; /* max hostname length */
 char *cid_server_scope_suffix = "_NFS-Ganesha";
 
 /**
@@ -148,6 +151,14 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 				== -1) {
 			res_EXCHANGE_ID4->eir_status = NFS4ERR_SERVERFAULT;
 			return NFS_REQ_ERROR;
+		}
+
+		/* use hostname if server_scope is default(localhost)
+		*/
+		if (strcmp(NFSv4_SERVER_SCOPE, SERVERSCOPE_DEFAULT) == 0) {
+			strcpy(cid_server_scope, cid_server_owner);
+		} else {
+			strcpy(cid_server_scope, NFSv4_SERVER_SCOPE);
 		}
 	}
 
@@ -408,8 +419,9 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 
 	res_EXCHANGE_ID4_ok->eir_server_owner.so_minor_id = 0;
 
+	owner_len = strlen(cid_server_scope);
 	temp = gsh_malloc(owner_len + scope_len + 1);
-	memcpy(temp, cid_server_owner, owner_len);
+	memcpy(temp, cid_server_scope, owner_len);
 	memcpy(temp + owner_len, cid_server_scope_suffix, scope_len + 1);
 
 	res_EXCHANGE_ID4_ok->eir_server_scope.eir_server_scope_len =
