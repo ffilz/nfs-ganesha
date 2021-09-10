@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "522f065a_04fea999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-10T19:58:34Z",
+      "side": 1,
+      "message": "Several comments plus you need to document the new parameter in src/config_samples/config.txt and doc/man/ganesha-core-config.rst",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f8ab08_da81883e",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-10T19:58:34Z",
+      "side": 1,
+      "message": "This could also be a simple pointer with pointer copy below.",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c4a349_683c3386",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-10T19:58:34Z",
+      "side": 1,
+      "message": "Could we not hide the parameter behind a #define? This code reads as comparing two constants...\n\nOn the other hand, but doing this strcpy, we can append the suffix also so filling in EXCHANGEID responses is simplified.",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "707fcc69_19237ce2",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-10T19:58:34Z",
+      "side": 1,
+      "message": "This computation needs to be changed to reflect the different scope name length.\n\nAlso, let\u0027s make these lengths global so we compute them once when we fill in cid_server_owner and cid_server_scope.\n\nAlso if the scope name is configured, I don\u0027t think we need the suffix.",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7eca6da_49eb5cda",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-10T19:58:34Z",
+      "side": 1,
+      "message": "Let\u0027s use a different string since localhost IS a hostname...\n\nOr use a different indication as to whether the parameter has been set.",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
