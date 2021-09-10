@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "81bc165c_70c9a42b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "WARNING: \u0027enviroment\u0027 may be misspelled - perhaps \u0027environment\u0027?\nSubject: [PATCH] As per the RFC#5661, in the cluster enviroment, the server",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e037a56e_238ac15e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -14,6 +31,193 @@
       "writtenOn": "2021-09-10T09:56:50Z",
       "side": 1,
       "message": "Pls review. ",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5eadd6c_4e51a071",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* use hostname as server_scope if scope set to localhost(default)",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90b14d7_6fa7e99c",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "ERROR: space required before the open brace \u0027{\u0027\n+\t\tif (strcmp(nfs_param.nfsv4_param.server_scope, SERVERSCOPE_DEFAULT) \u003d\u003d 0){",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33032e42_f6efaaa8",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tif (strcmp(nfs_param.nfsv4_param.server_scope, SERVERSCOPE_DEFAULT) \u003d\u003d 0){",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c4653f7_09e08026",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxV)\n+\t\t\tstrcpy(cid_server_scope,cid_server_owner);\n \t\t\t                       ^",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e1e1e9_2e9a0cce",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\t\telse\n+\t\t{",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e62a3c70_fc9b4838",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "ERROR: else should follow close brace \u0027}\u0027\n+\t\t}\n+\t\telse",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb629325_fd778e25",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxV)\n+\t\t\tstrcpy(cid_server_scope,nfs_param.nfsv4_param.server_scope);\n \t\t\t                       ^",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d7d415_5021c6ae",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstrcpy(cid_server_scope,nfs_param.nfsv4_param.server_scope);",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6c937e_3a0b1599",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+    ^I    Defaults to SERVERSCOPE_DEFAULT and is settable with server_scope. */$",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b40404_185d8c1a",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+    \t    Defaults to SERVERSCOPE_DEFAULT and is settable with server_scope. */",
+      "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13814af9_7ff7da10",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-10T10:00:04Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+    ^I    Defaults to SERVERSCOPE_DEFAULT and is settable with server_scope. */$",
       "revId": "2ed1e29afed02a930ac78535c6db2958c9a927b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
