@@ -460,6 +460,11 @@ typedef struct nfs_core_param {
 #define DOMAINNAME_DEFAULT "localdomain"
 
 /**
+ * @brief Default value of server_scope.
+ */
+#define SERVERSCOPE_DEFAULT "localhost"
+
+/**
  * @brief Default value of idmapconf.
  */
 #define IDMAPCONF_DEFAULT "/etc/idmapd.conf"
@@ -503,6 +508,9 @@ typedef struct nfs_version4_parameter {
 	/** The NFS grace period.  Defaults to
 	    GRACE_PERIOD_DEFAULT and is settable with Grace_Period. */
 	uint32_t grace_period;
+	/** The eir_server_scope for lock recovery.
+    	    Defaults to SERVERSCOPE_DEFAULT and is settable with server_scope. */
+	char *server_scope;
 	/** Domain to use if we aren't using the nfsidmap.  Defaults
 	    to DOMAINNAME_DEFAULT and is set with DomainName. */
 	char *domainname;
