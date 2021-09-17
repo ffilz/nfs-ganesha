@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68db3486_2f56f130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-09-17T12:58:06Z",
+      "side": 1,
+      "message": "A minor naming nit, but the code looks correct.",
+      "revId": "4f7ffe16758613ac776b09efc5b77f450ea528fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acde36a_16422a67",
+        "filename": "src/include/abstract_atomic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2286,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-09-17T12:58:06Z",
+      "side": 1,
+      "message": "Kinda sucks that you have all of this copypasta just to handle different types. It may be worthwhile to roll a generic version with macros, and then just add a bunch of wrappers for different types.",
+      "revId": "4f7ffe16758613ac776b09efc5b77f450ea528fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d79d1c3_1750a36d",
+        "filename": "src/include/atomic_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2021-09-17T12:58:06Z",
+      "side": 1,
+      "message": "nit: these names are really long. Could probably abbreviate \"decrement\" to \"dec\".",
+      "revId": "4f7ffe16758613ac776b09efc5b77f450ea528fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
