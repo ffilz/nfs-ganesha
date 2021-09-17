@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7c13b26_c8f80406",
+        "filename": "src/include/abstract_atomic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-09-17T13:28:37Z",
+      "side": 1,
+      "message": "These return bool, not value after addition.",
+      "revId": "4f7ffe16758613ac776b09efc5b77f450ea528fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9acde36a_16422a67",
         "filename": "src/include/abstract_atomic.h",
         "patchSetId": 1
@@ -31,6 +48,23 @@
       "writtenOn": "2021-09-17T12:58:06Z",
       "side": 1,
       "message": "Kinda sucks that you have all of this copypasta just to handle different types. It may be worthwhile to roll a generic version with macros, and then just add a bunch of wrappers for different types.",
+      "revId": "4f7ffe16758613ac776b09efc5b77f450ea528fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12bf46c2_5910bb64",
+        "filename": "src/include/atomic_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-09-17T13:28:37Z",
+      "side": 1,
+      "message": "Can you add documentation for the other params/return?",
       "revId": "4f7ffe16758613ac776b09efc5b77f450ea528fb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
