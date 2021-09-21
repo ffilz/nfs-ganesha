@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7a84c8_45331be9",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                owner_len \u003d strlen(cid_server_owner);$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe3d00a_f192b47f",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                owner_len \u003d strlen(cid_server_owner);$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a15b43_3e3c9fb7",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                /* use server_owner as server_scope if server_scope not$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fded6f8b_cb17d244",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 */$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21eb5550_ef0e602a",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                if (nfs_param.nfsv4_param.server_scope \u003d\u003d NULL ||$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbf328ca_c8f92e30",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                if (nfs_param.nfsv4_param.server_scope \u003d\u003d NULL ||$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1af281e_0f9912ea",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                nfs_param.nfsv4_param.server_scope \u003d\u003d \u0027\\0\u0027) {$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1656cb_4e85a454",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                nfs_param.nfsv4_param.server_scope \u003d\u003d \u0027\\0\u0027) {$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d7c6cb_3b914464",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        cid_server_scope \u003d cid_server_owner;$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c86273a_69d2c6e4",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        cid_server_scope \u003d cid_server_owner;$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b2fbe8_6b3e92f7",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        scope_len \u003d owner_len;$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0743e7f_45944fd5",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        scope_len \u003d owner_len;$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b0b64fc_34cfcd52",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                } else {$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "881b2316_1f67fdba",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                } else {$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31945263_09c11a26",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        cid_server_scope \u003d nfs_param.nfsv4_param.server_scope;$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f17f2db3_24e4ea8a",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        cid_server_scope \u003d nfs_param.nfsv4_param.server_scope;$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aa4d9c2_6d76a400",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        scope_len \u003d strlen(cid_server_scope);$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3bf84a6_c4960ffb",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        scope_len \u003d strlen(cid_server_scope);$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6064878_654e01db",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                }$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f82b0ec_cab0da56",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-09-21T06:42:10Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                }$",
+      "revId": "aafbe12d94ea6cad0e316fa67f596ae754b25506",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
