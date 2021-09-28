@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1deae37_e6ad38f0",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-28T17:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47f8ab08_da81883e",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8c4a349_683c3386",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-09-10T19:58:34Z",
       "side": 1,
       "message": "Could we not hide the parameter behind a #define? This code reads as comparing two constants...\n\nOn the other hand, but doing this strcpy, we can append the suffix also so filling in EXCHANGEID responses is simplified.",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9682834_6093b36e",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-28T17:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8c4a349_683c3386",
       "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "357b07da_3737acbd",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-28T17:44:29Z",
+      "side": 1,
+      "message": "But we still need the suffix if not configured.",
+      "parentUuid": "707fcc69_19237ce2",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7eca6da_49eb5cda",
         "filename": "src/include/gsh_config.h",
         "patchSetId": 4
@@ -82,6 +136,24 @@
       "writtenOn": "2021-09-10T19:58:34Z",
       "side": 1,
       "message": "Let\u0027s use a different string since localhost IS a hostname...\n\nOr use a different indication as to whether the parameter has been set.",
+      "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a50a12a_5b4f3869",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-09-28T17:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7eca6da_49eb5cda",
       "revId": "25618290ec0b66af2e5f28732e3c70e1c6ca5a94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
