@@ -119,6 +119,12 @@ struct token open_flags[] = {
 	{"create", 6, O_CREAT},
 	{"creat", 5, O_CREAT},
 	{"O_CREAT", 7, O_CREAT},
+	{"exclusive", 9, O_EXCL},
+	{"excl", 4, O_EXCL},
+	{"O_EXCL", 6, O_EXCL},
+	{"truncate", 8, O_TRUNC},
+	{"trunc", 5, O_TRUNC},
+	{"O_TRUNC", 7, O_TRUNC},
 	{"", 0, 0}
 };
 
