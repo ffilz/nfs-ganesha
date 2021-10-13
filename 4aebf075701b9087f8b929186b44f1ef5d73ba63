@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce0b46f6_98a3279d",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2021-10-13T23:57:57Z",
+      "side": 1,
+      "message": "Can you leave a comment about why this is 0 (when it used to be 1) and also update the commit message? (or did you meant to make it 1 by default?).\n\nThis is also the \"The FSAL itself didn\u0027t return a result for statfs or we don\u0027t have an object\" case right? (I might note that before filling in the hard-coded values)",
+      "range": {
+        "startLine": 1149,
+        "startChar": 0,
+        "endLine": 1149,
+        "endChar": 43
+      },
+      "revId": "4aebf075701b9087f8b929186b44f1ef5d73ba63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc515ed3_cce7cc36",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2021-10-13T23:57:57Z",
+      "side": 1,
+      "message": "Is this supposed to be \u003d FSAL_DEFAULT_TIME_DELTA_NSEC? (or is it some macro?)",
+      "range": {
+        "startLine": 1151,
+        "startChar": 0,
+        "endLine": 1151,
+        "endChar": 36
+      },
+      "revId": "4aebf075701b9087f8b929186b44f1ef5d73ba63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
