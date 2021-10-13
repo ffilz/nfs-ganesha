@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32dc4f6_b9ef215f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-10-13T14:02:00Z",
+      "side": 1,
+      "message": "Hmm, as unintuitive as it is, this looks right. I think the link should actually be in a utf8str which has len \u003d\u003d strlen but the buffer size is +1 for a terminating NUL. That would be a more invasive fix but might be worthwhile.",
+      "revId": "2d8ed58e626daf0eb25a5a8c868d3261048f7a68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
