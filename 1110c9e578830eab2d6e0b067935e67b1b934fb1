@@ -33,6 +33,24 @@
       "message": "Looks good.\n\nMy only nit is that it is a lot of copy/paste that only varies by the int type. Might it be cleaner to do this with macros so that the int type doesn\u0027t matter as much? Or maybe just roll up some macros that generate these functions for different integer types?",
       "revId": "1110c9e578830eab2d6e0b067935e67b1b934fb1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c56c44eb_b058977e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-10-14T14:11:52Z",
+      "side": 1,
+      "message": "Yea, something like that might be worthwhile. It could also be worthwhile to determine how many types Ganesha actually needs, and consolidate some of them. I know we need at least an int of some flavor for refcounting and I\u0027m pretty sure we use pointer also. I think we could consolidate all the refcounting to one size of int. It might still be worth using macros though. I\u0027ll have to take a look. But that will definitely be a later development...",
+      "parentUuid": "9c2a352c_183c168c",
+      "revId": "1110c9e578830eab2d6e0b067935e67b1b934fb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
