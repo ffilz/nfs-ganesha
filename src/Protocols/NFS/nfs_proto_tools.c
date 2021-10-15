@@ -2523,7 +2523,11 @@ static fattr_xdr_result encode_support_exclusive_create(XDR *xdr,
 	}
 	res = clear_attribute_in_bitmap(&bits, FATTR4_TIME_ACCESS_SET);
 	assert(res);
+	res = clear_attribute_in_bitmap(&bits, FATTR4_TIME_ACCESS);
+	assert(res);
 	res = clear_attribute_in_bitmap(&bits, FATTR4_TIME_MODIFY_SET);
+	assert(res);
+	res = clear_attribute_in_bitmap(&bits, FATTR4_TIME_MODIFY);
 	assert(res);
 	if (!inline_xdr_u_int32_t(xdr, &bits.bitmap4_len))
 		return FATTR_XDR_FAILED;
