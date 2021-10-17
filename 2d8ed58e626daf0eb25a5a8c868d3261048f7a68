@@ -88,6 +88,24 @@
       "parentUuid": "2142bace_91afc419",
       "revId": "2d8ed58e626daf0eb25a5a8c868d3261048f7a68",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20bad7d1_7cd98818",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2021-10-17T08:29:37Z",
+      "side": 1,
+      "message": "(Forgot to respond before the weekend, sorry for the late reply)\n\nThis mostly worked in my simple testing, as in I never noticed any problems. Then someone else tried to use it with NetApp backends. Those backends were configured with lots of volumes and the NetApp special feature of junctions in NFSv3. When we looked into the protocol, the null terminator needed to go over the wire. The NetApp NFSv3 junctions didn\u0027t work without the null terminator.\n\nfsal_api.h says that for readlink():\n * The symlink content passed back *must* be null terminated and the\n * length indicated in the buffer description *must* include the\n * terminator.",
+      "parentUuid": "e1649133_a4da7119",
+      "revId": "2d8ed58e626daf0eb25a5a8c868d3261048f7a68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
