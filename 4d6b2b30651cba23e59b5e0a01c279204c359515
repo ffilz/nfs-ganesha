@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab7c5e8e_dfd39943",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-10-26T13:40:38Z",
+      "side": 1,
+      "message": "Since this patch really just catches any case where we somehow missed an ESTALE, at worst it becomes dead code.",
+      "parentUuid": "d878e24f_c77027a0",
+      "revId": "4d6b2b30651cba23e59b5e0a01c279204c359515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539998fe_aa41f987",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-08-03T13:42:00Z",
       "side": 1,
       "message": "Can you change the message on this one to reference that it\u0027s a deleted file?",
+      "revId": "4d6b2b30651cba23e59b5e0a01c279204c359515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8fc3f57_fa25883a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3233,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-10-26T13:40:38Z",
+      "side": 1,
+      "message": "Should I make a friendly change to this?",
+      "parentUuid": "539998fe_aa41f987",
       "revId": "4d6b2b30651cba23e59b5e0a01c279204c359515",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
