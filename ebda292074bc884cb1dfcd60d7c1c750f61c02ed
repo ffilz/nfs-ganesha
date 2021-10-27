@@ -16,6 +16,23 @@
       "message": "I have tested this with nsm_use_caller_name false. I actually need to make sure everything works with it true... Which requires making it true on the client also...",
       "revId": "ebda292074bc884cb1dfcd60d7c1c750f61c02ed",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d2b103_00762e48",
+        "filename": "src/Protocols/NLM/nlm_Sm_Notify.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-10-27T13:27:14Z",
+      "side": 1,
+      "message": "Do we know we have a valid op_ctx-\u003eclient here?  Or might this crash?",
+      "revId": "ebda292074bc884cb1dfcd60d7c1c750f61c02ed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
