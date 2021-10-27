@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc03b3f2_f603c8fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-10-27T16:39:51Z",
+      "side": 1,
+      "message": "We definitely want to get this into V4.0",
+      "revId": "769642e336fb2ef3cf79817bb842ae2df7bb65d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27f8331e_31234d1f",
@@ -14,6 +31,24 @@
       "writtenOn": "2021-09-28T17:44:29Z",
       "side": 1,
       "message": "Technically the default is NULL but you can\u0027t set a NULL string in config so this is fine.",
+      "revId": "769642e336fb2ef3cf79817bb842ae2df7bb65d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f30e197e_398dd374",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-10-27T16:39:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f8331e_31234d1f",
       "revId": "769642e336fb2ef3cf79817bb842ae2df7bb65d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
