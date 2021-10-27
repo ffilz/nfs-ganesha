@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "095773c2_c4710764",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-10-27T18:03:51Z",
+      "side": 1,
+      "message": "Yes, that is intended to address this issue.",
+      "parentUuid": "a501eefb_331aaab1",
+      "revId": "15e32daa67ae5964c2398689671c83b5189c1277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2e0c55e_a663ab0f",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
         "patchSetId": 1
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "Ok, I\u0027m really not sure how to resolve this, and I don\u0027t have an ACL enabled setup... Or really a referral setup...\n\nI\u0027m almost certain it attrs_out-\u003erequest_mask needs to be checked for ACL. And we shouldn\u0027t necessarily refresh the ACL every time we refresh the attributes.",
       "parentUuid": "a2e0c55e_a663ab0f",
+      "revId": "15e32daa67ae5964c2398689671c83b5189c1277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2984d548_f6561378",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-10-27T18:03:51Z",
+      "side": 1,
+      "message": "I think this:\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/525891\nis the proper fix, although I can\u0027t test it either.",
+      "parentUuid": "e077dba4_3cdc006f",
       "revId": "15e32daa67ae5964c2398689671c83b5189c1277",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
