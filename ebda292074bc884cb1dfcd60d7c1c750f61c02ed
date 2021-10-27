@@ -33,6 +33,24 @@
       "message": "Do we know we have a valid op_ctx-\u003eclient here?  Or might this crash?",
       "revId": "ebda292074bc884cb1dfcd60d7c1c750f61c02ed",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25ee7873_fa6e1012",
+        "filename": "src/Protocols/NLM/nlm_Sm_Notify.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-10-27T13:49:18Z",
+      "side": 1,
+      "message": "This function is only ever called via the dispatcher, so it will always have an op_ctx-\u003eclient and op_ctx-\u003ecaller_addr, and the client will have a hostaddr_str.",
+      "parentUuid": "a8d2b103_00762e48",
+      "revId": "ebda292074bc884cb1dfcd60d7c1c750f61c02ed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
