@@ -50,6 +50,24 @@
       "message": "Hmm, and forgot to mark question as not resolved.",
       "revId": "d7da4850730390e0727b3a3d4fc44e76dc6d0be5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d000cae3_a9452fd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019066
+      },
+      "writtenOn": "2021-10-29T18:22:38Z",
+      "side": 1,
+      "message": "Hi Frank,\nI can modify the commit message, but I was just fixing what I though was a bug:\n\nto check that you\u0027re not running the process another time (see https://github.com/scality/nfs-ganesha/blob/next/src/MainNFSD/nfs_main.c#L390) you need to keep the file open otherwise the lock will be released.",
+      "parentUuid": "42c62e80_c2d04d15",
+      "revId": "d7da4850730390e0727b3a3d4fc44e76dc6d0be5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
