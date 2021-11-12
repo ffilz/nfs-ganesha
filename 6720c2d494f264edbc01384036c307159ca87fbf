@@ -16,6 +16,23 @@
       "message": "Hi Jeff, mind giving this a review :)",
       "revId": "6720c2d494f264edbc01384036c307159ca87fbf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e22462e2_27219cc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-12T15:22:51Z",
+      "side": 1,
+      "message": "Yes, this looks good. The getopt_long function is defined with an int return so receiving it into an int should be correct. The usage of getopt in Ganesha all take the return value into an int var.",
+      "revId": "6720c2d494f264edbc01384036c307159ca87fbf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
