@@ -16,6 +16,23 @@
       "message": "Hmm, so the ganesha xdr functions don\u0027t have the 3rd parameter, but since it\u0027s always called with 0 as the third parameter, and the way function calls work, a function will ignore extra passed parameters, it looks like everything is OK.",
       "revId": "1f3df81e2e9a8565f958a63e8a56c5c0dc61b2d9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c45ac0a3_1a83047c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-12T21:56:38Z",
+      "side": 1,
+      "message": "I\u0027m going to hold off the merge. I just trying compiling with a change to remove the 3rd parameter. All I had to remove to make it compile was calling with the 3rd parameter being 0. Looking over all the functions that are cast to xdrproc_t, all of them except xdr_void take 2 parameters. xdr_void takes none...\n\nI think I\u0027d prefer we remove the 3rd parameter.\n\nUnfortunately we can\u0027t remove the casts since the functions so cast have a typed second parameter not a void *.\n\nI\u0027d also be tempted to make xdr_void have 2 (ignored) parameters.",
+      "revId": "1f3df81e2e9a8565f958a63e8a56c5c0dc61b2d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
