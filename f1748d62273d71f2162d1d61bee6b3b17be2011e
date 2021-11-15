@@ -46,6 +46,30 @@
       },
       "revId": "f1748d62273d71f2162d1d61bee6b3b17be2011e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da90cf83_274c9894",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-15T19:52:05Z",
+      "side": 1,
+      "message": "Yes, Ganesha has that typedef. It seemed like it would be best for all the references to sockaddr_storage to be consistent within Ganesha, a bigger change would be to get rid of sockaddr_t...",
+      "parentUuid": "322d15e4_6a1bd63b",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 24
+      },
+      "revId": "f1748d62273d71f2162d1d61bee6b3b17be2011e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
