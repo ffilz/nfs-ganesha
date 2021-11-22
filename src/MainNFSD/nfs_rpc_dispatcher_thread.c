@@ -66,6 +66,10 @@
 #include "gsh_lttng/nfs_rpc.h"
 #endif
 
+#ifdef USE_MONITORING
+#include "monitoring.h"
+#endif
+
 #ifdef __APPLE__
 #include <sys/socketvar.h>
 #include <netinet/tcp_var.h>
@@ -1530,6 +1534,12 @@ static struct svc_req *alloc_nfs_request(SVCXPRT *xprt, XDR *xdrs)
 
 	(void) atomic_inc_uint64_t(&nfs_health_.enqueued_reqs);
 
+#ifdef USE_MONITORING
+	monitoring_rpc_received();
+	monitoring_rpcs_in_flight(nfs_health_.enqueued_reqs -
+				  nfs_health_.dequeued_reqs);
+#endif
+
 	/* set up req */
 	SVC_REF(xprt, SVC_REF_FLAG_NONE);
 	reqdata->svc.rq_xprt = xprt;
@@ -1576,4 +1586,8 @@ static void free_nfs_request(struct svc_req *req, enum xprt_stat stat)
 	SVC_RELEASE(xprt, SVC_REF_FLAG_NONE);
 
 	(void) atomic_inc_uint64_t(&nfs_health_.dequeued_reqs);
+
+#ifdef USE_MONITORING
+	monitoring_rpc_processed();
+#endif
 }

@@ -1,0 +1,102 @@
+/*
+ * vim:noexpandtab:shiftwidth=8:tabstop=8:
+ *
+ * Copyright (C) Google Inc., 2021
+ * Author: Bjorn Leffler leffler@google.com
+ *
+ *   This library is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Lesser General Public License as published
+ *   by the Free Software Foundation; either version 2.1 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This library is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See
+ *   the GNU Lesser General Public License for more details.
+ *
+ *   You should have received a copy of the GNU Lesser General Public License
+ *   along with this library; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+/**
+ * @brief Monitoring functions for NFS Ganesha.
+ *
+ * Monitoring must fail gracefully.
+ * Broken monitoring should not affect serving.
+ */
+
+#ifndef GANESHA_MONITORING_H
+#define GANESHA_MONITORING_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stddef.h>
+#include "nfs23.h"
+
+typedef uint16_t export_id_t;
+
+// Allow FSALs to register a human readable label used for per-export metrics.
+// The default export label is "exportid=<fsid_major>".
+void monitoring_register_export_label(export_id_t export_id, const char *label);
+const char *monitoring_get_export_label(export_id_t export_id);
+
+// Init monitoring export at TCP port <port>.
+void monitoring_init(const uint16_t port);
+
+/*
+ * These functions generate the following metrics:
+ *   Total request count.
+ *   Total request count by success / failure status.
+ *   Total bytes sent/received.
+ *   Request size in bytes as histogram.
+ *   Response size in bytes as histogram.
+ *   Latency in ms as histogram.
+ */
+
+void monitoring_nfs3_request(const uint32_t proc,
+			     const nsecs_elapsed_t request_time,
+			     const nfsstat3 status,
+			     const export_id_t export_id,
+			     const char *client_ip);
+
+void monitoring_nfs4_request(const uint32_t op,
+			     const nsecs_elapsed_t request_time,
+			     const nfsstat4 status,
+			     const export_id_t export_id,
+			     const char *client_ip);
+
+void monitoring_nfs_io(const size_t requested,
+		       const size_t transferred,
+		       const bool success,
+		       const bool is_write,
+		       const export_id_t export_id,
+		       const char *client_ip);
+
+// MDCache hit rates
+void monitoring_mdcache_cache_hit(const char *operation,
+				  const export_id_t export_id);
+void monitoring_mdcache_cache_miss(const char *operation,
+				   const export_id_t export_id);
+
+// In flight RPC stats.
+void monitoring_rpcs_in_flight(const uint64_t value);
+void monitoring_rpc_received(void);
+void monitoring_rpc_processed(void);
+
+// Client stats from op_ctx->client.
+void monitoring_client_activity(const char *client_ip);
+
+// Worker thread stats.
+void monitoring_worker_thread_min(const uint64_t value);
+void monitoring_worker_thread_max(const uint64_t value);
+void monitoring_worker_thread_start(void);
+void monitoring_worker_thread_exit(void);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+#endif   /* GANESHA_MONITORING_H */

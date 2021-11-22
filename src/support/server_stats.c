@@ -61,6 +61,10 @@
 #include <abstract_atomic.h>
 #include "nfs_proto_functions.h"
 
+#ifdef USE_MONITORING
+#include "monitoring.h"
+#endif
+
 #define NFS_V3_NB_COMMAND (NFSPROC3_COMMIT + 1)
 #define NFS_V4_NB_COMMAND 2
 #define MNT_V1_NB_COMMAND (MOUNTPROC3_EXPORT + 1)
@@ -75,11 +79,11 @@
 #define NFS_pcp nfs_param.core_param
 #define NFS_program NFS_pcp.program
 
-#ifdef USE_DBUS
-
 struct op_name {
 	char *name;
 };
+
+#ifdef USE_DBUS
 
 #ifdef _USE_RQUOTA
 static const struct op_name optqta[] = {
@@ -127,6 +131,8 @@ static const struct op_name optnlm[] = {
 };
 #endif
 
+#endif
+
 #ifdef _USE_NFS3
 static const struct op_name optabv3[] = {
 	[NFSPROC3_NULL] = {.name = "NULL", },
@@ -152,6 +158,16 @@ static const struct op_name optabv3[] = {
 	[NFSPROC3_PATHCONF] = {.name = "PATHCONF", },
 	[NFSPROC3_COMMIT] = {.name = "COMMIT", },
 };
+
+const char *nfsproc3_to_str(int nfsproc3)
+{
+	if (nfsproc3 < 0 || nfsproc3 > NFSPROC3_COMMIT) {
+		return optabv3[0].name;
+	}
+	return optabv3[nfsproc3].name;
+
+}
+
 #endif
 
 static const struct op_name optabv4[] = {
@@ -234,7 +250,13 @@ static const struct op_name optabv4[] = {
 	[NFS4_OP_REMOVEXATTR] = {.name = "OP_REMOVEXATTR",},
 };
 
-#endif
+const char *nfsop4_to_str(int nfsop4)
+{
+	if (nfsop4 < 0 || nfsop4 > NFS4_OP_REMOVEXATTR) {
+		return optabv4[0].name;
+	}
+	return optabv4[nfsop4].name;
+}
 
 /* Classify protocol ops for stats purposes
  */
@@ -1452,7 +1474,7 @@ static void record_v3_full_stats(struct svc_req *req,
 
 static void record_v4_full_stats(uint32_t proc,
 			       nsecs_elapsed_t request_time,
-			       bool success);
+			       int status);
 
 /**
  * @brief record NFS op finished
@@ -1510,6 +1532,11 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 					program_op, proto_op, NFS_V3,
 					rc == NFS_REQ_OK, dup);
 		timespec_update(&client->last_update, &current_time);
+
+#ifdef USE_MONITORING
+		monitoring_client_activity(client->hostaddr_str);
+#endif
+
 	}
 	if (!dup && op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
@@ -1550,8 +1577,7 @@ void server_stats_nfsv4_op_done(int proto_op,
 	time_diff = timespec_diff(start_time, &current_time);
 
 	if (nfs_param.core_param.enable_FULLV4STATS)
-		record_v4_full_stats(proto_op, time_diff,
-			    status == NFS4_OK);
+		record_v4_full_stats(proto_op, time_diff, status);
 
 	if (client != NULL) {
 		struct server_stats *server_st;
@@ -1663,6 +1689,21 @@ void server_stats_io_done(size_t requested,
 		record_io_stats(&exp_st->st, &op_ctx->ctx_export->lock,
 				requested, transferred, success, is_write);
 	}
+#ifdef USE_MONITORING
+	if (op_ctx->req_type == NFS_REQUEST) {
+		uint16_t export_id = 0;
+		struct fsal_export *export = op_ctx->fsal_export;
+		struct gsh_client *client = op_ctx->client;
+		const char *client_ip =
+			client == NULL ? "" : client->hostaddr_str;
+
+		if (export != NULL) {
+			export_id = export->export_id;
+		}
+		monitoring_nfs_io(requested, transferred, success, is_write,
+				  export_id, client_ip);
+	}
+#endif
 }
 
 /**
@@ -3117,6 +3158,26 @@ static void record_v3_full_stats(struct svc_req *req,
 	uint32_t vers = req->rq_msg.cb_vers;
 	uint32_t proc = req->rq_msg.cb_proc;
 
+#ifdef USE_MONTORING
+	if (prog == NFS_PROGRAM) {
+		uint16_t export_id = 0;
+		struct fsal_export *export = op_ctx->fsal_export;
+		struct gsh_client *client = op_ctx->client;
+		const char *client_ip =
+			client == NULL ? "" : client->hostaddr_str;
+		// TODO(leffler): Find nfsv3 result status?
+		nfs_res_t *res_nfs = reqdata->res_nfs;
+		const int fsal_status =
+		  (nfs_status == NFS3_OK ? nfs3_fsal_status(proc, res_nfs) : 0);
+
+		if (export != NULL) {
+			export_id = export->export_id;
+		}
+		monitoring_nfs3_request(proc, request_time, fsal_status,
+					export_id, client_ip);
+	}
+#endif
+
 	if (prog == NFS_program[P_NFS] && vers == NFS_V3) {
 		if (proc > NFSPROC3_COMMIT) {
 			LogCrit(COMPONENT_DBUS,
@@ -3145,8 +3206,22 @@ void reset_v3_full_stats(void)
 
 static void record_v4_full_stats(uint32_t proc,
 			       nsecs_elapsed_t request_time,
-			       bool success)
+			       int status)
 {
+	const bool success = (status == NFS4_OK);
+
+#ifdef USE_MONITORING
+	uint16_t export_id = 0;
+	struct fsal_export *export = op_ctx->fsal_export;
+	struct gsh_client *client = op_ctx->client;
+	const char *client_ip = client == NULL ? "" : client->hostaddr_str;
+
+	if (export != NULL) {
+		export_id = export->export_id;
+	}
+	monitoring_nfs4_request(proc, request_time, status, export_id,
+				client_ip);
+#endif
 	if (proc > NFS_V42_NB_OPERATION) {
 		LogCrit(COMPONENT_DBUS,
 			"proc is more than NFS4_OP_WRITE_SAME: %d\n",
