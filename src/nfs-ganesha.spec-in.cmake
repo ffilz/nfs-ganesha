@@ -62,6 +62,9 @@ Requires: openSUSE-release
 @BCOND_LTTNG@ lttng
 %global use_lttng %{on_off_switch lttng}
 
+@BCOND_MONITORING@ monitoring
+%global use_monitoring %{on_off_switch monitoring}
+
 @BCOND_UTILS@ utils
 %global use_utils %{on_off_switch utils}
 

@@ -53,6 +53,10 @@
 #include "gsh_lttng/mdcache.h"
 #endif
 
+#ifdef USE_MONITORING
+#include "monitoring.h"
+#endif
+
 #define mdc_chunk_first_dirent(c) \
 	glist_first_entry(&(c)->dirents, mdcache_dir_entry_t, chunk_list)
 
@@ -1221,6 +1225,9 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 			 bool uncached, mdcache_entry_t **new_entry,
 			 struct fsal_attrlist *attrs_out)
 {
+#ifdef USE_MONITORING
+	const char *OPERATION = "lookup";
+#endif
 	*new_entry = NULL;
 	fsal_status_t status;
 
@@ -1250,6 +1257,15 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 
 	PTHREAD_RWLOCK_rdlock(&mdc_parent->content_lock);
 
+#ifdef USE_MONITORING
+	uint16_t export_id = 0;
+	struct fsal_export *export = op_ctx->fsal_export;
+
+	if (export != NULL) {
+		export_id = export->export_id;
+	}
+#endif
+
 	if (mdcache_param.dir.avl_chunk == 0) {
 		/* We aren't caching dirents; call directly.
 		 * NOTE: Technically we will call mdc_lookup_uncached not
@@ -1258,6 +1274,9 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 		 *       will be no addition to the dirent cache, and thus no
 		 *       need to hold the write lock.
 		 */
+#ifdef USE_MONITORING
+		monitoring_mdcache_cache_miss(OPERATION, export_id);
+#endif
 		goto uncached;
 	}
 
@@ -1297,15 +1316,24 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 			mdcache_put(*new_entry);
 			*new_entry = NULL;
 		}
+#ifdef USE_MONITORING
+		monitoring_mdcache_cache_hit(OPERATION, export_id);
+#endif
 		return status;
 	} else if (!uncached) {
 		/* Was only looking in cache, so don't bother looking further */
+#ifdef USE_MONITORING
+		monitoring_mdcache_cache_miss(OPERATION, export_id);
+#endif
 		goto out;
 	} else if (status.major != ERR_FSAL_STALE) {
 		/* Actual failure */
 		LogDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_CACHE_INODE,
 			    "Lookup %s failed %s",
 			    name, fsal_err_txt(status));
+#ifdef USE_MONITORING
+		monitoring_mdcache_cache_miss(OPERATION, export_id);
+#endif
 		goto out;
 	}
 
@@ -1318,6 +1346,9 @@ fsal_status_t mdc_lookup(mdcache_entry_t *mdc_parent, const char *name,
 		mdcache_dirent_invalidate_all(mdc_parent);
 	}
 
+#ifdef USE_MONITORING
+	monitoring_mdcache_cache_miss(OPERATION, export_id);
+#endif
 	LogDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_CACHE_INODE,
 		    "Cache Miss detected for %s", name);
 
