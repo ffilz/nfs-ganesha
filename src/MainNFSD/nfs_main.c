@@ -47,6 +47,10 @@
 #include "conf_url.h"
 #include "sal_functions.h"
 
+#ifdef USE_MONITORING
+#include "monitoring.h"
+#endif
+
 /**
  * @brief LTTng trace enabling magic
  *
@@ -452,6 +456,11 @@ int main(int argc, char *argv[])
 			 "Error while parsing log configuration");
 		goto fatal_die;
 	}
+
+#ifdef USE_MONITORING
+	/* Init monitoring stack */
+	monitoring_init(nfs_param.core_param->prometheus_port);
+#endif  /* USE_MONITORING */
 
 	/* We need all the fsal modules loaded so we can have
 	 * the list available at exports parsing time.

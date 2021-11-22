@@ -40,6 +40,16 @@ if(USE_9P AND USE_9P_RDMA)
     9p_rdma_callbacks.c)
 endif(USE_9P AND USE_9P_RDMA)
 
+if(USE_MONITORING)
+  set(ganesha_nfsd_OBJS
+    ${ganesha_nfsd_OBJS}
+    $<TARGET_OBJECTS:monitoring>
+  )
+  set(MONITORING_LIBRARIES
+    metrics
+  )
+endif(USE_MONITORING)
+
 if(USE_NFS_RDMA)
   add_definitions(-D_USE_NFS_RDMA)
 endif(USE_NFS_RDMA)
@@ -169,6 +179,7 @@ target_link_libraries(ganesha_nfsd
   ${SYSTEM_LIBRARIES}
   ${LTTNG_LIBRARIES}
   ${MOOSHIKA_LIBRARIES}
+  ${MONITORING_LIBRARIES}
 )
 
 if(SANITIZE_ADDRESS)
