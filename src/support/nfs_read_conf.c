@@ -122,6 +122,8 @@ static struct config_item core_params[] = {
 	CONF_ITEM_UI16("Rquota_Port", 0, UINT16_MAX, RQUOTA_PORT,
 		       nfs_core_param, port[P_RQUOTA]),
 #endif
+	CONF_ITEM_UI16("Prometheus_Port", 0, UINT16_MAX, PROMETHEUS_PORT,
+		       nfs_core_param, prometheus_port),
 	CONF_ITEM_IP_ADDR("Bind_Addr", "0.0.0.0",
 			  nfs_core_param, bind_addr),
 	CONF_ITEM_UI32("NFS_Program", 1, INT32_MAX, NFS_PROGRAM,

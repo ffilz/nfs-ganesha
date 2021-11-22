@@ -61,6 +61,10 @@
 #include <abstract_atomic.h>
 #include "nfs_proto_functions.h"
 
+#ifdef USE_MONITORING
+#include "monitoring.h"
+#endif
+
 #define NFS_V3_NB_COMMAND (NFSPROC3_COMMIT + 1)
 #define NFS_V4_NB_COMMAND 2
 #define MNT_V1_NB_COMMAND (MOUNTPROC3_EXPORT + 1)
@@ -1510,6 +1514,11 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 					program_op, proto_op, NFS_V3,
 					rc == NFS_REQ_OK, dup);
 		timespec_update(&client->last_update, &current_time);
+
+#ifdef USE_MONITORING
+		monitoring_client_activity(client->hostaddr_str);
+#endif
+
 	}
 	if (!dup && op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
@@ -1663,6 +1672,21 @@ void server_stats_io_done(size_t requested,
 		record_io_stats(&exp_st->st, &op_ctx->ctx_export->lock,
 				requested, transferred, success, is_write);
 	}
+#ifdef USE_MONITORING
+	if (op_ctx->req_type == NFS_REQUEST) {
+		uint16_t export_id = 0;
+		struct fsal_export *export = op_ctx->fsal_export;
+		struct gsh_client *client = op_ctx->client;
+		const char *client_ip =
+			client == NULL ? "" : client->hostaddr_str;
+
+		if (export != NULL) {
+			export_id = export->export_id;
+		}
+		monitoring_nfs_io(requested, transferred, success, is_write,
+				  export_id, client_ip);
+	}
+#endif
 }
 
 /**
@@ -3117,6 +3141,26 @@ static void record_v3_full_stats(struct svc_req *req,
 	uint32_t vers = req->rq_msg.cb_vers;
 	uint32_t proc = req->rq_msg.cb_proc;
 
+#ifdef USE_MONTORING
+	if (prog == NFS_PROGRAM) {
+		uint16_t export_id = 0;
+		struct fsal_export *export = op_ctx->fsal_export;
+		struct gsh_client *client = op_ctx->client;
+		const char *client_ip =
+			client == NULL ? "" : client->hostaddr_str;
+		// TODO(leffler): Find nfsv3 result status?
+		nfs_res_t *res_nfs = reqdata->res_nfs;
+		const int fsal_status =
+		  (nfs_status == NFS3_OK ? nfs3_fsal_status(proc, res_nfs) : 0);
+
+		if (export != NULL) {
+			export_id = export->export_id;
+		}
+		monitoring_nfs3_request(proc, request_time, fsal_status,
+					export_id, client_ip);
+	}
+#endif
+
 	if (prog == NFS_program[P_NFS] && vers == NFS_V3) {
 		if (proc > NFSPROC3_COMMIT) {
 			LogCrit(COMPONENT_DBUS,
@@ -3147,6 +3191,19 @@ static void record_v4_full_stats(uint32_t proc,
 			       nsecs_elapsed_t request_time,
 			       bool success)
 {
+#ifdef USE_MONITORING
+	const bool success = (status == NFS4_OK);
+	uint16_t export_id = 0;
+	struct fsal_export *export = op_ctx->fsal_export;
+	struct gsh_client *client = op_ctx->client;
+	const char *client_ip = client == NULL ? "" : client->hostaddr_str;
+
+	if (export != NULL) {
+		export_id = export->export_id;
+	}
+	monitoring_nfs4_request(proc, request_time, status, export_id,
+				client_ip);
+#endif
 	if (proc > NFS_V42_NB_OPERATION) {
 		LogCrit(COMPONENT_DBUS,
 			"proc is more than NFS4_OP_WRITE_SAME: %d\n",
