@@ -93,6 +93,11 @@ typedef enum protos {
 #define RQUOTA_PORT 875
 
 /**
+ * @brief Prometheus port for Prometheus metrics export.
+ */
+#define PROMETHEUS_PORT 9101
+
+/**
  * @brief Default value for _9p_param.nb_worker
  */
 #define NB_WORKER_THREAD_DEFAULT 256
@@ -217,6 +222,8 @@ typedef struct nfs_core_param {
 	/** An array of port numbers, one for each protocol.  Set by
 	    the NFS_Port, MNT_Port, NLM_Port, and Rquota_Port options. */
 	uint16_t port[P_COUNT];
+	/** The port number used for prometheus monitoring. */
+	uint16_t prometheus_port;
 	/** The IPv4 or IPv6 address to which to bind for our
 	    listening port.  Set by the Bind_Addr option. */
 	sockaddr_t bind_addr;

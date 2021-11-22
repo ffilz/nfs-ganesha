@@ -400,6 +400,9 @@ goption(USE_GUI_ADMIN_TOOLS "Package GUI Admin scripts" ON)
 # Enable LTTng tracing
 goption(USE_LTTNG "Enable LTTng tracing" OFF)
 
+# Enable exporting of Prometheus monitoring metrics
+goption(USE_MONITORING "Enable Monitoring" OFF)
+
 # Build man page.
 goption(USE_MAN_PAGE "Build MAN page" OFF)
 
@@ -971,6 +974,22 @@ if(USE_LTTNG)
   endif(LTTNG_FOUND)
 endif(USE_LTTNG)
 
+gopt_test(USE_MONITORING)
+if(USE_MONITORING)
+  find_package(prometheus-cpp CONFIG)
+  if(prometheus-cpp_INCLUDE_DIR)
+    include_directories(${prometheus-cpp_INCLUDE_DIR})
+  else(prometheus-cpp_INCLUDE_DIR)
+    message(WARNING "Prometheus libraries not found. Disabling USE_MONITORING")
+    set(USE_MONITORING OFF)
+  endif(prometheus-cpp_INCLUDE_DIR)
+  find_package(absl CONFIG)
+  if(NOT TARGET absl::time)
+    message(WARNING "ABSL libraries not found. Disabling USE_MONITORING")
+    set(USE_MONITORING OFF)
+  endif(NOT TARGET absl::time)
+endif(USE_MONITORING)
+
 gopt_test(USE_RADOS_RECOV)
 if(USE_RADOS_RECOV)
   find_package(RADOS ${USE_RADOS_RECOV_REQUIRED})
@@ -1207,6 +1226,10 @@ if(USE_LTTNG)
   add_subdirectory(tracing)
 endif(USE_LTTNG)
 
+if(USE_MONITORING)
+  add_subdirectory(monitoring)
+endif(USE_MONITORING)
+
 add_subdirectory(scripts)
 add_subdirectory(doc)
 # display configuration vars
@@ -1292,6 +1315,7 @@ message(STATUS "USE_ADMIN_TOOLS = ${USE_ADMIN_TOOLS}")
 message(STATUS "USE_GUI_ADMIN_TOOLS = ${USE_GUI_ADMIN_TOOLS}")
 message(STATUS "MODULES_PATH = ${MODULES_PATH}")
 message(STATUS "USE_LTTNG = ${USE_LTTNG}")
+message(STATUS "USE_MONITORING = ${USE_MONITORING}")
 message(STATUS "USE_VSOCK = ${USE_VSOCK}")
 message(STATUS "USE_TOOL_MULTILOCK = ${USE_TOOL_MULTILOCK}")
 message(STATUS "USE_MAN_PAGE = ${USE_MAN_PAGE}")
@@ -1465,6 +1489,12 @@ if(USE_LTTNG)
 else(USE_LTTNG)
     set(BCOND_LTTNG "%bcond_with")
 endif(USE_LTTNG)
+
+if(USE_MONITORING)
+    set(BCOND_MONITORING "%bcond_without")
+else(USE_MONITORING)
+    set(BCOND_MONITORING "%bcond_with")
+endif(USE_MONITORING)
 
 if(${ALLOCATOR} STREQUAL "jemalloc")
     set(BCOND_JEMALLOC "%bcond_without")
