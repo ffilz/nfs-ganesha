@@ -44,6 +44,10 @@
 #include "mdcache_hash.h"
 #include "mdcache_avl.h"
 
+#ifdef USE_MONITORING
+#include "monitoring.h"
+#endif
+
 /*
  * handle methods
  */
@@ -940,14 +944,28 @@ out:
 static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 				      struct fsal_attrlist *attrs_out)
 {
+#ifdef USE_MONITORING
+	const char *OPERATION = "getattrs";
+#endif
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status = {0, 0};
+#ifdef USE_MONITORING
+	uint16_t export_id = 0;
+	struct fsal_export *export = op_ctx->fsal_export;
+
+	if (export != NULL) {
+		export_id = export->export_id;
+	}
+#endif
 
 	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
 
 	if (mdcache_is_attrs_valid(entry, attrs_out->request_mask)) {
 		/* Up-to-date */
+#ifdef USE_MONITORING
+		monitoring_mdcache_cache_hit(OPERATION, export_id);
+#endif
 		goto unlock;
 	}
 
@@ -957,9 +975,15 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 
 	if (mdcache_is_attrs_valid(entry, attrs_out->request_mask)) {
 		/* Someone beat us to it */
+#ifdef USE_MONITORING
+		monitoring_mdcache_cache_hit(OPERATION, export_id);
+#endif
 		goto unlock;
 	}
 
+#ifdef USE_MONITORING
+	monitoring_mdcache_cache_hit(OPERATION, export_id);
+#endif
 	status = mdcache_refresh_attrs(
 			entry, (attrs_out->request_mask & ATTR_ACL) != 0,
 			(attrs_out->request_mask & ATTR4_FS_LOCATIONS) != 0,

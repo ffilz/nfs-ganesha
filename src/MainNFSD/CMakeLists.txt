@@ -158,6 +158,18 @@ if(USE_9P)
   )
 endif(USE_9P)
 
+if(USE_MONITORING)
+  find_package(absl CONFIG REQUIRED)
+  set(ganesha_nfsd_OBJS
+    ${ganesha_nfsd_OBJS}
+    $<TARGET_OBJECTS:monitoring>
+  )
+  set(MONITORING_LIBRARIES
+    absl::time
+    metrics
+  )
+endif(USE_MONITORING)
+
 add_library(ganesha_nfsd SHARED
   ${ganesha_nfsd_OBJS} ${fsal_CORE_SRCS}
 )
@@ -169,6 +181,7 @@ target_link_libraries(ganesha_nfsd
   ${SYSTEM_LIBRARIES}
   ${LTTNG_LIBRARIES}
   ${MOOSHIKA_LIBRARIES}
+  ${MONITORING_LIBRARIES}
 )
 
 if(SANITIZE_ADDRESS)

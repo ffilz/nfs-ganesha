@@ -108,6 +108,7 @@ typedef enum log_components {
 	COMPONENT_FSAL_UP,
 	COMPONENT_DBUS,
 	COMPONENT_NFS_MSK,
+	COMPONENT_MONITORING,
 	COMPONENT_COUNT
 } log_components_t;
 
