@@ -1488,7 +1488,8 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_9P_DISPATCH] = NIV_EVENT,
 	[COMPONENT_FSAL_UP] = NIV_EVENT,
 	[COMPONENT_DBUS] = NIV_EVENT,
-	[COMPONENT_NFS_MSK] = NIV_EVENT
+	[COMPONENT_NFS_MSK] = NIV_EVENT,
+	[COMPONENT_MONITORING] = NIV_EVENT
 };
 
 /* Active set of log levels */
@@ -1614,7 +1615,10 @@ struct log_component_info LogComponents[COMPONENT_COUNT] = {
 		.comp_str = "DBUS",},
 	[COMPONENT_NFS_MSK] = {
 		.comp_name = "COMPONENT_NFS_MSK",
-		.comp_str = "NFS_MSK",}
+		.comp_str = "NFS_MSK",},
+	[COMPONENT_MONITORING] = {
+		.comp_name = "COMPONENT_MONITORING",
+		.comp_str = "MONITORING",}
 };
 
 void DisplayLogComponentLevel(log_components_t component, const char *file,
@@ -1776,6 +1780,7 @@ HANDLE_PROP(9P_DISPATCH);
 HANDLE_PROP(FSAL_UP);
 HANDLE_PROP(DBUS);
 HANDLE_PROP(NFS_MSK);
+HANDLE_PROP(MONITORING);
 
 static struct gsh_dbus_prop *log_props[] = {
 	LOG_PROPERTY_ITEM(ALL),
@@ -1815,6 +1820,7 @@ static struct gsh_dbus_prop *log_props[] = {
 	LOG_PROPERTY_ITEM(FSAL_UP),
 	LOG_PROPERTY_ITEM(DBUS),
 	LOG_PROPERTY_ITEM(NFS_MSK),
+	LOG_PROPERTY_ITEM(MONITORING),
 	NULL
 };
 
@@ -2113,6 +2119,8 @@ static struct config_item component_levels[] = {
 			 COMPONENT_DBUS, int),
 	CONF_INDEX_TOKEN("NFS_MSK", NB_LOG_LEVEL, log_levels,
 			 COMPONENT_NFS_MSK, int),
+	CONF_INDEX_TOKEN("MONITORING", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MONITORING, int),
 	CONFIG_EOL
 };
 

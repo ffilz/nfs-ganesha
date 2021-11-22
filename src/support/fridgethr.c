@@ -51,6 +51,10 @@
 #include "fridgethr.h"
 #include "nfs_core.h"
 
+#ifdef USE_MONITORING
+#include "monitoring.h"
+#endif
+
 /**
  * @brief Initialize a thread fridge
  *
@@ -529,6 +533,10 @@ static void *fridgethr_start_routine(void *arg)
 	rcu_register_thread();
 	SetNameFunction(fr->s);
 
+#ifdef USE_MONITORING
+	monitoring_worker_thread_start();
+#endif
+
 	/* Excplicitly and definitely enable cancellation */
 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, &old_state);
 
@@ -571,6 +579,9 @@ static void *fridgethr_start_routine(void *arg)
 	/* At this point the fridge entry no longer exists and must
 	   not be accessed. */
 	rcu_unregister_thread();
+#ifdef USE_MONITORING
+	monitoring_worker_thread_exit();
+#endif
 	return NULL;
 }
 
@@ -1388,6 +1399,11 @@ int fridgethr_populate(struct fridgethr *fr,
 			 fr->s);
 		return EINVAL;
 	}
+
+#ifdef USE_MONITORING
+	monitoring_worker_thread_max(fr->p.thr_max);
+	monitoring_worker_thread_min(fr->p.thr_min);
+#endif
 
 	for (i = 0; i < threads_to_run; ++i) {
 		struct fridgethr_entry *fe = NULL;
