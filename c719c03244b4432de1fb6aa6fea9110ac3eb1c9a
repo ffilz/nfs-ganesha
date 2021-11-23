@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99c72df8_08b9acd1",
+        "filename": "src/monitoring/nfs_names.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-23T15:58:00Z",
+      "side": 1,
+      "message": "Yea, can we use the optabs for the op names and nfsstat3_to_str and nfsstat4_to_str for the errors? Any particular reason you used lower case? I think keeping these consistent with the RFC etc. is best.",
+      "parentUuid": "cbae825d_bf1d2f3d",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78d84ec3_4d67ae45",
         "filename": "src/support/fridgethr.c",
         "patchSetId": 5
