@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0b73af_b8956649",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-11-23T14:17:12Z",
+      "side": 1,
+      "message": "Looks pretty good.  A few issues.",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43271263_7a1fccd5",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-11-23T14:17:12Z",
+      "side": 1,
+      "message": "These bits are for nfs-ganesha.spec-in.cmake so you need to modify that file as well.  This will enable \"make rpm\" to work properly.",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cc90f3d_0987ec4f",
+        "filename": "src/libntirpc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-11-23T14:17:12Z",
+      "side": 1,
+      "message": "Is this change supposed to be updating ntirpc?  I don\u0027t remember seeing a PR on ntirpc that goes with this.",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbae825d_bf1d2f3d",
+        "filename": "src/monitoring/nfs_names.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-11-23T14:17:12Z",
+      "side": 1,
+      "message": "Should we make optabv4 and optabv3 usable for this, rather than duplicating?  I\u0027m worried about these not being updated if anything changes.",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d84ec3_4d67ae45",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-11-23T14:17:12Z",
+      "side": 1,
+      "message": "It appears that these set a global thread_max in the monitoring.  However, there are many thread fridges in Ganesha, each with their own min and max values, so I think these may need to sum-up rather than setting?",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
