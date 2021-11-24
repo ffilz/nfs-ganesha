@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87915b66_f105b8bf",
+        "filename": "src/monitoring/nfs_names.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-24T15:22:39Z",
+      "side": 1,
+      "message": "Oh gosh, there are two different optabv4... There\u0027s also one in src/Protocols/NFS/nfs4_Compound.c...\n\nThere\u0027s also operation tables in src/MainNFSD/nfs_worker_thread.c\n\nWe really should consider combining those things, though the ones in nfs_worker_thread.c and nfs4_Compound.c have prefixes, but maybe those should be dropped.",
+      "parentUuid": "062a42c9_ab19b18d",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78d84ec3_4d67ae45",
         "filename": "src/support/fridgethr.c",
         "patchSetId": 5
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Ah, I thought there was only one thread fridge for NFS worker threads. Controlled by \"_9P { Nb_Worker \u003d XXX; }\" in the configuration file.\n\nFrom a monitoring point of view, the goal is to display the {min,current,max} number of threads in use, so the user can tune the number of threads needed.",
       "parentUuid": "78d84ec3_4d67ae45",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b01b043e_939408c1",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-24T15:22:39Z",
+      "side": 1,
+      "message": "Yea, so you might want to monitor each Fridge thread pool. Some Fridges are just a single thread though, so probably not worth monitoring them. Others may be a thread per export or file system which probably also aren\u0027t worth monitoring.",
+      "parentUuid": "52d78003_fcee262d",
       "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
