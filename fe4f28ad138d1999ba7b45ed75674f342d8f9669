@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52705db1_d36545a9",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2807,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-11-25T08:40:34Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tres \u003d (double) v3_full_stats[proc].latency.min * 0.000001;",
+      "revId": "fe4f28ad138d1999ba7b45ed75674f342d8f9669",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "182a844f_d87aa38e",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2810,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2021-11-25T08:40:34Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tres \u003d (double) v3_full_stats[proc].latency.max * 0.000001;",
+      "revId": "fe4f28ad138d1999ba7b45ed75674f342d8f9669",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
