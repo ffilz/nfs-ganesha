@@ -275,9 +275,7 @@ bool fsalattr_to_sattr3(const struct fsal_attrlist *fsal_attrs,
 	memset(attrs_out, 0, sizeof(*attrs_out));
 
 	/* Make sure there aren't any additional options we aren't expecting. */
-	if (!attrmask_valid_setattr(fsal_attrs->valid_mask)) {
-		return false;
-	}
+	if (!attrmask_valid_setattr(fsal_attrs->valid_mask)) return false;
 
 	if (FSAL_TEST_MASK(fsal_attrs->valid_mask, ATTR_MODE)) {
 		attrs_out->mode.set_it = true;
