@@ -16,6 +16,24 @@
       "message": "We shouldn\u0027t remove this for the default case, otherwise when default case Ganesha restarts with the new version, clients won\u0027t recover properly.",
       "revId": "be092f7e5ea7f17d3f17dc0ee5020243845c44b9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c895197_9cc8f545",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-29T19:17:52Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "89345400_baba3b71",
+      "revId": "be092f7e5ea7f17d3f17dc0ee5020243845c44b9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
