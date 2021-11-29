@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8418662_2de614b2",
+        "filename": "src/support/nfs_convert.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-11-29T19:24:44Z",
+      "side": 1,
+      "message": "Hmm, at least for some log messages, I would still prefer to see the NFS3PROC_ or NFS4_OP_ prefixes in the logged string.\n\nAlso, there are still NFS3 op names in worker_thread.c...\n\nAnd since those names are in structs that are also used by the other NFSv3 RPC programs, I\u0027d prefer to keep the name strings in those tables, and have nfsproc[34]_to_str get the names from those tables rather than introduce a new array of strings.",
+      "revId": "5330d2e89f05c25e37cd18259ba4aac1149880cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
