@@ -281,6 +281,24 @@
       "parentUuid": "52d78003_fcee262d",
       "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4a711c_8ccf5cd4",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-11-29T15:02:49Z",
+      "side": 1,
+      "message": "Interesting, I sort of take this back.  fridgethr_populate() is only called by 9p (which, by the way, is unrelated to NFS).  So this is technically okay, but will start to fail if anyone else ever calls fridghthr_populate().  The actual threads that run NFS operations are created by ntirpc, not by Ganesha.",
+      "parentUuid": "b01b043e_939408c1",
+      "revId": "c719c03244b4432de1fb6aa6fea9110ac3eb1c9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
