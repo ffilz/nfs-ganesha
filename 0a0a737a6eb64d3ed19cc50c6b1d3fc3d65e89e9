@@ -16,6 +16,24 @@
       "message": "I\u0027m not quite sure who else should review this. It looks OK to me, but I\u0027ve also never used the stats dBus commands...",
       "revId": "0a0a737a6eb64d3ed19cc50c6b1d3fc3d65e89e9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e264600_5e6a17a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2021-11-30T08:52:27Z",
+      "side": 1,
+      "message": "yap...\nActually, when I make the python script work well. I seldom use dBus command, too.\nThis improvement is that when the python script crash, that would be helpful to use dBus command to check the output and fix that(python script).\n\nWe would not check the build parameter to confirm what protocol that boolean value means.",
+      "parentUuid": "78913d11_063717c8",
+      "revId": "0a0a737a6eb64d3ed19cc50c6b1d3fc3d65e89e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
