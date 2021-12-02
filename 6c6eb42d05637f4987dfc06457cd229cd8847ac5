@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5021c24_de9974f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-02T13:57:36Z",
+      "side": 1,
+      "message": "\u003e Patch Set 13: Verified-1\n\u003e \n\u003e https://ci.centos.org//job/nfs_ganesha_cthon04/6254/console : FAILED\n\nThis error is because jenkins is not building ganesha along with rgw libraries. It builds successfully on my local machine.",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
