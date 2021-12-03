@@ -53,6 +53,74 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3eddc0c_cdb19ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:30:24Z",
+      "side": 1,
+      "message": "Please use gsh_strldup to assure the strings are properly NUL terminated and the buffer is properly allocated for that.",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd9d938_888d56f5",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:30:24Z",
+      "side": 1,
+      "message": "Use gsh_strldup it adds the \u0027\\0\u0027 NUL character onto the end, the length passed would be attrs-\u003exattrs-\u003eval.len and the extra byte for the \u0027\\0\u0027 NUL character will be allocated. If the allocation fails, Ganesha will abort.",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161f4a3c_6ed30e93",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:30:24Z",
+      "side": 1,
+      "message": "Won\u0027t need this if you use gsh_strldup",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0857fee_a075227c",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:30:24Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this also use gsh_strldup?",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57f411f6_6ae0a661",
