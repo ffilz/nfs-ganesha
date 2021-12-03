@@ -35,6 +35,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3926322_1e1c16e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T21:35:27Z",
+      "side": 1,
+      "message": "Matt and I had a conversation on IRC and I think a better way to resolve this is to queue each duplicate request behind the original request. Then when it\u0027s complete, we can just resubmit and then it will see the response in the DRC and send that. We could optimize and only resend if the original reply fails with XPRT_DIED. In any case, we can leverage the async code to handle this without blocking threads.",
+      "revId": "afff10d29f3a11ff7b7801e14e657af04510256b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb177158_405b8188",
