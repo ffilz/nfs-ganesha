@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "0201bb33_d913f540",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -14,8 +15,25 @@
       "side": 1,
       "message": "So, the arguments to the callback need to be the RGW structures, not the Ganesha structures.  This means it needs to be a rgw_xattrlist not a struct xattrlist.  You\u0027ll need to translate in the callback.",
       "revId": "f9104c4abcff64076d288dae229b39c6d6207732",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f057629e_fa83fed2",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0201bb33_d913f540",
+      "revId": "f9104c4abcff64076d288dae229b39c6d6207732",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

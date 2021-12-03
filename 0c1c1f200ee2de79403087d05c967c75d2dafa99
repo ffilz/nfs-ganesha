@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "d96cd8fe_d174402f",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -14,10 +15,28 @@
       "side": 1,
       "message": "Why no listxattrs?",
       "revId": "0c1c1f200ee2de79403087d05c967c75d2dafa99",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8834bc8a_e1ad23af",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d96cd8fe_d174402f",
+      "revId": "0c1c1f200ee2de79403087d05c967c75d2dafa99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "5444b68f_6351f493",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -31,8 +50,25 @@
       "side": 1,
       "message": "Need to set the ops-\u003egetxattrs and so on in here.",
       "revId": "0c1c1f200ee2de79403087d05c967c75d2dafa99",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "199bd957_68fafef4",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1849,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5444b68f_6351f493",
+      "revId": "0c1c1f200ee2de79403087d05c967c75d2dafa99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

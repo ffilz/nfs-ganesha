@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "b3eeeb61_abe1df9b",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^I^Isize is double the size of la_maxcount$",
       "revId": "a379514fba81893ba636a9506d69f4c5fb5a9a10",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "34274cf7_fcff9fea",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^I^Ito allow for component4 overhead$",
       "revId": "a379514fba81893ba636a9506d69f4c5fb5a9a10",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6d7e0c79_f8562c39",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -48,10 +49,10 @@
       "side": 1,
       "message": "what part is not yet implemented?",
       "revId": "a379514fba81893ba636a9506d69f4c5fb5a9a10",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d66034d9_24981022",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -66,8 +67,25 @@
       "message": "filter_prefix in rgw_lsxattrs isn\u0027t implemented yet.",
       "parentUuid": "6d7e0c79_f8562c39",
       "revId": "a379514fba81893ba636a9506d69f4c5fb5a9a10",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c93733_190e3b0e",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d66034d9_24981022",
+      "revId": "a379514fba81893ba636a9506d69f4c5fb5a9a10",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

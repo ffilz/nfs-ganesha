@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "e5f6be08_319366b5",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -14,10 +15,28 @@
       "side": 1,
       "message": "where are cb and cb_arg defined?",
       "revId": "80d1a0c06ded6c67d2aa7c9db55ebe559d083718",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c47a0a5_01a11d04",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5f6be08_319366b5",
+      "revId": "80d1a0c06ded6c67d2aa7c9db55ebe559d083718",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "ce6da10c_f562c1ea",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -31,10 +50,28 @@
       "side": 1,
       "message": "does our api really process one xattr at a time?",
       "revId": "80d1a0c06ded6c67d2aa7c9db55ebe559d083718",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f10aa01a_42e3bdcb",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce6da10c_f562c1ea",
+      "revId": "80d1a0c06ded6c67d2aa7c9db55ebe559d083718",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "0e51ab06_a6bd6917",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -48,8 +85,25 @@
       "side": 1,
       "message": "does our api really process 1 xattr at a time?",
       "revId": "80d1a0c06ded6c67d2aa7c9db55ebe559d083718",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb8dc4b_f852f8e6",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e51ab06_a6bd6917",
+      "revId": "80d1a0c06ded6c67d2aa7c9db55ebe559d083718",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

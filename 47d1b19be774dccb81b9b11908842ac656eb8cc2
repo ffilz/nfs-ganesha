@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "8b0cdeb5_f40105da",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -14,10 +15,28 @@
       "side": 1,
       "message": "This one should not be a strdup, just use the pointer.  This is because rgw_getxattrs() doesn\u0027t save this string, just reads it, and only uses it during the call.  If you strdup() here, you\u0027ll need to free after.",
       "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7d98f5_a41af35d",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b0cdeb5_f40105da",
+      "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "8fac0a2e_9d126190",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -31,10 +50,28 @@
       "side": 1,
       "message": "Same here w.r.t. strdup",
       "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5605c97_53531513",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fac0a2e_9d126190",
+      "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "b3fc1746_84eb0490",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -48,10 +85,28 @@
       "side": 1,
       "message": "same here w.r.t. strdup",
       "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76248d2_5aa9d070",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1817,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3fc1746_84eb0490",
+      "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "da699688_689be0e3",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
@@ -65,8 +120,25 @@
       "side": 1,
       "message": "same here w.r.t. strdup",
       "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "958dcb43_881283d9",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1848,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-03T19:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da699688_689be0e3",
+      "revId": "47d1b19be774dccb81b9b11908842ac656eb8cc2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
