@@ -75,15 +75,13 @@ typedef struct drc {
 	} d_u;
 } drc_t;
 
-typedef enum dupreq_state {
-	DUPREQ_START = 0,
-	DUPREQ_COMPLETE,
-} dupreq_state_t;
+#define DUPREQ_MAX_DUPES 3
 
 struct dupreq_entry {
 	struct opr_rbtree_node rbt_k;
 	/* Define the tail queue */
 	TAILQ_ENTRY(dupreq_entry) fifo_q;
+	TAILQ_HEAD(dupes, nfs_request) dupes;
 	pthread_mutex_t mtx;
 	struct {
 		sockaddr_t addr;
@@ -96,9 +94,11 @@ struct dupreq_entry {
 		uint32_t rq_proc;
 	} hin;
 	uint64_t hk;		/* hash key */
-	dupreq_state_t state;
+	bool complete;
 	uint32_t refcnt;
 	nfs_res_t *res;
+	enum nfs_req_result rc;
+	int dupe_cnt;
 };
 
 typedef struct dupreq_entry dupreq_entry_t;
@@ -115,10 +115,18 @@ static inline void free_nfs_res(nfs_res_t *res)
 	pool_free(nfs_res_pool, res);
 }
 
+static inline enum nfs_req_result nfs_dupreq_reply_rc(nfs_request_t *reqnfs)
+{
+	dupreq_entry_t *dv = reqnfs->svc.rq_u1;
+
+	return dv->rc;
+}
+
 typedef enum dupreq_status {
 	DUPREQ_SUCCESS = 0,
 	DUPREQ_BEING_PROCESSED,
 	DUPREQ_EXISTS,
+	DUPREQ_DROP,
 } dupreq_status_t;
 
 void dupreq2_pkginit(void);
@@ -128,10 +136,9 @@ drc_t *drc_get_tcp_drc(struct svc_req *);
 void drc_release_tcp_drc(drc_t *);
 void nfs_dupreq_put_drc(drc_t *drc);
 
-dupreq_status_t nfs_dupreq_start(nfs_request_t *,
-				 struct svc_req *);
-void nfs_dupreq_finish(struct svc_req *, nfs_res_t *);
-void nfs_dupreq_delete(struct svc_req *);
-void nfs_dupreq_rele(struct svc_req *, const nfs_function_desc_t *);
+dupreq_status_t nfs_dupreq_start(nfs_request_t *);
+void nfs_dupreq_finish(nfs_request_t *,  enum nfs_req_result);
+void nfs_dupreq_delete(nfs_request_t *,  enum nfs_req_result);
+void nfs_dupreq_rele(nfs_request_t *);
 
 #endif /* NFS_DUPREQ_H */
