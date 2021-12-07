@@ -67,6 +67,24 @@
       "message": "Solomon, could you weigh in on this? It looks like a simple fix so if it makes sense, I\u0027d like to get it into V4.0 which will be finalized in the next few weeks.\n\nThanks\n\nFrank",
       "revId": "36714b11b51f265a2bddcc7e7bbc0aacfd0c13c9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4276875b_4e1ae5cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2021-12-07T22:26:43Z",
+      "side": 1,
+      "message": "Sorry, I think we went back and forth on this on the mailing list, but this isn\u0027t (quite) the right fix. The confusion seems to come with the proxy code mixing terms like FH / fh_len and its proxyv4_handle_blob.\n\nHandleMap_SetFH is being called from handle.c with n-\u003eblob.len as the argument for *datalen* which is being compared / thought of as an fh4. Indeed, the result from GetFH is ultimately passed to proxyv4_create_handle, which believes that the thing it\u0027s getting in hdl_desc is a proxyv4_handle_blob. proxyv4_create_handle then pulls out the fh4 by taking off the first two bytes of proxyv4_handle_blob.\n\nSo that\u0027s why +2 fixes the problem -- it\u0027s really sizeof(proxyv4_handle_blob). But calling the thing in handle_pool_entry_t an fh_len/fh_data pair makes it seem like it\u0027s an FH4.\n\nDo folks have an opinion on the minimum rewording to some of the handle map code here? (at the very least I\u0027d put a comment explaining the FH4 + 2 logic as being FH4 in a proxyv4_handle_blob)",
+      "parentUuid": "d11a0564_ca81e9ff",
+      "revId": "36714b11b51f265a2bddcc7e7bbc0aacfd0c13c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
