@@ -35,6 +35,57 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "374d2710_a8292e78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2021-12-08T19:55:13Z",
+      "side": 1,
+      "message": "more comments, checked retwnd management, looks ok (but agree per chat discussion that queuing a request for retry should increment retwnd)",
+      "revId": "afa002e209c94efcdb38ad9e2590ae8921b26f0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d061bb33_1dfdc8f6",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2021-12-08T19:55:13Z",
+      "side": 1,
+      "message": "finding a cache hit (a retry) increments retwnd, that\u0027s unchanged +1",
+      "revId": "afa002e209c94efcdb38ad9e2590ae8921b26f0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de360bf_9696eeef",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2021-12-08T19:55:13Z",
+      "side": 1,
+      "message": "I don\u0027t see code to dequeue the suspended dupe request;  am I missing it?",
+      "revId": "afa002e209c94efcdb38ad9e2590ae8921b26f0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce6b4eb1_7ea4f015",
