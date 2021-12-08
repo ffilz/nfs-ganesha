@@ -33,6 +33,57 @@
       "message": "Looks good to me.  Not sure how to test, though.",
       "revId": "afa002e209c94efcdb38ad9e2590ae8921b26f0a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce6b4eb1_7ea4f015",
+        "filename": "src/include/nfs_dupreq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2021-12-08T15:25:22Z",
+      "side": 1,
+      "message": "as noted in irc, i don\u0027t think we can accept an unbounded number of retry requests--ideally, we would only need one",
+      "revId": "afa002e209c94efcdb38ad9e2590ae8921b26f0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b82e0f_5e5a7eae",
+        "filename": "src/include/nfs_proto_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2021-12-08T15:25:22Z",
+      "side": 1,
+      "message": "ditto here, unbounded number of (expensive) retry objects",
+      "revId": "afa002e209c94efcdb38ad9e2590ae8921b26f0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7729076_8769920a",
+        "filename": "src/include/nfs_proto_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2021-12-08T15:25:22Z",
+      "side": 1,
+      "message": "+1",
+      "revId": "afa002e209c94efcdb38ad9e2590ae8921b26f0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
