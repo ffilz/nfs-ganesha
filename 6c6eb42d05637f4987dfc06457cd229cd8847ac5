@@ -104,6 +104,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "205ea792_edc0dcec",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-13T14:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecd9d938_888d56f5",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "161f4a3c_6ed30e93",
@@ -117,6 +135,24 @@
       "writtenOn": "2021-12-03T19:30:24Z",
       "side": 1,
       "message": "Won\u0027t need this if you use gsh_strldup",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e45b482a_a804b739",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-13T14:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "161f4a3c_6ed30e93",
       "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -138,6 +174,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b951be7_9660fc77",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-13T14:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0857fee_a075227c",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57f411f6_6ae0a661",
@@ -151,6 +205,24 @@
       "writtenOn": "2021-12-02T14:24:26Z",
       "side": 1,
       "message": "This line shouldn\u0027t be necessary, since it was already checked above.",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "273b5274_65113e96",
+        "filename": "src/cmake/modules/FindRGW.cmake",
+        "patchSetId": 13
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-13T14:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57f411f6_6ae0a661",
       "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -172,6 +244,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09df0503_b900bdfa",
+        "filename": "src/cmake/modules/FindRGW.cmake",
+        "patchSetId": 13
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-13T14:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "438fb527_5a14d155",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0317591f_f2415865",
@@ -185,6 +275,24 @@
       "writtenOn": "2021-12-02T14:24:26Z",
       "side": 1,
       "message": "The extra check exists isn\u0027t necessary, you already checked rgw_getxattrs above.  Just use the results.",
+      "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1aef6ab_bb96ad8e",
+        "filename": "src/cmake/modules/FindRGW.cmake",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-13T14:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0317591f_f2415865",
       "revId": "6c6eb42d05637f4987dfc06457cd229cd8847ac5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
