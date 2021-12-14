@@ -16,6 +16,24 @@
       "message": "looks ok to me, from my recollection of the api;  what kind of testing has been done (and might we automate in future)?",
       "revId": "f0bcfaada1315d8a4968e83dbc13e9df8f82b755",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8dcf5f5_94b4a904",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015769
+      },
+      "writtenOn": "2021-12-14T11:49:11Z",
+      "side": 1,
+      "message": "Matt I haven\u0027t run any specific xattr test, when I wrote the code for gluster api I did manual testing and wrote a test case in ceph-ci automating that manual test. For rgw I am not aware of any xattr test if present.",
+      "parentUuid": "00881f38_80a4eb39",
+      "revId": "f0bcfaada1315d8a4968e83dbc13e9df8f82b755",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
