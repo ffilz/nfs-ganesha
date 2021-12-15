@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a7b4e1_d75cdc6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2021-12-15T16:32:38Z",
+      "side": 1,
+      "message": "This should be good now. Off by 1 error if using default (original) server_scope which was caught by ASAN and caused process abort.",
+      "revId": "84d6838703c6a089191b606d2d68d6213e64c1e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
