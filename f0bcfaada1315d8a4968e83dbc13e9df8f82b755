@@ -52,6 +52,23 @@
       "parentUuid": "f8dcf5f5_94b4a904",
       "revId": "f0bcfaada1315d8a4968e83dbc13e9df8f82b755",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea04b35_8466a010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2021-12-17T18:00:52Z",
+      "side": 1,
+      "message": "I cannot get xattrs to work with this patch.  The pynfs xattr tests fail, and trying manually gives operation not supported.",
+      "revId": "f0bcfaada1315d8a4968e83dbc13e9df8f82b755",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
