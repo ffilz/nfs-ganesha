@@ -65,6 +65,10 @@ struct mdcache_parameter {
 		uint32_t avl_detached_mult;
 		/** Computed max detached dirents */
 		uint32_t avl_detached_max;
+		/** Max count of dirents per response, currently precomputed
+		 *  from avl_chunk.
+		 */
+		uint32_t max_count;
 	} dir;
 	/** High water mark for cache entries.  Defaults to 100000,
 	    settable by Entries_HWMark. */

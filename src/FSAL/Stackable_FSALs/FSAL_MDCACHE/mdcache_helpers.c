@@ -2887,6 +2887,7 @@ fsal_status_t mdcache_readdir_chunked(mdcache_entry_t *directory,
 	bool reload_chunk = false;
 	bool whence_is_name = op_ctx->fsal_export->exp_ops.fs_supports(
 				op_ctx->fsal_export, fso_whence_is_name);
+	int count = 0;
 
 
 #ifdef USE_LTTNG
@@ -3316,6 +3317,8 @@ again:
 		cb_result = cb(dirent->name, &entry->obj_handle, &attrs,
 			       dir_state, dirent->ck);
 
+		count++;
+
 		fsal_release_attrs(&attrs);
 
 		if (whence_is_name) {
@@ -3334,7 +3337,8 @@ again:
 				fsal_dir_result_str(cb_result),
 				dirent->eod ? "true" : "false");
 
-		if (cb_result >= DIR_TERMINATE || dirent->eod) {
+		if (cb_result >= DIR_TERMINATE || dirent->eod
+		    || count == mdcache_param.dir.max_count) {
 			/* Caller is done, or we have reached the end of
 			 * the directory, no need to get another dirent.
 			 */
