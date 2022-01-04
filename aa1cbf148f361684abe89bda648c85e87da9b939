@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06a09ec9_5c12dfee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-04T23:14:55Z",
+      "side": 1,
+      "message": "Prabhu, try this. I settled on 4 x chunk size. The default Linux client asks for a 30k max response which is reasonable. We really only need to limit when the response size is unreasonable so I aimed for a larger max count.",
+      "revId": "aa1cbf148f361684abe89bda648c85e87da9b939",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
