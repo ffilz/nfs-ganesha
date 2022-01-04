@@ -153,6 +153,9 @@ int mdcache_set_param_from_conf(config_file_t parse_tree,
 	mdcache_param.dir.avl_detached_max =
 	    mdcache_param.dir.avl_chunk * mdcache_param.dir.avl_detached_mult;
 
+	/* Compute max_count from avl_chunk. */
+	mdcache_param.dir.max_count = mdcache_param.dir.avl_chunk * 4;
+
 	return 0;
 }
 
