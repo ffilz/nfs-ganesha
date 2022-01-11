@@ -701,6 +701,13 @@ proxyv3_setattr2(struct fsal_obj_handle *obj_hdl,
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
+	/* Check that rawdev wasn't set */
+	if (attrib_set & ATTR_RAWDEV) {
+		LogCrit(COMPONENT_FSAL,
+			"SETATTR3() with ATTR_RAWDEV is invalid");
+		return fsalstat(ERR_FSAL_INVAL, 0);
+	}
+
 	/* If the call fails for any reason, exit. */
 	if (!proxyv3_nfs_call(proxyv3_sockaddr(),
 			      proxyv3_socklen(),
@@ -2555,7 +2562,7 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3)
 	    fsinfo->maxfilesize > resok->maxfilesize) {
 		LogWarn(COMPONENT_FSAL,
 			"SKIPPING: Asked to change maxfilesize "
-			"from %" PRIu64 "to %" PRIu64,
+			"from %" PRIu64 " to %" PRIu64,
 			fsinfo->maxfilesize, resok->maxfilesize);
 
 		/*
