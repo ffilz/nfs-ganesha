@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "102259b1_b56a7c1b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-01-11T03:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c066366_b60db71e",
+      "revId": "077a3a9c065dd304c6567911c38ce4331dd45826",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "912606b0_b8c036a1",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-11T00:56:26Z",
       "side": 1,
       "message": "Hmm, are you sure this should be a LogCrit?",
+      "revId": "077a3a9c065dd304c6567911c38ce4331dd45826",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df7d07fe_f3c08e2d",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-01-11T03:14:37Z",
+      "side": 1,
+      "message": "Good point, I was just following the general pattern.\n\nI downgraded this and other possible errors to LogWarn. I left memory allocation, unsupported and unlikely problems as LogCrit.",
+      "parentUuid": "912606b0_b8c036a1",
       "revId": "077a3a9c065dd304c6567911c38ce4331dd45826",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "Please fix...",
       "parentUuid": "e9d47564_0915dada",
+      "revId": "077a3a9c065dd304c6567911c38ce4331dd45826",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dda54fa_25a9bcd8",
+        "filename": "src/FSAL/FSAL_PROXY_V3/utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-01-11T03:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76ec40ae_29c72ffa",
       "revId": "077a3a9c065dd304c6567911c38ce4331dd45826",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
