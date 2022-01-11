@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "540ef1bc_d74c903b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-11T14:54:32Z",
+      "side": 1,
+      "message": "I see the issue but I don\u0027t think the fix is quite right.",
+      "revId": "27699fd4b930fbeb2a2d39484d69af505b33e264",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93e3e818_1463194f",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-11T14:54:32Z",
+      "side": 1,
+      "message": "The +2 is supposed to cover \u0027/\u0027 after parent_len and \u0027\\0\u0027 after segment_len",
+      "revId": "27699fd4b930fbeb2a2d39484d69af505b33e264",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e58fa1_ac638877",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-11T14:54:32Z",
+      "side": 1,
+      "message": "Target of parent_len + 1 should copy after the \u0027/\u0027\nlength of segment_len + 1 should copy the \u0027\\0\u0027 from segment_len\n\nHowever, I think the actual bug is that we should just copy segment_len bytes, there may not be a \u0027\\0\u0027.\n\nSo I think what we want is\ntotal_len \u003d parent_len + segment_len + 2;\nmemcpy(path + parent_len + 1, recov_dir + position, segment_len);\npath[total_len - 1] \u003d \u0027\\0\u0027;",
+      "revId": "27699fd4b930fbeb2a2d39484d69af505b33e264",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
