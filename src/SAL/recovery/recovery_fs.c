@@ -377,12 +377,13 @@ static void fs_rm_clid_impl(int position,
 	/* allocate enough memory for the new part of the string
 	 * which is parent path + '/' + new segment
 	 */
-	total_len = parent_len + segment_len + 2;
+	total_len = parent_len + segment_len + 3;
 	path = gsh_malloc(total_len);
 
 	memcpy(path, parent_path, parent_len);
 	path[parent_len] = '/';
 	memcpy(path + parent_len + 1, recov_dir + position, segment_len + 1);
+	path[total_len - 1] = '\0';
 
 	/* recursively remove the directory hirerchy which represent the
 	 *clientid
