@@ -526,7 +526,7 @@ proxyv3_lookup_internal(struct fsal_export *export_handle,
 			      NFSPROC3_LOOKUP,
 			      (xdrproc_t) xdr_LOOKUP3args, &args,
 			      (xdrproc_t) xdr_LOOKUP3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"LOOKUP3 failed");
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -605,7 +605,7 @@ proxyv3_getattr_from_fh3(struct nfs_fh3 *fh3,
 			      NFSPROC3_GETATTR,
 			      (xdrproc_t) xdr_GETATTR3args, &args,
 			      (xdrproc_t) xdr_GETATTR3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call failed (%u)",
 			result.status);
 		return fsalstat(ERR_FSAL_INVAL, 0);
@@ -696,8 +696,15 @@ proxyv3_setattr2(struct fsal_obj_handle *obj_hdl,
 	/* NOTE(boulos): Ganesha NFSD handles this above us in nfs3_setattr. */
 	args.guard.check = false;
 	if (!fsalattr_to_sattr3(attrib_set, &args.new_attributes)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"SETATTR3() with invalid attributes");
+		return fsalstat(ERR_FSAL_INVAL, 0);
+	}
+
+	/* Check that rawdev wasn't set */
+	if (FSAL_TEST_MASK(attrib_set->request_mask, ATTR_RAWDEV)) {
+		LogWarn(COMPONENT_FSAL,
+			"SETATTR3() with ATTR_RAWDEV is invalid");
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
@@ -709,7 +716,7 @@ proxyv3_setattr2(struct fsal_obj_handle *obj_hdl,
 			      NFSPROC3_SETATTR,
 			      (xdrproc_t) xdr_SETATTR3args, &args,
 			      (xdrproc_t) xdr_SETATTR3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call failed (%u)",
 			result.status);
 		return fsalstat(ERR_FSAL_INVAL, 0);
@@ -889,7 +896,7 @@ proxyv3_issue_createlike(struct proxyv3_obj_handle *parent_obj,
 			      nfsProc,
 			      encFunc, encArgs,
 			      decFunc, decArgs)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"%s failed", procName);
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -1120,13 +1127,13 @@ proxyv3_symlink(struct fsal_obj_handle *dir_hdl,
 	args.where.name = (char *) name;
 
 	if (attrs_in == NULL) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"symlink called without attributes. Unexpected");
 		return fsalstat(ERR_FSAL_FAULT, 0);
 	}
 
 	if (!fsalattr_to_sattr3(attrs_in, &args.symlink.symlink_attributes)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"SYMLINK3 with invalid attributes");
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -1185,7 +1192,7 @@ proxyv3_hardlink(struct fsal_obj_handle *obj_hdl,
 			      NFSPROC3_LINK,
 			      (xdrproc_t) xdr_LINK3args, &args,
 			      (xdrproc_t) xdr_LINK3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"LINK3 failed");
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -1237,7 +1244,7 @@ proxyv3_readlink(struct fsal_obj_handle *obj_hdl,
 			      NFSPROC3_READLINK,
 			      (xdrproc_t) xdr_READLINK3args, &args,
 			      (xdrproc_t) xdr_READLINK3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"rpc for READLINK3 failed.");
 		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
 	}
@@ -1308,7 +1315,7 @@ proxyv3_close2(struct fsal_obj_handle *obj_hdl,
 			return fsalstat(ERR_FSAL_NOT_OPENED, 0);
 		}
 
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"Received unexpected stateful CLOSE with state_type %d",
 			state->state_type);
 
@@ -1354,7 +1361,7 @@ proxyv3_mkdir(struct fsal_obj_handle *dir_hdl,
 	args.where.name = (char *) name;
 
 	if (!fsalattr_to_sattr3(attrs_in, &args.attributes)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"MKDIR() with invalid attributes");
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -1419,7 +1426,7 @@ proxyv3_mknode(struct fsal_obj_handle *dir_hdl,
 		args.what.type = NF3FIFO;
 		break;
 	default:
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"mknode got invalid MKNOD type %d",
 			nodetype);
 	}
@@ -1440,7 +1447,7 @@ proxyv3_mknode(struct fsal_obj_handle *dir_hdl,
 	}
 
 	if (!fsalattr_to_sattr3(attrs_in, attrs)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"MKNOD() with invalid attributes");
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -1528,7 +1535,7 @@ proxyv3_readdir_process_entries(entryplus3 *entry,
 						     NULL /* drop attrs */);
 
 			if (FSAL_IS_ERROR(rc)) {
-				LogCrit(COMPONENT_FSAL,
+				LogWarn(COMPONENT_FSAL,
 					"Last chance LOOKUP failed for READDIRPLUS entry '%s'",
 					entry->name);
 				return rc;
@@ -1567,7 +1574,7 @@ proxyv3_readdir_process_entries(entryplus3 *entry,
 			rc = proxyv3_getattr_from_fh3(fh3, attrs);
 
 			if (FSAL_IS_ERROR(rc)) {
-				LogCrit(COMPONENT_FSAL,
+				LogWarn(COMPONENT_FSAL,
 					"Last chance GETATTR failed for READDIRPLUS entry '%s'",
 					entry->name);
 				return rc;
@@ -1669,7 +1676,7 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 
 	/* Check that attrmask is at most NFSv3 */
 	if (!attrmask_is_nfs3(attrmask)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"readdir asked for incompatible output attrs");
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -1711,7 +1718,7 @@ proxyv3_readdir(struct fsal_obj_handle *dir_hdl,
 				      NFSPROC3_READDIRPLUS,
 				      encFunc, &args,
 				      decFunc, &result)) {
-			LogCrit(COMPONENT_FSAL,
+			LogWarn(COMPONENT_FSAL,
 				"proxyv3_nfs_call for READDIRPLUS failed (%u)",
 				result.status);
 			return fsalstat(ERR_FSAL_SERVERFAULT, 0);
@@ -1816,7 +1823,7 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 
 	if (read_arg->iov_count > 1) {
 		LogCrit(COMPONENT_FSAL,
-			"Got asked for multiple reads at once. Unexpected.");
+			"Got asked for multiple reads at once. Unsupported.");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			read_arg, cb_arg);
 		return;
@@ -1858,7 +1865,7 @@ proxyv3_read2(struct fsal_obj_handle *obj_hdl,
 			      NFSPROC3_READ,
 			      (xdrproc_t) xdr_READ3args, &args,
 			      (xdrproc_t) xdr_READ3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call failed (%u)",
 			result.status);
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0),
@@ -1952,7 +1959,7 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 	 */
 	if (write_arg->iov_count > 1) {
 		LogCrit(COMPONENT_FSAL,
-			"Got asked for multiple writes at once. Unexpected.");
+			"Got asked for multiple writes at once. Unsupported.");
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_NOTSUPP, 0),
 			write_arg, cb_arg);
 		return;
@@ -1995,7 +2002,7 @@ proxyv3_write2(struct fsal_obj_handle *obj_hdl,
 			      NFSPROC3_WRITE,
 			      (xdrproc_t) xdr_WRITE3args, &args,
 			      (xdrproc_t) xdr_WRITE3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call failed (%u)",
 			result.status);
 		done_cb(obj_hdl, fsalstat(ERR_FSAL_SERVERFAULT, 0),
@@ -2052,7 +2059,7 @@ proxyv3_commit2(struct fsal_obj_handle *obj_hdl,
 			      NFSPROC3_COMMIT,
 			      (xdrproc_t) xdr_COMMIT3args, &args,
 			      (xdrproc_t) xdr_COMMIT3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call failed (%u)",
 			result.status);
 		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
@@ -2139,7 +2146,7 @@ proxyv3_unlink(struct fsal_obj_handle *dir_hdl,
 			      method,
 			      enc, args,
 			      dec, result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call failed (%u)",
 			*status);
 		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
@@ -2200,7 +2207,7 @@ proxyv3_rename(struct fsal_obj_handle *obj_hdl,
 			      NFSPROC3_RENAME,
 			      (xdrproc_t) xdr_RENAME3args, &args,
 			      (xdrproc_t) xdr_RENAME3res, &result))  {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call for RENAME failed");
 		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
 	}
@@ -2247,7 +2254,7 @@ proxyv3_get_dynamic_info(struct fsal_export *export_handle,
 			      NFSPROC3_FSSTAT,
 			      (xdrproc_t) xdr_FSSTAT3args, &args,
 			      (xdrproc_t) xdr_FSSTAT3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"proxyv3_nfs_call for FSSTAT3 failed (%u)",
 			result.status);
 		return fsalstat(ERR_FSAL_INVAL, 0);
@@ -2513,7 +2520,7 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3)
 			      NFSPROC3_FSINFO,
 			      (xdrproc_t) xdr_FSINFO3args, &args,
 			      (xdrproc_t) xdr_FSINFO3res, &result)) {
-		LogCrit(COMPONENT_FSAL,
+		LogWarn(COMPONENT_FSAL,
 			"FSINFO failed");
 		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
 	}
@@ -2555,7 +2562,7 @@ proxyv3_fill_fsinfo(nfs_fh3 *fh3)
 	    fsinfo->maxfilesize > resok->maxfilesize) {
 		LogWarn(COMPONENT_FSAL,
 			"SKIPPING: Asked to change maxfilesize "
-			"from %" PRIu64 "to %" PRIu64,
+			"from %" PRIu64 " to %" PRIu64,
 			fsinfo->maxfilesize, resok->maxfilesize);
 
 		/*
