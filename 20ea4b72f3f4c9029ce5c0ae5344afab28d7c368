@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c152856_6c3bc091",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-12T17:58:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* We fail with LogFatal here on error because it",
+      "revId": "20ea4b72f3f4c9029ce5c0ae5344afab28d7c368",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd67e37_6c7fc939",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-12T17:58:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t * V6 based udp socket and have failed for the tcp",
+      "revId": "20ea4b72f3f4c9029ce5c0ae5344afab28d7c368",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec62fa7_d726b302",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1168,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-12T17:58:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t * the first udp sock create and would have moved",
+      "revId": "20ea4b72f3f4c9029ce5c0ae5344afab28d7c368",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8292ff9d_e000aecf",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-12T17:58:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t tags[p], errno, strerror(errno));",
+      "revId": "20ea4b72f3f4c9029ce5c0ae5344afab28d7c368",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d3b6c87_4e3a3067",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-12T17:58:47Z",
+      "side": 1,
+      "message": "WARNING: Statements should start on a tabstop\n+\t\t\t\t }",
+      "revId": "20ea4b72f3f4c9029ce5c0ae5344afab28d7c368",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
