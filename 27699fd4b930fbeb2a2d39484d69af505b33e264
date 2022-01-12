@@ -50,6 +50,24 @@
       "message": "Target of parent_len + 1 should copy after the \u0027/\u0027\nlength of segment_len + 1 should copy the \u0027\\0\u0027 from segment_len\n\nHowever, I think the actual bug is that we should just copy segment_len bytes, there may not be a \u0027\\0\u0027.\n\nSo I think what we want is\ntotal_len \u003d parent_len + segment_len + 2;\nmemcpy(path + parent_len + 1, recov_dir + position, segment_len);\npath[total_len - 1] \u003d \u0027\\0\u0027;",
       "revId": "27699fd4b930fbeb2a2d39484d69af505b33e264",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f10f2bd_cdbcf62b",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-01-12T06:04:06Z",
+      "side": 1,
+      "message": "Thanks for review. I have updated the patch.",
+      "parentUuid": "83e58fa1_ac638877",
+      "revId": "27699fd4b930fbeb2a2d39484d69af505b33e264",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
