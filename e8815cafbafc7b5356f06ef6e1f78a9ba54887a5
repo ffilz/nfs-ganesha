@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa321714_5e1ef0dd",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-13T23:33:55Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst bool allow_rawdev \u003d false;\n+\tif (!fsalattr_to_sattr3(attrib_set,",
+      "revId": "e8815cafbafc7b5356f06ef6e1f78a9ba54887a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "298ce5e9_20812085",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-13T23:33:55Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tconst bool allow_rawdev \u003d false;\n+\t\tif (!fsalattr_to_sattr3(attrib_set, allow_rawdev, attrs)) {",
+      "revId": "e8815cafbafc7b5356f06ef6e1f78a9ba54887a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "229bd8b3_0c0163b8",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-13T23:33:55Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst bool allow_rawdev \u003d false;\n+\tif (!fsalattr_to_sattr3(attrs_in,",
+      "revId": "e8815cafbafc7b5356f06ef6e1f78a9ba54887a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd41938e_37d75133",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-13T23:33:55Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst bool allow_rawdev \u003d false;\n+\tif (!fsalattr_to_sattr3(attrs_in, allow_rawdev, \u0026args.attributes)) {",
+      "revId": "e8815cafbafc7b5356f06ef6e1f78a9ba54887a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a579bb41_66bcb61a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1451,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-01-13T23:33:55Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst bool allow_rawdev \u003d true;\n+\tif (!fsalattr_to_sattr3(attrs_in, allow_rawdev, attrs)) {",
+      "revId": "e8815cafbafc7b5356f06ef6e1f78a9ba54887a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
