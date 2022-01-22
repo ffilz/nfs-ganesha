@@ -152,7 +152,7 @@ struct vfs_fsal_obj_handle *alloc_handle(int dirfd,
 
 	if (hdl->obj_handle.type == REGULAR_FILE) {
 		hdl->u.file.fd.fd = -1;	/* no open on this yet */
-		hdl->u.file.fd.openflags = FSAL_O_CLOSED;
+		hdl->u.file.fd.fsal_fd.openflags = FSAL_O_CLOSED;
 	} else if (hdl->obj_handle.type == SYMBOLIC_LINK) {
 		ssize_t retlink;
 		size_t len = stat->st_size + 1;
@@ -1227,7 +1227,7 @@ static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
 	PTHREAD_RWLOCK_rdlock(&obj_hdl->obj_lock);
 
 	if (obj_hdl->type == REGULAR_FILE &&
-	    myself->u.file.fd.openflags != FSAL_O_CLOSED) {
+	    myself->u.file.fd.fsal_fd.openflags != FSAL_O_CLOSED) {
 		srcfd = myself->u.file.fd.fd;
 	} else {
 		srcfd = vfs_fsal_open(myself, flags, &fsal_error);
@@ -1586,11 +1586,13 @@ struct closefd vfs_fsal_open_and_stat(struct fsal_export *exp,
 		 * mode. If not, open a temporary file descriptor.
 		 *
 		 * Note that FSAL_O_REOPEN will never be set in
-		 * myself->u.file.fd.openflags and thus forces a re-open.
+		 * myself->u.file.fd.fsal_fd.openflags and thus forces a
+		 * re-open.
 		 */
 		if (((flags & FSAL_O_ANY) != 0 &&
-		     (myself->u.file.fd.openflags & FSAL_O_RDWR) == 0) ||
-		    ((myself->u.file.fd.openflags & flags) != flags)) {
+		     (myself->u.file.fd.fsal_fd.openflags & FSAL_O_RDWR) == 0)
+		     ||
+		    ((myself->u.file.fd.fsal_fd.openflags & flags) != flags)) {
 			/* no file open at the moment */
 			cfd.fd = vfs_fsal_open(myself, open_flags, fsal_error);
 			if (cfd.fd < 0) {
@@ -1835,6 +1837,8 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 #endif
 	ops->setattr2 = vfs_setattr2;
 	ops->close2 = vfs_close2;
+	ops->close_func = vfs_close_func;
+	ops->reopen_func = vfs_reopen_func;
 
 	/* xattr related functions */
 	ops->list_ext_attrs = vfs_list_ext_attrs;

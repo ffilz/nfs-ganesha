@@ -68,6 +68,7 @@
 #include "nfs_proto_tools.h"
 #include "idmapper.h"
 #include "pnfs_utils.h"
+#include "atomic_utils.h"
 
 /* fsal_attach_export
  * called from the FSAL's create_export method with a reference on the fsal.
@@ -1328,6 +1329,146 @@ fsal_status_t merge_share(struct fsal_obj_handle *orig_hdl,
 }
 
 /**
+this refinement gets rid of the rw lock in the I/O path and provides a bit
+more fairness to open/upgrade/downgrade/close and uses dec_and_lock to
+better prevent spurious wakeup due to a race that is not habdled above
+
+increment io_counter
+if fd_counter != 0
+	lock mutex
+	if fd_counter != 0
+		// fd work is waiting, block until it's done
+		if decrement io_counter == 0
+			signal condition var
+		while fd_counter != 0
+			wait on condition var
+		// we are done waiting for fd work, so resume I/O
+		increment io_counter
+	unlock mutex
+// now we know no fd work is waiting or in progress and can't start
+initiate I/O
+
+on I/O complete (async or immediate):
+-------------------------------------
+
+if decrement_and_lock io_counter
+	if fd_counter != 0
+		signal condition var
+	unlock mutex
+
+open/upgrade/downgrade/close:
+-----------------------------
+
+increment fd_counter
+lock mutex
+while io_counter != 0
+	// now fd_counter is non-zero and io_counter is zero, any I/O that
+	// tries to start will block until fd_counter goes to zero
+	wait on cond var
+
+// io_counter was zero, and because we checked while holding the mutex, but made
+// fd_counter non-zero before taking the mutex any I/O threads that try to start
+// after we took the mutex MUST be blocked, proceed
+unlock mutex
+
+// serialize any open/upgrade/downgrade/close
+take write lock
+re-open fd in new mode or close it
+release write lock
+
+// now ready to allow I/O to resume
+if decrement_and_lock fd_counter
+	if fd_counter == 0
+		signal cond var
+	unlock mutex
+*/
+
+/**
+ * @brief Function to close a fsal_fd while protecting it, usually called on
+ *        a global fd.
+ *
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  fsal_fd     File handle to close
+ * @param[in]  close_func  FSAL supplied close function
+ *
+ * @return FSAL status.
+ */
+
+fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
+			    struct fsal_fd *fsal_fd,
+			    fsal_close_func close_func)
+{
+	fsal_status_t status;
+
+	/* Indicate we want to do fd work */
+	atomic_inc_int32_t(&fsal_fd->fd_work);
+
+	PTHREAD_MUTEX_lock(&fsal_fd->work_mutex);
+
+	/* Wait for lull in io work */
+	while (atomic_fetch_int32_t(&fsal_fd->io_work) != 0) {
+		/* io work is in progress or trying to start, wait for it to
+		 * complete (or not start)
+		 */
+		PTHREAD_COND_wait(&fsal_fd->work_cond, &fsal_fd->work_mutex);
+	}
+
+	/* Now we hold the mutex and no one is doing I/O so we can safely
+	 * close the fd.
+	 */
+	status = close_func(obj_hdl, fsal_fd);
+
+	/* Indicate we are dobe with fd work and signal any waiters */
+	atomic_dec_int32_t(&fsal_fd->fd_work);
+	PTHREAD_COND_signal(&fsal_fd->work_cond);
+
+	PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
+
+	return status;
+}
+
+/**
+ * @brief Function to open or reopen a fsal_fd.
+ *
+ * NOTE: Assumes fsal_fd->work_mutex is held.
+ *
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  openflags   New mode for open
+ * @param[out] fd          File descriptor that is to be used
+ *
+ * @return FSAL status.
+ */
+
+fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
+			     fsal_openflags_t openflags,
+			     struct fsal_fd *fsal_fd)
+{
+	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+
+	/* Wait for lull in io work */
+	while (atomic_fetch_int32_t(&fsal_fd->io_work) != 0) {
+		/* io work is in progress or trying to start,
+		 * wait for it to complete (or not start)
+		 */
+		PTHREAD_COND_wait(&fsal_fd->work_cond,
+				  &fsal_fd->work_mutex);
+	}
+
+	if (!open_correct(fsal_fd->openflags, openflags)) {
+		status = fsal_reopen_fd(obj_hdl, openflags, fsal_fd);
+	}
+
+	/* Indicate we are dobe with fd work and signal any
+	 * waiters
+	 */
+	atomic_dec_int32_t(&fsal_fd->fd_work);
+
+	PTHREAD_COND_signal(&fsal_fd->work_cond);
+
+	return status;
+}
+
+/**
  * @brief Reopen the fd associated with the object handle.
  *
  * This function assures that the fd is open in the mode requested. If
@@ -1820,6 +1961,487 @@ fsal_status_t fsal_find_fd(struct fsal_fd **out_fd,
 	return fsal_reopen_obj(obj_hdl, openflags != FSAL_O_ANY, bypass,
 			       openflags, obj_fd, share, open_func, close_func,
 			       out_fd, has_lock, closefd);
+}
+
+static inline bool cant_reopen(fsal_openflags_t openflags,
+			       bool may_open,
+			       bool may_reopen)
+{
+	if (may_open && openflags == 0) {
+		/* Can open and was closed */
+		return false;
+	}
+
+	/* Assumed the openflags were wrong, reverse sense of may_reopen */
+	return !may_reopen;
+}
+
+/**
+ * @brief Wait to start I/O. Returns with io_work counter incremented.
+ *
+ * @param[in] fsal_fd         The file descriptor to do I/O on
+ *
+ */
+
+fsal_status_t wait_to_start_io(struct fsal_obj_handle *obj_hdl,
+			       struct fsal_fd *fsal_fd,
+			       fsal_openflags_t openflags,
+			       bool may_open,
+			       bool may_reopen)
+{
+	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+
+	/* Indicate we want to do I/O work */
+	atomic_inc_int32_t(&fsal_fd->io_work);
+
+	/* Check if fd_work is in progress (or trying to start). We do this
+	 * check unlocked because fd work will check io work in a way that
+	 * assures that io work always wins any race.
+	 */
+	while (atomic_fetch_int32_t(&fsal_fd->fd_work) != 0) {
+		/* We need to back off on trying to do I/O so the fd work can
+		 * complete.
+		 */
+		if (PTHREAD_MUTEX_dec_int32_t_and_lock(&fsal_fd->io_work,
+						       &fsal_fd->work_mutex)) {
+			/* Let the thread waiting to do fd work know it can
+			 * proceed.
+			 */
+			PTHREAD_COND_signal(&fsal_fd->work_cond);
+		} else {
+			/* need the mutex anyway... */
+			PTHREAD_MUTEX_lock(&fsal_fd->work_mutex);
+		}
+
+		/* Now we need to wait on the condition variable... Note that
+		 * if other I/O was in progress, we will get a spurious wakeup
+		 * when that I/O completes.
+		 */
+		while (atomic_fetch_int32_t(&fsal_fd->fd_work) != 0) {
+			PTHREAD_COND_wait(&fsal_fd->work_cond,
+					  &fsal_fd->work_mutex);
+		}
+
+		// if io_count is zero we can check openflags here, and if
+		// appropriate, re-open
+		// because we're in the same position as an fd work thread
+		// would
+		/* At this point the fd's open flags are protected because we
+		 * hold the mutex so we can check them and see if we need to
+		 * open or re-open.
+		 */
+		LogFullDebug(COMPONENT_FSAL,
+			     "Open mode = %x, desired mode = %x",
+			     (int) fsal_fd->openflags,
+			     (int) openflags);
+
+		if (!open_correct(fsal_fd->openflags, openflags)) {
+			if (cant_reopen(fsal_fd->openflags, may_open,
+					may_reopen)) {
+				/* fsal_fd is in wrong mode and we aren't
+				 * allowed to reopen, so return EBUSY.
+				 */
+				PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
+				return posix2fsal_status(EBUSY);
+			}
+
+			/* Indicate we want to do fd work */
+			atomic_inc_int32_t(&fsal_fd->fd_work);
+
+			status = reopen_fsal_fd(obj_hdl, openflags, fsal_fd);
+
+			if (FSAL_IS_ERROR(status)) {
+				PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
+				return status;
+			}
+		}
+
+		/* Try again to indicate we want to do I/O work */
+		atomic_inc_int32_t(&fsal_fd->io_work);
+
+		PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
+	}
+
+	/* At this point the fd's open flags are protected so we can check
+	 * them.
+	 */
+	LogFullDebug(COMPONENT_FSAL,
+		     "Open mode = %x, desired mode = %x",
+		     (int) fsal_fd->openflags,
+		     (int) openflags);
+
+	if (!open_correct(fsal_fd->openflags, openflags)) {
+		if (cant_reopen(fsal_fd->openflags, may_open, may_reopen)) {
+			/* fsal_fd is in wrong mode and we aren't
+			 * allowed to reopen, so return EBUSY.
+			 */
+			return posix2fsal_status(EBUSY);
+		}
+
+		/* Indicate we want to do fd work */
+		atomic_inc_int32_t(&fsal_fd->fd_work);
+
+		PTHREAD_MUTEX_lock(&fsal_fd->work_mutex);
+
+		status = reopen_fsal_fd(obj_hdl, openflags, fsal_fd);
+
+		PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
+
+		if (FSAL_IS_ERROR(status)) {
+			return status;
+		}
+	}
+
+	/* Now we have the file open in the correct mode, and I/O has started.
+	 * Allow our caller to proceed.
+	 */
+	return status;
+}
+
+/**
+ * @brief Start I/O on the global fd for the object.
+ *
+ * If the global fd is busy, tmp_fd will be opened to be used for the I/O.
+ *
+ * This function assures that the fd is open in the mode requested. If
+ * the fd was already open, it closes it and reopens with the OR of the
+ * requested modes.
+ *
+ * Optionally, out_fd can be NULL in which case a file is not actually
+ * opened, in this case, all that actually happens is the share reservation
+ * check.
+ *
+ * If openflags is FSAL_O_ANY, the caller will utilize the global file
+ * descriptor if it is open, otherwise it will use a temporary file descriptor.
+ * The primary use of this is to not open long lasting global file descriptors
+ * for getattr and setattr calls. The other users of FSAL_O_ANY are NFSv3 LOCKT
+ * for which this behavior is also desireable and NFSv3 UNLOCK where there
+ * SHOULD be an open file descriptor attached to state, but if not, a temporary
+ * file descriptor will work fine (and the resulting unlock won't do anything
+ * since we just opened the temporary file descriptor).
+ *
+ * @param[in,out] out_fd   File descriptor that is to be used
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  my_fd       The file descriptor associated with the object
+ * @param[in]  tmp_fd      A temporary file descriptor
+ * @param[in]  openflags   Mode for open
+ * @param[in]  bypass      Indicates to bypass share_deny_read and
+ *                         share_deny_write but not share_deny_write_mand
+ * @param[in]  share       The fsal_share associated with the object
+ *
+ * @return FSAL status.
+ */
+
+fsal_status_t fsal_start_global_io(struct fsal_fd **out_fd,
+				   struct fsal_obj_handle *obj_hdl,
+				   struct fsal_fd *my_fd,
+				   struct fsal_fd *tmp_fd,
+				   fsal_openflags_t openflags,
+				   bool bypass,
+				   struct fsal_share *share)
+{
+	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+	bool open_any = openflags == FSAL_O_ANY;
+
+	if (!open_any && share != NULL) {
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Note we will check again if we drop and re-acquire the lock
+		 * just to be on the safe side.
+		 */
+		status = check_share_conflict(share, openflags, bypass);
+
+		if (FSAL_IS_ERROR(status)) {
+			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+			LogDebug(COMPONENT_FSAL,
+				 "check_share_conflict failed with %s",
+				 msg_fsal_err(status.major));
+			return status;
+		}
+
+		/* Take the share reservation now by updating the counters. */
+		update_share_counters(share, FSAL_O_CLOSED, openflags);
+
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	}
+
+	status = wait_to_start_io(obj_hdl, my_fd, openflags, !open_any,
+				  !open_any);
+
+	if (status.major == ERR_FSAL_DELAY) {
+		/* We can't use the global fd, use the tmp_fd. We don't need
+		 * any synchronization as the tmp_fd is private to the
+		 * particular operation.
+		 */
+		status = reopen_fsal_fd(obj_hdl,
+					open_any ? FSAL_O_READ : openflags,
+					tmp_fd);
+		tmp_fd->close_on_complete = true;
+		*out_fd = tmp_fd;
+	} else {
+		*out_fd = my_fd;
+	}
+
+	if (!FSAL_IS_ERROR(status))
+		return status;
+
+	/* Can't proceed... */
+	LogDebug(COMPONENT_FSAL,
+		 "%s failed with %s",
+		 *out_fd == my_fd
+			? "wait_to_start_io"
+			: "reopen_fsal_fd",
+		 msg_fsal_err(status.major));
+
+	if (!open_any && share != NULL) {
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Release the share reservation now by updating the counters.
+		 */
+		update_share_counters(share, openflags, FSAL_O_CLOSED);
+
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	}
+
+	*out_fd = NULL;
+
+	return status;
+}
+
+/**
+ * @brief Find a useable file descriptor for a regular file.
+ *
+ * This function specifically does NOT return with the obj_handle's lock
+ * held if the fd associated with a state_t is being used. These fds are
+ * considered totally separate from the global fd and don't need protection
+ * and should not interfere with other operations on the object.
+ *
+ * Optionally, out_fd can be NULL in which case a file is not actually
+ * opened, in this case, all that actually happens is the share reservation
+ * check (which may result in the lock being held).
+ *
+ * Note that FSAL_O_ANY may be passed on to fsal_reopen_obj, see the
+ * documentation of that function for the implications.
+ *
+ * @param[in,out] out_fd         File descriptor that is to be used
+ * @param[in]     obj_hdl        File on which to operate
+ * @param[in]     obj_fd         The file descriptor associated with the object
+ * @param[in]     tmp_fd         A temporary file descriptor
+ * @param[in]     state          state_t to use for this operation
+ * @param[in]     openflags      Mode for open
+ * @param[in]     open_for_locks Indicates file is open for locks
+ * @param[out]    reusing_open_state_fd Indicates whether already opened fd
+ * @param[in]     bypass         If state doesn't indicate a share reservation,
+ *                               bypass any deny read
+ * @param[in]     share          The fsal_share associated with the object
+ *
+ * @return FSAL status.
+ */
+
+fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
+			    struct fsal_obj_handle *obj_hdl,
+			    struct fsal_fd *obj_fd,
+			    struct fsal_fd *tmp_fd,
+			    struct state_t *state,
+			    fsal_openflags_t openflags,
+			    bool open_for_locks,
+			    bool *reusing_open_state_fd,
+			    bool bypass,
+			    struct fsal_share *share)
+{
+	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+	struct fsal_fd *state_fd;
+
+	if (state == NULL)
+		goto global;
+
+	/* Check if we can use the fd in the state */
+	state_fd = (struct fsal_fd *) (state + 1);
+
+	/* Indicate we want to do I/O work */
+	atomic_inc_int32_t(&state_fd->io_work);
+
+	/* Check if fd_work is in progress (or trying to start) */
+	while (atomic_fetch_int32_t(&state_fd->fd_work) != 0) {
+		/* We need to back off on trying to do I/O so the fd work can
+		 * complete.
+		 */
+		if (PTHREAD_MUTEX_dec_int32_t_and_lock(&state_fd->io_work,
+						       &state_fd->work_mutex)) {
+			/* Let the thread waiting to do fd work know it can
+			 * proceed.
+			 */
+			PTHREAD_COND_signal(&state_fd->work_cond);
+		} else {
+			/* need the mutex anyway... */
+			PTHREAD_MUTEX_lock(&state_fd->work_mutex);
+		}
+		/* Now we need to wait on the condition variable... Note that
+		 * if other I/O was in progress, we will get a spurious wakeup
+		 * when that I/O completes.
+		*/
+		while (atomic_fetch_int32_t(&state_fd->fd_work) != 0) {
+			PTHREAD_COND_wait(&state_fd->work_cond,
+					  &state_fd->work_mutex);
+		}
+
+		/* Try again to indicate we want to do I/O work */
+		atomic_inc_int32_t(&state_fd->io_work);
+	}
+
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "state_fd->openflags = %d openflags = %d%s",
+		     state_fd->openflags, openflags,
+		     open_for_locks ? " Open For Locks" : "");
+
+	status = wait_to_start_io(obj_hdl, state_fd, openflags, false, false);
+
+	if (!FSAL_IS_ERROR(status)) {
+		/* It was valid, return it.
+		 * Since we found a valid fd in the state, no need to
+		 * check deny modes.
+		 */
+		LogFullDebug(COMPONENT_FSAL, "Use state_fd %p", state_fd);
+
+		if (out_fd)
+			*out_fd = state_fd;
+
+		return status;
+	}
+
+	if (open_for_locks) {
+		/* This is being opened for locks, we will not be able to
+		 * re-open so open for read/write. If that fails permission
+		 * check and openstate is available, retry with that state's
+		 * access mode.
+		 */
+		status = wait_to_start_io(obj_hdl, state_fd, FSAL_O_RDWR,
+					  true, false);
+
+		if (status.major == ERR_FSAL_ACCESS &&
+		   (state->state_type == STATE_TYPE_LOCK ||
+		    state->state_type == STATE_TYPE_NLM_LOCK) &&
+		    state->state_data.lock.openstate != NULL) {
+			/* Got an EACCESS and openstate is available, try
+			 * again with it's openflags.
+			 */
+			// interesting question - what do we do if openstate
+			// is being re-opened??? I think we may also need to
+			// start I/O on the open state while we do this
+			// reopen of the lock state
+			struct fsal_fd *related_fd = (struct fsal_fd *)
+					(state->state_data.lock.openstate + 1);
+
+			status = wait_to_start_io(
+					obj_hdl, state_fd,
+					related_fd->openflags & FSAL_O_RDWR,
+					true, false);
+		} else if (status.major == ERR_FSAL_DELAY) {
+			/* Try with actual openflags which SHOULD succeed. */
+			status = wait_to_start_io(obj_hdl, state_fd, openflags,
+						  false, false);
+			if (status.major == ERR_FSAL_DELAY) {
+				LogCrit(COMPONENT_FSAL,
+					"Conflicting open, can not re-open fd with locks");
+				status = posix2fsal_status(EINVAL);
+			}
+		}
+
+		if (FSAL_IS_ERROR(status)) {
+			LogCrit(COMPONENT_FSAL,
+				"Open for locking failed for access %s",
+				openflags == FSAL_O_RDWR ? "Read/Write"
+				: openflags == FSAL_O_READ ? "Read"
+				: "Write");
+		} else {
+			LogFullDebug(COMPONENT_FSAL,
+				     "Opened state_fd %p", state_fd);
+			*out_fd = state_fd;
+		}
+
+		return status;
+	}
+
+	/* Check if there is a related state, in which case, can we use it's
+	 * fd (this will support FSALs that have an open file per open state
+	 * but don't bother with opening a separate file for the lock state).
+	 */
+	if ((state->state_type == STATE_TYPE_LOCK ||
+	     state->state_type == STATE_TYPE_NLM_LOCK) &&
+	    state->state_data.lock.openstate != NULL) {
+		struct fsal_fd *related_fd = (struct fsal_fd *)
+				(state->state_data.lock.openstate + 1);
+
+		LogFullDebug(COMPONENT_FSAL,
+			     "related_fd->openflags = %d openflags = %d",
+			     related_fd->openflags, openflags);
+
+		status = wait_to_start_io(obj_hdl, related_fd, openflags,
+					  false, false);
+
+		if (!FSAL_IS_ERROR(status)) {
+			/* It was valid, return it.
+			 * Since we found a valid fd in the open state, no
+			 * need to check deny modes.
+			 */
+			LogFullDebug(COMPONENT_FSAL,
+				     "Use related_fd %p", related_fd);
+			if (out_fd) {
+				*out_fd = related_fd;
+				/* The associated open state has an open fd,
+				 * however some FSALs can not use it and must
+				 * need to dup the fd into the lock state
+				 * instead. So to signal this to the caller
+				 * function the following flag
+				 */
+				if (reusing_open_state_fd != NULL)
+					*reusing_open_state_fd = true;
+			}
+
+			return status;
+		}
+	}
+
+ global:
+
+	/* No useable state_t so return the global file descriptor. */
+	LogFullDebug(COMPONENT_FSAL,
+		     "Use global fd openflags = %x",
+		     openflags);
+
+	/* Make sure global is open as necessary otherwise return a
+	 * temporary file descriptor. Check share reservation if not
+	 * opening FSAL_O_ANY. If we were passed a state, then we won't
+	 * need to check share reservation.
+	 */
+	return fsal_start_global_io(out_fd, obj_hdl, obj_fd, tmp_fd, openflags,
+				    bypass, state == NULL ? share : NULL);
+}
+
+fsal_status_t fsal_complete_io(struct fsal_obj_handle *obj_hdl,
+			       struct fsal_fd *fsal_fd)
+{
+	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+
+	if (fsal_fd->close_on_complete) {
+		/* Close the temp fd, no need to do the rest since this fsal_fd
+		 * was only being used for this operation.
+		 */
+		return fsal_close_fd(obj_hdl, fsal_fd);
+	}
+
+	/* Indicate I/O done, and if we were last I/O, signal condition in case
+	 * any threads are waiting to do fd work.
+	 */
+	if (PTHREAD_MUTEX_dec_int32_t_and_lock(&fsal_fd->io_work,
+					       &fsal_fd->work_mutex)) {
+		PTHREAD_COND_signal(&fsal_fd->work_cond);
+	}
+
+	PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
+
+	return status;
 }
 
 /**
