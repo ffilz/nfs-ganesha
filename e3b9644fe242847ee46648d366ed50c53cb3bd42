@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78894b13_292cad40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-26T15:36:29Z",
+      "side": 1,
+      "message": "Wow, was this ever tested...\n\nLooks good, just a minor comment, should we initialize more of v or does it really JUST need the ip address to serve as a search key?",
+      "revId": "e3b9644fe242847ee46648d366ed50c53cb3bd42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a22f29_dc184db0",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-26T15:36:29Z",
+      "side": 1,
+      "message": "Should we do more initialization of v?\n\nLet\u0027s also add a comment.",
+      "revId": "e3b9644fe242847ee46648d366ed50c53cb3bd42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
