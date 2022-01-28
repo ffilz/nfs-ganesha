@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4673067c_f3c064ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "Thanks for all the comments. The big question I have is did I miss anything as to actual protection or have I created any dead locks.\n\nThe good thing about this re-write is I got rid of holding both the obj_lock and this new \"lock\" which last summer\u0027s implementation had two different orderings of taking (that supposedly didn\u0027t cross each other so no ABBA deadlock - supposedly...). Now one or the other is taken at a time. No ABBA deadlock...",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f4f1c75_d989a583",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3baa4d89_617129d4",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "Ahh, whoops... FSAL_CEPH hasn\u0027t been fully converted... Yea, these commented out locks would be removed.",
+      "parentUuid": "0f4f1c75_d989a583",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aadc1040_f555fb62",
         "filename": "src/FSAL/FSAL_VFS/file.c",
         "patchSetId": 1
@@ -48,6 +83,24 @@
       "writtenOn": "2022-01-28T18:36:09Z",
       "side": 1,
       "message": "Remove?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0ea420_ff243673",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "Yep",
+      "parentUuid": "aadc1040_f555fb62",
       "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +158,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64497f49_8cef4ce5",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "Yea, whoops...",
+      "parentUuid": "1a23adfd_611fb0cf",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a11fdbfc_851c39aa",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -116,6 +187,24 @@
       "writtenOn": "2022-01-28T18:36:09Z",
       "side": 1,
       "message": "Mixing // and /**/?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b44c001_3391ec55",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "Yea, need to fix that...",
+      "parentUuid": "a11fdbfc_851c39aa",
       "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -139,6 +228,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf916e81_1e074d89",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2038,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "Because we aren\u0027t protected for I/O yet, we\u0027ve done our fd work, but another thread could still manage to change the fd. However, when we get out of the loop, we will be protected for I/O work, and because of how we re-open with \"oring\" the access modes, we shouldn\u0027t have to reopen outside the loop. I do need to verify all that works right though... This is one of the tricky areas, resolving all the races between fd work and io work so we wind up with the fd open in the right way for io...",
+      "parentUuid": "9821e5b8_5a89c382",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ac52b1b_cacdc62e",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -156,6 +263,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c043c8a_a3b0d14b",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "Whoops, need to delete that bit. fsal_find_fd used to be called to just do share reservation checks. I\u0027m not doing that with the new mechanism, instead those uses check the share reservation directly.",
+      "parentUuid": "5ac52b1b_cacdc62e",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "024a4475_ec30e5e8",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -167,6 +292,24 @@
       "writtenOn": "2022-01-28T18:36:09Z",
       "side": 1,
       "message": "out_fd could be null here?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125ac0e1_6e321348",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-01-28T19:00:29Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "024a4475_ec30e5e8",
       "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
