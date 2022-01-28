@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29d13dac_e978f050",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "Looks plausible, some comments.",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f4f1c75_d989a583",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "I\u0027m assuming the new protection makes this lock unnecessary?  If so, all these commented locks need to be removed.",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aadc1040_f555fb62",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd8fb227_5db80b7f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "fd_counter seems to actually be named fd_work, and io_counter is named io_work.  Can the comment be updated?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a4561e_d5dafac9",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1421,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "s/dobe/done/",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a23adfd_611fb0cf",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be the same as close, in terms of incing fd_work, and taking the mutex?  It\u0027s described that way in the doc above, and it dec\u0027s fd_work below.",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a11fdbfc_851c39aa",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "Mixing // and /**/?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9821e5b8_5a89c382",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2038,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "Why are we reopening in the back-off loop, and again after it\u0027s done?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac52b1b_cacdc62e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "This says out_fd can be NULL, but it\u0027s unconditionally dereferenced in the function",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024a4475_ec30e5e8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-01-28T18:36:09Z",
+      "side": 1,
+      "message": "out_fd could be null here?",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
