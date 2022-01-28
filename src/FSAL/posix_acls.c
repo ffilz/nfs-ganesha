@@ -889,6 +889,9 @@ acl_t xattr_2_posix_acl(const struct acl_ea_header *ea_header, size_t size)
 	acl_str = acl_to_any_text(acl, NULL, ',',
 				TEXT_ABBREVIATE | TEXT_NUMERIC_IDS);
 	LogDebug(COMPONENT_FSAL, "posix acl = %s ", acl_str);
+
+	acl_free(acl_str);
+
 	return acl;
 
 out:
@@ -923,6 +926,8 @@ int posix_acl_2_xattr(acl_t acl, void *buf, size_t size)
 	acl_str = acl_to_any_text(acl, NULL, ',',
 				TEXT_ABBREVIATE | TEXT_NUMERIC_IDS);
 	LogDebug(COMPONENT_FSAL, "posix acl = %s ", acl_str);
+
+	acl_free(acl_str);
 
 	count = acl_entries(acl);
 	real_size = sizeof(*ea_header) + count * sizeof(*ea_entry);
