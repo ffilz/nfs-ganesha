@@ -16,6 +16,24 @@
       "message": "Good catch. These three lines of code should also be enclosed in if (isDebug(COMPONENT_FSAL)) { ... } so that the acl_to_any_text is ONLY executed when the message is being logged.",
       "revId": "a4b9460d12551f9d546fc88f01490f8d273d48b1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f78f617_3665b95c",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-01T00:54:41Z",
+      "side": 1,
+      "message": "Hmm, a tiny refinement would be to move the declaration of acl_str to the if {} block to make it clear it isn\u0027t used elsewhere.",
+      "parentUuid": "8a8bebc3_b85ae3cf",
+      "revId": "a4b9460d12551f9d546fc88f01490f8d273d48b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
