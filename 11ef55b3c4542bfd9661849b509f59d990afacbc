@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f26ee1c0_f1fb1b10",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-02-01T11:52:49Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tchar *acl_str;\n+\t\tacl_str \u003d acl_to_any_text(allow_acl, NULL, \u0027,\u0027,",
+      "revId": "11ef55b3c4542bfd9661849b509f59d990afacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7365fba8_04fcbeb5",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-02-01T11:52:49Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tchar *acl_str;\n+\t\tacl_str \u003d acl_to_any_text(acl, NULL, \u0027,\u0027,",
+      "revId": "11ef55b3c4542bfd9661849b509f59d990afacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61adb45f_f3b84421",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-02-01T11:52:49Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tchar *acl_str;\n+\t\tacl_str \u003d acl_to_any_text(acl, NULL, \u0027,\u0027,",
+      "revId": "11ef55b3c4542bfd9661849b509f59d990afacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
