@@ -70,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b4de16_1e24f182",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1075,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "I\u0027m going to remove FSAL_CEPH from this patch for now",
+      "parentUuid": "3baa4d89_617129d4",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aadc1040_f555fb62",
@@ -105,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31b5b695_f5a6648d",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d0ea420_ff243673",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd8fb227_5db80b7f",
@@ -122,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce13df82_7ddc7752",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd8fb227_5db80b7f",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44a4561e_d5dafac9",
@@ -135,6 +189,24 @@
       "writtenOn": "2022-01-28T18:36:09Z",
       "side": 1,
       "message": "s/dobe/done/",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42815139_19c3ac3f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1421,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44a4561e_d5dafac9",
       "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -174,6 +246,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae800a7_7e91d302",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "Actually, our caller incremented fd_work (except in the one place we don\u0027t need the synchronization, where we actually just need to call fsal_reopen_fd directly...",
+      "parentUuid": "64497f49_8cef4ce5",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a11fdbfc_851c39aa",
@@ -205,6 +295,24 @@
       "side": 1,
       "message": "Yea, need to fix that...",
       "parentUuid": "a11fdbfc_851c39aa",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a550ab3f_b422f6c0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b44c001_3391ec55",
       "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -244,6 +352,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "179c03ea_32518fc3",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2038,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "I\u0027ve re-worked this and added comments. We now open in combined mode, so the check outside the loop is redundant and trivial.",
+      "parentUuid": "cf916e81_1e074d89",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ac52b1b_cacdc62e",
@@ -279,6 +405,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe9182f_97901127",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c043c8a_a3b0d14b",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "024a4475_ec30e5e8",
@@ -310,6 +454,24 @@
       "side": 1,
       "message": "See comment above.",
       "parentUuid": "024a4475_ec30e5e8",
+      "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af3e672_7d5a3aa8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-02T01:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "125ac0e1_6e321348",
       "revId": "b7bc9d069665af3b87c72c513f043b56b8f0e3f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
