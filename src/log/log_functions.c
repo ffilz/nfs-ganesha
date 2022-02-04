@@ -117,7 +117,7 @@ enum log_flag_index_t {
 	LF_PROGNAME,		/*< Ganesha program name field. */
 	LF_PID,			/*< Ganesha process identifier. */
 	LF_THREAD_NAME,		/*< Name of active thread logging message. */
-	LF_FILE_NAME,		/*< Source file name message occured in. */
+	LF_FILE_NAME,		/*< Source file name message occurred in. */
 	LF_LINE_NUM,		/*< Source line number message occurred in. */
 	LF_FUNCTION_NAME,	/*< Function name message occurred in. */
 	LF_COMPONENT,		/*< Log component. */
@@ -732,7 +732,7 @@ void release_log_facility(const char *name)
 	if (facility == NULL) {
 		PTHREAD_RWLOCK_unlock(&log_rwlock);
 		LogCrit(COMPONENT_LOG,
-			 "Attempting release of non-existant log facility (%s)",
+			 "Attempting release of non-existent log facility (%s)",
 			 name);
 		return;
 	}
@@ -757,7 +757,7 @@ void release_log_facility(const char *name)
 /**
  * @brief Enable the named logger
  *
- * Enabling a logger adds it to the list of facilites that will be
+ * Enabling a logger adds it to the list of facilities that will be
  * used to report messages.
  *
  * @param name [IN] the name of the logger to enable
@@ -1399,7 +1399,7 @@ void display_log_component_level(log_components_t component, const char *file,
 	struct display_buffer dsp_log = {sizeof(log_buffer),
 					 log_buffer, log_buffer};
 
-	/* Build up the messsage and capture the various positions in it. */
+	/* Build up the message and capture the various positions in it. */
 	b_left = display_log_header(&dsp_log);
 
 	if (b_left > 0)
@@ -2642,7 +2642,7 @@ bool _ratelimit(struct ratelimit_state *rs, int *missed)
 	bool ret;
 	time_t now;
 
-	/* If we fail to acquire the mutex, then we are alreday busy,
+	/* If we fail to acquire the mutex, then we are already busy,
 	 * so don't log message (aka return false)
 	 */
 	if (pthread_mutex_trylock(&rs->mutex))

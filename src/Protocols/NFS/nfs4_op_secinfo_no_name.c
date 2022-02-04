@@ -55,7 +55,7 @@
  *
  * This function impelments the NFSv4 SECINFO_NO_NAME operation.
  *
- * @param[in]     op   Operation reqest
+ * @param[in]     op   Operation request
  * @param[in,out] data Compound data
  * @param[out]    resp Response
  *

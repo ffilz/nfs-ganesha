@@ -1,6 +1,6 @@
 /*
  *  mntent
- *  mntent.h - compatability header for FreeBSD
+ *  mntent.h - compatibility header for FreeBSD
  *
  *  Copyright (c) 2001 David Rufino <daverufino@btinternet.com>
  *  All rights reserved.
