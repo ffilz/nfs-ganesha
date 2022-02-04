@@ -22,7 +22,7 @@
 
 /**
  * @file os/mntent.h
- * @brief Platform dependant utilities for reading/writing fstab, mtab, etc..
+ * @brief Platform dependent utilities for reading/writing fstab, mtab, etc..
  */
 
 #ifndef MNTENT_H

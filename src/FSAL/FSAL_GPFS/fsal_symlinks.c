@@ -46,7 +46,7 @@
  *
  *  @return Major error codes :
  *        - ERR_FSAL_NO_ERROR     (no error)
- *        - Another error code if an error occured.
+ *        - Another error code if an error occurred.
  */
 fsal_status_t
 GPFSFSAL_readlink(struct fsal_obj_handle *dir_hdl,
@@ -84,7 +84,7 @@ GPFSFSAL_readlink(struct fsal_obj_handle *dir_hdl,
  *
  * @return Major error codes :
  *        - ERR_FSAL_NO_ERROR     (no error)
- *        - Another error code if an error occured.
+ *        - Another error code if an error occurred.
  */
 fsal_status_t
 GPFSFSAL_symlink(struct fsal_obj_handle *dir_hdl, const char *linkname,

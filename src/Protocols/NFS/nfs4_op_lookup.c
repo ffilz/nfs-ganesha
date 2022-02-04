@@ -46,7 +46,7 @@
 /**
  * @brief NFS4_OP_LOOKUP
  *
- * This function implments the NFS4_OP_LOOKUP operation, which looks
+ * This function implements the NFS4_OP_LOOKUP operation, which looks
  * a filename up in the FSAL.
  *
  * @param[in]     op   Arguments for nfs4_op

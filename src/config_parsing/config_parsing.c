@@ -1256,7 +1256,7 @@ static int do_block_load(struct config_node *blk,
 				break;
 			case CONFIG_DEPRECATED:
 				config_proc_error(node, err_type,
-					"Deprectated parameter (%s)%s%s",
+					"Deprecated parameter (%s)%s%s",
 					item->name,
 					item->u.deprecated.message
 						? " - "
@@ -1330,7 +1330,7 @@ static int do_block_load(struct config_node *blk,
  *  This function attaches the build param struct to its link_mem.
  *  Before it does the attach, it will do validation of input if required.
  *  Returns 0 if validation passes and the attach is successful.  Otherwise,
- *  it returns an error which will trigger a release of resourcs acquired
+ *  it returns an error which will trigger a release of resources acquired
  *  by the self_struct_init.
  *
  * Both of these functions are called in the context of the link_mem parse.
@@ -1699,7 +1699,7 @@ errout:
  * @param expr   [IN] pointer to the expression to be parsed
  * @param expr_node [OUT] pointer to expression parse tree
  *
- * @return pointer to first char past parse or NULL for erros.
+ * @return pointer to first char past parse or NULL for errors.
  */
 
 static char *parse_expr(char *expr, struct expr_parse **expr_node)
@@ -1754,7 +1754,7 @@ static inline bool match_one_term(char *value, struct config_node *node)
  * once found, the token value is compared.  '*' matches anything. else
  * it is a case-insensitive string compare.
  *
- * @param blk   [IN] pointer to config_node descibing the block
+ * @param blk   [IN] pointer to config_node describing the block
  * @param expr  [IN] expr_parse node to match
  *
  * @return true if matched, else false
