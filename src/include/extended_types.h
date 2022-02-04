@@ -26,7 +26,7 @@
 
 /**
  * @file include/extended_types.h
- * @brief Extended types, platform dependant.
+ * @brief Extended types, platform dependent.
  *
  */
 

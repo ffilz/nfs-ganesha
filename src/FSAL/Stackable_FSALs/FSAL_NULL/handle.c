@@ -149,7 +149,7 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 			null_parent->sub_handle, path, &sub_handle, attrs_out);
 	op_ctx->fsal_export = &export->export;
 
-	/* wraping the subfsal handle in a nullfs handle. */
+	/* wrapping the subfsal handle in a nullfs handle. */
 	return nullfs_alloc_and_check_handle(export, sub_handle, parent->fs,
 					     handle, status);
 }
@@ -178,7 +178,7 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 		parent_hdl->sub_handle, name, attrs_in, &sub_handle, attrs_out);
 	op_ctx->fsal_export = &export->export;
 
-	/* wraping the subfsal handle in a nullfs handle. */
+	/* wrapping the subfsal handle in a nullfs handle. */
 	return nullfs_alloc_and_check_handle(export, sub_handle, dir_hdl->fs,
 					     new_obj, status);
 }
@@ -211,7 +211,7 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl,
 		&sub_handle, attrs_out);
 	op_ctx->fsal_export = &export->export;
 
-	/* wraping the subfsal handle in a nullfs handle. */
+	/* wrapping the subfsal handle in a nullfs handle. */
 	return nullfs_alloc_and_check_handle(export, sub_handle, dir_hdl->fs,
 					     new_obj, status);
 }
@@ -250,7 +250,7 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 		attrs_out);
 	op_ctx->fsal_export = &export->export;
 
-	/* wraping the subfsal handle in a nullfs handle. */
+	/* wrapping the subfsal handle in a nullfs handle. */
 	return nullfs_alloc_and_check_handle(export, sub_handle, dir_hdl->fs,
 					     new_obj, status);
 }
@@ -737,7 +737,7 @@ fsal_status_t nullfs_lookup_path(struct fsal_export *exp_hdl,
 
 	op_ctx->fsal_export = &exp->export;
 
-	/* wraping the subfsal handle in a nullfs handle. */
+	/* wrapping the subfsal handle in a nullfs handle. */
 	/* Note : nullfs filesystem = subfsal filesystem or NULL ? */
 	return nullfs_alloc_and_check_handle(exp, sub_handle, NULL, handle,
 					     status);
@@ -778,7 +778,7 @@ fsal_status_t nullfs_create_handle(struct fsal_export *exp_hdl,
 
 	op_ctx->fsal_export = &export->export;
 
-	/* wraping the subfsal handle in a nullfs handle. */
+	/* wrapping the subfsal handle in a nullfs handle. */
 	/* Note : nullfs filesystem = subfsal filesystem or NULL ? */
 	return nullfs_alloc_and_check_handle(export, sub_handle, NULL, handle,
 					     status);

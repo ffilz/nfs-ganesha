@@ -373,7 +373,7 @@ enum nfs_req_result nfs4_op_setclientid(struct nfs_argop4 *op,
 }
 
 /**
- * @brief Free memory alocated for SETCLIENTID result
+ * @brief Free memory allocated for SETCLIENTID result
  *
  * @param[in,out] resp nfs4_op results
  */

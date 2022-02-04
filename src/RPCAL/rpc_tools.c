@@ -25,7 +25,7 @@
 
 /**
  * @file    rpc_tools.c
- * @brief   Some tools very usefull in the nfs protocol implementation.
+ * @brief   Some tools very useful in the nfs protocol implementation.
  *
  */
 

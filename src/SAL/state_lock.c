@@ -1754,7 +1754,7 @@ void try_to_grant_lock(state_lock_entry_t *lock_entry)
 		if (status == STATE_SUCCESS)
 			return;
 
-		reason = "Removing unsucessfully granted blocked lock";
+		reason = "Removing unsuccessfully granted blocked lock";
 	}
 
 	/* There was no call back data, the call back failed,
@@ -2045,7 +2045,7 @@ state_status_t state_release_grant(state_cookie_entry_t *cookie_entry)
 
 /******************************************************************************
  *
- * Functions to interract with FSAL
+ * Functions to interact with FSAL
  *
  ******************************************************************************/
 
@@ -2413,7 +2413,7 @@ state_status_t state_lock(struct fsal_obj_handle *obj,
 			if (different_lock(&found_entry->sle_lock, lock))
 				continue;
 
-			/* We have matched all atribute of the existing lock.
+			/* We have matched all attribute of the existing lock.
 			 * Just return with blocked status. Client may be
 			 * polling.
 			 */
@@ -2958,7 +2958,7 @@ state_status_t state_nlm_notify(state_nsm_client_t *nsmclient,
 			 *
 			 * Note that although this entry is temporarily
 			 * not on the ssc_lock_list, we don't need to hold
-			 * an extra refrence to the entry since the list
+			 * an extra reference to the entry since the list
 			 * still effectively protected by the ssc_mutex.
 			 * If something happens to remove this entry, it will
 			 * actually be removed from the newlocks list, which
@@ -3033,7 +3033,7 @@ state_status_t state_nlm_notify(state_nsm_client_t *nsmclient,
 			 * calling state_unlock() because export cleanup
 			 * will remove all the state. This is assured by
 			 * the call to put_gsh_export from
-			 * clear_op_context_export. Pretend succes.
+			 * clear_op_context_export. Pretend success.
 			 */
 			status = STATE_SUCCESS;
 		}
@@ -3131,7 +3131,7 @@ state_status_t state_nlm_notify(state_nsm_client_t *nsmclient,
 			 * calling state_unlock() because export cleanup
 			 * will remove all the state. This is assured by
 			 * the call to put_gsh_export from
-			 * clear_op_context_export. Pretend succes.
+			 * clear_op_context_export. Pretend success.
 			 */
 			status = STATE_SUCCESS;
 		}

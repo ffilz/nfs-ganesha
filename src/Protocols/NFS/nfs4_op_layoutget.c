@@ -70,7 +70,7 @@
  * @param[in]     layout_type      Type of layout being requested
  * @param[out]    layout_state     The layout state
  *
- * @return NFS4_OK if successfull, other values on error
+ * @return NFS4_OK if successful, other values on error
  */
 
 static nfsstat4 acquire_layout_state(compound_data_t *data,
@@ -251,7 +251,7 @@ void free_layouts(layout4 *layouts, uint32_t numlayouts)
  * @param[in,out] res     Input/output and output arguments to the FSAL
  * @param[out]    current Current entry in the logr_layout array.
  *
- * @return NFS4_OK if successfull, other values show an error.
+ * @return NFS4_OK if successful, other values show an error.
  */
 
 static nfsstat4 one_segment(struct fsal_obj_handle *obj,
