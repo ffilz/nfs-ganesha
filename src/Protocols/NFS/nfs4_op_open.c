@@ -686,7 +686,7 @@ static void open4_ex_create_args(OPEN4args *arg,
 		/* For an exclusive create we must indicate atime and mtime have
 		 * been set for the verifier. The client will use this
 		 * indication to know it must use a separate SETATTR to set
-		 * these attributess. This is especially important for
+		 * these attributes. This is especially important for
 		 * EXCLUSIVE4_1 creates that come with attributes.
 		 */
 		set_attribute_in_bitmap(attrset, FATTR4_TIME_ACCESS);
@@ -703,7 +703,7 @@ static void open4_ex_create_args(OPEN4args *arg,
 /**
  * @brief NFS4_OP_OPEN processing using extended FSAL API
  *
- * This function impelments the NFS4_OP_OPEN operation, which
+ * This function implements the NFS4_OP_OPEN operation, which
  * potentially creates and opens a regular file.
  *
  * @param[in]     arg         Arguments for nfs4_op
@@ -739,7 +739,7 @@ static void open4_ex(OPEN4args *arg,
 	enum fsal_create_mode createmode = FSAL_NO_CREATE;
 	/* The filename to create */
 	char *filename = NULL;
-	/* The supplied calim type */
+	/* The supplied claim type */
 	open_claim_type4 claim = arg->claim.claim;
 	fsal_verifier_t verifier;
 	struct fsal_attrlist sattr;
@@ -1207,7 +1207,7 @@ static void open4_ex(OPEN4args *arg,
 /**
  * @brief NFS4_OP_OPEN
  *
- * This function impelments the NFS4_OP_OPEN operation, which
+ * This function implements the NFS4_OP_OPEN operation, which
  * potentially creates and opens a regular file.
  *
  * @param[in]     op   Arguments for nfs4_op
@@ -1239,7 +1239,7 @@ enum nfs_req_result nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 	nfs_client_id_t *clientid = NULL;
 	/* The found or created state owner for this open */
 	state_owner_t *owner = NULL;
-	/* The supplied calim type */
+	/* The supplied claim type */
 	open_claim_type4 claim = arg_OPEN4->claim.claim;
 	/* The open state for the file */
 	state_t *file_state = NULL;
@@ -1364,7 +1364,7 @@ enum nfs_req_result nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		goto out2;
 	}
 
-	/* So we still have a reference even after we repalce the
+	/* So we still have a reference even after we replace the
 	 * current FH.
 	 */
 	obj_change = data->current_obj;
