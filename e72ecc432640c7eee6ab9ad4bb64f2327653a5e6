@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5febf301_93a2bba5",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-02-10T06:08:51Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tstatus \u003d mdcache_new_entry(export, sub_handle, attrs_in, false, attrs_out,",
+      "revId": "e72ecc432640c7eee6ab9ad4bb64f2327653a5e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f34ef60b_b655051e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1670,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-02-10T06:08:51Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tstatus \u003d mdcache_new_entry(state-\u003eexport, sub_handle, attrs, true,",
+      "revId": "e72ecc432640c7eee6ab9ad4bb64f2327653a5e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
