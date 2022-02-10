@@ -641,13 +641,14 @@ void mdcache_dirent_invalidate_all(mdcache_entry_t *entry)
  * the state of the source attributes still safe to call fsal_release_attrs,
  * so all will be well.
  *
- * @param[in]     export         Export for this cache
- * @param[in]     sub_handle     sub-FSAL's new obj handle
- * @param[in]     attrs_in       Attributes provided for the object
- * @param[in,out] attrs_out      Attributes requested for the object
- * @param[in]     new_directory  Indicate a new directory was created
- * @param[out]    entry          Newly instantiated cache entry
- * @param[in]     state          Optional state_t representing open file.
+ * @param[in]     export              Export for this cache
+ * @param[in]     sub_handle          sub-FSAL's new obj handle
+ * @param[in]     attrs_in            Attributes provided for the object
+ * @param[in]     is_newest_attrs_in  Indicate attrs_in is newest
+ * @param[in,out] attrs_out           Attributes requested for the object
+ * @param[in]     new_directory       Indicate a new directory was created
+ * @param[out]    entry               Newly instantiated cache entry
+ * @param[in]     state               Optional state_t representing open file.
  *
  * @note This returns an INITIAL ref'd entry on success
  *
@@ -657,6 +658,7 @@ fsal_status_t
 mdcache_new_entry(struct mdcache_fsal_export *export,
 		  struct fsal_obj_handle *sub_handle,
 		  struct fsal_attrlist *attrs_in,
+		  bool is_newest_attrs_in,
 		  struct fsal_attrlist *attrs_out,
 		  bool new_directory,
 		  mdcache_entry_t **entry,
@@ -861,6 +863,12 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 	mdcache_put(nentry);
 
  out_no_new_entry_yet:
+
+	if (is_newest_attrs_in) {
+		PTHREAD_RWLOCK_wrlock(&(*entry)->attr_lock);
+		mdc_update_attr_cache(*entry, attrs_in);
+		PTHREAD_RWLOCK_unlock(&(*entry)->attr_lock);
+	}
 
 	/* If attributes were requested, fetch them now if we still have a
 	 * success return since we did not actually create a new object and
@@ -1104,7 +1112,7 @@ mdcache_locate_host(struct gsh_buffdesc *fh_desc,
 		return status;
 	}
 
-	status = mdcache_new_entry(export, sub_handle, &attrs, attrs_out,
+	status = mdcache_new_entry(export, sub_handle, &attrs, false, attrs_out,
 				   false, entry, NULL, MDC_REASON_DEFAULT);
 
 	fsal_release_attrs(&attrs);
@@ -1660,7 +1668,7 @@ mdc_readdir_uncached_cb(const char *name, struct fsal_obj_handle *sub_handle,
 	/* This is in the middle of a subcall. Do a supercall */
 	supercall_raw(state->export,
 		status = mdcache_new_entry(state->export, sub_handle, attrs,
-					   NULL, false, &new_entry, NULL,
+					   true, NULL, false, &new_entry, NULL,
 					   MDC_REASON_SCAN)
 	);
 
@@ -2192,7 +2200,7 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 			" sub_handle=0x%p",
 			name, cookie, sub_handle);
 
-	status = mdcache_new_entry(export, sub_handle, attrs_in, NULL,
+	status = mdcache_new_entry(export, sub_handle, attrs_in, false, NULL,
 				   false, &new_entry, NULL, MDC_REASON_SCAN);
 
 	if (FSAL_IS_ERROR(status)) {
