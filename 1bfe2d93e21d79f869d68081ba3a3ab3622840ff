@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89281788_174d41ef",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-11T16:08:33Z",
+      "side": 1,
+      "message": "Yes, let\u0027s rename.",
+      "parentUuid": "8d914b64_fd80a76b",
+      "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7199cbc1_f5de25a7",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 3
@@ -31,6 +49,23 @@
       "writtenOn": "2022-02-11T16:03:30Z",
       "side": 1,
       "message": "I think you need to move this section down below, and change the \"if\" below to an \"else if\".  Otherwise, it\u0027s going to request the attributes anyway.",
+      "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3525af99_03e91612",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-11T16:08:33Z",
+      "side": 1,
+      "message": "Yea, the above comment needs to be addressed since you\u0027re overriding it, and like Daniel says, the is_newest_attrs_in case will fall through to the below get_optional_attrs.",
       "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
