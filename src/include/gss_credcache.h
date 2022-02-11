@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: LGPL-3.0-or-later */
 /*
   Copyright (c) 2004 The Regents of the University of Michigan.
   All rights reserved.

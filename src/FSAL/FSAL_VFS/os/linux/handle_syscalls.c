@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
 /*
  *   Copyright (C) International Business Machines  Corp., 2010
  *   Author(s): Aneesh Kumar K.V <aneesh.kumar@linux.vnet.ibm.com>

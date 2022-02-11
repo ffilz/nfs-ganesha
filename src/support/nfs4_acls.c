@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
 #include "config.h"
 #include "abstract_mem.h"
 #include "fsal_types.h"
