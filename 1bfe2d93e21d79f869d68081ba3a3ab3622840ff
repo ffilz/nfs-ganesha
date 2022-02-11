@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d914b64_fd80a76b",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T16:03:30Z",
+      "side": 1,
+      "message": "Maybe \"prefer_attrs_in\" ?",
+      "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7199cbc1_f5de25a7",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T16:03:30Z",
+      "side": 1,
+      "message": "I think you need to move this section down below, and change the \"if\" below to an \"else if\".  Otherwise, it\u0027s going to request the attributes anyway.",
+      "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
