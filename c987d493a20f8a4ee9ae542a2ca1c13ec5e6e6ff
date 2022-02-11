@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f701d555_88a725d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-11T23:38:17Z",
+      "side": 1,
+      "message": "I\u0027m not quite sure we should touch src/FSAL/FSAL_GPFS/include/* since those are supposed to just be directly copied from GPFS without changes. Tentatively I\u0027m adding the SPDX License Identifier.",
+      "parentUuid": "c8e84843_33c65677",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d04b66e4_1c4654c9",
         "filename": "src/FSAL/FSAL_LIZARDFS/fileinfo_cache.h",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79ae006d_23f1dd12",
+        "filename": "src/FSAL/FSAL_LIZARDFS/fileinfo_cache.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-11T23:38:17Z",
+      "side": 1,
+      "message": "Yea, we might want to do that. Unfortunately they seem to have disappeared. I guess if it becomes an issue we can just cut the code out. Any distributor can do that of course.",
+      "parentUuid": "d04b66e4_1c4654c9",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "558c15c9_b18e5836",
         "filename": "src/FSAL/FSAL_VFS/os/linux/handle_syscalls.c",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "This one is V2.1 or later",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fed30786_e94a29ff",
+        "filename": "src/FSAL/FSAL_VFS/os/linux/handle_syscalls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-11T23:38:17Z",
+      "side": 1,
+      "message": "Hmm, should we actually re-license all the 2.1 or later as 3.0 or later for consistency? This is the big advantage of getting these SPDX tags in, it makes it easy to grep for the licenses in use...",
+      "parentUuid": "558c15c9_b18e5836",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -275,6 +329,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6eddf8b_4ff797b5",
+        "filename": "src/include/rbt_node.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-11T23:38:17Z",
+      "side": 1,
+      "message": "It is GPL but not LGPL, but it has a special exception.\n\nI\u0027m going to see if there is a proper LGPL version available. I think the exception is what later became the LGPL, but not 100% sure.",
+      "parentUuid": "a1a06b5b_1007ef4b",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70f23862_841a32a0",
         "filename": "src/include/rbt_tree.h",
         "patchSetId": 1
@@ -286,6 +358,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "Needs license.  May not be GPL?",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e242e2_41de6d42",
+        "filename": "src/include/rbt_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-11T23:38:17Z",
+      "side": 1,
+      "message": "It is GPL but not LGPL, but it has a special exception.\n\nI\u0027m going to see if there is a proper LGPL version available. I think the exception is what later became the LGPL, but not 100% sure.",
+      "parentUuid": "70f23862_841a32a0",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
