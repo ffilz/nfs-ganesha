@@ -1,0 +1,361 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e84843_33c65677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Missed files:\nsrc/config_parsing/*\ntools/test_findlog.c\ninclude/config_parsing.h\ninclude/gsh_intrinsic.h\nsrc/FSAL/FSAL_GPFS/include/*",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d04b66e4_1c4654c9",
+        "filename": "src/FSAL/FSAL_LIZARDFS/fileinfo_cache.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "This appears to not be \"or later\"  This is a problem (or not, since the file is so short).  We may need to get lizerdfs people to re-license it",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "558c15c9_b18e5836",
+        "filename": "src/FSAL/FSAL_VFS/os/linux/handle_syscalls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "This one is V2.1 or later",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "826d7de1_6039a4da",
+        "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "V2.1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d60c3f1_530d70f0",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/nullfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "2.1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8bf845c_03952efe",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "This one needs a license.",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7992406e_230cbe7b",
+        "filename": "src/SAL/recovery/recovery_fs_ng.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "This one needs a license.",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "611bfb72_4e4a1410",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "This one needs a license.",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f27c6bc7_105bb67b",
+        "filename": "src/include/FSAL/access_check.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs a license.",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf80c40_424827d4",
+        "filename": "src/include/FSAL/fsal_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs a license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a54dc89_ecebbeb5",
+        "filename": "src/include/FSAL/fsal_init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs a license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d485512_a7ed7f70",
+        "filename": "src/include/fsal_handle_syscalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "v2.1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea9bd04_03ffaebd",
+        "filename": "src/include/gss_credcache.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "BSD",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae80f570_7a814d38",
+        "filename": "src/include/nfs4.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f571b140_a376184f",
+        "filename": "src/include/os/linux/fsal_handle_syscalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "2.1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a06b5b_1007ef4b",
+        "filename": "src/include/rbt_node.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs license.  May not be GPL?",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f23862_841a32a0",
+        "filename": "src/include/rbt_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs license.  May not be GPL?",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eca84da_05da9058",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6524bb08_9b172f0f",
+        "filename": "src/test/test_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "112fa091_63ad6e4e",
+        "filename": "src/test/test_mh_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ade96c1_82174739",
+        "filename": "src/test/test_url_regex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-11T15:49:57Z",
+      "side": 1,
+      "message": "Needs license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
