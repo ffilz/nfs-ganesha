@@ -78,6 +78,8 @@ fsal_status_t fsal_internal_close(int fd, void *owner, int cflags)
 	carg.close_fd = fd;
 	carg.close_flags = cflags;
 	carg.close_owner = owner;
+	carg.cli_ip = NULL;
+
 	if (op_ctx && op_ctx->client)
 		carg.cli_ip = op_ctx->client->hostaddr_str;
 
