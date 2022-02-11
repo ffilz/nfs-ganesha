@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: LGPL-3.0 */
 /*
    Copyright 2017 Skytechnology sp. z o.o.
 

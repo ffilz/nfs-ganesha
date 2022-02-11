@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: LGPL-3.0-or-later */
 /*
  * Local RPC definitions, especially the GSS switch and
  * compensating definitions if we don't have GSS.

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: LGPL-3.0-or-later */
 #ifndef _ACCESS_CHECK_H
 #define _ACCESS_CHECK_H
 
