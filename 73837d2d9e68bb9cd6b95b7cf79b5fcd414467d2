@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32db68c0_8541da1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-15T13:19:35Z",
+      "side": 1,
+      "message": "The atomic fetch is useful (although small, since this is a periodic thread, not in the I/O path)  I think the average calculation is correct.",
+      "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbe600f6_02dea97b",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-15T13:19:35Z",
+      "side": 1,
+      "message": "I think this is correct, but somewhat mis-named.  I think it\u0027s the average of the *range* of FDs, not the absolute average of FDs.",
+      "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0219f93e_9f085aa0",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-15T13:19:35Z",
+      "side": 1,
+      "message": "Why is this moved?  It seems to have the same effect either way?",
+      "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
