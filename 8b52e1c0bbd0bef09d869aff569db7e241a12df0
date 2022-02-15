@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa106c4_60c9066d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-15T13:06:50Z",
+      "side": 1,
+      "message": "I wonder why this is necessary?  It saves one line at each call site.  I could be convinced, but I\u0027m not sure.",
+      "revId": "8b52e1c0bbd0bef09d869aff569db7e241a12df0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a395d1e9_234ac47d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_int.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-15T13:06:50Z",
+      "side": 1,
+      "message": "This is not the same.  It was adding to head (on purpose...), now it\u0027s adding to tail.",
+      "revId": "8b52e1c0bbd0bef09d869aff569db7e241a12df0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
