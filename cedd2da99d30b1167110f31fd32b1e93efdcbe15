@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee75c49c_a4aa9729",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-02-15T09:40:06Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\u0026found_share-\u003estate_data.nlm_share.share_perclient);",
+      "revId": "cedd2da99d30b1167110f31fd32b1e93efdcbe15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aac7d8f_cf71b2b9",
+        "filename": "src/include/gsh_list.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-02-15T09:40:06Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+static inline void glist_move_tail(struct glist_head *head, struct glist_head *node)",
+      "revId": "cedd2da99d30b1167110f31fd32b1e93efdcbe15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
