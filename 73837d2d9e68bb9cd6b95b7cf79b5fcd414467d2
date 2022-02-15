@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aff7e15b_014a847e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2022-02-15T15:18:00Z",
+      "side": 1,
+      "message": "Add comment to make it clear.\nThanks for explaining",
+      "parentUuid": "dbe600f6_02dea97b",
+      "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0219f93e_9f085aa0",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2022-02-15T13:19:35Z",
       "side": 1,
       "message": "Why is this moved?  It seems to have the same effect either way?",
+      "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f184e9b_2d7b20e4",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2022-02-15T15:18:00Z",
+      "side": 1,
+      "message": "yap, It has the same effect.\nBecause the state change is not related to the following code just move it to top and change state first.",
+      "parentUuid": "0219f93e_9f085aa0",
       "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
