@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5aa2eb8_15b31c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2022-02-15T15:28:46Z",
+      "side": 1,
+      "message": "It would do nothing if node is already on tail.\nThe old call would do delete even it is already tail.\nBesides, I think that make code simplify by merging these two lines.",
+      "parentUuid": "1fa106c4_60c9066d",
+      "revId": "8b52e1c0bbd0bef09d869aff569db7e241a12df0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a395d1e9_234ac47d",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-02-15T13:06:50Z",
       "side": 1,
       "message": "This is not the same.  It was adding to head (on purpose...), now it\u0027s adding to tail.",
+      "revId": "8b52e1c0bbd0bef09d869aff569db7e241a12df0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80876744_2adb6c27",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_int.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2022-02-15T15:28:46Z",
+      "side": 1,
+      "message": "Yes, I check code again. You are right. already correct it.",
+      "parentUuid": "a395d1e9_234ac47d",
       "revId": "8b52e1c0bbd0bef09d869aff569db7e241a12df0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
