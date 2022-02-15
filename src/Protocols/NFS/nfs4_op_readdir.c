@@ -525,7 +525,11 @@ enum nfs_req_result nfs4_op_readdir(struct nfs_argop4 *op,
 	cookie = arg_READDIR4->cookie;
 
 	/* Dont over flow V4.1 maxresponsesize or maxcachedsize */
-	maxcount = resp_room(data);
+	if (nfs_param.core_param.readdir_res_size != 0) {
+		maxcount = nfs_param.core_param.readdir_res_size;
+	} else {
+		maxcount = resp_room(data);
+	}
 
 	if (maxcount > (arg_READDIR4->maxcount + sizeof(nfsstat4)))
 		maxcount = arg_READDIR4->maxcount + sizeof(nfsstat4);

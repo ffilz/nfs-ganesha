@@ -158,6 +158,8 @@ Max_Uid_To_Group_Reqs(uint32, range 0 to INT32_MAX, default 0)
 Enable_V3fh_Validation_For_V4(bool, default false)
     Set true to enforce when v3 file handle used for v4
 
+Readdir_Res_Size(uint32, range 4096 to 32768, default 0)
+    Response size of readdir request, 0 means use maxcount value from nfs request
 
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
