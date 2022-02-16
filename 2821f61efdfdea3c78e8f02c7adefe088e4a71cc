@@ -70,6 +70,24 @@
       "parentUuid": "b65bcf20_ec0baca4",
       "revId": "2821f61efdfdea3c78e8f02c7adefe088e4a71cc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233f506b_6c2a5542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-16T22:49:31Z",
+      "side": 1,
+      "message": "Yea, I would prefer not to make changes like this. While it may help readability to handle common error this way, it also introduces bumps for merging back ported patches down the road. And as Daniel says, we can\u0027t have a macro for every error. Also, there is no guarantee new code would use the shortcut, diluting it.",
+      "parentUuid": "6733b2b6_8836877e",
+      "revId": "2821f61efdfdea3c78e8f02c7adefe088e4a71cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
