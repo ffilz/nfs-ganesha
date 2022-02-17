@@ -122,6 +122,24 @@
       "parentUuid": "f3b54149_dcb5251e",
       "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a655ab_7db7fcde",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-17T16:02:01Z",
+      "side": 1,
+      "message": "Try this for a bit more clear (and typos removed):\n\n/* Set state first because it is not related\n * to the following code flow\n */\n\nThat is also the preferred format for multi-line comments, optionally the */ can be at the end of the last line (though I personally prefer it as my example).",
+      "parentUuid": "547ea9ea_d7d5cff3",
+      "revId": "73837d2d9e68bb9cd6b95b7cf79b5fcd414467d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
