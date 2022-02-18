@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44677776_0d77d535",
+        "filename": "src/Protocols/NFS/nfs3_readdirplus.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1019263
+      },
+      "writtenOn": "2022-02-18T05:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a71e7632_082ff1d5",
+      "revId": "553978047fa6494211163ae4329515c332e0be67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ebe3f59_c1a57939",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-02-16T22:37:07Z",
       "side": 1,
       "message": "You might want to change \"possible values\" to \"suggested values\" since nothing actually requires the value to be a power of 2.\n\nAlso is 32768 really the maximum someone might want to force it to? I\u0027d be inclined to err on the side of big...",
+      "revId": "553978047fa6494211163ae4329515c332e0be67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "711a6de8_9229848d",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1019263
+      },
+      "writtenOn": "2022-02-18T05:33:44Z",
+      "side": 1,
+      "message": "Corrected to suggested values.\n\nBelow condition handle maximum value. We use cfg_readdir_size  if it is \u003c arg-\u003earg_readdirplus3.maxcount. \n\n\tif (cfg_readdir_size !\u003d 0 \u0026\u0026\n\t\tcfg_readdir_size \u003c arg-\u003earg_readdirplus3.maxcount) {\n\t\tmaxcount \u003d cfg_readdir_size;\n\t} else {\n\t\tmaxcount \u003d arg-\u003earg_readdirplus3.maxcount;",
+      "parentUuid": "6ebe3f59_c1a57939",
       "revId": "553978047fa6494211163ae4329515c332e0be67",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
