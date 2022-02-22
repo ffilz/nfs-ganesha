@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3541ee9d_dc2a59c0",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-02-22T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89281788_174d41ef",
+      "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7199cbc1_f5de25a7",
@@ -55,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a89dac77_70423850",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-02-22T01:29:28Z",
+      "side": 1,
+      "message": "Thanks for review, and I want to make change like follows. When prefer_attrs_in is true, use attrs_in to overwrite attr of existed entry, and copy attrs_in to attrs_out. When perfer_attrs_in is false, we call get_optional_attrs to get attrs_out, and use attrs_out to overwrite attr of existed entry. What do you think of this ?\n\tif (prefer_attrs_in) {\n\t\tPTHREAD_RWLOCK_wrlock(\u0026(*entry)-\u003eattr_lock);\n\t\tmdc_update_attr_cache(*entry, attrs_in);\n\t\tPTHREAD_RWLOCK_unlock(\u0026(*entry)-\u003eattr_lock);\n\n\t\tif (!FSAL_IS_ERROR(status) \u0026\u0026 attrs_out !\u003d NULL)\n\t\t\tfsal_copy_attrs(attrs_out, attrs_in, false);\n\t} else if (!FSAL_IS_ERROR(status) \u0026\u0026 attrs_out !\u003d NULL) {\n\t\tstatus \u003d get_optional_attrs(\u0026(*entry)-\u003eobj_handle,\n\t\t\t\t\t    attrs_out);\n\t\tif (FSAL_IS_ERROR(status)) {\n\t\t\t/* Oops, failed to get attributes and ATTR_RDATTR_ERR\n\t\t\t * was not requested, so we are failing and thus must\n\t\t\t * drop the object reference we got.\n\t\t\t */\n\t\t\tmdcache_put(*entry);\n\t\t\t*entry \u003d NULL;\n\t\t} else {\n\t\t\tPTHREAD_RWLOCK_wrlock(\u0026(*entry)-\u003eattr_lock);\n\t\t\tmdc_update_attr_cache(*entry, attrs_out);\n\t\t\tPTHREAD_RWLOCK_unlock(\u0026(*entry)-\u003eattr_lock);\n\t\t}\n\t}",
+      "parentUuid": "7199cbc1_f5de25a7",
+      "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3525af99_03e91612",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 3
@@ -66,6 +102,24 @@
       "writtenOn": "2022-02-11T16:08:33Z",
       "side": 1,
       "message": "Yea, the above comment needs to be addressed since you\u0027re overriding it, and like Daniel says, the is_newest_attrs_in case will fall through to the below get_optional_attrs.",
+      "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f08ecae_c7b43d5e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-02-22T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3525af99_03e91612",
       "revId": "1bfe2d93e21d79f869d68081ba3a3ab3622840ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
