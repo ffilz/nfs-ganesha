@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b80c2bd_7e1b05ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-22T15:37:15Z",
+      "side": 1,
+      "message": "\u003e It would do nothing if node is already on tail.\n\u003e The old call would do delete even it is already tail.\n\u003e Besides, I think that make code simplify by merging these two lines.\n\nThat\u0027s a good point so this is useful. Please add a Doxygen comment as requested to help justify this.",
+      "parentUuid": "c5aa2eb8_15b31c16",
+      "revId": "8b52e1c0bbd0bef09d869aff569db7e241a12df0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a395d1e9_234ac47d",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_int.h",
         "patchSetId": 2
