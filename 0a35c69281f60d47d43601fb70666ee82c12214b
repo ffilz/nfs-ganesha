@@ -33,6 +33,24 @@
       "message": "So, something just occurred to me.  glist_del() doesn\u0027t take a list.  So the combo:\nglist_del()\nglist_add_tail()\ncould be moving an entry from one list to another.  The no macro would to the same thing, *unless* the entry is currently at the end of it\u0027s current list, in which case it would be left on that list and not moved.   I think we need an audit of these to make sure that entries are already on the list they\u0027re being moved to, as it\u0027s not always obvious from the local code.",
       "revId": "0a35c69281f60d47d43601fb70666ee82c12214b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "732e076a_d9474fd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-25T15:24:35Z",
+      "side": 1,
+      "message": "So this actually just works...\n\nIf node is NOT on the list \"head\" at all, head-\u003etail CAN NOT point to node and so therefore it will do the glist_del and the glist_add_tail.\n\nSo this actually works just fine to remove an element from any list to the tail of the specified list, bypassing the actual move if the element is already the tail of the target list.",
+      "parentUuid": "63a50f9b_030d3ce9",
+      "revId": "0a35c69281f60d47d43601fb70666ee82c12214b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
