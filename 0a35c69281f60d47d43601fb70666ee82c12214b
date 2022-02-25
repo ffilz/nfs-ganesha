@@ -16,6 +16,23 @@
       "message": "If you don\u0027t want to change the one unresolved comment I made, please respond and mark it resolved. Otherwise this is good to go so I\u0027ll also give it a +1.",
       "revId": "0a35c69281f60d47d43601fb70666ee82c12214b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a50f9b_030d3ce9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-02-25T14:33:41Z",
+      "side": 1,
+      "message": "So, something just occurred to me.  glist_del() doesn\u0027t take a list.  So the combo:\nglist_del()\nglist_add_tail()\ncould be moving an entry from one list to another.  The no macro would to the same thing, *unless* the entry is currently at the end of it\u0027s current list, in which case it would be left on that list and not moved.   I think we need an audit of these to make sure that entries are already on the list they\u0027re being moved to, as it\u0027s not always obvious from the local code.",
+      "revId": "0a35c69281f60d47d43601fb70666ee82c12214b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
