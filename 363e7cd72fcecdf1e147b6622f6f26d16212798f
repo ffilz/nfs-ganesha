@@ -22,6 +22,30 @@
       },
       "revId": "363e7cd72fcecdf1e147b6622f6f26d16212798f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d51d2b6_77d7bae5",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1722,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-02-28T15:12:24Z",
+      "side": 1,
+      "message": "The fsal_fd used to be protected by the obj_lock (taken below), however, the fsal_fd needs to be protected across the I/O operation, which may be completed by a different thread. A pthread_rwlock can not be used in that way, so a new lock is implemented using the work_mutex to protect actually changing the fd\u0027s mode and to protect the condition variable used to signal the availability of the new lock.\n\nSee this patch: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/531877 for the details of the new management.\n\nOne definite advantage is that each fd, for which there is one per NFSv4 stateid (i.e. at least one per client), has it\u0027s own lock which will reduce contention.\n\nWith this change, the obj_lock is only used to protect the share reservation.",
+      "parentUuid": "1696fc00_a59d4ab7",
+      "range": {
+        "startLine": 1722,
+        "startChar": 30,
+        "endLine": 1722,
+        "endChar": 40
+      },
+      "revId": "363e7cd72fcecdf1e147b6622f6f26d16212798f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
