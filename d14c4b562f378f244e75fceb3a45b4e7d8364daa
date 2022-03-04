@@ -102,6 +102,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82f40c16_a875f906",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2137,
+      "author": {
+        "id": 1019989
+      },
+      "writtenOn": "2022-03-04T11:13:37Z",
+      "side": 1,
+      "message": "What I understand is that when writing data, 0 is returned here, complete the first stage of work. Then when cephfs calls the callback function, it completes the entire I/O process.\nHowever, in the code you submitted on the cephfs side, I didn\u0027t see the callback function being called.\nIn this case, the write request I/O will be stuck, right?",
+      "range": {
+        "startLine": 2137,
+        "startChar": 10,
+        "endLine": 2137,
+        "endChar": 26
+      },
+      "revId": "d14c4b562f378f244e75fceb3a45b4e7d8364daa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "070c51c8_1de8bb55",
         "filename": "src/FSAL/FSAL_CEPH/handle.c",
         "patchSetId": 1
