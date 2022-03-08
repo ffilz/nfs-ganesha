@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77df4a75_36cd07d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-03-08T12:43:45Z",
+      "side": 1,
+      "message": "Neither exit(2) nor _exit(2) should be generating core files, but it doesn\u0027t matter on any system we care about which we use, so I guess I\u0027m fine with it.",
+      "revId": "16ce3deb571171f09450bfaaeb6820ed2f81795a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
