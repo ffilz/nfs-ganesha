@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e7234f_b697d54b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "I think I\u0027ve covered all of these in subsequent patches.",
+      "parentUuid": "f701d555_88a725d0",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d04b66e4_1c4654c9",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yea, we might want to do that. Unfortunately they seem to have disappeared. I guess if it becomes an issue we can just cut the code out. Any distributor can do that of course.",
       "parentUuid": "d04b66e4_1c4654c9",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f327a4_2bd7351e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/fileinfo_cache.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Oops, have to fix this one.",
+      "parentUuid": "79ae006d_23f1dd12",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -126,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56feaab6_cce71d6a",
+        "filename": "src/FSAL/FSAL_VFS/os/linux/handle_syscalls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "The top level LICENSE.txt file is a verbatim copy from the FSF. It is not supposed to be modifier. The individual source files then should say 3.0 or later.\n\nActually I\u0027m not quite sure what the top level statement should be about what license the whole has.",
+      "parentUuid": "bb7d6909_8f6f3c15",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "826d7de1_6039a4da",
         "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
         "patchSetId": 1
@@ -137,6 +191,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "V2.1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f589ce54_9011d697",
+        "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "826d7de1_6039a4da",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +226,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "2.1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "653262c9_935bcc7a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/nullfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d60c3f1_530d70f0",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -177,6 +267,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a553515_12bf2f76",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still need to do this one",
+      "parentUuid": "c8bf845c_03952efe",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7992406e_230cbe7b",
         "filename": "src/SAL/recovery/recovery_fs_ng.c",
         "patchSetId": 1
@@ -188,6 +296,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "This one needs a license.",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61e1e61e_f7bf404b",
+        "filename": "src/SAL/recovery/recovery_fs_ng.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still needs to be done",
+      "parentUuid": "7992406e_230cbe7b",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -211,6 +337,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd055fc5_73c1907e",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still needs to be done",
+      "parentUuid": "611bfb72_4e4a1410",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f27c6bc7_105bb67b",
         "filename": "src/include/FSAL/access_check.h",
         "patchSetId": 1
@@ -222,6 +366,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "Needs a license.",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceff1e61_69369224",
+        "filename": "src/include/FSAL/access_check.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Oops, still need to do this one",
+      "parentUuid": "f27c6bc7_105bb67b",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -245,6 +407,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80c85920_3539d403",
+        "filename": "src/include/FSAL/fsal_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still need to do this one",
+      "parentUuid": "cdf80c40_424827d4",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a54dc89_ecebbeb5",
         "filename": "src/include/FSAL/fsal_init.h",
         "patchSetId": 1
@@ -256,6 +436,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "Needs a license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef4191ce_acf3ae1d",
+        "filename": "src/include/FSAL/fsal_init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still needs to be done",
+      "parentUuid": "6a54dc89_ecebbeb5",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -277,6 +475,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc837b41_575aaed9",
+        "filename": "src/include/fsal_handle_syscalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d485512_a7ed7f70",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ea9bd04_03ffaebd",
@@ -290,6 +506,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "BSD",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7420800a_1d4f8f34",
+        "filename": "src/include/gss_credcache.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ea9bd04_03ffaebd",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -313,6 +547,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e23bfe7c_64ad78f1",
+        "filename": "src/include/nfs4.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Oops, still need to fix this one",
+      "parentUuid": "ae80f570_7a814d38",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f571b140_a376184f",
         "filename": "src/include/os/linux/fsal_handle_syscalls.h",
         "patchSetId": 1
@@ -324,6 +576,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "2.1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "367326ab_09230d36",
+        "filename": "src/include/os/linux/fsal_handle_syscalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f571b140_a376184f",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -365,6 +635,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10324cb8_d2ec9b9a",
+        "filename": "src/include/rbt_node.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "It\u0027s not one hundred percent clear what the path for the rbt code is. The license and history information at the top indicates that it is copied from gcc and the text matches that in the rbt tree code in gcc but the gcc code is C++ templates. I assume someone massaged the templates into C structs that are included as members of the structs desired to be kept in an rb tree. As far as I can tell, the latest gcc code still has the same license.\n\nI think we\u0027re OK but I couldn\u0027t find the proper SPDX to call out this particular exception.",
+      "parentUuid": "c6eddf8b_4ff797b5",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70f23862_841a32a0",
         "filename": "src/include/rbt_tree.h",
         "patchSetId": 1
@@ -398,6 +686,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b1feb3_a6bf65b7",
+        "filename": "src/include/rbt_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Marking done, see discussion of rbt_node.h",
+      "parentUuid": "04e242e2_41de6d42",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3eca84da_05da9058",
@@ -411,6 +717,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "Needs license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d4c880_c7e1b075",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still needs to be done",
+      "parentUuid": "3eca84da_05da9058",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -434,6 +758,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a28c826c_c543b9be",
+        "filename": "src/test/test_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still needs to be done",
+      "parentUuid": "6524bb08_9b172f0f",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "112fa091_63ad6e4e",
         "filename": "src/test/test_mh_avl.c",
         "patchSetId": 1
@@ -451,6 +793,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6811628d_7f723ab1",
+        "filename": "src/test/test_mh_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still needs to be done",
+      "parentUuid": "112fa091_63ad6e4e",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ade96c1_82174739",
         "filename": "src/test/test_url_regex.c",
         "patchSetId": 1
@@ -462,6 +822,24 @@
       "writtenOn": "2022-02-11T15:49:57Z",
       "side": 1,
       "message": "Needs license",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1100df09_c1c9d7be",
+        "filename": "src/test/test_url_regex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:39:26Z",
+      "side": 1,
+      "message": "Still needs to be done",
+      "parentUuid": "5ade96c1_82174739",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
