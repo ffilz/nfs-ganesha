@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e07164_0235fd5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-11T15:49:38Z",
+      "side": 1,
+      "message": "Actually this duplicate check really isn\u0027t necessary since the export handling does it\u0027s own duplicate checking.\n\nIn fact, this duplicate check if changed as suggested would prevent dynamic export update from working since it would kick in before the export processing had a chance to determine if the duplicate is because of dynamic update.\n\nI guess this DOES allow a config file to have two instances of an export, with the second instance serving as an \"update\" of the first.\n\nNot sure the best way to handle that other than maybe the config parsing should walk the tree looking for duplicate blocks.",
+      "revId": "060d83f630c1e79fbccf889f7c19b7270711d267",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
