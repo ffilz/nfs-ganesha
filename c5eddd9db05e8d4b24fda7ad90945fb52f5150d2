@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b10c6e_75c70846",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-15T17:07:42Z",
+      "side": 1,
+      "message": "The indentation and block nesting looks wrong here.",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9c9814_4239c033",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-15T17:07:42Z",
+      "side": 1,
+      "message": "Why do you need to do this? Doesn\u0027t populate_posix_filesystems find the GPFS file systems?\n\nAt the least this probably needs some comments explaining.",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492d5bf0_1044a61e",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-15T17:07:42Z",
+      "side": 1,
+      "message": "Our style is not to use // comments",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
