@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4efaf037_58a63cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:47:11Z",
+      "side": 1,
+      "message": "Please fix formatting and comment style issues.",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3f098e26_43c0ac3b",
         "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
         "patchSetId": 1
@@ -86,6 +103,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d9537a5_abbf5749",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:47:11Z",
+      "side": 1,
+      "message": "Fix 80 column issue (move comment to its own line) and avoid // comments",
+      "parentUuid": "161c7379_cf74b26e",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "211f207f_1736fbb3",
@@ -103,6 +138,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98656fe_899c5704",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:47:11Z",
+      "side": 1,
+      "message": "Again, move comment to it\u0027s own line and use /* ... */ style",
+      "parentUuid": "211f207f_1736fbb3",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b136f2c3_b43951d7",
@@ -116,6 +169,24 @@
       "writtenOn": "2022-03-18T09:51:35Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\ttype \u003d strtok_r(NULL, \" \", \u0026savePtr);      //3rd is the type",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b3965c3_faf9763b",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:47:11Z",
+      "side": 1,
+      "message": "Again, move comment to it\u0027s own line and use /* ... */ style",
+      "parentUuid": "b136f2c3_b43951d7",
       "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
