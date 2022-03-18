@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79ec5e29_473a1406",
+        "filename": "src/FSAL/FSAL_LIZARDFS/fileinfo_cache.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Oh, crud, not only is there no or later, it\u0027s also GPL not LGPL...",
+      "parentUuid": "43f327a4_2bd7351e",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "558c15c9_b18e5836",
         "filename": "src/FSAL/FSAL_VFS/os/linux/handle_syscalls.c",
         "patchSetId": 1
@@ -303,6 +321,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d5535e8_c726dd40",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "7a553515_12bf2f76",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7992406e_230cbe7b",
         "filename": "src/SAL/recovery/recovery_fs_ng.c",
         "patchSetId": 1
@@ -332,6 +368,24 @@
       "side": 1,
       "message": "Still needs to be done",
       "parentUuid": "7992406e_230cbe7b",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647fb772_69f30510",
+        "filename": "src/SAL/recovery/recovery_fs_ng.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "61e1e61e_f7bf404b",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -373,6 +427,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ccf43c5_6bdb60c1",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "cd055fc5_73c1907e",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f27c6bc7_105bb67b",
         "filename": "src/include/FSAL/access_check.h",
         "patchSetId": 1
@@ -402,6 +474,24 @@
       "side": 1,
       "message": "Oops, still need to do this one",
       "parentUuid": "f27c6bc7_105bb67b",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25931c37_c336779c",
+        "filename": "src/include/FSAL/access_check.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "ceff1e61_69369224",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -443,6 +533,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fc93d76_9518f490",
+        "filename": "src/include/FSAL/fsal_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "80c85920_3539d403",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a54dc89_ecebbeb5",
         "filename": "src/include/FSAL/fsal_init.h",
         "patchSetId": 1
@@ -472,6 +580,24 @@
       "side": 1,
       "message": "Still needs to be done",
       "parentUuid": "6a54dc89_ecebbeb5",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3ac939c_5adb0273",
+        "filename": "src/include/FSAL/fsal_init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "ef4191ce_acf3ae1d",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -577,6 +703,24 @@
       "side": 1,
       "message": "Oops, still need to fix this one",
       "parentUuid": "ae80f570_7a814d38",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1da6e4_b5f91ba0",
+        "filename": "src/include/nfs4.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "e23bfe7c_64ad78f1",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -689,6 +833,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac8f5199_1266e704",
+        "filename": "src/include/rbt_node.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch.",
+      "parentUuid": "c4e3549e_2d4b95d1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70f23862_841a32a0",
         "filename": "src/include/rbt_tree.h",
         "patchSetId": 1
@@ -777,6 +939,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edd7eb12_c6512066",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "b3d4c880_c7e1b075",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6524bb08_9b172f0f",
         "filename": "src/test/test_avl.c",
         "patchSetId": 1
@@ -806,6 +986,24 @@
       "side": 1,
       "message": "Still needs to be done",
       "parentUuid": "6524bb08_9b172f0f",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd073c4c_96e820a8",
+        "filename": "src/test/test_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "a28c826c_c543b9be",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -847,6 +1045,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2816cf66_5e53d08d",
+        "filename": "src/test/test_mh_avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "6811628d_7f723ab1",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ade96c1_82174739",
         "filename": "src/test/test_url_regex.c",
         "patchSetId": 1
@@ -876,6 +1092,24 @@
       "side": 1,
       "message": "Still needs to be done",
       "parentUuid": "5ade96c1_82174739",
+      "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "530a370a_06427d08",
+        "filename": "src/test/test_url_regex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-03-18T14:42:12Z",
+      "side": 1,
+      "message": "Covered in another patch since there is no license doesn\u0027t belong in this patch.",
+      "parentUuid": "1100df09_c1c9d7be",
       "revId": "c987d493a20f8a4ee9ae542a2ca1c13ec5e6e6ff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
