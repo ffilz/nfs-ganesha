@@ -31,6 +31,8 @@
 #ifndef _POSIX_ACLS_H
 #define _POSIX_ACLS_H
 
+#include "config.h"
+
 #include <sys/acl.h>
 #include "nfs4_acls.h"
 #include <acl/libacl.h>
@@ -92,6 +94,16 @@ ace_count(acl_t acl);
 size_t posix_acl_xattr_size(int count);
 
 int posix_acl_entries_count(size_t size);
+
+#ifndef HAVE_ACL_GET_FD_NP
+acl_t
+acl_get_fd_np(int fd, acl_type_t type);
+#endif
+
+#ifndef HAVE_ACL_SET_FD_NP
+int
+acl_set_fd_np(int fd, acl_t acl, acl_type_t type);
+#endif
 
 acl_t
 xattr_2_posix_acl(const struct acl_ea_header *ea_header, size_t size);

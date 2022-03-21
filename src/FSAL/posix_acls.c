@@ -788,6 +788,85 @@ int posix_acl_entries_count(size_t size)
 	return size / sizeof(struct acl_ea_entry);
 }
 
+#ifndef HAVE_ACL_GET_FD_NP
+/*
+ * @brief Get POSIX ACL, including default ACL, via file descriptor
+ *
+ * @param[in]  fd	File descriptor
+ * @param[in]  type	ACL type - ACL_TYPE_ACCESS, ACL_TYPE_DEFAULT
+ *
+ * @return Posix ACL on success, NULL on failure.
+ */
+
+#ifdef LINUX
+acl_t
+acl_get_fd_np(int fd, acl_type_t type)
+{
+	char fname[PATH_MAX];
+	int num;
+
+	if (type == ACL_TYPE_ACCESS) {
+		return acl_get_fd(fd);
+	}
+
+	if (fd < 0) {
+		errno = EINVAL;
+		return NULL;
+	}
+
+	num = snprintf(fname, sizeof(fname), "/proc/self/fd/%d", fd);
+	if (num >= sizeof(fname)) {
+		errno = EINVAL;
+		return NULL;
+	}
+
+	return acl_get_file(fname, type);
+}
+#else
+#error Misconfiguration - attempting to replace acl_get_fd_np(() but not Linux
+#endif
+#endif
+
+#ifndef HAVE_ACL_SET_FD_NP
+/*
+ * @brief Set POSIX ACL, including default ACL, via file descriptor
+ *
+ * @param[in]  fd	Extented attribute
+ * @param[in]  acl	Posix ACL
+ * @param[in]  type	ACL type - ACL_TYPE_ACCESS, ACL_TYPE_DEFAULT
+ *
+ * @return 0 on success, non-zero on failure, with errno set.
+ */
+
+#ifdef LINUX
+int
+acl_set_fd_np(int fd, acl_t acl, acl_type_t type)
+{
+	char fname[PATH_MAX];
+	int num;
+
+	if (type == ACL_TYPE_ACCESS) {
+		return acl_set_fd(fd, acl);
+	}
+
+	if (fd < 0) {
+		errno = EINVAL;
+		return -1;
+	}
+
+	num = snprintf(fname, sizeof(fname), "/proc/self/fd/%d", fd);
+	if (num >= sizeof(fname)) {
+		errno = EINVAL;
+		return -1;
+	}
+
+	return acl_set_file(fname, type, acl);
+}
+#else
+#error Misconfiguration - attempting to replace acl_set_fd_np(() but not Linux
+#endif
+#endif
+
 /*
  * @brief Convert extended attribute to POSIX ACL
  *
