@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5246254_95d72bba",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1019989
+      },
+      "writtenOn": "2022-03-21T09:11:57Z",
+      "side": 0,
+      "message": "Now, ERR_FSAL_NOT_OPENED is no longer returned, so in the function fsal_close, open_fd_count will be decremented by one, so open_fd_count will become negative?",
+      "revId": "510bac4ee069c65c6275dde2e5994e137d091410",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
