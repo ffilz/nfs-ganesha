@@ -36,6 +36,13 @@ SET(fsalvfs_LIB_SRCS_common
    attrs.c
 )
 
+if(ENABLE_VFS_POSIX_ACL)
+    set(fsalvfs_LIB_SRCS_common
+        ${fsalvfs_LIB_SRCS_common}
+        ../../posix_acls.c
+    )
+endif(ENABLE_VFS_POSIX_ACL)
+
 if(USE_FSAL_VFS)
 
     set(FSAL_LUSTRE_VFS_NAME "VFS")
