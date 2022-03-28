@@ -143,6 +143,11 @@ static bool rgw_cb(const char *name, void *arg, uint64_t offset,
 	enum fsal_dir_result cb_rc;
 
 	fsal_prepare_attrs(&attrs, rgw_cb_arg->attrmask);
+	uint64_t _off = (uint64_t)name;
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "%s with folder name: %s, folder offset: %" PRIu64,
+		     __func__, ((char *) _off), _off);
 
 	/* rgw_lookup now accepts type hints */
 	status = lookup_int(rgw_cb_arg->dir_hdl, name, &obj, &attrs, st,
@@ -161,7 +166,7 @@ static bool rgw_cb(const char *name, void *arg, uint64_t offset,
 	/** @todo FSF - when rgw gains mark capability, need to change this
 	 *              code...
 	 */
-	cb_rc = rgw_cb_arg->cb(name, obj, &attrs, rgw_cb_arg->fsal_arg, offset);
+	cb_rc = rgw_cb_arg->cb(name, obj, &attrs, rgw_cb_arg->fsal_arg, _off);
 
 	fsal_release_attrs(&attrs);
 
@@ -196,7 +201,7 @@ static fsal_status_t rgw_fsal_readdir(struct fsal_obj_handle *dir_hdl,
 
 	/* when whence_is_name, whence is a char pointer cast to
 	 * fsal_cookie_t */
-	const char *r_whence = (const char *) whence;
+	const char *r_whence = (const char *) *whence;
 
 	struct rgw_export *export =
 		container_of(op_ctx->fsal_export, struct rgw_export, export);
