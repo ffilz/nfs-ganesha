@@ -65,6 +65,7 @@
 #include "delayed_exec.h"
 #include "client_mgr.h"
 #include "export_mgr.h"
+#include "mdcache_mgr.h"
 #ifdef USE_CAPS
 #include <sys/capability.h>	/* For capget/capset */
 #endif
@@ -629,6 +630,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	dbus_export_init();
 	dbus_client_init();
 	dbus_cache_init();
+	dbus_mdc_init();
 #endif
 
 	/* acls cache may be needed by exports_pkginit */
