@@ -83,6 +83,7 @@ SET(support_STAT_SRCS
    bsd-base64.c
    server_stats.c
    export_mgr.c
+   mdcache_mgr.c
    nfs4_fs_locations.c
 )
 
