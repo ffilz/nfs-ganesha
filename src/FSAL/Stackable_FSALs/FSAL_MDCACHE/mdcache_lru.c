@@ -477,6 +477,7 @@ adjust_lru(mdcache_entry_t *entry)
 		/* move entry to LRU of L1 */
 		glist_del(&lru->q);     /* skip L1 fixups */
 		--(q->size);
+		lru->qid = LRU_ENTRY_L1;
 		q = &qlane->L1;
 		lru_insert(lru, q, LRU_LRU);
 		break;
@@ -2054,14 +2055,18 @@ _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 	bool freed = false;
 
 	if (!other_lock_held) {
-		QLOCK(qlane);
-		if (((entry->lru.flags & LRU_CLEANED) == 0) &&
-		    (entry->lru.qid == LRU_ENTRY_CLEANUP)) {
-			do_cleanup = true;
-			atomic_set_uint32_t_bits(&entry->lru.flags,
-						 LRU_CLEANED);
+		// precheck about qid to avoid LOCK every time
+		if (entry->lru.qid == LRU_ENTRY_CLEANUP) {
+			QLOCK(qlane);
+			// final check with lock
+			if (((entry->lru.flags & LRU_CLEANED) == 0) &&
+			    (entry->lru.qid == LRU_ENTRY_CLEANUP)) {
+				do_cleanup = true;
+				atomic_set_uint32_t_bits(&entry->lru.flags,
+							 LRU_CLEANED);
+			}
+			QUNLOCK(qlane);
 		}
-		QUNLOCK(qlane);
 
 		if (do_cleanup) {
 			LogDebug(COMPONENT_CACHE_INODE,
