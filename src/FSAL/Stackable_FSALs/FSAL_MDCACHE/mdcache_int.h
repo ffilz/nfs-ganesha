@@ -197,8 +197,9 @@ struct mdcache_lru_stats {
 					 *< reclaimable entries */
 	uint64_t reclaim_tries;		/*< Means that how many times we try to
 					 *< get reclaimable entry */
-	uint64_t reclaim_success;
-	uint64_t destroyed_entries;
+	uint64_t reclaim_success;	/*< Reclaim successfully times */
+	uint64_t destroyed_entries;	/*< The number of LRU entries that are
+					 *< destroyed */
 };
 
 extern struct mdcache_lru_stats *lru_st;
