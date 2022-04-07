@@ -89,6 +89,8 @@ static struct config_item mdcache_params[] = {
 		       mdcache_parameter, futility_count),
 	CONF_ITEM_UI32("Dirmap_HWMark", 1, UINT32_MAX, 10000,
 		       mdcache_parameter, dirmap_hwmark),
+	CONF_ITEM_BOOL("Try_Force_Reuse_Entry", false,
+		       mdcache_parameter, try_reuse_entry),
 	CONFIG_EOL
 };
 

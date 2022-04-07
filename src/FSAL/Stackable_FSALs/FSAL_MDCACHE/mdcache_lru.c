@@ -779,11 +779,15 @@ lru_reap_impl(enum lru_q_id qid)
 }
 
 static inline mdcache_lru_t *
-lru_try_reap_entry(void)
+lru_try_reap_entry(bool release)
 {
 	mdcache_lru_t *lru;
 
-	if (lru_state.entries_used < lru_state.entries_hiwat)
+	if (lru_state.entries_used == 0)
+		return NULL;
+
+	if ((release || !mdcache_param.try_reuse_entry) &&
+	    lru_state.entries_used < lru_state.entries_hiwat)
 		return NULL;
 
 	/* XXX dang why not start with the cleanup list? */
@@ -1688,7 +1692,7 @@ size_t mdcache_lru_release_entries(int32_t want_release)
 	if (want_release == 0)
 		return released;
 
-	while ((lru = lru_try_reap_entry())) {
+	while ((lru = lru_try_reap_entry(true))) {
 		entry = container_of(lru, mdcache_entry_t, lru);
 		mdcache_lru_unref(entry);
 		++released;
@@ -1932,10 +1936,12 @@ mdcache_entry_t *mdcache_lru_get(struct fsal_obj_handle *sub_handle)
 	mdcache_lru_t *lru;
 	mdcache_entry_t *nentry = NULL;
 
-	lru = lru_try_reap_entry();
+	lru = lru_try_reap_entry(false);
 	if (lru) {
 		/* we uniquely hold entry */
 		nentry = container_of(lru, mdcache_entry_t, lru);
+		LogFullDebug(COMPONENT_CACHE_INODE,
+			     "get entry %p to reuse", nentry);
 		mdcache_lru_clean(nentry);
 		memset(&nentry->attrs, 0, sizeof(nentry->attrs));
 		init_rw_locks(nentry);
