@@ -34,6 +34,23 @@
       "parentUuid": "69419a44_2da4c1d9",
       "revId": "2eabf230fec9407facd3742ac41cdff0ab67c32a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b77377e_7cddb671",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-04-07T16:18:33Z",
+      "side": 1,
+      "message": "I agree, this breaks constant-time allocation.  The issue is that this code is in the fast path, and we can\u0027t add arbitrary looping through lists without adding large amounts of latency.  This is why we have lanes: so that if one lane has an object stuck at the LRU for some time, another lane will be usable.  I was about to say \"raise the number of lanes, if your load is that large\", but number of lanes appear to not be configurable.  I had thought it was, but it isn\u0027t.\n\nWe do, now, run down LRU entries in the background if we\u0027re over the highwater, so extra entries should be freed over time.\n\nI\u0027m not sure what the best solution is, here.  I see several possibilities.  We can make LRU_N_Q_LANES configurable (17 is *way* too small for millions of entries in flight, I think);  We can do something like this PR, but with a small fixed number of iterations (2? 5? 10?); or we could add a toggle that allows this PR under the context of trading bounded latency for bounded memory usage?",
+      "revId": "2eabf230fec9407facd3742ac41cdff0ab67c32a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
