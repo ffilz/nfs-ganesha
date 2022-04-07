@@ -777,12 +777,30 @@ lru_reap_impl(enum lru_q_id qid)
 	return lru;
 }
 
+/**
+ * @brief Pre-check then try to pull an entry of the queue
+ *
+ * This function is the entry point that would check the some
+ * conditions to pull an entry or not.
+ *
+ * There are two cases would return NULL.
+ *   1. The number of used entries is small than high water of entries.
+ *   2. Try to reuse entry (force_reuse is true or the number of used entries
+ *      are big than high watter of enttries) but reap fail.
+ *
+ * @param[in] force_reuse	Must try to reap an entry to reuse or not.
+ * @return NULL or available entry with relaetd conditions
+ */
+
 static inline mdcache_lru_t *
-lru_try_reap_entry(void)
+lru_try_reap_entry(bool force_reuse)
 {
 	mdcache_lru_t *lru;
 
-	if (lru_state.entries_used < lru_state.entries_hiwat)
+	if (lru_state.entries_used == 0)
+		return NULL;
+
+	if (!force_reuse && lru_state.entries_used < lru_state.entries_hiwat)
 		return NULL;
 
 	/* XXX dang why not start with the cleanup list? */
@@ -1685,7 +1703,8 @@ size_t mdcache_lru_release_entries(int32_t want_release)
 	if (want_release == 0)
 		return released;
 
-	while ((lru = lru_try_reap_entry())) {
+	/* In release path, do not reap entries aggressively */
+	while ((lru = lru_try_reap_entry(false))) {
 		entry = container_of(lru, mdcache_entry_t, lru);
 		mdcache_lru_unref(entry);
 		++released;
@@ -1929,10 +1948,12 @@ mdcache_entry_t *mdcache_lru_get(struct fsal_obj_handle *sub_handle)
 	mdcache_lru_t *lru;
 	mdcache_entry_t *nentry = NULL;
 
-	lru = lru_try_reap_entry();
+	lru = lru_try_reap_entry(mdcache_param.try_reuse_entry);
 	if (lru) {
 		/* we uniquely hold entry */
 		nentry = container_of(lru, mdcache_entry_t, lru);
+		LogFullDebug(COMPONENT_CACHE_INODE,
+			     "get entry %p to reuse", nentry);
 		mdcache_lru_clean(nentry);
 		memset(&nentry->attrs, 0, sizeof(nentry->attrs));
 		init_rw_locks(nentry);
