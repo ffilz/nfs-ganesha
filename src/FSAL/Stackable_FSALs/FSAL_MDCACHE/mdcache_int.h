@@ -192,6 +192,17 @@ struct mdcache_stats {
 
 extern struct mdcache_stats *cache_stp;
 
+struct mdcache_lru_stats {
+	uint64_t reclaimable_entries;	/*< Total number of potentially
+					 *< reclaimable entries */
+	uint64_t reclaim_tries;		/*< Means that how many times we try to
+					 *< get reclaimable entry */
+	uint64_t reclaim_success;
+	uint64_t destroyed_entries;
+};
+
+extern struct mdcache_lru_stats *lru_st;
+
 /**
  * @brief Represents one of the many-many links between inodes and exports.
  *
