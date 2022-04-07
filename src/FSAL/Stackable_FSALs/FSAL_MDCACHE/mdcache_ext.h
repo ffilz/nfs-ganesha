@@ -117,6 +117,9 @@ struct mdcache_parameter {
 	/** High water mark for dirent mapping entries.  Defaults to 10000,
 	    settable by Dirmap_HWMark. */
 	uint32_t dirmap_hwmark;
+	/** Make reclaim early and skip the condition about number of
+	    entries. Default to False. */
+	bool try_reuse_entry;
 };
 
 extern struct mdcache_parameter mdcache_param;
