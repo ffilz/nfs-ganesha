@@ -718,6 +718,10 @@ lru_reap_impl(enum lru_q_id qid)
 #endif
 		QUNLOCK(qlane);
 
+		/* update lru statistics */
+		(void)atomic_inc_uint64_t(&lru_st->reclaim_tries);
+
+		assert(refcnt > 1);
 		if (unlikely(refcnt != (LRU_SENTINEL_REFCOUNT + 1))) {
 			/* cant use it. */
 			adjust_lru_root_object(entry);
@@ -750,6 +754,7 @@ lru_reap_impl(enum lru_q_id qid)
 			QUNLOCK(qlane);
 			cih_remove_latched(entry, &latch,
 					   CIH_REMOVE_UNLOCK);
+
 			/* Note, we're not releasing our ref here.
 			 * cih_remove_latched() called
 			 * mdcache_lru_unref(), which released the
@@ -1933,6 +1938,8 @@ mdcache_entry_t *mdcache_lru_get(struct fsal_obj_handle *sub_handle)
 		mdcache_lru_clean(nentry);
 		memset(&nentry->attrs, 0, sizeof(nentry->attrs));
 		init_rw_locks(nentry);
+		/* update lru statistics */
+		(void)atomic_inc_uint64_t(&lru_st->reclaim_success);
 	} else {
 		/* alloc entry (if fails, aborts) */
 		nentry = alloc_cache_entry();
@@ -2000,10 +2007,11 @@ fsal_status_t
 _mdcache_lru_ref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 		 int line)
 {
-#ifdef USE_LTTNG
-	int32_t refcnt =
-#endif
-		atomic_inc_int32_t(&entry->lru.refcnt);
+	int refcnt = atomic_inc_int32_t(&entry->lru.refcnt);
+
+	/* from 1 -> 2, means that already add to reclaimable_entries */
+	if (refcnt == LRU_SENTINEL_REFCOUNT + 1)
+		atomic_dec_uint64_t(&lru_st->reclaimable_entries);
 
 #ifdef USE_LTTNG
 	tracepoint(mdcache, mdc_lru_ref,
@@ -2063,6 +2071,19 @@ _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 		}
 	}
 
+	refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
+	if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
+		LogFullDebug(COMPONENT_CACHE_INODE,
+			     "checking entry with refcnt: %d, valid: %s!",
+			     refcnt, (entry->fh_hk.inavl ? "True" : "False"));
+		QLOCK(qlane);
+		refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
+		if (LRU_ENTRY_RECLAIMABLE(entry, refcnt))
+			(void)atomic_inc_uint64_t(&lru_st->reclaimable_entries);
+		QUNLOCK(qlane);
+
+	}
+
 	refcnt = atomic_dec_int32_t(&entry->lru.refcnt);
 
 #ifdef USE_LTTNG
@@ -2104,6 +2125,7 @@ _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 		freed = true;
 
 		(void) atomic_dec_int64_t(&lru_state.entries_used);
+		(void) atomic_inc_int64_t(&lru_st->destroyed_entries);
 	}			/* refcnt == 0 */
  out:
 	return freed;

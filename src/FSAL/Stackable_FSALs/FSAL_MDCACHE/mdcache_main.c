@@ -52,6 +52,7 @@ pool_t *mdcache_entry_pool;
 
 struct mdcache_stats cache_st;
 struct mdcache_stats *cache_stp = &cache_st;
+struct mdcache_lru_stats *lru_st;
 
 /* FSAL name determines name of shared library: libfsal<name>.so */
 const char mdcachename[] = "MDCACHE";
