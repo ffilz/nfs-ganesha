@@ -2503,4 +2503,22 @@ void dirmap_lru_stop(struct mdcache_fsal_export *exp)
 	LogDebug(COMPONENT_NFS_READDIR, "stopped dirmap %s", exp->name);
 }
 
+uint64_t get_lru_entries(int qid)
+{
+	int id;
+	uint64_t entries = 0;
+
+	for (id = 0; id < LRU_N_Q_LANES; ++id) {
+		struct lru_q_lane *qlane;
+
+		qlane = &LRU[id];
+		QLOCK(qlane);
+		if (qid == LRU_ENTRY_L1)
+			entries += qlane->L1.size;
+		else if (qid == LRU_ENTRY_L2)
+			entries += qlane->L2.size;
+		QUNLOCK(qlane);
+	}
+	return entries;
+}
 /** @} */
