@@ -486,6 +486,60 @@ void mdcache_utilization(DBusMessageIter *iter)
 	dbus_message_iter_close_container(iter, &struct_iter);
 
 }
+
+/* lru reclaim statistics */
+void mdcache_lru_reclaim_status(DBusMessageIter *iter)
+{
+	DBusMessageIter struct_iter;
+	char *type;
+	uint64_t lru_entries, des_entries;
+	uint64_t rec_entries, rec_tries, rec_success;
+	uint64_t l2_entries_real, l1_entries_real;
+
+
+	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
+					 &struct_iter);
+	/* Gather the data */
+	lru_entries = atomic_fetch_uint64_t(&lru_state.entries_used);
+	des_entries = atomic_fetch_uint64_t(&lru_st->destroyed_entries);
+	rec_entries = atomic_fetch_uint64_t(&lru_st->reclaimable_entries);
+	rec_tries = atomic_fetch_uint64_t(&lru_st->reclaim_tries);
+	rec_success = atomic_fetch_uint64_t(&lru_st->reclaim_success);
+
+	l1_entries_real = get_lru_entries(LRU_ENTRY_L1);
+	l2_entries_real = get_lru_entries(LRU_ENTRY_L2);
+
+	type = " LRU entries: ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &lru_entries);
+	type = " LRU L1 entries: ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &l1_entries_real);
+	type = " LRU L2 entries: ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &l2_entries_real);
+	type = " Destroyed entries: ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &des_entries);
+	type = " Reclaimable entries: ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &rec_entries);
+	type = " Times of trying reclaim: ";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &rec_tries);
+	type = " Times of reclaimed";
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &type);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &rec_success);
+
+	dbus_message_iter_close_container(iter, &struct_iter);
+}
 #endif /* USE_DBUS */
 
 /** @} */
