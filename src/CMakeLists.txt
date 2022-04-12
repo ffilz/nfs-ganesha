@@ -623,6 +623,11 @@ if (USE_MAN_PAGE)
 endif(USE_MAN_PAGE)
 
 # POSIX ACLs - these may be used in multiple places
+check_library_exists(acl acl_get_file "" HAVE_LIBACL)
+if(HAVE_LIBACL)
+  # libacl is required on Linux, while in FreeBSD these functions are in libc
+  LIST(APPEND CMAKE_REQUIRED_LIBRARIES "acl")
+endif(HAVE_LIBACL)
 check_include_files("sys/acl.h" HAVE_SYS_ACL_H)
 check_include_files("acl/libacl.h" HAVE_ACL_LIBACL_H)
 
