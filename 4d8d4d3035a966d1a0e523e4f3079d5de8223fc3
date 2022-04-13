@@ -16,6 +16,24 @@
       "message": "These should go in os/linux/ (with includes if necessary in include/os/linux)",
       "revId": "4d8d4d3035a966d1a0e523e4f3079d5de8223fc3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124286be_36aa9318",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-04-13T18:46:29Z",
+      "side": 1,
+      "message": "Yes, definitely this should be in os/linux since it uses /proc/self...\n\nIs there really no other way to do this? I guess it will always work even if we opened the fd via handle and this Ganesha instance never did a lookup by name.",
+      "parentUuid": "b6156183_3995cc0d",
+      "revId": "4d8d4d3035a966d1a0e523e4f3079d5de8223fc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
