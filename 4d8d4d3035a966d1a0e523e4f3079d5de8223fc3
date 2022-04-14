@@ -34,6 +34,24 @@
       "parentUuid": "b6156183_3995cc0d",
       "revId": "4d8d4d3035a966d1a0e523e4f3079d5de8223fc3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c97aaf0_04807bf3",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2022-04-14T14:13:41Z",
+      "side": 1,
+      "message": "I thought the same thing.  No other way in Linux.  While trying to figure this out I found FreeBSD has an F_GETPATH command for fcntl().  However, this was proposed and rejected for Linux many years ago because there is already a way of doing it: readlink() via /proc/*/fd/...  ;-)\n\nThis is also the way Samba does it.",
+      "parentUuid": "124286be_36aa9318",
+      "revId": "4d8d4d3035a966d1a0e523e4f3079d5de8223fc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
