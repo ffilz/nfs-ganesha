@@ -33,6 +33,24 @@
       "message": "Two thoughts.  First, you generally check for the headers first, because that check is easy (just file exists), and only check for the library if the headers exist (since that\u0027s a hard check, a compile).  Second, we have cmake/modules/FindLibACL.cmake, which is very rudimentary.  Probably a better solution is to fix that, including all these checks, then just use find_package(LibACL).  libacl is checked/used enough it this file to justify using a package file.",
       "revId": "3f1598a1d27a8cfb5d2b2b356cf22ef1153bd628",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39614f5d_90d0d252",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-04-14T13:06:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1f4366c_b7d5a73d",
+      "revId": "3f1598a1d27a8cfb5d2b2b356cf22ef1153bd628",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
