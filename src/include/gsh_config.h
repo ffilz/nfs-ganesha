@@ -454,7 +454,7 @@ typedef struct nfs_core_param {
 /**
  * @brief Default value for lease_lifetime
  */
-#define LEASE_LIFETIME_DEFAULT 60
+#define LEASE_LIFETIME_DEFAULT 120
 
 /**
  * @brief Default value for grace period
