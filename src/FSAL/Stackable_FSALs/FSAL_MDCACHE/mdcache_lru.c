@@ -1360,16 +1360,7 @@ lru_run(struct fridgethr_context *ctx)
 	/* avoid to do more atomic fetch we could check with currentopen */
 	extremis = currentopen > lru_state.fds_hiwat;
 
-	if (currentopen < lru_state.fds_lowat) {
-		LogDebug(COMPONENT_CACHE_INODE_LRU,
-			 "FD count is %zd and low water mark is %d: not reaping.",
-			 currentopen, lru_state.fds_lowat);
-		if (atomic_fetch_uint32_t(&lru_state.fd_state) > FD_LOW) {
-			LogEvent(COMPONENT_CACHE_INODE_LRU,
-				 "Return to normal fd reaping.");
-			atomic_store_uint32_t(&lru_state.fd_state, FD_LOW);
-		}
-	} else {
+	if (lru_state.entries_used >= lru_state.entries_hiwat) {
 		/* Set state first because that does not realted
 		 * with following code flow
 		 */
@@ -1412,7 +1403,6 @@ lru_run(struct fridgethr_context *ctx)
 				 "Open FDs over high water mark, reapring aggressively.");
 		}
 
-		/* Total fds closed between all lanes and all current runs. */
 		do {
 			workpass = 0;
 			for (lane = 0; lane < LRU_N_Q_LANES; ++lane) {
@@ -1428,8 +1418,7 @@ lru_run(struct fridgethr_context *ctx)
 				workpass += lru_run_lane(lane, &totalclosed);
 			}
 			totalwork += workpass;
-		} while (extremis && (workpass >= lru_state.per_lane_work)
-			 && (totalwork < lru_state.biggest_window));
+		}
 
 		/* means latest current open fds after reap */
 		currentopen = atomic_fetch_size_t(&open_fd_count);
