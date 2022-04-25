@@ -16,6 +16,24 @@
       "message": "It\u0027s not that simple.  The primary purpose of the levels of the cache was that entries in L1 could have a global FD open, and entries in L2 cannot.  Demoting from L1 to L2 was part of tracking and handling the global FDs.  I suspect a more complicated re-design is necessary to achieve the multiple goals that the cache is attempting to fulfill.",
       "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6425649_df804135",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-04-25T17:30:47Z",
+      "side": 1,
+      "message": "Agreed, I think we need to go back to the drawing board.\n\nPreviously, cache_inode had \"pinned\" nodes that were removed from the LRU. Pinned nodes were nodes that were not eligible for reaping because they had state (open, lock, delegation, layout) or were anchors in the pseudofs (export/file system roots, mount points). Going back to removing those nodes from the LRU should mean any node is potentially reapable and then L1/L2 is JUST management of the open fd. We can then look at other changes that might be needed to be more aggressive at reaping if we are over the high water mark.",
+      "parentUuid": "71dee4ed_904d93de",
+      "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
