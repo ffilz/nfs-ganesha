@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71dee4ed_904d93de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-04-25T15:48:23Z",
+      "side": 1,
+      "message": "It\u0027s not that simple.  The primary purpose of the levels of the cache was that entries in L1 could have a global FD open, and entries in L2 cannot.  Demoting from L1 to L2 was part of tracking and handling the global FDs.  I suspect a more complicated re-design is necessary to achieve the multiple goals that the cache is attempting to fulfill.",
+      "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
