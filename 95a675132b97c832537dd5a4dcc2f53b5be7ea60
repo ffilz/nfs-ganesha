@@ -16,6 +16,57 @@
       "message": "lease_lifetime is a configurable.  Just change it in the config file, don\u0027t change the compile-time default.",
       "revId": "95a675132b97c832537dd5a4dcc2f53b5be7ea60",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2e17e9_f4ee05f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-04-25T17:26:42Z",
+      "side": 1,
+      "message": "We can discuss the maximum, but changing the compiled default will not be accepted.",
+      "revId": "95a675132b97c832537dd5a4dcc2f53b5be7ea60",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc618a3_214ffe48",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-04-25T17:26:42Z",
+      "side": 1,
+      "message": "Daniel is right, no reason to change the compiled default.",
+      "revId": "95a675132b97c832537dd5a4dcc2f53b5be7ea60",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6a628c0_05562de9",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-04-25T17:26:42Z",
+      "side": 1,
+      "message": "What is the perceived need for increasing the maximum to 3 minutes? If we really change this, we need to change the max for grace period also (grace period generally should be 1.5 x ).",
+      "revId": "95a675132b97c832537dd5a4dcc2f53b5be7ea60",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
