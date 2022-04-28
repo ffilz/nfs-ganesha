@@ -189,6 +189,7 @@ int main(int argc, char *argv[])
 			printf("Release comment = %s\n", VERSION_COMMENT);
 			printf("Git HEAD = %s\n", _GIT_HEAD_COMMIT);
 			printf("Git Describe = %s\n", _GIT_DESCRIBE);
+			printf("Kaleb was here\n");
 #endif
 			exit(0);
 			break;
