@@ -1876,10 +1876,10 @@ static struct config_item fsal_params[] = {
 			FSAL_MAXIOSIZE, _struct_, MaxWrite,		\
 			EXPORT_OPTION_MAXWRITE_SET, options_set),	\
 	CONF_ITEM_UI64_SET("PrefRead", 512, FSAL_MAXIOSIZE,		\
-			FSAL_MAXIOSIZE, _struct_, PrefRead,		\
+			1048576, _struct_, PrefRead,			\
 			EXPORT_OPTION_PREFREAD_SET, options_set),	\
 	CONF_ITEM_UI64_SET("PrefWrite", 512, FSAL_MAXIOSIZE,		\
-			FSAL_MAXIOSIZE, _struct_, PrefWrite,		\
+			1048576, _struct_, PrefWrite,			\
 			EXPORT_OPTION_PREFWRITE_SET, options_set),	\
 	CONF_ITEM_UI64("PrefReaddir", 512, FSAL_MAXIOSIZE, 16384,	\
 		       _struct_, PrefReaddir),				\
