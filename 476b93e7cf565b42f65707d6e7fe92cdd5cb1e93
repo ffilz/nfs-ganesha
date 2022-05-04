@@ -34,6 +34,24 @@
       "parentUuid": "71dee4ed_904d93de",
       "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "879bd995_2aff7410",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-05-04T02:40:48Z",
+      "side": 1,
+      "message": "Thanks the review. I have a question, \"any node is potentially reapable and then L1/L2 is JUST management of the open fd\", will this cause error or fatal problem? Because whether reap entry from L2, depends on the reference count, so the using entry will not be freed ?",
+      "parentUuid": "f6425649_df804135",
+      "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
