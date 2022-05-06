@@ -104,6 +104,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e8f71d_0b42ff61",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T16:36:11Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tFILE *file \u003d NULL;\n \t     ^",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f158290_bd540b1e",
@@ -209,6 +226,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "789db136_410d86ab",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T16:36:11Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tbreak;  // Something is broken with the command pipe,",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "211f207f_1736fbb3",
         "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
         "patchSetId": 1
@@ -244,6 +278,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "58b7bc1c_8cd95bea",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T16:36:11Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tptr \u003d strtok_r(NULL, \" \", \u0026savePtr); // 2nd is the mount point",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b136f2c3_b43951d7",
         "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
         "patchSetId": 1
@@ -273,6 +324,23 @@
       "side": 1,
       "message": "Again, move comment to it\u0027s own line and use /* ... */ style",
       "parentUuid": "b136f2c3_b43951d7",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0bf779f_43c12496",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T16:36:11Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\ttype \u003d strtok_r(NULL, \" \", \u0026savePtr);      //3rd is the type",
       "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
