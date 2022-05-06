@@ -189,6 +189,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad42483_e411bbf1",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (file \u003d\u003d NULL) {\n+\t\t\tgoto exit;\n+\t\t}",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "492d5bf0_1044a61e",
@@ -202,6 +219,23 @@
       "writtenOn": "2022-03-15T17:07:42Z",
       "side": 1,
       "message": "Our style is not to use // comments",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45135f32_901199cd",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Read the next line from the file",
       "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -260,6 +294,57 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "47179eee_4a74f7f7",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tbreak;  // Something is broken with the command pipe,",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d20f88bc_5fef945b",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\tbreak;  // Something is broken with the command pipe,",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3e2c2ef_e3c81e51",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t//maybe done or reached to EOF",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "211f207f_1736fbb3",
         "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
         "patchSetId": 1
@@ -312,6 +397,40 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "eb2f51ea_6fd989dc",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tptr \u003d strtok_r(NULL, \" \", \u0026savePtr); // 2nd is the mount point",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d90e3008_2f95d2e9",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\tptr \u003d strtok_r(NULL, \" \", \u0026savePtr); // 2nd is the mount point",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b136f2c3_b43951d7",
         "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
         "patchSetId": 1
@@ -358,6 +477,40 @@
       "writtenOn": "2022-05-06T16:36:11Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\ttype \u003d strtok_r(NULL, \" \", \u0026savePtr);      //3rd is the type",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca7511b_97d8eca8",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\ttype \u003d strtok_r(NULL, \" \", \u0026savePtr);      //3rd is the type",
+      "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d09278b_209c5494",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-06T17:49:18Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\ttype \u003d strtok_r(NULL, \" \", \u0026savePtr);      //3rd is the type",
       "revId": "c5eddd9db05e8d4b24fda7ad90945fb52f5150d2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
