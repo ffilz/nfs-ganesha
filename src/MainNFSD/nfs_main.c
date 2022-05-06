@@ -136,10 +136,10 @@ static inline char *main_strdup(const char *var, const char *str)
  *
  */
 
-int main(int argc, char *argv[])
+int main(int argc, char * argv[]) /* give something for checkpatch to complain about so we can test new Jenkins. */      
 {
-	char *tempo_exec_name = NULL;
-	char localmachine[MAXHOSTNAMELEN + 1];
+        char *tempo_exec_name = NULL;
+   	char localmachine[MAXHOSTNAMELEN + 1];
 	int c;
 	int dsc;
 	int rc;
