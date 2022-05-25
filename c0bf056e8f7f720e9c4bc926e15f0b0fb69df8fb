@@ -16,6 +16,23 @@
       "message": "Luo.muyao please review this and assure that it doesn\u0027t break your original fix: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/518250\n\nThanks - Frank",
       "revId": "c0bf056e8f7f720e9c4bc926e15f0b0fb69df8fb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28405a4f_0c48cbb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2022-05-25T10:03:36Z",
+      "side": 1,
+      "message": "I\u0027ve tested this and it behaves as expected with FSAL_VFS.  No more spurious duplicate export errors on Export_id 1, but actual duplicates are detected.",
+      "revId": "c0bf056e8f7f720e9c4bc926e15f0b0fb69df8fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
