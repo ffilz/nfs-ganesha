@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58735891_597a5ee8",
+        "filename": "src/FSAL/FSAL_PROXY_V3/utils.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-27T22:21:58Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (!attrmask_valid_setattr(fsal_attrs-\u003evalid_mask)) return false;",
+      "revId": "4a222aca1e002ab131b36d3fdf4c5d8807a2ad11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8f966d_739b1198",
+        "filename": "src/support/nfs_convert.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-27T22:21:58Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Add 9 to remove \"NFSPROC3_\" prefix.",
+      "revId": "4a222aca1e002ab131b36d3fdf4c5d8807a2ad11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd45de01_3868ad5b",
+        "filename": "src/support/nfs_convert.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-27T22:21:58Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Add 3 to remove \"OP_\" prefix",
+      "revId": "4a222aca1e002ab131b36d3fdf4c5d8807a2ad11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
