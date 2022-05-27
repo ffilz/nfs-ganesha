@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e933d1_b027eff3",
+        "filename": "src/FSAL/FSAL_PROXY_V3/utils.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-05-27T05:54:14Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!attrmask_valid(fsal_attrs-\u003evalid_mask, allow_rawdev)) {\n \t\treturn false;\n \t}",
+      "revId": "b4ee442b9470c47cd83db25af037faae6e3270b5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
