@@ -21,6 +21,7 @@
 #include "config.h"
 #include <stddef.h>
 #include <urcu/ref.h>
+#include <urcu-bp.h>
 #include "gsh_refstr.h"
 #include "abstract_mem.h"
 #include "gsh_list.h"
@@ -37,7 +38,7 @@ struct gsh_refstr *gsh_refstr_alloc(size_t len)
 void gsh_refstr_release(struct urcu_ref *ref)
 {
 	struct gsh_refstr *gr = container_of(ref, struct gsh_refstr, gr_ref);
-
+	synchronize_rcu();
 	LogFullDebug(COMPONENT_EXPORT,
 		     "Releasing refstr %s", gr->gr_val);
 
