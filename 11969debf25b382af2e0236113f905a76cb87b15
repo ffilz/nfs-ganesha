@@ -16,6 +16,29 @@
       "message": "Jeff could you review this please.",
       "revId": "11969debf25b382af2e0236113f905a76cb87b15",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c7638c7_d76f3df2",
+        "filename": "src/support/refstr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2022-06-01T15:38:50Z",
+      "side": 1,
+      "message": "Doing this here seems wrong as not all of the gsh_refstr users are necessarily RCU-protected, and this could end up blocking when it\u0027s not actually needed.\n\nThat said, the RCU rules around gsh_refstr are not as clear as they should be. Some (most?) callers should be calling synchronize_rcu() before releasing the \"canonical\" reference on the object. Very few actually do this. Really, only the rados cluster backends handle this right, AFAICT.\n\nMaybe you\u0027re right and we should just make these things be properly RCU-managed so the upper layers don\u0027t need to deal with this. Instead of calling synchronize_rcu here though, I think we should use call_rcu.\n\nThat means that you\u0027d need to embed a rcu_head inside the gsh_refstr, but I\u0027d rather trade a little memory and avoid blocking a thread until the current rcu grace period ends.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 2
+      },
+      "revId": "11969debf25b382af2e0236113f905a76cb87b15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
