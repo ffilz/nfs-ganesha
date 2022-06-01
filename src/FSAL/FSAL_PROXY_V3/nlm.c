@@ -258,7 +258,7 @@ proxyv3_nlm_commonrpc(rpcproc_t nlmProc, const char *procName,
 			      encFunc, args, decFunc, result)) {
 		LogCrit(COMPONENT_FSAL, "PROXY_V3: NLM op %s failed.",
 			procName);
-		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
+		return fsalstat(ERR_FSAL_DELAY, 0);
 	}
 
 	/* For now, always log the results. */
