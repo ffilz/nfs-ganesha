@@ -39,6 +39,30 @@
       },
       "revId": "11969debf25b382af2e0236113f905a76cb87b15",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6b30f4_abc0ff72",
+        "filename": "src/support/refstr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-06-02T15:49:11Z",
+      "side": 1,
+      "message": "Thanks Jeff for review\nWe are hitting this race here as reported by address_sanitizer\nWe could end up releasing canonical reference in copy_gsh_export and free the pointer, simultaneously read thread might have got the reference.\n\nWe could use call_rcu also to avoid blocking.\n\nBut I am not sure why we have this assert in gsh_refstr_get()\n        /*                              \n         * The assumption is that the persistent reference to the object is\n         * only put after an RCU grace period has settled.\n         */      \n        if (!urcu_ref_get_unless_zero(\u0026gr-\u003egr_ref))\n                abort();\n\nWe could have zero ref, we should return NULL here or copy new pointer to old pointer before reclaiming old pointer, if we can\u0027t return NULL here.",
+      "parentUuid": "6c7638c7_d76f3df2",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 2
+      },
+      "revId": "11969debf25b382af2e0236113f905a76cb87b15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
