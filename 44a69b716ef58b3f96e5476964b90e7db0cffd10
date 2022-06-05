@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f8ac18de_53e31b04",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2022-06-05T18:37:28Z",
+      "side": 1,
+      "message": "Initialized all cli_ip member in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/534572",
+      "parentUuid": "d0e4312b_fd1d51dc",
+      "revId": "44a69b716ef58b3f96e5476964b90e7db0cffd10",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a516d85d_a4fd0fbe",
         "filename": "src/FSAL/FSAL_GPFS/include/gpfs_nfs.h",
         "patchSetId": 1
