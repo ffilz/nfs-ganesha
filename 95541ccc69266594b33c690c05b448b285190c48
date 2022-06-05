@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7c6307c_2bea0e65",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T20:39:55Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tif (fgets(lineBuf, sizeof(lineBuf), file) \u003d\u003d NULL) {",
+      "revId": "95541ccc69266594b33c690c05b448b285190c48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6b783ae_d4cf85d6",
+        "filename": "src/FSAL/FSAL_GPFS/gpfsext.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T20:39:55Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t/* Something is broken with the command pipe,",
+      "revId": "95541ccc69266594b33c690c05b448b285190c48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
