@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc33e8f_fab1ea6d",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T18:45:12Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (op_ctx \u0026\u0026 op_ctx-\u003eclient) {\n+\t\tstatarg.cli_ip \u003d op_ctx-\u003eclient-\u003ehostaddr_str;\n+\t}",
+      "revId": "d9c37149b35c6c5be38609231ef77c0ea891e5e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ec2509_09570a03",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T18:45:12Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (op_ctx \u0026\u0026 op_ctx-\u003eclient) {\n+\t\tstatarg.cli_ip \u003d op_ctx-\u003eclient-\u003ehostaddr_str;\n+\t}",
+      "revId": "d9c37149b35c6c5be38609231ef77c0ea891e5e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a7ec920_e964bda1",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T18:45:12Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (op_ctx \u0026\u0026 op_ctx-\u003eclient) {\n+\t\txstatarg.cli_ip \u003d op_ctx-\u003eclient-\u003ehostaddr_str;\n+\t}",
+      "revId": "d9c37149b35c6c5be38609231ef77c0ea891e5e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6798470e_bdc69d64",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T18:45:12Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (op_ctx \u0026\u0026 op_ctx-\u003eclient) {\n+\t\txstatarg.cli_ip \u003d op_ctx-\u003eclient-\u003ehostaddr_str;\n+\t}",
+      "revId": "d9c37149b35c6c5be38609231ef77c0ea891e5e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073ac798_13e8f892",
+        "filename": "src/FSAL/FSAL_GPFS/include/gpfs_nfs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T18:45:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    const char *cli_ip;$",
+      "revId": "d9c37149b35c6c5be38609231ef77c0ea891e5e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf83d4c_a4cb8a30",
+        "filename": "src/FSAL/FSAL_GPFS/include/gpfs_nfs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-05T18:45:12Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    const char *cli_ip;$",
+      "revId": "d9c37149b35c6c5be38609231ef77c0ea891e5e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
