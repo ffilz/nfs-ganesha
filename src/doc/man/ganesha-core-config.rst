@@ -365,6 +365,11 @@ Server_Scope(string, default "")
     Specify the value which is common for all cluster nodes.
     For e.g., Name of the cluster or cluster-id.
 
+Getattrs_In_Complete_Read(bool, default true)
+    Whether to call extra getattrs after read, in order to check file size and
+    validate the EOF flag correctness. Needed for ESXi client compatibility
+    when FSAL's don't set it correctly.
+
 RADOS_KV {}
 --------------------------------------------------------------------------------
 

@@ -559,6 +559,9 @@ typedef struct nfs_version4_parameter {
 	bool enforce_utf8_vld;
 	/** Max number of Client IDs allowed on the system */
 	uint32_t max_client_ids;
+	/** Whether to call getattrs in nfs4_complete_read. Defaults to true and
+	    settable by Getattrs_In_Complete_Read. */
+	bool getattrs_in_complete_read;
 } nfs_version4_parameter_t;
 
 /** @} */
