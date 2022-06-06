@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a0dcb7b_8faea887",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2022-06-06T12:54:09Z",
+      "side": 1,
+      "message": "Btw, what doesn\u0027t pass compilation for me is the if statement without the block after\n\n```\nnfs-ganesha/src/FSAL/FSAL_PROXY_V3/nlm.c: In function ‘proxyv3_nlm_init’:\nnfs-ganesha/src/FSAL/FSAL_PROXY_V3/nlm.c:42:5: error: this ‘if’ clause does not guard... [-Werror\u003dmisleading-indentation]\n   42 |     if (nlm_initialised)\n      |     ^~\nnfs-ganesha/src/FSAL/FSAL_PROXY_V3/nlm.c:45:9: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’\n   45 |         if (gethostname(nlmMachineName, sizeof(nlmMachineName)) !\u003d 0) {\n      |         ^~\ncc1: all warnings being treated as errors\n```\n\nI guess it worked for you because of the tab while I used space\nIs Ganesha using a coding standard that prefers not to open a code block for a signal line after a condition statement?",
+      "parentUuid": "ab874ae7_2ebf26ed",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "86c4bb309f12abac68d070aceb66f7e32f627cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f15ebdd_36ab8d22",
         "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
         "patchSetId": 4
