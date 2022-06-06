@@ -44,6 +44,7 @@ patch-for-HPSS-nfs-ganesha-*
 core.*
 *cmake_install.cmake
 libfsal*.so*
+libganesha_nfsd.so*
 Doxyfile
 *~
 *.swp
@@ -52,7 +53,10 @@ Doxyfile
 src/scripts/systemd/nfs-ganesha-config.service
 src/FSAL/FSAL_VFS/vfs/lustre_main.c
 src/FSAL/FSAL_VFS/vfs/main.c
+src/FSAL/FSAL_VFS/vfs/dummy_lustre_main.c
 src/Protocols/NLM/sm_notify.ganesha
+src/sm_notify.ganesha
+src/ganesha.nfsd
 src/CMakeCache.txt
 src/CPackConfig.cmake
 src/CPackSourceConfig.cmake
