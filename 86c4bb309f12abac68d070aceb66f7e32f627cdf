@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30b10a46_7478b966",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-06-06T10:01:06Z",
+      "side": 1,
+      "message": "You mean the variable? I initially had it as:\nstatic bool nlm_initialised \u003d false;\n\nBut got the following error message:\nERROR: do not initialise statics to 0 or NULL\n\nShould it be like this?\nstatic bool nlm_initialised;",
+      "parentUuid": "3f40c5e4_6d82492b",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "86c4bb309f12abac68d070aceb66f7e32f627cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f15ebdd_36ab8d22",
         "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-06T09:55:20Z",
       "side": 1,
       "message": "Why not function static instead of global?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 29
+      },
+      "revId": "86c4bb309f12abac68d070aceb66f7e32f627cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "710094b6_996473ff",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-06-06T10:01:06Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "2f15ebdd_36ab8d22",
       "range": {
         "startLine": 72,
         "startChar": 0,
