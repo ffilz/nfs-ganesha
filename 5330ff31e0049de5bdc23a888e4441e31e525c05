@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ecc4266_ed253ee9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-06T00:32:48Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static bool nlm_initialised \u003d false;",
+      "revId": "5330ff31e0049de5bdc23a888e4441e31e525c05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d528818c_c99de971",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-06T00:32:48Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (nlm_initialised) return true;",
+      "revId": "5330ff31e0049de5bdc23a888e4441e31e525c05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dbd47e4_9379f2bb",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-06T00:32:48Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static bool rpc_initialised \u003d false;",
+      "revId": "5330ff31e0049de5bdc23a888e4441e31e525c05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55de4c88_1d3bbb33",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-06T00:32:48Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (rpc_initialised) return true;",
+      "revId": "5330ff31e0049de5bdc23a888e4441e31e525c05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
