@@ -33,6 +33,41 @@
       "message": "Hmm, this is the list of untracked files I have, maybe more of these should be added:\n\n\tCMakeDoxyfile.in\n\tCMakeDoxygenDefaults.cmake\n\tFSAL/FSAL_VFS/vfs/dummy_lustre_main.c\n\tMainNFSD/libganesha_nfsd.so\n\tMainNFSD/libganesha_nfsd.so.4.0\n\tSAL/libganesha_rados_recov.so\n\tconfig_parsing/libganesha_rados_urls.so\n\tganesha-rados-grace\n\tganesha.nfsd\n\tinstall_manifest.txt\n\tnohup.out\n\tsm_notify.ganesha\n\ttools/multilock/ml_cephfs_client\n\ttools/multilock/ml_console\n\ttools/multilock/ml_glusterfs_client\n\ttools/multilock/ml_posix_client\n",
       "revId": "35cfa248984cf86fad1f697f6cd598e590a24562",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc39acb_3c9902fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-06T18:40:35Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e https://jenkins-nfs-ganesha.apps.ocp.ci.centos.org//job/nfs_ganesha_posix_compliance/35/console : FAILED\n\nIgnore this one, probably known failures.",
+      "revId": "35cfa248984cf86fad1f697f6cd598e590a24562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5276a162_b2d7b955",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-06T18:40:35Z",
+      "side": 1,
+      "message": "I think that may be known failures. Ignore it.",
+      "parentUuid": "ee412125_76616c77",
+      "revId": "35cfa248984cf86fad1f697f6cd598e590a24562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
