@@ -378,6 +378,8 @@ static struct config_item version4_params[] = {
 		       nfs_version4_parameter, enforce_utf8_vld),
 	CONF_ITEM_UI32("Max_Client_Ids", 0, UINT32_MAX, 0,
 		       nfs_version4_parameter, max_client_ids),
+	CONF_ITEM_BOOL("Getattrs_In_Complete_Read", true,
+			   nfs_version4_parameter, getattrs_in_complete_read),
 	CONFIG_EOL
 };
 
