@@ -1406,7 +1406,7 @@ static bool proc_block(struct config_node *node,
 				  item->name);
 		goto err_out;
 	}
-	if (item->u.blk.check && item->u.blk.check(param_struct, err_type)) {
+	if (item->u.blk.check && !item->u.blk.check(param_struct, err_type)) {
 		goto err_out;
 	}
 	LogFullDebug(COMPONENT_CONFIG,
