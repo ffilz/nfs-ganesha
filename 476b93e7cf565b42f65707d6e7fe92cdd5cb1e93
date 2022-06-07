@@ -87,6 +87,41 @@
       "message": "Just a friendly ping.",
       "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5a89a6_088dc0bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-07T17:30:12Z",
+      "side": 1,
+      "message": "Yes, an entry that has a refcount of 2 or higher will not be freed.",
+      "parentUuid": "879bd995_2aff7410",
+      "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2043c5c_0c205e09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-07T17:30:12Z",
+      "side": 1,
+      "message": "Apparently I forgot to send my comment...\n\nI am code reviewing this -2 because I think we need more significant work to redo the LRU to exclude objects held for state or pseudofs/export purposes (formerly \"pinned\" in the old cache_inode). This is a more significant effort that will need to be submitted to V5-dev (and then possibly back ported to V4.x).",
+      "revId": "476b93e7cf565b42f65707d6e7fe92cdd5cb1e93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
