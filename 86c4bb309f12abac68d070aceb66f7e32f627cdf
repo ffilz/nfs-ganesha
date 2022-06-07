@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6abdd3cc_1b4ab7c9",
+        "filename": "src/FSAL/FSAL_PROXY_V3/nlm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-06-07T03:03:16Z",
+      "side": 1,
+      "message": "I moved the variable inside the function and made it static, without initialising to false.\n\nIs this better?",
+      "parentUuid": "6c5933a8_6d9409b0",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "86c4bb309f12abac68d070aceb66f7e32f627cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f15ebdd_36ab8d22",
         "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
         "patchSetId": 4
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "Same as above.",
       "parentUuid": "2f15ebdd_36ab8d22",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 29
+      },
+      "revId": "86c4bb309f12abac68d070aceb66f7e32f627cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b19765_9f58b279",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-06-07T03:03:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "710094b6_996473ff",
       "range": {
         "startLine": 72,
         "startChar": 0,
