@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f76f080d_ca069548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-09T16:50:44Z",
+      "side": 1,
+      "message": "I don\u0027t think this can be right. state_del will need a proper export and fsal_export in order to retire the state (states are allocated and released by FSALs now),\n\nThere must be some situation where a state is still referenced after state_del.",
+      "revId": "5540dc35ef8f6deed0f7e50d37a6e23d6cb522e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
