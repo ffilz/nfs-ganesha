@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ca9c10b_03be8329",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-06-09T08:51:53Z",
+      "side": 1,
+      "message": "This is asan log, \n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\u003d\u003d205902\u003d\u003d ERROR: AddressSanitizer: heap-use-after-free on address 0x600c00436340 at pc 0x7f542f69f554 bp 0x7f5421787780 sp 0x7f5421787770\nREAD of size 8 at 0x600c00436340 thread T1\n#0 0x7f542f69f553 in posix2fsal_attributes /usr/include/urcu/ref.h:85\n#1 0x7f542f69f872 in posix2fsal_attributes /usr/src/debug/nfs-ganesha-4.0.2/include/gsh_refstr.h:96\n#2 0x7f542f6ad974 in fsal_common_is_referral /usr/src/debug/nfs-ganesha-4.0.2/FSAL/commonlib.c:2004 \u003d\u003d\u003e(ignore fsal_common_is_referral, it should be set_op_context_export_fsal_no_release at this location)\n#3 0x7f542f6aee2a in init_op_context /usr/src/debug/nfs-ganesha-4.0.2/FSAL/commonlib.c:2166\n#4 0x7f542f846c02 in init_op_context_simple /usr/src/debug/nfs-ganesha-4.0.2/include/fsal.h:124\n#5 0x7f542f84b0e0 in lru_run_lane /usr/src/debug/nfs-ganesha-4.0.2/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c:1197\n#6 0x7f542f84be34 in lru_run /usr/src/debug/nfs-ganesha-4.0.2/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c:1425\n#7 0x7f542f7a6daf in fridgethr_start_routine /usr/src/debug/nfs-ganesha-4.0.2/support/fridgethr.c:556\n#8 0x7f542fb69a87 in __asan_describe_address ??:?\n#9 0x7f542db68ea4 in start_thread pthread_create.c:?\n#10 0x7f542d46fb0c in __clone ??:?\n0x600c00436340 is located 0 bytes inside of 54-byte region [0x600c00436340,0x600c00436376)\nfreed by thread T24 here:\n#0 0x7f542fb65ff9 in __interceptor_free ??:?\n#1 0x7f542f7c1a38 in gsh_free /usr/src/debug/nfs-ganesha-4.0.2/include/abstract_mem.h:256\n#2 0x7f542f7c1b01 in gsh_refstr_release /usr/src/debug/nfs-ganesha-4.0.2/support/refstr.c:24\n#3 0x7f542f79a9a9 in urcu_ref_put /usr/include/urcu/ref.h:68\n#4 0x7f542f79ab92 in gsh_refstr_put /usr/src/debug/nfs-ganesha-4.0.2/include/gsh_refstr.h:141\n#5 0x7f542f79d60f in copy_gsh_export /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:1042\n#6 0x7f542f79e539 in export_commit_common /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:1331\n#7 0x7f542f79f097 in update_export_commit /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:1610\n#8 0x7f542f72de55 in proc_block /usr/src/debug/nfs-ganesha-4.0.2/config_parsing/config_parsing.c:1416\n#9 0x7f542f72efd2 in load_config_from_parse /usr/src/debug/nfs-ganesha-4.0.2/config_parsing/config_parsing.c:2007\n#10 0x7f542f7a0267 in reread_exports /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:2372\n#11 0x7f542f717f7f in reread_config /usr/src/debug/nfs-ganesha-4.0.2/MainNFSD/nfs_init.c:196\n#12 0x7f542f71813d in sigmgr_thread /usr/src/debug/nfs-ganesha-4.0.2/MainNFSD/nfs_init.c:234\n#13 0x7f542fb69a87 in __asan_describe_address ??:?\npreviously allocated by thread T24 here:\n#0 0x7f542fb66119 in malloc ??:?\n#1 0x7f542f7c1a56 in gsh_refstr_alloc /usr/src/debug/nfs-ganesha-4.0.2/support/refstr.c:12\n#2 0x7f542f79ab21 in gsh_refstr_dup /usr/src/debug/nfs-ganesha-4.0.2/include/gsh_refstr.h:62\n#3 0x7f542f79d6ad in copy_gsh_export /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:1054 (discriminator 2)\n#4 0x7f542f79e539 in export_commit_common /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:1331\n#5 0x7f542f79f097 in update_export_commit /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:1610\n#6 0x7f542f72de55 in proc_block /usr/src/debug/nfs-ganesha-4.0.2/config_parsing/config_parsing.c:1416\n#7 0x7f542f72efd2 in load_config_from_parse /usr/src/debug/nfs-ganesha-4.0.2/config_parsing/config_parsing.c:2007\n#8 0x7f542f7a0267 in reread_exports /usr/src/debug/nfs-ganesha-4.0.2/support/exports.c:2372\n#9 0x7f542f717f7f in reread_config /usr/src/debug/nfs-ganesha-4.0.2/MainNFSD/nfs_init.c:196\n#10 0x7f542f71813d in sigmgr_thread /usr/src/debug/nfs-ganesha-4.0.2/MainNFSD/nfs_init.c:234\n#11 0x7f542fb69a87 in __asan_describe_address ??:?\nThread T1 created by T0 here:",
+      "parentUuid": "19ae524d_96437097",
+      "revId": "11969debf25b382af2e0236113f905a76cb87b15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0c29eda9_94be29e4",
