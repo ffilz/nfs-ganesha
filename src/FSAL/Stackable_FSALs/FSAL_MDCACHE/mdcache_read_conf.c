@@ -122,17 +122,10 @@ struct config_block mdcache_param_blk = {
 int mdcache_set_param_from_conf(config_file_t parse_tree,
 				struct config_error_type *err_type)
 {
-	(void) load_config_from_parse(parse_tree,
-				      &cache_inode_param_blk,
-				      NULL,
-				      true,
-				      err_type);
-	if (!config_error_is_harmless(err_type)) {
-		LogCrit(COMPONENT_INIT,
-			"Error while parsing CACHEINODE specific configuration");
-		return -1;
-	}
-
+	/* MDCACHE and CACHEINODE block uses same variable mdcache_param_blk
+	 * to read the config file. MDCACHE block should be processed first to
+	 * maintain backward compatibility.
+	 */
 	(void) load_config_from_parse(parse_tree,
 				      &mdcache_param_blk,
 				      NULL,
@@ -141,6 +134,17 @@ int mdcache_set_param_from_conf(config_file_t parse_tree,
 	if (!config_error_is_harmless(err_type)) {
 		LogCrit(COMPONENT_INIT,
 			"Error while parsing MDCACHE specific configuration");
+		return -1;
+	}
+
+	(void) load_config_from_parse(parse_tree,
+				      &cache_inode_param_blk,
+				      NULL,
+				      true,
+				      err_type);
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_INIT,
+			"Error while parsing CACHEINODE specific configuration");
 		return -1;
 	}
 
