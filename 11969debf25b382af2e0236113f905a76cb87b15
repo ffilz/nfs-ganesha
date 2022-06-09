@@ -54,6 +54,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc2a9a45_2a0aef17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-06-09T15:37:57Z",
+      "side": 1,
+      "message": "Added fix to reassign the pointer first and then free the old pointer, that should handle read paths accessing the old pointer, assuming reassign will",
+      "parentUuid": "df91b892_940a53a9",
+      "revId": "11969debf25b382af2e0236113f905a76cb87b15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0c29eda9_94be29e4",
