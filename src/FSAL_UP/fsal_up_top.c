@@ -1108,6 +1108,14 @@ static void delegrecall_completion_func(rpc_call_t *call)
 
 	if (!ret || obj == NULL) {
 		LogDebug(COMPONENT_NFS_CB, "Stale file");
+		/* we need to set op_ctx for calling free_state on fsal ops */
+		if (state->state_exp) {
+			get_gsh_export_ref(state->state_exp->owning_export);
+			init_op_context_simple(&op_context,
+				state->state_exp->owning_export,
+				state->state_exp->owning_export->fsal_export);
+			used_ctx = true;
+		}
 		goto out_free_drc;
 	}
 
