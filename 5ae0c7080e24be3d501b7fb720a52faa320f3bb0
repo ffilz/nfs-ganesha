@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23eb7c2a_9d6dcddc",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2022-06-09T15:40:10Z",
+      "side": 1,
+      "message": "You probably need a synchronize_rcu here. You need to make sure that any other tasks that might see the old values of these pointers are now finished with them (as signified by them calling rcu_read_unlock), before we put the references, which might possibly free the old_fullpath and old_pseudopath.",
+      "revId": "5ae0c7080e24be3d501b7fb720a52faa320f3bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
