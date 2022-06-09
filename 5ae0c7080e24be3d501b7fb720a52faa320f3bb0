@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8c3abc3_619ada81",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-09T15:48:16Z",
+      "side": 1,
+      "message": "Could you use rcu_set_pointer like we use elsewhere in the code?",
+      "revId": "5ae0c7080e24be3d501b7fb720a52faa320f3bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25be69fa_7cb69b43",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-09T15:48:16Z",
+      "side": 1,
+      "message": "I think we also should use rcu_set_pointer here (to NULL).",
+      "revId": "5ae0c7080e24be3d501b7fb720a52faa320f3bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e904b58_30553e15",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-09T15:48:16Z",
+      "side": 1,
+      "message": "Same comments as above",
+      "revId": "5ae0c7080e24be3d501b7fb720a52faa320f3bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23eb7c2a_9d6dcddc",
         "filename": "src/support/exports.c",
         "patchSetId": 2
@@ -14,6 +65,24 @@
       "writtenOn": "2022-06-09T15:40:10Z",
       "side": 1,
       "message": "You probably need a synchronize_rcu here. You need to make sure that any other tasks that might see the old values of these pointers are now finished with them (as signified by them calling rcu_read_unlock), before we put the references, which might possibly free the old_fullpath and old_pseudopath.",
+      "revId": "5ae0c7080e24be3d501b7fb720a52faa320f3bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e07bfc16_1f4e90d4",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-09T15:48:16Z",
+      "side": 1,
+      "message": "Yea, that\u0027s what my reading suggested.",
+      "parentUuid": "23eb7c2a_9d6dcddc",
       "revId": "5ae0c7080e24be3d501b7fb720a52faa320f3bb0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
