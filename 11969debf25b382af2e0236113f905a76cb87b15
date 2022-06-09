@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "df91b892_940a53a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-09T14:33:09Z",
+      "side": 1,
+      "message": "Thanks. The problem is that update of an export\u0027s fullpath and pseudopath is not actually protected by any sort of lock. I\u0027m looking at the right way to do an RCU update. This path is the only update path and I think all the read paths are correct.\n\nSo the correction needs to be in copy_gsh_export.",
+      "parentUuid": "2ca9c10b_03be8329",
+      "revId": "11969debf25b382af2e0236113f905a76cb87b15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0c29eda9_94be29e4",
