@@ -16,6 +16,24 @@
       "message": "Thanks for adding the syncrhonize_rcu but please also make the change to rcu_set_pointer and also use that to set NULL (otherwise if an update DID actually set a pointer to NULL, the original value wouldn\u0027t be properly terminated).",
       "revId": "ea62d2c0ab96dc6a57fcbb30840d6e84b2235788",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2038a1d_8f5cfbdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-06-10T03:10:40Z",
+      "side": 1,
+      "message": "Ack, I will update the patch",
+      "parentUuid": "e495fb12_6720a2f9",
+      "revId": "ea62d2c0ab96dc6a57fcbb30840d6e84b2235788",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
