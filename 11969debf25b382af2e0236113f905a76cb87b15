@@ -74,6 +74,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6506cee6_5c33c851",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-15T18:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc2a9a45_2a0aef17",
+      "revId": "11969debf25b382af2e0236113f905a76cb87b15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0c29eda9_94be29e4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -174,6 +192,30 @@
       "side": 1,
       "message": "To be clear, what you\u0027re proposing is to change how that works. Getting that right and still allowing RCU traversal of hashtables with these objects is the tricky part.\n\nIn fact, I wonder if the right fix here is to do something like this:\n\n```\ndiff --git a/src/support/exports.c b/src/support/exports.c\nindex ec0f6d394462..41ffa7e56376 100644\n--- a/src/support/exports.c\n+++ b/src/support/exports.c\n@@ -1026,18 +1026,28 @@ static inline void update_atomic_fields(struct gsh_export *export,\n static inline void copy_gsh_export(struct gsh_export *dest,\n                                   struct gsh_export *src)\n {\n+       struct gsh_refstr *fullpath, *pseudopath;\n+\n        /* Update atomic fields */\n        update_atomic_fields(dest, src);\n \n        /* Now take lock and swap out client list and export_perms... */\n        PTHREAD_RWLOCK_wrlock(\u0026dest-\u003elock);\n \n+       /* zero out old pointers and ensure that no one will see them */\n+       fullpath \u003d rcu_dereference(dest-\u003efullpath);\n+       pseudopath \u003d rcu_dereference(dest-\u003epseudopath);\n+       rcu_set_pointer(\u0026dest-\u003efullpath, NULL);\n+       rcu_set_pointer(\u0026dest-\u003epseudopath, NULL);\n+\n+       synchronize_rcu();\n+\n        /* Put references to old refstr */\n-       if (dest-\u003efullpath !\u003d NULL)\n-               gsh_refstr_put(dest-\u003efullpath);\n+       if (fullpath !\u003d NULL)\n+               gsh_refstr_put(fullpath);\n \n-       if (dest-\u003epseudopath !\u003d NULL)\n-               gsh_refstr_put(dest-\u003epseudopath);\n+       if (pseudopath !\u003d NULL)\n+               gsh_refstr_put(pseudopath);\n \n        /* Free old cfg_fullpath and cfg_pseudopath */\n        gsh_free(dest-\u003ecfg_fullpath);\n```",
       "parentUuid": "1e73c468_f6d4b4d8",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 2
+      },
+      "revId": "11969debf25b382af2e0236113f905a76cb87b15",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d82b8c_cce6bb5e",
+        "filename": "src/support/refstr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-15T18:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3c66611_ab73aded",
       "range": {
         "startLine": 41,
         "startChar": 0,
