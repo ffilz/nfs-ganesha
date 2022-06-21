@@ -511,7 +511,9 @@ void dec_nfs4_state_ref(struct state_t *state)
 
 	PTHREAD_MUTEX_destroy(&state->state_mutex);
 
-	state->state_exp->exp_ops.free_state(state->state_exp, state);
+	if (state && state->state_exp) {
+		state->state_exp->exp_ops.free_state(state->state_exp, state);
+	}
 
 	if (str_valid)
 		LogFullDebug(COMPONENT_STATE, "Deleted %s", str);
