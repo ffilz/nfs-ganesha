@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb017ad8_e418ada2",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-21T11:11:52Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (state \u0026\u0026 state-\u003estate_exp) {\n+\t\tstate-\u003estate_exp-\u003eexp_ops.free_state(state-\u003estate_exp, state);\n+\t}",
+      "revId": "aca07dce6afaf23b655cd55345b5798540322640",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d31db443_787051b7",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-21T11:11:52Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (state \u0026\u0026 state-\u003estate_exp) {\n+\t\tstate-\u003estate_exp-\u003eexp_ops.free_state(state-\u003estate_exp, state);\n+\t}",
+      "revId": "aca07dce6afaf23b655cd55345b5798540322640",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b4bb843_b265065c",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-21T11:11:52Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (state \u0026\u0026 state-\u003estate_exp) {\n+\t\t\tstate-\u003estate_exp-\u003eexp_ops.free_state(state-\u003estate_exp, state);\n+\t\t}",
+      "revId": "aca07dce6afaf23b655cd55345b5798540322640",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "028a29f3_214ec48c",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-06-21T11:11:52Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstate-\u003estate_exp-\u003eexp_ops.free_state(state-\u003estate_exp, state);",
+      "revId": "aca07dce6afaf23b655cd55345b5798540322640",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
