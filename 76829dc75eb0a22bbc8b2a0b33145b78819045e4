@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82379860_5e1dfef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-24T21:00:16Z",
+      "side": 1,
+      "message": "When does this occur that a state_t has no state_exp attached? Please add more description of the issue to the commit message.\n\nI want to understand if this is actually the correct fix, or is sweeping something under the rug.",
+      "revId": "76829dc75eb0a22bbc8b2a0b33145b78819045e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c408a3ba_850b16d8",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-06-21T11:25:55Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\tstate-\u003estate_exp-\u003eexp_ops.free_state(state-\u003estate_exp, state);",
+      "revId": "76829dc75eb0a22bbc8b2a0b33145b78819045e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd66dbd_1dd83abb",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-24T21:00:16Z",
+      "side": 1,
+      "message": "Please fix this long line.",
+      "parentUuid": "c408a3ba_850b16d8",
       "revId": "76829dc75eb0a22bbc8b2a0b33145b78819045e4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
