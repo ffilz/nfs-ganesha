@@ -104,6 +104,24 @@
       "parentUuid": "37f6a71b_f487e65f",
       "revId": "5540dc35ef8f6deed0f7e50d37a6e23d6cb522e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1aa1ca6_d25ea6f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-27T15:24:36Z",
+      "side": 1,
+      "message": "OK, I understand this path now. I\u0027ve proposed a minor change to reduce mutex thrashing.\n\nOptionally we could call get_state_obj_export_owner_refs() which is used everywhere else an export ref is needed from the state. This would still have the state mutex thrashing. This would add a certain consistency to the code.\n\nA final option would be to have _state_del_locked() handle setting the export in op_context if not correct.",
+      "parentUuid": "2a2377ba_8e98e32a",
+      "revId": "5540dc35ef8f6deed0f7e50d37a6e23d6cb522e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

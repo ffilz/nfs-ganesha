@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86572f7b_af4d5b4f",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-27T15:24:36Z",
+      "side": 1,
+      "message": "Add a comment here why we are locking state",
+      "revId": "e83733a9f767ff8775e1f849dc50464335690290",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e82290e8_948d3680",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-27T15:24:36Z",
+      "side": 1,
+      "message": "retain the state lock longer and do state_del_locked",
+      "revId": "e83733a9f767ff8775e1f849dc50464335690290",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38fdec55_a5a50568",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-27T15:24:36Z",
+      "side": 1,
+      "message": "Move the unlock here",
+      "revId": "e83733a9f767ff8775e1f849dc50464335690290",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
