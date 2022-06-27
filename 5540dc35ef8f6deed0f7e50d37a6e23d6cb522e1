@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cecf963_5be2034b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-06-27T05:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d411474_ffab19f1",
+      "revId": "5540dc35ef8f6deed0f7e50d37a6e23d6cb522e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f76f080d_ca069548",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-06-24T21:53:03Z",
       "side": 1,
       "message": "I think there are two patches addressing the same issue. The other patch is:\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/540364",
+      "revId": "5540dc35ef8f6deed0f7e50d37a6e23d6cb522e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a2377ba_8e98e32a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-06-27T05:46:43Z",
+      "side": 1,
+      "message": "Its not same issue, this issue can still happen even with https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/540364\n\nrefcount on state won\u0027t protect state_export set to NULL by _state_del_locked\nwe could add some flag which could set to DESTROYING once _state_del_locked is called, so that we should not be able to take further ref on this state, same way we handle deletion of sec_xprt.",
+      "parentUuid": "37f6a71b_f487e65f",
       "revId": "5540dc35ef8f6deed0f7e50d37a6e23d6cb522e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
