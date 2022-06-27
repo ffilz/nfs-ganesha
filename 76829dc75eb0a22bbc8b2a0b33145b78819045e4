@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5949d59f_efb66d72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-06-27T15:36:44Z",
+      "side": 1,
+      "message": "Do you have stack back trace? You COULD be hitting the issue in the other patch, though looking at the code I never see state_exp being set to NULL.\n\nActually, I think we need to eliminate use of state_exp. Anything that works on a state SHOULD have op_ctx set up with the proper export, so we should just be able to use op_ctx-\u003efsal_export.\n\nLet me contemplate this and put forth an alternate patch.\n\nIn the meantime, it would still be good to understand how state_exp got to be NULL.",
+      "parentUuid": "8e872e64_4d73f3b8",
+      "revId": "76829dc75eb0a22bbc8b2a0b33145b78819045e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c408a3ba_850b16d8",
         "filename": "src/SAL/nlm_state.c",
         "patchSetId": 2
