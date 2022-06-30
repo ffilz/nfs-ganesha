@@ -19,3 +19,4 @@
    ganesha-core-config
    ganesha-rados-cluster-design
    ganesha-rados-grace
+   ganesha-top
