@@ -773,6 +773,105 @@ lru_reap_impl(enum lru_q_id qid)
 	return lru;
 }
 
+
+
+static uint32_t reap_lane_aggressive;
+
+size_t
+lru_reap_impl_aggressive(enum lru_q_id qid, int32_t want_release)
+{
+	if (want_release == 0)
+		return 0;
+
+	size_t released = 0;
+	uint32_t lane;
+	struct lru_q_lane *qlane;
+	struct lru_q *lq;
+	mdcache_lru_t *lru;
+	mdcache_entry_t *entry;
+	uint32_t refcnt;
+	cih_latch_t latch;
+	int ix;
+
+	lane = LRU_NEXT(reap_lane_aggressive);
+	for (ix = 0; ix < LRU_N_Q_LANES; ++ix, lane = LRU_NEXT(reap_lane_aggressive)) {
+		if (released >= want_release)
+			goto out;
+
+		qlane = &LRU[lane];
+		lq = (qid == LRU_ENTRY_L1) ? &qlane->L1 : &qlane->L2;
+		QLOCK(qlane);
+		qlane->iter.active = true;
+
+		glist_for_each_safe(qlane->iter.glist, qlane->iter.glistn, &lq->q) {
+			if (released >= want_release)
+				break;
+
+			lru = glist_entry(qlane->iter.glist, mdcache_lru_t, q);
+			refcnt = atomic_inc_int32_t(&lru->refcnt);
+			entry = container_of(lru, mdcache_entry_t, lru);
+#ifdef USE_LTTNG
+			tracepoint(mdcache, mdc_lru_ref,
+					__func__, __LINE__, &entry->obj_handle, entry->sub_handle,
+					refcnt);
+#endif
+			QUNLOCK(qlane);
+
+			if (unlikely(refcnt != (LRU_SENTINEL_REFCOUNT + 1))) {
+				/* cant use it. */
+				adjust_lru_root_object(entry);
+				mdcache_put(entry);
+				goto next_lru;
+			}
+			/* potentially reclaimable */
+			/* entry must be unreachable from CIH when recycled */
+			cih_latch_entry(&entry->fh_hk.key, &latch, CIH_GET_WLOCK,
+					__func__, __LINE__);
+			QLOCK(qlane);
+			refcnt = atomic_fetch_int32_t(&entry->lru.refcnt);
+			/* there are two cases which permit reclaim,
+			 * entry is:
+			 * 1. reachable but unref'd (refcnt==2)
+			 * 2. unreachable, being removed (plus refcnt==0)
+			 *  for safety, take only the former
+			 */
+			if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
+				/* it worked */
+				struct lru_q *q = lru_queue_of(entry);
+
+#ifdef USE_LTTNG
+				tracepoint(mdcache, mdc_lru_reap, __func__,
+						__LINE__, &entry->obj_handle,
+						entry->lru.refcnt);
+#endif
+				LRU_DQ_SAFE(lru, q);
+				entry->lru.qid = LRU_ENTRY_NONE;
+				QUNLOCK(qlane);
+				cih_remove_latched(entry, &latch,
+						CIH_REMOVE_UNLOCK);
+				/* Note, we're releasing our ref here. */
+
+				QUNLOCK(qlane);
+				mdcache_lru_unref(entry);
+				++released;
+				goto next_lru;
+			}
+			cih_hash_release(&latch);
+			QUNLOCK(qlane);
+			mdcache_lru_unref(entry);
+next_lru:
+			QLOCK(qlane); /* QLOCKED */
+		} /* for_each_safe lru */
+
+		qlane->iter.active = false; /* !ACTIVE */
+		QUNLOCK(qlane);
+	} /* foreach lane */
+
+out:
+	return released;
+}
+
+
 static inline mdcache_lru_t *
 lru_try_reap_entry(void)
 {
@@ -1467,7 +1566,7 @@ lru_run(struct fridgethr_context *ctx)
 				lru_state.entries_used,
 				lru_state.entries_release_size);
 
-			released = mdcache_lru_release_entries(
+			released = mdcache_lru_release_entries_aggressive(
 					lru_state.entries_release_size);
 			LogFullDebug(COMPONENT_CACHE_INODE_LRU,
 				"Actually release %zd entries", released);
@@ -1698,6 +1797,21 @@ size_t mdcache_lru_release_entries(int32_t want_release)
 
 	return released;
 }
+
+
+size_t mdcache_lru_release_entries_aggressive(int32_t want_release)
+{
+	size_t released = 0;
+
+	/*release nothing*/
+	if (want_release == 0)
+		return released;
+
+	released += lru_reap_impl_aggressive(LRU_ENTRY_L2, want_release - released);
+	released += lru_reap_impl_aggressive(LRU_ENTRY_L1, want_release - released);
+	return released;
+}
+
 
 void init_fds_limit(void)
 {
