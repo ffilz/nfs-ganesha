@@ -713,12 +713,18 @@ enum nfsstat4 release_lock_owner(state_owner_t *owner)
 
 		PTHREAD_MUTEX_unlock(&owner->so_mutex);
 
+		/* Take lock to fix race with _state_del_locked which
+		 * could set it to NULL.
+		 */
+		PTHREAD_MUTEX_lock(&state->state_mutex);
 		/* Set the op_context properly, since this can be called from
 		 * ops that don't do a putfh
 		 */
-		get_gsh_export_ref(state->state_export);
-		set_op_context_export_fsal(state->state_export,
-					   state->state_exp);
+		if (state->state_export) {
+			get_gsh_export_ref(state->state_export);
+			set_op_context_export(state->state_export);
+		}
+		PTHREAD_MUTEX_unlock(&state->state_mutex);
 
 		state_del(state);
 		dec_state_t_ref(state);
