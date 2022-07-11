@@ -173,7 +173,7 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 %if %{with man_page}
-%if ( 0%{?rhel} && 0%{?rhel} < 8 )
+%if ( 0%{?rhel} && 0%{?rhel} < 7 )
 BuildRequires: python-sphinx
 %else
 %if ( 0%{?suse_version} )
@@ -243,7 +243,7 @@ be used with NFS-Ganesha to support PROXY_V3 based filesystems
 %package utils
 Summary: The NFS-GANESHA util scripts
 Group: Applications/System
-%if ( 0%{?rhel} && 0%{?rhel} < 8 )
+%if ( 0%{?rhel} && 0%{?rhel} < 7 )
 Requires:       dbus-python, pygobject2, pyparsing
 BuildRequires:  python-devel
 %else
@@ -501,7 +501,8 @@ Development headers and auxiliary files for developing with %{name}.
 %setup -q -n %{sourcename}
 
 %build
-cmake .	-DCMAKE_BUILD_TYPE=Debug			\
+cmake src						\
+	-DCMAKE_BUILD_TYPE=Debug			\
 	-DBUILD_CONFIG=rpmbuild				\
 	-DUSE_FSAL_NULL=%{use_fsal_null}		\
 	-DUSE_FSAL_MEM=%{use_fsal_mem}			\
@@ -549,61 +550,61 @@ mkdir -p %{buildroot}%{_sbindir}
 mkdir -p %{buildroot}%{_libdir}/ganesha
 mkdir -p %{buildroot}%{_localstatedir}/log/ganesha
 mkdir -p %{buildroot}%{_libexecdir}/ganesha
-install -m 644 config_samples/logrotate_ganesha	%{buildroot}%{_sysconfdir}/logrotate.d/ganesha
-install -m 644 scripts/ganeshactl/org.ganesha.nfsd.conf	%{buildroot}%{_sysconfdir}/dbus-1/system.d
-install -m 755 scripts/nfs-ganesha-config.sh %{buildroot}%{_libexecdir}/ganesha
+install -m 644 src/config_samples/logrotate_ganesha	%{buildroot}%{_sysconfdir}/logrotate.d/ganesha
+install -m 644 src/scripts/ganeshactl/org.ganesha.nfsd.conf	%{buildroot}%{_sysconfdir}/dbus-1/system.d
+install -m 755 src/scripts/nfs-ganesha-config.sh %{buildroot}%{_libexecdir}/ganesha
 %if %{with 9P}
-install -m 755 tools/mount.9P	%{buildroot}%{_sbindir}/mount.9P
+install -m 755 src/tools/mount.9P	%{buildroot}%{_sbindir}/mount.9P
 %endif
 
-install -m 644 config_samples/vfs.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/vfs.conf %{buildroot}%{_sysconfdir}/ganesha
 
 mkdir -p %{buildroot}%{_unitdir}
 %if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 8 )
 mkdir -p %{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha-lock.service.d
 %endif
 
-install -m 644 scripts/systemd/nfs-ganesha.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha.service
+install -m 644 src/scripts/systemd/nfs-ganesha.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha.service
 %if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 8 )
-install -m 644 scripts/systemd/nfs-ganesha-lock.service.el8	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
-install -m 644 scripts/systemd/rpc-statd.conf.el8	%{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha-lock.service.d/rpc-statd.conf
+install -m 644 src/scripts/systemd/nfs-ganesha-lock.service.el8	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
+install -m 644 src/scripts/systemd/rpc-statd.conf.el8	%{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha-lock.service.d/rpc-statd.conf
 %else
-install -m 644 scripts/systemd/nfs-ganesha-lock.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
+install -m 644 src/scripts/systemd/nfs-ganesha-lock.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
 %endif
-install -m 644 scripts/systemd/nfs-ganesha-config.service %{buildroot}%{_unitdir}/nfs-ganesha-config.service
-install -m 644 scripts/systemd/sysconfig/nfs-ganesha	%{buildroot}%{_sysconfdir}/sysconfig/ganesha
+install -m 644 src/scripts/systemd/nfs-ganesha-config.service %{buildroot}%{_unitdir}/nfs-ganesha-config.service
+install -m 644 src/scripts/systemd/sysconfig/nfs-ganesha	%{buildroot}%{_sysconfdir}/sysconfig/ganesha
 
 %if %{with pt}
-install -m 644 config_samples/pt.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/pt.conf %{buildroot}%{_sysconfdir}/ganesha
 %endif
 
 %if %{with lustre}
-install -m 644 config_samples/lustre.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/lustre.conf %{buildroot}%{_sysconfdir}/ganesha
 %endif
 
 %if %{with xfs}
-install -m 644 config_samples/xfs.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/xfs.conf %{buildroot}%{_sysconfdir}/ganesha
 %endif
 
 %if %{with ceph}
-install -m 644 config_samples/ceph.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/ceph.conf %{buildroot}%{_sysconfdir}/ganesha
 %endif
 
 %if %{with rgw}
-install -m 644 config_samples/rgw.conf %{buildroot}%{_sysconfdir}/ganesha
-install -m 644 config_samples/rgw_bucket.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/rgw.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/rgw_bucket.conf %{buildroot}%{_sysconfdir}/ganesha
 %endif
 
 %if %{with gluster}
-install -m 644 config_samples/logrotate_fsal_gluster %{buildroot}%{_sysconfdir}/logrotate.d/ganesha-gfapi
+install -m 644 src/config_samples/logrotate_fsal_gluster %{buildroot}%{_sysconfdir}/logrotate.d/ganesha-gfapi
 %endif
 
 %if %{with gpfs}
-install -m 644 config_samples/gpfs.conf	%{buildroot}%{_sysconfdir}/ganesha
-install -m 644 config_samples/gpfs.ganesha.nfsd.conf %{buildroot}%{_sysconfdir}/ganesha
-install -m 644 config_samples/gpfs.ganesha.main.conf %{buildroot}%{_sysconfdir}/ganesha
-install -m 644 config_samples/gpfs.ganesha.log.conf %{buildroot}%{_sysconfdir}/ganesha
-install -m 644 config_samples/gpfs.ganesha.exports.conf	%{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/gpfs.conf	%{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/gpfs.ganesha.nfsd.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/gpfs.ganesha.main.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/gpfs.ganesha.log.conf %{buildroot}%{_sysconfdir}/ganesha
+install -m 644 src/config_samples/gpfs.ganesha.exports.conf	%{buildroot}%{_sysconfdir}/ganesha
 %endif
 
 make DESTDIR=%{buildroot} install
@@ -611,11 +612,11 @@ make DESTDIR=%{buildroot} install
 %if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
 install -d %{buildroot}%{_selinux_store_path}/packages
 install -d -p %{buildroot}%{_selinux_store_path}/devel/include/contrib
-install -p -m 644 selinux/ganesha.if %{buildroot}%{_selinux_store_path}/devel/include/contrib
-install -m 0644 selinux/ganesha.pp.bz2 %{buildroot}%{_selinux_store_path}/packages
+install -p -m 644 src/selinux/ganesha.if %{buildroot}%{_selinux_store_path}/devel/include/contrib
+install -m 0644 src/selinux/ganesha.pp.bz2 %{buildroot}%{_selinux_store_path}/packages
 %endif
 
-%if ( 0%{?rhel} && 0%{?rhel} < 8 )
+%if ( 0%{?rhel} && 0%{?rhel} < 7 )
 rm -f %{buildroot}/%{python_sitelib}/gpfs*
 rm -f %{buildroot}/%{python_sitelib}/__init__.*
 %else
@@ -817,8 +818,8 @@ exit 0
 %{_libdir}/libntirpc.so.@NTIRPC_ABI_EMBED@
 %{_libdir}/libntirpc.so
 %{!?_licensedir:%global license %%doc}
-%license libntirpc/COPYING
-%doc libntirpc/NEWS libntirpc/README
+%license src/libntirpc/COPYING
+%doc src/libntirpc/NEWS src/libntirpc/README
 %files -n libntirpc-devel
 %{_libdir}/pkgconfig/libntirpc.pc
 %dir %{_includedir}/ntirpc
@@ -843,7 +844,7 @@ exit 0
 
 %if %{with utils}
 %files utils
-%if ( 0%{?rhel} && 0%{?rhel} < 8 )
+%if ( 0%{?rhel} && 0%{?rhel} < 7 )
 %{python_sitelib}/Ganesha/*
 %{python_sitelib}/ganeshactl-*-info
 %else
