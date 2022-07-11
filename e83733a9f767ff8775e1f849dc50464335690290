@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b617b6e8_b2afaecc",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-07-11T16:06:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86572f7b_af4d5b4f",
+      "revId": "e83733a9f767ff8775e1f849dc50464335690290",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45cf0f8b_6f9637b9",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-06-27T18:54:33Z",
       "side": 1,
       "message": "Please change this to set_op_context_export(state-\u003estate_export);\n\nI\u0027m getting rid of state_exp.",
+      "revId": "e83733a9f767ff8775e1f849dc50464335690290",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42ecbb9a_830f4126",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-07-11T16:06:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45cf0f8b_6f9637b9",
       "revId": "e83733a9f767ff8775e1f849dc50464335690290",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "817b84de_ed9df031",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-07-11T16:06:06Z",
+      "side": 1,
+      "message": "_state_del_locked will also take PTHREAD_MUTEX_lock(\u0026state-\u003estate_mutex)\nso we have to release it.",
+      "parentUuid": "e82290e8_948d3680",
+      "revId": "e83733a9f767ff8775e1f849dc50464335690290",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38fdec55_a5a50568",
         "filename": "src/SAL/nfs4_state.c",
         "patchSetId": 2
@@ -82,6 +136,24 @@
       "writtenOn": "2022-06-27T15:24:36Z",
       "side": 1,
       "message": "Move the unlock here",
+      "revId": "e83733a9f767ff8775e1f849dc50464335690290",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40163cb1_b70a0cb3",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-07-11T16:06:06Z",
+      "side": 1,
+      "message": "_state_del_locked will also take PTHREAD_MUTEX_lock(\u0026state-\u003estate_mutex)\nso we have to release it.",
+      "parentUuid": "38fdec55_a5a50568",
       "revId": "e83733a9f767ff8775e1f849dc50464335690290",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
