@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "518ab5ba_fcd65bf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-07-11T12:10:51Z",
+      "side": 1,
+      "message": "one doubt in codepaths like delegrecall_completion_func where we create op_ctx only if state-\u003estate_obj and state-\u003estate_export are valid.\nIs there chance that we could get state_obj or state_export NULL and go ahead without creating op_ctx\nwhich will call issue for \n```\n        state \u003d nfs4_State_Get_Pointer(deleg_ctx-\u003edrc_stateid.other);\n\n        if (state \u003d\u003d NULL) {\n                LogDebug(COMPONENT_NFS_CB, \"Delegation is already returned\");\n                goto out_free_drc;\n        }\n\n        ret \u003d get_state_obj_export_owner_refs(state, \u0026obj, \u0026export, NULL);\n\n        if (!ret || obj \u003d\u003d NULL) {\n                LogDebug(COMPONENT_NFS_CB, \"Stale file\");\n                goto out_free_drc;\u003d\u003d\u003e we will jump without creating op_ctx\n        }\n        \n        init_op_context_simple(\u0026op_context, export, export-\u003efsal_export);\n        used_ctx \u003d true;\n\n        \n------------\n------------\n\nout_free_drc:\n\n        free_delegrecall_context(deleg_ctx);\n\nout_free:\n        if (minorversion \u003d\u003d 0) {\n                opcbrecall \u003d \u0026call-\u003ecbt.v_u.v4.args.argarray.argarray_val[0]\n                                .nfs_cb_argop4_u.opcbrecall;\n                nfs4_freeFH(\u0026opcbrecall-\u003efh);\n        } else {\n                opcbrecall \u003d \u0026call-\u003ecbt.v_u.v4.args.argarray.argarray_val[1]\n                                .nfs_cb_argop4_u.opcbrecall;\n                nfs4_freeFH(\u0026opcbrecall-\u003efh);\n                nfs41_release_single(call);\n        }\n\n        if (state !\u003d NULL)\n                dec_state_t_ref(state);\u003d\u003d\u003ethis will not have op_ctx\n                \n ```\n",
+      "revId": "47bae38acd93db6ac0985524e0b5fb86902af76f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
