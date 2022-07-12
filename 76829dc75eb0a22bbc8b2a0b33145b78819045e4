@@ -196,6 +196,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7941c2c0_e807f1b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-07-12T11:13:29Z",
+      "side": 1,
+      "message": "Hi, I think I found the root cause. It\u0027s a used after free.\n\u003d\u003d358416\u003d\u003dERROR: AddressSanitizer: heap-use-after-free on address 0x61100468f578 at pc 0x000000dff043 bp 0x7f59901b7ec0 sp 0x7f59901b7eb8\nWRITE of size 4 at 0x61100468f578 thread T2429\n    #0 0xdff042 in atomic_add_int32_t bytenas-ganesha/src/include/abstract_atomic.h:271\n    #1 0xdff042 in atomic_inc_int32_t bytenas-ganesha/src/include/abstract_atomic.h:292\n    #2 0xdff042 in inc_state_t_ref bytenas-ganesha/src/include/sal_functions.h:390\n    #3 0xdff042 in nfs4_read bytenas-ganesha/src/Protocols/NFS/nfs4_op_read.cc:467\n    #4 0xe00497 in nfs4_op_read(nfs_argop4*, compound_data*, nfs_resop4*) bytenas-ganesha/src/Protocols/NFS/nfs4_op_read.cc:741\n    #5 0xaa221e in process_one_op(compound_data*, nfsstat4*) bytenas-ganesha/src/Protocols/NFS/nfs4_Compound.cc:940\n    #6 0xaa6303 in nfs4_Compound(nfs_arg__*, svc_req*, nfs_res__*) bytenas-ganesha/src/Protocols/NFS/nfs4_Compound.cc:1365\n    #7 0xbaf27b in nfs_rpc_process_request bytenas-ganesha/src/MainNFSD/nfs_worker_thread.cc:1631\n    #8 0x7f5a3b0dbdbb in svc_request (/opt/tiger/ganesha_deploy/lib/libntirpc.so.3.2+0x22dbb)\n    #9 0x7f5a3b0d9110 in svc_rqst_xprt_task_recv (/opt/tiger/ganesha_deploy/lib/libntirpc.so.3.2+0x20110)\n    #10 0x7f5a3b0d9b37 in svc_rqst_epoll_loop (/opt/tiger/ganesha_deploy/lib/libntirpc.so.3.2+0x20b37)\n    #11 0x7f5a3b0e4db9 in work_pool_thread (/opt/tiger/ganesha_deploy/lib/libntirpc.so.3.2+0x2bdb9)\n    #12 0x7f5a374ceca8 in start_thread /data00/jenkins/workspace/gcc8_x86_64/src/glibc/nptl/pthread_create.c:486\n    #13 0x7f5a35bb276e in __clone (/opt/tiger/ganesha_deploy/lib/libc.so.6+0xf276e)\n\n0x61100468f578 is located 184 bytes inside of 240-byte region [0x61100468f4c0,0x61100468f5b0)\nfreed by thread T2930 here:\n    #0 0x7f5a3cc4e000 in __interceptor_free /data00/jenkins/workspace/gcc8_x86_64/src/gcc/libsanitizer/asan/asan_malloc_linux.cc:66\n    #1 0xbe17f4 in mdcache_free_state bytenas-ganesha/src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.cc:788\n    #2 0x8804b1 in dec_nfs4_state_ref(state_t*) bytenas-ganesha/src/SAL/nfs4_state_id.cc:518\n    #3 0xe420fb in dec_state_t_ref bytenas-ganesha/src/include/sal_functions.h:412\n    #4 0xe420fb in nfs4_op_lock(nfs_argop4*, compound_data*, nfs_resop4*) bytenas-ganesha/src/Protocols/NFS/nfs4_op_lock.cc:716\n    #5 0xaa221e in process_one_op(compound_data*, nfsstat4*) bytenas-ganesha/src/Protocols/NFS/nfs4_Compound.cc:940\n    #6 0xaa6303 in nfs4_Compound(nfs_arg__*, svc_req*, nfs_res__*) bytenas-ganesha/src/Protocols/NFS/nfs4_Compound.cc:1365\n    #7 0xbaf27b in nfs_rpc_process_request bytenas-ganesha/src/MainNFSD/nfs_worker_thread.cc:1631\n    #8 0x7f5a3b0dbdbb in svc_request (/opt/tiger/ganesha_deploy/lib/libntirpc.so.3.2+0x22dbb)\n\npreviously allocated by thread T393 here:\n    #0 0x7f5a3cc4e568 in __interceptor_calloc /data00/jenkins/workspace/gcc8_x86_64/src/gcc/libsanitizer/asan/asan_malloc_linux.cc:95\n    #1 0xd0b403 in nas_alloc_state(fsal_export*, state_type, state_t*) bytenas-ganesha/src/FSAL/FSAL_NAS/handle.cc:921\n    #2 0xbe1706 in mdcache_alloc_state bytenas-ganesha/src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.cc:765\n    #3 0xe8e29d in open4_ex bytenas-ganesha/src/Protocols/NFS/nfs4_op_open.cc:943\n    #4 0xea3ee4 in nfs4_op_open(nfs_argop4*, compound_data*, nfs_resop4*) bytenas-ganesha/src/Protocols/NFS/nfs4_op_open.cc:1389\n    #5 0xaa221e in process_one_op(compound_data*, nfsstat4*) bytenas-ganesha/src/Protocols/NFS/nfs4_Compound.cc:940\n    #6 0xaa6303 in nfs4_Compound(nfs_arg__*, svc_req*, nfs_res__*) bytenas-ganesha/src/Protocols/NFS/nfs4_Compound.cc:1365\n    #7 0xbaf27b in nfs_rpc_process_request bytenas-ganesha/src/MainNFSD/nfs_worker_thread.cc:1631\n    #8 0x7f5a3b0dbdbb in svc_request (/opt/tiger/ganesha_deploy/lib/libntirpc.so.3.2+0x22dbb)",
+      "parentUuid": "84283f76_38e05d5e",
+      "revId": "76829dc75eb0a22bbc8b2a0b33145b78819045e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c408a3ba_850b16d8",
