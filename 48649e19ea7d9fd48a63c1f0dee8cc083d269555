@@ -50,6 +50,23 @@
       "message": "pls review",
       "revId": "48649e19ea7d9fd48a63c1f0dee8cc083d269555",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b690a49_4fb47cda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-07-14T23:39:08Z",
+      "side": 1,
+      "message": "See https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/541256\n\nThe put_ref this is trying to counter shouldn\u0027t be done.\n\nIn the old cache_inode, there was a separate pin refcount that was used to remove entries from the LRU that had long term references (and thus were not eligible for reaping). The conversion to mdcache removed that concept, but from what I can tell, partially removed some of the refcounting related to that, but not all,",
+      "revId": "48649e19ea7d9fd48a63c1f0dee8cc083d269555",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
