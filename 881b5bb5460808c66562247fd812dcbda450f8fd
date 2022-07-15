@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f461872b_8b289014",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-15T08:59:59Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!state_del_locked(state_found)) {\n+\t\tdec_state_t_ref(state_found);\n+\t}",
+      "revId": "881b5bb5460808c66562247fd812dcbda450f8fd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
