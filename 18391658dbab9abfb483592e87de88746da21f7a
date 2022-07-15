@@ -16,6 +16,24 @@
       "message": "What\u0027s the point of this function if all it does is check if the list is empty without returning?",
       "revId": "18391658dbab9abfb483592e87de88746da21f7a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d9f2a0_f7808e89",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3575,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-07-15T17:01:22Z",
+      "side": 0,
+      "message": "Umm, oops... the free_list code should still be there...",
+      "parentUuid": "ee795a22_7525292b",
+      "revId": "18391658dbab9abfb483592e87de88746da21f7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
