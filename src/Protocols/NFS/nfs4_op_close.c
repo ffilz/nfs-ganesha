@@ -241,6 +241,7 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 			 * told what was wrong
 			 */
 			PTHREAD_MUTEX_unlock(&open_owner->so_mutex);
+			dec_state_t_ref(state_found);
 			goto out2;
 		}
 	}
@@ -303,7 +304,9 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	 * supports extended ops, this will result in closing any open files
 	 * the FSAL has for this state.
 	 */
-	state_del_locked(state_found);
+	if (!state_del_locked(state_found)) {
+		dec_state_t_ref(state_found);
+	}
 
 	/* Poison the current stateid */
 	data->current_stateid_valid = false;
@@ -333,7 +336,6 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
  out2:
 	dec_state_owner_ref(open_owner);
 	state_obj->obj_ops->put_ref(state_obj);
-	dec_state_t_ref(state_found);
 
 	return nfsstat4_to_nfs_req_result(res_CLOSE4->status);
 }				/* nfs4_op_close */
