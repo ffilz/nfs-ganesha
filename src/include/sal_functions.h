@@ -652,7 +652,7 @@ state_status_t _state_add(struct fsal_obj_handle *obj,
 state_status_t state_set(state_t *state);
 
 #define state_del_locked(s) _state_del_locked(s, __func__, __LINE__)
-void _state_del_locked(state_t *state, const char *func, int line);
+bool _state_del_locked(state_t *state, const char *func, int line);
 
 void state_del(state_t *state);
 
