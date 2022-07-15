@@ -330,9 +330,10 @@ state_status_t _state_add(struct fsal_obj_handle *obj,
  *
  * @param[in]     state The state to remove
  *
+ * @return true on success, false on failure
  */
 
-void _state_del_locked(state_t *state, const char *func, int line)
+bool _state_del_locked(state_t *state, const char *func, int line)
 {
 	char str[LOG_BUFF_LEN] = "\0";
 	struct display_buffer dspbuf = {sizeof(str), str, str};
@@ -353,7 +354,7 @@ void _state_del_locked(state_t *state, const char *func, int line)
 		if (str_valid)
 			LogDebug(COMPONENT_STATE,
 				 "Racing to delete %s", str);
-		return;
+		return false;
 	}
 
 	if (str_valid)
@@ -375,7 +376,7 @@ void _state_del_locked(state_t *state, const char *func, int line)
 		LogDebug(COMPONENT_STATE,
 			 "Entry for state is stale");
 		PTHREAD_MUTEX_unlock(&state->state_mutex);
-		return;
+		return false;
 	}
 
 #ifdef USE_LTTNG
@@ -511,6 +512,7 @@ void _state_del_locked(state_t *state, const char *func, int line)
 	dec_state_t_ref(state);
 
 	obj->obj_ops->put_ref(obj);
+	return true;
 }
 
 /**
