@@ -700,6 +700,7 @@ static struct state_t *alloc_state(struct fsal_export *exp_hdl,
 void free_state(struct fsal_export *exp_hdl, struct state_t *state)
 {
 	gsh_free(state);
+	state = NULL;
 }
 
 /**
