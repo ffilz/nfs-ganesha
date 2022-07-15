@@ -507,9 +507,6 @@ void _state_del_locked(state_t *state, const char *func, int line)
 	 */
 	(void) obj->obj_ops->close2(obj, state);
 
-	/* Remove the sentinel reference */
-	dec_state_t_ref(state);
-
 	obj->obj_ops->put_ref(obj);
 }
 

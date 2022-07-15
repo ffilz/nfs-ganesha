@@ -497,6 +497,7 @@ enum nfs_req_result nfs4_op_layoutget(struct nfs_argop4 *op,
 
 		if ((layout_state) && (layout_state->state_seqid == 0)) {
 			state_del(layout_state);
+			dec_state_t_ref(layout_state);
 			layout_state = NULL;
 		}
 
