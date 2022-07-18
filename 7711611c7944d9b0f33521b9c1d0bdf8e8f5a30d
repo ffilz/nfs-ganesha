@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea63c87b_172fa8c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: do not set execute permissions for source files",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad0c04e_c9e34f15",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+extern std::unique_ptr\u003cprometheus::Exposer\u003e exposer;\n                       ^",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c4609e_b3780bb3",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+extern std::unique_ptr\u003cprometheus::Exposer\u003e exposer;\n                                           ^",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc9f1a03_43efa480",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+extern std::shared_ptr\u003cprometheus::Registry\u003e registry;\n                       ^",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "336f30c4_a5bb9fc6",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+extern std::shared_ptr\u003cprometheus::Registry\u003e registry;\n                                            ^",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf375d98_5f1ff66f",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+const std::string \u0026GetExportLabel(export_id_t export_id);\n                   ^",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "814a7ba0_58aa4d18",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\t\tif (export !\u003d NULL) export_id \u003d export-\u003eexport_id;",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bfc0e16_cbc57218",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3079,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\t\tif (export !\u003d NULL) export_id \u003d export-\u003eexport_id;",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "419e3052_05e15cdb",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3122,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:58:23Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (export !\u003d NULL) export_id \u003d export-\u003eexport_id;",
+      "revId": "7711611c7944d9b0f33521b9c1d0bdf8e8f5a30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
