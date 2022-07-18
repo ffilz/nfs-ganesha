@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d778cf_5602d523",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-07-18T13:31:05Z",
+      "side": 1,
+      "message": "I admit, I don\u0027t know much about Prometheus or Graphana, so just a few nits here, while I digest things.",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cddaa1dc_ca0df790",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-07-18T07:16:42Z",
       "side": 1,
       "message": "This goes over all clients - the loop\u0027s cost will only go up with time. If you use an LRU you can iterate just the active clients, and stop on the first inactive one.\nYou can also prune based on that",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf0f28fd_f8f562d5",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-07-18T13:31:05Z",
+      "side": 1,
+      "message": "True, but you trade off activity in this isolated thread for activity in the hot-path of operations, so maybe this is a good solution after all?",
+      "parentUuid": "cddaa1dc_ca0df790",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -184,6 +219,23 @@
       "writtenOn": "2022-07-18T04:05:12Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+const std::string \u0026GetExportLabel(export_id_t export_id);\n                   ^",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e23c822e_806499ba",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-07-18T13:31:05Z",
+      "side": 1,
+      "message": "I think there may be a problem with these.  There appears to be a single instance of max and min in the monitoring code, but there are may thread fridges, so this will get called for each one.  It seems that the last-one-in will overwrite the others?",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
