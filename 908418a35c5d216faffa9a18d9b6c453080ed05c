@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35da1b51_aba3f0d6",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1020351
+      },
+      "writtenOn": "2022-07-18T13:36:20Z",
+      "side": 1,
+      "message": "That\u0027s a good point. Still, clientActivity does need to be pruned, no?\n\nActually, if you just prune here based on durationSeconds you get the same behavior as with LRU - the loop\u0027s cost will be roughly the number of active clients in a set amount of time (the prune threshold + the thread\u0027s timer)",
+      "parentUuid": "bf0f28fd_f8f562d5",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a36fde5_429a6b9f",
         "filename": "src/monitoring/monitoring.cc",
         "patchSetId": 10
