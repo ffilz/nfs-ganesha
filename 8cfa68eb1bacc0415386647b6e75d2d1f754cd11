@@ -1,0 +1,446 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f47fd6_6ee2e700",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not set execute permissions for source files",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea12c77_79e90f79",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+#endif  // USE_MONITORING",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee933ba6_5adba9bb",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+#endif  // USE_MONITORING",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197b7702_4ba6878f",
+        "filename": "src/config_samples/prometheus.rules.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+  $",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7547a74_e3f0f585",
+        "filename": "src/config_samples/prometheus.rules.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+    $",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95fc44e_9f4ace6d",
+        "filename": "src/config_samples/prometheus.rules.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+    $",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cadbff43_90b10807",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bad6b65_f431950f",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Allow FSALs to register a human readable label used for per-export metrics.",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e916b07_6cbd36cb",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// The default label (if the FSAL doesn\u0027t set one) is \"exportid\u003d\u003cfsid_major\u003e\".",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89a5ad26_9282ade0",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Init monitoring export at TCP port \u003cport\u003e.",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ae1877_3fbfb0bd",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// MDCache hit rates.",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f280fff6_53b8786c",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// In flight RPC stats.",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccc018f_f9cb0214",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Worker thread stats.",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "433d1e6b_c110726d",
+        "filename": "src/include/monitoring.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Min and max values refer to the sizing of the NFS worker thread pool.",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6629a31_79c80ed9",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b9c5af_10fe9ee3",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+#include \"monitoring.h\"  // NOLINT",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3926ebc4_a2e86115",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+extern std::unique_ptr\u003cprometheus::Exposer\u003e exposer;\n                                           ^",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5175b71b_a086c6f1",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+extern std::unique_ptr\u003cprometheus::Exposer\u003e exposer;\n                       ^",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc32472_9529213f",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+extern std::shared_ptr\u003cprometheus::Registry\u003e registry;\n                       ^",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d91bd4d2_94998a9d",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+extern std::shared_ptr\u003cprometheus::Registry\u003e registry;\n                                            ^",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e72a20_09e90450",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+const std::string \u0026GetExportLabel(export_id_t export_id);\n                   ^",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f2713d_575d436d",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+}  // namespace ganesha_monitoring",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636e84fd_bb8c5203",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (export !\u003d NULL) {\n+\t\t\texport_id \u003d export-\u003eexport_id;\n+\t\t}",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c360d62_4cca4698",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3081,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (export !\u003d NULL) {\n+\t\t\texport_id \u003d export-\u003eexport_id;\n+\t\t}",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3296ff_235f25f4",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3096,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\trecord_op(\u0026v3_full_stats[proc], request_time, status \u003d\u003d NFS_REQ_OK, dup);",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd32aa8c_34929ec4",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3125,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T02:44:29Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (export !\u003d NULL) {\n+\t\texport_id \u003d export-\u003eexport_id;\n+\t}",
+      "revId": "8cfa68eb1bacc0415386647b6e75d2d1f754cd11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
