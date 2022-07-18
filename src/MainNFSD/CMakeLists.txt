@@ -144,6 +144,13 @@ set(ganesha_nfsd_OBJS
     $<TARGET_OBJECTS:fsalmdcache>
 )
 
+if(USE_MONITORING)
+  set(ganesha_nfsd_OBJS
+    ${ganesha_nfsd_OBJS}
+    $<TARGET_OBJECTS:monitoring>
+  )
+endif(USE_MONITORING)
+
 if(USE_DBUS)
   set(ganesha_nfsd_OBJS
     ${ganesha_nfsd_OBJS}
