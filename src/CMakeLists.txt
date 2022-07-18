@@ -295,6 +295,10 @@ goption(USE_FSAL_MEM "build Memory FSAL shared library" ON)
 # Internal capability required by some FSALs
 option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" ON)
 
+# Monitoring stack.
+set(USE_MONITORING OFF)
+goption(USE_MONITORING "Build monitoring stack" OFF)
+
 # nTIRPC
 option(USE_SYSTEM_NTIRPC "Use the system nTIRPC, rather than the submodule" OFF)
 option (USE_GSS "enable RPCSEC_GSS support" ON)
@@ -1055,6 +1059,9 @@ set(_USE_NLM ${USE_NLM})
 set(_USE_RQUOTA ${USE_RQUOTA})
 set(_USE_CB_SIMULATOR ${USE_CB_SIMULATOR})
 
+# Monitoring
+gopt_test(USE_MONITORING)
+
 ########### add a "make dist" and a "make rpm"  ###############
 
 set( PKG_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}.tar.gz")
@@ -1209,6 +1216,9 @@ add_subdirectory(RPCAL)
 add_subdirectory(Protocols)
 add_subdirectory(support)
 add_subdirectory(os)
+if(USE_MONITORING)
+  add_subdirectory(monitoring)
+endif(USE_MONITORING)
 
 add_subdirectory(FSAL)
 add_subdirectory(idmapper)
@@ -1271,6 +1281,7 @@ message(STATUS "ENABLE_ERROR_INJECTION = ${ENABLE_ERROR_INJECTION}")
 message(STATUS "ENABLE_VFS_DEBUG_ACL = ${ENABLE_VFS_DEBUG_ACL}")
 message(STATUS "ENABLE_RFC_ACL = ${ENABLE_RFC_ACL}")
 message(STATUS "CEPHFS_POSIX_ACL = ${CEPHFS_POSIX_ACL}")
+message(STATUS "USE_MONITORING = ${USE_MONITORING}")
 message(STATUS "USE_CAPS = ${USE_CAPS}")
 message(STATUS "USE_BLKID = ${USE_BLKID}")
 message(STATUS "DISTNAME_HAS_GIT_DATA = ${DISTNAME_HAS_GIT_DATA}" )
@@ -1610,6 +1621,7 @@ target_link_libraries(ganesha.nfsd
   ${SYSTEM_LIBRARIES}
   ${LTTNG_LIBRARIES}
   ${LDFLAG_DISALLOW_UNDEF}
+  ${MONITORING_LIBRARIES}
 )
 set_target_properties(ganesha.nfsd PROPERTIES COMPILE_FLAGS "-fPIC")
 install(TARGETS ganesha.nfsd COMPONENT daemon DESTINATION bin)
