@@ -1,6 +1,108 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bedb1c0_fd27f728",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020351
+      },
+      "writtenOn": "2022-07-18T07:16:42Z",
+      "side": 1,
+      "message": "Cool",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cddaa1dc_ca0df790",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1020351
+      },
+      "writtenOn": "2022-07-18T07:16:42Z",
+      "side": 1,
+      "message": "This goes over all clients - the loop\u0027s cost will only go up with time. If you use an LRU you can iterate just the active clients, and stop on the first inactive one.\nYou can also prune based on that",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a36fde5_429a6b9f",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1020351
+      },
+      "writtenOn": "2022-07-18T07:16:42Z",
+      "side": 1,
+      "message": "The comment in monitoring_register_export_label() seems to imply we\u0027re never allowed to free the memory pointed to by exportLabels entries (\"... as the label is returned as a char* to C code\")",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7d9389_918d2d0a",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1020351
+      },
+      "writtenOn": "2022-07-18T07:16:42Z",
+      "side": 1,
+      "message": "Calling GetExportLabel() but the result is ignored if export_id\u003d\u003d0",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a3d3dd_ebd3368b",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1020351
+      },
+      "writtenOn": "2022-07-18T07:16:42Z",
+      "side": 1,
+      "message": "Ditto (ignored if export_id\u003d\u003d0)",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198e5bc0_c6cdfe9b",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1020351
+      },
+      "writtenOn": "2022-07-18T07:16:42Z",
+      "side": 1,
+      "message": "Ditto (can do like monitoring_mdcache_cache_miss() below and inline the variable)",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb9e2190_7b9af7ac",
