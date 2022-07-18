@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a395ba79_87dfaa6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T03:14:19Z",
+      "side": 1,
+      "message": "ERROR: do not set execute permissions for source files",
+      "revId": "d45ee2a776572c3fb65b2c79a974dda5e02e9c76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f182fd7a_eeae692c",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T03:14:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+extern std::unique_ptr\u003cprometheus::Exposer\u003e exposer;\n                       ^",
+      "revId": "d45ee2a776572c3fb65b2c79a974dda5e02e9c76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d47426_7cc93eed",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T03:14:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+extern std::unique_ptr\u003cprometheus::Exposer\u003e exposer;\n                                           ^",
+      "revId": "d45ee2a776572c3fb65b2c79a974dda5e02e9c76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1150363_6f00225e",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T03:14:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+extern std::shared_ptr\u003cprometheus::Registry\u003e registry;\n                                            ^",
+      "revId": "d45ee2a776572c3fb65b2c79a974dda5e02e9c76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dbdcdbf_de4b3f2b",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T03:14:19Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+extern std::shared_ptr\u003cprometheus::Registry\u003e registry;\n                       ^",
+      "revId": "d45ee2a776572c3fb65b2c79a974dda5e02e9c76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727787db_09cc5cb7",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-07-18T03:14:19Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+const std::string \u0026GetExportLabel(export_id_t export_id);\n                   ^",
+      "revId": "d45ee2a776572c3fb65b2c79a974dda5e02e9c76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
