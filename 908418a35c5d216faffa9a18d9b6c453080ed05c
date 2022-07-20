@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3009aa2_222eab70",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-07-20T13:39:56Z",
+      "side": 1,
+      "message": "I missed that there was a separate list.  That needs pruning, of course.  What\u0027s the reason for not using the actual client list?  I guess you\u0027ll have to lock it, so that may be a good enough reason.",
+      "parentUuid": "35da1b51_aba3f0d6",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a36fde5_429a6b9f",
         "filename": "src/monitoring/monitoring.cc",
         "patchSetId": 10
@@ -316,6 +334,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff45f3d_a02edd47",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-07-20T13:39:56Z",
+      "side": 1,
+      "message": "Ouch.  Clearly these checks don\u0027t work for C++ code.  Frank?  Any way we can disable them for C++ only?",
+      "parentUuid": "32206afa_1051ef86",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f39ec852_e0d4bd03",
@@ -452,6 +488,24 @@
       "side": 1,
       "message": "Yes, only the last one counts. But this function is only called from 9p_dispatcher.c (line 453) so it looks like there\u0027s only one thread pool created.",
       "parentUuid": "e23c822e_806499ba",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c5dcef_f6a568a7",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-07-20T13:39:56Z",
+      "side": 1,
+      "message": "Good point.  That means this isn\u0027t doing what it looks like it\u0027s doing, which is counting threads.  Most threads come from ntirpc, and the rest come from individual thread fridges.  This one contributes basically nothing, since it\u0027s 9P only.  What stat is this supposed to be reporting, and do we think it\u0027s useful, given the above issues?",
+      "parentUuid": "c3d11f69_98b7a7e0",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
