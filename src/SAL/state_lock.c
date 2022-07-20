@@ -2510,6 +2510,24 @@ state_status_t state_lock(struct fsal_obj_handle *obj,
 
 				LogEntry("Found existing", found_entry);
 
+				if (found_entry->sle_state != state) {
+					LogFullDebug(COMPONENT_STATE,
+					"Existing lock entry has old state");
+					if (found_entry->sle_state)
+						dec_nlm_state_ref(
+						found_entry->sle_state);
+
+					found_entry->sle_state = state;
+					if (state != NULL) {
+						glist_add_tail(
+					&state->state_data.lock.state_locklist,
+					&found_entry->sle_state_locks);
+						inc_state_t_ref(state);
+					}
+					LogEntry("sle after state change",
+							found_entry);
+				}
+
 				status = STATE_SUCCESS;
 				return status;
 			}
