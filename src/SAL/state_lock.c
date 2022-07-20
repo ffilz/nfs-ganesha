@@ -2510,6 +2510,20 @@ state_status_t state_lock(struct fsal_obj_handle *obj,
 
 				LogEntry("Found existing", found_entry);
 
+				if (found_entry->sle_state != state) {
+					LogFullDebug(COMPONENT_STATE,
+					"Existing lock entry has old state");
+					if (found_entry->sle_state)
+						dec_nlm_state_ref(
+						found_entry->sle_state);
+
+					found_entry->sle_state = state;
+					atomic_inc_int32_t(
+						&state->state_refcount);
+					LogEntry("sle after state change",
+							found_entry);
+				}
+
 				status = STATE_SUCCESS;
 				return status;
 			}
