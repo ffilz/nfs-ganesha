@@ -88,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1b891a_30985eec",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-20T05:32:21Z",
+      "side": 1,
+      "message": "I removed monitoring of client activity. Let\u0027s add that as a separate change and focus on all the other plumbing.",
+      "parentUuid": "35da1b51_aba3f0d6",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a36fde5_429a6b9f",
@@ -101,6 +119,24 @@
       "writtenOn": "2022-07-18T07:16:42Z",
       "side": 1,
       "message": "The comment in monitoring_register_export_label() seems to imply we\u0027re never allowed to free the memory pointed to by exportLabels entries (\"... as the label is returned as a char* to C code\")",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99cade4e_8d16b9de",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-20T05:32:21Z",
+      "side": 1,
+      "message": "Great catch. The export label isn\u0027t returned as char* to C code anymore. I changed GetExportLabel() to return a string copy, so that the entry in exportLabels can be updated.",
+      "parentUuid": "3a36fde5_429a6b9f",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -122,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33aabff_0afc93b3",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-20T05:32:21Z",
+      "side": 1,
+      "message": "Moved it further down.",
+      "parentUuid": "9e7d9389_918d2d0a",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26a3d3dd_ebd3368b",
@@ -139,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e88774_37b01e42",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-20T05:32:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26a3d3dd_ebd3368b",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "198e5bc0_c6cdfe9b",
@@ -152,6 +224,24 @@
       "writtenOn": "2022-07-18T07:16:42Z",
       "side": 1,
       "message": "Ditto (can do like monitoring_mdcache_cache_miss() below and inline the variable)",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a66cccc_96d32ed9",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-20T05:32:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "198e5bc0_c6cdfe9b",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -254,6 +344,24 @@
       "writtenOn": "2022-07-18T13:31:05Z",
       "side": 1,
       "message": "I think there may be a problem with these.  There appears to be a single instance of max and min in the monitoring code, but there are may thread fridges, so this will get called for each one.  It seems that the last-one-in will overwrite the others?",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3d11f69_98b7a7e0",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-20T05:32:21Z",
+      "side": 1,
+      "message": "Yes, only the last one counts. But this function is only called from 9p_dispatcher.c (line 453) so it looks like there\u0027s only one thread pool created.",
+      "parentUuid": "e23c822e_806499ba",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

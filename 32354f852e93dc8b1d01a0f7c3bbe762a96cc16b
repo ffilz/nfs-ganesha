@@ -118,6 +118,24 @@
       "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+const std::string \u0026GetExportLabel(export_id_t export_id);\n                   ^",
       "revId": "32354f852e93dc8b1d01a0f7c3bbe762a96cc16b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ebef6a9_7f2c9e52",
+        "filename": "src/monitoring/monitoring_internal.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-20T05:32:21Z",
+      "side": 1,
+      "message": "Removed \u0026",
+      "parentUuid": "7c835d68_5dceab90",
+      "revId": "32354f852e93dc8b1d01a0f7c3bbe762a96cc16b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
