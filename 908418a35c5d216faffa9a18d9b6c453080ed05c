@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e5b51f9_e30616ae",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-21T00:54:31Z",
+      "side": 1,
+      "message": "On second thought, I think the monitoring stack should report the \"last activity per client\" only, not the \"active client count\". The \"active client count\" can be calculated by Prometheus.\n\nI will:\n1. Add the code back to report last client activity.\n2. Update the Prometheus rules to calculate this.",
+      "parentUuid": "d3009aa2_222eab70",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a36fde5_429a6b9f",
         "filename": "src/monitoring/monitoring.cc",
         "patchSetId": 10
@@ -524,6 +542,24 @@
       "side": 1,
       "message": "Good point.  That means this isn\u0027t doing what it looks like it\u0027s doing, which is counting threads.  Most threads come from ntirpc, and the rest come from individual thread fridges.  This one contributes basically nothing, since it\u0027s 9P only.  What stat is this supposed to be reporting, and do we think it\u0027s useful, given the above issues?",
       "parentUuid": "c3d11f69_98b7a7e0",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16627a8e_a98ed87a",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-07-21T00:54:31Z",
+      "side": 1,
+      "message": "But it looks to me as if the 9P worker thread pool is the one that handles NFS requests, so this is actually the NFS worker thread pool. If I got that wrong, where is the NFS worker thread pool created?\n\nThe point of all this is to be able to tune Ganesha and understand what\u0027s going on. These thread numbers may look odd by themselves, but when you also combine them with:\n1. Number of rpcs received / processed.\n2. Number of operations in flight.\n3. (tail) Latency percentiles of operations.\nThen you can build an accurate view of what Ganesha is up to, and where bottlenecks are forming. As an example, it\u0027s straight forward to spot if rpcs are queuing up because of worker thread starvation.\n\nThe min/max number of threads are actually gauges (can be incremented / decremented). Let me change these from set functions to increment / decrement functions. Then it will work for any number of worker thread pools.",
+      "parentUuid": "90c5dcef_f6a568a7",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
