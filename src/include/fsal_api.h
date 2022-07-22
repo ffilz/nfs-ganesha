@@ -1470,6 +1470,13 @@ typedef enum fsal_dir_result (*fsal_readdir_cb)(
 				struct fsal_attrlist *attrs,
 				void *dir_state, fsal_cookie_t cookie);
 
+/* FSAL resume_reason values, may be defined by specific FSALs also. Any
+ * generic ones may be defined here. FSAL specific reasons should be defined
+ * starting from values > 1000.
+ */
+#define FSAL_NORESUME 0
+#define FSAL_CLOSEFD 1
+
 /**
  * @brief Argument for read2/write2 and their callbacks
  *
@@ -1477,6 +1484,10 @@ typedef enum fsal_dir_result (*fsal_readdir_cb)(
 struct fsal_io_arg {
 	size_t io_amount;	/**< Total amount of I/O actually done */
 	struct io_info *info;	/**< More info about data for read_plus */
+	void *cbi;		/**< FSAL specific call back info */
+	int fsal_resume;	/**< If non-zero, FSAL requests a resume
+				     callback, the specific value indicates
+				     the reason. */
 	union {
 		bool end_of_file;	/**< True if end-of-file reached */
 		bool fsal_stable;	/**< requested/achieved stability */
