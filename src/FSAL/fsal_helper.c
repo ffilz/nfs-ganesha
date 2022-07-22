@@ -1859,6 +1859,8 @@ void fsal_read(struct fsal_obj_handle *obj_hdl,
 	       struct fsal_io_arg *arg,
 	       struct async_process_data *data)
 {
+again:
+
 	obj_hdl->obj_ops->read2(obj_hdl, bypass, sync_cb, arg, data);
 
 	PTHREAD_MUTEX_lock(data->mutex);
@@ -1870,6 +1872,11 @@ void fsal_read(struct fsal_obj_handle *obj_hdl,
 	}
 
 	PTHREAD_MUTEX_unlock(data->mutex);
+
+	if (arg->fsal_resume) {
+		data->done = false;
+		goto again;
+	}
 }
 
 void fsal_write(struct fsal_obj_handle *obj_hdl,
@@ -1877,6 +1884,8 @@ void fsal_write(struct fsal_obj_handle *obj_hdl,
 		struct fsal_io_arg *arg,
 		struct async_process_data *data)
 {
+again:
+
 	obj_hdl->obj_ops->write2(obj_hdl, bypass, sync_cb, arg, data);
 
 	PTHREAD_MUTEX_lock(data->mutex);
@@ -1888,6 +1897,11 @@ void fsal_write(struct fsal_obj_handle *obj_hdl,
 	}
 
 	PTHREAD_MUTEX_unlock(data->mutex);
+
+	if (arg->fsal_resume) {
+		data->done = false;
+		goto again;
+	}
 }
 
 #define XATTR_USER_PREFIX	"user."
