@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d39bec7c_b1781ce1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-07-22T22:13:47Z",
+      "side": 1,
+      "message": "I also want to make sure no locks wind up abandoned because the client never tried to reclaim them.",
+      "revId": "5aa858ac779d15c8e71424d655ebc3aa72bb72c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1539613_654e1dad",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2526,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-07-22T22:13:47Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure you also have to move the lock over to the new state (sle_state_locks/state_data.lock.state_locklist)",
+      "revId": "5aa858ac779d15c8e71424d655ebc3aa72bb72c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
