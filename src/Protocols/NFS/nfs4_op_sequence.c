@@ -140,8 +140,6 @@ enum nfs_req_result nfs4_op_sequence(struct nfs_argop4 *op,
 						slot->cached_result,
 						refcnt);
 
-				PTHREAD_MUTEX_unlock(&slot->lock);
-
 				dec_session_ref(session);
 				res_SEQUENCE4->sr_status = NFS4_OK;
 				return NFS_REQ_REPLAY;

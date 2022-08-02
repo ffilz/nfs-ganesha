@@ -695,6 +695,7 @@ enum nfs_req_result complete_op(compound_data_t *data, nfsstat4 *status,
 			     data->slot->cached_result,
 			     nfsstat4_to_str(*status));
 
+		PTHREAD_MUTEX_unlock(&data->slot->lock);
 		/* Will exit the for loop since result is not NFS_REQ_OK */
 		goto out;
 	}
