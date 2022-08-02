@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a87e42ca_0084fe02",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2518,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-02T14:20:54Z",
+      "side": 1,
+      "message": "Maybe we put the old state on a list that the reaper thread can use to clean out old locks once grace period is over",
+      "revId": "d11d9d1250c7f5f80f319be9e7405311e9800aad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2421830_bb9a7e93",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2521,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-02T14:20:54Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to check for NULL\n\nAlso move this block before dec ref of old state to make sure we don\u0027t drop something",
+      "revId": "d11d9d1250c7f5f80f319be9e7405311e9800aad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdb3e3ec_1a2a9c42",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2523,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-02T14:20:54Z",
+      "side": 1,
+      "message": "Add one space of indent for visual clarity",
+      "revId": "d11d9d1250c7f5f80f319be9e7405311e9800aad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aabfe59_76ba5e13",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-02T14:20:54Z",
+      "side": 1,
+      "message": "Move this before glist_add_tail for visual clarity\n\nAdd a blank line after the glist_add_tail to help with visual clarity",
+      "revId": "d11d9d1250c7f5f80f319be9e7405311e9800aad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
