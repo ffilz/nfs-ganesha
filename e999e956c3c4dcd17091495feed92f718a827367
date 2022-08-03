@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2640276_6890b5bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-03T23:51:23Z",
+      "side": 1,
+      "message": "Looks good, just a minor nit and it\u0027s ready to go.\n\nThanks for opening the issue.",
+      "revId": "e999e956c3c4dcd17091495feed92f718a827367",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8910e729_f30eff81",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-03T23:51:23Z",
+      "side": 1,
+      "message": "Could you move this to the top of the block? checkpatch maybe no longer complains about declarations not at the top of a block, but that is the style we use.",
+      "revId": "e999e956c3c4dcd17091495feed92f718a827367",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644d9d20_84d13805",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2528,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-03T23:51:23Z",
+      "side": 1,
+      "message": "Oh, good, that has clarity, thanks.",
+      "revId": "e999e956c3c4dcd17091495feed92f718a827367",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
