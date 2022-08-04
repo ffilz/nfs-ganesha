@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38b2f30_bbaecb4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-04T15:02:11Z",
+      "side": 1,
+      "message": "This fix makes sense, yet I am a bit wary of holding the lock across the op_sequence return. At a minimum I\u0027d like to see more description in the commit message and some comments.\n\nI wonder if the stuff that\u0027s done in complete_op for replay could be done in op_sequence? That way the lock release is local to the lock acquire.",
+      "revId": "bb2840ccdf8e761afdb8ea8c2cfeb7b6e5eb3737",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
