@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fc7d8e9_f20f7425",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2022-08-04T10:19:11Z",
+      "side": 1,
+      "message": "Hi Frank, I thought it is good to declare this variable only in this if condition block since if this condtion,is not met, this variable is not required. \nNow I made this first statement in this if block. \nPlease let me know if you want me to move it to the beginning of the this function state_lock().",
+      "parentUuid": "8910e729_f30eff81",
+      "revId": "e999e956c3c4dcd17091495feed92f718a827367",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "644d9d20_84d13805",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 4
