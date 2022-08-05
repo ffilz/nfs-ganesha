@@ -40,6 +40,7 @@
 
 #include "fsal_api.h"
 #include "sal_data.h"
+#include "sal_functions.h"
 
 /*
  * fsal common utility functions
@@ -203,9 +204,10 @@ static inline struct state_t *init_state(struct state_t *state,
 	state->state_exp = exp_hdl;
 	state->state_type = state_type;
 
-	if (state_type == STATE_TYPE_LOCK ||
-	    state_type == STATE_TYPE_NLM_LOCK)
-		state->state_data.lock.openstate = related_state;
+	if ((state_type == STATE_TYPE_LOCK ||
+	    state_type == STATE_TYPE_NLM_LOCK) && related_state)
+		memcpy(state->state_data.lock.openstate_key,
+			related_state->stateid_other, OTHERSIZE);
 
 	return state;
 }
