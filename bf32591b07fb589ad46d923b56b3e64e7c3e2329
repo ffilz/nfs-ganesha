@@ -33,6 +33,59 @@
       "message": "Hmm.  I read \"check_foo()\" as returning true if \"foo\".  So this should return true if \"export_duplicate\", ",
       "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f661d349_253a6580",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-05T16:46:57Z",
+      "side": 1,
+      "message": "Hmm, good point.\n\nAnd I dislike having a boolean function where you always want to negate it when testing. It\u0027s too easy to miss a ! in the code and misunderstand the sense of the test.",
+      "parentUuid": "2017b01b_8be1518a",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a193c0b6_29d8299d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-05T16:46:57Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "51fe8ffc_8693054e",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf10adc_5b428b7c",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-05T16:46:57Z",
+      "side": 1,
+      "message": "Sometimes I wish the logical inverse was \"not\" rather than \"!\" for easier reading... It\u0027s easy to miss the !\n\nWhat it we renamed it from check to check_fail?",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
