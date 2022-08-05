@@ -1,0 +1,412 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c7b8a87_03d6bc81",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1745,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "ERROR: \"foo* bar\" should be \"foo *bar\"\n+\t\t\tstruct state_t* openstate \u003d nfs4_State_Get_Pointer(state-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501c8864_3e73e14c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1745,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstruct state_t* openstate \u003d nfs4_State_Get_Pointer(state-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750e195e_c20f838b",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1746,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tstruct state_t* openstate \u003d nfs4_State_Get_Pointer(state-\u003estate_data.lock.openstate_key);\n+\t\t\tif (openstate) {",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb1fb2aa_8ac41d46",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1747,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Got an EACCESS and openstate is available, try",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6344318_deca556b",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1750,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tstruct fsal_fd *related_fd \u003d (struct fsal_fd *)(openstate + 1);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9cdb54_a6b37040",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\t\tstruct fsal_fd *related_fd \u003d (struct fsal_fd *)(openstate + 1);\n+\t\t\t\tdec_state_t_ref(openstate);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1ec98a_9f321e06",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1755,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tstatus \u003d open_func(obj_hdl, openflags, state_fd);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c11b2a_7aad94ec",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1781,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "ERROR: \"foo* bar\" should be \"foo *bar\"\n+\t\tstruct state_t* openstate \u003d nfs4_State_Get_Pointer(state-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93b67a7_d22d6de7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1781,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tstruct state_t* openstate \u003d nfs4_State_Get_Pointer(state-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5c42053_7eebe164",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1782,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tstruct state_t* openstate \u003d nfs4_State_Get_Pointer(state-\u003estate_data.lock.openstate_key);\n+\t\tif (!openstate)",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8997504_c73e9b3f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tstruct fsal_fd *related_fd \u003d (struct fsal_fd *)(openstate + 1);\n+\t\tdec_state_t_ref(openstate);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "472d9571_265c28cd",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstate_open \u003d nfs4_State_Get_Pointer(state-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d05072_7adc9a7b",
+        "filename": "src/Protocols/NFS/nfs4_op_allocate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I^I^Igoto out;^I$",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3a917c_5ac21019",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tstate_open \u003d nfs4_State_Get_Pointer(lock_state-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e351b883_0abb89dd",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tmemcpy(candidate_data.lock.openstate_key, state_open-\u003estateid_other, OTHERSIZE);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e4b9043_1a1f8ac4",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstate_open \u003d nfs4_State_Get_Pointer(state_found-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf00e0fc_de87075b",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I^I^Igoto out; $",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba9b3bd_ef6d1cf5",
+        "filename": "src/Protocols/NFS/nfs4_op_setattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tstate_open \u003d nfs4_State_Get_Pointer(state_found-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0660b1_a9095a86",
+        "filename": "src/Protocols/NFS/nfs4_op_setattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tres_SETATTR4-\u003estatus \u003d NFS4ERR_BAD_STATEID;",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9aa403b_1bd04f86",
+        "filename": "src/Protocols/NFS/nfs4_op_setattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I^I^I^Igoto done; $",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4995ac99_5ddcb74e",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstate_open \u003d nfs4_State_Get_Pointer(state_found-\u003estate_data.lock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfe63023_e3133e18",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\topenstate \u003d nfs4_State_Get_Pointer(state_data-\u003elock.openstate_key);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29ddab35_efd30052",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (state_type \u003d\u003d STATE_TYPE_LOCK \u0026\u0026 openstate) {\n+\t\t\tdec_state_t_ref(openstate);\n+\t\t}",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023bf95b_a1b84b74",
+        "filename": "src/include/FSAL/fsal_commonlib.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T10:55:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tmemcpy(state-\u003estate_data.lock.openstate_key, related_state-\u003estateid_other, OTHERSIZE);",
+      "revId": "ec6b263eac4e1c6a7bffb38671109f07ea0ef862",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
