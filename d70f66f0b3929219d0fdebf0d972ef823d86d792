@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f7450b_2d95d4a7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T11:12:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Got an EACCESS and openstate is available, try",
+      "revId": "d70f66f0b3929219d0fdebf0d972ef823d86d792",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85a64b60_1b9ed986",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1758,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T11:12:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tstatus \u003d open_func(obj_hdl, openflags, state_fd);",
+      "revId": "d70f66f0b3929219d0fdebf0d972ef823d86d792",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4db5db23_30b2185b",
+        "filename": "src/Protocols/NFS/nfs4_op_setattr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T11:12:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tstate_found-\u003estate_data.lock.openstate_key);",
+      "revId": "d70f66f0b3929219d0fdebf0d972ef823d86d792",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ce635f_7c127b0c",
+        "filename": "src/Protocols/NFS/nfs4_op_setattr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-05T11:12:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tres_SETATTR4-\u003estatus \u003d NFS4ERR_BAD_STATEID;",
+      "revId": "d70f66f0b3929219d0fdebf0d972ef823d86d792",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
