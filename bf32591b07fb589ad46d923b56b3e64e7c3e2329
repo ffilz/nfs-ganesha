@@ -16,6 +16,23 @@
       "message": "\u003e Patch Set 1:\n\u003e \n\u003e https://jenkins-nfs-ganesha.apps.ocp.ci.centos.org//job/nfs_ganesha_posix_compliance/115/console : FAILED\n\nI assume I can ignore the POSIX compliance failures, since the code change is meant to be a no-op in export validation, so should have no effect on I/O.",
       "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2017b01b_8be1518a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-08-05T13:37:53Z",
+      "side": 1,
+      "message": "Hmm.  I read \"check_foo()\" as returning true if \"foo\".  So this should return true if \"export_duplicate\", ",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
