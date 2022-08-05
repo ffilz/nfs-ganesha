@@ -1741,17 +1741,22 @@ fsal_status_t fsal_find_fd(struct fsal_fd **out_fd,
 
 		if (status.major == ERR_FSAL_ACCESS &&
 		   (state->state_type == STATE_TYPE_LOCK ||
-		    state->state_type == STATE_TYPE_NLM_LOCK) &&
-		    state->state_data.lock.openstate != NULL) {
-			/* Got an EACCESS and openstate is available, try
-			 * again with it's openflags.
-			 */
-			struct fsal_fd *related_fd = (struct fsal_fd *)
-					(state->state_data.lock.openstate + 1);
+		    state->state_type == STATE_TYPE_NLM_LOCK)) {
+			struct state_t *openstate = nfs4_State_Get_Pointer(
+				state->state_data.lock.openstate_key);
+			if (openstate) {
+				/* Got an EACCESS and openstate is available, try
+				* again with it's openflags.
+				*/
+				struct fsal_fd *related_fd =
+					(struct fsal_fd *)(openstate + 1);
 
-			openflags = related_fd->openflags & FSAL_O_RDWR;
+				dec_state_t_ref(openstate);
 
-			status = open_func(obj_hdl, openflags, state_fd);
+				openflags = related_fd->openflags & FSAL_O_RDWR;
+
+				status = open_func(obj_hdl, openflags, state_fd);
+			}
 		}
 
 		if (FSAL_IS_ERROR(status)) {
@@ -1774,11 +1779,16 @@ fsal_status_t fsal_find_fd(struct fsal_fd **out_fd,
 	 * fd (this will support FSALs that have an open file per open state
 	 * but don't bother with opening a separate file for the lock state).
 	 */
-	if ((state->state_type == STATE_TYPE_LOCK ||
-	     state->state_type == STATE_TYPE_NLM_LOCK) &&
-	    state->state_data.lock.openstate != NULL) {
-		struct fsal_fd *related_fd = (struct fsal_fd *)
-				(state->state_data.lock.openstate + 1);
+	if (state->state_type == STATE_TYPE_LOCK ||
+	     state->state_type == STATE_TYPE_NLM_LOCK) {
+		struct state_t *openstate = nfs4_State_Get_Pointer(
+			state->state_data.lock.openstate_key);
+		if (!openstate)
+			goto global;
+
+		struct fsal_fd *related_fd = (struct fsal_fd *)(openstate + 1);
+
+		dec_state_t_ref(openstate);
 
 		LogFullDebug(COMPONENT_FSAL,
 			     "related_fd->openflags = %d openflags = %d",
