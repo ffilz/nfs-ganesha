@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c554f8_6b805e24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-06T00:13:04Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nSo instead of assigning state to state-\u003estate_data.lock.openstate, we assign",
+      "revId": "56fb65016c6694054b8b42617d801b21c34a6961",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f54fb0c_709e4fca",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1749,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-06T00:13:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Got an EACCESS and openstate is available, try",
+      "revId": "56fb65016c6694054b8b42617d801b21c34a6961",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ab9a4f_b3605988",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1759,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-06T00:13:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tstatus \u003d open_func(obj_hdl, openflags, state_fd);",
+      "revId": "56fb65016c6694054b8b42617d801b21c34a6961",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125b6a30_f02e6895",
+        "filename": "src/Protocols/NFS/nfs4_op_setattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-06T00:13:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tres_SETATTR4-\u003estatus \u003d NFS4ERR_BAD_STATEID;",
+      "revId": "56fb65016c6694054b8b42617d801b21c34a6961",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
