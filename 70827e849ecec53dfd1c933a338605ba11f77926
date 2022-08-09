@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b773654_7037ad98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-09T15:49:38Z",
+      "side": 1,
+      "message": "This looks great and nicely avoids holding the lock too long.\n\nBy the way, you could have just pushed this as a new version of the old patch, that keeps the comment history together (one of the reasons we use Gerrithub for review).",
+      "revId": "70827e849ecec53dfd1c933a338605ba11f77926",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
