@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8eccc5_971de875",
+        "filename": "src/include/nfs_proto_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-09T08:17:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tstep1: thread1 receive a replay request, and found slot-\u003ecached_result",
+      "revId": "2396cd094b4277cd64b0dafd068da49e7e281c53",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "588f983f_797f30be",
+        "filename": "src/include/nfs_proto_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-09T08:17:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t       not null, and assign slot to data-\u003eslot and unlock the slot-\u003elock.",
+      "revId": "2396cd094b4277cd64b0dafd068da49e7e281c53",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
