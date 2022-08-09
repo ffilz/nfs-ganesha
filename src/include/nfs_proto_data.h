@@ -356,6 +356,20 @@ struct compound_data {
 						   reserved, if any */
 	struct nfs41_session_slot__ *slot;	/*< NFv41: pointer to the
 							session's slot */
+	/* <NFv41: pointer to the slot cached result, for reply request,
+	 * we use data->cached_result to save data->slot->cached_result.
+	 *
+	 * Otherwise crash happens, for example:
+	 * thread1: receive a replay request, and found slot->cached_result
+	 *	        not null, and assign slot to data->slot and unlock the
+	 *			slot->lock.
+	 * thread2: receive a normal request, got slot->lock and
+	 *	        release_slot(slot), so slot->cached_result was set null.
+	 * thread1: in complete_op will assign *status with
+	 *	        data->slot->cached_result->status,
+	 *	        but data->slot->cached_result is null, so crash happens.
+	*/
+	struct COMPOUND4res_extended *cached_result;
 	bool sa_cachethis;	/*< True if cachethis was specified in
 				    SEQUENCE op. */
 	nfs_opnum4 opcode;	/*< Current NFS4 OP */

@@ -129,6 +129,7 @@ enum nfs_req_result nfs4_op_sequence(struct nfs_argop4 *op,
 				 * Take a reference to the slot cached response.
 				 */
 				data->slot = slot;
+				data->cached_result = slot->cached_result;
 				refcnt = atomic_inc_int32_t(
 					&slot->cached_result->res_refcnt);
 

@@ -686,9 +686,9 @@ enum nfs_req_result complete_op(compound_data_t *data, nfsstat4 *status,
 		/* Copy the reply from the cache (the reference is already
 		 * taken by SEQUENCE.
 		 */
-		data->res->res_compound4_extended = data->slot->cached_result;
+		data->res->res_compound4_extended = data->cached_result;
 
-		*status = ((COMPOUND4res *) data->slot->cached_result)->status;
+		*status = ((COMPOUND4res *) data->cached_result)->status;
 
 		LogFullDebug(COMPONENT_SESSIONS,
 			     "Use session replay cache %p result %s",
