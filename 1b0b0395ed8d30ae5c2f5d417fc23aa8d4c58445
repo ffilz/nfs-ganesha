@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd44e9a7_7dfca632",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-09T08:47:21Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\trelease_nfs4_res_compound(data-\u003eres-\u003eres_compound4_extended);",
+      "revId": "1b0b0395ed8d30ae5c2f5d417fc23aa8d4c58445",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc7253b_5bf2cf9a",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-09T08:47:21Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Copy the reply from the cache (the reference is already",
+      "revId": "1b0b0395ed8d30ae5c2f5d417fc23aa8d4c58445",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37279c11_4bcc5ff9",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-09T08:47:21Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tdata-\u003eres-\u003eres_compound4_extended \u003d data-\u003eslot-\u003ecached_result;",
+      "revId": "1b0b0395ed8d30ae5c2f5d417fc23aa8d4c58445",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba47d39_b1ac5c3f",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-09T08:47:21Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tdata-\u003ecached_result_status \u003d ((COMPOUND4res *) data-\u003ecached_result)-\u003estatus;",
+      "revId": "1b0b0395ed8d30ae5c2f5d417fc23aa8d4c58445",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
