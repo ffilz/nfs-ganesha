@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b24ec54_c4ed3068",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-09T17:22:22Z",
+      "side": 1,
+      "message": "Some minor fixups.\n\nI prefer the style where all local variable declarations are at the top of the block not interspersed with code.",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f9b1a4_11fa6d4d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1755,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-09T17:22:22Z",
+      "side": 1,
+      "message": "Is it safe to do this dec refcount? We\u0027re still referencing openstate.",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43103c99_abdf954d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1792,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-09T17:22:22Z",
+      "side": 1,
+      "message": "Could you move the declaration to the top of the block and just do the assignment here?",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb50e2e8_573e8078",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-09T17:22:22Z",
+      "side": 1,
+      "message": "Is this safe? We\u0027re still referencing part of openstate.",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc9cff4_ca6ab734",
+        "filename": "src/include/FSAL/fsal_commonlib.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-09T17:22:22Z",
+      "side": 1,
+      "message": "Hmm, this won\u0027t work for NLM which passes related_state \u003d\u003d NULL anyway. Let\u0027s remove STATE_TYPE_NLM_LOCK from this test.\n\nIf at some point we decide to do work to try and link NLM lock state with NLM share state, we will have to do a different lookup anyway and we can code that into here.",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
