@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "438c3158_3742b4a1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1755,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-08-10T01:30:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3f9b1a4_11fa6d4d",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43103c99_abdf954d",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-09T17:22:22Z",
       "side": 1,
       "message": "Could you move the declaration to the top of the block and just do the assignment here?",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf94c52_f2e7ef24",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1792,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-08-10T01:30:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43103c99_abdf954d",
       "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "329c8e0e_063d14a8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-08-10T01:30:48Z",
+      "side": 1,
+      "message": "sorry, it\u0027s hard to say whether it\u0027s safe or not, because this function:fsal_find_fd return related_fd to the caller function.",
+      "parentUuid": "fb50e2e8_573e8078",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2cc9cff4_ca6ab734",
         "filename": "src/include/FSAL/fsal_commonlib.h",
         "patchSetId": 9
@@ -82,6 +136,24 @@
       "writtenOn": "2022-08-09T17:22:22Z",
       "side": 1,
       "message": "Hmm, this won\u0027t work for NLM which passes related_state \u003d\u003d NULL anyway. Let\u0027s remove STATE_TYPE_NLM_LOCK from this test.\n\nIf at some point we decide to do work to try and link NLM lock state with NLM share state, we will have to do a different lookup anyway and we can code that into here.",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4565a1_32791ca6",
+        "filename": "src/include/FSAL/fsal_commonlib.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-08-10T01:30:48Z",
+      "side": 1,
+      "message": "What about the following change, it\u0027s equal to the origin code. I\u0027m not sure\nwhether it\u0027s safe to remove STATE_TYPE_NLM_LOCK.\n\tif (state_type \u003d\u003d STATE_TYPE_LOCK || state_type \u003d\u003d STATE_TYPE_NLM_LOCK) {\n\t    if (related_state) {\n\t\tmemcpy(state-\u003estate_data.lock.openstate_key,\n\t\t\trelated_state-\u003estateid_other, OTHERSIZE);\n            } else {\n                memset(state-\u003estate_data.lock.openstate_key, 0, OTHERSIZE);\n            }\n        }",
+      "parentUuid": "2cc9cff4_ca6ab734",
       "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
