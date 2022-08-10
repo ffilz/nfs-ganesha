@@ -16,6 +16,24 @@
       "message": "This looks great and nicely avoids holding the lock too long.\n\nBy the way, you could have just pushed this as a new version of the old patch, that keeps the comment history together (one of the reasons we use Gerrithub for review).",
       "revId": "70827e849ecec53dfd1c933a338605ba11f77926",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7513123d_87fb0412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-08-10T00:01:23Z",
+      "side": 1,
+      "message": "Thanks for review. I also want to push a new version of the old path. But I accidentally deleted the origin branch in my local, so I create a new branch in local, when I push the new branch, it generated a new patch. Can I fetch the origin branch of old patch from Gerrithub? Then I can submit this as new commit of the old branch.",
+      "parentUuid": "8b773654_7037ad98",
+      "revId": "70827e849ecec53dfd1c933a338605ba11f77926",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
