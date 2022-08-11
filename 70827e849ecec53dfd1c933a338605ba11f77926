@@ -34,6 +34,24 @@
       "parentUuid": "8b773654_7037ad98",
       "revId": "70827e849ecec53dfd1c933a338605ba11f77926",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7cd01d_6d3184f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-11T15:37:09Z",
+      "side": 1,
+      "message": "Yes, you could fetch the original branch (use the Download link near the top of the change page on Gerrithub).\n\nBut actually ALL you need to do in a case like this is copy the Change-Id: from the original commit message when you create the new patch in the new branch. You may have to overwrite it.",
+      "parentUuid": "7513123d_87fb0412",
+      "revId": "70827e849ecec53dfd1c933a338605ba11f77926",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
