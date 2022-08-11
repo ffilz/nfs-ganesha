@@ -143,6 +143,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba556e46_6348a972",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-11T15:33:46Z",
+      "side": 1,
+      "message": "Hmm, good point.\n\nI\u0027m actually re-working the fsal_fd stuff for async because we need to protect an fd across a async/non-blocking I/O that will have a completion call back on another thread. It will also improve protection of the fd I believe and at that point, once we actually hand out an fd, it\u0027s protected until the I/O operation is complete. So a racing close would then block on completion of the I/O which is appropriate.\n\nHmm, with the current design, we can\u0027t defer the dec ref on the openstate until the I/O is complete because we don\u0027t have a call on completion... My new design DOES include such a call...",
+      "parentUuid": "89e5b9b1_18593031",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab3301f_f3cd1212",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1818,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-11T15:33:46Z",
+      "side": 1,
+      "message": "Oh, and crud... we don\u0027t hold the lock either... :-(\n\nSo yes, we have iffy code here...\n\nMaybe my redesign of fsal_fd needs to go in as a bug fix. Here\u0027s one of the patches - see the other related patches also:\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/531877",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2cc9cff4_ca6ab734",
         "filename": "src/include/FSAL/fsal_commonlib.h",
         "patchSetId": 9
@@ -172,6 +207,24 @@
       "side": 1,
       "message": "What about the following change, it\u0027s equal to the origin code. I\u0027m not sure\nwhether it\u0027s safe to remove STATE_TYPE_NLM_LOCK.\n\tif (state_type \u003d\u003d STATE_TYPE_LOCK || state_type \u003d\u003d STATE_TYPE_NLM_LOCK) {\n\t    if (related_state) {\n\t\tmemcpy(state-\u003estate_data.lock.openstate_key,\n\t\t\trelated_state-\u003estateid_other, OTHERSIZE);\n            } else {\n                memset(state-\u003estate_data.lock.openstate_key, 0, OTHERSIZE);\n            }\n        }",
       "parentUuid": "2cc9cff4_ca6ab734",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9141802b_3c28cde5",
+        "filename": "src/include/FSAL/fsal_commonlib.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-11T15:33:46Z",
+      "side": 1,
+      "message": "Oh, I see the issue...\n\nBUT - note that related state is ONLY every looked up for NFSv4...\n\nYou don\u0027t need to initialize to all zero because the state was allocated with calloc.\n\nSo hmm, really the only test you need is if related_state is non-NULL, don\u0027t even need the the test for state_type...",
+      "parentUuid": "6e4565a1_32791ca6",
       "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
