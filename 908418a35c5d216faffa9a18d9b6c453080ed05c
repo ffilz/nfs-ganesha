@@ -616,6 +616,24 @@
       "parentUuid": "16627a8e_a98ed87a",
       "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f776f1_b910b78a",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-08-14T23:38:02Z",
+      "side": 1,
+      "message": "Thanks for clarifying. I moved this to MainNFSD/nfs_main.c and used nfs_param.core_param.rpc.ioq_thrd_{min,max} as the number of threads in the pool.",
+      "parentUuid": "08be496e_878ff3f6",
+      "revId": "908418a35c5d216faffa9a18d9b6c453080ed05c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
