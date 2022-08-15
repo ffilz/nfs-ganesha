@@ -16,6 +16,74 @@
       "message": "Looks reasonable",
       "revId": "d21cd722c5713f50d103ea56f0297915ffae8a6c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78cbc8fd_40afbac4",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 17
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-15T16:04:28Z",
+      "side": 1,
+      "message": "Please also add to src/doc/man/ganesha-core-config.rst",
+      "revId": "d21cd722c5713f50d103ea56f0297915ffae8a6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0754973b_3f240ea6",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-15T16:04:28Z",
+      "side": 1,
+      "message": "Go ahead and add a , at the end so future additions just insert a new line",
+      "revId": "d21cd722c5713f50d103ea56f0297915ffae8a6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8aa9fb_d8792dfc",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1622,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-15T16:04:28Z",
+      "side": 1,
+      "message": "Go ahead and add a , at the end so future additions just insert a new line",
+      "revId": "d21cd722c5713f50d103ea56f0297915ffae8a6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533067d1_a3bc3e29",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-15T16:04:28Z",
+      "side": 1,
+      "message": "Copyright probably should be 2022?",
+      "revId": "d21cd722c5713f50d103ea56f0297915ffae8a6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
