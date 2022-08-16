@@ -598,6 +598,8 @@ void nfs4_op_destroy_clientid_Free(nfs_resop4 *);
 void nfs4_op_reclaim_complete_Free(nfs_resop4 *);
 
 void compound_data_Free(compound_data_t *);
+bool get_nfs4_operations(compound_data_t *data, uint32_t operations_len,
+	char* operations);
 bool xdr_COMPOUND4res_extended(XDR *xdrs, struct COMPOUND4res_extended **objp);
 
 /* Pseudo FS functions */
