@@ -44,6 +44,7 @@
 #include "export_mgr.h"
 #include "nfs_creds.h"
 #include "pnfs_utils.h"
+#include <time.h>
 
 #ifdef USE_LTTNG
 #include "gsh_lttng/nfs_rpc.h"
@@ -929,6 +930,21 @@ enum nfs_req_result process_one_op(compound_data_t *data, nfsstat4 *status)
 	return result;
 }
 
+void set_slot_last_req(compound_data_t *data)
+{
+	if (!get_nfs4_operations(data, NFS41_COMPOUND_OPERATIONS_LEN,
+		data->slot->last_req.operations)) {
+		return;
+	}
+
+	data->slot->last_req.xid = data->req->rq_msg.rm_xid;
+	data->slot->last_req.seq_id = data->sequence;
+	struct timespec curr_time;
+	now(&curr_time);
+	data->slot->last_req.finish_time_ms = curr_time.tv_sec * 1000 +
+		curr_time.tv_nsec / 1000000;
+}
+
 void complete_nfs4_compound(compound_data_t *data, int status,
 			    enum nfs_req_result result)
 {
@@ -958,7 +974,7 @@ void complete_nfs4_compound(compound_data_t *data, int status,
 		 * is pointed to by data->cached_result).
 		 */
 		data->slot->cached_result = data->res->res_compound4_extended;
-
+		set_slot_last_req(data);
 		/* Take a reference to indicate that this reply is cached. */
 		atomic_inc_int32_t(&data->slot->cached_result->res_refcnt);
 	} else if (data->minorversion > 0 &&
@@ -978,7 +994,7 @@ void complete_nfs4_compound(compound_data_t *data, int status,
 		/* Allocate (and zero) a new COMPOUND4res_extended */
 		data->slot->cached_result =
 			gsh_calloc(1, sizeof(*data->slot->cached_result));
-
+		set_slot_last_req(data);
 		/* Take initial reference to response. */
 		data->slot->cached_result->res_refcnt = 1;
 
@@ -1110,6 +1126,52 @@ static enum xprt_stat nfs4_compound_resume(struct svc_req *req)
 	nfs_rpc_complete_async_request(reqdata, NFS_REQ_OK);
 
 	return XPRT_IDLE;
+}
+
+/**
+ *
+ * @brief get the operations of compound, separated by comma
+ *
+ *  @param[in]  data            Compound request's data
+ *  @param[in]  operations_len  max length of all operations
+ *  @param[out] operations      all operations separated by comma
+ *
+ * @retval true on success.
+ * @retval false on failure.
+ */
+bool get_nfs4_operations(compound_data_t *data, uint32_t operations_len,
+	char* operations)
+{
+	const uint32_t argarray_len = data->argarray_len;
+	/* Array of op arguments */
+	nfs_argop4 * const argarray = data->argarray;
+	uint32_t start = 0, i = 0, opname_len = 0;
+
+	if (argarray_len == 0) {
+		return false;
+	}
+
+	for (i = 0; i < argarray_len; i++) {
+		nfs_argop4 *thisarg = &argarray[i];
+
+		const char *opname = nfsop4_to_str(thisarg->argop);
+		opname_len = strlen(opname);
+		if (start + opname_len + 1 >= operations_len) {
+			return false;
+		}
+
+		memcpy(operations + start, opname, opname_len);
+		start += opname_len;
+		operations[start] = ',';
+		start += 1;
+	}
+
+	if (start >= operations_len) {
+		return false;
+	}
+
+	operations[start] = '\0';
+	return true;
 }
 
 /**

@@ -131,6 +131,23 @@ extern hash_table_t *ht_session_id;
  */
 #define NFS41_NB_SLOTS_DEF 64
 
+
+/**
+ * @brief Default size of all operations in one compound
+ */
+#define NFS41_COMPOUND_OPERATIONS_LEN 200
+
+/**
+ * @brief the simple info of request
+ */
+
+struct nfs41_cached_req {
+	char operations[NFS41_COMPOUND_OPERATIONS_LEN];
+	uint32_t xid;
+	sequenceid4 seq_id;
+	uint64_t finish_time_ms;
+};
+
 /**
  * @brief Members in the slot table
  */
@@ -141,6 +158,7 @@ typedef struct nfs41_session_slot__ {
 	struct COMPOUND4res_extended *cached_result;	/*< NFv41: pointer to
 							   cached RPC result in
 							   a session's slot */
+	struct nfs41_cached_req last_req; /*< Last request of the slot */
 } nfs41_session_slot_t;
 
 /**
