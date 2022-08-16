@@ -36,6 +36,7 @@
  */
 
 #include "config.h"
+#include "nfs_convert.h"
 #include "nfs_core.h"
 #include "nfs_proto_functions.h"
 #include "sal_functions.h"
@@ -109,6 +110,53 @@ int display_session(struct display_buffer *dspbuf, nfs41_session_t *session)
 
 	if (b_left > 0)
 		b_left = display_session_id(dspbuf, session->session_id);
+
+	if (b_left > 0)
+		b_left = display_cat(dspbuf, "}");
+
+	return b_left;
+}
+
+/**
+ * @brief Display a compound request's operations
+ *
+ * @param[in]  dspbuf      The key to display
+ * @param[in]  opcodes     The array of opcode belongs to one compound
+ * @param[in]  opcodes_len The number of opcode belongs to one compound
+ *
+ * @return Length of output string.
+ */
+
+int display_nfs4_operations(struct display_buffer *dspbuf, nfs_opnum4 *opcodes,
+	uint32_t opcode_num)
+{
+	uint32_t i = 0, opname_len;
+	const char *opname = NULL;
+
+	int b_left = display_cat(dspbuf, "nfs4 operations {");
+
+	while (b_left > 0 && i < opcode_num) {
+		if (i > 0)
+			b_left = display_cat(dspbuf, ",");
+
+		opname = nfsop4_to_str(opcodes[i]);
+		opname_len = strlen(opname);
+
+		/* 5 means length of ",..}" plus length of '\0' */
+		if (i < opcode_num - 1 && b_left < opname_len + 5) {
+			b_left = display_cat(dspbuf, "..");
+			break;
+		}
+
+		/* 2 means length of "}" plus length of '\0' */
+		if (i == opcode_num - 1 && b_left < opname_len + 2) {
+			b_left = display_cat(dspbuf, "..");
+			break;
+		}
+
+		b_left = display_cat(dspbuf, opname);
+		i++;
+	}
 
 	if (b_left > 0)
 		b_left = display_cat(dspbuf, "}");
