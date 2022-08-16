@@ -34,6 +34,24 @@
       "parentUuid": "41375d71_679c169e",
       "revId": "587c2b84b06868851ceb19e98e3882dfbb11c445",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f494104_366b5a85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019791
+      },
+      "writtenOn": "2022-08-16T13:19:42Z",
+      "side": 1,
+      "message": "Maybe we can use the main opcode(we need to decode it from the request message) as the identifier of the request, rather than the string operations.",
+      "parentUuid": "dc042234_d6ba9d5c",
+      "revId": "587c2b84b06868851ceb19e98e3882dfbb11c445",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
