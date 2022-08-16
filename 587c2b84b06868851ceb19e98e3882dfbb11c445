@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41375d71_679c169e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2022-08-16T11:56:20Z",
+      "side": 1,
+      "message": "This change seems suspicious. It looks expensive, introduces linear time complexity in multiple paths, iiuc.  Then it crashes ganesha because it guesses that a client has misbehaved?  I think this needs much broader discussion, but I would not be inclined to accept this change.",
+      "revId": "587c2b84b06868851ceb19e98e3882dfbb11c445",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
