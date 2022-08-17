@@ -16,6 +16,23 @@
       "message": "A few more changes I caught while testing:\n1. Updates to the build procedure. Please check my style in CMakeLists.txt files.\n2. Accounting for hit rates in MDCache for getattr and lookup. I consistently use \"getattr\" as the function name in monitoring, not \"getattrs\".\n",
       "revId": "0a697d893d1408d3e3153d40ff0c8bf0e40ebd04",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea78f7de_206a5f4c",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-08-17T13:33:46Z",
+      "side": 1,
+      "message": "Rather than: \nset()\ngoption()\n\nit should be:\ngoption()\ngopt_test()\n\nLook at any of the USE_FSAL_* for examples, or cmake/goption.cmake for docs.",
+      "revId": "0a697d893d1408d3e3153d40ff0c8bf0e40ebd04",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
