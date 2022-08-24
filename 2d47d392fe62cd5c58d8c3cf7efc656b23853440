@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7b58665_4a39aa6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-08-24T15:57:58Z",
+      "side": 1,
+      "message": "Instead of incurring string operations cost of every request, could we just retain an array (sized to allow the max number of ops in a compound) of all the op numbers. THEN for logging, convert them to a string (and use the functions in display.h to limit the length of the string). There are conditionals to check for log level which should be used before doing work on constructing the log message.\n\nAlso let\u0027s use LogEvent. This is NOT reporting an error in Ganesha but a client error.",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
