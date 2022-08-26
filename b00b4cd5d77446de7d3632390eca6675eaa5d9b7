@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca74762_7b672132",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-08-26T09:31:05Z",
+      "side": 1,
+      "message": "This is weird. I had the correct indentation in my client. Could be a git problem?",
+      "parentUuid": "b3b6d0f3_18b2c0d2",
+      "revId": "b00b4cd5d77446de7d3632390eca6675eaa5d9b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04f68f93_57e68142",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-08-26T09:16:01Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tmonitoring_worker_thread_min_increment(nfs_param.core_param.rpc.ioq_thrd_min);",
+      "revId": "b00b4cd5d77446de7d3632390eca6675eaa5d9b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeea508e_2055909d",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-08-26T09:31:05Z",
+      "side": 1,
+      "message": "This is weird. I had the correct indentation in my client. Could be a git problem?",
+      "parentUuid": "04f68f93_57e68142",
       "revId": "b00b4cd5d77446de7d3632390eca6675eaa5d9b7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
