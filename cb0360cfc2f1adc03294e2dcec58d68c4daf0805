@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adff757a_4728fdbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-08-26T14:24:00Z",
+      "side": 1,
+      "message": "Okay, now I\u0027m really confused.  install_git_hooks.sh is trivially simple, and doesn\u0027t appear to use either [[ or OSTYPE.  I\u0027m far from an expert on POSIX shells (although I use bash a lot), but it doesn\u0027t appear to be non-compliant, and it passes \"shellcheck -s sh\" for me.  I don\u0027t see a need for this change.",
+      "revId": "cb0360cfc2f1adc03294e2dcec58d68c4daf0805",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
