@@ -16,6 +16,210 @@
       "message": "Instead of incurring string operations cost of every request, could we just retain an array (sized to allow the max number of ops in a compound) of all the op numbers. THEN for logging, convert them to a string (and use the functions in display.h to limit the length of the string). There are conditionals to check for log level which should be used before doing work on constructing the log message.\n\nAlso let\u0027s use LogEvent. This is NOT reporting an error in Ganesha but a client error.",
       "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd100043_1b968933",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct timespec curr_time;\n+\tnow(\u0026curr_time);",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c6fba30_950f8232",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "ERROR: \"foo* bar\" should be \"foo *bar\"\n+\tchar* operations)",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8766dd8_0cee9c42",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (argarray_len \u003d\u003d 0) {\n+\t\treturn false;\n+\t}",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e02ce702_a230d730",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tconst char *opname \u003d nfsop4_to_str(argarray[i].argop);\n+\t\topname_len \u003d strlen(opname);",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a68121_eb07b401",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (start + opname_len + 1 \u003e\u003d operations_len) {\n+\t\t\treturn false;\n+\t\t}",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2306237_b269bd58",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (start \u003e\u003d operations_len) {\n+\t\treturn false;\n+\t}",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4dc00eb_a754d5fd",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (slot-\u003elast_req.seq_id !\u003d req_seq_id) {\n+\t\treturn;\n+\t}",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb429bab_6d09df8a",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (strcmp(operations, slot-\u003elast_req.operations) \u003d\u003d 0) {\n+\t\treturn;\n+\t}",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af5f8e1_df8c90af",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Not a replay request, maybe caused by nfs-client\u0027s bug, \"\n+\t\t\"please try upgrade the nfs-client\u0027s kernel, \"",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1baafce_4df71ecc",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"please try upgrade the nfs-client\u0027s kernel, \"\n+\t\t\"slotid %\"PRIu32\" cached request operations %s seqid %\"PRIu32",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e43ec4_f06b06e3",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tcheck_replay_request(data, slot, arg_SEQUENCE4-\u003esa_sequenceid, slotid);",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8234bdff_7f6e91ff",
+        "filename": "src/include/nfs_proto_functions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-08-26T09:16:39Z",
+      "side": 1,
+      "message": "ERROR: \"foo* bar\" should be \"foo *bar\"\n+\tchar* operations);",
+      "revId": "2d47d392fe62cd5c58d8c3cf7efc656b23853440",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
