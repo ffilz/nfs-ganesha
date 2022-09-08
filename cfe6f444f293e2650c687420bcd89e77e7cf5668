@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "117a0623_ee208934",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T19:56:41Z",
+      "side": 1,
+      "message": "The NFS worker threads are actually managed by libntirpc not the fridge. The fridge just manages a handful of special purpose threads and the worker threads for 9P so that probably isn\u0027t what you want.",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d2b016_ed3d928a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T19:56:41Z",
+      "side": 1,
+      "message": "You probably want to add monitoring critical mdcache numbers like number of entries in use and number of open files (which will be changing...).",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f53ec9e6_a447c1bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T19:56:41Z",
+      "side": 1,
+      "message": "Note also this is something that will be saved for V5.0 (which we hope to have a much faster turn around than V4.0).",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e0fe9bf_d3a51b8b",
+        "filename": "src/include/log.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T19:56:41Z",
+      "side": 1,
+      "message": "Let\u0027s not add a component for a single message.",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cb8db8_2bd9abcd",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T19:56:41Z",
+      "side": 1,
+      "message": "I don\u0027t think we should add a new log component for a single message. This could be a COMPONENT_INIT message.",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
