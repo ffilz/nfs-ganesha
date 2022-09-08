@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5dde2ed8_e1d788d6",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Since this string could be long, please look at src/include/display.h which allow you to construct a long string safely and in an easy to read manner. Make get_nfs4_operations a \"display\" function. See display_session() for an example of such a function. Also, rename this function display_nfs4_operations()...\n\nNote that then if the array is long, it will give some portion of the array and then end with a \"..\" string indicating the string was truncated.\n\nOnce we have this, let\u0027s also have a Full_Debug message that prints out this for every request, there\u0027s liable to be some value to it for debugging... Do that in nfs4_compound.c so it\u0027s logged for 4.0 also.",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96573c28_6d11fd4c",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Please declare opcode_num here, our coding style is to not mix code and declarations.",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40249c75_94f4fae9",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Please move declarations only needed for the logging into the conditional block below.",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2df757e3_5cc23364",
         "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
         "patchSetId": 10
@@ -48,6 +99,60 @@
       "writtenOn": "2022-09-08T06:24:33Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t\"Not a replay request, maybe caused by nfs-client\u0027s bug, \"\n+\t\t\t\"please try upgrade the nfs-client\u0027s kernel, \"",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebc5f72_c56b54dc",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3199ba08_6ae154d3",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e867b462_2b29d457",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc70d978_adafc235",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b594c23_5bb05529",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df757e3_5cc23364",
       "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +208,60 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8975a7_2555a8ee",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1672ebd7_f860e46b",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bbe5ec1_4ae5a0f5",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47554f7c_0695bb74",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14fd939_11ba49e1",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd3ab02d_f6a701f1",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a996fbf1_5e84a538",
@@ -150,6 +309,60 @@
       "writtenOn": "2022-09-08T06:24:33Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t\"slotid %\"PRIu32\" cached request operations %s \"\n+\t\t\t\"seqid %\"PRIu32\" xid %\"PRIu32\" finish time %\"PRIu64",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e7498eb_c299e237",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a996fbf1_5e84a538",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "918fa7dd_9a82a442",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0bff675_2669f30e",
+      "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11c7c952_12e091c5",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-08T16:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a24abfb9_6bcb5d36",
       "revId": "5dd144789f804f28702949b67ed579de6bc9266d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
