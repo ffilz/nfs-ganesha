@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c611d53_429078da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-09-08T23:31:18Z",
+      "side": 1,
+      "message": "Should I remove this completely, or try to make it work with libntirpc?\n\nYears ago, I was tuning the NFS kernel server and found that the sweet spot (maximum performance / minimum jitter) was 8 threads / vcpu. It would be nice to be able to do the same for Ganesha.",
+      "parentUuid": "117a0623_ee208934",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12d2b016_ed3d928a",
         "filename": "/COMMIT_MSG",
         "patchSetId": 25
@@ -49,6 +67,24 @@
       "writtenOn": "2022-09-08T19:56:41Z",
       "side": 1,
       "message": "You probably want to add monitoring critical mdcache numbers like number of entries in use and number of open files (which will be changing...).",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3bca0f6_e86a98a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-09-08T23:31:18Z",
+      "side": 1,
+      "message": "Sure, but can we do that in a separate, smaller change?",
+      "parentUuid": "12d2b016_ed3d928a",
       "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +141,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d80d0e16_a6d7bed4",
+        "filename": "src/include/log.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-09-08T23:31:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e0fe9bf_d3a51b8b",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82cb8db8_2bd9abcd",
@@ -133,6 +187,24 @@
         "id": 1003571
       },
       "writtenOn": "2022-09-08T22:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82cb8db8_2bd9abcd",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20e7d1d7_204e9010",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-09-08T23:31:18Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "82cb8db8_2bd9abcd",
