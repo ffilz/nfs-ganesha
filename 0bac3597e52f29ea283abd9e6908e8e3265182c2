@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f5fb4b_7dd90056",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-09T12:19:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\"Last request %s slotid %\"PRIu32\" seqid %\"PRIu32\" xid %\"PRIu32",
+      "revId": "0bac3597e52f29ea283abd9e6908e8e3265182c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c698c725_8cc84118",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-09T12:19:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\"Current request %s slotid %\"PRIu32\" seqid %\"PRIu32\" xid %\"PRIu32,",
+      "revId": "0bac3597e52f29ea283abd9e6908e8e3265182c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63e1f47f_8fd17252",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-09T12:19:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// 5 means length of \",..}\" plus length of \u0027\\0\u0027",
+      "revId": "0bac3597e52f29ea283abd9e6908e8e3265182c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2035a67e_1eab1bb4",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-09T12:19:29Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// 2 means length of \"}\" plus length of \u0027\\0\u0027",
+      "revId": "0bac3597e52f29ea283abd9e6908e8e3265182c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
