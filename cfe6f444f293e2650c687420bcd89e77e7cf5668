@@ -90,6 +90,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "197e1d3d_e6c0a689",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-09T15:49:24Z",
+      "side": 1,
+      "message": "Sure, we can do thread count as a separate patch. ntirpc doesn\u0027t currently have any control mechanism other than through Ganesha. We could just add a function to fetch the value of the thread counter.",
+      "parentUuid": "c9f5b305_e5b7476e",
+      "revId": "cfe6f444f293e2650c687420bcd89e77e7cf5668",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12d2b016_ed3d928a",
