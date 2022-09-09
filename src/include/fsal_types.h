@@ -949,6 +949,13 @@ struct fsal_fd {
 		       PTHREAD_COND_INITIALIZER, \
 		       false }
 
+static inline void init_fsal_fd(struct fsal_fd *fsal_fd)
+{
+	memset(fsal_fd, 0, sizeof(*fsal_fd));
+	PTHREAD_MUTEX_init(&fsal_fd->work_mutex, NULL);
+	PTHREAD_COND_init(&fsal_fd->work_cond, NULL);
+}
+
 /**
  * @brief The ref counted share reservation state.
  *
