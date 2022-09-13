@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d8a383_45363be9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-13T15:42:43Z",
+      "side": 1,
+      "message": "The problem with this is that we will accept SM_NOTIFY from any client that has an IP address x.y.z.127 which isn\u0027t good.\n\nWe need to deal with the endian problem by making sure all IP addresses manipulated are in host byte order.",
+      "revId": "1401ecdb4f5120838db582334fd643934cb5b0c0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
