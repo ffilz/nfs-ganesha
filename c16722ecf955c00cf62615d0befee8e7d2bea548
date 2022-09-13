@@ -159,6 +159,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "219732d7_8b1624b8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-13T17:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba556e46_6348a972",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fab3301f_f3cd1212",
@@ -172,6 +190,24 @@
       "writtenOn": "2022-08-11T15:33:46Z",
       "side": 1,
       "message": "Oh, and crud... we don\u0027t hold the lock either... :-(\n\nSo yes, we have iffy code here...\n\nMaybe my redesign of fsal_fd needs to go in as a bug fix. Here\u0027s one of the patches - see the other related patches also:\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/531877",
+      "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "391afc2f_692868ba",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1818,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-13T17:48:17Z",
+      "side": 1,
+      "message": "My redesign is too big to just include as a bug fix, but I intend to push V5.0 much sooner, probably January 2023.",
+      "parentUuid": "fab3301f_f3cd1212",
       "revId": "c16722ecf955c00cf62615d0befee8e7d2bea548",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
