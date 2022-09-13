@@ -69,6 +69,23 @@
       "parentUuid": "4b77377e_7cddb671",
       "revId": "2eabf230fec9407facd3742ac41cdff0ab67c32a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4979904_9cc7ebee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-13T17:57:18Z",
+      "side": 1,
+      "message": "See https://docs.google.com/document/d/183s5kpCotohJOhpFUhRZGJA2HaLE2vvUwQjpsvMcgYo/edit?usp\u003dsharing\n\nI am in the process of redesigning the LRU to address this issue. The redesign will go into V5.0 and there may be a case for back port, though not in the V4-stable branch.",
+      "revId": "2eabf230fec9407facd3742ac41cdff0ab67c32a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
