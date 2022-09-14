@@ -16,6 +16,40 @@
       "message": "Daniel, I\u0027d like a second opinion on this. I think we could take it as an interim fix.",
       "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8f66ce_fb30659f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-09-14T12:49:51Z",
+      "side": 1,
+      "message": "Generally seems plausible.  One issue, though.",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e81aa0_2a1a9ce3",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1796,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-09-14T12:49:51Z",
+      "side": 1,
+      "message": "We cannot reference related_fd after dropping the ref on openstate, since related_fd is a pointer into the memory of openstate.  Moving the dec_state_t_ref() later is complicated, but necessary.  Or maybe make a copy of it like is done below for out_fd?",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
