@@ -16,6 +16,24 @@
       "message": "The problem with this is that we will accept SM_NOTIFY from any client that has an IP address x.y.z.127 which isn\u0027t good.\n\nWe need to deal with the endian problem by making sure all IP addresses manipulated are in host byte order.",
       "revId": "1401ecdb4f5120838db582334fd643934cb5b0c0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca805575_e12ba5d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-09-14T05:44:51Z",
+      "side": 1,
+      "message": "How about comparing bytes similar to ipv6, we did men copy sockaddr to local buffer, started hitting issue.",
+      "parentUuid": "34d8a383_45363be9",
+      "revId": "1401ecdb4f5120838db582334fd643934cb5b0c0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
