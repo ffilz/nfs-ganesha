@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15dc588a_abd751fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-14T18:19:41Z",
+      "side": 1,
+      "message": "This is troublesome.\n\nMaybe we need to add a reference for the openstate instead. Then openstate will last as long as any associated lockstate.\n\nAlso we should try harder to detect this condition because a lockstate shouldn\u0027t exist if it\u0027s openstate is being closed.",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27e81aa0_2a1a9ce3",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 11
@@ -48,6 +65,24 @@
       "writtenOn": "2022-09-14T12:49:51Z",
       "side": 1,
       "message": "We cannot reference related_fd after dropping the ref on openstate, since related_fd is a pointer into the memory of openstate.  Moving the dec_state_t_ref() later is complicated, but necessary.  Or maybe make a copy of it like is done below for out_fd?",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a5d429_4e86338f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1796,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-14T18:19:41Z",
+      "side": 1,
+      "message": "Yea, that\u0027s not going to work...\n\nAnd we can\u0027t just make a copy, because if openstate is freed, the fd will also be closed so making a copy won\u0027t work.",
+      "parentUuid": "27e81aa0_2a1a9ce3",
       "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
