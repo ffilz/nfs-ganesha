@@ -33,6 +33,24 @@
       "message": "This last check against 0x01 isn\u0027t correct.  The whole of 127/8 is loopback, not just 127.0.0.1, to all you need to check is the first byte.",
       "revId": "e1cbc8e8a90db1b24c3b97fa3382d102cf54870d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e64f7fb4_a9e48a93",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-14T18:57:21Z",
+      "side": 1,
+      "message": "Oh, right, yea, only need to check [0] for 0x7f, don\u0027t need to check the other bytes... This will only accept 127.0.0.1 (which PROBABLY is fine...). We should match the IPv6 check...",
+      "parentUuid": "b12f8bf9_671f6a65",
+      "revId": "e1cbc8e8a90db1b24c3b97fa3382d102cf54870d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
