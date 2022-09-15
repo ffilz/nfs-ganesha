@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2402ad82_9c653da3",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-09-15T20:29:55Z",
+      "side": 1,
+      "message": "Hmm, that doesn\u0027t sit right for FSAL_RGW to go peer into the internals of FSAL_MDCACHE... Yet I\u0027m not quite sure the best way to do this...",
+      "revId": "d9a589e2fd83f38f3b9010c86bfffbf9b963f338",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
