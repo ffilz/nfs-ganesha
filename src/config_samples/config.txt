@@ -636,6 +636,12 @@ MDCACHE / CACHEINODE
 	Use_Getattr_Directory_Invalidation(bool, default false)
 
 	Dir_Chunk(uint32, range 0 to UINT32_MAX, default 128)
+		* Dir_Chunk is the size of per-directory dirent cache.
+		  Set to 0 means the directory chunking does not enable.
+		  Most FSAL modules have better performance with Dir_Chunk.
+		  Except for FSAL_CEPH, it recommends setting Dir_Chunk to 0.
+		  For FSAL_RGW you must enable the Dir_Chunk because FSAL_RGW
+		  needs it to list directory as POSIX style.
 
 	Detached_Mult(uint32, range 1 to UINT32_MAX, default 1)
 
