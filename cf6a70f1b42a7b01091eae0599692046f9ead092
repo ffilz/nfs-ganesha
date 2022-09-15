@@ -16,6 +16,24 @@
       "message": "Can you look at https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/540556 and let me know if we actually still need this patch?",
       "revId": "cf6a70f1b42a7b01091eae0599692046f9ead092",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b1dcec5_7ab96606",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-09-15T15:09:52Z",
+      "side": 1,
+      "message": "We don\u0027t need this patch if there is no state_exp, I have one comment on https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/540556, can you check if its valid?",
+      "parentUuid": "ad91b184_93910177",
+      "revId": "cf6a70f1b42a7b01091eae0599692046f9ead092",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
