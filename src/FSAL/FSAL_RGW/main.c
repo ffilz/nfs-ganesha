@@ -39,6 +39,7 @@
 #include "abstract_mem.h"
 #include "nfs_exports.h"
 #include "export_mgr.h"
+#include "../Stackable_FSALs/FSAL_MDCACHE/mdcache_ext.h"
 
 static const char *module_name = "RGW";
 
@@ -202,6 +203,17 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	int rgw_status;
 	/* True if we have called fsal_export_init */
 	bool initialized = false;
+
+	/* dir_chunk is mandatory for FSAL_RGW.
+	 * Because of that, we would check it
+	 * before creating the FSAL_RGW module
+	 */
+	if (mdcache_param.dir.avl_chunk == 0) {
+		LogCrit(COMPONENT_FSAL,
+			"RGW module needs enable the Dir_Chunk of MDCACHE");
+		status = ERR_FSAL_INVAL;
+		return status;
+	}
 
 	/* once */
 	if (!RGWFSM.rgw) {
