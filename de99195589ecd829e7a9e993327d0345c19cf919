@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff83ff8_e440e0f0",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-15T10:00:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogCrit(COMPONENT_FSAL, \"RGW module need enable the Dir_Chunk of MDCACHE\");",
+      "revId": "de99195589ecd829e7a9e993327d0345c19cf919",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
