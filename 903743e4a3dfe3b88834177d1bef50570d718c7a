@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e8e03c_cb701ecd",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-15T00:58:22Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!open_correct(fsal_fd-\u003eopenflags, openflags)) {\n+\t\tstatus \u003d fsal_reopen_fd(obj_hdl, openflags, fsal_fd);\n+\t}",
+      "revId": "903743e4a3dfe3b88834177d1bef50570d718c7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b62c12_81f80288",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-15T00:58:22Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (FSAL_IS_ERROR(status)) {\n+\t\t\tgoto out;\n+\t\t}",
+      "revId": "903743e4a3dfe3b88834177d1bef50570d718c7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "251b8468_dfe550a0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2402,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-15T00:58:22Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// interesting question - what do we do if openstate",
+      "revId": "903743e4a3dfe3b88834177d1bef50570d718c7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fceaf84_101de9e9",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2403,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-15T00:58:22Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// is being re-opened??? I think we may also need to",
+      "revId": "903743e4a3dfe3b88834177d1bef50570d718c7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab89aa3a_f47b1647",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2404,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-15T00:58:22Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// start I/O on the open state while we do this",
+      "revId": "903743e4a3dfe3b88834177d1bef50570d718c7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cfbb09_f9a91d5d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2405,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-15T00:58:22Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// reopen of the lock state",
+      "revId": "903743e4a3dfe3b88834177d1bef50570d718c7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
