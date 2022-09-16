@@ -16,6 +16,24 @@
       "message": "Hmm, that doesn\u0027t sit right for FSAL_RGW to go peer into the internals of FSAL_MDCACHE... Yet I\u0027m not quite sure the best way to do this...",
       "revId": "d9a589e2fd83f38f3b9010c86bfffbf9b963f338",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de3de51_790b0f6d",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-09-16T13:45:12Z",
+      "side": 1,
+      "message": "I\u0027d honestly prefer to only document, rather than a layer violation such as this.  The only alternative I can think of is to put a check in mdcache itself.  It may be possible to do it sanely.",
+      "parentUuid": "2402ad82_9c653da3",
+      "revId": "d9a589e2fd83f38f3b9010c86bfffbf9b963f338",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
