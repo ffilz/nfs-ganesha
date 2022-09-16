@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05e71c32_9a60d169",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-16T01:59:04Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (e_acl) {\n+\t\tacl_free((void *)e_acl);\n+\t}",
+      "revId": "27f388a29550e02947064d185200e807fc1afccc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5cced72_b1546f71",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-16T01:59:04Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (i_acl) {\n+\t\tacl_free((void *)i_acl);\n+\t}",
+      "revId": "27f388a29550e02947064d185200e807fc1afccc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4940bab_b82e03e6",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-16T01:59:04Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!FSAL_TEST_MASK(request_mask, ATTR_ACL) || !attrib) {\n+\t\treturn fsalstat(ERR_FSAL_NO_ERROR, 0);\n+\t}",
+      "revId": "27f388a29550e02947064d185200e807fc1afccc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f0203e_bfff4e18",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-16T01:59:04Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!is_dir) {\n+\t\tgoto out;\n+\t}",
+      "revId": "27f388a29550e02947064d185200e807fc1afccc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d7e001_25d1839c",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-09-16T01:59:04Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (acl) {\n+\t\tacl_free((void *)acl);\n+\t}",
+      "revId": "27f388a29550e02947064d185200e807fc1afccc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
