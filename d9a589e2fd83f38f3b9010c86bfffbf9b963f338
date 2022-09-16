@@ -34,6 +34,24 @@
       "parentUuid": "2402ad82_9c653da3",
       "revId": "d9a589e2fd83f38f3b9010c86bfffbf9b963f338",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d72a18ab_33719b74",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2022-09-16T14:09:23Z",
+      "side": 1,
+      "message": "Hi dang, thanks for your suggestions.\nSo, we prefer to keep the sub-layer instead break it.\nThen try to document and give some warning to user to know the potential risk.\n\nThat\u0027s right? What do you think?\n\nFor me, the error when we do not set up dir_chunk looks harmless with data.\nSo, maybe avoid to breaking a layer is more suitable. Thanks for dang\u0027s opinions.",
+      "parentUuid": "6de3de51_790b0f6d",
+      "revId": "d9a589e2fd83f38f3b9010c86bfffbf9b963f338",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
