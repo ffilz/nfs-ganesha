@@ -104,6 +104,24 @@
       "message": "Sometimes I wish the logical inverse was \"not\" rather than \"!\" for easier reading... It\u0027s easy to miss the !\n\nWhat it we renamed it from check to check_fail?",
       "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "188cb639_cb2a55d5",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2022-09-19T09:55:48Z",
+      "side": 1,
+      "message": "\u003e Sometimes I wish the logical inverse was \"not\" rather than \"!\" for easier reading... It\u0027s easy to miss the !\n\u003e \n\u003e What it we renamed it from check to check_fail?\n\nSorry, I missed this reply...\n\nI think the intent of check() is noble, so the name is good.  That is, I don\u0027t like check_fail()...  :-)\n\nAlthough the \u0027!\u0027 gets a bit hidden, that\u0027s a line of code that isn\u0027t going to be read often.\n\nOne alternative that could make the code clearer is to have typedef for the different config_block member functions.  Then this code could read:\n\n  config_block_check_fn check;\n  ...\n  check \u003d item-\u003eu.blk.check;\n  if (check \u0026\u0026 !check(param_struct, err_type) {\n    goto err_out;\n  }\n\nThat is much more readable and the ! has little chance of getting lost in the noise.\n\nAlternatively, could rename check() to is_invalid().  I think that would make sense...",
+      "parentUuid": "dcf10adc_5b428b7c",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
