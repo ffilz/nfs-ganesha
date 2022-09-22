@@ -95,7 +95,11 @@ int _9p_lopen(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 					  _9p_tools_errno(fsal_status),
 					  plenout, preply);
 
-		atomic_inc_uint32_t(&pfid->opens);
+		if (atomic_inc_uint32_t(&pfid->opens) == 1) {
+			/* Get a long term reference on first open */
+			pfid->ppentry->obj_ops->get_long_term_ref(
+								pfid->ppentry);
+		}
 	}
 
 	/* Build the reply */
