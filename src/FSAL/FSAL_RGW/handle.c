@@ -426,12 +426,10 @@ fsal_status_t rgw_fsal_setattr2(struct fsal_obj_handle *obj_hdl,
 
 	fsal_status_t status = {0, 0};
 	int rc = 0;
-	bool has_lock = false;
-	bool closefd = false;
+	bool has_share = false;
 	struct stat st;
 	/* Mask of attributes to set */
 	uint32_t mask = 0;
-	bool reusing_open_state_fd = false;
 
 	struct rgw_export *export =
 		container_of(op_ctx->fsal_export, struct rgw_export, export);
@@ -467,20 +465,30 @@ fsal_status_t rgw_fsal_setattr2(struct fsal_obj_handle *obj_hdl,
 				"Setting size on non-regular file");
 			return fsalstat(ERR_FSAL_INVAL, EINVAL);
 		}
+		if (state == NULL) {
+			PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
 
-		/* We don't actually need an open fd, we are just doing the
-		 * share reservation checking, thus the NULL parameters.
-		 */
-		status = fsal_find_fd(NULL, obj_hdl, NULL, &handle->share,
-				bypass, state, FSAL_O_WRITE, NULL, NULL,
-				&has_lock, &closefd, false,
-				&reusing_open_state_fd);
+			status = check_share_conflict(&handle->share,
+						      FSAL_O_WRITE, bypass);
 
-		if (FSAL_IS_ERROR(status)) {
-			LogFullDebug(COMPONENT_FSAL,
-				"fsal_find_fd status=%s",
-				fsal_err_txt(status));
-			goto out;
+			if (FSAL_IS_ERROR(status)) {
+				PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+
+				LogDebug(COMPONENT_FSAL,
+					 "check_share_conflict failed with %s",
+					 fsal_err_txt(status));
+
+				return status;
+			}
+
+			/* Take the share reservation now by updating the
+			 * counters.
+			 */
+			update_share_counters(&handle->share, FSAL_O_CLOSED,
+					      FSAL_O_WRITE);
+			has_share = true;
+
+			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 		}
 	}
 
@@ -574,8 +582,16 @@ fsal_status_t rgw_fsal_setattr2(struct fsal_obj_handle *obj_hdl,
 
  out:
 
-	if (has_lock)
+	if (has_share) {
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Release the share reservation now by updating the counters.
+		 */
+		update_share_counters(&handle->share, FSAL_O_WRITE,
+				      FSAL_O_CLOSED);
+
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	}
 
 	return status;
 }
@@ -1290,7 +1306,7 @@ fsal_status_t rgw_fsal_reopen2(struct fsal_obj_handle *obj_hdl,
 			PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
 
 			update_share_counters(&handle->share, openflags,
-					old_openflags);
+					      old_openflags);
 
 			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 		}
@@ -1550,8 +1566,8 @@ fsal_status_t rgw_fsal_close2(struct fsal_obj_handle *obj_hdl,
 			 */
 
 			update_share_counters(&handle->share,
-					handle->openflags,
-					FSAL_O_CLOSED);
+					      handle->openflags,
+					      FSAL_O_CLOSED);
 
 		}
 
