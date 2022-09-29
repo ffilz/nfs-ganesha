@@ -48,35 +48,88 @@
 #define STATE2FD(s) (&container_of(s, struct gpfs_state_fd, state)->gpfs_fd)
 extern uint64_t get_handle2inode(struct gpfs_file_handle *gfh);
 
-static fsal_status_t
-gpfs_open_func(struct fsal_obj_handle *obj_hdl, fsal_openflags_t openflags,
-		struct fsal_fd *fd)
+/**
+ * @brief G{PFS Function to open or reopen a fsal_fd.
+ *
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  openflags   New mode for open
+ * @param[out] fsal_fd     File descriptor that is to be used
+ *
+ * @return FSAL status.
+ */
+
+fsal_status_t gpfs_reopen_func(struct fsal_obj_handle *obj_hdl,
+			       fsal_openflags_t openflags,
+			       struct fsal_fd *fsal_fd)
 {
-	fsal_status_t status;
-	struct gpfs_fd *my_fd = (struct gpfs_fd *)fd;
+	fsal_status_t status, status2;
+	struct gpfs_fd *my_fd;
 	int posix_flags = 0;
+	int fd;
+
+	my_fd = container_of(fsal_fd, struct gpfs_fd, fsal_fd);
 
 	fsal2posix_openflags(openflags, &posix_flags);
 
-	status = GPFSFSAL_open(obj_hdl, posix_flags, &my_fd->fd);
+	LogFullDebug(COMPONENT_FSAL,
+		     "my_fd->fd = %d openflags = %x, posix_flags = %x",
+		     my_fd->fd, openflags, posix_flags);
+
+	status = GPFSFSAL_open(obj_hdl, posix_flags, &fd);
+
 	if (FSAL_IS_ERROR(status))
 		return status;
 
-	my_fd->openflags = FSAL_O_NFS_FLAGS(openflags);
-	LogFullDebug(COMPONENT_FSAL, "new fd %d", my_fd->fd);
+	if (my_fd->fd != -1) {
+		/* File was previously open, close old fd */
+		status2 = fsal_internal_close(my_fd->fd, NULL, 0);
+
+		if (FSAL_IS_ERROR(status2)) {
+			LogFullDebug(COMPONENT_FSAL,
+				     "close failed with %s",
+				     fsal_err_txt(status));
+
+			/** @todo - what to do about error here... */
+		}
+	}
+
+	/* Save the file descriptor, make sure we only save the
+	 * open modes that actually represent the open file.
+	 */
+	LogFullDebug(COMPONENT_FSAL,
+		     "fd = %d, new openflags = %x",
+		     fd, openflags);
+	if (fd == 0)
+		LogCrit(COMPONENT_FSAL,
+			"fd = %d, new openflags = %x",
+			fd, openflags);
+
+	my_fd->fd = fd;
+	my_fd->fsal_fd.openflags = FSAL_O_NFS_FLAGS(openflags);
 
 	return status;
 }
 
-static fsal_status_t
-gpfs_close_func(struct fsal_obj_handle *obj_hdl, struct fsal_fd *fd)
+/**
+ * @brief GPFS Function to close a fsal_fd.
+ *
+ * @param[in]  obj_hdl     File on which to operate
+ * @param[in]  fsal_fd     File handle to close
+ *
+ * @return FSAL status.
+ */
+
+fsal_status_t gpfs_close_func(struct fsal_obj_handle *obj_hdl,
+			      struct fsal_fd *fsal_fd)
 {
 	fsal_status_t status;
-	struct gpfs_fd *my_fd = (struct gpfs_fd *)fd;
+	struct gpfs_fd *my_fd;
+
+	my_fd = container_of(fsal_fd, struct gpfs_fd, fsal_fd);
 
 	status = fsal_internal_close(my_fd->fd, NULL, 0);
 	my_fd->fd = -1;
-	my_fd->openflags = FSAL_O_CLOSED;
+	my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
 
 	return status;
 }
@@ -185,14 +238,14 @@ open_by_handle(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	/* Close any old open file descriptor and update with the new
 	 * one. There shouldn't be any old open for state based call.
 	 */
-	if (my_fd->openflags != FSAL_O_CLOSED) {
+	if (my_fd->fsal_fd.openflags != FSAL_O_CLOSED) {
 		assert(my_fd->fd >= 3);
 		/* assert(state == NULL); */
 		(void)fsal_internal_close(my_fd->fd, NULL, 0);
 	}
 
 	my_fd->fd = fd;
-	my_fd->openflags = FSAL_O_NFS_FLAGS(openflags);
+	my_fd->fsal_fd.openflags = FSAL_O_NFS_FLAGS(openflags);
 
 	if (attrs_out && (createmode >= FSAL_EXCLUSIVE || truncated)) {
 		/* Refresh the attributes */
@@ -234,7 +287,7 @@ open_by_handle(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 
 	(void) fsal_internal_close(my_fd->fd, state->state_owner, 0);
 	my_fd->fd = -1;
-	my_fd->openflags = FSAL_O_CLOSED;
+	my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
 
  undo_share:
 	/* On error we need to release our share reservation
@@ -677,7 +730,7 @@ gpfs_reopen2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	/* Set up the new share so we can drop the lock and not have a
 	 * conflicting share be asserted, updating the share counters.
 	 */
-	update_share_counters(share, my_share_fd->openflags, openflags);
+	update_share_counters(share, my_share_fd->fsal_fd.openflags, openflags);
 
 	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 
@@ -690,21 +743,17 @@ gpfs_reopen2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		 * one over. Make sure no one is using the fd that we are
 		 * about to close!
 		 */
-		PTHREAD_RWLOCK_wrlock(&my_share_fd->fdlock);
-
 		fsal_internal_close(my_share_fd->fd, NULL, 0);
 
 		my_share_fd->fd = my_fd;
-		my_share_fd->openflags = FSAL_O_NFS_FLAGS(openflags);
-
-		PTHREAD_RWLOCK_unlock(&my_share_fd->fdlock);
+		my_share_fd->fsal_fd.openflags = FSAL_O_NFS_FLAGS(openflags);
 	} else {
 		/* We had a failure on open - we need to revert the share.
 		 * This can block over an I/O operation.
 		 */
 		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
 
-		update_share_counters(share, openflags, my_share_fd->openflags);
+		update_share_counters(share, openflags, my_share_fd->fsal_fd.openflags);
 
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 	}
@@ -715,73 +764,6 @@ gpfs_reopen2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		LogDebug(COMPONENT_FSAL, "Inode involved: %"PRIu64", error: %s",
 			get_handle2inode(gfh), msg_fsal_err(status.major));
 	}
-	return status;
-}
-
-fsal_status_t
-find_fd(int *fd, struct fsal_obj_handle *obj_hdl, bool bypass,
-	struct state_t *state, fsal_openflags_t openflags, bool *has_lock,
-	bool *closefd, bool open_for_locks)
-{
-	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
-	struct gpfs_fsal_obj_handle *myself;
-	struct gpfs_fd temp_fd = {
-			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, -1 };
-	struct gpfs_fd *out_fd = &temp_fd;
-	int posix_flags;
-	bool reusing_open_state_fd = false;
-
-	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
-
-	fsal2posix_openflags(openflags, &posix_flags);
-
-	LogFullDebug(COMPONENT_FSAL, "openflags 0x%X posix_flags 0x%X",
-			openflags, posix_flags);
-
-	switch (obj_hdl->type) {
-	case REGULAR_FILE:
-		status = fsal_find_fd((struct fsal_fd **)&out_fd, obj_hdl,
-				      (struct fsal_fd *)&myself->u.file.fd,
-				      &myself->u.file.share,
-				      bypass, state, openflags,
-				      gpfs_open_func, gpfs_close_func,
-				      has_lock, closefd, open_for_locks,
-				      &reusing_open_state_fd);
-
-		if (FSAL_IS_SUCCESS(status)) {
-			*fd = out_fd->fd;
-			assert(*fd >= 3);
-		}
-		return status;
-
-	case SOCKET_FILE:
-	case CHARACTER_FILE:
-	case BLOCK_FILE:
-	case SYMBOLIC_LINK:
-	case FIFO_FILE:
-	case DIRECTORY:
-		break;
-
-	case NO_FILE_TYPE:
-	case EXTENDED_ATTR:
-		return fsalstat(posix2fsal_error(EINVAL), EINVAL);
-	}
-
-	/* Open file descriptor for non-regular files. */
-	status = gpfs_open_func(obj_hdl, openflags, (struct fsal_fd *)out_fd);
-	if (FSAL_IS_ERROR(status)) {
-		LogDebug(COMPONENT_FSAL,
-			 "Failed with openflags 0x%08x",
-			  openflags);
-		return status;
-	}
-	LogFullDebug(COMPONENT_FSAL,
-		     "Opened fd=%d for file of type %s",
-		     out_fd->fd, object_file_type_to_str(obj_hdl->type));
-
-	*fd = out_fd->fd;
-	*closefd = true;
-
 	return status;
 }
 
@@ -809,14 +791,16 @@ void
 gpfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass, fsal_async_cb done_cb,
 	   struct fsal_io_arg *read_arg, void *caller_arg)
 {
-	int my_fd = -1;
-	fsal_status_t status;
-	bool has_lock = false;
-	bool closefd = false;
+	fsal_status_t status, status2;
+	struct gpfs_fd *my_fd;
+	struct gpfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *out_fd;
 	struct gpfs_fsal_export *exp = container_of(op_ctx->fsal_export,
 					struct gpfs_fsal_export, export);
 	int export_fd = exp->export_fd;
-	struct gpfs_fd *gpfs_fd = NULL;
+	struct gpfs_fsal_obj_handle *myself;
+
+	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
@@ -827,31 +811,24 @@ gpfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass, fsal_async_cb done_cb,
 		return;
 	}
 
-	/* Acquire state's fdlock to prevent OPEN upgrade closing the
-	 * file descriptor while we use it.
-	 */
-	if (read_arg->state) {
-		gpfs_fd = STATE2FD(read_arg->state);
-		PTHREAD_RWLOCK_rdlock(&gpfs_fd->fdlock);
-	}
-
-	/* Get a usable file descriptor */
-	status = find_fd(&my_fd, obj_hdl, bypass, read_arg->state, FSAL_O_READ,
-			 &has_lock, &closefd, false);
+	/* Indicate a desire to start io and get a usable file descritor */
+	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
+			       &temp_fd.fsal_fd, read_arg->state, FSAL_O_READ,
+			       false, NULL, bypass, &myself->u.file.share);
 
 	if (FSAL_IS_ERROR(status)) {
-		LogDebug(COMPONENT_FSAL,
-			 "find_fd failed %s", msg_fsal_err(status.major));
-		if (gpfs_fd)
-			PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-		done_cb(obj_hdl, status, read_arg, caller_arg);
-		return;
+		LogFullDebug(COMPONENT_FSAL,
+			     "fsal_start_io failed returning %s",
+			     fsal_err_txt(status));
+		goto exit;
 	}
+
+	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
 
 	assert(read_arg->iov_count == 1);
 
 	if (read_arg->info)
-		status = gpfs_read_plus_fd(my_fd, read_arg->offset,
+		status = gpfs_read_plus_fd(my_fd->fd, read_arg->offset,
 					   read_arg->iov[0].iov_len,
 					   read_arg->iov[0].iov_base,
 					   &read_arg->io_amount,
@@ -859,35 +836,39 @@ gpfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass, fsal_async_cb done_cb,
 					   read_arg->info,
 					   export_fd);
 	else
-		status = GPFSFSAL_read(my_fd, read_arg->offset,
+		status = GPFSFSAL_read(my_fd->fd, read_arg->offset,
 				       read_arg->iov[0].iov_len,
 				       read_arg->iov[0].iov_base,
 				       &read_arg->io_amount,
 				       &read_arg->end_of_file, export_fd);
 
-	if (gpfs_fd)
-		PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-
-	if (closefd) {
-		fsal_status_t status2;
-
-		status2 = fsal_internal_close(my_fd, NULL, 0);
-		if (FSAL_IS_ERROR(status2)) {
-			LogEvent(COMPONENT_FSAL,
-				 "fsal close failed, fd:%d, error: %s",
-				 my_fd, msg_fsal_err(status2.major));
-		}
-	}
-
-	if (has_lock)
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
-
 	if (FSAL_IS_ERROR(status)) {
-		struct gpfs_file_handle *gfh = container_of(obj_hdl,
-			struct gpfs_fsal_obj_handle, obj_handle)->handle;
 		LogDebug(COMPONENT_FSAL, "Inode involved: %"PRIu64", error: %s",
-			get_handle2inode(gfh), msg_fsal_err(status.major));
+			 get_handle2inode(myself->handle),
+			 fsal_err_txt(status));
 	}
+
+	status2 = fsal_complete_io(obj_hdl, out_fd);
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	if (read_arg->state == NULL) {
+		/* We did I/O without a state so we need to release the temp
+		 * share reservation acquired.
+		 */
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Release the share reservation now by updating the counters.
+		 */
+		update_share_counters(&myself->u.file.share,
+				      FSAL_O_READ, FSAL_O_CLOSED);
+
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	}
+
+ exit:
 
 	done_cb(obj_hdl, status, read_arg, caller_arg);
 }
@@ -918,15 +899,16 @@ gpfs_write2(struct fsal_obj_handle *obj_hdl,
 	    struct fsal_io_arg *write_arg,
 	    void *caller_arg)
 {
-	fsal_status_t status;
-	int my_fd = -1;
-	bool has_lock = false;
-	bool closefd = false;
-	fsal_openflags_t openflags = FSAL_O_WRITE;
+	fsal_status_t status, status2;
+	struct gpfs_fd *my_fd;
+	struct gpfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *out_fd;
 	struct gpfs_fsal_export *exp = container_of(op_ctx->fsal_export,
 					struct gpfs_fsal_export, export);
 	int export_fd = exp->export_fd;
-	struct gpfs_fd *gpfs_fd = NULL;
+	struct gpfs_fsal_obj_handle *myself;
+
+	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
 		LogDebug(COMPONENT_FSAL,
@@ -937,50 +919,54 @@ gpfs_write2(struct fsal_obj_handle *obj_hdl,
 		return;
 	}
 
-	/* Acquire state's fdlock to prevent OPEN upgrade closing the
-	 * file descriptor while we use it.
-	 */
-	if (write_arg->state) {
-		gpfs_fd = STATE2FD(write_arg->state);
-		PTHREAD_RWLOCK_rdlock(&gpfs_fd->fdlock);
-	}
-
-	/* Get a usable file descriptor */
-	status = find_fd(&my_fd, obj_hdl, bypass, write_arg->state, openflags,
-			 &has_lock, &closefd, false);
+	/* Indicate a desire to start io and get a usable file descritor */
+	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
+			       &temp_fd.fsal_fd, write_arg->state, FSAL_O_WRITE,
+			       false, NULL, bypass, &myself->u.file.share);
 
 	if (FSAL_IS_ERROR(status)) {
-		LogDebug(COMPONENT_FSAL,
-			 "find_fd failed %s", msg_fsal_err(status.major));
-		if (gpfs_fd)
-			PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-		done_cb(obj_hdl, status, write_arg, caller_arg);
-		return;
+		LogFullDebug(COMPONENT_FSAL,
+			     "fsal_start_io failed returning %s",
+			     fsal_err_txt(status));
+		goto exit;
 	}
 
-	status = GPFSFSAL_write(my_fd, write_arg->offset,
+	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
+
+	status = GPFSFSAL_write(my_fd->fd, write_arg->offset,
 				write_arg->iov[0].iov_len,
 				write_arg->iov[0].iov_base,
 				&write_arg->io_amount,
 				&write_arg->fsal_stable,
 				export_fd);
 
-	if (gpfs_fd)
-		PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-
-	if (closefd) {
-		fsal_status_t status2;
-
-		status2 = fsal_internal_close(my_fd, NULL, 0);
-		if (FSAL_IS_ERROR(status2)) {
-			LogEvent(COMPONENT_FSAL,
-				 "fsal close failed, fd:%d, error: %s",
-				 my_fd, msg_fsal_err(status2.major));
-		}
+	if (FSAL_IS_ERROR(status)) {
+		LogDebug(COMPONENT_FSAL, "Inode involved: %"PRIu64", error: %s",
+			 get_handle2inode(myself->handle),
+			 fsal_err_txt(status));
 	}
 
-	if (has_lock)
+	status2 = fsal_complete_io(obj_hdl, out_fd);
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	if (write_arg->state == NULL) {
+		/* We did I/O without a state so we need to release the temp
+		 * share reservation acquired.
+		 */
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Release the share reservation now by updating the counters.
+		 */
+		update_share_counters(&myself->u.file.share,
+				      FSAL_O_WRITE, FSAL_O_CLOSED);
+
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	}
+
+ exit:
 
 	done_cb(obj_hdl, status, write_arg, caller_arg);
 }
@@ -989,12 +975,13 @@ fsal_status_t
 gpfs_fallocate(struct fsal_obj_handle *obj_hdl, state_t *state,
 	       uint64_t offset, uint64_t length, bool allocate)
 {
-	fsal_status_t status;
-	int my_fd = -1;
-	bool has_lock = false;
-	bool closefd = false;
-	fsal_openflags_t openflags = FSAL_O_WRITE;
-	struct gpfs_fd *gpfs_fd = NULL;
+	fsal_status_t status, status2;
+	struct gpfs_fd *my_fd;
+	struct gpfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *out_fd;
+	struct gpfs_fsal_obj_handle *myself;
+
+	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
 		LogMajor(COMPONENT_FSAL,
@@ -1003,60 +990,57 @@ gpfs_fallocate(struct fsal_obj_handle *obj_hdl, state_t *state,
 		return fsalstat(posix2fsal_error(EXDEV), EXDEV);
 	}
 
-	/* Acquire state's fdlock to prevent OPEN upgrade closing the
-	 * file descriptor while we use it.
-	 */
-	if (state) {
-		gpfs_fd = STATE2FD(state);
-		PTHREAD_RWLOCK_rdlock(&gpfs_fd->fdlock);
-	}
-
-	/* Get a usable file descriptor */
-	status = find_fd(&my_fd, obj_hdl, false, state, openflags,
-			 &has_lock, &closefd, false);
+	/* Indicate a desire to start io and get a usable file descritor */
+	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
+			       &temp_fd.fsal_fd, state, FSAL_O_WRITE,
+			       false, NULL, false, &myself->u.file.share);
 
 	if (FSAL_IS_ERROR(status)) {
-		LogDebug(COMPONENT_FSAL,
-			 "find_fd failed %s", msg_fsal_err(status.major));
-		if (gpfs_fd)
-			PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-		return status;
+		LogFullDebug(COMPONENT_FSAL,
+			     "fsal_start_io failed returning %s",
+			     fsal_err_txt(status));
+		goto exit;
 	}
 
-	status = GPFSFSAL_alloc(my_fd, offset, length, allocate);
+	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
 
-	if (gpfs_fd)
-		PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-
-	if (closefd) {
-		fsal_status_t status2;
-
-		status2 = fsal_internal_close(my_fd, NULL, 0);
-		if (FSAL_IS_ERROR(status2)) {
-			LogEvent(COMPONENT_FSAL,
-				 "fsal close failed, fd:%d, error: %s",
-				 my_fd, msg_fsal_err(status2.major));
-		}
-	}
-
-	if (has_lock)
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	status = GPFSFSAL_alloc(my_fd->fd, offset, length, allocate);
 
 	if (FSAL_IS_ERROR(status)) {
-		struct gpfs_file_handle *gfh = container_of(obj_hdl,
-			struct gpfs_fsal_obj_handle, obj_handle)->handle;
 		LogDebug(COMPONENT_FSAL, "Inode involved: %"PRIu64", error: %s",
-			get_handle2inode(gfh), msg_fsal_err(status.major));
+			 get_handle2inode(myself->handle),
+			 fsal_err_txt(status));
 	}
+
+	status2 = fsal_complete_io(obj_hdl, out_fd);
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	if (state == NULL) {
+		/* We did I/O without a state so we need to release the temp
+		 * share reservation acquired.
+		 */
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Release the share reservation now by updating the counters.
+		 */
+		update_share_counters(&myself->u.file.share,
+				      FSAL_O_WRITE, FSAL_O_CLOSED);
+
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	}
+
+ exit:
+
 	return status;
 }
 
 static fsal_status_t
-gpfs_commit_fd(int my_fd, struct fsal_obj_handle *obj_hdl, off_t offset,
+gpfs_commit_fd(int my_fd, struct gpfs_fsal_obj_handle *myself, off_t offset,
 	       size_t len)
 {
-	struct gpfs_fsal_obj_handle *myself =
-		container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 	struct fsync_arg arg = {0};
 	verifier4 writeverf = {0};
 	int retval;
@@ -1099,46 +1083,48 @@ gpfs_commit_fd(int my_fd, struct fsal_obj_handle *obj_hdl, off_t offset,
 fsal_status_t
 gpfs_commit2(struct fsal_obj_handle *obj_hdl, off_t offset, size_t len)
 {
-	fsal_status_t status;
+	fsal_status_t status, status2;
+	struct gpfs_fd *my_fd;
+	struct gpfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *out_fd;
 	struct gpfs_fsal_obj_handle *myself;
-	struct gpfs_fd temp_fd = {
-			FSAL_O_CLOSED, PTHREAD_RWLOCK_INITIALIZER, -1 };
-	struct gpfs_fd *out_fd = &temp_fd;
-	bool has_lock = false;
-	bool closefd = false;
 
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	/* Make sure file is open in appropriate mode.
 	 * Do not check share reservation.
 	 */
-	status = fsal_reopen_obj(obj_hdl, false, false, FSAL_O_WRITE,
-				 (struct fsal_fd *)&myself->u.file.fd,
-				 &myself->u.file.share,
-				 gpfs_open_func, gpfs_close_func,
-				 (struct fsal_fd **)&out_fd, &has_lock,
-				 &closefd);
+	status = fsal_start_global_io(&out_fd, obj_hdl,
+				      &myself->u.file.fd.fsal_fd,
+				      &temp_fd.fsal_fd,
+				      FSAL_O_WRITE, false,
+				      NULL);
 
-	if (!FSAL_IS_ERROR(status)) {
+	if (FSAL_IS_ERROR(status))
+		return status;
 
-		fsal_set_credentials(&op_ctx->creds);
+	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
 
-		status = gpfs_commit_fd(out_fd->fd, obj_hdl, offset, len);
+	fsal_set_credentials(&op_ctx->creds);
 
-		fsal_restore_ganesha_credentials();
-	}
-	if (closefd)
-		fsal_internal_close(out_fd->fd, NULL, 0);
+	status = gpfs_commit_fd(my_fd->fd, myself, offset, len);
 
-	if (has_lock)
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	fsal_restore_ganesha_credentials();
 
 	if (FSAL_IS_ERROR(status)) {
-		struct gpfs_file_handle *gfh = container_of(obj_hdl,
-			struct gpfs_fsal_obj_handle, obj_handle)->handle;
 		LogDebug(COMPONENT_FSAL, "Inode involved: %"PRIu64", error: %s",
-			get_handle2inode(gfh), msg_fsal_err(status.major));
+			 get_handle2inode(myself->handle),
+			 fsal_err_txt(status));
 	}
+
+	status2 = fsal_complete_io(obj_hdl, out_fd);
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	/* We did not do share reservation stuff... */
+
 	return status;
 }
 
@@ -1172,14 +1158,17 @@ gpfs_lock_op2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	struct glock glock_args;
 	struct set_get_lock_arg gpfs_sg_arg;
 	fsal_openflags_t openflags;
-	fsal_status_t status;
-	bool has_lock = false;
-	bool closefd = false;
+	fsal_status_t status, status2;
+	struct gpfs_fd *my_fd;
+	struct gpfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *out_fd;
 	bool bypass = false;
 	struct gpfs_fsal_export *exp = container_of(op_ctx->fsal_export,
 					struct gpfs_fsal_export, export);
 	int export_fd = exp->export_fd;
-	struct gpfs_fd *gpfs_fd = NULL;
+	struct gpfs_fsal_obj_handle *myself;
+
+	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	LogFullDebug(COMPONENT_FSAL,
 		     "Locking: op:%d sle_type:%d type:%d start:%llu length:%llu owner:%p",
@@ -1264,26 +1253,21 @@ gpfs_lock_op2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		return fsalstat(ERR_FSAL_NOTSUPP, 0);
 	}
 
-	/* Acquire state's fdlock to prevent OPEN upgrade closing the
-	 * file descriptor while we use it.
-	 */
-	if (state) {
-		gpfs_fd = STATE2FD(state);
-		PTHREAD_RWLOCK_rdlock(&gpfs_fd->fdlock);
-	}
-
-	/* Get a usable file descriptor */
-	status = find_fd(&glock_args.lfd, obj_hdl, bypass, state,
-			 openflags, &has_lock, &closefd, true);
+	/* Indicate a desire to start io and get a usable file descritor */
+	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
+			       &temp_fd.fsal_fd, state, openflags,
+			       true, NULL, bypass, &myself->u.file.share);
 
 	if (FSAL_IS_ERROR(status)) {
-		LogDebug(COMPONENT_FSAL,
-			 "find_fd failed %s", msg_fsal_err(status.major));
-		if (gpfs_fd)
-			PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-		return status;
+		LogCrit(COMPONENT_FSAL,
+			"fsal_start_io failed returning %s",
+			fsal_err_txt(status));
+		goto exit;
 	}
 
+	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
+
+	glock_args.lfd = my_fd->fd;
 	glock_args.flock.l_len = req_lock->lock_length;
 	glock_args.flock.l_start = req_lock->lock_start;
 	glock_args.flock.l_whence = SEEK_SET;
@@ -1299,57 +1283,71 @@ gpfs_lock_op2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	status = GPFSFSAL_lock_op(export, lock_op, req_lock, conflicting_lock,
 				  &gpfs_sg_arg);
 
-	if (gpfs_fd)
-		PTHREAD_RWLOCK_unlock(&gpfs_fd->fdlock);
-
-	if (closefd) {
-		fsal_status_t status2;
-
-		status2 = fsal_internal_close(glock_args.lfd, NULL, 0);
-		if (FSAL_IS_ERROR(status2)) {
-			LogEvent(COMPONENT_FSAL,
-				 "fsal close failed, fd:%d, error: %s",
-				 glock_args.lfd, msg_fsal_err(status2.major));
-		}
-	}
-
-	if (has_lock)
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
 
 	if (FSAL_IS_ERROR(status)) {
-		struct gpfs_file_handle *gfh = container_of(obj_hdl,
-			struct gpfs_fsal_obj_handle, obj_handle)->handle;
 		LogDebug(COMPONENT_FSAL, "Inode involved: %"PRIu64", error: %s",
-			get_handle2inode(gfh), msg_fsal_err(status.major));
+			 get_handle2inode(myself->handle),
+			 fsal_err_txt(status));
 	}
+
+	status2 = fsal_complete_io(obj_hdl, out_fd);
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	if (state == NULL) {
+		/* We did I/O without a state so we need to release the temp
+		 * share reservation acquired.
+		 */
+		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+
+		/* Release the share reservation now by updating the counters.
+		 */
+		update_share_counters(&myself->u.file.share,
+				      openflags, FSAL_O_CLOSED);
+
+		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	}
+
+ exit:
+
 	return status;
 }
 
 /**
- *  @brief GPFS seek command
+ * @brief Seek to data or hole
  *
- *  @param obj_hdl FSAL object handle
- *  @param io_info I/O information
- *  @return FSAL status
+ * This function seek to data or hole in a file.
  *
- *  default case not supported
+ * @param[in]     obj_hdl   File on which to operate
+ * @param[in]     state     state_t to use for this operation
+ * @param[in,out] info      Information about the data
+ *
+ * @return FSAL status.
  */
-fsal_status_t gpfs_seek(struct fsal_obj_handle *obj_hdl,
+
+fsal_status_t gpfs_seek2(struct fsal_obj_handle *obj_hdl,
+			 struct state_t *state,
 			 struct io_info *info)
 {
-	struct gpfs_fsal_obj_handle *myself =
-		container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
+	off_t offset = info->io_content.hole.di_offset;
+	fsal_status_t status, status2;
+	struct fsal_attrlist attrs;
+	struct gpfs_fd *my_fd;
+	struct gpfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *out_fd;
 	struct gpfs_io_info io_info = {0};
 	struct fseek_arg arg = {0};
+	struct gpfs_fsal_export *exp = container_of(op_ctx->fsal_export,
+					struct gpfs_fsal_export, export);
+	int export_fd = exp->export_fd;
+	struct gpfs_fsal_obj_handle *myself;
 
-	assert(myself->u.file.fd.fd >= 3 &&
-	       myself->u.file.fd.openflags != FSAL_O_CLOSED);
-
-	arg.mountdirfd = myself->u.file.fd.fd;
-	arg.openfd = myself->u.file.fd.fd;
-	arg.info = &io_info;
+	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	io_info.io_offset = info->io_content.hole.di_offset;
+
 	switch (info->io_content.what) {
 	case NFS4_CONTENT_DATA:
 		io_info.io_what = SEEK_DATA;
@@ -1361,17 +1359,84 @@ fsal_status_t gpfs_seek(struct fsal_obj_handle *obj_hdl,
 		return fsalstat(ERR_FSAL_UNION_NOTSUPP, 0);
 	}
 
+	/** @todo: WARNING there's a size check that isn't atomic, Fixing this
+	 *         would probably mean taking the object lock, but that would
+	 *         not be entirely safe since we no longer use the object lock
+	 *         to proect I/O on the object...
+	 */
+
+	/* Indicate a desire to start io and get a usable file descritor */
+	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
+			       &temp_fd.fsal_fd, state, FSAL_O_ANY,
+			       false, NULL, true, NULL);
+
+	if (FSAL_IS_ERROR(status)) {
+		LogFullDebug(COMPONENT_FSAL,
+			     "fsal_start_io failed returning %s",
+			     fsal_err_txt(status));
+		goto exit;
+	}
+
+	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
+
+	arg.mountdirfd = export_fd;
+	arg.openfd = my_fd->fd;
+	arg.info = &io_info;
+
+	fsal_prepare_attrs(&attrs,
+			   (op_ctx->fsal_export->exp_ops.fs_supported_attrs(
+							op_ctx->fsal_export)
+				& ~(ATTR_ACL | ATTR4_FS_LOCATIONS)));
+
+	status = GPFSFSAL_getattrs(op_ctx->fsal_export,
+				   obj_hdl->fs->private_data,
+				   myself->handle,
+				   &attrs);
+
+	fsal_release_attrs(&attrs);
+
+	if (FSAL_IS_ERROR(status)) {
+		LogFullDebug(COMPONENT_FSAL,
+			     "GPFSFSAL_getattrs failed returning %s",
+			     fsal_err_txt(status));
+		goto out;
+	}
+
+	/* RFC7862 15.11.3,
+	 * If the sa_offset is beyond the end of the file,
+	 * then SEEK MUST return NFS4ERR_NXIO. */
+	if (offset >= attrs.filesize) {
+		status = posix2fsal_status(ENXIO);
+		LogFullDebug(COMPONENT_FSAL,
+			     "offset >= file size, returning %s",
+			     fsal_err_txt(status));
+		goto out;
+	}
+
 	if (gpfs_ganesha(OPENHANDLE_SEEK_BY_FD, &arg) == -1) {
 		if (errno == EUNATCH)
 			LogFatal(COMPONENT_FSAL, "GPFS Returned EUNATCH");
-		return fsalstat(posix2fsal_error(errno), 0);
+		status = posix2fsal_status(errno);
+		goto out;
 	}
 
 	info->io_eof = io_info.io_eof;
 	info->io_content.hole.di_offset = io_info.io_offset;
 	info->io_content.hole.di_length = io_info.io_len;
 
-	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+ out:
+
+	status2 = fsal_complete_io(obj_hdl, out_fd);
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	/* We did FSAL_O_ANY so no share reservation was acquired */
+
+ exit:
+
+	return status;
 }
 
 /**
@@ -1390,7 +1455,7 @@ gpfs_io_advise(struct fsal_obj_handle *obj_hdl, struct io_hints *hints)
 	struct fadvise_arg arg = {0};
 
 	assert(myself->u.file.fd.fd >= 3 &&
-	       myself->u.file.fd.openflags != FSAL_O_CLOSED);
+	       myself->u.file.fd.fsal_fd.openflags != FSAL_O_CLOSED);
 
 	arg.mountdirfd = myself->u.file.fd.fd;
 	arg.openfd = myself->u.file.fd.fd;
@@ -1427,10 +1492,10 @@ fsal_status_t gpfs_close(struct fsal_obj_handle *obj_hdl)
 	PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
 
 	if (myself->u.file.fd.fd >= 0 &&
-	    myself->u.file.fd.openflags != FSAL_O_CLOSED) {
+	    myself->u.file.fd.fsal_fd.openflags != FSAL_O_CLOSED) {
 		status = fsal_internal_close(myself->u.file.fd.fd, NULL, 0);
 		myself->u.file.fd.fd = -1;
-		myself->u.file.fd.openflags = FSAL_O_CLOSED;
+		myself->u.file.fd.fsal_fd.openflags = FSAL_O_CLOSED;
 	} else {
 		status = fsalstat(ERR_FSAL_NOT_OPENED, 0);
 	}
@@ -1478,7 +1543,7 @@ gpfs_close2(struct fsal_obj_handle *obj_hdl, struct state_t *state)
 		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
 
 		update_share_counters(&myself->u.file.share,
-				      my_fd->openflags,
+				      my_fd->fsal_fd.openflags,
 				      FSAL_O_CLOSED);
 
 		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
@@ -1491,12 +1556,10 @@ gpfs_close2(struct fsal_obj_handle *obj_hdl, struct state_t *state)
 		/* Acquire state's fdlock to make sure no other thread
 		 * is operating on the fd while we close it.
 		 */
-		PTHREAD_RWLOCK_wrlock(&my_fd->fdlock);
 		status = fsal_internal_close(my_fd->fd, state_owner, 0);
 
 		my_fd->fd = -1;
-		my_fd->openflags = FSAL_O_CLOSED;
-		PTHREAD_RWLOCK_unlock(&my_fd->fdlock);
+		my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
 	}
 	if (FSAL_IS_ERROR(status)) {
 		struct gpfs_file_handle *gfh = container_of(obj_hdl,
