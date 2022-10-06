@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52950603_816afbc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-06T23:53:12Z",
+      "side": 1,
+      "message": "The problem with this patch is actually that the protocol layer doesn\u0027t emit an xdr_bool \"false\" for \"no more entries\" because it didn\u0027t decide no more entries fit. What we actually need to implement is use of the dircount param and override it. This patch will need a re-design.",
+      "revId": "2ac480ebdccd70ed9faf269ea8b8c8cda0cc29f0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3e5bc6f_9c5fca96",
