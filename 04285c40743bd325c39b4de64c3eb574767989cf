@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11d44c0d_027e0ea6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020331
+      },
+      "writtenOn": "2022-10-10T04:14:46Z",
+      "side": 1,
+      "message": "Seen the core once, backtrace:\n\n\n(gdb) bt full\n#0  0x00007f9574ec94fb in raise () from /lib64/libpthread.so.0\nNo symbol table info available.\n#1  0x00007f95767d5327 in crash_handler (signo\u003d11, info\u003d0x7f94a67b68b0, ctx\u003d0x7f94a67b6780) at /usr/src/debug/nfs-ganesha-4.0.2/MainNFSD/nfs_init.c:256\nNo locals.\n#2  \u003csignal handler called\u003e\nNo symbol table info available.\n#3  0x00007f9576900469 in adjust_lru_root_object (entry\u003d0x7f9390925d00) at /usr/src/debug/nfs-ganesha-4.0.2/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c:506\n        q \u003d 0x0\n#4  0x00007f9576900f13 in lru_reap_impl (qid\u003dLRU_ENTRY_L2) at /usr/src/debug/nfs-ganesha-4.0.2/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c:723\n        lane \u003d 10\n        qlane \u003d 0x7f95769b7240 \u003cLRU+2240\u003e\n        lq \u003d 0x7f95769b7260 \u003cLRU+2272\u003e\n        lru \u003d 0x7f9390925f30\n        entry \u003d 0x7f9390925d00\n        refcnt \u003d 3\n        latch \u003d {cp \u003d 0x5a7a5000a01}\n        ix \u003d 16\n        __func__ \u003d \"lru_reap_impl\"\n#5  0x00007f957690205a in lru_try_reap_entry () at /usr/src/debug/nfs-ganesha-4.0.2/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c:881\n        lru \u003d 0x7f957687ccf1 \u003cCityHash64WithSeeds+62\u003e\n#6  0x00007f957690606e in mdcache_lru_get (sub_handle\u003d0x7f951e961340) at /usr/src/debug/nfs-ganesha-4.0.2/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c:2059\n        lru \u003d 0x7f9571920cf8\n        nentry \u003d 0x0\n#7  0x00007f95768f28a7 in _mdcache_alloc_handle (export\u003d0x7f95719f2800, sub_handle\u003d0x7f951e961340, fs\u003d0x7f955ba36600, reason\u003dMDC_REASON_DEFAULT, func\u003d0x7f957695f3a0 \u003c__func__.25210\u003e \"mdcache_new_entry\", line\u003d709)\n    at /usr/src/debug/nfs-ganesha-4.0.2/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c:174\n        result \u003d 0x7f9571920f98\n        status \u003d {major \u003d 513152168, minor \u003d 32661}\n        __func__ \u003d \"_mdcache_alloc_handle\"\n#8  0x00007f95768f484a in mdcache_new_entry (export\u003d0x7f95719f2800, sub_handle\u003d0x7f951e961340, attrs_in\u003d0x7f94a67b7870, attrs_out\u003d0x0, new_directory\u003dfalse, entry\u003d0x7f94a67b77e8, state\u003d0x0, reason\u003dMDC_REASON_DEFAULT)\n    at /usr/src/debug/nfs-ganesha-\n        status \u003d {major \u003d ERR_FSAL_NO_ERROR, minor \u003d 0}\n        export \u003d 0x7f95719f2800\n        attrs \u003d {request_mask \u003d 9560014, valid_mask \u003d 1171406, supported \u003d 9560014, type \u003d REGULAR_FILE, filesize \u003d 1373519, fsid \u003d {major \u003d 0, minor \u003d 219}, fsid3 \u003d 0, acl \u003d 0x0, fileid \u003d 2814749767477157, mode \u003d 493,\n          numlinks \u003d 1, owner \u003d 0, group \u003d 0, rawdev \u003d {major \u003d 0, minor \u003d 0}, atime \u003d {tv_sec \u003d 1652820509, tv_nsec \u003d 95234500}, creation \u003d {tv_sec \u003d 0, tv_nsec \u003d 0}, ctime \u003d {tv_sec \u003d 1652820509, tv_nsec \u003d 512249983}, mtime \u003d {\n            tv_sec \u003d 1652820509, tv_nsec \u003d 512249983}, spaceused \u003d 1384960, change \u003d 1652820509512249983, generation \u003d 0, expire_time_attr \u003d 0, fs_locations \u003d 0x0, sec_label \u003d {slai_lfs \u003d {lfs_lfs \u003d 0, lfs_pi \u003d 0}, slai_data \u003d {\n              slai_data_len \u003d 0, slai_data_val \u003d 0x0}}}\n        invalidate \u003d false\n        __func__ \u003d \"mdc_lookup_uncached\"",
+      "revId": "04285c40743bd325c39b4de64c3eb574767989cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
