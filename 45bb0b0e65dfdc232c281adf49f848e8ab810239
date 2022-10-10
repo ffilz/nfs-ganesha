@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c68e36e_e9e193fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020331
+      },
+      "writtenOn": "2022-10-10T06:14:17Z",
+      "side": 1,
+      "message": "When we are calling lru_queue_of(), without any lock, \nthat is not safe because, we read the entry-\u003elru.qid,\nwhich can be written/updated by the data path thread at \nsame time, so our read is unsafe and can result\nunexpected results/core.\n\n 294 static inline struct lru_q *\n 295 lru_queue_of(mdcache_entry_t *entry)\n 296 {\n 297         struct lru_q *q;\n 298\n 299         switch (entry-\u003elru.qid) {\n 300         case LRU_ENTRY_L1:\n",
+      "revId": "45bb0b0e65dfdc232c281adf49f848e8ab810239",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
