@@ -16,6 +16,23 @@
       "message": "Any thoughts about it?",
       "revId": "1e8131923bb86dd0fbc2beacfd4ad906bbc7e07b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "436c1c66_ca3ce898",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-11T21:16:12Z",
+      "side": 1,
+      "message": "Could you define adjustable_root_obj above and just set the value here? Our coding style is to have all definitions of local variables at the beginning of a block before any lines of code.",
+      "revId": "1e8131923bb86dd0fbc2beacfd4ad906bbc7e07b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
