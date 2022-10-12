@@ -16,6 +16,24 @@
       "message": "Hmm... This makes ALL redundant with Default.  I think I\u0027d prefer is ALL overrode individual settings, so that I can just chuck in an ALL without changing anything else.  Either that, or just remove Default, since ALL does the same thing.  What do others think?",
       "revId": "c7281b3b0782c37bfd562be6164ad291eb33827d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "043b453b_83095f17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-12T16:03:03Z",
+      "side": 1,
+      "message": "\u003e Hmm... This makes ALL redundant with Default.  I think I\u0027d prefer is ALL overrode individual settings, so that I can just chuck in an ALL without changing anything else.  Either that, or just remove Default, since ALL does the same thing.  What do others think?\n\nALL is not the same as default. When you remove ALL, everything that is not otherwise specified as individual components reverts to the specified default (which in many cases will have been set with the -N command line option).\n\nI can see arguments for ALL overriding the individual components as it originally did. If we changed it back to that, one could still change default which would change everything not explicitly set but then to revert, you would need to explicitly set default back, you couldn\u0027t just remove it.\n\nI\u0027m open to either way. Either way is more useful and works more like people probably expect than the current function.",
+      "parentUuid": "e32a12a3_aeec5275",
+      "revId": "c7281b3b0782c37bfd562be6164ad291eb33827d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
