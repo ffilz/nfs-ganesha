@@ -48,6 +48,7 @@
 #include <ctype.h>
 #include <pthread.h>
 #include <dlfcn.h>
+#include <sys/statfs.h>
 #include "log.h"
 #include "fsal.h"
 #include "nfs_core.h"
@@ -196,6 +197,7 @@ int load_fsal(const char *name,
 	char *dl_path;
 	struct fsal_module *fsal;
 	char *bp;
+	struct stat statbuf;
 	size_t size = strlen(nfs_param.core_param.ganesha_modules_loc)
 		      + strlen(name)
 		      + strlen(pathfmt) + 1;
@@ -211,6 +213,15 @@ int load_fsal(const char *name,
 		bp++;
 	}
 	dl_path = gsh_strdup(path);
+
+	/* check filepath */
+	if (stat(path, &statbuf) < 0) {
+		retval = errno;
+		LogCrit(COMPONENT_INIT,
+			"stat returned %s (%d) while loading FSAL path %s",
+			strerror(retval), retval, path);
+		goto fileerr;
+	}
 
 	PTHREAD_MUTEX_lock(&fsal_lock);
 	if (load_state != idle)
@@ -308,8 +319,9 @@ int load_fsal(const char *name,
 dlerr:
 	dlclose(dl);
 errout:
-	load_state = idle;
 	PTHREAD_MUTEX_unlock(&fsal_lock);
+fileerr:
+	load_state = idle;
 	LogMajor(COMPONENT_INIT, "Failed to load module (%s) because: %s",
 		 path,
 		 strerror(retval));
