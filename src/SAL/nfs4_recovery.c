@@ -463,12 +463,23 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	 * NULL pointer. Just use hostname.
 	 */
 	maxlen = sysconf(_SC_HOST_NAME_MAX);
+
+	if (maxlen < 0) {
+		rc = -errno;
+		LogEvent(COMPONENT_CLIENTID,
+			 "sysconf(_SC_HOST_NAME_MAX) failed: with %s (%d)",
+			 strerror(-rc), -rc);
+		return rc;
+	}
+
 	nodeid = gsh_malloc(maxlen);
 	rc = gsh_gethostname(nodeid, maxlen,
 			nfs_param.core_param.enable_AUTHSTATS);
 	if (rc != 0) {
-		LogEvent(COMPONENT_CLIENTID, "gethostname failed: %d", errno);
 		rc = -errno;
+		LogEvent(COMPONENT_CLIENTID,
+			 "gethostname failed: %s (%d)",
+			 strerror(-rc), -rc);
 		gsh_free(nodeid);
 	} else {
 		*pnodeid = nodeid;
