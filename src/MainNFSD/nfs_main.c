@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 	int c;
 	int dsc;
 	int rc;
-	int pidfile;
+	int pidfile = -1;               /* fd for file to store pid */
 	char *log_path = NULL;
 	char *exec_name = "nfs-ganesha";
 	int debug_level = -1;
@@ -377,8 +377,8 @@ int main(int argc, char *argv[])
 	/* Echo PID into pidfile */
 	pidfile = open(nfs_pidfile_path, O_CREAT | O_RDWR, 0644);
 	if (pidfile == -1) {
-		LogFatal(COMPONENT_MAIN, "Can't open pid file %s for writing",
-			 nfs_pidfile_path);
+		LogFatal(COMPONENT_MAIN, "open() failed for pid file %s\nerrno was: %s (%d)",
+			 nfs_pidfile_path, strerror(errno), errno);
 	} else {
 		struct flock lk;
 
@@ -388,15 +388,17 @@ int main(int argc, char *argv[])
 		lk.l_start = (off_t) 0;
 		lk.l_len = (off_t) 0;
 		if (fcntl(pidfile, F_SETLK, &lk) == -1)
-			LogFatal(COMPONENT_MAIN, "Ganesha already started");
+			LogFatal(COMPONENT_MAIN, "fcntl(%d) failed\n"
+				"Ganesha already started", pidfile);
 
 		/* Put pid into file, then sync it */
 		if (dprintf(pidfile, "%u\n", getpid()) < 0 ||
 		    fsync(pidfile) < 0) {
-			close(pidfile);
 			LogCrit(COMPONENT_MAIN,
-				"Couldn't write pid to file %s error %s (%d)",
+				"dprintf() or fsync() failed trying to write pid to file %s\nerrno was: %s (%d)",
 				nfs_pidfile_path, strerror(errno), errno);
+			close(pidfile);
+			pidfile = -1;
 		}
 	}
 
@@ -527,7 +529,8 @@ int main(int argc, char *argv[])
 	if (log_path)
 		free(log_path);
 
-	close(pidfile);
+	if (pidfile != -1)
+		close(pidfile);
 
 	return 0;
 
@@ -539,7 +542,8 @@ fatal_die:
 	if (log_path)
 		free(log_path);
 
-	close(pidfile);
+	if (pidfile != -1)
+		close(pidfile);
 
 	/* systemd journal won't display our errors without this */
 	sleep(1);
