@@ -37,6 +37,58 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "466a6268_bd6706e5",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-18T23:25:27Z",
+      "side": 1,
+      "message": "Please put the string on the next line by itself. Also don\u0027t use \\n in log messages.",
+      "parentUuid": "1720b668_13c6b44a",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "853d61ef_dc89df2c",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-18T23:25:27Z",
+      "side": 1,
+      "message": "Please don\u0027t split the string, put it all on a line by itseld. Also don\u0027t use \\n in log messages.",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc4ed01_83fd8293",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-18T23:25:27Z",
+      "side": 1,
+      "message": "Please don\u0027t use \\n in log messages",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed98e7e3_4bc79ad5",
         "filename": "src/MainNFSD/nfs_main.c",
         "patchSetId": 1
@@ -48,6 +100,41 @@
       "writtenOn": "2022-10-18T13:35:24Z",
       "side": 1,
       "message": "Since pidfile isn\u0027t used anywhere else, I\u0027d say just remove the close() in this error.  That get\u0027s rid of double close, and doesn\u0027t require any other changes.  (note, close(-1) is fine, it just returns an error, which we ignore).  Alternatively, I don\u0027t think the pidfile needs to be open the whole time (systemd certainly doesn\u0027t care).  So we can just unconditionally close the pidfile here, and remove the close() calls at exit.",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5247e32c_a1a98635",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-18T23:25:27Z",
+      "side": 1,
+      "message": "The pidfile does need to be open, we SETLK on it to prevent another instance from starting.",
+      "parentUuid": "ed98e7e3_4bc79ad5",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fe4101_991a1cb7",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-18T23:25:27Z",
+      "side": 1,
+      "message": "Hmm, I wonder if we should LogFatal for problems with the pidfile?",
       "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
