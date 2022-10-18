@@ -67,6 +67,14 @@ static int rados_cluster_init(void)
 	} else {
 		long maxlen = sysconf(_SC_HOST_NAME_MAX);
 
+		if (maxlen < 0) {
+			ret = -errno;
+			LogEvent(COMPONENT_CLIENTID,
+				 "sysconf(_SC_HOST_NAME_MAX) failed: with %s (%d)",
+				 strerror(-ret), -ret);
+			goto out_shutdown;
+		}
+
 		nodeid = gsh_malloc(maxlen);
 		ret = gethostname(nodeid, maxlen);
 		if (ret) {
