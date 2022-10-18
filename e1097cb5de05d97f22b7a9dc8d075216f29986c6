@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c50aca14_5be4baa1",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-10-18T13:35:24Z",
+      "side": 1,
+      "message": "This is unnecessary.  pidfile is unconditionally set before it\u0027s used.",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1720b668_13c6b44a",
         "filename": "src/MainNFSD/nfs_main.c",
         "patchSetId": 1
@@ -14,6 +31,23 @@
       "writtenOn": "2022-10-18T13:05:38Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\tLogFatal(COMPONENT_MAIN, \"open() failed for pid file %s\\nerrno was: %s (%d)\",",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed98e7e3_4bc79ad5",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-10-18T13:35:24Z",
+      "side": 1,
+      "message": "Since pidfile isn\u0027t used anywhere else, I\u0027d say just remove the close() in this error.  That get\u0027s rid of double close, and doesn\u0027t require any other changes.  (note, close(-1) is fine, it just returns an error, which we ignore).  Alternatively, I don\u0027t think the pidfile needs to be open the whole time (systemd certainly doesn\u0027t care).  So we can just unconditionally close the pidfile here, and remove the close() calls at exit.",
       "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
