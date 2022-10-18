@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1720b668_13c6b44a",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-10-18T13:05:38Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogFatal(COMPONENT_MAIN, \"open() failed for pid file %s\\nerrno was: %s (%d)\",",
+      "revId": "e1097cb5de05d97f22b7a9dc8d075216f29986c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
