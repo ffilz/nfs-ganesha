@@ -16,6 +16,23 @@
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (nfs_param.core_param.readdir_res_size \u003c maxcount) {\n \t\tmaxcount \u003d nfs_param.core_param.readdir_res_size;\n \t}",
       "revId": "aeb787d9c88f1695ca22a22353051ccf3401c224",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65e931c_ae7ff9d5",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-20T00:02:26Z",
+      "side": 1,
+      "message": "I\u0027m not sure if the recommendations below make sense so I expect to change those.",
+      "revId": "aeb787d9c88f1695ca22a22353051ccf3401c224",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
