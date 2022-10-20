@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ad27cc_81874477",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-10-20T00:02:07Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (nfs_param.core_param.readdir_res_size \u003c maxcount) {\n \t\tmaxcount \u003d nfs_param.core_param.readdir_res_size;\n \t}",
+      "revId": "aeb787d9c88f1695ca22a22353051ccf3401c224",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
