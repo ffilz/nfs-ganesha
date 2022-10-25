@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7956695c_e5ae9f9f",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-25T16:28:57Z",
+      "side": 1,
+      "message": "Oops the above needs to check for NULL before checking for \u0027\\0\u0027 (NUL)...\n\nThis check is that export_id 0 has pseudopath \"/\" (root). The next check is that any other NFSv4 export has a pseudo path.",
+      "revId": "f82550d988c15e6be60bb00262be55469b0ef1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "152fae19_59210587",
         "filename": "src/support/exports.c",
         "patchSetId": 2
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "900e49c5_29f75e7b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-25T16:28:57Z",
+      "side": 1,
+      "message": "I debated that, but the export doesn\u0027t specify Protocols. It won\u0027t be mounted in the pseudofs later because we do a full check of an export before mounting (and we will unmount if on reload pseudopath has been taken away).\n\nIf I added Protocols to the export, things would be a bit odd during a subsequent export reload, though I guess nothing too odd would happen.\n\nI guess one odd thing about this would be that if a client had a handle into this export, and then pseudopath was removed, the client\u0027s handle would still be good and it could continue to access via NFSv4...\n\nLet me explore explicitly setting the export\u0027s Protocols in this case.",
+      "parentUuid": "152fae19_59210587",
+      "revId": "f82550d988c15e6be60bb00262be55469b0ef1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "051978e9_2d1eeb39",
         "filename": "src/support/exports.c",
         "patchSetId": 2
@@ -48,6 +83,24 @@
       "writtenOn": "2022-10-25T14:13:49Z",
       "side": 1,
       "message": "Could we combine this checking to the above `export_id \u003d\u003d 0`?\nLooks like these two handle the `export_id \u003d\u003d 0`.",
+      "revId": "f82550d988c15e6be60bb00262be55469b0ef1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c8679dd_57c369a7",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1269,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-25T16:28:57Z",
+      "side": 1,
+      "message": "Different check.",
+      "parentUuid": "051978e9_2d1eeb39",
       "revId": "f82550d988c15e6be60bb00262be55469b0ef1d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
