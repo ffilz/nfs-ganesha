@@ -91,6 +91,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a218c3ee_3a2d1569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-25T23:33:59Z",
+      "side": 1,
+      "message": "Hmm, I looked at the history of this duplicate block check...\n\nThe way the check is handled is actually a bit of a hack to deal with avoiding a bad situation with FSAL_CEPH,\n\nI think actually the whole thing needs some re-work which is a bit much for this stage of how close we are to releasing Ganesha V4.1.\n\nThe current code works, it\u0027s just not ideal from a readability standpoint.\n\nLet\u0027s do a better fix of the whole situation for Ganesha V5.0.\n\nIdeally we would solve the problem in the commit without having a separate pre-check.",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcf10adc_5b428b7c",
         "filename": "src/config_parsing/config_parsing.c",
         "patchSetId": 1
