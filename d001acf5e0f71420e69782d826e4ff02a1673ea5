@@ -16,6 +16,23 @@
       "message": "If this is addressing LRU reclaim, this might not be necessary with the redesign https://docs.google.com/document/d/183s5kpCotohJOhpFUhRZGJA2HaLE2vvUwQjpsvMcgYo/edit?usp\u003dsharing that is in progress.",
       "revId": "d001acf5e0f71420e69782d826e4ff02a1673ea5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8baccc3c_8f273a2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-25T23:48:03Z",
+      "side": 1,
+      "message": "Can we abandon this in favor of the LRU changes that will soon be available in V5.0?\n\nThey aren\u0027t under formal review yet, but are available for preview here:\n\nhttps://github.com/nfs-ganesha/nfs-ganesha/compare/next...ffilz:nfs-ganesha:ceph-async",
+      "revId": "d001acf5e0f71420e69782d826e4ff02a1673ea5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
