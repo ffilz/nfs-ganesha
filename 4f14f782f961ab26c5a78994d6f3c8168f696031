@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "891aa5bb_4e63861f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-25T23:44:22Z",
+      "side": 1,
+      "message": "How easy is it to hit this situation?\n\nOne option is that we fix by pulling in the new FSAL_FD handling as a bug fix... It\u0027s a big change, but it does actually resolve a bunch of bug fixes.\n\nIt also changes the FSAL API in a big way...\n\nCan we just cross our fingers and make sure this is properly fixed in V5.0 which I hope to get out in January 2023 (or at least 1Q 2023)?",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27e81aa0_2a1a9ce3",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 11
