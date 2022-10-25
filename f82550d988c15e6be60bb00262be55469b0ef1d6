@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1be81bd5_25b7d0b8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2022-10-25T14:13:49Z",
+      "side": 1,
+      "message": "just curious, what is the difference with the following line(1310-)? \n\nLooks like the same checking logic but it would return error here. Or the following line is redundant if we add checking here?",
+      "revId": "f82550d988c15e6be60bb00262be55469b0ef1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "152fae19_59210587",
         "filename": "src/support/exports.c",
         "patchSetId": 2
@@ -14,6 +31,23 @@
       "writtenOn": "2022-10-25T13:34:50Z",
       "side": 1,
       "message": "This warns, but it doesn\u0027t turn of the NFS4 bit?",
+      "revId": "f82550d988c15e6be60bb00262be55469b0ef1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "051978e9_2d1eeb39",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1269,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2022-10-25T14:13:49Z",
+      "side": 1,
+      "message": "Could we combine this checking to the above `export_id \u003d\u003d 0`?\nLooks like these two handle the `export_id \u003d\u003d 0`.",
       "revId": "f82550d988c15e6be60bb00262be55469b0ef1d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
