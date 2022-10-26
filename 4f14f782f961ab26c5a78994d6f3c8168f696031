@@ -87,6 +87,60 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c183cd_0bd55dbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-26T15:20:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93469af8_1ad0bb75",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d9daa66_29bc0f37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-26T15:20:11Z",
+      "side": 1,
+      "message": "We\u0027ll take this for now and rely on the fsal_fd rework in V5.0 to better solve the problem.",
+      "parentUuid": "15dc588a_abd751fb",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e628d7b8_815edac2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-26T15:20:11Z",
+      "side": 1,
+      "message": "OK, then we\u0027ll take it. The situation should be resolved much better in V5.0.",
+      "parentUuid": "fc7f3986_0c409744",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27e81aa0_2a1a9ce3",
@@ -118,6 +172,24 @@
       "side": 1,
       "message": "Yea, that\u0027s not going to work...\n\nAnd we can\u0027t just make a copy, because if openstate is freed, the fd will also be closed so making a copy won\u0027t work.",
       "parentUuid": "27e81aa0_2a1a9ce3",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bd33611_228c11eb",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1796,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-26T15:20:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59a5d429_4e86338f",
       "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
