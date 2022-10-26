@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b20590_744c9532",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-26T20:02:45Z",
+      "side": 1,
+      "message": "What actually complains about this being a char *?",
+      "revId": "0832adde28c87974cb0a04fb6380e26e1d7e75ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027b8941_38b33e70",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-26T20:02:45Z",
+      "side": 1,
+      "message": "Are you sure this works? xdr_bool takes a bool_t or did you change the definition of xdr_bool?",
+      "revId": "0832adde28c87974cb0a04fb6380e26e1d7e75ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
