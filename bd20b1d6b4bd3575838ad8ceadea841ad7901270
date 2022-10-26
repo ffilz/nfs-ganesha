@@ -16,6 +16,24 @@
       "message": "OK, that makes more sense. Could you add a comment to indicate try again with IPv4 in case of error with IPv6.",
       "revId": "bd20b1d6b4bd3575838ad8ceadea841ad7901270",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38178519_37a8d19b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2022-10-26T05:14:05Z",
+      "side": 1,
+      "message": "Its there in the code already\n```\n        /* Couldn\u0027t find an AF_INET6 address, look for AF_INET address */\n        hints.ai_family \u003d AF_INET;\n\n        retval \u003d gsh_getaddrinfo(caller_name, port_str, \u0026hints, \u0026result, stats);\n```",
+      "parentUuid": "222df5a0_2c751d6c",
+      "revId": "bd20b1d6b4bd3575838ad8ceadea841ad7901270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
