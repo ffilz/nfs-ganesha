@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a8c1599_98d207ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-27T23:09:08Z",
+      "side": 1,
+      "message": "OK, after talking with Kaleb, I\u0027d like to see the \"unresolved\" comments addressed.",
+      "revId": "0832adde28c87974cb0a04fb6380e26e1d7e75ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95b20590_744c9532",
         "filename": "src/Protocols/NFS/nfs3_readdir.c",
         "patchSetId": 2
@@ -20,6 +37,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf5740b4_d374a759",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-27T23:09:08Z",
+      "side": 1,
+      "message": "OK, I see now, it\u0027s assigned to uio_vio fields which are uint8_t *,\n\nPlease also change nfs4_op_readdir.c for consistency.",
+      "parentUuid": "95b20590_744c9532",
+      "revId": "0832adde28c87974cb0a04fb6380e26e1d7e75ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb69b2ba_ee920ae4",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-27T23:09:08Z",
+      "side": 1,
+      "message": "Please leave this as xdrmem_create, which that\u0027s a macro resolving to xdrmem_ncreate, the macro is what all callers use.",
+      "revId": "0832adde28c87974cb0a04fb6380e26e1d7e75ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "027b8941_38b33e70",
         "filename": "src/Protocols/NFS/nfs_proto_tools.c",
         "patchSetId": 2
@@ -31,6 +83,24 @@
       "writtenOn": "2022-10-26T20:02:45Z",
       "side": 1,
       "message": "Are you sure this works? xdr_bool takes a bool_t or did you change the definition of xdr_bool?",
+      "revId": "0832adde28c87974cb0a04fb6380e26e1d7e75ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "103a3cde_75995ee1",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-27T23:09:08Z",
+      "side": 1,
+      "message": "Oh, never mind... Brain read this backwards... You\u0027re changing TO bool_t...",
+      "parentUuid": "027b8941_38b33e70",
       "revId": "0832adde28c87974cb0a04fb6380e26e1d7e75ec",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
