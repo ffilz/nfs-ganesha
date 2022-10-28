@@ -160,6 +160,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bd99de4_95e8cd46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-28T21:14:47Z",
+      "side": 1,
+      "message": "And I found the issue causing the compile error.",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27e81aa0_2a1a9ce3",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 11
@@ -207,6 +224,23 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "59a5d429_4e86338f",
+      "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af6fb2e1_d255d486",
+        "filename": "src/include/FSAL/fsal_commonlib.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-28T21:14:47Z",
+      "side": 1,
+      "message": "Missing closing brace...",
       "revId": "4f14f782f961ab26c5a78994d6f3c8168f696031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
