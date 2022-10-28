@@ -16,6 +16,24 @@
       "message": "Technically not necessary.  LogFatal() exits.",
       "revId": "1b4fb951b6c007c9dc9d70e643e58b1a2fd95ff2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af8963c_1b573222",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-28T20:18:32Z",
+      "side": 1,
+      "message": "Sometimes the compiler or static code analysis complain because they don\u0027t know LogFatal never returns...",
+      "parentUuid": "972d3bb0_c6efd6ed",
+      "revId": "1b4fb951b6c007c9dc9d70e643e58b1a2fd95ff2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
