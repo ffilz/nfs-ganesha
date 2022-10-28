@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a603e2a_aefbf10f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-28T18:09:16Z",
+      "side": 1,
+      "message": "This needs a bit more work before being ready for merge.",
+      "revId": "7f297490d6a164e3ad060512591105baa647c124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3e49eb6_32013163",
         "filename": "src/config_samples/config.txt",
         "patchSetId": 5
@@ -49,6 +66,58 @@
       "writtenOn": "2022-10-28T17:58:37Z",
       "side": 1,
       "message": "This bit should be left out, I think.  Docs are in the man pages now, and we shouldn\u0027t have multiple places for them, since they won\u0027t be kept in sync.",
+      "revId": "7f297490d6a164e3ad060512591105baa647c124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd45d6d_9b229de2",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-28T18:09:16Z",
+      "side": 1,
+      "message": "Yea, let\u0027s not add detail in config.txt, config.txt is a simple enumeration of all the config variables in a single file. Yes, that\u0027s duplicate of the man pages, but personally for me, it\u0027s easier to skim when I\u0027m looking for a config variable.",
+      "parentUuid": "d3e49eb6_32013163",
+      "revId": "7f297490d6a164e3ad060512591105baa647c124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c1d0aab_b8600377",
+        "filename": "src/config_samples/rgw.conf",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-28T18:09:16Z",
+      "side": 1,
+      "message": "Since 128 is the default, I\u0027d prefer to leave it out, though we could document it should never be set to 0, but that documentation might be best off in the man page.",
+      "revId": "7f297490d6a164e3ad060512591105baa647c124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c06000_b8d67cb8",
+        "filename": "src/doc/man/ganesha-cache-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-10-28T18:09:16Z",
+      "side": 1,
+      "message": "\"should always be enabled\"",
       "revId": "7f297490d6a164e3ad060512591105baa647c124",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
