@@ -1,6 +1,91 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "441b1ac7_7f84be55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-01T18:22:06Z",
+      "side": 1,
+      "message": "The limits we check against need to be small enough to be a real limit to protect against security attack.",
+      "revId": "e4ab066cda127151e8c38b91338fdb7df49b9f57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e372d0_04a48431",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-01T18:22:06Z",
+      "side": 1,
+      "message": "we need a more modest limit for this. For V4.x it actually should never be more than 3. Actually there\u0027s a BITMAP4_LEN defined to 3... use that instead of UINT_MAX.",
+      "revId": "e4ab066cda127151e8c38b91338fdb7df49b9f57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d040e9a_24e2db70",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-01T18:22:06Z",
+      "side": 1,
+      "message": "We need a limit smaller than UINT_MAX. knfsd checks this against the size of the request but I\u0027m not sure that\u0027s convenient. Maybe limit it to 4096?",
+      "revId": "e4ab066cda127151e8c38b91338fdb7df49b9f57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "654c4be0_2245a57d",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1653,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-01T18:22:06Z",
+      "side": 1,
+      "message": "This needs to be a smaller limit that UINT_MAX. Let\u0027s say 1024 for this.",
+      "revId": "e4ab066cda127151e8c38b91338fdb7df49b9f57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba30ba60_f07c62c1",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1702,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-01T18:22:06Z",
+      "side": 1,
+      "message": "1024 for this one also",
+      "revId": "e4ab066cda127151e8c38b91338fdb7df49b9f57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "728c7f65_d0635850",
@@ -14,6 +99,23 @@
       "writtenOn": "2022-11-01T17:59:44Z",
       "side": 1,
       "message": "ERROR: space prohibited before that close parenthesis \u0027)\u0027\n+\tif (objp-\u003ecount \u003c\u003d 0 || objp-\u003ecount \u003e UINT_MAX )",
+      "revId": "e4ab066cda127151e8c38b91338fdb7df49b9f57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12947740_7495a5c8",
+        "filename": "src/Protocols/XDR/xdr_nfsacl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-01T18:22:06Z",
+      "side": 1,
+      "message": "This needs a smaller limit, let\u0027s say 4096",
       "revId": "e4ab066cda127151e8c38b91338fdb7df49b9f57",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
