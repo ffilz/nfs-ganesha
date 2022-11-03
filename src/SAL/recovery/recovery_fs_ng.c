@@ -377,10 +377,18 @@ static void fs_ng_read_recov_clids(nfs_grace_start_t *gsp,
 		return;
 	}
 
+#ifndef FIXME
+	return;
+#else
 	/**
+	 * More investigation/design is required to determine the best
+	 * implementation for the remainder of this method. In the interim,
+	 * Coverity complains that this is dead code because of the early
+	 * return above. Hence the remainder of this method is ifdef'ed
+	 * out to avoid the Coverity complaint.
+	 *
 	 *  @todo: FIXME: make the rest of this work
 	 */
-	return;
 
 	switch (gsp->event) {
 	case EVENT_TAKE_NODEID:
@@ -418,6 +426,7 @@ static void fs_ng_read_recov_clids(nfs_grace_start_t *gsp,
 			 "Failed to read v4 recovery dir (%s)", path);
 		return;
 	}
+#endif
 }
 
 static void fs_ng_swap_recov_dir(void)
