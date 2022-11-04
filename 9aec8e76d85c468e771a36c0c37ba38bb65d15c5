@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432ee082_5b056dba",
+        "filename": "src/FSAL/FSAL_PROXY_V3/utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-04T18:40:33Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!attrmask_is_posix(fsal_attrs_out-\u003erequest_mask)) {\n \t\treturn false;\n \t}",
+      "revId": "9aec8e76d85c468e771a36c0c37ba38bb65d15c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2bb19da_34934bf7",
+        "filename": "src/FSAL/FSAL_PROXY_V3/utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-04T18:40:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tgsh_time_cmp(\u0026fsal_attrs_out-\u003emtime, \u0026fsal_attrs_out-\u003ectime) \u003e 0",
+      "revId": "9aec8e76d85c468e771a36c0c37ba38bb65d15c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
