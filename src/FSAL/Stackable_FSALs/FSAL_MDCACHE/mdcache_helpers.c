@@ -3175,6 +3175,9 @@ again:
 					"Lookup by key for %s failed, lookup by name now",
 					dirent->name);
 
+			atomic_set_uint32_t_bits(&chunk_dirty_manage.status,
+					CHUNK_DIRTY);
+			now(&chunk_dirty_manage.dirty_time);
 			/* mdc_lookup_uncached needs write lock, dropping the
 			 * read lock means we can no longer trust the dirent or
 			 * the chunk.
