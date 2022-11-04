@@ -547,8 +547,11 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 	if (!(directory->obj_handle.type == DIRECTORY))
 		return fsalstat(ERR_FSAL_NOTDIR, 0);
 
-	if (mdcache_param.dir.avl_chunk == 0) {
-		/* Not caching dirents; pass through directly to FSAL */
+	if (mdcache_param.dir.avl_chunk == 0 ||
+		(0 < chunk_dirty_manage.recovery_interval &&
+		CHUNK_DIRTY == atomic_fetch_int32_t(&chunk_dirty_manage.status))) {
+		/* Not caching dirents or (recovery_interval is enable and existing dirty chunk);
+		pass through directly to FSAL */
 		return mdcache_readdir_uncached(directory, whence, dir_state,
 						cb, attrmask, eod_met);
 	} else {
