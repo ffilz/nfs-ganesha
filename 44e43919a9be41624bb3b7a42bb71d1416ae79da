@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9670ad8_7fcc9957",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-08T22:55:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tupdate_share_counters(share, openflags, my_share_fd-\u003efsal_fd.openflags);",
+      "revId": "44e43919a9be41624bb3b7a42bb71d1416ae79da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
