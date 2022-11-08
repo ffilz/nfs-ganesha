@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "079afc82_3ae7bfad",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-08T22:35:58Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (8, 17)\n+\tif (FSAL_IS_ERROR(status)) {\n+\t\t /*close fd*/",
+      "revId": "8ab3b9adc0f9bba9fdfcf065c38b687e908be16a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
