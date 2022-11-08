@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee4efea4_3841f492",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1997,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-08T22:27:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!open_correct(fsal_fd-\u003eopenflags, openflags)) {\n+\t\tstatus \u003d fsal_reopen_fd(obj_hdl, openflags, fsal_fd);\n+\t}",
+      "revId": "0884d6ef21931782bab67110e15a2bae6c3312ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d6a708_50c56b74",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2258,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-08T22:27:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (FSAL_IS_ERROR(status)) {\n+\t\t\tgoto out;\n+\t\t}",
+      "revId": "0884d6ef21931782bab67110e15a2bae6c3312ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
