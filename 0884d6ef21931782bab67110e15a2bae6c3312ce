@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b786ee8_6089ad09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T15:36:54Z",
+      "side": 1,
+      "message": "Will submit new patch shortly.",
+      "revId": "0884d6ef21931782bab67110e15a2bae6c3312ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee4efea4_3841f492",
@@ -18,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7014182_b11fc00d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1997,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T15:36:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee4efea4_3841f492",
+      "revId": "0884d6ef21931782bab67110e15a2bae6c3312ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19d6a708_50c56b74",
@@ -31,6 +66,24 @@
       "writtenOn": "2022-11-08T22:27:41Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (FSAL_IS_ERROR(status)) {\n+\t\t\tgoto out;\n+\t\t}",
+      "revId": "0884d6ef21931782bab67110e15a2bae6c3312ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04738a52_f077a144",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2258,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T15:36:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19d6a708_50c56b74",
       "revId": "0884d6ef21931782bab67110e15a2bae6c3312ce",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
