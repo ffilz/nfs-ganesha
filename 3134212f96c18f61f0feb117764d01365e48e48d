@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cdb4302_bf98d610",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-09T14:10:30Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tCHUNK_DIRTY \u003d\u003d atomic_fetch_int32_t(\u0026chunk_dirty_manage.status))) {",
+      "revId": "3134212f96c18f61f0feb117764d01365e48e48d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3615470e_8735098c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-09T14:10:30Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t\tCHUNK_CLEAN);",
+      "revId": "3134212f96c18f61f0feb117764d01365e48e48d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bbf276_68712c8d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1632,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-11-09T14:10:30Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t\tCHUNK_CLEAN);",
+      "revId": "3134212f96c18f61f0feb117764d01365e48e48d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
