@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f3f1cab_0c07f6af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T19:41:14Z",
+      "side": 1,
+      "message": "The new way L1 and L2 will be used:\n\nEntries created via readdir directory scan will go into MRU of L2 all other new entries will go into MRU of L1. Any entry that gets an INITIAL reference for an operation will be promted to MRU of L1 (possibly promoted from L2 also). Non-INITIAL references don\u0027t promote entries.\n\nThe LRU thread will periodically demote to L2. I\u0027m really not totally convinced we still need L1 and L2...\n\nWe try and reap from L2 first.",
+      "revId": "f66b36602a8629486dd9a857e8fc205b0852e4eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6cf1df2_7a35a2cd",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 1
