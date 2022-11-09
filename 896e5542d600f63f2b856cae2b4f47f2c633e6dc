@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca0ce44_38e11ad7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T16:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77fd6081_39700499",
+      "revId": "896e5542d600f63f2b856cae2b4f47f2c633e6dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ce77e17_ba739538",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-08T22:56:46Z",
       "side": 1,
       "message": "WARNING: suspect code indent for conditional statements (8, 17)\n+\tif (FSAL_IS_ERROR(status)) {\n+\t\t /*close fd*/",
+      "revId": "896e5542d600f63f2b856cae2b4f47f2c633e6dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c997a10_0de501a9",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T16:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ce77e17_ba739538",
       "revId": "896e5542d600f63f2b856cae2b4f47f2c633e6dc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90abf4b5_60fa4c3f",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T16:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f8dc08a_0bf9bf9f",
+      "revId": "896e5542d600f63f2b856cae2b4f47f2c633e6dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8d1d7a2_e92c9cb9",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-11-08T22:56:46Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (rc \u003c 0) {\n+\t\tstatus \u003d lzfs_fsal_last_err();\n \t}",
+      "revId": "896e5542d600f63f2b856cae2b4f47f2c633e6dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65d220e_0fa4dfd0",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T16:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8d1d7a2_e92c9cb9",
       "revId": "896e5542d600f63f2b856cae2b4f47f2c633e6dc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
