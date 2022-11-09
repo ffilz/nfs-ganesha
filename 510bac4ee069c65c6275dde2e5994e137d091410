@@ -16,6 +16,24 @@
       "message": "Now, ERR_FSAL_NOT_OPENED is no longer returned, so in the function fsal_close, open_fd_count will be decremented by one, so open_fd_count will become negative?",
       "revId": "510bac4ee069c65c6275dde2e5994e137d091410",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd42443a_c6de2844",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-09T16:05:51Z",
+      "side": 0,
+      "message": "Actually ceph_close_my_fd will return ERR_FSAL_NOT_OPENED in this case, so all is good. Also, open_fd_count is managed differently now.",
+      "parentUuid": "a5246254_95d72bba",
+      "revId": "510bac4ee069c65c6275dde2e5994e137d091410",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
