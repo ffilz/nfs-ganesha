@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2679f8ad_c7f1143a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-11-09T18:30:23Z",
+      "side": 1,
+      "message": "Generally looks fine.  I\u0027m not sure about 9P refcounting, though",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27616c9a_16558bbe",
+        "filename": "src/Protocols/9P/9p_lopen.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-11-09T18:30:23Z",
+      "side": 1,
+      "message": "Why not just get one on every open, and put one on every close?  long_term_ref is a refcount, afterall.",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e6b43b_98b3308b",
+        "filename": "src/Protocols/9P/9p_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-11-09T18:30:23Z",
+      "side": 1,
+      "message": "This appears to put every time, but we only got the first time.",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1281ec49_676601d4",
+        "filename": "src/Protocols/9P/9p_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-11-09T18:30:23Z",
+      "side": 1,
+      "message": "Okay, this one is problematic, since it ignores the number of opens.",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce3e6c8_2ff7aa7c",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-11-09T18:30:23Z",
+      "side": 1,
+      "message": "obj could be NULL here.",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
