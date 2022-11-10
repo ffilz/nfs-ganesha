@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5f749d5_6ac3ea27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-11-10T13:42:33Z",
+      "side": 1,
+      "message": "Okay, with this, there\u0027s almost no difference between a single list and a double list.  Only if there\u0027s a gap, allowing L1-\u003eL2 demotions, followed by a readdir.  Otherwise, it\u0027s the same as putting readdir results in LRU of a single list.  I guess it could make a difference in re-use of readdir results, but I think in steady use, where we\u0027re reaping regularly, L2 will generally be empty or small, and having 2 queue won\u0027t make much of a difference.",
+      "parentUuid": "6f3f1cab_0c07f6af",
+      "revId": "f66b36602a8629486dd9a857e8fc205b0852e4eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6cf1df2_7a35a2cd",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 1
