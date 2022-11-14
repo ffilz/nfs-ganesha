@@ -16,6 +16,23 @@
       "message": "Probably useful, although I think systemd also dumps the backtrace of a service when it crashes.",
       "revId": "88ed8c5f2dd9bb5841e8ebf7d0611230d6796c47",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca990e5_0fd76aa2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020701
+      },
+      "writtenOn": "2022-11-14T04:55:29Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Verified-1\n\u003e \n\u003e https://jenkins-nfs-ganesha.apps.ocp.ci.centos.org/job/nfs-ganesha_trigger-fsal_cephfs/379//console : FAILED\n\n\nLooks like false failure.\nCan you please restart the test and check it? ",
+      "revId": "88ed8c5f2dd9bb5841e8ebf7d0611230d6796c47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
