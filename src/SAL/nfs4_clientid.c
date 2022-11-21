@@ -915,22 +915,6 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale)
 	else
 		ht_expire = ht_unconfirmed_client_id;
 
-	/* Need to clean up the client record. */
-	record = clientid->cid_client_record;
-	clientid->cid_client_record = NULL;
-
-	if (record != NULL) {
-		/* Detach the clientid record from the client record */
-		if (record->cr_confirmed_rec == clientid)
-			record->cr_confirmed_rec = NULL;
-
-		if (record->cr_unconfirmed_rec == clientid)
-			record->cr_unconfirmed_rec = NULL;
-
-		/* the linkage was removed, update refcount */
-		dec_client_record_ref(record);
-	}
-
 	if (make_stale) {
 		/* Keep clientid hashed, but mark it as stale */
 		clientid->cid_confirmed = STALE_CLIENT_ID;
@@ -1094,6 +1078,27 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale)
 
 	/* revoke delegations for this client*/
 	revoke_owner_delegs(&clientid->cid_owner);
+
+	/* Need to clean up the client record. */
+	PTHREAD_MUTEX_lock(&clientid->cid_mutex);
+	record = clientid->cid_client_record;
+	clientid->cid_client_record = NULL;
+	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
+
+	if (record != NULL) {
+		/* Detach the clientid record from the client record */
+		PTHREAD_MUTEX_lock(&record->cr_mutex);
+		if (record->cr_confirmed_rec == clientid)
+			record->cr_confirmed_rec = NULL;
+
+		if (record->cr_unconfirmed_rec == clientid)
+			record->cr_unconfirmed_rec = NULL;
+
+		PTHREAD_MUTEX_unlock(&record->cr_mutex);
+
+		/* the linkage was removed, update refcount */
+		dec_client_record_ref(record);
+	}
 
 	/* Destroy v4 callback channel */
 	if (clientid->cid_minorversion == 0 &&
