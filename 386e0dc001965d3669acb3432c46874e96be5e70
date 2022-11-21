@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1777a2e6_55dc64aa",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-21T20:04:47Z",
+      "side": 1,
+      "message": "I think this needs the cid_mutex to be held.",
+      "revId": "386e0dc001965d3669acb3432c46874e96be5e70",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a798f4d_67d2c33e",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-21T20:04:47Z",
+      "side": 1,
+      "message": "Hmm, and I\u0027m not sure what protects the record...",
+      "revId": "386e0dc001965d3669acb3432c46874e96be5e70",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
