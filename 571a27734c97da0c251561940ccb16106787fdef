@@ -16,6 +16,40 @@
       "message": "I\u0027ve added the appropriate Mutex protections. ",
       "revId": "571a27734c97da0c251561940ccb16106787fdef",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc67268_a3c9c188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-21T23:44:24Z",
+      "side": 1,
+      "message": "Oops, cr_mutex is already held.",
+      "revId": "571a27734c97da0c251561940ccb16106787fdef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6b859e_53f301df",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-21T23:44:24Z",
+      "side": 1,
+      "message": "cr_mutex is already held, see line #870",
+      "revId": "571a27734c97da0c251561940ccb16106787fdef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
