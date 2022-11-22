@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "638a4a3c_d89aeeb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-11-22T15:03:15Z",
+      "side": 1,
+      "message": "I\u0027m somewhat worried about dropping and reacquiring the cid_mutex.  I haven\u0027t seen any codepaths with issues yet, but it definitely opens a potential hole.",
+      "revId": "c95335fcf2daccdc569ce070323ae38e80694802",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
