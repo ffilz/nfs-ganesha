@@ -121,6 +121,24 @@
       "message": "A common convention is to have well-known prefix to all exported metrics and counters. In our case, I would recommend to prefix with \u0027nfs_ganesha_\u0027 all metric-counters names.",
       "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998bccc2_e63b023b",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2022-11-22T19:54:52Z",
+      "side": 1,
+      "message": "I agree with this and will update the prefix later today.\n\nIn my private testing, I use a separate prefix per core / FSAL library, hence the \"mdcache\" prefix here.",
+      "parentUuid": "e7f6bf57_e87211b4",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
