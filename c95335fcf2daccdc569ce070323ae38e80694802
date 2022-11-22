@@ -16,6 +16,24 @@
       "message": "I\u0027m somewhat worried about dropping and reacquiring the cid_mutex.  I haven\u0027t seen any codepaths with issues yet, but it definitely opens a potential hole.",
       "revId": "c95335fcf2daccdc569ce070323ae38e80694802",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9297011b_9a3e4bd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2022-11-22T17:56:13Z",
+      "side": 1,
+      "message": "The issue is that removing the client record and then calling operations that get to the FSAL is an issue, as it might depend on it for information (like in our case). \n\nThe only alternative that I see to not dropping and reacquiring the mutex is to hold it for the entire process of `nfs_client_id_expire` until we discard the client record. But this will require holding the mutex for a long time, while it seems that the model is to hold it for the least amount of time and only when setting/getting data from it.  \n\nDo you think the better approach is to hold the mutex for the entire time?",
+      "parentUuid": "638a4a3c_d89aeeb0",
+      "revId": "c95335fcf2daccdc569ce070323ae38e80694802",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
