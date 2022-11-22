@@ -52,6 +52,75 @@
       "parentUuid": "93d0f772_7904e1c4",
       "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "437e8552_43fd85bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2022-11-22T13:49:02Z",
+      "side": 1,
+      "message": "IMHO, this PR is better than (my) https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/543171\n\nIn a containerized environment it does not require an additional sidecar container, plus it has the potential to extern more metrics which are currently not visible via Ganesha DBus interface. Are there any open issues with this one?",
+      "parentUuid": "4e3aa006_ccbfc138",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e48a504a_ea23a412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2022-11-22T13:49:02Z",
+      "side": 1,
+      "message": "A common convention is to have well-known prefix to all exported metrics and counters. In our case, I would recommend to prefix with \u0027nfs_ganesha_\u0027 all metric-counters names.",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ea2be4_78b9551b",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2022-11-22T13:49:02Z",
+      "side": 1,
+      "message": "glibc declares:\n\n  extern void setrpcent (int __stayopen) __THROW;\n  extern void endrpcent (void) __THROW;\n  \nwhile libntipc declares without the __THROW.\nFor C++ code, this yields compilation error.\n\nOption 1:\nbefore those includes, have:\n#undef __THROW\n#define __THROW \n\nOption 2:\nAlign libntipc with latest glibc declarations.",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f6bf57_e87211b4",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2022-11-22T13:49:02Z",
+      "side": 1,
+      "message": "A common convention is to have well-known prefix to all exported metrics and counters. In our case, I would recommend to prefix with \u0027nfs_ganesha_\u0027 all metric-counters names.",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
