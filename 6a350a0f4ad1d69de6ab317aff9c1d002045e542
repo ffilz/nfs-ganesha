@@ -33,6 +33,23 @@
       "message": "Hmm, looking over the code, I think there\u0027s a lot of loose stuff with the client_record. I think we can re-work things so the client_record isn\u0027t actually freed until all clientids that use it are also freed. So nfs_client_id_expire wouldn\u0027t touch the client_record, leaving it to be unrefed when dec_client_id_ref reduces the clientid refcount to 0, at which point it releases it\u0027s client_record refcount, which if that then goes to 0 is allowed to free.\n\nThen cid_client_record is always valid and never changed. And can be safely accessed if the user holds a reference to the clientid.",
       "revId": "6a350a0f4ad1d69de6ab317aff9c1d002045e542",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8241ce_91405267",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-22T23:53:26Z",
+      "side": 1,
+      "message": "How about this patch instead:\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/546512\n\nThat assures that the life time of the client record is as long as necessary.",
+      "revId": "6a350a0f4ad1d69de6ab317aff9c1d002045e542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
