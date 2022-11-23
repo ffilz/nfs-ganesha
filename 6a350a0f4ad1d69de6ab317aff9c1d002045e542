@@ -50,6 +50,24 @@
       "message": "How about this patch instead:\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/546512\n\nThat assures that the life time of the client record is as long as necessary.",
       "revId": "6a350a0f4ad1d69de6ab317aff9c1d002045e542",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a5be573_3a517a8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2022-11-23T15:01:53Z",
+      "side": 1,
+      "message": "This looks good, it is a better solution to clean up the way it is handled. \n \nI will abandon this change once the other one is approved.",
+      "parentUuid": "ec8241ce_91405267",
+      "revId": "6a350a0f4ad1d69de6ab317aff9c1d002045e542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
