@@ -69,6 +69,42 @@
       "message": "can we abandon this then in favor of the other patch?",
       "revId": "7347d2946f196e051c8fce6a408decd14746ee86",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8d7ffc7_72d84544",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2022-11-23T07:47:00Z",
+      "side": 1,
+      "message": "Interesting; I was not aware of this effort. Exporting metrics from within the server itself (instead of an external process, using the dbus interface) is more robust. Is there any public (github?) repository/branch which is used for this development effort? I would like to take a closer look.",
+      "parentUuid": "8ccc8d56_2b8b6a54",
+      "revId": "7347d2946f196e051c8fce6a408decd14746ee86",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2162e39_f41993b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2022-11-23T07:47:00Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "d8e09d0d_4c030c51",
+      "revId": "7347d2946f196e051c8fce6a408decd14746ee86",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
