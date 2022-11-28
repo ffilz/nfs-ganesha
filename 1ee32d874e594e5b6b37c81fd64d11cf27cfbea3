@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0739cc7_4ce63795",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2022-11-28T18:11:26Z",
+      "side": 1,
+      "message": "This change looks like it might break the reclaim_complete check when fsal_grace_support \u003d\u003d true.",
+      "revId": "1ee32d874e594e5b6b37c81fd64d11cf27cfbea3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
