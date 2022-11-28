@@ -51,6 +51,24 @@
       "parentUuid": "a0739cc7_4ce63795",
       "revId": "1ee32d874e594e5b6b37c81fd64d11cf27cfbea3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00387c0b_5e9c8e82",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-11-28T18:39:55Z",
+      "side": 1,
+      "message": "reclaim complete is in an || clause, let\u0027s rewrite a bit:\n\n(!allow_reclaim \u0026\u0026 !grace_support)\n||\n(minorversion \u003e 0 \u0026\u0026 reclaim_complete)\n\nSo if reclaim is complete, we will definitely get NO_GRACE",
+      "parentUuid": "a0739cc7_4ce63795",
+      "revId": "1ee32d874e594e5b6b37c81fd64d11cf27cfbea3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
