@@ -105,6 +105,24 @@
       "parentUuid": "802e7587_98391c2c",
       "revId": "1ee32d874e594e5b6b37c81fd64d11cf27cfbea3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d5a95c_af99111c",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2022-11-30T13:45:14Z",
+      "side": 1,
+      "message": "My mistake, I misread the logic here. I think this looks safe, but maybe that\u0027s a good reason to add a new helper function for this? This condition has grown complex and hard to read. It could use a nice comments that explains the logic in English.",
+      "parentUuid": "bb0e51a7_bcbb1690",
+      "revId": "1ee32d874e594e5b6b37c81fd64d11cf27cfbea3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
