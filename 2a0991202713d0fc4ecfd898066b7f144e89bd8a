@@ -16,6 +16,23 @@
       "message": "I just read the discussion in the IRC in hindsight. Here are some answers to questions that cam up there (I didn\u0027t answer in the IRC because this was an old discussion): \n1. Our goal with this patch if to let the FSAL decide on whether or not to allow reclaim of resources. The reasons we do this is a bit long to explain here, but mainly since we are implementing a clustered solution where clients can move between Ganesha FEs, we use our FSAL as source of truth for these things. \nBTW, this seems to be the reason `fso_grace_method` exists- letting the FSAL make decisions about grace/reclaim.\n\n2. What happens if a client calls open with `CLAIM_PREVIOUS` after calling `RECLAIM_COMPLETE`? Well if you look at the condition that I changed, one of the conditions along side it is `clientid-\u003ecid_cb.v41.cid_reclaim_complete`, my patch doesn\u0027t effect it. \n\n3. What happens if the client call open with `CLAIM_PREVIOUS` after grace period? Then when it calls lock with reclaim, the FSAL is responsible to deny the lock.\n\n4. We have tested this- the reason we are submitting this patch is that we found this original issue in a test- Clients weren\u0027t able to reclaim locks after failure because open failed. After this fix, the test passes. ",
       "revId": "2a0991202713d0fc4ecfd898066b7f144e89bd8a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f8551d_edb2144d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2022-11-30T13:46:45Z",
+      "side": 1,
+      "message": "Looks reasonable, but I wouldn\u0027t mind seeing this logic moved into a helper function with some surrounding comments. This check has grown quite complex.",
+      "revId": "2a0991202713d0fc4ecfd898066b7f144e89bd8a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
