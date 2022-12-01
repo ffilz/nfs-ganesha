@@ -16,6 +16,23 @@
       "message": "Looks pretty simple. I\u0027m OK with this going into V4.3 (I\u0027m pretty sure we will be doing a V4.3).",
       "revId": "e2ec258fd8bb22b37ef7a617cf2bb656a896452b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b559c863_5879a7ae",
+        "filename": "src/scripts/nfs-ganesha-config.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-12-01T16:39:03Z",
+      "side": 1,
+      "message": "Should NODEID_EXEC be defined to /bin/true in scripts/systemd/sysconfig/nfs-ganesha and scripts/init.d/sysconfig/ganesha like EPOCH_EXEC is?  Maybe with a commented out version pointing at the new script?",
+      "revId": "e2ec258fd8bb22b37ef7a617cf2bb656a896452b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
