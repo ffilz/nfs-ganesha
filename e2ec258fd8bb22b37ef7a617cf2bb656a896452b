@@ -33,6 +33,24 @@
       "message": "Should NODEID_EXEC be defined to /bin/true in scripts/systemd/sysconfig/nfs-ganesha and scripts/init.d/sysconfig/ganesha like EPOCH_EXEC is?  Maybe with a commented out version pointing at the new script?",
       "revId": "e2ec258fd8bb22b37ef7a617cf2bb656a896452b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "378daeaa_f6391a6d",
+        "filename": "src/scripts/nfs-ganesha-config.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1020701
+      },
+      "writtenOn": "2022-12-02T04:57:24Z",
+      "side": 1,
+      "message": "Added #NODEID_EXEC\u003d\"\" in both sysconfig file. NODEID_EXEC should point for proper script, setting /bin/true(with commented line also) may give wrong impression. I would go with empty string (\"\").",
+      "parentUuid": "b559c863_5879a7ae",
+      "revId": "e2ec258fd8bb22b37ef7a617cf2bb656a896452b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
