@@ -237,7 +237,51 @@ int nfs_rpc_req2client_cred(struct svc_req *req, nfs_client_cred_t *pcred)
 	return 1;
 }
 
-#ifdef _HAVE_GSSAPI
+static void set_extended_groups(void)
+{
+	/****************************************************************/
+	/* Check if we have manage_gids.				*/
+	/****************************************************************/
+	if ((op_ctx->cred_flags & MANAGED_GIDS) != 0) {
+		/* Fetch the group data if required */
+		if (op_ctx->caller_gdata == NULL &&
+		    !uid2grp(op_ctx->original_creds.caller_uid,
+			     &op_ctx->caller_gdata)) {
+			LogInfo(COMPONENT_DISPATCH,
+				"Attempt to fetch managed_gids failed");
+			idmapper_monitoring__failure(IDMAPPING_UID_TO_GROUPLIST,
+						     IDMAPPING_PWUTILS);
+			/** @todo: do we really want to bail here? */
+			if (nfs_param.core_param.enable_rpc_cred_fallback) {
+				LogInfo(COMPONENT_DISPATCH,
+					"Attempt to fetch managed_gids failed for uid=%u, using cred info from rpc request",
+					op_ctx->original_creds.caller_uid);
+				/* Use the original_creds group list */
+				op_ctx->creds.caller_glen =
+					op_ctx->original_creds.caller_glen;
+				op_ctx->creds.caller_garray =
+					op_ctx->original_creds.caller_garray;
+
+			} else {
+				LogInfo(COMPONENT_DISPATCH,
+					"Attempt to fetch managed_gids failed for uid=%u",
+					op_ctx->original_creds.caller_uid);
+				op_ctx->creds.caller_glen = 0;
+			}
+		} else {
+			op_ctx->creds.caller_glen =
+				op_ctx->caller_gdata->nbgroups;
+			op_ctx->creds.caller_garray =
+				op_ctx->caller_gdata->groups;
+		}
+	} else {
+		/* Use the original_creds group list */
+		op_ctx->creds.caller_glen = op_ctx->original_creds.caller_glen;
+		op_ctx->creds.caller_garray =
+			op_ctx->original_creds.caller_garray;
+	}
+}
+
 static void rpcsec_gss_fetch_managed_groups(char *principal)
 {
 	/* Fetch the group data only if required */
@@ -272,7 +316,6 @@ static void rpcsec_gss_fetch_managed_groups(char *principal)
 #endif
 	}
 }
-#endif
 
 /**
  * @brief Get numeric credentials from request
@@ -402,6 +445,8 @@ nfsstat4 nfs_req_creds(struct svc_req *req)
 		break;
 	}
 
+	set_extended_groups();
+
 	/****************************************************************/
 	/* Now check for anon creds or id squashing			*/
 	/****************************************************************/
@@ -446,46 +491,6 @@ nfsstat4 nfs_req_creds(struct svc_req *req)
 	} else {
 		/* Use original_creds gid */
 		op_ctx->creds.caller_gid = op_ctx->original_creds.caller_gid;
-	}
-
-	/****************************************************************/
-	/* Check if we have manage_gids.				*/
-	/****************************************************************/
-	if ((op_ctx->cred_flags & MANAGED_GIDS) != 0) {
-		/* Fetch the group data if required */
-		if (op_ctx->caller_gdata == NULL &&
-		    !uid2grp(op_ctx->original_creds.caller_uid,
-			     &op_ctx->caller_gdata)) {
-			idmapper_monitoring__failure(IDMAPPING_UID_TO_GROUPLIST,
-						     IDMAPPING_PWUTILS);
-			/** @todo: do we really want to bail here? */
-			if (nfs_param.core_param.enable_rpc_cred_fallback) {
-				LogInfo(COMPONENT_DISPATCH,
-					"Attempt to fetch managed_gids failed for uid=%u, using cred info from rpc request",
-					op_ctx->original_creds.caller_uid);
-				/* Use the original_creds group list */
-				op_ctx->creds.caller_glen =
-					op_ctx->original_creds.caller_glen;
-				op_ctx->creds.caller_garray =
-					op_ctx->original_creds.caller_garray;
-
-			} else {
-				LogInfo(COMPONENT_DISPATCH,
-					"Attempt to fetch managed_gids failed for uid=%u",
-					op_ctx->original_creds.caller_uid);
-				return NFS4ERR_ACCESS;
-			}
-		} else {
-			op_ctx->creds.caller_glen =
-				op_ctx->caller_gdata->nbgroups;
-			op_ctx->creds.caller_garray =
-				op_ctx->caller_gdata->groups;
-		}
-	} else {
-		/* Use the original_creds group list */
-		op_ctx->creds.caller_glen = op_ctx->original_creds.caller_glen;
-		op_ctx->creds.caller_garray =
-			op_ctx->original_creds.caller_garray;
 	}
 
 	/****************************************************************/
