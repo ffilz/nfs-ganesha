@@ -236,6 +236,7 @@ if (LINUX)
     set(PLATFORM "LINUX")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-strict-aliasing")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wimplicit -Wformat -Wmissing-braces -Wreturn-type -Wunused-variable -Wuninitialized -Wno-pointer-sign -Wno-maybe-uninitialized")
     set(OS_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/os/linux")
 endif(LINUX)
 
