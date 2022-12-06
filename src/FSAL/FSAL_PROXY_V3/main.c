@@ -200,8 +200,9 @@ const uint proxyv3_nlm_port(void)
  */
 const struct user_cred *proxyv3_creds(void)
 {
-	/* We want the *original* credentials, so we reflect the client */
-	return &op_ctx->original_creds;
+	/* We want the resolved user credentials, so we reflect the client
+	 * after resolving managed groups and credentials squashing */
+	return &op_ctx->creds;
 }
 
 /**
