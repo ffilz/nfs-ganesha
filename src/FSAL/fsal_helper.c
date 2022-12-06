@@ -1955,7 +1955,8 @@ again:
 	PTHREAD_MUTEX_lock(data->fsa_mutex);
 
 	while (!data->done) {
-		int rc = pthread_cond_wait(data->fsa_cond, data->fsa_mutex);
+		int __attribute__((unused)) rc =
+			pthread_cond_wait(data->fsa_cond, data->fsa_mutex);
 
 		assert(rc == 0);
 	}
@@ -1978,7 +1979,8 @@ again:
 	PTHREAD_MUTEX_lock(data->fsa_mutex);
 
 	while (!data->done) {
-		int rc = pthread_cond_wait(data->fsa_cond, data->fsa_mutex);
+		int __attribute__((unused)) rc =
+			pthread_cond_wait(data->fsa_cond, data->fsa_mutex);
 
 		assert(rc == 0);
 	}
