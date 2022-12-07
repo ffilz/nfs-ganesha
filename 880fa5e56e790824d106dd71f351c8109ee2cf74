@@ -16,6 +16,24 @@
       "message": "This is misleading, since the line and func are passed in, but the file is here.  Maybe stub out file, in this case, instead of using __FILE__?  (FTR, I don\u0027t see a point in using file when you have the function)",
       "revId": "880fa5e56e790824d106dd71f351c8109ee2cf74",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3ccbbd_85356874",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2392,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-12-07T16:01:20Z",
+      "side": 1,
+      "message": "log_all_exports is only called within this file, so rather than add __FILE__ to every caller, I just handled __FILE__ here. The file is an input to DisplayLogComponentLevel. I actually use file:line all the time, my editor allows me to select file:line and open a file directly to that line number. Much quicker than using cscope or grep to find the function.\n\nBut if you prefer, I will change so file is passed in and all callers pass it.",
+      "parentUuid": "03437eab_28becdf3",
+      "revId": "880fa5e56e790824d106dd71f351c8109ee2cf74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
