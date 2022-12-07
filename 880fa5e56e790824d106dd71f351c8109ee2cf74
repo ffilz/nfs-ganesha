@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03437eab_28becdf3",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2392,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2022-12-07T15:46:18Z",
+      "side": 1,
+      "message": "This is misleading, since the line and func are passed in, but the file is here.  Maybe stub out file, in this case, instead of using __FILE__?  (FTR, I don\u0027t see a point in using file when you have the function)",
+      "revId": "880fa5e56e790824d106dd71f351c8109ee2cf74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
