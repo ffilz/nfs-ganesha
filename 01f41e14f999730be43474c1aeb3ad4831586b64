@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f2b6fac_f12e63e7",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-12-08T13:02:24Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Handle IPV6 IP addr",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbda0e6c_89aab71c",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-12-08T13:02:24Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (lastptr \u0026\u0026 *(lastptr-1) \u003d\u003d \u0027:\u0027) {\n+\t\tlastptr \u003d NULL;\n+\t}",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94dbb24d_c309aa48",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-12-08T13:02:24Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!port_argument) {\n+\t\t\tport_argument \u003d 24007;\n+\t\t}",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b42d28_e51b78b9",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2022-12-08T13:02:24Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tfor (i \u003d 0; i \u003c n; i++) {\n+\t\t\ttrimmed_hostname[i] \u003d hostname_begins[i];\n+\t\t}",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
