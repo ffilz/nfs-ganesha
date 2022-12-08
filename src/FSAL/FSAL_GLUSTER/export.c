@@ -43,6 +43,7 @@
 #include "export_mgr.h"
 #include "pnfs_utils.h"
 #include "sal_data.h"
+#include "ctype.h"
 #ifdef USE_LTTNG
 #include "gsh_lttng/fsal_gluster.h"
 #endif
@@ -586,6 +587,77 @@ skip_upcall:
 }
 
 /**
+ * @brief Given a glhostname which might include port number, find and set if there is
+ * already existing port entry. If not set to default glusterfsd port i.e 24007.
+ */
+void
+parse_glhostname(char *hostname, char **ghostname, int *gport)
+{
+	long port_argument = 24007;
+	char *lastptr = rindex(hostname, ':');
+
+	// Handle IPV6 IP addr
+	if (lastptr && *(lastptr-1) == ':') {
+		lastptr = NULL;
+	}
+
+	if (lastptr) {
+		*lastptr = '\0';
+		port_argument = strtol(lastptr + 1, NULL, 0);
+
+		if (!port_argument) {
+			port_argument = 24007;
+		}
+	}
+
+	*ghostname = hostname;
+	*gport = port_argument;
+}
+
+/**
+ * @brief Given a glhostname which might include trailing spaces on either side, find and
+ * return trimmed glhostname.
+ */
+static char *
+strip_trailing_spaces(const char *hostname)
+{
+	int l;
+	int n;
+	const char *hostname_begins;
+	const char *hostname_ends;
+
+	l = strlen(hostname);
+	n = l;
+	hostname_begins = hostname;
+
+	while (isspace(*hostname_begins)) {
+		hostname_begins++;
+		n--;
+	}
+
+	hostname_ends = hostname + l - 1;
+	while (isspace(*hostname_ends)) {
+		hostname_ends--;
+		n--;
+	}
+
+	if (n == l) {
+		return gsh_strdup(hostname);
+	} else {
+		char *trimmed_hostname;
+		int i;
+
+		trimmed_hostname = gsh_malloc(n + sizeof((char) '\0'));
+		for (i = 0; i < n; i++) {
+			trimmed_hostname[i] = hostname_begins[i];
+		}
+		trimmed_hostname[n] = '\0';
+
+		return trimmed_hostname;
+	}
+}
+
+/**
  * @brief Given Gluster export params, find and return if there is
  * already existing export entry. If not create one.
  */
@@ -594,6 +666,17 @@ glusterfs_get_fs(struct glexport_params params,
 		 const struct fsal_up_vector *up_ops)
 {
 	int rc = 0;
+
+	int gport = 0;
+	char *ghostname = NULL;
+	char *gtransport = NULL;
+	char *duphost = NULL;
+	char *token = NULL;
+	char *trimmed = NULL;
+	char *context = NULL;
+
+	int successful_ret = 0;
+
 	struct glusterfs_fs *gl_fs = NULL;
 	glfs_t  *fs = NULL;
 	struct glist_head *glist, *glistn;
@@ -622,16 +705,34 @@ glusterfs_get_fs(struct glexport_params params,
 
 	switch (params.gltransport) {
 	case GLUSTER_RDMA_VOL:
-		rc = glfs_set_volfile_server(fs, "rdma", params.glhostname,
-				24007);
+		gtransport = "rdma";
 		break;
 	default:
-		rc = glfs_set_volfile_server(fs, "tcp", params.glhostname,
-				24007);
+		gtransport = "tcp";
 		break;
 	}
 
-	if (rc != 0) {
+	duphost = gsh_strdup(params.glhostname);
+	token = strtok_r(duphost, ",", &context);
+
+	while (token != NULL) {
+		trimmed = strip_trailing_spaces(token);
+		parse_glhostname(trimmed, &ghostname, &gport);
+
+		rc = glfs_set_volfile_server(fs, gtransport, ghostname,
+				gport);
+
+		if (rc == 0)
+			successful_ret++;
+
+		gsh_free(trimmed);
+		token = strtok_r(NULL, ",", &context);
+	}
+
+	if (duphost)
+		gsh_free(duphost);
+
+	if (!successful_ret) {
 		LogCrit(COMPONENT_FSAL,
 			"Unable to set volume file. Volume: %s",
 			params.glvolname);
