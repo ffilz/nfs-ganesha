@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47e0ffb_b3acff51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-12-09T00:37:26Z",
+      "side": 1,
+      "message": "Please fix up, but also, please investigate whether this can actually have improved handling by doing something in the config parser.",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a4823d_590cf08e",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-12-09T00:37:26Z",
+      "side": 1,
+      "message": "Please wrap comments to fit in 80 columns",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f2b6fac_f12e63e7",
@@ -14,6 +48,24 @@
       "writtenOn": "2022-12-08T13:02:24Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Handle IPV6 IP addr",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed767626_052f31fa",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-12-09T00:37:26Z",
+      "side": 1,
+      "message": "Please use /* ... */ style comments",
+      "parentUuid": "0f2b6fac_f12e63e7",
       "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +106,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ad594d5_17034755",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-12-09T00:37:26Z",
+      "side": 1,
+      "message": "wrap....",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2983cb71_6f666f73",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-12-09T00:37:26Z",
+      "side": 1,
+      "message": "Just use +1...",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03b42d28_e51b78b9",
         "filename": "src/FSAL/FSAL_GLUSTER/export.c",
         "patchSetId": 1
@@ -65,6 +151,24 @@
       "writtenOn": "2022-12-08T13:02:24Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tfor (i \u003d 0; i \u003c n; i++) {\n+\t\t\ttrimmed_hostname[i] \u003d hostname_begins[i];\n+\t\t}",
+      "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be479ec_23d70f24",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2022-12-09T00:37:26Z",
+      "side": 1,
+      "message": "Please use memcpy instead of for loop.",
+      "parentUuid": "03b42d28_e51b78b9",
       "revId": "01f41e14f999730be43474c1aeb3ad4831586b64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
