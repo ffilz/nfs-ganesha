@@ -18,6 +18,40 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3745ebd2_86871818",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-01-04T14:44:00Z",
+      "side": 1,
+      "message": "Looks good, a few minor nits.",
+      "revId": "073567883e97bcc388ae0a3386e303d86b1d0229",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77df5e66_b1a24bda",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-01-04T14:44:00Z",
+      "side": 1,
+      "message": "Can we use this directly?  Or at least put () on the end, since it\u0027s not a compile-time constant?",
+      "revId": "073567883e97bcc388ae0a3386e303d86b1d0229",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc611e3c_d6b81606",
@@ -31,6 +65,23 @@
       "writtenOn": "2023-01-04T11:29:34Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t/** Minimum threshold value to call malloc_trim. The malloc_trim will be called",
+      "revId": "073567883e97bcc388ae0a3386e303d86b1d0229",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd307c10_65680613",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-01-04T14:44:00Z",
+      "side": 1,
+      "message": "The doxygen comment goes before the definition, so this should move up (and wrap at 80 chars)",
       "revId": "073567883e97bcc388ae0a3386e303d86b1d0229",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
