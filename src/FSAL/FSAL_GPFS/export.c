@@ -532,8 +532,10 @@ int gpfs_claim_filesystem(struct fsal_filesystem *fs,
 	/* We have set up the export. If the file system is already claimed,
 	 * we are done.
 	 */
-	if (fs->private_data) /* file system is already claimed */
+	if (fs->private_data) {/* file system is already claimed */
+		*private_data = gpfs_fs;
 		return 0;
+	}
 
 	/* Get an fd for the root and create an upcall thread */
 	retval = open_root_fd(gpfs_fs);

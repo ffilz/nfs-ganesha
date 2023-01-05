@@ -1382,7 +1382,7 @@ static int process_claim(const char *path,
 	int retval = 0;
 	bool already_claimed = this->fsal == fsal;
 	enum claim_type claim_type;
-	void *private_data;
+	void *private_data = NULL;
 
 	LogFilesystem("PROCESS CLAIM", "", this);
 
