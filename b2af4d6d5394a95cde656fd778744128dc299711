@@ -34,6 +34,24 @@
       "parentUuid": "90f8fdfe_e5ff8b4c",
       "revId": "b2af4d6d5394a95cde656fd778744128dc299711",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9da1d1c3_fdcef02f",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2023-01-05T19:08:31Z",
+      "side": 1,
+      "message": "private_data argument introduced in 4.x and process_claim (localfs.c) assigns private_data  back to this-\u003eprivate_data \n\nthis-\u003eprivate_data \u003d private_data; \n\nWith current code, private_data points valid data only for 1st export creation.\n2nd export onwards it will not be initialized since fs-\u003eprivate_data is not null.\n\nAnother alternative to this fix is removal of private_data argument in claim_filesystem_cb and retain old implementation where this-\u003eprivate_data is assigned with gpfs_fs for first time.\n\nfs-\u003eprivate_data \u003d gpfs_fs; in gpfs_claim_filesystem",
+      "parentUuid": "905430da_d9ba07c8",
+      "revId": "b2af4d6d5394a95cde656fd778744128dc299711",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
