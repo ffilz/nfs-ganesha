@@ -311,24 +311,19 @@ int vfs_claim_filesystem(struct fsal_filesystem *fs,
 			 struct fsal_export *exp,
 			 void **private_data)
 {
-	int retval = 0, fd = root_fd(fs);
+	int retval = 0, fd;
 	struct vfs_fsal_export *myself;
 
 	LogFilesystem("VFS CLAIM FS", "", fs);
 
-	myself = EXPORT_VFS_FROM_FSAL(exp);
-
-	if (fs->fsal != NULL) {
-		if (fd <= 0) {
-			LogCrit(COMPONENT_FSAL,
-				"Something wrong with export, fs %s appears already claimed but doesn't have private data",
-				fs->path);
-			retval = EINVAL;
-			goto errout;
-		}
-
-		goto already_claimed;
+	if (private_data != NULL) {
+		/* Already claimed, and private_data is already set, nothing to
+		 * do here.
+		 */
+		return 0;
 	}
+
+	myself = EXPORT_VFS_FROM_FSAL(exp);
 
 	retval = vfs_get_root_handle(fs, myself, &fd);
 
@@ -341,8 +336,6 @@ int vfs_claim_filesystem(struct fsal_filesystem *fs,
 		}
 		goto errout;
 	}
-
-already_claimed:
 
 	*private_data = (void *) (long) fd;
 
