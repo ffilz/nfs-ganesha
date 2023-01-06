@@ -52,6 +52,24 @@
       "parentUuid": "905430da_d9ba07c8",
       "revId": "b2af4d6d5394a95cde656fd778744128dc299711",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13229b10_a8cf6793",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-06T17:19:47Z",
+      "side": 1,
+      "message": "OK, sorry, reading more carefully this is the correct fix. It is necessary since otherwise process_claim would change private_data to garbage.\n\nIf claimfs() is called with private_data not being NULL, the fs MUST belong to this FSAL (GPFS in this case) and thus the existing private_data MUST be correct, so returning it in the private_data parameter is correct.\n\nActually there is some other intricacies...\n\nWhen claimfs() is called, the fs may still be claimed by another FSAL in which case private_data might not be NULL but also belongs to the other FSAL. That is why process_claim is setting the private_data much later, so it doesn\u0027t overwrite too early.\n\nI think I need to have process_claim set private_data to NULL unless the fs already belongs to this FSAL. The claimfs() implementations would then look at the passed in private_data, NOT fs-\u003eprivate_data.\n\nLet me post a replacement patch.",
+      "parentUuid": "9da1d1c3_fdcef02f",
+      "revId": "b2af4d6d5394a95cde656fd778744128dc299711",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
