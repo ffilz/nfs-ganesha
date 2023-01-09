@@ -33,6 +33,24 @@
       "message": "Are you sure we only need to set cc-\u003ecc_error.re_status if there is an error?",
       "revId": "8e896873e88d600515bef79401e85f09ba83556e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc164340_81f27950",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 1020331
+      },
+      "writtenOn": "2023-01-09T09:54:03Z",
+      "side": 1,
+      "message": "In case of error, we have to copy the return value in line 993/996 back. which we are doing in line 1002.",
+      "parentUuid": "43521b89_d9f705d5",
+      "revId": "8e896873e88d600515bef79401e85f09ba83556e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
