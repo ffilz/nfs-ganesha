@@ -22,6 +22,23 @@ NFS_CORE_PARAM {}
 --------------------------------------------------------------------------------
 Core parameters:
 
+HA_Proxy_Clients (client list, empty)
+    Client list entries can take on one of the following forms:
+
+        \*          Match any client
+        @name       Netgroup name
+        x.x.x.x/y   IPv4 network address, IPv6 addresses are also allowed
+                    but the format is too complex to show here
+        wildcarded  If the string contains at least one ? or *
+                    character (and is not simply "*"), the string is
+                    used to pattern match host names. Note that [] may
+                    also be used, but the pattern MUST have at least one
+                    ? or *
+        hostname    Match a single client (match is by IP address, all
+                    addresses returned by getaddrinfo will match, the
+                    getaddrinfo call is made at config parsing time)
+        IP address  Match a single client
+
 NFS_Port (uint16, range 0 to UINT16_MAX, default 2049)
     Port number used by NFS Protocol.
 

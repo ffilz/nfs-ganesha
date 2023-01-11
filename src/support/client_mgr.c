@@ -1720,4 +1720,19 @@ out:
 
 }
 
+bool ha_proxy_match(SVCXPRT *xprt)
+{
+	struct base_client_entry *client = NULL;
+
+	if (glist_empty(&nfs_param.core_param.haproxy_clients))
+		return false;
+
+	/* Does the client match anyone on the client list? */
+	client = client_match(COMPONENT_DISPATCH, " for HA Proxy",
+			      &xprt->xp_proxy.ss,
+			      &nfs_param.core_param.haproxy_clients);
+
+	return client != NULL;
+}
+
 /** @} */
