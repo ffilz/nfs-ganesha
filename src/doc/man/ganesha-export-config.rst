@@ -191,8 +191,8 @@ for any give client.
 
 Clients(client list, empty)
     Client list entries can take on one of the following forms:
-    Match any client::
 
+        \*          Match any client
         @name       Netgroup name
         x.x.x.x/y   IPv4 network address
         wildcarded  If the string contains at least one ? or *
