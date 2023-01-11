@@ -35,6 +35,8 @@ PSEUDO, NULL, GLUSTER
 NFS_CORE_PARAM {}
 -----------------
 
+	HA_Preoxy_Clients (client list, empty)
+
 	NFS_Port (uint16, range 0 to UINT16_MAX, default 2049)
 
 	MNT_Port (uint16, range 0 to UINT16_MAX, default 0)
