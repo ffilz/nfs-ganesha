@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66b77256_5761e04e",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-18T21:51:14Z",
+      "side": 1,
+      "message": "You could also use:\n\nint len \u003d strlen(nfs_param.nfsv4_param.server_owner);\n\nassert(len \u003c sizeof(cid_server_owner));\n\nmemcpy(cid_server_owner, nfs_param.nfsv4_param.server_owner, len + 1);\n\nI have worked in the past to eradicate use of strncpy but snprintf works also.",
+      "parentUuid": "a4154dba_002941ce",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2517e8cd_3bbc5a54",
         "filename": "src/doc/man/ganesha-core-config.rst",
         "patchSetId": 2
