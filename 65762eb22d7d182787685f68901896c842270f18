@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4154dba_002941ce",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-01-18T20:05:39Z",
+      "side": 1,
+      "message": "I changed it to be an assert, as I agree with you it makes more sense. \n\nNote that I also had to get rid of the `strncpy` as on newer compilers it produces the following error:\n```\n‘strncpy’ specified bound 256 equals destination size [-Werror\u003dstringop-truncation]\n``` \nBasically, strncpy doesn\u0027t let you use the full size of you buffer on newer compilers. \n\nI replaced it with `snprint`.",
+      "parentUuid": "b3564d0c_36bd758c",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2517e8cd_3bbc5a54",
         "filename": "src/doc/man/ganesha-core-config.rst",
         "patchSetId": 2
