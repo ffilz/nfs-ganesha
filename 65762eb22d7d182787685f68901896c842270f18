@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20b55c51_75f69927",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-01-18T16:43:24Z",
+      "side": 1,
+      "message": "I thought there was already a verification that checks the file owenr size. In the definition of the param we set max length to be MAXNAMLEN, is that not enforced? \n\nEven if it is verified I didn\u0027t want to ignore the return value here. Alternatively if it is verified, I could call LogFatal here, which would terminate, would you prefer that? From what I saw Ganesha code avoids termination in most cases.",
+      "parentUuid": "aa0e7c7a_7c2a56a2",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2517e8cd_3bbc5a54",
         "filename": "src/doc/man/ganesha-core-config.rst",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2023-01-18T16:04:49Z",
       "side": 1,
       "message": "This also needs to be documented in src/config_samples/config.txt\n\nAlso please wrap the long line.",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be54f1a6_a112e104",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-01-18T16:43:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2517e8cd_3bbc5a54",
       "revId": "65762eb22d7d182787685f68901896c842270f18",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-01-18T16:04:49Z",
       "side": 1,
       "message": "Add a commit function that checks the length of server_owner.",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e8e605_85023192",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-01-18T16:43:24Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "22bdd3a5_4e6496d1",
       "revId": "65762eb22d7d182787685f68901896c842270f18",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
