@@ -144,12 +144,31 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 
 	if (cid_server_owner[0] == '\0') {
 		/* Set up the server owner string */
-		if (gsh_gethostname(cid_server_owner,
-				sizeof(cid_server_owner),
-				nfs_param.core_param.enable_AUTHSTATS)
-				== -1) {
-			res_EXCHANGE_ID4->eir_status = NFS4ERR_SERVERFAULT;
-			return NFS_REQ_ERROR;
+		if (nfs_param.nfsv4_param.server_owner == NULL) {
+			/* If the server owner param is NULL, set it to
+			 * hostname
+			 */
+			if (gsh_gethostname(
+				    cid_server_owner, sizeof(cid_server_owner),
+				    nfs_param.core_param.enable_AUTHSTATS) ==
+			    -1) {
+				res_EXCHANGE_ID4->eir_status =
+					NFS4ERR_SERVERFAULT;
+				return NFS_REQ_ERROR;
+			}
+		} else {
+			strncpy(cid_server_owner,
+				nfs_param.nfsv4_param.server_owner,
+				sizeof(cid_server_owner));
+			if (cid_server_owner[sizeof(cid_server_owner) - 1] !=
+			    '\0') {
+				cid_server_owner[sizeof(cid_server_owner) - 1] =
+					'\0';
+				LogDebug(
+					COMPONENT_CLIENTID,
+					"Server owner was too long and will be cut. Server owner: %s",
+					cid_server_owner);
+			}
 		}
 
 		owner_len = strlen(cid_server_owner);
