@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3564d0c_36bd758c",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-18T17:25:38Z",
+      "side": 1,
+      "message": "Oh, right. OK, then yea, a LogFatal would probably be appropriate here.\n\nOptionally we can just ignore it with a comment that the length is already validated. Or check with an assert.\n\nIn one sense, we have code here that can never be tested.",
+      "parentUuid": "20b55c51_75f69927",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2517e8cd_3bbc5a54",
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "See comment above.",
       "parentUuid": "22bdd3a5_4e6496d1",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94561fa0_e6f63526",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-18T17:25:38Z",
+      "side": 1,
+      "message": "Right. OK, no need for a change here.",
+      "parentUuid": "18e8e605_85023192",
       "revId": "65762eb22d7d182787685f68901896c842270f18",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
