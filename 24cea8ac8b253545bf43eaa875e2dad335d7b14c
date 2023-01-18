@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2132869_005c4182",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-01-18T12:03:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t/* If the server owner param is NULL, set it to hostname */",
+      "revId": "24cea8ac8b253545bf43eaa875e2dad335d7b14c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b973160_9f3ea8c2",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-01-18T12:03:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tres_EXCHANGE_ID4-\u003eeir_status \u003d NFS4ERR_SERVERFAULT;",
+      "revId": "24cea8ac8b253545bf43eaa875e2dad335d7b14c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778ec640_51bd80c6",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-01-18T12:03:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstrncpy(cid_server_owner, nfs_param.nfsv4_param.server_owner,",
+      "revId": "24cea8ac8b253545bf43eaa875e2dad335d7b14c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a9da98_fcb44fc4",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-01-18T12:03:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (cid_server_owner[sizeof(cid_server_owner)-1] !\u003d \u0027\\0\u0027) {",
+      "revId": "24cea8ac8b253545bf43eaa875e2dad335d7b14c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c99a81f_4a41a0c9",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-01-18T12:03:35Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tcid_server_owner[sizeof(cid_server_owner)-1] \u003d \u0027\\0\u0027;",
+      "revId": "24cea8ac8b253545bf43eaa875e2dad335d7b14c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
