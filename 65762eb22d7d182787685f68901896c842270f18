@@ -107,6 +107,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5cc9ae5_50077c5b",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-01-18T22:09:11Z",
+      "side": 1,
+      "message": "Yeah, that could work as well. But, I think I\u0027ll leave it with with `snprintf`. I like it slightly better as it handles the null termination a bit clearer (not need to the \"magic\" +1).",
+      "parentUuid": "66b77256_5761e04e",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2517e8cd_3bbc5a54",
