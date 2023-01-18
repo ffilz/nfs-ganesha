@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c1b731_9f6eb34f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-18T16:04:49Z",
+      "side": 1,
+      "message": "Also, I would like to hold this for the V5 when it\u0027s open.",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0e7c7a_7c2a56a2",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-18T16:04:49Z",
+      "side": 1,
+      "message": "Let\u0027s validate the length in the config processing step rather than truncating.",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2517e8cd_3bbc5a54",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-18T16:04:49Z",
+      "side": 1,
+      "message": "This also needs to be documented in src/config_samples/config.txt\n\nAlso please wrap the long line.",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22bdd3a5_4e6496d1",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-18T16:04:49Z",
+      "side": 1,
+      "message": "Add a commit function that checks the length of server_owner.",
+      "revId": "65762eb22d7d182787685f68901896c842270f18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
