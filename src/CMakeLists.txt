@@ -187,6 +187,12 @@ include(FindPkgConfig)
 # For our option system
 include(${GANESHA_TOP_CMAKE_DIR}/cmake/goption.cmake)
 
+include(CheckCCompilerFlag)
+CHECK_C_COMPILER_FLAG("-fmacro-prefix-map=old=new" HAS_MACRO_PREFIX_MAP_FLAG)
+if(${HAS_MACRO_PREFIX_MAP_FLAG})
+  add_compile_options(-fmacro-prefix-map=${GANESHA_TOP_CMAKE_DIR}/=)
+endif()
+
 # If we are in a git tree, then this CMakeLists.txt is in "src/" and go .git is in "src/.."
 IF( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
   message( STATUS "Compilation from within a git repository. Using git rev-parse HEAD")
@@ -1349,6 +1355,8 @@ message(STATUS "PLATFORM = ${PLATFORM}")
 message(STATUS "ARCH = ${ARCH}")
 message(STATUS "VERSION = ${GANESHA_VERSION}")
 message(STATUS "BUILD HOST = ${BUILD_HOST_NAME}")
+message(STATUS "C COMPILER = ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS "C COMPILER VERSION = ${CMAKE_C_COMPILER_VERSION}")
 message(STATUS "-------------------------------------------------------")
 message(STATUS "USE_FSAL_PROXY_V4 = ${USE_FSAL_PROXY_V4}")
 message(STATUS "USE_FSAL_PROXY_V3 = ${USE_FSAL_PROXY_V3}")
