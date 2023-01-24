@@ -16,6 +16,41 @@
       "message": "Why is the entire directory being read in before the response is served?\n\nNormally we read a single chunk (def. 128 entries) and then serve the response. With read ahead (used by FSAL_RGW) we read 1000 entries (so 8 chunks) not the whole directory.\n\nThis needs more understanding of the problem before we try and fix it.\n\n\nIs there an associated github issue we can go back to discussion the problem and see configuration files and such?",
       "revId": "4493bd20f37e158ed05bb7775ebff6e5b3e7164f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42b98fe_6714e7c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-24T19:20:45Z",
+      "side": 1,
+      "message": "Oops, there IS a github issue: https://github.com/nfs-ganesha/nfs-ganesha/issues/868",
+      "parentUuid": "0519981f_4a13ea55",
+      "revId": "4493bd20f37e158ed05bb7775ebff6e5b3e7164f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f9138d6_01410ed3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-01-24T19:20:45Z",
+      "side": 1,
+      "message": "Now that V4.3 has been released and V5-dev.1 will be merged soon, I\u0027m taking the -2 off this one. It still needs work though so a -1.",
+      "revId": "4493bd20f37e158ed05bb7775ebff6e5b3e7164f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
