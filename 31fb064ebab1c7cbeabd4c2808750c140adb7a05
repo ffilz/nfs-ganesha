@@ -141,6 +141,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39b0c8d2_be9f5e36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2023-01-30T09:45:07Z",
+      "side": 1,
+      "message": "I tested this PR with V4.0.11 and it was fine, although it required a minor fix to libntirpc (which has been fixed by now; see commit c2da5a9a122e0a247f320ced938eee2fef45e946 in libntirpc). However, given the amount of time passed from my last cycle of testing I will rebase it over V4.3 and repeat the testing cycle.",
+      "parentUuid": "94fa0290_5b294692",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ea2be4_78b9551b",
@@ -172,6 +190,24 @@
       "side": 1,
       "message": "I prefer option 2, as it covers any C++ code in Ganesha.\n\nShachar, you are working on this, right?",
       "parentUuid": "d1ea2be4_78b9551b",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55c7e2e_5418013f",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1020470
+      },
+      "writtenOn": "2023-01-30T09:45:07Z",
+      "side": 1,
+      "message": "Proposed a fix in ntirpc (currently, in \u0027next\u0027 branch): \nhttps://github.com/nfs-ganesha/ntirpc/commit/c2da5a9a122e0a247f320ced938eee2fef45e946",
+      "parentUuid": "fe5561fc_3bf49085",
       "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
