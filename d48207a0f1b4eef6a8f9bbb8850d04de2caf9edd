@@ -16,6 +16,29 @@
       "message": "OK, I think I understand a little more... I\u0027d like review from Solomon.",
       "revId": "d48207a0f1b4eef6a8f9bbb8850d04de2caf9edd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "158854a9_a1749eb7",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2023-01-31T22:38:13Z",
+      "side": 1,
+      "message": "Mind leaving a comment *here*, too saying that this isn\u0027t an NFS FH, it\u0027s actually a `proxyv4_handle_blob` (which is currently a pair of uint8_t values and *then* v4 FH).",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 37
+      },
+      "revId": "d48207a0f1b4eef6a8f9bbb8850d04de2caf9edd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
