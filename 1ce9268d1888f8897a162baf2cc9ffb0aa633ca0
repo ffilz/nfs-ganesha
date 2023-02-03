@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c313d96_2b007f47",
+        "filename": "src/Protocols/9P/9p_lopen.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-03T17:19:41Z",
+      "side": 1,
+      "message": "Yes, doing that, and cleaning up the unrefs to be one unref for each open.",
+      "parentUuid": "f0841244_7180c127",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85e6b43b_98b3308b",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-11-09T18:30:23Z",
       "side": 1,
       "message": "This appears to put every time, but we only got the first time.",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d4da67f_d104c443",
+        "filename": "src/Protocols/9P/9p_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-03T17:19:41Z",
+      "side": 1,
+      "message": "OK, fixing this up to remove a reference for each open.",
+      "parentUuid": "85e6b43b_98b3308b",
       "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -87,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc81cd1_b07e5437",
+        "filename": "src/Protocols/9P/9p_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-03T17:19:41Z",
+      "side": 1,
+      "message": "Ooh, dear... Adding a loop which will result in opens being 0 at the end. Also moving the unref to after the close2.",
+      "parentUuid": "1281ec49_676601d4",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ce3e6c8_2ff7aa7c",
@@ -100,6 +154,24 @@
       "writtenOn": "2022-11-09T18:30:23Z",
       "side": 1,
       "message": "obj could be NULL here.",
+      "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ff734c3_a93588ac",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-03T17:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ce3e6c8_2ff7aa7c",
       "revId": "1ce9268d1888f8897a162baf2cc9ffb0aa633ca0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
