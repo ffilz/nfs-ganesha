@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc71e0c4_f5b98972",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-03T00:42:43Z",
+      "side": 1,
+      "message": "Adding a comment here to note that this comment will be cleaned up in a subsequent patch that removes LRU_DQ_SAFE special handling.",
+      "parentUuid": "b83188e4_3f268bb1",
+      "revId": "aabe19af5c5b166a2b47b97489dca4f1d4ec684c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef731a65_88306773",
@@ -107,6 +125,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bdb1ad0_3c6b0ba5",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-03T00:42:43Z",
+      "side": 1,
+      "message": "There probably is more work to be done here, but I think what is here now will be sufficient to move forward. I\u0027m adding a todo comment.",
+      "parentUuid": "1a3c42a2_3d043dd8",
+      "revId": "aabe19af5c5b166a2b47b97489dca4f1d4ec684c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb63c7b7_9bbb42e4",
@@ -138,6 +174,24 @@
       "side": 1,
       "message": "Hmm, yea, the intricacies of the new LRU need some consideration...",
       "parentUuid": "fb63c7b7_9bbb42e4",
+      "revId": "aabe19af5c5b166a2b47b97489dca4f1d4ec684c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0584c23b_a89baefd",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-03T00:42:43Z",
+      "side": 1,
+      "message": "I\u0027m going to leave this for another day...",
+      "parentUuid": "dac283e7_f271cf73",
       "revId": "aabe19af5c5b166a2b47b97489dca4f1d4ec684c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
