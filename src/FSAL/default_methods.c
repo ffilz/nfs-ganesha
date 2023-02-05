@@ -685,7 +685,8 @@ static struct state_t *alloc_state(struct fsal_export *exp_hdl,
 				   enum state_type state_type,
 				   struct state_t *related_state)
 {
-	return init_state(gsh_calloc(1, sizeof(struct state_t)),
+	return init_state(gsh_calloc(1, sizeof(struct state_t)
+		+ sizeof(struct fsal_fd)),
 			  exp_hdl, state_type, related_state);
 }
 
