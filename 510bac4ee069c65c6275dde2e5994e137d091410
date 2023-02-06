@@ -52,6 +52,24 @@
       "parentUuid": "bd42443a_c6de2844",
       "revId": "510bac4ee069c65c6275dde2e5994e137d091410",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2153878_3b4276d8",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-02-06T16:02:11Z",
+      "side": 0,
+      "message": "It looks like ceph_cloce_my_fd will return ERR_FSAL_NO_ERROR if openflags is FSAL_O_CLOSED.",
+      "parentUuid": "e13de048_c1028451",
+      "revId": "510bac4ee069c65c6275dde2e5994e137d091410",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
