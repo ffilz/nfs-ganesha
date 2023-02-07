@@ -50,6 +50,24 @@
       "message": "Hmm...\n\nFSAL_PROXY_V3 doesn\u0027t override alloc_state, and it doesn\u0027t use fsal_fd, I\u0027m honestly not sure what it does with all the state stuff...\n\nNot every FSAL uses a fsal_fd after the state_t (see FSAL_PROXY_V4 for example)\n\nThat means the default status2 really isn\u0027t a good idea...\n\nI think the default status2 should be in commonlib with the fsal_fd stuff for explicit use by those FSALs that follow the convention of state_t followed by fsal_fd and the default status2 return not supported.\n\nAnd status2 is actually sort of problematic since technically it could race... \n\nIt\u0027s used in two places, by NFSv4 OPEN upgrade and by 9P to check open mode before allowing a lock (not sure this is really required).\n\nI don\u0027t see any other actual uses that depend on fsal_fd being after state_t that aren\u0027t FSAL specific code that understands it\u0027s using fsal_fd.\n\nConsidering I have a huge patch set that has some fsal_fd work in it, perhaps I should make fixing this all up properly be part of that re-work.",
       "revId": "8a7b39ea5c7977112521584df6783f36f909c7b3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "076d4b04_5ac0b83f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020873
+      },
+      "writtenOn": "2023-02-07T00:14:29Z",
+      "side": 1,
+      "message": "Note: As part of a separate migration we were working on, my team (separate from Bjorn\u0027s) moved from not really handling state correctly (aka \"at all\") to actually using it. As part of that, we overrode status2 and alloc_state and are not currently blocked on this.\n\nMoving status2 away from default_methods.c is likely a better solution - if any fsal forgets (or doesn\u0027t realize they need to) override both alloc_state and status2, it won\u0027t cause out of bounds memory accesses:\n\nCurrent state:\n- Override neither alloc_state nor status2: bad memory access\n- Override only alloc_state: have to remember to allocate the space\n- Override only status2: kind of up to you to do the correct thing\n- Override both: should be fine (assuming you uphold the contract)\n\nMy original fix (this commit) changes only one row:\n- Override neither: everything is fine\n- (specifically, overriding only alloc_state requires that you remember to allocate the space or you encounter this issue)\n\nFixing this by changing status2 changes the first two rows:\n- Override neither: not supported error iff status2 is called\n- Override only alloc_state: not supported error iff status2 is called\n\n--- \n\nSomewhat unrelated / other musings...\n\nWhen I wrote the commit description, and said that there were \u0027numerous\u0027 other locations, I was referencing uses in specific FSALs like FSAL_MEM (which aren\u0027t concerning because they\u0027ll properly allocate) and these three in FSAL/commonlib.c\u0027s fsal_find_fd function:\n- state + 1: https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/FSAL/commonlib.c#L1689\n- openstate + 1: https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/FSAL/commonlib.c#L1735\n- openstate + 1: https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/FSAL/commonlib.c#L1774\n\nInvestigating that further:\n\n`fsal_find_fd` seems fine, as the callers I was able to find were all in FSAL implementations that appear to override alloc_state and provide enough room for the fsal_fd-compatible data block after the state (I\u0027ve seen three versions of this: calloc\u0027ing enough space for state_t + fsal_fd, using a struct that has state_t and the openflags, and using a struct that has state_t and a fsal-specific fd struct that has openflags as the first member).\n\nNote that there may be some uses I didn\u0027t find, as I didn\u0027t originally notice FSAL_VFS\u0027s use of fsal_fd because (a) it uses vfs_fd instead of fsal_fd, it\u0027s just compatible with its layout, and (b) it generally uses `container_of` to get from a `state_t *` to a `vfs_state_fd` instead of using `state + 1` to get from `state_t *` to the object after it.\n\nLooking for instances of `container_of(state`, I can see several other places that are allocating a struct that has an fsal_fd-compatible struct after the state_t struct, most seem fine at a very quick glance (using container_of to get to their fs-specific state+fd struct), with only FSAL_PROXY_V4 being the concerning one that puts something _other than_ an fsal_fd-compatible struct [at least I\u0027m assuming they\u0027re compatible based on the names of the structs] after the state.",
+      "parentUuid": "97f402fa_284b96e7",
+      "revId": "8a7b39ea5c7977112521584df6783f36f909c7b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
