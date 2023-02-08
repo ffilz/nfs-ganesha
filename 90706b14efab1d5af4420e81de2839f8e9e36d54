@@ -50,6 +50,24 @@
       "message": "I\u0027m not sure why this is necessary.  The spec file builds fine as it is, and the CMakeLists.txt file is already in src.",
       "revId": "90706b14efab1d5af4420e81de2839f8e9e36d54",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e75d3ab0_5c34cc4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2023-02-08T16:24:59Z",
+      "side": 1,
+      "message": "Hi Daniel,\nSorry for the late reply.\nI propose these changes because I stuck with the `rpmbuild` on centos7.\nAfter I make these changes, the build is completed.\nIf the spec file builds fine as it is, maybe we could close this.\nBTW, could I know how the build flow for nfs-ganesha on the centos/RHEL system?",
+      "parentUuid": "f64b9c4e_2d9edcd9",
+      "revId": "90706b14efab1d5af4420e81de2839f8e9e36d54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
