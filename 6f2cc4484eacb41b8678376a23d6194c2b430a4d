@@ -68,6 +68,23 @@
       "parentUuid": "bd422486_c8c189da",
       "revId": "6f2cc4484eacb41b8678376a23d6194c2b430a4d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a706c4f_0ec9cf51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-10T22:52:00Z",
+      "side": 1,
+      "message": "OK, this needs to be rethought. When I ran pynfs, I got 90 failures. I don\u0027t have ACLs enabled on my XFS file system, or maybe I do? I dunno, in any case, my default setup doesn\u0027t work with ACLs enabled by default.\n\nI think maybe we should leave them disabled by default unless we can improve operation with them on by default but not necessarily enabled by the underlying filesystem.",
+      "revId": "6f2cc4484eacb41b8678376a23d6194c2b430a4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
