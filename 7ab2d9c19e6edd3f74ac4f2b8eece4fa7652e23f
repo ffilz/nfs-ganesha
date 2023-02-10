@@ -24,6 +24,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d6950c_b2c2c738",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-10T00:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab544983_d55c5974",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 10
+      },
+      "revId": "7ab2d9c19e6edd3f74ac4f2b8eece4fa7652e23f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c1bc782_78bedd7f",
@@ -71,6 +95,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57d245c_398d4b6d",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-10T00:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94e1423d_631ecd65",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "7ab2d9c19e6edd3f74ac4f2b8eece4fa7652e23f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30131b79_cd48d323",
@@ -84,6 +132,24 @@
       "writtenOn": "2023-01-25T18:09:18Z",
       "side": 1,
       "message": "Oh, crud, I think this needs to be (sockaddr_t *)\u0026xprt-\u003exp_proxy.ss\n\nWe want to match the HA Proxy host not the actual client. xp_remote (what svc_getrpccaller resolves to) has been changed to the actual client at this point while the endpoint of the tcp socket (the HA Proxy host) has been copied to xp_proxy",
+      "revId": "7ab2d9c19e6edd3f74ac4f2b8eece4fa7652e23f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ef0b70_9da2211e",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-10T00:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30131b79_cd48d323",
       "revId": "7ab2d9c19e6edd3f74ac4f2b8eece4fa7652e23f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
