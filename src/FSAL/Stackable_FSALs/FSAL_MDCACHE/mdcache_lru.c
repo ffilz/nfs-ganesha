@@ -453,6 +453,37 @@ lru_insert_chunk(struct dir_chunk *chunk, struct lru_q *q, enum lru_edge edge)
 	QUNLOCK(qlane);
 }
 
+static uint32_t reap_lane;
+
+/**
+ * @brief Get entries count for lru queue
+ *
+ * @param[in] qid  Target queue
+ * @return Entries count of input queue
+ */
+static inline uint64_t
+get_lru_entries_count(enum lru_q_id qid)
+{
+	uint32_t lane;
+	struct lru_q_lane *qlane;
+	struct lru_q *lq;
+	int ix;
+	uint64_t total_size = 0;
+
+	lane = LRU_NEXT(reap_lane);
+	for (ix = 0; ix < LRU_N_Q_LANES; ++ix, lane = LRU_NEXT(reap_lane)) {
+		uint64_t size = 0;
+
+		qlane = &LRU[lane];
+		lq = (qid == LRU_ENTRY_L1) ? &qlane->L1 : &qlane->L2;
+		QLOCK(qlane);
+		size = atomic_fetch_uint64_t(&lq->size);
+		total_size = atomic_add_uint64_t(&total_size, size);
+		QUNLOCK(qlane);
+	}
+	return total_size;
+}
+
 /*
  * @brief Adjust the order of LRU entries
  *
@@ -678,9 +709,6 @@ mdcache_lru_clean(mdcache_entry_t *entry)
  * @param[in] qid  Queue to reap
  * @return Available entry if found, NULL otherwise
  */
-
-static uint32_t reap_lane;
-
 static inline mdcache_lru_t *
 lru_reap_impl(enum lru_q_id qid)
 {
@@ -773,13 +801,16 @@ lru_reap_impl(enum lru_q_id qid)
 static inline mdcache_lru_t *
 lru_try_reap_entry(void)
 {
-	mdcache_lru_t *lru;
+	mdcache_lru_t *lru = NULL;
+	uint64_t total_entries_l2 = 0;
 
 	if (lru_state.entries_used < lru_state.entries_hiwat)
 		return NULL;
 
 	/* XXX dang why not start with the cleanup list? */
-	lru = lru_reap_impl(LRU_ENTRY_L2);
+	total_entries_l2 = get_lru_entries_count(LRU_ENTRY_L2);
+	if (total_entries_l2 > lru_state.entries_ctwat_l2)
+		lru = lru_reap_impl(LRU_ENTRY_L2);
 	if (!lru)
 		lru = lru_reap_impl(LRU_ENTRY_L1);
 
@@ -1798,7 +1829,7 @@ err_open:
 }
 
 /* Public functions */
-
+#define CONTROL_CHUNK_NUM_L2 (16)
 /**
  * Initialize subsystem
  */
@@ -1824,6 +1855,14 @@ mdcache_lru_pkginit(void)
 	   bit fishy, so come back and revisit this. */
 	lru_state.entries_hiwat = mdcache_param.entries_hwmark;
 	lru_state.entries_used = 0;
+
+	/* set entries control water for l2 */
+	if (mdcache_param.dir.avl_chunk > 0) {
+		lru_state.entries_ctwat_l2 =
+		CONTROL_CHUNK_NUM_L2*mdcache_param.dir.avl_chunk;
+	} else {
+		lru_state.entries_ctwat_l2 = CONTROL_CHUNK_NUM_L2*128;
+	}
 
 	/* set lru release entries size */
 	lru_state.entries_release_size = mdcache_param.entries_release_size;
