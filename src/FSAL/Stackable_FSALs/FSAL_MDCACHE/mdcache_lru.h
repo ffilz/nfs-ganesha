@@ -118,6 +118,11 @@ extern pool_t *mdcache_entry_pool;
 #define LRU_REQ_INITIAL  0x0002
 
 /**
+ * The caller is fetching an scan cache hit reference
+ */
+#define LRU_REQ_SCAN_HIT  0x0003
+
+/**
  * qlane is locked
  */
 #define LRU_UNREF_QLOCKED 0x0008

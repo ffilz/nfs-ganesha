@@ -457,9 +457,10 @@ lru_insert_chunk(struct dir_chunk *chunk, struct lru_q *q, enum lru_edge edge)
  * @brief Adjust the order of LRU entries
  *
  * @param [in] entry  Entry to adjust.
+ * @param [in] flags  One of LRU_REQ_INITIAL or LRU_REQ_SCAN_HIT.
  */
 static inline void
-adjust_lru(mdcache_entry_t *entry)
+adjust_lru(mdcache_entry_t *entry, uint32_t flags)
 {
 	mdcache_lru_t *lru = &entry->lru;
 	struct lru_q_lane *qlane = &LRU[lru->lane];
@@ -475,12 +476,19 @@ adjust_lru(mdcache_entry_t *entry)
 		break;
 	case LRU_ENTRY_L2:
 		q = lru_queue_of(entry);
-		/* move entry to LRU of L1 */
-		glist_del(&lru->q);     /* skip L1 fixups */
-		--(q->size);
-		q = &qlane->L1;
-		lru_insert(lru, q, LRU_LRU);
-		break;
+		if (flags == LRU_REQ_SCAN_HIT) {
+			/* advance entry to MRU (of L2) */
+			glist_del(&lru->q);
+			--(q->size);
+			lru_insert(lru, q, LRU_MRU);
+		} else {
+			/* move entry to LRU of L1 */
+			glist_del(&lru->q);     /* skip L1 fixups */
+			--(q->size);
+			q = &qlane->L1;
+			lru_insert(lru, q, LRU_LRU);
+			break;
+		}
 	default:
 		/* do nothing */
 		break;
@@ -503,7 +511,7 @@ adjust_lru_root_object(mdcache_entry_t *entry)
 {
 	/* adjust export root or junction nodes */
 	if (is_export_pin(&entry->obj_handle))
-		adjust_lru(entry);
+		adjust_lru(entry, LRU_REQ_INITIAL);
 }
 
 /**
@@ -1974,6 +1982,8 @@ void mdcache_lru_insert(mdcache_entry_t *entry, mdc_reason_t reason)
 		break;
 	case MDC_REASON_SCAN:
 		lru_insert_entry(entry, &LRU[entry->lru.lane].L2, LRU_MRU);
+		break;
+	default:
 		break;
 	}
 }
