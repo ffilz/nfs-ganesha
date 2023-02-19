@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd05b17_c726ce2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-02-19T14:00:57Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nIf the client not receive a file/floder from the last readdir, it will retransfers",
+      "revId": "b139b2ca6743e37e803a1319e50fa6ae592ac304",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "037f3c35_f79571ee",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-02-19T14:00:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tstatus \u003d mdcache_find_keyed_reason(\u0026key, entry, MDC_REASON_SCAN_HIT);",
+      "revId": "b139b2ca6743e37e803a1319e50fa6ae592ac304",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d79dbfdb_e382bae1",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-02-19T14:00:57Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I$",
+      "revId": "b139b2ca6743e37e803a1319e50fa6ae592ac304",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30afb528_fb143c74",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-02-19T14:00:57Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (reason \u003d\u003d MDC_REASON_SCAN_HIT) {\n[...]\n+\t\t} else if (reason \u003d\u003d MDC_REASON_SCAN) {\n[...]",
+      "revId": "b139b2ca6743e37e803a1319e50fa6ae592ac304",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
