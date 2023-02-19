@@ -57,8 +57,9 @@ extern struct mdcache_fsal_module MDCACHE;
  * @brief Reason an entry is being inserted/looked up
  */
 typedef enum {
-	MDC_REASON_DEFAULT,	/**< Default insertion */
-	MDC_REASON_SCAN		/**< Is being inserted by a scan */
+	MDC_REASON_DEFAULT,		/**< Default insertion */
+	MDC_REASON_SCAN,		/**< Is being inserted by a scan */
+	MDC_REASON_SCAN_HIT		/**< scan cache hit */
 } mdc_reason_t;
 
 typedef struct mdcache_dmap_entry__ {

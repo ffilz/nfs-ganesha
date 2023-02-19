@@ -686,7 +686,12 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 	/* Check if the entry already exists.  We allow the following race
 	 * because mdcache_lru_get has a slow path, and the latch is a
 	 * shared lock. */
-	status = mdcache_find_keyed(&key, entry);
+	if (MDC_REASON_SCAN == reason) {
+		status = mdcache_find_keyed_reason(&key, entry,
+		MDC_REASON_SCAN_HIT);
+	} else {
+		status = mdcache_find_keyed(&key, entry);
+	}
 	if (!FSAL_IS_ERROR(status)) {
 		LogDebug(COMPONENT_CACHE_INODE,
 			 "Trying to add an already existing entry. Found entry %p type: %d, New type: %d",
@@ -1000,10 +1005,15 @@ mdcache_find_keyed_reason(mdcache_key_t *key, mdcache_entry_t **entry,
 					__func__, __LINE__);
 	if (likely(*entry)) {
 		fsal_status_t status;
+		uint32_t flag = LRU_REQ_INITIAL;
+
+		if (reason == MDC_REASON_SCAN_HIT)
+			flag = LRU_REQ_SCAN_HIT;
+		else if (reason == MDC_REASON_SCAN)
+			flag = LRU_FLAG_NONE;
 
 		/* Initial Ref on entry */
-		status = mdcache_lru_ref(*entry, (reason != MDC_REASON_SCAN) ?
-					 LRU_REQ_INITIAL : LRU_FLAG_NONE);
+		status = mdcache_lru_ref(*entry, flag);
 		/* Release the subtree hash table lock */
 		cih_hash_release(&latch);
 		if (FSAL_IS_ERROR(status)) {
