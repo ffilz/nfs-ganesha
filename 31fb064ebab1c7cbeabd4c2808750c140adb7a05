@@ -283,6 +283,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e43b587_3c6fd086",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2023-02-21T22:44:46Z",
+      "side": 1,
+      "message": "NOLINT statements removed, as requested.\n\nAre we good with the resolution of the __THROW statements in ntirpc/rpc/rpcent.h? I could redefine that at the top of monitoring.cc.\n\nApologies for the late reply, I just got back from an extended leave. I was invited to the weekly community meeting this week, but cannot make it, as it\u0027s 2am Sydney time.",
+      "parentUuid": "9e17e44d_bc7537a8",
+      "revId": "31fb064ebab1c7cbeabd4c2808750c140adb7a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7f6bf57_e87211b4",
