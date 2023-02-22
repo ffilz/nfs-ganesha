@@ -33,6 +33,24 @@
       "message": "Does this list represent allowed HA Proxies, or NFS clients that are allowed to connect through HA Proxy?  This is ambiguous to me, and should probably be clarified.",
       "revId": "f4ebdd44f2eb31db372f55b321faad2e9816ab18",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7807a9ec_01aec739",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-02-22T17:28:25Z",
+      "side": 1,
+      "message": "Good point, it\u0027s the list of HA Proxies. Maybe HA_Proxy_Clients is the wrong name...",
+      "parentUuid": "a88d7577_3356ddb1",
+      "revId": "f4ebdd44f2eb31db372f55b321faad2e9816ab18",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
