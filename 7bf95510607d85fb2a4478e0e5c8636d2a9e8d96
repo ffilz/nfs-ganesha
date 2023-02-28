@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2e70f9_56eb9438",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-02-28T16:00:29Z",
+      "side": 1,
+      "message": "minor nits",
+      "revId": "7bf95510607d85fb2a4478e0e5c8636d2a9e8d96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d914b65_71a00758",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-02-28T16:00:29Z",
+      "side": 1,
+      "message": "flags is unused?  Can we just remove it?",
+      "revId": "7bf95510607d85fb2a4478e0e5c8636d2a9e8d96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "420b00e3_c17463d0",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-02-28T16:00:29Z",
+      "side": 1,
+      "message": "LRU or MRU?  (we\u0027ve overloaded the term \"LRU\", so we should be careful with it...)",
+      "revId": "7bf95510607d85fb2a4478e0e5c8636d2a9e8d96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
