@@ -106,6 +106,24 @@
       "parentUuid": "201a850d_e8ebfac1",
       "revId": "510bac4ee069c65c6275dde2e5994e137d091410",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eba1099_a812f493",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-03-01T22:14:00Z",
+      "side": 0,
+      "message": "OK, I added the ERR_FSAL_NOT_OPENED to ceph_close_my_fd that should resolve this issue. This error is checked to avoid removing from the new fd_ltru",
+      "parentUuid": "03de8eab_eb7e57dc",
+      "revId": "510bac4ee069c65c6275dde2e5994e137d091410",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
