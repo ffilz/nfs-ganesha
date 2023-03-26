@@ -286,13 +286,7 @@ static inline utf8string *utf8string_dup(utf8string *d, const char *s, size_t l)
 		return d;
 	}
 
-	d->utf8string_val = (char *)malloc(l + 1);
-
-	if (d->utf8string_val == NULL) {
-		LogMallocFailure(__FILE__, __LINE__, __func__,
-				 "utf8string_dup");
-		abort();
-	}
+	d->utf8string_val = (char *)gsh_malloc(l + 1);
 	d->utf8string_len = l;
 	memcpy(d->utf8string_val, s, l + 1);
 	return d;
@@ -4008,23 +4002,15 @@ static inline bool xdr_utf8string_decode(XDR *xdrs, utf8string *objp,
 	if (!size)
 		return true;
 
-	if (!sp) {
-		sp = (char *)malloc(size + 1);
-
-		if (sp == NULL) {
-			LogMallocFailure(__FILE__, __LINE__, __func__,
-					 "utf8string_dup");
-			abort();
-		}
-	}
+	if (!sp)
+		sp = (char *)gsh_malloc(size + 1);
 
 	ret = xdr_opaque_decode(xdrs, sp, size);
 
 	if (!ret) {
-		if (!objp->utf8string_val) {
+		if (!objp->utf8string_val)
 			/* Only free if we allocated */
-			free(sp);
-		}
+			gsh_free(sp, size + 1);
 		return ret;
 	}
 
