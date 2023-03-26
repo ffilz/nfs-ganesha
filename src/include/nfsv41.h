@@ -4009,7 +4009,7 @@ static inline bool xdr_utf8string_decode(XDR *xdrs, utf8string *objp,
 		return true;
 
 	if (!sp) {
-		sp = (char *)malloc(size + 1);
+		sp = (char *)mem_alloc(size + 1);
 
 		if (sp == NULL) {
 			LogMallocFailure(__FILE__, __LINE__, __func__,
@@ -4023,7 +4023,7 @@ static inline bool xdr_utf8string_decode(XDR *xdrs, utf8string *objp,
 	if (!ret) {
 		if (!objp->utf8string_val) {
 			/* Only free if we allocated */
-			free(sp);
+			mem_free(sp, size + 1);
 		}
 		return ret;
 	}
