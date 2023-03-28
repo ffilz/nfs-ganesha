@@ -34,6 +34,23 @@
       "parentUuid": "faed3b94_ba23ab54",
       "revId": "e9a225e648c379cad79d08485d393a1b3af05b51",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da4afa4_e3784d6c",
+        "filename": "src/Protocols/NFS/nfs4_op_renew.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-03-28T15:24:49Z",
+      "side": 1,
+      "message": "This stuff is not protected by lock or other serialization anywhere else. It probably should be. I think it could just be atomic and use atomic test and set here.",
+      "revId": "e9a225e648c379cad79d08485d393a1b3af05b51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
