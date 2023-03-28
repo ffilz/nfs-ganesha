@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47090493_1bbafcf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-03-28T14:09:01Z",
+      "side": 1,
+      "message": "Why not just take the LogInfo out of posix2fsal_error?  In a quick scan, it\u0027s only used with a sub-error, so it should be okay, I think.",
+      "revId": "55a20bb582e8fa0e2b8912289fbd9df64b8ec079",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
