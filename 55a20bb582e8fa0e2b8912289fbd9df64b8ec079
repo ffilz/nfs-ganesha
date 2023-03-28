@@ -16,6 +16,24 @@
       "message": "Why not just take the LogInfo out of posix2fsal_error?  In a quick scan, it\u0027s only used with a sub-error, so it should be okay, I think.",
       "revId": "55a20bb582e8fa0e2b8912289fbd9df64b8ec079",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6eb6905_9f6c0d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-03-28T15:27:10Z",
+      "side": 1,
+      "message": "I thought about that, but I\u0027m not sure if some of the conditions do need to be logged. I should take the time to figure out where the various errors that result in ERR_FSAL_DELAY could come up and which need to be reported in LogInfo and just report them at the appropriate point.",
+      "parentUuid": "47090493_1bbafcf8",
+      "revId": "55a20bb582e8fa0e2b8912289fbd9df64b8ec079",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
