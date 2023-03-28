@@ -16,6 +16,24 @@
       "message": "This sequence (and data-\u003epreserved_clientid in general) was pretty consistently protected by cid_mutex.  Is it safe to do this assignment unprotected?",
       "revId": "e9a225e648c379cad79d08485d393a1b3af05b51",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c758158e_dd4beb22",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-03-28T15:23:22Z",
+      "side": 1,
+      "message": "Data is per request, so no locking necessary. session-\u003eclientid_record is set when creating the session and never changed. If we succeed in reserving the lease, the session can\u0027t be invalidated before the end of this request so copying clientid_record is safe.",
+      "parentUuid": "faed3b94_ba23ab54",
+      "revId": "e9a225e648c379cad79d08485d393a1b3af05b51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
