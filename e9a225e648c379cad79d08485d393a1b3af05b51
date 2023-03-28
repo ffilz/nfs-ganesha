@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faed3b94_ba23ab54",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-03-28T14:43:34Z",
+      "side": 1,
+      "message": "This sequence (and data-\u003epreserved_clientid in general) was pretty consistently protected by cid_mutex.  Is it safe to do this assignment unprotected?",
+      "revId": "e9a225e648c379cad79d08485d393a1b3af05b51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
