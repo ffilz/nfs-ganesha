@@ -153,6 +153,8 @@ enum release_claims {
 	UNCLAIM_SKIP,
 };
 
+void unclaim_fs(struct fsal_filesystem *this);
+
 bool release_posix_file_system(struct fsal_filesystem *fs,
 			       enum release_claims release_claims);
 

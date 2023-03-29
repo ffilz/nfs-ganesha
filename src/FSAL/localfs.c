@@ -1368,6 +1368,19 @@ bool is_filesystem_exported(struct fsal_filesystem *fs,
 	return false;
 }
 
+void unclaim_fs(struct fsal_filesystem *this)
+{
+	/* One call to unclaim resolves all claims to the filesystem */
+	if (this->unclaim != NULL) {
+		LogDebug(COMPONENT_FSAL,
+				"Have FSAL %s unclaim filesystem %s",
+				this->fsal->name, this->path);
+		this->unclaim(this);
+	}
+	this->fsal = NULL;
+	this->unclaim = NULL;
+}
+
 static int process_claim(const char *path,
 			 int pathlen,
 			 struct fsal_filesystem_export_map *parent_map,

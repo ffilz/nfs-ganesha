@@ -670,7 +670,7 @@ void gpfs_unexport_filesystems(struct gpfs_fsal_export *exp)
 			LogInfo(COMPONENT_FSAL,
 				"GPFS is no longer exporting filesystem %s",
 				map->fs->fs->path);
-			//unclaim_fs(map->fs->fs);
+			unclaim_fs(map->fs->fs);
 		}
 
 		/* And free it */
