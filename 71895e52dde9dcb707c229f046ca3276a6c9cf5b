@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a844f329_9dd7b59a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-03-29T15:18:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure why FSAL_GPFS isn\u0027t using the right thing. This code will not work right if an export exports sub-mounted filesystems or a filesystem is exported by multiple exports.\n\nFSAL_GPFS export release() should be calling unclaim_all_export_maps instead of trying to roll its own gpfs_unexport_filesystems.\n\nPlease see what FSAL_VFS does:\n\nFSAL/FSAL_VFS/export.c release 84 unclaim_all_export_maps(exp_hdl);",
+      "revId": "71895e52dde9dcb707c229f046ca3276a6c9cf5b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
