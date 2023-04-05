@@ -583,7 +583,7 @@ static void do_delegation(OPEN4args *arg_OPEN4, OPEN4res *res_OPEN4,
 				  arg_OPEN4, resok, owner, &prerecall)) {
 		/* Update delegation open stats */
 		if (ostate->file.fdeleg_stats.fds_num_opens == 0)
-			ostate->file.fdeleg_stats.fds_first_open = time(NULL);
+			ostate->file.fdeleg_stats.fds_first_open = time(NULL);		
 		ostate->file.fdeleg_stats.fds_num_opens++;
 
 		LogDebug(COMPONENT_STATE, "Attempting to grant delegation");
@@ -1177,6 +1177,10 @@ static void open4_ex(OPEN4args *arg,
 		STATELOCK_lock(file_obj);
 		st_lock_held = true;
 	}
+	
+	/**At this point open has succeeded and we are holding the state lock*/
+	if (arg->share_access & OPEN4_SHARE_ACCESS_WRITE)
+		file_obj->state_hdl->file.fdeleg_stats.fds_num_write_opens++;
 
 	do_delegation(arg, res_OPEN4, data, owner, *file_state, clientid);
  out:
