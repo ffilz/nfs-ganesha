@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6fd4c9e_ba48db0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-05T17:44:26Z",
+      "side": 1,
+      "message": "Thanks for looking over, one of the reasons for all the name changes was to be better able to audit. I have a mess of sed scripting to help with matching up. It\u0027s possible I was hasty in my matching up and excluded things that didn\u0027t actually have matches, so a careful audit is worthwhile. In that vein, here are the sed scripts I used:\n\nhttps://pastebin.com/knJ9cHMP\n\nYou can see all the egrep -v I used to eliminate things that matched...\n\nIf someone wanted to do an independent audit, they could take the script and remove all the exclusions and validate again.\n\nNote that at a quick glance, it looks like libntirpc is pretty clean but a formal audit would be worthwhile.\n\n",
+      "revId": "894d2568d61bd030037b932deafa6191b6c13e2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e87a570_dec0497e",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-04-05T14:02:40Z",
       "side": 1,
       "message": "This appears to not be used?",
+      "revId": "894d2568d61bd030037b932deafa6191b6c13e2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df28f21e_53014114",
+        "filename": "src/FSAL/FSAL_PROXY_V4/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-05T17:44:26Z",
+      "side": 1,
+      "message": "Used by proxyv4_create_export",
+      "parentUuid": "0e87a570_dec0497e",
       "revId": "894d2568d61bd030037b932deafa6191b6c13e2f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -37,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bf5ee46_6fa5aa3d",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-05T17:44:26Z",
+      "side": 1,
+      "message": "Oops, originally I was going to do something fancier on exit, then all the cleanup moved to the caller...\n\nWill fix...\n\nThough the compiler may put the goto in...",
+      "parentUuid": "8a70d87b_5491c4a7",
+      "revId": "894d2568d61bd030037b932deafa6191b6c13e2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb65e857_6f18de66",
         "filename": "src/Protocols/NLM/nlm_async.c",
         "patchSetId": 1
@@ -54,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c76deea1_dbb8e57d",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-05T17:44:26Z",
+      "side": 1,
+      "message": "state_lock_init in state_lock.c",
+      "parentUuid": "bb65e857_6f18de66",
+      "revId": "894d2568d61bd030037b932deafa6191b6c13e2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a3a8797_32809024",
         "filename": "src/support/ds.c",
         "patchSetId": 1
@@ -65,6 +136,24 @@
       "writtenOn": "2023-04-05T14:02:40Z",
       "side": 1,
       "message": "I can\u0027t see where this is initialized?",
+      "revId": "894d2568d61bd030037b932deafa6191b6c13e2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df1afb67_a459bf98",
+        "filename": "src/support/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-05T17:44:26Z",
+      "side": 1,
+      "message": "Immediately following function server_pkginit...",
+      "parentUuid": "3a3a8797_32809024",
       "revId": "894d2568d61bd030037b932deafa6191b6c13e2f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
