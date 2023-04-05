@@ -16,6 +16,24 @@
       "message": "I agree.  And if, at some future point, pools need protection, they should provide it themselves.",
       "revId": "82bc4ba9553fb24b04c65c0ddac8c8669e777bee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb0bf20_f2f4804f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-05T17:30:46Z",
+      "side": 1,
+      "message": "Really we should either remove pools or make them useful. Right now all they are is a wrapper on malloc where you don\u0027t have to specify the size. And what is in pools right now isn\u0027t even a useful set to track in use counts for objects we might care to know how many are in use. And even if we did add such tracking it would just use an atomic counter so no need of a lock.\n\nSadly the pools are a legacy from the very early Ganesha memory management and not something actually useful.",
+      "parentUuid": "e29566e3_26b59709",
+      "revId": "82bc4ba9553fb24b04c65c0ddac8c8669e777bee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
