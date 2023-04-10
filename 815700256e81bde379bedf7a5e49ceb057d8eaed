@@ -86,6 +86,24 @@
       "parentUuid": "cfccfd4b_63790067",
       "revId": "815700256e81bde379bedf7a5e49ceb057d8eaed",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c411da06_313569b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-10T16:03:02Z",
+      "side": 1,
+      "message": "Look at commit ba4ef255a7b18312a1520362cefb9afd1a89fab3\n\nIt handles making a list of IP addresses in a generic way. That code in combination with CONF_ITEM_PROC (look to see how it\u0027s used in two places) makes it easy to parse a list of IP addresses though maybe it needs some modification to allow just single IP addresses and host names. But you shouldn\u0027t be doing string parsing, we have a parser to do that and it already parses lists.",
+      "parentUuid": "4124267d_a6a60933",
+      "revId": "815700256e81bde379bedf7a5e49ceb057d8eaed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
