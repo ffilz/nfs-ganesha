@@ -121,6 +121,24 @@
       "parentUuid": "ae7d007e_a7483db1",
       "revId": "8a7b39ea5c7977112521584df6783f36f909c7b3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a862b58d_4e318652",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020873
+      },
+      "writtenOn": "2023-04-11T23:33:03Z",
+      "side": 1,
+      "message": "I\u0027m OK abandoning if we\u0027re the only ones running in to this issue, but I don\u0027t think it\u0027s currently resolved - https://github.com/ffilz/nfs-ganesha/blob/next/src/FSAL/default_methods.c#L1356 still references data \"after `state`\", and `alloc_state` still doesn\u0027t allocate enough space for it. Maybe I\u0027m not looking at the correct repo/branch?",
+      "parentUuid": "92737d4f_870bf579",
+      "revId": "8a7b39ea5c7977112521584df6783f36f909c7b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
