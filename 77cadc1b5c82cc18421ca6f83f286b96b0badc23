@@ -16,6 +16,24 @@
       "message": "This is how I\u0027ve always wanted Ganesha to behave.  Should we consider having this on by default, and have an option to turn it off?  Or is that too big a change?",
       "revId": "77cadc1b5c82cc18421ca6f83f286b96b0badc23",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420dcde6_093cd3a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-11T14:02:27Z",
+      "side": 1,
+      "message": "Before changing default, we should check with folks using various HA solutions.\n\nNote that I believe this will cause Ganesha to fatal if an exported filesystem isn\u0027t available on startup so it could induce HA bouncing until (and if) the HA detects the bouncing and completely shuts down the service.\n\nOf course the solution would be for the HA solutions to specify the command line option to NOT fail on startup.\n\nWe just don\u0027t want to surprise existing products that rebase to 5.0 or later...",
+      "parentUuid": "89576e3d_174179f2",
+      "revId": "77cadc1b5c82cc18421ca6f83f286b96b0badc23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
