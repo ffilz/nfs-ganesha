@@ -139,6 +139,24 @@
       "parentUuid": "92737d4f_870bf579",
       "revId": "8a7b39ea5c7977112521584df6783f36f909c7b3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92185587_d2b917de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015854
+      },
+      "writtenOn": "2023-04-12T00:59:48Z",
+      "side": 1,
+      "message": "I\u0027ll abandon this change for now, but would also be keen to fix some memory issues long term.\n\nI\u0027ve observed memory management issues when compiling Ganesha with the Clang compiler and running Ganesha in debug mode with memory profilers. Warnings about modifications to unallocated memory.",
+      "parentUuid": "a862b58d_4e318652",
+      "revId": "8a7b39ea5c7977112521584df6783f36f909c7b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
