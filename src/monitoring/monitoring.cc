@@ -22,6 +22,7 @@
 
 #include <unistd.h>
 
+#include <algorithm>
 #include <map>
 #include <memory>
 #include <sstream>
