@@ -58,7 +58,8 @@ static void release(struct fsal_export *exp_hdl)
 	struct gpfs_fsal_export *myself =
 	    container_of(exp_hdl, struct gpfs_fsal_export, export);
 
-	gpfs_unexport_filesystems(myself);
+	unclaim_all_export_maps(exp_hdl);
+
 	fsal_detach_export(exp_hdl->fsal, &exp_hdl->exports);
 	free_export_ops(exp_hdl);
 	close(myself->export_fd);
@@ -821,7 +822,7 @@ gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 	return status;
 
 unexport:
-	gpfs_unexport_filesystems(gpfs_exp);
+	unclaim_all_export_maps(exp);
 detach:
 	fsal_detach_export(fsal_hdl, &exp->exports);
 free:
