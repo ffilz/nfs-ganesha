@@ -16,6 +16,24 @@
       "message": "This seems to be correct, but is there an actual reason for this?   Right now, it\u0027s absolutely clear, at a glance, what clients apply to an export.  With this, there\u0027s potential for ambiguity.  Not in the definition, that\u0027s clear, but in which definition applies.  That is, clients in export defaults could apply either to all exports or only to empty exports, and with this, you have to know (and remember) which it is, since both are sane defaults.",
       "revId": "a5a7b01cbb9412c65ca29daf788bf6f75ce2e971",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1aa541b_06f909ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-20T16:08:39Z",
+      "side": 1,
+      "message": "If I recall, someone asked for it.\n\nBut it\u0027s basically like all items in EXPORT_DEFAULTS. If that field isn\u0027t specified in the EXPORT (or in the EXPORT via a CLIENT block), then the value in EXPORT_DEFAULTS applies.\n\nBut it is a tad more complicated.\n\nIt also makes me think that something that ultimately would be useful is export groups that group a bunch of exports with the same options. Then if you had multi-tenancy you could have a customer-one group and a customer-two group, each with the CLIENT definitions that distinguish that customer and then list all the exports that belong to that group.",
+      "parentUuid": "a1c1d5c8_ac3fee23",
+      "revId": "a5a7b01cbb9412c65ca29daf788bf6f75ce2e971",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
