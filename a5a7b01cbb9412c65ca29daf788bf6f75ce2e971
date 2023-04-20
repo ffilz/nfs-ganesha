@@ -34,6 +34,24 @@
       "parentUuid": "a1c1d5c8_ac3fee23",
       "revId": "a5a7b01cbb9412c65ca29daf788bf6f75ce2e971",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb11518_b48ddaa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-04-20T17:24:27Z",
+      "side": 1,
+      "message": "I don\u0027t think groups are necessary.  If you\u0027re configuring by hand, you don\u0027t have very many exports, and can make sure they\u0027re right.  If you have tons of exports, you\u0027re using an orchestrator to configure, and it doesn\u0027t matter.  That\u0027s sort-of my argument for this change too, but I don\u0027t have a strong opinion about that.\n\nIf it was asked for, I guess we can do it.",
+      "parentUuid": "f1aa541b_06f909ca",
+      "revId": "a5a7b01cbb9412c65ca29daf788bf6f75ce2e971",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
