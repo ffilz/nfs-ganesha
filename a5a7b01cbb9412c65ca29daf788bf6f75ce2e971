@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c1d5c8_ac3fee23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-04-20T15:58:30Z",
+      "side": 1,
+      "message": "This seems to be correct, but is there an actual reason for this?   Right now, it\u0027s absolutely clear, at a glance, what clients apply to an export.  With this, there\u0027s potential for ambiguity.  Not in the definition, that\u0027s clear, but in which definition applies.  That is, clients in export defaults could apply either to all exports or only to empty exports, and with this, you have to know (and remember) which it is, since both are sane defaults.",
+      "revId": "a5a7b01cbb9412c65ca29daf788bf6f75ce2e971",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
