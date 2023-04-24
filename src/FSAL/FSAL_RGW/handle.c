@@ -1636,12 +1636,6 @@ static void handle_to_key(struct fsal_obj_handle *obj_hdl,
 
 #ifdef USE_FSAL_RGW_XATTRS
 
-/** @todo - the code below has some serious problems with dereferencing NULL
- *          pointers. The CMake capability detection has been "nerfed" so this
- *          code will never be enabled...
- *
- */
-
 static int getxattr_cb(rgw_xattrlist *attrs, void *arg, uint32_t flags)
 {
 	xattrvalue4 *cb_arg = (xattrvalue4 *)arg;
@@ -1656,7 +1650,7 @@ static int getxattr_cb(rgw_xattrlist *attrs, void *arg, uint32_t flags)
 /**
  * @brief Get Extended Attribute
  *
- * The function fetches the extended attr of the object.
+ * The function fetches an extended attr of the object.
  *
  * @param[in]  obj_hdl  Input object to query
  * @param[in]  xa_name  Input xattr name
@@ -1670,7 +1664,6 @@ static fsal_status_t getxattrs(struct fsal_obj_handle *obj_hdl,
 	int rc = 0;
 	int errsv = 0;
 	fsal_status_t status;
-	rgw_xattrlist attrs = {NULL, 1};
 
 	struct rgw_export *export =
 		container_of(op_ctx->fsal_export,
@@ -1678,13 +1671,13 @@ static fsal_status_t getxattrs(struct fsal_obj_handle *obj_hdl,
 	struct rgw_handle *handle =
 		container_of(obj_hdl, struct rgw_handle, handle);
 
-	/** @todo - deref of NULL pointer set above! */
-	attrs.xattrs->key.val =
-		xa_name->utf8string_val;
-	attrs.xattrs->key.len = xa_name->utf8string_len;
+	rgw_xattrstr xattr_k = {xa_name->utf8string_val, xa_name->utf8string_len};
+	rgw_xattrstr xattr_v = {NULL, 0};
+	rgw_xattr xattrs[1] = {{xattr_k, xattr_v}};
+	rgw_xattrlist xattrlist = {xattrs, 1};
 
-	rc = rgw_getxattrs(export->rgw_fs, handle->rgw_fh, &attrs,
-			   getxattr_cb, &xa_value,
+	rc = rgw_getxattrs(export->rgw_fs, handle->rgw_fh, &xattrlist,
+			   getxattr_cb, xa_value,
 			   RGW_GETXATTR_FLAG_NONE);
 
 	if (rc < 0) {
@@ -1719,7 +1712,7 @@ out:
 /**
  * @brief Set Extended Attribute
  *
- * The function sets the extended attr of the object.
+ * The function sets an extended attr of the object.
  *
  * @param[in]  obj_hdl  The input object
  * @param[in]  sa_type  Input xattr type
@@ -1736,7 +1729,6 @@ static fsal_status_t setxattrs(struct fsal_obj_handle *obj_hdl,
 	int rc = 0;
 	int errsv = 0;
 	fsal_status_t status = {0, 0};
-	rgw_xattrlist attrs = {NULL, 1};
 
 	struct rgw_export *export =
 		container_of(op_ctx->fsal_export,
@@ -1744,15 +1736,12 @@ static fsal_status_t setxattrs(struct fsal_obj_handle *obj_hdl,
 	struct rgw_handle *handle = container_of(obj_hdl, struct rgw_handle,
 						 handle);
 
-	/** @todo - deref of NULL pointer set above! */
-	attrs.xattrs->key.val =
-		xa_name->utf8string_val;
-	attrs.xattrs->key.len = xa_name->utf8string_len;
-	attrs.xattrs->val.val =
-		xa_value->utf8string_val;
-	attrs.xattrs->val.len = xa_value->utf8string_len;
+	rgw_xattrstr xattr_k = {xa_name->utf8string_val, xa_name->utf8string_len};
+	rgw_xattrstr xattr_v = {xa_value->utf8string_val, xa_value->utf8string_len};
+	rgw_xattr xattr = {xattr_k, xattr_v};
+	rgw_xattrlist xattrlist = {&xattr, 1};
 
-	rc = rgw_setxattrs(export->rgw_fs, handle->rgw_fh, &attrs,
+	rc = rgw_setxattrs(export->rgw_fs, handle->rgw_fh, &xattrlist,
 			   RGW_SETXATTR_FLAG_NONE);
 
 	if (rc < 0) {
@@ -1786,7 +1775,6 @@ static fsal_status_t removexattrs(struct fsal_obj_handle *obj_hdl,
 	int rc = 0;
 	int errsv = 0;
 	fsal_status_t status = {0, 0};
-	rgw_xattrlist attrs = {NULL, 1};
 
 	struct rgw_export *export =
 		container_of(op_ctx->fsal_export,
@@ -1794,15 +1782,14 @@ static fsal_status_t removexattrs(struct fsal_obj_handle *obj_hdl,
 	struct rgw_handle *handle =
 		container_of(obj_hdl, struct rgw_handle, handle);
 
-	attrs.xattr_cnt = 1;
-	/** @todo - deref of NULL pointer set above! */
-	attrs.xattrs->key.val =
-		xa_name->utf8string_val;
-	attrs.xattrs->key.len = xa_name->utf8string_len;
+	rgw_xattrstr xattr_k = {xa_name->utf8string_val, xa_name->utf8string_len};
+	rgw_xattrstr xattr_v = {NULL, 0};
+	rgw_xattr xattr = {xattr_k, xattr_v};
+	rgw_xattrlist xattrlist = {&xattr, 1};
 
 	rc = rgw_rmxattrs(export->rgw_fs,
 			  handle->rgw_fh,
-			  &attrs, RGW_RMXATTR_FLAG_NONE);
+			  &xattrlist, RGW_RMXATTR_FLAG_NONE);
 
 	if (rc < 0) {
 		errsv = errno;
@@ -1823,19 +1810,31 @@ struct lxattr_cb_arg {
 	xattrlist4 *names;
 };
 
-static int lsxattr_cb(rgw_xattrlist *attrs, void *cb_arg, uint32_t flag)
+#define XATTR_USER_PREFIX	"user."
+#define XATTR_USER_PREFIX_LEN	(sizeof(XATTR_USER_PREFIX) - 1)
+
+static int lsxattr_cb(rgw_xattrlist *attrs, void *arg, uint32_t flag)
 {
-	struct lxattr_cb_arg *cb = (struct lxattr_cb_arg *)cb_arg;
+	struct lxattr_cb_arg *cb_arg = (struct lxattr_cb_arg *)arg;
 
-	cb->names->xl4_entries[cb->names->xl4_count].utf8string_val =
-		gsh_strldup(attrs->xattrs[0].key.val, attrs->xattrs[0].key.len,
-		&cb->names->xl4_entries[cb->names->xl4_count].utf8string_len);
+	for (uint32_t ix = 0; ix < attrs->xattr_cnt; ++ix) {
+		rgw_xattr *xattr = &(attrs->xattrs[ix]);
+		component4 *entry = &(cb_arg->names->xl4_entries[cb_arg->names->xl4_count]);
 
-	cb->names->xl4_count++;
+		/* defensive checks borrowed from Jeff Layton's helper */
+		if (xattr->key.len < XATTR_USER_PREFIX_LEN + 1)
+			return 0;
 
-	if (cb->names->xl4_count == cb->max) {
-		flag = RGW_LSXATTR_FLAG_STOP;
-		return flag;
+		if (strncmp(xattr->key.val, XATTR_USER_PREFIX, XATTR_USER_PREFIX_LEN))
+			return 0;
+
+		entry->utf8string_val =
+			gsh_strldup(xattr->key.val, xattr->key.len, &entry->utf8string_len);
+		cb_arg->names->xl4_count++;
+
+		if (cb_arg->names->xl4_count == cb_arg->max) {
+			return RGW_LSXATTR_FLAG_STOP;
+		}
 	}
 
 	return 0;
@@ -1866,10 +1865,6 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 	int rc = 0;
 	int errsv = 0;
 	fsal_status_t status = {0, 0};
-	struct lxattr_cb_arg attrs;
-
-	attrs.names = lr_names;
-	attrs.max = la_maxcount;
 
 	struct rgw_export *export =
 		container_of(op_ctx->fsal_export,
@@ -1877,9 +1872,18 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 	struct rgw_handle *handle =
 		container_of(obj_hdl, struct rgw_handle, handle);
 
+	struct lxattr_cb_arg cb_arg;
+
+	/* XXX: ffilz: the doc in fsal_api strongly implies this buffer is pre-allocated,
+	 * but it's not */
+	lr_names->xl4_entries = gsh_calloc(la_maxcount, sizeof(xattrlist4));
+	lr_names->xl4_count = 0; /* defensive */
+	cb_arg.names = lr_names;
+	cb_arg.max = la_maxcount;
+
 	rc = rgw_lsxattrs(export->rgw_fs, handle->rgw_fh,
 			  NULL /* filter_prefix not yet implemented in RGW */,
-			  lsxattr_cb, &attrs, RGW_LSXATTR_FLAG_NONE);
+			  lsxattr_cb, &cb_arg, RGW_LSXATTR_FLAG_NONE);
 
 	if (rc < 0) {
 		errsv = errno;
@@ -1890,7 +1894,8 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 		goto out;
 	}
 
-	/* Setting true unconditionally since cookie isn't implemented yet */
+	/* Setting lr_eof true unconditionally since cookie isn't implemented yet */
+	*la_cookie = cb_arg.names->xl4_count;
 	*lr_eof = true;
 
 	status = fsalstat(ERR_FSAL_NO_ERROR, 0);
