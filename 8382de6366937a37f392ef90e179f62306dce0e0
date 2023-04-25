@@ -16,6 +16,24 @@
       "message": "Does this mean that Ganesha will only build against reef plus?  Do we want a conditional compile to build against older versions? ",
       "revId": "8382de6366937a37f392ef90e179f62306dce0e0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4a98600_04d86fcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-25T15:32:23Z",
+      "side": 1,
+      "message": "I\u0027d prefer that we conditional compile so we build against older versions (otherwise it may make it hard to keep CI and my weekly builds building FSAL_RGW).",
+      "parentUuid": "747ded47_9a712c61",
+      "revId": "8382de6366937a37f392ef90e179f62306dce0e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
