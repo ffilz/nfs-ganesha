@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b187f02d_ff83c037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-25T18:47:11Z",
+      "side": 1,
+      "message": "OK, sorry for the confusion, looks good.",
+      "revId": "e61ab8e8e2758746a9a0b13e12ae2283f58a7908",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b25801b7_2545347b",
@@ -36,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b917bae2_a584d98e",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-25T18:47:11Z",
+      "side": 1,
+      "message": "Oh, sorry, didn\u0027t read that this is just a comment change to match the code... :-)",
+      "parentUuid": "03a84d7e_86ed3758",
+      "revId": "e61ab8e8e2758746a9a0b13e12ae2283f58a7908",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8b7283d_48d7051b",
@@ -67,6 +102,24 @@
       "side": 1,
       "message": "this is a preprocessor if.  iff the version is 1.2.1 or later, we take the new signature, otherwise, the old one.",
       "parentUuid": "e8b7283d_48d7051b",
+      "revId": "e61ab8e8e2758746a9a0b13e12ae2283f58a7908",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af9c9eb4_0d968675",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-04-25T18:47:11Z",
+      "side": 1,
+      "message": "OK, got it, didn\u0027t read carefully enough. Looks good. Thanks.",
+      "parentUuid": "29c5a64d_9c5988e4",
       "revId": "e61ab8e8e2758746a9a0b13e12ae2283f58a7908",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
