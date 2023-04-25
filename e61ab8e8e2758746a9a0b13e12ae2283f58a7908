@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03a84d7e_86ed3758",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2023-04-25T18:35:40Z",
+      "side": 1,
+      "message": "this is not new",
+      "parentUuid": "b25801b7_2545347b",
+      "revId": "e61ab8e8e2758746a9a0b13e12ae2283f58a7908",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8b7283d_48d7051b",
         "filename": "src/FSAL/FSAL_RGW/handle.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-25T18:26:59Z",
       "side": 1,
       "message": "That looks to be looking for 1.2.1 or later?",
+      "revId": "e61ab8e8e2758746a9a0b13e12ae2283f58a7908",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c5a64d_9c5988e4",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2023-04-25T18:35:40Z",
+      "side": 1,
+      "message": "this is a preprocessor if.  iff the version is 1.2.1 or later, we take the new signature, otherwise, the old one.",
+      "parentUuid": "e8b7283d_48d7051b",
       "revId": "e61ab8e8e2758746a9a0b13e12ae2283f58a7908",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
