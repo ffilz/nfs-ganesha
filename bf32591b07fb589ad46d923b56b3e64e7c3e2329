@@ -140,6 +140,77 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f8296f_65d9e74e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-05-04T23:44:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aef1a0e3_5a856dbe",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f458a7ce_0224b540",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-05-04T23:44:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "550770a1_63d6edf5",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f962cd_592d39f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-05-04T23:44:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a218c3ee_3a2d1569",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6d8e5a_5321e3c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-05-04T23:44:13Z",
+      "side": 1,
+      "message": "Trying to get this abandoned change to disappear from my dashboard by resolving comments.",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcf10adc_5b428b7c",
@@ -171,6 +242,24 @@
       "side": 1,
       "message": "\u003e Sometimes I wish the logical inverse was \"not\" rather than \"!\" for easier reading... It\u0027s easy to miss the !\n\u003e \n\u003e What it we renamed it from check to check_fail?\n\nSorry, I missed this reply...\n\nI think the intent of check() is noble, so the name is good.  That is, I don\u0027t like check_fail()...  :-)\n\nAlthough the \u0027!\u0027 gets a bit hidden, that\u0027s a line of code that isn\u0027t going to be read often.\n\nOne alternative that could make the code clearer is to have typedef for the different config_block member functions.  Then this code could read:\n\n  config_block_check_fn check;\n  ...\n  check \u003d item-\u003eu.blk.check;\n  if (check \u0026\u0026 !check(param_struct, err_type) {\n    goto err_out;\n  }\n\nThat is much more readable and the ! has little chance of getting lost in the noise.\n\nAlternatively, could rename check() to is_invalid().  I think that would make sense...",
       "parentUuid": "dcf10adc_5b428b7c",
+      "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1872ff8e_af61cb69",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-05-04T23:44:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "188cb639_cb2a55d5",
       "revId": "bf32591b07fb589ad46d923b56b3e64e7c3e2329",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
