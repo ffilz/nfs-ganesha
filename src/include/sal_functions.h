@@ -919,7 +919,7 @@ void nfs_wait_for_grace_norefs(void);
 void nfs_notify_grace_norefs_waiters(void);
 
 /* v4 Client stable-storage database management */
-void nfs4_add_clid(nfs_client_id_t *);
+int nfs4_add_clid(nfs_client_id_t *);
 void nfs4_rm_clid(nfs_client_id_t *);
 void nfs4_chk_clid(nfs_client_id_t *);
 
@@ -965,7 +965,7 @@ struct nfs4_recovery_backend {
 	void (*recovery_read_clids)(nfs_grace_start_t *gsp,
 				    add_clid_entry_hook add_clid,
 				    add_rfh_entry_hook add_rfh);
-	void (*add_clid)(nfs_client_id_t *);
+	int (*add_clid)(nfs_client_id_t *);
 	void (*rm_clid)(nfs_client_id_t *);
 	void (*add_revoke_fh)(nfs_client_id_t *, nfs_fh4 *);
 	void (*end_grace)(void);

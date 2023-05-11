@@ -499,7 +499,7 @@ out:
 	return ret;
 }
 
-void rados_kv_add_clid(nfs_client_id_t *clientid)
+int rados_kv_add_clid(nfs_client_id_t *clientid)
 {
 	char ckey[RADOS_KEY_MAX_LEN];
 	char *cval;
@@ -514,6 +514,7 @@ void rados_kv_add_clid(nfs_client_id_t *clientid)
 	rcu_read_unlock();
 	ret = rados_kv_put(ckey, cval, recov_oid->gr_val);
 	gsh_refstr_put(recov_oid);
+
 	if (ret < 0) {
 		LogEvent(COMPONENT_CLIENTID, "Failed to add clid %lu",
 			 clientid->cid_clientid);
@@ -521,6 +522,8 @@ void rados_kv_add_clid(nfs_client_id_t *clientid)
 	} else {
 		clientid->cid_recov_tag = cval;
 	}
+
+	return ret;
 }
 
 void rados_kv_rm_clid(nfs_client_id_t *clientid)

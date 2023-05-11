@@ -273,7 +273,7 @@ int fs_create_recov_dir(void)
 	return 0;
 }
 
-void fs_add_clid(nfs_client_id_t *clientid)
+int fs_add_clid(nfs_client_id_t *clientid)
 {
 	int err = 0;
 	char path[PATH_MAX] = {0};
@@ -328,8 +328,10 @@ void fs_add_clid(nfs_client_id_t *clientid)
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to create client in recovery dir (%s), errno: %s (%d)",
 			 path, strerror(errno), errno);
+		return -1;
 	} else {
 		LogDebug(COMPONENT_CLIENTID, "Created client dir [%s]", path);
+		return 0;
 	}
 }
 

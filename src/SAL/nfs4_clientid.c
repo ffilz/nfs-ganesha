@@ -99,6 +99,7 @@ nfsstat4 clientid_error_to_nfsstat(clientid_status_t err)
 		return NFS4_OK;
 	case CLIENT_ID_INSERT_MALLOC_ERROR:
 		return NFS4ERR_RESOURCE;
+	case CLIENT_ID_DATABASE_ERROR:
 	case CLIENT_ID_INVALID_ARGUMENT:
 		return NFS4ERR_SERVERFAULT;
 	case CLIENT_ID_EXPIRED:
@@ -126,6 +127,8 @@ const char *clientid_error_to_str(clientid_status_t err)
 		return "CLIENT_ID_SUCCESS";
 	case CLIENT_ID_INSERT_MALLOC_ERROR:
 		return "CLIENT_ID_INSERT_MALLOC_ERROR";
+	case CLIENT_ID_DATABASE_ERROR:
+		return "CLIENT_ID_DATABASE_ERROR";
 	case CLIENT_ID_INVALID_ARGUMENT:
 		return "CLIENT_ID_INVALID_ARGUMENT";
 	case CLIENT_ID_EXPIRED:
@@ -584,8 +587,6 @@ nfs_client_id_t *create_client_id(clientid4 clientid,
  * @retval CLIENT_ID_SUCCESS if successful.
  * @retval CLIENT_ID_INSERT_MALLOC_ERROR if an error occurred during
  *         the insertion process
- * @retval CLIENT_ID_NETDB_ERROR if an error occurred during the netdb
- *         query (via gethostbyaddr).
  */
 
 clientid_status_t nfs_client_id_insert(nfs_client_id_t *clientid)
@@ -739,8 +740,8 @@ int remove_unconfirmed_client_id(nfs_client_id_t *clientid)
  *         unconfirmed table
  * @retval CLIENT_ID_INSERT_MALLOC_ERROR if unable to insert record
  *         into confirmed table
- * @retval CLIENT_ID_NETDB_ERROR if an error occurred during the netdb
- *         query (via gethostbyaddr).
+ * @retval CLIENT_ID_DATABASE_ERROR if an error occurred while inserting the
+ *         clientid into the recovery database.
  */
 clientid_status_t nfs_client_id_confirm(nfs_client_id_t *clientid,
 					log_components_t component)
@@ -793,23 +794,45 @@ clientid_status_t nfs_client_id_confirm(nfs_client_id_t *clientid,
 				hash_table_err_to_str(rc), str);
 		}
 
-		/* Set this up so this client id record will be
-		   freed. */
+		/* Set this up so this client id record will be freed. */
 		clientid->cid_confirmed = EXPIRED_CLIENT_ID;
 
-		/* Release hash table reference to the unconfirmed
-		   record */
+		/* Release hash table reference to the unconfirmed record */
 		(void)dec_client_id_ref(clientid);
 
 		return CLIENT_ID_INSERT_MALLOC_ERROR;
 	}
+
+	if (nfs4_add_clid(clientid) != 0) {
+		rc = HashTable_Del(ht_confirmed_client_id, &buffkey, &old_key,
+				   &old_value);
+
+		if (rc != HASHTABLE_SUCCESS) {
+			/* Wow, it just gets worse, let's log and bail...*/
+			char str[LOG_BUFF_LEN] = "\0";
+			struct display_buffer dspbuf = {sizeof(str), str, str};
+
+			display_client_id_rec(&dspbuf, clientid);
+
+			LogFatal(COMPONENT_CLIENTID,
+				 "Unexpected problem %s, could not remove {%s}",
+				 hash_table_err_to_str(rc), str);
+		}
+
+		/* Set this up so this client id record will be freed. */
+		clientid->cid_confirmed = EXPIRED_CLIENT_ID;
+
+		/* Release hash table reference to the unconfirmed record */
+		(void)dec_client_id_ref(clientid);
+
+		return CLIENT_ID_DATABASE_ERROR;
+	}
+
 	atomic_inc_uint64_t(&num_confirmed_client_ids);
 
 	/* Add the clientid as the confirmed entry for the client
 	   record */
 	clientid->cid_client_record->cr_confirmed_rec = clientid;
-
-	nfs4_add_clid(clientid);
 
 	return CLIENT_ID_SUCCESS;
 }
