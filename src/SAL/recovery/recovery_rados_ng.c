@@ -198,7 +198,7 @@ static int rados_ng_init(void)
 	return 0;
 }
 
-static void rados_ng_add_clid(nfs_client_id_t *clientid)
+static int rados_ng_add_clid(nfs_client_id_t *clientid)
 {
 	struct gsh_refstr *recov_oid;
 	char ckey[RADOS_KEY_MAX_LEN];
@@ -214,6 +214,7 @@ static void rados_ng_add_clid(nfs_client_id_t *clientid)
 	rcu_read_unlock();
 	ret = rados_ng_put(ckey, cval, recov_oid->gr_val);
 	gsh_refstr_put(recov_oid);
+
 	if (ret < 0) {
 		LogEvent(COMPONENT_CLIENTID, "Failed to add clid %lu",
 			 clientid->cid_clientid);
@@ -221,6 +222,8 @@ static void rados_ng_add_clid(nfs_client_id_t *clientid)
 	} else {
 		clientid->cid_recov_tag = cval;
 	}
+
+	return ret;
 }
 
 static void rados_ng_rm_clid(nfs_client_id_t *clientid)

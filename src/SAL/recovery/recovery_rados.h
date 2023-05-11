@@ -66,7 +66,7 @@ int rados_kv_connect(rados_ioctx_t *io_ctx, const char *userid,
 void rados_kv_shutdown(void);
 int rados_kv_put(char *key, char *val, char *object);
 int rados_kv_get(char *key, char *val, char *object);
-void rados_kv_add_clid(nfs_client_id_t *clientid);
+int rados_kv_add_clid(nfs_client_id_t *clientid);
 void rados_kv_rm_clid(nfs_client_id_t *clientid);
 void rados_kv_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle);
 

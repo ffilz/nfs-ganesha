@@ -82,8 +82,9 @@ static void default_recovery_read_clids(nfs_grace_start_t *gsp,
 {
 }
 
-static void default_add_clid(nfs_client_id_t *clientid)
+static int default_add_clid(nfs_client_id_t *clientid)
 {
+	return -1;
 }
 
 static void default_rm_clid(nfs_client_id_t *clientid)
@@ -617,11 +618,15 @@ void nfs_notify_grace_norefs_waiters(void)
  *
  * @param[in] clientid Client record
  */
-void nfs4_add_clid(nfs_client_id_t *clientid)
+int nfs4_add_clid(nfs_client_id_t *clientid)
 {
+	int rc;
+
 	PTHREAD_MUTEX_lock(&clientid->cid_mutex);
-	recovery_backend->add_clid(clientid);
+	rc = recovery_backend->add_clid(clientid);
 	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
+
+	return rc;
 }
 
 /**

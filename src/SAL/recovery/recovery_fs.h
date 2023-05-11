@@ -26,7 +26,7 @@
 extern char v4_recov_dir[PATH_MAX];
 extern unsigned int v4_recov_dir_len;
 
-void fs_add_clid(nfs_client_id_t *clientid);
+int fs_add_clid(nfs_client_id_t *clientid);
 void fs_rm_clid(nfs_client_id_t *clientid);
 void fs_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle);
 void fs_clean_old_recov_dir_impl(char *parent_path);

@@ -717,6 +717,7 @@ typedef enum nfs_clientid_confirm_state__ {
 typedef enum clientid_status {
 	CLIENT_ID_SUCCESS = 0,	/*< Success */
 	CLIENT_ID_INSERT_MALLOC_ERROR,	/*< Unable to allocate memory */
+	CLIENT_ID_DATABASE_ERROR,	/*< Error with recovery data base */
 	CLIENT_ID_INVALID_ARGUMENT,	/*< Invalid argument */
 	CLIENT_ID_EXPIRED,	/*< requested client id expired */
 	CLIENT_ID_STALE		/*< requested client id stale */
