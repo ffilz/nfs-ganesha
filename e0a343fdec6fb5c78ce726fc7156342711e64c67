@@ -16,6 +16,24 @@
       "message": "I think this is missing something, all I see is NLM code.",
       "revId": "e0a343fdec6fb5c78ce726fc7156342711e64c67",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b2fa611_2013621f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2023-05-11T01:32:57Z",
+      "side": 1,
+      "message": "No this is the entire patch.\n\nWe just want to remove owner-\u003eso_refcount \u003d 1 from get_state_owner. \n\nmemcpy(owner, key, sizeof(*key)) in line 1448 takes care of setting the refcount to 1 before adding the owner to the list\n\nThis is how we initialize the key in create_nfs4_owner\n\n....\n\tkey.so_owner.so_nfs4_owner.so_args.argop \u003d NFS4_OP_ILLEGAL;\n\tkey.so_refcount \u003d 1; \u003c\u003c\u003d\u003d\u003d\n\tkey.so_owner.so_nfs4_owner.so_confirmed \u003d confirm;\n....",
+      "parentUuid": "6c9d4e95_3718b2e7",
+      "revId": "e0a343fdec6fb5c78ce726fc7156342711e64c67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
