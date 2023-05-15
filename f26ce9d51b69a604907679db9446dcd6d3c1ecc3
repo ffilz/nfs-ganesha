@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d7204c_868abefa",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-05-15T13:43:34Z",
+      "side": 1,
+      "message": "Should this succeed?  If there\u0027s no recovery database at all, then we couldn\u0027t have any clients.",
+      "revId": "f26ce9d51b69a604907679db9446dcd6d3c1ecc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
