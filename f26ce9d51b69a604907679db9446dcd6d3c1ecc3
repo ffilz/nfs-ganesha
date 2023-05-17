@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c3be4f_d8d1978d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2023-05-17T18:51:56Z",
+      "side": 1,
+      "message": "Do you really want to pass this back to the client?\n\nThe recovery DB is only used when you have to reboot. It\u0027s quite possible the client\u0027s mount lifetime doesn\u0027t involve any server reboots, in which case it should still work. Obviously the admin should be informed that something is wrong, but I\u0027m not sure that rejecting the mount is the right thing to do.\n\nOTOH, the client wouldn\u0027t be allowed to reclaim, so once you do restart the server, you\u0027re sort of hosed.",
+      "revId": "f26ce9d51b69a604907679db9446dcd6d3c1ecc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84d7204c_868abefa",
