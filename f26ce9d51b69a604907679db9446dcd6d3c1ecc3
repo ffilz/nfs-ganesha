@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2733e015_b5e1ca0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-05-19T17:37:09Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m really not sure. Either way isn\u0027t great. I am inclined to lean toward reporting the failure to the client, but even that doesn\u0027t prevent corruption because what if the failure is after a reboot, now you have a client not able to reclaim state. I guess another option would be to make such errors fatal, but I\u0027m not sure that can\u0027t get into a place where we lose data somnehow.\n\nI\u0027m going to hold off on merging this one, I think there\u0027s a bigger conversation and maybe it needs to happen on the IETF mailing list.",
+      "parentUuid": "b8c3be4f_d8d1978d",
+      "revId": "f26ce9d51b69a604907679db9446dcd6d3c1ecc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe7df83_f2ee7f23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-05-19T17:37:09Z",
+      "side": 1,
+      "message": "-2 to help me make sure I don\u0027t merge this...",
+      "revId": "f26ce9d51b69a604907679db9446dcd6d3c1ecc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84d7204c_868abefa",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 1
