@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a738596b_a2a10a01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-05-31T12:58:02Z",
+      "side": 1,
+      "message": "This is an odd one, since we don\u0027t actually care about any of the results of find_package_handle_standard_args(), but only LSB_RELEASE_EXECUTABLE.\n\nLooking in my /usr/share/cmake/Modules, there are a few with underscores (such as FindSDL_*.cmake and Findosg_functions.cmake) so it seems that it\u0027s fine to have underscores.  I\u0027d vote for FindLSB_release.cmake",
+      "revId": "6745fd2f225b4f70aaa03cdc94d5f69f3515e43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
