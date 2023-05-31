@@ -16,6 +16,24 @@
       "message": "Hmm...  This breaks python detection on fedora 35, but fixes it on fedora 37.  I\u0027m not sure we care about 35 (outside of my test boxes), but this means we need to do a large matrix of compiles for this fix, and we no longer have our CI, so it\u0027ll have to be done by hang.",
       "revId": "4e9d014abddc7fd4cfbb5a104b6712a2a9c87b91",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c66399_7c718f71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-05-31T16:01:32Z",
+      "side": 1,
+      "message": "Making this unresolved.",
+      "parentUuid": "81041146_eec87c9c",
+      "revId": "4e9d014abddc7fd4cfbb5a104b6712a2a9c87b91",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
