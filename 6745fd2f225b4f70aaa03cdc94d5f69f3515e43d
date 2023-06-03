@@ -34,6 +34,24 @@
       "parentUuid": "a738596b_a2a10a01",
       "revId": "6745fd2f225b4f70aaa03cdc94d5f69f3515e43d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1a63f86_65518973",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-06-03T07:09:59Z",
+      "side": 1,
+      "message": "Yeah, I guess with the previous patch removing the local copy of FindPackageHandleStandardArgs.cmake, find_package_handle_standard_args() now produces warnings you don\u0027t care about.  Think of it as progress!  :-)\n\nPushed a new version of this commit that renames the module to FindLSB_release.cmake.",
+      "parentUuid": "1fd26867_00dfd1c6",
+      "revId": "6745fd2f225b4f70aaa03cdc94d5f69f3515e43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
