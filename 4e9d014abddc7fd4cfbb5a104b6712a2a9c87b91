@@ -34,6 +34,24 @@
       "parentUuid": "81041146_eec87c9c",
       "revId": "4e9d014abddc7fd4cfbb5a104b6712a2a9c87b91",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393dc340_d24864f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-06-03T07:16:45Z",
+      "side": 1,
+      "message": "(hmmm... had left an old version of this as a draft)\n\nHowever, with this patch Ganesha would be using upstream cmake modules for detecting nearly everything, which is the right thing to do.  So, any fixable issues should be reported to upstream cmake and distros.  If there\u0027s a bug in F35 cmake then  it could be fixed there...  but it has been EOL for nearly 6 months.\nIt makes sense for users of EOL distros to work around the problem, while users of current distros get a fix.\n\nIf this fix is included in an upcoming release, then the release notes could mention that, while this fixes Python detection on recent Linux distributions, it may break on some older distributions.  For those, it could be recommended to set -DPython3_EXECUTABLE\u003d/usr/bin/python3.  I think as long as a workaround is given then it should be OK.\n\nI\u0027ve posted the expanded container coverage, so hopefully we can get an idea of whether this is a good thing.  I expanded the script to be able to run a shell pipeline in all containers, so it is quite easy to run with and without a patch, capture output and compare.",
+      "parentUuid": "08c66399_7c718f71",
+      "revId": "4e9d014abddc7fd4cfbb5a104b6712a2a9c87b91",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
