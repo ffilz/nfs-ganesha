@@ -16,6 +16,41 @@
       "message": "I wonder if we should have a \"make container\" like we have \"make rpm\"?",
       "revId": "89a20d10389004da722464b93bb53408241316da",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d217070_3ca0d501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-06-03T06:57:54Z",
+      "side": 1,
+      "message": "That seems difficult, because you need to know which distro to aim at.  A container for the current distro isn\u0027t so useful.",
+      "parentUuid": "fc541e1f_3901594a",
+      "revId": "89a20d10389004da722464b93bb53408241316da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771620fe_38b2cba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-06-03T06:57:54Z",
+      "side": 1,
+      "message": "The other interesting thing here is that containers can be confusing.  All of the containers here work on my Debian testing box.  However, if I try them on my Debian stable laptop, at least the el9 containers fail to connect to the network (DNS lookup for install fails, haven\u0027t debugged further).  Some ABI issue, I suppose.  I was going to add a README, but ran out of time - it seems like somewhere we would need to add expectations, especially for developers on systems with older kernels.",
+      "revId": "89a20d10389004da722464b93bb53408241316da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
