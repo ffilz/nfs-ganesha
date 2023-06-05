@@ -51,6 +51,42 @@
       "message": "The other interesting thing here is that containers can be confusing.  All of the containers here work on my Debian testing box.  However, if I try them on my Debian stable laptop, at least the el9 containers fail to connect to the network (DNS lookup for install fails, haven\u0027t debugged further).  Some ABI issue, I suppose.  I was going to add a README, but ran out of time - it seems like somewhere we would need to add expectations, especially for developers on systems with older kernels.",
       "revId": "89a20d10389004da722464b93bb53408241316da",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fedbe54f_fab8947e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-06-05T13:08:32Z",
+      "side": 1,
+      "message": "We\u0027d pick a sane default for each release, and the allow overriding it with either a CMake variable or a make variable.  Not saying we need it for this PR, but just an idea.",
+      "parentUuid": "1d217070_3ca0d501",
+      "revId": "89a20d10389004da722464b93bb53408241316da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e217782b_0a3c1f66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-06-05T13:08:32Z",
+      "side": 1,
+      "message": "Odd.  That\u0027s supposed to be the point of containers, that they just work.  At any rate, we already limit how old a release can be and still be supported, so it\u0027s not a huge deal.",
+      "parentUuid": "771620fe_38b2cba9",
+      "revId": "89a20d10389004da722464b93bb53408241316da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
