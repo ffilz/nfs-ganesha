@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30e1587_83472999",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-10T04:40:22Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (hdl-\u003ehandle-\u003ehandle_size \u003d\u003d 40) {\n+\t\thdl-\u003ehandle-\u003ehandle_size \u003d 48;\n+\t}",
+      "revId": "4c7f9234604e96cbbf827b969a37f14b738a470e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
