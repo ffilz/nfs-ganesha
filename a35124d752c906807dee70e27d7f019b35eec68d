@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd5047fb_b8835602",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-10T20:45:11Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n  ganesha-container all sh -c \"rm -rf build/* \u0026\u0026 cd build \u0026\u0026 cmake -DUSE_FSAL_VFS\u003dON -DUSE_DBUS\u003dON -DENABLE_VFS_POSIX_ACL\u003dYES -DUSE_ADMIN_TOOLS\u003dYES ../nfs-ganesha/src \u0026\u0026 make -j\"",
+      "revId": "a35124d752c906807dee70e27d7f019b35eec68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
