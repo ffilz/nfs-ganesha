@@ -119,6 +119,8 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 	/* Abbreviated alias for successful response */
 	CREATE_SESSION4resok * const res_CREATE_SESSION4ok =
 	    &res_CREATE_SESSION4->CREATE_SESSION4res_u.csr_resok4;
+	/* Attributes of condition variables */
+	pthread_condattr_t cond_attr;
 
 	/* Make sure str_client is always printable even
 	 * if log level changes midstream.
@@ -351,7 +353,10 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 	nfs41_session->cb_program = 0;
 
 	PTHREAD_MUTEX_init(&nfs41_session->cb_mutex, NULL);
-	PTHREAD_COND_init(&nfs41_session->cb_cond, NULL);
+	PTHREAD_COND_ATTR_init(&cond_attr);
+	PTHREAD_COND_ATTR_set_mono_clock(&cond_attr);
+	PTHREAD_COND_init(&nfs41_session->cb_cond, &cond_attr);
+	PTHREAD_COND_ATTR_destroy(&cond_attr);
 	PTHREAD_RWLOCK_init(&nfs41_session->conn_lock, NULL);
 	PTHREAD_MUTEX_init(&nfs41_session->cb_chan.chan_mtx, NULL);
 
@@ -520,7 +525,7 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 	conf->cid_create_session_sequence++;
 
 	/* Bump the lease timer */
-	conf->cid_last_renew = time(NULL);
+	conf->cid_last_renew = time_mono(NULL);
 
 	if (isFullDebug(component)) {
 		char str[LOG_BUFF_LEN] = "\0";

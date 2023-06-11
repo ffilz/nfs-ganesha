@@ -66,7 +66,7 @@ struct cache_user {
 	time_t epoch;
 };
 
-#define user_expired(user) (time(NULL) - (user)->epoch > \
+#define user_expired(user) (time_mono(NULL) - (user)->epoch > \
 		nfs_param.core_param.manage_gids_expiration)
 
 /**
@@ -81,7 +81,7 @@ struct cache_group {
 	time_t epoch;
 };
 
-#define group_expired(group) (time(NULL) - (group)->epoch > \
+#define group_expired(group) (time_mono(NULL) - (group)->epoch > \
 		nfs_param.core_param.manage_gids_expiration)
 
 /**
@@ -322,7 +322,7 @@ bool idmapper_add_user(const struct gsh_buffdesc *name, uid_t uid,
 	struct cache_user *new;
 
 	new = gsh_malloc(sizeof(struct cache_user) + name->len);
-	new->epoch = time(NULL);
+	new->epoch = time_mono(NULL);
 	new->uname.addr = (char *)new + sizeof(struct cache_user);
 	new->uname.len = name->len;
 	new->uid = uid;
@@ -428,7 +428,7 @@ bool idmapper_add_group(const struct gsh_buffdesc *name, const gid_t gid)
 	struct cache_group *new;
 
 	new = gsh_malloc(sizeof(struct cache_group) + name->len);
-	new->epoch = time(NULL);
+	new->epoch = time_mono(NULL);
 	new->gname.addr = (char *)new + sizeof(struct cache_group);
 	new->gname.len = name->len;
 	new->gid = gid;

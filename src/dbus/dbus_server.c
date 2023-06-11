@@ -237,7 +237,7 @@ struct dbus_bcast_item *add_dbus_broadcast(
 	new_bcast = (struct dbus_bcast_item *)
 		gsh_malloc(sizeof(struct dbus_bcast_item));
 
-	now(&new_bcast->next_bcast_time);
+	now_mono(&new_bcast->next_bcast_time);
 	new_bcast->bcast_interval = bcast_interval;
 	new_bcast->count = count;
 	new_bcast->bcast_arg = bcast_arg;
@@ -764,7 +764,7 @@ void *gsh_dbus_thread(void *arg)
 			struct dbus_bcast_item *bcast_item = glist_entry(glist,
 							struct dbus_bcast_item,
 							dbus_bcast_q);
-			now(&current_time);
+			now_mono(&current_time);
 			time_expired = gsh_time_cmp(
 				&current_time, &bcast_item->next_bcast_time);
 

@@ -352,7 +352,7 @@ static bool fridgethr_freeze(struct fridgethr *fr,
 		if ((fr->p.wake_threads == NULL)
 		    || (fr->command != fridgethr_comm_run)) {
 			if (fr->p.thread_delay > 0) {
-				clock_gettime(CLOCK_REALTIME, &fe->timeout);
+				clock_gettime(CLOCK_MONOTONIC, &fe->timeout);
 				fe->timeout.tv_sec += fr->p.thread_delay;
 				rc = pthread_cond_timedwait(&fe->ctx.fre_cv,
 							    &fe->ctx.fre_mtx,
@@ -524,6 +524,8 @@ static int fridgethr_spawn(struct fridgethr *fr,
 	int rc = 0;
 	/* Newly created thread entry */
 	struct fridgethr_entry *fe = NULL;
+	/* Attributes of condition variables */
+	pthread_condattr_t cond_attr;
 
 	fe = gsh_calloc(1, sizeof(struct fridgethr_entry));
 
@@ -531,7 +533,10 @@ static int fridgethr_spawn(struct fridgethr *fr,
 	fe->fr = fr;
 
 	PTHREAD_MUTEX_init(&fe->ctx.fre_mtx, NULL);
-	PTHREAD_COND_init(&fe->ctx.fre_cv, NULL);
+	PTHREAD_COND_ATTR_init(&cond_attr);
+	PTHREAD_COND_ATTR_set_mono_clock(&cond_attr);
+	PTHREAD_COND_init(&fe->ctx.fre_cv, &cond_attr);
+	PTHREAD_COND_ATTR_destroy(&cond_attr);
 
 	fe->ctx.func = func;
 	fe->ctx.arg = arg;
@@ -1104,12 +1109,16 @@ int fridgethr_sync_command(struct fridgethr *fr, fridgethr_comm_t command,
 {
 	pthread_mutex_t fsc_mtx;
 	pthread_cond_t fsc_cv;
+	pthread_condattr_t cond_attr;
 	bool done = false;
 	int rc = 0;
 	struct timespec ts;
 
 	PTHREAD_MUTEX_init(&fsc_mtx, NULL);
-	PTHREAD_COND_init(&fsc_cv, NULL);
+	PTHREAD_COND_ATTR_init(&cond_attr);
+	PTHREAD_COND_ATTR_set_mono_clock(&cond_attr);
+	PTHREAD_COND_init(&fsc_cv, &cond_attr);
+	PTHREAD_COND_ATTR_destroy(&cond_attr);
 
 	PTHREAD_MUTEX_lock(&fsc_mtx);
 	switch (command) {
@@ -1141,7 +1150,7 @@ int fridgethr_sync_command(struct fridgethr *fr, fridgethr_comm_t command,
 	}
 
 	if (timeout != 0) {
-		clock_gettime(CLOCK_REALTIME, &ts);
+		clock_gettime(CLOCK_MONOTONIC, &ts);
 		ts.tv_sec += timeout;
 	}
 
@@ -1209,6 +1218,7 @@ int fridgethr_populate(struct fridgethr *fr,
 {
 	int threads_to_run;
 	int i;
+	pthread_condattr_t cond_attr;
 
 	PTHREAD_MUTEX_lock(&fr->frt_mtx);
 	if (fr->p.thr_min != 0) {
@@ -1237,8 +1247,10 @@ int fridgethr_populate(struct fridgethr *fr,
 		fe->fr = fr;
 
 		PTHREAD_MUTEX_init(&fe->ctx.fre_mtx, NULL);
-
-		PTHREAD_COND_init(&fe->ctx.fre_cv, NULL);
+		PTHREAD_COND_ATTR_init(&cond_attr);
+		PTHREAD_COND_ATTR_set_mono_clock(&cond_attr);
+		PTHREAD_COND_init(&fe->ctx.fre_cv, &cond_attr);
+		PTHREAD_COND_ATTR_destroy(&cond_attr);
 
 		fe->ctx.func = func;
 		fe->ctx.arg = arg;

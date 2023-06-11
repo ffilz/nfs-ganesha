@@ -134,7 +134,7 @@ int display_nfs4_owner(struct display_buffer *dspbuf, state_owner_t *owner)
 	if (texpire != 0) {
 		b_left = display_printf(dspbuf,
 					" cached(expires in %ld secs)",
-					texpire - time(NULL));
+					texpire - time_mono(NULL));
 
 		if (b_left <= 0)
 			return b_left;
