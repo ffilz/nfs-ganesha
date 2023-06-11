@@ -1,0 +1,310 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6ff6338_59a63599",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tcurr_time \u003d time_mono(NULL);//I don\u0027t see where lru_state.prev_time is set",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acad1ee5_23fc36b8",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tcurr_time \u003d time_mono(NULL);//I don\u0027t see where lru_state.prev_time is set",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d5bb1f_aced9182",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define PTHREAD_COND_ATTR_init(_cond_attr)\t\t\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58d64ba_a0c37f36",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     _cond_attr, #_cond_attr,\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "815cf5fd_77a3a9b4",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"Error %d, Init cond attr %p (%s) \"\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa89a4b_08f484de",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"at %s:%d\", rc, _cond_attr, #_cond_attr,\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0828a78b_3ebc6713",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define PTHREAD_COND_ATTR_destroy(_cond_attr)\t\t\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85a5bed_e15d8e10",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\trc \u003d pthread_condattr_destroy(_cond_attr);\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "804d44f3_7454ec01",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Destroy cond attr %p (%s) at %s:%d\",\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa2c699_423f068e",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     _cond_attr, #_cond_attr,\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd8dc79_9faf8cb3",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"Error %d, destroy cond attr %p (%s) \"\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77a9667_784b861e",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"at %s:%d\", rc, _cond_attr, #_cond_attr,\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f30962c_49bc8245",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define PTHREAD_COND_ATTR_set_mono_clock(_cond_attr)\t\t\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac29e50c_b5be4159",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\trc \u003d pthread_condattr_setclock(_cond_attr, CLOCK_MONOTONIC);\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7650b68_446f0c0c",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Set cond attr to mono time %p (%s) at %s:%d\",\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d64985c3_e663101c",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     _cond_attr, #_cond_attr,\t\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dd4e7c3_14f147aa",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"Error %d, Set cond attr to mono time %p (%s) \"\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d9f14e_a496c1dd",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-11T12:20:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"at %s:%d\", rc, _cond_attr, #_cond_attr,\t\t\\",
+      "revId": "e23359ebc886650c6c692bd1a9e04e5dd80ffb46",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
