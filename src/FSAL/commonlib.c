@@ -1523,7 +1523,7 @@ void fd_lru_run(struct fridgethr_context *ctx)
 		   value is less than the work to do in a single queue,
 		   don't spin through more passes. */
 		uint32_t workpass = 0;
-		time_t curr_time = time(NULL);
+		time_t curr_time = time_mono(NULL);
 
 		if (currentopen < fd_lru_state.fds_hiwat &&
 		    atomic_fetch_uint32_t(&fd_lru_state.fd_state) == FD_LIMIT) {
@@ -1605,7 +1605,7 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	 * much shorter time.
 	 */
 	fd_lru_state.prev_fd_count = currentopen;
-	fd_lru_state.prev_time = time(NULL);
+	fd_lru_state.prev_time = time_mono(NULL);
 
 	fdnorm = (fdratepersec + fds_avg) / fds_avg;
 	fddelta = (currentopen > fd_lru_state.fds_lowat)

@@ -131,7 +131,7 @@ restart:
 static int reap_expired_open_owners(void)
 {
 	int count = 0;
-	time_t tnow = time(NULL);
+	time_t tnow = time_mono(NULL);
 	time_t texpire;
 	state_owner_t *owner;
 	struct state_nfs4_owner_t *nfs4_owner;

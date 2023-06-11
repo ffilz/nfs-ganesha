@@ -201,7 +201,7 @@ int display_client_id_rec(struct display_buffer *dspbuf,
 	if (clientid->cid_lease_reservations > 0)
 		delta = 0;
 	else
-		delta = time(NULL) - clientid->cid_last_renew;
+		delta = time_mono(NULL) - clientid->cid_last_renew;
 
 	b_left = display_printf(dspbuf,
 				"} t_delta=%d reservations=%d refcount=%"PRIu32,
@@ -537,7 +537,7 @@ nfs_client_id_t *create_client_id(clientid4 clientid,
 
 	client_rec->cid_confirmed = UNCONFIRMED_CLIENT_ID;
 	client_rec->cid_clientid = clientid;
-	client_rec->cid_last_renew = time(NULL);
+	client_rec->cid_last_renew = time_mono(NULL);
 	client_rec->cid_client_record = client_record;
 	client_rec->cid_credential = *credential;
 

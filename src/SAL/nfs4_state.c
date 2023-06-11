@@ -426,7 +426,7 @@ void _state_del_locked(state_t *state, const char *func, int line)
 
 			atomic_store_time_t(&nfs4_owner->so_cache_expire,
 					    nfs_param.nfsv4_param.lease_lifetime
-						+ time(NULL));
+						+ time_mono(NULL));
 			glist_add_tail(&cached_open_owners,
 				       &nfs4_owner->so_cache_entry);
 

@@ -222,7 +222,7 @@ static struct group_data *uid2grp_allocate_by_name(
 		sem_post(&uid2grp_sem);
 
 	PTHREAD_MUTEX_init(&gdata->gd_lock, NULL);
-	gdata->epoch = time(NULL);
+	gdata->epoch = time_mono(NULL);
 	gdata->refcount = 0;
 	return gdata;
 }
@@ -279,7 +279,7 @@ static struct group_data *uid2grp_allocate_by_uid(uid_t uid)
 		sem_post(&uid2grp_sem);
 
 	PTHREAD_MUTEX_init(&gdata->gd_lock, NULL);
-	gdata->epoch = time(NULL);
+	gdata->epoch = time_mono(NULL);
 	gdata->refcount = 0;
 	return gdata;
 }
@@ -292,7 +292,7 @@ static struct group_data *uid2grp_allocate_by_uid(uid_t uid)
  *
  * @return true if successful, false otherwise
  */
-#define uid2grp_expired(gdata) (time(NULL) - (gdata)->epoch > \
+#define uid2grp_expired(gdata) (time_mono(NULL) - (gdata)->epoch > \
 		nfs_param.core_param.manage_gids_expiration)
 bool name2grp(const struct gsh_buffdesc *name, struct group_data **gdata)
 {

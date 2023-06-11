@@ -58,7 +58,7 @@ static unsigned int _valid_lease(nfs_client_id_t *clientid)
 	if (clientid->cid_lease_reservations != 0)
 		return nfs_param.nfsv4_param.lease_lifetime;
 
-	t = time(NULL);
+	t = time_mono(NULL);
 
 	if (clientid->cid_last_renew + nfs_param.nfsv4_param.lease_lifetime > t)
 		return (clientid->cid_last_renew +
@@ -215,7 +215,7 @@ void update_lease(nfs_client_id_t *clientid)
 
 	/* Renew lease when last reservation is released */
 	if (clientid->cid_lease_reservations == 0)
-		clientid->cid_last_renew = time(NULL);
+		clientid->cid_last_renew = time_mono(NULL);
 
 	if (isFullDebug(COMPONENT_CLIENTID)) {
 		char str[LOG_BUFF_LEN] = "\0";

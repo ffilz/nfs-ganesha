@@ -1155,7 +1155,7 @@ static bool find_cb_slot(nfs41_session_t *session, bool wait, slotid4 *slot,
 		struct timespec ts;
 		bool woke = false;
 
-		clock_gettime(CLOCK_REALTIME, &ts);
+		clock_gettime(CLOCK_MONOTONIC, &ts);
 		timespec_addms(&ts, 100);
 
 		woke = (pthread_cond_timedwait(&session->cb_cond,

@@ -1262,7 +1262,7 @@ lru_run(struct fridgethr_context *ctx)
 	LogFullDebug(COMPONENT_MDCACHE_LRU, "lru entries: %" PRIu64,
 		     atomic_fetch_uint64_t(&lru_state.entries_used));
 
-	curr_time = time(NULL);
+	curr_time = time_mono(NULL);//I don't see where lru_state.prev_time is set
 
 	if ((curr_time >= lru_state.prev_time) &&
 	    (curr_time - lru_state.prev_time < fridgethr_getwait(ctx)))
@@ -2058,7 +2058,7 @@ void mdc_lru_map_dirent(mdcache_dir_entry_t *dirent)
 			     dirent->name, dirent->ck);
 		/* Move to MRU */
 		dmap = avltree_container_of(node, mdcache_dmap_entry_t, node);
-		now(&dmap->timestamp);
+		now_mono(&dmap->timestamp);
 		glist_move_tail(&exp->dirent_map.lru, &dmap->lru_entry);
 		PTHREAD_MUTEX_unlock(&exp->dirent_map.dm_mtx);
 		return;
@@ -2077,7 +2077,7 @@ void mdc_lru_map_dirent(mdcache_dir_entry_t *dirent)
 
 	dmap->ck = dirent->ck;
 	dmap->name = gsh_strdup(dirent->name);
-	now(&dmap->timestamp);
+	now_mono(&dmap->timestamp);
 	LogFullDebug(COMPONENT_NFS_READDIR, "Mapping %s -> %" PRIx64 " %p:%d",
 		     dmap->name, dmap->ck, exp, exp->dirent_map.count);
 
@@ -2153,7 +2153,7 @@ static void dirmap_lru_run(struct fridgethr_context *ctx)
 
 	PTHREAD_MUTEX_lock(&exp->dirent_map.dm_mtx);
 
-	now(&curtime);
+	now_mono(&curtime);
 
 	cur = glist_last_entry(&exp->dirent_map.lru, mdcache_dmap_entry_t,
 			       lru_entry);
