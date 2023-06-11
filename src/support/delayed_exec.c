@@ -173,7 +173,7 @@ static enum delayed_employment delayed_get_work(struct timespec *when,
 	if (first == NULL)
 		return delayed_unemployed;
 
-	now(&current);
+	now_mono(&current);
 	mul = avltree_container_of(first, struct delayed_multi, node);
 
 	if (gsh_time_cmp(&mul->realtime, &current) > 0) {
@@ -265,11 +265,16 @@ void delayed_start(void)
 	const size_t threads_to_start = 1;
 	/* Thread attributes */
 	pthread_attr_t attr;
+	/* Attributes of condition variables */
+	pthread_condattr_t cond_attr;
 	/* Thread index */
 	int i;
 
 	PTHREAD_MUTEX_init(&dle_mtx, NULL);
-	PTHREAD_COND_init(&dle_cv, NULL);
+	PTHREAD_COND_ATTR_init(&cond_attr);
+	PTHREAD_COND_ATTR_set_mono_clock(&cond_attr);
+	PTHREAD_COND_init(&dle_cv, &cond_attr);
+	PTHREAD_COND_ATTR_destroy(&cond_attr);
 	LIST_INIT(&thread_list);
 	avltree_init(&tree, comparator, 0);
 
@@ -309,7 +314,7 @@ void delayed_shutdown(void)
 	int rc = -1;
 	struct timespec then;
 
-	now(&then);
+	now_mono(&then);
 	then.tv_sec += 120;
 
 	PTHREAD_MUTEX_lock(&dle_mtx);
@@ -355,7 +360,7 @@ int delayed_submit(void (*func) (void *), void *arg, nsecs_elapsed_t delay)
 	mul = gsh_malloc(sizeof(struct delayed_multi));
 	task = gsh_malloc(sizeof(struct delayed_task));
 
-	now(&mul->realtime);
+	now_mono(&mul->realtime);
 	timespec_add_nsecs(delay, &mul->realtime);
 
 	PTHREAD_MUTEX_lock(&dle_mtx);

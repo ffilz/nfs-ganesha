@@ -108,7 +108,7 @@ static bool ng_expired(struct avltree_node *node)
 	info = avltree_container_of(node, struct ng_cache_info, ng_node);
 
 	/* Hardcoded to 30 minutes for now */
-	if (time(NULL) - info->ng_epoch > 30 * 60)
+	if (time_mono(NULL) - info->ng_epoch > 30 * 60)
 		return true;
 
 	return false;
@@ -169,7 +169,7 @@ static void ng_add(const char *group, const char *host, bool negative)
 	info->ng_group.len = strlen(group)+1;
 	info->ng_host.addr = gsh_strdup(host);
 	info->ng_host.len = strlen(host)+1;
-	info->ng_epoch = time(NULL);
+	info->ng_epoch = time_mono(NULL);
 
 	if (negative) {
 		/* @todo check positive cache first? */

@@ -835,6 +835,82 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 	} while (0)
 
 /**
+ * @brief Logging condition variable attr initialization
+ *
+ * @param[in,out] _cond_attr The attributes used while initializing the
+ *			condition variable
+ */
+#define PTHREAD_COND_ATTR_init(_cond_attr)			\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_condattr_init(_cond_attr);		\
+		if (rc == 0) {						\
+			LogFullDebug(COMPONENT_RW_LOCK,			\
+				     "Init cond attr %p (%s) at %s:%d",	\
+				     _cond_attr, #_cond_attr,	\
+				     __FILE__, __LINE__);		\
+		} else {						\
+			LogCrit(COMPONENT_RW_LOCK,			\
+				"Error %d, Init cond attr %p (%s) "	\
+				"at %s:%d", rc, _cond_attr,		\
+				#_cond_attr, __FILE__, __LINE__);	\
+			abort();					\
+		}							\
+	} while (0)
+
+/**
+ * @brief Logging condition variable attr destroy
+ *
+ * @param[in,out] _cond_attr The cond variable attributes to destroy
+ */
+#define PTHREAD_COND_ATTR_destroy(_cond_attr)			\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_condattr_destroy(_cond_attr);	\
+		if (rc == 0) {						\
+			LogFullDebug(COMPONENT_RW_LOCK,			\
+				     "Destroy cond attr %p (%s) "	\
+				     "at %s:%d", _cond_attr,		\
+				     #_cond_attr, __FILE__, __LINE__);	\
+		} else {						\
+			LogCrit(COMPONENT_RW_LOCK,			\
+				"Error %d, destroy cond attr %p (%s) "	\
+				"at %s:%d", rc, _cond_attr,		\
+				 #_cond_attr, __FILE__, __LINE__);	\
+			abort();					\
+		}							\
+	} while (0)
+
+/**
+ * @brief Logging set condition variable attr to monotonic clock
+ *
+ * @param[in,out] _cond_attr The attributes used while initializing the
+ *			condition variable
+ */
+#define PTHREAD_COND_ATTR_set_mono_clock(_cond_attr)			\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_condattr_setclock(_cond_attr,	\
+			 CLOCK_MONOTONIC);				\
+		if (rc == 0) {						\
+			LogFullDebug(COMPONENT_RW_LOCK,			\
+				     "Set cond attr to mono time %p "	\
+				     "(%s) at %s:%d", _cond_attr,	\
+				     #_cond_attr, __FILE__, __LINE__);	\
+		} else {						\
+			LogCrit(COMPONENT_RW_LOCK,			\
+				"Error %d, Set cond attr to "	\
+				"mono time %p (%s) at "	\
+				"%s:%d", rc, _cond_attr,	\
+				#_cond_attr, __FILE__, __LINE__);	\
+			abort();					\
+		}							\
+	} while (0)
+
+/**
  * @brief Inline functions for timespec math
  *
  * This is for timespec math.  If you want to
@@ -1005,6 +1081,48 @@ static inline void now(struct timespec *ts)
 		LogCrit(COMPONENT_MAIN, "Failed to get timestamp");
 		assert(0);	/* if this is broken, we are toast so die */
 	}
+}
+
+/**
+ * @brief Get the monotonic time right now as a timespec
+ *
+ * @param[out] ts Timespec struct
+ */
+
+static inline void now_mono(struct timespec *ts)
+{
+	int rc;
+
+	rc = clock_gettime(CLOCK_MONOTONIC, ts);
+	if (rc != 0) {
+		LogCrit(COMPONENT_MAIN, "Failed to get mono timestamp");
+		assert(0);	/* if this is broken, we are toast so die */
+	}
+}
+
+/**
+ * @brief Get the monotonic time in seconds right now
+ *
+ * @param[out] t time_t
+ *
+ * @retval tv_sec time_t
+ */
+
+static inline time_t time_mono(time_t *t)
+{
+	int rc;
+	struct timespec ts;
+
+	rc = clock_gettime(CLOCK_MONOTONIC_COARSE, &ts);
+	if (rc != 0) {
+		LogCrit(COMPONENT_MAIN, "Failed to get mono time in seconds");
+		assert(0);	/* if this is broken, we are toast so die */
+	}
+
+	if (t != NULL)
+		*t = ts.tv_sec;
+
+	return ts.tv_sec;
 }
 
 /* The following definitions require some of the following */

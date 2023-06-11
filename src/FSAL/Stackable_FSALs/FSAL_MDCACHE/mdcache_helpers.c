@@ -439,7 +439,7 @@ mdc_get_parent_handle(struct mdcache_fsal_export *export,
 	expire_time_parent = op_ctx->fsal_export->exp_ops.fs_expiretimeparent(
 							op_ctx->fsal_export);
 	if (expire_time_parent != -1)
-		entry->fsobj.fsdir.parent_time = time(NULL) +
+		entry->fsobj.fsdir.parent_time = time_mono(NULL) +
 						 expire_time_parent;
 	else
 		entry->fsobj.fsdir.parent_time = 0;
@@ -2945,7 +2945,7 @@ fsal_status_t mdcache_readdir_chunked(mdcache_entry_t *directory,
 		 * entire directory to be reloaded, causing a huge delay that
 		 * can cause the readdir to time out on the client.  To avoid
 		 * this, bump the expire time on the directory */
-		directory->attr_time = time(NULL);
+		directory->attr_time = time_mono(NULL);
 	}
 
 restart:

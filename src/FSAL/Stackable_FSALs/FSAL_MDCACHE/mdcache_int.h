@@ -673,7 +673,7 @@ mdcache_key_dup(mdcache_key_t *tgt,
 static inline bool
 mdcache_is_parent_valid(mdcache_entry_t *entry)
 {
-	time_t current_time = time(NULL);
+	time_t current_time = time_mono(NULL);
 
 	if (current_time > entry->fsobj.fsdir.parent_time)
 		return false;
@@ -800,7 +800,7 @@ mdc_fixup_md(mdcache_entry_t *entry, struct fsal_attrlist *attrs)
 		flags |= MDCACHE_TRUST_SEC_LABEL;
 	}
 
-	time_t cur_time = time(NULL);
+	time_t cur_time = time_mono(NULL);
 
 	/* Set the refresh time for the cache entry */
 	if (flags & MDCACHE_TRUST_ACL) {
@@ -896,7 +896,7 @@ mdcache_is_attrs_valid(mdcache_entry_t *entry, attrmask_t mask)
 		return false;
 
 	if ((mask & ~ATTR_ACL) != 0 && entry->attrs.expire_time_attr > 0) {
-		time_t current_time = time(NULL);
+		time_t current_time = time_mono(NULL);
 
 		if (current_time - entry->attr_time >
 		    entry->attrs.expire_time_attr)
@@ -907,7 +907,7 @@ mdcache_is_attrs_valid(mdcache_entry_t *entry, attrmask_t mask)
 		return false;
 
 	if ((mask & ATTR_ACL) != 0 && entry->attrs.expire_time_attr > 0) {
-		time_t current_time = time(NULL);
+		time_t current_time = time_mono(NULL);
 
 		if (current_time - entry->acl_time >
 		    entry->attrs.expire_time_attr)

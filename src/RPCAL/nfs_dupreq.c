@@ -346,7 +346,7 @@ void dupreq2_pkginit(void)
 	/* init recycle_q */
 	TAILQ_INIT(&drc_st->tcp_drc_recycle_q);
 	drc_st->tcp_drc_recycle_qlen = 0;
-	drc_st->last_expire_check = time(NULL);
+	drc_st->last_expire_check = time_mono(NULL);
 	drc_st->expire_delta = nfs_param.core_param.drc.tcp.recycle_expire_s;
 
 	/* UDP DRC is global, shared */
@@ -502,7 +502,7 @@ static inline void dupreq_entry_put(dupreq_entry_t *dv);
 static inline void drc_free_expired(void)
 {
 	drc_t *drc;
-	time_t now = time(NULL);
+	time_t now = time_mono(NULL);
 	struct rbtree_x_part *t;
 	struct opr_rbtree_node *odrc = NULL;
 	struct dupreq_entry *dv;
@@ -767,7 +767,7 @@ void nfs_dupreq_put_drc(drc_t *drc)
 	 * again!
 	 */
 	if (drc->refcnt == 0 && !(drc->flags & DRC_FLAG_RECYCLE)) {
-		drc->d_u.tcp.recycle_time = time(NULL);
+		drc->d_u.tcp.recycle_time = time_mono(NULL);
 		drc->flags |= DRC_FLAG_RECYCLE;
 		TAILQ_INSERT_TAIL(&drc_st->tcp_drc_recycle_q,
 				  drc, d_u.tcp.recycle_q);

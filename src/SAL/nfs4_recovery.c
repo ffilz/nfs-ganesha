@@ -568,7 +568,7 @@ void nfs_wait_for_grace_enforcement(void)
 	pthread_mutex_lock(&enforcing_mutex);
 	nfs_try_lift_grace();
 	while (nfs_in_grace() && !nfs_grace_enforcing()) {
-		struct timespec	timeo = { .tv_sec = time(NULL) + 5,
+		struct timespec	timeo = { .tv_sec = time_mono(NULL) + 5,
 					  .tv_nsec = 0 };
 
 		pthread_cond_timedwait(&enforcing_cond, &enforcing_mutex,
@@ -595,7 +595,7 @@ static pthread_mutex_t norefs_mutex;
 void nfs_wait_for_grace_norefs(void)
 {
 	pthread_mutex_lock(&norefs_mutex);
-	struct timespec	timeo = { .tv_sec = time(NULL) + 5,
+	struct timespec	timeo = { .tv_sec = time_mono(NULL) + 5,
 				  .tv_nsec = 0 };
 	pthread_cond_timedwait(&norefs_cond, &norefs_mutex,
 			       &timeo);
@@ -1138,10 +1138,16 @@ struct cleanup_list_element recovery_cleanup_element = {
 int load_recovery_param_from_conf(config_file_t parse_tree,
 				  struct config_error_type *err_type)
 {
+	/* Attributes of condition variables */
+	pthread_condattr_t cond_attr;
+
 	PTHREAD_MUTEX_init(&grace_mutex, NULL);
-	PTHREAD_COND_init(&enforcing_cond, NULL);
+	PTHREAD_COND_ATTR_init(&cond_attr);
+	PTHREAD_COND_ATTR_set_mono_clock(&cond_attr);
+	PTHREAD_COND_init(&enforcing_cond, &cond_attr);
 	PTHREAD_MUTEX_init(&enforcing_mutex, NULL);
-	PTHREAD_COND_init(&norefs_cond, NULL);
+	PTHREAD_COND_init(&norefs_cond, &cond_attr);
+	PTHREAD_COND_ATTR_destroy(&cond_attr);
 	PTHREAD_MUTEX_init(&norefs_mutex, NULL);
 
 	RegisterCleanup(&recovery_cleanup_element);
