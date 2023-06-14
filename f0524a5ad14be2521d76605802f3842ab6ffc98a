@@ -16,6 +16,91 @@
       "message": "Thanks for fixing the checkpatch errors, still considering this patch overall.",
       "revId": "f0524a5ad14be2521d76605802f3842ab6ffc98a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f40b5f_112f2e79",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-14T16:48:20Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I^I^I\"at %s:%d\", rc, _cond_attr, ^I\\$",
+      "revId": "f0524a5ad14be2521d76605802f3842ab6ffc98a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af4d2f7_234a0579",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-14T16:48:20Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I^I^I     \"at %s:%d\", _cond_attr, ^I\\$",
+      "revId": "f0524a5ad14be2521d76605802f3842ab6ffc98a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0ec5e9_7e17708f",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-14T16:48:20Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\trc \u003d pthread_condattr_setclock(_cond_attr, CLOCK_MONOTONIC);\t\\",
+      "revId": "f0524a5ad14be2521d76605802f3842ab6ffc98a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41c54dd_23c567d3",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-14T16:48:20Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I^I^I     \"(%s) at %s:%d\", _cond_attr, ^I\\$",
+      "revId": "f0524a5ad14be2521d76605802f3842ab6ffc98a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b14d33d_0d72b01e",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-14T16:48:20Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I^I^I\"%s:%d\", rc, _cond_attr, ^I\\$",
+      "revId": "f0524a5ad14be2521d76605802f3842ab6ffc98a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
