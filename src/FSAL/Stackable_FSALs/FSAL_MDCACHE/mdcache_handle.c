@@ -641,11 +641,16 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 
 	status = mdc_lookup(mdc_newdir, new_name, true, &mdc_lookup_dst, NULL);
 	if (!FSAL_IS_ERROR(status)) {
-		if (mdc_obj == mdc_lookup_dst) {
+		if ((mdc_obj == mdc_lookup_dst) && !strcmp(old_name, new_name) &&
+			olddir_hdl->obj_ops->handle_cmp(olddir_hdl, newdir_hdl)) {
+			LogDebug(COMPONENT_MDCACHE, "Rename (%p,%s)->(%p,%s): same source and destination",
+					mdc_olddir, old_name, mdc_newdir, new_name);
 			/* Same source and destination */
 			goto out;
 		}
 		if (obj_is_junction(&mdc_lookup_dst->obj_handle)) {
+			LogDebug(COMPONENT_MDCACHE, "Rename (%p,%s)->(%p,%s): Cannot rename on top of junction",
+					mdc_olddir, old_name, mdc_newdir, new_name);
 			/* Cannot rename on top of junction */
 			status = fsalstat(ERR_FSAL_XDEV, 0);
 			goto out;
