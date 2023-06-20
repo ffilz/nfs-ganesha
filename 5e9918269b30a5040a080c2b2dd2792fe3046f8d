@@ -16,6 +16,24 @@
       "message": "What decrements the client_record_ref after this?",
       "revId": "5e9918269b30a5040a080c2b2dd2792fe3046f8d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34d5f9e3_a436f9a5",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2023-06-20T14:18:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understood your question completely. This corresponds to a refcount decrement at line #182.",
+      "parentUuid": "36a761ae_e6ca00f8",
+      "revId": "5e9918269b30a5040a080c2b2dd2792fe3046f8d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
