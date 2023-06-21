@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42fd69e3_4126e3a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-21T16:52:46Z",
+      "side": 1,
+      "message": "Please add a short \u003c 75 chars title. And line wrap the rest of the lines.",
+      "revId": "94595bf1a4a04f37991550f0e5b7ab5689f6e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c9d80d_206e8d1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-21T16:52:46Z",
+      "side": 1,
+      "message": "Looks good, though I\u0027d also be comfortable if we totally removed this shortcut. I don\u0027t recall if there was any reason for maintaining other than being a shortcut.",
+      "revId": "94595bf1a4a04f37991550f0e5b7ab5689f6e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ffb2498_2ef1405a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-21T16:52:46Z",
+      "side": 1,
+      "message": "Line wrap so everything is in 80 columns or less.",
+      "revId": "94595bf1a4a04f37991550f0e5b7ab5689f6e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68b7a69f_a6217bd7",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-21T16:52:46Z",
+      "side": 1,
+      "message": "Move the string to the next line (and then it\u0027s OK if it is over 80 columns, line up the parameters and then that line will be OK.",
+      "revId": "94595bf1a4a04f37991550f0e5b7ab5689f6e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49431a44_d3b1c03e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-21T16:52:46Z",
+      "side": 1,
+      "message": "Same...",
+      "revId": "94595bf1a4a04f37991550f0e5b7ab5689f6e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
