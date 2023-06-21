@@ -455,8 +455,9 @@ char *get_long(char *line, long *value, enum requires_more requires_more,
 	return SkipWhite(c, requires_more, invalid);
 }
 
-char *get_longlong(char *line, long long *value,
-		   enum requires_more requires_more, const char *invalid)
+char *get_unsignedlonglong(char *line, long long *value,
+			   enum requires_more requires_more,
+			   const char *invalid)
 {
 	char *c;
 	char *t;
@@ -471,7 +472,7 @@ char *get_longlong(char *line, long long *value,
 	if (*t == '*' && len == 1)
 		*value = -1;
 	else {
-		*value = strtoll(t, &e, 0);
+		*value = strtoull(t, &e, 0);
 
 		if (e != NULL && e != c) {
 			array_strcpy(errdetail, invalid);
@@ -1030,7 +1031,7 @@ char *parse_response(char *line, struct response *resp)
 			if (rest == NULL)
 				goto fail;
 
-			rest = get_longlong(rest, &resp->r_length,
+			rest = get_unsignedlonglong(rest, &resp->r_length,
 					    REQUIRES_NO_MORE, "Invalid length");
 			break;
 
@@ -1040,7 +1041,7 @@ char *parse_response(char *line, struct response *resp)
 			if (rest == NULL)
 				goto fail;
 
-			rest = get_longlong(rest, &resp->r_length,
+			rest = get_unsignedlonglong(rest, &resp->r_length,
 					    REQUIRES_MORE, "Invalid length");
 
 			if (rest == NULL)
@@ -1077,13 +1078,15 @@ char *parse_response(char *line, struct response *resp)
 				goto fail;
 		}
 
-		rest = get_longlong(rest, &resp->r_start, REQUIRES_MORE,
-				    "Invalid lock start");
+		rest = get_unsignedlonglong(rest, &resp->r_start,
+					    REQUIRES_MORE,
+					    "Invalid lock start");
 		if (rest == NULL)
 			goto fail;
 
-		rest = get_longlong(rest, &resp->r_length, REQUIRES_NO_MORE,
-				    "Invalid lock length");
+		rest = get_unsignedlonglong(rest, &resp->r_length,
+					    REQUIRES_NO_MORE,
+					    "Invalid lock length");
 		break;
 
 	case STATUS_CONFLICT:
@@ -1103,14 +1106,16 @@ char *parse_response(char *line, struct response *resp)
 		if (rest == NULL)
 			goto fail;
 
-		rest = get_longlong(rest, &resp->r_start, REQUIRES_MORE,
-				    "Invalid lock start");
+		rest = get_unsignedlonglong(rest, &resp->r_start,
+					    REQUIRES_MORE,
+					    "Invalid lock start");
 
 		if (rest == NULL)
 			goto fail;
 
-		rest = get_longlong(rest, &resp->r_length, REQUIRES_NO_MORE,
-				    "Invalid lock length");
+		rest = get_unsignedlonglong(rest, &resp->r_length,
+					    REQUIRES_NO_MORE,
+					    "Invalid lock length");
 		break;
 
 	case STATUS_CANCELED:
@@ -1125,13 +1130,14 @@ char *parse_response(char *line, struct response *resp)
 			if (rest == NULL)
 				goto fail;
 
-			rest = get_longlong(rest, &resp->r_start, REQUIRES_MORE,
-					    "Invalid lock start");
+			rest = get_unsignedlonglong(rest, &resp->r_start,
+						    REQUIRES_MORE,
+						    "Invalid lock start");
 
 			if (rest == NULL)
 				goto fail;
 
-			rest = get_longlong(rest, &resp->r_length,
+			rest = get_unsignedlonglong(rest, &resp->r_length,
 					    REQUIRES_NO_MORE,
 					    "Invalid lock length");
 		} else if (resp->r_cmd == CMD_ALARM) {
@@ -1194,11 +1200,11 @@ char *parse_response(char *line, struct response *resp)
 		}							\
 	} while (0)
 
-#define return_if_ne_longlong(expected, received, fmt)			\
+#define return_if_ne_unsignedlonglong(expected, received, fmt)		\
 	do {								\
 		if (expected != -1 &&					\
 		    expected != received) {				\
-			array_sprintf(errdetail, fmt " %lld",		\
+			array_sprintf(errdetail, fmt " %llu",		\
 				      received);			\
 			return false;					\
 		}							\
@@ -1292,7 +1298,7 @@ int compare_responses(struct response *expected, struct response *received)
 		case CMD_WRITE:
 			return_if_ne_long(expected->r_fpos, received->r_fpos,
 					  "Unexpected fpos");
-			return_if_ne_longlong(expected->r_length,
+			return_if_ne_unsignedlonglong(expected->r_length,
 					      received->r_length,
 					      "Unexpected length");
 			break;
@@ -1300,7 +1306,7 @@ int compare_responses(struct response *expected, struct response *received)
 		case CMD_READ:
 			return_if_ne_long(expected->r_fpos, received->r_fpos,
 					  "Unexpected fpos");
-			return_if_ne_longlong(expected->r_length,
+			return_if_ne_unsignedlonglong(expected->r_length,
 					      received->r_length,
 					      "Unexpected length");
 			return_if_ne_string(expected->r_data, received->r_data,
@@ -1320,10 +1326,10 @@ int compare_responses(struct response *expected, struct response *received)
 			return_if_ne_lock_type(expected->r_lock_type,
 					       received->r_lock_type);
 
-		return_if_ne_longlong(expected->r_start, received->r_start,
-				      "Unexpected start");
-		return_if_ne_longlong(expected->r_length, received->r_length,
-				      "Unexpected length");
+		return_if_ne_unsignedlonglong(expected->r_start, received->r_start,
+					      "Unexpected start");
+		return_if_ne_unsignedlonglong(expected->r_length, received->r_length,
+					      "Unexpected length");
 		break;
 
 	case STATUS_CONFLICT:
@@ -1333,10 +1339,10 @@ int compare_responses(struct response *expected, struct response *received)
 				  "Unexpected pid");
 		return_if_ne_lock_type(expected->r_lock_type,
 				       received->r_lock_type);
-		return_if_ne_longlong(expected->r_start, received->r_start,
-				      "Unexpected start");
-		return_if_ne_longlong(expected->r_length, received->r_length,
-				      "Unexpected length");
+		return_if_ne_unsignedlonglong(expected->r_start, received->r_start,
+					      "Unexpected start");
+		return_if_ne_unsignedlonglong(expected->r_length, received->r_length,
+					      "Unexpected length");
 		break;
 
 	case STATUS_CANCELED:
@@ -1345,12 +1351,12 @@ int compare_responses(struct response *expected, struct response *received)
 					  "Unexpected fpos");
 			return_if_ne_lock_type(expected->r_lock_type,
 					       received->r_lock_type);
-			return_if_ne_longlong(expected->r_start,
-					      received->r_start,
-					      "Unexpected start");
-			return_if_ne_longlong(expected->r_length,
-					      received->r_length,
-					      "Unexpected length");
+			return_if_ne_unsignedlonglong(expected->r_start,
+						      received->r_start,
+						      "Unexpected start");
+			return_if_ne_unsignedlonglong(expected->r_length,
+						      received->r_length,
+						      "Unexpected length");
 		} else if (expected->r_cmd == CMD_ALARM) {
 			return_if_ne_long(expected->r_secs, received->r_secs,
 					  "Unexpected secs");
@@ -1437,7 +1443,7 @@ char *parse_read(char *line, struct response *req)
 	if (*more == '"')
 		return get_rdata(more, req, MAXSTR, REQUIRES_NO_MORE);
 	else
-		return get_longlong(more, &req->r_length, REQUIRES_NO_MORE,
+		return get_unsignedlonglong(more, &req->r_length, REQUIRES_NO_MORE,
 				    "Invalid len");
 }
 
@@ -1450,7 +1456,7 @@ char *parse_seek(char *line, struct response *req)
 	if (more == NULL)
 		return more;
 
-	return get_longlong(more, &req->r_start, REQUIRES_NO_MORE,
+	return get_unsignedlonglong(more, &req->r_start, REQUIRES_NO_MORE,
 			    "Invalid pos");
 }
 
@@ -1474,13 +1480,13 @@ char *parse_lock(char *line, struct response *req)
 		array_sprintf(badtoken, "%s", str_lock_type(req->r_lock_type));
 	}
 
-	more = get_longlong(more, &req->r_start, REQUIRES_MORE,
+	more = get_unsignedlonglong(more, &req->r_start, REQUIRES_MORE,
 			    "Invalid lock start");
 
 	if (more == NULL)
 		return more;
 
-	return get_longlong(more, &req->r_length, REQUIRES_NO_MORE,
+	return get_unsignedlonglong(more, &req->r_length, REQUIRES_NO_MORE,
 			    "Invalid lock len");
 }
 
@@ -1495,13 +1501,13 @@ char *parse_unlock(char *line, struct response *req)
 	if (more == NULL)
 		return more;
 
-	more = get_longlong(more, &req->r_start, REQUIRES_MORE,
+	more = get_unsignedlonglong(more, &req->r_start, REQUIRES_MORE,
 			    "Invalid lock start");
 
 	if (more == NULL)
 		return more;
 
-	return get_longlong(more, &req->r_length, REQUIRES_NO_MORE,
+	return get_unsignedlonglong(more, &req->r_length, REQUIRES_NO_MORE,
 			    "Invalid lock len");
 }
 
@@ -1521,13 +1527,13 @@ char *parse_list(char *line, struct response *req)
 	if (more == NULL)
 		return more;
 
-	more = get_longlong(more, &req->r_start, REQUIRES_MORE,
+	more = get_unsignedlonglong(more, &req->r_start, REQUIRES_MORE,
 			    "Invalid lock start");
 
 	if (more == NULL)
 		return more;
 
-	return get_longlong(more, &req->r_length, REQUIRES_NO_MORE,
+	return get_unsignedlonglong(more, &req->r_length, REQUIRES_NO_MORE,
 			    "Invalid lock len");
 }
 
