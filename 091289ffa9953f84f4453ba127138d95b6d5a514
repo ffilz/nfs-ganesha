@@ -16,6 +16,24 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis fixes a Time-of-check Time-of-use bug checking for the file handle of the source before moving and then the file handle of the target before moving and comparing them. There can be a scenario that two or more clients will perform the rename at the same time both will pass the source lookup and one of them will perform the move while the other can get a success for it as well. This damaged the atomicity of the rename operation. The FSAL should handle the case when those are different entries with the same file handle (hard-links).",
       "revId": "091289ffa9953f84f4453ba127138d95b6d5a514",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1f3a1a_7eceed5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T17:11:52Z",
+      "side": 1,
+      "message": "Please fix this.",
+      "parentUuid": "04e4c52f_493537cc",
+      "revId": "091289ffa9953f84f4453ba127138d95b6d5a514",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
