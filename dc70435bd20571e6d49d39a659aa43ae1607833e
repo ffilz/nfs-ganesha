@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87fbfdd8_82ebe681",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T20:14:12Z",
+      "side": 1,
+      "message": "Looks good now, ignore the macro flow control warning.",
+      "revId": "dc70435bd20571e6d49d39a659aa43ae1607833e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8378463_c40c88a5",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-06-22T20:07:05Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define return_if_ne_unsignedlonglong(expected, received, fmt)\t\t\\\n \tdo {\t\t\t\t\t\t\t\t\\\n \t\tif (expected !\u003d -1 \u0026\u0026\t\t\t\t\t\\\n \t\t    expected !\u003d received) {\t\t\t\t\\\n+\t\t\tarray_sprintf(errdetail, fmt \" %llu\",\t\t\\\n \t\t\t\t      received);\t\t\t\\\n \t\t\treturn false;\t\t\t\t\t\\\n \t\t}\t\t\t\t\t\t\t\\\n@@ -1292,7 +1298,7 @@ int compare_responses(struct response *expected, struct response *received)",
+      "revId": "dc70435bd20571e6d49d39a659aa43ae1607833e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "608aa754_feb0916b",
+        "filename": "src/tools/multilock/ml_functions.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T20:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8378463_c40c88a5",
       "revId": "dc70435bd20571e6d49d39a659aa43ae1607833e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
