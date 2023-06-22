@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b60fa3b8_32d22981",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:16:47Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis fixes a Time-of-check Time-of-use bug checking for the file handle of the source before moving",
+      "revId": "dcaea65a03467c007403e4e0af756d7a9d65b137",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc2aa8b2_28f33b85",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:16:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tif ((mdc_obj \u003d\u003d mdc_lookup_dst) \u0026\u0026 !strcmp(old_name, new_name) \u0026\u0026",
+      "revId": "dcaea65a03467c007403e4e0af756d7a9d65b137",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39f2f0f8_ef9ceca2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:16:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tolddir_hdl-\u003eobj_ops-\u003ehandle_cmp(olddir_hdl, newdir_hdl)) {",
+      "revId": "dcaea65a03467c007403e4e0af756d7a9d65b137",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c35d40d_c5b23f12",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:16:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tLogDebug(COMPONENT_MDCACHE, \"Rename (%p,%s)-\u003e(%p,%s): same source and destination\",",
+      "revId": "dcaea65a03467c007403e4e0af756d7a9d65b137",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8394866_22d26abe",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:16:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tmdc_olddir, old_name, mdc_newdir, new_name);",
+      "revId": "dcaea65a03467c007403e4e0af756d7a9d65b137",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c003562c_7d1de421",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:16:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tLogDebug(COMPONENT_MDCACHE, \"Rename (%p,%s)-\u003e(%p,%s): Cannot rename on top of junction\",",
+      "revId": "dcaea65a03467c007403e4e0af756d7a9d65b137",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da63e4b8_0183c4a5",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:16:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tmdc_olddir, old_name, mdc_newdir, new_name);",
+      "revId": "dcaea65a03467c007403e4e0af756d7a9d65b137",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
