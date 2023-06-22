@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48f80878_e186d4a6",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T16:03:50Z",
+      "side": 1,
+      "message": "Please resolve this one, I know it\u0027s minor, but it\u0027s cleaner...",
+      "parentUuid": "79b176dd_d983fb03",
+      "revId": "c5c3e0cecb23881515dc9be633a96b7d46bde229",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "745ac4c9_a47e1c26",
         "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "This is just an work around fix. The actual fix needs code changes in GPFS as well.",
       "parentUuid": "745ac4c9_a47e1c26",
+      "revId": "c5c3e0cecb23881515dc9be633a96b7d46bde229",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501122e9_7434f8b7",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T16:03:50Z",
+      "side": 1,
+      "message": "Can you make sure the buffer is allocated 48 bytes and clarify in comments?",
+      "parentUuid": "850a8cbe_6c460576",
       "revId": "c5c3e0cecb23881515dc9be633a96b7d46bde229",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
