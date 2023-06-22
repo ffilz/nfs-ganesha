@@ -233,7 +233,7 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 		if ((server_pnfs_flags & EXCHGID4_FLAG_USE_PNFS_MDS) == 0)
 			server_pnfs_flags |= EXCHGID4_FLAG_USE_NON_PNFS;
 
-		pnfs_flags &= server_pnfs_flags;
+		pnfs_flags = server_pnfs_flags;
 	}
 
 	LogDebug(COMPONENT_CLIENTID,
