@@ -51,6 +51,23 @@
       "parentUuid": "e98831bc_438ca32a",
       "revId": "f58d40eef7ebf7de1baefb65a4e52be8c903f709",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d17581c4_77ee1ff3",
+        "filename": "src/tools/multilock/ml_console.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-22T05:24:08Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\trc \u003d setsockopt(listensock, SOL_SOCKET, SO_REUSEADDR, \u0026reuse, sizeof(reuse));",
+      "revId": "f58d40eef7ebf7de1baefb65a4e52be8c903f709",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
