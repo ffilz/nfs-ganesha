@@ -864,12 +864,12 @@ void sprintf_resp(char *line, int size, const char *lead,
 			break;
 
 		case CMD_WRITE:
-			sprint_left(rest, left, " %ld %lld\n", resp->r_fpos,
+			sprint_left(rest, left, " %ld %llu\n", resp->r_fpos,
 				    resp->r_length);
 			break;
 
 		case CMD_READ:
-			sprint_left(rest, left, " %ld %lld \"%s\"\n",
+			sprint_left(rest, left, " %ld %llu \"%s\"\n",
 				    resp->r_fpos, resp->r_length, resp->r_data);
 			break;
 		}
@@ -880,11 +880,11 @@ void sprintf_resp(char *line, int size, const char *lead,
 	case STATUS_DENIED:
 	case STATUS_DEADLOCK:
 		if (resp->r_cmd == CMD_LIST) {
-			sprint_left(rest, left, " %ld %lld %lld\n",
+			sprint_left(rest, left, " %ld %llu %llu\n",
 				    resp->r_fpos, resp->r_start,
 				    resp->r_length);
 		} else {
-			sprint_left(rest, left, " %ld %s %lld %lld\n",
+			sprint_left(rest, left, " %ld %s %llu %llu\n",
 				    resp->r_fpos,
 				    str_lock_type(resp->r_lock_type),
 				    resp->r_start,
@@ -893,14 +893,14 @@ void sprintf_resp(char *line, int size, const char *lead,
 		break;
 
 	case STATUS_CONFLICT:
-		sprint_left(rest, left, " %ld %ld %s %lld %lld\n", resp->r_fpos,
+		sprint_left(rest, left, " %ld %ld %s %llu %llu\n", resp->r_fpos,
 			    resp->r_pid, str_lock_type(resp->r_lock_type),
 			    resp->r_start, resp->r_length);
 		break;
 
 	case STATUS_CANCELED:
 		if (resp->r_cmd == CMD_LOCKW) {
-			sprint_left(rest, left, " %ld %s %lld %lld\n",
+			sprint_left(rest, left, " %ld %s %llu %llu\n",
 				    resp->r_fpos,
 				    str_lock_type(resp->r_lock_type),
 				    resp->r_start,
@@ -1055,7 +1055,7 @@ char *parse_response(char *line, struct response *resp)
 				array_strcpy(errdetail,
 					     "Read length doesn't match");
 				errno = EINVAL;
-				array_sprintf(badtoken, "%lld != %lld",
+				array_sprintf(badtoken, "%llu != %llu",
 					      verify_len, resp->r_length);
 				goto fail;
 			}
@@ -1655,7 +1655,7 @@ void sprintf_req(char *line, int size, const char *lead, struct response *req)
 	case CMD_LOCK:
 	case CMD_TEST:
 	case CMD_HOP:
-		sprint_left(rest, left, " %ld %s %lld %lld\n", req->r_fpos,
+		sprint_left(rest, left, " %ld %s %llu %llu\n", req->r_fpos,
 			    str_lock_type(req->r_lock_type), req->r_start,
 			    req->r_length);
 		break;
@@ -1663,7 +1663,7 @@ void sprintf_req(char *line, int size, const char *lead, struct response *req)
 	case CMD_UNLOCK:
 	case CMD_LIST:
 	case CMD_UNHOP:
-		sprint_left(rest, left, " %ld %lld %lld\n", req->r_fpos,
+		sprint_left(rest, left, " %ld %llu %llu\n", req->r_fpos,
 			    req->r_start, req->r_length);
 		break;
 
@@ -1692,7 +1692,7 @@ void sprintf_req(char *line, int size, const char *lead, struct response *req)
 		break;
 
 	case CMD_SEEK:
-		sprint_left(rest, left, " %ld %lld\n",
+		sprint_left(rest, left, " %ld %llu\n",
 			    req->r_fpos, req->r_start);
 		break;
 
@@ -1702,7 +1702,7 @@ void sprintf_req(char *line, int size, const char *lead, struct response *req)
 		break;
 
 	case CMD_READ:
-		sprint_left(rest, left, " %ld %lld\n",
+		sprint_left(rest, left, " %ld %llu\n",
 			    req->r_fpos, req->r_length);
 		break;
 	}
