@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac12207_75a34986",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T17:17:34Z",
+      "side": 1,
+      "message": "Please fix the checkpatch warnings\n\nBTW, do you have the commit hooks installed as documented in CONTRIBUTING_HOWTO.txt? There is a checkpatch commit hook that should catch most checkpatch problems before pushing to Gerrithub.",
+      "revId": "21d6995a0e8747032877a244258b16bea0f97cca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99e22984_27feb097",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-06-22T16:51:19Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define return_if_ne_unsignedlonglong(expected, received, fmt)\t\t\\\n \tdo {\t\t\t\t\t\t\t\t\\\n \t\tif (expected !\u003d -1 \u0026\u0026\t\t\t\t\t\\\n \t\t    expected !\u003d received) {\t\t\t\t\\\n+\t\t\tarray_sprintf(errdetail, fmt \" %llu\",\t\t\\\n \t\t\t\t      received);\t\t\t\\\n \t\t\treturn false;\t\t\t\t\t\\\n \t\t}\t\t\t\t\t\t\t\\\n@@ -1292,7 +1298,7 @@ int compare_responses(struct response *expected, struct response *received)",
+      "revId": "21d6995a0e8747032877a244258b16bea0f97cca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9be49446_1e61ecfe",
+        "filename": "src/tools/multilock/ml_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T17:17:34Z",
+      "side": 1,
+      "message": "Ignore this warning.",
+      "parentUuid": "99e22984_27feb097",
       "revId": "21d6995a0e8747032877a244258b16bea0f97cca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
