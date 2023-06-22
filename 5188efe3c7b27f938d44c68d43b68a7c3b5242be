@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67bfa1b4_9f6e16d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-22T17:18:14Z",
+      "side": 1,
+      "message": "Please fix the checkpatch warnings.\n\nBTW, do you have the commit hooks installed as documented in CONTRIBUTING_HOWTO.txt? There is a checkpatch commit hook that should catch most checkpatch problems before pushing to Gerrithub.",
+      "revId": "5188efe3c7b27f938d44c68d43b68a7c3b5242be",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0230dd4d_8c501e6b",
         "filename": "src/FSAL/FSAL_PSEUDO/handle.c",
         "patchSetId": 4
