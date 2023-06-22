@@ -304,53 +304,52 @@ nfsstat4 nfs_req_creds(struct svc_req *req)
 
 #ifdef _HAVE_GSSAPI
 	case RPCSEC_GSS:
-		if ((op_ctx->cred_flags & CREDS_LOADED) == 0) {
-			/* Get the gss data to process them */
-			gd = SVCAUTH_PRIVATE(req->rq_auth);
+		/* Get the gss data to process them */
+		gd = SVCAUTH_PRIVATE(req->rq_auth);
+		memcpy(principal, gd->cname.value, gd->cname.length);
+		principal[gd->cname.length] = 0;
 
-			memcpy(principal, gd->cname.value, gd->cname.length);
-			principal[gd->cname.length] = 0;
-
-			LogMidDebug(COMPONENT_DISPATCH,
-				     "Mapping RPCSEC_GSS principal %s to uid/gid",
-				     principal);
-
-			/* Convert to uid */
-#if _MSPAC_SUPPORT
-			if (!principal2uid(principal,
-					   &op_ctx->original_creds.caller_uid,
-					   &op_ctx->original_creds.caller_gid,
-					   gd)) {
-#else
-			if (!principal2uid(principal,
-					   &op_ctx->original_creds.caller_uid,
-					   &op_ctx->original_creds.caller_gid)
-			   ) {
-#endif
-				LogInfo(COMPONENT_IDMAPPER,
-					"Could not map principal %s to uid",
-					principal);
-				/* For compatibility with Linux knfsd, we set
-				 * the uid/gid to anonymous when a name->uid
-				 * mapping can't be found.
-				 */
-				op_ctx->cred_flags |= CREDS_ANON |
-						       CREDS_LOADED;
-				auth_label = "RPCSEC_GSS (no mapping)";
-				break;
-			}
-
-			op_ctx->cred_flags |= CREDS_LOADED;
-			auth_label = "RPCSEC_GSS";
-			op_ctx->cred_flags |= MANAGED_GIDS;
-			garray_copy = &op_ctx->managed_garray_copy;
+		if (op_ctx->cred_flags & CREDS_LOADED) {
+			/* Creds are already loaded, get auth_label using
+			 * existing anon flag
+			 */
+			auth_label = (op_ctx->cred_flags & CREDS_ANON) ?
+				"RPCSEC_GSS (no mapping)" : "RPCSEC_GSS";
 			break;
 		}
-		/* Creds are already loaded, get auth_label using existing
-		 * anon flag
-		 */
-		auth_label = (op_ctx->cred_flags & CREDS_ANON) ?
-			"RPCSEC_GSS (no mapping)" : "RPCSEC_GSS";
+
+		LogMidDebug(COMPONENT_DISPATCH,
+			     "Mapping RPCSEC_GSS principal %s to uid/gid",
+			     principal);
+
+		/* Convert to uid */
+#if _MSPAC_SUPPORT
+		if (!principal2uid(principal,
+				   &op_ctx->original_creds.caller_uid,
+				   &op_ctx->original_creds.caller_gid,
+				   gd)) {
+#else
+		if (!principal2uid(principal,
+				   &op_ctx->original_creds.caller_uid,
+				   &op_ctx->original_creds.caller_gid)
+		   ) {
+#endif
+			LogInfo(COMPONENT_IDMAPPER,
+				"Could not map principal %s to uid",
+				principal);
+			/* For compatibility with Linux knfsd, we set
+			 * the uid/gid to anonymous when a name->uid
+			 * mapping can't be found.
+			 */
+			op_ctx->cred_flags |= CREDS_ANON |
+					       CREDS_LOADED;
+			auth_label = "RPCSEC_GSS (no mapping)";
+			break;
+		}
+
+		op_ctx->cred_flags |= CREDS_LOADED | MANAGED_GIDS;
+		auth_label = "RPCSEC_GSS";
+		garray_copy = &op_ctx->managed_garray_copy;
 		break;
 #endif				/* _USE_GSSRPC */
 
