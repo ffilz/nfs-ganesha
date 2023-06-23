@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "570b111e_1f3ebd87",
+        "filename": "src/tools/multilock/ml_functions.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-23T22:04:44Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define return_if_ne_unsignedlonglong(expected, received, fmt)\t\t\\\n \tdo {\t\t\t\t\t\t\t\t\\\n \t\tif (expected !\u003d -1 \u0026\u0026\t\t\t\t\t\\\n \t\t    expected !\u003d received) {\t\t\t\t\\\n+\t\t\tarray_sprintf(errdetail, fmt \" %llu\",\t\t\\\n \t\t\t\t      received);\t\t\t\\\n \t\t\treturn false;\t\t\t\t\t\\\n \t\t}\t\t\t\t\t\t\t\\\n@@ -1292,7 +1298,7 @@ int compare_responses(struct response *expected, struct response *received)",
+      "revId": "2292e0c751e32a380d7eebd1cc0cd3effa463586",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
