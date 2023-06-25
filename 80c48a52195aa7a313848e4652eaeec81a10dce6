@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a7208d_a7e710df",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3179,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-25T09:24:10Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static uint32_t op_id \u003d 0;",
+      "revId": "80c48a52195aa7a313848e4652eaeec81a10dce6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
