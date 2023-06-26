@@ -104,6 +104,24 @@
       "parentUuid": "a3e2882d_e2250a59",
       "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b50bed_ad5b0d16",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-06-26T15:20:39Z",
+      "side": 1,
+      "message": "I\u0027m not sure 16 bits is actually good enough. Preferably you don\u0027t want two different operations on the same log to share the same id (or, at least for them to be really different in time). \n\n16 bits gives you 64K values. And since there are many storage systems that can support 10K IOPS and more, we would only get several seconds of uniqueness in this case. Even with 1K IOPS it will overflow within about a minute. \n\nSince this will only save 5 characters in the log, I think it is better to keep it 32 bit. \n\nI even considered making it 64 bits at first, but decided that it would be too much.",
+      "parentUuid": "1155fe63_255d976f",
+      "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
