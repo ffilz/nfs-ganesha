@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31cd0bbc_1e0f5024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-26T14:48:34Z",
+      "side": 1,
+      "message": "Looks good, but let\u0027s squash the two patches.",
+      "revId": "80c48a52195aa7a313848e4652eaeec81a10dce6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5a7208d_a7e710df",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-06-25T09:24:10Z",
       "side": 1,
       "message": "ERROR: do not initialise statics to 0 or NULL\n+static uint32_t op_id \u003d 0;",
+      "revId": "80c48a52195aa7a313848e4652eaeec81a10dce6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be911740_2ecf8b30",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3179,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-26T14:48:34Z",
+      "side": 1,
+      "message": "Please drop the initialization.",
+      "parentUuid": "a5a7208d_a7e710df",
       "revId": "80c48a52195aa7a313848e4652eaeec81a10dce6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
