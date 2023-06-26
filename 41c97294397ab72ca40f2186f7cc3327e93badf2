@@ -86,6 +86,24 @@
       "parentUuid": "a03f9bba_2fc3e22d",
       "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1155fe63_255d976f",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-26T15:04:17Z",
+      "side": 1,
+      "message": "Ok, and thinking about it, if you\u0027re using this, you don\u0027t necessarily need thread name (unless you want to understand how suspended op-context may get resumed by a different thread). Actually, this will be extra helpful in following the action of an async I/O or anything else that suspends an op-context.\n\nHmm, any thought to actually using a smaller counter? Or just displaying a smaller number of bits? 16 bits might be plenty in most cases.",
+      "parentUuid": "a3e2882d_e2250a59",
+      "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
