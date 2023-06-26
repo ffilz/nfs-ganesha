@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "591a913a_3e5c198c",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2023-06-26T12:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48f80878_e186d4a6",
+      "revId": "c5c3e0cecb23881515dc9be633a96b7d46bde229",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "745ac4c9_a47e1c26",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Can you make sure the buffer is allocated 48 bytes and clarify in comments?",
       "parentUuid": "850a8cbe_6c460576",
+      "revId": "c5c3e0cecb23881515dc9be633a96b7d46bde229",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ff5178_fa3176e0",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2023-06-26T12:11:32Z",
+      "side": 1,
+      "message": "I have verified that there are no occurrences of buffer overflow. We are using only 28 byte of 40. \n\nHowever, I have identified an issue concerning the handling of two variables, namely \"handle_size\" and \"handle_key_size,\" within the GPFS code.\n\nThe variable \"handle_size\" should have a size equivalent to or smaller than that of the \"gpfs_file_handle\" structure, while \"handle_key_size\" should represent the size of the buffer copied from FSAL. Unfortunately, there are certain instances in the GPFS code where these variables are not handled correctly.\n\n              struct gpfs_file_handle\n              {\n                uint16_t handle_size;\n                uint16_t handle_type;\n                uint16_t handle_version;\n                uint16_t handle_key_size;\n                uint32_t handle_fsid[2];\n                /* file identifier */\n                unsigned char f_handle[OPENHANDLE_HANDLE_LEN];\n              };\n\nUntil we align GPFS with the Ganesha code, we need to implement this temporary workaround fix.",
+      "parentUuid": "501122e9_7434f8b7",
       "revId": "c5c3e0cecb23881515dc9be633a96b7d46bde229",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
