@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "808c7db6_8d34fe00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-06-26T14:57:13Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f0ce2a7e_5e8ba1a8",
+      "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a03f9bba_2fc3e22d",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-26T14:48:13Z",
       "side": 1,
       "message": "I wonder if this would be better a bit closer to the front of the log message.\n\nAlso, to conserve length of log line, maybe just \"#\" instead of \"op_id\u003d\"",
+      "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e2882d_e2250a59",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-06-26T14:57:13Z",
+      "side": 1,
+      "message": "I considered it, but the problem is that it could get confusing, as you would have no way of knowing what this number is. \nSince this is a number and all the rest are strings, I think it is different.",
+      "parentUuid": "a03f9bba_2fc3e22d",
       "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
