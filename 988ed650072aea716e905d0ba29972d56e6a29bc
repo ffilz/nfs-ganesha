@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51539544_38f63b7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-26T14:59:37Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n13/06/2023 T07:13:11.196878+0000 : epoch 64881707 : buildvm-shaharhoch : ganesha.nfsd-10230[main] /home/shaharhoch/ganesha/src/support/exports.c:963 :export_check_options :RW LOCK :F_DBG :op_id\u003d4 :Unlocked 0xaeb6f8 (\u0026exp-\u003eexp_lock) at /home/shaharhoch/ganesha/src/support/exports.c:963",
+      "revId": "988ed650072aea716e905d0ba29972d56e6a29bc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7662385_8f287e91",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3179,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-06-26T14:59:37Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static uint32_t op_id \u003d 0;",
+      "revId": "988ed650072aea716e905d0ba29972d56e6a29bc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
