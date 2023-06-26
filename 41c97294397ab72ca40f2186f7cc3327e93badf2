@@ -16,6 +16,40 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n13/06/2023 T07:13:11.196878+0000 : epoch 64881707 : buildvm-shaharhoch : ganesha.nfsd-10230[main] /home/shaharhoch/ganesha/src/support/exports.c:963 :export_check_options :RW LOCK :F_DBG :op_id\u003d4 :Unlocked 0xaeb6f8 (\u0026exp-\u003eexp_lock) at /home/shaharhoch/ganesha/src/support/exports.c:963",
       "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ce2a7e_5e8ba1a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-26T14:48:13Z",
+      "side": 1,
+      "message": "Please just squash these two patches. Our style is to keep such closely related patches together. The first patch doesn\u0027t make any sense without this patch.",
+      "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03f9bba_2fc3e22d",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-26T14:48:13Z",
+      "side": 1,
+      "message": "I wonder if this would be better a bit closer to the front of the log message.\n\nAlso, to conserve length of log line, maybe just \"#\" instead of \"op_id\u003d\"",
+      "revId": "41c97294397ab72ca40f2186f7cc3327e93badf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
