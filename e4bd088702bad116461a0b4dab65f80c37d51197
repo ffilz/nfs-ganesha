@@ -33,6 +33,24 @@
       "message": "Hmm, the whole following code is a mess... Could we re-write the whole bit to huse server_pnfs_flags and use server_pnfs_flags after this if-else block?",
       "revId": "e4bd088702bad116461a0b4dab65f80c37d51197",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a6393ca_c0e26589",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2023-06-27T14:44:38Z",
+      "side": 1,
+      "message": "Not sure that I follow you.\nIMHO the bellow code is correct after my (small) modification.\nI can try to combine the if-else sections into one but it seems to me that it would be less readable than the current code.",
+      "parentUuid": "ebf16740_19d5aa89",
+      "revId": "e4bd088702bad116461a0b4dab65f80c37d51197",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
