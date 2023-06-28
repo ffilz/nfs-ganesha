@@ -51,6 +51,24 @@
       "parentUuid": "ebf16740_19d5aa89",
       "revId": "e4bd088702bad116461a0b4dab65f80c37d51197",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ac848f_87645fa1",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-28T15:05:56Z",
+      "side": 1,
+      "message": "My thought is to keep pnfs_flags as the flags from the request and then server_pnfs_flags would be the flags we are constructing for the response.",
+      "parentUuid": "1a6393ca_c0e26589",
+      "revId": "e4bd088702bad116461a0b4dab65f80c37d51197",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
