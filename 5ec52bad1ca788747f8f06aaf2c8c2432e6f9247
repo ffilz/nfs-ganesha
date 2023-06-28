@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d1cb68_aa1e53fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-28T15:01:23Z",
+      "side": 1,
+      "message": "My main concern on this is locking then unlocking then locking again the cid_mutex. I have suggested to avoid that.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a224a7_7a15660e",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-28T15:01:23Z",
+      "side": 1,
+      "message": "Let\u0027s not unlock here.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7755e73e_bb1a5eee",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-28T15:01:23Z",
+      "side": 1,
+      "message": "Let\u0027s not unlock here.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4af156_a1456f4d",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-28T15:01:23Z",
+      "side": 1,
+      "message": "Unlock here.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "494bdb89_22d53d48",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-28T15:01:23Z",
+      "side": 1,
+      "message": "So we won\u0027t lock here.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
