@@ -157,6 +157,9 @@ enum lru_q_id {
 
 #define LRU_CLEANUP 0x00000001 /* Entry is on cleanup queue */
 #define LRU_CLEANED 0x00000002 /* Entry has been cleaned */
+#define LRU_EVER_PROMOTED 0x00000004 /* Entry will be promoted after releasing
+				   * last long term reference (never cleared).
+				   */
 
 typedef struct mdcache_lru__ {
 	struct glist_head q;	/*< Link in the physical deque
@@ -418,7 +421,7 @@ typedef struct mdcache_dir_entry__ {
 	/** Temporary entry pointer
 	 * Only valid while the entry is ref'd.  Must be NULL otherwise.
 	 * Protected by the parent content_lock */
-	mdcache_entry_t *entry;
+	mdcache_entry_t *mde_entry;
 	const char *name;
 	/** The NUL-terminated filename */
 	char name_buffer[];
