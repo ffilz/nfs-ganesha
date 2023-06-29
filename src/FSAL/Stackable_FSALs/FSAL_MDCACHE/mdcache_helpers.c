@@ -256,9 +256,9 @@ static void mdc_unref_chunk_dirents(struct dir_chunk *chunk,
 				       mdcache_dir_entry_t,
 				       chunk_list,
 				       &dirent->chunk_list)) {
-		if (dirent->entry) {
-			mdcache_lru_unref(dirent->entry, LRU_FLAG_NONE);
-			dirent->entry = NULL;
+		if (dirent->mde_entry) {
+			mdcache_lru_unref(dirent->mde_entry, LRU_LONG_TERM_REFERENCE);
+			dirent->mde_entry = NULL;
 		}
 	}
 }
@@ -2409,11 +2409,11 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 			}
 			state->cur_chunk = new_dir_entry->chunk;
 			mdcache_lru_ref_chunk(state->cur_chunk);
-			if (new_dir_entry->entry) {
+			if (new_dir_entry->mde_entry) {
 				/* This was ref'd already; drop extra ref */
-				mdcache_lru_unref(new_dir_entry->entry,
-						  LRU_FLAG_NONE);
-				new_dir_entry->entry = NULL;
+				mdcache_lru_unref(new_dir_entry->mde_entry,
+						  LRU_LONG_TERM_REFERENCE);
+				new_dir_entry->mde_entry = NULL;
 			}
 			if (state->prev_chunk &&
 			    state->prev_chunk != state->cur_chunk) {
@@ -2454,15 +2454,20 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 			new_entry,
 			atomic_fetch_int32_t(&new_entry->lru.refcnt));
 
-	if (new_dir_entry != allocated_dir_entry && new_dir_entry->entry) {
+	if (new_dir_entry != allocated_dir_entry && new_dir_entry->mde_entry) {
 		/* This was swapped and already has a refcounted entry. Drop our
 		 * ref. */
 		mdcache_lru_unref(new_entry, LRU_FLAG_NONE);
 	} else {
-		/* This is a new dirent, or doesn't have an entry. Pass our ref
+		/* This is a new dirent, or doesn't have an entry.
+		 * We need a long term reference for the dirent and then we need to
+		 * drop the short term reference.
+		 * Pass our ref
 		 * on entry off to mdcache_readdir_chunked */
-		assert(!new_dir_entry->entry);
-		new_dir_entry->entry = new_entry;
+		assert(!new_dir_entry->mde_entry);
+		mdcache_lru_ref(new_entry, LRU_LONG_TERM_REFERENCE);
+		new_dir_entry->mde_entry = new_entry;
+		mdcache_lru_unref(new_entry, LRU_FLAG_NONE);
 	}
 
 	return result;
@@ -3165,9 +3170,9 @@ again:
 
 		status.major = ERR_FSAL_NO_ERROR;
 		/* We have the content_lock for at least read. */
-		if (dirent->entry) {
+		if (dirent->mde_entry) {
 			/* Take a ref for our use */
-			entry = dirent->entry;
+			entry = dirent->mde_entry;
 			mdcache_lru_ref(entry, LRU_FLAG_NONE);
 		} else {
 			/* Not cached, get actual entry using the dirent ckey */
@@ -3272,7 +3277,7 @@ again:
 			}
 		}
 
-		if (has_write && dirent->entry) {
+		if (has_write && dirent->mde_entry) {
 			/* If we get here, we have the write lock, have an
 			 * entry, and took a ref on it above.  The dirent also
 			 * has a ref on the entry.  Drop that ref now.  This can
@@ -3281,8 +3286,8 @@ again:
 			 * took the ref, and another readdir will drop the ref,
 			 * or it will be dropped when the dirent is cleaned up.
 			 * */
-			mdcache_lru_unref(dirent->entry, LRU_FLAG_NONE);
-			dirent->entry = NULL;
+			mdcache_lru_unref(dirent->mde_entry, LRU_LONG_TERM_REFERENCE);
+			dirent->mde_entry = NULL;
 		}
 
 		if (reload_chunk && look_ck != 0 && dirent->ck !=

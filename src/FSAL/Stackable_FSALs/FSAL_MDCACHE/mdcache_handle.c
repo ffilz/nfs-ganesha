@@ -1368,7 +1368,7 @@ static void mdcache_get_long_term_ref(struct fsal_obj_handle *obj_hdl)
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 
-	mdcache_lru_ref(entry, LRU_LONG_TERM_REFERENCE);
+	mdcache_lru_ref(entry, LRU_LONG_TERM_REFERENCE | LRU_PROMOTE);
 }
 
 /**
