@@ -90,11 +90,6 @@ extern pool_t *mdcache_entry_pool;
 #define LRU_FLAG_NONE  0x0000
 
 /**
- * The caller is fetching an initial reference
- */
-#define LRU_REQ_INITIAL  0x0002
-
-/**
  * Long term reference
  */
 #define LRU_LONG_TERM_REFERENCE 0x0004
