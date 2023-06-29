@@ -46,8 +46,11 @@ Entries_Release_Size(uint32, range 0 to UINT32_MAX, default 100)
     The number of entries attempted to release each time when the handle
     cache has exceeded the entries high water mark.
 
-Chunks_HWMark(uint32, range 1 to UINT32_MAX, default 100000)
+Chunks_HWMark(uint32, range 1 to UINT32_MAX, default 700)
     The point at which dirent cache chunks will start being reused.
+
+    Note that Dir_Chunk * Chunks_HWMark should not be greater than
+    Entries_HWMark.
 
 LRU_Run_Interval(uint32, range 1 to 24 * 3600, default 90)
     Base interval in seconds between runs of the LRU cleaner thread.
