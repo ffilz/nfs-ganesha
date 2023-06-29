@@ -129,7 +129,7 @@ static void mdcache_unexport(struct fsal_export *exp_hdl,
 		/* Get a ref across cleanup.  This must be an initial ref, so
 		 * that it takes the LRU lane lock, keeping it from racing with
 		 * lru_lane_run() */
-		mdcache_lru_ref(entry, LRU_REQ_INITIAL);
+		mdcache_lru_ref(entry, LRU_PROMOTE);
 		PTHREAD_RWLOCK_unlock(&exp->mdc_exp_lock);
 
 		/* Must get attr_lock before mdc_exp_lock */

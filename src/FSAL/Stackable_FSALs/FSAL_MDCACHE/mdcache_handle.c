@@ -1361,6 +1361,10 @@ static void mdcache_put_ref(struct fsal_obj_handle *obj_hdl)
 /**
  * @brief Get a long term reference to the handle
  *
+ * This function is only ever called for non-directory long term references
+ * so mark them all LRU_PROMOTE to indicate when released, the entry will
+ * return to L1. It SHOULD already be in L1, but just in case...
+ *
  * @param[in] obj_hdl	Handle to ref long term
  */
 static void mdcache_get_long_term_ref(struct fsal_obj_handle *obj_hdl)
@@ -1368,7 +1372,10 @@ static void mdcache_get_long_term_ref(struct fsal_obj_handle *obj_hdl)
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
 
-	mdcache_lru_ref(entry, LRU_LONG_TERM_REFERENCE);
+	/* Assure this long term reference (and any others) will promote into L1
+	 * when released.
+	 */
+	mdcache_lru_ref(entry, LRU_LONG_TERM_REFERENCE | LRU_PROMOTE);
 }
 
 /**
