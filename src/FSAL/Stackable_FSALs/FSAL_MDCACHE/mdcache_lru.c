@@ -1777,10 +1777,15 @@ void _mdcache_lru_ref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 		   refcnt, long_refcnt);
 #endif
 
+	if (flags & LRU_PROMOTE) {
+		/* If entry is ever promoted, remember that. */
+		atomic_set_uint32_t_bits(&entry->lru.flags, LRU_EVER_PROMOTED);
+	}
+
 	if (flags & LRU_LONG_TERM_REFERENCE) {
 		/* Move into long_term queue or adjust to MRU */
 		long_term_lru(entry);
-	} else if (flags & LRU_REQ_INITIAL) {
+	} else if (flags & LRU_PROMOTE) {
 		/* adjust LRU on initial refs */
 		adjust_lru(entry);
 	}
@@ -1859,10 +1864,23 @@ _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags, const char *func,
 				atomic_fetch_int32_t(&entry->lru.long_refcnt);
 
 			if (likely(long_refcnt == 0)) {
-				/* Move entry to MRU of L1 */
+				/* Move entry to MRU of L1 or L2 */
 				q = lru_queue_of(entry);
 				LRU_DQ(&entry->lru, q);
-				q = &qlane->L1;
+
+				if (entry->lru.flags & LRU_EVER_PROMOTED) {
+					/* If entry was ever promoted, insert
+					 * into L1.
+					 */
+					q = &qlane->L1;
+				} else {
+					/* Entry was never promoted, only ever
+					 * used in a directory scan, return to
+					 * L2.
+					 */
+					q = &qlane->L2;
+				}
+
 				lru_insert(&entry->lru, q);
 			}
 
