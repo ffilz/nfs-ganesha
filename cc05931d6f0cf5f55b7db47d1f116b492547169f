@@ -52,6 +52,24 @@
       "parentUuid": "c74ae601_3c4fd3e1",
       "revId": "cc05931d6f0cf5f55b7db47d1f116b492547169f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a12126_55c0487c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-06-30T14:52:09Z",
+      "side": 1,
+      "message": "Yea, that\u0027s part of what I\u0027m thinking is if we have low-water mark background cleaning based on the inode cache utilization, this should not be so necessary.\n\nHmm, when deciding whether to reap a chunk or get a new one, we could ALSO look at the inode cache utilization.\n\nWhat we want to avoid is readdir activity causing the inode cache to be 128 times the size because the number of chunks defaults to the same value as the number of inodes (we should also probably reduce that, say by a factor of 10 or maybe the default should be even lower with documentation that for workloads with lots of small directories it should be set larger). But with advice like that, we definitely don\u0027t want to restrict the configuration.",
+      "parentUuid": "b8bd6620_acae7cff",
+      "revId": "cc05931d6f0cf5f55b7db47d1f116b492547169f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
