@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6448ac_4d62ad94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-07-02T17:17:32Z",
+      "side": 1,
+      "message": "This is an attempt to fix a bug I accidentally introduced when trying to fix another issue. See the original change here:\nhttps://gerrithub.io/c/ffilz/nfs-ganesha/+/555950\n\nUnfortunately the only way I see to fix it is to not respond to lookups and readdirs during an export update, and pass an internal signal to the FSAL when using lookup for the export update process. \n\nThis is kinda ugly, but I couldn\u0027t really see any other way of fixing it. I\u0027m open to other suggestions though.",
+      "revId": "e1972ea744e945d25180c10e03e886bd00c380ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
