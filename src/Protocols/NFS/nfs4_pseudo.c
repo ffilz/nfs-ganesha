@@ -197,8 +197,10 @@ bool make_pseudofs_node(char *name, struct pseudofs_state *state)
 	char const *fsal_name;
 
 retry:
-
-	/* First, try to lookup the entry */
+	/* First, try to lookup the entry
+	 * Set pseudo_fsal_internal_lookup, to signal to FSAL_PSEUDO that it
+	 * can return a response while export is being updated  */
+	op_ctx->flags.pseudo_fsal_internal_lookup = true;
 	fsal_status = fsal_lookup(state->obj, name, &new_node, NULL);
 
 	if (!FSAL_IS_ERROR(fsal_status)) {
