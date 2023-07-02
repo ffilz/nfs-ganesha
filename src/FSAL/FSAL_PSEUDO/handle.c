@@ -268,6 +268,9 @@ static struct pseudo_fsal_obj_handle
 	fsal_obj_handle_init(&hdl->obj_handle, exp_hdl, DIRECTORY);
 	hdl->obj_handle.obj_ops = &PSEUDOFS.handle_ops;
 
+	state_hdl_init(hdl->obj_handle.state_hdl, hdl->obj_handle.type,
+		       &hdl->obj_handle);
+
 	avltree_init(&hdl->avl_name, pseudofs_n_cmpf, 0 /* flags */);
 	avltree_init(&hdl->avl_index, pseudofs_i_cmpf, 0 /* flags */);
 	hdl->next_i = 2;
