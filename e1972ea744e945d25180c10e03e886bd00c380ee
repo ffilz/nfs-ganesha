@@ -51,6 +51,57 @@
       "parentUuid": "aad77d0d_e1ea9251",
       "revId": "e1972ea744e945d25180c10e03e886bd00c380ee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "208f24cb_ff43a256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-03T15:01:46Z",
+      "side": 1,
+      "message": "It looks like fsal_pseudo already makes use of fsal_private for readdir calling lookup.\n\nI suggest adding a separate field to request_op_context.",
+      "revId": "e1972ea744e945d25180c10e03e886bd00c380ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3879f02a_17e6a7f4",
+        "filename": "src/FSAL/FSAL_PSEUDO/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-03T15:01:46Z",
+      "side": 1,
+      "message": "Note that you are overloading fsal_private, see line 367 below...\n\nWhy not just add a boolean into request_op_context? Or add a field for flags and define a flag for this (then anything in the future that needs a flag can just add a new flag).",
+      "revId": "e1972ea744e945d25180c10e03e886bd00c380ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7fba0f_1f8407e5",
+        "filename": "src/FSAL/FSAL_PSEUDO/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-03T15:01:46Z",
+      "side": 1,
+      "message": "Below is a conflicting use of fsal_private.",
+      "revId": "e1972ea744e945d25180c10e03e886bd00c380ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
