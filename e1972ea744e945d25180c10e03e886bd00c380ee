@@ -33,6 +33,24 @@
       "message": "Is this change fixing the root cause, specifically, that leads to an uninitialized state_hdl?  I\u0027m not expert in the pseudofs, but it sound a bit like this change is doing something else.  I\u0027m surprised that we are introducing a new nfs4_error_delay path as a solution, just going on the reasoning in the comment.",
       "revId": "e1972ea744e945d25180c10e03e886bd00c380ee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69550b3_ae16bd93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2023-07-03T06:41:25Z",
+      "side": 1,
+      "message": "AFAIU, the root cause is the way MDCache works. \nThe actual handle that is exposed externally is the handle that is kept in MDCache, and the hdl_state is also kept in the MDCache.\nThis means that initializing this info in the handle itself will not help much. \n\nAlso, creating the entries in the PSEUDO FSAL is done using the FSAL MKDIR API, which doesn\u0027t allow to pass junction exports, and so you can\u0027t create the entry in an atomic way. \n\nAll this causes the issue where we create the handle, and then we update the info in the handle, so this is not atomic, and prone to races. This might call for a deeper change in how this works, but it requires a bit more familiarity with the code base than I have. As I said, I\u0027m open for suggestions here. \n\nPersonally, I don\u0027t think it is really a problem not returning a response during a configuration change, it makes sense to not export information while in a transient state, and it is similar to a lock. \nWhat I don\u0027t love about this patch is the need to signal to the FSAL through the op_ctx-\u003efsal_private in lookup during the update.",
+      "parentUuid": "aad77d0d_e1ea9251",
+      "revId": "e1972ea744e945d25180c10e03e886bd00c380ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
