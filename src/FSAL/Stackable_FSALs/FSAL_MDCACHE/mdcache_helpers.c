@@ -2454,7 +2454,8 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 			new_entry,
 			atomic_fetch_int32_t(&new_entry->lru.refcnt));
 
-	if (new_dir_entry != allocated_dir_entry && new_dir_entry->entry) {
+	if ((new_dir_entry != allocated_dir_entry && new_dir_entry->entry) ||
+		(new_dir_entry->chunk != state->cur_chunk)) {
 		/* This was swapped and already has a refcounted entry. Drop our
 		 * ref. */
 		mdcache_lru_unref(new_entry, LRU_FLAG_NONE);
@@ -3167,6 +3168,25 @@ again:
 		/* We have the content_lock for at least read. */
 		if (dirent->entry) {
 			/* Take a ref for our use */
+			/**
+			 * We shouldn't get here without a write lock.
+			 * The assumption is that while we are holding a
+			 * write lock we get a refcount for dirent->entry in
+			 * mdc_populate_dir_chunk and then we later
+			 * release it in a if block down below.
+			 * So if the dirent->entry is not NULL
+			 * then somebody is holding a write lock.
+			 * If somebody is holding a write lock then
+			 * nobody else could hold a read
+			 * lock on the same directory and so we
+			 * can't get here without a write lock
+			*/
+			if (!has_write) {
+				LogCrit(COMPONENT_CACHE_INODE,
+					"holding entry refcount without write lock for dirent:%p"
+					" and entry:%p. This can result in a mdcache bloat",
+					dirent, dirent->entry);
+			}
 			entry = dirent->entry;
 			mdcache_lru_ref(entry, LRU_FLAG_NONE);
 		} else {
