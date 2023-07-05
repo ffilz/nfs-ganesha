@@ -16,6 +16,41 @@
       "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Attempt to fetch managed_gids failed,\"\n+\t\t\t\t\t\" using cred info from rpc request\");",
       "revId": "689f8c504cc6e0b5db225cf333f764f6da07d203",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76a63595_8f9e802c",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-05T18:41:46Z",
+      "side": 1,
+      "message": "Please don\u0027t split strings, they can exceed the 80 column limit.\n\nHmm, this maybe should also display the principal causing problems",
+      "parentUuid": "6b31abe0_bb162045",
+      "revId": "689f8c504cc6e0b5db225cf333f764f6da07d203",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465c5d67_3a1239ca",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-05T18:41:46Z",
+      "side": 1,
+      "message": "So this message should also indicate the principal causing problems.",
+      "revId": "689f8c504cc6e0b5db225cf333f764f6da07d203",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
