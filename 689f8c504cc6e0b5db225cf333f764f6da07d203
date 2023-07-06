@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2865cf22_fcb8b106",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2023-07-06T11:12:11Z",
+      "side": 1,
+      "message": "displayed uid instead of principal since sec flavor could be SYS or RPCSEC_GSS.",
+      "parentUuid": "76a63595_8f9e802c",
+      "revId": "689f8c504cc6e0b5db225cf333f764f6da07d203",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "465c5d67_3a1239ca",
@@ -49,6 +67,24 @@
       "writtenOn": "2023-07-05T18:41:46Z",
       "side": 1,
       "message": "So this message should also indicate the principal causing problems.",
+      "revId": "689f8c504cc6e0b5db225cf333f764f6da07d203",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd244500_7093dd81",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2023-07-06T11:12:11Z",
+      "side": 1,
+      "message": "displayed uid instead of principal since sec flavor could be SYS or RPCSEC_GSS.",
+      "parentUuid": "465c5d67_3a1239ca",
       "revId": "689f8c504cc6e0b5db225cf333f764f6da07d203",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
