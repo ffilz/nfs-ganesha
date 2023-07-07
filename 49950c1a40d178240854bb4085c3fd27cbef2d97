@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57593dce_699c8ec3",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2458,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "ERROR: space required before the open brace \u0027{\u0027\n+\t\t(new_dir_entry-\u003echunk !\u003d state-\u003ecur_chunk)){",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8492c4d8_2479c8b8",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3173,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t * that while we are holding a write lock we get a refcount for",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59633c1e_74c7b362",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3174,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t * dirent-\u003eentry in mdc_populate_dir_chunk and then we later",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8430e7_f34d1be9",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3176,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t * So if the dirent-\u003eentry is not NULL then somebody is holding",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02128f86_3f7e5980",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t * a write lock. If somebody is holding a write lock then",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "259e8d04_d780c4fe",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3178,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t * nobody else should hold a read lock on the same directory",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8675b9a1_2469e402",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3181,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\t\t\tif(!has_write){",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83707855_8b6c1c42",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3181,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "ERROR: space required before the open brace \u0027{\u0027\n+\t\t\tif(!has_write){",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6465d584_ab36146c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:37:07Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"holding entry refcount without write lock for dirent:%p\"\n+\t\t\t\t\t\" and entry:%p. This can result in a mdcache bloat\",",
+      "revId": "49950c1a40d178240854bb4085c3fd27cbef2d97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
