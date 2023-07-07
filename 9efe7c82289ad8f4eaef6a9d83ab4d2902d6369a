@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8338404d_fb997443",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3187,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-07T18:45:56Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"holding entry refcount without write lock for dirent:%p\"\n+\t\t\t\t\t\" and entry:%p. This can result in a mdcache bloat\",",
+      "revId": "9efe7c82289ad8f4eaef6a9d83ab4d2902d6369a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
