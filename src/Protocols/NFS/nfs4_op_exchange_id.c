@@ -87,6 +87,8 @@ int get_raddr(SVCXPRT *xprt)
 char cid_server_owner[MAXNAMLEN+1]; /* max hostname length */
 char *cid_server_scope_suffix = "_NFS-Ganesha";
 char *cid_server_scope;
+/* Mutex protecting access of cid_server owner & scope */
+pthread_mutex_t cid_server_mutex = PTHREAD_MUTEX_INITIALIZER;
 int owner_len, scope_len, ss_suffix_len;
 
 /**
@@ -143,46 +145,56 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 	}
 
 	if (cid_server_owner[0] == '\0') {
-		/* Set up the server owner string */
-		if (nfs_param.nfsv4_param.server_owner == NULL) {
-			/* If the server owner param is NULL, set it to
-			 * hostname
-			 */
-			if (gsh_gethostname(
-				    cid_server_owner, sizeof(cid_server_owner),
-				    nfs_param.core_param.enable_AUTHSTATS) ==
-			    -1) {
-				res_EXCHANGE_ID4->eir_status =
-					NFS4ERR_SERVERFAULT;
-				return NFS_REQ_ERROR;
+		/* Making this logic thread safe */
+		PTHREAD_MUTEX_lock(&cid_server_mutex);
+		if (cid_server_owner[0] == '\0') {
+			/* Set up the server owner string */
+			if (nfs_param.nfsv4_param.server_owner == NULL) {
+				/* If the server owner param is NULL, set it to
+				* hostname
+				*/
+				if (gsh_gethostname(
+					cid_server_owner,
+					sizeof(cid_server_owner),
+					nfs_param.core_param.enable_AUTHSTATS)
+					== -1) {
+					res_EXCHANGE_ID4->eir_status =
+						NFS4ERR_SERVERFAULT;
+					PTHREAD_MUTEX_unlock(&cid_server_mutex);
+					return NFS_REQ_ERROR;
+				}
+			} else {
+				rc = snprintf(cid_server_owner,
+					sizeof(cid_server_owner), "%s",
+					nfs_param.nfsv4_param.server_owner);
+				/* Assert that server owner conf param is not
+				* too long. this should never happen since
+				* it is validated during conf parsing */
+				assert(rc >= 0 &&
+					rc < sizeof(cid_server_owner));
 			}
-		} else {
-			rc = snprintf(cid_server_owner,
-				      sizeof(cid_server_owner), "%s",
-				      nfs_param.nfsv4_param.server_owner);
-			/* Assert that server owner conf param is not too long.
-			 * this should never happen since it is validated during
-			 * conf parsing */
-			assert(rc >= 0 && rc < sizeof(cid_server_owner));
-		}
 
-		owner_len = strlen(cid_server_owner);
+			owner_len = strlen(cid_server_owner);
 
-		/* use server_owner as server_scope if server_scope not
-		 * mentioned in main config file
-		 */
-		if (nfs_param.nfsv4_param.server_scope == NULL) {
-			ss_suffix_len = strlen(cid_server_scope_suffix);
-			scope_len = owner_len + ss_suffix_len;
-			cid_server_scope = gsh_malloc(scope_len + 1);
-			memcpy(cid_server_scope, cid_server_owner, owner_len);
-			memcpy(cid_server_scope + owner_len,
-					cid_server_scope_suffix,
-					ss_suffix_len + 1);
-		} else {
-			cid_server_scope = nfs_param.nfsv4_param.server_scope;
-			scope_len = strlen(cid_server_scope);
+			/* use server_owner as server_scope if server_scope not
+			* mentioned in main config file
+			*/
+			if (nfs_param.nfsv4_param.server_scope == NULL) {
+				ss_suffix_len = strlen(cid_server_scope_suffix);
+				scope_len = owner_len + ss_suffix_len;
+				cid_server_scope = gsh_malloc(scope_len + 1);
+				memcpy(cid_server_scope,
+						cid_server_owner, owner_len);
+				memcpy(cid_server_scope + owner_len,
+						cid_server_scope_suffix,
+						ss_suffix_len + 1);
+			} else {
+				cid_server_scope =
+					nfs_param.nfsv4_param.server_scope;
+				scope_len = strlen(cid_server_scope);
+			}
 		}
+		PTHREAD_MUTEX_unlock(&cid_server_mutex);
 	}
 
 	/* Now check that the response will fit. Use 0 for
