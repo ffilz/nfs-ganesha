@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f80b8f9_f4364dfa",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-11T17:17:10Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+extern char cid_server_owner[MAXNAMLEN+1]; /* max hostname length */",
+      "revId": "08607ba6e8dc457714192e69807fa8280a110689",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c20f38_dc6c541a",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-07-11T17:17:10Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+extern char *cid_server_scope;",
+      "revId": "08607ba6e8dc457714192e69807fa8280a110689",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
