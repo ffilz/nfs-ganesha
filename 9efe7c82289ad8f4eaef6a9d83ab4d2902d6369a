@@ -33,6 +33,24 @@
       "message": "I think I\u0027m confused what the purpose of this LogCrit is for",
       "revId": "9efe7c82289ad8f4eaef6a9d83ab4d2902d6369a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19375a56_92b343eb",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3189,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2023-07-11T01:43:48Z",
+      "side": 1,
+      "message": "Removed the LogCrit for now. The other change is more important and we want to see if it can be merged soon.\n\nI still think that this log is super useful. It helped me catch this bug but i\u0027ll just do a followup patch lateron for the log. I original wanted to add an assert(!has_write) there but i instead went for a log since i didn\u0027t want us to see crashes if theres another bug lurking somewhere",
+      "parentUuid": "5326f9c1_5523734b",
+      "revId": "9efe7c82289ad8f4eaef6a9d83ab4d2902d6369a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
