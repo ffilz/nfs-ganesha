@@ -16,6 +16,24 @@
       "message": "Could we do this during startup, rather than using a lock?",
       "revId": "6843d2f0bc941b6de2b5f00692842ee9c1a7c34b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8de1be64_11ec07c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-11T14:57:46Z",
+      "side": 1,
+      "message": "Yes, let\u0027s do this during startup. Adding a lock will introduce lock contention on this but since it\u0027s all based on config, it can be set once at startup.",
+      "parentUuid": "31d578a6_53e77566",
+      "revId": "6843d2f0bc941b6de2b5f00692842ee9c1a7c34b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
