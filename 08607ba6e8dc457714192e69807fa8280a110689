@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "299ac68f_317569a5",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-07-11T17:25:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f80b8f9_f4364dfa",
+      "revId": "08607ba6e8dc457714192e69807fa8280a110689",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c20f38_dc6c541a",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-07-11T17:17:10Z",
       "side": 1,
       "message": "WARNING: externs should be avoided in .c files\n+extern char *cid_server_scope;",
+      "revId": "08607ba6e8dc457714192e69807fa8280a110689",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1e1dbd_f2a760fe",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-07-11T17:25:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56c20f38_dc6c541a",
       "revId": "08607ba6e8dc457714192e69807fa8280a110689",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
