@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db81f115_c71dcc22",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-07-12T04:47:56Z",
+      "side": 1,
+      "message": "Yeah, we can do that...\n\nAlso, how about the init of existing V4 related caches...do we need to handle them as well?",
+      "parentUuid": "042be781_c42951b8",
+      "revId": "3bb358b0445749f6880d8e03be1cce2e34254dc8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98fa647b_c8ac804b",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-07-11T18:20:41Z",
       "side": 1,
       "message": "Can this ever actually be empty now?",
+      "revId": "3bb358b0445749f6880d8e03be1cce2e34254dc8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2187fe2f_cd0a7e78",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-07-12T04:47:56Z",
+      "side": 1,
+      "message": "Post the changes at init, this is impossible to be empty...\n\nUnless, post making the above NFSv4 specific changes and then, in future if Ganesha supports runtime enabling of protocols...",
+      "parentUuid": "98fa647b_c8ac804b",
       "revId": "3bb358b0445749f6880d8e03be1cce2e34254dc8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
