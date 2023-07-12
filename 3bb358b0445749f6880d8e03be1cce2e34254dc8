@@ -86,6 +86,24 @@
       "parentUuid": "98fa647b_c8ac804b",
       "revId": "3bb358b0445749f6880d8e03be1cce2e34254dc8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5359a75_0878edc0",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-12T23:06:10Z",
+      "side": 1,
+      "message": "I we support runtime enabling of protocols in the future, we would presumably set this at the time of enabling NFSv4. So we probably should remove the check. We could have an assert to catch future bugs.",
+      "parentUuid": "2187fe2f_cd0a7e78",
+      "revId": "3bb358b0445749f6880d8e03be1cce2e34254dc8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
