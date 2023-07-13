@@ -16,6 +16,24 @@
       "message": "I do have a question here - does this elevated reference at the LRU itself cause problems? If we have more threads than lanes trying to reap an entry, it could get locked out. Maybe this should actually be explicit to get a TEMP_REF which would remove the entry from the LRU. But maybe that\u0027s just an argument we need more lanes than CPU threads at least, maybe more than worker threads.",
       "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "953b041b_049dbb5a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-07-13T15:05:12Z",
+      "side": 1,
+      "message": "This lane is locked.  I think it\u0027s okay.",
+      "parentUuid": "2b9bd7ec_a575a9dc",
+      "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
