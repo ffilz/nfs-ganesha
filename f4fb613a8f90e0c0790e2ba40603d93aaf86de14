@@ -34,6 +34,24 @@
       "parentUuid": "2b9bd7ec_a575a9dc",
       "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae2dfb7c_768a646b",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-13T18:12:11Z",
+      "side": 1,
+      "message": "Ah, good point. Hmm, I wonder if we should do a trylock here so we don\u0027t get stuck on an in-use lane? Of course we could be waiting for an unref to put an entry back into this lane, which if we wait a moment for the lock, we might then be able to reap.",
+      "parentUuid": "953b041b_049dbb5a",
+      "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
