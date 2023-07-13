@@ -34,6 +34,24 @@
       "parentUuid": "6b5fdd5c_11f6a1cc",
       "revId": "197abaad2bc9857cd901a40fad30abda69629da9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb8bf9d_b356683b",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1881,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-13T18:13:30Z",
+      "side": 1,
+      "message": "Fixed but this patch has also been squashed with the other patch that made all elevated refcounts active entries and removed from the LRU.",
+      "parentUuid": "a0c3592a_61aa4c82",
+      "revId": "197abaad2bc9857cd901a40fad30abda69629da9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
