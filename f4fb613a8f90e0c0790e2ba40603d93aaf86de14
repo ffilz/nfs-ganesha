@@ -52,6 +52,24 @@
       "parentUuid": "953b041b_049dbb5a",
       "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aefde4de_3e769907",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-07-14T12:55:18Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s necessary.  Nothing should be holding the qlane lock for extended periods of time.",
+      "parentUuid": "ae2dfb7c_768a646b",
+      "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
