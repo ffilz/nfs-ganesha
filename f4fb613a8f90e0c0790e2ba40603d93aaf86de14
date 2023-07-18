@@ -88,6 +88,24 @@
       "parentUuid": "aefde4de_3e769907",
       "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "193b9270_c2ce2f3f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-18T16:57:00Z",
+      "side": 1,
+      "message": "Based on the report from https://github.com/nfs-ganesha/nfs-ganesha/issues/963 I\u0027m going to say that for now everything seems to be good. I will look at a patch so that we don\u0027t always start on lane 0, but otherwise nothing to be concerned about this patch.",
+      "parentUuid": "c58f2307_2ed0bd00",
+      "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
