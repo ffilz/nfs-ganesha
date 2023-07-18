@@ -106,6 +106,24 @@
       "parentUuid": "c58f2307_2ed0bd00",
       "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2a0c46_cea4c419",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-18T17:45:36Z",
+      "side": 1,
+      "message": "And it turns out we already don\u0027t always start on lane 0. In fact, every iteration of the loop in lru_reap_impl looks at a different lane than the last attempt (even if by a different thread). The chance of lock contention is essentially 0.",
+      "parentUuid": "193b9270_c2ce2f3f",
+      "revId": "f4fb613a8f90e0c0790e2ba40603d93aaf86de14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
