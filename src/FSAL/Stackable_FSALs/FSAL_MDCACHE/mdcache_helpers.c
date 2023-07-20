@@ -2184,7 +2184,9 @@ mdc_readdir_chunk_object(const char *name, struct fsal_obj_handle *sub_handle,
 	int code = 0;
 	fsal_status_t status;
 	enum fsal_dir_result result = DIR_CONTINUE;
-
+	/* Grab back the RW lock */
+	PTHREAD_RWLOCK_unlock(&state->dir->content_lock);
+	PTHREAD_RWLOCK_wrlock(&state->dir->content_lock);
 #ifdef DEBUG_MDCACHE
 	assert(state->dir->content_lock.__data.__cur_writer);
 #endif
@@ -3029,6 +3031,11 @@ again:
 				"Readdir chunked about to populate chunk %p next_ck=0x%"
 				PRIx64, chunk, next_ck);
 
+		/* Ease the lock contention here, by not locking entire tree.
+		* RW lock would be taken back once the chunk is to be updated
+		* in the callback post subcall */
+		PTHREAD_RWLOCK_unlock(&directory->content_lock);
+		PTHREAD_RWLOCK_rdlock(&directory->content_lock);
 		/* No, we need to populate a chunk using this cookie.
 		 *
 		 * NOTE: empty directory can result in dirent being NULL, and
