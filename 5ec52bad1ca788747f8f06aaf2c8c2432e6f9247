@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "296e2c27_99c3c7c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-25T23:29:19Z",
+      "side": 1,
+      "message": "Sorry, didn\u0027t read code carefully enough. Two different mutexes. This looks good.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2a224a7_7a15660e",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-06-28T15:01:23Z",
       "side": 1,
       "message": "Let\u0027s not unlock here.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d28dfa_c6119dd8",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-25T23:29:19Z",
+      "side": 1,
+      "message": "Never mind, different mutexes...",
+      "parentUuid": "b2a224a7_7a15660e",
       "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +87,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a41b8a05_37f83a2b",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-25T23:29:19Z",
+      "side": 1,
+      "message": "Never mind, different mutexes...",
+      "parentUuid": "7755e73e_bb1a5eee",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b4af156_a1456f4d",
@@ -69,6 +122,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7098c5a8_c72d751a",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-25T23:29:19Z",
+      "side": 1,
+      "message": "Never mind, different mutexes...",
+      "parentUuid": "2b4af156_a1456f4d",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "494bdb89_22d53d48",
@@ -82,6 +153,24 @@
       "writtenOn": "2023-06-28T15:01:23Z",
       "side": 1,
       "message": "So we won\u0027t lock here.",
+      "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b161047_3de2b375",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid_confirm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-25T23:29:19Z",
+      "side": 1,
+      "message": "Never mind, different mutexes...",
+      "parentUuid": "494bdb89_22d53d48",
       "revId": "5ec52bad1ca788747f8f06aaf2c8c2432e6f9247",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
