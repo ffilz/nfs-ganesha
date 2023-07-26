@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a435de_87a5aa2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-07-26T00:20:49Z",
+      "side": 1,
+      "message": "Can we please have slightly better documentation for new options?",
+      "revId": "968b08a53b189d8dc3dc0d900cfe0c4b80ba1601",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6e77823_2600ece8",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-07-26T00:20:49Z",
+      "side": 1,
+      "message": "I assume this is for NLMPROC4_SHARE and NLMPROC4_UNSHARE, which I think is for share reservations (the RFC is very terse on this)?  If so, can we please expand this a bit to mention \"share reservations\"?\n\nSome of the one liners already in the documentation are a bit difficult to understand...  so I figure some verbosity might help to avoid that with new options.\n\nThanks.  😊",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 49
+      },
+      "revId": "968b08a53b189d8dc3dc0d900cfe0c4b80ba1601",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
