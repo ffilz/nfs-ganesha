@@ -1362,6 +1362,7 @@ int32_t fsal_fd_global_counter;
 uint32_t fsal_fd_state_counter;
 uint32_t fsal_fd_temp_counter;
 time_t lru_run_interval;
+bool Cache_FDs;
 static struct fridgethr *fd_lru_fridge;
 
 uint32_t lru_try_one(void)
@@ -1417,7 +1418,6 @@ struct fd_lru_state fd_lru_state;
 uint32_t futility_count;
 uint32_t required_progress;
 uint32_t reaper_work;
-time_t lru_run_interval;
 
 /**
  * @brief Function that executes in the fd_lru thread
@@ -1504,7 +1504,7 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	   API, for example.) */
 
 
-	if (currentopen < fd_lru_state.fds_lowat) {
+	if (currentopen < fd_lru_state.fds_lowat && Cache_FDs) {
 		LogDebug(COMPONENT_FSAL,
 			 "FD count fsal_fd_global_counter is %"PRIi32
 			 " and low water mark is %d: not reaping.",
@@ -1525,7 +1525,13 @@ void fd_lru_run(struct fridgethr_context *ctx)
 		uint32_t workpass = 0;
 		time_t curr_time = time(NULL);
 
-		if (currentopen < fd_lru_state.fds_hiwat &&
+		if (!Cache_FDs &&
+		    atomic_fetch_uint32_t(&fd_lru_state.fd_state) > FD_LOW &&
+		    currentopen < fd_lru_state.fds_lowat) {
+			LogEvent(COMPONENT_FSAL,
+				 "Return to normal fd reaping.");
+			atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LOW);
+		} else if (currentopen < fd_lru_state.fds_hiwat &&
 		    atomic_fetch_uint32_t(&fd_lru_state.fd_state) == FD_LIMIT) {
 			LogEvent(COMPONENT_FSAL,
 				 "Count of fd is below high water mark.");
@@ -1855,6 +1861,7 @@ fsal_status_t fd_lru_pkginit(struct fd_lru_parameter *params)
 	required_progress = params->required_progress;
 	reaper_work = params->reaper_work;
 	lru_run_interval = params->lru_run_interval;
+	Cache_FDs = params->Cache_FDs;
 
 	memset(&frp, 0, sizeof(struct fridgethr_params));
 	frp.thr_max = 1;
