@@ -71,6 +71,14 @@ Chunks_LWMark(uint32, range 1 to UINT32_MAX, default 1000)
 LRU_Run_Interval(uint32, range 1 to 24 * 3600, default 90)
     Base interval in seconds between runs of the LRU cleaner thread.
 
+Cache_FDs(bool, true)
+    If Cache_FDs is false then FDs will remained cached till the LRU reaper
+    thread invokes and tries to close the FDs.
+
+    If Cache_FDs is true (default) then FDs get cached and LRU reaper thread on
+    invocation will try to close the FDs only when the currentopen >= fds_lowat
+    (FD low watermark).
+
 FD_Limit_Percent(uint32, range 0 to 100, default 99)
     The percentage of the system-imposed maximum of file descriptors at which
     Ganesha will deny requests.
