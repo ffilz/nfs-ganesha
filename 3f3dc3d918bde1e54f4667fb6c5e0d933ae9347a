@@ -16,6 +16,24 @@
       "message": "I don\u0027t like this.  Since we reclaim the write lock on the first dirent, and we unlock/relock on every dirent, at best this will be a slowdown and increase contention on the lock, and at worst it will open a window for a race.  A better solution is likely to be to implement readdirplus.",
       "revId": "3f3dc3d918bde1e54f4667fb6c5e0d933ae9347a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e401720_9c7ddcd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-07-27T20:01:57Z",
+      "side": 1,
+      "message": "Agreed, I really don\u0027t think this is a good solution. I think better would be to understand why the backend is so slow.",
+      "parentUuid": "e505ed77_47334e09",
+      "revId": "3f3dc3d918bde1e54f4667fb6c5e0d933ae9347a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
