@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e505ed77_47334e09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-07-27T18:23:26Z",
+      "side": 1,
+      "message": "I don\u0027t like this.  Since we reclaim the write lock on the first dirent, and we unlock/relock on every dirent, at best this will be a slowdown and increase contention on the lock, and at worst it will open a window for a race.  A better solution is likely to be to implement readdirplus.",
+      "revId": "3f3dc3d918bde1e54f4667fb6c5e0d933ae9347a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
