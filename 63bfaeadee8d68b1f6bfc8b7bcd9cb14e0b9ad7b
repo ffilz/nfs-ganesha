@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f47b06d_765da26e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-07-27T14:17:01Z",
+      "side": 1,
+      "message": "I\u0027m not understanding this.  It seems that if !cache_fds we won\u0027t ever return to FD_LOW?  Is this correct?  Can you add a comment describing the logic here?",
+      "revId": "63bfaeadee8d68b1f6bfc8b7bcd9cb14e0b9ad7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
