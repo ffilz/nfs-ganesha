@@ -33,6 +33,24 @@
       "message": "This chunk appears to be doing the same thing as the above chunk (return to FD_LOW if currentopen is low).  I believe that nothing at all changes if we take this and the above hunk out entirely.",
       "revId": "2b4d5fba9b66d2b64f33ff0e51321d301cc1d8e2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7428f2_8ebfd3c2",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-08-01T14:09:24Z",
+      "side": 1,
+      "message": "Okay, I mis-read.  The rest of the else clause still executes.  Can we re-arrange this so that we check for low state separate from the check for cache_fd?",
+      "parentUuid": "8a2cd09a_2d2ed16e",
+      "revId": "2b4d5fba9b66d2b64f33ff0e51321d301cc1d8e2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
