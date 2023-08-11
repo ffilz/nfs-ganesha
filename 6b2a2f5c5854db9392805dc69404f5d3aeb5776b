@@ -87,6 +87,24 @@
       "parentUuid": "bab18139_2577b4ee",
       "revId": "6b2a2f5c5854db9392805dc69404f5d3aeb5776b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb5c664f_6c6ca818",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-08-11T14:34:21Z",
+      "side": 1,
+      "message": "Ah yes, it does. I wonder if the attribute encoders that use data-\u003ecurrent_obj should actually use op_ctx...\n\nIn any case, this looks good.",
+      "parentUuid": "bc52f7a8_9431eae0",
+      "revId": "6b2a2f5c5854db9392805dc69404f5d3aeb5776b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
