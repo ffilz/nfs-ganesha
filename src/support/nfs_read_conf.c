@@ -393,7 +393,7 @@ static struct config_item krb5_params[] = {
 		       nfs_krb5_param, keytab),
 	CONF_ITEM_PATH("CCacheDir", 1, MAXPATHLEN, DEFAULT_NFS_CCACHE_DIR,
 		       nfs_krb5_param, ccache_dir),
-	CONF_ITEM_BOOL("Active_krb5", true, nfs_krb5_param, active_krb5),
+	CONF_ITEM_BOOL("Active_krb5", false, nfs_krb5_param, active_krb5),
 	CONFIG_EOL
 };
 

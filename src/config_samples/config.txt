@@ -236,7 +236,7 @@ NFS_KRB5 {}
 
 	CCacheDir(path, default "/var/run/ganesha")
 
-	Active_krb5(bool, default true)
+	Active_krb5(bool, default false)
 
 
 NFSV4 {}
@@ -573,8 +573,6 @@ EXPORT { FSAL {} }
 	Credential_LifeTime(uint32, range 0 to 86400*2, default 86400)
 
 	Sec_Type(enum, values [krb5, krb5i, krb5p], default krb5)
-
-	Active_krb5(bool, default false)
 
 	Enable_Handle_Mapping(bool, default false)
 
