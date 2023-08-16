@@ -221,6 +221,10 @@ int display_client_id_rec(struct display_buffer *dspbuf,
 	b_left = display_printf(dspbuf, "} cred_flavor=%u",
 				clientid->cid_credential.flavor);
 
+	b_left = display_printf(dspbuf,
+				"} cred_flavor=%u",
+				clientid->cid_credential.flavor);
+
 	if (b_left <= 0)
 		return b_left;
 
