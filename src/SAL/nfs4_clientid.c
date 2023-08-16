@@ -217,6 +217,10 @@ int display_client_id_rec(struct display_buffer *dspbuf,
 				atomic_fetch_uint32_t(
 					&clientid->cid_open_state_counter));
 
+	b_left = display_printf(dspbuf,
+				"} cred_flavor=%u",
+				clientid->cid_credential.flavor);
+
 	if (b_left <= 0)
 		return b_left;
 
