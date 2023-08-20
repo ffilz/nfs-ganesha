@@ -501,8 +501,10 @@ static inline void fsal_copy_attrs(struct fsal_attrlist *dest,
 		 * caller when calling fsal_release_attrs will not have to
 		 * release the ACL reference).
 		 */
+		if (dest->acl != NULL) {
+			dest->valid_mask &= ~ATTR_ACL;
+		}
 		dest->acl = NULL;
-		dest->valid_mask &= ~ATTR_ACL;
 	}
 
 	if (pass_refs && ((save_request_mask & ATTR4_FS_LOCATIONS) != 0)) {
