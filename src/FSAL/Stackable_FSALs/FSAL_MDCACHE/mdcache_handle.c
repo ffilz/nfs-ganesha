@@ -551,7 +551,8 @@ static fsal_status_t mdcache_readdir(struct fsal_obj_handle *dir_hdl,
 	if (!(directory->obj_handle.type == DIRECTORY))
 		return fsalstat(ERR_FSAL_NOTDIR, 0);
 
-	if (mdcache_param.dir.avl_chunk == 0) {
+	if (mdcache_param.dir.avl_chunk == 0 ||
+	    lru_state.chunks_used >= lru_state.chunks_hiwat) {
 		/* Not caching dirents; pass through directly to FSAL */
 		return mdcache_readdir_uncached(directory, whence, dir_state,
 						cb, attrmask, eod_met);
