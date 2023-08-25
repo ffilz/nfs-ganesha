@@ -359,6 +359,10 @@ Idmapped_User_Time_Validity(int64, range 0 to INT64_MAX, default 86400)
 Idmapped_Group_Time_Validity(int64, range 0 to INT64_MAX, default 86400)
     Cache validity in seconds for idmapped-group entries
 
+Cache_Users_Max_Count(uint32, range 0 to INT32_MAX, default 50000)
+    Max number of cached idmapped users
+
+
 NFSv4 {}
 --------------------------------------------------------------------------------
 
