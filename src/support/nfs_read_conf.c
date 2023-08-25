@@ -379,6 +379,8 @@ struct config_block krb5_param = {
 static struct config_item directory_services_params[] = {
 	CONF_ITEM_STR("DomainName", 1, MAXPATHLEN, DOMAINNAME_DEFAULT,
 		       directory_services_param, domainname),
+	CONF_ITEM_I64("Idmapped_User_Time_Validity", 0, INT64_MAX, 24*60*60,
+		       directory_services_param, idmapped_user_time_validity),
 	CONFIG_EOL
 };
 
