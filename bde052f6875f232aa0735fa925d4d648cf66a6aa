@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff7dca7_be2902e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-08-28T17:42:44Z",
+      "side": 1,
+      "message": "This may be a good idea, but I think I\u0027d rather see a larger threshold than just the hi-water mark. Some FSALs may not do well with uncached readdir.\n\nUltimately, the readdir cache should be carefully tuned for the work load, number of chunks and chunk size. For example, if you have lots of small directories, smaller chunks (and more of them) may be more appropriate.",
+      "revId": "bde052f6875f232aa0735fa925d4d648cf66a6aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
