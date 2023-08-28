@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a258d50_3d7758b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-08-28T16:24:00Z",
+      "side": 1,
+      "message": "Thanks for these changes. I\u0027m not sure what happened to get_fsal_obj_hdl. That actually needs to be implemented for all the FSALs... Is that something you would be able to do?\n\nAlso, I think I\u0027d like to see this as 3 separate patches since each file is really independent.\n\nIf you are able to implement get_fsal_obj_hdl for all the FSALs, all those implementations could go in one patch.",
+      "revId": "19f7c86d4c092b653cb2e823abb7ded004bda9be",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
