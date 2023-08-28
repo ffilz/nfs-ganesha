@@ -872,11 +872,17 @@ fsal_mode_gen_acl(struct fsal_attrlist *attrs)
 		nfs4_acl_release_entry(attrs->acl);
 	}
 
-	attrs->acl = nfs4_acl_alloc();
-	attrs->acl->naces = 6;
-	attrs->acl->aces = (fsal_ace_t *) nfs4_ace_alloc(attrs->acl->naces);
+	fsal_acl_data_t acl_data;
+	acl_data.naces = 6;
+	acl_data.aces = nfs4_ace_alloc(acl_data.naces);
 
-	fsal_mode_gen_set(attrs->acl->aces, attrs->mode);
+	fsal_mode_gen_set(acl_data.aces, attrs->mode);
+
+	fsal_acl_status_t acl_status;
+	attrs->acl = nfs4_acl_new_entry(&acl_data, &acl_status);
+	if (attrs->acl == NULL) {
+		LogFatal(COMPONENT_FSAL, "Failed in nfs4_acl_new_entry, acl_status %d", acl_status);
+	}
 
 	FSAL_SET_MASK(attrs->valid_mask, ATTR_ACL);
 
