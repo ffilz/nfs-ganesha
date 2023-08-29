@@ -34,6 +34,24 @@
       "parentUuid": "8ff7dca7_be2902e2",
       "revId": "bde052f6875f232aa0735fa925d4d648cf66a6aa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f49ffd_32e72ed3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-08-29T21:08:06Z",
+      "side": 1,
+      "message": "We had a conversation today on the community call and we are not in favor of this. We discussed the idea collecting metrics on directory usage to allow adjusting the chunk size to better match the actual workload. Outside of that, the best thing is to properly tune the chunk cache parameters so that the chunk cache is big enough for the working set. Reverting to uncached readdir just isn\u0027t a good idea, and eventually we would like to remove the uncached code.",
+      "parentUuid": "de7a81ee_5b3d8da6",
+      "revId": "bde052f6875f232aa0735fa925d4d648cf66a6aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
