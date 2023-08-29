@@ -31,7 +31,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#endif
 
 #include "log.h"
 #include "nfs4.h"
@@ -224,7 +226,10 @@ out:
 
 static void reap_malloc_frag(void)
 {
-	static size_t trim_threshold;
+#ifdef __APPLE__
+	LogFatal(COMPONENT_MEMLEAKS, "malloc_trim is not supported");
+#else
+	sizestatic size_t trim_threshold;
 	size_t min_threshold = nfs_param.core_param.malloc_trim_minthreshold;
 	size_t rss;
 
@@ -257,6 +262,7 @@ static void reap_malloc_frag(void)
 	LogEvent(COMPONENT_MEMLEAKS,
 		 "called malloc_trim, current rss: %zu MB, threshold: %zu MB",
 		 rss, trim_threshold);
+#endif
 }
 
 struct reaper_state {
