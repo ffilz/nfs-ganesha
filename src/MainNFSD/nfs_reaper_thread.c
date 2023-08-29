@@ -31,7 +31,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#endif
 
 #include "log.h"
 #include "nfs4.h"
@@ -222,9 +224,10 @@ out:
 	return ((uint64_t)rss * page_size) / (1024 * 1024);
 }
 
+#ifdef __APPLE__
 static void reap_malloc_frag(void)
 {
-	static size_t trim_threshold;
+	sizestatic size_t trim_threshold;
 	size_t min_threshold = nfs_param.core_param.malloc_trim_minthreshold;
 	size_t rss;
 
@@ -258,6 +261,7 @@ static void reap_malloc_frag(void)
 		 "called malloc_trim, current rss: %zu MB, threshold: %zu MB",
 		 rss, trim_threshold);
 }
+#endif
 
 struct reaper_state {
 	size_t count;
@@ -302,8 +306,11 @@ static void reaper_run(struct fridgethr_context *ctx)
 	     reap_hash_table(ht_unconfirmed_client_id));
 
 	rst->count += reap_expired_open_owners();
+
+#ifdef __APPLE__
 	if (nfs_param.core_param.malloc_trim)
 		reap_malloc_frag();
+#endif
 }
 
 int reaper_init(void)
