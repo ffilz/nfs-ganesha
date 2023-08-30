@@ -75,7 +75,8 @@
 #define RQUOTA_NB_COMMAND (RQUOTAPROC_SETACTIVEQUOTA + 1)
 #define NFS_V40_NB_OPERATION (NFS4_OP_RELEASE_LOCKOWNER + 1)
 #define NFS_V41_NB_OPERATION (NFS4_OP_RECLAIM_COMPLETE + 1)
-#define NFS_V42_NB_OPERATION (NFS4_OP_WRITE_SAME + 1)
+#define NFS_V42_NB_OPERATION (NFS4_OP_CLONE + 1)
+#define NFS_V43_NB_OPERATION (NFS4_OP_LAST_ONE)
 #define _9P_NB_COMMAND 33
 
 #define NFS_pcp nfs_param.core_param
@@ -3128,9 +3129,9 @@ static void record_v4_full_stats(uint32_t proc,
 	monitoring_nfs4_request(proc, request_time, status, export_id,
 				client_ip);
 #endif
-	if (proc > NFS_V42_NB_OPERATION) {
+	if (proc >= NFS4_OP_LAST_ONE) {
 		LogCrit(COMPONENT_DBUS,
-			"proc is more than NFS4_OP_WRITE_SAME: %d\n",
+			"proc is more than NFS4_OP_LAST_ONE: %d\n",
 			proc);
 		return;
 	}
