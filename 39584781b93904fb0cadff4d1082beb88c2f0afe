@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aa65d61_412d1ccf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2023-08-30T13:02:22Z",
+      "side": 1,
+      "message": "These are both safe.  status is set before it\u0027s ever used, so the initialization is redundant, and out_fd is never read by the callers, only set.  Was something complaining about these?",
+      "revId": "39584781b93904fb0cadff4d1082beb88c2f0afe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
