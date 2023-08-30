@@ -16,6 +16,24 @@
       "message": "These are both safe.  status is set before it\u0027s ever used, so the initialization is redundant, and out_fd is never read by the callers, only set.  Was something complaining about these?",
       "revId": "39584781b93904fb0cadff4d1082beb88c2f0afe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e776fe_b8bd8e73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2023-08-30T15:02:55Z",
+      "side": 1,
+      "message": "If we take the \"goto out\" in line 1941 then we have a use of uninitialized out_fd in line 1984 and we return the uninitialized status in line 1992.",
+      "parentUuid": "5aa65d61_412d1ccf",
+      "revId": "39584781b93904fb0cadff4d1082beb88c2f0afe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
