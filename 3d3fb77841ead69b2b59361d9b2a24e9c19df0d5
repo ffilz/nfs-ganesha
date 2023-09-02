@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f5e4f90_596244d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-02T04:24:22Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis allows triggering config reload via a mechanism other than sighup (we are using this for dynamically setting ganesha\u0027s logging level). The boolean return value indicates if there were any problems during config reload.",
+      "revId": "3d3fb77841ead69b2b59361d9b2a24e9c19df0d5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
