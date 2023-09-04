@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "835833d1_7ac8ffeb",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2620,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-04T16:04:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tfor (i \u003d 0; i \u003c NFS_V3_NB_COMMAND ; i++) {\n \t\t\treset_op_count(\u0026(st-\u003enfsv3-\u003ecmds[i]));\n \t\t}",
+      "revId": "4f23b196dfd2124b674ce07e97b99abbc6b06d3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "326ba227_3982e3a0",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2632,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-04T16:04:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tfor (i \u003d 0; i \u003c NLM_V4_NB_OPERATION ; i++) {\n \t\t\treset_op_count(\u0026(st-\u003enlm4-\u003ecmds[i]));\n \t\t}",
+      "revId": "4f23b196dfd2124b674ce07e97b99abbc6b06d3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a734ba1b_3f440874",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2644,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-04T16:04:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tfor (i \u003d 0; i \u003c NFS_V3_NB_COMMAND; i++) {\n \t\t(void)atomic_store_uint64_t(\u0026global_st.v3.op[i], 0);\n \t}",
+      "revId": "4f23b196dfd2124b674ce07e97b99abbc6b06d3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1677ee6_3e3bd2e4",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2654,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-04T16:04:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tfor (i \u003d 0; i \u003c NLM_V4_NB_OPERATION; i++) {\n \t\t(void)atomic_store_uint64_t(\u0026global_st.lm.op[i], 0);\n \t}",
+      "revId": "4f23b196dfd2124b674ce07e97b99abbc6b06d3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64decec1_5e45dacc",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2660,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-04T16:04:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tfor (i \u003d 0; i \u003c MNT_V3_NB_COMMAND; i++) {\n \t\t(void)atomic_store_uint64_t(\u0026global_st.mn.op[i], 0);\n \t}",
+      "revId": "4f23b196dfd2124b674ce07e97b99abbc6b06d3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712b9f90_62c54bf8",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2666,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-04T16:04:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tfor (i \u003d 0; i \u003c RQUOTA_NB_COMMAND; i++) {\n \t\t(void)atomic_store_uint64_t(\u0026global_st.qt.op[i], 0);\n \t}",
+      "revId": "4f23b196dfd2124b674ce07e97b99abbc6b06d3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
