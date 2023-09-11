@@ -456,6 +456,18 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 	}
 #endif
 
+	/* Directory Services specific configuration */
+	(void) load_config_from_parse(parse_tree,
+				      &directory_services_param,
+				      &nfs_param.directory_services_param,
+				      true,
+				      err_type);
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_INIT,
+			"Error while parsing DIRECTORY_SERVICES configuration");
+		return -1;
+	}
+
 	/* NFSv4 specific configuration */
 	(void) load_config_from_parse(parse_tree,
 				      &version4_param,
