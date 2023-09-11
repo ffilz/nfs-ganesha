@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4e6036_b193e988",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-11T18:27:02Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\t\tif(state_found-\u003estate_data.share.share_access \u0026 OPEN4_SHARE_ACCESS_WRITE \u0026\u0026",
+      "revId": "8b72603fc8a7e1e9b4493c0276cc91b527f7aab8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f79d27db_7a76e48f",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-11T18:27:02Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tif(state_found-\u003estate_data.share.share_access \u0026 OPEN4_SHARE_ACCESS_WRITE \u0026\u0026",
+      "revId": "8b72603fc8a7e1e9b4493c0276cc91b527f7aab8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
