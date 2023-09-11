@@ -16,6 +16,40 @@
       "message": "Please review...\nThis patch improves the shortcomings of implementation of fds_num_write_opens logic",
       "revId": "5c80ac1b05a6818b40503e8429763d3352b334e6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f2e9586_0d59f340",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-11T18:37:33Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\t\tif(state_found-\u003estate_data.share.share_access \u0026 OPEN4_SHARE_ACCESS_WRITE \u0026\u0026",
+      "revId": "5c80ac1b05a6818b40503e8429763d3352b334e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6de91c_816e58ea",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-11T18:37:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tif(state_found-\u003estate_data.share.share_access \u0026 OPEN4_SHARE_ACCESS_WRITE \u0026\u0026",
+      "revId": "5c80ac1b05a6818b40503e8429763d3352b334e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
