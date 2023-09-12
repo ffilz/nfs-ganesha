@@ -556,7 +556,7 @@ static void nfs_Start_threads(void)
 	delayed_start();
 
 	/* Starting the thread dedicated to signal handling */
-	rc = pthread_create(&sigmgr_thrid, &attr_thr, sigmgr_thread, NULL);
+	rc = PTHREAD_create(&sigmgr_thrid, &attr_thr, sigmgr_thread, NULL);
 	if (rc != 0) {
 		LogFatal(COMPONENT_THREAD,
 			 "Could not create sigmgr_thread, error = %d (%s)",
@@ -574,7 +574,7 @@ static void nfs_Start_threads(void)
 		}
 
 		/* Starting the 9P/TCP dispatcher thread */
-		rc = pthread_create(&_9p_dispatcher_thrid, &attr_thr,
+		rc = PTHREAD_create(&_9p_dispatcher_thrid, &attr_thr,
 				    _9p_dispatcher_thread, NULL);
 		if (rc != 0) {
 			LogFatal(COMPONENT_THREAD,
@@ -590,7 +590,7 @@ static void nfs_Start_threads(void)
 	/* Starting the 9P/RDMA dispatcher thread */
 	if (nfs_param.core_param.core_options & CORE_OPTION_9P) {
 		/** @todo - this thread is never cancelled or cleaned up... */
-		rc = pthread_create(&_9p_rdma_dispatcher_thrid, &attr_thr,
+		rc = PTHREAD_create(&_9p_rdma_dispatcher_thrid, &attr_thr,
 				    _9p_rdma_dispatcher_thread, NULL);
 		if (rc != 0) {
 			LogFatal(COMPONENT_THREAD,
@@ -604,7 +604,7 @@ static void nfs_Start_threads(void)
 
 #ifdef USE_DBUS
 	/* DBUS event thread */
-	rc = pthread_create(&gsh_dbus_thrid, &attr_thr, gsh_dbus_thread, NULL);
+	rc = PTHREAD_create(&gsh_dbus_thrid, &attr_thr, gsh_dbus_thread, NULL);
 	if (rc != 0) {
 		LogFatal(COMPONENT_THREAD,
 			 "Could not create gsh_dbus_thread, error = %d (%s)",
@@ -614,7 +614,7 @@ static void nfs_Start_threads(void)
 #endif
 
 	/* Starting the admin thread */
-	rc = pthread_create(&admin_thrid, &attr_thr, admin_thread, NULL);
+	rc = PTHREAD_create(&admin_thrid, &attr_thr, admin_thread, NULL);
 	if (rc != 0) {
 		LogFatal(COMPONENT_THREAD,
 			 "Could not create admin_thread, error = %d (%s)",
