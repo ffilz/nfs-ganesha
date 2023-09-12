@@ -1125,7 +1125,7 @@ int main(int argc, char **argv)
 
 	/* Start the worker and polling threads */
 	for (i = 0; i <= NUM_WORKER; i++) {
-		rc = pthread_create(&threads[i],
+		rc = PTHREAD_create(&threads[i],
 				    NULL,
 				    worker,
 				    i == 0 ? &a_poller : &a_worker);
