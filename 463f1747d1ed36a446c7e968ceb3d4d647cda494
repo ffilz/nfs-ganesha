@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a179edae_68c6ab9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-09-25T21:45:53Z",
+      "side": 1,
+      "message": "This breaks the NFSv4 protocol. I\u0027m uncomfortable with accepting this patch without discussion on the IETF mailing list even if the default configuration was changed to not enable this.\n\nAlso, this maybe needs to be discussed in a github issue before we explore coding.\n\nHave you tried increasing the grace period and lease period and using NFSv4.1 so that a Ganesha restart isn\u0027t hung up on a long grace period? Again, discussion for IETF mailing list and/or github issue before coding.",
+      "revId": "463f1747d1ed36a446c7e968ceb3d4d647cda494",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
