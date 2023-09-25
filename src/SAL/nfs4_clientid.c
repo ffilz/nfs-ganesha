@@ -85,6 +85,13 @@ pool_t *client_id_pool;
 
 static uint64_t num_confirmed_client_ids;
 
+uint32_t num_of_curr_expired_clients;
+/**
+ * @brief Global list to store expired client IDs and it's mutex
+ */
+struct glist_head expired_client_ids_list;
+pthread_mutex_t expired_client_ids_list_lock;
+
 /**
  * @brief Return the NFSv4 status for the client id error code
  *
@@ -577,6 +584,10 @@ nfs_client_id_t *create_client_id(clientid4 clientid,
 	/* Get a reference to the client record */
 	(void)inc_client_record_ref(client_rec->cid_client_record);
 
+	/* Init the list head for expired_client */
+	glist_init(&client_rec->expired_client);
+	client_rec->marked_for_delayed_cleanup = false;
+
 	return client_rec;
 }
 
@@ -859,6 +870,59 @@ bool clientid_has_state(nfs_client_id_t *clientid)
 	return live_state;
 }
 
+/*
+ * @brief compare routine used to sort expired client items
+ *
+ * Function used to sort the expired client items according
+ * to lease renew time.  Conforms to the glist_compare
+ * function signature so it can be used with glist_insert_sorted
+ *
+ * @param a: Pointer to the glist of a expired client
+ * @param b: Pointer to the glist of another expired client
+ *           to compare the first to
+ */
+int expired_client_item_compare(struct glist_head *a,
+				struct glist_head *b)
+{
+	nfs_client_id_t *client_item_a;
+	nfs_client_id_t *client_item_b;
+
+	client_item_a = glist_entry(a,
+				    nfs_client_id_t,
+				    expired_client);
+	client_item_b = glist_entry(b,
+				    nfs_client_id_t,
+				    expired_client);
+	if (client_item_a->cid_last_renew < client_item_b->cid_last_renew)
+		return -1;
+	else
+		return 1;
+}
+
+void print_expired_client_list(void)
+{
+	/* expired_client iterator */
+	struct glist_head *expired_client_i = NULL;
+	/* Next expired_client */
+	struct glist_head *expired_client_n = NULL;
+
+	glist_for_each_safe(expired_client_i,
+			    expired_client_n, &expired_client_ids_list) {
+		char str[LOG_BUFF_LEN] = "\0";
+		struct display_buffer dspbuf = {sizeof(str), str, str};
+
+		/* The client to expire finally */
+		struct nfs_client_id_t *expired_client =
+			glist_entry(expired_client_i,
+				    struct nfs_client_id_t,
+				    expired_client);
+
+		display_client_id_rec(&dspbuf, expired_client);
+		LogFullDebug(COMPONENT_CLIENTID,
+				"Expired Client Entry %s", str);
+	}
+}
+
 /**
  * @brief Client expires, need to take care of owners
  *
@@ -868,10 +932,12 @@ bool clientid_has_state(nfs_client_id_t *clientid)
  *
  * @param[in] clientid The client id to expire
  * @param[in] make_stale  Set if client id expire is due to ip move.
+ * @param[in] force_expire  Expire up the client id by force.
  *
  * @return true if the clientid is successfully expired.
  */
-bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale)
+bool nfs_client_id_expire(nfs_client_id_t *clientid,
+			  bool make_stale, bool force_expire)
 {
 	int rc, held;
 	struct gsh_buffdesc buffkey;
@@ -895,6 +961,32 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale)
 		}
 
 		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
+		release_op_context();
+		return false;
+	} else if (!make_stale && !force_expire &&
+		   nfs_param.nfsv4_param.expired_client_threshold &&
+		   (atomic_inc_uint32_t(&num_of_curr_expired_clients) <=
+			nfs_param.nfsv4_param.expired_client_threshold)) {
+		/* Take a ref for clientid and add to list */
+		inc_client_id_ref(clientid);
+		clientid->marked_for_delayed_cleanup = true;
+		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
+
+		if (isFullDebug(COMPONENT_CLIENTID)) {
+			display_client_id_rec(&dspbuf, clientid);
+			LogFullDebug(COMPONENT_CLIENTID,
+			    "Threshold(%u > %u) not reached, Adding Expired Client{%s} for delayed cleanup.",
+			    nfs_param.nfsv4_param.expired_client_threshold,
+			    atomic_fetch_uint32_t(&num_of_curr_expired_clients),
+			    str);
+		}
+		PTHREAD_MUTEX_lock(&expired_client_ids_list_lock);
+		/* Sort entries based on cid_last_renew */
+		glist_insert_sorted(&expired_client_ids_list,
+				    &clientid->expired_client,
+				    &expired_client_item_compare);
+		PTHREAD_MUTEX_unlock(&expired_client_ids_list_lock);
+
 		release_op_context();
 		return false;
 	}
@@ -1142,6 +1234,111 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale)
 
 	release_op_context();
 	return true;
+}
+
+/**
+ * @brief Expire the expired clients added to the client list
+ *
+ * Once the threshold of number of expired clients reaches,
+ * this API is invoked to actually start cleaning them up.
+ *
+ * @return the count of clientids expired.
+ */
+int reap_expired_client_list(void)
+{
+	/* expired_client iterator */
+	struct glist_head *expired_client_i = NULL;
+	/* Next expired_client */
+	struct glist_head *expired_client_n = NULL;
+	nfs_client_record_t *client_rec;
+	int count = 0;
+
+	/* If feature disabled or threshold not reached */
+	if (!(nfs_param.nfsv4_param.expired_client_threshold &&
+		(atomic_fetch_uint32_t(&num_of_curr_expired_clients) >=
+		nfs_param.nfsv4_param.expired_client_threshold))) {
+		return count;
+	}
+	PTHREAD_MUTEX_lock(&expired_client_ids_list_lock);
+	if (isDebug(COMPONENT_CLIENTID))
+		print_expired_client_list();
+
+	/* Once the limit reached, clean everything */
+	glist_for_each_safe(expired_client_i,
+			    expired_client_n, &expired_client_ids_list) {
+		char str[LOG_BUFF_LEN] = "\0";
+		struct display_buffer dspbuf = {sizeof(str), str, str};
+		bool str_valid = false;
+
+		/* The client to expire finally */
+		struct nfs_client_id_t *expired_client =
+			glist_entry(expired_client_i,
+				    struct nfs_client_id_t,
+				    expired_client);
+
+		PTHREAD_MUTEX_lock(&expired_client->cid_mutex);
+		/* Update lease and recheck once again before cleaning up */
+		update_lease_v40(expired_client, str, &str_valid, &dspbuf);
+
+		if (valid_lease(expired_client)) {
+			PTHREAD_MUTEX_unlock(&expired_client->cid_mutex);
+			glist_del(&expired_client->expired_client);
+			expired_client->marked_for_delayed_cleanup = false;
+			/* Drop ref of the expired_client as it's gone valid */
+			dec_client_id_ref(expired_client);
+			atomic_dec_uint32_t(&num_of_curr_expired_clients);
+			continue;
+		}
+
+		if (isDebug(COMPONENT_CLIENTID)) {
+			display_client_id_rec(&dspbuf, expired_client);
+			LogFullDebug(COMPONENT_CLIENTID,
+				     "Expired Client is %s", str);
+			str_valid = true;
+		}
+
+		/* Get the client record */
+		client_rec = expired_client->cid_client_record;
+
+		/* if record is STALE, the linkage to client_record is
+		 * removed already. Acquire a ref on client record
+		 * before we drop the mutex on clientid
+		 */
+		if (client_rec != NULL)
+			inc_client_record_ref(client_rec);
+
+		PTHREAD_MUTEX_unlock(&expired_client->cid_mutex);
+
+		if (client_rec != NULL)
+			PTHREAD_MUTEX_lock(&client_rec->cr_mutex);
+
+		nfs_client_id_expire(expired_client, false, true);
+
+		if (client_rec != NULL) {
+			PTHREAD_MUTEX_unlock(&client_rec->cr_mutex);
+			dec_client_record_ref(client_rec);
+		}
+
+		if (isFullDebug(COMPONENT_CLIENTID)) {
+			if (!str_valid)
+				display_printf(&dspbuf, "clientid %p",
+					       expired_client);
+
+			LogFullDebug(COMPONENT_CLIENTID,
+				     "Delayed reaper, expired {%s}", str);
+		}
+
+		glist_del(&expired_client->expired_client);
+		expired_client->marked_for_delayed_cleanup = false;
+
+		/* Drop ref of the expired_client taken before adding to list */
+		dec_client_id_ref(expired_client);
+
+		atomic_dec_uint32_t(&num_of_curr_expired_clients);
+		count++;
+	}
+	PTHREAD_MUTEX_unlock(&expired_client_ids_list_lock);
+	return count;
 }
 
 /**
@@ -1789,6 +1986,9 @@ int nfs_Init_client_id(void)
 
 	client_id_pool =
 	    pool_basic_init("NFS4 Client ID Pool", sizeof(nfs_client_id_t));
+
+	PTHREAD_MUTEX_init(&expired_client_ids_list_lock, NULL);
+	glist_init(&expired_client_ids_list);
 
 	return CLIENT_ID_SUCCESS;
 }
