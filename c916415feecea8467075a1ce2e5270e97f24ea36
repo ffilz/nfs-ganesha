@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db781eb_dad7654e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Sure. Updated the commit.\n\nThis merge request updates Ganesha reaper logic to avoid\nexpiring client post lease period, unless the number of\nunresponsive clients go over a limit. Ganesha keeps track\nof all expired clients in LRU fashion and picks the oldest\nexpired client when the number of clients exceeds the max\nlimit. This allows Ganesha to retain the open \u0026 lock state\nand there by helping certain client workloads like MLPerf\nto run smoothly, even after a network partition.\n\nThis implements behaviour in Ganesha similar to\nthat done in the KNFS, i.e. NFSv4 \"Courteous Server\" as part of\nLinux 5.19 NFSD.\nhttps://www.phoronix.com/news/Linux-5.19-NFSD-Courteous\n\nAlso config and man pages updated...",
+      "parentUuid": "0bbf5ffc_5c248769",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5107ca02_4512e338",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-25T08:38:37Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t/* Before going to expire the current client in RBT node,",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30424b31_3a34645e",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5107ca02_4512e338",
       "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06cfce2b_a34db579",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb1e927e_8f1e151d",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "498d1e8a_8bc3f4bc",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-09-25T08:38:37Z",
       "side": 1,
       "message": "ERROR: code indent should use tabs where possible\n+^I^I^I        struct glist_head *b)$",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b8dfe03_877c9e81",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "498d1e8a_8bc3f4bc",
       "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "567c4828_200bb5af",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eb5eb7a_205ce35f",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bde48127_74560896",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-09-25T08:38:37Z",
       "side": 1,
       "message": "ERROR: Bad function definition - void print_expired_client_list() should probably be void print_expired_client_list(void)\n+void print_expired_client_list()",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08adc42_859862be",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde48127_74560896",
       "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b58736_b8bfac79",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51eaafcb_3aa01000",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02bed6c6_ad6a1394",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-09-25T08:38:37Z",
       "side": 1,
       "message": "ERROR: Bad function definition - int reap_expired_client_list() should probably be int reap_expired_client_list(void)\n+int reap_expired_client_list()",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05eb41a5_18edd5c2",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02bed6c6_ad6a1394",
       "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08fa801d_2bd3a50c",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f602bfcb_163fe2d4",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "436fb1f0_548b056f",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-09-25T08:38:37Z",
       "side": 1,
       "message": "ERROR: Bad function definition - int reap_expired_client_list() should probably be int reap_expired_client_list(void)\n+int reap_expired_client_list();",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d59b5ee_36132a9b",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-09-25T15:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "436fb1f0_548b056f",
       "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
