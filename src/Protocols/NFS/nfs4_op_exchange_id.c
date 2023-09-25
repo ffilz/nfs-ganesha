@@ -250,7 +250,7 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 				 *
 				 * Expire clientid and release our reference.
 				 */
-				nfs_client_id_expire(conf, false);
+				nfs_client_id_expire(conf, false, true);
 				dec_client_id_ref(conf);
 				conf = NULL;
 			} else {

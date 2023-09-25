@@ -591,6 +591,10 @@ typedef struct nfs_version4_parameter {
 	bool enforce_utf8_vld;
 	/** Max number of Client IDs allowed on the system */
 	uint32_t max_client_ids;
+	/** Threshold for number of expired clients to reach,
+	 *  in order to start with the actual expiration
+	 */
+	uint32_t expired_client_threshold;
 } nfs_version4_parameter_t;
 
 /** @} */
