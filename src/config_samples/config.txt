@@ -260,6 +260,8 @@ NFSV4 {}
 
 	Server_Owner(string, default "")
 
+	Expired_Client_Threshold(uint32, range 0 to UINT32_MAX, default 16)
+
 EXPORT_DEFAULTS {}
 ------------------
 
