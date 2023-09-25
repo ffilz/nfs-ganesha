@@ -290,7 +290,10 @@ clientid_status_t nfs_client_id_confirm(nfs_client_id_t *clientid,
 
 bool clientid_has_state(nfs_client_id_t *clientid);
 
-bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale);
+bool nfs_client_id_expire(nfs_client_id_t *clientid,
+			  bool make_stale, bool force_expire);
+
+int reap_expired_client_list(void);
 
 #define DISPLAY_CLIENTID_SIZE 36
 int display_clientid(struct display_buffer *dspbuf, clientid4 clientid);
