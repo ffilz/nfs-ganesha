@@ -186,7 +186,7 @@ bool reserve_lease_or_expire(nfs_client_id_t *clientid, bool update)
 		if (client_rec != NULL)
 			PTHREAD_MUTEX_lock(&client_rec->cr_mutex);
 
-		nfs_client_id_expire(clientid, false);
+		nfs_client_id_expire(clientid, false, true);
 
 		if (client_rec != NULL) {
 			PTHREAD_MUTEX_unlock(&client_rec->cr_mutex);

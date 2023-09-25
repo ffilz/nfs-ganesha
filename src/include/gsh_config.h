@@ -591,6 +591,14 @@ typedef struct nfs_version4_parameter {
 	bool enforce_utf8_vld;
 	/** Max number of Client IDs allowed on the system */
 	uint32_t max_client_ids;
+	/** Threshold for number of expired clients to reach,
+	 *  in order to start with the actual expiration
+	 */
+	uint32_t expired_client_threshold;
+	/** Number of open files that an unresponsive client could have,
+	 * beyond which Ganesha need not keep them in memory or expire it.
+	 */
+	uint32_t max_open_files_for_expired_client;
 } nfs_version4_parameter_t;
 
 /** @} */
