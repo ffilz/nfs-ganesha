@@ -651,7 +651,7 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		res_LOCK4->status = NFS4ERR_BAD_STATEID;
 		goto out2;
 	}
-
+RETRY_ACQUIRE_LOCK:
 	/* Now we have a lock owner and a stateid.  Go ahead and push
 	 * lock into SAL (and FSAL). */
 	state_status = state_lock(obj,
@@ -668,6 +668,15 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 			 state_err_str(state_status));
 
 		if (state_status == STATE_LOCK_CONFLICT) {
+			if (conflict_owner) {
+				nfs_client_id_t *client_id =
+				conflict_owner->so_owner.so_nfs4_owner.so_clientrec;
+
+				if (client_id->marked_for_delayed_cleanup) {
+					reap_expired_client_list(client_id);
+					goto RETRY_ACQUIRE_LOCK;
+				}
+			}
 			/* A conflicting lock from a different lock_owner,
 			 * returns NFS4ERR_DENIED, but check that the
 			 * response will fit, if not, return response error.
