@@ -442,7 +442,7 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 		 * NOTE: found MUST NOT BE conf (otherwise clientid would have
 		 *       matched).
 		 */
-		nfs_client_id_expire(conf, false);
+		nfs_client_id_expire(conf, false, true);
 		dec_client_id_ref(conf);
 		conf = NULL;
 	}

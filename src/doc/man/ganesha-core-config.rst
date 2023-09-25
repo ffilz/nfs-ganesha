@@ -428,6 +428,15 @@ Server_Owner(string, default "")
     Connections to servers with the same server owner can be shared by
     the client. This is advertised to the client on EXCHANGE_ID.
 
+Expired_Client_Threshold(uint32, range 0 to UINT32_MAX, default 16)
+    Specify the threshold of number of expired clients to be kept in memory
+    post lease period, unless the number of unresponsive clients go over this
+    limit. Ganesha keeps track of all expired clients in LRU fashion and picks
+    the oldest expired client when the number of clients exceeds the max limit.
+    This allows Ganesha to retain the open & lock state and there by helping
+    certain client workloads like MLPerf to run smoothly,
+    even after a network partition.
+
 RADOS_KV {}
 --------------------------------------------------------------------------------
 
