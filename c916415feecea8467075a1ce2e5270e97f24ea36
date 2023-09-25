@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5107ca02_4512e338",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t/* Before going to expire the current client in RBT node,",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1e927e_8f1e151d",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t     \"Reaper, Parked for later \"\n+\t\t\t\t\t     \"cleanup {%s}\",",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498d1e8a_8bc3f4bc",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+^I^I^I        struct glist_head *b)$",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb5eb7a_205ce35f",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (client_item_a-\u003ecid_last_renew \u003c client_item_b-\u003ecid_last_renew) {\n[...]\n+\t} else {\n[...]",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde48127_74560896",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void print_expired_client_list() should probably be void print_expired_client_list(void)\n+void print_expired_client_list()",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51eaafcb_3aa01000",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t    \"Threshold(%u \u003e %u) not reached, \"\n+\t\t\t    \"Adding Expired Client{%s} for delayed cleanup.\",",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02bed6c6_ad6a1394",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - int reap_expired_client_list() should probably be int reap_expired_client_list(void)\n+int reap_expired_client_list()",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f602bfcb_163fe2d4",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (isDebug(COMPONENT_CLIENTID)) {\n+\t\tprint_expired_client_list();\n+\t}",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "436fb1f0_548b056f",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-25T08:38:37Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - int reap_expired_client_list() should probably be int reap_expired_client_list(void)\n+int reap_expired_client_list();",
+      "revId": "c916415feecea8467075a1ce2e5270e97f24ea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
