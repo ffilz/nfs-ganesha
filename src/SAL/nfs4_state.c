@@ -1145,4 +1145,41 @@ void dump_all_states(void)
 }
 #endif
 
+/**
+ * @brief Check and Expire clients upon conflicts
+ *
+ * @param[in] ostate File state to wipe off the expired clients
+ *
+ * @retval true if all conflicting clients were found and cleaned
+ *
+ */
+bool check_and_remove_conflicting_client(struct state_hdl *file_state_hdl)
+{
+	struct glist_head *glist, *glistn;
+	bool isFoundAndCleaned = false;
+
+	if (glist_empty(&file_state_hdl->file.list_of_states))
+		return isFoundAndCleaned;
+
+	glist_for_each_safe(glist, glistn,
+		&file_state_hdl->file.list_of_states) {
+		state_t *state = glist_entry(glist, state_t, state_list);
+		state_owner_t *owner = state->state_owner;
+
+		if (owner == NULL) {
+			/* Skip states that have gone stale. */
+			continue;
+		}
+
+		nfs_client_id_t *client_id =
+			owner->so_owner.so_nfs4_owner.so_clientrec;
+		if (client_id->marked_for_delayed_cleanup) {
+			reap_expired_client_list(client_id);
+			isFoundAndCleaned = true;
+			/* Do not break, continue with other shared accessors */
+		}
+	}
+	return isFoundAndCleaned;
+}
+
 /** @} */
