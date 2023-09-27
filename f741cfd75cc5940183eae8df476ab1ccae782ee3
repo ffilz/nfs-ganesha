@@ -16,6 +16,159 @@
       "message": "please check this patch :-)",
       "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89a4e687_901e3b1a",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\twhile ((bhardlimitscaled \u003e UINT32_MAX) || (bsoftlimitscaled \u003e UINT32_MAX) || (curblocksscaled \u003e UINT32_MAX))",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72a8a4cd_7d5af849",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\twhile ((bhardlimitscaled \u003e UINT32_MAX) || (bsoftlimitscaled \u003e UINT32_MAX) || (curblocksscaled \u003e UINT32_MAX))\n+\t{",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba87df9_1c0ac8b0",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// check if we hit the limit of scaling, then limit to max",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49deb44a_5cf9713d",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\t\tif ((bsizescaled \u003c\u003c 1) \u003e UINT32_MAX)\n+\t\t{",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be85d8e_a46ab2fa",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\t\telse\n+\t\t{",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e4cbf97_5dfbc86f",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: else should follow close brace \u0027}\u0027\n+\t\t}\n+\t\telse",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1072ac7f_73ccfb6d",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// we can still scale",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "189b38f7_d4b8dcfe",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// items that have changed due to scaling",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7deba5_b2137fd0",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-27T09:06:55Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// items carried over unchanged",
+      "revId": "f741cfd75cc5940183eae8df476ab1ccae782ee3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
