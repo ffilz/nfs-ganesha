@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6abc793c_db8834d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-09-27T14:56:51Z",
+      "side": 1,
+      "message": "Looks good other than minor style issue.",
+      "revId": "b26d19df2571d1c18e2273329b50d154e6b18ae6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf8794f_21210db5",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-09-27T14:56:51Z",
+      "side": 1,
+      "message": "Please move these definitions to the top of the function, that is our coding style.",
+      "revId": "b26d19df2571d1c18e2273329b50d154e6b18ae6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
