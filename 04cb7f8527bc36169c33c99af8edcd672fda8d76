@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "979c3cc9_de5c9f95",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-28T15:22:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tconflict_owner-\u003eso_owner.so_nfs4_owner.so_clientrec;",
+      "revId": "04cb7f8527bc36169c33c99af8edcd672fda8d76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1369da1e_fe77b547",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-28T15:22:57Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (client_item_a-\u003ecid_last_renew \u003c\u003d client_item_b-\u003ecid_last_renew) {\n[...]\n+\t} else {\n[...]",
+      "revId": "04cb7f8527bc36169c33c99af8edcd672fda8d76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a6696e8_19cd2bed",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-28T15:22:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tstr, nfs_param.nfsv4_param.expired_client_threshold,",
+      "revId": "04cb7f8527bc36169c33c99af8edcd672fda8d76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25bbb483_612929c1",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-28T15:22:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tatomic_fetch_uint32_t(\u0026num_of_curr_expired_clients));",
+      "revId": "04cb7f8527bc36169c33c99af8edcd672fda8d76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2449b90b_82d83386",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-28T15:22:57Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^IIf passed NULL, judge and clean all expired$",
+      "revId": "04cb7f8527bc36169c33c99af8edcd672fda8d76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0b55dd3_ff1270eb",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-09-28T15:22:57Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^Iones in the list.$",
+      "revId": "04cb7f8527bc36169c33c99af8edcd672fda8d76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
