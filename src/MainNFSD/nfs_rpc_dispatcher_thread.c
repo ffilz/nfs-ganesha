@@ -898,6 +898,7 @@ int bind_sockets_vsock(void)
 #endif /* RPC_VSOCK */
 
 void Bind_sockets(void)
+	__attribute__((no_sanitize("alignment")))
 {
 	int rc = 0;
 
