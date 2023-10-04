@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daefca42_460689f8",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-10-04T09:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4276c445_bf308d02",
+      "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5933e4bf_2437bf94",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-28T10:30:03Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (client_item_a-\u003ecid_last_renew \u003c\u003d client_item_b-\u003ecid_last_renew) {\n[...]\n+\t} else {\n[...]",
+      "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b7072ae_7bb01d3b",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-10-04T09:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5933e4bf_2437bf94",
       "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df76ea1_69593db3",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-10-04T09:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1b26ede_d060d203",
+      "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "207562d2_1d2a96b2",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-09-28T10:30:03Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t\t\tatomic_fetch_uint32_t(\u0026num_of_curr_expired_clients));",
+      "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4f641e_1e58d4bd",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-10-04T09:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "207562d2_1d2a96b2",
       "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "964e5686_299521be",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-10-04T09:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16653a57_1e409c8f",
+      "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8390cb08_b8be3886",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-09-28T10:30:03Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^Iones in the list.$",
+      "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc7713a1_6a46e1ef",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-10-04T09:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8390cb08_b8be3886",
       "revId": "ac4d0a0795fa871951266da93a6993629e16f233",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
