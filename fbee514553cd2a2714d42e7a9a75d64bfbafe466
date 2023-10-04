@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77a5321_838b2917",
+        "filename": "src/include/nfs_proto_tools.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-04T18:52:53Z",
+      "side": 1,
+      "message": "Could you use MAX_UINT32 here instead of ~0?",
+      "revId": "fbee514553cd2a2714d42e7a9a75d64bfbafe466",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4170d1a1_7ab6a0e1",
+        "filename": "src/include/nfs_proto_tools.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-04T18:52:53Z",
+      "side": 1,
+      "message": "I wonder if something like\n\n#define UINT32_ONE ((uint32_t) 1)\n\nwould make the code more readable?\n\nor even a macro\n\n#define BITSHIFT_ONE(bits) ((uint32_t) 1 \u003c\u003c bits)",
+      "revId": "fbee514553cd2a2714d42e7a9a75d64bfbafe466",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
