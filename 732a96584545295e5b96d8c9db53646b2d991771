@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2a30dd2_74f95d72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-10-04T15:43:15Z",
+      "side": 1,
+      "message": "As discussed here and also in the github issue #1007...\n\nHave implemented the courteous server implementation by keeping the \nexpired client in memory and avoids expiring clients post lease period,\nunless the number of unresponsive clients\ngo over a limit. Ganesha keeps track of all expired clients in LRU\nfashion and picks the oldest expired client when the number of\nclients exceeds the max limit. This allows Ganesha to retain the\nopen and lock state and thereby helping certain client workloads\nlike MLPerf to run smoothly, even after a network partition or\nclient bugs...\n\nAlso with this courteous server implementation, a client would be \nallowed acquiring conflicting state (locks and opens) while an \nunexpired (but hasn\u0027t renewed in time) client holds state...\n\nHave verified scenarios of clients expiring after reaching threshold\nand also conflicting access...\n\nPlease help to review the changes...",
+      "revId": "732a96584545295e5b96d8c9db53646b2d991771",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
