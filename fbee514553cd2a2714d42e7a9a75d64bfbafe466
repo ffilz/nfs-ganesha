@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47bd0613_a5918b8d",
+        "filename": "src/include/nfs_proto_tools.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2023-10-05T02:09:37Z",
+      "side": 1,
+      "message": "Only recently I got back to doing some C coding. I have been doing C++ for a long time. I was surprised I did not see MAX_UINT32 here, but then again I don\u0027t see MAX_UINT32 anywhere in nfs-ganesha logic, and I think I saw somewhere MAX_UINT32 is deprecated?\n\nThere are some subtleties with widening and narrowing conversions, but I have for the most part forgotten all of that. What I have here is the consensus from looking at this together with a couple of co-workers here, but of course I am open to any and all suggestions.",
+      "parentUuid": "d77a5321_838b2917",
+      "revId": "fbee514553cd2a2714d42e7a9a75d64bfbafe466",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4170d1a1_7ab6a0e1",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-04T18:52:53Z",
       "side": 1,
       "message": "I wonder if something like\n\n#define UINT32_ONE ((uint32_t) 1)\n\nwould make the code more readable?\n\nor even a macro\n\n#define BITSHIFT_ONE(bits) ((uint32_t) 1 \u003c\u003c bits)",
+      "revId": "fbee514553cd2a2714d42e7a9a75d64bfbafe466",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31904218_5496a5bb",
+        "filename": "src/include/nfs_proto_tools.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2023-10-05T02:09:37Z",
+      "side": 1,
+      "message": "I think more macros would make this even more confusing. Maybe a local constant is better?",
+      "parentUuid": "4170d1a1_7ab6a0e1",
       "revId": "fbee514553cd2a2714d42e7a9a75d64bfbafe466",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
