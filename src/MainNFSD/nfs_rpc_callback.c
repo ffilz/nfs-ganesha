@@ -717,9 +717,14 @@ int nfs_rpc_create_chan_v41(SVCXPRT *xprt, nfs41_session_t *session,
 	PTHREAD_MUTEX_lock(&chan->chan_mtx);
 
 	if (chan->clnt) {
-		/* Something better later. */
-		code = EEXIST;
-		goto out;
+		if (clnt_vc_get_client_xprt(chan->clnt) == xprt) {
+			/* The xprt is already associated with the channel */
+			goto out;
+		}
+		/* The xprt is not associated with the existing channel, so we first
+		 * destroy it and then re-create it with the given xprt.
+		 */
+		_nfs_rpc_destroy_chan(chan);
 	}
 
 	chan->type = RPC_CHAN_V41;

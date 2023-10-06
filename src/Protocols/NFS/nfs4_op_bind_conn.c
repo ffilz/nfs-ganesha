@@ -35,6 +35,59 @@
 #include "nfs_proto_functions.h"
 
 /**
+ * @brief Bind connection to the session's backchannel
+ */
+static nfsstat4 bind_conn_to_session_backchannel(SVCXPRT *rq_xprt,
+	nfs41_session_t *session)
+{
+	sockaddr_t addr;
+	char session_str[LOG_BUFF_LEN] = "\0";
+	struct display_buffer db = {sizeof(session_str), session_str, session_str};
+	char xprt_addr_str[LOG_BUFF_LEN / 2] = "\0";
+	struct display_buffer db1 =
+		{sizeof(xprt_addr_str), xprt_addr_str, xprt_addr_str};
+
+	/* Copy the address coming over the wire for logging. */
+	copy_xprt_addr(&addr, rq_xprt);
+	display_sockaddr(&db1, &addr);
+	display_session(&db, session);
+
+	LogInfo(COMPONENT_SESSIONS, "Set up session: %s backchannel and bind it"
+		" to current xprt FD: %d socket-address: %s", session_str,
+		rq_xprt->xp_fd, xprt_addr_str);
+
+	/* For state-protection other than SP4_NONE, there needs to be further
+	 * validation (RFC 5661 section-2.10.8.3) before backchannel setup.
+	 * Since Ganesha supports only SP4_NONE as of now, we skip processing of
+	 * other mechanisms.
+	 */
+	if (session->clientid_record->cid_state_protect_how == SP4_NONE) {
+		int rc;
+
+		LogInfo(COMPONENT_SESSIONS,
+			"Creating backchannel for session: %s", session_str);
+
+		/* Create backchannel */
+		rc = nfs_rpc_create_chan_v41(rq_xprt, session,
+			session->cb_sec_parms.sec_parms_len,
+			session->cb_sec_parms.sec_parms_val);
+
+		if (rc == 0) {
+			LogInfo(COMPONENT_SESSIONS,
+				"Successfully created backchannel for session: %s", session_str);
+			return NFS4_OK;
+		}
+		if (rc == EINVAL || rc == EPERM) {
+			return NFS4ERR_INVAL;
+		}
+		return NFS4ERR_SERVERFAULT;
+	}
+	LogFatal(COMPONENT_SESSIONS, "Only SP4_NONE state protection is supported."
+		" Code flow should not reach here");
+	return NFS4ERR_SERVERFAULT;
+}
+
+/**
  * @brief the NFS4_OP_BIND_CONN_TO_SESSION operation
  *
  * @param[in]     op   nfs4_op arguments
@@ -57,6 +110,7 @@ enum nfs_req_result nfs4_op_bind_conn(struct nfs_argop4 *op,
 	BIND_CONN_TO_SESSION4resok * const resok_BIND_CONN_TO_SESSION4 =
 	    &res_BIND_CONN_TO_SESSION4->BIND_CONN_TO_SESSION4res_u.bctsr_resok4;
 	nfs41_session_t *session;
+	channel_dir_from_server4 server_channel_dir;
 
 	resp->resop = NFS4_OP_BIND_CONN_TO_SESSION;
 	res_BIND_CONN_TO_SESSION4->bctsr_status = NFS4_OK;
@@ -110,19 +164,36 @@ enum nfs_req_result nfs4_op_bind_conn(struct nfs_argop4 *op,
 
 	switch (arg_BIND_CONN_TO_SESSION4->bctsa_dir) {
 	case CDFC4_FORE:
-		resok_BIND_CONN_TO_SESSION4->bctsr_dir = CDFS4_FORE;
+		server_channel_dir = CDFS4_FORE;
 		break;
 	case CDFC4_BACK:
-		resok_BIND_CONN_TO_SESSION4->bctsr_dir = CDFS4_BACK;
-		break;
 	case CDFC4_FORE_OR_BOTH:
-		resok_BIND_CONN_TO_SESSION4->bctsr_dir = CDFS4_BOTH;
-		break;
 	case CDFC4_BACK_OR_BOTH:
-		resok_BIND_CONN_TO_SESSION4->bctsr_dir = CDFS4_BOTH;
+		nfsstat4 bindToBackchannel =
+			bind_conn_to_session_backchannel(data->req->rq_xprt, session);
+		if (bindToBackchannel != NFS4_OK) {
+			if (arg_BIND_CONN_TO_SESSION4->bctsa_dir == CDFC4_FORE_OR_BOTH) {
+				/* Since it is not mandatory to bind connection to backchannel in
+				 * this scenario, we return only successful forechannel creation.
+				 */
+				server_channel_dir = CDFS4_FORE;
+				break;
+			}
+			LogWarn(COMPONENT_SESSIONS,
+				"Mandatory backchannel creation failed. Return error");
+			res_BIND_CONN_TO_SESSION4->bctsr_status = bindToBackchannel;
+			return NFS_REQ_ERROR;
+		}
+		if (arg_BIND_CONN_TO_SESSION4->bctsa_dir == CDFC4_BACK_OR_BOTH ||
+			arg_BIND_CONN_TO_SESSION4->bctsa_dir == CDFC4_FORE_OR_BOTH) {
+			server_channel_dir = CDFS4_BOTH;
+			break;
+		}
+		server_channel_dir = CDFS4_BACK;
 		break;
 	}
 
+	resok_BIND_CONN_TO_SESSION4->bctsr_dir = server_channel_dir;
 	resok_BIND_CONN_TO_SESSION4->bctsr_use_conn_in_rdma_mode =
 			arg_BIND_CONN_TO_SESSION4->bctsa_use_conn_in_rdma_mode;
 
