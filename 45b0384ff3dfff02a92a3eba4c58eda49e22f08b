@@ -16,6 +16,40 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis \"fixes\" https://github.com/nfs-ganesha/nfs-ganesha/issues/1009, but a better fix would be to get the correct alignment, rather than suppressing the check in these two functions.",
       "revId": "45b0384ff3dfff02a92a3eba4c58eda49e22f08b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5773c79_d43e753b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-06T22:09:23Z",
+      "side": 1,
+      "message": "Made a suggestion of a change that might solve the problem without adding the directives.",
+      "revId": "45b0384ff3dfff02a92a3eba4c58eda49e22f08b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a691bc_5fb17bd7",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-06T22:09:23Z",
+      "side": 1,
+      "message": "Could you try moving this up before port?",
+      "revId": "45b0384ff3dfff02a92a3eba4c58eda49e22f08b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
