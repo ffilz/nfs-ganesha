@@ -1511,7 +1511,6 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_PNFS] = NIV_EVENT,
 	[COMPONENT_RW_LOCK] = NIV_EVENT,
 	[COMPONENT_NLM] = NIV_EVENT,
-	[COMPONENT_RPC] = NIV_EVENT,
 	[COMPONENT_TIRPC] = NIV_EVENT,
 	[COMPONENT_NFS_CB] = NIV_EVENT,
 	[COMPONENT_THREAD] = NIV_EVENT,
@@ -1522,6 +1521,7 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_FSAL_UP] = NIV_EVENT,
 	[COMPONENT_DBUS] = NIV_EVENT,
 	[COMPONENT_NFS_MSK] = NIV_EVENT,
+	[COMPONENT_XPRT] = NIV_EVENT,
 };
 
 /* Active set of log levels */
@@ -1615,9 +1615,6 @@ struct log_component_info LogComponents[COMPONENT_COUNT] = {
 	[COMPONENT_NLM] = {
 		.comp_name = "COMPONENT_NLM",
 		.comp_str = "NLM",},
-	[COMPONENT_RPC] = {
-		.comp_name = "COMPONENT_RPC",
-		.comp_str = "RPC",},
 	[COMPONENT_TIRPC] = {
 		.comp_name = "COMPONENT_TIRPC",
 		.comp_str = "TIRPC",},
@@ -1648,6 +1645,9 @@ struct log_component_info LogComponents[COMPONENT_COUNT] = {
 	[COMPONENT_NFS_MSK] = {
 		.comp_name = "COMPONENT_NFS_MSK",
 		.comp_str = "NFS_MSK",},
+	[COMPONENT_XPRT] = {
+		.comp_name = "COMPONENT_XPRT",
+		.comp_str = "XPRT",},
 };
 
 void DisplayLogComponentLevel(log_components_t component, const char *file,
@@ -2126,8 +2126,6 @@ static struct config_item component_levels[] = {
 			 COMPONENT_RW_LOCK, int),
 	CONF_INDEX_TOKEN("NLM", NB_LOG_LEVEL, log_levels,
 			 COMPONENT_NLM, int),
-	CONF_INDEX_TOKEN("RPC", NB_LOG_LEVEL, log_levels,
-			 COMPONENT_RPC, int),
 	CONF_INDEX_TOKEN("TIRPC", NB_LOG_LEVEL, log_levels,
 			 COMPONENT_TIRPC, int),
 	CONF_INDEX_TOKEN("NFS_CB", NB_LOG_LEVEL, log_levels,
@@ -2152,6 +2150,8 @@ static struct config_item component_levels[] = {
 			 COMPONENT_DBUS, int),
 	CONF_INDEX_TOKEN("NFS_MSK", NB_LOG_LEVEL, log_levels,
 			 COMPONENT_NFS_MSK, int),
+	CONF_INDEX_TOKEN("XPRT", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_XPRT, int),
 	CONFIG_EOL
 };
 
