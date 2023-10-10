@@ -39,18 +39,34 @@
 static bool setup_up_vector(struct gpfs_filesystem *gpfs_fs)
 {
 	struct gpfs_filesystem_export_map *map;
+	struct glist_head *glist, *glistn;
+	struct gsh_export *export;
+	int64_t refcount;
 
-	map = glist_first_entry(&gpfs_fs->exports,
-				struct gpfs_filesystem_export_map, on_exports);
-	if (!map)
-		return false;
+	glist_for_each_safe(glist, glistn, &gpfs_fs->exports) {
+		map = glist_entry(glist, struct gpfs_filesystem_export_map,
+					  on_exports);
+		if (map) {
+			export = map->exp->export.up_ops->up_gsh_export;
+			refcount = atomic_fetch_int64_t(&export->refcnt);
 
-	gpfs_fs->up_vector = (struct fsal_up_vector *)map->exp->export.up_ops;
+			LogFullDebug(COMPONENT_FSAL_UP,
+					"export path is %s,refcnt=%ld",
+					export->fullpath->gr_val, refcount);
 
-	/* wait for upcall readiness */
-	up_ready_wait(gpfs_fs->up_vector);
-
-	return true;
+			if (refcount) {
+				gpfs_fs->up_vector =
+			(struct fsal_up_vector *)map->exp->export.up_ops;
+				/* wait for upcall readiness */
+				up_ready_wait(gpfs_fs->up_vector);
+				return true;
+			} else {
+				LogFullDebug(COMPONENT_FSAL_UP,
+				"refcnt is null, retrieving next map");
+			}
+		}
+	}
+	return false;
 }
 
 /**
