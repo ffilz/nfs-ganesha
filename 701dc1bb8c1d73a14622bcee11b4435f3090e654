@@ -16,6 +16,23 @@
       "message": "I haven\u0027t reviewed for real, but I like what I see here.  Lot of flexibility.",
       "revId": "701dc1bb8c1d73a14622bcee11b4435f3090e654",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f442b2_3865046f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019989
+      },
+      "writtenOn": "2023-10-10T14:50:00Z",
+      "side": 1,
+      "message": "This looks good.\nWhen I tried to add a lot of export, such as two thousands, I found two problems:\n1. After startup, too many ceph clients can cause ganesha to take up a lot of memory, requiring more than 10m of memory per export. If it can be shared in this way, it seems to solve the problem.\n2. When ganesha starts, if there are so many export, then the startup time will be long, could be as long as a few minutes. Because each export is added serially and ceph need time to reclaim, I wonder if this can optimize this problem?",
+      "revId": "701dc1bb8c1d73a14622bcee11b4435f3090e654",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
