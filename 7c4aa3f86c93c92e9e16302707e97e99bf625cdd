@@ -16,6 +16,24 @@
       "message": "I think I understand this, just want to clarify. So in fact, for each upcall, GPFS was setting the up_vector based originally on the first export. So the change is to loop through the exports looking for a viable one? And then if none are viable, it would ignore that upcall?\n\nCould you also add a bit more detail of what the problem was into the commit message? I just want to make sure I understand that this will fix the problem because this fix surprised me a bit.",
       "revId": "7c4aa3f86c93c92e9e16302707e97e99bf625cdd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7f33ff_ad485f5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2023-10-11T13:04:38Z",
+      "side": 1,
+      "message": "Yes, change is loop through the exports to find valid export and use it to setup up vector. If no valid export is available ( that means all exports were removed for this fs) and we exit thread. On last export removal itself we will try to stop up call thread",
+      "parentUuid": "484f1501_06eaee89",
+      "revId": "7c4aa3f86c93c92e9e16302707e97e99bf625cdd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
