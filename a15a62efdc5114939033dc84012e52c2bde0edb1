@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dadf0a87_df4de365",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-11T12:02:40Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                /* Need to LRU track global fd including incrementing$",
+      "revId": "a15a62efdc5114939033dc84012e52c2bde0edb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0506183_9892028d",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-11T12:02:40Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 * fsal_fd_global_counter.$",
+      "revId": "a15a62efdc5114939033dc84012e52c2bde0edb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c15087_f7691bf2",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-11T12:02:40Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 */$",
+      "revId": "a15a62efdc5114939033dc84012e52c2bde0edb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1f2224_e4510ffc",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-11T12:02:40Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                insert_fd_lru(\u0026dst_fd-\u003efsal_fd);$",
+      "revId": "a15a62efdc5114939033dc84012e52c2bde0edb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f763e5fd_a7a569bf",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-11T12:02:40Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                insert_fd_lru(\u0026dst_fd-\u003efsal_fd);$",
+      "revId": "a15a62efdc5114939033dc84012e52c2bde0edb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
