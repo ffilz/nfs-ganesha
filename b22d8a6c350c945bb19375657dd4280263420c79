@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169f95b9_1a5a55ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-12T21:50:29Z",
+      "side": 1,
+      "message": "I don\u0027t think this patch is the right thing. Something is wrong, All of this is supposed to just work. Hmm. gpfs_unclaim_filesystem is doing way more than vfs_unclaim_filesystem. I think GPFS may be doing stuff by itself that is supposed to be done by the common code, and maybe it\u0027s breaking something.",
+      "revId": "b22d8a6c350c945bb19375657dd4280263420c79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bb4a0b_a5235d2f",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-12T21:50:29Z",
+      "side": 1,
+      "message": "So unclaim_all_export_maps is supposed to do this.\n\nI\u0027m not sure what\u0027s wrong here.",
+      "revId": "b22d8a6c350c945bb19375657dd4280263420c79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
