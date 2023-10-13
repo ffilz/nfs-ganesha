@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c07f6c7_99d3ac08",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-13T20:11:33Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tuint64_t bsizescaled \u003d fsal_quota.bsize;\n+\twhile ((bhardlimitscaled \u003e UINT32_MAX) ||",
+      "revId": "4b0b2c174faa68c27970620b765356dd87032496",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
