@@ -50,6 +50,24 @@
       "message": "So unclaim_all_export_maps is supposed to do this.\n\nI\u0027m not sure what\u0027s wrong here.",
       "revId": "b22d8a6c350c945bb19375657dd4280263420c79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df80b37_50bc9cee",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2023-10-13T07:23:21Z",
+      "side": 1,
+      "message": "Hi Frank, in 4.3 fsal_filesystem_export_map is introduced and gpfs_fsal ia already maintaing a mapping between exports and fs using gpfs_filesystem_export_map. So when an export is removed, gpfs_filesystem_export_map is not cleaned. This is leading to issues while setting up upvector which is using first entry from export list using gpfs_filesystem_export_map",
+      "parentUuid": "31bb4a0b_a5235d2f",
+      "revId": "b22d8a6c350c945bb19375657dd4280263420c79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
