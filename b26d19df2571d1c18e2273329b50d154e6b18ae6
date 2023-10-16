@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0958cd4c_dd4436cd",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-16T15:05:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e92a33a_993d21ad",
+      "revId": "b26d19df2571d1c18e2273329b50d154e6b18ae6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e98b3814_b3b75f15",
@@ -66,6 +84,24 @@
       "writtenOn": "2023-09-27T15:09:05Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tuint64_t bsizescaled \u003d fsal_quota.bsize;\n+\twhile ((bhardlimitscaled \u003e UINT32_MAX) ||",
+      "revId": "b26d19df2571d1c18e2273329b50d154e6b18ae6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7690eb8_4a14a7ea",
+        "filename": "src/Protocols/RQUOTA/rquota_getquota.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-16T15:05:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e98b3814_b3b75f15",
       "revId": "b26d19df2571d1c18e2273329b50d154e6b18ae6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
