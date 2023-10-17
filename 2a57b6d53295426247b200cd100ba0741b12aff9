@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a406d1_1a8401ed",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-17T14:53:49Z",
+      "side": 0,
+      "message": "So this just prevents decrementing the count if ACL_MASK is present.",
+      "revId": "2a57b6d53295426247b200cd100ba0741b12aff9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
