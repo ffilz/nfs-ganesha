@@ -358,6 +358,7 @@ void nfs41_Session_PrintAll(void);
 bool check_session_conn(nfs41_session_t *session,
 			compound_data_t *data,
 			bool can_associate);
+void release_all_session_connections(nfs41_session_t *session);
 
 /******************************************************************************
  *

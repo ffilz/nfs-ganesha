@@ -93,8 +93,9 @@ enum nfs_req_result nfs4_op_destroy_session(struct nfs_argop4 *op,
 	else
 		res_DESTROY_SESSION4->dsr_status = NFS4_OK;
 
-	/* Release ref taken in get_pointer */
+	release_all_session_connections(session);
 
+	/* Release ref taken in get_pointer */
 	dec_session_ref(session);
 
 	return nfsstat4_to_nfs_req_result(res_DESTROY_SESSION4->dsr_status);

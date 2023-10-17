@@ -42,6 +42,7 @@
 #include "nfs_creds.h"
 #include "client_mgr.h"
 #include "fsal.h"
+#include "xprt_handler.h"
 #ifdef USE_LTTNG
 #include "gsh_lttng/nfs4.h"
 #endif
@@ -178,6 +179,7 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 	/* Abbreviated alias for successful response */
 	CREATE_SESSION4resok * const res_CREATE_SESSION4ok =
 	    &res_CREATE_SESSION4->CREATE_SESSION4res_u.csr_resok4;
+	bool add_session_to_xprt;
 
 	/* Make sure str_client is always printable even
 	 * if log level changes midstream.
@@ -397,8 +399,6 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 		goto out;
 	}
 
-	copy_xprt_addr(&nfs41_session->connections[0], data->req->rq_xprt);
-	nfs41_session->num_conn = 1;
 	nfs41_session->clientid = clientid;
 	nfs41_session->clientid_record = found;
 	nfs41_session->refcount = 2;	/* sentinel ref + call path ref */
@@ -624,6 +624,19 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 			 "success %s csa_flags 0x%X csr_flags 0x%X",
 			  str, arg_CREATE_SESSION4->csa_flags,
 			  res_CREATE_SESSION4ok->csr_flags);
+	}
+
+	nfs41_session->num_conn = 0;
+
+	/* Add session to the xprt session-list */
+	LogDebug(component, "Now add the new session entry to xprt");
+
+	add_session_to_xprt = associate_xprt_with_nfs41_session(data->req->rq_xprt,
+		nfs41_session);
+	if (!add_session_to_xprt) {
+		LogWarn(COMPONENT_SESSIONS,
+			"Could not associate xprt FD: %d with session",
+			data->req->rq_xprt->xp_fd);
 	}
 
 	/* Successful exit */
