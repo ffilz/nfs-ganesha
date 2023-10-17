@@ -16,6 +16,24 @@
       "message": "@ffilz This doesn\u0027t suffice for me.",
       "revId": "2f39cf18411d8b1745d1753da9445f7059a449b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da1f59cc_7091bd34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-17T21:56:07Z",
+      "side": 1,
+      "message": "Looks like a bunch of the build configurations set USE_DBUS ON. We generally assume DBUS is available and desired, so the in-tree build configurations are going to specify it but those build configurations may not work for all folks, for example, if a build without DBUS is desired. In that case, it\u0027s best to avoid using the build configurations and specify all the desired options.",
+      "parentUuid": "080c4291_d3669010",
+      "revId": "2f39cf18411d8b1745d1753da9445f7059a449b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
