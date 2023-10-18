@@ -106,6 +106,55 @@ bool associate_xprt_with_nfs41_session(SVCXPRT *xprt,
 }
 
 /**
+ * This function destroys the input session's backchannel if it is up, and if
+ * it uses the input xprt.
+ */
+__attribute__ ((__unused__))
+static void destroy_session_backchannel_for_xprt(struct nfs41_session *session,
+	SVCXPRT *xprt)
+{
+	char session_str[LOG_BUFF_LEN] = "\0";
+	struct display_buffer db2 = {sizeof(session_str), session_str, session_str};
+	display_session_id(&db2, session->session_id);
+
+	if (!(atomic_fetch_uint32_t(&session->flags) & session_bc_up)) {
+		goto no_backchannel;
+	}
+	PTHREAD_MUTEX_lock(&session->cb_chan.chan_mtx);
+
+	/* After acquiring the lock, we re-check if the backchannel is available */
+	if (session->cb_chan.clnt == NULL) {
+		PTHREAD_MUTEX_unlock(&session->cb_chan.chan_mtx);
+		goto no_backchannel;
+	}
+	/* Given that the backchannel is up, we first check if the session's
+	 * backchannel actually uses the xprt being destroyed.
+	 * The channel lock ensures that channel's client check (below) and the
+	 * channel destroy operation are performed atomically.
+	 */
+	if (clnt_vc_get_client_xprt(session->cb_chan.clnt) != xprt) {
+		PTHREAD_MUTEX_unlock(&session->cb_chan.chan_mtx);
+		LogDebug(COMPONENT_XPRT, "Backchannel xprt for current session %s does "
+			"not match the xprt to be destroyed. Skip destroying backchannel",
+			session_str);
+		return;
+	}
+	/* Now destroy the backchannel */
+	nfs_rpc_destroy_chan_no_lock(&session->cb_chan);
+	atomic_clear_uint32_t_bits(&session->flags, session_bc_up);
+	PTHREAD_MUTEX_unlock(&session->cb_chan.chan_mtx);
+
+	LogDebug(COMPONENT_XPRT, "Backchannel destroyed for current session %s",
+		session_str);
+	return;
+
+ no_backchannel:
+	LogDebug(COMPONENT_XPRT,
+		"Backchannel is not up for the current session %s, skip destroying it",
+		session_str);
+}
+
+/**
  * After a xprt is destroyed, this function handles cleanup of the client
  * data associated with the xprt (if any). It is supposed to be invoked
  * after the xprt's connection is closed.
