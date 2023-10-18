@@ -48,6 +48,7 @@ typedef struct svc_xprt_client_data {
 void init_client_data_for_xprt(SVCXPRT *);
 void destroy_client_data_for_destroyed_xprt(SVCXPRT *);
 
+void unref_xprt_client_data(SVCXPRT *);
 bool associate_xprt_with_nfs41_session(SVCXPRT *, nfs41_session_t *);
 
 #endif				/* XPRT_HANDLER_H */
