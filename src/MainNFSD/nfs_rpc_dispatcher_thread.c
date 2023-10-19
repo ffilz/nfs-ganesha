@@ -105,6 +105,7 @@ enum evchan {
 static struct rpc_evchan rpc_evchan[EVCHAN_SIZE];
 
 static enum xprt_stat nfs_rpc_tcp_user_data(SVCXPRT *);
+static void nfs_rpc_unref_user_data(SVCXPRT *);
 static void nfs_rpc_alloc_user_data(SVCXPRT *);
 static enum xprt_stat nfs_rpc_free_user_data(SVCXPRT *);
 static struct svc_req *alloc_nfs_request(SVCXPRT *xprt, XDR *xdrs);
@@ -535,6 +536,10 @@ void Create_tcp(protos prot)
 	/* Hook xp_free_user_data (finalize/free private data) */
 	(void)SVC_CONTROL(tcp_xprt[prot], SVCSET_XP_FREE_USER_DATA,
 			  nfs_rpc_free_user_data);
+
+	/* Hook xp_unref_user_data (un-reference to/from private data) */
+	(void)SVC_CONTROL(tcp_xprt[prot], SVCSET_XP_UNREF_USER_DATA,
+			  nfs_rpc_unref_user_data);
 
 	(void)svc_rqst_evchan_reg(rpc_evchan[TCP_UREG_CHAN].chan_id,
 				  tcp_xprt[prot], SVC_RQST_FLAG_XPRT_UREG);
@@ -1537,6 +1542,16 @@ static enum xprt_stat nfs_rpc_free_user_data(SVCXPRT *xprt)
 	}
 	destroy_client_data_for_destroyed_xprt(xprt);
 	return XPRT_DESTROYED;
+}
+
+/**
+ * @brief xprt user-data un-referencing function
+ *
+ * @param[in] xprt Transport to use for un-referencing user-data
+ */
+static void nfs_rpc_unref_user_data(SVCXPRT *xprt)
+{
+	unref_xprt_client_data(xprt);
 }
 
 /**
