@@ -92,6 +92,18 @@ bool associate_xprt_with_nfs41_session(SVCXPRT *xprt,
 
 	PTHREAD_RWLOCK_wrlock(&xprt_client_data->nfs41_session_list_lock);
 
+	/* It is possible that the current xprt is to be destroyed. If so, we do
+	 * not want to associate such xprt to the session.
+	 */
+	if (xprt->xp_flags & SVC_XPRT_FLAG_DESTROYING) {
+		PTHREAD_RWLOCK_unlock(&xprt_client_data->nfs41_session_list_lock);
+		LogInfo(COMPONENT_SESSIONS,
+			"Do not associate to the session the xprt FD: %d under destruction",
+			xprt->xp_fd);
+		gsh_free(new_entry);
+		return false;
+	}
+
 	new_entry->session = nfs41_session;
 	glist_add_tail(&xprt_client_data->nfs41_session_list, &new_entry->node);
 	inc_session_ref(nfs41_session);
