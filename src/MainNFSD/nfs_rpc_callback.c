@@ -732,6 +732,17 @@ int nfs_rpc_create_chan_v41(SVCXPRT *xprt, nfs41_session_t *session,
 
 	assert(xprt);
 
+	/* We skip if the xprt to be associated with backchannel is being or is
+	 * already destroyed
+	 */
+	if (xprt->xp_flags & SVC_XPRT_FLAG_DESTROYING) {
+		LogWarn(COMPONENT_NFS_CB,
+			"xprt FD: %d is being destroyed, do not create back channel",
+			xprt->xp_fd);
+		code = EINVAL;
+		goto out;
+	}
+
 	if (svc_get_xprt_type(xprt) == XPRT_RDMA) {
 		LogWarn(COMPONENT_NFS_CB,
 			"refusing to create back channel over RDMA for now");
