@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d4358d9_a41025b0",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tnew_count \u003d posix_acl_2_fsal_acl(e_acl, is_dir, false, is_v4, \u0026pace);",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "990a888e_d2e936c2",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tnew_i_count \u003d posix_acl_2_fsal_acl(i_acl, true, true, is_v4, \u0026pace);",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6f49c3_f53c32e0",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\ttrue, true, is_v4, \u0026pace);",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7a0db73_1d5c5b70",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tnew_count \u003d posix_acl_2_fsal_acl(e_acl, is_dir, false, is_v4, \u0026pace);",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b677a3_93298803",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tnew_i_count \u003d posix_acl_2_fsal_acl(i_acl, true, true, is_v4, \u0026pace);",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe97416b_0f827519",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+^I^I        continue;$",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d403158_65fe33c3",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5022,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tnew_count \u003d posix_acl_2_fsal_acl(e_acl, is_dir, false, is_v4, \u0026pace);",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bfb13fa_ad21d088",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5029,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-20T21:36:49Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tnew_i_count \u003d posix_acl_2_fsal_acl(i_acl, true, true, is_v4, \u0026pace);",
+      "revId": "e98bbfebebf487075d2f4984a7840d958dbc38b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
