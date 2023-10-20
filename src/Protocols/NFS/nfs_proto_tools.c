@@ -4977,6 +4977,7 @@ int nfs3_acl_2_fsal_acl(struct fsal_attrlist *attr, nfs3_int32 mask,
 	fsal_acl_status_t aclstatus;
 	int e_count = 0, i_count = 0, new_count = 0, new_i_count = 0;
 	int rc = 0;
+	bool is_v4 = false;
 
 
 	attr->valid_mask = 0;
@@ -5018,14 +5019,14 @@ int nfs3_acl_2_fsal_acl(struct fsal_attrlist *attr, nfs3_int32 mask,
 	pace = acldata.aces;
 
 	if (e_count > 0) {
-		new_count = posix_acl_2_fsal_acl(e_acl, is_dir, false, &pace);
+		new_count = posix_acl_2_fsal_acl(e_acl, is_dir, false, is_v4, &pace);
 	} else {
 		LogDebug(COMPONENT_NFSPROTO,
 			"No acl set for access acl");
 	}
 
 	if (i_count > 0) {
-		new_i_count = posix_acl_2_fsal_acl(i_acl, true, true, &pace);
+		new_i_count = posix_acl_2_fsal_acl(i_acl, true, true, is_v4, &pace);
 		new_count += new_i_count;
 	} else {
 		LogDebug(COMPONENT_NFSPROTO,
