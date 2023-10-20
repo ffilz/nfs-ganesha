@@ -248,6 +248,7 @@ fsal_status_t vfs_sub_getattrs(struct vfs_fsal_obj_handle *vfs_hdl,
 	fsal_acl_status_t aclstatus;
 	int e_count = 0, i_count = 0, new_count = 0, new_i_count = 0;
 	fsal_status_t status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+	bool is_v4 = true;
 
 	/*
 	 * open(2) for these is done with O_PATH, so acl_get_fd(3)
@@ -301,14 +302,14 @@ fsal_status_t vfs_sub_getattrs(struct vfs_fsal_obj_handle *vfs_hdl,
 	pace = acldata.aces;
 
 	if (e_count > 0) {
-		new_count = posix_acl_2_fsal_acl(e_acl, is_dir, false, &pace);
+		new_count = posix_acl_2_fsal_acl(e_acl, is_dir, false, is_v4, &pace);
 	} else {
 		LogDebug(COMPONENT_FSAL,
 			"effective acl is not set for this object");
 	}
 
 	if (i_count > 0) {
-		new_i_count = posix_acl_2_fsal_acl(i_acl, true, true, &pace);
+		new_i_count = posix_acl_2_fsal_acl(i_acl, true, true, is_v4, &pace);
 		new_count += new_i_count;
 	} else {
 		LogDebug(COMPONENT_FSAL,

@@ -75,7 +75,7 @@ struct acl_ea_header {
 
 int
 posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
-			fsal_ace_t **p_falacl);
+			bool is_v4, fsal_ace_t **p_falacl);
 
 acl_t
 fsal_acl_2_posix_acl(fsal_acl_t *p_fsalacl, acl_type_t type);
