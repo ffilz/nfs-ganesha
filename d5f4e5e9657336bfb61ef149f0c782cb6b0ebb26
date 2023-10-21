@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1f4cf0_e9b65fdd",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4488,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-21T20:27:37Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dinfo) {\n+\t\targs.dynamicinfo \u003d *dinfo;\n+\t}",
+      "revId": "d5f4e5e9657336bfb61ef149f0c782cb6b0ebb26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
