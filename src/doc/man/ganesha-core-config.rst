@@ -356,6 +356,8 @@ DomainName(string, default "localdomain")
 Idmapped_User_Time_Validity(int64, range 0 to INT64_MAX, default 86400)
     Cache validity in seconds for idmapped-user entries
 
+Idmapped_Group_Time_Validity(int64, range 0 to INT64_MAX, default 86400)
+    Cache validity in seconds for idmapped-group entries
 
 NFSv4 {}
 --------------------------------------------------------------------------------

@@ -381,6 +381,8 @@ static struct config_item directory_services_params[] = {
 		       directory_services_param, domainname),
 	CONF_ITEM_I64("Idmapped_User_Time_Validity", 0, INT64_MAX, 24*60*60,
 		       directory_services_param, idmapped_user_time_validity),
+	CONF_ITEM_I64("Idmapped_Group_Time_Validity", 0, INT64_MAX, 24*60*60,
+		       directory_services_param, idmapped_group_time_validity),
 	CONFIG_EOL
 };
 
