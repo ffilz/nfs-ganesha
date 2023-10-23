@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a51e52be_bcd7fe1d",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-23T15:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8ea51d_a026bc22",
+      "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aee7ecaa_e3433765",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5060ea65_327a63bd",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-23T15:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aee7ecaa_e3433765",
+      "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "845945e9_87539ddd",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-10-20T17:28:06Z",
       "side": 1,
       "message": "Drop this and use ACL_FOR_V4 below",
+      "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c84f57_58f26836",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-23T15:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "845945e9_87539ddd",
       "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +140,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c6fb49_f97cd288",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4980,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-23T15:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b47a6c3_272cd666",
+      "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3a69e37_3e65628d",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-10-20T17:28:06Z",
       "side": 1,
       "message": "Instead of setting is_v4 true or false in each function that uses this function, please make 2 #defines here:\n\n#define ACL_FOR_V4 true\n\n#define ACL_FOR_V3 false\nAnd then use those at the call points\n\nAnd maybe rename the param to \"for_v4\"",
+      "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3892ac_1e2cbb86",
+        "filename": "src/include/posix_acls.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-10-23T15:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3a69e37_3e65628d",
       "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
