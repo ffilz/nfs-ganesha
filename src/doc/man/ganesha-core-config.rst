@@ -365,6 +365,11 @@ Cache_Users_Max_Count(uint32, range 0 to INT32_MAX, default 50000)
 Cache_Groups_Max_Count(uint32, range 0 to INT32_MAX, default 50000)
     Max number of cached idmapped groups
 
+Cache_Reaping_Interval(int64, range 60 to 3650*86400, default 3650*86400)
+    Cache reaping interval in seconds for idmapped cached entites.
+    Its default value is set to 10 years, which basically means that
+    the cache-reaping is disabled.
+
 
 NFSv4 {}
 --------------------------------------------------------------------------------

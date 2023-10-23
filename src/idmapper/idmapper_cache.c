@@ -163,6 +163,10 @@ static struct avltree gname_tree;
 
 static struct avltree gid_tree;
 
+/**
+ * @brief Struct representing threads that reap idmapper users, groups caches
+ */
+static struct fridgethr *cache_reaper_fridge = NULL;
 
 /**
  * @brief Comparison for user names
@@ -303,6 +307,78 @@ static void remove_cache_group(struct cache_group *group)
 }
 
 /**
+ * @brief Reaps the cache user, group entries
+ *
+ * Since the user and group fifo queues store entries in increasing order of
+ * time-validity, the reaper reaps from the queue head in the same order. It
+ * stops when it first encounters a non-expired entry.
+ */
+static void cache_reaper_run(struct fridgethr_context *unused_ctx)
+{
+	struct cache_user *user;
+	struct cache_group *group;
+
+	LogFullDebug(COMPONENT_IDMAPPER, "Idmapper cache reaper run started");
+	PTHREAD_RWLOCK_wrlock(&idmapper_user_lock);
+
+	for (user = TAILQ_FIRST(&user_fifo_queue); user != NULL;) {
+		if (!user_expired(user)) {
+			break;
+		}
+		remove_cache_user(user);
+		user = TAILQ_FIRST(&user_fifo_queue);
+	}
+	PTHREAD_RWLOCK_unlock(&idmapper_user_lock);
+	LogFullDebug(COMPONENT_IDMAPPER, "Idmapper user-cache reaper run ended");
+	PTHREAD_RWLOCK_wrlock(&idmapper_group_lock);
+
+	for (group = TAILQ_FIRST(&group_fifo_queue); group != NULL;) {
+		if (!group_expired(group)) {
+			break;
+		}
+		remove_cache_group(group);
+		group = TAILQ_FIRST(&group_fifo_queue);
+	}
+	PTHREAD_RWLOCK_unlock(&idmapper_group_lock);
+	LogFullDebug(COMPONENT_IDMAPPER, "Idmapper group-cache reaper run ended");
+}
+
+/**
+ * @brief Initialise the reaper thread for reaping expired user, group entries
+ */
+static void idmapper_cache_reaper_init()
+{
+	struct fridgethr_params thread_params;
+	int rc;
+
+	memset(&thread_params, 0, sizeof(struct fridgethr_params));
+	thread_params.thr_max = 1;
+	thread_params.thr_min = 1;
+	thread_params.thread_delay =
+		nfs_param.directory_services_param.cache_reaping_interval;
+	thread_params.flavor = fridgethr_flavor_looper;
+
+	assert(cache_reaper_fridge == NULL);
+
+	rc = fridgethr_init(&cache_reaper_fridge, "idmapper_cache_reaper",
+		&thread_params);
+	if (rc != 0) {
+		LogCrit(COMPONENT_IDMAPPER,
+			"Idmapper cache reaper fridge init failed. Error: %d", rc);
+		return;
+	}
+	rc = fridgethr_submit(cache_reaper_fridge, cache_reaper_run, NULL);
+	if (rc != 0) {
+		LogCrit(COMPONENT_IDMAPPER,
+			"Unable to start reaper for idmapper cache. Error: %d.", rc);
+		fridgethr_destroy(cache_reaper_fridge);
+		cache_reaper_fridge = NULL;
+		return;
+	}
+	LogInfo(COMPONENT_IDMAPPER, "Idmapper cache reaper initialized");
+}
+
+/**
  * @brief Initialize the IDMapper cache
  */
 
@@ -321,6 +397,8 @@ void idmapper_cache_init(void)
 
 	TAILQ_INIT(&user_fifo_queue);
 	TAILQ_INIT(&group_fifo_queue);
+
+	idmapper_cache_reaper_init();
 }
 
 /**
@@ -762,10 +840,15 @@ void idmapper_clear_cache(void)
 /**
  * @brief Destroy the IDMapper cache
  *
- * This function clears the cache, and destroys its locks.
+ * This function destroys the cache reaper, clears the cache, and destroys
+ * its locks.
  */
 void idmapper_destroy_cache(void)
 {
+	if (cache_reaper_fridge != NULL) {
+		fridgethr_destroy(cache_reaper_fridge);
+		cache_reaper_fridge = NULL;
+	}
 	idmapper_clear_cache();
 	PTHREAD_RWLOCK_destroy(&idmapper_user_lock);
 	PTHREAD_RWLOCK_destroy(&idmapper_group_lock);
