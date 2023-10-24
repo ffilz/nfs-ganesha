@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ac96366_9d69790b",
+        "filename": "src/FSAL/posix_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2023-10-24T06:37:47Z",
+      "side": 1,
+      "message": "Near the top of posix_acl_2_fsal_acl(), the mask is retrieved and used to set a variables readmask, writemask and executemask.  These are then used in the loop to modify other entries.\n\nThis logic is arguably technically incorrect for conversion to NFSv3/POSIX ACLs, since other entries will be modified to their effective values rather than returning a 1:1 ACL containing each original entry.  However, given that either method results in a correct semantic rendering of the ACL, I don\u0027t think it matters.  After all, this is weak ACL conversion.\n\nSo, the continue just stops the loop from generating a mask ACE... but it has already been loaded for use in the loop.",
+      "parentUuid": "1ebf6d3f_b6482f2b",
+      "revId": "96713409decafcc534b38b5a49cbe0347708dae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b47a6c3_272cd666",
         "filename": "src/Protocols/NFS/nfs_proto_tools.c",
         "patchSetId": 4
