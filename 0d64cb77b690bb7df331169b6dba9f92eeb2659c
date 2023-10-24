@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "390c4d3e_c50cfc80",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-24T07:06:45Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (retval \u003d\u003d 0) {\n+\t\t\tbreak;\n \t\t}",
+      "revId": "0d64cb77b690bb7df331169b6dba9f92eeb2659c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
