@@ -448,6 +448,9 @@ goption(RADOS_URLS "Enable config file inclusion from RADOS objects" ON)
 # Enable CephFS POSIX ACL
 goption(CEPHFS_POSIX_ACL "Enable CephFS POSIX ACL" ON)
 
+# Enable CephFS client_oc
+goption(CEPHFS_CLIENT_OC "CephFS client Object Cache" OFF)
+
 # Enable NFSv4 and POSIX acls mapping
 option(USE_ACL_MAPPING "Build NFSv4 to POSIX ACL mapping" OFF)
 
@@ -1351,6 +1354,7 @@ message(STATUS "ENABLE_VFS_POSIX_ACL = ${ENABLE_VFS_POSIX_ACL}")
 message(STATUS "ENABLE_VFS_DEBUG_ACL = ${ENABLE_VFS_DEBUG_ACL}")
 message(STATUS "ENABLE_RFC_ACL = ${ENABLE_RFC_ACL}")
 message(STATUS "CEPHFS_POSIX_ACL = ${CEPHFS_POSIX_ACL}")
+message(STATUS "CEPHFS_CLIENT_OC = ${CEPHFS_CLIENT_OC}")
 message(STATUS "USE_MONITORING = ${USE_MONITORING}")
 message(STATUS "USE_CAPS = ${USE_CAPS}")
 message(STATUS "USE_BLKID = ${USE_BLKID}")

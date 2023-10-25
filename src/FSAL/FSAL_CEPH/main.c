@@ -656,6 +656,22 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 		goto error;
 	}
 
+#define ON 1
+
+#if CEPHFS_CLIENT_OC
+	ceph_status = ceph_conf_set(cm->cmount, "client_oc", "true");
+#else
+	ceph_status = ceph_conf_set(cm->cmount, "client_oc", "false");
+#endif
+
+	if (ceph_status) {
+		status.major = ERR_FSAL_INVAL;
+		LogCrit(COMPONENT_FSAL,
+			"Unable to set Ceph client_oc: %d",
+			ceph_status);
+		goto error;
+	}
+
 	ceph_status = ceph_init(cm->cmount);
 
 	if (ceph_status != 0) {
