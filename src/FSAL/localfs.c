@@ -1031,7 +1031,9 @@ int resolve_posix_filesystem(const char *path,
 		 */
 		retval = stat(path, &statbuf);
 
-		if (retval != 0) {
+		if (retval == 0) {
+			break;
+		} else {
 			retval = errno;
 			LogDebug(COMPONENT_FSAL,
 				 "stat returned %s (%d) while resolving export path %s %s",
