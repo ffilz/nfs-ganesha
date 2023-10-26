@@ -387,6 +387,8 @@ static struct config_item directory_services_params[] = {
 		       directory_services_param, cache_users_max_count),
 	CONF_ITEM_UI32("Cache_Groups_Max_Count", 0, INT32_MAX, 50000,
 		       directory_services_param, cache_groups_max_count),
+	CONF_ITEM_UI32("Cache_User_Groups_Max_Count", 0, INT32_MAX, 50000,
+		       directory_services_param, cache_user_groups_max_count),
 	CONF_ITEM_I64("Cache_Reaping_Interval", 60, 3650*86400, 3650*86400,
 		       directory_services_param, cache_reaping_interval),
 	CONF_ITEM_I64("Negative_Cache_Time_Validity", 0, INT64_MAX, 5*60,

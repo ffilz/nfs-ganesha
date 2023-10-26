@@ -629,6 +629,8 @@ typedef struct directory_services_param {
 	uint32_t cache_users_max_count;
 	/** Max number of cached idmapped groups */
 	uint32_t cache_groups_max_count;
+	/** Max number of cached user-groups entries */
+	uint32_t cache_user_groups_max_count;
 	/** Cache reaping interval in seconds for idmapped users and groups */
 	time_t cache_reaping_interval;
 	/** Cache validity in seconds for negative entries */
