@@ -16,6 +16,40 @@
       "message": "In my project, I customized some configurations in ganesha.conf and wanted to update them through signal. However, currently only some built-in configurations are supported for updating, so I submitted these codes.In my project, I customized some configurations in ganesha.conf and wanted to update them through signal. However, currently only some built-in configurations are supported for updating, so I submitted these codes.",
       "revId": "f063a2481aca5184ba27f29599553b87e8d0ec4d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a60e79_7d9f7206",
+        "filename": "src/FSAL/fsal_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-28T05:49:09Z",
+      "side": 1,
+      "message": "ERROR: else should follow close brace \u0027}\u0027\n \t}\n+\telse {",
+      "revId": "f063a2481aca5184ba27f29599553b87e8d0ec4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1e83a2_e62d980a",
+        "filename": "src/FSAL/fsal_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-10-28T05:49:09Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tconfig_file_t myconfig;\n+\t\tmyconfig \u003d get_parse_root(node);",
+      "revId": "f063a2481aca5184ba27f29599553b87e8d0ec4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
