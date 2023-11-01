@@ -16,6 +16,24 @@
       "message": "client_oc seems to improve performance. What\u0027s the reason for turning this off, and does it introduce bugs that can\u0027t be fixed?",
       "revId": "6c6046cc9a727b824d9a0b55234873b3476a57a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43d5e09_b7032380",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-01T15:23:01Z",
+      "side": 1,
+      "message": "We have observed a memory leak with it. It\u0027s not absolutely clear yet whether we should force this or give recommendations on why to set it false or true in ceph.conf.\n\nWhat workload is showing client_oc \u003d true improving performance?",
+      "parentUuid": "5146f122_1190833b",
+      "revId": "6c6046cc9a727b824d9a0b55234873b3476a57a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
