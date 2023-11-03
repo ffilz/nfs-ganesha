@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "573c71dc_1d3a7405",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I^I$",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697062ec_509b6053",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t/* Before going to expire the current client in RBT node,",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb03b6ea_aeebcaad",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\t\"Reaper, Parked for later \"\n+\t\t\t\t\t     \"cleanup {%s}\",",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9d6b24_3d2bcd98",
+        "filename": "src/MainNFSD/nfs_reaper_thread.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\"Reaper done, expired {%s}\", str);",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e54426e_803a398d",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^IIf passed NULL, judge and clean all expired$",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e7931c_5afa4c03",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^I^I^I^Iones in the list.$",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f9f70f_676bcfd3",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tif ((atomic_fetch_uint32_t(\u0026num_of_curr_expired_clients))",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb249ec_44717cc8",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t    \u0026\u0026 conflict_owner-\u003eso_type \u003e\u003d STATE_OPEN_OWNER_NFSV4",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89dfaeba_0da73d3b",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2557,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tif ((atomic_fetch_uint32_t(\u0026num_of_curr_expired_clients))",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eded11c2_105de09d",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2558,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-03T11:42:57Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t    \u0026\u0026 conflict_owner-\u003eso_type \u003e\u003d STATE_OPEN_OWNER_NFSV4",
+      "revId": "36100a70a0f6360e716e55863315cb30e775d36d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
