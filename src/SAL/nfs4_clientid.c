@@ -84,7 +84,6 @@ pool_t *client_id_pool;
 
 
 static uint64_t num_confirmed_client_ids;
-
 /**
  * @brief Return the NFSv4 status for the client id error code
  *
@@ -204,9 +203,11 @@ int display_client_id_rec(struct display_buffer *dspbuf,
 		delta = time(NULL) - clientid->cid_last_renew;
 
 	b_left = display_printf(dspbuf,
-				"} t_delta=%d reservations=%d refcount=%"PRIu32,
+				"} t_delta=%d reservations=%d refcount=%d files_opened=%u,",
 				delta, clientid->cid_lease_reservations,
-				atomic_fetch_int32_t(&clientid->cid_refcount));
+				atomic_fetch_int32_t(&clientid->cid_refcount),
+				atomic_fetch_uint32_t(
+					&clientid->cid_open_state_counter));
 
 	if (b_left <= 0)
 		return b_left;
