@@ -428,6 +428,12 @@ Server_Owner(string, default "")
     Connections to servers with the same server owner can be shared by
     the client. This is advertised to the client on EXCHANGE_ID.
 
+Open_State_Per_Client(uint32, range 0 to UINT32_MAX, default 10000)
+    Specify the maximum number of files that could be opened by a client. One
+    misbehaving client could potentially open multiple files and exhaust the
+    open FD limit allowed by ganesha's cgroup. Beyond this limit, client gets
+    denied if it tries to open too many files. To disable set to ZERO.
+
 RADOS_KV {}
 --------------------------------------------------------------------------------
 
