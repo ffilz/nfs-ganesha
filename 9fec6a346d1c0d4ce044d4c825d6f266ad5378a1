@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a473a3cf_0c2db8bd",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-09T19:04:41Z",
+      "side": 1,
+      "message": "Let\u0027s default to 0 to not change behavior, we don\u0027t want to break some existing setup that exceeds 10k files per client.",
+      "revId": "9fec6a346d1c0d4ce044d4c825d6f266ad5378a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
