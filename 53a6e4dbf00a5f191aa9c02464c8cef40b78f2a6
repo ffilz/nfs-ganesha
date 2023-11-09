@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc7a3fb_07b2e948",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-09T17:54:41Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tatomic_fetch_uint32_t(\u0026clientid-\u003ecid_open_state_counter),",
+      "revId": "53a6e4dbf00a5f191aa9c02464c8cef40b78f2a6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
