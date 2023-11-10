@@ -134,7 +134,7 @@ struct rgw_cb_arg {
 #if ((LIBRGW_FILE_VER_MAJOR > 1) || \
 	((LIBRGW_FILE_VER_MAJOR == 1) && \
 	 ((LIBRGW_FILE_VER_MINOR > 2) || \
-	  ((LIBRGW_FILE_VER_MINOR == 2) && (LIBRGW_FILE_VER_EXTRA >= 1)))))
+	  ((LIBRGW_FILE_VER_MINOR == 2) && (LIBRGW_FILE_VER_EXTRA >= 0)))))
 static int
 #else
 static bool
