@@ -16,6 +16,24 @@
       "message": "I introduced the requirement to use 1.2.1 advisedly.  A change had been made in the ceph upstream which altered the function signature of rgw_readdir2, but did not update the interface version.  SO.  There are ceph codebases where ganesha can required 1.2.1 and get correct linkage, and ones where it will be wrong.  If you have a ceph codebase that presents the new signature for rgw_readdir2 but presents librgw version 1.2.0--you could update that codebase.",
       "revId": "7dc7b0db22d512a07725d3edb87cee56f1eb9ace",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "767d954f_dd19f43a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2023-11-10T13:03:36Z",
+      "side": 1,
+      "message": "Sorry, please adjust my statement to: \"SO.  There are ceph codebases where ganesha can required 1.2.0 and get correct linkage, and ones where it will be wrong.  If you have a ceph codebase that presents the new signature for rgw_readdir2 but presents librgw version 1.2.0--you could update that codebase.\"",
+      "parentUuid": "9904de73_8a4e61f7",
+      "revId": "7dc7b0db22d512a07725d3edb87cee56f1eb9ace",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
