@@ -69,6 +69,23 @@
       "parentUuid": "767d954f_dd19f43a",
       "revId": "7dc7b0db22d512a07725d3edb87cee56f1eb9ace",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb305e0_fee0d7da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2023-11-11T16:46:08Z",
+      "side": 1,
+      "message": "Hi,\n\nThe issue that tracks incrementing the EXTRA versions is https://tracker.ceph.com/issues/59509.  It is marked as backport_processed for Reef in https://tracker.ceph.com/issues/61564.  So you should, with upstream Reef as described, be seeing the updated EXTRA version at 1.\n\nMatt",
+      "revId": "7dc7b0db22d512a07725d3edb87cee56f1eb9ace",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
