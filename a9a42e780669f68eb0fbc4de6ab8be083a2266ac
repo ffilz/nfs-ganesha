@@ -16,6 +16,24 @@
       "message": "How about, instead, unconditionally freeing state in free_state() in include/sal_data.h?",
       "revId": "a9a42e780669f68eb0fbc4de6ab8be083a2266ac",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b532be2_dfd30b3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-14T15:51:21Z",
+      "side": 1,
+      "message": "I thought about that, but considered that if ever a FSAL really does something very different on alloc_state, we don\u0027t want to assume that a generic free is the right thing to do.",
+      "parentUuid": "d0bd5915_bc44afdd",
+      "revId": "a9a42e780669f68eb0fbc4de6ab8be083a2266ac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
