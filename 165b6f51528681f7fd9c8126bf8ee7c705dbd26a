@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d76656_87126fd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-14T15:50:35Z",
+      "side": 1,
+      "message": "Could you fix the checkpatch warnings and errors in all the patches? When you are done and have uploaded a new patch set, make sure to mark all the checkpatch comments for the original version as done to improve code review readability.\n\nAlso, make sure you have the commit hooks installed (that way the checkpatch issues will be caught when you commit rather than waiting for the CI to run checkpatch):\n\nPREPARING FOR PATCH SUBMISSION:\n\nWe also have several commit hooks, please install them:\n\n    src/scripts/git_hooks/install_git_hooks.sh",
+      "revId": "165b6f51528681f7fd9c8126bf8ee7c705dbd26a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36c20151_4978d52d",
