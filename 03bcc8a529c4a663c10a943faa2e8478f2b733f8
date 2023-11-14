@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01ca1662_2e8757de",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tadd_session_to_xprt \u003d associate_xprt_with_nfs41_session(data-\u003ereq-\u003erq_xprt,",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa919611_bdf9e7f1",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tadd_session_to_xprt \u003d associate_xprt_with_nfs41_session(data-\u003ereq-\u003erq_xprt,",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bfe3b1_e8bb5e22",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"Skip processing xprt FD: %d without client data\", xprt-\u003exp_fd);",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3be186_8e438078",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tPTHREAD_RWLOCK_wrlock(\u0026xprt_client_data-\u003enfs41_session_list_lock);",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d206d8_1397340e",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tglist_entry(curr_node, nfs41_session_list_entry_t, node);",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337b72cf_1ab60632",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tPTHREAD_RWLOCK_unlock(\u0026xprt_client_data-\u003enfs41_session_list_lock);",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc74d2e_659a684d",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: labels should not be indented\n+\t release_xprt_ref:",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abca687_c9da15eb",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* Release the connection-xprt\u0027s ref held by the session being destroyed */",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fc68f50_c62b5dc1",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\tstruct display_buffer db \u003d\n+\t\t{sizeof(sockaddr_str), sockaddr_str, sockaddr_str};",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126f9a7f_769f7d55",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* Copy the socket address from xprt and convert to string for logging */",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e257fc74_b12f6e24",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\"xprt-\u003exp_u1 is not initialised for xprt FD: %d\", xprt-\u003exp_fd);",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dbf2ab0_dcf8adad",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\tstruct display_buffer db \u003d\n+\t\t{sizeof(sockaddr_str), sockaddr_str, sockaddr_str};",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332f1fde_f15a90fe",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* Copy the socket address from xprt and convert to string for logging */",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "833f97ff_445b80cd",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\"with FD: %d, socket-addr: %s\", xprt, xprt-\u003exp_fd, sockaddr_str);",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97c7a88b_d547e16f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\tLogInfo(COMPONENT_XPRT, \"Processing client data for destroyed xprt: %p \"\n+\t\t\"with FD: %d, socket-addr: %s\", xprt, xprt-\u003exp_fd, sockaddr_str);",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7737090d_75796e9c",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-14T19:59:17Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"No client data is associated with the destroyed xprt. \"\n+\t\t\t\"Nothing more to handle\");",
+      "revId": "03bcc8a529c4a663c10a943faa2e8478f2b733f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
