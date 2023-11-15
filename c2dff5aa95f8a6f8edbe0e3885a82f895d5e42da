@@ -1,4 +1,107 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643118de_d43e5a38",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:08:10Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tstruct display_buffer db2 \u003d {sizeof(session_str), session_str, session_str};",
+      "revId": "c2dff5aa95f8a6f8edbe0e3885a82f895d5e42da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17fedb7f_cb8220e6",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:08:10Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct display_buffer db2 \u003d {sizeof(session_str), session_str, session_str};\n+\tdisplay_session_id(\u0026db2, session-\u003esession_id);",
+      "revId": "c2dff5aa95f8a6f8edbe0e3885a82f895d5e42da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe9ca4e_b71bed37",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:08:10Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!(atomic_fetch_uint32_t(\u0026session-\u003eflags) \u0026 session_bc_up)) {\n+\t\tgoto no_backchannel;\n+\t}",
+      "revId": "c2dff5aa95f8a6f8edbe0e3885a82f895d5e42da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae1e7278_09e1d678",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:08:10Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* After acquiring the lock, we re-check if the backchannel is available */",
+      "revId": "c2dff5aa95f8a6f8edbe0e3885a82f895d5e42da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee5e765_c54a48a6",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:08:10Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogDebug(COMPONENT_XPRT, \"Backchannel xprt for current session %s does \"",
+      "revId": "c2dff5aa95f8a6f8edbe0e3885a82f895d5e42da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e927d5ab_e230a738",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:08:10Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogDebug(COMPONENT_XPRT, \"Backchannel xprt for current session %s does \"\n+\t\t\t\"not match the xprt to be destroyed. Skip destroying backchannel\",",
+      "revId": "c2dff5aa95f8a6f8edbe0e3885a82f895d5e42da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ],
   "submitRequirementResults": []
 }
