@@ -110,7 +110,6 @@ bool associate_xprt_with_nfs41_session(SVCXPRT *xprt,
  * This function destroys the input session's backchannel if it is up, and if
  * it uses the input xprt.
  */
-__attribute__ ((__unused__))
 static void destroy_session_backchannel_for_xprt(struct nfs41_session *session,
 	SVCXPRT *xprt)
 {
@@ -156,6 +155,128 @@ static void destroy_session_backchannel_for_xprt(struct nfs41_session *session,
 	LogDebug(COMPONENT_XPRT,
 		"Backchannel is not up for session %s, skip destroying it",
 		session_str);
+}
+
+/**
+ * This function removes xprt references, both of the xprt from the client-
+ * -data components, and of the client-data components from the xprt.
+ *
+ * This function should be called when destroying a xprt, in order to release
+ * the above mentioned references.
+ */
+void unref_xprt_client_data(SVCXPRT *xprt)
+{
+	svc_xprt_client_data_t *xprt_client_data;
+	struct glist_head *curr_node;
+	nfs41_session_list_entry_t *curr_session;
+	sockaddr_t xprt_addr;
+	struct glist_head duplicate_session_list;
+	nfs41_session_list_entry_t *duplicate_session_entry;
+	char xprt_addr_str[LOG_BUFF_LEN / 2] = "\0";
+	struct display_buffer db = {
+		sizeof(xprt_addr_str), xprt_addr_str, xprt_addr_str};
+
+	/* Convert xprt's socket address to string for logging */
+	copy_xprt_addr(&xprt_addr, xprt);
+	display_sockaddr(&db, &xprt_addr);
+
+	LogDebug(COMPONENT_XPRT,
+		"About to un-reference client-data from xprt with FD: %d,"
+		" socket-addr: %s", xprt->xp_fd, xprt_addr_str);
+
+	if (!xprt->xp_u1) {
+		LogInfo(COMPONENT_XPRT,
+			"The xprt is not associated with any client-data,"
+			" done un-referencing.");
+		return;
+	}
+	glist_init(&duplicate_session_list);
+
+	/* Now process the client data associated with the xprt */
+	xprt_client_data = (svc_xprt_client_data_t *) xprt->xp_u1;
+	PTHREAD_RWLOCK_wrlock(&xprt_client_data->nfs41_session_list_lock);
+
+	/* Copy the xprt sessions to a new list to avoid deadlock that can
+	 * happen if we take xprt's session-list lock followed by session's
+	 * connections lock (this lock order is reverse of the order used
+	 * during xprt connection association and un-association with a
+	 * session)
+	 *
+	 * With the below change, we do not acquire the nested session's
+	 * connections lock, while holding the xprt's session-list lock. We
+	 * first release the xprt's session-list lock after copying the xprt's
+	 * sessions to a duplicate session-list. We then acquire the session's
+	 * connection lock to process each session in the duplicate list. That
+	 * is, both the mentioned operations are not done atomically.
+	 *
+	 * This can result in possible situations where the xprt's session-list
+	 * has been cleared after the first operation, but those cleared
+	 * sessions still have the xprt's reference, until the second operation.
+	 * During this interval between the two operation, it is possible that
+	 * another thread (in a different operation) sees a missing session on
+	 * this xprt's session-list and tries to add it to that xprt, even
+	 * though that session already had a reference to this xprt. If this
+	 * situation happens, such a session added to this xprt's session-list
+	 * will be at risk of never getting un-referenced. Also, such a xprt's
+	 * reference would get re-added to the session, and then the xprt would
+	 * be at risk of never getting destroyed. However, since this other
+	 * thread additionally must also check if the xprt under consideration
+	 * is being destroyed before adding the session to it, we are able to
+	 * avoid this situation.
+	 *
+	 * The same situation can also happen after the xprt is un-referenced
+	 * through this function, but another in-flight request is still
+	 * operating on this same xprt (under destruction). The above mentioned
+	 * check will also prevent this from happening.
+	 */
+	for (curr_node = xprt_client_data->nfs41_session_list.next;
+		curr_node != &(xprt_client_data->nfs41_session_list);) {
+		struct glist_head *next_node = curr_node->next;
+
+		curr_session = glist_entry(
+			curr_node, nfs41_session_list_entry_t, node);
+		duplicate_session_entry = gsh_malloc(
+			sizeof(nfs41_session_list_entry_t));
+		duplicate_session_entry->session = curr_session->session;
+		glist_add_tail(&duplicate_session_list,
+			&duplicate_session_entry->node);
+
+		/* Since we would want to add a new session reference for the
+		 * duplicate list and release the existing session reference
+		 * from the xprt, both would negate each other. So, we do not
+		 * update the reference at all.
+		 */
+
+		/* Free the session-node allocated for the xprt */
+		glist_del(curr_node);
+		gsh_free(curr_session);
+		curr_node = next_node;
+	}
+	PTHREAD_RWLOCK_unlock(&xprt_client_data->nfs41_session_list_lock);
+	/* For each session referenced by the xprt, destroy the backchannel and
+	 * release the connection_xprt held by the session.
+	 */
+	for (curr_node = duplicate_session_list.next;
+		curr_node != &duplicate_session_list;) {
+		struct glist_head *next_node = curr_node->next;
+
+		curr_session = glist_entry(curr_node,
+			nfs41_session_list_entry_t, node);
+		destroy_session_backchannel_for_xprt(curr_session->session,
+			xprt);
+		remove_session_connection(curr_session->session, xprt);
+
+		/* Release session reference */
+		dec_session_ref(curr_session->session);
+
+		/* Free the session-node allocated for the xprt */
+		glist_del(curr_node);
+		gsh_free(curr_session);
+		curr_node = next_node;
+	}
+	LogDebug(COMPONENT_XPRT,
+		"Done un-referencing of xprt with FD: %d, socket-addr: %s",
+		xprt->xp_fd, xprt_addr_str);
 }
 
 /**
