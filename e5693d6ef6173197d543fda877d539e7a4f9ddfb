@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3da90ca_f5a79adf",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c8a7d7d_df09289d",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5fb77d2_acc1d60f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-15T02:47:13Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tstruct display_buffer db \u003d {sizeof(session_str), session_str, session_str};",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06d5d06_d0758452",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5fb77d2_acc1d60f",
       "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19ed1535_d49ff906",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "232cbbe9_e1f99204",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ced3837f_f2ff9242",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-11-15T02:47:13Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\tLogInfo(COMPONENT_SESSIONS, \"Set up session: %s backchannel and bind it\"\n+\t\t\" to current xprt FD: %d socket-address: %s\", session_str,",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85694c7e_a5dad7dd",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ced3837f_f2ff9242",
       "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebce0ee9_7feabbc3",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97faf49e_6d1a4f0d",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a67cca6_3b818190",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-11-15T02:47:13Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (rc \u003d\u003d EINVAL || rc \u003d\u003d EPERM) {\n+\t\t\treturn NFS4ERR_INVAL;\n+\t\t}",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb215545_3402228b",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a67cca6_3b818190",
       "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94016052_e8df8a7c",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e4b0ee3_4f62e4c6",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bf922f1_6f70f319",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-11-15T02:47:13Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\tLogFatal(COMPONENT_SESSIONS, \"Only SP4_NONE state protection is supported.\"\n+\t\t\" Code flow should not reach here\");",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d46abe1c_2b7fd399",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bf922f1_6f70f319",
       "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17d1a6fd_92ba71db",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6801213b_489e54a2",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86fa2c4d_c1e919b4",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-11-15T02:47:13Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\tif (arg_BIND_CONN_TO_SESSION4-\u003ebctsa_dir \u003d\u003d CDFC4_FORE_OR_BOTH) {",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526dac80_99a929bb",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86fa2c4d_c1e919b4",
       "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -188,6 +368,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcfa75eb_ae983e97",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55133201_3f445cd7",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c760015f_585dca32",
@@ -201,6 +399,24 @@
       "writtenOn": "2023-11-15T02:47:13Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t\t * this scenario, we return only successful forechannel creation.",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f0de186_ad45f3c2",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c760015f_585dca32",
       "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -222,6 +438,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08b1a15_7f3a29bd",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87f58282_babc487b",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df46c145_2e76d030",
@@ -239,6 +473,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c455135a_4751c217",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df46c145_2e76d030",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6da5be67_8d817726",
@@ -252,6 +504,24 @@
       "writtenOn": "2023-11-15T02:47:13Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\targ_BIND_CONN_TO_SESSION4-\u003ebctsa_dir \u003d\u003d CDFC4_FORE_OR_BOTH) {",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c75659ec_b6fb5938",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da5be67_8d817726",
       "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
