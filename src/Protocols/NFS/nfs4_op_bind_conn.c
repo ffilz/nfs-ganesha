@@ -82,6 +82,7 @@ static nfsstat4 bind_conn_to_session_backchannel(SVCXPRT *rq_xprt,
 	}
 	LogFatal(COMPONENT_SESSIONS,
 		"Only SP4_NONE state protection is supported. Code flow should not reach here");
+	return NFS4ERR_SERVERFAULT;
 }
 
 /**
