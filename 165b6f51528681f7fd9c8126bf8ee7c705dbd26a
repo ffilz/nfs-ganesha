@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e8ab19_f492946c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:22:30Z",
+      "side": 1,
+      "message": "As discussed outside this forum, I did have the hook installed, but it did not run on `git commit --amend`, so these warnings were missed earlier. Thanks for sharing the required information to fix these issues.\n\nHowever, the current CL is being abandoned since I created fresh commits, and unfortunately missed retaining the change-id to avoid creating new CLs :(",
+      "parentUuid": "61d76656_87126fd6",
+      "revId": "165b6f51528681f7fd9c8126bf8ee7c705dbd26a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36c20151_4978d52d",
