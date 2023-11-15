@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb9eaf0e_8a94428b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T21:47:52Z",
+      "side": 1,
+      "message": "Fix checkpatch issues, I do want to give this one another careful look.",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ffc5126_c2672b18",
         "filename": "src/support/xprt_handler.c",
         "patchSetId": 1
@@ -14,6 +31,41 @@
       "writtenOn": "2023-11-15T11:30:37Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3f36669_5f86d26f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T21:47:52Z",
+      "side": 1,
+      "message": "Ignore...",
+      "parentUuid": "7ffc5126_c2672b18",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cba99a0_8d9c2ab3",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T21:47:52Z",
+      "side": 1,
+      "message": "You could conditionally do this. Since buffer is initialized, nothing bad will happen if there is a race between enabling info and this.",
       "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -37,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a22defeb_30865794",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T21:47:52Z",
+      "side": 1,
+      "message": "Don\u0027t split strings. Move the parameters onto a new line.",
+      "parentUuid": "14fc81dd_e7b3b70d",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b4c8944_4d6c12d9",
         "filename": "src/support/xprt_handler.c",
         "patchSetId": 1
@@ -54,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c93e10dd_e38dbcd8",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T21:47:52Z",
+      "side": 1,
+      "message": "don\u0027t split strings...",
+      "parentUuid": "2b4c8944_4d6c12d9",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9889f477_7f58e649",
         "filename": "src/support/xprt_handler.c",
         "patchSetId": 1
@@ -65,6 +153,24 @@
       "writtenOn": "2023-11-15T11:30:37Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t\"No client data is associated with the destroyed xprt.\"\n+\t\t\t\" Nothing more to handle\");",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127ca047_2aca9644",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T21:47:52Z",
+      "side": 1,
+      "message": "Don\u0027t split strings...",
+      "parentUuid": "9889f477_7f58e649",
       "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
