@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ffc5126_c2672b18",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T11:30:37Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14fc81dd_e7b3b70d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T11:30:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"xp_u1 is already initialised for xprt with FD: %d and\"\n+\t\t\t\" socket-addr: %s\", xprt-\u003exp_fd, sockaddr_str);",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4c8944_4d6c12d9",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T11:30:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Processing client data for destroyed xprt: %p with FD: %d,\"\n+\t\t\" socket-addr: %s\", xprt, xprt-\u003exp_fd, sockaddr_str);",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9889f477_7f58e649",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T11:30:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"No client data is associated with the destroyed xprt.\"\n+\t\t\t\" Nothing more to handle\");",
+      "revId": "42e8c4939dc76c463b8a72d81c38d695a93143c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
