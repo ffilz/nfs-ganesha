@@ -1,4 +1,158 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47475f26_05ca0980",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tstruct display_buffer xprt_db \u003d {sizeof(xprt_addr_string), xprt_addr_string,",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "777bbc3d_81485dbf",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tstruct display_buffer curr_xprt_db \u003d {sizeof(curr_xprt_addr_string),",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45b80453_466379d1",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t * socket-address. We do not want to remove a different xprt with same",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64289e8d_63df5883",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (session-\u003econnection_xprts[i] \u003d\u003d xprt) {\n+\t\t\tbreak;\n+\t\t}",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1df92d_651278d0",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\"Found no matching connection for input xprt addr %s\", xprt_addr_string);",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745a0315_4b6d165d",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* Left shift by 1 all the entries present on the right of current index.",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c0d07c_e03e0f40",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * Note that there can be a maximum of only NFS41_MAX_CONNECTIONS entries in",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c39d2fb2_00103352",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * the array. The array being contiguous, the NFS41_MAX_CONNECTIONS number",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dec3a94_1aca948c",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T08:49:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\"Successfuly removed the connection for xprt addr %s\", xprt_addr_string);",
+      "revId": "3d8375dee96fe68f9f175b7f72a360165559cca2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ],
   "submitRequirementResults": []
 }
