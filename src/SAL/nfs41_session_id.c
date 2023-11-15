@@ -564,6 +564,85 @@ retry:
 }
 
 /**
+ * @brief Remove matching connection (SVCXPRT) from the session
+ */
+void remove_session_connection(nfs41_session_t *session, SVCXPRT *xprt)
+{
+	int i;
+	sockaddr_t xprt_addr;
+	char xprt_addr_string[LOG_BUFF_LEN / 2] = "\0";
+	struct display_buffer xprt_db = {
+		sizeof(xprt_addr_string), xprt_addr_string, xprt_addr_string};
+
+	/* Copy the address from the input xprt */
+	copy_xprt_addr(&xprt_addr, xprt);
+	display_sockaddr(&xprt_db, &xprt_addr);
+
+	PTHREAD_RWLOCK_wrlock(&session->conn_lock);
+
+	for (i = 0; i < session->num_conn; i++) {
+		sockaddr_t curr_xprt_addr;
+
+		/* Copy socket address from the session's current connection */
+		copy_xprt_addr(&curr_xprt_addr, session->connection_xprts[i]);
+
+		if (isFullDebug(COMPONENT_SESSIONS)) {
+			char curr_xprt_addr_string[LOG_BUFF_LEN / 2] = "\0";
+			struct display_buffer curr_xprt_db = {
+				sizeof(curr_xprt_addr_string),
+				curr_xprt_addr_string, curr_xprt_addr_string};
+
+			display_sockaddr(&curr_xprt_db, &curr_xprt_addr);
+			LogFullDebug(COMPONENT_SESSIONS,
+				"Comparing input xprt addr %s to session bound"
+				" xprt addr %s", xprt_addr_string,
+				curr_xprt_addr_string);
+		}
+
+		/* During removal, the xprt address must match, and not just the
+		 * socket-address. We do not want to remove a different xprt
+		 * with same socket-address.
+		 */
+		if (session->connection_xprts[i] == xprt)
+			break;
+	}
+
+	/* Return if the connection is not bound to the session */
+	if (i >= session->num_conn) {
+		PTHREAD_RWLOCK_unlock(&session->conn_lock);
+		LogWarn(COMPONENT_SESSIONS,
+			"Found no matching connection for input xprt addr %s",
+			xprt_addr_string);
+		return;
+	}
+
+	/* Now, remove the matching connection from session */
+	session->num_conn--;
+
+	/* Release the connection-xprt's ref held on the session */
+	SVC_RELEASE(session->connection_xprts[i], SVC_RELEASE_FLAG_NONE);
+
+	/* Left shift by 1 all the entries present on the right of current
+	 * index.
+	 *
+	 * Note that there can be a maximum of only NFS41_MAX_CONNECTIONS
+	 * entries in the array. The array being contiguous, the
+	 * NFS41_MAX_CONNECTIONS number of accesses should be faster than a
+	 * smaller number of random accesses if we used a linked-list.
+	 */
+	while (i < session->num_conn) {
+		session->connection_xprts[i] = session->connection_xprts[i+1];
+		i++;
+	}
+	session->connection_xprts[i] = NULL;
+
+	PTHREAD_RWLOCK_unlock(&session->conn_lock);
+	LogDebug(COMPONENT_SESSIONS,
+		"Successfuly removed the connection for xprt addr %s",
+		xprt_addr_string);
+}
+
+/**
  * @brief Release all connections (SVCXPRT) referenced by the session
  */
 void release_all_session_connections(nfs41_session_t *session)
