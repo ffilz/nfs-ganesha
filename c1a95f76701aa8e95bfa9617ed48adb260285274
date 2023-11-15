@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af3d32aa_da053c7b",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T12:37:10Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Set up session: %s backchannel and bind it to current xprt\"\n+\t\t\" FD: %d socket-address: %s\", session_str, rq_xprt-\u003exp_fd,",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b4f9fe_a476e48a",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T12:37:10Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Only SP4_NONE state protection is supported. Code flow should\"\n+\t\t\" not reach here\");",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
