@@ -1,4 +1,447 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7fc39df_90b5414d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\tstruct display_buffer db \u003d\n+\t\t{sizeof(xprt_addr_str), xprt_addr_str, xprt_addr_str};",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b9239c3_4f1dad6e",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* Copy the xprt sessions to a new list to avoid deadlock that can happen",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32828953_c8f90e5f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * lock (this lock order is reverse of the order used during xprt connection",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f1c333_95044a8e",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * With the below change, we do not acquire the nested session\u0027s connections",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e996b26_f3710a92",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * lock, while holding the xprt\u0027s session-list lock. We first release the",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a249c09_f966f4f1",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * xprt\u0027s session-list lock after copying the xprt\u0027s sessions to a duplicate",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2085b35e_b582d9f2",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * session-list. We then acquire the session\u0027s connection lock to process",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f513d494_997ca6b2",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * each session in the duplicate list. That is, both the mentioned operations",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd32b07b_860660ed",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * This can result in possible situations where the xprt\u0027s session-list has",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df91934a_fae7fea0",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * been cleared after the first operation, but those cleared sessions still",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e3fd183_5d94f4b5",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * interval between the two operation, it is possible that another thread",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "549cba03_a63e2ddc",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * session-list and tries to add it to that xprt, even though that session",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe92217_3a812297",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * already had a reference to this xprt. If this situation happens, such a",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5b4705_618e4825",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * getting un-referenced. Also, such a xprt\u0027s reference would get re-added",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30def9ea_d1290a9f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * must also check if the xprt under consideration is being destroyed before",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3bbc1f_22e9046e",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * through this function, but another in-flight request is still operating",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e39f87_02e0d66f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tstruct glist_head *next_node \u003d curr_node-\u003enext;\n+\t\tcurr_session \u003d glist_entry(curr_node, nfs41_session_list_entry_t, node);",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0cc2769_87484f6e",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tcurr_session \u003d glist_entry(curr_node, nfs41_session_list_entry_t, node);",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "944c5629_bcbd178d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tduplicate_session_entry \u003d gsh_malloc(sizeof(nfs41_session_list_entry_t));",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b71ca32_1cf6f792",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tglist_add_tail(\u0026duplicate_session_list, \u0026duplicate_session_entry-\u003enode);",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b6d353_08b05ebc",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* Since we would want to add a new session reference for the duplicate",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ecb187_8bf279df",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t * list and release the existing session reference from the xprt, both",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a47474_51633d89",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t * would negate each other. So, we do not update the reference at all.",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3187447_3f323305",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tstruct glist_head *next_node \u003d curr_node-\u003enext;\n+\t\tcurr_session \u003d glist_entry(curr_node, nfs41_session_list_entry_t, node);",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7652e8_307e958a",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tcurr_session \u003d glist_entry(curr_node, nfs41_session_list_entry_t, node);",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd394fb_cd3ab528",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T09:28:56Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tdestroy_session_backchannel_for_xprt(curr_session-\u003esession, xprt);",
+      "revId": "ce88ff9d2ab712f126096e5b532d7c533c4998ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ],
   "submitRequirementResults": []
 }
