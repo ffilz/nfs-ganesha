@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8a7d7d_df09289d",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* The xprt is not associated with the existing channel, so we first",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5fb77d2_acc1d60f",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tstruct display_buffer db \u003d {sizeof(session_str), session_str, session_str};",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "232cbbe9_e1f99204",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\tstruct display_buffer db1 \u003d\n+\t\t{sizeof(xprt_addr_str), xprt_addr_str, xprt_addr_str};",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced3837f_f2ff9242",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\tLogInfo(COMPONENT_SESSIONS, \"Set up session: %s backchannel and bind it\"\n+\t\t\" to current xprt FD: %d socket-address: %s\", session_str,",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97faf49e_6d1a4f0d",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\"Successfully created backchannel for session: %s\", session_str);",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a67cca6_3b818190",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (rc \u003d\u003d EINVAL || rc \u003d\u003d EPERM) {\n+\t\t\treturn NFS4ERR_INVAL;\n+\t\t}",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e4b0ee3_4f62e4c6",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tLogFatal(COMPONENT_SESSIONS, \"Only SP4_NONE state protection is supported.\"",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf922f1_6f70f319",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\tLogFatal(COMPONENT_SESSIONS, \"Only SP4_NONE state protection is supported.\"\n+\t\t\" Code flow should not reach here\");",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6801213b_489e54a2",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tbind_conn_to_session_backchannel(data-\u003ereq-\u003erq_xprt, session);",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86fa2c4d_c1e919b4",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (arg_BIND_CONN_TO_SESSION4-\u003ebctsa_dir \u003d\u003d CDFC4_FORE_OR_BOTH) {",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55133201_3f445cd7",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Since it is not mandatory to bind connection to backchannel in",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c760015f_585dca32",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t * this scenario, we return only successful forechannel creation.",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87f58282_babc487b",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tres_BIND_CONN_TO_SESSION4-\u003ebctsr_status \u003d bindToBackchannel;",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df46c145_2e76d030",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tif (arg_BIND_CONN_TO_SESSION4-\u003ebctsa_dir \u003d\u003d CDFC4_BACK_OR_BOTH ||",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6da5be67_8d817726",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T02:47:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\targ_BIND_CONN_TO_SESSION4-\u003ebctsa_dir \u003d\u003d CDFC4_FORE_OR_BOTH) {",
+      "revId": "e5693d6ef6173197d543fda877d539e7a4f9ddfb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
