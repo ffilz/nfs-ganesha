@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71f47ad_b7147593",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T12:50:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"About to un-reference client-data from xprt with FD: %d,\"\n+\t\t\" socket-addr: %s\", xprt-\u003exp_fd, xprt_addr_str);",
+      "revId": "a15339e55fcadb2b07107234128cd26f8c1a26a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e060cfe6_e7e248ed",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T12:50:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"The xprt is not associated with any client-data,\"\n+\t\t\t\" done un-referencing.\");",
+      "revId": "a15339e55fcadb2b07107234128cd26f8c1a26a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
