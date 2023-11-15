@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7731a150_bbd20e9a",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-11-15T11:14:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tPTHREAD_RWLOCK_unlock(\u0026xprt_client_data-\u003enfs41_session_list_lock);",
+      "revId": "4c37442e6dd6c565f0d2d0d86c9ac44ca9dd1093",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ],
   "submitRequirementResults": []
 }
