@@ -336,6 +336,7 @@ void free_client_id(nfs_client_id_t *clientid)
 			nfs41_session_t *session = glist_entry(glist,
 							       nfs41_session_t,
 							       session_link);
+			release_all_session_connections(session);
 			nfs41_Session_Del(session->session_id);
 		}
 	}
@@ -1096,6 +1097,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale)
 			nfs41_session_t *session = glist_entry(glist,
 							       nfs41_session_t,
 							       session_link);
+			release_all_session_connections(session);
 
 			if (!nfs41_Session_Del(session->session_id)) {
 				display_client_id_rec(&dspbuf, clientid);

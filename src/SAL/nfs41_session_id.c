@@ -40,6 +40,7 @@
 #include "nfs_core.h"
 #include "nfs_proto_functions.h"
 #include "sal_functions.h"
+#include "xprt_handler.h"
 #ifdef USE_LTTNG
 #include "gsh_lttng/nfs4.h"
 #endif
@@ -482,6 +483,7 @@ bool check_session_conn(nfs41_session_t *session,
 {
 	int i, num;
 	sockaddr_t addr;
+	bool add_session_to_xprt;
 	bool associate = false;
 
 	/* Copy the address coming over the wire. */
@@ -495,6 +497,11 @@ retry:
 	num = session->num_conn;
 
 	for (i = 0; i < session->num_conn; i++) {
+		sockaddr_t conn_addr;
+
+		/* Copy socket address from the session's current connection */
+		copy_xprt_addr(&conn_addr, session->connection_xprts[i]);
+
 		if (isFullDebug(COMPONENT_SESSIONS)) {
 			char str1[LOG_BUFF_LEN / 2] = "\0";
 			char str2[LOG_BUFF_LEN / 2] = "\0";
@@ -502,13 +509,13 @@ retry:
 			struct display_buffer db2 = {sizeof(str2), str2, str2};
 
 			display_sockaddr(&db1, &addr);
-			display_sockaddr(&db2, &session->connections[i]);
+			display_sockaddr(&db2, &conn_addr);
 			LogFullDebug(COMPONENT_SESSIONS,
 				     "Comparing addr %s for %s to Session bound addr %s",
 				     str1, data->opname, str2);
 		}
 
-		if (cmp_sockaddr(&addr, &session->connections[i], false)) {
+		if (cmp_sockaddr(&addr, &conn_addr, false)) {
 			/* We found a match */
 			PTHREAD_RWLOCK_unlock(&session->conn_lock);
 			return true;
@@ -544,12 +551,68 @@ retry:
 		goto retry;
 	}
 
-	/* Add the new connection. */
-	memcpy(&session->connections[session->num_conn++], &addr, sizeof(addr));
-
+	add_session_to_xprt = associate_xprt_with_nfs41_session(
+		data->req->rq_xprt, session);
 	PTHREAD_RWLOCK_unlock(&session->conn_lock);
 
-	return true;
+	if (!add_session_to_xprt) {
+		LogWarn(COMPONENT_SESSIONS,
+			"Could not associate xprt FD: %d with session",
+			data->req->rq_xprt->xp_fd);
+	}
+	return add_session_to_xprt;
+}
+
+/**
+ * @brief Release all connections (SVCXPRT) referenced by the session
+ */
+void release_all_session_connections(nfs41_session_t *session)
+{
+	int i;
+
+	/* Take connections write-lock */
+	PTHREAD_RWLOCK_wrlock(&session->conn_lock);
+
+	for (i = 0; i < session->num_conn; i++) {
+		struct glist_head *curr_node;
+		svc_xprt_client_data_t *client_data;
+		SVCXPRT *xprt = session->connection_xprts[i];
+
+		if (!xprt->xp_u1) {
+			LogDebug(COMPONENT_SESSIONS,
+				"Skip xprt FD: %d without client data",
+				xprt->xp_fd);
+			goto release_xprt_ref;
+		}
+		client_data = (svc_xprt_client_data_t *) xprt->xp_u1;
+		PTHREAD_RWLOCK_wrlock(&client_data->nfs41_session_list_lock);
+
+		for (curr_node = client_data->nfs41_session_list.next;
+			curr_node != &(client_data->nfs41_session_list);) {
+
+			struct glist_head *next_node = curr_node->next;
+			nfs41_session_list_entry_t *curr_session = glist_entry(
+				curr_node, nfs41_session_list_entry_t, node);
+
+			if (curr_session->session == session) {
+				dec_session_ref(curr_session->session);
+				glist_del(curr_node);
+				gsh_free(curr_session);
+			}
+			curr_node = next_node;
+		}
+		PTHREAD_RWLOCK_unlock(&client_data->nfs41_session_list_lock);
+
+ release_xprt_ref:
+
+		/* Release the connection-xprt's ref held by the session being
+		 * destroyed.
+		 */
+		SVC_RELEASE(xprt, SVC_RELEASE_FLAG_NONE);
+		session->connection_xprts[i] = NULL;
+	}
+	session->num_conn = 0;
+	PTHREAD_RWLOCK_unlock(&session->conn_lock);
 }
 
 /** @} */
