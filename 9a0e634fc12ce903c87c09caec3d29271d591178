@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2fb2a9_40a732ea",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9794295_a6b4644d",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b534827_0183ab5f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t/* Copy the xprt sessions to a new list to avoid deadlock that can happen",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b92c17_feb75309",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b534827_0183ab5f",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "378d3720_9447d3d2",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa5d2393_62e1eb09",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a6ad3d3_7b5de601",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t * With the below change, we do not acquire the nested session\u0027s connections",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15f18a06_77ff001b",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a6ad3d3_7b5de601",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8604ab_8d8ee96e",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5f24d86_c19629c5",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bfbcd6b_41e23752",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t * xprt\u0027s session-list lock after copying the xprt\u0027s sessions to a duplicate",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0126cf23_ac6a503b",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bfbcd6b_41e23752",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d01ff2_d013324d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94b5e9fc_c99b999e",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac255d05_2d3fb39c",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t * each session in the duplicate list. That is, both the mentioned operations",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af64738_6260c45b",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac255d05_2d3fb39c",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "378b76bd_16c22043",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0433ca35_b8b0f08a",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4487de9e_747474b0",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t * been cleared after the first operation, but those cleared sessions still",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc5b6bd_ce4fc465",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4487de9e_747474b0",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -188,6 +368,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ec641f_eaff2078",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83ea28d4_7ff2fdeb",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bffebbc9_ccb3945b",
@@ -201,6 +399,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t * session-list and tries to add it to that xprt, even though that session",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "757965eb_8ed2965d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bffebbc9_ccb3945b",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -222,6 +438,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef2ed909_2f1da9f1",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2754b4d9_067e44a8",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9ddab16_f39cf976",
@@ -235,6 +469,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t * getting un-referenced. Also, such a xprt\u0027s reference would get re-added",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4acc61_576eacc9",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9ddab16_f39cf976",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -256,6 +508,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "606894b2_db9101ce",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea1d585e_1c4ebebc",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d067849_f478a6ab",
@@ -269,6 +539,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t * through this function, but another in-flight request is still operating",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01aa559f_18161e1a",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d067849_f478a6ab",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -307,6 +595,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "128a9eca_daf4fb30",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "372f1e59_ad84bea6",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "597652a6_36c2bcf8",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1468e43b_71b1f623",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ed4c1ef_310ca19e",
@@ -320,6 +644,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\tduplicate_session_entry \u003d gsh_malloc(sizeof(nfs41_session_list_entry_t));",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68c72fb5_52c49f3b",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed4c1ef_310ca19e",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -341,6 +683,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04762ce3_36564e7f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a2a39ab_5d501313",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5d52897_850bf33e",
@@ -354,6 +714,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t/* Since we would want to add a new session reference for the duplicate",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c19b76f0_4e7bcd69",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5d52897_850bf33e",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -375,6 +753,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14017f13_c3d1f9b9",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "697fe279_ebc029be",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e50803d_4cb94db1",
@@ -388,6 +784,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t * would negate each other. So, we do not update the reference at all.",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f19fcb95_61451ac5",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e50803d_4cb94db1",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -426,6 +840,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee39378e_07a985fc",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0674db71_2f526450",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "713c877d_8f51e464",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13be4fec_263a7c19",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f301e73_9b238a0c",
@@ -439,6 +889,24 @@
       "writtenOn": "2023-11-14T20:44:10Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\tdestroy_session_backchannel_for_xprt(curr_session-\u003esession, xprt);",
+      "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "678ae4de_b7156795",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-11-15T07:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f301e73_9b238a0c",
       "revId": "9a0e634fc12ce903c87c09caec3d29271d591178",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
