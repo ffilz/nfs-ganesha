@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be051ad8_3230e6c5",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T20:11:28Z",
+      "side": 1,
+      "message": "Again, don\u0027t break the string. And then move the parameters to the next line since checkpatch would get grumpy about them being past 80 columns",
+      "parentUuid": "af3d32aa_da053c7b",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043bbaf8_7d09987d",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T20:11:28Z",
+      "side": 1,
+      "message": "It would be nice to re-organize the code so the return of NFS4_OK is at the end.\n\nHow about\n\nif (unlikely(rc \u003d\u003d EINVAL || rc \u003d\u003d EPERM)) {\n   LogDebug(...) // log the error\n   return NFS4ERR_INVAL;\n} else if (unlikely(rc !\u003d 0)) {\n   LogDebug(...) // log the actual error\n   return NFS4ERR_SERVERFAULT;\n}\nLog the success\nLog success",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39b4f9fe_a476e48a",
         "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
         "patchSetId": 1
@@ -31,6 +66,58 @@
       "writtenOn": "2023-11-15T12:37:10Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\"Only SP4_NONE state protection is supported. Code flow should\"\n+\t\t\" not reach here\");",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13eb35d9_5cbc11c2",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T20:11:28Z",
+      "side": 1,
+      "message": "Please don\u0027t break strings...",
+      "parentUuid": "39b4f9fe_a476e48a",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b4afef_4845faeb",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T20:11:28Z",
+      "side": 1,
+      "message": "Blank line here please.",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864a0443_9878a3fc",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-15T20:11:28Z",
+      "side": 1,
+      "message": "I think this should be a LogCrit?",
       "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
