@@ -16,6 +16,23 @@
       "message": "Hi ffilz, could you review this patch?",
       "revId": "e87951f5512dab2b03cec553d27d2784fd7eea2f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "478c5faf_250471c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2023-11-16T06:28:05Z",
+      "side": 1,
+      "message": "There is one case that fails:\nhttps://jenkins-nfs-ganesha.apps.ocp.cloud.ci.centos.org/job/fsal-rgw/224//console : FAILED\n\nIt seems there is nothing related. Could anyone help?",
+      "revId": "e87951f5512dab2b03cec553d27d2784fd7eea2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
