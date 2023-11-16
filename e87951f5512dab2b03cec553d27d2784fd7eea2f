@@ -33,6 +33,41 @@
       "message": "There is one case that fails:\nhttps://jenkins-nfs-ganesha.apps.ocp.cloud.ci.centos.org/job/fsal-rgw/224//console : FAILED\n\nIt seems there is nothing related. Could anyone help?",
       "revId": "e87951f5512dab2b03cec553d27d2784fd7eea2f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead11cb1_7484ef65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-16T16:31:41Z",
+      "side": 1,
+      "message": "Yea, there is some breakage there that has nothing to do with your patch.",
+      "parentUuid": "478c5faf_250471c4",
+      "revId": "e87951f5512dab2b03cec553d27d2784fd7eea2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb9c13e1_d647ab36",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-16T16:31:41Z",
+      "side": 1,
+      "message": "Please move this line after the comment.",
+      "revId": "e87951f5512dab2b03cec553d27d2784fd7eea2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
