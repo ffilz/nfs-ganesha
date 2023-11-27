@@ -51,6 +51,24 @@
       "parentUuid": "b3a93a69_052555ca",
       "revId": "7552ec8f51496db542a1f300961fb829657d7c8d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21e466f7_edfb8c93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-11-27T16:37:22Z",
+      "side": 1,
+      "message": "If you have them all in the same git repo, you just need to cherry pick each one into a single branch. With gerrithub, I have to open each patch in a new tab, and select the right \"download\" link. There isn\u0027t a way to navigate to the \"next\" patch. It\u0027s a pretty slow process, and I don\u0027t get confirmation I grabbed all the patches until I push the merge and see them all clear out of gerrithub. It\u0027s actually more error prone...",
+      "parentUuid": "241b57c3_de31643e",
+      "revId": "7552ec8f51496db542a1f300961fb829657d7c8d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
