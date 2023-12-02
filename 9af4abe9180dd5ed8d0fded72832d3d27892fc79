@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d27fecd3_15b84ae3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-02T23:26:19Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis allows us to plugin our own logging framework and get unified logs for out fsal + ganesha.",
+      "revId": "9af4abe9180dd5ed8d0fded72832d3d27892fc79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a8df63_cc83826e",
+        "filename": "src/include/log_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-02T23:26:19Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+#endif  // _LOG_COMMON_H",
+      "revId": "9af4abe9180dd5ed8d0fded72832d3d27892fc79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
