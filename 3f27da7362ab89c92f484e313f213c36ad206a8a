@@ -33,6 +33,24 @@
       "message": "I\u0027m not quite understanding what this accomplishes. You have your own logging subsystem? Could you share how it will be used?",
       "revId": "3f27da7362ab89c92f484e313f213c36ad206a8a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d3af51_6972937c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2023-12-04T20:58:20Z",
+      "side": 1,
+      "message": "Yes, we use the logging subsystem that is included in abseil: https://github.com/abseil/abseil-cpp\n\nWe patch display_log_component_level to call into a small function that in turn calls into absl logging. This bridge layer needs to know the logging levels and logging components, but it must not include all of log.h. That\u0027s why I moved those two enums to log_common.h",
+      "parentUuid": "b49f7864_1aa2847d",
+      "revId": "3f27da7362ab89c92f484e313f213c36ad206a8a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
