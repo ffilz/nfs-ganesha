@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis allows us to plugin our own logging framework and get unified logs for out fsal + ganesha.",
       "revId": "3f27da7362ab89c92f484e313f213c36ad206a8a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49f7864_1aa2847d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-12-04T20:47:32Z",
+      "side": 1,
+      "message": "I\u0027m not quite understanding what this accomplishes. You have your own logging subsystem? Could you share how it will be used?",
+      "revId": "3f27da7362ab89c92f484e313f213c36ad206a8a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
