@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be958c21_cf001c59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-12-08T23:24:11Z",
+      "side": 1,
+      "message": "OK, doing a V6-dev.1 merge so this is ready to go.",
+      "revId": "5675c673ffd11044f99908c2960ccbc5f4cf6d4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0ebfab_ce70d061",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-12-08T23:24:11Z",
+      "side": 1,
+      "message": "I had to shorten conflict_owner to cf_own to have a chance of not breaking up cf_own-\u003eso_owner.so_nfs4_owner.so_clientrec. Since it\u0027s very locally used, I think it works.",
+      "revId": "5675c673ffd11044f99908c2960ccbc5f4cf6d4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
