@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de488934_e7e45c54",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-09T23:49:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t/* Recheck once again before cleaning up, if it became active */",
+      "revId": "a82bf3794acd1b1b54bf54dbb6b9a4ff183aedff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b78d34_f43b1b85",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1413,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-09T23:49:17Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (24, 24)\n+\t\t\tif (valid_lease(expired_client, true)) {\n+\t\t\tPTHREAD_MUTEX_unlock(\u0026expired_client-\u003ecid_mutex);",
+      "revId": "a82bf3794acd1b1b54bf54dbb6b9a4ff183aedff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a394430_2d51d718",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-09T23:49:17Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I^I$",
+      "revId": "a82bf3794acd1b1b54bf54dbb6b9a4ff183aedff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
