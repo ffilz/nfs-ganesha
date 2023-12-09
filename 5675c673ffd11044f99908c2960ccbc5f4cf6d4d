@@ -55,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "15073542_6a8d2a93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2023-12-09T04:14:38Z",
+      "side": 1,
+      "message": "This issue in LKU10 has been resolved...\nThis was coming due to the removal of conflicting state from expired client\nas part of IO operations and parallel reaper cleaning states.\nThe list_of_states was getting cleared off, but the the next pointer\nin glist_for_each_safe was dangling, thereby causing the crash.",
+      "parentUuid": "72acafd5_27865d8a",
+      "revId": "5675c673ffd11044f99908c2960ccbc5f4cf6d4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0f0ebfab_ce70d061",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 16
