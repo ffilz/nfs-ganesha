@@ -16,6 +16,24 @@
       "message": "As discussed in our meeting, I think it would be best to just request all supported attributes (less ACL and security label unless the client has requested those).",
       "revId": "8527143f74f411564ce60e1b7994e8a8963db926",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f92107_6ebdf6e3",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2023-12-12T22:35:01Z",
+      "side": 1,
+      "message": "What should we do if the req_attr contains attributes that are not supported?",
+      "parentUuid": "50431523_9a4f0faa",
+      "revId": "8527143f74f411564ce60e1b7994e8a8963db926",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
