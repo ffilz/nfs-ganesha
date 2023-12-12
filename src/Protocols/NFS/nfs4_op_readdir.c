@@ -665,7 +665,7 @@ enum nfs_req_result nfs4_op_readdir(struct nfs_argop4 *op,
 	/* Assume we need at least the NFS v3 attr.
 	 * Any attr is sufficient for permission checking.
 	 */
-	attrmask = ATTRS_NFS3;
+	attrmask = arg_READDIR4->attr_request | ATTRS_NFS3;
 
 	/* If ACL is requested, we need to add that for permission checking. */
 	if (attribute_is_set(tracker.req_attr, FATTR4_ACL))
