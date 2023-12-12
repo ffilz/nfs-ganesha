@@ -662,10 +662,15 @@ enum nfs_req_result nfs4_op_readdir(struct nfs_argop4 *op,
 	xdrmem_create(&tracker.xdr, (char *)tracker.entries, tracker.mem_avail,
 		      XDR_ENCODE);
 
+	/* Ignore errors here as they just indicate that we got a request
+	 * for an unrecognized attribute. For READDIR we just won't return it.
+	 */
+	bitmap4_to_attrmask_t(&arg_READDIR4->attr_request, &attrmask);
+
 	/* Assume we need at least the NFS v3 attr.
 	 * Any attr is sufficient for permission checking.
 	 */
-	attrmask = ATTRS_NFS3;
+	attrmask |= ATTRS_NFS3;
 
 	/* If ACL is requested, we need to add that for permission checking. */
 	if (attribute_is_set(tracker.req_attr, FATTR4_ACL))
