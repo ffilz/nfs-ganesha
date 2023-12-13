@@ -16,6 +16,24 @@
       "message": "Coming late to the party here -- what was the problem with tmpfs and GPFS?\n\nThis commit makes it impossible to export a tmpfs directly as well, which was useful for testing; the comment above this block also doesn\u0027t match up as tmpfs does export properly (at least for 9p, but I don\u0027t see why nfs wouldn\u0027t work...), so at the very least we should explain why we\u0027re blocking it in a way that stands out a bit more in logs (a bit hard to do, export fails to be found later with `vfs_create_export :FSAL :CRIT :resolve_posix_filesystem(/tmp) returned No such file or directory` but the reason here is only listed in debug when we don\u0027t know yet it\u0027ll be used by export..), or if possible it\u0027d be great if we could make both use cases work, but I can\u0027t help with that if I don\u0027t understand the problem.",
       "revId": "e21025367778c39b8c69d7c9b7dad8f931968123",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7671f2dd_10e38f73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2023-12-13T14:46:03Z",
+      "side": 1,
+      "message": "reason for excluding tmpfs: NFS fails to resolve the posix filesystem, when a \u0027tmpfs\u0027 type is mounted prior to adding any gpfs export, and then unmounted. This happens because NFS does not repopulate the posix filesystem which leads to mismatch of major and minor number of exports",
+      "parentUuid": "e8839903_fe5f5aaa",
+      "revId": "e21025367778c39b8c69d7c9b7dad8f931968123",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
