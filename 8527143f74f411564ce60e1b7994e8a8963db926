@@ -52,6 +52,24 @@
       "parentUuid": "72f92107_6ebdf6e3",
       "revId": "8527143f74f411564ce60e1b7994e8a8963db926",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab524a59_b09012c9",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2023-12-13T00:00:14Z",
+      "side": 1,
+      "message": "Done. I changed it so that nfs4_op_readdir passed down the requested attributes, but also checks that requested attributes are in fact supported.",
+      "parentUuid": "9fe84c64_8f5152cf",
+      "revId": "8527143f74f411564ce60e1b7994e8a8963db926",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
