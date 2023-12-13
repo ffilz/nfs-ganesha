@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48069e17_2553e520",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-13T01:14:33Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attrmask \u003d\u003d 0) {\n+\t\tattrmask \u003d ATTRS_NFS3;\n+\t}",
+      "revId": "94f5d968a0d473488100da48e2f78307e46afa36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
