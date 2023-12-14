@@ -550,8 +550,9 @@ fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
 	 * mode bit needs to be cleared in case of non-executable regular files,
 	 * we retain the same behavior (i.e. clear) as linux kernel NFS server.
 	 */
-	if (FSAL_TEST_MASK(attr->valid_mask, ATTR_OWNER) ||
-	    FSAL_TEST_MASK(attr->valid_mask, ATTR_GROUP)) {
+	if ((obj->type != DIRECTORY) &&
+	    (FSAL_TEST_MASK(attr->valid_mask, ATTR_OWNER) ||
+	     FSAL_TEST_MASK(attr->valid_mask, ATTR_GROUP))) {
 		/* The 'current' fsal attrs are not populated during the above call to
 		 * fsal_check_setattr_perms() if the caller is root. Populating it here.
 		 */
