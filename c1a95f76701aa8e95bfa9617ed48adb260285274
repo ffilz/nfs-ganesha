@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1533e999_0d2abbe4",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-12-14T13:00:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be051ad8_3230e6c5",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "043bbaf8_7d09987d",
@@ -49,6 +67,24 @@
       "writtenOn": "2023-11-15T20:11:28Z",
       "side": 1,
       "message": "It would be nice to re-organize the code so the return of NFS4_OK is at the end.\n\nHow about\n\nif (unlikely(rc \u003d\u003d EINVAL || rc \u003d\u003d EPERM)) {\n   LogDebug(...) // log the error\n   return NFS4ERR_INVAL;\n} else if (unlikely(rc !\u003d 0)) {\n   LogDebug(...) // log the actual error\n   return NFS4ERR_SERVERFAULT;\n}\nLog the success\nLog success",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5810ba8_393ad33f",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-12-14T13:00:27Z",
+      "side": 1,
+      "message": "Done. The error is already logged inside the `nfs_rpc_create_chan_v41` function, so skipped the logging here.",
+      "parentUuid": "043bbaf8_7d09987d",
       "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +124,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5028de_51b9650e",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-12-14T13:00:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13eb35d9_5cbc11c2",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27b4afef_4845faeb",
@@ -105,6 +159,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "952629db_2855a19a",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-12-14T13:00:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b4afef_4845faeb",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "864a0443_9878a3fc",
@@ -118,6 +190,24 @@
       "writtenOn": "2023-11-15T20:11:28Z",
       "side": 1,
       "message": "I think this should be a LogCrit?",
+      "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "883bf3c0_6613c619",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2023-12-14T13:00:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "864a0443_9878a3fc",
       "revId": "c1a95f76701aa8e95bfa9617ed48adb260285274",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
