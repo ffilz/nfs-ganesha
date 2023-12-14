@@ -161,6 +161,11 @@ static fsal_status_t find_cephfs_root(struct ceph_export *export, Inode **pi,
 	if (export->cmount_path == NULL ||
 	    strcmp(export->cmount_path, CTX_FULLPATH(op_ctx)) == 0) {
 		rc = ceph_ll_lookup_root(export->cmount, pi);
+		if (rc) {
+			LogWarn(COMPONENT_FSAL,
+			"Root lookup failed for %s : %d",
+			CTX_FULLPATH(op_ctx), rc);
+		}
 		*stxr = false;
 		goto out;
 	}
@@ -193,6 +198,10 @@ static fsal_status_t find_cephfs_root(struct ceph_export *export, Inode **pi,
 		walk_path = "/";
 	}
 
+	LogDebug(COMPONENT_FSAL,
+			"Cmount path %s, walk_path %s",
+			export->cmount_path, walk_path);
+
 	/* Now walk the path */
 	rc = fsal_ceph_ll_walk(export->cmount,
 			       walk_path,
@@ -201,6 +210,11 @@ static fsal_status_t find_cephfs_root(struct ceph_export *export, Inode **pi,
 			       false,
 			       &root_creds);
 
+	if (rc) {
+		LogWarn(COMPONENT_FSAL,
+				"ceph_ll_walk failed for %s : %d",
+				walk_path, rc);
+	}
 	*stxr = true;
 
 out:
@@ -579,8 +593,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (ceph_status != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to create Ceph handle for %s.",
-			CTX_FULLPATH(op_ctx));
+			"Unable to create Ceph handle for %s : %d",
+			CTX_FULLPATH(op_ctx), ceph_status);
 		goto error;
 	}
 
@@ -588,8 +602,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (ceph_status != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to read Ceph configuration for %s.",
-			CTX_FULLPATH(op_ctx));
+			"Unable to read Ceph configuration for %s : %d",
+			CTX_FULLPATH(op_ctx), ceph_status);
 		goto error;
 	}
 
@@ -635,7 +649,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (ceph_status != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to init Ceph handle.");
+			"Unable to init Ceph handle : %d",
+			ceph_status);
 		goto error;
 	}
 
@@ -653,8 +668,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (ceph_status != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to do reclaim_reset for %s.",
-			CTX_FULLPATH(op_ctx));
+			"Unable to do reclaim_reset for %s : %d",
+			CTX_FULLPATH(op_ctx), ceph_status);
 		goto error;
 	}
 
@@ -663,8 +678,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (ceph_status != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL,
-			"Unable to mount Ceph cluster for %s.",
-			CTX_FULLPATH(op_ctx));
+			"Unable to mount Ceph cluster for %s : %d",
+			CTX_FULLPATH(op_ctx), ceph_status);
 		goto error;
 	}
 
@@ -699,8 +714,12 @@ has_cmount:
 
 	status = find_cephfs_root(export, &i, &stx, &stxr);
 
-	if (FSAL_IS_ERROR(status))
+	if (FSAL_IS_ERROR(status)) {
+		LogCrit(COMPONENT_FSAL,
+				"Error finding root for %s.",
+				CTX_FULLPATH(op_ctx));
 		goto error;
+	}
 
 	if (!stxr) {
 		rc = fsal_ceph_ll_getattr(export->cmount, i, &stx,
@@ -708,6 +727,9 @@ has_cmount:
 					  &op_ctx->creds);
 
 		if (rc < 0) {
+			LogCrit(COMPONENT_FSAL,
+					"Ceph getattr failed %s : %d",
+					CTX_FULLPATH(op_ctx), rc);
 			status = ceph2fsal_error(rc);
 			goto error;
 		}
