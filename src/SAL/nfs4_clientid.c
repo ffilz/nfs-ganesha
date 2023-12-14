@@ -338,7 +338,7 @@ void free_client_id(nfs_client_id_t *clientid)
 			nfs41_session_t *session = glist_entry(glist,
 							       nfs41_session_t,
 							       session_link);
-			nfs41_Session_Del(session->session_id);
+			nfs41_Session_Del(session);
 		}
 	}
 
@@ -1099,7 +1099,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale)
 							       nfs41_session_t,
 							       session_link);
 
-			if (!nfs41_Session_Del(session->session_id)) {
+			if (!nfs41_Session_Del(session)) {
 				display_client_id_rec(&dspbuf, clientid);
 				LogCrit(COMPONENT_SESSIONS,
 					"Expire session failed for {%s}",
