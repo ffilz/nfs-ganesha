@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc693f17_3e483838",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-12-18T23:25:18Z",
+      "side": 1,
+      "message": "This will definitely help, adding strerror will make the messages even more useful.\n\nIt is probably worth doing this in other code paths, though for normal operations that may be expected to fail, you would want to use LogDebug.",
+      "revId": "28016d7134230c38facda580805ad4cbee1fc676",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f692ce8_69be339b",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2023-12-18T23:25:18Z",
+      "side": 1,
+      "message": "Since the ceph error codes are errno values, but negative, you could add a %s and strerror(-rc) for a message that will make more sense to a sysadmin",
+      "revId": "28016d7134230c38facda580805ad4cbee1fc676",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
