@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58fd1d73_5141496b",
+        "filename": "src/include/gsh_rpc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-19T07:51:39Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst struct netbuf *hostaddr \u003d svc_getcaller_netbuf(xprt);\n+\tif (hostaddr-\u003elen \u003d\u003d 0)",
+      "revId": "45ea5b32bff1d9082347828021f50e81915cc650",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
