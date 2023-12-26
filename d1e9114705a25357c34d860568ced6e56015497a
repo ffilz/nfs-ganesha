@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58fbcf24_fdebcd4d",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-26T12:07:37Z",
+      "side": 1,
+      "message": "ERROR: switch and case should be at the same indent\n \tswitch (state-\u003estate_type) {\n+\t\tcase STATE_TYPE_NONE:\n[...]\n+\t\tcase STATE_TYPE_SHARE:\n[...]\n+\t\tcase STATE_TYPE_DELEG:\n[...]\n+\t\tcase STATE_TYPE_LOCK:\n[...]\n+\t\tcase STATE_TYPE_LAYOUT:\n[...]\n+\t\tcase STATE_TYPE_NLM_LOCK:\n[...]\n+\t\tcase STATE_TYPE_NLM_SHARE:\n[...]\n+\t\tcase STATE_TYPE_9P_FID:\n[...]\n+\t\tdefault:",
+      "revId": "d1e9114705a25357c34d860568ced6e56015497a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d01954_d65f51ae",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-26T12:07:37Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+#define EXPORT_CONTAINER ^I^I^I\\$",
+      "revId": "d1e9114705a25357c34d860568ced6e56015497a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df92d49_3e4c8d3b",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-26T12:07:37Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I\"(\" TYPE_ID TYPE_STRING ^I^I\\$",
+      "revId": "d1e9114705a25357c34d860568ced6e56015497a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0a42ba_c895bb0b",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2023-12-26T12:07:37Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I\"(\" TYPE_STRING ^I^I^I\\$",
+      "revId": "d1e9114705a25357c34d860568ced6e56015497a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
