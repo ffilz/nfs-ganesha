@@ -1947,6 +1947,7 @@ fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
 		LogFullDebug(COMPONENT_FSAL,
 			 "fsal_start_fd_work returned %s",
 			 fsal_err_txt(status));
+		fsal_complete_fd_work(fsal_fd);
 		return status;
 	}
 
