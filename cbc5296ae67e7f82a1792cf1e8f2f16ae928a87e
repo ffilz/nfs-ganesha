@@ -16,6 +16,23 @@
       "message": "Please review...",
       "revId": "cbc5296ae67e7f82a1792cf1e8f2f16ae928a87e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "596dd183_a43a2c8c",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-01-09T22:09:41Z",
+      "side": 1,
+      "message": "Hmm, I wonder if this actually should be Open? In NFSv4 they are called open states. And some folks use \"share\" instead of \"export\".",
+      "revId": "cbc5296ae67e7f82a1792cf1e8f2f16ae928a87e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
