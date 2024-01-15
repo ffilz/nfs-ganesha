@@ -23,7 +23,7 @@ Type=forking
 RuntimeDirectory=ganesha
 EnvironmentFile=-/etc/default/nfs-ganesha
 ExecStart=/bin/bash -c "${NUMACTL} ${NUMAOPTS} /usr/bin/ganesha.nfsd -C ${OPTIONS} ${EPOCH} ${GNODEID}"
-ExecReload=/bin/kill -HUP $MAINPID
+ExecReload=/bin/dbus-send --print-reply=literal --system --dest=org.ganesha.nfsd --type=method_call /org/ganesha/nfsd/admin org.ganesha.nfsd.admin.reread_config
 ExecStop=/usr/bin/dbus-send --system   --dest=org.ganesha.nfsd --type=method_call /org/ganesha/nfsd/admin org.ganesha.nfsd.admin.shutdown
 
 [Install]
