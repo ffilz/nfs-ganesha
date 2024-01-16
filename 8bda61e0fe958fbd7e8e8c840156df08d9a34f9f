@@ -34,6 +34,24 @@
       "parentUuid": "d7370889_11964578",
       "revId": "8bda61e0fe958fbd7e8e8c840156df08d9a34f9f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22543389_a9c3c262",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1950,
+      "author": {
+        "id": 1037661
+      },
+      "writtenOn": "2024-01-16T20:06:45Z",
+      "side": 1,
+      "message": "I\u0027ve just checked Rojin patch and it resolves hangs and my patch caused abort on destroy_mutex. So I\u0027ll decline it.",
+      "parentUuid": "a33e8e98_30f90e11",
+      "revId": "8bda61e0fe958fbd7e8e8c840156df08d9a34f9f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
