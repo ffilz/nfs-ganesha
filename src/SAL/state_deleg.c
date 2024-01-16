@@ -241,6 +241,11 @@ void deleg_heuristics_recall(struct fsal_obj_handle *obj,
 	statistics->fds_curr_delegations--;
 	statistics->fds_recall_count++;
 
+	/* Reset the delegation type if no active delegation present. */
+	if (statistics->fds_curr_delegations == 0) {
+		statistics->fds_deleg_type = OPEN_DELEGATE_NONE;
+	}
+
 	/* Update delegation stats for client. */
 	dec_grants(client->gsh_client);
 	client->curr_deleg_grants--;
