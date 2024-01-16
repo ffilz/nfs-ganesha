@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2003d509_329eef92",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-01-16T16:30:34Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tobj-\u003estate_hdl-\u003efile.fdeleg_stats.fds_deleg_type \u003d OPEN_DELEGATE_NONE;",
+      "revId": "e3c80192d6fb102b959ce01e602272e622d88785",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c11246a_ec6f3eaf",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-01-16T16:30:34Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (statistics-\u003efds_curr_delegations \u003d\u003d 0) {\n+\t\tstatistics-\u003efds_deleg_type \u003d OPEN_DELEGATE_NONE;\n+\t}",
+      "revId": "e3c80192d6fb102b959ce01e602272e622d88785",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
