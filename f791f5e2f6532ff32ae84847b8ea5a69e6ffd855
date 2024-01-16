@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e9cf96_55e39a3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-01-16T18:49:13Z",
+      "side": 1,
+      "message": "We need to get GPFS using the common code for mapping filesystems and exports as I mentioned in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1170665\n\nIf we make GPFS look more like FSAL_VFS, things should be more workable.\n\nFSAL_VFS casts private in claim/unlcaim to an int fd, GPFS probably needs a structure, but that structure doesn\u0027t need to do the mapping, it just needs to hook to the fd for the filesystem and the upcall thread and maybe a few other bits.\n\nLet me take a stab at it in the next week and see if I can make something make sense.",
+      "revId": "f791f5e2f6532ff32ae84847b8ea5a69e6ffd855",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
