@@ -320,11 +320,6 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	if (data->minorversion == 0)
 		op_ctx->clientid = NULL;
 
-	if (share_access_state & OPEN4_SHARE_ACCESS_WRITE &&
-		state_obj->type == REGULAR_FILE) {
-		state_obj->state_hdl->file.fdeleg_stats.fds_num_write_opens--;
-	}
-
 	STATELOCK_unlock(state_obj);
 	res_CLOSE4->status = NFS4_OK;
 
