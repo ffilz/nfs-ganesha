@@ -16,6 +16,24 @@
       "message": "fsal_start_fd_work() returns error only in reclaim path - in other paths, it blocks. That is why it can call fsal_complete_fd_work() unconditionally in IO paths....\nSo, if reclaiming we could decrement off the counters that would make the code clean as well...I have the patch awaiting merge for the same...\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1174224",
       "revId": "8bda61e0fe958fbd7e8e8c840156df08d9a34f9f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a33e8e98_30f90e11",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1950,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-01-16T18:54:55Z",
+      "side": 1,
+      "message": "Rojin, are you saying this patch is redundant and use your patch instead?",
+      "parentUuid": "d7370889_11964578",
+      "revId": "8bda61e0fe958fbd7e8e8c840156df08d9a34f9f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
