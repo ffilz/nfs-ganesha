@@ -1504,8 +1504,10 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	LogDebug(COMPONENT_FSAL,
 		 "FD count fsal_fd_global_counter is %"PRIi32
 		 " and low water mark is %"PRIi32
-		 " and high water mark is %"PRIi32" %s",
-		 currentopen, fd_lru_state.fds_lowat, fd_lru_state.fds_hiwat,
+		 " and high water mark is %"PRIi32
+		 " and hard limit is %"PRIi32
+		 " %s",
+		 currentopen, fd_lru_state.fds_lowat, fd_lru_state.fds_hiwat,fd_lru_state.fds_hard_limit,
 		 ((currentopen >= fd_lru_state.fds_lowat)
 			|| (Cache_FDs == false))
 			? "(reaping)" : "(not reaping)");
@@ -1569,18 +1571,19 @@ void fd_lru_run(struct fridgethr_context *ctx)
 
 			LogDebug(COMPONENT_FSAL,
 				 "Reaping up to %" PRIu32 " fds",
-				 reaper_work);
+				 fd_lru_state.per_lane_work);
 
 			LogFullDebug(COMPONENT_FSAL,
 				     "formeropen=%" PRIu32
-				     " totalwork=%" PRIu32,
-				     formeropen, totalwork);
+				     " totalwork=%" PRIu32
+					 " reaper_work=%" PRIu32,
+				     formeropen, totalwork, reaper_work);
 
 			for (i = 0; i < reaper_work; ++i)
 				workpass += lru_try_one();
 
 			totalwork += workpass;
-		} while (extremis && (workpass >= reaper_work)
+		} while (extremis && (workpass >= fd_lru_state.per_lane_work)
 			 && (totalwork < fd_lru_state.biggest_window));
 
 		currentopen = atomic_fetch_int32_t(&fsal_fd_global_counter);
@@ -1836,10 +1839,10 @@ err_open:
 
 	if (params->reaper_work) {
 		/* Backwards compatibility */
-		reaper_work = (params->reaper_work + 16) / 17;
+		fd_lru_state.per_lane_work = (params->reaper_work + 16) / 17;
 	} else {
 		/* New parameter */
-		reaper_work = params->reaper_work_per_lane;
+		fd_lru_state.per_lane_work = params->reaper_work_per_lane;
 	}
 
 	fd_lru_state.biggest_window =
@@ -1860,6 +1863,7 @@ fsal_status_t fd_lru_pkginit(struct fd_lru_parameter *params)
 
 	futility_count = params->futility_count;
 	required_progress = params->required_progress;
+	reaper_work = params->reaper_work;
 	lru_run_interval = params->lru_run_interval;
 	Cache_FDs = params->Cache_FDs;
 
@@ -1937,6 +1941,9 @@ fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
 	fsal_status_t status;
 	bool is_globalfd = fsal_fd->fd_type == FSAL_FD_GLOBAL;
 
+	LogFullDebug(COMPONENT_FSAL,
+			"begin");
+
 	/* Assure that is_reclaiming is only set when it's a global fd */
 	assert(is_reclaiming ? is_globalfd : true);
 
@@ -1947,6 +1954,7 @@ fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
 		LogFullDebug(COMPONENT_FSAL,
 			 "fsal_start_fd_work returned %s",
 			 fsal_err_txt(status));
+		fsal_complete_fd_work(fsal_fd);
 		return status;
 	}
 
@@ -1987,6 +1995,9 @@ fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
 		}
 	}
 
+	LogFullDebug(COMPONENT_FSAL,
+			"end");
+
 	return status;
 }
 
@@ -2014,6 +2025,7 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 {
 	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
 
+	LogDebug(COMPONENT_FSAL, "begin");
 	/* Wait for lull in io work */
 	while (!can_start && atomic_fetch_int32_t(&fsal_fd->io_work) != 0) {
 		LogFullDebug(COMPONENT_FSAL,
@@ -2074,6 +2086,7 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 
 	PTHREAD_COND_signal(&fsal_fd->work_cond);
 
+	LogDebug(COMPONENT_FSAL, "end");
 	return status;
 }
 
@@ -2159,6 +2172,7 @@ fsal_status_t wait_to_start_io(struct fsal_obj_handle *obj_hdl,
 	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
 	bool retried = false;
 
+	LogFullDebug(COMPONENT_FSAL, "begin");
 retry:
 
 	/* Indicate we want to do I/O work */
@@ -2235,11 +2249,17 @@ retry:
 		 * don't thrash the mutex.
 		 */
 		LogFullDebug(COMPONENT_FSAL,
-			     "Open mode = %x, desired mode = %x",
+			     "Open mode = %x, desired mode = %x open_correct() = %d",
 			     (int) fsal_fd->openflags,
-			     (int) openflags);
+			     (int) openflags,
+				 open_correct(fsal_fd->openflags, openflags));
 
 		if (!open_correct(fsal_fd->openflags, openflags)) {
+
+			LogFullDebug(COMPONENT_FSAL,
+					"debug: before cant_reopen: may_open = %d may_reopen = %d",
+					may_open,
+					may_reopen);
 			if (cant_reopen(fsal_fd, may_open, may_reopen)) {
 				/* fsal_fd is in wrong mode and we aren't
 				 * allowed to reopen, so return EBUSY.
@@ -2294,13 +2314,19 @@ retry:
 	 * open or re-open it.
 	 */
 	LogFullDebug(COMPONENT_FSAL,
-		     "Open mode = %x, desired mode = %x",
+		     "Open mode = %x, desired mode = %x open_correct() = %d",
 		     (int) fsal_fd->openflags,
-		     (int) openflags);
+		     (int) openflags,
+			 open_correct(fsal_fd->openflags, openflags));
 
 	if (!open_correct(fsal_fd->openflags, openflags)) {
 		bool can_start = false;
 
+		LogFullDebug(COMPONENT_FSAL,
+				"debug: before cant_reopen: retried = %d may_open = %d may_reopen = %d",
+				retried,
+				may_open,
+				may_reopen);
 		if (retried || cant_reopen(fsal_fd, may_open, may_reopen)) {
 			/* fsal_fd is in wrong mode and we aren't
 			 * allowed to reopen, so return EBUSY.
@@ -2388,6 +2414,8 @@ out:
 		atomic_dec_int32_t(&fsal_fd->want_write);
 	}
 
+	LogFullDebug(COMPONENT_FSAL, "end");
+
 	return status;
 }
 
@@ -2436,6 +2464,7 @@ fsal_status_t fsal_start_global_io(struct fsal_fd **out_fd,
 	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
 	bool open_any = openflags == FSAL_O_ANY;
 
+	LogDebug(COMPONENT_FSAL, "begin");
 	if (!open_any && share != NULL) {
 		status = check_share_conflict_and_update_locked(obj_hdl,
 								share,
@@ -2492,6 +2521,7 @@ fsal_status_t fsal_start_global_io(struct fsal_fd **out_fd,
 
 	*out_fd = NULL;
 
+	LogDebug(COMPONENT_FSAL, "end");
 	return status;
 }
 
@@ -2539,6 +2569,8 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
 	struct fsal_fd *state_fd;
 
+	LogFullDebug(COMPONENT_FSAL, "begin");
+
 	if (state == NULL)
 		goto global;
 
@@ -2559,6 +2591,8 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 	/** @todo FSF - oops, what about a delegation?
 	 */
 	status = wait_to_start_io(obj_hdl, state_fd, openflags, false, false);
+
+	LogFullDebug(COMPONENT_FSAL, "after wait_to_start_io");
 
 	if (FSAL_IS_SUCCESS(status)) {
 		/* It was valid, return it.
@@ -2727,6 +2761,7 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 		     "Use global fd openflags = %x",
 		     openflags);
 
+	LogFullDebug(COMPONENT_FSAL, "end");
 	/* Make sure global is open as necessary otherwise return a
 	 * temporary file descriptor. Check share reservation if not
 	 * opening FSAL_O_ANY. If we were passed a state, then we won't
@@ -2828,6 +2863,11 @@ fsal_status_t fsal_start_fd_work(struct fsal_fd *fsal_fd, bool is_reclaiming)
 			 */
 			bump_fd_lru(fsal_fd);
 			PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
+			LogFullDebug(COMPONENT_FSAL,
+		     "%p done fd work io_work = %"PRIi32" fd_work = %"PRIi32,
+		     fsal_fd,
+		     atomic_fetch_int32_t(&fsal_fd->io_work),
+		     atomic_fetch_int32_t(&fsal_fd->fd_work));
 			/* Use fsalstat to avoid LogInfo... */
 			return fsalstat(ERR_FSAL_DELAY, EBUSY);
 		}
