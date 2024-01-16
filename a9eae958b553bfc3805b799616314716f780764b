@@ -33,6 +33,40 @@
       "message": "Would you please collate all your patches into a single \"branch\" and push that? I will make merging much easier if I can just checkout one branch from Gerrithub,\n\nThanks\n\nFrank",
       "revId": "a9eae958b553bfc3805b799616314716f780764b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33b5fa9_679472e8",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-01-16T19:56:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tobj-\u003estate_hdl-\u003efile.fdeleg_stats.fds_deleg_type \u003d OPEN_DELEGATE_NONE;",
+      "revId": "a9eae958b553bfc3805b799616314716f780764b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a652348_c67b283f",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-01-16T19:56:05Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (statistics-\u003efds_curr_delegations \u003d\u003d 0) {\n+\t\tstatistics-\u003efds_deleg_type \u003d OPEN_DELEGATE_NONE;\n+\t}",
+      "revId": "a9eae958b553bfc3805b799616314716f780764b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
