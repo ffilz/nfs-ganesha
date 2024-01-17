@@ -16,6 +16,40 @@
       "message": "Please review...This CR adds some loggers to debug fd_lru related issues",
       "revId": "b531d513d0d2c7b1a62ab607edc60c1a9ab594cb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc40b81_7a4d9b0e",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-01-17T18:39:55Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_FSAL, \"Using global fd \"\n+\t\t\t\"with fsal_fd(%p) for fd(%d/%d) type(%d)\",",
+      "revId": "b531d513d0d2c7b1a62ab607edc60c1a9ab594cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f450113c_41bbf99a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-01-17T18:39:55Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_FSAL, \"Inserted fsal_fd(%p) \"\n+\t\t\t\"to fd_global_lru with count(%d)\",",
+      "revId": "b531d513d0d2c7b1a62ab607edc60c1a9ab594cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
