@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1cde8ae_5ad3112d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-01-17T15:48:47Z",
+      "side": 1,
+      "message": "OK, we\u0027ll watch this.\n\nIt is nice for me to have a single branch I can pull even if patches are unrelated, since I do the merge process on my local git repo, not via gerrithub, making sure I get all the patches is tricky. When a bunch can be merged with one pull from gerrithub, that\u0027s handy. It also means that should an individuals patches conflict with each other, that individual has already handled the merge conflicts.\n\nHowever, it\u0027s just a \"nice to have\" so if your work flow works better with separate patches, I\u0027ll manage.\n\nThanks for all your contributions.",
+      "parentUuid": "f8c25a9c_bcc4bfbd",
+      "revId": "a9eae958b553bfc3805b799616314716f780764b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e33b5fa9_679472e8",
         "filename": "src/SAL/nfs4_state.c",
         "patchSetId": 3
