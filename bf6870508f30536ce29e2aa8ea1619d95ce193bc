@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "541d741e_4bb63e57",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-01-17T11:17:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9efaa3f_b0d7f722",
+      "revId": "bf6870508f30536ce29e2aa8ea1619d95ce193bc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "997d05bc_9648733c",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-16T19:02:37Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (statistics-\u003efds_curr_delegations \u003d\u003d 0) {\n+\t\tstatistics-\u003efds_deleg_type \u003d OPEN_DELEGATE_NONE;\n+\t}",
+      "revId": "bf6870508f30536ce29e2aa8ea1619d95ce193bc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ee17679_db77bdf6",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-01-17T11:17:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "997d05bc_9648733c",
       "revId": "bf6870508f30536ce29e2aa8ea1619d95ce193bc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
