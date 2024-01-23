@@ -439,6 +439,11 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl,
 	if (attrs_out != NULL)
 		fsal_copy_attrs(attrs_out, &hdl->attributes, false);
 
+	now(&myself->attributes.mtime);
+	myself->attributes.ctime = myself->attributes.mtime;
+	myself->attributes.change = timespec_to_nsecs(
+					&myself->attributes.mtime);
+
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
