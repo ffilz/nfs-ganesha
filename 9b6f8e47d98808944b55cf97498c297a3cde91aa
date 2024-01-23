@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f9b532_d049256e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-01-23T19:15:34Z",
+      "side": 1,
+      "message": "Thanks for discovering this, I think we need to move setting mtime etc. so that the obj_lock protects the operation.",
+      "revId": "9b6f8e47d98808944b55cf97498c297a3cde91aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fde1146_f2af0638",
+        "filename": "src/FSAL/FSAL_PSEUDO/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-01-23T19:15:34Z",
+      "side": 1,
+      "message": "I think we actually need to update the mtime etc. here with the lock. Unfortunately we probably should do a new call to now with the lock held so it strictly advances.",
+      "revId": "9b6f8e47d98808944b55cf97498c297a3cde91aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
