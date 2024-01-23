@@ -16,6 +16,24 @@
       "message": "Are we sure we want this to be a LogEvent? How chatty will this be?",
       "revId": "658dcd350d64131b3d7d32dfc2c590466880e983",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8008c974_21fc9eb3",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-01-23T18:26:45Z",
+      "side": 1,
+      "message": "This is kind of corner scenario which would happen only if the file have no active states but still was delegated falsely...hence we are resetting them...\nHence this Event logs added while hitting this case...\n\nThis shouldn\u0027t be flooding up normally...",
+      "parentUuid": "9814e384_0ad12f8f",
+      "revId": "658dcd350d64131b3d7d32dfc2c590466880e983",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
