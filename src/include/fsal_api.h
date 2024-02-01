@@ -1753,6 +1753,10 @@ struct fsal_obj_ops {
  * @param[in]     attrs_in  Attributes to set on newly created object
  * @param[out]    new_obj   Newly created object
  * @param[in,out] attrs_out Optional attributes for newly created object
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @note On success, @a new_obj has been ref'd
  *
@@ -1762,7 +1766,9 @@ struct fsal_obj_ops {
 				const char *name,
 				struct fsal_attrlist *attrs_in,
 				struct fsal_obj_handle **new_obj,
-				struct fsal_attrlist *attrs_out);
+				struct fsal_attrlist *attrs_out,
+				struct fsal_attrlist *parent_pre_attrs_out,
+				struct fsal_attrlist *parent_post_attrs_out);
 
 /**
  * @brief Create a special file
@@ -1797,6 +1803,10 @@ struct fsal_obj_ops {
  * @param[in]     attrs_in  Attributes to set on newly created object
  * @param[out]    new_obj   Newly created object
  * @param[in,out] attrs_out Optional attributes for newly created object
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @note On success, @a new_obj has been ref'd
  *
@@ -1807,7 +1817,9 @@ struct fsal_obj_ops {
 				 object_file_type_t nodetype,
 				 struct fsal_attrlist *attrs_in,
 				 struct fsal_obj_handle **new_obj,
-				 struct fsal_attrlist *attrs_out);
+				 struct fsal_attrlist *attrs_out,
+				 struct fsal_attrlist *parent_pre_attrs_out,
+				 struct fsal_attrlist *parent_post_attrs_out);
 
 /**
  * @brief Create a symbolic link
@@ -1839,6 +1851,10 @@ struct fsal_obj_ops {
  * @param[in]     attrs_in  Attributes to set on newly created object
  * @param[out]    new_obj   Newly created object
  * @param[in,out] attrs_out Optional attributes for newly created object
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @note On success, @a new_obj has been ref'd
  *
@@ -1849,7 +1865,9 @@ struct fsal_obj_ops {
 				  const char *link_path,
 				  struct fsal_attrlist *attrs_in,
 				  struct fsal_obj_handle **new_obj,
-				  struct fsal_attrlist *attrs_out);
+				  struct fsal_attrlist *attrs_out,
+				  struct fsal_attrlist *parent_pre_attrs_out,
+				  struct fsal_attrlist *parent_post_attrs_out);
 /**@}*/
 
 /**@{*/
@@ -2467,6 +2485,10 @@ struct fsal_obj_ops {
  * @param[in,out] new_obj           Newly created object
  * @param[in,out] attrs_out         Optional attributes for newly created object
  * @param[in,out] caller_perm_check The caller must do a permission check
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @return FSAL status.
  */
@@ -2479,7 +2501,9 @@ struct fsal_obj_ops {
 				fsal_verifier_t verifier,
 				struct fsal_obj_handle **new_obj,
 				struct fsal_attrlist *attrs_out,
-				bool *caller_perm_check);
+				bool *caller_perm_check,
+				struct fsal_attrlist *parent_pre_attrs_out,
+				struct fsal_attrlist *parent_post_attrs_out);
 
 /**
  * @brief Check the exclusive create verifier for a file.
