@@ -16,6 +16,176 @@
       "message": "This relates to the discussion we had a few days ago to add atomic pre and post attrs option for the FSAL. \n\nNote that this should be done to additional operations (currently it is only for operations that create - open, mkdir, mknod, symlink). I wanted to first get some input for this change before I do the rest.",
       "revId": "f91927f6536945e8238d016b22a998dca06dff14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012c5766_52208da4",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^I^I^I    Should be atomic.$",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2afe32dc_061be293",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1714,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     struct fsal_attrlist *parent_post_attrs_out)",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71c76e10_ca1acb3a",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (parent_pre_attrs_out !\u003d NULL) {\n+\t\tparent_pre_attrs_out-\u003evalid_mask \u003d 0;\n+\t}",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6210dbe3_59b93bd4",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (parent_post_attrs_out !\u003d NULL) {\n+\t\tparent_post_attrs_out-\u003evalid_mask \u003d 0;\n+\t}",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa5fb1a_16feb670",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (parent_pre_attrs_out !\u003d NULL) {\n+\t\tparent_pre_attrs_out-\u003evalid_mask \u003d 0;\n+\t}",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "984ed89c_e3ce8f00",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (parent_pre_attrs_out !\u003d NULL) {\n+\t\tparent_pre_attrs_out-\u003evalid_mask \u003d 0;\n+\t}",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7df95cf3_8d0e28da",
+        "filename": "src/Protocols/NFS/nfs3_mkdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tnfs_SetWccData(\u0026pre_parent, parent_obj, \u0026parent_post_attrs, \u0026resok-\u003edir_wcc);",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732d4700_76bf818a",
+        "filename": "src/Protocols/NFS/nfs3_mknod.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tnfs_SetWccData(\u0026pre_parent, parent_obj, \u0026parent_post_attrs, \u0026rok-\u003edir_wcc);",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde8f8a2_cf964261",
+        "filename": "src/Protocols/NFS/nfs3_symlink.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tnfs_SetWccData(\u0026pre_parent, parent_obj, \u0026parent_post_attrs, \u0026resok-\u003edir_wcc);",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d82d9aa9_04b05afd",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T20:16:00Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\tif(FSAL_TEST_MASK(fsal_attrs-\u003evalid_mask,",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
