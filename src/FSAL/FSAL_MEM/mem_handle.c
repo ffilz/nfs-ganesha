@@ -1030,6 +1030,10 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
  * @param[in]     attrs_in  Attributes to set on newly created object
  * @param[out]    new_obj   Newly created object
  * @param[in,out] attrs_out Optional attributes for newly created object
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @note On success, @a new_obj has been ref'd
  *
@@ -1039,7 +1043,9 @@ static fsal_status_t mem_mkdir(struct fsal_obj_handle *dir_hdl,
 			       const char *name,
 			       struct fsal_attrlist *attrs_in,
 			       struct fsal_obj_handle **new_obj,
-			       struct fsal_attrlist *attrs_out)
+			       struct fsal_attrlist *attrs_out,
+			       struct fsal_attrlist *parent_pre_attrs_out,
+			       struct fsal_attrlist *parent_post_attrs_out)
 {
 	struct mem_fsal_obj_handle *parent =
 		container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
@@ -1063,6 +1069,12 @@ static fsal_status_t mem_mkdir(struct fsal_obj_handle *dir_hdl,
  * @param[in] nodetype	Type of new node
  * @param[in] attrs_in	Attributes for new node
  * @param[out] new_obj	New object handle on success
+ * @param[in,out] attrs_out Optional attributes for the create object.
+ * 			    Should be atomic.
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @note This returns an INITIAL ref'd entry on success
  * @return FSAL status
@@ -1071,7 +1083,9 @@ static fsal_status_t mem_mknode(struct fsal_obj_handle *dir_hdl,
 				const char *name, object_file_type_t nodetype,
 				struct fsal_attrlist *attrs_in,
 				struct fsal_obj_handle **new_obj,
-				struct fsal_attrlist *attrs_out)
+				struct fsal_attrlist *attrs_out,
+				struct fsal_attrlist *parent_pre_attrs_out,
+				struct fsal_attrlist *parent_post_attrs_out)
 {
 	struct mem_fsal_obj_handle *hdl, *parent =
 		container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
@@ -1100,6 +1114,12 @@ static fsal_status_t mem_mknode(struct fsal_obj_handle *dir_hdl,
  * @param[in] link_path	Contents of symlink
  * @param[in] attrs_in	Attributes for new simlink
  * @param[out] new_obj	New object handle on success
+ * @param[in,out] attrs_out Optional attributes for the create object.
+ *			    Should be atomic.
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @note This returns an INITIAL ref'd entry on success
  * @return FSAL status
@@ -1108,7 +1128,9 @@ static fsal_status_t mem_symlink(struct fsal_obj_handle *dir_hdl,
 				 const char *name, const char *link_path,
 				 struct fsal_attrlist *attrs_in,
 				 struct fsal_obj_handle **new_obj,
-				 struct fsal_attrlist *attrs_out)
+				 struct fsal_attrlist *attrs_out,
+				 struct fsal_attrlist *parent_pre_attrs_out,
+				 struct fsal_attrlist *parent_post_attrs_out)
 {
 	struct mem_fsal_obj_handle *hdl, *parent =
 		container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
@@ -1603,6 +1625,10 @@ exit:
  * @param[in,out] new_obj           Newly created object
  * @param[in,out] attrs_out         Optional attributes for newly created object
  * @param[in,out] caller_perm_check The caller must do a permission check
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @return FSAL status.
  */
@@ -1615,7 +1641,9 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 			fsal_verifier_t verifier,
 			struct fsal_obj_handle **new_obj,
 			struct fsal_attrlist *attrs_out,
-			bool *caller_perm_check)
+			bool *caller_perm_check,
+			struct fsal_attrlist *parent_pre_attrs_out,
+			struct fsal_attrlist *parent_post_attrs_out)
 {
 	fsal_status_t status = {0, 0};
 	struct fsal_fd *my_fd = NULL;

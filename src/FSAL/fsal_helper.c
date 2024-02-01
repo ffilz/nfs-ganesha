@@ -403,12 +403,22 @@ fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
 			    struct fsal_attrlist *attr,
 			    fsal_verifier_t verifier,
 			    struct fsal_obj_handle **obj,
-			    struct fsal_attrlist *attrs_out)
+			    struct fsal_attrlist *attrs_out,
+			    struct fsal_attrlist *parent_pre_attrs_out,
+			    struct fsal_attrlist *parent_post_attrs_out)
 {
 	fsal_status_t status = { 0, 0 };
 	fsal_status_t close_status = { 0, 0 };
 	bool caller_perm_check = false;
 	char *reason;
+
+	if (parent_pre_attrs_out != NULL) {
+		parent_pre_attrs_out->valid_mask = 0;
+	}
+
+	if (parent_post_attrs_out != NULL) {
+		parent_post_attrs_out->valid_mask = 0;
+	}
 
 	*obj = NULL;
 
@@ -438,7 +448,9 @@ fsal_status_t open2_by_name(struct fsal_obj_handle *in_obj,
 				       verifier,
 				       obj,
 				       attrs_out,
-				       &caller_perm_check);
+				       &caller_perm_check,
+				       parent_pre_attrs_out,
+				       parent_post_attrs_out);
 	if (FSAL_IS_ERROR(status)) {
 		LogFullDebug(COMPONENT_FSAL,
 			     "FSAL %d %s returned %s",
@@ -992,6 +1004,12 @@ fsal_create_set_verifier(struct fsal_attrlist *sattr, uint32_t verf_hi,
  * @param[in]  attrs        Attributes to be used at file creation
  * @param[in]  link_content Contents for symlink
  * @param[out] obj          Created file
+ * @param[in,out] attrs_out Optional attributes for the create object.
+ *			    Should be atomic.
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @note On success, @a obj has been ref'd
  *
@@ -1004,7 +1022,9 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 			  struct fsal_attrlist *attrs,
 			  const char *link_content,
 			  struct fsal_obj_handle **obj,
-			  struct fsal_attrlist *attrs_out)
+			  struct fsal_attrlist *attrs_out,
+			  struct fsal_attrlist *parent_pre_attrs_out,
+			  struct fsal_attrlist *parent_post_attrs_out)
 {
 	fsal_status_t status = { 0, 0 };
 	attrmask_t orig_mask = attrs->valid_mask;
@@ -1024,10 +1044,20 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 
 	/* Try to create it first */
 
+	if (parent_pre_attrs_out != NULL) {
+		parent_pre_attrs_out->valid_mask = 0;
+	}
+
+	if (parent_post_attrs_out != NULL) {
+		parent_post_attrs_out->valid_mask = 0;
+	}
+
 	switch (type) {
 	case REGULAR_FILE:
 		status = fsal_open2(parent, NULL, FSAL_O_RDWR, FSAL_UNCHECKED,
-				    name, attrs, NULL, obj, attrs_out);
+				    name, attrs, NULL, obj, attrs_out,
+				    parent_pre_attrs_out,
+				    parent_post_attrs_out);
 		if (FSAL_IS_SUCCESS(status)) {
 			/* Close it again; this is just a create */
 			(void)fsal_close(*obj);
@@ -1036,12 +1066,16 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 
 	case DIRECTORY:
 		status = parent->obj_ops->mkdir(parent, name, attrs,
-					       obj, attrs_out);
+					       obj, attrs_out,
+					       parent_pre_attrs_out,
+					       parent_post_attrs_out);
 		break;
 
 	case SYMBOLIC_LINK:
 		status = parent->obj_ops->symlink(parent, name, link_content,
-						 attrs, obj, attrs_out);
+						 attrs, obj, attrs_out,
+						 parent_pre_attrs_out,
+						 parent_post_attrs_out);
 		break;
 
 	case SOCKET_FILE:
@@ -1049,7 +1083,9 @@ fsal_status_t fsal_create(struct fsal_obj_handle *parent,
 	case BLOCK_FILE:
 	case CHARACTER_FILE:
 		status = parent->obj_ops->mknode(parent, name, type,
-						attrs, obj, attrs_out);
+						attrs, obj, attrs_out,
+						parent_pre_attrs_out,
+						parent_post_attrs_out);
 		break;
 
 	case NO_FILE_TYPE:
@@ -1582,6 +1618,12 @@ out:
  * @param[in]     attr       Attributes to set on the file
  * @param[in]     verifier   Verifier to use with exclusive create
  * @param[out]    obj        New entry for the opened file
+ * @param[in,out] attrs_out Optional attributes for the create object.
+ *			    Should be atomic.
+ * @param[in,out] parent_pre_attrs_out Optional attributes for parent dir before
+ *				       the operation. Should be atomic.
+ * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
+ *					after the operation. Should be atomic.
  *
  * @return FSAL status
  */
@@ -1594,13 +1636,23 @@ fsal_status_t fsal_open2(struct fsal_obj_handle *in_obj,
 			 struct fsal_attrlist *attr,
 			 fsal_verifier_t verifier,
 			 struct fsal_obj_handle **obj,
-			 struct fsal_attrlist *attrs_out)
+			 struct fsal_attrlist *attrs_out,
+			 struct fsal_attrlist *parent_pre_attrs_out,
+			 struct fsal_attrlist *parent_post_attrs_out)
 {
 	fsal_status_t status = { 0, 0 };
 	bool caller_perm_check = false;
 	char *reason;
 
 	*obj = NULL;
+
+	if (parent_pre_attrs_out != NULL) {
+		parent_pre_attrs_out->valid_mask = 0;
+	}
+
+	if (parent_post_attrs_out != NULL) {
+		parent_post_attrs_out->valid_mask = 0;
+	}
 
 	if (attr != NULL) {
 		LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG,
@@ -1633,7 +1685,9 @@ fsal_status_t fsal_open2(struct fsal_obj_handle *in_obj,
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	if (name)
 		return open2_by_name(in_obj, state, openflags, createmode,
-				     name, attr, verifier, obj, attrs_out);
+				     name, attr, verifier, obj, attrs_out,
+				     parent_pre_attrs_out,
+				     parent_post_attrs_out);
 
 	/* No name, directories don't make sense */
 	if (in_obj->type == DIRECTORY) {
@@ -1671,7 +1725,9 @@ fsal_status_t fsal_open2(struct fsal_obj_handle *in_obj,
 				       verifier,
 				       obj,
 				       attrs_out,
-				       &caller_perm_check);
+				       &caller_perm_check,
+				       parent_pre_attrs_out,
+				       parent_post_attrs_out);
 
 	if (!FSAL_IS_ERROR(status)) {
 		/* Get a reference to the entry. */
