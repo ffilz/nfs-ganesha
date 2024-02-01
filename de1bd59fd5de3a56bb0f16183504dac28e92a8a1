@@ -16,6 +16,584 @@
       "message": "Please review",
       "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8833608_75d18b81",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcfb8eba_c21fe54b",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                /* Get references to the file and export */$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "743994f7_e2348ad6",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                ok \u003d get_state_obj_export_owner_refs(state, \u0026obj, \u0026export,$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e75788d_9a49f2de",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                ok \u003d get_state_obj_export_owner_refs(state, \u0026obj, \u0026export,$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e18b6c_6d7e93e0",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                     NULL);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "953e8f41_895b0847",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                     NULL);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ada8df5_f7d0fdef",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                if (!ok) {$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2feff769_cc95115f",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                if (!ok) {$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098f961d_019ad272",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        /* The file, export, or state must be about to$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a5a1dc_e21c6bb4",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                         * die, skip for now.$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b8cc53_3d800cc5",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                         */$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f644f9_f1204319",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        PTHREAD_MUTEX_unlock(\u0026owner-\u003eso_mutex);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500039fc_2d8c68de",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        PTHREAD_MUTEX_unlock(\u0026owner-\u003eso_mutex);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fa7143_a94a204a",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        continue;$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbdf7490_ec4d8646",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        continue;$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dea38f0f_66ca4756",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                }$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e999338b_01e817c2",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                }$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a01871a1_56f6309e",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                STATELOCK_lock(obj);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99dc1dc2_baa5bafd",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                STATELOCK_lock(obj);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a3c2db_834edb96",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                /* op_ctx may be used by state_del_locked and others set export$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82dd993_eee8591b",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 * from the state and release any old ctx_export reference.$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f758200_65111ee4",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 * Reference was taken above and will be release by$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4912476_d816e4c0",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 * clear_op_context_export below.$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a36c91_641e80f3",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 */$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603387ed_15fbeb6e",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                set_op_context_export(export);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b802e4b_cbff377c",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                set_op_context_export(export);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87cf42eb_f15fd7d0",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                /* If FSAL supports extended operations, file will be closed by$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d649c49c_6f25f4f1",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 * state_del_locked.$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9900dc7a_084d9e54",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 */$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ad88f0_f08e96c1",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                state_del_locked(state);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bceaa8f_f662a69d",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                state_del_locked(state);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3073eb8c_686ed55b",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                /* Release refs we held during state_del */$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1844c0b1_2079f96c",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                obj-\u003eobj_ops-\u003eput_ref(obj);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a2a0fe1_a1896fd6",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-01T13:39:39Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                obj-\u003eobj_ops-\u003eput_ref(obj);$",
+      "revId": "de1bd59fd5de3a56bb0f16183504dac28e92a8a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
