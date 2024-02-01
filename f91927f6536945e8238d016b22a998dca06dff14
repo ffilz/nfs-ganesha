@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0c88a5_b94e80f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-02-01T15:34:23Z",
+      "side": 1,
+      "message": "This relates to the discussion we had a few days ago to add atomic pre and post attrs option for the FSAL. \n\nNote that this should be done to additional operations (currently it is only for operations that create - open, mkdir, mknod, symlink). I wanted to first get some input for this change before I do the rest.",
+      "revId": "f91927f6536945e8238d016b22a998dca06dff14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
