@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "710a76f4_28cc2ece",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:14:05Z",
+      "side": 1,
+      "message": "Let\u0027s make this a LogWarn",
+      "revId": "762ff2f3b6e5332c2d9f6db9873d9a160c4f45e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115bd1f3_3271faa7",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:14:05Z",
+      "side": 1,
+      "message": "Let\u0027s not make this a LogFatal in case someone runs a pynfs test to validate non-supported security flavor.",
+      "revId": "762ff2f3b6e5332c2d9f6db9873d9a160c4f45e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
