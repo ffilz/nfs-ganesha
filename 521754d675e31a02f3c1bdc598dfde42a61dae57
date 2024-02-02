@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e64426_56c40cd5",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:12:19Z",
+      "side": 1,
+      "message": "Let\u0027s not do a LogFatal in case someone runs a pynfs test case that tests for unsupported state protection.",
+      "revId": "521754d675e31a02f3c1bdc598dfde42a61dae57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
