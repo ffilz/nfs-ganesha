@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd9344c0_d732d388",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:54:24Z",
+      "side": 1,
+      "message": "Please declare the local variable at the top.",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13215b31_3d7e84a5",
         "filename": "src/support/xprt_handler.c",
         "patchSetId": 6
@@ -14,6 +31,109 @@
       "writtenOn": "2024-01-30T00:15:21Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c263e63_8eafb1c1",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:54:24Z",
+      "side": 1,
+      "message": "Ignore these...",
+      "parentUuid": "13215b31_3d7e84a5",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687d5b80_5643782f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:54:24Z",
+      "side": 1,
+      "message": "Please use the previously existing, and currently unused COMPONENT_RPC\n\nOr is there any reason to not use COMPONENT_SESSIONS?",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d45b8b1_5580a78c",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:54:24Z",
+      "side": 1,
+      "message": "Please declare local var at top.",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee536ce3_d64ffb6f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:54:24Z",
+      "side": 1,
+      "message": "Please use the previously existing, and currently unused COMPONENT_RPC\n\nOr is there any reason to not use COMPONENT_SESSIONS?",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00b7bf82_cc514f53",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:54:24Z",
+      "side": 1,
+      "message": "Please declare local var at top",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad0abb6_9347876d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:54:24Z",
+      "side": 1,
+      "message": "Do we really need all these asserts?",
       "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
