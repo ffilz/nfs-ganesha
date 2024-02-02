@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ca0569_56dd5300",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T18:58:22Z",
+      "side": 1,
+      "message": "Please use the previously existing, and currently unused COMPONENT_RPC\n\nOr is there any reason to not use COMPONENT_SESSIONS?",
+      "revId": "1d69c573c1fd823faefdcbc55170fe3406b18ab2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
