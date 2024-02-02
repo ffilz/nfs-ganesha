@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba6f1ed_4623b753",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T19:02:45Z",
+      "side": 1,
+      "message": "Please use the previously existing, and currently unused COMPONENT_RPC\n\nOr is there any reason to not use COMPONENT_SESSIONS?",
+      "revId": "d5224a81ff7a45244d1a519080dbc8c50fbc9b7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a679ec4_0a9daa5d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-02T19:02:45Z",
+      "side": 1,
+      "message": "Please declare local vars at the top",
+      "revId": "d5224a81ff7a45244d1a519080dbc8c50fbc9b7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
