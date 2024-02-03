@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8c7e02_d3dcc248",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-02-03T07:23:40Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nExecuting the command \"setfacl -m u:user1:rx dir1/\" to set access acl for directory dir1. In this case, only access acl is set and there is no default acl. Decoding default acl on the server side will failed for count is 0",
+      "revId": "dedf66fecb939994fd08f64fe6997e1193c12f0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
