@@ -16,6 +16,24 @@
       "message": "Can we just use the unused COMPONENT_RPC for this instead of introducing a new component?",
       "revId": "90e4749b435de003308b924483753fb74dce6589",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "731dc4d7_8853c89b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-05T06:54:30Z",
+      "side": 1,
+      "message": "IMO, `COMPONENT_RPC` seems like a generic rpc-component, that can be used in various contexts. As part of this changeset, I specifically wanted to model the service transport handle\u0027s functionality, and having a dedicated log component for it would help in logging isolation and ease of debugging around the service transport handle\u0027s state lifecycle.",
+      "parentUuid": "2f42bb37_4a91ca73",
+      "revId": "90e4749b435de003308b924483753fb74dce6589",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
