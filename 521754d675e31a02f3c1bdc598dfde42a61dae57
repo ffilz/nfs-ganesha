@@ -16,6 +16,24 @@
       "message": "Let\u0027s not do a LogFatal in case someone runs a pynfs test case that tests for unsupported state protection.",
       "revId": "521754d675e31a02f3c1bdc598dfde42a61dae57",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dcc4d71_1b14e49d",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-05T06:49:58Z",
+      "side": 1,
+      "message": "Since during `create_session` we always store `SP4_NONE` in the session, regardless of the state-protection that the client requests, so the code flow should not reach here. This `LogFatal` is to prevent against accidental bugs or unintended changes.",
+      "parentUuid": "15e64426_56c40cd5",
+      "revId": "521754d675e31a02f3c1bdc598dfde42a61dae57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
