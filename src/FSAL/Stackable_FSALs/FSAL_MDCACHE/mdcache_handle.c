@@ -494,11 +494,18 @@ static fsal_status_t mdcache_readlink(struct fsal_obj_handle *obj_hdl,
  * @param[in] obj_hdl	Object to link to.
  * @param[in] destdir_hdl	Destination directory into which to link
  * @param[in] name	Name of new link
+ * @param[in,out] destdir_pre_attrs_out Optional attributes for destdir dir
+ *					before the operation. Should be atomic.
+ * @param[in,out] destdir_post_attrs_out Optional attributes for destdir dir
+ *					after the operation. Should be atomic.
+ *
  * @return FSAL status
  */
 static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 			      struct fsal_obj_handle *destdir_hdl,
-			      const char *name)
+			      const char *name,
+			      struct fsal_attrlist *destdir_pre_attrs_out,
+			      struct fsal_attrlist *destdir_post_attrs_out)
 {
 	mdcache_entry_t *entry =
 		container_of(obj_hdl, mdcache_entry_t, obj_handle);
@@ -509,7 +516,8 @@ static fsal_status_t mdcache_link(struct fsal_obj_handle *obj_hdl,
 
 	subcall(
 		status = entry->sub_handle->obj_ops->link(
-			entry->sub_handle, dest->sub_handle, name)
+			entry->sub_handle, dest->sub_handle, name,
+			destdir_pre_attrs_out, destdir_post_attrs_out)
 	       );
 
 	if (FSAL_IS_ERROR(status)) {
@@ -642,7 +650,11 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 				struct fsal_obj_handle *olddir_hdl,
 				const char *old_name,
 				struct fsal_obj_handle *newdir_hdl,
-				const char *new_name)
+				const char *new_name,
+				struct fsal_attrlist *olddir_pre_attrs_out,
+				struct fsal_attrlist *olddir_post_attrs_out,
+				struct fsal_attrlist *newdir_pre_attrs_out,
+				struct fsal_attrlist *newdir_post_attrs_out)
 {
 	mdcache_entry_t *mdc_olddir =
 		container_of(olddir_hdl, mdcache_entry_t,
@@ -692,7 +704,9 @@ static fsal_status_t mdcache_rename(struct fsal_obj_handle *obj_hdl,
 	subcall(
 		status = mdc_olddir->sub_handle->obj_ops->rename(
 			mdc_obj->sub_handle, mdc_olddir->sub_handle,
-			old_name, mdc_newdir->sub_handle, new_name)
+			old_name, mdc_newdir->sub_handle, new_name,
+			olddir_pre_attrs_out, olddir_post_attrs_out,
+			newdir_pre_attrs_out, newdir_post_attrs_out)
 	       );
 
 	if (FSAL_IS_ERROR(status))
@@ -1122,7 +1136,9 @@ out:
  */
 static fsal_status_t mdcache_unlink(struct fsal_obj_handle *dir_hdl,
 				    struct fsal_obj_handle *obj_hdl,
-				    const char *name)
+				    const char *name,
+				    struct fsal_attrlist *parent_pre_attrs_out,
+				    struct fsal_attrlist *parent_post_attrs_out)
 {
 	mdcache_entry_t *parent =
 		container_of(dir_hdl, mdcache_entry_t, obj_handle);
@@ -1141,7 +1157,8 @@ static fsal_status_t mdcache_unlink(struct fsal_obj_handle *dir_hdl,
 
 	subcall(
 		status = parent->sub_handle->obj_ops->unlink(
-			parent->sub_handle, entry->sub_handle, name)
+			parent->sub_handle, entry->sub_handle, name,
+			parent_pre_attrs_out, parent_post_attrs_out)
 	       );
 
 	if (FSAL_IS_ERROR(status)) {
