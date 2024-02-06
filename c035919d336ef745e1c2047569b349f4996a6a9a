@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "028bee6d_5171c66f",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-06T22:23:09Z",
+      "side": 1,
+      "message": "OK, good point to not use COMPONENT_SESSIONS. See other discussion about introducing a new log component.",
+      "parentUuid": "851f23a3_e02b6acb",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d45b8b1_5580a78c",
         "filename": "src/support/xprt_handler.c",
         "patchSetId": 6
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Done.\nIt is unfortunate that I can not use it as a const pointer by doing so.",
       "parentUuid": "1d45b8b1_5580a78c",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04034d4_3e5ed067",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-06T22:23:09Z",
+      "side": 1,
+      "message": "What was the benefit of const?",
+      "parentUuid": "672a69b2_7b15477e",
       "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
