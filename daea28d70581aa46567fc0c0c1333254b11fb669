@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba8e3908_49479232",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014452
+      },
+      "writtenOn": "2024-02-06T16:23:10Z",
+      "side": 1,
+      "message": "Hey Frank - First patch into this repo, I followed the contributors howto, hoping I got all of the bits right!\n\nThis patch fixes writer lock contention described in the commit msg, which we see as significantly more expensive in glibc in el8-based operating systems.\n\nAssociated GitHub issue:\nhttps://github.com/nfs-ganesha/nfs-ganesha/issues/1075",
+      "revId": "daea28d70581aa46567fc0c0c1333254b11fb669",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
