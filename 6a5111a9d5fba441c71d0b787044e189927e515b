@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d51a3798_0b055f56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014452
+      },
+      "writtenOn": "2024-02-06T16:33:13Z",
+      "side": 1,
+      "message": "Hey Frank,\nThis is the fix for associated GitHub issue: https://github.com/nfs-ganesha/nfs-ganesha/issues/1076\n\nI posted the flamegraph snippet for this issue to the issue, so you can visualize where log_an_export overhead is being seen.\n\nThe LOG_EXPORT statements seemed to be debug only, so I\u0027m proposing compiling around this with IFDEF DEBUG, but if there is another approach that might be more sane for the project, I\u0027m happy to tweak this.\n\nThanks,\nJon",
+      "revId": "6a5111a9d5fba441c71d0b787044e189927e515b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
