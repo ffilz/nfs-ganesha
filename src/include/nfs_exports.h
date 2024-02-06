@@ -239,6 +239,7 @@ static inline bool export_can_be_mounted(struct gsh_export *exp)
 	       && exp->cfg_pseudopath[1] != '\0';
 }
 
+#ifdef DEBUG
 #define LOG_EXPORT(level, tag, exp, clients)				   \
 	do {								   \
 		struct log_exports_parms lep = {level, __FILE__, __LINE__, \
@@ -246,5 +247,14 @@ static inline bool export_can_be_mounted(struct gsh_export *exp)
 									   \
 		(void) log_an_export(exp, &lep);			   \
 	} while (0)
+#else
+#define LOG_EXPORT(level, tag, exp, clients)				   \
+	do {								   \
+		struct log_exports_parms lep = {level, __FILE__, __LINE__, \
+						__func__, tag, clients};   \
+		(void) exp;						   \
+		(void) lep;						   \
+	} while (0)
+#endif
 
 #endif				/* !NFS_EXPORTS_H */
