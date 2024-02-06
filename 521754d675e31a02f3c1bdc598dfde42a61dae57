@@ -34,6 +34,24 @@
       "parentUuid": "15e64426_56c40cd5",
       "revId": "521754d675e31a02f3c1bdc598dfde42a61dae57",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b6ecba_1212efa5",
+        "filename": "src/Protocols/NFS/nfs4_op_bind_conn.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-06T22:14:19Z",
+      "side": 1,
+      "message": "Ah, OK. Maybe add a comment to remind folks that we force set to SP4_NONE.",
+      "parentUuid": "8dcc4d71_1b14e49d",
+      "revId": "521754d675e31a02f3c1bdc598dfde42a61dae57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
