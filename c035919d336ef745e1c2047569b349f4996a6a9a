@@ -124,6 +124,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6d20c3_19e96c43",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-07T06:44:49Z",
+      "side": 1,
+      "message": "Resolving this comment, as I have updated the other CL based on your comment about the log component.",
+      "parentUuid": "028bee6d_5171c66f",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d45b8b1_5580a78c",
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "What was the benefit of const?",
       "parentUuid": "672a69b2_7b15477e",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d0d344_c2a15121",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-07T06:44:49Z",
+      "side": 1,
+      "message": "The const pointer would prevent accidental re-assignment of xprt_data to another xprt_custom_data_t struct, which I believe is considered to be a good practice in general. However, I am fine with the current implementation to be aligned with the general Ganesha guidelines.",
+      "parentUuid": "e04034d4_3e5ed067",
       "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
