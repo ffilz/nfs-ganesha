@@ -33,6 +33,24 @@
       "message": "This seems to call idmapper whether we have USE_NFSIDMAP or not.",
       "revId": "0b6533c20c1e1e1c7eeb11298b9bb0061cbae939",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f766c89_840dce90",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-07T07:25:29Z",
+      "side": 1,
+      "message": "The idmapper cache is used with both `USE_NFSIDMAP` (when using libnfsidmap for idmapping) and `nfs_param.nfsv4_param.use_getpwnam` (when using linux name resolution system (with sssd for example) for idmapping). Check `name2id` and `xdr_encode_nfs4_princ` functions in this `idmapper.c` file, that have a similar logic.",
+      "parentUuid": "45acef7d_20c36b3e",
+      "revId": "0b6533c20c1e1e1c7eeb11298b9bb0061cbae939",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

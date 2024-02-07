@@ -16,6 +16,24 @@
       "message": "Why did you remove this ifdef?",
       "revId": "bad6f7025af8f35e5816e75f7c433daffe58658d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b20caa_293b075a",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-07T07:25:29Z",
+      "side": 0,
+      "message": "Until now, this function `principal2uid` works only with USE_NFSIDMAP macro (which uses `libnfsidmap` library for idmapping). This CL additionally makes this function work with  the lib-C\u0027s pw* function, for cases where `nfs_param.nfsv4_param.use_getpwnam` is true (that is, where USE_NFSIDMAP is false \n -- since these two are used exclusive of each other).\n\nThe ifdef removed here is added below in line 878, where libnfsidmap specific resolution is performed.",
+      "parentUuid": "496cd4e7_aa2ba575",
+      "revId": "bad6f7025af8f35e5816e75f7c433daffe58658d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
