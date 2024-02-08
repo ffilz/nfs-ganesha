@@ -1126,6 +1126,22 @@ if(USE_CAPS)
   endif (CAPS_FOUND)
 endif(USE_CAPS)
 
+
+# enable libunwind if available
+goption(USE_UNWIND "Enable libunwind" ON)
+gopt_test(USE_UNWIND)
+if (USE_UNWIND)
+  find_package(Unwind)
+  if (UNWIND_FOUND)
+    set(SYSTEM_LIBRARIES ${UNWIND_LIBRARIES} ${SYSTEM_LIBRARIES})
+    include_directories(${UNWIND_INCLUDE_DIR})
+    message(STATUS "libunwind found: ${UNWIND_LIBRARIES}")
+  else (UNWIND_FOUND)
+    message(WARNING "libunwind not found. Disabling USE_UNWIND")
+    set(USE_UNWIND OFF)
+  endif (UNWIND_FOUND)
+endif(USE_UNWIND)
+
 # default to ON so that it does the right thing in the CentOS CI
 goption(USE_LEGACY_PYTHON_INSTALL "Use 'python setup.py install'" ON)
 
@@ -1381,6 +1397,7 @@ message(STATUS "USE_MAN_PAGE = ${USE_MAN_PAGE}")
 message(STATUS "USE_RADOS_RECOV = ${USE_RADOS_RECOV}")
 message(STATUS "RADOS_URLS = ${RADOS_URLS}")
 message(STATUS "USE_CUNIT = ${USE_CUNIT}")
+message(STATUS "USE_UNWIND = ${USE_UNWIND}")
 message(STATUS "SANITIZE_ADDRESS = ${SANITIZE_ADDRESS}")
 
 set(USE_CB_SIMULATOR ${USE_CB_SIMULATOR}
