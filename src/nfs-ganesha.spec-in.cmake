@@ -86,6 +86,9 @@ Requires: openSUSE-release
 @BCOND_RPCBIND@ rpcbind
 %global use_rpcbind %{on_off_switch rpcbind}
 
+@BCOND_UNWIND@ unwind
+%global use_unwind %{on_off_switch unwind}
+
 @BCOND_MSPAC_SUPPORT@ mspac_support
 %global use_mspac_support %{on_off_switch mspac_support}
 
@@ -247,6 +250,14 @@ Requires: nfs-ganesha = %{version}-%{release}
 This package contains a FSAL shared object to
 be used with NFS-Ganesha to support PROXY_V3 based filesystems
 
+%if %{with unwind}
+%if ( 0%{?rhel} && 0%{?rhel} < 8 )
+Requires: libc6-dev
+%else
+Requires: libc-devel
+%if ( 0%{?suse_version} )
+Requires: glibc-devel
+%endif
 
 %if %{with utils}
 %package utils
@@ -529,6 +540,7 @@ cmake .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DUSE_SYSTEM_NTIRPC=%{use_system_ntirpc}	\
 	-DUSE_9P_RDMA=%{use_rdma}			\
 	-DUSE_LTTNG=%{use_lttng}			\
+	-DUSE_UNWIND=%{use_unwind}			\
 	-DUSE_ADMIN_TOOLS=%{use_utils}			\
 	-DUSE_GUI_ADMIN_TOOLS=%{use_gui_utils}		\
 	-DUSE_RADOS_RECOV=%{use_rados_recov}		\
