@@ -316,6 +316,24 @@
       "parentUuid": "2ad0abb6_9347876d",
       "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4821bd_5bfefa41",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-08T19:52:46Z",
+      "side": 1,
+      "message": "OK, I prefer not to see so many code correctness asserts, but they get dropped from production code anyway.",
+      "parentUuid": "889e4de0_5213a21c",
+      "revId": "c035919d336ef745e1c2047569b349f4996a6a9a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
