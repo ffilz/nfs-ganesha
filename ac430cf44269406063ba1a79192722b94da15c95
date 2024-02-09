@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0566fdee_7ae5720a",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2657,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-09T23:20:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83cf0583_d59db36f",
+      "revId": "ac430cf44269406063ba1a79192722b94da15c95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cfe95e6_811a1134",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-02-09T03:05:18Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (unw_init_local(\u0026cursor, \u0026uc) !\u003d 0) {\n+\t\tgoto libunwind_failed;\n+\t}",
+      "revId": "ac430cf44269406063ba1a79192722b94da15c95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3f7093b_6d1fc9a1",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-09T23:20:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cfe95e6_811a1134",
       "revId": "ac430cf44269406063ba1a79192722b94da15c95",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
