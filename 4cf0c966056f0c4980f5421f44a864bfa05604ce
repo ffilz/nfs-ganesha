@@ -16,6 +16,24 @@
       "message": "Hmm, this raises the point that maybe it\u0027s worthwhile considering partial validity of mdcache attributes. It would be nice to update what we can from postattr.",
       "revId": "4cf0c966056f0c4980f5421f44a864bfa05604ce",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4461a3d_5e6ab2a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-02-11T06:57:01Z",
+      "side": 1,
+      "message": "I thought about this, but this is not trivial. Since in order to update the attributes from post-attr you need to take the mdcache entry lock. I don\u0027t want to take it for the entire time, since that would mean we can\u0027t perform more than one operation at a time on the same directory. \n\nWe could take the lock after the operation, to update it, but then it won\u0027t be atomic - if there are two operations at the same time, we can\u0027t be sure that the attribute update would happen in the same order as it was performed. \n\nThere are probably ways to solve that (like comparing mtime on update), but I didn\u0027t want to get into it now, as part of this change.",
+      "parentUuid": "ec619f8f_dd414b67",
+      "revId": "4cf0c966056f0c4980f5421f44a864bfa05604ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
