@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87371b6c_4148fbe9",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-12T16:06:58Z",
+      "side": 1,
+      "message": "I think the condition below is wrong... If state is NULL or attrs_out is NULL, we will continue to line 556 with a non-regular file...\n\nActually, with a non-regular file, state will always be NULL, so that part of the test should be redundant...\n\nMaybe this is always called with attrs_out non-NULL also...",
+      "revId": "d026a4c7302b6719d75748a42ad6f928b8a19324",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5645d19_b551becb",
         "filename": "src/FSAL/FSAL_GPFS/file.c",
         "patchSetId": 1
@@ -66,6 +83,24 @@
       "side": 1,
       "message": "I would assume non null state can not happen here - line 543 asks for that and jumps out via \"goto fileerr\" - bypassing the new statements?",
       "parentUuid": "c5645d19_b551becb",
+      "revId": "d026a4c7302b6719d75748a42ad6f928b8a19324",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e57896c_48b9b7ab",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-12T16:06:58Z",
+      "side": 1,
+      "message": "The goto in 553 only occurs if the file is not a regular file, and actually, see comment above...\n\nSo actually, there\u0027s a problem, if attrs_out is NULL, we will try an insert the fd for a non-regular file (with a non-regular file, state will NOT be NULL...)\n\nIn any case, any regular file WILL come through this path, it may be harmless to insert the global FD, but please verify this is all OK with state non-NULL.",
+      "parentUuid": "41fe3583_3d865ae2",
       "revId": "d026a4c7302b6719d75748a42ad6f928b8a19324",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
