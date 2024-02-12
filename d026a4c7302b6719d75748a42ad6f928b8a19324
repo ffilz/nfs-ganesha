@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a46546b_3a4f926e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010265
+      },
+      "writtenOn": "2024-02-12T15:36:20Z",
+      "side": 1,
+      "message": "I would assume non null state can not happen here - line 543 asks for that and jumps out via \"goto fileerr\" - bypassing the new statements?",
+      "revId": "d026a4c7302b6719d75748a42ad6f928b8a19324",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5645d19_b551becb",
@@ -31,6 +48,24 @@
       "writtenOn": "2024-01-26T19:30:40Z",
       "side": 1,
       "message": "Does this work OK if state is non-NULL?\n\nFSAL_VFS only does the insert_fd_lru when state is NULL and thus the open is indeed on the global fd.\n\nI suppose all this will do if the global fd is not actually used, it will LRU track it and eventually try and \"close\" it, which will effectively be a no-op.",
+      "revId": "d026a4c7302b6719d75748a42ad6f928b8a19324",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41fe3583_3d865ae2",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1010265
+      },
+      "writtenOn": "2024-02-12T15:36:20Z",
+      "side": 1,
+      "message": "I would assume non null state can not happen here - line 543 asks for that and jumps out via \"goto fileerr\" - bypassing the new statements?",
+      "parentUuid": "c5645d19_b551becb",
       "revId": "d026a4c7302b6719d75748a42ad6f928b8a19324",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
