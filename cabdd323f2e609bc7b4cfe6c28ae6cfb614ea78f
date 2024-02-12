@@ -52,6 +52,24 @@
       "parentUuid": "409f9539_e192325f",
       "revId": "cabdd323f2e609bc7b4cfe6c28ae6cfb614ea78f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba10c4c_4333c4e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-12T16:42:31Z",
+      "side": 1,
+      "message": "Yes, there is that. Also, single patch sets, especially when merge conflicts might arise, add significantly to my workload. I am actually getting some pressure to spend less of my time on upstream work, so the easier it is for me to review (single patch set is also easier to review) and merge, the more happy my management will be.\n\nAnother thing to consider, it\u0027s not always necessary to break something up into multiple patches. One huge patch is definitely discouraged for large changes, but striking a balance between a separate patch for each little concept (like is preferred in some open source communities) and a single huge patch is worthwhile to consider.\n\nThanks for all your efforts.",
+      "parentUuid": "f1af2a33_be72ce24",
+      "revId": "cabdd323f2e609bc7b4cfe6c28ae6cfb614ea78f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
