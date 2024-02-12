@@ -34,6 +34,24 @@
       "parentUuid": "eba8411d_c0f8cc2b",
       "revId": "cabdd323f2e609bc7b4cfe6c28ae6cfb614ea78f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1af2a33_be72ce24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-12T13:47:21Z",
+      "side": 1,
+      "message": "On re-thinking about this, it seems better to have a single patch-set containing changes for idmapper, uid2grp and nfs-creds. It also avoids merge conflicts and creating separate change-sets for similar changes across these.",
+      "parentUuid": "409f9539_e192325f",
+      "revId": "cabdd323f2e609bc7b4cfe6c28ae6cfb614ea78f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
