@@ -16,6 +16,24 @@
       "message": "Could you please merge all the idmapper and creds patch sets into a single patch set? It will make it much easier to merge and add clarity to the review.\n\nThanks\n\nFrank",
       "revId": "cabdd323f2e609bc7b4cfe6c28ae6cfb614ea78f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409f9539_e192325f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-02-12T10:24:57Z",
+      "side": 1,
+      "message": "Sure, I will have all idmapper CLs in a single patch set.\n\nI want to keep this nfs-creds change-set (https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1176545) separate, as it is independent of idmapper.\n\nSo, there will be 3 different patch-sets in parallel -- one for idmapper, one for uid2grp and one for nfs-creds. Hope that is ok.",
+      "parentUuid": "eba8411d_c0f8cc2b",
+      "revId": "cabdd323f2e609bc7b4cfe6c28ae6cfb614ea78f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
