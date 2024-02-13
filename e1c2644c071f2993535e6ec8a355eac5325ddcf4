@@ -16,6 +16,24 @@
       "message": "I wonder if we want to allow a bit more size than this by default?  I don\u0027t have any numbers, but 16k seems small to me.  I\u0027d think we could go 2x or even 4x without significant amounts of latency added, which would speed up total listing time significantly.\n\nUnrelated, since you\u0027re touching the file, can you remove the execute bit from nfs_read_conf.c?  It\u0027s the only file in that directory that\u0027s executable.",
       "revId": "e1c2644c071f2993535e6ec8a355eac5325ddcf4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7bdf3f7_206518b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-02-13T16:14:56Z",
+      "side": 1,
+      "message": "Done - increased it to 32KB. We might have to rerun the test if we want to go even higher",
+      "parentUuid": "2d899a10_c9957305",
+      "revId": "e1c2644c071f2993535e6ec8a355eac5325ddcf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
