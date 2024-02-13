@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d899a10_c9957305",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-02-13T14:04:15Z",
+      "side": 1,
+      "message": "I wonder if we want to allow a bit more size than this by default?  I don\u0027t have any numbers, but 16k seems small to me.  I\u0027d think we could go 2x or even 4x without significant amounts of latency added, which would speed up total listing time significantly.\n\nUnrelated, since you\u0027re touching the file, can you remove the execute bit from nfs_read_conf.c?  It\u0027s the only file in that directory that\u0027s executable.",
+      "revId": "e1c2644c071f2993535e6ec8a355eac5325ddcf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
