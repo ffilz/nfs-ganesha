@@ -16,6 +16,23 @@
       "message": "It would be handy to reference the github issue in the commit message.\n\nAlso, would 64k work? Do we know what other clients request? I want to be a bit careful of reducing this value if other clients have a larger size and are working well.\n\nThat said, reducing this does seem like a good idea. We can always try 32k and see how it works in other environments.",
       "revId": "c69f0fdbba86acfc1b1cf028eaa679fe6ccdd665",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c41b3f3_3d4e53b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-15T18:57:06Z",
+      "side": 1,
+      "message": "And sorry, missed the earlier conversation resulting in a change from 16k to 32k. If you want to stick with 32k for now, I\u0027m fine with that.\n\nNote also that anyone determining that a larger value would work better can change their configuration.",
+      "revId": "c69f0fdbba86acfc1b1cf028eaa679fe6ccdd665",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
