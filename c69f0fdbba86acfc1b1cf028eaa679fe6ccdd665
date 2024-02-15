@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9f4646b_75bc7a7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-15T18:52:58Z",
+      "side": 1,
+      "message": "It would be handy to reference the github issue in the commit message.\n\nAlso, would 64k work? Do we know what other clients request? I want to be a bit careful of reducing this value if other clients have a larger size and are working well.\n\nThat said, reducing this does seem like a good idea. We can always try 32k and see how it works in other environments.",
+      "revId": "c69f0fdbba86acfc1b1cf028eaa679fe6ccdd665",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
