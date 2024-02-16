@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f726ccaf_0b22594e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-16T18:50:13Z",
+      "side": 1,
+      "message": "I\u0027d like to see error as message, but will merge this as is.",
+      "revId": "d68dd112fa879a1b3573e483709d72b198fe8d0f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d85ec1d3_22064f5d",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-16T18:50:13Z",
+      "side": 1,
+      "message": "Longer term, we should convert the error number into a message as well. strerror?",
+      "revId": "d68dd112fa879a1b3573e483709d72b198fe8d0f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
