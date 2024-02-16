@@ -34,6 +34,23 @@
       "parentUuid": "1f334df5_219cf24c",
       "revId": "4bd4d4cfe7f8176e6822cc8b96e09aabfff3e489",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32a8fb7_ef7d7645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-02-16T21:15:14Z",
+      "side": 1,
+      "message": "Unrelated but what is this line in close for.\n\t/** @todo don\u0027t merge me... hack to avoid legacy open_fd_count */\n\treturn fsalstat(ERR_FSAL_NOT_OPENED, 0);",
+      "revId": "4bd4d4cfe7f8176e6822cc8b96e09aabfff3e489",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
