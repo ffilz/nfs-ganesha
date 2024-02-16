@@ -460,6 +460,7 @@ static inline void free_tcp_drc(drc_t *drc)
 		if (drc->xt.tree[ix].cache)
 			gsh_free(drc->xt.tree[ix].cache);
 	}
+	mem_free(drc->xt.tree, drc->npart * sizeof(struct rbtree_x_part));
 	PTHREAD_MUTEX_destroy(&drc->drc_mtx);
 	LogFullDebug(COMPONENT_DUPREQ, "free TCP drc %p", drc);
 	pool_free(tcp_drc_pool, drc);
