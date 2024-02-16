@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95811a45_b20f2b6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-16T23:44:59Z",
+      "side": 1,
+      "message": "Hmm, we were doing good... This change needs some consideration since it will change existing running configurations.\n\nSome options:\n\n1. Allow the domain name to be configured either way.\n\n2. Detect use of the old way and throw a config error with a descriptive message\n\n2a. Do this ONLY if the new way is not also used (so a single config file could be used by either old or new ways of configuring)",
+      "revId": "96d3ca177e385f76eb7c52a380d8aae7a0501974",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
