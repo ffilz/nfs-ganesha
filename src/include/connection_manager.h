@@ -155,6 +155,14 @@ enum connection_manager__client_state_t {
 	CONNECTION_MANAGER__CLIENT_STATE__DRAINING,
 };
 
+enum connection_manager__connection_started_t {
+	// The new connection is allowed to be created and execute requests
+	CONNECTION_MANAGER__CONNECTION_STARTED__ALLOW = 0,
+	// The draining process in other servers failed, the new connection
+	// should be dropped
+	CONNECTION_MANAGER__CONNECTION_STARTED__DROP,
+};
+
 typedef struct connection_manager__connection_t {
 	bool is_managed; // When false, fields below are not initialized
 	// We don't have ownership on XPRT, when the XPRT is destroyed it calls
@@ -188,4 +196,15 @@ connection_manager__callback_context_t connection_manager__callback_clear(void);
 void connection_manager__client_init(connection_manager__client_t *);
 // Called from client_mgr when a gsh_client is destroyed.
 void connection_manager__client_fini(connection_manager__client_t *);
+
+// Called when a new connection is created
+// When this module is enabled, this method blocks until all the other Ganesha
+// servers in the cluster drain and close the connections by this client
+// Might fail when timeout is reached, and in that case the connection is
+// destroyed
+// In case there are any draining processes in progress
+// (connection_manager__drain_and_disconnect_local), they are aborted so the new
+// connection gets the priority.
+enum connection_manager__connection_started_t
+connection_manager__connection_started(SVCXPRT *);
 #endif // CONNECTION_MANAGER_H
