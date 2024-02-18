@@ -91,7 +91,6 @@
 
 #include "common_utils.h"
 
-
 /* A client steady state can be either DRAINED or ACTIVE.
  * The transition DRAINED -> ACTIVE is called ACTIVATING.
  * The transition ACTIVE -> DRAINED is called DRAINING.

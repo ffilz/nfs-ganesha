@@ -177,6 +177,7 @@ struct gsh_client *get_gsh_client(sockaddr_t *client_ipaddr, bool lookup_only)
 	cl = &server_st->client;
 	cl->cl_addrbuf = *client_ipaddr;
 	cl->refcnt = 0;
+	connection_manager__client_init(&cl->connection_manager);
 
 	if (!sprint_sockip(client_ipaddr, cl->hostaddr_str,
 			   sizeof(cl->hostaddr_str))) {
@@ -214,6 +215,8 @@ void put_gsh_client(struct gsh_client *client)
 
 	new_refcnt = atomic_dec_int64_t(&client->refcnt);
 	assert(new_refcnt >= 0);
+	// TODO: b/298325057 - Monitor number of clients
+	// TODO: b/298325057 - Free resources
 }
 
 /**

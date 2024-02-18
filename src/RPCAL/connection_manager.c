@@ -29,6 +29,7 @@
  */
 
 #include "connection_manager.h"
+#include "client_mgr.h"
 
 #define LogInfoClient(client, format, args...)                                 \
 	LogInfo(COMPONENT_XPRT, "%s: " format,                                 \
@@ -46,8 +47,9 @@
 static inline const char *get_client_address_for_debugging(
 	const connection_manager__client_t *client)
 {
-	// TODO: b/298325057 - Get client address from gsh_client.
-	return "<unknown>";
+	const struct gsh_client *const gsh_client = container_of(
+		client, struct gsh_client, connection_manager);
+	return gsh_client->hostaddr_str;
 }
 
 void connection_manager__client_init(connection_manager__client_t *client)
