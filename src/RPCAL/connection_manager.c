@@ -334,3 +334,32 @@ connection_manager__connection_started(SVCXPRT *xprt)
 	PTHREAD_MUTEX_unlock(&client->mutex);
 	return CONNECTION_MANAGER__CONNECTION_STARTED__ALLOW;
 }
+
+void connection_manager__connection_finished(const SVCXPRT *xprt)
+{
+	connection_manager__connection_t *const connection =
+		xprt_to_connection(xprt);
+	if (!connection || !connection->is_managed) {
+		LogInfo(COMPONENT_XPRT,
+			"fd %d: Connection is not managed",
+			xprt->xp_fd);
+		return;
+	}
+	struct gsh_client *const gsh_client = connection->gsh_client;
+	connection_manager__client_t *const client =
+		&gsh_client->connection_manager;
+	LogInfoConnection(connection, "Connection finished");
+
+	PTHREAD_MUTEX_lock(&client->mutex);
+	glist_del(&connection->node);
+	assert(client->connections_count > 0);
+	client->connections_count--;
+	if (client->connections_count == 0) {
+		PTHREAD_COND_broadcast(&client->cond_change);
+	}
+	PTHREAD_MUTEX_unlock(&client->mutex);
+
+	connection->xprt = NULL;
+	connection->gsh_client = NULL;
+	put_gsh_client(gsh_client);
+}

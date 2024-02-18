@@ -207,4 +207,8 @@ void connection_manager__client_fini(connection_manager__client_t *);
 // connection gets the priority.
 enum connection_manager__connection_started_t
 connection_manager__connection_started(SVCXPRT *);
+// Called when a connection is closed
+// Updates the connection list, and potentially notifies the draining process
+void connection_manager__connection_finished(const SVCXPRT *);
+
 #endif // CONNECTION_MANAGER_H
