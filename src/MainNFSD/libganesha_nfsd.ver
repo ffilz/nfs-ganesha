@@ -23,6 +23,8 @@
   config_GetBlockNode;
   config_ParseFile;
   config_url_init;
+  connection_manager__callback_set;
+  connection_manager__callback_clear;
   convert_ipv6_to_ipv4;
   create_log_facility;
   decode_fsid;

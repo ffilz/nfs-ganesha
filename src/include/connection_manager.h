@@ -77,7 +77,7 @@
  *
  * Usage:
  * 1. Set "Enable_Connection_Manager" in the config.
- * 2. Use connection_manager__callbacks_register to register a callback that
+ * 2. Use connection_manager__callback_set to register a callback that
  * sends the "DRAIN" request to the other Ganesha servers in the cluster. The
  * callback is called each time a new client connects to the current Ganesha
  * server, and we block-wait until the callback finishes successfully before
@@ -90,6 +90,39 @@
 #define CONNECTION_MANAGER_H
 
 #include "common_utils.h"
+
+enum connection_manager__drain_t {
+	// Drain was successful
+	CONNECTION_MANAGER__DRAIN__SUCCESS = 0,
+	// Drain was vacuously successful, there were no active connections by
+	// the client
+	CONNECTION_MANAGER__DRAIN__SUCCESS_NO_CONNECTIONS,
+	// Drain failed, most likely due to a new incoming connection that
+	// aborted the draining process, or because we were busy draining other
+	// servers
+	CONNECTION_MANAGER__DRAIN__FAILED,
+	// Drain failed due to timeout
+	CONNECTION_MANAGER__DRAIN__FAILED_TIMEOUT,
+};
+
+typedef enum connection_manager__drain_t
+(*connection_manager__callback_drain_t)(
+	// User provided context
+	void *user_context,
+	// Client to drain
+	const sockaddr_t *client_address,
+	// Client address string for logging/debugging
+	const char *client_address_str,
+	// Timeout for the draining
+	const struct timespec *timeout);
+
+typedef struct connection_manager__callback_context_t {
+	// User provided context
+	void *user_context;
+	// Sends a "DRAIN" request to the other Ganesha servers in the cluster
+	connection_manager__callback_drain_t
+		drain_and_disconnect_other_servers;
+} connection_manager__callback_context_t;
 
 /* A client steady state can be either DRAINED or ACTIVE.
  * The transition DRAINED -> ACTIVE is called ACTIVATING.
@@ -131,6 +164,13 @@ typedef struct connection_manager__client_t {
 	struct glist_head connections;
 	uint32_t connections_count;
 } connection_manager__client_t;
+
+// Sets the callbacks to be called on draining
+// Can be called only on init or after "clear" was called
+void connection_manager__callback_set(connection_manager__callback_context_t);
+// Clears the drain callbacks, and returns the last stored callbacks struct
+// Can be called only after "set" was called
+connection_manager__callback_context_t connection_manager__callback_clear(void);
 
 // Called from client_mgr when a new gsh_client is created.
 void connection_manager__client_init(connection_manager__client_t *);

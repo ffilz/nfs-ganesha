@@ -52,6 +52,49 @@ static inline const char *get_client_address_for_debugging(
 	return gsh_client->hostaddr_str;
 }
 
+static enum connection_manager__drain_t callback_default_drain_other_servers(
+	void *context,
+	const sockaddr_t *client_address,
+	const char *client_address_str,
+	const struct timespec *timeout)
+{
+	static bool first_time = true;
+	if (first_time) {
+		first_time = false;
+		LogWarn(COMPONENT_XPRT,
+			"%s: Connection manager is enabled but missing drain callback",
+			client_address_str);
+	}
+	return CONNECTION_MANAGER__DRAIN__SUCCESS_NO_CONNECTIONS;
+}
+
+static pthread_rwlock_t callback_lock = RWLOCK_INITIALIZER;
+static const connection_manager__callback_context_t callback_default = {
+	/*user_context=*/NULL, callback_default_drain_other_servers};
+static connection_manager__callback_context_t callback_context =
+	callback_default;
+
+void connection_manager__callback_set(
+	connection_manager__callback_context_t new)
+{
+	PTHREAD_RWLOCK_wrlock(&callback_lock);
+	assert(callback_context.drain_and_disconnect_other_servers ==
+	       callback_default.drain_and_disconnect_other_servers);
+	callback_context = new;
+	PTHREAD_RWLOCK_unlock(&callback_lock);
+}
+
+connection_manager__callback_context_t connection_manager__callback_clear(void)
+{
+	PTHREAD_RWLOCK_wrlock(&callback_lock);
+	assert(callback_context.drain_and_disconnect_other_servers !=
+	       callback_default.drain_and_disconnect_other_servers);
+	const connection_manager__callback_context_t old = callback_context;
+	callback_context = callback_default;
+	PTHREAD_RWLOCK_unlock(&callback_lock);
+	return old;
+}
+
 void connection_manager__client_init(connection_manager__client_t *client)
 {
 	LogInfoClient(client, "Client init %p", client);
