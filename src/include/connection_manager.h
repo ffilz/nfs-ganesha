@@ -1,0 +1,92 @@
+/* SPDX-License-Identifier: LGPL-3.0-or-later */
+/*
+ * vim:noexpandtab:shiftwidth=8:tabstop=8:
+ *
+ * Copyright 2024 Google LLC
+ * Contributor : Yoni Couriel  yonic@google.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301 USA
+ *
+ * ---------------------------------------
+ */
+
+/**
+ * @file connection_manager.h
+ * @author Yoni Couriel <yonic@google.com>
+ * @brief Allows a client to be connected to a single Ganesha server at a time.
+ *
+ * This modules mitigates the Exactly-Once-Semantics issue when running
+ * multiple Ganesha servers in a cluster.
+ *
+ * A client is all the connections from the same source IP address.
+ *
+ * The scenario is described here:
+ * https://www.rfc-editor.org/rfc/rfc8881.html#section-2.10.6-6
+ * When applied to multiple Ganesha servers this scenario can happen since
+ * Ganesha servers don't share their EOS-reply-cache with each other:
+ * 1. The Client sends "WRITE A" to Server 1
+ * 2. Server 1 is slow to process the request (it might have too much load from
+ * other clients)
+ * 3. The Client connects to Server 2 (it might be due to load balancing)
+ * 4. The Client establishes a session with Server 2, and sends "WRITE A"
+ * 5. Server 2 executes the request and sends a success response
+ * 6. The Client sends "WRITE B" to Server 2, and the server executes it
+ * 7. Server 1 executes the old "WRITE A" request from step (1), overriding
+ * "WRITE B" from step (6)
+ *
+ * Step (5) above won't happen if we had a cluster-wide EOS-reply-cache, or if
+ * the client can't execute requests in Server 2 before all its requests
+ * are completed in Server 1. This module implements the latter:
+ * 1. When a client connects to a new Ganesha server, the server sends a "DRAIN"
+ * request to all the other Ganesha servers in the cluster
+ * 2. When a Ganesha server gets a "DRAIN" request, it closes and waits for the
+ * connections of that client
+ * 3. Only after a successful "DRAIN", the client is allowed to connect to the
+ * new Ganesha server
+ *
+ * When an NFSv4 client connects to a new server, they are allowed to RECLAIM
+ * their state. When using the Connection Manager, we need to extend the lease
+ * time of the client state after draining, otherwise we are exposed to the
+ * following (rare) scenario:
+ * 1. The Client has a lock in Server 1
+ * 2. The Client connects to Server 2 (it might be due to load balancing)
+ * 3. Server 2 starts draining all the other servers in the cluster
+ * 4. Server 1 is successfully drained, and the lease timeout is set to
+ *      now + Lease_Lifetime
+ * 5. Server 3, however, is very slow to respond, and delays the draining
+ * 6. The lease times-out, and Server 1 releases the Client's lock
+ * 7. Another client takes that lock
+ * 8. Server 3 either: finishes the drain, or "kicked-out" from the cluster
+ * 9. The Client is finally allowed to connect to Server 2, but it won't be able
+ *      to RECLAIM their lock (because of step 7)
+ * The solution is to extend the lease time after draining, to be:
+ * now + Lease_Lifetime + "Max time before kicking-out non-responsive servers"
+ *
+ * Usage:
+ * 1. Set "Enable_Connection_Manager" in the config.
+ * 2. Use connection_manager__callbacks_register to register a callback that
+ * sends the "DRAIN" request to the other Ganesha servers in the cluster. The
+ * callback is called each time a new client connects to the current Ganesha
+ * server, and we block-wait until the callback finishes successfully before
+ * we allow that client to issue requests.
+ * 3. When receiving a "DRAIN" request, use
+ * connection_manager__drain_and_disconnect_local to drain the current Ganesha
+ * server.
+ */
+#ifndef CONNECTION_MANAGER_H
+#define CONNECTION_MANAGER_H
+
+#endif // CONNECTION_MANAGER_H
