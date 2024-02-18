@@ -155,6 +155,18 @@ enum connection_manager__client_state_t {
 	CONNECTION_MANAGER__CLIENT_STATE__DRAINING,
 };
 
+typedef struct connection_manager__connection_t {
+	bool is_managed; // When false, fields below are not initialized
+	// We don't have ownership on XPRT, when the XPRT is destroyed it calls
+	// connection_manager__connection_finished which destroys this struct
+	SVCXPRT *xprt;
+	// We have ownership on gsh_client, and it should be released when this
+	// struct is destroyed
+	struct gsh_client *gsh_client;
+	// connections list in connection_manager__client_t
+	struct glist_head node;
+} connection_manager__connection_t;
+
 typedef struct connection_manager__client_t {
 	enum connection_manager__client_state_t state;
 	pthread_mutex_t mutex;            // Protects this struct
