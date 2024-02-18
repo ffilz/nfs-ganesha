@@ -115,6 +115,28 @@ static inline void condition_wait(connection_manager__client_t *client)
 	PTHREAD_COND_wait(&client->cond_change, &client->mutex);
 }
 
+enum condition_wait_t {
+	CONDITION_WAIT__OK = 0,
+	CONDITION_WAIT__TIMEOUT,
+};
+
+// Assumes the client mutex is held
+static inline enum condition_wait_t
+condition_timedwait(connection_manager__client_t *client,
+		    struct timespec timeout)
+{
+	const int rc = pthread_cond_timedwait(&client->cond_change,
+					      &client->mutex, &timeout);
+	switch (rc) {
+	case 0:
+		return CONDITION_WAIT__OK;
+	case ETIMEDOUT:
+		return CONDITION_WAIT__TIMEOUT;
+	default:
+		LogFatalClient(client, "Unexpected return code: %d", rc);
+	}
+}
+
 // Assumes the client mutex is held
 static inline void wait_for_state_change(
 	connection_manager__client_t *client)
@@ -189,6 +211,165 @@ void connection_manager__client_fini(connection_manager__client_t *client)
 	assert(client->state == CONNECTION_MANAGER__CLIENT_STATE__DRAINED);
 	PTHREAD_MUTEX_destroy(&client->mutex);
 	PTHREAD_COND_destroy(&client->cond_change);
+}
+
+static void
+update_socket_linger(const connection_manager__connection_t *connection)
+{
+	// Setting Timeout=0, so the TCP connection will send RST on close()
+	// without waiting for the client's response. This is needed in case
+	// the client was migrated by a load balancer to another server, and
+	// we want the connection to close quickly.
+	// Linger is still enabled, so close() will block until the connection
+	// is closed.
+	const struct linger linger = {.l_onoff = 1, .l_linger = 0};
+
+	if (setsockopt(connection->xprt->xp_fd, SOL_SOCKET, SO_LINGER, &linger,
+		       sizeof(linger)) < 0) {
+		LogWarnConnection(connection,
+				  "Could not set linger for connection: %s",
+				  strerror(errno));
+	}
+}
+
+// Assumes the client mutex is held
+static enum connection_manager__drain_t try_drain_self(
+	connection_manager__client_t *client, uint32_t timeout_sec)
+{
+	assert(client->state == CONNECTION_MANAGER__CLIENT_STATE__ACTIVE);
+	change_state(client, CONNECTION_MANAGER__CLIENT_STATE__DRAINING);
+
+	// TODO: Extends client state lease (see explanation in header)
+
+	const struct glist_head *node;
+
+	glist_for_each(node, &client->connections) {
+		const connection_manager__connection_t *const connection =
+			glist_entry(node, connection_manager__connection_t,
+				    node);
+		LogInfoConnection(connection,
+				  "Destroying connection (xp_refcnt %d)",
+				  connection->xprt->xp_refcnt);
+		assert(connection->is_managed);
+		update_socket_linger(connection);
+		shutdown(connection->xprt->xp_fd, SHUT_RDWR);
+		SVC_DESTROY(connection->xprt);
+	}
+
+	LogInfoClient(client,
+		      "Waiting for %d connections to terminate, timeout=%d",
+		      client->connections_count, timeout_sec);
+	const struct timespec timeout = timeout_seconds(timeout_sec);
+	enum condition_wait_t wait_result = CONDITION_WAIT__OK;
+
+	while (client->connections_count != 0 &&
+	       client->state == CONNECTION_MANAGER__CLIENT_STATE__DRAINING) {
+		// Note mutex is temporarily released while waiting, and other
+		// threads can abort the draining
+		if (condition_timedwait(client, timeout) ==
+		    CONDITION_WAIT__TIMEOUT) {
+			wait_result = CONDITION_WAIT__TIMEOUT;
+			break;
+		}
+	}
+	LogInfoClient(client,
+		      "Finished waiting: state=%d connections=%d wait=%d",
+		      client->state, client->connections_count, wait_result);
+
+	if (client->state == CONNECTION_MANAGER__CLIENT_STATE__DRAINING) {
+		// Since we have (mutex && DRAINING), we're allowed to change
+		// the state to DRAINED/ACTIVE. This also holds in more complex
+		// scenarios where the draining was aborted by another thread
+		// and then restarted by a third thread.
+		if (client->connections_count == 0) {
+			change_state(client,
+				CONNECTION_MANAGER__CLIENT_STATE__DRAINED);
+		} else {
+			change_state(client,
+				CONNECTION_MANAGER__CLIENT_STATE__ACTIVE);
+		}
+	}
+
+	if (client->state == CONNECTION_MANAGER__CLIENT_STATE__DRAINED) {
+		return CONNECTION_MANAGER__DRAIN__SUCCESS;
+	} else {
+		return wait_result == CONDITION_WAIT__TIMEOUT
+			? CONNECTION_MANAGER__DRAIN__FAILED_TIMEOUT
+			: CONNECTION_MANAGER__DRAIN__FAILED;
+	}
+}
+
+enum connection_manager__drain_t
+connection_manager__drain_and_disconnect_local(sockaddr_t *client_address)
+{
+	struct gsh_client *const gsh_client =
+			get_gsh_client(client_address, /*lookup_only=*/true);
+	if (gsh_client == NULL) {
+		char address_for_debugging[SOCK_NAME_MAX];
+
+		sprint_sockip(client_address, address_for_debugging,
+			sizeof(address_for_debugging));
+		LogInfo(COMPONENT_XPRT, "Client not found: %s",
+			address_for_debugging);
+		return CONNECTION_MANAGER__DRAIN__SUCCESS_NO_CONNECTIONS;
+	}
+	connection_manager__client_t *const client =
+		&gsh_client->connection_manager;
+	enum connection_manager__drain_t result;
+
+	PTHREAD_MUTEX_lock(&client->mutex);
+	switch (client->state) {
+	case CONNECTION_MANAGER__CLIENT_STATE__DRAINED: {
+		LogInfoClient(client, "Already drained");
+		result = CONNECTION_MANAGER__DRAIN__SUCCESS_NO_CONNECTIONS;
+		break;
+	}
+	case CONNECTION_MANAGER__CLIENT_STATE__ACTIVATING: {
+		LogInfoClient(client, "Busy draining other servers");
+		result = CONNECTION_MANAGER__DRAIN__FAILED;
+		break;
+	}
+	case CONNECTION_MANAGER__CLIENT_STATE__ACTIVE: {
+		LogInfoClient(client, "Starting self drain");
+		result = try_drain_self(
+			client,
+			nfs_param.core_param.connection_manager_timeout_sec);
+		break;
+	}
+	case CONNECTION_MANAGER__CLIENT_STATE__DRAINING: {
+		LogInfoClient(client, "Already self draining, waiting");
+		wait_for_state_change(client);
+		result = (client->state ==
+			CONNECTION_MANAGER__CLIENT_STATE__DRAINED) ?
+			CONNECTION_MANAGER__DRAIN__SUCCESS :
+			CONNECTION_MANAGER__DRAIN__FAILED;
+		break;
+	}
+	default: {
+		LogFatalClient(client,
+			       "Unexpected connection manager state %d",
+			       client->state);
+	}
+	}
+
+	PTHREAD_MUTEX_unlock(&client->mutex);
+	put_gsh_client(gsh_client);
+
+	switch (result) {
+	case CONNECTION_MANAGER__DRAIN__SUCCESS:
+		// Fallthrough
+	case CONNECTION_MANAGER__DRAIN__SUCCESS_NO_CONNECTIONS:
+		LogInfoClient(client, "Drain was successful: %d", result);
+		break;
+	case CONNECTION_MANAGER__DRAIN__FAILED:
+		// Fallthrough
+	case CONNECTION_MANAGER__DRAIN__FAILED_TIMEOUT:
+		LogWarnClient(client, "Drain failed: %d", result);
+		break;
+	default:
+		LogFatalClient(client, "Unknown result: %d", result);
+	}
+	return result;
 }
 
 static inline connection_manager__connection_t *

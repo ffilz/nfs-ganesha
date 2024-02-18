@@ -211,4 +211,12 @@ connection_manager__connection_started(SVCXPRT *);
 // Updates the connection list, and potentially notifies the draining process
 void connection_manager__connection_finished(const SVCXPRT *);
 
+// Calls SVC_DESTROY on the client's connections, and block-waits until they
+// are closed, or until timeout.
+// The "drain_and_disconnect_other_servers" callback should send a "DRAIN"
+// request to the other Ganesha servers in the cluster. When a "DRAIN" request
+// is received, this method should be called.
+enum connection_manager__drain_t
+connection_manager__drain_and_disconnect_local(sockaddr_t *);
+
 #endif // CONNECTION_MANAGER_H
