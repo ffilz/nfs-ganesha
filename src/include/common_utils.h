@@ -833,9 +833,12 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 	} while (0)
 
 /**
- * @brief Logging condtion variable signal
+ * @brief Logging condition variable signal
  *
- * @param[in,out] _cond The condition variable to destroy
+ * Shall unblock at least one of the threads that are blocked on the specified
+ * condition variable cond (if any threads are blocked on cond).
+ *
+ * @param[in,out] _cond The condition variable to signal
  */
 
 #define PTHREAD_COND_signal(_cond)					\
@@ -851,6 +854,33 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		} else {						\
 			LogCrit(COMPONENT_RW_LOCK,			\
 				"Error %d, Wait cond %p (%s) "		\
+				"at %s:%d", rc, _cond, #_cond,		\
+				__FILE__, __LINE__);			\
+			abort();					\
+		}							\
+	} while (0)
+
+/**
+ * @brief Logging condition variable broadcast
+ *
+ * Shall unblock all threads currently blocked on the specified condition variable cond.
+ *
+ * @param[in,out] _cond The condition variable to broadcast
+ */
+
+#define PTHREAD_COND_broadcast(_cond)					\
+	do {								\
+		int rc;							\
+									\
+		rc = pthread_cond_broadcast(_cond);			\
+		if (rc == 0) {						\
+			LogFullDebug(COMPONENT_RW_LOCK,			\
+				     "Broadcast cond %p (%s) at %s:%d",	\
+				     _cond, #_cond,			\
+				     __FILE__, __LINE__);		\
+		} else {						\
+			LogCrit(COMPONENT_RW_LOCK,			\
+				"Error %d, Broadcast cond %p (%s) "	\
 				"at %s:%d", rc, _cond, #_cond,		\
 				__FILE__, __LINE__);			\
 			abort();					\
