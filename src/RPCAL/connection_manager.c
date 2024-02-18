@@ -29,3 +29,43 @@
  */
 
 #include "connection_manager.h"
+
+#define LogInfoClient(client, format, args...)                                 \
+	LogInfo(COMPONENT_XPRT, "%s: " format,                                 \
+		get_client_address_for_debugging(client), ##args)
+#define LogWarnClient(client, format, args...)                                 \
+	LogWarn(COMPONENT_XPRT, "%s: " format,                                 \
+		get_client_address_for_debugging(client), ##args)
+#define LogFatalClient(client, format, args...)                                \
+	do {                                                                   \
+		LogFatal(COMPONENT_XPRT, "%s: " format,                        \
+			get_client_address_for_debugging(client), ##args);     \
+		abort();                                                       \
+	} while (0);
+
+static inline const char *get_client_address_for_debugging(
+	const connection_manager__client_t *client)
+{
+	// TODO: b/298325057 - Get client address from gsh_client.
+	return "<unknown>";
+}
+
+void connection_manager__client_init(connection_manager__client_t *client)
+{
+	LogInfoClient(client, "Client init %p", client);
+	client->state = CONNECTION_MANAGER__CLIENT_STATE__DRAINED;
+	PTHREAD_MUTEX_init(&client->mutex, NULL);
+	PTHREAD_COND_init(&client->cond_change, NULL);
+	glist_init(&client->connections);
+	client->connections_count = 0;
+}
+
+void connection_manager__client_fini(connection_manager__client_t *client)
+{
+	LogInfoClient(client, "Client fini %p", client);
+	assert(client->connections_count == 0);
+	assert(glist_empty(&client->connections));
+	assert(client->state == CONNECTION_MANAGER__CLIENT_STATE__DRAINED);
+	PTHREAD_MUTEX_destroy(&client->mutex);
+	PTHREAD_COND_destroy(&client->cond_change);
+}

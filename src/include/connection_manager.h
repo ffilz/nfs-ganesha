@@ -89,4 +89,52 @@
 #ifndef CONNECTION_MANAGER_H
 #define CONNECTION_MANAGER_H
 
+#include "common_utils.h"
+
+
+/* A client steady state can be either DRAINED or ACTIVE.
+ * The transition DRAINED -> ACTIVE is called ACTIVATING.
+ * The transition ACTIVE -> DRAINED is called DRAINING.
+ * If the transition fails, the state reverts back:
+ *
+ *         +-----------+            +----------+
+ *   +----->  DRAINED  <---Success--+ DRAINING +-----+
+ *   |     +----+------+            +----^-----+     |
+ * Failed       |                        |           |
+ *   |     New connection          Drain request     |
+ *   |          |                        |        Failed
+ *   |     +----v-------+           +----+-----+     |
+ *   +-----+ ACTIVATING +--Success-->  ACTIVE  <-----+
+ *         +------------+           +----------+
+ *
+ * Created with: asciiflow.com
+ */
+enum connection_manager__client_state_t {
+	// In this state, new connections will transition to ACTIVATING state and
+	// try to drain other servers
+	CONNECTION_MANAGER__CLIENT_STATE__DRAINED = 0,
+	// In this state, new connections will block-wait until the state is changed
+	CONNECTION_MANAGER__CLIENT_STATE__ACTIVATING,
+	// In this state, new connections are allowed immediately, without going
+	// through the process of draining other servers
+	CONNECTION_MANAGER__CLIENT_STATE__ACTIVE,
+	// In this state, new connections will abort the local draining process and
+	// transition back to ACTIVE state
+	CONNECTION_MANAGER__CLIENT_STATE__DRAINING,
+};
+
+typedef struct connection_manager__client_t {
+	enum connection_manager__client_state_t state;
+	pthread_mutex_t mutex;            // Protects this struct
+	// Notified on state/connections change
+	pthread_cond_t cond_change;
+	// List of connection_manager__connection_t
+	struct glist_head connections;
+	uint32_t connections_count;
+} connection_manager__client_t;
+
+// Called from client_mgr when a new gsh_client is created.
+void connection_manager__client_init(connection_manager__client_t *);
+// Called from client_mgr when a gsh_client is destroyed.
+void connection_manager__client_fini(connection_manager__client_t *);
 #endif // CONNECTION_MANAGER_H
