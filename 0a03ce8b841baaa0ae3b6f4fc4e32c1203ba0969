@@ -16,6 +16,23 @@
       "message": "Please review and approve",
       "revId": "0a03ce8b841baaa0ae3b6f4fc4e32c1203ba0969",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a32ff1a1_c9924f9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-19T19:13:51Z",
+      "side": 1,
+      "message": "That\u0027s a good start, but note that each lock owner/file pair also implies an FD in FSAL_VFS at least. But maybe limiting opens is enough since using locks just means twice as many fd?",
+      "revId": "0a03ce8b841baaa0ae3b6f4fc4e32c1203ba0969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
