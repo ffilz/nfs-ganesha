@@ -16,6 +16,23 @@
       "message": "Please review and approve...\nThis DBus we can keep extending for all FD related stats...",
       "revId": "dca613768f3ac204faad085d7aca5afce663767f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a506f3d_3c1556d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-02-19T19:41:43Z",
+      "side": 1,
+      "message": "Is it possible to dump the information into dbus stream instead of log? dbus stats are all returned to the dbus \"client\" for processing and/or display.\n\nAlso, this probably makes sense to hook up to Prometheus/Grafana.",
+      "revId": "dca613768f3ac204faad085d7aca5afce663767f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
