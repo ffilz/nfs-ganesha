@@ -33,6 +33,24 @@
       "message": "Is it possible to dump the information into dbus stream instead of log? dbus stats are all returned to the dbus \"client\" for processing and/or display.\n\nAlso, this probably makes sense to hook up to Prometheus/Grafana.",
       "revId": "dca613768f3ac204faad085d7aca5afce663767f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42c6f2d_c7346d0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-02-20T13:28:04Z",
+      "side": 1,
+      "message": "Right, understood....\nWell, it\u0027s possible :-)\nI just wanted to show a FD usage summary to user and then dump the detailed ClientID details in the logs...with more clients, output may look a bit messier...\n\nIf you insist this, I can make a new CR for the same...",
+      "parentUuid": "6a506f3d_3c1556d0",
+      "revId": "dca613768f3ac204faad085d7aca5afce663767f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
