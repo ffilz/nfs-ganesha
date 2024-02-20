@@ -51,6 +51,24 @@
       "parentUuid": "a32ff1a1_c9924f9f",
       "revId": "0a03ce8b841baaa0ae3b6f4fc4e32c1203ba0969",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb35425_4fa1c1fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-02-20T13:24:58Z",
+      "side": 1,
+      "message": "\u003e Yeah, earlier these counters were considering the locks \u0026 deleg, thereby causing the intention of putting this to go wrong, hence made this changes...counters used to mismatch comparing with lsof, grepped with Ganesha PID...\n\u003e One way to make this clear would be to rename open_state_per_client to open_files_per_client\n\nLemme know your opinion",
+      "parentUuid": "dfa9708d_a5b2a217",
+      "revId": "0a03ce8b841baaa0ae3b6f4fc4e32c1203ba0969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
