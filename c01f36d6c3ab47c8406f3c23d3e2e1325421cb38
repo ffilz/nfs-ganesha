@@ -52,6 +52,24 @@
       "parentUuid": "9ee7be5a_9924157b",
       "revId": "c01f36d6c3ab47c8406f3c23d3e2e1325421cb38",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8bc0894_4e325588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014452
+      },
+      "writtenOn": "2024-02-21T04:02:32Z",
+      "side": 1,
+      "message": "Ah ok. Just to clarify, are you talking about nfs4_State_Del, where the state is removed from the hashtable itself? or something else? \n\nIf nfs4_State_Del, my understanding is that operation will be protected by hashtable writer lock, which would have to wait behind the hashtable reader lock after this change.",
+      "parentUuid": "479fa664_e229165e",
+      "revId": "c01f36d6c3ab47c8406f3c23d3e2e1325421cb38",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
