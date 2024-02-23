@@ -33,6 +33,24 @@
       "message": "DEBUG is never defined somewhere, could you make it so when BUILD_TYPE\u003dDebug is selected, DEBUG is defined, or look for another conditional to use?",
       "revId": "6a5111a9d5fba441c71d0b787044e189927e515b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "babcd27f_b716face",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-02-23T06:31:58Z",
+      "side": 1,
+      "message": "Have updated the changes, similar to that done in other logger macros...\nThis avoids the critical path logging overheads and also allows logs to be turned on, when required to debug...",
+      "parentUuid": "cdd6f926_ef8733e8",
+      "revId": "6a5111a9d5fba441c71d0b787044e189927e515b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
