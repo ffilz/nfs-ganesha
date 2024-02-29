@@ -897,7 +897,8 @@ fsal_mode_gen_acl(struct fsal_attrlist *attrs)
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
-fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl)
+fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl,
+			       bool dup_inherit_aces)
 {
 	int naces;
 	fsal_ace_t *sace, *dace;
@@ -920,7 +921,7 @@ fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl)
 			continue;
 		if (!IS_FSAL_ACE_PERM(*sace))
 			continue;
-		if (IS_FSAL_ACE_INHERIT(*sace)) {
+		if (IS_FSAL_ACE_INHERIT(*sace) && dup_inherit_aces) {
 			/* Dup this ACE */
 			naces++;
 		}
@@ -966,7 +967,7 @@ fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl)
 			continue;
 		}
 
-		if (IS_FSAL_ACE_INHERIT(*dace)) {
+		if (IS_FSAL_ACE_INHERIT(*dace) && dup_inherit_aces) {
 			/* Need to duplicate */
 			GET_FSAL_ACE_FLAG(*dace) |= FSAL_ACE_FLAG_INHERIT_ONLY;
 			dace++;
