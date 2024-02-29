@@ -2094,7 +2094,7 @@ fsal_status_t vfs_setattr2(struct fsal_obj_handle *obj_hdl,
 		if (FSAL_IS_ERROR(status))
 			return status;
 
-		status = fsal_mode_to_acl(attrib_set, attrs.acl);
+		status = fsal_mode_to_acl(attrib_set, attrs.acl, true);
 
 		/* Done with the attrs */
 		fsal_release_attrs(&attrs);

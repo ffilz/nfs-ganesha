@@ -122,7 +122,8 @@ fsal_status_t fsal_rename_access(struct fsal_obj_handle *old_dir_hdl,
 				 struct fsal_obj_handle *new_dir_hdl,
 				 struct fsal_obj_handle *dst_obj_hdl,
 				 bool isdir);
-fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl);
+fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl,
+			       bool dup_inherit_aces);
 fsal_status_t fsal_acl_to_mode(struct fsal_attrlist *attrs);
 
 void set_common_verifier(struct fsal_attrlist *attrs,
