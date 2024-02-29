@@ -761,13 +761,15 @@ static fattr_xdr_result encode_acl(XDR *xdr, struct xdr_attrs_args *args)
 	if (!args->attrs->acl) {
 		/* In order to follow RFC8881 and knfsd behavior, create ACL
 		 * from the mode bits.
-		 * Allocated objects will be freed by the normal flow which call
-		 * fsal_release_attrs. */
-		fsal_status_t status = fsal_mode_to_acl(args->attrs, NULL);
+		 * Allocated objects will be freed by the normal flow which
+		 * call fsal_release_attrs. */
+		fsal_status_t status = fsal_mode_to_acl(args->attrs, NULL,
+				true);
 
 		if (FSAL_IS_ERROR(status)) {
 			LogWarn(COMPONENT_NFS_V4,
-				"Failed in creating ACL from mode bits. Status: %u",
+				"Failed in creating ACL from mode bits."
+					" Status: %u",
 				status.major);
 			return FATTR_XDR_FAILED;
 		}
