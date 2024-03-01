@@ -34,6 +34,24 @@
       "parentUuid": "95811a45_b20f2b6c",
       "revId": "96d3ca177e385f76eb7c52a380d8aae7a0501974",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c11fb73a_6864ee29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-01T11:57:37Z",
+      "side": 1,
+      "message": "Thanks Frank for pointing this out, and merging the remaining change-set.\n\nI have updated the code to retain the old config, and always return error if the old config is set, regardless of whether the new way is set, because we add a default value (`localdomain`) when the config is not explicitly set.",
+      "parentUuid": "9fbeadeb_e2f12dd2",
+      "revId": "96d3ca177e385f76eb7c52a380d8aae7a0501974",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
