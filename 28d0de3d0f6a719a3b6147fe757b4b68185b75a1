@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69beb0b5_72523bf4",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_up.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-01T16:42:46Z",
+      "side": 1,
+      "message": "This gets a reference the same as the old code.",
+      "revId": "28d0de3d0f6a719a3b6147fe757b4b68185b75a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2226392e_93e53e28",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_up.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-01T16:42:46Z",
+      "side": 1,
+      "message": "This passes the reference to the op_context, same as the old code.\n\nThe reference is released by the various release_op_context calls below.",
+      "revId": "28d0de3d0f6a719a3b6147fe757b4b68185b75a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
