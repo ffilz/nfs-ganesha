@@ -16,6 +16,24 @@
       "message": "How about having 0 be disabled, rather than creating a thread that won\u0027t run?",
       "revId": "3f33004c71b27e3100fee6d12319500233574dca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07378952_523d140e",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-01T21:50:57Z",
+      "side": 1,
+      "message": "Yes, let\u0027s have default of 0 never runs.\n\nActually, if we add my suggestion of a way to detect if the config block is present at all, default to 0 if not present, otherwise default to a useful value?",
+      "parentUuid": "5b41375d_f17e6d0c",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
