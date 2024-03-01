@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b263139a_1d0f9453",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2024-03-01T08:54:18Z",
+      "side": 1,
+      "message": "Hi Frank, we are taking reference on gsh_export here. I think we should decrement it after handling upcall?",
+      "range": {
+        "startLine": 1329,
+        "startChar": 2,
+        "endLine": 1329,
+        "endChar": 20
+      },
+      "revId": "0ac2ce951211df59e41ae0ed3c4f64ac567ff885",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
