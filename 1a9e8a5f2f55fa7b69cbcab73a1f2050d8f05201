@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9de4c9df_6ecd84f2",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-03-01T18:25:30Z",
+      "side": 1,
+      "message": "Since this is only one function call, I\u0027d prefer to have it inline, rather than in a goto.",
+      "revId": "1a9e8a5f2f55fa7b69cbcab73a1f2050d8f05201",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
