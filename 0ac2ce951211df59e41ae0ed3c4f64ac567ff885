@@ -22,6 +22,30 @@
       },
       "revId": "0ac2ce951211df59e41ae0ed3c4f64ac567ff885",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be5ca09_b1c9f54e",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-01T16:41:19Z",
+      "side": 1,
+      "message": "The caller is responsible for releasing the reference.\n\nIf you look at how this is used, the export is added to the op_context, with the reference handed off. At the end of the upcall, there is a release_op_context, that will release the export reference.\n\nThe call to this is replacing a get_gsh_export_ref.",
+      "parentUuid": "b263139a_1d0f9453",
+      "range": {
+        "startLine": 1329,
+        "startChar": 2,
+        "endLine": 1329,
+        "endChar": 20
+      },
+      "revId": "0ac2ce951211df59e41ae0ed3c4f64ac567ff885",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
