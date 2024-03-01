@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2535f1_bae352c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-01T19:00:43Z",
+      "side": 1,
+      "message": "Hmm, I didn\u0027t realize we have multiple list implementations... Most of our code uses glist, though we do have one TAILQ in the Ganesha code. I wonder how much we want to encourage multiple list implementations...\n\nAlso, is this default going to be high enough that a legacy config will work reasonably well?",
+      "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
