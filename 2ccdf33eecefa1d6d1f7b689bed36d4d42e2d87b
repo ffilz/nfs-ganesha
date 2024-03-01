@@ -16,6 +16,24 @@
       "message": "I wonder if this should fall back on the old config if the new config isn\u0027t set?",
       "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0b84103_5d9f3f54",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-01T18:55:06Z",
+      "side": 1,
+      "message": "Yes, I would really like to see old configs be viable, if with a warning.\n\nI think it might be worth adding an ability to flag that a specific config block was actually present to make it easier to gather options from old blocks. We can make the old parameters note if they were explicitly configured so that we can throw a warning if the old param is set and the new block is present. At least for one release I want to allow both so my testing and CI for example, can share a single config file that will work with old and new code.",
+      "parentUuid": "5bd0dc53_c2d6fb17",
+      "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
