@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4463b74f_054b230e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-01T18:30:37Z",
+      "side": 1,
+      "message": "Please help to review the changes...\n\nThis CR exposes option to FSALs to add obj handles to FSAL level handle list\n    \nFSAL which have no usecase of storing the obj handles\nwithin fsal handlers, can skip this handle list at FSAL level.\nThereby saving the CPU spend on acquiring fsm_lock during IO.\n\nAm seeing that, only FSAL_MEM and FSAL_PSUEDO works on this handle list at\nFSAL level, for other\u0027s this is of not much use. Others they just help\nduring the shutdown path, to cleanup any stale handles - shutdown_handles().\n\nIf you agree, then can submit a subsequent commit to disable same for others.",
+      "revId": "bc914f23f5d7e468f0303e39ded931489f00e36c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
