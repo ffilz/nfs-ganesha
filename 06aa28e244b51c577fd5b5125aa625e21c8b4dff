@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeea45fe_5d6fb31f",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-02T15:52:05Z",
+      "side": 1,
+      "message": "WARNING: \u0027usera\u0027 may be misspelled - perhaps \u0027users\u0027?\n+\treturn gsh_buffdesc_comparator(\u0026user1-\u003euname, \u0026usera-\u003euname);",
+      "revId": "06aa28e244b51c577fd5b5125aa625e21c8b4dff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9684d8da_2f3e4850",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-02T15:52:05Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint mr \u003d memcmp(buff1-\u003eaddr, buffa-\u003eaddr, MIN(buff1-\u003elen, buffa-\u003elen));\n+\tif (unlikely(mr \u003d\u003d 0)) {",
+      "revId": "06aa28e244b51c577fd5b5125aa625e21c8b4dff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb0b1ae_72894bae",
+        "filename": "src/support/uid2grp_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-02T15:52:05Z",
+      "side": 1,
+      "message": "WARNING: \u0027usera\u0027 may be misspelled - perhaps \u0027users\u0027?\n+\treturn gsh_buffdesc_comparator(\u0026user1-\u003euname, \u0026usera-\u003euname);",
+      "revId": "06aa28e244b51c577fd5b5125aa625e21c8b4dff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
