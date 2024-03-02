@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e69bd704_67bd2b87",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-02T07:54:40Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!success) {\n+\t\t\tgoto principal_not_found;\n+\t\t}",
+      "revId": "f61dc7096e69c01b303c61865d220b8c12b84f6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
