@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda813ab_9e851000",
+        "filename": "src/support/uid2grp_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-02T14:24:45Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!uid2grp_is_group_data_expired(groups-\u003egdata)) {\n+\t\t\tbreak;\n+\t\t}",
+      "revId": "f2883d956065d1864587db4f5506c397d4b3a15b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
