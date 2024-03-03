@@ -34,6 +34,142 @@
       "parentUuid": "5b41375d_f17e6d0c",
       "revId": "3f33004c71b27e3100fee6d12319500233574dca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3455c7d_2417320f",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static struct fridgethr *cache_reaper_fridge \u003d NULL;",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b5045d_575633fe",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!user_expired(user)) {\n+\t\t\tbreak;\n+\t\t}",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261b052f_89c1cb4d",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tLogFullDebug(COMPONENT_IDMAPPER, \"Idmapper user-cache reaper run ended\");",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c6b8dcc_08709f4d",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!group_expired(group)) {\n+\t\t\tbreak;\n+\t\t}",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "450830a4_db743ef4",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tLogFullDebug(COMPONENT_IDMAPPER, \"Idmapper group-cache reaper run ended\");",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f18fd21_36a80901",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void idmapper_cache_reaper_init() should probably be void idmapper_cache_reaper_init(void)\n+static void idmapper_cache_reaper_init()",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd01a1a_75686aab",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\"Idmapper cache reaper fridge init failed. Error: %d\", rc);",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68730e16_3904d306",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T02:25:46Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\"Unable to start reaper for idmapper cache. Error: %d.\", rc);",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
