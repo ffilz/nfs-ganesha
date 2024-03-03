@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9733a440_64e7bde3",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T04:12:39Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!success) {\n+\t\t\tgoto principal_not_found;\n+\t\t}",
+      "revId": "1a9e8a5f2f55fa7b69cbcab73a1f2050d8f05201",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9de4c9df_6ecd84f2",
         "filename": "src/idmapper/idmapper.c",
         "patchSetId": 2
