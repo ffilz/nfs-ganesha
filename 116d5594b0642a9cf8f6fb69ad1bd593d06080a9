@@ -16,6 +16,57 @@
       "message": "Is 0 disable max or no caching? It would be nice to be able to not have a max and have that be default (since we currently don\u0027t do this).",
       "revId": "116d5594b0642a9cf8f6fb69ad1bd593d06080a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d86d198_6faf1715",
+        "filename": "src/support/uid2grp_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T10:22:45Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tsem_init(\u0026uid2grp_sem, 0, nfs_param.core_param.max_uid_to_grp_reqs);",
+      "revId": "116d5594b0642a9cf8f6fb69ad1bd593d06080a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1144e5_244f36d3",
+        "filename": "src/support/uid2grp_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T10:22:45Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tmemset(uid_grplist_cache, 0, id_cache_size * sizeof(struct avltree_node *));",
+      "revId": "116d5594b0642a9cf8f6fb69ad1bd593d06080a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "870f833e_4baff916",
+        "filename": "src/support/uid2grp_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-03T10:22:45Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tnfs_param.directory_services_param.cache_user_groups_max_count) {",
+      "revId": "116d5594b0642a9cf8f6fb69ad1bd593d06080a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
