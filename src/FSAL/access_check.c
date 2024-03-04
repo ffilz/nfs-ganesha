@@ -490,7 +490,8 @@ static fsal_status_t fsal_check_access_acl(
 	}
 
 	/* unsatisfied flags */
-	missing_access = v4mask & ~FSAL_ACE4_PERM_CONTINUE;
+	missing_access = v4mask & ~(FSAL_ACE4_PERM_CONTINUE |
+			FSAL_ACE4_REQ_FLAG);
 	if (!missing_access) {
 		LogFullDebug(COMPONENT_NFS_V4_ACL, "Nothing was requested");
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
