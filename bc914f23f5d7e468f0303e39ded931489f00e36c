@@ -33,6 +33,24 @@
       "message": "This looks good. I think most of the FSALs would be eligible for not tracking their obj handles, though we may want to track in debug builds somehow. There isn\u0027t a sensible conditional compile to use and not sure we want to add a new one.",
       "revId": "bc914f23f5d7e468f0303e39ded931489f00e36c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab2f72c_f3cfeddd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-04T04:25:12Z",
+      "side": 1,
+      "message": "Yes, hence thought of implementing it so...FSAL can decide whether they wanna store the obj handles in other list or not...Currently I see only FSAL_MEM and FSAL_PSUEDO works on this handle list at FSAL level, for other\u0027s this is of not much use. Others they just help during the shutdown path, to cleanup any stale handles - shutdown_handles().\n\nWe can have this in...",
+      "parentUuid": "8d88ed06_40bfa5af",
+      "revId": "bc914f23f5d7e468f0303e39ded931489f00e36c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
