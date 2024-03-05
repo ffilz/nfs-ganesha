@@ -51,6 +51,24 @@
       "message": "2 things.  First, there\u0027s an ntirpc pullup that shouldn\u0027t be here.  Second, this actually turns on a setting (PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP) that hasn\u0027t been used until now.  How sure are we that it works, and doesn\u0027t break anything?  We might be better off removing the code?",
       "revId": "6278f470e1857441b8a23c529c6c288014eb866e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9fe829c_f9c8276b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-05T17:14:27Z",
+      "side": 1,
+      "message": "As discussed during the sync up\n1) Removing the ntirpc submodule update from this.\n2) Commit 6da94ce0 made PTHREAD_MUTEX_ADAPTIVE_NP and\nPTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP the default attributes for\nall rwlocks. But these changes were not getting reflected because of the wrong undefined macro, which is corrected here...Also this has been validated in our product and helps to give better performance...Lemme know, if you know more details...",
+      "parentUuid": "956f5ea7_a75b74b4",
+      "revId": "6278f470e1857441b8a23c529c6c288014eb866e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
