@@ -16,6 +16,24 @@
       "message": "Please review and approve...this also updates TiRPC submodule to below commits...\n\nPR to TiRPC\nhttps://github.com/nfs-ganesha/ntirpc/pull/290",
       "revId": "6278f470e1857441b8a23c529c6c288014eb866e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3e8dfca_1f00e172",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-05T07:37:44Z",
+      "side": 1,
+      "message": "Am not sure, if this was the right way to update TiRPC, here in gerrit...\n\n@ffilzlnx@mindspring.com @dang@redhat.com\nI believe, once the other TiRPC PR is merged, below build failure, would get rectified...\n\nHEAD is now at 6278f47 Use __GLIBC__ macro to set pthread RW lock kind\nSubmodule \u0027src/libntirpc\u0027 (https://github.com/nfs-ganesha/ntirpc.git) registered for path \u0027src/libntirpc\u0027\nCloning into \u0027/root/nfs-ganesha/src/libntirpc\u0027...\nfatal: remote error: upload-pack: not our ref cab029f47d35ad64c177d1bfd26dcf1841bda029\nfatal: Fetched in submodule path \u0027src/libntirpc\u0027, but it did not contain cab029f47d35ad64c177d1bfd26dcf1841bda029. Direct fetching of that commit failed.\nSynchronizing submodule url for \u0027src/libntirpc\u0027\n\n...\n\n/root/nfs-ganesha/src/include/gsh_rpc.h:49:10: fatal error: rpc/xdr_inline.h: No such file or directory\n   49 | #include \u003crpc/xdr_inline.h\u003e\n      |          ^~~~~~~~~~~~~~~~~~\ncompilation terminated.",
+      "parentUuid": "541e5dc7_856ba841",
+      "revId": "6278f470e1857441b8a23c529c6c288014eb866e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
