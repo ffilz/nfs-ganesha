@@ -678,10 +678,7 @@ static fsal_status_t fsal_check_access_acl(
 		}
 	}
 
-	if (IS_FSAL_ACE4_REQ(v4mask) && missing_access) {
-		LogDebug(COMPONENT_NFS_V4_ACL, "final access unknown (NO_ACE)");
-		return fsalstat(ERR_FSAL_NO_ACE, 0);
-	} else if (missing_access || (denied != NULL && *denied != 0)) {
+	if (missing_access || (denied != NULL && *denied != 0)) {
 #ifndef ENABLE_RFC_ACL
 		if ((missing_access &
 		     (FSAL_ACE_PERM_WRITE_ATTR | FSAL_ACE_PERM_WRITE_ACL |
