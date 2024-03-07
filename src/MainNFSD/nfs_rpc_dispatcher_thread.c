@@ -1323,6 +1323,10 @@ static inline void Register_program(protos prot, int vers)
 }
 #endif /* RPCBIND */
 
+#ifdef SVC_PARAM_HAS_THR_STACK_SIZE
+extern unsigned long PTHREAD_stack_size;
+#endif
+
 /**
  * @brief Init the svc descriptors for the nfs daemon
  *
@@ -1375,6 +1379,9 @@ void nfs_Init_svc(void)
 		nfs_param.core_param.rpc.gss.max_ctx;
 	svc_params.gss_max_gc =
 		nfs_param.core_param.rpc.gss.max_gc;
+#ifdef SVC_PARAM_HAS_THR_STACK_SIZE
+	svc_params.thr_stack_size = PTHREAD_stack_size;
+#endif
 
 	/* Only after TI-RPC allocators, log channel are setup */
 	if (!svc_init(&svc_params))
