@@ -2085,6 +2085,17 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 		}
 
 		status = fsal_reopen_fd(obj_hdl, openflags, fsal_fd);
+
+		if (unlikely((FSAL_IS_ERROR(status)) &&
+			(fsal_fd->openflags == FSAL_O_CLOSED))) {
+				/* An error occurred during open/reopen
+				 * and this fd is currently closed. Lets remove
+				 * it from fd lru
+				 */
+				remove_fd_lru(fsal_fd);
+			}
+		}
+
 	}
 
 	/* Indicate we are done with fd work and signal any waiters. */
