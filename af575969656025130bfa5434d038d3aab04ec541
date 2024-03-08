@@ -16,6 +16,24 @@
       "message": "WARNING: externs should be avoided in .c files\n+extern unsigned long PTHREAD_stack_size;",
       "revId": "af575969656025130bfa5434d038d3aab04ec541",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9685504a_51e02713",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-08T17:10:03Z",
+      "side": 1,
+      "message": "Can we move this extern into nfs_init.h?",
+      "parentUuid": "10e7e209_eac8e289",
+      "revId": "af575969656025130bfa5434d038d3aab04ec541",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
