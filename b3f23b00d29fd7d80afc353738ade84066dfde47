@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93860fc_daa40c99",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:34:40Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\tif (c \u003d\u003d \u0027\\\"\u0027)\n+\t\tc \u003d *sp++; /* gobble leading \u0027\"\u0027 from regexp */",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfdac545_5cb551f0",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:34:40Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\twhile (c !\u003d \u0027\\0\u0027) {\n+\t\tif (c \u003d\u003d \u0027\\\\\u0027) {",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1068c8cb_10599ca3",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:34:40Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\tif (c \u003d\u003d \u0027\\\\\u0027) {\n+\t\tc \u003d *sp++;",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc079dfc_a52d8190",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:34:40Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\t} else if (c \u003d\u003d \u0027\"\u0027 \u0026\u0026 *sp \u003d\u003d \u0027\\0\u0027)\n+\t\tbreak; /* skip trailing \u0027\"\u0027 from regexp */",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f853785_ac4e269a",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:34:40Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 20)\n+\t\tif (token[strlen(token) - 1] \u003d\u003d \u0027\\\u0027\u0027)\n+\t\t    token[strlen(token) - 1] \u003d \u0027\\0\u0027;",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
