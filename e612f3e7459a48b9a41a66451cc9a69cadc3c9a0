@@ -33,6 +33,91 @@
       "message": "Is it worth using CityHash that other parts of the code already use?",
       "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf7e921_66c0047d",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:08:00Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\tif (c \u003d\u003d \u0027\\\"\u0027)\n+\t\tc \u003d *sp++; /* gobble leading \u0027\"\u0027 from regexp */",
+      "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3889342e_a8d62b25",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:08:00Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\twhile (c !\u003d \u0027\\0\u0027) {\n+\t\tif (c \u003d\u003d \u0027\\\\\u0027) {",
+      "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8264037_88dc136f",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:08:00Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\tif (c \u003d\u003d \u0027\\\\\u0027) {\n+\t\tc \u003d *sp++;",
+      "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "928927e1_1c856d43",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:08:00Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\t} else if (c \u003d\u003d \u0027\"\u0027 \u0026\u0026 *sp \u003d\u003d \u0027\\0\u0027)\n+\t\tbreak; /* skip trailing \u0027\"\u0027 from regexp */",
+      "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5464bbfb_082c6d5e",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-14T22:08:00Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 20)\n+\t\tif (token[strlen(token) - 1] \u003d\u003d \u0027\\\u0027\u0027)\n+\t\t    token[strlen(token) - 1] \u003d \u0027\\0\u0027;",
+      "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
