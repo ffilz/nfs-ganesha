@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7895cd54_454c3826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-14T21:54:10Z",
+      "side": 1,
+      "message": "This looks pretty good. I just wonder if we should use CityHash?",
+      "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e0f95a_a873f889",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-14T21:54:10Z",
+      "side": 1,
+      "message": "Is it worth using CityHash that other parts of the code already use?",
+      "revId": "e612f3e7459a48b9a41a66451cc9a69cadc3c9a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
