@@ -66,6 +66,7 @@
 #include "nfs_proto_functions.h"
 #include "pnfs_utils.h"
 #include "idmapper.h"
+#include "city.h"
 
 /** Mutex to serialize export admin operations.
  */
@@ -94,18 +95,18 @@ struct export_by_id {
 static struct export_by_id export_by_id;
 
 /** List of all active exports,
-  * protected by export_admin_mutex
-  */
+ * protected by export_admin_mutex
+ */
 static struct glist_head exportlist = GLIST_HEAD_INIT(exportlist);
 
 /** List of exports to be mounted in PseudoFS,
-  * protected by export_admin_mutex
-  */
+ * protected by export_admin_mutex
+ */
 static struct glist_head mount_work = GLIST_HEAD_INIT(mount_work);
 
 /** List of exports to be cleaned up on unexport,
-  * protected by export_admin_mutex
-  */
+ * protected by export_admin_mutex
+ */
 static struct glist_head unexport_work = GLIST_HEAD_INIT(unexport_work);
 
 void export_add_to_mount_work(struct gsh_export *export)
@@ -264,6 +265,16 @@ bool insert_gsh_export(struct gsh_export *export)
 
 	/* update cache */
 	atomic_store_voidptr(cache_slot, &export->node_k);
+
+	/* update hashkey of fullpath, pseudopath, FS_tag */
+	export->fullpath_hkey = CityHash64(export->cfg_fullpath,
+					     sizeof(export->cfg_fullpath));
+	export->pseudopath_hkey = CityHash64(export->cfg_pseudopath,
+					     sizeof(export->cfg_pseudopath));
+	if (export->FS_tag != NULL)
+		export->FS_tag_hkey = CityHash64(export->FS_tag,
+						 sizeof(export->FS_tag));
+
 	glist_add_tail(&exportlist, &export->exp_list);
 
 	PTHREAD_RWLOCK_unlock(&export_by_id.eid_lock);
@@ -354,9 +365,12 @@ struct gsh_export *get_gsh_export_by_path_locked(char *path,
 	int len_export;
 	struct gsh_export *ret_exp = NULL;
 	int len_ret = 0;
+	uint64_t path_hashkey;
 
 	if (len_path > 1 && path[len_path - 1] == '/')
 		len_path--;
+
+	path_hashkey = CityHash64(path, len_path);
 
 	LogFullDebug(COMPONENT_EXPORT,
 		     "Searching for export matching path %s",
@@ -414,6 +428,10 @@ struct gsh_export *get_gsh_export_by_path_locked(char *path,
 			gsh_refstr_put(ref_fullpath);
 			continue;
 		}
+
+		/* check fullpath hashkey */
+		if (exact_match && path_hashkey != export->fullpath_hkey)
+			continue;
 
 		/* we agree on size, now compare the leading substring
 		 */
@@ -486,10 +504,13 @@ struct gsh_export *get_gsh_export_by_pseudo_locked(char *path,
 	int len_export;
 	struct gsh_export *ret_exp = NULL;
 	int len_ret = 0;
+	uint64_t path_hashkey;
 
 	/* Ignore trailing slash in path */
 	if (len_path > 1 && path[len_path - 1] == '/')
 		len_path--;
+
+	path_hashkey = CityHash64(path, len_path);
 
 	LogFullDebug(COMPONENT_EXPORT,
 		     "Searching for export matching pseudo path %s",
@@ -556,6 +577,10 @@ struct gsh_export *get_gsh_export_by_pseudo_locked(char *path,
 			continue;
 		}
 
+		/* check path hashkey */
+		if (exact_match && path_hashkey != export->pseudopath_hkey)
+			continue;
+
 		/* we agree on size, now compare the leading substring
 		 */
 		if (strncmp(ref_pseudopath->gr_val, path, len_export)
@@ -617,6 +642,9 @@ struct gsh_export *get_gsh_export_by_tag(char *tag)
 {
 	struct gsh_export *export;
 	struct glist_head *glist;
+	uint64_t tag_hashkey;
+
+	tag_hashkey = CityHash64(tag, sizeof(tag));
 
 	PTHREAD_RWLOCK_rdlock(&export_by_id.eid_lock);
 
@@ -624,6 +652,7 @@ struct gsh_export *get_gsh_export_by_tag(char *tag)
 		export = glist_entry(glist, struct gsh_export, exp_list);
 
 		if (export->FS_tag != NULL &&
+		    tag_hashkey == export->FS_tag_hkey &&
 		    !strcmp(export->FS_tag, tag))
 			goto out;
 	}
@@ -1346,8 +1375,7 @@ static bool gsh_export_removeexport(DBusMessageIter *args,
 		goto out_unlock;
 	}
 
-	/* Lots of obj_ops may be called during cleanup; make sure that an
-	 * op_ctx exists */
+	/* Lots of obj_ops may be called during cleanup; make sure that an  op_ctx exists */
 	init_op_context_simple(&op_context, export, export->fsal_export);
 
 	release_export(export, false);
@@ -1412,9 +1440,9 @@ static void client_of_export(struct exportlist_client_entry *expclient,
 	case NETWORK_CLIENT:
 		grp_name = cidr_to_str(client->client.network.cidr,
 				CIDR_NOFLAGS);
-		if (grp_name == NULL) {
+		if (grp_name == NULL)
 			grp_name = "Invalid Network Address";
-		}
+
 		break;
 	case NETGROUP_CLIENT:
 		grp_name = client->client.netgroup.netgroupname;

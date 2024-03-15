@@ -50,6 +50,7 @@
 #include "sal_functions.h"
 #include "pnfs_utils.h"
 #include "mdcache.h"
+#include "city.h"
 
 /**
  * @brief Protect EXPORT_DEFAULTS structure for dynamic update.
@@ -611,7 +612,8 @@ static int fsal_cfg_commit(void *node, void *link_mem, void *self_struct,
 	/* The handle cache (currently MDCACHE) must be at the top of the stack
 	 * of FSALs.  To achieve this, call directly into MDCACHE, passing the
 	 * sub-FSAL's fsal_module.  MDCACHE will stack itself on top of that
-	 * FSAL, continuing down the chain. */
+	 * FSAL, continuing down the chain.
+	 */
 	status = mdcache_fsal_create_export(fsal, node, err_type, &fsal_up_top);
 
 	if (FSAL_IS_ERROR(status)) {
@@ -807,7 +809,8 @@ static void *export_init(void *link_mem, void *self_struct)
 			/* export is not yet added to the export
 			 * manager. Hence there shall not be any
 			 * other thread racing here. So no need
-			 * to take lock. */
+			 * to take lock.
+			 */
 			export->has_pnfs_ds = false;
 
 			/* Remove and destroy the fsal_pnfs_ds */
@@ -2141,9 +2144,8 @@ static void *pseudofs_init(void *link_mem, void *self_struct)
 {
 	struct gsh_export *export = export_init(link_mem, self_struct);
 
-	if (self_struct != NULL) {
+	if (self_struct != NULL)
 		return export;
-	}
 
 	/* The initialization case */
 	export->filesystem_id.major = 152;
@@ -2193,6 +2195,15 @@ static void *pseudofs_init(void *link_mem, void *self_struct)
 
 	export->pseudopath = gsh_refstr_dup("/");
 	export->fullpath = gsh_refstr_dup("/");
+
+	/* update hashkey of fullpath, pseudopath, FS_tag*/
+	export->fullpath_hkey = CityHash64(export->cfg_fullpath,
+					   sizeof(export->cfg_fullpath));
+	export->pseudopath_hkey = CityHash64(export->cfg_pseudopath,
+					     sizeof(export->cfg_pseudopath));
+	if (export->FS_tag != NULL)
+		export->FS_tag_hkey = CityHash64(export->FS_tag,
+						 sizeof(export->FS_tag));
 
 	LOG_EXPORT(NIV_FULL_DEBUG, "pseudofs_init", export, true);
 
@@ -2928,7 +2939,8 @@ int init_export_root(struct gsh_export *export)
 					export_opt.def.expire_time_attr;
 
 	/* set the EXPORT_OPTION_EXPIRE_SET bit from the export
-	 * into the op_ctx */
+	 * into the op_ctx
+	 */
 	op_ctx->export_perms.options |= EXPORT_OPTION_EXPIRE_SET;
 
 	/* Lookup for the FSAL Path */
@@ -2937,7 +2949,8 @@ int init_export_root(struct gsh_export *export)
 		 export->export_id, CTX_FULLPATH(op_ctx));
 
 	/* This takes a reference, which will keep the root object around for
-	 * the lifetime of the export. */
+	 * the lifetime of the export.
+	 */
 	fsal_status = export->fsal_export->exp_ops.lookup_path(
 				export->fsal_export, CTX_FULLPATH(op_ctx),
 				&obj, NULL);
