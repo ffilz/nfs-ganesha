@@ -222,6 +222,10 @@ struct gsh_export {
 	bool update_prune_unmount;
 	/** Due to an update, this export will need to be remounted. */
 	bool update_remount;
+
+	uint64_t fullpath_hkey;		/* hash key of fullpath */
+	uint64_t pseudopath_hkey;	/* hash key of pseudopath */
+	uint64_t FS_tag_hkey;		/* hash key of FS_tag */
 };
 
 /* Use macro to define this to get around include file order. */
