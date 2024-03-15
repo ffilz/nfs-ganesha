@@ -84,6 +84,23 @@
       "message": "WARNING: suspect code indent for conditional statements (16, 20)\n+\t\tif (token[strlen(token) - 1] \u003d\u003d \u0027\\\u0027\u0027)\n+\t\t    token[strlen(token) - 1] \u003d \u0027\\0\u0027;",
       "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d38a102_2c8a0fe7",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-03-15T06:20:01Z",
+      "side": 1,
+      "message": "I suppose the strlen comparison can be removed. Based on hash matching \u0026 strcmp, one can say the tokens are matching.",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
