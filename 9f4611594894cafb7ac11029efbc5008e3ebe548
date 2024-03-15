@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d789c0_9dad8cc8",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-03-15T14:07:11Z",
+      "side": 1,
+      "message": "What if there is a hash collision, like all hash functions can have?  You still need to do a full key compare if the hash matches.  Maybe that\u0027s still a win?  But maybe not.",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
