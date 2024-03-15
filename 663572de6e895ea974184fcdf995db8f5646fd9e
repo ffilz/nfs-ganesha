@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff2fa1d_3d4d0edb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-15T20:34:01Z",
+      "side": 1,
+      "message": "Please make sure to push the whole patch chain, I see this references an old version of the other parsing patch. That creates confusion when merging since it\u0027s easiest to pull up one patch in a chain and navigate from there to each additional patch, or if the chain is big enough, do a branch fetch from the top patch.",
+      "revId": "663572de6e895ea974184fcdf995db8f5646fd9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
