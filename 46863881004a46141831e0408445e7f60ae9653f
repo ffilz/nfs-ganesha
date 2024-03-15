@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1a36165_0f05f94a",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-15T20:28:48Z",
+      "side": 1,
+      "message": "Ah, removing cache might make sense.\n\nIt was requested to add a consistent prefix because many metrics can get collated on a dashboard, having them have a consistent prefix makes it easier to find them and relate them.\n\nSo nfs_ganesha_mdcache_hits_total and nfs_ganesha_mdcache_misses_total",
+      "parentUuid": "5964f6b3_62e9e931",
+      "revId": "46863881004a46141831e0408445e7f60ae9653f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed207ef4_e5b45e50",
         "filename": "src/monitoring/monitoring.cc",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2024-03-15T06:37:07Z",
       "side": 1,
       "message": "No need to have word ganesha in below. This can be done for other occurrences. \n\nnfs_ganesha_client_requests_total -\u003e nfs_client_requests_total",
+      "revId": "46863881004a46141831e0408445e7f60ae9653f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf82e01_c7dab022",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-15T20:28:48Z",
+      "side": 1,
+      "message": "Again, as noted, a consistent prefix was requested.",
+      "parentUuid": "ed207ef4_e5b45e50",
       "revId": "46863881004a46141831e0408445e7f60ae9653f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "Except adding ganesha is what this PR does, so there must be a reason for it.",
       "parentUuid": "7d843947_99f1c0ef",
+      "revId": "46863881004a46141831e0408445e7f60ae9653f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13b0433_93efc04f",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-15T20:28:48Z",
+      "side": 1,
+      "message": "Yep, a consistent prefix was requested.",
+      "parentUuid": "04d3ece0_d14af143",
       "revId": "46863881004a46141831e0408445e7f60ae9653f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
