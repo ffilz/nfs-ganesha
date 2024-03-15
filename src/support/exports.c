@@ -50,6 +50,7 @@
 #include "sal_functions.h"
 #include "pnfs_utils.h"
 #include "mdcache.h"
+#include "city.h"
 
 /**
  * @brief Protect EXPORT_DEFAULTS structure for dynamic update.
@@ -2193,6 +2194,15 @@ static void *pseudofs_init(void *link_mem, void *self_struct)
 
 	export->pseudopath = gsh_refstr_dup("/");
 	export->fullpath = gsh_refstr_dup("/");
+
+	/* update hashkey of fullpath, pseudopath, FS_tag*/
+	export->fullpath_hkey = CityHash64(export->fullpath->gr_val,
+					   sizeof(export->fullpath));
+	export->pseudopath_hkey = CityHash64(export->pseudopath->gr_val,
+					     sizeof(export->pseudopath));
+	if (export->FS_tag != NULL)
+		export->FS_tag_hkey = CityHash64(export->FS_tag,
+						 sizeof(export->FS_tag));
 
 	LOG_EXPORT(NIV_FULL_DEBUG, "pseudofs_init", export, true);
 
