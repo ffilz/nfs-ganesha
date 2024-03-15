@@ -101,6 +101,24 @@
       "message": "I suppose the strlen comparison can be removed. Based on hash matching \u0026 strcmp, one can say the tokens are matching.",
       "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea926f38_54d0ee36",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-15T10:56:06Z",
+      "side": 1,
+      "message": "I deliberately opted for strlen() to minimize the usage of strcmp. Even though we use CityHash64, there\u0027s still a small chance that two paths could have the same hash.",
+      "parentUuid": "6d38a102_2c8a0fe7",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
