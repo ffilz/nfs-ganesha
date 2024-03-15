@@ -34,6 +34,57 @@
       "parentUuid": "72de9d67_b2dc3716",
       "revId": "46863881004a46141831e0408445e7f60ae9653f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5964f6b3_62e9e931",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-03-15T06:37:07Z",
+      "side": 1,
+      "message": "Suggestion - for mdcache, again using cache in the name looks repetitive. Also no need to mention ganesha (this is implicit). I would suggest to remove the words cache and ganesha from all such name fields, like below.\n\nnfs_ganesha_mdcache_cache_hits_total -\u003e nfs_mdcache_hits_total",
+      "revId": "46863881004a46141831e0408445e7f60ae9653f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed207ef4_e5b45e50",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-03-15T06:37:07Z",
+      "side": 1,
+      "message": "No need to have word ganesha in below. This can be done for other occurrences. \n\nnfs_ganesha_client_requests_total -\u003e nfs_client_requests_total",
+      "revId": "46863881004a46141831e0408445e7f60ae9653f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d843947_99f1c0ef",
+        "filename": "src/monitoring/monitoring.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-03-15T06:37:07Z",
+      "side": 1,
+      "message": "Here we can avoid nfs_ganesha in the name.\n\nnfs_ganesha_nfs_requests_total -\u003e nfs_requests_total",
+      "revId": "46863881004a46141831e0408445e7f60ae9653f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
