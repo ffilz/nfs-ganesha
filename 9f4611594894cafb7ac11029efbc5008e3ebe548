@@ -16,6 +16,24 @@
       "message": "What if there is a hash collision, like all hash functions can have?  You still need to do a full key compare if the hash matches.  Maybe that\u0027s still a win?  But maybe not.",
       "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba44a99_9a1089a0",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-15T19:47:45Z",
+      "side": 1,
+      "message": "The hashkey is calculated for fullpath and should be checked if a check is requested for fullpath.\n\nin case  of hash collision, we are continuing and doing strncmp check",
+      "parentUuid": "d2d789c0_9dad8cc8",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
