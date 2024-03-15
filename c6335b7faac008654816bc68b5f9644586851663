@@ -136,6 +136,23 @@
       "message": "Thanks for this.",
       "revId": "c6335b7faac008654816bc68b5f9644586851663",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56dc830d_fd9f2a77",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-15T21:22:30Z",
+      "side": 1,
+      "message": "If you keep the strlen, at least do strlen(token) outside the loop.\n\nWhere this COULD be a benefit is if struct token_tab kept the length of the token so strlen is only ever done once per token.",
+      "revId": "c6335b7faac008654816bc68b5f9644586851663",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
