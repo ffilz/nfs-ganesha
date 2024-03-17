@@ -834,11 +834,9 @@ fsal_mode_gen_set(fsal_ace_t *ace_owner_group, fsal_ace_t *ace_everyone,
 	deny = ace_owner_group;
 	allow = deny + 1;
 	GET_FSAL_ACE_USER(*allow) = FSAL_ACE_SPECIAL_OWNER;
-	GET_FSAL_ACE_IFLAG(*allow) |= (FSAL_ACE_IFLAG_MODE_GEN |
-				       FSAL_ACE_IFLAG_SPECIAL_ID);
+	GET_FSAL_ACE_IFLAG(*allow) |= FSAL_ACE_IFLAG_SPECIAL_ID;
 	GET_FSAL_ACE_USER(*deny) = FSAL_ACE_SPECIAL_OWNER;
-	GET_FSAL_ACE_IFLAG(*deny) |= (FSAL_ACE_IFLAG_MODE_GEN |
-				      FSAL_ACE_IFLAG_SPECIAL_ID);
+	GET_FSAL_ACE_IFLAG(*deny) |= FSAL_ACE_IFLAG_SPECIAL_ID;
 	GET_FSAL_ACE_PERM(*allow) |= default_attr_acl_read_perm;
 	GET_FSAL_ACE_PERM(*allow) |= FSAL_ACE_PERM_WRITE_ATTR |
 			FSAL_ACE_PERM_WRITE_ACL | FSAL_ACE_PERM_WRITE_OWNER;
@@ -847,22 +845,18 @@ fsal_mode_gen_set(fsal_ace_t *ace_owner_group, fsal_ace_t *ace_everyone,
 	deny += 2;
 	allow = deny + 1;
 	GET_FSAL_ACE_USER(*allow) = FSAL_ACE_SPECIAL_GROUP;
-	GET_FSAL_ACE_IFLAG(*allow) |= (FSAL_ACE_IFLAG_MODE_GEN |
-				       FSAL_ACE_IFLAG_SPECIAL_ID);
+	GET_FSAL_ACE_IFLAG(*allow) |= FSAL_ACE_IFLAG_SPECIAL_ID;
 	GET_FSAL_ACE_USER(*deny) = FSAL_ACE_SPECIAL_GROUP;
-	GET_FSAL_ACE_IFLAG(*deny) |= (FSAL_ACE_IFLAG_MODE_GEN |
-				      FSAL_ACE_IFLAG_SPECIAL_ID);
+	GET_FSAL_ACE_IFLAG(*deny) |= FSAL_ACE_IFLAG_SPECIAL_ID;
 	GET_FSAL_ACE_PERM(*allow) |= default_attr_acl_read_perm;
 	fsal_mode_set_ace(deny, allow, (mode & S_IRWXG) << 3);
 	/* @EVERYONE */
 	deny = ace_everyone;
 	allow = deny + 1;
 	GET_FSAL_ACE_USER(*allow) = FSAL_ACE_SPECIAL_EVERYONE;
-	GET_FSAL_ACE_IFLAG(*allow) |= (FSAL_ACE_IFLAG_MODE_GEN |
-				       FSAL_ACE_IFLAG_SPECIAL_ID);
+	GET_FSAL_ACE_IFLAG(*allow) |= FSAL_ACE_IFLAG_SPECIAL_ID;
 	GET_FSAL_ACE_USER(*deny) = FSAL_ACE_SPECIAL_EVERYONE;
-	GET_FSAL_ACE_IFLAG(*deny) |= (FSAL_ACE_IFLAG_MODE_GEN |
-				      FSAL_ACE_IFLAG_SPECIAL_ID);
+	GET_FSAL_ACE_IFLAG(*deny) |= FSAL_ACE_IFLAG_SPECIAL_ID;
 	GET_FSAL_ACE_PERM(*allow) |= default_attr_acl_read_perm;
 	fsal_mode_set_ace(deny, allow, (mode & S_IRWXO) << 6);
 
