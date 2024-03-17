@@ -820,7 +820,8 @@ fsal_mode_set_ace(fsal_ace_t *deny, fsal_ace_t *allow, uint32_t mode)
 }
 
 static fsal_status_t
-fsal_mode_gen_set(fsal_ace_t *ace, uint32_t mode)
+fsal_mode_gen_set(fsal_ace_t *ace_owner_group, fsal_ace_t *ace_everyone,
+		  uint32_t mode)
 {
 	fsal_ace_t *allow, *deny;
 	/* All should have the READ_ATTR & READ_ACL allowed by default.
@@ -830,7 +831,7 @@ fsal_mode_gen_set(fsal_ace_t *ace, uint32_t mode)
 			FSAL_ACE_PERM_READ_ATTR | FSAL_ACE_PERM_READ_ACL;
 
 	/* @OWNER */
-	deny = ace;
+	deny = ace_owner_group;
 	allow = deny + 1;
 	GET_FSAL_ACE_USER(*allow) = FSAL_ACE_SPECIAL_OWNER;
 	GET_FSAL_ACE_IFLAG(*allow) |= (FSAL_ACE_IFLAG_MODE_GEN |
@@ -854,7 +855,7 @@ fsal_mode_gen_set(fsal_ace_t *ace, uint32_t mode)
 	GET_FSAL_ACE_PERM(*allow) |= default_attr_acl_read_perm;
 	fsal_mode_set_ace(deny, allow, (mode & S_IRWXG) << 3);
 	/* @EVERYONE */
-	deny += 2;
+	deny = ace_everyone;
 	allow = deny + 1;
 	GET_FSAL_ACE_USER(*allow) = FSAL_ACE_SPECIAL_EVERYONE;
 	GET_FSAL_ACE_IFLAG(*allow) |= (FSAL_ACE_IFLAG_MODE_GEN |
@@ -884,7 +885,7 @@ fsal_mode_gen_acl(struct fsal_attrlist *attrs)
 	acl_data.naces = 6;
 	acl_data.aces = nfs4_ace_alloc(acl_data.naces);
 
-	fsal_mode_gen_set(acl_data.aces, attrs->mode);
+	fsal_mode_gen_set(acl_data.aces, acl_data.aces + 4, attrs->mode);
 
 	fsal_acl_status_t acl_status;
 	attrs->acl = nfs4_acl_new_entry(&acl_data, &acl_status);
@@ -933,7 +934,8 @@ fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl,
 		return fsal_mode_gen_acl(attrs);
 	}
 
-	/* Space for generated ACEs at the end */
+	/* Space for generated ACEs - OWNER, GROUP at start and EVERYONE
+	 * at the end */
 	naces += 6;
 
 	if (attrs->acl != NULL) {
@@ -950,7 +952,7 @@ fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl,
 	fsal_acl_data_t acl_data;
 	acl_data.aces = nfs4_ace_alloc(naces);
 	acl_data.naces = 0;
-	dace = acl_data.aces;
+	dace = acl_data.aces + 4;
 
 	for (sace = sacl->aces; sace < sacl->aces + sacl->naces;
 	     sace++) {
@@ -1012,7 +1014,7 @@ fsal_status_t fsal_mode_to_acl(struct fsal_attrlist *attrs, fsal_acl_t *sacl,
 		return fsalstat(ERR_FSAL_SERVERFAULT, 0);
 	}
 
-	fsal_mode_gen_set(dace, attrs->mode);
+	fsal_mode_gen_set(acl_data.aces, dace, attrs->mode);
 
 	fsal_acl_status_t acl_status;
 	acl_data.naces = naces;
