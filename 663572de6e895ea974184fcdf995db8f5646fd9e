@@ -16,6 +16,24 @@
       "message": "Please make sure to push the whole patch chain, I see this references an old version of the other parsing patch. That creates confusion when merging since it\u0027s easiest to pull up one patch in a chain and navigate from there to each additional patch, or if the chain is big enough, do a branch fetch from the top patch.",
       "revId": "663572de6e895ea974184fcdf995db8f5646fd9e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb2d5159_ae9d766f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-18T06:42:04Z",
+      "side": 1,
+      "message": "Sure. I just pushed this as an individual patch since it doesn\u0027t have dependencies on any other patches.",
+      "parentUuid": "3ff2fa1d_3d4d0edb",
+      "revId": "663572de6e895ea974184fcdf995db8f5646fd9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
