@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840847fb_0eb1a3be",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-18T10:28:11Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be better insert to fd_lru after gpfs_reopen_func succeeds...Else in error path you would need to remove as well...",
+      "revId": "e8f953f4d6dea276e1f3889982fb269b3d261935",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f42c36_56d1a6f2",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-18T10:28:11Z",
+      "side": 1,
+      "message": "And also better to validate whether or not we are going to reopen a fd that was closed by another thread before we insert ...",
+      "revId": "e8f953f4d6dea276e1f3889982fb269b3d261935",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
