@@ -16,6 +16,24 @@
       "message": "Hmm, I didn\u0027t realize we have multiple list implementations... Most of our code uses glist, though we do have one TAILQ in the Ganesha code. I wonder how much we want to encourage multiple list implementations...\n\nAlso, is this default going to be high enough that a legacy config will work reasonably well?",
       "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96b21e5_4ca4de5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-19T15:52:24Z",
+      "side": 1,
+      "message": "I found the TAILQ abstraction pretty useful.\n\nWe had no limit on the number of cache entries earlier. This newly added default limit seems like a reasonable number to me.",
+      "parentUuid": "9f2535f1_bae352c6",
+      "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
