@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b99117ab_4961fa10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T00:31:25Z",
+      "side": 1,
+      "message": "Do not directly reference a gsh_refstr string. Also need to consider pseudopath changing on export update.",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b71e832c_084ef2f2",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T00:31:25Z",
+      "side": 1,
+      "message": "For the following you MUST use export-\u003ecfg_fullpath and export-\u003ecfg_pseudopath. The following is improper use of a gsh_refstr.\n\nHowever, there is another problem. This does not account for export update that changes pseudopath.",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2d789c0_9dad8cc8",
@@ -32,6 +66,41 @@
       "side": 1,
       "message": "The hashkey is calculated for fullpath and should be checked if a check is requested for fullpath.\n\nin case  of hash collision, we are continuing and doing strncmp check",
       "parentUuid": "d2d789c0_9dad8cc8",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bceb63db_62f668d8",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T00:31:25Z",
+      "side": 1,
+      "message": "Yea, this is using the hash compare to skip exports that can not be a match. If the hash is the same, the longer compare is done.",
+      "parentUuid": "9ba44a99_9a1089a0",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead40a45_e80388fb",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T00:31:25Z",
+      "side": 1,
+      "message": "I\u0027m not sure a separate strlen saves anything. The two strlen calls are going to scan the two strings, same as strcmp. In fact, strlen scans the entire string, while strcmp scans only until first mismatch.\n\nThere may be cases where a strlen compare makes sense, especially if you already have one strlen. In that case, if the lengths match, use memcmp instead of strcmp.\n\nAlso not sure it\u0027s worth bothering optimizing tag, we really should remove tag...\n\ntag is only useful for NFSv3 mounts and was an attempt to enable exports to have different mount options for different quality of service, but none of that is implemented so it\u0027s just a non-standard mount name for an export.",
       "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
