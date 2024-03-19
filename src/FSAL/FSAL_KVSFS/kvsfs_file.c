@@ -136,6 +136,17 @@ static fsal_status_t kvsfs_open_by_handle(struct fsal_obj_handle *obj_hdl,
 		goto exit;
 	}
 
+	/* Inserts to fd_lru only if open succeeds */
+	if (old_openflags == FSAL_O_CLOSED) {
+		/* This is actually an open, need to increment
+		 * appropriate counter and insert into LRU.
+		 */
+		insert_fd_lru(fsal_fd);
+	} else {
+		/* Bump up the FD in fd_lru as it was already in fd lru. */
+		bump_fd_lru(fsal_fd);
+	}
+
 	if (attrs_out && (createmode >= FSAL_EXCLUSIVE || truncated)) {
 		/* NOTE: won't come in here when called from vfs_reopen2... */
 
