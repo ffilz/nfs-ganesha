@@ -480,6 +480,11 @@ static fsal_status_t vfs_open2_by_handle(struct fsal_obj_handle *obj_hdl,
 		goto exit;
 	}
 
+	/* Keep track of whether or not we are going to reopen a fd that was
+	 * closed by another thread before we got here. */
+	bool is_actual_open = ((old_openflags == FSAL_O_CLOSED)
+				&& (my_fd->fd < 0));
+
 	/* No share conflict, re-open the share fd */
 	status = vfs_reopen_func(obj_hdl, openflags, fsal_fd);
 
@@ -488,6 +493,17 @@ static fsal_status_t vfs_open2_by_handle(struct fsal_obj_handle *obj_hdl,
 			 "vfs_reopen_func returned %s",
 			 fsal_err_txt(status));
 		goto exit;
+	}
+
+	/* Inserts to fd_lru only if open succeeds */
+	if (is_actual_open) {
+		/* This is actually an open, need to increment
+		 * appropriate counter and insert into LRU.
+		 */
+		insert_fd_lru(fsal_fd);
+	} else {
+		/* Bump up the FD in fd_lru as it was already in fd lru. */
+		bump_fd_lru(fsal_fd);
 	}
 
 	/* Check HSM status */
