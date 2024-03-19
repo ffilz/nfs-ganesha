@@ -52,6 +52,24 @@
       "parentUuid": "a0b84103_5d9f3f54",
       "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a2edf1_df37b136",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T17:05:18Z",
+      "side": 1,
+      "message": "There\u0027s a config item flag, CONFIG_MARK_SET that can be checked if a config item is set.  That would allow checking if the legacy option was set. We would need to add a new macro CONF_ITEM_STR_SET to be used with the legacy option. If that is set, and the new block is processed, we can throw a warning.\n\nHmm, but we also need a way of setting if a config block has been explicitly set. For some blocks like exports, we only go through the commit if the block is present, but for top level blocks, we always commit.\n\nI can add some stuff to config, maybe next week, to make this easier.\n\nI really don\u0027t want to break existing configurations for the V6 release as we get this stuff migrated.",
+      "parentUuid": "e71eed27_39b101e2",
+      "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
