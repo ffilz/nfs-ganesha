@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ea17b58_e910bccc",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T00:02:34Z",
+      "side": 1,
+      "message": "Good point.\n\nAlso, I believe this change is actually necessary for other FSALs also.",
+      "parentUuid": "840847fb_0eb1a3be",
+      "revId": "e8f953f4d6dea276e1f3889982fb269b3d261935",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1f42c36_56d1a6f2",
         "filename": "src/FSAL/FSAL_GPFS/file.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-18T10:28:11Z",
       "side": 1,
       "message": "And also better to validate whether or not we are going to reopen a fd that was closed by another thread before we insert ...",
+      "revId": "e8f953f4d6dea276e1f3889982fb269b3d261935",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3a5527_ff2d7153",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T00:02:34Z",
+      "side": 1,
+      "message": "Hmm, I wonder if this stuff should try and use reopen_fsal_fd.\n\nI need to look at this closer.",
+      "parentUuid": "d1f42c36_56d1a6f2",
       "revId": "e8f953f4d6dea276e1f3889982fb269b3d261935",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
