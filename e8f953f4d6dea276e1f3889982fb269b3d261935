@@ -69,6 +69,24 @@
       "parentUuid": "d1f42c36_56d1a6f2",
       "revId": "e8f953f4d6dea276e1f3889982fb269b3d261935",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf6ecd35_01fbc123",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-19T06:31:50Z",
+      "side": 1,
+      "message": "Yes, here at FSALs since we have the fd, we can validate same along with the flags for this...\nAnd I believe, reopen_fsal_fd should also have this logic IN and insert to fd_lru only after open succeeds...lemme submit a patch...",
+      "parentUuid": "bf3a5527_ff2d7153",
+      "revId": "e8f953f4d6dea276e1f3889982fb269b3d261935",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
