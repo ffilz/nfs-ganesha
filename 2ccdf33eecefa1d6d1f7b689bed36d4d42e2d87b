@@ -34,6 +34,24 @@
       "parentUuid": "5bd0dc53_c2d6fb17",
       "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71eed27_39b101e2",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-19T15:19:45Z",
+      "side": 1,
+      "message": "Due to the default values for the configs, detecting the absence of new config is not feasible, to be able to fallback to the older config.\n\nThere are two options that I see:\n\n1. Set the default value of older configs to nulls (and similar). Fail bootup if user provides older configs (regardless of the new config being provided), with an explicit error message to migrate to the new config section.\n\n2. Set the default value of new configs to nulls (and similar). Use the new configs if user provides them, else fallback to the older configs. At a later point when the older configs are removed, the default values of the new configs can be added.\n\nWhile it seems that option 2 would solve your requirement, but it could confuse  the users if they supply both configs. Also, adding a warning to the users in such a case would require adding default values to the older configs as well, to first detect if they actually supplied the config.\n\nIMO, the first option is cleaner, although with some inconvenience to the users.\n\nWDYT?",
+      "parentUuid": "a0b84103_5d9f3f54",
+      "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
