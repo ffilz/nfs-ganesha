@@ -155,6 +155,24 @@
       "parentUuid": "4fb05c25_d99841f3",
       "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98812f27_ca0e2c1c",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-19T00:34:58Z",
+      "side": 1,
+      "message": "Also, if you really do use strlen, use memcmp instead of strcmp if the length matches.\n\nBut note that strlen scans the entire string, strcmp only scans until first mismatch, so mismatches are usually cheap. Especially once you are only doing slightly more than 1 compare per token (the match, plus the rare additional compare due to hash collision).",
+      "parentUuid": "838c46e3_8afb5d08",
+      "revId": "b3f23b00d29fd7d80afc353738ade84066dfde47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
