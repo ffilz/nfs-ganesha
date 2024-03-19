@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a664f3c7_0be749a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-19T15:42:57Z",
+      "side": 1,
+      "message": "Thanks Frank...\nI was not aware of the active FSALs, hence changed VFS layer only...which had the file descriptors as well...some FSALs I saw they do not have fd exposed to update...Anyways, I am making the change\n\nPlease note, Patch 1184736 needs to merged before this change...",
+      "parentUuid": "b8dc5e90_838b1306",
+      "revId": "d5470d935372473a8a8a03b35fc105177fef436c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0189198b_b534a94a",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-19T14:30:11Z",
       "side": 1,
       "message": "Please declare this at the top.",
+      "revId": "d5470d935372473a8a8a03b35fc105177fef436c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed98e9d6_74cc35d5",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-19T15:42:57Z",
+      "side": 1,
+      "message": "Right...Done",
+      "parentUuid": "0189198b_b534a94a",
       "revId": "d5470d935372473a8a8a03b35fc105177fef436c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
