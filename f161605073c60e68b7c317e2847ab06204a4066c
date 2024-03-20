@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "851b5ce9_751f1266",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T20:27:51Z",
+      "side": 1,
+      "message": "Thanks. This will take a while to review.\n\nIn the meantime, please look at the recent patches, there are some changes to fsal_fd handling that you should adopt.\n\nSecond, is anything necessary to be able to compile? I prefer to be able to at least compile all the code in Ganesha. One option if you depend on proprietary libraries is to provide the header files that allow compiling (see FSAL_GPFS for example).",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
