@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ff74cec_6a461e5c",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:20:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9733a440_64e7bde3",
+      "revId": "1a9e8a5f2f55fa7b69cbcab73a1f2050d8f05201",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9de4c9df_6ecd84f2",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-01T18:25:30Z",
       "side": 1,
       "message": "Since this is only one function call, I\u0027d prefer to have it inline, rather than in a goto.",
+      "revId": "1a9e8a5f2f55fa7b69cbcab73a1f2050d8f05201",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f69b760_b7c6cf82",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:20:46Z",
+      "side": 1,
+      "message": "We add to negative cache and return false from the function, in such scenarios. In future, it would be easier to add further common functionality like emitting metrics or retries for example. We can maybe extract these into a common function, but I\u0027ll push that to a later time.",
+      "parentUuid": "9de4c9df_6ecd84f2",
       "revId": "1a9e8a5f2f55fa7b69cbcab73a1f2050d8f05201",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
