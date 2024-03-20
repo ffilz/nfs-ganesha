@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6c0fdaa_a4fd1759",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "I added 0 as the default value for now, meaning that reaper is disabled.",
+      "parentUuid": "07378952_523d140e",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3455c7d_2417320f",
         "filename": "src/idmapper/idmapper_cache.c",
         "patchSetId": 2
@@ -49,6 +67,24 @@
       "writtenOn": "2024-03-03T02:25:46Z",
       "side": 1,
       "message": "ERROR: do not initialise statics to 0 or NULL\n+static struct fridgethr *cache_reaper_fridge \u003d NULL;",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd197a4e_23750e0b",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3455c7d_2417320f",
       "revId": "3f33004c71b27e3100fee6d12319500233574dca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -70,6 +106,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c223805_2a67c5ba",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82b5045d_575633fe",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "261b052f_89c1cb4d",
@@ -83,6 +137,24 @@
       "writtenOn": "2024-03-03T02:25:46Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tLogFullDebug(COMPONENT_IDMAPPER, \"Idmapper user-cache reaper run ended\");",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33bb119_4fb3d8fc",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "261b052f_89c1cb4d",
       "revId": "3f33004c71b27e3100fee6d12319500233574dca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -104,6 +176,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3db6b7a_d611fd87",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c6b8dcc_08709f4d",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "450830a4_db743ef4",
@@ -117,6 +207,24 @@
       "writtenOn": "2024-03-03T02:25:46Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tLogFullDebug(COMPONENT_IDMAPPER, \"Idmapper group-cache reaper run ended\");",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4840d62d_0a3b269d",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "450830a4_db743ef4",
       "revId": "3f33004c71b27e3100fee6d12319500233574dca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -138,6 +246,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ffc930_60a396c0",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f18fd21_36a80901",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cd01a1a_75686aab",
@@ -155,6 +281,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aa2cd6e_456760e3",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd01a1a_75686aab",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68730e16_3904d306",
@@ -168,6 +312,24 @@
       "writtenOn": "2024-03-03T02:25:46Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t\"Unable to start reaper for idmapper cache. Error: %d.\", rc);",
+      "revId": "3f33004c71b27e3100fee6d12319500233574dca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5edcc95_4efea43c",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68730e16_3904d306",
       "revId": "3f33004c71b27e3100fee6d12319500233574dca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
