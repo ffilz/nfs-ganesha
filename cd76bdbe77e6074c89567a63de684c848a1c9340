@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e8bd35_7606c1f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T17:12:31Z",
+      "side": 1,
+      "message": "I am really tempted to remove FSAL_KVSFS and FSAL_LIZARDFS but as long as they continue to compile, I\u0027m not totally opposed. If we hit something that is a major change, then maybe we cut them out.\n\n-1 review because of the cut/paste error.",
+      "revId": "cd76bdbe77e6074c89567a63de684c848a1c9340",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ca8e69_379cd21d",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T17:12:31Z",
+      "side": 1,
+      "message": "Oops, cut/paste error...",
+      "revId": "cd76bdbe77e6074c89567a63de684c848a1c9340",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
