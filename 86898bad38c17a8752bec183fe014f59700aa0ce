@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8eb43d8_9f855588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "There are still some error conditions where we close the fd after insert/bump LRU. Should they be handled?",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5c14533_6c6b61f0",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1316,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "Here\u0027s an error that closes the file, should we delay the insert/bump to here?",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ebe9a52_7cb8d9b2",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "same, another error condition",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d9f0cf3_ac75e9b8",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "Another error",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d5563e6_2fcc35fe",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "Hmm, no error here... This may be a problem..\n\nHmm, no verification of exclusive create...",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccbb03bd_51bbbc2e",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "Another error",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9ec885_6d0c922a",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "Another error case",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3217fb6_524649e5",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "error case",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71c1551f_4140a710",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-20T00:03:12Z",
+      "side": 1,
+      "message": "possible error case",
+      "revId": "86898bad38c17a8752bec183fe014f59700aa0ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
