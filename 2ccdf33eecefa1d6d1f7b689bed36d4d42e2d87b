@@ -70,6 +70,24 @@
       "parentUuid": "e71eed27_39b101e2",
       "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ac23ce_cbe5e4e8",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-20T14:18:54Z",
+      "side": 1,
+      "message": "I have gone with option 2 for now, to maintain backward compatibility.\n\nWe can do some cleanup around this once the new macros are in place.",
+      "parentUuid": "56a2edf1_df37b136",
+      "revId": "2ccdf33eecefa1d6d1f7b689bed36d4d42e2d87b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
