@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3daf69bf_4a910962",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-21T10:31:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d6dcbd_7df63b1b",
+      "revId": "a838a7b055332c0e715fee782f3e6420d63d6753",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd847739_4a512ba9",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-14T21:53:38Z",
       "side": 1,
       "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\twhile (c !\u003d \u0027\\0\u0027) {\n+\t\tif (c \u003d\u003d \u0027\\\\\u0027) {",
+      "revId": "a838a7b055332c0e715fee782f3e6420d63d6753",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87790c2a_3cb00876",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-21T10:31:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd847739_4a512ba9",
       "revId": "a838a7b055332c0e715fee782f3e6420d63d6753",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -118,6 +154,24 @@
       "writtenOn": "2024-03-14T21:53:38Z",
       "side": 1,
       "message": "WARNING: suspect code indent for conditional statements (16, 20)\n+\t\tif (token[strlen(token) - 1] \u003d\u003d \u0027\\\u0027\u0027)\n+\t\t    token[strlen(token) - 1] \u003d \u0027\\0\u0027;",
+      "revId": "a838a7b055332c0e715fee782f3e6420d63d6753",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab6c5cc5_70a7aefa",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-21T10:31:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2074798f_65cb1178",
       "revId": "a838a7b055332c0e715fee782f3e6420d63d6753",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
