@@ -158,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0615ad6c_06630828",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-21T10:29:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4db42013_8c90238f",
+      "revId": "c6335b7faac008654816bc68b5f9644586851663",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18310030_347f96c7",
@@ -171,6 +189,24 @@
       "writtenOn": "2024-03-15T07:17:15Z",
       "side": 1,
       "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\t} else if (c \u003d\u003d \u0027\"\u0027 \u0026\u0026 *sp \u003d\u003d \u0027\\0\u0027)\n+\t\tbreak; /* skip trailing \u0027\"\u0027 from regexp */",
+      "revId": "c6335b7faac008654816bc68b5f9644586851663",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df75c38_b7bc9d28",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-03-21T10:29:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18310030_347f96c7",
       "revId": "c6335b7faac008654816bc68b5f9644586851663",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
