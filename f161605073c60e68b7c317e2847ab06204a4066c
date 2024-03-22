@@ -20,6 +20,5225 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "632c856a_f44c9c4c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f105ee_37c56d06",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619cd782_4820745c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c42442d_9bd446e4",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5bff89_5f3192f7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "437e0fa9_50012ab7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6d0776_ed17c082",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e9c520_b916fd6f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a19a7c_32b448d9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98729ec1_0716a7ea",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64a9f45b_4db3f8a0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6b5c2a0_de0fa575",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab0898e8_c06af895",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9909cf_3cad3b16",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08d7ccdd_1b049082",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59d2535_d0c6a6c6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20fff2ec_3c611bdd",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df30c9ba_fb4aec95",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0a097f_01b63c94",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a53b60a_e529a5ec",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dbf04f5_b6d1c8d8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce3699c_ea31c39a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce9f489_61e0439a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff2347d2_ff1e87f1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be2487eb_19a1a82d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a63222_66423ab6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbab4fa4_7e0c4aeb",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e057dcc_fb629700",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context \u003d\u003d NULL) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54fbac6_cf91d68e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeee49e9_06123248",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (export \u003d\u003d NULL) {\n+\t\treturn;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8deb4766_6d8e2943",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (cacheHandle \u003d\u003d NULL) {\n+\t\t\tbreak;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2758c490_bf11c5fe",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dataServer-\u003ecacheHandle !\u003d NULL) {\n+\t\treleaseFileInfoCache(export-\u003ecache, dataServer-\u003ecacheHandle);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "083d69fb_458b207c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (export \u003d\u003d NULL) {\n+\t\treturn NFS4ERR_IO;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc388d5_fb66ae2d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dataServer-\u003ecacheHandle !\u003d NULL) {\n+\t\treturn NFS4_OK;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1622bb6f_73ea40ab",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dataServer-\u003ecacheHandle \u003d\u003d NULL) {\n+\t\treturn NFS4ERR_IO;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f1c160_3a94a82a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (fileHandle !\u003d NULL) {\n+\t\treturn NFS4_OK;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e23fbb_0316e0a6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status !\u003d NFS4_OK) {\n+\t\treturn status;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c776e7f9_f0b2824f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (bytes \u003c 0) {\n+\t\treturn nfs4LastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17be8a9a_78d38028",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (nfsStatus !\u003d NFS4_OK) {\n+\t\treturn nfsStatus;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca9f520b_646ac03e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (bytes \u003c 0) {\n+\t\treturn nfs4LastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87dba112_f00d9441",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (stability !\u003d UNSTABLE4) {\n+\t\tstatus \u003d saunafs_flush(export-\u003efsInstance, NULL, fileHandle);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99203f49_9e810888",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// If we failed here then there is no opened SaunaFS file",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b67938_b4ae2ff9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// descriptor, which implies that we don\u0027t need to flush",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "983b5f90_ea157a67",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// anything",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ed0593_93888a63",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (buffer-\u003elen !\u003d sizeof(struct DSWire)) {\n+\t\treturn NFS4ERR_BADHANDLE;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc8f635_c2e049bb",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dataServerWire-\u003einode \u003d\u003d 0) {\n+\t\treturn NFS4ERR_BADHANDLE;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701ae11b_3d249ca1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "226d3f07_b3be72e0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (!cacheHandle) {\n+\t\t\t\tbreak;\n+\t\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1462ab62_7f561a01",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// set the real path to the path without the prefix from",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7d24a0_a67dbef1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// ctx_export-\u003efullpath",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "878336fb_c5b0d05d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (realPath \u003d\u003d NULL) {\n+\t\t\treturn fsalstat(ERR_FSAL_INVAL, 0);\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317c57c0_fb098ae8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (*realPath !\u003d \u0027/\u0027) {\n+\t\t\treturn fsalstat(ERR_FSAL_INVAL, 0);\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2a41af_e6d680d5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (strstr(realPath, CTX_FULLPATH(op_ctx)) !\u003d realPath) {\n+\t\treturn fsalstat(ERR_FSAL_SERVERFAULT, 0);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3041ad87_a1a2bd94",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (*realPath \u003d\u003d \u0027\\0\u0027) {\n+\t\trealPath \u003d rootDirPath;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b6fe87_6b3713e7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// special case the root",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d0c184_78ac077b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (attributes \u003d\u003d NULL) {\n+\t\t\treturn fsalstat(ERR_FSAL_NO_ERROR, 0);\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "032018a6_4908a790",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e80a8a_4663a54b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attributes !\u003d NULL) {\n+\t\tposix2fsal_attributes_all(\u0026entry.attr, attributes);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0676465a_f609b0ac",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc74244_92da75d8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t(void)export; // Not used",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169216dd_b0fbbbe1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!buffer || !buffer-\u003eaddr) {\n+\t\treturn fsalstat(ERR_FSAL_FAULT, 0);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19820284_31a518e7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (buffer-\u003elen !\u003d sizeof(sau_inode_t)) {\n+\t\treturn fsalstat(ERR_FSAL_INVAL, 0);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55bf577c_e582a96b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c34df424_5117d7f0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attributes !\u003d NULL) {\n+\t\tposix2fsal_attributes_all(\u0026result.attr, attributes);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0faa7e_0cf8da32",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Fixup supported_mask to indicate if ACL is supported for this export",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb604b36_52dcbc9f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (NFSv4_ACL_SUPPORT) {\n[...]\n+\t} else {\n[...]",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876547ee_3465cf10",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t(void)export; // Not used",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cf6bbfc_ad1d04f2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90df9372_67cab236",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (entryA-\u003einode \u003c entryB-\u003einode) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab2785a3_28077694",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (entryA-\u003einode \u003e entryB-\u003einode) {\n+\t\treturn 1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44111b3a_cf62c383",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (entryA-\u003elookup || entryB-\u003elookup) {\n+\t\treturn 0;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94da3ee0_49a0c84f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (entryA \u003c entryB) {\n+\t\treturn -1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01e77425_a9e7618c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (entryA \u003e entryB) {\n+\t\treturn 1;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759c8c33_e3c1312d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!cache) {\n+\t\treturn;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f5ec242_0f87d07c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+﻿// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20cc170e_93c4c79c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (handle-\u003ehandle.type \u003d\u003d REGULAR_FILE) {\n+\t\tdestroy_fsal_fd(\u0026handle-\u003efd.fsalFd);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027fbd72_958971b2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (handle !\u003d handle-\u003eexport-\u003eroot) {\n+\t\tdeleteHandle(handle);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1a7a80e_8184b701",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206f4f01_41734d18",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attributes !\u003d NULL) {\n+\t\tposix2fsal_attributes_all(\u0026node.attr, attributes);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f1f608_b764452d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!saunafsFd) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337c03a5_c5187f0d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (whence !\u003d NULL) {\n+\t\tdirentryOffset \u003d *whence;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c64c444_df359669",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (status \u003c 0) {\n+\t\t\treturn fsalLastError();\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337cf036_7fe600a3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (result !\u003d DIR_CONTINUE || totalEntries \u003c batchSize) {\n+\t\t\tbreak;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ba00fa6_0456eebf",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae540aeb_4216cbf8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (attributes-\u003erequest_mask \u0026 ATTR_RDATTR_ERR) {\n+\t\t\tattributes-\u003evalid_mask \u003d ATTR_RDATTR_ERR;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "585c8aa8_680e2ee8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!FSAL_IS_ERROR(status)) {\n+\t\t\tattributes-\u003evalid_mask |\u003d (attrmask_t)ATTR_ACL;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c1940a_f179b660",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (status \u003c 0) {\n+\t\t\treturn fsalLastError();\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01977283_767712ee",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// We need to use the global file descriptor to continue",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9111a683_9ee6944f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// Success, establish the new share.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059d84cf_4b443f7b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2625edaf_f964724d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Indicate we are done with fd work and signal",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79c8f7e_62f6ac1c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// any waiters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02935f32_e1935938",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Success, establish the new share.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a40b7c_4c2cf52a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c769b8dc_b9bbd202",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Indicate we are done with fd work and signal any waiters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217492f8_6f8f1872",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// No share conflict, re-open the share fd",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a0fbac_abf4e410",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Success, establish the new share.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf6b0dc5_b9352cde",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3500759_1e4b9264",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Indicate we are done with fd work and signal any waiters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "920a410d_01277fd0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Refresh the attributes",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03efb93_c1c7f4b9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Verifier didn\u0027t match, return EEXIST",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70878cc9_a83ceb6b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// close fd",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a85586d_0d9c0128",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Success, establish the new share.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438f57df_d29935c2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc2cc660_95f8fb3e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Indicate we are done with fd work and signal any waiters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce75cffd_49dfcc4c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Ganesha doesn\u0027t has open by name, so we need to get the name with",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638cd9ea_5cb40f7d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// lookup",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d1af43_88a064c2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Now fixup attrs for verifier if exclusive create",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adba0aba_526b5189",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Create file",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ff9dc1_b6923b9b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Fetch the mode attribute to use in the openat system call",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac96b1e3_9c74cd39",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Don\u0027t set the mode if we later set the attributes",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169bfce0_67b04c91",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retval \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed8bc2fd_2d5fce5d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// File has been created by us.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ff8d3eb_666c9b2f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (retval \u003c 0) {\n+\t\t\treturn fsalLastError();\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "256da8f2_0f7e1fc5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (retval \u003c 0) {\n+\t\t\t\treturn fsalLastError();\n+\t\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb161c2_4a951cab",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\t\tif (retval \u003c 0) {\n+\t\t\t\t\treturn fsalLastError();\n+\t\t\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67a9d21_c4217c85",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attributes !\u003d NULL) {\n+\t\tposix2fsal_attributes_all(\u0026posixAttributes.attr, attributes);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e51a9e6_a81300f5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Currently we don\u0027t support READ_PLUS",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393e3f8e_d13118fa",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Indicate a desire to start io and get a usable file descritor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c571a73_98875124",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8eb46f_1dc30536",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// to release the temp share",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3adc0b_42a09fb5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2cad9e6_9e6b6b2d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Release the share reservation now by",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af4df1d4_46a40a0a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c9aa53_24f6427d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// We did I/O without a state so we need to release the temp",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d511a6_a290d7fe",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cba9c22_f3c7e719",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Release the share reservation now by updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bdffd8_ccbd9872",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retvalue \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a883e7_8f584d78",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the handle we just allocate",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb25284_5a4a46df",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// We ignore errors here. The mkdir and setattr",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e89d85_130b582e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// succeeded, so we don\u0027t want to return error",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06566016_fb06da45",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// if the getattrs fails.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a9bd5ba_d9f6b340",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// We\u0027ll just return no attributes in that case.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6443424a_a9e69541",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Since we haven\u0027t set any attributes other than what",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f42849_26c41c64",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// was set on create, just use the stat results we used",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b8693fc_6202aab3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// to create the fsal_obj_handle.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e9204e_bbf7606f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retvalue \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea23d21b_46ed7579",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ba1b3d_ec9acb6a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "394a28fc_41b8128c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Indicate a desire to start io and get a usable file descritor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e0ffbf7_9538aea4",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (bytes \u003d\u003d 0) {\n+\t\t\tbreak;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f5c29a8_57c13c58",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb9aefca_11088e38",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1310,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// to release the temp share reservation",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf72ab0_a1e4afe6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd430b9_a97b0eb0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Release the share reservation now by",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "822ea9e6_17a98427",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t//  updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1534f17c_06a6dbcd",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// We did I/O without a state so we need to release the temp",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e31d2e9_d1f073b6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed97651b_5c594ef8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Release the share reservation now by updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99805737_e8d05e57",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Make sure file is open in appropriate mode.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98cb06ed_991600ce",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Do not check share reservation.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90a6b85_21261c90",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (FSAL_IS_ERROR(status)) {\n+\t\treturn status;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66555455_7e154c68",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retvalue \u003c 0) {\n+\t\tstatus \u003d fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3065e9df_7a1ed592",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// We did not do share reservation stuff...",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b431c0_4f4e50e8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Check share reservation and if OK,",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3cc80db_f88c15e0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// update the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9546795_3f5685c8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the share reservation now by updating",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c908fb8_d24d09b3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36093342_5fb97e4e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Release the share reservation now by updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f156451_352fdfa9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retvalue \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c651cf_7ae511df",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1658,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// We handled the mode above",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647c0077_247896ab",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1664,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Now per support_ex API, if there are any other",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9d2908_a21dca71",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// attributes set, go ahead and get them set now",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858b5efe_faa34a80",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the handle we just allocated",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b815944c_7b9088e5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// We may end up using global fd, don\u0027t fail on a deny mode",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b62816af_451f608c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (requestedLock-\u003elock_type \u003d\u003d FSAL_LOCK_R) {\n[...]\n+\t\t} else if (requestedLock-\u003elock_type \u003d\u003d FSAL_LOCK_W) {\n[...]",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a5c563a_3bed299c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1761,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_FSAL, \"ERROR: Lock operation requested \"\n+\t\t\t\t\t     \"was not TEST, READ, or WRITE.\");",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304eec82_7e387dbc",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1778,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \"ERROR: The requested lock type was not \"\n+\t\t\t     \"read or write.\");",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a20d1f3b_45010214",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1783,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (lockOperation \u003d\u003d FSAL_OP_UNLOCK) {\n+\t\tlockInfo.l_type \u003d F_UNLCK;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ad5432f_1c5f48ed",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Indicate a desire to start io and get a usable file descritor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45fc1d3_b42ebd7a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// We did I/O without a state so we need to release",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cad4fde_20d8a0db",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1826,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// the temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0b3e283_666246c7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the share reservation now by updating",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c73f5b_7c6445b2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247326cd_aaec5516",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1838,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// F_UNLCK is returned then the tested operation would be possible",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1261062_b05f6436",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// We did I/O without a state so we need to release the temp",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a179ee_13e8dfa8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1860,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f41bb47_8fd07a48",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1862,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Release the share reservation now by updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c9304f_d1f8787e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1965,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retvalue \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb99104b_d32ec0c4",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// We handled the mode above",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c9b2a65_bbe2cad4",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Setting attributes for the created object",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7cdae6c_c41ec574",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1986,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the handle we just allocated",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f84408_aed1881b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1991,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Since we haven\u0027t set any attributes other than what was set",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be71901a_fe2ecf75",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// on create, just use the stat results we used to create the",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bef6463_9c3ddeaf",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1993,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// fsal_obj_handle",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dff7247_743394ba",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2030,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (objectHandle-\u003etype !\u003d SYMBOLIC_LINK) {\n+\t\treturn fsalstat(ERR_FSAL_FAULT, 0);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c1f131d_13ad9f35",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2045,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// saunafs_readlink() returns the size of the read link if succeed.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc8e08c6_c27acd40",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2046,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Otherwise returns -1 to indicate an error occurred",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81091fef_c4abbf6b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2047,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (size \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b50689_cda6f5b1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2102,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// We need to merge the share reservations on this file.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b83213a_e673c6ea",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2103,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// This could result in ERR_FSAL_SHARE_DENIED.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aecc72c_069c4a6f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// This can block over an I/O operation",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e53c949f_cb069378",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Indicate a desire to start io and get a usable file descritor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a0baa31_1ab7553c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2171,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Get stat to obtain the current size",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd91efba_bd21f49a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// We did I/O without a state so we need to release",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d90109_fe1bc33a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2185,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// the temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d98c76f_cd9c4cb4",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2187,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the share reservation now by updating",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c79c56a_85380bc0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2188,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac6b2ef_a9c1e724",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2219,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1588c170_568bf26a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// to release the",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11e0a50_25f7f2bc",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2221,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0df31df_82835b1b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2223,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// Release the share reservation now by",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "443129ee_3e24f556",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2224,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4ca2b5_547f5566",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2237,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (retvalue \u003c 0) {\n+\t\t\t\tstatus \u003d fsalLastError();\n+\t\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49781d1_46cbf586",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\t} else if (allocate \u003d\u003d false) { // Deallocate",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69cdfa76_e91e71c7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t} else if (allocate \u003d\u003d false) { // Deallocate",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ebff7a7_eda5fc17",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2242,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Initialize the zero-buffer",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9fe08d_45e2e907",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2247,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Write the interval [offset..offset + length] with zeros",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f68930_cceeb13b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2263,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d68fb72_87de4a4a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2264,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// to release the",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e9737d_1114478a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b259292_5527d644",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Release the share reservation now by",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "573c82f2_79724ce3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d7a7f2_1536f6c7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2278,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Set the original size because deallocation must not change",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876f968a_cabbfd1d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2279,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// file size",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2bfa605_4e8cc60a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2294,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5153b2dd_0ab36687",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// to release the",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fbaa700_993204f6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2296,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b12bc37_f3af52c6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2298,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Release the share reservation now by",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd9d8a47_61da1bfa",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2299,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7ec14f_bc0e1329",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (retvalue \u003c 0) {\n+\t\t\tstatus \u003d fsalLastError();\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84bd2655_5fbeb5af",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2322,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// We did I/O without a state so we need to release the temp",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf32ddc_d54591c3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2323,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19380bb7_a8994917",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Release the share reservation now by updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40bb746f_ceaf20a2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2387,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Updating the real size",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd84352b_20155378",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Make sure utf8string is NUL terminated",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2406048d_ff5ff480",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Size of list of extended attributes",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e28ffd_ee42d904",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2476,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// First time, the function is called to get the size of xattr list",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0528a6cd_b538bbed",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2485,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// If xattr were retrieved and they can be allocated",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2ea1d8_bbf07097",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2489,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Second time the function is called to retrieve the xattr list",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385c1fe6_9033c281",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2501,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Setting retrieved extended attributes to Ganesha",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a6abdab_0919d1b0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2506,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Releasing allocated buffer",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409b9704_6a082038",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8033cedb_89d14a2f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (export-\u003efsInstance) {\n+\t\t\tsau_destroy(export-\u003efsInstance);\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49185f49_98da5c3f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (export-\u003ecache) {\n+\t\t\tdestroyFileInfoCache(export-\u003ecache);\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74de6ac_73c4b646",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// parse parameters for this export",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44dd94e9_92cf6e98",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// special case: server_id matches export_id",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d6a8d7_89a2e207",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Return the ref taken by create_fsal_pnfs_ds",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709a37ac_0c2bc598",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// get attributes for root inode",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9973b4_bcb1c128",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Remove and destroy the fsal_pnfs_ds",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7000a88f_dc8c8160",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Return the ref taken by create_fsal_pnfs_ds",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e243ae1_07ae8aaf",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Set up module operations",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3036e2f_40343547",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Initialize fsal_obj_handle ops for FSAL SaunaFS",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e045759_0860835a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee73480e_5e9ea41e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (chunkserver \u003d\u003d base) {\n+\t\treturn 0;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b94d31b_a332f457",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (size \u003d\u003d 0) {\n+\t\treturn;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf30a7f_ce36b797",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Free labels, we don\u0027t need them.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc53b822_3e97191f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// remove disconnected",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d899e5b8_a7574ec5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// sorting chunkservers based on its ip attribute",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a544724b_752a5880",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// remove entries with the same ip",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e98ee8_040a1a4b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// randomize",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963d60e3_1fc2732e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// prefer std chunk part type",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dce0f10_cb7e7c1b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// fill unused entries with the servers from randomized",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c09fe68_b2086af3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// chunkserver list",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef382956_f63dd378",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// encode ds entry",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8153e73_f59324ed",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (status !\u003d NFS4_OK) {\n+\t\t\treturn kNFS4_ERROR;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01687573_7849882b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (status !\u003d NFS4_OK) {\n+\t\t\treturn -1;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9b421e_5edb5009",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (chunkserverInfo) {\n+\t\tgsh_free(chunkserverInfo);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0e7a1ea_90bd0b5c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// get the chunk list for file",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7148737e_3e133024",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Failed to encode device information \"\n+\t\t\t\t\"for export \u003d %\" PRIu16 \" inode \u003d %\" PRIu64,",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f03cf980_e2c1e2b8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"Failed to encode device information \"\n+\t\t\t\"for export \u003d %\" PRIu16 \" inode \u003d %\" PRIu64,",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bcbc047_74183e1b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\treturn MaxBufferSize;  // typical value in NFS FSAL plugins",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f056bef_c70320e3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// one stripe index + number of addresses +",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f354408d_c7993a82",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// SAUNAFS_EXPECTED_BACKUP_DS_COUNT addresses per chunk each address",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81050658_b2119b0f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// takes 37 bytes (we use 40 for safety) we add 32 bytes of overhead",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699afc29_67576fb7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// (includes stripe count and DS count)",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f66e6a6a_9772c816",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9735f08_a9534ae9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"Error \u0027%s\u0027 in attempt to get \"\n+\t\t\t\"attributes of file %lli.\",",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69bcf35e_3c9dae56",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"Error \u0027%s\u0027 in attempt to set attributes \"\n+\t\t\t\"of file %lli.\",",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d51b06f_3a20a2a9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1420ef14_64a680b0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!fsalACL || (!fsalACL-\u003eaces \u0026\u0026 fsalACL-\u003enaces \u003e 0)) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b9ad995_046a779d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!saunafsACL) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8124a1a4_8553d397",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (IS_FSAL_ACE_GROUP_ID(*fsalACE)) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb8039bd_bf9151ee",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!saunafsACL) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4585c8cf_db7c60e1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!aclData.aces) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32fe9683_3c2d966e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (IS_FSAL_ACE_GROUP_ID(*fsalACE)) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c4ab80_79decfb5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!acl) {\n+\t\treturn fsalstat(ERR_FSAL_NO_ERROR, 0);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb0b1500_d14ad56e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b720c79e_691780f3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Global SaunaFS constants",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b36cf11_0e88de4d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct fsal_export export; /// Export object",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b31450_4cef0811",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct SaunaFSHandle *root; /// root handle of export",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05782c92_5dc6c138",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tsau_t *fsInstance; /// Filesystem instance",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c54feb5_a291f80c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tsau_init_params_t parameters; /// Initial parameters",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b99325f3_b4479c7c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tFileInfoCache_t *cache; /// Export cache",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd3b8a3_fadf4434",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tbool pnfsMdsEnabled; /// pNFS Metadata Server enabled",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "449aab3a_d194ae36",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tbool pnfsDsEnabled;  /// pNFS Data Server enabled",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d4fd2c_9c18f18b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint32_t cacheTimeout; /// Timeout for entries at cache",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23b8487a_a77c2c43",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint32_t cacheMaximumSize; /// Maximum size of cache",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ae8f0a_b0f5e05f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct fsal_fd fsalFd; /// The open and share mode plus fd management",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749337b0_fda779c3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct sau_fileinfo *fd; /// SaunaFS file descriptor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408a75ba_48d67953",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// state MUST be first to use default free_state",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ae8cc6_cb3f4783",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct state_t state; /// Structure representing a single NFSv4 state",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f36840f_863a46c7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct SaunaFSFd saunafsFd; /// SaunaFS file descriptor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cec7bba_ccc6b0a5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint16_t moduleId; /// module id",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf68636_ebe88aeb",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint16_t exportId; /// export id",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dbe361a_d2f493a0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tsau_inode_t inode; /// inode",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849f3e95_e7856834",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct fsal_obj_handle handle; /// Public handle",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d67414_a95d259c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct SaunaFSFd fd; /// SaunaFS FSAL file descriptor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d219ab29_3e55ea24",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tsau_inode_t inode; /// inode of file",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13441847_ce512181",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct SaunaFSHandleKey key; /// Handle key",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dace9423_d8b4e05c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct SaunaFSExport *export; /// Export to which the handle belongs",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23c69f99_6a841d16",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct fsal_share share; /// The ref counted share reservation state",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93eff113_6fd5e704",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint32_t inode; /// inode",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7d9c6e_e7e3c6c2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tstruct fsal_ds_handle handle; /// Public Data Server handle",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1153f5_3b1a56eb",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint32_t inode; /// inode",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ddeb81_fd447873",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tFileInfoEntry_t *cacheHandle; /// Cache entry for inode",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46ed4f7_77ca0150",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d65bc7ff_2965d7a7",
         "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
         "patchSetId": 1
@@ -31,6 +5250,108 @@
       "writtenOn": "2024-03-20T20:32:37Z",
       "side": 1,
       "message": "Are you licensing GPL-3.0 or later or LGPL-3.0 or later? If the former, update the SPDX-Licence-Identifier to match.\n\nNote that most of Ganesha is license LGPL-3.0 or later rather than GPL-3.0 or later.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f12351c_47f10008",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (cred \u003d\u003d NULL) {\n+\t\treturn sau_create_user_context(0, 0, 0, 0);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0e520f_2f77e002",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!ctx) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d238a6e5_c264ef84",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+/// Functions for allocating/deleting handles",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3aa7bde_1e081c04",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Functions for ACL",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea49e0b_6fd23b82",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Functions for handling errors",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2441aa8_dcc49a4d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-22T00:04:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Functions for pNFS",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
