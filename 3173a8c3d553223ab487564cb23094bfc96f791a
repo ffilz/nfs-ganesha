@@ -52,6 +52,24 @@
       "parentUuid": "f96b21e5_4ca4de5b",
       "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01f7fdb_0ae8537d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-22T14:53:25Z",
+      "side": 1,
+      "message": "There is a slight difference in implementation in terms of what is stored the previous pointer of a node (I think that Linux also uses the TAILQ based implementation). However, that doesn\u0027t much affect the usage of either data structure.\n\nThen there is also a single-linked version of the TAILQ, which could be useful in some situations.\n\nBut as you said, within Ganesha we use both TAILQ and glist.",
+      "parentUuid": "a1ba4f67_418ac2f2",
+      "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
