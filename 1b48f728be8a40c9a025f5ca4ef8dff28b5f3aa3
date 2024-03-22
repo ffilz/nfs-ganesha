@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0fb8ee6_585585e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-22T17:59:44Z",
+      "side": 1,
+      "message": "There were multiple delegation recalls happening for the same obj. The first thread enters with state lock to recall, once found that it could expire off the client which has gone inactive, we were releasing the state lock and setting DELEG_GRANTED for the state-\u003estate_data.deleg.sd_state, before actually expiring the client. This opens up window to the contending async task to acquire the same state lock and crash off, as it started dereferencing the clientid related structures which would have gone stale, as part of the first threads client expire path. \n\nFix made as part of below CR, by handling parallel delegation recalls for the same fsal_objs. This CR avoid such contenders to skip processing this state by setting DELEG_GRANTED only after the client is expired off and owner reference to state removed off the clientid.",
+      "revId": "1b48f728be8a40c9a025f5ca4ef8dff28b5f3aa3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
