@@ -2645,6 +2645,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab1713e7_ce02fa06",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "What comment style should I adopt for SPDX-License-Identifier?",
+      "parentUuid": "2f5ec242_0f87d07c",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20cc170e_93c4c79c",
         "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
         "patchSetId": 1
@@ -2656,6 +2674,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (handle-\u003ehandle.type \u003d\u003d REGULAR_FILE) {\n+\t\tdestroy_fsal_fd(\u0026handle-\u003efd.fsalFd);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c43ba5_b3ac0a59",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20cc170e_93c4c79c",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2677,6 +2713,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e97656_2b244aba",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "027fbd72_958971b2",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1a7a80e_8184b701",
@@ -2690,6 +2744,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a38423f9_de9da184",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1a7a80e_8184b701",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2711,6 +2783,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf520d1e_0d571691",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "206f4f01_41734d18",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13f1f608_b764452d",
@@ -2724,6 +2814,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!saunafsFd) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba36e0ef_e062b67f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f1f608_b764452d",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2745,6 +2853,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bde22e1e_dbe954b9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "337c03a5_c5187f0d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c64c444_df359669",
@@ -2758,6 +2884,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (status \u003c 0) {\n+\t\t\treturn fsalLastError();\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9ca3c9f_7459ff23",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c64c444_df359669",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2779,6 +2923,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "154f5bfd_cdb31e90",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "337cf036_7fe600a3",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ba00fa6_0456eebf",
@@ -2792,6 +2954,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48947105_34ffe402",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ba00fa6_0456eebf",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2813,6 +2993,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31597eb4_680c9c45",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae540aeb_4216cbf8",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "585c8aa8_680e2ee8",
@@ -2826,6 +3024,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (!FSAL_IS_ERROR(status)) {\n+\t\t\tattributes-\u003evalid_mask |\u003d (attrmask_t)ATTR_ACL;\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2622f7ed_06614219",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "585c8aa8_680e2ee8",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2847,6 +3063,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a403dd6c_c485191b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91c1940a_f179b660",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01977283_767712ee",
@@ -2860,6 +3094,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// We need to use the global file descriptor to continue",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1668cc_7769ff42",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01977283_767712ee",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2881,6 +3133,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "328ec223_ebb043f7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9111a683_9ee6944f",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "059d84cf_4b443f7b",
@@ -2894,6 +3164,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae9d8d8_656ee9c6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "059d84cf_4b443f7b",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2915,6 +3203,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc4ef062_c4c60a7e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2625edaf_f964724d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c79c8f7e_62f6ac1c",
@@ -2928,6 +3234,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// any waiters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d934dca6_ecb30eb6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c79c8f7e_62f6ac1c",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2949,6 +3273,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1153f26b_9c09e00e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02935f32_e1935938",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a40b7c_4c2cf52a",
@@ -2962,6 +3304,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5abb6b8a_8380fe5d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2a40b7c_4c2cf52a",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2983,6 +3343,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2581e4f0_b84d7722",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c769b8dc_b9bbd202",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "217492f8_6f8f1872",
@@ -2996,6 +3374,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// No share conflict, re-open the share fd",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8733386_dd56aa3d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "217492f8_6f8f1872",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3017,6 +3413,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8333dea_59f0c96a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22a0fbac_abf4e410",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf6b0dc5_b9352cde",
@@ -3030,6 +3444,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5895538_2a66ce5e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf6b0dc5_b9352cde",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3051,6 +3483,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ea4aa4_e54bad37",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3500759_1e4b9264",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "920a410d_01277fd0",
@@ -3064,6 +3514,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Refresh the attributes",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc15b76_34f1e872",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "920a410d_01277fd0",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3085,6 +3553,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7055d42_5511d057",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a03efb93_c1c7f4b9",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70878cc9_a83ceb6b",
@@ -3098,6 +3584,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// close fd",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53197b9c_75f6d0f2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70878cc9_a83ceb6b",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3119,6 +3623,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd16327_4fa872ce",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a85586d_0d9c0128",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "438f57df_d29935c2",
@@ -3132,6 +3654,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Release obj_lock.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "265945d7_2b53a2d5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "438f57df_d29935c2",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3153,6 +3693,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c70fded_db5b5ddd",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc2cc660_95f8fb3e",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce75cffd_49dfcc4c",
@@ -3166,6 +3724,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Ganesha doesn\u0027t has open by name, so we need to get the name with",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdeec190_81ae3491",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce75cffd_49dfcc4c",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3187,6 +3763,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56b0ab18_52e2396e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "638cd9ea_5cb40f7d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d1af43_88a064c2",
@@ -3200,6 +3794,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Now fixup attrs for verifier if exclusive create",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f5231a_e4469ef3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13d1af43_88a064c2",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3221,6 +3833,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8016023_7bb09b4e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adba0aba_526b5189",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66ff9dc1_b6923b9b",
@@ -3234,6 +3864,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Fetch the mode attribute to use in the openat system call",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "490cb578_b358a213",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66ff9dc1_b6923b9b",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3255,6 +3903,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f9fe021_2fa38652",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac96b1e3_9c74cd39",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "169bfce0_67b04c91",
@@ -3268,6 +3934,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retval \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c103bed_2d6bd1e5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "169bfce0_67b04c91",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3289,6 +3973,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b725c763_db801283",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed8bc2fd_2d5fce5d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ff8d3eb_666c9b2f",
@@ -3302,6 +4004,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (retval \u003c 0) {\n+\t\t\treturn fsalLastError();\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5d88fde_6bc3e9a7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ff8d3eb_666c9b2f",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3323,6 +4043,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e7f62c_453a501f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "256da8f2_0f7e1fc5",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fb161c2_4a951cab",
@@ -3336,6 +4074,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\t\tif (retval \u003c 0) {\n+\t\t\t\t\treturn fsalLastError();\n+\t\t\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1cd9437_132cebff",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fb161c2_4a951cab",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3357,6 +4113,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be42d4a_f5ea5e8c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d67a9d21_c4217c85",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e51a9e6_a81300f5",
@@ -3370,6 +4144,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Currently we don\u0027t support READ_PLUS",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea4e257b_ea91f6d4",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e51a9e6_a81300f5",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3391,6 +4183,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e542d129_1fc95131",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "393e3f8e_d13118fa",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c571a73_98875124",
@@ -3404,6 +4214,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e25d5c9_ce6a1141",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c571a73_98875124",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3425,6 +4253,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d6d0628_6b4dc1b9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a8eb46f_1dc30536",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d3adc0b_42a09fb5",
@@ -3438,6 +4284,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d974ac_c5c30894",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d3adc0b_42a09fb5",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3459,6 +4323,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0fd196b_826a1d2e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2cad9e6_9e6b6b2d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af4df1d4_46a40a0a",
@@ -3472,6 +4354,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d97348_9da2935d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af4df1d4_46a40a0a",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3493,6 +4393,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f3896e_856ae8e8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c9aa53_24f6427d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3d511a6_a290d7fe",
@@ -3506,6 +4424,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "822f0ede_1f64ac17",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3d511a6_a290d7fe",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3527,6 +4463,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e9b5bd_7816ff84",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cba9c22_f3c7e719",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67bdffd8_ccbd9872",
@@ -3540,6 +4494,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retvalue \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2b62fc_fd74622f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67bdffd8_ccbd9872",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3561,6 +4533,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8051011c_669f4a1d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90a883e7_8f584d78",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8eb25284_5a4a46df",
@@ -3574,6 +4564,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// We ignore errors here. The mkdir and setattr",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41e9979_9a5f7ae3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eb25284_5a4a46df",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3595,6 +4603,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cbb2f2d_9b956460",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38e89d85_130b582e",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06566016_fb06da45",
@@ -3608,6 +4634,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// if the getattrs fails.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b2ae85_7f9b2edb",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06566016_fb06da45",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3629,6 +4673,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6adb57ed_92a1ec52",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a9bd5ba_d9f6b340",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6443424a_a9e69541",
@@ -3642,6 +4704,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Since we haven\u0027t set any attributes other than what",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59939a2c_fad90648",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6443424a_a9e69541",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3663,6 +4743,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be0713e_a95c7d2a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52f42849_26c41c64",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b8693fc_6202aab3",
@@ -3676,6 +4774,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// to create the fsal_obj_handle.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4efd0ac2_a4951e24",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b8693fc_6202aab3",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3697,6 +4813,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "191e7a82_9be8cd26",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28e9204e_bbf7606f",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea23d21b_46ed7579",
@@ -3710,6 +4844,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (status \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf634d5b_376aecd2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea23d21b_46ed7579",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3731,6 +4883,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa0cc8bf_86de0d52",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8ba1b3d_ec9acb6a",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "394a28fc_41b8128c",
@@ -3744,6 +4914,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Indicate a desire to start io and get a usable file descritor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11890449_b7c1e820",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "394a28fc_41b8128c",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3765,6 +4953,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "295275a0_d6d0716f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e0ffbf7_9538aea4",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f5c29a8_57c13c58",
@@ -3778,6 +4984,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2e9bcf_5c6692d9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f5c29a8_57c13c58",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3799,6 +5023,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62fcc65f_6f8cc822",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1310,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb9aefca_11088e38",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adf72ab0_a1e4afe6",
@@ -3812,6 +5054,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad285a35_1871944d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adf72ab0_a1e4afe6",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3833,6 +5093,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5520b4f_1e0a655b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dd430b9_a97b0eb0",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "822ea9e6_17a98427",
@@ -3846,6 +5124,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t//  updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "006fb61a_17400f61",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "822ea9e6_17a98427",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3867,6 +5163,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e149d481_715d6a2d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1534f17c_06a6dbcd",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e31d2e9_d1f073b6",
@@ -3880,6 +5194,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b2fa843_3562ea9b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e31d2e9_d1f073b6",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3901,6 +5233,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "860e15b4_51fdc5a8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed97651b_5c594ef8",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99805737_e8d05e57",
@@ -3914,6 +5264,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Make sure file is open in appropriate mode.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0547a47_389651c5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99805737_e8d05e57",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3935,6 +5303,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "286d89db_a48394c0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98cb06ed_991600ce",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a90a6b85_21261c90",
@@ -3948,6 +5334,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (FSAL_IS_ERROR(status)) {\n+\t\treturn status;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b52fcc_010394cc",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a90a6b85_21261c90",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3969,6 +5373,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f161b7bd_1394285d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66555455_7e154c68",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3065e9df_7a1ed592",
@@ -3982,6 +5404,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// We did not do share reservation stuff...",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45acc4e_4bf5ab22",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3065e9df_7a1ed592",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4003,6 +5443,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b63365b_d38fe996",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3b431c0_4f4e50e8",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3cc80db_f88c15e0",
@@ -4016,6 +5474,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// update the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ac0d84_e23483b8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3cc80db_f88c15e0",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4037,6 +5513,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ccd3a2_6fbfca7c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9546795_3f5685c8",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c908fb8_d24d09b3",
@@ -4050,6 +5544,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0252169_e7c5e658",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c908fb8_d24d09b3",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4071,6 +5583,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6328239_41d5a328",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36093342_5fb97e4e",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f156451_352fdfa9",
@@ -4084,6 +5614,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (retvalue \u003c 0) {\n+\t\treturn fsalLastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcae0b1e_1573dd0a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f156451_352fdfa9",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4105,6 +5653,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86fcaeb_e5b2c0ce",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1658,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8c651cf_7ae511df",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "647c0077_247896ab",
@@ -4118,6 +5684,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Now per support_ex API, if there are any other",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d78176_d45be452",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1664,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "647c0077_247896ab",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4139,6 +5723,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62fb92b8_501f8a17",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e9d2908_a21dca71",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "858b5efe_faa34a80",
@@ -4152,6 +5754,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the handle we just allocated",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc94e35b_726014eb",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "858b5efe_faa34a80",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4173,6 +5793,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d04a5496_c7b7dd37",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b815944c_7b9088e5",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b62816af_451f608c",
@@ -4186,6 +5824,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (requestedLock-\u003elock_type \u003d\u003d FSAL_LOCK_R) {\n[...]\n+\t\t} else if (requestedLock-\u003elock_type \u003d\u003d FSAL_LOCK_W) {\n[...]",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d1d573d_56c72beb",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b62816af_451f608c",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4207,6 +5863,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1a156e5_54885014",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1761,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c563a_3bed299c",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "304eec82_7e387dbc",
@@ -4220,6 +5894,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t     \"ERROR: The requested lock type was not \"\n+\t\t\t     \"read or write.\");",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7de22de_7fa52ad1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1778,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "304eec82_7e387dbc",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4241,6 +5933,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "350113d8_eb4dc447",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1783,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a20d1f3b_45010214",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ad5432f_1c5f48ed",
@@ -4254,6 +5964,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Indicate a desire to start io and get a usable file descritor",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c397f562_8ab88669",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ad5432f_1c5f48ed",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4275,6 +6003,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89547de7_fad3afc1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e45fc1d3_b42ebd7a",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cad4fde_20d8a0db",
@@ -4288,6 +6034,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// the temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e78b5d55_8b977e64",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1826,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cad4fde_20d8a0db",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4309,6 +6073,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85209756_2369fb11",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0b3e283_666246c7",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c73f5b_7c6445b2",
@@ -4322,6 +6104,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eda24cb_58b600d3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3c73f5b_7c6445b2",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4343,6 +6143,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4113570e_605659b2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1838,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "247326cd_aaec5516",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1261062_b05f6436",
@@ -4356,6 +6174,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// We did I/O without a state so we need to release the temp",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f3640f_2a91015a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1261062_b05f6436",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4377,6 +6213,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb8dd54_349fc2fd",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1860,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71a179ee_13e8dfa8",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f41bb47_8fd07a48",
@@ -4390,6 +6244,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Release the share reservation now by updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ae3c0f1_a68136b8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1862,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f41bb47_8fd07a48",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4411,6 +6283,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "439a493f_36ffb2cf",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1965,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9c9304f_d1f8787e",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb99104b_d32ec0c4",
@@ -4424,6 +6314,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// We handled the mode above",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d5bca93_a621c929",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb99104b_d32ec0c4",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4445,6 +6353,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66fa4521_b89bb156",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c9b2a65_bbe2cad4",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7cdae6c_c41ec574",
@@ -4458,6 +6384,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// Release the handle we just allocated",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4e3c21_5b059583",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1986,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7cdae6c_c41ec574",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4479,6 +6423,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e8d305_6c018317",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1991,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8f84408_aed1881b",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be71901a_fe2ecf75",
@@ -4492,6 +6454,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// on create, just use the stat results we used to create the",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ddee412_d9a3c549",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be71901a_fe2ecf75",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4513,6 +6493,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8c6c7cd_c23abc5a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1993,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bef6463_9c3ddeaf",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dff7247_743394ba",
@@ -4526,6 +6524,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (objectHandle-\u003etype !\u003d SYMBOLIC_LINK) {\n+\t\treturn fsalstat(ERR_FSAL_FAULT, 0);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7090c8c2_513b8d0b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2030,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dff7247_743394ba",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4547,6 +6563,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e8e326_28c2d4b8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2045,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c1f131d_13ad9f35",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc8e08c6_c27acd40",
@@ -4560,6 +6594,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Otherwise returns -1 to indicate an error occurred",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "084e3f24_80be295f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2046,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8e08c6_c27acd40",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4581,6 +6633,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b535418_8ebfcd0c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2047,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81091fef_c4abbf6b",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49b50689_cda6f5b1",
@@ -4594,6 +6664,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// We need to merge the share reservations on this file.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6717225c_04e4bb19",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2102,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49b50689_cda6f5b1",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4615,6 +6703,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6ddabc_0751a176",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2103,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b83213a_e673c6ea",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aecc72c_069c4a6f",
@@ -4628,6 +6734,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// This can block over an I/O operation",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec0a20d_4182a5bc",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aecc72c_069c4a6f",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4649,6 +6773,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "422fbe08_26413d11",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e53c949f_cb069378",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a0baa31_1ab7553c",
@@ -4662,6 +6804,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Get stat to obtain the current size",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eccf3d86_fe1f0e11",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2171,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a0baa31_1ab7553c",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4683,6 +6843,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c00247b_fab9fd7c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd91efba_bd21f49a",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57d90109_fe1bc33a",
@@ -4696,6 +6874,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// the temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b408b0bd_5138a5fe",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2185,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57d90109_fe1bc33a",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4717,6 +6913,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6796aba0_2466a40e",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2187,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d98c76f_cd9c4cb4",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c79c56a_85380bc0",
@@ -4730,6 +6944,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t// the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e28195_0a3d0844",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2188,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c79c56a_85380bc0",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4751,6 +6983,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d281ee_0ba99dc8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2219,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ac6b2ef_a9c1e724",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1588c170_568bf26a",
@@ -4764,6 +7014,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// to release the",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6430862e_1698b01c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1588c170_568bf26a",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4785,6 +7053,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b160f939_e9c3762b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2221,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e11e0a50_25f7f2bc",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0df31df_82835b1b",
@@ -4798,6 +7084,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t\t// Release the share reservation now by",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebc81705_08d70fc5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2223,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0df31df_82835b1b",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4819,6 +7123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b097497_2befc8b0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2224,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "443129ee_3e24f556",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e4ca2b5_547f5566",
@@ -4832,6 +7154,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (retvalue \u003c 0) {\n+\t\t\t\tstatus \u003d fsalLastError();\n+\t\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172d7f0e_51b19117",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2237,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e4ca2b5_547f5566",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4870,6 +7210,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb137a62_e2097bbd",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b49781d1_46cbf586",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff3b4dc_a6df2794",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69cdfa76_e91e71c7",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ebff7a7_eda5fc17",
@@ -4883,6 +7259,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Initialize the zero-buffer",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c0a8a9_885c7fde",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2242,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ebff7a7_eda5fc17",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4904,6 +7298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e77707ad_cde14dde",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2247,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e9fe08d_45e2e907",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96f68930_cceeb13b",
@@ -4917,6 +7329,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// We did I/O without a state so we need",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77952da8_9b0fc27b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2263,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96f68930_cceeb13b",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4938,6 +7368,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a97d7ba_c5eb9d03",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2264,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d68fb72_87de4a4a",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9e9737d_1114478a",
@@ -4951,6 +7399,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// temp share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ffc734_4b33f6d8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9e9737d_1114478a",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4972,6 +7438,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89e50e9a_aed394dc",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b259292_5527d644",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "573c82f2_79724ce3",
@@ -4985,6 +7469,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// updating the counters.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "110c3beb_435c4204",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "573c82f2_79724ce3",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5006,6 +7508,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54147f9c_ab9fa8a3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2278,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1d7a7f2_1536f6c7",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "876f968a_cabbfd1d",
@@ -5019,6 +7539,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// file size",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d20b00c1_10597684",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2279,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "876f968a_cabbfd1d",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5040,6 +7578,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c955c55c_5ed5c1f5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2294,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2bfa605_4e8cc60a",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5153b2dd_0ab36687",
@@ -5053,6 +7609,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// to release the",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "645dcfc6_36e4d9c9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2295,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5153b2dd_0ab36687",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5074,6 +7648,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b082a7_2a078cec",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2296,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fbaa700_993204f6",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b12bc37_f3af52c6",
@@ -5087,6 +7679,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t\t\t// Release the share reservation now by",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e9558f_1ff5863c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2298,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b12bc37_f3af52c6",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5108,6 +7718,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7739f69_6eb01870",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2299,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd9d8a47_61da1bfa",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a7ec14f_bc0e1329",
@@ -5121,6 +7749,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (retvalue \u003c 0) {\n+\t\t\tstatus \u003d fsalLastError();\n+\t\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "672db031_55163478",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a7ec14f_bc0e1329",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5142,6 +7788,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df4bfcf0_b0d37b14",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2322,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84bd2655_5fbeb5af",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdf32ddc_d54591c3",
@@ -5155,6 +7819,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// share reservation acquired.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf2e6ed4_0ad69c33",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2323,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdf32ddc_d54591c3",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5176,6 +7858,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8c7d27_b0104e1f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19380bb7_a8994917",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40bb746f_ceaf20a2",
@@ -5189,6 +7889,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Updating the real size",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81c848de_f8d1e422",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2387,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40bb746f_ceaf20a2",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5210,6 +7928,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3258440e_226836d7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2389,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd84352b_20155378",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2406048d_ff5ff480",
@@ -5223,6 +7959,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Size of list of extended attributes",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba8f074_734e06e6",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2406048d_ff5ff480",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5244,6 +7998,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a30deeb_1e2581a7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2476,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96e28ffd_ee42d904",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0528a6cd_b538bbed",
@@ -5257,6 +8029,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// If xattr were retrieved and they can be allocated",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c95d4a9_f9f7b2e3",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2485,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0528a6cd_b538bbed",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -5278,6 +8068,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fd86518_3a2555d2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2489,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b2ea1d8_bbf07097",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "385c1fe6_9033c281",
@@ -5295,6 +8103,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ec71e0_bc824384",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2501,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "385c1fe6_9033c281",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a6abdab_0919d1b0",
@@ -5308,6 +8134,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// Releasing allocated buffer",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "377681ce_66fb8dee",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2506,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T04:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a6abdab_0919d1b0",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
