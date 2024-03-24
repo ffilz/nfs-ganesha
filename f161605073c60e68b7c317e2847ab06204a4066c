@@ -1035,6 +1035,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67074316_a5544062",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Same comment here about the use of // or /* */ comment style.",
+      "parentUuid": "b54fbac6_cf91d68e",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eeee49e9_06123248",
         "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
         "patchSetId": 1
@@ -1046,6 +1064,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (export \u003d\u003d NULL) {\n+\t\treturn;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b8293a_7f13c816",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeee49e9_06123248",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1067,6 +1103,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52121cb1_375a9ed2",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8deb4766_6d8e2943",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2758c490_bf11c5fe",
@@ -1080,6 +1134,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dataServer-\u003ecacheHandle !\u003d NULL) {\n+\t\treleaseFileInfoCache(export-\u003ecache, dataServer-\u003ecacheHandle);\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "242689d0_8d13321a",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2758c490_bf11c5fe",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1101,6 +1173,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f0640c_b09af10d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "083d69fb_458b207c",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdc388d5_fb66ae2d",
@@ -1114,6 +1204,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dataServer-\u003ecacheHandle !\u003d NULL) {\n+\t\treturn NFS4_OK;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed2b5ad9_fd63ebb5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdc388d5_fb66ae2d",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1135,6 +1243,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b707756_9f6373f9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1622bb6f_73ea40ab",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34f1c160_3a94a82a",
@@ -1148,6 +1274,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (fileHandle !\u003d NULL) {\n+\t\treturn NFS4_OK;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a8761a5_49969bc7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f1c160_3a94a82a",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1169,6 +1313,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a1f8967_19e1dd15",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36e23fbb_0316e0a6",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c776e7f9_f0b2824f",
@@ -1182,6 +1344,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (bytes \u003c 0) {\n+\t\treturn nfs4LastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efaf78e_1bdd9ab0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c776e7f9_f0b2824f",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1203,6 +1383,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f48ef18a_d4523f55",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17be8a9a_78d38028",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca9f520b_646ac03e",
@@ -1216,6 +1414,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (bytes \u003c 0) {\n+\t\treturn nfs4LastError();\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44813828_639fc0bf",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca9f520b_646ac03e",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1237,6 +1453,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e36f2cf0_9cdd4586",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87dba112_f00d9441",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99203f49_9e810888",
@@ -1250,6 +1484,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// If we failed here then there is no opened SaunaFS file",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccf179db_fa19989f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99203f49_9e810888",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1271,6 +1523,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "058f583e_049d6bd1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03b67938_b4ae2ff9",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "983b5f90_ea157a67",
@@ -1284,6 +1554,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// anything",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "283315b9_4b651a71",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "983b5f90_ea157a67",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1305,6 +1593,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e1ecbd2_0c9d0a9c",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27ed0593_93888a63",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbc8f635_c2e049bb",
@@ -1318,6 +1624,24 @@
       "writtenOn": "2024-03-22T00:04:47Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (dataServerWire-\u003einode \u003d\u003d 0) {\n+\t\treturn NFS4ERR_BADHANDLE;\n+\t}",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "099248ab_30cd5166",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbc8f635_c2e049bb",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
