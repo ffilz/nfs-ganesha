@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a05cbfbe_9d5968dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:22:15Z",
+      "side": 1,
+      "message": "I have been checking the last changes and I applied some of them. Please, check my updated patch and tell me if I missed something.\n\nAbout the second point, I already included a new saunafs folder with the headers needed to compile all the code in Ganesha. However, probably there will be needed adjustments in the CMakeLists.txt of the main project, because of saunafs-client library, which is checked to verify if SAUNAFS is enabled or not.",
+      "parentUuid": "851b5ce9_751f1266",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "632c856a_f44c9c4c",
@@ -5250,6 +5268,24 @@
       "writtenOn": "2024-03-20T20:32:37Z",
       "side": 1,
       "message": "Are you licensing GPL-3.0 or later or LGPL-3.0 or later? If the former, update the SPDX-Licence-Identifier to match.\n\nNote that most of Ganesha is license LGPL-3.0 or later rather than GPL-3.0 or later.",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab55a92e_6fe37399",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1037824
+      },
+      "writtenOn": "2024-03-24T03:22:15Z",
+      "side": 1,
+      "message": "We released saunafs as GPL v3, and we plan to do the same with SaunaFS FSAL. In the new patch, I updated the SPDX-License identifier to match GPL-3.0 or later.",
+      "parentUuid": "d65bc7ff_2965d7a7",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
