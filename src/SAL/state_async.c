@@ -74,8 +74,8 @@ static void state_blocked_lock_caller(struct fridgethr_context *ctx)
 	if (export_ready(export)) {
 		get_gsh_export_ref(export);
 		/* Initialize a root context, need to get a valid export. */
-		init_op_context(&op_context, export, export->fsal_export,
-				NULL, 0, 0, UNKNOWN_REQUEST);
+		init_op_context(&op_context, export, export->fsal_export, NULL,
+				0, 0, UNKNOWN_REQUEST);
 		set_op_ctx = true;
 	}
 
@@ -175,18 +175,20 @@ state_status_t state_async_init(void)
 	rc = fridgethr_init(&state_poll_fridge, "state_poll", &frp);
 
 	if (rc != 0) {
-		LogMajor(COMPONENT_STATE,
-			 "Unable to initialize state blocked lock polling thread fridge: %d",
-			 rc);
+		LogMajor(
+			COMPONENT_STATE,
+			"Unable to initialize state blocked lock polling thread fridge: %d",
+			rc);
 		return STATE_INIT_ENTRY_FAILED;
 	}
 
 	rc = fridgethr_submit(state_poll_fridge, blocked_lock_polling, NULL);
 
 	if (rc != 0) {
-		LogMajor(COMPONENT_STATE,
-			 "Unable to start blocked lock polling thread, error code %d.",
-			 rc);
+		LogMajor(
+			COMPONENT_STATE,
+			"Unable to start blocked lock polling thread, error code %d.",
+			rc);
 		return STATE_INIT_ENTRY_FAILED;
 	}
 
@@ -202,8 +204,7 @@ state_status_t state_async_shutdown(void)
 {
 	int rc1, rc2;
 
-	rc1 = fridgethr_sync_command(state_async_fridge,
-				     fridgethr_comm_stop,
+	rc1 = fridgethr_sync_command(state_async_fridge, fridgethr_comm_stop,
 				     120);
 
 	if (rc1 == ETIMEDOUT) {
@@ -215,8 +216,7 @@ state_status_t state_async_shutdown(void)
 			 "Failed shutting down state async thread: %d", rc1);
 	}
 
-	rc2 = fridgethr_sync_command(state_poll_fridge,
-				     fridgethr_comm_stop,
+	rc2 = fridgethr_sync_command(state_poll_fridge, fridgethr_comm_stop,
 				     120);
 
 	if (rc2 == ETIMEDOUT) {
@@ -224,9 +224,10 @@ state_status_t state_async_shutdown(void)
 			 "Shutdown timed out, cancelling threads.");
 		fridgethr_cancel(state_poll_fridge);
 	} else if (rc2 != 0) {
-		LogMajor(COMPONENT_STATE,
-			 "Failed shutting down state blocked lock polling thread: %d",
-			 rc2);
+		LogMajor(
+			COMPONENT_STATE,
+			"Failed shutting down state blocked lock polling thread: %d",
+			rc2);
 	}
 
 	return ((rc1 == 0) && (rc2 == 0)) ? STATE_SUCCESS : STATE_SIGNAL_ERROR;

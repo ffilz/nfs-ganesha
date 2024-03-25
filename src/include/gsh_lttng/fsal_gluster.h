@@ -37,24 +37,13 @@
  */
 
 TRACEPOINT_EVENT(
-	fsalgl,
-	open_fd,
-	TP_ARGS(const char *, function,
-		int, line,
-		int, flag,
-		void *, glfd),
-	TP_FIELDS(
-		ctf_string(function, function)
-		ctf_integer(int, line, line)
-		ctf_integer(int, flag, flag)
-		ctf_integer(void *, glfd, glfd)
-	)
-)
+	fsalgl, open_fd,
+	TP_ARGS(const char *, function, int, line, int, flag, void *, glfd),
+	TP_FIELDS(ctf_string(function, function) ctf_integer(int, line, line)
+			  ctf_integer(int, flag, flag)
+				  ctf_integer(void *, glfd, glfd)))
 
-TRACEPOINT_LOGLEVEL(
-	fsalgl,
-	open_fd,
-	TRACE_INFO)
+TRACEPOINT_LOGLEVEL(fsalgl, open_fd, TRACE_INFO)
 /**
  * @brief Trace close call for glfd
  *
@@ -63,23 +52,13 @@ TRACEPOINT_LOGLEVEL(
  * @param[in] glfd	Gluster fd
  */
 
-TRACEPOINT_EVENT(
-	fsalgl,
-	close_fd,
-	TP_ARGS(const char *, function,
-		int, line,
-		void *, glfd),
-	TP_FIELDS(
-		ctf_string(function, function)
-		ctf_integer(int, line, line)
-		ctf_integer(void *, glfd, glfd)
-	)
-)
+TRACEPOINT_EVENT(fsalgl, close_fd,
+		 TP_ARGS(const char *, function, int, line, void *, glfd),
+		 TP_FIELDS(ctf_string(function, function)
+				   ctf_integer(int, line, line)
+					   ctf_integer(void *, glfd, glfd)))
 
-TRACEPOINT_LOGLEVEL(
-	fsalgl,
-	close_fd,
-	TRACE_INFO)
+TRACEPOINT_LOGLEVEL(fsalgl, close_fd, TRACE_INFO)
 
 /**
  * @brief Trace Glusterfs handle
@@ -89,23 +68,13 @@ TRACEPOINT_LOGLEVEL(
  * @param[in] glfd	Glusterfs handle
  */
 
-TRACEPOINT_EVENT(
-	fsalgl,
-	gl_handle,
-	TP_ARGS(const char *, function,
-		int, line,
-		void *, handle),
-	TP_FIELDS(
-		ctf_string(function, function)
-		ctf_integer(int, line, line)
-		ctf_integer(void *, handle, handle)
-	)
-)
+TRACEPOINT_EVENT(fsalgl, gl_handle,
+		 TP_ARGS(const char *, function, int, line, void *, handle),
+		 TP_FIELDS(ctf_string(function, function)
+				   ctf_integer(int, line, line)
+					   ctf_integer(void *, handle, handle)))
 
-TRACEPOINT_LOGLEVEL(
-	fsalgl,
-	gl_handle,
-	TRACE_INFO)
+TRACEPOINT_LOGLEVEL(fsalgl, gl_handle, TRACE_INFO)
 
 #endif /* GANESHA_LTTNG_FSALGLUSTER_TP_H */
 

@@ -52,7 +52,7 @@
 #include "nfs_core.h"
 #ifdef CEPHFS_POSIX_ACL
 #include "nfs_exports.h"
-#endif				/* CEPHFS_POSIX_ACL */
+#endif /* CEPHFS_POSIX_ACL */
 #ifdef USE_LTTNG
 #include "gsh_lttng/fsal_ceph.h"
 #endif
@@ -70,7 +70,7 @@ static void release(struct fsal_export *export_pub)
 {
 	/* The private, expanded export */
 	struct ceph_export *export =
-			container_of(export_pub, struct ceph_export, export);
+		container_of(export_pub, struct ceph_export, export);
 	/* Ceph mount */
 	struct ceph_mount *cm = export->cm;
 
@@ -97,13 +97,11 @@ static void release(struct fsal_export *export_pub)
 		gsh_free(cm->cm_user_id);
 		gsh_free(cm->cm_secret_key);
 
-
 		gsh_free(cm);
 	} else if (cm->cm_export == export) {
 		/* Need to attach a different export for upcalls */
 		cm->cm_export = glist_first_entry(&cm->cm_exports,
-						  struct ceph_export,
-						  cm_list);
+						  struct ceph_export, cm_list);
 	}
 
 	export->cmount = NULL;
@@ -137,7 +135,7 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 {
 	/* The 'private' full export handle */
 	struct ceph_export *export =
-			container_of(export_pub, struct ceph_export, export);
+		container_of(export_pub, struct ceph_export, export);
 	/* The 'private' full object handle */
 	struct ceph_handle *handle = NULL;
 	/* Inode pointer */
@@ -198,8 +196,8 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 		return status;
 	}
 
-	rc = fsal_ceph_ll_walk(export->cmount, realpath, &i, &stx,
-				!!attrs_out, &op_ctx->creds);
+	rc = fsal_ceph_ll_walk(export->cmount, realpath, &i, &stx, !!attrs_out,
+			       &op_ctx->creds);
 
 	if (rc < 0)
 		return ceph2fsal_error(rc);
@@ -228,8 +226,7 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
  */
 static fsal_status_t wire_to_host(struct fsal_export *exp_hdl,
 				  fsal_digesttype_t in_type,
-				  struct gsh_buffdesc *fh_desc,
-				  int flags)
+				  struct gsh_buffdesc *fh_desc, int flags)
 {
 	struct ceph_host_handle *hhdl = fh_desc->addr;
 
@@ -336,7 +333,7 @@ static fsal_status_t create_handle(struct fsal_export *export_pub,
 {
 	/* Full 'private' export structure */
 	struct ceph_export *export =
-			container_of(export_pub, struct ceph_export, export);
+		container_of(export_pub, struct ceph_export, export);
 	/* FSAL status to return */
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	/* The FSAL specific portion of the handle received by the client */
@@ -366,8 +363,9 @@ static fsal_status_t create_handle(struct fsal_export *export_pub,
 		return ceph2fsal_error(rc);
 
 	rc = fsal_ceph_ll_getattr(export->cmount, i, &stx,
-		attrs_out ? CEPH_STATX_ATTR_MASK : CEPH_STATX_HANDLE_MASK,
-		&op_ctx->creds);
+				  attrs_out ? CEPH_STATX_ATTR_MASK :
+					      CEPH_STATX_HANDLE_MASK,
+				  &op_ctx->creds);
 	if (rc < 0)
 		return ceph2fsal_error(rc);
 
@@ -402,7 +400,7 @@ static fsal_status_t get_fs_dynamic_info(struct fsal_export *export_pub,
 {
 	/* Full 'private' export */
 	struct ceph_export *export =
-			container_of(export_pub, struct ceph_export, export);
+		container_of(export_pub, struct ceph_export, export);
 	/* Return value from Ceph calls */
 	int rc = 0;
 	/* Filesystem stat */
@@ -434,12 +432,12 @@ static fsal_aclsupp_t fs_acl_support(struct fsal_export *exp_hdl)
 	else
 		return 0;
 }
-#endif				/* CEPHFS_POSIX_ACL */
+#endif /* CEPHFS_POSIX_ACL */
 
 void ceph_prepare_unexport(struct fsal_export *export_pub)
 {
 	struct ceph_export *export =
-			container_of(export_pub, struct ceph_export, export);
+		container_of(export_pub, struct ceph_export, export);
 
 	/* Flush all buffers */
 	ceph_sync_fs(export->cmount);
@@ -456,7 +454,6 @@ void ceph_prepare_unexport(struct fsal_export *export_pub)
 #endif
 }
 
-
 /**
  * @brief Function to get the fasl_obj_handle that has fsal_fd as its global fd.
  *
@@ -466,9 +463,8 @@ void ceph_prepare_unexport(struct fsal_export *export_pub)
  *
  * @return the fsal_obj_handle.
  */
-void get_fsal_obj_hdl(struct fsal_export *exp_hdl,
-				  struct fsal_fd *fd,
-				  struct fsal_obj_handle **handle)
+void get_fsal_obj_hdl(struct fsal_export *exp_hdl, struct fsal_fd *fd,
+		      struct fsal_obj_handle **handle)
 {
 	struct ceph_fd *my_fd = NULL;
 	struct ceph_handle *myself = NULL;
@@ -478,7 +474,6 @@ void get_fsal_obj_hdl(struct fsal_export *exp_hdl,
 
 	*handle = &myself->handle;
 }
-
 
 /**
  * @brief Set operations for exports
@@ -502,8 +497,8 @@ void export_ops_init(struct export_ops *ops)
 	ops->get_fsal_obj_hdl = get_fsal_obj_hdl;
 #ifdef CEPHFS_POSIX_ACL
 	ops->fs_acl_support = fs_acl_support;
-#endif				/* CEPHFS_POSIX_ACL */
+#endif /* CEPHFS_POSIX_ACL */
 #ifdef CEPH_PNFS
 	export_ops_pnfs(ops);
-#endif				/* CEPH_PNFS */
+#endif /* CEPH_PNFS */
 }

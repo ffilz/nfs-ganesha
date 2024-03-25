@@ -34,8 +34,8 @@
  */
 
 #include "config.h"
-#include <unistd.h>		/* for using gethostname */
-#include <stdlib.h>		/* for using exit */
+#include <unistd.h> /* for using gethostname */
+#include <stdlib.h> /* for using exit */
 #include <strings.h>
 #include <string.h>
 #include <sys/types.h>
@@ -46,7 +46,7 @@
 #ifdef USE_NFSIDMAP
 #include <nfsidmap.h>
 #include "nfs_exports.h"
-#endif				/* USE_NFSIDMAP */
+#endif /* USE_NFSIDMAP */
 #ifdef _MSPAC_SUPPORT
 #include <wbclient.h>
 #endif
@@ -95,20 +95,20 @@ static bool idmapper_set_owner_domain(void)
 		 * clearing the earlier state within libnfsidmap, which is
 		 * currently not possible.
 		 */
-		if (nfs4_init_name_mapping(nfs_param.nfsv4_param.idmapconf)
-			!= 0) {
+		if (nfs4_init_name_mapping(nfs_param.nfsv4_param.idmapconf) !=
+		    0) {
 			LogCrit(COMPONENT_IDMAPPER,
 				"Failed to init idmapping via nfsidmap");
 			return false;
 		}
-		if (nfs4_get_default_domain
-			(NULL, domain_addr, NFS4_MAX_DOMAIN_LEN) != 0) {
+		if (nfs4_get_default_domain(NULL, domain_addr,
+					    NFS4_MAX_DOMAIN_LEN) != 0) {
 			LogCrit(COMPONENT_IDMAPPER,
 				"Failed to get default domain via nfsidmap");
 			return false;
 		}
 	}
-#endif				/* USE_NFSIDMAP */
+#endif /* USE_NFSIDMAP */
 	if (nfs_param.nfsv4_param.use_getpwnam)
 		strcpy(domain_addr, nfs_param.nfsv4_param.domainname);
 
@@ -187,7 +187,7 @@ bool idmapper_init(void)
  * @param[in] gss_princ true if the name is a gss principal
  */
 static void add_user_to_cache(const struct gsh_buffdesc *name, uid_t uid,
-	const gid_t *gid, bool gss_princ)
+			      const gid_t *gid, bool gss_princ)
 {
 	bool success;
 
@@ -197,7 +197,7 @@ static void add_user_to_cache(const struct gsh_buffdesc *name, uid_t uid,
 
 	if (unlikely(!success)) {
 		LogMajor(COMPONENT_IDMAPPER,
-			"idmapper_add_user (uid: %u) failed.", uid);
+			 "idmapper_add_user (uid: %u) failed.", uid);
 	}
 }
 
@@ -217,7 +217,7 @@ static void add_group_to_cache(const struct gsh_buffdesc *name, gid_t gid)
 
 	if (unlikely(!success)) {
 		LogMajor(COMPONENT_IDMAPPER,
-			"idmapper_add_group (gid: %u) failed.", gid);
+			 "idmapper_add_group (gid: %u) failed.", gid);
 	}
 }
 
@@ -244,14 +244,14 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 		char namebuf[11];
 
 		name.addr = namebuf;
-		name.len = sprintf(namebuf, "%"PRIu32, id);
+		name.len = sprintf(namebuf, "%" PRIu32, id);
 		not_a_size_t = name.len;
 		return inline_xdr_bytes(xdrs, (char **)&name.addr,
 					&not_a_size_t, UINT32_MAX);
 	}
 
 	PTHREAD_RWLOCK_rdlock(group ? &idmapper_group_lock :
-			      &idmapper_user_lock);
+				      &idmapper_user_lock);
 	if (group)
 		success = idmapper_lookup_by_gid(id, &found);
 	else
@@ -262,15 +262,14 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 
 		/* Fully qualified owners are always stored in the
 		   hash table, no matter what our lookup method. */
-		success =
-		    inline_xdr_bytes(xdrs, (char **)&found->addr, &not_a_size_t,
-				     UINT32_MAX);
+		success = inline_xdr_bytes(xdrs, (char **)&found->addr,
+					   &not_a_size_t, UINT32_MAX);
 		PTHREAD_RWLOCK_unlock(group ? &idmapper_group_lock :
-				      &idmapper_user_lock);
+					      &idmapper_user_lock);
 		return success;
 	} else {
 		PTHREAD_RWLOCK_unlock(group ? &idmapper_group_lock :
-				      &idmapper_user_lock);
+					      &idmapper_user_lock);
 		int rc;
 		int size;
 		bool looked_up = false;
@@ -347,11 +346,12 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 				LogInfo(COMPONENT_IDMAPPER,
 					"%s failed with code %d.",
 					(group ? "nfs4_gid_to_name" :
-					"nfs4_uid_to_name"), rc);
+						 "nfs4_uid_to_name"),
+					rc);
 			}
-#else				/* USE_NFSIDMAP */
+#else /* USE_NFSIDMAP */
 			looked_up = false;
-#endif				/* !USE_NFSIDMAP */
+#endif /* !USE_NFSIDMAP */
 		}
 
 		if (!looked_up) {
@@ -360,7 +360,8 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 					"Lookup for %d failed, using numeric %s",
 					id, (group ? "group" : "owner"));
 				/* 2**32 is 10 digits long in decimal */
-				new_name.len = sprintf(namebuff, "%"PRIu32, id);
+				new_name.len =
+					sprintf(namebuff, "%" PRIu32, id);
 			} else {
 				LogInfo(COMPONENT_IDMAPPER,
 					"Lookup for %d failed, using nobody.",
@@ -423,8 +424,7 @@ bool xdr_encode_nfs4_group(XDR *xdrs, gid_t gid)
  * @return true on success, false on just phoning it in.
  */
 
-static bool atless2id(char *name, size_t len, uint32_t *id,
-		      const uint32_t anon)
+static bool atless2id(char *name, size_t len, uint32_t *id, const uint32_t anon)
 {
 	if ((len == 6) && (!memcmp(name, "nobody", 6))) {
 		*id = anon;
@@ -551,8 +551,8 @@ static int name_to_uid(const char *name, uint32_t *uid, gid_t *gid)
  *
  * @return true on success, false not making the grade
  */
-static bool pwentname2id(char *name, uint32_t *id, bool group,
-			 gid_t *gid, bool *got_gid, char *at)
+static bool pwentname2id(char *name, uint32_t *id, bool group, gid_t *gid,
+			 bool *got_gid, char *at)
 {
 	int err;
 	if (at != NULL) {
@@ -646,9 +646,9 @@ static bool idmapname2id(char *name, size_t len, uint32_t *id,
 			-rc);
 		return false;
 	}
-#else				/* USE_NFSIDMAP */
+#else /* USE_NFSIDMAP */
 	return false;
-#endif				/* USE_NFSIDMAP */
+#endif /* USE_NFSIDMAP */
 }
 
 /**
@@ -668,13 +668,13 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 	bool success;
 
 	PTHREAD_RWLOCK_rdlock(group ? &idmapper_group_lock :
-			      &idmapper_user_lock);
+				      &idmapper_user_lock);
 	if (group)
 		success = idmapper_lookup_by_gname(name, id);
 	else
 		success = idmapper_lookup_by_uname(name, id, NULL, false);
 	PTHREAD_RWLOCK_unlock(group ? &idmapper_group_lock :
-			      &idmapper_user_lock);
+				      &idmapper_user_lock);
 
 	if (success)
 		return true;
@@ -692,19 +692,18 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 
 		if (at == NULL) {
 			if (pwentname2id(namebuff, id, group, &gid, &got_gid,
-				NULL))
+					 NULL))
 				looked_up = true;
 			else if (atless2id(namebuff, name->len, id, anon))
 				looked_up = true;
 			else
 				return false;
 		} else if (nfs_param.nfsv4_param.use_getpwnam) {
-			looked_up =
-			  pwentname2id(namebuff, id, group, &gid, &got_gid, at);
+			looked_up = pwentname2id(namebuff, id, group, &gid,
+						 &got_gid, at);
 		} else {
-			looked_up =
-			    idmapname2id(namebuff, name->len, id, anon, group,
-					 &gid, &got_gid, at);
+			looked_up = idmapname2id(namebuff, name->len, id, anon,
+						 group, &gid, &got_gid, at);
 		}
 
 		if (!looked_up) {
@@ -718,7 +717,7 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 			add_group_to_cache(name, *id);
 		else
 			add_user_to_cache(name, *id, got_gid ? &gid : NULL,
-				false);
+					  false);
 
 		return true;
 	}
@@ -761,12 +760,10 @@ void winbind_stats_update(struct timespec *s_time, struct timespec *e_time)
 
 	PTHREAD_RWLOCK_wrlock(&winbind_auth_lock);
 	(void)atomic_inc_uint64_t(&winbind_auth_stats.total);
-	(void)atomic_add_uint64_t(&winbind_auth_stats.latency,
-					resp_time);
+	(void)atomic_add_uint64_t(&winbind_auth_stats.latency, resp_time);
 	if (winbind_auth_stats.max < resp_time)
 		winbind_auth_stats.max = resp_time;
-	if (winbind_auth_stats.min == 0 ||
-	    winbind_auth_stats.min > resp_time)
+	if (winbind_auth_stats.min == 0 || winbind_auth_stats.min > resp_time)
 		winbind_auth_stats.min = resp_time;
 	PTHREAD_RWLOCK_unlock(&winbind_auth_lock);
 }
@@ -779,12 +776,10 @@ void gc_stats_update(struct timespec *s_time, struct timespec *e_time)
 
 	PTHREAD_RWLOCK_wrlock(&gc_auth_lock);
 	(void)atomic_inc_uint64_t(&gc_auth_stats.total);
-	(void)atomic_add_uint64_t(&gc_auth_stats.latency,
-					resp_time);
+	(void)atomic_add_uint64_t(&gc_auth_stats.latency, resp_time);
 	if (gc_auth_stats.max < resp_time)
 		gc_auth_stats.max = resp_time;
-	if (gc_auth_stats.min == 0 ||
-	    gc_auth_stats.min > resp_time)
+	if (gc_auth_stats.min == 0 || gc_auth_stats.min > resp_time)
 		gc_auth_stats.min = resp_time;
 	PTHREAD_RWLOCK_unlock(&gc_auth_lock);
 }
@@ -797,16 +792,13 @@ void dns_stats_update(struct timespec *s_time, struct timespec *e_time)
 
 	PTHREAD_RWLOCK_wrlock(&dns_auth_lock);
 	(void)atomic_inc_uint64_t(&dns_auth_stats.total);
-	(void)atomic_add_uint64_t(&dns_auth_stats.latency,
-					resp_time);
+	(void)atomic_add_uint64_t(&dns_auth_stats.latency, resp_time);
 	if (dns_auth_stats.max < resp_time)
 		dns_auth_stats.max = resp_time;
-	if (dns_auth_stats.min == 0 ||
-	    dns_auth_stats.min > resp_time)
+	if (dns_auth_stats.min == 0 || dns_auth_stats.min > resp_time)
 		dns_auth_stats.min = resp_time;
 	PTHREAD_RWLOCK_unlock(&dns_auth_lock);
 }
-
 
 void reset_auth_stats(void)
 {
@@ -862,14 +854,12 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 	const gid_t *gss_gidres = NULL;
 	bool success;
 	uint principal_len = strlen(principal);
-	struct gsh_buffdesc princbuff = {
-		.addr = principal,
-		.len = principal_len
-	};
+	struct gsh_buffdesc princbuff = { .addr = principal,
+					  .len = principal_len };
 
 	PTHREAD_RWLOCK_rdlock(&idmapper_user_lock);
 	success = idmapper_lookup_by_uname(&princbuff, &gss_uid, &gss_gidres,
-		true);
+					   true);
 
 	/* We do need uid and gid. If gid is not in the cache, treat it as a
 	 * failure.
@@ -881,10 +871,9 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 	}
 	PTHREAD_RWLOCK_unlock(&idmapper_user_lock);
 
-	if ((princbuff.len >= 4)
-		  && (!memcmp(princbuff.addr, "nfs/", 4)
-		|| !memcmp(princbuff.addr, "root/", 5)
-		|| !memcmp(princbuff.addr, "host/", 5))) {
+	if ((princbuff.len >= 4) && (!memcmp(princbuff.addr, "nfs/", 4) ||
+				     !memcmp(princbuff.addr, "root/", 5) ||
+				     !memcmp(princbuff.addr, "host/", 5))) {
 		/* NFSv4 specific features: RPCSEC_GSS will
 		 * provide user like
 		 *
@@ -905,8 +894,8 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 		char *uname;
 		int uname_len = principal_len;
 
-		LogDebug(COMPONENT_IDMAPPER,
-			"Get uid for %s using pw func", principal);
+		LogDebug(COMPONENT_IDMAPPER, "Get uid for %s using pw func",
+			 principal);
 
 		/* Strip off the realm from principal for pwnam lookup.
 		 * TODO: Later support pwnam lookup using full-name.
@@ -920,7 +909,7 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 		uname[uname_len] = '\0';
 
 		success = pwentname2id(uname, &gss_uid, false, &gss_gid,
-			&got_gid, NULL);
+				       &got_gid, NULL);
 		if (!success)
 			return false;
 
@@ -935,13 +924,13 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 #ifdef USE_NFSIDMAP
 		int err;
 
-		LogDebug(COMPONENT_IDMAPPER,
-			"Get uid for %s using nfsidmap", principal);
+		LogDebug(COMPONENT_IDMAPPER, "Get uid for %s using nfsidmap",
+			 principal);
 
 		/* nfs4_gss_princ_to_ids required to extract uid/gid
 		   from gss creds */
 		err = nfs4_gss_princ_to_ids("krb5", principal, &gss_uid,
-			&gss_gid);
+					    &gss_gid);
 		if (err) {
 			LogWarn(COMPONENT_IDMAPPER,
 				"Could not resolve %s to uid using nfsidmap, err: %d",
@@ -961,14 +950,13 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 				memset(&params, 0, sizeof(params));
 				params.level = WBC_AUTH_USER_LEVEL_PAC;
 				params.password.pac.data =
-				    (uint8_t *) gd->pac.ms_pac.value;
+					(uint8_t *)gd->pac.ms_pac.value;
 				params.password.pac.length =
-				    gd->pac.ms_pac.length;
+					gd->pac.ms_pac.length;
 
 				now(&s_time);
-				wbc_err =
-				    wbcAuthenticateUserEx(&params, &info,
-							  &error);
+				wbc_err = wbcAuthenticateUserEx(&params, &info,
+								&error);
 				now(&e_time);
 				if (stats)
 					winbind_stats_update(&s_time, &e_time);
@@ -989,9 +977,7 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 				}
 
 				now(&s_time);
-				wbc_err =
-					wbcGetpwsid(&info->sids[0].sid,
-						    &pwd);
+				wbc_err = wbcGetpwsid(&info->sids[0].sid, &pwd);
 				now(&e_time);
 				if (stats)
 					winbind_stats_update(&s_time, &e_time);
@@ -1009,13 +995,13 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 				wbcFreeMemory(info);
 				goto principal_found;
 			}
-#endif				/* _MSPAC_SUPPORT */
+#endif /* _MSPAC_SUPPORT */
 
 			return false;
 		}
 		goto principal_found;
 
-#else				/* !USE_NFSIDMAP */
+#else /* !USE_NFSIDMAP */
 		assert(!"prohibited by idmapping configuration");
 #endif
 	}
@@ -1035,7 +1021,7 @@ out:
  * DBUS method to collect Auth stats for group cache and winbind
  */
 static bool all_auth_stats(DBusMessageIter *args, DBusMessage *reply,
-				DBusError *error)
+			   DBusError *error)
 {
 	bool success = true, stats_exist = false;
 	char *errormsg = "OK";
@@ -1052,28 +1038,25 @@ static bool all_auth_stats(DBusMessageIter *args, DBusMessage *reply,
 	gsh_dbus_status_reply(&iter, success, errormsg);
 
 	gsh_dbus_append_timestamp(&iter, &auth_stats_time);
-	dbus_message_iter_open_container(&iter, DBUS_TYPE_STRUCT,
-		NULL, &struct_iter);
+	dbus_message_iter_open_container(&iter, DBUS_TYPE_STRUCT, NULL,
+					 &struct_iter);
 
 	/* group cache stats */
 	PTHREAD_RWLOCK_rdlock(&gc_auth_lock);
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_UINT64, &gc_auth_stats.total);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &gc_auth_stats.total);
 	if (gc_auth_stats.total > 0) {
 		stats_exist = true;
-		res = (double) gc_auth_stats.latency /
-			gc_auth_stats.total * 0.000001;
+		res = (double)gc_auth_stats.latency / gc_auth_stats.total *
+		      0.000001;
 	}
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	if (stats_exist)
-		res = (double) gc_auth_stats.max * 0.000001;
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+		res = (double)gc_auth_stats.max * 0.000001;
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	if (stats_exist)
-		res = (double) gc_auth_stats.min * 0.000001;
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+		res = (double)gc_auth_stats.min * 0.000001;
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	PTHREAD_RWLOCK_unlock(&gc_auth_lock);
 
 	stats_exist = false;
@@ -1081,23 +1064,20 @@ static bool all_auth_stats(DBusMessageIter *args, DBusMessage *reply,
 
 	/* winbind stats */
 	PTHREAD_RWLOCK_rdlock(&winbind_auth_lock);
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_UINT64, &winbind_auth_stats.total);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &winbind_auth_stats.total);
 	if (winbind_auth_stats.total > 0) {
 		stats_exist = true;
-		res = (double) winbind_auth_stats.latency /
-			winbind_auth_stats.total * 0.000001;
+		res = (double)winbind_auth_stats.latency /
+		      winbind_auth_stats.total * 0.000001;
 	}
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	if (stats_exist)
-		res = (double) winbind_auth_stats.max * 0.000001;
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+		res = (double)winbind_auth_stats.max * 0.000001;
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	if (stats_exist)
-		res = (double) winbind_auth_stats.min * 0.000001;
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+		res = (double)winbind_auth_stats.min * 0.000001;
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	PTHREAD_RWLOCK_unlock(&winbind_auth_lock);
 
 	stats_exist = false;
@@ -1105,23 +1085,20 @@ static bool all_auth_stats(DBusMessageIter *args, DBusMessage *reply,
 
 	/* DNS stats */
 	PTHREAD_RWLOCK_rdlock(&dns_auth_lock);
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_UINT64, &dns_auth_stats.total);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
+				       &dns_auth_stats.total);
 	if (dns_auth_stats.total > 0) {
 		stats_exist = true;
-		res = (double) dns_auth_stats.latency /
-			dns_auth_stats.total * 0.000001;
+		res = (double)dns_auth_stats.latency / dns_auth_stats.total *
+		      0.000001;
 	}
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	if (stats_exist)
-		res = (double) dns_auth_stats.max * 0.000001;
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+		res = (double)dns_auth_stats.max * 0.000001;
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	if (stats_exist)
-		res = (double) dns_auth_stats.min * 0.000001;
-	dbus_message_iter_append_basic(&struct_iter,
-		DBUS_TYPE_DOUBLE, &res);
+		res = (double)dns_auth_stats.min * 0.000001;
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE, &res);
 	PTHREAD_RWLOCK_unlock(&dns_auth_lock);
 	dbus_message_iter_close_container(&iter, &struct_iter);
 
@@ -1131,10 +1108,7 @@ static bool all_auth_stats(DBusMessageIter *args, DBusMessage *reply,
 struct gsh_dbus_method auth_statistics = {
 	.name = "GetAuthStats",
 	.method = all_auth_stats,
-	.args = {STATUS_REPLY,
-		 TIMESTAMP_REPLY,
-		 AUTH_REPLY,
-		 END_ARG_LIST}
+	.args = { STATUS_REPLY, TIMESTAMP_REPLY, AUTH_REPLY, END_ARG_LIST }
 };
 #endif
 #endif

@@ -70,7 +70,7 @@
 #include "client_mgr.h"
 #include "export_mgr.h"
 #ifdef USE_CAPS
-#include <sys/capability.h>	/* For capget/capset */
+#include <sys/capability.h> /* For capget/capset */
 #endif
 #include "uid2grp.h"
 #include "netgroup_cache.h"
@@ -103,8 +103,8 @@ static struct _nfs_health healthstats;
 struct timespec nfs_ServerBootTime;
 time_t nfs_ServerEpoch;
 
-verifier4 NFS4_write_verifier;	/* NFS V4 write verifier */
-writeverf3 NFS3_write_verifier;	/* NFS V3 write verifier */
+verifier4 NFS4_write_verifier; /* NFS V4 write verifier */
+writeverf3 NFS3_write_verifier; /* NFS V3 write verifier */
 
 /* node ID used to identify an individual node in a cluster */
 int g_nodeid;
@@ -142,7 +142,7 @@ char *nfs_config_path = GANESHA_CONFIG_PATH;
 
 char *nfs_pidfile_path = GANESHA_PIDFILE_PATH;
 
-char cid_server_owner[MAXNAMLEN+1]; /* max hostname length */
+char cid_server_owner[MAXNAMLEN + 1]; /* max hostname length */
 char *cid_server_scope;
 
 /**
@@ -185,7 +185,7 @@ bool reread_config(void)
 		LogCrit(COMPONENT_CONFIG,
 			"Error while parsing new configuration file %s",
 			nfs_config_path);
-		(void) report_config_errors(&err_type, NULL, config_errs_to_log);
+		(void)report_config_errors(&err_type, NULL, config_errs_to_log);
 		return false;
 	}
 
@@ -203,7 +203,7 @@ bool reread_config(void)
 		return false;
 	}
 
-	(void) report_config_errors(&err_type, NULL, config_errs_to_log);
+	(void)report_config_errors(&err_type, NULL, config_errs_to_log);
 	config_Free(config_struct);
 	return true;
 }
@@ -235,8 +235,9 @@ static void *sigmgr_thread(void *UnusedArg)
 			continue;
 		}
 		if (signal_caught == SIGHUP) {
-			LogEvent(COMPONENT_MAIN,
-				 "SIGHUP_HANDLER: Received SIGHUP.... initiating export list reload");
+			LogEvent(
+				COMPONENT_MAIN,
+				"SIGHUP_HANDLER: Received SIGHUP.... initiating export list reload");
 			reread_config();
 #ifdef _HAVE_GSSAPI
 			svcauth_gss_release_cred();
@@ -251,7 +252,6 @@ static void *sigmgr_thread(void *UnusedArg)
 	rcu_unregister_thread();
 	return NULL;
 }
-
 
 static void crash_handler(int signo, siginfo_t *info, void *ctx)
 {
@@ -316,8 +316,8 @@ void nfs_prereq_init(const char *program_name, const char *host_name,
 	PTHREAD_RWLOCKATTR_init(&default_rwlock_attr);
 #if defined(__linux__)
 	PTHREAD_RWLOCKATTR_setkind_np(
-				&default_rwlock_attr,
-				PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
+		&default_rwlock_attr,
+		PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP);
 #endif
 
 	PTHREAD_stack_size = stack_size;
@@ -379,16 +379,16 @@ void nfs_print_param_config(void)
 	printf("\tDRC_UDP_Checksum = %u ;\n",
 	       nfs_param.core_param.drc.udp.checksum);
 	printf("\tBlocked_Lock_Poller_Interval = %" PRIu64 " ;\n",
-	       (uint64_t) nfs_param.core_param.blocked_lock_poller_interval);
+	       (uint64_t)nfs_param.core_param.blocked_lock_poller_interval);
 
 	printf("\tManage_Gids_Expiration = %" PRIu64 " ;\n",
-	       (uint64_t) nfs_param.core_param.manage_gids_expiration);
+	       (uint64_t)nfs_param.core_param.manage_gids_expiration);
 
 	printf("\tDrop_IO_Errors = %s ;\n",
-	       nfs_param.core_param.drop_io_errors ?  "true" : "false");
+	       nfs_param.core_param.drop_io_errors ? "true" : "false");
 
 	printf("\tDrop_Inval_Errors = %s ;\n",
-	       nfs_param.core_param.drop_inval_errors ?  "true" : "false");
+	       nfs_param.core_param.drop_inval_errors ? "true" : "false");
 
 	printf("\tDrop_Delay_Errors = %s ;\n",
 	       nfs_param.core_param.drop_delay_errors ? "true" : "false");
@@ -426,11 +426,8 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 	server_pkginit();
 
 	/* Core parameters */
-	(void) load_config_from_parse(parse_tree,
-				      &nfs_core,
-				      &nfs_param.core_param,
-				      true,
-				      err_type);
+	(void)load_config_from_parse(parse_tree, &nfs_core,
+				     &nfs_param.core_param, true, err_type);
 	if (!config_error_is_harmless(err_type)) {
 		LogCrit(COMPONENT_INIT,
 			"Error while parsing core configuration");
@@ -440,11 +437,8 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 	/* Worker parameters: ip/name hash table and expiration
 	 * for each entry
 	 */
-	(void) load_config_from_parse(parse_tree,
-				      &nfs_ip_name,
-				      NULL,
-				      true,
-				      err_type);
+	(void)load_config_from_parse(parse_tree, &nfs_ip_name, NULL, true,
+				     err_type);
 	if (!config_error_is_harmless(err_type)) {
 		LogCrit(COMPONENT_INIT,
 			"Error while parsing IP/name configuration");
@@ -453,11 +447,8 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 
 #ifdef _HAVE_GSSAPI
 	/* NFS kerberos5 configuration */
-	(void) load_config_from_parse(parse_tree,
-				      &krb5_param,
-				      &nfs_param.krb5_param,
-				      true,
-				      err_type);
+	(void)load_config_from_parse(parse_tree, &krb5_param,
+				     &nfs_param.krb5_param, true, err_type);
 	if (!config_error_is_harmless(err_type)) {
 		LogCrit(COMPONENT_INIT,
 			"Error while parsing NFS/KRB5 configuration for RPCSEC_GSS");
@@ -466,11 +457,8 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 #endif
 
 	/* NFSv4 specific configuration */
-	(void) load_config_from_parse(parse_tree,
-				      &version4_param,
-				      &nfs_param.nfsv4_param,
-				      true,
-				      err_type);
+	(void)load_config_from_parse(parse_tree, &version4_param,
+				     &nfs_param.nfsv4_param, true, err_type);
 	if (!config_error_is_harmless(err_type)) {
 		LogCrit(COMPONENT_INIT,
 			"Error while parsing NFSv4 specific configuration");
@@ -478,11 +466,8 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 	}
 
 #ifdef _USE_9P
-	(void) load_config_from_parse(parse_tree,
-				      &_9p_param_blk,
-				      NULL,
-				      true,
-				      err_type);
+	(void)load_config_from_parse(parse_tree, &_9p_param_blk, NULL, true,
+				     err_type);
 	if (!config_error_is_harmless(err_type)) {
 		LogCrit(COMPONENT_INIT,
 			"Error while parsing 9P specific configuration");
@@ -589,9 +574,10 @@ static void nfs_Start_threads(void)
 		rc = PTHREAD_create(&_9p_dispatcher_thrid, &attr_thr,
 				    _9p_dispatcher_thread, NULL);
 		if (rc != 0) {
-			LogFatal(COMPONENT_THREAD,
-				 "Could not create  9P/TCP dispatcher, error = %d (%s)",
-				 errno, strerror(errno));
+			LogFatal(
+				COMPONENT_THREAD,
+				"Could not create  9P/TCP dispatcher, error = %d (%s)",
+				errno, strerror(errno));
 		}
 		LogEvent(COMPONENT_THREAD,
 			 "9P/TCP dispatcher thread was started successfully");
@@ -605,9 +591,10 @@ static void nfs_Start_threads(void)
 		rc = PTHREAD_create(&_9p_rdma_dispatcher_thrid, &attr_thr,
 				    _9p_rdma_dispatcher_thread, NULL);
 		if (rc != 0) {
-			LogFatal(COMPONENT_THREAD,
-				 "Could not create  9P/RDMA dispatcher, error = %d (%s)",
-				 errno, strerror(errno));
+			LogFatal(
+				COMPONENT_THREAD,
+				"Could not create  9P/RDMA dispatcher, error = %d (%s)",
+				errno, strerror(errno));
 		}
 		LogEvent(COMPONENT_THREAD,
 			 "9P/RDMA dispatcher thread was started successfully");
@@ -655,7 +642,6 @@ static void nfs_Start_threads(void)
 	PTHREAD_ATTR_destroy(&attr_thr);
 }
 
-
 /**
  * @brief Initialise NFSv4 specific parameters.
  *
@@ -673,17 +659,15 @@ int nfsv4_init_params(void)
 	/* Set up the server owner string */
 	if (nfs_param.nfsv4_param.server_owner == NULL) {
 		/* If the server owner param is NULL, set it to hostname */
-		if (gsh_gethostname(
-			cid_server_owner, sizeof(cid_server_owner),
-			nfs_param.core_param.enable_AUTHSTATS) == -1) {
-			LogCrit(COMPONENT_NFS_V4,
-				"gsh_gethostname failed");
+		if (gsh_gethostname(cid_server_owner, sizeof(cid_server_owner),
+				    nfs_param.core_param.enable_AUTHSTATS) ==
+		    -1) {
+			LogCrit(COMPONENT_NFS_V4, "gsh_gethostname failed");
 			return -1;
 		}
 	} else {
-		rc = snprintf(cid_server_owner,
-				sizeof(cid_server_owner), "%s",
-				nfs_param.nfsv4_param.server_owner);
+		rc = snprintf(cid_server_owner, sizeof(cid_server_owner), "%s",
+			      nfs_param.nfsv4_param.server_owner);
 		/* Assert that server owner conf param is not too long.
 		 * this should never happen since it is validated during
 		 * conf parsing */
@@ -699,9 +683,8 @@ int nfsv4_init_params(void)
 		scope_len = owner_len + ss_suffix_len;
 		cid_server_scope = gsh_malloc(scope_len + 1);
 		memcpy(cid_server_scope, cid_server_owner, owner_len);
-		memcpy(cid_server_scope + owner_len,
-				cid_server_scope_suffix,
-				ss_suffix_len + 1);
+		memcpy(cid_server_scope + owner_len, cid_server_scope_suffix,
+		       ss_suffix_len + 1);
 	} else {
 		cid_server_scope = nfs_param.nfsv4_param.server_scope;
 	}
@@ -740,8 +723,8 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	 */
 	exports_pkginit();
 
-	nfs41_session_pool =
-	    pool_basic_init("NFSv4.1 session pool", sizeof(nfs41_session_t));
+	nfs41_session_pool = pool_basic_init("NFSv4.1 session pool",
+					     sizeof(nfs41_session_t));
 
 	/* If rpcsec_gss is used, set the path to the keytab */
 #ifdef _HAVE_GSSAPI
@@ -751,7 +734,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 
 		if (strcmp(nfs_param.krb5_param.keytab, DEFAULT_NFS_KEYTAB))
 			gss_status = krb5_gss_register_acceptor_identity(
-						nfs_param.krb5_param.keytab);
+				nfs_param.krb5_param.keytab);
 
 		if (gss_status != GSS_S_COMPLETE) {
 			log_sperror_gss(GssError, gss_status, 0);
@@ -762,7 +745,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 		LogInfo(COMPONENT_INIT,
 			"krb5 keytab path successfully set to %s",
 			nfs_param.krb5_param.keytab);
-#endif				/* HAVE_KRB5 */
+#endif /* HAVE_KRB5 */
 
 		/* Set up principal to be use for GSSAPPI within GSSRPC/KRB5 */
 		gss_service_buf.value = nfs_param.krb5_param.svc.principal;
@@ -771,7 +754,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 		/* The '+1' is not to be forgotten, for the '\0' at the end */
 
 		maj_stat = gss_import_name(&min_stat, &gss_service_buf,
-					   (gss_OID) GSS_C_NT_HOSTBASED_SERVICE,
+					   (gss_OID)GSS_C_NT_HOSTBASED_SERVICE,
 					   &nfs_param.krb5_param.svc.gss_name);
 		if (maj_stat != GSS_S_COMPLETE) {
 			log_sperror_gss(GssError, maj_stat, min_stat);
@@ -788,8 +771,8 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 			nfs_param.krb5_param.svc.principal);
 
 		/* Set the principal to GSSRPC */
-		if (!svcauth_gss_set_svc_name
-		    (nfs_param.krb5_param.svc.gss_name)) {
+		if (!svcauth_gss_set_svc_name(
+			    nfs_param.krb5_param.svc.gss_name)) {
 			LogFatal(COMPONENT_INIT,
 				 "Impossible to set gss principal to GSSRPC");
 		}
@@ -798,13 +781,12 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 		 * backchannel. */
 
 #ifdef HAVE_KRB5
-	}			/*  if( nfs_param.krb5_param.active_krb5 ) */
-#endif				/* HAVE_KRB5 */
-#endif				/* _HAVE_GSSAPI */
+	} /*  if( nfs_param.krb5_param.active_krb5 ) */
+#endif /* HAVE_KRB5 */
+#endif /* _HAVE_GSSAPI */
 	/* Init the NFSv4 Clientid cache */
 	LogDebug(COMPONENT_INIT, "Now building NFSv4 clientid cache");
-	if (nfs_Init_client_id() !=
-	    CLIENT_ID_SUCCESS) {
+	if (nfs_Init_client_id() != CLIENT_ID_SUCCESS) {
 		LogFatal(COMPONENT_INIT,
 			 "Error while initializing NFSv4 clientid cache");
 	}
@@ -876,11 +858,11 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	if (nfs_param.core_param.core_options & CORE_OPTION_NFSV4) {
 		/* Initialise NFSv4 specific parameters */
 		if (nfsv4_init_params() != 0) {
-			LogFatal(COMPONENT_INIT,
-			  "Error while initializing NFSv4 specific parameter");
+			LogFatal(
+				COMPONENT_INIT,
+				"Error while initializing NFSv4 specific parameter");
 		}
-		LogInfo(COMPONENT_INIT,
-			"NFSv4 specific parameter initialized");
+		LogInfo(COMPONENT_INIT, "NFSv4 specific parameter initialized");
 	}
 #ifdef _USE_9P
 	LogDebug(COMPONENT_INIT, "Now building 9P resources");
@@ -889,7 +871,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 			 "Error while initializing 9P Resources");
 	}
 	LogInfo(COMPONENT_INIT, "9P resources successfully initialized");
-#endif				/* _USE_9P */
+#endif /* _USE_9P */
 
 	/* Creates the pseudo fs */
 	LogDebug(COMPONENT_INIT, "Now building pseudo fs");
@@ -913,9 +895,9 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	nfs_rpc_cb_pkginit();
 #ifdef _USE_CB_SIMULATOR
 	nfs_rpc_cbsim_pkginit();
-#endif				/*  _USE_CB_SIMULATOR */
+#endif /*  _USE_CB_SIMULATOR */
 
-}				/* nfs_Init */
+} /* nfs_Init */
 
 #ifdef USE_CAPS
 /**
@@ -928,7 +910,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 
 static void lower_my_caps(void)
 {
-	cap_value_t cap_values[] = {CAP_SYS_RESOURCE};
+	cap_value_t cap_values[] = { CAP_SYS_RESOURCE };
 	cap_t cap;
 	char *cap_text;
 	ssize_t capstrlen = 0;
@@ -941,32 +923,32 @@ static void lower_my_caps(void)
 
 	cap = cap_get_proc();
 	if (cap == NULL) {
-		LogFatal(COMPONENT_INIT,
-			 "cap_get_proc() failed, %s", strerror(errno));
+		LogFatal(COMPONENT_INIT, "cap_get_proc() failed, %s",
+			 strerror(errno));
 	}
 
 	ret = cap_set_flag(cap, CAP_EFFECTIVE,
 			   sizeof(cap_values) / sizeof(cap_values[0]),
 			   cap_values, CAP_CLEAR);
 	if (ret != 0) {
-		LogFatal(COMPONENT_INIT,
-			 "cap_set_flag() failed, %s", strerror(errno));
+		LogFatal(COMPONENT_INIT, "cap_set_flag() failed, %s",
+			 strerror(errno));
 	}
 
 	ret = cap_set_flag(cap, CAP_PERMITTED,
 			   sizeof(cap_values) / sizeof(cap_values[0]),
 			   cap_values, CAP_CLEAR);
 	if (ret != 0) {
-		LogFatal(COMPONENT_INIT,
-			 "cap_set_flag() failed, %s", strerror(errno));
+		LogFatal(COMPONENT_INIT, "cap_set_flag() failed, %s",
+			 strerror(errno));
 	}
 
 	ret = cap_set_flag(cap, CAP_INHERITABLE,
 			   sizeof(cap_values) / sizeof(cap_values[0]),
 			   cap_values, CAP_CLEAR);
 	if (ret != 0) {
-		LogFatal(COMPONENT_INIT,
-			 "cap_set_flag() failed, %s", strerror(errno));
+		LogFatal(COMPONENT_INIT, "cap_set_flag() failed, %s",
+			 strerror(errno));
 	}
 
 	ret = cap_set_proc(cap);
@@ -976,8 +958,9 @@ static void lower_my_caps(void)
 			 strerror(errno));
 	}
 
-	LogEvent(COMPONENT_INIT,
-		 "CAP_SYS_RESOURCE was successfully removed for proper quota management in FSAL");
+	LogEvent(
+		COMPONENT_INIT,
+		"CAP_SYS_RESOURCE was successfully removed for proper quota management in FSAL");
 
 	/* Print newly set capabilities (same as what CLI "getpcaps" displays */
 	cap_text = cap_to_text(cap, &capstrlen);
@@ -992,13 +975,13 @@ static void lower_my_caps(void)
 #define THIRTY_MIN 1800000000000UL
 static void do_malloc_trim(void *param)
 {
-	LogDebug(COMPONENT_MAIN, malloc_trim(0) ?
-		 "malloc_trim() released some memory" :
-		 "malloc_trim() was not able to release memory");
-	(void) delayed_submit(do_malloc_trim, 0, THIRTY_MIN);
+	LogDebug(COMPONENT_MAIN,
+		 malloc_trim(0) ?
+			 "malloc_trim() released some memory" :
+			 "malloc_trim() was not able to release memory");
+	(void)delayed_submit(do_malloc_trim, 0, THIRTY_MIN);
 }
 #endif
-
 
 /**
  * @brief Start NFS service
@@ -1026,7 +1009,7 @@ void nfs_start(nfs_start_info_t *p_start_info)
 			uint64_t epoch;
 		} build_verifier;
 
-		build_verifier.epoch = (uint64_t) nfs_ServerEpoch;
+		build_verifier.epoch = (uint64_t)nfs_ServerEpoch;
 
 		memcpy(NFS3_write_verifier, build_verifier.NFS3_write_verifier,
 		       sizeof(NFS3_write_verifier));
@@ -1043,7 +1026,7 @@ void nfs_start(nfs_start_info_t *p_start_info)
 	nfs_Start_threads(); /* Spawns service threads */
 
 #if defined(M_TRIM_THRESHOLD)
-	(void) delayed_submit(do_malloc_trim, 0, THIRTY_MIN);
+	(void)delayed_submit(do_malloc_trim, 0, THIRTY_MIN);
 #endif
 
 	nfs_init_complete();
@@ -1149,8 +1132,8 @@ bool nfs_health(void)
 			"Health status is unhealthy. "
 			"enq new: %" PRIu64 ", old: %" PRIu64 "; "
 			"deq new: %" PRIu64 ", old: %" PRIu64,
-			newenq, healthstats.enqueued_reqs,
-			newdeq, healthstats.dequeued_reqs);
+			newenq, healthstats.enqueued_reqs, newdeq,
+			healthstats.dequeued_reqs);
 	}
 
 	healthstats.enqueued_reqs = newenq;

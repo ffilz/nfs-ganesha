@@ -34,7 +34,7 @@
 #include "config.h"
 
 #include "fsal.h"
-#include <libgen.h>		/* used for 'dirname' */
+#include <libgen.h> /* used for 'dirname' */
 #include <pthread.h>
 #include <string.h>
 #include <sys/types.h>
@@ -68,15 +68,13 @@ static void release(struct fsal_export *exp_hdl)
 	myself = EXPORT_VFS_FROM_FSAL(exp_hdl);
 
 	if (op_ctx != NULL && op_ctx->ctx_export != NULL) {
-		LogDebug(COMPONENT_FSAL, "Releasing VFS export %"PRIu16
-			 " for %s",
-			 exp_hdl->export_id,
-			 ctx_export_path(op_ctx));
+		LogDebug(COMPONENT_FSAL,
+			 "Releasing VFS export %" PRIu16 " for %s",
+			 exp_hdl->export_id, ctx_export_path(op_ctx));
 	} else {
-		LogDebug(COMPONENT_FSAL, "Releasing VFS export %"PRIu16
-			 " on filesystem %s",
-			 exp_hdl->export_id,
-			 exp_hdl->root_fs->path);
+		LogDebug(COMPONENT_FSAL,
+			 "Releasing VFS export %" PRIu16 " on filesystem %s",
+			 exp_hdl->export_id, exp_hdl->root_fs->path);
 	}
 
 	vfs_sub_fini(myself);
@@ -86,7 +84,7 @@ static void release(struct fsal_export *exp_hdl)
 	fsal_detach_export(exp_hdl->fsal, &exp_hdl->exports);
 	free_export_ops(exp_hdl);
 
-	gsh_free(myself);	/* elvis has left the building */
+	gsh_free(myself); /* elvis has left the building */
 }
 
 static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
@@ -97,13 +95,14 @@ static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
 	int retval = 0;
 
-	LogFullDebug(COMPONENT_FSAL, "About to check obj %p fs %p",
-		     obj_hdl, obj_hdl->fs);
+	LogFullDebug(COMPONENT_FSAL, "About to check obj %p fs %p", obj_hdl,
+		     obj_hdl->fs);
 
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
-		LogDebug(COMPONENT_FSAL,
-			 "FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
-			 obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
+		LogDebug(
+			COMPONENT_FSAL,
+			"FSAL %s operation for handle belonging to FSAL %s, return EXDEV",
+			obj_hdl->fsal->name, obj_hdl->fs->fsal->name);
 		retval = EXDEV;
 		fsal_error = posix2fsal_error(retval);
 		goto out;
@@ -126,7 +125,7 @@ static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
 	infop->time_delta.tv_sec = 0;
 	infop->time_delta.tv_nsec = FSAL_DEFAULT_TIME_DELTA_NSEC;
 
- out:
+out:
 	return fsalstat(fsal_error, retval);
 }
 
@@ -141,8 +140,7 @@ static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
 
 static fsal_status_t get_quota(struct fsal_export *exp_hdl,
 			       const char *filepath, int quota_type,
-			       int quota_id,
-			       fsal_quota_t *pquota)
+			       int quota_id, fsal_quota_t *pquota)
 {
 	struct dqblk fs_quota;
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
@@ -166,8 +164,8 @@ static fsal_status_t get_quota(struct fsal_export *exp_hdl,
 
 	/** @todo need to get the right file system... */
 	retval = QUOTACTL(QCMD(Q_GETQUOTA, quota_type),
-			  exp_hdl->root_fs->device,
-			  quota_id, (caddr_t) &fs_quota);
+			  exp_hdl->root_fs->device, quota_id,
+			  (caddr_t)&fs_quota);
 	errsv = errno;
 	vfs_restore_ganesha_credentials(exp_hdl->fsal);
 
@@ -186,7 +184,7 @@ static fsal_status_t get_quota(struct fsal_export *exp_hdl,
 	pquota->ftimeleft = fs_quota.dqb_itime;
 	pquota->bsize = DEV_BSIZE;
 
- out:
+out:
 	return fsalstat(fsal_error, retval);
 }
 
@@ -196,8 +194,8 @@ static fsal_status_t get_quota(struct fsal_export *exp_hdl,
 
 static fsal_status_t set_quota(struct fsal_export *exp_hdl,
 			       const char *filepath, int quota_type,
-			       int quota_id,
-			       fsal_quota_t *pquota, fsal_quota_t *presquota)
+			       int quota_id, fsal_quota_t *pquota,
+			       fsal_quota_t *presquota)
 {
 	struct dqblk fs_quota;
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
@@ -245,8 +243,8 @@ static fsal_status_t set_quota(struct fsal_export *exp_hdl,
 
 	/** @todo need to get the right file system... */
 	retval = QUOTACTL(QCMD(Q_SETQUOTA, quota_type),
-			  exp_hdl->root_fs->device,
-			  quota_id, (caddr_t) &fs_quota);
+			  exp_hdl->root_fs->device, quota_id,
+			  (caddr_t)&fs_quota);
 	errsv = errno;
 	vfs_restore_ganesha_credentials(exp_hdl->fsal);
 
@@ -256,10 +254,10 @@ static fsal_status_t set_quota(struct fsal_export *exp_hdl,
 		goto err;
 	}
 	if (presquota != NULL)
-		return get_quota(exp_hdl, filepath, quota_type,
-				 quota_id, presquota);
+		return get_quota(exp_hdl, filepath, quota_type, quota_id,
+				 presquota);
 
- err:
+err:
 	return fsalstat(fsal_error, retval);
 }
 
@@ -278,8 +276,7 @@ static fsal_status_t set_quota(struct fsal_export *exp_hdl,
 
 static fsal_status_t wire_to_host(struct fsal_export *exp_hdl,
 				  fsal_digesttype_t in_type,
-				  struct gsh_buffdesc *fh_desc,
-				  int flags)
+				  struct gsh_buffdesc *fh_desc, int flags)
 {
 	struct fsal_filesystem *fs;
 	bool dummy;
@@ -290,7 +287,6 @@ static fsal_status_t wire_to_host(struct fsal_export *exp_hdl,
 	return vfs_check_handle(exp_hdl, fh_desc, &fs, fh, &dummy);
 }
 
-
 /**
  * @brief Function to get the fasl_obj_handle that has fsal_fd as its global fd.
  *
@@ -300,9 +296,8 @@ static fsal_status_t wire_to_host(struct fsal_export *exp_hdl,
  *
  * @return the fsal_obj_handle.
  */
-void get_fsal_obj_hdl(struct fsal_export *exp_hdl,
-				  struct fsal_fd *fd,
-				  struct fsal_obj_handle **handle)
+void get_fsal_obj_hdl(struct fsal_export *exp_hdl, struct fsal_fd *fd,
+		      struct fsal_obj_handle **handle)
 {
 	struct vfs_fd *my_fd = NULL;
 	struct vfs_fsal_obj_handle *myself = NULL;
@@ -312,7 +307,6 @@ void get_fsal_obj_hdl(struct fsal_export *exp_hdl,
 
 	*handle = &myself->obj_handle;
 }
-
 
 /* vfs_export_ops_init
  * overwrite vector entries with the methods that we support
@@ -331,8 +325,7 @@ void vfs_export_ops_init(struct export_ops *ops)
 	ops->get_fsal_obj_hdl = get_fsal_obj_hdl;
 }
 
-int vfs_claim_filesystem(struct fsal_filesystem *fs,
-			 struct fsal_export *exp,
+int vfs_claim_filesystem(struct fsal_filesystem *fs, struct fsal_export *exp,
 			 void **private_data)
 {
 	int retval = 0, fd;
@@ -344,9 +337,10 @@ int vfs_claim_filesystem(struct fsal_filesystem *fs,
 		/* Already claimed, and private_data is already set, nothing to
 		 * do here.
 		 */
-		LogDebug(COMPONENT_FSAL,
-			 "file system %s is already claimed with fd %d private_data %p",
-			 fs->path, (int) (long) *private_data, *private_data);
+		LogDebug(
+			COMPONENT_FSAL,
+			"file system %s is already claimed with fd %d private_data %p",
+			fs->path, (int)(long)*private_data, *private_data);
 		return 0;
 	}
 
@@ -364,11 +358,11 @@ int vfs_claim_filesystem(struct fsal_filesystem *fs,
 		goto errout;
 	}
 
-	*private_data = (void *) (long) fd;
+	*private_data = (void *)(long)fd;
 
 	LogDebug(COMPONENT_FSAL,
-		 "claiming file system %s fd %d (private_data %p)",
-		 fs->path, fd, *private_data);
+		 "claiming file system %s fd %d (private_data %p)", fs->path,
+		 fd, *private_data);
 
 errout:
 
@@ -382,9 +376,7 @@ void vfs_unclaim_filesystem(struct fsal_filesystem *fs)
 	if (root_fd(fs) > 0)
 		close(root_fd(fs));
 
-	LogInfo(COMPONENT_FSAL,
-		"VFS Unclaiming %s",
-		fs->path);
+	LogInfo(COMPONENT_FSAL, "VFS Unclaiming %s", fs->path);
 }
 
 /* create_export
@@ -394,14 +386,13 @@ void vfs_unclaim_filesystem(struct fsal_filesystem *fs)
  * returns the export with one reference taken.
  */
 
-fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl,
-				void *parse_node,
+fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 				struct config_error_type *err_type,
 				const struct fsal_up_vector *up_ops)
 {
 	struct vfs_fsal_export *myself;
 	int retval = 0;
-	fsal_status_t fsal_status = {0, 0};
+	fsal_status_t fsal_status = { 0, 0 };
 
 	vfs_state_init();
 
@@ -410,11 +401,8 @@ fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl,
 	fsal_export_init(&myself->export);
 	vfs_export_ops_init(&myself->export.exp_ops);
 
-	retval = load_config_from_node(parse_node,
-				       vfs_sub_export_param,
-				       myself,
-				       true,
-				       err_type);
+	retval = load_config_from_node(parse_node, vfs_sub_export_param, myself,
+				       true, err_type);
 	if (retval != 0) {
 		fsal_status = posix2fsal_status(EINVAL);
 		goto err_free;
@@ -425,20 +413,18 @@ fsal_status_t vfs_create_export(struct fsal_module *fsal_hdl,
 	retval = fsal_attach_export(fsal_hdl, &myself->export.exports);
 	if (retval != 0) {
 		fsal_status = posix2fsal_status(retval);
-		goto err_free;	/* seriously bad */
+		goto err_free; /* seriously bad */
 	}
 
-	retval = resolve_posix_filesystem(CTX_FULLPATH(op_ctx),
-					  fsal_hdl, &myself->export,
-					  vfs_claim_filesystem,
+	retval = resolve_posix_filesystem(CTX_FULLPATH(op_ctx), fsal_hdl,
+					  &myself->export, vfs_claim_filesystem,
 					  vfs_unclaim_filesystem,
 					  &myself->export.root_fs);
 
 	if (retval != 0) {
 		LogCrit(COMPONENT_FSAL,
 			"resolve_posix_filesystem(%s) returned %s (%d)",
-			CTX_FULLPATH(op_ctx),
-			strerror(retval), retval);
+			CTX_FULLPATH(op_ctx), strerror(retval), retval);
 		fsal_status = posix2fsal_status(retval);
 		goto err_cleanup;
 	}
@@ -460,7 +446,7 @@ err_cleanup:
 	fsal_detach_export(fsal_hdl, &myself->export.exports);
 err_free:
 	free_export_ops(&myself->export);
-	gsh_free(myself);	/* elvis has left the building */
+	gsh_free(myself); /* elvis has left the building */
 	return fsal_status;
 }
 
@@ -490,8 +476,7 @@ err_free:
  * @return FSAL status.
  */
 
-fsal_status_t vfs_update_export(struct fsal_module *fsal_hdl,
-				void *parse_node,
+fsal_status_t vfs_update_export(struct fsal_module *fsal_hdl, void *parse_node,
 				struct config_error_type *err_type,
 				struct fsal_export *original,
 				struct fsal_module *updated_super)
@@ -504,19 +489,16 @@ fsal_status_t vfs_update_export(struct fsal_module *fsal_hdl,
 	fsal_status_t status;
 
 	/* Check for changes in stacking by calling default update_export. */
-	status = update_export(fsal_hdl, parse_node, err_type,
-			       original, updated_super);
+	status = update_export(fsal_hdl, parse_node, err_type, original,
+			       updated_super);
 
 	if (FSAL_IS_ERROR(status))
 		return status;
 
 	memset(&myself, 0, sizeof(myself));
 
-	retval = load_config_from_node(parse_node,
-				       vfs_sub_export_param,
-				       &myself,
-				       true,
-				       err_type);
+	retval = load_config_from_node(parse_node, vfs_sub_export_param,
+				       &myself, true, err_type);
 
 	if (retval != 0) {
 		return posix2fsal_status(EINVAL);
@@ -534,7 +516,6 @@ fsal_status_t vfs_update_export(struct fsal_module *fsal_hdl,
 		invalid = true;
 	}
 
-	return invalid
-		? posix2fsal_status(EINVAL)
-		: fsalstat(ERR_FSAL_NO_ERROR, 0);
+	return invalid ? posix2fsal_status(EINVAL) :
+			 fsalstat(ERR_FSAL_NO_ERROR, 0);
 }

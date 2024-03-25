@@ -36,7 +36,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
-#include <signal.h>		/* for sigaction */
+#include <signal.h> /* for sigaction */
 #include <errno.h>
 #include "fsal.h"
 #include "log.h"
@@ -77,11 +77,9 @@
 
 /* parameters for NFSd startup and default values */
 
-nfs_start_info_t my_nfs_start_info = {
-	.dump_default_config = false,
-	.lw_mark_trigger = false,
-	.drop_caps = false
-};
+nfs_start_info_t my_nfs_start_info = { .dump_default_config = false,
+				       .lw_mark_trigger = false,
+				       .drop_caps = false };
 
 config_file_t nfs_config_struct;
 char *nfs_host_name = "localhost";
@@ -103,8 +101,7 @@ struct cleanup_list_element export_cleanup_element = {
  *
  */
 
-int nfs_libmain(const char *ganesha_conf,
-		const char *lpath,
+int nfs_libmain(const char *ganesha_conf, const char *lpath,
 		const int debug_level)
 {
 	char localmachine[MAXHOSTNAMELEN + 1];
@@ -117,7 +114,7 @@ int nfs_libmain(const char *ganesha_conf,
 
 	/* Set the server's boot time and epoch */
 	now(&nfs_ServerBootTime);
-	nfs_ServerEpoch = (time_t) nfs_ServerBootTime.tv_sec;
+	nfs_ServerEpoch = (time_t)nfs_ServerBootTime.tv_sec;
 
 	if (ganesha_conf)
 		nfs_config_path = gsh_strdup(ganesha_conf);
@@ -139,16 +136,15 @@ int nfs_libmain(const char *ganesha_conf,
 	}
 
 	/* initialize memory and logging */
-	nfs_prereq_init(exec_name, nfs_host_name, debug_level, log_path,
-			false, 8192 * 1024);
+	nfs_prereq_init(exec_name, nfs_host_name, debug_level, log_path, false,
+			8192 * 1024);
 #if GANESHA_BUILD_RELEASE
-	LogEvent(COMPONENT_MAIN, "%s Starting: Ganesha Version %s",
-		 exec_name, GANESHA_VERSION);
+	LogEvent(COMPONENT_MAIN, "%s Starting: Ganesha Version %s", exec_name,
+		 GANESHA_VERSION);
 #else
-	LogEvent(COMPONENT_MAIN, "%s Starting: %s",
-		 exec_name,
-		 "Ganesha Version " _GIT_DESCRIBE ", built at "
-		 __DATE__ " " __TIME__ " on " BUILD_HOST);
+	LogEvent(COMPONENT_MAIN, "%s Starting: %s", exec_name,
+		 "Ganesha Version " _GIT_DESCRIBE ", built at " __DATE__
+		 " " __TIME__ " on " BUILD_HOST);
 #endif
 
 	/* initialize nfs_init */
@@ -168,8 +164,7 @@ int nfs_libmain(const char *ganesha_conf,
 	sigemptyset(&signals_to_block);
 	sigaddset(&signals_to_block, SIGPIPE); /* XXX */
 	if (pthread_sigmask(SIG_BLOCK, &signals_to_block, NULL) != 0)
-		LogFatal(COMPONENT_MAIN,
-			 "pthread_sigmask failed");
+		LogFatal(COMPONENT_MAIN, "pthread_sigmask failed");
 
 	/* init URL package */
 	config_url_init();
@@ -179,8 +174,7 @@ int nfs_libmain(const char *ganesha_conf,
 		goto fatal_die;
 
 	if (nfs_config_path == NULL || nfs_config_path[0] == '\0') {
-		LogWarn(COMPONENT_INIT,
-			"No configuration file named.");
+		LogWarn(COMPONENT_INIT, "No configuration file named.");
 		nfs_config_struct = NULL;
 	} else
 		nfs_config_struct =
@@ -190,16 +184,14 @@ int nfs_libmain(const char *ganesha_conf,
 		char *errstr = err_type_str(&err_type);
 
 		if (!config_error_is_harmless(&err_type)) {
-			LogCrit(COMPONENT_INIT,
-				 "Error %s while parsing (%s)",
-				 errstr != NULL ? errstr : "unknown",
-				 nfs_config_path);
+			LogCrit(COMPONENT_INIT, "Error %s while parsing (%s)",
+				errstr != NULL ? errstr : "unknown",
+				nfs_config_path);
 			if (errstr != NULL)
 				gsh_free(errstr);
 			goto fatal_die;
 		} else
-			LogWarn(COMPONENT_INIT,
-				"Error %s while parsing (%s)",
+			LogWarn(COMPONENT_INIT, "Error %s while parsing (%s)",
 				errstr != NULL ? errstr : "unknown",
 				nfs_config_path);
 		if (errstr != NULL)
@@ -208,7 +200,7 @@ int nfs_libmain(const char *ganesha_conf,
 
 	if (read_log_config(nfs_config_struct, &err_type) < 0) {
 		LogCrit(COMPONENT_INIT,
-			 "Error while parsing log configuration");
+			"Error while parsing log configuration");
 		goto fatal_die;
 	}
 
@@ -216,25 +208,22 @@ int nfs_libmain(const char *ganesha_conf,
 	 * the list available at exports parsing time.
 	 */
 	if (start_fsals(nfs_config_struct, &err_type) < 0) {
-		LogCrit(COMPONENT_INIT,
-			 "Error starting FSALs.");
+		LogCrit(COMPONENT_INIT, "Error starting FSALs.");
 		goto fatal_die;
 	}
 
 	/* parse configuration file */
 
-	if (nfs_set_param_from_conf(nfs_config_struct,
-				    &my_nfs_start_info,
+	if (nfs_set_param_from_conf(nfs_config_struct, &my_nfs_start_info,
 				    &err_type)) {
 		LogCrit(COMPONENT_INIT,
-			 "Error setting parameters from configuration file.");
+			"Error setting parameters from configuration file.");
 		goto fatal_die;
 	}
 
 	/* initialize core subsystems and data structures */
 	if (init_server_pkgs() != 0) {
-		LogCrit(COMPONENT_INIT,
-			"Failed to initialize server packages");
+		LogCrit(COMPONENT_INIT, "Failed to initialize server packages");
 		goto fatal_die;
 	}
 
@@ -243,11 +232,9 @@ int nfs_libmain(const char *ganesha_conf,
 	 */
 	dsc = ReadDataServers(nfs_config_struct, &err_type);
 	if (dsc < 0) {
-		LogCrit(COMPONENT_INIT,
-			"Error while parsing DS entries");
+		LogCrit(COMPONENT_INIT, "Error while parsing DS entries");
 		goto fatal_die;
 	}
-
 
 	/* Create stable storage directory, this needs to be done before
 	 * starting the recovery thread.
@@ -255,7 +242,7 @@ int nfs_libmain(const char *ganesha_conf,
 	rc = nfs4_recovery_init();
 	if (rc) {
 		LogCrit(COMPONENT_INIT,
-			  "Recovery backend initialization failed!");
+			"Recovery backend initialization failed!");
 		goto fatal_die;
 	}
 
@@ -273,14 +260,13 @@ int nfs_libmain(const char *ganesha_conf,
 	 */
 	rc = ReadExports(nfs_config_struct, &err_type);
 	if (rc < 0) {
-		LogCrit(COMPONENT_INIT,
-			  "Error while parsing export entries");
+		LogCrit(COMPONENT_INIT, "Error while parsing export entries");
 		goto fatal_die;
 	}
 	if (rc == 0 && dsc == 0)
 		LogWarn(COMPONENT_INIT,
 			"No export entries found in configuration file !!!");
-	(void) report_config_errors(&err_type, NULL, config_errs_to_log);
+	(void)report_config_errors(&err_type, NULL, config_errs_to_log);
 
 	/* freeing syntax tree : */
 
@@ -294,9 +280,8 @@ int nfs_libmain(const char *ganesha_conf,
 	return 0;
 
 fatal_die:
-	(void) report_config_errors(&err_type, NULL, config_errs_to_log);
-	LogFatal(COMPONENT_INIT,
-		 "Fatal errors.  Server exiting...");
+	(void)report_config_errors(&err_type, NULL, config_errs_to_log);
+	LogFatal(COMPONENT_INIT, "Fatal errors.  Server exiting...");
 	/* NOT REACHED */
 	return 2;
 }

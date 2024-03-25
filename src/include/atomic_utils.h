@@ -36,9 +36,8 @@
  */
 
 #if defined(GCC_ATOMIC_FUNCTIONS) | defined(GCC_SYNC_FUNCTIONS)
-static inline
-bool PTHREAD_MUTEX_dec_int64_t_and_lock(int64_t *var,
-					pthread_mutex_t *lock)
+static inline bool PTHREAD_MUTEX_dec_int64_t_and_lock(int64_t *var,
+						      pthread_mutex_t *lock)
 {
 	if (atomic_add_unless_int64_t(var, -1, 1))
 		return false;
@@ -61,9 +60,8 @@ bool PTHREAD_MUTEX_dec_int64_t_and_lock(int64_t *var,
  */
 
 #if defined(GCC_ATOMIC_FUNCTIONS) | defined(GCC_SYNC_FUNCTIONS)
-static inline
-bool PTHREAD_MUTEX_dec_uint64_t_and_lock(uint64_t *var,
-					 pthread_mutex_t *lock)
+static inline bool PTHREAD_MUTEX_dec_uint64_t_and_lock(uint64_t *var,
+						       pthread_mutex_t *lock)
 {
 	if (atomic_add_unless_uint64_t(var, -1, 1))
 		return false;
@@ -86,9 +84,8 @@ bool PTHREAD_MUTEX_dec_uint64_t_and_lock(uint64_t *var,
  */
 
 #if defined(GCC_ATOMIC_FUNCTIONS) | defined(GCC_SYNC_FUNCTIONS)
-static inline
-bool PTHREAD_MUTEX_dec_int32_t_and_lock(int32_t *var,
-					pthread_mutex_t *lock)
+static inline bool PTHREAD_MUTEX_dec_int32_t_and_lock(int32_t *var,
+						      pthread_mutex_t *lock)
 {
 	if (atomic_add_unless_int32_t(var, -1, 1))
 		return false;
@@ -111,9 +108,8 @@ bool PTHREAD_MUTEX_dec_int32_t_and_lock(int32_t *var,
  */
 
 #if defined(GCC_ATOMIC_FUNCTIONS) | defined(GCC_SYNC_FUNCTIONS)
-static inline
-bool PTHREAD_MUTEX_dec_uint32_t_and_lock(uint32_t *var,
-					 pthread_mutex_t *lock)
+static inline bool PTHREAD_MUTEX_dec_uint32_t_and_lock(uint32_t *var,
+						       pthread_mutex_t *lock)
 {
 	if (atomic_add_unless_uint32_t(var, -1, 1))
 		return false;
@@ -126,4 +122,4 @@ bool PTHREAD_MUTEX_dec_uint32_t_and_lock(uint32_t *var,
 }
 #endif
 
-#endif				/* !ATOMIC_UTILS_H */
+#endif /* !ATOMIC_UTILS_H */

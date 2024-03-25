@@ -128,7 +128,7 @@ static const struct op_name optnlm[] = {
  */
 
 enum proto_op_type {
-	GENERAL_OP = 0,		/* default for array init */
+	GENERAL_OP = 0, /* default for array init */
 	READ_OP,
 	WRITE_OP,
 	LAYOUT_OP
@@ -217,17 +217,17 @@ struct nfsv4_ops {
 /* basic op counter
  */
 struct op_count {
-	uint64_t total;		/* total of any kind */
-	uint64_t errors;	/* ! NFS_OK */
-	uint64_t dups;		/* detected dup requests */
+	uint64_t total; /* total of any kind */
+	uint64_t errors; /* ! NFS_OK */
+	uint64_t dups; /* detected dup requests */
 };
 
 struct proto_op {
-	uint64_t total;		/* total of any kind */
-	uint64_t errors;	/* ! NFS_OK */
-	uint64_t dups;		/* detected dup requests */
-	struct op_latency latency;	/* either executed ops latency */
-	struct op_latency dup_latency;	/* or latency (runtime) to replay */
+	uint64_t total; /* total of any kind */
+	uint64_t errors; /* ! NFS_OK */
+	uint64_t dups; /* detected dup requests */
+	struct op_latency latency; /* either executed ops latency */
+	struct op_latency dup_latency; /* or latency (runtime) to replay */
 };
 
 /* basic I/O transfer counter
@@ -242,9 +242,9 @@ struct xfer_op {
  */
 
 struct layout_op {
-	uint64_t total;		/* total ops */
-	uint64_t errors;	/* ! NFS4_OK && !NFS4ERR_DELAY */
-	uint64_t delays;	/* NFS4ERR_DELAY */
+	uint64_t total; /* total ops */
+	uint64_t errors; /* ! NFS4_OK && !NFS4ERR_DELAY */
+	uint64_t delays; /* NFS4ERR_DELAY */
 };
 
 #ifdef _USE_NFS3
@@ -252,13 +252,13 @@ struct layout_op {
  */
 
 struct nfsv3_stats {
-	struct proto_op cmds;	/* non-I/O ops = cmds - (read+write) */
+	struct proto_op cmds; /* non-I/O ops = cmds - (read+write) */
 	struct xfer_op read;
 	struct xfer_op write;
 };
 
 struct clnt_allops_v3_stats {
-	struct op_count cmds[NFS_V3_NB_COMMAND];	/* all NFSv3 ops */
+	struct op_count cmds[NFS_V3_NB_COMMAND]; /* all NFSv3 ops */
 };
 
 /* Mount statistics counters
@@ -278,7 +278,7 @@ struct nlmv4_stats {
 };
 
 struct clnt_allops_nlm_stats {
-	struct op_count cmds[NLM_V4_NB_OPERATION];	/* all NLMv4 ops */
+	struct op_count cmds[NLM_V4_NB_OPERATION]; /* all NLMv4 ops */
 };
 #endif
 
@@ -297,14 +297,14 @@ struct rquota_stats {
 
 struct nfsv40_stats {
 	struct proto_op compounds;
-	uint64_t ops_per_compound;	/* avg = total / ops_per */
+	uint64_t ops_per_compound; /* avg = total / ops_per */
 	struct xfer_op read;
 	struct xfer_op write;
 };
 
 struct nfsv41_stats {
 	struct proto_op compounds;
-	uint64_t ops_per_compound;	/* for size averaging */
+	uint64_t ops_per_compound; /* for size averaging */
 	struct xfer_op read;
 	struct xfer_op write;
 	struct layout_op getdevinfo;
@@ -315,7 +315,7 @@ struct nfsv41_stats {
 };
 
 struct clnt_allops_v4_stats {
-	struct op_count cmds[NFS4_OP_LAST_ONE];	/* all ops for NFSv4.x */
+	struct op_count cmds[NFS4_OP_LAST_ONE]; /* all ops for NFSv4.x */
 };
 
 struct transport_stats {
@@ -329,11 +329,11 @@ struct transport_stats {
 
 #ifdef _USE_9P
 struct _9p_stats {
-	struct proto_op cmds;	/* non-I/O ops */
+	struct proto_op cmds; /* non-I/O ops */
 	struct xfer_op read;
 	struct xfer_op write;
 	struct transport_stats trans;
-	struct proto_op *opcodes[_9P_RWSTAT+1];
+	struct proto_op *opcodes[_9P_RWSTAT + 1];
 };
 #endif
 
@@ -369,10 +369,10 @@ struct global_stats {
 struct deleg_stats {
 	uint32_t curr_deleg_grants; /* current num of delegations owned by
 				       this client */
-	uint32_t tot_recalls;       /* total num of times client was asked to
+	uint32_t tot_recalls; /* total num of times client was asked to
 				       recall */
-	uint32_t failed_recalls;    /* times client failed to process recall */
-	uint32_t num_revokes;	    /* Num revokes for the client */
+	uint32_t failed_recalls; /* times client failed to process recall */
+	uint32_t num_revokes; /* Num revokes for the client */
 };
 
 static struct global_stats global_st;
@@ -411,20 +411,20 @@ static struct nfsv3_stats *get_v3(struct gsh_stats *stats,
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv3 == NULL)
 			stats->nfsv3 =
-			    gsh_calloc(1, sizeof(struct nfsv3_stats));
+				gsh_calloc(1, sizeof(struct nfsv3_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv3;
 }
 
 static struct clnt_allops_v3_stats *get_v3_all(struct gsh_clnt_allops_stats *st,
-				  pthread_rwlock_t *lock)
+					       pthread_rwlock_t *lock)
 {
 	if (unlikely(st->nfsv3 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (st->nfsv3 == NULL)
-			st->nfsv3 =
-			    gsh_calloc(1, sizeof(struct clnt_allops_v3_stats));
+			st->nfsv3 = gsh_calloc(
+				1, sizeof(struct clnt_allops_v3_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return st->nfsv3;
@@ -456,15 +456,14 @@ static struct nlmv4_stats *get_nlm4(struct gsh_stats *stats,
 	return stats->nlm4;
 }
 
-static struct clnt_allops_nlm_stats *get_nlm4_all(
-		struct gsh_clnt_allops_stats *stats,
-		pthread_rwlock_t *lock)
+static struct clnt_allops_nlm_stats *
+get_nlm4_all(struct gsh_clnt_allops_stats *stats, pthread_rwlock_t *lock)
 {
 	if (unlikely(stats->nlm4 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nlm4 == NULL)
-			stats->nlm4 = gsh_calloc(1,
-				sizeof(struct clnt_allops_nlm_stats));
+			stats->nlm4 = gsh_calloc(
+				1, sizeof(struct clnt_allops_nlm_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nlm4;
@@ -479,7 +478,7 @@ static struct rquota_stats *get_rquota(struct gsh_stats *stats,
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->rquota == NULL)
 			stats->rquota =
-			    gsh_calloc(1, sizeof(struct rquota_stats));
+				gsh_calloc(1, sizeof(struct rquota_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->rquota;
@@ -493,7 +492,7 @@ static struct nfsv40_stats *get_v40(struct gsh_stats *stats,
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv40 == NULL)
 			stats->nfsv40 =
-			    gsh_calloc(1, sizeof(struct nfsv40_stats));
+				gsh_calloc(1, sizeof(struct nfsv40_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv40;
@@ -506,7 +505,7 @@ static struct nfsv41_stats *get_v41(struct gsh_stats *stats,
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv41 == NULL)
 			stats->nfsv41 =
-			    gsh_calloc(1, sizeof(struct nfsv41_stats));
+				gsh_calloc(1, sizeof(struct nfsv41_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv41;
@@ -519,21 +518,20 @@ static struct nfsv41_stats *get_v42(struct gsh_stats *stats,
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv42 == NULL)
 			stats->nfsv42 =
-			    gsh_calloc(1, sizeof(struct nfsv41_stats));
+				gsh_calloc(1, sizeof(struct nfsv41_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv42;
 }
 
-static struct clnt_allops_v4_stats *get_v4_all(
-				struct gsh_clnt_allops_stats *stats,
-				pthread_rwlock_t *lock)
+static struct clnt_allops_v4_stats *
+get_v4_all(struct gsh_clnt_allops_stats *stats, pthread_rwlock_t *lock)
 {
 	if (unlikely(stats->nfsv4 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv4 == NULL)
-			stats->nfsv4 =
-			    gsh_calloc(1, sizeof(struct clnt_allops_v4_stats));
+			stats->nfsv4 = gsh_calloc(
+				1, sizeof(struct clnt_allops_v4_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv4;
@@ -564,7 +562,6 @@ static struct _9p_stats *get_9p(struct gsh_stats *stats, pthread_rwlock_t *lock)
  */
 void record_latency(struct proto_op *op, nsecs_elapsed_t request_time, bool dup)
 {
-
 	/* dup latency is counted separately */
 	if (likely(!dup)) {
 		(void)atomic_add_uint64_t(&op->latency.latency, request_time);
@@ -577,12 +574,12 @@ void record_latency(struct proto_op *op, nsecs_elapsed_t request_time, bool dup)
 	} else {
 		(void)atomic_add_uint64_t(&op->dup_latency.latency,
 					  request_time);
-		if (op->dup_latency.min == 0L
-		    || op->dup_latency.min > request_time)
+		if (op->dup_latency.min == 0L ||
+		    op->dup_latency.min > request_time)
 			(void)atomic_store_uint64_t(&op->dup_latency.min,
 						    request_time);
-		if (op->dup_latency.max == 0L
-		    || op->dup_latency.max < request_time)
+		if (op->dup_latency.max == 0L ||
+		    op->dup_latency.max < request_time)
 			(void)atomic_store_uint64_t(&op->dup_latency.max,
 						    request_time);
 	}
@@ -618,8 +615,8 @@ static void record_io(struct xfer_op *iop, size_t requested, size_t transferred,
  */
 
 static void record_io_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
-			    size_t requested,
-			    size_t transferred, bool success, bool is_write)
+			    size_t requested, size_t transferred, bool success,
+			    bool is_write)
 {
 	struct xfer_op *iop = NULL;
 
@@ -811,7 +808,6 @@ static void reset_nfsv40_stats(struct nfsv40_stats *nfsv40)
 	reset_xfer_op(&nfsv40->write);
 }
 
-
 /**
  * @brief reset the counts nfsv41_stats
  * Use atomic ops to avoid locks.
@@ -831,7 +827,6 @@ static void reset_nfsv41_stats(struct nfsv41_stats *nfsv41)
 	reset_layout_op(&nfsv41->layout_return);
 	reset_layout_op(&nfsv41->recall);
 }
-
 
 #ifdef _USE_NFS3
 /**
@@ -912,7 +907,7 @@ static void reset__9P_stats(struct _9p_stats *_9p)
 	}
 }
 #endif
-#endif		/* USE_DBUS */
+#endif /* USE_DBUS */
 
 /**
  * @brief record V4.1 layout op stats
@@ -951,8 +946,8 @@ static void record_layout(struct nfsv41_stats *sp, int proto_op, int status)
 
 static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 			    int proto_op, int minorversion,
-			    nsecs_elapsed_t request_time,
-			    int status, bool is_export)
+			    nsecs_elapsed_t request_time, int status,
+			    bool is_export)
 {
 	if (minorversion == 0) {
 		struct nfsv40_stats *sp = get_v40(gsh_st, lock);
@@ -972,10 +967,10 @@ static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		default:
 			if (is_export)
 				record_op(&sp->compounds, request_time,
-					status == NFS4_OK, false);
+					  status == NFS4_OK, false);
 			else
 				record_op_only(&sp->compounds,
-					status == NFS4_OK, false);
+					       status == NFS4_OK, false);
 		}
 	} else if (minorversion == 1) {
 		struct nfsv41_stats *sp = get_v41(gsh_st, lock);
@@ -1001,7 +996,7 @@ static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 					  status == NFS4_OK, false);
 			else
 				record_op_only(&sp->compounds,
-					  status == NFS4_OK, false);
+					       status == NFS4_OK, false);
 		}
 	} else if (minorversion == 2) {
 		struct nfsv41_stats *sp = get_v42(gsh_st, lock);
@@ -1024,13 +1019,12 @@ static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		default:
 			if (is_export)
 				record_op(&sp->compounds, request_time,
-					status == NFS4_OK, false);
+					  status == NFS4_OK, false);
 			else
 				record_op_only(&sp->compounds,
-					status == NFS4_OK, false);
+					       status == NFS4_OK, false);
 		}
 	}
-
 }
 
 /**
@@ -1039,11 +1033,9 @@ static void record_nfsv4_op(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 
 static void record_compound(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 			    int minorversion, uint64_t num_ops,
-			    nsecs_elapsed_t request_time,
-			    bool success)
+			    nsecs_elapsed_t request_time, bool success)
 {
 	if (minorversion == 0) {
-
 		struct nfsv40_stats *sp = get_v40(gsh_st, lock);
 
 		/* record stuff */
@@ -1062,7 +1054,6 @@ static void record_compound(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		record_op(&sp->compounds, request_time, success, false);
 		(void)atomic_add_uint64_t(&sp->ops_per_compound, num_ops);
 	}
-
 }
 
 /**
@@ -1079,7 +1070,7 @@ static void record_compound(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
  */
 
 static void record_clnt_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
-			 nfs_request_t *reqdata, bool success, bool dup)
+			      nfs_request_t *reqdata, bool success, bool dup)
 {
 	struct svc_req *req = &reqdata->svc;
 	uint32_t proto_op = req->rq_msg.cb_proc;
@@ -1087,7 +1078,7 @@ static void record_clnt_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 
 	if (program_op == NFS_program[P_NFS]) {
 		if (proto_op == 0)
-			return;	/* we don't count NULL ops */
+			return; /* we don't count NULL ops */
 #ifdef _USE_NFS3
 		if (req->rq_msg.cb_vers == NFS_V3) {
 			struct nfsv3_stats *sp = get_v3(gsh_st, lock);
@@ -1132,22 +1123,23 @@ static void record_clnt_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 }
 
 static void record_clnt_all_stats(struct gsh_clnt_allops_stats *gsh_st,
-		pthread_rwlock_t *lock, uint32_t prog_op, uint32_t proto_op,
-		uint32_t vers, bool success, bool dup)
+				  pthread_rwlock_t *lock, uint32_t prog_op,
+				  uint32_t proto_op, uint32_t vers,
+				  bool success, bool dup)
 {
 	if (prog_op == NFS_program[P_NFS]) {
 		if (proto_op == 0)
-			return;	/* we don't count NULL ops */
+			return; /* we don't count NULL ops */
 		if (vers == NFS_V4) {
 			struct clnt_allops_v4_stats *sp =
-						get_v4_all(gsh_st, lock);
+				get_v4_all(gsh_st, lock);
 
 			/* record stuff */
 			record_clnt_ops(&(sp->cmds[proto_op]), success, dup);
 #ifdef _USE_NFS3
 		} else if (vers == NFS_V3) {
 			struct clnt_allops_v3_stats *sp =
-						get_v3_all(gsh_st, lock);
+				get_v3_all(gsh_st, lock);
 
 			/* record stuff */
 			record_clnt_ops(&(sp->cmds[proto_op]), success, dup);
@@ -1161,7 +1153,6 @@ static void record_clnt_all_stats(struct gsh_clnt_allops_stats *gsh_st,
 #endif
 	}
 }
-
 
 /**
  * @brief Record request statistics (V3 era protos only)
@@ -1187,7 +1178,7 @@ static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 
 	if (program_op == NFS_program[P_NFS]) {
 		if (proto_op == 0)
-			return;	/* we don't count NULL ops */
+			return; /* we don't count NULL ops */
 #ifdef _USE_NFS3
 		if (req->rq_msg.cb_vers == NFS_V3) {
 			struct nfsv3_stats *sp = get_v3(gsh_st, lock);
@@ -1206,8 +1197,8 @@ static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 					       dup);
 				break;
 			default:
-				record_op(&sp->cmds, request_time,
-					  success, dup);
+				record_op(&sp->cmds, request_time, success,
+					  dup);
 			}
 		}
 #endif
@@ -1217,11 +1208,11 @@ static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		struct mnt_stats *sp = get_mnt(gsh_st, lock);
 
 		if (global && req->rq_msg.cb_vers == MOUNT_V1)
-			record_op(&global_st.mnt.v1_ops, request_time,
-				  success, dup);
+			record_op(&global_st.mnt.v1_ops, request_time, success,
+				  dup);
 		else if (global)
-			record_op(&global_st.mnt.v3_ops, request_time,
-				  success, dup);
+			record_op(&global_st.mnt.v3_ops, request_time, success,
+				  dup);
 
 		/* record stuff */
 		if (req->rq_msg.cb_vers == MOUNT_V1)
@@ -1234,8 +1225,8 @@ static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		struct nlmv4_stats *sp = get_nlm4(gsh_st, lock);
 
 		if (global)
-			record_op(&global_st.nlm4.ops, request_time,
-				  success, dup);
+			record_op(&global_st.nlm4.ops, request_time, success,
+				  dup);
 		/* record stuff */
 		record_op(&sp->ops, request_time, success, dup);
 #endif
@@ -1244,8 +1235,8 @@ static void record_stats(struct gsh_stats *gsh_st, pthread_rwlock_t *lock,
 		struct rquota_stats *sp = get_rquota(gsh_st, lock);
 
 		if (global)
-			record_op(&global_st.rquota.ops, request_time,
-				  success, dup);
+			record_op(&global_st.rquota.ops, request_time, success,
+				  dup);
 		/* record stuff */
 		if (req->rq_msg.cb_vers == RQUOTAVERS)
 			record_op(&sp->ops, request_time, success, dup);
@@ -1283,10 +1274,10 @@ static void record_transport_stats(struct transport_stats *t_st,
  *
  * Called from 9P functions doing send/recv
  */
-void server_stats_transport_done(struct gsh_client *client,
-				uint64_t rx_bytes, uint64_t rx_pkt,
-				uint64_t rx_err, uint64_t tx_bytes,
-				uint64_t tx_pkt, uint64_t tx_err)
+void server_stats_transport_done(struct gsh_client *client, uint64_t rx_bytes,
+				 uint64_t rx_pkt, uint64_t rx_err,
+				 uint64_t tx_bytes, uint64_t tx_pkt,
+				 uint64_t tx_err)
 {
 	struct server_stats *server_st =
 		container_of(client, struct server_stats, client);
@@ -1336,13 +1327,12 @@ void server_stats_9p_done(u8 opc, struct _9p_request_data *req9p)
 
 #ifdef _USE_NFS3
 static void record_v3_full_stats(struct svc_req *req,
-			       nsecs_elapsed_t request_time,
-			       int status, bool dup);
+				 nsecs_elapsed_t request_time, int status,
+				 bool dup);
 #endif
 
-static void record_v4_full_stats(uint32_t proc,
-			       nsecs_elapsed_t request_time,
-			       nfsstat4 status);
+static void record_v4_full_stats(uint32_t proc, nsecs_elapsed_t request_time,
+				 nfsstat4 status);
 
 /**
  * @brief record NFS op finished
@@ -1386,31 +1376,28 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 
 #ifdef _USE_NFS3
 	if (nfs_param.core_param.enable_FULLV3STATS)
-		record_v3_full_stats(req, time_diff,
-			    rc, dup);
+		record_v3_full_stats(req, time_diff, rc, dup);
 #endif
 	if (client != NULL) {
 		struct server_stats *server_st;
 
 		server_st = container_of(client, struct server_stats, client);
 		record_clnt_stats(&server_st->st, &client->client_lock, reqdata,
-			     rc == NFS_REQ_OK, dup);
+				  rc == NFS_REQ_OK, dup);
 		if (nfs_param.core_param.enable_CLNTALLSTATS)
 			record_clnt_all_stats(&server_st->c_all,
-					&client->client_lock,
-					program_op, proto_op, NFS_V3,
-					rc == NFS_REQ_OK, dup);
+					      &client->client_lock, program_op,
+					      proto_op, NFS_V3,
+					      rc == NFS_REQ_OK, dup);
 		timespec_update(&client->last_update, &current_time);
 	}
 	if (!dup && op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
 
-		exp_st =
-		    container_of(op_ctx->ctx_export, struct export_stats,
-			    export);
+		exp_st = container_of(op_ctx->ctx_export, struct export_stats,
+				      export);
 		record_stats(&exp_st->st, &op_ctx->ctx_export->exp_lock,
-			     reqdata, time_diff,
-			     rc == NFS_REQ_OK, dup, true);
+			     reqdata, time_diff, rc == NFS_REQ_OK, dup, true);
 		timespec_update(&op_ctx->ctx_export->last_update,
 				&current_time);
 	}
@@ -1422,8 +1409,8 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
  * Called from nfs4_compound at compound loop completion
  */
 
-void server_stats_nfsv4_op_done(int proto_op,
-				struct timespec *start_time, int status)
+void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
+				int status)
 {
 	struct gsh_client *client = op_ctx->client;
 	struct timespec current_time;
@@ -1448,13 +1435,14 @@ void server_stats_nfsv4_op_done(int proto_op,
 
 		server_st = container_of(client, struct server_stats, client);
 		record_nfsv4_op(&server_st->st, &client->client_lock, proto_op,
-				op_ctx->nfs_minorvers, time_diff,
-				status, false);
+				op_ctx->nfs_minorvers, time_diff, status,
+				false);
 		if (nfs_param.core_param.enable_CLNTALLSTATS)
 			record_clnt_all_stats(&server_st->c_all,
-				&client->client_lock,
-				NFS_program[P_NFS], proto_op, NFS_V4,
-				status == NFS_REQ_OK, false);
+					      &client->client_lock,
+					      NFS_program[P_NFS], proto_op,
+					      NFS_V4, status == NFS_REQ_OK,
+					      false);
 		timespec_update(&client->last_update, &current_time);
 	}
 
@@ -1471,12 +1459,11 @@ void server_stats_nfsv4_op_done(int proto_op,
 	if (op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
 
-		exp_st =
-		    container_of(op_ctx->ctx_export, struct export_stats,
-			    export);
+		exp_st = container_of(op_ctx->ctx_export, struct export_stats,
+				      export);
 		record_nfsv4_op(&exp_st->st, &op_ctx->ctx_export->exp_lock,
-				proto_op, op_ctx->nfs_minorvers,
-				time_diff, status, true);
+				proto_op, op_ctx->nfs_minorvers, time_diff,
+				status, true);
 		timespec_update(&op_ctx->ctx_export->last_update,
 				&current_time);
 	}
@@ -1504,20 +1491,17 @@ void server_stats_compound_done(int num_ops, int status)
 
 		server_st = container_of(client, struct server_stats, client);
 		record_compound(&server_st->st, &client->client_lock,
-				op_ctx->nfs_minorvers,
-				num_ops, time_diff,
+				op_ctx->nfs_minorvers, num_ops, time_diff,
 				status == NFS4_OK);
 		timespec_update(&client->last_update, &current_time);
 	}
 	if (op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
 
-		exp_st =
-		    container_of(op_ctx->ctx_export, struct export_stats,
-			    export);
+		exp_st = container_of(op_ctx->ctx_export, struct export_stats,
+				      export);
 		record_compound(&exp_st->st, &op_ctx->ctx_export->exp_lock,
-				op_ctx->nfs_minorvers, num_ops,
-				time_diff,
+				op_ctx->nfs_minorvers, num_ops, time_diff,
 				status == NFS4_OK);
 		timespec_update(&op_ctx->ctx_export->last_update,
 				&current_time);
@@ -1531,8 +1515,8 @@ void server_stats_compound_done(int num_ops, int status)
  * transfers
  */
 
-void server_stats_io_done(size_t requested,
-			  size_t transferred, bool success, bool is_write)
+void server_stats_io_done(size_t requested, size_t transferred, bool success,
+			  bool is_write)
 {
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		return;
@@ -1542,15 +1526,13 @@ void server_stats_io_done(size_t requested,
 		server_st = container_of(op_ctx->client, struct server_stats,
 					 client);
 		record_io_stats(&server_st->st, &op_ctx->client->client_lock,
-				requested, transferred, success,
-				is_write);
+				requested, transferred, success, is_write);
 	}
 	if (op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
 
-		exp_st =
-		    container_of(op_ctx->ctx_export, struct export_stats,
-			    export);
+		exp_st = container_of(op_ctx->ctx_export, struct export_stats,
+				      export);
 		record_io_stats(&exp_st->st, &op_ctx->ctx_export->exp_lock,
 				requested, transferred, success, is_write);
 	}
@@ -1559,8 +1541,8 @@ void server_stats_io_done(size_t requested,
 		uint16_t export_id = 0;
 		struct fsal_export *export = op_ctx->fsal_export;
 		struct gsh_client *client = op_ctx->client;
-		const char *client_ip =
-			client == NULL ? "" : client->hostaddr_str;
+		const char *client_ip = client == NULL ? "" :
+							 client->hostaddr_str;
 
 		if (export != NULL)
 			export_id = export->export_id;
@@ -1580,8 +1562,8 @@ void check_deleg_struct(struct gsh_stats *stats, pthread_rwlock_t *lock)
 	if (unlikely(stats->deleg == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->deleg == NULL)
-			stats->deleg = gsh_calloc(1,
-					sizeof(struct deleg_stats));
+			stats->deleg =
+				gsh_calloc(1, sizeof(struct deleg_stats));
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 }
@@ -1646,10 +1628,8 @@ void dbus_message_iter_append_protocol_info(DBusMessageIter *niter,
 
 	dbus_message_iter_open_container(niter, DBUS_TYPE_STRUCT, NULL,
 					 &p_iter);
-	dbus_message_iter_append_basic(&p_iter, DBUS_TYPE_STRING,
-				       protocol);
-	dbus_message_iter_append_basic(&p_iter, DBUS_TYPE_BOOLEAN,
-				       enabled);
+	dbus_message_iter_append_basic(&p_iter, DBUS_TYPE_STRING, protocol);
+	dbus_message_iter_append_basic(&p_iter, DBUS_TYPE_BOOLEAN, enabled);
 	dbus_message_iter_close_container(niter, &p_iter);
 }
 
@@ -1793,8 +1773,7 @@ static void server_dbus_iostats(struct xfer_op *iop, DBusMessageIter *iter)
 				       &iop->cmd.errors);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
 				       &iop->cmd.latency.latency);
-	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				       &zero);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64, &zero);
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
 
@@ -1827,8 +1806,8 @@ static void server_dbus_cexop_stats(struct xfer_op *iop, DBusMessageIter *iter,
 				       &iop->cmd.errors);
 	if (for_export) {
 		if (iop->cmd.total)
-			res = (double) (iop->cmd.latency.latency * 0.000001) /
-					(iop->cmd.total);
+			res = (double)(iop->cmd.latency.latency * 0.000001) /
+			      (iop->cmd.total);
 		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE,
 					       &res);
 	}
@@ -1864,8 +1843,8 @@ static void server_dbus_ceop_stats(struct proto_op *op, DBusMessageIter *iter,
 				       &op->errors);
 	if (for_export) {
 		if (op->total)
-			res = (double) (op->latency.latency * 0.000001) /
-								op->total;
+			res = (double)(op->latency.latency * 0.000001) /
+			      op->total;
 		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_DOUBLE,
 					       &res);
 	}
@@ -1886,8 +1865,7 @@ static void server_dbus_ceop_stats(struct proto_op *op, DBusMessageIter *iter,
  * @param for_export  [IN] boolean indicating whether it is for an export
  **/
 static void server_dbus_celo_stats(struct nfsv41_stats *sp,
-				   DBusMessageIter *iter,
-				   bool for_export)
+				   DBusMessageIter *iter, bool for_export)
 {
 	DBusMessageIter struct_iter;
 	uint64_t total, errors, delays;
@@ -1895,9 +1873,9 @@ static void server_dbus_celo_stats(struct nfsv41_stats *sp,
 	total = sp->getdevinfo.total + sp->layout_get.total +
 		sp->layout_commit.total + sp->layout_return.total;
 	errors = sp->getdevinfo.errors + sp->layout_get.errors +
-		sp->layout_commit.errors + sp->layout_return.errors;
+		 sp->layout_commit.errors + sp->layout_return.errors;
 	delays = sp->getdevinfo.delays + sp->layout_get.delays +
-		sp->layout_commit.delays + sp->layout_return.delays;
+		 sp->layout_commit.delays + sp->layout_return.delays;
 	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
 					 &struct_iter);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64, &total);
@@ -1932,8 +1910,7 @@ static void server_dbus_transportstats(struct transport_stats *tstats,
 }
 #endif
 
-void server_dbus_client_io_ops(DBusMessageIter *iter,
-				struct gsh_client *client)
+void server_dbus_client_io_ops(DBusMessageIter *iter, struct gsh_client *client)
 {
 	struct server_stats *svr = NULL;
 	struct gsh_stats *st;
@@ -2009,21 +1986,22 @@ void server_dbus_client_all_ops(DBusMessageIter *iter,
 	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
 				       &stats_available);
 	if (c_all->nfsv3) {
-		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
-						 NULL, &array_iter);
+		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
+						 &array_iter);
 		for (i = 0; i < NFS_V3_NB_COMMAND; i++) {
 			if (c_all->nfsv3->cmds[i].total) {
-				op_name = (char *) nfsproc3_to_str(i);
+				op_name = (char *)nfsproc3_to_str(i);
 				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_STRING, &op_name);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+							       DBUS_TYPE_STRING,
+							       &op_name);
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nfsv3->cmds[i].total);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nfsv3->cmds[i].errors);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nfsv3->cmds[i].dups);
 			}
 		}
@@ -2037,20 +2015,21 @@ void server_dbus_client_all_ops(DBusMessageIter *iter,
 	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
 				       &stats_available);
 	if (c_all->nlm4) {
-		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
-						 NULL, &array_iter);
+		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
+						 &array_iter);
 		for (i = 0; i < NLM_V4_NB_OPERATION; i++) {
 			if (c_all->nlm4->cmds[i].total) {
 				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_STRING, &optnlm[i].name);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+							       DBUS_TYPE_STRING,
+							       &optnlm[i].name);
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nlm4->cmds[i].total);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nlm4->cmds[i].errors);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nlm4->cmds[i].dups);
 			}
 		}
@@ -2063,18 +2042,19 @@ void server_dbus_client_all_ops(DBusMessageIter *iter,
 	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
 				       &stats_available);
 	if (c_all->nfsv4) {
-		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
-						 NULL, &array_iter);
+		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
+						 &array_iter);
 		for (i = 0; i < NFS4_OP_LAST_ONE; i++) {
 			if (c_all->nfsv4->cmds[i].total) {
-				op_name = (char *) nfsop4_to_str(i);
+				op_name = (char *)nfsop4_to_str(i);
 				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_STRING, &op_name);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+							       DBUS_TYPE_STRING,
+							       &op_name);
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nfsv4->cmds[i].total);
-				dbus_message_iter_append_basic(&array_iter,
-					DBUS_TYPE_UINT64,
+				dbus_message_iter_append_basic(
+					&array_iter, DBUS_TYPE_UINT64,
 					&c_all->nfsv4->cmds[i].errors);
 			}
 		}
@@ -2100,14 +2080,14 @@ void server_dbus_client_all_ops(DBusMessageIter *iter,
 	dbus_message_iter_append_basic(iter, DBUS_TYPE_BOOLEAN,
 				       &stats_available);
 	if (stats_available) {
-		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT,
-						 NULL, &array_iter);
-		dbus_message_iter_append_basic(&array_iter,
-			DBUS_TYPE_UINT64, &tot_cmp);
-		dbus_message_iter_append_basic(&array_iter,
-			DBUS_TYPE_UINT64, &err_cmp);
-		dbus_message_iter_append_basic(&array_iter,
-			DBUS_TYPE_UINT64, &ops_in_cmp);
+		dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
+						 &array_iter);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+					       &tot_cmp);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+					       &err_cmp);
+		dbus_message_iter_append_basic(&array_iter, DBUS_TYPE_UINT64,
+					       &ops_in_cmp);
 		dbus_message_iter_close_container(iter, &array_iter);
 	}
 }
@@ -2180,38 +2160,42 @@ void server_dbus_total(struct export_stats *export_st, DBusMessageIter *iter)
 				       &version);
 	if (export_st->st.nfsv3 == NULL)
 		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&total);
+					       &total);
 	else
-		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&export_st->st.nfsv3->cmds.total);
+		dbus_message_iter_append_basic(
+			&struct_iter, DBUS_TYPE_UINT64,
+			&export_st->st.nfsv3->cmds.total);
 #endif
 	version = "NFSv40";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	if (export_st->st.nfsv40 == NULL)
 		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&total);
+					       &total);
 	else
-		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&export_st->st.nfsv40->compounds.total);
+		dbus_message_iter_append_basic(
+			&struct_iter, DBUS_TYPE_UINT64,
+			&export_st->st.nfsv40->compounds.total);
 	version = "NFSv41";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	if (export_st->st.nfsv41 == NULL)
 		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&total);
+					       &total);
 	else
-		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&export_st->st.nfsv41->compounds.total);
+		dbus_message_iter_append_basic(
+			&struct_iter, DBUS_TYPE_UINT64,
+			&export_st->st.nfsv41->compounds.total);
 	version = "NFSv42";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	if (export_st->st.nfsv42 == NULL)
 		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&total);
+					       &total);
 	else
-		dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-				&export_st->st.nfsv42->compounds.total);
+		dbus_message_iter_append_basic(
+			&struct_iter, DBUS_TYPE_UINT64,
+			&export_st->st.nfsv42->compounds.total);
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
 
@@ -2228,48 +2212,48 @@ void global_dbus_total(DBusMessageIter *iter)
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.nfsv3.cmds.total);
+				       &global_st.nfsv3.cmds.total);
 #endif
 	version = "NFSv40";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.nfsv40.compounds.total);
+				       &global_st.nfsv40.compounds.total);
 	version = "NFSv41";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.nfsv41.compounds.total);
+				       &global_st.nfsv41.compounds.total);
 	version = "NFSv42";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.nfsv42.compounds.total);
+				       &global_st.nfsv42.compounds.total);
 #ifdef _USE_NLM
 	version = "NLM4";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.nlm4.ops.total);
+				       &global_st.nlm4.ops.total);
 #endif
 #ifdef _USE_NFS3
 	version = "MNTv1";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.mnt.v1_ops.total);
+				       &global_st.mnt.v1_ops.total);
 	version = "MNTv3";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.mnt.v3_ops.total);
+				       &global_st.mnt.v3_ops.total);
 #endif
 #ifdef _USE_RQUOTA
 	version = "RQUOTA";
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING,
 				       &version);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_UINT64,
-					&global_st.rquota.ops.total);
+				       &global_st.rquota.ops.total);
 #endif
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
@@ -2290,11 +2274,12 @@ void global_dbus_fast(DBusMessageIter *iter)
 				       &version);
 	for (i = 0; i < NFS_V3_NB_COMMAND; i++) {
 		if (global_st.v3.op[i] > 0) {
-			op = (char *) nfsproc3_to_str(i);
+			op = (char *)nfsproc3_to_str(i);
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_STRING, &op);
+						       DBUS_TYPE_STRING, &op);
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_UINT64, &global_st.v3.op[i]);
+						       DBUS_TYPE_UINT64,
+						       &global_st.v3.op[i]);
 		}
 	}
 #endif
@@ -2303,11 +2288,12 @@ void global_dbus_fast(DBusMessageIter *iter)
 				       &version);
 	for (i = 0; i < NFS4_OP_LAST_ONE; i++) {
 		if (global_st.v4.op[i] > 0) {
-			op = (char *) nfsop4_to_str(i);
+			op = (char *)nfsop4_to_str(i);
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_STRING, &op);
+						       DBUS_TYPE_STRING, &op);
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_UINT64, &global_st.v4.op[i]);
+						       DBUS_TYPE_UINT64,
+						       &global_st.v4.op[i]);
 		}
 	}
 #ifdef _USE_NLM
@@ -2318,9 +2304,10 @@ void global_dbus_fast(DBusMessageIter *iter)
 		if (global_st.lm.op[i] > 0) {
 			op = optnlm[i].name;
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_STRING, &op);
+						       DBUS_TYPE_STRING, &op);
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_UINT64, &global_st.lm.op[i]);
+						       DBUS_TYPE_UINT64,
+						       &global_st.lm.op[i]);
 		}
 	}
 #endif
@@ -2332,9 +2319,10 @@ void global_dbus_fast(DBusMessageIter *iter)
 		if (global_st.mn.op[i] > 0) {
 			op = optmnt[i].name;
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_STRING, &op);
+						       DBUS_TYPE_STRING, &op);
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_UINT64, &global_st.mn.op[i]);
+						       DBUS_TYPE_UINT64,
+						       &global_st.mn.op[i]);
 		}
 	}
 #endif
@@ -2346,9 +2334,10 @@ void global_dbus_fast(DBusMessageIter *iter)
 		if (global_st.qt.op[i] > 0) {
 			op = optqta[i].name;
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_STRING, &op);
+						       DBUS_TYPE_STRING, &op);
 			dbus_message_iter_append_basic(&struct_iter,
-					DBUS_TYPE_UINT64, &global_st.qt.op[i]);
+						       DBUS_TYPE_UINT64,
+						       &global_st.qt.op[i]);
 		}
 	}
 #endif
@@ -2459,17 +2448,13 @@ void server_ret_nfsmon_iostats(struct xfer_op *op_read,
 			       struct xfer_op *op_preread,
 			       struct xfer_op *op_prewrite)
 {
-	(void)atomic_sub_uint64_t(&op_read->cmd.total,
-				  op_preread->cmd.total);
-	(void)atomic_sub_uint64_t(&op_read->requested,
-				  op_preread->requested);
+	(void)atomic_sub_uint64_t(&op_read->cmd.total, op_preread->cmd.total);
+	(void)atomic_sub_uint64_t(&op_read->requested, op_preread->requested);
 	(void)atomic_sub_uint64_t(&op_read->transferred,
 				  op_preread->transferred);
 
-	(void)atomic_sub_uint64_t(&op_write->cmd.total,
-				  op_prewrite->cmd.total);
-	(void)atomic_sub_uint64_t(&op_write->requested,
-				  op_prewrite->requested);
+	(void)atomic_sub_uint64_t(&op_write->cmd.total, op_prewrite->cmd.total);
+	(void)atomic_sub_uint64_t(&op_write->requested, op_prewrite->requested);
 	(void)atomic_sub_uint64_t(&op_write->transferred,
 				  op_prewrite->transferred);
 }
@@ -2526,7 +2511,6 @@ void server_dbus_fill_io(DBusMessageIter *array_iter, uint16_t *export_id,
 
 	/* close the structure container */
 	dbus_message_iter_close_container(array_iter, &struct_iter);
-
 }
 
 /**
@@ -2617,17 +2601,17 @@ void reset_gsh_allops_stats(struct gsh_clnt_allops_stats *st)
 
 #ifdef _USE_NFS3
 	if (st->nfsv3) {
-		for (i = 0; i < NFS_V3_NB_COMMAND ; i++)
+		for (i = 0; i < NFS_V3_NB_COMMAND; i++)
 			reset_op_count(&(st->nfsv3->cmds[i]));
 	}
 #endif
 	if (st->nfsv4) {
-		for (i = 0; i < NFS4_OP_LAST_ONE ; i++)
+		for (i = 0; i < NFS4_OP_LAST_ONE; i++)
 			reset_op_count(&(st->nfsv4->cmds[i]));
 	}
 #ifdef _USE_NLM
 	if (st->nlm4) {
-		for (i = 0; i < NLM_V4_NB_OPERATION ; i++)
+		for (i = 0; i < NLM_V4_NB_OPERATION; i++)
 			reset_op_count(&(st->nlm4->cmds[i]));
 	}
 #endif
@@ -2664,7 +2648,7 @@ void reset_global_stats(void)
 #endif
 	reset_nfsv40_stats(&global_st.nfsv40);
 	reset_nfsv41_stats(&global_st.nfsv41);
-	reset_nfsv41_stats(&global_st.nfsv42);  /* Uses v41 stats */
+	reset_nfsv41_stats(&global_st.nfsv42); /* Uses v41 stats */
 #ifdef _USE_NFS3
 	reset_mnt_stats(&global_st.mnt);
 #endif
@@ -2736,7 +2720,6 @@ void server_dbus_9p_opstats(struct _9p_stats *_9pp, u8 opcode,
 	server_dbus_op_stats(_9pp->opcodes[opcode], iter);
 }
 #endif
-
 
 /**
  * @brief Report layout statistics as a struct
@@ -2810,7 +2793,6 @@ void server_dbus_delegations(struct deleg_stats *ds, DBusMessageIter *iter)
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
 
-
 #ifdef _USE_NFS3
 /**
  * @brief NFSv3 Detailed stats reporting
@@ -2824,34 +2806,34 @@ void server_dbus_v3_full_stats(DBusMessageIter *iter)
 	char *message, *op_name;
 
 	gsh_dbus_append_timestamp(iter, &v3_full_stats_time);
-	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY,
-					 "(stttddd)", &array_iter);
+	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY, "(stttddd)",
+					 &array_iter);
 	for (op = 1; op < NFS_V3_NB_COMMAND; op++) {
 		if (v3_full_stats[op].total) {
-			op_name = (char *) nfsproc3_to_str(op);
-			dbus_message_iter_open_container(&array_iter,
-							 DBUS_TYPE_STRUCT,
-							 NULL, &op_iter);
+			op_name = (char *)nfsproc3_to_str(op);
+			dbus_message_iter_open_container(
+				&array_iter, DBUS_TYPE_STRUCT, NULL, &op_iter);
+			dbus_message_iter_append_basic(
+				&op_iter, DBUS_TYPE_STRING, &op_name);
+			dbus_message_iter_append_basic(
+				&op_iter, DBUS_TYPE_UINT64,
+				&v3_full_stats[op].total);
+			dbus_message_iter_append_basic(
+				&op_iter, DBUS_TYPE_UINT64,
+				&v3_full_stats[op].errors);
 			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_STRING, &op_name);
+						       DBUS_TYPE_UINT64,
+						       &v3_full_stats[op].dups);
+			res = (double)v3_full_stats[op].latency.latency *
+			      0.000001 / v3_full_stats[op].total;
 			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &v3_full_stats[op].total);
+						       DBUS_TYPE_DOUBLE, &res);
+			res = (double)v3_full_stats[op].latency.min * 0.000001;
 			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &v3_full_stats[op].errors);
+						       DBUS_TYPE_DOUBLE, &res);
+			res = (double)v3_full_stats[op].latency.max * 0.000001;
 			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &v3_full_stats[op].dups);
-			res = (double) v3_full_stats[op].latency.latency *
-					0.000001 / v3_full_stats[op].total;
-			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-			res = (double) v3_full_stats[op].latency.min *
-					0.000001;
-			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-			res = (double) v3_full_stats[op].latency.max *
-					0.000001;
-			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
+						       DBUS_TYPE_DOUBLE, &res);
 			dbus_message_iter_close_container(&array_iter,
 							  &op_iter);
 			op_counter += v3_full_stats[op].total;
@@ -2860,25 +2842,23 @@ void server_dbus_v3_full_stats(DBusMessageIter *iter)
 	if (op_counter == 0) {
 		message = "None";
 		/* insert dummy stats to avoid dbus crash */
-		dbus_message_iter_open_container(&array_iter,
-						 DBUS_TYPE_STRUCT,
+		dbus_message_iter_open_container(&array_iter, DBUS_TYPE_STRUCT,
 						 NULL, &op_iter);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_STRING, &message);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &op_counter);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &op_counter);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &op_counter);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-		dbus_message_iter_close_container(&array_iter,
-						  &op_iter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_STRING,
+					       &message);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_UINT64,
+					       &op_counter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_UINT64,
+					       &op_counter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_UINT64,
+					       &op_counter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_close_container(&array_iter, &op_iter);
 	} else {
 		message = "OK";
 	}
@@ -2899,30 +2879,31 @@ void server_dbus_v4_full_stats(DBusMessageIter *iter)
 	char *message, *op_name;
 
 	gsh_dbus_append_timestamp(iter, &v4_full_stats_time);
-	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY,
-					 "(sttddd)", &array_iter);
+	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY, "(sttddd)",
+					 &array_iter);
 	for (op = 1; op < NFS_V42_NB_OPERATION; op++) {
 		if (v4_full_stats[op].total) {
-			op_name = (char *) nfsop4_to_str(op);
-			dbus_message_iter_open_container(&array_iter,
-							 DBUS_TYPE_STRUCT,
-							 NULL, &op_iter);
+			op_name = (char *)nfsop4_to_str(op);
+			dbus_message_iter_open_container(
+				&array_iter, DBUS_TYPE_STRUCT, NULL, &op_iter);
+			dbus_message_iter_append_basic(
+				&op_iter, DBUS_TYPE_STRING, &op_name);
+			dbus_message_iter_append_basic(
+				&op_iter, DBUS_TYPE_UINT64,
+				&v4_full_stats[op].total);
+			dbus_message_iter_append_basic(
+				&op_iter, DBUS_TYPE_UINT64,
+				&v4_full_stats[op].errors);
+			res = (double)v4_full_stats[op].latency.latency *
+			      0.000001 / v4_full_stats[op].total;
 			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_STRING, &op_name);
+						       DBUS_TYPE_DOUBLE, &res);
+			res = (double)v4_full_stats[op].latency.min * 0.000001;
 			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &v4_full_stats[op].total);
+						       DBUS_TYPE_DOUBLE, &res);
+			res = (double)v4_full_stats[op].latency.max * 0.000001;
 			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &v4_full_stats[op].errors);
-			res = (double) v4_full_stats[op].latency.latency *
-					0.000001 / v4_full_stats[op].total;
-			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-			res = (double) v4_full_stats[op].latency.min * 0.000001;
-			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-			res = (double) v4_full_stats[op].latency.max * 0.000001;
-			dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
+						       DBUS_TYPE_DOUBLE, &res);
 			dbus_message_iter_close_container(&array_iter,
 							  &op_iter);
 			op_counter += v4_full_stats[op].total;
@@ -2930,31 +2911,29 @@ void server_dbus_v4_full_stats(DBusMessageIter *iter)
 	}
 	if (op_counter == 0) {
 		message = "None";
-		dbus_message_iter_open_container(&array_iter,
-						 DBUS_TYPE_STRUCT,
+		dbus_message_iter_open_container(&array_iter, DBUS_TYPE_STRUCT,
 						 NULL, &op_iter);
 		/* insert dummy stats to avoid dbus crash */
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_STRING, &message);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &op_counter);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_UINT64, &op_counter);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-		dbus_message_iter_append_basic(&op_iter,
-				DBUS_TYPE_DOUBLE, &res);
-		dbus_message_iter_close_container(&array_iter,
-						  &op_iter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_STRING,
+					       &message);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_UINT64,
+					       &op_counter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_UINT64,
+					       &op_counter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_close_container(&array_iter, &op_iter);
 	} else {
 		message = "OK";
 	}
 	dbus_message_iter_close_container(iter, &array_iter);
 	dbus_message_iter_append_basic(iter, DBUS_TYPE_STRING, &message);
 }
-#endif				/* USE_DBUS */
+#endif /* USE_DBUS */
 
 /**
  * @brief Free statistics storage
@@ -3046,8 +3025,8 @@ void server_stats_allops_free(struct gsh_clnt_allops_stats *statsp)
 
 #ifdef _USE_NFS3
 static void record_v3_full_stats(struct svc_req *req,
-			       nsecs_elapsed_t request_time,
-			       int status, bool dup)
+				 nsecs_elapsed_t request_time, int status,
+				 bool dup)
 {
 	uint32_t prog = req->rq_msg.cb_prog;
 	uint32_t vers = req->rq_msg.cb_vers;
@@ -3058,12 +3037,12 @@ static void record_v3_full_stats(struct svc_req *req,
 		uint16_t export_id = 0;
 		struct fsal_export *export = op_ctx->fsal_export;
 		struct gsh_client *client = op_ctx->client;
-		const char *client_ip =
-			client == NULL ? "" : client->hostaddr_str;
+		const char *client_ip = client == NULL ? "" :
+							 client->hostaddr_str;
 		if (export != NULL)
 			export_id = export->export_id;
-		monitoring_nfs3_request(proc, request_time, status,
-					export_id, client_ip);
+		monitoring_nfs3_request(proc, request_time, status, export_id,
+					client_ip);
 	}
 #endif
 
@@ -3094,9 +3073,8 @@ void reset_v3_full_stats(void)
 }
 #endif
 
-static void record_v4_full_stats(uint32_t proc,
-			       nsecs_elapsed_t request_time,
-			       nfsstat4 status)
+static void record_v4_full_stats(uint32_t proc, nsecs_elapsed_t request_time,
+				 nfsstat4 status)
 {
 #ifdef USE_MONITORING
 	uint16_t export_id = 0;
@@ -3111,8 +3089,7 @@ static void record_v4_full_stats(uint32_t proc,
 #endif
 	if (proc >= NFS4_OP_LAST_ONE) {
 		LogCrit(COMPONENT_DBUS,
-			"proc is more than NFS4_OP_LAST_ONE: %d\n",
-			proc);
+			"proc is more than NFS4_OP_LAST_ONE: %d\n", proc);
 		return;
 	}
 	record_op(&v4_full_stats[proc], request_time, status == NFS4_OK, false);

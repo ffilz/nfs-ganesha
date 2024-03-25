@@ -62,21 +62,17 @@ void monitoring_init(const uint16_t port);
 
 void monitoring_nfs3_request(const uint32_t proc,
 			     const nsecs_elapsed_t request_time,
-			     const nfsstat3 status,
-			     const export_id_t export_id,
+			     const nfsstat3 status, const export_id_t export_id,
 			     const char *client_ip);
 
 void monitoring_nfs4_request(const uint32_t op,
 			     const nsecs_elapsed_t request_time,
-			     const nfsstat4 status,
-			     const export_id_t export_id,
+			     const nfsstat4 status, const export_id_t export_id,
 			     const char *client_ip);
 
 void monitoring_nfs_io(const size_t bytes_requested,
-		       const size_t bytes_transferred,
-		       const bool success,
-		       const bool is_write,
-		       const export_id_t export_id,
+		       const size_t bytes_transferred, const bool success,
+		       const bool is_write, const export_id_t export_id,
 		       const char *client_ip);
 
 /* MDCache hit rates. */
@@ -94,4 +90,4 @@ void monitoring_rpcs_in_flight(const uint64_t value);
 }
 #endif
 
-#endif   /* GANESHA_MONITORING_H */
+#endif /* GANESHA_MONITORING_H */

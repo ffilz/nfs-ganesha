@@ -36,8 +36,8 @@
 #include "config.h"
 #include "gsh_rpc.h"
 #include "nfs_core.h"
-#include <unistd.h>		/* for using gethostname */
-#include <stdlib.h>		/* for using exit */
+#include <unistd.h> /* for using gethostname */
+#include <stdlib.h> /* for using exit */
 #include <strings.h>
 #include <string.h>
 #include <sys/types.h>
@@ -93,8 +93,7 @@ void uid2grp_release_group_data(struct group_data *gdata)
 }
 
 /* Allocate supplementary groups buffer */
-static bool my_getgrouplist_alloc(char *user,
-				  gid_t gid,
+static bool my_getgrouplist_alloc(char *user, gid_t gid,
 				  struct group_data *gdata)
 {
 	int ngroups = 1000;
@@ -167,8 +166,8 @@ static bool my_getgrouplist_alloc(char *user,
 }
 
 /* Allocate and fill in group_data structure */
-static struct group_data *uid2grp_allocate_by_name(
-		const struct gsh_buffdesc *name)
+static struct group_data *
+uid2grp_allocate_by_name(const struct gsh_buffdesc *name)
 {
 	struct passwd p;
 	struct passwd *pp;
@@ -206,8 +205,8 @@ static struct group_data *uid2grp_allocate_by_name(
 
 	if (retval != 0) {
 		LogEvent(COMPONENT_IDMAPPER,
-			 "getpwnam_r for %s failed, error %d",
-			 namebuff, retval);
+			 "getpwnam_r for %s failed, error %d", namebuff,
+			 retval);
 		goto out;
 	}
 	if (pp == NULL) {
@@ -338,7 +337,7 @@ out:
  * allocation failures.
  */
 static struct group_data *uid2grp_allocate_by_principal(char *principal,
-	uid_t uid, gid_t gid)
+							uid_t uid, gid_t gid)
 {
 #ifdef USE_NFSIDMAP
 	struct group_data *grpdata = NULL;
@@ -349,8 +348,8 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 
 #ifdef _MSPAC_SUPPORT
 	/* TODO */
-	LogWarn(COMPONENT_IDMAPPER,
-		"Unsupported code path for principal %s", principal);
+	LogWarn(COMPONENT_IDMAPPER, "Unsupported code path for principal %s",
+		principal);
 	return NULL;
 #endif
 
@@ -373,7 +372,7 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 		groups = gsh_malloc(ngroups * sizeof(gid_t));
 
 		ret = nfs4_gss_princ_to_grouplist("krb5", principal, groups,
-			&ngroups);
+						  &ngroups);
 		if (ret) {
 			LogWarn(COMPONENT_IDMAPPER,
 				"Could not re-resolve principal %s to groups using nfsidmap, err: %d",
@@ -389,8 +388,8 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 		return NULL;
 	}
 	LogDebug(COMPONENT_IDMAPPER,
-		"Resolved principal %s to %d groups using nfsidmap",
-		principal, ngroups);
+		 "Resolved principal %s to %d groups using nfsidmap", principal,
+		 ngroups);
 
 	/* Resize or free the buffer as appropriate */
 	if (ngroups == 0) {
@@ -406,7 +405,7 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 	grpdata->uname.addr = (char *)grpdata + sizeof(struct group_data);
 	memcpy(grpdata->uname.addr, principal, grpdata->uname.len);
 	/* Null-terminate the uname string */
-	((char *) grpdata->uname.addr)[grpdata->uname.len] = 0;
+	((char *)grpdata->uname.addr)[grpdata->uname.len] = 0;
 	grpdata->uid = uid;
 	grpdata->gid = gid;
 	grpdata->groups = groups;
@@ -538,21 +537,19 @@ bool uid2grp(uid_t uid, struct group_data **gdata)
  *
  * @return true if successful, false otherwise
  */
-bool principal2grp(char *principal, struct group_data **gdata,
-	const uid_t uid, const gid_t gid)
+bool principal2grp(char *principal, struct group_data **gdata, const uid_t uid,
+		   const gid_t gid)
 {
 	bool success = false;
 	uid_t unused_cached_uid = -1;
-	struct gsh_buffdesc princbuff = {
-		.addr = principal,
-		.len = strlen(principal)
-	};
+	struct gsh_buffdesc princbuff = { .addr = principal,
+					  .len = strlen(principal) };
 	LogDebug(COMPONENT_IDMAPPER, "Resolve principal %s to groups",
-		principal);
+		 principal);
 
 	PTHREAD_RWLOCK_rdlock(&uid2grp_user_lock);
-	success = uid2grp_lookup_by_uname(&princbuff, &unused_cached_uid,
-		gdata);
+	success =
+		uid2grp_lookup_by_uname(&princbuff, &unused_cached_uid, gdata);
 
 	/* Return success if we find non-expired group-data in cache */
 	if (success && !uid2grp_is_group_data_expired(*gdata)) {

@@ -53,9 +53,8 @@ uint64_t mem_inode_number = 1;
 /* helpers
  */
 
-static inline int
-mem_n_cmpf(const struct avltree_node *lhs,
-		const struct avltree_node *rhs)
+static inline int mem_n_cmpf(const struct avltree_node *lhs,
+			     const struct avltree_node *rhs)
 {
 	struct mem_dirent *lk, *rk;
 
@@ -65,9 +64,8 @@ mem_n_cmpf(const struct avltree_node *lhs,
 	return strcmp(lk->d_name, rk->d_name);
 }
 
-static inline int
-mem_i_cmpf(const struct avltree_node *lhs,
-		const struct avltree_node *rhs)
+static inline int mem_i_cmpf(const struct avltree_node *lhs,
+			     const struct avltree_node *rhs)
 {
 	struct mem_dirent *lk, *rk;
 
@@ -110,8 +108,7 @@ static void mem_cleanup(struct mem_fsal_obj_handle *myself)
 
 	fsal_obj_handle_fini(&myself->obj_handle, true);
 
-	LogDebug(COMPONENT_FSAL,
-		 "Releasing obj_hdl=%p, myself=%p, name=%s",
+	LogDebug(COMPONENT_FSAL, "Releasing obj_hdl=%p, myself=%p, name=%s",
 		 &myself->obj_handle, myself, myself->m_name);
 
 	switch (myself->obj_handle.type) {
@@ -287,11 +284,8 @@ static fsal_status_t mem_getattrs(struct fsal_obj_handle *obj_hdl,
 		   myself->m_name, myself->attrs.filesize,
 		   myself->attrs.numlinks, myself->attrs.change);
 #endif
-	LogFullDebug(COMPONENT_FSAL,
-		     "hdl=%p, name=%s numlinks %"PRIu32,
-		     myself,
-		     myself->m_name,
-		     myself->attrs.numlinks);
+	LogFullDebug(COMPONENT_FSAL, "hdl=%p, name=%s numlinks %" PRIu32,
+		     myself, myself->m_name, myself->attrs.numlinks);
 
 	fsal_copy_attrs(outattrs, &myself->attrs, false);
 
@@ -310,8 +304,7 @@ static fsal_status_t mem_getattrs(struct fsal_obj_handle *obj_hdl,
  *                                      after the operation. Should be atomic.
  */
 static void mem_insert_obj(struct mem_fsal_obj_handle *parent,
-			   struct mem_fsal_obj_handle *child,
-			   const char *name,
+			   struct mem_fsal_obj_handle *child, const char *name,
 			   struct fsal_attrlist *parent_pre_attrs_out,
 			   struct fsal_attrlist *parent_post_attrs_out)
 {
@@ -343,7 +336,7 @@ static void mem_insert_obj(struct mem_fsal_obj_handle *parent,
 	avltree_insert(&dirent->avl_i, &parent->mh_dir.avl_index);
 	/* Update numkids */
 	numkids = atomic_inc_uint32_t(&parent->mh_dir.numkids);
-	LogFullDebug(COMPONENT_FSAL, "%s numkids %"PRIu32, parent->m_name,
+	LogFullDebug(COMPONENT_FSAL, "%s numkids %" PRIu32, parent->m_name,
 		     numkids);
 
 	mem_update_change_locked(parent);
@@ -361,8 +354,8 @@ static void mem_insert_obj(struct mem_fsal_obj_handle *parent,
  * @param[in] name	Name to look up
  * @return Dirent on success, NULL on failure
  */
-struct mem_dirent *
-mem_dirent_lookup(struct mem_fsal_obj_handle *dir, const char *name)
+struct mem_dirent *mem_dirent_lookup(struct mem_fsal_obj_handle *dir,
+				     const char *name)
 {
 	struct mem_dirent key;
 	struct avltree_node *node;
@@ -387,8 +380,7 @@ mem_dirent_lookup(struct mem_fsal_obj_handle *dir, const char *name)
  * @param[in] dirent	Current dirent
  * @return Next dirent, or NULL if at EOD
  */
-static struct mem_dirent *
-mem_dirent_next(struct mem_dirent *dirent)
+static struct mem_dirent *mem_dirent_next(struct mem_dirent *dirent)
 {
 	struct avltree_node *node;
 
@@ -411,8 +403,8 @@ mem_dirent_next(struct mem_dirent *dirent)
  * @param[in] seekloc	Location to seek to
  * @return Dirent associated with seekloc
  */
-static struct mem_dirent *
-mem_readdir_seekloc(struct mem_fsal_obj_handle *dir, fsal_cookie_t seekloc)
+static struct mem_dirent *mem_readdir_seekloc(struct mem_fsal_obj_handle *dir,
+					      fsal_cookie_t seekloc)
 {
 	struct mem_dirent *dirent;
 	struct avltree_node *node;
@@ -425,11 +417,9 @@ mem_readdir_seekloc(struct mem_fsal_obj_handle *dir, fsal_cookie_t seekloc)
 		if (!node) {
 			return NULL;
 		}
-		dirent = avltree_container_of(node, struct mem_dirent,
-					      avl_i);
+		dirent = avltree_container_of(node, struct mem_dirent, avl_i);
 		return dirent;
 	}
-
 
 	memset(&key, 0, sizeof(key));
 	key.d_index = seekloc;
@@ -474,7 +464,7 @@ static void mem_remove_dirent_locked(struct mem_fsal_obj_handle *parent,
 	PTHREAD_RWLOCK_unlock(&child->obj_handle.obj_lock);
 
 	numkids = atomic_dec_uint32_t(&parent->mh_dir.numkids);
-	LogFullDebug(COMPONENT_FSAL, "%s numkids %"PRIu32, parent->m_name,
+	LogFullDebug(COMPONENT_FSAL, "%s numkids %" PRIu32, parent->m_name,
 		     numkids);
 
 	/* Free dirent */
@@ -548,7 +538,6 @@ void mem_clean_export(struct mem_fsal_obj_handle *root)
 		mem_remove_dirent_locked(root, dirent);
 		PTHREAD_RWLOCK_unlock(&root->obj_handle.obj_lock);
 	}
-
 }
 
 /**
@@ -579,8 +568,8 @@ static void mem_copy_attrs_mask(struct fsal_attrlist *attrs_in,
 
 	if (FSAL_TEST_MASK(attrs_in->valid_mask, ATTR_MODE)) {
 		attrs_out->mode = attrs_in->mode & (~S_IFMT & 0xFFFF) &
-			~op_ctx->fsal_export->exp_ops.fs_umask(
-						op_ctx->fsal_export);
+				  ~op_ctx->fsal_export->exp_ops.fs_umask(
+					  op_ctx->fsal_export);
 	}
 
 	if (FSAL_TEST_MASK(attrs_in->valid_mask, ATTR_OWNER)) {
@@ -635,8 +624,8 @@ static void mem_copy_attrs_mask(struct fsal_attrlist *attrs_in,
  * @param[in] fd	  FD to open
  * @param[in] openflags   New mode for open
  */
-static inline
-void mem_open_my_fd(struct fsal_fd *fd, fsal_openflags_t openflags)
+static inline void mem_open_my_fd(struct fsal_fd *fd,
+				  fsal_openflags_t openflags)
 {
 	fd->openflags = FSAL_O_NFS_FLAGS(openflags);
 }
@@ -706,15 +695,11 @@ static fsal_status_t mem_close_func(struct fsal_obj_handle *obj_hdl,
  *
  * @return Handle on success, NULL on failure
  */
-static struct mem_fsal_obj_handle *
-_mem_alloc_handle(struct mem_fsal_obj_handle *parent,
-		  const char *name,
-		  object_file_type_t type,
-		  struct mem_fsal_export *mfe,
-		  struct fsal_attrlist *attrs,
-		  struct fsal_attrlist *parent_pre_attrs_out,
-		  struct fsal_attrlist *parent_post_attrs_out,
-		  const char *func, int line)
+static struct mem_fsal_obj_handle *_mem_alloc_handle(
+	struct mem_fsal_obj_handle *parent, const char *name,
+	object_file_type_t type, struct mem_fsal_export *mfe,
+	struct fsal_attrlist *attrs, struct fsal_attrlist *parent_pre_attrs_out,
+	struct fsal_attrlist *parent_post_attrs_out, const char *func, int line)
 {
 	struct mem_fsal_obj_handle *hdl;
 	size_t isize;
@@ -751,8 +736,8 @@ _mem_alloc_handle(struct mem_fsal_obj_handle *parent,
 
 	if ((attrs && attrs->valid_mask & ATTR_MODE) != 0)
 		hdl->attrs.mode = attrs->mode & (~S_IFMT & 0xFFFF) &
-			~op_ctx->fsal_export->exp_ops.fs_umask(
-						op_ctx->fsal_export);
+				  ~op_ctx->fsal_export->exp_ops.fs_umask(
+					  op_ctx->fsal_export);
 	else
 		hdl->attrs.mode = 0600;
 
@@ -779,12 +764,10 @@ _mem_alloc_handle(struct mem_fsal_obj_handle *parent,
 	else
 		hdl->attrs.mtime = hdl->attrs.ctime;
 
-
 	/** @todo FSF - this calculation may be different than what particular
 	 *              FSALs use. Is that a problem?
 	 */
-	hdl->attrs.change =
-		timespec_to_nsecs(&hdl->attrs.ctime);
+	hdl->attrs.change = timespec_to_nsecs(&hdl->attrs.ctime);
 
 	switch (type) {
 	case REGULAR_FILE:
@@ -820,8 +803,6 @@ _mem_alloc_handle(struct mem_fsal_obj_handle *parent,
 		break;
 	}
 
-
-
 	/* Set the mask at the end. */
 	hdl->attrs.valid_mask = ATTRS_POSIX;
 	hdl->attrs.supported = ATTRS_POSIX;
@@ -839,7 +820,7 @@ _mem_alloc_handle(struct mem_fsal_obj_handle *parent,
 	if (parent != NULL) {
 		/* Attach myself to my parent */
 		mem_insert_obj(parent, hdl, name, parent_pre_attrs_out,
-			parent_post_attrs_out);
+			       parent_post_attrs_out);
 	} else {
 		/* This is an export */
 		hdl->is_export = true;
@@ -853,7 +834,7 @@ _mem_alloc_handle(struct mem_fsal_obj_handle *parent,
 	return hdl;
 }
 
-#define  mem_int_lookup(d, p, e) _mem_int_lookup(d, p, e, __func__, __LINE__)
+#define mem_int_lookup(d, p, e) _mem_int_lookup(d, p, e, __func__, __LINE__)
 static fsal_status_t _mem_int_lookup(struct mem_fsal_obj_handle *dir,
 				     const char *path,
 				     struct mem_fsal_obj_handle **entry,
@@ -874,9 +855,8 @@ static fsal_status_t _mem_int_lookup(struct mem_fsal_obj_handle *dir,
 		}
 
 		*entry = dir->mh_dir.parent;
-		LogFullDebug(COMPONENT_FSAL,
-			     "Found %s/%s hdl=%p",
-			     dir->m_name, path, *entry);
+		LogFullDebug(COMPONENT_FSAL, "Found %s/%s hdl=%p", dir->m_name,
+			     path, *entry);
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 	} else if (strcmp(path, ".") == 0) {
 		*entry = dir;
@@ -897,26 +877,23 @@ static fsal_status_t _mem_int_lookup(struct mem_fsal_obj_handle *dir,
 }
 
 static fsal_status_t mem_create_obj(struct mem_fsal_obj_handle *parent,
-				    object_file_type_t type,
-				    const char *name,
+				    object_file_type_t type, const char *name,
 				    struct fsal_attrlist *attrs_in,
 				    struct fsal_obj_handle **new_obj,
 				    struct fsal_attrlist *attrs_out,
 				    struct fsal_attrlist *parent_pre_attrs_out,
 				    struct fsal_attrlist *parent_post_attrs_out)
 {
-	struct mem_fsal_export *mfe = container_of(op_ctx->fsal_export,
-						   struct mem_fsal_export,
-						   export);
+	struct mem_fsal_export *mfe = container_of(
+		op_ctx->fsal_export, struct mem_fsal_export, export);
 	struct mem_fsal_obj_handle *hdl;
 	fsal_status_t status;
 
-	*new_obj = NULL;		/* poison it */
+	*new_obj = NULL; /* poison it */
 
 	if (parent->obj_handle.type != DIRECTORY) {
 		LogCrit(COMPONENT_FSAL,
-			"Parent handle is not a directory. hdl = 0x%p",
-			parent);
+			"Parent handle is not a directory. hdl = 0x%p", parent);
 		return fsalstat(ERR_FSAL_NOTDIR, 0);
 	}
 
@@ -930,13 +907,8 @@ static fsal_status_t mem_create_obj(struct mem_fsal_obj_handle *parent,
 	}
 
 	/* allocate an obj_handle and fill it up */
-	hdl = mem_alloc_handle(parent,
-			       name,
-			       type,
-			       mfe,
-			       attrs_in,
-			       parent_pre_attrs_out,
-			       parent_post_attrs_out);
+	hdl = mem_alloc_handle(parent, name, type, mfe, attrs_in,
+			       parent_pre_attrs_out, parent_post_attrs_out);
 	if (!hdl)
 		return fsalstat(ERR_FSAL_NOMEM, 0);
 
@@ -968,9 +940,7 @@ static fsal_status_t mem_lookup(struct fsal_obj_handle *parent,
 	struct mem_fsal_obj_handle *myself, *hdl = NULL;
 	fsal_status_t status;
 
-	myself = container_of(parent,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
+	myself = container_of(parent, struct mem_fsal_obj_handle, obj_handle);
 
 	/* Check if this context already holds the lock on
 	 * this directory.
@@ -978,8 +948,7 @@ static fsal_status_t mem_lookup(struct fsal_obj_handle *parent,
 	if (op_ctx->fsal_private != parent)
 		PTHREAD_RWLOCK_rdlock(&parent->obj_lock);
 	else
-		LogFullDebug(COMPONENT_FSAL,
-			     "Skipping lock for %s",
+		LogFullDebug(COMPONENT_FSAL, "Skipping lock for %s",
 			     myself->m_name);
 
 	status = mem_int_lookup(myself, path, &hdl);
@@ -1015,10 +984,8 @@ out:
  */
 
 static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
-				 fsal_cookie_t *whence,
-				 void *dir_state,
-				 fsal_readdir_cb cb,
-				 attrmask_t attrmask,
+				 fsal_cookie_t *whence, void *dir_state,
+				 fsal_readdir_cb cb, attrmask_t attrmask,
 				 bool *eof)
 {
 	struct mem_fsal_obj_handle *myself;
@@ -1028,9 +995,7 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 	enum fsal_dir_result cb_rc;
 	int count = 0;
 
-	myself = container_of(dir_hdl,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
+	myself = container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 	if (whence != NULL)
 		cookie = *whence;
@@ -1041,8 +1006,7 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 	tracepoint(fsalmem, mem_readdir, __func__, __LINE__, dir_hdl,
 		   myself->m_name, cookie);
 #endif
-	LogFullDebug(COMPONENT_FSAL, "hdl=%p, name=%s",
-		     myself, myself->m_name);
+	LogFullDebug(COMPONENT_FSAL, "hdl=%p, name=%s", myself, myself->m_name);
 
 	PTHREAD_RWLOCK_rdlock(&dir_hdl->obj_lock);
 
@@ -1054,10 +1018,7 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 	dirent = mem_readdir_seekloc(myself, cookie);
 
 	/* Always run in index order */
-	for (;
-	     dirent != NULL;
-	     dirent = dirent_next) {
-
+	for (; dirent != NULL; dirent = dirent_next) {
 		if (count >= 2 * mdcache_param.dir.avl_chunk) {
 			LogFullDebug(COMPONENT_FSAL, "readahead done %d",
 				     count);
@@ -1125,8 +1086,7 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
  * @return FSAL status.
  */
 static fsal_status_t mem_mkdir(struct fsal_obj_handle *dir_hdl,
-			       const char *name,
-			       struct fsal_attrlist *attrs_in,
+			       const char *name, struct fsal_attrlist *attrs_in,
 			       struct fsal_obj_handle **new_obj,
 			       struct fsal_attrlist *attrs_out,
 			       struct fsal_attrlist *parent_pre_attrs_out,
@@ -1173,8 +1133,9 @@ static fsal_status_t mem_mknode(struct fsal_obj_handle *dir_hdl,
 				struct fsal_attrlist *parent_pre_attrs_out,
 				struct fsal_attrlist *parent_post_attrs_out)
 {
-	struct mem_fsal_obj_handle *hdl, *parent =
-		container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
+	struct mem_fsal_obj_handle *hdl,
+		*parent = container_of(dir_hdl, struct mem_fsal_obj_handle,
+				       obj_handle);
 	fsal_status_t status;
 
 	LogDebug(COMPONENT_FSAL, "mknode %s", name);
@@ -1219,8 +1180,9 @@ static fsal_status_t mem_symlink(struct fsal_obj_handle *dir_hdl,
 				 struct fsal_attrlist *parent_pre_attrs_out,
 				 struct fsal_attrlist *parent_post_attrs_out)
 {
-	struct mem_fsal_obj_handle *hdl, *parent =
-		container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
+	struct mem_fsal_obj_handle *hdl,
+		*parent = container_of(dir_hdl, struct mem_fsal_obj_handle,
+				       obj_handle);
 	fsal_status_t status;
 
 	LogDebug(COMPONENT_FSAL, "symlink %s", name);
@@ -1254,8 +1216,7 @@ static fsal_status_t mem_readlink(struct fsal_obj_handle *obj_hdl,
 		container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 	if (obj_hdl->type != SYMBOLIC_LINK) {
-		LogCrit(COMPONENT_FSAL,
-			"Handle is not a symlink. hdl = 0x%p",
+		LogCrit(COMPONENT_FSAL, "Handle is not a symlink. hdl = 0x%p",
 			obj_hdl);
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
@@ -1279,8 +1240,7 @@ static fsal_status_t mem_readlink(struct fsal_obj_handle *obj_hdl,
  *
  * @return FSAL status.
  */
-fsal_status_t mem_setattr2(struct fsal_obj_handle *obj_hdl,
-			   bool bypass,
+fsal_status_t mem_setattr2(struct fsal_obj_handle *obj_hdl, bool bypass,
 			   struct state_t *state,
 			   struct fsal_attrlist *attrs_set)
 {
@@ -1289,8 +1249,8 @@ fsal_status_t mem_setattr2(struct fsal_obj_handle *obj_hdl,
 
 	/* apply umask, if mode attribute is to be changed */
 	if (FSAL_TEST_MASK(attrs_set->valid_mask, ATTR_MODE))
-		attrs_set->mode &=
-		    ~op_ctx->fsal_export->exp_ops.fs_umask(op_ctx->fsal_export);
+		attrs_set->mode &= ~op_ctx->fsal_export->exp_ops.fs_umask(
+			op_ctx->fsal_export);
 
 	/* Test if size is being set, make sure file is regular and if so,
 	 * require a read/write file descriptor.
@@ -1326,8 +1286,7 @@ fsal_status_t mem_setattr2(struct fsal_obj_handle *obj_hdl,
  * @return FSAL status.
  */
 fsal_status_t mem_link(struct fsal_obj_handle *obj_hdl,
-		       struct fsal_obj_handle *dir_hdl,
-		       const char *name,
+		       struct fsal_obj_handle *dir_hdl, const char *name,
 		       struct fsal_attrlist *destdir_pre_attrs_out,
 		       struct fsal_attrlist *destdir_post_attrs_out)
 {
@@ -1336,7 +1295,7 @@ fsal_status_t mem_link(struct fsal_obj_handle *obj_hdl,
 	struct mem_fsal_obj_handle *dir =
 		container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
 	struct mem_fsal_obj_handle *hdl;
-	fsal_status_t status = {0, 0};
+	fsal_status_t status = { 0, 0 };
 
 	status = mem_int_lookup(dir, name, &hdl);
 	if (!FSAL_IS_ERROR(status)) {
@@ -1348,7 +1307,7 @@ fsal_status_t mem_link(struct fsal_obj_handle *obj_hdl,
 	}
 
 	mem_insert_obj(dir, myself, name, destdir_pre_attrs_out,
-		destdir_post_attrs_out);
+		       destdir_post_attrs_out);
 
 	myself->attrs.numlinks++;
 
@@ -1380,16 +1339,12 @@ static fsal_status_t mem_unlink(struct fsal_obj_handle *dir_hdl,
 				struct fsal_attrlist *parent_post_attrs_out)
 {
 	struct mem_fsal_obj_handle *parent, *myself;
-	fsal_status_t status = {0, 0};
+	fsal_status_t status = { 0, 0 };
 	uint32_t numkids;
 	struct mem_dirent *dirent;
 
-	parent = container_of(dir_hdl,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
-	myself = container_of(obj_hdl,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
+	parent = container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
+	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 #ifdef USE_LTTNG
 	tracepoint(fsalmem, mem_unlink, __func__, __LINE__, dir_hdl,
@@ -1407,8 +1362,7 @@ static fsal_status_t mem_unlink(struct fsal_obj_handle *dir_hdl,
 		/* Check if directory is empty */
 		numkids = atomic_fetch_uint32_t(&myself->mh_dir.numkids);
 		if (numkids > 2) {
-			LogFullDebug(COMPONENT_FSAL,
-				     "%s numkids %"PRIu32,
+			LogFullDebug(COMPONENT_FSAL, "%s numkids %" PRIu32,
 				     myself->m_name, numkids);
 			status = fsalstat(ERR_FSAL_NOTEMPTY, 0);
 			goto unlock;
@@ -1459,8 +1413,8 @@ unlock:
 
 fsal_status_t mem_close(struct fsal_obj_handle *obj_hdl)
 {
-	struct mem_fsal_obj_handle *myself = container_of(obj_hdl,
-				  struct mem_fsal_obj_handle, obj_handle);
+	struct mem_fsal_obj_handle *myself =
+		container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 	fsal_status_t status;
 
 	assert(obj_hdl->type == REGULAR_FILE);
@@ -1496,22 +1450,18 @@ fsal_status_t mem_close(struct fsal_obj_handle *obj_hdl)
  *
  * @return FSAL status
  */
-static fsal_status_t mem_rename(struct fsal_obj_handle *obj_hdl,
-				struct fsal_obj_handle *olddir_hdl,
-				const char *old_name,
-				struct fsal_obj_handle *newdir_hdl,
-				const char *new_name,
-				struct fsal_attrlist *olddir_pre_attrs_out,
-				struct fsal_attrlist *olddir_post_attrs_out,
-				struct fsal_attrlist *newdir_pre_attrs_out,
-				struct fsal_attrlist *newdir_post_attrs_out)
+static fsal_status_t
+mem_rename(struct fsal_obj_handle *obj_hdl, struct fsal_obj_handle *olddir_hdl,
+	   const char *old_name, struct fsal_obj_handle *newdir_hdl,
+	   const char *new_name, struct fsal_attrlist *olddir_pre_attrs_out,
+	   struct fsal_attrlist *olddir_post_attrs_out,
+	   struct fsal_attrlist *newdir_pre_attrs_out,
+	   struct fsal_attrlist *newdir_post_attrs_out)
 {
-	struct mem_fsal_obj_handle *mem_olddir =
-		container_of(olddir_hdl, struct mem_fsal_obj_handle,
-			     obj_handle);
-	struct mem_fsal_obj_handle *mem_newdir =
-		container_of(newdir_hdl, struct mem_fsal_obj_handle,
-			     obj_handle);
+	struct mem_fsal_obj_handle *mem_olddir = container_of(
+		olddir_hdl, struct mem_fsal_obj_handle, obj_handle);
+	struct mem_fsal_obj_handle *mem_newdir = container_of(
+		newdir_hdl, struct mem_fsal_obj_handle, obj_handle);
 	struct mem_fsal_obj_handle *mem_obj =
 		container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 	struct mem_fsal_obj_handle *mem_lookup_dst = NULL;
@@ -1534,8 +1484,8 @@ static fsal_status_t mem_rename(struct fsal_obj_handle *obj_hdl,
 			return fsalstat(ERR_FSAL_EXIST, 0);
 		}
 
-		numkids = atomic_fetch_uint32_t(
-				&mem_lookup_dst->mh_dir.numkids);
+		numkids =
+			atomic_fetch_uint32_t(&mem_lookup_dst->mh_dir.numkids);
 		if (mem_lookup_dst->obj_handle.type == DIRECTORY &&
 		    numkids > 2) {
 			/* Target dir must be empty */
@@ -1557,7 +1507,7 @@ static fsal_status_t mem_rename(struct fsal_obj_handle *obj_hdl,
 
 	/* Remove from old dir */
 	mem_remove_dirent(mem_olddir, old_name, olddir_pre_attrs_out,
-		olddir_post_attrs_out);
+			  olddir_post_attrs_out);
 
 	if (!strcmp(old_name, mem_obj->m_name)) {
 		/* Change base name */
@@ -1567,7 +1517,7 @@ static fsal_status_t mem_rename(struct fsal_obj_handle *obj_hdl,
 
 	/* Insert into new directory */
 	mem_insert_obj(mem_newdir, mem_obj, new_name, newdir_pre_attrs_out,
-		newdir_post_attrs_out);
+		       newdir_post_attrs_out);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
@@ -1581,20 +1531,20 @@ static fsal_status_t mem_open2_by_handle(struct fsal_obj_handle *obj_hdl,
 {
 	struct fsal_fd *my_fd;
 	struct mem_fsal_obj_handle *myself;
-	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	fsal_openflags_t old_openflags;
 	bool truncated = openflags & FSAL_O_TRUNC;
 
 	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 	if (state != NULL)
-		my_fd = &container_of(state, struct mem_state_fd,
-				      state)->fsal_fd;
+		my_fd = &container_of(state, struct mem_state_fd, state)
+				 ->fsal_fd;
 	else
 		my_fd = &myself->mh_file.fd;
 
 	/* Indicate we want to do fd work (can't fail since not reclaiming) */
-	(void) fsal_start_fd_work(my_fd, false);
+	(void)fsal_start_fd_work(my_fd, false);
 
 	old_openflags = my_fd->openflags;
 
@@ -1643,13 +1593,13 @@ static fsal_status_t mem_open2_by_handle(struct fsal_obj_handle *obj_hdl,
 	if (FSAL_O_NFS_FLAGS(openflags) == FSAL_O_NFS_FLAGS(old_openflags) &&
 	    truncated == false && createmode == FSAL_NO_CREATE) {
 		LogFullDebug(COMPONENT_FSAL,
-			     "no-op reopen2 my_fd = %p openflags = %x",
-			     my_fd, openflags);
+			     "no-op reopen2 my_fd = %p openflags = %x", my_fd,
+			     openflags);
 		goto exit;
 	}
 
 	/* No share conflict, re-open the share fd (can't fail) */
-	(void) mem_reopen_func(obj_hdl, openflags, my_fd);
+	(void)mem_reopen_func(obj_hdl, openflags, my_fd);
 
 	if (truncated)
 		myself->attrs.filesize = myself->attrs.spaceused = 0;
@@ -1657,8 +1607,7 @@ static fsal_status_t mem_open2_by_handle(struct fsal_obj_handle *obj_hdl,
 	/* Now check verifier for exclusive, but not for
 	 * FSAL_EXCLUSIVE_9P.
 	 */
-	if (createmode >= FSAL_EXCLUSIVE &&
-	    createmode != FSAL_EXCLUSIVE_9P &&
+	if (createmode >= FSAL_EXCLUSIVE && createmode != FSAL_EXCLUSIVE_9P &&
 	    !check_verifier_attrlist(&myself->attrs, verifier, false)) {
 		/* Verifier didn't match, return EEXIST */
 		status = posix2fsal_status(EEXIST);
@@ -1673,7 +1622,7 @@ static fsal_status_t mem_open2_by_handle(struct fsal_obj_handle *obj_hdl,
 
 	if (FSAL_IS_ERROR(status)) {
 		/*close fd*/
-		(void) mem_close_my_fd(my_fd);
+		(void)mem_close_my_fd(my_fd);
 	}
 
 exit:
@@ -1682,8 +1631,7 @@ exit:
 		if (!FSAL_IS_ERROR(status)) {
 			/* Success, establish the new share. */
 			update_share_counters(&myself->mh_file.share,
-					      old_openflags,
-					      openflags);
+					      old_openflags, openflags);
 		}
 
 		/* Release obj_lock. */
@@ -1717,20 +1665,16 @@ exit:
  *
  * @return FSAL status.
  */
-fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
-			struct state_t *state,
-			fsal_openflags_t openflags,
-			enum fsal_create_mode createmode,
-			const char *name,
-			struct fsal_attrlist *attrs_set,
-			fsal_verifier_t verifier,
-			struct fsal_obj_handle **new_obj,
-			struct fsal_attrlist *attrs_out,
-			bool *caller_perm_check,
-			struct fsal_attrlist *parent_pre_attrs_out,
-			struct fsal_attrlist *parent_post_attrs_out)
+fsal_status_t
+mem_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
+	  fsal_openflags_t openflags, enum fsal_create_mode createmode,
+	  const char *name, struct fsal_attrlist *attrs_set,
+	  fsal_verifier_t verifier, struct fsal_obj_handle **new_obj,
+	  struct fsal_attrlist *attrs_out, bool *caller_perm_check,
+	  struct fsal_attrlist *parent_pre_attrs_out,
+	  struct fsal_attrlist *parent_post_attrs_out)
 {
-	fsal_status_t status = {0, 0};
+	fsal_status_t status = { 0, 0 };
 	struct fsal_fd *my_fd = NULL;
 	struct mem_fsal_obj_handle *myself, *hdl = NULL;
 	bool truncated;
@@ -1739,18 +1683,17 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 	struct fsal_attrlist verifier_attr;
 
 	if (state != NULL)
-		my_fd = &container_of(state, struct mem_state_fd,
-				      state)->fsal_fd;
+		my_fd = &container_of(state, struct mem_state_fd, state)
+				 ->fsal_fd;
 
 	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 	if (setattrs)
-		LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG,
-			    "attrs_set ", attrs_set, false);
+		LogAttrlist(COMPONENT_FSAL, NIV_FULL_DEBUG, "attrs_set ",
+			    attrs_set, false);
 
 	truncated = (openflags & FSAL_O_TRUNC) != 0;
-	LogFullDebug(COMPONENT_FSAL,
-		     truncated ? "Truncate" : "No truncate");
+	LogFullDebug(COMPONENT_FSAL, truncated ? "Truncate" : "No truncate");
 
 	/* Now fixup attrs for verifier if exclusive create */
 	if (createmode >= FSAL_EXCLUSIVE) {
@@ -1771,8 +1714,7 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 #endif
 
 		status = mem_open2_by_handle(obj_hdl, state, openflags,
-					     createmode, verifier,
-					     attrs_out);
+					     createmode, verifier, attrs_out);
 
 		*caller_perm_check = FSAL_IS_SUCCESS(status);
 		return status;
@@ -1842,7 +1784,7 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 
 		if (attrs_out != NULL) {
 			status = (*new_obj)->obj_ops->getattrs(*new_obj,
-							      attrs_out);
+							       attrs_out);
 			if (FSAL_IS_ERROR(status) &&
 			    (attrs_out->request_mask & ATTR_RDATTR_ERR) == 0) {
 				/* Get attributes failed and caller expected
@@ -1862,8 +1804,7 @@ fsal_status_t mem_open2(struct fsal_obj_handle *obj_hdl,
 
 		/* Take the share reservation now by updating the counters. */
 		update_share_counters_locked(*new_obj, &hdl->mh_file.share,
-					     FSAL_O_CLOSED,
-					     openflags);
+					     FSAL_O_CLOSED, openflags);
 	}
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -1905,8 +1846,7 @@ fsal_openflags_t mem_status2(struct fsal_obj_handle *obj_hdl,
  * @return FSAL status.
  */
 fsal_status_t mem_reopen2(struct fsal_obj_handle *obj_hdl,
-			  struct state_t *state,
-			  fsal_openflags_t openflags)
+			  struct state_t *state, fsal_openflags_t openflags)
 {
 	return mem_open2_by_handle(obj_hdl, state, openflags, FSAL_NO_CREATE,
 				   NULL, NULL);
@@ -1924,20 +1864,15 @@ struct mem_async_arg {
 	struct fsal_fd temp_fd;
 };
 
-static void
-mem_async_complete(struct fridgethr_context *ctx)
+static void mem_async_complete(struct fridgethr_context *ctx)
 {
 	struct mem_async_arg *async_arg = ctx->arg;
 	struct mem_fsal_export *mem_export = container_of(
-						async_arg->fsal_export,
-						struct mem_fsal_export,
-						export);
+		async_arg->fsal_export, struct mem_fsal_export, export);
 	uint32_t async_delay = atomic_fetch_uint32_t(&mem_export->async_delay);
 	fsal_status_t status;
 	struct mem_fsal_obj_handle *myself = container_of(
-						async_arg->obj_hdl,
-						struct mem_fsal_obj_handle,
-						obj_handle);
+		async_arg->obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 	struct req_op_context opctx;
 
 	/* Now check if we need to delay the call back */
@@ -1959,8 +1894,7 @@ mem_async_complete(struct fridgethr_context *ctx)
 
 	status = fsal_complete_io(async_arg->obj_hdl, async_arg->out_fd);
 
-	LogFullDebug(COMPONENT_FSAL,
-		     "fsal_complete_io returned %s",
+	LogFullDebug(COMPONENT_FSAL, "fsal_complete_io returned %s",
 		     fsal_err_txt(status));
 
 	if (async_arg->io_arg->state == NULL) {
@@ -1982,7 +1916,6 @@ mem_async_complete(struct fridgethr_context *ctx)
 	gsh_free(async_arg);
 }
 
-
 /**
  * @brief Read data from a file
  *
@@ -2002,23 +1935,21 @@ mem_async_complete(struct fridgethr_context *ctx)
  * @return Nothing; results are in callback
  */
 
-void mem_read2(struct fsal_obj_handle *obj_hdl,
-	       bool bypass,
-	       fsal_async_cb done_cb,
-	       struct fsal_io_arg *read_arg,
+void mem_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
+	       fsal_async_cb done_cb, struct fsal_io_arg *read_arg,
 	       void *caller_arg)
 {
-	struct mem_fsal_obj_handle *myself = container_of(obj_hdl,
-				  struct mem_fsal_obj_handle, obj_handle);
+	struct mem_fsal_obj_handle *myself =
+		container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 	struct fsal_fd *out_fd;
-	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0}, status2;
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 }, status2;
 	uint64_t offset = read_arg->offset;
 	int i;
-	struct mem_fsal_export *mem_export =
-	      container_of(op_ctx->fsal_export, struct mem_fsal_export, export);
+	struct mem_fsal_export *mem_export = container_of(
+		op_ctx->fsal_export, struct mem_fsal_export, export);
 	uint32_t async_type = atomic_fetch_uint32_t(&mem_export->async_type);
 	uint32_t async_stall_delay =
-			atomic_fetch_uint32_t(&mem_export->async_stall_delay);
+		atomic_fetch_uint32_t(&mem_export->async_stall_delay);
 	struct mem_async_arg *async_arg;
 
 	if (read_arg->info != NULL) {
@@ -2060,7 +1991,7 @@ void mem_read2(struct fsal_obj_handle *obj_hdl,
 		}
 
 		bufsize = read_arg->iov[i].iov_len;
-		if (offset +  bufsize > myself->attrs.filesize) {
+		if (offset + bufsize > myself->attrs.filesize) {
 			bufsize = myself->attrs.filesize - offset;
 		}
 		if (offset < myself->datasize) {
@@ -2090,7 +2021,7 @@ void mem_read2(struct fsal_obj_handle *obj_hdl,
 
 	if (MEM.async_threads > 0 &&
 	    (async_type > MEM_RANDOM_OR_INLINE ||
-	    ((async_type == MEM_RANDOM_OR_INLINE) && ((random() % 1) == 1)))) {
+	     ((async_type == MEM_RANDOM_OR_INLINE) && ((random() % 1) == 1)))) {
 		/* Initialize the rest of async_arg */
 		async_arg->obj_hdl = obj_hdl;
 		async_arg->io_arg = read_arg;
@@ -2101,8 +2032,7 @@ void mem_read2(struct fsal_obj_handle *obj_hdl,
 		async_arg->out_fd = out_fd;
 		async_arg->share = FSAL_O_READ;
 
-		if (fridgethr_submit(mem_async_fridge,
-				     mem_async_complete,
+		if (fridgethr_submit(mem_async_fridge, mem_async_complete,
 				     async_arg) == 0) {
 			/* Async fired off...
 			 * I/O will complete async.
@@ -2113,8 +2043,7 @@ void mem_read2(struct fsal_obj_handle *obj_hdl,
 
 	status2 = fsal_complete_io(obj_hdl, out_fd);
 
-	LogFullDebug(COMPONENT_FSAL,
-		     "fsal_complete_io returned %s",
+	LogFullDebug(COMPONENT_FSAL, "fsal_complete_io returned %s",
 		     fsal_err_txt(status2));
 
 	if (read_arg->state == NULL) {
@@ -2166,23 +2095,21 @@ bye:
  * @param[in,out] caller_arg	Opaque arg from the caller for callback
  */
 
-void mem_write2(struct fsal_obj_handle *obj_hdl,
-			 bool bypass,
-			 fsal_async_cb done_cb,
-			 struct fsal_io_arg *write_arg,
-			 void *caller_arg)
+void mem_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
+		fsal_async_cb done_cb, struct fsal_io_arg *write_arg,
+		void *caller_arg)
 {
-	struct mem_fsal_obj_handle *myself = container_of(obj_hdl,
-				  struct mem_fsal_obj_handle, obj_handle);
+	struct mem_fsal_obj_handle *myself =
+		container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 	struct fsal_fd *out_fd;
-	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0}, status2;
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 }, status2;
 	uint64_t offset = write_arg->offset;
 	int i;
-	struct mem_fsal_export *mem_export =
-	      container_of(op_ctx->fsal_export, struct mem_fsal_export, export);
+	struct mem_fsal_export *mem_export = container_of(
+		op_ctx->fsal_export, struct mem_fsal_export, export);
 	uint32_t async_type = atomic_fetch_uint32_t(&mem_export->async_type);
 	uint32_t async_stall_delay =
-			atomic_fetch_uint32_t(&mem_export->async_stall_delay);
+		atomic_fetch_uint32_t(&mem_export->async_stall_delay);
 	struct mem_async_arg *async_arg;
 
 	if (obj_hdl->type != REGULAR_FILE) {
@@ -2216,7 +2143,7 @@ void mem_write2(struct fsal_obj_handle *obj_hdl,
 		size_t bufsize;
 
 		bufsize = write_arg->iov[i].iov_len;
-		if (offset +  bufsize > myself->attrs.filesize) {
+		if (offset + bufsize > myself->attrs.filesize) {
 			myself->attrs.filesize = myself->attrs.spaceused =
 				offset + bufsize;
 		}
@@ -2234,8 +2161,8 @@ void mem_write2(struct fsal_obj_handle *obj_hdl,
 
 #ifdef USE_LTTNG
 	tracepoint(fsalmem, mem_write, __func__, __LINE__, obj_hdl,
-			   myself->m_name, write_arg->state,
-			   myself->attrs.filesize, myself->attrs.spaceused);
+		   myself->m_name, write_arg->state, myself->attrs.filesize,
+		   myself->attrs.spaceused);
 #endif
 
 	/* Update change stats */
@@ -2245,12 +2172,11 @@ void mem_write2(struct fsal_obj_handle *obj_hdl,
 	 *              FSALs use. Is that a problem? Also, above, ctime is used
 	 *              not mtime...
 	 */
-	myself->attrs.change =
-		timespec_to_nsecs(&myself->attrs.mtime);
+	myself->attrs.change = timespec_to_nsecs(&myself->attrs.mtime);
 
 	if (MEM.async_threads > 0 &&
 	    (async_type > MEM_RANDOM_OR_INLINE ||
-	    ((async_type == MEM_RANDOM_OR_INLINE) && ((random() % 1) == 1)))) {
+	     ((async_type == MEM_RANDOM_OR_INLINE) && ((random() % 1) == 1)))) {
 		struct mem_async_arg *async_arg;
 
 		/* Was MEM_FIXED, MEM_RANDOM, or MEM_RANDOM_OR_INLINE and we
@@ -2267,8 +2193,7 @@ void mem_write2(struct fsal_obj_handle *obj_hdl,
 		async_arg->out_fd = out_fd;
 		async_arg->share = FSAL_O_WRITE;
 
-		if (fridgethr_submit(mem_async_fridge,
-				     mem_async_complete,
+		if (fridgethr_submit(mem_async_fridge, mem_async_complete,
 				     async_arg) == 0) {
 			/* Async fired off...
 			 * I/O will complete async.
@@ -2277,11 +2202,9 @@ void mem_write2(struct fsal_obj_handle *obj_hdl,
 		}
 	}
 
-
 	status2 = fsal_complete_io(obj_hdl, out_fd);
 
-	LogFullDebug(COMPONENT_FSAL,
-		     "fsal_complete_io returned %s",
+	LogFullDebug(COMPONENT_FSAL, "fsal_complete_io returned %s",
 		     fsal_err_txt(status2));
 
 	if (write_arg->state == NULL) {
@@ -2331,8 +2254,7 @@ bye:
  * @return FSAL status.
  */
 
-fsal_status_t mem_commit2(struct fsal_obj_handle *obj_hdl,
-			  off_t offset,
+fsal_status_t mem_commit2(struct fsal_obj_handle *obj_hdl, off_t offset,
 			  size_t len)
 {
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -2352,13 +2274,12 @@ fsal_status_t mem_commit2(struct fsal_obj_handle *obj_hdl,
  * @return FSAL status.
  */
 
-fsal_status_t mem_close2(struct fsal_obj_handle *obj_hdl,
-			 struct state_t *state)
+fsal_status_t mem_close2(struct fsal_obj_handle *obj_hdl, struct state_t *state)
 {
-	struct fsal_fd *my_fd = &container_of(state, struct mem_state_fd,
-					      state)->fsal_fd;
-	struct mem_fsal_obj_handle *myself = container_of(obj_hdl,
-				  struct mem_fsal_obj_handle, obj_handle);
+	struct fsal_fd *my_fd =
+		&container_of(state, struct mem_state_fd, state)->fsal_fd;
+	struct mem_fsal_obj_handle *myself =
+		container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 #ifdef USE_LTTNG
 	tracepoint(fsalmem, mem_close, __func__, __LINE__, obj_hdl,
@@ -2370,8 +2291,7 @@ fsal_status_t mem_close2(struct fsal_obj_handle *obj_hdl,
 	    state->state_type == STATE_TYPE_9P_FID) {
 		/* This is a share state, we must update the share counters */
 		update_share_counters_locked(obj_hdl, &myself->mh_file.share,
-					     my_fd->openflags,
-					     FSAL_O_CLOSED);
+					     my_fd->openflags, FSAL_O_CLOSED);
 	}
 
 	return close_fsal_fd(obj_hdl, my_fd, false);
@@ -2396,18 +2316,18 @@ static fsal_status_t mem_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
 {
 	const struct mem_fsal_obj_handle *myself;
 
-	myself = container_of(obj_hdl,
-			      const struct mem_fsal_obj_handle,
+	myself = container_of(obj_hdl, const struct mem_fsal_obj_handle,
 			      obj_handle);
 
 	switch (output_type) {
 	case FSAL_DIGEST_NFSV3:
 	case FSAL_DIGEST_NFSV4:
 		if (fh_desc->len < V4_FH_OPAQUE_SIZE) {
-			LogMajor(COMPONENT_FSAL,
-				 "Space too small for handle.  need %lu, have %zu",
-				 ((unsigned long) V4_FH_OPAQUE_SIZE),
-				 fh_desc->len);
+			LogMajor(
+				COMPONENT_FSAL,
+				"Space too small for handle.  need %lu, have %zu",
+				((unsigned long)V4_FH_OPAQUE_SIZE),
+				fh_desc->len);
 			return fsalstat(ERR_FSAL_TOOSMALL, 0);
 		}
 
@@ -2433,13 +2353,11 @@ static fsal_status_t mem_handle_to_wire(const struct fsal_obj_handle *obj_hdl,
  * @param[out] fh_desc	Buffer to write key into
  */
 static void mem_handle_to_key(struct fsal_obj_handle *obj_hdl,
-			  struct gsh_buffdesc *fh_desc)
+			      struct gsh_buffdesc *fh_desc)
 {
 	struct mem_fsal_obj_handle *myself;
 
-	myself = container_of(obj_hdl,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
+	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 	fh_desc->addr = myself->handle;
 	fh_desc->len = V4_FH_OPAQUE_SIZE;
@@ -2456,9 +2374,7 @@ static void mem_get_ref(struct fsal_obj_handle *obj_hdl)
 {
 	struct mem_fsal_obj_handle *myself;
 
-	myself = container_of(obj_hdl,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
+	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 	mem_int_get_ref(myself);
 }
 
@@ -2473,9 +2389,7 @@ static void mem_put_ref(struct fsal_obj_handle *obj_hdl)
 {
 	struct mem_fsal_obj_handle *myself;
 
-	myself = container_of(obj_hdl,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
+	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 	mem_int_put_ref(myself);
 }
 
@@ -2488,9 +2402,7 @@ static void mem_release(struct fsal_obj_handle *obj_hdl)
 {
 	struct mem_fsal_obj_handle *myself;
 
-	myself = container_of(obj_hdl,
-			      struct mem_fsal_obj_handle,
-			      obj_handle);
+	myself = container_of(obj_hdl, struct mem_fsal_obj_handle, obj_handle);
 
 	if (myself->obj_handle.type == REGULAR_FILE) {
 		fsal_status_t st;
@@ -2500,8 +2412,8 @@ static void mem_release(struct fsal_obj_handle *obj_hdl)
 		if (FSAL_IS_ERROR(st)) {
 			LogCrit(COMPONENT_FSAL,
 				"Could not close hdl 0x%p, status %s error %s(%d)",
-				obj_hdl, fsal_err_txt(st),
-				strerror(st.minor), st.minor);
+				obj_hdl, fsal_err_txt(st), strerror(st.minor),
+				st.minor);
 		}
 
 		destroy_fsal_fd(&myself->mh_file.fd);
@@ -2523,26 +2435,23 @@ static void mem_release(struct fsal_obj_handle *obj_hdl)
 static fsal_status_t mem_merge(struct fsal_obj_handle *old_hdl,
 			       struct fsal_obj_handle *new_hdl)
 {
-	fsal_status_t status = {ERR_FSAL_NO_ERROR, 0};
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 
 	if (old_hdl == new_hdl) {
 		/* Nothing to merge */
 		return status;
 	}
 
-	if (old_hdl->type == REGULAR_FILE &&
-	    new_hdl->type == REGULAR_FILE) {
+	if (old_hdl->type == REGULAR_FILE && new_hdl->type == REGULAR_FILE) {
 		/* We need to merge the share reservations on this file.
 		 * This could result in ERR_FSAL_SHARE_DENIED.
 		 */
 		struct mem_fsal_obj_handle *old, *new;
 
-		old = container_of(old_hdl,
-				    struct mem_fsal_obj_handle,
-				    obj_handle);
-		new = container_of(new_hdl,
-				    struct mem_fsal_obj_handle,
-				    obj_handle);
+		old = container_of(old_hdl, struct mem_fsal_obj_handle,
+				   obj_handle);
+		new = container_of(new_hdl, struct mem_fsal_obj_handle,
+				   obj_handle);
 
 		/* This can block over an I/O operation. */
 		status = merge_share(old_hdl, &old->mh_file.share,
@@ -2556,10 +2465,8 @@ void mem_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	fsal_default_obj_ops_init(ops);
 
-	ops->get_ref = mem_get_ref,
-	ops->put_ref = mem_put_ref,
-	ops->merge = mem_merge,
-	ops->release = mem_release;
+	ops->get_ref = mem_get_ref, ops->put_ref = mem_put_ref,
+	ops->merge = mem_merge, ops->release = mem_release;
 	ops->lookup = mem_lookup;
 	ops->readdir = mem_readdir;
 	ops->mkdir = mem_mkdir;
@@ -2593,8 +2500,7 @@ void mem_handle_ops_init(struct fsal_obj_ops *ops)
  * KISS
  */
 
-fsal_status_t mem_lookup_path(struct fsal_export *exp_hdl,
-			      const char *path,
+fsal_status_t mem_lookup_path(struct fsal_export *exp_hdl, const char *path,
 			      struct fsal_obj_handle **obj_hdl,
 			      struct fsal_attrlist *attrs_out)
 {
@@ -2605,8 +2511,7 @@ fsal_status_t mem_lookup_path(struct fsal_export *exp_hdl,
 
 	if (strcmp(path, mfe->export_path) != 0) {
 		/* Lookup of a path other than the export's root. */
-		LogCrit(COMPONENT_FSAL,
-			"Attempt to lookup non-root path %s",
+		LogCrit(COMPONENT_FSAL, "Attempt to lookup non-root path %s",
 			path);
 		return fsalstat(ERR_FSAL_NOENT, ENOENT);
 	}
@@ -2615,13 +2520,9 @@ fsal_status_t mem_lookup_path(struct fsal_export *exp_hdl,
 	attrs.mode = 0777;
 
 	if (mfe->root_handle == NULL) {
-		mfe->root_handle = mem_alloc_handle(NULL,
-						    mfe->export_path,
-						    DIRECTORY,
-						    mfe,
-						    &attrs,
-						    NULL,
-						    NULL);
+		mfe->root_handle = mem_alloc_handle(NULL, mfe->export_path,
+						    DIRECTORY, mfe, &attrs,
+						    NULL, NULL);
 	}
 
 	*obj_hdl = &mfe->root_handle->obj_handle;
@@ -2656,29 +2557,25 @@ fsal_status_t mem_create_handle(struct fsal_export *exp_hdl,
 	*obj_hdl = NULL;
 
 	if (hdl_desc->len != V4_FH_OPAQUE_SIZE) {
-		LogCrit(COMPONENT_FSAL,
-			"Invalid handle size %zu expected %lu",
-			hdl_desc->len,
-			((unsigned long) V4_FH_OPAQUE_SIZE));
+		LogCrit(COMPONENT_FSAL, "Invalid handle size %zu expected %lu",
+			hdl_desc->len, ((unsigned long)V4_FH_OPAQUE_SIZE));
 
 		return fsalstat(ERR_FSAL_BADHANDLE, 0);
 	}
 
 	PTHREAD_RWLOCK_rdlock(&exp_hdl->fsal->fsm_lock);
 
-	glist_for_each(glist, &exp_hdl->fsal->handles) {
+	glist_for_each(glist, &exp_hdl->fsal->handles)
+	{
 		hdl = glist_entry(glist, struct fsal_obj_handle, handles);
 
-		my_hdl = container_of(hdl,
-				      struct mem_fsal_obj_handle,
+		my_hdl = container_of(hdl, struct mem_fsal_obj_handle,
 				      obj_handle);
 
-		if (memcmp(my_hdl->handle,
-			   hdl_desc->addr,
-			   V4_FH_OPAQUE_SIZE) == 0) {
-			LogDebug(COMPONENT_FSAL,
-				 "Found hdl=%p name=%s",
-				 my_hdl, my_hdl->m_name);
+		if (memcmp(my_hdl->handle, hdl_desc->addr, V4_FH_OPAQUE_SIZE) ==
+		    0) {
+			LogDebug(COMPONENT_FSAL, "Found hdl=%p name=%s", my_hdl,
+				 my_hdl->m_name);
 
 #ifdef USE_LTTNG
 			tracepoint(fsalmem, mem_create_handle, __func__,
@@ -2697,8 +2594,7 @@ fsal_status_t mem_create_handle(struct fsal_export *exp_hdl,
 		}
 	}
 
-	LogDebug(COMPONENT_FSAL,
-		"Could not find handle");
+	LogDebug(COMPONENT_FSAL, "Could not find handle");
 
 	PTHREAD_RWLOCK_unlock(&exp_hdl->fsal->fsm_lock);
 

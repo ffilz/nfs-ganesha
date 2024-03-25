@@ -90,10 +90,9 @@
 #ifndef __GNUC__
 #error Please edit abstract_atomic.h and implement support for  \
 	non-GNU compilers.
-#else				/* __GNUC__ */
-#define ATOMIC_GCC_VERSION (__GNUC__ * 10000                           \
-			    + __GNUC_MINOR__ * 100                     \
-			    + __GNUC_PATCHLEVEL__)
+#else /* __GNUC__ */
+#define ATOMIC_GCC_VERSION \
+	(__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
 
 #if ((ATOMIC_GCC_VERSION) >= 40700)
 #define GCC_ATOMIC_FUNCTIONS 1
@@ -101,8 +100,8 @@
 #define GCC_SYNC_FUNCTIONS 1
 #else
 #error This verison of GCC does not support atomics.
-#endif				/* Version check */
-#endif				/* __GNUC__ */
+#endif /* Version check */
+#endif /* __GNUC__ */
 
 /*
  * Preaddition, presubtraction, preincrement, predecrement (return the
@@ -2156,8 +2155,7 @@ static inline int64_t atomic_fetch_int64_t(int64_t *var)
  */
 
 #ifdef GCC_ATOMIC_FUNCTIONS
-static inline bool atomic_add_unless_int64_t(int64_t *var,
-					     int64_t addend,
+static inline bool atomic_add_unless_int64_t(int64_t *var, int64_t addend,
 					     int64_t unless)
 {
 	int64_t cur, newv;
@@ -2175,8 +2173,7 @@ static inline bool atomic_add_unless_int64_t(int64_t *var,
 	return true;
 }
 #elif defined(GCC_SYNC_FUNCTIONS)
-static inline bool atomic_add_unless_int64_t(int64_t *var,
-					     int64_t addend,
+static inline bool atomic_add_unless_int64_t(int64_t *var, int64_t addend,
 					     int64_t unless)
 {
 	int64_t cur, newv;
@@ -2252,8 +2249,7 @@ static inline uint64_t atomic_fetch_uint64_t(uint64_t *var)
  */
 
 #ifdef GCC_ATOMIC_FUNCTIONS
-static inline bool atomic_add_unless_uint64_t(uint64_t *var,
-					      uint64_t addend,
+static inline bool atomic_add_unless_uint64_t(uint64_t *var, uint64_t addend,
 					      uint64_t unless)
 {
 	uint64_t cur, newv;
@@ -2271,8 +2267,7 @@ static inline bool atomic_add_unless_uint64_t(uint64_t *var,
 	return true;
 }
 #elif defined(GCC_SYNC_FUNCTIONS)
-static inline bool atomic_add_unless_uint64_t(uint64_t *var,
-					      uint64_t addend,
+static inline bool atomic_add_unless_uint64_t(uint64_t *var, uint64_t addend,
 					      uint64_t unless)
 {
 	uint64_t cur, newv;
@@ -2348,8 +2343,7 @@ static inline int32_t atomic_fetch_int32_t(int32_t *var)
  */
 
 #ifdef GCC_ATOMIC_FUNCTIONS
-static inline bool atomic_add_unless_int32_t(int32_t *var,
-					     int32_t addend,
+static inline bool atomic_add_unless_int32_t(int32_t *var, int32_t addend,
 					     int32_t unless)
 {
 	int32_t cur, newv;
@@ -2367,8 +2361,7 @@ static inline bool atomic_add_unless_int32_t(int32_t *var,
 	return true;
 }
 #elif defined(GCC_SYNC_FUNCTIONS)
-static inline bool atomic_add_unless_int32_t(int32_t *var,
-					     int32_t addend,
+static inline bool atomic_add_unless_int32_t(int32_t *var, int32_t addend,
 					     int32_t unless)
 {
 	int32_t cur, newv;
@@ -2489,8 +2482,7 @@ static inline uint32_t atomic_fetch_uint32_t(uint32_t *var)
  */
 
 #ifdef GCC_ATOMIC_FUNCTIONS
-static inline bool atomic_add_unless_uint32_t(uint32_t *var,
-					      uint32_t addend,
+static inline bool atomic_add_unless_uint32_t(uint32_t *var, uint32_t addend,
 					      uint32_t unless)
 {
 	uint32_t cur, newv;
@@ -2508,8 +2500,7 @@ static inline bool atomic_add_unless_uint32_t(uint32_t *var,
 	return true;
 }
 #elif defined(GCC_SYNC_FUNCTIONS)
-static inline bool atomic_add_unless_uint32_t(uint32_t *var,
-					      uint32_t addend,
+static inline bool atomic_add_unless_uint32_t(uint32_t *var, uint32_t addend,
 					      uint32_t unless)
 {
 	uint32_t cur, newv;
@@ -2727,4 +2718,4 @@ static inline void atomic_store_uint8_t(uint8_t *var, uint8_t val)
 	(void)__sync_lock_test_and_set(var, val);
 }
 #endif
-#endif				/* !_ABSTRACT_ATOMIC_H */
+#endif /* !_ABSTRACT_ATOMIC_H */

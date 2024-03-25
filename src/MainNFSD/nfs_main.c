@@ -36,7 +36,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
-#include <signal.h>		/* for sigaction */
+#include <signal.h> /* for sigaction */
 #include <errno.h>
 #include "fsal.h"
 #include "log.h"
@@ -79,15 +79,13 @@
 
 #ifdef USE_MONITORING
 #include "monitoring.h"
-#endif  /* USE_MONITORING */
+#endif /* USE_MONITORING */
 
 /* parameters for NFSd startup and default values */
 
-static nfs_start_info_t my_nfs_start_info = {
-	.dump_default_config = false,
-	.lw_mark_trigger = false,
-	.drop_caps = true
-};
+static nfs_start_info_t my_nfs_start_info = { .dump_default_config = false,
+					      .lw_mark_trigger = false,
+					      .drop_caps = true };
 
 config_file_t nfs_config_struct;
 char *nfs_host_name = "localhost";
@@ -117,8 +115,9 @@ static const char usage[] =
 	"SIGTERM    : Cleanly terminate the program\n"
 	"------------- Default Values -------------\n"
 	"LogFile    : SYSLOG\n"
-	"PidFile    : "GANESHA_PIDFILE_PATH"\n"
-	"DebugLevel : NIV_EVENT\n" "ConfigFile : "GANESHA_CONFIG_PATH"\n";
+	"PidFile    : " GANESHA_PIDFILE_PATH "\n"
+	"DebugLevel : NIV_EVENT\n"
+	"ConfigFile : " GANESHA_CONFIG_PATH "\n";
 
 static inline char *main_strdup(const char *var, const char *str)
 {
@@ -134,8 +133,8 @@ static inline char *main_strdup(const char *var, const char *str)
 
 static int valid_stack_size(unsigned long stack_size)
 {
-	static unsigned long valid_sizes[] = {
-		16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 };
+	static unsigned long valid_sizes[] = { 16,  32,	  64,	128,  256,
+					       512, 1024, 2048, 4096, 8192 };
 	for (unsigned int i = 0;
 	     i < sizeof(valid_sizes) / sizeof(valid_sizes[0]); i++)
 		if (valid_sizes[i] == stack_size)
@@ -162,7 +161,7 @@ int main(int argc, char *argv[])
 	int c;
 	int dsc;
 	int rc;
-	int pidfile = -1;               /* fd for file to store pid */
+	int pidfile = -1; /* fd for file to store pid */
 	unsigned long stack_size = 8388608; /* 8M, glibc's default */
 	char *log_path = NULL;
 	char *exec_name = "nfs-ganesha";
@@ -178,7 +177,7 @@ int main(int argc, char *argv[])
 
 	/* Set the server's boot time and epoch */
 	now(&nfs_ServerBootTime);
-	nfs_ServerEpoch = (time_t) nfs_ServerBootTime.tv_sec;
+	nfs_ServerEpoch = (time_t)nfs_ServerBootTime.tv_sec;
 	srand(nfs_ServerEpoch);
 
 	tempo_exec_name = strrchr(argv[0], '/');
@@ -279,7 +278,7 @@ int main(int argc, char *argv[])
 			break;
 
 		case 'E':
-			nfs_ServerEpoch = (time_t) atoll(optarg);
+			nfs_ServerEpoch = (time_t)atoll(optarg);
 			break;
 
 		case 'I':
@@ -304,13 +303,12 @@ int main(int argc, char *argv[])
 	nfs_prereq_init(exec_name, nfs_host_name, debug_level, log_path,
 			dump_trace, stack_size);
 #if GANESHA_BUILD_RELEASE
-	LogEvent(COMPONENT_MAIN, "%s Starting: Ganesha Version %s",
-		 exec_name, GANESHA_VERSION);
+	LogEvent(COMPONENT_MAIN, "%s Starting: Ganesha Version %s", exec_name,
+		 GANESHA_VERSION);
 #else
-	LogEvent(COMPONENT_MAIN, "%s Starting: %s",
-		 exec_name,
-		 "Ganesha Version " _GIT_DESCRIBE ", built at "
-		 __DATE__ " " __TIME__ " on " BUILD_HOST);
+	LogEvent(COMPONENT_MAIN, "%s Starting: %s", exec_name,
+		 "Ganesha Version " _GIT_DESCRIBE ", built at " __DATE__
+		 " " __TIME__ " on " BUILD_HOST);
 #endif
 
 	/* initialize nfs_init */
@@ -336,18 +334,20 @@ int main(int argc, char *argv[])
 		switch (son_pid = fork()) {
 		case -1:
 			/* Fork failed */
-			LogFatal(COMPONENT_MAIN,
-				 "Could not start nfs daemon (fork error %d (%s)",
-				 errno, strerror(errno));
+			LogFatal(
+				COMPONENT_MAIN,
+				"Could not start nfs daemon (fork error %d (%s)",
+				errno, strerror(errno));
 			break;
 
 		case 0:
 			/* This code is within the son (that will actually work)
 			 * Let's make it the leader of its group of process */
 			if (setsid() == -1) {
-				LogFatal(COMPONENT_MAIN,
-					 "Could not start nfs daemon (setsid error %d (%s)",
-					 errno, strerror(errno));
+				LogFatal(
+					COMPONENT_MAIN,
+					"Could not start nfs daemon (setsid error %d (%s)",
+					errno, strerror(errno));
 			}
 
 			/* stdin, stdout and stderr should not refer to a tty
@@ -361,7 +361,7 @@ int main(int argc, char *argv[])
 			if (close(STDIN_FILENO) == -1)
 				LogEvent(COMPONENT_MAIN,
 					 "Error while closing stdin: %d (%s)",
-					  errno, strerror(errno));
+					 errno, strerror(errno));
 			else {
 				LogEvent(COMPONENT_MAIN, "stdin closed");
 				dup(dev_null_fd);
@@ -370,7 +370,7 @@ int main(int argc, char *argv[])
 			if (close(STDOUT_FILENO) == -1)
 				LogEvent(COMPONENT_MAIN,
 					 "Error while closing stdout: %d (%s)",
-					  errno, strerror(errno));
+					 errno, strerror(errno));
 			else {
 				LogEvent(COMPONENT_MAIN, "stdout closed");
 				dup(dev_null_fd);
@@ -379,16 +379,17 @@ int main(int argc, char *argv[])
 			if (close(STDERR_FILENO) == -1)
 				LogEvent(COMPONENT_MAIN,
 					 "Error while closing stderr: %d (%s)",
-					  errno, strerror(errno));
+					 errno, strerror(errno));
 			else {
 				LogEvent(COMPONENT_MAIN, "stderr closed");
 				dup(dev_null_fd);
 			}
 
 			if (close(dev_null_fd) == -1)
-				LogFatal(COMPONENT_MAIN,
-					 "Could not close tmp fd to /dev/null: %d (%s)",
-					 errno, strerror(errno));
+				LogFatal(
+					COMPONENT_MAIN,
+					"Could not close tmp fd to /dev/null: %d (%s)",
+					errno, strerror(errno));
 
 			/* In the child process, change the log header
 			 * if not, the header will contain the parent's pid */
@@ -399,8 +400,7 @@ int main(int argc, char *argv[])
 			/* This code is within the parent process,
 			 * it is useless, it must die */
 			LogFullDebug(COMPONENT_MAIN,
-				     "Starting a child of pid %d",
-				     son_pid);
+				     "Starting a child of pid %d", son_pid);
 			exit(0);
 			break;
 		}
@@ -418,9 +418,10 @@ int main(int argc, char *argv[])
 	/* this file is a fatal error.                                 */
 	pidfile = open(nfs_pidfile_path, O_CREAT | O_RDWR, 0644);
 	if (pidfile == -1) {
-		LogFatal(COMPONENT_MAIN,
+		LogFatal(
+			COMPONENT_MAIN,
 			"open(%s, O_CREAT | O_RDWR, 0644) failed for pid file, errno was: %s (%d)",
-			 nfs_pidfile_path, strerror(errno), errno);
+			nfs_pidfile_path, strerror(errno), errno);
 		goto fatal_die;
 	} else {
 		struct flock lk;
@@ -429,12 +430,12 @@ int main(int argc, char *argv[])
 		/* Ganesha may already be running.                         */
 		lk.l_type = F_WRLCK;
 		lk.l_whence = SEEK_SET;
-		lk.l_start = (off_t) 0;
-		lk.l_len = (off_t) 0;
+		lk.l_start = (off_t)0;
+		lk.l_len = (off_t)0;
 		if (fcntl(pidfile, F_SETLK, &lk) == -1) {
 			LogFatal(COMPONENT_MAIN,
-				"fcntl(%d) failed, Ganesha already started",
-				pidfile);
+				 "fcntl(%d) failed, Ganesha already started",
+				 pidfile);
 			goto fatal_die;
 		}
 
@@ -442,7 +443,8 @@ int main(int argc, char *argv[])
 		/* to ensure it winds up on the disk.                 */
 		if (dprintf(pidfile, "%u\n", getpid()) < 0 ||
 		    fsync(pidfile) < 0) {
-			LogFatal(COMPONENT_MAIN,
+			LogFatal(
+				COMPONENT_MAIN,
 				"dprintf() or fsync() failed trying to write pid to file %s errno was: %s (%d)",
 				nfs_pidfile_path, strerror(errno), errno);
 			goto fatal_die;
@@ -459,7 +461,7 @@ int main(int argc, char *argv[])
 	if (pthread_sigmask(SIG_BLOCK, &signals_to_block, NULL) != 0) {
 		LogFatal(COMPONENT_MAIN,
 			 "Could not start nfs daemon, pthread_sigmask failed");
-			goto fatal_die;
+		goto fatal_die;
 	}
 
 	/* init URL package */
@@ -472,8 +474,7 @@ int main(int argc, char *argv[])
 	/* Parse the configuration file so we all know what is going on. */
 
 	if (nfs_config_path == NULL || nfs_config_path[0] == '\0') {
-		LogWarn(COMPONENT_INIT,
-			"No configuration file named.");
+		LogWarn(COMPONENT_INIT, "No configuration file named.");
 		nfs_config_struct = NULL;
 	} else
 		nfs_config_struct =
@@ -483,16 +484,14 @@ int main(int argc, char *argv[])
 		char *errstr = err_type_str(&err_type);
 
 		if (!config_error_is_harmless(&err_type)) {
-			LogCrit(COMPONENT_INIT,
-				 "Error %s while parsing (%s)",
-				 errstr != NULL ? errstr : "unknown",
-				 nfs_config_path);
+			LogCrit(COMPONENT_INIT, "Error %s while parsing (%s)",
+				errstr != NULL ? errstr : "unknown",
+				nfs_config_path);
 			if (errstr != NULL)
 				gsh_free(errstr);
 			goto fatal_die;
 		} else
-			LogWarn(COMPONENT_INIT,
-				"Error %s while parsing (%s)",
+			LogWarn(COMPONENT_INIT, "Error %s while parsing (%s)",
 				errstr != NULL ? errstr : "unknown",
 				nfs_config_path);
 		if (errstr != NULL)
@@ -501,7 +500,7 @@ int main(int argc, char *argv[])
 
 	if (read_log_config(nfs_config_struct, &err_type) < 0) {
 		LogCrit(COMPONENT_INIT,
-			 "Error while parsing log configuration");
+			"Error while parsing log configuration");
 		goto fatal_die;
 	}
 
@@ -509,29 +508,26 @@ int main(int argc, char *argv[])
 	 * the list available at exports parsing time.
 	 */
 	if (start_fsals(nfs_config_struct, &err_type) < 0) {
-		LogCrit(COMPONENT_INIT,
-			 "Error starting FSALs.");
+		LogCrit(COMPONENT_INIT, "Error starting FSALs.");
 		goto fatal_die;
 	}
 
 	/* parse configuration file */
 
-	if (nfs_set_param_from_conf(nfs_config_struct,
-				    &my_nfs_start_info,
+	if (nfs_set_param_from_conf(nfs_config_struct, &my_nfs_start_info,
 				    &err_type)) {
 		LogCrit(COMPONENT_INIT,
-			 "Error setting parameters from configuration file.");
+			"Error setting parameters from configuration file.");
 		goto fatal_die;
 	}
 
 #ifdef USE_MONITORING
 	monitoring_init(nfs_param.core_param.monitoring_port);
-#endif  /* USE_MONITORING */
+#endif /* USE_MONITORING */
 
 	/* initialize core subsystems and data structures */
 	if (init_server_pkgs() != 0) {
-		LogCrit(COMPONENT_INIT,
-			"Failed to initialize server packages");
+		LogCrit(COMPONENT_INIT, "Failed to initialize server packages");
 		goto fatal_die;
 	}
 	/* Load Data Server entries from parsed file
@@ -539,8 +535,7 @@ int main(int argc, char *argv[])
 	 */
 	dsc = ReadDataServers(nfs_config_struct, &err_type);
 	if (dsc < 0) {
-		LogCrit(COMPONENT_INIT,
-			"Error while parsing DS entries");
+		LogCrit(COMPONENT_INIT, "Error while parsing DS entries");
 		goto fatal_die;
 	}
 
@@ -550,7 +545,7 @@ int main(int argc, char *argv[])
 	rc = nfs4_recovery_init();
 	if (rc) {
 		LogCrit(COMPONENT_INIT,
-			  "Recovery backend initialization failed!");
+			"Recovery backend initialization failed!");
 		goto fatal_die;
 	}
 
@@ -565,8 +560,7 @@ int main(int argc, char *argv[])
 	 */
 	rc = ReadExports(nfs_config_struct, &err_type);
 	if (rc < 0) {
-		LogCrit(COMPONENT_INIT,
-			  "Error while parsing export entries");
+		LogCrit(COMPONENT_INIT, "Error while parsing export entries");
 		goto fatal_die;
 	}
 	if (rc == 0 && dsc == 0)
@@ -600,7 +594,7 @@ int main(int argc, char *argv[])
 	return 0;
 
 fatal_die:
-	(void) report_config_errors(&err_type, NULL, config_errs_to_log);
+	(void)report_config_errors(&err_type, NULL, config_errs_to_log);
 
 	if (tempo_exec_name)
 		free(exec_name);
@@ -612,8 +606,7 @@ fatal_die:
 	/* systemd journal won't display our errors without this */
 	sleep(1);
 
-	LogFatal(COMPONENT_INIT,
-		 "Fatal errors.  Server exiting...");
+	LogFatal(COMPONENT_INIT, "Fatal errors.  Server exiting...");
 	/* NOT REACHED */
 	return 2;
 }
