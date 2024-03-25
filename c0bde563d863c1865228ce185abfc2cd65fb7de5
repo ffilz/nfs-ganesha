@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bccb56fa_326cbc91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "Well, it doesn\u0027t look too bad. A few thoughts from the first chunk of files...\n\nIn interest of reducing manual merges, I think we should finish iterating over the current bugs and get everything submitted so far merged. Then re-run the automated conversion. Otherwise there\u0027s going to be a load of manual merge and we\u0027ll end up introducing old formatted code.\n\nPlease open a discussion on the mailing list so everyone knows this is under consideration and can weigh in.",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "328db0d9_ac3c2af3",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "Hmm, should we add an open brace on the if line",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca0699a_98f52c82",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "So we can have the close brace before the else?",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "100af952_46184410",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "I get what the auto format is trying to do here, but it\u0027s not very pretty...",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7e02b6_305fb702",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "There was a time I would have been annoyed to have the component on the next line.\n\nThese days, if I want to analyze log messages, I\u0027ll use tools/findlog.sh instead of grep...",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9772a96e_29167bc8",
+        "filename": "src/avl/avl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "Since your touching this line, could you change XXX to @TODO?",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd4331b_7ffd35ce",
+        "filename": "src/avl/bst.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "This one is unfortunate. Once the params are mostly one per line, I find it easier to read if all the params are one per line.",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf5aa90d_148a12cc",
+        "filename": "src/cidr/cidr_addr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "Oh, nice THAT one is resolved. The need for that extra space to make checkpatch happy was annoying.",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7a88899_4814178d",
+        "filename": "src/cidr/cidr_get.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "It would be nice with a mass re-formatting to fix lines \u003e80 (other than the single string that runs over).",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126c495e_06262667",
+        "filename": "src/cidr/cidr_inaddr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "Hmm, the old IS easier to read, but understand the limits of automatic code formatting.",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7927fbab_6bfec7dc",
+        "filename": "src/dbus/dbus_priv.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:57:05Z",
+      "side": 1,
+      "message": "Well, that\u0027s a nice re-write...",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
