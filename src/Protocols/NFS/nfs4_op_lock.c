@@ -58,16 +58,15 @@ static const char *lock_tag = "LOCK";
 
 #define SUCCESS_RESP_SIZE (sizeof(nfsstat4) + sizeof(stateid4))
 
-enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
-				 compound_data_t *data,
+enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op, compound_data_t *data,
 				 struct nfs_resop4 *resp)
 {
 	/* Shorter alias for arguments */
-	LOCK4args * const arg_LOCK4 = &op->nfs_argop4_u.oplock;
+	LOCK4args *const arg_LOCK4 = &op->nfs_argop4_u.oplock;
 	open_to_lock_owner4 *arg_open_owner =
 		&arg_LOCK4->locker.locker4_u.open_owner;
 	/* Shorter alias for response */
-	LOCK4res * const res_LOCK4 = &resp->nfs_resop4_u.oplock;
+	LOCK4res *const res_LOCK4 = &resp->nfs_resop4_u.oplock;
 	/* Status code from state calls */
 	state_status_t state_status = STATE_SUCCESS;
 	/* Data for lock state to be created */
@@ -106,8 +105,8 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 	int rc;
 	struct fsal_obj_handle *obj = data->current_obj;
 	bool st_lock_held = false;
-	uint64_t maxfilesize =
-	    op_ctx->fsal_export->exp_ops.fs_maxfilesize(op_ctx->fsal_export);
+	uint64_t maxfilesize = op_ctx->fsal_export->exp_ops.fs_maxfilesize(
+		op_ctx->fsal_export);
 	bool new_lock_state = false;
 
 	LogDebug(COMPONENT_NFS_V4_LOCK,
@@ -127,8 +126,7 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 
 	/* Record the sequence info */
 	if (data->minorversion > 0) {
-		memcpy(refer.session,
-		       data->session->session_id,
+		memcpy(refer.session, data->session->session_id,
 		       sizeof(sessionid4));
 		refer.sequence = data->sequence;
 		refer.slot = data->slotid;
@@ -158,8 +156,7 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		break;
 
 	default:
-		LogDebug(COMPONENT_NFS_V4_LOCK,
-			 "Invalid lock type");
+		LogDebug(COMPONENT_NFS_V4_LOCK, "Invalid lock type");
 		res_LOCK4->status = NFS4ERR_INVAL;
 		return NFS_REQ_ERROR;
 	}
@@ -176,14 +173,9 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 	if (arg_LOCK4->locker.new_lock_owner) {
 		/* Check stateid correctness and get pointer to state */
 		nfs_status = nfs4_Check_Stateid(
-			&arg_open_owner->open_stateid,
-			obj,
-			&state_open,
-			data,
-			STATEID_SPECIAL_FOR_LOCK,
-			arg_open_owner->open_seqid,
-			data->minorversion == 0,
-			lock_tag);
+			&arg_open_owner->open_stateid, obj, &state_open, data,
+			STATEID_SPECIAL_FOR_LOCK, arg_open_owner->open_seqid,
+			data->minorversion == 0, lock_tag);
 
 		if (nfs_status != NFS4_OK) {
 			if (nfs_status == NFS4ERR_REPLAY) {
@@ -194,14 +186,15 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 				if (open_owner != NULL) {
 					resp_owner = open_owner;
 					seqid = arg_LOCK4->locker.locker4_u
-						.open_owner.open_seqid;
+							.open_owner.open_seqid;
 					goto check_seqid;
 				}
 			}
 
 			res_LOCK4->status = nfs_status;
-			LogDebug(COMPONENT_NFS_V4_LOCK,
-				 "LOCK failed nfs4_Check_Stateid for open owner");
+			LogDebug(
+				COMPONENT_NFS_V4_LOCK,
+				"LOCK failed nfs4_Check_Stateid for open owner");
 			return NFS_REQ_ERROR;
 		}
 
@@ -212,8 +205,9 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		if (open_owner == NULL) {
 			/* State is going stale. */
 			res_LOCK4->status = NFS4ERR_STALE;
-			LogDebug(COMPONENT_NFS_V4_LOCK,
-				 "LOCK failed nfs4_Check_Stateid, stale open owner");
+			LogDebug(
+				COMPONENT_NFS_V4_LOCK,
+				"LOCK failed nfs4_Check_Stateid, stale open owner");
 			goto out2;
 		}
 
@@ -223,14 +217,14 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		seqid = arg_open_owner->open_seqid;
 
 		LogLock(COMPONENT_NFS_V4_LOCK, NIV_FULL_DEBUG,
-			"LOCK New lock owner from open owner",
-			obj, open_owner, &lock_desc);
+			"LOCK New lock owner from open owner", obj, open_owner,
+			&lock_desc);
 
 		/* Check is the clientid is known or not */
 		rc = nfs_client_id_get_confirmed(
-			data->minorversion == 0
-				? arg_open_owner->lock_owner.clientid
-				: data->session->clientid,
+			data->minorversion == 0 ?
+				arg_open_owner->lock_owner.clientid :
+				data->session->clientid,
 			&clientid);
 
 		if (rc != CLIENT_ID_SUCCESS) {
@@ -240,23 +234,27 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 			goto out2;
 		}
 
-		if (isDebug(COMPONENT_CLIENTID) && (clientid !=
-		    open_owner->so_owner.so_nfs4_owner.so_clientrec)) {
+		if (isDebug(COMPONENT_CLIENTID) &&
+		    (clientid !=
+		     open_owner->so_owner.so_nfs4_owner.so_clientrec)) {
 			char str_open[LOG_BUFF_LEN / 2] = "\0";
-			struct display_buffer dspbuf_open = {
-				sizeof(str_open), str_open, str_open};
+			struct display_buffer dspbuf_open = { sizeof(str_open),
+							      str_open,
+							      str_open };
 			char str_lock[LOG_BUFF_LEN / 2] = "\0";
-			struct display_buffer dspbuf_lock = {
-				sizeof(str_lock), str_lock, str_lock};
+			struct display_buffer dspbuf_lock = { sizeof(str_lock),
+							      str_lock,
+							      str_lock };
 
-			display_client_id_rec(&dspbuf_open,
-					      open_owner->so_owner
-					      .so_nfs4_owner.so_clientrec);
+			display_client_id_rec(
+				&dspbuf_open,
+				open_owner->so_owner.so_nfs4_owner.so_clientrec);
 			display_client_id_rec(&dspbuf_lock, clientid);
 
-			LogDebug(COMPONENT_CLIENTID,
-				 "Unexpected, new lock owner clientid {%s} doesn't match open owner clientid {%s}",
-				 str_lock, str_open);
+			LogDebug(
+				COMPONENT_CLIENTID,
+				"Unexpected, new lock owner clientid {%s} doesn't match open owner clientid {%s}",
+				str_lock, str_open);
 		}
 
 		/* The related stateid is already stored in state_open */
@@ -287,13 +285,9 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		 */
 		nfs_status = nfs4_Check_Stateid(
 			&arg_LOCK4->locker.locker4_u.lock_owner.lock_stateid,
-			obj,
-			&lock_state,
-			data,
-			STATEID_SPECIAL_FOR_LOCK,
+			obj, &lock_state, data, STATEID_SPECIAL_FOR_LOCK,
 			arg_LOCK4->locker.locker4_u.lock_owner.lock_seqid,
-			data->minorversion == 0,
-			lock_tag);
+			data->minorversion == 0, lock_tag);
 
 		if (nfs_status != NFS4_OK) {
 			if (nfs_status == NFS4ERR_REPLAY) {
@@ -303,28 +297,31 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 
 				if (lock_owner != NULL) {
 					open_owner = lock_owner->so_owner
-						.so_nfs4_owner.so_related_owner;
+							     .so_nfs4_owner
+							     .so_related_owner;
 					inc_state_owner_ref(open_owner);
 					resp_owner = lock_owner;
 					seqid = arg_LOCK4->locker.locker4_u
-						.lock_owner.lock_seqid;
+							.lock_owner.lock_seqid;
 					goto check_seqid;
 				}
 			}
 
 			res_LOCK4->status = nfs_status;
-			LogDebug(COMPONENT_NFS_V4_LOCK,
-				 "LOCK failed nfs4_Check_Stateid for existing lock owner");
+			LogDebug(
+				COMPONENT_NFS_V4_LOCK,
+				"LOCK failed nfs4_Check_Stateid for existing lock owner");
 			return NFS_REQ_ERROR;
 		}
 
 		/* Check if lock state belongs to same export */
 		if (!state_same_export(lock_state, op_ctx->ctx_export)) {
-			LogEvent(COMPONENT_STATE,
-				 "Lock Owner Export Conflict, Lock held for export %"
-				 PRIu16" request for export %"PRIu16,
-				 state_export_id(lock_state),
-				 op_ctx->ctx_export->export_id);
+			LogEvent(
+				COMPONENT_STATE,
+				"Lock Owner Export Conflict, Lock held for export %" PRIu16
+				" request for export %" PRIu16,
+				state_export_id(lock_state),
+				op_ctx->ctx_export->export_id);
 			res_LOCK4->status = NFS4ERR_INVAL;
 			goto out2;
 		}
@@ -332,8 +329,9 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		/* A lock state has been found. Check its type */
 		if (lock_state->state_type != STATE_TYPE_LOCK) {
 			res_LOCK4->status = NFS4ERR_BAD_STATEID;
-			LogDebug(COMPONENT_NFS_V4_LOCK,
-				 "LOCK failed existing lock owner,  state type is not LOCK");
+			LogDebug(
+				COMPONENT_NFS_V4_LOCK,
+				"LOCK failed existing lock owner,  state type is not LOCK");
 			goto out2;
 		}
 
@@ -348,8 +346,9 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		if (lock_owner == NULL) {
 			/* State is going stale. */
 			res_LOCK4->status = NFS4ERR_STALE;
-			LogDebug(COMPONENT_NFS_V4_LOCK,
-				 "LOCK failed nfs4_Check_Stateid, stale open owner");
+			LogDebug(
+				COMPONENT_NFS_V4_LOCK,
+				"LOCK failed nfs4_Check_Stateid, stale open owner");
 			goto out2;
 		}
 
@@ -369,23 +368,19 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		seqid = arg_LOCK4->locker.locker4_u.lock_owner.lock_seqid;
 
 		LogLock(COMPONENT_NFS_V4_LOCK, NIV_FULL_DEBUG,
-			"LOCK Existing lock owner", obj,
-			lock_owner, &lock_desc);
+			"LOCK Existing lock owner", obj, lock_owner,
+			&lock_desc);
 
 		/* Get the client for this open owner */
 		clientid = open_owner->so_owner.so_nfs4_owner.so_clientrec;
 		inc_client_id_ref(clientid);
 	}
 
- check_seqid:
+check_seqid:
 
 	/* Check seqid (lock_seqid or open_seqid) */
 	if (data->minorversion == 0) {
-		if (!Check_nfs4_seqid(resp_owner,
-				      seqid,
-				      op,
-				      obj,
-				      resp,
+		if (!Check_nfs4_seqid(resp_owner, seqid, op, obj, resp,
 				      lock_tag)) {
 			/* Response is all setup for us and LogDebug
 			 * told what was wrong
@@ -410,8 +405,8 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 	    (STATE_LOCK_OFFSET_EOF - lock_desc.lock_start)) {
 		res_LOCK4->status = NFS4ERR_INVAL;
 		LogDebug(COMPONENT_NFS_V4_LOCK,
-			 "LOCK failed length overflow start %"PRIx64
-			 " length %"PRIx64,
+			 "LOCK failed length overflow start %" PRIx64
+			 " length %" PRIx64,
 			 lock_desc.lock_start, lock_desc.lock_length);
 		goto out;
 	}
@@ -424,10 +419,10 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 	 */
 	if (lock_desc.lock_length > (maxfilesize - lock_desc.lock_start)) {
 		LogDebug(COMPONENT_NFS_V4_LOCK,
-			 "LOCK past maxfilesize %"PRIx64" start %"PRIx64
-			 " length %"PRIx64,
-			 maxfilesize,
-			 lock_desc.lock_start, lock_desc.lock_length);
+			 "LOCK past maxfilesize %" PRIx64 " start %" PRIx64
+			 " length %" PRIx64,
+			 maxfilesize, lock_desc.lock_start,
+			 lock_desc.lock_length);
 		lock_desc.lock_length = 0;
 	}
 
@@ -437,31 +432,27 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 	 * state assures there are no conflicting states.
 	 */
 	if (((arg_LOCK4->locktype == WRITE_LT ||
-	      arg_LOCK4->locktype == WRITEW_LT)
-	      &&
-	      ((state_open->state_data.share.share_access &
-		OPEN4_SHARE_ACCESS_WRITE) == 0))
-	    ||
+	      arg_LOCK4->locktype == WRITEW_LT) &&
+	     ((state_open->state_data.share.share_access &
+	       OPEN4_SHARE_ACCESS_WRITE) == 0)) ||
 	    ((arg_LOCK4->locktype == READ_LT ||
-	      arg_LOCK4->locktype == READW_LT)
-	      &&
-	      ((state_open->state_data.share.share_access &
-		OPEN4_SHARE_ACCESS_READ) == 0))) {
+	      arg_LOCK4->locktype == READW_LT) &&
+	     ((state_open->state_data.share.share_access &
+	       OPEN4_SHARE_ACCESS_READ) == 0))) {
 		/* The open state doesn't allow access based on the
 		 * type of lock
 		 */
 		LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
-			"LOCK failed, SHARE doesn't allow access",
-			obj, lock_owner, &lock_desc);
+			"LOCK failed, SHARE doesn't allow access", obj,
+			lock_owner, &lock_desc);
 
 		res_LOCK4->status = NFS4ERR_OPENMODE;
 
 		goto out;
 	}
 
-
 	fsal_grace = op_ctx->fsal_export->exp_ops.fs_supports(
-					op_ctx->fsal_export, fso_grace_method);
+		op_ctx->fsal_export, fso_grace_method);
 
 	/* Do grace period checking (use resp_owner below since a new
 	 * lock request with a new lock owner doesn't have a lock owner
@@ -506,12 +497,9 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 
 		/* This lock owner is not known yet, allocated and set
 		   up a new one */
-		lock_owner = create_nfs4_owner(&owner_name,
-					       clientid,
+		lock_owner = create_nfs4_owner(&owner_name, clientid,
 					       STATE_LOCK_OWNER_NFSV4,
-					       open_owner,
-					       0,
-					       &isnew,
+					       open_owner, 0, &isnew,
 					       CARE_ALWAYS, true);
 
 		LogStateOwner("Lock: ", lock_owner);
@@ -519,26 +507,22 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		if (lock_owner == NULL) {
 			res_LOCK4->status = NFS4ERR_RESOURCE;
 			LogLock(COMPONENT_NFS_V4_LOCK, NIV_EVENT,
-				"LOCK failed to create new lock owner",
-				obj, open_owner, &lock_desc);
+				"LOCK failed to create new lock owner", obj,
+				open_owner, &lock_desc);
 			goto out2;
 		}
 
 		if (!isnew) {
 			PTHREAD_MUTEX_lock(&lock_owner->so_mutex);
 			/* Check lock_seqid if it has attached locks. */
-			if (!glist_empty(&lock_owner->so_lock_list)
-			    && (data->minorversion == 0)
-			    && !Check_nfs4_seqid(lock_owner,
-						 arg_open_owner->lock_seqid,
-						 op,
-						 obj,
-						 resp,
-						 lock_tag)) {
+			if (!glist_empty(&lock_owner->so_lock_list) &&
+			    (data->minorversion == 0) &&
+			    !Check_nfs4_seqid(lock_owner,
+					      arg_open_owner->lock_seqid, op,
+					      obj, resp, lock_tag)) {
 				LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
 					"LOCK failed to create new lock owner, re-use",
-					obj,
-					open_owner, &lock_desc);
+					obj, open_owner, &lock_desc);
 				dump_all_locks(
 					"All locks (re-use of lock owner)");
 
@@ -575,8 +559,8 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 			 * with the guard of STATELOCK. If does not exist,
 			 * it means file already closed.
 			 */
-			if (nfs4_State_Get_Pointer(
-				state_open->stateid_other) == NULL) {
+			if (nfs4_State_Get_Pointer(state_open->stateid_other) ==
+			    NULL) {
 				res_LOCK4->status = NFS4ERR_BAD_STATEID;
 				goto out2;
 			}
@@ -586,24 +570,20 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 			/* Prepare state management structure */
 			memset(&candidate_data, 0, sizeof(candidate_data));
 			memcpy(candidate_data.lock.openstate_key,
-				state_open->stateid_other, OTHERSIZE);
+			       state_open->stateid_other, OTHERSIZE);
 
 			/* Add the lock state to the lock table */
-			state_status = state_add_impl(obj,
-						      STATE_TYPE_LOCK,
-						      &candidate_data,
-						      lock_owner,
-						      &lock_state,
-						      data->minorversion > 0 ?
-								&refer : NULL);
+			state_status = state_add_impl(
+				obj, STATE_TYPE_LOCK, &candidate_data,
+				lock_owner, &lock_state,
+				data->minorversion > 0 ? &refer : NULL);
 
 			if (state_status != STATE_SUCCESS) {
 				res_LOCK4->status = NFS4ERR_RESOURCE;
 
 				LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
-					"LOCK failed to add new stateid",
-					obj, lock_owner,
-					&lock_desc);
+					"LOCK failed to add new stateid", obj,
+					lock_owner, &lock_desc);
 
 				goto out2;
 			}
@@ -617,7 +597,6 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 			glist_add_tail(
 				&state_open->state_data.share.share_lockstates,
 				&lock_state->state_data.lock.state_sharelist);
-
 		}
 	} else {
 		/* Take the st_lock now */
@@ -627,7 +606,7 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 
 	if (data->minorversion == 0) {
 		op_ctx->clientid =
-		    &lock_owner->so_owner.so_nfs4_owner.so_clientid;
+			&lock_owner->so_owner.so_nfs4_owner.so_clientid;
 	}
 
 	/* Handle race with CLOSE and LOCK. Buggy clients could send
@@ -654,14 +633,9 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 
 	/* Now we have a lock owner and a stateid.  Go ahead and push
 	 * lock into SAL (and FSAL). */
-	state_status = state_lock(obj,
-				  lock_owner,
-				  lock_state,
-				  blocking,
-				  NULL,	/* No block data for now */
-				  &lock_desc,
-				  &conflict_owner,
-				  &conflict_desc);
+	state_status = state_lock(obj, lock_owner, lock_state, blocking,
+				  NULL, /* No block data for now */
+				  &lock_desc, &conflict_owner, &conflict_desc);
 
 	if (state_status != STATE_SUCCESS) {
 		LogDebug(COMPONENT_NFS_V4_LOCK, "LOCK failed with status %s",
@@ -673,23 +647,17 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 			 * response will fit, if not, return response error.
 			 */
 			res_LOCK4->status = Process_nfs4_conflict(
-						&res_LOCK4->LOCK4res_u.denied,
-						conflict_owner,
-						&conflict_desc,
-						data);
+				&res_LOCK4->LOCK4res_u.denied, conflict_owner,
+				&conflict_desc, data);
 		} else {
 			res_LOCK4->status = nfs4_Errno_state(state_status);
 		}
 
 		/* Save the response in the lock or open owner */
-		if (res_LOCK4->status != NFS4ERR_RESOURCE
-		    && res_LOCK4->status != NFS4ERR_BAD_STATEID
-		    && data->minorversion == 0) {
-			Copy_nfs4_state_req(resp_owner,
-					    seqid,
-					    op,
-					    obj,
-					    resp,
+		if (res_LOCK4->status != NFS4ERR_RESOURCE &&
+		    res_LOCK4->status != NFS4ERR_BAD_STATEID &&
+		    data->minorversion == 0) {
+			Copy_nfs4_state_req(resp_owner, seqid, op, obj, resp,
 					    lock_tag);
 		}
 
@@ -708,47 +676,35 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 	data->op_resp_size = SUCCESS_RESP_SIZE;
 
 	/* Handle stateid/seqid for success */
-	update_stateid(lock_state,
-		       &res_LOCK4->LOCK4res_u.resok4.lock_stateid,
-		       data,
-		       lock_tag);
+	update_stateid(lock_state, &res_LOCK4->LOCK4res_u.resok4.lock_stateid,
+		       data, lock_tag);
 
 	if (arg_LOCK4->locker.new_lock_owner) {
 		/* Also save the response in the lock owner */
-		Copy_nfs4_state_req(lock_owner,
-				    arg_open_owner->lock_seqid,
-				    op,
-				    obj,
-				    resp,
-				    lock_tag);
-
+		Copy_nfs4_state_req(lock_owner, arg_open_owner->lock_seqid, op,
+				    obj, resp, lock_tag);
 	}
 
 	if (isFullDebug(COMPONENT_NFS_V4_LOCK)) {
 		char str[LOG_BUFF_LEN] = "\0";
-		struct display_buffer dspbuf = {sizeof(str), str, str};
+		struct display_buffer dspbuf = { sizeof(str), str, str };
 
 		display_stateid(&dspbuf, lock_state);
 
 		LogFullDebug(COMPONENT_NFS_V4_LOCK, "LOCK stateid %s", str);
 	}
 
-	LogLock(COMPONENT_NFS_V4_LOCK, NIV_FULL_DEBUG, "LOCK applied",
-		obj, lock_owner, &lock_desc);
+	LogLock(COMPONENT_NFS_V4_LOCK, NIV_FULL_DEBUG, "LOCK applied", obj,
+		lock_owner, &lock_desc);
 
- out:
+out:
 
 	if (data->minorversion == 0) {
 		/* Save the response in the lock or open owner */
-		Copy_nfs4_state_req(resp_owner,
-				    seqid,
-				    op,
-				    obj,
-				    resp,
-				    lock_tag);
+		Copy_nfs4_state_req(resp_owner, seqid, op, obj, resp, lock_tag);
 	}
 
- out2:
+out2:
 	if (have_grace_ref)
 		nfs_put_grace_status();
 
@@ -776,7 +732,7 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 		dec_client_id_ref(clientid);
 
 	return nfsstat4_to_nfs_req_result(res_LOCK4->status);
-}				/* nfs4_op_lock */
+} /* nfs4_op_lock */
 
 /**
  * @brief Free memory allocated for LOCK result
@@ -793,7 +749,7 @@ void nfs4_op_lock_Free(nfs_resop4 *res)
 
 	if (resp->status == NFS4ERR_DENIED)
 		Release_nfs4_denied(&resp->LOCK4res_u.denied);
-}				/* nfs4_op_lock_Free */
+} /* nfs4_op_lock_Free */
 
 void nfs4_op_lock_CopyRes(LOCK4res *res_dst, LOCK4res *res_src)
 {

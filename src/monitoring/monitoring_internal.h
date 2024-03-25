@@ -30,7 +30,7 @@
 #ifdef __cplusplus
 
 extern "C" {
-#include "monitoring.h"  /* NOLINT */
+#include "monitoring.h" /* NOLINT */
 }
 
 #include <memory>
@@ -39,15 +39,16 @@ extern "C" {
 #include "prometheus/exposer.h"
 #include "prometheus/registry.h"
 
-namespace ganesha_monitoring {
+namespace ganesha_monitoring
+{
 
-extern std::unique_ptr < prometheus::Exposer > exposer;
-extern std::shared_ptr < prometheus::Registry > registry;
+extern std::unique_ptr<prometheus::Exposer> exposer;
+extern std::shared_ptr<prometheus::Registry> registry;
 
 const std::string GetExportLabel(export_id_t export_id);
 
-}  /* namespace ganesha_monitoring */
+} /* namespace ganesha_monitoring */
 
-#endif  /* __cplusplus */
+#endif /* __cplusplus */
 
-#endif  /* GANESHA_MONITORING_INTERNAL_H */
+#endif /* GANESHA_MONITORING_INTERNAL_H */
