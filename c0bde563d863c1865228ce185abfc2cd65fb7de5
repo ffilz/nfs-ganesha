@@ -88,6 +88,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4a8c797_b6881e41",
+        "filename": "src/MainNFSD/nfs_lib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__DATE__\u0027 macro makes the build non-deterministic\n+\t\t \"Ganesha Version \" _GIT_DESCRIBE \", built at \" __DATE__",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d910017b_32c2394b",
+        "filename": "src/MainNFSD/nfs_lib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__TIME__\u0027 macro makes the build non-deterministic\n+\t\t \" \" __TIME__ \" on \" BUILD_HOST);",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da7b629a_273f8765",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__DATE__\u0027 macro makes the build non-deterministic\n+\t\t \"Ganesha Version \" _GIT_DESCRIBE \", built at \" __DATE__",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7dd9fc9_317aa9ba",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: Use of the \u0027__TIME__\u0027 macro makes the build non-deterministic\n+\t\t \" \" __TIME__ \" on \" BUILD_HOST);",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801d6e72_33affc7e",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "WARNING: Possible switch case/default not preceeded by break or fallthrough comment\n+\tcase AF_INET6: {",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9772a96e_29167bc8",
         "filename": "src/avl/avl.c",
         "patchSetId": 1
@@ -139,6 +224,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5688b9fa_f48827d3",
+        "filename": "src/cidr/cidr_addr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: return is not a function, parentheses are not required\n+\t\treturn (NULL); /* Preserve errno */",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38bffa18_8631f9e5",
+        "filename": "src/cidr/cidr_addr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: return is not a function, parentheses are not required\n+\t\treturn (NULL); /* Preserve errno */",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7a88899_4814178d",
         "filename": "src/cidr/cidr_get.c",
         "patchSetId": 1
@@ -173,6 +292,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71caf3db_36d9c9a8",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"%s parsed RADOS_URLS block, have ceph_conf\u003d%s \"\n+\t\t     \" userid\u003d%s\",",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7927fbab_6bfec7dc",
         "filename": "src/dbus/dbus_priv.h",
         "patchSetId": 1
@@ -184,6 +320,108 @@
       "writtenOn": "2024-03-25T15:57:05Z",
       "side": 1,
       "message": "Well, that\u0027s a nice re-write...",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47272d2a_6e2d4dd0",
+        "filename": "src/include/city.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+#endif // CITY_HASH_H_",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e2ca29_6b075450",
+        "filename": "src/include/citycrc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+void CityHashCrc256(const char *s, size_t len, uint64 *result);\n                                                       ^",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "682512ef_4ddbfbd1",
+        "filename": "src/include/citycrc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+#endif // CITY_HASH_CRC_H_",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf69e316_1d8e9471",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"Invalid dest pointer, dest: %p, \"\n+\t\t\t\"src: %p, ac: %p\",",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bb6fab6_6a5a8253",
+        "filename": "src/support/rados_grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint64_t cur \u003d htole64(1); // starting epoch",
+      "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c16e150_5ec30eec",
+        "filename": "src/support/rados_grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-03-25T19:57:46Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tuint64_t rec \u003d htole64(0); // no recovery yet",
       "revId": "c0bde563d863c1865228ce185abfc2cd65fb7de5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
