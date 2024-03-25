@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cc31ce8_bd74285f",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-25T09:51:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "508a08c9_1d19345e",
+      "revId": "bc5d9bf3de62a5e6773cf948712f3b645a201b0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "605500b1_3950591b",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-22T19:37:13Z",
       "side": 1,
       "message": "WARNING: \u0027usera\u0027 may be misspelled - perhaps \u0027users\u0027?\n+\treturn gsh_buffdesc_comparator(\u0026user1-\u003euname, \u0026usera-\u003euname);",
+      "revId": "bc5d9bf3de62a5e6773cf948712f3b645a201b0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3629d9a5_68964dbb",
+        "filename": "src/support/uid2grp_cache.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-25T09:51:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "605500b1_3950591b",
       "revId": "bc5d9bf3de62a5e6773cf948712f3b645a201b0b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
