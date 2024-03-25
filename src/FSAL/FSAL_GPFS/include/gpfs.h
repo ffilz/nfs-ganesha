@@ -53,92 +53,89 @@ extern "C" {
 
 #if defined(WIN32) && defined(GPFSDLL)
 
-  /* The following errno values either are missing from Windows errno.h or
+/* The following errno values either are missing from Windows errno.h or
      have a conflicting value. Other errno values (e.g. EPERM) are okay. */
-  #define GPFS_EALREADY     37      /* Operation already in progress        */
-  #define GPFS_EOPNOTSUPP   45      /* Operation not supported              */
-  #define GPFS_EDQUOT       69      /* Disk quota exceeded                  */
-  #define GPFS_ESTALE       9       /* No file system (mapped to EBADF)      */
-  #define GPFS_EFORMAT      19      /* Unformatted media (mapped to ENODEV) */
+#define GPFS_EALREADY 37 /* Operation already in progress        */
+#define GPFS_EOPNOTSUPP 45 /* Operation not supported              */
+#define GPFS_EDQUOT 69 /* Disk quota exceeded                  */
+#define GPFS_ESTALE 9 /* No file system (mapped to EBADF)      */
+#define GPFS_EFORMAT 19 /* Unformatted media (mapped to ENODEV) */
 
-  /* specify the library calling convention */
-  #define GPFS_API __stdcall
+/* specify the library calling convention */
+#define GPFS_API __stdcall
 
-  /* On Windows, this is a HANDLE as returned by CreateFile() */
-  typedef void* gpfs_file_t;
+/* On Windows, this is a HANDLE as returned by CreateFile() */
+typedef void *gpfs_file_t;
 
 #else /* not gpfs.dll on Windows */
 
-  #define GPFS_API
-  /* On UNIX systems, this is a file descriptor as returned by open() */
-  typedef int gpfs_file_t;
+#define GPFS_API
+/* On UNIX systems, this is a file descriptor as returned by open() */
+typedef int gpfs_file_t;
 
 #endif
-
 
 typedef unsigned int gpfs_uid_t;
 typedef long long gpfs_off64_t;
 typedef unsigned long long gpfs_uid64_t;
 
-typedef struct gpfs_timestruc
-{
-  unsigned int tv_sec;
-  unsigned int tv_nsec;
+typedef struct gpfs_timestruc {
+	unsigned int tv_sec;
+	unsigned int tv_nsec;
 } gpfs_timestruc_t;
 
-typedef struct gpfs_timestruc64
-{
-  long long    tv_sec;
-  unsigned int tv_nsec;
+typedef struct gpfs_timestruc64 {
+	long long tv_sec;
+	unsigned int tv_nsec;
 } gpfs_timestruc64_t;
 
-#define GPFS_SLITE_SIZE_BIT     0x00000001
-#define GPFS_SLITE_BLKSIZE_BIT  0x00000002
-#define GPFS_SLITE_BLOCKS_BIT   0x00000004
-#define GPFS_SLITE_ATIME_BIT    0x00000010
-#define GPFS_SLITE_MTIME_BIT    0x00000020
-#define GPFS_SLITE_CTIME_BIT    0x00000040
-#define GPFS_SLITE_EXACT_BITS   0x00000077
+#define GPFS_SLITE_SIZE_BIT 0x00000001
+#define GPFS_SLITE_BLKSIZE_BIT 0x00000002
+#define GPFS_SLITE_BLOCKS_BIT 0x00000004
+#define GPFS_SLITE_ATIME_BIT 0x00000010
+#define GPFS_SLITE_MTIME_BIT 0x00000020
+#define GPFS_SLITE_CTIME_BIT 0x00000040
+#define GPFS_SLITE_EXACT_BITS 0x00000077
 
 /* Returns "1" if the attribute is requested to be accurate.
    (On output, indicates the value returned in statbufP is accurate). */
-#define GPFS_SLITE(m)         (0 == (m))
-#define GPFS_SLITE_SIZET(m)   (0 != ((m) & GPFS_SLITE_SIZE_BIT))
+#define GPFS_SLITE(m) (0 == (m))
+#define GPFS_SLITE_SIZET(m) (0 != ((m) & GPFS_SLITE_SIZE_BIT))
 #define GPFS_SLITE_BLKSIZE(m) (0 != ((m) & GPFS_SLITE_BLKSIZE_BIT))
-#define GPFS_SLITE_BLOCKS(m)  (0 != ((m) & GPFS_SLITE_BLOCKS_BIT))
-#define GPFS_SLITE_ATIME(m)   (0 != ((m) & GPFS_SLITE_ATIME_BIT))
-#define GPFS_SLITE_MTIME(m)   (0 != ((m) & GPFS_SLITE_MTIME_BIT))
-#define GPFS_SLITE_CTIME(m)   (0 != ((m) & GPFS_SLITE_CTIME_BIT))
-#define GPFS_SLITE_EXACT(m)   (GPFS_SLITE_EXACT_BITS == (m))
+#define GPFS_SLITE_BLOCKS(m) (0 != ((m) & GPFS_SLITE_BLOCKS_BIT))
+#define GPFS_SLITE_ATIME(m) (0 != ((m) & GPFS_SLITE_ATIME_BIT))
+#define GPFS_SLITE_MTIME(m) (0 != ((m) & GPFS_SLITE_MTIME_BIT))
+#define GPFS_SLITE_CTIME(m) (0 != ((m) & GPFS_SLITE_CTIME_BIT))
+#define GPFS_SLITE_EXACT(m) (GPFS_SLITE_EXACT_BITS == (m))
 
 /* Sets the litemask bit indicating that the attribute should be accurate */
-#define GPFS_S_SLITE(m)         (m) = 0
-#define GPFS_S_SLITE_SIZET(m)   (m) |= GPFS_SLITE_SIZE_BIT
+#define GPFS_S_SLITE(m) (m) = 0
+#define GPFS_S_SLITE_SIZET(m) (m) |= GPFS_SLITE_SIZE_BIT
 #define GPFS_S_SLITE_BLKSIZE(m) (m) |= GPFS_SLITE_BLKSIZE_BIT
-#define GPFS_S_SLITE_BLOCKS(m)  (m) |= GPFS_SLITE_BLOCKS_BIT
-#define GPFS_S_SLITE_ATIME(m)   (m) |= GPFS_SLITE_ATIME_BIT
-#define GPFS_S_SLITE_MTIME(m)   (m) |= GPFS_SLITE_MTIME_BIT
-#define GPFS_S_SLITE_CTIME(m)   (m) |= GPFS_SLITE_CTIME_BIT
-#define GPFS_S_SLITE_EXACT(m)   (m) |= GPFS_SLITE_EXACT_BITS
+#define GPFS_S_SLITE_BLOCKS(m) (m) |= GPFS_SLITE_BLOCKS_BIT
+#define GPFS_S_SLITE_ATIME(m) (m) |= GPFS_SLITE_ATIME_BIT
+#define GPFS_S_SLITE_MTIME(m) (m) |= GPFS_SLITE_MTIME_BIT
+#define GPFS_S_SLITE_CTIME(m) (m) |= GPFS_SLITE_CTIME_BIT
+#define GPFS_S_SLITE_EXACT(m) (m) |= GPFS_SLITE_EXACT_BITS
 
 #define GPFS_STATLITE 0
 #define GPFS_NOFOLLOW 1
 
 /* Mapping of buffer for gpfs_getacl, gpfs_putacl. */
-typedef struct gpfs_opaque_acl
-{
-  int            acl_buffer_len;  /* INPUT:  Total size of buffer (including this field).
+typedef struct gpfs_opaque_acl {
+	int acl_buffer_len; /* INPUT:  Total size of buffer (including this field).
                                      OUTPUT: Actual size of the ACL information.  */
-  unsigned short acl_version;     /* INPUT:  Set to zero.
+	unsigned short acl_version; /* INPUT:  Set to zero.
                                      OUTPUT: Current version of the returned ACL. */
-  unsigned char  acl_type;        /* INPUT:  Type of ACL: access (1) or default (2). */
-  char           acl_var_data[1]; /* OUTPUT: Remainder of the ACL information. */
+	unsigned char
+		acl_type; /* INPUT:  Type of ACL: access (1) or default (2). */
+	char acl_var_data[1]; /* OUTPUT: Remainder of the ACL information. */
 } gpfs_opaque_acl_t;
 
 /* ACL types (acl_type field in gpfs_opaque_acl_t or gpfs_acl_t) */
-#define GPFS_ACL_TYPE_ACCESS  1
+#define GPFS_ACL_TYPE_ACCESS 1
 #define GPFS_ACL_TYPE_DEFAULT 2
-#define GPFS_ACL_TYPE_NFS4    3
+#define GPFS_ACL_TYPE_NFS4 3
 
 /* gpfs_getacl, gpfs_putacl flag indicating structures instead of the
    opaque style data normally used.  */
@@ -146,61 +143,61 @@ typedef struct gpfs_opaque_acl
 #define GPFS_PUTACL_STRUCT 0x00000020
 
 /* gpfs_getacl, gpfs_putacl flag indicating smbd is the caller */
-#define GPFS_ACL_SAMBA     0x00000040
+#define GPFS_ACL_SAMBA 0x00000040
 
 /* Defined values for gpfs_aclVersion_t */
-#define GPFS_ACL_VERSION_POSIX   1
-#define GPFS_ACL_VERSION_NFS4F   3 /* GPFS_ACL_VERSION_NFS4 plus V4FLAGS */
-#define GPFS_ACL_VERSION_NFS4    4
+#define GPFS_ACL_VERSION_POSIX 1
+#define GPFS_ACL_VERSION_NFS4F 3 /* GPFS_ACL_VERSION_NFS4 plus V4FLAGS */
+#define GPFS_ACL_VERSION_NFS4 4
 
 /* Values for gpfs_aclLevel_t  */
-#define GPFS_ACL_LEVEL_BASE    0 /* compatible with all acl_version values */
+#define GPFS_ACL_LEVEL_BASE 0 /* compatible with all acl_version values */
 #define GPFS_ACL_LEVEL_V4FLAGS 1 /* requires GPFS_ACL_VERSION_NFS4 */
 
 /* Values for gpfs_aceType_t (ACL_VERSION_POSIX) */
-#define GPFS_ACL_USER_OBJ  1
+#define GPFS_ACL_USER_OBJ 1
 #define GPFS_ACL_GROUP_OBJ 2
-#define GPFS_ACL_OTHER     3
-#define GPFS_ACL_MASK      4
-#define GPFS_ACL_USER      5
-#define GPFS_ACL_GROUP     6
+#define GPFS_ACL_OTHER 3
+#define GPFS_ACL_MASK 4
+#define GPFS_ACL_USER 5
+#define GPFS_ACL_GROUP 6
 
 /* Values for gpfs_acePerm_t (ACL_VERSION_POSIX) */
 #define ACL_PERM_EXECUTE 001
-#define ACL_PERM_WRITE   002
-#define ACL_PERM_READ    004
+#define ACL_PERM_WRITE 002
+#define ACL_PERM_READ 004
 #define ACL_PERM_CONTROL 010
 
 /* Values for gpfs_aceType_t (ACL_VERSION_NFS4) */
 #define ACE4_TYPE_ALLOW 0
-#define ACE4_TYPE_DENY  1
+#define ACE4_TYPE_DENY 1
 #define ACE4_TYPE_AUDIT 2
 #define ACE4_TYPE_ALARM 3
 
 /* Values for gpfs_aceFlags_t (ACL_VERSION_NFS4) */
-#define ACE4_FLAG_FILE_INHERIT    0x00000001
-#define ACE4_FLAG_DIR_INHERIT     0x00000002
-#define ACE4_FLAG_NO_PROPAGATE    0x00000004
-#define ACE4_FLAG_INHERIT_ONLY    0x00000008
-#define ACE4_FLAG_SUCCESSFUL      0x00000010
-#define ACE4_FLAG_FAILED          0x00000020
-#define ACE4_FLAG_GROUP_ID        0x00000040
-#define ACE4_FLAG_INHERITED       0x00000080
+#define ACE4_FLAG_FILE_INHERIT 0x00000001
+#define ACE4_FLAG_DIR_INHERIT 0x00000002
+#define ACE4_FLAG_NO_PROPAGATE 0x00000004
+#define ACE4_FLAG_INHERIT_ONLY 0x00000008
+#define ACE4_FLAG_SUCCESSFUL 0x00000010
+#define ACE4_FLAG_FAILED 0x00000020
+#define ACE4_FLAG_GROUP_ID 0x00000040
+#define ACE4_FLAG_INHERITED 0x00000080
 
 /* GPFS-defined flags.  Placed in a separate ACL field to avoid
    ever running into newly defined NFSv4 flags. */
-#define ACE4_IFLAG_SPECIAL_ID     0x80000000
+#define ACE4_IFLAG_SPECIAL_ID 0x80000000
 
 /* Values for gpfs_aceMask_t (ACL_VERSION_NFS4) */
-#define ACE4_MASK_READ         0x00000001
-#define ACE4_MASK_LIST_DIR     0x00000001
-#define ACE4_MASK_WRITE        0x00000002
-#define ACE4_MASK_ADD_FILE     0x00000002
-#define ACE4_MASK_APPEND       0x00000004
-#define ACE4_MASK_ADD_SUBDIR   0x00000004
-#define ACE4_MASK_READ_NAMED   0x00000008
-#define ACE4_MASK_WRITE_NAMED  0x00000010
-#define ACE4_MASK_EXECUTE      0x00000020
+#define ACE4_MASK_READ 0x00000001
+#define ACE4_MASK_LIST_DIR 0x00000001
+#define ACE4_MASK_WRITE 0x00000002
+#define ACE4_MASK_ADD_FILE 0x00000002
+#define ACE4_MASK_APPEND 0x00000004
+#define ACE4_MASK_ADD_SUBDIR 0x00000004
+#define ACE4_MASK_READ_NAMED 0x00000008
+#define ACE4_MASK_WRITE_NAMED 0x00000010
+#define ACE4_MASK_EXECUTE 0x00000020
 
 /* The rfc doesn't provide a mask equivalent to "search" ("x" on a
  * directory in posix), but it also doesn't say that its EXECUTE
@@ -209,43 +206,42 @@ typedef struct gpfs_opaque_acl
  * here that the EXECUTE bit has this dual meaning... otherwise
  * we're left with no control over search.
  */
-#define ACE4_MASK_SEARCH       0x00000020
+#define ACE4_MASK_SEARCH 0x00000020
 
 #define ACE4_MASK_DELETE_CHILD 0x00000040
-#define ACE4_MASK_READ_ATTR    0x00000080
-#define ACE4_MASK_WRITE_ATTR   0x00000100
-#define ACE4_MASK_DELETE       0x00010000
-#define ACE4_MASK_READ_ACL     0x00020000
-#define ACE4_MASK_WRITE_ACL    0x00040000
-#define ACE4_MASK_WRITE_OWNER  0x00080000
-#define ACE4_MASK_SYNCHRONIZE  0x00100000
-#define ACE4_MASK_ALL          0x001f01ff
+#define ACE4_MASK_READ_ATTR 0x00000080
+#define ACE4_MASK_WRITE_ATTR 0x00000100
+#define ACE4_MASK_DELETE 0x00010000
+#define ACE4_MASK_READ_ACL 0x00020000
+#define ACE4_MASK_WRITE_ACL 0x00040000
+#define ACE4_MASK_WRITE_OWNER 0x00080000
+#define ACE4_MASK_SYNCHRONIZE 0x00100000
+#define ACE4_MASK_ALL 0x001f01ff
 
 /* Values for gpfs_uid_t (ACL_VERSION_NFS4) */
-#define ACE4_SPECIAL_OWNER              1
-#define ACE4_SPECIAL_GROUP              2
-#define ACE4_SPECIAL_EVERYONE           3
+#define ACE4_SPECIAL_OWNER 1
+#define ACE4_SPECIAL_GROUP 2
+#define ACE4_SPECIAL_EVERYONE 3
 
 /* per-ACL flags imported from a Windows security descriptor object */
-#define ACL4_FLAG_OWNER_DEFAULTED               0x00000100
-#define ACL4_FLAG_GROUP_DEFAULTED               0x00000200
-#define ACL4_FLAG_DACL_PRESENT                  0x00000400
-#define ACL4_FLAG_DACL_DEFAULTED                0x00000800
-#define ACL4_FLAG_SACL_PRESENT                  0x00001000
-#define ACL4_FLAG_SACL_DEFAULTED                0x00002000
-#define ACL4_FLAG_DACL_UNTRUSTED                0x00004000
-#define ACL4_FLAG_SERVER_SECURITY               0x00008000
-#define ACL4_FLAG_DACL_AUTO_INHERIT_REQ         0x00010000
-#define ACL4_FLAG_SACL_AUTO_INHERIT_REQ         0x00020000
-#define ACL4_FLAG_DACL_AUTO_INHERITED           0x00040000
-#define ACL4_FLAG_SACL_AUTO_INHERITED           0x00080000
-#define ACL4_FLAG_DACL_PROTECTED                0x00100000
-#define ACL4_FLAG_SACL_PROTECTED                0x00200000
-#define ACL4_FLAG_RM_CONTROL_VALID              0x00400000
-#define ACL4_FLAG_NULL_DACL                     0x00800000
-#define ACL4_FLAG_NULL_SACL                     0x01000000
-#define ACL4_FLAG_VALID_FLAGS                   0x01ffff00
-
+#define ACL4_FLAG_OWNER_DEFAULTED 0x00000100
+#define ACL4_FLAG_GROUP_DEFAULTED 0x00000200
+#define ACL4_FLAG_DACL_PRESENT 0x00000400
+#define ACL4_FLAG_DACL_DEFAULTED 0x00000800
+#define ACL4_FLAG_SACL_PRESENT 0x00001000
+#define ACL4_FLAG_SACL_DEFAULTED 0x00002000
+#define ACL4_FLAG_DACL_UNTRUSTED 0x00004000
+#define ACL4_FLAG_SERVER_SECURITY 0x00008000
+#define ACL4_FLAG_DACL_AUTO_INHERIT_REQ 0x00010000
+#define ACL4_FLAG_SACL_AUTO_INHERIT_REQ 0x00020000
+#define ACL4_FLAG_DACL_AUTO_INHERITED 0x00040000
+#define ACL4_FLAG_SACL_AUTO_INHERITED 0x00080000
+#define ACL4_FLAG_DACL_PROTECTED 0x00100000
+#define ACL4_FLAG_SACL_PROTECTED 0x00200000
+#define ACL4_FLAG_RM_CONTROL_VALID 0x00400000
+#define ACL4_FLAG_NULL_DACL 0x00800000
+#define ACL4_FLAG_NULL_SACL 0x01000000
+#define ACL4_FLAG_VALID_FLAGS 0x01ffff00
 
 /* Externalized ACL defintions */
 typedef unsigned int gpfs_aclType_t;
@@ -261,46 +257,41 @@ typedef unsigned int gpfs_acePerm_t;
 typedef unsigned int gpfs_aceMask_t;
 
 /* A POSIX ACL Entry */
-typedef struct gpfs_ace_v1
-{
-  gpfs_aceType_t  ace_type; /* POSIX ACE type */
-  gpfs_uid_t      ace_who;  /* uid/gid */
-  gpfs_acePerm_t  ace_perm; /* POSIX permissions */
+typedef struct gpfs_ace_v1 {
+	gpfs_aceType_t ace_type; /* POSIX ACE type */
+	gpfs_uid_t ace_who; /* uid/gid */
+	gpfs_acePerm_t ace_perm; /* POSIX permissions */
 } gpfs_ace_v1_t;
 
 /* An NFSv4 ACL Entry */
-typedef struct gpfs_ace_v4
-{
-  gpfs_aceType_t  aceType;   /* Allow or Deny */
-  gpfs_aceFlags_t aceFlags;  /* Inherit specifications, etc. */
-  gpfs_aceFlags_t aceIFlags; /* GPFS Internal flags */
-  gpfs_aceMask_t  aceMask;   /* NFSv4 mask specification */
-  gpfs_uid_t      aceWho;    /* User/Group identification */
+typedef struct gpfs_ace_v4 {
+	gpfs_aceType_t aceType; /* Allow or Deny */
+	gpfs_aceFlags_t aceFlags; /* Inherit specifications, etc. */
+	gpfs_aceFlags_t aceIFlags; /* GPFS Internal flags */
+	gpfs_aceMask_t aceMask; /* NFSv4 mask specification */
+	gpfs_uid_t aceWho; /* User/Group identification */
 } gpfs_ace_v4_t;
 
 /* when GPFS_ACL_VERSION_NFS4, and GPFS_ACL_LEVEL_V4FLAGS */
 typedef struct v4Level1_ext /* ACL extension */
 {
-  gpfs_aclFlag_t acl_flags; /* per-ACL flags */
-  gpfs_ace_v4_t ace_v4[1];
+	gpfs_aclFlag_t acl_flags; /* per-ACL flags */
+	gpfs_ace_v4_t ace_v4[1];
 } v4Level1_t;
 
 /* The GPFS ACL */
-typedef struct gpfs_acl
-{
-  gpfs_aclLen_t     acl_len;     /* Total length of this ACL in bytes */
-  gpfs_aclLevel_t   acl_level;   /* Reserved (must be zero) */
-  gpfs_aclVersion_t acl_version; /* POSIX or NFS4 ACL */
-  gpfs_aclType_t    acl_type;    /* Access, Default, or NFS4 */
-  gpfs_aclCount_t   acl_nace;    /* Number of Entries that follow */
-  union
-  {
-    gpfs_ace_v1_t  ace_v1[1]; /* when GPFS_ACL_VERSION_POSIX */
-    gpfs_ace_v4_t  ace_v4[1]; /* when GPFS_ACL_VERSION_NFS4  */
-    v4Level1_t     v4Level1;  /* when GPFS_ACL_LEVEL_V4FLAGS */
-  };
+typedef struct gpfs_acl {
+	gpfs_aclLen_t acl_len; /* Total length of this ACL in bytes */
+	gpfs_aclLevel_t acl_level; /* Reserved (must be zero) */
+	gpfs_aclVersion_t acl_version; /* POSIX or NFS4 ACL */
+	gpfs_aclType_t acl_type; /* Access, Default, or NFS4 */
+	gpfs_aclCount_t acl_nace; /* Number of Entries that follow */
+	union {
+		gpfs_ace_v1_t ace_v1[1]; /* when GPFS_ACL_VERSION_POSIX */
+		gpfs_ace_v4_t ace_v4[1]; /* when GPFS_ACL_VERSION_NFS4  */
+		v4Level1_t v4Level1; /* when GPFS_ACL_LEVEL_V4FLAGS */
+	};
 } gpfs_acl_t;
-
 
 /* NAME:        gpfs_getacl()
  *
@@ -330,11 +321,7 @@ typedef struct gpfs_acl
  *              ENOTDIR Not on directory
  *              ENOMEM  Out of memory
  */
-int GPFS_API
-gpfs_getacl(const char *pathname,
-            int flags,
-            void *acl);
-
+int GPFS_API gpfs_getacl(const char *pathname, int flags, void *acl);
 
 /* NAME:        gpfs_putacl()
  *
@@ -351,11 +338,7 @@ gpfs_getacl(const char *pathname,
  *              ENOMEM  Out of memory
  *              EPERM   Caller does not hold appropriate privilege
  */
-int GPFS_API
-gpfs_putacl(const char *pathname,
-            int flags,
-            void *acl);
-
+int GPFS_API gpfs_putacl(const char *pathname, int flags, void *acl);
 
 /* NAME:        gpfs_prealloc()
  *
@@ -403,40 +386,35 @@ gpfs_putacl(const char *pathname,
  *              ENOSPC  Not enough space on disk
  *              EPERM   File is in a snapshot
  */
-int GPFS_API
-gpfs_prealloc(gpfs_file_t fileDesc,
-              gpfs_off64_t startOffset,
-              gpfs_off64_t bytesToPrealloc);
+int GPFS_API gpfs_prealloc(gpfs_file_t fileDesc, gpfs_off64_t startOffset,
+			   gpfs_off64_t bytesToPrealloc);
 
 /* Directory entries are nominally (assuming compact names of 19 bytes or less)
    32 bytes in size.  This conversion factor is used in mapping between a
    number of entries (for mmchattr) and a size when calling gpfs_prealloc. */
-#define GPFS_PREALLOC_DIR_SLOT_SIZE 32  /* for size => bytes per entry */
+#define GPFS_PREALLOC_DIR_SLOT_SIZE 32 /* for size => bytes per entry */
 
-
-typedef struct gpfs_winattr
-{
-  gpfs_timestruc_t creationTime;
-  unsigned int winAttrs; /* values as defined below */
+typedef struct gpfs_winattr {
+	gpfs_timestruc_t creationTime;
+	unsigned int winAttrs; /* values as defined below */
 } gpfs_winattr_t;
 
 /* winAttrs values */
-#define GPFS_WINATTR_ARCHIVE              0x0001
-#define GPFS_WINATTR_COMPRESSED           0x0002
-#define GPFS_WINATTR_DEVICE               0x0004
-#define GPFS_WINATTR_DIRECTORY            0x0008
-#define GPFS_WINATTR_ENCRYPTED            0x0010
-#define GPFS_WINATTR_HIDDEN               0x0020
-#define GPFS_WINATTR_NORMAL               0x0040
-#define GPFS_WINATTR_NOT_CONTENT_INDEXED  0x0080
-#define GPFS_WINATTR_OFFLINE              0x0100
-#define GPFS_WINATTR_READONLY             0x0200
-#define GPFS_WINATTR_REPARSE_POINT        0x0400
-#define GPFS_WINATTR_SPARSE_FILE          0x0800
-#define GPFS_WINATTR_SYSTEM               0x1000
-#define GPFS_WINATTR_TEMPORARY            0x2000
-#define GPFS_WINATTR_HAS_STREAMS          0x4000
-
+#define GPFS_WINATTR_ARCHIVE 0x0001
+#define GPFS_WINATTR_COMPRESSED 0x0002
+#define GPFS_WINATTR_DEVICE 0x0004
+#define GPFS_WINATTR_DIRECTORY 0x0008
+#define GPFS_WINATTR_ENCRYPTED 0x0010
+#define GPFS_WINATTR_HIDDEN 0x0020
+#define GPFS_WINATTR_NORMAL 0x0040
+#define GPFS_WINATTR_NOT_CONTENT_INDEXED 0x0080
+#define GPFS_WINATTR_OFFLINE 0x0100
+#define GPFS_WINATTR_READONLY 0x0200
+#define GPFS_WINATTR_REPARSE_POINT 0x0400
+#define GPFS_WINATTR_SPARSE_FILE 0x0800
+#define GPFS_WINATTR_SYSTEM 0x1000
+#define GPFS_WINATTR_TEMPORARY 0x2000
+#define GPFS_WINATTR_HAS_STREAMS 0x4000
 
 /* NAME:        gpfs_get_winattrs()
  *              gpfs_get_winattrs_path()
@@ -454,12 +432,10 @@ typedef struct gpfs_winattr
  *              EINVAL  Not a regular file
  *              ENOSYS  function not available
  */
-int GPFS_API
-gpfs_get_winattrs(gpfs_file_t fileDesc, gpfs_winattr_t *attrP);
+int GPFS_API gpfs_get_winattrs(gpfs_file_t fileDesc, gpfs_winattr_t *attrP);
 
-int GPFS_API
-gpfs_get_winattrs_path(const char *pathname, gpfs_winattr_t *attrP);
-
+int GPFS_API gpfs_get_winattrs_path(const char *pathname,
+				    gpfs_winattr_t *attrP);
 
 /* NAME:        gpfs_set_winattrs()
  *              gpfs_set_winattrs_path()
@@ -478,15 +454,15 @@ gpfs_get_winattrs_path(const char *pathname, gpfs_winattr_t *attrP);
  *              EINVAL  Not a regular file
  *              ENOSYS  function not available
  */
-int GPFS_API
-gpfs_set_winattrs(gpfs_file_t fileDesc, int flags, gpfs_winattr_t *attrP);
+int GPFS_API gpfs_set_winattrs(gpfs_file_t fileDesc, int flags,
+			       gpfs_winattr_t *attrP);
 
-int GPFS_API
-gpfs_set_winattrs_path(const char *pathname, int flags, gpfs_winattr_t *attrP);
+int GPFS_API gpfs_set_winattrs_path(const char *pathname, int flags,
+				    gpfs_winattr_t *attrP);
 
 /* gpfs_set_winattr flag values */
 #define GPFS_WINATTR_SET_CREATION_TIME 0x08
-#define GPFS_WINATTR_SET_ATTRS         0x10
+#define GPFS_WINATTR_SET_ATTRS 0x10
 
 /*
  * NAME:        gpfs_set_times(), gpfs_set_times_path()
@@ -516,19 +492,18 @@ gpfs_set_winattrs_path(const char *pathname, int flags, gpfs_winattr_t *attrP);
  */
 typedef gpfs_timestruc_t gpfs_times_vector_t[4];
 
-int GPFS_API
-gpfs_set_times(gpfs_file_t fileDesc, int flags, gpfs_times_vector_t times);
+int GPFS_API gpfs_set_times(gpfs_file_t fileDesc, int flags,
+			    gpfs_times_vector_t times);
 
-int GPFS_API
-gpfs_set_times_path(char *pathname, int flags, gpfs_times_vector_t times);
+int GPFS_API gpfs_set_times_path(char *pathname, int flags,
+				 gpfs_times_vector_t times);
 
 /* gpfs_set_times flag values */
-#define GPFS_SET_ATIME          0x01
-#define GPFS_SET_MTIME          0x02
-#define GPFS_SET_CTIME          0x04
-#define GPFS_SET_CREATION_TIME  0x08
+#define GPFS_SET_ATIME 0x01
+#define GPFS_SET_MTIME 0x02
+#define GPFS_SET_CTIME 0x04
+#define GPFS_SET_CREATION_TIME 0x08
 #define GPFS_SET_TIME_NO_FOLLOW 0x10
-
 
 /* NAME:        gpfs_set_share()
  *
@@ -554,23 +529,20 @@ gpfs_set_times_path(char *pathname, int flags, gpfs_times_vector_t times);
  */
 
 /* allow/deny specifications */
-#define GPFS_SHARE_NONE   0
-#define GPFS_SHARE_READ   1
-#define GPFS_SHARE_WRITE  2
-#define GPFS_SHARE_BOTH   3
-#define GPFS_SHARE_ALL    3
-#define GPFS_DENY_NONE    0
-#define GPFS_DENY_READ    1
-#define GPFS_DENY_WRITE   2
-#define GPFS_DENY_BOTH    3
-#define GPFS_DENY_DELETE  4
-#define GPFS_DENY_ALL     7
+#define GPFS_SHARE_NONE 0
+#define GPFS_SHARE_READ 1
+#define GPFS_SHARE_WRITE 2
+#define GPFS_SHARE_BOTH 3
+#define GPFS_SHARE_ALL 3
+#define GPFS_DENY_NONE 0
+#define GPFS_DENY_READ 1
+#define GPFS_DENY_WRITE 2
+#define GPFS_DENY_BOTH 3
+#define GPFS_DENY_DELETE 4
+#define GPFS_DENY_ALL 7
 
-int GPFS_API
-gpfs_set_share(gpfs_file_t fileDesc,
-               unsigned int share,
-               unsigned int deny);
-
+int GPFS_API gpfs_set_share(gpfs_file_t fileDesc, unsigned int share,
+			    unsigned int deny);
 
 /* NAME:        gpfs_set_lease()
  *
@@ -596,14 +568,11 @@ gpfs_set_share(gpfs_file_t fileDesc,
  */
 
 /* leaseType specifications */
-#define GPFS_LEASE_NONE    0
-#define GPFS_LEASE_READ    1
-#define GPFS_LEASE_WRITE   2
+#define GPFS_LEASE_NONE 0
+#define GPFS_LEASE_READ 1
+#define GPFS_LEASE_WRITE 2
 
-int GPFS_API
-gpfs_set_lease(gpfs_file_t fileDesc,
-               unsigned int leaseType);
-
+int GPFS_API gpfs_set_lease(gpfs_file_t fileDesc, unsigned int leaseType);
 
 /* NAME:        gpfs_get_lease()
  *
@@ -618,11 +587,9 @@ gpfs_set_lease(gpfs_file_t fileDesc,
  *
  * Errno:       EINVAL
  */
-int GPFS_API
-gpfs_get_lease(gpfs_file_t fileDesc);
+int GPFS_API gpfs_get_lease(gpfs_file_t fileDesc);
 
-
- /* NAME:        gpfs_get_realfilename(), gpfs_get_realfilename_path()
+/* NAME:        gpfs_get_realfilename(), gpfs_get_realfilename_path()
   *
   * FUNCTION:    Interface to get real name of a file.
   *
@@ -642,17 +609,13 @@ gpfs_get_lease(gpfs_file_t fileDesc);
   *              EACCESS Permission denied
   *              ENOSYS  function not available
   */
-int GPFS_API
-gpfs_get_realfilename(gpfs_file_t fileDesc,
-                      char *fileNameP,
-                      int *buflen);
+int GPFS_API gpfs_get_realfilename(gpfs_file_t fileDesc, char *fileNameP,
+				   int *buflen);
 
-int GPFS_API
-gpfs_get_realfilename_path(const char *pathname,
-                           char *fileNameP,
-                           int *buflen);
+int GPFS_API gpfs_get_realfilename_path(const char *pathname, char *fileNameP,
+					int *buflen);
 
- /* NAME:        gpfs_ftruncate()
+/* NAME:        gpfs_ftruncate()
   *
   * FUNCTION:    Interface to truncate a file.
   *
@@ -670,25 +633,23 @@ gpfs_get_realfilename_path(const char *pathname,
   *              EINVAL  length < 0
   *              EACCESS  Permission denied
   */
-int GPFS_API
-gpfs_ftruncate(gpfs_file_t fileDesc, gpfs_off64_t length);
+int GPFS_API gpfs_ftruncate(gpfs_file_t fileDesc, gpfs_off64_t length);
 
-#define GPFS_WIN_CIFS_REGISTERED   0x02000000
-typedef struct cifsThreadData_t
-{
-  unsigned int dataLength; /* Total buffer length */
-  unsigned int share;      /* gpfs_set_share declaration */
-  unsigned int deny;       /* gpfs_set_share specification */
-  unsigned int lease;      /* gpfs_set_lease lease type */
-  unsigned int secInfoFlags; /* Future use.  Must be zero */
-  gpfs_uid_t   sdUID;      /* Owning user */
-  gpfs_uid_t   sdGID;      /* Owning group */
-  int          shareLocked_fd; /* file descriptor with share locks */
-  unsigned int aclLength ; /* Length of the following ACL */
-  gpfs_acl_t   acl;        /* The initial ACL for create/mkdir */
+#define GPFS_WIN_CIFS_REGISTERED 0x02000000
+typedef struct cifsThreadData_t {
+	unsigned int dataLength; /* Total buffer length */
+	unsigned int share; /* gpfs_set_share declaration */
+	unsigned int deny; /* gpfs_set_share specification */
+	unsigned int lease; /* gpfs_set_lease lease type */
+	unsigned int secInfoFlags; /* Future use.  Must be zero */
+	gpfs_uid_t sdUID; /* Owning user */
+	gpfs_uid_t sdGID; /* Owning group */
+	int shareLocked_fd; /* file descriptor with share locks */
+	unsigned int aclLength; /* Length of the following ACL */
+	gpfs_acl_t acl; /* The initial ACL for create/mkdir */
 } cifsThreadData_t;
 
- /* NAME:        gpfs_register_cifs_export()
+/* NAME:        gpfs_register_cifs_export()
   *
   * FUNCTION:    Register a CIFS export process.
   *
@@ -701,10 +662,9 @@ typedef struct cifsThreadData_t
   *              EINVAL  prior process/thread registrations exist
   *              EBADF   unable to allocate a file descriptor
   */
-int GPFS_API
-gpfs_register_cifs_export(void);
+int GPFS_API gpfs_register_cifs_export(void);
 
- /* NAME:        gpfs_unregister_cifs_export()
+/* NAME:        gpfs_unregister_cifs_export()
   *
   * FUNCTION:    remove a registration for a CIFS export
   *
@@ -715,10 +675,9 @@ gpfs_register_cifs_export(void);
   *              EACCES  cannot establish credentials
   *              ENOMEM  temporary shortage of memory
   */
-int GPFS_API
-gpfs_unregister_cifs_export(void);
+int GPFS_API gpfs_unregister_cifs_export(void);
 
- /* NAME:        gpfs_register_cifs_buffer()
+/* NAME:        gpfs_register_cifs_buffer()
   *
   * FUNCTION:    Register a CIFS thread/buffer combination
   *
@@ -734,10 +693,9 @@ gpfs_unregister_cifs_export(void);
   *              EINVAL  no associated process registration exists
   *                      bad dataLength in buffer.
   */
-int GPFS_API
-gpfs_register_cifs_buffer(cifsThreadData_t *bufP);
+int GPFS_API gpfs_register_cifs_buffer(cifsThreadData_t *bufP);
 
- /* NAME:        gpfs_unregister_cifs_buffer()
+/* NAME:        gpfs_unregister_cifs_buffer()
   *
   * FUNCTION:    remove a CIFS thread/buffer registration
   *
@@ -749,8 +707,7 @@ gpfs_register_cifs_buffer(cifsThreadData_t *bufP);
   *              ENOMEM  unable to allocate required memory
   *              EINVAL  no associated process registration exists
   */
-int GPFS_API
-gpfs_unregister_cifs_buffer(void);
+int GPFS_API gpfs_unregister_cifs_buffer(void);
 
 /* NAME:        gpfs_lib_init()
  *
@@ -762,8 +719,7 @@ gpfs_unregister_cifs_buffer(void);
  *
  * Errno:       ENOSYS  Function not available
  */
-int GPFS_API
-gpfs_lib_init(int flags);
+int GPFS_API gpfs_lib_init(int flags);
 
 /* NAME:        gpfs_lib_term()
  *
@@ -775,22 +731,21 @@ gpfs_lib_init(int flags);
  *
  * Errno:       ENOSYS  Function not available
  */
-int GPFS_API
-gpfs_lib_term(int flags);
+int GPFS_API gpfs_lib_term(int flags);
 
 /* Define maximum length of the name for a GPFS named object, such
    as a snapshot, storage pool or fileset. The name is a null-terminated
    character string, which is not include in the max length */
-#define GPFS_MAXNAMLEN       255
+#define GPFS_MAXNAMLEN 255
 
 /* Define maximum length of the path to a GPFS named object
    such as a snapshot or fileset. If the absolute path name exceeds
    this limit, then use a relative path name. The path is a null-terminated
    character string, which is not included in the max length */
-#define GPFS_MAXPATHLEN     1023
+#define GPFS_MAXPATHLEN 1023
 
 /* ASCII code for "GPFS" in the struct statfs f_type field */
-#define GPFS_SUPER_MAGIC     0x47504653
+#define GPFS_SUPER_MAGIC 0x47504653
 
 /* GPFS inode attributes
    gpfs_uid_t - defined above
@@ -816,58 +771,54 @@ typedef unsigned long long gpfs_fsid64_t[2];
 typedef short gpfs_nlink_t;
 typedef long long gpfs_nlink64_t;
 
-
 #if defined(WIN32) || defined(_MS_SUA_)
-  typedef struct gpfs_stat64
-  {
-    gpfs_dev_t         st_dev;        /* id of device containing file */
-    gpfs_ino64_t       st_ino;        /* file inode number */
-    gpfs_mode_t        st_mode;       /* access mode */
-    gpfs_nlink64_t     st_nlink;      /* number of links */
-    unsigned int       st_flags;      /* flag word */
-    gpfs_uid64_t       st_uid;        /* owner uid */
-    gpfs_gid64_t       st_gid;        /* owner gid */
-    gpfs_dev_t         st_rdev;       /* device id (if special file) */
-    gpfs_off64_t       st_size;       /* file size in bytes */
-    gpfs_timestruc64_t st_atime;      /* time of last access */
-    gpfs_timestruc64_t st_mtime;      /* time of last data modification */
-    gpfs_timestruc64_t st_ctime;      /* time of last status change */
-    int                st_blksize;    /* preferred block size for io */
-    gpfs_off64_t       st_blocks;     /* 512 byte blocks of disk held by file */
-    long long          st_fsid;       /* file system id */
-    unsigned int       st_type;       /* file type */
-    gpfs_gen64_t       st_gen;        /* inode generation number */
-    gpfs_timestruc64_t st_createtime; /* time of creation */
-    unsigned int       st_attrs;      /* Windows flags */
-  } gpfs_stat64_t;
+typedef struct gpfs_stat64 {
+	gpfs_dev_t st_dev; /* id of device containing file */
+	gpfs_ino64_t st_ino; /* file inode number */
+	gpfs_mode_t st_mode; /* access mode */
+	gpfs_nlink64_t st_nlink; /* number of links */
+	unsigned int st_flags; /* flag word */
+	gpfs_uid64_t st_uid; /* owner uid */
+	gpfs_gid64_t st_gid; /* owner gid */
+	gpfs_dev_t st_rdev; /* device id (if special file) */
+	gpfs_off64_t st_size; /* file size in bytes */
+	gpfs_timestruc64_t st_atime; /* time of last access */
+	gpfs_timestruc64_t st_mtime; /* time of last data modification */
+	gpfs_timestruc64_t st_ctime; /* time of last status change */
+	int st_blksize; /* preferred block size for io */
+	gpfs_off64_t st_blocks; /* 512 byte blocks of disk held by file */
+	long long st_fsid; /* file system id */
+	unsigned int st_type; /* file type */
+	gpfs_gen64_t st_gen; /* inode generation number */
+	gpfs_timestruc64_t st_createtime; /* time of creation */
+	unsigned int st_attrs; /* Windows flags */
+} gpfs_stat64_t;
 #else
-  typedef struct stat64 gpfs_stat64_t;
+typedef struct stat64 gpfs_stat64_t;
 #endif
 
 #if defined(WIN32) || defined(_MS_SUA_)
-  typedef struct gpfs_statfs64
-  {
-    gpfs_off64_t       f_blocks;      /* total data blocks in file system */
-    gpfs_off64_t       f_bfree;       /* free block in fs */
-    gpfs_off64_t       f_bavail;      /* free blocks avail to non-superuser */
-    int                f_bsize;       /* optimal file system block size */
-    gpfs_ino64_t       f_files;       /* total file nodes in file system */
-    gpfs_ino64_t       f_ffree;       /* free file nodes in fs */
-    gpfs_fsid64_t      f_fsid;        /* file system id */
-    int                f_fsize;       /* fundamental file system block size */
-    int                f_sector_size; /* logical disk sector size */
-    char               f_fname[32];   /* file system name (usually mount pt.) */
-    char               f_fpack[32];   /* file system pack name */
-    int                f_name_max;    /* maximum component name length for posix */
-  } gpfs_statfs64_t;
+typedef struct gpfs_statfs64 {
+	gpfs_off64_t f_blocks; /* total data blocks in file system */
+	gpfs_off64_t f_bfree; /* free block in fs */
+	gpfs_off64_t f_bavail; /* free blocks avail to non-superuser */
+	int f_bsize; /* optimal file system block size */
+	gpfs_ino64_t f_files; /* total file nodes in file system */
+	gpfs_ino64_t f_ffree; /* free file nodes in fs */
+	gpfs_fsid64_t f_fsid; /* file system id */
+	int f_fsize; /* fundamental file system block size */
+	int f_sector_size; /* logical disk sector size */
+	char f_fname[32]; /* file system name (usually mount pt.) */
+	char f_fpack[32]; /* file system pack name */
+	int f_name_max; /* maximum component name length for posix */
+} gpfs_statfs64_t;
 #else
-  typedef struct statfs64 gpfs_statfs64_t;
+typedef struct statfs64 gpfs_statfs64_t;
 #endif
 
 /* Declarations for backwards compatibility. */
 typedef gpfs_stat64_t stat64_t;
 typedef gpfs_statfs64_t statfs64_t;
-
 
 /* Define a version number for the directory entry data to allow
    future changes in this structure. Careful callers should also use
@@ -875,201 +826,201 @@ typedef gpfs_statfs64_t statfs64_t;
    to allow some degree of forward compatibility */
 #define GPFS_D_VERSION 1
 
-typedef struct gpfs_direntx
-{
-  int            d_version;     /* this struct's version */
-  unsigned short d_reclen;      /* actual size of this struct including
+typedef struct gpfs_direntx {
+	int d_version; /* this struct's version */
+	unsigned short d_reclen; /* actual size of this struct including
                                    null terminated variable length d_name */
-  unsigned short d_type;        /* Types are defined below */
-  gpfs_ino_t     d_ino;         /* File inode number */
-  gpfs_gen_t     d_gen;         /* Generation number for the inode */
-  char           d_name[256];   /* null terminated variable length name */
+	unsigned short d_type; /* Types are defined below */
+	gpfs_ino_t d_ino; /* File inode number */
+	gpfs_gen_t d_gen; /* Generation number for the inode */
+	char d_name[256]; /* null terminated variable length name */
 } gpfs_direntx_t;
-
 
 #define GPFS_D64_VERSION 2
 
-typedef struct gpfs_direntx64
-{
-  int            d_version;     /* this struct's version */
-  unsigned short d_reclen;      /* actual size of this struct including
+typedef struct gpfs_direntx64 {
+	int d_version; /* this struct's version */
+	unsigned short d_reclen; /* actual size of this struct including
                                    null terminated variable length d_name */
-  unsigned short d_type;        /* Types are defined below */
-  gpfs_ino64_t   d_ino;         /* File inode number */
-  gpfs_gen64_t   d_gen;         /* Generation number for the inode */
-  unsigned int   d_flags;       /* Flags are defined below */
-  char           d_name[1028];  /* null terminated variable length name */
-                                /* (1020+null+7 byte pad to double word) */
-                                /* to handle up to 255 UTF-8 chars */
+	unsigned short d_type; /* Types are defined below */
+	gpfs_ino64_t d_ino; /* File inode number */
+	gpfs_gen64_t d_gen; /* Generation number for the inode */
+	unsigned int d_flags; /* Flags are defined below */
+	char d_name[1028]; /* null terminated variable length name */
+	/* (1020+null+7 byte pad to double word) */
+	/* to handle up to 255 UTF-8 chars */
 } gpfs_direntx64_t;
 
 /* File types for d_type field in gpfs_direntx_t */
-#define GPFS_DE_OTHER    0
-#define GPFS_DE_FIFO     1
-#define GPFS_DE_CHR      2
-#define GPFS_DE_DIR      4
-#define GPFS_DE_BLK      6
-#define GPFS_DE_REG      8
-#define GPFS_DE_LNK     10
-#define GPFS_DE_SOCK    12
-#define GPFS_DE_DEL     16
+#define GPFS_DE_OTHER 0
+#define GPFS_DE_FIFO 1
+#define GPFS_DE_CHR 2
+#define GPFS_DE_DIR 4
+#define GPFS_DE_BLK 6
+#define GPFS_DE_REG 8
+#define GPFS_DE_LNK 10
+#define GPFS_DE_SOCK 12
+#define GPFS_DE_DEL 16
 
 /* Define flags for gpfs_direntx64_t */
-#define GPFS_DEFLAG_NONE      0x0000 /* Default value, no flags set */
-#define GPFS_DEFLAG_JUNCTION  0x0001 /* DirEnt is a fileset junction */
+#define GPFS_DEFLAG_NONE 0x0000 /* Default value, no flags set */
+#define GPFS_DEFLAG_JUNCTION 0x0001 /* DirEnt is a fileset junction */
 #define GPFS_DEFLAG_IJUNCTION 0x0002 /* DirEnt is a inode space junction */
-#define GPFS_DEFLAG_ORPHAN    0x0004 /* DirEnt is an orphan (pcache) */
-#define GPFS_DEFLAG_CLONE     0x0008 /* DirEnt is a clone child */
+#define GPFS_DEFLAG_ORPHAN 0x0004 /* DirEnt is an orphan (pcache) */
+#define GPFS_DEFLAG_CLONE 0x0008 /* DirEnt is a clone child */
 
 /* Define a version number for the iattr data to allow future changes
    in this structure. Careful callers should also use the ia_reclen field
    for the size of the structure rather than sizeof, to allow some degree
    of forward compatibility */
 #define GPFS_IA_VERSION 1
-#define GPFS_IA64_VERSION 3 /* ver 3 adds ia_repl_xxxx bytes instead of ia_pad2 */
+#define GPFS_IA64_VERSION \
+	3 /* ver 3 adds ia_repl_xxxx bytes instead of ia_pad2 */
 #define GPFS_IA64_RESERVED 4
 #define GPFS_IA64_UNUSED 8
 
-typedef struct gpfs_iattr
-{
-  int              ia_version;    /* this struct version */
-  int              ia_reclen;     /* sizeof this structure */
-  int              ia_checksum;   /* validity check on iattr struct */
-  gpfs_mode_t      ia_mode;       /* access mode; see gpfs_mode_t comment */
-  gpfs_uid_t       ia_uid;        /* owner uid */
-  gpfs_gid_t       ia_gid;        /* owner gid */
-  gpfs_ino_t       ia_inode;      /* file inode number */
-  gpfs_gen_t       ia_gen;        /* inode generation number */
-  gpfs_nlink_t     ia_nlink;      /* number of links */
-  short            ia_flags;      /* Flags (defined below) */
-  int              ia_blocksize;  /* preferred block size for io */
-  gpfs_mask_t      ia_mask;       /* Initial attribute mask (not used) */
-  unsigned int     ia_pad1;       /* reserved space */
-  gpfs_off64_t     ia_size;       /* file size in bytes */
-  gpfs_off64_t     ia_blocks;     /* 512 byte blocks of disk held by file */
-  gpfs_timestruc_t ia_atime;      /* time of last access */
-  gpfs_timestruc_t ia_mtime;      /* time of last data modification */
-  gpfs_timestruc_t ia_ctime;      /* time of last status change */
-  gpfs_dev_t       ia_rdev;       /* id of device */
-  unsigned int     ia_xperm;      /* extended attributes (defined below) */
-  unsigned int     ia_modsnapid;  /* snapshot id of last modification */
-  unsigned int     ia_filesetid;  /* fileset ID */
-  unsigned int     ia_datapoolid; /* storage pool ID for data */
-  unsigned int     ia_pad2;       /* reserved space */
+typedef struct gpfs_iattr {
+	int ia_version; /* this struct version */
+	int ia_reclen; /* sizeof this structure */
+	int ia_checksum; /* validity check on iattr struct */
+	gpfs_mode_t ia_mode; /* access mode; see gpfs_mode_t comment */
+	gpfs_uid_t ia_uid; /* owner uid */
+	gpfs_gid_t ia_gid; /* owner gid */
+	gpfs_ino_t ia_inode; /* file inode number */
+	gpfs_gen_t ia_gen; /* inode generation number */
+	gpfs_nlink_t ia_nlink; /* number of links */
+	short ia_flags; /* Flags (defined below) */
+	int ia_blocksize; /* preferred block size for io */
+	gpfs_mask_t ia_mask; /* Initial attribute mask (not used) */
+	unsigned int ia_pad1; /* reserved space */
+	gpfs_off64_t ia_size; /* file size in bytes */
+	gpfs_off64_t ia_blocks; /* 512 byte blocks of disk held by file */
+	gpfs_timestruc_t ia_atime; /* time of last access */
+	gpfs_timestruc_t ia_mtime; /* time of last data modification */
+	gpfs_timestruc_t ia_ctime; /* time of last status change */
+	gpfs_dev_t ia_rdev; /* id of device */
+	unsigned int ia_xperm; /* extended attributes (defined below) */
+	unsigned int ia_modsnapid; /* snapshot id of last modification */
+	unsigned int ia_filesetid; /* fileset ID */
+	unsigned int ia_datapoolid; /* storage pool ID for data */
+	unsigned int ia_pad2; /* reserved space */
 } gpfs_iattr_t;
 
-
-typedef struct gpfs_iattr64
-{
-  int                ia_version;    /* this struct version */
-  int                ia_reclen;     /* sizeof this structure */
-  int                ia_checksum;   /* validity check on iattr struct */
-  gpfs_mode_t        ia_mode;       /* access mode; see gpfs_mode_t comment */
-  gpfs_uid64_t       ia_uid;        /* owner uid */
-  gpfs_gid64_t       ia_gid;        /* owner gid */
-  gpfs_ino64_t       ia_inode;      /* file inode number */
-  gpfs_gen64_t       ia_gen;        /* inode generation number */
-  gpfs_nlink64_t     ia_nlink;      /* number of links */
-  gpfs_off64_t       ia_size;       /* file size in bytes */
-  gpfs_off64_t       ia_blocks;     /* 512 byte blocks of disk held by file */
-  gpfs_timestruc64_t ia_atime;      /* time of last access */
-  unsigned int       ia_winflags;   /* windows flags (defined below) */
-  unsigned int       ia_pad1;       /* reserved space */
-  gpfs_timestruc64_t ia_mtime;      /* time of last data modification */
-  unsigned int       ia_flags;      /* flags (defined below) */
-  /* next four bytes were ia_pad2 */
-  unsigned char      ia_repl_data;  /* data replication factor */
-  unsigned char      ia_repl_data_max; /* data replication max factor */
-  unsigned char      ia_repl_meta;  /* meta data replication factor */
-  unsigned char      ia_repl_meta_max; /* meta data replication max factor */
-  gpfs_timestruc64_t ia_ctime;      /* time of last status change */
-  int                ia_blocksize;  /* preferred block size for io */
-  unsigned int       ia_pad3;       /* reserved space */
-  gpfs_timestruc64_t ia_createtime; /* creation time */
-  gpfs_mask_t        ia_mask;       /* initial attribute mask (not used) */
-  int                ia_pad4;       /* reserved space */
-  unsigned int       ia_reserved[GPFS_IA64_RESERVED]; /* reserved space */
-  unsigned int       ia_xperm;      /* extended attributes (defined below) */
-  gpfs_dev_t         ia_dev;        /* id of device containing file */
-  gpfs_dev_t         ia_rdev;       /* device id (if special file) */
-  unsigned int       ia_pcacheflags; /* pcache inode bits */
-  gpfs_snapid64_t    ia_modsnapid;  /* snapshot id of last modification */
-  unsigned int       ia_filesetid;  /* fileset ID */
-  unsigned int       ia_datapoolid; /* storage pool ID for data */
-  gpfs_ino64_t       ia_inode_space_mask; /* inode space mask of this file system */
-                                          /* This value is saved in the iattr structure
+typedef struct gpfs_iattr64 {
+	int ia_version; /* this struct version */
+	int ia_reclen; /* sizeof this structure */
+	int ia_checksum; /* validity check on iattr struct */
+	gpfs_mode_t ia_mode; /* access mode; see gpfs_mode_t comment */
+	gpfs_uid64_t ia_uid; /* owner uid */
+	gpfs_gid64_t ia_gid; /* owner gid */
+	gpfs_ino64_t ia_inode; /* file inode number */
+	gpfs_gen64_t ia_gen; /* inode generation number */
+	gpfs_nlink64_t ia_nlink; /* number of links */
+	gpfs_off64_t ia_size; /* file size in bytes */
+	gpfs_off64_t ia_blocks; /* 512 byte blocks of disk held by file */
+	gpfs_timestruc64_t ia_atime; /* time of last access */
+	unsigned int ia_winflags; /* windows flags (defined below) */
+	unsigned int ia_pad1; /* reserved space */
+	gpfs_timestruc64_t ia_mtime; /* time of last data modification */
+	unsigned int ia_flags; /* flags (defined below) */
+	/* next four bytes were ia_pad2 */
+	unsigned char ia_repl_data; /* data replication factor */
+	unsigned char ia_repl_data_max; /* data replication max factor */
+	unsigned char ia_repl_meta; /* meta data replication factor */
+	unsigned char ia_repl_meta_max; /* meta data replication max factor */
+	gpfs_timestruc64_t ia_ctime; /* time of last status change */
+	int ia_blocksize; /* preferred block size for io */
+	unsigned int ia_pad3; /* reserved space */
+	gpfs_timestruc64_t ia_createtime; /* creation time */
+	gpfs_mask_t ia_mask; /* initial attribute mask (not used) */
+	int ia_pad4; /* reserved space */
+	unsigned int ia_reserved[GPFS_IA64_RESERVED]; /* reserved space */
+	unsigned int ia_xperm; /* extended attributes (defined below) */
+	gpfs_dev_t ia_dev; /* id of device containing file */
+	gpfs_dev_t ia_rdev; /* device id (if special file) */
+	unsigned int ia_pcacheflags; /* pcache inode bits */
+	gpfs_snapid64_t ia_modsnapid; /* snapshot id of last modification */
+	unsigned int ia_filesetid; /* fileset ID */
+	unsigned int ia_datapoolid; /* storage pool ID for data */
+	gpfs_ino64_t
+		ia_inode_space_mask; /* inode space mask of this file system */
+	/* This value is saved in the iattr structure
                                              during backup and used during restore */
-  gpfs_off64_t       ia_dirminsize; /* dir pre-allocation size in bytes */
-  unsigned int       ia_unused[GPFS_IA64_UNUSED];  /* reserved space */
+	gpfs_off64_t ia_dirminsize; /* dir pre-allocation size in bytes */
+	unsigned int ia_unused[GPFS_IA64_UNUSED]; /* reserved space */
 } gpfs_iattr64_t;
 
 /* Define flags for inode attributes */
-#define GPFS_IAFLAG_SNAPDIR         0x0001 /* (obsolete) */
-#define GPFS_IAFLAG_USRQUOTA        0x0002 /* inode is a user quota file */
-#define GPFS_IAFLAG_GRPQUOTA        0x0004 /* inode is a group quota file */
-#define GPFS_IAFLAG_ERROR           0x0008 /* error reading inode */
+#define GPFS_IAFLAG_SNAPDIR 0x0001 /* (obsolete) */
+#define GPFS_IAFLAG_USRQUOTA 0x0002 /* inode is a user quota file */
+#define GPFS_IAFLAG_GRPQUOTA 0x0004 /* inode is a group quota file */
+#define GPFS_IAFLAG_ERROR 0x0008 /* error reading inode */
 /* Define flags for inode replication attributes */
-#define GPFS_IAFLAG_FILESET_ROOT    0x0010 /* root dir of a fileset */
+#define GPFS_IAFLAG_FILESET_ROOT 0x0010 /* root dir of a fileset */
 #define GPFS_IAFLAG_NO_SNAP_RESTORE 0x0020 /* don't restore from snapshots */
-#define GPFS_IAFLAG_FILESETQUOTA    0x0040 /* inode is a fileset quota file */
-#define GPFS_IAFLAG_COMANAGED       0x0080 /* file data is co-managed */
-#define GPFS_IAFLAG_ILLPLACED       0x0100 /* may not be properly placed */
-#define GPFS_IAFLAG_REPLMETA        0x0200 /* metadata replication set */
-#define GPFS_IAFLAG_REPLDATA        0x0400 /* data replication set */
-#define GPFS_IAFLAG_EXPOSED         0x0800 /* may have data on suspended disks */
-#define GPFS_IAFLAG_ILLREPLICATED   0x1000 /* may not be properly replicated */
-#define GPFS_IAFLAG_UNBALANCED      0x2000 /* may not be properly balanced */
-#define GPFS_IAFLAG_DATAUPDATEMISS  0x4000 /* has stale data blocks on
+#define GPFS_IAFLAG_FILESETQUOTA 0x0040 /* inode is a fileset quota file */
+#define GPFS_IAFLAG_COMANAGED 0x0080 /* file data is co-managed */
+#define GPFS_IAFLAG_ILLPLACED 0x0100 /* may not be properly placed */
+#define GPFS_IAFLAG_REPLMETA 0x0200 /* metadata replication set */
+#define GPFS_IAFLAG_REPLDATA 0x0400 /* data replication set */
+#define GPFS_IAFLAG_EXPOSED 0x0800 /* may have data on suspended disks */
+#define GPFS_IAFLAG_ILLREPLICATED 0x1000 /* may not be properly replicated */
+#define GPFS_IAFLAG_UNBALANCED 0x2000 /* may not be properly balanced */
+#define GPFS_IAFLAG_DATAUPDATEMISS \
+	0x4000 /* has stale data blocks on
                                               unavailable disk */
-#define GPFS_IAFLAG_METAUPDATEMISS  0x8000 /* has stale metadata on
+#define GPFS_IAFLAG_METAUPDATEMISS \
+	0x8000 /* has stale metadata on
                                               unavailable disk */
 
-#define GPFS_IAFLAG_IMMUTABLE       0x00010000 /* Immutability */
-#define GPFS_IAFLAG_INDEFRETENT     0x00020000 /* Indefinite retention */
-#define GPFS_IAFLAG_SECUREDELETE    0x00040000 /* Secure deletion */
+#define GPFS_IAFLAG_IMMUTABLE 0x00010000 /* Immutability */
+#define GPFS_IAFLAG_INDEFRETENT 0x00020000 /* Indefinite retention */
+#define GPFS_IAFLAG_SECUREDELETE 0x00040000 /* Secure deletion */
 
-#define GPFS_IAFLAG_TRUNCMANAGED    0x00080000 /* dmapi truncate event enabled */
-#define GPFS_IAFLAG_READMANAGED     0x00100000 /* dmapi read event enabled */
-#define GPFS_IAFLAG_WRITEMANAGED    0x00200000 /* dmapi write event enabled */
+#define GPFS_IAFLAG_TRUNCMANAGED 0x00080000 /* dmapi truncate event enabled */
+#define GPFS_IAFLAG_READMANAGED 0x00100000 /* dmapi read event enabled */
+#define GPFS_IAFLAG_WRITEMANAGED 0x00200000 /* dmapi write event enabled */
 
-#define GPFS_IAFLAG_APPENDONLY      0x00400000 /* AppendOnly only */
-#define GPFS_IAFLAG_DELETED         0x00800000 /* inode has been deleted */
+#define GPFS_IAFLAG_APPENDONLY 0x00400000 /* AppendOnly only */
+#define GPFS_IAFLAG_DELETED 0x00800000 /* inode has been deleted */
 #ifdef ZIP
-#define GPFS_IAFLAG_ILLCOMPRESSED   0x01000000 /* may not be properly compressed */
+#define GPFS_IAFLAG_ILLCOMPRESSED \
+	0x01000000 /* may not be properly compressed */
 #endif
-#define GPFS_IAFLAG_FPOILLPLACED    0x02000000 /* may not be properly placed per
+#define GPFS_IAFLAG_FPOILLPLACED \
+	0x02000000 /* may not be properly placed per
                                                   FPO attributes (bgf, wad, wadfg) */
 
 /* Define flags for window's attributes */
-#define GPFS_IWINFLAG_ARCHIVE       0x0001 /* Archive */
-#define GPFS_IWINFLAG_HIDDEN        0x0002 /* Hidden */
-#define GPFS_IWINFLAG_NOTINDEXED    0x0004 /* Not content indexed */
-#define GPFS_IWINFLAG_OFFLINE       0x0008 /* Off-line */
-#define GPFS_IWINFLAG_READONLY      0x0010 /* Read-only */
-#define GPFS_IWINFLAG_REPARSE       0x0020 /* Reparse point */
-#define GPFS_IWINFLAG_SYSTEM        0x0040 /* System */
-#define GPFS_IWINFLAG_TEMPORARY     0x0080 /* Temporary */
-#define GPFS_IWINFLAG_COMPRESSED    0x0100 /* Compressed */
-#define GPFS_IWINFLAG_ENCRYPTED     0x0200 /* Encrypted */
-#define GPFS_IWINFLAG_SPARSE        0x0400 /* Sparse file */
-#define GPFS_IWINFLAG_HASSTREAMS    0x0800 /* Has streams */
+#define GPFS_IWINFLAG_ARCHIVE 0x0001 /* Archive */
+#define GPFS_IWINFLAG_HIDDEN 0x0002 /* Hidden */
+#define GPFS_IWINFLAG_NOTINDEXED 0x0004 /* Not content indexed */
+#define GPFS_IWINFLAG_OFFLINE 0x0008 /* Off-line */
+#define GPFS_IWINFLAG_READONLY 0x0010 /* Read-only */
+#define GPFS_IWINFLAG_REPARSE 0x0020 /* Reparse point */
+#define GPFS_IWINFLAG_SYSTEM 0x0040 /* System */
+#define GPFS_IWINFLAG_TEMPORARY 0x0080 /* Temporary */
+#define GPFS_IWINFLAG_COMPRESSED 0x0100 /* Compressed */
+#define GPFS_IWINFLAG_ENCRYPTED 0x0200 /* Encrypted */
+#define GPFS_IWINFLAG_SPARSE 0x0400 /* Sparse file */
+#define GPFS_IWINFLAG_HASSTREAMS 0x0800 /* Has streams */
 
 /* Define flags for extended attributes */
-#define GPFS_IAXPERM_ACL            0x0001 /* file has acls */
-#define GPFS_IAXPERM_XATTR          0x0002 /* file has extended attributes */
-#define GPFS_IAXPERM_DMATTR         0x0004 /* file has dm attributes */
-#define GPFS_IAXPERM_DOSATTR        0x0008 /* file has non-default dos attrs */
-#define GPFS_IAXPERM_RPATTR         0x0010 /* file has restore policy attrs */
+#define GPFS_IAXPERM_ACL 0x0001 /* file has acls */
+#define GPFS_IAXPERM_XATTR 0x0002 /* file has extended attributes */
+#define GPFS_IAXPERM_DMATTR 0x0004 /* file has dm attributes */
+#define GPFS_IAXPERM_DOSATTR 0x0008 /* file has non-default dos attrs */
+#define GPFS_IAXPERM_RPATTR 0x0010 /* file has restore policy attrs */
 
 /* Define flags for pcache bits defined in the inode */
-#define GPFS_ICAFLAG_CACHED   0x0001  /* "cached complete"  */
-#define GPFS_ICAFLAG_CREATE   0x0002  /* "created"          */
-#define GPFS_ICAFLAG_DIRTY    0x0004  /* "data dirty"       */
-#define GPFS_ICAFLAG_LINK     0x0008  /* "hard linked"      */
-#define GPFS_ICAFLAG_SETATTR  0x0010  /* "attr changed"     */
-#define GPFS_ICAFLAG_LOCAL    0x0020  /* "local"            */
-#define GPFS_ICAFLAG_APPEND   0x0040  /* "append"           */
-#define GPFS_ICAFLAG_STATE    0x0080  /* "has remote state" */
+#define GPFS_ICAFLAG_CACHED 0x0001 /* "cached complete"  */
+#define GPFS_ICAFLAG_CREATE 0x0002 /* "created"          */
+#define GPFS_ICAFLAG_DIRTY 0x0004 /* "data dirty"       */
+#define GPFS_ICAFLAG_LINK 0x0008 /* "hard linked"      */
+#define GPFS_ICAFLAG_SETATTR 0x0010 /* "attr changed"     */
+#define GPFS_ICAFLAG_LOCAL 0x0020 /* "local"            */
+#define GPFS_ICAFLAG_APPEND 0x0040 /* "append"           */
+#define GPFS_ICAFLAG_STATE 0x0080 /* "has remote state" */
 
 /* Define pointers to interface types */
 typedef struct gpfs_fssnap_handle gpfs_fssnap_handle_t;
@@ -1077,29 +1028,30 @@ typedef struct gpfs_iscan gpfs_iscan_t;
 typedef struct gpfs_ifile gpfs_ifile_t;
 typedef struct gpfs_restore gpfs_restore_t;
 
-typedef struct gpfs_fssnap_id
-{
-  char opaque[48];
+typedef struct gpfs_fssnap_id {
+	char opaque[48];
 } gpfs_fssnap_id_t;
-
 
 /* Define extended return codes for gpfs backup & restore
    calls without an explicit return code will return the value in errno */
 #define GPFS_NEW_ERRNO_BASE 185
-#define GPFS_E_INVAL_INUM           (GPFS_NEW_ERRNO_BASE+0) /* invalid inode number */
+#define GPFS_E_INVAL_INUM (GPFS_NEW_ERRNO_BASE + 0) /* invalid inode number */
 
-#define GPFS_ERRNO_BASE  190 
-#define GPFS_E_INVAL_FSSNAPID       (GPFS_ERRNO_BASE+0) /* invalid fssnap id */
-#define GPFS_E_INVAL_ISCAN          (GPFS_ERRNO_BASE+1) /* invalid iscan pointer */
-#define GPFS_E_INVAL_IFILE          (GPFS_ERRNO_BASE+2) /* invalid ifile pointer */
-#define GPFS_E_INVAL_IATTR          (GPFS_ERRNO_BASE+3) /* invalid iattr structure */
-#define GPFS_E_INVAL_RESTORE        (GPFS_ERRNO_BASE+4) /* invalid restore pointer */
-#define GPFS_E_INVAL_FSSNAPHANDLE   (GPFS_ERRNO_BASE+5) /* invalid fssnap handle */
-#define GPFS_E_INVAL_SNAPNAME       (GPFS_ERRNO_BASE+6) /* invalid snapshot name */
-#define GPFS_E_FS_NOT_RESTORABLE    (GPFS_ERRNO_BASE+7) /* FS is not clean */
-#define GPFS_E_RESTORE_NOT_ENABLED  (GPFS_ERRNO_BASE+8) /* Restore was not enabled */
-#define GPFS_E_RESTORE_STARTED      (GPFS_ERRNO_BASE+9) /* Restore is running */
-#define GPFS_E_INVAL_XATTR          (GPFS_ERRNO_BASE+10) /* invalid extended
+#define GPFS_ERRNO_BASE 190
+#define GPFS_E_INVAL_FSSNAPID (GPFS_ERRNO_BASE + 0) /* invalid fssnap id */
+#define GPFS_E_INVAL_ISCAN (GPFS_ERRNO_BASE + 1) /* invalid iscan pointer */
+#define GPFS_E_INVAL_IFILE (GPFS_ERRNO_BASE + 2) /* invalid ifile pointer */
+#define GPFS_E_INVAL_IATTR (GPFS_ERRNO_BASE + 3) /* invalid iattr structure */
+#define GPFS_E_INVAL_RESTORE (GPFS_ERRNO_BASE + 4) /* invalid restore pointer */
+#define GPFS_E_INVAL_FSSNAPHANDLE \
+	(GPFS_ERRNO_BASE + 5) /* invalid fssnap handle */
+#define GPFS_E_INVAL_SNAPNAME (GPFS_ERRNO_BASE + 6) /* invalid snapshot name */
+#define GPFS_E_FS_NOT_RESTORABLE (GPFS_ERRNO_BASE + 7) /* FS is not clean */
+#define GPFS_E_RESTORE_NOT_ENABLED \
+	(GPFS_ERRNO_BASE + 8) /* Restore was not enabled */
+#define GPFS_E_RESTORE_STARTED (GPFS_ERRNO_BASE + 9) /* Restore is running */
+#define GPFS_E_INVAL_XATTR \
+	(GPFS_ERRNO_BASE + 10) /* invalid extended
                                                             attribute pointer */
 
 /* Define flags parameter for get/put file attributes.
@@ -1107,44 +1059,46 @@ typedef struct gpfs_fssnap_id
    gpfs_igetattrsx, gpfs_iputattrsx 
    and gpfs_lwe_getattrs, gpfs_lwe_putattrs
 */
-#define GPFS_ATTRFLAG_DEFAULT            0x0000  /* default behavior */
-#define GPFS_ATTRFLAG_NO_PLACEMENT       0x0001  /* exclude file placement attributes */
-#define GPFS_ATTRFLAG_IGNORE_POOL        0x0002  /* saved poolid is not valid */
-#define GPFS_ATTRFLAG_USE_POLICY         0x0004  /* use restore policy rules to
+#define GPFS_ATTRFLAG_DEFAULT 0x0000 /* default behavior */
+#define GPFS_ATTRFLAG_NO_PLACEMENT \
+	0x0001 /* exclude file placement attributes */
+#define GPFS_ATTRFLAG_IGNORE_POOL 0x0002 /* saved poolid is not valid */
+#define GPFS_ATTRFLAG_USE_POLICY \
+	0x0004 /* use restore policy rules to
                                                     determine poolid */
-#define GPFS_ATTRFLAG_INCL_DMAPI         0x0008  /* Include dmapi attributes */
-#define GPFS_ATTRFLAG_FINALIZE_ATTRS     0x0010  /* Finalize immutability attributes */
-#define GPFS_ATTRFLAG_SKIP_IMMUTABLE     0x0020  /* Skip immutable attributes */
-#define GPFS_ATTRFLAG_INCL_ENCR          0x0040  /* Include encryption attributes */
-#define GPFS_ATTRFLAG_SKIP_CLONE         0x0080  /* Skip clone attributes */
-#define GPFS_ATTRFLAG_MODIFY_CLONEPARENT 0x0100  /* Allow modification on clone parent */
+#define GPFS_ATTRFLAG_INCL_DMAPI 0x0008 /* Include dmapi attributes */
+#define GPFS_ATTRFLAG_FINALIZE_ATTRS \
+	0x0010 /* Finalize immutability attributes */
+#define GPFS_ATTRFLAG_SKIP_IMMUTABLE 0x0020 /* Skip immutable attributes */
+#define GPFS_ATTRFLAG_INCL_ENCR 0x0040 /* Include encryption attributes */
+#define GPFS_ATTRFLAG_SKIP_CLONE 0x0080 /* Skip clone attributes */
+#define GPFS_ATTRFLAG_MODIFY_CLONEPARENT \
+	0x0100 /* Allow modification on clone parent */
 #ifdef ZIP
-#define GPFS_ATTRFLAG_NO_COMPRESSED      0x0200  /* exclude "compressed" attribute */
+#define GPFS_ATTRFLAG_NO_COMPRESSED 0x0200 /* exclude "compressed" attribute */
 #endif
 
 /* Define structure used by gpfs_statfspool */
-typedef struct gpfs_statfspool_s
-{
-  gpfs_off64_t f_blocks;     /* total data blocks in pool */
-  gpfs_off64_t f_bfree;      /* free blocks in pool */
-  gpfs_off64_t f_bavail;     /* free blocks avail to non-superuser */
-  gpfs_off64_t f_mblocks;    /* total metadata blocks in pool */
-  gpfs_off64_t f_mfree;      /* free blocks avail for system metadata */
-  int          f_bsize;      /* optimal storage pool block size */
-  int          f_files;      /* total file nodes assigned to pool */
-  gpfs_pool_t  f_poolid;     /* storage pool id */
-  int          f_fsize;      /* fundamental file system block size */
-  unsigned int f_usage;      /* data and/or metadata stored in pool */
-  int          f_replica;    /* replica */
-  int          f_bgf;        /* block group factor */
-  int          f_wad;        /* write affinity depth */
-  int          f_allowWriteAffinity;   /* allow write affinity depth. 1 means yes */
-  int          f_reserved[3];/* Current unused and set to  zero */
+typedef struct gpfs_statfspool_s {
+	gpfs_off64_t f_blocks; /* total data blocks in pool */
+	gpfs_off64_t f_bfree; /* free blocks in pool */
+	gpfs_off64_t f_bavail; /* free blocks avail to non-superuser */
+	gpfs_off64_t f_mblocks; /* total metadata blocks in pool */
+	gpfs_off64_t f_mfree; /* free blocks avail for system metadata */
+	int f_bsize; /* optimal storage pool block size */
+	int f_files; /* total file nodes assigned to pool */
+	gpfs_pool_t f_poolid; /* storage pool id */
+	int f_fsize; /* fundamental file system block size */
+	unsigned int f_usage; /* data and/or metadata stored in pool */
+	int f_replica; /* replica */
+	int f_bgf; /* block group factor */
+	int f_wad; /* write affinity depth */
+	int f_allowWriteAffinity; /* allow write affinity depth. 1 means yes */
+	int f_reserved[3]; /* Current unused and set to  zero */
 } gpfs_statfspool_t;
 
-#define STATFSPOOL_USAGE_DATA      0x0001 /* Pool stores user data */
-#define STATFSPOOL_USAGE_METADATA  0x0002 /* Pool stores system metadata */
-
+#define STATFSPOOL_USAGE_DATA 0x0001 /* Pool stores user data */
+#define STATFSPOOL_USAGE_METADATA 0x0002 /* Pool stores system metadata */
 
 /* NAME:        gpfs_fstat(), gpfs_stat()
  *
@@ -1158,13 +1112,10 @@ typedef struct gpfs_statfspool_s
  *              EINVAL  Not a GPFS file
  *              ESTALE  cached fs information was invalid
  */
-int GPFS_API
-gpfs_fstat(gpfs_file_t fileDesc,
-           gpfs_stat64_t *buffer);
+int GPFS_API gpfs_fstat(gpfs_file_t fileDesc, gpfs_stat64_t *buffer);
 
-int GPFS_API
-gpfs_stat(const char *pathname, /* File pathname */
-          gpfs_stat64_t *buffer);
+int GPFS_API gpfs_stat(const char *pathname, /* File pathname */
+		       gpfs_stat64_t *buffer);
 
 /* NAME:        gpfs_fstat_x(), gpfs_stat_x()
  *
@@ -1187,17 +1138,12 @@ gpfs_stat(const char *pathname, /* File pathname */
  *              EINVAL  Not a GPFS file
  *              ESTALE  cached fs information was invalid
  */
-int GPFS_API
-gpfs_fstat_x(gpfs_file_t fileDesc,
-             unsigned int *st_litemaskP,
-             gpfs_iattr64_t *iattr,
-             size_t iattrBufLen);
+int GPFS_API gpfs_fstat_x(gpfs_file_t fileDesc, unsigned int *st_litemaskP,
+			  gpfs_iattr64_t *iattr, size_t iattrBufLen);
 
-int GPFS_API
-gpfs_stat_x(const char *pathname, /* File pathname */
-            unsigned int *st_litemaskP,
-            gpfs_iattr64_t *iattr,
-            size_t iattrBufLen);
+int GPFS_API gpfs_stat_x(const char *pathname, /* File pathname */
+			 unsigned int *st_litemaskP, gpfs_iattr64_t *iattr,
+			 size_t iattrBufLen);
 
 /* NAME:        gpfs_statfs64()
  *
@@ -1211,9 +1157,8 @@ gpfs_stat_x(const char *pathname, /* File pathname */
  *              EINVAL  Not a GPFS file
  *              ESTALE  cached fs information was invalid
  */
-int GPFS_API
-gpfs_statfs64(const char *pathname, /* File pathname */
-              gpfs_statfs64_t *buffer);
+int GPFS_API gpfs_statfs64(const char *pathname, /* File pathname */
+			   gpfs_statfs64_t *buffer);
 
 /* NAME:        gpfs_statlite()
  *              gpfs_lstatlite() - do not follow a symlink at the end of the path
@@ -1232,16 +1177,11 @@ gpfs_statfs64(const char *pathname, /* File pathname */
  *              EINVAL
  *
  */
-int GPFS_API
-gpfs_statlite(const char *pathname,
-              unsigned int *st_litemaskP,
-              gpfs_stat64_t *statbufP);
+int GPFS_API gpfs_statlite(const char *pathname, unsigned int *st_litemaskP,
+			   gpfs_stat64_t *statbufP);
 
-int GPFS_API
-gpfs_lstatlite(const char *pathname,
-               unsigned int *st_litemaskP,
-               gpfs_stat64_t *statbufP);
-
+int GPFS_API gpfs_lstatlite(const char *pathname, unsigned int *st_litemaskP,
+			    gpfs_stat64_t *statbufP);
 
 /* NAME:        gpfs_fgetattrs()
  *
@@ -1269,13 +1209,8 @@ gpfs_lstatlite(const char *pathname,
  *              ENOSPC  buffer too small to return all attributes
  *                      *attrSizeP will be set to the size necessary
  */
-int GPFS_API
-gpfs_fgetattrs(gpfs_file_t fileDesc,
-               int flags,
-               void *bufferP,
-               int bufferSize,
-               int *attrSizeP);
-
+int GPFS_API gpfs_fgetattrs(gpfs_file_t fileDesc, int flags, void *bufferP,
+			    int bufferSize, int *attrSizeP);
 
 /* NAME:        gpfs_fputattrs()
  *
@@ -1309,11 +1244,7 @@ gpfs_fgetattrs(gpfs_file_t fileDesc,
  *              EINVAL  the buffer does not contain valid attribute data
  *              EINVAL  invalid flags provided
  */
-int GPFS_API
-gpfs_fputattrs(gpfs_file_t fileDesc,
-               int flags,
-               void *bufferP);
-
+int GPFS_API gpfs_fputattrs(gpfs_file_t fileDesc, int flags, void *bufferP);
 
 /* NAME:        gpfs_fputattrswithpathname()
  *
@@ -1360,12 +1291,8 @@ gpfs_fputattrs(gpfs_file_t fileDesc,
  *              ENOENT  invalid pathname
  *              EINVAL  invalid flags provided
  */
-int GPFS_API
-gpfs_fputattrswithpathname(gpfs_file_t fileDesc,
-                           int flags,
-                           void *bufferP,
-                           const char *pathName);
-
+int GPFS_API gpfs_fputattrswithpathname(gpfs_file_t fileDesc, int flags,
+					void *bufferP, const char *pathName);
 
 /* NAME:        gpfs_get_fssnaphandle_by_path()
  *
@@ -1383,9 +1310,8 @@ gpfs_fputattrswithpathname(gpfs_file_t fileDesc,
  *              ENOENT invalid pathname
  *              see system calls open(), fstatfs(), and malloc() ERRORS
  */
-gpfs_fssnap_handle_t * GPFS_API
+gpfs_fssnap_handle_t *GPFS_API
 gpfs_get_fssnaphandle_by_path(const char *pathName);
-
 
 /* NAME:        gpfs_get_fssnaphandle_by_name()
  *
@@ -1406,10 +1332,8 @@ gpfs_get_fssnaphandle_by_path(const char *pathName);
  *              GPFS_E_INVAL_SNAPNAME invalid snapshot name
  *              see system calls open(), fstatfs(), and malloc() ERRORS
  */
-gpfs_fssnap_handle_t * GPFS_API
-gpfs_get_fssnaphandle_by_name(const char *fsName,
-                              const char *snapName);
-
+gpfs_fssnap_handle_t *GPFS_API
+gpfs_get_fssnaphandle_by_name(const char *fsName, const char *snapName);
 
 /* NAME:        gpfs_get_fssnaphandle_by_fssnapid()
  *
@@ -1425,7 +1349,7 @@ gpfs_get_fssnaphandle_by_name(const char *fsName,
  *              GPFS_E_INVAL_FSSNAPID invalid snapshot id
  *              see system calls open(), fstatfs(), and malloc() ERRORS
  */
-gpfs_fssnap_handle_t * GPFS_API
+gpfs_fssnap_handle_t *GPFS_API
 gpfs_get_fssnaphandle_by_fssnapid(const gpfs_fssnap_id_t *fssnapId);
 
 /* NAME:        gpfs_get_fset_snaphandle_by_path()
@@ -1444,7 +1368,7 @@ gpfs_get_fssnaphandle_by_fssnapid(const gpfs_fssnap_id_t *fssnapId);
  *              ENOENT invalid pathname
  *              see system calls open(), fstatfs(), and malloc() ERRORS
  */
-gpfs_fssnap_handle_t * GPFS_API
+gpfs_fssnap_handle_t *GPFS_API
 gpfs_get_fset_snaphandle_by_path(const char *pathName);
 
 /* NAME:        gpfs_get_fset_snaphandle_by_name()
@@ -1469,10 +1393,8 @@ gpfs_get_fset_snaphandle_by_path(const char *pathName);
  *              GPFS_E_INVAL_SNAPNAME invalid snapshot name
  *              see system calls open(), fstatfs(), and malloc() ERRORS
  */
-gpfs_fssnap_handle_t * GPFS_API
-gpfs_get_fset_snaphandle_by_name(const char *fsName,
-                                 const char *fsetName,
-                                 const char *snapName);
+gpfs_fssnap_handle_t *GPFS_API gpfs_get_fset_snaphandle_by_name(
+	const char *fsName, const char *fsetName, const char *snapName);
 
 /* NAME:        gpfs_get_fset_snaphandle_by_fset_snapid()
  *
@@ -1488,7 +1410,7 @@ gpfs_get_fset_snaphandle_by_name(const char *fsName,
  *              GPFS_E_INVAL_FSSNAPID invalid snapshot id
  *              see system calls open(), fstatfs(), and malloc() ERRORS
  */
-gpfs_fssnap_handle_t * GPFS_API
+gpfs_fssnap_handle_t *GPFS_API
 gpfs_get_fset_snaphandle_by_fset_snapid(const gpfs_fssnap_id_t *fsetsnapId);
 
 /* NAME:        gpfs_get_pathname_from_fssnaphandle()
@@ -1504,9 +1426,8 @@ gpfs_get_fset_snaphandle_by_fset_snapid(const gpfs_fssnap_id_t *fsetsnapId);
  * Errno:       ENOSYS function not available
  *              GPFS_E_INVAL_FSSNAPHANDLE invalid fssnapHandle
  */
-const char * GPFS_API
+const char *GPFS_API
 gpfs_get_pathname_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
-
 
 /* NAME:        gpfs_get_fsname_from_fssnaphandle()
  *
@@ -1521,9 +1442,8 @@ gpfs_get_pathname_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
  * Errno:       ENOSYS function not available
  *              GPFS_E_INVAL_FSSNAPHANDLE invalid fssnapHandle
  */
-const char * GPFS_API
+const char *GPFS_API
 gpfs_get_fsname_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
-
 
 /* NAME:        gpfs_get_snapname_from_fssnaphandle()
  *
@@ -1543,9 +1463,8 @@ gpfs_get_fsname_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
  *              the snapId may still be valid, but the call will fail
  *              with errno set to GPFS_E_INVAL_SNAPNAME.
  */
-const char * GPFS_API
+const char *GPFS_API
 gpfs_get_snapname_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
-
 
 /* NAME:        gpfs_get_snapid_from_fssnaphandle()
  *
@@ -1576,7 +1495,6 @@ gpfs_get_snapid_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
 gpfs_snapid64_t GPFS_API
 gpfs_get_snapid_from_fssnaphandle64(gpfs_fssnap_handle_t *fssnapHandle);
 
-
 /* NAME:        gpfs_get_fssnapid_from_fssnaphandle()
  *
  * FUNCTION:    Get a unique, non-volatile file system and snapshot id
@@ -1594,10 +1512,8 @@ gpfs_get_snapid_from_fssnaphandle64(gpfs_fssnap_handle_t *fssnapHandle);
  *              EINVAL null ptr given for returned fssnapId
  *              EFAULT size mismatch for fssnapId
  */
-int GPFS_API
-gpfs_get_fssnapid_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle,
-                                    gpfs_fssnap_id_t *fssnapId);
-
+int GPFS_API gpfs_get_fssnapid_from_fssnaphandle(
+	gpfs_fssnap_handle_t *fssnapHandle, gpfs_fssnap_id_t *fssnapId);
 
 /* NAME:        gpfs_get_restore_fssnapid_from_fssnaphandle()
  *
@@ -1620,9 +1536,8 @@ gpfs_get_fssnapid_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle,
  *              ENOMEM unable to allocate memory for request
  *              GPFS_E_FS_NOT_RESTORABLE fs is not clean for restore
  */
-int GPFS_API
-gpfs_get_restore_fssnapid_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle,
-                                            gpfs_fssnap_id_t *fssnapId);
+int GPFS_API gpfs_get_restore_fssnapid_from_fssnaphandle(
+	gpfs_fssnap_handle_t *fssnapHandle, gpfs_fssnap_id_t *fssnapId);
 
 /* NAME:        gpfs_free_fssnaphandle()
  *
@@ -1634,8 +1549,7 @@ gpfs_get_restore_fssnapid_from_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle,
  *
  * Errno:       None
  */
-void GPFS_API
-gpfs_free_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
+void GPFS_API gpfs_free_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
 
 /* NAME:        gpfs_get_snapdirname()
  *
@@ -1656,11 +1570,8 @@ gpfs_free_fssnaphandle(gpfs_fssnap_handle_t *fssnapHandle);
  *              GPFS_E_INVAL_FSSNAPHANDLE fssnapHandle is invalid
  *              E2BIG buffer too small to return the snapshot directory name
  */
-int GPFS_API
-gpfs_get_snapdirname(gpfs_fssnap_handle_t *fssnapHandle,
-                     char *snapdirName,
-                     int bufLen);
-
+int GPFS_API gpfs_get_snapdirname(gpfs_fssnap_handle_t *fssnapHandle,
+				  char *snapdirName, int bufLen);
 
 /* NAME:        gpfs_open_inodescan()
  *
@@ -1693,16 +1604,13 @@ gpfs_get_snapdirname(gpfs_fssnap_handle_t *fssnapHandle,
  *                     being scanned
  *              see system calls dup() and malloc() ERRORS
  */
-gpfs_iscan_t * GPFS_API
-gpfs_open_inodescan(gpfs_fssnap_handle_t *fssnapHandle,
-                    const gpfs_fssnap_id_t *prev_fssnapId,
-                    gpfs_ino_t *maxIno);
+gpfs_iscan_t *GPFS_API gpfs_open_inodescan(gpfs_fssnap_handle_t *fssnapHandle,
+					   const gpfs_fssnap_id_t *prev_fssnapId,
+					   gpfs_ino_t *maxIno);
 
-gpfs_iscan_t * GPFS_API
-gpfs_open_inodescan64(gpfs_fssnap_handle_t *fssnapHandle,
-                      const gpfs_fssnap_id_t *prev_fssnapId,
-                      gpfs_ino64_t *maxIno);
-
+gpfs_iscan_t *GPFS_API gpfs_open_inodescan64(
+	gpfs_fssnap_handle_t *fssnapHandle,
+	const gpfs_fssnap_id_t *prev_fssnapId, gpfs_ino64_t *maxIno);
 
 /* NAME:        gpfs_open_inodescan_with_xattrs()
  *
@@ -1741,20 +1649,15 @@ gpfs_open_inodescan64(gpfs_fssnap_handle_t *fssnapHandle,
  *                     being scanned
  *              see system calls dup() and malloc() ERRORS
  */
-gpfs_iscan_t * GPFS_API
-gpfs_open_inodescan_with_xattrs(gpfs_fssnap_handle_t *fssnapHandle,
-                                const gpfs_fssnap_id_t *prev_fssnapId,
-                                int nxAttrs,
-                                const char *xattrsList[],
-                                gpfs_ino_t *maxIno);
+gpfs_iscan_t *GPFS_API gpfs_open_inodescan_with_xattrs(
+	gpfs_fssnap_handle_t *fssnapHandle,
+	const gpfs_fssnap_id_t *prev_fssnapId, int nxAttrs,
+	const char *xattrsList[], gpfs_ino_t *maxIno);
 
-gpfs_iscan_t * GPFS_API
-gpfs_open_inodescan_with_xattrs64(gpfs_fssnap_handle_t *fssnapHandle,
-                                  const gpfs_fssnap_id_t *prev_fssnapId,
-                                  int nxAttrs,
-                                  const char *xattrList[],
-                                  gpfs_ino64_t *maxIno);
-
+gpfs_iscan_t *GPFS_API gpfs_open_inodescan_with_xattrs64(
+	gpfs_fssnap_handle_t *fssnapHandle,
+	const gpfs_fssnap_id_t *prev_fssnapId, int nxAttrs,
+	const char *xattrList[], gpfs_ino64_t *maxIno);
 
 /* NAME:        gpfs_next_inode()
  *
@@ -1790,16 +1693,11 @@ gpfs_open_inodescan_with_xattrs64(gpfs_fssnap_handle_t *fssnapHandle,
  *              The termIno parameter provides a means to partition an
  *              inode scan such that it may be executed on more than one node.
  */
-int GPFS_API
-gpfs_next_inode(gpfs_iscan_t *iscan,
-                gpfs_ino_t termIno,
-                const gpfs_iattr_t **iattr);
+int GPFS_API gpfs_next_inode(gpfs_iscan_t *iscan, gpfs_ino_t termIno,
+			     const gpfs_iattr_t **iattr);
 
-int GPFS_API
-gpfs_next_inode64(gpfs_iscan_t *iscan,
-                  gpfs_ino64_t termIno,
-                  const gpfs_iattr64_t **iattr);
-
+int GPFS_API gpfs_next_inode64(gpfs_iscan_t *iscan, gpfs_ino64_t termIno,
+			       const gpfs_iattr64_t **iattr);
 
 /* NAME:        gpfs_next_inode_with_xattrs()
  *
@@ -1850,20 +1748,17 @@ gpfs_next_inode64(gpfs_iscan_t *iscan,
  *              The returned pointers to the extended attribute name and value
  *              will be aligned to a double-word boundary.
  */
-int GPFS_API
-gpfs_next_inode_with_xattrs(gpfs_iscan_t *iscan,
-                            gpfs_ino_t termIno,
-                            const gpfs_iattr_t **iattr,
-                            const char **xattrBuf,
-                            unsigned int *xattrBufLen);
+int GPFS_API gpfs_next_inode_with_xattrs(gpfs_iscan_t *iscan,
+					 gpfs_ino_t termIno,
+					 const gpfs_iattr_t **iattr,
+					 const char **xattrBuf,
+					 unsigned int *xattrBufLen);
 
-int GPFS_API
-gpfs_next_inode_with_xattrs64(gpfs_iscan_t *iscan,
-                              gpfs_ino64_t termIno,
-                              const gpfs_iattr64_t **iattr,
-                              const char **xattrBuf,
-                              unsigned int *xattrBufLen);
-
+int GPFS_API gpfs_next_inode_with_xattrs64(gpfs_iscan_t *iscan,
+					   gpfs_ino64_t termIno,
+					   const gpfs_iattr64_t **iattr,
+					   const char **xattrBuf,
+					   unsigned int *xattrBufLen);
 
 /* NAME:        gpfs_next_xattr()
  *
@@ -1898,15 +1793,9 @@ gpfs_next_inode_with_xattrs64(gpfs_iscan_t *iscan,
  *              may be overwritten by subsequent calls to gpfs_next_attribute()
  *              or other gpfs library calls.
  */
-int GPFS_API
-gpfs_next_xattr(gpfs_iscan_t *iscan,
-                const char **xattrBuf,
-                unsigned int *xattrBufLen,
-                const char **name,
-                unsigned int *valueLen,
-                const char **value);
-
-
+int GPFS_API gpfs_next_xattr(gpfs_iscan_t *iscan, const char **xattrBuf,
+			     unsigned int *xattrBufLen, const char **name,
+			     unsigned int *valueLen, const char **value);
 
 /* NAME:        gpfs_seek_inode()
  *
@@ -1921,19 +1810,14 @@ gpfs_next_xattr(gpfs_iscan_t *iscan,
  * Errno:       ENOSYS function not available
  *              GPFS_E_INVAL_ISCAN bad parameters
  */
-int GPFS_API
-gpfs_seek_inode(gpfs_iscan_t *iscan,
-                gpfs_ino_t ino);
+int GPFS_API gpfs_seek_inode(gpfs_iscan_t *iscan, gpfs_ino_t ino);
 
-int GPFS_API
-gpfs_seek_inode64(gpfs_iscan_t *iscan,
-                  gpfs_ino64_t ino);
-
+int GPFS_API gpfs_seek_inode64(gpfs_iscan_t *iscan, gpfs_ino64_t ino);
 
 #ifdef SNAPSHOT_ILM
 
 /* define GPFS generated errno */
-#define GPFS_E_HOLE_IN_IFILE  238 /* hole in inode file */
+#define GPFS_E_HOLE_IN_IFILE 238 /* hole in inode file */
 
 #endif
 /* NAME:        gpfs_stat_inode()
@@ -1981,34 +1865,25 @@ gpfs_seek_inode64(gpfs_iscan_t *iscan,
  *              is overwritten by subsequent calls to gpfs_next_inode(),
  *              gpfs_seek_inode() or gpfs_stat_inode();
  */
-int GPFS_API
-gpfs_stat_inode(gpfs_iscan_t *iscan,
-                gpfs_ino_t ino,
-                gpfs_ino_t termIno,
-                const gpfs_iattr_t **iattr);
+int GPFS_API gpfs_stat_inode(gpfs_iscan_t *iscan, gpfs_ino_t ino,
+			     gpfs_ino_t termIno, const gpfs_iattr_t **iattr);
 
-int GPFS_API
-gpfs_stat_inode64(gpfs_iscan_t *iscan,
-                  gpfs_ino64_t ino,
-                  gpfs_ino64_t termIno,
-                  const gpfs_iattr64_t **iattr);
+int GPFS_API gpfs_stat_inode64(gpfs_iscan_t *iscan, gpfs_ino64_t ino,
+			       gpfs_ino64_t termIno,
+			       const gpfs_iattr64_t **iattr);
 
-int GPFS_API
-gpfs_stat_inode_with_xattrs(gpfs_iscan_t *iscan,
-                            gpfs_ino_t ino,
-                            gpfs_ino_t termIno,
-                            const gpfs_iattr_t **iattr,
-                            const char **xattrBuf,
-                            unsigned int *xattrBufLen);
+int GPFS_API gpfs_stat_inode_with_xattrs(gpfs_iscan_t *iscan, gpfs_ino_t ino,
+					 gpfs_ino_t termIno,
+					 const gpfs_iattr_t **iattr,
+					 const char **xattrBuf,
+					 unsigned int *xattrBufLen);
 
-int GPFS_API
-gpfs_stat_inode_with_xattrs64(gpfs_iscan_t *iscan,
-                              gpfs_ino64_t ino,
-                              gpfs_ino64_t termIno,
-                              const gpfs_iattr64_t **iattr,
-                              const char **xattrBuf,
-                              unsigned int *xattrBufLen);
-
+int GPFS_API gpfs_stat_inode_with_xattrs64(gpfs_iscan_t *iscan,
+					   gpfs_ino64_t ino,
+					   gpfs_ino64_t termIno,
+					   const gpfs_iattr64_t **iattr,
+					   const char **xattrBuf,
+					   unsigned int *xattrBufLen);
 
 /* NAME:        gpfs_close_inodescan()
  *
@@ -2020,9 +1895,7 @@ gpfs_stat_inode_with_xattrs64(gpfs_iscan_t *iscan,
  *
  * Errno:       None
  */
-void GPFS_API
-gpfs_close_inodescan(gpfs_iscan_t *iscan);
-
+void GPFS_API gpfs_close_inodescan(gpfs_iscan_t *iscan);
 
 /* NAME:        gpfs_cmp_fssnapid()
  *
@@ -2046,11 +1919,8 @@ gpfs_close_inodescan(gpfs_iscan_t *iscan);
  *              EDOM the two snapshots cannot be compared because
  *                they were taken from two different file systems.
  */
-int GPFS_API
-gpfs_cmp_fssnapid(const gpfs_fssnap_id_t *fssnapId1,
-                  const gpfs_fssnap_id_t *fssnapId2,
-                  int *result);
-
+int GPFS_API gpfs_cmp_fssnapid(const gpfs_fssnap_id_t *fssnapId1,
+			       const gpfs_fssnap_id_t *fssnapId2, int *result);
 
 /* NAME:        gpfs_iopen()
  *
@@ -2086,20 +1956,15 @@ gpfs_cmp_fssnapid(const gpfs_fssnap_id_t *fssnapId1,
  *              GPFS_E_INVAL_IATTR iattr structure was corrupted
  *              see dup() and malloc() ERRORS
  */
-gpfs_ifile_t * GPFS_API
-gpfs_iopen(gpfs_fssnap_handle_t *fssnapHandle,
-           gpfs_ino_t ino,
-           int open_flags,
-           const gpfs_iattr_t *statxbuf,
-           const char *symLink);
+gpfs_ifile_t *GPFS_API gpfs_iopen(gpfs_fssnap_handle_t *fssnapHandle,
+				  gpfs_ino_t ino, int open_flags,
+				  const gpfs_iattr_t *statxbuf,
+				  const char *symLink);
 
-gpfs_ifile_t * GPFS_API
-gpfs_iopen64(gpfs_fssnap_handle_t *fssnapHandle,
-             gpfs_ino64_t ino,
-             int open_flags,
-             const gpfs_iattr64_t *statxbuf,
-             const char *symLink);
-
+gpfs_ifile_t *GPFS_API gpfs_iopen64(gpfs_fssnap_handle_t *fssnapHandle,
+				    gpfs_ino64_t ino, int open_flags,
+				    const gpfs_iattr64_t *statxbuf,
+				    const char *symLink);
 
 /* Define gpfs_iopen flags as used by the backup & restore by inode.
    The backup code will only read the source files.
@@ -2107,9 +1972,8 @@ gpfs_iopen64(gpfs_fssnap_handle_t *fssnapHandle,
    don't already exist. The file length is set by the inode attributes.
    Consequently, to restore a user file it is unnecessary to include
    the O_TRUNC flag. */
-#define GPFS_O_BACKUP  (O_RDONLY)
+#define GPFS_O_BACKUP (O_RDONLY)
 #define GPFS_O_RESTORE (O_WRONLY | O_CREAT)
-
 
 /* NAME:        gpfs_iread()
  *
@@ -2132,12 +1996,8 @@ gpfs_iopen64(gpfs_fssnap_handle_t *fssnapHandle,
  *              GPFS_E_INVAL_IFILE bad ifile parameters
  *              see system call read() ERRORS
  */
-int GPFS_API
-gpfs_iread(gpfs_ifile_t *ifile,
-           void *buffer,
-           int bufferSize,
-           gpfs_off64_t *offset);
-
+int GPFS_API gpfs_iread(gpfs_ifile_t *ifile, void *buffer, int bufferSize,
+			gpfs_off64_t *offset);
 
 /* NAME:        gpfs_iwrite()
  *
@@ -2160,12 +2020,8 @@ gpfs_iread(gpfs_ifile_t *ifile,
  *              GPFS_E_INVAL_IFILE bad ifile parameters
  *              see system call write() ERRORS
  */
-int GPFS_API
-gpfs_iwrite(gpfs_ifile_t *ifile,
-            void *buffer,
-            int writeLen,
-            gpfs_off64_t *offset);
-
+int GPFS_API gpfs_iwrite(gpfs_ifile_t *ifile, void *buffer, int writeLen,
+			 gpfs_off64_t *offset);
 
 /* NAME:        gpfs_ireaddir()
  *
@@ -2188,25 +2044,18 @@ gpfs_iwrite(gpfs_ifile_t *ifile,
  * Notes:       The data returned by gpfs_ireaddir() is overwritten by
  *              subsequent calls to gpfs_ireaddir().
  */
-int GPFS_API
-gpfs_ireaddir(gpfs_ifile_t *idir,
-              const gpfs_direntx_t **dirent);
+int GPFS_API gpfs_ireaddir(gpfs_ifile_t *idir, const gpfs_direntx_t **dirent);
 
-int GPFS_API
-gpfs_ireaddir64(gpfs_ifile_t *idir,
-                const gpfs_direntx64_t **dirent);
+int GPFS_API gpfs_ireaddir64(gpfs_ifile_t *idir,
+			     const gpfs_direntx64_t **dirent);
 
+int GPFS_API gpfs_ireaddirx(gpfs_ifile_t *idir,
+			    gpfs_iscan_t *iscan, /* in only  */
+			    const gpfs_direntx_t **dirent);
 
-int GPFS_API
-gpfs_ireaddirx(gpfs_ifile_t *idir,
-               gpfs_iscan_t *iscan,      /* in only  */
-               const gpfs_direntx_t **dirent);
-
-int GPFS_API
-gpfs_ireaddirx64(gpfs_ifile_t *idir,
-                 gpfs_iscan_t *iscan,      /* in only  */
-                 const gpfs_direntx64_t **dirent);
-
+int GPFS_API gpfs_ireaddirx64(gpfs_ifile_t *idir,
+			      gpfs_iscan_t *iscan, /* in only  */
+			      const gpfs_direntx64_t **dirent);
 
 /* NAME:        gpfs_iwritedir()
  *
@@ -2227,14 +2076,10 @@ gpfs_ireaddirx64(gpfs_ifile_t *idir,
  *              EFORMAT invalid dirent version number
  *              see system call write() ERRORS
  */
-int GPFS_API
-gpfs_iwritedir(gpfs_ifile_t *idir,
-               const gpfs_direntx_t *dirent);
+int GPFS_API gpfs_iwritedir(gpfs_ifile_t *idir, const gpfs_direntx_t *dirent);
 
-int GPFS_API
-gpfs_iwritedir64(gpfs_ifile_t *idir,
-                 const gpfs_direntx64_t *dirent);
-
+int GPFS_API gpfs_iwritedir64(gpfs_ifile_t *idir,
+			      const gpfs_direntx64_t *dirent);
 
 /* NAME:        gpfs_igetattrs()
  *
@@ -2262,11 +2107,8 @@ gpfs_iwritedir64(gpfs_ifile_t *idir,
  *                      *attrSizeP will be set to the size necessary
  *              GPFS_E_INVAL_IFILE bad ifile parameters
  */
-int GPFS_API
-gpfs_igetattrs(gpfs_ifile_t *ifile,
-               void *buffer,
-               int bufferSize,
-               int *attrSize);
+int GPFS_API gpfs_igetattrs(gpfs_ifile_t *ifile, void *buffer, int bufferSize,
+			    int *attrSize);
 
 /* NAME:        gpfs_igetattrsx()
  *
@@ -2304,13 +2146,8 @@ gpfs_igetattrs(gpfs_ifile_t *ifile,
  *              ENOSPC  buffer too small to return all attributes
  *                      *attrSizeP will be set to the size necessary
  */
-int GPFS_API
-gpfs_igetattrsx(gpfs_ifile_t *ifile,
-                int flags,
-                void *buffer,
-                int bufferSize,
-                int *attrSize);
-
+int GPFS_API gpfs_igetattrsx(gpfs_ifile_t *ifile, int flags, void *buffer,
+			     int bufferSize, int *attrSize);
 
 /* NAME:        gpfs_igetxattr()
  *
@@ -2337,12 +2174,8 @@ gpfs_igetattrsx(gpfs_ifile_t *ifile,
  *                      *attrSize will be set to the size necessary
  *              GPFS_E_INVAL_IFILE bad ifile parameters
  */
-int GPFS_API
-gpfs_igetxattr(gpfs_ifile_t *ifile,
-	       void *buffer,
-	       int bufferSize,
-	       int *attrSize);
-
+int GPFS_API gpfs_igetxattr(gpfs_ifile_t *ifile, void *buffer, int bufferSize,
+			    int *attrSize);
 
 /* NAME:        gpfs_iputattrs()
  *
@@ -2366,10 +2199,7 @@ gpfs_igetxattr(gpfs_ifile_t *ifile,
  *              ESTALE cached fs information was invalid
  *              GPFS_E_INVAL_IFILE bad ifile parameters
  */
-int GPFS_API
-gpfs_iputattrs(gpfs_ifile_t *ifile,
-               void *buffer);
-
+int GPFS_API gpfs_iputattrs(gpfs_ifile_t *ifile, void *buffer);
 
 /* NAME:        gpfs_iputattrsx()
  *
@@ -2440,12 +2270,8 @@ gpfs_iputattrs(gpfs_ifile_t *ifile,
  *              ESTALE cached fs information was invalid
  *              GPFS_E_INVAL_IFILE bad ifile parameters
  */
-int GPFS_API
-gpfs_iputattrsx(gpfs_ifile_t *ifile,
-                int flags,
-                void *buffer,
-                const char *pathName);
-
+int GPFS_API gpfs_iputattrsx(gpfs_ifile_t *ifile, int flags, void *buffer,
+			     const char *pathName);
 
 /* NAME:        gpfs_igetfilesetname()
  *
@@ -2467,12 +2293,8 @@ gpfs_iputattrsx(gpfs_ifile_t *ifile,
  *              ENOSPC  buffer too small to return fileset name
  *              GPFS_E_INVAL_ISCAN bad iscan parameter
  */
-int GPFS_API
-gpfs_igetfilesetname(gpfs_iscan_t *iscan,
-                     unsigned int filesetId,
-                     void *buffer,
-                     int bufferSize);
-
+int GPFS_API gpfs_igetfilesetname(gpfs_iscan_t *iscan, unsigned int filesetId,
+				  void *buffer, int bufferSize);
 
 /* NAME:        gpfs_igetstoragepool()
  *
@@ -2494,12 +2316,8 @@ gpfs_igetfilesetname(gpfs_iscan_t *iscan,
  *              ENOSPC  buffer too small to return all storage pool name
  *              GPFS_E_INVAL_ISCAN bad iscan parameters
  */
-int GPFS_API
-gpfs_igetstoragepool(gpfs_iscan_t *iscan,
-                     unsigned int dataPoolId,
-                     void *buffer,
-                     int bufferSize);
-
+int GPFS_API gpfs_igetstoragepool(gpfs_iscan_t *iscan, unsigned int dataPoolId,
+				  void *buffer, int bufferSize);
 
 /* NAME:        gpfs_iclose()
  *
@@ -2509,9 +2327,7 @@ gpfs_igetstoragepool(gpfs_iscan_t *iscan,
  *
  * Returns:     void
  */
-void GPFS_API
-gpfs_iclose(gpfs_ifile_t *ifile);
-
+void GPFS_API gpfs_iclose(gpfs_ifile_t *ifile);
 
 /* NAME:        gpfs_ireadlink()
  *
@@ -2531,18 +2347,11 @@ gpfs_iclose(gpfs_ifile_t *ifile);
  *              GPFS_E_INVAL_FSSNAPHANDLE invalid fssnap handle
  *              see system call readlink() ERRORS
  */
-int GPFS_API
-gpfs_ireadlink(gpfs_fssnap_handle_t *fssnapHandle,
-               gpfs_ino_t ino,
-               char *buffer,
-               int bufferSize);
+int GPFS_API gpfs_ireadlink(gpfs_fssnap_handle_t *fssnapHandle, gpfs_ino_t ino,
+			    char *buffer, int bufferSize);
 
-int GPFS_API
-gpfs_ireadlink64(gpfs_fssnap_handle_t *fssnapHandle,
-               gpfs_ino64_t ino,
-               char *buffer,
-               int bufferSize);
-
+int GPFS_API gpfs_ireadlink64(gpfs_fssnap_handle_t *fssnapHandle,
+			      gpfs_ino64_t ino, char *buffer, int bufferSize);
 
 /* NAME:        gpfs_sync_fs()
  *
@@ -2559,9 +2368,7 @@ gpfs_ireadlink64(gpfs_fssnap_handle_t *fssnapHandle,
  *              ESTALE cached fs information was invalid
  *              GPFS_E_INVAL_FSSNAPHANDLE invalid fssnapHandle
  */
-int GPFS_API
-gpfs_sync_fs(gpfs_fssnap_handle_t *fssnapHandle);
-
+int GPFS_API gpfs_sync_fs(gpfs_fssnap_handle_t *fssnapHandle);
 
 /* NAME:        gpfs_enable_restore()
  *
@@ -2589,10 +2396,8 @@ gpfs_sync_fs(gpfs_fssnap_handle_t *fssnapHandle);
  * for this fs. The caller must decide if EALREADY represents an
  * error condition.
  */
-int GPFS_API
-gpfs_enable_restore(gpfs_fssnap_handle_t *fssnapHandle,
-                    int on_off);
-
+int GPFS_API gpfs_enable_restore(gpfs_fssnap_handle_t *fssnapHandle,
+				 int on_off);
 
 /* NAME:        gpfs_start_restore()
  *
@@ -2626,17 +2431,17 @@ gpfs_enable_restore(gpfs_fssnap_handle_t *fssnapHandle,
  * or it could be due to a concurrent restore process still running.
  * The caller must decide if EALREADY represents an error condition.
  */
-gpfs_restore_t * GPFS_API
-gpfs_start_restore(gpfs_fssnap_handle_t *fssnapHandle,
-                   int restore_flags,
-                   const gpfs_fssnap_id_t *old_fssnapId,
-                   const gpfs_fssnap_id_t *new_fssnapId);
+gpfs_restore_t *GPFS_API
+gpfs_start_restore(gpfs_fssnap_handle_t *fssnapHandle, int restore_flags,
+		   const gpfs_fssnap_id_t *old_fssnapId,
+		   const gpfs_fssnap_id_t *new_fssnapId);
 
-#define GPFS_RESTORE_NORMAL 0   /* Restore not started if prior restore
+#define GPFS_RESTORE_NORMAL \
+	0 /* Restore not started if prior restore
                                    has not completed. */
-#define GPFS_RESTORE_FORCED 1   /* Restore starts even if prior restore
+#define GPFS_RESTORE_FORCED \
+	1 /* Restore starts even if prior restore
                                    has not completed. */
-
 
 /* NAME:        gpfs_end_restore()
  *
@@ -2661,9 +2466,7 @@ gpfs_start_restore(gpfs_fssnap_handle_t *fssnapHandle,
  * already completed. The caller must decide if EALREADY represents
  * an error condition.
  */
-int GPFS_API
-gpfs_end_restore(gpfs_restore_t *restoreId);
-
+int GPFS_API gpfs_end_restore(gpfs_restore_t *restoreId);
 
 /* NAME:        gpfs_ireadx()
  *
@@ -2719,15 +2522,13 @@ gpfs_end_restore(gpfs_restore_t *restoreId);
  * Notes:       The termOffset parameter provides a means to partition a
  *              file's data such that it may be read on more than one node.
  */
-gpfs_off64_t GPFS_API
-gpfs_ireadx(gpfs_ifile_t *ifile,      /* in only  */
-            gpfs_iscan_t *iscan,      /* in only  */
-            void *buffer,             /* in only  */
-            int bufferSize,           /* in only  */
-            gpfs_off64_t *offset,     /* in/out   */
-            gpfs_off64_t termOffset,  /* in only */
-            int *hole);               /* out only */
-
+gpfs_off64_t GPFS_API gpfs_ireadx(gpfs_ifile_t *ifile, /* in only  */
+				  gpfs_iscan_t *iscan, /* in only  */
+				  void *buffer, /* in only  */
+				  int bufferSize, /* in only  */
+				  gpfs_off64_t *offset, /* in/out   */
+				  gpfs_off64_t termOffset, /* in only */
+				  int *hole); /* out only */
 
 /* NAME:        gpfs_ireadx_ext
  *
@@ -2737,15 +2538,13 @@ gpfs_ireadx(gpfs_ifile_t *ifile,      /* in only  */
  *
  * Returns:     See gpfs_ireadx()
  */
-gpfs_off64_t GPFS_API
-gpfs_ireadx_ext(gpfs_ifile_t *ifile,      /* in only  */
-            gpfs_iscan_t *iscan,      /* in only  */
-            void *buffer,             /* in only  */
-            int bufferSize,           /* in only  */
-            gpfs_off64_t *offset,     /* in/out   */
-            gpfs_off64_t termOffset,  /* in only */
-            int *hole);
-
+gpfs_off64_t GPFS_API gpfs_ireadx_ext(gpfs_ifile_t *ifile, /* in only  */
+				      gpfs_iscan_t *iscan, /* in only  */
+				      void *buffer, /* in only  */
+				      int bufferSize, /* in only  */
+				      gpfs_off64_t *offset, /* in/out   */
+				      gpfs_off64_t termOffset, /* in only */
+				      int *hole);
 
 /* NAME:        gpfs_iwritex()
  *
@@ -2773,13 +2572,11 @@ gpfs_ireadx_ext(gpfs_ifile_t *ifile,      /* in only  */
  *              GPFS_E_INVAL_IFILE bad ifile parameter
  *              see system call write() ERRORS
  */
-gpfs_off64_t GPFS_API
-gpfs_iwritex(gpfs_ifile_t *ifile,    /* in only */
-             void *buffer,           /* in only */
-             gpfs_off64_t writeLen,  /* in only */
-             gpfs_off64_t offset,    /* in only */
-             int hole);              /* in only */
-
+gpfs_off64_t GPFS_API gpfs_iwritex(gpfs_ifile_t *ifile, /* in only */
+				   void *buffer, /* in only */
+				   gpfs_off64_t writeLen, /* in only */
+				   gpfs_off64_t offset, /* in only */
+				   int hole); /* in only */
 
 /* NAME:        gpfs_statfspool()
  *
@@ -2827,18 +2624,17 @@ gpfs_iwritex(gpfs_ifile_t *ifile,    /* in only */
  */
 int GPFS_API
 gpfs_statfspool(const char *pathname, /* in only: path to file system*/
-                gpfs_pool_t *poolId,  /* in out: id of first pool to return
+		gpfs_pool_t *poolId, /* in out: id of first pool to return
                                          on return set to next poolId
                                          or -1 when there are no more pools */
-                unsigned int options, /* in only: option flags */
-                int *nPools,          /* in out: number of pool stats requested
+		unsigned int options, /* in only: option flags */
+		int *nPools, /* in out: number of pool stats requested
                                          on return number of stat structs
                                          returned in buffer or if nPools was
                                          set to 0, the return value is the
                                          number of pools currently defined */
-                void *buffer,         /* ptr to return stat structures */
-                int bufferSize);      /* sizeof stat buffer or 0 */
-
+		void *buffer, /* ptr to return stat structures */
+		int bufferSize); /* sizeof stat buffer or 0 */
 
 /* NAME:        gpfs_getpoolname()
  *
@@ -2859,23 +2655,18 @@ gpfs_statfspool(const char *pathname, /* in only: path to file system*/
  *              E_FORMAT_INCOMPAT file system does not support pools
  *              E2BIG  buffer too small to return storage pool name
  */
-int GPFS_API
-gpfs_getpoolname(const char *pathname,
-                 gpfs_pool_t poolId,
-                 void *buffer,
-                 int bufferSize);
-
+int GPFS_API gpfs_getpoolname(const char *pathname, gpfs_pool_t poolId,
+			      void *buffer, int bufferSize);
 
 /* /usr/src/linux/include/linux/fs.h includes /usr/src/linux/include/linux/quota.h
    which has conflicting definitions. */
 #ifdef _LINUX_QUOTA_
-  #undef Q_SYNC
-  #undef Q_GETQUOTA
-  #undef Q_SETQUOTA
-  #undef Q_QUOTAON
-  #undef Q_QUOTAOFF
+#undef Q_SYNC
+#undef Q_GETQUOTA
+#undef Q_SETQUOTA
+#undef Q_QUOTAON
+#undef Q_QUOTAOFF
 #endif
-
 
 /* GPFS QUOTACTL */
 
@@ -2886,57 +2677,58 @@ gpfs_getpoolname(const char *pathname,
  * quota that is being manipulated (see above).
  */
 
-#define SUBCMDMASK      0x00ff
-#define SUBCMDSHIFT     8
+#define SUBCMDMASK 0x00ff
+#define SUBCMDSHIFT 8
 #define GPFS_QCMD(cmd, type) (((cmd) << SUBCMDSHIFT) | ((type) & SUBCMDMASK))
 
-#define Q_QUOTAON       0x0100  /* enable quotas */
-#define Q_QUOTAOFF      0x0200  /* disable quotas */
-#define Q_GETQUOTA      0x0300  /* get limits and usage */
+#define Q_QUOTAON 0x0100 /* enable quotas */
+#define Q_QUOTAOFF 0x0200 /* disable quotas */
+#define Q_GETQUOTA 0x0300 /* get limits and usage */
 #ifndef _LINUX_SOURCE_COMPAT
-  /* Standard AIX definitions of quota commands */
-  #define Q_SETQUOTA    0x0400  /* set limits */
-  #define Q_SETQLIM     Q_SETQUOTA
+/* Standard AIX definitions of quota commands */
+#define Q_SETQUOTA 0x0400 /* set limits */
+#define Q_SETQLIM Q_SETQUOTA
 #else
-  /* Alternate definitions, for Linux Affinity */
-  #define Q_SETQLIM     0x0400  /* set limits */
-  #define Q_SETQUOTA    0x0700  /* set limits and usage */
+/* Alternate definitions, for Linux Affinity */
+#define Q_SETQLIM 0x0400 /* set limits */
+#define Q_SETQUOTA 0x0700 /* set limits and usage */
 #endif
-#define Q_SETUSE        0x0500  /* set usage */
-#define Q_SYNC          0x0600  /* sync disk copy of a file systems quotas */
-#define Q_SETGRACETIME  0x0900  /* set grace time */
-#define Q_SETGRACETIME_ENHANCE  0x0800  /* set grace time and update all
+#define Q_SETUSE 0x0500 /* set usage */
+#define Q_SYNC 0x0600 /* sync disk copy of a file systems quotas */
+#define Q_SETGRACETIME 0x0900 /* set grace time */
+#define Q_SETGRACETIME_ENHANCE \
+	0x0800 /* set grace time and update all
                                          * quota entries */
-#define Q_GETDQPFSET    0x0A00  /* get default quota per fileset */
-#define Q_SETDQPFSET    0x0B00  /* set default quota per fileset */
-#define Q_SETQUOTA_UPDATE_ET 0x0C00 /* this SETQUOTA needs to update entryType */
-#define Q_GETDQPFSYS    0x0D00  /* get default quota per file system */
-#define Q_SETDQPFSYS    0x0E00  /* set default quota per file system */
+#define Q_GETDQPFSET 0x0A00 /* get default quota per fileset */
+#define Q_SETDQPFSET 0x0B00 /* set default quota per fileset */
+#define Q_SETQUOTA_UPDATE_ET \
+	0x0C00 /* this SETQUOTA needs to update entryType */
+#define Q_GETDQPFSYS 0x0D00 /* get default quota per file system */
+#define Q_SETDQPFSYS 0x0E00 /* set default quota per file system */
 
 /* gpfs quota types */
-#define GPFS_USRQUOTA     0
-#define GPFS_GRPQUOTA     1
+#define GPFS_USRQUOTA 0
+#define GPFS_GRPQUOTA 1
 #define GPFS_FILESETQUOTA 2
 
 /* define GPFS generated errno */
-#define GPFS_E_NO_QUOTA_INST  237 /* file system does not support quotas */
+#define GPFS_E_NO_QUOTA_INST 237 /* file system does not support quotas */
 
-typedef struct gpfs_quotaInfo
-{
-  gpfs_off64_t blockUsage;      /* current block count in 1 KB units*/
-  gpfs_off64_t blockHardLimit;  /* absolute limit on disk blks alloc */
-  gpfs_off64_t blockSoftLimit;  /* preferred limit on disk blks */
-  gpfs_off64_t blockInDoubt;    /* distributed shares + "lost" usage for blks */
-  int          inodeUsage;      /* current # allocated inodes */
-  int          inodeHardLimit;  /* absolute limit on allocated inodes */
-  int          inodeSoftLimit;  /* preferred inode limit */
-  int          inodeInDoubt;    /* distributed shares + "lost" usage for inodes */
-  gpfs_uid_t   quoId;           /* uid, gid or fileset id */
-  int          entryType;       /* entry type, not used */
-  unsigned int blockGraceTime;  /* time limit for excessive disk use */
-  unsigned int inodeGraceTime;  /* time limit for excessive inode use */
+typedef struct gpfs_quotaInfo {
+	gpfs_off64_t blockUsage; /* current block count in 1 KB units*/
+	gpfs_off64_t blockHardLimit; /* absolute limit on disk blks alloc */
+	gpfs_off64_t blockSoftLimit; /* preferred limit on disk blks */
+	gpfs_off64_t
+		blockInDoubt; /* distributed shares + "lost" usage for blks */
+	int inodeUsage; /* current # allocated inodes */
+	int inodeHardLimit; /* absolute limit on allocated inodes */
+	int inodeSoftLimit; /* preferred inode limit */
+	int inodeInDoubt; /* distributed shares + "lost" usage for inodes */
+	gpfs_uid_t quoId; /* uid, gid or fileset id */
+	int entryType; /* entry type, not used */
+	unsigned int blockGraceTime; /* time limit for excessive disk use */
+	unsigned int inodeGraceTime; /* time limit for excessive inode use */
 } gpfs_quotaInfo_t;
-
 
 /* NAME:        gpfs_quotactl()
  *
@@ -2969,12 +2761,8 @@ typedef struct gpfs_quotaInfo
  *              EOPNOTSUPP
  *              GPFS_E_NO_QUOTA_INST The file system does not support quotas
  */
-int GPFS_API
-gpfs_quotactl(const char *pathname,
-              int cmd,
-              int id,
-              void *bufferP);
-
+int GPFS_API gpfs_quotactl(const char *pathname, int cmd, int id,
+			   void *bufferP);
 
 /* NAME:        gpfs_getfilesetid()
  *
@@ -2996,11 +2784,8 @@ gpfs_quotactl(const char *pathname,
  *              EINVAL
  *              ENOENT        No such file, directory or fileset
  */
-int GPFS_API
-gpfs_getfilesetid(const char *pathname,
-                  const char *name,
-                  int *idP);
-
+int GPFS_API gpfs_getfilesetid(const char *pathname, const char *name,
+			       int *idP);
 
 /* NAME:        gpfs_clone_snap()
  *
@@ -3031,8 +2816,7 @@ gpfs_getfilesetid(const char *pathname,
  *              EFORMAT File system does not support clones
  *              EMEDIUMTYPE File system does not support clones
  */
-int GPFS_API
-gpfs_clone_snap(const char *sourcePathP, const char *destPathP);
+int GPFS_API gpfs_clone_snap(const char *sourcePathP, const char *destPathP);
 
 /* NAME:        gpfs_clone_copy()
  *
@@ -3059,9 +2843,7 @@ gpfs_clone_snap(const char *sourcePathP, const char *destPathP);
  *              EFORMAT File system does not support clones
  *              EMEDIUMTYPE File system does not support clones
  */
-int GPFS_API
-gpfs_clone_copy(const char *sourcePathP, const char *destPathP);
-
+int GPFS_API gpfs_clone_copy(const char *sourcePathP, const char *destPathP);
 
 /* NAME:        gpfs_declone()
  *
@@ -3088,12 +2870,11 @@ gpfs_clone_copy(const char *sourcePathP, const char *destPathP);
  */
 
 /* Values for ancLimit */
-#define GPFS_CLONE_ALL         0
+#define GPFS_CLONE_ALL 0
 #define GPFS_CLONE_PARENT_ONLY 1
 
-int GPFS_API
-gpfs_declone(gpfs_file_t fileDesc, int ancLimit, gpfs_off64_t nBlocks,
-             gpfs_off64_t *offsetP);
+int GPFS_API gpfs_declone(gpfs_file_t fileDesc, int ancLimit,
+			  gpfs_off64_t nBlocks, gpfs_off64_t *offsetP);
 
 /* NAME:        gpfs_clone_split()
  *
@@ -3112,8 +2893,7 @@ gpfs_declone(gpfs_file_t fileDesc, int ancLimit, gpfs_off64_t nBlocks,
  *              EPERM   Not a regular file or not a clone child
  *              EACCESS Write access to target file not permitted
  */
-int GPFS_API
-gpfs_clone_split(gpfs_file_t fileDesc, int ancLimit);
+int GPFS_API gpfs_clone_split(gpfs_file_t fileDesc, int ancLimit);
 
 /* NAME:        gpfs_clone_unsnap()
  *
@@ -3131,8 +2911,7 @@ gpfs_clone_split(gpfs_file_t fileDesc, int ancLimit);
  *              EPERM   Not a regular file or not a clone parent
  *              EACCESS Write access to target file not permitted
  */
-int GPFS_API
-gpfs_clone_unsnap(gpfs_file_t fileDesc);
+int GPFS_API gpfs_clone_unsnap(gpfs_file_t fileDesc);
 
 /* NAME:       gpfs_get_fset_masks()
  *
@@ -3147,12 +2926,10 @@ gpfs_clone_unsnap(gpfs_file_t fileDesc);
  * Errno:       ENOSYS function not available
  *              GPFS_E_INVAL_FSSNAPHANDLE invalid fssnapHandle
  */
-int GPFS_API
-gpfs_get_fset_masks(gpfs_fssnap_handle_t* fset_snapHandle,
-                    gpfs_ino64_t* inodeSpaceMask,
-                    gpfs_ino64_t* inodeBlockMask,
-                    int* inodesPerInodeBlock);
-
+int GPFS_API gpfs_get_fset_masks(gpfs_fssnap_handle_t *fset_snapHandle,
+				 gpfs_ino64_t *inodeSpaceMask,
+				 gpfs_ino64_t *inodeBlockMask,
+				 int *inodesPerInodeBlock);
 
 /*
  *   API functions for Light Weight Event
@@ -3161,118 +2938,132 @@ gpfs_get_fset_masks(gpfs_fssnap_handle_t* fset_snapHandle,
 /*
  * Define light weight event types
  */
-typedef enum
-{
-  GPFS_LWE_EVENT_UNKNOWN         = 0, /* "Uknown event" */
-  GPFS_LWE_EVENT_FILEOPEN        = 1, /* 'OPEN' - look at getInfo('OPEN_FLAGS') if you care */
-  GPFS_LWE_EVENT_FILECLOSE       = 2, /* "File Close Event" 'CLOSE' */
-  GPFS_LWE_EVENT_FILEREAD        = 3, /* "File Read Event" 'READ' */
-  GPFS_LWE_EVENT_FILEWRITE       = 4, /* "File Write Event" 'WRITE' */
-  GPFS_LWE_EVENT_FILEDESTROY     = 5, /* File is being destroyed 'DESTROY' */
-  GPFS_LWE_EVENT_FILEEVICT       = 6, /* OpenFile object is being evicted from memory 'FILE_EVICT' */
-  GPFS_LWE_EVENT_BUFFERFLUSH     = 7, /* Data buffer is being written to disk 'BUFFER_FLUSH' */
-  GPFS_LWE_EVENT_POOLTHRESHOLD   = 8, /* Storage pool exceeded defined utilization 'POOL_THRESHOLD' */
-  GPFS_LWE_EVENT_FILEDATA        = 9, /* "Read/Write/Trunc" event on open file */
-  GPFS_LWE_EVENT_FILERENAME      = 10, /* Rename event on open file */
-  GPFS_LWE_EVENT_FILEUNLINK      = 11, /* Unlink file event */
-  GPFS_LWE_EVENT_FILERMDIR       = 12, /* Remove directory event */
-  GPFS_LWE_EVENT_EVALUATE        = 13, /* Evaluate And Set Events */
+typedef enum {
+	GPFS_LWE_EVENT_UNKNOWN = 0, /* "Uknown event" */
+	GPFS_LWE_EVENT_FILEOPEN =
+		1, /* 'OPEN' - look at getInfo('OPEN_FLAGS') if you care */
+	GPFS_LWE_EVENT_FILECLOSE = 2, /* "File Close Event" 'CLOSE' */
+	GPFS_LWE_EVENT_FILEREAD = 3, /* "File Read Event" 'READ' */
+	GPFS_LWE_EVENT_FILEWRITE = 4, /* "File Write Event" 'WRITE' */
+	GPFS_LWE_EVENT_FILEDESTROY = 5, /* File is being destroyed 'DESTROY' */
+	GPFS_LWE_EVENT_FILEEVICT =
+		6, /* OpenFile object is being evicted from memory 'FILE_EVICT' */
+	GPFS_LWE_EVENT_BUFFERFLUSH =
+		7, /* Data buffer is being written to disk 'BUFFER_FLUSH' */
+	GPFS_LWE_EVENT_POOLTHRESHOLD =
+		8, /* Storage pool exceeded defined utilization 'POOL_THRESHOLD' */
+	GPFS_LWE_EVENT_FILEDATA = 9, /* "Read/Write/Trunc" event on open file */
+	GPFS_LWE_EVENT_FILERENAME = 10, /* Rename event on open file */
+	GPFS_LWE_EVENT_FILEUNLINK = 11, /* Unlink file event */
+	GPFS_LWE_EVENT_FILERMDIR = 12, /* Remove directory event */
+	GPFS_LWE_EVENT_EVALUATE = 13, /* Evaluate And Set Events */
 
-  GPFS_LWE_EVENT_FILEOPEN_READ   = 14, /* Open for Read Only -  EVENT 'OPEN_READ' - deprecated, use 'OPEN' */
-  GPFS_LWE_EVENT_FILEOPEN_WRITE  = 15, /* Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
+	GPFS_LWE_EVENT_FILEOPEN_READ =
+		14, /* Open for Read Only -  EVENT 'OPEN_READ' - deprecated, use 'OPEN' */
+	GPFS_LWE_EVENT_FILEOPEN_WRITE =
+		15, /* Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
 
-  GPFS_LWE_EVENT_FILEPOOL_CHANGE = 16, /* Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
+	GPFS_LWE_EVENT_FILEPOOL_CHANGE =
+		16, /* Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
 
-  GPFS_LWE_EVENT_MAX = 17, /* 1 greater than any of the above */
+	GPFS_LWE_EVENT_MAX = 17, /* 1 greater than any of the above */
 } gpfs_lwe_eventtype_t;
 
-
 /* Define light weight event response types */
-typedef enum
-{
-  GPFS_LWE_RESP_INVALID  = 0,  /* "Response Invalid/Unknown" */
-  GPFS_LWE_RESP_CONTINUE = 1,  /* "Response Continue" */
-  GPFS_LWE_RESP_ABORT    = 2,  /* "Response Abort" */
-  GPFS_LWE_RESP_DONTCARE = 3   /* "Response DontCare" */
+typedef enum {
+	GPFS_LWE_RESP_INVALID = 0, /* "Response Invalid/Unknown" */
+	GPFS_LWE_RESP_CONTINUE = 1, /* "Response Continue" */
+	GPFS_LWE_RESP_ABORT = 2, /* "Response Abort" */
+	GPFS_LWE_RESP_DONTCARE = 3 /* "Response DontCare" */
 } gpfs_lwe_resp_t;
 
 /*
  * Define light weight event inofrmation
  */
-#define LWE_DATA_FS_NAME          0x00000001  /* "fsName" */
-#define LWE_DATA_PATH_NAME        0x00000002  /* "pathName" */
-#define LWE_DATA_PATH_NEW_NAME    0x00000004  /* "pathNewName" for reanem */
-#define LWE_DATA_URL              0x00000008  /* "URL" */
-#define LWE_DATA_INODE            0x00000010  /* "inode" */
-#define LWE_DATA_OPEN_FLAGS       0x00000020  /* "openFlags" */
-#define LWE_DATA_POOL_NAME        0x00000040  /* "poolName" */
-#define LWE_DATA_FILE_SIZE        0x00000080  /* "fileSize" */
-#define LWE_DATA_OWNER_UID        0x00000100  /* "ownerUserId" */
-#define LWE_DATA_OWNER_GID        0x00000200  /* "ownerGroupId" */
-#define LWE_DATA_ATIME            0x00000400  /* "atime" */
-#define LWE_DATA_MTIME            0x00000800  /* "mtime" */
-#define LWE_DATA_NOW_TIME         0x00001000  /* "nowTime" */
-#define LWE_DATA_ELAPSED_TIME     0x00002000  /* "elapsedTime" */
-#define LWE_DATA_CLIENT_UID       0x00004000  /* "clientUserId" */
-#define LWE_DATA_CLIENT_GID       0x00008000  /* "clientGroupId" */
-#define LWE_DATA_NFS_IP           0x00010000  /* "clientIp" */
-#define LWE_DATA_PROCESS_ID       0x00020000  /* "processId" */
-#define LWE_DATA_TARGET_POOL_NAME 0x00040000  /* "targetPoolName" */
-#define LWE_DATA_BYTES_READ       0x00080000  /* "bytesRead" */
-#define LWE_DATA_BYTES_WRITTEN    0x00100000  /* "bytesWritten" */
-#define LWE_DATA_CLUSTER_NAME     0x00200000  /* "clusterName" */
-#define LWE_DATA_NODE_NAME        0x00400000  /* "nodeName" */
+#define LWE_DATA_FS_NAME 0x00000001 /* "fsName" */
+#define LWE_DATA_PATH_NAME 0x00000002 /* "pathName" */
+#define LWE_DATA_PATH_NEW_NAME 0x00000004 /* "pathNewName" for reanem */
+#define LWE_DATA_URL 0x00000008 /* "URL" */
+#define LWE_DATA_INODE 0x00000010 /* "inode" */
+#define LWE_DATA_OPEN_FLAGS 0x00000020 /* "openFlags" */
+#define LWE_DATA_POOL_NAME 0x00000040 /* "poolName" */
+#define LWE_DATA_FILE_SIZE 0x00000080 /* "fileSize" */
+#define LWE_DATA_OWNER_UID 0x00000100 /* "ownerUserId" */
+#define LWE_DATA_OWNER_GID 0x00000200 /* "ownerGroupId" */
+#define LWE_DATA_ATIME 0x00000400 /* "atime" */
+#define LWE_DATA_MTIME 0x00000800 /* "mtime" */
+#define LWE_DATA_NOW_TIME 0x00001000 /* "nowTime" */
+#define LWE_DATA_ELAPSED_TIME 0x00002000 /* "elapsedTime" */
+#define LWE_DATA_CLIENT_UID 0x00004000 /* "clientUserId" */
+#define LWE_DATA_CLIENT_GID 0x00008000 /* "clientGroupId" */
+#define LWE_DATA_NFS_IP 0x00010000 /* "clientIp" */
+#define LWE_DATA_PROCESS_ID 0x00020000 /* "processId" */
+#define LWE_DATA_TARGET_POOL_NAME 0x00040000 /* "targetPoolName" */
+#define LWE_DATA_BYTES_READ 0x00080000 /* "bytesRead" */
+#define LWE_DATA_BYTES_WRITTEN 0x00100000 /* "bytesWritten" */
+#define LWE_DATA_CLUSTER_NAME 0x00200000 /* "clusterName" */
+#define LWE_DATA_NODE_NAME 0x00400000 /* "nodeName" */
 
 /*
  * Define light weight events
  */
-#define LWE_EVENT_EVALUATED       0x00000001  /* policy was evaluated */
-#define LWE_EVENT_FILEOPEN        0x00000002  /* "op_open" */
-#define LWE_EVENT_FILECLOSE       0x00000004  /* "op_close" */
-#define LWE_EVENT_FILEREAD        0x00000008  /* "op_read" */
-#define LWE_EVENT_FILEWRITE       0x00000010  /* "op_write" */
-#define LWE_EVENT_FILEDESTROY     0x00000020  /* "op_destroy" */
-#define LWE_EVENT_FILEEVICT       0x00000040  /* "op_evict" OpenFile object is being evicted from memory 'FILE_EVICT' */
-#define LWE_EVENT_BUFFERFLUSH     0x00000080  /* "op_buffer_flush" Data buffer is being written to disk 'BUFFER_FLUSH' */
-#define LWE_EVENT_POOLTHRESHOLD   0x00000100  /* "op_pool_threshhold" Storage pool exceeded defined utilization 'POOL_THRESHOLD' */
-#define LWE_EVENT_FILEDATA        0x00000200  /* "op_data" "Read/Write/Trunc" event on open file */
-#define LWE_EVENT_FILERENAME      0x00000400  /* "op_rename" Rename event on open file */
-#define LWE_EVENT_FILEUNLINK      0x00000800  /* "op_unlink" Unlink file event */
-#define LWE_EVENT_FILERMDIR       0x00001000  /* "op_rmdir" Remove directory event */
-#define LWE_EVENT_FILEOPEN_READ   0x00002000  /* "op_open_read" Open for Read Only -  EVENT 'OPEN_READ' - deprecated, use 'OPEN' */
-#define LWE_EVENT_FILEOPEN_WRITE  0x00004000  /* "op_open_write" Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
-#define LWE_EVENT_FILEPOOL_CHANGE 0x00008000  /* "op_pool_change" Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
+#define LWE_EVENT_EVALUATED 0x00000001 /* policy was evaluated */
+#define LWE_EVENT_FILEOPEN 0x00000002 /* "op_open" */
+#define LWE_EVENT_FILECLOSE 0x00000004 /* "op_close" */
+#define LWE_EVENT_FILEREAD 0x00000008 /* "op_read" */
+#define LWE_EVENT_FILEWRITE 0x00000010 /* "op_write" */
+#define LWE_EVENT_FILEDESTROY 0x00000020 /* "op_destroy" */
+#define LWE_EVENT_FILEEVICT \
+	0x00000040 /* "op_evict" OpenFile object is being evicted from memory 'FILE_EVICT' */
+#define LWE_EVENT_BUFFERFLUSH \
+	0x00000080 /* "op_buffer_flush" Data buffer is being written to disk 'BUFFER_FLUSH' */
+#define LWE_EVENT_POOLTHRESHOLD \
+	0x00000100 /* "op_pool_threshhold" Storage pool exceeded defined utilization 'POOL_THRESHOLD' */
+#define LWE_EVENT_FILEDATA \
+	0x00000200 /* "op_data" "Read/Write/Trunc" event on open file */
+#define LWE_EVENT_FILERENAME \
+	0x00000400 /* "op_rename" Rename event on open file */
+#define LWE_EVENT_FILEUNLINK 0x00000800 /* "op_unlink" Unlink file event */
+#define LWE_EVENT_FILERMDIR 0x00001000 /* "op_rmdir" Remove directory event */
+#define LWE_EVENT_FILEOPEN_READ \
+	0x00002000 /* "op_open_read" Open for Read Only -  EVENT 'OPEN_READ' - deprecated, use 'OPEN' */
+#define LWE_EVENT_FILEOPEN_WRITE \
+	0x00004000 /* "op_open_write" Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
+#define LWE_EVENT_FILEPOOL_CHANGE \
+	0x00008000 /* "op_pool_change" Open with Writing privileges - EVENT 'OPEN_WRITE' - deprecated, use 'OPEN' */
 
 /*
  * Defines for light weight sessions
  */
 typedef unsigned long long gpfs_lwe_sessid_t;
-#define GPFS_LWE_NO_SESSION  ((gpfs_lwe_sessid_t) 0)
+#define GPFS_LWE_NO_SESSION ((gpfs_lwe_sessid_t)0)
 #define GPFS_LWE_SESSION_INFO_LEN 256
-
 
 /*
  * Define light weight token to identify access right
  */
-typedef struct gpfs_lwe_token
-{
-  unsigned long long high;
-  unsigned long long low;
+typedef struct gpfs_lwe_token {
+	unsigned long long high;
+	unsigned long long low;
 
 #ifdef __cplusplus
-  bool operator == (const struct gpfs_lwe_token& rhs) const
-    { return high == rhs.high && low == rhs.low; };
-  bool operator != (const struct gpfs_lwe_token& rhs) const
-    { return high != rhs.high || low != rhs.low; };
-#endif  /* __cplusplus */
+	bool operator==(const struct gpfs_lwe_token &rhs) const
+	{
+		return high == rhs.high && low == rhs.low;
+	};
+	bool operator!=(const struct gpfs_lwe_token &rhs) const
+	{
+		return high != rhs.high || low != rhs.low;
+	};
+#endif /* __cplusplus */
 
 } gpfs_lwe_token_t;
 
 /* Define special tokens */
-static const gpfs_lwe_token_t  _gpfs_lwe_no_token = { 0, 0 };
-#define GPFS_LWE_NO_TOKEN      _gpfs_lwe_no_token
+static const gpfs_lwe_token_t _gpfs_lwe_no_token = { 0, 0 };
+#define GPFS_LWE_NO_TOKEN _gpfs_lwe_no_token
 
-static const gpfs_lwe_token_t  _gpfs_lwe_invalid_token = { 0, 1 };
+static const gpfs_lwe_token_t _gpfs_lwe_invalid_token = { 0, 1 };
 #define GPFS_LWE_INVALID_TOKEN _gpfs_lwe_invalid_token
 
 /*
@@ -3291,44 +3082,35 @@ static const gpfs_lwe_token_t  _gpfs_lwe_invalid_token = { 0, 1 };
 
 /* LWE data events are generated from user access
  * to a LWE managed region. */
-#define GPFS_LWE_DATAEVENT_NONE     (0x0)
-#define GPFS_LWE_DATAEVENT_READ     (0x1)
-#define GPFS_LWE_DATAEVENT_WRITE    (0x2)
+#define GPFS_LWE_DATAEVENT_NONE (0x0)
+#define GPFS_LWE_DATAEVENT_READ (0x1)
+#define GPFS_LWE_DATAEVENT_WRITE (0x2)
 #define GPFS_LWE_DATAEVENT_TRUNCATE (0x4)
-
-
 
 /*
  * Define light weight event structure
  */
 typedef struct gpfs_lwe_event {
-  int                   eventLen;        /* offset 0 */
-  gpfs_lwe_eventtype_t  eventType;       /* offset 4 */
-  gpfs_lwe_token_t      eventToken;      /* offset 8 <--- Must on DWORD */
-  int                   isSync;          /* offset 16 */
-  int                   parmLen;         /* offset 20 */
-  char*                 parmP;           /* offset 24 <-- Must on DWORD */
+	int eventLen; /* offset 0 */
+	gpfs_lwe_eventtype_t eventType; /* offset 4 */
+	gpfs_lwe_token_t eventToken; /* offset 8 <--- Must on DWORD */
+	int isSync; /* offset 16 */
+	int parmLen; /* offset 20 */
+	char *parmP; /* offset 24 <-- Must on DWORD */
 } gpfs_lwe_event_t;
-
-
 
 /*
  * Define light weight access rights
  */
-#define GPFS_LWE_RIGHT_NULL           0
-#define GPFS_LWE_RIGHT_SHARED         1
-#define GPFS_LWE_RIGHT_EXCL           2
-
+#define GPFS_LWE_RIGHT_NULL 0
+#define GPFS_LWE_RIGHT_SHARED 1
+#define GPFS_LWE_RIGHT_EXCL 2
 
 /* Flag indicating whether to wait
  * when requesting a right or an event
  */
-#define GPFS_LWE_FLAG_NONE   0
-#define GPFS_LWE_FLAG_WAIT   1
-
-
-
-
+#define GPFS_LWE_FLAG_NONE 0
+#define GPFS_LWE_FLAG_WAIT 1
 
 /* NAME:       gpfs_lwe_create_session()
  *
@@ -3361,14 +3143,11 @@ typedef struct gpfs_lwe_event {
  *            EEXIST session to resume exists with different id
  *            EPERM  Caller does not hold appropriate privilege
  */
-int GPFS_API
-gpfs_lwe_create_session(gpfs_lwe_sessid_t  oldsid,        /* IN */
-                        char              *sessinfop,     /* IN */
-                        gpfs_lwe_sessid_t *newsidp);      /* OUT */
+int GPFS_API gpfs_lwe_create_session(gpfs_lwe_sessid_t oldsid, /* IN */
+				     char *sessinfop, /* IN */
+				     gpfs_lwe_sessid_t *newsidp); /* OUT */
 
 #define GPFS_MAX_LWE_SESSION_INFO_LEN 100
-
-
 
 /* NAME:       gpfs_lwe_destroy_session()
  *
@@ -3384,11 +3163,7 @@ gpfs_lwe_create_session(gpfs_lwe_sessid_t  oldsid,        /* IN */
  *            EBUSY  session is busy
  *            EPERM  Caller does not hold appropriate privilege
  */
-int GPFS_API
-gpfs_lwe_destroy_session(gpfs_lwe_sessid_t sid);         /* IN */
-
-
-
+int GPFS_API gpfs_lwe_destroy_session(gpfs_lwe_sessid_t sid); /* IN */
 
 /* NAME:       gpfs_lwe_getall_sessions()
  *
@@ -3406,11 +3181,9 @@ gpfs_lwe_destroy_session(gpfs_lwe_sessid_t sid);         /* IN */
  *            E2BIG  information is too large
  *            EPERM  Caller does not hold appropriate privilege
  */
-int GPFS_API
-gpfs_lwe_getall_sessions(unsigned int        nelem,      /* IN */
-                         gpfs_lwe_sessid_t  *sidbufp,    /* OUT */
-                         unsigned int       *nelemp);    /* OUT */
-
+int GPFS_API gpfs_lwe_getall_sessions(unsigned int nelem, /* IN */
+				      gpfs_lwe_sessid_t *sidbufp, /* OUT */
+				      unsigned int *nelemp); /* OUT */
 
 /* NAME:       gpfs_lw_query_session()
  *
@@ -3429,12 +3202,10 @@ gpfs_lwe_getall_sessions(unsigned int        nelem,      /* IN */
  *             E2BIG   information is too large
  *             EPERM   Caller does not hold appropriate privilege
  */
-int GPFS_API
-gpfs_lwe_query_session(gpfs_lwe_sessid_t  sid,     /* IN */
-                       size_t             buflen,  /* IN */
-                       void              *bufp,    /* OUT */
-                       size_t            *rlenP);  /* OUT */
-
+int GPFS_API gpfs_lwe_query_session(gpfs_lwe_sessid_t sid, /* IN */
+				    size_t buflen, /* IN */
+				    void *bufp, /* OUT */
+				    size_t *rlenP); /* OUT */
 
 /* NAME:       gpfs_lwe_get_events()
  *
@@ -3453,13 +3224,12 @@ gpfs_lwe_query_session(gpfs_lwe_sessid_t  sid,     /* IN */
  *             E2BIG    information is too large
  *             EINVAL   pass in args invalid
  */
-int GPFS_API
-gpfs_lwe_get_events(gpfs_lwe_sessid_t  sid,     /* IN  */
-                    unsigned int       maxmsgs, /* IN  */
-                    unsigned int       flags,   /* IN  */
-                    size_t             buflen,  /* IN  */
-                    void              *bufp,    /* OUT */
-                    size_t            *rlenp);  /* OUT */
+int GPFS_API gpfs_lwe_get_events(gpfs_lwe_sessid_t sid, /* IN  */
+				 unsigned int maxmsgs, /* IN  */
+				 unsigned int flags, /* IN  */
+				 size_t buflen, /* IN  */
+				 void *bufp, /* OUT */
+				 size_t *rlenp); /* OUT */
 
 /* NAME:      gpfs_lwe_respond_event()
  *
@@ -3474,12 +3244,10 @@ gpfs_lwe_get_events(gpfs_lwe_sessid_t  sid,     /* IN  */
  *            EINVAL    pass in args invalid
  *
  */
-int GPFS_API
-gpfs_lwe_respond_event(gpfs_lwe_sessid_t  sid,       /* IN */
-                       gpfs_lwe_token_t   token,     /* IN */
-                       gpfs_lwe_resp_t    response,  /* IN */
-                       int                reterror); /* IN */
-
+int GPFS_API gpfs_lwe_respond_event(gpfs_lwe_sessid_t sid, /* IN */
+				    gpfs_lwe_token_t token, /* IN */
+				    gpfs_lwe_resp_t response, /* IN */
+				    int reterror); /* IN */
 
 /* NAME:      gpfs_lwe_request_right
  *
@@ -3507,14 +3275,12 @@ gpfs_lwe_respond_event(gpfs_lwe_sessid_t  sid,       /* IN */
  *                      and process would be blocked
  *
  */
-int GPFS_API
-gpfs_lwe_request_right(gpfs_lwe_sessid_t  sid,       /* IN */
-                       void              *hanp,      /* IN */
-                       size_t             hlen,      /* IN */
-                       unsigned int       right,     /* IN */
-                       unsigned int       flags,     /* IN */
-                       gpfs_lwe_token_t  *token);    /* OUT */
-
+int GPFS_API gpfs_lwe_request_right(gpfs_lwe_sessid_t sid, /* IN */
+				    void *hanp, /* IN */
+				    size_t hlen, /* IN */
+				    unsigned int right, /* IN */
+				    unsigned int flags, /* IN */
+				    gpfs_lwe_token_t *token); /* OUT */
 
 /* NAME:      gpfs_lwe_upgrade_right
  *
@@ -3546,12 +3312,10 @@ gpfs_lwe_request_right(gpfs_lwe_sessid_t  sid,       /* IN */
  *            EBUSY     Process would be blocked
  *
  */
-int GPFS_API
-gpfs_lwe_upgrade_right(gpfs_lwe_sessid_t  sid,       /* IN */
-                       void              *hanp,      /* IN */
-                       size_t             hlen,      /* IN */
-                       gpfs_lwe_token_t token);      /* IN */
-
+int GPFS_API gpfs_lwe_upgrade_right(gpfs_lwe_sessid_t sid, /* IN */
+				    void *hanp, /* IN */
+				    size_t hlen, /* IN */
+				    gpfs_lwe_token_t token); /* IN */
 
 /* NAME:      gpfs_lwe_downgrade_right
  *
@@ -3580,12 +3344,10 @@ gpfs_lwe_upgrade_right(gpfs_lwe_sessid_t  sid,       /* IN */
  *            EPERM     Token's right is not exclusive
  *
  */
-int GPFS_API
-gpfs_lwe_downgrade_right(gpfs_lwe_sessid_t  sid,   /* IN */
-                         void              *hanp,  /* IN */
-                         size_t             hlen,  /* IN */
-                         gpfs_lwe_token_t token);  /* IN */
-
+int GPFS_API gpfs_lwe_downgrade_right(gpfs_lwe_sessid_t sid, /* IN */
+				      void *hanp, /* IN */
+				      size_t hlen, /* IN */
+				      gpfs_lwe_token_t token); /* IN */
 
 /* NAME:      gpfs_lwe_release_right
  *
@@ -3612,12 +3374,10 @@ gpfs_lwe_downgrade_right(gpfs_lwe_sessid_t  sid,   /* IN */
  *            EFAULT    Invalid pointer provided
  *            EPERM     Caller does not hold appropriate privilege
  */
-int GPFS_API
-gpfs_lwe_release_right(gpfs_lwe_sessid_t  sid,       /* IN */
-                       void              *hanp,      /* IN */
-                       size_t             hlen,      /* IN */
-                       gpfs_lwe_token_t token);      /* IN */
-
+int GPFS_API gpfs_lwe_release_right(gpfs_lwe_sessid_t sid, /* IN */
+				    void *hanp, /* IN */
+				    size_t hlen, /* IN */
+				    gpfs_lwe_token_t token); /* IN */
 
 /* NAME:        gpfs_lwe_getattrs()
  *
@@ -3659,16 +3419,9 @@ gpfs_lwe_release_right(gpfs_lwe_sessid_t  sid,       /* IN */
  *              ENOSPC  buffer too small to return all attributes
  *                      *attrSizeP will be set to the size necessary
  */
-int GPFS_API
-gpfs_lwe_getattrs(gpfs_lwe_sessid_t  sid,
-                  void              *hanp,
-                  size_t             hlen,
-                  gpfs_lwe_token_t   token,
-                  int                flags,
-                  void              *buffer,
-                  int                bufferSize,
-                  int               *attrSize);
-
+int GPFS_API gpfs_lwe_getattrs(gpfs_lwe_sessid_t sid, void *hanp, size_t hlen,
+			       gpfs_lwe_token_t token, int flags, void *buffer,
+			       int bufferSize, int *attrSize);
 
 /* NAME:        gpfs_lwe_putattrs()
  *
@@ -3743,19 +3496,11 @@ gpfs_lwe_getattrs(gpfs_lwe_sessid_t  sid,
  *              ESTALE cached fs information was invalid
  *              GPFS_E_INVAL_IFILE bad ifile parameters
  */
-int GPFS_API
-gpfs_lwe_putattrs(gpfs_lwe_sessid_t  sid,
-                  void              *hanp,
-                  size_t             hlen,
-                  gpfs_lwe_token_t   token,
-                  int                flags,
-                  void              *buffer,
-                  const char        *pathName);
+int GPFS_API gpfs_lwe_putattrs(gpfs_lwe_sessid_t sid, void *hanp, size_t hlen,
+			       gpfs_lwe_token_t token, int flags, void *buffer,
+			       const char *pathName);
 
-
-
-const char* GPFS_API
-gpfs_get_fspathname_from_fsname(const char* fsname_or_path);
+const char *GPFS_API gpfs_get_fspathname_from_fsname(const char *fsname_or_path);
 /* Check that fsname_or_path refers to a GPFS file system and find the path to its root
  Return a strdup()ed copy of the path -OR- NULL w/errno
 */
@@ -3763,29 +3508,32 @@ gpfs_get_fspathname_from_fsname(const char* fsname_or_path);
 int GPFS_API
 /* experimental */
 gpfs_qos_getstats(
-                   const char *fspathname, /* in only: path to file system*/
-                   unsigned int options, /* in only: option flags: 0=begin at specified qip, 1=begin after qip */
-                   unsigned int qosid,   /* in only: 0 or a specific qosid at which to start or continue */
-                   gpfs_pool_t  poolid,  /* in only: -1 or a specific poolid at which to start or continue */
-                   unsigned int mqips,   /* in only: max number of qip=(qosid,poolid) histories to retrieve */
-                   unsigned int nslots,  /* in only: max number of time slots of history to retrieve */
-                   void *bufferP,        /* ptr to return stat structures */
-                   unsigned int bufferSize);  /* sizeof stat buffer or 0 */
+	const char *fspathname, /* in only: path to file system*/
+	unsigned int
+		options, /* in only: option flags: 0=begin at specified qip, 1=begin after qip */
+	unsigned int
+		qosid, /* in only: 0 or a specific qosid at which to start or continue */
+	gpfs_pool_t
+		poolid, /* in only: -1 or a specific poolid at which to start or continue */
+	unsigned int
+		mqips, /* in only: max number of qip=(qosid,poolid) histories to retrieve */
+	unsigned int
+		nslots, /* in only: max number of time slots of history to retrieve */
+	void *bufferP, /* ptr to return stat structures */
+	unsigned int bufferSize); /* sizeof stat buffer or 0 */
 
 int GPFS_API
 /* experimental */
-gpfs_qos_control(
-                   const char *fspathname, /* in only: path to file system*/
-                   void *bufferP,        /* in/out control/get/set structs */
-                   unsigned int bufferSize);
+gpfs_qos_control(const char *fspathname, /* in only: path to file system*/
+		 void *bufferP, /* in/out control/get/set structs */
+		 unsigned int bufferSize);
 
-int GPFS_API
-gpfs_qos_set(
-             const char *fspathname,
-             const char *classname, /* "gold", "silver", or .. "1" or "2" .. */
-             int   id,        /* process id or  pgrp or userid */
-             int   which,    /* process, pgrp or user */
-             double* qshareP); /* return the share, percentage or when negative IOP limit */
+int GPFS_API gpfs_qos_set(
+	const char *fspathname,
+	const char *classname, /* "gold", "silver", or .. "1" or "2" .. */
+	int id, /* process id or  pgrp or userid */
+	int which, /* process, pgrp or user */
+	double *qshareP); /* return the share, percentage or when negative IOP limit */
 /* if id==0 then getpid() or getpgrp() or getuid()
    if which==0 or 1 then process, if 2 process then group, if 3 then userid
    Return -1 on error, with errno=
@@ -3796,14 +3544,12 @@ gpfs_qos_set(
 */
 
 /* For the given process get QOS info */
-int GPFS_API
-gpfs_qos_get(
-             const char *fspathname,
-	     int  *classnumP,
-             char  classname[18], /* "gold", "silver", or .. "1" or "2" .. */
-             int   id,        /* process id or  pgrp or userid */
-             int   which,    /* process, pgrp or user */
-             double* qshareP); /* return the share, percentage or when negative IOP limit */
+int GPFS_API gpfs_qos_get(
+	const char *fspathname, int *classnumP,
+	char classname[18], /* "gold", "silver", or .. "1" or "2" .. */
+	int id, /* process id or  pgrp or userid */
+	int which, /* process, pgrp or user */
+	double *qshareP); /* return the share, percentage or when negative IOP limit */
 
 /* given classname, set *classnumP and  set *qshareP
    Return -1 on error, with errno=
@@ -3812,27 +3558,16 @@ gpfs_qos_get(
     ENXIO  if QOS throttling is not active
         (but classname is recognized, *classnumP and *qshareP have configured values)
 */
-int GPFS_API
-gpfs_qos_lkupName(
-                  const char *fspathname,
-		  int        *classnumP,
-                  const char *classname,
-                  double* qshareP);
+int GPFS_API gpfs_qos_lkupName(const char *fspathname, int *classnumP,
+			       const char *classname, double *qshareP);
 
 /* given classnumber, find name and share (similar to above), but start with number instead of name */
-int GPFS_API
-gpfs_qos_lkupVal(
-                  const char *fspathname,
-		  int        val,
-                  char    classname[18],
-                  double* qshareP);
+int GPFS_API gpfs_qos_lkupVal(const char *fspathname, int val,
+			      char classname[18], double *qshareP);
 
-int GPFS_API
-gpfs_ioprio_set(int,int,int); /* do not call directly */
+int GPFS_API gpfs_ioprio_set(int, int, int); /* do not call directly */
 
-int GPFS_API
-gpfs_ioprio_get(int,int); /* do not call directly */
-
+int GPFS_API gpfs_ioprio_get(int, int); /* do not call directly */
 
 /* NAME:        gpfs_enc_file_rewrap_key()
  *
@@ -3878,13 +3613,11 @@ gpfs_ioprio_get(int,int); /* do not call directly */
 
 /* The Key ID is a string comprised of the key ID and the remote key
    server RKM ID, separated by ':' */
-typedef const char *gpfs_enc_key_id_t;    /* "<KEY ID> : <KMS ID>" */
+typedef const char *gpfs_enc_key_id_t; /* "<KEY ID> : <KMS ID>" */
 
-int GPFS_API
-gpfs_enc_file_rewrap_key(gpfs_file_t fileDesc,
-                         gpfs_enc_key_id_t orig_key_p,
-                         gpfs_enc_key_id_t new_key_p);
-
+int GPFS_API gpfs_enc_file_rewrap_key(gpfs_file_t fileDesc,
+				      gpfs_enc_key_id_t orig_key_p,
+				      gpfs_enc_key_id_t new_key_p);
 
 /* NAME:        gpfs_enc_get_algo()
  *
@@ -3918,13 +3651,9 @@ gpfs_enc_file_rewrap_key(gpfs_file_t fileDesc,
  *              E2BIG     Output string does not fit in algo_txtP
  */
 
-int GPFS_API
-gpfs_enc_get_algo(gpfs_file_t fileDesc,
-                  const char *encryption_xattrP,
-                  int xattr_len,
-                  char *algo_txtP,
-                  int algo_txt_size);
-
+int GPFS_API gpfs_enc_get_algo(gpfs_file_t fileDesc,
+			       const char *encryption_xattrP, int xattr_len,
+			       char *algo_txtP, int algo_txt_size);
 
 /* NAME:        gpfs_init_trace()
  *
@@ -3940,8 +3669,7 @@ gpfs_enc_get_algo(gpfs_file_t fileDesc,
  *              ENFILE  Too many open files
  *              ENOSYS  Function not available
  */
-int GPFS_API
-gpfs_init_trace(void);
+int GPFS_API gpfs_init_trace(void);
 
 /* NAME:        gpfs_query_trace()
  *
@@ -3959,8 +3687,7 @@ gpfs_init_trace(void);
  *              ENFILE  Too many open files
  *              ENOSYS  Function not available
  */
-int GPFS_API
-gpfs_query_trace(void);
+int GPFS_API gpfs_query_trace(void);
 
 /* NAME:        gpfs_add_trace()
  *
@@ -3981,8 +3708,7 @@ gpfs_query_trace(void);
  *
  * Returns:     None.
  */
-void GPFS_API
-gpfs_add_trace(int level, const char *msg);
+void GPFS_API gpfs_add_trace(int level, const char *msg);
 
 /* NAME:        gpfs_fini_trace()
  *
@@ -4001,35 +3727,35 @@ void gpfs_fini_trace(void);
  */
 
 #ifdef GPFS_64BIT_INODES
-  #undef  GPFS_D_VERSION
-  #define GPFS_D_VERSION GPFS_D64_VERSION
-  #undef  GPFS_IA_VERSION
-  #define GPFS_IA_VERSION GPFS_IA64_VERSION
+#undef GPFS_D_VERSION
+#define GPFS_D_VERSION GPFS_D64_VERSION
+#undef GPFS_IA_VERSION
+#define GPFS_IA_VERSION GPFS_IA64_VERSION
 
-  #define gpfs_ino_t gpfs_ino64_t
-  #define gpfs_gen_t gpfs_gen64_t
-  #define gpfs_uid_t gpfs_uid64_t
-  #define gpfs_gid_t gpfs_gid64_t
-  #define gpfs_snapid_t gpfs_snapid64_t
-  #define gpfs_nlink_t gpfs_nlink64_t
-  #define gpfs_timestruc_t gpfs_timestruc64_t
-  #define gpfs_direntx_t gpfs_direntx64_t
-  #define gpfs_direntx gpfs_direntx64
-  #define gpfs_iattr_t gpfs_iattr64_t
+#define gpfs_ino_t gpfs_ino64_t
+#define gpfs_gen_t gpfs_gen64_t
+#define gpfs_uid_t gpfs_uid64_t
+#define gpfs_gid_t gpfs_gid64_t
+#define gpfs_snapid_t gpfs_snapid64_t
+#define gpfs_nlink_t gpfs_nlink64_t
+#define gpfs_timestruc_t gpfs_timestruc64_t
+#define gpfs_direntx_t gpfs_direntx64_t
+#define gpfs_direntx gpfs_direntx64
+#define gpfs_iattr_t gpfs_iattr64_t
 
-  #define gpfs_get_snapid_from_fssnaphandle gpfs_get_snapid_from_fssnaphandle64
-  #define gpfs_open_inodescan gpfs_open_inodescan64
-  #define gpfs_open_inodescan_with_xattrs gpfs_open_inodescan_with_xattrs64
-  #define gpfs_next_inode gpfs_next_inode64
-  #define gpfs_next_inode_with_xattrs gpfs_next_inode_with_xattrs64
-  #define gpfs_seek_inode gpfs_seek_inode64
-  #define gpfs_stat_inode gpfs_stat_inode64
-  #define gpfs_stat_inode_with_xattrs gpfs_stat_inode_with_xattrs64
-  #define gpfs_iopen gpfs_iopen64
-  #define gpfs_ireaddir gpfs_ireaddir64
-  #define gpfs_ireaddirx gpfs_ireaddirx64
-  #define gpfs_iwritedir gpfs_iwritedir64
-  #define gpfs_ireadlink gpfs_ireadlink64
+#define gpfs_get_snapid_from_fssnaphandle gpfs_get_snapid_from_fssnaphandle64
+#define gpfs_open_inodescan gpfs_open_inodescan64
+#define gpfs_open_inodescan_with_xattrs gpfs_open_inodescan_with_xattrs64
+#define gpfs_next_inode gpfs_next_inode64
+#define gpfs_next_inode_with_xattrs gpfs_next_inode_with_xattrs64
+#define gpfs_seek_inode gpfs_seek_inode64
+#define gpfs_stat_inode gpfs_stat_inode64
+#define gpfs_stat_inode_with_xattrs gpfs_stat_inode_with_xattrs64
+#define gpfs_iopen gpfs_iopen64
+#define gpfs_ireaddir gpfs_ireaddir64
+#define gpfs_ireaddirx gpfs_ireaddirx64
+#define gpfs_iwritedir gpfs_iwritedir64
+#define gpfs_ireadlink gpfs_ireadlink64
 #endif
 
 #define gpfs_icreate gpfs_icreate64
