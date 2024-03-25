@@ -71,6 +71,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7467534_5359d7c9",
+        "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Use the // for source files and /* for header files. I don\u0027t know why checkpatch.pl trips up so badly on this one...",
+      "parentUuid": "f29b1cba_f113b908",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17f105ee_37c56d06",
@@ -1051,6 +1069,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d03a8b_e404ee4f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67074316_a5544062",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeee49e9_06123248",
@@ -1677,6 +1713,24 @@
       "side": 1,
       "message": "Same comment about which comment style should I adopt for SPDX-License-Identifier.",
       "parentUuid": "701ae11b_3d249ca1",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a889be2_4d92c84d",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd578e2_32713b84",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2416,6 +2470,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84a68fe7_74cebe30",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dae2bdbc_618f5982",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90df9372_67cab236",
@@ -2657,6 +2729,24 @@
       "side": 1,
       "message": "What comment style should I adopt for SPDX-License-Identifier?",
       "parentUuid": "2f5ec242_0f87d07c",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "850824f8_bba1c2ae",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "This is fine. Ignore this particular error for the SPDX comments.",
+      "parentUuid": "ab1713e7_ce02fa06",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -8191,6 +8281,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d7ce150_22a623c1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29cb2908_a3b7b45c",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8033cedb_89d14a2f",
@@ -8572,6 +8680,24 @@
       "side": 1,
       "message": "What comment style should I adopt for SPDX-License-Identifier?",
       "parentUuid": "1e045759_0860835a",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d4686e_def1a5c8",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2cf2fe5_a3e0d96a",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -9381,6 +9507,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e033591_c00bbc24",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "692be882_d78f624d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9735f08_a9534ae9",
@@ -9482,6 +9626,24 @@
       "side": 1,
       "message": "What comment style should I adopt for SPDX-License-Identifier?",
       "parentUuid": "8d51b06f_3a20a2a9",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2020381f_07387dc0",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_acl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81177340_53076388",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -10781,6 +10943,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff7aa7ec_db2c99e1",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f22fff8_0651d01d",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d65bc7ff_2965d7a7",
@@ -10812,6 +10992,24 @@
       "side": 1,
       "message": "We released saunafs as GPL v3, and we plan to do the same with SaunaFS FSAL. In the new patch, I updated the SPDX-License identifier to match GPL-3.0 or later.",
       "parentUuid": "d65bc7ff_2965d7a7",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b001afb_72708031",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-25T15:07:17Z",
+      "side": 1,
+      "message": "OK, would you consider licensing LGPL? Use of GPL code in Ganesha is tricky.",
+      "parentUuid": "ab55a92e_6fe37399",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
