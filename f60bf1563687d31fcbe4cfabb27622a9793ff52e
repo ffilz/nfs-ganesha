@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "530885e4_8eb08709",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-28T07:21:49Z",
+      "side": 1,
+      "message": "Wondering if there would be a case, in which we would need to have a separate mutex as well for the IO work? because we now signal fd cond, then broadcast io cond and then we unlock the same mutex...",
+      "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
