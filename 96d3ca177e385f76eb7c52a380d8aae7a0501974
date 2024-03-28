@@ -70,6 +70,24 @@
       "parentUuid": "c11fb73a_6864ee29",
       "revId": "96d3ca177e385f76eb7c52a380d8aae7a0501974",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "308edb5c_ad6319a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:40:58Z",
+      "side": 1,
+      "message": "The more I think about this, the more I think we just need to rip the bandaid off and remove the old parameter and set the new parameter to the default \"localdomain\". Then folks using old config will get an error if they explicitly set the old parameter.\n\nThe config will throw a warning if the old param is set, and if -X was specified on the Ganesha command line, it will refuse to start. So we will be well covered as far as warning folks the config has changed.\n\nAnd anyone actually using the domain name is going to immediate have problems if they didn\u0027t specify -X and ran without converting their config...",
+      "parentUuid": "854165a4_63173a09",
+      "revId": "96d3ca177e385f76eb7c52a380d8aae7a0501974",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
