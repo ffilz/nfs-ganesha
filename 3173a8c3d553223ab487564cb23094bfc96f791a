@@ -106,6 +106,24 @@
       "parentUuid": "79c6169e_219aacde",
       "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc86e83_9c68ad81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T16:19:07Z",
+      "side": 1,
+      "message": "If we\u0027re not going to switch to TAILQ, I\u0027d rather not merge the patches with TAILQ and then have to go back and change them to glist.\n\nGiven that ntirpc uses TAILQ, I suspect the best path is to move to TAILQ and then the question is how do we do it? There\u0027s a lot of glist.\n\nGanesha V6 would be a good time to make a switch because we have so many things creating upheaval that is going to make back porting a pain, so might as well d glist -\u003e TAILQ too...",
+      "parentUuid": "3f56609d_c17fbf99",
+      "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
