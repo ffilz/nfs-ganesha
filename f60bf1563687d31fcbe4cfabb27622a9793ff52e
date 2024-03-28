@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "233d56cb_d174f8c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019989
+      },
+      "writtenOn": "2024-03-28T13:01:04Z",
+      "side": 1,
+      "message": "Another similar stack is:\n#0  0x00007fa3e460d575 in pthread_rwlock_wrlock () from /lib64/libpthread.so.0\n#1  0x00007fa3e8571f80 in mdcache_getattrs (obj_hdl\u003d0x9fc6538, attrs_out\u003d0x7fa3e15fdc50) \n#2  0x00007fa3e854b7cd in nfs_SetPostOpAttr (obj\u003d0x9fc6538, Fattr\u003d0x3843aca8, attrs\u003d0x0) \n#3  0x00007fa3e854bab5 in nfs_SetWccData (before_attr\u003d0x0, obj\u003d0x9fc6538, wcc_data\u003d0x3843ac88) \n#4  0x00007fa3e855dfc5 in nfs3_complete_write (data\u003d0xc1fff10) \n#5  0x00007fa3e855ea4a in nfs3_write (arg\u003d0xb5fa350, req\u003d0xb5f9b00, res\u003d0x3843ac80) \n#6  0x00007fa3e846338f in nfs_rpc_process_request (reqdata\u003d0xb5f9b00, retry\u003dfalse) \n#7  0x00007fa3e84639a9 in nfs_rpc_valid_NFS (req\u003d0xb5f9b00)",
+      "parentUuid": "ebfcb7eb_859203a8",
+      "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "530885e4_8eb08709",
         "filename": "src/include/fsal_types.h",
         "patchSetId": 1
