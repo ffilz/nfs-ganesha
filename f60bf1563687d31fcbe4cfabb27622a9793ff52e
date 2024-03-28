@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36743288_780f8d4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T21:38:07Z",
+      "side": 1,
+      "message": "Hmm, that\u0027s a RW lock not a mutex, I wonder how that has any relation to this?",
+      "parentUuid": "233d56cb_d174f8c3",
+      "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "530885e4_8eb08709",
         "filename": "src/include/fsal_types.h",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2024-03-28T07:21:49Z",
       "side": 1,
       "message": "Wondering if there would be a case, in which we would need to have a separate mutex as well for the IO work? because we now signal fd cond, then broadcast io cond and then we unlock the same mutex...",
+      "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de548d3d_4442e453",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T21:38:07Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Whenever a thread uses pthread_cond_signal or pthread_cond_broadcast, it is OK to drop the mutex. And adding a second mutex would mean start I/O would need to take it also, which would introduce lock ordering constraints that might actually make it so you always have to take both...\n\nNow one issue is the thread that signals and broadcasts both condition variables CAN then block between signalling fd_work and broadcasting io_work if an fd work thread wakes up and takes the mutex. It would be neat if we had more complex mechanisms that would allow us to drop the mutex, schedule all the waiting threads (1 or more fd_work, all the io_work) and then re-take the mutex. And then it would be handy if there was a signal and release function so a signalling thread wouldn\u0027t have to wait for a woken up thread to do work - I wonder how much that\u0027s actually an issue, does the scheduler take signal/broadcast as a yield point?",
+      "parentUuid": "530885e4_8eb08709",
       "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
