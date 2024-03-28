@@ -2097,7 +2097,11 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 		     atomic_fetch_int32_t(&fsal_fd->io_work),
 		     atomic_fetch_int32_t(&fsal_fd->fd_work));
 
+	/* Wake up at least one thread waiting to do fd work */
 	PTHREAD_COND_signal(&fsal_fd->work_cond);
+
+	/* Wake up all threads waiting to do io work */
+	PTHREAD_COND_broadcast(&fsal_fd->io_cond);
 
 	return status;
 }
@@ -2237,9 +2241,7 @@ retry:
 			PTHREAD_MUTEX_lock(&fsal_fd->work_mutex);
 		}
 
-		/* Now we need to wait on the condition variable... Note that
-		 * if other I/O was in progress, we will get a spurious wakeup
-		 * when that I/O completes.
+		/* Now we need to wait on the io_work condition variable...
 		 */
 		while (atomic_fetch_int32_t(&fsal_fd->fd_work) != 0) {
 			LogFullDebug(COMPONENT_FSAL,
@@ -2249,7 +2251,7 @@ retry:
 				     atomic_fetch_int32_t(&fsal_fd->io_work),
 				     atomic_fetch_int32_t(&fsal_fd->fd_work));
 
-			PTHREAD_COND_wait(&fsal_fd->work_cond,
+			PTHREAD_COND_wait(&fsal_fd->io_cond,
 					  &fsal_fd->work_mutex);
 		}
 
@@ -2775,8 +2777,8 @@ fsal_status_t fsal_complete_io(struct fsal_obj_handle *obj_hdl,
 		return fsal_close_fd(obj_hdl, fsal_fd);
 	}
 
-	/* Indicate I/O done, and if we were last I/O, signal condition in case
-	 * any threads are waiting to do fd work.
+	/* Indicate I/O done, and if we were last I/O, signal work_cond
+	 * condition in case any threads are waiting to do fd work.
 	 */
 	LogFullDebug(COMPONENT_FSAL,
 		     "%p done io_work (-1) = %"PRIi32" fd_work = %"PRIi32,
@@ -2889,7 +2891,11 @@ void fsal_complete_fd_work(struct fsal_fd *fsal_fd)
 		     atomic_fetch_int32_t(&fsal_fd->io_work),
 		     atomic_fetch_int32_t(&fsal_fd->fd_work));
 
+	/* Wake up at least one thread waiting to do fd work */
 	PTHREAD_COND_signal(&fsal_fd->work_cond);
+
+	/* Wake up all threads waiting to do io work */
+	PTHREAD_COND_broadcast(&fsal_fd->io_cond);
 
 	/* Completely done, release the mutex. */
 	PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
