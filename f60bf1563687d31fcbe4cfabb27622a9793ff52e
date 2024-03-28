@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebfcb7eb_859203a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019989
+      },
+      "writtenOn": "2024-03-28T12:08:28Z",
+      "side": 1,
+      "message": "After using this patch, I found some strange thread stack information during the test, as many as hundreds. When vdbench stops, these thread locks will be executed.\n\nAlso, the performance will drop a lot, I\u0027m not sure if it has something to do with this.\n\n#0  0x00007fa3e460d575 in pthread_rwlock_wrlock () from /lib64/libpthread.so.0\n#1  0x00007fa3e8571f80 in mdcache_getattrs (obj_hdl\u003d0x9eba038, attrs_out\u003d0x7fa3e19fdcd0) //\tPTHREAD_RWLOCK_wrlock(\u0026entry-\u003eattr_lock);\n#2  0x00007fa3e854b9c1 in nfs_SetPreOpAttr (obj\u003d0x9eba038, attr\u003d0x7fa3e19fdf40) \n#3  0x00007fa3e855e599 in nfs3_write (arg\u003d0x6e5be50, req\u003d0x6e5b600, res\u003d0x36ceb180) \n#4  0x00007fa3e846338f in nfs_rpc_process_request (reqdata\u003d0x6e5b600, retry\u003dfalse) \n#5  0x00007fa3e84639a9 in nfs_rpc_valid_NFS (req\u003d0x6e5b600) \n#6  0x00007fa3e8030fba in svc_vc_decode () from /lib64/libntirpc.so.5.0\n#7  0x00007fa3e802bd3a in svc_request () from /lib64/libntirpc.so.5.0\n#8  0x00007fa3e8030eba in svc_vc_recv () from /lib64/libntirpc.so.5.0\n#9  0x00007fa3e802bcba in svc_rqst_xprt_task_recv () from /lib64/libntirpc.so.5.0\n#10 0x00007fa3e803a0f7 in work_pool_thread () from /lib64/libntirpc.so.5.0\n#11 0x00007fa3e46082ff in start_thread () from /lib64/libpthread.so.0\n#12 0x00007fa3e3639dd3 in clone () from /lib64/libc.so.6",
+      "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "530885e4_8eb08709",
         "filename": "src/include/fsal_types.h",
         "patchSetId": 1
