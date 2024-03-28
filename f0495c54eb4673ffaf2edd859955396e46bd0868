@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64d9c75a_294ef846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:58:18Z",
+      "side": 1,
+      "message": "Hmm, another patch that introduces a TAILQ - I need to think about this",
+      "revId": "f0495c54eb4673ffaf2edd859955396e46bd0868",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "badc6d91_c1f81cdf",
         "filename": "src/idmapper/idmapper_negative_cache.c",
         "patchSetId": 4
@@ -14,6 +31,24 @@
       "writtenOn": "2024-03-23T07:55:26Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "f0495c54eb4673ffaf2edd859955396e46bd0868",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea4fae3b_33e3e2c9",
+        "filename": "src/idmapper/idmapper_negative_cache.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:58:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "badc6d91_c1f81cdf",
       "revId": "f0495c54eb4673ffaf2edd859955396e46bd0868",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
