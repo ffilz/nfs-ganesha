@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5791e5_8026fef1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:50:34Z",
+      "side": 1,
+      "message": "Rip the bandaid off, remove the old parameter and let it cause warning if set.",
+      "revId": "342e3b5df96026655d018f1555bf29ad9acd7423",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc428013_6fb8a65f",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:50:34Z",
+      "side": 1,
+      "message": "The need for this will have been removed in earlier patch",
+      "revId": "342e3b5df96026655d018f1555bf29ad9acd7423",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0242c275_f3de0a39",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:50:34Z",
+      "side": 1,
+      "message": "Remove Manage_Gids_Expiration so no need for this check",
+      "revId": "342e3b5df96026655d018f1555bf29ad9acd7423",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb09b945_39fbbda8",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:50:34Z",
+      "side": 1,
+      "message": "Remove Manage_Gids_Expiration",
+      "revId": "342e3b5df96026655d018f1555bf29ad9acd7423",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fc08d6_486326fa",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:50:34Z",
+      "side": 1,
+      "message": "Remove Manage_Gids_Expiration",
+      "revId": "342e3b5df96026655d018f1555bf29ad9acd7423",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408727e8_32debf34",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-03-28T15:50:34Z",
+      "side": 1,
+      "message": "Just remove Manage_Gids_Expiration",
+      "revId": "342e3b5df96026655d018f1555bf29ad9acd7423",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
