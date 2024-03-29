@@ -124,6 +124,24 @@
       "parentUuid": "3f56609d_c17fbf99",
       "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7560f0_80e7d51f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-29T03:57:12Z",
+      "side": 1,
+      "message": "There are multiple usages of both of them across the codebase, and migrating away from either of them is going to be tedious. Maybe we can have a general guideline around using TAILQ going forward, and gradually migrate away from existing usages of glist.\n\nPersonally speaking, given that both glist and TAILQ implementations are stable and standard, I don\u0027t mind allowing the usage of either. Basically, there is not much of maintenance overhead incurred by having both of them in the code.",
+      "parentUuid": "fbc86e83_9c68ad81",
+      "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
