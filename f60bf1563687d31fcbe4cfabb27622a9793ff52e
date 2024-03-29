@@ -87,6 +87,24 @@
       "parentUuid": "530885e4_8eb08709",
       "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3365b905_1130a3e2",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-03-29T01:53:55Z",
+      "side": 1,
+      "message": "Yes, now the signaling thread may need to wait for other thread to complete work, due to common mutex, but I believe that is fine - not blocking ongoing IOs :-)",
+      "parentUuid": "de548d3d_4442e453",
+      "revId": "f60bf1563687d31fcbe4cfabb27622a9793ff52e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
