@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac65899c_33b7453b",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-03-29T05:49:34Z",
+      "side": 1,
+      "message": "`Manage_Gids_Expiration` is still used for user\u0027s managed groups cache. This change only avoids using it for individual user cache and group cache. I will subsequently introduce a new param in directory_services section and then remove this param completely.\n\nHaving said that, lets finalise on the backward compatibility aspect as being discussed  at https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1176766/comments/95811a45_b20f2b6c",
+      "parentUuid": "0242c275_f3de0a39",
+      "revId": "342e3b5df96026655d018f1555bf29ad9acd7423",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb09b945_39fbbda8",
         "filename": "src/doc/man/ganesha-core-config.rst",
         "patchSetId": 4
