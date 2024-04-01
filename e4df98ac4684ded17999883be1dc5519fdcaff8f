@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "477a935c_06f2077c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T22:49:06Z",
+      "side": 1,
+      "message": "Please add this blank line",
+      "parentUuid": "ff628630_b5116c8b",
+      "revId": "e4df98ac4684ded17999883be1dc5519fdcaff8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50333292_044e17bd",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b05dd25_bfe9d499",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T22:49:06Z",
+      "side": 1,
+      "message": "Please remove the braces.",
+      "parentUuid": "3f9d478f_8cb00c0c",
+      "revId": "e4df98ac4684ded17999883be1dc5519fdcaff8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c4dd4ff_3436c5e9",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2024-04-01T15:05:19Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\tLogFatal(COMPONENT_FSAL, \"Failed in nfs4_acl_new_entry, acl_status %d\", acl_status);",
+      "revId": "e4df98ac4684ded17999883be1dc5519fdcaff8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b65546f_8c671a3d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T22:49:06Z",
+      "side": 1,
+      "message": "Please wrap this.",
+      "parentUuid": "5c4dd4ff_3436c5e9",
       "revId": "e4df98ac4684ded17999883be1dc5519fdcaff8f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
