@@ -276,17 +276,18 @@ static inline bool different_lock(fsal_lock_param_t *lock1,
  * @param[in] le     Entry to log
  */
 static void
-log_entry_ref_count(const char *reason, state_lock_entry_t *le,
-		    int32_t refcount, char *file, int line, char *function)
+log_entry_ref_count(log_levels_t level, const char *reason,
+		    state_lock_entry_t *le, int32_t refcount,
+		    char *file, int line, char *function)
 {
-	if (isFullDebug(COMPONENT_STATE)) {
+	if (isLevel(COMPONENT_STATE, level)) {
 		char owner[LOG_BUFF_LEN] = "\0";
 		struct display_buffer dspbuf = {sizeof(owner), owner, owner};
 
 		display_owner(&dspbuf, le->sle_owner);
 
 		DisplayLogComponentLevel(COMPONENT_STATE, file, line, function,
-			NIV_FULL_DEBUG,
+			level,
 			"%s Entry: %p obj=%p, fileid=%" PRIu64
 			", export=%u, type=%s, start=0x%"PRIx64
 			", end=0x%"PRIx64
@@ -307,17 +308,28 @@ log_entry_ref_count(const char *reason, state_lock_entry_t *le,
 }
 
 #define LogEntryRefCount(reason, le, refcount) \
-	log_entry_ref_count(reason, le, refcount, \
+	log_entry_ref_count(NIV_FULL_DEBUG, reason, le, refcount, \
 	(char *) __FILE__, __LINE__, (char *) __func__)
 
 /**
- * @brief Log a lock entry
+ * @brief Log a lock entry at debug level
  *
  * @param[in] reason Arbitrary string
  * @param[in] le     Entry to log
  */
 #define LogEntry(reason, le) \
-	log_entry_ref_count(reason, le, \
+	log_entry_ref_count(NIV_FULL_DEBUG, reason, le, \
+	atomic_fetch_int32_t(&le->sle_ref_count), \
+	(char *) __FILE__, __LINE__, (char *) __func__)
+
+/**
+ * @brief Log a lock entry at event level
+ *
+ * @param[in] reason Arbitrary string
+ * @param[in] le     Entry to log
+ */
+#define LogEntryEvent(reason, le) \
+	log_entry_ref_count(NIV_EVENT, reason, le, \
 	atomic_fetch_int32_t(&le->sle_ref_count), \
 	(char *) __FILE__, __LINE__, (char *) __func__)
 
@@ -354,7 +366,7 @@ static bool LogList(const char *reason, struct fsal_obj_handle *obj,
 						  state_lock_entry_t,
 						  sle_list);
 
-			LogEntry(reason, found_entry);
+			LogEntryEvent(reason, found_entry);
 			if (found_entry->sle_obj == NULL)
 				break;
 		}
@@ -399,7 +411,7 @@ static bool LogBlockedList(const char *reason, struct fsal_obj_handle *obj,
 			    glist_entry(glist, state_block_data_t, sbd_list);
 
 			found_entry = block_entry->sbd_lock_entry;
-			LogEntry(reason, found_entry);
+			LogEntryEvent(reason, found_entry);
 			if (found_entry->sle_obj == NULL)
 				break;
 		}
@@ -783,6 +795,8 @@ recheck_for_conflicting_entries:
 			     || lock->lock_type == FSAL_LOCK_W)
 			    && different_owners(found_entry->sle_owner, owner)
 			    ) {
+				LogEntryEvent("Found Conflicting", found_entry);
+
 				/* Recheck for expiry */
 				state_owner_t *cf_own = found_entry->sle_owner;
 				nfs_client_id_t *client_id =
@@ -1820,7 +1834,7 @@ void try_to_grant_lock(state_lock_entry_t *lock_entry)
 	 * or the block was cancelled.
 	 * Remove lock from list.
 	 */
-	LogEntry(reason, lock_entry);
+	LogEntryEvent(reason, lock_entry);
 	remove_from_locklist(lock_entry);
 }
 
@@ -2370,7 +2384,7 @@ state_status_t state_test(struct fsal_obj_handle *obj,
 
 	if (found_entry != NULL) {
 		/* found a conflicting lock, return it */
-		LogEntry("Found conflict", found_entry);
+		LogEntryEvent("Found conflict", found_entry);
 		copy_conflict(found_entry, holder, conflict);
 		status = STATE_LOCK_CONFLICT;
 	} else {
@@ -2383,7 +2397,7 @@ state_status_t state_test(struct fsal_obj_handle *obj,
 			LogFullDebug(COMPONENT_STATE, "Lock success");
 			break;
 		case STATE_LOCK_CONFLICT:
-			LogLock(COMPONENT_STATE, NIV_FULL_DEBUG,
+			LogLock(COMPONENT_STATE, NIV_EVENT,
 				"Conflict from FSAL",
 				obj, *holder, conflict);
 			break;
@@ -2474,9 +2488,9 @@ state_status_t state_lock(struct fsal_obj_handle *obj,
 					 op_ctx_tmp_export_path(op_ctx, &tmp),
 					 op_ctx->ctx_export->export_id,
 					 op_ctx_export_path(op_ctx));
-				LogEntry(
-					"Found lock entry belonging to another export",
-					found_entry);
+				LogEntryEvent(
+					      "Found lock entry belonging to another export",
+					      found_entry);
 
 				tmp_put_exp_paths(&tmp);
 
@@ -2494,7 +2508,7 @@ state_status_t state_lock(struct fsal_obj_handle *obj,
 			 * Just return with blocked status. Client may be
 			 * polling.
 			 */
-			LogEntry("Found blocked", found_entry);
+			LogEntryEvent("Found blocked", found_entry);
 			status = STATE_LOCK_BLOCKED;
 			return status;
 		}
@@ -2519,8 +2533,8 @@ recheck_for_conflicting_entries:
 				 op_ctx->ctx_export->export_id,
 				 op_ctx_export_path(op_ctx));
 
-			LogEntry("Found lock entry belonging to another export",
-				 found_entry);
+			LogEntryEvent("Found lock entry belonging to another export",
+				      found_entry);
 
 			tmp_put_exp_paths(&tmp);
 
@@ -2545,7 +2559,7 @@ recheck_for_conflicting_entries:
 				/* Found a conflicting lock, break out of loop.
 				 * Also indicate overlap hint.
 				 */
-				LogEntry("Conflicts with", found_entry);
+				LogEntryEvent("Conflicts with", found_entry);
 				LogList("Locks", obj,
 					&obj->state_hdl->file.lock_list);
 				state_owner_t *cf_own = found_entry->sle_owner;
@@ -2606,7 +2620,7 @@ recheck_for_conflicting_entries:
 						obj->state_hdl, found_entry);
 				}
 
-				LogEntry("Found existing", found_entry);
+				LogEntryEvent("Found existing", found_entry);
 
 				if (found_entry->sle_state != state) {
 					state_t *old_state = NULL;
@@ -2757,7 +2771,7 @@ recheck_for_conflicting_entries:
 		/* A lock downgrade could unblock blocked locks */
 		grant_blocked_locks(obj->state_hdl);
 	} else if (status == STATE_LOCK_CONFLICT) {
-		LogEntry("Conflict in FSAL for", found_entry);
+		LogEntryEvent("Conflict in FSAL for", found_entry);
 
 		/* Discard lock entry */
 		remove_from_locklist(found_entry);
@@ -2788,7 +2802,7 @@ recheck_for_conflicting_entries:
 		}
 
 		/* Insert entry into lock list */
-		LogEntry("FSAL block for", found_entry);
+		LogEntryEvent("FSAL block for", found_entry);
 
 		glist_add_tail(&obj->state_hdl->file.lock_list,
 			       &found_entry->sle_list);

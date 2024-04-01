@@ -567,8 +567,8 @@ nfsstat4 Process_nfs4_conflict(LOCK4denied *denied, state_owner_t *holder,
 		denied->owner.owner.owner_val = unknown_owner.so_owner_val;
 	}
 
-	LogFullDebug(COMPONENT_STATE, "denied->owner.owner.owner_val = %p",
-		     denied->owner.owner.owner_val);
+	LogEvent(COMPONENT_STATE, "denied->owner.owner.owner_val = %p",
+		 denied->owner.owner.owner_val);
 
 	if (holder != NULL && holder->so_type == STATE_LOCK_OWNER_NFSV4)
 		denied->owner.clientid =

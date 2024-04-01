@@ -229,14 +229,19 @@ enum nfs_req_result nfs4_op_lockt(struct nfs_argop4 *op, compound_data_t *data,
 		/* A conflicting lock from a different lock_owner,
 		 * returns NFS4ERR_DENIED
 		 */
-		LogStateOwner("Conflict: ", conflict_owner);
-
+		char str[LOG_BUFF_LEN];
+		struct display_buffer dspbuf = {
+					sizeof(str), str, str};
+		display_owner(&dspbuf, conflict_owner);
+		LogEvent(COMPONENT_NFS_V4_LOCK, "Conflict: %s", str);
 		res_LOCKT4->status = Process_nfs4_conflict(
 						&res_LOCKT4->LOCKT4res_u.denied,
 						conflict_owner,
 						&conflict_desc,
 						data);
 	} else {
+		LogEvent(COMPONENT_NFS_V4_LOCK, "LOCKT failed with status %s",
+			 state_err_str(state_status));
 		/* Return result */
 		res_LOCKT4->status = nfs4_Errno_state(state_status);
 
