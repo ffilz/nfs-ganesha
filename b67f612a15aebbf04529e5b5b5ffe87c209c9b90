@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8cd82d_9c0bb9a5",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T14:42:24Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\t\tif(dest-\u003eacl !\u003d NULL) {",
+      "revId": "b67f612a15aebbf04529e5b5b5ffe87c209c9b90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977f49d5_15ca2fb3",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T14:42:24Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif(dest-\u003eacl !\u003d NULL) {\n+\t\t\tdest-\u003evalid_mask \u0026\u003d ~ATTR_ACL;\n+\t\t}",
+      "revId": "b67f612a15aebbf04529e5b5b5ffe87c209c9b90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
