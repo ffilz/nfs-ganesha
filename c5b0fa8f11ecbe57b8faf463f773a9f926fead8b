@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99cac6c7_e3cb1028",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T15:57:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t  FSAL_ACE_PERM_ADD_SUBDIRECTORY);",
+      "revId": "c5b0fa8f11ecbe57b8faf463f773a9f926fead8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6049e9ca_7517e69d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T15:57:04Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif ((attrs-\u003emode \u0026 S_IXGRP) \u003d\u003d 0) {\n+\t\t\t\tGET_FSAL_ACE_PERM(*dace) \u0026\u003d ~FSAL_ACE_PERM_EXECUTE;\n+\t\t\t}",
+      "revId": "c5b0fa8f11ecbe57b8faf463f773a9f926fead8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab694da2_687d5401",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T15:57:04Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tGET_FSAL_ACE_PERM(*dace) \u0026\u003d ~FSAL_ACE_PERM_EXECUTE;",
+      "revId": "c5b0fa8f11ecbe57b8faf463f773a9f926fead8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
