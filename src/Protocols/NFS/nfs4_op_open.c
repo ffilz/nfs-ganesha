@@ -486,7 +486,7 @@ static void get_delegation(compound_data_t *data, OPEN4args *args,
 	state_status = acquire_lease_lock(ostate, clientowner, new_state);
 	if (state_status != STATE_SUCCESS) {
 		if (args->claim.claim != CLAIM_PREVIOUS) {
-			LogDebug(COMPONENT_NFS_V4_LOCK,
+			LogEvent(COMPONENT_NFS_V4_LOCK,
 				 "get delegation call added state but failed to lock with status %s",
 				 state_err_str(state_status));
 			state_del_locked(new_state);

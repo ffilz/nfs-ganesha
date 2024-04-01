@@ -94,7 +94,7 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 		if (!nfs_get_grace_status(arg->reclaim)) {
 			grace_ref = false;
 			res->res_nlm4.stat.stat = NLM4_DENIED_GRACE_PERIOD;
-			LogDebug(COMPONENT_NLM,
+			LogEvent(COMPONENT_NLM,
 				 "REQUEST RESULT:%s in grace %s %s",
 				 arg->reclaim ? " NOT" : "",
 				 proc_name,
@@ -121,7 +121,7 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	if (rc >= 0) {
 		/* Present the error back to the client */
 		res->res_nlm4.stat.stat = (nlm4_stats) rc;
-		LogDebug(COMPONENT_NLM,
+		LogEvent(COMPONENT_NLM,
 			 "REQUEST RESULT: %s %s",
 			 proc_name,
 			 lock_result_str(res->res_nlm4.stat.stat));
@@ -131,7 +131,7 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 
 	/* Check if v4 delegations conflict with v3 op */
 	if (state_deleg_conflict(obj, lock.lock_type == FSAL_LOCK_W)) {
-		LogDebug(COMPONENT_NLM,
+		LogEvent(COMPONENT_NLM,
 			 "NLM lock request DROPPED due to delegation conflict");
 		rc = NFS_REQ_DROP;
 		goto out_dec;
@@ -167,6 +167,11 @@ int nlm4_Lock(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 
 		if (state_status == STATE_IN_GRACE)
 			res->res_nlm4.stat.stat = NLM4_DENIED_GRACE_PERIOD;
+
+		LogEvent(COMPONENT_NLM,
+			 "REQUEST RESULT: state_lock %s %s",
+			 proc_name,
+			 lock_result_str(res->res_nlm4.stat.stat));
 	} else {
 		res->res_nlm4.stat.stat = NLM4_GRANTED;
 	}

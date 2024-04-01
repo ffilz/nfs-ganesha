@@ -111,8 +111,8 @@ int nlm4_Test(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	if (rc >= 0) {
 		/* resent the error back to the client */
 		res->res_nlm4.stat.stat = (nlm4_stats) rc;
-		LogDebug(COMPONENT_NLM,
-			 "REQUEST RESULT: nlm4_Unlock %s",
+		LogEvent(COMPONENT_NLM,
+			 "REQUEST RESULT: NLM4_TEST %s",
 			 lock_result_str(res->res_nlm4.stat.stat));
 		goto out;
 	}
@@ -127,7 +127,17 @@ int nlm4_Test(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	if (state_status != STATE_SUCCESS) {
 		test_stat->stat = nlm_convert_state_error(state_status);
 
+		LogEvent(COMPONENT_NLM,
+			 "REQUEST RESULT: state_test %s",
+			 lock_result_str(res->res_nlm4.stat.stat));
+
 		if (state_status == STATE_LOCK_CONFLICT) {
+			char str[LOG_BUFF_LEN];
+			struct display_buffer dspbuf = {
+						sizeof(str), str, str};
+			display_owner(&dspbuf, holder);
+			LogEvent(COMPONENT_NLM, "Conflict: %s", str);
+
 			nlm_process_conflict(&test_stat->nlm4_testrply_u.holder,
 					     holder,
 					     &conflict);

@@ -664,7 +664,7 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 				  &conflict_desc);
 
 	if (state_status != STATE_SUCCESS) {
-		LogDebug(COMPONENT_NFS_V4_LOCK, "LOCK failed with status %s",
+		LogEvent(COMPONENT_NFS_V4_LOCK, "LOCK failed with status %s",
 			 state_err_str(state_status));
 
 		if (state_status == STATE_LOCK_CONFLICT) {
@@ -672,6 +672,11 @@ enum nfs_req_result nfs4_op_lock(struct nfs_argop4 *op,
 			 * returns NFS4ERR_DENIED, but check that the
 			 * response will fit, if not, return response error.
 			 */
+			char str[LOG_BUFF_LEN];
+			struct display_buffer dspbuf = {
+						sizeof(str), str, str};
+			display_owner(&dspbuf, conflict_owner);
+			LogEvent(COMPONENT_NFS_V4_LOCK, "Conflict: %s", str);
 			res_LOCK4->status = Process_nfs4_conflict(
 						&res_LOCK4->LOCK4res_u.denied,
 						conflict_owner,
