@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3b795f_77eb9bf3",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T23:12:11Z",
+      "side": 0,
+      "message": "This does make sense",
+      "revId": "b125bee3622a9f740934563cfabe09c7851a36ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff2e6ab_ce7b5421",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T23:12:11Z",
+      "side": 0,
+      "message": "But this doesn\u0027t, see man(2) _exit. It exits the process immediately without doing any extras libc does on exit like cleanups...\n\nSee commit 5d23a4d1b03b10258d6359a0abf1f39073ce0db1 which changed from exit to _exit.",
+      "revId": "b125bee3622a9f740934563cfabe09c7851a36ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
