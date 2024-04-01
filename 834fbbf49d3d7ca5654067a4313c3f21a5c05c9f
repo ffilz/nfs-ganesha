@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b4a6695_e984d40b",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T18:07:39Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n \t\tif (IS_FSAL_ACE_INHERIT_ONLY(*dace) ||\n \t\t    (!IS_FSAL_ACE_PERM(*dace)))\n+\t\t{",
+      "revId": "834fbbf49d3d7ca5654067a4313c3f21a5c05c9f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
