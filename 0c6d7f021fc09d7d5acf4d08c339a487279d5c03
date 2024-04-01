@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e00c88e_cda3de3b",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T23:51:22Z",
+      "side": 1,
+      "message": "Please fix these...",
+      "parentUuid": "90021669_022ee1ff",
+      "revId": "0c6d7f021fc09d7d5acf4d08c339a487279d5c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "152aec4b_4e7445e4",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -133,6 +151,24 @@
       "writtenOn": "2024-04-01T15:59:46Z",
       "side": 1,
       "message": "ERROR: trailing statements should be on next line\n+\tif (!fsal_check_ace_couple(ace, FSAL_ACE_SPECIAL_EVERYONE)) return false;",
+      "revId": "0c6d7f021fc09d7d5acf4d08c339a487279d5c03",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2c354f5_82a43e12",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T23:51:22Z",
+      "side": 1,
+      "message": "Fix the previous error and this will go away...",
+      "parentUuid": "f1013724_51405099",
       "revId": "0c6d7f021fc09d7d5acf4d08c339a487279d5c03",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
