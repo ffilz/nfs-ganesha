@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "835cb68f_b58946a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-01T23:59:18Z",
+      "side": 1,
+      "message": "This is going to make Ganesha VERY chatty when byte range locks are used. What is the need to make these EVENT? Why does the sysadmin need to know about them?\n\nSeeing some other log level escalation, I wonder if we need a log level between INFO and DEBUG that is \"sysdamin\" level debug? Assaf - what do you think?",
+      "revId": "899954529b57ca2d6ed95282d8e0dd4a4f7fd77a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db168d12_7375008d",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 3
