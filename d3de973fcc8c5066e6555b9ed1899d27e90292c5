@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bda739e_e45b86c8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tfor (who \u003d FSAL_ACE_SPECIAL_OWNER; who \u003c\u003d FSAL_ACE_SPECIAL_EVERYONE; who++) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb793445_fd799aa1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:WxV)\n+\t\tuint32_t allowed \u003d0, denied \u003d 0;\n \t\t                 ^",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3d0c193_508fee95",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tconst fsal_ace_t *ace \u003d \u0026attrs-\u003eacl-\u003eaces[i];\n+\t\t\tif (!IS_FSAL_ACE_PERM(*ace) || IS_FSAL_ACE_INHERIT_ONLY(*ace)) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a4f062c_553ace15",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (!IS_FSAL_ACE_PERM(*ace) || IS_FSAL_ACE_INHERIT_ONLY(*ace)) {\n+\t\t\t\tcontinue;\n+\t\t\t}",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ca0e833_0b6ab699",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (!IS_FSAL_ACE_PERM(*ace) || IS_FSAL_ACE_INHERIT_ONLY(*ace)) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f756574_421ab043",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (!IS_FSAL_ACE_SPECIAL_ID(*ace)) {\n+\t\t\t\tcontinue;\n+\t\t\t}",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca13ef35_cbf5fd0c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (!IS_FSAL_ACE_USER(*ace, who) \u0026\u0026 !IS_FSAL_ACE_SPECIAL_EVERYONE(*ace)) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb832f6_6d178757",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (!IS_FSAL_ACE_USER(*ace, who) \u0026\u0026 !IS_FSAL_ACE_SPECIAL_EVERYONE(*ace)) {\n+\t\t\t\tcontinue;\n+\t\t\t}",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d96f9e3_9c278c1a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tif (IS_FSAL_ACE_ALLOW(*ace) \u0026\u0026 (denied \u0026 modes[0]) \u003d\u003d 0) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e547a83b_f03f69fd",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\t\t\tif (IS_FSAL_ACE_ALLOW(*ace) \u0026\u0026 (denied \u0026 modes[0]) \u003d\u003d 0) {\n[...]\n+\t\t\t\t} else {\n[...]",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4403c336_1d7141bc",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (IS_FSAL_ACE_WRITE_DATA(*ace) || IS_FSAL_ACE_APPEND_DATA(*ace)) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a99577_0183f1b3",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\t\t\tif (IS_FSAL_ACE_ALLOW(*ace) \u0026\u0026 (denied \u0026 modes[1]) \u003d\u003d 0) {\n[...]\n+\t\t\t\t} else {\n[...]",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8f1b77f_eb6baaba",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tif (IS_FSAL_ACE_ALLOW(*ace) \u0026\u0026 (denied \u0026 modes[1]) \u003d\u003d 0) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a89dcf83_ee9eadd0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tif (IS_FSAL_ACE_ALLOW(*ace) \u0026\u0026 (denied \u0026 modes[2]) \u003d\u003d 0) {",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8aa9ebd_0d85ccd0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-01T23:00:40Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\t\t\tif (IS_FSAL_ACE_ALLOW(*ace) \u0026\u0026 (denied \u0026 modes[2]) \u003d\u003d 0) {\n[...]\n+\t\t\t\t} else {\n[...]",
+      "revId": "d3de973fcc8c5066e6555b9ed1899d27e90292c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
