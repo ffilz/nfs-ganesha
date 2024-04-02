@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7ff73d3_98425fa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-04-02T06:06:41Z",
+      "side": 1,
+      "message": "Yeah...if there were conflicts, then needed these logs to debug easily who had the previous conflicting accesses...And yeah, post the issue, we could always ask to repro, by enabling the module logs, but these sometimes were not helping...hence thought of making the conflicting access logs to Event, so that we could debug better...\nAlso like you mentioned, if we have event logs in application failure paths, we would end up flooding logs...",
+      "parentUuid": "835cb68f_b58946a3",
+      "revId": "899954529b57ca2d6ed95282d8e0dd4a4f7fd77a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db168d12_7375008d",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 3
