@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdfc9048_979f6364",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:40:02Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// In order to follow RFC8881 and knfsd behavior, create ACL from the mode bits.",
+      "revId": "37f436ee84efd1dea3955755c7d434c8d6c9cc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a1203c_0344e4ed",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:40:02Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t// In order to follow RFC8881 and knfsd behavior, create ACL from the mode bits.",
+      "revId": "37f436ee84efd1dea3955755c7d434c8d6c9cc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210cb2b4_d38be74f",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:40:02Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Allocated objects will be freed by the normal flow which call fsal_release_attrs.",
+      "revId": "37f436ee84efd1dea3955755c7d434c8d6c9cc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e46e8aa2_3078d4ed",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:40:02Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t// Allocated objects will be freed by the normal flow which call fsal_release_attrs.",
+      "revId": "37f436ee84efd1dea3955755c7d434c8d6c9cc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd586087_3b97e437",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:40:02Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tfsal_status_t status \u003d fsal_mode_to_acl(args-\u003eattrs, NULL);\n+\t\tif (FSAL_IS_ERROR(status)) {",
+      "revId": "37f436ee84efd1dea3955755c7d434c8d6c9cc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2088de7_07876a3a",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:40:02Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tLogWarn(COMPONENT_NFS_V4, \"Failed in creating ACL from mode bits. Status: %u\", status.major);",
+      "revId": "37f436ee84efd1dea3955755c7d434c8d6c9cc6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
