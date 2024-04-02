@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a8cfeb_e4eea8c6",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:00:11Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tfsal_acl_data_t acl_data;\n+\tacl_data.aces \u003d nfs4_ace_alloc(naces);",
+      "revId": "9180e836ae22851a29921667a6fc2b7d6763c56c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d42308_67ea3261",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:00:11Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tfsal_acl_status_t acl_status;\n+\tacl_data.naces \u003d naces;",
+      "revId": "9180e836ae22851a29921667a6fc2b7d6763c56c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e62502_3b10e6a8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:00:11Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attrs-\u003eacl \u003d\u003d NULL) {\n+\t\tLogFatal(COMPONENT_FSAL, \"Failed in nfs4_acl_new_entry\");\n+\t}",
+      "revId": "9180e836ae22851a29921667a6fc2b7d6763c56c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
