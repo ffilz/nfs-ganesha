@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2da5b614_fb2e4206",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:35:02Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tfsal_acl_data_t acl_data;\n+\tacl_data.naces \u003d 6;",
+      "revId": "4be649dae575a7c9c859cccc69ee979ae8cc7540",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ab96afb_d1989015",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 5
@@ -14,6 +31,57 @@
       "writtenOn": "2024-04-01T22:49:06Z",
       "side": 1,
       "message": "Please move all declarations to the top of the function",
+      "revId": "4be649dae575a7c9c859cccc69ee979ae8cc7540",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f482505_75535372",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:35:02Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tfsal_acl_status_t acl_status;\n+\tattrs-\u003eacl \u003d nfs4_acl_new_entry(\u0026acl_data, \u0026acl_status);",
+      "revId": "4be649dae575a7c9c859cccc69ee979ae8cc7540",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7b0cf7_c2646103",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:35:02Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attrs-\u003eacl \u003d\u003d NULL) {\n+\t\tLogFatal(COMPONENT_FSAL, \"Failed in nfs4_acl_new_entry, acl_status %d\", acl_status);\n+\t}",
+      "revId": "4be649dae575a7c9c859cccc69ee979ae8cc7540",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ce3e7a_c67c7e2f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-02T06:35:02Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogFatal(COMPONENT_FSAL, \"Failed in nfs4_acl_new_entry, acl_status %d\", acl_status);",
       "revId": "4be649dae575a7c9c859cccc69ee979ae8cc7540",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
