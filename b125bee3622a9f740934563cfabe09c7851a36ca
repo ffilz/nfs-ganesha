@@ -16,6 +16,24 @@
       "message": "why are these renames part of this patch when you don\u0027t rename encode/decode acl?",
       "revId": "b125bee3622a9f740934563cfabe09c7851a36ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fbabf15_75ccf476",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-04-02T17:53:52Z",
+      "side": 1,
+      "message": "Functions with these names are defined in fsal_commonlib.h, so they conflict",
+      "parentUuid": "9f4bb24c_2d1f96da",
+      "revId": "b125bee3622a9f740934563cfabe09c7851a36ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
