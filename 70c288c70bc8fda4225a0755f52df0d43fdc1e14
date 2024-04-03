@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa6336c_e3766a36",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstatic bool first_time \u003d true;\n+\tif (first_time) {",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4c30659_71bc0e95",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst connection_manager__callback_context_t old \u003d callback_context;\n+\tcallback_context \u003d callback_default;",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe02a0f5_74fba091",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Drain was successful",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25498fe7_07681f79",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Drain was vacuously successful, there were no active connections by",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21f1a43f_6fd5c8c6",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// the client",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "772461e6_1bc752ed",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Drain failed, most likely due to a new incoming connection that",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b35d232_7f5e66e3",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// aborted the draining process, or because we were busy draining other",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24482ffd_47c176f6",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// servers",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65290202_73ae4846",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Drain failed due to timeout",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51913388_52b727cf",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// User provided context",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c345a931_bb18e79d",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Client to drain",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fffd8f6_3138e199",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Client address string for logging/debugging",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4caa844e_a564ecf7",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Timeout for the draining",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b1b16d3_56593fec",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// User provided context",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5573be1a_7ec72400",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Sends a \"DRAIN\" request to the other Ganesha servers in the cluster",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f5266a_33a4368c",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Sets the callbacks to be called on draining",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28567d37_fca1062b",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Can be called only on init or after \"clear\" was called",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "305b3a81_ef337b14",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Clears the drain callbacks, and returns the last stored callbacks struct",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b799233_f776dea3",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:14:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Can be called only after \"set\" was called",
+      "revId": "70c288c70bc8fda4225a0755f52df0d43fdc1e14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
