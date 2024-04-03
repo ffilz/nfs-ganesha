@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff7088d7_07ed7cbc",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fde509a7_81512291",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "018016e3_3de3bdfd",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a26e8d_1afac5d0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "018016e3_3de3bdfd",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ad57072_55b5f283",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-04-02T06:28:36Z",
       "side": 1,
       "message": "ERROR: trailing statements should be on next line\n+\t\t\tif (!IS_FSAL_ACE_ALLOW(aces[i])) return false;",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1d7a88_72f5ff5f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ad57072_55b5f283",
       "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +140,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5557ef04_f1433e19",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9954f183_1e3f2352",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35be98af_86bcd7ce",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2240d6f5_50ee9431",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99f2f2dd_fd127d48",
@@ -99,6 +189,24 @@
       "writtenOn": "2024-04-02T06:28:36Z",
       "side": 1,
       "message": "ERROR: trailing statements should be on next line\n+\tif (!fsal_check_ace_couple(ace, FSAL_ACE_SPECIAL_GROUP)) return false;",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae056581_f69fd7fd",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99f2f2dd_fd127d48",
       "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +245,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "424f9836_5eb79b3e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84dcac52_0e6b5c9e",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c95207b_66a82444",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a71ccafd_82faf031",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdd32159_704a974e",
@@ -150,6 +294,24 @@
       "writtenOn": "2024-04-02T06:28:36Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tbool can_reuse \u003d fsal_can_reuse_mode_to_acl(sacl);\n+\tLogFullDebug(COMPONENT_FSAL, \"Can reuse aces for mode: %d\", can_reuse);",
+      "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7a6f329_3cee50c1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdd32159_704a974e",
       "revId": "dfc82d0ed372c86f56000f55526eb494bf44d1a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
