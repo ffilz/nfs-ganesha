@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a47783f_072ef541",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T20:18:11Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (client-\u003econnections_count \u003d\u003d 0) {\n+\t\tPTHREAD_COND_broadcast(\u0026client-\u003econd_change);\n+\t}",
+      "revId": "f12bc9c9fbd51c5360664b2b0e85fed643348a0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c7b797_eaac3ca2",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T20:18:11Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Called when a connection is closed",
+      "revId": "f12bc9c9fbd51c5360664b2b0e85fed643348a0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e96fba_31a2814f",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T20:18:11Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Updates the connection list, and potentially notifies the draining process",
+      "revId": "f12bc9c9fbd51c5360664b2b0e85fed643348a0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
