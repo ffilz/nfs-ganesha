@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b1fa79_e3c2c65a",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:28:43Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tbool is_managed; // When false, fields below are not initialized",
+      "revId": "ef4554ebb0bb51648da64110be4cce571883448b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3f5ca04_001f8324",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:28:43Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// We don\u0027t have ownership on XPRT, when the XPRT is destroyed it calls",
+      "revId": "ef4554ebb0bb51648da64110be4cce571883448b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1b9dad_f3952910",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:28:43Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// connection_manager__connection_finished which destroys this struct",
+      "revId": "ef4554ebb0bb51648da64110be4cce571883448b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e00fb7_9c1db637",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:28:43Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tSVCXPRT *xprt;\n \t        ^",
+      "revId": "ef4554ebb0bb51648da64110be4cce571883448b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "421c4043_a92f814e",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:28:43Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// We have ownership on gsh_client, and it should be released when this",
+      "revId": "ef4554ebb0bb51648da64110be4cce571883448b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfe6dd7_2b2a3171",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:28:43Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// struct is destroyed",
+      "revId": "ef4554ebb0bb51648da64110be4cce571883448b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa8b8ac9_7aea79ae",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:28:43Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// connections list in connection_manager__client_t",
+      "revId": "ef4554ebb0bb51648da64110be4cce571883448b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
