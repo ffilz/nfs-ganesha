@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe64f9a_ccafb219",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-03T14:59:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0883a68d_af8ea846",
+      "revId": "d94389ccd502bd9230b5ddfe64f59e7d4306eeda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93754f83_69c7c06a",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-03T13:47:51Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+#endif // CONNECTION_MANAGER_H",
+      "revId": "d94389ccd502bd9230b5ddfe64f59e7d4306eeda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc5dd698_dc41299c",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-03T14:59:58Z",
+      "side": 1,
+      "message": "Fix this please",
+      "parentUuid": "93754f83_69c7c06a",
       "revId": "d94389ccd502bd9230b5ddfe64f59e7d4306eeda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
