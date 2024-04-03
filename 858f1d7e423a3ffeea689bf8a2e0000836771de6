@@ -1,0 +1,378 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2100ca62_c568467f",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Assumes the client mutex is held",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c29d842_2ff92929",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Setting Timeout\u003d0, so the TCP connection will send RST on close()",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d2fb92_0c0ecb9f",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// without waiting for the client\u0027s response. This is needed in case",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd2e6334_2534661d",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// the client was migrated by a load balancer to another server, and",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "323274ee_132e4547",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// we want the connection to close quickly.",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6211f6ed_50cca05a",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Linger is still enabled, so close() will block until the connection",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e664d379_976dab41",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// is closed.",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "459c3e4a_1851fd20",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Assumes the client mutex is held",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd80158d_58ca8efe",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// TODO: Extends client state lease (see explanation in header)",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a249da_8858ddc8",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Note mutex is temporarily released while waiting, and other",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c88e34b1_06b06381",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// threads can abort the draining",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a48850ee_62f636bf",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Since we have (mutex \u0026\u0026 DRAINING), we\u0027re allowed to change",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49dff808_94ec6641",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// the state to DRAINED/ACTIVE. This also holds in more complex",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f54d12b7_15982e4a",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// scenarios where the draining was aborted by another thread",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3759ad3_cd93678c",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// and then restarted by a third thread.",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e857f86a_b3663de8",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Fallthrough",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db50ebf_ae94016f",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// Fallthrough",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec2dd17_edfcb45d",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Calls SVC_DESTROY on the client\u0027s connections, and block-waits until they",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21d83cb_fa05cb7e",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// are closed, or until timeout.",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb7204ee_7c2fb91b",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// The \"drain_and_disconnect_other_servers\" callback should send a \"DRAIN\"",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749d5119_137554a3",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// request to the other Ganesha servers in the cluster. When a \"DRAIN\" request",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10536f51_420e4490",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T22:29:36Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// is received, this method should be called.",
+      "revId": "858f1d7e423a3ffeea689bf8a2e0000836771de6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
