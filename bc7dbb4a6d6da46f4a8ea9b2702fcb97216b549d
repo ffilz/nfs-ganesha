@@ -16,6 +16,24 @@
       "message": "Is this actually recommended by RFC? Ganesha doesn\u0027t enforce DENY READ_ATTR and READ_ACL (for which reason, it is actually supposed to reject any ACL that tries to DENY those). Adding ALLOW for those might mistakenly imply DENY is supported.",
       "revId": "bc7dbb4a6d6da46f4a8ea9b2702fcb97216b549d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "028e5a6c_97e2e61e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-03T16:30:16Z",
+      "side": 1,
+      "message": "The RFC doesn\u0027t explicitly refer to this, but this is the behavior of the nfsd and also NetApp so I think that it is a good idea to do the same.\nAfter all, as you say, this is what ganesha actually do so better to expose it to the user like the other known servers are doing.",
+      "parentUuid": "3fb507d2_f21eb36b",
+      "revId": "bc7dbb4a6d6da46f4a8ea9b2702fcb97216b549d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
