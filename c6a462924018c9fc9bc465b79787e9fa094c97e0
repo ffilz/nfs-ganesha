@@ -1,0 +1,446 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353d247a_3f6ceeaa",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Assumes the client mutex is held",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fefd7cb_dca58fa5",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Assumes the client mutex is held",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960d79e4_e20106f4",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Assumes the client mutex is held",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703306db_7bd34aae",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\twhile (client-\u003estate \u003d\u003d initial_state) {\n+\t\tcondition_wait(client);\n+\t}",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d813899a_ec8745bd",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Tries to activate the client if it\u0027s not already activated.",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6313d47d_0b0ec41b",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// The \"connection\" parameter is used for logging purposes only, the entity",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c321c00_886acec8",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// being activated is the client.",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0475dcd_0e183550",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Assumes the client mutex is held.",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c383206_633c7317",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// It\u0027s OK to unlock because no other thread can change the",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c86cd04_9536c4f8",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// state while ACTIVATING.",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ada7970_52bc02e9",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"fd %d: Must call nfs_rpc_alloc_user_data before \"\n+\t\t\t\"calling %s\", xprt-\u003exp_fd, __func__);",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c20e3397_8eadb502",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// refcount is released in connection_manager__connection_finished",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05d111e_10485019",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// No need to hold XPRT refcount, because the connection struct is",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1adf6fd_50d3cb1d",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// stored in the XPRT custom user data. When the XPRT is destroyed it",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b08bffb_5f2e0a31",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// calls connection_manager__connection_finished",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6812246b_3b6affa6",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// The new connection is allowed to be created and execute requests",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b23c2d7_b3418ab8",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// The draining process in other servers failed, the new connection",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71312c5e_5b1f1112",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// should be dropped",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56919b6d_a863fa60",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Called when a new connection is created",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfbfcddb_a0dad6d8",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// When this module is enabled, this method blocks until all the other Ganesha",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3900d69c_29493fb6",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// servers in the cluster drain and close the connections by this client",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "235529b2_b303db52",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Might fail when timeout is reached, and in that case the connection is",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76335afa_5dbd7abc",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// destroyed",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d055938c_24fdec0d",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// In case there are any draining processes in progress",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2737f8_b5e7dd71",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// (connection_manager__drain_and_disconnect_local), they are aborted so the new",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ded5a2_a2aa2dc1",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T19:58:53Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// connection gets the priority.",
+      "revId": "c6a462924018c9fc9bc465b79787e9fa094c97e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
