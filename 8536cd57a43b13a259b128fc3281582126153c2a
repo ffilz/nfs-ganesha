@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d3b912_97679bca",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:05:50Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// TODO: b/298325057 - Monitor number of clients",
+      "revId": "8536cd57a43b13a259b128fc3281582126153c2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a89503_e5ead2b2",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T16:05:50Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// TODO: b/298325057 - Free resources",
+      "revId": "8536cd57a43b13a259b128fc3281582126153c2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
