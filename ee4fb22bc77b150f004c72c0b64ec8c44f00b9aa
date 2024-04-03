@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a3d9254_194b11a0",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "WARNING: do {} while (0) macros should not be semicolon terminated\n+#define LogFatalClient(client, format, args...)                                \\\n+\tdo {                                                                   \\\n+\t\tLogFatal(COMPONENT_XPRT, \"%s: \" format,                        \\\n+\t\t\tget_client_address_for_debugging(client), ##args);     \\\n+\t\tabort();                                                       \\\n+\t} while (0);",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10865bad_03e730bc",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// TODO: b/298325057 - Get client address from gsh_client.",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0bb361d_0030466c",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// In this state, new connections will transition to ACTIVATING state and",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d28716b_19cee748",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t// In this state, new connections will transition to ACTIVATING state and",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb6ddba_7e9dadd3",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// try to drain other servers",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62744263_19f6796d",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t// In this state, new connections will block-wait until the state is changed",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41109e3_bc2ef9d7",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// In this state, new connections will block-wait until the state is changed",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a17c9867_440a4f7b",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// In this state, new connections are allowed immediately, without going",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4299f09_243fea7b",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// through the process of draining other servers",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217ad4f3_faacb33a",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// In this state, new connections will abort the local draining process and",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd70150_4fb057c7",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t// In this state, new connections will abort the local draining process and",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66648775_36f237bc",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// transition back to ACTIVE state",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe030d70_9963d550",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\tpthread_mutex_t mutex;            // Protects this struct",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e658b59a_c5ae7d28",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Notified on state/connections change",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fa3ada_ebefd4a6",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// List of connection_manager__connection_t",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f39de5_c9fc6436",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Called from client_mgr when a new gsh_client is created.",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f21d2534_d0f7cd4b",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-03T14:07:31Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Called from client_mgr when a gsh_client is destroyed.",
+      "revId": "ee4fb22bc77b150f004c72c0b64ec8c44f00b9aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
