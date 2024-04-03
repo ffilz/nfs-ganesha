@@ -34,6 +34,24 @@
       "parentUuid": "3fb507d2_f21eb36b",
       "revId": "bc7dbb4a6d6da46f4a8ea9b2702fcb97216b549d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55de062_547d044b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-03T17:32:07Z",
+      "side": 1,
+      "message": "OK, that\u0027s fair. And if other implementations do the same, let\u0027s mirror them.\n\nLet\u0027s add a bit to the comments though to document that while we wouldn\u0027t enforce a DENY of these bits, we are making generated ACLs reflect that we don\u0027t block those.\n\nThough I think we do actually enforce READ_ACL against non-owner. But it is still fair to allow it in generated ACLs. Or maybe only @OWNER should have READ_ACL by default?",
+      "parentUuid": "028e5a6c_97e2e61e",
+      "revId": "bc7dbb4a6d6da46f4a8ea9b2702fcb97216b549d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
