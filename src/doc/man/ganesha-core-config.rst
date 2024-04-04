@@ -221,6 +221,13 @@ enable_rpc_cred_fallback(bool,  default false)
     if  Manage_Gids=True and group resolution fails,
     then use gid data from rpc request.
 
+Enable_Connection_Manager(bool, default false)
+    When enabled, a client (from the same source IP address), is allowed to
+    be connected to a single Ganesha server at a specific point in time.
+    See details in connection_manager.h
+Connection_Manager_Timeout_sec(uint32, range 0 to UINT32_MAX, default 2*60)
+    Timeout for waiting until client is fully disconnected from other Ganesha
+    servers.
 
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
