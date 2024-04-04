@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c046081_caa6a012",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 991,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-04T05:58:55Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attrs-\u003eacl \u003d\u003d NULL) {\n+\t\tLogFatal(COMPONENT_FSAL, \"Failed in nfs4_acl_new_entry\");\n+\t}",
+      "revId": "5eddbaab8f098de7487f12ff477b038a2d406598",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
