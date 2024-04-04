@@ -36,6 +36,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c54dc42_75f00425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-04-04T09:44:54Z",
+      "side": 1,
+      "message": "Why every lock failure is an event ? If parallel applications are using the said file systems, then locking may fail. So current DEBUG level is correct.\nAdditional log statements are welcome, but with level DEBUG.",
+      "revId": "899954529b57ca2d6ed95282d8e0dd4a4f7fd77a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db168d12_7375008d",
