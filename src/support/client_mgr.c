@@ -183,6 +183,7 @@ struct gsh_client *get_gsh_client(sockaddr_t *client_ipaddr, bool lookup_only)
 		(void) strlcpy(cl->hostaddr_str, "<unknown>",
 			       sizeof(cl->hostaddr_str));
 	}
+	connection_manager__client_init(&cl->connection_manager);
 
 	PTHREAD_RWLOCK_wrlock(&client_by_ip.cip_lock);
 	node = avltree_insert(&cl->node_k, &client_by_ip.t);
@@ -214,6 +215,8 @@ void put_gsh_client(struct gsh_client *client)
 
 	new_refcnt = atomic_dec_int64_t(&client->refcnt);
 	assert(new_refcnt >= 0);
+	/* TODO: When we fix the resource leak (gsh_free), remember to call
+	 * also connection_manager__client_fini. */
 }
 
 /**
