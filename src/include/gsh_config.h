@@ -491,6 +491,16 @@ typedef struct nfs_core_param {
 	/** if  Manage_Gids=True and group resolution fails,
 	 *  then use gid data from rpc request */
 	bool enable_rpc_cred_fallback;
+	/** When enabled, a client (from the same source IP address), is
+	 *  allowed to be connected to a single Ganesha server at a specific
+	 *  point in time.
+	 *  See details in connection_manager.h
+	 */
+	bool enable_connection_manager;
+	/** Timeout for waiting until client is fully disconnected from other
+	 *  Ganesha servers.
+	 */
+	uint32_t connection_manager_timeout_sec;
 } nfs_core_parameter_t;
 
 /** @} */

@@ -333,6 +333,10 @@ static struct config_item core_params[] = {
 #endif
 	CONF_ITEM_BOOL("enable_rpc_cred_fallback", false,
 		       nfs_core_param, enable_rpc_cred_fallback),
+	CONF_ITEM_BOOL("Enable_Connection_Manager", false,
+		       nfs_core_param, enable_connection_manager),
+	CONF_ITEM_UI32("Connection_Manager_Timeout_sec", 0, UINT32_MAX, 2*60,
+		       nfs_core_param, connection_manager_timeout_sec),
 	CONFIG_EOL
 };
 

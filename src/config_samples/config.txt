@@ -201,6 +201,10 @@ NFS_CORE_PARAM {}
 
 	enable_rpc_cred_fallback(bool, default false)
 
+	Enable_Connection_Manager(bool, default false)
+
+	Connection_Manager_Timeout_sec(uint32, range 0 to UINT32_MAX, default 2*60)
+
 NFS_IP_NAME {}
 --------------
 
