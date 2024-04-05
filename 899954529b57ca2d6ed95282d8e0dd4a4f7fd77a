@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5a90a1e_3e7b6601",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-04-05T09:47:19Z",
+      "side": 1,
+      "message": "Yes, I missed to abandon off this change...once we have binary logs, this would ease debugging...having event logs in application failure paths, would end up flooding logs...",
+      "parentUuid": "7c54dc42_75f00425",
+      "revId": "899954529b57ca2d6ed95282d8e0dd4a4f7fd77a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db168d12_7375008d",
