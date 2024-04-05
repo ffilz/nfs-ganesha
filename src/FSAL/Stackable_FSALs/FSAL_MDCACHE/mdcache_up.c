@@ -266,7 +266,7 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 		goto put;
 	}
 
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 
 	if (attr->expire_time_attr != 0)
 		entry->attrs.expire_time_attr = attr->expire_time_attr;
@@ -417,7 +417,7 @@ mdc_up_update(const struct fsal_up_vector *vec, struct gsh_buffdesc *handle,
 		status = fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
 
 put:
 	mdcache_lru_unref(entry, LRU_ACTIVE_REF);

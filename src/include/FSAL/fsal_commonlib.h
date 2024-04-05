@@ -138,11 +138,11 @@ static inline void update_share_counters_locked(struct fsal_obj_handle *obj_hdl,
 						fsal_openflags_t old_openflags,
 						fsal_openflags_t new_openflags)
 {
-	PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&obj_hdl->obj_lock);
 
 	update_share_counters(share, old_openflags, new_openflags);
 
-	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 }
 
 fsal_status_t check_share_conflict(struct fsal_share *share,
@@ -177,12 +177,12 @@ check_share_conflict_and_update_locked(struct fsal_obj_handle *obj_hdl,
 {
 	fsal_status_t status;
 
-	PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&obj_hdl->obj_lock);
 
 	status = check_share_conflict_and_update(obj_hdl, share, old_openflags,
 						 new_openflags, bypass);
 
-	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 
 	return status;
 }

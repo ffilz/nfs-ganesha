@@ -104,9 +104,9 @@ int fsal_attach_export(struct fsal_module *fsal_hdl,
 void fsal_detach_export(struct fsal_module *fsal_hdl,
 			struct glist_head *obj_link)
 {
-	PTHREAD_RWLOCK_wrlock(&fsal_hdl->fsm_lock);
+	PTHREAD_MUTEX_lock(&fsal_hdl->fsm_lock);
 	glist_del(obj_link);
-	PTHREAD_RWLOCK_unlock(&fsal_hdl->fsm_lock);
+	PTHREAD_MUTEX_unlock(&fsal_hdl->fsm_lock);
 }
 
 /**
@@ -167,12 +167,12 @@ void fsal_obj_handle_init(struct fsal_obj_handle *obj, struct fsal_export *exp,
 {
 	obj->fsal = exp->fsal;
 	obj->type = type;
-	PTHREAD_RWLOCK_init(&obj->obj_lock, NULL);
+	PTHREAD_MUTEX_init(&obj->obj_lock, NULL);
 
 	if (add_to_fsal_handle) {
-		PTHREAD_RWLOCK_wrlock(&obj->fsal->fsm_lock);
+		PTHREAD_MUTEX_lock(&obj->fsal->fsm_lock);
 		glist_add(&obj->fsal->handles, &obj->handles);
-		PTHREAD_RWLOCK_unlock(&obj->fsal->fsm_lock);
+		PTHREAD_MUTEX_unlock(&obj->fsal->fsm_lock);
 	}
 }
 
@@ -180,11 +180,11 @@ void fsal_obj_handle_fini(struct fsal_obj_handle *obj,
 			  bool added_to_fsal_handle)
 {
 	if (added_to_fsal_handle) {
-		PTHREAD_RWLOCK_wrlock(&obj->fsal->fsm_lock);
+		PTHREAD_MUTEX_lock(&obj->fsal->fsm_lock);
 		glist_del(&obj->handles);
-		PTHREAD_RWLOCK_unlock(&obj->fsal->fsm_lock);
+		PTHREAD_MUTEX_unlock(&obj->fsal->fsm_lock);
 	}
-	PTHREAD_RWLOCK_destroy(&obj->obj_lock);
+	PTHREAD_MUTEX_destroy(&obj->obj_lock);
 	memset(&obj->obj_ops, 0, sizeof(obj->obj_ops));	/* poison myself */
 	obj->fsal = NULL;
 }
@@ -204,9 +204,9 @@ void fsal_pnfs_ds_fini(struct fsal_pnfs_ds *pds)
 {
 	assert(pds->fsal);
 
-	PTHREAD_RWLOCK_wrlock(&pds->fsal->fsm_lock);
+	PTHREAD_MUTEX_lock(&pds->fsal->fsm_lock);
 	glist_del(&pds->server);
-	PTHREAD_RWLOCK_unlock(&pds->fsal->fsm_lock);
+	PTHREAD_MUTEX_unlock(&pds->fsal->fsm_lock);
 
 	memset(&pds->s_ops, 0, sizeof(pds->s_ops));	/* poison myself */
 
@@ -1259,7 +1259,7 @@ fsal_status_t merge_share(struct fsal_obj_handle *orig_hdl,
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 	}
 
-	PTHREAD_RWLOCK_wrlock(&orig_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&orig_hdl->obj_lock);
 
 	if (dupe_share->share_access_read > 0 &&
 	    orig_share->share_deny_read > 0) {
@@ -1303,7 +1303,7 @@ fsal_status_t merge_share(struct fsal_obj_handle *orig_hdl,
 
  out_conflict:
 
-	PTHREAD_RWLOCK_unlock(&orig_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&orig_hdl->obj_lock);
 
 	return status;
 }
@@ -2469,7 +2469,7 @@ fsal_status_t fsal_start_global_io(struct fsal_fd **out_fd,
 								bypass);
 
 		if (FSAL_IS_ERROR(status)) {
-			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+			PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 			LogDebug(COMPONENT_FSAL,
 				 "check_share_conflict_and_update_locked failed with %s",
 				 fsal_err_txt(status));

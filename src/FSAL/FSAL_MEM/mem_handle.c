@@ -327,12 +327,12 @@ static void mem_insert_obj(struct mem_fsal_obj_handle *parent,
 	dirent->d_index = CityHash64(name, strlen(name));
 
 	/* Link into child */
-	PTHREAD_RWLOCK_wrlock(&child->obj_handle.obj_lock);
+	PTHREAD_MUTEX_lock(&child->obj_handle.obj_lock);
 	glist_add_tail(&child->dirents, &dirent->dlist);
-	PTHREAD_RWLOCK_unlock(&child->obj_handle.obj_lock);
+	PTHREAD_MUTEX_unlock(&child->obj_handle.obj_lock);
 
 	/* Link into parent */
-	PTHREAD_RWLOCK_wrlock(&parent->obj_handle.obj_lock);
+	PTHREAD_MUTEX_lock(&parent->obj_handle.obj_lock);
 
 	if (parent_pre_attrs_out != NULL)
 		mem_getattrs(&parent->obj_handle, parent_pre_attrs_out);
@@ -351,7 +351,7 @@ static void mem_insert_obj(struct mem_fsal_obj_handle *parent,
 	if (parent_post_attrs_out != NULL)
 		mem_getattrs(&parent->obj_handle, parent_post_attrs_out);
 
-	PTHREAD_RWLOCK_unlock(&parent->obj_handle.obj_lock);
+	PTHREAD_MUTEX_unlock(&parent->obj_handle.obj_lock);
 }
 
 /**
@@ -469,9 +469,9 @@ static void mem_remove_dirent_locked(struct mem_fsal_obj_handle *parent,
 	/* Take the child lock, to remove from the child.  This should not race
 	 * with @r mem_insert_obj since that takes the locks sequentially */
 	child = dirent->hdl;
-	PTHREAD_RWLOCK_wrlock(&child->obj_handle.obj_lock);
+	PTHREAD_MUTEX_lock(&child->obj_handle.obj_lock);
 	glist_del(&dirent->dlist);
-	PTHREAD_RWLOCK_unlock(&child->obj_handle.obj_lock);
+	PTHREAD_MUTEX_unlock(&child->obj_handle.obj_lock);
 
 	numkids = atomic_dec_uint32_t(&parent->mh_dir.numkids);
 	LogFullDebug(COMPONENT_FSAL, "%s numkids %"PRIu32, parent->m_name,
@@ -503,7 +503,7 @@ static void mem_remove_dirent(struct mem_fsal_obj_handle *parent,
 {
 	struct mem_dirent *dirent;
 
-	PTHREAD_RWLOCK_wrlock(&parent->obj_handle.obj_lock);
+	PTHREAD_MUTEX_lock(&parent->obj_handle.obj_lock);
 
 	if (parent_pre_attrs_out != NULL)
 		mem_getattrs(&parent->obj_handle, parent_pre_attrs_out);
@@ -515,7 +515,7 @@ static void mem_remove_dirent(struct mem_fsal_obj_handle *parent,
 	if (parent_post_attrs_out != NULL)
 		mem_getattrs(&parent->obj_handle, parent_post_attrs_out);
 
-	PTHREAD_RWLOCK_unlock(&parent->obj_handle.obj_lock);
+	PTHREAD_MUTEX_unlock(&parent->obj_handle.obj_lock);
 }
 
 /**
@@ -544,9 +544,9 @@ void mem_clean_export(struct mem_fsal_obj_handle *root)
 			mem_clean_export(child);
 		}
 
-		PTHREAD_RWLOCK_wrlock(&root->obj_handle.obj_lock);
+		PTHREAD_MUTEX_lock(&root->obj_handle.obj_lock);
 		mem_remove_dirent_locked(root, dirent);
-		PTHREAD_RWLOCK_unlock(&root->obj_handle.obj_lock);
+		PTHREAD_MUTEX_unlock(&root->obj_handle.obj_lock);
 	}
 
 }
@@ -976,7 +976,7 @@ static fsal_status_t mem_lookup(struct fsal_obj_handle *parent,
 	 * this directory.
 	 */
 	if (op_ctx->fsal_private != parent)
-		PTHREAD_RWLOCK_rdlock(&parent->obj_lock);
+		PTHREAD_MUTEX_lock(&parent->obj_lock);
 	else
 		LogFullDebug(COMPONENT_FSAL,
 			     "Skipping lock for %s",
@@ -992,7 +992,7 @@ static fsal_status_t mem_lookup(struct fsal_obj_handle *parent,
 
 out:
 	if (op_ctx->fsal_private != parent)
-		PTHREAD_RWLOCK_unlock(&parent->obj_lock);
+		PTHREAD_MUTEX_unlock(&parent->obj_lock);
 
 	if (!FSAL_IS_ERROR(status) && attrs_out != NULL) {
 		/* This is unlocked, however, for the most part, attributes
@@ -1044,7 +1044,7 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 	LogFullDebug(COMPONENT_FSAL, "hdl=%p, name=%s",
 		     myself, myself->m_name);
 
-	PTHREAD_RWLOCK_rdlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&dir_hdl->obj_lock);
 
 	/* Use fsal_private to signal to lookup that we hold
 	 * the lock.
@@ -1092,7 +1092,7 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 
 	op_ctx->fsal_private = NULL;
 
-	PTHREAD_RWLOCK_unlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&dir_hdl->obj_lock);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
@@ -1397,7 +1397,7 @@ static fsal_status_t mem_unlink(struct fsal_obj_handle *dir_hdl,
 		   myself->attrs.numlinks);
 #endif
 
-	PTHREAD_RWLOCK_wrlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&dir_hdl->obj_lock);
 
 	if (parent_pre_attrs_out != NULL)
 		mem_getattrs(dir_hdl, parent_pre_attrs_out);
@@ -1444,7 +1444,7 @@ unlock:
 	if (parent_post_attrs_out != NULL)
 		mem_getattrs(dir_hdl, parent_post_attrs_out);
 
-	PTHREAD_RWLOCK_unlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&dir_hdl->obj_lock);
 
 	return status;
 }
@@ -1619,7 +1619,7 @@ static fsal_status_t mem_open2_by_handle(struct fsal_obj_handle *obj_hdl,
 		 * that no I/O is in progress or can start before proceeding
 		 * past the above while loop.
 		 */
-		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+		PTHREAD_MUTEX_lock(&obj_hdl->obj_lock);
 
 		/* Now check the new share. */
 		status = check_share_conflict(&myself->mh_file.share, openflags,
@@ -1687,7 +1687,7 @@ exit:
 		}
 
 		/* Release obj_lock. */
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+		PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 	}
 
 	/* Indicate we are done with fd work and signal any waiters. */
@@ -2664,7 +2664,7 @@ fsal_status_t mem_create_handle(struct fsal_export *exp_hdl,
 		return fsalstat(ERR_FSAL_BADHANDLE, 0);
 	}
 
-	PTHREAD_RWLOCK_rdlock(&exp_hdl->fsal->fsm_lock);
+	PTHREAD_MUTEX_lock(&exp_hdl->fsal->fsm_lock);
 
 	glist_for_each(glist, &exp_hdl->fsal->handles) {
 		hdl = glist_entry(glist, struct fsal_obj_handle, handles);
@@ -2686,7 +2686,7 @@ fsal_status_t mem_create_handle(struct fsal_export *exp_hdl,
 #endif
 			*obj_hdl = hdl;
 
-			PTHREAD_RWLOCK_unlock(&exp_hdl->fsal->fsm_lock);
+			PTHREAD_MUTEX_unlock(&exp_hdl->fsal->fsm_lock);
 
 			if (attrs_out != NULL) {
 				fsal_copy_attrs(attrs_out, &my_hdl->attrs,
@@ -2700,7 +2700,7 @@ fsal_status_t mem_create_handle(struct fsal_export *exp_hdl,
 	LogDebug(COMPONENT_FSAL,
 		"Could not find handle");
 
-	PTHREAD_RWLOCK_unlock(&exp_hdl->fsal->fsm_lock);
+	PTHREAD_MUTEX_unlock(&exp_hdl->fsal->fsm_lock);
 
 	return fsalstat(ERR_FSAL_STALE, ESTALE);
 }

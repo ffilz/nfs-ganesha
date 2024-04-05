@@ -775,7 +775,7 @@ static fsal_status_t lzfs_int_open_by_handle(struct fsal_obj_handle *obj_hdl,
 		 * that no I/O is in progress or can start before proceeding
 		 * past the above while loop.
 		 */
-		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+		PTHREAD_MUTEX_lock(&obj_hdl->obj_lock);
 
 		/* Now check the new share. */
 		status = check_share_conflict(&lzfs_hdl->share, openflags,
@@ -870,7 +870,7 @@ exit:
 		}
 
 		/* Release obj_lock. */
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+		PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 	}
 
 	/* Indicate we are done with fd work and signal any waiters. */

@@ -3036,7 +3036,7 @@ struct fsal_module {
 				   library. NULL if statically linked */
 	struct fsal_ops m_ops;	/*< FSAL module methods vector */
 
-	pthread_rwlock_t fsm_lock;		/*< Lock to be held when
+	pthread_mutex_t fsm_lock;		/*< Lock to be held when
 					    manipulating its lists (above). */
 	int32_t refcount;		/*< Reference count */
 	struct fsal_stats *stats;   /*< for storing the FSAL specific stats */
@@ -3129,7 +3129,7 @@ struct fsal_obj_handle {
 	struct fsal_module *fsal;	/*< Link back to fsal module */
 	struct fsal_obj_ops *obj_ops;	/*< Operations vector */
 
-	pthread_rwlock_t obj_lock;		/*< Lock on handle */
+	pthread_mutex_t obj_lock;		/*< Lock on handle */
 
 	/* Static attributes */
 	object_file_type_t type;	/*< Object file type */

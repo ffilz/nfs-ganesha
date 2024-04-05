@@ -273,7 +273,7 @@ static struct pseudo_fsal_obj_handle
 	hdl->next_i = 2;
 	if (parent != NULL) {
 		/* Attach myself to my parent */
-		PTHREAD_RWLOCK_wrlock(&parent->obj_handle.obj_lock);
+		PTHREAD_MUTEX_lock(&parent->obj_handle.obj_lock);
 		avltree_insert(&hdl->avl_n, &parent->avl_name);
 		hdl->index = (parent->next_i)++;
 		avltree_insert(&hdl->avl_i, &parent->avl_index);
@@ -284,7 +284,7 @@ static struct pseudo_fsal_obj_handle
 		parent->attributes.change = timespec_to_nsecs(
 					&parent->attributes.mtime);
 
-		PTHREAD_RWLOCK_unlock(&parent->obj_handle.obj_lock);
+		PTHREAD_MUTEX_unlock(&parent->obj_handle.obj_lock);
 	}
 	return hdl;
 
@@ -322,7 +322,7 @@ static fsal_status_t lookup(struct fsal_obj_handle *parent,
 	 * this directory.
 	 */
 	if (op_ctx->fsal_private != parent)
-		PTHREAD_RWLOCK_rdlock(&parent->obj_lock);
+		PTHREAD_MUTEX_lock(&parent->obj_lock);
 	else
 		LogFullDebug(COMPONENT_FSAL,
 			     "Skipping lock for %s",
@@ -372,7 +372,7 @@ out:
 	}
 
 	if (op_ctx->fsal_private != parent)
-		PTHREAD_RWLOCK_unlock(&parent->obj_lock);
+		PTHREAD_MUTEX_unlock(&parent->obj_lock);
 
 	if (error == ERR_FSAL_NO_ERROR && attrs_out != NULL) {
 		/* This is unlocked, however, for the most part, attributes
@@ -497,7 +497,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 		 "hdl=%p, name=%s",
 		 myself, myself->name);
 
-	PTHREAD_RWLOCK_rdlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&dir_hdl->obj_lock);
 
 	/* Use fsal_private to signal to lookup that we hold
 	 * the lock.
@@ -538,7 +538,7 @@ static fsal_status_t read_dirents(struct fsal_obj_handle *dir_hdl,
 out:
 	op_ctx->fsal_private = NULL;
 
-	PTHREAD_RWLOCK_unlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&dir_hdl->obj_lock);
 
 	return fsalstat(error, 0);
 }
@@ -594,7 +594,7 @@ static fsal_status_t file_unlink(struct fsal_obj_handle *dir_hdl,
 			      struct pseudo_fsal_obj_handle,
 			      obj_handle);
 
-	PTHREAD_RWLOCK_wrlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&dir_hdl->obj_lock);
 
 	/* Check if directory is empty */
 	numlinks = atomic_fetch_uint32_t(&hdl->numlinks);
@@ -625,7 +625,7 @@ static fsal_status_t file_unlink(struct fsal_obj_handle *dir_hdl,
 					&myself->attributes.mtime);
 
 unlock:
-	PTHREAD_RWLOCK_unlock(&dir_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&dir_hdl->obj_lock);
 
 	return fsalstat(error, 0);
 }
@@ -815,7 +815,7 @@ fsal_status_t pseudofs_create_handle(struct fsal_export *exp_hdl,
 		return fsalstat(ERR_FSAL_BADHANDLE, 0);
 	}
 
-	PTHREAD_RWLOCK_rdlock(&exp_hdl->fsal->fsm_lock);
+	PTHREAD_MUTEX_lock(&exp_hdl->fsal->fsm_lock);
 
 	glist_for_each(glist, &exp_hdl->fsal->handles) {
 		hdl = glist_entry(glist, struct fsal_obj_handle, handles);
@@ -833,7 +833,7 @@ fsal_status_t pseudofs_create_handle(struct fsal_export *exp_hdl,
 
 			*handle = hdl;
 
-			PTHREAD_RWLOCK_unlock(&exp_hdl->fsal->fsm_lock);
+			PTHREAD_MUTEX_unlock(&exp_hdl->fsal->fsm_lock);
 
 			if (attrs_out != NULL) {
 				fsal_copy_attrs(attrs_out, &my_hdl->attributes,
@@ -848,7 +848,7 @@ fsal_status_t pseudofs_create_handle(struct fsal_export *exp_hdl,
 		/* An export update may be the cause of the failure. Tell the
 		 * client to retry.
 		 */
-		PTHREAD_RWLOCK_unlock(&exp_hdl->fsal->fsm_lock);
+		PTHREAD_MUTEX_unlock(&exp_hdl->fsal->fsm_lock);
 
 		LogDebug(COMPONENT_EXPORT,
 			 "PseudoFS create handle may have failed due to export update");
@@ -859,7 +859,7 @@ fsal_status_t pseudofs_create_handle(struct fsal_export *exp_hdl,
 	LogDebug(COMPONENT_FSAL,
 		"Could not find handle");
 
-	PTHREAD_RWLOCK_unlock(&exp_hdl->fsal->fsm_lock);
+	PTHREAD_MUTEX_unlock(&exp_hdl->fsal->fsm_lock);
 
 	return fsalstat(ERR_FSAL_STALE, ESTALE);
 }

@@ -516,7 +516,7 @@ int register_fsal(struct fsal_module *fsal_hdl, const char *name,
 	 */
 	memcpy(&fsal_hdl->m_ops, &def_fsal_ops, sizeof(struct fsal_ops));
 
-	PTHREAD_RWLOCK_init(&fsal_hdl->fsm_lock, NULL);
+	PTHREAD_MUTEX_init(&fsal_hdl->fsm_lock, NULL);
 	glist_init(&fsal_hdl->servers);
 	glist_init(&fsal_hdl->handles);
 	glist_init(&fsal_hdl->exports);

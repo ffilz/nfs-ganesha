@@ -854,7 +854,7 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 #if 0
 			my_fd = &hdl->fd;
 #endif
-			PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+			PTHREAD_MUTEX_lock(&obj_hdl->obj_lock);
 		}
 
 		rc = rgw_open(export->rgw_fs, handle->rgw_fh, posix_flags,
@@ -865,7 +865,7 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 				/* Release the lock taken above, and return
 				 * since there is nothing to undo.
 				 */
-				PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+				PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 				return rgw2fsal_error(rc);
 			} else {
 				/* Error - need to release the share */
@@ -916,7 +916,7 @@ fsal_status_t rgw_fsal_open2(struct fsal_obj_handle *obj_hdl,
 			 * status. If success, we haven't done any permission
 			 * check so ask the caller to do so.
 			 */
-			PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+			PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 			*caller_perm_check = !FSAL_IS_ERROR(status);
 			return status;
 		}
@@ -1538,7 +1538,7 @@ fsal_status_t rgw_fsal_close2(struct fsal_obj_handle *obj_hdl,
 	LogFullDebug(COMPONENT_FSAL,
 		"%s enter obj_hdl %p state %p", __func__, obj_hdl, state);
 
-	PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+	PTHREAD_MUTEX_lock(&obj_hdl->obj_lock);
 
 	if (state) {
 		open_state = (struct rgw_open_state *) state;
@@ -1578,7 +1578,7 @@ fsal_status_t rgw_fsal_close2(struct fsal_obj_handle *obj_hdl,
 		}
 	}
 
-	PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+	PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 
 	return status;
 }

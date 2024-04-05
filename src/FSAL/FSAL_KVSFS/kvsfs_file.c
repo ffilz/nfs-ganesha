@@ -95,7 +95,7 @@ static fsal_status_t kvsfs_open_by_handle(struct fsal_obj_handle *obj_hdl,
 		 * that no I/O is in progress or can start before proceeding
 		 * past the above while loop.
 		 */
-		PTHREAD_RWLOCK_wrlock(&obj_hdl->obj_lock);
+		PTHREAD_MUTEX_lock(&obj_hdl->obj_lock);
 
 		old_openflags = my_fd->fsal_fd.openflags;
 
@@ -170,7 +170,7 @@ exit:
 		}
 
 		/* Release obj_lock. */
-		PTHREAD_RWLOCK_unlock(&obj_hdl->obj_lock);
+		PTHREAD_MUTEX_unlock(&obj_hdl->obj_lock);
 	}
 
 	/* Indicate we are done with fd work and signal any waiters. */

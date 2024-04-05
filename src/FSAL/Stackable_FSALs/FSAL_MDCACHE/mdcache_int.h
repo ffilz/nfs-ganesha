@@ -91,7 +91,7 @@ struct mdcache_fsal_export {
 	/** The list of cache entries belonging to this export */
 	struct glist_head entry_list;
 	/** Lock protecting entry_list */
-	pthread_rwlock_t mdc_exp_lock;
+	pthread_mutex_t mdc_exp_lock;
 	/** Flags for the export. */
 	uint8_t flags;
 	/** Mapping of ck -> name for whence-is-name */
@@ -275,7 +275,7 @@ static const uint32_t MDCACHE_UNREACHABLE = 0x100;
 
 struct mdcache_fsal_obj_handle {
 	/** Reader-writer lock for attributes */
-	pthread_rwlock_t attr_lock;
+	pthread_mutex_t attr_lock;
 	/** MDCache FSAL Handle */
 	struct fsal_obj_handle obj_handle;
 	/** Sub-FSAL handle */
@@ -1171,11 +1171,11 @@ fsal_status_t mdcache_refresh_attrs_no_invalidate(mdcache_entry_t *entry)
 {
 	fsal_status_t status;
 
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 
 	status = mdcache_refresh_attrs(entry, false, false, false, false);
 
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
 
 	if (FSAL_IS_ERROR(status)) {
 		LogDebug(COMPONENT_MDCACHE, "Refresh attributes failed %s",

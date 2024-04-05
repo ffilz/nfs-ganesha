@@ -653,7 +653,7 @@ mdcache_lru_clean(mdcache_entry_t *entry)
 	 */
 	mdcache_key_delete(&entry->fh_hk.key);
 	PTHREAD_RWLOCK_destroy(&entry->content_lock);
-	PTHREAD_RWLOCK_destroy(&entry->attr_lock);
+	PTHREAD_MUTEX_destroy(&entry->attr_lock);
 
 	state_hdl_cleanup(entry->obj_handle.state_hdl, entry->obj_handle.type);
 
@@ -1066,7 +1066,7 @@ mdcache_lru_cleanup_try_push(mdcache_entry_t *entry)
 
 	/* Take the attr lock, so we can check that this entry is still
 	 * not in any export */
-	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 
 	/* Make sure that the entry is not reaped by the time this
 	 * thread got the QLOCK
@@ -1088,12 +1088,12 @@ mdcache_lru_cleanup_try_push(mdcache_entry_t *entry)
 
 		/* It's safe to drop the attr lock here, as we have the
 		 * latch, so no one can look up the entry */
-		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+		PTHREAD_MUTEX_unlock(&entry->attr_lock);
 		QUNLOCK(qlane);
 		/* Drop the sentinel reference */
 		cih_remove_latched(entry, &latch, CIH_REMOVE_NONE);
 	} else {
-		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+		PTHREAD_MUTEX_unlock(&entry->attr_lock);
 		QUNLOCK(qlane);
 	}
 
@@ -1702,7 +1702,7 @@ mdcache_lru_pkgshutdown(void)
 static inline void init_rw_locks(mdcache_entry_t *entry)
 {
 	/* Initialize the entry locks */
-	PTHREAD_RWLOCK_init(&entry->attr_lock, NULL);
+	PTHREAD_MUTEX_init(&entry->attr_lock, NULL);
 	PTHREAD_RWLOCK_init(&entry->content_lock, NULL);
 }
 

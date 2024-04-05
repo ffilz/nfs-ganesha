@@ -227,9 +227,9 @@ static fsal_status_t mdc_open2_by_name(
 					op_ctx->fsal_export) | ATTR_RDATTR_ERR);
 			fsal_copy_attrs(&attrs, attrs_out, false);
 
-			PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+			PTHREAD_MUTEX_lock(&entry->attr_lock);
 			mdc_update_attr_cache(entry, &attrs);
-			PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+			PTHREAD_MUTEX_unlock(&entry->attr_lock);
 
 			/* mdc_update_attr_cache() consumes attrs; the release
 			 * is here only for code inspection. */

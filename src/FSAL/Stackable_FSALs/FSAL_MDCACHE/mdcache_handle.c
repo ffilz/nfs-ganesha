@@ -1000,7 +1000,7 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 	const uint16_t export_id = (export == NULL ? 0 : export->export_id);
 #endif  /* USE_MONITORING */
 
-	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 
 	if (mdcache_is_attrs_valid(entry, attrs_out->request_mask)) {
 		/* Up-to-date */
@@ -1011,8 +1011,8 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 	}
 
 	/* Promote to write lock */
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 
 	if (mdcache_is_attrs_valid(entry, attrs_out->request_mask)) {
 		/* Someone beat us to it */
@@ -1049,7 +1049,7 @@ unlock:
 
 unlock_no_attrs:
 
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
 
 	if (FSAL_IS_ERROR(status) && (status.major == ERR_FSAL_STALE))
 		mdcache_kill_entry(entry);
@@ -1102,7 +1102,7 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 		need_acl = true;
 	}
 
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 	status2 = mdcache_refresh_attrs(entry, need_acl, false, false, false);
 	if (FSAL_IS_ERROR(status2)) {
 		/* Assume that the cache is bogus now */
@@ -1119,7 +1119,7 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 			 (long long) entry->attrs.change);
 		entry->attrs.change = change + 1;
 	}
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
 out:
 	if (kill_entry)
 		mdcache_kill_entry(entry);
@@ -1464,7 +1464,7 @@ static bool mdcache_is_referral(struct fsal_obj_handle *obj_hdl,
 
 	fsal_prepare_attrs(attrs, ATTR_MODE | ATTR_TYPE);
 
-	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 	locked = true;
 
 	if (mdcache_is_attrs_valid(entry, attrs->request_mask)) {
@@ -1473,8 +1473,8 @@ static bool mdcache_is_referral(struct fsal_obj_handle *obj_hdl,
 	}
 
 	/* Promote to write lock */
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 	write_locked = true;
 
 	if (!mdcache_is_attrs_valid(entry, attrs->request_mask)) {
@@ -1486,7 +1486,7 @@ copy_and_unlock:
 
 	valid_request_mask = attrs->request_mask;
 	fsal_copy_attrs(attrs, &entry->attrs, false);
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
 	locked = false;
 	write_locked = false;
 
@@ -1508,7 +1508,7 @@ invoke_subfsal:
 
 	/* Need to take a read lock again to check if cached attrs are valid */
 	if (!locked) {
-		PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
+		PTHREAD_MUTEX_lock(&entry->attr_lock);
 		locked = true;
 		assert(!write_locked);
 	}
@@ -1518,8 +1518,8 @@ invoke_subfsal:
 	if (!mdcache_is_attrs_valid(entry, attrs->request_mask)) {
 		if (!write_locked) {
 			/* Promote to write lock to update the cached attrs */
-			PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-			PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+			PTHREAD_MUTEX_unlock(&entry->attr_lock);
+			PTHREAD_MUTEX_lock(&entry->attr_lock);
 		}
 
 		mdc_update_attr_cache(entry, attrs);
@@ -1529,7 +1529,7 @@ invoke_subfsal:
 
 out:
 	if (locked) {
-		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+		PTHREAD_MUTEX_unlock(&entry->attr_lock);
 	}
 
 	fsal_release_attrs(attrs);

@@ -280,7 +280,7 @@ void mdc_clean_entry(mdcache_entry_t *entry)
 	struct glist_head *glistn;
 
 	/* Must get attr_lock before mdc_exp_lock */
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 
 	glist_for_each_safe(glist, glistn, &entry->export_list) {
 		struct entry_export_map *expmap;
@@ -291,17 +291,17 @@ void mdc_clean_entry(mdcache_entry_t *entry)
 				     export_per_entry);
 		export = expmap->exp;
 
-		PTHREAD_RWLOCK_wrlock(&export->mdc_exp_lock);
+		PTHREAD_MUTEX_lock(&export->mdc_exp_lock);
 
 		mdc_remove_export_map(expmap);
 
-		PTHREAD_RWLOCK_unlock(&export->mdc_exp_lock);
+		PTHREAD_MUTEX_unlock(&export->mdc_exp_lock);
 	}
 
 	/* Clear out first_export */
 	atomic_store_int32_t(&entry->first_export_id, -1);
 
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
 
 	if (entry->obj_handle.type == DIRECTORY) {
 		PTHREAD_RWLOCK_wrlock(&entry->content_lock);
@@ -351,7 +351,7 @@ fsal_status_t mdc_check_mapping(mdcache_entry_t *entry)
 	    (int32_t) op_ctx->ctx_export->export_id)
 		return fsalstat(ERR_FSAL_NO_ERROR, 0);
 
-	PTHREAD_RWLOCK_rdlock(&entry->attr_lock);
+	PTHREAD_MUTEX_lock(&entry->attr_lock);
 
 again:
 	(void)atomic_inc_uint64_t(&cache_stp->inode_mapping);
@@ -362,7 +362,7 @@ again:
 
 		/* Found active export on list */
 		if (expmap->exp == export) {
-			PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+			PTHREAD_MUTEX_unlock(&entry->attr_lock);
 			return fsalstat(ERR_FSAL_NO_ERROR, 0);
 		}
 	}
@@ -371,8 +371,8 @@ again:
 		/* Now take write lock and try again in
 		 * case another thread has raced with us.
 		 */
-		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
-		PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+		PTHREAD_MUTEX_unlock(&entry->attr_lock);
+		PTHREAD_MUTEX_lock(&entry->attr_lock);
 		try_write = true;
 		goto again;
 	}
@@ -380,7 +380,7 @@ again:
 	/* We have the write lock and did not find
 	 * this export on the list, add it.
 	 */
-	PTHREAD_RWLOCK_wrlock(&export->mdc_exp_lock);
+	PTHREAD_MUTEX_lock(&export->mdc_exp_lock);
 
 	/* Check for unexport again, this prevents an interlock issue where
 	 * we passed above, but now unexport is in progress. This is required
@@ -392,8 +392,8 @@ again:
 		/* In the process of unexporting, don't allow creating a new
 		 * export mapping. Return a stale error.
 		 */
-		PTHREAD_RWLOCK_unlock(&export->mdc_exp_lock);
-		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+		PTHREAD_MUTEX_unlock(&export->mdc_exp_lock);
+		PTHREAD_MUTEX_unlock(&entry->attr_lock);
 		return fsalstat(ERR_FSAL_STALE, ESTALE);
 	}
 
@@ -411,8 +411,8 @@ again:
 	glist_add_tail(&entry->export_list, &expmap->export_per_entry);
 	glist_add_tail(&export->entry_list, &expmap->entry_per_export);
 
-	PTHREAD_RWLOCK_unlock(&export->mdc_exp_lock);
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	PTHREAD_MUTEX_unlock(&export->mdc_exp_lock);
+	PTHREAD_MUTEX_unlock(&entry->attr_lock);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
@@ -891,9 +891,9 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 	 *        does not hold a lock on the "new" entry.
 	 */
 	if (prefer_attrs_in && !FSAL_IS_ERROR(status)) {
-		PTHREAD_RWLOCK_wrlock(&(*entry)->attr_lock);
+		PTHREAD_MUTEX_lock(&(*entry)->attr_lock);
 		mdc_update_attr_cache(*entry, attrs_in);
-		PTHREAD_RWLOCK_unlock(&(*entry)->attr_lock);
+		PTHREAD_MUTEX_unlock(&(*entry)->attr_lock);
 
 		if (attrs_out != NULL) {
 			fsal_copy_attrs(attrs_out, attrs_in, false);
@@ -909,9 +909,9 @@ mdcache_new_entry(struct mdcache_fsal_export *export,
 			mdcache_lru_unref(*entry, flags);
 			*entry = NULL;
 		} else {
-			PTHREAD_RWLOCK_wrlock(&(*entry)->attr_lock);
+			PTHREAD_MUTEX_lock(&(*entry)->attr_lock);
 			mdc_update_attr_cache(*entry, attrs_out);
-			PTHREAD_RWLOCK_unlock(&(*entry)->attr_lock);
+			PTHREAD_MUTEX_unlock(&(*entry)->attr_lock);
 		}
 	}
 
