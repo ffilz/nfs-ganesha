@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806d6e2a_fcca5e39",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-05T02:51:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (!IS_FSAL_ACE_SPECIAL_ID(*ace)) {\n+\t\t\t\tcontinue;\n+\t\t\t}",
+      "revId": "1b7d4d14e34ff3c652af96ab11b81eac26f8bced",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
