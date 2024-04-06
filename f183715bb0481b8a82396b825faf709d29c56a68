@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fe7247_b798c473",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-06T18:05:38Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tfsal_acl_data_t acl_data;\n+\tacl_data.naces \u003d 6;",
+      "revId": "f183715bb0481b8a82396b825faf709d29c56a68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf7d830_bb896068",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-06T18:05:38Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tfsal_acl_status_t acl_status;\n+\tattrs-\u003eacl \u003d nfs4_acl_new_entry(\u0026acl_data, \u0026acl_status);",
+      "revId": "f183715bb0481b8a82396b825faf709d29c56a68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98de5c2d_1956afe3",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-06T18:05:38Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (attrs-\u003eacl \u003d\u003d NULL) {\n+\t\tLogFatal(COMPONENT_FSAL, \"Failed in nfs4_acl_new_entry, acl_status %d\", acl_status);\n+\t}",
+      "revId": "f183715bb0481b8a82396b825faf709d29c56a68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61024d0d_78d325b7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-06T18:05:38Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogFatal(COMPONENT_FSAL, \"Failed in nfs4_acl_new_entry, acl_status %d\", acl_status);",
+      "revId": "f183715bb0481b8a82396b825faf709d29c56a68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
