@@ -52,6 +52,24 @@
       "parentUuid": "028e5a6c_97e2e61e",
       "revId": "bc7dbb4a6d6da46f4a8ea9b2702fcb97216b549d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f9c7969_0af6fb19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-07T10:11:16Z",
+      "side": 1,
+      "message": "IMO just like all can see info like mode bits and file owner \u0026 group, they should see the ACL as well (READ_ACL). This is also the behavior done by the mentioned servers above.\n\nThe @OWNER is the only one to have the WRITE_ACL permission though.",
+      "parentUuid": "a55de062_547d044b",
+      "revId": "bc7dbb4a6d6da46f4a8ea9b2702fcb97216b549d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
