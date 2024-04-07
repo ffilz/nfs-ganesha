@@ -16,6 +16,24 @@
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (dest-\u003eacl !\u003d NULL) {\n+\t\t\tdest-\u003evalid_mask \u0026\u003d ~ATTR_ACL;\n+\t\t}",
       "revId": "6c035c7b405460cd57fb572aa8e23cad368d5b96",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5981728_97a3322f",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-07T09:56:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e746155a_47fa39d5",
+      "revId": "6c035c7b405460cd57fb572aa8e23cad368d5b96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
