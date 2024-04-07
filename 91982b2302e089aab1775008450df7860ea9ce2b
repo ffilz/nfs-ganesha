@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b28aa802_1d18edc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-07T10:18:36Z",
+      "side": 1,
+      "message": "Well, duping the inherit ACEs is a valid option mentioned by the RFC.\nYet, what I\u0027m not sure that this is the correct place to do that as the FSAL may decide to do that suring SETATTR. After all the client may not call chmod.\n\nDo you want me to remove the dup behavior from here?",
+      "parentUuid": "77ec18da_23fdee1a",
+      "revId": "91982b2302e089aab1775008450df7860ea9ce2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3daea04c_dfd8148c",
         "filename": "src/Protocols/NFS/nfs_proto_tools.c",
         "patchSetId": 6
