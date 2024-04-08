@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e1b76c_e6e09aca",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\t\tif (IS_FSAL_ACE_INHERIT(aces[i])) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e61827_4b6c6be0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\t\t\tif (!IS_FSAL_ACE_DENY(aces[i])) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dba053b_3e7a3e35",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\t\t\tif (!IS_FSAL_ACE_ALLOW(aces[i])) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9357ae4_80411ad4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (!fsal_check_ace_couple(ace, FSAL_ACE_SPECIAL_OWNER)) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b43f43d_df378252",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tconst fsal_ace_t *ace \u003d \u0026sacl-\u003eaces[0];\n+\tif (!fsal_check_ace_couple(ace, FSAL_ACE_SPECIAL_OWNER)) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97542b4b_72e14c5e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (!fsal_check_ace_couple(ace, FSAL_ACE_SPECIAL_GROUP)) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f3e72b_a9678206",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (!fsal_check_ace_couple(ace, FSAL_ACE_SPECIAL_EVERYONE)) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac512cd2_549e1511",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif (!fsal_check_ace_couple(ace, FSAL_ACE_SPECIAL_EVERYONE)) return false;",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07098f0b_39d905f4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-08T00:59:02Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tbool can_reuse \u003d fsal_can_reuse_mode_to_acl(sacl);\n+\tLogFullDebug(COMPONENT_FSAL, \"Can reuse aces for mode: %d\", can_reuse);",
+      "revId": "4703169d09f5ce5d3b8b088bcb0db519b78bcfc9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
