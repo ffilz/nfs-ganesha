@@ -16,6 +16,23 @@
       "message": "Please help to review the changes...\nThis helped to reduces the cpu contention and improve latency..",
       "revId": "0308a7b5b6b5d760fd145f500827028372033bb1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "209caf0a_6cc47140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-04-08T14:12:51Z",
+      "side": 1,
+      "message": "A change from rwlock to mutex is a huge, conceptual change.  I think we\u0027re going to need a lot of discussion and lots and lots of testing before we can take such a change.",
+      "revId": "0308a7b5b6b5d760fd145f500827028372033bb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
