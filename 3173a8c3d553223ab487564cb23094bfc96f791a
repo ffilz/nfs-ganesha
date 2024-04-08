@@ -142,6 +142,24 @@
       "parentUuid": "fbc86e83_9c68ad81",
       "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6682e423_1e13c9b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-08T22:47:44Z",
+      "side": 1,
+      "message": "OK, in the interest of moving along, I\u0027ll accept new TAILQ.\n\nI would request we don\u0027t mix between glist and TAILQ for similar data structures. So in the sooner than later term, we should make sure there aren\u0027t any glist in the idmapper code.",
+      "parentUuid": "6f7560f0_80e7d51f",
+      "revId": "3173a8c3d553223ab487564cb23094bfc96f791a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
