@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "99f6226d_17ad6227",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-11T01:08:33Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis module aims to mitigate the Out-Of-Order scenario described in https://www.rfc-editor.org/rfc/rfc8881.html#section-2.10.6-6",
+      "revId": "2f9ae5974748e45d465f3fb35d0291971bb14376",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7f33fdc1_071d26cb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -14,6 +31,23 @@
       "writtenOn": "2024-04-04T08:38:29Z",
       "side": 1,
       "message": "I like the approach.  We\u0027ve had downstream users highlight this class of issues.  This solution is very compact.",
+      "revId": "2f9ae5974748e45d465f3fb35d0291971bb14376",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1b3e1d_881d8ddc",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-11T01:08:33Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
       "revId": "2f9ae5974748e45d465f3fb35d0291971bb14376",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
