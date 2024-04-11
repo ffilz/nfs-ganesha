@@ -33,6 +33,24 @@
       "message": "A change from rwlock to mutex is a huge, conceptual change.  I think we\u0027re going to need a lot of discussion and lots and lots of testing before we can take such a change.",
       "revId": "0308a7b5b6b5d760fd145f500827028372033bb1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3540b08_e6c52982",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-11T21:33:02Z",
+      "side": 1,
+      "message": "I agree. In the e-mail thread, you indicated this was a problem with el8, is it also an issue on el9?",
+      "parentUuid": "209caf0a_6cc47140",
+      "revId": "0308a7b5b6b5d760fd145f500827028372033bb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
