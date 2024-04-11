@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32f9915a_aa3fd8b2",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-11T20:43:55Z",
+      "side": 1,
+      "message": "WARNING: \u0027usera\u0027 may be misspelled - perhaps \u0027users\u0027?\n+\treturn gsh_buffdesc_comparator(\u0026user1-\u003euname, \u0026usera-\u003euname);",
+      "revId": "0d0109a76a6bf3db028bab0be2ebccc12b31aedb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a7b983_a51bb4aa",
+        "filename": "src/support/uid2grp_cache.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-11T20:43:55Z",
+      "side": 1,
+      "message": "WARNING: \u0027usera\u0027 may be misspelled - perhaps \u0027users\u0027?\n+\treturn gsh_buffdesc_comparator(\u0026user1-\u003euname, \u0026usera-\u003euname);",
+      "revId": "0d0109a76a6bf3db028bab0be2ebccc12b31aedb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
