@@ -562,7 +562,6 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	cm = ceph_mount_lookup(&cm_key.cm_avl_mount);
 
 	if (cm != NULL) {
-		cm->cm_refcnt++;
 		LogDebug(COMPONENT_FSAL,
 			 "Re-using cmount %s for %s",
 			 cm->cm_mount_path, CTX_FULLPATH(op_ctx));
@@ -571,7 +570,7 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 
 	cm = gsh_calloc(1, sizeof(*cm));
 
-	cm->cm_refcnt = 1;
+	cm->cm_refcnt = 0;
 
 	if (export->fs_name)
 		cm->cm_fs_name = gsh_strdup(export->fs_name);
