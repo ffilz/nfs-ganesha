@@ -16,6 +16,23 @@
       "message": "There is an issue.  In the error: case, we decrement the refcount to decide to delete it.  That will go negative.  So something must change to fix the error case.  Usually in Ganesha, we have a sentinal refcount for the basic storage (in this case the avl_cmount).  So maybe a better solution is to codify that here, leave the refcount set to in this location, and change the release() code in export.c to check for refcount\u003d\u003d1 instead of refcount\u003d\u003d0?",
       "revId": "bfe2b3384b13b4cf7105361b1d522fdaf033b6b4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c580313a_26e83455",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-15T14:47:25Z",
+      "side": 1,
+      "message": "Should we fix this by removing this increment instead? And leave the initial set to 1.\n\nThat leaves the initial refcount 1 in case of error.",
+      "revId": "bfe2b3384b13b4cf7105361b1d522fdaf033b6b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
