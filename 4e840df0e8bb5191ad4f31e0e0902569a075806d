@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce75d8cc_ad3f8cab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037970
+      },
+      "writtenOn": "2024-04-15T08:37:03Z",
+      "side": 1,
+      "message": "I created wrong assumptions reading the doc, and I feel anybody reading it for the first time would probably get confused too. The actual meaning which I understand after discussing with @gregsfortytwo and @ffilz is if the path is /foo/bar then the cmount_path can start from / and go down up to /foo/bar. I hope this makes sense.",
+      "revId": "4e840df0e8bb5191ad4f31e0e0902569a075806d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
