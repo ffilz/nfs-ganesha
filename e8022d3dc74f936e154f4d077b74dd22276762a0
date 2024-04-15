@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "851b1754_f47d709f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-04-15T15:20:12Z",
+      "side": 1,
+      "message": "Somehow, the CI is not building the new code.  It still says bool (and it\u0027s unconditionally int now), and the line it mentions (FSAL_RGW/handle.c:218) is the location in the old code, not in the new code.  I\u0027m not sure what to do about this.",
+      "revId": "e8022d3dc74f936e154f4d077b74dd22276762a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
