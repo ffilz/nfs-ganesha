@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7751fafa_fb7ab9f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-16T17:23:59Z",
+      "side": 1,
+      "message": "This looks reasonable, however, are you aware of the -E command line option that allows the start script to set nfs_ServerEpoch? Also, have you considered the other uses of nfs_ServerEpoch: NFS3_write_verifier, NFS4_write_verifier, and the epoch that is included (optionally) in log messages?\n\nThe advantage of the command line option is the scripting that ultimately is assigning epochs doesn\u0027t need to edit the config file.",
+      "revId": "436f6c17c138baaf27836b9e4a356cf7e7e9e69b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
