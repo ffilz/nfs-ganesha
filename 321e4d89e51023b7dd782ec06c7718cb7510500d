@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d3ae80_edba80ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-16T22:36:59Z",
+      "side": 1,
+      "message": "I\u0027m trying to verify a potential issue with POSIX ACL conversion and I thought this was the HEAD patch of your patch set, but when I switch to it, the Relation Chain in Gerrithub seems to show another patch as HEAD AND that patch is (Not current).\n\nCould you please make sure to push the entire patchset to Gerrithub from HEAD and make sure the relation chain for each patch shows the proper sequence.\n\nIn the meantime, my question...\n\nThe old code seems to convert write access to include FSAL_ACE_PERM_SET_OWNER_WRITE which is (FSAL_ACE_PERM_WRITE_ACL | FSAL_ACE_PERM_WRITE_ATTR) for ACL_USER_OBJ. I think that might be wrong, POSIX only allows the owner to change mode and ACL, at least with mode bits.\n\nCould you verify my understanding on that?",
+      "revId": "321e4d89e51023b7dd782ec06c7718cb7510500d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
