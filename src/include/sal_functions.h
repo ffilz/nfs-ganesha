@@ -300,6 +300,7 @@ void remove_client_from_expired_client_list(nfs_client_id_t *active_clientid);
 
 #define DISPLAY_CLIENTID_SIZE 36
 int display_clientid(struct display_buffer *dspbuf, clientid4 clientid);
+uint64_t get_unique_client_prefix(void);
 clientid4 new_clientid(void);
 void new_clientid_verifier(char *verf);
 

@@ -464,6 +464,11 @@ Max_Client_Ids(uint32, range 0 to UINT32_MAX, default 0)
     is part of. The above limit can be used as a guardrail to prevent
     getting into this situation.
 
+Unique_Client_Id_Prefix(uint32, range 0 to UINT32_MAX, default 0)
+   Unique value to be used as prefix for the Client id, to make sure it is
+   unique between ganesha nodes.
+   if 0 is supplied server boot epoch time in seconds will be used
+
 Server_Scope(string, default "")
     Specify the value which is common for all cluster nodes.
     For e.g., Name of the cluster or cluster-id.
