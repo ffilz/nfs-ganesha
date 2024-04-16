@@ -3199,6 +3199,8 @@ void save_op_context_export_and_clear(struct saved_export_context *saved)
 	op_ctx->ctx_export = NULL;
 	op_ctx->fsal_export = NULL;
 	op_ctx->ctx_pnfs_ds = NULL;
+	op_ctx->ctx_fullpath = NULL;
+	op_ctx->ctx_pseudopath = NULL;
 }
 
 void restore_op_context_export(struct saved_export_context *saved)
