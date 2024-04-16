@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf0ed259_16aa33b7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3081,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-16T21:56:33Z",
+      "side": 1,
+      "message": "With your current patch we instead get a SEGV when this tries to dereference NULL values. In my local trials I also guarded these two lines with checks for NULL. With that my issue is fixed.",
+      "range": {
+        "startLine": 3080,
+        "startChar": 2,
+        "endLine": 3081,
+        "endChar": 41
+      },
+      "revId": "4ccb39227f3b00119afdbf554b05dc070c381447",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
