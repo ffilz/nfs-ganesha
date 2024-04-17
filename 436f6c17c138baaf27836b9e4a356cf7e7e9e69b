@@ -34,6 +34,24 @@
       "parentUuid": "7751fafa_fb7ab9f7",
       "revId": "436f6c17c138baaf27836b9e4a356cf7e7e9e69b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc332b0_96d421a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-17T19:50:32Z",
+      "side": 1,
+      "message": "The purpose of the epoch in the log is to make it easy to attach log messages to Ganesha instances, so I would definitely change that one.\n\nI think clients would also benefit having the write verifier unique, so might as well change them all.\n\nThat said, we should then move this to core param from nfsv4 param.",
+      "parentUuid": "50849759_293195ce",
+      "revId": "436f6c17c138baaf27836b9e4a356cf7e7e9e69b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
