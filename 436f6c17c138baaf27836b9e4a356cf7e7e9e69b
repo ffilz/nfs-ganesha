@@ -16,6 +16,24 @@
       "message": "This looks reasonable, however, are you aware of the -E command line option that allows the start script to set nfs_ServerEpoch? Also, have you considered the other uses of nfs_ServerEpoch: NFS3_write_verifier, NFS4_write_verifier, and the epoch that is included (optionally) in log messages?\n\nThe advantage of the command line option is the scripting that ultimately is assigning epochs doesn\u0027t need to edit the config file.",
       "revId": "436f6c17c138baaf27836b9e4a356cf7e7e9e69b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50849759_293195ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-04-17T14:20:09Z",
+      "side": 1,
+      "message": "We are aware of the -E flag, the problem for us is that we have ganesha as a service and so the -E will remain constant. \nthat could have worked for us, but ganesha can be restarted and we want the new ganesha to have a different uniqueness then the old ganesha and so we use the configuration to set it.\nI made it so that having no config will preserve the old behavior. as I am guessing most use cases do not include using it as a service. \nfor the other uses of nfs_ServerEpoch it doesn\u0027t seem like it would have a problem and they are actually defined as accepting epoch, so I don\u0027t think there is a reason to change them. but if you think it would be preferable I don\u0027t mind changing them as well",
+      "parentUuid": "7751fafa_fb7ab9f7",
+      "revId": "436f6c17c138baaf27836b9e4a356cf7e7e9e69b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
