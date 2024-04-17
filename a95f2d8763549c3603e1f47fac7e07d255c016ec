@@ -16,6 +16,24 @@
       "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Failed in creating ACL from mode bits.\"\n+\t\t\t\t\t\" Status: %u\",",
       "revId": "a95f2d8763549c3603e1f47fac7e07d255c016ec",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bb759f5_1225356b",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-17T20:33:11Z",
+      "side": 1,
+      "message": "Please fix this split string.",
+      "parentUuid": "ced34e28_716ea251",
+      "revId": "a95f2d8763549c3603e1f47fac7e07d255c016ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
