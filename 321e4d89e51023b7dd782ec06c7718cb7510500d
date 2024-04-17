@@ -16,6 +16,24 @@
       "message": "I\u0027m trying to verify a potential issue with POSIX ACL conversion and I thought this was the HEAD patch of your patch set, but when I switch to it, the Relation Chain in Gerrithub seems to show another patch as HEAD AND that patch is (Not current).\n\nCould you please make sure to push the entire patchset to Gerrithub from HEAD and make sure the relation chain for each patch shows the proper sequence.\n\nIn the meantime, my question...\n\nThe old code seems to convert write access to include FSAL_ACE_PERM_SET_OWNER_WRITE which is (FSAL_ACE_PERM_WRITE_ACL | FSAL_ACE_PERM_WRITE_ATTR) for ACL_USER_OBJ. I think that might be wrong, POSIX only allows the owner to change mode and ACL, at least with mode bits.\n\nCould you verify my understanding on that?",
       "revId": "321e4d89e51023b7dd782ec06c7718cb7510500d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f80120_49add1ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020257
+      },
+      "writtenOn": "2024-04-17T14:33:33Z",
+      "side": 1,
+      "message": "Sorry, in a previous comment you have asked me to squash this commit and so I did but I forgot to mark this commit as abandoned. Will do it now.\nThis is the reason why you see this as detached from the others.\n\nRegarding your question (if I understand it correctly), indeed posix allows only owner (and root) to change the mode bits and acl, and indeed in my implementation I tried to follow this.",
+      "parentUuid": "95d3ae80_edba80ee",
+      "revId": "321e4d89e51023b7dd782ec06c7718cb7510500d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
