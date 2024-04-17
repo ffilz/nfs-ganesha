@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db628a0_83e29217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-17T20:30:22Z",
+      "side": 1,
+      "message": "Interesting, the relation chain of this still shows the two squashed (now abandoned) patches, while the relation chain for https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1190158/20 does not...\n\nAs long as doing a \"checkout\" from 1190158 gets the up to date version of every patch, all is good...\n\nOther than showing the abandoned patches for this one, the rest show as up to date.",
+      "revId": "aa52645b2fb6db8b107011af24aba458922c55c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
