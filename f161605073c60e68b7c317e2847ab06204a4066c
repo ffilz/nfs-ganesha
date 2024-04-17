@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83738e43_8aba7b4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-17T20:24:14Z",
+      "side": 1,
+      "message": "If the code builds without the library, CMakeLists.txt could be modified to not check. Not sure what is best for you.\n\nFSAL_GPFS is built so that the GPFS libraries need not be installed to build FSAL_GPFS. This is handy because we can make sure a significant FSAL always builds as we make changes.",
+      "parentUuid": "a05cbfbe_9d5968dc",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "632c856a_f44c9c4c",
         "filename": "src/FSAL/FSAL_SAUNAFS/context_wrap.c",
         "patchSetId": 1
@@ -11046,6 +11064,24 @@
       "side": 1,
       "message": "Frank after analyzing your suggestion about LGPL license with the rest of the team, we decided to use LGPL for SaunaFS FSAL that we want to include at the Ganesha repository. I already submitted a new patch updating SPDX-License-Identifier to use LGPL, so I\u0027m marking this conversation as resolved.",
       "parentUuid": "52f61aaa_5ded2610",
+      "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e38f6506_d1a358da",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-17T20:24:14Z",
+      "side": 1,
+      "message": "Great, thanks for using LGPL, it will make it easier for others.",
+      "parentUuid": "7eecaa14_18035f07",
       "revId": "f161605073c60e68b7c317e2847ab06204a4066c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
