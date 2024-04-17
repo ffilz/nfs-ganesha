@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ba0192_986899e8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 0,
+      "message": "So I see previously this function was not doing\n\n\tgsh_refstr_put(op_ctx-\u003ectx_fullpath);\n\tgsh_refstr_put(op_ctx-\u003ectx_pseudopath);\n\t\nbut now it does. I think it is best to mention this in the patch description.",
+      "range": {
+        "startLine": 3134,
+        "startChar": 5,
+        "endLine": 3134,
+        "endChar": 27
+      },
+      "revId": "2cf6d40fa8d92519cd7d3cbe5b6bd22f201c778a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42ce115_66d0a109",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3222,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 0,
+      "message": "Ah! Now I see the bug in pnfs. Thanks for fixing this. I think it is best to mention this in the patch description, in a few words.",
+      "range": {
+        "startLine": 3222,
+        "startChar": 2,
+        "endLine": 3222,
+        "endChar": 35
+      },
+      "revId": "2cf6d40fa8d92519cd7d3cbe5b6bd22f201c778a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

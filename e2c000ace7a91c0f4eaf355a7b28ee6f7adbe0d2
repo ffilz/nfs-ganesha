@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0ca9a5_1eb41540",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3141,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "I don\u0027t understand this paragraph. It is not clear what you mean.",
+      "range": {
+        "startLine": 3138,
+        "startChar": 0,
+        "endLine": 3141,
+        "endChar": 56
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d149acba_2738504a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3198,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "I see this macro in fsal.h:\n\n```\n#define set_op_context_export(exp_expr) \\\n\tdo { \\\n\t\tstruct gsh_export *ex \u003d exp_expr; \\\n\t\tset_op_context_export_fsal(ex, ex ? ex-\u003efsal_export : NULL); \\\n\t} while (0)\n```\n\nI suggest in a follow up you should get rid of the macro, get rid of the fsal_exp argument, and have this function do what the macro is doing. It seems to be things will be clearer that way.",
+      "range": {
+        "startLine": 3198,
+        "startChar": 1,
+        "endLine": 3198,
+        "endChar": 3
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4b0d1b5_210cba5a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3285,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "The wording here needs some work.",
+      "range": {
+        "startLine": 3285,
+        "startChar": 49,
+        "endLine": 3285,
+        "endChar": 59
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d2d584_1a959ac1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3345,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "I suggest this change for clarity:\nIf the thread\u0027s op_ctx is non-NULL, that will be saved in ctx-\u003esaved_op_ctx.",
+      "range": {
+        "startLine": 3345,
+        "startChar": 3,
+        "endLine": 3345,
+        "endChar": 77
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daffc641_b25d20c2",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3347,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "I suggest this change for clarity:\nThe thread\u0027s op_ctx will be set to ctx.",
+      "range": {
+        "startLine": 3347,
+        "startChar": 3,
+        "endLine": 3347,
+        "endChar": 54
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7604e9e2_e034d2f8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3356,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "Can this be NULL?",
+      "range": {
+        "startLine": 3356,
+        "startChar": 14,
+        "endLine": 3356,
+        "endChar": 25
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b6a5df_043c398e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3416,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "Do you want to assert that these refs are zero?",
+      "range": {
+        "startLine": 3416,
+        "startChar": 44,
+        "endLine": 3416,
+        "endChar": 70
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8564d54_f9b1e758",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3452,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-17T21:55:31Z",
+      "side": 1,
+      "message": "Do you want to assert that ctx-\u003esaved_op_ctx is NULL?",
+      "range": {
+        "startLine": 3452,
+        "startChar": 5,
+        "endLine": 3452,
+        "endChar": 22
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
