@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4df31525_e0f515aa",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-17T20:12:45Z",
+      "side": 1,
+      "message": "Oh, do we really have a leak here?",
+      "revId": "40aa761556b390aa23b1477928581c780e0a9c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45d110bd_ed00e07c",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-17T20:12:45Z",
+      "side": 1,
+      "message": "It looks like we free gsh_client here...",
+      "revId": "40aa761556b390aa23b1477928581c780e0a9c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
