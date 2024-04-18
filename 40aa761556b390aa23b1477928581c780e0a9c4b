@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32fcc5a_a0bb700f",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-04-18T08:36:14Z",
+      "side": 1,
+      "message": "Seems like this struct is released by dbus, so removed the comment and moved the `fini` call over there",
+      "parentUuid": "4df31525_e0f515aa",
+      "revId": "40aa761556b390aa23b1477928581c780e0a9c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45d110bd_ed00e07c",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-17T20:12:45Z",
       "side": 1,
       "message": "It looks like we free gsh_client here...",
+      "revId": "40aa761556b390aa23b1477928581c780e0a9c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fad9851_5a2e9ef3",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-04-18T08:36:14Z",
+      "side": 1,
+      "message": "Thanks, done",
+      "parentUuid": "45d110bd_ed00e07c",
       "revId": "40aa761556b390aa23b1477928581c780e0a9c4b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
