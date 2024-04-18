@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df19ffc_7bc3fa53",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-04-18T08:36:22Z",
+      "side": 1,
+      "message": "Since it\u0027s a rare scenario inside a rare scenario we decided to handle it at a later time this year.\nThe implementation will be:\n1. Call `reserve_lease` during the drain\n2. When draining is done, extend the lease deadline to \"now + grace time\"",
+      "parentUuid": "153faa16_bb3079d4",
+      "revId": "08d7797f8371e8f6712f5d5b2f0ca4c6430ba6d1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebfc3b27_25bde171",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "753010a9_9d4f4fe7",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-04-18T08:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebfc3b27_25bde171",
+      "revId": "08d7797f8371e8f6712f5d5b2f0ca4c6430ba6d1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ca1509f_3fcf0aad",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-04-17T20:13:47Z",
       "side": 1,
       "message": "blank line please.",
+      "revId": "08d7797f8371e8f6712f5d5b2f0ca4c6430ba6d1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c1c66e_3eac1143",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-04-18T08:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ca1509f_3fcf0aad",
       "revId": "08d7797f8371e8f6712f5d5b2f0ca4c6430ba6d1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
