@@ -22,6 +22,30 @@
       },
       "revId": "12ab9f66b381a6ce4835dac748adb0fc9afeed07",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36719968_4111678e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3441,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-19T17:57:43Z",
+      "side": 1,
+      "message": "Suspend can\u0027t check anything. The op_ctx pointer may no longer point to valid memory. It\u0027s possible (though perhaps unlikely) for the resume to run to completion on another thread and free the op_context.",
+      "parentUuid": "241bcf00_d82c4fae",
+      "range": {
+        "startLine": 3441,
+        "startChar": 3,
+        "endLine": 3441,
+        "endChar": 7
+      },
+      "revId": "12ab9f66b381a6ce4835dac748adb0fc9afeed07",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

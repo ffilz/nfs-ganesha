@@ -332,6 +332,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5dae9209_b4a10307",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3416,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-19T17:57:43Z",
+      "side": 1,
+      "message": "The refs won\u0027t be zero. If the export is still valid, it will have a reference to the refstr as well as possibly other threads op_contexts",
+      "parentUuid": "c3b6a5df_043c398e",
+      "range": {
+        "startLine": 3416,
+        "startChar": 44,
+        "endLine": 3416,
+        "endChar": 70
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8564d54_f9b1e758",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
@@ -343,6 +367,30 @@
       "writtenOn": "2024-04-17T21:55:31Z",
       "side": 1,
       "message": "Do you want to assert that ctx-\u003esaved_op_ctx is NULL?",
+      "range": {
+        "startLine": 3452,
+        "startChar": 5,
+        "endLine": 3452,
+        "endChar": 22
+      },
+      "revId": "e2c000ace7a91c0f4eaf355a7b28ee6f7adbe0d2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4490a19_d2a7f94c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3452,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-19T17:57:43Z",
+      "side": 1,
+      "message": "Yes, see below...",
+      "parentUuid": "d8564d54_f9b1e758",
       "range": {
         "startLine": 3452,
         "startChar": 5,
