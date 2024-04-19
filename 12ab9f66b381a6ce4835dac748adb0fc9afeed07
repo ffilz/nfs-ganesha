@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241bcf00_d82c4fae",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3441,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-04-19T17:50:18Z",
+      "side": 1,
+      "message": "Why not \"check fail\" that this is indeed the case? That would help catch bugs and helps the reader understand the API.\n\nIn general, not just this one function, I think it would be good to add logic to crash if the invariants are violated. I assume that would not hurt performance, but I don\u0027t know for sure.",
+      "range": {
+        "startLine": 3441,
+        "startChar": 3,
+        "endLine": 3441,
+        "endChar": 7
+      },
+      "revId": "12ab9f66b381a6ce4835dac748adb0fc9afeed07",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
