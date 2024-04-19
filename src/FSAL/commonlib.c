@@ -3293,6 +3293,7 @@ void resume_op_context(struct req_op_context *ctx)
 	}
 }
 
+#ifdef USE_DBUS
 void fd_usage_summarize_dbus(DBusMessageIter *iter)
 {
 	DBusMessageIter struct_iter;
@@ -3374,5 +3375,6 @@ void fd_usage_summarize_dbus(DBusMessageIter *iter)
 
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
+#endif /* USE_DBUS */
 
 /** @} */
