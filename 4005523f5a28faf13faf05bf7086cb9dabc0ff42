@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3132a5_640c4bb6",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!ple-\u003eccname) {\n+\t\treturn;\n+\t}",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727d46ef_29f10edb",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogCrit(COMPONENT_NFS_CB, \"Received %s while resolving krb5 cache %s\",",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a408717d_ced64d6b",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogCrit(COMPONENT_NFS_CB, \"Received %s while destroying krb5 cache %s\",",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96ebe3a7_d39d3dce",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tLogInfo(COMPONENT_NFS_CB, \"krb5 cache %s has been destroyed\", ple-\u003eccname);",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c624285_b2432204",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (ple-\u003erealm !\u003d NULL) {\n+\t\tgsh_free(ple-\u003erealm);\n+\t}",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05e7d33c_8c6959c5",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (ple-\u003eccname !\u003d NULL) {\n+\t\tgsh_free(ple-\u003eccname);\n+\t}",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f754de13_57276d29",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context !\u003d NULL) {\n+\t\tkrb5_free_principal(*context, ple-\u003eprinc);\n+\t}",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af43141a_c6bd4667",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (context !\u003d NULL) {\n+\t\t\tdestroy_krb5_creds_cache(ple, context);\n+\t\t}",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdbd2a0a_ebe988d5",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void gssd_clear_cred_cache() should probably be void gssd_clear_cred_cache(void)\n+void gssd_clear_cred_cache()",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11dab5c_325275b7",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* If we cannot init krb5-context (required for destroying krb5 caches), we",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e55cbac_f96a4232",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T04:44:25Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* Clear the cached global krb5 principal list and destroy the krb5 caches */",
+      "revId": "4005523f5a28faf13faf05bf7086cb9dabc0ff42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
