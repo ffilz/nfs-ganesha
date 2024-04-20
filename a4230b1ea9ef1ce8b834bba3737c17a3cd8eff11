@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d34dbf3a_fcc36b29",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T11:14:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!ple-\u003eccname) {\n+\t\treturn;\n+\t}",
+      "revId": "a4230b1ea9ef1ce8b834bba3737c17a3cd8eff11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6830cda5_eb0fd1b3",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T11:14:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (ple-\u003erealm !\u003d NULL) {\n+\t\tgsh_free(ple-\u003erealm);\n+\t}",
+      "revId": "a4230b1ea9ef1ce8b834bba3737c17a3cd8eff11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9eae9dc_f4d0e708",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T11:14:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (ple-\u003eccname !\u003d NULL) {\n+\t\tgsh_free(ple-\u003eccname);\n+\t}",
+      "revId": "a4230b1ea9ef1ce8b834bba3737c17a3cd8eff11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c5b280_14012df8",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T11:14:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (context !\u003d NULL) {\n+\t\tkrb5_free_principal(*context, ple-\u003eprinc);\n+\t}",
+      "revId": "a4230b1ea9ef1ce8b834bba3737c17a3cd8eff11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebcbca11_e347d90f",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T11:14:42Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (context !\u003d NULL) {\n+\t\t\tdestroy_krb5_creds_cache(ple, context);\n+\t\t}",
+      "revId": "a4230b1ea9ef1ce8b834bba3737c17a3cd8eff11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "794b57fb_c10fde94",
+        "filename": "src/RPCAL/gss_credcache.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T11:14:42Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void gssd_clear_cred_cache() should probably be void gssd_clear_cred_cache(void)\n+void gssd_clear_cred_cache()",
+      "revId": "a4230b1ea9ef1ce8b834bba3737c17a3cd8eff11",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
