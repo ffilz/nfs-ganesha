@@ -2260,6 +2260,21 @@ state_status_t do_lock_op(struct fsal_obj_handle *obj,
 		break;
 	}
 
+	if (nfs4_clientid != NULL) {
+		if (fsal_lock_op == FSAL_OP_UNLOCK
+			&& nfs4_clientid->cid_confirmed == STALE_CLIENT_ID) {
+			if (fsal_export->exp_ops.fs_supports(fsal_export,
+					fso_lock_full_control)) {
+				LogDebug(COMPONENT_STATE,
+					"skip unlock of stale nfs4_clientid. FSAL need the lock record to check lock reclaim");
+				return STATE_SUCCESS;
+			}
+		}
+
+		lock->clid = nfs4_clientid->cid_clientid;
+		lock->saddr = nfs4_clientid->cid_server_addr;
+	}
+
 	/* If the owner gsh_client doesn't match the op_ctx and is not NULL
 	 * then save the op_ctx->client and switch to owner_client.
 	 */
