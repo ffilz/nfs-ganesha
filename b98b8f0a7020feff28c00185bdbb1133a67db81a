@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141e7654_b1a0dc53",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T03:51:45Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+extern bool idmapping_enabled;",
+      "revId": "b98b8f0a7020feff28c00185bdbb1133a67db81a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
