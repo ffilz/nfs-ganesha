@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66dafb22_2c1a60b2",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-20T10:59:53Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!status) {\n+\t\tLogFatal(COMPONENT_CONFIG, \"Failed to set idmapping status\");\n+\t}",
+      "revId": "1fc5e90f6f9e8f623e400bf32fbd42b8a0f25427",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
