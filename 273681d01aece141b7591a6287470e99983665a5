@@ -16,6 +16,24 @@
       "message": "I don\u0027t think this is a good idea.  It may work currently (or it may not), but this is calling into ntirpc before it\u0027s initialized, to it may start failing at any point.  You shouldn\u0027t call any ntirpc methods before calling svc_init(), which is why this was split in the first place.",
       "revId": "273681d01aece141b7591a6287470e99983665a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5340307_1e823405",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1021521
+      },
+      "writtenOn": "2024-04-22T15:06:24Z",
+      "side": 1,
+      "message": "I agree with you on this.\n\nIn the existing implementation as well, the function `svcauth_gss_set_svc_name` is called before `svc_init`. It works today, because the `svc_init` does not interact with `svc_auth_gss.c`. If that changes in the future, it can break things.\n\nHowever, this CL does not attempt to fix that. It only does the refactoring with the same assumption that `svc_auth_gss` methods can be called before `svc_init`. I fix this assumption in the next CL (https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1193526), by calling `gss_principal_init` after `nfs_Init_svc`.",
+      "parentUuid": "103f9073_6dea2e92",
+      "revId": "273681d01aece141b7591a6287470e99983665a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
