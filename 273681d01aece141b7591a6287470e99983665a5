@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "103f9073_6dea2e92",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-04-22T14:38:52Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a good idea.  It may work currently (or it may not), but this is calling into ntirpc before it\u0027s initialized, to it may start failing at any point.  You shouldn\u0027t call any ntirpc methods before calling svc_init(), which is why this was split in the first place.",
+      "revId": "273681d01aece141b7591a6287470e99983665a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
