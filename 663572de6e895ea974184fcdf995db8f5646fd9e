@@ -51,6 +51,24 @@
       "message": "Please push this patch with the up to date preceding patches so that the relation chain shows current patches.",
       "revId": "663572de6e895ea974184fcdf995db8f5646fd9e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a81ea6fe_04df9a38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-04-24T18:27:56Z",
+      "side": 1,
+      "message": "I still see two patches in the relation chain for this patch, and 3 when I look at Config: Fix Long Parsing Time for Large Exports and then there is also Fixing performance issues with export add and update operations\n\nThat causes confusion when I do a merge and makes it possible I merge the wrong version of a patch",
+      "parentUuid": "7d2d6e6a_3c780484",
+      "revId": "663572de6e895ea974184fcdf995db8f5646fd9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
