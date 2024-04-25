@@ -382,19 +382,8 @@ if(USE_GTEST)
   endif((NOT LTTNG_FOUND) OR (NOT GPERFTOOLS_FOUND) OR (NOT GTEST_FOUND))
 endif(USE_GTEST)
 
-# NFS RDMA
-option(USE_NFS_RDMA "enable NFS/RDMA support" OFF)
-
-if(USE_NFS_RDMA)
-    # NFS/RDMA is unsupported and should not be used currently
-    message(STATUS "-------------------------------------------------------------------------")
-    message(STATUS "The RDMA effort for Ganesha has been long abandoned, the current code may")
-    message(STATUS "or may not compile but is most likely not functional and certainly is not")
-    message(STATUS "supported by the active development team. If anyone develops an interest")
-    message(STATUS "in actively developing and supporting RDMA, we would welcome you.")
-    message(STATUS "-------------------------------------------------------------------------")
-    message(FATAL_ERROR "Aborting - NFS/RDMA not currently supported.")
-endif(USE_NFS_RDMA)
+# Enable NFS Over RDMA Support
+option(USE_NFS_RDMA "enable NFS/RDMA support" ON)
 
 # Enable 9P Support
 option(USE_9P "enable 9P support" ON)
@@ -514,8 +503,14 @@ ENDIF()
 
 if(USE_NFS_RDMA OR USE_9P_RDMA)
   find_package(RDMA REQUIRED)
-  include_directories(${RDMA_INCLUDE_DIR})
-  set(SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${RDMA_LIBRARY})
+  if(RDMA_FOUND)
+    include_directories(${RDMA_INCLUDE_DIR})
+    set(SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${RDMA_LIBRARY})
+  else(RDMA_FOUND)
+    set(USE_NFS_RDMA OFF)
+    set(USE_9P_RDMA OFF)
+    message(FATAL_ERROR "Could not find RDMA dependencies, disabling RDMA Support")
+  endif(RDMA_FOUND)
 endif(USE_NFS_RDMA OR USE_9P_RDMA)
 
 if(USE_9P_RDMA AND NOT USE_9P)
@@ -1374,6 +1369,7 @@ message(STATUS "USE_9P = ${USE_9P}")
 message(STATUS "_USE_9P = ${_USE_9P}")
 message(STATUS "_USE_9P_RDMA = ${_USE_9P_RDMA}")
 message(STATUS "USE_NFS_RDMA = ${USE_NFS_RDMA}")
+message(STATUS "USE_RPC_RDMA = ${USE_RPC_RDMA}")
 message(STATUS "USE_NFS3 = ${USE_NFS3}")
 message(STATUS "USE_NLM = ${USE_NLM}")
 message(STATUS "USE_NFSACL3 = ${USE_NFSACL3}")
@@ -1470,12 +1466,12 @@ set(USE_NLM ${USE_NLM}
 
 set(USE_NFS_RDMA ${USE_NFS_RDMA}
   CACHE BOOL
-  "enable nfs RDMA"
+  "enable NFS Over RDMA"
   FORCE)
 
 set(_USE_NFS_RDMA ${USE_NFS_RDMA}
   CACHE BOOL
-  "enable nfs RDMA in config"
+  "enable NFS Over RDMA in config"
   FORCE)
 
 set(USE_ACL_MAPPING ${USE_ACL_MAPPING}
