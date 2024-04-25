@@ -28,4 +28,8 @@ set(_MSPAC_SUPPORT OFF)
 set(USE_9P OFF)
 set(USE_DBUS ON)
 
+# Enabling NFS_Over_RDMA
+set(USE_NFS_RDMA ON)
+set(USE_RPC_RDMA ON)
+
 message(STATUS "Building vfs_only configuration")
