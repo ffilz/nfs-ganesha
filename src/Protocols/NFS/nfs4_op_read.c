@@ -121,10 +121,12 @@ static enum nfs_req_result nfs4_complete_read(struct nfs4_read_data *data)
 			     " read length = %zu eof=%u", read_arg->offset,
 			     read_arg->io_amount, read_arg->end_of_file);
 	} else {
-		int i;
+		if (!op_ctx->is_rdma_buff_used) {
+			int i;
 
-		for (i = 0; i < read_arg->iov_count; ++i) {
-			gsh_free(read_arg->iov[i].iov_base);
+			for (i = 0; i < read_arg->iov_count; ++i) {
+				gsh_free(read_arg->iov[i].iov_base);
+			}
 		}
 
 		data->res_READ4->READ4res_u.resok4.data.data_val = NULL;
@@ -475,7 +477,6 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 	uint64_t offset = 0;
 	uint64_t MaxRead = 0;
 	uint64_t MaxOffsetRead = 0;
-	void *bufferdata = NULL;
 	fsal_status_t fsal_status = {0, 0};
 	state_t *state_found = NULL;
 	state_t *state_open = NULL;
@@ -719,9 +720,6 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 		goto out;
 	}
 
-	/* Some work is to be done */
-	bufferdata = gsh_malloc_aligned(4096, RNDUP(size));
-
 	if (!anonymous_started && data->minorversion == 0) {
 		owner = get_state_owner_ref(state_found);
 		if (owner != NULL) {
@@ -738,7 +736,8 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 	read_arg->offset = offset;
 	read_arg->iov_count = 1;
 	read_arg->iov[0].iov_len = size;
-	read_arg->iov[0].iov_base = bufferdata;
+	read_arg->iov[0].iov_base = get_buffer_for_io_response(data->req,
+							       RNDUP(size));
 	read_arg->io_amount = 0;
 	read_arg->end_of_file = false;
 
@@ -857,8 +856,10 @@ void xdr_READ4res_uio_release(struct xdr_uio *uio, u_int flags)
 		     uio, uio->uio_references, (int) uio->uio_count);
 
 	if (!(--uio->uio_references)) {
-		for (ix = 0; ix < uio->uio_count; ix++) {
-			gsh_free(uio->uio_vio[ix].vio_base);
+		if (!op_ctx->is_rdma_buff_used) {
+			for (ix = 0; ix < uio->uio_count; ix++) {
+				gsh_free(uio->uio_vio[ix].vio_base);
+			}
 		}
 		gsh_free(uio);
 	}
@@ -914,10 +915,13 @@ void nfs4_op_read_Free(nfs_resop4 *res)
 {
 	READ4res *resp = &res->nfs_resop4_u.opread;
 
-	if (resp->status == NFS4_OK)
-		if (resp->READ4res_u.resok4.data.data_val != NULL)
-			gsh_free(resp->READ4res_u.resok4.data.data_val);
-}
+	if (resp->status == NFS4_OK) {
+		if (!op_ctx->is_rdma_buff_used) {
+			if (resp->READ4res_u.resok4.data.data_val != NULL)
+				gsh_free(resp->READ4res_u.resok4.data.data_val);
+		}
+		resp->READ4res_u.resok4.data.data_val = NULL;
+	}}
 
 /**
  * @brief The NFS4_OP_READ_PLUS operation
@@ -987,9 +991,13 @@ void nfs4_op_read_plus_Free(nfs_resop4 *res)
 	READ_PLUS4res *resp = &res->nfs_resop4_u.opread_plus;
 	contents *conp = &resp->rpr_resok4.rpr_contents;
 
-	if (resp->rpr_status == NFS4_OK && conp->what == NFS4_CONTENT_DATA)
-		if (conp->data.d_data.data_val != NULL)
-			gsh_free(conp->data.d_data.data_val);
+	if (resp->rpr_status == NFS4_OK && conp->what == NFS4_CONTENT_DATA) {
+		if (!op_ctx->is_rdma_buff_used) {
+			if (conp->data.d_data.data_val != NULL)
+				gsh_free(conp->data.d_data.data_val);
+		}
+		conp->data.d_data.data_val = NULL;
+	}
 }
 
 /**
