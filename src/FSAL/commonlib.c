@@ -3678,4 +3678,19 @@ void fd_usage_summarize_dbus(DBusMessageIter *iter)
 }
 #endif /* USE_DBUS */
 
+void * get_buffer_for_io_response(struct svc_req *req,
+				  uint64_t size)
+{
+	// Whether it's RDMA enabled and having data chunk
+	if (req->rq_xprt->xp_rdma && req->data_chunk) {
+		LogDebug(COMPONENT_TIRPC, "Using req %p data chunk %p",
+			 req, req->data_chunk);
+
+		req->is_rdma_buff_used = op_ctx->is_rdma_buff_used = true;
+		return req->data_chunk;
+	} else {
+		return gsh_malloc_aligned(4096, RNDUP(size));
+	}
+}
+
 /** @} */
