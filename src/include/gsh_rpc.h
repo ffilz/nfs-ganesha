@@ -284,6 +284,11 @@ extern tirpc_pkg_params ntirpc_pp;
 sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4);
 bool is_loopback(sockaddr_t *addr);
 
+/**
+ * API to get the buffer to fill the IO Payloads,
+ */
+void * get_buffer_for_io_response(struct svc_req *req, uint64_t size);
+
 #ifdef __cplusplus
 }
 #endif
