@@ -16,6 +16,24 @@
       "message": "Enabled NFS Over RDMA by default, to validate basic compilations...\n\nIf fails, then need help to install below devel packages...\n1) libibverbs-devel\n2) librdmacm-devel",
       "revId": "814f7110aef9279bf7de2bb31f0387c00c4a141f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c64812d9_1a1ea8fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037973
+      },
+      "writtenOn": "2024-04-25T13:46:01Z",
+      "side": 1,
+      "message": "Has there been any verification on enabling NFS over RDMA feature by default? There might be some risks involved.",
+      "parentUuid": "e9286e7e_9265061a",
+      "revId": "814f7110aef9279bf7de2bb31f0387c00c4a141f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
