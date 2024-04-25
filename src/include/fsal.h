@@ -124,6 +124,11 @@ void restore_op_context_export(struct saved_export_context *saved);
 void discard_op_context_export(struct saved_export_context *saved);
 void set_op_context_pnfs_ds(struct fsal_pnfs_ds *pds);
 
+/**
+ * API to get the buffer to fill the IO Payloads
+ */
+void *get_buffer_for_io_response(struct svc_req *req, uint64_t size);
+
 /******************************************************
  *                Structure used to define a fsal
  ******************************************************/
