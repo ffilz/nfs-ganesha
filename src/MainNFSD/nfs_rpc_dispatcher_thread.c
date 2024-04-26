@@ -488,6 +488,17 @@ static enum xprt_stat nfs_rpc_dispatch_tcp_VSOCK(SVCXPRT *xprt)
 }
 #endif
 
+#ifdef _USE_NFS_RDMA
+static enum xprt_stat nfs_rpc_dispatch_RDMA(SVCXPRT *xprt)
+{
+	LogFullDebug(COMPONENT_DISPATCH,
+		     "RDMA request on SVCXPRT %p fd %d stat %d",
+		     xprt, xprt->xp_fd, SVC_STAT(xprt->xp_parent));
+	xprt->xp_dispatch.process_cb = nfs_rpc_valid_NFS;
+	return SVC_STAT(xprt->xp_parent);
+}
+#endif
+
 const svc_xprt_fun_t tcp_dispatch[P_COUNT] = {
 	nfs_rpc_dispatch_tcp_NFS,
 #ifdef _USE_NFS3
@@ -506,7 +517,7 @@ const svc_xprt_fun_t tcp_dispatch[P_COUNT] = {
 	nfs_rpc_dispatch_tcp_VSOCK,
 #endif
 #ifdef _USE_NFS_RDMA
-	NULL,
+	nfs_rpc_dispatch_RDMA,
 #endif
 };
 
@@ -569,15 +580,6 @@ struct rpc_rdma_attr rpc_rdma_xa = {
 	.use_srq = false,
 };
 
-static enum xprt_stat nfs_rpc_dispatch_RDMA(SVCXPRT *xprt)
-{
-	LogFullDebug(COMPONENT_DISPATCH,
-		     "RDMA request on SVCXPRT %p fd %d",
-		     xprt, xprt->xp_fd);
-	xprt->xp_dispatch.process_cb = nfs_rpc_valid_NFS;
-	return SVC_STAT(xprt->xp_parent);
-}
-
 void Create_RDMA(protos prot)
 {
 	/* Override the RDMA service port as per the port configured */
@@ -595,7 +597,7 @@ void Create_RDMA(protos prot)
 		LogFatal(COMPONENT_DISPATCH, "Cannot allocate RPC/%s SVCXPRT",
 			 tags[prot]);
 
-	tcp_xprt[prot]->xp_dispatch.rendezvous_cb = nfs_rpc_dispatch_RDMA;
+	tcp_xprt[prot]->xp_dispatch.rendezvous_cb = tcp_dispatch[prot];
 
 	/* Hook xp_free_user_data (finalize/free private data) */
 	(void)SVC_CONTROL(tcp_xprt[prot], SVCSET_XP_FREE_USER_DATA,
