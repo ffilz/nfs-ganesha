@@ -16,6 +16,24 @@
       "message": "This probably should have something different so CI without the proper support doesn\u0027t try to build RDMA",
       "revId": "7b092da50417e28fc85f38911a42e74e2730b2d1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7739d9_cd516472",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-04-26T15:29:06Z",
+      "side": 1,
+      "message": "Yes, Like we discussed, I had enabled NFS Over RDMA by default, to validate basic compilations of community codes on CI...\n\nSince it fails, need help to install below devel packages in our CI compile/build/deploy environments...\n1) libibverbs-devel\n2) librdmacm-devel",
+      "parentUuid": "3ed4fe09_419ed607",
+      "revId": "7b092da50417e28fc85f38911a42e74e2730b2d1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
