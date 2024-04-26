@@ -1390,6 +1390,8 @@ void nfs_Init_svc(void)
 #endif
 #ifdef _USE_NFS_RDMA
 	svc_params.nfs_rdma_port = nfs_param.core_param.port[P_NFS_RDMA];
+	svc_params.max_rdma_connections =
+		nfs_param.core_param.rpc.max_rdma_connections;
 #endif
 
 	/* Only after TI-RPC allocators, log channel are setup */
