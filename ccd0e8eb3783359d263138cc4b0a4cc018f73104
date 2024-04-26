@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd989e4_a7ea0097",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3681,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-26T15:43:52Z",
+      "side": 1,
+      "message": "ERROR: \"foo * bar\" should be \"foo *bar\"\n+void * get_buffer_for_io_response(struct svc_req *req,",
+      "revId": "ccd0e8eb3783359d263138cc4b0a4cc018f73104",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28aad226_53dab468",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3688,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-26T15:43:52Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogDebug(COMPONENT_TIRPC, \"Using req %p data chunk %p \"\n+\t\t    \"data chunk length %d\",",
+      "revId": "ccd0e8eb3783359d263138cc4b0a4cc018f73104",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c6c36a_b03a1dae",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-04-26T15:43:52Z",
+      "side": 1,
+      "message": "ERROR: \"foo * bar\" should be \"foo *bar\"\n+void * get_buffer_for_io_response(struct svc_req *req,",
+      "revId": "ccd0e8eb3783359d263138cc4b0a4cc018f73104",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
