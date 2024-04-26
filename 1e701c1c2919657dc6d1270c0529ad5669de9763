@@ -71,6 +71,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84036d83_df80b4c4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3684,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-04-26T15:43:26Z",
+      "side": 1,
+      "message": "Yes, Frank, will clean them up :-)",
+      "parentUuid": "b1642015_59d5d215",
+      "revId": "1e701c1c2919657dc6d1270c0529ad5669de9763",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a40142c1_707cdad8",
@@ -84,6 +102,24 @@
       "writtenOn": "2024-04-25T21:53:23Z",
       "side": 1,
       "message": "Does this need to be in ifdef?",
+      "revId": "1e701c1c2919657dc6d1270c0529ad5669de9763",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00da2d64_ff34dd95",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3685,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-04-26T15:43:26Z",
+      "side": 1,
+      "message": "Yeah, this was for showcasing the changes in common codes...\nWill update with proper compile flags :-)",
+      "parentUuid": "a40142c1_707cdad8",
       "revId": "1e701c1c2919657dc6d1270c0529ad5669de9763",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
