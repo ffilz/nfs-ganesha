@@ -30,8 +30,11 @@ if(HAVE_ACL_LIBACL_H)
   check_library_exists(acl acl_get_file "" HAVE_LIBACL)
 endif(HAVE_ACL_LIBACL_H)
 
-if(HAVE_SYS_ACL_H)
-  # Available on FreeBSD (and perhaps others) - replace on Linux
-  check_symbol_exists(acl_get_fd_np sys/acl.h HAVE_ACL_GET_FD_NP)
-  check_symbol_exists(acl_set_fd_np sys/acl.h HAVE_ACL_SET_FD_NP)
-endif(HAVE_SYS_ACL_H)
+if (NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  # We know Linux doesn't have them, use the versions in os/linux/acl.c
+  if(HAVE_SYS_ACL_H)
+    # Available on FreeBSD (and perhaps others) - replace on Linux
+    check_symbol_exists(acl_get_fd_np sys/acl.h HAVE_ACL_GET_FD_NP)
+    check_symbol_exists(acl_set_fd_np sys/acl.h HAVE_ACL_SET_FD_NP)
+  endif(HAVE_SYS_ACL_H)
+endif()
