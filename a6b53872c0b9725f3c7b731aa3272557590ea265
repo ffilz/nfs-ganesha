@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a175af1_175bc443",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-05-02T23:48:29Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this is needed.  We\u0027re seeing ACL support successfully built on CentOS 7 and Rocky Linux 8.  I\u0027m sure I\u0027ve previously tested it on a large number of platforms using containers.\n\n`HAVE_ACL_GET_FD_NP` is logically used in 2 places:\n\n1. In `src/include/os/linux/acl.h` and `src/os/linux/acl.c`, to decide if the\n   replacement should be declared and built.\n   \n2. In `src/CMakeLists.txt` to decide if the feature needs to be disabled.  There,\n   the condition for disabling is:\n   ```(NOT (HAVE_ACL_GET_FD_NP OR LINUX))```\n   So, this can only be disabled if the platform isn\u0027t Linux.\n   \nWhat platform isn\u0027t this working on?\n\nI\u0027ll test running cmake in a bunch of containers and see if I can see a failure.",
+      "revId": "a6b53872c0b9725f3c7b731aa3272557590ea265",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
