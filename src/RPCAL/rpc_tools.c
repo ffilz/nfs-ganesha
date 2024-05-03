@@ -476,3 +476,194 @@ bool is_loopback(sockaddr_t *addr)
 			   &in6addr_loopback,
 			   sizeof(in6addr_loopback)) == 0);
 }
+
+static void xdr_io_data_uio_release(struct xdr_uio *uio, u_int flags)
+{
+	int ix;
+	io_data *io_data = uio->uio_u2;
+
+	LogFullDebug(COMPONENT_NFS_V4,
+		     "Releasing %p, references %"PRIi32", count %d",
+		     uio, uio->uio_references, (int) uio->uio_count);
+
+	if (--uio->uio_references != 0)
+		return;
+
+	if (io_data->release != NULL) {
+		/* Handle the case where the io_data comes with its
+		 * own release method.
+		 *
+		 * Note if extra buffer was used to handle RNDUP, the
+		 * io_data release function doesn't even know about it so will
+		 * not free it.
+		 */
+		io_data->release(io_data);
+	} else {
+		if (uio->uio_u1 != NULL) {
+			/* Don't free the last buffer! It was allocated along
+			 * with uio..
+			 */
+			uio->uio_count--;
+		}
+
+		/* Free the buffers that had been allocated */
+		for (ix = 0; ix < uio->uio_count; ix++) {
+			gsh_free(uio->uio_vio[ix].vio_base);
+		}
+	}
+
+	gsh_free(uio);
+}
+
+static inline bool xdr_io_data_encode(XDR *xdrs, io_data *objp)
+{
+	struct xdr_uio *uio;
+	uint32_t size = objp->data_len;
+	/* The size to actually be written must be a multiple of
+	 * BYTES_PER_XDR_UNIT
+	 */
+	uint32_t size2 = RNDUP(size);
+	int i, extra, last;
+	int count = objp->iovcnt;
+
+	if (!inline_xdr_u_int32_t(xdrs, &size))
+		return false;
+
+	if (size != size2) {
+		/* Add an extra buffer for round up */
+		count++;
+		extra = BYTES_PER_XDR_UNIT;
+		last = objp->iovcnt - 1;
+	}
+
+	uio = gsh_calloc(1, sizeof(struct xdr_uio) +
+			 count * sizeof(struct xdr_vio) + extra);
+	uio->uio_release = xdr_io_data_uio_release;
+	uio->uio_count = count;
+	uio->uio_u2 = objp->release_data;
+
+	for (i = 0; i < objp->iovcnt; i++) {
+		size_t i_size = objp->iov[i].iov_len;
+
+		uio->uio_vio[i].vio_base = objp->iov[i].iov_base;
+		uio->uio_vio[i].vio_head = objp->iov[i].iov_base;
+		uio->uio_vio[i].vio_tail = objp->iov[i].iov_base + i_size;
+		uio->uio_vio[i].vio_wrap = objp->iov[i].iov_base + i_size;
+		uio->uio_vio[i].vio_length = i_size;
+		uio->uio_vio[i].vio_type = VIO_DATA;
+	}
+
+	if (size != size2) {
+		/* grab the last N bytes of last buffer into extra */
+		size_t n = size2 - size;
+		char *p = objp->iov[last].iov_base +
+			  objp->iov[last].iov_len - n;
+		char *extra = (char *) uio + sizeof(struct xdr_uio) +
+					     count * sizeof(struct xdr_vio);
+
+		/* drop those bytes from the last buffer */
+		uio->uio_vio[last].vio_tail -= n;
+		uio->uio_vio[last].vio_wrap -= n;
+		uio->uio_vio[last].vio_length -= n;
+
+		/* move the bytes to the extra buffer and set it up as a
+		 * BYTES_PER_XDR_UNIT (4) byte buffer. Because it is part of the
+		 * memory we allocated above with calloc, the extra bytes are
+		 * already zeroed.
+		 */
+		memcpy(extra, p, n);
+
+		i = count - 1;
+		uio->uio_vio[count - 1].vio_base = p;
+		uio->uio_vio[count - 1].vio_head = p;
+		uio->uio_vio[count - 1].vio_tail = p + BYTES_PER_XDR_UNIT;
+		uio->uio_vio[count - 1].vio_wrap = p + BYTES_PER_XDR_UNIT;
+		uio->uio_vio[count - 1].vio_length = BYTES_PER_XDR_UNIT;
+		uio->uio_vio[count - 1].vio_type = VIO_DATA;
+
+		/* Remember so we don't free... */
+		uio->uio_u1 = extra;
+	}
+
+	LogFullDebug(COMPONENT_NFS_V4,
+		     "Allocated %p, references %"PRIi32", count %d",
+		     uio, uio->uio_references, (int) uio->uio_count);
+
+	if (!xdr_putbufs(xdrs, uio, UIO_FLAG_NONE)) {
+		uio->uio_release(uio, UIO_FLAG_NONE);
+		return false;
+	}
+
+	return true;
+}
+
+static inline bool xdr_io_data_decode(XDR *xdrs, io_data *objp)
+{
+	uint32_t start;
+	struct xdr_vio *vio;
+	int i;
+
+	/* Get the data_len */
+	if (!inline_xdr_u_int32_t(xdrs, &objp->data_len))
+		return false;
+
+	/* Get the current position in the stream */
+	start = XDR_GETPOS(xdrs);
+
+	/* Find out how many buffers the data occupies */
+	objp->iovcnt = XDR_IOVCOUNT(xdrs, start, objp->data_len);
+
+	/* Allocate a vio to extract the data buffers into */
+	vio = gsh_calloc(objp->iovcnt, sizeof(*vio));
+
+	/* Get the data buffers - XDR_FILLBUFS happens to do what we want... */
+	if (!XDR_FILLBUFS(xdrs, start, vio, objp->data_len)) {
+		gsh_free(vio);
+		return false;
+	}
+
+	/* Now allocate an iovec to carry the data */
+	objp->iov = gsh_calloc(objp->iovcnt, sizeof(*objp->iov));
+
+	/* Convert the xdr_vio to an iovec */
+	for (i = 0; i < objp->iovcnt; i++) {
+		objp->iov[i].iov_base = vio[i].vio_head;
+		objp->iov[i].iov_len = vio[i].vio_length;
+		__warnx(TIRPC_DEBUG_FLAG_SVC_VC,
+			"%s: %p iov[%d].vio_head %p vio_length %z",
+			__func__, xdrs, i,
+			objp->iov[i].iov_base,
+			objp->iov[i].iov_len);
+	}
+
+	/* We're done with the vio */
+	gsh_free(vio);
+
+	/* Now advance the position past the data */
+	if (!XDR_SETPOS(xdrs, start + objp->data_len)) {
+		gsh_free(objp->iov);
+		objp->iov = NULL;
+		return false;
+	}
+
+	return true;
+}
+
+bool xdr_io_data(XDR *xdrs, io_data *objp)
+{
+	if (xdrs->x_op == XDR_ENCODE) {
+		/* We are going to use putbufs */
+		return xdr_io_data_encode(xdrs, objp);
+	}
+
+	if (xdrs->x_op == XDR_DECODE) {
+		/* We are going to use putbufs */
+		return xdr_io_data_decode(xdrs, objp);
+	}
+
+	/* All that remains is XDR_FREE */
+	gsh_free(objp->iov);
+	objp->iov = NULL;
+
+	return true;
+}
