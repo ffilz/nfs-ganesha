@@ -16,6 +16,24 @@
       "message": "I don\u0027t understand why this is needed.  We\u0027re seeing ACL support successfully built on CentOS 7 and Rocky Linux 8.  I\u0027m sure I\u0027ve previously tested it on a large number of platforms using containers.\n\n`HAVE_ACL_GET_FD_NP` is logically used in 2 places:\n\n1. In `src/include/os/linux/acl.h` and `src/os/linux/acl.c`, to decide if the\n   replacement should be declared and built.\n   \n2. In `src/CMakeLists.txt` to decide if the feature needs to be disabled.  There,\n   the condition for disabling is:\n   ```(NOT (HAVE_ACL_GET_FD_NP OR LINUX))```\n   So, this can only be disabled if the platform isn\u0027t Linux.\n   \nWhat platform isn\u0027t this working on?\n\nI\u0027ll test running cmake in a bunch of containers and see if I can see a failure.",
       "revId": "a6b53872c0b9725f3c7b731aa3272557590ea265",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d0760c_b24a4cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-05-03T00:56:44Z",
+      "side": 1,
+      "message": "I try to build on all possible platforms:\n```\n$ ganesha-container all sh -c \"rm -rf build/* \u0026\u0026 cd build \u0026\u0026 cmake -DUSE_FSAL_VFS\u003dON -DUSE_DBUS\u003dON -DENABLE_VFS_POSIX_ACL\u003dYES -DUSE_ADMIN_TOOLS\u003dYES ../nfs-ganesha/src\" \u003ebuild-all.out 2\u003e\u00261\n```\nThen:\n```\n$ grep \u0027\\(03 May 2024\\|ENABLE_VFS_POSIX_ACL\\)\u0027 build-all.out\nalmalinux 8 (Fri 03 May 2024 09:46:53 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\nalmalinux 9 (Fri 03 May 2024 09:49:20 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\ncentos 7 (Fri 03 May 2024 09:51:52 AEST)\ncentos 8 (Fri 03 May 2024 09:53:38 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\ncentos 9 (Fri 03 May 2024 09:56:46 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\ndebian 10 (Fri 03 May 2024 10:00:04 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\ndebian 11 (Fri 03 May 2024 10:01:54 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\ndebian 12 (Fri 03 May 2024 10:03:46 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\nfedora 37 (Fri 03 May 2024 10:05:48 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\nfedora 38 (Fri 03 May 2024 10:08:34 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\nrockylinux 8 (Fri 03 May 2024 10:11:33 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\nrockylinux 9 (Fri 03 May 2024 10:11:48 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\nsle 15.5 (Fri 03 May 2024 10:14:22 AEST)\nubuntu 18.04 (Fri 03 May 2024 10:18:19 AEST)\nubuntu 20.04 (Fri 03 May 2024 10:20:10 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\nubuntu 22.04 (Fri 03 May 2024 10:22:18 AEST)\n-- ENABLE_VFS_POSIX_ACL \u003d ON\n```\nOn all platforms where `cmake` runs successfully:\n```ENABLE_VFS_POSIX_ACL \u003d ON```\n`cmake` failures:\n* CentOS 7 and Ubuntu 18.04 fail due to missing `FindPython3.cmake` module\n* My experimental SLE 15.5 container fails due to missing Kerberos libraries",
+      "parentUuid": "8a175af1_175bc443",
+      "revId": "a6b53872c0b9725f3c7b731aa3272557590ea265",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
