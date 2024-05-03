@@ -34,6 +34,24 @@
       "parentUuid": "8a175af1_175bc443",
       "revId": "a6b53872c0b9725f3c7b731aa3272557590ea265",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c93fb9_fd544d93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2024-05-03T12:11:43Z",
+      "side": 1,
+      "message": "There\u0027s a different problem——\n\nsomeone at google using packages from our PPA (https://launchpad.net/~nfs-ganesha/+archive/ubuntu/nfs-ganesha-5) reported that ACLs aren\u0027t working.\n\nI build Fedora, CentOS, Ubuntu, Debian, and SUSE packages.\n\nAcross the board they all get \n ...\n -- ENABLE_VFS_POSIX_ACL \u003d OFF\n ...\n\nBut even with this change it\u0027s still getting disabled somewhere.\n\ne.g. https://kojipkgs.fedoraproject.org//packages/nfs-ganesha/5.7/8.fc41/data/logs/x86_64/build.log\n\nFurther investigation is required.",
+      "parentUuid": "a5d0760c_b24a4cd6",
+      "revId": "a6b53872c0b9725f3c7b731aa3272557590ea265",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
