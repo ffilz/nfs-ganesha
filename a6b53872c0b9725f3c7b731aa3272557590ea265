@@ -52,6 +52,24 @@
       "parentUuid": "a5d0760c_b24a4cd6",
       "revId": "a6b53872c0b9725f3c7b731aa3272557590ea265",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab9e6964_581c7414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-05-04T00:35:06Z",
+      "side": 1,
+      "message": "I can\u0027t see any build logs for the PPA builds, but the Fedora one doesn\u0027t have:\n```-DENABLE_VFS_POSIX_ACL\u003dYES```\nin the `cmake` command.  The default is `OFF`.\n\nI did originally propose a final commit to enable it by default.  However, it was failing tests, so that patch never got merged - I think it was abandoned.  I can\u0027t remember details, but it is possible the test failures were due to the early bugs for symlinks, device files, ..., which have since been fixed.  The fixes mean all relevant pyNFS tests now pass.\n\nI don\u0027t know how to go back in time in Gerrit find the original commit, along with test failures.  If you can find that then we could assess whether `ENABLE_VFS_POSIX_ACL` should now be enabled by default.",
+      "parentUuid": "48c93fb9_fd544d93",
+      "revId": "a6b53872c0b9725f3c7b731aa3272557590ea265",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
