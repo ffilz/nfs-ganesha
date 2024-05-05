@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure what the problem was, but this ended up being very chatty while running pynfs tests and somehow Ganesha aborted or terminated as a result of what was going on.\n\nPlease make sure this capability allows pynfs to pass without any explicit configuration.",
       "revId": "b3e854e90646f550b14fdeb00c57afd44e5abb14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e194b978_cb552efa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-05-05T11:30:23Z",
+      "side": 1,
+      "message": "Can you share how did you run pynfs? I couldn\u0027t reproduce such a failure\n\nThe new module writes logs to COMPONENT_XPRT, if it turns out to be too chatty, we can use a separate component.",
+      "parentUuid": "f4702f0c_8c5f32fd",
+      "revId": "b3e854e90646f550b14fdeb00c57afd44e5abb14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
