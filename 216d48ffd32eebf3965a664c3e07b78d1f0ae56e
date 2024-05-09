@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06ead53_a0bd6ef6",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-09T21:53:13Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tfor (ix \u003d 0; ix \u003c uio-\u003euio_count; ix++) {\n+\t\t\tgsh_free(uio-\u003euio_vio[ix].vio_base);\n+\t\t}",
+      "revId": "216d48ffd32eebf3965a664c3e07b78d1f0ae56e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
