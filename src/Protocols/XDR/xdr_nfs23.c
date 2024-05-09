@@ -8,7 +8,7 @@
  */
 #include "config.h"
 #include "gsh_rpc.h"
-#include "nfs23.h"
+#include "fsal.h"
 #include "nfs_fh.h"
 #include "fsal_convert.h"
 
@@ -799,8 +799,9 @@ void xdr_READ3res_uio_release(struct xdr_uio *uio, u_int flags)
 		     uio, uio->uio_references, (int) uio->uio_count);
 
 	if (!(--uio->uio_references)) {
-		for (ix = 0; ix < uio->uio_count; ix++) {
-			gsh_free(uio->uio_vio[ix].vio_base);
+		if (!op_ctx->is_rdma_buff_used) {
+			for (ix = 0; ix < uio->uio_count; ix++)
+				gsh_free(uio->uio_vio[ix].vio_base);
 		}
 		gsh_free(uio);
 	}
