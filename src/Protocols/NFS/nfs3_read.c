@@ -123,8 +123,9 @@ static int nfs3_complete_read(struct nfs3_read_data *data)
 		goto out;
 	}
 
-	for (i = 0; i < read_arg->iov_count; ++i) {
-		gsh_free(read_arg->iov[i].iov_base);
+	if (!op_ctx->is_rdma_buff_used) {
+		for (i = 0; i < read_arg->iov_count; ++i)
+			gsh_free(read_arg->iov[i].iov_base);
 	}
 
 	/* If we are here, there was an error */
@@ -384,7 +385,8 @@ int nfs3_read(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	read_arg->iov_count = 1;
 	read_arg->iov[0].iov_len = size;
 	/* Must allocate buffer as a multiple of BYTES_PER_XDR_UNIT */
-	read_arg->iov[0].iov_base = gsh_malloc(RNDUP(size));
+	read_arg->iov[0].iov_base = get_buffer_for_io_response(req,
+							       RNDUP(size));
 	read_arg->io_amount = 0;
 	read_arg->end_of_file = false;
 
@@ -457,6 +459,7 @@ void nfs3_read_free(nfs_res_t *res)
 {
 	if ((res->res_read3.status == NFS3_OK)
 	    && (res->res_read3.READ3res_u.resok.data.data_len != 0)) {
-		gsh_free(res->res_read3.READ3res_u.resok.data.data_val);
+		if (!op_ctx->is_rdma_buff_used)
+			gsh_free(res->res_read3.READ3res_u.resok.data.data_val);
 	}
 }
