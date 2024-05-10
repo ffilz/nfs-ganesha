@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63431c50_a8afc174",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-10T08:54:40Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n - fix the logic in set_fs_max_rdwr_size function to set the right fsinfo response",
+      "revId": "b41e3ba5202929612f8958249e88e353e64b0474",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f47efa_46ee0e5b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2878,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-10T08:54:40Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                export-\u003ePrefRead \u003d export-\u003eMaxRead;$",
+      "revId": "b41e3ba5202929612f8958249e88e353e64b0474",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0eff3e_565ec8d5",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2878,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-10T08:54:40Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                export-\u003ePrefRead \u003d export-\u003eMaxRead;$",
+      "revId": "b41e3ba5202929612f8958249e88e353e64b0474",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
