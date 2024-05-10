@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca199bea_f31901c1",
+        "filename": "src/include/gsh_rpc.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-10T16:26:58Z",
+      "side": 1,
+      "message": "ERROR: \"foo * bar\" should be \"foo *bar\"\n+void * get_buffer_for_io_response(struct svc_req *req, uint64_t size);",
+      "revId": "d267518479fb51665f9291281d1df806ee7e2582",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
