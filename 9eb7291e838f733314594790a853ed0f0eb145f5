@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fedcda30_722682cf",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-13T04:09:02Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tchar str[20];\n+\tsnprintf(str, 20, \"%d\", nfs_param.core_param.port[P_NFS_RDMA]);",
+      "revId": "9eb7291e838f733314594790a853ed0f0eb145f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
