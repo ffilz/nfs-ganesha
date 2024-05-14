@@ -16,6 +16,24 @@
       "message": "Can RDMA not use the same port as TCPv4 the way TCPv6 can?  It should be a different port domain.",
       "revId": "362dccb3801c9c0f64d1199a1cee8c7c8bfccd07",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "351f6560_c4238657",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-14T02:36:39Z",
+      "side": 1,
+      "message": "20049 is the default port (selected by IANA) but any other port can work (should be aligned in the NFS client as well). Hence made it configurable.\nhttps://www.speedguide.net/port.php?port\u003d20049",
+      "parentUuid": "0fea56c8_b3139f40",
+      "revId": "362dccb3801c9c0f64d1199a1cee8c7c8bfccd07",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
