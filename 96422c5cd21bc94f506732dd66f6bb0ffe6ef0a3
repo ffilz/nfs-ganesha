@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866c06e1_22622cc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-05-14T23:33:02Z",
+      "side": 1,
+      "message": "TL;DR: If someone wants to build with `-DUSE_NFS3\u003dOFF` (or `-DUSE_NFSACL3\u003dOFF`) and an FSAL that doesn\u0027t use POSIX ACLs (or, say with `-DUSE_FSAL_VFS\u003dON -DENABLE_VFS_POSIX_ACL\u003dOFF`) then `libacl` is technically not required but this change forces it to be available.\n\nIs this for `ENABLE_VFS_POSIX_ACL`?\n\nIf this is specified on the command-line then `libacl` is already mandatory:\n\n```\n$ cmake -DUSE_FSAL_VFS\u003dON -DENABLE_VFS_POSIX_ACL\u003dON ../nfs-ganesha/src\n[...]\n-- Looking for include file sys/acl.h\n-- Looking for include file sys/acl.h - not found\n-- Looking for include file acl/libacl.h\n-- Looking for include file acl/libacl.h - not found\nCMake Warning at CMakeLists.txt:686 (message):\n  Could not find libacl\n\n\nCMake Warning at CMakeLists.txt:690 (message):\n  Could not find sys/acl.h\n\n\nCMake Error at CMakeLists.txt:707 (message):\n  Missing VFS FSAL prerequisites, but requested on command line\n\n\n-- Configuring incomplete, errors occurred!\nSee also \"/home/martins/downloads/nfs-ganesha/build/CMakeFiles/CMakeOutput.log\".\nSee also \"/home/martins/downloads/nfs-ganesha/build/CMakeFiles/CMakeError.log\".\n\n```\nThis is handled by:\n```\n      else(ENABLE_VFS_POSIX_ACL)\n\tif(ENABLE_VFS_POSIX_ACL_REQUIRED)\n\t  message(FATAL_ERROR \"Missing VFS FSAL prerequisites, but requested on command line\")\n\telse(ENABLE_VFS_POSIX_ACL_REQUIRED)\n\t  message(WARNING \"Missing VFS FSAL prerequisites, disabling ENABLE_VFS_POSIX_ACL\")\n\tendif(ENABLE_VFS_POSIX_ACL_REQUIRED)\n      endif(ENABLE_VFS_POSIX_ACL)\n```\nThe error message is arguably weak.  It should probably say:\n```\nMissing VFS POSIX ACL prerequisities ...\n```\nor\n```\nMissing ENABLE_VFS_POSIX_ACL prerequisites ...\n```\nThe `_REQUIRED` thing seems to be a convention for ensuring that anything enabled on the `cmake` command-line causes a failure if it dependencies are missing.  If it isn\u0027t on the command-line but is enabled by default then the convention seems to be to disable it and warn.  However, this isn\u0027t done uniformly through `src/MakeLists.txt`.\n\nThe convention means that if someone really wants `ENABLE_VFS_POSIX_ACL` then they should always specify it on the `cmake` command-line to ensure failure if it can\u0027t be built.  However, I notice the default is still `OFF`, so it needs to be on the command-line regardless.\n\nIf a problem is being seen with another `libacl` user then this probably needs a `_REQUIRED` check too.  For example, I notice that `CEPHFS_POSIX_ACL`, `USE_NFSACL3`, `USE_FSAL_GLUSTER` all just warn and disable.\n\nIf someone\u0027s packaging file (e.g. RPM spec file) needs a particular feature then it should enable that feature on the `cmake` command-line rather than depending on defaults.  If a feature is enabled on the command-line but can\u0027t be built then `cmake` should fail - if this only generates a warning then that is a bug.\n\nHopefully, I\u0027m not being too hard-nosed, but the feature is there so we might as well use it.  Doing this consistently allows a minimal set of dependencies to be installed.",
+      "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
