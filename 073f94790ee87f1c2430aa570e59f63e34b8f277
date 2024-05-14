@@ -16,6 +16,24 @@
       "message": "Why can\u0027t this use the same config as TCP/UDP?  When would you want to allow v3 for TCP but not RDMA?",
       "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "563cff56_873a6d91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-14T02:42:11Z",
+      "side": 1,
+      "message": "Yes, since we are supporting limited protocol versions for NFSoRDMA, we wanted to control the access/mount, with this configuration.\nWe would be supporting v4.0, in current version. Hence default we wanna keep 4.0 enabled, though v3 also works.\nOnce in subsequent versions/patches, we start support other variants, user just need to enable it\u0027s support via this config.",
+      "parentUuid": "8a6fb271_cfcb1b56",
+      "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
