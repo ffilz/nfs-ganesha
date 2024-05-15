@@ -34,6 +34,24 @@
       "parentUuid": "8a6fb271_cfcb1b56",
       "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41827fa9_85acc83b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-05-15T13:14:10Z",
+      "side": 1,
+      "message": "I understand the current limited support, but the plan is to have full support, and when that happens we won\u0027t want to have separate config.  Removing config is much harder than adding it, so I\u0027d somewhat prefer to not add these, and consider RDMA to be under development until it supports the full 3/4 set.  I think for now we can just say \"don\u0027t do that\" if someone configures an invalid setup.",
+      "parentUuid": "563cff56_873a6d91",
+      "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
