@@ -52,6 +52,24 @@
       "parentUuid": "7478bb20_db9b6151",
       "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375e8866_97758a1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-05-15T22:58:11Z",
+      "side": 1,
+      "message": "\u003e This is unrelated to ENABLE_VFS_POSIX_ACL.  I got a new machine, and was getting my dev environment up.  Cmake passed, and the build failed because the headers from libacl were missing.  ENABLE_VFS_POSIX_ACL was off.\n\nWhere did the build fail?\n\nIf `cmake` passed but the build failed then that is a bug where something isn\u0027t checking for `libacl` before disabling a component or failing.\n\nI can\u0027t see that it would fail in the Gluster FSAL, because it should be disabled if `libacl` is not found.\n\nHowever, here is an example of what I was talking about in my previous comment:\n```\ndiff --git a/src/CMakeLists.txt b/src/CMakeLists.txt\nindex 84fe85a5c..e58162f37 100644\n--- a/src/CMakeLists.txt\n+++ b/src/CMakeLists.txt\n@@ -868,9 +868,13 @@ if(USE_FSAL_GLUSTER)\n \tset(USE_POSIX_ACLS ON)\n \tset(USE_ACL_MAPPING ON)\n     else(HAVE_LIBACL)\n+      if (USE_FSAL_GLUSTER_REQUIRED)\n+\tmessage(FATAL_ERROR \"Could not find libacl, but GLUSTER requested on command line.\")\n+      else (USE_FSAL_GLUSTER_REQUIRED)\n \tset(USE_POSIX_ACLS OFF)\n \tset(USE_FSAL_GLUSTER OFF)\n \tmessage(STATUS \"Could not find libacl, disabling GLUSTER fsal build\")\n+      endif(USE_FSAL_GLUSTER_REQUIRED)\n     endif(HAVE_LIBACL)\n     check_library_exists(gfapi glfs_xreaddirplus_r ${GFAPI_LIBDIR} HAVE_XREADDIRPLUS)\n     if(HAVE_XREADDIRPLUS)\n```\nThis way, if the Gluster FSAL requires `libacl`, which is not available, then the behaviour depends on whether the Gluster FSAL is being built by default or was specified on the `cmake` command-line.",
+      "parentUuid": "83ea31b6_99e6c88b",
+      "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
