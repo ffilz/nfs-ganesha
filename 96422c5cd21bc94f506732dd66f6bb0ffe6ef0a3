@@ -70,6 +70,24 @@
       "parentUuid": "83ea31b6_99e6c88b",
       "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f07074_110c0407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-15T23:17:45Z",
+      "side": 1,
+      "message": "I think we need to rethink how we enable ACLs. Certainly it should be an option to enable these two bits:\n\nACL support in a FSAL in use\nSupport of the NFS v3 POSIX ACL sideband protocol\n\nAnd then, to the extent that more than one ACL model is available for the back end, what do we do. Martin and I started a conversation yesterday on IRC.\n\nCertainly if libacl is not available, anything that depends on it can not be enabled, and following our rules on cmake, if an option was explicit on the cmake command line that can not be supported because libacl is not present, then we must fail the cmake.",
+      "parentUuid": "83ea31b6_99e6c88b",
+      "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
