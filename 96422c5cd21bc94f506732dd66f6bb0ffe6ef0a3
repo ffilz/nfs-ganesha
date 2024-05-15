@@ -34,6 +34,24 @@
       "parentUuid": "866c06e1_22622cc5",
       "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83ea31b6_99e6c88b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-05-15T13:37:11Z",
+      "side": 1,
+      "message": "This is unrelated to ENABLE_VFS_POSIX_ACL.  I got a new machine, and was getting my dev environment up.  Cmake passed, and the build failed because the headers from libacl were missing.  ENABLE_VFS_POSIX_ACL was off.",
+      "parentUuid": "7478bb20_db9b6151",
+      "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
