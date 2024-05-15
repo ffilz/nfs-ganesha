@@ -88,6 +88,24 @@
       "parentUuid": "83ea31b6_99e6c88b",
       "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c736b5d0_d8d85537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-05-15T23:58:19Z",
+      "side": 1,
+      "message": "I can try to have a go at that in the next few days (I have a long queue and some deadlines).\n\nI think this can clearly be removed from `USE_FSAL_GLUSTER` related magic:\n```\n$ git grep USE_POSIX_ACLS\nsrc/CMakeLists.txt:     set(USE_POSIX_ACLS ON)\nsrc/CMakeLists.txt:     set(USE_POSIX_ACLS OFF)\n```\nIt clearly isn\u0027t used.\n\nThen we\u0027re down to `USE_ACL_MAPPING` for the FSALs.  Or should this continue to be secondary to a new setting (e.g. `USE_FSAL_NFS4_POSIX_ACLS`), since `USE_ACL_MAPPING` is secondary to `USE_NFSACL3`?\n\nI think something new.  Not sure how easy it is to have `cmake` fail with errors like:\n`ENABLE_VFS_POSIX_ACL is no longer supported, use USE_FSAL_NFS4_POSIX_ACLS instead`\n\nDo we want deprecation warnings?",
+      "parentUuid": "f0f07074_110c0407",
+      "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
