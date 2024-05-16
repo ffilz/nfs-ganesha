@@ -44,6 +44,7 @@ SET(MainServices_STAT_SRCS
    nfs_rpc_tcp_socket_manager_thread.c
    nfs_init.c
    nfs_lib.c
+   nfs_metrics.c
    nfs_reaper_thread.c
    ../support/client_mgr.c
 )
@@ -147,7 +148,7 @@ set(ganesha_nfsd_OBJS
 if(USE_MONITORING)
   set(ganesha_nfsd_OBJS
     ${ganesha_nfsd_OBJS}
-    $<TARGET_OBJECTS:monitoring>
+    $<TARGET_OBJECTS:gmonitoring>
   )
 endif(USE_MONITORING)
 

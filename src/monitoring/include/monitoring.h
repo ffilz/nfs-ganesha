@@ -30,8 +30,12 @@
 #ifndef GANESHA_MONITORING_H
 #define GANESHA_MONITORING_H
 
+#include <stdbool.h>
 #include <stddef.h>
-#include "nfs23.h"
+#include <stdint.h>
+#include <stdlib.h>
+
+#include "gsh_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,7 +52,7 @@ void monitoring_register_export_label(export_id_t export_id, const char *label);
 void monitoring_init(const uint16_t port);
 
 /*
- * The following three functions generate the following metrics,
+ * The following two functions generate the following metrics,
  * exported both as total and per export.
  *
  * - Total request count.
@@ -60,30 +64,30 @@ void monitoring_init(const uint16_t port);
  * - Latency in ms as histogram.
  */
 
-void monitoring_nfs3_request(const uint32_t proc,
-			     const nsecs_elapsed_t request_time,
-			     const nfsstat3 status,
-			     const export_id_t export_id,
-			     const char *client_ip);
 
-void monitoring_nfs4_request(const uint32_t op,
-			     const nsecs_elapsed_t request_time,
-			     const nfsstat4 status,
-			     const export_id_t export_id,
-			     const char *client_ip);
+void monitoring__dynamic_observe_nfs_request(
+			      const char *operation,
+			      nsecs_elapsed_t request_time,
+			      const char *version,
+			      const char *status_label,
+			      export_id_t export_id,
+			      const char *client_ip);
 
-void monitoring_nfs_io(const size_t bytes_requested,
-		       const size_t bytes_transferred,
-		       const bool success,
-		       const bool is_write,
-		       const export_id_t export_id,
-		       const char *client_ip);
+void monitoring__dynamic_observe_nfs_io(
+			size_t bytes_requested,
+			size_t bytes_transferred,
+			bool success,
+			bool is_write,
+			export_id_t export_id,
+			const char *client_ip);
 
 /* MDCache hit rates. */
-void monitoring_mdcache_cache_hit(const char *operation,
-				  const export_id_t export_id);
-void monitoring_mdcache_cache_miss(const char *operation,
-				   const export_id_t export_id);
+void monitoring__dynamic_mdcache_cache_hit(
+				const char *operation,
+				export_id_t export_id);
+void monitoring__dynamic_mdcache_cache_miss(
+				const char *operation,
+				export_id_t export_id);
 
 /* In flight RPC stats. */
 void monitoring_rpc_received(void);
