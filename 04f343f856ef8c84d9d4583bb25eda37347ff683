@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b16bebe_7decd66c",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-17T17:15:05Z",
+      "side": 1,
+      "message": "We should add the constants for 4.1 and 4.2.",
+      "revId": "04f343f856ef8c84d9d4583bb25eda37347ff683",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b333ee_82c469f1",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-17T17:15:05Z",
+      "side": 1,
+      "message": "Should we have the tokens now for 4.1 and 4.2? And warn in the code when not supported?\n\nWe should think about how to make it easy to enable support for 4.x+\n\nCan we have tokens like 4.0+ and 4.1+\n\nDo we anticipate any future 4.x making challenge to support RDMA? We could cross that bridge when we get there...",
+      "revId": "04f343f856ef8c84d9d4583bb25eda37347ff683",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
