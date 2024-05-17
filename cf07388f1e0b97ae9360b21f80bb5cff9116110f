@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e405416e_6c16ef1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-17T17:17:01Z",
+      "side": 1,
+      "message": "In order to reduce the re-do of stuff for zero-copy, I will scaffold zero-copy to be ready for this. Then you can rebase RDMA on top of zero-copy and you will just be filling in the actual RDMA buffer allocation.",
+      "revId": "cf07388f1e0b97ae9360b21f80bb5cff9116110f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
