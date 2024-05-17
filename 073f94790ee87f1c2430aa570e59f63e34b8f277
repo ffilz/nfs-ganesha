@@ -52,6 +52,24 @@
       "parentUuid": "563cff56_873a6d91",
       "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6126f280_6c0dba3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-17T07:46:54Z",
+      "side": 1,
+      "message": "Yes, we could keep this config, just configure the required version that is supported for the product/FSAL...later update it going forward...\nFor eg, some products, which forwards RPC between the distributed nodes cannot support v3 by default, unless RDMA client is implemented in Ganesha...they could just have v4, with referals enabled by default...once supported, these config could be updated in subsequent versions",
+      "parentUuid": "41827fa9_85acc83b",
+      "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
