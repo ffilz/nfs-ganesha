@@ -83,6 +83,7 @@
 #include "FSAL/fsal_localfs.h"
 #ifdef USE_MONITORING
 #include "nfs_metrics.h"
+#include "sal_metrics.h"
 #endif
 
 pthread_mutexattr_t default_mutex_attr;
@@ -1023,6 +1024,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 
 #ifdef USE_MONITORING
 	nfs_metrics__init();
+	sal_metrics__init();
 #endif
 
 	/* acls cache may be needed by exports_pkginit */
