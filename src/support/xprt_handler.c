@@ -31,6 +31,7 @@
 #include "xprt_handler.h"
 #include "nfs_core.h"
 #include "sal_functions.h"
+#include "sal_metrics.h"
 
 /**
  * @brief Inits the xprt's user-data represented by the `xprt_custom_data_t`
@@ -51,8 +52,10 @@ void init_custom_data_for_xprt(SVCXPRT *xprt)
 	glist_init(&xprt_data->nfs41_sessions_holder.sessions);
 	PTHREAD_RWLOCK_init(
 		&xprt_data->nfs41_sessions_holder.sessions_lock, NULL);
+	xprt_data->nfs41_sessions_holder.num_sessions = 0;
 	xprt->xp_u1 = (void *) xprt_data;
 	xprt_data->status = ASSOCIATED_TO_XPRT;
+	sal_metrics__xprt_custom_data_status(ASSOCIATED_TO_XPRT);
 
 	display_xprt_sockaddr(&db, xprt);
 	LogDebug(COMPONENT_XPRT,
@@ -92,13 +95,17 @@ bool add_nfs41_session_to_xprt(SVCXPRT *xprt, nfs41_session_t *session)
 			xprt->xp_fd);
 		dec_session_ref(session);
 		gsh_free(new_entry);
+		sal_metrics__xprt_association_denied();
 		return false;
 	}
 
 	glist_add_tail(&xprt_data->nfs41_sessions_holder.sessions,
 		&new_entry->node);
+	const uint8_t num_sessions =
+		++xprt_data->nfs41_sessions_holder.num_sessions;
 	PTHREAD_RWLOCK_unlock(
 		&xprt_data->nfs41_sessions_holder.sessions_lock);
+	sal_metrics__xprt_sessions(num_sessions);
 	return true;
 }
 
@@ -111,6 +118,7 @@ void remove_nfs41_session_from_xprt(SVCXPRT *xprt,
 	struct glist_head *curr_node, *next_node;
 	xprt_custom_data_t *xprt_data;
 	nfs41_sessions_holder_t *sessions_holder;
+	uint8_t found_session_count = 0;
 
 	assert(xprt->xp_u1 != NULL);
 	xprt_data = (xprt_custom_data_t *) xprt->xp_u1;
@@ -126,9 +134,15 @@ void remove_nfs41_session_from_xprt(SVCXPRT *xprt,
 			dec_session_ref(curr_entry->session);
 			glist_del(curr_node);
 			gsh_free(curr_entry);
+			found_session_count++;
 		}
 	}
+	sessions_holder->num_sessions -= found_session_count;
+	const uint8_t num_sessions = sessions_holder->num_sessions;
 	PTHREAD_RWLOCK_unlock(&sessions_holder->sessions_lock);
+
+	if (found_session_count > 0)
+		sal_metrics__xprt_sessions(num_sessions);
 }
 
 /**
@@ -204,6 +218,7 @@ void dissociate_custom_data_from_xprt(SVCXPRT *xprt)
 	PTHREAD_RWLOCK_wrlock(&sessions_holder->sessions_lock);
 	/* Move all xprt-data sessions to the duplicate-sessions list */
 	glist_splice_tail(&duplicate_sessions, &sessions_holder->sessions);
+	sessions_holder->num_sessions = 0;
 	xprt_data->status = DISSOCIATED_FROM_XPRT;
 	PTHREAD_RWLOCK_unlock(&sessions_holder->sessions_lock);
 
@@ -226,6 +241,7 @@ void dissociate_custom_data_from_xprt(SVCXPRT *xprt)
 		glist_del(curr_node);
 		gsh_free(curr_entry);
 	}
+	sal_metrics__xprt_custom_data_status(DISSOCIATED_FROM_XPRT);
 	LogDebug(COMPONENT_XPRT,
 		"Done un-referencing of xprt with FD: %d, socket-addr: %s",
 		xprt->xp_fd, xprt_addr_str);
@@ -266,4 +282,5 @@ void destroy_custom_data_for_destroyed_xprt(SVCXPRT *xprt)
 	xprt_data->status = DESTROYED;
 	gsh_free(xprt_data);
 	xprt->xp_u1 = NULL;
+	sal_metrics__xprt_custom_data_status(DESTROYED);
 }
