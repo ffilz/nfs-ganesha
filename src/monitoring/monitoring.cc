@@ -389,12 +389,14 @@ void monitoring_register_export_label(const export_id_t export_id,
   exportLabels[export_id] = std::string(label);
 }
 
-void monitoring_init(const uint16_t port) {
+void monitoring__init(uint16_t port, bool enable_dynamic_metrics)
+{
   static bool initialized;
   if (initialized)
     return;
+  if (enable_dynamic_metrics)
+    dynamic_metrics = std::make_unique<DynamicMetrics>(registry);
   exposer.start(port);
-  dynamic_metrics = std::make_unique<DynamicMetrics>(registry);
   initialized = true;
 }
 
