@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39aac671_2d55f92d",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e219fa8_2343384b",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Total number of xprts per \"\n+\t\t\t\t\t\"custom-data status\",",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6644d7ed_d94be43d",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Distribution of number of sessions \"\n+\t\t\t\t\"associated with each xprt\",",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d18d963_e0192e5b",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Total number of clients per \"\n+\t\t\t\t\t\"state-protection type\",",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b8b6d3_f9d328de",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Distribution of number of \"\n+\t\t\t\t\"session-connections across sessions\",",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1215cf_86ee56f8",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Total number of denied session-and-xprt \"\n+\t\t\t\t\"associations across sessions\",",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd29856a_a043f5d8",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (blocked \u003d\u003d STATE_NON_BLOCKING) {\n[...]\n+\t} else {\n[...]",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bca2679_070dee33",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-19T18:35:38Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (lock_entry-\u003esle_blocked \u003d\u003d STATE_NON_BLOCKING) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "8070e7516b8d23634e2aad75ee95a1ae0415fc62",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
