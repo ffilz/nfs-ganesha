@@ -50,6 +50,7 @@
 #include "sal_functions.h"
 /*#include "nlm_util.h"*/
 #include "export_mgr.h"
+#include "sal_metrics.h"
 
 /**
  * @page state_lock_entry_locking state_lock_entry_t locking rule
@@ -600,6 +601,11 @@ static state_lock_entry_t *create_state_lock_entry(struct fsal_obj_handle *obj,
 	PTHREAD_MUTEX_unlock(&all_locks_mutex);
 #endif
 
+	if (blocked == STATE_NON_BLOCKING) {
+		sal_metrics__locks_inc(SAL_METRICS_HOLDERS);
+	} else {
+		sal_metrics__locks_inc(SAL_METRICS_WAITERS);
+	}
 	return new_entry;
 }
 
@@ -663,6 +669,12 @@ static void lock_entry_dec_ref(state_lock_entry_t *lock_entry)
 		glist_del(&lock_entry->sle_all_locks);
 		PTHREAD_MUTEX_unlock(&all_locks_mutex);
 #endif
+
+		if (lock_entry->sle_blocked == STATE_NON_BLOCKING) {
+			sal_metrics__locks_dec(SAL_METRICS_HOLDERS);
+		} else {
+			sal_metrics__locks_dec(SAL_METRICS_WAITERS);
+		}
 
 		lock_entry->sle_obj->obj_ops->put_ref(lock_entry->sle_obj);
 		put_gsh_export(lock_entry->sle_export);
@@ -1677,6 +1689,12 @@ void grant_blocked_lock_immediate(struct state_hdl *ostate,
 		}
 	}
 
+	if (lock_entry->sle_blocked != STATE_NON_BLOCKING) {
+		/* Lock granted. Increase holders and decrease waiters */
+		sal_metrics__locks_inc(SAL_METRICS_HOLDERS);
+		sal_metrics__locks_dec(SAL_METRICS_WAITERS);
+	}
+
 	/* Mark lock as granted */
 	lock_entry->sle_blocked = STATE_NON_BLOCKING;
 
@@ -1728,6 +1746,10 @@ void state_complete_grant(state_cookie_entry_t *cookie_entry)
 
 		/* A lock downgrade could unblock blocked locks */
 		grant_blocked_locks(obj->state_hdl);
+
+		/* Lock granted. Increase holders and decrease waiters */
+		sal_metrics__locks_inc(SAL_METRICS_HOLDERS);
+		sal_metrics__locks_dec(SAL_METRICS_WAITERS);
 	}
 
 	/* Free cookie and unblock lock.
