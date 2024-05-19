@@ -51,6 +51,7 @@
 #include "abstract_atomic.h"
 #include "city.h"
 #include "client_mgr.h"
+#include "sal_metrics.h"
 
 /**
  * @brief Hashtable used to cache NFSv4 clientids
@@ -706,6 +707,8 @@ int remove_confirmed_client_id(nfs_client_id_t *clientid)
 	(void)dec_client_id_ref(clientid);
 	atomic_dec_uint64_t(&num_confirmed_client_ids);
 
+	sal_metrics__confirmed_clients(num_confirmed_client_ids);
+
 	return rc;
 }
 
@@ -828,6 +831,8 @@ clientid_status_t nfs_client_id_confirm(nfs_client_id_t *clientid,
 		return CLIENT_ID_INSERT_MALLOC_ERROR;
 	}
 	atomic_inc_uint64_t(&num_confirmed_client_ids);
+
+	sal_metrics__confirmed_clients(num_confirmed_client_ids);
 
 	/* Add the clientid as the confirmed entry for the client
 	   record */
@@ -1101,8 +1106,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid,
 				"Could not remove expired clientid %" PRIx64
 				" error=%s", clientid->cid_clientid,
 				hash_table_err_to_str(rc));
-		} else if (ht_expire == ht_confirmed_client_id)
+		} else if (ht_expire == ht_confirmed_client_id) {
 			atomic_dec_uint64_t(&num_confirmed_client_ids);
+			sal_metrics__confirmed_clients(
+				num_confirmed_client_ids);
+		}
 	}
 
 	/* Traverse the client's lock owners, and release all
@@ -1297,6 +1305,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid,
 	}
 
 	release_op_context();
+
+	sal_metrics__lease_expire();
 	return true;
 }
 
