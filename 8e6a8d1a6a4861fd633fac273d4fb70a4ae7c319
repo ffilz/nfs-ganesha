@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c30baa60_33a43125",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:22:05Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "8e6a8d1a6a4861fd633fac273d4fb70a4ae7c319",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "586ca1ed_0aae2358",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:22:05Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Total number of xprts per \"\n+\t\t\t\t\t\"custom-data status\",",
+      "revId": "8e6a8d1a6a4861fd633fac273d4fb70a4ae7c319",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca569e2d_79c84b78",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:22:05Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Distribution of number of sessions \"\n+\t\t\t\t\"associated with each xprt\",",
+      "revId": "8e6a8d1a6a4861fd633fac273d4fb70a4ae7c319",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee03d6b0_39425da8",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:22:05Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Total number of clients per \"\n+\t\t\t\t\t\"state-protection type\",",
+      "revId": "8e6a8d1a6a4861fd633fac273d4fb70a4ae7c319",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b198f1c9_76eebaf9",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:22:05Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Distribution of number of \"\n+\t\t\t\t\"session-connections across sessions\",",
+      "revId": "8e6a8d1a6a4861fd633fac273d4fb70a4ae7c319",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98adaa9_84810853",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:22:05Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Total number of denied session-and-xprt \"\n+\t\t\t\t\"associations across sessions\",",
+      "revId": "8e6a8d1a6a4861fd633fac273d4fb70a4ae7c319",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
