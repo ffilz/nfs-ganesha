@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b44512fd_adbc8c55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe monitoring library is extracted to shared object, in order to support any",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11aea0dc_4351ac23",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfc8fb0_3283ea96",
+        "filename": "src/include/nfs_metrics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee362d4f_b9e6d493",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tExposer(prometheus::Registry \u0026registry) : registry_(registry) {}\n \t                             ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4099fa0f_7b06ca01",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "WARNING: labels should not be indented\n+\tprometheus::Registry \u0026registry_;",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8d1a8e_0131e390",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tprometheus::Registry \u0026registry_;\n \t                     ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac62f10e_5735b12e",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint server_fd_;\n+\tstd::thread thread_id_;",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d22b9b_fd556b84",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "WARNING: labels should not be indented\n+\tstd::thread thread_id_;",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63632865_d88913d7",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Delete copy/move constructor/assignment",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db00fb8_9310874a",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:VxW)\n+\tExposer\u0026 operator\u003d(const Exposer\u0026) \u003d delete;\n \t       ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5aef55_4833df55",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\tExposer\u0026 operator\u003d(const Exposer\u0026) \u003d delete;\n \t                 ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "070066d3_66cf8ddf",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u0026\u0026\u0027 (ctx:VxB)\n+\tExposer(Exposer\u0026\u0026) \u003d delete;\n \t               ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aef167aa_c61f2d25",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u0026\u0026\u0027 (ctx:VxB)\n+\tExposer\u0026 operator\u003d(Exposer\u0026\u0026) \u003d delete;\n \t                          ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84492cc1_cb50416c",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\tExposer\u0026 operator\u003d(Exposer\u0026\u0026) \u003d delete;\n \t                 ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f435bbd6_a82cb792",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:VxW)\n+\tExposer\u0026 operator\u003d(Exposer\u0026\u0026) \u003d delete;\n \t       ^",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527db8be_ce476084",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-20T07:17:24Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+} // namespace ganesha_monitoring",
+      "revId": "4bfb8efd97b61ac7af89929cdc49c5f27292fba5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
