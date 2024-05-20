@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb4f487_b3f21066",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-20T07:05:34Z",
+      "side": 1,
+      "message": "Yeah, could be added...\nWill update",
+      "parentUuid": "7b16bebe_7decd66c",
+      "revId": "04f343f856ef8c84d9d4583bb25eda37347ff683",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79b333ee_82c469f1",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-17T17:15:05Z",
       "side": 1,
       "message": "Should we have the tokens now for 4.1 and 4.2? And warn in the code when not supported?\n\nWe should think about how to make it easy to enable support for 4.x+\n\nCan we have tokens like 4.0+ and 4.1+\n\nDo we anticipate any future 4.x making challenge to support RDMA? We could cross that bridge when we get there...",
+      "revId": "04f343f856ef8c84d9d4583bb25eda37347ff683",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "454ab9de_bb97fae8",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-20T07:05:34Z",
+      "side": 1,
+      "message": "Tokens for 4.1 and 4.2 has been added...But I wanted user, being unable to configure it itself, unless it\u0027s supported in Ganesha, else he/she would be able to mount...\n\nyes, we could have tokens like 3+, 4.0+, 4.1+...if you insist...\n\nI believe, we must be able to support them, once we have a strong ask from customer/community for other protocol variants...This being the base IO path being stabilized, we could extend to support other version specific asks...slot management may need a design...and client side of implementation for RDMA...",
+      "parentUuid": "79b333ee_82c469f1",
       "revId": "04f343f856ef8c84d9d4583bb25eda37347ff683",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

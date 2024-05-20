@@ -88,6 +88,24 @@
       "parentUuid": "6126f280_6c0dba3d",
       "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea910425_5b35c9a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-20T07:05:34Z",
+      "side": 1,
+      "message": "Yes, by default we are enabling only 4.0 now... v3 could be supported unless there is forwarding between storage nodes, as there is no referal here...\n\nHence NFS_RDMA_ENABLE_FOR_ALL I enabled v3 and v4.0 support...and NFS_RDMA_ENABLE_BY_DEFAULT is just v4.0\n\nMissing versions, will need to implement the RDMA client side of logcis/codes, for supporting CBs and also slot management related credit handlings in the RDMA IOs...",
+      "parentUuid": "016c3ad3_927d9c12",
+      "revId": "073f94790ee87f1c2430aa570e59f63e34b8f277",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
