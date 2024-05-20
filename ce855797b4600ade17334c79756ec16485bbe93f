@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe prometheus-cpp-lite supports atomic operations on int types, which is more efficient than the current prometheus-cpp library that uses double.",
       "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaef55e_c666d451",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-20T15:14:34Z",
+      "side": 1,
+      "message": "Does this have an option of using the atomic counters we already have for many of the metrics? Keeping duplicate counters seems a waste.\n\nI think it would actually be worth having a discussion on the mailing list or in a github issue about plans for Prometheus monitoring.\n\nWe also need to address the scalability of having many \"per-xyz\" metrics.",
+      "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
