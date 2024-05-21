@@ -1912,9 +1912,9 @@ static void fsal_iov_release(void *release_data)
  *
  * An iovec MUST be included in the read_arg. If the caller is supplying the
  * read buffer (for example, RDMA), then the iovec will be passed as is. If
- * the caller does not need to supply the read buffer, then the iovec should
+ * the caller does not need to supply the read buffer, then the iovec MUST
  * be length 1 and, and iov[0].iov_len must be the requested read size and
- * iov[0].iov_base should be NULL. If the FSAL will allocate its own buffer,
+ * iov[0].iov_base MUST be NULL. If the FSAL will allocate its own buffer,
  * this special iovec will be passed down, otherwise a buffer will be allocated.
  *
  * @param[in]     obj_hdl	File on which to operate
@@ -1936,19 +1936,36 @@ void fsal_read2(struct fsal_obj_handle *obj_hdl,
 	assert(read_arg->iov_count > 0);
 	assert(read_arg->iov != NULL);
 
-	if (read_arg->iov[0].iov_base == NULL &&
-	    !op_ctx->fsal_export->exp_ops.fs_supports(
+	if (read_arg->iov[0].iov_base != NULL) {
+		/* Buffer's were supplied, use them */
+		goto call_read2;
+	}
+
+	/* If buffers aren't supplied, iov_count MUST be 1 */
+	assert(read_arg->iov_count == 1);
+
+	/* Check if someone else want's to allocate the buffer */
+	read_arg->iov[0].iov_base =
+			get_buffer_for_io_response(read_arg->iov[0].iov_len);
+
+	if (read_arg->iov[0].iov_base != NULL) {
+		/* Someone wanted to allocate the buffer, use it. */
+		goto call_read2;
+	}
+
+	/* Check if FSAL will allocate the buffer */
+	if (!op_ctx->fsal_export->exp_ops.fs_supports(
 						op_ctx->fsal_export,
 						fso_allocate_own_read_buffer)) {
-		/* Must have one and only one iovec structure */
-		assert(read_arg->iov_count == 1);
-		/* We need a read buffer and the FSAL will not allocate it. */
+		/* FSAL will not allocate a buffer, so allocate one. */
 		read_arg->iov[0].iov_base =
 					gsh_malloc(read_arg->iov[0].iov_len);
 		/* Set up release function */
 		read_arg->iov_release = fsal_iov_release;
 		read_arg->release_data = read_arg;
 	}
+
+call_read2:
 
 	return obj_hdl->obj_ops->read2(obj_hdl, bypass, done_cb,
 				       read_arg, caller_arg);
