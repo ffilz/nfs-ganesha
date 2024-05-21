@@ -52,6 +52,24 @@
       "parentUuid": "2a7739d9_cd516472",
       "revId": "7b092da50417e28fc85f38911a42e74e2730b2d1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b3314c_f287d164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-21T15:12:01Z",
+      "side": 1,
+      "message": "As @dang@redhat.com suggested, I have updated the Make files to toggle RDMA support, if dependencies are not found...Awaiting CI build response",
+      "parentUuid": "3d2e729d_10799c2f",
+      "revId": "7b092da50417e28fc85f38911a42e74e2730b2d1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
