@@ -95,10 +95,11 @@ struct ceph_fsal_module CephFSM = {
 		#endif
 			.readdir_plus = true,
 			.xattr_support = true,
-			/* Change the following to true to support zero copy
-			 * read.
-			 */
+#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
+			.allocate_own_read_buffer = true,
+#else
 			.allocate_own_read_buffer = false,
+#endif
 			.expire_time_parent = -1,
 		}
 	}
@@ -109,6 +110,8 @@ static struct config_item ceph_items[] = {
 		ceph_fsal_module, conf_path),
 	CONF_ITEM_MODE("umask", 0,
 			ceph_fsal_module, fsal.fs_info.umask),
+	CONF_ITEM_BOOL("async", false, ceph_fsal_module, async),
+	CONF_ITEM_BOOL("zerocopy", false, ceph_fsal_module, zerocopy),
 	CONFIG_EOL
 };
 
