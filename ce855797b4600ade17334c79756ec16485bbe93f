@@ -33,6 +33,24 @@
       "message": "Does this have an option of using the atomic counters we already have for many of the metrics? Keeping duplicate counters seems a waste.\n\nI think it would actually be worth having a discussion on the mailing list or in a github issue about plans for Prometheus monitoring.\n\nWe also need to address the scalability of having many \"per-xyz\" metrics.",
       "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ac0dec_74b24f1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-05-21T08:13:02Z",
+      "side": 1,
+      "message": "Sure we can have a discussion. Yes, the new library supports the existing metrics too. The next commit migrates the existing metrics to the new API.\nAccording to our internal performance tests, the infrastructure proposed here scales well due to:\n1. Using atomic int instead of atomic double\n2. Defining the metrics at init time, and not during IOs",
+      "parentUuid": "8aaef55e_c666d451",
+      "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
