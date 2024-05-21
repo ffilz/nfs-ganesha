@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322cd22c_61a5fbfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-21T20:45:26Z",
+      "side": 1,
+      "message": "When the RDMA changes are put on top of Zero Copy, this patch won\u0027t be necessary as the buffer will be allocated in fsal_read2 which already takes care of the situation.",
+      "revId": "a831d32217774ee4b30d828a9ad5b175482c448d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
