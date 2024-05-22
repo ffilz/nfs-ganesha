@@ -16,6 +16,24 @@
       "message": "with my version of this function, this would have to change to:\n\ntracker.entries \u003d get_buffer_for_io_response(tracker.mem_avail);\nif (tracker.entries \u003d\u003d NULL)\n      tracker.entries \u003d gsh_malloc(tracker.mem_avail);",
       "revId": "03fd3e4660baddeca15ea7a5b45bce7183df0650",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6b15620_f6772d8e",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-22T07:09:20Z",
+      "side": 1,
+      "message": "Is it possible to allocate the memory within get_buffer_for_io_response(), for ReadDir/ReadDirPlus paths? Would had looked cleaner...",
+      "parentUuid": "becf85ef_48513c96",
+      "revId": "03fd3e4660baddeca15ea7a5b45bce7183df0650",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
