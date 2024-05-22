@@ -104,6 +104,7 @@ enum nfs_req_result nfs4_op_reclaim_complete(struct nfs_argop4 *op,
 		clientid->cid_cb.v41.cid_reclaim_complete = true;
 		if (clientid->cid_allow_reclaim)
 			atomic_inc_int32_t(&reclaim_completes);
+		nfs41_reclaim_complete_clid(clientid);
 	}
 
 	GSH_AUTO_TRACEPOINT(nfs4, op_reclaim_complete_end, TRACE_INFO,
