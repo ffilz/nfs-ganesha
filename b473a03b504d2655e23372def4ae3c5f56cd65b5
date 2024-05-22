@@ -16,6 +16,40 @@
       "message": "Hi, Frank,\n\nThis patch adds enforcement to reject reclaim in some edge conditions. No recovery_backend enables this feature now. This patch focuses on the common mechanism. Patches to enable this feature can be submitted in the future in need.\n\nPlease help to review this patch. Thanks!\n\n\nZhitao Li",
       "revId": "b473a03b504d2655e23372def4ae3c5f56cd65b5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "450b45c9_ab382e50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-22T15:51:00Z",
+      "side": 1,
+      "message": "I\u0027m wondering exactly how this will work. See discussion in the github issue",
+      "revId": "b473a03b504d2655e23372def4ae3c5f56cd65b5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cf1beb9_8cfb8c25",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-22T15:51:00Z",
+      "side": 1,
+      "message": "Could you add a comment, this logic reads confusing.\n\nSo it can only return false when a backend supports this and sets end_grace?",
+      "revId": "b473a03b504d2655e23372def4ae3c5f56cd65b5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
