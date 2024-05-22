@@ -16,6 +16,24 @@
       "message": "When the RDMA changes are put on top of Zero Copy, this patch won\u0027t be necessary as the buffer will be allocated in fsal_read2 which already takes care of the situation.",
       "revId": "a831d32217774ee4b30d828a9ad5b175482c448d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a24ba9_ae06b62f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-05-22T07:06:38Z",
+      "side": 1,
+      "message": "Ohh...so these CRs goes away then...\n\nHow about the code path, where the buffer/UIO had to be freed up previously?",
+      "parentUuid": "322cd22c_61a5fbfa",
+      "revId": "a831d32217774ee4b30d828a9ad5b175482c448d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
