@@ -568,7 +568,7 @@ static void rados_kv_pop_clid_entry(char *key, char *val, size_t val_len,
 	cl_name = strtok(dupval, "#");
 	if (!cl_name)
 		cl_name = dupval;
-	clid_ent = add_clid_entry(cl_name);
+	clid_ent = add_clid_entry(cl_name, false, false);
 
 	rfh_names = strtok(NULL, "#");
 	rfh_name = strtok(rfh_names, "#");
