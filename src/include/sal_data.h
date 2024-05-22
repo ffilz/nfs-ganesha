@@ -274,6 +274,8 @@ typedef struct clid_entry {
 	struct glist_head cl_list; /*< Link in the list */
 	struct glist_head cl_rfh_list;
 	char cl_name[PATH_MAX]; /*< Client name */
+	bool cl_reclaim_complete; /*< Whether the NFS v4.1+ client
+						reclaims completely */
 } clid_entry_t;
 
 extern char v4_old_dir[PATH_MAX];
