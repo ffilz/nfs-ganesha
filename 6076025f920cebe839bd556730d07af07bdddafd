@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76426f2b_2b7c554b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:15:37Z",
+      "side": 1,
+      "message": "What is the expectation of this patch?\n\nThe check you removed validates that NFSv4 is enabled for this export, not just that it has a pseudopath defined (pseudopath can be used with NFSv3 to specify the path to mount instead of using the backend path).",
+      "revId": "6076025f920cebe839bd556730d07af07bdddafd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
