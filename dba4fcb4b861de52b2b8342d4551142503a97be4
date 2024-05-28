@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fabcde6_d679a995",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T23:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59041960_9fe51419",
+      "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ce2c3f1_0732686a",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-20T07:21:24Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Connection Manager Connection Started \"\n+\t\t\t\t\"Latencies per Result\",",
+      "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4cac50_1756cb23",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T23:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ce2c3f1_0732686a",
       "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc826a24_e8dd7bf4",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T23:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9746dbd_9036fd83",
+      "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da29a297_f11ddc68",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-05-20T07:21:24Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tgauge_metric_handle_t clients[CONNECTION_MANAGER__CLIENT_STATE__LAST];\n+\thistogram_metric_handle_t connection_started_latencies",
+      "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0c743f_9884522e",
+        "filename": "src/RPCAL/connection_manager_metrics.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T23:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da29a297_f11ddc68",
       "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f62362_914795fd",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T23:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "957beb9f_399c5050",
+      "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8905892e_5cbb2ead",
@@ -103,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c6e552d_c41733e4",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T23:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8905892e_5cbb2ead",
+      "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46c96438_5b076573",
@@ -116,6 +224,24 @@
       "writtenOn": "2024-05-20T07:21:24Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Number of connection started results (for monitoring)",
+      "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d620e79d_d048cd5d",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T23:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46c96438_5b076573",
       "revId": "dba4fcb4b861de52b2b8342d4551142503a97be4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
