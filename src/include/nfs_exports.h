@@ -231,10 +231,8 @@ uint32_t export_check_options(struct gsh_export *exp);
 
 static inline bool export_can_be_mounted(struct gsh_export *exp)
 {
-	uint32_t options = export_check_options(exp);
 
-	return (options & EXPORT_OPTION_NFSV4) != 0
-	       && exp->cfg_pseudopath != NULL
+	return exp->cfg_pseudopath != NULL
 	       && exp->export_id != 0
 	       && exp->cfg_pseudopath[1] != '\0';
 }
