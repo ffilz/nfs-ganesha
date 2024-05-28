@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03445d7a_9eaaeb4e",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91dbd4f4_ca60a351",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6762572a_88bf787a",
@@ -52,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c83324_b53cdc6e",
+        "filename": "src/include/nfs_metrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6762572a_88bf787a",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c959e8cd_2e307d3e",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-05-19T18:32:46Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tExposer(prometheus::Registry \u0026registry) : registry_(registry) {}\n \t                             ^",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe50fe2_ceff4b1c",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c959e8cd_2e307d3e",
       "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +157,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c6f7d6_770eb09a",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02bbec1a_56622435",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e0ed5cb_89cdd101",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00815266_be45c6b5",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3a28184_3dec56ac",
@@ -137,6 +227,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3316a6_b869e9ce",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3a28184_3dec56ac",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa97ab5_3f3be6bf",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd9eeb32_7592b901",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03609077_eb8fa342",
@@ -150,6 +276,24 @@
       "writtenOn": "2024-05-19T18:32:46Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Delete copy/move constructor/assignment",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28791f1_ddb4f3e5",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03609077_eb8fa342",
       "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -188,6 +332,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba1d1c79_50fb7e51",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8087c38f_ed497e00",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f1199c_e2669115",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f63ea1ce_6c43e028",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9f5fcfa_196634f7",
@@ -201,6 +381,24 @@
       "writtenOn": "2024-05-19T18:32:46Z",
       "side": 1,
       "message": "ERROR: spaces required around that \u0027\u0026\u0026\u0027 (ctx:VxB)\n+\tExposer(Exposer\u0026\u0026) \u003d delete;\n \t               ^",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526d4860_5174aa98",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9f5fcfa_196634f7",
       "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -256,6 +454,60 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50353985_6139fea1",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8a2626d_40814d5d",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b367641_ffb896eb",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "823b340f_b6e6b876",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e459f34_8d194e14",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9936fe41_fe17029e",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eefacc18_36363eea",
@@ -269,6 +521,24 @@
       "writtenOn": "2024-05-19T18:32:46Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+} // namespace ganesha_monitoring",
+      "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f158feb_d8113c84",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-28T21:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eefacc18_36363eea",
       "revId": "c2495a59dbf5cdd0ce8ddc1bcacaf58cae15d861",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
