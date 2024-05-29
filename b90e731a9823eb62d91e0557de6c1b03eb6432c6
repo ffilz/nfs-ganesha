@@ -16,6 +16,24 @@
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tfor (ix \u003d 0; ix \u003c uio-\u003euio_count; ix++) {\n+\t\t\tgsh_free(uio-\u003euio_vio[ix].vio_base);\n+\t\t}",
       "revId": "b90e731a9823eb62d91e0557de6c1b03eb6432c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66a0953f_40ee686b",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-05-29T23:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d76a0c_0d61b18d",
+      "revId": "b90e731a9823eb62d91e0557de6c1b03eb6432c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
