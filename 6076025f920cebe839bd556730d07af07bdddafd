@@ -16,6 +16,24 @@
       "message": "What is the expectation of this patch?\n\nThe check you removed validates that NFSv4 is enabled for this export, not just that it has a pseudopath defined (pseudopath can be used with NFSv3 to specify the path to mount instead of using the backend path).",
       "revId": "6076025f920cebe839bd556730d07af07bdddafd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d51bb83_3271e8f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038063
+      },
+      "writtenOn": "2024-05-29T14:50:35Z",
+      "side": 1,
+      "message": "This patch is to fix the issue that NFSv4 will mount failed when changing protocols from 3 to 3,4 by dbus.",
+      "parentUuid": "76426f2b_2b7c554b",
+      "revId": "6076025f920cebe839bd556730d07af07bdddafd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
