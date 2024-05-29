@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2bcd0e_e52ab4b7",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-29T11:37:03Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "b925f136c6e172d8c7ac6c17b0e1e3f0e8602a1f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a842aa13_2f39077c",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-29T11:37:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Connection Manager Connection Started \"\n+\t\t\t\t\"Latencies per Result\",",
+      "revId": "b925f136c6e172d8c7ac6c17b0e1e3f0e8602a1f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f18ab2_afa75207",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-29T11:37:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Connection Manager Drain Local Client \"\n+\t\t\t\t\"Latencies per Result\",",
+      "revId": "b925f136c6e172d8c7ac6c17b0e1e3f0e8602a1f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e6ccdbf_deeb0029",
+        "filename": "src/RPCAL/connection_manager_metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-29T11:37:03Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tgauge_metric_handle_t clients[CONNECTION_MANAGER__CLIENT_STATE__LAST];\n+\thistogram_metric_handle_t connection_started_latencies",
+      "revId": "b925f136c6e172d8c7ac6c17b0e1e3f0e8602a1f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e149990_d2c0c6ed",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-29T11:37:03Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Number of drain results (for monitoring)",
+      "revId": "b925f136c6e172d8c7ac6c17b0e1e3f0e8602a1f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39b193f_0d868802",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-29T11:37:03Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Number of client states (for monitoring)",
+      "revId": "b925f136c6e172d8c7ac6c17b0e1e3f0e8602a1f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a07acb9_cfb686a6",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-29T11:37:03Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// Number of connection started results (for monitoring)",
+      "revId": "b925f136c6e172d8c7ac6c17b0e1e3f0e8602a1f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
