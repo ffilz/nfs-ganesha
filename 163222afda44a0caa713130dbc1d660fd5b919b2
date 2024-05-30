@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5dcc54_e3ce14d7",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:08:59Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define FOREACH_NFS_STAT4(X) \\\n+\tX(NFS4_OK)\t\\\n+\tX(NFS4ERR_PERM)\t\\\n+\tX(NFS4ERR_NOENT)\t\\\n+\tX(NFS4ERR_IO)\t\\\n+\tX(NFS4ERR_NXIO)\t\\\n+\tX(NFS4ERR_ACCESS)\t\\\n+\tX(NFS4ERR_EXIST)\t\\\n+\tX(NFS4ERR_XDEV)\t\\\n+\tX(NFS4ERR_NOTDIR)\t\\\n+\tX(NFS4ERR_ISDIR)\t\\\n+\tX(NFS4ERR_INVAL)\t\\\n+\tX(NFS4ERR_FBIG)\t\\\n+\tX(NFS4ERR_NOSPC)\t\\\n+\tX(NFS4ERR_ROFS)\t\\\n+\tX(NFS4ERR_MLINK)\t\\\n+\tX(NFS4ERR_NAMETOOLONG)\t\\\n+\tX(NFS4ERR_NOTEMPTY)\t\\\n+\tX(NFS4ERR_DQUOT)\t\\\n+\tX(NFS4ERR_STALE)\t\\\n+\tX(NFS4ERR_BADHANDLE)\t\\\n+\tX(NFS4ERR_BAD_COOKIE)\t\\\n+\tX(NFS4ERR_NOTSUPP)\t\\\n+\tX(NFS4ERR_TOOSMALL)\t\\\n+\tX(NFS4ERR_SERVERFAULT)\t\\\n+\tX(NFS4ERR_BADTYPE)\t\\\n+\tX(NFS4ERR_DELAY)\t\\\n+\tX(NFS4ERR_SAME)\t\\\n+\tX(NFS4ERR_DENIED)\t\\\n+\tX(NFS4ERR_EXPIRED)\t\\\n+\tX(NFS4ERR_LOCKED)\t\\\n+\tX(NFS4ERR_GRACE)\t\\\n+\tX(NFS4ERR_FHEXPIRED)\t\\\n+\tX(NFS4ERR_SHARE_DENIED)\t\\\n+\tX(NFS4ERR_WRONGSEC)\t\\\n+\tX(NFS4ERR_CLID_INUSE)\t\\\n+\tX(NFS4ERR_RESOURCE)\t\\\n+\tX(NFS4ERR_MOVED)\t\\\n+\tX(NFS4ERR_NOFILEHANDLE)\t\\\n+\tX(NFS4ERR_MINOR_VERS_MISMATCH)\t\\\n+\tX(NFS4ERR_STALE_CLIENTID)\t\\\n+\tX(NFS4ERR_STALE_STATEID)\t\\\n+\tX(NFS4ERR_OLD_STATEID)\t\\\n+\tX(NFS4ERR_BAD_STATEID)\t\\\n+\tX(NFS4ERR_BAD_SEQID)\t\\\n+\tX(NFS4ERR_NOT_SAME)\t\\\n+\tX(NFS4ERR_LOCK_RANGE)\t\\\n+\tX(NFS4ERR_SYMLINK)\t\\\n+\tX(NFS4ERR_RESTOREFH)\t\\\n+\tX(NFS4ERR_LEASE_MOVED)\t\\\n+\tX(NFS4ERR_ATTRNOTSUPP)\t\\\n+\tX(NFS4ERR_NO_GRACE)\t\\\n+\tX(NFS4ERR_RECLAIM_BAD)\t\\\n+\tX(NFS4ERR_RECLAIM_CONFLICT)\t\\\n+\tX(NFS4ERR_BADXDR)\t\\\n+\tX(NFS4ERR_LOCKS_HELD)\t\\\n+\tX(NFS4ERR_OPENMODE)\t\\\n+\tX(NFS4ERR_BADOWNER)\t\\\n+\tX(NFS4ERR_BADCHAR)\t\\\n+\tX(NFS4ERR_BADNAME)\t\\\n+\tX(NFS4ERR_BAD_RANGE)\t\\\n+\tX(NFS4ERR_LOCK_NOTSUPP)\t\\\n+\tX(NFS4ERR_OP_ILLEGAL)\t\\\n+\tX(NFS4ERR_DEADLOCK)\t\\\n+\tX(NFS4ERR_FILE_OPEN)\t\\\n+\tX(NFS4ERR_ADMIN_REVOKED)\t\\\n+\tX(NFS4ERR_CB_PATH_DOWN)\t\\\n+\tX(NFS4ERR_BADIOMODE)\t\\\n+\tX(NFS4ERR_BADLAYOUT)\t\\\n+\tX(NFS4ERR_BAD_SESSION_DIGEST)\t\\\n+\tX(NFS4ERR_BADSESSION)\t\\\n+\tX(NFS4ERR_BADSLOT)\t\\\n+\tX(NFS4ERR_COMPLETE_ALREADY)\t\\\n+\tX(NFS4ERR_CONN_NOT_BOUND_TO_SESSION)\t\\\n+\tX(NFS4ERR_DELEG_ALREADY_WANTED)\t\\\n+\tX(NFS4ERR_BACK_CHAN_BUSY)\t\\\n+\tX(NFS4ERR_LAYOUTTRYLATER)\t\\\n+\tX(NFS4ERR_LAYOUTUNAVAILABLE)\t\\\n+\tX(NFS4ERR_NOMATCHING_LAYOUT)\t\\\n+\tX(NFS4ERR_RECALLCONFLICT)\t\\\n+\tX(NFS4ERR_UNKNOWN_LAYOUTTYPE)\t\\\n+\tX(NFS4ERR_SEQ_MISORDERED)\t\\\n+\tX(NFS4ERR_SEQUENCE_POS)\t\\\n+\tX(NFS4ERR_REQ_TOO_BIG)\t\\\n+\tX(NFS4ERR_REP_TOO_BIG)\t\\\n+\tX(NFS4ERR_REP_TOO_BIG_TO_CACHE)\t\\\n+\tX(NFS4ERR_RETRY_UNCACHED_REP)\t\\\n+\tX(NFS4ERR_UNSAFE_COMPOUND)\t\\\n+\tX(NFS4ERR_TOO_MANY_OPS)\t\\\n+\tX(NFS4ERR_OP_NOT_IN_SESSION)\t\\\n+\tX(NFS4ERR_HASH_ALG_UNSUPP)\t\\\n+\tX(NFS4ERR_CLIENTID_BUSY)\t\\\n+\tX(NFS4ERR_PNFS_IO_HOLE)\t\\\n+\tX(NFS4ERR_SEQ_FALSE_RETRY)\t\\\n+\tX(NFS4ERR_BAD_HIGH_SLOT)\t\\\n+\tX(NFS4ERR_DEADSESSION)\t\\\n+\tX(NFS4ERR_ENCR_ALG_UNSUPP)\t\\\n+\tX(NFS4ERR_PNFS_NO_LAYOUT)\t\\\n+\tX(NFS4ERR_NOT_ONLY_OP)\t\\\n+\tX(NFS4ERR_WRONG_CRED)\t\\\n+\tX(NFS4ERR_WRONG_TYPE)\t\\\n+\tX(NFS4ERR_DIRDELEG_UNAVAIL)\t\\\n+\tX(NFS4ERR_REJECT_DELEG)\t\\\n+\tX(NFS4ERR_RETURNCONFLICT)\t\\\n+\tX(NFS4ERR_DELEG_REVOKED)\t\\\n+\tX(NFS4ERR_PARTNER_NOTSUPP)\t\\\n+\tX(NFS4ERR_PARTNER_NO_AUTH)\t\\\n+\tX(NFS4ERR_UNION_NOTSUPP)\t\\\n+\tX(NFS4ERR_OFFLOAD_DENIED)\t\\\n+\tX(NFS4ERR_WRONG_LFS)\t\\\n+\tX(NFS4ERR_BADLABEL)\t\\\n+\tX(NFS4ERR_OFFLOAD_NO_REQS)\t\\\n+\tX(NFS4ERR_NOXATTR)\t\\\n+\tX(NFS4ERR_XATTR2BIG)\t\\\n+\tX(NFS4ERR_REPLAY)",
+      "revId": "163222afda44a0caa713130dbc1d660fd5b919b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14787fd_075a2f85",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:08:59Z",
+      "side": 1,
+      "message": "ERROR: Macros with multiple statements should be enclosed in a do - while loop\n+\t#define DEFINE_CASE(name) case name: return CONCAT(name, __INDEX);",
+      "revId": "163222afda44a0caa713130dbc1d660fd5b919b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c997275c_4a22f6bd",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:08:59Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+\t#define DEFINE_CASE(name) case name: return CONCAT(name, __INDEX);",
+      "revId": "163222afda44a0caa713130dbc1d660fd5b919b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5caa8f_e8ec5432",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:08:59Z",
+      "side": 1,
+      "message": "WARNING: macros should not use a trailing semicolon\n+\t#define DEFINE_CASE(name) case name: return CONCAT(name, __INDEX);",
+      "revId": "163222afda44a0caa713130dbc1d660fd5b919b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b43e66f_acc04bb5",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:08:59Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027:\u0027 (ctx:VxE)\n+\tdefault:\n \t       ^",
+      "revId": "163222afda44a0caa713130dbc1d660fd5b919b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02217057_1497554d",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:08:59Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+\t#define DEFINE_INDEX_TO_STAT(name) [CONCAT(name, __INDEX)] \u003d name,",
+      "revId": "163222afda44a0caa713130dbc1d660fd5b919b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790e0e02_d21e808d",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:08:59Z",
+      "side": 1,
+      "message": "ERROR: space prohibited before open square bracket \u0027[\u0027\n+\t#define DEFINE_INDEX_TO_STAT(name) [CONCAT(name, __INDEX)] \u003d name,",
+      "revId": "163222afda44a0caa713130dbc1d660fd5b919b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
