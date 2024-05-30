@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0756e09_66a612c9",
+        "filename": "src/idmapper/idmapper_monitoring.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:09:51Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "9d08181c3efe06be3165866a839b6fb51a9e434b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d5f7480_5c3e1c50",
+        "filename": "src/idmapper/idmapper_monitoring.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:09:51Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Distribution of the time duration \"\n+\t\t\t\t\t\"that evicted entries were stored in \"",
+      "revId": "9d08181c3efe06be3165866a839b6fb51a9e434b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e0266c_b4428257",
+        "filename": "src/idmapper/idmapper_monitoring.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:09:51Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"that evicted entries were stored in \"\n+\t\t\t\t\t\"the cache\",",
+      "revId": "9d08181c3efe06be3165866a839b6fb51a9e434b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
