@@ -33,6 +33,24 @@
       "message": "I don\u0027t see how if dynamic metrics are disabled, it actually disables them other than to not create dynamic_metrics, but then that\u0027s a NULL pointer otherwise?",
       "revId": "7aaa1f8abb550a086a66bab7a5c18d925d46d2fe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f228c90_a4c4322f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-05-30T11:52:05Z",
+      "side": 1,
+      "message": "Yes, it\u0027s NULL. Forgot to copy over the `if (!dynamic_metrics) return;` line from our codebase. good catch!",
+      "parentUuid": "11b11f79_28203f2a",
+      "revId": "7aaa1f8abb550a086a66bab7a5c18d925d46d2fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
