@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fea8932_e8c98c2a",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:19:04Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "d6370eb33d9947807b8acae8f621c06c00d6ff24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eebe8c7_04cedce0",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:19:04Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Connection Manager Connection Started \"\n+\t\t\t\t\"Latencies per Result\",",
+      "revId": "d6370eb33d9947807b8acae8f621c06c00d6ff24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6e2676_0ce894fa",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:19:04Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Connection Manager Drain Local Client \"\n+\t\t\t\t\"Latencies per Result\",",
+      "revId": "d6370eb33d9947807b8acae8f621c06c00d6ff24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a97475_4f87052d",
+        "filename": "src/RPCAL/connection_manager_metrics.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-05-30T12:19:04Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tgauge_metric_handle_t clients[CONNECTION_MANAGER__CLIENT_STATE__LAST];\n+\thistogram_metric_handle_t connection_started_latencies",
+      "revId": "d6370eb33d9947807b8acae8f621c06c00d6ff24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
