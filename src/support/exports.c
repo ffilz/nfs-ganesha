@@ -1256,7 +1256,15 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 					? "can be mounted"
 					: "can not be mounted");
 			mount_status_changed |= true;
-			mount_export |= mountable;
+
+			probe_exp->export_perms = export->export_perms;
+			if (!mount_gsh_export(probe_exp)) {
+				LogCrit(COMPONENT_CONFIG,
+				"mount_gsh_export failed when update export");
+				err_type->internal = true;
+				errcnt++;
+				return errcnt;
+			}
 		}
 
 		if (mount_export) {
