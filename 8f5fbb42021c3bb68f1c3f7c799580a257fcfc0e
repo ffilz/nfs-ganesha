@@ -33,6 +33,24 @@
       "message": "Don\u0027t we need to have similar change in void release(struct fsal_obj_handle *obj_hdl) as well, the non reclaiming paths?",
       "revId": "8f5fbb42021c3bb68f1c3f7c799580a257fcfc0e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c819a19_63c544d1",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-04T18:12:01Z",
+      "side": 1,
+      "message": "No, in the case where fsal_start_fd_work is called with is_reclaiming true from close_fsal_fd, if the reclaiming causes fd_work to not be started, then there is no need to call fsal_fd_complete_work because it has already been called.\n\nThus when fsal_start_fd_work returns success, fsal_complete_fd_work must be called with no need for any changes.",
+      "parentUuid": "aa71c339_c91c7f0a",
+      "revId": "8f5fbb42021c3bb68f1c3f7c799580a257fcfc0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
