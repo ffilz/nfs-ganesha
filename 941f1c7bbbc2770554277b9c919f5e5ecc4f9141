@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3178edd8_1547219a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-06-04T12:14:52Z",
+      "side": 1,
+      "message": "Error: Failed to download metadata for repo \u0027epel\u0027: Cannot download repomd.xml: Cannot download repodata/repomd.xml: All mirrors were tried\n\nDid the removal of stream8 somehow break epel?",
+      "revId": "941f1c7bbbc2770554277b9c919f5e5ecc4f9141",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
