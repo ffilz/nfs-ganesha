@@ -51,6 +51,24 @@
       "parentUuid": "aa71c339_c91c7f0a",
       "revId": "8f5fbb42021c3bb68f1c3f7c799580a257fcfc0e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f3000e3_7afb262e",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-06-05T04:19:07Z",
+      "side": 1,
+      "message": "But, if you see that codes... close_fsal_fd() is called with is_reclaiming as false...\nhttps://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/FSAL/FSAL_VFS/handle.c#L1735\n\nAnd then, here fsal_start_fd_work is called with same false value ...\nhttps://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/FSAL/commonlib.c#L2089\n\nPlease recheck this path once...",
+      "parentUuid": "4c819a19_63c544d1",
+      "revId": "8f5fbb42021c3bb68f1c3f7c799580a257fcfc0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
