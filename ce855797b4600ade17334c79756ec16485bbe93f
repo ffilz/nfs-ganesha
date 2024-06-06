@@ -69,6 +69,24 @@
       "parentUuid": "c0ac0dec_74b24f1a",
       "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "262efef9_34884624",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-06T18:03:13Z",
+      "side": 1,
+      "message": "I was thinking about the cardinality issue. Our performance folks have raised an issue with having per export and per client metrics when there can be 1000s of exports and/or clients.\n\nI\u0027m not sure what the solution to that issue is.\n\nThis patch set still leaves the per export and per client metrics as dynamic right?",
+      "parentUuid": "61e7a339_93ee2b0a",
+      "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
