@@ -69,6 +69,24 @@
       "parentUuid": "4c819a19_63c544d1",
       "revId": "8f5fbb42021c3bb68f1c3f7c799580a257fcfc0e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f08ee109_28a66365",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-06T00:05:22Z",
+      "side": 1,
+      "message": "Since fsal_start_fd_work  with is_reclaim \u003d\u003d false, the error paths won\u0027t be taken and it will return success. The caller in this case in any case, checks the return value. I guess we could add a LogAbort if it gets an error and is_reclaiming is false.\n\nThe main thing this patch does is makes sure if there is an error, fsal_complete_fd_work  is called. And then adds a wrapper for those places that unconditionally call fsal_complete_fd_work  with is_reclaim \u003d\u003d false and don\u0027t expect a return value.",
+      "parentUuid": "4f3000e3_7afb262e",
+      "revId": "8f5fbb42021c3bb68f1c3f7c799580a257fcfc0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
