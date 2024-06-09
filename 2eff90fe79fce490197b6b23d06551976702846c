@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c827c8_bf3d86a7",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-09T18:05:35Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t \"FSAL %s operation for handle belonging to FSAL %s, \"\n+\t\t\t \"return EXDEV\", obj_hdl-\u003efsal-\u003ename,",
+      "revId": "2eff90fe79fce490197b6b23d06551976702846c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
