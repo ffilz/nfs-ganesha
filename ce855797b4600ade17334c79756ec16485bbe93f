@@ -87,6 +87,24 @@
       "parentUuid": "61e7a339_93ee2b0a",
       "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f77a3ef_6e628d06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-06-09T05:49:39Z",
+      "side": 1,
+      "message": "Yes it\u0027s backward compatible, just in case anyone is using it, there was no change in those metrics\nHowever, we wrapped the dynamic metrics under a `Enable_Dynamic_Metrics` parameter, so they can be disabled for better performance.",
+      "parentUuid": "262efef9_34884624",
+      "revId": "ce855797b4600ade17334c79756ec16485bbe93f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
