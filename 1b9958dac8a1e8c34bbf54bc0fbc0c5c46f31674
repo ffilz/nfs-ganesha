@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cc18c8_811a9578",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-11T23:49:41Z",
+      "side": 1,
+      "message": "I think you should use find_fd like vfs_getattr2 does instead. We can\u0027t assure obj_hdl is a REGULAR_FILE.",
+      "revId": "1b9958dac8a1e8c34bbf54bc0fbc0c5c46f31674",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
