@@ -51,6 +51,24 @@
       "parentUuid": "a0f39e7f_c0804d67",
       "revId": "82656a9ca27932a384cabc1d4295b0e83dc0d356",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0db7b15_554162bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-12T16:00:57Z",
+      "side": 1,
+      "message": "Right. So the question is always, do we err in favor of the proper response when the file wasn\u0027t there in the first place, or err in favor of the proper response when a replay occurred (this can also happen if a replay is not caught by duplicate request cache)? The more likely scenario is that the file wasn\u0027t there in the first place and the REMOVE is not a replay.",
+      "parentUuid": "1b926ed6_861d9332",
+      "revId": "82656a9ca27932a384cabc1d4295b0e83dc0d356",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
