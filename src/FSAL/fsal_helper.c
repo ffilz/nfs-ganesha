@@ -1458,6 +1458,9 @@ fsal_remove(struct fsal_obj_handle *parent, const char *name,
 	if (FSAL_IS_ERROR(status)) {
 		LogFullDebug(COMPONENT_FSAL, "lookup %s failure %s",
 			     name, fsal_err_txt(status));
+		if (status.major == ERR_FSAL_NOENT)
+			status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+
 		return status;
 	}
 
