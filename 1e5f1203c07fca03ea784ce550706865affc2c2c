@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d74ecf89_42088297",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-12T12:00:08Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nWhen the client deletes a file, the server successfully removes it，if the client does not receive the response due to the server restart，",
+      "revId": "1e5f1203c07fca03ea784ce550706865affc2c2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c932cba_8f8a7f02",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-12T12:00:08Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (status.major \u003d\u003d ERR_FSAL_NOENT) {\n+\t\t\tstatus \u003d fsalstat(ERR_FSAL_NO_ERROR, 0);\n+\t\t}",
+      "revId": "1e5f1203c07fca03ea784ce550706865affc2c2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
