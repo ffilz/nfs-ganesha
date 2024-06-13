@@ -69,6 +69,23 @@
       "message": "In light of the uncertain value of this, I think it best for now to leave client_oc as a config file option. Another possible option would be another per-client option in the EXPORT { FSAL {} } block, or a global option in the FSAL {} block.",
       "revId": "6c6046cc9a727b824d9a0b55234873b3476a57a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8958d65e_a97396f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-13T23:43:37Z",
+      "side": 1,
+      "message": "Replace this with a config option: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1196284",
+      "revId": "6c6046cc9a727b824d9a0b55234873b3476a57a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
