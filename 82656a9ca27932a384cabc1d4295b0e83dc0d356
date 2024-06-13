@@ -87,6 +87,24 @@
       "parentUuid": "d0db7b15_554162bf",
       "revId": "82656a9ca27932a384cabc1d4295b0e83dc0d356",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97139bec_e15a10a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019837
+      },
+      "writtenOn": "2024-06-13T01:31:29Z",
+      "side": 1,
+      "message": "1.When the client deletes a file that does not exist, it will send a lookup request, which will return NOENT.\n2.When deleting a directory on the client side, it will first send a readdir request,Then delete files based on the results of readdir. Unless a file is deleted at the underlying filesystem, there should not be any \u0027file not found\u0027 errors.",
+      "parentUuid": "99ca4dc6_e901a5bb",
+      "revId": "82656a9ca27932a384cabc1d4295b0e83dc0d356",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
