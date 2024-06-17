@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb9237d_bb0c8e8d",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2161,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-06-17T15:04:57Z",
+      "side": 1,
+      "message": "This looks like use-after-free, since we call `gsh_free(async_arg)` a few lines above\n\n(same issue in `mem_read2`)",
+      "range": {
+        "startLine": 2161,
+        "startChar": 0,
+        "endLine": 2161,
+        "endChar": 38
+      },
+      "revId": "a4e52ddf16ac565380bc8608c6de65229224cb23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
