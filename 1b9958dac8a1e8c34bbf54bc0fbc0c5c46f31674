@@ -16,6 +16,24 @@
       "message": "I think you should use find_fd like vfs_getattr2 does instead. We can\u0027t assure obj_hdl is a REGULAR_FILE.",
       "revId": "1b9958dac8a1e8c34bbf54bc0fbc0c5c46f31674",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1cfcb6b_979c9adc",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-06-17T07:40:07Z",
+      "side": 1,
+      "message": "\u003e I think you should use find_fd like vfs_getattr2 does instead. We can\u0027t assure obj_hdl is a REGULAR_FILE.\n\nThat was the initial plan, but `find_fd()` is in `file.c`, while this change is to `export.c`.  We\u0027ve tested with file, directory, device and it seems fine.\n\nIf you want to see `find_fd()` factored out, do you have any suggestions for where it should live?  There doesn\u0027t seem to be an obvious place.  If a new file, would we follow the examples in (at least) `FSAL_GPFS`, `FSAL_GLUSTER`, `FSAL_CEPH` and generalise to using `internal.[ch]`?",
+      "parentUuid": "a2cc18c8_811a9578",
+      "revId": "1b9958dac8a1e8c34bbf54bc0fbc0c5c46f31674",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
