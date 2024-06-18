@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f4425c_bae62eed",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (lock_test_status \u003d\u003d STATE_SUCCESS) {\n+\t\tprocess_blocked_lock_upcall(lock_entry);\n+\t}",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "156ba216_cd806870",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (rc !\u003d 0) {\n+\t\tLogMajor(COMPONENT_STATE, \"Unable to schedule request: %d\", rc);\n+\t}",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c78c3be3_91f3c3f4",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (rc !\u003d 0) {\n+\t\tLogMajor(COMPONENT_STATE, \"Unable to schedule request: %d\", rc);\n+\t}",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bedce90_9a0a1d97",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\tLogEntryRefCount(\"Refcount not zero after \"\n+\t\t\t\t\t\"acquiring lock. Not freeing entry\",",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2bbc961_db9bdf41",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1884,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogEntry(\"Received up-call for lock entry that was already \"\n+\t\t\t\t \"removed from the lock list. Ignoring\",",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3110a5ef_126f91f8",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (check_time \u003c expire_time) {\n+\t\t\treturn;\n+\t\t}",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7610a8f4_94a2236c",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3817,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (check_time \u003c next_poll_time) {\n+\t\t\treturn;\n+\t\t}",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8026351a_feded1db",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3863,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (found_entry-\u003esle_protocol \u003d\u003d LOCK_NFSv4) {\n[...]\n \t\t} else {\n[...]",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cb7c56_7c03d600",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\ttime_t snbd_notified_eligible_time; // Only valid for available locks",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae65d6b_cd036307",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-06-18T09:36:47Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\ttime_t snbd_last_poll_time; // Only valid for blocked locks",
+      "revId": "2b5b09a3b110ac91720e6517aa7d739c75f616db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
