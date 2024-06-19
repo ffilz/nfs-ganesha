@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7afee15_6ca8750f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-19T19:39:08Z",
+      "side": 1,
+      "message": "Getting this out there, I want to do another read through of this.",
+      "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8761daa_c7a16882",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-19T19:39:08Z",
+      "side": 1,
+      "message": "This feels like it could be racy. We have had problems before with refcounts incrementing from 0. Are we sure that anything that would increment from 0 takes the blocked_locks_mutex?",
+      "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa390faf_86beb42a",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-19T19:39:08Z",
+      "side": 1,
+      "message": "And that anything that might increment from 0 can not proceed if we get to here?",
+      "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
