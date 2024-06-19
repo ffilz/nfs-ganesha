@@ -34,6 +34,24 @@
       "parentUuid": "a2cc18c8_811a9578",
       "revId": "1b9958dac8a1e8c34bbf54bc0fbc0c5c46f31674",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0be15c52_4e4c7135",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-19T19:38:24Z",
+      "side": 1,
+      "message": "It might be worth moving some stuff to internal.[ch]. We have functions in handle.c that are also called from file.c. But I\u0027d also be OK with exposing find_fd from file.c to export.c, so the declaration would go into vfs_methods.h",
+      "parentUuid": "a1cfcb6b_979c9adc",
+      "revId": "1b9958dac8a1e8c34bbf54bc0fbc0c5c46f31674",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
