@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07cf558_17e05b56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-20T23:54:25Z",
+      "side": 1,
+      "message": "Hmm, that is an interesting issue regarding using additional FSAL_PSEUDO exports...\n\nHowever, this is not the right fix for that. This fix will cause issues if an explicit export is created with Pseudo \u003d \"/\".\n\nSome systems use a non-FSAL_PSEUDO export for pseudo root and it\u0027s also possible to explicitly define a FSAL_PSEUDO export with export_id 0 and Pseudo \u003d \"/\" to explicitly set options for the pseudo root export.\n\nAnd that actually is the solution to this problem. If you are defining additional FSAL_PSEUDO exports, explicitly define the pseudo root export, and define it first, so it\u0027s root gets fileid 0.\n\nWe could also modify FSAL_PSEUDO to identify when pseudo root is being created and use fileid 0 for it, otherwise, start at fileid 1.\n\nAnother option would be for FSAL_PSEUDO to have a separate fileid space for each FSAL_PSEUDO export.",
+      "revId": "bf222505a4e71547e434ba759457e1c0f69e2c90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
