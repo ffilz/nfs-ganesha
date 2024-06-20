@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad371d30_e65ec7ed",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-06-20T05:34:21Z",
+      "side": 1,
+      "message": "This is only relevant for locks that are in state_blocked_locks. as being part of the blocked locks list does not increase reference count and so they are only protected by the mutex. and we only take a refcount on them while iterating(under the blocked_locks mutex).\nfor other cases we take a refcount when we already have one on a hopefully locked object (barring other bugs) so we are guaranteed not to increase from 0.",
+      "parentUuid": "e8761daa_c7a16882",
+      "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa390faf_86beb42a",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-19T19:39:08Z",
       "side": 1,
       "message": "And that anything that might increment from 0 can not proceed if we get to here?",
+      "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5014ab_e71edbcd",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-06-20T05:34:21Z",
+      "side": 1,
+      "message": "same as comment above. the only way to increase from zero is to take the mutex and iterate state_blocked_locks. on other cases there should only increase from an existing reference/object creation",
+      "parentUuid": "fa390faf_86beb42a",
       "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
