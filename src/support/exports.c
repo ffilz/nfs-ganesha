@@ -2578,6 +2578,12 @@ int ReadExports(config_file_t in_config,
 		return -1;
 	}
 
+	rc = build_default_root(err_type);
+	if (rc < 0) {
+		LogCrit(COMPONENT_CONFIG, "No pseudo root!");
+		return -1;
+	}
+
 	num_exp = load_config_from_parse(in_config,
 				    &export_param,
 				    NULL,
@@ -2585,12 +2591,6 @@ int ReadExports(config_file_t in_config,
 				    err_type);
 	if (num_exp < 0) {
 		LogCrit(COMPONENT_CONFIG, "Export block error");
-		return -1;
-	}
-
-	rc = build_default_root(err_type);
-	if (rc < 0) {
-		LogCrit(COMPONENT_CONFIG, "No pseudo root!");
 		return -1;
 	}
 
