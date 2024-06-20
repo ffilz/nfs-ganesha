@@ -52,6 +52,23 @@
       "parentUuid": "b248bf56_c22844da",
       "revId": "5d8e54543717a1b8b5b9f9fd31a9e1dd8d789d1a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2656f90_d7350532",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2024-06-20T21:17:38Z",
+      "side": 1,
+      "message": "avl and llrbt have different performance profiles, and avl is probably faster in the common case--but in particular when there is a higher frequency of lookup vs update;  both are partitioned b-trees, not \"hash tables\"\n\niirc, \"hash table\" is the multi-tree that philippe took partially from some gnu component, and what I remember about it originally was that was not an intrusve (linked) structure, so it did extra allocations and more importantly, accessing the anchor the link didn\u0027t imply having the record in cache;  that\u0027s a win almost certainly for avl;\n\nso hashtable is not a hash table the traditional sense--it\u0027s a set of trees, with locking per tree--the hash only selects the tree from the set; that said, while we can cheaply enumerate everything in the overall table, we probably aren\u0027t (because there\u0027s no efficient in-order traversal of the set, only of one tree)\n\nnote that the MDCache has a dedicated multi-tree structure that is modeled on the original hash table one, but uses avl.  maybe we should just convert hash table to use avl tree at some convenient time",
+      "revId": "5d8e54543717a1b8b5b9f9fd31a9e1dd8d789d1a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
