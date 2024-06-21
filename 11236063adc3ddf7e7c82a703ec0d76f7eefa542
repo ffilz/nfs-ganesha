@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ff3e064_bbbe615b",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-21T00:00:12Z",
+      "side": 1,
+      "message": "OK, I thought it might be OK, but wanted to make sure consideration was given.",
+      "parentUuid": "ad371d30_e65ec7ed",
+      "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa390faf_86beb42a",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "same as comment above. the only way to increase from zero is to take the mutex and iterate state_blocked_locks. on other cases there should only increase from an existing reference/object creation",
       "parentUuid": "fa390faf_86beb42a",
+      "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9667aea1_d19e8ac0",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-06-21T00:00:12Z",
+      "side": 1,
+      "message": "OK, I thought it might be OK, but wanted to make sure consideration was given.",
+      "parentUuid": "9d5014ab_e71edbcd",
       "revId": "11236063adc3ddf7e7c82a703ec0d76f7eefa542",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
