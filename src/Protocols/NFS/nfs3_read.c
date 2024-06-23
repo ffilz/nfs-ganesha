@@ -267,7 +267,6 @@ static void nfs3_read_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 int nfs3_read(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 {
 	struct fsal_obj_handle *obj;
-	pre_op_attr pre_attr;
 	fsal_status_t fsal_status = {0, 0};
 	uint64_t offset = arg->arg_read3.offset;
 	size_t size = arg->arg_read3.count;
@@ -302,8 +301,6 @@ int nfs3_read(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		server_stats_io_done(size, 0, false, false);
 		return rc;
 	}
-
-	nfs_SetPreOpAttr(obj, &pre_attr);
 
 	fsal_status =
 	    obj->obj_ops->test_access(obj, FSAL_READ_ACCESS, NULL, NULL, true);
