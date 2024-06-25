@@ -16,6 +16,24 @@
       "message": "I don\u0027t think this is a good idea.  nfs_SetPreOpAttr() has the side effect of calling obj-\u003egetattrs(), which can fill the attributes from the FSAL if they weren\u0027t cached.  So even if pre_attr isn\u0027t used, this side effect can be important.",
       "revId": "eb7e99df3ee547801dcab284c1ad6cd7d8f6e3a1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e429949_c648a7e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019837
+      },
+      "writtenOn": "2024-06-25T00:59:36Z",
+      "side": 1,
+      "message": "Can I delete it if I disable attribute caching",
+      "parentUuid": "b5685282_3e96303f",
+      "revId": "eb7e99df3ee547801dcab284c1ad6cd7d8f6e3a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
