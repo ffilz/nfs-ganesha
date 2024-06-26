@@ -52,6 +52,24 @@
       "parentUuid": "1e429949_c648a7e4",
       "revId": "eb7e99df3ee547801dcab284c1ad6cd7d8f6e3a1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68a2b19_5b1418ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019837
+      },
+      "writtenOn": "2024-06-26T07:51:47Z",
+      "side": 1,
+      "message": "thanks. I\u0027m doing performance optimization. When disabling attribute caching, there is operation amplification here. Deleting it can reduce the getattr calls, as concurrent access is limited in mdcache_getattr due to rw locks",
+      "parentUuid": "45ef6774_2683079b",
+      "revId": "eb7e99df3ee547801dcab284c1ad6cd7d8f6e3a1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
