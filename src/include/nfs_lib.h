@@ -41,6 +41,13 @@ extern int nfs_libmain(
 	const char *log_path,
 	const int debug_level);
 
+extern int nfs_libmain2(
+	const char *config_path,
+	const char *log_path,
+	const int debug_level,
+	const char *optional_static_fsal_name,
+	void (*optional_static_fsal_initializer)(void));
+
 extern bool reread_config(void);
 
 #endif				/* !NFS_LIB_H */

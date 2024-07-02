@@ -220,7 +220,9 @@ struct config_block fsal_block = {
  */
 
 int start_fsals(config_file_t in_config,
-		struct config_error_type *err_type)
+		struct config_error_type *err_type,
+		const char *optional_static_fsal_name,
+		void (*optional_static_fsal_initializer)(void))
 {
 	int rc;
 
@@ -250,6 +252,17 @@ int start_fsals(config_file_t in_config,
 
 	/* Load FSAL_PSEUDO */
 	load_fsal_static("PSEUDO", pseudo_fsal_init);
+
+	if (optional_static_fsal_initializer != NULL) {
+		/* Load statically compiled FSAL */
+		assert(optional_static_fsal_name != NULL);
+		LogInfo(COMPONENT_INIT, "Loading static FSAL: '%s'...",
+						optional_static_fsal_name);
+		load_fsal_static(optional_static_fsal_name,
+				 optional_static_fsal_initializer);
+		LogInfo(COMPONENT_INIT, "Loading static FSAL '%s' done",
+						optional_static_fsal_name);
+	}
 
 	return 0;
 }

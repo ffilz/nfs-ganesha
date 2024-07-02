@@ -96,16 +96,11 @@ struct cleanup_list_element export_cleanup_element = {
 	.clean = export_cleanup,
 };
 
-/**
- * nfs_libmain: library initializer
- *
- * @return status to calling program by calling the exit(3C) function.
- *
- */
-
-int nfs_libmain(const char *ganesha_conf,
+int nfs_libmain2(const char *ganesha_conf,
 		const char *lpath,
-		const int debug_level)
+		const int debug_level,
+		const char *optional_static_fsal_name,
+		void (*optional_static_fsal_initializer)(void))
 {
 	char localmachine[MAXHOSTNAMELEN + 1];
 	int dsc;
@@ -215,7 +210,8 @@ int nfs_libmain(const char *ganesha_conf,
 	/* We need all the fsal modules loaded so we can have
 	 * the list available at exports parsing time.
 	 */
-	if (start_fsals(nfs_config_struct, &err_type) < 0) {
+	if (start_fsals(nfs_config_struct, &err_type, optional_static_fsal_name,
+			optional_static_fsal_initializer) < 0) {
 		LogCrit(COMPONENT_INIT,
 			 "Error starting FSALs.");
 		goto fatal_die;
@@ -299,4 +295,18 @@ fatal_die:
 		 "Fatal errors.  Server exiting...");
 	/* NOT REACHED */
 	return 2;
+}
+
+/**
+ * nfs_libmain: library initializer
+ *
+ * @return status to calling program by calling the exit(3C) function.
+ *
+ */
+
+int nfs_libmain(const char *ganesha_conf,
+		const char *lpath,
+		const int debug_level)
+{
+	return nfs_libmain2(ganesha_conf, lpath, debug_level, NULL, NULL);
 }

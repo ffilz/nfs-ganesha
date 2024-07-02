@@ -508,7 +508,7 @@ int main(int argc, char *argv[])
 	/* We need all the fsal modules loaded so we can have
 	 * the list available at exports parsing time.
 	 */
-	if (start_fsals(nfs_config_struct, &err_type) < 0) {
+	if (start_fsals(nfs_config_struct, &err_type, NULL, NULL) < 0) {
 		LogCrit(COMPONENT_INIT,
 			 "Error starting FSALs.");
 		goto fatal_die;
