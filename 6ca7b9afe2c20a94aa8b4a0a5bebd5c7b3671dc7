@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79dea4ce_a6a1bf9d",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-03T20:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8de2d4d7_2b6bfeb7",
+      "revId": "6ca7b9afe2c20a94aa8b4a0a5bebd5c7b3671dc7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86d78bd2_67c5893b",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-07-03T05:48:03Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t\t\"Connection Manager Connection Started \"\n+\t\t\t\t\"Latencies per Result\",",
+      "revId": "6ca7b9afe2c20a94aa8b4a0a5bebd5c7b3671dc7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e393263_1d6b6c16",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-03T20:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86d78bd2_67c5893b",
       "revId": "6ca7b9afe2c20a94aa8b4a0a5bebd5c7b3671dc7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f42101_022d414e",
+        "filename": "src/RPCAL/connection_manager_metrics.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-03T20:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdad1bf1_536c297e",
+      "revId": "6ca7b9afe2c20a94aa8b4a0a5bebd5c7b3671dc7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9900da0_4c6da4a2",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-07-03T05:48:03Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tgauge_metric_handle_t clients[CONNECTION_MANAGER__CLIENT_STATE__LAST];\n+\thistogram_metric_handle_t connection_started_latencies",
+      "revId": "6ca7b9afe2c20a94aa8b4a0a5bebd5c7b3671dc7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "534e4800_6d3d3c88",
+        "filename": "src/RPCAL/connection_manager_metrics.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-03T20:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9900da0_4c6da4a2",
       "revId": "6ca7b9afe2c20a94aa8b4a0a5bebd5c7b3671dc7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
