@@ -70,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6826f455_8b7596cb",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38da0924_5447463c",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "324e69b0_80361b1d",
@@ -83,6 +101,24 @@
       "writtenOn": "2024-07-03T00:17:45Z",
       "side": 1,
       "message": "unlock -\u003e cancel?",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2317d01_a61a8097",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "324e69b0_80361b1d",
       "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -106,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b89ae410_ae49ec41",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "This is a solution for such an issue we encountered, this happens because the blocked_lock list holds locks without having a reference to them.\nBut code that goes over the list can take a ref count for those locks.\nSo other then other bugs this resolves that case.\nbut either way, this change just makes the code more robust, not less so.\nIdeally we would have wanted for refs not to be able to be taken when ref count is zero, but that requires a larger change or adding locks, which is something we didn\u0027t want to get into",
+      "parentUuid": "83af3af4_0d5b8bc7",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28c7b517_25e9d0e3",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 3
@@ -117,6 +171,24 @@
       "writtenOn": "2024-07-03T00:17:45Z",
       "side": 1,
       "message": "Add a function description please",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb5d612_f19bcff5",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2479,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28c7b517_25e9d0e3",
       "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -138,6 +210,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29c47af_20565c14",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2484,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c97c278f_55f76fd6",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0162c3fc_5398c728",
@@ -151,6 +241,24 @@
       "writtenOn": "2024-07-03T00:17:45Z",
       "side": 1,
       "message": "Add a function description please",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b93c84a_554ffe12",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0162c3fc_5398c728",
       "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -172,6 +280,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38610788_1ddd1ca3",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2795,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d337b224_aa176c20",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54bc5496_33b2fa7e",
@@ -185,6 +311,24 @@
       "writtenOn": "2024-07-03T00:17:45Z",
       "side": 1,
       "message": "blank lines please",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a385b82a_53dd499b",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3214,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54bc5496_33b2fa7e",
       "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -206,6 +350,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f648f0a9_3839a6ed",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3750,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f33d1546_6547a986",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bde38ad6_c08bb277",
@@ -219,6 +381,24 @@
       "writtenOn": "2024-07-03T00:17:45Z",
       "side": 1,
       "message": "Add a function description please",
+      "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cfdafb_36b5f351",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3785,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-07-03T05:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde38ad6_c08bb277",
       "revId": "d65556b265321464b85ddf6242a613c033a7a2dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
