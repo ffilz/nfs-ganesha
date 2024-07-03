@@ -33,6 +33,29 @@
       "message": "Provisionally this looks good, I\u0027d like a 2nd opinion on static linking",
       "revId": "c14ceb2a24fea5f97331bfce68301844f5a888a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17d5b58_17ae626f",
+        "filename": "src/FSAL/fsal_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2024-07-03T07:11:24Z",
+      "side": 1,
+      "message": "note that calling `load_fsal_static` means that `m_ops.init_config` will never be called: `fsal_load_init` calls it only if the fsal isn\u0027t loaded yet, otherwise it calls `m_ops.update_config`.\nconsider either documenting this behavior in `nfs_libmain2` API or perhaps fixing it by calling `m_ops.init_config` if it hasn\u0027t been called yet",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 45
+      },
+      "revId": "c14ceb2a24fea5f97331bfce68301844f5a888a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
