@@ -30,7 +30,9 @@
 #include "avltree.h"
 #include "gsh_list.h"
 #ifdef USE_LTTNG
+#ifndef TRACEPOINT_DEFINE
 #include "gsh_lttng/fsal_mem.h"
+#endif // TRACEPOINT_DEFINE
 #endif
 
 struct mem_fsal_obj_handle;
