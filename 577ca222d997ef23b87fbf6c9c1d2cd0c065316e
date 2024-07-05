@@ -16,6 +16,24 @@
       "message": "ERROR: do not use C99 // comments\n+#endif // TRACEPOINT_DEFINE",
       "revId": "577ca222d997ef23b87fbf6c9c1d2cd0c065316e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbe106c_ede5c1e5",
+        "filename": "src/FSAL/FSAL_MEM/mem_int.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-05T21:50:32Z",
+      "side": 1,
+      "message": "Please don\u0027t use // comments (except for the SPDX line at the top of a file or in C++ files).",
+      "parentUuid": "30836cd9_1b47cb9b",
+      "revId": "577ca222d997ef23b87fbf6c9c1d2cd0c065316e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
