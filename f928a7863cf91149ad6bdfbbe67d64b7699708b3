@@ -33,6 +33,23 @@
       "message": "Not sure what\u0027s wrong with this one. It causes pynfs test case RPLY8 to cause Ganesha to crash.",
       "revId": "f928a7863cf91149ad6bdfbbe67d64b7699708b3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0107a4dd_0d8a8be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-06T00:36:53Z",
+      "side": 1,
+      "message": "I\u0027m not confident of what\u0027s going on, however, a process of elimination on the RPLY8 problem did seem to isolate this patch (in that my merge up to this patch passed RPLY8, and then this failed). However, in light of the suspicion that it may actually be the courteous server support causing the problem, I am leaving this with a +0 code review and a -1 verify.",
+      "revId": "f928a7863cf91149ad6bdfbbe67d64b7699708b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
