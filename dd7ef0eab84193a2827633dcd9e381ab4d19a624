@@ -33,6 +33,23 @@
       "message": "Before accepting this patch, I would like to understand why pynfs 4.0 test case LOCK20 fails. It may be a test case problem.",
       "revId": "dd7ef0eab84193a2827633dcd9e381ab4d19a624",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffafc62e_8eb08484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-06T00:35:02Z",
+      "side": 1,
+      "message": "Somehow, testing with this did get past RPLY8 however, the LOCK20 failure seems independent so I\u0027m going to leave this one with +0 code and -1 verify pending review of the situation with LOCK20.",
+      "revId": "dd7ef0eab84193a2827633dcd9e381ab4d19a624",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
