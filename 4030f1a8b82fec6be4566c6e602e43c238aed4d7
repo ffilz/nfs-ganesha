@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "737906ea_3cdc0bee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-08T23:33:37Z",
+      "side": 1,
+      "message": "OK, I really do need to look at this carefully. This patch turns out to be the culprit in pynfs 4.0 test case RPLY8 causing a Ganesha crash.",
+      "revId": "4030f1a8b82fec6be4566c6e602e43c238aed4d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ace8209c_b162cdb3",
         "filename": "src/SAL/sal_metrics.c",
         "patchSetId": 6
