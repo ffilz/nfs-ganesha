@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d66a2a91_68ca2176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-09T21:16:20Z",
+      "side": 1,
+      "message": "My invocations for pynfs are:\n\nFrom nfs4.0 directory:\n\n./testserver.py -v --outfile /home/ffilz/ganesha/pynfs-results/TESTOUT.nfs4.0.all-ganesha-RD12-LOCK8c.2024-07-09.log --maketree 127.0.0.1:/export/test1/pynfs --showomit --secure --rundeps all ganesha RD12 LOCK8c\n\nYou can run just RPLY8 by replacing \"all ganesha RD12 LOCK8c\" with \"RPLY8\"\n\nFrom nfs4.1 directory:\n\n./testserver.py -v --outfile /home/ffilz/ganesha/pynfs-results/TESTOUT.nfs4.1.all-ganesha.2024-07-09.log --maketree 127.0.0.1:/export/test1/pynfs --showomit --rundeps all ganesha",
+      "parentUuid": "737906ea_3cdc0bee",
+      "revId": "4030f1a8b82fec6be4566c6e602e43c238aed4d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ace8209c_b162cdb3",
         "filename": "src/SAL/sal_metrics.c",
         "patchSetId": 6
