@@ -1690,44 +1690,46 @@ void server_stats_summary(DBusMessageIter *iter, struct gsh_stats *st)
 					 &st_iter);
 
 #ifdef _USE_NFS3
-	stats_available = st->nfsv3 != 0;
+	stats_available = (st->nfsv3 != 0 && st->nfsv3->cmds.total != 0);
 	protocol = "NFSv3";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
 
-	stats_available = st->mnt != 0;
+	stats_available = (st->mnt != 0 &&
+		(st->mnt->v1_ops.total != 0 || st->mnt->v3_ops.total != 0));
 	protocol = "MNT";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
 #endif
 #ifdef _USE_NLM
-	stats_available = st->nlm4 != 0;
+	stats_available = (st->nlm4 != 0 && st->nlm4->ops.total != 0);
 	protocol = "NLMv4";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
 #endif
 #ifdef _USE_RQUOTA
-	stats_available = st->rquota != 0;
+	stats_available = (st->rquota != 0 &&
+		(st->rquota->ops.total != 0 || st->rquota->ext_ops.total != 0));
 	protocol = "RQUOTA";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
 
 #endif
-	stats_available = st->nfsv40 != 0;
+	stats_available = (st->nfsv40 != 0 && st->nfsv40->compounds.total != 0);
 	protocol = "NFSv40";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
-	stats_available = st->nfsv41 != 0;
+	stats_available = (st->nfsv41 != 0 && st->nfsv41->compounds.total != 0);
 	protocol = "NFSv41";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
 
-	stats_available = st->nfsv42 != 0;
+	stats_available = (st->nfsv42 != 0 && st->nfsv42->compounds.total != 0);
 	protocol = "NFSv42";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
 #ifdef _USE_9P
-	stats_available = st->_9p != 0;
+	stats_available = (st->_9p != 0 && st->_9p->cmds.total != 0);
 	protocol = "9P";
 	dbus_message_iter_append_protocol_info(&st_iter, &protocol,
 					       &stats_available);
