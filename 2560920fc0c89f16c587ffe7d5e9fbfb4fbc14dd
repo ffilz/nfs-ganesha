@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f03ce07_d2d4c1d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-11T05:28:38Z",
+      "side": 1,
+      "message": "Context - Lemme clarify, I will update the commit message also later.\n\nScenario is that, user mounts his clients over say NFSv3 and then decides to remount them with NFSv4.0/1/2...and later once he performs the ShowClients, it lists that the client is still performing NFSv3 IOs. Hence to avoid this confusion, rather than restarting Ganesha, he could be asked to reset the stats and then perform the ShowClients to get the latest updated information...\nHence this change made to reflect the same...",
+      "parentUuid": "77ba7098_6d4df2c5",
+      "revId": "2560920fc0c89f16c587ffe7d5e9fbfb4fbc14dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a24c1852_a8a7b9cc",
@@ -66,6 +84,30 @@
       "writtenOn": "2024-07-11T04:57:36Z",
       "side": 1,
       "message": "unrelated exactly to this change, but would be nice to update the comment",
+      "range": {
+        "startLine": 1664,
+        "startChar": 0,
+        "endLine": 1676,
+        "endChar": 2
+      },
+      "revId": "2560920fc0c89f16c587ffe7d5e9fbfb4fbc14dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "618ce5eb_ddb87a58",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1676,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-11T05:28:38Z",
+      "side": 1,
+      "message": "Sure, I will make the updates, based on the new logics incorporated IN",
+      "parentUuid": "a24c1852_a8a7b9cc",
       "range": {
         "startLine": 1664,
         "startChar": 0,
@@ -101,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8db832da_0a196d96",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-11T05:28:38Z",
+      "side": 1,
+      "message": "My perception here was that, there is a compound carrying these sub operations like read/write/OtherOps, hence checking the compound counters which would yield us the same required results...\nplease correct my understanding, if wrong...",
+      "parentUuid": "89516fed_8029666d",
+      "range": {
+        "startLine": 1718,
+        "startChar": 14,
+        "endLine": 1718,
+        "endChar": 73
+      },
+      "revId": "2560920fc0c89f16c587ffe7d5e9fbfb4fbc14dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d185403a_d9bb492b",
         "filename": "src/support/server_stats.c",
         "patchSetId": 1
@@ -112,6 +178,30 @@
       "writtenOn": "2024-07-11T04:57:36Z",
       "side": 1,
       "message": "here I would probably also check read/write as cmds only refers to non io",
+      "range": {
+        "startLine": 1732,
+        "startChar": 41,
+        "endLine": 1732,
+        "endChar": 60
+      },
+      "revId": "2560920fc0c89f16c587ffe7d5e9fbfb4fbc14dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4609b543_d11dd9ed",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-11T05:28:38Z",
+      "side": 1,
+      "message": "Okies...I was in perception that cmds.total encapsulates other operations as well...the check is gonna be long one...\nFor completeness, I amde changes to 9p and RQuota paths",
+      "parentUuid": "d185403a_d9bb492b",
       "range": {
         "startLine": 1732,
         "startChar": 41,
