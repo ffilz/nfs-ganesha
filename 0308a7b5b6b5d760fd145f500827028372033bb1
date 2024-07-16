@@ -86,6 +86,23 @@
       "message": "Hello Frank and Daniel, please help to check on this finding and it\u0027s fix.",
       "revId": "0308a7b5b6b5d760fd145f500827028372033bb1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa4e64e_db0bc68f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-16T17:44:35Z",
+      "side": 1,
+      "message": "Could you split this to handle each lock in a separate patch.\n\nThe obj_lock is only taken read in two places and I don\u0027t think either are very critical to performance, so that\u0027s a good one to replace with mutex.\n\nMostly the fsm_lock has low utilization so could be a mutex, but FSAL_MEM uses it in a way that I\u0027d like better characterization. On the other hand, other than FSAL_MEM it\u0027s not used in any critical paths so if it stays a rwlock the only impact would be on FSAL_MEM which should be separately investigated to see if it impacts the types of performance evaluation FSAL_MEM was written for.\n\nI\u0027m a little more concerned about the mdcache locks.",
+      "revId": "0308a7b5b6b5d760fd145f500827028372033bb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
