@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0040bb73_201d3f0f",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-16T23:07:35Z",
+      "side": 1,
+      "message": "maybe make this NFS_RDMA_ENABLE_FOR_NFSV40 \u003c\u003c compound4_minor so it\u0027s a bit more obvious",
+      "revId": "9c4278ffeed5493a9f37c3956a0976b01c6b07d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab4cbe1_ae5322f4",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-16T23:07:35Z",
+      "side": 1,
+      "message": "You might want to add a comment that the check for V4.x depends on these values being 2 \u003c\u003c x",
+      "revId": "9c4278ffeed5493a9f37c3956a0976b01c6b07d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
