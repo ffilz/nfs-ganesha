@@ -122,6 +122,11 @@ proxyv3_openfd(const struct sockaddr *host,
 	       uint16_t port)
 {
 	int rc;
+	int flag;
+	struct timeval tv;
+
+	tv.tv_sec = 600;
+	tv.tv_usec = 0;
 
 	LogDebug(COMPONENT_FSAL,
 		 "Opening a new socket");
@@ -234,6 +239,29 @@ proxyv3_openfd(const struct sockaddr *host,
 		hostv6->sin6_port = htons(port);
 	} else {
 		hostv4->sin_port = htons(port);
+	}
+
+	flag = 1;
+	/*
+	 * We can re-use the sockets between the proxy and the host
+	 * by keeping the socket alive.
+	 */
+	if (setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE,
+			      &flag, sizeof(flag)) < 0) {
+		LogCrit(COMPONENT_FSAL,
+			"Set keep alive failed with error :%d",
+			errno);
+		close(fd);
+		return -1;
+	}
+
+	if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&tv,
+			      sizeof(tv))) {
+		LogCrit(COMPONENT_FSAL,
+			"Setting recv timeout failed with error :%d",
+			errno);
+		close(fd);
+		return -1;
 	}
 
 	if (connect(fd, (struct sockaddr *)&hostAndPort, socklen) < 0) {
