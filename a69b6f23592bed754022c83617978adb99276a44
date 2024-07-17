@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "837c7477_5a56effb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-07-17T15:24:26Z",
+      "side": 1,
+      "message": "I have some thoughts, and I\u0027d like to start a discussion.\n\nFirst, this fixes the build for LTTng, but breaks the build for GTest (when LTTng is on).  That will need to be fixed.\n\nI am wondering, however, about the re-organization.  The original idea was to have the LTTng modules for each separate package (say FSAL_CEPH) be installable with that package.  Obviously, we never did that, and only have one LTTng package now.  (As an aside, will that even work if you don\u0027t install all the packages that were built when LTTng was enabled?  I\u0027m not sure.)   This re-org makes that impossible.  Is this packaging something we care about?  Or are we fine with a single LTTng package forever?",
+      "revId": "a69b6f23592bed754022c83617978adb99276a44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
