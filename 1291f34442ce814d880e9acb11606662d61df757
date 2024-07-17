@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09aafebd_2bad46bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-17T23:04:34Z",
+      "side": 1,
+      "message": "OK, this lock is only ever taken for read in one place - in unexport, so not a common code path, and then it\u0027s taken for such a short time.",
+      "revId": "1291f34442ce814d880e9acb11606662d61df757",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
