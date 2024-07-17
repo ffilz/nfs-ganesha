@@ -281,6 +281,7 @@ static state_status_t create_file_recall(struct fsal_obj_handle *obj,
 
 		if ((s->state_type != STATE_TYPE_LAYOUT)
 		    || (s->state_data.layout.state_layout_type != type)) {
+			dec_state_owner_ref(owner);
 			continue;
 		}
 
