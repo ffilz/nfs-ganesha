@@ -16,6 +16,24 @@
       "message": "Hmm, considering the issue being worked, should this be a LogCrit not a LogFatal?",
       "revId": "f89c0cdfb7c6bb85cb09033f4c97d9504f6c9a01",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "087b19e1_3c03af60",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-07-18T07:19:30Z",
+      "side": 1,
+      "message": "I think LogFatal is more appropriate as this will generate backtrace, which will help us to fix this.",
+      "parentUuid": "9cc6481b_11c1db2f",
+      "revId": "f89c0cdfb7c6bb85cb09033f4c97d9504f6c9a01",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
