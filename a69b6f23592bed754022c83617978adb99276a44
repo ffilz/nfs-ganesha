@@ -34,6 +34,24 @@
       "parentUuid": "837c7477_5a56effb",
       "revId": "a69b6f23592bed754022c83617978adb99276a44",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "945f3f1c_7e515efd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-07-19T15:54:32Z",
+      "side": 1,
+      "message": "\u003e Why do you say this breaks build for GTest? IIUC GTest build with LTTNG was always broken. It must have been, since LTTNG built itself was broken, but it is also broken for additional reasons. \n\u003e It should be fixed, but this is a separate effort from this commit. \n\nThe last time LTTng build, GTest also built with it.  It\u0027s reasonable to assume, therefore, that this change broke the build with GTest, although we obviously can\u0027t know for sure.  Regardless, I was pointing it out.\n\n\u003e \n\u003e Why would this change make it impossible? \n\u003e All this change does is move all the headers to compile in one file for simplicity. This is because they all compile as part of the same .so.\n\nThis is exactly what makes it impossible, without undoing this change.  When we\u0027re build separate .o files, we can include them in separate packages in the packaging step.  When they\u0027re all in a single .o, we can\u0027t split them up.\n\n\u003e \n\u003e If you want to divide it to separate .so files, all you need is to add another .so target and move the relevant headers there. \n\nWhich undoes the changes here.\n\n\u003e This doesn\u0027t really change anything significant. It only moves around where you include the headers, this can always be easily moved again.\n\nRight, and I was asking if this is what we want.  Clearly it\u0027s not hugely important, since we\u0027ve never split up the packaging.  In fact, I suspect no one has made packages with LTTng enabled, except for testing.  Hence my asking for opinions.",
+      "parentUuid": "9eaa5fb7_8269bea5",
+      "revId": "a69b6f23592bed754022c83617978adb99276a44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
