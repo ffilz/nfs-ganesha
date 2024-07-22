@@ -849,6 +849,25 @@ nfsstat4 handle_deleg_getattr(struct fsal_obj_handle *obj,
 int cbgetattr_impl(struct fsal_obj_handle *obj, nfs_client_id_t *client,
 		   struct gsh_export *ctx_exp);
 
+extern int g_total_num_files_delegated;
+/**
+ * @brief Decrement g_total_num_files_delegated if the file has no delegations
+ * and the nfs_param for Max_Files_Delegatable is non-zero meaning this feature
+ * is enabled
+ * @note st_lock is held
+ */
+#define DEC_G_Total_Num_Files_Delegated(curr_delegations)\
+	do {\
+		if ((nfs_param.nfsv4_param.max_files_delegatable != 0) &&\
+			(curr_delegations == 0)) {\
+			int new_total_num_files_delegated =\
+				atomic_dec_int32_t(\
+				&g_total_num_files_delegated);\
+			LogFullDebug(COMPONENT_STATE,\
+				"total_num_files_delegated decremented to %d",\
+				new_total_num_files_delegated);\
+		} \
+	} while (0)
 /******************************************************************************
  *
  * Layout functions
