@@ -1518,6 +1518,16 @@ state_status_t delegrecall_impl(struct fsal_obj_handle *obj)
 		}
 
 		client_id = owner->so_owner.so_nfs4_owner.so_clientrec;
+		if (!client_id ||
+			!atomic_fetch_int32_t(&client_id->cid_refcount)) {
+			/* Let's release the owner ref &*/
+			dec_state_owner_ref(owner);
+			LogDebug(COMPONENT_FSAL_UP,
+				 "Client id within owner has gone stale, no need to recall delegation");
+			gsh_free(drc_ctx);
+			*deleg_state = DELEG_GRANTED;
+			continue;
+		}
 		inc_client_id_ref(client_id);
 		dec_state_owner_ref(owner);
 
