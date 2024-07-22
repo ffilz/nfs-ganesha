@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b04f21d9_3cfad944",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-22T22:28:27Z",
+      "side": 1,
+      "message": "This needs to use atomic operations. The statistics are protected by a per-obj lock, but this is a global counter so the per-obj lock doesn\u0027t properly protect it.\n\nOtherwise looks good.",
+      "revId": "80fcf6705dcc67f9357bb38b1d23c41539249c25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
