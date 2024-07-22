@@ -48,6 +48,8 @@
 #include <pthread.h>
 #include <string.h>
 
+extern int g_max_files_delegatable;
+
 /** File cache configuration, settable in the CacheInode/MDCACHE
     stanza. */
 
@@ -94,6 +96,8 @@ static struct config_item mdcache_params[] = {
 		       mdcache_parameter, futility_count),
 	CONF_ITEM_UI32("Dirmap_HWMark", 1, UINT32_MAX, 10000,
 		       mdcache_parameter, dirmap_hwmark),
+	CONF_ITEM_I32("Files_Delegatable_Percent", 10, INT32_MAX, 90,
+				mdcache_parameter, files_delegatable_percent),
 	CONFIG_EOL
 };
 
@@ -160,6 +164,10 @@ int mdcache_set_param_from_conf(config_file_t parse_tree,
 	/* Compute avl_detached_max from avl_chunk and avl_detached_mult */
 	mdcache_param.dir.avl_detached_max =
 	    mdcache_param.dir.avl_chunk * mdcache_param.dir.avl_detached_mult;
+
+	g_max_files_delegatable =
+		(mdcache_param.files_delegatable_percent *
+			mdcache_param.entries_hwmark) / 100;
 
 	return 0;
 }
