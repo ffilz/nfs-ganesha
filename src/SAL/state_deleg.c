@@ -56,6 +56,9 @@
 #include "nfs_convert.h"
 #include "fsal_convert.h"
 
+/* Keeps track of total number of files delegated */
+int total_num_files_delegated = 0;
+
 /**
  * @brief Initialize new delegation state as argument for state_add()
  *
@@ -194,6 +197,14 @@ void update_delegation_stats(struct state_hdl *ostate,
 	/* Update delegation stats for file. */
 	struct file_deleg_stats *statistics = &ostate->file.fdeleg_stats;
 
+	if (statistics->fds_curr_delegations == 0) {
+		/* First delegation being granted on this file*/
+		int new_total_num_files_delegated =
+			atomic_inc_int32_t(&total_num_files_delegated);
+		LogFullDebug(COMPONENT_STATE, "total_num_files_delegated"
+			" incremented to %d", new_total_num_files_delegated);
+	}
+
 	statistics->fds_curr_delegations++;
 	statistics->fds_delegation_count++;
 	statistics->fds_last_delegation = time(NULL);
@@ -248,6 +259,10 @@ void deleg_heuristics_recall(struct fsal_obj_handle *obj,
 			statistics->fds_curr_delegations,
 			statistics->fds_deleg_type);
 		statistics->fds_deleg_type = OPEN_DELEGATE_NONE;
+		int new_total_num_files_delegated =
+			atomic_dec_int32_t(&total_num_files_delegated);
+		LogFullDebug(COMPONENT_STATE, "total_num_files_delegated"
+			" decremented to %d", new_total_num_files_delegated);
 	}
 
 	/* Update delegation stats for client. */
@@ -369,6 +384,17 @@ bool should_we_grant_deleg(struct state_hdl *ostate, nfs_client_id_t *client,
 		default:
 			break;
 		}
+	}
+
+	/* we have reached the maximum number of files we can delegate */
+	if ((nfs_param.nfsv4_param.max_files_delegatable != 0) &&
+		(total_num_files_delegated >=
+		nfs_param.nfsv4_param.max_files_delegatable)){
+		LogFullDebug(COMPONENT_STATE, "Cannot delegate file since"
+			" Max_Files_Delegatable limit is reached");
+		resok->delegation.open_delegation4_u.od_whynone.ond_why =
+								WND4_RESOURCE;
+		return false;
 	}
 
 	/* If there is a recent recall on this file, the client that made
