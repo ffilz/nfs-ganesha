@@ -545,6 +545,10 @@ Max_Alive_Time_For_Expired_Client(uint64, range 0 to UINT64_MAX, default 86400)
     in memory, beyond which Ganesha would start reaping and expire it off.
     Comes to play if the config Expired_Client_Threshold is not set to ZERO.
 
+Max_Files_Delegatable(int32, range 0 to INT32_MAX, default 100000)
+    A max value to limit the total number of files ganesha can delegate to
+    clients.
+
 RADOS_KV {}
 --------------------------------------------------------------------------------
 
