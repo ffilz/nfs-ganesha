@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e5df03c_ef5780a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-07-23T03:14:18Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nIf check_share_conflict ever returns ERR_FSAL_SHARE_DENIED obj_lock ends up getting unlocked twice: first inside check_share_conflict_and_update_locked, and then again inside fsal_start_global_io right after check_share_conflict_and_update_locked returns.",
+      "revId": "f604164dea8eebc680f16b11cb11c10d61530a05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
