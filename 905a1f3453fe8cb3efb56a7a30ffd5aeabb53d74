@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "546fd4f7_85e7f13a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-23T16:54:18Z",
+      "side": 1,
+      "message": "Looks good, but noticed some leaked export references...",
+      "revId": "905a1f3453fe8cb3efb56a7a30ffd5aeabb53d74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c136c51f_b032a7f2",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-23T16:54:18Z",
+      "side": 1,
+      "message": "This leaks an export reference...",
+      "revId": "905a1f3453fe8cb3efb56a7a30ffd5aeabb53d74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75538f94_1f67a1a2",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-07-23T16:54:18Z",
+      "side": 1,
+      "message": "And a leaked export reference here also",
+      "revId": "905a1f3453fe8cb3efb56a7a30ffd5aeabb53d74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
