@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cb96dc8_b73a8b7b",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-23T04:27:06Z",
+      "side": 1,
+      "message": "Do we need to make it atomic one...and rename it to something like g_\u003cVar\u003e to give a sense of global scope",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f8440cd_ea7e70be",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 3
@@ -38,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29d8cd10_ff99d80a",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-23T04:27:06Z",
+      "side": 1,
+      "message": "Please change as below\nLogFullDebug(COMPONENT_STATE, \"total_num_files_delegated incremented to %d\",\n             new_total_num_files_delegated);",
+      "parentUuid": "d813e3ea_192dd309",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "977831ef_e7a770a4",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 3
@@ -55,6 +90,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e60a84ef_9deebbcf",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-23T04:27:06Z",
+      "side": 1,
+      "message": "Better we atomically fetch total_num_files_delegated",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bb3a2b8_cc8ae3ca",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 3
@@ -66,6 +118,40 @@
       "writtenOn": "2024-07-23T00:33:12Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_STATE, \"Cannot delegate file since\"\n+\t\t\t\" Max_Files_Delegatable limit is reached\");",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bebff126_39053e73",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-23T04:27:06Z",
+      "side": 1,
+      "message": "Please have the comments updated for this variable",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b791d8_50fdb90c",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-07-23T04:27:06Z",
+      "side": 1,
+      "message": "Please update the man doc and the sample config file, for the same...like done for the other parameters",
       "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
