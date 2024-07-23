@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8440cd_ea7e70be",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-07-23T00:33:12Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_STATE, \"total_num_files_delegated\"\n+\t\t\t\" incremented to %d\", new_total_num_files_delegated);",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977831ef_e7a770a4",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-07-23T00:33:12Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_STATE, \"total_num_files_delegated\"\n+\t\t\t\" decremented to %d\", new_total_num_files_delegated);",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bb3a2b8_cc8ae3ca",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-07-23T00:33:12Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_STATE, \"Cannot delegate file since\"\n+\t\t\t\" Max_Files_Delegatable limit is reached\");",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
