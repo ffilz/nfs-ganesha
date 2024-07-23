@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3900d380_fb62d40c",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-23T17:54:14Z",
+      "side": 1,
+      "message": "Don\u0027t see us using atomic keyword for other variables like fsal_fd_global_counter but added a suffix to the variable to indicate that it is a global counter",
+      "parentUuid": "0cb96dc8_b73a8b7b",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f8440cd_ea7e70be",
@@ -71,6 +89,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d69711_7e353a3e",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-23T17:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29d8cd10_ff99d80a",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "977831ef_e7a770a4",
@@ -84,6 +120,24 @@
       "writtenOn": "2024-07-23T00:33:12Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_STATE, \"total_num_files_delegated\"\n+\t\t\t\" decremented to %d\", new_total_num_files_delegated);",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f516502_d14e85b1",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-23T17:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977831ef_e7a770a4",
       "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +159,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d04e6be_b2c444d6",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-23T17:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e60a84ef_9deebbcf",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bb3a2b8_cc8ae3ca",
@@ -118,6 +190,24 @@
       "writtenOn": "2024-07-23T00:33:12Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\tLogFullDebug(COMPONENT_STATE, \"Cannot delegate file since\"\n+\t\t\t\" Max_Files_Delegatable limit is reached\");",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c0185af_a11820fc",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-23T17:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bb3a2b8_cc8ae3ca",
       "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -139,6 +229,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e331719e_c5c52dfd",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-23T17:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bebff126_39053e73",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75b791d8_50fdb90c",
@@ -152,6 +260,24 @@
       "writtenOn": "2024-07-23T04:27:06Z",
       "side": 1,
       "message": "Please update the man doc and the sample config file, for the same...like done for the other parameters",
+      "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f09efd7_da582aa1",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-23T17:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75b791d8_50fdb90c",
       "revId": "dd03b27ce71aeaedc7ca32b083adddd88d0d3f96",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
