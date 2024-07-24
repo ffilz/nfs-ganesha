@@ -70,6 +70,24 @@
       "parentUuid": "945f3f1c_7e515efd",
       "revId": "a69b6f23592bed754022c83617978adb99276a44",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f44ef24_6350cc30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-07-24T13:33:31Z",
+      "side": 1,
+      "message": "\u003e ```\n\u003e This is not accurate. I think the question is, how many .c/.o files do you want to create per .so file. Previously we created a separate .c/.o file for each LTTNG provider. My change combines it to one, not because you should always have one, but because we should have one per .so file. Currently we have one .so file, so we have one .c file. \n\u003e \n\u003e In the future, if we want to separate it to other .so files, the question is, again, do you want each .so file to compile a single .c file or one per provider? \n\u003e \n\u003e I think it is better to combine all providers in the same .so file, because it makes it easier and clearer to add providers. And, in case you use LTTNG more often, which is what we want to do, we don\u0027t want to create a new file and add it to the build system every time we create add a new provider for traces.\n\u003e \n\u003e This is why I think this patch is orthogonal to the question of separating LTTNG traces to different .so files.\n\nYou\u0027re half right.  We currently have more .c files than we would need, but we would need more than one.  Several of the existing .c files are for components that are unconditionally in Ganesha, but many of them are for components that are parts of other packages.\n\n\u003e \n\u003e ----------------------------------------------------------------\n\u003e \n\u003e We can discuss the question of whether or not each component should have its own .so for LTTNG traces, and IMHO, I actually think any loadable module (like a FSAL) should just have LTTNG traces statically linked in it, and not use a loadable module. The loadable module makes it more complicated to use, and the FSAL is already a loadable module. If you want to load a FSAL with LTTNG traces you can just replace the FSAL you load with a FSAL that is built with LTTNG traces.\n\nI don\u0027t know if this is feasible or not.  I don\u0027t know enough about lttng loading to know what happens if you have traces but not the framework loaded.  I assume the linker just takes them out, so it should probably work.\n\n\u003e \n\u003e The Ganesha itself having a loadable module for traces does make some sense, since then you can load/unload it dynamically. But, even then, I think it is easier to achieve this dynamics with a configuration flag of enabling/disabling the traces (or having a trace level) than having a dynamically loaded module in Ganesha. \n\nThere\u0027s actually an important win to loading your lttng:  performance.  If lttng isn\u0027t loaded, then all trace calls turn into a single unconditional jump instruction, which is extremely fast (and the CPU will actually remove it after the first run).  If lttng is loaded but disabled somehow, then every trace call needs to check config to see if it\u0027s enabled, which will add extra instructions, and keep the relevant config in the CPU cache lines.   This is one of the big wins of lttng, and why we use it in the first place.  So I\u0027m strongly in favor of keeping lttng loadable.\n\n\u003e \n\u003e So, basically, IMHO, the best option would be compile LTTNG traces statically (assuming USE_LTTNG is on) and have a configuration flag to control whether or not the traces are enabled (or, better yet, a log level).",
+      "parentUuid": "2076a98e_9996a27b",
+      "revId": "a69b6f23592bed754022c83617978adb99276a44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
