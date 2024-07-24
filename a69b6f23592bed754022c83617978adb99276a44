@@ -88,6 +88,24 @@
       "parentUuid": "2076a98e_9996a27b",
       "revId": "a69b6f23592bed754022c83617978adb99276a44",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e74163aa_54126299",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-07-24T14:06:07Z",
+      "side": 1,
+      "message": "Maybe we can discuss this a bit in the next weekly Ganesha meeting. \n\nBut, the question now is, do we want to block fixing LTTNG compilation on this decision, since even if we decide that we want to separate the LTTNG traces to each FSAL separately we will not do this now, and in any case the issue of moving the headers to another C file is a small matter.",
+      "parentUuid": "5f44ef24_6350cc30",
+      "revId": "a69b6f23592bed754022c83617978adb99276a44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
