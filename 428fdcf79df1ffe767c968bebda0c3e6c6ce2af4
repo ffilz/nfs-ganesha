@@ -16,6 +16,24 @@
       "message": "This is better with the atomic variables, however, if multiple threads are simultaneously trying to grant a delegation, we can overflow the limit because we check the counter, and then later increment it. We need to increment and check to \"reserve\" a slot, and then decrement the counter if we end up not granting a delegation.",
       "revId": "428fdcf79df1ffe767c968bebda0c3e6c6ce2af4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893c9b3f_a7958628",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-07-24T03:08:01Z",
+      "side": 1,
+      "message": "Ack - good point will rework the patch that way",
+      "parentUuid": "cda645c3_860bd05a",
+      "revId": "428fdcf79df1ffe767c968bebda0c3e6c6ce2af4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
