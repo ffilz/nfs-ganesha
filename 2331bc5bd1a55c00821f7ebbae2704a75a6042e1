@@ -39,6 +39,30 @@
       },
       "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae43f57_f04428ed",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-07-24T13:21:57Z",
+      "side": 1,
+      "message": "It looks like this is intended to protect against a leak of lock_state rather than lock_owner?  In the case where nfs4_Check_Stateid() return NFS4ERR_REPLAY, lock_state will be ref\u0027d, but it will only be free\u0027d if get_state_owner_ref() succeeds.",
+      "parentUuid": "dd046f8b_c71b9986",
+      "range": {
+        "startLine": 366,
+        "startChar": 3,
+        "endLine": 366,
+        "endChar": 7
+      },
+      "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
