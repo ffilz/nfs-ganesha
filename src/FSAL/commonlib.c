@@ -2399,6 +2399,14 @@ retry:
 				/* fsal_fd is in wrong mode and we aren't
 				 * allowed to reopen, so return EBUSY.
 				 */
+
+				/* Wake up at least one thread waiting to do fd
+				 * work
+				 */
+				PTHREAD_COND_signal(&fsal_fd->fd_work_cond);
+				/* Wake up all threads waiting to do io work */
+				PTHREAD_COND_broadcast(&fsal_fd->io_work_cond);
+
 				PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
 				/* Use fsalstat to avoid LogInfo... */
 				status = fsalstat(ERR_FSAL_DELAY, EBUSY);
