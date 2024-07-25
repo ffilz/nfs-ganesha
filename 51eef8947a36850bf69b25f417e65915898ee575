@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcbacab9_a2b731dc",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-07-25T03:23:12Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t//passing 0 current delegations since ostate is None",
+      "revId": "51eef8947a36850bf69b25f417e65915898ee575",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
