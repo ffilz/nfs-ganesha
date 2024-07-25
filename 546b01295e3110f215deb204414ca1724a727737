@@ -16,6 +16,91 @@
       "message": "Anyone can help review this",
       "revId": "546b01295e3110f215deb204414ca1724a727737",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f274d1_b4fe59ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2024-07-25T18:28:44Z",
+      "side": 1,
+      "message": "Thanks! I\u0027d make this a little more flexible (flag gated) and move some of this around.",
+      "revId": "546b01295e3110f215deb204414ca1724a727737",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbfb93d_3518970a",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2024-07-25T18:28:44Z",
+      "side": 1,
+      "message": "Don\u0027t call this \"flag\". You\u0027re using it to set keep_alive via setsocketopt, so call it keep_alive or something.",
+      "revId": "546b01295e3110f215deb204414ca1724a727737",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7141ef0a_7ae9e464",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2024-07-25T18:28:44Z",
+      "side": 1,
+      "message": "Can you make this an optional flag? I don\u0027t love having a hard-coded value right here.",
+      "revId": "546b01295e3110f215deb204414ca1724a727737",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3cd0f8_9174d592",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2024-07-25T18:28:44Z",
+      "side": 1,
+      "message": "See above, don\u0027t call this flag.",
+      "revId": "546b01295e3110f215deb204414ca1724a727737",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd517c4_15f0ebcf",
+        "filename": "src/FSAL/FSAL_PROXY_V3/rpc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1017716
+      },
+      "writtenOn": "2024-07-25T18:28:44Z",
+      "side": 1,
+      "message": "I would move these up to just after calling socket().",
+      "revId": "546b01295e3110f215deb204414ca1724a727737",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
