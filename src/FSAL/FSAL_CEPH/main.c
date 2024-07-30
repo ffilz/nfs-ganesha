@@ -38,6 +38,7 @@
 
 #include <stdlib.h>
 #include <assert.h>
+#include <math.h>
 #include "fsal.h"
 #include "fsal_types.h"
 #include "FSAL/fsal_init.h"
@@ -50,6 +51,7 @@
 #include "statx_compat.h"
 #include "nfs_core.h"
 #include "sal_functions.h"
+#include "../Stackable_FSALs/FSAL_MDCACHE/mdcache_ext.h"
 
 /**
  * The name of this module.
@@ -545,6 +547,9 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	struct ceph_mount *cm;
 	/* stx is filled in */
 	bool stxr = false;
+	/* ceph - client_cache_size */
+	uint32_t ceph_cache_size;
+	char cache_size_str[16];
 
 	fsal_export_init(&export->export);
 	export_ops_init(&export->export.exp_ops);
@@ -690,6 +695,27 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 		LogCrit(COMPONENT_FSAL,
 			"Unable to set Ceph client_oc: %d",
 			ceph_status);
+		goto error;
+	}
+
+	/*
+	 * Set proper client_cache_size. It should be equal to total
+	 * mdcache cache size.
+	 */
+	ceph_cache_size = mdcache_param.cache_size * mdcache_param.nparts;
+	/*
+	 * mdcache size is prime, hence ceph_cache_size is required
+	 * to round it to 4K boundary
+	 */
+	ceph_cache_size = floor(((ceph_cache_size + 4096) / 4096) * 4096);
+	snprintf(cache_size_str, 15, "%u", ceph_cache_size);
+	ceph_status = ceph_conf_set(cm->cmount, "client_cache_size",
+		      cache_size_str);
+	if (ceph_status) {
+		status.major = ERR_FSAL_INVAL;
+		LogCrit(COMPONENT_FSAL,
+				"Unable to set Ceph client_cache_size: %d",
+				ceph_status);
 		goto error;
 	}
 
