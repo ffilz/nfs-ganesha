@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09402317_29ee135b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-07-30T12:21:39Z",
+      "side": 1,
+      "message": "Why do we keep pointer to things in a cache?  This is inherently broken, since we cannot be sure, no matter how big the cache is, that these things are kept in memory as long as we\u0027re using them.  We can only keep pointers to objects that have an explicit lifecycle that we control.",
+      "revId": "ee57eee1eda07ff3ef1c82eca496ec86abd97346",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fc8b9fd_21c8d983",
