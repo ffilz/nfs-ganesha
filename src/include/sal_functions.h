@@ -701,14 +701,15 @@ static inline struct fsal_obj_handle *get_state_obj_ref(state_t *state)
 	return obj;
 }
 
-static inline bool state_same_export(state_t *state, struct gsh_export *export)
+static inline bool state_same_export(state_t *state,
+				     struct gsh_export *state_export)
 {
 	bool same = false;
 
 	PTHREAD_MUTEX_lock(&state->state_mutex);
 
 	if (state->state_export != NULL)
-		same = state->state_export == export;
+		same = state->state_export == state_export;
 
 	PTHREAD_MUTEX_unlock(&state->state_mutex);
 
@@ -777,7 +778,7 @@ static inline bool state_same_owner(state_t *state, state_owner_t *owner)
 
 bool get_state_obj_export_owner_refs(state_t *state,
 				     struct fsal_obj_handle **obj,
-				     struct gsh_export **export,
+				     struct gsh_export **state_export,
 				     state_owner_t **owner);
 
 void state_nfs4_state_wipe(struct state_hdl *ostate);
