@@ -1150,6 +1150,7 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 	if (commit_type == update_export && probe_exp != NULL) {
 		bool mount_export = false;
 		bool mount_status_changed = false;
+		bool mountable = false;
 
 		/* We have an actual update case, probe_exp is the target
 		 * to update. Check all the options that MUST match.
@@ -1245,7 +1246,7 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 			/* The new options for NFSv4 probably don't match the
 			 * old options.
 			 */
-			bool mountable = export_can_be_mounted(export);
+			mountable = export_can_be_mounted(export);
 
 			LogDebug(COMPONENT_EXPORT,
 				 "Export %d NFSv4 changing from %s to %s",
@@ -1256,7 +1257,6 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 					? "can be mounted"
 					: "can not be mounted");
 			mount_status_changed |= true;
-			mount_export |= mountable;
 		}
 
 		if (mount_export) {
@@ -1278,6 +1278,16 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 		probe_exp->config_gen = get_parse_root_generation(node);
 
 		copy_gsh_export(probe_exp, export);
+
+		if (mountable) {
+			if (!mount_gsh_export(probe_exp)) {
+				LogCrit(COMPONENT_CONFIG,
+					"mount_gsh_export failed in update process");
+				err_type->internal = true;
+				errcnt++;
+				return errcnt;
+			}
+		}
 
 		/* We will need to dispose of the config export since we
 		 * updated the existing export.
