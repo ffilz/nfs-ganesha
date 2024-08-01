@@ -811,7 +811,7 @@ void prune_pseudofs_subtree(struct gsh_export *export, uint64_t generation,
 	/* Drop the lock */
 	PTHREAD_RWLOCK_unlock(&export->exp_lock);
 
-	if (defunct) {
+	if (defunct && (!need_put)) {
 		LogDebug(COMPONENT_EXPORT,
 			 "Export %d pseudo %s unmounted because %s",
 			 export->export_id, ref_pseudopath->gr_val,

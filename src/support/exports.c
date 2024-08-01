@@ -1216,9 +1216,9 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 
 		if (mount_export) {
 			/* This export has changed in a way that it needs to be
-			 * remounted.
+			 * mounted/remounted.
 			 */
-			probe_exp->update_remount = true;
+			export_add_to_mount_work(probe_exp);
 		}
 
 		if (mount_status_changed && probe_exp->is_mounted) {
@@ -2563,7 +2563,7 @@ int reread_exports(config_file_t in_config, struct config_error_type *err_type)
 	 * Finally remount all the exports that were unmounted. If that fails,
 	 * create_pseudofs() will LogFatal and abort.
 	 */
-	prune_pseudofs_subtree(NULL, generation, false);
+	prune_pseudofs_subtree(NULL, generation, true);
 	prune_defunct_exports(generation);
 	create_pseudofs();
 
