@@ -16,6 +16,74 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nsince overhead for taking rdlock is higher than mutex so it should be better.",
       "revId": "7034728de5f85e41269b2f5f3c801bb0272b788e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3526a079_62b6c011",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:56:45Z",
+      "side": 1,
+      "message": "Looks good other than flag values that are no longer needed",
+      "revId": "7034728de5f85e41269b2f5f3c801bb0272b788e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9457568_157fb3dc",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:56:45Z",
+      "side": 1,
+      "message": "We no longer need CIH_GET_RLOCK and CIH_GET_WLOCK",
+      "revId": "7034728de5f85e41269b2f5f3c801bb0272b788e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c315f0_0ed5eaf3",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:56:45Z",
+      "side": 1,
+      "message": "This function will no longer need flags",
+      "revId": "7034728de5f85e41269b2f5f3c801bb0272b788e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1eb374c_7b180074",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:56:45Z",
+      "side": 1,
+      "message": "Don\u0027t test flags - we don\u0027t need them.\n\nAlso moot nit... Comment is wrong...",
+      "revId": "7034728de5f85e41269b2f5f3c801bb0272b788e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
