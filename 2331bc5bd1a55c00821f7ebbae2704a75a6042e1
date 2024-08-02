@@ -20,6 +20,40 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2a0a5001_7ab5cd25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:29:57Z",
+      "side": 1,
+      "message": "Will post a new patch momentarily...",
+      "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f470199b_76532e44",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:29:57Z",
+      "side": 1,
+      "message": "However, this one needs fixing also..",
+      "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dd046f8b_c71b9986",
         "filename": "src/Protocols/NFS/nfs4_op_lock.c",
         "patchSetId": 1
@@ -79,6 +113,30 @@
       "side": 1,
       "message": "This is interesting and complex. I have close to zero context here...\n\nIF Daniel is referring to the ref taken inside the get_state_owner_ref call on line 348, then this is what I see: get_state_owner_ref only takes a ref when it return non-NULL, so if go inside the if block on line 352 and then to the goto check_seqid on line 359.\n\nSO I don\u0027t think Daniel is referring to that. Instead I think Daniel is referring to the ref that nfs4_Check_Stateid takes on state2 when it calls get_state_obj_export_owner_refs, specifically in the case when nfs4_Check_Stateid returns NFS4ERR_REPLAY AND (I suppose) when get_state_owner_ref (on line 348) returns NULL (what if it returns non-null?). THEN we need to dec_nfs4_state_ref somewhere....\n\nOK, if that is the case, then what about other nfs4_Check_Stateid calls? For example nfs4_read (and nfs4_op_write) both call nfs4_Check_Stateid and, as far as I can tell, don\u0027t have special logic for handling NFS4ERR_REPLAY.",
       "parentUuid": "2ae43f57_f04428ed",
+      "range": {
+        "startLine": 366,
+        "startChar": 3,
+        "endLine": 366,
+        "endChar": 7
+      },
+      "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4649d927_76630598",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:29:57Z",
+      "side": 1,
+      "message": "All the other calls handle the state reference, or can not have NFS4ERR_REPLAY as a return because check_seqid is always false.",
+      "parentUuid": "11fa00c0_916dfc0a",
       "range": {
         "startLine": 366,
         "startChar": 3,
