@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01adcb9f_7fb76c92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T23:21:53Z",
+      "side": 1,
+      "message": "Mostly looks good but let\u0027s make the max a percentage of the MDCACHE hw_mark.\n\nAlso, let\u0027s not allow unlimited, so either config doesn\u0027t allow 0, or 0 means no delegations at all (might be a handy way to disable delegations).",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92ddd1f3_22917f51",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 8
