@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bf2b98b_c78ca3b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T23:11:38Z",
+      "side": 1,
+      "message": "I thought we held references to the ceph entries that we had cached?\n\nWhat do we link to that has lifetime managed by Ceph?\n\nNone of the other FSALs have links like that.",
+      "parentUuid": "e7705daa_a8c87ebc",
+      "revId": "ee57eee1eda07ff3ef1c82eca496ec86abd97346",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fc8b9fd_21c8d983",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 1
