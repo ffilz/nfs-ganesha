@@ -16,6 +16,74 @@
       "message": "@ffilzlnx@mindspring.com, @itsmerojin@gmail.com can you review latest on this change",
       "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ddd1f3_22917f51",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T23:20:30Z",
+      "side": 1,
+      "message": "int32_t",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d8fa00_553f40d7",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 8
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T23:20:30Z",
+      "side": 1,
+      "message": "This should be configured as a percentage of the high water mark so that it can never force cache to be over sized.\n\nAlso, we have no obligation to delegate, so I see no reason to have 0 mean unlimited. We may want to set a minimum of 10%, or maybe we allow setting 0 to disable delegations.",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad2630e_6054aa3f",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T23:20:30Z",
+      "side": 1,
+      "message": "int32_t...",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f656a6a_5574db25",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T23:20:30Z",
+      "side": 1,
+      "message": "And then %\"PRIu32",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
