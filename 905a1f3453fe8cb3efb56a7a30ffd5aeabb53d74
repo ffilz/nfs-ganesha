@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3611b5d6_5ecb0e8e",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:35:17Z",
+      "side": 1,
+      "message": "Let\u0027s not introduce a leak here, instead, have a patch preceding this patch fix the leak below.",
+      "parentUuid": "0cbaf54e_1ff83c45",
+      "revId": "905a1f3453fe8cb3efb56a7a30ffd5aeabb53d74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75538f94_1f67a1a2",
         "filename": "src/FSAL_UP/fsal_up_top.c",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I will handle it as part of below CR, seems this is present across the current API...\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1198325",
       "parentUuid": "75538f94_1f67a1a2",
+      "revId": "905a1f3453fe8cb3efb56a7a30ffd5aeabb53d74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09727e65_b5e1186b",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-02T22:35:17Z",
+      "side": 1,
+      "message": "Actually, have the patch that fixes this leak preceed this patch",
+      "parentUuid": "93b2e25d_5a6741c5",
       "revId": "905a1f3453fe8cb3efb56a7a30ffd5aeabb53d74",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
