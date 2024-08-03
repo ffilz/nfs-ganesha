@@ -16,6 +16,57 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nWith this fix RDMA reads and metadata ops are working, still need some more fixes to make RDMA writes work with latext iovec changes.",
       "revId": "048a90ce4ab298715df3d2835c8bc74b71242bb1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb4ac35_acb3a579",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-03T00:08:54Z",
+      "side": 1,
+      "message": "Fixed in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1198710",
+      "revId": "048a90ce4ab298715df3d2835c8bc74b71242bb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb7b6ce_c36592ba",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-03T00:08:54Z",
+      "side": 1,
+      "message": "Fixed in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1198710",
+      "revId": "048a90ce4ab298715df3d2835c8bc74b71242bb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08569137_7d9d2f4f",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-03T00:08:54Z",
+      "side": 1,
+      "message": "This looks similar to the changes in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1198613 except it\u0027s in a different place...\n\nGood catch.\n\nPlease work with Rojin to have him include this patch with his patch series so one merge gets them all.",
+      "revId": "048a90ce4ab298715df3d2835c8bc74b71242bb1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
