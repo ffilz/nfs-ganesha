@@ -182,21 +182,19 @@ void destroy_fsals(void)
 			 */
 			atomic_store_int32_t(&m->refcount, 0);
 		}
-		if (m->dl_handle) {
-			int rc = 0;
-			char *fsal_name = gsh_strdup(m->name);
+		int rc = 0;
+		char *fsal_name = gsh_strdup(m->name);
 
-			LogEvent(COMPONENT_FSAL, "Unloading FSAL %s",
-				 fsal_name);
-			rc = m->m_ops.unload(m);
-			if (rc != 0) {
-				LogMajor(COMPONENT_FSAL,
-					 "Unload of %s failed with error %d",
-					 fsal_name, rc);
-			}
-			LogEvent(COMPONENT_FSAL, "FSAL %s unloaded", fsal_name);
-			gsh_free(fsal_name);
+		LogEvent(COMPONENT_FSAL, "Unloading FSAL %s",
+			 fsal_name);
+		rc = m->m_ops.unload(m);
+		if (rc != 0) {
+			LogMajor(COMPONENT_FSAL,
+				 "Unload of %s failed with error %d",
+				 fsal_name, rc);
 		}
+		LogEvent(COMPONENT_FSAL, "FSAL %s unloaded", fsal_name);
+		gsh_free(fsal_name);
 	}
 
 	release_posix_file_systems();
