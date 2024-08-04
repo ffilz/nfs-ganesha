@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07a0d783_cff06685",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_read_conf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-04T23:29:28Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+extern int g_max_files_delegatable;",
+      "revId": "4f884fc33228286c784b39c3dc21670d7295fdf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
