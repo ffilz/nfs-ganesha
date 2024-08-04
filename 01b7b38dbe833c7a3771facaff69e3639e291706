@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d0b51bb_3c678b4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-08-04T23:31:04Z",
+      "side": 1,
+      "message": "Done- keeping it as config doesn\u0027t allow 0 since i see other flags for disabling delegations like nfsv4_param.allow_delegations",
+      "parentUuid": "01adcb9f_7fb76c92",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92ddd1f3_22917f51",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-08-02T23:20:30Z",
       "side": 1,
       "message": "int32_t",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1be35a5_4d0de586",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-08-04T23:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ddd1f3_22917f51",
       "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c1c799c_40a7d62d",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 8
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-08-04T23:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d8fa00_553f40d7",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad2630e_6054aa3f",
@@ -86,6 +140,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14519c49_6cbd9369",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-08-04T23:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad2630e_6054aa3f",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f656a6a_5574db25",
@@ -99,6 +171,24 @@
       "writtenOn": "2024-08-02T23:20:30Z",
       "side": 1,
       "message": "And then %\"PRIu32",
+      "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e1e751_e5fceacd",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2024-08-04T23:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f656a6a_5574db25",
       "revId": "01b7b38dbe833c7a3771facaff69e3639e291706",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
