@@ -342,6 +342,7 @@ void Cleanup(void)
 		c = c->next;
 	}
 
+	cleanup_list = NULL;
 	PTHREAD_RWLOCK_destroy(&log_rwlock);
 #ifdef _DONT_HAVE_LOCALTIME_R
 	PTHREAD_MUTEX_destroy(&mutex_localtime);
@@ -1021,6 +1022,7 @@ void init_logging(const char *log_path, const int debug_level)
 #endif
 	glist_init(&facility_list);
 	glist_init(&active_facility_list);
+	default_facility = NULL;
 
 	/* Initialize const_log_str to defaults. Ganesha can start logging
 	 * before the LOG config is processed (in fact, LOG config can itself
