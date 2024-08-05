@@ -34,6 +34,24 @@
       "parentUuid": "25b5e932_56f5a982",
       "revId": "1d46fa1d3ed3bd293c22a861861be2581f5ce1a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad535b4d_af72b366",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-05T18:44:42Z",
+      "side": 1,
+      "message": "Actually, that can cause other shuffling.\n\nAssume you have two exports:\n\n/export/exp1/some/path/exp2\n/export/exp1\n\nInitially /export/exp1 is NFSv3 only while /export/exp1/some/path/exp2 is NFSv3 and NFSv4. So it is mounted in the pseudofs. But when /export/exp1 is exported NFSv4, it will be mounted in the pseudofs. /export/exp1/some/path/exp2 should be unmounted from the pseudofs and remounted, this time on the real filesystem node some/path/exp2 within /export/exp1",
+      "parentUuid": "0bb9b608_932dc184",
+      "revId": "1d46fa1d3ed3bd293c22a861861be2581f5ce1a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
