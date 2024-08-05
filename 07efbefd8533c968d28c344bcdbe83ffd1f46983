@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nClang format file source: https://github.com/torvalds/linux/blob/master/.clang-format",
       "revId": "07efbefd8533c968d28c344bcdbe83ffd1f46983",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ce6400_98b30c2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-05T18:33:27Z",
+      "side": 1,
+      "message": "We would like to tag V6.0 this week so we would want to get these changes applied and merged also.\n\nWhat I think would be the best plan is to get a V6-dev.18 with the final set of patches out in the next day or two, then make the clang conversions and release that as V6-dev.19 and then a final merge for V6.0 that includes a V6.0 tag for ntirpc.\n\nDid you have any plans on clang formatting ntirpc?",
+      "revId": "07efbefd8533c968d28c344bcdbe83ffd1f46983",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
