@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b2e42d3_bc333e2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-05T18:52:17Z",
+      "side": 1,
+      "message": "Looks good now but more minor shuffling of a declaration.",
+      "revId": "4f884fc33228286c784b39c3dc21670d7295fdf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07a0d783_cff06685",
@@ -31,6 +48,41 @@
       "writtenOn": "2024-08-04T23:29:28Z",
       "side": 1,
       "message": "WARNING: externs should be avoided in .c files\n+extern int g_max_files_delegatable;",
+      "revId": "4f884fc33228286c784b39c3dc21670d7295fdf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a906198_8117c4c2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_read_conf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-05T18:52:17Z",
+      "side": 1,
+      "message": "You should be able to include sal_data.h here (and I propose moving the extern declaration to sal_data.h from sal_functions.h).",
+      "parentUuid": "07a0d783_cff06685",
+      "revId": "4f884fc33228286c784b39c3dc21670d7295fdf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc43a58_89086581",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-05T18:52:17Z",
+      "side": 1,
+      "message": "Could you move the extern to sal_data.h",
       "revId": "4f884fc33228286c784b39c3dc21670d7295fdf2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
