@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bfd6219_deea0dec",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t     \"Decrement cid_refcount Clientid {%s} cid_refcount to %\" PRId32,",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053fe6e1_347610bb",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tnfs_param.nfsv4_param.expired_client_threshold,",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a70c787_32d2940b",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tatomic_fetch_uint32_t(\u0026num_of_curr_expired_clients));",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "973ba952_34351407",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement st_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b743d0a0_42fb65a2",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement slc_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8778a4c_c31ee5e6",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement st_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a0c892b_4a02d8a8",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\", protocol %s, blocked\u003d%s/%p/%s\"\n+\t\t\t\", state\u003d%p, sle_refcount\u003d%\"PRIu32",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc729523_e9704e1a",
+        "filename": "src/SAL/state_misc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement so_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3042c68_9639bbdb",
+        "filename": "src/SAL/state_misc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1247,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:07:40Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Increment so_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "61b518676ddcc5220775c3fa577316f5048c9991",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
