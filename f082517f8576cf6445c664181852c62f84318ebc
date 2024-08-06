@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2dfaced_fb2ed58c",
+        "filename": "src/FSAL/fsal_destroyer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t \"Extra ds references (%\"PRIi32\") hanging around.\",",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a22a024_1f35282b",
+        "filename": "src/FSAL/fsal_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\"Unregister FSAL %s with non-zero fsal_refcount\u003d%\"PRIi32,",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0fda2e6_3d5453c5",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t     \"Decrement cid_refcount Clientid {%s} cid_refcount to %\" PRId32,",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f92fccd7_fa2cb065",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tstr, nfs_param.nfsv4_param.expired_client_threshold,",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b5bdcc_8d9714ee",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tatomic_fetch_uint32_t(\u0026num_of_curr_expired_clients));",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95446082_de5532c6",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement st_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e86599_5231e521",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement slc_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "179078b0_0f437197",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement st_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51094ecb_c63fd592",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n \t\t\t\", protocol %s\"\n+\t\t\t\", blocked\u003d%s/%p/%s, state\u003d%p, sle_refcount\u003d%\"PRIu32",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b5239dc_08712a54",
+        "filename": "src/SAL/state_misc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement so_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb41de4_91aa7c55",
+        "filename": "src/SAL/state_misc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1247,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T13:31:05Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Increment so_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "f082517f8576cf6445c664181852c62f84318ebc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
