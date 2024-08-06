@@ -214,7 +214,7 @@ int display_stateid(struct display_buffer *dspbuf, state_t *state)
 		return b_left;
 
 	return display_printf(dspbuf,
-			      "} state_refcount=%"PRId32,
+			      "} st_refcount=%"PRId32,
 			      atomic_fetch_int32_t(&state->state_refcount));
 }
 
@@ -507,7 +507,7 @@ void dec_nfs4_state_ref(struct state_t *state)
 	if (refcount > 0) {
 		if (str_valid)
 			LogFullDebug(COMPONENT_STATE,
-				     "Decrement refcount now=%" PRId32 " {%s}",
+				     "Decrement st_refcount now=%" PRId32 " {%s}",
 				     refcount, str);
 
 		return;
