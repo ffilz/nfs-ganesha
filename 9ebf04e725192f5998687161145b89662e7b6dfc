@@ -16,6 +16,74 @@
       "message": "Since these were logging changes, I combined them to a single CR, please review",
       "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e365a86_efad055b",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:12:53Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tnfs_param.nfsv4_param.expired_client_threshold,",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b52f761_37b91f94",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:12:53Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tatomic_fetch_uint32_t(\u0026num_of_curr_expired_clients));",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c3ee1d_94898cd7",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:12:53Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement slc_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980d77fc_d59bcd39",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-06T19:12:53Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\", protocol %s, blocked\u003d%s/%p/%s\"\n+\t\t\t\", state\u003d%p, sle_refcount\u003d%\"PRIu32",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
