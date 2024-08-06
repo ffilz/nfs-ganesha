@@ -103,7 +103,7 @@ int display_nsm_client(struct display_buffer *dspbuf, state_nsm_client_t *key)
 	if (b_left <= 0)
 		return b_left;
 
-	return display_printf(dspbuf, " ssc_client=%p %s refcount=%d",
+	return display_printf(dspbuf, " ssc_client=%p %s ssc_refcount=%d",
 			      key->ssc_client,
 			      atomic_fetch_int32_t(&key->ssc_monitored)
 					? "monitored" : "unmonitored",
@@ -307,7 +307,7 @@ int display_nlm_client(struct display_buffer *dspbuf, state_nlm_client_t *key)
 	if (b_left <= 0)
 		return b_left;
 
-	return display_printf(dspbuf, " type=%s refcount=%d",
+	return display_printf(dspbuf, " type=%s slc_refcount=%d",
 			      xprt_type_to_str(key->slc_client_type),
 			      atomic_fetch_int32_t(&key->slc_refcount));
 }

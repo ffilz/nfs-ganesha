@@ -571,7 +571,7 @@ int unregister_fsal(struct fsal_module *fsal_hdl)
 	if (refcount != 0) {
 		/* this would be very bad */
 		LogCrit(COMPONENT_FSAL,
-			"Unregister FSAL %s with non-zero refcount=%"PRIi32,
+			"Unregister FSAL %s with non-zero fsal_refcount=%"PRIi32,
 			fsal_hdl->name, refcount);
 		return EBUSY;
 	}

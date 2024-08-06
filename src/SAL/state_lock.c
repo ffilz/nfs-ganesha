@@ -285,7 +285,7 @@ log_entry_ref_count(const char *reason, state_lock_entry_t *le,
 			", export=%u, type=%s, start=0x%"PRIx64
 			", end=0x%"PRIx64
 			", protocol %s"
-			", blocked=%s/%p/%s, state=%p, refcount=%"PRIu32
+			", blocked=%s/%p/%s, state=%p, sle_refcount=%"PRIu32
 			", owner={%s}",
 			reason, le, le->sle_obj,
 			(uint64_t) le->sle_obj->fileid,
