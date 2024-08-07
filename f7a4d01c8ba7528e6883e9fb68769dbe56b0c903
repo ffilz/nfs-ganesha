@@ -16,6 +16,24 @@
       "message": "Why can we get away with only passing in st_owner on one place?  Shouldn\u0027t this fail for all calls that expire?",
       "revId": "f7a4d01c8ba7528e6883e9fb68769dbe56b0c903",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e5e8ab_34da3d22",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-07T14:37:37Z",
+      "side": 1,
+      "message": "Thanks for the quick review...\n\nSo in other places we are not taking any state_owner reference and calling this reserve_lease_or_expire()...\n\nBut in nfs4_Check_Stateid(), we can see that owner being fetched by taking a ref in get_state_obj_export_owner_refs()...and once it succeeds, there is a case in which we wanna reserve the lease, this lease is not already reserved...And since lease is expired we wanna expire off the client, including it\u0027s state and owners...\nThat goes in a infinite failure loop path, as we are unable to release the last state owner ref, to remove/free it...\n\nPlease refer https://github.com/nfs-ganesha/nfs-ganesha/issues/1152 for detailed analysis...",
+      "parentUuid": "b3b5f9d5_5dba78c7",
+      "revId": "f7a4d01c8ba7528e6883e9fb68769dbe56b0c903",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
