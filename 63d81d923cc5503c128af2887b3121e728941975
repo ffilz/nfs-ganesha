@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a48e12_3a021dab",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-07T10:05:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tnfs_param.nfsv4_param.expired_client_threshold,",
+      "revId": "63d81d923cc5503c128af2887b3121e728941975",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d9e4e4_4e4b1c79",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-07T10:05:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\tatomic_fetch_uint32_t(\u0026num_of_curr_expired_clients));",
+      "revId": "63d81d923cc5503c128af2887b3121e728941975",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d18602_63a4ef96",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-07T10:05:47Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t     \"Decrement slc_refcount now\u003d%\" PRId32 \" {%s}\",",
+      "revId": "63d81d923cc5503c128af2887b3121e728941975",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb4e1a89_1f1cfbb5",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-07T10:05:47Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\", protocol %s, blocked\u003d%s/%p/%s\"\n+\t\t\t\", state\u003d%p, sle_refcount\u003d%\"PRIu32",
+      "revId": "63d81d923cc5503c128af2887b3121e728941975",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
