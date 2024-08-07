@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "debd69d4_67f2424c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-07T17:32:13Z",
+      "side": 1,
+      "message": "Ah, that makes sense.\n\nHowever, when you pass an owner, and the ref is decremented, the caller needs to not reference owner anymore...\n\nTwo options:\n\nOne, when called with an owner, and it fails, the caller sets owner2 to NULL\n\nTwo, change the parameter to **owner, and set *owner \u003d NULL after decrementing refcount",
+      "revId": "f7a4d01c8ba7528e6883e9fb68769dbe56b0c903",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3b5f9d5_5dba78c7",
         "filename": "src/SAL/nfs4_lease.c",
         "patchSetId": 7
