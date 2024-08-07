@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f68d06d1_28e10679",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-07T04:24:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e365a86_efad055b",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b52f761_37b91f94",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-08-06T19:12:53Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t\t\tatomic_fetch_uint32_t(\u0026num_of_curr_expired_clients));",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ddd13a1_a6823185",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-07T04:24:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b52f761_37b91f94",
       "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb49ef8c_18510c55",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-07T04:24:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58c3ee1d_94898cd7",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "980d77fc_d59bcd39",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-08-06T19:12:53Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t\", protocol %s, blocked\u003d%s/%p/%s\"\n+\t\t\t\", state\u003d%p, sle_refcount\u003d%\"PRIu32",
+      "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb8e507_a3d326a9",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-07T04:24:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "980d77fc_d59bcd39",
       "revId": "9ebf04e725192f5998687161145b89662e7b6dfc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
