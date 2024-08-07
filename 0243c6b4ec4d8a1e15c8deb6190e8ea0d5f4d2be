@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63aa9d47_99fede7a",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-07T09:24:52Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+bool reserve_lease_or_expire(nfs_client_id_t *clientid, bool update,",
+      "revId": "0243c6b4ec4d8a1e15c8deb6190e8ea0d5f4d2be",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
