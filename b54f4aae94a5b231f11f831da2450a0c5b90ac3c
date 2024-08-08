@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcccfc83_3e008660",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020873
+      },
+      "writtenOn": "2024-08-08T16:55:00Z",
+      "side": 1,
+      "message": "I see that there\u0027s also a copy of abstract_atomic.h in ntirpc; it doesn\u0027t have the \u0027unless\u0027 functions, so it\u0027s a lower priority to fix, but if we require a compiler with support for the `__atomic` versions of these functions in Ganesha, should we do the same for ntirpc?",
+      "revId": "b54f4aae94a5b231f11f831da2450a0c5b90ac3c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
