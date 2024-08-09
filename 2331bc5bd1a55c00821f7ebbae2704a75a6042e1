@@ -187,6 +187,30 @@
       },
       "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efbe5b13_a13cc665",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-08-09T23:12:28Z",
+      "side": 1,
+      "message": "I looked again at nfs4_op_open_confirm and nfs4_op_open_confirm and as far as I can tell they look fine.",
+      "parentUuid": "b70742e3_b694992f",
+      "range": {
+        "startLine": 366,
+        "startChar": 3,
+        "endLine": 366,
+        "endChar": 7
+      },
+      "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
