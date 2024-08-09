@@ -163,6 +163,30 @@
       },
       "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70742e3_b694992f",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-08-09T04:10:23Z",
+      "side": 1,
+      "message": "The goto out2 looks good to me, but I have some related questions and one suggestion.\n\nDo nfs4_op_open_confirm and nfs4_op_open_downgrade really need to handle NFS4ERR_REPLAY they way they are doing it today? Those are calling Check_nfs4_seqid and doing other stuff, I wonder if all that could have bad side effects, but I don\u0027t really know.\n\nActually the same question applies to LOCK and LOCKU. If we do need to treat NFS4ERR_REPLAY as your patch is doing, it would be nice to have a comment, something like:\n\n```\n\t\tif (nfs_status !\u003d NFS4_OK) {\n\t\t\tif (nfs_status \u003d\u003d NFS4ERR_REPLAY) {\n\t\t\t\tlock_owner \u003d get_state_owner_ref(lock_state);\n\n\t\t\t\tLogStateOwner(\"Lock: \", lock_owner);\n\n\t\t\t\tif (lock_owner !\u003d NULL) {\n\t\t\t\t\t// NOTE: This is a replay but we need to\n\t\t\t\t\t// do blah blah blah because the RFC-xyz\n\t\t\t\t\t// says blah blah blah.\n\t\t\t\t\topen_owner \u003d lock_owner-\u003eso_owner\n\t\t\t\t\t\t.so_nfs4_owner.so_related_owner;\n\t\t\t\t\tinc_state_owner_ref(open_owner);\n\t\t\t\t\tresp_owner \u003d lock_owner;\n\t\t\t\t\tseqid \u003d arg_LOCK4-\u003elocker.locker4_u\n\t\t\t\t\t\t.lock_owner.lock_seqid;\n\t\t\t\t\tgoto check_seqid;\n\t\t\t\t}\n\t\t\t\t......\n```\nFeel free to ignore this suggestion if it is too burdensome at this moment.",
+      "parentUuid": "4649d927_76630598",
+      "range": {
+        "startLine": 366,
+        "startChar": 3,
+        "endLine": 366,
+        "endChar": 7
+      },
+      "revId": "2331bc5bd1a55c00821f7ebbae2704a75a6042e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

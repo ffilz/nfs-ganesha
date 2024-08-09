@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aacea458_f9549519",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-08-09T04:10:23Z",
+      "side": 1,
+      "message": "The logic here is surprising to me. I can see this logic is only applicable to CLOSE. The comment seems to imply there should be a goto replay here, but instead there is a goto success. Besides, there are two sub-cases: maybe the get_state_obj_export_owner_refs call on line 939 returned false because state2 is NULL, or maybe state2 is not NULL. If state2\u003d\u003dNULL and we go to success, this function returns NFS4_OK but *state is NULL. That makes the comment on nfs4_op_close incorrect and the nfs4_op_close weird.",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1015,
+        "endChar": 0
+      },
+      "revId": "9d21bc33c8a56d3236e8202b286fb019e1cb7b45",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
