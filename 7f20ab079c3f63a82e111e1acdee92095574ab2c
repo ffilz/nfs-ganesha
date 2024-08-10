@@ -1,0 +1,1092 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574dfe3a_749c1025",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce3e465_31108c28",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Change include to relative path",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a484785_b37a0182",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (2, 4)\n+  do {                                                                         \\\n+    const uint32_t _server_id_ \u003d nfs_param.core_param.unique_server_id;        \\",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a281e8_cc8ab541",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+  do {                                                                         \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21bf67e_7deca215",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    const uint32_t _server_id_ \u003d nfs_param.core_param.unique_server_id;        \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e54236_7bb193d2",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a660ca3_3c530a61",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b00eb9f_4fa56884",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint32_t _op_id_ \u003d 0;                                                      \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ff0a1f4_d847b5c0",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    int32_t _xprt_fd_ \u003d -1;                                                    \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e786fa77_c85aec58",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    if (op_ctx) {                                                              \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "668176b8_f5c016b0",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (4, 6)\n+    if (op_ctx) {                                                              \\\n+      _op_id_ \u003d op_ctx-\u003eop_id;                                                 \\",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df248def_5c4dcb5e",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      _op_id_ \u003d op_ctx-\u003eop_id;                                                 \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8627a3cc_cc110f72",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      if (op_ctx-\u003enfs_reqdata !\u003d NULL \u0026\u0026                                       \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf2ead1e_068466bc",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+          op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt !\u003d NULL) {                          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a63bd2_b4d47bb3",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+          op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt !\u003d NULL) {                          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8cff0d8_67f835eb",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        _xprt_fd_ \u003d op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt-\u003exp_fd;                   \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc79e9d_ef602612",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        _xprt_fd_ \u003d op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt-\u003exp_fd;                   \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31abb6f8_596e7b54",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      }                                                                        \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3d982b_47663c8f",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    }                                                                          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f5036f_06eabf8c",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6070bfa_f3aede9f",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5ecdfe1_62994e7d",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    AUTO_TRACEPOINT(prov_name, event_name, log_level,                          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d96d96_9e809887",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                    __FILE__                                                   \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "955c873c_721b9a8c",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                    __FILE__                                                   \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da971274_9a776fea",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                    \":\" LINE_AS_STRING                                         \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ee85bc_bfab839c",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                    \":\" LINE_AS_STRING                                         \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c66be18_ca6148fe",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                    \" | server_id\u003d{} | op_id\u003d{} | xprt_fd\u003d{} | \" format,       \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a123fbf9_49964f84",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                    \" | server_id\u003d{} | op_id\u003d{} | xprt_fd\u003d{} | \" format,       \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e28bd1_1ebd9e30",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                    _server_id_, _op_id_, _xprt_fd_, ##__VA_ARGS__);           \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4333317a_4b8e0427",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                    _server_id_, _op_id_, _xprt_fd_, ##__VA_ARGS__);           \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "570408e5_7afa70f3",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+  } while (0)$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b309f9c_34992cf4",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                   ...)                                        \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e990742b_17451a9f",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                   ...)                                        \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ce696c_38f11f32",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+  do {                                                                         \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a9a4a5b_955ebdb6",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (2, 4)\n+  do {                                                                         \\\n+    const uint32_t _server_id_ \u003d nfs_param.core_param.unique_server_id;        \\",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "617a6014_57dc0692",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    const uint32_t _server_id_ \u003d nfs_param.core_param.unique_server_id;        \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d88fd22f_9018c05f",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6825b053_39340f60",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a16247fb_da0936a1",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint32_t _op_id_ \u003d 0;                                                      \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881abab4_6f04dad5",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    int32_t _xprt_fd_ \u003d -1;                                                    \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0791071_21d9d766",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    if (op_ctx) {                                                              \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c8ed25_a0222452",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (4, 6)\n+    if (op_ctx) {                                                              \\\n+      _op_id_ \u003d op_ctx-\u003eop_id;                                                 \\",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053e7ace_909f5b9d",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      _op_id_ \u003d op_ctx-\u003eop_id;                                                 \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4d2000_4755187d",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      if (op_ctx-\u003enfs_reqdata !\u003d NULL \u0026\u0026                                       \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19563d33_11a3fdf3",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+          op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt !\u003d NULL) {                          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d4c06c_b32ee941",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+          op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt !\u003d NULL) {                          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5dc4533_e3b0ae4c",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        _xprt_fd_ \u003d op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt-\u003exp_fd;                   \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30109a18_70170130",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        _xprt_fd_ \u003d op_ctx-\u003enfs_reqdata-\u003esvc.rq_xprt-\u003exp_fd;                   \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aade176_87839bda",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+      }                                                                        \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bde16f5_4f4a23cd",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    }                                                                          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49645f84_e3e661d7",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66a17f1f_798bb5c9",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                                               \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a73bc949_81d93e9a",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    UNIQUE_AUTO_TRACEPOINT(                                                    \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a990b7cc_11a6829c",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        prov_name, event_name, log_level,                                      \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acfbd1ba_c73b8785",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        prov_name, event_name, log_level,                                      \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ef580c_e4199d9e",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        __FILE__ \":\" LINE_AS_STRING                                            \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bdcfdaa_305c496e",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        __FILE__ \":\" LINE_AS_STRING                                            \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37e9694_96a9ee83",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                 \" | server_id\u003d{} | op_id\u003d{} | xprt_fd\u003d{} | \" format,          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e8a503_f643964c",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 \" | server_id\u003d{} | op_id\u003d{} | xprt_fd\u003d{} | \" format,          \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "645d796d_d83c940f",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        _server_id_, _op_id_, _xprt_fd_, ##__VA_ARGS__);                       \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1df49f_4007187a",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        _server_id_, _op_id_, _xprt_fd_, ##__VA_ARGS__);                       \\$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dce40fb_c164394f",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+  } while (0)$",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd22c53f_f2bb98a0",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+#else // USE_LTTNG",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808df912_f145d9f5",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:40:44Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+#endif /* __GSH_LTTNG_H__ */",
+      "revId": "7f20ab079c3f63a82e111e1acdee92095574ab2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
