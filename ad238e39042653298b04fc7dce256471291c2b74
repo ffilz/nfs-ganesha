@@ -1,0 +1,463 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b66c9ba_b388e4c8",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Get attrs. Handle: {}, name: {}, \"\n+\t\t\"filesize: {}, numlinks: {}, change: {}\",",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a76ebc_5a5513a4",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Set attrs. Handle: {}, name: {}, size: {}, numlinks: {}, \"\n+\t\t\"change: {}\", obj_hdl, TP_STR(myself-\u003em_name),",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f66aabf_41495574",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Link. Dir handle: {}, dir name: {}, obj handle: {}, \"\n+\t\t\"obj name: {}, new name {}, num links: {}\", dir_hdl,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f667697e_21469523",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Unlink. Dir handle: {}, dir name: {}, obj handle: {}, \"\n+\t\t\"obj name: {}, num links: {}\", dir_hdl, TP_STR(parent-\u003em_name),",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d16d120_3971983b",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1556,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Rename. Handle: {}, old dir name: {}, old name: {}, \"\n+\t\t\"new dir name: {}, new name: {}\", obj_hdl,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c1ab8b_ac3a8287",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1790,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"Open by handle. Handle: {}, name: {}, state: {}, \"\n+\t\t\t\"truncated: {}, setattrs: {}\", obj_hdl,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd780f6_ca84d4b6",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Open . Handle: {}, name: {}, state: {}, \"\n+\t\t\"truncated: {}, setattrs: {}\", \u0026hdl-\u003eobj_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f56e754_7bea0e24",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2106,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Read. Handle: {}, name: {}, state: {}, size: {}, \"\n+\t\t\"spaceused: {}\", obj_hdl, TP_STR(myself-\u003em_name),",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d49141e_5083a195",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2258,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Write. Handle: {}, name: {}, state: {}, size: {}, \"\n+\t\t\"spaceused: {}\", obj_hdl, TP_STR(myself-\u003em_name),",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac02ac0_d7b1a27f",
+        "filename": "src/FSAL/FSAL_MEM/mem_int.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "ERROR: Macros with multiple statements should be enclosed in a do - while loop\n+#define mem_free_handle(h)                                                     \\\n+\tGSH_UNIQUE_AUTO_TRACEPOINT(fsalmem, mem_free, TRACE_DEBUG,             \\\n+\t\t\"Freeing handle. hdl: {}, name: {}\", h,                        \\\n+\t\tTP_STR(h-\u003em_name));                                            \\\n+\t_mem_free_handle(h)",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8c1e1c_1d37959e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2691,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Readdir poulate for obj handle: {}, sub handle: {},\"\n+\t\t\" whence: {}\", \u0026directory-\u003eobj_handle, directory-\u003esub_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d2188e_e02899b8",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3353,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"Calling readdir callback. Obj handle: {}, \"\n+\t\t\t\"sub handle: {}, refcount: {}\", \u0026directory-\u003eobj_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e0dd9a_8652aee2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3501,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"Removed entry. Obj handle: {}, refcount: {}, \"\n+\t\t\t\"freed: {}\", \u0026entry-\u003eobj_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a513e490_f1a00e05",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"lru ref. handle: {}, sub handle: {}, refcnt: {}, \"\n+\t\t\t\"active_refcnt: {}\", \u0026entry-\u003eobj_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f195006_aafd004d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"lru ref. handle: {}, sub handle: {}, refcnt: {}, \"\n+\t\t\t\"active_refcnt: {}\", \u0026entry-\u003eobj_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c24ef71_88142425",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1854,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"lru ref. handle: {}, sub handle: {}, refcnt: {}, \"\n+\t\t\t\"active_refcnt: {}\", \u0026entry-\u003eobj_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d50fb1_811df787",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"lru unref. handle: {}, sub handle: {}, refcnt: {}, \"\n+\t\t\"active_refcnt: {}\", \u0026entry-\u003eobj_handle,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda916d5_833a166b",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"Valid nfs req. xprt_ptr: {}, cb_prog: {}, cb_vers: {}\"\n+\t\t\"cb_proc: {}\", reqdata-\u003esvc.rq_xprt, req-\u003erq_msg.cb_prog,",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fda89b2_7de01cad",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddcb56e7_2debd540",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+  GSH_AUTO_TRACEPOINT(prov, event, log_level, XPRT_FMT \" | \" format,           \\$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10467027_63a487ea",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                      XPRT_VARS(_xprt), ##__VA_ARGS__)$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bfba87e_be53cecb",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                      XPRT_VARS(_xprt), ##__VA_ARGS__)$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed45fe2_40324a59",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                        ...)                                   \\$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15909e74_0bae6550",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                        ...)                                   \\$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ccceaba_c49695dc",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+  GSH_UNIQUE_AUTO_TRACEPOINT(prov, event, log_level, XPRT_FMT \" | \" format,    \\$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fbd715_0fc5cd12",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                             XPRT_VARS(_xprt), ##__VA_ARGS__)$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a4a2c03_152a48ff",
+        "filename": "src/include/gsh_xprt_tracepoint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-10T05:43:37Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                             XPRT_VARS(_xprt), ##__VA_ARGS__)$",
+      "revId": "ad238e39042653298b04fc7dce256471291c2b74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
