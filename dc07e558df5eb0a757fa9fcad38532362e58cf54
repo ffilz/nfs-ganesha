@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897a713b_1e100d9c",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-08-12T09:39:19Z",
+      "side": 1,
+      "message": "@itsmerojin@gmail.com, @ffilzlnx@mindspring.com, Let\u0027s say 5 threads are working on this function, which means the so_refcount increases to 6 before reaching this line. Therefore, reducing the refcount by 1 will not free the state_owner structure, and setting state_owner to NULL will potentially cause a memory leak and leave a stale entry in ht_owner. Am I missing something here?",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 34
+      },
+      "revId": "dc07e558df5eb0a757fa9fcad38532362e58cf54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
