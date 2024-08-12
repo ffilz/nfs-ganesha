@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "941622a9_ac4742a0",
+        "filename": "src/scripts/podman/ganesha-container",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-12T16:27:50Z",
+      "side": 1,
+      "message": "Hmm, should we invoke ShellCheck on shell scripts as a commit hook? Or add it to the CI (alongside checkpatch and/or clang)?",
+      "revId": "35dc6324e0e2fc1949840a0de38093b28bd190db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7890688_bf68dc1e",
         "filename": "src/scripts/podman/ganesha-container",
         "patchSetId": 1
