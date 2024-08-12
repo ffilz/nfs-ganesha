@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50db8630_840283ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-12T17:01:22Z",
+      "side": 1,
+      "message": "Could you fix the checkpatch issues, it will make it easier to review.\n\nI realize we are about to switch to clang formatting, but until we do so, it will be easier to review without all the checkpatch comments.",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1fb4ee7_9321b27e",
         "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
         "patchSetId": 1
