@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3ea71a_bd3d6c0a",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-12T16:39:15Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"fd %d: Must call nfs_rpc_alloc_user_data before \"\n+\t\t\t\"calling %s\", xprt-\u003exp_fd, __func__);",
+      "revId": "6b3a7ed0bdf2d752d3ba6f1542726c6e4acb8830",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3dbacfe_079121ff",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-12T16:39:15Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogFatalClient(client, \"found connection xprt %p is differnet \"\n+\t\t\t\t\"from given xprt %p \", connection-\u003exprt, xprt);",
+      "revId": "6b3a7ed0bdf2d752d3ba6f1542726c6e4acb8830",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
