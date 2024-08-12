@@ -22,6 +22,30 @@
       },
       "revId": "dc07e558df5eb0a757fa9fcad38532362e58cf54",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7542e25a_621b066e",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-12T15:00:26Z",
+      "side": 1,
+      "message": "When we hit this condition, the lease is expired, but this owner reference prevents nfs4_clientid_expire from proceeding. The caller has taken the ref, and passed this owner in. By setting to NULL, we signal the caller that the reference has already been released. If you look at the callers that pass in st_owner, you will see that this is clean.",
+      "parentUuid": "897a713b_1e100d9c",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 34
+      },
+      "revId": "dc07e558df5eb0a757fa9fcad38532362e58cf54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
