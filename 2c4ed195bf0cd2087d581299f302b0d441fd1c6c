@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24bc54e8_4c756add",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-12T17:22:54Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\tLogInfo(COMPONENT_DISPATCH, \"fd %d: remote_address_is_set received \"\n+\t\t\"for xprt %p. Remote address %s, HaProxy address %s\",",
+      "revId": "2c4ed195bf0cd2087d581299f302b0d441fd1c6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f470a2b_186900ad",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-12T17:22:54Z",
+      "side": 1,
+      "message": "WARNING: break quoted strings at a space character\n+\t\tLogWarn(COMPONENT_DISPATCH, \"fs - %d: xprt %p failed on\"\n+\t\t\t\"connection_started.\", xprt-\u003exp_fd, xprt);",
+      "revId": "2c4ed195bf0cd2087d581299f302b0d441fd1c6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b15bce7_60373532",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-12T17:22:54Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tLogWarn(COMPONENT_DISPATCH, \"fs - %d: xprt %p failed on\"\n+\t\t\t\"connection_started.\", xprt-\u003exp_fd, xprt);",
+      "revId": "2c4ed195bf0cd2087d581299f302b0d441fd1c6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
