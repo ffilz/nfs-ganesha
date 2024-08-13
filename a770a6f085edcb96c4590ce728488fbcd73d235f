@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22771224_3da6443a",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:29:44Z",
+      "side": 1,
+      "message": "Oops, fix this one",
+      "parentUuid": "3eb0b176_5916ca3f",
+      "revId": "a770a6f085edcb96c4590ce728488fbcd73d235f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5936f4c6_9079513e",
         "filename": "src/include/gsh_lttng/gsh_lttng.h",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2024-08-13T15:46:36Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define TP_INT_ARR(_data, _len) (_data), (_len)",
+      "revId": "a770a6f085edcb96c4590ce728488fbcd73d235f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d60c580_8c700118",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:29:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5936f4c6_9079513e",
       "revId": "a770a6f085edcb96c4590ce728488fbcd73d235f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c05ea4d_e83e8230",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:29:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "96bae526_a65c0947",
+      "revId": "a770a6f085edcb96c4590ce728488fbcd73d235f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ae870b2_3529e035",
@@ -69,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ef16b24_ac5beda6",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:29:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1ae870b2_3529e035",
+      "revId": "a770a6f085edcb96c4590ce728488fbcd73d235f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9786c5f_cdc8d17f",
@@ -82,6 +154,24 @@
       "writtenOn": "2024-08-13T15:46:36Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define TP_VAR_STR_ARR(_data, _len) (_data), (_len)",
+      "revId": "a770a6f085edcb96c4590ce728488fbcd73d235f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b163d0e_033d2745",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:29:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e9786c5f_cdc8d17f",
       "revId": "a770a6f085edcb96c4590ce728488fbcd73d235f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
