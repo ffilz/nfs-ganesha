@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46570be6_43e6b841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Please do combine these. Checkpatch allows for strings to extend beyond 80 columns. You will need to put the string on a line by itself.",
+      "parentUuid": "e35afc75_81897aae",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1fb4ee7_9321b27e",
         "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2024-08-12T16:42:07Z",
       "side": 1,
       "message": "ERROR: that open brace { should be on the previous line\n+\tstruct display_buffer remote_addr_dbuf \u003d\n+\t\t{sizeof(remote_addr_str), remote_addr_str, remote_addr_str};",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa1b74c_2aff8091",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1fb4ee7_9321b27e",
       "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -70,6 +106,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd2443f9_756d854c",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7b1fdf3_9b9399ce",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adb112e6_238bdd6c",
@@ -83,6 +137,24 @@
       "writtenOn": "2024-08-12T16:42:07Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\tLogInfo(COMPONENT_DISPATCH, \"fd %d: remote_address_is_set received \"\n+\t\t\"for xprt %p. Remote address %s, HaProxy address %s\",",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375d6107_44b7194c",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Please do combine these. Checkpatch allows for strings to extend beyond 80 columns. You will need to put the string on a line by itself.",
+      "parentUuid": "adb112e6_238bdd6c",
       "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -117,6 +189,42 @@
       "writtenOn": "2024-08-12T16:42:07Z",
       "side": 1,
       "message": "ERROR: space required after that \u0027,\u0027 (ctx:WxV)\n+\t\txprt-\u003exp_fd, xprt, remote_addr_str ,proxy_addr_str);\n \t\t                                   ^",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dfa8484_f634d2c4",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "414a9a9b_b3eb7e96",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af49ff9f_4afd7041",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "354d7eab_0fb94e07",
       "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -157,6 +265,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37a1bf3f_bec4d5e2",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Please do combine these. Checkpatch allows for strings to extend beyond 80 columns. You will need to put the string on a line by itself.",
+      "parentUuid": "9be203c7_442bdf51",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c33384e_f3448ddd",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Hmm, and your split missed a space...",
+      "parentUuid": "ad170a57_8e671d34",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc0deb4c_6152f9fc",
         "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
         "patchSetId": 1
@@ -168,6 +312,24 @@
       "writtenOn": "2024-08-12T16:42:07Z",
       "side": 1,
       "message": "ERROR: return is not a function, parentheses are not required\n+\t\treturn (XPRT_DIED);",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d22f03_16965eaf",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc0deb4c_6152f9fc",
       "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -185,6 +347,24 @@
       "writtenOn": "2024-08-12T16:42:07Z",
       "side": 1,
       "message": "ERROR: return is not a function, parentheses are not required\n+\treturn (XPRT_IDLE);",
+      "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561f0008_1f95708d",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-13T16:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8acfb8c_f77b8417",
       "revId": "8022d8b9e86d0c2a4819f6fca52b9542cb04bfee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
