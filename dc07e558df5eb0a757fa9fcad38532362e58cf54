@@ -46,6 +46,30 @@
       },
       "revId": "dc07e558df5eb0a757fa9fcad38532362e58cf54",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "122789d7_958a7b49",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-13T04:27:23Z",
+      "side": 1,
+      "message": "Yes, Like Frank mentioned...this is safe enough...and handles the infinite loop seen, due to an extra ref taken...\nThis is reducing the ref of the state owner, if passed by the caller and setting to NULL, to notify that the pointer is valid no more",
+      "parentUuid": "7542e25a_621b066e",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 34
+      },
+      "revId": "dc07e558df5eb0a757fa9fcad38532362e58cf54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
