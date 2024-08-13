@@ -35,6 +35,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c65f0643_28830d49",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-08-13T15:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d77ce6f2_406e8867",
+      "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b11852f_db40de02",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-08-13T15:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70b67157_420fed35",
+      "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4754ad88_ca6216ad",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-08-13T13:36:45Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define TP_INT_ARR(_data, _len) (_data), (_len)",
+      "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40dca4d8_a5f51efc",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-08-13T15:39:38Z",
+      "side": 1,
+      "message": "I can\u0027t surround `(_data), (_len)` in parentheses, because it has a different meaning. This is used to expand arguments. For example:\n```\nfoo(a, TP_INT_ARR(data, len));\n```\nShould become:\n```\nfoo(a, data, len);\n```\nand not:\n```\nfoo(a, (data, len));\n```",
+      "parentUuid": "4754ad88_ca6216ad",
       "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5303e5b4_f8ae7e9d",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-08-13T15:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abd3d037_4e57b859",
+      "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5fb8744_eaac835a",
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2795bc13_3525b337",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-08-13T15:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5fb8744_eaac835a",
+      "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7de6eb5_c8b743a0",
@@ -99,6 +189,24 @@
       "writtenOn": "2024-08-13T13:36:45Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define TP_VAR_STR_ARR(_data, _len) (_data), (_len)",
+      "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c60eeb_15940edb",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-08-13T15:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7de6eb5_c8b743a0",
       "revId": "06c74fea2325abfd13d71c268c5a2e72c7fb0773",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
