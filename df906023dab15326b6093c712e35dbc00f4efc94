@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06912d62_10a6301e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-14T16:07:06Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis patch allocates 256 bytes of space by default to store the hostname. If the length of the hostname exceeds len, it takes the first len characters. Otherwise, it uses the hostname directly.",
+      "revId": "df906023dab15326b6093c712e35dbc00f4efc94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a34568d_a11643bc",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-14T16:07:06Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tsize_t copylen \u003d (strlen(hostname) \u003e maxlen) ? maxlen : strlen(hostname);",
+      "revId": "df906023dab15326b6093c712e35dbc00f4efc94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c94f1a6_40c8ea9c",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-14T16:07:06Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tsize_t copylen \u003d (strlen(hostname) \u003e maxlen) ? maxlen : strlen(hostname);\n+\tnodeid \u003d gsh_malloc(copylen + 1);",
+      "revId": "df906023dab15326b6093c712e35dbc00f4efc94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
