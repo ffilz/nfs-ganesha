@@ -441,8 +441,10 @@ bool nfs_grace_is_member(void)
 int nfs_recovery_get_nodeid(char **pnodeid)
 {
 	int rc;
-	long maxlen;
+	size_t maxlen;
+	size_t copylen;
 	char *nodeid = NULL;
+	char *hostname = NULL;
 
 	if (recovery_backend->get_nodeid) {
 		rc = recovery_backend->get_nodeid(&nodeid);
@@ -463,16 +465,24 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	 * NULL pointer. Just use hostname.
 	 */
 	maxlen = sysconf(_SC_HOST_NAME_MAX);
-	nodeid = gsh_malloc(maxlen);
-	rc = gsh_gethostname(nodeid, maxlen,
+	hostname = gsh_malloc(MAXNAMLEN + 1);
+	rc = gsh_gethostname(hostname, MAXNAMLEN + 1,
 			nfs_param.core_param.enable_AUTHSTATS);
 	if (rc != 0) {
 		LogEvent(COMPONENT_CLIENTID, "gethostname failed: %d", errno);
 		rc = -errno;
-		gsh_free(nodeid);
-	} else {
-		*pnodeid = nodeid;
+		gsh_free(hostname);
+		return rc;
 	}
+
+	copylen = (strlen(hostname) > maxlen) ? maxlen : strlen(hostname);
+	nodeid = gsh_malloc(copylen + 1);
+	strncpy(nodeid, hostname, copylen);
+	nodeid[copylen] = '\0';
+
+	*pnodeid = nodeid;
+	gsh_free(hostname);
+
 	return rc;
 }
 
