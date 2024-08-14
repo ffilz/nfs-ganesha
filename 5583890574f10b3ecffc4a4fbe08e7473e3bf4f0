@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c5d908_c857aad3",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-14T20:01:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e6bbf460_3b682c79",
+      "revId": "5583890574f10b3ecffc4a4fbe08e7473e3bf4f0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db14e976_27994b75",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-08-14T16:04:33Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tsize_t copylen \u003d (strlen(hostname) \u003e maxlen) ? maxlen : strlen(hostname);\n+\tnodeid \u003d gsh_malloc(copylen + 1);",
+      "revId": "5583890574f10b3ecffc4a4fbe08e7473e3bf4f0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c940109_80918d37",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-14T20:01:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "db14e976_27994b75",
       "revId": "5583890574f10b3ecffc4a4fbe08e7473e3bf4f0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
