@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3297aa5b_1df370e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-15T01:00:30Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis patch allocates 256 bytes of space by default to store the hostname. If the length of the hostname exceeds len, it takes the first len characters. Otherwise, it uses the hostname directly.",
+      "revId": "ce06a141163eb127e08a40432e190abc75f8338e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
