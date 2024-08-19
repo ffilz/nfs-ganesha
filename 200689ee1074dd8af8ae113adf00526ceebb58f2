@@ -33,6 +33,40 @@
       "message": "Hello Frank, are there any issues with this patch?",
       "revId": "200689ee1074dd8af8ae113adf00526ceebb58f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55aaf704_17222182",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-19T17:32:35Z",
+      "side": 1,
+      "message": "You might use the MIN macro, but it might also be worth putting the strlen into a local variable to assure that the string is only scanned once. Might be easiest to do:\n\ncopylen \u003d strlen(hostname);\nif (copylen \u003e maxlen)\n   copylen \u003d maxlen.",
+      "revId": "200689ee1074dd8af8ae113adf00526ceebb58f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5afc1659_a179c330",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-19T17:32:35Z",
+      "side": 1,
+      "message": "We have been moving away from strncpy. In this case, a simple memcpy could replace this strncpy.",
+      "revId": "200689ee1074dd8af8ae113adf00526ceebb58f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
