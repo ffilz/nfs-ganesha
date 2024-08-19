@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "916bc4e2_2659cb67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-19T09:31:32Z",
+      "side": 1,
+      "message": "WARNING: \u0027seperate\u0027 may be misspelled - perhaps \u0027separate\u0027?\nFor RDMA data offsets are not inline, since we use seperate",
+      "revId": "78a9f84d2dad71aab3d23bc3629417ec24d8fba3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33f82fc5_29d392d5",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-19T09:31:32Z",
+      "side": 1,
+      "message": "WARNING: \u0027seperately\u0027 may be misspelled - perhaps \u0027separately\u0027?\n+\t/* For rdma_reads data received seperately, so get data buffer */",
+      "revId": "78a9f84d2dad71aab3d23bc3629417ec24d8fba3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a794ed0_4a27f1e0",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-19T09:31:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif (!XDR_SETPOS(xdrs, XDR_GETENDDATAPOS(xdrs, start, RNDUP(objp-\u003edata_len)))) {",
+      "revId": "78a9f84d2dad71aab3d23bc3629417ec24d8fba3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
