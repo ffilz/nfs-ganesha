@@ -70,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4b42ef_ff1cba95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037682
+      },
+      "writtenOn": "2024-08-19T21:45:07Z",
+      "side": 1,
+      "message": "I wrapped in the existing LINUX definition check as PR_SET_IO_FLUSHER is present in the 5.6rc1 kernel releases and later (https://github.com/torvalds/linux/commit/8d19f1c8e1937baf74e1962aae9f90fa3aeab463) assuming you didn\u0027t mean for something more specific (I didn\u0027t see any other cmake checks getting into specific glibc/kernel header checks so didn\u0027t want to invent more than necessary here).",
+      "parentUuid": "e89f9137_522b3969",
+      "revId": "9307f525414ebd4540aa8e11fee7ae1672ad263a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb37fd7b_09c65e1b",
