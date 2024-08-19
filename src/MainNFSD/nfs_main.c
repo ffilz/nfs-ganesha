@@ -32,6 +32,7 @@
 #include "config.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/prctl.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
@@ -51,6 +52,10 @@
 #ifdef USE_MONITORING
 #include "monitoring.h"
 #endif  /* USE_MONITORING */
+
+#ifndef PR_SET_IO_FLUSHER
+#define PR_SET_IO_FLUSHER 57
+#endif
 
 /* parameters for NFSd startup and default values */
 
@@ -432,6 +437,19 @@ int main(int argc, char *argv[])
 			 "Could not start nfs daemon, pthread_sigmask failed");
 			goto fatal_die;
 	}
+
+	/* Set thread I/O flusher, see
+	 * https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?h=master&id=8d19f1c8e1937baf74e1962aae9f90fa3aeab463
+	 */
+	if (prctl(PR_SET_IO_FLUSHER, 1, 0, 0, 0) == -1) {
+		if (errno != EINVAL) {
+			LogFatal(COMPONENT_MAIN,
+				 "Error setting prctl PR_SET_IO_FLUSHER flag: %s",
+				 strerror(errno));
+			goto fatal_die;
+		}
+	}
+
 
 	/* init URL package */
 	config_url_init();
