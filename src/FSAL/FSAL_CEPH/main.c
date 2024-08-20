@@ -464,8 +464,9 @@ static void ino_release_cb(void *handle, vinodeno_t vino)
 
 	PTHREAD_RWLOCK_rdlock(&cmount_lock);
 
-	cm->cm_export->export.up_ops->try_release(
-				cm->cm_export->export.up_ops, &fh_desc, 0);
+	cm->cm_export->export.up_ops->invalidate_close(
+				cm->cm_export->export.up_ops, &fh_desc,
+				FSAL_UP_INVALIDATE_CLOSE);
 
 	PTHREAD_RWLOCK_unlock(&cmount_lock);
 }
