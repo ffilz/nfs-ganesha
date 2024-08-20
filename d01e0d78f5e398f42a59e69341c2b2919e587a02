@@ -33,6 +33,24 @@
       "message": "Code changes, looks good to me...\n\n/root/rpmbuild/BUILD/nfs-ganesha-6-dev.18/libntirpc/ntirpc/rpc/svc.h: In function \u0027svc_destroy_it\u0027:\n/root/rpmbuild/BUILD/nfs-ganesha-6-dev.18/libntirpc/ntirpc/rpc/svc.h:541:17: error: \u0027pthread_yield\u0027 is deprecated: pthread_yield is deprecated, use sched_yield instead [-Werror\u003ddeprecated-declarations]\n  541 |                 pthread_yield();\n  \nnot sure, why we hitting this now....",
       "revId": "d01e0d78f5e398f42a59e69341c2b2919e587a02",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "000222da_423abcde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2024-08-20T16:00:58Z",
+      "side": 1,
+      "message": "Should be fixed with tirpc pull\n\ncommit 8a969d2fa63f406c8e243434435faffb6444f56d\nAuthor: Daniel Gryniewicz \u003cdang@fprintf.net\u003e\nDate:   Thu Aug 15 10:56:34 2024 -0400\n\n    Replace deprecated pthread_yield() with sched_yield()\n    \n    Signed-off-by: Daniel Gryniewicz \u003cdang@fprintf.net\u003e",
+      "parentUuid": "cc6a3d07_d0500111",
+      "revId": "d01e0d78f5e398f42a59e69341c2b2919e587a02",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
