@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n\u003d\u003d144581\u003d\u003d    by 0x4EAF5DE: nfs_rpc_process_request (nfs_worker_thread.c:1579)",
       "revId": "d01e0d78f5e398f42a59e69341c2b2919e587a02",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc6a3d07_d0500111",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-20T14:07:49Z",
+      "side": 1,
+      "message": "Code changes, looks good to me...\n\n/root/rpmbuild/BUILD/nfs-ganesha-6-dev.18/libntirpc/ntirpc/rpc/svc.h: In function \u0027svc_destroy_it\u0027:\n/root/rpmbuild/BUILD/nfs-ganesha-6-dev.18/libntirpc/ntirpc/rpc/svc.h:541:17: error: \u0027pthread_yield\u0027 is deprecated: pthread_yield is deprecated, use sched_yield instead [-Werror\u003ddeprecated-declarations]\n  541 |                 pthread_yield();\n  \nnot sure, why we hitting this now....",
+      "revId": "d01e0d78f5e398f42a59e69341c2b2919e587a02",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
