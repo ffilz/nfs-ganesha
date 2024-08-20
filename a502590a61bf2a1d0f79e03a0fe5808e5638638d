@@ -33,6 +33,24 @@
       "message": "WARNING: line over 80 characters\n+\tif (!XDR_SETPOS(xdrs, XDR_GETENDDATAPOS(xdrs, start, RNDUP(objp-\u003edata_len)))) {",
       "revId": "a502590a61bf2a1d0f79e03a0fe5808e5638638d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89534b34_21102f90",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-20T23:04:14Z",
+      "side": 1,
+      "message": "But could you fix the long line?",
+      "parentUuid": "87f584ed_c023506f",
+      "revId": "a502590a61bf2a1d0f79e03a0fe5808e5638638d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
