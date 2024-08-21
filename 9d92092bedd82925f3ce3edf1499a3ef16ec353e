@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure this is right. I don\u0027t see how it will encourage MDCACHE to release the ceph handle on the entry which is what ceph is wanting. It won\u0027t even close the global fd. It just invalidates the attributes and such.",
       "revId": "9d92092bedd82925f3ce3edf1499a3ef16ec353e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c40da9af_910fb301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-08-21T03:25:58Z",
+      "side": 1,
+      "message": "Will rectify the code to call invalidate_close, which will help in closing global FD. Thanks for pointing this out.",
+      "parentUuid": "0e86ec60_7fb216f4",
+      "revId": "9d92092bedd82925f3ce3edf1499a3ef16ec353e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
