@@ -34,6 +34,24 @@
       "parentUuid": "0e86ec60_7fb216f4",
       "revId": "9d92092bedd82925f3ce3edf1499a3ef16ec353e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ff80315_9b015008",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008909
+      },
+      "writtenOn": "2024-08-23T12:44:04Z",
+      "side": 1,
+      "message": "It has been a long time since I looked at this code, but the rationale behind try_release was the one in ceph userland commit e3b9df78fa42add2:\n\n    client: add a new inode release request callback\n    \n    trim_caps() walks the list of caps on the session, and releases\n    non-auth caps, and attempts to trim dentries until the cache\n    size is under the max_caps value requested by MDS.\n    \n    This is fine for FUSE, but doesn\u0027t really match the use-case of\n    nfs-ganesha. Ganesha typically looks up inodes by inode number, not\n    by dentry. It\u0027s quite possible that after a restart, we may have a\n    ton of outstanding inodes with no dentries associated with them.\n    \n    Ganesha holds a reference to each inode, so libcephfs can\u0027t release\n    them, and we don\u0027t have a way to request that ganesha do so.\n    \n    Add a new ino_release_callback and finisher. The intent is to allow\n    libcephfs to \"upcall\" to the application and request that it release\n    references to a specific inode.",
+      "parentUuid": "c40da9af_910fb301",
+      "revId": "9d92092bedd82925f3ce3edf1499a3ef16ec353e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
