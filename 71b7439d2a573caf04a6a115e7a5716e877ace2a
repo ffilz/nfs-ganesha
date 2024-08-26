@@ -16,6 +16,24 @@
       "message": "It has been a long time since I looked at this code, but the rationale behind try_release was the one in ceph userland commit e3b9df78fa42add2:\n\n    client: add a new inode release request callback\n    \n    trim_caps() walks the list of caps on the session, and releases\n    non-auth caps, and attempts to trim dentries until the cache\n    size is under the max_caps value requested by MDS.\n    \n    This is fine for FUSE, but doesn\u0027t really match the use-case of\n    nfs-ganesha. Ganesha typically looks up inodes by inode number, not\n    by dentry. It\u0027s quite possible that after a restart, we may have a\n    ton of outstanding inodes with no dentries associated with them.\n    \n    Ganesha holds a reference to each inode, so libcephfs can\u0027t release\n    them, and we don\u0027t have a way to request that ganesha do so.\n    \n    Add a new ino_release_callback and finisher. The intent is to allow\n    libcephfs to \"upcall\" to the application and request that it release\n    references to a specific inode.\n    \nSo the idea there is that we want to release these objects from the mdcache unless something is actually using them (indicated by an elevated refcount).\n\nIt\u0027s not clear to me that changing this to invalidate will have the same semantics. I think I considered doing what you suggest at in ~2020 and decided that using invalidate would cause issues vs. concurrent activity.\n\nThe ceph client and ganesha code has undoubtedly changed in the last 4 years though, so I won\u0027t stand in the way if you\u0027re certain that\u0027s the right thing to do.",
       "revId": "71b7439d2a573caf04a6a115e7a5716e877ace2a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e6191bb_60669866",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-08-26T21:30:05Z",
+      "side": 1,
+      "message": "@jlayton@redhat.com Thanks for that description. I half-remembered the rationale for the new API. I don\u0027t think things have changed in a way that negates this rationale. So maybe we need to make try_release do some additional or different stuff while still having the goal of releasing fsal_obj_handles so the ceph reference is released.\n\nIf the assumptions of the refcounts are wrong, maybe we could add a new cache validity flag that indicates a request for release was made, so mdcache unref could check that flag and if set, make a new attempt to release the entry on reducing refcount to 1 (rather than 0).\n\nWe can also simply reject try_release for any inode that has long term references since some kind of state is requiring us to hold the inode.",
+      "parentUuid": "8a1b1cd6_42edc057",
+      "revId": "71b7439d2a573caf04a6a115e7a5716e877ace2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
