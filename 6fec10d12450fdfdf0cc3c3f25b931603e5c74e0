@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb61422_d91c55d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-27T10:58:50Z",
+      "side": 1,
+      "message": "WARNING: \u0027seperately\u0027 may be misspelled - perhaps \u0027separately\u0027?\n2\u003e For RDMA we send nfs_headers and data seperately, so that we can do rdma_writes for data buffers, so single opaque buffer with header+data is not working.",
+      "revId": "6fec10d12450fdfdf0cc3c3f25b931603e5c74e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "147a3cdb_f542a268",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-27T10:58:50Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n1\u003e We do encryption of NFS response header + data buffers and copy encrypted data in single large buffer to send over wire as opaque bytes.",
+      "revId": "6fec10d12450fdfdf0cc3c3f25b931603e5c74e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e708bb_a1531bdb",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-27T10:58:50Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"NFS over RDMA transport is not supported for GSS flavour krb5p,\"\n+\t\t\t\t\t\" failing the request !!!\");",
+      "revId": "6fec10d12450fdfdf0cc3c3f25b931603e5c74e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f1c914_3bfcd026",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-27T10:58:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* mount.nfs gets Protocol not supported errors */",
+      "revId": "6fec10d12450fdfdf0cc3c3f25b931603e5c74e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b1b3e8_32d8ed2e",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-27T10:58:50Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\treturn svcerr_progvers(\u0026reqdata-\u003esvc, NFS_V4, NFS_V4);",
+      "revId": "6fec10d12450fdfdf0cc3c3f25b931603e5c74e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
