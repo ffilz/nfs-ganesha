@@ -149,10 +149,11 @@ struct mem_fsal_obj_handle *mem_rand_obj(struct mem_fsal_export *mfe)
 	struct glist_head *glist, *glistn;
 	uint32_t n = 2;
 
-	if (glist_empty(&mfe->mfe_objs))
-		return NULL;
-
 	PTHREAD_RWLOCK_rdlock(&mfe->mfe_exp_lock);
+
+	if (glist_empty(&mfe->mfe_objs))
+		goto out;
+
 	glist_for_each_safe(glist, glistn, &mfe->mfe_objs)
 	{
 		if (res == NULL) {
@@ -170,6 +171,9 @@ struct mem_fsal_obj_handle *mem_rand_obj(struct mem_fsal_export *mfe)
 		}
 		n++;
 	}
+
+out:
+
 	PTHREAD_RWLOCK_unlock(&mfe->mfe_exp_lock);
 
 	return res;
