@@ -160,6 +160,17 @@ static void load_lttng(void)
 #endif /* USE_LTTNG */
 
 /**
+ * Check if Ganesha is running in container
+ */
+
+static inline
+bool am_i_containerized(void)
+{
+	/* in Ceph environment variable I_AM_IN_A_CONTAINER=1 */
+	return getenv("I_AM_IN_A_CONTAINER");
+}
+
+/**
  * main: simply the main function.
  *
  * The 'main' function as in every C program.
@@ -492,11 +503,17 @@ int main(int argc, char *argv[])
 	 */
 	if (prctl(PR_SET_IO_FLUSHER, 1, 0, 0, 0) == -1) {
 		if (errno != EINVAL) {
-			LogFatal(
-				COMPONENT_MAIN,
-				"Error setting prctl PR_SET_IO_FLUSHER flag: %s",
-				strerror(errno));
-			goto fatal_die;
+			/* in container prctl call fails with EPERM */
+			if ((am_i_containerized() && (errno == EPERM))) {
+				LogEvent(COMPONENT_MAIN,
+					 "Ignoring prctl failure, as this is containerized environment");
+			} else {
+				LogFatal(
+					COMPONENT_MAIN,
+					"Error setting prctl PR_SET_IO_FLUSHER flag: %s",
+					strerror(errno));
+				goto fatal_die;
+			}
 		}
 	}
 #endif
