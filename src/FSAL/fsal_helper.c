@@ -1252,11 +1252,21 @@ static enum fsal_dir_result populate_dirent(const char *name,
 		status = junction_obj->obj_ops->getattrs(junction_obj, &attrs2);
 
 		if (!FSAL_IS_ERROR(status)) {
+			uint64_t mounted_on_file_id;
+
 			/* Now call the callback again with that. */
+			PTHREAD_RWLOCK_rdlock(&junction_export->exp_lock);
+
+			mounted_on_file_id =
+				junction_export->exp_mounted_on_file_id;
+
+			PTHREAD_RWLOCK_unlock(&junction_export->exp_lock);
+
 			state->cb_state = CB_JUNCTION;
+
 			status.major = state->cb(
 				&state->cb_parms, junction_obj, &attrs2,
-				junction_export->exp_mounted_on_file_id, cookie,
+				mounted_on_file_id, cookie,
 				state->cb_state);
 
 			state->cb_state = CB_ORIGINAL;
