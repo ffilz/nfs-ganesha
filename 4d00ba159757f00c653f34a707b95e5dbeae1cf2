@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d737aa00_6bd4baf3",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-29T21:28:48Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tchar *c_type;\n+\t\tc_type \u003d getenv(\"container\");",
+      "revId": "4d00ba159757f00c653f34a707b95e5dbeae1cf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d83ad7_492d3310",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-08-29T21:28:48Z",
+      "side": 1,
+      "message": "WARNING: Statements terminations use 1 semicolon\n+\treturn containerized;;",
+      "revId": "4d00ba159757f00c653f34a707b95e5dbeae1cf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
