@@ -16,6 +16,24 @@
       "message": "could you explain the rules for cmount_lock?  why do we need it read locked?",
       "revId": "b81c4aac8c0695a46bcef50728f4ae38aa250274",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "745d518e_31228d16",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-08-30T04:32:08Z",
+      "side": 1,
+      "message": "Thanks for catching this.\nI used cmount_lock (read locked) because, it was used in try_release.\nBut looking at the code flow, we are not going to call anything from ceph code, so this locking can be removed safely.",
+      "parentUuid": "959a9533_d6475b8e",
+      "revId": "b81c4aac8c0695a46bcef50728f4ae38aa250274",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
