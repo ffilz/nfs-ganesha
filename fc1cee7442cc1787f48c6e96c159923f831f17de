@@ -50,6 +50,24 @@
       "message": "If this is for performance reason, then no need to fail for krb5p.\nRather it should be documented and leave it upto the end user.\nI understand this will defeat purpose of using RDMA, but I would say thats the current cost when one prefers privacy/security over performance",
       "revId": "fc1cee7442cc1787f48c6e96c159923f831f17de",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aa898ff_6e86ef65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-08-30T03:33:46Z",
+      "side": 1,
+      "message": "It\u0027s not only performance, also the implementation changes involved in making this work...Would need spend some cycles...\n\nI just given all the points that we thought to conclude, to fail user mount with RDMA enabled path and Auth as Krbp5 for now, as we do not wanna implement the changes now...\nOnce in coming months, we solve this properly, we can remove this path to fail...\n\nAlso the other flavours like krb5 and krb5i works well with RDMA enabled...",
+      "parentUuid": "338338a4_00f5ff9a",
+      "revId": "fc1cee7442cc1787f48c6e96c159923f831f17de",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
