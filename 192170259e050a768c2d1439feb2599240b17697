@@ -16,6 +16,24 @@
       "message": "I would just like to double-check 1 thing about this.  In your Ceph environment, is `$container` set inside the containers?  If so, I think you should depend on it instead, and drop this check.  However, if it isn\u0027t set, let\u0027s support the use of `I_AM_IN_A_CONTAINER`.\n\nTo allow less churn later, how about using early returns for successful checks (i.e. `return true;`) and just return `false` at the end if none of the checks succeed.  That way, each check is in its own section of code and you don\u0027t need any `else` blocks.  If a section is later discovered to be unnecessary it can then be removed with a simple patch that just removes code lines (without any restructure).\n\nSorry if I\u0027m overthinking this...  :smile:",
       "revId": "192170259e050a768c2d1439feb2599240b17697",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33cf60b9_247ffa4f",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-08-30T07:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "626e9c06_e056db74",
+      "revId": "192170259e050a768c2d1439feb2599240b17697",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
