@@ -404,39 +404,45 @@ struct proto_op v4_full_stats[NFS4_OP_LAST_ONE];
 static struct nfsv3_stats *get_v3(struct gsh_stats *stats,
 				  pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->nfsv3 == NULL)) {
+	if (likely(stats->nfsv3))
+		return stats->nfsv3;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv3 == NULL)
 			stats->nfsv3 =
 				gsh_calloc(1, sizeof(struct nfsv3_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->nfsv3;
 	}
-	return stats->nfsv3;
 }
 
 static struct clnt_allops_v3_stats *get_v3_all(struct gsh_clnt_allops_stats *st,
 					       pthread_rwlock_t *lock)
 {
-	if (unlikely(st->nfsv3 == NULL)) {
+	if (likely(st->nfsv3))
+		return st->nfsv3;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (st->nfsv3 == NULL)
 			st->nfsv3 = gsh_calloc(
 				1, sizeof(struct clnt_allops_v3_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return st->nfsv3;
 	}
-	return st->nfsv3;
 }
 
 static struct mnt_stats *get_mnt(struct gsh_stats *stats,
 				 pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->mnt == NULL)) {
+	if (likely(stats->mnt))
+		return stats->mnt;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->mnt == NULL)
 			stats->mnt = gsh_calloc(1, sizeof(struct mnt_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->mnt;
 	}
-	return stats->mnt;
 }
 #endif
 
@@ -444,26 +450,30 @@ static struct mnt_stats *get_mnt(struct gsh_stats *stats,
 static struct nlmv4_stats *get_nlm4(struct gsh_stats *stats,
 				    pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->nlm4 == NULL)) {
+	if (likely(stats->nlm4))
+		return stats->nlm4;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nlm4 == NULL)
 			stats->nlm4 = gsh_calloc(1, sizeof(struct nlmv4_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->nlm4;
 	}
-	return stats->nlm4;
 }
 
 static struct clnt_allops_nlm_stats *
 get_nlm4_all(struct gsh_clnt_allops_stats *stats, pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->nlm4 == NULL)) {
+	if (likely(stats->nlm4))
+		return stats->nlm4;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nlm4 == NULL)
 			stats->nlm4 = gsh_calloc(
 				1, sizeof(struct clnt_allops_nlm_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->nlm4;
 	}
-	return stats->nlm4;
 }
 #endif
 
@@ -471,79 +481,91 @@ get_nlm4_all(struct gsh_clnt_allops_stats *stats, pthread_rwlock_t *lock)
 static struct rquota_stats *get_rquota(struct gsh_stats *stats,
 				       pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->rquota == NULL)) {
+	if (likely(stats->rquota))
+		return stats->rquota;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->rquota == NULL)
 			stats->rquota =
 				gsh_calloc(1, sizeof(struct rquota_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->rquota;
 	}
-	return stats->rquota;
 }
 #endif
 
 static struct nfsv40_stats *get_v40(struct gsh_stats *stats,
 				    pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->nfsv40 == NULL)) {
+	if (likely(stats->nfsv40))
+		return stats->nfsv40;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv40 == NULL)
 			stats->nfsv40 =
 				gsh_calloc(1, sizeof(struct nfsv40_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->nfsv40;
 	}
-	return stats->nfsv40;
 }
 
 static struct nfsv41_stats *get_v41(struct gsh_stats *stats,
 				    pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->nfsv41 == NULL)) {
+	if (likely(stats->nfsv41))
+		return stats->nfsv41;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv41 == NULL)
 			stats->nfsv41 =
 				gsh_calloc(1, sizeof(struct nfsv41_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->nfsv41;
 	}
-	return stats->nfsv41;
 }
 
 static struct nfsv41_stats *get_v42(struct gsh_stats *stats,
 				    pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->nfsv42 == NULL)) {
+	if (likely(stats->nfsv42))
+		return stats->nfsv42;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv42 == NULL)
 			stats->nfsv42 =
 				gsh_calloc(1, sizeof(struct nfsv41_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->nfsv42;
 	}
-	return stats->nfsv42;
 }
 
 static struct clnt_allops_v4_stats *
 get_v4_all(struct gsh_clnt_allops_stats *stats, pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->nfsv4 == NULL)) {
+	if (likely(stats->nfsv4))
+		return stats->nfsv4;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv4 == NULL)
 			stats->nfsv4 = gsh_calloc(
 				1, sizeof(struct clnt_allops_v4_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->nfsv4;
 	}
-	return stats->nfsv4;
 }
 
 #ifdef _USE_9P
 static struct _9p_stats *get_9p(struct gsh_stats *stats, pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->_9p == NULL)) {
+	if (likely(stats->_9p))
+		return stats->_9p;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->_9p == NULL)
 			stats->_9p = gsh_calloc(1, sizeof(struct _9p_stats));
 		PTHREAD_RWLOCK_unlock(lock);
+		return stats->_9p;
 	}
-	return stats->_9p;
 }
 #endif
 
@@ -1561,7 +1583,9 @@ void server_stats_io_done(size_t requested, size_t transferred, bool success,
  */
 void check_deleg_struct(struct gsh_stats *stats, pthread_rwlock_t *lock)
 {
-	if (unlikely(stats->deleg == NULL)) {
+	if (likely(stats->deleg))
+		return;
+	else {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->deleg == NULL)
 			stats->deleg =
