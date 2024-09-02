@@ -22,6 +22,30 @@
       },
       "revId": "fca951c2f964af26e579fad63a6391298cece1d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157855c1_9d8783ff",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-09-02T23:07:52Z",
+      "side": 1,
+      "message": "Of course, in my hypothetical scenario control somehow reaches here with a valid in_obj for the *directory*... Still, it seem plausible access control may have changed after the client got the directory\u0027s filehandle? Again, I did not look in detail and maybe I completely wrong... it\u0027s just a though.",
+      "parentUuid": "559e0f41_a66fb39c",
+      "range": {
+        "startLine": 1682,
+        "startChar": 22,
+        "endLine": 1682,
+        "endChar": 37
+      },
+      "revId": "fca951c2f964af26e579fad63a6391298cece1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
