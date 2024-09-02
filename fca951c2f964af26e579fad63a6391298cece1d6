@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "559e0f41_a66fb39c",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-09-02T23:04:57Z",
+      "side": 1,
+      "message": "I have not looked in detail, but I am wondering if it is possible for ERR_FSAL_ACCESS here because the user does not have access to the *directory*? If that\u0027s the case, it seems possible you could get ERR_FSAL_ACCESS but the file does NOT exist.",
+      "range": {
+        "startLine": 1682,
+        "startChar": 22,
+        "endLine": 1682,
+        "endChar": 37
+      },
+      "revId": "fca951c2f964af26e579fad63a6391298cece1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
