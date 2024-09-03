@@ -46,6 +46,30 @@
       },
       "revId": "fca951c2f964af26e579fad63a6391298cece1d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b593f69d_50459b95",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-09-03T07:43:14Z",
+      "side": 1,
+      "message": "My change only affect EACCES in case you don\u0027t have permissions for the file itself. The permission check for the directory is done prior, so this doesn\u0027t affect it.",
+      "parentUuid": "157855c1_9d8783ff",
+      "range": {
+        "startLine": 1682,
+        "startChar": 22,
+        "endLine": 1682,
+        "endChar": 37
+      },
+      "revId": "fca951c2f964af26e579fad63a6391298cece1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
