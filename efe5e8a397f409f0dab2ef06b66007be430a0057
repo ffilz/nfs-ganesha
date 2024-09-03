@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8445157_cb2da1c7",
+        "filename": "src/FSAL/FSAL_MEM/mem_up.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-03T13:43:27Z",
+      "side": 1,
+      "message": "If you\u0027re going to do it this way, then this check is unneeded.  The glist_for_each_safe() will just do nothing.\n\nglist_empty() should be safe to call without a lock, it\u0027s a single pointer check.  The whole point of that check was to avoid taking the lock if the list is already empty.  Sure, the list could be filled a line later, but who cares?  We\u0027re returning anyway.\n\nRegardless, this isn\u0027t the correct fix.  Either leave it alone, or remove it entirely.",
+      "revId": "efe5e8a397f409f0dab2ef06b66007be430a0057",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
