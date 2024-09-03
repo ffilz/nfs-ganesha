@@ -70,6 +70,30 @@
       },
       "revId": "fca951c2f964af26e579fad63a6391298cece1d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a33a4b_41e967aa",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-09-03T17:04:28Z",
+      "side": 1,
+      "message": "I see. Thank you for clarifying. Does the NFS v4.x protocol clearly specify the correct error to return in this situation?",
+      "parentUuid": "b593f69d_50459b95",
+      "range": {
+        "startLine": 1682,
+        "startChar": 22,
+        "endLine": 1682,
+        "endChar": 37
+      },
+      "revId": "fca951c2f964af26e579fad63a6391298cece1d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
