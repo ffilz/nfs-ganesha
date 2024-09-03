@@ -16,6 +16,24 @@
       "message": "\"Test, lock, and retest\" is a very common way of optimizing using locked code, and it\u0027s used everywhere in Ganesha.  If Coverity can\u0027t handle it, I\u0027d prefer we mark these issues as invalid, rather than change the Ganesha code.",
       "revId": "3abc829fad0d2737ab40b8dae9fa01f674104c57",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce2756a0_ac5aed7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-03T15:19:17Z",
+      "side": 1,
+      "message": "Yes, looking at this one, it\u0027s especially safe, so I would mark these as Intentional rather than making any code change.\n\nBTW, when you update a CID, fill in status as Bug (a change was really necessary), Invalid (Coverity\u0027s analysis is wrong) or Intentional (sure, at some technical level, the analysis is right, but we\u0027re doing what we do anyway)\n\nFor this one, technically Coverity is right - at least historically, there are platforms where pointer access is not atomic (like original x86 segment:offset pointers) where these functions could return half a pointer. With modern architectures, a pointer read is atomic (given the pointer is aligned) so all we lose is memory barrier, and the test, lock, and re-test assures the memory barrier for the retest.",
+      "parentUuid": "e9440cc7_1e60da17",
+      "revId": "3abc829fad0d2737ab40b8dae9fa01f674104c57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
