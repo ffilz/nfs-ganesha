@@ -491,7 +491,10 @@ int main(int argc, char *argv[])
 	 * https://git.kernel.org/torvalds/p/8d19f1c8e1937baf74e1962aae9f90fa3aeab463
 	 */
 	if (prctl(PR_SET_IO_FLUSHER, 1, 0, 0, 0) == -1) {
-		if (errno != EINVAL) {
+		if (errno == EPERM) {
+			LogWarn(COMPONENT_MAIN,
+				"Failed to set PR_SET_IO_FLUSHER due to EPERM");
+		} else if (errno != EINVAL) {
 			LogFatal(
 				COMPONENT_MAIN,
 				"Error setting prctl PR_SET_IO_FLUSHER flag: %s",
