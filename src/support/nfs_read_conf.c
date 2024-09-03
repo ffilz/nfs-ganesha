@@ -369,6 +369,8 @@ static struct config_item core_params[] = {
 		       enable_connection_manager),
 	CONF_ITEM_UI32("Connection_Manager_Timeout_sec", 0, UINT32_MAX, 2 * 60,
 		       nfs_core_param, connection_manager_timeout_sec),
+	CONF_ITEM_BOOL("Allow_Unprivileged_Set_Io_Flusher", false,
+		       nfs_core_param, allow_unprivileged_set_io_flusher),
 	CONFIG_EOL
 };
 
