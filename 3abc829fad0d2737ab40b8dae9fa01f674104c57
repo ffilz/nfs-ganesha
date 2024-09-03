@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9440cc7_1e60da17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-03T14:23:28Z",
+      "side": 1,
+      "message": "\"Test, lock, and retest\" is a very common way of optimizing using locked code, and it\u0027s used everywhere in Ganesha.  If Coverity can\u0027t handle it, I\u0027d prefer we mark these issues as invalid, rather than change the Ganesha code.",
+      "revId": "3abc829fad0d2737ab40b8dae9fa01f674104c57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
