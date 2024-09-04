@@ -227,9 +227,8 @@ static void fs_verifier(struct fsal_export *exp_hdl,
 
 	rc = gpfs_ganesha(OPENHANDLE_GET_VERIFIER, &varg);
 	errsv = errno;
-	if (rc != 0) {
+	if (rc != 0)
 		LogDebug(COMPONENT_PNFS, "rc %d err %d", rc, errsv);
-	}
 }
 
 /**
