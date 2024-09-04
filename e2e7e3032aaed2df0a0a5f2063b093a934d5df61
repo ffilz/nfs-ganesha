@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6990eeef_a5f65252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-04T21:23:22Z",
+      "side": 1,
+      "message": "Lior - please have a look at this. We are still running checkpatch in the CI, which we need to fix, but it calls out an issue with the clang formatting.\n\nclang-format has produced some \u003e 80 column lines that aren\u0027t just strings (which is all checkpatch allowed). I tried to manually fix them, but clang complained.\n\nI\u0027d like to see clang-format not exceed 80 columns except to keep strings from breaking.\n\nI\u0027d also like clang to allow for some frendly reformatting and not just forcing everything to some robotic formatting.\n\nFor example, a bit of a beef I have is that clang prefers the following for a function call invocation:\n\nfoo(a_very_long_param,\n       another_long_param, a,\n       and_a_last_long_param);\n\nover the much more readable, and people won\u0027t miss the \"a\" parameter:\n\nfoo(a_very_long_param,\n       another_long_param,\n       a,\n       and_a_last_long_param);\n\nAlso, this patch is because clang complained about these issues even though I had not changed these lines in my following patch, so I did this patch to fix the files. I\u0027m not sure how these files got this way, is the format you applied different from what the commit hook checks?",
+      "revId": "e2e7e3032aaed2df0a0a5f2063b093a934d5df61",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "482ad563_90e31619",
