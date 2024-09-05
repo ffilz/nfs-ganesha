@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aa648d4_1e9e11d7",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_ds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-05T03:14:29Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (gpfs_ganesha(OPENHANDLE_FSYNC, \u0026arg) \u003d\u003d -1) {\n+\t\tretval \u003d errno;\n+\t}",
+      "revId": "183e6e7862f959cb7af31ba704519e28e4be40e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
