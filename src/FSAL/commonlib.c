@@ -1563,7 +1563,8 @@ void fd_lru_run(struct fridgethr_context *ctx)
 
 	fds_avg = (fd_lru_state.fds_hiwat - fd_lru_state.fds_lowat) / 2;
 
-	currentopen = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	currentopen = atomic_fetch_int32_t(&fsal_fd_global_counter) +
+		      atomic_fetch_int32_t(&fsal_fd_state_counter);
 
 	extremis = currentopen > fd_lru_state.fds_hiwat;
 
@@ -1580,9 +1581,8 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	}
 
 	/* Check for fd_state transitions */
-
 	LogDebug(COMPONENT_FSAL,
-		 "FD count fsal_fd_global_counter is %" PRIi32
+		 "FSAL FD Count is %" PRIi32
 		 " and low water mark is %" PRIi32
 		 " and high water mark is %" PRIi32 " %s",
 		 currentopen, fd_lru_state.fds_lowat, fd_lru_state.fds_hiwat,
@@ -1639,24 +1639,20 @@ void fd_lru_run(struct fridgethr_context *ctx)
 			     ((uint64_t)(curr_time - fd_lru_state.prev_time)));
 
 		if (extremis) {
-			LogDebug(
-				COMPONENT_FSAL,
-				"Open FDs over high water mark, reaping aggressively.");
+			LogEvent(COMPONENT_FSAL,
+				 "Open FDs over high water mark, reaping aggressively.");
 		}
 
 		/* Attempt to close fds. */
 		do {
 			int i;
-
 			workpass = 0;
 
-			LogDebug(COMPONENT_FSAL,
-				 "Reaping up to %" PRIu32 " fds", reaper_work);
-
-			LogFullDebug(COMPONENT_FSAL,
-				     "formeropen=%" PRIu32
-				     " totalwork=%" PRIu32,
-				     formeropen, totalwork);
+			LogEvent(COMPONENT_FSAL,
+				 "Reaping up to %" PRIu32 " fds"
+				 " formeropen=%" PRIu32
+				 " totalwork=%" PRIu32,
+				 reaper_work, formeropen, totalwork);
 
 			for (i = 0; i < reaper_work; ++i)
 				workpass += lru_try_one();
@@ -1665,7 +1661,8 @@ void fd_lru_run(struct fridgethr_context *ctx)
 		} while (extremis && (workpass >= reaper_work) &&
 			 (totalwork < fd_lru_state.biggest_window));
 
-		currentopen = atomic_fetch_int32_t(&fsal_fd_global_counter);
+		currentopen = atomic_fetch_int32_t(&fsal_fd_global_counter) +
+			      atomic_fetch_int32_t(&fsal_fd_state_counter);
 
 		if (extremis && ((currentopen > formeropen) ||
 				 (formeropen - currentopen <
@@ -1717,9 +1714,11 @@ void fd_lru_run(struct fridgethr_context *ctx)
 
 	LogDebug(COMPONENT_FSAL,
 		 "After work, fsal_fd_global_counter:%" PRIi32
+		 " fsal_fd_state_counter:%" PRIi32
 		 " fdrate:%u new_thread_wait=%" PRIu64,
-		 atomic_fetch_int32_t(&fsal_fd_global_counter), fdratepersec,
-		 (uint64_t)new_thread_wait);
+		 atomic_fetch_int32_t(&fsal_fd_global_counter),
+		 atomic_fetch_int32_t(&fsal_fd_state_counter),
+		 fdratepersec, (uint64_t)new_thread_wait);
 	LogFullDebug(COMPONENT_FSAL,
 		     "currentopen=%" PRIu32 " futility=%d totalwork=%" PRIu32
 		     " biggest_window=%d extremis=%d fds_lowat=%d ",
@@ -2204,7 +2203,9 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 			       bool may_reopen)
 {
-	int32_t open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	int32_t global_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	int32_t state_fds = atomic_fetch_int32_t(&fsal_fd_state_counter);
+	int32_t open_fds = global_fds + state_fds;
 
 	if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
 	    open_fds >= fd_lru_state.fds_hard_limit) {
@@ -2214,9 +2215,10 @@ static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 				   NIV_CRIT :
 				   NIV_DEBUG,
 			   "FD Hard Limit (%" PRIu32
-			   ") Exceeded (fsal_fd_global_counter = %" PRIi32
+			   ") Exceeded (global_fds = %d + state_fds = %d"
 			   "), waking LRU thread.",
-			   fd_lru_state.fds_hard_limit, open_fds);
+			   fd_lru_state.fds_hard_limit,
+			   global_fds, state_fds);
 		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
 		fridgethr_wake(fd_lru_fridge);
 
@@ -2232,9 +2234,10 @@ static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 				   NIV_INFO :
 				   NIV_DEBUG,
 			   "FDs above high water mark (%" PRIu32
-			   ", fsal_fd_global_counter = %" PRIi32
+			   ", global_fds = %d + state_fds = %d"
 			   "), waking LRU thread.",
-			   fd_lru_state.fds_hiwat, open_fds);
+			   fd_lru_state.fds_hiwat,
+			   global_fds, state_fds);
 		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_HIGH);
 		fridgethr_wake(fd_lru_fridge);
 	}
@@ -2269,25 +2272,29 @@ fsal_status_t wait_to_start_io(struct fsal_obj_handle *obj_hdl,
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	bool retried = false;
 
-        int32_t open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
-        if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
-            open_fds >= fd_lru_state.fds_hard_limit) {
-                LogAtLevel(COMPONENT_FSAL,
-                           atomic_fetch_uint32_t(&fd_lru_state.fd_state) !=
-                                           FD_LIMIT ?
-                                   NIV_CRIT :
-                                   NIV_DEBUG,
-                           "FD Hard Limit (%" PRIu32
-                           ") Exceeded (fsal_fd_global_counter = %" PRIi32
-                           "), waking LRU thread.",
-                           fd_lru_state.fds_hard_limit, open_fds);
-                atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
-                fridgethr_wake(fd_lru_fridge);
+	int32_t global_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	int32_t state_fds = atomic_fetch_int32_t(&fsal_fd_state_counter);
+	int32_t open_fds = global_fds + state_fds;
 
-                /* Too many open files, don't open any more. */
+	if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
+		open_fds >= fd_lru_state.fds_hard_limit) {
+		LogAtLevel(COMPONENT_FSAL,
+				atomic_fetch_uint32_t(&fd_lru_state.fd_state) !=
+						FD_LIMIT ?
+					NIV_CRIT :
+					NIV_DEBUG,
+				"FD Hard Limit (%" PRIu32
+				") Exceeded (global_fds = %d + state_fds = %d"
+				"), waking LRU thread.",
+				fd_lru_state.fds_hard_limit,
+				global_fds, state_fds);
+		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
+		fridgethr_wake(fd_lru_fridge);
+
+		/* Too many open files, don't open any more. */
 		status = fsalstat(ERR_FSAL_DELAY, EBUSY);
-                return status;
-        }
+		return status;
+	}
 retry:
 
 	/* Indicate we want to do I/O work */
