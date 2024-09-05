@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de2f4eeb_3d6787c7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2283,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-05T21:23:31Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint32_t open_fds \u003d global_fds + state_fds;\n+\tif (fsal_fd-\u003efd_type \u003d\u003d FSAL_FD_GLOBAL \u0026\u0026",
+      "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a232840_156c8d16",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-05T21:23:31Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\") Exceeded (global_fds \u003d %d + state_fds \u003d %d\"\n+\t\t\t\t\"), waking LRU thread.\",",
+      "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
