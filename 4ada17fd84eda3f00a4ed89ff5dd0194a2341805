@@ -16,6 +16,40 @@
       "message": "During the LDX workloads scale with below workloads, we saw that we are hitting the system FD limits...\n1. file open\n2. lock\n3. delete\n4. close\n5. Per user simultaneously opens 100 files and closing those files\n\nIn the test currently 1000 users were running in parallel...\n\n(gdb) p fsal_fd_global_counter\n$1 \u003d 99768\n(gdb) p fsal_fd_state_counter\n$2 \u003d 99774\n\nSo thought to consider the the state FDs counts also for purging...\nPlease help to review and approve...",
       "revId": "4ada17fd84eda3f00a4ed89ff5dd0194a2341805",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ea2f59_6619ba97",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2279,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-05T21:23:14Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint32_t open_fds \u003d global_fds + state_fds;\n+\tif (fsal_fd-\u003efd_type \u003d\u003d FSAL_FD_GLOBAL \u0026\u0026",
+      "revId": "4ada17fd84eda3f00a4ed89ff5dd0194a2341805",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c8617c_3dc3eb18",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-05T21:23:14Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\") Exceeded (global_fds \u003d %d + state_fds \u003d %d\"\n+\t\t\t\t\"), waking LRU thread.\",",
+      "revId": "4ada17fd84eda3f00a4ed89ff5dd0194a2341805",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
