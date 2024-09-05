@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1693681_91bef507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-09-05T16:20:23Z",
+      "side": 1,
+      "message": "At higher SWBuild runs, we are seeing a lot of FD were open and we were hitting system FD limits, causing EIO.\nHence handling it, please help to review and approve",
+      "revId": "0a84d2aa9cca37356b1caa1efe8c195cb823d952",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
