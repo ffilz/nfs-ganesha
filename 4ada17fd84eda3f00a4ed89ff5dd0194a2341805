@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95f3dc2e_ce1b3e22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-09-05T16:36:07Z",
+      "side": 1,
+      "message": "During the LDX workloads scale with below workloads, we saw that we are hitting the system FD limits...\n1. file open\n2. lock\n3. delete\n4. close\n5. Per user simultaneously opens 100 files and closing those files\n\nIn the test currently 1000 users were running in parallel...\n\n(gdb) p fsal_fd_global_counter\n$1 \u003d 99768\n(gdb) p fsal_fd_state_counter\n$2 \u003d 99774\n\nSo thought to consider the the state FDs counts also for purging...\nPlease help to review and approve...",
+      "revId": "4ada17fd84eda3f00a4ed89ff5dd0194a2341805",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
