@@ -2204,7 +2204,9 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 			       bool may_reopen)
 {
-	int32_t open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	int32_t global_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	int32_t state_fds = atomic_fetch_int32_t(&fsal_fd_state_counter);
+	int32_t open_fds = global_fds + state_fds;
 
 	if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
 	    open_fds >= fd_lru_state.fds_hard_limit) {
@@ -2214,9 +2216,10 @@ static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 				   NIV_CRIT :
 				   NIV_DEBUG,
 			   "FD Hard Limit (%" PRIu32
-			   ") Exceeded (fsal_fd_global_counter = %" PRIi32
+			   ") Exceeded (global_fds = %d + state_fds = %d"
 			   "), waking LRU thread.",
-			   fd_lru_state.fds_hard_limit, open_fds);
+			   fd_lru_state.fds_hard_limit,
+			   global_fds, state_fds);
 		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
 		fridgethr_wake(fd_lru_fridge);
 
@@ -2232,9 +2235,10 @@ static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 				   NIV_INFO :
 				   NIV_DEBUG,
 			   "FDs above high water mark (%" PRIu32
-			   ", fsal_fd_global_counter = %" PRIi32
+			   ", global_fds = %d + state_fds = %d"
 			   "), waking LRU thread.",
-			   fd_lru_state.fds_hiwat, open_fds);
+			   fd_lru_state.fds_hiwat,
+			   global_fds, state_fds);
 		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_HIGH);
 		fridgethr_wake(fd_lru_fridge);
 	}
@@ -2269,25 +2273,28 @@ fsal_status_t wait_to_start_io(struct fsal_obj_handle *obj_hdl,
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	bool retried = false;
 
-        int32_t open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
-        if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
-            open_fds >= fd_lru_state.fds_hard_limit) {
-                LogAtLevel(COMPONENT_FSAL,
-                           atomic_fetch_uint32_t(&fd_lru_state.fd_state) !=
-                                           FD_LIMIT ?
-                                   NIV_CRIT :
-                                   NIV_DEBUG,
-                           "FD Hard Limit (%" PRIu32
-                           ") Exceeded (fsal_fd_global_counter = %" PRIi32
-                           "), waking LRU thread.",
-                           fd_lru_state.fds_hard_limit, open_fds);
-                atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
-                fridgethr_wake(fd_lru_fridge);
+	int32_t global_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	int32_t state_fds = atomic_fetch_int32_t(&fsal_fd_state_counter);
+	int32_t open_fds = global_fds + state_fds;
+	if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
+		open_fds >= fd_lru_state.fds_hard_limit) {
+		LogAtLevel(COMPONENT_FSAL,
+				atomic_fetch_uint32_t(&fd_lru_state.fd_state) !=
+						FD_LIMIT ?
+					NIV_CRIT :
+					NIV_DEBUG,
+				"FD Hard Limit (%" PRIu32
+				") Exceeded (global_fds = %d + state_fds = %d"
+				"), waking LRU thread.",
+				fd_lru_state.fds_hard_limit,
+				global_fds, state_fds);
+		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
+		fridgethr_wake(fd_lru_fridge);
 
-                /* Too many open files, don't open any more. */
+		/* Too many open files, don't open any more. */
 		status = fsalstat(ERR_FSAL_DELAY, EBUSY);
-                return status;
-        }
+		return status;
+	}
 retry:
 
 	/* Indicate we want to do I/O work */
