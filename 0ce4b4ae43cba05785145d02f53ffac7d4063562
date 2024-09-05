@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a001e8d_82ff51ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-05T03:07:32Z",
+      "side": 1,
+      "message": "ERROR: do not set execute permissions for source files",
+      "revId": "0ce4b4ae43cba05785145d02f53ffac7d4063562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b16995f5_d148c28d",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_mds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-05T03:07:32Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (rc !\u003d 0) {\n+\t\tLogDebug(COMPONENT_PNFS, \"rc %d err %d\", rc, errsv);\n+\t}",
+      "revId": "0ce4b4ae43cba05785145d02f53ffac7d4063562",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
