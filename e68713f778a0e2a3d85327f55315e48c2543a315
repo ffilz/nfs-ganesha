@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c01adcfd_6c68803f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-05T22:39:43Z",
+      "side": 1,
+      "message": "Looks good. Hmm, we need to make sure we limit the state opens (and are we tracking both opens for OPEN and opens for LOCK?).\n\nAlthough we have moved to clang formatting, could you fix those checkpatch warnings?\n\nI would like to see if we can change the clang formatting to not allow breaking strings and require the blank line after declarations.",
+      "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de2f4eeb_3d6787c7",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
