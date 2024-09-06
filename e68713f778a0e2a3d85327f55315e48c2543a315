@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb25c132_eee406e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-09-06T11:50:31Z",
+      "side": 1,
+      "message": "Yeah, we are tracking for v4...and also we have a config for that Max_Open_States_Per_Client...but nothing for v3...\n\ncheckpatch - have been fixed...\n\nAlso, The reapper for global fd was triggered, but we still hit the fd limit since there is no reapper for state_fd\n(gdb) p fsal_fd_global_counter\n$5 \u003d 61\n(gdb) p fsal_fd_state_counter\n$6 \u003d 199820\n\nAt scale, we are hitting a new Hang with this changes...",
+      "parentUuid": "c01adcfd_6c68803f",
+      "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de2f4eeb_3d6787c7",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-05T21:23:31Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tint32_t open_fds \u003d global_fds + state_fds;\n+\tif (fsal_fd-\u003efd_type \u003d\u003d FSAL_FD_GLOBAL \u0026\u0026",
+      "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc05bd0_1df81a0f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2283,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-09-06T11:50:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de2f4eeb_3d6787c7",
       "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2024-09-05T21:23:31Z",
       "side": 1,
       "message": "WARNING: quoted string split across lines\n+\t\t\t\t\") Exceeded (global_fds \u003d %d + state_fds \u003d %d\"\n+\t\t\t\t\"), waking LRU thread.\",",
+      "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "857f39f5_b4b171bc",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-09-06T11:50:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a232840_156c8d16",
       "revId": "e68713f778a0e2a3d85327f55315e48c2543a315",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
