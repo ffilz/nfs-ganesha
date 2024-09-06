@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87bcbd3b_7307d584",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1037682
+      },
+      "writtenOn": "2024-09-06T15:07:50Z",
+      "side": 1,
+      "message": "Kubernetes would inject a KUBERNETES_SERVICE_HOST environment variable among others:\n\nKUBERNETES_PORT\u003dtcp://10.43.0.1:443\nKUBERNETES_SERVICE_PORT\u003d443\nKUBERNETES_PORT_443_TCP_ADDR\u003d10.43.0.1\nKUBERNETES_PORT_443_TCP_PORT\u003d443\nKUBERNETES_PORT_443_TCP_PROTO\u003dtcp\nKUBERNETES_SERVICE_PORT_HTTPS\u003d443\nKUBERNETES_PORT_443_TCP\u003dtcp://10.43.0.1:443\nKUBERNETES_SERVICE_HOST\u003d10.43.0.1\n\nI don\u0027t see container set there.",
+      "revId": "51e57edf1578c2135b8e43856718e260b2fe4f73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
