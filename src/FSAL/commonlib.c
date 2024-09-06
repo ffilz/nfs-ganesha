@@ -2097,8 +2097,8 @@ fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
  *
  * NOTE: Assumes fsal_fd->work_mutex is held and that fd_work has been
  *       incremented. After re_opening if necessary, fd_work will be
- *       decremented, fd_work_cond will be signaled, and io_work_cond will be
- *       broadcast.
+ *       decremented, fd_work_cond and io_work_cond will be
+ *       broadcasted.
  *
  * NOTE: We should not come in here with openflags of FSAL_O_ANY
  *
@@ -2177,8 +2177,8 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 		     fsal_fd, atomic_fetch_int32_t(&fsal_fd->io_work),
 		     atomic_fetch_int32_t(&fsal_fd->fd_work));
 
-	/* Wake up at least one thread waiting to do fd work */
-	PTHREAD_COND_signal(&fsal_fd->fd_work_cond);
+	/* Wake up all thread waiting to do fd work */
+	PTHREAD_COND_broadcast(&fsal_fd->fd_work_cond);
 
 	if (io_can_start) {
 		/* Wake up all threads waiting to do io work */
@@ -2338,10 +2338,10 @@ retry:
 
 		if (PTHREAD_MUTEX_dec_int32_t_and_lock(&fsal_fd->io_work,
 						       &fsal_fd->work_mutex)) {
-			/* Let the thread waiting to do fd work know it can
+			/* Let the threads waiting to do fd work know it can
 			 * proceed.
 			 */
-			PTHREAD_COND_signal(&fsal_fd->fd_work_cond);
+			PTHREAD_COND_broadcast(&fsal_fd->fd_work_cond);
 		} else {
 			/* need the mutex anyway... */
 			PTHREAD_MUTEX_lock(&fsal_fd->work_mutex);
@@ -2377,10 +2377,10 @@ retry:
 				 * allowed to reopen, so return EBUSY.
 				 */
 
-				/* Wake up at least one thread waiting to do fd
+				/* Wake up all the thread waiting to do fd
 				 * work
 				 */
-				PTHREAD_COND_signal(&fsal_fd->fd_work_cond);
+				PTHREAD_COND_broadcast(&fsal_fd->fd_work_cond);
 				/* Wake up all threads waiting to do io work */
 				PTHREAD_COND_broadcast(&fsal_fd->io_work_cond);
 
@@ -2459,10 +2459,10 @@ retry:
 
 			if (PTHREAD_MUTEX_dec_int32_t_and_lock(
 				    &fsal_fd->io_work, &fsal_fd->work_mutex)) {
-				/* Let the thread waiting to do fd work know it
+				/* Let the threads waiting to do fd work know it
 				 * can proceed.
 				 */
-				PTHREAD_COND_signal(&fsal_fd->fd_work_cond);
+				PTHREAD_COND_broadcast(&fsal_fd->fd_work_cond);
 				PTHREAD_MUTEX_unlock(&fsal_fd->work_mutex);
 			}
 
@@ -2884,7 +2884,7 @@ fsal_status_t fsal_complete_io(struct fsal_obj_handle *obj_hdl,
 						       &fsal_fd->work_mutex);
 
 	if (got_mutex)
-		PTHREAD_COND_signal(&fsal_fd->fd_work_cond);
+		PTHREAD_COND_broadcast(&fsal_fd->fd_work_cond);
 
 	/* We choose to bump the fd at the completion of I/O so we don't have
 	 * to introduce new locking.
@@ -2981,8 +2981,8 @@ void fsal_complete_fd_work(struct fsal_fd *fsal_fd)
 		     fsal_fd, atomic_fetch_int32_t(&fsal_fd->io_work),
 		     atomic_fetch_int32_t(&fsal_fd->fd_work));
 
-	/* Wake up at least one thread waiting to do fd work */
-	PTHREAD_COND_signal(&fsal_fd->fd_work_cond);
+	/* Wake up all threads waiting to do fd work */
+	PTHREAD_COND_broadcast(&fsal_fd->fd_work_cond);
 
 	if (io_can_start) {
 		/* Wake up all threads waiting to do io work */
