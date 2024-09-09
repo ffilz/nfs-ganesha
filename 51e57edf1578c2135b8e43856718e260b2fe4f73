@@ -16,6 +16,24 @@
       "message": "Kubernetes would inject a KUBERNETES_SERVICE_HOST environment variable among others:\n\nKUBERNETES_PORT\u003dtcp://10.43.0.1:443\nKUBERNETES_SERVICE_PORT\u003d443\nKUBERNETES_PORT_443_TCP_ADDR\u003d10.43.0.1\nKUBERNETES_PORT_443_TCP_PORT\u003d443\nKUBERNETES_PORT_443_TCP_PROTO\u003dtcp\nKUBERNETES_SERVICE_PORT_HTTPS\u003d443\nKUBERNETES_PORT_443_TCP\u003dtcp://10.43.0.1:443\nKUBERNETES_SERVICE_HOST\u003d10.43.0.1\n\nI don\u0027t see container set there.",
       "revId": "51e57edf1578c2135b8e43856718e260b2fe4f73",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cabd73d9_35b8ab9b",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-09T06:59:08Z",
+      "side": 1,
+      "message": "When I check the environment variables within the container, I observe below set.\n------------------------------------------------\n# cat /proc/self/environ\nCEPH_DEVEL\u003dfalse\nTCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES\u003d134217728\nCEPH_POINT_RELEASE\u003dOSD_FLAVOR\u003ddefault\nPWD\u003d/\nI_AM_IN_A_CONTAINER\u003d1\ncontainer\u003doci\nHOME\u003d/root\nCONTAINER_IMAGE\u003dregistry-proxy.engineering.redhat.com/rh-osbs/rhceph:ceph-8.0-rhel-9-containers-candidate-33957-20240829052554\nCEPH_VERSION\u003dsquid\nCEPH_REF\u003dsquid\nTERM\u003dxterm\nNODE_NAME\u003dceph-msaini-c0c9rr-node1-installer\nSHLVL\u003d1\nwhich_declare\u003ddeclare -f\nPATH\u003d/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/binBASH_FUNC_which%%\u003d() {  ( alias;\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@\n}_\u003d/usr/bin/cat\n----------------------------------------------\nPlease see what you are getting. Feel free to submit new code change covering what k8s provides.",
+      "parentUuid": "87bcbd3b_7307d584",
+      "revId": "51e57edf1578c2135b8e43856718e260b2fe4f73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
