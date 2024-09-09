@@ -70,6 +70,24 @@
       "parentUuid": "8cbe9e4f_fb0b4c01",
       "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba37427a_70c07fe2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-09-09T16:45:49Z",
+      "side": 1,
+      "message": "Is this solving a case where two threads are blocked trying to do FD work on a global FD, with thread1 (the reaper?) trying to close the FD and thread2 trying to (re)open it?",
+      "parentUuid": "6dfd49a4_f5e02603",
+      "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
