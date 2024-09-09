@@ -52,6 +52,24 @@
       "parentUuid": "5d32ca2c_d853521b",
       "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dfd49a4_f5e02603",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-09-09T16:35:30Z",
+      "side": 1,
+      "message": "If I understand correctly only one thread can do fd work at a time. Ideally the change description would have a summary of why broadcast helps, to help readers like me :-) What is this change trying to solve?\n\nAlso, it is possible some installations (e.g. my team\u0027s) will require some tuning of LRU knobs after this change + https://gerrithub.io/c/ffilz/nfs-ganesha/+/1200764. The more we understand what\u0027s going on the better.",
+      "parentUuid": "8cbe9e4f_fb0b4c01",
+      "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
