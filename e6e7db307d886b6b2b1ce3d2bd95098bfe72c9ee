@@ -34,6 +34,24 @@
       "parentUuid": "188c2cfb_88d08304",
       "revId": "e6e7db307d886b6b2b1ce3d2bd95098bfe72c9ee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5932e72_65cd4054",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-10T04:07:45Z",
+      "side": 1,
+      "message": "I have different opinion. Instead of blindly accepting EPERM, one may want to run Ganesha with required privileges as per the need, so may be exiting would be preferred approach.\nYou may want to enhance the function to add required conditions to accept EPERM.",
+      "parentUuid": "e4a5d646_f2ce4a85",
+      "revId": "e6e7db307d886b6b2b1ce3d2bd95098bfe72c9ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
