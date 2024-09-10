@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c01cb75_ddd28854",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-10T04:10:46Z",
+      "side": 1,
+      "message": "I do not agree with blindly accepting EPERM. Someone wants to run Ganesha to with required privileges and make use of the kernel/OS settings.\nSo do not merge both.\nIn case needed, one should update this function to add allowed environments to accept EPERM.",
+      "parentUuid": "19b528ab_cbf01346",
+      "revId": "51e57edf1578c2135b8e43856718e260b2fe4f73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87bcbd3b_7307d584",
