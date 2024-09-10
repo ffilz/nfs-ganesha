@@ -16,6 +16,24 @@
       "message": "This touches the same code as https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1200210\n\nDoes that patch satisfy the need here or do we need to merge the two?",
       "revId": "e6e7db307d886b6b2b1ce3d2bd95098bfe72c9ee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a5d646_f2ce4a85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-09-10T03:30:05Z",
+      "side": 1,
+      "message": "I wasn\u0027t aware of this patch when I created mine. But my failure came not when running on any of the environments mentioned in that patch, so it wouldn\u0027t help in my case. \n\nI don\u0027t see a reason to limit the cases where we accept EPERM and personally I think it is just better to accept it in all cases rather than maintaining a list of environments where it is allowed.",
+      "parentUuid": "188c2cfb_88d08304",
+      "revId": "e6e7db307d886b6b2b1ce3d2bd95098bfe72c9ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
