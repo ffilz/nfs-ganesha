@@ -52,6 +52,24 @@
       "parentUuid": "e4a5d646_f2ce4a85",
       "revId": "e6e7db307d886b6b2b1ce3d2bd95098bfe72c9ee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac308ef5_221fb5f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-09-10T08:11:17Z",
+      "side": 1,
+      "message": "Is there an environment that we will not allow to get EPERM for? If not, then why create an allow list that will search for all environments and not just accept all? \n\nI don\u0027t think encouraging user to escalate permissions is a good thing. It is always recommend to run in as lower privileges as possible and I don\u0027t think this specific change that is only relevant to a very rare use case is a good reason to force permission escalation. \n\nYou want to be able to run Ganesha in containers without permission escalation, but if we use your logic, why don\u0027t we force you to use containers with escalated permissions? It is possible... \n\nThis is an open source project that potentially has a lot of users, not everyone is like us that knows the code base and can send a patch in case Ganesha doesn\u0027t work in their environment. Having a specific allow list of environments that just the devs work on can make it so some users can\u0027t run Ganehsa in their setup and I don\u0027t think this is what we want. \n\nFor this reason I added a warning print. And if a user encounters an issue related to this (which is very unlikely) they can choose to escalate permissions.",
+      "parentUuid": "c5932e72_65cd4054",
+      "revId": "e6e7db307d886b6b2b1ce3d2bd95098bfe72c9ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
