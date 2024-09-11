@@ -917,6 +917,11 @@ struct fd_lru_state {
 	time_t prev_time; /* previous time the gc thread was run. */
 	uint32_t fd_state;
 	uint32_t fd_fallback_limit;
+	/** Limits the FSAL_FD_STATE type fsal_fd opened for
+	 * NFSv4 LOCK and NLM Lock/Share based operations.
+	 * Can be used in future, once we have reaper ready for FSAL_FD_STATE.
+	 * */
+	uint32_t fd_state_limit;
 };
 
 enum fsal_fd_type {
