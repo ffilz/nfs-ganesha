@@ -220,6 +220,8 @@ NFS_CORE_PARAM {}
 
 	Connection_Manager_Timeout_sec(uint32, range 0 to UINT32_MAX, default 2*60)
 
+	Max_Allowed_Locks_Percent(uint32, range 0 to 50, default 45)
+
 NFS_IP_NAME {}
 --------------
 

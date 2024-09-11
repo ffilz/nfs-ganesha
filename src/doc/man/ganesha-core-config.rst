@@ -250,6 +250,15 @@ Unique_Server_Id(uint32, range 0 to UINT32_MAX, default 0)
    unique between ganesha nodes and file write verifier.
    if 0 is supplied server boot epoch time in seconds will be used
 
+Max_Allowed_Locks_Percent(uint32, range 0 to 50, default 45)
+    Max Locks percentage that could be acquired out of the System FD Limit.
+    Each Locks would correspond to reserving a State FD, which is not
+    tracked by the global FD LRU and can't be reaped as well.
+    This value is configured in percentage, with max of 50%,
+    which can be disabled in runtime by setting to Zero, but
+    changing percentage needs Ganesha restart, as it's derived out
+    from the System FD Limits
+
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
 
