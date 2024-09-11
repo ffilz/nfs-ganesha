@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af5348d9_ecada82a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1653,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T08:48:42Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t \"Reaping up to %\" PRIu32 \" fds\"\n+\t\t\t\t \" formeropen\u003d%\" PRIu32",
+      "revId": "d7ecaaed54717d266098373f8f00761fa6f719ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "310de518_94fbd07e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T08:48:42Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\") Exceeded (global_fds \u003d %d + state_fds \u003d %d\"\n+\t\t\t\t\"), waking LRU thread.\",",
+      "revId": "d7ecaaed54717d266098373f8f00761fa6f719ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
