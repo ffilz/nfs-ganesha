@@ -88,6 +88,24 @@
       "parentUuid": "6dfd49a4_f5e02603",
       "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d39d3631_f76f27f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-09-11T08:39:27Z",
+      "side": 1,
+      "message": "Thanks David, for giving a look onto this issue/fix...Like I mentioned earlier, am also rethinking about this fix, as these broadcasts could cause spurious wake ups...\n\nI will update the commit messages, with proper test steps, for all the previous CRs...\n\nSo, for the second question...Yes, like you mentioned on the parallel FD usage by 2 threads, there was a hung seen in Ganesha, for which I made this changes after a short discussion with Frank... After making the LRU cleanup more aggressive, considering the state FDs as well this hung were seen, we saw that the IOs were dead hung on fsal_start_io() -\u003e fsal_start_global_io() -\u003e wait_to_start_io()...\n\nHung Analysis:\n1) Thread1: write2 -\u003e .. -\u003e wait_to_start_io, stop before the loop(io_work:1, fd_work:0) --\u003e while (atomic_fetch_int32_t(\u0026fsal_fd-\u003efd_work)\n2) Thread2: reaper -\u003e lru_try_one -\u003e close_fsal_fd -\u003e fsal_start_fd_work -\u003e increase the fd_work and stop (io_work:1, fd_work:1)\n3) Thread1: Enters above loop, since fd_work !\u003d 0, then io_work -1 and wait PTHREAD_COND_wait(\u0026fsal_fd-\u003eio_work_cond, (io_work:0, fd_work:1)\n4) Thread2: Enters the condition block to dec fd_work and return EBUSY(io_work:0, fd_work:0) -\u003e same as we found in the core file:\n        (gdb) p fsal_fd-\u003eio_work\n        $3 \u003d 0\n        (gdb) p fsal_fd-\u003efd_work\n        $4 \u003d 0\n\n5) And then nobody was trying to wake up Thread1 in this case, then more and more IO thread got hung... Hence I did a broadcast 😊\n\nAfter making this change, the hung was not seen later, but then we hit the FD system limit, as there was no body to clean up the stale State FDs...For fixing this, we need to add some limit for State FDs, which we do not have today in Ganesha...2M was the system FD limit...\n        (gdb) p fsal_fd_global_counter\n        $1 \u003d 56\n        (gdb) p fsal_fd_state_counter\n        $2 \u003d 199829\n\nAlso later we had bought down the below patch as well- https://gerrithub.io/c/ffilz/nfs-ganesha/+/1195471\n\nFinally, like I updated in the community call yesterday, let\u0027s hold this patch to see if there is better fix without broadcast and also more better testings...\n\nPlease lemme know your thoughts @drieber@google.com and @ffilzlnx@mindspring.com...\nLeaving a -1 for now...Though no impacts of this change - can be overridden and merged IN as well, if community agrees...",
+      "parentUuid": "ba37427a_70c07fe2",
+      "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
