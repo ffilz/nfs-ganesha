@@ -369,6 +369,8 @@ static struct config_item core_params[] = {
 		       enable_connection_manager),
 	CONF_ITEM_UI32("Connection_Manager_Timeout_sec", 0, UINT32_MAX, 2 * 60,
 		       nfs_core_param, connection_manager_timeout_sec),
+	CONF_ITEM_UI32("Max_Locks_Allowed_Out_Of_System_FD_Limit", 0, 50, 30,
+		       nfs_core_param, nfs_max_locks_allowed_out_of_system_fd_limit),
 	CONFIG_EOL
 };
 

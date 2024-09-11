@@ -125,9 +125,24 @@ state_status_t _state_add_impl(struct fsal_obj_handle *obj,
 	got_export_ref = true;
 
 	if (pnew_state == NULL) {
-		if (state_type == STATE_TYPE_LOCK)
+		if (state_type == STATE_TYPE_LOCK) {
+			/* If we have allocated too many state FDs already,
+			 * let's stop going ahead and return no resource error
+			 * as we do not have enough resources to process the IO
+			 */
+			if (nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit &&
+				(atomic_fetch_int32_t(&fsal_fd_state_counter) >= 
+				fd_lru_state.fds_hard_limit*nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit/100)) {
+				LogCrit(COMPONENT_STATE,
+				"Too many Locks acquired(cur:%u>=limit:%u)",
+				atomic_fetch_int32_t(&fsal_fd_state_counter),
+				fd_lru_state.fds_hard_limit*nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit/100);
+				status = STATE_RESOURCE;
+				goto errout;
+			}
 			openstate = nfs4_State_Get_Pointer(
 				state_data->lock.openstate_key);
+		}
 
 		pnew_state = op_ctx->fsal_export->exp_ops.alloc_state(
 			op_ctx->fsal_export, state_type, openstate);
