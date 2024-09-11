@@ -43,6 +43,7 @@
 #include "nsm.h"
 #include "log.h"
 #include "fsal.h"
+#include "gsh_config.h"
 
 /**
  * @brief NLM States
@@ -433,6 +434,25 @@ int get_nlm_state(enum state_type state_type, struct fsal_obj_handle *state_obj,
 	if (care == CARE_NOT || care == CARE_OWNER) {
 		hashtable_releaselatched(ht_nlm_states, &latch);
 		return 0;
+	}
+
+	/* For NLM LOCK and SHARE requests,
+	 * If we have allocated too many state FDs already,
+	 * let's stop going ahead and return no resource error.
+	 */
+	if (nfs_param.core_param.max_allowed_locks_pct &&
+		(atomic_fetch_int32_t(&fsal_fd_state_counter) >=
+		fd_lru_state.fd_state_limit)) {
+
+		LogCrit(COMPONENT_STATE,
+			"Too many Locks acquired(cur:%u>=limit:%u)",
+			atomic_fetch_int32_t(&fsal_fd_state_counter),
+			fd_lru_state.fd_state_limit);
+
+		*pstate = NULL;
+		hashtable_releaselatched(ht_nlm_states, &latch);
+
+		return NLM4_DENIED_NOLOCKS;
 	}
 
 	state = op_ctx->fsal_export->exp_ops.alloc_state(op_ctx->fsal_export,

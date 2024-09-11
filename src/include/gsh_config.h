@@ -541,6 +541,14 @@ typedef struct nfs_core_param {
 	    (as a comma-separated list of 3,4.0,4.1,4.2) */
 	unsigned int nfs_rdma_supported_protocol_versions;
 #endif
+	/** Max Locks % that could be acquired out of the System FD Limit.
+	 * Each Locks would correspond to reserving a State FD, which is not
+	 * tracked by the global FD LRU and can't be reaped as well.
+	 * This value is configured in percentage, with max of 50%,
+	 * which can be disabled in runtime by setting to Zero, but
+	 * changing percentage needs Ganesha restart, as it's derived out
+	 * from the System FD Limits */
+	uint32_t max_allowed_locks_pct;
 } nfs_core_parameter_t;
 
 /** @} */

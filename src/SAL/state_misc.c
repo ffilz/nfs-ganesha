@@ -169,6 +169,8 @@ const char *state_err_str(state_status_t err)
 		return "STATE_BADHANDLE";
 	case STATE_BAD_RANGE:
 		return "STATE_BAD_RANGE";
+	case STATE_RESOURCE_LIMIT:
+		return "STATE_RESOURCE_LIMIT";
 	}
 	return "unknown";
 }
@@ -485,6 +487,9 @@ nfsstat4 nfs4_Errno_state(state_status_t error)
 		/* Should not occur */
 		nfserror = NFS4ERR_INVAL;
 		break;
+	case STATE_RESOURCE_LIMIT:
+		nfserror = NFS4ERR_RESOURCE;
+		break;
 	}
 
 	return nfserror;
@@ -632,6 +637,7 @@ nfsstat3 nfs3_Errno_state(state_status_t error)
 		nfserror = NFS3ERR_BADHANDLE;
 		break;
 
+	case STATE_RESOURCE_LIMIT:
 	case STATE_INCONSISTENT_ENTRY:
 	case STATE_HASH_TABLE_ERROR:
 	case STATE_ASYNC_POST_ERROR:

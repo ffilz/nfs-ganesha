@@ -1946,8 +1946,13 @@ err_open:;
 	}
 
 	fd_lru_state.biggest_window =
-		(params->biggest_window * fd_lru_state.fds_system_imposed) /
-		100;
+	    (params->biggest_window * fd_lru_state.fds_system_imposed) / 100;
+
+	fd_lru_state.fd_state_limit =
+	    (nfs_param.core_param.max_allowed_locks_pct) ?
+	    ((fd_lru_state.fds_hard_limit *
+	    nfs_param.core_param.max_allowed_locks_pct) / 100) :
+	    fd_lru_state.fds_hard_limit;
 }
 
 /**
