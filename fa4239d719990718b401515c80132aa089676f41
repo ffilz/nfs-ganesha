@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1adf7050_57979c23",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tif (nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit \u0026\u0026",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ae19d5_4f4efa7d",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t(atomic_fetch_int32_t(\u0026fsal_fd_state_counter) \u003e\u003d",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a5d5d1_f2d38850",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I^I^I(atomic_fetch_int32_t(\u0026fsal_fd_state_counter) \u003e\u003d $",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34aebc48_a43907ab",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tfd_lru_state.fds_hard_limit*nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit/100)) {",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e9038ba_0e27ab74",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\tfd_lru_state.fds_hard_limit*nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit/100);",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ebb962_ab728536",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I(atomic_fetch_int32_t(\u0026fsal_fd_state_counter) \u003e\u003d $",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f9156b_4ed2dc4e",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tfd_lru_state.fds_hard_limit * nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit/100)) {",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d7e980_16816b5d",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tfd_lru_state.fds_hard_limit*nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit/100);",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f854d936_4d162cc0",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c8f897_b2a549f3",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-11T17:15:26Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t       nfs_core_param, nfs_max_locks_allowed_out_of_system_fd_limit),",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
