@@ -483,6 +483,7 @@ int ganeshun_yy_init_parser(char *srcfile, struct parser_state *st)
 	confroot->root.type = TYPE_ROOT;
 	confroot->generation = atomic_inc_uint64_t(&config_generation);
 	st->root_node = confroot;
+	st->root_node->avl_token_initiated = false;
 	ganeshun_yylex_init_extra(st, &st->scanner);
 	rc = new_file(srcfile, st);
 	if (rc == 0)
