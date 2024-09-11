@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "5a1ee956_e78e9a1d",
         "filename": "src/include/abstract_mem.h",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Just ad glist_head list to this structure",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "171f768d_f1857cf3",
         "filename": "src/include/abstract_mem.h",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "No reason to have two globals here. \"struct pool\" should have list element embedded.",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "5851d401_e723970c",
         "filename": "src/include/abstract_mem.h",
@@ -49,10 +50,28 @@
       "message": "With glist this just becomes glist_head",
       "parentUuid": "171f768d_f1857cf3",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcc612cb_2b301747",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-11T08:23:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5851d401_e723970c",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "5d4055ff_5bdb283e",
         "filename": "src/include/abstract_mem.h",
@@ -66,10 +85,10 @@
       "side": 1,
       "message": "Maybe \"Unnamed\" if the name is not provided. Not much memory, and no need to have conditional statements at other places.",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4a512489_5f29eb83",
         "filename": "src/include/abstract_mem.h",
@@ -84,10 +103,28 @@
       "message": "If we do this, it should use a global constant string so that if we do down the road remove pools, we can properly clean up (check if (name !\u003d unnamed) gsh_free(name)).",
       "parentUuid": "5d4055ff_5bdb283e",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea80c751_e2550caf",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-11T08:23:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4a512489_5f29eb83",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "f740a1ee_0d299196",
         "filename": "src/include/abstract_mem.h",
@@ -101,10 +138,10 @@
       "side": 1,
       "message": "Why open-code the list?  Why not use glist?  That way, you don\u0027t need the pool_list_current variable.",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "1c214c64_d20100f3",
         "filename": "src/include/abstract_mem.h",
@@ -119,10 +156,10 @@
       "message": "I thought about this a bit in my review, and then I considered that we never remove list entries. With that we just need a single linked list. Of course saving 8 bytes per pool out of less than 100 pools (if we go wild and put more things into pools) really isn\u0027t much memory.",
       "parentUuid": "f740a1ee_0d299196",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "031bbb71_2e524a9f",
         "filename": "src/include/abstract_mem.h",
@@ -137,10 +174,10 @@
       "message": "We could do \"struct pool *next\" within struct pool if wasting memory is a motivation.",
       "parentUuid": "1c214c64_d20100f3",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "1eb3d30d_56996625",
         "filename": "src/include/abstract_mem.h",
@@ -155,10 +192,28 @@
       "message": "Memory really isn\u0027t a concern, lets just use glist",
       "parentUuid": "031bbb71_2e524a9f",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a98f20_660c86b8",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-11T08:23:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1eb3d30d_56996625",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "5777fd42_175e7de1",
         "filename": "src/include/abstract_mem.h",
@@ -172,10 +227,10 @@
       "side": 1,
       "message": "All this code will be reduced to a couple lines with embedded \"list\" element in \"struct pool\"",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f710e3c7_f4342510",
         "filename": "src/include/abstract_mem.h",
@@ -190,10 +245,28 @@
       "message": "Yes, it just becomes glist_append(\u0026pool_list, \u0026pool-\u003elist)",
       "parentUuid": "5777fd42_175e7de1",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae79a74_fe8fda2a",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-11T08:23:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f710e3c7_f4342510",
+      "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
       "key": {
         "uuid": "b7e817df_ab1b7c95",
         "filename": "src/include/abstract_mem.h",
@@ -207,10 +280,10 @@
       "side": 1,
       "message": "pool_destroy IS called - you need to handle removal from the list, with that we definitely need double linked list.\n\npool_destroy should also throw a LogCrit if the count isn\u0027t 0.",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4a5d057b_ce731bb1",
         "filename": "src/support/server_stats.c",
@@ -224,8 +297,7 @@
       "side": 1,
       "message": "This is a good place for this.",
       "revId": "5923a1917b8f79cf44b0b48327771a3d413ded63",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "3b8f1daf_896a6008",
         "filename": "src/include/abstract_mem.h",
@@ -14,10 +15,28 @@
       "side": 1,
       "message": "mpool_next may be better than mpool_list?",
       "revId": "1fa9f5e1622e20b304110974b1697d6f25091b83",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc60e08_339cc7fd",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-11T08:23:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3b8f1daf_896a6008",
+      "revId": "1fa9f5e1622e20b304110974b1697d6f25091b83",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "1a7e168d_3769ca6b",
         "filename": "src/include/abstract_mem.h",
@@ -31,8 +50,25 @@
       "side": 1,
       "message": "Frank pointed out that this entry needs to be removed in pool_destroy() not sure if anyone calls at this point but we should fix as there is pool_destroy function now.",
       "revId": "1fa9f5e1622e20b304110974b1697d6f25091b83",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc51fb9_cd8af949",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-11T08:23:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1a7e168d_3769ca6b",
+      "revId": "1fa9f5e1622e20b304110974b1697d6f25091b83",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
