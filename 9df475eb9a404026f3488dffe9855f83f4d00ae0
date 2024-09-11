@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nUsage: ganesha_logrotate_mgr \u003cenable|disable|list|change|set-crontab\u003e [options]",
       "revId": "9df475eb9a404026f3488dffe9855f83f4d00ae0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42e5f21_5e9f0bf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-11T12:20:28Z",
+      "side": 1,
+      "message": "Why not just use logrotate(8)?  That\u0027s how Ganesha logs have traditionally been rotated.",
+      "revId": "9df475eb9a404026f3488dffe9855f83f4d00ae0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
