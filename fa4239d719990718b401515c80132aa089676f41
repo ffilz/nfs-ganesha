@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26520503_a4aa2dfc",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-11T18:42:53Z",
+      "side": 1,
+      "message": "Let\u0027s try and keep lines \u003c 80 columns.",
+      "parentUuid": "1adf7050_57979c23",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0ae19d5_4f4efa7d",
         "filename": "src/SAL/nfs4_state.c",
         "patchSetId": 1
@@ -54,6 +72,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27f0cfa0_4eba6100",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-11T18:42:53Z",
+      "side": 1,
+      "message": "And blanks at end of line...",
+      "parentUuid": "21a5d5d1_f2d38850",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35bee3fc_7b9bcb77",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-11T18:42:53Z",
+      "side": 1,
+      "message": "I need to determine if we can fix the clang formatting to better match checkpatch on 80 columns...",
+      "parentUuid": "b0ae19d5_4f4efa7d",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34aebc48_a43907ab",
         "filename": "src/SAL/nfs4_state.c",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2024-09-11T17:15:26Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t\tfd_lru_state.fds_hard_limit*nfs_param.core_param.nfs_max_locks_allowed_out_of_system_fd_limit/100)) {",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2701ca7_528f9154",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-11T18:42:53Z",
+      "side": 1,
+      "message": "Can we pre-calculate this limit instead of calculating each time?",
+      "parentUuid": "34aebc48_a43907ab",
       "revId": "fa4239d719990718b401515c80132aa089676f41",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -150,6 +222,23 @@
       "writtenOn": "2024-09-11T17:15:26Z",
       "side": 1,
       "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "fa4239d719990718b401515c80132aa089676f41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ec3cf9_456dc472",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-11T18:42:53Z",
+      "side": 1,
+      "message": "Could we make this shorter so it\u0027s easier to not blow past 80 columns?",
       "revId": "fa4239d719990718b401515c80132aa089676f41",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
