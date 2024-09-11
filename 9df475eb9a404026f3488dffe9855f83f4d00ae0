@@ -33,6 +33,24 @@
       "message": "Why not just use logrotate(8)?  That\u0027s how Ganesha logs have traditionally been rotated.",
       "revId": "9df475eb9a404026f3488dffe9855f83f4d00ae0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0e1222_6ea4759e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-09-11T12:34:35Z",
+      "side": 1,
+      "message": "The customer wants a command to enable or disable log rotation instead of doing it manually. This command will help avoid manual errors and make it easier to instruct the customer to collect Ganesha logs.",
+      "parentUuid": "d42e5f21_5e9f0bf4",
+      "revId": "9df475eb9a404026f3488dffe9855f83f4d00ae0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
