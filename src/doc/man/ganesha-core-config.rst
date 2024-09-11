@@ -261,6 +261,15 @@ Allow_Set_Io_Flusher_Fail(bool, default false)
   For more info, see:
   https://git.kernel.org/torvalds/p/8d19f1c8e1937baf74e1962aae9f90fa3aeab463
 
+Max_Allowed_Locks_Percent(uint32, range 0 to 50, default 45)
+    Max Locks percentage that could be acquired out of the System FD Limit.
+    Each Locks would correspond to reserving a State FD, which is not
+    tracked by the global FD LRU and can't be reaped as well.
+    This value is configured in percentage, with max of 50%,
+    which can be disabled in runtime by setting to Zero, but
+    changing percentage needs Ganesha restart, as it's derived out
+    from the System FD Limits
+
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
 

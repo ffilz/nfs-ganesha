@@ -551,6 +551,14 @@ typedef struct nfs_core_param {
 	 * For more info, see:
 	 * https://git.kernel.org/torvalds/p/8d19f1c8e1937baf74e1962aae9f90fa3aeab463 */
 	bool allow_set_io_flusher_fail;
+	/** Max Locks % that could be acquired out of the System FD Limit.
+	 * Each Locks would correspond to reserving a State FD, which is not
+	 * tracked by the global FD LRU and can't be reaped as well.
+	 * This value is configured in percentage, with max of 50%,
+	 * which can be disabled in runtime by setting to Zero, but
+	 * changing percentage needs Ganesha restart, as it's derived out
+	 * from the System FD Limits */
+	uint32_t max_allowed_locks_pct;
 } nfs_core_parameter_t;
 
 /** @} */

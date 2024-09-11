@@ -371,6 +371,8 @@ static struct config_item core_params[] = {
 		       nfs_core_param, connection_manager_timeout_sec),
 	CONF_ITEM_BOOL("Allow_Set_Io_Flusher_Fail", false, nfs_core_param,
 		       allow_set_io_flusher_fail),
+	CONF_ITEM_UI32("Max_Allowed_Locks_Percent", 0, 50, 45,
+		       nfs_core_param, max_allowed_locks_pct),
 	CONFIG_EOL
 };
 
