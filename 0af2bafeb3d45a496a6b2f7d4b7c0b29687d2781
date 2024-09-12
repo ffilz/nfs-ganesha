@@ -144,6 +144,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9148ee4e_0c58c9a1",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-12T16:48:06Z",
+      "side": 1,
+      "message": "If the hashes are equal, shouldn\u0027t we compare strings in case there is a hash collision?",
+      "revId": "0af2bafeb3d45a496a6b2f7d4b7c0b29687d2781",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fc1bd06_f694575b",
         "filename": "src/config_parsing/analyse.c",
         "patchSetId": 1
@@ -173,6 +190,41 @@
       "side": 1,
       "message": "Done!",
       "parentUuid": "3fc1bd06_f694575b",
+      "revId": "0af2bafeb3d45a496a6b2f7d4b7c0b29687d2781",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be485d85_9bc4f1b5",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-12T16:48:06Z",
+      "side": 1,
+      "message": "Please add this blank line",
+      "parentUuid": "3fc1bd06_f694575b",
+      "revId": "0af2bafeb3d45a496a6b2f7d4b7c0b29687d2781",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d477448_15f3be38",
+        "filename": "src/config_parsing/analyse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-12T16:48:06Z",
+      "side": 1,
+      "message": "initialized may be more understandable",
       "revId": "0af2bafeb3d45a496a6b2f7d4b7c0b29687d2781",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
