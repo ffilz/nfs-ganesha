@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a83f0b5_35dcf4b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-12T08:25:57Z",
+      "side": 1,
+      "message": "Work on suggestion\nRest all looks good",
+      "revId": "b1b9a10a1c3d333a11d06465331d2af25ec52378",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37c28c4_b7749f37",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-12T08:25:57Z",
+      "side": 1,
+      "message": "```suggestion\nstatic void print_token(FILE *output, struct avltree_node *node)\n```static void print_token_tree(FILE *output, struct avltree_node *node)",
+      "revId": "b1b9a10a1c3d333a11d06465331d2af25ec52378",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
