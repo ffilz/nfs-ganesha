@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d763be_cb5807af",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1038288
+      },
+      "writtenOn": "2024-09-12T06:37:37Z",
+      "side": 1,
+      "message": "Previously string comparison operation was reduced to hash comparison which gave good result in terms of time of parsing. But, parser was maintaining a table of unique tokens in a linked list, and every time a new token was being found there was a lookup being done in the linked list which was O(n) lookup. If the token was found in the list a char* being returned otherwise new token was being added to the linked list.\nHere, I have change this token table from a linkedlist to an avl tree. Now, the lookup can be done in O(logn).\nThe previous change was giving time around 120s for 20,000 export blocks. But, if you increase the number of client blocks in each export blocks by a factor of 2. This time of parsing will grow up to 500s. Because the parsing is being done in O(n^2).\nBut, this change has brought down the parsing time to O(nlogn).\nNow, even with 1,00,000 exports we can get parsing done in 2-3s.",
+      "parentUuid": "baa4e44b_f2ed84ae",
+      "revId": "0af2bafeb3d45a496a6b2f7d4b7c0b29687d2781",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "52c14919_b157895c",
