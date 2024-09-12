@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad254828_c8cbd5ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-12T14:43:12Z",
+      "side": 1,
+      "message": "Great work.  A few comments.",
+      "revId": "4391ced401869d2faf961a6b069e133cfe6ffe98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1835db4_c9e6a887",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-12T14:43:12Z",
+      "side": 1,
+      "message": "This looks like an extra free.  Above, you allocated both new_tok and new_tok-\u003etoken in one allocation, so the free below should be enough.",
+      "revId": "4391ced401869d2faf961a6b069e133cfe6ffe98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1a70c39_476f646c",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 3
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-12T14:43:12Z",
+      "side": 1,
+      "message": "It\u0027s probably best to just avltree_init() here, rather than tracking whether it\u0027s been initialized.",
+      "revId": "4391ced401869d2faf961a6b069e133cfe6ffe98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
