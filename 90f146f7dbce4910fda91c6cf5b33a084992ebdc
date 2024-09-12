@@ -106,6 +106,24 @@
       "parentUuid": "ba37427a_70c07fe2",
       "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7f3879_ce658fdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021774
+      },
+      "writtenOn": "2024-09-12T19:17:03Z",
+      "side": 1,
+      "message": "When the LRU reaches this step:\n```\n4) Thread2: Enters the condition block to dec fd_work and return EBUSY(io_work:0, fd_work:0)\n```\nthere is a `fsal_complete_fd_work(fsal_fd)` call right before returning EBUSY. That decrements fd_work and does a broadcast of `\u0026fsal_fd-\u003eio_work_cond`. So I still don\u0027t understand the hung.\n\nI don\u0027t have a clear picture or a clear suggestion, just one vague thought: maybe wait_to_start_io should pay attention to `fsal_fd-\u003elru_reclaim \u003e 0`, in this situation we clearly know the LRU thread is trying to close this fsal_fd. Just a thought...",
+      "parentUuid": "d39d3631_f76f27f6",
+      "revId": "90f146f7dbce4910fda91c6cf5b33a084992ebdc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
