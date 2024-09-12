@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4133f44e_956a84e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-12T08:39:30Z",
+      "side": 1,
+      "message": "Apologies for one more cycle\nPlease work on suggestion",
+      "revId": "20cc4d7d2e4d43d75703dab1614b5ac00cbb0a7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4016650_702552df",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-12T08:39:30Z",
+      "side": 1,
+      "message": "```suggestion\n\tMax_Locks_Allowed_Percent(uint32, range 0 to 50, default 45)\n```Max_Allowed_Locks_Percent(uint32, range 0 to 50, default 45)",
+      "revId": "20cc4d7d2e4d43d75703dab1614b5ac00cbb0a7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ebaaea2_b3a54bbe",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-09-12T08:39:30Z",
+      "side": 1,
+      "message": "```suggestion\n\tuint32_t nfs_max_locks_allowed_pct;\n```uint32_t max_allowed_locks_pct;",
+      "revId": "20cc4d7d2e4d43d75703dab1614b5ac00cbb0a7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
