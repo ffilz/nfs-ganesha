@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05c7fb7_318b3187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-09-13T12:01:12Z",
+      "side": 1,
+      "message": "Hi @martin@uni-mainz.de,\n\nCan you please add a few words to the commit message explaining why `fd \u003d\u003d -1` if this is a referral?  I\u0027d like to understand why the change is necessary, so I can learn something here.\n\nThanks!",
+      "revId": "22a404c48c9059b3d98b26fdfb60046c7c7ee9dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b903af0_542334bc",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-09-13T12:01:12Z",
+      "side": 1,
+      "message": "s/skiping/skipping/",
+      "revId": "22a404c48c9059b3d98b26fdfb60046c7c7ee9dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
