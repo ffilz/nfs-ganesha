@@ -60,15 +60,15 @@
  */
 pthread_rwlock_t export_opt_lock;
 
-#define GLOBAL_EXPORT_PERMS_INITIALIZER(self)                                                                                                                                                                        \
-	.def.anonymous_uid = ANON_UID, .def.anonymous_gid = ANON_GID,                                                                                                                                                \
-	.def.expire_time_attr =                                                                                                                                                                                      \
-		EXPORT_DEFAULT_CACHE_EXPIRY, /* Note: Access_Type defaults to None on purpose     */ /*       And no PROTO is included - that is filled   */ /*       from nfs_param.core_param.core_options.     */ \
-		.def.options = EXPORT_OPTION_ROOT_SQUASH |                                                                                                                                                           \
-			       EXPORT_OPTION_NO_ACCESS |                                                                                                                                                             \
-			       EXPORT_OPTION_AUTH_DEFAULTS |                                                                                                                                                         \
-			       EXPORT_OPTION_XPORT_DEFAULTS |                                                                                                                                                        \
-			       EXPORT_OPTION_NO_DELEGATIONS,                                                                                                                                                         \
+#define GLOBAL_EXPORT_PERMS_INITIALIZER(self)                                                                                        \
+	.def.anonymous_uid = ANON_UID, .def.anonymous_gid = ANON_GID,                                                                \
+	.def.expire_time_attr = /* Note: Access_Type defaults to None on purpose     */                                              \
+		EXPORT_DEFAULT_CACHE_EXPIRY, /* And no PROTO is included - that is filled from nfs_param.core_param.core_options. */ \
+		.def.options = EXPORT_OPTION_ROOT_SQUASH |                                                                           \
+			       EXPORT_OPTION_NO_ACCESS |                                                                             \
+			       EXPORT_OPTION_AUTH_DEFAULTS |                                                                         \
+			       EXPORT_OPTION_XPORT_DEFAULTS |                                                                        \
+			       EXPORT_OPTION_NO_DELEGATIONS,                                                                         \
 	.def.set = UINT32_MAX, .clients = { &self.clients, &self.clients },
 
 struct global_export_perms export_opt = { GLOBAL_EXPORT_PERMS_INITIALIZER(
