@@ -293,8 +293,8 @@ try_drain_self(connection_manager__client_t *client, uint32_t timeout_sec)
 		return CONNECTION_MANAGER__DRAIN__SUCCESS;
 	} else {
 		return wait_result == CONDITION_WAIT__TIMEOUT ?
-				     CONNECTION_MANAGER__DRAIN__FAILED_TIMEOUT :
-				     CONNECTION_MANAGER__DRAIN__FAILED;
+			       CONNECTION_MANAGER__DRAIN__FAILED_TIMEOUT :
+			       CONNECTION_MANAGER__DRAIN__FAILED;
 	}
 }
 
@@ -344,8 +344,8 @@ connection_manager__drain_and_disconnect_local(sockaddr_t *client_address)
 		wait_for_state_change(client);
 		result = (client->state ==
 			  CONNECTION_MANAGER__CLIENT_STATE__DRAINED) ?
-				       CONNECTION_MANAGER__DRAIN__SUCCESS :
-				       CONNECTION_MANAGER__DRAIN__FAILED;
+				 CONNECTION_MANAGER__DRAIN__SUCCESS :
+				 CONNECTION_MANAGER__DRAIN__FAILED;
 		break;
 	}
 	default: {
