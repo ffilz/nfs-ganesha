@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "618abce8_1d361e26",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-09-16T14:48:10Z",
+      "side": 1,
+      "message": "Thanks for the feedback! I understand the use of maintainer mode, but I was thinking it might be beneficial to enable these flags (and potentially more) for all builds once the current issues are resolved. This could help catch more issues earlier and improve code quality across the board, even in standard compilations. What do you think?\nWe do it in our builds as we build normally when we build manually or in the CI pipeline (we want to keep on the same compilation process)",
+      "parentUuid": "cdc41ea0_dfa9e7af",
+      "revId": "71703b55d6a10600e7a968623b2d96d522348e5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a028dc1_fbd55935",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
         "patchSetId": 2
