@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d619747_820aa54d",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T11:25:38Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tint __attribute__((unused)) rc \u003d pthread_cond_wait(data-\u003efsa_cond, data-\u003efsa_mutex);",
+      "revId": "d87bfa8303e62e590745494746968f8db441faed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d72ea92_79b69e78",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1965,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T11:25:38Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tint __attribute__((unused)) rc \u003d pthread_cond_wait(data-\u003efsa_cond, data-\u003efsa_mutex);",
+      "revId": "d87bfa8303e62e590745494746968f8db441faed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0426be0d_a4cc8fdf",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T11:25:38Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tbool __attribute__((unused)) res \u003d set_attribute_in_bitmap(\u0026bits, attr);",
+      "revId": "d87bfa8303e62e590745494746968f8db441faed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6575d093_ff056861",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3584,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T11:25:38Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\tbool __attribute__((unused)) res \u003d set_attribute_in_bitmap(bitmap,",
+      "revId": "d87bfa8303e62e590745494746968f8db441faed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff627563_ae3c17fb",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3182,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T11:25:38Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tint32_t __attribute__((unused)) ref \u003d atomic_dec_int32_t(\u0026obj_hdl-\u003eexp_refcnt);",
+      "revId": "d87bfa8303e62e590745494746968f8db441faed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
