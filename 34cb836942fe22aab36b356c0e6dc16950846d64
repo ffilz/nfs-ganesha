@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a70eb4e_c39ea481",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-16T14:03:39Z",
+      "side": 1,
+      "message": "I suspect it\u0027s better to unconditionally set \"invalidate\" to either true or false, rather than depending on the caller to initialize it.",
+      "revId": "34cb836942fe22aab36b356c0e6dc16950846d64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
