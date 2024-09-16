@@ -315,9 +315,6 @@ not_junction:
 
 	/* Bits that don't require allocation */
 	if (xdr_getpos(&tracker->xdr) + BASE_ENTRY_SIZE > mem_avail) {
-		if (!tracker->has_entries) {
-			tracker->error = NFS4ERR_TOOSMALL;
-		}
 		LogDebug(COMPONENT_NFS_READDIR,
 			 "Skipping because too small for BASE_ENTRY_SIZE %d",
 			 (int)BASE_ENTRY_SIZE);
@@ -334,9 +331,6 @@ not_junction:
 	if (xdr_getpos(&tracker->xdr) + BASE_ENTRY_SIZE +
 		    RNDUP(name.utf8string_len) >
 	    mem_avail) {
-		if (!tracker->has_entries) {
-			tracker->error = NFS4ERR_TOOSMALL;
-		}
 		LogDebug(COMPONENT_NFS_READDIR,
 			 "Skipping because of name %s too long %d",
 			 (char *)cb_parms->name, (int)name.utf8string_len);
@@ -467,6 +461,9 @@ server_fault:
 	tracker->error = NFS4ERR_SERVERFAULT;
 
 failure:
+
+	if (!tracker->has_entries && tracker->error == NFS4_OK)
+		tracker->error = NFS4ERR_TOOSMALL;
 
 	/* Reset to where we started this entry and encode a boolean
 	 * false instead (entry_follows is false).
