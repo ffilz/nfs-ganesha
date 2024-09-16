@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22d418f_de1f8d45",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:20:11Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!tracker-\u003ehas_entries \u0026\u0026 tracker-\u003eerror \u003d\u003d NFS4_OK) {\n+\t\ttracker-\u003eerror \u003d NFS4ERR_TOOSMALL;\n+\t}",
+      "revId": "0446c72968903a6b3d04a9140e08fd5f70a94023",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
