@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b1262c3_91b902fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-16T17:30:13Z",
+      "side": 1,
+      "message": "I\u0027m not a fan of adding build.sh.  It\u0027s super limited (for example hardcoded -j16).  I\u0027ve yet to see a good one of these in any project, even Ceph, which has a much more flexible version.\n\nUsing cmake3 is fine.",
+      "revId": "b0bf881ffded2853c536dfe6440438433094e7c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2391f86_772d1260",
