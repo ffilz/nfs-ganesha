@@ -16,6 +16,24 @@
       "message": "I suspect it\u0027s better to unconditionally set \"invalidate\" to either true or false, rather than depending on the caller to initialize it.",
       "revId": "34cb836942fe22aab36b356c0e6dc16950846d64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2070592a_66353293",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-16T17:30:39Z",
+      "side": 1,
+      "message": "I was originally coding it that way, but it seemed cleaner to initialize the bool to false in the caller. Then it assures the bool is set to false whether it calls this function or not. And then it\u0027s a bit redundant to check if the param is non-NULL and set it to false at the top.",
+      "parentUuid": "5a70eb4e_c39ea481",
+      "revId": "34cb836942fe22aab36b356c0e6dc16950846d64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
