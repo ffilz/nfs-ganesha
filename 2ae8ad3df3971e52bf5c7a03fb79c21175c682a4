@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee2d02a5_f42eff92",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define GLOBAL_EXPORT_PERMS_INITIALIZER(self)                                                                                   \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c0d0e2_e66af994",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t.def.anonymous_uid \u003d ANON_UID, .def.anonymous_gid \u003d ANON_GID,                                                           \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61440035_63ba7d01",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t.def.expire_time_attr \u003d                                                                                                 \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de28361a_974b7817",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tEXPORT_DEFAULT_CACHE_EXPIRY, /* Note: Access_Type defaults to None on purpose     */                            \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00b72b15_f5f491a9",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/*       And no PROTO is included - that is filled   */ /*       from nfs_param.core_param.core_options.     */ \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eed3ceb2_b5166409",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t.def.options \u003d EXPORT_OPTION_ROOT_SQUASH |                                                                      \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f4ff33_4318ea59",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_NO_ACCESS |                                                                        \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022a6a5f_fb141789",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_AUTH_DEFAULTS |                                                                    \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f8b2c2_2a2362e5",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_XPORT_DEFAULTS |                                                                   \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f2d7a9_8a7d648c",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:51:12Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_NO_DELEGATIONS,                                                                    \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
