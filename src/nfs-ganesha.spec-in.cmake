@@ -574,6 +574,7 @@ cmake3 .	-DCMAKE_BUILD_TYPE=Debug			\
 	-D_MSPAC_SUPPORT=%{use_mspac_support}		\
 	-DSANITIZE_ADDRESS=%{use_sanitize_address}	\
 	-DUSE_LEGACY_PYTHON_INSTALL=%{use_legacy_python_install}	\
+	-DUSE_NFSIDMAP=OFF	\
 %if %{with jemalloc}
 	-DALLOCATOR=jemalloc
 %endif
