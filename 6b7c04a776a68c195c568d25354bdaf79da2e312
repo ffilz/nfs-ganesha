@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c9a9091_dd4fbc3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-16T13:53:09Z",
+      "side": 1,
+      "message": "Looks good.  A few potential improvements.",
+      "revId": "6b7c04a776a68c195c568d25354bdaf79da2e312",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f75eb2b_d72f8da0",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-16T13:53:09Z",
+      "side": 1,
+      "message": "I don\u0027t think this check is necessary, since you already set fd_state_limit to max limit if this was zero.  In fact, I think we want to do the check in that case, or we\u0027ll exceed max, and possibly error out.",
+      "revId": "6b7c04a776a68c195c568d25354bdaf79da2e312",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3905b2_ca3c6ffa",
+        "filename": "src/SAL/nlm_state.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-16T13:53:09Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "6b7c04a776a68c195c568d25354bdaf79da2e312",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fad5af8_ac1ef6b6",
+        "filename": "src/include/gsh_status.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-16T13:53:09Z",
+      "side": 1,
+      "message": "I think this needs to be handled in nfs4_Errno_state() and nfs3_Errno_state(), unless NFS4ERR_INVAL is the correct translation.",
+      "revId": "6b7c04a776a68c195c568d25354bdaf79da2e312",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
