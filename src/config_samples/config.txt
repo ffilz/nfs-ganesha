@@ -834,6 +834,8 @@ LOG { FORMAT {} }
 
 	OP_ID(bool, default false)
 
+	CLIENT_REQ_XID(bool, default false)
+
 
 MDCACHE {}
 ----------
