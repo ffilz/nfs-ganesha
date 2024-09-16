@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b07d5e_62d2bf28",
+        "filename": "src/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-16T17:11:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f2391f86_772d1260",
+      "revId": "b0bf881ffded2853c536dfe6440438433094e7c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "025820fa_0af7b419",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-16T11:37:45Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+  ${CMAKE} .  -DCMAKE_BUILD_TYPE\u003dRelWithDebInfo -DUSE_ADMIN_TOOLS\u003dON -DUSE_GUI_ADMIN_TOOLS\u003dOFF -DUSE_DBUS\u003dON",
+      "revId": "b0bf881ffded2853c536dfe6440438433094e7c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0550054c_e342e2e2",
+        "filename": "src/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-16T17:11:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "025820fa_0af7b419",
       "revId": "b0bf881ffded2853c536dfe6440438433094e7c2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
