@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb1acaef_4772ade7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-16T17:18:23Z",
+      "side": 1,
+      "message": "Code changes are all find, continuing discussion of the compile flag changes and when to make them.",
+      "revId": "71703b55d6a10600e7a968623b2d96d522348e5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdc41ea0_dfa9e7af",
@@ -56,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "873ca0f8_49709ae6",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-16T17:18:23Z",
+      "side": 1,
+      "message": "Let\u0027s turn any of these we don\u0027t have in maintainer mode on (we need to make sure that has ALL the warnings we expect to be handled).\n\nI\u0027ll defer to Kaleb on what to enable for production builds, he\u0027s the one who does all the packaging.",
+      "parentUuid": "e1218c05_8c215e53",
+      "revId": "71703b55d6a10600e7a968623b2d96d522348e5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a028dc1_fbd55935",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
         "patchSetId": 2
@@ -67,6 +102,24 @@
       "writtenOn": "2024-09-16T11:40:44Z",
       "side": 1,
       "message": "ERROR: space prohibited after that \u0027*\u0027 (ctx:WxW)\n+\tstruct avltree_node __attribute__((unused)) * node;\n \t                                            ^",
+      "revId": "71703b55d6a10600e7a968623b2d96d522348e5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ef41fe_7c9d4094",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-16T17:18:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3a028dc1_fbd55935",
       "revId": "71703b55d6a10600e7a968623b2d96d522348e5a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
