@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1218c05_8c215e53",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-16T17:01:13Z",
+      "side": 1,
+      "message": "I\u0027m definitely against having -Werror in the release version of the code.  I used to be a Gentoo maintainer, and upstream packages that had -Werror on by default were a huge problem, because it meant we had to patch it out of the build.  There are too many different systems with too many different versions of compilers for this to be feasible.  Once you turn off -Werror, it\u0027s debatable whether or not the other flags are useful.  I don\u0027t have a strong opinion on that.",
+      "parentUuid": "618abce8_1d361e26",
+      "revId": "71703b55d6a10600e7a968623b2d96d522348e5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a028dc1_fbd55935",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
         "patchSetId": 2
