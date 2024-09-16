@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f73ec5b_037d7e56",
+        "filename": "src/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:55:16Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+  ${CMAKE} .  -DCMAKE_BUILD_TYPE\u003dDebug -DUSE_ADMIN_TOOLS\u003dON -DUSE_GUI_ADMIN_TOOLS\u003dOFF -DUSE_DBUS\u003dON",
+      "revId": "cf81fa698d3979b875b85385d2d242ba7302d7e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e80ba44b_4650431e",
+        "filename": "src/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-16T10:55:16Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+  ${CMAKE} .  -DCMAKE_BUILD_TYPE\u003dRelWithDebInfo -DUSE_ADMIN_TOOLS\u003dON -DUSE_GUI_ADMIN_TOOLS\u003dOFF -DUSE_DBUS\u003dON",
+      "revId": "cf81fa698d3979b875b85385d2d242ba7302d7e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
