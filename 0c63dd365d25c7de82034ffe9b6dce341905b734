@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9aea546_5ef6079b",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2088,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-17T19:19:54Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tstruct glist_head *curr_node, *next_node;\n+\t\t\tpthread_mutex_lock(\u0026clientid-\u003ecid_mutex);",
+      "revId": "0c63dd365d25c7de82034ffe9b6dce341905b734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8da8d6b7_ef9ed063",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2090,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-17T19:19:54Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\t\t\tglist_for_each_safe(\n+\t\t\t\tcurr_node, next_node,\n+\t\t\t\t\u0026clientid-\u003ecid_cb.v41.cb_session_list)\n+\t\t\t{",
+      "revId": "0c63dd365d25c7de82034ffe9b6dce341905b734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
