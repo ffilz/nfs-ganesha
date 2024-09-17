@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86123c8e_51a4eb1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-09-17T05:37:20Z",
+      "side": 1,
+      "message": "You are right regarding the commit message and I fixed it\n\nIt is not disabling the idmapping, it is just disabling the reliance of libnfsidmap for it in favor of using the pw-utils functions to perform the idmapping.\n\nWhen someone wants to use libnfsidmap, they will need to specifically configure it- http://linux.die.net/man/5/idmapd.conf\n\nSo in that case it would be better that they would specifically turn it on\nThat\u0027s also adds an additional dependency while building",
+      "parentUuid": "0c6597e2_24954cef",
+      "revId": "c771982c609ad574f7bf808b0b0df85e9d5d0721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b69dc9c6_ef787f46",
