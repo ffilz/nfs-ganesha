@@ -16,6 +16,23 @@
       "message": "Is there any reason not to just include this with the patch that uses it?\n\nIt will make review a bit easier.",
       "revId": "ddf6e5207bf4753e74702261229991815bd58987",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63922fdf_b2a26a79",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-17T19:20:18Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\tglist_for_each_safe(curr_node, next_node, \u0026connections_copy)\n+\t{",
+      "revId": "ddf6e5207bf4753e74702261229991815bd58987",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
