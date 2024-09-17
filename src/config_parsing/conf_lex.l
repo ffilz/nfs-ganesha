@@ -517,7 +517,7 @@ static int process_dir(char *d_name, struct parser_state *st)
 	struct dirent *dir;
 	void *yyscanner = st->scanner;
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
-	char fname[MAXPATHLEN], dname[MAXPATHLEN], *tmp_dpath = NULL;
+	char fname[MAXPATHLEN+1], dname[MAXPATHLEN+1], *tmp_dpath = NULL;
 	char *pattern = NULL , *laststr = NULL, *dir_path = NULL;
 	int rc = 0, dir_strlen;
 
