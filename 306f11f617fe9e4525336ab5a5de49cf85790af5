@@ -16,6 +16,24 @@
       "message": "Is there a reason for removing this? We still only call rpcsec_gss_fetch_managed_groups with _HAVE_GSSAPI set",
       "revId": "306f11f617fe9e4525336ab5a5de49cf85790af5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9118b55_9abb5f8e",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-09-17T05:31:38Z",
+      "side": 0,
+      "message": "Yes, thais is the reason, that the call is disabled so it is redundant to add it here as well",
+      "parentUuid": "f76109fb_9c69fe02",
+      "revId": "306f11f617fe9e4525336ab5a5de49cf85790af5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
