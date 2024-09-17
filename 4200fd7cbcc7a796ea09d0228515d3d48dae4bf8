@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "346900eb_f69dc605",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-17T18:31:17Z",
+      "side": 1,
+      "message": "Hmm, maybe this should use PTHREAD_COND_wait for consistency?\n\nThough sadly we don\u0027t use the PTHREAD_XYZ_abc macros consistently... But anywhere we are just doing this kind of assert or abort check we should use them.",
+      "revId": "4200fd7cbcc7a796ea09d0228515d3d48dae4bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2178cbef_b8c16eea",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-17T18:31:17Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "4200fd7cbcc7a796ea09d0228515d3d48dae4bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
