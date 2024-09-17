@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d43daf02_e029d6b6",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-17T19:18:28Z",
+      "side": 1,
+      "message": "ERROR: \"foo * bar\" should be \"foo *bar\"\n+int nfs41_Session_Destroy_All_Connections(nfs41_session_t * session)",
+      "revId": "4a2146ff984983084cba04e3faef9854a8309d69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3e3abd_b8e3b5a9",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-17T19:18:28Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\tglist_for_each_safe(curr_node, next_node, \u0026connections_copy)\n+\t{",
+      "revId": "4a2146ff984983084cba04e3faef9854a8309d69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
