@@ -1056,6 +1056,8 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 	uint64_t change;
 	bool need_acl = false, kill_entry = false;
 
+	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+
 	change = entry->attrs.change;
 
 	subcall(status = entry->sub_handle->obj_ops->setattr2(
@@ -1076,8 +1078,8 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 		need_acl = true;
 	}
 
-	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
 	status2 = mdcache_refresh_attrs(entry, need_acl, false, false, NULL);
+
 	if (FSAL_IS_ERROR(status2)) {
 		/* Assume that the cache is bogus now */
 		atomic_clear_uint32_t_bits(&entry->mde_flags,
@@ -1094,8 +1096,11 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 			(long long)change, (long long)entry->attrs.change);
 		entry->attrs.change = change + 1;
 	}
-	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+
 out:
+
+	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+
 	if (kill_entry)
 		mdcache_kill_entry(entry);
 
