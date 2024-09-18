@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4967f88c_822949c7",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T11:39:31Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_client *const client \u003d lookup_client(args, \u0026errormsg);\n+\tif (client \u003d\u003d NULL) {",
+      "revId": "e5148ee7f989ac9390f6ff7273b37734257eaf5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
