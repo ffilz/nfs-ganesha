@@ -608,14 +608,19 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 		} else {
 #ifdef USE_NFSIDMAP
 			if (group) {
+				now_mono(&s_time);
 				rc = nfs4_gid_to_name(id, owner_domain_addr,
 						      namebuff,
 						      NFS4_MAX_DOMAIN_LEN + 1);
+				now_mono(&e_time);
 			} else {
+				now_mono(&s_time);
 				rc = nfs4_uid_to_name(id, owner_domain_addr,
 						      namebuff,
 						      NFS4_MAX_DOMAIN_LEN + 1);
+				now_mono(&e_time);
 			}
+
 			idmapper_monitoring__external_request(
 				group ? IDMAPPING_GID_TO_GROUP :
 					IDMAPPING_UID_TO_UIDGID,
