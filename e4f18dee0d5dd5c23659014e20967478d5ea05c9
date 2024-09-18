@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409c7d51_8f50f8fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2024-09-18T17:39:42Z",
+      "side": 1,
+      "message": "I think, in practice, nfsidmap is what most people and distributions use, so I can\u0027t really imagine a rationale for disabling it by default.\n\nI\u0027d be more likely to say yes to a change like this if the cmake logic was changed to detect whether nfsidmap-devel or pw-utils(-dev) is installed and automatically configure accordingly.\n\nAnd out of curiosity, which distros have pw-utils? It\u0027s not in Fedora, CentOS, or RHEL, and I don\u0027t find it on Debian or Ubuntu. (Didn\u0027t check SUSE.)",
+      "revId": "e4f18dee0d5dd5c23659014e20967478d5ea05c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
