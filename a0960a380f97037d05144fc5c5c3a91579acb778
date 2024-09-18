@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f281455e_bce07700",
+        "filename": "src/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T07:17:37Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+  ${CMAKE} .  -DCMAKE_BUILD_TYPE\u003dDebug -DUSE_ADMIN_TOOLS\u003dON -DUSE_GUI_ADMIN_TOOLS\u003dOFF -DUSE_DBUS\u003dON -DUSE_NFSIDMAP\u003dOFF",
+      "revId": "a0960a380f97037d05144fc5c5c3a91579acb778",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261e274d_886dd33b",
+        "filename": "src/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T07:17:37Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+  ${CMAKE} .  -DCMAKE_BUILD_TYPE\u003dRelWithDebInfo -DUSE_ADMIN_TOOLS\u003dON -DUSE_GUI_ADMIN_TOOLS\u003dOFF -DUSE_DBUS\u003dON -DUSE_NFSIDMAP\u003dOFF",
+      "revId": "a0960a380f97037d05144fc5c5c3a91579acb778",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
