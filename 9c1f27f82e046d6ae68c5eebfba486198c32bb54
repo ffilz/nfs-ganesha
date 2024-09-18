@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe764030_d755dc01",
+        "filename": "src/MainNFSD/nfs_lib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T19:44:20Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// nfs_config_path is allocated only if ganesha_conf is not null.",
+      "revId": "9c1f27f82e046d6ae68c5eebfba486198c32bb54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
