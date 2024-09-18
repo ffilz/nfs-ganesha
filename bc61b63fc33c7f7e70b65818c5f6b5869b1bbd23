@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d21de5e_72fbae11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T19:42:27Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\ndbus-send --system --dest\u003dorg.ganesha.nfsd --type\u003dmethod_call /org/ganesha/nfsd/admin org.ganesha.nfsd.admin.reread_config",
+      "revId": "bc61b63fc33c7f7e70b65818c5f6b5869b1bbd23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d79357_41026834",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T19:42:27Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tDBusMessageIter iter;\n+\tdbus_message_iter_init_append(reply, \u0026iter);",
+      "revId": "bc61b63fc33c7f7e70b65818c5f6b5869b1bbd23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1178123a_7c515c80",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T19:42:27Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tbool success \u003d reread_config();\n+\tif (!success) {",
+      "revId": "bc61b63fc33c7f7e70b65818c5f6b5869b1bbd23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020dd6df_b11f5fa4",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-18T19:42:27Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!success) {\n+\t\terrormsg \u003d \"Failed to reread config\";\n+\t}",
+      "revId": "bc61b63fc33c7f7e70b65818c5f6b5869b1bbd23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
