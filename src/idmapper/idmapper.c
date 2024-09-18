@@ -965,7 +965,7 @@ static bool idmapname2id(char *name, size_t len, uint32_t *id,
 
 	if (!idmapping_enabled) {
 		LogWarn(COMPONENT_IDMAPPER,
-			"Idmapping is disabled. idmap-name-to-id skipped.");
+			"Idmapping is disabled. idmapname2id skipped.");
 		return false;
 	}
 
@@ -1226,7 +1226,7 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 
 	if (!idmapping_enabled) {
 		LogWarn(COMPONENT_IDMAPPER,
-			"Idmapping is disabled. principal-to-uid skipped.");
+			"Idmapping is disabled. principal2uid skipped.");
 		return false;
 	}
 
