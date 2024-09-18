@@ -200,6 +200,7 @@ bool set_idmapping_status(bool status_enabled)
 	/* Clear idmapper data */
 	idmapper_clear_cache();
 	idmapper_clear_owner_domain();
+	idmapper_negative_cache_clear();
 
 	/* Clear uid2grp data */
 	uid2grp_clear_cache();
