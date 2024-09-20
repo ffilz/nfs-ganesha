@@ -16,6 +16,57 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n- The intention behind introducing a new compiler flag was to eliminate lengthy file names in Ganesha logs.",
       "revId": "f0d9fe97d33602dc376e924bd8e72be3c7fa54ee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c64625_f897188f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-20T16:40:21Z",
+      "side": 1,
+      "message": "This looks like a mixture of merged commit messages.  Can this be re-written to just describe what\u0027s being done?  (Note this should work on a lot more than Rocky).",
+      "revId": "f0d9fe97d33602dc376e924bd8e72be3c7fa54ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c29212c_56bbd97d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-20T16:40:21Z",
+      "side": 1,
+      "message": "This looks like a good move, I think.  A couple of questions.",
+      "revId": "f0d9fe97d33602dc376e924bd8e72be3c7fa54ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "586a55a3_ebb44630",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-20T16:40:21Z",
+      "side": 1,
+      "message": "How about \"\u003d./\" at the end?  It doesn\u0027t add much, and makes them \"real\" paths.  (This is what\u0027s suggested in the gcc manpage, which is why I bring it up)",
+      "revId": "f0d9fe97d33602dc376e924bd8e72be3c7fa54ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
