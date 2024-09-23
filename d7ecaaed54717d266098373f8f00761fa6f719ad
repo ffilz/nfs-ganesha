@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b54f74df_a00d5a4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T23:37:42Z",
+      "side": 1,
+      "message": "Yea, that\u0027s a good point. I\u0027m not sure this actually is the path we want to take.\n\nWe should limit the number of state fds.\n\nMaybe we should dynamically float the high water and low water numbers for global fs based on the fd limit - the number of open state fd?\n\nOr maybe the global fd limits are based on the fd limit - the max number of state fd?\n\nLet\u0027s give this more thought.\n\nAlso, we need to consider how to limit opens for FSALs where an open doesn\u0027t actually use a system fd, so we might not want to run with a large ulimit for fds...",
+      "parentUuid": "481467f4_194e4487",
+      "revId": "d7ecaaed54717d266098373f8f00761fa6f719ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af5348d9_ecada82a",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 5
