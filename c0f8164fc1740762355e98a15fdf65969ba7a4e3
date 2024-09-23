@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2580efd1_4b04ed96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "A lot to review here, but responding to the checkpatch issues...",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce7eab16_7872e8ff",
         "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
         "patchSetId": 3
@@ -14,6 +31,24 @@
       "writtenOn": "2024-09-23T13:33:36Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tclient_owner4 *const clientowner \u003d \u0026arg_EXCHANGE_ID4-\u003eeia_clientowner;\n \t              ^",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93b8b051_f29bddd3",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ce7eab16_7872e8ff",
       "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -35,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b27f71_f92ff1e5",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "54f35142_3277ac66",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a38fbd61_9a84f4cd",
@@ -48,6 +101,24 @@
       "writtenOn": "2024-09-23T13:33:36Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\tconst LOCK4denied *const denied \u003d\n \t\t                  ^",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37cb1ae0_9aaff465",
+        "filename": "src/Protocols/NFS/nfs4_op_lockt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a38fbd61_9a84f4cd",
       "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +140,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbbfe4e7_9c165ce1",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "170aa7b6_7dd1b8cc",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "450c1d25_48d65d8f",
@@ -82,6 +171,24 @@
       "writtenOn": "2024-09-23T13:33:36Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tREAD4args *const arg_READ4 \u003d \u0026op-\u003enfs_argop4_u.opread;\n \t          ^",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a081e0_3dbf04b6",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "450c1d25_48d65d8f",
       "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +210,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7388c979_e7a00778",
+        "filename": "src/Protocols/NFS/nfs4_op_reclaim_complete.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "37b19dd8_0b2ad8b5",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac34817a_cc325738",
@@ -116,6 +241,24 @@
       "writtenOn": "2024-09-23T13:33:36Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tconst SEQUENCE4resok *const reok \u003d\n \t                     ^",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff1aca8_44ba8d8d",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ac34817a_cc325738",
       "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +280,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0fd6d3e_17b354bf",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "82ec80bd_93a2e52b",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9a0faae_e7c0fb63",
@@ -154,6 +315,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d825c002_f3999745",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c9a0faae_e7c0fb63",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d207b6f_fa9e1cf8",
@@ -167,6 +346,24 @@
       "writtenOn": "2024-09-23T13:33:36Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define LOCK_VARS(_lock)                                                   \\\n+\t((uint64_t)_lock-\u003esle_obj-\u003efileid), _lock-\u003esle_lock.lock_type,     \\\n+\t\t_lock-\u003esle_lock.lock_start, (_lock)-\u003esle_lock.lock_length, \\\n+\t\t(_lock-\u003esle_block_data ?                                   \\\n+\t\t\t _lock-\u003esle_block_data-\u003esbd_block_type :           \\\n+\t\t\t STATE_BLOCK_NONE)",
+      "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61a1e46_48ff7c48",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5d207b6f_fa9e1cf8",
       "revId": "c0f8164fc1740762355e98a15fdf65969ba7a4e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

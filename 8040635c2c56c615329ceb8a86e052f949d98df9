@@ -106,6 +106,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a4aef25_91a71aab",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Ignore it, we do want to phase out checkpatch, though at the moment it does do some checking clang doesn\u0027t. This isn\u0027t one of them, this is a place where checkpatch logic breaks down and it spits out a lose-lost issue. Try and placate checkpatch and a DIFFERENT error fires!",
+      "parentUuid": "c8806ea9_00a0dc86",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cef4aee_694edcea",
@@ -263,6 +281,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6386cd6e_62f87cae",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cabb6795_3f46b57e",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3985e927_9d504c88",
@@ -311,6 +347,24 @@
       "writtenOn": "2024-09-23T12:49:34Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\tconst LOCK4denied *const denied \u003d\n \t\t                  ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69428dc1_2da0ea1c",
+        "filename": "src/Protocols/NFS/nfs4_op_lockt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4c782522_cf830ed7",
       "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -402,6 +456,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee63262_49ef396d",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1519,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8ccda154_16749604",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "790dbd2f_c15f64e0",
@@ -454,6 +526,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b416fc1_0ab98022",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "401defc3_dd625713",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db91b808_d1721678",
@@ -467,6 +557,24 @@
       "writtenOn": "2024-09-23T12:49:34Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tRECLAIM_COMPLETE4args *const arg_RECLAIM_COMPLETE4 \u003d\n \t                      ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4247472f_708caa5b",
+        "filename": "src/Protocols/NFS/nfs4_op_reclaim_complete.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "db91b808_d1721678",
       "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -519,6 +627,24 @@
       "writtenOn": "2024-09-23T12:49:34Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tconst SEQUENCE4resok *const reok \u003d\n \t                     ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f06dc44_ff28c28c",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T20:54:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1bba10b6_bf0fbe1e",
       "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
