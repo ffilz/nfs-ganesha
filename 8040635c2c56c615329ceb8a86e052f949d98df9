@@ -1,0 +1,378 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4283d997_030e9a10",
+        "filename": "src/Protocols/NFS/nfs4_op_create.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"CREATE arg: type\u003d{} specdata1\u003d{} specdata2\u003d{} \"\n+\t\t\"name[{}]\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213e08e0_efd2dea4",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"CREATE_SESSION arg: clientid\u003d{} sequence\u003d{} flags\u003d{} \"\n+\t\t\"cb_program\u003d{} sec_parms_len\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2922c8_eb4eefe3",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tclient_owner4 *const clientowner \u003d \u0026arg_EXCHANGE_ID4-\u003eeia_clientowner;\n \t              ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cef4aee_694edcea",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"EXCHANGE_ID arg: verifier\u003d{} ownerid\u003d{} flags\u003d{} \"\n+\t\t\"state_protect\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b85b06_116f6e34",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"EXCHANGE_ID res: status\u003d{} clientid\u003d{} flags\u003d{} sequenceid\u003d{} \"\n+\t\t\"state_protect\u003d{} minor_id\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f71d250_6e49dec5",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"LOCK arg: type\u003d{} reclaim\u003d{} offset\u003d{} length\u003d{} \"\n+\t\t\t\"open_seqid\u003d{} stateid\u003d{} lock_seqid\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b70f6b9_31c876cc",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"LOCK arg: type\u003d{} reclaim\u003d{} offset\u003d{} length\u003d{} \"\n+\t\t\t\"stateid\u003d{} seqid\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabb6795_3f46b57e",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\tconst lock_owner4 *const owner \u003d\n \t\t                  ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3985e927_9d504c88",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"LOCK conflict: status\u003d{} offset\u003d{} length\u003d{} \"\n+\t\t\t\"type\u003d{} clientid\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c782522_cf830ed7",
+        "filename": "src/Protocols/NFS/nfs4_op_lockt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\tconst LOCK4denied *const denied \u003d\n \t\t                  ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7425a613_b40691f0",
+        "filename": "src/Protocols/NFS/nfs4_op_lockt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"LOCKT denied: status\u003d{} offset\u003d{} length\u003d{} type\u003d{} \"\n+\t\t\t\"owner[{}] \u003d {}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e6ae10_6f5d7db4",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"OPEN arg: claim\u003d{} opentype\u003d{} howmode\u003d{} share_deny\u003d{} \"\n+\t\t\"share_access\u003d{} seqid\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccda154_16749604",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1519,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tconst OPEN4resok *const resok \u003d \u0026res_OPEN4-\u003eOPEN4res_u.resok4;\n \t                 ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790dbd2f_c15f64e0",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t    \" rflags\u003d{} \"\n+\t\t\t    \"delegation\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401defc3_dd625713",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tREAD4args *const arg_READ4 \u003d \u0026op-\u003enfs_argop4_u.opread;\n \t          ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db91b808_d1721678",
+        "filename": "src/Protocols/NFS/nfs4_op_reclaim_complete.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tRECLAIM_COMPLETE4args *const arg_RECLAIM_COMPLETE4 \u003d\n \t                      ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af62b76f_191392a2",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t    \"SEQUENCE arg: session\u003d{} sequence\u003d{} slotid\u003d{} \"\n+\t\t\t    \"highest_slotid\u003d{} cachethis\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bba10b6_bf0fbe1e",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tconst SEQUENCE4resok *const reok \u003d\n \t                     ^",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b19524_73a4222a",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\"SEQUENCE res: status\u003d{} session\u003d{} sequence\u003d{} slotid\u003d{} \"\n+\t\t\"status_flags\u003d{}\",",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e6fb8cd_220b78a3",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define TP_CINFO_ARGS_EXPAND(cinfo) \\\n+\t(cinfo).atomic, (cinfo).before, (cinfo).after",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53102711_47bcab19",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define LOCK_RQST_VARS(_lock, _handle)                            \\\n+\t(_lock), (uint64_t)(_handle)-\u003efileid, (_lock)-\u003elock_type, \\\n+\t\t(_lock)-\u003elock_start, (_lock)-\u003elock_length",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934fab39_194140ae",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-23T12:49:34Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define LOCK_VARS(_lock)                                                   \\\n+\t((uint64_t)_lock-\u003esle_obj-\u003efileid), _lock-\u003esle_lock.lock_type,     \\\n+\t\t_lock-\u003esle_lock.lock_start, (_lock)-\u003esle_lock.lock_length, \\\n+\t\t(_lock-\u003esle_block_data ?                                   \\\n+\t\t\t _lock-\u003esle_block_data-\u003esbd_block_type :           \\\n+\t\t\t STATE_BLOCK_NONE)",
+      "revId": "8040635c2c56c615329ceb8a86e052f949d98df9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
