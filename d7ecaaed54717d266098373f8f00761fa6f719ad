@@ -36,6 +36,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "481467f4_194e4487",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-09-23T22:02:36Z",
+      "side": 1,
+      "message": "One question related to this, since the reaper will only reap the global fd, if the state fd counter is high but no global fd, each open will trigger the reaper which won\u0027t be able to reap any global fd:\n23/09/2024 21:56:25Z : vm 84143[none] [fd_lru] fd_lru_run :FSAL :EVENT :Open FDs over high water mark, reaping aggressively.\n23/09/2024 21:56:25Z : vm 84143[none] [fd_lru] fd_lru_run :FSAL :EVENT :Reaping up to 50 fds formeropen\u003d3844617 totalwork\u003d0\n23/09/2024 21:56:34Z : vm 84143[none] [fd_lru] fd_lru_run :FSAL :EVENT :Open FDs over high water mark, reaping aggressively.\n23/09/2024 21:56:34Z : vm 84143[none] [fd_lru] fd_lru_run :FSAL :EVENT :Reaping up to 50 fds formeropen\u003d3844617 totalwork\u003d0\n23/09/2024 21:56:43Z : vm 84143[none] [fd_lru] fd_lru_run :FSAL :EVENT :Open FDs over high water mark, reaping aggressively.\n23/09/2024 21:56:43Z : vm 84143[none] [fd_lru] fd_lru_run :FSAL :EVENT :Reaping up to 50 fds formeropen\u003d3844617 totalwork\u003d0\n23/09/2024 21:56:52Z : vm 84143[none] [fd_lru] fd_lru_run :FSAL :EVENT :Open FDs over high water mark, reaping aggressively.",
+      "revId": "d7ecaaed54717d266098373f8f00761fa6f719ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af5348d9_ecada82a",
