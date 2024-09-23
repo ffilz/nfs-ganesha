@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49aaa6b3_e44281cb",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 1
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T23:53:37Z",
+      "side": 1,
+      "message": "The problem is this strlcpy",
+      "revId": "035e01f3f0aa93925fbc91c487c8825f06c5f918",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d181fc5e_098041b2",
         "filename": "src/config_parsing/conf_lex.l",
         "patchSetId": 1
@@ -14,6 +31,23 @@
       "writtenOn": "2024-09-18T16:10:37Z",
       "side": 1,
       "message": "This is already checked here.  That +1 won\u0027t get used for fname.",
+      "revId": "035e01f3f0aa93925fbc91c487c8825f06c5f918",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec8690c_690d04e6",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-23T23:53:37Z",
+      "side": 1,
+      "message": "And this sprintf is a problem too\n\nBuffers that will hold a MAXPATHLEN need to be +1 for the \\0 terminator",
       "revId": "035e01f3f0aa93925fbc91c487c8825f06c5f918",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
