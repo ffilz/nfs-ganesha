@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23af248e_fd85b878",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T03:24:05Z",
+      "side": 1,
+      "message": "We have tried to avoid using strncpy because it doesn\u0027t NUL terminate the resulting string if it is cut short. Instead we have used strlcpy.",
+      "revId": "ba9c832c0cbe550819bdbb5d2a6f225724f86ef7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69af6e35_a1bf03d2",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T03:24:05Z",
+      "side": 1,
+      "message": "Should we keep this in the if then block below?",
+      "revId": "ba9c832c0cbe550819bdbb5d2a6f225724f86ef7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
