@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfce6896_9164e66a",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tclient_owner4 *const clientowner \u003d \u0026arg_EXCHANGE_ID4-\u003eeia_clientowner;\n \t              ^",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37aead2d_748c3c6b",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\tconst lock_owner4 *const owner \u003d\n \t\t                  ^",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3db84aa_3226dbf9",
+        "filename": "src/Protocols/NFS/nfs4_op_lockt.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\tconst LOCK4denied *const denied \u003d\n \t\t                  ^",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "889bba3e_85910e49",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tconst OPEN4resok *const resok \u003d \u0026res_OPEN4-\u003eOPEN4res_u.resok4;\n \t                 ^",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb7e7726_eee4dee4",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tREAD4args *const arg_READ4 \u003d \u0026op-\u003enfs_argop4_u.opread;\n \t          ^",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8d5dcb_e8f3cba1",
+        "filename": "src/Protocols/NFS/nfs4_op_reclaim_complete.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tRECLAIM_COMPLETE4args *const arg_RECLAIM_COMPLETE4 \u003d\n \t                      ^",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e874c59_d8f923d9",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tconst SEQUENCE4resok *const reok \u003d\n \t                     ^",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd2c9363_c697eb6d",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define TP_CINFO_ARGS_EXPAND(cinfo) \\\n+\t(cinfo).atomic, (cinfo).before, (cinfo).after",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2710c1a_5c29ac17",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define LOCK_RQST_VARS(_lock, _handle)                            \\\n+\t(_lock), (uint64_t)(_handle)-\u003efileid, (_lock)-\u003elock_type, \\\n+\t\t(_lock)-\u003elock_start, (_lock)-\u003elock_length",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89a3971_34537f49",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-24T21:52:36Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define LOCK_VARS(_lock)                                                   \\\n+\t((uint64_t)_lock-\u003esle_obj-\u003efileid), _lock-\u003esle_lock.lock_type,     \\\n+\t\t_lock-\u003esle_lock.lock_start, (_lock)-\u003esle_lock.lock_length, \\\n+\t\t(_lock-\u003esle_block_data ?                                   \\\n+\t\t\t _lock-\u003esle_block_data-\u003esbd_block_type :           \\\n+\t\t\t STATE_BLOCK_NONE)",
+      "revId": "187b173859a383d2af0da9c8360c86be83463287",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
