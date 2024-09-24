@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13dc7156_b8bbc349",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "67e72e3f_ba6e60ff",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72b0d37d_7cc98c6f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-24T07:58:07Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\t\tconst lock_owner4 *const owner \u003d\n \t\t                  ^",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5458fd9_ff6e5ba4",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "72b0d37d_7cc98c6f",
       "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91db2122_9bafe616",
+        "filename": "src/Protocols/NFS/nfs4_op_lockt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a64d4a2e_6af97701",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f1cce89_f45b7bec",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-09-24T07:58:07Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tconst OPEN4resok *const resok \u003d \u0026res_OPEN4-\u003eOPEN4res_u.resok4;\n \t                 ^",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01020860_d0e080b9",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6f1cce89_f45b7bec",
       "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97417a4b_4d3ad576",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c434bd06_fdfcb525",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfd2a47d_62cc3a6b",
@@ -99,6 +189,24 @@
       "writtenOn": "2024-09-24T07:58:07Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+\tRECLAIM_COMPLETE4args *const arg_RECLAIM_COMPLETE4 \u003d\n \t                      ^",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f86f40_7de2e739",
+        "filename": "src/Protocols/NFS/nfs4_op_reclaim_complete.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dfd2a47d_62cc3a6b",
       "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c14c928_b6288b8e",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "27da05e9_b85ffbfb",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "087def61_fa4cd8c0",
@@ -133,6 +259,24 @@
       "writtenOn": "2024-09-24T07:58:07Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define TP_CINFO_ARGS_EXPAND(cinfo) \\\n+\t(cinfo).atomic, (cinfo).before, (cinfo).after",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d2e6d19_2047d775",
+        "filename": "src/include/gsh_lttng/gsh_lttng.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "087def61_fa4cd8c0",
       "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92df85b4_df6bdc3c",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d73386e0_c3637978",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8da70614_9fb77e5c",
@@ -167,6 +329,24 @@
       "writtenOn": "2024-09-24T07:58:07Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define LOCK_VARS(_lock)                                                   \\\n+\t((uint64_t)_lock-\u003esle_obj-\u003efileid), _lock-\u003esle_lock.lock_type,     \\\n+\t\t_lock-\u003esle_lock.lock_start, (_lock)-\u003esle_lock.lock_length, \\\n+\t\t(_lock-\u003esle_block_data ?                                   \\\n+\t\t\t _lock-\u003esle_block_data-\u003esbd_block_type :           \\\n+\t\t\t STATE_BLOCK_NONE)",
+      "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f386c7d_5008d9ae",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-24T20:49:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8da70614_9fb77e5c",
       "revId": "8a0ee4fe7e6a1913925bf373ff8730602e45a23d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
