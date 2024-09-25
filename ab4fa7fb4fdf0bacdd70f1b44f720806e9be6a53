@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca157b3_bbf1b952",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_ext.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-25T17:23:50Z",
+      "side": 1,
+      "message": "Could we name the param the same in config and in struct (with or without camel case)?\n\nAlso, could we push this param into the fsal_fd lru config block\n\nAt some point we actually need to move config into a separate FSAL_FD config block",
+      "revId": "ab4fa7fb4fdf0bacdd70f1b44f720806e9be6a53",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a0d0e87_0561037c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-25T17:23:50Z",
+      "side": 1,
+      "message": "I\u0027d rather the fsal_fd code use this param from the fd_lru config block",
+      "revId": "ab4fa7fb4fdf0bacdd70f1b44f720806e9be6a53",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef2c1d17_91295e3f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-25T17:23:50Z",
+      "side": 1,
+      "message": "Please use the same name for both the config and the struct (with or without camel case)",
+      "revId": "ab4fa7fb4fdf0bacdd70f1b44f720806e9be6a53",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
