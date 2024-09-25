@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "035e7cdf_a24b9ca5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-09-25T14:48:07Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is necessary.  We don\u0027t care about the value of change, except to ensure that it did change.  If we changed it, and something changed it back, we still need to change it again.  This saves us from holding the lock across a network call to the FS.",
+      "revId": "c5bec6557e204b2861d70067e347b1b230dd88a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
