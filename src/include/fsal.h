@@ -388,6 +388,7 @@ static inline fsal_status_t fsal_commit(struct fsal_obj_handle *obj,
 }
 fsal_status_t fsal_verify2(struct fsal_obj_handle *obj,
 			   fsal_verifier_t verifier);
+fsal_status_t fsal_close2(struct fsal_obj_handle *obj);
 
 /**
  * @brief Prepare an fsal_attrlist for fetching attributes.
@@ -665,6 +666,11 @@ struct fd_lru_parameter {
 	 *   currentopen >= fds_lowat (FD low watermark).
 	 */
 	bool Cache_FDs;
+	/**
+	 * Whether to close files immediately after opening files and
+	 * using them for read/write/commit. Defaults to false,
+	 * settable with Close_Fast. */
+	bool close_fast;
 	/** The percentage of the system-imposed maximum of file
 	    descriptors at which Ganesha will deny requests.
 	    Defaults to 99, settable with FD_Limit_Percent. */
@@ -707,6 +713,8 @@ extern uint32_t fsal_fd_state_counter;
 void fsal_init_fds_limit(struct fd_lru_parameter *params);
 fsal_status_t fd_lru_pkginit(struct fd_lru_parameter *params);
 fsal_status_t fd_lru_pkgshutdown(void);
+
+bool fsal_fd_close_fast(void);
 
 #endif /* !FSAL_H */
 /** @} */
