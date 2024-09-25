@@ -388,6 +388,7 @@ static inline fsal_status_t fsal_commit(struct fsal_obj_handle *obj,
 }
 fsal_status_t fsal_verify2(struct fsal_obj_handle *obj,
 			   fsal_verifier_t verifier);
+fsal_status_t fsal_close2(struct fsal_obj_handle *obj);
 
 /**
  * @brief Prepare an fsal_attrlist for fetching attributes.

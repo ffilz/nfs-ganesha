@@ -2559,6 +2559,9 @@ fsal_status_t fsal_start_global_io(struct fsal_fd **out_fd,
 		}
 	}
 
+	if (mdcache_lru_using_temp_fds())
+		goto skip_global_fd;
+
 	status = wait_to_start_io(obj_hdl, my_fd, openflags, !open_any,
 				  !open_any);
 	if (!FSAL_IS_ERROR(status)) {
@@ -2568,7 +2571,9 @@ fsal_status_t fsal_start_global_io(struct fsal_fd **out_fd,
 	LogDebug(COMPONENT_FSAL, "wait_to_start_io failed with %s",
 		 fsal_err_txt(status));
 
-	if (status.major == ERR_FSAL_DELAY) {
+skip_global_fd:
+
+	if (status.major == ERR_FSAL_DELAY || mdcache_lru_using_temp_fds()) {
 		/* We can't use the global fd, use the tmp_fd. We don't need
 		 * any synchronization as the tmp_fd is private to the
 		 * particular operation.
