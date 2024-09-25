@@ -467,4 +467,8 @@ void mdcache_utilization(DBusMessageIter *iter)
 }
 #endif /* USE_DBUS */
 
+bool mdcache_lru_using_temp_fds(void)
+{
+	return mdcache_param.use_temp_fds;
+}
 /** @} */
