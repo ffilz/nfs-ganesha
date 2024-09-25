@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc897713_b795ab18",
+        "filename": "src/Protocols/NFS/nfs4_op_lockt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-25T00:57:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t       arg_LOCKT4-\u003eowner.clientid :",
+      "revId": "2fb8145921a4c59ede35d74901569eedd6fdd0b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee4babe1_89d57add",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-25T00:57:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t   arg_OPEN4-\u003eowner.clientid :",
+      "revId": "2fb8145921a4c59ede35d74901569eedd6fdd0b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6130e173_ab26c19e",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-25T00:57:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t   data-\u003esession-\u003eclientid,",
+      "revId": "2fb8145921a4c59ede35d74901569eedd6fdd0b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e49cb4fb_2a1fa1ec",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-25T00:57:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t\t\tFALSE;",
+      "revId": "2fb8145921a4c59ede35d74901569eedd6fdd0b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
