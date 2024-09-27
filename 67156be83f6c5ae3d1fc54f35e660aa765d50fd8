@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2abb560d_4a2652f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-09-27T23:30:48Z",
+      "side": 1,
+      "message": "This causes the following pynfs failures, I don\u0027t think it\u0027s quite right:\n\nRDDR12   st_readdir.testUnaccessibleDirAttrs                      : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\nRDDR11   st_readdir.testUnaccessibleDir                           : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\nRDDR8    st_readdir.testMaxcountSmall                             : FAILURE\n           READDIR of empty dir with maxcount\u003d16 should return\n           NFS4_OK, instead got NFS4ERR_TOOSMALL",
+      "revId": "67156be83f6c5ae3d1fc54f35e660aa765d50fd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
