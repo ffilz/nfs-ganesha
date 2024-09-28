@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14308c70_552255eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-28T05:24:40Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n1\u003e We do encryption of NFS response header + data buffers and copy encrypted data in single large buffer to send over wire as opaque bytes.",
+      "revId": "0b2c0ceac1c5b740227bf03a3688bd3dd7709769",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ee60e2_5e102548",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-09-28T05:24:40Z",
+      "side": 1,
+      "message": "WARNING: \u0027seperately\u0027 may be misspelled - perhaps \u0027separately\u0027?\n2\u003e For RDMA we send nfs_headers and data seperately, so that we can do rdma_writes for data buffers, so single opaque buffer with header+data is not working.",
+      "revId": "0b2c0ceac1c5b740227bf03a3688bd3dd7709769",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
