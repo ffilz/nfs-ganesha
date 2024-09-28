@@ -16,6 +16,24 @@
       "message": "This causes the following pynfs failures, I don\u0027t think it\u0027s quite right:\n\nRDDR12   st_readdir.testUnaccessibleDirAttrs                      : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\nRDDR11   st_readdir.testUnaccessibleDir                           : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\nRDDR8    st_readdir.testMaxcountSmall                             : FAILURE\n           READDIR of empty dir with maxcount\u003d16 should return\n           NFS4_OK, instead got NFS4ERR_TOOSMALL",
       "revId": "67156be83f6c5ae3d1fc54f35e660aa765d50fd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48be517a_5dc74c77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2024-09-28T17:58:50Z",
+      "side": 1,
+      "message": "I think testMaxcountSmall(RDDR8) exposed another bug in readdir.\nSpecifically, the base size limit we set was incorrect - in included the size of `nfsstat4` when it shouldn\u0027t have, according to the RFC it should only include the size of `READDIR4resok`:\nhttps://datatracker.ietf.org/doc/html/rfc8881#:~:text\u003dThe%20maxcount%20field%20of%20the%20request%20represents%20the%20maximum%20total%20size%20of%20all%20of%20the%20data%20being%20returned%20within%20the%20READDIR4resok%20structure%20and%20includes%20the%20XDR%20overhead\n\nI updated the patch to fix it. With the fix it passes for me. \n\nAs for the other two - testUnaccessibleDirAttrs(RDDR12) and `testUnaccessibleDir`(RDDR11), when I run it with this patch it passes:\n```\n./testserver.py 127.0.0.1:2049/super_ut --maketree --rundeps --verbose RDDR12 RDDR11\nMKDIR    st_create.testDir                                        : RUNNING\nMKDIR    st_create.testDir                                        : PASS\nMODE     st_setattr.testMode                                      : RUNNING\nMODE     st_setattr.testMode                                      : PASS\nRDDR12   st_readdir.testUnaccessibleDirAttrs                      : RUNNING\nRDDR12   st_readdir.testUnaccessibleDirAttrs                      : PASS\nRDDR11   st_readdir.testUnaccessibleDir                           : RUNNING\nRDDR11   st_readdir.testUnaccessibleDir                           : PASS\n**************************************************\nMODE     st_setattr.testMode                                      : PASS\nRDDR12   st_readdir.testUnaccessibleDirAttrs                      : PASS\nRDDR11   st_readdir.testUnaccessibleDir                           : PASS\nMKDIR    st_create.testDir                                        : PASS\n**************************************************\nCommand line asked for 4 of 679 tests\nOf those: 0 Skipped, 0 Failed, 0 Warned, 4 Passed\n```\n@ffilzlnx@mindspring.com - What FSAL are you using for the test?\nI tried it with our FSAL, with FSAL_VFS and with FSAL_MEM, and the tests passed in all cases.\n\nLooking at the code I did find a code path that does seem problematic where we don\u0027t properly set the error code. I also fixed that (although it looks like I\u0027m my tests we didn\u0027t reach this code path). \n\n@ffilzlnx@mindspring.com - Can you try it with the updated patch?",
+      "parentUuid": "2abb560d_4a2652f4",
+      "revId": "67156be83f6c5ae3d1fc54f35e660aa765d50fd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
