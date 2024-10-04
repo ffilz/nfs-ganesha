@@ -1050,6 +1050,11 @@ check_it:
 			    &owner2)) {
 			LogDebug(COMPONENT_STATE, "Returning NFS4ERR_EXPIRED");
 
+			/* Client will increase the seqid after receiving
+			 * NFS4ERR_EXPIRED, so we need to mark the seqid
+			 * expired here.
+			 */
+			Expire_nfs4_seqid(owner2);
 			status = NFS4ERR_EXPIRED;
 			goto failure;
 		}
