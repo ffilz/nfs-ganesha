@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15866af5_9362e267",
+        "filename": "src/SAL/nfs4_owner.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-10-04T06:26:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t * 2. The client lease is expired. We also expire the seqid by setting so_last_entry to NULL.",
+      "revId": "b6e44d11bfe1987056fd20f1b2e9135cdeee4602",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a40680_829391eb",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-10-04T06:26:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t/* Client will increase the seqid after receving NFS4ERR_EXPIRED,",
+      "revId": "b6e44d11bfe1987056fd20f1b2e9135cdeee4602",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21881c7_6edbcc9c",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-10-04T06:26:29Z",
+      "side": 1,
+      "message": "WARNING: \u0027receving\u0027 may be misspelled - perhaps \u0027receiving\u0027?\n+\t\t\t/* Client will increase the seqid after receving NFS4ERR_EXPIRED,",
+      "revId": "b6e44d11bfe1987056fd20f1b2e9135cdeee4602",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
