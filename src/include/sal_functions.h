@@ -540,6 +540,8 @@ bool Check_nfs4_seqid(state_owner_t *owner, seqid4 seqid, nfs_argop4 *args,
 		      struct fsal_obj_handle *obj, nfs_resop4 *resp,
 		      const char *tag);
 
+void Expire_nfs4_seqid(state_owner_t *owner);
+
 /**
  * @brief Determine if an NFS v4 owner has state associated with it
  *

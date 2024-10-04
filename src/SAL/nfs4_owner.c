@@ -718,7 +718,11 @@ bool Check_nfs4_seqid(state_owner_t *owner, seqid4 seqid, nfs_argop4 *args,
 		str_valid = true;
 	}
 
-	/* If this is a new state owner, client may start with any seqid */
+	/* Allow clients to start with any seqid when so_last_entry is NULL.
+	 * Here are two cases:
+	 * 1. The the owner is new. That is, server has no saved seqid.
+	 * 2. The client lease is expired. We also expire the seqid by setting so_last_entry to NULL.
+	 */
 	if (owner->so_owner.so_nfs4_owner.so_last_entry == NULL) {
 		if (str_valid)
 			LogFullDebug(
@@ -783,6 +787,18 @@ bool Check_nfs4_seqid(state_owner_t *owner, seqid4 seqid, nfs_argop4 *args,
 	nfs4_Compound_CopyResOne(resp, &owner->so_owner.so_nfs4_owner.so_resp);
 
 	return false;
+}
+
+/**
+ * @brief Expire the NFS4 seqid to allow the client to reclaim the open status
+ *
+ * We just do a trick to allow the client can bypass the seqid check.
+ *
+ * @param[in]  owner The owner
+ */
+void Expire_nfs4_seqid(state_owner_t *owner)
+{
+	owner->so_owner.so_nfs4_owner.so_last_entry = NULL;
 }
 
 /** @} */
