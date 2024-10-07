@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "201f8552_d38fff2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-10-07T14:12:29Z",
+      "side": 1,
+      "message": "Looks fine, one nit.",
+      "revId": "807fec9e4d6f53c7544baaaf0b111be1a036d773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ace9edf_ab202f0d",
+        "filename": "src/FSAL/FSAL_CEPH/mds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-10-07T14:12:29Z",
+      "side": 1,
+      "message": "Can we use \"false\" here instead of \"0\", since the arg is a bool?",
+      "revId": "807fec9e4d6f53c7544baaaf0b111be1a036d773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
