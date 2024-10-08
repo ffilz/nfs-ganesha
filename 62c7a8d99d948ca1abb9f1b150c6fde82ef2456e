@@ -16,6 +16,40 @@
       "message": "fixed comment warnings",
       "revId": "62c7a8d99d948ca1abb9f1b150c6fde82ef2456e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0120381_19579d15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-08T20:54:40Z",
+      "side": 1,
+      "message": "I think I like this idea, but special case needs handling.",
+      "revId": "62c7a8d99d948ca1abb9f1b150c6fde82ef2456e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e41ad3_b9994083",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-08T20:54:40Z",
+      "side": 1,
+      "message": "Need to check for NULL owner2, reserve_lease_or_expire can set owner2 to NULL in certain paths.",
+      "revId": "62c7a8d99d948ca1abb9f1b150c6fde82ef2456e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
