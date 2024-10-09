@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d918a15a_d2ff2622",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:25:13Z",
+      "side": 1,
+      "message": "Where is this referenced after Cleanup is called (just before we exit)?",
+      "revId": "3cc652a543a0d3686fd928dc3143725809081a92",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861b7d76_9c8c9cd2",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:25:13Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary, as a global, it is initialized to 0 (NULL)",
+      "revId": "3cc652a543a0d3686fd928dc3143725809081a92",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
