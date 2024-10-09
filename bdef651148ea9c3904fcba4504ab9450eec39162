@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ad9970_c3791cfe",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7455c463_b523aa5a",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23d39d01_c77cf824",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c9328b2_8a6e696b",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23d39d01_c77cf824",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bae55e31_96dc0f3f",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-10-09T09:23:37Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Check for stuck connections",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54400ed7_f05b4f36",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bae55e31_96dc0f3f",
       "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +140,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41185016_cf7e9522",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f947245_61e9a418",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3e2e5b_7cd646a9",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cbc2098_6f54011c",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "554e7c52_9e564434",
@@ -99,6 +189,24 @@
       "writtenOn": "2024-10-09T09:23:37Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// Drain failed due to a connection that did not drain",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc44d9f3_bd9ee940",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "554e7c52_9e564434",
       "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -133,6 +241,42 @@
       "writtenOn": "2024-10-09T09:23:37Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tbool is_destroyed; // This connection started draining and is no longer usable",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a64273_7fe4eb94",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21713d98_0652ead7",
+      "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749afc8a_59f695a3",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58dbf7e4_26f10312",
       "revId": "bdef651148ea9c3904fcba4504ab9450eec39162",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
