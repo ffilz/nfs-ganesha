@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nm-\u003edl_handle is used to determine if fsal is static, and static fsals are the only ones implementing unload",
       "revId": "a92250cb6671659b27b0246f3c405837509e9121",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "107621fd_380be6ab",
+        "filename": "src/FSAL/fsal_destroyer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T18:09:00Z",
+      "side": 1,
+      "message": "Let\u0027s move these to the top of the loop, also use gsh_strdupa instead",
+      "revId": "a92250cb6671659b27b0246f3c405837509e9121",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
