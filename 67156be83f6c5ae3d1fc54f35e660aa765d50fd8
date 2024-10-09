@@ -34,6 +34,24 @@
       "parentUuid": "2abb560d_4a2652f4",
       "revId": "67156be83f6c5ae3d1fc54f35e660aa765d50fd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7a5c286_004d5ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-09T00:07:24Z",
+      "side": 1,
+      "message": "Hmm 11 and 12 are still failing:\n\nRDDR12   st_readdir.testUnaccessibleDirAttrs                      : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\nRDDR11   st_readdir.testUnaccessibleDir                           : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\n\n\nIt might be an ordering thing,,,\n\nI run FSAL_VFS on an XFS filesystem",
+      "parentUuid": "48be517a_5dc74c77",
+      "revId": "67156be83f6c5ae3d1fc54f35e660aa765d50fd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
