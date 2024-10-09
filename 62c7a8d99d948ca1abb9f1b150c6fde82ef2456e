@@ -50,6 +50,24 @@
       "message": "Need to check for NULL owner2, reserve_lease_or_expire can set owner2 to NULL in certain paths.",
       "revId": "62c7a8d99d948ca1abb9f1b150c6fde82ef2456e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a102995_4febe4c4",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1038357
+      },
+      "writtenOn": "2024-10-09T09:44:04Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t notice the changes here. With the newer version of  reserve_lease_or_expire, the owner2 will always be set to NULL when it returns false here.\n\nAnd I also didn\u0027t notice that there is already a commit (Expire lease immediately when reserve_lease fails.) you pushed in V5. With this commit, the server cleans up the lease and related owners eagerly before the server returns NFS4ERR_EXPIRED. It seems that my patch is not necessary anymore, isn\u0027t it? \n\nWe will try to cherry-pick these 2 commits first to see whether it works or not. Thanks.",
+      "parentUuid": "d5e41ad3_b9994083",
+      "revId": "62c7a8d99d948ca1abb9f1b150c6fde82ef2456e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
