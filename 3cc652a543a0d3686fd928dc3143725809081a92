@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfeaa9d6_fc775241",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-10-10T05:29:20Z",
+      "side": 1,
+      "message": "it isn\u0027t, but in some of our tests we bring up up ganesha several times and this caused us problems.\nif one day we will want to add unit testing to ganesha this change will be useful as well",
+      "parentUuid": "d918a15a_d2ff2622",
+      "revId": "3cc652a543a0d3686fd928dc3143725809081a92",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "861b7d76_9c8c9cd2",
         "filename": "src/log/log_functions.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-09T18:25:13Z",
       "side": 1,
       "message": "This shouldn\u0027t be necessary, as a global, it is initialized to 0 (NULL)",
+      "revId": "3cc652a543a0d3686fd928dc3143725809081a92",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7364bcc1_5b38ac04",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-10-10T05:29:20Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "861b7d76_9c8c9cd2",
       "revId": "3cc652a543a0d3686fd928dc3143725809081a92",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
