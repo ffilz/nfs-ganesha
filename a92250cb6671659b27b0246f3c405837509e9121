@@ -16,6 +16,24 @@
       "message": "This shutdown seems to have disappeared?",
       "revId": "a92250cb6671659b27b0246f3c405837509e9121",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21712c80_79b6570a",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-10-10T06:03:50Z",
+      "side": 0,
+      "message": "yes, as SVC_DESTROY already does a shutdown. we had it at two separate commits but we try to do less commits here as you prefer larger commits",
+      "parentUuid": "fb352afa_c17d07b4",
+      "revId": "a92250cb6671659b27b0246f3c405837509e9121",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
