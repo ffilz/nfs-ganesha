@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95af011_21bae01a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-10-14T15:43:43Z",
+      "side": 1,
+      "message": "The clean() functions don\u0027t free the elements in the list pointed to by cleanup_list, they\u0027re all static in memory, not allocated.  So the list itself is always safe.  Obviously calling clean() multiple times on an entry may cause issues in that subsystem, but it\u0027s safe in all the cases I looked at.\n\nBasically, this whole system is statically set up at compile-time and startup, and should always be safe to call.  What issue are you actually seeing?",
+      "revId": "4e9db20e20a2a845347d24921b11c238488a59fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
