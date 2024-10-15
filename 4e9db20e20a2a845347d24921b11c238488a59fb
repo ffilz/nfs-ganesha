@@ -16,6 +16,24 @@
       "message": "The clean() functions don\u0027t free the elements in the list pointed to by cleanup_list, they\u0027re all static in memory, not allocated.  So the list itself is always safe.  Obviously calling clean() multiple times on an entry may cause issues in that subsystem, but it\u0027s safe in all the cases I looked at.\n\nBasically, this whole system is statically set up at compile-time and startup, and should always be safe to call.  What issue are you actually seeing?",
       "revId": "4e9db20e20a2a845347d24921b11c238488a59fb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46848b6_cc1812c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-10-15T06:38:18Z",
+      "side": 1,
+      "message": "when, shutting down ganesha and then initializing it again we will have weird behaviors due to double registers in the list.\nI can set it to null at init, but IMO it makes more sense to set it to null after cleanup as cleanups are not required to be idempotent",
+      "parentUuid": "f95af011_21bae01a",
+      "revId": "4e9db20e20a2a845347d24921b11c238488a59fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
