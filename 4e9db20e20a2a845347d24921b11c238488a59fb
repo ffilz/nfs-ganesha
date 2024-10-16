@@ -70,6 +70,24 @@
       "parentUuid": "40e33e37_b240211c",
       "revId": "4e9db20e20a2a845347d24921b11c238488a59fb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d36243_75a70869",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-16T14:29:54Z",
+      "side": 1,
+      "message": "I wouldn\u0027t want to begin to assume Ganesha can be re-started without starting a new process. Way too many things depend on the free initialization to zero from starting a new process.\n\nThere are absolutely situations where a FSAL may not be able to completely clean up and then depends on the process exiting to finalize cleanup.\n\nIf you want to run a variety of unit tests using the same Ganesha process, don\u0027t stop Ganesha between tests.\n\nIf you really see a need for this, open a github issue (tag it enhancement) where we can contain discussion and list all the places Ganesha doesn\u0027t properly clean up.",
+      "parentUuid": "a46848b6_cc1812c5",
+      "revId": "4e9db20e20a2a845347d24921b11c238488a59fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
