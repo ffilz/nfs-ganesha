@@ -52,6 +52,24 @@
       "parentUuid": "a46848b6_cc1812c5",
       "revId": "4e9db20e20a2a845347d24921b11c238488a59fb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f037cc20_2b70ea5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-10-16T04:31:34Z",
+      "side": 1,
+      "message": "we run it to perform basic sanity unit tests. And I agree ganesha is not built for it. theoretically each unit test scenario can run in a different executable but in our testing system there is value in rerunning ganesha in the same process.",
+      "parentUuid": "40e33e37_b240211c",
+      "revId": "4e9db20e20a2a845347d24921b11c238488a59fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
