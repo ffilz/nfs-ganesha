@@ -680,8 +680,8 @@ static fsal_status_t mem_close_func(struct fsal_obj_handle *obj_hdl,
 	return mem_close_my_fd(fd);
 }
 
-#define mem_alloc_handle(p, n, t, e, a, ppra, ppoa) \
-	_mem_alloc_handle(p, n, t, e, a, ppra, ppoa, __func__, __LINE__)
+#define mem_alloc_handle(p, n, t, e, a, c, ppra, ppoa) \
+	_mem_alloc_handle(p, n, t, e, a, c, ppra, ppoa, __func__, __LINE__)
 /**
  * @brief Allocate a MEM handle
  *
@@ -690,6 +690,7 @@ static fsal_status_t mem_close_func(struct fsal_obj_handle *obj_hdl,
  * @param[in]     type                  Type of handle to allocate
  * @param[in]     mfe                   MEM Export owning new handle
  * @param[in]     attrs                 Attributes of new handle
+ * @param[in]     create                New create of object
  * @param[in,out] parent_pre_attrs_out  Optional attributes for parent dir
  *                                      before the operation. Should be atomic.
  * @param[in,out] parent_post_attrs_out Optional attributes for parent dir
@@ -700,7 +701,8 @@ static fsal_status_t mem_close_func(struct fsal_obj_handle *obj_hdl,
 static struct mem_fsal_obj_handle *_mem_alloc_handle(
 	struct mem_fsal_obj_handle *parent, const char *name,
 	object_file_type_t type, struct mem_fsal_export *mfe,
-	struct fsal_attrlist *attrs, struct fsal_attrlist *parent_pre_attrs_out,
+	struct fsal_attrlist *attrs, bool new_create,
+	struct fsal_attrlist *parent_pre_attrs_out,
 	struct fsal_attrlist *parent_post_attrs_out, const char *func, int line)
 {
 	struct mem_fsal_obj_handle *hdl;
@@ -716,13 +718,16 @@ static struct mem_fsal_obj_handle *_mem_alloc_handle(
 
 	/* Establish tree details for this directory */
 	hdl->m_name = gsh_strdup(name);
-	hdl->obj_handle.fileid = atomic_postinc_uint64_t(&mem_inode_number);
 	hdl->datasize = MEM.inode_size;
 	glist_init(&hdl->dirents);
-	PTHREAD_RWLOCK_wrlock(&mfe->mfe_exp_lock);
-	glist_add_tail(&mfe->mfe_objs, &hdl->mfo_exp_entry);
+	if (new_create) {
+		hdl->obj_handle.fileid =
+			atomic_postinc_uint64_t(&mem_inode_number);
+		PTHREAD_RWLOCK_wrlock(&mfe->mfe_exp_lock);
+		glist_add_tail(&mfe->mfe_objs, &hdl->mfo_exp_entry);
+		PTHREAD_RWLOCK_unlock(&mfe->mfe_exp_lock);
+	}
 	hdl->mfo_exp = mfe;
-	PTHREAD_RWLOCK_unlock(&mfe->mfe_exp_lock);
 	package_mem_handle(hdl);
 
 	/* Fills the output struct */
@@ -818,13 +823,15 @@ static struct mem_fsal_obj_handle *_mem_alloc_handle(
 	fsal_obj_handle_init(&hdl->obj_handle, &mfe->export, type, true);
 	hdl->obj_handle.obj_ops = &MEM.handle_ops;
 
-	if (parent != NULL) {
-		/* Attach myself to my parent */
-		mem_insert_obj(parent, hdl, name, parent_pre_attrs_out,
+	if (new_create) {
+		if (parent != NULL) {
+			/* Attach myself to my parent */
+			mem_insert_obj(parent, hdl, name, parent_pre_attrs_out,
 			       parent_post_attrs_out);
-	} else {
-		/* This is an export */
-		hdl->is_export = true;
+		} else {
+			/* This is an export */
+			hdl->is_export = true;
+		}
 	}
 
 	if (hdl->obj_handle.type == REGULAR_FILE) {
@@ -910,7 +917,7 @@ static fsal_status_t mem_create_obj(struct mem_fsal_obj_handle *parent,
 	}
 
 	/* allocate an obj_handle and fill it up */
-	hdl = mem_alloc_handle(parent, name, type, mfe, attrs_in,
+	hdl = mem_alloc_handle(parent, name, type, mfe, attrs_in, true,
 			       parent_pre_attrs_out, parent_post_attrs_out);
 	if (!hdl)
 		return fsalstat(ERR_FSAL_NOMEM, 0);
@@ -997,6 +1004,8 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 	struct fsal_attrlist attrs;
 	enum fsal_dir_result cb_rc;
 	int count = 0;
+	struct mem_fsal_export *mfe = container_of(op_ctx->fsal_export,
+						struct mem_fsal_export, export);
 
 	myself = container_of(dir_hdl, struct mem_fsal_obj_handle, obj_handle);
 
@@ -1022,6 +1031,8 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 
 	/* Always run in index order */
 	for (; dirent != NULL; dirent = dirent_next) {
+		struct mem_fsal_obj_handle *hdl;
+
 		if (count >= 2 * mdcache_param.dir.avl_chunk) {
 			LogFullDebug(COMPONENT_FSAL, "readahead done %d",
 				     count);
@@ -1039,9 +1050,15 @@ static fsal_status_t mem_readdir(struct fsal_obj_handle *dir_hdl,
 
 		fsal_prepare_attrs(&attrs, attrmask);
 		fsal_copy_attrs(&attrs, &dirent->hdl->attrs, false);
-		mem_int_get_ref(dirent->hdl);
 
-		cb_rc = cb(dirent->d_name, &dirent->hdl->obj_handle, &attrs,
+		/* Allocate handle for using in the callback */
+		hdl = mem_alloc_handle(NULL, dirent->d_name,
+			dirent->hdl->obj_handle.type, mfe, &dirent->hdl->attrs,
+			false, NULL, NULL);
+		if (!hdl)
+			return fsalstat(ERR_FSAL_NOMEM, 0);
+
+		cb_rc = cb(dirent->d_name, &hdl->obj_handle, &attrs,
 			   dir_state, cookie);
 
 		fsal_release_attrs(&attrs);
@@ -2549,7 +2566,7 @@ fsal_status_t mem_lookup_path(struct fsal_export *exp_hdl, const char *path,
 	if (mfe->root_handle == NULL) {
 		mfe->root_handle = mem_alloc_handle(NULL, mfe->export_path,
 						    DIRECTORY, mfe, &attrs,
-						    NULL, NULL);
+						    true, NULL, NULL);
 	}
 
 	*obj_hdl = &mfe->root_handle->obj_handle;
