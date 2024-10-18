@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b3984d_69fb7fab",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1653,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-10-18T07:59:34Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (my_fd) {\n+\t\t(void)ceph_close_my_fd(my_fd);\n+\t}",
+      "revId": "856788f6c07d6a98080401a59ae7a8f79a5ef2bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
