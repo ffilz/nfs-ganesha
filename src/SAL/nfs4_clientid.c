@@ -1288,8 +1288,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			display_owner(&dspbuf, owner);
 
 			if (refcount > 1)
-				LogFatal(
-					COMPONENT_CLIENTID,
+				LogWarn(COMPONENT_CLIENTID,
 					"Expired State - Open Owners, Possibly extra references to {%s}",
 					str);
 			else
