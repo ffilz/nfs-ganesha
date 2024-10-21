@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n11/10/2024 08:05:39 : epoch 67091434 : rhs-srv-03.gdev.lab.eng.rdu2.redhat.com : ganesha.nfsd-714666[svc_6] init_fsal_fd :RW LOCK :F_DBG :Init mutex 0x7f69d02ce228 (\u0026fsal_fd-\u003ework_mutex) at /home/psachin/downstream/nfs/nfs-ganesha/src/include/fsal_types.h:987",
       "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72cf676_0d512b33",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-10-21T13:13:52Z",
+      "side": 1,
+      "message": "Please explain this more.  As far as I can tell, this should be a valid handle from the dirent, and needs to be a complete handle, since mdcache will cache it.  I\u0027m not seeing where the callback will free it (and since you\u0027re not putting it in the tree, it looks like it will leak).  Basically, the code looks correct to me as is, so I need a better explanation of what\u0027s wrong.",
+      "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
