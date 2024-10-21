@@ -33,6 +33,24 @@
       "message": "Please explain this more.  As far as I can tell, this should be a valid handle from the dirent, and needs to be a complete handle, since mdcache will cache it.  I\u0027m not seeing where the callback will free it (and since you\u0027re not putting it in the tree, it looks like it will leak).  Basically, the code looks correct to me as is, so I need a better explanation of what\u0027s wrong.",
       "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3390a56b_c531c5ce",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-10-21T17:44:42Z",
+      "side": 1,
+      "message": "The handle stored by dirent in mdcache is valid handle with global FD structure (FD, work_mutex and cond variables). When readdir code makes use of existing handle, the mutex gets used and as per code flow of getattr, it gets destroyed. Further invocation of readdir tries to access the same mutex and crashes as mutes is invalid.\nThe code changes I made are based on FSAL_VFS code flow for readdir. There as well we create a new handle and use the same.\n----------- Here is full stack of imp function calls ------\nnfs4_op_readdir -\u003e\n        fsal_status \u003d fsal_readdir(dir_obj, cookie, \u0026num_entries, \u0026eod_met,\n                                   attrmask, nfs4_readdir_callback, \u0026tracker);\nfsal_readdir -\u003e \n        fsal_status \u003d\n                directory-\u003eobj_ops-\u003ereaddir(directory, \u0026cookie, (void *)\u0026state,\n                                            populate_dirent, attrmask, eod_met);\nmdcache_readdir -\u003e\n                return mdcache_readdir_chunked(directory,\n                                               whence ? *whence : (uint64_t)0,\n                                               dir_state, cb, attrmask,\n                                               eod_met);\nmdcache_readdir_chunked -\u003e\n                status \u003d mdcache_populate_dir_chunk(directory, next_ck, \u0026dirent,\n                                                    chunk, \u0026eod);\nmdcache_populate_dir_chunk -\u003e\n        subcall(readdir_status \u003d directory-\u003esub_handle-\u003eobj_ops-\u003ereaddir(\n                        directory-\u003esub_handle, whence_ptr, \u0026state,\n                        mdc_readdir_chunked_cb, attrmask, eod_met));\nmem_readdir -\u003e\n              cb_rc \u003d cb(dirent-\u003ed_name, \u0026dirent-\u003ehdl-\u003eobj_handle, \u0026attrs,\n                         dir_state, cookie);\nmdc_readdir_chunked_cb -\u003e\n        supercall_raw(state-\u003eexport,\n                      result \u003d mdc_readdir_chunk_object(name, sub_handle, attrs,\n                                                        dir_state, cookie));\nmdcache_new_entry -\u003e\n                        subcall_raw(export, sub_handle-\u003eobj_ops-\u003erelease(sub_handle));\nmem_release -\u003e\n\tdestroy_fsal_fd\n-----------------------------------------------------------\nIn release call, the handle is released, so no memory leak. But I will run valgrind and if needed submit another patch",
+      "parentUuid": "c72cf676_0d512b33",
+      "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
