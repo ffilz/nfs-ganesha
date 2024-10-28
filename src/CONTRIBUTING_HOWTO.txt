@@ -58,6 +58,8 @@ TESTING
 
 Patches should be tested before submission. Some tests that are easy to run are:
 
+(Use src/test/run_test_mode.sh to run Ganesha for testing)
+
 Connectathon (cthon04)
 
 https://wiki.linux-nfs.org/wiki/index.php/Connectathon_test_suite
@@ -155,6 +157,10 @@ better against Ganesha:
 
 https://github.com/ffilz/pjdfstest
 https://github.com/ffilz/ntfs-3g-pjd-fstest
+
+RUNNING GANESHA FOR TESTING
+
+Use src/test/run_test_mode.sh to run Ganesha for basic testing.
 
 PREPARING FOR PATCH SUBMISSION:
 
