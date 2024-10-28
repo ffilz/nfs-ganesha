@@ -69,6 +69,24 @@
       "parentUuid": "3390a56b_c531c5ce",
       "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fe2449b_aa0e7b49",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2024-10-28T14:25:25Z",
+      "side": 1,
+      "message": "Okay, I think I understand.  I think mem_readdir is missing a mem_int_get_ref() before calling the callback.  A bit of context:\n\nThe handle for a dirent is immutable in FSAL_MEM, it lives for the lifetime of the dirent (so as long as the entry exists in the directory).  You cannot copy it or free it until the dirent is removed by the client.  It is the source of all handles for everything in FSAL_MEM.  That\u0027s why it\u0027s refcounted, so that we can \"allocate\" and \"free\" it without it going away.  All this is because there\u0027s no underlying filesystem, so we can\u0027t re-scan and re-create handles.  All we have are handles and dirents.  So, I think the refcount is the solution.",
+      "parentUuid": "c3a9f9ea_f7a6fa98",
+      "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
