@@ -38,24 +38,28 @@
 
 #include "exposer.h"
 
-#define PERROR(MESSAGE)                                                        \
-	fprintf(stderr, "[%s:%d] %s: %s\n", __FILE__, __LINE__, (MESSAGE),     \
+#define PERROR(MESSAGE)                                                    \
+	fprintf(stderr, "[%s:%d] %s: %s\n", __FILE__, __LINE__, (MESSAGE), \
 		strerror(errno))
 #define PFATAL(MESSAGE) (PERROR(MESSAGE), abort())
 
-namespace ganesha_monitoring {
+namespace ganesha_monitoring
+{
 
 /* streambuf wrapper for sending into a socket */
 template <std::size_t size = 4096>
 class SocketStreambuf : public std::streambuf {
-public:
-	explicit SocketStreambuf(int socket_fd) : socket_fd_(socket_fd) {
+    public:
+	explicit SocketStreambuf(int socket_fd)
+		: socket_fd_(socket_fd)
+	{
 		setp(buffer_.data(), buffer_.data() + buffer_.size());
 	}
 
-protected:
+    protected:
 	/* Flushes buffer to socket */
-	int overflow(int ch) override {
+	int overflow(int ch) override
+	{
 		if (pptr() == epptr()) {
 			/* Buffer is full, flush it */
 			if (sync())
@@ -70,7 +74,8 @@ protected:
 	}
 
 	/* Sends buffer to socket (blocking) and clears it */
-	int sync() override {
+	int sync() override
+	{
 		if (aborted_)
 			return -1;
 		const std::size_t bytes_count = pptr() - pbase();
@@ -78,11 +83,9 @@ protected:
 			/* Try to send buffer */
 			std::size_t bytes_sent = 0;
 			while (bytes_sent < bytes_count) {
-				const ssize_t result = TEMP_FAILURE_RETRY(send(
-					socket_fd_,
-					pbase() + bytes_sent,
-					bytes_count - bytes_sent,
-					0));
+				const ssize_t result = TEMP_FAILURE_RETRY(
+					send(socket_fd_, pbase() + bytes_sent,
+					     bytes_count - bytes_sent, 0));
 				if (result <= 0) {
 					PERROR("Could not send metrics, aborting");
 					aborted_ = true;
@@ -96,20 +99,21 @@ protected:
 		return 0;
 	}
 
-private:
+    private:
 	const int socket_fd_;
 	bool aborted_ = false;
 	std::array<char, size> buffer_{};
 
 	// Delete copy/move constructor/assignment
-	SocketStreambuf(const SocketStreambuf&) = delete;
-	SocketStreambuf& operator=(const SocketStreambuf&) = delete;
-	SocketStreambuf(SocketStreambuf&&) = delete;
-	SocketStreambuf& operator=(SocketStreambuf&&) = delete;
+	SocketStreambuf(const SocketStreambuf &) = delete;
+	SocketStreambuf &operator=(const SocketStreambuf &) = delete;
+	SocketStreambuf(SocketStreambuf &&) = delete;
+	SocketStreambuf &operator=(SocketStreambuf &&) = delete;
 };
 
 static bool is_metric_empty(prometheus::Metric::Type type,
-			    prometheus::ClientMetric &metric) {
+			    prometheus::ClientMetric &metric)
+{
 	switch (type) {
 	case prometheus::Metric::Type::Counter:
 		return metric.counter.value == 0.0;
@@ -127,22 +131,26 @@ static bool is_metric_empty(prometheus::Metric::Type type,
 // nfsv4__op_latency_bucket{op="REMOVEXATTR",status="NFS4ERR_REPLAY"})
 // Significantly reduces the amount of data transferred to the Prometheus
 // server from MBs to KBs
-static void compact_family(prometheus::MetricFamily &family) {
+static void compact_family(prometheus::MetricFamily &family)
+{
 	auto first_element_to_remove = std::remove_if(
 		family.metric.begin(), family.metric.end(),
 		[&family](auto metric) {
-			return is_metric_empty(family.type, metric); });
+			return is_metric_empty(family.type, metric);
+		});
 	// Keep at least one metric even if it's empty so it's easier to query
 	if (first_element_to_remove == family.metric.begin())
 		first_element_to_remove++;
 	family.metric.erase(first_element_to_remove, family.metric.end());
 }
 
-Exposer::~Exposer() {
+Exposer::~Exposer()
+{
 	stop();
 }
 
-void Exposer::start(uint16_t port) {
+void Exposer::start(uint16_t port)
+{
 	const std::lock_guard<std::mutex> lock(mutex_);
 	if (running_)
 		PFATAL("Already running");
@@ -169,7 +177,8 @@ void Exposer::start(uint16_t port) {
 	thread_id_ = std::thread{ server_thread, this };
 }
 
-void Exposer::stop() {
+void Exposer::stop()
+{
 	const std::lock_guard<std::mutex> lock(mutex_);
 	if (running_) {
 		running_ = false;
@@ -180,7 +189,8 @@ void Exposer::stop() {
 	}
 }
 
-void *Exposer::server_thread(void *arg) {
+void *Exposer::server_thread(void *arg)
+{
 	Exposer *const exposer = (Exposer *)arg;
 	char buffer[1024];
 
