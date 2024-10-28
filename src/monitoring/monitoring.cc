@@ -453,7 +453,7 @@ void monitoring_register_export_label(const export_id_t export_id,
 
 void monitoring__init(uint16_t port, bool enable_dynamic_metrics)
 {
-	static bool initialized;
+	static bool initialized = false;
 	if (initialized)
 		return;
 	if (enable_dynamic_metrics)

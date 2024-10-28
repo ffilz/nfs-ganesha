@@ -35,12 +35,11 @@
 namespace ganesha_monitoring
 {
 
+using HistogramInt = prometheus::Histogram<int64_t>;
+
 class Exposer {
     public:
-	Exposer(prometheus::Registry &registry)
-		: registry_(registry)
-	{
-	}
+	explicit Exposer(prometheus::Registry &registry);
 	~Exposer();
 
 	void start(uint16_t port);
@@ -48,6 +47,9 @@ class Exposer {
 
     private:
 	prometheus::Registry &registry_;
+	HistogramInt::Family &scrapingLatencies_;
+	prometheus::Histogram<int64_t> &successLatencies_;
+	prometheus::Histogram<int64_t> &failureLatencies_;
 	static constexpr int INVALID_FD = -1;
 	int server_fd_ = INVALID_FD;
 	bool running_ = false;

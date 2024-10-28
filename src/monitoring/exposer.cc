@@ -34,6 +34,7 @@
 #include <unistd.h>
 #include <streambuf>
 
+#include "prometheus/histogram.h"
 #include "prometheus/text_serializer.h"
 
 #include "exposer.h"
@@ -42,6 +43,10 @@
 	fprintf(stderr, "[%s:%d] %s: %s\n", __FILE__, __LINE__, (MESSAGE), \
 		strerror(errno))
 #define PFATAL(MESSAGE) (PERROR(MESSAGE), abort())
+
+static const char kStatus[] = "status";
+static const char kSuccess[] = "success";
+static const char kFailure[] = "failure";
 
 namespace ganesha_monitoring
 {
@@ -54,6 +59,11 @@ class SocketStreambuf : public std::streambuf {
 		: socket_fd_(socket_fd)
 	{
 		setp(buffer_.data(), buffer_.data() + buffer_.size());
+	}
+
+	bool was_aborted()
+	{
+		return aborted_;
 	}
 
     protected:
@@ -86,7 +96,7 @@ class SocketStreambuf : public std::streambuf {
 				const ssize_t result = TEMP_FAILURE_RETRY(
 					send(socket_fd_, pbase() + bytes_sent,
 					     bytes_count - bytes_sent, 0));
-				if (result <= 0) {
+				if (result < 0) {
 					PERROR("Could not send metrics, aborting");
 					aborted_ = true;
 					return -1;
@@ -144,6 +154,28 @@ static void compact_family(prometheus::MetricFamily &family)
 	family.metric.erase(first_element_to_remove, family.metric.end());
 }
 
+static inline HistogramInt::BucketBoundaries getBoundries()
+{
+	return { 2,	 4,	  8,	   16,	    32,	     64,
+		 128,	 256,	  512,	   1024,    2048,    4096,
+		 8192,	 16384,	  32768,   65536,   131072,  262144,
+		 524288, 1048576, 2097152, 4194304, 8388608, 16777216 };
+}
+
+Exposer::Exposer(prometheus::Registry &registry)
+	: registry_(registry)
+	, scrapingLatencies_(
+		  prometheus::Builder<HistogramInt>()
+			  .Name("monitoring__scraping_latencies")
+			  .Help("Time duration of entire registry scraping [ms].")
+			  .Register(registry))
+	, successLatencies_(scrapingLatencies_.Add({ { kStatus, kSuccess } },
+						   getBoundries()))
+	, failureLatencies_(scrapingLatencies_.Add({ { kStatus, kFailure } },
+						   getBoundries()))
+{
+}
+
 Exposer::~Exposer()
 {
 	stop();
@@ -189,6 +221,24 @@ void Exposer::stop()
 	}
 }
 
+static inline uint64_t now_mono_ns(void)
+{
+	struct timespec ts;
+	const int rc = clock_gettime(CLOCK_MONOTONIC, &ts);
+	if (rc == 0) {
+		return (uint64_t)ts.tv_sec * 1000000000ULL +
+		       (uint64_t)ts.tv_nsec;
+	} else {
+		PERROR("Could not get the time");
+		return 0;
+	}
+}
+
+static inline int64_t get_elapsed_ms(uint64_t start_time_ns)
+{
+	return (now_mono_ns() - start_time_ns) / 1000000LL;
+}
+
 void *Exposer::server_thread(void *arg)
 {
 	Exposer *const exposer = (Exposer *)arg;
@@ -202,6 +252,7 @@ void *Exposer::server_thread(void *arg)
 				PERROR("Failed to accept connection");
 			continue;
 		}
+		const uint64_t start_time = now_mono_ns();
 		recv(client_fd, buffer, sizeof(buffer), 0);
 
 		auto families = exposer->registry_.Collect();
@@ -216,6 +267,12 @@ void *Exposer::server_thread(void *arg)
 		socket_ostream.flush();
 
 		close(client_fd);
+
+		const int64_t elapsed_ms = get_elapsed_ms(start_time);
+		if (socket_streambuf.was_aborted())
+			exposer->failureLatencies_.Observe(elapsed_ms);
+		else
+			exposer->successLatencies_.Observe(elapsed_ms);
 	}
 	return NULL;
 }
