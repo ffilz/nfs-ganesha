@@ -35,6 +35,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcc5e8a1_c7e63a14",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e573445c_f037858f",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f519a1_81ce05d8",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fc2c9de1_97bd1195",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4bbde30_b7b57555",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-10-28T07:51:35Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\texplicit Exposer(prometheus::Registry \u0026registry);\n \t                                      ^",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12556d9a_f9bebbe4",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d4bbde30_b7b57555",
       "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -82,6 +136,42 @@
       "writtenOn": "2024-10-28T07:51:35Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tHistogramInt::Family \u0026scrapingLatencies_;\n \t                     ^",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "173e26d5_0d97548a",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1fa2c4fa_19ed6c7f",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c916da_4b1acfb0",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9089f0d2_14e10b5a",
       "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +227,60 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8442d40_bc6a8967",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6a929a69_e3df92d4",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "257a4af4_0095f570",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f6d6d7a_d90ef16b",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a87a4356_b11d8cb8",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f100774d_ad84690f",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06da2d9f_ea20b23c",
@@ -184,6 +328,60 @@
       "writtenOn": "2024-10-28T07:51:35Z",
       "side": 1,
       "message": "WARNING: labels should not be indented\n+\tprometheus::Histogram\u003cint64_t\u003e \u0026failureLatencies_;",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "596d9dac_dfc7ef04",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "26a164ac_98952345",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe460a4_8334492b",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "06da2d9f_ea20b23c",
+      "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ad7038_8c1b8970",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-10-29T17:02:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b6df1eae_18963810",
       "revId": "8670c97c55e3431bc492bc948ac5f5001d66b11c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
