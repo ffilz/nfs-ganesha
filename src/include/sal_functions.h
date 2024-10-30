@@ -296,6 +296,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 extern uint32_t num_of_curr_expired_clients;
 int reap_expired_client_list(nfs_client_id_t *clientid);
 void remove_client_from_expired_client_list(nfs_client_id_t *active_clientid);
+bool add_client_to_expired_client_list(nfs_client_id_t *clientid);
 
 #define DISPLAY_CLIENTID_SIZE 37 /* 36 chars + null terminator */
 int display_clientid(struct display_buffer *dspbuf, clientid4 clientid);

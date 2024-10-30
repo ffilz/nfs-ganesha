@@ -1027,6 +1027,67 @@ void remove_client_from_expired_client_list(nfs_client_id_t *active_clientid)
 }
 
 /**
+ * @brief Add client to expired client list.
+ *
+ * NOTE: The caller should hold cid_mutex.
+ *
+ * @param[in] clientid The client id
+ *
+ * @retval true if the clientid is successfully added to the list.
+ */
+bool add_client_to_expired_client_list(nfs_client_id_t *clientid)
+{
+	if (clientid->cid_confirmed == EXPIRED_CLIENT_ID) {
+		/* Already expired, no need to add to list */
+		return false;
+	}
+	if (nfs_param.nfsv4_param.expired_client_threshold) {
+		/* Judging the amount of states the client owns.
+		 * If it has large number of opened files, we may not want
+		 * to hold the memory for a client that has gone away. */
+		if (atomic_fetch_uint32_t(&clientid->cid_open_state_counter) <
+		    nfs_param.nfsv4_param.max_open_files_for_expired_client) {
+			/* We have an expired client to be added to list */
+			atomic_inc_uint32_t(&num_of_curr_expired_clients);
+
+			/* Take a ref for clientid and add to list */
+			inc_client_id_ref(clientid);
+			clientid->marked_for_delayed_cleanup = true;
+
+			/* Drop the cid_mutex now so it is safe to take the
+			 * expired_client_ids_list_lock mutex.
+			 */
+			PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
+
+			if (isFullDebug(COMPONENT_CLIENTID)) {
+				display_client_id_rec(&dspbuf, clientid);
+				LogFullDebug(
+					COMPONENT_CLIENTID,
+					"Adding Expired Client{%s} for delayed cleanup, Threshold(%u) Curr_Expired(%u).",
+					str,
+					nfs_param.nfsv4_param
+						.expired_client_threshold,
+					atomic_fetch_uint32_t(
+						&num_of_curr_expired_clients));
+			}
+			PTHREAD_MUTEX_lock(&expired_client_ids_list_lock);
+			/* Sort entries based on cid_last_renew */
+			glist_insert_sorted(&expired_client_ids_list,
+					    &clientid->expired_client,
+					    &expired_client_item_compare);
+			PTHREAD_MUTEX_unlock(&expired_client_ids_list_lock);
+			if (isDebug(COMPONENT_CLIENTID))
+				print_expired_client_list();
+
+			/* Re-acquire the cid_mutex */
+			PTHREAD_MUTEX_lock(&clientid->cid_mutex);
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * @brief Client expires, need to take care of owners
  *
  * If there is a client_record attached to the clientid,
@@ -1070,45 +1131,9 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 		return false;
 	}
 
-	if (!make_stale && !force_expire &&
-	    nfs_param.nfsv4_param.expired_client_threshold) {
-		/* Judging the amount of states the client owns.
-		 * If it has large number of opened files, we may not want
-		 * to hold the memory for a client that has gone away. */
-		if (atomic_fetch_uint32_t(&clientid->cid_open_state_counter) <
-		    nfs_param.nfsv4_param.max_open_files_for_expired_client) {
-			/* We have an expired client to be added to list */
-			atomic_inc_uint32_t(&num_of_curr_expired_clients);
-
-			/* Take a ref for clientid and add to list */
-			inc_client_id_ref(clientid);
-			clientid->marked_for_delayed_cleanup = true;
-
-			/* Drop the cid_mutex now so it is safe to take the
-			 * expired_client_ids_list_lock mutex.
-			 */
+	if (!make_stale && !force_expire) {
+		if (add_client_to_expired_client_list(clientid)) {
 			PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
-
-			if (isFullDebug(COMPONENT_CLIENTID)) {
-				display_client_id_rec(&dspbuf, clientid);
-				LogFullDebug(
-					COMPONENT_CLIENTID,
-					"Adding Expired Client{%s} for delayed cleanup, Threshold(%u) Curr_Expired(%u).",
-					str,
-					nfs_param.nfsv4_param
-						.expired_client_threshold,
-					atomic_fetch_uint32_t(
-						&num_of_curr_expired_clients));
-			}
-			PTHREAD_MUTEX_lock(&expired_client_ids_list_lock);
-			/* Sort entries based on cid_last_renew */
-			glist_insert_sorted(&expired_client_ids_list,
-					    &clientid->expired_client,
-					    &expired_client_item_compare);
-			PTHREAD_MUTEX_unlock(&expired_client_ids_list_lock);
-			if (isDebug(COMPONENT_CLIENTID))
-				print_expired_client_list();
-
 			release_op_context();
 			return false;
 		}
