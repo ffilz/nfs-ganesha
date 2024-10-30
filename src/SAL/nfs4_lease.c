@@ -165,6 +165,15 @@ bool reserve_lease_or_expire(nfs_client_id_t *clientid, bool update,
 
 	valid = _valid_lease(clientid, false);
 
+	/* try to add client to expire list and revalidate */
+	if (valid == 0) {
+		if (clientid->cid_confirmed != EXPIRED_CLIENT_ID &&
+		    !clientid->marked_for_delayed_cleanup) {
+			if (add_client_to_expired_client_list(clientid))
+				valid = _valid_lease(clientid, false);
+		}
+	}
+
 	if (valid != 0)
 		clientid->cid_lease_reservations++;
 
