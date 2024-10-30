@@ -181,14 +181,6 @@ bool reserve_lease_or_expire(nfs_client_id_t *clientid, bool update,
 	if (valid == 0) {
 		/* Let's expire the lease */
 
-		/* Drop the Reference on st_owner, else nfs_client_id_expire
-		 * would not be able to clear the state owners
-		 */
-		if (st_owner != NULL) {
-			dec_state_owner_ref(*st_owner);
-			*st_owner = NULL;
-		}
-
 		/* Get the client record. */
 		nfs_client_record_t *client_rec = clientid->cid_client_record;
 
@@ -209,7 +201,28 @@ bool reserve_lease_or_expire(nfs_client_id_t *clientid, bool update,
 		if (client_rec != NULL)
 			PTHREAD_MUTEX_lock(&client_rec->cr_mutex);
 
-		nfs_client_id_expire(clientid, false, true);
+		nfs_client_id_expire(clientid, false, false);
+
+		/* Client might be added to expired list,
+		 * re-validate the client.
+		 */
+		PTHREAD_MUTEX_lock(&clientid->cid_mutex);
+
+		valid = _valid_lease(clientid, false);
+		if (valid != 0) {
+			clientid->cid_lease_reservations++;
+		} else {
+			/* Drop the Reference on st_owner, else
+			 * nfs_client_id_expire would not be able
+			 * to clear the state owners.
+			 */
+			if (st_owner != NULL) {
+				dec_state_owner_ref(*st_owner);
+				*st_owner = NULL;
+			}
+		}
+
+		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 
 		if (client_rec != NULL) {
 			PTHREAD_MUTEX_unlock(&client_rec->cr_mutex);
@@ -219,7 +232,8 @@ bool reserve_lease_or_expire(nfs_client_id_t *clientid, bool update,
 		/* drop our reference to the client_id */
 		dec_client_id_ref(clientid);
 
-		return false;
+		if (valid == 0)
+			return false;
 	}
 
 	if (update)
