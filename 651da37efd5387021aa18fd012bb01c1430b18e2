@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45df8ed_ee0af2ac",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-11-01T23:17:13Z",
+      "side": 1,
+      "message": "Could you add a comment as to why you check marked_for_delayed_cleanup here when it isn\u0027t checked at the other call to add_client_to_expired_client_list.",
+      "revId": "651da37efd5387021aa18fd012bb01c1430b18e2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
