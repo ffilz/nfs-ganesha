@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39434aa7_e56bd5f9",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxO)\n+using HistogramInt \u003d prometheus::Histogram\u003cint64_t\u003e;\n                                                   ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d2802e5_1ff996bd",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+using HistogramInt \u003d prometheus::Histogram\u003cint64_t\u003e;\n                                           ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "444ea23c_f9d9da3e",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\texplicit Exposer(prometheus::Registry \u0026registry);\n \t                                      ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca38d879_d97878f2",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tHistogramInt::Family \u0026scrapingLatencies_;\n \t                     ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f9f2a2_6033933a",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "WARNING: labels should not be indented\n+\tHistogramInt::Family \u0026scrapingLatencies_;",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3579270_a65bc323",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+\tprometheus::Histogram\u003cint64_t\u003e \u0026successLatencies_;\n \t                     ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30130f0f_2e422993",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+\tprometheus::Histogram\u003cint64_t\u003e \u0026successLatencies_;\n \t                             ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa7e8b5d_2f79b0c7",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "WARNING: labels should not be indented\n+\tprometheus::Histogram\u003cint64_t\u003e \u0026successLatencies_;",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4bb89b3_e6346969",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "WARNING: labels should not be indented\n+\tprometheus::Histogram\u003cint64_t\u003e \u0026failureLatencies_;",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6bee116_b6b37a49",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxV)\n+\tprometheus::Histogram\u003cint64_t\u003e \u0026failureLatencies_;\n \t                     ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a069b5_76e15187",
+        "filename": "src/monitoring/include/exposer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-03T08:24:54Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003e\u0027 (ctx:VxW)\n+\tprometheus::Histogram\u003cint64_t\u003e \u0026failureLatencies_;\n \t                             ^",
+      "revId": "b1cff0c8c6013f3ee3e7ab39a786c5010356d9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
