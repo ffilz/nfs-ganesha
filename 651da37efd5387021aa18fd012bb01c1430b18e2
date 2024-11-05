@@ -16,6 +16,24 @@
       "message": "Could you add a comment as to why you check marked_for_delayed_cleanup here when it isn\u0027t checked at the other call to add_client_to_expired_client_list.",
       "revId": "651da37efd5387021aa18fd012bb01c1430b18e2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09fc3e14_462f1b6f",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-05T18:17:05Z",
+      "side": 1,
+      "message": "Sure, Frank. \n\nBefore this patch, the only code path to add a client to the expire list in is: \"reaper_run -\u003e reap_hash_table -\u003e (if not (client_id-\u003emarked_for_delayed_cleanup || valid_lease(client_id, false))) -\u003e nfs_client_id_expire(client_id, false, false)\"(all other calls will have true as the last param). It should not be any race in that case since only reaper will add a client to expire list.\n\nI just rethink current case, though we have the marked_for_delayed_cleanup check for both cases, there could still be a race where a client could be added to the expire twice:\n1. Reaper check marked_for_delayed_cleanup \u003d\u003d false \u0026 trigger nfs_client_id_expire \u0026 unlock cid_mutex\n2. Reserve_lease_or_expire check the same client for marked_for_delayed_cleanup \u003d\u003d false \u0026 marked_for_delayed_cleanup to true \u0026 add the client to list\n3. step 1 continue to add the same client to the list.\n\nMight need to enhance it with some checks in the new \"add_client_to_expired_client_list\" to avoid the race now",
+      "parentUuid": "e45df8ed_ee0af2ac",
+      "revId": "651da37efd5387021aa18fd012bb01c1430b18e2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
