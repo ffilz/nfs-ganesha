@@ -116,6 +116,7 @@ clid_entry_t *nfs4_add_clid_entry(char *cl_name)
 {
 	clid_entry_t *new_ent = gsh_malloc(sizeof(clid_entry_t));
 
+	LogFullDebug(COMPONENT_CLIENTID, "Add NFS4 Clientid %s", cl_name);
 	glist_init(&new_ent->cl_rfh_list);
 	(void)strlcpy(new_ent->cl_name, cl_name, sizeof(new_ent->cl_name));
 	glist_add(&clid_list, &new_ent->cl_list);
@@ -127,6 +128,7 @@ rdel_fh_t *nfs4_add_rfh_entry(clid_entry_t *clid_ent, char *rfh_name)
 {
 	rdel_fh_t *new_ent = gsh_malloc(sizeof(rdel_fh_t));
 
+	LogFullDebug(COMPONENT_CLIENTID, "Add NFS4 RFH %s", rfh_name);
 	new_ent->rdfh_handle_str = gsh_strdup(rfh_name);
 	glist_add(&clid_ent->cl_rfh_list, &new_ent->rdfh_list);
 	return new_ent;
@@ -687,22 +689,23 @@ void nfs4_chk_clid_impl(nfs_client_id_t *clientid, clid_entry_t **clid_ent_arg)
 	{
 		clid_ent = glist_entry(node, clid_entry_t, cl_list);
 		if (check_clid(clientid, clid_ent)) {
-			if (isDebug(COMPONENT_CLIENTID)) {
-				char str[LOG_BUFF_LEN] = "\0";
-				struct display_buffer dspbuf = { sizeof(str),
-								 str, str };
-
-				display_client_id_rec(&dspbuf, clientid);
-
-				LogFullDebug(COMPONENT_CLIENTID,
-					     "Allowed to reclaim ClientId %s",
-					     str);
-			}
 			clientid->cid_allow_reclaim = true;
 			*clid_ent_arg = clid_ent;
 			break;
 		}
 	}
+
+	if (isFullDebug(COMPONENT_CLIENTID)) {
+		char str[LOG_BUFF_LEN] = "\0";
+		struct display_buffer dspbuf = { sizeof(str), str, str };
+
+		display_client_id_rec(&dspbuf, clientid);
+
+		LogFullDebug(COMPONENT_CLIENTID,
+			     "%sAllowed to reclaim ClientId %s",
+			     clientid->cid_allow_reclaim ? "" : "Not ", str);
+	}
+
 	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 }
 
@@ -923,9 +926,12 @@ bool nfs4_check_deleg_reclaim(nfs_client_id_t *clid, nfs_fh4 *fhandle)
 			}
 		}
 	}
+
+	LogFullDebug(COMPONENT_CLIENTID, "%s fh:%s",
+		     retval ? "Can reclaim" : "Can't reclaim revoked", rhdlstr);
+
 	PTHREAD_MUTEX_unlock(&grace_mutex);
-	LogFullDebug(COMPONENT_CLIENTID, "Returning %s",
-		     retval ? "TRUE" : "FALSE");
+
 	return retval;
 }
 
