@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b786c417_907e190e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "If a client after lease expiry does any operation, I believe we can continue the forceful expiration of such cases and get a new session/clientID generated for the client, if not already marked for future cleanups...This was design choice for such cases...\n\nOnly Reaper triggered Client expiry are parked for future cleanup...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc88bb6_bddb96a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "Current code, I remember, should be forcefully clearing up the ClientIDs, there was a force flag set to true...not need to park such clients coming after lease expiry for later cleanups...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0e8a2a5b_ae1aea1a",
@@ -14,6 +48,108 @@
       "writtenOn": "2024-11-06T01:13:23Z",
       "side": 1,
       "message": "Looks good.",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd0e8b8_3ad45ec5",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "Are these checks really required here as well, we are already checking this...\n\nIf these safety checks are required, please move inside the below feature toggle flag counter - expired_client_threshold",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e416dd_093c1801",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "nit:Typos in comments",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32589af8_ee7b8d3f",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "All the path in code, invoking reserve_lease_or_expire(), is gonna be impacted at here...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c03e22_8f6bfa25",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "This is risky to invoke here and continue, as this API drops the clientid-\u003ecid_mutex and later reacquires it...Reaper might clean it up, in between as well...you might wanna rework on this...\n\nAlso this is gonna impact the force cleanup logic, please check below comment...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b40fc71_e9ac4105",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "In the old logic, once the valid is 0, we used to immediately expire off the client by passing force flag as true...\nNow that path would get impacted, because of above interception...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564cf892_27062235",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1021665
+      },
+      "writtenOn": "2024-11-07T04:20:43Z",
+      "side": 1,
+      "message": "Once add_client_to_expired_client_list() is done above and valid gets updated...code will reach here and eventually remove it from expired client list...",
       "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
