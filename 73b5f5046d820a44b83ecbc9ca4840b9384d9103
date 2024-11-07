@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea6632b_d83359ee",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2275,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-07T05:01:08Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint32_t open_fds \u003d atomic_fetch_int32_t(\u0026fsal_fd_global_counter);\n+\tif (fsal_fd-\u003efd_type \u003d\u003d FSAL_FD_GLOBAL \u0026\u0026",
+      "revId": "73b5f5046d820a44b83ecbc9ca4840b9384d9103",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
