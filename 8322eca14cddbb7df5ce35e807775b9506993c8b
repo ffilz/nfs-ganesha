@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dca779ff_8d8b3149",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-07T21:47:03Z",
+      "side": 1,
+      "message": "Hi Rojin, we hit I/O issues where client did not come back in time with RENEW \u0026 trigger OPEN and got NFS4ERR_EXPIRED where IO error will pop up in linux client:\n 1          0  ** NFS 154 V4 Call RENEW CID: 0x7fe1\n  2          0 **  NFS 102 V4 Reply (Call In 1) RENEW\n 20         40  ** NFS 154 V4 Call RENEW CID: 0x7fe1\n 21         40 **  NFS 102 V4 Reply (Call In 20) RENEW\n 81         80  ** NFS 154 V4 Call RENEW CID: 0x7fe1\n 82         80 **  NFS 102 V4 Reply (Call In 81) RENEW\n 96        120  ** NFS 154 V4 Call RENEW CID: 0x7fe1\n 97        120 **  NFS 102 V4 Reply (Call In 96) RENEW\n1339        184  ** NFS 302 V4 Call OPEN DH: 0xe64c1e2b/file_2024-21-55-43_787985\n1340        184 **  NFS 110 V4 Reply (Call In 1339) OPEN Status: NFS4ERR_EXPIRED\n\nIn such case, we might not want to wait for the reaper to add the expire client to list.",
+      "parentUuid": "b786c417_907e190e",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bc88bb6_bddb96a1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -105,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27f9c54b_1fcae3d6",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-07T21:47:03Z",
+      "side": 1,
+      "message": "Yes, like the OPEN case above which will invoke the reserve_lease_or_expire, instead of return EXPIRED, we want it to try to add the client to expire list",
+      "parentUuid": "32589af8_ee7b8d3f",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2c03e22_8f6bfa25",
         "filename": "src/SAL/nfs4_lease.c",
         "patchSetId": 5
@@ -116,6 +152,24 @@
       "writtenOn": "2024-11-07T04:20:43Z",
       "side": 1,
       "message": "This is risky to invoke here and continue, as this API drops the clientid-\u003ecid_mutex and later reacquires it...Reaper might clean it up, in between as well...you might wanna rework on this...\n\nAlso this is gonna impact the force cleanup logic, please check below comment...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b120de_156aabc3",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-07T21:47:03Z",
+      "side": 1,
+      "message": "Yeah, now we have not just one code path to add a client to list, so add_client_to_expired_client_list will need to check whether the client has already been added to the expire list(while holding cid_mutex lock)",
+      "parentUuid": "d2c03e22_8f6bfa25",
       "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
