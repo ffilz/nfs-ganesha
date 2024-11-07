@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48cf152b_b8308591",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-07T08:50:45Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nBefore submitting a patch we require testing, this script provides an acceptable convention for running Ganesha for testing.",
+      "revId": "a77ddfa07c47e3811efb78e88560c0213e34587a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b5b94e_1f394222",
+        "filename": "src/test/run_test_mode.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-07T08:50:45Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#\t$ ./nfs4.1/testserver.py -v --outfile pynfs-results.log --maketree 127.0.0.1:/export/test1/pynfs --showomit --rundeps all ganesha",
+      "revId": "a77ddfa07c47e3811efb78e88560c0213e34587a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
