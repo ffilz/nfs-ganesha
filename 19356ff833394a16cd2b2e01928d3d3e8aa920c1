@@ -105,6 +105,24 @@
       "parentUuid": "4fe2449b_aa0e7b49",
       "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ada82ab_69b3aeb5",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2024-11-09T07:12:59Z",
+      "side": 1,
+      "message": "@dang@redhat.com\nIf you see the existing code (line no 1042), there was call for mem_int_get_ref, but this is not helping.",
+      "parentUuid": "bb3af6a4_492cb4cc",
+      "revId": "19356ff833394a16cd2b2e01928d3d3e8aa920c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
