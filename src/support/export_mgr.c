@@ -120,14 +120,35 @@ void export_add_to_unexport_work(struct gsh_export *export)
 
 struct gsh_export *export_take_mount_work(void)
 {
-	struct gsh_export *export;
+	struct gsh_export *export, *ret_exp = NULL;
+	struct glist_head *glist, *glistn;
+	int min_len = 0;
 
-	export = glist_first_entry(&mount_work, struct gsh_export, exp_work);
+	if (mount_work.next == &mount_work) {
+		return NULL;
+	}
 
-	if (export != NULL)
-		glist_del(&export->exp_work);
+	glist_for_each_safe(glist, glistn, &mount_work) {
+		export = glist_entry(glist, struct gsh_export, exp_work);
+		struct gsh_refstr *ref_pseudopath;
+		rcu_read_lock();
+		ref_pseudopath = gsh_refstr_get(rcu_dereference(export->pseudopath));
+		rcu_read_unlock();
 
-	return export;
+		int current_len = strlen(ref_pseudopath->gr_val);
+		if (min_len == 0 || current_len < min_len) {
+			min_len = current_len;
+			ret_exp = export;
+		}
+
+		gsh_refstr_put(ref_pseudopath);
+	}
+
+	glist_del(&ret_exp->exp_work);
+
+	LOG_EXPORT(NIV_DEBUG, "Found", ret_exp, false);
+
+	return ret_exp;
 }
 
 /**
@@ -546,7 +567,8 @@ struct gsh_export *get_gsh_export_by_pseudo_locked(char *path, bool exact_match)
 
 		/* we agree on size, now compare the leading substring
 		 */
-		if (strncmp(ref_pseudopath->gr_val, path, len_export) == 0) {
+		if (strncmp(ref_pseudopath->gr_val, path, len_export) == 0 &&
+			(export->is_mounted || len_export == 1)) {
 			ret_exp = export;
 			len_ret = len_export;
 
