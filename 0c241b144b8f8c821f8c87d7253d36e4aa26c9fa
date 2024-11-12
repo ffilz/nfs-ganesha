@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52a55b12_e30c731d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-11-12T19:57:21Z",
+      "side": 1,
+      "message": "I note that your /111/222 export is NFSv3 only. I believe this is the issue.\n\n\nWhat actually happens if the exports are not processed in order (let\u0027s say that /111/222 was an NFSv4 export but was sorted later in the config), is that we would create a pseudofs path from / to /111/222/333 for the second export. Then we would replace 222 with the first export and re-mount 333 inside 222.\n\nThis should all function correctly. We need it to work this way in order to be able to insert/remove /111/222 from the pseudofs on export update.",
+      "revId": "0c241b144b8f8c821f8c87d7253d36e4aa26c9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24b1d6fd_a1815c3f",
         "filename": "src/support/export_mgr.c",
         "patchSetId": 1
