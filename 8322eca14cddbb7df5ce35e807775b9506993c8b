@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf7a616_f27e3a52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-12T23:03:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dca779ff_8d8b3149",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bc88bb6_bddb96a1",
@@ -49,6 +67,24 @@
       "writtenOn": "2024-11-07T04:20:43Z",
       "side": 1,
       "message": "Current code, I remember, should be forcefully clearing up the ClientIDs, there was a force flag set to true...not need to park such clients coming after lease expiry for later cleanups...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b41e61a_07a781ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-12T23:03:23Z",
+      "side": 1,
+      "message": "Only the reaper will have the force flag as false, so we will need to wait till the reaper to take effect today",
+      "parentUuid": "2bc88bb6_bddb96a1",
       "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -139,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8c5a43_4ee8ae0d",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-12T23:03:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "27f9c54b_1fcae3d6",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2c03e22_8f6bfa25",
@@ -174,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ebfe40_6d60bae6",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-12T23:03:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "81b120de_156aabc3",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b40fc71_e9ac4105",
@@ -191,6 +263,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb73cbec_153c80e4",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-12T23:03:23Z",
+      "side": 1,
+      "message": "The intention of the change here is to avoid entering here which will really expire the client",
+      "parentUuid": "6b40fc71_e9ac4105",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "564cf892_27062235",
@@ -204,6 +294,24 @@
       "writtenOn": "2024-11-07T04:20:43Z",
       "side": 1,
       "message": "Once add_client_to_expired_client_list() is done above and valid gets updated...code will reach here and eventually remove it from expired client list...",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c0b69d_dbe990bf",
+        "filename": "src/SAL/nfs4_lease.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-12T23:03:23Z",
+      "side": 1,
+      "message": "After remove_client_from_expired_client_list, the client will get updated and the function will return true",
+      "parentUuid": "564cf892_27062235",
       "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
