@@ -123,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ef53e0_16a9dbab",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2024-11-12T23:08:47Z",
+      "side": 1,
+      "message": "Yeah, in nfs_client_id_expire we already has this check, but the new code path calling add_client_to_expired_client_list we should also do similar check.",
+      "parentUuid": "cfd0e8b8_3ad45ec5",
+      "revId": "8322eca14cddbb7df5ce35e807775b9506993c8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76e416dd_093c1801",
