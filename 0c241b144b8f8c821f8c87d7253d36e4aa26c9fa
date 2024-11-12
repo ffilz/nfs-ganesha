@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b1d6fd_a1815c3f",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-12T18:03:13Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (mount_work.next \u003d\u003d \u0026mount_work) {\n+\t\treturn NULL;\n+\t}",
+      "revId": "0c241b144b8f8c821f8c87d7253d36e4aa26c9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578cf479_ee3a2c6c",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-12T18:03:13Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tstruct gsh_refstr *ref_pseudopath;\n+\t\trcu_read_lock();",
+      "revId": "0c241b144b8f8c821f8c87d7253d36e4aa26c9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c3af53_3371373b",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-12T18:03:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tref_pseudopath \u003d gsh_refstr_get(rcu_dereference(export-\u003epseudopath));",
+      "revId": "0c241b144b8f8c821f8c87d7253d36e4aa26c9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fce2792_2a4054da",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-12T18:03:13Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint current_len \u003d strlen(ref_pseudopath-\u003egr_val);\n+\t\tif (min_len \u003d\u003d 0 || current_len \u003c min_len) {",
+      "revId": "0c241b144b8f8c821f8c87d7253d36e4aa26c9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
