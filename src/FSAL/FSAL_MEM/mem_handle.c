@@ -120,6 +120,8 @@ static void mem_cleanup(struct mem_fsal_obj_handle *myself)
 		mem_clean_all_dirents(myself);
 		break;
 	case REGULAR_FILE:
+		/* destroy associated global FD */
+		destroy_fsal_fd(&myself->mh_file.fd);
 		break;
 	case SYMBOLIC_LINK:
 		gsh_free(myself->mh_symlink.link_contents);
@@ -2442,8 +2444,6 @@ static void mem_release(struct fsal_obj_handle *obj_hdl)
 				obj_hdl, fsal_err_txt(st), strerror(st.minor),
 				st.minor);
 		}
-
-		destroy_fsal_fd(&myself->mh_file.fd);
 	}
 
 	mem_int_put_ref(myself);
