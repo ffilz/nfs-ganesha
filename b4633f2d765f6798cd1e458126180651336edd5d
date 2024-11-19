@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a68e29_7b63f40b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-11-19T00:02:27Z",
+      "side": 1,
+      "message": "I think I\u0027d still rather not under the principle of not limiting the ports that are enabled by default. There is no run-time config to enable/disable monitoring, only to configure which port is used and whether dynamic monitoring is enabled or not.\n\nIf we want to add config that defaults to monitoring disabled, I would be more willing.\n\nHowever, monitoring also does add additional metrics capture even if the exposer was disabled.",
+      "revId": "b4633f2d765f6798cd1e458126180651336edd5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
