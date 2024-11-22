@@ -824,8 +824,7 @@ void prune_pseudofs_subtree(struct gsh_export *export, uint64_t generation,
 
 		pseudo_unmount_export(export);
 
-		if (export->config_gen >= generation &&
-		    (export->export_perms.options & EXPORT_OPTION_NFSV4) != 0 &&
+		if ((export->export_perms.options & EXPORT_OPTION_NFSV4) != 0 &&
 		    export->export_id != 0 &&
 		    ref_pseudopath->gr_val[1] != '\0') {
 			export->update_remount = true;
