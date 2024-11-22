@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e286dcd6_a846bb2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-22T16:32:11Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nAs a result, /exp will be unmounted. During the pruning phase, /exp/subexp will be unmounted first. However, it will not be remounted because /exp/subexp does not meet the condition \"export-\u003econfig_gen \u003e\u003d generation\". Eventually, /exp/subexp will get disconnected from Pseudofs.",
+      "revId": "11b5b97f824e9dad052d4d388c3685f33017ce32",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
