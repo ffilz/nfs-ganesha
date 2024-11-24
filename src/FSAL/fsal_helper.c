@@ -532,6 +532,25 @@ fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
 
 	is_superuser = op_ctx->fsal_export->exp_ops.is_superuser(
 		op_ctx->fsal_export, &op_ctx->creds);
+
+	/* Test for the following condition from chmod(2):
+	 *
+	 *     If the calling process is not privileged (Linux: does not have
+	 *     the CAP_FSETID capability), and the group of the file does not
+	 *     match the effective group ID of the process or one of its
+	 *     supplementary group IDs, the S_ISGID bit will be turned off,
+	 *     but this will not cause an error to be returned.
+	 *
+	 * We test the actual mode being set before testing for group
+	 * membership since that is a bit more expensive.
+	 */
+	if (!is_superuser && FSAL_TEST_MASK(attr->valid_mask, ATTR_MODE) &&
+	    (attr->mode & S_ISGID) != 0 &&
+	    fsal_not_in_group_list(current.group)) {
+		/* Clear S_ISGID */
+		attr->mode &= ~S_ISGID;
+	}
+
 	/* Test for the following condition from chown(2):
 	 *
 	 *     When the owner or group of an executable file are changed by an
@@ -588,24 +607,6 @@ fsal_status_t fsal_setattr(struct fsal_obj_handle *obj, bool bypass,
 			/* Clear S_ISUID. */
 			attr->mode &= ~S_ISUID;
 		}
-	}
-
-	/* Test for the following condition from chmod(2):
-	 *
-	 *     If the calling process is not privileged (Linux: does not have
-	 *     the CAP_FSETID capability), and the group of the file does not
-	 *     match the effective group ID of the process or one of its
-	 *     supplementary group IDs, the S_ISGID bit will be turned off,
-	 *     but this will not cause an error to be returned.
-	 *
-	 * We test the actual mode being set before testing for group
-	 * membership since that is a bit more expensive.
-	 */
-	if (!is_superuser && FSAL_TEST_MASK(attr->valid_mask, ATTR_MODE) &&
-	    (attr->mode & S_ISGID) != 0 &&
-	    fsal_not_in_group_list(current.group)) {
-		/* Clear S_ISGID */
-		attr->mode &= ~S_ISGID;
 	}
 
 	status = obj->obj_ops->setattr2(obj, bypass, state, attr);
