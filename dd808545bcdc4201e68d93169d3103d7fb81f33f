@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83267a01_4a25e30d",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-24T13:32:44Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\tglist_for_each_safe(curr_node, next_node, \u0026connections_copy)\n+\t{",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62824c64_3859de60",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2172,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-24T13:32:44Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tstruct glist_head *curr_node, *next_node;\n+\t\t\tpthread_mutex_lock(\u0026clientid-\u003ecid_mutex);",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd0eed6d_ea2b8b67",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2174,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-24T13:32:44Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+\t\t\tglist_for_each_safe(\n+\t\t\t\tcurr_node, next_node,\n+\t\t\t\t\u0026clientid-\u003ecid_cb.v41.cb_session_list)\n+\t\t\t{",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e5b6f3_2cb89ca0",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-24T13:32:44Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_client *const client \u003d lookup_client(args, \u0026errormsg);\n+\tif (client \u003d\u003d NULL) {",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
