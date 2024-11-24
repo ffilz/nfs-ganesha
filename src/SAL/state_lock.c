@@ -108,17 +108,7 @@ state_owner_t unknown_owner = {
 	.so_lock_list = GLIST_HEAD_INIT(unknown_owner.so_lock_list),
 };
 
-static state_status_t do_lock_op(struct fsal_obj_handle *obj, state_t *state,
-				 fsal_lock_op_t lock_op, state_owner_t *owner,
-				 fsal_lock_param_t *lock,
-				 state_owner_t **holder,
-				 fsal_lock_param_t *conflict, bool overlap);
-/**
- * @brief Blocking lock cookies
- */
-
-/**
- * @brief Check whether a lock is from NLM
+s
  *
  * @param[in] lock_entry Lock to check
  *
@@ -3214,7 +3204,7 @@ state_status_t state_cancel_blocked(state_lock_entry_t *lock_entry)
 
 		default:
 			LogFatal(COMPONENT_STATE, "Got an protocol type %s",
-				 str_protocol(lock_entry->sle_blocked));
+				 str_protocol(lock_entry->sle_protocol));
 		}
 		break;
 
