@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38922f47_00dac9dc",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-24T13:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83267a01_4a25e30d",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62824c64_3859de60",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-11-24T13:32:44Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\t\t\tstruct glist_head *curr_node, *next_node;\n+\t\t\tpthread_mutex_lock(\u0026clientid-\u003ecid_mutex);",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "983794fe_d1609b42",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2172,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-24T13:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62824c64_3859de60",
       "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b89bec_8c8e98d0",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2174,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-24T13:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd0eed6d_ea2b8b67",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6e5b6f3_2cb89ca0",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-11-24T13:32:44Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_client *const client \u003d lookup_client(args, \u0026errormsg);\n+\tif (client \u003d\u003d NULL) {",
+      "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2722089_d5476261",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-24T13:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6e5b6f3_2cb89ca0",
       "revId": "dd808545bcdc4201e68d93169d3103d7fb81f33f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
