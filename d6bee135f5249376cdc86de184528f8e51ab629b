@@ -16,6 +16,24 @@
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (op_ctx-\u003ecred_flags \u0026 MANAGED_GIDS) {\n+\t\tgarray_copy \u003d \u0026op_ctx-\u003emanaged_garray_copy;\n+\t}",
       "revId": "d6bee135f5249376cdc86de184528f8e51ab629b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73788d10_3de90340",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-24T12:56:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53ad39c2_c98431a5",
+      "revId": "d6bee135f5249376cdc86de184528f8e51ab629b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
