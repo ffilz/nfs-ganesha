@@ -52,6 +52,24 @@
       "parentUuid": "32d0c6c8_feed4675",
       "revId": "ea421aa59f2cc74b085b014d4110858601f0e9e5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aff64fa_3d2e3402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-24T13:07:18Z",
+      "side": 1,
+      "message": "The dynamic configuration was kerberos is already merged, for some reason this was missing in it\n\nWe call the clear cache (`nfs_rpc_cb_set_gss_status`) whenever we enable / disable GSS in `nfs_rpc_cb_set_gss_status`, so this call is redundant",
+      "parentUuid": "a3a999be_e8e2cca2",
+      "revId": "ea421aa59f2cc74b085b014d4110858601f0e9e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
