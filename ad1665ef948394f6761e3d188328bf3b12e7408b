@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0844268_f0ff8092",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-24T13:47:37Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\ndbus-send --system --dest\u003dorg.ganesha.nfsd --type\u003dmethod_call /org/ganesha/nfsd/admin org.ganesha.nfsd.admin.reread_config",
+      "revId": "ad1665ef948394f6761e3d188328bf3b12e7408b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012848a1_d8446276",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-24T13:47:37Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tDBusMessageIter iter;\n+\tdbus_message_iter_init_append(reply, \u0026iter);",
+      "revId": "ad1665ef948394f6761e3d188328bf3b12e7408b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
