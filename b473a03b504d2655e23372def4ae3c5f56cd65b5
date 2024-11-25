@@ -104,6 +104,24 @@
       "parentUuid": "851164b7_22f7f3cf",
       "revId": "b473a03b504d2655e23372def4ae3c5f56cd65b5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809862dd_961a0235",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2024-11-25T03:05:08Z",
+      "side": 1,
+      "message": "This commit only implements the framework. If it is accepted, I will adapt `recovery_fs` to the framework soon.",
+      "parentUuid": "216f66e7_ca629123",
+      "revId": "b473a03b504d2655e23372def4ae3c5f56cd65b5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
