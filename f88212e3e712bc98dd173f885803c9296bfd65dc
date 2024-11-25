@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1fa45cf_4e948862",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-25T15:18:13Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe config option can be used in (DEFAULT) EXPORT CLIENT blocks to limit the block only",
+      "revId": "f88212e3e712bc98dd173f885803c9296bfd65dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad384702_e4ce0200",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-25T15:18:13Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * An export client entry might be scoped only to local (non-PROXY protocol) requests",
+      "revId": "f88212e3e712bc98dd173f885803c9296bfd65dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
