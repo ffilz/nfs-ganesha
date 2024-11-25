@@ -214,6 +214,9 @@ void connection_manager__callback_set(connection_manager__callback_context_t);
  */
 connection_manager__callback_context_t connection_manager__callback_clear(void);
 
+// Initialize the Connection Manager module
+void connection_manager__init(void);
+
 /**
  * Called from client_mgr when a new gsh_client is created.
  */
