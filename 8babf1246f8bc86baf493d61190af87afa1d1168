@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "894b739f_83b4d236",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2172,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-25T16:15:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "667f8dde_ddb792e8",
+      "revId": "8babf1246f8bc86baf493d61190af87afa1d1168",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18273dff_492f72b8",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-11-25T15:14:18Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_client *const client \u003d lookup_client(args, \u0026errormsg);\n+\tif (client \u003d\u003d NULL) {",
+      "revId": "8babf1246f8bc86baf493d61190af87afa1d1168",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9bb1bfa_55a93bcb",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-11-25T16:15:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cdde8fd_43b719d7",
       "revId": "8babf1246f8bc86baf493d61190af87afa1d1168",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
