@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f697ddb5_acbd6839",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-25T15:19:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* The \u0027current\u0027 fsal attrs are not populated during the above call to",
+      "revId": "b482216dfcaa1dabb619d94c86b04605ce7e778d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a664319e_4cad7f84",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-25T15:19:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t * fsal_check_setattr_perms() if the caller is root. Populating it here.",
+      "revId": "b482216dfcaa1dabb619d94c86b04605ce7e778d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81cb481_d211ce68",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-25T15:19:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t/* User changing ownership on an executable or non-executable file",
+      "revId": "b482216dfcaa1dabb619d94c86b04605ce7e778d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32688394_0619102e",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-25T15:19:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Mode wasn\u0027t being set, so set it now, start with",
+      "revId": "b482216dfcaa1dabb619d94c86b04605ce7e778d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eea847df_ab61b331",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-11-25T15:19:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t/* Don\u0027t clear S_ISGID if the file isn\u0027t group executable.",
+      "revId": "b482216dfcaa1dabb619d94c86b04605ce7e778d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
