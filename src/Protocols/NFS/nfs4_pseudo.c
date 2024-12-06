@@ -334,7 +334,7 @@ bool pseudo_mount_export(struct gsh_export *export)
 
 	/* skip exports that aren't for NFS v4
 	 * Also, nothing to actually do for Pseudo Root
-	 * (defer checking pseudopath for Pseudo Root until we have refstr.
+	 * (defer checking pseudopath for Pseudo Root until we have refstr.)
 	 */
 	if (!export_can_be_mounted(export))
 		return true;
