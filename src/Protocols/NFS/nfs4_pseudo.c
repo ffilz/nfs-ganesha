@@ -40,17 +40,6 @@
 #include "fsal.h"
 #include "export_mgr.h"
 
-/**
- * @brief Find the node for this path component
- *
- * If not found, create it.  Called from token_to_proc() iterator
- *
- * @param token [IN] path name component
- * @param arg   [IN] callback state
- *
- * @return status as bool. false terminates foreach
- */
-
 struct pseudofs_state {
 	struct gsh_export *export;
 	struct fsal_obj_handle *obj;
@@ -187,6 +176,16 @@ out:
 	parent_obj->obj_ops->put_ref(parent_obj);
 }
 
+/**
+ * @brief Find the node for this path component
+ *
+ * If not found, create it.
+ *
+ * @param name    [IN] path name component
+ * @param state   [IN] pseudofs state
+ *
+ * @return status as bool. false terminates foreach
+ */
 bool make_pseudofs_node(char *name, struct pseudofs_state *state)
 {
 	struct fsal_obj_handle *new_node = NULL;
