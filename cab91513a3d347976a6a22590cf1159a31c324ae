@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n- The intention behind introducing a new compiler flag was to eliminate lengthy file names in Ganesha logs.",
       "revId": "cab91513a3d347976a6a22590cf1159a31c324ae",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb0607de_b48ee218",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-09T19:09:05Z",
+      "side": 1,
+      "message": "Could you wrap the commit message.\n\nAlso, if this really makes gdb not work, please make it a compile option that defaults to off.\n\nCould you also share a before and after log message?",
+      "revId": "cab91513a3d347976a6a22590cf1159a31c324ae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
