@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08e5c3a_80e19dea",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-09T20:02:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "144c05e0_775b0049",
+      "revId": "76fbf53668cc11f3bf0f883eb939a46bd9e2a89b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fba31a27_546e9f55",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03bddd64_dd94848f",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-09T20:02:54Z",
+      "side": 1,
+      "message": "Go ahead and remove these braces.",
+      "parentUuid": "fba31a27_546e9f55",
+      "revId": "76fbf53668cc11f3bf0f883eb939a46bd9e2a89b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f02c76aa_299f18f0",
         "filename": "src/include/connection_manager.h",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2024-11-25T16:48:13Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+// Initialize the Connection Manager module",
+      "revId": "76fbf53668cc11f3bf0f883eb939a46bd9e2a89b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b66b192_68d7615c",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-09T20:02:54Z",
+      "side": 1,
+      "message": "Please don\u0027t use // comments outside of C++ files (and the SPDX header).",
+      "parentUuid": "f02c76aa_299f18f0",
       "revId": "76fbf53668cc11f3bf0f883eb939a46bd9e2a89b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
