@@ -36,6 +36,9 @@ unsigned int v4_recov_dir_len;
 char v4_old_dir[PATH_MAX];
 unsigned int v4_old_dir_len;
 
+/* this file denotes that the clientid has reclaimed completely */
+static char *reclaim_complete_marker = "reclaim_complete";
+
 /**
  * @brief convert clientid opaque bytes as a hex string for mkdir purpose.
  *
@@ -333,13 +336,65 @@ void fs_add_clid(nfs_client_id_t *clientid)
 	}
 }
 
+void fs_reclaim_complete(nfs_client_id_t *clientid)
+{
+	char path[PATH_MAX] = { 0 };
+	int length, position = 0, pathpos, marker_len;
+	int fd;
+
+	memcpy(path, v4_recov_dir, v4_recov_dir_len);
+	pathpos = v4_recov_dir_len;
+
+	length = strlen(clientid->cid_recov_tag);
+	marker_len = strlen(reclaim_complete_marker);
+
+	while (position < length) {
+		int len = length - position;
+
+		if (len <= NAME_MAX) {
+			int new_pathpos = pathpos + 1 + len + 1 + marker_len;
+
+			if (new_pathpos >= sizeof(path)) {
+				LogCrit(COMPONENT_CLIENTID,
+					"Could not reclaim_complete path %s/%s/%s too long",
+					path,
+					clientid->cid_recov_tag + position,
+					reclaim_complete_marker);
+				return;
+			}
+			path[pathpos++] = '/';
+			memcpy(path + pathpos,
+			       clientid->cid_recov_tag + position, len);
+			path[pathpos + len] = '/';
+			memcpy(path + pathpos + len + 1,
+				reclaim_complete_marker, marker_len);
+			fd = creat(path, 0700);
+			if (fd < 0) {
+				LogEvent(
+					COMPONENT_CLIENTID,
+					"Failed to record revoke errno: %s (%d)",
+					strerror(errno), errno);
+			} else {
+				close(fd);
+			}
+			return;
+		}
+		path[pathpos++] = '/';
+		memcpy(path + pathpos, clientid->cid_recov_tag + position,
+		       NAME_MAX);
+		pathpos += NAME_MAX;
+		position += NAME_MAX;
+	}
+}
+
 /**
- * @brief Remove the revoked file handles created under a specific
- * client-id path on the stable storage.
+ * @brief Remove the records created under a specific client-id
+ * path on the stable storage, including the revoked file handles
+ * and reclaim_complete marker.
  *
  * @param[in] path The path of the client-id on the stable storage.
  */
-static void fs_rm_revoked_handles(char *path)
+static void fs_rm_client_records(char *path)
 {
 	DIR *dp;
 	struct dirent *dentp;
@@ -354,8 +409,9 @@ static void fs_rm_revoked_handles(char *path)
 	for (dentp = readdir(dp); dentp != NULL; dentp = readdir(dp)) {
 		int rc;
 
-		if (!strcmp(dentp->d_name, ".") ||
-		    !strcmp(dentp->d_name, "..") || dentp->d_name[0] != '\x1') {
+		/* only delete revoke file handles or reclaim_complete marker */
+		if (dentp->d_name[0] != '\x1' &&
+			strcmp(dentp->d_name, reclaim_complete_marker)) {
 			continue;
 		}
 
@@ -388,9 +444,9 @@ static void fs_rm_clid_impl(int position, char *recov_dir, int len,
 
 	if (position == len) {
 		/* We are at the tail directory of the clid,
-		* remove revoked handles, if any.
+		* remove revoked handles and reclaim complete marker, if any.
 		*/
-		fs_rm_revoked_handles(parent_path);
+		fs_rm_client_records(parent_path);
 		return;
 	}
 
@@ -441,6 +497,36 @@ void fs_rm_clid(nfs_client_id_t *clientid)
 	gsh_free(recov_dir);
 }
 
+static bool fs_check_reclaim_complete(const char *clid_path)
+{
+	char path[PATH_MAX] = { 0 };
+	int rc = snprintf(path, sizeof(path), "%s/%s",
+		clid_path, reclaim_complete_marker);
+
+	if (unlikely(rc >= sizeof(path))) {
+		LogCrit(COMPONENT_CLIENTID,
+			"Path %s/%s too long", clid_path,
+			reclaim_complete_marker);
+	} else if (unlikely(rc < 0)) {
+		LogCrit(COMPONENT_CLIENTID,
+			"Unexpected return from snprintf %d error %s (%d)",
+			rc, strerror(errno), errno);
+	} else {
+		struct stat buffer;
+
+		if (stat(path, &buffer) == 0) {
+			if (S_ISREG(buffer.st_mode))
+				return true;
+			else {
+				LogDebug(COMPONENT_CLIENTID,
+					"unexpected non-regular type of path %s",
+					path);
+			}
+		}
+	}
+	return false;
+}
+
 /**
  * @brief Copy and Populate revoked delegations for this client.
  *
@@ -477,11 +563,6 @@ static void fs_cp_pop_revoked_delegs(clid_entry_t *clid_ent, char *path,
 			continue;
 		/* All the revoked filehandles stored with \x1 prefix */
 		if (dentp->d_name[0] != '\x1') {
-			/* Something wrong; it should not happen */
-			LogMidDebug(
-				COMPONENT_CLIENTID,
-				"%s showed up along with revoked FHs. Skipping",
-				dentp->d_name);
 			continue;
 		}
 
@@ -585,6 +666,7 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 	int segment_len;
 	int total_clid_len;
 	int clid_str_len = (clid_str == NULL) ? 0 : strlen(clid_str);
+	bool reclaim_complete;
 
 	dp = opendir(parent_path);
 	if (dp == NULL) {
@@ -599,10 +681,8 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 		if (!strcmp(dentp->d_name, ".") || !strcmp(dentp->d_name, ".."))
 			continue;
 
-		/* Skip names that start with '\x1' as they are files
-		 * representing revoked file handles
-		 */
-		if (dentp->d_name[0] == '\x1')
+		/* skip non-directory dentries */
+		if (dentp->d_type != DT_DIR)
 			continue;
 
 		num++;
@@ -696,13 +776,16 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 			cid_len = atoi(temp);
 			len = strlen(ptr2);
 			if ((len == (cid_len + 2)) && (ptr2[len - 1] == ')')) {
-				new_ent = add_clid_entry(build_clid, true);
+				reclaim_complete =
+					fs_check_reclaim_complete(sub_path);
+				new_ent = add_clid_entry(build_clid,
+							reclaim_complete);
 				fs_cp_pop_revoked_delegs(new_ent, sub_path,
 							 tgtdir, !takeover,
 							 add_rfh_entry);
 				LogDebug(COMPONENT_CLIENTID,
-					 "added %s to clid list",
-					 new_ent->cl_name);
+					 "added %s to clid list, reclaim_complete %d",
+					 new_ent->cl_name, reclaim_complete);
 			}
 		}
 		gsh_free(build_clid);
@@ -710,6 +793,7 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 		 * hierarchy  that represent the current clientid
 		 */
 		if (!takeover) {
+			fs_rm_client_records(sub_path);
 			rc = rmdir(sub_path);
 			if (rc == -1) {
 				LogEvent(COMPONENT_CLIENTID,
@@ -855,13 +939,13 @@ void fs_clean_old_recov_dir_impl(char *parent_path)
 		/* If there is a filename starting with '\x1', then it is
 		 * a revoked handle, go ahead and remove it.
 		 */
-		if (dentp->d_name[0] == '\x1') {
+		if (dentp->d_type == DT_REG) {
 			if (unlink(path) < 0) {
 				LogEvent(COMPONENT_CLIENTID,
-					 "unlink of %s failed errno: %s (%d)",
-					 path, strerror(errno), errno);
+					"unlink of %s failed errno: %s (%d)",
+					path, strerror(errno), errno);
 			}
-		} else {
+		} else if (dentp->d_type == DT_DIR) {
 			/* This is a directory, we need process files in it! */
 			fs_clean_old_recov_dir_impl(path);
 
@@ -872,6 +956,10 @@ void fs_clean_old_recov_dir_impl(char *parent_path)
 					 "Failed to remove %s, errno: %s (%d)",
 					 path, strerror(errno), errno);
 			}
+		} else {
+			LogEvent(COMPONENT_CLIENTID,
+				"unknown dentry type %c:%s",
+				dentp->d_type, path);
 		}
 		gsh_free(path);
 	}
@@ -952,6 +1040,7 @@ struct nfs4_recovery_backend fs_backend = {
 	.recovery_init = fs_create_recov_dir,
 	.end_grace = fs_clean_old_recov_dir,
 	.recovery_read_clids = fs_read_recov_clids_takeover,
+	.reclaim_complete = fs_reclaim_complete,
 	.add_clid = fs_add_clid,
 	.rm_clid = fs_rm_clid,
 	.add_revoke_fh = fs_add_revoke_fh,
