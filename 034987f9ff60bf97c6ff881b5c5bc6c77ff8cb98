@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f47a10f_01fe7da9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-09T22:03:50Z",
+      "side": 1,
+      "message": "We would actually like to move away from using dbus, for one thing it requires use of privileged containers for containerized Ganesha. SIGHUP is always viable, so I would prefer leave these scripts using SIGHUP.\n\nOf course really scripts like this should be vetted and customized by distributions and not just pick up scripts from the project.",
+      "revId": "034987f9ff60bf97c6ff881b5c5bc6c77ff8cb98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
