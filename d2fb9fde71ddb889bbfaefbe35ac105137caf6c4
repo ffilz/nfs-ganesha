@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd724ead_c444b919",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-09T21:42:12Z",
+      "side": 1,
+      "message": "In principle I\u0027m OK with this but I worry about unexpected consequences of expiring a clientid that we did not remove all the references to. Is someone left with a dangling pointer at all, or other unpleasant effect.",
+      "revId": "d2fb9fde71ddb889bbfaefbe35ac105137caf6c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
