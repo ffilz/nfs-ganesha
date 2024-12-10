@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86eefa44_eff01afd",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T01:05:35Z",
+      "side": 1,
+      "message": "Please fix this open brace",
+      "parentUuid": "82407b69_24f5cc33",
+      "revId": "8babf1246f8bc86baf493d61190af87afa1d1168",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "667f8dde_ddb792e8",
         "filename": "src/SAL/nfs4_clientid.c",
         "patchSetId": 13
@@ -66,6 +84,24 @@
       "writtenOn": "2024-11-25T15:14:18Z",
       "side": 1,
       "message": "ERROR: that open brace { should be on the previous line\n+\t\t\tglist_for_each_safe(\n+\t\t\t\tcurr_node, next_node,\n+\t\t\t\t\u0026clientid-\u003ecid_cb.v41.cb_session_list)\n+\t\t\t{",
+      "revId": "8babf1246f8bc86baf493d61190af87afa1d1168",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a32d4ba7_c727eea3",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2174,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T01:05:35Z",
+      "side": 1,
+      "message": "Please fix this open brace",
+      "parentUuid": "18273dff_492f72b8",
       "revId": "8babf1246f8bc86baf493d61190af87afa1d1168",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
