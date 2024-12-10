@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a771fd47_9c3da1d6",
+        "filename": "src/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T00:38:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2f349feb_d742abb2",
+      "revId": "82fa789e5be710a6ff050ed1f53eede1281abf74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f12f612_56fb826d",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-17T05:56:41Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+  ${CMAKE} .  -DCMAKE_BUILD_TYPE\u003dRelWithDebInfo -DUSE_ADMIN_TOOLS\u003dON -DUSE_GUI_ADMIN_TOOLS\u003dOFF -DUSE_DBUS\u003dON -DUSE_NFSIDMAP\u003dOFF",
+      "revId": "82fa789e5be710a6ff050ed1f53eede1281abf74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "973af12d_db1a5a2f",
+        "filename": "src/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T00:38:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f12f612_56fb826d",
       "revId": "82fa789e5be710a6ff050ed1f53eede1281abf74",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
