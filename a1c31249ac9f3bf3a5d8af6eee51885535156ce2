@@ -16,6 +16,23 @@
       "message": "I would like more discussion on the merits of making libnfsidmap not used by default.\n\nOtherwise, this feels like a change that belongs in specific distributions.",
       "revId": "a1c31249ac9f3bf3a5d8af6eee51885535156ce2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b48de0d_ee9901de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2024-12-10T04:51:04Z",
+      "side": 1,
+      "message": "I don\u0027t think I\u0027m in favor of churn to remove a library that we\u0027ve relied on for over a decade, just to have one less link lib?",
+      "revId": "a1c31249ac9f3bf3a5d8af6eee51885535156ce2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
