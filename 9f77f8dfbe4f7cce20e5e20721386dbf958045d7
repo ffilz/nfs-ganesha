@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0cc44cc_74819a65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T23:01:46Z",
+      "side": 1,
+      "message": "Maybe let\u0027s not reformat the test C++ code, the reformat is just making a mess.",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce57a5c_a6c01930",
+        "filename": "src/gtest/fsal_api/test_close2_latency.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T23:01:46Z",
+      "side": 1,
+      "message": "Interesting, the readability of the params for alloc_state and open2 are reversed... Same below...",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "660e5e3c_330a2484",
+        "filename": "src/gtest/fsal_api/test_close2_latency.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T23:01:46Z",
+      "side": 1,
+      "message": "More garbage reformatting.",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fdd061d_a537a843",
+        "filename": "src/gtest/fsal_api/test_close_latency.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T23:01:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure what clang is doing here, but that\u0027s horrible...\n\nOther than spaces vs. tabs, the old version is much more readable",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
