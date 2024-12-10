@@ -33,6 +33,24 @@
       "message": "WARNING: Missing a blank line after declarations\n+\tDBusMessageIter iter;\n+\tdbus_message_iter_init_append(reply, \u0026iter);",
       "revId": "ad1665ef948394f6761e3d188328bf3b12e7408b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbdcd770_d6559584",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T01:12:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "012848a1_d8446276",
+      "revId": "ad1665ef948394f6761e3d188328bf3b12e7408b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
