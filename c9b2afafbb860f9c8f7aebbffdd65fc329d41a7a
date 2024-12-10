@@ -20,6 +20,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e58d0ff6_5d683f9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T20:10:52Z",
+      "side": 1,
+      "message": "I see what this is doing and it makes sense, but the code feels a bit obtuse, I feel like it could be simplified and a bit easier to understand.",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc2175c0_afdd77ca",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T20:10:52Z",
+      "side": 1,
+      "message": "I would re-order these so WITH is 1, WITHOUT is 0.",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f47ccc2f_4ea9db2c",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3178,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T20:10:52Z",
+      "side": 1,
+      "message": "Is it really worth having this as a separate function?",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "887d3935_4583674c",
         "filename": "src/support/exports.c",
         "patchSetId": 4
@@ -31,6 +82,41 @@
       "writtenOn": "2024-11-25T17:32:45Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+ * An export client entry might be scoped only to local (non-PROXY protocol) requests",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97bcfd8f_f1ae4a86",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3184,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T20:10:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "887d3935_4583674c",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32139fe7_ba5f1c8b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3206,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-10T20:10:52Z",
+      "side": 1,
+      "message": "If you reverse the values for WITH and WITHOUT, you can just test for equality...\n\nOptionally, if is_rpc_address_initialized was not a separate function, just make is_op_proxy_protocol and enum and set it to the right enum value based on if the address is initialized or not.",
       "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
