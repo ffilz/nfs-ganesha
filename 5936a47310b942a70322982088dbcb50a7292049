@@ -16,6 +16,24 @@
       "message": "Why remove this?",
       "revId": "5936a47310b942a70322982088dbcb50a7292049",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b366ce5_5ff0f994",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2024-12-11T02:47:16Z",
+      "side": 0,
+      "message": "This function only cares about revoked file handles under the directory of the client id, which are denoted as files named with \"\\x1\" as the first character. \n\nThis commit adds another file named \"reclaim_complete\", and there maybe other entries for other use in the future. So files not begins with \"\\x1\" are as expected and logs are not necessary.",
+      "parentUuid": "00a8e6e5_70d1722d",
+      "revId": "5936a47310b942a70322982088dbcb50a7292049",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
