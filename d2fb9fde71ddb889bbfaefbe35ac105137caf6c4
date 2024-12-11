@@ -33,6 +33,24 @@
       "message": "@ofirvins@google.com Can you please add the exact scenario for how this can happen / reproduced",
       "revId": "d2fb9fde71ddb889bbfaefbe35ac105137caf6c4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "297a5325_9fea389b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2024-12-11T07:21:21Z",
+      "side": 1,
+      "message": "What we encountered is an incorrect client behavior where client had several  machines with the same hostname, which causes a collision between them and then when 1 client destroys another session ref count is not immediately 0 which crashes ganesha. this can of course also be used by a malicious client to disable cluster.",
+      "parentUuid": "cd724ead_c444b919",
+      "revId": "d2fb9fde71ddb889bbfaefbe35ac105137caf6c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
