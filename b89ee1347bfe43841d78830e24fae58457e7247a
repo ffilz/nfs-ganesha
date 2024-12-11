@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8423a9_871ce14b",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T18:03:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "750de0bd_ca938675",
+      "revId": "b89ee1347bfe43841d78830e24fae58457e7247a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa6b4daa_f371373d",
@@ -31,6 +49,41 @@
       "writtenOn": "2024-12-11T10:33:15Z",
       "side": 1,
       "message": "ERROR: that open brace { should be on the previous line\n+\t\t\tglist_for_each_safe(\n+\t\t\t\tcurr_node, next_node,\n+\t\t\t\t\u0026clientid-\u003ecid_cb.v41.cb_session_list)\n+\t\t\t{",
+      "revId": "b89ee1347bfe43841d78830e24fae58457e7247a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc740ce9_7fcb7683",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2175,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T18:03:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fa6b4daa_f371373d",
+      "revId": "b89ee1347bfe43841d78830e24fae58457e7247a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27bb241d_8c40a341",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T18:03:44Z",
+      "side": 1,
+      "message": "Good choice. Thanks",
       "revId": "b89ee1347bfe43841d78830e24fae58457e7247a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
