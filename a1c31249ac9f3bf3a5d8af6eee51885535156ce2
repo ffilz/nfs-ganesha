@@ -33,6 +33,24 @@
       "message": "I don\u0027t think I\u0027m in favor of churn to remove a library that we\u0027ve relied on for over a decade, just to have one less link lib?",
       "revId": "a1c31249ac9f3bf3a5d8af6eee51885535156ce2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6f937b_5b059f31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-11T10:00:48Z",
+      "side": 1,
+      "message": "The usage in `libnfsidmap` was only when Ganesha was configured to use Kerberos + Directory Services, I don\u0027t think that there are many users that have that kind of setup, it isn\u0027t even documented anywhere properly and took us quite a while to find the exact way to have it configured properly to work",
+      "parentUuid": "9b48de0d_ee9901de",
+      "revId": "a1c31249ac9f3bf3a5d8af6eee51885535156ce2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
