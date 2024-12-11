@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48b44990_d39b6226",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T00:00:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5d624f17_51ef3b0f",
+      "revId": "4200fd7cbcc7a796ea09d0228515d3d48dae4bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "346900eb_f69dc605",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "426e0550_8f061e3b",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T00:00:37Z",
+      "side": 1,
+      "message": "Please change to use PTHREAD_COND_wait",
+      "parentUuid": "346900eb_f69dc605",
+      "revId": "4200fd7cbcc7a796ea09d0228515d3d48dae4bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2178cbef_b8c16eea",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 4
@@ -48,6 +84,24 @@
       "writtenOn": "2024-09-17T18:31:17Z",
       "side": 1,
       "message": "Same",
+      "revId": "4200fd7cbcc7a796ea09d0228515d3d48dae4bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38629a55_f0f1d530",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T00:00:37Z",
+      "side": 1,
+      "message": "Please change to use PTHREAD_COND_wait",
+      "parentUuid": "2178cbef_b8c16eea",
       "revId": "4200fd7cbcc7a796ea09d0228515d3d48dae4bf8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

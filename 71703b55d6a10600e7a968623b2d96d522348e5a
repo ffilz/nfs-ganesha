@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ce35540_35e42fbf",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T00:00:37Z",
+      "side": 1,
+      "message": "Please leave this change out. The code changes are all fine (except please change to use PTHREAD_COND_wait where appropriate). The code always gets built in maintainer mode as part of merge testing. I believe these are also turned on in debug build mode which developers should be using (or maintainer mode) when testing patches before submission.\n\nLeaving -Werror out of the standard build means that we have some grace when introducing a new compiler.",
+      "parentUuid": "3e7de445_98e5d9d2",
+      "revId": "71703b55d6a10600e7a968623b2d96d522348e5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a028dc1_fbd55935",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_avl.c",
         "patchSetId": 2
