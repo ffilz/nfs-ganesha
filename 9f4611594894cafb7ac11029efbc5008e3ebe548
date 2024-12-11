@@ -73,6 +73,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "843610f6_6feb402c",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T00:59:53Z",
+      "side": 1,
+      "message": "For the following you MUST use export-\u003ecfg_fullpath and export-\u003ecfg_pseudopath. The following is improper use of a gsh_refstr.\n\nHowever, there is another problem. This does not account for export update that changes fullpath or pseudopath.",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2d789c0_9dad8cc8",
         "filename": "src/support/export_mgr.c",
         "patchSetId": 2
@@ -124,6 +141,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac176dcc_30ddf8ae",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T00:59:53Z",
+      "side": 1,
+      "message": "Yes, this is good, hash is being used only to skip entries that can not match,",
+      "parentUuid": "9ba44a99_9a1089a0",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ead40a45_e80388fb",
@@ -155,6 +190,23 @@
       "side": 1,
       "message": "Done.. removed strlen() comparison.",
       "parentUuid": "ead40a45_e80388fb",
+      "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e5da7b_0b3ee839",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-11T00:59:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure a separate strlen saves anything. strlen scans the string, so both strings are scanned by strlen. In fact, strlen scans the whole string whereas strcmp while scanning both strings, stops at the first mis-match.",
       "revId": "9f4611594894cafb7ac11029efbc5008e3ebe548",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
