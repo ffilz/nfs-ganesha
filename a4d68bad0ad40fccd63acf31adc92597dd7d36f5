@@ -1,0 +1,361 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd868fa8_5f1c57dc",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define FSAL_FD_INIT                                                                            \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d4eb64_6abc7a16",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t{ .openflags \u003d FSAL_O_CLOSED,                                                           \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e8363c_14871e88",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .fd_work \u003d 0,                                                                         \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6792248_93d86794",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .io_work \u003d 0,                                                                         \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234c2c1d_2d04db1f",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .want_read \u003d 0,                                                                       \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd48e03_0f93230d",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .want_write \u003d 0,                                                                      \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65427b4_39d443a1",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .fsal_export \u003d op_ctx-\u003efsal_export,                                                   \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaf3ec0d_2dd265e1",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .fd_lru \u003d { NULL, NULL }, /* work_mutex unused for FSAL_FD_TEMP */                    \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7916ae_7e3c9840",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  /* io_work_cond unused for FSAL_FD_TEMP */ /* fd_work_cond unused for FSAL_FD_TEMP */ \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1907845_ec982d7d",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .close_on_complete \u003d false,                                                           \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c8df50_f16c2110",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t  .lru_reclaim \u003d 0,                                                                     \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798ddbc1_ae1beefd",
+        "filename": "src/include/gsh_dbus.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define STATUS_REPLY                                           \\\n+\t{ .name \u003d \"status\", .type \u003d \"b\", .direction \u003d \"out\" }, \\\n+\t\t{ .name \u003d \"error\", .type \u003d \"s\", .direction \u003d \"out\" }",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6880348_8c1300f9",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define IOSTATS_REPLY                                               \\\n+\t{ .name \u003d \"read\", .type \u003d \"(tttttt)\", .direction \u003d \"out\" }, \\\n+\t\t{ .name \u003d \"write\", .type \u003d \"(tttttt)\", .direction \u003d \"out\" }",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ab057b_7d5345d1",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define FSAL_OPS_REPLY                                            \\\n+\t{ .name \u003d \"fsal_name\", .type \u003d \"s\", .direction \u003d \"out\" }, \\\n+\t\t{ .name \u003d \"fsal_stats\",                           \\\n+\t\t  .type \u003d \"a(stddd)\",                             \\\n+\t\t  .direction \u003d \"out\" }",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aae6c6c_277c1125",
+        "filename": "src/support/exports.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t.def                                                                                                                \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb3eafb3_8815366f",
+        "filename": "src/support/exports.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t.anonymous_uid \u003d ANON_UID,                                                                                  \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90701fc_80bb11d1",
+        "filename": "src/support/exports.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t    .def.anonymous_gid \u003d ANON_GID,                                                                                  \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ec4f64_7f3b99ad",
+        "filename": "src/support/exports.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t    .def.expire_time_attr \u003d EXPORT_DEFAULT_CACHE_EXPIRY,                                                            \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a244cb5c_b18fc058",
+        "filename": "src/support/exports.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t    /* Note: Access_Type defaults to None on purpose     */                                                         \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4bc98b_cf8caba8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t    /*       And no PROTO is included - that is filled   */ /*       from nfs_param.core_param.core_options.     */ \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a236ba_aba62935",
+        "filename": "src/support/exports.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T09:32:32Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t    .def.set \u003d UINT32_MAX,                                                                                          \\",
+      "revId": "a4d68bad0ad40fccd63acf31adc92597dd7d36f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
