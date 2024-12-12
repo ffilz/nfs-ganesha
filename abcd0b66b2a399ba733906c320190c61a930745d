@@ -16,6 +16,24 @@
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define CONN_VARS(connection) (connection)-\u003exprt-\u003exp_fd",
       "revId": "abcd0b66b2a399ba733906c320190c61a930745d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "523bad5e_b25e481a",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-12T19:41:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8317bce1_6169346c",
+      "revId": "abcd0b66b2a399ba733906c320190c61a930745d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
