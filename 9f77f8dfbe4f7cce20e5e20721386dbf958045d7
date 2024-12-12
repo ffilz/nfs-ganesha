@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cde96875_d964d6d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-12T19:33:36Z",
+      "side": 1,
+      "message": "Yes, that looks like it solves the ugly formatting. Thanks for working this out.",
+      "parentUuid": "20d604b5_8949d08c",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2ce57a5c_a6c01930",
         "filename": "src/gtest/fsal_api/test_close2_latency.cc",
         "patchSetId": 4
@@ -88,6 +106,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fee1e48_ea1391e0",
+        "filename": "src/gtest/fsal_api/test_close2_latency.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-12T19:33:36Z",
+      "side": 1,
+      "message": "Yes, much better.",
+      "parentUuid": "82e3d4f8_5c0ef6b1",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fdd061d_a537a843",
@@ -119,6 +155,42 @@
       "side": 1,
       "message": "There is no semicolon here, it is counting on a dark boost vodoo to return the objet from each call and using operator() overloading\n\nSo the output looks very ugly, I refactored the code so it will be more clear and result in a nicer formatting\n\nI do think we should stick to clang-formatting rather than format it by ourselves, in the previous code for example there was a mixture of tabs and spaces\n\nThis way it will be easier for us to contribute code, as we have everything formatted and like that we encounter many conflicts\n\nWe can also config the C++ clang-formatting in a different way if we would like in the future",
       "parentUuid": "7fdd061d_a537a843",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec8282c_e4308efe",
+        "filename": "src/gtest/fsal_api/test_close_latency.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-12T19:33:36Z",
+      "side": 1,
+      "message": "Yes, that looks much better.",
+      "parentUuid": "6b7bee0e_9ca371bc",
+      "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c100eb8_901597ce",
+        "filename": "src/gtest/fsal_api/test_close_latency.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-12T19:33:36Z",
+      "side": 1,
+      "message": "Yes, that looks much better.",
+      "parentUuid": "6b7bee0e_9ca371bc",
       "revId": "9f77f8dfbe4f7cce20e5e20721386dbf958045d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
