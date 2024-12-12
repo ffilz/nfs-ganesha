@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db983cdc_bc429333",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe config option can be used in (DEFAULT) EXPORT CLIENT blocks to limit the block only",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59cfd8d_254b82d6",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define GLOBAL_EXPORT_PERMS_INITIALIZER(self)                                                                                        \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8179119_81bcc783",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t.def.anonymous_uid \u003d ANON_UID, .def.anonymous_gid \u003d ANON_GID,                                                                \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c512dd_96778d23",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t.def.expire_time_attr \u003d /* Note: Access_Type defaults to None on purpose     */                                              \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7d849cf_c8c8dbae",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tEXPORT_DEFAULT_CACHE_EXPIRY, /* And no PROTO is included - that is filled from nfs_param.core_param.core_options. */ \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "773282d3_5e29d230",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t.def.options \u003d EXPORT_OPTION_ROOT_SQUASH |                                                                           \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "383bb7df_566e528c",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_NO_ACCESS |                                                                             \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1042018_55d92ad8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_AUTH_DEFAULTS |                                                                         \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd2cff7_4ff14a68",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_XPORT_DEFAULTS |                                                                        \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3776693_076cbc12",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_NO_DELEGATIONS,                                                                         \\",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d3c900d_79625854",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3174,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+static inline bool is_proxy_protocol_connection(const SVCXPRT *const xprt)\n                                                               ^",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3592d54c_0d450aa9",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3182,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * Given an export client entry checks if the current request is in PROXY protocol",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35f0e6c7_aa551f22",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * or the current request is not in PROXY protocol and the client entry applies to",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c7e9ab_e1d20e38",
+        "filename": "src/support/exports.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:15:03Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * or the current request is not in PROXY protocol and the client entry applies to $",
+      "revId": "b7095df0b0e3e2928f53c8a527eadbce481adaf0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
