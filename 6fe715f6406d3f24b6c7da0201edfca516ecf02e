@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8647db08_1577c235",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe config option can be used in (DEFAULT) EXPORT CLIENT blocks to limit the block only",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec082f5f_e0171aee",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+#define GLOBAL_EXPORT_PERMS_INITIALIZER(self)                                                                                        \\",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd730d98_4586b853",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t.def.anonymous_uid \u003d ANON_UID, .def.anonymous_gid \u003d ANON_GID,                                                                \\",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1306dd1d_4da72348",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t.def.options \u003d EXPORT_OPTION_ROOT_SQUASH |                                                                           \\",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84961d0b_8dddaf59",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_NO_ACCESS |                                                                             \\",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21e2778_f2090404",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_AUTH_DEFAULTS |                                                                         \\",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94a96586_becdc94b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_XPORT_DEFAULTS |                                                                        \\",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74974bda_b384d4b9",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_NO_DELEGATIONS,                                                                         \\",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43a04d8f_fd504714",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3174,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:50:33Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+static inline bool is_proxy_protocol_connection(const SVCXPRT *const xprt)\n                                                               ^",
+      "revId": "6fe715f6406d3f24b6c7da0201edfca516ecf02e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
