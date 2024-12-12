@@ -51,6 +51,24 @@
       "parentUuid": "17fd69c9_f6814092",
       "revId": "b22a3bb472e42d043210ce8618d7d42e4c2e0b7f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80963ef7_4237d598",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-12T12:48:47Z",
+      "side": 1,
+      "message": "I wasn\u0027t the one working / investigating that issue, that was Shahar\n\nBut I think that he explained it in the commit message that one check is altering the mode field and the other one is performing a check on it.\n\nSo it would be better to reverse the checks so we first perform the check and then possible changing its value",
+      "parentUuid": "f98b4f6a_34e78c80",
+      "revId": "b22a3bb472e42d043210ce8618d7d42e4c2e0b7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
