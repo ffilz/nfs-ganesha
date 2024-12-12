@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3deae26_c2501f86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038517
+      },
+      "writtenOn": "2024-12-12T10:09:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e58d0ff6_5d683f9d",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc2175c0_afdd77ca",
@@ -52,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16b85669_b466afda",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1038517
+      },
+      "writtenOn": "2024-12-12T10:09:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc2175c0_afdd77ca",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f47ccc2f_4ea9db2c",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-12-10T20:10:52Z",
       "side": 1,
       "message": "Is it really worth having this as a separate function?",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b8eee70_9b55b8a4",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3178,
+      "author": {
+        "id": 1038517
+      },
+      "writtenOn": "2024-12-12T10:09:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f47ccc2f_4ea9db2c",
       "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -117,6 +171,24 @@
       "writtenOn": "2024-12-10T20:10:52Z",
       "side": 1,
       "message": "If you reverse the values for WITH and WITHOUT, you can just test for equality...\n\nOptionally, if is_rpc_address_initialized was not a separate function, just make is_op_proxy_protocol and enum and set it to the right enum value based on if the address is initialized or not.",
+      "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4307d10d_cfc75d05",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3206,
+      "author": {
+        "id": 1038517
+      },
+      "writtenOn": "2024-12-12T10:09:22Z",
+      "side": 1,
+      "message": "Simplified in another manner.\nWould that work?",
+      "parentUuid": "32139fe7_ba5f1c8b",
       "revId": "c9b2afafbb860f9c8f7aebbffdd65fc329d41a7a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
