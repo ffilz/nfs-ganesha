@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bfe707d_e0efb077",
+        "filename": "src/FSAL/fsal_manager.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T11:10:17Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t// Static fsals might not be configured",
+      "revId": "73682e8eed0963ca386b82e1e4cfaa6f44b8f1cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
