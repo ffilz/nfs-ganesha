@@ -16,6 +16,24 @@
       "message": "On these two, which duplicate this patch:\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1202363\n\nSee discussion there",
       "revId": "9d54425f6b2cecc3a2b219d4e0af688cd377bb74",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a0acfa2_7180a84d",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-12T13:35:05Z",
+      "side": 1,
+      "message": "I removed it for now from this patch\n\n@ofirvins@google.com Can you please add justification for why you made that change?\nwas it found by valgrind / compiler warning / internal tools??",
+      "parentUuid": "e679ddf2_34afdd69",
+      "revId": "9d54425f6b2cecc3a2b219d4e0af688cd377bb74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
