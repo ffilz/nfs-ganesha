@@ -16,6 +16,24 @@
       "message": "Our organizations (multiple now, and historically) all depend on the option to use Krb5, everywhere.  Krb5 is *the* standardized method for selective authentication in NFSv4.  It\u0027s fine if your organization does not need Krb5, but most do.  So I, at least, think it\u0027s correct for Krb5 to be enabled by default.",
       "revId": "53249b3778368ffab4d43589c5837758747a4681",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf1684d_703a7441",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-12T10:03:57Z",
+      "side": 1,
+      "message": "We do use Kerberos, but when enabling Kerberos, it\u0027s usually necessary to configure the other related settings in this block, such as updating the principal and keytab path. Because of this, we felt it made little sense to leave a default boolean flag indicating Kerberos is active without also explicitly requiring the associated settings to be configured. Additionally, it\u0027s worth noting that approximately 95% of Ganesha users do not use Kerberos or any directory services, so it seems reasonable to require those who do use it to explicitly enable this feature and ensure it’s properly configured. However, if we don’t agree on this approach, we can keep this as an internal patch.",
+      "parentUuid": "827eb37c_6dd87a90",
+      "revId": "53249b3778368ffab4d43589c5837758747a4681",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
