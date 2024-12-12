@@ -16,6 +16,24 @@
       "message": "I just realized this is partially a dupe of https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1201307?usp\u003dsearch and has the same issue with two failed pynfs tests in my environment.\n\nI\u0027m going to defer this one for further investigation as to why the pynfs tests fail.\n\nThe failures I get are:\n\nRDDR12   st_readdir.testUnaccessibleDirAttrs                      : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\nRDDR11   st_readdir.testUnaccessibleDir                           : FAILURE\n           READDIR of directory with mode\u003d0o000 should return\n           NFS4_OK or NFS4ERR_ACCESS, instead got\n           NFS4ERR_TOOSMALL\nRDDR8    st_readdir.testMaxcountSmall                             : FAILURE\n           READDIR of empty dir with maxcount\u003d16 should return\n           NFS4_OK, instead got NFS4ERR_TOOSMALL",
       "revId": "027e393cbe8a61d9b3819a8ecbf8c74a30635a52",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f54a574d_4472d4ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-12T22:08:41Z",
+      "side": 1,
+      "message": "I guess RDDR8 is still failing without this... I think that may have slipped in somewhere along the line. We\u0027re getting more pynfs failures than I remember...\n\nOK, I think the following patch is responsible for RDDR8 failure:\n\n9145c831b9d31e100d9eac5cef511dd469c7e6f8 nfs4_op_readdir: Fix xdr memory allocation\n\nStill, this patch introduces two new failures",
+      "parentUuid": "8017bc0b_31d80c45",
+      "revId": "027e393cbe8a61d9b3819a8ecbf8c74a30635a52",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
