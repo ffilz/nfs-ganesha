@@ -51,6 +51,24 @@
       "parentUuid": "9b48de0d_ee9901de",
       "revId": "a1c31249ac9f3bf3a5d8af6eee51885535156ce2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "101c926e_6e4d7864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2024-12-12T02:07:02Z",
+      "side": 1,
+      "message": "Krb5 in particular (which agree, usually goes with directory services) being the only standardized method for selective authentication and authorization in the modern NFSv4 protocol--and the only one I know of in general use.  You are welcome to disable use of kerberos in your environment, and we should definitely support different name integration as marked options, if they are helpful.  I do not agree with this proposed change, nor with the proposed change to disable Krb5 by default. As a sometime ganesha maintainer (e.g., I created ntirpc and some of our Krb5 integration), I do not think nfs-ganesha should take any change based on this reasoning.",
+      "parentUuid": "2f6f937b_5b059f31",
+      "revId": "a1c31249ac9f3bf3a5d8af6eee51885535156ce2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
