@@ -69,6 +69,24 @@
       "parentUuid": "343bd819_1f97a963",
       "revId": "cab91513a3d347976a6a22590cf1159a31c324ae",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60daf18a_8cf5526e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-12T19:36:05Z",
+      "side": 1,
+      "message": "Yes, that looks good. Thanks...\n\nAnd... Oops, I never posted the following, leaving it in for history...\nI tried this out and it does look good, but I would like there to be a cmake option that can be turned ON to get fully qualified paths. Looking at how it works, I\u0027m fine with the default being the short path. I see FQ path in gdb backtrace, and the short path in the log file works just fine if I open with my editor which has current working directory in my specific repo.",
+      "parentUuid": "343bd819_1f97a963",
+      "revId": "cab91513a3d347976a6a22590cf1159a31c324ae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
