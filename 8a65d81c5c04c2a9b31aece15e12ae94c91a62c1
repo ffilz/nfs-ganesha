@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f10d151_d26603e2",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:20:10Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define CONN_VARS(connection) (connection)-\u003exprt-\u003exp_fd",
+      "revId": "8a65d81c5c04c2a9b31aece15e12ae94c91a62c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bafdbee_e31e5cb9",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:20:10Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\twhile (client-\u003estate \u003d\u003d initial_state) {\n \t\tcondition_wait(client);\n+\t}",
+      "revId": "8a65d81c5c04c2a9b31aece15e12ae94c91a62c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a1b37f_4600e04a",
+        "filename": "src/include/connection_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T10:20:10Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// Initialize the Connection Manager module",
+      "revId": "8a65d81c5c04c2a9b31aece15e12ae94c91a62c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
