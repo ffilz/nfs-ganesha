@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "827eb37c_6dd87a90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2024-12-12T02:13:02Z",
+      "side": 1,
+      "message": "Our organizations (multiple now, and historically) all depend on the option to use Krb5, everywhere.  Krb5 is *the* standardized method for selective authentication in NFSv4.  It\u0027s fine if your organization does not need Krb5, but most do.  So I, at least, think it\u0027s correct for Krb5 to be enabled by default.",
+      "revId": "53249b3778368ffab4d43589c5837758747a4681",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
