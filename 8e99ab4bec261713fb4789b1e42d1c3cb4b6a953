@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3e8097_2f6b6ba4",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T20:41:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* The \u0027current\u0027 fsal attrs are not populated during the above call",
+      "revId": "8e99ab4bec261713fb4789b1e42d1c3cb4b6a953",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d4a232_622796cd",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T20:41:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t * to fsal_check_setattr_perms() if the caller is root. Populating",
+      "revId": "8e99ab4bec261713fb4789b1e42d1c3cb4b6a953",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17856842_acedecd3",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-12T20:41:17Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Mode wasn\u0027t being set, so set it now, start with",
+      "revId": "8e99ab4bec261713fb4789b1e42d1c3cb4b6a953",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
