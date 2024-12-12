@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ac6bd7c_2e025cb7",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-12T13:21:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b49d41df_045bc228",
+      "revId": "ea603af3a089568477c55ebfb8ec86d6ddd3ad6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4738357d_cf37b180",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-12-12T13:21:26Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\twhile (client-\u003estate \u003d\u003d initial_state) {\n \t\tcondition_wait(client);\n+\t}",
+      "revId": "ea603af3a089568477c55ebfb8ec86d6ddd3ad6a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1915c05_776620c9",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-12T13:21:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4738357d_cf37b180",
       "revId": "ea603af3a089568477c55ebfb8ec86d6ddd3ad6a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
