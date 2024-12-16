@@ -16,6 +16,24 @@
       "message": "WARNING: line over 80 characters\n+ * Shall unblock all threads currently blocked on the specified condition variable cond.",
       "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2192f2e9_7fe80d6c",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-16T21:49:35Z",
+      "side": 1,
+      "message": "Please wrap this comment so it doesn\u0027t overflow.\n\nCan we improve clang\u0027s line length check? I appreciate checkpatch requiring pretty much everything to fit in 80 columns except for quoted strings which it then prefers not to be broken up (for ease of grepping the code to find them),",
+      "parentUuid": "17bb9acf_67c75ba8",
+      "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
