@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68453a87_8e4e2060",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 2
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-12-17T07:55:16Z",
+      "side": 1,
+      "message": "The ganesha_logrotate_mgr does not interact with or send requests to the Ganesha process to unlink ganesha_mgr, so it would be better to have a separate command for this task.",
+      "parentUuid": "6e3bdf2d_271f42f6",
+      "revId": "6d8e76413d97861fa80be3cc0f448076e5877bcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f035d26_d8c2f342",
@@ -52,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "951b9c04_d17b0b89",
+        "filename": "src/scripts/ganeshactl/ganesha_logrotate_mgr.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-12-17T07:55:16Z",
+      "side": 1,
+      "message": "Changed to LGPL",
+      "parentUuid": "3f035d26_d8c2f342",
+      "revId": "6d8e76413d97861fa80be3cc0f448076e5877bcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fad66530_6c182a22",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-09-11T18:45:52Z",
       "side": 1,
       "message": "Was this copied from somewhere? Should it be 2024?",
+      "revId": "6d8e76413d97861fa80be3cc0f448076e5877bcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ec39f6_784cc618",
+        "filename": "src/scripts/ganeshactl/ganesha_logrotate_mgr.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2024-12-17T07:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fad66530_6c182a22",
       "revId": "6d8e76413d97861fa80be3cc0f448076e5877bcb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
