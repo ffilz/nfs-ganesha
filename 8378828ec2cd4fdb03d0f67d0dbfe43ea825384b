@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2908430_745504d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-18T10:45:56Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThe config option can be used in (DEFAULT) EXPORT CLIENT blocks to limit the block only",
+      "revId": "8378828ec2cd4fdb03d0f67d0dbfe43ea825384b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d2851f_f6f64d93",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3178,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2024-12-18T10:45:56Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027*\u0027 (ctx:WxV)\n+static inline bool is_ha_proxy_protocol_connection(const SVCXPRT *const xprt)\n                                                                  ^",
+      "revId": "8378828ec2cd4fdb03d0f67d0dbfe43ea825384b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
