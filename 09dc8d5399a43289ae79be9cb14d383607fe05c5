@@ -52,6 +52,24 @@
       "parentUuid": "2192f2e9_7fe80d6c",
       "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa4cc9a_7f10f33e",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-18T09:31:51Z",
+      "side": 1,
+      "message": "I see that we are already using `BreakStringLiterals` and it doesn\u0027t do what we expect, I\u0027ll take a look at other options for it",
+      "parentUuid": "974583b4_c1323185",
+      "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
