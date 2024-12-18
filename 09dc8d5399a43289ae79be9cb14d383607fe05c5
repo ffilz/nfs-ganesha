@@ -34,6 +34,24 @@
       "parentUuid": "17bb9acf_67c75ba8",
       "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974583b4_c1323185",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-18T09:26:41Z",
+      "side": 1,
+      "message": "Regarding not splitting strings into multiple lines, I found the following option for clang-format-\nhttps://clang.llvm.org/docs/ClangFormatStyleOptions.html#breakstringliterals\n\nWe can give that a try and see if it does what we want\n\nRegarding comments with long lines, I found the following options-\nhttps://clang.llvm.org/docs/ClangFormatStyleOptions.html#reflowcomments\n\nWith the setting `RCS_Always`\n\nI\u0027ll apply those two options in a separate commit and reformat the code and let me know what you think about it",
+      "parentUuid": "2192f2e9_7fe80d6c",
+      "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
