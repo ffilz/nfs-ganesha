@@ -88,6 +88,24 @@
       "parentUuid": "cfa4cc9a_7f10f33e",
       "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f76bd0_38149e58",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2024-12-18T23:26:00Z",
+      "side": 1,
+      "message": "Could we just manually wrap this line? Or do you hope to resolve the line length checks with clang and reformat all the code to fixup any others?",
+      "parentUuid": "601e8b65_926c1914",
+      "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
