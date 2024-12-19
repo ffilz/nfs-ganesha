@@ -381,32 +381,9 @@ int main(int argc, char *argv[])
 					 "Could not open /dev/null: %d (%s)",
 					 errno, strerror(errno));
 
-			if (close(STDIN_FILENO) == -1)
-				LogEvent(COMPONENT_MAIN,
-					 "Error while closing stdin: %d (%s)",
-					 errno, strerror(errno));
-			else {
-				LogEvent(COMPONENT_MAIN, "stdin closed");
-				dup(dev_null_fd);
-			}
-
-			if (close(STDOUT_FILENO) == -1)
-				LogEvent(COMPONENT_MAIN,
-					 "Error while closing stdout: %d (%s)",
-					 errno, strerror(errno));
-			else {
-				LogEvent(COMPONENT_MAIN, "stdout closed");
-				dup(dev_null_fd);
-			}
-
-			if (close(STDERR_FILENO) == -1)
-				LogEvent(COMPONENT_MAIN,
-					 "Error while closing stderr: %d (%s)",
-					 errno, strerror(errno));
-			else {
-				LogEvent(COMPONENT_MAIN, "stderr closed");
-				dup(dev_null_fd);
-			}
+			dup2(dev_null_fd, STDIN_FILENO);
+			dup2(dev_null_fd, STDOUT_FILENO);
+			dup2(dev_null_fd, STDERR_FILENO);
 
 			if (close(dev_null_fd) == -1)
 				LogFatal(
