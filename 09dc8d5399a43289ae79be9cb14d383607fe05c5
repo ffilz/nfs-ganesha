@@ -106,6 +106,24 @@
       "parentUuid": "601e8b65_926c1914",
       "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43e02faf_4ea501cd",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2024-12-22T11:55:26Z",
+      "side": 1,
+      "message": "For now I manually wrapped this line, look at the latest patch\n\nWe can attempt multiple different formatting with different configurations later and run the reformatting if we like it, that\u0027s pretty straightforward to do later",
+      "parentUuid": "f5f76bd0_38149e58",
+      "revId": "09dc8d5399a43289ae79be9cb14d383607fe05c5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
