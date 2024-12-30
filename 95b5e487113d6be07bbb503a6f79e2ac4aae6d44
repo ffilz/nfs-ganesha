@@ -101,6 +101,23 @@
       "message": "WARNING: line over 80 characters\n+\t\t\t\t/* Record that a change has now been requested */",
       "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7150e2_31126cb4",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2024-12-30T03:25:41Z",
+      "side": 1,
+      "message": "Can you please describe what sticky grace means?  Does the fact that it defaults to true change the default behaviour?  If not, can the documentation please explain why someone would want to set `Sticky_Grace \u003d False`?  Thanks...",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
