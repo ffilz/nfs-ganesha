@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d21857_6636fc72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Sorry for the delay in responding, I\u0027d like to see a few minor changes. Overall this looks good.",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139b9660_9131f942",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "I think this comment needs to be amended to document the sticky_grace parameter.",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b590eba2_6c1e59d6",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Document that this function is a no-op without sticky_grace",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8078bc_95128638",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Maybe fold the if condition into the assert if this assert is indeed necessary (since it only fires in the case of stick grace).",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a63f5690_f954120f",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Adjust comment for sticky grace parameter",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427d5747_5535e64b",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Update this comment to discuss the flow if sticky grace is false",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0dca8ff_2c922912",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Can these two conditions that determine if we should lift grace be combined? Or should this if be an else if?",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e47923f_1ac5047e",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "I think we should actually default to false.",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc17efe_b31b97cf",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Default to false.",
+      "revId": "7e3f5f346ed30922d71cd6f9d436efb5ac07b235",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

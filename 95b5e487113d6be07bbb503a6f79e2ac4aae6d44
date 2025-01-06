@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce12dc4e_3381ad63",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "220bd20d_c28ddbe8",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93a6c6ab_6c615981",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fa88593_5a8c22a4",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93a6c6ab_6c615981",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af425053_de26e2e4",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-12-23T15:01:31Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (nfs_param.nfsv4_param.sticky_grace) {\n+\t\t\tassert(!(cur \u0026 GRACE_STATUS_COUNT_MASK));\n+\t\t}",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2f2204_2d547a02",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af425053_de26e2e4",
       "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +140,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e44eb7df_2ad77795",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ebd356f_bdb4f5b6",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "839bfcf7_b8bd7a07",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9792a9a_c14d6ce4",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abe6091a_87e089ea",
@@ -103,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ddf9216_e64e3e35",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abe6091a_87e089ea",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7150e2_31126cb4",
@@ -116,6 +224,24 @@
       "writtenOn": "2024-12-30T03:25:41Z",
       "side": 1,
       "message": "Can you please describe what sticky grace means?  Does the fact that it defaults to true change the default behaviour?  If not, can the documentation please explain why someone would want to set `Sticky_Grace \u003d False`?  Thanks...",
+      "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8997c9cb_9bcd0652",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-06T18:26:46Z",
+      "side": 1,
+      "message": "I think we want it to default to false. Only FSAL_CEPH with it\u0027s filesystem integration of grace period really wants sticky grace.",
+      "parentUuid": "2f7150e2_31126cb4",
       "revId": "95b5e487113d6be07bbb503a6f79e2ac4aae6d44",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
