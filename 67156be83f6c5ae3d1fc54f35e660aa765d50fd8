@@ -70,6 +70,24 @@
       "parentUuid": "c7a5c286_004d5ae7",
       "revId": "67156be83f6c5ae3d1fc54f35e660aa765d50fd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33e0190_63de7bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-07T23:59:02Z",
+      "side": 1,
+      "message": "Ahh,you have to run pynfs as root to trigger. It\u0027s a test case bug. RDDR11 and RDDR12 do not set dircount so it defaults to 1. The directory has 1 entry and we allow root to read the directory.\n\nI will submit a pynfs patch...",
+      "parentUuid": "49d371a3_906921a8",
+      "revId": "67156be83f6c5ae3d1fc54f35e660aa765d50fd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
