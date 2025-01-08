@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce97e35_b6b0f861",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2411,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-08T18:51:12Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (read_access_check_policy \u003d\u003d READ_ACCESS_CHECK_POLICY_ALL) {\n+\t\treturn READABLE_READ_ACCESS_CHECK_POLICY_ALL;\n+\t}",
+      "revId": "06287025823edd2d30fbae0cef4071fd444f80d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "321bc4ef_98a6db4b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2414,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-08T18:51:12Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (read_access_check_policy \u0026 READ_ACCESS_CHECK_POLICY_PRE) {\n+\t\treturn READABLE_READ_ACCESS_CHECK_POLICY_PRE;\n+\t}",
+      "revId": "06287025823edd2d30fbae0cef4071fd444f80d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f303806_18c2ada7",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-08T18:51:12Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (read_access_check_policy \u0026 READ_ACCESS_CHECK_POLICY_POST) {\n+\t\treturn READABLE_READ_ACCESS_CHECK_POLICY_POST;\n+\t}",
+      "revId": "06287025823edd2d30fbae0cef4071fd444f80d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
