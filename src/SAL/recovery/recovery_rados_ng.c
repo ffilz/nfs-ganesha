@@ -303,14 +303,61 @@ rados_ng_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 				   add_clid_entry_hook add_clid_entry,
 				   add_rfh_entry_hook add_rfh_entry)
 {
+	int ret;
+	char object_takeover[NI_MAXHOST];
+	struct pop_args args = {
+		.add_clid_entry = add_clid_entry,
+		.add_rfh_entry = add_rfh_entry,
+		.old = false,
+		.takeover = true,
+	};
+
 	if (!gsp) {
 		rados_ng_read_recov_clids_recover(add_clid_entry,
 						  add_rfh_entry);
 		return;
 	}
 
-	LogEvent(COMPONENT_CLIENTID,
-		 "Unable to perform takeover with rados_ng recovery backend.");
+	switch (gsp->event) {
+	case EVENT_TAKE_IP:
+		ret = snprintf(object_takeover, sizeof(object_takeover),
+			       "%s_recov", gsp->ipaddr);
+		if (unlikely(ret >= sizeof(object_takeover))) {
+			LogCrit(COMPONENT_CLIENTID,
+				       "object_takeover too long %s_recov",
+				       gsp->ipaddr);
+		} else if (unlikely(ret < 0)) {
+			LogCrit(COMPONENT_CLIENTID,
+					"snprintf %d error %s (%d)", ret,
+					strerror(errno), errno);
+		}
+		break;
+	case EVENT_TAKE_NODEID:
+		ret = snprintf(object_takeover, sizeof(object_takeover),
+			       "%s_recov", gsp->nodeid);
+		if (unlikely(ret >= sizeof(object_takeover))) {
+			LogCrit(COMPONENT_CLIENTID,
+				       "object_takeover too long %s_recov",
+				       gsp->nodeid);
+		} else if (unlikely(ret < 0)) {
+			LogCrit(COMPONENT_CLIENTID,
+					"snprintf %d error %s (%d)", ret,
+					strerror(errno), errno);
+		}
+		break;
+	default:
+		LogWarn(COMPONENT_CLIENTID,
+				"Recovery unknown/unsupported event %d",
+				gsp->event);
+		return;
+	}
+
+	ret = rados_kv_traverse(rados_ng_pop_clid_entry, &args,
+			object_takeover);
+	if (ret < 0) {
+		LogEvent(COMPONENT_CLIENTID, "Failed to takeover IP - %s",
+				gsp->ipaddr);
+	}
 }
 
 static void rados_ng_cleanup_old(void)
