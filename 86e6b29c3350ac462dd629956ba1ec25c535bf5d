@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161cd282_628c3163",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c5f5bb_28b837cf",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\tMETRIC_METADATA(\"Total number of xprts per \"\n+\t\t\t\t\t\t\"custom-data status\",",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ecd76d_6baab30f",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tMETRIC_METADATA(\"Distribution of number of sessions \"\n+\t\t\t\t\"associated with each xprt\",",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc275518_ee730f45",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\tMETRIC_METADATA(\"Total number of clients per \"\n+\t\t\t\t\t\t\"state-protection type\",",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c14810_1de918d8",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tMETRIC_METADATA(\"Distribution of number of \"\n+\t\t\t\t\"session-connections across sessions\",",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac46c9bd_627c4c61",
+        "filename": "src/SAL/sal_metrics.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\tMETRIC_METADATA(\"Total number of denied session-and-xprt \"\n+\t\t\t\t\"associations across sessions\",",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db392636_cfab5496",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2960,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t   STATE_BLOCK_ASYNC :",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d3afd92_67ba0eeb",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2961,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-09T00:23:52Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\t\t\t\t\t\t   STATE_BLOCK_POLL;",
+      "revId": "86e6b29c3350ac462dd629956ba1ec25c535bf5d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
