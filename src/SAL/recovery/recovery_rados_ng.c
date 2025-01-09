@@ -46,6 +46,8 @@
 
 static rados_write_op_t grace_op;
 static pthread_mutex_t grace_op_lock;
+bool takeover = false;
+char object_takeover[NI_MAXHOST];
 
 static int rados_ng_put(char *key, char *val, char *object)
 {
@@ -190,10 +192,6 @@ static int rados_ng_init(void)
 	}
 	rados_release_write_op(op);
 
-	/* Create new grace_op to spool changes until grace period is done */
-	grace_op = rados_create_write_op();
-	rados_write_op_omap_clear(grace_op);
-
 	LogEvent(COMPONENT_CLIENTID, "Rados kv store init done");
 	return 0;
 }
@@ -303,14 +301,69 @@ rados_ng_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 				   add_clid_entry_hook add_clid_entry,
 				   add_rfh_entry_hook add_rfh_entry)
 {
+	int ret;
+	struct pop_args args = {
+		.add_clid_entry = add_clid_entry,
+		.add_rfh_entry = add_rfh_entry,
+		.old = false,
+		.takeover = true,
+	};
+
 	if (!gsp) {
+		takeover = false;
+		LogDebug(COMPONENT_CLIENTID,
+			 "Recovery object in use %s", rados_recov_oid->gr_val);
 		rados_ng_read_recov_clids_recover(add_clid_entry,
 						  add_rfh_entry);
 		return;
 	}
 
-	LogEvent(COMPONENT_CLIENTID,
-		 "Unable to perform takeover with rados_ng recovery backend.");
+	/* Its takeover activity */
+	takeover = true;
+
+	switch (gsp->event) {
+	case EVENT_TAKE_IP:
+		ret = snprintf(object_takeover, sizeof(object_takeover),
+			       "%s_recov", gsp->ipaddr);
+		if (unlikely(ret >= sizeof(object_takeover))) {
+			LogCrit(COMPONENT_CLIENTID,
+				       "object_takeover too long %s_recov",
+				       gsp->ipaddr);
+		} else if (unlikely(ret < 0)) {
+			LogCrit(COMPONENT_CLIENTID,
+					"snprintf %d error %s (%d)", ret,
+					strerror(errno), errno);
+		}
+		break;
+	case EVENT_TAKE_NODEID:
+		ret = snprintf(object_takeover, sizeof(object_takeover),
+			       "%d_recov", gsp->nodeid);
+		if (unlikely(ret >= sizeof(object_takeover))) {
+			LogCrit(COMPONENT_CLIENTID,
+				       "object_takeover too long %s_recov",
+				       gsp->nodeid);
+		} else if (unlikely(ret < 0)) {
+			LogCrit(COMPONENT_CLIENTID,
+					"snprintf %d error %s (%d)", ret,
+					strerror(errno), errno);
+		}
+		break;
+	default:
+		LogWarn(COMPONENT_CLIENTID,
+				"Recovery unknown/unsupported event %d",
+				gsp->event);
+		return;
+	}
+
+	LogDebug(COMPONENT_CLIENTID,
+			"Recovery object in use %s", object_takeover);
+
+	ret = rados_kv_traverse(rados_ng_pop_clid_entry, &args,
+			object_takeover);
+	if (ret < 0) {
+		LogWarn(COMPONENT_CLIENTID, "Failed to takeover IP - %s",
+				gsp->ipaddr);
+	}
 }
 
 static void rados_ng_cleanup_old(void)
@@ -318,14 +371,28 @@ static void rados_ng_cleanup_old(void)
 	int ret;
 	struct gsh_refstr *recov_oid;
 
-	/* Commit pregrace transaction */
 	PTHREAD_MUTEX_lock(&grace_op_lock);
-	rcu_read_lock();
-	recov_oid = gsh_refstr_get(rcu_dereference(rados_recov_oid));
-	rcu_read_unlock();
-	ret = rados_write_op_operate(grace_op, rados_recov_io_ctx,
+
+	/* Create new grace_op to spool changes until grace period is done */
+	grace_op = rados_create_write_op();
+	rados_write_op_omap_clear(grace_op);
+
+	/* Commit pregrace transaction */
+	if (!takeover) {
+		rcu_read_lock();
+		recov_oid = gsh_refstr_get(rcu_dereference(rados_recov_oid));
+		rcu_read_unlock();
+		LogDebug(COMPONENT_CLIENTID,
+			"Recovery object to be cleaned %s", recov_oid->gr_val);
+		ret = rados_write_op_operate(grace_op, rados_recov_io_ctx,
 				     recov_oid->gr_val, NULL, 0);
-	gsh_refstr_put(recov_oid);
+		gsh_refstr_put(recov_oid);
+	} else {
+		LogDebug(COMPONENT_CLIENTID,
+			"Recovery object to be cleaned %s", object_takeover);
+		ret = rados_write_op_operate(grace_op, rados_recov_io_ctx,
+				     object_takeover, NULL, 0);
+	}
 	if (ret < 0) {
 		LogEvent(COMPONENT_CLIENTID,
 			 "Failed to commit grace period transactions: %s",
