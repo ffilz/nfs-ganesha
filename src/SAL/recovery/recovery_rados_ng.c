@@ -149,6 +149,20 @@ static int rados_ng_init(void)
 				ret, strerror(ret), ret);
 			return ret;
 		}
+	} else if (g_node_vip) {
+		ret = snprintf(host, sizeof(host), "%s", g_node_vip);
+		if (unlikely(ret >= sizeof(host))) {
+			LogCrit(COMPONENT_CLIENTID, "node%s too long",
+				g_node_vip);
+			return -ENAMETOOLONG;
+		} else if (unlikely(ret < 0)) {
+			ret = errno;
+			LogCrit(COMPONENT_CLIENTID,
+				"Unexpected return from snprintf %d error %s (%d)",
+				ret, strerror(ret), ret);
+			return ret;
+		}
+
 	} else {
 		ret = gethostname(host, sizeof(host));
 		if (ret) {
@@ -309,8 +323,56 @@ rados_ng_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 		return;
 	}
 
-	LogEvent(COMPONENT_CLIENTID,
-		 "Unable to perform takeover with rados_ng recovery backend.");
+	int ret;
+	char object_takeover[NI_MAXHOST];
+	struct pop_args args = {
+		.add_clid_entry = add_clid_entry,
+		.add_rfh_entry = add_rfh_entry,
+		.old = false,
+		.takeover = true,
+	};
+
+	switch (gsp->event) {
+	case EVENT_TAKE_IP:
+		ret = snprintf(object_takeover, sizeof(object_takeover),
+			       "%s_recov", gsp->ipaddr);
+		if (unlikely(ret >= sizeof(object_takeover))) {
+			LogCrit(COMPONENT_CLIENTID,
+				"object_takeover too long %s_recov",
+				gsp->ipaddr);
+		} else if (unlikely(ret < 0)) {
+			LogCrit(COMPONENT_CLIENTID, "snprintf %d error %s (%d)",
+				ret, strerror(errno), errno);
+		}
+		break;
+	case EVENT_TAKE_NODEID:
+		ret = snprintf(object_takeover, sizeof(object_takeover),
+			       "%i_recov", gsp->nodeid);
+		if (unlikely(ret >= sizeof(object_takeover))) {
+			LogCrit(COMPONENT_CLIENTID,
+				"object_takeover too long %i_recov",
+				gsp->nodeid);
+		} else if (unlikely(ret < 0)) {
+			LogCrit(COMPONENT_CLIENTID, "snprintf %d error %s (%d)",
+				ret, strerror(errno), errno);
+		}
+		break;
+	default:
+		LogWarn(COMPONENT_CLIENTID,
+			"Recovery unknown/unsupported event %d", gsp->event);
+		return;
+	}
+
+	ret = rados_kv_traverse(rados_ng_pop_clid_entry, &args,
+				object_takeover);
+
+	if (ret < 0) {
+		LogEvent(COMPONENT_CLIENTID, "Failed to takeover");
+		return;
+	}
+
+	grace_op = rados_create_write_op();
+	rados_write_op_omap_clear(grace_op);
 }
 
 static void rados_ng_cleanup_old(void)
