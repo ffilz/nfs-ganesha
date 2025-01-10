@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cf1d359_a5717955",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-10T23:48:21Z",
+      "side": 1,
+      "message": "Please address the checkpatch comments, although clang does not enforce those, all of the comments it made are part of our style expectations.",
+      "revId": "5e27289ad816f1e013dd06535af60002fd9aea1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "430eebd8_afd401ad",
         "filename": "src/include/gsh_config.h",
         "patchSetId": 1
@@ -677,6 +694,23 @@
       "writtenOn": "2025-01-10T14:54:46Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tCONF_ITEM_BLOCK(\"QOS_BLOCK\", qos_block_params, qos_block_init, qos_block_commit, gsh_export, qos_block),",
+      "revId": "5e27289ad816f1e013dd06535af60002fd9aea1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3cd0246_d13a46c4",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-10T23:48:21Z",
+      "side": 1,
+      "message": "I wonder if we should add a new QOS config block?",
       "revId": "5e27289ad816f1e013dd06535af60002fd9aea1d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
