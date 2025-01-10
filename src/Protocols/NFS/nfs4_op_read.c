@@ -50,6 +50,7 @@
 #include "export_mgr.h"
 #include "nfs_exports.h"
 #include "gsh_rpc.h"
+#include "nfs_qos.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -67,6 +68,8 @@ struct nfs4_read_data {
 	struct fsal_obj_handle *obj;
 	/** Flags to control synchronization */
 	uint32_t flags;
+	/*  QOS enabled on this IO */
+	uint32_t qos_flag;
 	/** IO Info for READ_PLUS */
 	struct io_info info;
 	/** Arguments for read call - must be last */
@@ -265,6 +268,44 @@ static void nfs4_read_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 	}
 }
 
+void nfs4_qos_read_cb(void *args)
+{
+	struct qos_op_cb_arg *qos_cb_args = args;
+	struct nfs4_read_data *data = qos_cb_args->caller_data;
+	struct nfs4_read_data *read_data = qos_cb_args->caller_data;
+	uint32_t flags;
+
+	if (qos_cb_args->ratecontrol) {
+		/* Since here we dont want to handle error and all
+		 * path will be svc_resume->nfs4_op_write_resume->write2(based on QOS flag)
+		 * Set the flags indicating IO is from QOS and need to be resumed.
+		 */
+		LogFullDebug(COMPONENT_QOS, "ratecontrol IO Read");
+		data->res_READ4->status = NFS4_OK;
+		read_data->qos_flag |= IS_QOS_IO;
+		svc_resume(data->data->req);
+
+	} else {
+		LogFullDebug(COMPONENT_QOS, "NFS4ERR_DELAY for RD:%p RDD:%p RDDOP:%p",
+				read_data, read_data->data, read_data->data->op_data);
+
+		data->res_READ4->status = NFS4ERR_DELAY;
+
+		flags = atomic_postset_uint32_t_bits(&data->flags, ASYNC_PROC_DONE);
+		if ((flags & ASYNC_PROC_EXIT) == ASYNC_PROC_EXIT) {
+			/* nfs4_op_write has already exited, we will need to reschedule
+			 * the request for completion.
+			 *                                     */
+			LogFullDebug(COMPONENT_QOS,"SVC resume %p ", data->data->req);
+			svc_resume(data->data->req);
+		} else {
+			LogFullDebug(COMPONENT_QOS, "Shoudn't enter this block");
+		}
+	}
+	LogFullDebug(COMPONENT_QOS,"free addr %p", args);
+	free(args);
+}
+
 enum nfs_req_result nfs4_op_read_resume(struct nfs_argop4 *op,
 					compound_data_t *data,
 					struct nfs_resop4 *resp)
@@ -272,6 +313,23 @@ enum nfs_req_result nfs4_op_read_resume(struct nfs_argop4 *op,
 	struct nfs4_read_data *read_data = data->op_data;
 	enum nfs_req_result rc;
 	uint32_t flags;
+
+	if (read_data->qos_flag & IS_QOS_IO) {
+		bool bypass = read_data->qos_flag & IS_QOS_IO_READ_BYPASS;
+		read_data->qos_flag = 0;
+		LogFullDebug(COMPONENT_QOS, "debugdp qos_flag IO read bypass:%d", bypass);
+		atomic_postclear_uint32_t_bits(
+				&read_data->flags, ASYNC_PROC_EXIT | ASYNC_PROC_DONE);
+		/*  Do the actual read */
+		fsal_read2(read_data->obj, bypass, nfs4_read_cb, &read_data->read_arg, read_data);
+		flags = atomic_postset_uint32_t_bits(&read_data->flags, ASYNC_PROC_EXIT);
+		if ((flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+			LogFullDebug(COMPONENT_QOS, "ASYNC:%d", bypass);
+			return NFS_REQ_ASYNC_WAIT;
+		} else {
+			LogFullDebug(COMPONENT_QOS, "SYNC:%d", bypass);
+		}
+	}
 
 	if (read_data->read_arg.fsal_resume) {
 		/* FSAL is requesting another read2 call on resume */
@@ -794,6 +852,7 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 
 	/* Set up args, allocate from heap, iov_len will be 1 */
 	read_data = gsh_calloc(1, sizeof(*read_data));
+	read_data->qos_flag = 0;
 	LogFullDebug(COMPONENT_NFS_V4, "Allocated read_data %p", read_data);
 	read_arg = &read_data->read_arg;
 	read_arg->info = info;
@@ -815,6 +874,13 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 	if (info != NULL) {
 		/* We will be using the io_info that is part of read_data */
 		read_data->info.io_advise = info->io_advise;
+	}
+
+	if (QoS_Process(size, read_data, data, QOS_READ)) {
+		read_data->qos_flag |= (unsigned int)bypass << 1;
+		flags = atomic_postset_uint32_t_bits(&read_data->flags, ASYNC_PROC_EXIT);
+		LogFullDebug(COMPONENT_QOS, "ASYNC_WAIT SVC_pause:%p bypass:%d", read_data->data->req, bypass);
+		goto out;
 	}
 
 again:
