@@ -543,7 +543,6 @@ void nfs_try_lift_grace(void)
 		timeout.tv_sec += nfs_param.nfsv4_param.grace_period;
 		in_grace = gsh_time_cmp(&timeout, &now) > 0;
 	}
-
 	/*
 	 * Ok, we're basically ready to lift. Ensure there are no outstanding
 	 * references to the current status of the grace period. If there are,
