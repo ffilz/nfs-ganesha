@@ -482,6 +482,30 @@ typedef struct nfs_core_param {
 	/** Whether to use Pseudo (true) or Path (false) for NFS v3 and 9P
 	    mounts. */
 	bool mount_path_pseudo;
+	/** QoS global configuration parameters.
+	 *  ToDo: These parameters need to be moved to separate block */
+	struct {
+		bool enable_qos;
+	        bool enable_tokens;
+		bool enable_bw_control;
+	        bool combined_rw_bw_control;
+	        bool combined_rw_token_control;
+		int qos_type;
+		uint64_t max_export_write_bw;
+		uint64_t max_export_read_bw;
+		uint64_t max_client_write_bw;
+		uint64_t max_client_read_bw;
+
+		uint64_t max_export_read_tokens;
+		uint64_t max_export_write_tokens;
+		uint64_t max_client_read_tokens;
+		uint64_t max_client_write_tokens;
+		uint64_t export_read_tokens_renew_time;
+		uint64_t export_write_tokens_renew_time;
+		uint64_t client_read_tokens_renew_time;
+		uint64_t client_write_tokens_renew_time;
+	}qos_global_config;
+
 	/** Whether to disable UDP listeners */
 	uint32_t enable_UDP;
 	/** DBus name prefix. Required if one wants to run multiple ganesha
