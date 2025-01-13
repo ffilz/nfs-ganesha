@@ -147,15 +147,16 @@ static int rados_ng_init(void)
 			LogCrit(COMPONENT_CLIENTID,
 				"Unexpected return from snprintf %d error %s (%d)",
 				ret, strerror(ret), ret);
-			return ret;
+			return -ret;
 		}
 	} else {
 		ret = gethostname(host, sizeof(host));
 		if (ret) {
-			LogEvent(COMPONENT_CLIENTID,
+			ret = errno;
+			LogCrit(COMPONENT_CLIENTID,
 				 "Failed to gethostname: %s (%d)",
 				 strerror(errno), errno);
-			return -errno;
+			return -ret;
 		}
 	}
 
@@ -172,7 +173,7 @@ static int rados_ng_init(void)
 			       rados_kv_param.namespace);
 	if (ret < 0) {
 		gsh_refstr_put(recov_oid);
-		LogEvent(COMPONENT_CLIENTID, "Failed to connect to cluster: %d",
+		LogCrit(COMPONENT_CLIENTID, "Failed to connect to cluster: %d",
 			 ret);
 		return ret;
 	}
@@ -183,7 +184,7 @@ static int rados_ng_init(void)
 				     NULL, 0);
 	gsh_refstr_put(recov_oid);
 	if (ret < 0 && ret != -EEXIST) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to create object");
+		LogCrit(COMPONENT_CLIENTID, "Failed to create object");
 		rados_release_write_op(op);
 		rados_kv_shutdown();
 		return ret;
@@ -194,7 +195,9 @@ static int rados_ng_init(void)
 	grace_op = rados_create_write_op();
 	rados_write_op_omap_clear(grace_op);
 
-	LogEvent(COMPONENT_CLIENTID, "Rados kv store init done");
+	LogEvent(COMPONENT_CLIENTID,
+		 "rados-ng recovery backend initialization complete");
+
 	return 0;
 }
 
