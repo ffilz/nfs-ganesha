@@ -70,7 +70,7 @@ static int rados_cluster_init(void)
 		nodeid = gsh_malloc(maxlen);
 		ret = gethostname(nodeid, maxlen);
 		if (ret) {
-			LogEvent(COMPONENT_CLIENTID, "gethostname failed: %d",
+			LogCrit(COMPONENT_CLIENTID, "gethostname failed: %d",
 				 errno);
 			ret = -errno;
 			goto out_free_nodeid;
@@ -81,7 +81,7 @@ static int rados_cluster_init(void)
 			       rados_kv_param.ceph_conf, rados_kv_param.pool,
 			       rados_kv_param.namespace);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to connect to cluster: %d",
+		LogCrit(COMPONENT_CLIENTID, "Failed to connect to rados cluster: %d",
 			 ret);
 		goto out_shutdown;
 	}
@@ -89,7 +89,7 @@ static int rados_cluster_init(void)
 	ret = rados_grace_member(rados_recov_io_ctx, rados_kv_param.grace_oid,
 				 nodeid);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID,
+		LogCrit(COMPONENT_CLIENTID,
 			 "Cluster membership check failed: %d", ret);
 		goto out_shutdown;
 	}
@@ -99,10 +99,13 @@ static int rados_cluster_init(void)
 			   &rados_watch_cookie, rados_grace_watchcb, NULL, 30,
 			   NULL);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID,
+		LogCrit(COMPONENT_CLIENTID,
 			 "Failed to set watch on grace db: %d", ret);
 		goto out_shutdown;
 	}
+
+	LogEvent(COMPONENT_CLIENTID, "rados-cluster recovery backend init done");
+
 	return 0;
 
 out_shutdown:
