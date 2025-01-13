@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d6800aa_5721d615",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-13T18:31:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogCrit(COMPONENT_CLIENTID, \"Failed to connect to rados cluster: %d\",",
+      "revId": "6c53709a601768a40a0bf69f879e90b71648152e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c5c58c_7db7050d",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-13T18:31:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tLogEvent(COMPONENT_CLIENTID, \"rados-cluster recovery backend init done\");",
+      "revId": "6c53709a601768a40a0bf69f879e90b71648152e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93fcf792_58277c69",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-13T18:31:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogCrit(COMPONENT_CLIENTID, \"Failed to connect to rados kv store: %d\",",
+      "revId": "6c53709a601768a40a0bf69f879e90b71648152e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70de7bc2_c2637d84",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-13T18:31:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogCrit(COMPONENT_CLIENTID, \"Failed to create recovery (rados) object\");",
+      "revId": "6c53709a601768a40a0bf69f879e90b71648152e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd0b1bb0_1d1bdaa2",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-13T18:31:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tLogCrit(COMPONENT_CLIENTID, \"Failed to create recovery (rados) object\");",
+      "revId": "6c53709a601768a40a0bf69f879e90b71648152e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
