@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2581df1c_240260ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-14T19:20:45Z",
+      "side": 1,
+      "message": "Hmm, you need consistency on the error returned. In fact, the return is only checked for \u003c 0, so maybe always just return -1? Or always return -errno...\n\nIf we\u0027re going to clean up the error reporting, let\u0027s completely clean it up...",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882df8f4_e1316520",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-14T19:20:45Z",
+      "side": 1,
+      "message": "Should return -errno here... Except you should set err \u003d errno BEFORE the LogCrit and use is since LogCrit will change errno...",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0143fee_6b805622",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-14T19:20:45Z",
+      "side": 1,
+      "message": "Same deal with err vs. errno",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb504a8b_336a829b",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-14T19:20:45Z",
+      "side": 1,
+      "message": "Same deal with err vs. errno",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66543ee2_09e67a34",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-14T19:20:45Z",
+      "side": 1,
+      "message": "Same deal with err vs. errno",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c579760_a9186616",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-14T19:20:45Z",
+      "side": 1,
+      "message": "Same deal with err vs. errno",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
