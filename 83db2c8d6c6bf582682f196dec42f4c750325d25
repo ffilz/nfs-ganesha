@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f9a619_a29684c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-15T18:16:30Z",
+      "side": 1,
+      "message": "Whenever returning errno, you need to save it before Log message. Logging definitely involves system calls that will reset errno.\n\nA good practice I follow is to save errno anytime there\u0027s a log message and use the saved value in the log message (this insulates from a parameter to the log message using a library or system call that resets errno).",
+      "revId": "83db2c8d6c6bf582682f196dec42f4c750325d25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e98eba_dc1f8636",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-15T18:16:30Z",
+      "side": 1,
+      "message": "errno will have been poisoned by LogCrit, you need to set err \u003d errno...",
+      "revId": "83db2c8d6c6bf582682f196dec42f4c750325d25",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
