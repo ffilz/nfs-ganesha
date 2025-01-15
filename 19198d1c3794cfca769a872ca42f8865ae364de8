@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de3ae91_aaf4fdf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-15T05:28:07Z",
+      "side": 1,
+      "message": "Making it to return -errno. So in case needed one can have more insights about the actual failure.",
+      "parentUuid": "2581df1c_240260ce",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "882df8f4_e1316520",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-01-14T19:20:45Z",
       "side": 1,
       "message": "Should return -errno here... Except you should set err \u003d errno BEFORE the LogCrit and use is since LogCrit will change errno...",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8ad787_b2b44efe",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-15T05:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "882df8f4_e1316520",
       "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a18bf6c_e450c04d",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-15T05:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0143fee_6b805622",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb504a8b_336a829b",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-01-14T19:20:45Z",
       "side": 1,
       "message": "Same deal with err vs. errno",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d0d250d_deda432e",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-15T05:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb504a8b_336a829b",
       "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af989a0_8fc00e18",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-15T05:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66543ee2_09e67a34",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c579760_a9186616",
@@ -99,6 +189,24 @@
       "writtenOn": "2025-01-14T19:20:45Z",
       "side": 1,
       "message": "Same deal with err vs. errno",
+      "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c0fd53_ac4c46bf",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-15T05:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c579760_a9186616",
       "revId": "19198d1c3794cfca769a872ca42f8865ae364de8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
