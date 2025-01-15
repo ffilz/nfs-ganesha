@@ -483,6 +483,9 @@ Delegations(bool, default false)
 Deleg_Recall_Retry_Delay(uint32_t, range 0 to 10, default 1)
     Delay after which server will retry a recall in case of failures
 
+Preserve_Unlinked(bool, default false)
+    Whether to allow preserve unlinked.
+
 pnfs_mds(bool, default false)
     Whether this a pNFS MDS server.
     For FSAL Gluster, if this is true, set pnfs_mds in gluster block as well.
