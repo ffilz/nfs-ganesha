@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb482eb_2d336ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-15T19:30:21Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs to be changed. If the library is not available, the build will not include it, and would only fail if it was explicitly specified on the cmake command line.",
+      "revId": "9de5bbd77f13c5c50216b0476790c76b0e74a515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
