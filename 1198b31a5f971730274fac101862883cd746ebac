@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "182c6027_40bb1073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-15T19:27:54Z",
+      "side": 1,
+      "message": "I not in favor of changing this default. Plus, if the code is built with -DUSE_GSS\u003dOFF the code isn\u0027t included at all. It\u0027s relatively harmless if Kerberos is not setup and this is enabled (I run that way all the time).",
+      "revId": "1198b31a5f971730274fac101862883cd746ebac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
