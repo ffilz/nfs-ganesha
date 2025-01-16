@@ -46,6 +46,30 @@
       },
       "revId": "a0ec2da5dbb8c4ad7fb71f775374a439b18addb8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6851104_87714da4",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2025-01-16T10:00:28Z",
+      "side": 1,
+      "message": "Unfortunately, the commit message helps developers but not users.  I was unaware that \"preserve unlinked\" is an NFSv4.1 thing.  It might be worth referring to that in the documentation.  :-)",
+      "parentUuid": "a202ebb8_50178a19",
+      "range": {
+        "startLine": 487,
+        "startChar": 4,
+        "endLine": 487,
+        "endChar": 39
+      },
+      "revId": "a0ec2da5dbb8c4ad7fb71f775374a439b18addb8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
