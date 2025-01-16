@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c2b2c09_9354831a",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-16T11:12:46Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static bool takeover \u003d false;",
+      "revId": "a275189e03c99ac6f8714386b4fa682fa30793d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "050278c8_d26d41a3",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-16T11:12:46Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint ret;\n+\ttakeover \u003d true;",
+      "revId": "a275189e03c99ac6f8714386b4fa682fa30793d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
