@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286b1eb5_24aa5871",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1419,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-16T18:13:57Z",
+      "side": 1,
+      "message": "This should have the STATE_LOCK held (which in the call you introduce is true.\n\nAdd a function description comment above and note that state lock must be held, like:\n\n@note The st_lock MUST be held.",
+      "revId": "a357e27b73d51a533a8ce077441674708178fb09",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
