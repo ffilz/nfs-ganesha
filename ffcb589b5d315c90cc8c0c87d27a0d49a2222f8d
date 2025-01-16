@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6206a5db_a915a46e",
+        "filename": "src/SAL/recovery/recovery_rados_ng.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-16T06:40:33Z",
+      "side": 1,
+      "message": "Thanks for catching this. Added required action on failure",
+      "parentUuid": "b54d5e71_f90d3730",
+      "revId": "ffcb589b5d315c90cc8c0c87d27a0d49a2222f8d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ea496f1_f4de271d",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a9858cf_b1b598e1",
+        "filename": "src/SAL/recovery/recovery_rados_ng.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-16T06:40:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ea496f1_f4de271d",
+      "revId": "ffcb589b5d315c90cc8c0c87d27a0d49a2222f8d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "583345e0_6d689dfb",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-01-15T09:23:56Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\tLogWarn(COMPONENT_CLIENTID, \"Failed to takeover node - %d\",",
+      "revId": "ffcb589b5d315c90cc8c0c87d27a0d49a2222f8d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8957287b_6300e088",
+        "filename": "src/SAL/recovery/recovery_rados_ng.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-16T06:40:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "583345e0_6d689dfb",
       "revId": "ffcb589b5d315c90cc8c0c87d27a0d49a2222f8d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
