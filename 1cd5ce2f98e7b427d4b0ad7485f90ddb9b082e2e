@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "799840d1_bf6b0636",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-16T05:42:49Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nToday, when a file is removed by an NFS client, it checks if the file is opened by other processes (or the same process). If yes, the NFS client renames the file to \".nfs\u003chashValue\u003e\" and when the last open is closed, removes the renamed file. This method is known as \"silly rename\". One problem with this approach is that the renamed files will not be removed if the client crashes.",
+      "revId": "1cd5ce2f98e7b427d4b0ad7485f90ddb9b082e2e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
