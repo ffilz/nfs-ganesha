@@ -50,6 +50,24 @@
       "message": "Have you tested this with pynfs? I think that will break open upgrade.",
       "revId": "a1d009a7e539dfc05139fa1fb417ea53c5a9c0e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9079455_e79577c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037682
+      },
+      "writtenOn": "2025-01-17T19:02:34Z",
+      "side": 1,
+      "message": "@ffilz\n\n\u003e OPEN29   st_open.testUpgrades                                     : PASS\n\nRunning nfs4.0 and nfs4.1 tests and see some odd python specific issues of str + bytes interaction and the ones called out in src/CONTRIBUTING_HOWTO but nothing super scary. Anything specific I can do in your experience to further validate?",
+      "parentUuid": "e9af7f1a_9f2683f9",
+      "revId": "a1d009a7e539dfc05139fa1fb417ea53c5a9c0e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
