@@ -55,7 +55,7 @@ static struct config_item rados_kv_params[] = {
 		      namespace),
 	CONF_ITEM_STR("grace_oid", 1, NI_MAXHOST, DEFAULT_RADOS_GRACE_OID,
 		      rados_kv_parameter, grace_oid),
-	CONF_ITEM_STR("nodeid", 1, NI_MAXHOST, NULL, rados_kv_parameter,
+	CONF_ITEM_I32("nodeid", 0, INT32_MAX, -1, rados_kv_parameter,
 		      nodeid),
 	CONFIG_EOL
 };
@@ -732,10 +732,17 @@ out:
 
 int rados_kv_get_nodeid(char **pnodeid)
 {
+	char *nodeid = NULL;
+	int ret = 0;
 	/* return the nodeid if we have one */
-	if (rados_kv_param.nodeid)
-		*pnodeid = gsh_strdup(rados_kv_param.nodeid);
-	return 0;
+	if (rados_kv_param.nodeid >= 0) {
+		nodeid = gsh_malloc(16); /* int max value is 11 digits */
+		ret = snprintf(nodeid, 15, "%d", rados_kv_param.nodeid);
+		if (ret < 16 && ret > 0)
+			ret = 0;
+	}
+	*pnodeid = nodeid;
+	return ret;
 }
 
 struct nfs4_recovery_backend rados_kv_backend = {
