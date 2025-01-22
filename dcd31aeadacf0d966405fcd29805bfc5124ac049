@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3a2892_899b90de",
+        "filename": "src/support/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:20:16Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct qos_block_config *qos_block \u003d self_struct;\n+\tLogFullDebug(COMPONENT_CONFIG, \"export %s\", gsh_export-\u003ecfg_fullpath);",
+      "revId": "dcd31aeadacf0d966405fcd29805bfc5124ac049",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
