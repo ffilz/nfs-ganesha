@@ -1,0 +1,905 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "190b33e6_1ba0c238",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8747885b_5c1d1aaf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (s_qos_class \u003d\u003d NULL || s_qos_class-\u003eclients \u003d\u003d NULL) {\n+\t\treturn true;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b73ce2fa_1b9910fb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\treturn true; //Continue th eiteration for next share",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd2a1161_84311839",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (export \u003d\u003d NULL || export-\u003eqos_class \u003d\u003d NULL) {\n+\t\t\treturn;\n+\t\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a6ef288_704df2c1",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (client \u003d\u003d NULL) {\n+\t\t\treturn;\n+\t\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d79204_24206eda",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"bucket_value: wio:%d, bw:%ld,\"\n+\t\t     \" bw_ldct:%ld, mat:%ld, tc:%ld trt:%ld, ltct:%ld\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c93826_b0b2aa0f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \"%s PER_SHARE SI:%d s_wio:%d\"\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d\"",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24fd5fc4_ccda2f21",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d\"\n+\t\t\t     \" c_rw_bw:%d, c_rw_token:%d\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b6a646_151c3797",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \"%s PER_CLIENT CI:%p s_wio:%d\"\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d c_rw_bw:%d,\"",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7efb2e45_55d2cfd2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d c_rw_bw:%d,\"\n+\t\t\t     \" c_rw_token:%d\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "009d050e_c9cbc3c0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (in-\u003eenable_qos \u003d\u003d false) {\n+\t\treturn;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b56a2125_9c4a9f42",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (qos_block !\u003d NULL) {\n[...]\n+\t} else {\n[...]",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f46604_37da35b8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (new_node) {\n+\t\tsetNode_pc(new_node, client_addr, qos_block);\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f73fb7_eb860bae",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!client) {\n+\t\treturn;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb4405cc_ceb533a6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: \u0027availablity\u0027 may be misspelled - perhaps \u0027availability\u0027?\n+static bool qos_check_bucket_token_availablity(qos_bucket_t *bucket,",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2e874d7_8853d2e7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (bucket-\u003etokens_consumed \u003c\u003d bucket-\u003emax_available_tokens) {\n[...]\n+\t} else {\n[...]",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9464f62a_a37fc8e8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: \u0027availablity\u0027 may be misspelled - perhaps \u0027availability\u0027?\n+static bool qos_check_token_availablity(void *qos_class, uint64_t request_size,",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b9e4d2_28deb94d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: \u0027availablity\u0027 may be misspelled - perhaps \u0027availability\u0027?\n+\treturn qos_check_bucket_token_availablity(bucket, request_size);",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d0d2ae_168a1854",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: \u0027availablity\u0027 may be misspelled - perhaps \u0027availability\u0027?\n+\tif (!qos_check_token_availablity(qos_class, request_size, op_type,",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7910bd0f_e3b18a93",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: \u0027availablity\u0027 may be misspelled - perhaps \u0027availability\u0027?\n+\tif (!qos_check_token_availablity(qos_class, request_size, op_type,",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b14fe3_1dcd94b1",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: \u0027availablity\u0027 may be misspelled - perhaps \u0027availability\u0027?\n+\tint share_token_available \u003d qos_check_token_availablity(",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5cf15c4_1ba55b9b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: \u0027availablity\u0027 may be misspelled - perhaps \u0027availability\u0027?\n+\tint client_token_available \u003d qos_check_token_availablity(",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732b6786_2c88927c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t//Considering 15 seconds before returning to client",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8935d54_354fae37",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// svc_rqst_qos_suspend_socket(client-\u003erq_xprt);",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a604ce_bdc5cd57",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"Timer added: %p gio_waiters:%d client_io_waitlists:%d\"\n+\t\t     \" CI:%p CT:%ld TO:%ld\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f0e01d6_a8be7a15",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"ct:%ld, dt:%ld rt:%ld tslo:%ld bw_ldct:%ld dis:%ld\"\n+\t\t\t\" dins:%ld bytes:%ld wba:%ld\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db0d53e_356c916c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (ret !\u003d 0) {\n+\t\t\tLogFullDebug(COMPONENT_QOS, \"Sleep Failure \");\n+\t\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5442f7_78e3fd5a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\twhile (current-\u003enext !\u003d NULL \u0026\u0026 current-\u003enext !\u003d entry_to_remove) {\n+\t\tcurrent \u003d current-\u003enext;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a79640_58eda7a5",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (new_entry \u003d\u003d NULL) {\n+\t\tLogFullDebug(COMPONENT_QOS, \"ERROR new entry is NULL\");\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d17b1f0_fd8fa83c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\twhile (current-\u003enext !\u003d NULL \u0026\u0026 current-\u003enext !\u003d entry_to_remove) {\n+\t\tcurrent \u003d current-\u003enext;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3597fc44_62130d7d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1375,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Expired IO Timer:%p CT:%ld Expiry:%ld\"\n+\t\t\t\t\t\" TCounter:%d\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce18211_157621fc",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1397,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t//list_timer_entries(head);",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72db424_b9811732",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t//svc_rqst_qos_resume_socket(rq_xprt);",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72884e03_c28f4f2f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1603,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (share \u003d\u003d NULL) {\n+\t\treturn;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c5b13c_ef379881",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (share !\u003d NULL \u0026\u0026 sbucket !\u003d NULL) {\n+\t\treturn;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc15eee0_44fc558f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"%s PS SI:%d s_wio:%d op_type:%s\"\n+\t\t     \" lct:%ld pct:%ld sb_io:%d sbw_ldct:%ld\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8da08ac_6a1427e7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1722,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (client !\u003d NULL \u0026\u0026 cbucket !\u003d NULL) {\n+\t\treturn;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6dd2105_de65585b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1727,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"%s PC CID:%p c_wio:%d op_type:%s\"\n+\t\t     \" lct:%ld pct:%ld cb_io:%d cbw_ldct:%ld\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc38e962_281ae29d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"%s PSPC SI:%d CID:%p s_wio:%d c_wio:%d\"\n+\t\t     \" op_type:%s lct:%ld pct:%ld sb_io:%d \"",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7606dcfd_da2cff7f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1749,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \" op_type:%s lct:%ld pct:%ld sb_io:%d \"\n+\t\t     \" cb_io:%d sbw_ldct:%ld cbw_ldct:%ld\",",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c970c7_7cc94d62",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (qos_class \u003d\u003d NULL) {\n+\t\treturn;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a9307a3_5c075010",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (share \u003d\u003d NULL) {\n+\t\treturn;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec0ccce5_14aa4f53",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1950,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (client \u003d\u003d NULL) {\n+\t\treturn 0;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baade05e_b528b181",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1033a405_0a8ba71f",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \\\n+\tdo {                                                        \\\n+\t\tif (!dbus_message_iter_next(args) ||                \\\n+\t\t    dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);   \\\n+\t\t\treturn true;                                \\\n+\t\t}                                                   \\\n+\t} while (0)\n+",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14322c0b_f039f2f6",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_ARG_OR_RETURN(args, type, iter, msg)                      \\\n+\tdo {                                                                 \\\n+\t\tif (!args || dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);            \\\n+\t\t\treturn true;                                         \\\n+\t\t}                                                            \\\n+\t} while (0)\n+",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5940cf57_b3b152ba",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!export) {\n+\t\treturn false;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097fbb66_56c69570",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!export) {\n+\t\treturn false;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4627de35_96c81c1d",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!export) {\n+\t\treturn false;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "723b84f3_d2bca665",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!export) {\n+\t\treturn false;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd28b5b0_68a2b858",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!export) {\n+\t\treturn false;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eb2504e_7cfb3e3b",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (!export) {\n+\t\treturn false;\n+\t}",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69bd0265_a39af36c",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-22T16:24:41Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t//\t.methods \u003d qos_methods,",
+      "revId": "9be31e492496c734772aa6e81f535ab4ca17db99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
