@@ -16,6 +16,24 @@
       "message": "Do we know how this parameter was being used in the past? Is it being used by any active deployments?",
       "revId": "b369d17ca903b70270064c40263f33528974c5e0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "745e2b6c_f98b160d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-24T17:40:46Z",
+      "side": 1,
+      "message": "This is part of RADOS_KV block. This parameter is unique identification of the node. Mostly used for connecting to rados for recovery object activity (like create, delete etc). So that way I am expecting almost no known deployment which will be impacted by changing its type.\nAs I see part of the code is making use g_nodeid (when it is provided) as nodeid (for failover scenarios), it means that there is no dependancy on nodeid being string only.\nAlso \"ganesha_mgr\" makes use of numeric nodeid for initiating failover.\nSo with this change everything will be aligned, nodeid will be numeric",
+      "parentUuid": "20357c6a_10994c0d",
+      "revId": "b369d17ca903b70270064c40263f33528974c5e0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
