@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "081b2cdb_218ad591",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-24T18:16:14Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n\"nodeid\" is part of RADOS_KV block. It is used as unique identification of the node for accessing recovery object. In case, g_nodeid is provided (via -I option in command line), then it is used as nodeid. Also for failover capabilities, numeric nodeid is used (via \"ganesha_mgr\" utility).",
+      "revId": "95ca6ee00e69317f48e47b4025184e1ba37f0ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
