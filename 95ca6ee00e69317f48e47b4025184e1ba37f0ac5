@@ -33,6 +33,24 @@
       "message": "Hmm, this impacts rados_cluster also:\n\nIn file included from /home/ffilz/ganesha/review/src/include/sal_data.h:49,\n                 from /home/ffilz/ganesha/review/src/include/nfs_core.h:42,\n                 from /home/ffilz/ganesha/review/src/SAL/recovery/recovery_rados_cluster.c:34:\n/home/ffilz/ganesha/review/src/SAL/recovery/recovery_rados_cluster.c: In function ‘rados_cluster_init’:\n/home/ffilz/ganesha/review/src/SAL/recovery/recovery_rados_cluster.c:68:51: error: passing argument 1 of ‘strdup’ makes pointer from integer without a cast [-Werror\u003dint-conversion]\n   68 |                 nodeid \u003d gsh_strdup(rados_kv_param.nodeid);\n      |                                     ~~~~~~~~~~~~~~^~~~~~~\n      |                                                   |\n      |                                                   int\n/home/ffilz/ganesha/review/src/include/abstract_mem.h:216:35: note: in definition of macro ‘gsh_strdup’\n  216 |                 char *p_ \u003d strdup(s); \\\n      |                                   ^\nIn file included from /usr/local/include/rados/librados.h:29,\n                 from /home/ffilz/ganesha/review/src/SAL/recovery/recovery_rados_cluster.c:30:\n/usr/include/string.h:171:34: note: expected ‘const char *’ but argument is of type ‘int’\n  171 | extern char *strdup (const char *__s)\n      |                      ~~~~~~~~~~~~^~~\ncc1: all warnings being treated as errors",
       "revId": "95ca6ee00e69317f48e47b4025184e1ba37f0ac5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f8451d_078a95cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-01-27T14:49:28Z",
+      "side": 1,
+      "message": "Done, made required code change for \"rados_cluster\" and \"rados_kv\"",
+      "parentUuid": "3b3615e5_92e68c24",
+      "revId": "95ca6ee00e69317f48e47b4025184e1ba37f0ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
