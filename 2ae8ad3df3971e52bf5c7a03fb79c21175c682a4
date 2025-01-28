@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "749b86b9_9037f602",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "That was formatted that way by clang-format, we cannot change styles manually\n\nEither we change the code that causes it (in this case it is comments that are inside macros), or we specifically change the style configuration that causes it in the style format file- http://clang.llvm.org/docs/ClangFormatStyleOptions.html\n\nAs part of the style format I still need to update the gerrit bot to stop running checkpatch and run the clang format as validation phase, so we won\u0027t have any differences that are caused from developers that don\u0027t run clang-format locally\n\nFor now what I did do is to combine the two separate comments into a single line comment",
+      "parentUuid": "a2250483_8ff26d8c",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c0d0e2_e66af994",
@@ -49,6 +67,24 @@
       "writtenOn": "2024-09-16T10:51:12Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t.def.anonymous_uid \u003d ANON_UID, .def.anonymous_gid \u003d ANON_GID,                                                           \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1900712d_2e49c6cb",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e3c0d0e2_e66af994",
       "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -70,6 +106,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8619639_d06f8c1c",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "61440035_63ba7d01",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de28361a_974b7817",
@@ -83,6 +137,24 @@
       "writtenOn": "2024-09-16T10:51:12Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\tEXPORT_DEFAULT_CACHE_EXPIRY, /* Note: Access_Type defaults to None on purpose     */                            \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea58f2f_f45c9419",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "de28361a_974b7817",
       "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -104,6 +176,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c0e102_972655b1",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "00b72b15_f5f491a9",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eed3ceb2_b5166409",
@@ -117,6 +207,24 @@
       "writtenOn": "2024-09-16T10:51:12Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t.def.options \u003d EXPORT_OPTION_ROOT_SQUASH |                                                                      \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d97ee63_95e0e1e9",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eed3ceb2_b5166409",
       "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -138,6 +246,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f197e5c_85891dd2",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b0f4ff33_4318ea59",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "022a6a5f_fb141789",
@@ -151,6 +277,24 @@
       "writtenOn": "2024-09-16T10:51:12Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_AUTH_DEFAULTS |                                                                    \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "340e9aa9_9f2e7080",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "022a6a5f_fb141789",
       "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -172,6 +316,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b181b7c0_53e89d60",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "24f8b2c2_2a2362e5",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03f2d7a9_8a7d648c",
@@ -185,6 +347,24 @@
       "writtenOn": "2024-09-16T10:51:12Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\t\t\t       EXPORT_OPTION_NO_DELEGATIONS,                                                                    \\",
+      "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18404a2f_82e1c1a0",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-28T18:29:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "03f2d7a9_8a7d648c",
       "revId": "2ae8ad3df3971e52bf5c7a03fb79c21175c682a4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
