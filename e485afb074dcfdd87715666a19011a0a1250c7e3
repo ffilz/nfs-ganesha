@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6101ca_148da623",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"bucket_value: wio:%d, bw:%ld,\"\n+\t\t     \" bw_ldct:%ld, mat:%ld, tc:%ld trt:%ld, ltct:%ld\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea75383_8bac7a41",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \"%s PER_SHARE SI:%d s_wio:%d\"\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d\"",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497e7cd0_e429f97d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d\"\n+\t\t\t     \" c_rw_bw:%d, c_rw_token:%d\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f247d60_84ab110a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \"%s PER_CLIENT CI:%p s_wio:%d\"\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d c_rw_bw:%d,\"",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b34454e1_f24f8c33",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t     \" bw_enabled:%d, token_enabled:%d c_rw_bw:%d,\"\n+\t\t\t     \" c_rw_token:%d\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd3d122_7898e9d9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// svc_rqst_qos_suspend_socket(client-\u003erq_xprt);",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c629cd6_8836ff5d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"Timer added: %p gio_waiters:%d client_io_waitlists:%d\"\n+\t\t     \" CI:%p CT:%ld TO:%ld\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e376b1_024802d8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\"ct:%ld, dt:%ld rt:%ld tslo:%ld bw_ldct:%ld dis:%ld\"\n+\t\t\t\" dins:%ld bytes:%ld wba:%ld\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfcf6b91_66524612",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t\t\t\t\"Expired IO Timer:%p CT:%ld Expiry:%ld\"\n+\t\t\t\t\t\" TCounter:%d\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e004e300_6a687e9a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t\t//svc_rqst_qos_resume_socket(rq_xprt);",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d883a194_036933d0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1762,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"%s PS SI:%d s_wio:%d op_type:%s\"\n+\t\t     \" lct:%ld pct:%ld sb_io:%d sbw_ldct:%ld\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbd30227_63b0e512",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1780,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"%s PC CID:%p c_wio:%d op_type:%s\"\n+\t\t     \" lct:%ld pct:%ld cb_io:%d cbw_ldct:%ld\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9e98fa_18250820",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \"%s PSPC SI:%d CID:%p s_wio:%d c_wio:%d\"\n+\t\t     \" op_type:%s lct:%ld pct:%ld sb_io:%d \"",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3526e8b5_0d3fed19",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1802,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: quoted string split across lines\n+\t\t     \" op_type:%s lct:%ld pct:%ld sb_io:%d \"\n+\t\t     \" cb_io:%d sbw_ldct:%ld cbw_ldct:%ld\",",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d77467_9b87316e",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \\\n+\tdo {                                                        \\\n+\t\tif (!dbus_message_iter_next(args) ||                \\\n+\t\t    dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);   \\\n+\t\t\treturn true;                                \\\n+\t\t}                                                   \\\n+\t} while (0)\n+",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92002775_350dce4b",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_ARG_OR_RETURN(args, type, iter, msg)                      \\\n+\tdo {                                                                 \\\n+\t\tif (!args || dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);            \\\n+\t\t\treturn true;                                         \\\n+\t\t}                                                            \\\n+\t} while (0)\n+",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9c1fea3_4a04752c",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-28T16:48:03Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "e485afb074dcfdd87715666a19011a0a1250c7e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
