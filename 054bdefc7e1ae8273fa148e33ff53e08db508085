@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a821f0b3_5ccec7c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-29T23:16:31Z",
+      "side": 1,
+      "message": "Please address the checkpatch comments.\n\nAlso, what is the implication of this not being thread safe? As a build option, this seems like it might be harder to use than to just re-create the issue while running in gdb or collecting a core file and analyzing that.",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f60b79cf_7c0aa0a2",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
