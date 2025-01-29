@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b670c05f_50d6fda2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n #\u003cline_number\u003e at code path \u003ccode file\u003e:\u003ccode line\u003e from binary \u003cbinary path\u003e",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f60b79cf_7c0aa0a2",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+\tstatic bool abort_on_next_run \u003d false;",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206d5357_ce98ca43",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstatic bool abort_on_next_run \u003d false;\n+\tif (abort_on_next_run) {",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99750044_c65ffcc5",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (is_inside_crash_handler) {\n+\t\tabort_on_next_run \u003d true;\n+\t}",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e70edda_56cb9011",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2615,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (fp \u003d\u003d NULL) {\n+\t\treturn ENRICHED_BT_FAILURE;\n+\t}",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959b6992_b7e20fdf",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2615,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tFILE *fp \u003d popen(command, \"r\");\n+\tif (fp \u003d\u003d NULL) {",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae09e4d4_5f6350ee",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2646,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t/* format: start_addr-end_addr permissions offset dev inode binary_path */",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e66d76_3db5f770",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2651,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-01-29T22:27:48Z",
+      "side": 1,
+      "message": "WARNING: unchecked sscanf return value\n+\t\tsscanf(line, scan_format_buffer, \u0026start_addr, \u0026end_addr,\n+\t\t       (char *)binary_path);",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
