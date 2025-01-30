@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b053009_60059fbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-30T09:57:45Z",
+      "side": 1,
+      "message": "It is not that it is not thread safe, it is that it is not signal safe\n\nThe implication for that is, that in corner cases this code might not work / get stuck.\nFor that reason we do all the signal safe code and consider this code as best effort + adding a watchdog to cause Ganesha to exit if it will be stuck.\nAgain, those are theoretical corner cases that we wanted to address.\n\nRegarding the build flag, we wanted to leave the current Ganesha behavior as-is and allow anyone who wants that to be able to enable it.\n\nFor us, we will enable this feature always and in all environments.\nIf Ganesha will crash for some reason, we want to get as much information that we can from it.\n\nP.S- worth mentioning in the documentation that if this flag is enabled, the command line `addr2line` should be available on the machine.\n\nRoy , can you please add that?",
+      "parentUuid": "cf9810af_1a810c56",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f60b79cf_7c0aa0a2",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
