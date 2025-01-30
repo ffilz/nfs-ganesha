@@ -16,6 +16,29 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\n #\u003cline_number\u003e at code path \u003ccode file\u003e:\u003ccode line\u003e from binary \u003cbinary path\u003e",
       "revId": "47397d7407d453dca2cae9ed2cfffc097780b9a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6764c626_fd6111f3",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-01-30T20:20:11Z",
+      "side": 1,
+      "message": "This should be a `const char *`",
+      "range": {
+        "startLine": 2695,
+        "startChar": 1,
+        "endLine": 2695,
+        "endChar": 5
+      },
+      "revId": "47397d7407d453dca2cae9ed2cfffc097780b9a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
