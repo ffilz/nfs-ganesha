@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf9810af_1a810c56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:46:53Z",
+      "side": 1,
+      "message": "Fixed the checkpatch comments.\n\nThe idea behind the build flag is that we can decide to build with it or without it (similar to the decision to build with backtraces(3) or libunwind).\n\nI don\u0027t expect it to be used for reproducing issues that happened without it (although it is possible). \nI think that if you value the information of file name, line number, etc, you will always enable the flag on your build.",
+      "parentUuid": "a821f0b3_5ccec7c4",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f60b79cf_7c0aa0a2",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
