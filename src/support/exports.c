@@ -1735,7 +1735,8 @@ static struct config_item_list nfs_protocols[] = {
 
 static struct config_item_list transports[] = {
 	CONFIG_LIST_TOK("UDP", EXPORT_OPTION_UDP),
-	CONFIG_LIST_TOK("TCP", EXPORT_OPTION_TCP), CONFIG_LIST_EOL
+	CONFIG_LIST_TOK("TCP", EXPORT_OPTION_TCP),
+	CONFIG_LIST_TOK("RDMA", EXPORT_OPTION_RDMA), CONFIG_LIST_EOL
 };
 
 /**

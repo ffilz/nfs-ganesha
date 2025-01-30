@@ -134,14 +134,15 @@ static struct config_item_list nfs_rdma_protocol_versions[] = {
 	CONFIG_LIST_TOK("NFS4.0", NFS_RDMA_ENABLE_FOR_NFSV40),
 	CONFIG_LIST_TOK("NFSv4.0", NFS_RDMA_ENABLE_FOR_NFSV40),
 
-#ifdef _USE_NFS_RDMA_UNUSED
-	/* Enable  4.1, v4.1, NFS4.1, NFSv4.1, 4.2, v4.2, NFS4.2, NFSv4.2
-	 * once Ganesha starts supporting these versions */
 	CONFIG_LIST_TOK("4.1", NFS_RDMA_ENABLE_FOR_NFSV41),
 	CONFIG_LIST_TOK("v4.1", NFS_RDMA_ENABLE_FOR_NFSV41),
 	CONFIG_LIST_TOK("NFS4.1", NFS_RDMA_ENABLE_FOR_NFSV41),
 	CONFIG_LIST_TOK("NFSv4.1", NFS_RDMA_ENABLE_FOR_NFSV41),
 
+#ifdef _USE_NFS_RDMA_UNUSED
+	/* Enable  4.2, v4.2, NFS4.2, NFSv4.2 once Ganesha
+	 * starts supporting these versions
+	 */
 	CONFIG_LIST_TOK("4.2", NFS_RDMA_ENABLE_FOR_NFSV42),
 	CONFIG_LIST_TOK("v4.2", NFS_RDMA_ENABLE_FOR_NFSV42),
 	CONFIG_LIST_TOK("NFS4.2", NFS_RDMA_ENABLE_FOR_NFSV42),
