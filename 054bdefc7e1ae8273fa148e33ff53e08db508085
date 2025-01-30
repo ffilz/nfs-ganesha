@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d1a7c3_5ff82adb",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f60b79cf_7c0aa0a2",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "206d5357_ce98ca43",
@@ -69,6 +87,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5579ecaf_2e8b4943",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "206d5357_ce98ca43",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99750044_c65ffcc5",
@@ -82,6 +118,24 @@
       "writtenOn": "2025-01-29T22:27:48Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (is_inside_crash_handler) {\n+\t\tabort_on_next_run \u003d true;\n+\t}",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d2ea3c_f6bd1b06",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99750044_c65ffcc5",
       "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +174,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35880802_98fd6f6d",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2615,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e70edda_56cb9011",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "708edf25_5b1adfae",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2615,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "959b6992_b7e20fdf",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae09e4d4_5f6350ee",
@@ -137,6 +227,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "188a5f42_049586d5",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2646,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae09e4d4_5f6350ee",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76e66d76_3db5f770",
@@ -150,6 +258,24 @@
       "writtenOn": "2025-01-29T22:27:48Z",
       "side": 1,
       "message": "WARNING: unchecked sscanf return value\n+\t\tsscanf(line, scan_format_buffer, \u0026start_addr, \u0026end_addr,\n+\t\t       (char *)binary_path);",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1611c154_e0d5e3b9",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2651,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-01-30T08:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76e66d76_3db5f770",
       "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
