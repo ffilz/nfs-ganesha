@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df17b23_9e45feab",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-30T19:18:56Z",
+      "side": 1,
+      "message": "We should default this to false",
+      "revId": "a70a300041bf64ea95cf96ec1c69bf1b7da11f20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db9ae08a_d0c1a187",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-30T19:18:56Z",
+      "side": 1,
+      "message": "Looks like a dupe of line 481?\n\nAlso, can this default to false?",
+      "revId": "a70a300041bf64ea95cf96ec1c69bf1b7da11f20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e66f67a_92c7e5bc",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-30T19:18:56Z",
+      "side": 1,
+      "message": "Could you #define constants for these very large numbers? Or code them like 1024*1024? Just a bit easier to read",
+      "revId": "a70a300041bf64ea95cf96ec1c69bf1b7da11f20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
