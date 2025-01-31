@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "006a2b8b_b23f2af8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-31T00:24:35Z",
+      "side": 1,
+      "message": "Should this patch be re-factored or squashed with the other, it includes a header file that isn\u0027t provided until the next patch",
+      "revId": "a70a300041bf64ea95cf96ec1c69bf1b7da11f20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0df17b23_9e45feab",
         "filename": "src/support/exports.c",
         "patchSetId": 1
@@ -48,6 +65,40 @@
       "writtenOn": "2025-01-30T19:18:56Z",
       "side": 1,
       "message": "Could you #define constants for these very large numbers? Or code them like 1024*1024? Just a bit easier to read",
+      "revId": "a70a300041bf64ea95cf96ec1c69bf1b7da11f20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c632e6_bd001380",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-31T00:24:35Z",
+      "side": 1,
+      "message": "This isn\u0027t defined until next patch...",
+      "revId": "a70a300041bf64ea95cf96ec1c69bf1b7da11f20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc55b369_e26235d7",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2825,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-31T00:24:35Z",
+      "side": 1,
+      "message": "This isn\u0027t defined yet, not until next patch... Also, please use enum here",
       "revId": "a70a300041bf64ea95cf96ec1c69bf1b7da11f20",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
