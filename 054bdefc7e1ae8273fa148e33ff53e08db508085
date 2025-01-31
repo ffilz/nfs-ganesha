@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cee4177_545a7a67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-01-31T00:27:34Z",
+      "side": 1,
+      "message": "Oh, right, not signal safe... Yea, we can\u0027t exhaustively worry about that...\n\nLet\u0027s add that documentation note.\nAnd add a CMake dependency on addr2line...\n\nAlso, let\u0027s enable this in debug and maintainer build configs, it certainly is handy.",
+      "parentUuid": "2b053009_60059fbf",
+      "revId": "054bdefc7e1ae8273fa148e33ff53e08db508085",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f60b79cf_7c0aa0a2",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
