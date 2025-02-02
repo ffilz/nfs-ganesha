@@ -119,7 +119,7 @@ static enum load_state {
  * @param[in] init	Initialization function for FSAL
  */
 
-static void load_fsal_static(const char *name, void (*init)(void))
+void load_fsal_static(const char *name, void (*init)(void))
 {
 	char *dl_path = gsh_concat("Builtin-", name);
 	struct fsal_module *fsal;
