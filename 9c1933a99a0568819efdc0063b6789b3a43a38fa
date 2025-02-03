@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a9444a1_1d80d730",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-03T16:26:27Z",
+      "side": 1,
+      "message": "WARNING: \u0027makeing\u0027 may be misspelled - perhaps \u0027making\u0027?\ncare of makeing the node-name as \"node\u003cnodeid\u003e\". This will unify use of",
+      "revId": "9c1933a99a0568819efdc0063b6789b3a43a38fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a152e18a_07af2352",
+        "filename": "src/tools/ganesha-rados-grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-03T16:26:27Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tint len \u003d 0;\n+\t\t\tnode_names \u003d calloc(nodes, sizeof(char *));",
+      "revId": "9c1933a99a0568819efdc0063b6789b3a43a38fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3644d080_a3ce4fd9",
+        "filename": "src/tools/ganesha-rados-grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-03T16:26:27Z",
+      "side": 1,
+      "message": "ERROR: space required before the open parenthesis \u0027(\u0027\n+\t\t\tfor(i\u003d0; i\u003c nodes; ++i) {",
+      "revId": "9c1933a99a0568819efdc0063b6789b3a43a38fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc851d5c_c291a72f",
+        "filename": "src/tools/ganesha-rados-grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-03T16:26:27Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003c\u0027 (ctx:VxW)\n+\t\t\tfor(i\u003d0; i\u003c nodes; ++i) {\n \t\t\t          ^",
+      "revId": "9c1933a99a0568819efdc0063b6789b3a43a38fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12e6922_97ba5668",
+        "filename": "src/tools/ganesha-rados-grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-03T16:26:27Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\t\t\tfor(i\u003d0; i\u003c nodes; ++i) {\n \t\t\t     ^",
+      "revId": "9c1933a99a0568819efdc0063b6789b3a43a38fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
