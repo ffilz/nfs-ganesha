@@ -33,6 +33,24 @@
       "message": "WARNING: Missing a blank line after declarations\n+\tchar *last_char \u003d str + strlen(str) - 1;\n+\tif (*last_char \u003d\u003d \u0027\\n\u0027)",
       "revId": "908eb11ed9ca8ff709168161b2233fc05555599d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aeaca90_4869c522",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2608,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-04T10:28:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b606a10_76bb2936",
+      "revId": "908eb11ed9ca8ff709168161b2233fc05555599d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
