@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afb14e82_dea071b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-11T23:11:27Z",
+      "side": 1,
+      "message": "I do wonder about the impact of the empty functions if USE_MONITORING is off.\n\nThey could be made inline if USE_MONITORING is off.\n\nBut that may be a small nit.",
+      "revId": "a0461586a9c2783c71a2be2973eef56e1a5b2925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4206eeaf_e2a06943",
