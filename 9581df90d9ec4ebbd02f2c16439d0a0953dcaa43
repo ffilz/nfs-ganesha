@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a9438c_31f3d749",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-11T15:44:24Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void dynamic_metrics__init() should probably be void dynamic_metrics__init(void)\n+void dynamic_metrics__init();",
+      "revId": "9581df90d9ec4ebbd02f2c16439d0a0953dcaa43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a17c32c_089887bf",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-11T15:44:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\texplicit PrometheusExposer(prometheus::Registry \u0026registry);\n \t                                                ^",
+      "revId": "9581df90d9ec4ebbd02f2c16439d0a0953dcaa43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ead5364_bcdf17df",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-11T15:44:24Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\tPrometheusExposer \u0026operator\u003d(const PrometheusExposer \u0026) \u003d delete;\n \t                           ^",
+      "revId": "9581df90d9ec4ebbd02f2c16439d0a0953dcaa43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4afd1e1b_6cd0d11e",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-11T15:44:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tPrometheusExposer \u0026operator\u003d(const PrometheusExposer \u0026) \u003d delete;\n \t                  ^",
+      "revId": "9581df90d9ec4ebbd02f2c16439d0a0953dcaa43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95acb0fe_ae72a33f",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-11T15:44:24Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tPrometheusExposer \u0026operator\u003d(PrometheusExposer \u0026\u0026) \u003d delete;\n \t                  ^",
+      "revId": "9581df90d9ec4ebbd02f2c16439d0a0953dcaa43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "331779db_b15593b2",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-11T15:44:24Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\tPrometheusExposer \u0026operator\u003d(PrometheusExposer \u0026\u0026) \u003d delete;\n \t                           ^",
+      "revId": "9581df90d9ec4ebbd02f2c16439d0a0953dcaa43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
