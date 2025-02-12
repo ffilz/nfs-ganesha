@@ -35,6 +35,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b56744_45182f33",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "required without since used around function arg",
+      "parentUuid": "16ea53b1_745bca87",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce27f0b_b752549c",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "required without since used around function arg",
+      "parentUuid": "74943505_9f92882a",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fcadbba_93bc88c3",
@@ -65,6 +101,42 @@
       "writtenOn": "2025-02-12T16:20:04Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\texplicit PrometheusExposer(prometheus::Registry \u0026registry);\n \t                                                ^",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19ac52fa_21eb4a2b",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "4fcadbba_93bc88c3",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5cbb8df_0fbcc9b1",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "97aad59f_9c2c7710",
       "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +209,78 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c727e8a_ed48f955",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "4e4b9fa6_f6048964",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca9fc9f_6537b1f0",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "4d895426_b4d5411d",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bef291cf_235ebd38",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "9bada338_6c7922b5",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3f27750_6c350373",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "be8fca36_808be698",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a842981_6f96da72",
@@ -205,6 +349,78 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e913dce_3e160e31",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "4f404e08_8134f8b9",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5244c1_370c9014",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "87f205db_32acfcc9",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef48e1e1_f562aaa4",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "1f553512_f88b612f",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c616f399_643c6154",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "false positive error - checkpath assumes bitwise \u0026 and doesn\u0027t recognize c++ ref",
+      "parentUuid": "5a842981_6f96da72",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3345504_586396e6",
@@ -235,6 +451,42 @@
       "writtenOn": "2025-02-12T16:20:04Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define UNUSED_(arg) NOT_USED_##arg UNUSED_ATTR",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8d24c2_aa19d942",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "required without since used around function arg",
+      "parentUuid": "a3345504_586396e6",
+      "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25dae9c9_a12ad0ed",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-02-12T16:29:03Z",
+      "side": 1,
+      "message": "required without since used around function arg",
+      "parentUuid": "685a59e1_7ef2404f",
       "revId": "bdf775bc6ce320182f7e9dbff83eaa10b4c9daf5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
