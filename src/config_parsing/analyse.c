@@ -232,10 +232,10 @@ static void print_node(FILE *output, struct config_node *node,
 		/* a statement value */
 		fprintf(output, "%*s(%s)'%s' '%s'\n", indent, " ",
 			(node->u.term.type != 0 ?
-				 config_term_type[node->u.term.type].name :
-				 "unknown"),
+				       config_term_type[node->u.term.type].name :
+				       "unknown"),
 			(node->u.term.op_code != NULL ? node->u.term.op_code :
-							" "),
+							      " "),
 			node->u.term.varvalue);
 	}
 }
