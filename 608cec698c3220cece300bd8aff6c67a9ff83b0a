@@ -33,6 +33,57 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nUsually this recovery backend objects for “rados_cluster” backend are named",
       "revId": "608cec698c3220cece300bd8aff6c67a9ff83b0a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "494ea1be_0857433b",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-13T18:22:49Z",
+      "side": 1,
+      "message": "Is there a reason to just use these 4 bytes and not the full IPV6 address?",
+      "revId": "608cec698c3220cece300bd8aff6c67a9ff83b0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e2404c5_2de0277f",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-13T18:22:49Z",
+      "side": 1,
+      "message": "OK, so this assumes a Ganesha instance coming up has one VIP assigned to it at startup?",
+      "revId": "608cec698c3220cece300bd8aff6c67a9ff83b0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82e0aa5a_3eb553bc",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-13T18:22:49Z",
+      "side": 1,
+      "message": "typo: read from",
+      "revId": "608cec698c3220cece300bd8aff6c67a9ff83b0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
