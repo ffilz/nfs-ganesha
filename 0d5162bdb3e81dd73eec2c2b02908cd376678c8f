@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3abb9d_05b7f18e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-13T11:27:37Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nUsually this recovery backend objects for “rados_cluster” backend are named",
+      "revId": "0d5162bdb3e81dd73eec2c2b02908cd376678c8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b3ac049_d8cbaebf",
@@ -29,6 +46,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-13T11:26:39Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+extern int get_raddr(SVCXPRT *xprt);",
+      "revId": "0d5162bdb3e81dd73eec2c2b02908cd376678c8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "698d7fef_a70631ad",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-13T11:27:37Z",
       "side": 1,
       "message": "WARNING: externs should be avoided in .c files\n+extern int get_raddr(SVCXPRT *xprt);",
       "revId": "0d5162bdb3e81dd73eec2c2b02908cd376678c8f",
@@ -54,6 +88,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e0424ab_90a79aea",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-13T11:27:37Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (gsp \u0026\u0026 (gsp-\u003eevent !\u003d EVENT_JUST_GRACE)) {\n \t\tset_recovery_object_for_takeover(gsp);\n \t}",
+      "revId": "0d5162bdb3e81dd73eec2c2b02908cd376678c8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a009c311_534a0c74",
         "filename": "src/SAL/recovery/recovery_rados_cluster.c",
         "patchSetId": 1
@@ -63,6 +114,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-13T11:26:39Z",
+      "side": 1,
+      "message": "WARNING: \u0027targetted\u0027 may be misspelled - perhaps \u0027targeted\u0027?\n+\t/* Read form the recovery object targetted for reclaim */",
+      "revId": "0d5162bdb3e81dd73eec2c2b02908cd376678c8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ae30c6_e2e028e6",
+        "filename": "src/SAL/recovery/recovery_rados_cluster.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-13T11:27:37Z",
       "side": 1,
       "message": "WARNING: \u0027targetted\u0027 may be misspelled - perhaps \u0027targeted\u0027?\n+\t/* Read form the recovery object targetted for reclaim */",
       "revId": "0d5162bdb3e81dd73eec2c2b02908cd376678c8f",
