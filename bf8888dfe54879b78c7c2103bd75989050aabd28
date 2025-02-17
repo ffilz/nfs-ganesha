@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f387856f_5c5be5db",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1486,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T20:02:41Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+int for_each_tcp_drc(void (*cb)(drc_t *drc, void *state), void *state)\n+{",
+      "revId": "bf8888dfe54879b78c7c2103bd75989050aabd28",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d31e45c_ccfad55d",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 2
@@ -29,6 +46,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-17T19:59:21Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tuint64_t num_drcs \u003d 0;\n+\tfor (idx \u003d 0; idx \u003c npart; ++idx) {",
+      "revId": "bf8888dfe54879b78c7c2103bd75989050aabd28",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69701f66_1bf2b667",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T20:02:41Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tuint64_t num_drcs \u003d 0;\n+\tfor (idx \u003d 0; idx \u003c npart; ++idx) {",
       "revId": "bf8888dfe54879b78c7c2103bd75989050aabd28",
