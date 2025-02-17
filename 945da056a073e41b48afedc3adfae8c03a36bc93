@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1b71e8e_9b364718",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function declarations go on the next line\n+static void drc_to_dbus(drc_t *drc, void *state) {",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cce4a103_975f109e",
         "filename": "src/MainNFSD/nfs_admin_thread.c",
         "patchSetId": 1
@@ -29,6 +46,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-17T19:45:00Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_open_container(array_iter, DBUS_TYPE_STRUCT, NULL, \u0026struct_iter);",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c4cb19_6c451bb8",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_open_container(array_iter, DBUS_TYPE_STRUCT, NULL, \u0026struct_iter);",
       "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
@@ -54,6 +88,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56b18af0_a1105482",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_append_basic(\u0026struct_iter, DBUS_TYPE_UINT32, \u0026drc-\u003esize);",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f338a8b1_10c4e1fb",
         "filename": "src/MainNFSD/nfs_admin_thread.c",
         "patchSetId": 1
@@ -63,6 +114,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-17T19:45:00Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_open_container(\u0026iter, DBUS_TYPE_STRUCT, NULL, \u0026struct_iter);",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d6e059_4922f734",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_open_container(\u0026iter, DBUS_TYPE_STRUCT, NULL, \u0026struct_iter);",
       "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
@@ -88,6 +156,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8e413b4_d398d0ae",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_append_basic(\u0026struct_iter, DBUS_TYPE_UINT32, \u0026counter);",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b649218_56363479",
         "filename": "src/MainNFSD/nfs_admin_thread.c",
         "patchSetId": 1
@@ -97,6 +182,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-17T19:45:00Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_open_container(\u0026iter, DBUS_TYPE_STRUCT, NULL, \u0026struct_iter);",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a127497_8a3e992c",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
       "side": 1,
       "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_open_container(\u0026iter, DBUS_TYPE_STRUCT, NULL, \u0026struct_iter);",
       "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
@@ -122,6 +224,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3907e1e_5a985044",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tdbus_message_iter_append_basic(\u0026struct_iter, DBUS_TYPE_UINT32, \u0026counter);",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2eb5b26_ba993ee0",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 1
@@ -131,6 +250,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-17T19:45:00Z",
+      "side": 1,
+      "message": "ERROR: that open brace { should be on the previous line\n+int for_each_tcp_drc(void(*cb) (drc_t *drc, void *state), void *state)\n+{",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "316da3bf_813516c5",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
       "side": 1,
       "message": "ERROR: that open brace { should be on the previous line\n+int for_each_tcp_drc(void(*cb) (drc_t *drc, void *state), void *state)\n+{",
       "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
@@ -156,6 +292,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62904c65_005adc56",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tuint64_t num_drcs \u003d 0;\n+\tfor (uint32_t idx \u003d 0; idx \u003c npart; ++idx) {",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ac8e474_e10345fc",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 1
@@ -173,6 +326,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7b9d103_4745c3e6",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1515,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - uint32_t get_tcp_drc_recycle_qlen() should probably be uint32_t get_tcp_drc_recycle_qlen(void)\n+uint32_t get_tcp_drc_recycle_qlen()",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5d08cee_4a67babd",
         "filename": "src/include/nfs_dupreq.h",
         "patchSetId": 1
@@ -182,6 +352,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-02-17T19:45:00Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - uint32_t get_tcp_drc_recycle_qlen() should probably be uint32_t get_tcp_drc_recycle_qlen(void)\n+uint32_t get_tcp_drc_recycle_qlen();",
+      "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200e81b4_4f375ee6",
+        "filename": "src/include/nfs_dupreq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-17T19:49:29Z",
       "side": 1,
       "message": "ERROR: Bad function definition - uint32_t get_tcp_drc_recycle_qlen() should probably be uint32_t get_tcp_drc_recycle_qlen(void)\n+uint32_t get_tcp_drc_recycle_qlen();",
       "revId": "945da056a073e41b48afedc3adfae8c03a36bc93",
