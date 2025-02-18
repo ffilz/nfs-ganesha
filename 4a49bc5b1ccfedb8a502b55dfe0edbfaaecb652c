@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1de006_0842e09a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nQOS CompileTime enable and disablement using ENABLE_QOS flag while doing CMAKE.",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a6b01eb_ea217f39",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2129,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint counter \u003d 0;\n+\tLogFullDebug(COMPONENT_QOS, \"Current Timer Entries:\");",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1855ca08_027096f1",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2722,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (share \u0026\u0026 share-\u003eiops_enabled) {\n+\t\tresume_iops_ps(share, *(unsigned int *)state);\n+\t}",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9daf8199_25554021",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (client \u0026\u0026 client-\u003eiops_enabled) {\n+\t\tresume_iops_pc(client, *(unsigned int *)state);\n+\t}",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "112289f5_054eefad",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3156,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\tif (bucket \u003d\u003d NULL) {\n+\t\t\tgoto out;\n+\t\t}",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ccd34b_c7021e6b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3194,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (op_ctx-\u003ectx_export) {\n+\t\texport \u003d op_ctx-\u003ectx_export;\n+\t}",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "538d6968_12f36cbe",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3198,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (op_ctx-\u003eclient) {\n+\t\tclient \u003d op_ctx-\u003eclient;\n+\t}",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb7e555_cbdadd10",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \\\n+\tdo {                                                        \\\n+\t\tif (!dbus_message_iter_next(args) ||                \\\n+\t\t    dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);   \\\n+\t\t\treturn true;                                \\\n+\t\t}                                                   \\\n+\t} while (0)\n+",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad3b314_cae442fb",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_ARG_OR_RETURN(args, type, iter, msg)                      \\\n+\tdo {                                                                 \\\n+\t\tif (!args || dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);            \\\n+\t\t\treturn true;                                         \\\n+\t\t}                                                            \\\n+\t} while (0)\n+",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa0b552_e54bfa08",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-02-18T12:13:46Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "4a49bc5b1ccfedb8a502b55dfe0edbfaaecb652c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
