@@ -322,7 +322,7 @@ PSEUDOFS {}
 This block allows specifying some options for the pseudofs root export. It is
 very similar to an EXPORT block, except only the following options may be
 specified. CLIENT blocks may be used just like an EXPORT block, however, they
-are also limited to the same options.
+are also limited to the same options. Same is applicable to QOS_BLOCK.
 
 This is basically a shortcut rather than having to fill out options in an
 EXPORT block. Note that Path, Pseudo, and Export_Id are not included as those
@@ -371,6 +371,14 @@ The following options may have limits on dynamic effect
 UseCookieVerifier(bool, default true)
     Updating UseCookieVerifier while a readdir is in
     progress may result in unexpected behavior.
+
+EXPORT { QOS_BLOCK  {} }
+--------------------------------------------------------------------------------
+This is optional : Refer ManPage(8) ganesha-qos-config
+
+PSEUDOFS { QOS_BLOCK  {} }
+--------------------------------------------------------------------------------
+This is optional : Refer ManPage(8) ganesha-qos-config
 
 PSEUDOFS { CLIENT {} }
 --------------------------------------------------------------------------------
@@ -581,3 +589,4 @@ SEE ALSO
 :doc:`ganesha-9p-config <ganesha-9p-config>`\(8)
 :doc:`ganesha-proxy-config <ganesha-proxy-config>`\(8)
 :doc:`ganesha-ceph-config <ganesha-ceph-config>`\(8)
+:doc:`ganesha-qos-config <ganesha-qos-config>`\(8)

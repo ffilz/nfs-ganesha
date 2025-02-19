@@ -198,6 +198,9 @@ XFS {}
 --------------------------------------------------------------------------------
 Refer to :doc:`ganesha-xfs-config <ganesha-xfs-config>`\(8) for usage
 
+QOS_DEFAULT_CONFIG {}
+--------------------------------------------------------------------------------
+Refer to :doc:`ganesha-qos-config <ganesha-qos-config>`\(8) for usage
 
 EXAMPLE
 ==========================================================
@@ -221,3 +224,4 @@ See also
 :doc:`ganesha-ceph-config <ganesha-ceph-config>`\(8)
 :doc:`ganesha-core-config <ganesha-core-config>`\(8)
 :doc:`ganesha-export-config <ganesha-export-config>`\(8)
+:doc:`ganesha-qos-config <ganesha-qos-config>`\(8)

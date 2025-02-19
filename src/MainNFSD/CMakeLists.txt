@@ -86,6 +86,14 @@ if(USE_CB_SIMULATOR)
     )
 endif(USE_CB_SIMULATOR)
 
+if(ENABLE_QOS)
+  SET(MainServices_STAT_SRCS
+    ${MainServices_STAT_SRCS}
+    nfs_qos.c
+   ../support/nfs_qosmgr.c
+    )
+endif(ENABLE_QOS)
+
 add_library(MainServices OBJECT ${MainServices_STAT_SRCS})
 add_sanitizers(MainServices)
 set_target_properties(MainServices PROPERTIES COMPILE_FLAGS "-fPIC")
