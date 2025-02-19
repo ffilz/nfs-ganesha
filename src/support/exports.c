@@ -50,6 +50,7 @@
 #include "sal_functions.h"
 #include "pnfs_utils.h"
 #include "mdcache.h"
+#include "nfs_qos.h"
 
 /**
  * @brief Protect EXPORT_DEFAULTS structure for dynamic update.
@@ -420,6 +421,178 @@ static void *client_init(void *link_mem, void *self_struct)
 	}
 }
 
+#ifdef ENABLE_QOS
+static void *qos_block_init(void *link_mem, void *self_struct);
+static int qos_block_commit(void *node, void *link_mem, void *self_struct,
+			    struct config_error_type *err_type);
+static void *qos_block_init(void *link_mem, void *self_struct)
+{
+	struct qos_block_config *qos_block;
+
+	if (self_struct == NULL) {
+		qos_block = gsh_calloc(1, sizeof(struct qos_block_config));
+		LogFullDebug(COMPONENT_CONFIG, "Allocating args: %p: %p",
+			     link_mem, qos_block);
+	} else {
+		qos_block = self_struct;
+	}
+
+	return qos_block;
+}
+static int qos_block_commit(void *node, void *link_mem, void *self_struct,
+			    struct config_error_type *err_type)
+{
+	struct qos_block_config **exp_hdl = link_mem;
+	struct gsh_export *gsh_export =
+		container_of(exp_hdl, struct gsh_export, qos_block);
+	struct qos_block_config *qos_block = self_struct;
+
+	LogFullDebug(COMPONENT_CONFIG, "export %s", gsh_export->cfg_fullpath);
+	/*Since the global value is in enabled state,
+	 *enable_qos == False need to be updated to QOS */
+	/* Add check for global_config */
+	if (g_qos_config->enable_qos &&
+	    g_qos_config->qos_type != QOS_PER_CLIENT_ENABLED) {
+		gsh_export->qos_block = self_struct;
+		LogFullDebug(COMPONENT_CONFIG,
+			     "QOS qb: %p Enable: %d max_export_wbw: %" PRIu64
+			     " max_export_rbw: %" PRIu64
+			     " max_client_wbw: %" PRIu64
+			     " exportid: %d cfg_Path: %s cfg_psesudo: %s",
+			     qos_block, qos_block->enable_qos,
+			     qos_block->max_export_write_bw,
+			     qos_block->max_export_read_bw,
+			     qos_block->max_client_write_bw,
+			     gsh_export->export_id, gsh_export->cfg_fullpath,
+			     gsh_export->cfg_pseudopath);
+		/* Align with the global value */
+		qos_block->qos_type = g_qos_config->qos_type;
+		/* Init QOS internal strutures here */
+		qos_perexport_insert(gsh_export, qos_block);
+	} else {
+		LogFullDebug(COMPONENT_CONFIG,
+			     "QOS qb: %p Disabled: %d eid: %d cfg_path: %s",
+			     qos_block, qos_block->enable_qos,
+			     gsh_export->export_id, gsh_export->cfg_fullpath);
+		if (qos_block) {
+			gsh_free(qos_block);
+			gsh_export->qos_block = NULL;
+		}
+	}
+	return 0;
+}
+
+static struct config_item_list qos_types_supported[] = {
+	CONFIG_LIST_TOK("Per_Export", QOS_PER_EXPORT_ENABLED),
+	CONFIG_LIST_TOK("Per_Client", QOS_PER_CLIENT_ENABLED),
+	CONFIG_LIST_TOK("Per_Export_Per_Client",
+			QOS_PEREXPORT_PERCLIENT_ENABLED),
+	CONFIG_LIST_EOL
+};
+
+static struct config_item qos_block_params[] = {
+	CONF_ITEM_BOOL("enable_qos", false, qos_block_config, enable_qos),
+
+	CONF_ITEM_BOOL("enable_token", false, qos_block_config, enable_tokens),
+	CONF_ITEM_BOOL("enable_bw_control", false, qos_block_config,
+		       enable_bw_control),
+	CONF_ITEM_BOOL("enable_iops_control", false, qos_block_config,
+		       enable_iops_control),
+
+	CONF_ITEM_BOOL("combined_rw_bw_control", false, qos_block_config,
+		       combined_rw_bw_control),
+	CONF_ITEM_BOOL("combined_rw_token_control", false, qos_block_config,
+		       combined_rw_token_control),
+	CONF_ITEM_BOOL("combined_rw_iops_control", true, qos_block_config,
+		       combined_rw_iops_control),
+
+	CONF_ITEM_TOKEN("qos_type", QOS_PEREXPORT_PERCLIENT_ENABLED,
+			qos_types_supported, qos_block_config, qos_type),
+
+	CONF_ITEM_UI64("max_export_combined_bw", QOS_MIN_BW, QOS_MAX_BW,
+		       QOS_DEFAULT_EXPORT_BW, qos_block_config,
+		       max_export_combined_bw),
+	CONF_ITEM_UI64("max_client_combined_bw", QOS_MIN_BW, QOS_MAX_BW,
+		       QOS_DEFAULT_CLIENT_BW, qos_block_config,
+		       max_client_combined_bw),
+	CONF_ITEM_UI64("max_export_write_bw", QOS_MIN_BW, QOS_MAX_BW,
+		       QOS_DEFAULT_EXPORT_BW, qos_block_config,
+		       max_export_write_bw),
+	CONF_ITEM_UI64("max_export_read_bw", QOS_MIN_BW, QOS_MAX_BW,
+		       QOS_DEFAULT_EXPORT_BW, qos_block_config,
+		       max_export_read_bw),
+	CONF_ITEM_UI64("max_client_write_bw", QOS_MIN_BW, QOS_MAX_BW,
+		       QOS_DEFAULT_CLIENT_BW, qos_block_config,
+		       max_client_write_bw),
+	CONF_ITEM_UI64("max_client_read_bw", QOS_MIN_BW, QOS_MAX_BW,
+		       QOS_DEFAULT_CLIENT_BW, qos_block_config,
+		       max_client_read_bw),
+
+	CONF_ITEM_UI64("max_export_iops", QOS_MIN_IOPS, QOS_MAX_IOPS,
+		       QOS_DEFAULT_EXPORT_IOPS, qos_block_config,
+		       max_export_combined_iops),
+	CONF_ITEM_UI64("max_client_iops", QOS_MIN_IOPS, QOS_MAX_IOPS,
+		       QOS_DEFAULT_CLIENT_IOPS, qos_block_config,
+		       max_client_combined_iops),
+	CONF_ITEM_UI64("max_export_write_iops", QOS_MIN_IOPS, QOS_MAX_IOPS,
+		       QOS_DEFAULT_EXPORT_IOPS, qos_block_config,
+		       max_export_write_iops),
+	CONF_ITEM_UI64("max_export_read_iops", QOS_MIN_IOPS, QOS_MAX_IOPS,
+		       QOS_DEFAULT_EXPORT_IOPS, qos_block_config,
+		       max_export_read_iops),
+	CONF_ITEM_UI64("max_client_write_iops", QOS_MIN_IOPS, QOS_MAX_IOPS,
+		       QOS_DEFAULT_CLIENT_IOPS, qos_block_config,
+		       max_client_write_iops),
+	CONF_ITEM_UI64("max_client_read_iops", QOS_MIN_IOPS, QOS_MAX_IOPS,
+		       QOS_DEFAULT_CLIENT_IOPS, qos_block_config,
+		       max_client_read_iops),
+
+	CONF_ITEM_UI64("max_export_read_tokens", QOS_MIN_TOKENS, QOS_MAX_TOKENS,
+		       QOS_DEFAULT_TOKENS, qos_block_config,
+		       max_export_read_tokens),
+	CONF_ITEM_UI64("max_export_write_tokens", QOS_MIN_TOKENS,
+		       QOS_MAX_TOKENS, QOS_DEFAULT_TOKENS, qos_block_config,
+		       max_export_write_tokens),
+	CONF_ITEM_UI64("max_client_read_tokens", QOS_MIN_TOKENS, QOS_MAX_TOKENS,
+		       QOS_DEFAULT_TOKENS, qos_block_config,
+		       max_client_read_tokens),
+	CONF_ITEM_UI64("max_client_write_tokens", QOS_MIN_TOKENS,
+		       QOS_MAX_TOKENS, QOS_DEFAULT_TOKENS, qos_block_config,
+		       max_client_write_tokens),
+	CONF_ITEM_UI64("export_read_tokens_renew_time",
+		       QOS_MIN_TOKENS_REFRESH_TIME, QOS_MAX_REFRESH_TIME,
+		       QOS_DEF_TOKEN_REFRESH_TIME, qos_block_config,
+		       export_read_tokens_renew_time),
+	CONF_ITEM_UI64("export_write_tokens_renew_time",
+		       QOS_MIN_TOKENS_REFRESH_TIME, QOS_MAX_REFRESH_TIME,
+		       QOS_DEF_TOKEN_REFRESH_TIME, qos_block_config,
+		       export_write_tokens_renew_time),
+	CONF_ITEM_UI64("client_read_tokens_renew_time",
+		       QOS_MIN_TOKENS_REFRESH_TIME, QOS_MAX_REFRESH_TIME,
+		       QOS_DEF_TOKEN_REFRESH_TIME, qos_block_config,
+		       client_read_tokens_renew_time),
+	CONF_ITEM_UI64("client_write_tokens_renew_time",
+		       QOS_MIN_TOKENS_REFRESH_TIME, QOS_MAX_REFRESH_TIME,
+		       QOS_DEF_TOKEN_REFRESH_TIME, qos_block_config,
+		       client_write_tokens_renew_time),
+	CONFIG_EOL
+};
+
+/*
+static struct config_block qos_block_desc = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.qos.export%d",
+	.blk_desc.name = "QOS_BLOCK",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.u = {
+		.blk = {
+			.init = qos_block_init,
+			.params = qos_block_params,
+			.commit = qos_block_commit
+		}
+	}
+};
+*/
+#endif
 /**
  * @brief Init for CLIENT sub-block of an export.
  *
@@ -878,6 +1051,10 @@ static inline void copy_gsh_export(struct gsh_export *dest,
 		dest->cfg_fullpath = NULL;
 		rcu_set_pointer(&(dest->fullpath), NULL);
 	}
+
+#ifdef ENABLE_QOS
+	copy_gsh_qos_conf(dest, src);
+#endif
 
 	/* Copy config pseudopath and create new refstr */
 	if (src->cfg_pseudopath != NULL) {
@@ -2116,7 +2293,10 @@ static struct config_item export_params[] = {
 			  EXPORT_DEFAULT_CACHE_EXPIRY, gsh_export,
 			  export_perms.expire_time_attr,
 			  EXPORT_OPTION_EXPIRE_SET, export_perms.set),
-
+#ifdef ENABLE_QOS
+	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
+			qos_block_commit, gsh_export, qos_block),
+#endif
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
 	 * parameters have been processed before these sub-blocks
@@ -2140,6 +2320,10 @@ static struct config_item export_update_params[] = {
 			  EXPORT_DEFAULT_CACHE_EXPIRY, gsh_export,
 			  export_perms.expire_time_attr,
 			  EXPORT_OPTION_EXPIRE_SET, export_perms.set),
+#ifdef ENABLE_QOS
+	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
+			qos_block_commit, gsh_export, qos_block),
+#endif
 
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
@@ -2255,6 +2439,10 @@ static struct config_item pseudofs_params[] = {
 	 * parameters have been processed before this sub-block
 	 * is processed.
 	 */
+#ifdef ENABLE_QOS
+	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
+			qos_block_commit, gsh_export, qos_block),
+#endif
 	CONF_ITEM_BLOCK_MULT("Client", pseudo_fs_client_params,
 			     pseudofs_client_init, client_commit, gsh_export,
 			     clients),
@@ -2274,6 +2462,10 @@ static struct config_item pseudofs_update_params[] = {
 	 * parameters have been processed before this sub-block
 	 * is processed.
 	 */
+#ifdef ENABLE_QOS
+	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
+			qos_block_commit, gsh_export, qos_block),
+#endif
 	CONF_ITEM_BLOCK_MULT("Client", pseudo_fs_client_params,
 			     pseudofs_client_init, client_commit, gsh_export,
 			     clients),
@@ -2738,6 +2930,9 @@ void free_export_resources(struct gsh_export *export, bool config)
 
 	export->fsal_export = NULL;
 
+#ifdef ENABLE_QOS
+	qos_free_mem(export, QOS_EXPORT);
+#endif
 	/* free strings here */
 	gsh_free(export->cfg_fullpath);
 	gsh_free(export->cfg_pseudopath);

@@ -30,6 +30,7 @@ PROXY_V3 {}
 PROXY_V4 {}
 RADOS_KV {}
 RADOS_URLS {}
+QOS_DEFAULT_CONFIG {}
 
 Notably the following FSALs do not have a global config block:
 
@@ -648,6 +649,24 @@ EXPORT { FSAL {} }
 
 	describes the stacked FSAL's parameters
 
+EXPORT { QOS_BLOCK  {} }
+------------------------
+
+	See global QOS_DEFAULT_CONFIG {}
+
+	* Config exception is qos_type is not available at export level.
+
+	* By default global EXPORT_DEFAULTS will be applied to export.
+
+	* This block is required at export level only if there needs to be
+	  different value than global value.
+
+	* Respective QOS_DEFAULT_CONFIG enable values needs to be enabled first
+	  to enable export level values.
+
+	* If export QOS_BLOCK {} needs to be populated, then populate required
+	  enabled entities otherwise default value will get applied.
+
 PSEUDOFS {}
 -----------
 
@@ -1129,3 +1148,79 @@ RADOS_URLS {}
 	userid(path, no default)
 
 	watch_url(url, no default)
+
+QOS_DEFAULT_CONFIG {}
+---------------------
+
+    enable_qos(bool, default false)
+
+    enable_tokens(bool, default false)
+
+    enable_bw_control(bool, default false)
+
+    enable_iops_control(bool, default false)
+
+    combined_rw_bw_control(bool, default false)
+
+    combined_rw_token_control(bool, default true)
+
+    combined_rw_iops_control(bool, default true)
+
+    qos_type(enum, values ["PE", "PC", "PEPC"], default "PEPC")
+
+    /*More info on default, range can be found in src/include/nfs_qos.h*/
+
+    max_export_combined_bw(uint64, range 1048576 to 107374182400,
+			   default 2147483648)
+
+    max_client_combined_bw(uint64, range 1048576 to 107374182400,
+                           default 2147483648)
+
+    max_export_write_bw(uint64, range 1048576 to 107374182400,
+                        default 2147483648)
+
+    max_export_read_bw(uint64, range 1048576 to 107374182400,
+                       default 2147483648)
+
+    max_client_write_bw(uint64, range 1048576 to 107374182400,
+                        default 2147483648)
+
+    max_client_read_bw(uint64, range 1048576 to 107374182400,
+                       default 2147483648)
+
+    max_export_iops(uint64, range 10 to 409600, default 8192)
+
+    max_client_iops(uint64, range 10 to 409600, default 8192)
+
+    max_export_write_iops(uint64, range 10 to 409600, default 8192)
+
+    max_export_read_iops(uint64, range 10 to 409600, default 8192)
+
+    max_client_write_iops(uint64, range 10 to 409600, default 8192)
+
+    max_client_read_iops(uint64, range 10 to 409600, default 8192)
+
+    max_export_write_tokens(uint64, range 3774873600 to UINT64_MAX,
+			    default 90596966400)
+
+    max_export_read_tokens(uint64, range 3774873600 to UINT64_MAX,
+			   default 90596966400)
+
+    max_client_write_tokens(uint64, range 3774873600 to UINT64_MAX,
+			    default 90596966400)
+
+    max_client_read_tokens(uint64, range 3774873600 to UINT64_MAX,
+			   default 90596966400)
+
+    export_write_tokens_renew_time(uint64, range 3600 to UINT64_MAX,
+				   default 86400)
+
+    export_read_tokens_renew_time(uint64, range 3600 to UINT64_MAX,
+				  default 86400)
+
+    client_write_tokens_renew_time(uint64, range 3600 to UINT64_MAX,
+				   default 86400)
+
+    client_read_tokens_renew_time(uint64, range 3600 to UINT64_MAX,
+				  default 86400)
+
