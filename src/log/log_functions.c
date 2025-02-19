@@ -1539,6 +1539,7 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_DBUS] = NIV_EVENT,
 	[COMPONENT_NFS_MSK] = NIV_EVENT,
 	[COMPONENT_XPRT] = NIV_EVENT,
+	[COMPONENT_QOS] = NIV_EVENT,
 };
 
 /* Active set of log levels */
@@ -1665,6 +1666,9 @@ struct log_component_info LogComponents[COMPONENT_COUNT] = {
 	[COMPONENT_XPRT] = {
 		.comp_name = "COMPONENT_XPRT",
 		.comp_str = "XPRT",},
+	[COMPONENT_QOS] = {
+		.comp_name = "COMPONENT_QOS",
+		.comp_str = "QOS",},
 };
 
 void DisplayLogComponentLevel(log_components_t component, const char *file,
@@ -1829,6 +1833,7 @@ HANDLE_PROP(FSAL_UP);
 HANDLE_PROP(DBUS);
 HANDLE_PROP(NFS_MSK);
 HANDLE_PROP(XPRT);
+HANDLE_PROP(QOS);
 
 static struct gsh_dbus_prop *log_props[] = {
 	LOG_PROPERTY_ITEM(ALL),		LOG_PROPERTY_ITEM(LOG),
@@ -1849,7 +1854,8 @@ static struct gsh_dbus_prop *log_props[] = {
 	LOG_PROPERTY_ITEM(STATE),	LOG_PROPERTY_ITEM(9P),
 	LOG_PROPERTY_ITEM(9P_DISPATCH), LOG_PROPERTY_ITEM(FSAL_UP),
 	LOG_PROPERTY_ITEM(DBUS),	LOG_PROPERTY_ITEM(NFS_MSK),
-	LOG_PROPERTY_ITEM(XPRT),	NULL
+	LOG_PROPERTY_ITEM(XPRT),	LOG_PROPERTY_ITEM(QOS),
+	NULL
 };
 
 struct gsh_dbus_interface log_interface = {
@@ -2128,6 +2134,7 @@ static struct config_item component_levels[] = {
 	CONF_INDEX_TOKEN("NFS_MSK", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_MSK,
 			 int),
 	CONF_INDEX_TOKEN("XPRT", NB_LOG_LEVEL, log_levels, COMPONENT_XPRT, int),
+	CONF_INDEX_TOKEN("QOS", NB_LOG_LEVEL, log_levels, COMPONENT_QOS, int),
 	CONFIG_EOL
 };
 

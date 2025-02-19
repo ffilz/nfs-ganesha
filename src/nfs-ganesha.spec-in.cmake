@@ -74,6 +74,9 @@ Requires: openSUSE-release
 @BCOND_NTIRPC@ system_ntirpc
 %global use_system_ntirpc %{on_off_switch system_ntirpc}
 
+@BCOND_QOS@ qos
+%global use_qos %{on_off_switch qos}
+
 @BCOND_MAN_PAGE@ man_page
 %global use_man_page %{on_off_switch man_page}
 
@@ -548,6 +551,7 @@ cmake3 .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DUSE_FSAL_KVSFS=%{use_fsal_kvsfs}		\
 	-DUSE_FSAL_GLUSTER=%{use_fsal_gluster}		\
 	-DUSE_SYSTEM_NTIRPC=%{use_system_ntirpc}	\
+	-DENABLE_QOS=%{use_qos}				\
 	-DUSE_9P_RDMA=%{use_rdma}			\
 	-DUSE_LTTNG=%{use_lttng}			\
 	-DUSE_UNWIND=%{use_unwind}			\
@@ -751,6 +755,10 @@ exit 0
 %{_mandir}/*/ganesha-rados-grace.8.gz
 %{_mandir}/*/ganesha-rados-cluster-design.8.gz
 %endif
+%endif
+
+%if %{with qos}
+%{_mandir}/*/ganesha-qos-config.8.gz
 %endif
 
 %if %{with rados_urls}
