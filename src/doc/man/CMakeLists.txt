@@ -58,6 +58,11 @@ if(USE_FSAL_VFS)
         ganesha-vfs-config.rst)
 endif()
 
+if(ENABLE_QOS)
+   list(APPEND man_srcs
+        ganesha-qos-config.rst)
+endif()
+
 if(USE_FSAL_LUSTRE)
    list(APPEND man_srcs
         ganesha-lustre-config.rst)
