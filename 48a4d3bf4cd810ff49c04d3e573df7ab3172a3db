@@ -16,6 +16,24 @@
       "message": "Does this change break the current containerized ceph HA implementation?",
       "revId": "48a4d3bf4cd810ff49c04d3e573df7ab3172a3db",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2270f3_fd7db60c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-02-19T17:43:10Z",
+      "side": 1,
+      "message": "Nope. The only change is using 0001 in the uuid instead of exportid. By default the exportid starts with 1 (0001), and this reclaim_reset is called in the context of first export only. So logic wise no change.\nWithout this correction if someone removes the first export, then on restart, it will make use of first available exportid, which is now 2. This will lead to not to reclaim the old ceph client state/CAPs.",
+      "parentUuid": "9aca7932_efbf9ddf",
+      "revId": "48a4d3bf4cd810ff49c04d3e573df7ab3172a3db",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
