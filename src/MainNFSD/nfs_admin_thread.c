@@ -63,6 +63,7 @@
 #ifdef USE_MONITORING
 #include "prometheus_exposer.h"
 #endif
+#include "nfs_qos.h"
 
 /**
  * @brief Mutex protecting shutdown flag.
@@ -854,6 +855,11 @@ static void do_shutdown(void)
 	LogEvent(COMPONENT_MAIN, "Stopping delayed executor.");
 	delayed_shutdown();
 	LogEvent(COMPONENT_MAIN, "Delayed executor stopped.");
+
+#ifdef ENABLE_QOS
+	/* QOS shutdown */
+	shutdown_qos();
+#endif
 
 	LogEvent(COMPONENT_MAIN, "Stopping state asynchronous request thread");
 	rc = state_async_shutdown();
