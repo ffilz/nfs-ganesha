@@ -372,6 +372,10 @@ UseCookieVerifier(bool, default true)
     Updating UseCookieVerifier while a readdir is in
     progress may result in unexpected behavior.
 
+EXPORT { QOS_BLOCK  {} }
+------------------------
+This is optional : Refer ManPage(8) ganesha-qos-config
+
 PSEUDOFS { CLIENT {} }
 --------------------------------------------------------------------------------
 See the ``CLIENT  {}`` block description but note that beyond the Clients and
@@ -581,3 +585,4 @@ SEE ALSO
 :doc:`ganesha-9p-config <ganesha-9p-config>`\(8)
 :doc:`ganesha-proxy-config <ganesha-proxy-config>`\(8)
 :doc:`ganesha-ceph-config <ganesha-ceph-config>`\(8)
+:doc:`ganesha-qos-config <ganesha-qos-config>`\(8)
