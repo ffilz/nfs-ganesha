@@ -44,6 +44,7 @@
 #include "fsal_pnfs.h"
 #include "server_stats.h"
 #include "export_mgr.h"
+#include "nfs_qos.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -61,6 +62,10 @@ struct nfs4_write_data {
 	struct fsal_obj_handle *obj;
 	/** Flags to control synchronization */
 	uint32_t flags;
+#ifdef ENABLE_QOS
+	/** QOS flag used while resuming the op */
+	uint32_t qos_flag;
+#endif
 	/** Arguments for write call - must be last */
 	struct fsal_io_arg write_arg;
 };
@@ -143,6 +148,23 @@ enum nfs_req_result nfs4_op_write_resume(struct nfs_argop4 *op,
 	enum nfs_req_result rc;
 	uint32_t flags;
 
+#ifdef ENABLE_QOS
+	if (write_data->qos_flag & IS_QOS_IO) {
+		write_data->qos_flag = 0;
+		atomic_postclear_uint32_t_bits(
+			&write_data->flags, ASYNC_PROC_EXIT | ASYNC_PROC_DONE);
+		write_data->obj->obj_ops->write2(write_data->obj, false,
+						 nfs4_write_cb,
+						 &write_data->write_arg,
+						 write_data);
+
+		flags = atomic_postset_uint32_t_bits(&write_data->flags,
+						     ASYNC_PROC_EXIT);
+		if ((flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+			return NFS_REQ_ASYNC_WAIT;
+		}
+	}
+#endif
 	if (write_data->write_arg.fsal_resume) {
 		/* FSAL is requesting another write2 call on resume */
 		atomic_postclear_uint32_t_bits(
@@ -490,7 +512,15 @@ enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 	write_data->obj = obj;
 
 	data->op_data = write_data;
+#ifdef ENABLE_QOS
+	int qos_async_scheduled = 0;
 
+	write_data->qos_flag = IS_QOS_IO;
+	qos_async_scheduled = qos_process(size, write_data, data, QOS_WRITE);
+	if (qos_async_scheduled == QOS_TASK_SUSPENDED)
+		goto out;
+	write_data->qos_flag = 0;
+#endif
 again:
 
 	/* Do the actual write */
@@ -509,7 +539,12 @@ out:
 		state_open = NULL;
 	}
 
+#ifdef ENABLE_QOS
+	if (qos_async_scheduled == QOS_TASK_SUSPENDED ||
+	    (flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+#else
 	if ((flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+#endif
 		/* The write was not finished before we got here. When the
 		 * write completes, nfs4_write_cb() will have to reschedule the
 		 * request for completion. The resume will be resolved by
@@ -521,7 +556,7 @@ out:
 	}
 
 	if (write_data != NULL && write_arg->fsal_resume) {
-		/* FSAL is requesting another read2 call */
+		/* FSAL is requesting another write2 call */
 		atomic_postclear_uint32_t_bits(
 			&write_data->flags, ASYNC_PROC_EXIT | ASYNC_PROC_DONE);
 		/* Make the call with the same params, though the FSAL will be
@@ -616,3 +651,49 @@ void nfs4_op_write_same_Free(nfs_resop4 *resp)
 {
 	/* Nothing to be done */
 }
+
+#ifdef ENABLE_QOS
+/**
+ * @brief Callback function for QOS BW control, NFS4 write operations.
+ *
+ * This function is called on resuming the IO after ratelimiting considerations.
+ * It handles both rate-limited and token-based I/O,
+ *  resuming the service request if necessary.
+ *
+ * @param args Pointer to qos_op_cb_arg structure containing callback arguments
+ */
+void nfs4_qos_write_cb(void *args)
+{
+	struct qos_op_cb_arg *qos_cb_args = args;
+	struct nfs4_write_data *write_data = qos_cb_args->caller_data;
+
+	if (qos_cb_args->ratecontrol) {
+		/* BW io, need to be resumed, should take default path */
+		LogFullDebug(COMPONENT_QOS, "Ratecontrol IO exit writedata: %p",
+			     write_data);
+		write_data->res_WRITE4->status = NFS4_OK;
+		svc_resume(write_data->data->req);
+
+	} else {
+		/* Execution reaching here indicates that this is a
+		 * token-exhausted IO. This means no data quota is currently
+		 * available for the IO to proceed.
+		 * Return NFS_ERR_DELAY so that client will retry the IO later.
+		 * The QOS layer has deferred this IO for either
+		 * TOKEN_NFS_ERR_DELAY_DEFAULT or TOKEN_NFS_ERR_DELAY_IMMED
+		 * duration. This delay ensures the client does not retry the
+		 * IO immediately, preventing unnecessary network consumption.
+		 * */
+		LogFullDebug(COMPONENT_QOS, "Token IO exit writedata: %p",
+			     write_data);
+
+		/* Since io needs to be errored out, reset the qos_flag */
+		write_data->qos_flag = 0;
+		write_data->res_WRITE4->status = NFS4ERR_DELAY;
+		atomic_postset_uint32_t_bits(&write_data->flags,
+					     ASYNC_PROC_DONE);
+		svc_resume(write_data->data->req);
+	}
+	gsh_free(args);
+}
+#endif

@@ -50,6 +50,7 @@
 #include "export_mgr.h"
 #include "nfs_exports.h"
 #include "gsh_rpc.h"
+#include "nfs_qos.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -67,6 +68,10 @@ struct nfs4_read_data {
 	struct fsal_obj_handle *obj;
 	/** Flags to control synchronization */
 	uint32_t flags;
+#ifdef ENABLE_QOS
+	/* QOS flag used while resuming the op */
+	uint32_t qos_flag;
+#endif
 	/** IO Info for READ_PLUS */
 	struct io_info info;
 	/** Arguments for read call - must be last */
@@ -266,6 +271,51 @@ static void nfs4_read_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 	}
 }
 
+#ifdef ENABLE_QOS
+/**
+ * @brief Callback function for QOS BW control, NFS4 read operations.
+ *
+ * This function is called on resuming the IO after ratelimiting considerations.
+ * It handles both rate-limited and token-based I/O,
+ *  resuming the service request if necessary.
+ *
+ * @param args Pointer to qos_op_cb_arg structure containing callback arguments
+ */
+void nfs4_qos_read_cb(void *args)
+{
+	struct qos_op_cb_arg *qos_cb_args = args;
+	struct nfs4_read_data *read_data = qos_cb_args->caller_data;
+
+	if (qos_cb_args->ratecontrol) {
+		/* BW io, needs to be resumed, should take default path */
+		LogFullDebug(COMPONENT_QOS, "Ratecontrol IO exit read_data: %p",
+			     read_data);
+		read_data->res_READ4->status = NFS4_OK;
+		svc_resume(read_data->data->req);
+
+	} else {
+		/* Execution reaching here indicates that this is a
+		 * token-exhausted IO. This means no data quota is currently
+		 * available for the IO to proceed.
+		 * Return NFS_ERR_DELAY so that client will retry the IO later.
+		 * The QOS layer has deferred this IO for either
+		 * TOKEN_NFS_ERR_DELAY_DEFAULT or TOKEN_NFS_ERR_DELAY_IMMED
+		 * duration. This delay ensures the client does not retry the
+		 * IO immediately, preventing unnecessary network consumption.
+		 * */
+		LogFullDebug(COMPONENT_QOS, "Token IO exit read_data: %p",
+			     read_data);
+		/* Reset the flas indicating IO should not continue */
+		read_data->qos_flag = 0;
+		read_data->res_READ4->status = NFS4ERR_DELAY;
+		atomic_postset_uint32_t_bits(&read_data->flags,
+					     ASYNC_PROC_DONE);
+		svc_resume(read_data->data->req);
+	}
+	gsh_free(args);
+}
+#endif
+
 enum nfs_req_result nfs4_op_read_resume(struct nfs_argop4 *op,
 					compound_data_t *data,
 					struct nfs_resop4 *resp)
@@ -273,7 +323,23 @@ enum nfs_req_result nfs4_op_read_resume(struct nfs_argop4 *op,
 	struct nfs4_read_data *read_data = data->op_data;
 	enum nfs_req_result rc;
 	uint32_t flags;
+#ifdef ENABLE_QOS
+	if (read_data->qos_flag & IS_QOS_IO) {
+		bool bypass = read_data->qos_flag & IS_QOS_IO_READ_BYPASS;
 
+		read_data->qos_flag = 0;
+		atomic_postclear_uint32_t_bits(
+			&read_data->flags, ASYNC_PROC_EXIT | ASYNC_PROC_DONE);
+		/*  Do the actual read */
+		fsal_read2(read_data->obj, bypass, nfs4_read_cb,
+			   &read_data->read_arg, read_data);
+		flags = atomic_postset_uint32_t_bits(&read_data->flags,
+						     ASYNC_PROC_EXIT);
+		if ((flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+			return NFS_REQ_ASYNC_WAIT;
+		}
+	}
+#endif
 	if (read_data->read_arg.fsal_resume) {
 		/* FSAL is requesting another read2 call on resume */
 		atomic_postclear_uint32_t_bits(
@@ -818,6 +884,17 @@ static enum nfs_req_result nfs4_read(struct nfs_argop4 *op,
 		read_data->info.io_advise = info->io_advise;
 	}
 
+#ifdef ENABLE_QOS
+	int qos_async_scheduled = 0;
+
+	read_data->qos_flag = IS_QOS_IO;
+	read_data->qos_flag |= (unsigned int)bypass * IS_QOS_IO_READ_BYPASS;
+	qos_async_scheduled = qos_process(size, read_data, data, QOS_READ);
+	if (qos_async_scheduled == QOS_TASK_SUSPENDED)
+		goto out;
+	read_data->qos_flag = 0;
+#endif
+
 again:
 
 	/* Do the actual read */
@@ -836,7 +913,12 @@ out:
 		state_open = NULL;
 	}
 
+#ifdef ENABLE_QOS
+	if (qos_async_scheduled == QOS_TASK_SUSPENDED ||
+	    (flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+#else
 	if ((flags & ASYNC_PROC_DONE) != ASYNC_PROC_DONE) {
+#endif
 		/* The read was not finished before we got here. When the
 		 * read completes, nfs4_read_cb() will have to reschedule the
 		 * request for completion. The resume will be resolved by
