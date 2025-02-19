@@ -45,6 +45,7 @@
 #include "nfs_creds.h"
 #include "pnfs_utils.h"
 #include <time.h>
+#include "nfs_qos.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -1063,6 +1064,20 @@ static enum xprt_stat nfs4_compound_resume(struct svc_req *req)
 	/* Restore the op_ctx */
 	resume_op_context(&reqdata->op_context);
 
+	/* IOPS IO should excecute previous function,
+	 * due to the wait its tapped*/
+#ifdef ENABLE_QOS
+	if ((data->qos_flags & IS_QOS_COMPOUND_IO) != false) {
+		/* reset the QOS COMPOUND */
+		LogFullDebug(COMPONENT_QOS,
+			     "Resetting the IS_QOS_COMPOUND_IO bits oppos:%d",
+			     data->oppos);
+		data->qos_flags &= ~IS_QOS_COMPOUND_IO;
+		data->oppos -= 1;
+		result = NFS_REQ_OK;
+		goto qos_resume_compound;
+	}
+#endif
 	/* Start by resuming the operation that suspended. */
 	result = (optabv4[data->opcode].resume)(&data->argarray[data->oppos],
 						data,
@@ -1082,12 +1097,34 @@ static enum xprt_stat nfs4_compound_resume(struct svc_req *req)
 		return XPRT_SUSPEND;
 	}
 
+#ifdef ENABLE_QOS
+qos_resume_compound:
+#endif
 	/* Skip the resumed op and continue through the rest of the compound. */
 	for (data->oppos += 1;
 	     result == NFS_REQ_OK && data->oppos < data->argarray_len;
 	     data->oppos++) {
+#ifdef ENABLE_QOS
+		if ((data->qos_flags & IS_QOS_IOPS_ACCOUNTED) == false) {
+			LogFullDebug(
+				COMPONENT_QOS,
+				"WARN d:%p p:%d, oc:%d f:%d acc:%d", data,
+				data->oppos, data->opcode, data->qos_flags,
+				((data->qos_flags & IS_QOS_IOPS_ACCOUNTED) ?
+					 1 :
+					 0));
+			if (QoS_Process_iops(data) ==
+			    QOS_TASK_ASYNC_SCHEDULED) {
+				result = NFS_REQ_ASYNC_WAIT;
+				goto qos_async_resume;
+			}
+		}
+#endif
 		result = process_one_op(data, &status);
 
+#ifdef ENABLE_QOS
+qos_async_resume:
+#endif
 		if (result == NFS_REQ_ASYNC_WAIT) {
 			/* The request is suspended, don't touch the request in
 			 * any way because the resume may already be scheduled
@@ -1376,15 +1413,31 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	 * request might have already been resumed on another worker thread.
 	 */
 	data->req->rq_resume_cb = nfs4_compound_resume;
-
+#ifdef ENABLE_QOS
+	data->qos_flags = 0;
+#endif
 	/**********************************************************************
 	 * Now start processing the compound ops.
 	 **********************************************************************/
 	for (data->oppos = 0;
 	     result == NFS_REQ_OK && data->oppos < data->argarray_len;
 	     data->oppos++) {
+#ifdef ENABLE_QOS
+		/*  Do the accouting of iops of compound ops */
+		if ((data->qos_flags & IS_QOS_IOPS_ACCOUNTED) == false) {
+			if (QoS_Process_iops(data) ==
+			    QOS_TASK_ASYNC_SCHEDULED) {
+				result = NFS_REQ_ASYNC_WAIT;
+				goto qos_async;
+			}
+		}
+#endif
+
 		result = process_one_op(data, &status);
 
+#ifdef ENABLE_QOS
+qos_async:
+#endif
 		if (result == NFS_REQ_ASYNC_WAIT) {
 			/* The request is suspended, don't touch the request in
 			 * any way because the resume may already be scheduled
@@ -1706,4 +1759,31 @@ bool xdr_COMPOUND4res_extended(XDR *xdrs, struct COMPOUND4res_extended **objp)
 	return xdr_COMPOUND4res(xdrs, &res_compound4_extended->res_compound4);
 }
 
+#ifdef ENABLE_QOS
+/**
+ * @brief Callback function for NFS4 compound operations.
+ *
+ * This function is called when a rate-controlled IOPS I/O needs to be resumed.
+ * It checks whether the operation was subject to rate limiting.
+ *
+ * @param args Pointer to qos_op_cb_arg structure containing callback arguments
+ */
+void nfs4_qos_compond_cb(void *args)
+{
+	struct qos_op_cb_arg *qos_cb_args = args;
+	compound_data_t *data = qos_cb_args->caller_data;
+
+	if (qos_cb_args->ratecontrol) {
+		LogFullDebug(COMPONENT_QOS, "Ratecontrol IO exit data:%p",
+			     data);
+		data->qos_flags |= IS_QOS_COMPOUND_IO;
+		svc_resume(data->req);
+
+	} else {
+		LogFullDebug(COMPONENT_QOS, "Ratecontrol IO exit data:%p",
+			     data);
+	}
+	gsh_free(args);
+}
+#endif
 /* @} */
