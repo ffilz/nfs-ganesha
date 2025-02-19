@@ -6,6 +6,7 @@
    ganesha-9p-config
    ganesha-ceph-config
    ganesha-log-config
+   ganesha-qos-config
    ganesha-gluster-config
    ganesha-gpfs-config
    ganesha-proxy-config
