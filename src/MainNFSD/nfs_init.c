@@ -81,11 +81,12 @@
 #include <urcu-bp.h>
 #include "conf_url.h"
 #include "FSAL/fsal_localfs.h"
+#include "nfs_qosmgr.h"
 #ifdef USE_MONITORING
 #include "nfs_metrics.h"
 #include "sal_metrics.h"
 #endif
-
+#include "nfs_qos.h"
 pthread_mutexattr_t default_mutex_attr;
 pthread_rwlockattr_t default_rwlock_attr;
 
@@ -672,6 +673,21 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 		return -1;
 	}
 
+#ifdef ENABLE_QOS
+	/* QoS global parameters */
+	(void)load_config_from_parse(parse_tree, &qos_core, &qos_block_config,
+				     true, err_type);
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_INIT,
+			"Error while parsing qos configuration");
+		return -1;
+	}
+
+	if (qos_block_config.enable_qos == true)
+		qos_init();
+
+#endif
+
 	/* Worker parameters: ip/name hash table and expiration
 	 * for each entry
 	 */
@@ -1003,6 +1019,9 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	dbus_export_init();
 	dbus_client_init();
 	dbus_cache_init();
+#ifdef ENABLE_QOS
+	dbus_qosmgr_init();
+#endif
 #endif
 
 #ifdef USE_MONITORING
