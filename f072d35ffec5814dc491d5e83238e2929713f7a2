@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a8d863b_10fcf489",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-20T19:24:04Z",
+      "side": 1,
+      "message": "This looks good. Have you concocted a test to make sure everything is OK if there is exactly enough room for a final entry plus the FALSE for no more entries plus the encoding of end of directory boolean? Ideally run the test with READDIR3, READDIRPLUS3, and READDIR4.",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
