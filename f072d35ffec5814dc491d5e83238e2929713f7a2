@@ -16,6 +16,24 @@
       "message": "This looks good. Have you concocted a test to make sure everything is OK if there is exactly enough room for a final entry plus the FALSE for no more entries plus the encoding of end of directory boolean? Ideally run the test with READDIR3, READDIRPLUS3, and READDIR4.",
       "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a41686_44cef42e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-02-21T03:06:51Z",
+      "side": 1,
+      "message": "I have tested two cases for READDIR3, READDIRPLUS3, and READDIR4, during which I used Wireshark to capture and display the packets. \n1. A small directory so that one readdir request can fetch all contents. \n2. A large directory so that two or more readdir requests are needed to fetch all contents. \n\nI have checked that the \"next entry\" and \"eof\" flags are present in every reply message. The Linux `ls`, `ls -al` and Windows `dir`, `File Explorer` can display the directory correctly.",
+      "parentUuid": "5a8d863b_10fcf489",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
