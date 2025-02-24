@@ -1,6 +1,109 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6822e75_cc9a835c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-02-24T06:33:14Z",
+      "side": 1,
+      "message": "work on the comments/suggestions",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "388056da_78e4bacd",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-02-24T06:33:14Z",
+      "side": 1,
+      "message": "```suggestion\n\t/* Structure belongs to which gsh_client session,\n```",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 13
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4a22fe7_ecd23d73",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-02-24T06:33:14Z",
+      "side": 1,
+      "message": "```suggestion\n\t/*  Used for waiting IO accounting in case of token exhaust */\n```",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 22
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c1d01c6_ca05fea3",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-02-24T06:33:14Z",
+      "side": 1,
+      "message": "```suggestion\n\t/*  Used for waiting IO accounting in case of token exhaust */\n```",
+      "range": {
+        "startLine": 152,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62257d9e_dbb888a9",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-02-24T06:33:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be string ? so that anyone reading ganesha.conf file will get to know which QoS type is in use.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6422a95b_d0477bbe",
