@@ -34,6 +34,24 @@
       "parentUuid": "5a8d863b_10fcf489",
       "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea8df919_ab14b912",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T19:19:57Z",
+      "side": 1,
+      "message": "I was thinking of tests that made sure we had a readdir response that exactly had room for the FALSE to terminate the list of dirents, and then the EOF flag.\n\nAnd then another test where there is room in the response for the FALSE for end of dirents, but not the EOF flag (in which case we abandon the last dirent).\n\nAnd then another test where there is room for one more dirent, but not even the FALSE for end of dirents, so again, we abandon the last dirent.\n\nSo that we very definitely probe that things work right at the boundary conditions.",
+      "parentUuid": "b0a41686_44cef42e",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
