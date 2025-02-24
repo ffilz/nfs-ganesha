@@ -18,6 +18,210 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e18347_5aca0cde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "A bunch of style stuff to consider.\n\nAlso, I do we do anything to stop epoll on a socket, or do we just suspend I/O requests that exceed the QoS limits? If so,what accounting for how much memory is used, especially suspending write requests?\n\nProbably still more review comments. This is a huge patch, it would have been much easier to review broken into digestible chunks where each patch as it is added compiles.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7613d2_8c0a3f49",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Is there any serialization that protects this copy on export update?",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650e1096_f905e57c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Same locking question",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132bddfe_2a3a396c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Is share an export? We should use consistent terminology",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e3e4775_c4809b4b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Is there any reason not to use the glist functions for list manipulation? The code is easier to read when we use common list manipulation.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe34a702_d965b766",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Can simple functions like this be inline?",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672c27cb_0252d661",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Please use PTHREAD_MUTEX_xxx macros, they handle the errors transparently instead of ignoring them (and also allow tracing)",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76bf6554_879c84d6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Use gsh_calloc instead of gsh_malloc when allocating and then memset to 0",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d9cb75_226d3335",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "A general comment, please use \"export\" rather than \"share\". It reduces confusion and better matches all the other code.\n\nIn NFS terms, share refers to open share modes.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc27ed54_0f5600ed",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "These need more descriptive names, also QOS_PS_ENABLED and QOS_PC_ENABLED only differ by one character in the middle.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46287497_784dd043",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Are these reasonable ranges for min/max? With 100 gig ethernet, it seems possible some installations might be comfortable with a max closer to the 12.5 GBps that 100 Gbps represents. And there might be faster connections between containers on the same host.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "509f6989_24e3767a",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Some thoughts on the structures below:\n\n1. Historically we have had a preference to use \"struct xyx\" instead of a typdef to \"xyz_t\"\n\n2. It seems like some code could be simplified by merging these two structures and using a union for the bits that are separate by client/export",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "388056da_78e4bacd",
@@ -106,6 +310,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01a77066_d7b5ce77",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Yes, we should use string names, there\u0027s an ENUM config type to handle this.",
+      "parentUuid": "62257d9e_dbb888a9",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8365f42_efabffe1",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "EXPORT_DEFAULTS doesn\u0027t work with a gsh_export, just global_export_perms",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96da9b5_616624ce",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Does commit actually handle updating the QOS params? How does the code handle that?\n\nNote that the FSAL params has as specific update commit and the client blocks are copied, but the copy is done under a lock to be seamless.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0673a73_7776ec43",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2399,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Might as well not include spurious white space changes",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6422a95b_d0477bbe",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 1
@@ -134,6 +407,42 @@
       "writtenOn": "2025-02-20T18:38:16Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \\\n+\tdo {                                                        \\\n+\t\tif (!dbus_message_iter_next(args) ||                \\\n+\t\t    dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);   \\\n+\t\t\treturn true;                                \\\n+\t\t}                                                   \\\n+\t} while (0)\n+",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a86ff7d_ee38c688",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f90187dd_a1c4cb32",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0813f97a_57cbffd7",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6422a95b_d0477bbe",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -172,6 +481,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5eacf30_77a2d944",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "063f697d_45d0c939",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16e443b7_ce96803e",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "232ffd6a_77fed44f",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60d57d62_feea3de7",
@@ -202,6 +547,42 @@
       "writtenOn": "2025-02-20T18:38:16Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a997b8_134414b4",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "736ac619_dd5577b8",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f454ad_84f6cb98",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-24T23:39:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "60d57d62_feea3de7",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
