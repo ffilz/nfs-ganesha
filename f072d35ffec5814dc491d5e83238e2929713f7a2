@@ -87,6 +87,24 @@
       "message": "Space for 2 booleans are in need. So we should check with \"(xdr_getpos(\u0026tracker-\u003exdr) + 2*BYTES_PER_XDR_UNIT) \u003e\u003d tracker-\u003emem_avail\". The issue also exists in nfs3_readdirplus and nfs4_op_readdir.",
       "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51485e87_67833a22",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-02-25T06:50:32Z",
+      "side": 1,
+      "message": "This issue in boundary conditions has existed before this patch.",
+      "parentUuid": "3919aa74_99b9d2c1",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
