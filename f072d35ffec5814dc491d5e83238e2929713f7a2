@@ -74,6 +74,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10c7a98e_f46fa5fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-26T21:42:11Z",
+      "side": 1,
+      "message": "OK, I think the space calculations are wrong in a bunch of places...\n\n\nThe uio needs to hold the terminating FALSE and the EOF marker\n\nSo we need to make sure those will fit, but we also need to make sure we don\u0027t double account for anything...\n\nIn some sense, it might make sense for tracker-\u003emem_avail to not account for those, though the xdr_mem be created with space for them. Then when the FSAL readdir call is done (and thus as many entries as will fit in the tracker-\u003emem_avail space are in the xdr_mem), then the main readdir function just encodes the FALSE for entry termination and the EOF into the xdr_mem using the space it reserved by telling tracker 8 bytes less.",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f68248b_69ecd962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-26T21:42:11Z",
+      "side": 1,
+      "message": "Sounds good, thanks.",
+      "parentUuid": "79b25779_abeabbc5",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d8b30b_dc3cc4ba",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-26T21:42:11Z",
+      "side": 1,
+      "message": "Hmm, this COULD just be maxcount \u003d MIN(cfg_readdir_size, arg-\u003earg_readdir3.count)\n\n\n\nIf we want to clean up space allocation a bit",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c27ed2_7ed041dd",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-26T21:42:11Z",
+      "side": 1,
+      "message": "Oh, this calculation is wrong... the two BYTES_PER_XDR_UNII are supposed to be for the terminating FALSE and the EOF marker.\n\nThis calculation should also be documented with a comment.",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3919aa74_99b9d2c1",
         "filename": "src/Protocols/NFS/nfs3_readdir.c",
         "patchSetId": 1
@@ -103,6 +172,58 @@
       "side": 1,
       "message": "This issue in boundary conditions has existed before this patch.",
       "parentUuid": "3919aa74_99b9d2c1",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38c0940_1390944f",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-26T21:42:11Z",
+      "side": 1,
+      "message": "And then yes, this needs to allow for two booleans",
+      "parentUuid": "51485e87_67833a22",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8ea69c_a2cd4c7b",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-26T21:42:11Z",
+      "side": 1,
+      "message": "Hmm, this allows for the terminating FALSE but not the EOF...",
+      "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f367f77e_b1bdf25c",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-26T21:42:11Z",
+      "side": 1,
+      "message": "Hmm, this seems to be reserving space for the terminating FALSE and the the EOF marker",
       "revId": "f072d35ffec5814dc491d5e83238e2929713f7a2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
