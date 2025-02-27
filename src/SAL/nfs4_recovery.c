@@ -831,7 +831,7 @@ const char *recovery_backend_str(enum recovery_backend recovery_backend)
 int nfs4_recovery_init(void)
 {
 	LogEvent(COMPONENT_CLIENTID, "Recovery Backend Init for %s",
-		recovery_backend_str(nfs_param.nfsv4_param.recovery_backend));
+		 recovery_backend_str(nfs_param.nfsv4_param.recovery_backend));
 
 	switch (nfs_param.nfsv4_param.recovery_backend) {
 	case RECOVERY_BACKEND_FS:
@@ -1078,16 +1078,47 @@ static void nfs_release_nlm_state(char *release_ip)
 #endif /* _USE_NLM */
 }
 
-static int ip_match(char *ip, nfs_client_id_t *cid)
+/*
+ * Convert a IP addr string to binary form for both IPv4 and IPv6
+ */
+static int ip_convert(char *ip)
+{
+	int ip_saddr = 0;
+
+	/* NB inet_pton() returns 1 on success */
+	if (strstr(ip, ":")) {
+		struct in6_addr addr6;
+		void *lower4;
+
+		if (inet_pton(AF_INET6, ip, &addr6) > 0) {
+			lower4 = &(addr6.s6_addr[12]);
+			ip_saddr = ntohl(*(uint32_t *)lower4);
+		}
+	} else {
+		struct in_addr addr4;
+
+		if (inet_pton(AF_INET, ip, &addr4) > 0)
+			ip_saddr = ntohl(addr4.s_addr);
+	}
+	return ip_saddr;
+}
+
+static int ip_match(char *ip, uint32_t ip_saddr, nfs_client_id_t *cid)
 {
 	char *haystack;
 	char *value = cid->cid_client_record->cr_client_val;
 	int len = cid->cid_client_record->cr_client_val_len;
+	uint32_t saddr = cid->cid_client_record->cr_server_addr;
 
-	LogDebug(COMPONENT_STATE, "NFS Server V4 match ip %s with (%.*s)", ip,
-		 len, value);
+	LogDebug(COMPONENT_STATE,
+		 "NFS Server V4 match ip %s with (%.*s) and %x", ip, len, value,
+		 saddr);
 
-	if (strlen(ip) == 0) /* No IP all are matching */
+	/* No IP all are matching */
+	if (strlen(ip) == 0)
+		return 1;
+
+	if (saddr != 0 && (ip_saddr == saddr))
 		return 1;
 
 	haystack = alloca(len + 1);
@@ -1113,8 +1144,10 @@ static void nfs_release_v4_clients(char *ip)
 	nfs_client_id_t *cp;
 	nfs_client_record_t *recp;
 	int i;
+	uint32_t ip_saddr;
 
 	LogEvent(COMPONENT_STATE, "NFS Server V4 recovery release ip %s", ip);
+	ip_saddr = ip_convert(ip);
 
 	/* go through the confirmed clients looking for a match */
 	for (i = 0; i < ht->parameter.index_size; i++) {
@@ -1131,7 +1164,7 @@ restart:
 			cp = (nfs_client_id_t *)pdata->val.addr;
 			PTHREAD_MUTEX_lock(&cp->cid_mutex);
 			if ((cp->cid_confirmed == CONFIRMED_CLIENT_ID) &&
-			    ip_match(ip, cp)) {
+			    ip_match(ip, ip_saddr, cp)) {
 				inc_client_id_ref(cp);
 
 				/* client_record is always non-NULL. */
