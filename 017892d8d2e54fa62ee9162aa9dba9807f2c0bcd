@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b48439d_9ad68f3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Hmm, I also have a note that we need to change server_addr to use sockaddr_t so we can store fill IPv6 address. I really need to revisit all this stuff, there is stuff not quite right and it feels like we are applying band aids and not really fixing the core of the issue.",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b82a25a3_8b896705",
@@ -31,6 +48,42 @@
       "writtenOn": "2025-02-27T04:16:10Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\t\tvoid *ab;\n+\t\tif (inet_pton(AF_INET6, ip, \u0026addr6) \u003e 0) {",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36714a0b_350c58ba",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Please add this blank line. clang-format should not complain about it",
+      "parentUuid": "90d8afdd_074927fc",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8539a8be_e0c0592a",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b82a25a3_8b896705",
       "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +158,78 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "607f47c6_e242f0fe",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "If you want to keep these braces, you could just add a comment inside so the block is multi-line.",
+      "parentUuid": "3fba5e89_541e2a62",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b948acf_6bc8386f",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "08e99459_be691c1e",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28faffc7_45d7f514",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "16c67f47_3b5d4ec2",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb60ec2_9563d57e",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "82bb3ef7_06752cd1",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d03e79cd_951edc6c",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 1
@@ -133,6 +258,42 @@
       "writtenOn": "2025-02-27T04:16:10Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (strlen(ip) \u003d\u003d 0) {\n \t\treturn 1;\n+\t}",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6492c041_d6b6900b",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d03e79cd_951edc6c",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e0a9d9_408b74a9",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Can we get rid of these braces? Otherwise add a comment as suggested above.",
+      "parentUuid": "260ef056_c3200131",
       "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -201,6 +362,78 @@
       "writtenOn": "2025-02-27T04:16:10Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\t\tuint32_t ip_saddr \u003d ip_convert(ip);\n+\t\tif (ip_saddr \u003d\u003d saddr) {",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f943633_6be17bb6",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a9a8ad06_ff555a11",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12dacc1_0d4fc7b4",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e4fd546c_a98e2495",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "228aa5dc_728f2977",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Same here.",
+      "parentUuid": "fa1762f2_f2d89298",
+      "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d489a288_2c520ef2",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-02-27T19:36:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3e5faba8_611107ac",
       "revId": "017892d8d2e54fa62ee9162aa9dba9807f2c0bcd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
