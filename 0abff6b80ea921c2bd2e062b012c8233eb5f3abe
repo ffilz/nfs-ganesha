@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ea12d61_c19a94b8",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-01T00:47:45Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define UNUSED_(arg) NOT_USED_##arg UNUSED_ATTR",
+      "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54c03fe2_b42cada8",
         "filename": "src/monitoring/include/prometheus_exposer.h",
         "patchSetId": 5
@@ -29,6 +46,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-03-01T00:47:40Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\texplicit PrometheusExposer(prometheus::Registry \u0026registry);\n \t                                                ^",
+      "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e88c523_8efddb8a",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-01T00:47:45Z",
       "side": 1,
       "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\texplicit PrometheusExposer(prometheus::Registry \u0026registry);\n \t                                                ^",
       "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
@@ -71,6 +105,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c48943db_7b21a1cd",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-01T00:47:45Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\tPrometheusExposer \u0026operator\u003d(const PrometheusExposer \u0026) \u003d delete;\n \t                           ^",
+      "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2373021_628f3988",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-01T00:47:45Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tPrometheusExposer \u0026operator\u003d(const PrometheusExposer \u0026) \u003d delete;\n \t                  ^",
+      "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2bb2141_4b1dc26e",
         "filename": "src/monitoring/include/prometheus_exposer.h",
         "patchSetId": 5
@@ -105,6 +173,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a50addd_643450e0",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-01T00:47:45Z",
+      "side": 1,
+      "message": "ERROR: spaces required around that \u0027\u003d\u0027 (ctx:VxV)\n+\tPrometheusExposer \u0026operator\u003d(PrometheusExposer \u0026\u0026) \u003d delete;\n \t                           ^",
+      "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "142ef39a_3f684464",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-01T00:47:45Z",
+      "side": 1,
+      "message": "ERROR: need consistent spacing around \u0027\u0026\u0027 (ctx:WxV)\n+\tPrometheusExposer \u0026operator\u003d(PrometheusExposer \u0026\u0026) \u003d delete;\n \t                  ^",
+      "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fa3c096_bf509ef9",
         "filename": "src/monitoring/include/prometheus_exposer.h",
         "patchSetId": 5
@@ -114,6 +216,23 @@
         "id": 1005370
       },
       "writtenOn": "2025-03-01T00:47:40Z",
+      "side": 1,
+      "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define UNUSED_(arg) NOT_USED_##arg UNUSED_ATTR",
+      "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "343af278_57ba2508",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-01T00:47:45Z",
       "side": 1,
       "message": "ERROR: Macros with complex values should be enclosed in parentheses\n+#define UNUSED_(arg) NOT_USED_##arg UNUSED_ATTR",
       "revId": "0abff6b80ea921c2bd2e062b012c8233eb5f3abe",
