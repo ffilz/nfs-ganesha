@@ -917,6 +917,10 @@ static inline void copy_gsh_export(struct gsh_export *dest,
 uint32_t export_check_options(struct gsh_export *exp)
 {
 	struct export_perms perms;
+	struct glist_head *glist;
+	struct base_client_entry *client = NULL;
+	struct exportlist_client_entry *expclient = NULL;
+	char str[1024] = "\0";
 
 	memset(&perms, 0, sizeof(perms));
 
@@ -937,6 +941,26 @@ uint32_t export_check_options(struct gsh_export *exp)
 			 ~perms.set;
 
 	perms.set |= export_opt.conf.set;
+
+	glist_for_each(glist, &exp->clients)
+	{
+		client = glist_entry(glist, struct base_client_entry, cle_list);
+		if (client != NULL) {
+			expclient = container_of(client,
+						 struct exportlist_client_entry,
+						 client_entry);
+
+			/* Take client options */
+			perms.options |= expclient->client_perms.options &
+					 EXPORT_OPTION_PROTOCOLS;
+			perms.set |= expclient->client_perms.set &
+				     EXPORT_OPTION_PROTOCOLS;
+		}
+	}
+	struct display_buffer dspbuf = { sizeof(str), str, str };
+	(void)StrExportOptions(&dspbuf, &perms);
+	LogMidDebug(COMPONENT_EXPORT, "perms with client perms: (%s)", str);
+	display_reset_buffer(&dspbuf);
 
 	/* And finally take any options not yet set from global defaults */
 	perms.options |= export_opt.def.options & ~perms.set;
