@@ -122,6 +122,9 @@ Clients(client list, empty)
                     getaddrinfo call is made at config parsing time)
         IP address  Match a single client
 
+Protocols options set in CLIENT blocks of the export will override Export_Defaults
+setting. For example, if protocols=3 set in Export_Defaults block and protocols=4 set
+in CLIENT block of the export, then export can only mounted via NFSv4 from client.
 
 EXPORT_DEFAULTS {}
 --------------------------------------------------------------------------------
