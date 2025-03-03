@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6633fabb_d368f278",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct exportlist_client_entry *expclient \u003d NULL;\n+\tglist_for_each(glist, \u0026exp-\u003eclients) {",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f15a36_cc969db2",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxV)\n+\t\t\t\tstruct exportlist_client_entry,client_entry);\n \t\t\t\t                              ^",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56351378_3659dbdd",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       }$",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67918190_03e80bf6",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       char str[1024] \u003d \"\\0\";$",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6549e00_be202a58",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       struct display_buffer dspbuf \u003d {sizeof(str), str, str};$",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f05dc97_a1cbaaa7",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       (void) StrExportOptions(\u0026dspbuf, \u0026perms);$",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f4d3dc_61e8e64f",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       LogMidDebug(COMPONENT_EXPORT,\"perms with client perms:(%s)\",str);$",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec079b6a_66658587",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxV)\n+       LogMidDebug(COMPONENT_EXPORT,\"perms with client perms:(%s)\",str);\n                                                                   ^",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62651ded_0dbfa318",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxV)\n+       LogMidDebug(COMPONENT_EXPORT,\"perms with client perms:(%s)\",str);\n                                    ^",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b4ce34e_045e969c",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-03T20:45:46Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+       display_reset_buffer(\u0026dspbuf);$",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
