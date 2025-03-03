@@ -925,6 +925,26 @@ uint32_t export_check_options(struct gsh_export *exp)
 
 	perms.set |= export_opt.conf.set;
 
+	struct glist_head *glist;
+	struct base_client_entry *client = NULL;
+	struct exportlist_client_entry *expclient = NULL;
+	glist_for_each(glist, &exp->clients) {
+		client = glist_entry(glist, struct base_client_entry, cle_list);
+		if (client != NULL) {
+			expclient = container_of(client,
+				struct exportlist_client_entry,client_entry);
+
+			/* Take client options */
+			perms.options |= expclient->client_perms.options;
+			perms.set |= expclient->client_perms.set;
+		}
+       }
+       char str[1024] = "\0";
+       struct display_buffer dspbuf = {sizeof(str), str, str};
+       (void) StrExportOptions(&dspbuf, &perms);
+       LogMidDebug(COMPONENT_EXPORT,"perms with client perms:(%s)",str);
+       display_reset_buffer(&dspbuf);
+
 	/* And finally take any options not yet set from global defaults */
 	perms.options |= export_opt.def.options & ~perms.set;
 
