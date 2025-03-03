@@ -402,6 +402,9 @@ EXPORT_DEFAULTS { CLIENT  {} }
 
 	* Take all the "export permissions" options from EXPORT_DEFAULTS.
 
+	* Protocols options set in CLIENT blocks of the export will override protocols options in
+	  Export_Defaults setting.
+
 	* The client lists are dynamically updateable.
 
 	HA_Proxy_Protocol(enum list, values [with_ha_proxy, without_ha_proxy, any], default [any])
