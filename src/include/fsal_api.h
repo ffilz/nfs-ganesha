@@ -794,6 +794,19 @@ struct fsal_ops {
  */
 	void (*fsal_reset_stats)(struct fsal_module *const fsal_hdl);
 
+	/**
+ * @brief FSAL function to reclaim the client capabilities.
+ * This functionality will be required by FSALs, which are distributed
+ * in nature, and the client need to reclaim the capability to continue
+ * its operation. For example ceph client on failover need to reclaim
+ * its capabilities then only all FS related ops are possible.
+ *
+ * @param[in] fsal_hdl          FSAL module
+ * @return FSAL status
+ */
+	fsal_status_t (*fsal_reclaim_client)(struct fsal_module *const fsal_hdl,
+					     char *nodeid);
+
 	/**@}*/
 };
 
@@ -3159,8 +3172,7 @@ struct fsal_pnfs_ds {
  *
  */
 
-struct fsal_ds_handle {
-};
+struct fsal_ds_handle {};
 
 /**
  * @brief Get a reference on a fsal object handle by export
@@ -3183,8 +3195,8 @@ static inline void export_root_object_get(struct fsal_obj_handle *obj_hdl)
  */
 static inline void export_root_object_put(struct fsal_obj_handle *obj_hdl)
 {
-	int32_t __attribute__((unused))
-	ref = atomic_dec_int32_t(&obj_hdl->exp_refcnt);
+	int32_t __attribute__((unused)) ref =
+		atomic_dec_int32_t(&obj_hdl->exp_refcnt);
 
 	assert(ref >= 0);
 }
