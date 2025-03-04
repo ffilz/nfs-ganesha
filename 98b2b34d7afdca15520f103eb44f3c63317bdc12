@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f233923_d5f81d3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-04T18:58:07Z",
+      "side": 1,
+      "message": "Do you have the clang-format githook installed?",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf6cbc60_610b9a06",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-04T18:58:07Z",
+      "side": 1,
+      "message": "Move these declarations to the top of the function please, with blank line following.",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6633fabb_d368f278",
         "filename": "src/support/exports.c",
         "patchSetId": 1
@@ -35,6 +69,41 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c0a462b_4d6ec776",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-04T18:58:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a8f15a36_cc969db2",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347159b6_2b57ba7f",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-04T18:58:07Z",
+      "side": 1,
+      "message": "I don\u0027t think we want to blindly take all the client permissions.\n\nWe want to take Protocols for sure.\n\nI don\u0027t think we need Transports.\n\nI\u0027m sure we don\u0027t want any of the others.",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56351378_3659dbdd",
@@ -48,6 +117,24 @@
       "writtenOn": "2025-03-03T20:45:46Z",
       "side": 1,
       "message": "WARNING: please, no spaces at the start of a line\n+       }$",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf8b95ca_21c6fee4",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-04T18:58:07Z",
+      "side": 1,
+      "message": "Please fix these spaces at beginning of line.\n\nAlso, put the display stuff into isMidDebug (see log below).",
+      "parentUuid": "56351378_3659dbdd",
       "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -150,6 +237,42 @@
       "writtenOn": "2025-03-03T20:45:46Z",
       "side": 1,
       "message": "ERROR: space required after that \u0027,\u0027 (ctx:VxV)\n+       LogMidDebug(COMPONENT_EXPORT,\"perms with client perms:(%s)\",str);\n                                    ^",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16839726_fb999be8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-04T18:58:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ec079b6a_66658587",
+      "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4b46a9_f4fb0381",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-04T18:58:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "62651ded_0dbfa318",
       "revId": "98b2b34d7afdca15520f103eb44f3c63317bdc12",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
