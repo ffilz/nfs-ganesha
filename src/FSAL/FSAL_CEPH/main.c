@@ -103,6 +103,9 @@ struct ceph_fsal_module
 				    .expire_time_parent = -1,
 			    } } };
 
+/* ceph mount handle for node takeover activity */
+struct ceph_mount *takeover_cm = NULL;
+
 static int ceph_conf_commit(void *node, void *link_mem, void *self_struct,
 			    struct config_error_type *err_type)
 {
@@ -395,6 +398,43 @@ static int reclaim_reset(struct ceph_mount *cm)
 	ceph_finish_reclaim(cm->cmount);
 	ceph_set_uuid(cm->cmount, uuid);
 	gsh_free(nodeid);
+	gsh_free(uuid);
+	return 0;
+}
+
+/* ceph client reclaim for takeover of failed node */
+int takeover_reclaim_reset(char *nodeid)
+{
+	int ceph_status;
+	char *uuid;
+	size_t len;
+
+	if (takeover_cm == NULL) {
+		LogCrit(COMPONENT_FSAL,
+			"Ceph mount handle for takeover is invalid");
+		return 1;
+	}
+	len = strlen(RECLAIM_UUID_PREFIX) + strlen(nodeid) + 1 + 4 + 1;
+	uuid = gsh_malloc(len);
+	/* uuid will be always like "ganesha-node<n>-0001" */
+	(void)snprintf(uuid, len, RECLAIM_UUID_PREFIX "%s-%4.4hx", nodeid, 1);
+
+	/* If this fails, log a message but soldier on */
+	LogDebug(COMPONENT_FSAL, "Issuing reclaim reset for node %s, uuid %s",
+		 nodeid, uuid);
+	ceph_status = ceph_start_reclaim(takeover_cm->cmount, uuid,
+					 CEPH_RECLAIM_RESET);
+	if (ceph_status) {
+		/* Error ENOENT indicates that most likely this is first run
+		 * of this Ganesha instance, so can be ignored. Any other
+		 * failure indicates problem with this ceph client, better
+		 * throw the error and exit */
+		LogEvent(COMPONENT_FSAL, "start_reclaim failed: %s",
+			 strerror(-ceph_status));
+		if (ceph_status != ENOENT)
+			return ceph_status;
+	}
+	ceph_finish_reclaim(takeover_cm->cmount);
 	gsh_free(uuid);
 	return 0;
 }
@@ -731,6 +771,11 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 		goto error;
 	}
 
+	/* Store the ceph mount handle for future use for takeover activity */
+	takeover_cm = cm;
+	LogDebug(COMPONENT_FSAL, "Ceph mount handle for takeover activity %p",
+		 takeover_cm);
+
 	ceph_status = ceph_mount(cm->cmount, cm->cm_mount_path);
 
 	if (ceph_status != 0) {
@@ -829,6 +874,7 @@ error:
 		gsh_free(cm->cm_secret_key);
 
 		gsh_free(cm);
+		cm = NULL;
 	}
 
 	gsh_free(export);
