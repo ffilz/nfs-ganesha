@@ -425,7 +425,6 @@ void dynamic_metrics__observe_nfs_io(size_t bytes_requested,
 	// during the setup phase, or when the export id is unknown.
 	if (export_id == 0)
 		return;
-
 	// Observe by export metrics.
 	const std::string exportLabel = GetExportLabel(export_id);
 	dynamic_metrics->bytesReceivedTotalByOperationExport
