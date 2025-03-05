@@ -91,6 +91,7 @@ class DynamicMetrics {
 	CounterInt::Family &clientBytesSentTotal;
 
 	// Gauges
+	GaugeInt::Family &ganeshaversion;
 	GaugeInt::Family &rpcsInFlight;
 	GaugeInt::Family &lastClientUpdate;
 
@@ -166,7 +167,12 @@ DynamicMetrics::DynamicMetrics(prometheus::Registry &registry)
 	,
 
 	// Gauges
-	rpcsInFlight(
+	ganeshaversion(
+		prometheus::Builder<GaugeInt>()
+			.Name("ganesha_version")
+			.Help("Version of the running NFS-Ganesha service.")
+			.Register(registry))
+	, rpcsInFlight(
 		prometheus::Builder<GaugeInt>()
 			.Name("rpcs_in_flight")
 			.Help("Number of NFS requests received or in flight.")
@@ -309,6 +315,10 @@ static void toLowerCase(std::string &s)
 	std::transform(s.begin(), s.end(), s.begin(), ::tolower);
 }
 
+static void set_ganesha_version(void)
+{
+	dynamic_metrics->ganeshaversion.Add({}).Set(GANESHA_VERSION_MAJOR);
+}
 /*
  * Functions used from NFS Ganesha below.
  */
@@ -325,8 +335,10 @@ void dynamic_metrics__init(void)
 	prometheus::Registry *registry_ptr =
 		(prometheus::Registry *)(registry_handle.registry);
 	dynamic_metrics = std::make_unique<DynamicMetrics>(*registry_ptr);
+	set_ganesha_version();
 	initialized = true;
 }
+
 
 void dynamic_metrics__observe_nfs_request(const char *operation,
 					  nsecs_elapsed_t request_time,
@@ -384,6 +396,7 @@ void dynamic_metrics__observe_nfs_request(const char *operation,
 		       { kExport, exportLabel } },
 		     latencyBuckets)
 		.Observe(latency_ms);
+
 }
 
 void dynamic_metrics__observe_nfs_io(size_t bytes_requested,
@@ -425,7 +438,6 @@ void dynamic_metrics__observe_nfs_io(size_t bytes_requested,
 	// during the setup phase, or when the export id is unknown.
 	if (export_id == 0)
 		return;
-
 	// Observe by export metrics.
 	const std::string exportLabel = GetExportLabel(export_id);
 	dynamic_metrics->bytesReceivedTotalByOperationExport

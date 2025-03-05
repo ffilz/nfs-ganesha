@@ -109,6 +109,10 @@ static inline void dynamic_metrics__init(void)
 {
 }
 
+static inline void set_ganesha_version(void)
+{
+}
+
 static inline void dynamic_metrics__observe_nfs_request(
 	const char *UNUSED(operation), nsecs_elapsed_t UNUSED(request_time),
 	const char *UNUSED(version), const char *UNUSED(status_label),
