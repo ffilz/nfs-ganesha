@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02572e80_cc43ff0e",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-05T18:41:01Z",
+      "side": 1,
+      "message": "I wonder if we should use cidr_from_str and then grab the 4 bytes...\n\nEventually we need to convert to using full IPv6 address.\n\nAnd then we aren\u0027t adding yet another IP string conversion...",
+      "revId": "1ab4546fae2e6436012617877fd31dbb0a233bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
