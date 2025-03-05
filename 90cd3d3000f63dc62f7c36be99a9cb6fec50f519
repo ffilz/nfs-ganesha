@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd284fd8_4bdfe3bd",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1037928
+      },
+      "writtenOn": "2025-03-05T10:54:31Z",
+      "side": 1,
+      "message": "Consider using static metrics as they are more efficient, and match your use case: `monitoring__register_gauge`",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 16
+      },
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
