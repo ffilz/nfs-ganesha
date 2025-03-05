@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39176fa0_2d894361",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-05T11:51:08Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (nfs_RetryableError(fsal_status.major)) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "13b7ed2bfadf49e07ba67679df2bbcb484330ffb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36c6782_9d2261f1",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-05T11:51:08Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (nfs_DropDelayErrors()) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "13b7ed2bfadf49e07ba67679df2bbcb484330ffb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd11b70_39c72f06",
+        "filename": "src/Protocols/NFS/nfs3_setattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-05T11:51:08Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (nfs_DropDelayErrors()) {\n+\t\t\t\trc \u003d NFS_REQ_DROP;\n+\t\t\t}",
+      "revId": "13b7ed2bfadf49e07ba67679df2bbcb484330ffb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87990826_d8db8447",
+        "filename": "src/Protocols/NFS/nfs3_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-05T11:51:08Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (nfs_RetryableError(fsal_status.major)) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "13b7ed2bfadf49e07ba67679df2bbcb484330ffb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f69dbd_38a6e24f",
+        "filename": "src/Protocols/NFS/nfs3_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-05T11:51:08Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (nfs_DropDelayErrors()) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "13b7ed2bfadf49e07ba67679df2bbcb484330ffb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1030ad5e_d906e05c",
+        "filename": "src/Protocols/NFSACL/nfsacl_setacl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-05T11:51:08Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (nfs_DropDelayErrors()) {\n+\t\t\t\trc \u003d NFS_REQ_DROP;\n+\t\t\t}",
+      "revId": "13b7ed2bfadf49e07ba67679df2bbcb484330ffb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
