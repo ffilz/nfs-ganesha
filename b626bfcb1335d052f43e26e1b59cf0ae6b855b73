@@ -18,6 +18,74 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd66cbfc_30e09137",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-03-06T14:52:16Z",
+      "side": 1,
+      "message": "work on comments/suggestions",
+      "revId": "b626bfcb1335d052f43e26e1b59cf0ae6b855b73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0867c5d4_8ed4cfef",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-03-06T14:52:16Z",
+      "side": 1,
+      "message": "```suggestion\n\tLogEvent(COMPONENT_MAIN, \"gRPC initialized\");\n```",
+      "revId": "b626bfcb1335d052f43e26e1b59cf0ae6b855b73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7552391f_9aa82a19",
+        "filename": "src/grpc_server/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-03-06T14:52:16Z",
+      "side": 1,
+      "message": "Remove this line if not required",
+      "revId": "b626bfcb1335d052f43e26e1b59cf0ae6b855b73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e69a5ec_1d24652f",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-03-06T14:52:16Z",
+      "side": 1,
+      "message": "remove unwanted code",
+      "revId": "b626bfcb1335d052f43e26e1b59cf0ae6b855b73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11d624ea_ae77ff9b",
