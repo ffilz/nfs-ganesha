@@ -374,6 +374,11 @@ static struct config_item core_params[] = {
 	CONF_ITEM_BOOL("Enable_Dynamic_Metrics", true, nfs_core_param,
 		       enable_dynamic_metrics),
 #endif
+
+#ifdef USE_GRPC
+	CONF_ITEM_UI16("Grpc_Port", 0, UINT16_MAX, GRPC_PORT, nfs_core_param,
+		       grpc_port),
+#endif
 	CONF_ITEM_BOOL("enable_rpc_cred_fallback", false, nfs_core_param,
 		       enable_rpc_cred_fallback),
 	CONF_ITEM_UI32("Unique_Server_Id", 0, UINT32_MAX, 0, nfs_core_param,
@@ -520,15 +525,15 @@ static struct config_item version4_params[] = {
 	CONF_ITEM_UI32("Deleg_Recall_Retry_Delay", 0, 10,
 		       DELEG_RECALL_RETRY_DELAY_DEFAULT, nfs_version4_parameter,
 		       deleg_recall_retry_delay),
-	CONF_ITEM_BOOL("Preserve_Unlinked", false,
-		       nfs_version4_parameter, preserve_unlinked),
+	CONF_ITEM_BOOL("Preserve_Unlinked", false, nfs_version4_parameter,
+		       preserve_unlinked),
 	CONF_ITEM_BOOL("PNFS_MDS", false, nfs_version4_parameter, pnfs_mds),
 	CONF_ITEM_BOOL("PNFS_DS", false, nfs_version4_parameter, pnfs_ds),
 	CONF_ITEM_TOKEN("RecoveryBackend", RECOVERY_BACKEND_DEFAULT,
 			recovery_backend_types, nfs_version4_parameter,
 			recovery_backend),
 	CONF_ITEM_BOOL("RecoveryBackendIPBased", false, nfs_version4_parameter,
-			recovery_backend_ipbased),
+		       recovery_backend_ipbased),
 	CONF_ITEM_PATH("RecoveryRoot", 1, MAXPATHLEN, NFS_V4_RECOV_ROOT,
 		       nfs_version4_parameter, recov_root),
 	CONF_ITEM_PATH("RecoveryDir", 1, MAXNAMLEN, NFS_V4_RECOV_DIR,
