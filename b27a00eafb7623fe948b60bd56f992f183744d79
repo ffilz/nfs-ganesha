@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41cd782a_cc93038c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (cbucket \u003d\u003d NULL) {\n+\t\t\t\tgoto next;\n+\t\t\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d408dd_b493a215",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2545,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (export \u0026\u0026 export-\u003ebw_enabled) {\n+\t\tresume_bw_io_pe(export, *(unsigned int *)state);\n+\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18226b7_b807518e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (client \u0026\u0026 client-\u003ebw_enabled) {\n+\t\tresume_bw_io_pc(client, *(unsigned int *)state);\n+\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "815d94ab_ca61c788",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (gsh_client \u0026\u0026 gsh_client-\u003eqos_class !\u003d NULL) {\n+\t\tqos_class \u003d gsh_client-\u003eqos_class;\n+\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8860b12_7f326571",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2736,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (gsh_export \u0026\u0026 gsh_export-\u003eqos_class !\u003d NULL) {\n+\t\tqos_class \u003d gsh_export-\u003eqos_class;\n+\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd491e18_31842471",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3003,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (g_qos_config-\u003eqos_type \u003d\u003d QOS_PER_EXPORT_ENABLED) {\n[...]\n+\t} else if (g_qos_config-\u003eqos_type \u003d\u003d QOS_PER_CLIENT_ENABLED) {\n[...]\n+\t} else if (g_qos_config-\u003eqos_type \u003d\u003d QOS_PEREXPORT_PERCLIENT_ENABLED) {\n[...]",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4181ce22_d4715471",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3154,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (cbucket \u003d\u003d NULL) {\n+\t\t\t\tgoto next;\n+\t\t\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff68838_7229ac60",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \\\n+\tdo {                                                        \\\n+\t\tif (!dbus_message_iter_next(args) ||                \\\n+\t\t    dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);   \\\n+\t\t\treturn true;                                \\\n+\t\t}                                                   \\\n+\t} while (0)\n+",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e768b53e_a425794e",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_ARG_OR_RETURN(args, type, iter, msg)                      \\\n+\tdo {                                                                 \\\n+\t\tif (!args || dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);            \\\n+\t\t\treturn true;                                         \\\n+\t\t}                                                            \\\n+\t} while (0)\n+",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106ec229_1358f72a",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-06T15:08:51Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
