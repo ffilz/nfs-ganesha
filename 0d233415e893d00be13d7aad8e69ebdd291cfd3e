@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e619d2ee_5190e043",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "de3829c3_d160106b",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeafd839_43463c02",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-03-06T15:20:46Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67687343_a47b723f",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "93588e9b_cd30d2e8",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57e8062a_20c08e15",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "This could be another glist.",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41cd782a_cc93038c",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 2
@@ -14,6 +31,41 @@
       "writtenOn": "2025-03-06T15:08:51Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\t\t\tif (cbucket \u003d\u003d NULL) {\n+\t\t\t\tgoto next;\n+\t\t\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19788129_9ff2476e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "Please address these checkpatch warnings related to braces.\n\nIn this case, the goto could be eliminated by adding cbucket !\u003d NULL \u0026\u0026 to the if condition below.",
+      "parentUuid": "41cd782a_cc93038c",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32905e1f_585b04f9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2539,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "This function never seems to return false. Does it need a return value?",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -37,6 +89,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18734eaf_5982b833",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2545,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "Remove braces",
+      "parentUuid": "13d408dd_b493a215",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72dbce8a_b010c2b0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "Same for this function",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a18226b7_b807518e",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 2
@@ -48,6 +135,41 @@
       "writtenOn": "2025-03-06T15:08:51Z",
       "side": 1,
       "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tif (client \u0026\u0026 client-\u003ebw_enabled) {\n+\t\tresume_bw_io_pc(client, *(unsigned int *)state);\n+\t}",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf8172f_4790674c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "remove braces",
+      "parentUuid": "a18226b7_b807518e",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946f8992_6779a072",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2586,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-07T01:05:03Z",
+      "side": 1,
+      "message": "This function never returns false also",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
