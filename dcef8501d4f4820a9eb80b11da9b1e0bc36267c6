@@ -1,0 +1,1279 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c870cd5_7b06d866",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// update the clientid_cowner_map",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49adc1d2_0b60ff42",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// } else {",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09482816_bb8bcd6f",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I// ^Iif (!nfs_get_grace_status(false)) {$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca604b68_bd09bd62",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// \tif (!nfs_get_grace_status(false)) {",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1deaa8_337ef92d",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// \t\tLogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c69d3237_cd9e8d00",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I// ^I^ILogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c266158_a7cb1073",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t// \t\t\t\"LOCK failed, non-reclaim while in grace\",",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a63c19f_771259b5",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// \t\t\t\"LOCK failed, non-reclaim while in grace\",",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "354ed1a2_6e2ac9d4",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I// ^I^I^I\"LOCK failed, non-reclaim while in grace\",$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a790475_a7f90210",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I// ^I^I^Iobj, resp_owner, \u0026lock_desc);$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48abe436_d2e4bcae",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// \t\t\tobj, resp_owner, \u0026lock_desc);",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e82dde_1f95ac33",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I// ^I^Ires_LOCK4-\u003estatus \u003d NFS4ERR_GRACE;$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b94baa9d_45dc8cca",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// \t\tres_LOCK4-\u003estatus \u003d NFS4ERR_GRACE;",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a4fa0b_a85e9333",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I// ^I^Igoto out;$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c499f7cc_b51b6f07",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// \t\tgoto out;",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd866e76_70e6461d",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I^I// ^I}$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dae513e_9889e576",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// \t}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837df6d9_26c503a1",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// }",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35adcce8_fa0c9539",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t// HOP SPOT: state being saved to hash table here.",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c98e1a_ebc6f4e2",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tstruct open_info *open \u003d NULL;\n+\t\tfetch_persisting_open(\u0026open, bucket, rhdlstr);",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73aa2980_3de84883",
+        "filename": "src/SAL/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+target_link_libraries(sal $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0abe4932_4c21f691",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2940,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// different_owners",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ec791f_c60ab417",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2941,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+\t\t// different_lock",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e917780_20097758",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (nfs_get_grace_status(true)) {\n[...]\n+\t\t} else\n[...]",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d53c7a4_32e6b529",
+        "filename": "src/SAL/transparent_recovery/ReadMe.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: \u0027recieved\u0027 may be misspelled - perhaps \u0027received\u0027?\n+**IDEA:** Design a mechanism that can help server to figure out whether a request recieved during grace period conflicts with a state that was held by a client in previous life of the server. Having done that server can entertain reclaim as well as non-reclaim non-conflicting requests during the grace period.",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c24d721_8a928189",
+        "filename": "src/SAL/transparent_recovery/ReadMe.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "616e6285_92c4ede3",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static struct clid_maps_cowner *clid_maps_cowner_head \u003d NULL;",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9ec1ae_be678b58",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static struct clid_maps_cowner *clid_maps_cowner_tail \u003d NULL;",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0975222f_be385c3f",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (clid_maps_cowner_head \u003d\u003d NULL) {\n[...]\n+\t} else {\n[...]",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e411b099_79fa8882",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct clid_maps_cowner *curr_node \u003d clid_maps_cowner_head;\n+\twhile (curr_node !\u003d NULL) {",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0caaf31_7bf7d7a6",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct clid_maps_cowner *curr_node \u003d clid_maps_cowner_head;\n+\twhile (curr_node !\u003d NULL) {",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07aa2471_2ac4f5e2",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct clid_maps_cowner *prev_node \u003d NULL;\n+\twhile (curr_node !\u003d NULL) {",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035d88b3_2d238b74",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\t\tif (prev_node \u003d\u003d NULL) {\n[...]\n+\t\t} else {\n[...]",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4281dbd2_602ffefe",
+        "filename": "src/SAL/transparent_recovery/cid_cowner_mapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e13c842d_0d77e349",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static redisContext *redis_context \u003d NULL; /* Pointer to the redis context */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34285a0a_0a53d192",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * Given the bucket, primary-key and field-value pairs, sets the document in the redis instance.",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d7c87b_1e02d8f7",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tfor (size_t i \u003d 0; i \u003c reply-\u003eelements; i++) {\n+\t\t(*document)[i] \u003d strdup(reply-\u003eelement[i]-\u003estr);\n+\t}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b992e484_fc0334a3",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for single statement blocks\n+\tfor (size_t i \u003d 0; i \u003c reply-\u003eelements; i++) {\n+\t\t(*document)[i] \u003d strdup(reply-\u003eelement[i]-\u003estr);\n+\t}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa49974_6827064d",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * Given the bucket, primary-key and field-value pairs, updates the document in the redis instance.",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1e622f4_1bbd24a8",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * Given the bucket and primary-key, deletes the document from the redis instance.",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b57bf71a_bd6cba05",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* Delete the document corresponding to the key from the redis instance */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d865a2_d1ef5d39",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - int flush_doc_db() should probably be int flush_doc_db(void)\n+int flush_doc_db()",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "602019a6_760a3c88",
+        "filename": "src/SAL/transparent_recovery/docDB.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1f02d3_1cffda41",
+        "filename": "src/SAL/transparent_recovery/docDB.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * acting as database running in-memory $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eef52b9_82648aff",
+        "filename": "src/SAL/transparent_recovery/docDB.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - int flush_doc_db() should probably be int flush_doc_db(void)\n+int flush_doc_db();",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75bec1cd_5eeca72c",
+        "filename": "src/SAL/transparent_recovery/docDB.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+#endif",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30fdf3a2_465e32ac",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * in the redis storage when the server starts. $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9edac7_78dad0ab",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * - Swap the current bucket with the grace bucket $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86773824_40e3441a",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^Iin the grace period$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c070d51_0bde07df",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void grace_end_exchange_buckets() should probably be void grace_end_exchange_buckets(void)\n+void grace_end_exchange_buckets()",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c61058_a812942f",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tchar *old_bucket \u003d bucket; /* Create temporary pointer old bucket */\n+\tbucket \u003d grace_bucket; /* Set current bucket to grace bucket */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70ac893b_42ee5830",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\tbucket); /* Set the bucket name in redis storage for future recovery */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17750735_d267c98b",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\tif (old_bucket) /* Delete old bucket, i.e., bucket used for checking conflicts during grace period */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bfbb6db_a58e9418",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * ^Iduring grace period$",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe3c0c0_fe391408",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void init_transparet_recovery() should probably be void init_transparet_recovery(void)\n+void init_transparet_recovery()",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052d04fe_1672dc2b",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t\t\u0026bucket); /* Getting the bucket name used during last server life */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e197fe_f11f0310",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* Setting the bucket to be used during grace period depending upon bucket name */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e4b4ef9_2814b0da",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: braces {} are not necessary for any arm of this statement\n+\tif (!strcmp(bucket, bucket_options[0])) {\n[...]\n+\t} else\n[...]",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184cf9c1_ed4f8231",
+        "filename": "src/SAL/transparent_recovery/grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d3d678e_6aef0ca9",
+        "filename": "src/SAL/transparent_recovery/lock_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: do not initialise statics to 0 or NULL\n+static int num_fields \u003d 0; /* file local variable to store number of fields */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ca8b285_32993757",
+        "filename": "src/SAL/transparent_recovery/lock_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * Given the bucket, lock information, state owner and file handle $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8880c563_805ca325",
+        "filename": "src/SAL/transparent_recovery/lock_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: char * array declaration might be better as static const\n+\tchar *document[] \u003d { \"lock_owner\",  rhdlstr,\t     \"lock_type\",",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "734f1b5e_232c386f",
+        "filename": "src/SAL/transparent_recovery/lock_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tchar lock_bucket[256];\n+\tnum_documents \u003d 0;",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b715f59_aa418df8",
+        "filename": "src/SAL/transparent_recovery/lock_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d680a34_a89dd95e",
+        "filename": "src/SAL/transparent_recovery/open_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * returns true if the new open request conflicts with the existing open request.",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96fc25f2_79629fc9",
+        "filename": "src/SAL/transparent_recovery/open_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+\t/* If the existing access and deny values conflict with the new access and deny values */",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "645558ef_dd9628fa",
+        "filename": "src/SAL/transparent_recovery/open_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * Given the bucket, state owner, share access and deny values, persists the $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc75ef84_d4b15932",
+        "filename": "src/SAL/transparent_recovery/open_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: char * array declaration might be better as static const\n+\tchar *document_object[] \u003d { \"cowner\",\t    cowner,",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad0b1a9f_c5ea114d",
+        "filename": "src/SAL/transparent_recovery/open_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: line over 80 characters\n+ * Given the bucket and state owner, fetches the open info from the redis database.",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671d5775_145d019a",
+        "filename": "src/SAL/transparent_recovery/open_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+}",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a0b551_d27970de",
+        "filename": "src/SAL/transparent_recovery/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43bf456f_a65abe85",
+        "filename": "src/SAL/transparent_recovery/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void init_transparet_recovery() should probably be void init_transparet_recovery(void)\n+void init_transparet_recovery();",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cf2b65_77ab5a02",
+        "filename": "src/SAL/transparent_recovery/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - void grace_end_exchange_buckets() should probably be void grace_end_exchange_buckets(void)\n+void grace_end_exchange_buckets();",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9637de35_5ae1b570",
+        "filename": "src/SAL/transparent_recovery/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * structure for encapsulating, important data for  $",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3e6e96_8ae57a8f",
+        "filename": "src/SAL/transparent_recovery/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-11T18:22:28Z",
+      "side": 1,
+      "message": "WARNING: adding a line without newline at end of file\n+#endif",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
