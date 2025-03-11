@@ -40,6 +40,7 @@
 #include "sal_functions.h"
 #include "nfs_creds.h"
 #include "sal_metrics.h"
+#include "../../SAL/transparent_recovery/transparent_recovery.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -429,6 +430,12 @@ return_ok:
 	res_EXCHANGE_ID4_ok->eir_server_impl_id.eir_server_impl_id_val = NULL;
 
 	res_EXCHANGE_ID4->eir_status = NFS4_OK;
+
+	// update the clientid_cowner_map
+
+	add_clid_maps_cowner(
+		unconf->cid_clientid,
+		arg_EXCHANGE_ID4->eia_clientowner.co_ownerid.co_ownerid_val);
 
 	if (unconf == conf) {
 		/* We just updated a confirmed clientid, release the refcount

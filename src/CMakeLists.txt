@@ -335,7 +335,7 @@ option(ENABLE_ERROR_INJECTION "enable error injection" OFF)
 goption(ENABLE_VFS_POSIX_ACL "Enable NFSv4 to POSIX ACL mapping for VFS" OFF)
 option(ENABLE_VFS_DEBUG_ACL "Enable debug ACL store for VFS" OFF)
 option(ENABLE_RFC_ACL "Use all RFC ACL checks" OFF)
-option(USE_TOOL_MULTILOCK "build multilock tool" OFF)
+option(USE_TOOL_MULTILOCK "build multilock tool" ON)
 
 # Electric Fence (-lefence) link flag
 goption(USE_EFENCE "link with efence memory debug library" OFF)
@@ -1296,6 +1296,14 @@ if (NOT LIBURCU_INC)
 endif(NOT LIBURCU_INC)
 check_symbol_exists(urcu_ref_get_unless_zero urcu/ref.h HAVE_URCU_REF_GET_UNLESS_ZERO)
 
+find_library(HIREDIS_LIBRARY hiredis REQUIRED)
+find_library(REDIS_PLUS_PLUS_LIBRARY redis++ REQUIRED)
+
+set(REDIS_LIBRARY
+  ${HIREDIS_LIBRARY}
+  ${REDIS_PLUS_PLUS_LIBRARY}
+)
+
 # All the plumbing in the basement
 set(SYSTEM_LIBRARIES
   ${NTIRPC_LIBRARY}
@@ -1304,6 +1312,7 @@ set(SYSTEM_LIBRARIES
   ${KRB5_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${LIBURCU_LIB}
+  ${REDIS_LIBRARY}
 )
 
 include_directories(${LIBURCU_INC})
