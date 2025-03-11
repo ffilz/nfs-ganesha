@@ -259,6 +259,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "420df5d2_d7c78174",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "aff68838_7229ac60",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e768b53e_a425794e",
@@ -276,6 +294,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb30dcb_5e73bc0e",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e768b53e_a425794e",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "106ec229_1358f72a",
@@ -289,6 +325,24 @@
       "writtenOn": "2025-03-06T15:08:51Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d26fc6_2bb373d6",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "106ec229_1358f72a",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

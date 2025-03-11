@@ -1,6 +1,142 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "594a8fff_8bebc0a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "The config needs to be documented in src/config_samples/config.txt and the appropriate .rst files.",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c100461c_adafa63d",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Actually, move the QoS check here:\n\n#ifdef ENABLE_QOS\nif (((data-\u003eqos_flags \u0026 IS_QOS_IOPS_ACCOUNTED) \u003d\u003d 0) \u0026\u0026\n    (QoS_Process_iops(data) \u003d\u003d QOS_TASK_ASYNC_SCHEDULED) {\n    / Need to delay for QoS /\n    return NFS_REQ_ASYNC_WAIT;}#endif",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c1defc3_ece61dfa",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Move this check into process_one_op to simplify",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825dd77f_89e68271",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Move this check into process_one_op to simplify",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d3ed35f_e0db0e85",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Are you sure we should clear the flags? What if this read still needs rescheduling?",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8ed0e7f_2cc3d7c5",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "spelling:\n\nbypass value\n\nSkip the underscore also\nAlso, blank between : and %d",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c8bd9c_cfbaeaa1",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "How about make this qos_flag |\u003d (unsigned int) bypass * IS_QOS_IO_READ_BYPASS so we can understand where the flag is set?",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891f22a3_6de50340",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "blank between : and %d",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de3829c3_d160106b",
@@ -49,6 +185,24 @@
       "writtenOn": "2025-03-06T15:20:46Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_ARG_OR_RETURN(args, type, iter, msg)                      \\\n+\tdo {                                                                 \\\n+\t\tif (!args || dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);            \\\n+\t\t\treturn true;                                         \\\n+\t\t}                                                            \\\n+\t} while (0)\n+",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e379bfd_e19194bd",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eeafd839_43463c02",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
