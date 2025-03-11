@@ -16,6 +16,24 @@
       "message": "I wonder if we should use cidr_from_str and then grab the 4 bytes...\n\nEventually we need to convert to using full IPv6 address.\n\nAnd then we aren\u0027t adding yet another IP string conversion...",
       "revId": "1ab4546fae2e6436012617877fd31dbb0a233bb0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8f614d_22e13a64",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-03-11T00:39:28Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t hit send the other day. I am keen to get this patch done for now.  That will work for the IPs we are matching.  cidr_from_str looks like a full on parser :-)   I can then help to get the proper longer term IP address matching/conversions sorted.  I am working on getting proper VIP recovery working rather than having to copy the clids from nodeN dir to 102.168.1.1/.... directories etc.  I have had recoveries working, so far with it.  I just need to get back to it and sort more details.",
+      "parentUuid": "02572e80_cc43ff0e",
+      "revId": "1ab4546fae2e6436012617877fd31dbb0a233bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
