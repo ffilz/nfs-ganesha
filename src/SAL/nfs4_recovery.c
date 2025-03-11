@@ -43,6 +43,7 @@
 #include "bsd-base64.h"
 #include "client_mgr.h"
 #include "fsal.h"
+#include "transparent_recovery/transparent_recovery.h"
 
 /* The grace_mutex protects current_grace, clid_list, and clid_count */
 static pthread_mutex_t grace_mutex;
@@ -218,6 +219,7 @@ static void nfs_lift_grace_locked(void)
 	 */
 	if (nfs_in_grace()) {
 		nfs_end_grace();
+		grace_end_exchange_buckets();
 		__sync_synchronize();
 		/* Now change the actual status */
 		cur = __sync_and_and_fetch(&grace_status,
@@ -338,6 +340,11 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 			"NFS Server GRACE duration should at least match LEASE period. Current configured values are GRACE(%d), LEASE(%d)",
 			(int)nfs_param.nfsv4_param.grace_period,
 			(int)nfs_param.nfsv4_param.lease_lifetime);
+	}
+
+	if (!init_transparet_recovery()) {
+		ret = -EAGAIN;
+		goto out;
 	}
 
 	LogEvent(COMPONENT_STATE, "NFS Server Now IN GRACE, duration %d",
@@ -831,7 +838,7 @@ const char *recovery_backend_str(enum recovery_backend recovery_backend)
 int nfs4_recovery_init(void)
 {
 	LogEvent(COMPONENT_CLIENTID, "Recovery Backend Init for %s",
-		recovery_backend_str(nfs_param.nfsv4_param.recovery_backend));
+		 recovery_backend_str(nfs_param.nfsv4_param.recovery_backend));
 
 	switch (nfs_param.nfsv4_param.recovery_backend) {
 	case RECOVERY_BACKEND_FS:

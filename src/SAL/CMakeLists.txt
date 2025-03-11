@@ -38,6 +38,11 @@ SET(sal_STAT_SRCS
    nfs4_owner.c
    recovery/recovery_fs.c
    recovery/recovery_fs_ng.c
+   transparent_recovery/lock_recovery.c
+   transparent_recovery/open_recovery.c
+   transparent_recovery/docDB.c
+   transparent_recovery/grace.c
+   transparent_recovery/cid_cowner_mapper.c
 )
 
 if(USE_NLM)
@@ -57,7 +62,11 @@ endif(USE_9P)
 
 add_library(sal OBJECT ${sal_STAT_SRCS})
 add_sanitizers(sal)
-set_target_properties(sal PROPERTIES COMPILE_FLAGS "-fPIC")
+target_link_libraries(sal 
+  ${HIREDIS_LIBRARY}
+  ${REDIS_PLUS_PLUS_LIBRARY}
+)
+set_target_properties(sal PROPERTIES COMPILE_FLAGS "-fPIC -lredis++ -lhiredis")
 
 if (USE_LTTNG)
 add_dependencies(sal gsh_trace_header_generate)
