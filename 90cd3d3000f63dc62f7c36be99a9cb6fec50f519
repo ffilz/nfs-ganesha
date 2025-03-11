@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9847dbf7_0badc58f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-03-11T09:26:31Z",
+      "side": 1,
+      "message": "hi @ffilzlnx@mindspring.com,\nPrometheus variables are typically declared as Counter, Gauge, or Histogram. While Prometheus does not support string formats directly, we can define strings within labels, as shown below:\n\nganesha_version{GANESHA_VERSION\u003d\"7-dev.7\"} 0\n\nSince using a value of 0 would be meaningless, I propose that we set the value of this metric to GANESHA_MAJOR_NUMBER instead, so that the full version information is available within the labels.\n\n\nAlso @yonic@google.com,\nWould it be appropriate to use the monitoring__register_gauge() function to register the Ganesha version metric, rather than using the \"initializer list\" style?",
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd284fd8_4bdfe3bd",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "Agreed, this should be a static metric.\n\nAlso, as a fixed item, it should be an Info metric, and does not need a numeric value, just print out the version string.",
       "parentUuid": "dd284fd8_4bdfe3bd",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 16
+      },
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0effd7_0ec18a85",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-03-11T09:26:31Z",
+      "side": 1,
+      "message": "hi @ffilzlnx@mindspring.com,\nPrometheus variables are typically declared as Counter, Gauge, or Histogram. While Prometheus does not support string formats directly, we can define strings within labels, as shown below:\n\nganesha_version{GANESHA_VERSION\u003d\"7-dev.7\"} 0\n\nSince using a value of 0 would be meaningless, I propose that we set the value of this metric to GANESHA_MAJOR_NUMBER instead, so that the full version information is available within the labels.\n\n\nAnd @yonic@google.com,\nWould it be appropriate to use the monitoring__register_gauge() function to register the Ganesha version metric, rather than using the \"initializer list\" style?",
+      "parentUuid": "40db3f70_ca2bd61c",
       "range": {
         "startLine": 170,
         "startChar": 0,
