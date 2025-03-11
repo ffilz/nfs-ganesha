@@ -554,15 +554,16 @@ check_seqid:
 				res_LOCK4->status = NFS4ERR_NO_GRACE;
 				goto out;
 			}
-		} else {
-			if (!nfs_get_grace_status(false)) {
-				LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
-					"LOCK failed, non-reclaim while in grace",
-					obj, resp_owner, &lock_desc);
-				res_LOCK4->status = NFS4ERR_GRACE;
-				goto out;
-			}
 		}
+		// } else {
+		// 	if (!nfs_get_grace_status(false)) {
+		// 		LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
+		// 			"LOCK failed, non-reclaim while in grace",
+		// 			obj, resp_owner, &lock_desc);
+		// 		res_LOCK4->status = NFS4ERR_GRACE;
+		// 		goto out;
+		// 	}
+		// }
 		have_grace_ref = true;
 	}
 
@@ -767,6 +768,7 @@ check_seqid:
 	res_LOCK4->status = NFS4_OK;
 	data->op_resp_size = SUCCESS_RESP_SIZE;
 
+	// HOP SPOT: state being saved to hash table here.
 	/* Handle stateid/seqid for success */
 	update_stateid(lock_state, &res_LOCK4->LOCK4res_u.resok4.lock_stateid,
 		       data, lock_tag);

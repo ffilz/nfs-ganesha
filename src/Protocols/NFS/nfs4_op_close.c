@@ -40,6 +40,7 @@
 #include "nfs_proto_tools.h"
 #include "nfs_proto_functions.h"
 #include "nfs_convert.h"
+#include "../../SAL/transparent_recovery/transparent_recovery.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -143,6 +144,7 @@ void cleanup_layouts(compound_data_t *data)
 enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 				  struct nfs_resop4 *resp)
 {
+	LogAlways(COMPONENT_ALL, "Closing...");
 	/* Short alias for arguments */
 	CLOSE4args *const arg_CLOSE4 = &op->nfs_argop4_u.opclose;
 	/* Short alias for response */
@@ -304,6 +306,15 @@ out2:
 	dec_state_owner_ref(open_owner);
 	state_obj->obj_ops->put_ref(state_obj);
 	dec_state_t_ref(state_found);
+
+	if (res_CLOSE4->status == NFS4_OK) {
+		// delete the persisting open info
+		char rhdlstr[MAX_LEN];
+		base64url_encode(open_owner->so_owner_val,
+				 open_owner->so_owner_len, rhdlstr,
+				 sizeof(rhdlstr));
+		delete_persisting_open(bucket, rhdlstr);
+	}
 
 	GSH_AUTO_TRACEPOINT(nfs4, op_close_end, TRACE_INFO,
 			    "CLOSE arg: status={} open_stateid={}",
