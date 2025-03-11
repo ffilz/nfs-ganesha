@@ -22,6 +22,30 @@
       },
       "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40db3f70_ca2bd61c",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-11T00:17:45Z",
+      "side": 1,
+      "message": "Agreed, this should be a static metric.\n\nAlso, as a fixed item, it should be an Info metric, and does not need a numeric value, just print out the version string.",
+      "parentUuid": "dd284fd8_4bdfe3bd",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 16
+      },
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
