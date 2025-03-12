@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27bcbdf2_f7ba00aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-12T14:38:20Z",
+      "side": 1,
+      "message": "As yoni mentioned, let\u0027s stick with 1 for the value so aggregation is a count of servers at a particilar code level",
+      "parentUuid": "9847dbf7_0badc58f",
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd284fd8_4bdfe3bd",
         "filename": "src/monitoring/dynamic_metrics.cc",
         "patchSetId": 1
@@ -103,6 +121,30 @@
       "side": 1,
       "message": "Yes I\u0027d use `monitoring__register_gauge` in this case. If you want to use a label, please use value of 1 and not 0, so the aggregation will have a meaning of \"the number of Ganesha servers that have version X\"",
       "parentUuid": "6f0effd7_0ec18a85",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 16
+      },
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234713e2_c27c7c40",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-12T14:38:20Z",
+      "side": 1,
+      "message": "Yea very good point, prometheus-cpp\u0027s Info metric emited 1 as the value",
+      "parentUuid": "91fbe9b7_972195e5",
       "range": {
         "startLine": 170,
         "startChar": 0,
