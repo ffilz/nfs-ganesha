@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de56a032_7db42bdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-13T22:39:35Z",
+      "side": 1,
+      "message": "Oh, the complaints... ignore those two...",
+      "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6df0f16_53393868",
@@ -18,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ba0b1e_8abff65b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-13T22:39:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c6df0f16_53393868",
+      "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c97ad80b_aa0a6989",
@@ -31,6 +66,24 @@
       "writtenOn": "2025-03-13T22:36:36Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e654cf_c05f63b3",
+        "filename": "src/RPCAL/connection_manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-13T22:39:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c97ad80b_aa0a6989",
       "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
