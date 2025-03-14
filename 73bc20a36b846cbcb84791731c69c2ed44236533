@@ -120,6 +120,24 @@
       "message": "Does it mean the default value for bool global variable is false ?\nIf not, then we need to initialize these variables.",
       "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa0d4ce1_f8cbe284",
+        "filename": "src/SAL/recovery/recovery_rados_ng.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-14T18:32:57Z",
+      "side": 1,
+      "message": "The BSS is zero filled as part of loading a binary. Thus the default value of booleans is false. Any variable with an explicit initializer is then initialized after this.\n\nThat is different from local variables on the stack whcih are not initialized in any way.\n\nThus checkpatch prefers globals not initialized to 0, false, or \"\"",
+      "parentUuid": "68e26ac5_6665ee80",
+      "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
