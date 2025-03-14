@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "279ba769_60dbbadf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-03-14T06:18:34Z",
+      "side": 1,
+      "message": "Need clarification on default value for boolean global variable",
+      "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6df0f16_53393868",
@@ -84,6 +101,23 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "c97ad80b_aa0a6989",
+      "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e26ac5_6665ee80",
+        "filename": "src/SAL/recovery/recovery_rados_ng.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-03-14T06:18:34Z",
+      "side": 1,
+      "message": "Does it mean the default value for bool global variable is false ?\nIf not, then we need to initialize these variables.",
       "revId": "73bc20a36b846cbcb84791731c69c2ed44236533",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
