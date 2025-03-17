@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af6fcb63_2c897d2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-17T20:25:23Z",
+      "side": 1,
+      "message": "Did you use the updated commit hooks before committing this? I\u0027m not sure if this has passed clang-format (we don\u0027t have that in CI yet) and the checkpatch errors and warnings should be resolved before pushing to Gerrithub,",
+      "revId": "c380764d998cc3f7545a39fe3acf0158150bc2e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70b42854_bdd145c7",
         "filename": "src/support/server_stats.c",
         "patchSetId": 3
