@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06ef6cba_78502ede",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-17T20:28:02Z",
+      "side": 1,
+      "message": "Right, prometheus-cpp-lite doesn\u0027t have an INFO metric, so you just need to create your own using a Gauge that always has the value 1, and then one or more labels to express text information such as Ganesha version. We really only need a single metric for this kind of information and could express Ganesha version, build time, and other interesting bits like that.",
+      "parentUuid": "1a9e6105_23f82161",
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd284fd8_4bdfe3bd",
         "filename": "src/monitoring/dynamic_metrics.cc",
         "patchSetId": 1
