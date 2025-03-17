@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a9e6105_23f82161",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-03-17T11:09:43Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com,\nI guess this info metric is present in promethus code(https://github.com/prometheus/prometheus/blob/b0227d1f16ea5da448f7a610ed9a7e22e6f35782/util/fmtutil/format.go#L36C5-L44), But not in prometheus-cpp-lite code(https://github.com/biaks/prometheus-cpp-lite/blob/48d09c45ee6deb90e02579b03037740e1c01fd27/core/include/prometheus/metric.h#L12-L18), can you please confirm again?",
+      "parentUuid": "27bcbdf2_f7ba00aa",
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd284fd8_4bdfe3bd",
         "filename": "src/monitoring/dynamic_metrics.cc",
         "patchSetId": 1
@@ -145,6 +163,30 @@
       "side": 1,
       "message": "Yea very good point, prometheus-cpp\u0027s Info metric emited 1 as the value",
       "parentUuid": "91fbe9b7_972195e5",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 16
+      },
+      "revId": "90cd3d3000f63dc62f7c36be99a9cb6fec50f519",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20b05f4_f55107fe",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-03-17T11:09:43Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com , I guess this info metric is present in promethus code(https://github.com/prometheus/prometheus/blob/b0227d1f16ea5da448f7a610ed9a7e22e6f35782/util/fmtutil/format.go#L36C5-L44), But not in prometheus-cpp-lite code(https://github.com/biaks/prometheus-cpp-lite/blob/48d09c45ee6deb90e02579b03037740e1c01fd27/core/include/prometheus/metric.h#L12-L18), can you please confirm again?",
+      "parentUuid": "234713e2_c27c7c40",
       "range": {
         "startLine": 170,
         "startChar": 0,
