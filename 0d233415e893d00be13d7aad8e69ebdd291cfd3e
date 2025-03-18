@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8dd8b61_fa22eeb6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "23866f0d_78ce739f",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c100461c_adafa63d",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-03-11T18:53:09Z",
       "side": 1,
       "message": "Actually, move the QoS check here:\n\n#ifdef ENABLE_QOS\nif (((data-\u003eqos_flags \u0026 IS_QOS_IOPS_ACCOUNTED) \u003d\u003d 0) \u0026\u0026\n    (QoS_Process_iops(data) \u003d\u003d QOS_TASK_ASYNC_SCHEDULED) {\n    / Need to delay for QoS /\n    return NFS_REQ_ASYNC_WAIT;}#endif",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97bd4de2_0ebfd0ce",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c100461c_adafa63d",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30bdda75_12836eaf",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c1defc3_ece61dfa",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "825dd77f_89e68271",
@@ -82,6 +136,24 @@
       "writtenOn": "2025-03-11T18:53:09Z",
       "side": 1,
       "message": "Move this check into process_one_op to simplify",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a761af09_aa04f848",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825dd77f_89e68271",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +192,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "937a21d7_93fff646",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b8ed0e7f_2cc3d7c5",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74c8bd9c_cfbaeaa1",
@@ -137,6 +227,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f985b43_61f40f75",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74c8bd9c_cfbaeaa1",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "891f22a3_6de50340",
@@ -150,6 +258,24 @@
       "writtenOn": "2025-03-11T18:53:09Z",
       "side": 1,
       "message": "blank between : and %d",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d030cc05_03796d1c",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "891f22a3_6de50340",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

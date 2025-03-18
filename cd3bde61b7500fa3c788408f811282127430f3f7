@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0eb9088b_1bdd0073",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "edit for share -\u003e export here also",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a63a00e_28c79a7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Please rebase and make sure the curent patch passes clang-format and checkpatch\n\nPlease address all the unresolved comments",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1e358c0_5d417551",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 4
@@ -14,6 +48,160 @@
       "writtenOn": "2025-03-18T10:25:54Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47d09cd_c045923f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e1e358c0_5d417551",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a35dc3_2cf490e6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Why did you remove the stati initializer PTHREAD_MUTEX_INITIALIZER?",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9450b226_633fe0b0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2650,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Please call SetNameFunction here, I\u0027d suggest naming the two threads \"QOS_read\" and \"QOS_write\" based on op_type.",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3cac16e_15ab5946",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2674,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "No need to initialize to zeros, also please move declaration to top, it\u0027s easier to find that way.",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29217be6_09c99bed",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2675,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Rename for clarity, or just eliminate by passing (void *) type instead of pointer to type",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3609e3c9_f2888ddd",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2694,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Is there any reason you can\u0027t use PTHREAD_create?",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "666939cb_9e8ad561",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Instead of passing a reference, you could just pass (void *) i\n\nIt would also be a bit handy of this called out QOS_READ or QOS_WRITE explicitly",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1cce5f1_9635923d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2698,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Are you sure we don\u0027t need to do anything to shut down these threads? Until now we haven\u0027t detached threads.",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408b7c77_9b588ae6",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "These config options need to be documented in \n\nsrc/doc/man/ganesha-export-config.rst\nand\nsrc/config_samples/config.txt",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -35,6 +223,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8f96611_8564e31b",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6eb5cfe2_13875bb9",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "769bbb99_0838d3de",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6eb5cfe2_13875bb9",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de358947_8b1b134c",
@@ -48,6 +272,24 @@
       "writtenOn": "2025-03-18T10:25:54Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \\\n+\tdo {                                                        \\\n+\t\tif (!dbus_message_iter_next(args) ||                \\\n+\t\t    dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);   \\\n+\t\t\treturn true;                                \\\n+\t\t}                                                   \\\n+\t} while (0)\n+",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe603a9_74f49054",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "de358947_8b1b134c",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +311,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39074ea8_5c70595b",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f0f9a3ec_23ba591a",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c0ef72e_411a81cc",
@@ -82,6 +342,41 @@
       "writtenOn": "2025-03-18T10:25:54Z",
       "side": 1,
       "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e58b58e_2b1019c3",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c0ef72e_411a81cc",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88338e07_8915b3d0",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "These options need to be documented in a man page (.rst), probably a new one?\n\nAlso in src/config_samples/config.txt",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a258a63b_7b47800b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "706e2d1e_59b081bd",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d7613d2_8c0a3f49",
@@ -65,6 +83,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Is there any serialization that protects this copy on export update?",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "116c4b78_53399e3d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Reading a little further, I really don\u0027t see anything that protectes the use of the fields updated here. When we do a SIGHUP, we don\u0027t pause in progress requests while we update, so an in process requests might access anything in the config. We either use atomic values, or lock the export mutex while we use the export config.",
+      "parentUuid": "0d7613d2_8c0a3f49",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -99,6 +135,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Is share an export? We should use consistent terminology",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b626c661_a06f2a8c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "132bddfe_2a3a396c",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -241,6 +295,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1f2f13_3ad0f7fa",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc27ed54_0f5600ed",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46287497_784dd043",
@@ -254,6 +326,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Are these reasonable ranges for min/max? With 100 gig ethernet, it seems possible some installations might be comfortable with a max closer to the 12.5 GBps that 100 Gbps represents. And there might be faster connections between containers on the same host.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1989b980_f55d7e3f",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46287497_784dd043",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -298,6 +388,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54b70fd_9ed70453",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "388056da_78e4bacd",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 13
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4a22fe7_ecd23d73",
@@ -321,6 +435,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dba7c2a_f66147d9",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4a22fe7_ecd23d73",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 22
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c1d01c6_ca05fea3",
@@ -334,6 +472,30 @@
       "writtenOn": "2025-02-24T06:33:14Z",
       "side": 1,
       "message": "```suggestion\n\t/*  Used for waiting IO accounting in case of token exhaust */\n```",
+      "range": {
+        "startLine": 152,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7623b43_d5d7020d",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c1d01c6_ca05fea3",
       "range": {
         "startLine": 152,
         "startChar": 14,
@@ -375,6 +537,24 @@
       "side": 1,
       "message": "Yes, we should use string names, there\u0027s an ENUM config type to handle this.",
       "parentUuid": "62257d9e_dbb888a9",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b148ce_574e14c0",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "This change needs to be in the upstream even if we don\u0027t immediately make it downstream.",
+      "parentUuid": "01a77066_d7b5ce77",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -426,6 +606,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Might as well not include spurious white space changes",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba0178f_3e1f6158",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2399,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0673a73_7776ec43",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
