@@ -16,6 +16,24 @@
       "message": "I am not seeing any tool side changes to reflect these stats as part of ShowClients / ShowExports.\nProvide typical o/p it will provide as an example",
       "revId": "6ef5fe76e055dbd918160f63a5ff89dc8df313f1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a000f02_ad22a97c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2025-03-18T19:16:49Z",
+      "side": 1,
+      "message": "for the tools side changes i followed the example of last change to any of these interfaces https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1174062\n\nI think many of the other tools are out of date with even 1174062 but i think we should fix that in a separate patch",
+      "parentUuid": "1fca365b_f91c8de7",
+      "revId": "6ef5fe76e055dbd918160f63a5ff89dc8df313f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
