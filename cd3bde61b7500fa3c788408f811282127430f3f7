@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e358c0_5d417551",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-18T10:25:54Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eb5cfe2_13875bb9",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-18T10:25:54Z",
+      "side": 1,
+      "message": "ERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de358947_8b1b134c",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-18T10:25:54Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \\\n+\tdo {                                                        \\\n+\t\tif (!dbus_message_iter_next(args) ||                \\\n+\t\t    dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);   \\\n+\t\t\treturn true;                                \\\n+\t\t}                                                   \\\n+\t} while (0)\n+",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f9a3ec_23ba591a",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-18T10:25:54Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_DBUS_ARG_OR_RETURN(args, type, iter, msg)                      \\\n+\tdo {                                                                 \\\n+\t\tif (!args || dbus_message_iter_get_arg_type(args) !\u003d type) { \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg);            \\\n+\t\t\treturn true;                                         \\\n+\t\t}                                                            \\\n+\t} while (0)\n+",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0ef72e_411a81cc",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-03-18T10:25:54Z",
+      "side": 1,
+      "message": "WARNING: Macros with flow control statements should be avoided\n+#define CHECK_ARG_AND_RETURN(args, iter, msg)                     \\\n+\tdo {                                                      \\\n+\t\tif (!args) {                                      \\\n+\t\t\tgsh_dbus_status_reply(\u0026iter, false, msg); \\\n+\t\t\treturn true;                              \\\n+\t\t}                                                 \\\n+\t} while (0)\n+",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
