@@ -34,6 +34,41 @@
       "parentUuid": "ea34f960_469fe098",
       "revId": "dc23626941031837c8ee20379bfebbcc52055df0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5d82e5_53d6d2b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T20:42:13Z",
+      "side": 1,
+      "message": "Sorry, I just saw the number of unresolved comments... Will take a look then.",
+      "parentUuid": "679c9746_3dd9f730",
+      "revId": "dc23626941031837c8ee20379bfebbcc52055df0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb341b49_d9a3dbb2",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-18T20:42:13Z",
+      "side": 1,
+      "message": "Do you actually have any changes in this file?\n\nI\u0027m not sure why clang-format has reformatted so much of it... This is going to be annoying if clang-format keeps making multiple changes like this...",
+      "revId": "dc23626941031837c8ee20379bfebbcc52055df0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
