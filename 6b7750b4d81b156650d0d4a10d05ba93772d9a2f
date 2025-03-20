@@ -16,6 +16,23 @@
       "message": "Ah, much better. Thanks",
       "revId": "6b7750b4d81b156650d0d4a10d05ba93772d9a2f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55c202b_b272b138",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1761,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-03-20T05:37:18Z",
+      "side": 1,
+      "message": "Should this be called before closing the dbus message container ?",
+      "revId": "6b7750b4d81b156650d0d4a10d05ba93772d9a2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
