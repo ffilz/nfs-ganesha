@@ -33,6 +33,24 @@
       "message": "Should this be called before closing the dbus message container ?",
       "revId": "6b7750b4d81b156650d0d4a10d05ba93772d9a2f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df055e5e_e85990a1",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1761,
+      "author": {
+        "id": 1021041
+      },
+      "writtenOn": "2025-03-20T17:22:26Z",
+      "side": 1,
+      "message": "No, that close is for struct_iter not iter",
+      "parentUuid": "c55c202b_b272b138",
+      "revId": "6b7750b4d81b156650d0d4a10d05ba93772d9a2f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
