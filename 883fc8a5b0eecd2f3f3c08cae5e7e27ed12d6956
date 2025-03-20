@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c29d90a2_d58bb6e1",
+        "filename": "src/include/nfs_metrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-20T15:01:26Z",
+      "side": 1,
+      "message": "Is there a reason you can\u0027t just include nfs_proto_data.h?\n\nI\u0027d prefer not to break up the header files more.",
+      "revId": "883fc8a5b0eecd2f3f3c08cae5e7e27ed12d6956",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e251c7f_249c9d15",
+        "filename": "src/include/nfs_req_result.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-20T15:01:26Z",
+      "side": 1,
+      "message": "This maybe should not be an inline function, we don\u0027t want to duplicate the strings in the binary.",
+      "revId": "883fc8a5b0eecd2f3f3c08cae5e7e27ed12d6956",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
