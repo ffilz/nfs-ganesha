@@ -3084,7 +3084,10 @@ static void record_v3_full_stats(nfs_request_t *reqdata,
 	uint32_t vers = req->rq_msg.cb_vers;
 	uint32_t proc = req->rq_msg.cb_proc;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9b93c9590 (Added mntpath label for export_id metrics.)
 	if (prog == NFS_program[P_NFS] && vers == NFS_V3) {
 		if (proc >= NFS_V3_NB_COMMAND) {
 			LogCrit(COMPONENT_DBUS,
@@ -3093,22 +3096,38 @@ static void record_v3_full_stats(nfs_request_t *reqdata,
 			return;
 		}
 		/* All `nfs_res_t` of NFSv3 operations begins with `nfsstat3` */
+<<<<<<< HEAD
 		nfsstat3 status = reqdata->res_nfs ?
 				reqdata->res_nfs->res_getattr3.status :
 				NFS3_OK;
+=======
+		nfsstat3 status =
+			reqdata->res_nfs ? reqdata->res_nfs->res_getattr3.status
+					 : NFS3_OK;
+>>>>>>> 9b93c9590 (Added mntpath label for export_id metrics.)
 
 		record_op(&v3_full_stats[proc], request_time,
 			  result == NFS_REQ_OK && status == NFS3_OK, dup);
 
+<<<<<<< HEAD
 		uint16_t export_id = 0;
+=======
+>>>>>>> 9b93c9590 (Added mntpath label for export_id metrics.)
 		struct fsal_export *export = op_ctx->fsal_export;
 		struct gsh_client *client = op_ctx->client;
 		const char *client_ip = client == NULL ? ""
 						       : client->hostaddr_str;
+<<<<<<< HEAD
 		if (export != NULL)
 			export_id = export->export_id;
 		nfs_metrics__nfs3_request(proc, request_time, result, status,
 					  export_id, client_ip);
+=======
+		const char *path = op_ctx_export_path(op_ctx);
+		uint16_t export_id = export != NULL ? export->export_id : 0;
+		nfs_metrics__nfs3_request(proc, request_time, result, status,
+					  export_id, path, client_ip);
+>>>>>>> 9b93c9590 (Added mntpath label for export_id metrics.)
 	}
 }
 
@@ -3130,14 +3149,13 @@ void reset_v3_full_stats(void)
 static void record_v4_full_stats(uint32_t proc, nsecs_elapsed_t request_time,
 				 nfsstat4 status)
 {
-	uint16_t export_id = 0;
 	struct fsal_export *export = op_ctx->fsal_export;
 	struct gsh_client *client = op_ctx->client;
 	const char *client_ip = client == NULL ? "" : client->hostaddr_str;
+	const char *path = op_ctx_export_path(op_ctx);
+	uint16_t export_id = export != NULL ? export->export_id : 0;
 
-	if (export != NULL)
-		export_id = export->export_id;
-	nfs_metrics__nfs4_request(proc, request_time, status, export_id,
+	nfs_metrics__nfs4_request(proc, request_time, status, export_id, path,
 				  client_ip);
 	if (proc >= NFS4_OP_LAST_ONE) {
 		LogCrit(COMPONENT_DBUS,
