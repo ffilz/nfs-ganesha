@@ -3084,15 +3084,14 @@ static void record_v3_full_stats(struct svc_req *req,
 	uint32_t proc = req->rq_msg.cb_proc;
 
 	if (prog == NFS_PROGRAM) {
-		uint16_t export_id = 0;
 		struct fsal_export *export = op_ctx->fsal_export;
 		struct gsh_client *client = op_ctx->client;
 		const char *client_ip = client == NULL ? ""
 						       : client->hostaddr_str;
-		if (export != NULL)
-			export_id = export->export_id;
+		const char *path = op_ctx_export_path(op_ctx);
+		uint16_t export_id = export != NULL ? export->export_id : 0;
 		nfs_metrics__nfs3_request(proc, request_time, status, export_id,
-					  client_ip);
+					  path, client_ip);
 	}
 
 	if (prog == NFS_program[P_NFS] && vers == NFS_V3) {
@@ -3125,15 +3124,14 @@ void reset_v3_full_stats(void)
 static void record_v4_full_stats(uint32_t proc, nsecs_elapsed_t request_time,
 				 nfsstat4 status)
 {
-	uint16_t export_id = 0;
 	struct fsal_export *export = op_ctx->fsal_export;
 	struct gsh_client *client = op_ctx->client;
 	const char *client_ip = client == NULL ? "" : client->hostaddr_str;
+	const char *path = op_ctx_export_path(op_ctx);
+	uint16_t export_id = export != NULL ? export->export_id : 0;
 
-	if (export != NULL)
-		export_id = export->export_id;
 	nfs_metrics__nfs4_request(proc, request_time, status, export_id,
-				  client_ip);
+				  path, client_ip);
 	if (proc >= NFS4_OP_LAST_ONE) {
 		LogCrit(COMPONENT_DBUS,
 			"proc is more than NFS4_OP_LAST_ONE: %d\n", proc);
