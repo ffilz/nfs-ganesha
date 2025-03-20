@@ -34,7 +34,7 @@
 #include "dynamic_metrics.h"
 #include "nfsv41.h"
 #include "nfs23.h"
-
+#include "FSAL/fsal_localfs.h"
 void nfs_metrics__nfs4_op_completed(nfs_opnum4, nfsstat4, nsecs_elapsed_t);
 void nfs_metrics__gss_request_dropped(void);
 void nfs_metrics__nfs4_compound_completed(nfsstat4, nsecs_elapsed_t,
@@ -61,12 +61,12 @@ void nfs_metrics__nfs3_request(const uint32_t proc,
 			       const nsecs_elapsed_t request_time,
 			       const nfsstat3 status,
 			       const export_id_t export_id,
-			       const char *client_ip);
+			       const char *filepath, const char *client_ip);
 
 void nfs_metrics__nfs4_request(const uint32_t op,
 			       const nsecs_elapsed_t request_time,
 			       const nfsstat4 status,
 			       const export_id_t export_id,
-			       const char *client_ip);
+			       const char *filepath, const char *client_ip);
 
 #endif /* !NFS_METRICS_H */
