@@ -46,6 +46,7 @@ static const char kExport[] = "export";
 static const char kOperation[] = "operation";
 static const char kStatus[] = "status";
 static const char kVersion[] = "version";
+static const char kExportpath[] = "path";
 
 namespace ganesha_monitoring
 {
@@ -328,12 +329,10 @@ void dynamic_metrics__init(void)
 	initialized = true;
 }
 
-void dynamic_metrics__observe_nfs_request(const char *operation,
-					  nsecs_elapsed_t request_time,
-					  const char *version,
-					  const char *status_label,
-					  export_id_t export_id,
-					  const char *client_ip)
+void dynamic_metrics__observe_nfs_request(
+	const char *operation, nsecs_elapsed_t request_time,
+	const char *version, const char *status_label, export_id_t export_id,
+	const char *path, const char *client_ip)
 {
 	if (!dynamic_metrics)
 		return;
@@ -372,16 +371,17 @@ void dynamic_metrics__observe_nfs_request(const char *operation,
 	if (export_id == 0) {
 		return;
 	}
-
 	// Observe metrics, by export.
 	const std::string exportLabel = GetExportLabel(export_id);
 	dynamic_metrics->requestsTotalByOperationExport
 		.Add({ { kOperation, operationLowerCase },
-		       { kExport, exportLabel } })
+		       { kExport, exportLabel },
+		       { kExportpath, path } })
 		.Increment();
 	dynamic_metrics->latencyByOperationExport
 		.Add({ { kOperation, operationLowerCase },
-		       { kExport, exportLabel } },
+		       { kExport, exportLabel },
+		       { kExportpath, path } },
 		     latencyBuckets)
 		.Observe(latency_ms);
 }
