@@ -61,12 +61,12 @@ void nfs_metrics__nfs3_request(const uint32_t proc,
 			       const nsecs_elapsed_t request_time,
 			       const nfsstat3 status,
 			       const export_id_t export_id,
-			       const char *client_ip);
+			       const char *path, const char *client_ip);
 
 void nfs_metrics__nfs4_request(const uint32_t op,
 			       const nsecs_elapsed_t request_time,
 			       const nfsstat4 status,
 			       const export_id_t export_id,
-			       const char *client_ip);
+			       const char *path, const char *client_ip);
 
 #endif /* !NFS_METRICS_H */
