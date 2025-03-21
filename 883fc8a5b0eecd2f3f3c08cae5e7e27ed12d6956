@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c7cc683_df6b84b7",
+        "filename": "src/include/nfs_metrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-03-21T13:48:23Z",
+      "side": 1,
+      "message": "There will be a header file circular dependency problem: \"nfs_metrics.h -\u003e nfs_proto_data.h -\u003e .. -\u003e nfs_metrics.h\", which leads to complex compilation errors. \n\n\"nfs_metrics.h\" is in a quite low place which others depends on, and itself should not depends on other higher headers.\n\n\n```\nIn file included from /home/zhitaoli/repos/nfs-ganesha/src/include/fsal_up.h:53,\n                 from /home/zhitaoli/repos/nfs-ganesha/src/include/fsal_api.h:3197,\n                 from /home/zhitaoli/repos/nfs-ganesha/src/include/nfs_proto_data.h:40,\n                 from /home/zhitaoli/repos/nfs-ganesha/src/include/nfs_metrics.h:38,\n                 from /home/zhitaoli/repos/nfs-ganesha/src/MainNFSD/nfs_metrics.c:31:\n/home/zhitaoli/repos/nfs-ganesha/src/include/sal_data.h:220:26: error: field ‘cb_chan’ has incomplete type\n  struct rpc_call_channel cb_chan; /*\u003c Back channel */\n                          ^~~~~~~\n/home/zhitaoli/repos/nfs-ganesha/src/include/sal_data.h:321:35: error: ‘fsa_RW’ undeclared here (not in a function); did you mean ‘fsal_id’?\n  unsigned int share_access_counts[fsa_RW + 1];\n                                   ^~~~~~\n                                   fsal_id\n/home/zhitaoli/repos/nfs-ganesha/src/include/sal_data.h:323:33: error: ‘fsm_DRW’ undeclared here (not in a function)\n  unsigned int share_deny_counts[fsm_DRW + 1];\n  ```",
+      "parentUuid": "c29d90a2_d58bb6e1",
+      "revId": "883fc8a5b0eecd2f3f3c08cae5e7e27ed12d6956",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e251c7f_249c9d15",
         "filename": "src/include/nfs_req_result.h",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-20T15:01:26Z",
       "side": 1,
       "message": "This maybe should not be an inline function, we don\u0027t want to duplicate the strings in the binary.",
+      "revId": "883fc8a5b0eecd2f3f3c08cae5e7e27ed12d6956",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "accad8e0_cd29eef2",
+        "filename": "src/include/nfs_req_result.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-03-21T13:48:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e251c7f_249c9d15",
       "revId": "883fc8a5b0eecd2f3f3c08cae5e7e27ed12d6956",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2025-03-20T15:02:38Z",
       "side": 1,
       "message": "This change is also in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1211833\n\nI will merge that first, and then this change will drop out of this patch when cherry picked.",
+      "revId": "883fc8a5b0eecd2f3f3c08cae5e7e27ed12d6956",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "778bae36_fd4c644a",
+        "filename": "src/monitoring/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-03-21T13:48:23Z",
+      "side": 1,
+      "message": "That\u0027s ok.",
+      "parentUuid": "e6fa0204_18dd1b06",
       "revId": "883fc8a5b0eecd2f3f3c08cae5e7e27ed12d6956",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
