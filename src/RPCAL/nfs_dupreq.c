@@ -1222,6 +1222,9 @@ void nfs_dupreq_finish(nfs_request_t *reqnfs, enum nfs_req_result rc)
 
 	PTHREAD_MUTEX_lock(&dv->dre_mtx);
 
+	/* the next duplicate handles different results separately */
+	dv->rc = rc;
+
 	assert(dv->res == reqnfs->res_nfs);
 
 	/* Now see if there are any requests waiting. */
@@ -1238,7 +1241,6 @@ void nfs_dupreq_finish(nfs_request_t *reqnfs, enum nfs_req_result rc)
 	}
 
 	dv->complete = true;
-	dv->rc = rc;
 
 	PTHREAD_MUTEX_unlock(&dv->dre_mtx);
 
