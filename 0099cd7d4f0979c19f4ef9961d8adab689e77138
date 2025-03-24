@@ -16,6 +16,23 @@
       "message": "Please help review these patches submitted together. Thanks!",
       "revId": "0099cd7d4f0979c19f4ef9961d8adab689e77138",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e633fb26_3a8fa9ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-24T16:58:20Z",
+      "side": 1,
+      "message": "This makes sense, but have you made sure lock ordering is OK? Moving a lock such that other locks are now taken while that lock is held makes me worry about lock inversion deadlock.",
+      "revId": "0099cd7d4f0979c19f4ef9961d8adab689e77138",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
