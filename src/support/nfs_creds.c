@@ -60,6 +60,11 @@
 #include "client_mgr.h"
 #include "idmapper_monitoring.h"
 
+#include "gsh_lttng/gsh_lttng.h"
+#if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
+#include "gsh_lttng/generated_traces/nfs_creds.h"
+#endif
+
 /* Export permissions for root op context */
 uint32_t root_op_export_options =
 	EXPORT_OPTION_ROOT | EXPORT_OPTION_ACCESS_MASK |
@@ -249,12 +254,22 @@ static void set_extended_groups(void)
 			     &op_ctx->caller_gdata)) {
 			LogInfo(COMPONENT_DISPATCH,
 				"Attempt to fetch managed_gids failed");
+			GSH_AUTO_TRACEPOINT(
+				nfs_creds, failed_attempt_fetch_managed_gids,
+				TRACE_INFO,
+				"Failed to fetch managed_gids for uid={}",
+				op_ctx->original_creds.caller_uid);
 			idmapper_monitoring__failure(IDMAPPING_UID_TO_GROUPLIST,
 						     IDMAPPING_PWUTILS);
 			/** @todo: do we really want to bail here? */
 			if (nfs_param.core_param.enable_rpc_cred_fallback) {
 				LogInfo(COMPONENT_DISPATCH,
 					"Attempt to fetch managed_gids failed for uid=%u, using cred info from rpc request",
+					op_ctx->original_creds.caller_uid);
+				GSH_AUTO_TRACEPOINT(
+					nfs_creds, use_rpc_cred_fallback,
+					TRACE_INFO,
+					"Attempt to fetch managed_gids failed for uid={}, using cred info from rpc request",
 					op_ctx->original_creds.caller_uid);
 				/* Use the original_creds group list */
 				op_ctx->creds.caller_glen =
@@ -265,6 +280,11 @@ static void set_extended_groups(void)
 			} else {
 				LogInfo(COMPONENT_DISPATCH,
 					"Attempt to fetch managed_gids failed for uid=%u",
+					op_ctx->original_creds.caller_uid);
+				GSH_AUTO_TRACEPOINT(
+					nfs_creds, failed_fetch_managed_gids,
+					TRACE_INFO,
+					"Attempt to fetch managed_gids failed for uid={}",
 					op_ctx->original_creds.caller_uid);
 				op_ctx->creds.caller_glen = 0;
 			}
@@ -556,6 +576,21 @@ nfsstat4 nfs_req_creds(struct svc_req *req)
 			: ((op_ctx->cred_flags & GARRAY_SQUASHED) != 0
 				   ? " (squashed)"
 				   : ""));
+
+	GSH_AUTO_TRACEPOINT(
+		nfs_creds, req_creds, TRACE_INFO,
+		"{} creds mapped to uid={} (squshed={}), gid={} (squashed={})",
+		req->rq_msg.cb_cred.oa_flavor, op_ctx->creds.caller_uid,
+		(op_ctx->cred_flags & UID_SQUASHED) != 0,
+		op_ctx->creds.caller_gid,
+		(op_ctx->cred_flags & GID_SQUASHED) != 0);
+
+	GSH_AUTO_TRACEPOINT(nfs_creds, req_creds_groups, TRACE_INFO,
+			    "extended groups={} (managed={}, squashed={})",
+			    TP_INT_ARR_TRUNCATED(op_ctx->creds.caller_garray,
+						 op_ctx->creds.caller_glen),
+			    (op_ctx->cred_flags & MANAGED_GIDS) != 0,
+			    (op_ctx->cred_flags & GARRAY_SQUASHED) != 0);
 
 	return NFS4_OK;
 }

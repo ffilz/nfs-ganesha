@@ -53,6 +53,11 @@
 #endif
 #include "idmapper_monitoring.h"
 
+#include "gsh_lttng/gsh_lttng.h"
+#if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
+#include "gsh_lttng/generated_traces/uid2grp.h"
+#endif
+
 /* Switch to enable or disable idmapping */
 extern bool idmapping_enabled;
 
@@ -129,10 +134,16 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 	idmapper_monitoring__external_request(IDMAPPING_USERNAME_TO_GROUPLIST,
 					      IDMAPPING_PWUTILS, ret != -1,
 					      &s_time, &e_time);
+	GSH_AUTO_TRACEPOINT(uid2grp, getgrouplist_call, TRACE_INFO,
+			    "getgrouplist returned {} for user: {}. ngroups={}",
+			    ret, TP_STR(user), ngroups);
 
 	if (ret == -1) {
 		LogEvent(COMPONENT_IDMAPPER,
-			 "getgrouplist for user: %s failed retrying", user);
+			 "getgrouplist for user: %s failed, retrying", user);
+		GSH_AUTO_TRACEPOINT(uid2grp, getgrouplist_failed, TRACE_INFO,
+				    "getgrouplist for user: {} failed, retrying",
+				    TP_STR(user));
 
 		gsh_free(groups);
 
@@ -151,6 +162,11 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 			LogWarn(COMPONENT_IDMAPPER,
 				"getgrouplist for user:%s failed, ngroups: %d",
 				user, ngroups);
+			GSH_AUTO_TRACEPOINT(
+				uid2grp, getgrouplist_retry_failed,
+				TRACE_WARNING,
+				"getgrouplist for user:{} failed, ngroups: {}",
+				TP_STR(user), ngroups);
 			gsh_free(groups);
 			return false;
 		}
@@ -162,6 +178,9 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 	}
 
 	idmapper_monitoring__user_groups(ngroups);
+	GSH_AUTO_TRACEPOINT(uid2grp, getgrouplist_result, TRACE_INFO,
+			    "getgrouplist for user: {} returned groups: {}",
+			    TP_STR(user), TP_INT_ARR(groups, ngroups));
 
 	if (ngroups != 0) {
 		/* Resize the buffer, if it fails, gsh_realloc will
@@ -297,6 +316,9 @@ static struct group_data *uid2grp_allocate_by_uid(uid_t uid)
 						      IDMAPPING_PWUTILS,
 						      retval == 0, &s_time,
 						      &e_time);
+		GSH_AUTO_TRACEPOINT(uid2grp, getpwuid_r_call, TRACE_INFO,
+				    "getpwuid_r returned: {} for uid: {}",
+				    retval, uid);
 
 		if (retval != ERANGE)
 			break;
@@ -314,11 +336,17 @@ static struct group_data *uid2grp_allocate_by_uid(uid_t uid)
 	if (retval != 0) {
 		LogEvent(COMPONENT_IDMAPPER,
 			 "getpwuid_r for uid %u failed, error %d", uid, retval);
+		GSH_AUTO_TRACEPOINT(uid2grp, getpwuid_r_failed, TRACE_INFO,
+				    "getpwuid_r for uid={} failed, retval={}",
+				    uid, retval);
 		goto out;
 	}
 	if (pp == NULL) {
 		LogInfo(COMPONENT_IDMAPPER,
 			"No matching password record found for uid %u", uid);
+		GSH_AUTO_TRACEPOINT(
+			uid2grp, no_passwd_record, TRACE_INFO,
+			"No matching password record found for uid {}", uid);
 		goto out;
 	}
 
