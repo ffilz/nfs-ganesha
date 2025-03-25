@@ -1160,7 +1160,9 @@ dupreq_status_t nfs_dupreq_start(nfs_request_t *reqnfs)
 			dk->refcnt = 2;
 
 			PTHREAD_MUTEX_lock(&drc->drc_mtx);
+			/* count both inflight and completed entries */
 			++(drc->size);
+			/* inflight entry is not added to the dupreq_q */
 			PTHREAD_MUTEX_unlock(&drc->drc_mtx);
 
 			LogFullDebug(
@@ -1186,19 +1188,21 @@ no_cache:
 /**
  * @brief Completes a request in the cache
  *
- * Completes a cache insertion operation begun in nfs_dupreq_start.
+ * Completes a cache insertion operation begun in nfs_dupreq_start by
+ * marking the entry completed and adding the entry into dupreq_q.
  * The refcnt of the corresponding duplicate request entry is unchanged
  * (ie, the caller must still call nfs_dupreq_rele).
  *
  * In contrast with the prior DRC implementation, completing a request
  * in the current implementation may under normal conditions cause one
- * or more cached requests to be retired.  Requests are retired in the
- * order they were inserted.  The primary retire algorithm is a high
- * water mark, and a windowing heuristic.  One or more requests will be
- * retired if the water mark/timeout is exceeded, and if a no duplicate
- * requests have been found in the cache in a configurable window of
- * immediately preceding requests.  A timeout may supplement the water mark,
- * in future.
+ * or more cached requests to be retired. Entries can be retired only
+ * when they complete and they are retired in the order they complete.
+ *
+ * The primary retire algorithm is a high water mark, and a windowing
+ * heuristic. One or more requests will be retired if the water
+ * mark/timeout is exceeded, and if a no duplicate requests have been
+ * found in the cache in a configurable window of immediately preceding
+ * requests. A timeout may supplement the water mark, in future.
  *
  * req->rq_u1 has either a magic value, or points to a duplicate request
  * cache entry allocated in nfs_dupreq_start.
