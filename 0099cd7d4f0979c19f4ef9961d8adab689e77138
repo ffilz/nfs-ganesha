@@ -33,6 +33,24 @@
       "message": "This makes sense, but have you made sure lock ordering is OK? Moving a lock such that other locks are now taken while that lock is held makes me worry about lock inversion deadlock.",
       "revId": "0099cd7d4f0979c19f4ef9961d8adab689e77138",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69469026_af7b272c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-03-25T02:00:09Z",
+      "side": 1,
+      "message": "I have looked at all the lock operations in nfs_dupreq.c. \n1. nfs_dupreq_start() acquires partition lock firstly and then dupreq entry lock. \n2. nfs_dupreq_finish() and nfs_dupreq_rele() doesnt\u0027 acquire these two locks nestedly.\n3. nfs_dupreq_delete() has something wrong with nfs_dupreq_start(), that is also what we which by this commit.",
+      "parentUuid": "e633fb26_3a8fa9ab",
+      "revId": "0099cd7d4f0979c19f4ef9961d8adab689e77138",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
