@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77689af7_8e7af5d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-03-25T02:22:41Z",
+      "side": 1,
+      "message": "Let\u0027s introduce the proeblem we met with. Currently, the fifo queue contains both the inflight entries and the completed entries. Andthe entry is retired no matter whether it is inflight or completed. If the inflight entry is retired and the retry request comes in, then the retry request will also be dispatched and processed by NFSv3 protocol layer and the underlying FSAL layer.\n\nConsidering following case:\n1. NFS client sends a NFSv3 CREATE(UNCHECKED). The file has existed and the CREATE will truncate the file according to ganesha\u0027s implementation in MDCache layer.\n2. Ganesha recevies and dispatches it to protocol layer and FSAL layer.\n3. FSAL layer is not available temporarily to handle this request.\n4. During this period, there are many other requests handled successfully and placed into the DRC. The entry of inflight CREATE is retired.\n5. Client timeout and re-sends the CREATE request.\n6. Ganesha finds no entry of the request from the hash table and it also dispatches the CREATE.\n7. After some seconds, FSAL layer recovers and truncates the file. NFS client recevies the reply.\n8. NFS client sends write to the file quickly.\n9. There will be a write and a inflight CREATE(truncate). The write maybe lost due to the truncate.\n\nThe typeical issue of lost write due to retried truncate did happen in our practice. We expect that DRC layer can make sure that only one of the same retried requests is dispatched to the protocol and FSAL layer at the same time. So we change the code to only retire completed DRC entries.\n\nI also checked the related implementation of DRC of linux nfsd. It also only retires completed entries.\n\n\nBTW, from the comment of L423 in nfs_dupreq.c, the queue is marked as \"completed queue\". However, the infight entry is added into the queue at nfs_dupreq_start(), which conflicts with the comment.",
+      "parentUuid": "930d4fbb_d380f37f",
+      "revId": "ed6d5b4725aba953b556ec73fddd997843cd1d20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f13a5709_74652380",
         "filename": "src/RPCAL/nfs_dupreq.c",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2025-03-24T16:55:21Z",
       "side": 1,
       "message": "Hmm should we still increment the size?",
+      "revId": "ed6d5b4725aba953b556ec73fddd997843cd1d20",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe805af_3140928b",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-03-25T02:22:41Z",
+      "side": 1,
+      "message": "Yes. This size take accouts for all entries, which controls whether to retire.",
+      "parentUuid": "4b379b6d_484f58b6",
       "revId": "ed6d5b4725aba953b556ec73fddd997843cd1d20",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
