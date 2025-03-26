@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92777138_09b1c98c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-26T15:57:01Z",
+      "side": 1,
+      "message": "This should be in the man pages/wiki\n\nGood question, do we have an RDMA man page for Ganesha?",
+      "parentUuid": "23af553b_d48c2f88",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 9
+      },
+      "revId": "1fa0b3c9430e50dace5d8d8694705b22ebcab41b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41200d2b_637434ec",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59c211b1_b8edf3c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-26T15:57:01Z",
+      "side": 1,
+      "message": "Hmm, we don\u0027t actually validate the transports (we do the protocols)... We should do so, marked at least a couple places to check.",
+      "parentUuid": "41200d2b_637434ec",
+      "revId": "1fa0b3c9430e50dace5d8d8694705b22ebcab41b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c45404a_825807b8",
         "filename": "src/support/exports.c",
         "patchSetId": 1
@@ -54,6 +96,24 @@
       "writtenOn": "2025-03-25T15:59:49Z",
       "side": 1,
       "message": "If clang-format will allow it, please put CONFIG_LIST_EOL on a new line\n\nAlso, does this have to be in an #ifdef USE_RDMA?",
+      "revId": "1fa0b3c9430e50dace5d8d8694705b22ebcab41b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79bf6e8f_df4069a8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-03-26T15:57:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c45404a_825807b8",
       "revId": "1fa0b3c9430e50dace5d8d8694705b22ebcab41b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
