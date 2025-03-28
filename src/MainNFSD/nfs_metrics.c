@@ -212,13 +212,13 @@ static void register_nfsv4_operation_metrics(nfs_opnum4 opcode,
 
 	nfsv4_op_latency[opcode][statcode_index] =
 		monitoring__register_histogram(
-			"nfsv4__op_latency",
+			"nfs_nfsv4__op_latency",
 			METRIC_METADATA("NFSv4 Operations Latency",
 					METRIC_UNIT_MILLISECOND),
 			labels, ARRAY_SIZE(labels), monitoring__buckets_exp2());
 
 	nfsv4_op_count[opcode][statcode_index] = monitoring__register_counter(
-		"nfsv4__op_count",
+		"nfs_nfsv4__op_count",
 		METRIC_METADATA("NFSv4 Operations Counter", METRIC_UNIT_NONE),
 		labels, ARRAY_SIZE(labels));
 }
@@ -239,7 +239,7 @@ static void register_dropped_gss_requests_count_metric(void)
 	const metric_label_t labels[] = {};
 
 	dropped_gss_requests_count = monitoring__register_counter(
-		"nfsv4__dropped_gss_requests_count",
+		"nfs_nfsv4__dropped_gss_requests_count",
 		METRIC_METADATA("Number of dropped rpcsec_gss requests",
 				METRIC_UNIT_NONE),
 		labels, ARRAY_SIZE(labels));
@@ -250,7 +250,7 @@ static void register_compound_operation_metrics(void)
 	const metric_label_t empty_labels[] = {};
 
 	compound_ops_count_metric = monitoring__register_histogram(
-		"compound__ops_count",
+		"nfs_compound__ops_count",
 		METRIC_METADATA("Number of Operations in a Compound",
 				METRIC_UNIT_NONE),
 		empty_labels, ARRAY_SIZE(empty_labels),
@@ -263,7 +263,7 @@ static void register_compound_operation_metrics(void)
 			nfsstat4_to_str(index_to_nfsstat4[statcode_index])) };
 		compound_latency_metric[statcode_index] =
 			monitoring__register_histogram(
-				"compound__latency",
+				"nfs_compound__latency",
 				METRIC_METADATA("Compound Latency Histogram",
 						METRIC_UNIT_MILLISECOND),
 				labels, ARRAY_SIZE(labels),
@@ -300,17 +300,17 @@ static void register_rpcs_metrics(void)
 	const metric_label_t labels[] = {};
 
 	rpcs_received_total = monitoring__register_counter(
-		"rpcs_received_total",
+		"nfs_rpcs_received_total",
 		METRIC_METADATA("Number of NFS requests received",
 				METRIC_UNIT_NONE),
 		labels, ARRAY_SIZE(labels));
 	rpcs_completed_total = monitoring__register_counter(
-		"rpcs_completed_total",
+		"nfs_rpcs_completed_total",
 		METRIC_METADATA("Number of NFS requests completed",
 				METRIC_UNIT_NONE),
 		labels, ARRAY_SIZE(labels));
 	rpcs_inflight = monitoring__register_gauge(
-		"rpcs_in_flight",
+		"nfs_rpcs_in_flight",
 		METRIC_METADATA("Number of NFS requests received or in flight.",
 				METRIC_UNIT_NONE),
 		labels, ARRAY_SIZE(labels));
@@ -338,9 +338,9 @@ void nfs_metrics__nfs3_request(uint32_t proc, nsecs_elapsed_t request_time,
 {
 	const char *const version = "nfs3";
 	const char *const operation = nfsproc3_to_str(proc);
-	const char *const status_label = result == NFS_REQ_OK
-					 ? nfsstat3_to_str(nfs_status)
-					 : nfs_req_result_to_str(result);
+	const char *const status_label =
+		result == NFS_REQ_OK ? nfsstat3_to_str(nfs_status)
+				     : nfs_req_result_to_str(result);
 
 	dynamic_metrics__observe_nfs_request(operation, request_time, version,
 					     status_label, export_id,
