@@ -165,7 +165,7 @@ PrometheusExposer::PrometheusExposer(prometheus::Registry &registry)
 	: registry_(registry)
 	, scrapingLatencies_(
 		  prometheus::Builder<HistogramInt>()
-			  .Name("monitoring__scraping_latencies")
+			  .Name("nfs_monitoring__scraping_latencies")
 			  .Help("Time duration of entire registry scraping [ms].")
 			  .Register(registry))
 	, successLatencies_(scrapingLatencies_.Add({ { kStatus, kSuccess } },
