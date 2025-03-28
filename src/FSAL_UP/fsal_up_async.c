@@ -420,7 +420,8 @@ static void queue_cbgetattr(struct fridgethr_context *ctx)
 	(void)cbgetattr_impl(args->obj, args->clid, args->ctx_export);
 
 	args->obj->obj_ops->put_ref(args->obj);
-	dec_client_id_ref(args->clid);
+	if(valid_lease(args->clid, false))
+		dec_client_id_ref(args->clid);
 	put_gsh_export(args->ctx_export);
 
 	gsh_free(args);
