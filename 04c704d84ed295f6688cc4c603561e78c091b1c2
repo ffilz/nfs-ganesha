@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c18238_6796a9ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2025-03-31T16:39:16Z",
+      "side": 1,
+      "message": "I\u0027m generally not a fan of tracepoints on error, unless the error is expected to be too frequent for logging.  What\u0027s the justification for tracepoints in error cases?",
+      "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c4285c_a6e2d1f1",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2025-03-31T16:39:16Z",
+      "side": 1,
+      "message": "Do these need to be tracepoints?  They already log (and at INFO), and errors should be infrequent, right?",
+      "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
