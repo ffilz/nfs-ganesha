@@ -1,0 +1,19 @@
+# To generate the final alert.yml with a configurable hang window, run:
+# export HANG_WINDOW=2m(can be configured)
+# envsubst < prometheus.alert.yml > alert.yml
+
+groups:
+- name: ganesha-alerts
+  rules:
+  - alert: GaneshaPotentialHang
+    expr: |
+      increase(rpcs_received_total[$HANG_WINDOW]) >= 1
+      and
+      rate(rpcs_completed_total[$HANG_WINDOW]) == 0
+    for: $HANG_WINDOW
+    labels:
+      severity: critical
+    annotations:
+      summary: "Ganesha may be hung"
+      description: "RPCs are being received but none are completing for the past $HANG_WINDOW — possible hang state."
+
