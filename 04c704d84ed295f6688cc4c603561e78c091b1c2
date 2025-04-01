@@ -33,6 +33,24 @@
       "message": "Do these need to be tracepoints?  They already log (and at INFO), and errors should be infrequent, right?",
       "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ddb5bbb_fc769e10",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2025-04-01T05:32:04Z",
+      "side": 1,
+      "message": "The main reason we are adding these is that we are shifting more and more to work with traces, since they allow getting high frequency information. \nThis print specifiaclly should not be high frequency, but there is value for us to have important prints in the same place - So we don\u0027t have to go from traces to logs and corss-reference. This makes using traces easier and at no cost to anyone not using them (they don\u0027t compile if you disable it). \n\nWe only try to add these to specific code flows that are more in focus for us and are not highly visible now, not to the whole code base.",
+      "parentUuid": "b2c4285c_a6e2d1f1",
+      "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
