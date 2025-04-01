@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08cb88e0_bbebfee5",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-01T17:10:55Z",
+      "side": 1,
+      "message": "You should make sure this change isn\u0027t part of your patch set. Not sure how that got in...",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b60e2ef6_8f861ca6",
         "filename": "src/include/nfs_metrics.h",
         "patchSetId": 3
@@ -20,6 +37,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78b6aa69_b4aabcaf",
+        "filename": "src/include/nfs_metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-01T17:10:55Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "b60e2ef6_8f861ca6",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd827fe3_ab579c58",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-01T17:10:55Z",
+      "side": 1,
+      "message": "As was mentioned, please use fullpath here",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7537ee99_5d1a9421",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-01T17:10:55Z",
+      "side": 1,
+      "message": "Need to wrap this. Are you using the git hooks with clang-format checks?",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5e811e_e99d1e14",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3093,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-01T17:10:55Z",
+      "side": 1,
+      "message": "clang-format this",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "288afa95_bc49466d",
         "filename": "src/support/server_stats.c",
         "patchSetId": 3
@@ -31,6 +117,24 @@
       "writtenOn": "2025-04-01T06:51:55Z",
       "side": 1,
       "message": "Could we keep using \"fullpath\" as the name? Otherwise, we have to understand what the new name mntpath means.",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "349f6a28_06e5326b",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-01T17:10:55Z",
+      "side": 1,
+      "message": "agreed",
+      "parentUuid": "288afa95_bc49466d",
       "revId": "360e186e57970c4caf14d6615786a00d350fc031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
