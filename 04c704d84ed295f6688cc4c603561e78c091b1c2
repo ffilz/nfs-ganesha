@@ -87,6 +87,24 @@
       "parentUuid": "558b0e8a_b50d9804",
       "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d32423_3e832f9b",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2025-04-01T18:25:20Z",
+      "side": 1,
+      "message": "There was a tracepoint that traces all logging, but it was very inefficient because it traces everything as a string. This kind of defeats the purpose of binary logging (at least half the purpose). \n\nIt is potentially possible to move all logs to traces, but it will probably be a significant amount of work. We can discuss it in the next Ganesha weekly. \nFor now, since this is not the first place where we have this duplication, and we don\u0027t really plan on adding more duplicate ones it would be nice if we could have these prints and then discuss the biger changes that will take time.",
+      "parentUuid": "0c860ac6_53ec6f86",
+      "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
