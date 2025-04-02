@@ -415,7 +415,7 @@ bool reread_config(void)
 
 	/* Set idmapping status based on directory_services configuration */
 	status = set_idmapping_status(
-		nfs_param.directory_services_param.idmapping_active);
+		nfs_param.directory_services_param.idmapping_active, true);
 	if (!status)
 		LogFatal(COMPONENT_CONFIG, "Failed to set idmapping status");
 
@@ -825,7 +825,8 @@ int init_server_pkgs(void)
 	}
 	/* Set idmapping status based on directory_services configuration */
 	if (!set_idmapping_status(
-		    nfs_param.directory_services_param.idmapping_active)) {
+		    nfs_param.directory_services_param.idmapping_active,
+		    false)) {
 		LogCrit(COMPONENT_INIT, "Failed to set idmapping status");
 		return -1;
 	}
