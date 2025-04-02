@@ -16,6 +16,23 @@
       "message": "Responding to comments, still really a lot to review here...",
       "revId": "0309195fecd50d841171bf80c7695803f8593160",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2708757b_15875375",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T22:06:02Z",
+      "side": 1,
+      "message": "Why is this a void *? If possible, it\u0027s best to avoid casting void * to another type.",
+      "revId": "0309195fecd50d841171bf80c7695803f8593160",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
