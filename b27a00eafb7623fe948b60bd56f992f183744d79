@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc8c3a2_b4a73c9f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "57e8062a_20c08e15",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41cd782a_cc93038c",
@@ -71,6 +89,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b609b7_4d04022f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Addressed in patchset 3",
+      "parentUuid": "19788129_9ff2476e",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32905e1f_585b04f9",
@@ -84,6 +120,24 @@
       "writtenOn": "2025-03-07T01:05:03Z",
       "side": 1,
       "message": "This function never seems to return false. Does it need a return value?",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c880877_dce1c53d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2539,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Yes, the function needs a return value (which will always be true) otherwise for next Export in the list this function will not be get called from foreach_gsh_export()",
+      "parentUuid": "32905e1f_585b04f9",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -141,6 +195,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e70f67e_7e990858",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2545,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 3",
+      "parentUuid": "18734eaf_5982b833",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72dbce8a_b010c2b0",
@@ -154,6 +226,24 @@
       "writtenOn": "2025-03-07T01:05:03Z",
       "side": 1,
       "message": "Same for this function",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f07e80_8008c4db",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "72dbce8a_b010c2b0",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -211,6 +301,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10649bd7_559b8275",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 3",
+      "parentUuid": "8cf8172f_4790674c",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "946f8992_6779a072",
@@ -224,6 +332,24 @@
       "writtenOn": "2025-03-07T01:05:03Z",
       "side": 1,
       "message": "This function never returns false also",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97079976_7fd0f230",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2586,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Yes, so as to continue processing of IO for next export/client in the list.",
+      "parentUuid": "946f8992_6779a072",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -258,6 +384,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "815d94ab_ca61c788",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc16533a_bc3d85f2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 3",
       "parentUuid": "815d94ab_ca61c788",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
@@ -298,6 +442,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f05df1_977e0aaf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2736,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 3",
+      "parentUuid": "d8860b12_7f326571",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd491e18_31842471",
@@ -333,6 +495,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5efa1a1e_23384422",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3003,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 3",
+      "parentUuid": "dd491e18_31842471",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4181ce22_d4715471",
@@ -363,6 +543,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "4181ce22_d4715471",
+      "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb9e3e8_21358f35",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3154,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 3",
       "parentUuid": "4181ce22_d4715471",
       "revId": "b27a00eafb7623fe948b60bd56f992f183744d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"

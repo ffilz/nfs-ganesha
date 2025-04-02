@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81cfae02_4ce484b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Updated to export",
+      "parentUuid": "0eb9088b_1bdd0073",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a63a00e_28c79a7d",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Please rebase and make sure the curent patch passes clang-format and checkpatch\n\nPlease address all the unresolved comments",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e04928ae_f1bd1185",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Rebased with latest tip code, Done",
+      "parentUuid": "5a63a00e_28c79a7d",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -87,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ca2ee41_4a477178",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "g_qos_lock is initialized in qos_init() function.",
+      "parentUuid": "75a35dc3_2cf490e6",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9450b226_633fe0b0",
@@ -100,6 +154,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Please call SetNameFunction here, I\u0027d suggest naming the two threads \"QOS_read\" and \"QOS_write\" based on op_type.",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab1e648_1169e526",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2650,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, added SetNameFunction() in qos_thread.",
+      "parentUuid": "9450b226_633fe0b0",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -121,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f73f1d09_5d30694e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2674,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3cac16e_15ab5946",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29217be6_09c99bed",
@@ -134,6 +224,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Rename for clarity, or just eliminate by passing (void *) type instead of pointer to type",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2554fade_5b5ea7d8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2675,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29217be6_09c99bed",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -155,6 +263,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8402a242_ce90ea67",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2694,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Missed this, new patch set corrected.",
+      "parentUuid": "3609e3c9_f2888ddd",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "666939cb_9e8ad561",
@@ -168,6 +294,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Instead of passing a reference, you could just pass (void *) i\n\nIt would also be a bit handy of this called out QOS_READ or QOS_WRITE explicitly",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41da95cd_52aa3175",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "666939cb_9e8ad561",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -189,6 +333,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd51f94_0c2ece17",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2698,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Thread is started only if the global gonfig is enabled, and global config values for QOS are not run time configurable.\nSo once the QOS enabled in global config indicates QOS thread needs to be running state.",
+      "parentUuid": "b1cce5f1_9635923d",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "408b7c77_9b588ae6",
@@ -202,6 +364,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "These config options need to be documented in \n\nsrc/doc/man/ganesha-export-config.rst\nand\nsrc/config_samples/config.txt",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "289b7220_f1443730",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "408b7c77_9b588ae6",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -377,6 +557,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "These options need to be documented in a man page (.rst), probably a new one?\n\nAlso in src/config_samples/config.txt",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ee2429_7653b318",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Added new ManPage ganesha-qos-config.rst",
+      "parentUuid": "88338e07_8915b3d0",
       "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

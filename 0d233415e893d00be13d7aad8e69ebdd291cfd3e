@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a9a514e_d35541e9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "It was initally // only , but checkpatch given error so to not use \"//\".\n\n\nERROR: do not use C99 // comments\n+// SPDX-License-Identifier: LGPL-3.0-or-later\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1206998/2..3/src/MainNFSD/nfs_qos.c#1\npatchset2-\u003epatchset3",
+      "parentUuid": "23866f0d_78ce739f",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c100461c_adafa63d",
@@ -81,6 +99,24 @@
         "id": 1003571
       },
       "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c100461c_adafa63d",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4fe3380_a18a7306",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "c100461c_adafa63d",
@@ -123,6 +159,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39a6fee6_37aca9d0",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c1defc3_ece61dfa",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "825dd77f_89e68271",
@@ -158,6 +212,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4115de92_8b36674d",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825dd77f_89e68271",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d3ed35f_e0db0e85",
@@ -171,6 +243,24 @@
       "writtenOn": "2025-03-11T18:53:09Z",
       "side": 1,
       "message": "Are you sure we should clear the flags? What if this read still needs rescheduling?",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fae5fae_2cda0ff8",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Yes we need to clear the flag, because once IO is resumed from the QOS, that IO should not enter QOS again, should get in write_resume and follow the default path(Non QOS path) on rescheduling.",
+      "parentUuid": "6d3ed35f_e0db0e85",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -205,6 +295,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Acknowledged",
+      "parentUuid": "b8ed0e7f_2cc3d7c5",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc0217a_6146e828",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "b8ed0e7f_2cc3d7c5",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
@@ -245,6 +353,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "506eb170_247a2335",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74c8bd9c_cfbaeaa1",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "891f22a3_6de50340",
@@ -275,6 +401,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Acknowledged",
+      "parentUuid": "891f22a3_6de50340",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab17206_28a162d3",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "891f22a3_6de50340",
       "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
@@ -343,6 +487,24 @@
         "id": 1003571
       },
       "writtenOn": "2025-03-11T18:53:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eeafd839_43463c02",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7273f062_ae37a612",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "eeafd839_43463c02",

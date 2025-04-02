@@ -70,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ab5dac_2b6305d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "We do stop epoll in case of only Quota exhaust.\nFor BW and OPS limit we don\u0027t because failing or telling the client to retry the IO will put pressure on N/W as well. So best way is to put back pressure on Client outstanding IO\u0027s.\n\nAvailable options for this.\nSince current QOS implementation is for nfs4 and above, setting the nfs41_session-\u003enb_slots limit(from 64) to acceptable number(32,16,8) based on number of clients which will be connecting(max_clients) and available ram of system should help.",
+      "parentUuid": "d4e18347_5aca0cde",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d7613d2_8c0a3f49",
@@ -105,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d74ad82_4b51edf7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Caller of this function(copy_gsh_export) already holds the lock PTHREAD_RWLOCK_wrlock(\u0026dest-\u003eexp_lock).\nAnd here we are copying only the values(new QOS values), if the structure already exists(i.e QOS is enabled for that specific export/client).",
+      "parentUuid": "0d7613d2_8c0a3f49",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "650e1096_f905e57c",
@@ -118,6 +154,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Same locking question",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac92c35_701452ca",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, Already taken care by the caller.",
+      "parentUuid": "650e1096_f905e57c",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -157,6 +211,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e744507_4f40b357",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 2",
+      "parentUuid": "132bddfe_2a3a396c",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e3e4775_c4809b4b",
@@ -170,6 +242,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Is there any reason not to use the glist functions for list manipulation? The code is easier to read when we use common list manipulation.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e57e54e_133e6335",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "We have plans to move the existing linklist local implementation to glist.\nSince currently the changes are quiet large, I would say will bring those glist changes in different set of patch in future(new commit id).\n\nThings already in plan :\n1. Moving current list manipulation implementation to glist.\n2. Independent locking for BW, QUOTA, and IOPS.\n3. Will try explore the possibilities of lockless implementation.\n4. Generic structure for QosExport and QosClient (currently these are 2 different structures).\netc.\n\nPlanned things are all going to be gradual changes (Not one shot).",
+      "parentUuid": "2e3e4775_c4809b4b",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -226,6 +316,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8b181e_59fec4a2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 2",
+      "parentUuid": "672c27cb_0252d661",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76bf6554_879c84d6",
@@ -278,6 +386,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5fc0692_035da01f",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 2. Corrected in all the places required.\nExport in place of Share.",
+      "parentUuid": "17d9cb75_226d3335",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc27ed54_0f5600ed",
@@ -308,6 +434,24 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "bc27ed54_0f5600ed",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da423a81_6443b752",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 2.\nUpdated the names to be more descriptive.",
       "parentUuid": "bc27ed54_0f5600ed",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
@@ -348,6 +492,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9197ba78_27069b4e",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Current upper limits are set for 4-GigaBytesPerSecond.\nWill update the upper limits to 100-GigaBytesPerSecond in the next patchSet.",
+      "parentUuid": "46287497_784dd043",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "509f6989_24e3767a",
@@ -361,6 +523,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Some thoughts on the structures below:\n\n1. Historically we have had a preference to use \"struct xyx\" instead of a typdef to \"xyz_t\"\n\n2. It seems like some code could be simplified by merging these two structures and using a union for the bits that are separate by client/export",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08eeee2_425a75d9",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged.\n\nWe have plans to move the existing linklist local implementation to glist.\nSince current changes are quiet large, I would say, will bring glist changes in different set of patch in future(new commit id).\n\nThings already in plan :\n1. Moving current list manipulation implementation to glist.\n2. Independent locking for BW, QUOTA, and IOPS.\n3. Will try explore the possibilities of lockless implementation.\n4. Generic structure for QosExport and QosClient (currently these are 2 different structures). Generic structure already in place at nfs_qos.h:+209\netc.\n\nPlanned things are all going to be gradual changes (Not one shot).",
+      "parentUuid": "509f6989_24e3767a",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -401,6 +581,30 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "388056da_78e4bacd",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 13
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec0495ec_fa0a5394",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 2",
       "parentUuid": "388056da_78e4bacd",
       "range": {
         "startLine": 127,
@@ -459,6 +663,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abfc4793_ce06c057",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 2",
+      "parentUuid": "c4a22fe7_ecd23d73",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 22
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c1d01c6_ca05fea3",
@@ -495,6 +723,30 @@
       "writtenOn": "2025-03-18T18:12:55Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "9c1d01c6_ca05fea3",
+      "range": {
+        "startLine": 152,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b8a4651_f3cd8a7b",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Acknowledged, addressed in patchset 2",
       "parentUuid": "9c1d01c6_ca05fea3",
       "range": {
         "startLine": 152,
@@ -559,6 +811,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae45c12_df484208",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com\nI have noted this, will make sure to change it in next set of patches.",
+      "parentUuid": "c7b148ce_574e14c0",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8365f42_efabffe1",
@@ -576,6 +846,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f85f686_93c727ba",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2169,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Ack, Done.\nremoved from EXPORT_DEFAULTS",
+      "parentUuid": "f8365f42_efabffe1",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c96da9b5_616624ce",
@@ -589,6 +877,24 @@
       "writtenOn": "2025-02-24T23:39:48Z",
       "side": 1,
       "message": "Does commit actually handle updating the QOS params? How does the code handle that?\n\nNote that the FSAL params has as specific update commit and the client blocks are copied, but the copy is done under a lock to be seamless.",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ec3b48b_ff90d635",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
+      "side": 1,
+      "message": "Yes, Commit handles the updating of QOS params by creating new QOS values structure.  and later in the code flow qos_gsh_copy_mem() gets called, which will copy the new values to older structure.",
+      "parentUuid": "c96da9b5_616624ce",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -621,6 +927,24 @@
         "id": 1003571
       },
       "writtenOn": "2025-03-18T18:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0673a73_7776ec43",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b23c9f36_d5cb9e28",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2399,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-02T14:49:55Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "c0673a73_7776ec43",
