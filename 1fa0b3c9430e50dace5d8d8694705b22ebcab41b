@@ -48,6 +48,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab3993c4_fdfced86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-02T14:52:21Z",
+      "side": 1,
+      "message": "This patch introduces RDMA connection management, allowing users to mount the export with the RDMA option.\n\nSupported Features:\n- Access to the mounted directory, including listing files and directories within the export.\n- Read operation is supported, except when opening a file using the VIM editor.\n\nNot Supported:\n- Read operations when files are opened with the VIM editor.\n- Write \u0026 other file system operations.\n- Complete destroy path functionality.\n\nA patch review (PR) for the features currently not supported will be raised shortly.\n\n\n\nNFS Ganesha doesn\u0027t have RDMA man pages. And the subsequent patches are coming soon for the not supported features. Once it is done, we will update the wiki with all the supported features for RDMA. \nSince we don\u0027t want to push the big changes in a single patch, we decided to break it down w.r.t the functionalities.",
+      "parentUuid": "23af553b_d48c2f88",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 9
+      },
+      "revId": "1fa0b3c9430e50dace5d8d8694705b22ebcab41b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41200d2b_637434ec",
@@ -83,6 +107,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b818b02_fcb1505a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-02T14:52:21Z",
+      "side": 1,
+      "message": "Since RDMA is code not fully functional, we have disabled it with _USE_NFS_RDMA default compile time flag.",
+      "parentUuid": "41200d2b_637434ec",
+      "revId": "1fa0b3c9430e50dace5d8d8694705b22ebcab41b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c45404a_825807b8",
@@ -111,6 +153,24 @@
         "id": 1003571
       },
       "writtenOn": "2025-03-26T15:57:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c45404a_825807b8",
+      "revId": "1fa0b3c9430e50dace5d8d8694705b22ebcab41b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f9547f9_936d2bdb",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-02T14:52:21Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "3c45404a_825807b8",
