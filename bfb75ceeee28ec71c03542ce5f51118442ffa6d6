@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f22a585_cd752958",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T17:59:45Z",
+      "side": 1,
+      "message": "Is there a reason to change from IPv6 to IPv4 address?",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "218788ac_2207a11f",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T17:59:45Z",
+      "side": 1,
+      "message": "Should 4.2 also be added?",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3168af2_ad781639",
         "filename": "src/support/exports.c",
         "patchSetId": 2
@@ -31,6 +65,23 @@
       "writtenOn": "2025-03-26T15:57:01Z",
       "side": 1,
       "message": "Hmm, we should check transports here (including RDMA) also...",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "852bd87f_aba3f1f1",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T17:59:45Z",
+      "side": 1,
+      "message": "We do support 4.2 so shouldn\u0027t we include it?",
       "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
