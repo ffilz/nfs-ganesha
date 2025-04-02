@@ -353,6 +353,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "425dda81_1aeb248d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2698,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T20:55:46Z",
+      "side": 1,
+      "message": "Right, but on SIGTERM we do try and shut down all threads in an appropriate order rather than letting them die when the process exits. It does help valgrind analysis assure no memory leaks. Also, if this thread can trigger any activity, we don\u0027t want it firing something off after other resources it needs have already been shut down (not just threads, but data structures).",
+      "parentUuid": "afd51f94_0c2ece17",
+      "revId": "cd3bde61b7500fa3c788408f811282127430f3f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "408b7c77_9b588ae6",
         "filename": "src/support/exports.c",
         "patchSetId": 4

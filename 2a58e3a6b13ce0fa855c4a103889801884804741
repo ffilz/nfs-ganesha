@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ce7cad3_5976388d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T20:55:46Z",
+      "side": 1,
+      "message": "OK, so it is locked, but a request in process that might utilize the QOS parameters, what serialization is there so the other thread doesn\u0027t get an inconsistent value?\n\nA possible answer is that the CPU does atomic read of integer values which is fine as long as only one such value is used in decision making. The problem arises if multiple values need to be updated atomically.\n\nStill, it is preferable to be explicit with atomic operations. Without them, Coverity might analyze that value is updated under lock but read without lock.",
+      "parentUuid": "7d74ad82_4b51edf7",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "650e1096_f905e57c",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 1
@@ -260,6 +278,24 @@
       "side": 1,
       "message": "We have plans to move the existing linklist local implementation to glist.\nSince currently the changes are quiet large, I would say will bring those glist changes in different set of patch in future(new commit id).\n\nThings already in plan :\n1. Moving current list manipulation implementation to glist.\n2. Independent locking for BW, QUOTA, and IOPS.\n3. Will try explore the possibilities of lockless implementation.\n4. Generic structure for QosExport and QosClient (currently these are 2 different structures).\netc.\n\nPlanned things are all going to be gradual changes (Not one shot).",
       "parentUuid": "2e3e4775_c4809b4b",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e2ce55_35734812",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T20:55:46Z",
+      "side": 1,
+      "message": "It would be preferable to not introduce new list code not using glist upstream, but it at least should be resolved before we tage V7.0.",
+      "parentUuid": "3e57e54e_133e6335",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -831,6 +867,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a9ca2f1_27b4ba46",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T20:55:46Z",
+      "side": 1,
+      "message": "Since this has config implications, it really should go upstream the preferred way.",
+      "parentUuid": "2ae45c12_df484208",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8365f42_efabffe1",
         "filename": "src/support/exports.c",
         "patchSetId": 1
@@ -895,6 +949,24 @@
       "side": 1,
       "message": "Yes, Commit handles the updating of QOS params by creating new QOS values structure.  and later in the code flow qos_gsh_copy_mem() gets called, which will copy the new values to older structure.",
       "parentUuid": "c96da9b5_616624ce",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7657aa_761ea9c8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-02T20:55:46Z",
+      "side": 1,
+      "message": "I guess I\u0027m still uncomfortable with doing this export update without the synchronization of locks protecting the structure from read while updating, or atomic values the way all the other config update stuff works. I don\u0027t want to introduce surprises or more Coverity issues.",
+      "parentUuid": "9ec3b48b_ff90d635",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
