@@ -168,8 +168,6 @@ static void idmapper_clear_owner_domain(void)
  */
 bool set_idmapping_status(bool status_enabled)
 {
-	bool rc;
-
 	/* Acquire mutex to prevent interference by another invocation */
 	mutex_lock(&idmapping_status_lock);
 
@@ -182,14 +180,6 @@ bool set_idmapping_status(bool status_enabled)
 	}
 
 	if (status_enabled) {
-		/* Set the domainname for idmapping */
-		rc = idmapper_set_owner_domain();
-		if (!rc) {
-			mutex_unlock(&idmapping_status_lock);
-			LogWarn(COMPONENT_IDMAPPER,
-				"Could not set owner-domain while enabling Idmapping");
-			return false;
-		}
 		idmapping_enabled = true;
 		mutex_unlock(&idmapping_status_lock);
 		LogInfo(COMPONENT_IDMAPPER, "Idmapping is now enabled");
@@ -291,6 +281,8 @@ static void idmapper_reaper_init(void)
  */
 bool idmapper_init(void)
 {
+	bool rc;
+
 	PTHREAD_RWLOCK_init(&winbind_auth_lock, NULL);
 	PTHREAD_RWLOCK_init(&gc_auth_lock, NULL);
 	PTHREAD_RWLOCK_init(&dns_auth_lock, NULL);
@@ -299,6 +291,13 @@ bool idmapper_init(void)
 	idmapper_cache_init();
 	idmapper_negative_cache_init();
 	idmapper_reaper_init();
+
+	rc = idmapper_set_owner_domain();
+	if (!rc) {
+		LogWarn(COMPONENT_IDMAPPER,
+			"Unable to set owner-domain required for idmapping.");
+		return false;
+	}
 
 	idmapper_cleanup_element.clean = idmapper_cleanup;
 	RegisterCleanup(&idmapper_cleanup_element);
