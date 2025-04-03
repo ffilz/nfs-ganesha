@@ -120,6 +120,24 @@
       "parentUuid": "852bd87f_aba3f1f1",
       "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea7813af_d974cf0c",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-03T21:10:33Z",
+      "side": 1,
+      "message": "Since 4.2 is just a bunch of optional features on top of 4.1, and the client defaults to 4.2, we should give serious consideration to qualifying on 4.2 sooner than later.\n\nThat said, it could be in a different patch.\n\nBut in that caae, we might be a bit more verbose in the comment.",
+      "parentUuid": "37e5d004_b4daf185",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
