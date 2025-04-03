@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca0d3e1_7d5c288e",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-03T17:36:52Z",
+      "side": 1,
+      "message": "​Till now, I have enabled the RDMA for v4.0 \u0026 v4.1 only. Maybe in the future we will try to enable it for v4.2 as well.",
+      "parentUuid": "218788ac_2207a11f",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3168af2_ad781639",
@@ -82,6 +100,24 @@
       "writtenOn": "2025-04-02T17:59:45Z",
       "side": 1,
       "message": "We do support 4.2 so shouldn\u0027t we include it?",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e5d004_b4daf185",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-03T17:36:52Z",
+      "side": 1,
+      "message": "When we qualify the RDMA support for v4.2, we will move out from the UNUSED macro.",
+      "parentUuid": "852bd87f_aba3f1f1",
       "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
