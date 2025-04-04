@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1766c5f_83b9f3c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Make these two lines WIP Transparent Recovery Prototype",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c870cd5_7b06d866",
         "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
         "patchSetId": 1
@@ -14,6 +31,24 @@
       "writtenOn": "2025-03-11T18:22:28Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t// update the clientid_cowner_map",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab85bf5d_67d8d47a",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "I assume this is temporary code. You can avoid upsetting checkpatch by using #if 0 to compile out a chunk of code.\n\nAlso, please make sure you are using the commit hooks so your patch conforms to clang-format and checpatch.",
+      "parentUuid": "2c870cd5_7b06d866",
       "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -343,6 +378,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa01249f_a91aba23",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "You will need to add the blank line (it really does help code readability)",
+      "parentUuid": "04c98e1a_ebc6f4e2",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73aa2980_3de84883",
         "filename": "src/SAL/CMakeLists.txt",
         "patchSetId": 1
@@ -371,6 +424,24 @@
       "writtenOn": "2025-03-11T18:22:28Z",
       "side": 1,
       "message": "ERROR: do not use C99 // comments\n+\t\t// different_owners",
+      "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ebab9e1_430ca2fd",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2940,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Please make sure to use /* */ comments",
+      "parentUuid": "0abe4932_4c21f691",
       "revId": "dcef8501d4f4820a9eb80b11da9b1e0bc36267c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

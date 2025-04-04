@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3035f7eb_5038332e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "A bucnh of comments up front.\n\nIn addition to the other comments, this effort would benefit from being divided into multiple patches. Consider at least:\n\n1 patch to add the new structures and functions that manipulate them\n\n1 patch to integrate all that into the existing code\n\nAlso, please make sure to rebase on current next, make sure the latest git commit hooks are installed, make sure the code conforms to the latest clang-format, and make sure checkpatch isn\u0027t complaining about anything.",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "344cac5c_a552cae3",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Unless Ganesha is somehow using this code, or we are using it in the CI, please leave this as OFF. Note that if you are building yourself and need it, you can specify turning it on in the cmake invocation, this is preferable to changing CMakeLists.txt files for local build purposes.",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f60cc11_4fe253d1",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "This will probably need a cmake option to enable/disable since it depends on another library.",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd2e227b_91c2f9bf",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "If this header file is used more globably, put it in src/include",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b33ba0_e1b9a958",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Please make sure this log message isn\u0027t in final patch",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4dab67_30b9f58e",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Where did bucket come from?\n\nAlso, this code block needs to be before dec_state_owner_ref",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48f9ecbf_b805b44d",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Please put declarations at the top of the function (a style preference that is not enforced by clang-format or checkpath, sorry...)",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf3b79f_31dcbb78",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "I presume the LogAlways is a temporary message, be careful that doesn\u0027t go in the final patch, or if it does, it\u0027s a LogDebug(COMPONENT_STATE",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c91a9e7_83f97f22",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1376,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure what compare functions for these exist, but don\u0027t use strcmp (they may have embeded NUL characters). Each of these should have compare functions available (even if you have to expose them)",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd7cffb9_3821e042",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Make sure you use the latest clang-format. Maybe you\u0027re based on old code, but the above definitely doesn\u0027t conform to the latest clang-format as currently configured.",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66572259_186e474f",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Make sure this change isn\u0027t part of the final patch. If we need a change here, we will address that in a separate patch.",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5790bc05_e4428a93",
+        "filename": "src/include/log_common.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:55:14Z",
+      "side": 1,
+      "message": "Let\u0027s not introduce a new component, please use COMPONENT_STATE",
+      "revId": "a7c4002a61a13b5257b0224d47323995e85a1ff6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
