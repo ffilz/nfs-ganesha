@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dea20f88_a874bc49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:29:15Z",
+      "side": 1,
+      "message": "Sorry for some confusion about export paths. There is an op_ctx_export_path function that uses either fullpath or pseudopath depending on the NFS_CORE_PARAM mount_path_pseudo config option. This function is used everywhere in Ganesha to report export paths for consistency. With that, just name all the parameters \"path\". Optionally, since it\u0027s always taken from op_ctx, don\u0027t pass it as a parameter, just call op_ctx_export_path when the path is actually needed.\n\nNote that function also uses a standard \"No Export\" string if the op context doesn\u0027t have an export attached.",
+      "revId": "b60d4d399d11b1505d064d5030b21bad30d2331c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b03fcab5_9a65b6d0",
+        "filename": "src/include/nfs_metrics.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:29:15Z",
+      "side": 1,
+      "message": "Name the parameter path, what we use depends on config whether we use fullpath or pseudo path.",
+      "revId": "b60d4d399d11b1505d064d5030b21bad30d2331c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

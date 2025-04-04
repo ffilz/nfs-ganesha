@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3bb5899_d43a11f5",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:29:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08cb88e0_bbebfee5",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b60e2ef6_8f861ca6",
@@ -72,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48ae1aaa_c11c0a43",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:29:15Z",
+      "side": 1,
+      "message": "Please just use path. See other comments for why.",
+      "parentUuid": "bd827fe3_ab579c58",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7537ee99_5d1a9421",
         "filename": "src/monitoring/include/dynamic_metrics.h",
         "patchSetId": 3
@@ -100,6 +136,24 @@
       "writtenOn": "2025-04-01T17:10:55Z",
       "side": 1,
       "message": "clang-format this",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8274f05_247b9222",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3093,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:29:15Z",
+      "side": 1,
+      "message": "Please make sure this conforms to the latest clang-format and then mark this done if it does.",
+      "parentUuid": "6f5e811e_e99d1e14",
       "revId": "360e186e57970c4caf14d6615786a00d350fc031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -135,6 +189,24 @@
       "side": 1,
       "message": "agreed",
       "parentUuid": "288afa95_bc49466d",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca04dd9_7cd70821",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-04T21:29:15Z",
+      "side": 1,
+      "message": "Actually, name the parameter just \"path\", and you need to use op_ctx_export_path function. That function will provide a \"No Export\" string if there is no export in the context.",
+      "parentUuid": "349f6a28_06e5326b",
       "revId": "360e186e57970c4caf14d6615786a00d350fc031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
