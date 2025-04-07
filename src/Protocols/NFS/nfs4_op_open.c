@@ -45,6 +45,8 @@
 #include "nfs_creds.h"
 #include "export_mgr.h"
 #include "nfs_rpc_callback.h"
+#include "bsd-base64.h"
+#include "../SAL/transparent_recovery/transparent_recovery.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -121,7 +123,8 @@ static nfsstat4 open4_create_fh(compound_data_t *data,
 
 static nfsstat4 open4_validate_claim(compound_data_t *data,
 				     open_claim_type4 claim,
-				     nfs_client_id_t *clientid, bool *grace_ref)
+				     nfs_client_id_t *clientid, bool *grace_ref,
+				     bool can_open)
 {
 	/* Return code */
 	nfsstat4 status = NFS4_OK;
@@ -131,7 +134,6 @@ static nfsstat4 open4_validate_claim(compound_data_t *data,
 		op_ctx->fsal_export, fso_grace_method);
 	/* do we need a reference on the current state of grace? */
 	bool take_ref = !fsal_grace_support;
-
 	switch (claim) {
 	case CLAIM_NULL:
 		if ((data->minorversion > 0) &&
@@ -142,6 +144,8 @@ static nfsstat4 open4_validate_claim(compound_data_t *data,
 	case CLAIM_FH:
 		if (data->minorversion == 0)
 			status = NFS4ERR_NOTSUPP;
+		if (can_open && nfs_get_grace_status(true))
+			want_grace = true;
 		break;
 
 	case CLAIM_DELEGATE_PREV:
@@ -173,7 +177,7 @@ static nfsstat4 open4_validate_claim(compound_data_t *data,
 	default:
 		status = NFS4ERR_INVAL;
 	}
-
+	LogAlways(COMPONENT_ALL, "want_grace: %i", want_grace);
 	if (status == NFS4_OK) {
 		if (take_ref) {
 			if (nfs_get_grace_status(want_grace)) {
@@ -1029,8 +1033,7 @@ retry_open_file:
 		/* Open upgrade */
 		LogFullDebug(COMPONENT_STATE, "Calling reopen2");
 
-		status = fsal_reopen2(file_obj, *file_state,
-				      openflags, true);
+		status = fsal_reopen2(file_obj, *file_state, openflags, true);
 
 		if (FSAL_IS_ERROR(status)) {
 			res_OPEN4->status = nfs4_Errno_status(status);
@@ -1354,11 +1357,44 @@ enum nfs_req_result nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		goto out2;
 	}
 
+	char *cowner;
+	char rhdlstr[MAX_LEN];
+	get_clid_maps_cowner(arg_OPEN4->owner.clientid, &cowner);
+
+	struct file_metadata *file;
+	struct open_info *open;
+	file = NULL;
+	fetch_file_md(bucket, data->current_obj->fsid.major,
+		      data->current_obj->fsid.minor, data->current_obj->fileid,
+		      file);
+	open = (struct open_info *)malloc(sizeof(struct open_info));
+	base64url_encode(owner->so_owner_val, owner->so_owner_len, rhdlstr,
+			 sizeof(rhdlstr));
+
+	open->fileid = data->current_obj->fileid;
+	open->open_owner = rhdlstr;
+	open->share_access = arg_OPEN4->share_access;
+	open->share_deny = arg_OPEN4->share_deny;
+
+	if (!file) {
+		file->fileid = data->current_obj->fileid;
+		persist_file_md(bucket, data->current_obj->fsid.major,
+				data->current_obj->fsid.minor, file);
+	}
+	// PROBLEM
+	bool can_open = true;
+	if (nfs_get_grace_status(true)) {
+		struct open_info *opens;
+		opens = NULL;
+		fetch_persisting_opens(bucket, file, opens);
+		can_open = !is_conflicting_open(opens, open);
+	}
+
 	/* Do the claim check here, so we can save the result in the
 	 * owner for NFSv4.0.
 	 */
-	res_OPEN4->status =
-		open4_validate_claim(data, claim, clientid, &grace_ref);
+	res_OPEN4->status = open4_validate_claim(data, claim, clientid,
+						 &grace_ref, can_open);
 	if (res_OPEN4->status != NFS4_OK) {
 		LogDebug(COMPONENT_NFS_V4, "open4_validate_claim failed");
 		goto out;
@@ -1423,9 +1459,8 @@ enum nfs_req_result nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 
 	res_OPEN4->OPEN4res_u.resok4.rflags |= OPEN4_RESULT_LOCKTYPE_POSIX;
 	if (nfs_param.nfsv4_param.preserve_unlinked &&
-	    op_ctx->fsal_export->exp_ops.fs_supports(
-			op_ctx->fsal_export,
-			fso_preserve_unlinked))
+	    op_ctx->fsal_export->exp_ops.fs_supports(op_ctx->fsal_export,
+						     fso_preserve_unlinked))
 		res_OPEN4->OPEN4res_u.resok4.rflags |=
 			OPEN4_RESULT_PRESERVE_UNLINKED;
 
@@ -1486,8 +1521,18 @@ out:
 	}
 
 out2:
+
 	if (grace_ref)
 		nfs_put_grace_status();
+
+	if (res_OPEN4->status == NFS4_OK) {
+		// PROBLEM
+		if (nfs_get_grace_status(true)) {
+			persist_open_info(grace_bucket, file, open);
+		} else
+			persist_open_info(bucket, file, open);
+	}
+	free(cowner);
 
 	/* Update the lease before exit */
 	if (data->minorversion == 0)

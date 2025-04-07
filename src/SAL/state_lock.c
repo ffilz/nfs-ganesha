@@ -55,6 +55,7 @@
 #include "gsh_lttng/generated_traces/lock.h"
 #endif
 #include "sal_metrics.h"
+#include "transparent_recovery/transparent_recovery.h"
 
 /**
  * @page state_lock_entry_locking state_lock_entry_t locking rule
@@ -294,9 +295,9 @@ static void log_entry_ref_count(const char *reason, state_lock_entry_t *le,
 			str_protocol(le->sle_protocol),
 			str_blocked(le->sle_blocked), le->sle_block_data,
 			le->sle_block_data ?
-				      str_block_type(
+				str_block_type(
 					le->sle_block_data->sbd_block_type) :
-				      str_block_type(STATE_BLOCK_NONE),
+				str_block_type(STATE_BLOCK_NONE),
 			le->sle_state, refcount, owner);
 	}
 }
@@ -633,7 +634,7 @@ void lock_entry_dec_ref(state_lock_entry_t *lock_entry)
 	int32_t refcount = atomic_dec_int32_t(&lock_entry->sle_ref_count);
 
 	LogEntryRefCount(refcount != 0 ? "Decrement sle_ref_count" :
-					       "Decrement sle_ref_count and freeing",
+					 "Decrement sle_ref_count and freeing",
 			 lock_entry, refcount);
 
 	assert(refcount >= 0);
@@ -2249,12 +2250,12 @@ state_status_t do_lock_op(struct fsal_obj_handle *obj, state_t *state,
 		"Reasons to quick exit fso_lock_support=%s fso_lock_support_async_block=%s overlap=%s",
 		fsal_export->exp_ops.fs_supports(fsal_export,
 						 fso_lock_support) ?
-			      "yes" :
-			      "no",
+			"yes" :
+			"no",
 		fsal_export->exp_ops.fs_supports(fsal_export,
 						 fso_lock_support_async_block) ?
-			      "yes" :
-			      "no",
+			"yes" :
+			"no",
 		overlap ? "yes" : "no");
 	if (!fsal_export->exp_ops.fs_supports(fsal_export, fso_lock_support) ||
 	    (!fsal_export->exp_ops.fs_supports(fsal_export,
@@ -2661,9 +2662,47 @@ state_status_t state_lock(struct fsal_obj_handle *obj, state_owner_t *owner,
 	state_block_data_t *block_data;
 	bool lock_granted;
 	bool lock_cancel;
+	bool grace_conflict;
+	struct lock_info *new_lock;
 
 	LOCK__REQUEST_AUTO_TRACEPOINT(lock, obj, lock_request_start, TRACE_INFO,
 				      "lock request started");
+
+	new_lock = (struct lock_info *)malloc(sizeof(struct lock_info));
+
+	struct file_metadata *file;
+	char rhdlstr[MAX_LEN];
+
+	base64url_encode(owner->so_owner_val, owner->so_owner_len, rhdlstr,
+			 sizeof(rhdlstr));
+	new_lock->lock_owner = rhdlstr;
+	new_lock->fileid = obj->fileid;
+	new_lock->start = lock->lock_start;
+	new_lock->length = lock->lock_length;
+	new_lock->type = lock->lock_type;
+
+	file = (struct file_metadata *)malloc(sizeof(struct file_metadata));
+	fetch_file_md(bucket, obj->fsid.major, obj->fsid.minor, obj->fileid,
+		      file);
+
+	if (!file) {
+		file->fileid = obj->fileid;
+		persist_file_md(bucket, obj->fsid.major, obj->fsid.minor, file);
+	}
+
+	if (nfs_get_grace_status(true)) {
+		struct lock_info *locks = NULL;
+
+		fetch_persisting_locks(bucket, file, locks);
+
+		grace_conflict = is_conflicting_lock(locks, new_lock);
+
+		if (grace_conflict) {
+			status = NFS4ERR_GRACE;
+			return status;
+		}
+	}
+
 	if (blocking != STATE_NON_BLOCKING) {
 		/* First search for a blocked request. Client can ignore the
 		 * blocked request and keep sending us new lock request again
@@ -2724,6 +2763,7 @@ state_status_t state_lock(struct fsal_obj_handle *obj, state_owner_t *owner,
 	}
 
 recheck_for_conflicting_entries:
+
 	glist_for_each_safe(glist, glist_n, &obj->state_hdl->file.lock_list)
 	{
 		found_entry = glist_entry(glist, state_lock_entry_t, sle_list);
@@ -2920,6 +2960,11 @@ recheck_for_conflicting_entries:
 				      status);
 
 	if (status == STATE_SUCCESS) {
+		if (nfs_get_grace_status(true)) {
+			persist_lock_info(grace_bucket, file, new_lock);
+		} else
+			persist_lock_info(bucket, file, new_lock);
+
 		/* Merge any touching or overlapping locks into this one */
 		LogEntry("FSAL lock acquired, merging locks for", new_entry);
 
@@ -2957,8 +3002,8 @@ recheck_for_conflicting_entries:
 		} else if (allow) {
 			/* Actively poll for the lock only for nlm locks. */
 			block_data->sbd_block_type = (protocol == LOCK_NLM) ?
-								   STATE_BLOCK_ASYNC :
-								   STATE_BLOCK_POLL;
+							     STATE_BLOCK_ASYNC :
+							     STATE_BLOCK_POLL;
 		} else {
 			/* Ganesha will attempt to grant the lock when
 			 * a conflicting lock is released.
@@ -3112,6 +3157,11 @@ state_status_t state_unlock(struct fsal_obj_handle *obj, state_t *state,
 				       nsm_state, lock);
 
 	STATELOCK_unlock(obj);
+
+	if (status == STATE_SUCCESS) {
+		/* delete the lock entry from the database */
+		// delete_persisting_lock(bucket, lock, owner, obj);
+	}
 
 	return status;
 }
