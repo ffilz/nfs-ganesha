@@ -578,7 +578,7 @@ typedef struct nfs_core_param {
 /**
  * @brief Default value for grace period
  */
-#define GRACE_PERIOD_DEFAULT 90
+#define GRACE_PERIOD_DEFAULT 900
 
 /**
  * @brief Default value of domainname.
