@@ -1306,6 +1306,14 @@ set(SYSTEM_LIBRARIES
   ${LIBURCU_LIB}
 )
 
+find_library(HIREDIS_LIBRARY hiredis REQUIRED)
+find_library(REDIS_PLUS_PLUS_LIBRARY redis++ REQUIRED)
+
+set(REDIS_LIBRARY
+  ${HIREDIS_LIBRARY}
+  ${REDIS_PLUS_PLUS_LIBRARY}
+)
+
 include_directories(${LIBURCU_INC})
 
 # Config file; make sure it doesn't clobber an existing one
