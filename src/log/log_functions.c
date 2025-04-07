@@ -1486,6 +1486,7 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_DBUS] = NIV_EVENT,
 	[COMPONENT_NFS_MSK] = NIV_EVENT,
 	[COMPONENT_XPRT] = NIV_EVENT,
+	[COMPONENT_MIGRATION] = NIV_EVENT
 };
 
 /* Active set of log levels */
@@ -1612,6 +1613,9 @@ struct log_component_info LogComponents[COMPONENT_COUNT] = {
 	[COMPONENT_XPRT] = {
 		.comp_name = "COMPONENT_XPRT",
 		.comp_str = "XPRT",},
+	[COMPONENT_MIGRATION] = {
+		.comp_name = "COMPONENT_MIGRATION",
+		.comp_str = "MIGRATION",},
 };
 
 void DisplayLogComponentLevel(log_components_t component, const char *file,
@@ -2071,6 +2075,8 @@ static struct config_item component_levels[] = {
 	CONF_INDEX_TOKEN("NFS_MSK", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_MSK,
 			 int),
 	CONF_INDEX_TOKEN("XPRT", NB_LOG_LEVEL, log_levels, COMPONENT_XPRT, int),
+	CONF_INDEX_TOKEN("MIGRATION", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MIGRATION, int),
 	CONFIG_EOL
 };
 

@@ -90,7 +90,8 @@ typedef enum log_components {
 	COMPONENT_DBUS,
 	COMPONENT_NFS_MSK,
 	COMPONENT_XPRT,
-	COMPONENT_COUNT
+	COMPONENT_MIGRATION,
+	COMPONENT_COUNT,
 } log_components_t;
 
 #endif

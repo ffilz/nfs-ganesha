@@ -1296,6 +1296,14 @@ if (NOT LIBURCU_INC)
 endif(NOT LIBURCU_INC)
 check_symbol_exists(urcu_ref_get_unless_zero urcu/ref.h HAVE_URCU_REF_GET_UNLESS_ZERO)
 
+find_library(HIREDIS_LIBRARY hiredis REQUIRED)
+find_library(REDIS_PLUS_PLUS_LIBRARY redis++ REQUIRED)
+
+set(REDIS_LIBRARY
+  ${HIREDIS_LIBRARY}
+  ${REDIS_PLUS_PLUS_LIBRARY}
+)
+
 # All the plumbing in the basement
 set(SYSTEM_LIBRARIES
   ${NTIRPC_LIBRARY}
@@ -1304,6 +1312,7 @@ set(SYSTEM_LIBRARIES
   ${KRB5_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   ${LIBURCU_LIB}
+  ${REDIS_LIBRARY}
 )
 
 include_directories(${LIBURCU_INC})
