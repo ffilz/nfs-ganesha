@@ -159,6 +159,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e3d2b0_feae6d0a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-09T13:16:28Z",
+      "side": 1,
+      "message": "Added the required locks as suggested.",
+      "parentUuid": "5ce7cad3_5976388d",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "650e1096_f905e57c",
@@ -296,6 +314,24 @@
       "side": 1,
       "message": "It would be preferable to not introduce new list code not using glist upstream, but it at least should be resolved before we tage V7.0.",
       "parentUuid": "3e57e54e_133e6335",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ad3c99_3509fb19",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-09T13:16:28Z",
+      "side": 1,
+      "message": "Updated all the list manupulation to glist. Done.",
+      "parentUuid": "98e2ce55_35734812",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -883,6 +919,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df6f6d21_8ae9afd1",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-09T13:16:28Z",
+      "side": 1,
+      "message": "Updated to enum string values as suggested  : New values : \"PE\", \"PC\", \"PEPC\"",
+      "parentUuid": "7a9ca2f1_27b4ba46",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8365f42_efabffe1",
@@ -967,6 +1021,24 @@
       "side": 1,
       "message": "I guess I\u0027m still uncomfortable with doing this export update without the synchronization of locks protecting the structure from read while updating, or atomic values the way all the other config update stuff works. I don\u0027t want to introduce surprises or more Coverity issues.",
       "parentUuid": "9ec3b48b_ff90d635",
+      "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81da293f_d75cdee5",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-09T13:16:28Z",
+      "side": 1,
+      "message": "Added the protecting lock",
+      "parentUuid": "ff7657aa_761ea9c8",
       "revId": "2a58e3a6b13ce0fa855c4a103889801884804741",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

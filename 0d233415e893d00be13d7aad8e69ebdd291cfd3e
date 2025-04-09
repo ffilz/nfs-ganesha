@@ -283,6 +283,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d7cc80f_62563567",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-09T13:16:28Z",
+      "side": 1,
+      "message": "QOS just tapping the IO and delaying the execution.\nSince this is done in ASYNC way, In QOS code we tried to keep the minimum possible diversion from the exiting flow.\nIf you see, the bypass flag is there in the default read path, QOS is just carrying that bit to resume path and making sure no unexpected suspense comesup later.\nAnd without this bypass flag, we have see some random crash also.",
+      "parentUuid": "25fb23cc_b7af8fe4",
+      "revId": "0d233415e893d00be13d7aad8e69ebdd291cfd3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8ed0e7f_2cc3d7c5",
