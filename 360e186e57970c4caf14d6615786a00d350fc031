@@ -124,6 +124,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e00b5c_2ef8d884",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-09T17:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48ae1aaa_c11c0a43",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7537ee99_5d1a9421",
@@ -137,6 +155,24 @@
       "writtenOn": "2025-04-01T17:10:55Z",
       "side": 1,
       "message": "Need to wrap this. Are you using the git hooks with clang-format checks?",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452df51e_2315309c",
+        "filename": "src/monitoring/include/dynamic_metrics.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-09T17:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7537ee99_5d1a9421",
       "revId": "360e186e57970c4caf14d6615786a00d350fc031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -194,6 +230,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6ac02f_022fe49c",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3093,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-09T17:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddbe6dab_7cc4c4c5",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "288afa95_bc49466d",
@@ -243,6 +297,24 @@
       "side": 1,
       "message": "Actually, name the parameter just \"path\", and you need to use op_ctx_export_path function. That function will provide a \"No Export\" string if there is no export in the context.",
       "parentUuid": "349f6a28_06e5326b",
+      "revId": "360e186e57970c4caf14d6615786a00d350fc031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7799ff_a09252ef",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-09T17:57:44Z",
+      "side": 1,
+      "message": "Please do use the op_ctx_export_path function instead.",
+      "parentUuid": "aca04dd9_7cd70821",
       "revId": "360e186e57970c4caf14d6615786a00d350fc031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
