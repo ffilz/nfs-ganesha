@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5fd7e15_a9fbff9c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-10T21:06:25Z",
+      "side": 1,
+      "message": "Is there a lock that protects this list walk?",
+      "revId": "0a8990089a1a426fb7ab7fe460d3a192e7518969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fbdc5cd_c9773323",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-10T21:06:25Z",
+      "side": 1,
+      "message": "Something to consider in these structures, the generic member names like \"lock\" and \"clients\" do make it harder to scan the code for how thay are used. Consider adding a short prefix to each.",
+      "revId": "0a8990089a1a426fb7ab7fe460d3a192e7518969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f1bf1c0_cc3f8e82",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-10T21:06:25Z",
+      "side": 1,
+      "message": "You need the export lock to walk the list of clients.\n\nAlso, style preference is to have declarations at the top of the function.",
+      "revId": "0a8990089a1a426fb7ab7fe460d3a192e7518969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
