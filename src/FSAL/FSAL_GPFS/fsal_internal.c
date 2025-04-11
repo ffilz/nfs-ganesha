@@ -331,7 +331,8 @@ fsal_status_t fsal_internal_unlink(int dirfd, struct gpfs_file_handle *gpfs_fh,
 	if (op_ctx && op_ctx->client)
 		statarg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	if (op_ctx)
+		fsal_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_UNLINK_BY_NAME, &statarg);
 	errsv = errno;
@@ -461,8 +462,8 @@ fsal_status_t fsal_internal_rename_fh(int dirfd,
 	renamearg.cli_ip = NULL;
 	if (op_ctx && op_ctx->client)
 		renamearg.cli_ip = op_ctx->client->hostaddr_str;
-
-	fsal_set_credentials(&op_ctx->creds);
+	if (op_ctx)
+		fsal_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_RENAME_BY_FH, &renamearg);
 	errsv = errno;
@@ -690,7 +691,8 @@ fsal_status_t fsal_set_xstat_by_handle(int dirfd,
 	   implements sparse files, so blocks of all 0 will not actually
 	   be allocated.
 	 */
-	fsal_set_credentials(&op_ctx->creds);
+	if (op_ctx)
+		fsal_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_SET_XSTAT, &xstatarg);
 	errsv = errno;

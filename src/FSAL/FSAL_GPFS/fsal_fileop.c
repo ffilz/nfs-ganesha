@@ -125,7 +125,9 @@ fsal_status_t GPFSFSAL_read(int fd, uint64_t offset, size_t buf_size, void *buf,
 	if (op_ctx && op_ctx->client)
 		rarg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	if (op_ctx)
+		fsal_set_credentials(&op_ctx->creds);
+
 	nb_read = gpfs_ganesha(OPENHANDLE_READ_BY_FD, &rarg);
 	errsv = errno;
 	fsal_restore_ganesha_credentials();
@@ -191,7 +193,9 @@ fsal_status_t GPFSFSAL_write(int fd, uint64_t offset, size_t buf_size,
 	if (op_ctx && op_ctx->client)
 		warg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	if (op_ctx)
+		fsal_set_credentials(&op_ctx->creds);
+
 	nb_write = gpfs_ganesha(OPENHANDLE_WRITE_BY_FD, &warg);
 	errsv = errno;
 	fsal_restore_ganesha_credentials();
