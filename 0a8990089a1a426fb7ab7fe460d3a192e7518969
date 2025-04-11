@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68d8788_26798b6e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-11T10:57:44Z",
+      "side": 1,
+      "message": "qos_drain_*_ios() : will get called in 2 ways:\n1. From config update : Triggering of this function by any update to config is already handled , callers take care of the lock.\n2. From cleanup path (removing client/export): Triggering of this function on cleanup lock is not there, added the same in drain_qos_ios() which handles the cleanup.\n\nabove is applicable to BW, IOPS and Token. Addressed in Patchset 11",
+      "parentUuid": "b5fd7e15_a9fbff9c",
+      "revId": "0a8990089a1a426fb7ab7fe460d3a192e7518969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fbdc5cd_c9773323",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ff2e938_4dec567d",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-11T10:57:44Z",
+      "side": 1,
+      "message": "Sure, but I would prefer to update in future patches (Not in current review).\nlet me know whats your take on this.",
+      "parentUuid": "6fbdc5cd_c9773323",
+      "revId": "0a8990089a1a426fb7ab7fe460d3a192e7518969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f1bf1c0_cc3f8e82",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 10
@@ -48,6 +84,24 @@
       "writtenOn": "2025-04-10T21:06:25Z",
       "side": 1,
       "message": "You need the export lock to walk the list of clients.\n\nAlso, style preference is to have declarations at the top of the function.",
+      "revId": "0a8990089a1a426fb7ab7fe460d3a192e7518969",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3fba2e_7d2688ca",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-11T10:57:44Z",
+      "side": 1,
+      "message": "Done, Addressed in patchset 11",
+      "parentUuid": "1f1bf1c0_cc3f8e82",
       "revId": "0a8990089a1a426fb7ab7fe460d3a192e7518969",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
