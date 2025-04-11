@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eebb8687_485ae77d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-11T19:51:45Z",
+      "side": 1,
+      "message": "I wonder on these if op_ctx can actually be NULL in any of the calls? Might be better to remove the check for NULL op_ctx instead or understand why we can be doing GPFS operations with no op_ctx.\n\nAlso, please update the Coverity defects with Classification, Severity, Action, Ext. Reference to this patch, owner, and a brief comment describing resolution.",
+      "revId": "99ac873f4e75fdcbbc9343fd1dc90fe1730edaa8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09026214_adab74f9",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-11T19:51:45Z",
+      "side": 1,
+      "message": "Hmm, can op_ctx even be NULL here? Should we instead remove the check for NULL op_ctx? Or understand what path would get us here with a NULL op_ctx?",
+      "revId": "99ac873f4e75fdcbbc9343fd1dc90fe1730edaa8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
