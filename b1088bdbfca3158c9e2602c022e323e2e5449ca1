@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db36ea08_20ccbacc",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-11T21:18:16Z",
+      "side": 1,
+      "message": "This explanation still doesn\u0027t seem clear enough,",
+      "revId": "b1088bdbfca3158c9e2602c022e323e2e5449ca1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b315b184_b16481aa",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-11T21:18:16Z",
+      "side": 1,
+      "message": "You state that if Protocols is specified in the CLIENT blocks, then we don\u0027t use the Protocols set in EXPORT_DEFAULTS, but this is procesed after.\n\nIt would help to have some clear examples of different combinations of Protocols and what the result is.\n\nThis function also only governs whether the export is present in the PseudoFS.",
+      "revId": "b1088bdbfca3158c9e2602c022e323e2e5449ca1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
