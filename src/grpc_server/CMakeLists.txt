@@ -21,9 +21,9 @@
 #-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 #gRPC server Cmake
 
-include_directories(${ PROTOBUF_INCLUDE_DIRS })
-include_directories(${gRPC_INCLUDE_DIRS })
-include_directories(${ CMAKE_CURRENT_SOURCE_DIR }/include)
+include_directories(${PROTOBUF_INCLUDE_DIRS})
+include_directories(${gRPC_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_BINARY_DIR}/proto)
 
 set(SOURCE_FILES ${CMAKE_SOURCE_DIR}/grpc_server/GrpcServer.cc
@@ -37,13 +37,15 @@ target_link_libraries(gRPCLibrary
                       PRIVATE
                       gRPC::grpc++
                       protobuf::libprotobuf
-              grpc++_reflection
-                  ${SYSTEM_LIBRARIES}
-                sal)
-        target_include_directories(gRPCLibrary PRIVATE
-                      ${PROTOBUF_INCLUDE_DIR}
-                       ${CMAKE_SOURCE_DIR}/proto
-                   ${CMAKE_SOURCE_DIR}/grpc_server)
+                      grpc++_reflection
+                      ${SYSTEM_LIBRARIES}
+                      sal)
+
+target_include_directories(gRPCLibrary PRIVATE
+                           ${PROTOBUF_INCLUDE_DIR}
+                           ${CMAKE_SOURCE_DIR}/proto
+                           ${CMAKE_SOURCE_DIR}/grpc_server)
+
 set_target_properties(gRPCLibrary PROPERTIES COMPILE_FLAGS "-fPIC")
 install(TARGETS gRPCLibrary LIBRARY DESTINATION ${LIB_INSTALL_DIR})
 

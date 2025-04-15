@@ -197,8 +197,7 @@ if(${HAS_MACRO_PREFIX_MAP_FLAG} AND USE_RELATIVE_FILE_PATHS_IN_LOGS)
   add_compile_options(-fmacro-prefix-map=${GANESHA_TOP_CMAKE_DIR}/=./)
 endif()
 
-#If we are in a git tree, \
-	then this CMakeLists.txt is in "src/" and go.git is in "src/.."
+#If we are in a git tree, then this CMakeLists.txt is in "src/" and go.git is in "src/.."
 IF( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
   message( STATUS "Compilation from within a git repository. Using git rev-parse HEAD")
   EXECUTE_PROCESS( COMMAND git rev-parse HEAD
@@ -222,8 +221,7 @@ ELSE( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
 
 ENDIF( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
 
-STRING(SUBSTRING ${
-	_GIT_HEAD_COMMIT} 0  7 _GIT_HEAD_COMMIT_ABBREV )
+STRING(SUBSTRING ${_GIT_HEAD_COMMIT} 0  7 _GIT_HEAD_COMMIT_ABBREV )
 
 if (BSDBASED)
 #default gcc doesn't like using -Wuninitialized without -O on FreeBSD
@@ -423,8 +421,7 @@ if(USE_VSOCK)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DRPC_VSOCK")
 endif(USE_VSOCK)
 
-#This option will trigger \
-	"long distro name" aka name that contains git information
+#This option will trigger "long distro name" aka name that contains git information
 option(DISTNAME_HAS_GIT_DATA "Distribution package's name carries git data" OFF )
 
 #Build and package Python admin scripts for managing via DBus
@@ -1295,8 +1292,7 @@ else (USE_SYSTEM_NTIRPC)
   set(USE_RPC_RDMA ${USE_NFS_RDMA} CACHE BOOL "Use RDMA")
   set(TIRPC_EPOLL ${TIRPC_EPOLL} CACHE BOOL "Use EPOLL")
   set(USE_GSS ${USE_GSS} CACHE BOOL "Use GSS")
-  set(CMAKE_MODULE_PATH ${
-	CMAKE_MODULE_PATH}
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 	  "${GANESHA_TOP_CMAKE_DIR}/libntirpc/cmake/modules/")
   add_subdirectory(libntirpc)
   set(NTIRPC_LIBRARY ntirpc)

@@ -33,12 +33,9 @@ set(GRPC_SRCS ${PROTO_OUT_DIR}/nfsService.grpc.pb.cc)
 set(GRPC_HDRS ${PROTO_OUT_DIR}/nfsService.grpc.pb.h)
 
 execute_process(
-    COMMAND protoc --grpc_out=${
-	PROTO_OUT_DIR} --cpp_out=${
-	PROTO_OUT_DIR}
+    COMMAND protoc --grpc_out=${PROTO_OUT_DIR} --cpp_out=${PROTO_OUT_DIR}
     --experimental_allow_proto3_optional
-    --plugin=protoc-gen-grpc=${
-	GRPC_CPP_PLUGIN_LOCATION}
+    --plugin=protoc-gen-grpc=${GRPC_CPP_PLUGIN_LOCATION}
     --proto_path=${CMAKE_SOURCE_DIR}/proto ${PROTO_FILE}
    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
    RESULT_VARIABLE protoc_result

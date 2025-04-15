@@ -161,6 +161,10 @@ extern struct config_block krb5_param;
 extern struct config_block version4_param;
 extern struct config_block directory_services_param;
 
+#ifdef USE_GRPC
+extern struct config_block grpc_param;
+#endif
+
 /* in nfs_admin_thread.c */
 
 extern bool admin_shutdown;

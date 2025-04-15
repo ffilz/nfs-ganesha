@@ -30,6 +30,8 @@
 #include <pthread.h>
 #include <iostream>
 #include <grpcpp/grpcpp.h>
+#include <fstream>
+#include <sstream>
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,6 +45,22 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+
+// Utility function for reading key files
+inline std::string read_cert_file(const char *filepath)
+{
+	std::ifstream file_stream(filepath, std::ios::in | std::ios::binary);
+	std::ostringstream buffer;
+
+	if (!file_stream.is_open()) {
+		LogAlways(COMPONENT_GRPC, "Failed to open file: %s", filepath);
+		return "";
+	}
+
+	buffer << file_stream.rdbuf();
+
+	return buffer.str();
+}
 
 class GetClientIdService final : public nfsService::GetClientId::Service {
     public:
