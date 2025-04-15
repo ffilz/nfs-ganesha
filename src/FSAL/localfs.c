@@ -1937,8 +1937,13 @@ static struct gsh_dbus_method cachemgr_show_fs = {
 };
 
 static struct gsh_dbus_method *cachemgr_methods[] = {
-	&cachemgr_show_fs, &cachemgr_show_idmapper_users,
-	&cachemgr_show_idmapper_groups, &cachemgr_show_uid2grp, NULL
+	&cachemgr_show_fs,
+	&cachemgr_show_idmapper_users,
+	&cachemgr_show_idmapper_groups,
+	&cachemgr_show_idmapper_negative_users,
+	&cachemgr_show_idmapper_negative_groups,
+	&cachemgr_show_uid2grp,
+	NULL
 };
 
 static struct gsh_dbus_interface cachemgr_table = {
