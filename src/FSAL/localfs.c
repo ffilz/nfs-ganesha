@@ -28,6 +28,7 @@
 #include "config.h"
 
 #include "FSAL/fsal_localfs.h"
+#include "idmapper.h"
 #ifdef LINUX
 #include <sys/sysmacros.h> /* for major(3), minor(3) */
 #endif
@@ -1935,9 +1936,10 @@ static struct gsh_dbus_method cachemgr_show_fs = {
 		  END_ARG_LIST }
 };
 
-static struct gsh_dbus_method *cachemgr_methods[] = { &cachemgr_show_fs,
-						      &cachemgr_show_idmapper,
-						      NULL };
+static struct gsh_dbus_method *cachemgr_methods[] = {
+	&cachemgr_show_fs, &cachemgr_show_idmapper_users,
+	&cachemgr_show_idmapper_groups, NULL
+};
 
 static struct gsh_dbus_interface cachemgr_table = {
 	.name = "org.ganesha.nfsd.cachemgr",
