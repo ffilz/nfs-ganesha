@@ -84,6 +84,10 @@
 #include "nfs_metrics.h"
 #include "sal_metrics.h"
 
+#ifdef USE_GRPC
+#include "gRPC/GrpcServerInit.h"
+#endif /*USE_GRPC*/
+
 pthread_mutexattr_t default_mutex_attr;
 pthread_rwlockattr_t default_rwlock_attr;
 
@@ -765,6 +769,16 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 	}
 #endif
 
+#ifdef USE_GRPC
+	(void)load_config_from_parse(parse_tree, &grpc_param,
+				     &nfs_param.grpc_param, true, err_type);
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_INIT,
+			"Error while parsing grpc specific configuration");
+		return -1;
+	}
+#endif
+
 	if (mdcache_set_param_from_conf(parse_tree, err_type) < 0)
 		return -1;
 
@@ -1006,6 +1020,12 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	dbus_cache_init();
 #endif
 
+#ifdef USE_GRPC
+	grpc__init(nfs_param.grpc_param.grpc_port,
+		   nfs_param.grpc_param.grpc_server_cert,
+		   nfs_param.grpc_param.grpc_server_key,
+		   nfs_param.grpc_param.grpc_ca_cert);
+#endif
 	/* initializing nfs ganesha metrics */
 	nfs_metrics__init();
 	sal_metrics__init();

@@ -75,7 +75,7 @@ SET(RUNTIMEDIR "${SYSSTATEDIR}/run/ganesha" CACHE PATH "Runtime directory (for t
 # Extra version is for naming development/RC.  It is blank in stable branches
 # so it can be available to end-users to name local variants/versions
 # If used, it is always of the form "-whateveryouwant"
-set(GANESHA_EXTRA_VERSION -dev.11)
+set(GANESHA_EXTRA_VERSION -dev.14)
 
 set(GANESHA_VERSION ${GANESHA_MAJOR_VERSION}${GANESHA_MINOR_VERSION}${GANESHA_EXTRA_VERSION})
 set(GANESHA_BASE_VERSION ${GANESHA_MAJOR_VERSION}${GANESHA_MINOR_VERSION})
@@ -322,6 +322,9 @@ option(TIRPC_EPOLL "platform supports EPOLL or emulation" ON)
 # Build configure options
 goption(USE_DBUS "enable DBUS protocol support" ON)
 
+# Build gRPC
+goption(USE_GRPC "enable gRPC protocol support" OFF)
+
 # Various DBUS enabled features
 option(USE_CB_SIMULATOR "enable callback simulator thread" OFF)
 
@@ -388,7 +391,7 @@ if(USE_GTEST)
 endif(USE_GTEST)
 
 # Enable NFS Over RDMA Support
-option(USE_NFS_RDMA "enable NFS/RDMA support" ON)
+option(USE_NFS_RDMA "enable NFS/RDMA support" OFF)
 
 # Enable 9P Support
 option(USE_9P "enable 9P support" ON)
@@ -987,6 +990,21 @@ if(USE_DBUS)
   endif(NOT DBUS_FOUND)
 endif(USE_DBUS)
 
+gopt_test(USE_GRPC)
+if(USE_GRPC)
+    find_package(Protobuf REQUIRED)
+if(NOT Protobuf_FOUND)
+	message(WARNING "Cannot find Protobuf libs. Disabling gRPC,protobuf support")
+	set(USE_GRPC OFF)
+else(NOT Protobuf_FOUND)
+	find_package(gRPC REQUIRED)
+	if(NOT gRPC_FOUND)
+		message(WARNING "Cannot find gRPC libs. Disabling gRPC support")
+		set(USE_GRPC OFF)
+    endif(NOT gRPC_FOUND)
+endif(NOT Protobuf_FOUND)
+endif(USE_GRPC)
+
 if(USE_CB_SIMULATOR AND NOT USE_DBUS)
   message(WARNING "The callback simulator needs DBUS.  Disabling callback simulator")
   set(USE_CB_SIMULATOR OFF)
@@ -1337,6 +1355,11 @@ endif(USE_GTEST)
 if(USE_DBUS)
   add_subdirectory(dbus)
 endif(USE_DBUS)
+
+if(USE_GRPC)
+    add_subdirectory(proto)
+    add_subdirectory(grpc_server)
+endif(USE_GRPC)
 
 if(USE_LTTNG)
   add_subdirectory(tracing)
