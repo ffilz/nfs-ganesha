@@ -105,6 +105,24 @@
       "parentUuid": "0c860ac6_53ec6f86",
       "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea211acc_bbfa9448",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-04-15T17:20:26Z",
+      "side": 1,
+      "message": "This commit was replaced by this one- https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1213541\n\nJust to add a bit more clarification, we tried to use the textual logs to get the info that we needed and saw that it causes performance degradation as to when the logging is turned off.\n\nSo we wanted to get binary logging and improved the lttng binary logging mechanism, and it served the purpose of benefiting from good debugging information with minimal performance hit.\n\nThe previous method of having all the textual logs to be written to the lttng traces, is effectively writing textual logs into the binary logging stream, which causes the same performance degradation.\n\nSo now Ganesha has both mechanisms, the textual logs which has granularity for what components to output and what severity level, which each user can customize for themselves with the tradeof of debugability \u003c-\u003e performance.\n\nAnd the binary logging that can output IO rate binary logs with a much lower performance impact.\n\nWe may add a feature in the future to write each textual log to the binary log, but as I mentioned below, it will cause a drastic performance hit.",
+      "parentUuid": "f7d32423_3e832f9b",
+      "revId": "04c704d84ed295f6688cc4c603561e78c091b1c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
