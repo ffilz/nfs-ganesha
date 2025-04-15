@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c87aaf0_5af19fad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:29:40Z",
+      "side": 1,
+      "message": "You also need to udpate scripts/ganeshactl/ganesha_mgr.py",
+      "revId": "425449ca56c0fa92f5cf300b3cee71f7b0c26610",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a60887_9ce3997f",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:29:40Z",
+      "side": 1,
+      "message": "Hmm, why the heck is this table here? Idmapping isn\u0027t related to localfs...",
+      "revId": "425449ca56c0fa92f5cf300b3cee71f7b0c26610",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
