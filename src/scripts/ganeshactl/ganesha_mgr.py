@@ -267,9 +267,19 @@ class ManageCache():
                        _fs.MajorDevId,
                        _fs.MinorDevId))
 
-    def showidmapper(self):
-        print("Show idmapper cache")
-        status, errormsg, reply = self.cachemgr.ShowIdmapper()
+    def showidmapper_users(self):
+        print("Show idmapper users cache")
+        status, errormsg, reply = self.cachemgr.ShowIdmapperUsers()
+        if status == True:
+            _ts = reply[0]
+            ids = reply[1]
+            self.proc_id(_ts, ids)
+        else:
+            self.status_message(status, errormsg)
+
+    def showidmapper_groups(self):
+        print("Show idmapper groups cache")
+        status, errormsg, reply = self.cachemgr.ShowIdmapperGroups()
         if status == True:
             _ts = reply[0]
             ids = reply[1]
@@ -382,7 +392,8 @@ COMMANDS
       version: Displays ganesha release information
       posix_fs: Displays the mounted POSIX filesystems
       exports: Displays all current exports
-      idmap: Displays the idmapper cache
+      idmapper_users: Displays the idmapper users cache
+      idmapper_groups: Displays the idmapper groups cache
    grace:
       ipaddr: Begins grace for the given IP
    trim:
@@ -478,8 +489,10 @@ COMMANDS
             exportmgr.showexports()
         elif sys.argv[2] == "posix_fs":
             cachemgr.showfs()
-        elif sys.argv[2] == "idmap":
-            cachemgr.showidmapper()
+        elif sys.argv[2] == "idmapper_users":
+            cachemgr.showidmapper_users()
+        elif sys.argv[2] == "idmapper_groups":
+            cachemgr.showidmapper_groups()
         else:
             exit_option_not_supported("show")
 

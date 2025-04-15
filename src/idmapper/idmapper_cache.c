@@ -837,19 +837,19 @@ void idmapper_destroy_cache(void)
 #ifdef USE_DBUS
 
 /**
- *@brief Dbus method for showing idmapper cache
+ *@brief Dbus method for showing idmapper user cache
  *
  *@param[in]  args
  *@param[out] reply
  */
-static bool show_idmapper(DBusMessageIter *args, DBusMessage *reply,
-			  DBusError *error)
+static bool show_idmapper_users(DBusMessageIter *args, DBusMessage *reply,
+				DBusError *error)
 {
 	struct timespec timestamp;
 	struct avltree_node *node;
 	uint32_t val;
 	DBusMessageIter iter, sub_iter, id_iter;
-	char *namebuff = gsh_malloc(1024);
+	char *namebuff = gsh_malloc(256);
 	dbus_bool_t gid_set;
 
 	dbus_message_iter_init_append(reply, &iter);
@@ -868,13 +868,8 @@ static bool show_idmapper(DBusMessageIter *args, DBusMessage *reply,
 					    uname_node);
 		dbus_message_iter_open_container(&sub_iter, DBUS_TYPE_STRUCT,
 						 NULL, &id_iter);
-		memcpy(namebuff, user->uname.addr, user->uname.len);
-		if (user->uname.len > 255)
-			/*Truncate the name */
-			*(namebuff + 255) = '\0';
-		else
-			*(namebuff + user->uname.len) = '\0';
-
+		snprintf(namebuff, MIN(user->uname.len + 1, 256), "%s",
+			 (char *)user->uname.addr);
 		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_STRING,
 					       &namebuff);
 		val = user->uid;
@@ -900,11 +895,65 @@ static bool show_idmapper(DBusMessageIter *args, DBusMessage *reply,
 	return true;
 }
 
-struct gsh_dbus_method cachemgr_show_idmapper = {
-	.name = "showidmapper",
-	.method = show_idmapper,
+/**
+ *@brief Dbus method for showing idmapper groups cache
+ *
+ *@param[in]  args
+ *@param[out] reply
+ */
+static bool show_idmapper_groups(DBusMessageIter *args, DBusMessage *reply,
+				 DBusError *error)
+{
+	struct timespec timestamp;
+	struct avltree_node *node;
+	uint32_t val;
+	DBusMessageIter iter, sub_iter, id_iter;
+	char *namebuff = gsh_malloc(256);
+
+	dbus_message_iter_init_append(reply, &iter);
+	now(&timestamp);
+	gsh_dbus_append_timestamp(&iter, &timestamp);
+	dbus_message_iter_open_container(&iter, DBUS_TYPE_ARRAY, "(su)",
+					 &sub_iter);
+	PTHREAD_RWLOCK_rdlock(&idmapper_group_lock);
+	/* Traverse idmapper cache */
+	for (node = avltree_first(&gname_tree); node != NULL;
+	     node = avltree_next(node)) {
+		struct cache_group *group;
+
+		group = avltree_container_of(node, struct cache_group,
+					     gname_node);
+		dbus_message_iter_open_container(&sub_iter, DBUS_TYPE_STRUCT,
+						 NULL, &id_iter);
+		snprintf(namebuff, MIN(group->gname.len + 1, 256), "%s",
+			 (char *)group->gname.addr);
+		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_STRING,
+					       &namebuff);
+		val = group->gid;
+		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_UINT32,
+					       &val);
+
+		dbus_message_iter_close_container(&sub_iter, &id_iter);
+	}
+	PTHREAD_RWLOCK_unlock(&idmapper_group_lock);
+	free(namebuff);
+	dbus_message_iter_close_container(&iter, &sub_iter);
+	return true;
+}
+
+struct gsh_dbus_method cachemgr_show_idmapper_users = {
+	.name = "showidmapper_users",
+	.method = show_idmapper_users,
 	.args = { TIMESTAMP_REPLY,
 		  { .name = "ids", .type = "a(subu)", .direction = "out" },
+		  END_ARG_LIST }
+};
+
+struct gsh_dbus_method cachemgr_show_idmapper_groups = {
+	.name = "showidmapper_groups",
+	.method = show_idmapper_groups,
+	.args = { TIMESTAMP_REPLY,
+		  { .name = "ids", .type = "a(su)", .direction = "out" },
 		  END_ARG_LIST }
 };
 #endif
