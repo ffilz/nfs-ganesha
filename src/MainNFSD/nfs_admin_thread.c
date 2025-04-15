@@ -451,6 +451,39 @@ static struct gsh_dbus_method method_purge_idmapper_cache = {
 };
 
 /**
+ * @brief Dbus method for flushing idmapper negative cache
+ *
+ * @param[in]  args
+ * @param[out] reply
+ */
+static bool admin_dbus_purge_idmapper_negative_cache(DBusMessageIter *args,
+						     DBusMessage *reply,
+						     DBusError *error)
+{
+	char *errormsg = "Purge idmapper negative cache";
+	bool success = true;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+	if (args != NULL) {
+		errormsg = "Purge idmapper negative cache takes no arguments.";
+		success = false;
+		LogWarn(COMPONENT_DBUS, "%s", errormsg);
+		goto out;
+	}
+	idmapper_negative_cache_clear();
+out:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+	return success;
+}
+
+static struct gsh_dbus_method method_purge_idmapper_negative_cache = {
+	.name = "purge_idmapper_negative_cache",
+	.method = admin_dbus_purge_idmapper_negative_cache,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+/**
  * @brief Dbus method for updating open fd limit
  *
  * @param[in]  args
@@ -724,22 +757,25 @@ static struct gsh_dbus_method method_reread_config = {
 	.args = { STATUS_REPLY, END_ARG_LIST }
 };
 
-static struct gsh_dbus_method *admin_methods[] = { &method_shutdown,
-						   &method_grace_period,
-						   &method_get_grace,
-						   &method_purge_gids,
-						   &method_purge_netgroups,
-						   &method_init_fds_limit,
-						   &method_purge_idmapper_cache,
-						   &method_malloc_trace,
-						   &method_malloc_untrace,
-						   &method_trim_enable,
-						   &method_trim_disable,
-						   &method_trim_call,
-						   &method_trim_status,
-						   &method_reread_config,
-						   &method_get_drc_info,
-						   NULL };
+static struct gsh_dbus_method *admin_methods[] = {
+	&method_shutdown,
+	&method_grace_period,
+	&method_get_grace,
+	&method_purge_gids,
+	&method_purge_netgroups,
+	&method_init_fds_limit,
+	&method_purge_idmapper_cache,
+	&method_purge_idmapper_negative_cache,
+	&method_malloc_trace,
+	&method_malloc_untrace,
+	&method_trim_enable,
+	&method_trim_disable,
+	&method_trim_call,
+	&method_trim_status,
+	&method_reread_config,
+	&method_get_drc_info,
+	NULL
+};
 
 /* clang-format off */
 

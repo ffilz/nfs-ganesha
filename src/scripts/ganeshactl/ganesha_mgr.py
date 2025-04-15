@@ -190,9 +190,14 @@ class ServerAdmin():
         status, msg = self.admin.purge_netgroups()
         self.status_message(status, msg)
 
-    def purge_idmap(self):
+    def purge_idmapper(self):
         print("Purging idmapper cache")
-        status, msg = self.admin.purge_idmap()
+        status, msg = self.admin.purge_idmapper()
+        self.status_message(status, msg)
+
+    def purge_idmapper_negative(self):
+        print("Purging idmapper negative cache")
+        status, msg = self.admin.purge_idmapper_negative()
         self.status_message(status, msg)
 
     def purge_gids(self):
@@ -395,7 +400,8 @@ COMMANDS
          display export 10
    purge:
       netgroups: Purges netgroups cache
-      idmap: Purges idmapper cache
+      idmapper: Purges idmapper cache
+      idmapper_negative: Purges idmapper negative cache
       gids: Purges gids cache
    show:
       clients: Displays the current clients
@@ -422,7 +428,6 @@ COMMANDS
    shutdown: Shuts down the ganesha nfs server
 
 """
-
     if len(sys.argv) < 2:
         exit_try_help("Too few arguments")
 
@@ -482,8 +487,10 @@ COMMANDS
             exit_try_help("purge requires a cache name to purge")
         if sys.argv[2] == "netgroups":
             ganesha.purge_netgroups()
-        elif sys.argv[2] == "idmap":
-            ganesha.purge_idmap()
+        elif sys.argv[2] == "idmapper":
+            ganesha.purge_idmapper()
+        elif sys.argv[2] == "idmapper_negative":
+            ganesha.purge_idmapper_negative()
         elif sys.argv[2] == "gids":
             ganesha.purge_gids()
         else:
