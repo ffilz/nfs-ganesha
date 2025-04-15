@@ -41,6 +41,10 @@
 #include "nfs_core.h"
 #include <misc/queue.h>
 #include "idmapper_monitoring.h"
+#ifdef USE_DBUS
+#include "gsh_dbus.h"
+#endif
+#include "server_stats_private.h"
 
 /* Struct representing the negative cache entity */
 typedef enum negative_cache_entity_type {
@@ -436,5 +440,111 @@ void idmapper_negative_cache_destroy(void)
 	PTHREAD_RWLOCK_destroy(&idmapper_negative_cache_user_lock);
 	PTHREAD_RWLOCK_destroy(&idmapper_negative_cache_group_lock);
 }
+
+#ifdef USE_DBUS
+
+/**
+ *@brief Dbus method for showing idmapper negative cache of input @arg entity_type
+ *
+ *@param[in]  args
+ *@param[in]  entity_type
+ *@param[out] reply
+ */
+static bool show_idmapper_negative_cache_entity(
+	DBusMessageIter *args, DBusMessage *reply, DBusError *error,
+	negative_cache_entity_type_t entity_type)
+{
+	struct timespec timestamp;
+	struct avltree_node *node;
+	uint32_t val;
+	DBusMessageIter iter, sub_iter, id_iter;
+	char *namebuff = gsh_malloc(256);
+	struct avltree *cache_tree;
+	pthread_rwlock_t *entity_lock;
+	negative_cache_entity_t *entity;
+
+	switch (entity_type) {
+	case USER:
+		cache_tree = &uname_tree;
+		entity_lock = &idmapper_negative_cache_user_lock;
+		break;
+	case GROUP:
+		cache_tree = &gname_tree;
+		entity_lock = &idmapper_negative_cache_group_lock;
+		break;
+	default:
+		LogFatal(COMPONENT_IDMAPPER,
+			 "Unknown negative cache entity type: %d", entity_type);
+	}
+
+	dbus_message_iter_init_append(reply, &iter);
+	now(&timestamp);
+	gsh_dbus_append_timestamp(&iter, &timestamp);
+	dbus_message_iter_open_container(&iter, DBUS_TYPE_ARRAY, "(st)",
+					 &sub_iter);
+	PTHREAD_RWLOCK_wrlock(entity_lock);
+	/* Traverse idmapper cache */
+	for (node = avltree_first(cache_tree); node != NULL;
+	     node = avltree_next(node)) {
+		negative_cache_entity_t *entry;
+
+		entry = avltree_container_of(node, negative_cache_entity_t,
+					     name_node);
+		dbus_message_iter_open_container(&sub_iter, DBUS_TYPE_STRUCT,
+						 NULL, &id_iter);
+		snprintf(namebuff, MIN(entry->name.len + 1, 256), "%s",
+			 (char *)entry->name.addr);
+		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_STRING,
+					       &namebuff);
+		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_UINT64,
+					       &entry->epoch);
+		dbus_message_iter_close_container(&sub_iter, &id_iter);
+	}
+	PTHREAD_RWLOCK_unlock(entity_lock);
+	free(namebuff);
+	dbus_message_iter_close_container(&iter, &sub_iter);
+	return true;
+}
+
+/**
+ *@brief Dbus method for showing idmapper negative user cache
+ *
+ *@param[in]  args
+ *@param[out] reply
+ */
+static bool show_idmapper_negative_users(DBusMessageIter *args,
+					 DBusMessage *reply, DBusError *error)
+{
+	return show_idmapper_negative_cache_entity(args, reply, error, USER);
+}
+
+/**
+ *@brief Dbus method for showing idmapper negative groups cache
+ *
+ *@param[in]  args
+ *@param[out] reply
+ */
+static bool show_idmapper_negative_groups(DBusMessageIter *args,
+					  DBusMessage *reply, DBusError *error)
+{
+	return show_idmapper_negative_cache_entity(args, reply, error, GROUP);
+}
+
+struct gsh_dbus_method cachemgr_show_idmapper_negative_users = {
+	.name = "showidmapper_negative_users",
+	.method = show_idmapper_negative_users,
+	.args = { TIMESTAMP_REPLY,
+		  { .name = "ids", .type = "a(st)", .direction = "out" },
+		  END_ARG_LIST }
+};
+
+struct gsh_dbus_method cachemgr_show_idmapper_negative_groups = {
+	.name = "showidmapper_negative_groups",
+	.method = show_idmapper_negative_groups,
+	.args = { TIMESTAMP_REPLY,
+		  { .name = "ids", .type = "a(st)", .direction = "out" },
+		  END_ARG_LIST }
+};
+#endif
 
 /** @} */
