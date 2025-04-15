@@ -1097,3 +1097,18 @@ RADOS_URLS {}
 	userid(path, no default)
 
 	watch_url(url, no default)
+
+GRPC {}
+-------
+
+    Grpc_Port (uint16, range 0 to UINT16_MAX, default 50051)
+
+    Grpc_Server_Certificate (path default /etc/ganesha/ganesha_grpc_tls_cert/server.crt)
+
+    Grpc_Server_Key (path default /etc/ganesha/ganesha_grpc_tls_cert/server.key)
+
+    Grpc_Client_Certificate (path default /etc/ganesha/ganesha_grpc_tls_cert/client.crt)
+
+    Grpc_Client_Key (path default /etc/ganesha/ganesha_grpc_tls_cert/client.key)
+
+    Grpc_Ca_Certificate (path default /etc/ganesha/ganesha_grpc_tls_cert/ca.crt)
