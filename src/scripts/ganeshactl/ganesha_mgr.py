@@ -266,9 +266,19 @@ class ManageCache():
                        _fs.MajorDevId,
                        _fs.MinorDevId))
 
-    def showidmapper(self):
-        print("Show idmapper cache")
-        status, errormsg, reply = self.cachemgr.ShowIdmapper()
+    def showidmapper_users(self):
+        print("Show idmapper users cache")
+        status, errormsg, reply = self.cachemgr.ShowIdmapperUsers()
+        if status == True:
+            _ts = reply[0]
+            ids = reply[1]
+            self.proc_id(_ts, ids)
+        else:
+            self.status_message(status, errormsg)
+
+    def showidmapper_groups(self):
+        print("Show idmapper groups cache")
+        status, errormsg, reply = self.cachemgr.ShowIdmapperGroups()
         if status == True:
             _ts = reply[0]
             ids = reply[1]
@@ -368,7 +378,8 @@ if __name__ == '__main__':
        "      version: Displays ganesha release information\n"                     \
        "      posix_fs: Displays the mounted POSIX filesystems\n"                  \
        "      exports: Displays all current exports\n"                             \
-       "      idmap: Displays the idmapper cache\n\n"                              \
+       "      idmapper_users: Displays the idmapper users cache\n\n"               \
+       "      idmapper_groups: Displays the idmapper groups cache\n\n"             \
        "   grace: \n"                                                              \
        "      ipaddr: Begins grace for the given IP\n\n"                           \
        "   trim:\n"                                                                \
@@ -491,8 +502,10 @@ if __name__ == '__main__':
             exportmgr.showexports()
         elif sys.argv[2] == "posix_fs":
             cachemgr.showfs()
-        elif sys.argv[2] == "idmap":
-            cachemgr.showidmapper()
+        elif sys.argv[2] == "idmapper_users":
+            cachemgr.showidmapper_users()
+        elif sys.argv[2] == "idmapper_groups":
+            cachemgr.showidmapper_groups()
         else:
             msg = "Showing '%s' is not supported" % sys.argv[2]
             sys.exit(msg)
