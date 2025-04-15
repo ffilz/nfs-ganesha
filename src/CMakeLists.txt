@@ -1,27 +1,27 @@
-# SPDX-License-Identifier: LGPL-3.0-or-later
+# SPDX - License - Identifier : LGPL - 3.0 - or -later
 #-------------------------------------------------------------------------------
 #
 # Copyright Panasas, 2012
-# Contributor: Jim Lieb <jlieb@panasas.com>
+# Contributor : Jim Lieb < jlieb @panasas.com>
 #
-# This program is free software; you can redistribute it and/or
+# This program is free software; you can redistribute it and / or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
 # version 3 of the License, or (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU
 # Lesser General Public License for more details.
 #
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110 - 1301 USA
 #
-#-------------------------------------------------------------------------------
-# NFS Ganesha  Cmake
+#------------------------------------------------------------------------------
+# NFS Ganesha Cmake
 
-# Current version as of Fedora 16.  Not tested with earlier.
+# Current version as of Fedora 16. Not tested with earlier.
 
 cmake_minimum_required(VERSION 2.6.3)
 
@@ -47,7 +47,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${GANESHA_TOP_CMAKE_DIR}/cmake/modul
 project(nfs-ganesha C CXX)
 # Project versioning
 set(GANESHA_MAJOR_VERSION 7)
-# Minor version is blank for development.  On release, it becomes ".0".  On a
+# Minor version is blank for development.On release, it becomes ".0".On a
 # stable maintenance branch, this becomes ".N" where N is monotonically
 # increasing starting at 1. Remember to include the "." !!
 set(GANESHA_MINOR_VERSION )
@@ -72,9 +72,9 @@ ENDIF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT OR CMAKE_INSTALL_PREFIX STREQU
 
 SET(RUNTIMEDIR "${SYSSTATEDIR}/run/ganesha" CACHE PATH "Runtime directory (for things like pid file, not touched by install)")
 
-# Extra version is for naming development/RC.  It is blank in stable branches
-# so it can be available to end-users to name local variants/versions
-# If used, it is always of the form "-whateveryouwant"
+#Extra version is for naming development / RC.It is blank in stable branches
+#so it can be available to end - users to name local variants / versions
+#If used, it is always of the form "-whateveryouwant"
 set(GANESHA_EXTRA_VERSION -dev.11)
 
 set(GANESHA_VERSION ${GANESHA_MAJOR_VERSION}${GANESHA_MINOR_VERSION}${GANESHA_EXTRA_VERSION})
@@ -84,11 +84,11 @@ set(VERSION_COMMENT
   "GANESHA file server is 64 bits compliant and supports NFS v3,4.0,4.1 (pNFS) and 9P"
 )
 
-# find out which platform we are building on
+#find out which platform we are building on
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set(LINUX ON)
   set(UNIX ON)
-  # Now detects the Linux's distro
+#Now detects the Linux's distro
   set(DISTRO "UNKNOWN")
   set(LIBEXECDIR "/${CMAKE_INSTALL_PREFIX}/libexec")
 
@@ -101,7 +101,7 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
       COMMAND awk -F=  "/^ID_LIKE=/ { print $2 }" /etc/os-release
       OUTPUT_VARIABLE ID_LIKE
    )
-# Red Hat Enterprise Linux versions before 7.0 will be detected as UNKNOWN
+#Red Hat Enterprise Linux versions before 7.0 will be detected as UNKNOWN
 
   if( ${SYS_RELEASE} MATCHES "Red Hat" )
      message( STATUS "Detected a Linux Red Hat machine" )
@@ -141,7 +141,7 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
   set(BSDBASED ON)
   set(FREEBSD ON)
   set(UNIX ON)
-# On FreeBSD libc doesn't directly provide libexecinfo, so we have to find it
+#On FreeBSD libc doesn't directly provide libexecinfo, so we have to find it
   set(USE_EXECINFO ON)
   set(LIBEXECDIR "/${CMAKE_INSTALL_PREFIX}/libexec")
 endif(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
@@ -158,18 +158,18 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 
 if(DARWIN)
-  # Apple's /usr/bin/ld doesn't use the same flags for specifying treatment of
-  # undefined symbols, and its defaults are opposite of GNU's and LLVM's ld.
+#Apple 's /usr/bin/ld doesn' t use the same flags for specifying treatment of
+#undefined symbols, and its defaults are opposite of GNU 's and LLVM' s ld.
   set(LDFLAG_ALLOW_UNDEF "-Wl,-undefined,suppress")
   set(LDFLAG_DISALLOW_UNDEF "-Wl,-undefined,error")
 elseif(FREEBSD OR LINUX)
-  # llvm-ld seems to be missing a flag to explicitly allow undefined, but this
-  # is the default anyway for both llvm-ld and GNU ld.
+#llvm - ld seems to be missing a flag to explicitly allow undefined, but this
+#is the default anyway for both llvm - ld and GNU ld.
   set(LDFLAG_ALLOW_UNDEF "")
   set(LDFLAG_DISALLOW_UNDEF "-Wl,--no-undefined")
 endif(DARWIN)
 
-# Identify the host we are building on
+#Identify the host we are building on
 EXECUTE_PROCESS( COMMAND hostname
   OUTPUT_VARIABLE BUILD_HOST_NAME
   OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -178,13 +178,13 @@ EXECUTE_PROCESS( COMMAND hostname
 find_package(Toolchain REQUIRED)
 find_package(Sanitizers)
 
-# Add maintainer mode for (mainly) strict builds
+#Add maintainer mode for (mainly) strict builds
 include(${GANESHA_TOP_CMAKE_DIR}/cmake/maintainer_mode.cmake)
 
-# For libraries that provide pkg-config files
+#For libraries that provide pkg - config files
 include(FindPkgConfig)
 
-# For our option system
+#For our option system
 include(${GANESHA_TOP_CMAKE_DIR}/cmake/goption.cmake)
 
 goption(USE_RELATIVE_FILE_PATHS_IN_LOGS "Use relative file paths in log files" ON)
@@ -197,7 +197,7 @@ if(${HAS_MACRO_PREFIX_MAP_FLAG} AND USE_RELATIVE_FILE_PATHS_IN_LOGS)
   add_compile_options(-fmacro-prefix-map=${GANESHA_TOP_CMAKE_DIR}/=./)
 endif()
 
-# If we are in a git tree, then this CMakeLists.txt is in "src/" and go .git is in "src/.."
+#If we are in a git tree, then this CMakeLists.txt is in "src/" and go.git is in "src/.."
 IF( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
   message( STATUS "Compilation from within a git repository. Using git rev-parse HEAD")
   EXECUTE_PROCESS( COMMAND git rev-parse HEAD
@@ -221,7 +221,8 @@ ELSE( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
 
 ENDIF( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
 
-STRING(SUBSTRING ${_GIT_HEAD_COMMIT} 0  7 _GIT_HEAD_COMMIT_ABBREV )
+STRING(SUBSTRING ${
+	_GIT_HEAD_COMMIT} 0  7 _GIT_HEAD_COMMIT_ABBREV )
 
 if (BSDBASED)
 #default gcc doesn't like using -Wuninitialized without -O on FreeBSD
@@ -253,7 +254,7 @@ if (MSVC)
    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif(MSVC)
 
-# Library path name
+#Library path name
 get_property(USE_LIB64 GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS)
 if (USE_LIB64)
 	set(LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib64 CACHE PATH
@@ -270,7 +271,7 @@ ELSE()
 ENDIF()
 
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "unknown")
-  # uname -p is broken on this system.  Try uname -m
+#uname - p is broken on this system.Try uname - m
   EXECUTE_PROCESS( COMMAND uname -m
 		   OUTPUT_STRIP_TRAILING_WHITESPACE
 		   ERROR_QUIET
@@ -280,18 +281,18 @@ else (CMAKE_SYSTEM_PROCESSOR MATCHES "unknown")
 endif (CMAKE_SYSTEM_PROCESSOR MATCHES "unknown")
 
 if (ARCH MATCHES "x86_64")
-  # Nothing special to do for x86_64
+#Nothing special to do for x86_64
 elseif (ARCH MATCHES "i386")
-  # Nothing special to do for i386
+#Nothing special to do for i386
 elseif (ARCH MATCHES "mips")
   set(SYSTEM_LIBRARIES "-latomic" ${SYSTEM_LIBRARIES})
 else()
   message(WARNING "Unhandled architecture ${ARCH}")
 endif ()
 
-# FSAL selection
-# FSALs which are enabled by default but could be disabled
-# during the build
+#FSAL selection
+#FSALs which are enabled by default but could be disabled
+#during the build
 goption(USE_FSAL_PROXY_V4 "build PROXY_V4 FSAL shared library" ON)
 goption(USE_FSAL_PROXY_V3 "build PROXY_V3 FSAL shared library" ON)
 goption(USE_FSAL_VFS "build VFS FSAL shared library" ON)
@@ -307,22 +308,25 @@ goption(USE_FSAL_RGW "build RGW FSAL shared library" ON)
 goption(USE_FSAL_MEM "build Memory FSAL shared library" ON)
 goption(USE_FSAL_SAUNAFS "build SAUNAFS FSAL shared library" ON)
 
-# Internal capability required by some FSALs
+#Internal capability required by some FSALs
 option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" ON)
 
-# Monitoring stack.
+#Monitoring stack.
 goption(USE_MONITORING "Enable monitoring stack" OFF)
 gopt_test(USE_MONITORING)
 
-# nTIRPC
+#nTIRPC
 option(USE_SYSTEM_NTIRPC "Use the system nTIRPC, rather than the submodule" OFF)
 option (USE_GSS "enable RPCSEC_GSS support" ON)
 option(TIRPC_EPOLL "platform supports EPOLL or emulation" ON)
 
-# Build configure options
+#Build configure options
 goption(USE_DBUS "enable DBUS protocol support" ON)
 
-# Various DBUS enabled features
+#Build gRPC
+goption(USE_GRPC "enable gRPC protocol support" OFF)
+
+#Various DBUS enabled features
 option(USE_CB_SIMULATOR "enable callback simulator thread" OFF)
 
 goption(USE_NFSIDMAP "Use of libnfsidmap for name resolution" ON)
@@ -332,10 +336,10 @@ option(ENABLE_VFS_DEBUG_ACL "Enable debug ACL store for VFS" OFF)
 option(ENABLE_RFC_ACL "Use all RFC ACL checks" OFF)
 option(USE_TOOL_MULTILOCK "build multilock tool" OFF)
 
-# Electric Fence (-lefence) link flag
+#Electric Fence(-lefence) link flag
 goption(USE_EFENCE "link with efence memory debug library" OFF)
 
-# These are -D_FOO options, why ???  should be flags??
+#These are - D_FOO options, why ? ? ? should be flags ? ?
 option(_NO_TCP_REGISTER "disable registration of tcp services on portmapper" OFF)
 option(RPCBIND "enable registration with rpcbind" ON)
 option(DEBUG_SAL "enable debugging of SAL by keeping list of all locks, stateids, and state owners" OFF)
@@ -344,36 +348,36 @@ option(ENABLE_LOCKTRACE "Enable lock trace" OFF)
 goption(PROXYV4_HANDLE_MAPPING "enable NFSv3 handle mapping for PROXY_V4 FSAL" OFF)
 option(DEBUG_MDCACHE "Add various asserts to mdcache" OFF)
 
-# Debug symbols (-g) build flag
+#Debug symbols(-g) build flag
 option(DEBUG_SYMS "include debug symbols to binaries (-g option)" OFF)
 
-# Add coverage information to build tree
+#Add coverage information to build tree
 option(COVERAGE "add flag to generate coverage data at runtime" OFF)
 
 option(ENFORCE_GCC "enforce gcc as a the C compiler used for the project" OFF)
 
-# Define CPACK component (to deal with sub packages)
+#Define CPACK component(to deal with sub packages)
 set(CPACK_COMPONENTS_ALL daemon fsal headers tools)
 set(CPACK_COMPONENT_DAEMON_DISPLAY_NAME "NFS-Ganesha daemon")
 if (USE_SYSTEM_NTIRPC)
-  # Don't include libntirpc in the tarball
+#Don't include libntirpc in the tarball
   set(CPACK_SOURCE_IGNORE_FILES "libntirpc")
 else(USE_SYSTEM_NTIRPC)
-  # Don't include libntirpc's spec file; this can confuse rpmbuild
+#Don 't include libntirpc' s spec file; this can confuse rpmbuild
   set(CPACK_SOURCE_IGNORE_FILES "libntirpc.spec$")
 endif(USE_SYSTEM_NTIRPC)
 
-# Include custom config and cpack module
+#Include custom config and cpack module
 include(${GANESHA_TOP_CMAKE_DIR}/cmake/cpack_config.cmake)
 include(CPack)
 
-# MSPAC support -lwbclient link flag
+#MSPAC support - lwbclient link flag
 goption(_MSPAC_SUPPORT "enable mspac Winbind support" ON)
 
-# CUnit
+#CUnit
 goption(USE_CUNIT "Use Cunit test framework" OFF)
 
-# GTest
+#GTest
 goption(USE_GTEST "Use Google Test test framework" OFF)
 gopt_test(USE_GTEST)
 if(USE_GTEST)
@@ -387,69 +391,69 @@ if(USE_GTEST)
   endif((NOT LTTNG_FOUND) OR (NOT GPERFTOOLS_FOUND) OR (NOT GTEST_FOUND))
 endif(USE_GTEST)
 
-# Enable NFS Over RDMA Support
+#Enable NFS Over RDMA Support
 option(USE_NFS_RDMA "enable NFS/RDMA support" ON)
 
-# Enable 9P Support
+#Enable 9P Support
 option(USE_9P "enable 9P support" ON)
 option(USE_9P_RDMA "enable 9P_RDMA support" OFF)
 
-# Enable NFSv3 Support
+#Enable NFSv3 Support
 option(USE_NFS3 "enable NFSv3 support" ON)
 
 if(USE_NFS3)
-    # Enable NLM Support
+#Enable NLM Support
     option(USE_NLM "enable NLM support" ON)
-    # Enable NFSACL3 protocol extension support
+#Enable NFSACL3 protocol extension support
     option(USE_NFSACL3 "enable NFSACLv3 support" ON)
 else(USE_NFS3)
-    # Disable NLM Support
+#Disable NLM Support
     set(USE_NLM OFF)
-    # Disable NFSACL3 protocol extension support
+#Disable NFSACL3 protocol extension support
     set(USE_NFSACL3 OFF)
 endif(USE_NFS3)
 
-# Enable RQUOTA support
+#Enable RQUOTA support
 option(USE_RQUOTA "enable RQUOTA support" ON)
 
-# AF_VSOCK host support (NFS)
+#AF_VSOCK host support(NFS)
 option(USE_VSOCK "enable AF_VSOCK listener" OFF)
 if(USE_VSOCK)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DRPC_VSOCK")
 endif(USE_VSOCK)
 
-# This option will trigger "long distro name" aka name that contains git information
+#This option will trigger "long distro name" aka name that contains git information
 option(DISTNAME_HAS_GIT_DATA "Distribution package's name carries git data" OFF )
 
-# Build and package Python admin scripts for managing via DBus
+#Build and package Python admin scripts for managing via DBus
 goption(USE_ADMIN_TOOLS "Package Admin scripts" OFF)
 
-# Build and package Python gui admin scripts for managing via DBus
+#Build and package Python gui admin scripts for managing via DBus
 goption(USE_GUI_ADMIN_TOOLS "Package GUI Admin scripts" ON)
 
-# Enable LTTng tracing
+#Enable LTTng tracing
 goption(USE_LTTNG "Enable LTTng tracing" OFF)
 
-# Build man page.
+#Build man page.
 goption(USE_MAN_PAGE "Build MAN page" OFF)
 
-# Enable Rados KV store for recovery
+#Enable Rados KV store for recovery
 goption(USE_RADOS_RECOV "Enable Rados KV Recovery" ON)
 
-# Enable RADOS URL config file sections
+#Enable RADOS URL config file sections
 goption(RADOS_URLS "Enable config file inclusion from RADOS objects" ON)
 
-# Enable CephFS POSIX ACL
+#Enable CephFS POSIX ACL
 goption(CEPHFS_POSIX_ACL "Enable CephFS POSIX ACL" ON)
 
-# Enable NFSv4 and POSIX acls mapping
+#Enable NFSv4 and POSIX acls mapping
 option(USE_ACL_MAPPING "Build NFSv4 to POSIX ACL mapping" OFF)
 
 #
-# End build options
+#End build options
 #
 
-# Choose a shortcut build config
+#Choose a shortcut build config
 
 IF(BUILD_CONFIG)
   INCLUDE(
@@ -464,7 +468,7 @@ IF(COVERAGE)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage")
 ENDIF(COVERAGE)
 
-# Set what's needed is GCC is enforced
+#Set what's needed is GCC is enforced
 IF(ENFORCE_GCC)
     set(CMAKE_COMPILER_IS_GNUCXX TRUE)
     set(CMAKE_C_COMPILER gcc)
@@ -503,7 +507,8 @@ endif()
 
 IF(MOOSHIKA_PREFIX)
   set(MOOSHIKA_PREFIX ${MOOSHIKA_PREFIX} CACHE PATH "Path to Mooshika installation")
-  set(ENV{PKG_CONFIG_PATH} "${PKG_CONFIG_PATH}:${MOOSHIKA_PREFIX}/lib/pkgconfig")
+  set(ENV{
+	PKG_CONFIG_PATH} "${PKG_CONFIG_PATH}:${MOOSHIKA_PREFIX}/lib/pkgconfig")
 ENDIF()
 
 if(USE_NFS_RDMA OR USE_9P_RDMA)
@@ -541,7 +546,7 @@ check_include_files(strings.h HAVE_STRINGS_H)
 check_include_files(string.h HAVE_STRING_H)
 
 if(HAVE_STRING_H AND HAVE_STRINGS_H)
-  # we have all the libraries and include files to use string.h
+#we have all the libraries and include files to use string.h
   set(HAVE_STRNLEN ON)
 endif(HAVE_STRING_H AND HAVE_STRINGS_H)
 
@@ -565,7 +570,7 @@ if (USE_GSS)
   find_package(Krb5 REQUIRED gssapi)
   check_include_files(gssapi.h HAVE_GSSAPI_H)
   if (NOT HAVE_GSSAPI_H)
-    # Debian/Ubuntu 12 magic
+#Debian / Ubuntu 12 magic
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -I/usr/include/mit-krb5/")
     check_include_files(gssapi.h HAVE_GSSAPI_H)
   endif(NOT HAVE_GSSAPI_H)
@@ -629,15 +634,15 @@ if (USE_MAN_PAGE)
   endif(NOT SPHINX_BUILD)
 endif(USE_MAN_PAGE)
 
-# POSIX ACLs - these may be used in multiple places
+#POSIX ACLs - these may be used in multiple places
 find_package(LibACL)
 
-# Validate fsal dependencies
+#Validate fsal dependencies
 
 gopt_test(USE_FSAL_PROXY_V4)
 if (USE_FSAL_PROXY_V4)
-  # PROXY_V4 has no deps of it's own, but it has a dependent option
-  # PROXY_V4 handle mapping needs sqlite3
+#PROXY_V4 has no deps of it's own, but it has a dependent option
+#PROXY_V4 handle mapping needs sqlite3
   gopt_test(PROXYV4_HANDLE_MAPPING)
   if(PROXYV4_HANDLE_MAPPING)
     check_include_files(sqlite3.h HAVE_SQLITE3_H)
@@ -660,7 +665,7 @@ endif (USE_FSAL_PROXY_V4)
 
 gopt_test(USE_FSAL_VFS)
 if(USE_FSAL_VFS)
-  # VFS has an optional dependency for libbtrfsutil
+#VFS has an optional dependency for libbtrfsutil
   find_library(BTRFSUTIL_LIB btrfsutil)
   if (BTRFSUTIL_LIB)
     message(STATUS "Found BTRFS Util library: ${BTRFSUTIL_LIB}")
@@ -674,7 +679,7 @@ if(USE_FSAL_VFS)
       message(WARNING "ENABLE_VFS_DEBUG_ACL is on, so disabling ENABLE_VFS_POSIX_ACL")
     endif(ENABLE_VFS_POSIX_ACL)
   else(ENABLE_VFS_DEBUG_ACL)
-    # POSIX ACL support?
+#POSIX ACL support ?
     gopt_test(ENABLE_VFS_POSIX_ACL)
     if(ENABLE_VFS_POSIX_ACL)
       if(NOT HAVE_LIBACL)
@@ -696,7 +701,7 @@ if(USE_FSAL_VFS)
       if(ENABLE_VFS_POSIX_ACL)
 	set(ENABLE_VFS_ACL ON)
 	set(USE_ACL_MAPPING ON)
-	# libacl only required on Linux
+#libacl only required on Linux
 	set(LibACL_FIND_REQUIRED HAVE_LIBACL)
       else(ENABLE_VFS_POSIX_ACL)
 	if(ENABLE_VFS_POSIX_ACL_REQUIRED)
@@ -712,9 +717,9 @@ endif(USE_FSAL_VFS)
 gopt_test(USE_FSAL_LUSTRE)
 if(USE_FSAL_LUSTRE)
     ########### lustre hsm version test ##########
-    # Lustre/HSM feature needs Lustre 2.5.0.
-    # As some hsm calls were already landed as empty nutshells in 2.4
-    # we rely on this new call of 2.5.0: llapi_hsm_state_get_fd().
+#Lustre / HSM feature needs Lustre 2.5.0.
+#As some hsm calls were already landed as empty nutshells in 2.4
+#we rely on this new call of 2.5.0 : llapi_hsm_state_get_fd().
     ##############################################
     CHECK_LIBRARY_EXISTS(lustreapi llapi_hsm_state_get_fd "" USE_LLAPI)
     if(NOT USE_LLAPI)
@@ -800,7 +805,7 @@ if(USE_FSAL_XFS)
   endif((NOT HAVE_XFS_LIB) OR (NOT HAVE_XFS_H))
 endif(USE_FSAL_XFS)
 
-# VFS, GPFS, LUSTRE, and XFS require GSH_CAN_HOST_LOCAL_FS
+#VFS, GPFS, LUSTRE, and XFS require GSH_CAN_HOST_LOCAL_FS
 if(NOT GSH_CAN_HOST_LOCAL_FS)
   if((USE_FSAL_VFS AND USE_FSAL_VFS_REQUIRED) OR
      (USE_FSAL_GPFS AND USE_FSAL_GPFS_REQUIRED) OR
@@ -822,9 +827,10 @@ gopt_test(USE_FSAL_GLUSTER)
 if(USE_FSAL_GLUSTER)
   find_package(PkgConfig)
   IF(GLUSTER_PREFIX)
-    set(ENV{PKG_CONFIG_PATH} "${PKG_CONFIG_PATH}:${GLUSTER_PREFIX}/lib/pkgconfig")
+    set(ENV{
+	PKG_CONFIG_PATH} "${PKG_CONFIG_PATH}:${GLUSTER_PREFIX}/lib/pkgconfig")
   ENDIF(GLUSTER_PREFIX)
-  # pkg_check_modules doesn't fatal error on REQUIRED, so handle it ourselves
+#pkg_check_modules doesn't fatal error on REQUIRED, so handle it ourselves
   pkg_check_modules(GFAPI glusterfs-api>=7.6.6)
   if(NOT GFAPI_FOUND)
     if(USE_FSAL_GLUSTER_REQUIRED)
@@ -838,7 +844,7 @@ if(USE_FSAL_GLUSTER)
     message(STATUS "GFAPI_LIBRARY_DIRS=${GFAPI_LIBRARY_DIRS}")
     message(STATUS "GFAPI_LIBDIR=${GFAPI_LIBDIR}")
     include_directories(${GFAPI_INCLUDE_DIRS})
-    # missing directory not provided by current version of GlusterFS
+#missing directory not provided by current version of GlusterFS
     include_directories(${GFAPI_PREFIX}/include)
     link_directories (${GFAPI_LIBRARY_DIRS})
     pkg_check_modules(STAT_FETCH_GFAPI glusterfs-api>=7.6)
@@ -901,11 +907,11 @@ if(USE_FSAL_GLUSTER)
 endif(USE_FSAL_GLUSTER)
 
 gopt_test(USE_FSAL_NULL)
-# NULL has no dependencies
+#NULL has no dependencies
 
 gopt_test(USE_FSAL_RGW)
 if(USE_FSAL_RGW)
-  # require RGW w/API version 1.2.1
+#require RGW w / API version 1.2.1
   find_package(RGW 1.2.1 ${USE_FSAL_RGW_REQUIRED})
   if(NOT RGW_FOUND)
     message(WARNING "Cannot find supported RGW runtime.  Disabling RGW fsal build")
@@ -916,9 +922,9 @@ endif(USE_FSAL_RGW)
 gopt_test(USE_FSAL_SAUNAFS)
 
 gopt_test(USE_FSAL_MEM)
-# MEM has no dependencies
+#MEM has no dependencies
 
-# sort out which allocator to use
+#sort out which allocator to use
 if(${ALLOCATOR} STREQUAL "jemalloc")
   find_package(JeMalloc)
   if(JEMALLOC_FOUND)
@@ -941,14 +947,14 @@ else()
   endif()
 endif()
 
-# Find optional libraries/packages
+#Find optional libraries / packages
 
 if (USE_ACL_MAPPING)
   if(HAVE_LIBACL)
     set(SYSTEM_LIBRARIES ${LIBACL_LIBRARY} ${SYSTEM_LIBRARIES})
   else(HAVE_LIBACL)
     set(USE_ACL_MAPPING OFF)
-    # HAVE_LIBACL must be set before setting USE_ACL_MAPPING
+#HAVE_LIBACL must be set before setting USE_ACL_MAPPING
     message(FATAL_ERROR "Could not find libacl, disabling ACL mapping build")
   endif(HAVE_LIBACL)
 endif(USE_ACL_MAPPING)
@@ -971,7 +977,7 @@ endif(USE_EFENCE)
 gopt_test(USE_DBUS)
 if(USE_DBUS)
   find_package(PkgConfig)
-  # pkg_check_modules doesn't fatal error on REQUIRED, so handle it ourselves
+#pkg_check_modules doesn't fatal error on REQUIRED, so handle it ourselves
   pkg_check_modules(DBUS ${USE_DBUS_REQUIRED} dbus-1)
   if(NOT DBUS_FOUND)
     if(USE_DBUS_REQUIRED)
@@ -986,6 +992,21 @@ if(USE_DBUS)
     link_directories (${DBUS_LIBRARY_DIRS})
   endif(NOT DBUS_FOUND)
 endif(USE_DBUS)
+
+gopt_test(USE_GRPC)
+if(USE_GRPC)
+    find_package(Protobuf REQUIRED)
+if(NOT Protobuf_FOUND)
+	message(WARNING "Cannot find Protobuf libs. Disabling gRPC,protobuf support")
+	set(USE_GRPC OFF)
+else(NOT Protobuf_FOUND)
+	find_package(gRPC REQUIRED)
+	if(NOT gRPC_FOUND)
+		message(WARNING "Cannot find gRPC libs. Disabling gRPC support")
+		set(USE_GRPC OFF)
+    endif(NOT gRPC_FOUND)
+endif(NOT Protobuf_FOUND)
+endif(USE_GRPC)
 
 if(USE_CB_SIMULATOR AND NOT USE_DBUS)
   message(WARNING "The callback simulator needs DBUS.  Disabling callback simulator")
@@ -1032,13 +1053,13 @@ endif(_MSPAC_SUPPORT)
 
 gopt_test(USE_LTTNG)
 if(USE_LTTNG)
-  # Set LTTNG_PATH_HINT on the command line
-  # if your LTTng is not in a standard place
+#Set LTTNG_PATH_HINT on the command line
+#if your LTTng is not in a standard place
   find_package(LTTng ${USE_LTTNG_REQUIRED})
   if(LTTNG_FOUND)
 
     if(NOT CMAKE_EXPORT_COMPILE_COMMANDS)
-      # We must create compile_commands.json for lttng trace generation
+#We must create compile_commands.json for lttng trace generation
       set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
     endif(NOT CMAKE_EXPORT_COMPILE_COMMANDS)
 
@@ -1051,14 +1072,15 @@ if(USE_LTTNG)
     )
 
     include_directories(
-      ${LTTNG_INCLUDE_DIR}
+      ${
+	LTTNG_INCLUDE_DIR}
       "${CMAKE_CURRENT_SOURCE_DIR}/libntirpc/src/lttng/generator/include/"
       "${CMAKE_CURRENT_BINARY_DIR}/gsh_generated_include/"
       "${CMAKE_CURRENT_BINARY_DIR}/libntirpc/ntirpc_generated_include/"
     )
     add_definitions(-DUSE_LTTNG)
 
-    # Generate build rules for trace generator
+#Generate build rules for trace generator
     execute_process(
       COMMAND bash -c "${CMAKE_CURRENT_SOURCE_DIR}/libntirpc/src/lttng/generator/generate_cmake_rules.py \
           --project_path ${CMAKE_CURRENT_SOURCE_DIR} \
@@ -1099,7 +1121,7 @@ if(RADOS_URLS)
   endif(NOT RADOS_FOUND)
 endif(RADOS_URLS)
 
-# Cmake 2.6 has issue in managing BISON and FLEX
+#Cmake 2.6 has issue in managing BISON and FLEX
 if( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" VERSION_LESS "2.8" )
    message( status "CMake 2.6 detected, using portability hooks" )
    set(CMAKE_CURRENT_LIST_DIR /usr/share/cmake/Modules )
@@ -1122,7 +1144,7 @@ if (HAVE_KRB5)
     )
 endif (HAVE_KRB5)
 
-# check for d_off support, FreeBSD doesn't support it before 1200500
+#check for d_off support, FreeBSD doesn't support it before 1200500
 if(LINUX)
   add_definitions(-DHAS_DOFF)
 elseif(FREEBSD)
@@ -1135,12 +1157,12 @@ elseif(FREEBSD)
     add_definitions(-DHAS_DOFF)
   endif()
 elseif(DARWIN)
-  # d_off unavailable on macOS
+#d_off unavailable on macOS
 else() # d_off is on by default for other cases
   add_definitions(-DHAS_DOFF)
 endif()
 
-# Fixup loose bits of autotools legacy
+#Fixup loose bits of autotools legacy
 set(_USE_9P ${USE_9P})
 set(_USE_9P_RDMA ${USE_9P_RDMA})
 set(_USE_NFS3 ${USE_NFS3})
@@ -1153,7 +1175,7 @@ set(_USE_CB_SIMULATOR ${USE_CB_SIMULATOR})
 set( PKG_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}.tar.gz")
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
-# Find misc system libs
+#Find misc system libs
 
 goption(USE_CAPS "Enable capability management" ON)
 gopt_test(USE_CAPS)
@@ -1167,11 +1189,11 @@ if(USE_CAPS)
   endif (CAPS_FOUND)
 endif(USE_CAPS)
 
-# default to ON so that it does the right thing in the CentOS CI
+#default to ON so that it does the right thing in the CentOS CI
 goption(USE_LEGACY_PYTHON_INSTALL "Use 'python setup.py install'" ON)
 
-# Check if we have libblkid and libuuid, will just be reported under one
-# flag USE_BLKID
+#Check if we have libblkid and libuuid, will just be reported under one
+#flag USE_BLKID
 
 check_include_files("blkid/blkid.h" HAVE_LIBBLKID_H)
 find_library(LIBBLKID blkid)  # Management of Capabilities
@@ -1192,11 +1214,11 @@ check_library_exists(
 	)
 
 if(HAVE_LIBBLKID AND HAVE_LIBUUID AND HAVE_LIBBLKID_H AND HAVE_LIBUUID_H)
-  # we have all the libraries and include files to use libblkid and libuuid
+#we have all the libraries and include files to use libblkid and libuuid
   set(SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${LIBBLKID} ${LIBUUID})
   set(USE_BLKID ON)
 else(HAVE_LIBBLKID AND HAVE_LIBUUID AND HAVE_LIBBLKID_H AND HAVE_LIBUUID_H)
-  # we are missing something and can't use libblkid and libuuid
+#we are missing something and can't use libblkid and libuuid
   set(USE_BLKID OFF)
   if(NOT HAVE_LIBBLKID)
     message(STATUS "Could not find blkid library, disabling USE_BLKID")
@@ -1209,8 +1231,8 @@ else(HAVE_LIBBLKID AND HAVE_LIBUUID AND HAVE_LIBBLKID_H AND HAVE_LIBUUID_H)
   endif(NOT HAVE_LIBBLKID)
 endif(HAVE_LIBBLKID AND HAVE_LIBUUID AND HAVE_LIBBLKID_H AND HAVE_LIBUUID_H)
 
-# check is daemon exists
-# I use check_library_exists there to be portab;e
+#check is daemon exists
+#I use check_library_exists there to be portab; e
 check_library_exists(
 	c
 	daemon
@@ -1218,7 +1240,7 @@ check_library_exists(
 	HAVE_DAEMON
 	)
 
-# Needs to be before ntirpc
+#Needs to be before ntirpc
 add_custom_target( rpm DEPENDS dist)
 add_custom_command(TARGET rpm
                   COMMAND sh -c "rpmbuild -ta ${PKG_NAME}"
@@ -1232,9 +1254,9 @@ add_custom_command(TARGET srpm
 		  VERBATIM
 		  DEPENDS dist)
 
-# Roll up required libraries
+#Roll up required libraries
 
-# enable libunwind if available
+#enable libunwind if available
 goption(USE_UNWIND "Enable libunwind" ON)
 gopt_test(USE_UNWIND)
 if (USE_UNWIND)
@@ -1267,11 +1289,12 @@ if (USE_SYSTEM_NTIRPC)
     set(USE_LTTNG_NTIRPC ON)
   endif (USE_LTTNG)
 else (USE_SYSTEM_NTIRPC)
-  # Set options for submodule
+#Set options for submodule
   set(USE_RPC_RDMA ${USE_NFS_RDMA} CACHE BOOL "Use RDMA")
   set(TIRPC_EPOLL ${TIRPC_EPOLL} CACHE BOOL "Use EPOLL")
   set(USE_GSS ${USE_GSS} CACHE BOOL "Use GSS")
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+  set(CMAKE_MODULE_PATH ${
+	CMAKE_MODULE_PATH}
 	  "${GANESHA_TOP_CMAKE_DIR}/libntirpc/cmake/modules/")
   add_subdirectory(libntirpc)
   set(NTIRPC_LIBRARY ntirpc)
@@ -1295,7 +1318,7 @@ if (NOT LIBURCU_INC)
 endif(NOT LIBURCU_INC)
 check_symbol_exists(urcu_ref_get_unless_zero urcu/ref.h HAVE_URCU_REF_GET_UNLESS_ZERO)
 
-# All the plumbing in the basement
+#All the plumbing in the basement
 set(SYSTEM_LIBRARIES
   ${NTIRPC_LIBRARY}
   ${SYSTEM_LIBRARIES}
@@ -1307,7 +1330,7 @@ set(SYSTEM_LIBRARIES
 
 include_directories(${LIBURCU_INC})
 
-# Config file; make sure it doesn't clobber an existing one
+#Config file; make sure it doesn't clobber an existing one
 include(${GANESHA_TOP_CMAKE_DIR}/cmake/modules/InstallPackageConfigFile.cmake)
 InstallPackageConfigFile(${GANESHA_TOP_CMAKE_DIR}/config_samples/ganesha.conf.example ${SYSCONFDIR}/ganesha ganesha.conf)
 
@@ -1338,13 +1361,18 @@ if(USE_DBUS)
   add_subdirectory(dbus)
 endif(USE_DBUS)
 
+if(USE_GRPC)
+  add_subdirectory(proto)
+  add_subdirectory(grpc_server)
+endif(USE_GRPC)
+
 if(USE_LTTNG)
   add_subdirectory(tracing)
 endif(USE_LTTNG)
 
 add_subdirectory(scripts)
 add_subdirectory(doc)
-# display configuration vars
+#display configuration vars
 
 message(STATUS)
 message(STATUS "-------------------------------------------------------")
@@ -1526,18 +1554,17 @@ set(USE_ACL_MAPPING ${USE_ACL_MAPPING}
   "Build NFSv4 to POSIX ACL mapping"
   FORCE)
 
-
-# Now create a usable config.h
+#Now create a usable config.h
 configure_file(
   "${PROJECT_SOURCE_DIR}/include/config-h.in.cmake"
   "${PROJECT_BINARY_DIR}/include/config.h"
 )
 
-# Tweak the "%bcond_<with|without> in the specfile for every
-# optional feature. Take care on the logic of this syntax
-# %bcond_with means you add a "--with" option, default is "without this feature"
-# %bcond_without adds a"--without" so the feature is enabled by default
-# This has to be coherent with chosen FSALs
+#Tweak the "%bcond_<with|without> in the specfile for every
+#optional feature.Take care on the logic of this syntax
+#% bcond_with means you add a "--with" option, default is "without this feature"
+#% bcond_without adds a "--without" so the feature is enabled by default
+#This has to be coherent with chosen FSALs
 
 if(USE_FSAL_XFS)
     set(BCOND_XFS "%bcond_without")
@@ -1701,7 +1728,7 @@ else(USE_LEGACY_PYTHON_INSTALL)
     set(BCOND_LEGACY_PYTHON_INSTALL "%bcond_with")
 endif(USE_LEGACY_PYTHON_INSTALL)
 
-# Now create a usable specfile
+#Now create a usable specfile
 configure_file(
   "${PROJECT_SOURCE_DIR}/nfs-ganesha.spec-in.cmake"
   "${PROJECT_SOURCE_DIR}/nfs-ganesha.spec"
@@ -1712,7 +1739,7 @@ configure_file(
   "${PROJECT_SOURCE_DIR}/scripts/systemd/nfs-ganesha-config.service"
 )
 
-# Make a docker image
+#Make a docker image
 set(DOCKER_TMP_INSTALL_PATH "${PROJECT_BINARY_DIR}/docker/root")
 find_package(LSB_release)
 if(LSB_RELEASE_EXECUTABLE)
@@ -1743,7 +1770,8 @@ if(COVERAGE)
 	if(LCOV_EXEC AND GENHTML_EXEC)
 		add_custom_target(lcov)
 		add_custom_command(TARGET lcov
-			COMMAND ${LCOV_EXEC} --capture --directory .
+			COMMAND ${
+	LCOV_EXEC} --capture --directory .
 			--output-file coverage.info
 			COMMAND ${GENHTML_EXEC} coverage.info
 			--output-directory ./coverage_html/
