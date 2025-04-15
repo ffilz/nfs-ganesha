@@ -320,8 +320,20 @@ class AdminInterface():
         msg = reply[1]
         return status, msg
 
-    def purge_idmap(self):
+    def purge_idmapper(self):
         method = self.dbusobj.get_dbus_method("purge_idmapper_cache",
+                                              self.dbus_interface)
+        try:
+            reply = method()
+        except dbus.exceptions.DBusException as ex:
+            return False, ex
+
+        status = reply[0]
+        msg = reply[1]
+        return status, msg
+
+    def purge_idmapper_negative(self):
+        method = self.dbusobj.get_dbus_method("purge_idmapper_negative_cache",
                                               self.dbus_interface)
         try:
             reply = method()
