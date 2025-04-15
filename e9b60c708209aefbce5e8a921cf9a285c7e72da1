@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6daceb_a7319d77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:25:41Z",
+      "side": 1,
+      "message": "Hmm, good fix, but this might be better fixed by refactoring as described.",
+      "revId": "e9b60c708209aefbce5e8a921cf9a285c7e72da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbd6692_142c8c58",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:25:41Z",
+      "side": 1,
+      "message": "Refactoring comments below",
+      "revId": "e9b60c708209aefbce5e8a921cf9a285c7e72da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e711c33c_2ab34d17",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:25:41Z",
+      "side": 1,
+      "message": "Add fsal_status_t status \u003d {0, 0};",
+      "revId": "e9b60c708209aefbce5e8a921cf9a285c7e72da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb30fb02_6e60e8ae",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:25:41Z",
+      "side": 1,
+      "message": "Refactor to:\n\nif (errsv \u003d\u003d ERANGE)\n   status \u003d fsalstat(ERR_FSAL_TOOSMALL, ERANGE);\\\nelse\n    status \u003d posix2fsal_status(errsv);\ngoto out;\n    \n NOTE:  posix2fsal_statis is simpler than fsalstat(posix2fsal_error(errsv), errsv)",
+      "revId": "e9b60c708209aefbce5e8a921cf9a285c7e72da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a8ca7a_6ae60cdc",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:25:41Z",
+      "side": 1,
+      "message": "Refactor to:\n\nstatus \u003d posix2fsal_status(errsv);\ngoto out;",
+      "revId": "e9b60c708209aefbce5e8a921cf9a285c7e72da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab1f2f9_35047382",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:25:41Z",
+      "side": 1,
+      "message": "Move gsh_free(buf) to after out: label",
+      "revId": "e9b60c708209aefbce5e8a921cf9a285c7e72da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132263b1_c665f576",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-15T20:25:41Z",
+      "side": 1,
+      "message": "out:\ngsh_free(buf);\nreturn status;",
+      "revId": "e9b60c708209aefbce5e8a921cf9a285c7e72da1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
