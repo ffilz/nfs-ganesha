@@ -261,6 +261,9 @@ Allow_Set_Io_Flusher_Fail(bool, default false)
   For more info, see:
   https://git.kernel.org/torvalds/p/8d19f1c8e1937baf74e1962aae9f90fa3aeab463
 
+Grpc_Port (uint16, range 0 to UINT16_MAX, default 50051)
+  Port number used to communicate via gRPC.
+
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
 
