@@ -189,9 +189,14 @@ class ServerAdmin():
         status, msg = self.admin.purge_netgroups()
         self.status_message(status, msg)
 
-    def purge_idmap(self):
+    def purge_idmapper(self):
         print("Purging idmapper cache")
-        status, msg = self.admin.purge_idmap()
+        status, msg = self.admin.purge_idmapper()
+        self.status_message(status, msg)
+
+    def purge_idmapper_negative(self):
+        print("Purging idmapper negative cache")
+        status, msg = self.admin.purge_idmapper_negative()
         self.status_message(status, msg)
 
     def purge_gids(self):
@@ -381,7 +386,8 @@ if __name__ == '__main__':
        "         display export 10 \n\n"\
        "   purge: \n"                                                              \
        "      netgroups: Purges netgroups cache\n"                                 \
-       "      idmap: Purges idmapper cache\n"                                      \
+       "      idmapper: Purges idmapper cache\n"                                   \
+       "      idmapper_negative: Purges idmapper negative cache\n"                 \
        "      gids: Purges gids cache\n\n"                                         \
        "   show :\n"                                                               \
        "      clients: Displays the current clients\n"                             \
@@ -491,8 +497,10 @@ if __name__ == '__main__':
             sys.exit(msg)
         if sys.argv[2] == "netgroups":
             ganesha.purge_netgroups()
-        elif sys.argv[2] == "idmap":
-            ganesha.purge_idmap()
+        elif sys.argv[2] == "idmapper":
+            ganesha.purge_idmapper()
+        elif sys.argv[2] == "idmapper_negative":
+            ganesha.purge_idmapper_negative()
         elif sys.argv[2] == "gids":
             ganesha.purge_gids()
         else:
