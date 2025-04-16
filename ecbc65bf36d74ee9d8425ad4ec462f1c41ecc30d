@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c574f51d_bc25645c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-16T23:28:41Z",
+      "side": 1,
+      "message": "I would really like to see in the comments for each function, any locks that the function expects to be held. I\u0027m having trouble determining if various list operations are properly protected by locks.",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6394044b_c48c3091",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 12
@@ -14,6 +31,40 @@
       "writtenOn": "2025-04-16T17:31:27Z",
       "side": 1,
       "message": "Hmm, why look at fullpath length? Also code outside export create/update should not be looking at cfg_fullpath.",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ebe1bb_b17bc917",
+        "filename": "src/support/exports.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-16T23:28:41Z",
+      "side": 1,
+      "message": "Does this properly remove the QoS block if QoS is disabled or removed from EXPORT?",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6895a1_8907328a",
+        "filename": "src/support/exports.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-16T23:28:41Z",
+      "side": 1,
+      "message": "Could we get some alternate values that are more descriptive? These values can stand, but how about \"Per_Export\", \"Per_Client\", and \"Per_Export_Per_Client\"?",
       "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
