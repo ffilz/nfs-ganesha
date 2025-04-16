@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b0a7450_a7287f35",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-16T13:57:00Z",
+      "side": 1,
+      "message": "rdma_getaddrinfo() function was failing due to the IPv6 format on the SoftiWarp environment, so changed it to IPv4 format for the time being. It can work with NULL as well. \n\nOnce we validate the changes in the physical environment, we will change it accordingly or in a more generic way.",
+      "parentUuid": "7f22a585_cd752958",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "218788ac_2207a11f",
         "filename": "src/include/gsh_config.h",
         "patchSetId": 2
@@ -70,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b08e34a_acc6f581",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-16T13:57:00Z",
+      "side": 1,
+      "message": "Updated the patch accordingly.",
+      "parentUuid": "d3168af2_ad781639",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e671af6_b6ee5945",
@@ -83,6 +119,24 @@
       "writtenOn": "2025-03-26T15:57:01Z",
       "side": 1,
       "message": "Hmm, we should check transports here (including RDMA) also...",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "395fea3d_55c6299d",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-16T13:57:00Z",
+      "side": 1,
+      "message": "Updated the patch accordingly.",
+      "parentUuid": "1e671af6_b6ee5945",
       "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
