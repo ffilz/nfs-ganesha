@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6394044b_c48c3091",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-16T17:31:27Z",
+      "side": 1,
+      "message": "Hmm, why look at fullpath length? Also code outside export create/update should not be looking at cfg_fullpath.",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
