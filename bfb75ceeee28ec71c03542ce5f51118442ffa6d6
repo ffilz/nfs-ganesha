@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "099fa3a6_08eb0f28",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-16T17:28:04Z",
+      "side": 1,
+      "message": "OK, that\u0027s reasonable. Obviously RDMA is still a work in progress. You might mention something in the commit message.",
+      "parentUuid": "9b0a7450_a7287f35",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "218788ac_2207a11f",
@@ -226,6 +244,24 @@
       "side": 1,
       "message": "Please add some explanation to the comment",
       "parentUuid": "029f822c_a6a802d9",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3651a3b0_9eabb68f",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-16T17:28:04Z",
+      "side": 1,
+      "message": "One last bit on this, if a client tries to use NFSv4.2 over RDMA it will be rejected right?",
+      "parentUuid": "b947aba6_2f89dbd2",
       "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
