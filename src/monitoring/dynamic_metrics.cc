@@ -116,30 +116,30 @@ DynamicMetrics::DynamicMetrics(prometheus::Registry &registry)
 	: // Counters
 	mdcacheCacheHitsTotal(
 		prometheus::Builder<CounterInt>()
-			.Name("mdcache_cache_hits_total")
+			.Name("nfs_mdcache_hits_total")
 			.Help("Counter for total cache hits in mdcache.")
 			.Register(registry))
 	, mdcacheCacheMissesTotal(
 		  prometheus::Builder<CounterInt>()
-			  .Name("mdcache_cache_misses_total")
+			  .Name("nfs_mdcache_misses_total")
 			  .Help("Counter for total cache misses in mdcache.")
 			  .Register(registry))
 	, mdcacheCacheHitsByExportTotal(
 		  prometheus::Builder<CounterInt>()
-			  .Name("mdcache_cache_hits_by_export_total")
+			  .Name("nfs_mdcache_hits_by_export_total")
 			  .Help("Counter for total cache hits in mdcache, by export.")
 			  .Register(registry))
 	, mdcacheCacheMissesByExportTotal(
 		  prometheus::Builder<CounterInt>()
-			  .Name("mdcache_cache_misses_by_export_total")
+			  .Name("nfs_mdcache_misses_by_export_total")
 			  .Help("Counter for total cache misses in mdcache, by export.")
 			  .Register(registry))
 	, rpcsReceivedTotal(prometheus::Builder<CounterInt>()
-				    .Name("rpcs_received_total")
+				    .Name("nfs_rpcs_received_total")
 				    .Help("Counter for total RPCs received.")
 				    .Register(registry))
 	, rpcsCompletedTotal(prometheus::Builder<CounterInt>()
-				     .Name("rpcs_completed_total")
+				     .Name("nfs_rpcs_completed_total")
 				     .Help("Counter for total RPCs completed.")
 				     .Register(registry))
 	, errorsByVersionOperationStatus(
@@ -151,17 +151,17 @@ DynamicMetrics::DynamicMetrics(prometheus::Registry &registry)
 
 	// Per client metrics.
 	clientRequestsTotal(prometheus::Builder<CounterInt>()
-				    .Name("client_requests_total")
+				    .Name("nfs_client_requests_total")
 				    .Help("Total requests by client.")
 				    .Register(registry))
 	, clientBytesReceivedTotal(
 		  prometheus::Builder<CounterInt>()
-			  .Name("client_bytes_received_total")
+			  .Name("nfs_client_bytes_received_total")
 			  .Help("Total request bytes by client.")
 			  .Register(registry))
 	, clientBytesSentTotal(
 		  prometheus::Builder<CounterInt>()
-			  .Name("client_bytes_sent_total")
+			  .Name("nfs_client_bytes_sent_total")
 			  .Help("Total response bytes sent by client.")
 			  .Register(registry))
 	,
@@ -169,11 +169,11 @@ DynamicMetrics::DynamicMetrics(prometheus::Registry &registry)
 	// Gauges
 	rpcsInFlight(
 		prometheus::Builder<GaugeInt>()
-			.Name("rpcs_in_flight")
+			.Name("nfs_rpcs_in_flight")
 			.Help("Number of NFS requests received or in flight.")
 			.Register(registry))
 	, lastClientUpdate(prometheus::Builder<GaugeInt>()
-				   .Name("last_client_update")
+				   .Name("nfs_last_client_update")
 				   .Help("Last update timestamp, per client.")
 				   .Register(registry))
 	,

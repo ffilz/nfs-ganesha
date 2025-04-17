@@ -93,7 +93,7 @@ static void register_clients_metrics(void)
 				(enum connection_manager__client_state_t)
 					state)) };
 		metrics.clients[state] = monitoring__register_gauge(
-			"connection_manager__clients",
+			"nfs_connection_manager_clients",
 			METRIC_METADATA("Connection Manager Clients per State",
 					METRIC_UNIT_NONE),
 			labels, ARRAY_SIZE(labels));
@@ -112,7 +112,7 @@ static void register_connection_started_latencies_metrics(void)
 					result)) };
 		metrics.connection_started_latencies
 			[result] = monitoring__register_histogram(
-			"connection_manager__connection_started_latencies",
+			"nfs_connection_manager_connection_started_latencies",
 			METRIC_METADATA("Connection Manager Connection Started "
 					"Latencies per Result",
 					METRIC_UNIT_MILLISECOND),
@@ -131,7 +131,7 @@ static void register_drain_local_client_latencies_metrics(void)
 				(enum connection_manager__drain_t)result)) };
 		metrics.drain_local_client_latencies
 			[result] = monitoring__register_histogram(
-			"connection_manager__drain_local_client_latencies",
+			"nfs_connection_manager_drain_local_client_latencies",
 			METRIC_METADATA("Connection Manager Drain Local Client "
 					"Latencies per Result",
 					METRIC_UNIT_MILLISECOND),
