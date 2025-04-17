@@ -280,6 +280,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 					/* getaddrinfo() failed, retry */
 					retval = RPC_UNKNOWNADDR;
 					usleep(1000);
+					close(fd);
 					continue;
 				} else if (retval != 0) {
 					LogMajor(
@@ -287,6 +288,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 						"failed to resolve %s to an address: %s",
 						caller_name,
 						gai_strerror(retval));
+					close(fd);
 					return -1;
 				}
 
