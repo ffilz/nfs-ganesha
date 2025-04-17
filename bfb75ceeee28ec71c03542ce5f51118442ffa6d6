@@ -264,6 +264,24 @@
       "parentUuid": "b947aba6_2f89dbd2",
       "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ac6ab47_7a7680fb",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-17T11:11:33Z",
+      "side": 1,
+      "message": "Yes, Mount (NFSv4.2) command will fail with error \"mount.nfs: Protocol not supported\".",
+      "parentUuid": "3651a3b0_9eabb68f",
+      "revId": "bfb75ceeee28ec71c03542ce5f51118442ffa6d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
