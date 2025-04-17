@@ -18,6 +18,57 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d00667_89d4c163",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "More review later",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b0a6e58_4ec5d504",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure what happened in this file to mess up all the white space and create an unreasonably large patch.",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "071d7738_c0c932b8",
+        "filename": "src/grpc_server/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Make sure all copyrights for new files are IBM, unless copying from another file...\n\nIn which case you should include the original year, 2025",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3c08489_4e80d030",
@@ -37,6 +88,183 @@
         "endLine": 29,
         "endChar": 1
       },
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adfcecb2_f2ce0429",
+        "filename": "src/grpc_server/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Maybe, this file shouldn\u0027t be clang-formatted",
+      "parentUuid": "b3c08489_4e80d030",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 1
+      },
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d1832fd_07382230",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Copyright...",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b591575c_9f2e5d3e",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Copyright...",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac7cf61_b9e962a4",
+        "filename": "src/grpc_server/nfsServiceClient.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Copyright...",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5191dcb_cabffb14",
+        "filename": "src/grpc_server/nfsServiceClient.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Also, in the Ganesha tree, C++ files are named .cc not .cpp",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ac7699_d57bf6d4",
+        "filename": "src/grpc_server/nfsServiceServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "copyright...",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5b6c91_42865628",
+        "filename": "src/grpc_server/nfsServiceServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": ".cc not .cpp",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bb47cdd_83344257",
+        "filename": "src/proto/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Copyright...",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf1ed98_4387ee2b",
+        "filename": "src/proto/nfsService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Copyright...",
+      "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35e5003b_211c12fe",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:32:19Z",
+      "side": 1,
+      "message": "Need to document in:\n\nsrc/config_samples/config.txt\nsrc/doc/man/ganesha-core-config.rst",
       "revId": "15da1b55e525bbea4be9881231a6ca4639c7eb0b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
