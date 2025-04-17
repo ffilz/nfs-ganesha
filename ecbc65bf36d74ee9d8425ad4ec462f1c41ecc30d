@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "455b0cfb_d6f0bb40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-17T14:31:22Z",
+      "side": 1,
+      "message": "Updated the comments with lock details in required place",
+      "parentUuid": "c574f51d_bc25645c",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6394044b_c48c3091",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-16T17:31:27Z",
       "side": 1,
       "message": "Hmm, why look at fullpath length? Also code outside export create/update should not be looking at cfg_fullpath.",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6ed9a3_0c99c3d9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-17T14:31:22Z",
+      "side": 1,
+      "message": "Here check is trying to avoid OPS calculation for \"/\" .\nAnd qos_block and qos_class in gsh_export-\u003eqos_class will be null for \"/\"",
+      "parentUuid": "6394044b_c48c3091",
       "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a9234c_edb48001",
+        "filename": "src/support/exports.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-17T14:31:22Z",
+      "side": 1,
+      "message": "1. If QOS block is removed from export block in config-file, qos_block_commit will not get called.\n\n2. Consider a case where QOS block was already present and is now removed from export block in config file and SIGHUP is triggered to Ganesha for this update.\ncopy_gsh_qos_conf will take care of the appropriate actions required. (i.e global QOS values need to be refelected to export value)\n\n3. If share level qos is disabled, we mark the enable_qos to disabled in perexport structure. Structure will be still there.\n\n4. If Global QOS value is in disabled, else condition will make sure to not populate any QOS related struture in gsh_export/gsh_client.",
+      "parentUuid": "d8ebe1bb_b17bc917",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc6895a1_8907328a",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-04-16T23:28:41Z",
       "side": 1,
       "message": "Could we get some alternate values that are more descriptive? These values can stand, but how about \"Per_Export\", \"Per_Client\", and \"Per_Export_Per_Client\"?",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6967ba62_9d46d142",
+        "filename": "src/support/exports.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-17T14:31:22Z",
+      "side": 1,
+      "message": "Changes done as suggested.",
+      "parentUuid": "dc6895a1_8907328a",
       "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
