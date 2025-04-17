@@ -142,11 +142,12 @@ static bool is_metric_empty(prometheus::Metric::Type type,
 // server from MBs to KBs
 static void compact_family(prometheus::MetricFamily &family)
 {
-	auto first_element_to_remove = std::remove_if(
-		family.metric.begin(), family.metric.end(),
-		[&family](auto metric) {
-			return is_metric_empty(family.type, metric);
-		});
+	auto first_element_to_remove =
+		std::remove_if(family.metric.begin(), family.metric.end(),
+			       [&family](auto metric) {
+				       return is_metric_empty(family.type,
+							      metric);
+			       });
 	// Keep at least one metric even if it's empty so it's easier to query
 	if (first_element_to_remove == family.metric.begin())
 		first_element_to_remove++;
@@ -165,7 +166,7 @@ PrometheusExposer::PrometheusExposer(prometheus::Registry &registry)
 	: registry_(registry)
 	, scrapingLatencies_(
 		  prometheus::Builder<HistogramInt>()
-			  .Name("monitoring__scraping_latencies")
+			  .Name("nfs_monitoring__scraping_latencies")
 			  .Help("Time duration of entire registry scraping [ms].")
 			  .Register(registry))
 	, successLatencies_(scrapingLatencies_.Add({ { kStatus, kSuccess } },
