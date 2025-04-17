@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5a6c0a_92fc702e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-17T23:20:10Z",
+      "side": 1,
+      "message": "This is actually a false positive situation.\n\nCoverity doesn\u0027t understand refcounts and so it sees that dec ref frees the object and so a subsequent dec ref count is seen as a reference after free.\n\nBut of course if you have 2 or more references, the first dec ref doesn\u0027t actually free.",
+      "revId": "7089ba3222e02d266d3109df7e74dab10dbac442",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
