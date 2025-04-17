@@ -119,7 +119,7 @@ static fsal_status_t ceph_fsal_lookup(struct fsal_obj_handle *dir_pub,
 	/* Generic status return */
 	int rc = 0;
 	/* Stat output */
-	struct ceph_statx stx;
+	struct ceph_statx stx = { 0 };
 	/* The private 'full' export */
 	struct ceph_export *export =
 		container_of(op_ctx->fsal_export, struct ceph_export, export);
