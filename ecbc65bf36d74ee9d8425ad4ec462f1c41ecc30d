@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96c35041_fbd5d762",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T00:07:48Z",
+      "side": 1,
+      "message": "I don\u0027t think we can universally assume an EXPORT with Path \u003d \"/\"; can be assumed to not use QoS. In my testing, my Ceph EXPORT has Path \u003d \"/\"; and some hypothetical other FSAL might not even use Path, so just expect it to be \"/\".\n\nFurther, cfg_fullpath is not supposed to be referenced by anything other than the configuration code. It is not guaranteed to be a valid pointer outside the configuration process.\n\nIt seems like there must be a better way to determine an export is not subject to QoS.",
+      "parentUuid": "2e6ed9a3_0c99c3d9",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8ebe1bb_b17bc917",
         "filename": "src/support/exports.c",
         "patchSetId": 12
