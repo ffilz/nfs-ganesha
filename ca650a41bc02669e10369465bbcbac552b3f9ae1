@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e2a933_ad7372f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "More in depth review. This would be a lot easier to review if the code was structured so there were clear building block structures and functions, and then higher level code that used those blocks to accomplish the objctive.\n\nIt would really help me to review the code quicker if at least the structure element names were prefixed. Particularly, it\u0027s hard to follow what fields should be protected by which locks.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a15e2b9_d84855bc",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "You need to hold a lock to process the client list",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a830ce8_5985f44c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "Do not code redundant \u003d\u003d true in a boolean expression",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a72396_813c65bf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "Instead of having a separate function, just pull the code into here. It makes it much easier to follow.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "205649d0_4f1e8edd",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "This appears to be copying just a pointer, which in at least one case is: \u0026op_ctx-\u003eclient-\u003ecl_addrbuf which is not persistent at all. Did you mean qos_client_t\u0027s client_addr to be a sockaddr_t struct rather than pointer and do a member copy?",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc8cf97_be8d0c28",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "I see this is called from two places, but in each case is followed by setNode_pc, please fold that call into here to reduce the call stack.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8758e81_f01ea387",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "You should remove this test, allocate_client can never return NULL because gsh_calloc can never return NULL.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55580fa3_8d130d70",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "This function is called from just one place, and just makes one function call. Please consolidate allocate_client with setNode_pc as requested above, and then where this function is called, call alloc_client and then do the glist_add_tail.\n\nThis consolidation will make the code much easier to follow.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6dd6f7_3a44e92f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "This test should be removed, pepc_allocate_and_init_client can never return NULL.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1cc6dc4_f2c1d3f6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "client-\u003eclient_addr should not be a pointer, and should instead be compared using cmp_sockaddr",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5793fc5_71ac9b0a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "Why are we making this call without holding a lock, then repeating it with lock held? glist_for_each should always be called holding the lock that protects the list.\n\nFurther, why are we using a linked list of clients (possibly 1000s) instead of an AVL tree?",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6ae4d2_94c23835",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1452,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-18T21:54:53Z",
+      "side": 1,
+      "message": "Is there any lock or refcounting that is protecting use of qos_export_t and qos_client_t?",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
