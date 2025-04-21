@@ -409,7 +409,7 @@ void nlm_signal_async_resp(void *key)
 
 	if (resp_key == key) {
 		resp_key = NULL;
-		pthread_cond_signal(&nlm_async_resp_cond);
+		PTHREAD_COND_signal(&nlm_async_resp_cond);
 		LogFullDebug(COMPONENT_NLM, "Signaled condition variable");
 	} else {
 		LogFullDebug(COMPONENT_NLM, "Didn't signal condition variable");
