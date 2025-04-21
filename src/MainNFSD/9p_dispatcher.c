@@ -289,7 +289,7 @@ static void _9p_enqueue_req(struct _9p_request_data *reqdata)
 			/* XXX reliable handoff */
 			wqe->flags |= Wqe_LFlag_SyncDone;
 			if (wqe->flags & Wqe_LFlag_WaitSync)
-				pthread_cond_signal(&wqe->lwe.wq_cv);
+				PTHREAD_COND_signal(&wqe->lwe.wq_cv);
 			PTHREAD_MUTEX_unlock(&wqe->lwe.wq_mtx);
 		} else
 			/* ! SPIN LOCKED */

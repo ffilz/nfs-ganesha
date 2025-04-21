@@ -204,7 +204,7 @@ static void fridgethr_finish_transition(struct fridgethr *fr, bool locked)
 		fr->cb_func(fr->cb_arg);
 
 	if (fr->cb_cv)
-		pthread_cond_broadcast(fr->cb_cv);
+		PTHREAD_COND_broadcast(fr->cb_cv);
 
 	if (fr->cb_mtx && !locked)
 		PTHREAD_MUTEX_unlock(fr->cb_mtx);
@@ -651,7 +651,7 @@ static bool fridgethr_dispatch(struct fridgethr *fr,
 			fe->ctx.arg = arg;
 			fe->frozen = false;
 			fe->flags |= fridgethr_flag_dispatched;
-			pthread_cond_signal(&fe->ctx.fre_cv);
+			PTHREAD_COND_signal(&fe->ctx.fre_cv);
 			PTHREAD_MUTEX_unlock(&fe->ctx.fre_mtx);
 			dispatched = true;
 			break;
@@ -770,7 +770,7 @@ int fridgethr_wake(struct fridgethr *fr)
 		struct fridgethr_entry *fe =
 			container_of(g, struct fridgethr_entry, idle_link);
 		PTHREAD_MUTEX_lock(&fe->ctx.fre_mtx);
-		pthread_cond_signal(&fe->ctx.fre_cv);
+		PTHREAD_COND_signal(&fe->ctx.fre_cv);
 		PTHREAD_MUTEX_unlock(&fe->ctx.fre_mtx);
 	}
 
@@ -939,7 +939,7 @@ int fridgethr_stop(struct fridgethr *fr, pthread_mutex_t *pmtx,
 			/* We don't dispatch or anything, just wake
 			   them all up and let them grab work off the
 			   queue or terminate. */
-			pthread_cond_signal(&fe->ctx.fre_cv);
+			PTHREAD_COND_signal(&fe->ctx.fre_cv);
 			PTHREAD_MUTEX_unlock(&fe->ctx.fre_mtx);
 
 			if (fr->p.wake_threads != NULL)
@@ -1038,7 +1038,7 @@ int fridgethr_start(struct fridgethr *fr, pthread_mutex_t *pmtx,
 			/* We don't dispatch or anything, just wake
 			   them all up and let them grab work off the
 			   queue or terminate. */
-			pthread_cond_signal(&fe->ctx.fre_cv);
+			PTHREAD_COND_signal(&fe->ctx.fre_cv);
 			PTHREAD_MUTEX_unlock(&fe->ctx.fre_mtx);
 		}
 	}
