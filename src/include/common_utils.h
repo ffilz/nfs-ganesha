@@ -819,6 +819,33 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		}                                                         \
 	} while (0)
 
+/* clang-format on */
+
+static inline int PTHREAD_cond_timedwait(pthread_cond_t *cond,
+					 pthread_mutex_t *mtx,
+					 const struct timespec *abstime,
+					 const char *cond_name)
+{
+	int rc;
+
+	rc = pthread_cond_timedwait(cond, mtx, abstime);
+	if (rc == 0) {
+		LogFullDebug(COMPONENT_RW_LOCK,
+			     "Wait cond %p, %s at %s:%d, abstime: %ld.%09ld",
+			     cond, cond_name, __FILE__, __LINE__,
+			     abstime->tv_sec, abstime->tv_nsec);
+	} else {
+		LogCrit(COMPONENT_RW_LOCK,
+			"Error %d, Wait cond %p, %s at %s:%d, abstime: %ld.%09ld",
+			rc, cond, cond_name, __FILE__, __LINE__,
+			abstime->tv_sec, abstime->tv_nsec);
+	}
+	return rc;
+}
+
+#define PTHREAD_COND_timedwait(_cond, _mutex, _abstime) \
+	PTHREAD_cond_timedwait(_cond, _mutex, _abstime, #_cond)
+
 /**
  * @brief Logging condition variable signal
  *
@@ -831,7 +858,6 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 #define PTHREAD_COND_signal(_cond)                                          \
 	do {                                                                \
 		int rc;                                                     \
-									    \
 		rc = pthread_cond_signal(_cond);                            \
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
@@ -858,7 +884,6 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 #define PTHREAD_COND_broadcast(_cond)                                          \
 	do {                                                                   \
 		int rc;                                                        \
-									       \
 		rc = pthread_cond_broadcast(_cond);                            \
 		if (rc == 0) {                                                 \
 			LogFullDebug(COMPONENT_RW_LOCK,                        \
