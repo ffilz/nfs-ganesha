@@ -551,30 +551,26 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 
 /* clang-format on */
 
-static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
-					const char *mtx_name)
+static inline int PTHREAD_MUTEX_trylock(pthread_mutex_t *mtx)
 {
 	int rc;
 
 	rc = pthread_mutex_trylock(mtx);
 	if (rc == 0) {
-		LogFullDebug(COMPONENT_RW_LOCK,
-			     "Acquired mutex %p (%s) at %s:%d", mtx, mtx_name,
-			     __FILE__, __LINE__);
+		LogFullDebug(COMPONENT_RW_LOCK, "Acquired mutex %p  at %s:%d",
+			     mtx, __FILE__, __LINE__);
 	} else if (rc == EBUSY) {
-		LogFullDebug(COMPONENT_RW_LOCK, "Busy mutex %p (%s) at %s:%d",
-			     mtx, mtx_name, __FILE__, __LINE__);
+		LogFullDebug(COMPONENT_RW_LOCK, "Busy mutex %p at %s:%d", mtx,
+			     __FILE__, __LINE__);
 	} else {
 		LogCrit(COMPONENT_RW_LOCK,
-			"Error %d, acquiring mutex %p (%s) at %s:%d", rc, mtx,
-			mtx_name, __FILE__, __LINE__);
+			"Error %d, acquiring mutex %p at %s:%d", rc, mtx,
+			__FILE__, __LINE__);
 		abort();
 	}
 
 	return rc;
 }
-
-#define PTHREAD_MUTEX_trylock(_mtx) PTHREAD_mutex_trylock(_mtx, #_mtx)
 
 /**
  * @brief Logging mutex unlock
@@ -810,6 +806,11 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 			LogFullDebug(COMPONENT_RW_LOCK,                   \
 				     "Wait cond %p (%s) at %s:%d", _cond, \
 				     #_cond, __FILE__, __LINE__);         \
+		} else if(rc == ETIMEDOUT) {                              \
+			LogCrit(COMPONENT_RW_LOCK,                        \
+				"Error %d, Wait cond %p (%s) "            \
+				"at %s:%d",                               \
+				rc, _cond, #_cond, __FILE__, __LINE__);   \
 		} else {                                                  \
 			LogCrit(COMPONENT_RW_LOCK,                        \
 				"Error %d, Wait cond %p (%s) "            \
@@ -818,6 +819,40 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 			abort();                                          \
 		}                                                         \
 	} while (0)
+
+/* clang-format on */
+
+static inline int PTHREAD_cond_timedwait(pthread_cond_t *cond,
+					 pthread_mutex_t *mtx,
+					 const struct timespec *abstime,
+					 const char *cond_name)
+{
+	int rc;
+
+	rc = pthread_cond_timedwait(cond, mtx, abstime);
+	if (rc == 0) {
+		LogFullDebug(COMPONENT_RW_LOCK,
+			     "Wait cond %p, %s at %s:%d, abstime: %ld.%09ld",
+			     cond, cond_name, __FILE__, __LINE__,
+			     abstime->tv_sec, abstime->tv_nsec);
+	} else if (rc == ETIMEDOUT) {
+		LogFullDebug(
+			COMPONENT_RW_LOCK,
+			"Error %d, Wait cond %p, %s at %s:%d, abstime: %ld.%09ld",
+			rc, cond, cond_name, __FILE__, __LINE__,
+			abstime->tv_sec, abstime->tv_nsec);
+	} else {
+		LogCrit(COMPONENT_RW_LOCK,
+			"Error %d, Wait cond %p, %s at %s:%d, abstime: %ld.%09ld",
+			rc, cond, cond_name, __FILE__, __LINE__,
+			abstime->tv_sec, abstime->tv_nsec);
+		abort();
+	}
+	return rc;
+}
+
+#define PTHREAD_COND_timedwait(_cond, _mutex, _abstime) \
+	PTHREAD_cond_timedwait(_cond, _mutex, _abstime, #_cond)
 
 /**
  * @brief Logging condition variable signal
@@ -831,7 +866,6 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 #define PTHREAD_COND_signal(_cond)                                          \
 	do {                                                                \
 		int rc;                                                     \
-									    \
 		rc = pthread_cond_signal(_cond);                            \
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
@@ -858,7 +892,6 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 #define PTHREAD_COND_broadcast(_cond)                                          \
 	do {                                                                   \
 		int rc;                                                        \
-									       \
 		rc = pthread_cond_broadcast(_cond);                            \
 		if (rc == 0) {                                                 \
 			LogFullDebug(COMPONENT_RW_LOCK,                        \
