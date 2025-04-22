@@ -45,8 +45,13 @@ CIDR *cidr_net_supernet(const CIDR *addr)
 	int pflen;
 	CIDR *toret;
 
-	/* If it's already a /0 in its protocol, return nothing */
 	pflen = cidr_get_pflen(addr);
+
+	/* If prefix length value returned is -1 */
+	if (pflen < 0)
+		return (NULL);
+
+	/* If it's already a /0 in its protocol, return nothing */
 	if (pflen == 0) {
 		errno = 0;
 		return (NULL);
@@ -91,6 +96,11 @@ CIDR **cidr_net_subnets(const CIDR *addr)
 
 	/* You can't split a host address! */
 	pflen = cidr_get_pflen(addr);
+
+	/* If prefix length value returned is -1 */
+	if (pflen < 0)
+		return (NULL);
+
 	if ((addr->proto == CIDR_IPV4 && pflen == 32) ||
 	    (addr->proto == CIDR_IPV6 && pflen == 128)) {
 		errno = 0;
