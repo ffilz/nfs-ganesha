@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16fa1b92_666505af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-22T23:09:48Z",
+      "side": 1,
+      "message": "Looks good, but let\u0027s check all the places cidr_get_pflen is called. I see others that don\u0027t handle the -1 w/errno return.\n\n\nAnd maybe we should look at how to bulletproof this better so cidr_get_pflen isn\u0027t checking for valid address types.",
+      "revId": "771bda842f13bc839a1f69bf68a3597251da6ad9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
