@@ -40,7 +40,10 @@
 int cidr_contains(const CIDR *big, const CIDR *little)
 {
 	int i, oct, bit;
-	int pflen;
+	int pflen = 0;
+
+	if (cidr_validate(big) < 0 || cidr_validate(little) < 0)
+		return -1;
 
 	/* First off, they better be the same type */
 	if (big->proto != little->proto) {
@@ -61,11 +64,13 @@ int cidr_contains(const CIDR *big, const CIDR *little)
 	 * the normal tests below will DTRT.  Save big's pflen for the test
 	 * loop.
 	 */
-	if (cidr_get_pflen(little) < (pflen = cidr_get_pflen(big))) {
-		errno = 0;
-		return (-1);
-	}
+	int little_pflen = cidr_get_pflen(little);
+	int big_pflen = cidr_get_pflen(big);
 
+	if (little_pflen < big_pflen) {
+		errno = 0;
+		return -1;
+	}
 	/*
 	 * Now let's compare.  Note that for IPv4 addresses, the first 12
 	 * octets are irrelevant.  We take care throughout to keep them

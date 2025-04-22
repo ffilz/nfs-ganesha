@@ -114,5 +114,6 @@ struct in_addr *cidr_to_inaddr(const CIDR *, struct in_addr *);
 struct in6_addr *cidr_to_in6addr(const CIDR *, struct in6_addr *);
 char *cidr_to_str(const CIDR *, int);
 const char *cidr_version(void);
+int cidr_validate(const CIDR *);
 
 #endif /* __LIBCIDR_H */

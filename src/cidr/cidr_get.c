@@ -114,3 +114,23 @@ int cidr_get_proto(const CIDR *addr)
 {
 	return (addr->proto);
 }
+
+/* Validate CIDR: proper proto and contiguous mask */
+int cidr_validate(const CIDR *block)
+{
+	if (!block) {
+		errno = EINVAL;
+		return -1;
+	}
+
+	if (block->proto != CIDR_IPV4 && block->proto != CIDR_IPV6) {
+		errno = ENOENT;
+		return -1;
+	}
+
+	/* Errno is preserved from cidr_get_pflen */
+	if (cidr_get_pflen(block) < 0)
+		return -1;
+
+	return 0;
+}
