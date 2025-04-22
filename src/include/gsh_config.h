@@ -519,6 +519,9 @@ typedef struct nfs_core_param {
 	*/
 	uint32_t malloc_trim_minthreshold;
 #ifdef USE_MONITORING
+	/** Monitoring IP address. Monitoring service will listen on
+	 * <monitoring_addr>:<monitoring_port> */
+	sockaddr_t monitoring_addr;
 	/** Monitoring port number. */
 	uint16_t monitoring_port;
 	/** Enable creating metrics labels on the fly based on client-ip,

@@ -574,7 +574,8 @@ int main(int argc, char *argv[])
 #ifdef USE_MONITORING
 	if (nfs_param.core_param.enable_dynamic_metrics)
 		dynamic_metrics__init();
-	prometheus_exposer__start(nfs_param.core_param.monitoring_port,
+	prometheus_exposer__start(&nfs_param.core_param.monitoring_addr,
+				  nfs_param.core_param.monitoring_port,
 				  monitoring__get_registry_handle());
 #endif
 
