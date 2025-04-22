@@ -16,6 +16,125 @@
       "message": "Hi, is this patch waiting for review from Matt? Please tell if I can do something to move this patch forward.",
       "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "227016b6_47f4bd5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-04-22T12:31:03Z",
+      "side": 1,
+      "message": "I agree with the stated change, but I don\u0027t think I agree with the changes to the default sizes of DRC maps and queues.  These increase the memory displacement of the DRC, and we need a justification for that",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2bee3d0_400431a0",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-04-22T12:31:03Z",
+      "side": 1,
+      "message": "ok",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6f3700_f066fbe7",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-04-22T12:31:03Z",
+      "side": 1,
+      "message": "I don\u0027t see a motivation for changing the default value for high water mark to a larger value;  this leads to a larger DRC, and I think most users would prefer a smaller one",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37f18eb_62352a19",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-04-22T12:31:03Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a7e7d8_d33601d3",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-04-22T12:31:03Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33106b42_23163553",
+        "filename": "src/include/nfs_dupreq.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-04-22T12:31:03Z",
+      "side": 1,
+      "message": "I think this change is correct, we do not intend to remove uncompleted requests during \"recovery\"",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b1be40a_b48c1870",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-04-22T12:31:03Z",
+      "side": 1,
+      "message": "ditto--this is an even larger increase in DRC size",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
