@@ -201,9 +201,6 @@ int posix_acl_2_fsal_acl(acl_t p_posixacl, bool is_dir, bool is_inherit,
 	bool writemask = true, writeother = false, writecurrent = true;
 	bool executemask = true, executeother = false, executecurrent = true;
 
-	if (!p_posixacl)
-		return -1;
-
 	pace_deny = *ace;
 	pace_allow = (pace_deny + 1);
 	/* Store the mask entry values */
