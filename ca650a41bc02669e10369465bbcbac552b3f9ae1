@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31e322d8_4c80bf69",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-23T18:32:12Z",
+      "side": 1,
+      "message": "Do you hold a reference to the gsh_client for the qos_client_t?\n\nSome documentation of the lifetime of objects would help.\n\nAs long as something assures that the lifetime of the gsh_client is longer than the lifetime of the qos_client_t that will be fine, but please make sure to document that expectation.",
+      "parentUuid": "fe4ae75d_b0e24cf0",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3bc8cf97_be8d0c28",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 14
@@ -399,6 +417,24 @@
       "side": 1,
       "message": "No, there is no refernce count. \nBecause its just the list of IO which qos engine keeps in the qos_export_t or qos_client_t.\nUntil and unless IO\u0027s are drained, qos_share_t or gos_client_t will not get freed.\n\nThe flow always follows : incomming request for free qos_export_t/qos_client_t -\u003e check the IO list -\u003e drain the IO in list -\u003e disable the functionality for the qos_class -\u003e free the requested qos_class.",
       "parentUuid": "9b6ae4d2_94c23835",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d761ed_7ee132f0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1452,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-23T18:32:12Z",
+      "side": 1,
+      "message": "Some documentation in comments would help a lot",
+      "parentUuid": "82c46e38_3bacdfae",
       "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

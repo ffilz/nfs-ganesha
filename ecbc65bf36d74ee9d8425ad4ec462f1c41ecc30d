@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95b48da6_17e89c53",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-23T18:32:12Z",
+      "side": 1,
+      "message": "Why do you need to exclude export_id 0? It is allowed to be an export of a real filesystem in which case we may want to do QoS on it. Actually, we might even want to do QoS on the pseudofs export (which is the default export_id 0).\n\nIf op_ctx-\u003ectx_export is NULL then we definitely don\u0027t have a valid export.",
+      "parentUuid": "484f3c62_ec1c6841",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8ebe1bb_b17bc917",
         "filename": "src/support/exports.c",
         "patchSetId": 12
