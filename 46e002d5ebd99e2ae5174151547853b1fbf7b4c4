@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d10db403_5a7952c1",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-04-23T02:57:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b2bee3d0_400431a0",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f6f3700_f066fbe7",
@@ -65,6 +83,24 @@
       "writtenOn": "2025-04-22T12:31:03Z",
       "side": 1,
       "message": "I don\u0027t see a motivation for changing the default value for high water mark to a larger value;  this leads to a larger DRC, and I think most users would prefer a smaller one",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0c515da_d7c2dd77",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-04-23T02:57:22Z",
+      "side": 1,
+      "message": "Firstly, value 64 of DRC_TCP_HIWAT doesn\u0027t conform the comment \"1/2(size)\", which should be 512. \nSecondly, the DRC size per TCP connection is 1024 and DRC_TCP_HIWAT just works as a heuristic strategy to retire entries if cache hit ratio is not very high. In the worst case, 512 DRC entries per TCP connection may just take up 512KB memory. If the server is working with 1024 connections(high workload), then DRC takes up 512MB memory, which is also acceptable for current computers.\n\nOf course, I can change the default value of DRC_TCP_HIWAT back as long as it is reasonable. And we can configure the option in our practice.",
+      "parentUuid": "2f6f3700_f066fbe7",
       "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +122,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24df3c9f_bfa0f46d",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-04-23T02:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e37f18eb_62352a19",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4a7e7d8_d33601d3",
@@ -99,6 +153,24 @@
       "writtenOn": "2025-04-22T12:31:03Z",
       "side": 1,
       "message": "ditto",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2abb746_172e0c17",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-04-23T02:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4a7e7d8_d33601d3",
       "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +192,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75f13eb1_4710eb5b",
+        "filename": "src/include/nfs_dupreq.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-04-23T02:57:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "33106b42_23163553",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b1be40a_b48c1870",
@@ -133,6 +223,24 @@
       "writtenOn": "2025-04-22T12:31:03Z",
       "side": 1,
       "message": "ditto--this is an even larger increase in DRC size",
+      "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f1232e_2503677f",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1037512
+      },
+      "writtenOn": "2025-04-23T02:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b1be40a_b48c1870",
       "revId": "46e002d5ebd99e2ae5174151547853b1fbf7b4c4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
