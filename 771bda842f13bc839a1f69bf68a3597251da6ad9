@@ -16,6 +16,24 @@
       "message": "Looks good, but let\u0027s check all the places cidr_get_pflen is called. I see others that don\u0027t handle the -1 w/errno return.\n\n\nAnd maybe we should look at how to bulletproof this better so cidr_get_pflen isn\u0027t checking for valid address types.",
       "revId": "771bda842f13bc839a1f69bf68a3597251da6ad9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502c6ec8_c85ddcce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-04-23T13:40:25Z",
+      "side": 1,
+      "message": "In src/cidr/cidr_compare.c\n\nint cidr_contains(const CIDR *big, const CIDR *little) {\n\n…………\n…………\n…………        \n        if (cidr_get_pflen(little) \u003c (pflen \u003d cidr_get_pflen(big))) {\n                errno \u003d 0;\n                return (-1);\n        }\n\nThere is no check for negative prefix length. I can change it to - \n\nint little_pflen \u003d cidr_get_pflen(little);\nif (little_pflen \u003c 0) return -1;  // Preserve errno from little\u0027s check\n\nint big_pflen \u003d cidr_get_pflen(big);\nif (big_pflen \u003c 0) return -1;     // Preserve errno from big\u0027s check\n\nif (little_pflen \u003c big_pflen) {\n    errno \u003d 0;  // Explicitly mark this as a valid-but-rejected case\n    return -1;\n}\n\n----------------------------------------------------------------------\n\nIn few other places, condition is handled as below and requires no handling I think\n\n1 cidr_from_str.c 471 pflen \u003d cidr_get_pflen(ctmp);\n2 cidr_from_str.c 690 pflen \u003d cidr_get_pflen(ctmp);\n\n    pflen \u003d cidr_get_pflen(ctmp);\n    cidr_free(ctmp);\n    if (pflen \u003d\u003d -1) {\n        /* Failed; probably non-contiguous */\n        cidr_free(toret);\n        return (NULL); /* Preserve errno */\n    }\n\n1 cidr_to_str.c   175 pflen \u003d cidr_get_pflen(block);\n2 cidr_to_str.c   374 pflen \u003d cidr_get_pflen(block);\n\n\tpflen \u003d cidr_get_pflen(block);\n\tif (pflen \u003d\u003d -1) {\n\t    gsh_free(toret);\n\t    return (NULL); /* Preserve errno */\n\t}\n\t\n\nCurrently, I have added the check in -\nCIDR *cidr_net_supernet(const CIDR *addr), \n\nWill add the check in -\nCIDR **cidr_net_subnets(const CIDR *addr)\nconst char *cidr_numaddr(const CIDR *addr)\nconst char *cidr_numhost(const CIDR *addr)",
+      "parentUuid": "16fa1b92_666505af",
+      "revId": "771bda842f13bc839a1f69bf68a3597251da6ad9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
