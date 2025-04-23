@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6c460f_86dbc40b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "This path gets called when export needs to be freed.\n\nBecause of below expectation lock was not added previously.\n\nExpectation is that no one will be accesing the gsh_export-\u003eqos_class.\n2 cases are there :\n1. IO submission to QOS : IO will get stopped by existing Ganesha Infra before freeing the gsh_export, so no new IO for this gsh_export.\n2. IO resuming path from QOS: This is saved by gsh_export level RW lock, because we are using for foreach_gsh_export.\n\nBut yes added the lock as suggested.",
+      "parentUuid": "4a15e2b9_d84855bc",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a830ce8_5985f44c",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-04-18T21:54:53Z",
       "side": 1,
       "message": "Do not code redundant \u003d\u003d true in a boolean expression",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975d8ab9_45973588",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a830ce8_5985f44c",
       "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b878ea6_041c3d59",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "f4a72396_813c65bf",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "205649d0_4f1e8edd",
@@ -82,6 +136,24 @@
       "writtenOn": "2025-04-18T21:54:53Z",
       "side": 1,
       "message": "This appears to be copying just a pointer, which in at least one case is: \u0026op_ctx-\u003eclient-\u003ecl_addrbuf which is not persistent at all. Did you mean qos_client_t\u0027s client_addr to be a sockaddr_t struct rather than pointer and do a member copy?",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe4ae75d_b0e24cf0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Here ptr client_addr is the base address of gsh_client.client_addr which will be persistant till the client is alive.\nop_ctx-\u003eclient \u003d get_gsh_client(op_ctx-\u003ecaller_addr, false);\n\nSo In QOS engine, no need of verifying the client address by using cmp_socketaddr, just compare the address to distinguish or to get the correct client.",
+      "parentUuid": "205649d0_4f1e8edd",
       "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09fc261c_d9b6e664",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Done changes as suggested",
+      "parentUuid": "3bc8cf97_be8d0c28",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8758e81_f01ea387",
@@ -116,6 +206,24 @@
       "writtenOn": "2025-04-18T21:54:53Z",
       "side": 1,
       "message": "You should remove this test, allocate_client can never return NULL because gsh_calloc can never return NULL.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a16b8dfc_7f3466fd",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8758e81_f01ea387",
       "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +245,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae7fa551_3fd6aaf2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55580fa3_8d130d70",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e6dd6f7_3a44e92f",
@@ -150,6 +276,24 @@
       "writtenOn": "2025-04-18T21:54:53Z",
       "side": 1,
       "message": "This test should be removed, pepc_allocate_and_init_client can never return NULL.",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f2cabd7_57b44268",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6dd6f7_3a44e92f",
       "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -171,6 +315,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f1681d_6c579b4a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Here ptr client_addr is the base address of gsh_client.client_addr which will be persistant till the client is alive.\nSo In QOS engine, no need of verifying the client address by using cmp_socketaddr, just compare the address to get the correct client.",
+      "parentUuid": "d1cc6dc4_f2c1d3f6",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5793fc5_71ac9b0a",
@@ -188,6 +350,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e41c82f6_568e9fc6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Locking changes done.\nYes we need to convert this in avl tree. Will be doing AVL conversion as a seperate patch.",
+      "parentUuid": "a5793fc5_71ac9b0a",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b6ae4d2_94c23835",
@@ -201,6 +381,24 @@
       "writtenOn": "2025-04-18T21:54:53Z",
       "side": 1,
       "message": "Is there any lock or refcounting that is protecting use of qos_export_t and qos_client_t?",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c46e38_3bacdfae",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1452,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "No, there is no refernce count. \nBecause its just the list of IO which qos engine keeps in the qos_export_t or qos_client_t.\nUntil and unless IO\u0027s are drained, qos_share_t or gos_client_t will not get freed.\n\nThe flow always follows : incomming request for free qos_export_t/qos_client_t -\u003e check the IO list -\u003e drain the IO in list -\u003e disable the functionality for the qos_class -\u003e free the requested qos_class.",
+      "parentUuid": "9b6ae4d2_94c23835",
       "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

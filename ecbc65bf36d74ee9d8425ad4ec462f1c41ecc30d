@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "484f3c62_ec1c6841",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-04-23T12:18:49Z",
+      "side": 1,
+      "message": "Updated the code to check with \"exportid \u003d\u003d 0\".\nThere are cases for which we dynamically need to populate the qos_class in gsh_export/gsh_client.\n\nlet me know, if there is any mechanism available in the current code which distingushes valid export and invalid export in opt_ctx which we can be applied here.",
+      "parentUuid": "96c35041_fbd5d762",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8ebe1bb_b17bc917",
         "filename": "src/support/exports.c",
         "patchSetId": 12
