@@ -334,30 +334,30 @@ void nfs_metrics__rpcs_in_flight(int64_t value)
 #ifdef _USE_NFS3
 void nfs_metrics__nfs3_request(uint32_t proc, nsecs_elapsed_t request_time,
 			       enum nfs_req_result result, nfsstat3 nfs_status,
-			       export_id_t export_id, const char *client_ip)
+			       export_id_t export_id, const char *path,
+			       const char *client_ip)
 {
 	const char *const version = "nfs3";
 	const char *const operation = nfsproc3_to_str(proc);
-	const char *const status_label = result == NFS_REQ_OK
-					 ? nfsstat3_to_str(nfs_status)
-					 : nfs_req_result_to_str(result);
-
+	const char *const status_label =
+		result == NFS_REQ_OK ? nfsstat3_to_str(nfs_status)
+				     : nfs_req_result_to_str(result);
 	dynamic_metrics__observe_nfs_request(operation, request_time, version,
-					     status_label, export_id,
+					     status_label, export_id, path,
 					     client_ip);
 }
 #endif
 
 void nfs_metrics__nfs4_request(uint32_t op, nsecs_elapsed_t request_time,
 			       nfsstat4 status, export_id_t export_id,
-			       const char *client_ip)
+			       const char *path, const char *client_ip)
 {
 	const char *const version = "nfs4";
 	const char *const operation = nfsop4_to_str(op);
 	const char *const status_label = nfsstat4_to_str(status);
 
 	dynamic_metrics__observe_nfs_request(operation, request_time, version,
-					     status_label, export_id,
+					     status_label, export_id, path,
 					     client_ip);
 }
 
