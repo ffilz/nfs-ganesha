@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b30a25_e55ec680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-04-24T14:55:52Z",
+      "side": 1,
+      "message": "Under FSAL_PROXY_V3 and FSAL_PROXY_V4 directory of nfs-ganesha few files are using pthread systemcalls which i guess we should not modify with macros them as they used return code to close of file descripor.\n\nAnd apart from that i am working in writing PTHREAD_COND_timedwait() macro.",
+      "revId": "ccae562f9749aa8c5e316897227271cd9a0d7724",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
