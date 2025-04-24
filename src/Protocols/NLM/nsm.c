@@ -93,16 +93,28 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 	struct mon nsm_mon;
 	struct sm_stat_res res;
 	enum clnt_stat ret;
+	int retries = 3;
 
 	if (host == NULL)
 		return true;
 
-	PTHREAD_MUTEX_lock(&host->ssc_mutex);
+	while (atomic_fetch_int32_t(&host->ssc_monitored) == NSM_ATTEMPTING) {
+		if (retries-- == 0) {
+			LogEventLimited(COMPONENT_NLM,
+					"Monitor %s too many attempts",
+					nsm_mon.mon_id.mon_name);
+			return false;
+		}
+		LogDebug(COMPONENT_NLM, "Monitor %s attempting",
+			 host->ssc_nlm_caller_name);
+		sleep(1);
+	}
 
-	if (atomic_fetch_int32_t(&host->ssc_monitored)) {
-		PTHREAD_MUTEX_unlock(&host->ssc_mutex);
+	if (atomic_fetch_int32_t(&host->ssc_monitored) == NSM_MONITORED) {
 		return true;
 	}
+
+	atomic_store_int32_t(&host->ssc_monitored, NSM_ATTEMPTING);
 
 	memset(&nsm_mon, 0, sizeof(nsm_mon));
 	nsm_mon.mon_id.mon_name = host->ssc_nlm_caller_name;
@@ -118,8 +130,8 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 	if (!nsm_connect()) {
 		LogEventLimited(COMPONENT_NLM, "Monitor %s nsm_connect failed",
 				nsm_mon.mon_id.mon_name);
+		atomic_store_int32_t(&host->ssc_monitored, NSM_UNMONITORED);
 		PTHREAD_MUTEX_unlock(&nsm_mutex);
-		PTHREAD_MUTEX_unlock(&host->ssc_mutex);
 		return false;
 	}
 
@@ -142,8 +154,8 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 
 		clnt_req_release(cc);
 		nsm_disconnect(true);
+		atomic_store_int32_t(&host->ssc_monitored, NSM_UNMONITORED);
 		PTHREAD_MUTEX_unlock(&nsm_mutex);
-		PTHREAD_MUTEX_unlock(&host->ssc_mutex);
 		return false;
 	}
 	clnt_req_release(cc);
@@ -153,19 +165,18 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 			nsm_mon.mon_id.mon_name, res.res_stat);
 
 		nsm_disconnect(true);
+		atomic_store_int32_t(&host->ssc_monitored, NSM_UNMONITORED);
 		PTHREAD_MUTEX_unlock(&nsm_mutex);
-		PTHREAD_MUTEX_unlock(&host->ssc_mutex);
 		return false;
 	}
 
 	nsm_count++;
-	atomic_store_int32_t(&host->ssc_monitored, true);
+	atomic_store_int32_t(&host->ssc_monitored, NSM_MONITORED);
 
 	LogDebug(COMPONENT_NLM, "Monitored %s for nodename %s",
 		 nsm_mon.mon_id.mon_name, nodename);
 
 	PTHREAD_MUTEX_unlock(&nsm_mutex);
-	PTHREAD_MUTEX_unlock(&host->ssc_mutex);
 	return true;
 }
 
@@ -188,16 +199,28 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 	struct sm_stat res;
 	struct mon_id nsm_mon_id;
 	enum clnt_stat ret;
+	int retries = 3;
 
 	if (host == NULL)
 		return true;
 
-	PTHREAD_MUTEX_lock(&host->ssc_mutex);
+	while (atomic_fetch_int32_t(&host->ssc_monitored) == NSM_ATTEMPTING) {
+		if (retries-- == 0) {
+			LogEventLimited(COMPONENT_NLM,
+					"Unmonitor %s too many attempts",
+					host->ssc_nlm_caller_name);
+			return false;
+		}
+		LogDebug(COMPONENT_NLM, "Unmonitor %s attempting",
+			 host->ssc_nlm_caller_name);
+		sleep(1);
+	}
 
-	if (!atomic_fetch_int32_t(&host->ssc_monitored)) {
-		PTHREAD_MUTEX_unlock(&host->ssc_mutex);
+	if (atomic_fetch_int32_t(&host->ssc_monitored) == NSM_UNMONITORED) {
 		return true;
 	}
+
+	atomic_store_int32_t(&host->ssc_monitored, NSM_ATTEMPTING);
 
 	nsm_mon_id.mon_name = host->ssc_nlm_caller_name;
 	nsm_mon_id.my_id.my_prog = NLMPROG;
@@ -212,7 +235,7 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 				"Unmonitor %s nsm_connect failed",
 				nsm_mon_id.mon_name);
 		PTHREAD_MUTEX_unlock(&nsm_mutex);
-		PTHREAD_MUTEX_unlock(&host->ssc_mutex);
+		atomic_store_int32_t(&host->ssc_monitored, NSM_MONITORED);
 		return false;
 	}
 
@@ -236,12 +259,12 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 		clnt_req_release(cc);
 		nsm_disconnect(true);
 		PTHREAD_MUTEX_unlock(&nsm_mutex);
-		PTHREAD_MUTEX_unlock(&host->ssc_mutex);
+		atomic_store_int32_t(&host->ssc_monitored, NSM_MONITORED);
 		return false;
 	}
 	clnt_req_release(cc);
 
-	atomic_store_int32_t(&host->ssc_monitored, false);
+	atomic_store_int32_t(&host->ssc_monitored, NSM_UNMONITORED);
 	nsm_count--;
 
 	LogDebug(COMPONENT_NLM, "Unmonitored %s for nodename %s",
@@ -250,7 +273,6 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 	nsm_disconnect(false);
 
 	PTHREAD_MUTEX_unlock(&nsm_mutex);
-	PTHREAD_MUTEX_unlock(&host->ssc_mutex);
 	return true;
 }
 

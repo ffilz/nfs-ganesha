@@ -79,6 +79,7 @@ hash_table_t *ht_nlm_owner;
 int display_nsm_client(struct display_buffer *dspbuf, state_nsm_client_t *key)
 {
 	int b_left;
+	const char *mon_state = "unknown";
 
 	if (key == NULL)
 		return display_printf(dspbuf, "NSM Client <NULL>");
@@ -102,11 +103,19 @@ int display_nsm_client(struct display_buffer *dspbuf, state_nsm_client_t *key)
 	if (b_left <= 0)
 		return b_left;
 
+	switch (atomic_fetch_int32_t(&key->ssc_monitored)) {
+	case NSM_UNMONITORED:
+		mon_state = "unmonitored";
+		break;
+	case NSM_MONITORED:
+		mon_state = "monitored";
+		break;
+	case NSM_ATTEMPTING:
+		mon_state = "attempting";
+		break;
+	}
 	return display_printf(dspbuf, " ssc_client=%p %s ssc_refcount=%d",
-			      key->ssc_client,
-			      atomic_fetch_int32_t(&key->ssc_monitored)
-				      ? "monitored"
-				      : "unmonitored",
+			      key->ssc_client, mon_state,
 			      atomic_fetch_int32_t(&key->ssc_refcount));
 }
 

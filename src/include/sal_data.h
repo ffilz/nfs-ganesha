@@ -553,6 +553,12 @@ extern pthread_mutex_t all_state_owners_mutex;
 extern pthread_mutex_t all_state_v4_mutex;
 #endif
 
+typedef enum nsm_monitored__ {
+	NSM_UNMONITORED,
+	NSM_ATTEMPTING,
+	NSM_MONITORED
+} nsm_monitored_t;
+
 /**
  * @brief NSM (rpc.statd) state for a given client.
  *
