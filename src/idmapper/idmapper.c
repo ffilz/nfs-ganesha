@@ -61,6 +61,7 @@
 #include "idmapper.h"
 #include "server_stats_private.h"
 #include "idmapper_monitoring.h"
+#include "pwnam_wrappers.h"
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -177,6 +178,9 @@ bool set_idmapping_status(bool status_enabled)
 
 	/* Acquire mutex to prevent interference by another invocation */
 	mutex_lock(&idmapping_status_lock);
+
+	pwnam_wrappers__set_implementation(
+		nfs_param.directory_services_param.pwnam_implementation);
 
 	if (idmapping_enabled == status_enabled) {
 		mutex_unlock(&idmapping_status_lock);
@@ -549,8 +553,8 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 				struct group *gres;
 
 				now_mono(&s_time);
-				rc = getgrgid_r(id, &g, namebuff, new_name.len,
-						&gres);
+				rc = pwnam_wrappers__getgrgid_r(
+					id, &g, namebuff, new_name.len, &gres);
 				now_mono(&e_time);
 				idmapper_monitoring__external_request(
 					IDMAPPING_GID_TO_GROUP,
@@ -563,8 +567,8 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 				struct passwd *pres;
 
 				now_mono(&s_time);
-				rc = getpwuid_r(id, &p, namebuff, new_name.len,
-						&pres);
+				rc = pwnam_wrappers__getpwuid_r(
+					id, &p, namebuff, new_name.len, &pres);
 				now_mono(&e_time);
 				idmapper_monitoring__external_request(
 					IDMAPPING_UID_TO_UNAME,
@@ -756,7 +760,7 @@ static int name_to_gid(const char *name, gid_t *gid)
 		buf = gsh_malloc(buflen);
 
 		now_mono(&s_time);
-		err = getgrnam_r(name, &g, buf, buflen, &gres);
+		err = pwnam_wrappers__getgrnam_r(name, &g, buf, buflen, &gres);
 		now_mono(&e_time);
 		idmapper_monitoring__external_request(
 			IDMAPPING_GROUPNAME_TO_GROUP, IDMAPPING_PWUTILS,
@@ -842,7 +846,7 @@ static int name_to_uid(const char *name, uint32_t *uid, gid_t *gid)
 		buf = gsh_malloc(buflen);
 
 		now_mono(&s_time);
-		err = getpwnam_r(name, &p, buf, buflen, &pres);
+		err = pwnam_wrappers__getpwnam_r(name, &p, buf, buflen, &pres);
 		now_mono(&e_time);
 		idmapper_monitoring__external_request(
 			IDMAPPING_USERNAME_TO_UIDGID, IDMAPPING_PWUTILS,

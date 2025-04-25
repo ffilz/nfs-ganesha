@@ -53,6 +53,7 @@
 #include "nfs_proto_functions.h"
 #include "nfs_dupreq.h"
 #include "config_parsing.h"
+#include "pwnam_wrappers.h"
 
 /**
  * @brief Core configuration parameters
@@ -80,6 +81,12 @@ static struct config_item_list root_kerberos_principal_options[] = {
 	CONFIG_LIST_TOK("host", ROOT_KERBEROS_PRINCIPAL_HOST),
 	CONFIG_LIST_TOK("all", ROOT_KERBEROS_PRINCIPAL_ALL),
 	CONFIG_LIST_EOL
+};
+
+static struct config_item_list pwnam_implementation_options[] = {
+	CONFIG_LIST_TOK("nsswitch", PWNAM_IMPLEMENTATION__NSSWITCH),
+	CONFIG_LIST_TOK("sssd", PWNAM_IMPLEMENTATION__SSSD),
+	CONFIG_LIST_EOL,
 };
 
 static struct config_item_list protocols[] = {
@@ -457,6 +464,9 @@ static struct config_item directory_services_params[] = {
 	CONF_ITEM_BOOL("Pwutils_Use_Fully_Qualified_Names", false,
 		       directory_services_param,
 		       pwutils_use_fully_qualified_names),
+	CONF_ITEM_TOKEN("Pwnam_Implementation", PWNAM_IMPLEMENTATION__NSSWITCH,
+			pwnam_implementation_options, directory_services_param,
+			pwnam_implementation),
 	CONFIG_EOL
 };
 
