@@ -153,7 +153,10 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 
 		/* Try with the actual ngroups if user is part of more than 1000
 		 * groups. */
-		ngroups = MIN(ngroups, max_groups_membership);
+		if (ngroups > max_groups_membership) {
+			ngroups = max_groups_membership;
+			idmapper_monitoring__max_groups_exceeded_inc();
+		}
 		groups = gsh_malloc(ngroups * sizeof(gid_t));
 
 		now(&s_time);
@@ -482,7 +485,10 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 		 * 1000 groups
 		 */
 		gsh_free(groups);
-		ngroups = MIN(ngroups, max_groups_membership);
+		if (ngroups > max_groups_membership) {
+			ngroups = max_groups_membership;
+			idmapper_monitoring__max_groups_exceeded_inc();
+		}
 		groups = gsh_malloc(ngroups * sizeof(gid_t));
 
 		now_mono(&s_time);
