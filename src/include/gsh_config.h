@@ -50,6 +50,7 @@
 #include "nfs4.h"
 #include "gsh_recovery.h"
 #include "gsh_rpc.h"
+#include "pwnam_wrappers.h"
 
 /**
  * @brief An enumeration of protocols in the NFS family
@@ -736,6 +737,8 @@ typedef struct directory_services_param {
 	/** Whether to use fully qualified names for idmapping with pw-utils.
 	    Defaults to false. */
 	bool pwutils_use_fully_qualified_names;
+	/** What Pwnam implementation to use */
+	pwnam_implementation_t pwnam_implementation;
 } directory_services_param_t;
 
 /** @} */

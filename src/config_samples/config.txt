@@ -332,6 +332,8 @@ DIRECTORY_SERVICES {}
 
 	Pwutils_Use_Fully_Qualified_Names(bool, default false)
 
+	Pwnam_Implementation (enum, values [nsswitch, sssd], default "nsswitch")
+
 EXPORT_DEFAULTS {}
 ------------------
 
