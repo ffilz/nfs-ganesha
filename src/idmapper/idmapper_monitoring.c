@@ -58,6 +58,7 @@ static histogram_metric_handle_t
 /* 8 buckets in increasing powers of 2 */
 static const int64_t groups_buckets[] = { 0,  1,  2,   4,   8,	 16,
 					  32, 64, 128, 256, 512, 1024 };
+static counter_metric_handle_t max_groups_exceeded;
 
 static bool is_inited;
 
@@ -298,6 +299,17 @@ static void register_cache_entries_total_metrics(void)
 	}
 }
 
+static void register_max_groups_exceeded_metric(void)
+{
+	const metric_label_t empty_labels[] = {};
+	max_groups_exceeded = monitoring__register_counter(
+		"idmapping__max_groups_exceeded",
+		METRIC_METADATA(
+			"Total number of times a user had more than max groups",
+			METRIC_UNIT_NONE),
+		empty_labels, ARRAY_SIZE(empty_labels));
+}
+
 void idmapper_monitoring__init(void)
 {
 	register_user_groups_metric();
@@ -307,7 +319,16 @@ void idmapper_monitoring__init(void)
 	register_evicted_entries_cache_duration_metrics();
 	register_cache_entries_reaped_metrics();
 	register_cache_entries_total_metrics();
+	register_max_groups_exceeded_metric();
 	is_inited = true;
+}
+
+void idmapper_monitoring__max_groups_exceeded_inc(void)
+{
+	if (!is_inited)
+		return;
+
+	monitoring__counter_inc(max_groups_exceeded, 1);
 }
 
 void idmapper_monitoring__cache_usage(idmapping_cache_t idmapping_cache,
