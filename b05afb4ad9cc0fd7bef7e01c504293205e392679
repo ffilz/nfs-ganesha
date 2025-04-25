@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85f0af5_eba714e2",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-25T21:29:13Z",
+      "side": 1,
+      "message": "Need to also document in src/config_samples/config.txt",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981470bc_d8012204",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-25T21:29:13Z",
+      "side": 1,
+      "message": "Let\u0027s set the max to a sensible value and are you sure we want to set the default to 2000 when it used to be 1000?\n\nNot to mention comments below that cap the max at effectively 1000...",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "794df935_7f6d802c",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-25T21:29:13Z",
+      "side": 1,
+      "message": "Here you take the MIN of 1000 or max_groups_membership which has a max of INT32_MAX and defaults to 2000...\n\n\nLet\u0027s make the default and max in the config sensible, and drop this hidden default.",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ca5390_76f8137a",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-25T21:29:13Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59db685a_b49b19e9",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-25T21:29:13Z",
+      "side": 1,
+      "message": "If the returned ngroups from nfs4_gss_princ_to_grouplist is greater than max_groups_membership, this is just going to cause another ERANGE error...",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
