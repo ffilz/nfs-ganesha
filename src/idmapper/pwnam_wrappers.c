@@ -32,33 +32,69 @@
  */
 
 #include "pwnam_wrappers.h"
+#include "log.h"
+
+int (*getgrouplist_func)(const char *, __gid_t, __gid_t *,
+			 int *) = getgrouplist;
+
+int (*getpwnam_r_func)(const char *, struct passwd *, char *, size_t,
+		       struct passwd **) = getpwnam_r;
+
+int (*getpwuid_r_func)(uid_t, struct passwd *, char *, size_t,
+		       struct passwd **) = getpwuid_r;
+
+int (*getgrnam_r_func)(const char *, struct group *, char *, size_t,
+		       struct group **) = getgrnam_r;
+
+int (*getgrgid_r_func)(gid_t, struct group *, char *, size_t,
+		       struct group **) = getgrgid_r;
+
+int pwnam_wrappers__set_implementation(pwnam_implementation_t implementation)
+{
+	switch (implementation) {
+	case PWNAM_IMPLEMENTATION__NSSWITCH:
+		getgrouplist_func = getgrouplist;
+		getpwnam_r_func = getpwnam_r;
+		getpwuid_r_func = getpwuid_r;
+		getgrnam_r_func = getgrnam_r;
+		getgrgid_r_func = getgrgid_r;
+		LogEvent(COMPONENT_IDMAPPER,
+			 "NSSwitch pwnam implementation was loaded.");
+		break;
+	default:
+		LogFatal(COMPONENT_IDMAPPER,
+			 "Unsupported pwnam implementation");
+	}
+
+	return 0;
+}
 
 int pwnam_wrappers__getgrouplist(const char *user, gid_t group, gid_t *groups,
 				 int *ngroups)
 {
-	return getgrouplist(user, group, groups, ngroups);
+	return getgrouplist_func(user, group, groups, ngroups);
 }
 
 int pwnam_wrappers__getpwnam_r(const char *name, struct passwd *pwd, char *buf,
 			       size_t buflen, struct passwd **result)
 {
-	return getpwnam_r(name, pwd, buf, buflen, result);
+	return getpwnam_r_func(name, pwd, buf, buflen, result);
 }
 
 int pwnam_wrappers__getpwuid_r(uid_t uid, struct passwd *pwd, char *buf,
 			       size_t buflen, struct passwd **result)
 {
-	return getpwuid_r(uid, pwd, buf, buflen, result);
+	return getpwuid_r_func(uid, pwd, buf, buflen, result);
 }
 
 int pwnam_wrappers__getgrnam_r(const char *name, struct group *grp, char *buf,
 			       size_t buflen, struct group **result)
 {
-	return getgrnam_r(name, grp, buf, buflen, result);
+	return getgrnam_r_func(name, grp, buf, buflen, result);
 }
 
 int pwnam_wrappers__getgrgid_r(gid_t gid, struct group *grp, char *buf,
 			       size_t buflen, struct group **result)
 {
-	return getgrgid_r(gid, grp, buf, buflen, result);
+	return getgrgid_r_func(gid, grp, buf, buflen, result);
 }
