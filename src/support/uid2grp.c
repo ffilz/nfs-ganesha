@@ -48,6 +48,7 @@
 #include "common_utils.h"
 #include "uid2grp.h"
 #include "idmapper.h"
+#include "pwnam_wrappers.h"
 #ifdef USE_NFSIDMAP
 #include <nfsidmap.h>
 #endif
@@ -133,7 +134,7 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 	groups = gsh_malloc(ngroups * sizeof(gid_t));
 
 	now(&s_time);
-	ret = getgrouplist(user, gid, groups, &ngroups);
+	ret = pwnam_wrappers__getgrouplist(user, gid, groups, &ngroups);
 	now(&e_time);
 	idmapper_monitoring__external_request(IDMAPPING_USERNAME_TO_GROUPLIST,
 					      IDMAPPING_PWUTILS, ret != -1,
@@ -160,7 +161,7 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 		groups = gsh_malloc(ngroups * sizeof(gid_t));
 
 		now(&s_time);
-		ret = getgrouplist(user, gid, groups, &ngroups);
+		ret = pwnam_wrappers__getgrouplist(user, gid, groups, &ngroups);
 		now(&e_time);
 		idmapper_monitoring__external_request(
 			IDMAPPING_USERNAME_TO_GROUPLIST, IDMAPPING_PWUTILS,
@@ -239,7 +240,8 @@ uid2grp_allocate_by_name(const struct gsh_buffdesc *name)
 	while (buff_size <= PWENT_MAX_SIZE) {
 		buff = gsh_malloc(buff_size);
 		now_mono(&s_time);
-		retval = getpwnam_r(namebuff, &p, buff, buff_size, &pp);
+		retval = pwnam_wrappers__getpwnam_r(namebuff, &p, buff,
+						    buff_size, &pp);
 		now_mono(&e_time);
 		idmapper_monitoring__external_request(
 			IDMAPPING_USERNAME_TO_UIDGID, IDMAPPING_PWUTILS,
@@ -347,7 +349,8 @@ static struct group_data *uid2grp_allocate_by_uid(uid_t uid)
 	while (buff_size <= PWENT_MAX_SIZE) {
 		buff = gsh_malloc(buff_size);
 		now_mono(&s_time);
-		retval = getpwuid_r(uid, &p, buff, buff_size, &pp);
+		retval = pwnam_wrappers__getpwuid_r(uid, &p, buff, buff_size,
+						    &pp);
 		now_mono(&e_time);
 		idmapper_monitoring__external_request(IDMAPPING_UID_TO_UNAME,
 						      IDMAPPING_PWUTILS,
