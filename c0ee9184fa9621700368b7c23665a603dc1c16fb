@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3abc0cf_26f7ad02",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-25T21:31:12Z",
+      "side": 1,
+      "message": "Again, this is just going to cause another ERANGE error. Effectively blocking a user with more than the limit on groups.",
+      "revId": "c0ee9184fa9621700368b7c23665a603dc1c16fb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
