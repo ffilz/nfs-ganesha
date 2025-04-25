@@ -44,6 +44,7 @@
 
 typedef enum pwnam_implementation {
 	PWNAM_IMPLEMENTATION__NSSWITCH = 0,
+	PWNAM_IMPLEMENTATION__SSSD,
 } pwnam_implementation_t;
 
 int pwnam_wrappers__set_implementation(pwnam_implementation_t);
