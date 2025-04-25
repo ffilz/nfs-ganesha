@@ -42,6 +42,12 @@
 #include <grp.h>
 #include <pwd.h>
 
+typedef enum pwnam_implementation {
+	PWNAM_IMPLEMENTATION__NSSWITCH = 0,
+} pwnam_implementation_t;
+
+int pwnam_wrappers__set_implementation(pwnam_implementation_t);
+
 int pwnam_wrappers__getgrouplist(const char *user, gid_t group, gid_t *groups,
 				 int *ngroups);
 
