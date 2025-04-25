@@ -89,7 +89,7 @@ struct cleanup_list_element idmapper_cleanup_element;
 static struct fridgethr *cache_reaper_fridge;
 
 /* Switch to enable or disable idmapping */
-bool idmapping_enabled = true;
+bool idmapping_enabled;
 
 /* Mutex to protect set/reset of idmapping status */
 static mutex_t idmapping_status_lock = MUTEX_INITIALIZER;
