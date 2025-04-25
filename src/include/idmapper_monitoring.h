@@ -106,6 +106,12 @@ void idmapper_monitoring__external_request(idmapping_op_t, idmapping_utility_t,
 					   const struct timespec *end);
 
 /**
+ * @brief Updates idmapping max groups exceeded metric
+ */
+
+void idmapper_monitoring__max_groups_exceeded_inc(void);
+
+/**
  * @brief Updates idmapping cache usage metric
  */
 void idmapper_monitoring__cache_usage(idmapping_cache_t, bool is_cache_hit);
