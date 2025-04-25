@@ -38,6 +38,7 @@ SET(idmap_STAT_SRCS
    idmapper_cache.c
    idmapper_negative_cache.c
    idmapper_monitoring.c
+   pwnam_wrappers.c
 )
 
 add_library(idmap OBJECT ${idmap_STAT_SRCS})
