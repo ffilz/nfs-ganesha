@@ -32,6 +32,7 @@
  */
 
 #include "pwnam_wrappers.h"
+#include "sss_nss_idmap.h"
 #include "log.h"
 
 int (*getgrouplist_func)(const char *, __gid_t, __gid_t *,
@@ -60,6 +61,20 @@ int pwnam_wrappers__set_implementation(pwnam_implementation_t implementation)
 		getgrgid_r_func = getgrgid_r;
 		LogEvent(COMPONENT_IDMAPPER,
 			 "NSSwitch pwnam implementation was loaded.");
+		break;
+	case PWNAM_IMPLEMENTATION__SSSD:
+		if (sss_nss_idmap__init() != 0) {
+			LogCrit(COMPONENT_IDMAPPER,
+				"Failed to load sss_nss_idmap module.");
+			return 1;
+		}
+		getgrouplist_func = sss_nss_idmap__getgrouplist;
+		getpwnam_r_func = sss_nss_idmap__getpwnam;
+		getpwuid_r_func = sss_nss_idmap__getpwuid;
+		getgrnam_r_func = sss_nss_idmap__getgrnam;
+		getgrgid_r_func = sss_nss_idmap__getgrgid;
+		LogEvent(COMPONENT_IDMAPPER,
+			 "SSSD pwnam implementation was loaded.");
 		break;
 	default:
 		LogFatal(COMPONENT_IDMAPPER,
