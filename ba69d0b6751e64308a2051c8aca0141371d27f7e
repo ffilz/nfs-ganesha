@@ -51,6 +51,24 @@
       "message": "I don\u0027t see this ever being called...",
       "revId": "ba69d0b6751e64308a2051c8aca0141371d27f7e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3a1289_42579eec",
+        "filename": "src/include/pwnam_wrappers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-04-26T14:52:50Z",
+      "side": 1,
+      "message": "You are right, it isn\u0027t called yet\n\nIn a further commit it will be added to the configuration and then it will be called for configuration reload\n\nRight now it just keeps the current existing behavior and laying the foundations to call it",
+      "parentUuid": "7a09e79c_784c470b",
+      "revId": "ba69d0b6751e64308a2051c8aca0141371d27f7e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
