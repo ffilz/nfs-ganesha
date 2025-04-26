@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ffc0ace_ecf64251",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-04-26T14:49:05Z",
+      "side": 1,
+      "message": "1000 wasn\u0027t the max until today, just the initial value when attempting to fetch the groups\n\nBefore it wasn\u0027t capped, I can leave it without a cap like before, but 2k groups per user is considered high enough, so that\u0027s a sensible limitation",
+      "parentUuid": "981470bc_d8012204",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "794df935_7f6d802c",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-04-25T21:29:13Z",
       "side": 1,
       "message": "Here you take the MIN of 1000 or max_groups_membership which has a max of INT32_MAX and defaults to 2000...\n\n\nLet\u0027s make the default and max in the config sensible, and drop this hidden default.",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1cd218d_2117b150",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-04-26T14:49:05Z",
+      "side": 1,
+      "message": "Right, 1k is just the initial value when trying to fetch\n\nIf the user has more groups than that, it will feel the buffer with 1k groups and return ERANGE and ngroups will be set to the amount of groups the user has.\n\nI\u0027m taking the min here as if the configuration was set to 500 groups per user, we want to use the first 500 groups and not more than that.\n\n\nImportant to understand the API that is used. You allocate a buffer and provide an in/out parameter will the size of the buffer.\n\nIf the provider needs to feel the buffer further it will return ERANGE and use the ngroups as an OUT parameter to provide the number of groups if you want to increase the buffer size and call it again.\n\nThat\u0027s why there are two consecutive calls to the API",
+      "parentUuid": "794df935_7f6d802c",
       "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f120e3_d178e313",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-04-26T14:49:05Z",
+      "side": 1,
+      "message": "Same as previous comment",
+      "parentUuid": "45ca5390_76f8137a",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59db685a_b49b19e9",
@@ -82,6 +136,24 @@
       "writtenOn": "2025-04-25T21:29:13Z",
       "side": 1,
       "message": "If the returned ngroups from nfs4_gss_princ_to_grouplist is greater than max_groups_membership, this is just going to cause another ERANGE error...",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b95844_ea57685a",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-04-26T14:49:05Z",
+      "side": 1,
+      "message": "Right. But the buffer will be filled we the X number of groups we requested anyways.",
+      "parentUuid": "59db685a_b49b19e9",
       "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
