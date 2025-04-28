@@ -16,6 +16,24 @@
       "message": "So this patch doesn\u0027t allow for using Bind_Addr if Monitoring_Addr is not set?\n\nAlso, it seems like it would be worthwhile to combine monitoring_addr and monitoring_port into one sockaddr_t in the config commit so the lower level code need not do the combination.\n\nAnd we probably should allow setting the port and address together like: Monitoring_Addr \u003d 10.0.0.1:1234; In which case Monitoring_Port would be ignored.",
       "revId": "3a70aa487aa3ea7939dcb3cc3b549379858484ad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d21bda86_0dae42bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-04-28T17:05:33Z",
+      "side": 1,
+      "message": "Pushing new code change to make use of Bind_Addr if Monitoring_Addr is not set.\nIn my opinion keeping port and address separate will help in setting anyone at a time. Mostly admin will only one as per the need.\nSo currently not making any change for combining",
+      "parentUuid": "895ce0c7_152b8b6f",
+      "revId": "3a70aa487aa3ea7939dcb3cc3b549379858484ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
