@@ -1332,6 +1332,7 @@ static fattr_xdr_result encode_fs_locations(XDR *xdr,
 {
 	fs_locations4 fs_locs = {};
 	fs_location4 fs_loc = {};
+	fattr_xdr_result status;
 
 	if (args->data == NULL || args->data->current_obj == NULL)
 		return FATTR_XDR_NOOP;
@@ -1373,13 +1374,15 @@ static fattr_xdr_result encode_fs_locations(XDR *xdr,
 		LogEvent(COMPONENT_NFS_V4,
 			 "encode fs_locations xdr_fs_locations failed");
 
-		return FATTR_XDR_FAILED;
+		status = FATTR_XDR_FAILED;
+	} else {
+		status = FATTR_XDR_SUCCESS;
 	}
 
 	nfs4_pathname4_free(&fs_locs.fs_root);
 	nfs4_pathname4_free(&fs_loc.rootpath);
 
-	return FATTR_XDR_SUCCESS;
+	return status;
 }
 
 static fattr_xdr_result decode_fs_locations(XDR *xdr,
