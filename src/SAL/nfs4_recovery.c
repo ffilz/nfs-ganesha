@@ -992,12 +992,10 @@ bool nfs4_check_deleg_reclaim(nfs_client_id_t *clid, nfs_fh4 *fhandle)
 /**
  * @brief Release NLM state
  */
-static void nlm_releasecall(struct fridgethr_context *ctx)
+static void nlm_release(state_nsm_client_t *nsm_cp)
 {
-	state_nsm_client_t *nsm_cp;
 	state_status_t err;
 
-	nsm_cp = ctx->arg;
 	err = state_nlm_notify(nsm_cp, false, 0);
 	if (err != STATE_SUCCESS)
 		LogDebug(COMPONENT_STATE, "state_nlm_notify failed with %d",
@@ -1064,7 +1062,6 @@ static void nfs_release_nlm_state(char *release_ip)
 	struct rbt_head *head_rbt;
 	struct rbt_node *pn;
 	struct hash_data *pdata;
-	state_status_t state_status;
 	char serverip[SOCK_NAME_MAX];
 	int i;
 
@@ -1077,8 +1074,11 @@ static void nfs_release_nlm_state(char *release_ip)
 
 	/* walk the client list and call state_nlm_notify */
 	for (i = 0; i < ht->parameter.index_size; i++) {
-		PTHREAD_RWLOCK_wrlock(&ht->partitions[i].ht_lock);
 		head_rbt = &ht->partitions[i].rbt;
+restart:
+		LogDebug(COMPONENT_STATE, "Trying lock on %p",
+			 &ht->partitions[i].ht_lock);
+		PTHREAD_RWLOCK_wrlock(&ht->partitions[i].ht_lock);
 		/* go through all entries in the red-black-tree */
 		RBT_LOOP(head_rbt, pn)
 		{
@@ -1090,15 +1090,10 @@ static void nfs_release_nlm_state(char *release_ip)
 			    ip_str_match(release_ip, serverip)) {
 				nsm_cp = nlm_cp->slc_nsm_client;
 				inc_nsm_client_ref(nsm_cp);
-				state_status =
-					fridgethr_submit(state_async_fridge,
-							 nlm_releasecall,
-							 nsm_cp);
-				if (state_status != STATE_SUCCESS) {
-					dec_nsm_client_ref(nsm_cp);
-					LogCrit(COMPONENT_STATE,
-						"failed to submit nlm release thread ");
-				}
+				PTHREAD_RWLOCK_unlock(
+					&ht->partitions[i].ht_lock);
+				nlm_release(nsm_cp);
+				goto restart;
 			}
 			RBT_INCREMENT(pn);
 		}
