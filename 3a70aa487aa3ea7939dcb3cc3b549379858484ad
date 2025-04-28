@@ -34,6 +34,24 @@
       "parentUuid": "895ce0c7_152b8b6f",
       "revId": "3a70aa487aa3ea7939dcb3cc3b549379858484ad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9947ad57_0deb7653",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-04-28T17:10:12Z",
+      "side": 1,
+      "message": "Forgot to reply on combining together addr \u0026 port in single sockaddr_t.\nAs we may use bind_addr and monitoring_port when monitoring_addr is not set, it is easy to pass on addr and port separately.",
+      "parentUuid": "d21bda86_0dae42bc",
+      "revId": "3a70aa487aa3ea7939dcb3cc3b549379858484ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
