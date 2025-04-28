@@ -16,6 +16,24 @@
       "message": "In addition, please check all callers and remove any checks for \u003c 0. Coverity may flag those and think the function can return \u003c 0 and then still complain about overflow.",
       "revId": "16a454e59b251c4d47d3247ccfd53672cde6e866",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c25f25_3aec22bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-04-28T07:33:30Z",
+      "side": 1,
+      "message": "Removed the failure check of function posix_acl_2_fsal_acl() from all the caller functions.",
+      "parentUuid": "559d18ea_a811ff52",
+      "revId": "16a454e59b251c4d47d3247ccfd53672cde6e866",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
