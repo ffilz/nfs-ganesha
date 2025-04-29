@@ -41,6 +41,7 @@
 #include "avltree.h"
 #include "abstract_atomic.h"
 #include "fsal.h"
+#include "monitoring.h"
 
 #ifndef EXPORT_MGR_H
 #define EXPORT_MGR_H
@@ -229,6 +230,7 @@ struct gsh_export {
 	bool update_prune_unmount;
 	/** Due to an update, this export will need to be remounted. */
 	bool update_remount;
+	gauge_metric_handle_t metadata_metric; /* Prometheus metric handle */
 };
 
 /* Use macro to define this to get around include file order. */
@@ -330,7 +332,8 @@ void unmount_gsh_export(struct gsh_export *exp);
 void remove_gsh_export(uint16_t export_id);
 bool foreach_gsh_export(bool (*cb)(struct gsh_export *exp, void *state),
 			bool wrlock, void *state);
-
+void update_export_metadata_metric(struct gsh_export *exp);
+void cleanup_export_metadata_metric(struct gsh_export *exp);
 /**
  * @brief Advisory check of export readiness.
  *
