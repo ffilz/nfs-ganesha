@@ -243,7 +243,7 @@ static nfsstat4 layoutcommit(struct fsal_obj_handle *objectHandle,
 
 	if (hasRecentModificationTime(arguments, previousReply)) {
 		posixAttributes.st_mtim.tv_sec = arguments->new_time.seconds;
-		posixAttributes.st_mtim.tv_sec = arguments->new_time.nseconds;
+		posixAttributes.st_mtim.tv_nsec = arguments->new_time.nseconds;
 		mask |= SAU_SET_ATTR_MTIME;
 		mask = (unsigned int)mask | SAU_SET_ATTR_MTIME;
 	}
