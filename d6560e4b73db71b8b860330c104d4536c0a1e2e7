@@ -50,6 +50,24 @@
       "message": "We can remove this and adjust the if condition at line 815, similar to how it\u0027s handled at line 774, to maintain consistency.",
       "revId": "d6560e4b73db71b8b860330c104d4536c0a1e2e7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f373688_3550e005",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-04-29T20:56:38Z",
+      "side": 1,
+      "message": "Good point. Let\u0027s make this change also.",
+      "parentUuid": "b014facf_3cce00fe",
+      "revId": "d6560e4b73db71b8b860330c104d4536c0a1e2e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
