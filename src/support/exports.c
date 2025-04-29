@@ -1288,7 +1288,7 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 		probe_exp->config_gen = get_parse_root_generation(node);
 
 		copy_gsh_export(probe_exp, export);
-
+		update_export_metadata_metric(probe_exp);
 		/* We will need to dispose of the config export since we
 		 * updated the existing export.
 		 */
