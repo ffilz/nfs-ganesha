@@ -1600,7 +1600,6 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 		probe_exp->config_gen = get_parse_root_generation(node);
 
 		copy_gsh_export(probe_exp, export);
-
 		/* We will need to dispose of the config export since we
 		 * updated the existing export.
 		 */
@@ -1740,6 +1739,8 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 		errcnt++;
 		return errcnt;
 	}
+
+	update_export_metadata_metric(probe_exp);
 
 	/* add_export_commit shouldn't add this export to mount work as
 	 * add_export_commit deals with creating pseudo mount directly.
@@ -3064,6 +3065,8 @@ void free_export_resources(struct gsh_export *export, bool config)
 
 	LogDebug(COMPONENT_EXPORT, "Free resources for export %p id %d path %s",
 		 export, export->export_id, export->cfg_fullpath);
+
+	cleanup_export_metadata_metric(export);
 
 	if (op_ctx == NULL || op_ctx->ctx_export != export) {
 		/* We need to complete export cleanup with this export.
