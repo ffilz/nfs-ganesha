@@ -66,6 +66,7 @@
 #include "nfs_proto_functions.h"
 #include "pnfs_utils.h"
 #include "idmapper.h"
+#include "monitoring.h"
 
 /** Mutex to serialize export admin operations.
  */
@@ -89,6 +90,12 @@ struct export_by_id {
 	pthread_rwlock_t eid_lock;
 	struct avltree t;
 	struct avltree_node *cache[EXPORT_BY_ID_CACHE_SIZE];
+};
+
+struct export_labels {
+    const char *sectype;
+    const char *transport;
+    const char *access;
 };
 
 static struct export_by_id export_by_id;
@@ -234,6 +241,71 @@ struct gsh_export *alloc_export(void)
 }
 
 /**
+ * @brief Extract dynamic label values from an export config.
+ *
+ * This function analyzes the export's permission options to determine
+ * the transport type (TCP/UDP/RDMA), access type (rw/ro/no), and security
+ * type (sys/krb5/krb5i/krb5p) that should be attached as labels
+ * to Prometheus metrics.
+ *
+ * @param export Pointer to the gsh_export structure.
+ *
+ * @return Struct containing strings for access, transport, and sectype.
+ */
+
+struct export_labels get_export_labels(struct gsh_export *export)
+{
+    struct export_labels labels = {
+        .sectype = "unknown",
+        .transport = "unknown",
+        .access = "unknown"
+    };
+
+    uint32_t opts = export->export_perms.options;
+
+    /* Access */
+    switch (opts & EXPORT_OPTION_ACCESS_MASK) {
+    case EXPORT_OPTION_RW_ACCESS:
+        labels.access = "rw";
+        break;
+    case EXPORT_OPTION_READ_ACCESS:
+        labels.access = "ro";
+        break;
+    case EXPORT_OPTION_NO_ACCESS:
+        labels.access = "no";
+        break;
+    default:
+        labels.access = "unknown";
+        break;
+    }
+
+    /* Transport */
+    if (opts & EXPORT_OPTION_TCP)
+        labels.transport = "tcp";
+    else if (opts & EXPORT_OPTION_UDP)
+        labels.transport = "udp";
+    else if (opts & EXPORT_OPTION_RDMA)
+        labels.transport = "rdma";
+
+    /* Sectype */
+    if (opts & EXPORT_OPTION_AUTH_UNIX)
+        labels.sectype = "sys";
+    else if (opts & (EXPORT_OPTION_RPCSEC_GSS_PRIV |
+                     EXPORT_OPTION_RPCSEC_GSS_INTG |
+                     EXPORT_OPTION_RPCSEC_GSS_NONE)) {
+        if (opts & EXPORT_OPTION_RPCSEC_GSS_PRIV)
+            labels.sectype = "krb5p";
+        else if (opts & EXPORT_OPTION_RPCSEC_GSS_INTG)
+            labels.sectype = "krb5i";
+        else
+            labels.sectype = "krb5";
+    }
+
+    return labels;
+}
+
+
+/**
  * @brief Insert an export list entry into the export manager
  *
  * WARNING! This takes a pointer to the container of the exportlist.
@@ -258,6 +330,27 @@ bool insert_gsh_export(struct gsh_export *export)
 		PTHREAD_RWLOCK_unlock(&export_by_id.eid_lock);
 		return false;
 	}
+	/**
+	 * @brief Register the ganesha_export_metadata Prometheus metric.
+	 *
+	 * Labels are dynamically populated based on the export configuration.
+	 */
+	struct export_labels labels_info = get_export_labels(export);
+	const metric_label_t labels[] = {
+		METRIC_LABEL("instance", nfs_param.nfsv4_param.domainname),
+		METRIC_LABEL("fsal", export->fsal_export->fsal->name),
+		METRIC_LABEL("sectype", labels_info.sectype),
+		METRIC_LABEL("transport", labels_info.transport),
+		METRIC_LABEL("access",  labels_info.access),
+		METRIC_LABEL("export_path", export->cfg_fullpath)
+	};
+
+	gauge_metric_handle_t exp_metric = monitoring__register_gauge(
+		"ganesha_export_metadata",
+		METRIC_METADATA("Metadata about export", METRIC_UNIT_NONE),
+		labels, ARRAY_SIZE(labels));
+
+	monitoring__gauge_set(exp_metric, 1);
 
 	/* take an additional ref for the sentinel reference... */
 	get_gsh_export_ref(export);
