@@ -152,6 +152,10 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	       client_list_entry_allocator_t cle_allocator,
 	       client_list_entry_filler_t cle_filler, void *private_data);
 
+bool remove_base_client(enum log_components component,
+		       struct glist_head *client_list, const char *client_tok,
+		       enum term_type type_hint);
+
 bool haproxy_match(SVCXPRT *xprt);
 
 #endif /* !CLIENT_MGR_H */

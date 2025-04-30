@@ -313,7 +313,7 @@ int foreach_gsh_client(bool (*cb)(struct gsh_client *cl, void *state),
 /* parse the ipaddr string in args
  */
 
-static bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
+bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
 {
 	char *client_addr;
 	unsigned char cl_addrbuf[sizeof(struct in6_addr)];
@@ -363,6 +363,7 @@ struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
 		if (client == NULL)
 			*errormsg = "Client IP address not found";
 	}
+
 	return client;
 }
 
@@ -1367,6 +1368,30 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	CIDR *cidr;
 	int rc;
 	struct base_client_entry *cli;
+	struct glist_head *glist;
+
+	cidr = cidr_from_str(client_tok);
+	if (!cidr) {
+		LogAlways(COMPONENT_LOG, "Invalid client IP/CIDR (%s)",
+			  client_tok);
+		errcnt++;
+		goto exit;
+	}
+
+	/* Check if the same client already exist */
+	glist_for_each(glist, client_list) {
+		cli = glist_entry(glist, struct base_client_entry, cle_list);
+
+		if (cidr_equals(cli->client.network.cidr, cidr) == 1) {
+			LogAlways(COMPONENT_LOG,
+				  "Duplicate client entry ignored: %s",
+				  client_tok);
+			errcnt++;
+			goto exit;
+		}
+
+		cli = NULL;
+	}
 
 	if (cle_allocator == NULL)
 		cle_allocator = base_client_allocator;
@@ -1545,7 +1570,76 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	cli = NULL;
 out:
 	gsh_free(cli);
+exit:
+	cidr_free(cidr);
 	return errcnt;
+}
+
+/**
+ * @brief Expand the client name token into one or more client entries
+ *
+ * @param component     [IN]  component for logging
+ * @param client_list   [IN]  the client list
+ * @param client_tok    [IN]  the name string.  We modify it.
+ * @param type_hint     [IN]  type hint from parser for client_tok
+ *
+ * @returns True on success, false if no entry found
+ */
+bool remove_base_client(enum log_components component,
+			struct glist_head *client_list, const char *client_tok,
+			enum term_type type_hint)
+{
+	bool found = false;
+	CIDR *cidr;
+	struct base_client_entry *cli;
+	struct glist_head *glist;
+
+	cidr = cidr_from_str(client_tok);
+	if (!cidr) {
+		LogAlways(component, "Invalid client IP/CIDR (%s)", client_tok);
+		goto exit;
+	}
+
+	/* Check if the same client already exist */
+	glist_for_each(glist, client_list) {
+		cli = glist_entry(glist, struct base_client_entry, cle_list);
+
+		if (cidr_equals(cli->client.network.cidr, cidr) == 1) {
+			/* delete the exact match entry only */
+			switch (cli->type) {
+			case NETWORK_CLIENT:
+				if (cli->client.network.cidr != NULL)
+					cidr_free(cli->client.network.cidr);
+				break;
+			case NETGROUP_CLIENT:
+				gsh_free(cli->client.netgroup.netgroupname);
+				break;
+			case WILDCARDHOST_CLIENT:
+				gsh_free(cli->client.wildcard.wildcard);
+				break;
+			case GSSPRINCIPAL_CLIENT:
+				gsh_free(cli->client.gssprinc.princname);
+				break;
+			case PROTO_CLIENT:
+			case MATCH_ANY_CLIENT:
+			case BAD_CLIENT:
+				/* Do nothing for these client types */
+				break;
+			}
+
+			glist_del(&cli->cle_list);
+			gsh_free(cli);
+
+			LogAlways(component, "Removed client IP(%s)",
+				  client_tok);
+			found = true;
+			break;
+		}
+	}
+
+exit:
+	cidr_free(cidr);
+	return found;
 }
 
 /**
