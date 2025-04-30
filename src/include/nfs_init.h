@@ -59,6 +59,7 @@ void nfs_init_cleanup(void);
 void nfs_init_complete(void);
 void nfs_init_wait(void);
 int nfs_init_wait_timeout(int timeout);
+void nfs_global_export_client_list_init(void);
 
 /**
  * nfs_prereq_init:

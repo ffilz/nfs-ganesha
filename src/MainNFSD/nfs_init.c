@@ -101,6 +101,9 @@ struct _nfs_health nfs_health_;
 
 static struct _nfs_health healthstats;
 
+extern struct glist_head global_export_id_list;
+extern struct glist_head global_client_ip_list;
+
 /* ServerEpoch is ServerBootTime unless overridden by -E command line option */
 struct timespec nfs_ServerBootTime;
 time_t nfs_ServerEpoch;
@@ -1388,4 +1391,11 @@ bool nfs_health(void)
 	healthstats.dequeued_reqs = newdeq;
 
 	return healthy;
+}
+
+void nfs_global_export_client_list_init(void)
+{
+	/* Init the global export id list and client ip list */
+	glist_init(&global_export_id_list);
+	glist_init(&global_client_ip_list);
 }

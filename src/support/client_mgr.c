@@ -346,7 +346,7 @@ static bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
 /** @brief lookup gsh_client from input ip-address
  */
 
-static struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
+struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
 {
 	sockaddr_t sockaddr;
 	struct gsh_client *client = NULL;

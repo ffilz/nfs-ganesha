@@ -350,6 +350,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	/* Initialize the global export and client list */
+	nfs_global_export_client_list_init();
+
 	/* initialize memory and logging */
 	nfs_prereq_init(exec_name, nfs_host_name, debug_level, log_path,
 			dump_trace, stack_size);

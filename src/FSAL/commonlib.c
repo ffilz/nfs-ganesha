@@ -75,6 +75,10 @@
 #include "gsh_dbus.h"
 #endif
 
+extern log_levels_t *conditional_component_log_level;
+extern struct glist_head global_export_id_list;
+extern struct glist_head global_client_ip_list;
+
 /* fsal_attach_export
  * called from the FSAL's create_export method with a reference on the fsal.
  */
@@ -3247,6 +3251,9 @@ static inline void clear_op_context_export_impl(void)
 	 */
 	gsh_refstr_put(op_ctx->ctx_fullpath);
 	gsh_refstr_put(op_ctx->ctx_pseudopath);
+
+	/* Clear the context conditional flag */
+	op_ctx->conditional_log = false;
 }
 
 /**
@@ -3276,6 +3283,57 @@ void clear_op_context_export(void)
 }
 
 /**
+ * @brief Set conditional flag into the op_context.
+ *
+ * @param[in] exp       The gsh_export to set, can be NULL.
+ *
+ */
+void set_op_context_conditional_flag(struct gsh_export *exp)
+{
+	struct export_id_list *export_id_list_entry;
+	struct client_ip_list *client_ip_list_entry;
+	struct glist_head *export_glist;
+	struct glist_head *client_glist;
+
+	if ((op_ctx == NULL) || (exp == NULL))
+		return;
+
+	if (op_ctx->client == NULL)
+		return;
+
+	/* Set the op_ctx flag here if export matches */
+	if ((conditional_component_log_level[COMPONENT_ALL] > NIV_NULL) &&
+	    (glist_empty(&global_export_id_list) != true)) {
+		glist_for_each(export_glist, &global_export_id_list) {
+			export_id_list_entry =
+				glist_entry(export_glist, struct export_id_list,
+					    export_id_glist);
+
+			if (exp->export_id == export_id_list_entry->export_id) {
+				op_ctx->conditional_log = true;
+				break;
+			}
+		}
+	}
+
+	/* Set the op_ctx flag here if client matches */
+	if ((conditional_component_log_level[COMPONENT_ALL] > NIV_NULL) &&
+	    (glist_empty(&global_client_ip_list) != true)) {
+		glist_for_each(client_glist, &global_client_ip_list) {
+			client_ip_list_entry =
+				glist_entry(client_glist, struct client_ip_list,
+					    client_ip_glist);
+
+			if (strcmp(op_ctx->client->hostaddr_str,
+				   client_ip_list_entry->clientaddr_str) == 0) {
+				op_ctx->conditional_log = true;
+				break;
+			}
+		}
+	}
+}
+
+/**
  * @brief Set an export into the op_context.
  *
  * @param[in] exp       The gsh_export to set, can be NULL.
@@ -3290,6 +3348,8 @@ void set_op_context_export(struct gsh_export *exp)
 	clear_op_context_export_impl();
 
 	set_op_context_export_fsal_no_release(exp, fsal_exp, NULL);
+
+	set_op_context_conditional_flag(exp);
 }
 
 /**

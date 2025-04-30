@@ -508,6 +508,7 @@ struct req_op_context {
 	struct {
 		bool pseudo_fsal_internal_lookup;
 	} flags;
+	bool conditional_log; /* conditional log */
 };
 
 /**

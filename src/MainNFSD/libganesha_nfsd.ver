@@ -188,6 +188,7 @@
   nfs_param;
   nfs_pidfile_path;
   nfs_prereq_destroy;
+  nfs_global_export_client_list_init;
   nfs_prereq_init;
   nfs_recovery_get_nodeid;
   nfs_recovery_fsal_reclaim_client;
