@@ -313,7 +313,7 @@ int foreach_gsh_client(bool (*cb)(struct gsh_client *cl, void *state),
 /* parse the ipaddr string in args
  */
 
-static bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
+bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
 {
 	char *client_addr;
 	unsigned char cl_addrbuf[sizeof(struct in6_addr)];
@@ -363,6 +363,7 @@ struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
 		if (client == NULL)
 			*errormsg = "Client IP address not found";
 	}
+
 	return client;
 }
 
