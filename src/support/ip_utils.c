@@ -59,11 +59,6 @@
 #include "log.h"
 #include "abstract_mem.h"
 
-struct cidr_addr {
-	sockaddr_t ip_addr;
-	u_int16_t mask;
-};
-
 /**
  * @brief Create a hash value based on the sockaddr_t structure
  *
@@ -773,4 +768,27 @@ int cidr_proto(CIDR *cidr)
 int cidr_version(CIDR *cidr)
 {
 	return 1;
+}
+
+int cidr_equals(CIDR *c1, CIDR *c2)
+{
+	if (c1->mask != c2->mask)
+		return 0;
+
+	if (c1->ip_addr.ss_family != c2->ip_addr.ss_family)
+		return 0;
+
+	if (c1->ip_addr.ss_family == AF_INET) {
+		struct sockaddr_in *a = (struct sockaddr_in *)&c1->ip_addr;
+		struct sockaddr_in *b = (struct sockaddr_in *)&c2->ip_addr;
+
+		return a->sin_addr.s_addr == b->sin_addr.s_addr;
+	} else if (c1->ip_addr.ss_family == AF_INET6) {
+		struct sockaddr_in6 *a = (struct sockaddr_in6 *)&c1->ip_addr;
+		struct sockaddr_in6 *b = (struct sockaddr_in6 *)&c2->ip_addr;
+
+		return memcmp(&a->sin6_addr, &b->sin6_addr,
+			      sizeof(a->sin6_addr)) == 0;
+	}
+	return 0;
 }

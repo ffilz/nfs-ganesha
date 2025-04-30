@@ -313,7 +313,7 @@ int foreach_gsh_client(bool (*cb)(struct gsh_client *cl, void *state),
 /* parse the ipaddr string in args
  */
 
-static bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
+bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
 {
 	char *client_addr;
 	unsigned char cl_addrbuf[sizeof(struct in6_addr)];
@@ -350,7 +350,8 @@ static bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
 /** @brief lookup gsh_client from input ip-address
  */
 
-struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
+struct gsh_client *lookup_client(DBusMessageIter *args,
+				 char **errormsg, sockaddr_t *hostaddr)
 {
 	sockaddr_t sockaddr;
 	struct gsh_client *client = NULL;
@@ -362,7 +363,13 @@ struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
 		client = get_gsh_client(&sockaddr, true);
 		if (client == NULL)
 			*errormsg = "Client IP address not found";
+
+		if (hostaddr) {
+			/* Copy sockadd to hostaddr if hostaddr is valid */
+			memcpy(hostaddr, &sockaddr, sizeof(sockaddr));
+		}
 	}
+
 	return client;
 }
 
@@ -539,7 +546,7 @@ static bool disconnect_nfsv41_client(DBusMessageIter *args, DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	success = arg_ipaddr(args, &sockaddr, &errormsg);
 
-	struct gsh_client *const client = lookup_client(args, &errormsg);
+	struct gsh_client *const client = lookup_client(args, &errormsg, NULL);
 
 	if (client == NULL) {
 		success = false;
@@ -629,7 +636,7 @@ static bool gsh_client_io_ops(DBusMessageIter *args, DBusMessage *reply,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		errormsg = "Client IP address not found";
@@ -668,7 +675,7 @@ static bool gsh_client_all_ops(DBusMessageIter *args, DBusMessage *reply,
 		errormsg = "Stat counting for all ops for a client is disabled";
 		success = false;
 	} else {
-		client = lookup_client(args, &errormsg);
+		client = lookup_client(args, &errormsg, NULL);
 		if (client == NULL) {
 			success = false;
 			errormsg = "Client IP address not found";
@@ -723,7 +730,7 @@ static bool get_nfsv3_stats_io(DBusMessageIter *args, DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		errormsg = "NFS stat counting disabled";
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -769,7 +776,7 @@ static bool get_nfsv40_stats_io(DBusMessageIter *args, DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		errormsg = "NFS stat counting disabled";
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -814,7 +821,7 @@ static bool get_nfsv41_stats_io(DBusMessageIter *args, DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		errormsg = "NFS stat counting disabled";
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -859,7 +866,7 @@ static bool get_nfsv41_stats_layouts(DBusMessageIter *args, DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		errormsg = "NFS stat counting disabled";
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -904,7 +911,7 @@ static bool get_nfsv42_stats_io(DBusMessageIter *args, DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		errormsg = "NFS stat counting disabled";
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -949,7 +956,7 @@ static bool get_nfsv42_stats_layouts(DBusMessageIter *args, DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		errormsg = "NFS stat counting disabled";
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -990,7 +997,7 @@ static bool get_stats_delegations(DBusMessageIter *args, DBusMessage *reply,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		errormsg = "Client IP address not found";
@@ -1036,7 +1043,7 @@ static bool get_9p_stats_io(DBusMessageIter *args, DBusMessage *reply,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -1079,7 +1086,7 @@ static bool get_9p_stats_trans(DBusMessageIter *args, DBusMessage *reply,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 		if (errormsg == NULL)
@@ -1123,7 +1130,7 @@ static bool get_9p_client_op_stats(DBusMessageIter *args, DBusMessage *reply,
 	DBusMessageIter iter;
 
 	dbus_message_iter_init_append(reply, &iter);
-	client = lookup_client(args, &errormsg);
+	client = lookup_client(args, &errormsg, NULL);
 	if (client == NULL) {
 		success = false;
 	} else {

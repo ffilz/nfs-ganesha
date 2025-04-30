@@ -50,8 +50,10 @@ typedef struct sockaddr_storage sockaddr_t;
  */
 #define SOCK_NAME_MAX 128
 
-struct cidr_addr;
-typedef struct cidr_addr CIDR;
+typedef struct cidr_addr {
+	sockaddr_t ip_addr;
+	u_int16_t mask;
+} CIDR;
 
 CIDR *cidr_alloc(void);
 CIDR *cidr_dup(const CIDR *);
@@ -66,6 +68,7 @@ void cidr_mask_to_chars(CIDR *, unsigned char *);
 int cidr_family(CIDR *);
 int cidr_proto(CIDR *);
 int cidr_version(CIDR *);
+int cidr_equals(CIDR *c1, CIDR *c2);
 
 int cmp_sockaddr(sockaddr_t *, sockaddr_t *, bool);
 int sockaddr_cmpf(sockaddr_t *, sockaddr_t *, bool);
