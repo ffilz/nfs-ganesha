@@ -45,6 +45,12 @@
 extern pthread_mutexattr_t default_mutex_attr;
 extern pthread_rwlockattr_t default_rwlock_attr;
 
+extern struct base_client_entry *
+conditional_logging_client_match(sockaddr_t *sockaddr);
+struct gsh_export;
+extern struct export_id_list *
+conditional_logging_export_match(struct gsh_export *exp);
+
 /**
  * BUILD_BUG_ON - break compile if a condition is true.
  * @condition: the condition which the compiler should know is false.
