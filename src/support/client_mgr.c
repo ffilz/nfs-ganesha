@@ -313,7 +313,7 @@ int foreach_gsh_client(bool (*cb)(struct gsh_client *cl, void *state),
 /* parse the ipaddr string in args
  */
 
-static bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
+bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
 {
 	char *client_addr;
 	unsigned char cl_addrbuf[sizeof(struct in6_addr)];
@@ -363,6 +363,7 @@ struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
 		if (client == NULL)
 			*errormsg = "Client IP address not found";
 	}
+
 	return client;
 }
 
@@ -1341,6 +1342,171 @@ void *base_client_allocator(void)
 }
 
 /**
+ * @brief Normalize IPv4-mapped IPv6 CIDR addresses
+ *
+ * This helper normalizes a CIDR that represents an IPv4-mapped IPv6
+ * address into its canonical IPv4 form. The function converts the
+ * address family to AF_INET and adjusts the mask length to IPv4 semantics.
+ *
+ * Normalization ensures consistent behavior for CIDR equality,
+ * containment, and overlap checks by avoiding mismatches between
+ * IPv4 and IPv4-mapped IPv6 representations of the same network.
+ *
+ * This function must be invoked before performing CIDR comparisons
+ * such as cidr_contains_ip(), cidr_contains_cidr(), or cidr_equals().
+ *
+ * @param[in,out] cidr   CIDR object to be normalized in-place
+ */
+static void normalize_v4_mapped_cidr(CIDR *cidr)
+{
+	if (cidr == NULL)
+		return;
+
+	if (cidr->ip_addr.ss_family == AF_INET6) {
+		struct sockaddr_in6 *v6 = (struct sockaddr_in6 *)&cidr->ip_addr;
+
+		if (IN6_IS_ADDR_V4MAPPED(&v6->sin6_addr)) {
+			struct sockaddr_in v4 = { 0 };
+
+			v4.sin_family = AF_INET;
+			memcpy(&v4.sin_addr, &v6->sin6_addr.s6_addr[12],
+			       sizeof(struct in_addr));
+
+			cidr->ip_addr = *(sockaddr_t *)&v4;
+
+			/* Convert prefix */
+			if (cidr->mask >= 96)
+				cidr->mask -= 96;
+			else
+				cidr->mask = 0;
+		}
+	}
+}
+
+bool is_base_client_match(enum log_components comp, struct glist_head *cli_list,
+			  const char *cli_tok, enum term_type type_hint)
+{
+	struct base_client_entry *cli = NULL;
+	struct glist_head *glist;
+	CIDR *cidr;
+
+	/*
+	 * Locking requirements:
+	 * Caller must hold rwlock (read/write lock) before calling.
+	 * No locking is performed internally.
+	 */
+	glist_for_each(glist, cli_list) {
+		cli = glist_entry(glist, struct base_client_entry, cle_list);
+
+		switch (cli->type) {
+		case MATCH_ANY_CLIENT:
+			goto found;
+		case NETGROUP_CLIENT:
+			if ((type_hint == TERM_NETGROUP) &&
+			    (strlen(cli_tok) <= MAXHOSTNAMELEN) &&
+			    strcmp(cli->client.netgroup.netgroupname,
+				   cli_tok + 1) == 0)
+				goto found;
+			break;
+		case WILDCARDHOST_CLIENT:
+			if ((type_hint == TERM_REGEX) &&
+			    (strlen(cli_tok) > MAXHOSTNAMELEN) &&
+			    strcmp(cli->client.wildcard.wildcard, cli_tok) == 0)
+				goto found;
+			break;
+		case NETWORK_CLIENT:
+			if (type_hint == TERM_V4ADDR ||
+			    type_hint == TERM_V4CIDR ||
+			    type_hint == TERM_V6ADDR ||
+			    type_hint == TERM_V6CIDR) {
+				cidr = cidr_from_str(cli_tok);
+
+				if (cidr == NULL) {
+					LogAlways(comp, "Invalid IP/CIDR(%s)",
+						  cli_tok);
+					goto found;
+				}
+
+				normalize_v4_mapped_cidr(cidr);
+				normalize_v4_mapped_cidr(
+					cli->client.network.cidr);
+
+				if (cidr_contains_cidr(cli->client.network.cidr,
+						       cidr)) {
+					cidr_free(cidr);
+					goto found;
+				}
+				cidr_free(cidr);
+			}
+			break;
+		default:
+			LogAlways(comp,
+				  "Invalid client Type Hint(%d) Token(%s)",
+				  type_hint, cli_tok);
+		}
+	}
+
+	return false;
+
+found:
+	return true;
+}
+
+struct base_client_entry *is_base_client_exact_match(
+	enum log_components component, struct glist_head *client_list,
+	const char *client_tok)
+{
+	struct base_client_entry *cli;
+	struct glist_head *g;
+	CIDR *cidr = NULL;
+
+	/* Try CIDR parse (NETWORK_CLIENT) */
+	cidr = cidr_from_str(client_tok);
+	if (cidr)
+		normalize_v4_mapped_cidr(cidr);
+
+	glist_for_each(g, client_list) {
+		cli = glist_entry(g, struct base_client_entry, cle_list);
+
+		switch (cli->type) {
+		case NETWORK_CLIENT:
+			if (cidr && cidr_equals(cli->client.network.cidr, cidr))
+				goto found;
+			break;
+
+		case MATCH_ANY_CLIENT:
+			if (strcmp(client_tok, "*") == 0)
+				goto found;
+			break;
+
+		case NETGROUP_CLIENT:
+			if (client_tok[0] == '@' &&
+			    strcmp(cli->client.netgroup.netgroupname,
+				   client_tok + 1) == 0)
+				goto found;
+			break;
+
+		case WILDCARDHOST_CLIENT:
+			if (strcmp(cli->client.wildcard.wildcard, client_tok) ==
+			    0)
+				goto found;
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	cli = NULL;
+
+found:
+	if (cidr)
+		cidr_free(cidr);
+
+	return cli;
+}
+
+/**
  * @brief Expand the client name token into one or more client entries
  *
  * @param component     [IN]  component for logging
@@ -1368,6 +1534,12 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	int rc;
 	struct base_client_entry *cli;
 
+	/*
+	 * Locking requirements:
+	 * Caller must hold rwlock (read/write lock) before calling.
+	 * No locking is performed internally.
+	 */
+
 	if (cle_allocator == NULL)
 		cle_allocator = base_client_allocator;
 
@@ -1381,10 +1553,12 @@ int add_client(enum log_components component, struct glist_head *client_list,
 		break;
 	case TERM_NETGROUP:
 		if (strlen(client_tok) > MAXHOSTNAMELEN) {
-			config_proc_error(cnode, err_type,
-					  "netgroup (%s) name too long",
-					  client_tok);
-			err_type->invalid = true;
+			if (cnode && err_type) {
+				config_proc_error(cnode, err_type,
+						  "netgroup (%s) name too long",
+						  client_tok);
+				err_type->invalid = true;
+			}
 			errcnt++;
 			goto out;
 		}
@@ -1399,45 +1573,56 @@ int add_client(enum log_components component, struct glist_head *client_list,
 		if (cidr == NULL) {
 			switch (type_hint) {
 			case TERM_V4CIDR:
-				config_proc_error(
-					cnode, err_type,
-					"Expected a IPv4 CIDR address, got (%s)",
-					client_tok);
+				if (cnode && err_type)
+					config_proc_error(cnode, err_type,
+							  "Expected a IPv4 CIDR"
+							  " address, got (%s)",
+							  client_tok);
 				break;
 			case TERM_V6CIDR:
-				config_proc_error(
-					cnode, err_type,
-					"Expected a IPv6 CIDR address, got (%s)",
-					client_tok);
+				if (cnode && err_type)
+					config_proc_error(cnode, err_type,
+							  "Expected a IPv6 CIDR"
+							  " address, got (%s)",
+							  client_tok);
 				break;
 			case TERM_V4ADDR:
-				config_proc_error(
-					cnode, err_type,
-					"IPv4 addr (%s) not in presentation format",
-					client_tok);
+				if (cnode && err_type)
+					config_proc_error(
+						cnode, err_type,
+						"IPv4 addr (%s) not in"
+						" presentation format",
+						client_tok);
 				break;
 			case TERM_V6ADDR:
-				config_proc_error(
-					cnode, err_type,
-					"IPv6 addr (%s) not in presentation format",
-					client_tok);
+				if (cnode && err_type)
+					config_proc_error(
+						cnode, err_type,
+						"IPv6 addr (%s) not in"
+						" presentation format",
+						client_tok);
 				break;
 			default:
 				break;
 			}
-			err_type->invalid = true;
+			if (err_type)
+				err_type->invalid = true;
 			errcnt++;
 			goto out;
 		}
 		cli->client.network.cidr = cidr;
+		normalize_v4_mapped_cidr(cli->client.network.cidr);
 		cli->type = NETWORK_CLIENT;
 		break;
 	case TERM_REGEX:
 		if (strlen(client_tok) > MAXHOSTNAMELEN) {
-			config_proc_error(cnode, err_type,
-					  "Wildcard client (%s) name too long",
-					  client_tok);
-			err_type->invalid = true;
+			if (cnode && err_type) {
+				config_proc_error(cnode, err_type,
+						  "Wildcard client (%s) name "
+						  "too long",
+						  client_tok);
+				err_type->invalid = true;
+			}
 			errcnt++;
 			goto out;
 		}
@@ -1520,18 +1705,25 @@ int add_client(enum log_components component, struct glist_head *client_list,
 			freeaddrinfo(info);
 			goto out;
 		} else {
-			config_proc_error(cnode, err_type,
-					  "Client (%s) not found because %s",
-					  client_tok, gai_strerror(rc));
-			err_type->bogus = true;
+			if (cnode && err_type) {
+				config_proc_error(
+					cnode, err_type,
+					"Client (%s) not found because %s",
+					client_tok, gai_strerror(rc));
+				err_type->bogus = true;
+			}
 			errcnt++;
 		}
 		break;
 	default:
-		config_proc_error(cnode, err_type,
-				  "Expected a client, got a %s for (%s)",
-				  config_term_desc(type_hint), client_tok);
-		err_type->bogus = true;
+		if (cnode && err_type) {
+			config_proc_error(cnode, err_type,
+					  "Expected a client,"
+					  " got a %s for (%s)",
+					  config_term_desc(type_hint),
+					  client_tok);
+			err_type->bogus = true;
+		}
 		errcnt++;
 		goto out;
 	}
@@ -1545,7 +1737,66 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	cli = NULL;
 out:
 	gsh_free(cli);
+
 	return errcnt;
+}
+
+/**
+ * @brief Expand the client name token into one or more client entries
+ *
+ * @param component     [IN]  component for logging
+ * @param client_list   [IN]  the client list
+ * @param client_tok    [IN]  the name string.  We modify it.
+ *
+ * @returns True on success, false if no entry found
+ */
+bool delete_base_client(enum log_components component,
+			struct glist_head *client_list, const char *client_tok)
+{
+	bool deleted = false;
+	struct base_client_entry *cli;
+
+	/*
+	 * Locking requirements:
+	 * Caller must hold rwlock (read/write lock) before calling.
+	 * No locking is performed internally.
+	 */
+	/* Check if the same client already exist */
+	cli = is_base_client_exact_match(component, client_list, client_tok);
+
+	if (cli == NULL) {
+		LogAlways(component, "Matching client entry not found: %s",
+			  client_tok);
+		goto out;
+	}
+
+	/* delete the exact match entry only */
+	switch (cli->type) {
+	case NETWORK_CLIENT:
+		cidr_free(cli->client.network.cidr);
+		break;
+	case NETGROUP_CLIENT:
+		gsh_free(cli->client.netgroup.netgroupname);
+		break;
+	case WILDCARDHOST_CLIENT:
+		gsh_free(cli->client.wildcard.wildcard);
+		break;
+	case GSSPRINCIPAL_CLIENT:
+	case PROTO_CLIENT:
+	case MATCH_ANY_CLIENT:
+	case BAD_CLIENT:
+		/* Do nothing for these client types */
+		break;
+	}
+
+	glist_del(&cli->cle_list);
+	gsh_free(cli);
+
+	LogAlways(component, "Removed Base client: (%s)", client_tok);
+	deleted = true;
+
+out:
+	return deleted;
 }
 
 /**

@@ -60,11 +60,6 @@
 #include "abstract_mem.h"
 #include "common_utils.h"
 
-struct cidr_addr {
-	sockaddr_t ip_addr;
-	u_int16_t mask;
-};
-
 /**
  * @brief Create a hash value based on the sockaddr_t structure
  *
@@ -762,4 +757,28 @@ int cidr_proto(CIDR *cidr)
 int cidr_version(CIDR *cidr)
 {
 	return 1;
+}
+
+int cidr_equals(CIDR *a, CIDR *b)
+{
+	if (a->ip_addr.ss_family != b->ip_addr.ss_family)
+		return false;
+
+	if (a->mask != b->mask)
+		return false;
+
+	/* same network address */
+	return cidr_contains_ip(a, &b->ip_addr) == 0 &&
+	       cidr_contains_ip(b, &a->ip_addr) == 0;
+}
+
+bool cidr_contains_cidr(CIDR *a, CIDR *b)
+{
+	if (a->ip_addr.ss_family != b->ip_addr.ss_family)
+		return false;
+
+	if (a->mask > b->mask)
+		return false;
+
+	return (cidr_contains_ip(a, &b->ip_addr) == 0);
 }
