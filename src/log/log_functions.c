@@ -66,6 +66,12 @@
 #include "config_parsing.h"
 #include "sal_functions.h"
 
+extern struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg);
+
+#define COMPONENT_ARG \
+	{ .name = "component_name", .type = "s", .direction = "in" }
+#define LOG_LEVEL_ARG { .name = "log_level", .type = "s", .direction = "in" }
+
 /*
  * The usual PTHREAD_RWLOCK_xxx macros log messages for tracing if FULL
  * DEBUG is enabled. If such a macro is called from this logging file as
@@ -101,6 +107,7 @@
 	} while (0)
 
 pthread_rwlock_t log_rwlock;
+pthread_rwlock_t cond_log_rwlock;
 
 /* Variables to control log fields */
 
@@ -239,6 +246,11 @@ char const_log_str[LOG_BUFF_LEN] = "\0";
 char date_time_fmt[MAX_TD_FMT_LEN] = "\0";
 static bool disp_utc_timestamp;
 
+struct glist_head global_export_id_list = { &global_export_id_list,
+					    &global_export_id_list };
+struct glist_head global_client_ip_list = { &global_client_ip_list,
+					    &global_client_ip_list };
+
 typedef struct loglev {
 	char *str;
 	char *short_str;
@@ -348,6 +360,7 @@ void Cleanup(void)
 	}
 
 	PTHREAD_RWLOCK_destroy(&log_rwlock);
+	PTHREAD_RWLOCK_destroy(&cond_log_rwlock);
 #ifdef _DONT_HAVE_LOCALTIME_R
 	PTHREAD_MUTEX_destroy(&mutex_localtime);
 #endif
@@ -358,6 +371,27 @@ void Fatal(void)
 	gsh_log_backtrace();
 	_exit(2);
 }
+
+/*
+ * Convert a numeral component in ascii to
+ * the numeral value.
+ */
+int ReturnComponentAscii(const char *ComponentInAscii)
+{
+	int i = 0;
+
+	for (i = 0; i < COMPONENT_COUNT; i++)
+		if ((LogComponents[i].comp_name != NULL) &&
+		    (!strcasecmp(LogComponents[i].comp_name,
+				 ComponentInAscii) ||
+		     !strcasecmp(LogComponents[i].comp_name + 10,
+				 ComponentInAscii) ||
+		     !strcasecmp(LogComponents[i].comp_str, ComponentInAscii)))
+			return i;
+
+	/* If nothing found, return -1 */
+	return -1;
+} /* ReturnComponentAscii */
 
 /*
  * Convert a numeral log level in ascii to
@@ -1069,6 +1103,7 @@ void init_logging(const char *log_path, const int debug_level)
 
 	/* Finish initialization of and register log facilities. */
 	PTHREAD_RWLOCK_init(&log_rwlock, NULL);
+	PTHREAD_RWLOCK_init(&cond_log_rwlock, NULL);
 #ifdef _DONT_HAVE_LOCALTIME_R
 	PTHREAD_MUTEX_init(&mutex_localtime, NULL);
 #endif
@@ -1547,6 +1582,56 @@ log_levels_t *component_log_level = default_log_levels;
 /* Original log level set by -N or otherwise code default */
 log_levels_t original_log_level = NIV_EVENT;
 
+/**
+ * @brief Default Conditional logging levels
+ *
+ * These are for early initialization and whenever we
+ * have to fall back to something that will at least work...
+ */
+
+static log_levels_t default_conditional_log_levels[] = {
+	[COMPONENT_ALL] = NIV_FULL_DEBUG,
+	[COMPONENT_LOG] = NIV_FULL_DEBUG,
+	[COMPONENT_MEM_ALLOC] = NIV_FULL_DEBUG,
+	[COMPONENT_MEMLEAKS] = NIV_FULL_DEBUG,
+	[COMPONENT_FSAL] = NIV_FULL_DEBUG,
+	[COMPONENT_NFSPROTO] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_V4] = NIV_FULL_DEBUG,
+	[COMPONENT_EXPORT] = NIV_FULL_DEBUG,
+	[COMPONENT_FILEHANDLE] = NIV_FULL_DEBUG,
+	[COMPONENT_DISPATCH] = NIV_FULL_DEBUG,
+	[COMPONENT_MDCACHE] = NIV_FULL_DEBUG,
+	[COMPONENT_MDCACHE_LRU] = NIV_FULL_DEBUG,
+	[COMPONENT_HASHTABLE] = NIV_FULL_DEBUG,
+	[COMPONENT_HASHTABLE_CACHE] = NIV_FULL_DEBUG,
+	[COMPONENT_DUPREQ] = NIV_FULL_DEBUG,
+	[COMPONENT_INIT] = NIV_FULL_DEBUG,
+	[COMPONENT_MAIN] = NIV_FULL_DEBUG,
+	[COMPONENT_IDMAPPER] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_READDIR] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_V4_LOCK] = NIV_FULL_DEBUG,
+	[COMPONENT_CONFIG] = NIV_FULL_DEBUG,
+	[COMPONENT_CLIENTID] = NIV_FULL_DEBUG,
+	[COMPONENT_SESSIONS] = NIV_FULL_DEBUG,
+	[COMPONENT_PNFS] = NIV_FULL_DEBUG,
+	[COMPONENT_RW_LOCK] = NIV_FULL_DEBUG,
+	[COMPONENT_NLM] = NIV_FULL_DEBUG,
+	[COMPONENT_TIRPC] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_CB] = NIV_FULL_DEBUG,
+	[COMPONENT_THREAD] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_V4_ACL] = NIV_FULL_DEBUG,
+	[COMPONENT_STATE] = NIV_FULL_DEBUG,
+	[COMPONENT_9P] = NIV_FULL_DEBUG,
+	[COMPONENT_9P_DISPATCH] = NIV_FULL_DEBUG,
+	[COMPONENT_FSAL_UP] = NIV_FULL_DEBUG,
+	[COMPONENT_DBUS] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_MSK] = NIV_FULL_DEBUG,
+	[COMPONENT_XPRT] = NIV_FULL_DEBUG
+};
+
+/* Active set of log levels */
+log_levels_t *conditional_component_log_level = default_conditional_log_levels;
+
 /* Default log level setby LOG { default_log_level }, setting to NB_LOG_LEVEL
  * indicates it has not been specified in the config (in which case we fall
  * back to original_log_level.
@@ -1667,10 +1752,51 @@ struct log_component_info LogComponents[COMPONENT_COUNT] = {
 		.comp_str = "XPRT",},
 };
 
+/**
+ * Determine whether a log message should be emitted for a given
+ * component and log level, based on conditional log configuration.
+ *
+ * @param component The log component (e.g., COMPONENT_NFS, COMPONENT_CONFIG)
+ * @param level     The log level (e.g., NIV_DEBUG, NIV_INFO, NIV_NULL)
+ *
+ * @return true if the log should be printed; false otherwise.
+ */
+bool should_display_log(log_components_t component, log_levels_t level)
+{
+	/*
+     * NIV_NULL is a special case used for
+     * always-on logs (LogAlways, LogChanges)
+     */
+	if (level == NIV_NULL)
+		return true;
+
+	/*
+     * Check if the current level is within the allowed
+     * conditional log level for the component
+     * (i.e., log level is more severe or equal)
+     */
+	if (level <= conditional_component_log_level[component])
+		return true;
+
+	/*
+     * Check if the current operation context explicitly requests
+	 * conditional logging for export or client
+     */
+	if (op_ctx &&
+	    (op_ctx->export_conditional_log || op_ctx->client_conditional_log))
+		return true;
+
+	// None of the conditions met — do not log
+	return false;
+}
+
 void DisplayLogComponentLevel(log_components_t component, const char *file,
 			      int line, const char *function,
 			      log_levels_t level, const char *format, ...)
 {
+	if (!should_display_log(component, level))
+		return;
+
 	va_list arguments;
 
 	va_start(arguments, format);
@@ -1875,6 +2001,10 @@ struct facility_config {
 	void *lf_private;
 };
 
+struct conditional_config {
+	log_levels_t *cond_comp_log_level;
+};
+
 /**
  * @brief Logger config block parameters
  */
@@ -1886,6 +2016,7 @@ struct logger_config {
 	log_levels_t default_log_level;
 	uint32_t rpc_debug_flags;
 	bool disp_utc_timestamp;
+	struct conditional_config conditional;
 };
 
 /**
@@ -2309,6 +2440,274 @@ static int facility_commit(void *node, void *link_mem, void *self_struct,
 	return 0;
 }
 
+/**
+ * @brief Initialize a Exports block.
+ *
+ * This block is allocated just to capture the fields.  It's members
+ * are used to create/modify a facility at which point it gets freed.
+ */
+static void *export_id_list_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL)
+		return self_struct;
+	else if (self_struct == NULL)
+		return link_mem;
+	else
+		return NULL;
+}
+
+static int export_id_list_adder(const char *token, enum term_type type_hint,
+				struct config_item *item, void *param_addr,
+				void *cnode, struct config_error_type *err_type)
+{
+	char *endptr;
+	struct glist_head *export_glist;
+	struct export_id_list *export_id_list = NULL;
+	struct export_id_list *export_id_list_obj = NULL;
+
+	LogEvent(COMPONENT_CONFIG, "Adding Export Id: %s", token);
+
+	export_id_list = gsh_calloc(1, sizeof(struct export_id_list));
+	export_id_list->export_id = (uint16_t)strtoul(token, &endptr, 10);
+
+	if (true == glist_empty(&global_export_id_list)) {
+		glist_add(&global_export_id_list,
+			  &export_id_list->export_id_glist);
+	} else {
+		/* Check if Export ID already exist or not, if not then add */
+		glist_for_each(export_glist, &global_export_id_list) {
+			export_id_list_obj = glist_entry(export_glist,
+							 struct export_id_list,
+							 export_id_glist);
+
+			if (export_id_list->export_id ==
+			    export_id_list_obj->export_id) {
+				/* Export id already present in the list */
+				LogEvent(
+					COMPONENT_CONFIG,
+					"Conditional Logging already enabled for Export Id: %d",
+					export_id_list->export_id);
+				gsh_free(export_id_list);
+				goto out;
+			}
+		}
+
+		glist_add_tail(&global_export_id_list,
+			       &export_id_list->export_id_glist);
+	}
+
+	LogEvent(COMPONENT_CONFIG,
+		 "Conditional Logging Enabled for Export_Id: %d",
+		 export_id_list->export_id);
+
+out:
+	return 0;
+}
+
+/**
+ * @brief Initialize a CLIENTS block.
+ *
+ * This block is allocated just to capture the fields.  It's members
+ * are used to create/modify a facility at which point it gets freed.
+ */
+static void *client_ip_list_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL)
+		return self_struct;
+	else if (self_struct == NULL)
+		return link_mem;
+	else
+		return NULL;
+}
+
+static int client_ip_list_adder(const char *token, enum term_type type_hint,
+				struct config_item *item, void *param_addr,
+				void *cnode, struct config_error_type *err_type)
+{
+	int rc = 0;
+	CIDR *ctmp;
+	struct base_client_entry *client_entry;
+	struct glist_head *glist;
+
+	if (glist_empty(&global_client_ip_list))
+		goto add;
+
+	ctmp = cidr_from_str(token);
+
+	/* Check if the client cidr already exist */
+	glist_for_each(glist, &global_client_ip_list) {
+		client_entry =
+			glist_entry(glist, struct base_client_entry, cle_list);
+
+		if (cidr_contains(client_entry->client.network.cidr, ctmp) ==
+		    0) {
+			LogAlways(COMPONENT_CONFIG, "Client already exist: %s",
+				  token);
+			goto out;
+		}
+	}
+
+add:
+	rc = add_client(COMPONENT_CONFIG, &global_client_ip_list, token,
+			type_hint, cnode, err_type, NULL, NULL, NULL);
+
+	LogAlways(COMPONENT_CONFIG, "Adding Client: %s Status: %d", token, rc);
+
+out:
+	return rc;
+}
+
+/**
+ * @brief Conditional Logging params
+ */
+static struct config_item conditional_params[] = {
+	CONF_INDEX_TOKEN("ALL", NB_LOG_LEVEL, log_levels, COMPONENT_ALL, int),
+	CONF_INDEX_TOKEN("LOG", NB_LOG_LEVEL, log_levels, COMPONENT_LOG, int),
+	CONF_INDEX_TOKEN("MEM_ALLOC", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MEM_ALLOC, int),
+	CONF_INDEX_TOKEN("MEMLEAKS", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MEMLEAKS, int),
+	CONF_INDEX_TOKEN("LEAKS", NB_LOG_LEVEL, log_levels, COMPONENT_MEMLEAKS,
+			 int),
+	CONF_INDEX_TOKEN("FSAL", NB_LOG_LEVEL, log_levels, COMPONENT_FSAL, int),
+	CONF_INDEX_TOKEN("NFSPROTO", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFSPROTO, int),
+	CONF_INDEX_TOKEN("NFS3", NB_LOG_LEVEL, log_levels, COMPONENT_NFSPROTO,
+			 int),
+	CONF_INDEX_TOKEN("NFS_V4", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_V4,
+			 int),
+	CONF_INDEX_TOKEN("NFS4", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_V4,
+			 int),
+	CONF_INDEX_TOKEN("EXPORT", NB_LOG_LEVEL, log_levels, COMPONENT_EXPORT,
+			 int),
+	CONF_INDEX_TOKEN("FILEHANDLE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_FILEHANDLE, int),
+	CONF_INDEX_TOKEN("FH", NB_LOG_LEVEL, log_levels, COMPONENT_FILEHANDLE,
+			 int),
+	CONF_INDEX_TOKEN("DISPATCH", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_DISPATCH, int),
+	CONF_INDEX_TOKEN("DISP", NB_LOG_LEVEL, log_levels, COMPONENT_DISPATCH,
+			 int),
+	CONF_INDEX_TOKEN("CACHE_INODE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE, int),
+	CONF_INDEX_TOKEN("INODE", NB_LOG_LEVEL, log_levels, COMPONENT_MDCACHE,
+			 int),
+	CONF_INDEX_TOKEN("MDCACHE", NB_LOG_LEVEL, log_levels, COMPONENT_MDCACHE,
+			 int),
+	CONF_INDEX_TOKEN("CACHE_INODE_LRU", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE_LRU, int),
+	CONF_INDEX_TOKEN("INODE_LRU", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE_LRU, int),
+	CONF_INDEX_TOKEN("MDCACHE_LRU", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE_LRU, int),
+	CONF_INDEX_TOKEN("HASHTABLE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_HASHTABLE, int),
+	CONF_INDEX_TOKEN("HT", NB_LOG_LEVEL, log_levels, COMPONENT_HASHTABLE,
+			 int),
+	CONF_INDEX_TOKEN("HASHTABLE_CACHE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_HASHTABLE_CACHE, int),
+	CONF_INDEX_TOKEN("HT_CACHE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_HASHTABLE_CACHE, int),
+	CONF_INDEX_TOKEN("DUPREQ", NB_LOG_LEVEL, log_levels, COMPONENT_DUPREQ,
+			 int),
+	CONF_INDEX_TOKEN("INIT", NB_LOG_LEVEL, log_levels, COMPONENT_INIT, int),
+	CONF_INDEX_TOKEN("NFS_STARTUP", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_INIT, int),
+	CONF_INDEX_TOKEN("MAIN", NB_LOG_LEVEL, log_levels, COMPONENT_MAIN, int),
+	CONF_INDEX_TOKEN("IDMAPPER", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_IDMAPPER, int),
+	CONF_INDEX_TOKEN("NFS_READDIR", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_READDIR, int),
+	CONF_INDEX_TOKEN("NFS_V4_LOCK", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_LOCK, int),
+	CONF_INDEX_TOKEN("NFS4_LOCK", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_LOCK, int),
+	CONF_INDEX_TOKEN("CONFIG", NB_LOG_LEVEL, log_levels, COMPONENT_CONFIG,
+			 int),
+	CONF_INDEX_TOKEN("CLIENTID", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_CLIENTID, int),
+	CONF_INDEX_TOKEN("SESSIONS", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_SESSIONS, int),
+	CONF_INDEX_TOKEN("PNFS", NB_LOG_LEVEL, log_levels, COMPONENT_PNFS, int),
+	CONF_INDEX_TOKEN("RW_LOCK", NB_LOG_LEVEL, log_levels, COMPONENT_RW_LOCK,
+			 int),
+	CONF_INDEX_TOKEN("NLM", NB_LOG_LEVEL, log_levels, COMPONENT_NLM, int),
+	CONF_INDEX_TOKEN("TIRPC", NB_LOG_LEVEL, log_levels, COMPONENT_TIRPC,
+			 int),
+	CONF_INDEX_TOKEN("NFS_CB", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_CB,
+			 int),
+	CONF_INDEX_TOKEN("THREAD", NB_LOG_LEVEL, log_levels, COMPONENT_THREAD,
+			 int),
+	CONF_INDEX_TOKEN("NFS_V4_ACL", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_ACL, int),
+	CONF_INDEX_TOKEN("NFS4_ACL", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_ACL, int),
+	CONF_INDEX_TOKEN("STATE", NB_LOG_LEVEL, log_levels, COMPONENT_STATE,
+			 int),
+	CONF_INDEX_TOKEN("_9P", NB_LOG_LEVEL, log_levels, COMPONENT_9P, int),
+	CONF_INDEX_TOKEN("_9P_DISPATCH", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_9P_DISPATCH, int),
+	CONF_INDEX_TOKEN("_9P_DISP", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_9P_DISPATCH, int),
+	CONF_INDEX_TOKEN("FSAL_UP", NB_LOG_LEVEL, log_levels, COMPONENT_FSAL_UP,
+			 int),
+	CONF_INDEX_TOKEN("DBUS", NB_LOG_LEVEL, log_levels, COMPONENT_DBUS, int),
+	CONF_INDEX_TOKEN("NFS_MSK", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_MSK,
+			 int),
+	CONF_INDEX_TOKEN("XPRT", NB_LOG_LEVEL, log_levels, COMPONENT_XPRT, int),
+	CONF_ITEM_PROC_MULT("Exports", export_id_list_init,
+			    export_id_list_adder, export_id_list,
+			    export_id_glist),
+	CONF_ITEM_PROC_MULT("Clients", client_ip_list_init,
+			    client_ip_list_adder, base_client_entry, cle_list),
+	CONFIG_EOL
+};
+
+/**
+ * @brief Initialize a Conditional block.
+ *
+ * This block is allocated just to capture the fields.  It's members
+ * are used to create/modify a facility at which point it gets freed.
+ */
+static void *conditional_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL)
+		return self_struct;
+	else if (self_struct == NULL)
+		return gsh_calloc(COMPONENT_COUNT, sizeof(log_levels_t));
+	else {
+		gsh_free(self_struct);
+		return NULL;
+	}
+}
+
+/**
+ * @brief Commit a conditional block
+ *
+ * It can create a stream, syslog, or file facility and modify any
+ * existing one.  Special loggers must be created elsewhere.
+ * Note that you cannot use a log { facility {... }} to modify one
+ * of these special loggers because log block parsing is done first
+ * at server initialization.
+ */
+static int conditional_commit(void *node, void *link_mem, void *self_struct,
+			      struct config_error_type *err_type)
+{
+	struct conditional_config *conditional = link_mem;
+
+	assert(link_mem != NULL || self_struct != NULL);
+
+	conditional->cond_comp_log_level = (log_levels_t *)self_struct;
+
+	return 0;
+}
+
 static void *log_conf_init(void *link_mem, void *self_struct)
 {
 	struct logger_config *logger = self_struct;
@@ -2349,13 +2748,38 @@ static void *log_conf_init(void *link_mem, void *self_struct)
 	return NULL;
 }
 
+void SetConditionalComponentLogLevel(log_components_t component,
+				     int level_to_set)
+{
+	assert(level_to_set >= NIV_NULL);
+	assert(level_to_set < NB_LOG_LEVEL);
+	assert(component != COMPONENT_ALL);
+
+	if (level_to_set == conditional_component_log_level[component])
+		return;
+
+	LogChanges("Changing Conditional log level of %s from %s to %s",
+		   LogComponents[component].comp_name,
+		   ReturnLevelInt(conditional_component_log_level[component]),
+		   ReturnLevelInt(level_to_set));
+
+	conditional_component_log_level[component] = level_to_set;
+}
+
 static void apply_logger_config_levels(struct logger_config *logger)
 {
 	enum log_components comp;
 	bool has_levels = logger->comp_log_level != NULL;
+	bool has_conditional_levels = logger->conditional.cond_comp_log_level !=
+				      NULL;
+
 	log_levels_t log_level_all =
 		has_levels ? logger->comp_log_level[COMPONENT_ALL]
 			   : NB_LOG_LEVEL;
+	log_levels_t conditional_log_level_all =
+		has_conditional_levels
+			? logger->conditional.cond_comp_log_level[COMPONENT_ALL]
+			: NB_LOG_LEVEL;
 
 	/* Handle Default_Log_Level */
 	if (logger->default_log_level != default_log_level) {
@@ -2366,6 +2790,21 @@ static void apply_logger_config_levels(struct logger_config *logger)
 			   ReturnLevelInt(logger->default_log_level));
 
 		default_log_level = logger->default_log_level;
+	}
+
+	/* Handle Default Conditional Log Level */
+	if (has_conditional_levels &&
+	    (conditional_log_level_all != NB_LOG_LEVEL) &&
+	    (conditional_log_level_all <
+	     conditional_component_log_level[COMPONENT_ALL])) {
+		LogChanges(
+			"Changing Default Conditional Log Level from %s to %s",
+			ReturnLevelInt(
+				conditional_component_log_level[COMPONENT_ALL]),
+			ReturnLevelInt(conditional_log_level_all));
+
+		conditional_component_log_level[COMPONENT_ALL] =
+			conditional_log_level_all;
 	}
 
 	for (comp = COMPONENT_LOG; comp < COMPONENT_COUNT; comp++) {
@@ -2393,6 +2832,21 @@ static void apply_logger_config_levels(struct logger_config *logger)
 		}
 
 		SetComponentLogLevel(comp, level);
+
+		/* Handle conditional component log level */
+		log_levels_t cond_level;
+
+		if (has_conditional_levels &&
+		    logger->conditional.cond_comp_log_level[comp] !=
+			    NB_LOG_LEVEL) {
+			cond_level =
+				logger->conditional.cond_comp_log_level[comp];
+		} else {
+			cond_level =
+				conditional_component_log_level[COMPONENT_ALL];
+		}
+
+		SetConditionalComponentLogLevel(comp, cond_level);
 	}
 }
 
@@ -2551,6 +3005,8 @@ static struct config_item logging_params[] = {
 			component_commit, logger_config, comp_log_level),
 	CONF_ITEM_BOOL("Display_UTC_Timestamp", false, logger_config,
 		       disp_utc_timestamp),
+	CONF_ITEM_BLOCK("Conditional", conditional_params, conditional_init,
+			conditional_commit, logger_config, conditional),
 	CONFIG_EOL
 };
 
@@ -2938,3 +3394,741 @@ bool _ratelimit(struct ratelimit_state *rs, int *missed)
 
 	return ret;
 }
+
+/**
+ * @brief Match a specific export id in a export id list
+ *
+ * @param[in]  Export          Export Id to search for
+ *
+ * @return the export id entry or NULL if failure.
+ */
+struct export_id_list *
+conditional_logging_export_match(struct gsh_export *ctx_export)
+{
+	struct export_id_list *export_entry = NULL;
+	struct glist_head *export_glist;
+
+	if (glist_empty(&global_export_id_list))
+		return export_entry;
+
+	glist_for_each(export_glist, &global_export_id_list) {
+		export_entry = glist_entry(export_glist, struct export_id_list,
+					   export_id_glist);
+
+		if (export_entry->export_id == ctx_export->export_id)
+			break;
+	}
+
+	return export_entry;
+}
+
+/**
+ * @brief Match a specific client in a client list
+ *
+ * @param[in]  client          Client to search for
+ *
+ * @return the client entry or NULL if failure.
+ */
+struct base_client_entry *
+conditional_logging_client_match(struct gsh_client *client)
+{
+	struct base_client_entry *client_entry = NULL;
+
+	if (glist_empty(&global_client_ip_list))
+		return client_entry;
+
+	/* Does the host match anyone on the host list? */
+	client_entry = client_match(COMPONENT_LOG, " for CondLog",
+				    &client->cl_addrbuf, &global_client_ip_list,
+				    NULL);
+
+	return client_entry;
+}
+
+#ifdef USE_DBUS
+static bool dbus_cond_log_prop_get(log_components_t component,
+				   DBusMessageIter *reply)
+{
+	char *level_code;
+
+	level_code = ReturnLevelInt(conditional_component_log_level[component]);
+	if (level_code == NULL)
+		return false;
+	if (!dbus_message_iter_append_basic(reply, DBUS_TYPE_STRING,
+					    &level_code))
+		return false;
+	return true;
+}
+
+static bool dbus_cond_log_prop_set(log_components_t component,
+				   DBusMessageIter *arg)
+{
+	char *level_code;
+	int log_level;
+	int i;
+
+	if (dbus_message_iter_get_arg_type(arg) != DBUS_TYPE_STRING)
+		return false;
+	dbus_message_iter_get_basic(arg, &level_code);
+
+	log_level = ReturnLevelAscii(level_code);
+	if (log_level == -1) {
+		LogDebug(COMPONENT_DBUS,
+			 "Invalid log level: '%s' given for component %s",
+			 level_code, LogComponents[component].comp_name);
+		return false;
+	}
+
+	if (component == COMPONENT_ALL) {
+		LogChanges(
+			"Dbus setting conditional log level for all components to %s",
+			level_code);
+
+		conditional_component_log_level[component] = log_level;
+
+		for (i = COMPONENT_ALL + 1; i < COMPONENT_COUNT; i++)
+			SetConditionalComponentLogLevel(i, log_level);
+	} else {
+		LogChanges(
+			"Dbus set conditional log level for %s from %s to %s.",
+			LogComponents[component].comp_name,
+			ReturnLevelInt(
+				conditional_component_log_level[component]),
+			ReturnLevelInt(log_level));
+		SetConditionalComponentLogLevel(component, log_level);
+	}
+	return true;
+}
+
+/* Macros to make mapping properties table to components enum etc. easier
+ * expands to table entries and shim functions.
+ */
+
+/* clang-format off */
+#define HANDLE_COND_LOG_PROP(component)                                      \
+	static bool dbus_prop_get_COND_COMPONENT_##component(                \
+		DBusMessageIter *reply)                                      \
+	{                                                                    \
+		return dbus_cond_log_prop_get(COMPONENT_##component, reply); \
+	}                                                                    \
+\
+	static bool dbus_prop_set_COND_COMPONENT_##component(                \
+		DBusMessageIter *args)                                       \
+	{                                                                    \
+		return dbus_cond_log_prop_set(COMPONENT_##component, args);  \
+	}                                                                    \
+\
+	static struct gsh_dbus_prop COND_COMPONENT_##component##_prop = {    \
+		.name = "COMPONENT_" #component,                             \
+		.access = DBUS_PROP_READWRITE,                               \
+		.type = "s",                                                 \
+		.get = dbus_prop_get_COND_COMPONENT_##component,             \
+		.set = dbus_prop_set_COND_COMPONENT_##component              \
+	}
+
+/* clang-format on */
+
+#define COND_LOG_PROPERTY_ITEM(component) (&COND_COMPONENT_##component##_prop)
+
+/**
+ * @brief Conditional Log property handlers.
+ *
+ * Expands to get/set functions that match dbus_prop_get/set protos
+ * and call common handler with component enum as arg.
+ * There is one line per log_components_t enum.
+ * These must also match COND_LOG_PROPERTY_ITEM
+ */
+
+HANDLE_COND_LOG_PROP(ALL);
+HANDLE_COND_LOG_PROP(LOG);
+HANDLE_COND_LOG_PROP(MEM_ALLOC);
+HANDLE_COND_LOG_PROP(MEMLEAKS);
+HANDLE_COND_LOG_PROP(FSAL);
+HANDLE_COND_LOG_PROP(NFSPROTO);
+HANDLE_COND_LOG_PROP(NFS_V4);
+HANDLE_COND_LOG_PROP(EXPORT);
+HANDLE_COND_LOG_PROP(FILEHANDLE);
+HANDLE_COND_LOG_PROP(DISPATCH);
+HANDLE_COND_LOG_PROP(MDCACHE);
+HANDLE_COND_LOG_PROP(MDCACHE_LRU);
+HANDLE_COND_LOG_PROP(HASHTABLE);
+HANDLE_COND_LOG_PROP(HASHTABLE_CACHE);
+HANDLE_COND_LOG_PROP(DUPREQ);
+HANDLE_COND_LOG_PROP(INIT);
+HANDLE_COND_LOG_PROP(MAIN);
+HANDLE_COND_LOG_PROP(IDMAPPER);
+HANDLE_COND_LOG_PROP(NFS_READDIR);
+HANDLE_COND_LOG_PROP(NFS_V4_LOCK);
+HANDLE_COND_LOG_PROP(CONFIG);
+HANDLE_COND_LOG_PROP(CLIENTID);
+HANDLE_COND_LOG_PROP(SESSIONS);
+HANDLE_COND_LOG_PROP(PNFS);
+HANDLE_COND_LOG_PROP(RW_LOCK);
+HANDLE_COND_LOG_PROP(NLM);
+HANDLE_COND_LOG_PROP(TIRPC);
+HANDLE_COND_LOG_PROP(NFS_CB);
+HANDLE_COND_LOG_PROP(THREAD);
+HANDLE_COND_LOG_PROP(NFS_V4_ACL);
+HANDLE_COND_LOG_PROP(STATE);
+HANDLE_COND_LOG_PROP(9P);
+HANDLE_COND_LOG_PROP(9P_DISPATCH);
+HANDLE_COND_LOG_PROP(FSAL_UP);
+HANDLE_COND_LOG_PROP(DBUS);
+HANDLE_COND_LOG_PROP(NFS_MSK);
+HANDLE_COND_LOG_PROP(XPRT);
+
+static struct gsh_dbus_prop *cond_log_props[] = {
+	COND_LOG_PROPERTY_ITEM(ALL),
+	COND_LOG_PROPERTY_ITEM(LOG),
+	COND_LOG_PROPERTY_ITEM(MEM_ALLOC),
+	COND_LOG_PROPERTY_ITEM(MEMLEAKS),
+	COND_LOG_PROPERTY_ITEM(FSAL),
+	COND_LOG_PROPERTY_ITEM(NFSPROTO),
+	COND_LOG_PROPERTY_ITEM(NFS_V4),
+	COND_LOG_PROPERTY_ITEM(EXPORT),
+	COND_LOG_PROPERTY_ITEM(FILEHANDLE),
+	COND_LOG_PROPERTY_ITEM(DISPATCH),
+	COND_LOG_PROPERTY_ITEM(MDCACHE),
+	COND_LOG_PROPERTY_ITEM(MDCACHE_LRU),
+	COND_LOG_PROPERTY_ITEM(HASHTABLE),
+	COND_LOG_PROPERTY_ITEM(HASHTABLE_CACHE),
+	COND_LOG_PROPERTY_ITEM(DUPREQ),
+	COND_LOG_PROPERTY_ITEM(INIT),
+	COND_LOG_PROPERTY_ITEM(MAIN),
+	COND_LOG_PROPERTY_ITEM(IDMAPPER),
+	COND_LOG_PROPERTY_ITEM(NFS_READDIR),
+	COND_LOG_PROPERTY_ITEM(NFS_V4_LOCK),
+	COND_LOG_PROPERTY_ITEM(CONFIG),
+	COND_LOG_PROPERTY_ITEM(CLIENTID),
+	COND_LOG_PROPERTY_ITEM(SESSIONS),
+	COND_LOG_PROPERTY_ITEM(PNFS),
+	COND_LOG_PROPERTY_ITEM(RW_LOCK),
+	COND_LOG_PROPERTY_ITEM(NLM),
+	COND_LOG_PROPERTY_ITEM(TIRPC),
+	COND_LOG_PROPERTY_ITEM(NFS_CB),
+	COND_LOG_PROPERTY_ITEM(THREAD),
+	COND_LOG_PROPERTY_ITEM(NFS_V4_ACL),
+	COND_LOG_PROPERTY_ITEM(STATE),
+	COND_LOG_PROPERTY_ITEM(9P),
+	COND_LOG_PROPERTY_ITEM(9P_DISPATCH),
+	COND_LOG_PROPERTY_ITEM(FSAL_UP),
+	COND_LOG_PROPERTY_ITEM(DBUS),
+	COND_LOG_PROPERTY_ITEM(NFS_MSK),
+	COND_LOG_PROPERTY_ITEM(XPRT),
+	NULL
+};
+
+static bool dbus_conditional_log_export_enable(DBusMessageIter *args,
+					       DBusMessage *reply,
+					       DBusError *error)
+{
+	char *errormsg = "Conditional Logging Export:";
+	bool success = true;
+	uint16_t export_id;
+	struct gsh_export *export;
+	struct export_id_list *export_entry = NULL;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args == NULL) {
+		errormsg = "Message has no arguments! Export id expected";
+		goto arg_error;
+	}
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_UINT16) {
+		errormsg = "Invalid argument type";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &export_id);
+
+	export = get_gsh_export(export_id);
+	if (export == NULL) {
+		errormsg = "Invalid Export Id";
+		goto arg_error;
+	}
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	export_entry = conditional_logging_export_match(export);
+	if (export_entry) {
+		LogAlways(
+			COMPONENT_LOG,
+			"Conditional Logging already enabled for Export Id: %d",
+			export_id);
+		goto out;
+	}
+
+	export_entry = gsh_calloc(1, sizeof(struct export_id_list));
+	export_entry->export_id = export_id;
+
+	/* Export id entry not found in global list */
+	glist_add_tail(&global_export_id_list, &export_entry->export_id_glist);
+
+	LogAlways(COMPONENT_LOG,
+		  "Conditional Logging Enabled for Export_Id: %d",
+		  export_entry->export_id);
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+	put_gsh_export(export);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_export_disable(DBusMessageIter *args,
+						DBusMessage *reply,
+						DBusError *error)
+{
+	char *errormsg = "Conditional Logging Export:";
+	bool success = true;
+	uint16_t export_id;
+	struct gsh_export *export;
+	struct export_id_list *export_entry = NULL;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args == NULL) {
+		errormsg = "Message has no arguments! Export Id expected";
+		goto arg_error;
+	}
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_UINT16) {
+		errormsg = "Invalid argument type";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &export_id);
+
+	export = get_gsh_export(export_id);
+	if (export == NULL) {
+		errormsg = "Invalid Export Id";
+		goto arg_error;
+	}
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	if (glist_empty(&global_export_id_list)) {
+		errormsg = "Conditional Logging Export: List Empty!!";
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Logging Export: List Empty!!");
+		goto out;
+	}
+
+	export_entry = conditional_logging_export_match(export);
+	if (!export_entry) {
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Logging not enabled for Export Id: %d",
+			  export_id);
+		goto out;
+	}
+
+	glist_del(&export_entry->export_id_glist);
+	gsh_free(&export_entry->export_id_glist);
+
+	LogAlways(COMPONENT_LOG,
+		  "Conditional Logging disabled for Export_Id: %d",
+		  export->export_id);
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+	put_gsh_export(export);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_client_enable(DBusMessageIter *args,
+					       DBusMessage *reply,
+					       DBusError *error)
+{
+	char *errormsg = "Conditional Logging Client:";
+	bool success = true;
+	int rc;
+	struct gsh_client *client;
+	struct base_client_entry *client_entry;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	client = lookup_client(args, &errormsg);
+	if (client == NULL)
+		goto arg_error;
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	client_entry = conditional_logging_client_match(client);
+	if (client_entry) {
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Logging already enabled for Client: %s",
+			  client->hostaddr_str);
+		goto out;
+	}
+
+	rc = add_client(COMPONENT_LOG, &global_client_ip_list,
+			&client->hostaddr_str[0], TERM_V4CIDR, NULL, NULL, NULL,
+			NULL, NULL);
+
+	LogAlways(COMPONENT_LOG,
+		  "Conditional Logging Enabled for Client IP: %s Status: %d",
+		  client->hostaddr_str, rc);
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+	put_gsh_client(client);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_client_disable(DBusMessageIter *args,
+						DBusMessage *reply,
+						DBusError *error)
+{
+	char *errormsg = "Conditional Logging Client:";
+	bool success = true;
+	struct gsh_client *client;
+	struct base_client_entry *client_entry;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	client = lookup_client(args, &errormsg);
+	if (client == NULL)
+		goto arg_error;
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	if (glist_empty(&global_client_ip_list)) {
+		errormsg = "Conditional Logging Client: List Empty";
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Logging Client: List Empty!!");
+		goto out;
+	}
+
+	client_entry = conditional_logging_client_match(client);
+	if (!client_entry) {
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Logging not enabled for Client: %s",
+			  client->hostaddr_str);
+		goto out;
+	}
+
+	switch (client_entry->type) {
+	case NETWORK_CLIENT:
+		if (client_entry->client.network.cidr != NULL)
+			cidr_free(client_entry->client.network.cidr);
+		break;
+	case NETGROUP_CLIENT:
+		gsh_free(client_entry->client.netgroup.netgroupname);
+		break;
+	case WILDCARDHOST_CLIENT:
+		gsh_free(client_entry->client.wildcard.wildcard);
+		break;
+	case GSSPRINCIPAL_CLIENT:
+		gsh_free(client_entry->client.gssprinc.princname);
+		break;
+	case PROTO_CLIENT:
+	case MATCH_ANY_CLIENT:
+	case BAD_CLIENT:
+		/* Do nothing for these client types */
+		break;
+	}
+	glist_del(&client_entry->cle_list);
+	gsh_free(client_entry);
+
+	LogAlways(COMPONENT_LOG, "Conditional Logging disabled for Client: %s",
+		  client->hostaddr_str);
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+	put_gsh_client(client);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_set_component_log_level(DBusMessageIter *args,
+							 DBusMessage *reply,
+							 DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "Conditional Log";
+	char *component;
+	char *log_level;
+	log_levels_t level;
+	enum log_components comp;
+	int i;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args == NULL) {
+		errormsg = "Component Name and Log level expected";
+		goto arg_error;
+	}
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_STRING) {
+		errormsg = "Invalid argument type";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &component);
+	comp = ReturnComponentAscii(component);
+
+	dbus_message_iter_next(args);
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_STRING) {
+		errormsg = "Invalid argument type";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &log_level);
+	level = ReturnLevelAscii(log_level);
+
+	if ((comp >= COMPONENT_ALL && comp < COMPONENT_COUNT) &&
+	    (level >= NIV_NULL && level < NB_LOG_LEVEL)) {
+		if (comp == COMPONENT_ALL) {
+			conditional_component_log_level[COMPONENT_ALL] = level;
+
+			for (i = COMPONENT_LOG; i < COMPONENT_COUNT; i++)
+				SetConditionalComponentLogLevel(i, level);
+		} else {
+			SetConditionalComponentLogLevel(comp, level);
+		}
+	} else {
+		LogAlways(COMPONENT_LOG,
+			  "Invalid Conditional Log Component (%s) or Level (%s)",
+			  component, log_level);
+	}
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_get_component_log_level(DBusMessageIter *args,
+							 DBusMessage *reply,
+							 DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "Conditional Log";
+	char *component;
+	char *level_code;
+	enum log_components comp;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args == NULL) {
+		errormsg = "Message has no arguments! Component Name expected";
+		goto arg_error;
+	}
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_STRING) {
+		errormsg = "Invalid argument type";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &component);
+
+	comp = ReturnComponentAscii(component);
+
+	if (comp >= 0 && comp < COMPONENT_COUNT) {
+		level_code =
+			ReturnLevelInt(conditional_component_log_level[comp]);
+
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Log level for Component %s is %s",
+			  component, level_code);
+
+		errormsg = level_code;
+	} else {
+		LogAlways(COMPONENT_LOG, "Invalid Conditional Log Component %s",
+			  component);
+		errormsg = "Invalid Conditional Log Component";
+	}
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_export_list_show(DBusMessageIter *args,
+						  DBusMessage *reply,
+						  DBusError *error)
+{
+	char *errormsg = "Conditional Log";
+	bool success = true;
+	DBusMessageIter iter;
+	struct glist_head *export_glist;
+	struct export_id_list *export_id_list = NULL;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args != NULL) {
+		errormsg = "Show Export list takes no arguments.";
+		goto arg_error;
+	}
+
+	PTHREAD_RWLOCK_rdlock(&cond_log_rwlock);
+
+	if (glist_empty(&global_export_id_list) == true) {
+		errormsg = "Conditional Logging Export: List Empty";
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Logging Export: List Empty");
+	} else {
+		errormsg = "Conditional Logging Export: List Ok";
+		/* Print the export list */
+		glist_for_each(export_glist, &global_export_id_list) {
+			export_id_list = glist_entry(export_glist,
+						     struct export_id_list,
+						     export_id_glist);
+
+			dbus_message_iter_append_basic(
+				&iter, DBUS_TYPE_UINT16,
+				&export_id_list->export_id);
+		}
+	}
+
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_client_list_show(DBusMessageIter *args,
+						  DBusMessage *reply,
+						  DBusError *error)
+{
+	char *errormsg = "Conditional Logging Client:";
+	bool success = true;
+	DBusMessageIter iter;
+	char *client_ip_str;
+	struct glist_head *client_glist;
+	struct base_client_entry *client_list;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args != NULL) {
+		errormsg = "Show Client list takes no arguments.";
+		goto arg_error;
+	}
+
+	PTHREAD_RWLOCK_rdlock(&cond_log_rwlock);
+
+	if (glist_empty(&global_client_ip_list) == true) {
+		errormsg = "Conditional Logging Client: List Empty";
+		LogAlways(COMPONENT_LOG,
+			  "Conditional Logging Client: List Empty");
+	} else {
+		errormsg = "Conditional Logging Client: List Ok";
+		/* Print the client list */
+		glist_for_each(client_glist, &global_client_ip_list) {
+			client_list = glist_entry(client_glist,
+						  struct base_client_entry,
+						  cle_list);
+
+			client_ip_str =
+				cidr_to_str(client_list->client.network.cidr,
+					    CIDR_NOFLAGS);
+
+			LogAlways(
+				COMPONENT_LOG,
+				"Conditional Logging Enabled for Client IP: %s ",
+				client_ip_str);
+			dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING,
+						       &client_ip_str);
+		}
+	}
+
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static struct gsh_dbus_method conditional_log_export_enable = {
+	.name = "ExportEnable",
+	.method = dbus_conditional_log_export_enable,
+	.args = { ID_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_export_disable = {
+	.name = "ExportDisable",
+	.method = dbus_conditional_log_export_disable,
+	.args = { ID_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_client_enable = {
+	.name = "ClientEnable",
+	.method = dbus_conditional_log_client_enable,
+	.args = { IPADDR_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_client_disable = {
+	.name = "ClientDisable",
+	.method = dbus_conditional_log_client_disable,
+	.args = { IPADDR_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_set_component_log_level = {
+	.name = "SetConditionalComponentLogLevel",
+	.method = dbus_conditional_log_set_component_log_level,
+	.args = { COMPONENT_ARG, LOG_LEVEL_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_get_component_log_level = {
+	.name = "GetConditionalComponentLogLevel",
+	.method = dbus_conditional_log_get_component_log_level,
+	.args = { COMPONENT_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_export_list_show = {
+	.name = "ShowConditionalLogExportList",
+	.method = dbus_conditional_log_export_list_show,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_client_list_show = {
+	.name = "ShowConditionalLogClientList",
+	.method = dbus_conditional_log_client_list_show,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method *log_conditional_methods[] = {
+	&conditional_log_export_enable,
+	&conditional_log_export_disable,
+	&conditional_log_client_enable,
+	&conditional_log_client_disable,
+	&conditional_log_set_component_log_level,
+	&conditional_log_get_component_log_level,
+	&conditional_log_export_list_show,
+	&conditional_log_client_list_show,
+	NULL
+};
+
+struct gsh_dbus_interface log_conditional_interface = {
+	.name = "org.ganesha.nfsd.log.conditional",
+	.props = cond_log_props,
+	.methods = log_conditional_methods,
+	.signals = NULL
+};
+#endif /* USE_DBUS */

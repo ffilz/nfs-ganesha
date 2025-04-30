@@ -346,7 +346,7 @@ static bool arg_ipaddr(DBusMessageIter *args, sockaddr_t *sp, char **errormsg)
 /** @brief lookup gsh_client from input ip-address
  */
 
-static struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
+struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg)
 {
 	sockaddr_t sockaddr;
 	struct gsh_client *client = NULL;
@@ -1364,6 +1364,10 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	CIDR *cidr;
 	int rc;
 	struct base_client_entry *cli;
+	unsigned char cl_addrbuf[sizeof(struct in6_addr)];
+	sockaddr_t hostaddr;
+	sockaddr_t alt_hostaddr;
+	sockaddr_t *clientaddr;
 
 	if (cle_allocator == NULL)
 		cle_allocator = base_client_allocator;
@@ -1392,7 +1396,26 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	case TERM_V6CIDR:
 	case TERM_V4ADDR:
 	case TERM_V6ADDR:
-		cidr = cidr_from_str(client_tok);
+		if (inet_pton(AF_INET, client_tok, cl_addrbuf) == 1) {
+			hostaddr.ss_family = AF_INET;
+			memcpy(&((struct sockaddr_in *)&hostaddr)->sin_addr,
+			       cl_addrbuf, sizeof(struct in_addr));
+		} else if (inet_pton(AF_INET6, client_tok, cl_addrbuf) == 1) {
+			hostaddr.ss_family = AF_INET6;
+			memcpy(&((struct sockaddr_in6 *)&hostaddr)->sin6_addr,
+			       cl_addrbuf, sizeof(struct in6_addr));
+		}
+
+		clientaddr = convert_ipv6_to_ipv4(&hostaddr, &alt_hostaddr);
+
+		if (clientaddr->ss_family == AF_INET6) {
+			cidr = cidr_from_in6addr(
+			&((struct sockaddr_in6 *)clientaddr)->sin6_addr);
+		} else {
+			cidr = cidr_from_inaddr(
+				&((struct sockaddr_in *)clientaddr)->sin_addr);
+		}
+
 		if (cidr == NULL) {
 			switch (type_hint) {
 			case TERM_V4CIDR:

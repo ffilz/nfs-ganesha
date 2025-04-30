@@ -75,6 +75,11 @@
 #include "gsh_dbus.h"
 #endif
 
+extern struct base_client_entry *
+conditional_logging_client_match(struct gsh_client *client);
+extern struct export_id_list *
+conditional_logging_export_match(struct gsh_export *export);
+
 /* fsal_attach_export
  * called from the FSAL's create_export method with a reference on the fsal.
  */
@@ -3142,6 +3147,58 @@ void destroy_ctx_refstr(void)
 }
 
 /**
+ * @brief Set Export conditional flag into the op_context.
+ */
+void set_op_context_export_conditional_flag(void)
+{
+	struct export_id_list *export_entry;
+
+	/* Exit early if no operation context or export is set */
+	if (!op_ctx || !op_ctx->ctx_export)
+		return;
+
+	/* If already flagged, avoid redundant set */
+	if (op_ctx->export_conditional_log)
+		return;
+
+	/*
+     * Proceed only if:
+     * - Conditional log level is set (above NIV_NULL)
+     * - And global export ID list is not empty
+     */
+	export_entry = conditional_logging_export_match(op_ctx->ctx_export);
+	if (export_entry) {
+		op_ctx->export_conditional_log = true;
+	}
+}
+
+/**
+ * @brief Set Client conditional flag into the op_context.
+ */
+void set_op_context_client_conditional_flag(void)
+{
+	struct base_client_entry *client_entry;
+
+	/* Exit early if no operation context or client is set */
+	if (!op_ctx || !op_ctx->client)
+		return;
+
+	/* If already flagged, avoid redundant set */
+	if (op_ctx->client_conditional_log)
+		return;
+
+	/*
+     * Proceed only if:
+     * - Conditional log level is set (above NIV_NULL)
+     * - And global client ip list is not empty
+     */
+	client_entry = conditional_logging_client_match(op_ctx->client);
+	if (client_entry) {
+		op_ctx->client_conditional_log = true;
+	}
+}
+
+/**
  * @brief Set an export into an op_context (could be NULL).
  *
  * This is the core function that sets up an op_context. It makes no assumptions
@@ -3197,6 +3254,8 @@ static void set_op_context_export_fsal_no_release(struct gsh_export *exp,
 		op_ctx->fsal_module = fsal_exp->fsal;
 	else if (!op_ctx->fsal_module && op_ctx->saved_op_ctx)
 		op_ctx->fsal_module = op_ctx->saved_op_ctx->fsal_module;
+
+	set_op_context_export_conditional_flag();
 }
 
 /** @brief Remove the current export from the op_context so the op_context has
@@ -3247,6 +3306,9 @@ static inline void clear_op_context_export_impl(void)
 	 */
 	gsh_refstr_put(op_ctx->ctx_fullpath);
 	gsh_refstr_put(op_ctx->ctx_pseudopath);
+
+	/* Clear the context export conditional flag */
+	op_ctx->export_conditional_log = false;
 }
 
 /**
@@ -3290,6 +3352,20 @@ void set_op_context_export(struct gsh_export *exp)
 	clear_op_context_export_impl();
 
 	set_op_context_export_fsal_no_release(exp, fsal_exp, NULL);
+}
+
+/**
+ * @brief Set a client into the op_context.
+ *
+ * @param[in] client   The gsh_client to set, can be NULL.
+ *
+ */
+void set_op_context_client(struct gsh_client *client)
+{
+	op_ctx->client = client;
+	op_ctx->client_conditional_log = false;
+
+	set_op_context_client_conditional_flag();
 }
 
 /**
@@ -3486,6 +3562,8 @@ void release_op_context(void)
 	struct req_op_context *cur_ctx = op_ctx;
 
 	clear_op_context_export_impl();
+
+	op_ctx->client_conditional_log = false;
 
 	/* Clear the ctx_export and fsal_export */
 	op_ctx->ctx_export = NULL;

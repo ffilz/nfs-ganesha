@@ -17,6 +17,7 @@ LOG {}
 LOG { COMPONENTS {} }
 LOG { FACILITY {} }
 LOG { FORMAT {} }
+LOG { CONDITIONAL {} }
 _9P {}
 MDCACHE {}
 FSAL_LIST {}
@@ -878,6 +879,60 @@ LOG { FORMAT {} }
 
 	CLIENT_REQ_XID(bool, default false)
 
+LOG { CONDITIONAL {} }
+---------------------
+
+    Clients(client list, empty)
+
+    * Client list entries can take on one of the following forms. This
+      parameter may be repeated to extend the list.
+
+    *       Match any client
+    @name       Netgroup name
+    x.x.x.x  IPv6 addresses are only allowed
+
+    Exports(Export list, empty)
+
+    * Export list entries can take list of Export_IDs.
+
+    COMPONENT = LEVEL;
+
+	The components are: ALL, LOG, MEMLEAKS, FSAL, NFSPROTO,
+			    NFS_V4, EXPORT, FILEHANDLE, DISPATCH, MDCACHE,
+			    MDCACHE_LRU, HASHTABLE, HASHTABLE_CACHE, DUPREQ,
+			    INIT, MAIN, IDMAPPER, NFS_READDIR, NFS_V4_LOCK,
+			    CONFIG, CLIENTID, SESSIONS, PNFS, RW_LOCK, NLM,
+			    TIRPC, NFS_CB, THREAD, NFS_V4_ACL, STATE, 9P,
+			    9P_DISPATCH, FSAL_UP, DBUS, NFS_MSK, XPRT
+
+	Some synonyms are:
+
+	FH = FILEHANDLE
+	HT = HASHTABLE
+	CACHE_INODE_LRU = MDCAHCE_LRU
+	CACHE_INODE = MDCACHE
+	INODE_LRU = MDCAHCE_LRU
+	INODE = MDCACHE
+	DISP = DISPATCH
+	LEAKS = MEMLEAKS
+	NFS3 = NFSPROTO
+	NFS4 = NFS_V4
+	HT_CACHE = HASHTABLE_CACHE
+	NFS_STARTUP = INIT
+	NFS4_LOCK = NFS_V4_LOCK
+	NFS4_ACL = NFS_V4_ACL
+	9P_DISP = 9P_DISPATCH
+
+	The log levels are: NULL, FATAL, MAJ, CRIT, WARN, EVENT,
+			    INFO, DEBUG, MID_DEBUG, M_DBG,
+			    FULL_DEBUG, F_DBG], default FULL_DEBUG
+
+	ALL is a special component that when set, sets all components to the
+	specified value, overriding any that are explicitly set. Note that if
+	ALL is then removed from the config and SIGHUP is issued, all components
+	will revert to what is explicitly set, or Default_Log_Level if that is
+	specified, or the original log level from the -N command line option
+	if that was set, or the code default of EVENT.
 
 MDCACHE {}
 ----------

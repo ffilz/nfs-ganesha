@@ -36,6 +36,7 @@
 #include <sys/param.h>
 #include <syslog.h>
 #include <inttypes.h>
+#include <sys/socket.h>
 
 #ifndef LIBLOG_NO_THREAD
 #include <errno.h>
@@ -46,10 +47,17 @@
 #include "config_parsing.h"
 #include "display.h"
 #include "log_common.h"
+#include "gsh_list.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/* Conditional Logging related global structure */
+typedef struct export_id_list {
+	struct glist_head export_id_glist;
+	uint16_t export_id;
+} export_id_list_t;
 
 /* The maximum size of a log buffer */
 #define LOG_BUFF_LEN 2048
@@ -402,6 +410,7 @@ void rpc_warnx(/* const */ char *fmt, ...);
 
 #ifdef USE_DBUS
 extern struct gsh_dbus_interface log_interface;
+extern struct gsh_dbus_interface log_conditional_interface;
 #endif
 
 /* Rate limited logging */

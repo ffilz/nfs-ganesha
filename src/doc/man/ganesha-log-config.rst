@@ -109,6 +109,96 @@ LOG { COMPONENTS {} }
 
         FULL_DEBUG: 0xffffffff
 
+LOG { CONDITIONAL {} }
+----------------------
+Conditional logging increases verbosity for specific clients or exports,
+while reducing it for others. This setup is ideal for debugging specific
+traffic without flooding logs from unrelated requests.
+
+How It Works:
+
+1. All messages are first filtered by the COMPONENTS block.
+
+2. If they pass, the system checks if the request
+   matches a client or export in the Conditional block:
+
+   * If matched, the log level from COMPONENTS applies.
+   * If unmatched, the log level from Conditional applies.
+
+Example::
+
+    LOG {
+      COMPONENTS {
+        FSAL = INFO;
+        NFS4 = DEBUG;
+      }
+
+      Conditional {
+        Clients = 192.0.2.25;
+        Exports = 101;
+
+        COMPONENT_ALL = EVENT;
+        NFS4 = WARN;
+      }
+    }
+
+Explanation::
+
+  * Requests from 192.0.2.25 or export 101 log
+    using COMPONENTS levels (e.g., NFS4 = DEBUG).
+
+  * All other requests use reduced Conditional
+    levels (e.g., NFS4 = WARN, others = EVENT).
+
+**Clients(client list, default: empty)**
+
+    * Client list entries can take on one of the following forms. This
+      parameter may be repeated to extend the list.
+
+    * x.x.x.x  IPv6 addresses are only allowed
+
+**Exports(Export list, default: empty)**
+    * Export list entries can take list of Export_IDs.
+
+**COMPONENT = LEVEL**
+    The components are:
+
+                ALL, LOG, MEMLEAKS, FSAL, NFSPROTO,
+                NFS_V4, EXPORT, FILEHANDLE, DISPATCH, MDCACHE,
+                MDCACHE_LRU, HASHTABLE, HASHTABLE_CACHE, DUPREQ,
+                INIT, MAIN, IDMAPPER, NFS_READDIR, NFS_V4_LOCK,
+                CONFIG, CLIENTID, SESSIONS, PNFS, RW_LOCK, NLM,
+                TIRPC, NFS_CB, THREAD, NFS_V4_ACL, STATE, 9P,
+                9P_DISPATCH, FSAL_UP, DBUS, NFS_MSK, XPRT
+
+    Some synonyms are:
+
+    FH = FILEHANDLE
+    HT = HASHTABLE
+    CACHE_INODE_LRU = MDCAHCE_LRU
+    CACHE_INODE = MDCACHE
+    INODE_LRU = MDCAHCE_LRU
+    INODE = MDCACHE
+    DISP = DISPATCH
+    LEAKS = MEMLEAKS
+    NFS3 = NFSPROTO
+    NFS4 = NFS_V4
+    HT_CACHE = HASHTABLE_CACHE
+    NFS_STARTUP = INIT
+    NFS4_LOCK = NFS_V4_LOCK
+    NFS4_ACL = NFS_V4_ACL
+    9P_DISP = 9P_DISPATCH
+
+    The log levels are:
+                NULL, FATAL, MAJ, CRIT, WARN, EVENT,
+                INFO, DEBUG, MID_DEBUG, M_DBG,
+                FULL_DEBUG, F_DBG], default FULL_DEBUG
+
+    ALL is a special component that when set, sets all components to the
+    specified value, overriding any that are explicitly set. default is
+    set to FULL_DEBUG. COMPONENT_ALL in Conditional acts as fallback
+    for any unspecified components.
+
 LOG { FACILITY {} }
 --------------------------------------------------------------------------------
 This block may be repeated to configure multiple log facilities.
