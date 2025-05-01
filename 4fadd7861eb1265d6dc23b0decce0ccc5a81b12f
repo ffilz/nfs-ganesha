@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7362740a_c42b010e",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-01T20:50:00Z",
+      "side": 1,
+      "message": "So some problems with this:\n\n1. insert_gsh_export is only called when export is first created, not for update and several of those parameters can change, you will need to change the metric on update\n\n2. You need to look at nfs_param.core_param.mount_path_pseudo to determine whether to use fullpath or pseudopath.\n\n3. I\u0027m not sure if monitoring__register_gauge ends up making a copy of the label strings, you need to delve in and make sure it does. If it doesn\u0027t, you can\u0027t use cfg_fullpath or cfg_pseudopath because those strings are not allowed to be referenced outside when the export is being configured. If copied, then it\u0027s fine because your registering during config. If it isn\u0027t copied, you will need to do the gsh_refstr thing so that the monitoring pointer is valid for the life of the monitoring object.\n\n4.",
+      "revId": "4fadd7861eb1265d6dc23b0decce0ccc5a81b12f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
