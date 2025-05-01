@@ -52,6 +52,24 @@
       "parentUuid": "502c6ec8_c85ddcce",
       "revId": "771bda842f13bc839a1f69bf68a3597251da6ad9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a79f9279_766cdf30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-01T20:25:01Z",
+      "side": 1,
+      "message": "Hmm, looks like not, let\u0027s revert to before you added the validate function. We just need to handle all cases where pflen can be -1.\n\nThese are the only cidr functions we call from elsewhere in the Ganesha code:\n\n[root@fedora src]# tools/findlog.sh -f \u0027cidr_.*\u0027 | grep -v \u0027/cidr\u0027\n./Protocols/NFS/mnt_Export.c:111: grp_name \u003d cidr_to_str(client-\u003eclient.network.cidr, CIDR_NOFLAGS);\n./support/client_mgr.c:1238: cidr_to_str(client-\u003eclient.network.cidr, CIDR_NOFLAGS);\n./support/client_mgr.c:1318: cidr_free(client-\u003eclient.network.cidr);\n./support/client_mgr.c:1399: cidr \u003d cidr_from_str(client_tok);\n./support/client_mgr.c:1483: cidr_from_inaddr(\u0026infoaddr);\n./support/client_mgr.c:1504: cidr_from_in6addr(\u0026infoaddr);\n./support/client_mgr.c:1603: host_prefix \u003d cidr_from_in6addr( \u0026((struct sockaddr_in6 *) hostaddr) -\u003esin6_addr);\n./support/client_mgr.c:1608: host_prefix \u003d cidr_from_inaddr( \u0026((struct sockaddr_in *)hostaddr) -\u003esin_addr);\n./support/client_mgr.c:1614: if (cidr_contains(client-\u003eclient.network.cidr, host_prefix) \u003d\u003d 0) {\n./support/client_mgr.c:1702: cidr_free(host_prefix);\n./support/export_mgr.c:1366: cidr_to_str(client-\u003eclient.network.cidr, CIDR_NOFLAGS);\n\nBut cidr_get_pflen is declared in cidr.h so is techically available for calling without validation.",
+      "parentUuid": "35e645ee_16c5a91c",
+      "revId": "771bda842f13bc839a1f69bf68a3597251da6ad9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

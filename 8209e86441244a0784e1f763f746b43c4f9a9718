@@ -16,6 +16,24 @@
       "message": "Added a new function cidr_validate() to check the negative prefix length and calling it in concerned functions. Please, check.",
       "revId": "8209e86441244a0784e1f763f746b43c4f9a9718",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c91d2f5_85966e5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-01T20:25:01Z",
+      "side": 1,
+      "message": "Yea, let\u0027s revert that.\n\nSorry, I thought maybe we could do checks in higher level functions, but since cidr_get_pflen is exposed as part of API, we can\u0027t save ourselves...",
+      "parentUuid": "31a0521d_9f2eef90",
+      "revId": "8209e86441244a0784e1f763f746b43c4f9a9718",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
