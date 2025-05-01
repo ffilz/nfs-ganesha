@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cfe05ca_3273fdf8",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-01T23:23:44Z",
+      "side": 1,
+      "message": "I\u0027m trying to think if we would ever want to bind to a specific addr for NFS, but is inaddr_any for monitoring addr. If so, we would want to detect if the config had been set or not (see use of CONFIG_MARK_SET).",
+      "revId": "e5695f6318df273aa7f0ebac9287312805c3014b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c81052e_8ed2116c",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-01T23:23:44Z",
+      "side": 1,
+      "message": "Should document if not set to other than inaddr_any or in6addr_any that it will use Bind_Addr instead.",
+      "revId": "e5695f6318df273aa7f0ebac9287312805c3014b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
