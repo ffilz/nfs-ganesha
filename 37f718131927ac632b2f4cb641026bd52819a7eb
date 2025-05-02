@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de62e763_4498664c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-02T23:34:49Z",
+      "side": 1,
+      "message": "I just noticed you dropped an assignment to pflen...\n\nThis is why it\u0027s not a good idea to do assingments inside the condition for an if statement...",
+      "revId": "37f718131927ac632b2f4cb641026bd52819a7eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7aa486_9bf2bfbd",
+        "filename": "src/cidr/cidr_compare.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-02T23:34:49Z",
+      "side": 1,
+      "message": "Oh, please define little_pflen and big_pflen here.\n\nI feel it\u0027s easier to read code that is not interspersed with variable definitions.\n\n\nAnd get rid of pflen",
+      "revId": "37f718131927ac632b2f4cb641026bd52819a7eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b760dde_f43235d1",
+        "filename": "src/cidr/cidr_compare.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-02T23:34:49Z",
+      "side": 1,
+      "message": "Change this to big_pflen",
+      "revId": "37f718131927ac632b2f4cb641026bd52819a7eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c74f1f_584cca46",
+        "filename": "src/cidr/cidr_compare.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-02T23:34:49Z",
+      "side": 1,
+      "message": "Change this to big_pflen",
+      "revId": "37f718131927ac632b2f4cb641026bd52819a7eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
