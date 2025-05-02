@@ -70,6 +70,24 @@
       "parentUuid": "35e645ee_16c5a91c",
       "revId": "771bda842f13bc839a1f69bf68a3597251da6ad9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfeb699c_a9b9f7ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-05-02T07:23:23Z",
+      "side": 1,
+      "message": "Have reverted to patchset 2 changes, check is added in the code where cidr_get_pflen() has been called.\n\nCIDR *cidr_net_subnets(const CIDR addr)\nconst char cidr_numaddr(const CIDR addr)\nconst char cidr_numhost(const CIDR addr)\nint cidr_contains(const CIDR *big, const CIDR *little)\n\ncidr_to_str() already has the handling for it as below - \n\npflen \u003d cidr_get_pflen(block);\n\tif (pflen \u003d\u003d -1) {\n\tgsh_free(toret);\n\treturn (NULL); /* Preserve errno */\n}\n\nAnd cidr_from_str() as below - \u2028\n\npflen \u003d cidr_get_pflen(ctmp);\ncidr_free(ctmp);\nif (pflen \u003d\u003d -1) {\n\t/* Failed; probably non-contiguous */\n        cidr_free(toret);\n        return (NULL); /* Preserve errno */\n}\u2028\n\nCorrect me if I’m wrong but seems no other additions required.",
+      "parentUuid": "a79f9279_766cdf30",
+      "revId": "771bda842f13bc839a1f69bf68a3597251da6ad9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
