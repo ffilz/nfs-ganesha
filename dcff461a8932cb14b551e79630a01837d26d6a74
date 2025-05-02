@@ -16,6 +16,24 @@
       "message": "With this change, will we still default to idmapper enabled?",
       "revId": "dcff461a8932cb14b551e79630a01837d26d6a74",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55d95c6_20588411",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018367
+      },
+      "writtenOn": "2025-05-02T17:43:32Z",
+      "side": 1,
+      "message": "yes, this would not change the default option for the idmapper.\nJust ensure that the idmapper_set_owner_domain() is called with initialization",
+      "parentUuid": "5b789cd4_64751606",
+      "revId": "dcff461a8932cb14b551e79630a01837d26d6a74",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
