@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69cc227_3cb2638d",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-05-02T06:45:54Z",
+      "side": 1,
+      "message": "Typically if one is restricting NFS to listen on a specific IP (which is a public IP or interface), then definitely admin interface will also be restricted. So monitoring_addr can not be INADDR_ANY in almost all cases.",
+      "parentUuid": "1cfe05ca_3273fdf8",
+      "revId": "e5695f6318df273aa7f0ebac9287312805c3014b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c81052e_8ed2116c",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-01T23:23:44Z",
       "side": 1,
       "message": "Should document if not set to other than inaddr_any or in6addr_any that it will use Bind_Addr instead.",
+      "revId": "e5695f6318df273aa7f0ebac9287312805c3014b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c34446a_a88be086",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-05-02T06:45:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8c81052e_8ed2116c",
       "revId": "e5695f6318df273aa7f0ebac9287312805c3014b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
