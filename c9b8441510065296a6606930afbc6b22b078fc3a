@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b7d1ef5_6d8fa4f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-06T18:00:32Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m disturbed that we have PTHREAD_COND_timedwait that doesn\u0027t check the return code... ETIMEDOUT should be handled or at least explicitly ignored (using (void) cast and a comment)",
+      "revId": "c9b8441510065296a6606930afbc6b22b078fc3a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06235d1b_dbfab6a1",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-06T18:00:32Z",
+      "side": 1,
+      "message": "need an abort() here.",
+      "revId": "c9b8441510065296a6606930afbc6b22b078fc3a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d7e903e_cbe1dd0c",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-06T18:00:32Z",
+      "side": 1,
+      "message": "This needs to use the PTHREAD_COND_wait macro and then set fe-\u003ectx.woke \u003d true",
+      "revId": "c9b8441510065296a6606930afbc6b22b078fc3a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43eefb30_2c22aee4",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-06T18:00:32Z",
+      "side": 1,
+      "message": "Move this under the PTHREAD_COND_timedwait",
+      "revId": "c9b8441510065296a6606930afbc6b22b078fc3a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
