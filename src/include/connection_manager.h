@@ -115,6 +115,8 @@ enum connection_manager__drain_t {
 typedef enum connection_manager__drain_t (*connection_manager__callback_drain_t)(
 	/* User provided context */
 	void *user_context,
+	/* network id of the client */
+	const struct network_id *client_network_id,
 	/* Client to drain */
 	const sockaddr_t *client_address,
 	/* Client address string for logging/debugging */
@@ -142,6 +144,8 @@ typedef enum connection_manager__register_t (
 	*connection_manager__callback_register_t)(
 	/* User provided context */
 	void *user_context,
+	/* network id of the client */
+	const struct network_id *client_network_id,
 	/* Client to register */
 	const sockaddr_t *client_address,
 	/* Client address string for logging/debugging */
@@ -152,6 +156,8 @@ typedef enum connection_manager__register_t (
 typedef void (*connection_manager__callback_deregister_t)(
 	/* User provided context */
 	void *user_context,
+	/* network id of the client */
+	const struct network_id *client_network_id,
 	/* Client to deregister */
 	const sockaddr_t *client_address,
 	/* Client address string for logging/debugging */

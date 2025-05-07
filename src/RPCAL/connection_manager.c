@@ -188,8 +188,9 @@ static inline void wait_for_state_change(connection_manager__client_t *client)
 }
 
 static enum connection_manager__drain_t callback_default_drain_other_servers(
-	void *context, const sockaddr_t *client_address,
-	const char *client_address_str, const struct timespec *timeout)
+	void *context, const struct network_id *client_network_id,
+	const sockaddr_t *client_address, const char *client_address_str,
+	const struct timespec *timeout)
 {
 	LogWarn(COMPONENT_XPRT,
 		"%s: Client connected before Connection Manager callback was registered",
@@ -201,8 +202,9 @@ static enum connection_manager__drain_t callback_default_drain_other_servers(
 }
 
 static enum connection_manager__register_t callback_default_register_connection(
-	void *context, const sockaddr_t *client_address,
-	const char *client_address_str, const struct timespec *timeout)
+	void *context, const struct network_id *client_network_id,
+	const sockaddr_t *client_address, const char *client_address_str,
+	const struct timespec *timeout)
 {
 	LogWarn(COMPONENT_XPRT,
 		"%s: Client connected before Connection Manager callback was registered",
@@ -214,8 +216,8 @@ static enum connection_manager__register_t callback_default_register_connection(
 }
 
 static void callback_default_deregister_connection(
-	void *context, const sockaddr_t *client_address,
-	const char *client_address_str)
+	void *context, const struct network_id *client_network_id,
+	const sockaddr_t *client_address, const char *client_address_str)
 {
 	LogWarn(COMPONENT_XPRT,
 		"%s: Client connected before Connection Manager callback was registered",
@@ -592,6 +594,7 @@ static void try_activate_client(connection_manager__connection_t *connection)
 	const enum connection_manager__drain_t drain_result =
 		callback_context.register_connection_and_drain_other_servers(
 			callback_context.user_context,
+			&connection->xprt->xp_remote_network_id,
 			get_client_address(client),
 			get_client_address_for_debugging(client), &timeout);
 	PTHREAD_RWLOCK_unlock(&callback_lock);
@@ -683,6 +686,7 @@ register_new_client_connection(connection_manager__connection_t *connection)
 	const enum connection_manager__register_t register_result =
 		callback_context.register_connection(
 			callback_context.user_context,
+			&connection->xprt->xp_remote_network_id,
 			get_client_address(client),
 			get_client_address_for_debugging(client), &timeout);
 	PTHREAD_RWLOCK_unlock(&callback_lock);
@@ -705,6 +709,7 @@ register_new_client_connection(connection_manager__connection_t *connection)
 			PTHREAD_RWLOCK_rdlock(&callback_lock);
 			callback_context.deregister_connection(
 				callback_context.user_context,
+				&connection->xprt->xp_remote_network_id,
 				get_client_address(client),
 				get_client_address_for_debugging(client));
 			PTHREAD_RWLOCK_unlock(&callback_lock);
@@ -878,7 +883,8 @@ void connection_manager__connection_finished(const SVCXPRT *xprt)
 
 	PTHREAD_RWLOCK_rdlock(&callback_lock);
 	callback_context.deregister_connection(
-		callback_context.user_context, get_client_address(client),
+		callback_context.user_context, &connection->xprt->xp_remote_network_id,
+		get_client_address(client),
 		get_client_address_for_debugging(client));
 	PTHREAD_RWLOCK_unlock(&callback_lock);
 
