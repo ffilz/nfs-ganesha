@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8f1f3f6_7d2cedc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-08T18:08:37Z",
+      "side": 1,
+      "message": "Sorry, some more thoughts on this...",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82804b9_940f92c8",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-08T18:08:37Z",
+      "side": 1,
+      "message": "Hmm, realized this does need to be a function to be able to return the value (trying to have a multi-line macro that returns a value is a pain), so we need to keep the original macro + function, however, we need to redo it so __FILE__ and __LINE__ work right...\n\nThe macro needs to pass __FILE__, __func__, and __LINE__ to the function.\n\nAnd then the function needs to call DisplayLogComponentLevel so it can pass those.\n\nSee log_entry_ref_count/LogEntryRefCount in SAL/state_lock.c for an example.",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f326c89_55da47a7",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-08T18:08:37Z",
+      "side": 1,
+      "message": "Don\u0027t need this, pthread_cond_wait never returns this error.",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc34df2_bb675f49",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-08T18:08:37Z",
+      "side": 1,
+      "message": "Need to do the __FILE__, __LINE__, __func__ stuff as noted above",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
