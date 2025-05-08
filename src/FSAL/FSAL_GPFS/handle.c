@@ -778,6 +778,7 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 	if (!lxarg.eof) {
 		errsv = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL, "Unable to get xattr.");
+		gsh_free(buf);
 		return fsalstat(posix2fsal_error(errsv), errsv);
 	}
 	/* Only return names that the caller can read via getxattr */
