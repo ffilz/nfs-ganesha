@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ea0546_52556a35",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-05-10T09:36:58Z",
+      "side": 1,
+      "message": "I renamed this enum value to UID to UNAME, as getpwuid is used to translate UID to its username (you also get the gid, but not all the gids).\n\nAnd getgrouplist to resolve the GIDs, so I didn\u0027t want it to look confusing",
+      "parentUuid": "0ca9fd23_a16d788a",
+      "revId": "6d27fa7316a049e1d6a4a9da5fd9cb9e4e46fa0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "520f1eed_e9456277",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-25T21:52:55Z",
       "side": 1,
       "message": "Do these need to be both LogInfo and LTTNG tracepoint?",
+      "revId": "6d27fa7316a049e1d6a4a9da5fd9cb9e4e46fa0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f29d0d5_8b330a3f",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-05-10T09:36:58Z",
+      "side": 1,
+      "message": "I changed it to LogDebug\n\nEach of them is going to a different output and it is good to have them both\nJust in case a higher debug level is set for the logs for example or if you are looking at the traces to have more info there",
+      "parentUuid": "520f1eed_e9456277",
       "revId": "6d27fa7316a049e1d6a4a9da5fd9cb9e4e46fa0e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9097ff8_1e9945d1",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-05-10T09:36:58Z",
+      "side": 1,
+      "message": "I moved it to be for any case besides ENOENT",
+      "parentUuid": "57d105c2_8b53faa1",
+      "revId": "6d27fa7316a049e1d6a4a9da5fd9cb9e4e46fa0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f11890b8_bbd3ede1",
@@ -69,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0ee738_eda86451",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-05-10T09:36:58Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "f11890b8_bbd3ede1",
+      "revId": "6d27fa7316a049e1d6a4a9da5fd9cb9e4e46fa0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1e4df1d_79295224",
@@ -82,6 +154,24 @@
       "writtenOn": "2025-04-25T21:52:55Z",
       "side": 1,
       "message": "Hmm, should wrap this comment",
+      "revId": "6d27fa7316a049e1d6a4a9da5fd9cb9e4e46fa0e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b78c98_5b905430",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-05-10T09:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1e4df1d_79295224",
       "revId": "6d27fa7316a049e1d6a4a9da5fd9cb9e4e46fa0e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
