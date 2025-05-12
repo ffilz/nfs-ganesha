@@ -2680,7 +2680,9 @@ static fsal_status_t ceph_fsal_lease_op2(struct fsal_obj_handle *obj_hdl,
 		break;
 	case FSAL_DELEG_WR:
 		/* No write delegations (yet!) */
-		return ceph2fsal_error(-ENOTSUP);
+		openflags = FSAL_O_RDWR;
+		cmd = CEPH_DELEGATION_WR;
+		break;
 	default:
 		LogCrit(COMPONENT_FSAL, "Unknown requested lease state");
 		return ceph2fsal_error(-EINVAL);
@@ -2719,6 +2721,13 @@ static fsal_status_t ceph_fsal_lease_op2(struct fsal_obj_handle *obj_hdl,
 		 */
 		update_share_counters_locked(obj_hdl, &myself->share, openflags,
 					     FSAL_O_CLOSED);
+	}
+
+	/* Check if global FD was used and close it */
+	if (out_fd == &myself->fd.fsal_fd && deleg == FSAL_DELEG_NONE) {
+		LogFullDebug(COMPONENT_FSAL,
+			     "Closing the global FD during delegreturn");
+		ceph_close_my_fd(&myself->fd);
 	}
 
 exit:
