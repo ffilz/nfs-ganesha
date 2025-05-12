@@ -148,7 +148,8 @@ static void compact_family(prometheus::MetricFamily &family)
 			return is_metric_empty(family.type, metric);
 		});
 	// Keep at least one metric even if it's empty so it's easier to query
-	if (first_element_to_remove == family.metric.begin())
+	if (first_element_to_remove == family.metric.begin() && 
+			first_element_to_remove != family.metric.end())
 		first_element_to_remove++;
 	family.metric.erase(first_element_to_remove, family.metric.end());
 }
