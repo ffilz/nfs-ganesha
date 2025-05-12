@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55fa125a_4f5f79e1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "Is it dead code?\n\nAlso, do you have the checkpatch commit hook installed? It should have blocked committing with // comments.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09cbf6a_595987e7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2691,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "Can openstate ever be NULL for a delegation?",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "def971ca_eb1fd127",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "Why are we doing this? The openstate fd should already be open in the right mode, and in any cae, changing it\u0027s fd\u0027s openflags like this will just confuse the fd mode.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa10d36a_89df2060",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2710,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "This should be a dec_state_t_ref (otherwise you will leak 2 references). See logic for decrementing the refcount below.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bf7b43_291922fd",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "I think it would be better to validate that openstate is not NULL, and do a goto to the label I suggest below. That would alleviate the deep nesting level.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02876a59_f078d4f1",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2724,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "We still need to do I/O during recall with the delegation stateid, so I\u0027m not sure why we need separate handling",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4463a1a0_de58bc36",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2782,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "Remove this declaration of openstate since you have declatation above",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9983b886_6d767f73",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2843,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "Remove this declaration of openstate since you have declatation above",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c310c7e_580a3ebd",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2853,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-12T21:03:51Z",
+      "side": 1,
+      "message": "Add a label here to come to from above",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
