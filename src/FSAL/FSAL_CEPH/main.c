@@ -91,7 +91,7 @@ struct ceph_fsal_module
 				    .unique_handles = true,
 				    .homogenous = true,
 #ifdef USE_FSAL_CEPH_LL_DELEGATION
-				    .delegations = FSAL_OPTION_FILE_READ_DELEG,
+				    .delegations = FSAL_OPTION_FILE_DELEGATIONS,
 #endif
 				    .readdir_plus = true,
 				    .xattr_support = true,
@@ -122,7 +122,7 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_PATH("ceph_conf", 1, MAXPATHLEN, NULL, ceph_fsal_module,
 		       conf_path),
 	CONF_ITEM_MODE("umask", 0, ceph_fsal_module, fsal.fs_info.umask),
-	CONF_ITEM_BOOL("client_oc", false, ceph_fsal_module, client_oc),
+	CONF_ITEM_BOOL("client_oc", true, ceph_fsal_module, client_oc),
 	CONF_ITEM_BOOL("async", false, ceph_fsal_module, async),
 	CONF_ITEM_BOOL("zerocopy", false, ceph_fsal_module, zerocopy),
 	CONFIG_EOL
@@ -314,7 +314,11 @@ static void enable_delegations(struct ceph_mount *cm)
 {
 	struct export_perms *export_perms = &op_ctx->ctx_export->export_perms;
 
-	if (export_perms->options & EXPORT_OPTION_DELEGATIONS) {
+	/* Check EXPORT, EXPORT_DEFAULTS and CLIENT blocks for */
+	/* delegations related settings */
+	uint32_t eff_options = export_check_client_options(op_ctx->ctx_export);
+
+	if (eff_options & EXPORT_OPTION_DELEGATIONS) {
 		/*
 		 * Ganesha will time out delegations when the recall fails
 		 * for two lease periods. We add just a little bit above that
@@ -341,6 +345,8 @@ static void enable_delegations(struct ceph_mount *cm)
 				"Unable to set delegation timeout for %s. Disabling delegation support: %s",
 				CTX_FULLPATH(op_ctx), strerror(-ceph_status));
 		}
+	} else {
+		LogDebug(COMPONENT_FSAL, "No deleg option set in the config");
 	}
 }
 #else /* !USE_FSAL_CEPH_LL_DELEGATION */
