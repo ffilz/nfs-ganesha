@@ -2587,6 +2587,8 @@ fsal_status_t fsal_start_global_io(struct fsal_fd **out_fd,
 	status = wait_to_start_io(obj_hdl, my_fd, openflags, !open_any,
 				  !open_any);
 	if (!FSAL_IS_ERROR(status)) {
+		/* Mark the fd to be closed */
+		//my_fd->close_on_complete = true;
 		*out_fd = my_fd;
 		return status;
 	}
@@ -2663,7 +2665,65 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 			    bool bypass, struct fsal_share *share)
 {
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
-	struct fsal_fd *state_fd;
+	struct fsal_fd *state_fd, *related_fd;
+	struct state_t *openstate;
+	struct state_deleg *deleg;
+
+	/* Handling for delegation state */
+	if (state->state_type == STATE_TYPE_DELEG) {
+		deleg = &state->state_data.deleg;
+
+		LogFullDebug(COMPONENT_FSAL,
+			     "Handling delegation, sd_type = %d, sd_state = %d",
+			     deleg->sd_type, deleg->sd_state);
+
+		/* Check if the delegation is granted */
+		if (deleg->sd_state == DELEG_GRANTED) {
+			/* If the delegation is granted, we need to retrieve
+			 * the open state related to this delegation
+			 */
+			if (deleg->sd_type == OPEN_DELEGATE_WRITE) {
+				/* Now, retrieve the open state related to the
+				 * delegation, just like we would for a lock
+				 */
+				openstate = nfs4_State_Get_Pointer(
+					state->state_data.deleg.openstate_key);
+				if (openstate != NULL) {
+					related_fd =
+						(struct fsal_fd *)(openstate +
+								   1);
+					related_fd->openflags |= openflags;
+
+					status = wait_to_start_io(obj_hdl,
+								  related_fd,
+								  openflags,
+								  true, false);
+
+					if (FSAL_IS_SUCCESS(status)) {
+						if (out_fd) {
+							*out_fd = related_fd;
+							if (reusing_open_state_fd !=
+							    NULL)
+								*reusing_open_state_fd =
+									true;
+						}
+						inc_state_t_ref(openstate);
+						return status;
+					} else
+						dec_state_t_ref(openstate);
+				} else {
+					LogFullDebug(
+						COMPONENT_FSAL,
+						"No openstate with delegation");
+				}
+			}
+		} else if (deleg->sd_state == DELEG_RECALL_WIP) {
+			LogFullDebug(COMPONENT_FSAL,
+					"Delegation recall in progress,"
+					"cannot use delegation FD");
+			/** @todo delegation handling during recall */
+		}
+	}
 
 	if (state == NULL)
 		goto global;
