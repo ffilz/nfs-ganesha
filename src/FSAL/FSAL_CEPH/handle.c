@@ -931,6 +931,10 @@ static fsal_status_t ceph_close_my_fd(struct ceph_fd *my_fd)
 				rc = 0;
 			status = ceph2fsal_error(rc);
 		}
+		/* Cleaning up the io_work value from the previously
+		 *  used global FD
+		 */
+		my_fd->fsal_fd.io_work = 0;
 		my_fd->fd = NULL;
 		my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
 	} else {
@@ -2680,7 +2684,9 @@ static fsal_status_t ceph_fsal_lease_op2(struct fsal_obj_handle *obj_hdl,
 		break;
 	case FSAL_DELEG_WR:
 		/* No write delegations (yet!) */
-		return ceph2fsal_error(-ENOTSUP);
+		openflags = FSAL_O_RDWR;
+		cmd = CEPH_DELEGATION_WR;
+		break;
 	default:
 		LogCrit(COMPONENT_FSAL, "Unknown requested lease state");
 		return ceph2fsal_error(-EINVAL);
@@ -2695,6 +2701,15 @@ static fsal_status_t ceph_fsal_lease_op2(struct fsal_obj_handle *obj_hdl,
 		LogCrit(COMPONENT_FSAL, "fsal_start_io failed returning %s",
 			fsal_err_txt(status));
 		goto exit;
+	}
+
+	/* This check is for release_lease_lock path to make sure
+	 * fsal_complete_io will call ceph_close_my_fd
+	 */
+	if (deleg == FSAL_DELEG_NONE) {
+		LogFullDebug(COMPONENT_FSAL,
+			     "Closing the fd during release_lease_lock");
+		out_fd->close_on_complete = true;
 	}
 
 	my_fd = container_of(out_fd, struct ceph_fd, fsal_fd);

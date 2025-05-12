@@ -91,7 +91,7 @@ struct ceph_fsal_module
 				    .unique_handles = true,
 				    .homogenous = true,
 #ifdef USE_FSAL_CEPH_LL_DELEGATION
-				    .delegations = FSAL_OPTION_FILE_READ_DELEG,
+				    .delegations = FSAL_OPTION_FILE_DELEGATIONS,
 #endif
 				    .readdir_plus = true,
 				    .xattr_support = true,
@@ -122,7 +122,7 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_PATH("ceph_conf", 1, MAXPATHLEN, NULL, ceph_fsal_module,
 		       conf_path),
 	CONF_ITEM_MODE("umask", 0, ceph_fsal_module, fsal.fs_info.umask),
-	CONF_ITEM_BOOL("client_oc", false, ceph_fsal_module, client_oc),
+	CONF_ITEM_BOOL("client_oc", true, ceph_fsal_module, client_oc),
 	CONF_ITEM_BOOL("async", false, ceph_fsal_module, async),
 	CONF_ITEM_BOOL("zerocopy", false, ceph_fsal_module, zerocopy),
 	CONFIG_EOL
