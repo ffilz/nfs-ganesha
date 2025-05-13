@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2be33fe1_6d309fbc",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-13T20:40:45Z",
+      "side": 1,
+      "message": "You still need to replace LogFullDebug etc. with DisplayLogComponentLevel so it logs the file, line, and function properly.\n\nAnd really, it\u0027s redundant to put those in the message, logging already takes care of logging those bits (and we at least default to file and function).",
+      "parentUuid": "b82804b9_940f92c8",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f326c89_55da47a7",
         "filename": "src/include/common_utils.h",
         "patchSetId": 7
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "a",
       "parentUuid": "5f326c89_55da47a7",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7723f3ea_536e0199",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-13T20:40:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24e9fabe_9dcad43d",
       "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -135,6 +171,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "fbc34df2_bb675f49",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4323c3d_beb4b421",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-13T20:40:45Z",
+      "side": 1,
+      "message": "Same concern about using DisplayLogComponentLevel so it logs the file, line, and function properly.",
+      "parentUuid": "b0a0e956_21ac02ed",
       "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
