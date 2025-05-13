@@ -102,7 +102,7 @@ class PrometheusExposer {
 #endif
 
 static inline void
-prometheus_exposer__start(const sockaddr_t UNUSED(*addr),
+prometheus_exposer__start(const sockaddr_t *UNUSED(addr),
 		          uint16_t UNUSED(port),
 			  prometheus_registry_handle_t UNUSED(registry_handle))
 {
