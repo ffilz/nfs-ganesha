@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5c6b76e_cbdb0e5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-05-13T08:45:17Z",
+      "side": 1,
+      "message": "Will take care with rest of the changes.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55fa125a_4f5f79e1",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2025-05-12T21:03:51Z",
       "side": 1,
       "message": "Is it dead code?\n\nAlso, do you have the checkpatch commit hook installed? It should have blocked committing with // comments.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc071291_b1ef0b07",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-05-13T08:45:17Z",
+      "side": 1,
+      "message": "I did not use checkpatch commit hook this time. Will take care of it in further commits. \n\nWe did not see my_fd being marked for closure in fsal_start_global_io(). Had left it commented to check with you - if it is a good option to mark my_fd for closure\nhere? This further causes my_fd to be closed in fsal_complete_io().",
+      "parentUuid": "55fa125a_4f5f79e1",
       "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -48,6 +83,24 @@
       "writtenOn": "2025-05-12T21:03:51Z",
       "side": 1,
       "message": "Why are we doing this? The openstate fd should already be open in the right mode, and in any cae, changing it\u0027s fd\u0027s openflags like this will just confuse the fd mode.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae491132_b7c97513",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-05-13T08:45:17Z",
+      "side": 1,
+      "message": "Setting related_fd-\u003eopenflags |\u003d openflags or setting openflags to FSAL_O_WRITE in ceph_fsal_lease_op2() is required. Either of one needs to be used or else open mode and desired mode of FD won\u0027t be same in wait_to_start_io().",
+      "parentUuid": "def971ca_eb1fd127",
       "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
