@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29cda019_1cc1a0f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2025-05-14T09:06:02Z",
+      "side": 1,
+      "message": "I see this is a fix to some issue coverity found? Do we know if this issue actually exist or just found by static anlysis?\n\nTo my understanding \n```\nfirst_element_to_remove \u003d\u003d family.metric.begin() \u0026\u0026\n  first_element_to_remove \u003d\u003d family.metric.end()\n``` \nmeans that \n```\nfamily.metric.begin() \u003d\u003d family.metric.end()\n``` \nwhichs means that we have an empty metric family. I don\u0027t think we should have an empty metric family defined.\n\n\nIf we want to add this fix anyway to resolve the coverity issue I suggest to add a check in the function begining to make it more clear instead of the current fix.\nI think that having the following in the function start will be more explict (if it will also silience the coverity issue)\n```\nif (family.metric.begin() \u003d\u003d family.metric.end()) {\n  // in case we have an empty family metric (should never happen) \n  return;\n}\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "705d11bf2ae42483bfced8d49331b65fc873490a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfa575f0_f71feb9a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
