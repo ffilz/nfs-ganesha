@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "228672b7_5bb7696f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-05-14T12:33:58Z",
+      "side": 1,
+      "message": "Thanks for the clarification. Will remove this comment.",
+      "parentUuid": "f0d3dea3_7d585a99",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a09cbf6a_595987e7",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "But then the related_fd-\u003eopenflags doesn\u0027t match the way that fd was actually opened? I\u0027m confused at to the situation here.",
       "parentUuid": "ae491132_b7c97513",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facfbf1c_fb490149",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-05-14T12:33:58Z",
+      "side": 1,
+      "message": "If we set openflags as FSAL_O_WRITE in ceph_fsal_lease_op2(), then related_fd-\u003eopenflags matches with openflag.\n\nIf we set openflags as FSAL_O_RDWR in ceph_fsal_lease_op2(), then related_fd-\u003eopenflags won\u0027t match with openflag and further reopen_fsal_fd() will be called in order to match open mode and desired mode.",
+      "parentUuid": "f62fc3d2_cd1b3943",
       "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
