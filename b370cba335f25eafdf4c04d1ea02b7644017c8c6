@@ -16,6 +16,24 @@
       "message": "Looks good, can you remove \"open\" from the title.\n\nAlso, look at the pthread_cond and pthread_rwlock functions.\n\nAlso while FSAL_PROXY_V3 and FSAL_PROXY_V4 check return codes, for consistency they should use the macros.\n\nAlso see log/log_functions.c\n\nLooks like we don\u0027t have PTHREAD_COND_timedwait - please add that.\n\nLet\u0027s get all of these... But leave tools/multilock alone, it doesn\u0027t use the Ganesha header files.\n\nI think this invocation will find all the function calls to convert:\n\n[root@fedora src]# tools/findlog.sh -f \u0027pthread_.*\u0027  | egrep -v \u0027common_utils\\.h|libntirpc|pthread_exit|multilock|pthread_join|pthread_sigmask|pthread[_a-z]*cancel|pthread_create|pthread_self|nfs4_recovery.*pthread_mutex|nfs_rpc_callback.*pthread_mutex|nfs4_clientid.*pthread_mutex\u0027",
       "revId": "b370cba335f25eafdf4c04d1ea02b7644017c8c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e6350b1_324768a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Made an updated comment with requests.",
+      "parentUuid": "61733f24_acfe21d7",
+      "revId": "b370cba335f25eafdf4c04d1ea02b7644017c8c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

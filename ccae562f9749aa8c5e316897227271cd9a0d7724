@@ -16,6 +16,24 @@
       "message": "Under FSAL_PROXY_V3 and FSAL_PROXY_V4 directory of nfs-ganesha few files are using pthread systemcalls which i guess we should not modify with macros them as they used return code to close of file descripor.\n\nAnd apart from that i am working in writing PTHREAD_COND_timedwait() macro.",
       "revId": "ccae562f9749aa8c5e316897227271cd9a0d7724",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fba482b_7cc6d5f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Please do fixup the pthread_mutex_lock and unlock in PROXY_V3\n\nThe pthread calls in PROXY_V4 we aren\u0027t currently using macros for",
+      "parentUuid": "67b30a25_e55ec680",
+      "revId": "ccae562f9749aa8c5e316897227271cd9a0d7724",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

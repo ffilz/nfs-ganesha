@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b5ec4a_3bec46da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d8f1f3f6_7d2cedc2",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b82804b9_940f92c8",
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "You still need to replace LogFullDebug etc. with DisplayLogComponentLevel so it logs the file, line, and function properly.\n\nAnd really, it\u0027s redundant to put those in the message, logging already takes care of logging those bits (and we at least default to file and function).",
       "parentUuid": "b82804b9_940f92c8",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40d2fd35_17bb9d8f",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2be33fe1_6d309fbc",
       "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -189,6 +225,24 @@
       "side": 1,
       "message": "Same concern about using DisplayLogComponentLevel so it logs the file, line, and function properly.",
       "parentUuid": "b0a0e956_21ac02ed",
+      "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebf91345_8e89651d",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f4323c3d_beb4b421",
       "revId": "523b53661a877e4f6ddacd2c9304bee9d1f8455f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

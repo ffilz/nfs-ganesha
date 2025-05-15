@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2580341f_99b350fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Looking good, could we add a macro for pthread_rwlock_trywrlock for these cases:\n\n./FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c:1434: rc \u003d pthread_rwlock_trywrlock(\u0026dest-\u003econtent_lock);\n./FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c:1444: rc \u003d pthread_rwlock_trywrlock(\u0026src-\u003econtent_lock);\n./FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c:859: pthread_rwlock_trywrlock(\u0026entry-\u003econtent_lock) \u003d\u003d 0) {\n\nI would also like to standardize these to use the macro (and let the macro log the message and abort)\n\n./FSAL/FSAL_PROXY_V3/rpc.c:196: if (pthread_mutex_lock(\u0026rpcLock) !\u003d 0) {\n./FSAL/FSAL_PROXY_V3/rpc.c:197: LogCrit(COMPONENT_FSAL, \"pthread_mutex_lock failed %d %s\",:\t\t\terrno, strerror(errno));\n./FSAL/FSAL_PROXY_V3/rpc.c:206: if (pthread_mutex_unlock(\u0026rpcLock) !\u003d 0) {\n./FSAL/FSAL_PROXY_V3/rpc.c:207: LogCrit(COMPONENT_FSAL, \"pthread_mutex_unlock failed %d %s\",:\t\t\terrno, strerror(errno));\n./FSAL/FSAL_PROXY_V3/rpc.c:355: if (pthread_mutex_lock(\u0026rpcLock) !\u003d 0) {\n./FSAL/FSAL_PROXY_V3/rpc.c:356: LogCrit(COMPONENT_FSAL, \"pthread_mutex_lock failed %d %s\",:\t\t\terrno, strerror(errno));\n./FSAL/FSAL_PROXY_V3/rpc.c:410: if (pthread_mutex_unlock(\u0026rpcLock) !\u003d 0) {\n./FSAL/FSAL_PROXY_V3/rpc.c:412: \"pthread_mutex_unlock failed %d %s\", errno,:\t\t\t\tstrerror(errno));\n./FSAL/FSAL_PROXY_V3/rpc.c:426: if (pthread_mutex_unlock(\u0026rpcLock) !\u003d 0) {\n./FSAL/FSAL_PROXY_V3/rpc.c:427: LogCrit(COMPONENT_FSAL, \"pthread_mutex_unlock failed %d %s\",:\t\t\terrno, strerror(errno));\n./FSAL/FSAL_PROXY_V3/rpc.c:594: if (pthread_mutex_lock(\u0026rpcLock) !\u003d 0) {\n./FSAL/FSAL_PROXY_V3/rpc.c:595: LogCrit(COMPONENT_FSAL, \"pthread_mutex_lock failed %d %s\",:\t\t\terrno, strerror(errno));\n./FSAL/FSAL_PROXY_V3/rpc.c:624: if (pthread_mutex_unlock(\u0026rpcLock) !\u003d 0) {\n./FSAL/FSAL_PROXY_V3/rpc.c:625: LogCrit(COMPONENT_FSAL, \"pthread_mutex_unlock failed %d %s\",:\t\t\terrno, strerror(errno));",
+      "revId": "e3a66dfd9592dfae7487be5ee26d9fac2e000daa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8016e55a_1f499870",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "NIV_CRIT on this one",
+      "revId": "e3a66dfd9592dfae7487be5ee26d9fac2e000daa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7c5813_61706064",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "NIV_CRIT on this one",
+      "revId": "e3a66dfd9592dfae7487be5ee26d9fac2e000daa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed4c0db7_1b98123d",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Add this code here:\n\nif (rc \u003d\u003d ETIMEDOUT)\n        fe-\u003ectx.woke \u003d false;\nelse\n        fe-\u003ectx.woke \u003d true;",
+      "revId": "e3a66dfd9592dfae7487be5ee26d9fac2e000daa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0439fb3c_39766537",
+        "filename": "src/support/fridgethr.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-15T23:58:30Z",
+      "side": 1,
+      "message": "Use PTHREAD_COND_wait here",
+      "revId": "e3a66dfd9592dfae7487be5ee26d9fac2e000daa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
