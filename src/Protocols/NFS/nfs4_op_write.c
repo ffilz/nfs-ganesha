@@ -51,6 +51,8 @@
 #endif
 
 struct nfs4_write_data {
+	/** Arguments for write */
+	WRITE4args *arg_WRITE4;
 	/** Results for write */
 	WRITE4res *res_WRITE4;
 	/** Owner of state */
@@ -69,6 +71,13 @@ static enum nfs_req_result nfs4_complete_write(struct nfs4_write_data *data)
 {
 	struct fsal_io_arg *write_arg = &data->write_arg;
 	struct gsh_buffdesc verf_desc;
+
+	LogEvent(COMPONENT_NFS_V4,
+		     "complete write_arg %p arg_WRITE4 %p res_WRITE4 %p offset = %" PRIu64 "  io_request = %" PRIu64 "  fsal_stable = %d status %s",
+		     write_arg, data->arg_WRITE4, data->res_WRITE4,
+		     write_arg->offset, write_arg->io_request,
+		     write_arg->fsal_stable,
+		     nfsstat4_to_str(data->res_WRITE4->status));
 
 	if (data->res_WRITE4->status != NFS4_OK) {
 		goto done;
@@ -116,6 +125,7 @@ static void nfs4_write_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 			  void *write_data, void *caller_data)
 {
 	struct nfs4_write_data *data = caller_data;
+	struct fsal_io_arg *write_arg = &data->write_arg;
 	uint32_t flags;
 
 	/* Fixup ERR_FSAL_SHARE_DENIED status */
@@ -124,6 +134,13 @@ static void nfs4_write_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 
 	/* Get result */
 	data->res_WRITE4->status = nfs4_Errno_status(ret);
+
+	LogEvent(COMPONENT_NFS_V4,
+		     "callback write_arg %p arg_WRITE4 %p res_WRITE4 %p offset = %" PRIu64 "  io_request = %" PRIu64 "  fsal_stable = %d status %s",
+		     write_arg, data->arg_WRITE4, data->res_WRITE4,
+		     write_arg->offset, write_arg->io_request,
+		     write_arg->fsal_stable,
+		     nfsstat4_to_str(data->res_WRITE4->status));
 
 	flags = atomic_postset_uint32_t_bits(&data->flags, ASYNC_PROC_DONE);
 
@@ -140,6 +157,7 @@ enum nfs_req_result nfs4_op_write_resume(struct nfs_argop4 *op,
 					 struct nfs_resop4 *resp)
 {
 	struct nfs4_write_data *write_data = data->op_data;
+	struct fsal_io_arg *write_arg = &write_data->write_arg;
 	enum nfs_req_result rc;
 	uint32_t flags;
 
@@ -147,6 +165,13 @@ enum nfs_req_result nfs4_op_write_resume(struct nfs_argop4 *op,
 		/* FSAL is requesting another write2 call on resume */
 		atomic_postclear_uint32_t_bits(
 			&write_data->flags, ASYNC_PROC_EXIT | ASYNC_PROC_DONE);
+
+		LogEvent(COMPONENT_NFS_V4,
+			     "call again write_arg %p arg_WRITE4 %p res_WRITE4 %p offset = %" PRIu64 "  io_request = %" PRIu64 "  fsal_stable = %d",
+			     write_arg, write_data->arg_WRITE4,
+			     write_data->res_WRITE4,
+			     write_arg->offset, write_arg->io_request,
+			     write_arg->fsal_stable);
 
 		write_data->obj->obj_ops->write2(write_data->obj, true,
 						 nfs4_write_cb,
@@ -485,6 +510,7 @@ enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 	write_arg->fsal_stable = arg_WRITE4->stable != UNSTABLE4 || force_sync;
 
 	write_data->res_WRITE4 = res_WRITE4;
+	write_data->arg_WRITE4 = arg_WRITE4;
 	write_data->owner = owner;
 	write_data->data = data;
 	write_data->obj = obj;
@@ -492,6 +518,12 @@ enum nfs_req_result nfs4_op_write(struct nfs_argop4 *op, compound_data_t *data,
 	data->op_data = write_data;
 
 again:
+
+	LogEvent(COMPONENT_NFS_V4,
+		     "calling write_arg %p arg_WRITE4 %p res_WRITE4 %p offset = %" PRIu64 "  io_request = %" PRIu64 "  fsal_stable = %d",
+		     write_arg, write_data->arg_WRITE4, write_data->res_WRITE4,
+		     write_arg->offset, write_arg->io_request,
+		     write_arg->fsal_stable);
 
 	/* Do the actual write */
 	obj->obj_ops->write2(obj, false, nfs4_write_cb, write_arg, write_data);
