@@ -454,7 +454,7 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 	uint32_t not_a_size_t;
 	bool success = false;
 
-	if (nfs_param.nfsv4_param.only_numeric_owners) {
+	if (!idmapping_enabled || nfs_param.nfsv4_param.only_numeric_owners) {
 		/* 2**32 is 10 digits long in decimal */
 		struct gsh_buffdesc name;
 		char namebuf[11];
@@ -466,11 +466,6 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 					&not_a_size_t, UINT32_MAX);
 	}
 
-	if (!idmapping_enabled) {
-		LogWarn(COMPONENT_IDMAPPER,
-			"Idmapping is disabled, encode-nfs4-principal skipped");
-		return false;
-	}
 	PTHREAD_RWLOCK_rdlock(group ? &idmapper_group_lock
 				    : &idmapper_user_lock);
 	if (group)
