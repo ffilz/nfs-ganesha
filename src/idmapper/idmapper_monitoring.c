@@ -171,7 +171,7 @@ static void register_user_groups_metric(void)
 	const metric_label_t empty_labels[] = {};
 
 	idmapping_user_groups_total = monitoring__register_histogram(
-		"idmapping__user_groups_total",
+		"nfs_idmapping__user_groups_total",
 		METRIC_METADATA("Total groups per user", METRIC_UNIT_NONE),
 		empty_labels, ARRAY_SIZE(empty_labels), histogram_buckets);
 }
@@ -187,7 +187,7 @@ static void register_external_request_latency_metric(idmapping_op_t op,
 	};
 	idmapping_external_request_latency[op][utility][status] =
 		monitoring__register_histogram(
-			"idmapping__external_request_latency",
+			"nfs_idmapping__external_request_latency",
 			METRIC_METADATA("Idmapping external request latency",
 					METRIC_UNIT_MILLISECOND),
 			labels, ARRAY_SIZE(labels),
@@ -216,7 +216,7 @@ static void register_cache_uses_total_metrics(void)
 			};
 			idmapping_cache_uses_total[i][j] =
 				monitoring__register_counter(
-					"idmapping__cache_uses_total",
+					"nfs_idmapping__cache_uses_total",
 					METRIC_METADATA(
 						"Total idmapping-cache uses",
 						METRIC_UNIT_NONE),
@@ -235,7 +235,7 @@ static void register_failure_total_metrics(void)
 			};
 			idmapping_failures_total[i][j] =
 				monitoring__register_counter(
-					"idmapping__failures_total",
+					"nfs_idmapping__failures_total",
 					METRIC_METADATA(
 						"Total idmapping failures",
 						METRIC_UNIT_NONE),
@@ -252,7 +252,7 @@ static void register_evicted_entries_cache_duration_metrics(void)
 		};
 		evicted_entries_cached_duration[i] =
 			monitoring__register_histogram(
-				"idmapping__evicted_entries_cached_duration",
+				"nfs_idmapping__evicted_entries_cached_duration",
 				METRIC_METADATA(
 					"Distribution of the time duration "
 					"that evicted entries were stored in "

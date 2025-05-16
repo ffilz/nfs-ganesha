@@ -83,7 +83,7 @@ static void register_num_xprts_per_custom_data_status_metric(void)
 
 		num_xprts_per_custom_data_status[i] =
 			monitoring__register_counter(
-				"xprt__per_custom_data_status_count",
+				"nfs_xprt_per_custom_data_status_count",
 				METRIC_METADATA("Total number of xprts per "
 						"custom-data status",
 						METRIC_UNIT_NONE),
@@ -100,7 +100,7 @@ static void register_num_sessions_per_xprt_metric(void)
 	};
 
 	num_xprt_sessions = monitoring__register_histogram(
-		"xprt__sessions_count",
+		"nfs_xprt_sessions_count",
 		METRIC_METADATA("Distribution of number of sessions "
 				"associated with each xprt",
 				METRIC_UNIT_NONE),
@@ -131,7 +131,7 @@ static void register_num_clients_per_state_protection_metric(void)
 
 		num_clients_per_state_protection[i] =
 			monitoring__register_counter(
-				"clients__per_state_protection_count",
+				"nfs_clients_per_state_protection_count",
 				METRIC_METADATA("Total number of clients per "
 						"state-protection type",
 						METRIC_UNIT_NONE),
@@ -147,13 +147,13 @@ static void register_client_metrics(void)
 	};
 
 	confirmed_clients = monitoring__register_gauge(
-		"clients__confirmed_count",
+		"nfs_clients_confirmed_count",
 		METRIC_METADATA("Total Number of Confirmed Clients",
 				METRIC_UNIT_NONE),
 		empty_labels, ARRAY_SIZE(empty_labels));
 
 	lease_expire_event_count = monitoring__register_counter(
-		"clients__lease_expire_count",
+		"nfs_clients_lease_expire_count",
 		METRIC_METADATA("Total Number of Clients Lease Expired Events",
 				METRIC_UNIT_NONE),
 		empty_labels, ARRAY_SIZE(empty_labels));
@@ -164,7 +164,7 @@ static void register_client_metrics(void)
 			METRIC_LABEL("lock_type", lock_type_string[lock_type])
 		};
 		num_locks_metric[lock_type] = monitoring__register_gauge(
-			"locks__count",
+			"nfs_locks_count",
 			METRIC_METADATA("Total Number of Locks Record Count",
 					METRIC_UNIT_NONE),
 			lock_count_labels, ARRAY_SIZE(lock_count_labels));
@@ -182,7 +182,7 @@ static void register_num_session_connections_metric(void)
 	};
 
 	num_session_connections = monitoring__register_histogram(
-		"session__connections_count",
+		"nfs_session_connections_count",
 		METRIC_METADATA("Distribution of number of "
 				"session-connections across sessions",
 				METRIC_UNIT_NONE),
@@ -194,7 +194,7 @@ static void register_num_denied_session_xprt_associations_metric(void)
 	const metric_label_t empty_labels[] = {};
 
 	num_denied_session_xprt_associations = monitoring__register_counter(
-		"session__denied_xprt_associations_count",
+		"nfs_session_denied_xprt_associations_count",
 		METRIC_METADATA("Total number of denied session-and-xprt "
 				"associations across sessions",
 				METRIC_UNIT_NONE),
