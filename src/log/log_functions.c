@@ -1382,8 +1382,18 @@ static int display_log_component(struct display_buffer *dsp_log,
 {
 	int b_left = display_start(dsp_log);
 
-	if (b_left <= 0 || max_headers < LH_COMPONENT)
+	if (b_left <= 0)
 		return b_left;
+
+	/* Protect read access to max_headers */
+	PTHREAD_RWLOCK_rdlock(&log_rwlock);
+
+	if (max_headers < LH_COMPONENT) {
+		PTHREAD_RWLOCK_unlock(&log_rwlock);
+		return b_left;
+	}
+
+	PTHREAD_RWLOCK_unlock(&log_rwlock);
 
 	if (b_left > 0 && logfields->disp_clientip) {
 		if (clientip)
