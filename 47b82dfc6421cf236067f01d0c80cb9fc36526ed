@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea35104c_51a594eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-05-16T15:01:14Z",
+      "side": 1,
+      "message": "max_headers is an int which is atomic other than memory barriers. It is not critical thatit be perfect, so let\u0027s not introduce a lock into every log message. Please mark the Coverity as intentional.\n\nThere may be another Coverity for max_headers for display_log_header. Please do the same with that if it exists.",
+      "revId": "47b82dfc6421cf236067f01d0c80cb9fc36526ed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
