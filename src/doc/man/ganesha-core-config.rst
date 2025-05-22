@@ -460,6 +460,15 @@ Pwnam_Implementation (enum, default "nsswitch")
     - nsswitch : use the system's nsswitch for idmapping
     - sssd: use sssd directly for idmapping
 
+Sssd_Implementation_Timeout(uint32, range 0 to INT32_MAX, default 30)
+    The timeout to use for each direct to sssd idmapping operations, in seconds.
+    This is effective only when using SSSD pwnam implementation.
+    * A value of zero doesn't mean infinity.
+
+Sssd_Implementation_Skip_Cache(bool, default false)
+    Whether to skip SSSD cache when performing SSSD direct idmapping operations.
+    This is effective only when using SSSD pwnam implementation.
+
 NFSv4 {}
 --------------------------------------------------------------------------------
 

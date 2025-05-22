@@ -467,6 +467,11 @@ static struct config_item directory_services_params[] = {
 	CONF_ITEM_TOKEN("Pwnam_Implementation", PWNAM_IMPLEMENTATION__NSSWITCH,
 			pwnam_implementation_options, directory_services_param,
 			pwnam_implementation),
+	CONF_ITEM_UI32("Sssd_Implementation_Timeout", 0, INT32_MAX, 30,
+		       directory_services_param, sssd_implementation_timeout),
+	CONF_ITEM_BOOL("Sssd_Implementation_Skip_Cache", false,
+		       directory_services_param,
+		       sssd_implementation_skip_cache),
 	CONFIG_EOL
 };
 

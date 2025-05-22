@@ -40,6 +40,7 @@
 #include "log.h"
 #include "log_common.h"
 #include "sss_nss_idmap.h"
+#include "gsh_config.h"
 
 typedef int (*sss_nss_getpwnam_timeout_t)(const char *name, struct passwd *pwd,
 					  char *buffer, size_t buflen,
@@ -62,8 +63,10 @@ typedef int (*sss_nss_getgrouplist_timeout_t)(const char *name, gid_t group,
 					      uint32_t flags,
 					      unsigned int timeout);
 
-bool is_inited;
-void *handle;
+static bool is_inited;
+static void *handle;
+static int32_t sssd_flags;
+static unsigned int sssd_timeout;
 sss_nss_getpwnam_timeout_t sss_nss_getpwnam_timeout;
 sss_nss_getpwuid_timeout_t sss_nss_getpwuid_timeout;
 sss_nss_getgrnam_timeout_t sss_nss_getgrnam_timeout;
@@ -92,8 +95,8 @@ int sss_nss_idmap__getpwnam(const char *name, struct passwd *pwd, char *buffer,
 		LogFatal(
 			COMPONENT_IDMAPPER,
 			"Attempted to call sss_nss_idmap__getpwnam without successful init");
-	return sss_nss_getpwnam_timeout(name, pwd, buffer, buflen, result,
-					SSS_NSS_EX_FLAG_NO_FLAGS, 0);
+  return sss_nss_getpwnam_timeout(name, pwd, buffer, buflen, result, sssd_flags,
+				  sssd_timeout);
 }
 
 int sss_nss_idmap__getpwuid(uid_t uid, struct passwd *pwd, char *buffer,
@@ -102,8 +105,8 @@ int sss_nss_idmap__getpwuid(uid_t uid, struct passwd *pwd, char *buffer,
 		LogFatal(
 			COMPONENT_IDMAPPER,
 			"Attempted to call sss_nss_idmap__getpwuid without successful init");
-	return sss_nss_getpwuid_timeout(uid, pwd, buffer, buflen, result,
-					SSS_NSS_EX_FLAG_NO_FLAGS, 0);
+  return sss_nss_getpwuid_timeout(uid, pwd, buffer, buflen, result, sssd_flags,
+				  sssd_timeout);
 }
 
 int sss_nss_idmap__getgrnam(const char *name, struct group *grp, char *buffer,
@@ -112,8 +115,8 @@ int sss_nss_idmap__getgrnam(const char *name, struct group *grp, char *buffer,
 		LogFatal(
 			COMPONENT_IDMAPPER,
 			"Attempted to call sss_nss_idmap__getgrnam without successful init");
-	return sss_nss_getgrnam_timeout(name, grp, buffer, buflen, result,
-					SSS_NSS_EX_FLAG_NO_FLAGS, 0);
+  return sss_nss_getgrnam_timeout(name, grp, buffer, buflen, result, sssd_flags,
+				  sssd_timeout);
 }
 
 int sss_nss_idmap__getgrgid(gid_t gid, struct group *grp, char *buffer,
@@ -122,8 +125,8 @@ int sss_nss_idmap__getgrgid(gid_t gid, struct group *grp, char *buffer,
 		LogFatal(
 			COMPONENT_IDMAPPER,
 			"Attempted to call sss_nss_idmap__getgrgid without successful init");
-	return sss_nss_getgrgid_timeout(gid, grp, buffer, buflen, result,
-					SSS_NSS_EX_FLAG_NO_FLAGS, 0);
+  return sss_nss_getgrgid_timeout(gid, grp, buffer, buflen, result, sssd_flags,
+				  sssd_timeout);
 }
 
 int sss_nss_idmap__getgrouplist(const char *name, gid_t group, gid_t *groups,
@@ -132,11 +135,20 @@ int sss_nss_idmap__getgrouplist(const char *name, gid_t group, gid_t *groups,
 		LogFatal(COMPONENT_IDMAPPER,
 			 "Attempted to call sss_nss_idmap__getgrouplist without successful "
 			 "init");
-	return sss_nss_getgrouplist_timeout(name, group, groups, ngroups,
-					    SSS_NSS_EX_FLAG_NO_FLAGS, 0);
+  return sss_nss_getgrouplist_timeout(name, group, groups, ngroups, sssd_flags,
+				      sssd_timeout);
 }
 
 int sss_nss_idmap__init(void) {
+  const bool skip_cache =
+		  nfs_param.directory_services_param.sssd_implementation_skip_cache;
+  sssd_flags = skip_cache ? SSS_NSS_EX_FLAG_NO_CACHE : SSS_NSS_EX_FLAG_NO_FLAGS;
+  sssd_timeout =
+	  nfs_param.directory_services_param.sssd_implementation_timeout * 1000;
+  LogInfo(COMPONENT_IDMAPPER,
+	  "SSSD Implementation configuration: timeout: %d ms, skip cache: %d",
+	  sssd_timeout, skip_cache);
+
   if (is_inited) return 0;
 
 	if (handle != NULL) {
