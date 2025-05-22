@@ -454,6 +454,11 @@ Max_Groups_Membership (uint32, range 0 to INT32_MAX, default 2000)
 Pwutils_Use_Fully_Qualified_Names(bool, default false)
     Whether to use fully qualified names for idmapping with pw-utils
 
+Pwnam_Implementation (enum, default "nsswitch")
+    The implementation to use for pwnam idmapping
+
+    - nsswitch : use the system's nsswitch for idmapping
+    - sssd: use sssd directly for idmapping
 
 NFSv4 {}
 --------------------------------------------------------------------------------
