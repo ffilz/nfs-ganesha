@@ -179,6 +179,9 @@ bool set_idmapping_status(bool status_enabled)
 	/* Acquire mutex to prevent interference by another invocation */
 	mutex_lock(&idmapping_status_lock);
 
+	pwnam_wrappers__set_implementation(
+		nfs_param.directory_services_param.pwnam_implementation);
+
 	if (idmapping_enabled == status_enabled) {
 		mutex_unlock(&idmapping_status_lock);
 		LogInfo(COMPONENT_IDMAPPER,
