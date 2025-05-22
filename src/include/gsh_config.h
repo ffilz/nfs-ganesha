@@ -739,6 +739,10 @@ typedef struct directory_services_param {
 	bool pwutils_use_fully_qualified_names;
 	/** What Pwnam implementation to use */
 	pwnam_implementation_t pwnam_implementation;
+	/** SSSD implementation timeout to use */
+	uint32_t sssd_implementation_timeout;
+	/** SSSD implementation skip SSSD cache */
+	bool sssd_implementation_skip_cache;
 } directory_services_param_t;
 
 /** @} */
