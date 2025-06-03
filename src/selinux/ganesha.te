@@ -94,6 +94,7 @@ dontaudit ganesha_t self:capability net_admin;
 
 allow ganesha_t self:capability { dac_read_search dac_override fowner setgid setuid };
 allow ganesha_t self:capability2 block_suspend;
+allow ganesha_t self:capability sys_resource;
 allow ganesha_t self:process { setcap setrlimit };
 allow ganesha_t self:fifo_file rw_fifo_file_perms;
 allow ganesha_t self:unix_stream_socket create_stream_socket_perms;
@@ -287,7 +288,7 @@ allow init_t var_lib_nfs_t:dir create;
 #============= rpcbind_t ==============
 
 #!!!! This avc can be allowed using the boolean 'nis_enabled'
-allow rpcbind_t unreserved_port_t:udp_socket name_bind;
+nis_use_ypbind_uncond(ganesha_t)
 
 ########################################
 #
