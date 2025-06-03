@@ -176,6 +176,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17208a96_313f5ec4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-03T08:50:56Z",
+      "side": 1,
+      "message": "Added comments in the freeing function , what is expected from the QOS side.\nAnd freeing of the QOS strutures happens only when the acutal gsh_export or gsh_client cleanup happens, because QOS cleanups are hooked into them.",
+      "parentUuid": "31e322d8_4c80bf69",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bc8cf97_be8d0c28",
@@ -435,6 +453,24 @@
       "side": 1,
       "message": "Some documentation in comments would help a lot",
       "parentUuid": "82c46e38_3bacdfae",
+      "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f1cc3b1_46183789",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1452,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-03T08:50:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80d761ed_7ee132f0",
       "revId": "ca650a41bc02669e10369465bbcbac552b3f9ae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
