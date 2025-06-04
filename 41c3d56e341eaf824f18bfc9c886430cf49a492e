@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4d619836_71a38ccb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-04T11:23:07Z",
+      "side": 1,
+      "message": "The global config allows only 1 type of config at a time for a running instance.\nexport class lock will be held by the caller in case of PerExport and PerExport_PerClient, In case of PerClient client class lock will be held by caller.",
+      "parentUuid": "f79ff8c3_a1f8e8de",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a747dfe7_4696df4d",
         "filename": "src/Protocols/NFS/nfs4_op_read.c",
         "patchSetId": 16
@@ -52,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25fb3861_f6cbcd8e",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-04T11:23:07Z",
+      "side": 1,
+      "message": "Acknowledged, changes done in Patchset 17.",
+      "parentUuid": "c2c308e6_d9654161",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0007558_6479856d",
@@ -65,6 +101,24 @@
       "writtenOn": "2025-06-04T00:13:01Z",
       "side": 1,
       "message": "One minor bit here, test qos_async_scheduled first.",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14553f32_f1b9c97e",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-04T11:23:07Z",
+      "side": 1,
+      "message": "Acknowledged. changes done in Patchset 17.",
+      "parentUuid": "c0007558_6479856d",
       "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +140,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ea7df7_f8814194",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2218,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-04T11:23:07Z",
+      "side": 1,
+      "message": "QOS block is there as a global default config QOS_DEFAULT_CONFIG {}\nso the global values will act as export level defaults.",
+      "parentUuid": "be46fe94_c48fd640",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "147e025c_5ece4da9",
@@ -103,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35e49ce0_b4ba0180",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2445,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-04T11:23:07Z",
+      "side": 1,
+      "message": "Ack, added the QOS block for pseudofs",
+      "parentUuid": "147e025c_5ece4da9",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3193e3b_f6b5acbb",
@@ -116,6 +206,24 @@
       "writtenOn": "2025-06-04T00:00:31Z",
       "side": 1,
       "message": "QoS block should be added here. And allows updating the pseudofs QoS parameters.",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "752a242a_0a8aa3c2",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2464,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-04T11:23:07Z",
+      "side": 1,
+      "message": "Ack, done",
+      "parentUuid": "f3193e3b_f6b5acbb",
       "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

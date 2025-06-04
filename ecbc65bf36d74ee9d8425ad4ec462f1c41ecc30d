@@ -125,6 +125,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b2801f_928ef2c3",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-04T11:23:07Z",
+      "side": 1,
+      "message": "As per discussion done the below changes.\nAdded handling for PSEUDOFS in export config.\nRemoved the handling for \"/\", which was acutally not required.",
+      "parentUuid": "95b48da6_17e89c53",
+      "revId": "ecbc65bf36d74ee9d8425ad4ec462f1c41ecc30d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8ebe1bb_b17bc917",
