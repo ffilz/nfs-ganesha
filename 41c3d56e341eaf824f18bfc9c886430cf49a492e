@@ -3,6 +3,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f79ff8c3_a1f8e8de",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-04T00:13:01Z",
+      "side": 1,
+      "message": "I really feel like this constant 5 may need to be configurable.\n\nIf so, will it work to configure it to 0? Meaning we immediately disable the connection from epoll rather than suspend any requests.\n\nI\u0027m concerned about the memory consumption from suspended requests.\n\nHmm, also, I see this is done with the QoS class lock, but is a per-client lock held also (in case one thread is hitting same client for per export QoS and another thread for per client QoS)",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a747dfe7_4696df4d",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-04T00:13:01Z",
+      "side": 1,
+      "message": "BTW, good to remove the ASYNC_PROC_EXIT and ASYNC_PROC_DONE flag testing from this part since we haven\u0027t even made the fsal_read2 call yet those don\u0027t apply at all.",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c308e6_d9654161",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-04T00:13:01Z",
+      "side": 1,
+      "message": "One minor bit here, test qos_async_scheduled first.",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0007558_6479856d",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-04T00:13:01Z",
+      "side": 1,
+      "message": "One minor bit here, test qos_async_scheduled first.",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be46fe94_c48fd640",
         "filename": "src/support/exports.c",
         "patchSetId": 16
