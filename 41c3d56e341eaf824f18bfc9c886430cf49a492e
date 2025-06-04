@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be46fe94_c48fd640",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2218,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-04T00:00:31Z",
+      "side": 1,
+      "message": "QoS block should be added here so that per-export defaults can be configured in the export definitions.",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147e025c_5ece4da9",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2445,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-04T00:00:31Z",
+      "side": 1,
+      "message": "QoS block should be added here. This allows definining QoS parameters for the pseudofs without having to define all the standard EXPORT parameters (like Pseudo \u003d \"/\"; Export_Id \u003d 0; FSAL { Name \u003d \"PSEUDO\"; }).",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3193e3b_f6b5acbb",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2464,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-04T00:00:31Z",
+      "side": 1,
+      "message": "QoS block should be added here. And allows updating the pseudofs QoS parameters.",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
