@@ -987,6 +987,22 @@ int nfsv4_init_params(void)
 	} else {
 		cid_server_scope = nfs_param.nfsv4_param.server_scope;
 	}
+#ifdef USE_MONITORING
+	static char *latest_cid_server_scope;
+
+	if (latest_cid_server_scope == NULL) {
+		register_ganesha_info_metrics(cid_server_scope);
+	} else if (strcmp(latest_cid_server_scope, cid_server_scope) != 0) {
+		monitoring__gauge_set(ganesha_info, 0);
+		register_ganesha_info_metrics(cid_server_scope);
+		gsh_free(latest_cid_server_scope);
+	} else {
+		return 0;
+	}
+	latest_cid_server_scope = gsh_malloc(strlen(cid_server_scope) + 1);
+	memcpy(latest_cid_server_scope, cid_server_scope,
+	       strlen(cid_server_scope) + 1);
+#endif
 	return 0;
 }
 
