@@ -70,6 +70,24 @@
       "parentUuid": "82fe2477_7716b54f",
       "revId": "ca78768f8653c86b49085bffb2014832792706b3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0874ab42_8fdf65f3",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "OK, comments might be appropriate to document the lifetime of export-\u003eqos_class pointer to make it clear it can\u0027t be accessed by another thread.",
+      "parentUuid": "ae34fa35_c1561453",
+      "revId": "ca78768f8653c86b49085bffb2014832792706b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

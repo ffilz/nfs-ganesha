@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2445460a_d6b80daf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "You should set these pointers NULL after free since this can be called while stopping QoS and not just because export is going away.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5ff4df_fe062233",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "You should set this pointer NULL after free.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "417d3584_b17bb260",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "You should set these pointers NULL after free since this can be called while stopping QoS and not just because export is going away.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "437f0645_0ab5353b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "Separating out comment about the constant 5...\n\nI really feel like this constant 5 may need to be configurable.\n\nIf so, will it work to configure it to 0? Meaning we immediately disable the connection from epoll rather than suspend any requests.\n\nI\u0027m concerned about the memory consumption from suspended requests.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a23dc6f3_d01b711b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2147,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "You need to use proper access to path here, see tmp_get_exp_paths(), tmp_export_path(), and tmp_put_exp_paths(). It is not safe to access cfg_fullpath outside export config processing, the pointer can become invalid unexpectedly.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2917737_ec35e107",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2174,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "You need to use proper access to path here, see tmp_get_exp_paths(), tmp_export_path(), and tmp_put_exp_paths(). It is not safe to access cfg_fullpath outside export config processing, the pointer can become invalid unexpectedly.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a2aa03_185a3e9d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "You need to use proper access to path here, use op_ctx_export_path(op_ctx) instead of cfg_fullpath. It is not safe to access cfg_fullpath outside export config processing, the pointer can become invalid unexpectedly.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a038fcc8_3e31f14e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2825,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "You need to use proper access to path here, use op_ctx_export_path(op_ctx) instead of cfg_fullpath. It is not safe to access cfg_fullpath outside export config processing, the pointer can become invalid unexpectedly.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa5b1e0_0ae95057",
+        "filename": "src/Protocols/NFS/nfs4_op_destroy_session.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "Why do we need this? The gsh_client isn\u0027t going away, client may start a new session, we shouldn\u0027t flush the QoS data.\n\nAlso, client can have multiple sessions per clientid",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

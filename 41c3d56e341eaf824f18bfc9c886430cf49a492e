@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "40606cb1_ef3cbb3a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "OK, so for pepc, there is a client class for each client for THAT export? So we\u0027re safe if there are two threads,one processing client1/export1 and the other processing client1/export2?",
+      "parentUuid": "4d619836_71a38ccb",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a747dfe7_4696df4d",
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "QOS block is there as a global default config QOS_DEFAULT_CONFIG {}\nso the global values will act as export level defaults.",
       "parentUuid": "be46fe94_c48fd640",
+      "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1eb5210_afacaee6",
+        "filename": "src/support/exports.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2218,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:50:14Z",
+      "side": 1,
+      "message": "Valid point, we may still get a request to have it in EXPORT_DEFAULTS, but for now we can rely on the global for default.",
+      "parentUuid": "22ea7df7_f8814194",
       "revId": "41c3d56e341eaf824f18bfc9c886430cf49a492e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
