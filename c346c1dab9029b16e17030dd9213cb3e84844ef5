@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e41c75_a0d47dd4",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:56:01Z",
+      "side": 1,
+      "message": "We don\u0027t call this multiple times, why handle changing it?",
+      "revId": "c346c1dab9029b16e17030dd9213cb3e84844ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da653ccc_fc8c7558",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:56:01Z",
+      "side": 1,
+      "message": "If we do use this, use gsh_strdup instead of gsh_malloc, memcypy, and strlen",
+      "revId": "c346c1dab9029b16e17030dd9213cb3e84844ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79446050_1613de9d",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:56:01Z",
+      "side": 1,
+      "message": "Name the parameter server_scope",
+      "revId": "c346c1dab9029b16e17030dd9213cb3e84844ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6840919f_5cdfc630",
+        "filename": "src/include/nfs_metrics.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-05T20:56:01Z",
+      "side": 1,
+      "message": "Let\u0027s name the parameter server_scope since that\u0027s what\u0027s used",
+      "revId": "c346c1dab9029b16e17030dd9213cb3e84844ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
