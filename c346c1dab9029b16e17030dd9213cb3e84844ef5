@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70736454_30d4ffb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-06-06T17:10:36Z",
+      "side": 1,
+      "message": "The modification has been made within the nfsv4_init_params() function. This function is now invoked from within nfs_Init(), which, in turn, is called by the nfs_start() function. The nfs_start() function is invoked in two locations: once at the main() function of the nfs_main.c file, and once within the nfs_libmain() function located in nfs_lib.c. Therefore, it appears there may be potential for modifying the server scope.",
+      "revId": "c346c1dab9029b16e17030dd9213cb3e84844ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29e41c75_a0d47dd4",
