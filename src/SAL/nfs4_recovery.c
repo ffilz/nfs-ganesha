@@ -114,7 +114,8 @@ static void nfs_release_v4_clients(char *ip, sockaddr_t *ip_saddr);
 
 clid_entry_t *nfs4_add_clid_entry(char *cl_name, bool reclaim_complete)
 {
-	clid_entry_t *new_ent = gsh_malloc(sizeof(clid_entry_t));
+	clid_entry_t *new_ent =
+		gsh_malloc(sizeof(clid_entry_t), MEM_COMP_CLIENT);
 
 	glist_init(&new_ent->cl_rfh_list);
 	(void)strlcpy(new_ent->cl_name, cl_name, sizeof(new_ent->cl_name));
@@ -127,7 +128,7 @@ clid_entry_t *nfs4_add_clid_entry(char *cl_name, bool reclaim_complete)
 
 rdel_fh_t *nfs4_add_rfh_entry(clid_entry_t *clid_ent, char *rfh_name)
 {
-	rdel_fh_t *new_ent = gsh_malloc(sizeof(rdel_fh_t));
+	rdel_fh_t *new_ent = gsh_malloc(sizeof(rdel_fh_t), MEM_COMP_CLIENT);
 
 	new_ent->rdfh_handle_str = gsh_strdup(rfh_name);
 	glist_add(&clid_ent->cl_rfh_list, &new_ent->rdfh_list);
@@ -141,7 +142,7 @@ void nfs4_cleanup_clid_entries(void)
 	while ((clid_entry = glist_first_entry(&clid_list, struct clid_entry,
 					       cl_list)) != NULL) {
 		glist_del(&clid_entry->cl_list);
-		gsh_free(clid_entry);
+		gsh_free(clid_entry, MEM_COMP_CLIENT);
 		--clid_count;
 	}
 	assert(clid_count == 0);
@@ -495,13 +496,13 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	 * Either the backend doesn't support get_nodeid or it handed back a
 	 * NULL pointer. Just use hostname.
 	 */
-	hostname = gsh_malloc(MAXNAMLEN + 1);
+	hostname = gsh_malloc(MAXNAMLEN + 1, MEM_COMP_FSAL);
 	rc = gsh_gethostname(hostname, MAXNAMLEN + 1,
 			     nfs_param.core_param.enable_AUTHSTATS);
 	if (rc != 0) {
 		LogEvent(COMPONENT_CLIENTID, "gethostname failed: %d", errno);
 		rc = -errno;
-		gsh_free(hostname);
+		gsh_free(hostname, MEM_COMP_FSAL);
 		return rc;
 	}
 
@@ -509,12 +510,12 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	copylen = strlen(hostname);
 	if (copylen > maxlen)
 		copylen = maxlen;
-	nodeid = gsh_malloc(copylen + 1);
+	nodeid = gsh_malloc(copylen + 1, MEM_COMP_FSAL);
 	memcpy(nodeid, hostname, copylen);
 	nodeid[copylen] = '\0';
 
 	*pnodeid = nodeid;
-	gsh_free(hostname);
+	gsh_free(hostname, MEM_COMP_FSAL);
 
 	return rc;
 }

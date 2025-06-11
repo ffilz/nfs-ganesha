@@ -180,7 +180,8 @@ static int ceph_fsal_get_sec_label(struct ceph_handle *handle,
 		}
 
 		attrs->sec_label.slai_data.slai_data_len = rc;
-		gsh_free(attrs->sec_label.slai_data.slai_data_val);
+		gsh_free(attrs->sec_label.slai_data.slai_data_val,
+			 MEM_COMP_MISC);
 		if (rc > 0) {
 			attrs->sec_label.slai_data.slai_data_val =
 				gsh_memdup(label, rc);
@@ -1054,7 +1055,7 @@ void ceph_free_state(struct state_t *state)
 
 	destroy_fsal_fd(&my_fd->fsal_fd);
 
-	gsh_free(state);
+	gsh_free(state, MEM_COMP_FILE_AND_STATE_LOCK);
 }
 
 /**
@@ -1077,7 +1078,8 @@ struct state_t *ceph_alloc_state(struct fsal_export *exp_hdl,
 	struct state_t *state;
 	struct ceph_fd *my_fd;
 
-	state = init_state(gsh_calloc(1, sizeof(struct ceph_state_fd)),
+	state = init_state(gsh_calloc(1, sizeof(struct ceph_state_fd),
+				      MEM_COMP_FILE_AND_STATE_LOCK),
 			   ceph_free_state, state_type, related_state);
 
 	my_fd = &container_of(state, struct ceph_state_fd, state)->ceph_fd;
@@ -1845,7 +1847,7 @@ resume:
 
 	release_op_context();
 
-	gsh_free(cbi);
+	gsh_free(cbi, MEM_COMP_FSAL);
 }
 #endif
 
@@ -1904,7 +1906,7 @@ static void ceph_fsal_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
 	/* Allocate ceph call back information */
-	cbi = gsh_calloc(1, sizeof(*cbi));
+	cbi = gsh_calloc(1, sizeof(*cbi), MEM_COMP_FSAL);
 
 	init_fsal_fd(&cbi->temp_fd.fsal_fd, FSAL_FD_TEMP, op_ctx->fsal_export);
 #endif
@@ -2073,7 +2075,7 @@ exit:
 
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
 	destroy_fsal_fd(&cbi->temp_fd.fsal_fd);
-	gsh_free(cbi);
+	gsh_free(cbi, MEM_COMP_FSAL);
 #endif
 }
 
@@ -2158,7 +2160,7 @@ resume:
 
 	release_op_context();
 
-	gsh_free(cbi);
+	gsh_free(cbi, MEM_COMP_FSAL);
 }
 #endif
 
@@ -2209,7 +2211,7 @@ static void ceph_fsal_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	}
 
 	/* Allocate ceph call back information */
-	cbi = gsh_calloc(1, sizeof(*cbi));
+	cbi = gsh_calloc(1, sizeof(*cbi), MEM_COMP_FSAL);
 
 	init_fsal_fd(&cbi->temp_fd.fsal_fd, FSAL_FD_TEMP, op_ctx->fsal_export);
 #endif
@@ -2339,7 +2341,7 @@ exit:
 
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
 	destroy_fsal_fd(&cbi->temp_fd.fsal_fd);
-	gsh_free(cbi);
+	gsh_free(cbi, MEM_COMP_FSAL);
 #endif
 }
 
@@ -3306,8 +3308,8 @@ static fsal_status_t ceph_fsal_listxattrs(struct fsal_obj_handle *handle_pub,
 			goto out;
 		}
 
-		gsh_free(buf);
-		buf = gsh_malloc(listlen);
+		gsh_free(buf, MEM_COMP_FSAL);
+		buf = gsh_malloc(listlen, MEM_COMP_FSAL);
 		rc = ceph_ll_listxattr(export->cmount, handle->i, buf, listlen,
 				       &listlen, perms);
 	} while (rc == -ERANGE && loop++ < 5);
@@ -3326,7 +3328,7 @@ static fsal_status_t ceph_fsal_listxattrs(struct fsal_obj_handle *handle_pub,
 	status = fsal_listxattr_helper(buf, listlen, maxbytes, lxa_cookie,
 				       lxr_eof, lxr_names);
 out:
-	gsh_free(buf);
+	gsh_free(buf, MEM_COMP_FSAL);
 	ceph_userperm_destroy(perms);
 	return status;
 }

@@ -376,7 +376,7 @@ void FreeExportClient(struct base_client_entry *client)
 	expclient = container_of(client, struct exportlist_client_entry,
 				 client_entry);
 
-	gsh_free(expclient);
+	gsh_free(expclient, MEM_COMP_CLIENT);
 }
 
 /**
@@ -403,7 +403,8 @@ static void *client_init(void *link_mem, void *self_struct)
 	if (link_mem == NULL) {
 		return self_struct;
 	} else if (self_struct == NULL) {
-		expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry));
+		expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry),
+				    MEM_COMP_CLIENT);
 
 		cli = &expcli->client_entry;
 		glist_init(&cli->cle_list);
@@ -416,7 +417,7 @@ static void *client_init(void *link_mem, void *self_struct)
 		if (!glist_empty(&cli->cle_list))
 			FreeClientList(&cli->cle_list, FreeExportClient);
 		assert(glist_empty(&cli->cle_list));
-		gsh_free(expcli);
+		gsh_free(expcli, MEM_COMP_CLIENT);
 		return NULL;
 	}
 }
@@ -430,7 +431,8 @@ static void *qos_block_init(void *link_mem, void *self_struct)
 	struct qos_block_config *qos_block;
 
 	if (self_struct == NULL) {
-		qos_block = gsh_calloc(1, sizeof(struct qos_block_config));
+		qos_block = gsh_calloc(1, sizeof(struct qos_block_config),
+				       MEM_COMP_INIT);
 		LogFullDebug(COMPONENT_CONFIG, "Allocating args: %p: %p",
 			     link_mem, qos_block);
 	} else {
@@ -475,7 +477,7 @@ static int qos_block_commit(void *node, void *link_mem, void *self_struct,
 			     qos_block, qos_block->enable_qos,
 			     gsh_export->export_id, gsh_export->cfg_fullpath);
 		if (qos_block) {
-			gsh_free(qos_block);
+			gsh_free(qos_block, MEM_COMP_INIT);
 			gsh_export->qos_block = NULL;
 		}
 	}
@@ -1053,8 +1055,8 @@ static inline void copy_gsh_export(struct gsh_export *dest,
 		old_pseudopath = rcu_dereference(dest->pseudopath);
 
 	/* Free old cfg_fullpath and cfg_pseudopath */
-	gsh_free(dest->cfg_fullpath);
-	gsh_free(dest->cfg_pseudopath);
+	gsh_free(dest->cfg_fullpath, MEM_COMP_MISC);
+	gsh_free(dest->cfg_pseudopath, MEM_COMP_MISC);
 
 	/* Copy config fullpath and create new refstr */
 	if (src->cfg_fullpath != NULL) {
@@ -2212,7 +2214,8 @@ void *export_client_allocator(void)
 {
 	struct exportlist_client_entry *expcli;
 
-	expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry));
+	expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry),
+			    MEM_COMP_CLIENT);
 
 	return &expcli->client_entry;
 }
@@ -3060,9 +3063,9 @@ void free_export_resources(struct gsh_export *export, bool config)
 	qos_free_mem(export, QOS_EXPORT);
 #endif
 	/* free strings here */
-	gsh_free(export->cfg_fullpath);
-	gsh_free(export->cfg_pseudopath);
-	gsh_free(export->FS_tag);
+	gsh_free(export->cfg_fullpath, MEM_COMP_MISC);
+	gsh_free(export->cfg_pseudopath, MEM_COMP_MISC);
+	gsh_free(export->FS_tag, MEM_COMP_MISC);
 
 	/* Release the refstr if they have been created. Note that we
 	 * normally expect a refstr to be created, but we could be freeing an

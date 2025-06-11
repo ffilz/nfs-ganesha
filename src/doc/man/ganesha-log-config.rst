@@ -46,6 +46,9 @@ RPC_Debug_Flags(uint32, range 0 to UINT32_MAX, default 7)
 Display_UTC_Timestamp(bool, default false)
     Flag to enable displaying UTC date/time in log messages instead of localtime.
 
+Mem_Stats_Enabled(bool, default false)
+    Flag to enable counting of memory statistics
+
 LOG { COMPONENTS {} }
 --------------------------------------------------------------------------------
 **Default_log_level(token,default EVENT)**

@@ -159,14 +159,14 @@ int nfs_libmain(const char *ganesha_conf, const char *lpath,
 				errstr != NULL ? errstr : "unknown",
 				nfs_config_path);
 			if (errstr != NULL)
-				gsh_free(errstr);
+				gsh_free(errstr, MEM_COMP_MISC);
 			goto fatal_die;
 		} else
 			LogWarn(COMPONENT_INIT, "Error %s while parsing (%s)",
 				errstr != NULL ? errstr : "unknown",
 				nfs_config_path);
 		if (errstr != NULL)
-			gsh_free(errstr);
+			gsh_free(errstr, MEM_COMP_MISC);
 	}
 
 	if (read_log_config(nfs_config_struct, &err_type) < 0) {
@@ -250,10 +250,10 @@ int nfs_libmain(const char *ganesha_conf, const char *lpath,
 
 	/* nfs_config_path is allocated only if ganesha_conf is not null. */
 	if (ganesha_conf)
-		gsh_free(nfs_config_path);
+		gsh_free(nfs_config_path, MEM_COMP_MISC);
 	if (log_path)
-		gsh_free(log_path);
-	gsh_free(nfs_host_name);
+		gsh_free(log_path, MEM_COMP_MISC);
+	gsh_free(nfs_host_name, MEM_COMP_MISC);
 
 	return 0;
 

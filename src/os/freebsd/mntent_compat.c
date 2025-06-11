@@ -94,11 +94,11 @@ char *hasmntopt(const struct mntent *mnt, const char *option)
 	for (opt = optbuf; (opt = strtok(opt, " ")) != NULL; opt = NULL) {
 		if (!strcasecmp(opt, option)) {
 			opt = opt - optbuf + mnt->mnt_opts;
-			gsh_free(optbuf);
+			gsh_free(optbuf, MEM_COMP_MISC);
 			return opt;
 		}
 	}
-	gsh_free(optbuf);
+	gsh_free(optbuf, MEM_COMP_MISC);
 	return NULL;
 }
 

@@ -1524,3 +1524,212 @@ class DumpFULLV4Stats(Report):
                 output += " %12.6f" % (self.stats[3][i][5])
                 i += 1
             return output
+
+class RetrieveMemoryStats():
+    def __init__(self):
+        self.dbus_service_name = "org.ganesha.nfsd"
+        self.dbus_memstats_name = "org.ganesha.nfsd.memstats"
+        self.mem_interface = "/org/ganesha/nfsd/MemMgr"
+
+        self.bus = dbus.SystemBus()
+        self.memmgrobj = self.bus.get_object(self.dbus_service_name,
+                                             self.mem_interface)
+
+    # get memory stats
+    def get_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("GetMemoryStats",
+                                                     self.dbus_memstats_name)
+        return DumpMemStats(stats_state())
+
+    # reset memory stats
+    def reset_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("ResetMemoryStats",
+                                                     self.dbus_memstats_name)
+        return MemStatsStatus(stats_state())
+
+    # enable memory stats couting
+    def enable_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("EnableMemoryStats",
+                                                     self.dbus_memstats_name)
+        return MemStatsStatus(stats_state())
+
+    # disable memory stats counting
+    def disable_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("DisableMemoryStats",
+                                                     self.dbus_memstats_name)
+        return MemStatsStatus(stats_state())
+
+class MemStatsStatus():
+    def __init__(self, status):
+        self.status = status
+
+    def __str__(self):
+            return "GANESHA RESPONSE STATUS: " + self.status[1]
+
+class DumpMemStats(Report):
+    def __init__(self, stats):
+        super().__init__(stats)
+
+        self.curtime = time.time()
+        self.success = stats[0]
+        self.status = stats[1]
+        if self.success:
+            self.timestamp = (stats[2][0], stats[2][1])
+
+    def fill_report(self, report):
+        op_table = [
+            'MEM_COMP_INIT',
+            'MEM_COMP_FSAL',
+            'MEM_COMP_PROTOCOL',
+            'MEM_COMP_FILE_AND_STATE_LOCK',
+            'MEM_COMP_IO_BUFFER',
+            'MEM_COMP_SESSION',
+            'MEM_COMP_CLIENT',
+            'MEM_COMP_CACHE',
+            'MEM_COMP_LIBNTIRPC',
+            'MEM_COMP_DIGEST_POOL',
+            'MEM_COMP_HANDLE_POOL',
+            'MEM_COMP_DB_THREAD_POOL',
+            'MEM_COMP_DROP_POOL',
+            'MEM_COMP_MDCACHE_POOL',
+            'MEM_COMP_NFSV4_SESSION_POOL',
+            'MEM_COMP_DUP_REQ_POOL',
+            'MEM_COMP_NFS_RES_POOL',
+            'MEM_COMP_TCP_DRC_POOL',
+            'MEM_COMP_NFS4_CLIENT_ID_POOL',
+            'MEM_COMP_NFS4_STATE_OWNER_POOL',
+            'MEM_COMP_NODE_POOL',
+            'MEM_COMP_DATA_POOL',
+            'MEM_COMP_ACL_POOL',
+            'MEM_COMP_MISC',
+            'MEM_COMP_GTEST',
+            'MEM_COMP_MISC'
+        ]
+        stats = self.result[3:]
+
+        def op_stats(stats):
+            counters = [
+                "Total_Alloc_Calls",
+                "Total_Free_Calls",
+                "Total_Alloc_Bytes",
+                "Total_Freed_Bytes",
+                "Total_Current_Active_Bytes",
+                "Total_Peak_Active_Bytes"
+            ]
+
+            result = {}
+            for i in range(len(stats)):
+                result[counters[i]] = dbus_to_std(stats[i])
+
+            return result
+
+        i = 0
+        ops = iter(op_table)
+
+        while i < len(stats):
+            if isinstance(stats[i], dbus.Boolean):
+                # Skip the availability flag since we're ignoring proto-level
+                i += 1
+                continue
+            op_name = next(ops)
+            report[op_name] = op_stats(stats[i])
+            i += 1
+
+    def __str__(self):
+        output = ""
+        if self.status != "OK":
+            return ("GANESHA RESPONSE STATUS: " + self.status)
+        else:
+            self.starttime = self.timestamp[0] + self.timestamp[1] / 1e9
+            self.duration = self.curtime - self.starttime
+            output += ("\nMemory Stats \nStats collected " +
+                       "since: " + time.ctime(self.timestamp[0]) +
+                       str(self.timestamp[1]) + " nsecs" +
+                       "\nDuration: " + "%.10f" % self.duration + " seconds")
+
+            output += ("\n\t\t\t Alloc_Calls \t Free_Calls" +
+                       "\t Total_Alloc_Bytes \t Total_Freed_Bytes" +
+                       "\t\t Current_Active_Bytes " +
+                       "\t\t Peak_Active_Bytes\n")
+
+            op_labels = [
+                'INIT',
+                'FSAL',
+                'PROTOCOL',
+                'FILE_AND_STATE_LOCK',
+                'IO_BUFFER',
+                'SESSION',
+                'CLIENT',
+                'CACHE',
+                'LIBNTIRPC',
+                'DIGEST_POOL',
+                'HANDLE_POOL',
+                'DB_THREAD_POOL',
+                'DROP_POOL',
+                'MDCACHE_POOL',
+                'NFS4_SESSION_POOL',
+                'DUP_REQ_POOL',
+                'NFS_RES_POOL',
+                'TCP_DRC_POOL',
+                'CLIENT_ID_POOL',
+                'STATE_OWNER_POOL',
+                'NODE_POOL',
+                'DATA_POOL',
+                'ACL_POOL',
+                'MISC',
+                'GTEST'
+            ]
+
+            stats = self.result[3]
+
+            # self.stats is expected to be the array (a(sa(st)))
+            # So it's a list of tuples: (component_name, [(stat_name, value), ...])
+            #stats_dict = {name: dict(stat_list) for name, stat_list in self.stats}
+            stats_dict = {
+                name: dict(stat_list)
+                for item in stats
+                if isinstance(item, (list, tuple)) and len(item) == 2
+                for name, stat_list in [item]
+            }
+
+            total_alloc_calls = 0
+            total_free_calls = 0
+            total_alloc_bytes = 0
+            total_freed_bytes = 0
+            total_current_active_bytes = 0
+            total_peak_active_bytes = 0
+
+            for label in op_labels:
+                if label in stats_dict:
+                    stat_map = stats_dict[label]
+                    try:
+                        alloc_calls = int(stat_map['Total_Alloc_Calls'])
+                        free_calls = int(stat_map['Total_Free_Calls'])
+                        alloc_bytes = int(stat_map['Total_Alloc_Bytes'])
+                        freed_bytes = int(stat_map['Total_Freed_Bytes'])
+                        current_bytes = int(stat_map['Total_Current_Active_Bytes'])
+                        peak_bytes = int(stat_map['Total_Peak_Active_Bytes'])
+
+                        output += f"{label + ':':<20}"
+                        output += f"{alloc_calls:>12} {free_calls:>12} "
+                        output += f"{alloc_bytes:>21} {freed_bytes:>25} "
+                        output += f"{current_bytes:>25} {peak_bytes:>25} \n"
+
+                        total_alloc_calls += alloc_calls
+                        total_free_calls += free_calls
+                        total_alloc_bytes += alloc_bytes
+                        total_freed_bytes += freed_bytes
+                        total_current_active_bytes += current_bytes
+                        total_peak_active_bytes += peak_bytes
+                    except KeyError:
+                        output += f"{label + ':':<12} {'<Missing Stat>':>16}\n"
+                else:
+                    output += f"{label + ':':<12} {'<Invalid Data>':>16}\n"
+
+            output += "-" * 160 + "\n"
+            output += f"{'TOTAL:':<20}"
+            output += f"{total_alloc_calls:>12} {total_free_calls:>12} "
+            output += f"{total_alloc_bytes/(1024*1024):>21.2f}MB {total_freed_bytes/(1024*1024):>21.2f}MB "
+            output += f"{total_current_active_bytes/(1024*1024):>25.2f}MB {total_peak_active_bytes/(1024*1024):>22.2f}MB \n"
+
+        return output

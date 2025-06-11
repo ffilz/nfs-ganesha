@@ -132,7 +132,7 @@ void load_fsal_static(const char *name, void (*init)(void),
 		LogFatal(COMPONENT_INIT, "Couldn't Register FSAL_%s", name);
 
 	if (dl_error) {
-		gsh_free(dl_error);
+		free(dl_error);
 		dl_error = NULL;
 	}
 
@@ -335,7 +335,7 @@ int load_fsal(const char *name, struct fsal_module **fsal_hdl_p)
 	if (load_state != idle)
 		goto errout;
 	if (dl_error) {
-		gsh_free(dl_error);
+		free(dl_error);
 		dl_error = NULL;
 	}
 
@@ -430,7 +430,7 @@ errout:
 	PTHREAD_MUTEX_unlock(&fsal_lock);
 	LogMajor(COMPONENT_INIT, "Failed to load module (%s) because: %s", path,
 		 strerror(retval));
-	gsh_free(dl_path);
+	gsh_free(dl_path, MEM_COMP_MISC);
 	return retval;
 }
 
@@ -543,8 +543,8 @@ int register_fsal(struct fsal_module *fsal_hdl, const char *name,
 
 errout:
 
-	gsh_free(fsal_hdl->path);
-	gsh_free(fsal_hdl->name);
+	gsh_free(fsal_hdl->path, MEM_COMP_MISC);
+	gsh_free(fsal_hdl->name, MEM_COMP_MISC);
 	load_state = error;
 	PTHREAD_MUTEX_unlock(&fsal_lock);
 	LogCrit(COMPONENT_INIT, "FSAL \"%s\" failed to register because: %s",
@@ -576,8 +576,8 @@ int unregister_fsal(struct fsal_module *fsal_hdl)
 			fsal_hdl->name, refcount);
 		return EBUSY;
 	}
-	gsh_free(fsal_hdl->path);
-	gsh_free(fsal_hdl->name);
+	gsh_free(fsal_hdl->path, MEM_COMP_MISC);
+	gsh_free(fsal_hdl->name, MEM_COMP_MISC);
 	return 0;
 }
 
@@ -601,15 +601,16 @@ void *fsal_init(void *link_mem, void *self_struct)
 	if (link_mem == NULL) {
 		return self_struct; /* NOP */
 	} else if (self_struct == NULL) {
-		void *args = gsh_calloc(1, sizeof(struct fsal_args));
+		void *args =
+			gsh_calloc(1, sizeof(struct fsal_args), MEM_COMP_FSAL);
 
 		LogFullDebug(COMPONENT_CONFIG, "Allocating args %p/%p",
 			     link_mem, args);
 		return args;
 	} else {
 		fp = self_struct;
-		gsh_free(fp->name);
-		gsh_free(fp);
+		gsh_free(fp->name, MEM_COMP_MISC);
+		gsh_free(fp, MEM_COMP_FSAL);
 		return NULL;
 	}
 }

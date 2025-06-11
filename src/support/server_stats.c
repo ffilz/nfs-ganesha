@@ -63,6 +63,12 @@
 #include "nfs_proto_functions.h"
 #include "nfs_convert.h"
 #include "nfs_metrics.h"
+#include "server_stats_private.h"
+
+/* Memory Usage Statistics */
+struct gsh_mem_stats gshMC[MEM_COMP_MAX];
+bool gsh_mem_stats_logging_enabled;
+bool gsh_mem_stats_enabled;
 
 #define NFS_pcp nfs_param.core_param
 #define NFS_program NFS_pcp.program
@@ -407,8 +413,8 @@ static struct nfsv3_stats *get_v3(struct gsh_stats *stats,
 	if (unlikely(stats->nfsv3 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv3 == NULL)
-			stats->nfsv3 =
-				gsh_calloc(1, sizeof(struct nfsv3_stats));
+			stats->nfsv3 = gsh_calloc(1, sizeof(struct nfsv3_stats),
+						  MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv3;
@@ -422,7 +428,8 @@ static struct clnt_allops_v3_stats *get_v3_all(struct gsh_clnt_allops_stats *st,
 		if (st->nfsv3 == NULL)
 			st->nfsv3 =
 				gsh_calloc(1,
-					   sizeof(struct clnt_allops_v3_stats));
+					   sizeof(struct clnt_allops_v3_stats),
+					   MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return st->nfsv3;
@@ -434,7 +441,8 @@ static struct mnt_stats *get_mnt(struct gsh_stats *stats,
 	if (unlikely(stats->mnt == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->mnt == NULL)
-			stats->mnt = gsh_calloc(1, sizeof(struct mnt_stats));
+			stats->mnt = gsh_calloc(1, sizeof(struct mnt_stats),
+						MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->mnt;
@@ -448,7 +456,8 @@ static struct nlmv4_stats *get_nlm4(struct gsh_stats *stats,
 	if (unlikely(stats->nlm4 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nlm4 == NULL)
-			stats->nlm4 = gsh_calloc(1, sizeof(struct nlmv4_stats));
+			stats->nlm4 = gsh_calloc(1, sizeof(struct nlmv4_stats),
+						 MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nlm4;
@@ -460,8 +469,10 @@ get_nlm4_all(struct gsh_clnt_allops_stats *stats, pthread_rwlock_t *lock)
 	if (unlikely(stats->nlm4 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nlm4 == NULL)
-			stats->nlm4 = gsh_calloc(
-				1, sizeof(struct clnt_allops_nlm_stats));
+			stats->nlm4 =
+				gsh_calloc(1,
+					   sizeof(struct clnt_allops_nlm_stats),
+					   MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nlm4;
@@ -475,8 +486,9 @@ static struct rquota_stats *get_rquota(struct gsh_stats *stats,
 	if (unlikely(stats->rquota == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->rquota == NULL)
-			stats->rquota =
-				gsh_calloc(1, sizeof(struct rquota_stats));
+			stats->rquota = gsh_calloc(1,
+						   sizeof(struct rquota_stats),
+						   MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->rquota;
@@ -489,8 +501,9 @@ static struct nfsv40_stats *get_v40(struct gsh_stats *stats,
 	if (unlikely(stats->nfsv40 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv40 == NULL)
-			stats->nfsv40 =
-				gsh_calloc(1, sizeof(struct nfsv40_stats));
+			stats->nfsv40 = gsh_calloc(1,
+						   sizeof(struct nfsv40_stats),
+						   MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv40;
@@ -502,8 +515,9 @@ static struct nfsv41_stats *get_v41(struct gsh_stats *stats,
 	if (unlikely(stats->nfsv41 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv41 == NULL)
-			stats->nfsv41 =
-				gsh_calloc(1, sizeof(struct nfsv41_stats));
+			stats->nfsv41 = gsh_calloc(1,
+						   sizeof(struct nfsv41_stats),
+						   MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv41;
@@ -515,8 +529,9 @@ static struct nfsv41_stats *get_v42(struct gsh_stats *stats,
 	if (unlikely(stats->nfsv42 == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->nfsv42 == NULL)
-			stats->nfsv42 =
-				gsh_calloc(1, sizeof(struct nfsv41_stats));
+			stats->nfsv42 = gsh_calloc(1,
+						   sizeof(struct nfsv41_stats),
+						   MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv42;
@@ -530,7 +545,8 @@ get_v4_all(struct gsh_clnt_allops_stats *stats, pthread_rwlock_t *lock)
 		if (stats->nfsv4 == NULL)
 			stats->nfsv4 =
 				gsh_calloc(1,
-					   sizeof(struct clnt_allops_v4_stats));
+					   sizeof(struct clnt_allops_v4_stats),
+					   MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->nfsv4;
@@ -542,7 +558,8 @@ static struct _9p_stats *get_9p(struct gsh_stats *stats, pthread_rwlock_t *lock)
 	if (unlikely(stats->_9p == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->_9p == NULL)
-			stats->_9p = gsh_calloc(1, sizeof(struct _9p_stats));
+			stats->_9p = gsh_calloc(1, sizeof(struct _9p_stats),
+						MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 	return stats->_9p;
@@ -1305,8 +1322,9 @@ void server_stats_9p_done(u8 opc, struct _9p_request_data *req9p)
 		server_st = container_of(client, struct server_stats, client);
 		sp = get_9p(&server_st->st, &client->client_lock);
 		if (sp->opcodes[opc] == NULL)
-			sp->opcodes[opc] =
-				gsh_calloc(1, sizeof(struct proto_op));
+			sp->opcodes[opc] = gsh_calloc(1,
+						      sizeof(struct proto_op),
+						      MEM_COMP_PROTOCOL);
 		record_op(sp->opcodes[opc], 0, true, false);
 	}
 
@@ -1317,8 +1335,9 @@ void server_stats_9p_done(u8 opc, struct _9p_request_data *req9p)
 		exp_st = container_of(export, struct export_stats, export);
 		sp = get_9p(&exp_st->st, &export->exp_lock);
 		if (sp->opcodes[opc] == NULL)
-			sp->opcodes[opc] =
-				gsh_calloc(1, sizeof(struct proto_op));
+			sp->opcodes[opc] = gsh_calloc(1,
+						      sizeof(struct proto_op),
+						      MEM_COMP_PROTOCOL);
 		record_op(sp->opcodes[opc], 0, true, false);
 	}
 }
@@ -1565,8 +1584,8 @@ void check_deleg_struct(struct gsh_stats *stats, pthread_rwlock_t *lock)
 	if (unlikely(stats->deleg == NULL)) {
 		PTHREAD_RWLOCK_wrlock(lock);
 		if (stats->deleg == NULL)
-			stats->deleg =
-				gsh_calloc(1, sizeof(struct deleg_stats));
+			stats->deleg = gsh_calloc(1, sizeof(struct deleg_stats),
+						  MEM_COMP_PROTOCOL);
 		PTHREAD_RWLOCK_unlock(lock);
 	}
 }
@@ -2516,10 +2535,14 @@ void server_dbus_nfsmon_iostats(struct export_stats *export_st,
 	struct xfer_op *op_read = NULL;
 	struct xfer_op *op_write = NULL;
 
-	op_preread = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op));
-	op_prewrite = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op));
-	op_read = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op));
-	op_write = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op));
+	op_preread = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op),
+						  MEM_COMP_PROTOCOL);
+	op_prewrite = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op),
+						   MEM_COMP_PROTOCOL);
+	op_read = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op),
+					       MEM_COMP_PROTOCOL);
+	op_write = (struct xfer_op *)gsh_calloc(1, sizeof(struct xfer_op),
+						MEM_COMP_PROTOCOL);
 
 	server_nfsmon_export_iostats(export_st, op_preread, op_prewrite);
 	sleep(1);
@@ -2531,10 +2554,10 @@ void server_dbus_nfsmon_iostats(struct export_stats *export_st,
 	server_dbus_iostats(op_read, iter);
 	server_dbus_iostats(op_write, iter);
 
-	gsh_free(op_preread);
-	gsh_free(op_prewrite);
-	gsh_free(op_read);
-	gsh_free(op_write);
+	gsh_free(op_preread, MEM_COMP_PROTOCOL);
+	gsh_free(op_prewrite, MEM_COMP_PROTOCOL);
+	gsh_free(op_read, MEM_COMP_PROTOCOL);
+	gsh_free(op_write, MEM_COMP_PROTOCOL);
 }
 
 void server_dbus_fill_io(DBusMessageIter *array_iter, uint16_t *export_id,
@@ -3001,36 +3024,36 @@ void server_stats_free(struct gsh_stats *statsp)
 {
 #ifdef _USE_NFS3
 	if (statsp->nfsv3 != NULL) {
-		gsh_free(statsp->nfsv3);
+		gsh_free(statsp->nfsv3, MEM_COMP_PROTOCOL);
 		statsp->nfsv3 = NULL;
 	}
 	if (statsp->mnt != NULL) {
-		gsh_free(statsp->mnt);
+		gsh_free(statsp->mnt, MEM_COMP_PROTOCOL);
 		statsp->mnt = NULL;
 	}
 #endif
 #ifdef _USE_NLM
 	if (statsp->nlm4 != NULL) {
-		gsh_free(statsp->nlm4);
+		gsh_free(statsp->nlm4, MEM_COMP_PROTOCOL);
 		statsp->nlm4 = NULL;
 	}
 #endif
 #ifdef _USE_RQUOTA
 	if (statsp->rquota != NULL) {
-		gsh_free(statsp->rquota);
+		gsh_free(statsp->rquota, MEM_COMP_PROTOCOL);
 		statsp->rquota = NULL;
 	}
 #endif
 	if (statsp->nfsv40 != NULL) {
-		gsh_free(statsp->nfsv40);
+		gsh_free(statsp->nfsv40, MEM_COMP_PROTOCOL);
 		statsp->nfsv40 = NULL;
 	}
 	if (statsp->nfsv41 != NULL) {
-		gsh_free(statsp->nfsv41);
+		gsh_free(statsp->nfsv41, MEM_COMP_PROTOCOL);
 		statsp->nfsv41 = NULL;
 	}
 	if (statsp->nfsv42 != NULL) {
-		gsh_free(statsp->nfsv42);
+		gsh_free(statsp->nfsv42, MEM_COMP_PROTOCOL);
 		statsp->nfsv42 = NULL;
 	}
 #ifdef _USE_9P
@@ -3039,9 +3062,10 @@ void server_stats_free(struct gsh_stats *statsp)
 
 		for (opc = 0; opc <= _9P_RWSTAT; opc++) {
 			if (statsp->_9p->opcodes[opc] != NULL)
-				gsh_free(statsp->_9p->opcodes[opc]);
+				gsh_free(statsp->_9p->opcodes[opc],
+					 MEM_COMP_PROTOCOL);
 		}
-		gsh_free(statsp->_9p);
+		gsh_free(statsp->_9p, MEM_COMP_PROTOCOL);
 		statsp->_9p = NULL;
 	}
 #endif
@@ -3060,17 +3084,17 @@ void server_stats_allops_free(struct gsh_clnt_allops_stats *statsp)
 {
 #ifdef _USE_NFS3
 	if (statsp->nfsv3 != NULL) {
-		gsh_free(statsp->nfsv3);
+		gsh_free(statsp->nfsv3, MEM_COMP_PROTOCOL);
 		statsp->nfsv3 = NULL;
 	}
 #endif
 	if (statsp->nfsv4 != NULL) {
-		gsh_free(statsp->nfsv4);
+		gsh_free(statsp->nfsv4, MEM_COMP_PROTOCOL);
 		statsp->nfsv4 = NULL;
 	}
 #ifdef _USE_NLM
 	if (statsp->nlm4 != NULL) {
-		gsh_free(statsp->nlm4);
+		gsh_free(statsp->nlm4, MEM_COMP_PROTOCOL);
 		statsp->nlm4 = NULL;
 	}
 #endif
@@ -3157,6 +3181,273 @@ void reset_v4_full_stats(void)
 		v4_full_stats[op].latency.latency = 0;
 		v4_full_stats[op].latency.min = 0;
 		v4_full_stats[op].latency.max = 0;
+	}
+}
+
+struct mem_component_info MemComponents[MEM_COMP_MAX] = {
+	[MEM_COMP_INIT] = {
+		.mem_comp_name = "MEM_COMP_INIT",
+		.mem_comp_str = "INIT",},
+	[MEM_COMP_FSAL] = {
+		.mem_comp_name = "MEM_COMP_FSAL",
+		.mem_comp_str = "FSAL",},
+	[MEM_COMP_PROTOCOL] = {
+		.mem_comp_name = "MEM_COMP_PROTOCOL",
+		.mem_comp_str = "PROTOCOL",},
+	[MEM_COMP_FILE_AND_STATE_LOCK] = {
+		.mem_comp_name = "MEM_COMP_FILE_AND_STATE_LOCK",
+		.mem_comp_str = "FILE_AND_STATE_LOCK",},
+	[MEM_COMP_IO_BUFFER] = {
+		.mem_comp_name = "MEM_COMP_IO_BUFFER",
+		.mem_comp_str = "IO_BUFFER",},
+	[MEM_COMP_SESSION] = {
+		.mem_comp_name = "MEM_COMP_SESSION",
+		.mem_comp_str = "SESSION",},
+	[MEM_COMP_CLIENT] = {
+		.mem_comp_name = "MEM_COMP_CLIENT",
+		.mem_comp_str = "CLIENT",},
+	[MEM_COMP_CACHE] = {
+		.mem_comp_name = "MEM_COMP_CACHE",
+		.mem_comp_str = "CACHE",},
+	[MEM_COMP_LIBNTIRPC] = {
+		.mem_comp_name = "MEM_COMP_LIBNTIRPC",
+		.mem_comp_str = "LIBNTIRPC",},
+	[MEM_COMP_DIGEST_POOL] = {
+		.mem_comp_name = "MEM_COMP_DIGEST_POOL",
+		.mem_comp_str = "DIGEST_POOL",},
+	[MEM_COMP_HANDLE_POOL] = {
+		.mem_comp_name = "MEM_COMP_HANDLE_POOL",
+		.mem_comp_str = "HANDLE_POOL",},
+	[MEM_COMP_DB_THREAD_POOL] = {
+		.mem_comp_name = "MEM_COMP_DB_THREAD_POOL",
+		.mem_comp_str = "DB_THREAD_POOL",},
+	[MEM_COMP_DROP_POOL] = {
+		.mem_comp_name = "MEM_COMP_DROP_POOL",
+		.mem_comp_str = "DROP_POOL",},
+	[MEM_COMP_MDCACHE_POOL] = {
+		.mem_comp_name = "MEM_COMP_MDCACHE_POOL",
+		.mem_comp_str = "MDCACHE_POOL",},
+	[MEM_COMP_NFSV4_SESSION_POOL] = {
+		.mem_comp_name = "MEM_COMP_NFSV4_SESSION_POOL",
+		.mem_comp_str = "NFS4_SESSION_POOL",},
+	[MEM_COMP_DUP_REQ_POOL] = {
+		.mem_comp_name = "MEM_COMP_DUP_REQ_POOL",
+		.mem_comp_str = "DUP_REQ_POOL",},
+	[MEM_COMP_NFS_RES_POOL] = {
+		.mem_comp_name = "MEM_COMP_NFS_RES_POOL",
+		.mem_comp_str = "NFS_RES_POOL",},
+	[MEM_COMP_TCP_DRC_POOL] = {
+		.mem_comp_name = "MEM_COMP_TCP_DRC_POOL",
+		.mem_comp_str = "TCP_DRC_POOL",},
+	[MEM_COMP_NFS4_CLIENT_ID_POOL] = {
+		.mem_comp_name = "MEM_COMP_NFS4_CLIENT_ID_POOL",
+		.mem_comp_str = "CLIENT_ID_POOL",},
+	[MEM_COMP_NFS4_STATE_OWNER_POOL] = {
+		.mem_comp_name = "MEM_COMP_NFS4_STATE_OWNER_POOL",
+		.mem_comp_str = "STATE_OWNER_POOL",},
+	[MEM_COMP_NODE_POOL] = {
+		.mem_comp_name = "MEM_COMP_NODE_POOL",
+		.mem_comp_str = "NODE_POOL",},
+	[MEM_COMP_DATA_POOL] = {
+		.mem_comp_name = "MEM_COMP_DATA_POOL",
+		.mem_comp_str = "DATA_POOL",},
+	[MEM_COMP_ACL_POOL] = {
+		.mem_comp_name = "MEM_COMP_ACL_POOL",
+		.mem_comp_str = "ACL_POOL",},
+	[MEM_COMP_MISC] = {
+		.mem_comp_name = "MEM_COMP_MISC",
+		.mem_comp_str = "MISC",},
+	[MEM_COMP_GTEST] = {
+		.mem_comp_name = "MEM_COMP_GTEST",
+		.mem_comp_str = "GTEST",}
+};
+
+char *mem_stat_names[] = {
+	"Total_Alloc_Calls",	      "Total_Free_Calls",
+	"Total_Alloc_Bytes",	      "Total_Freed_Bytes",
+	"Total_Current_Active_Bytes", "Total_Peak_Active_Bytes"
+};
+
+void gsh_mem_stats_update_alloc(void *p, mem_components_t comp)
+{
+	size_t size;
+	uint64_t current_bytes;
+	uint64_t prev_peak_bytes;
+
+	if (gsh_mem_stats_enabled) {
+		/* Check for NULL pointer */
+		if (!p) {
+			LogWarn(COMPONENT_MEM_ALLOC,
+				"Memory statistics update"
+				" alloc failed for Component: %d",
+				comp);
+			return;
+		}
+
+		/* Fetch the actual allocated size */
+		size = malloc_usable_size(p);
+
+		atomic_inc_uint64_t(&gshMC[comp].total_alloc_calls);
+		atomic_add_uint64_t(&gshMC[comp].total_alloc_bytes, size);
+
+		current_bytes =
+			atomic_add_uint64_t(&gshMC[comp].current_active_bytes,
+					    size);
+		prev_peak_bytes =
+			atomic_fetch_uint64_t(&gshMC[comp].peak_active_bytes);
+
+		if (current_bytes > prev_peak_bytes)
+			atomic_store_uint64_t(&gshMC[comp].peak_active_bytes,
+					      current_bytes);
+
+		if (gsh_mem_stats_logging_enabled) {
+			LogFullDebug(COMPONENT_MEM_ALLOC,
+				     "Component: %s, Alloc_Calls: %" PRIu64
+				     " Free_Calls: %" PRIu64
+				     " Alloc_Bytes: %" PRIu64
+				     " Freed_Bytes: %" PRIu64
+				     " Current_Active_Bytes: %" PRIu64
+				     " Peak_Active_Bytes: %" PRIu64
+				     " Alloc_Size: %" PRIu64,
+				     MemComponents[comp].mem_comp_str,
+				     gshMC[comp].total_alloc_calls,
+				     gshMC[comp].total_free_calls,
+				     gshMC[comp].total_alloc_bytes,
+				     gshMC[comp].total_freed_bytes,
+				     gshMC[comp].current_active_bytes,
+				     gshMC[comp].peak_active_bytes, size);
+		}
+	}
+}
+
+void gsh_mem_stats_update_free(void *p, mem_components_t comp)
+{
+	size_t size;
+	uint64_t current_bytes;
+
+	if (gsh_mem_stats_enabled) {
+		/* Check for NULL pointer */
+		if (!p) {
+			LogWarn(COMPONENT_MEM_ALLOC,
+				"Memory statistics update"
+				" free failed for Component: %d",
+				comp);
+			return;
+		}
+
+		/* Fetch the actual free size */
+		size = malloc_usable_size(p);
+
+		atomic_inc_uint64_t(&gshMC[comp].total_free_calls);
+		atomic_add_uint64_t(&gshMC[comp].total_freed_bytes, size);
+
+		current_bytes = atomic_fetch_uint64_t(
+			&gshMC[comp].current_active_bytes);
+
+		if (current_bytes >= size)
+			atomic_sub_uint64_t(&gshMC[comp].current_active_bytes,
+					    size);
+		else
+			atomic_store_uint64_t(&gshMC[comp].current_active_bytes,
+					      0);
+
+		if (gsh_mem_stats_logging_enabled) {
+			LogFullDebug(COMPONENT_MEM_ALLOC,
+				     "Component: %s, Alloc_Calls: %" PRIu64
+				     " Free_Calls: %" PRIu64
+				     " Alloc_Bytes: %" PRIu64
+				     " Freed_Bytes: %" PRIu64
+				     " Current_Active_Bytes: %" PRIu64
+				     " Peak_Active_Bytes: %" PRIu64
+				     " Free_Size: %" PRIu64,
+				     MemComponents[comp].mem_comp_str,
+				     gshMC[comp].total_alloc_calls,
+				     gshMC[comp].total_free_calls,
+				     gshMC[comp].total_alloc_bytes,
+				     gshMC[comp].total_freed_bytes,
+				     gshMC[comp].current_active_bytes,
+				     gshMC[comp].peak_active_bytes, size);
+		}
+	}
+}
+
+uint64_t gsh_mem_stats_get_stat_by_index_and_comp(uint32_t index,
+						  mem_components_t comp)
+{
+	uint64_t value;
+
+	if (index < MAX_MEMORY_STATS_FIELD_COUNT && comp < MEM_COMP_MAX) {
+		switch (index) {
+		case 0:
+			value = gshMC[comp].total_alloc_calls;
+			break;
+		case 1:
+			value = gshMC[comp].total_free_calls;
+			break;
+		case 2:
+			value = gshMC[comp].total_alloc_bytes;
+			break;
+		case 3:
+			value = gshMC[comp].total_freed_bytes;
+			break;
+		case 4:
+			value = gshMC[comp].current_active_bytes;
+			break;
+		case 5:
+			value = gshMC[comp].peak_active_bytes;
+			break;
+		default:
+			value = 0;
+			break;
+		}
+	}
+
+	return value;
+}
+
+const char *gsh_mem_stats_get_mem_comp_str(mem_components_t comp)
+{
+	if (comp >= MEM_COMP_MAX)
+		return NULL;
+
+	return MemComponents[comp].mem_comp_str;
+}
+
+void gsh_log_mem_stats(void)
+{
+	for (uint16_t comp = MEM_COMP_INIT; comp < MEM_COMP_MAX; comp++) {
+		LogAlways(COMPONENT_MEM_ALLOC,
+			  "Component: %s, Alloc_Calls: %" PRIu64
+			  " Free_Calls: %" PRIu64 " Alloc_Bytes: %" PRIu64
+			  " Freed_Bytes: %" PRIu64
+			  " Current_Active_Bytes: %" PRIu64
+			  " Peak_Active_Bytes: %" PRIu64,
+			  MemComponents[comp].mem_comp_str,
+			  gshMC[comp].total_alloc_calls,
+			  gshMC[comp].total_free_calls,
+			  gshMC[comp].total_alloc_bytes,
+			  gshMC[comp].total_freed_bytes,
+			  gshMC[comp].current_active_bytes,
+			  gshMC[comp].peak_active_bytes);
+	}
+}
+
+void gsh_mem_stats_reset(void)
+{
+	uint16_t mem_comp;
+	struct gsh_mem_stats *mem_stats;
+
+	for (mem_comp = MEM_COMP_INIT; mem_comp < MEM_COMP_MAX; mem_comp++) {
+		mem_stats = &gshMC[mem_comp];
+
+		/* Reset Memory stats counter */
+		(void)atomic_store_uint64_t(&mem_stats->total_alloc_calls, 0);
+		(void)atomic_store_uint64_t(&mem_stats->total_free_calls, 0);
+		(void)atomic_store_uint64_t(&mem_stats->total_alloc_bytes, 0);
+		(void)atomic_store_uint64_t(&mem_stats->total_freed_bytes, 0);
+		(void)atomic_store_uint64_t(&mem_stats->current_active_bytes,
+					    0);
+		(void)atomic_store_uint64_t(&mem_stats->peak_active_bytes, 0);
 	}
 }
 

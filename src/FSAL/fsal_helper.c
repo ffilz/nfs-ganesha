@@ -1898,7 +1898,7 @@ fsal_status_t get_optional_attrs(struct fsal_obj_handle *obj_hdl,
 
 static void fsal_iov_release(void *release_data)
 {
-	gsh_free(release_data);
+	gsh_free(release_data, MEM_COMP_IO_BUFFER);
 }
 
 /**
@@ -1956,8 +1956,8 @@ void fsal_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	if (!op_ctx->fsal_export->exp_ops.fs_supports(
 		    op_ctx->fsal_export, fso_allocate_own_read_buffer)) {
 		/* FSAL will not allocate a buffer, so allocate one. */
-		read_arg->iov[0].iov_base =
-			gsh_malloc(read_arg->iov[0].iov_len);
+		read_arg->iov[0].iov_base = gsh_malloc(read_arg->iov[0].iov_len,
+						       MEM_COMP_IO_BUFFER);
 		/* Set up release function */
 		read_arg->iov_release = fsal_iov_release;
 		read_arg->release_data = read_arg->iov[0].iov_base;
@@ -2123,7 +2123,7 @@ next_name1:
 		goto out;
 	}
 
-	names = gsh_calloc(count, sizeof(*names));
+	names = gsh_calloc(count, sizeof(*names), MEM_COMP_FSAL);
 
 	assert(start);
 	name = start;
@@ -2165,8 +2165,8 @@ out:
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 out_error:
 	for (i = 0; i < count; ++i)
-		gsh_free(names[i].utf8string_val);
-	gsh_free(names);
+		gsh_free(names[i].utf8string_val, MEM_COMP_MISC);
+	gsh_free(names, MEM_COMP_FSAL);
 	return status;
 }
 

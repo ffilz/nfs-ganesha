@@ -243,7 +243,8 @@ int nfs3_readdir(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	tracker.entries = get_buffer_for_io_response(tracker.mem_avail, NULL);
 	/* If buffer was not assigned, let's allocate it */
 	if (tracker.entries == NULL)
-		tracker.entries = gsh_malloc(tracker.mem_avail);
+		tracker.entries =
+			gsh_malloc(tracker.mem_avail, MEM_COMP_IO_BUFFER);
 
 	xdrmem_create(&tracker.xdr, (char *)tracker.entries, tracker.mem_avail,
 		      XDR_ENCODE);
@@ -356,8 +357,9 @@ int nfs3_readdir(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		pos_end = xdr_getpos(&tracker.xdr);
 
 		/* Get an xdr_uio and fill it in */
-		uio = gsh_calloc(1, sizeof(struct xdr_uio) +
-					    sizeof(struct xdr_uio));
+		uio = gsh_calloc(
+			1, sizeof(struct xdr_uio) + sizeof(struct xdr_uio),
+			MEM_COMP_IO_BUFFER);
 		uio->uio_release = xdr_dirlist3_uio_release;
 		uio->uio_count = 1;
 		uio->uio_vio[0].vio_base = tracker.entries;
@@ -393,7 +395,7 @@ out:
 
 	if (tracker.entries) {
 		if (!op_ctx->is_rdma_buff_used)
-			gsh_free(tracker.entries);
+			gsh_free(tracker.entries, MEM_COMP_IO_BUFFER);
 		tracker.entries = NULL;
 	}
 
