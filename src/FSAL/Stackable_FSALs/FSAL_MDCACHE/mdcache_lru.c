@@ -948,7 +948,8 @@ struct dir_chunk *mdcache_get_chunk(mdcache_entry_t *parent,
 			     chunk);
 	} else {
 		/* alloc chunk (if fails, aborts) */
-		chunk = gsh_calloc(1, sizeof(struct dir_chunk));
+		chunk = gsh_calloc(1, sizeof(struct dir_chunk),
+				   MEM_COMP_MDCACHE);
 		glist_init(&chunk->dirents);
 		LogFullDebug(COMPONENT_MDCACHE, "New chunk %p.", chunk);
 		(void)atomic_inc_int64_t(&lru_state.chunks_used);
@@ -1703,7 +1704,8 @@ mdcache_entry_t *alloc_cache_entry(void)
 {
 	mdcache_entry_t *nentry;
 
-	nentry = pool_alloc(mdcache_entry_pool);
+	nentry = gsh_calloc(1, mdcache_entry_pool->object_size,
+			    MEM_COMP_MDCACHE);
 
 	/* Initialize the entry locks */
 	init_rw_locks(nentry);
@@ -1965,7 +1967,7 @@ bool _mdcache_lru_unref(mdcache_entry_t *entry, uint32_t flags,
 		QUNLOCK(qlane);
 
 		mdcache_lru_clean(entry);
-		pool_free(mdcache_entry_pool, entry);
+		gsh_free(entry, MEM_COMP_MDCACHE);
 		freed = true;
 
 		(void)atomic_dec_int64_t(&lru_state.entries_used);
@@ -2034,7 +2036,7 @@ void _mdcache_lru_unref_chunk(struct dir_chunk *chunk, const char *func,
 
 		/* And now we can free the chunk. */
 		LogFullDebug(COMPONENT_MDCACHE, "Freeing chunk %p", chunk);
-		gsh_free(chunk);
+		gsh_free(chunk, MEM_COMP_MDCACHE);
 	}
 	QUNLOCK(qlane);
 }
@@ -2126,13 +2128,13 @@ void mdc_lru_map_dirent(mdcache_dir_entry_t *dirent)
 					 mdcache_dmap_entry_t, lru_entry);
 		mdc_lru_dirmap_del(exp, dmap);
 		/* Free name */
-		gsh_free(dmap->name);
+		gsh_free(dmap->name, MEM_COMP_MDCACHE);
 	} else {
-		dmap = gsh_malloc(sizeof(*dmap));
+		dmap = gsh_malloc(sizeof(*dmap), MEM_COMP_MDCACHE);
 	}
 
 	dmap->ck = dirent->ck;
-	dmap->name = gsh_strdup(dirent->name);
+	dmap->name = gsh_strdup(dirent->name, MEM_COMP_MDCACHE);
 	now(&dmap->timestamp);
 	LogFullDebug(COMPONENT_NFS_READDIR, "Mapping %s -> %" PRIx64 " %p:%d",
 		     dmap->name, dmap->ck, exp, exp->dirent_map.count);
@@ -2182,7 +2184,7 @@ fsal_cookie_t *mdc_lru_unmap_dirent(uint64_t ck)
 		     dmap->name, dmap->ck);
 
 	/* Don't free name, we're passing it back to the caller */
-	gsh_free(dmap);
+	gsh_free(dmap, MEM_COMP_MDCACHE);
 
 	return (fsal_cookie_t *)name;
 }
@@ -2223,8 +2225,8 @@ static void dirmap_lru_run(struct fridgethr_context *ctx)
 			goto out;
 		}
 		mdc_lru_dirmap_del(exp, cur);
-		gsh_free(cur->name);
-		gsh_free(cur);
+		gsh_free(cur->name, MEM_COMP_MDCACHE);
+		gsh_free(cur, MEM_COMP_MDCACHE);
 		cur = next;
 	}
 

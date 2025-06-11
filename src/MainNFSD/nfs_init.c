@@ -85,6 +85,7 @@
 #include "nfs_qos.h"
 #include "nfs_metrics.h"
 #include "sal_metrics.h"
+#include "server_stats.h"
 
 pthread_mutexattr_t default_mutex_attr;
 pthread_rwlockattr_t default_rwlock_attr;
@@ -1031,7 +1032,7 @@ int nfsv4_init_params(void)
 		owner_len = strlen(cid_server_owner);
 		ss_suffix_len = strlen(cid_server_scope_suffix);
 		scope_len = owner_len + ss_suffix_len;
-		cid_server_scope = gsh_malloc(scope_len + 1);
+		cid_server_scope = gsh_malloc(scope_len + 1, MEM_COMP_CONFIG);
 		memcpy(cid_server_scope, cid_server_owner, owner_len);
 		memcpy(cid_server_scope + owner_len, cid_server_scope_suffix,
 		       ss_suffix_len + 1);
@@ -1063,6 +1064,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	dbus_export_init();
 	dbus_client_init();
 	dbus_cache_init();
+	dbus_mem_stats_init();
 #ifdef ENABLE_QOS
 	dbus_qosmgr_init();
 #endif
@@ -1082,8 +1084,11 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	 */
 	exports_pkginit();
 
-	nfs41_session_pool = pool_basic_init("NFSv4.1 session pool",
-					     sizeof(nfs41_session_t));
+	nfs41_session_pool = (pool_t *)gsh_malloc(sizeof(pool_t),
+						  MEM_COMP_CLIENT);
+	nfs41_session_pool->object_size = sizeof(nfs41_session_t);
+	nfs41_session_pool->name = gsh_strdup("NFSv4.1 session pool",
+					      MEM_COMP_CLIENT);
 
 	/* Init the NFSv4 Clientid cache */
 	LogDebug(COMPONENT_INIT, "Now building NFSv4 clientid cache");
@@ -1366,6 +1371,9 @@ void nfs_start(nfs_start_info_t *p_start_info)
 
 	/* Regular exit */
 	LogEvent(COMPONENT_MAIN, "NFS EXIT: regular exit");
+
+	/* Always capture Memory Stats in case of shutdown */
+	gsh_log_mem_stats();
 
 	nfs_init_cleanup();
 

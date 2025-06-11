@@ -141,7 +141,8 @@ static void fs_create_clid_name(nfs_client_id_t *clientid)
 			cidstr_len + str_client_addr_len + 5 + cidstr_lenx_len;
 
 		/* hold both long form clientid and IP */
-		clientid->cid_recov_tag = gsh_malloc(total_size);
+		clientid->cid_recov_tag = gsh_malloc(total_size,
+						     MEM_COMP_CLIENT);
 
 		/* Can't overrun and shouldn't return EOVERFLOW or EINVAL */
 		(void)snprintf(clientid->cid_recov_tag, total_size,
@@ -580,7 +581,7 @@ static void fs_rm_clid_impl(int position, char *recov_dir, int len,
 	 * which is parent path + '/' + new segment
 	 */
 	total_len = parent_len + segment_len + 2;
-	path = gsh_malloc(total_len);
+	path = gsh_malloc(total_len, MEM_COMP_FILE_AND_STATE_LOCK);
 
 	memcpy(path, parent_path, parent_len);
 	path[parent_len] = '/';
@@ -605,7 +606,7 @@ static void fs_rm_clid_impl(int position, char *recov_dir, int len,
 		LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
 			    "Removed client dir (%s)", path);
 	}
-	gsh_free(path);
+	gsh_free(path, MEM_COMP_FILE_AND_STATE_LOCK);
 }
 
 void fs_rm_clid(nfs_client_id_t *clientid)
@@ -669,7 +670,7 @@ void fs_rm_clid(nfs_client_id_t *clientid)
 		clientid->cid_recov_tag = NULL;
 		fs_rm_clid_impl(0, recov_dir, strlen(recov_dir), v4_recov_dir,
 				v4_recov_dir_len);
-		gsh_free(recov_dir);
+		gsh_free(recov_dir, MEM_COMP_CLIENT);
 	}
 }
 
@@ -869,13 +870,15 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 		 * subdirectory until reaching the end.
 		 */
 		segment_len = strlen(dentp->d_name);
-		sub_path = gsh_concat_sep(parent_path, '/', dentp->d_name);
+		sub_path = gsh_concat_sep(parent_path, '/', dentp->d_name,
+					  MEM_COMP_RECOVERY);
 
 		/* if tgtdir is not NULL, we need to build
 		 * nfs4old/currentnode
 		 */
 		if (tgtdir) {
-			new_path = gsh_concat_sep(tgtdir, '/', dentp->d_name);
+			new_path = gsh_concat_sep(tgtdir, '/', dentp->d_name,
+						  MEM_COMP_RECOVERY);
 
 			rc = mkdir(new_path, 0700);
 
@@ -890,7 +893,7 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 		/* reading the directory structure */
 		total_clid_len = segment_len + 1 + clid_str_len;
 
-		build_clid = gsh_malloc(total_clid_len);
+		build_clid = gsh_malloc(total_clid_len, MEM_COMP_RECOVERY);
 
 		if (clid_str)
 			memcpy(build_clid, clid_str, clid_str_len);
@@ -901,7 +904,8 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 		rc = fs_read_recov_clids_impl(sub_path, build_clid, new_path,
 					      takeover, add_clid_entry,
 					      add_rfh_entry);
-		gsh_free(new_path);
+		if (new_path != NULL)
+			gsh_free(new_path, MEM_COMP_RECOVERY);
 
 		/* after recursion, if the subdir has no non-hidden
 		 * directory this is the end of this clientid str. Add
@@ -920,32 +924,32 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 				LogEvent(COMPONENT_RECOVERY,
 					 "invalid clid format: %s, too long",
 					 build_clid);
-				gsh_free(sub_path);
-				gsh_free(build_clid);
+				gsh_free(sub_path, MEM_COMP_RECOVERY);
+				gsh_free(build_clid, MEM_COMP_RECOVERY);
 				continue;
 			}
 			ptr = strchr(build_clid, '(');
 			if (ptr == NULL) {
 				LogEvent(COMPONENT_RECOVERY,
 					 "invalid clid format: %s", build_clid);
-				gsh_free(sub_path);
-				gsh_free(build_clid);
+				gsh_free(sub_path, MEM_COMP_RECOVERY);
+				gsh_free(build_clid, MEM_COMP_RECOVERY);
 				continue;
 			}
 			ptr2 = strchr(ptr, ':');
 			if (ptr2 == NULL) {
 				LogEvent(COMPONENT_RECOVERY,
 					 "invalid clid format: %s", build_clid);
-				gsh_free(sub_path);
-				gsh_free(build_clid);
+				gsh_free(sub_path, MEM_COMP_RECOVERY);
+				gsh_free(build_clid, MEM_COMP_RECOVERY);
 				continue;
 			}
 			len = ptr2 - ptr - 1;
 			if (len >= 9) {
 				LogEvent(COMPONENT_RECOVERY,
 					 "invalid clid format: %s", build_clid);
-				gsh_free(sub_path);
-				gsh_free(build_clid);
+				gsh_free(sub_path, MEM_COMP_RECOVERY);
+				gsh_free(build_clid, MEM_COMP_RECOVERY);
 				continue;
 			}
 			memcpy(temp, ptr + 1, len + 1);
@@ -965,7 +969,7 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 					new_ent->cl_name, reclaim_complete);
 			}
 		}
-		gsh_free(build_clid);
+		gsh_free(build_clid, MEM_COMP_RECOVERY);
 		/* If this is not for takeover, remove the directory
 		 * hierarchy  that represent the current clientid
 		 */
@@ -986,7 +990,7 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 				}
 			}
 		}
-		gsh_free(sub_path);
+		gsh_free(sub_path, MEM_COMP_RECOVERY);
 	}
 
 	(void)closedir(dp);
@@ -1194,7 +1198,8 @@ void fs_clean_old_recov_dir_impl(char *parent_path)
 			continue;
 
 		/* Assemble the path */
-		path = gsh_concat_sep(parent_path, '/', dentp->d_name);
+		path = gsh_concat_sep(parent_path, '/', dentp->d_name,
+				      MEM_COMP_RECOVERY);
 
 		if (dentp->d_type == DT_REG) {
 			/* Remove regular files: revoked file handles */
@@ -1223,7 +1228,7 @@ void fs_clean_old_recov_dir_impl(char *parent_path)
 				 "unknown dentry type %c:%s", dentp->d_type,
 				 path);
 		}
-		gsh_free(path);
+		gsh_free(path, MEM_COMP_RECOVERY);
 	}
 	(void)closedir(dp);
 }
