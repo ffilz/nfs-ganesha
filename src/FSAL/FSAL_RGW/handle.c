@@ -1446,8 +1446,9 @@ struct state_t *rgw_alloc_state(struct fsal_export *exp_hdl,
 				enum state_type state_type,
 				struct state_t *related_state)
 {
-	return init_state(gsh_calloc(1, sizeof(struct rgw_open_state)), NULL,
-			  state_type, related_state);
+	return init_state(gsh_calloc(1, sizeof(struct rgw_open_state),
+				     MEM_COMP_FILE_AND_STATE_LOCK),
+			  NULL, state_type, related_state);
 }
 
 /**
@@ -1611,7 +1612,7 @@ static int getxattr_cb(rgw_xattrlist *attrs, void *arg, uint32_t flags)
 	xattrvalue4 *cb_arg = (xattrvalue4 *)arg;
 
 	copy_into_utf8string(cb_arg, attrs->xattrs->val.val,
-			     attrs->xattrs->val.len);
+			     attrs->xattrs->val.len, MEM_COMP_PROTOCOL);
 
 	return 0;
 }
@@ -1790,7 +1791,8 @@ static int lsxattr_cb(rgw_xattrlist *attrs, void *arg, uint32_t flag)
 			    XATTR_USER_PREFIX_LEN))
 			return 0;
 
-		copy_into_utf8string(entry, xattr->key.val, xattr->key.len);
+		copy_into_utf8string(entry, xattr->key.val, xattr->key.len,
+				     MEM_COMP_PROTOCOL);
 
 		cb_arg->names->xl4_count++;
 
@@ -1835,7 +1837,8 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 
 	/* XXX: ffilz: the doc in fsal_api strongly implies this buffer is pre-allocated,
 	 * but it's not */
-	lr_names->xl4_entries = gsh_calloc(la_maxcount, sizeof(xattrlist4));
+	lr_names->xl4_entries =
+		gsh_calloc(la_maxcount, sizeof(xattrlist4), MEM_COMP_PROTOCOL);
 	lr_names->xl4_count = 0; /* defensive */
 	cb_arg.names = lr_names;
 	cb_arg.max = la_maxcount;

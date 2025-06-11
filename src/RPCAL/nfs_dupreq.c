@@ -295,7 +295,8 @@ static inline void init_shared_drc(void)
 
 		drc->xt.cachesz = drc->cachesz;
 		xp->cache = gsh_calloc(drc->cachesz,
-				       sizeof(struct opr_rbtree_node *));
+				       sizeof(struct opr_rbtree_node *),
+				       MEM_COMP_DUP_REQ_POOL);
 	}
 }
 
@@ -316,14 +317,24 @@ void dupreq2_pkginit(void)
 {
 	int code __attribute__((unused)) = 0;
 
-	dupreq_pool = pool_basic_init("Duplicate Request Pool",
-				      sizeof(dupreq_entry_t));
+	dupreq_pool =
+		(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DUP_REQ_POOL);
+	dupreq_pool->object_size = sizeof(dupreq_entry_t);
+	dupreq_pool->name =
+		gsh_strdup("Duplicate Request Pool", MEM_COMP_DUP_REQ_POOL);
 
-	nfs_res_pool = pool_basic_init("nfs_res_t pool", sizeof(nfs_res_t));
+	nfs_res_pool =
+		(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_NFS_RES_POOL);
+	nfs_res_pool->object_size = sizeof(nfs_res_t);
+	nfs_res_pool->name =
+		gsh_strdup("nfs_res_t pool", MEM_COMP_NFS_RES_POOL);
 
-	tcp_drc_pool = pool_basic_init("TCP DRC Pool", sizeof(drc_t));
+	tcp_drc_pool =
+		(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_TCP_DRC_POOL);
+	tcp_drc_pool->object_size = sizeof(drc_t);
+	tcp_drc_pool->name = gsh_strdup("TCP DRC Pool", MEM_COMP_TCP_DRC_POOL);
 
-	drc_st = gsh_calloc(1, sizeof(struct drc_st));
+	drc_st = gsh_calloc(1, sizeof(struct drc_st), MEM_COMP_DUP_REQ_POOL);
 
 	/* init shared statics */
 	PTHREAD_MUTEX_init(&drc_st->drc_st_mtx, NULL);
@@ -398,7 +409,8 @@ static inline enum drc_type get_drc_type(struct svc_req *req)
  */
 static inline drc_t *alloc_tcp_drc(enum drc_type dtype)
 {
-	drc_t *drc = pool_alloc(tcp_drc_pool);
+	drc_t *drc =
+		gsh_calloc(1, tcp_drc_pool->object_size, MEM_COMP_TCP_DRC_POOL);
 	int ix, code __attribute__((unused)) = 0;
 
 	drc->type = dtype; /* DRC_TCP_V3 or DRC_TCP_V4 */
@@ -429,7 +441,8 @@ static inline drc_t *alloc_tcp_drc(enum drc_type dtype)
 
 		drc->xt.cachesz = drc->cachesz;
 		xp->cache = gsh_calloc(drc->cachesz,
-				       sizeof(struct opr_rbtree_node *));
+				       sizeof(struct opr_rbtree_node *),
+				       MEM_COMP_TCP_DRC_POOL);
 	}
 
 	return drc;
@@ -448,12 +461,12 @@ static inline void free_tcp_drc(drc_t *drc)
 
 	for (ix = 0; ix < drc->npart; ++ix) {
 		if (drc->xt.tree[ix].cache)
-			gsh_free(drc->xt.tree[ix].cache);
+			gsh_free(drc->xt.tree[ix].cache, MEM_COMP_TCP_DRC_POOL);
 	}
 	rbtx_cleanup(&drc->xt);
 	PTHREAD_MUTEX_destroy(&drc->drc_mtx);
 	LogFullDebug(COMPONENT_DUPREQ, "free TCP drc %p", drc);
-	pool_free(tcp_drc_pool, drc);
+	gsh_free(drc, MEM_COMP_TCP_DRC_POOL);
 }
 
 /**
@@ -869,7 +882,7 @@ static inline dupreq_entry_t *alloc_dupreq(void)
 {
 	dupreq_entry_t *dv;
 
-	dv = pool_alloc(dupreq_pool);
+	dv = gsh_calloc(1, dupreq_pool->object_size, MEM_COMP_DUP_REQ_POOL);
 	PTHREAD_MUTEX_init(&dv->dre_mtx, NULL);
 	TAILQ_INIT_ENTRY(dv, fifo_q);
 	TAILQ_INIT(&dv->dupes);
@@ -898,10 +911,10 @@ static inline void nfs_dupreq_free_dupreq(dupreq_entry_t *dv)
 	if (dv->res) {
 		func = nfs_dupreq_func(dv);
 		func->free_function(dv->res);
-		free_nfs_res(dv->res);
+		gsh_free(dv->res, MEM_COMP_NFS_RES_POOL);
 	}
 	PTHREAD_MUTEX_destroy(&dv->dre_mtx);
-	pool_free(dupreq_pool, dv);
+	gsh_free(dv, MEM_COMP_DUP_REQ_POOL);
 }
 
 /**
@@ -1144,7 +1157,8 @@ dupreq_status_t nfs_dupreq_start(nfs_request_t *reqnfs)
 		} else {
 			/* new request */
 			reqnfs->svc.rq_u1 = dk;
-			dk->res = alloc_nfs_res();
+			dk->res = gsh_calloc(1, nfs_res_pool->object_size,
+					     MEM_COMP_NFS_RES_POOL);
 			reqnfs->res_nfs = reqnfs->svc.rq_u2 = dk->res;
 
 			/* cache--can exceed drc->maxsize */
@@ -1178,7 +1192,8 @@ dupreq_status_t nfs_dupreq_start(nfs_request_t *reqnfs)
 
 no_cache:
 	reqnfs->svc.rq_u1 = DUPREQ_NOCACHE;
-	reqnfs->res_nfs = reqnfs->svc.rq_u2 = alloc_nfs_res();
+	reqnfs->res_nfs = reqnfs->svc.rq_u2 =
+		gsh_calloc(1, nfs_res_pool->object_size, MEM_COMP_NFS_RES_POOL);
 	return DUPREQ_SUCCESS;
 }
 
@@ -1419,7 +1434,7 @@ void nfs_dupreq_rele(nfs_request_t *reqnfs)
 		LogFullDebug(COMPONENT_DUPREQ, "releasing no-cache res %p",
 			     reqnfs->svc.rq_u2);
 		reqnfs->funcdesc->free_function(reqnfs->svc.rq_u2);
-		free_nfs_res(reqnfs->svc.rq_u2);
+		gsh_free(reqnfs->svc.rq_u2, MEM_COMP_NFS_RES_POOL);
 		goto out;
 	}
 

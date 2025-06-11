@@ -284,14 +284,16 @@ static inline void tmp_get_exp_paths(struct tmp_export_paths *tmp,
 	if (gr != NULL)
 		tmp->tmp_fullpath = gsh_refstr_get(gr);
 	else
-		tmp->tmp_fullpath = gsh_refstr_dup(exp->cfg_fullpath);
+		tmp->tmp_fullpath =
+			gsh_refstr_dup(exp->cfg_fullpath, MEM_COMP_EXPORT);
 
 	gr = rcu_dereference(exp->pseudopath);
 
 	if (gr != NULL)
 		tmp->tmp_pseudopath = gsh_refstr_get(gr);
 	else if (exp->cfg_pseudopath != NULL)
-		tmp->tmp_pseudopath = gsh_refstr_dup(exp->cfg_pseudopath);
+		tmp->tmp_pseudopath =
+			gsh_refstr_dup(exp->cfg_pseudopath, MEM_COMP_EXPORT);
 	else
 		tmp->tmp_pseudopath = gsh_refstr_get(no_export);
 
@@ -317,6 +319,7 @@ static inline bool op_ctx_export_has_option_set(uint32_t option)
 void export_pkginit(void);
 #ifdef USE_DBUS
 void dbus_export_init(void);
+void dbus_mem_stats_init(void);
 #endif
 struct gsh_export *alloc_export(void);
 bool insert_gsh_export(struct gsh_export *a_export);

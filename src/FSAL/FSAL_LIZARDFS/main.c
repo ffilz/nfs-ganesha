@@ -164,7 +164,8 @@ static fsal_status_t lzfs_fsal_create_export(
 	int rc;
 	struct fsal_pnfs_ds *pds = NULL;
 
-	lzfs_export = gsh_calloc(1, sizeof(struct lzfs_fsal_export));
+	lzfs_export =
+		gsh_calloc(1, sizeof(struct lzfs_fsal_export), MEM_COMP_EXPORT);
 
 	fsal_export_init(&lzfs_export->export);
 	lzfs_fsal_export_ops_init(&lzfs_export->export.exp_ops);
@@ -185,7 +186,8 @@ static fsal_status_t lzfs_fsal_create_export(
 		}
 	}
 
-	lzfs_export->lzfs_params.subfolder = gsh_strdup(CTX_FULLPATH(op_ctx));
+	lzfs_export->lzfs_params.subfolder =
+		gsh_strdup(CTX_FULLPATH(op_ctx), MEM_COMP_EXPORT);
 	lzfs_export->lzfs_instance =
 		liz_init_with_params(&lzfs_export->lzfs_params);
 
@@ -293,7 +295,7 @@ error:
 		if (lzfs_export->fileinfo_cache) {
 			liz_destroy_fileinfo_cache(lzfs_export->fileinfo_cache);
 		}
-		gsh_free(lzfs_export);
+		gsh_free(lzfs_export, MEM_COMP_EXPORT);
 	}
 
 	return status;

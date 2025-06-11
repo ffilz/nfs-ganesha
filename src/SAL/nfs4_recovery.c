@@ -187,7 +187,7 @@ char *nfs4_create_clid_name(nfs_client_id_t *clientid, size_t *len)
 		 * encoded string is simply cidstr.
 		 */
 		total_size = cidstr_len + 1;
-		encoded = gsh_malloc(total_size);
+		encoded = gsh_malloc(total_size, MEM_COMP_CLIENT);
 
 		memcpy(encoded, cidstr, total_size);
 	} else {
@@ -204,7 +204,7 @@ char *nfs4_create_clid_name(nfs_client_id_t *clientid, size_t *len)
 		 */
 		client_addr_len = strlen(str_client_addr);
 		total_size = cidstr_len + client_addr_len + 2;
-		encoded = gsh_malloc(total_size);
+		encoded = gsh_malloc(total_size, MEM_COMP_CLIENT);
 
 		memcpy(encoded, str_client_addr, client_addr_len);
 		encoded[client_addr_len] = '-';
@@ -222,7 +222,8 @@ char *nfs4_create_clid_name(nfs_client_id_t *clientid, size_t *len)
 
 clid_entry_t *nfs4_add_clid_entry(char *cl_name, bool reclaim_complete)
 {
-	clid_entry_t *new_ent = gsh_malloc(sizeof(clid_entry_t));
+	clid_entry_t *new_ent =
+		gsh_malloc(sizeof(clid_entry_t), MEM_COMP_RECOVERY);
 
 	glist_init(&new_ent->cl_rfh_list);
 	(void)strlcpy(new_ent->cl_name, cl_name, sizeof(new_ent->cl_name));
@@ -236,9 +237,9 @@ clid_entry_t *nfs4_add_clid_entry(char *cl_name, bool reclaim_complete)
 
 rdel_fh_t *nfs4_add_rfh_entry(clid_entry_t *clid_ent, char *rfh_name)
 {
-	rdel_fh_t *new_ent = gsh_malloc(sizeof(rdel_fh_t));
+	rdel_fh_t *new_ent = gsh_malloc(sizeof(rdel_fh_t), MEM_COMP_RECOVERY);
 
-	new_ent->rdfh_handle_str = gsh_strdup(rfh_name);
+	new_ent->rdfh_handle_str = gsh_strdup(rfh_name, MEM_COMP_RECOVERY);
 	glist_add(&clid_ent->cl_rfh_list, &new_ent->rdfh_list);
 	return new_ent;
 }
@@ -250,7 +251,7 @@ void nfs4_cleanup_clid_entries(void)
 	while ((clid_entry = glist_first_entry(&clid_list, struct clid_entry,
 					       cl_list)) != NULL) {
 		glist_del(&clid_entry->cl_list);
-		gsh_free(clid_entry);
+		gsh_free(clid_entry, MEM_COMP_RECOVERY);
 		--clid_count;
 	}
 	assert(clid_count == 0);
@@ -878,13 +879,13 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	 * Either the backend doesn't support get_nodeid or it handed back a
 	 * NULL pointer. Just use hostname.
 	 */
-	hostname = gsh_malloc(MAXNAMLEN + 1);
+	hostname = gsh_malloc(MAXNAMLEN + 1, MEM_COMP_RECOVERY);
 	rc = gsh_gethostname(hostname, MAXNAMLEN + 1,
 			     nfs_param.core_param.enable_AUTHSTATS);
 	if (rc != 0) {
 		LogEvent(COMPONENT_RECOVERY, "gethostname failed: %d", errno);
 		rc = -errno;
-		gsh_free(hostname);
+		gsh_free(hostname, MEM_COMP_RECOVERY);
 		return rc;
 	}
 
@@ -892,12 +893,12 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	copylen = strlen(hostname);
 	if (copylen > maxlen)
 		copylen = maxlen;
-	nodeid = gsh_malloc(copylen + 1);
+	nodeid = gsh_malloc(copylen + 1, MEM_COMP_RECOVERY);
 	memcpy(nodeid, hostname, copylen);
 	nodeid[copylen] = '\0';
 
 	*pnodeid = nodeid;
-	gsh_free(hostname);
+	gsh_free(hostname, MEM_COMP_RECOVERY);
 
 	return rc;
 }
