@@ -51,7 +51,7 @@ static void memstream_grow(struct memstream *ms, size_t newsize)
 	char *buf;
 
 	if (newsize > *ms->lenp) {
-		buf = gsh_realloc(*ms->cp, newsize + 1);
+		buf = gsh_realloc(*ms->cp, newsize + 1, MEM_COMP_MISC);
 #ifdef DEBUG
 		fprintf(stderr, "MS: %p growing from %zd to %zd\n", ms,
 			*ms->lenp, newsize);
@@ -129,7 +129,7 @@ static fpos_t memstream_seek(void *cookie, fpos_t pos, int whence)
 
 static int memstream_close(void *cookie)
 {
-	gsh_free(cookie);
+	gsh_free(cookie, MEM_COMP_MISC);
 	return 0;
 }
 
@@ -141,7 +141,7 @@ FILE *open_memstream(char **cp, size_t *lenp)
 
 	*cp = NULL;
 	*lenp = 0;
-	ms = gsh_malloc(sizeof(*ms));
+	ms = gsh_malloc(sizeof(*ms), MEM_COMP_MISC);
 	ms->cp = cp;
 	ms->lenp = lenp;
 	ms->offset = 0;
@@ -149,7 +149,7 @@ FILE *open_memstream(char **cp, size_t *lenp)
 		     memstream_close);
 	if (fp == NULL) {
 		save_errno = errno;
-		gsh_free(ms);
+		gsh_free(ms, MEM_COMP_MISC);
 		errno = save_errno;
 	}
 	return fp;

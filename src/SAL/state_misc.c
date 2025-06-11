@@ -855,7 +855,7 @@ void free_state_owner(state_owner_t *owner)
 		return;
 	}
 
-	gsh_free(owner->so_owner_val);
+	gsh_free(owner->so_owner_val, MEM_COMP_FILE_AND_STATE_LOCK);
 
 	PTHREAD_MUTEX_destroy(&owner->so_mutex);
 
@@ -867,7 +867,7 @@ void free_state_owner(state_owner_t *owner)
 	PTHREAD_MUTEX_unlock(&all_state_owners_mutex);
 #endif
 
-	pool_free(state_owner_pool, owner);
+	gsh_free(owner, MEM_COMP_NFS4_STATE_OWNER_POOL);
 }
 
 /**
@@ -1172,7 +1172,8 @@ not_found:
 		return NULL;
 	}
 
-	owner = pool_alloc(state_owner_pool);
+	owner = gsh_calloc(1, state_owner_pool->object_size,
+			   MEM_COMP_NFS4_STATE_OWNER_POOL);
 
 	/* Copy everything over */
 	memcpy(owner, key, sizeof(*key));
@@ -1192,7 +1193,8 @@ not_found:
 		init_owner(owner);
 
 	if (key->so_owner_len != 0) {
-		owner->so_owner_val = gsh_malloc(key->so_owner_len);
+		owner->so_owner_val = gsh_malloc(key->so_owner_len,
+						 MEM_COMP_FILE_AND_STATE_LOCK);
 
 		memcpy(owner->so_owner_val, key->so_owner_val,
 		       key->so_owner_len);

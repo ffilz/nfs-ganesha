@@ -478,7 +478,7 @@ static inline void free_state(struct state_t *state)
 	if (state->state_free != NULL)
 		state->state_free(state);
 	else
-		gsh_free(state);
+		gsh_free(state, MEM_COMP_FILE_AND_STATE_LOCK);
 }
 
 /* Macros to compare and copy state_t to a struct stateid4 */

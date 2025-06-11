@@ -42,6 +42,72 @@
 
 #include <sys/types.h>
 
+extern bool gsh_mem_stats_enabled;
+extern const char *mem_stat_names[];
+extern struct timespec mem_stats_time;
+
+/*
+ * @brief Ganesha per-component memory statistics
+ *
+ * Enable/disable of accounting is global
+ * (gsh_mem_stats_enabled), not per-struct.
+ */
+struct gsh_mem_stats {
+	/*
+	 * Lifetime: monotonic for the process; never cleared by
+	 * gsh_mem_stats_reset() or D-Bus reset.
+	 * # of gsh_mem_stats_update_alloc() calls since start.
+	 */
+	uint64_t lifetime_alloc_calls;
+	/* # of gsh_mem_stats_update_free() calls since start. */
+	uint64_t lifetime_free_calls;
+	/* Total bytes in alloc paths since start (per-call size, summed). */
+	uint64_t lifetime_alloc_bytes;
+	/* Total bytes in free paths since start (per-call size, summed). */
+	uint64_t lifetime_freed_bytes;
+
+	/*
+	 * Interval: zeroed on reset; use for "since last reset" rates and
+	 * byte volume. # of alloc calls in the current interval.
+	 */
+	uint64_t interval_alloc_calls;
+	/* # of free calls in the current interval. */
+	uint64_t interval_free_calls;
+	/* Total alloc bytes in the current interval. */
+	uint64_t interval_alloc_bytes;
+	/* Total free bytes in the current interval. */
+	uint64_t interval_freed_bytes;
+
+	/*
+	 * Balance and peaks: current/peak are live; reset refreshes
+	 * baseline/interval_peak relative to the new interval.
+	 * Best-effort outstanding bytes (net of alloc/free) for this comp.
+	 */
+	uint64_t current_active_bytes;
+	/* Lifetime high-water of current_active_bytes. */
+	uint64_t peak_active_bytes;
+	/*
+	 * current_active_bytes at last reset;
+	 * interval delta is (current - baseline).
+	 */
+	uint64_t baseline_active_bytes;
+	/*
+	 * Max of (current_active_bytes - baseline) since
+	 * last reset (not max of current alone).
+	 */
+	uint64_t interval_peak_active_delta;
+};
+
+struct mem_stats_info {
+	const char *mem_stat_name; /* stat name */
+};
+
+/*
+ * If adding any new value to gsh_mem_stats
+ * structure then increment the MAX_MEMORY_STATS_FIELD_COUNT
+ */
+#define MAX_MEMORY_STATS_FIELD_COUNT 12
+
 void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup);
 
 #ifdef _USE_9P
@@ -64,6 +130,15 @@ void dec_grants(struct gsh_client *client);
 void inc_revokes(struct gsh_client *client);
 void inc_recalls(struct gsh_client *client);
 void inc_failed_recalls(struct gsh_client *client);
+
+void gsh_mem_stats_update_alloc(void *p, mem_components_t comp);
+void gsh_mem_stats_update_free(void *p, mem_components_t comp);
+uint64_t gsh_mem_stats_get_stat_by_index_and_comp(uint32_t index,
+						  mem_components_t comp);
+/** comp is gshMC[] index: 0 = libntirpc, 1+ = Ganesha mem_components_t. */
+const char *gsh_mem_stats_get_mem_comp_str(mem_components_t comp);
+void gsh_log_mem_stats(void);
+void gsh_mem_stats_reset(void);
 
 #endif /* !SERVER_STATS_H */
 /** @} */
