@@ -161,7 +161,7 @@ char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *size)
 	lsize = str_client_addr_len + 2 + cidstr_lenx_len + 1 + cidstr_len + 2;
 
 	/* hold both long form clientid and IP */
-	val = gsh_malloc(lsize);
+	val = gsh_malloc(lsize, MEM_COMP_RECOVERY);
 	memcpy(val, str_client_addr, str_client_addr_len);
 	total_len = str_client_addr_len;
 	memcpy(val + total_len, "-(", 2);
@@ -421,7 +421,7 @@ int set_nodeid(void)
 		maxlen = MAXNAMLEN;
 	}
 
-	nodeid = gsh_malloc(maxlen + 1);
+	nodeid = gsh_malloc(maxlen + 1, MEM_COMP_RECOVERY);
 
 	/* check nodeid override with "I" option */
 	if (g_nodeid >= 0) {
@@ -510,7 +510,7 @@ int rados_kv_init(void)
 	set_nodeid();
 	nodeid_len = strlen(nodeid);
 	len = nodeid_len + 6 + 1;
-	recov_oid = gsh_refstr_alloc(len);
+	recov_oid = gsh_refstr_alloc(len, MEM_COMP_RECOVERY);
 	gsh_refstr_get(recov_oid);
 
 	/* Can't overrun and shouldn't return EOVERFLOW or EINVAL */
@@ -518,7 +518,7 @@ int rados_kv_init(void)
 	rcu_set_pointer(&rados_recov_oid, recov_oid);
 
 	len = nodeid_len + 4 + 1;
-	old_oid = gsh_refstr_alloc(len);
+	old_oid = gsh_refstr_alloc(len, MEM_COMP_RECOVERY);
 	gsh_refstr_get(old_oid);
 
 	/* Can't overrun and shouldn't return EOVERFLOW or EINVAL */
@@ -583,7 +583,7 @@ void rados_kv_add_clid_impl(nfs_client_id_t *clientid, char *recov_obj)
 	if (ret < 0) {
 		LogEvent(COMPONENT_RECOVERY, "Failed to add clid %lu",
 			 clientid->cid_clientid);
-		gsh_free(cval);
+		gsh_free(cval, MEM_COMP_RECOVERY);
 	} else {
 		clientid->cid_recov_tag = cval;
 	}
@@ -643,7 +643,7 @@ static void rados_kv_pop_clid_entry(char *key, char *val, size_t val_len,
 	bool takeover = pop_args->takeover;
 
 	/* extract clid records */
-	dupval = gsh_malloc(val_len + 1);
+	dupval = gsh_malloc(val_len + 1, MEM_COMP_RECOVERY);
 	memcpy(dupval, val, val_len);
 	dupval[val_len] = '\0';
 
@@ -668,7 +668,7 @@ static void rados_kv_pop_clid_entry(char *key, char *val, size_t val_len,
 			LogEvent(COMPONENT_RECOVERY, "Failed to move %s", key);
 		}
 	}
-	gsh_free(dupval);
+	gsh_free(dupval, MEM_COMP_RECOVERY);
 
 	if (!takeover) {
 		if (old) {
@@ -791,7 +791,7 @@ void rados_kv_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 	char *cval;
 	struct gsh_refstr *recov_oid;
 
-	cval = gsh_malloc(RADOS_VAL_MAX_LEN);
+	cval = gsh_malloc(RADOS_VAL_MAX_LEN, MEM_COMP_RECOVERY);
 
 	rados_kv_create_key(delr_clid, ckey, sizeof(ckey));
 	rcu_read_lock();
@@ -815,7 +815,7 @@ void rados_kv_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 	}
 out:
 	gsh_refstr_put(recov_oid);
-	gsh_free(cval);
+	gsh_free(cval, MEM_COMP_RECOVERY);
 }
 
 int rados_kv_get_nodeid(char **pnodeid)

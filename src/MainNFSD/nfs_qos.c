@@ -246,7 +246,7 @@ static inline uint64_t get_time_future_useconds(uint64_t ctime,
  */
 qos_class_t *allocate_qos_class(qos_class_type_t class_type)
 {
-	qos_class_t *node = gsh_calloc(1, sizeof(qos_class_t));
+	qos_class_t *node = gsh_calloc(1, sizeof(qos_class_t), MEM_COMP_QOS);
 
 	node->type = class_type;
 	PTHREAD_MUTEX_init(&(node->lock), NULL);
@@ -271,7 +271,7 @@ static qos_client_entry_t *alloc_clientdetails_pe(compound_data_t *data)
 {
 	qos_client_entry_t *new_entry = NULL;
 
-	new_entry = gsh_calloc(1, sizeof(qos_client_entry_t));
+	new_entry = gsh_calloc(1, sizeof(qos_client_entry_t), MEM_COMP_QOS);
 	new_entry->gsh_client = op_ctx->client;
 	new_entry->data = data;
 	new_entry->rq_xprt = data->req->rq_xprt;
@@ -292,7 +292,7 @@ static inline struct qos_op_cb_arg *alloc_qos_cb_args(void *caller_data,
 {
 	struct qos_op_cb_arg *qos_cb_args = NULL;
 
-	qos_cb_args = gsh_calloc(1, sizeof(struct qos_op_cb_arg));
+	qos_cb_args = gsh_calloc(1, sizeof(struct qos_op_cb_arg), MEM_COMP_QOS);
 	qos_cb_args->caller_data = caller_data;
 	qos_cb_args->ratecontrol = ratecontrol;
 	return qos_cb_args;
@@ -310,7 +310,8 @@ static inline timer_entry_t *create_timer_entry(uint64_t expiry,
 						void (*callback)(void *),
 						void *args)
 {
-	timer_entry_t *new_entry = gsh_calloc(1, sizeof(timer_entry_t));
+	timer_entry_t *new_entry =
+		gsh_calloc(1, sizeof(timer_entry_t), MEM_COMP_QOS);
 
 	new_entry->expiry = expiry;
 	new_entry->callback = callback;
@@ -419,7 +420,7 @@ static inline void resume_timer_entry(timer_entry_t *entry)
 
 	entry->callback(entry->args);
 	glist_del(&entry->timer_list);
-	gsh_free(entry);
+	gsh_free(entry, MEM_COMP_QOS);
 }
 
 /**
@@ -630,7 +631,7 @@ static inline void pepc_free_client_list(struct glist_head *head)
 	glist_for_each_safe(glist, glistn, head) {
 		qos_class = glist_entry(glist, qos_class_t, clients);
 		glist_del(&qos_class->clients);
-		gsh_free(qos_class);
+		gsh_free(qos_class, MEM_COMP_QOS);
 	}
 }
 
@@ -806,7 +807,7 @@ bool pepc_per_export_free_mem_iter(struct gsh_export *gsh_export, void *state)
 	if (sub_qos_class) {
 		QOS_PRINT_EXPORT("freeing client for export", gsh_export);
 		qos_drain_ios(sub_qos_class);
-		gsh_free(sub_qos_class);
+		gsh_free(sub_qos_class, MEM_COMP_QOS);
 	} else {
 		QOS_PRINT_EXPORT("tried client for export", gsh_export);
 		QOS_PRINT_CLIENT(__func__, ((struct gsh_client *)state));
@@ -847,9 +848,9 @@ void qos_free_mem(void *gsh_ptr, qos_class_type_t class_type)
 	case QOS_PER_EXPORT_ENABLED:
 		if (class_type == QOS_EXPORT) {
 			qos_drain_ios(export->qos_class);
-			gsh_free(export->qos_class);
+			gsh_free(export->qos_class, MEM_COMP_QOS);
 			if (export->qos_block)
-				gsh_free(export->qos_block);
+				gsh_free(export->qos_block, MEM_COMP_QOS);
 			export->qos_class = NULL;
 			export->qos_block = NULL;
 		}
@@ -857,7 +858,7 @@ void qos_free_mem(void *gsh_ptr, qos_class_type_t class_type)
 	case QOS_PER_CLIENT_ENABLED:
 		if (class_type == QOS_CLIENT && client->qos_class) {
 			qos_drain_ios(client->qos_class);
-			gsh_free(client->qos_class);
+			gsh_free(client->qos_class, MEM_COMP_QOS);
 			client->qos_class = NULL;
 		}
 		break;
@@ -877,16 +878,17 @@ void qos_free_mem(void *gsh_ptr, qos_class_type_t class_type)
 			pepc_free_client_list(&qos_class->clients);
 			PTHREAD_MUTEX_unlock(&qos_class->lock);
 			qos_drain_ios(qos_class);
-			gsh_free(export->qos_class);
+			gsh_free(export->qos_class, MEM_COMP_QOS);
 			if (export->qos_block)
-				gsh_free(export->qos_block);
+				gsh_free(export->qos_block, MEM_COMP_QOS);
 			export->qos_class = NULL;
 			export->qos_block = NULL;
 		} else {
 			QOS_PRINT_CLIENT("trying to free from all exports",
 					 ((struct gsh_client *)gsh_ptr));
 			foreach_gsh_export(pepc_per_export_free_mem_iter, false,
-					   client);
+					   client)
+				;
 		}
 		break;
 	default:
@@ -1350,7 +1352,8 @@ void qos_perexport_insert(struct gsh_export *gsh_export,
 		if (!gsh_export->qos_block) {
 			qos_block_config_t *new_block;
 
-			new_block = gsh_calloc(1, sizeof(qos_block_config_t));
+			new_block = gsh_calloc(1, sizeof(qos_block_config_t),
+					       MEM_COMP_QOS);
 			*new_block = *lqos_block;
 			gsh_export->qos_block = new_block;
 		}
@@ -1976,7 +1979,7 @@ static inline void refresh_qos_client(struct glist_head *clients,
 				 client->rq_xprt, client->epoll_disabled,
 				 rq_xprt);
 			glist_del(&client->token_ex_cl);
-			gsh_free(client);
+			gsh_free(client, MEM_COMP_QOS);
 			if (epd) {
 				svc_rqst_qos_resume_socket(rq_xprt);
 				epd = 0;
@@ -2093,13 +2096,16 @@ static inline void refresh_qos_token(void)
 			 g_qos_config->qos_type);
 		break;
 	case QOS_PER_EXPORT_ENABLED:
-		foreach_gsh_export(ps_token_control_iter, false, &op_type);
+		foreach_gsh_export(ps_token_control_iter, false, &op_type)
+			;
 		break;
 	case QOS_PER_CLIENT_ENABLED:
-		foreach_gsh_client(pc_token_control_iter, &op_type);
+		foreach_gsh_client(pc_token_control_iter, &op_type)
+			;
 		break;
 	case QOS_PEREXPORT_PERCLIENT_ENABLED:
-		foreach_gsh_export(pepc_token_control_iter, false, &op_type);
+		foreach_gsh_export(pepc_token_control_iter, false, &op_type)
+			;
 		break;
 	default:
 		LogDebug(COMPONENT_QOS, " Something really wrong: %d",
@@ -2787,13 +2793,16 @@ static inline void resume_io(qos_op_type_t op_type)
 			 g_qos_config->qos_type);
 		break;
 	case QOS_PER_EXPORT_ENABLED:
-		foreach_gsh_export(ps_io_control_iter, false, &op_type);
+		foreach_gsh_export(ps_io_control_iter, false, &op_type)
+			;
 		break;
 	case QOS_PER_CLIENT_ENABLED:
-		foreach_gsh_client(pc_io_control_iter, &op_type);
+		foreach_gsh_client(pc_io_control_iter, &op_type)
+			;
 		break;
 	case QOS_PEREXPORT_PERCLIENT_ENABLED:
-		foreach_gsh_export(pepc_io_control_iter, false, &op_type);
+		foreach_gsh_export(pepc_io_control_iter, false, &op_type)
+			;
 		break;
 	default:
 		LogDebug(COMPONENT_QOS, " Something really wrong: %d",
@@ -2949,10 +2958,12 @@ static inline void stop_qos_io(void)
 		break;
 	case QOS_PEREXPORT_PERCLIENT_ENABLED:
 	case QOS_PER_EXPORT_ENABLED:
-		foreach_gsh_export(pe_stop_iter, false, NULL);
+		foreach_gsh_export(pe_stop_iter, false, NULL)
+			;
 		break;
 	case QOS_PER_CLIENT_ENABLED:
-		foreach_gsh_client(pc_stop_iter, NULL);
+		foreach_gsh_client(pc_stop_iter, NULL)
+			;
 		break;
 	}
 }

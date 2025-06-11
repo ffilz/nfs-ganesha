@@ -303,7 +303,10 @@ static int init_db_thread_info(db_thread_info_t *p_thr_info,
 	PTHREAD_MUTEX_init(&p_thr_info->pool_mutex, NULL);
 
 	p_thr_info->dbop_pool =
-		pool_basic_init("drop_pool", sizeof(db_op_item_t));
+		(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DROP_POOL);
+	p_thr_info->dbop_pool->object_size = sizeof(db_op_item_t);
+	p_thr_info->dbop_pool->name =
+		gsh_strdup("drop_pool", MEM_COMP_DROP_POOL);
 
 	return HANDLEMAP_SUCCESS;
 }
@@ -744,7 +747,7 @@ static void *database_worker_thread(void *arg)
 
 		/* free the db operation item */
 		PTHREAD_MUTEX_lock(&p_info->pool_mutex);
-		pool_free(p_info->dbop_pool, to_be_done);
+		gsh_free(to_be_done, MEM_COMP_DB_THREAD_POOL);
 		PTHREAD_MUTEX_unlock(&p_info->pool_mutex);
 
 	} /* loop forever */
@@ -918,7 +921,8 @@ int handlemap_db_reaload_all(hash_table_t *target_hash)
 		/* get a new db operation  */
 		PTHREAD_MUTEX_lock(&db_thread[i].pool_mutex);
 
-		new_task = pool_alloc(db_thread[i].dbop_pool);
+		new_task = gsh_calloc(1, (db_thread[i].dbop_pool)->object_size,
+				      MEM_COMP_DB_THREAD_POOL);
 
 		PTHREAD_MUTEX_unlock(&db_thread[i].pool_mutex);
 
@@ -960,7 +964,8 @@ int handlemap_db_insert(nfs23_map_handle_t *p_in_nfs23_digest, const void *data,
 		/* get a new db operation  */
 		PTHREAD_MUTEX_lock(&db_thread[i].pool_mutex);
 
-		new_task = pool_alloc(db_thread[i].dbop_pool);
+		new_task = gsh_calloc(1, (db_thread[i].dbop_pool)->object_size,
+				      MEM_COMP_DB_THREAD_POOL);
 
 		PTHREAD_MUTEX_unlock(&db_thread[i].pool_mutex);
 
@@ -998,7 +1003,8 @@ int handlemap_db_delete(nfs23_map_handle_t *p_in_nfs23_digest)
 	/* get a new db operation  */
 	PTHREAD_MUTEX_lock(&db_thread[i].pool_mutex);
 
-	new_task = pool_alloc(db_thread[i].dbop_pool);
+	new_task = gsh_calloc(1, (db_thread[i].dbop_pool)->object_size,
+			      MEM_COMP_DB_THREAD_POOL);
 
 	PTHREAD_MUTEX_unlock(&db_thread[i].pool_mutex);
 

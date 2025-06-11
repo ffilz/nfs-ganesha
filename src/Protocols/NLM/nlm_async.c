@@ -42,7 +42,8 @@ pthread_cond_t nlm_async_resp_cond;
 int nlm_send_async_res_nlm4(state_nlm_client_t *host, state_async_func_t func,
 			    nfs_res_t *pres)
 {
-	state_async_queue_t *arg = gsh_malloc(sizeof(*arg));
+	state_async_queue_t *arg =
+		gsh_malloc(sizeof(*arg), MEM_COMP_FILE_AND_STATE_LOCK);
 	state_nlm_async_data_t *nlm_arg;
 	state_status_t status;
 
@@ -58,7 +59,7 @@ int nlm_send_async_res_nlm4(state_nlm_client_t *host, state_async_func_t func,
 	status = state_async_schedule(arg);
 
 	if (status != STATE_SUCCESS) {
-		gsh_free(arg);
+		gsh_free(arg, MEM_COMP_FILE_AND_STATE_LOCK);
 		return NFS_REQ_DROP;
 	}
 
@@ -68,7 +69,8 @@ int nlm_send_async_res_nlm4(state_nlm_client_t *host, state_async_func_t func,
 int nlm_send_async_res_nlm4test(state_nlm_client_t *host,
 				state_async_func_t func, nfs_res_t *pres)
 {
-	state_async_queue_t *arg = gsh_malloc(sizeof(*arg));
+	state_async_queue_t *arg =
+		gsh_malloc(sizeof(*arg), MEM_COMP_FILE_AND_STATE_LOCK);
 	state_nlm_async_data_t *nlm_arg;
 	state_status_t status;
 	nfs_res_t *res;
@@ -92,7 +94,7 @@ int nlm_send_async_res_nlm4test(state_nlm_client_t *host,
 
 	if (status != STATE_SUCCESS) {
 		nlm4_Test_Free(res);
-		gsh_free(arg);
+		gsh_free(arg, MEM_COMP_FILE_AND_STATE_LOCK);
 		return NFS_REQ_DROP;
 	}
 
@@ -266,8 +268,8 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 					&client_addr);
 
 				/* buf with inet is only needed for the port */
-				gsh_free(buf->buf);
-				gsh_free(buf);
+				gsh_free(buf->buf, MEM_COMP_LIBNTIRPC);
+				gsh_free(buf, MEM_COMP_LIBNTIRPC);
 
 				/* retry for spurious EAI_NONAME errors */
 				if (retval == EAI_NONAME ||
@@ -315,7 +317,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 					COMPONENT_NLM,
 					"Create NLM async %s connection to client %s %s",
 					client_type_str, caller_name, err);
-				gsh_free(err);
+				gsh_free(err, MEM_COMP_LIBNTIRPC);
 				CLNT_DESTROY(host->slc_callback_clnt);
 				host->slc_callback_clnt = NULL;
 				return -1;
@@ -331,7 +333,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 
 		LogFullDebug(COMPONENT_NLM, "About to make clnt_call");
 
-		cc = gsh_malloc(sizeof(*cc));
+		cc = gsh_malloc(sizeof(*cc), MEM_COMP_FILE_AND_STATE_LOCK);
 		clnt_req_fill(cc, host->slc_callback_clnt,
 			      host->slc_callback_auth, proc,
 			      (xdrproc_t)nlm_reply_proc[proc], inarg,
@@ -356,7 +358,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogCrit(COMPONENT_NLM, "NLM async Client procedure call %d %s",
 			proc, t);
-		gsh_free(t);
+		gsh_free(t, MEM_COMP_LIBNTIRPC);
 
 		clnt_req_release(cc);
 		CLNT_DESTROY(host->slc_callback_clnt);

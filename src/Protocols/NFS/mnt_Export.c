@@ -84,7 +84,8 @@ static bool proc_export(struct gsh_export *export, void *arg)
 		goto out;
 	}
 
-	new_expnode = gsh_calloc(1, sizeof(struct exportnode));
+	new_expnode =
+		gsh_calloc(1, sizeof(struct exportnode), MEM_COMP_PROTOCOL);
 
 	PTHREAD_RWLOCK_rdlock(&op_ctx->ctx_export->exp_lock);
 	PTHREAD_RWLOCK_rdlock(&export_opt_lock);
@@ -97,7 +98,8 @@ static bool proc_export(struct gsh_export *export, void *arg)
 			glist_entry(glist_item, struct base_client_entry,
 				    cle_list);
 
-		group = gsh_calloc(1, sizeof(struct groupnode));
+		group = gsh_calloc(1, sizeof(struct groupnode),
+				   MEM_COMP_PROTOCOL);
 
 		if (grp_tail == NULL)
 			new_expnode->ex_groups = group;
@@ -108,7 +110,8 @@ static bool proc_export(struct gsh_export *export, void *arg)
 		free_grp_name = false;
 		switch (client->type) {
 		case NETWORK_CLIENT:
-			grp_name = cidr_to_str(client->client.network.cidr);
+			grp_name = cidr_to_str(client->client.network.cidr,
+					       MEM_COMP_PROTOCOL);
 			if (grp_name == NULL) {
 				state->retval = errno;
 				grp_name = "Invalid Network Address";
@@ -133,9 +136,9 @@ static bool proc_export(struct gsh_export *export, void *arg)
 		}
 		LogFullDebug(COMPONENT_NFSPROTO, "Export %s client %s",
 			     ctx_export_path(op_ctx), grp_name);
-		group->gr_name = gsh_strdup(grp_name);
+		group->gr_name = gsh_strdup(grp_name, MEM_COMP_PROTOCOL);
 		if (free_grp_name)
-			gsh_free(grp_name);
+			gsh_free(grp_name, MEM_COMP_PROTOCOL);
 	}
 
 	PTHREAD_RWLOCK_unlock(&export_opt_lock);
@@ -213,13 +216,13 @@ void mnt_Export_Free(nfs_res_t *res)
 		while (grp != NULL) {
 			next_grp = grp->gr_next;
 			if (grp->gr_name != NULL)
-				gsh_free(grp->gr_name);
-			gsh_free(grp);
+				gsh_free(grp->gr_name, MEM_COMP_PROTOCOL);
+			gsh_free(grp, MEM_COMP_PROTOCOL);
 			grp = next_grp;
 		}
 		if (exp->ex_refdir != NULL)
 			gsh_refstr_put(exp->ex_refdir);
-		gsh_free(exp);
+		gsh_free(exp, MEM_COMP_PROTOCOL);
 		exp = next_exp;
 	}
 } /* mnt_Export_Free */

@@ -163,7 +163,7 @@ static void proxyv4_release(struct fsal_export *exp_hdl)
 
 	proxyv4_export_destroy(proxyv4_exp);
 
-	gsh_free(proxyv4_exp);
+	gsh_free(proxyv4_exp, MEM_COMP_FSAL);
 }
 
 static attrmask_t proxyv4_get_supported_attrs(struct fsal_export *exp_hdl)
@@ -188,7 +188,7 @@ fsal_status_t proxyv4_create_export(struct fsal_module *fsal_hdl,
 				    const struct fsal_up_vector *up_ops)
 {
 	fsal_status_t fsal_status = { 0, 0 };
-	struct proxyv4_export *exp = gsh_calloc(1, sizeof(*exp));
+	struct proxyv4_export *exp = gsh_calloc(1, sizeof(*exp), MEM_COMP_FSAL);
 	int rc;
 
 	/* export initial values */
@@ -246,6 +246,6 @@ err_free:
 
 	free_export_ops(&exp->exp);
 	proxyv4_export_destroy(exp);
-	gsh_free(exp);
+	gsh_free(exp, MEM_COMP_FSAL);
 	return fsal_status;
 }
