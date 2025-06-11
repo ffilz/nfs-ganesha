@@ -44,6 +44,32 @@
 #include <string.h>
 #include <assert.h>
 #include "log.h"
+#include <malloc.h>
+
+/* Memory Statistics Structures */
+typedef enum mem_components {
+	MEM_COMP_GANESHA,
+	MEM_COMP_LIBNTIRPC,
+	MEM_COMP_FSAL,
+	MEM_COMP_CACHE,
+	MEM_COMP_MISC,
+	MEM_COMP_MAX
+} mem_components_t;
+
+struct mem_component_info {
+	const char *mem_comp_name; /* component name */
+	const char *mem_comp_str; /* shorter, more useful name */
+};
+
+#define MEM_COMP MEM_COMP_GANESHA
+
+/* Memory Statistics API's */
+extern void gsh_update_alloc_stats(mem_components_t comp, size_t n);
+extern void gsh_update_free_stats(mem_components_t comp, size_t n);
+
+#define GSH_TOTAL_ALLOC_MEM(comp, alloc_sz) \
+	gsh_update_alloc_stats(comp, alloc_sz)
+#define GSH_TOTAL_FREE_MEM(comp, free_sz) gsh_update_free_stats(comp, free_sz)
 
 /**
  * @page GeneralAllocator General Allocator Shim
@@ -76,22 +102,27 @@ static inline void *gsh_malloc__(size_t n, const char *file, int line,
 				 const char *function)
 {
 	void *p = malloc(n);
-
 	if (p == NULL) {
 		LogMallocFailure(file, line, function, "gsh_malloc");
 		abort();
 	}
 
+	size_t alloc_sz = malloc_usable_size(p);
+
+	GSH_TOTAL_ALLOC_MEM(MEM_COMP, alloc_sz);
+
 	return p;
 }
 
-#define gsh_malloc(n)                 \
-	({                            \
-		void *p_ = malloc(n); \
-		if (p_ == NULL) {     \
-			abort();      \
-		}                     \
-		p_;                   \
+#define gsh_malloc(n)                                     \
+	({                                                \
+		void *p_ = malloc(n);                     \
+		if (p_ == NULL) {                         \
+			abort();                          \
+		}                                         \
+		size_t alloc_sz = malloc_usable_size(p_); \
+		GSH_TOTAL_ALLOC_MEM(MEM_COMP, alloc_sz);  \
+		p_;                                       \
 	})
 
 /**
@@ -124,17 +155,22 @@ static inline void *gsh_malloc_aligned__(size_t a, size_t n, const char *file,
 		LogMallocFailure(file, line, function, "gsh_malloc_aligned");
 		abort();
 	}
+	size_t alloc_sz = malloc_usable_size(p);
+
+	GSH_TOTAL_ALLOC_MEM(MEM_COMP, alloc_sz);
 
 	return p;
 }
 
-#define gsh_malloc_aligned(a, n)                      \
-	({                                            \
-		void *p_;                             \
-		if (posix_memalign(&p_, a, n) != 0) { \
-			abort();                      \
-		}                                     \
-		p_;                                   \
+#define gsh_malloc_aligned(a, n)                          \
+	({                                                \
+		void *p_;                                 \
+		if (posix_memalign(&p_, a, n) != 0) {     \
+			abort();                          \
+		}                                         \
+		size_t alloc_sz = malloc_usable_size(p_); \
+		GSH_TOTAL_ALLOC_MEM(MEM_COMP, alloc_sz);  \
+		p_;                                       \
 	})
 
 /**
@@ -159,17 +195,22 @@ static inline void *gsh_calloc__(size_t n, size_t s, const char *file, int line,
 		LogMallocFailure(file, line, function, "gsh_calloc");
 		abort();
 	}
+	size_t alloc_sz = malloc_usable_size(p);
+
+	GSH_TOTAL_ALLOC_MEM(MEM_COMP, alloc_sz);
 
 	return p;
 }
 
-#define gsh_calloc(n, s)                 \
-	({                               \
-		void *p_ = calloc(n, s); \
-		if (p_ == NULL) {        \
-			abort();         \
-		}                        \
-		p_;                      \
+#define gsh_calloc(n, s)                                  \
+	({                                                \
+		void *p_ = calloc(n, s);                  \
+		if (p_ == NULL) {                         \
+			abort();                          \
+		}                                         \
+		size_t alloc_sz = malloc_usable_size(p_); \
+		GSH_TOTAL_ALLOC_MEM(MEM_COMP, alloc_sz);  \
+		p_;                                       \
 	})
 
 /**
@@ -192,23 +233,31 @@ static inline void *gsh_calloc__(size_t n, size_t s, const char *file, int line,
 static inline void *gsh_realloc__(void *p, size_t n, const char *file, int line,
 				  const char *function)
 {
-	void *p2 = realloc(p, n);
+	size_t old_alloc_sz = malloc_usable_size(p);
 
+	void *p2 = realloc(p, n);
 	if (n != 0 && p2 == NULL) {
 		LogMallocFailure(file, line, function, "gsh_realloc");
 		abort();
 	}
 
+	size_t new_alloc_sz = malloc_usable_size(p2);
+
+	GSH_TOTAL_FREE_MEM(MEM_COMP, old_alloc_sz);
+	GSH_TOTAL_ALLOC_MEM(MEM_COMP, new_alloc_sz);
+
 	return p2;
 }
 
-#define gsh_realloc(p, n)                    \
-	({                                   \
-		void *p2_ = realloc(p, n);   \
-		if (n != 0 && p2_ == NULL) { \
-			abort();             \
-		}                            \
-		p2_;                         \
+#define gsh_realloc(p, n)                                  \
+	({                                                 \
+		void *p2_ = realloc(p, n);                 \
+		if (n != 0 && p2_ == NULL) {               \
+			abort();                           \
+		}                                          \
+		size_t alloc_sz = malloc_usable_size(p2_); \
+		GSH_TOTAL_ALLOC_MEM(MEM_COMP, alloc_sz);   \
+		p2_;                                       \
 	})
 
 #define gsh_strdup(s)                 \
@@ -257,6 +306,9 @@ static inline void *gsh_realloc__(void *p, size_t n, const char *file, int line,
  */
 static inline void gsh_free(void *p)
 {
+	size_t free_sz = malloc_usable_size(p);
+
+	GSH_TOTAL_FREE_MEM(MEM_COMP, free_sz);
 	free(p);
 }
 
@@ -272,6 +324,9 @@ static inline void gsh_free(void *p)
  */
 static inline void gsh_free_size(void *p, size_t n __attribute__((unused)))
 {
+	size_t free_sz = malloc_usable_size(p);
+
+	GSH_TOTAL_FREE_MEM(MEM_COMP, free_sz);
 	free(p);
 }
 

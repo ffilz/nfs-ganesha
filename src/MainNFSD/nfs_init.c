@@ -148,6 +148,30 @@ char *nfs_pidfile_path = GANESHA_PIDFILE_PATH;
 char cid_server_owner[MAXNAMLEN + 1]; /* max hostname length */
 char *cid_server_scope;
 
+struct mem_component_info MemComponents[MEM_COMP_MAX] = {
+	[MEM_COMP_GANESHA] = {
+	    .mem_comp_name = "MEM_COMP_GANESHA",
+	    .mem_comp_str = "GANESHA",},
+	[MEM_COMP_LIBNTIRPC] = {
+	    .mem_comp_name = "MEM_COMP_LIBNTIRPC",
+	    .mem_comp_str = "LIBNTIRPC",},
+	[MEM_COMP_FSAL] = {
+	    .mem_comp_name = "MEM_COMP_FSAL",
+	    .mem_comp_str = "FSAL",},
+	[MEM_COMP_CACHE] = {
+	    .mem_comp_name = "MEM_COMP_CACHE",
+	    .mem_comp_str = "CACHE",},
+	[MEM_COMP_MISC] = {
+	    .mem_comp_name = "MEM_COMP_MISC",
+	    .mem_comp_str = "MISC",}
+};
+
+const char *mem_stat_names[] = {
+	"Total_Alloc_Calls",	      "Total_Free_Calls",
+	"Total_Alloc_Bytes",	      "Total_Freed_Bytes",
+	"Total_Current_Active_Bytes", "Total_Peak_Active_Bytes"
+};
+
 /**
  * @brief Reread the configuration file to accomplish update of options.
  *
@@ -1012,6 +1036,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	dbus_export_init();
 	dbus_client_init();
 	dbus_cache_init();
+	dbus_mem_stats_init();
 #endif
 
 	/* initializing nfs ganesha metrics */

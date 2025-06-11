@@ -66,6 +66,8 @@
 #include "config_parsing.h"
 #include "sal_functions.h"
 
+bool logging_print_enabled;
+
 /*
  * The usual PTHREAD_RWLOCK_xxx macros log messages for tracing if FULL
  * DEBUG is enabled. If such a macro is called from this logging file as
@@ -938,9 +940,11 @@ int set_log_destination(const char *name, char *dest)
 				dest, strerror(errno));
 			return -errno;
 		}
+		PTHREAD_RWLOCK_unlock(&log_rwlock);
 		logfile = gsh_strdup(dest);
 		gsh_free(facility->lf_private);
 		facility->lf_private = logfile;
+		goto out;
 	} else if (facility->lf_func == log_to_stream) {
 		FILE *out;
 
@@ -963,6 +967,8 @@ int set_log_destination(const char *name, char *dest)
 		return -EINVAL;
 	}
 	PTHREAD_RWLOCK_unlock(&log_rwlock);
+
+out:
 	return 0;
 }
 
@@ -1140,6 +1146,8 @@ void init_logging(const char *log_path, const int debug_level)
 				 "Enable error (%s) for SYSLOG logging!",
 				 strerror(-rc));
 	}
+
+	logging_print_enabled = true;
 
 	if (debug_level >= 0) {
 		LogChanges("Setting log level for all components to %s",

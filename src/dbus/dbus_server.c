@@ -457,7 +457,15 @@ static bool dbus_reply_introspection(DBusMessage *reply,
 	dbus_message_iter_init_append(reply, &iter);
 	dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING,
 				       &introspection_xml);
-	gsh_free(introspection_xml);
+
+	/*
+	 * The memory being freed here was allocated using open_memstream(),
+	 * which internally uses malloc. It was not allocated via gsh_malloc(),
+	 * so we must use free() directly instead of gsh_free().
+	 * Using gsh_free() on such memory may lead to incorrect tracking
+	 * or undefined behavior.
+	 */
+	free(introspection_xml);
 
 out:
 	return retval;

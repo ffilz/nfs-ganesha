@@ -125,6 +125,8 @@
   gsh_refstr_alloc;
   gsh_refstr_put;
   gsh_refstr_release;
+  gsh_update_alloc_stats;
+  gsh_update_free_stats;
   g_max_files_delegatable;
   g_nodeid;
   g_node_vip;

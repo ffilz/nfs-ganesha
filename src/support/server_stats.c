@@ -63,6 +63,11 @@
 #include "nfs_proto_functions.h"
 #include "nfs_convert.h"
 #include "nfs_metrics.h"
+#include "server_stats_private.h"
+
+/* Memory Usage Statistics */
+struct gsh_memory_stats gshMC[MEM_COMP_MAX];
+extern bool logging_print_enabled;
 
 #define NFS_pcp nfs_param.core_param
 #define NFS_program NFS_pcp.program
@@ -825,6 +830,46 @@ static void reset_nfsv41_stats(struct nfsv41_stats *nfsv41)
 	reset_layout_op(&nfsv41->layout_commit);
 	reset_layout_op(&nfsv41->layout_return);
 	reset_layout_op(&nfsv41->recall);
+}
+
+/**
+ * @brief reset the counts nfsv41_stats
+ * Use atomic ops to avoid locks.
+ * @param mem_stats           [IN] pointer to mem_stats struct
+ */
+
+void reset_mem_stats(void)
+{
+	uint16_t mem_comp;
+	struct gsh_memory_stats *mem_stats;
+
+	for (mem_comp = 0; mem_comp < MEM_COMP_MAX; mem_comp++) {
+		mem_stats = &gshMC[mem_comp];
+
+		/* Reset Memory stats counter */
+		(void)atomic_store_uint64_t(&mem_stats->total_alloc_calls, 0);
+		(void)atomic_store_uint64_t(&mem_stats->total_free_calls, 0);
+		(void)atomic_store_uint64_t(&mem_stats->total_alloc_bytes, 0);
+		(void)atomic_store_uint64_t(&mem_stats->total_freed_bytes, 0);
+		(void)atomic_store_uint64_t(&mem_stats->current_active_bytes,
+					    0);
+		(void)atomic_store_uint64_t(&mem_stats->peak_active_bytes, 0);
+
+		if (logging_print_enabled) {
+			LogFullDebug(
+				COMPONENT_MEM_ALLOC,
+				"Total_Alloc_Calls: %ld, Total_Free_Calls: %ld, "
+				"Total_Alloc_Bytes: %ld, Total_Freed_Bytes: %ld, "
+				"Total_Current_Active_Bytes: %ld, "
+				"Total_Peak_Active_Bytes: %ld",
+				mem_stats->total_alloc_calls,
+				mem_stats->total_free_calls,
+				mem_stats->total_alloc_bytes,
+				mem_stats->total_freed_bytes,
+				mem_stats->current_active_bytes,
+				mem_stats->peak_active_bytes);
+		}
+	}
 }
 
 #ifdef _USE_NFS3
@@ -2735,6 +2780,7 @@ void reset_server_stats(void)
 	reset_v3_full_stats();
 #endif
 	reset_v4_full_stats();
+	reset_mem_stats();
 }
 
 #ifdef _USE_9P
@@ -3158,4 +3204,63 @@ void reset_v4_full_stats(void)
 	}
 }
 
+void gsh_update_alloc_stats(mem_components_t comp, size_t size)
+{
+	uint64_t current_bytes;
+	uint64_t prev_peak_bytes;
+
+	atomic_inc_uint64_t(&gshMC[comp].total_alloc_calls);
+	atomic_add_uint64_t(&gshMC[comp].total_alloc_bytes, size);
+
+	current_bytes =
+		atomic_add_uint64_t(&gshMC[comp].current_active_bytes, size);
+	prev_peak_bytes = atomic_fetch_uint64_t(&gshMC[comp].peak_active_bytes);
+
+	if (current_bytes > prev_peak_bytes)
+		atomic_store_uint64_t(&gshMC[comp].peak_active_bytes,
+				      current_bytes);
+
+	if (logging_print_enabled) {
+		LogFullDebug(
+			COMPONENT_MEM_ALLOC,
+			"Total_Alloc_Calls: %ld, Total_Free_Calls: %ld, "
+			"Total_Alloc_Bytes: %ld, Total_Freed_Bytes: %ld, "
+			"Total_Current_Active_Bytes: %ld, "
+			"Total_Peak_Active_Bytes: %ld, Last_Alloc_Size: %zu",
+			gshMC[comp].total_alloc_calls,
+			gshMC[comp].total_free_calls,
+			gshMC[comp].total_alloc_bytes,
+			gshMC[comp].total_freed_bytes,
+			gshMC[comp].current_active_bytes,
+			gshMC[comp].peak_active_bytes, size);
+	}
+}
+
+void gsh_update_free_stats(mem_components_t comp, size_t size)
+{
+	atomic_inc_uint64_t(&gshMC[comp].total_free_calls);
+	atomic_add_uint64_t(&gshMC[comp].total_freed_bytes, size);
+
+	uint64_t current_bytes =
+		atomic_fetch_uint64_t(&gshMC[comp].current_active_bytes);
+
+	if (current_bytes >= size)
+		atomic_sub_uint64_t(&gshMC[comp].current_active_bytes, size);
+	else
+		atomic_store_uint64_t(&gshMC[comp].current_active_bytes, 0);
+
+	if (logging_print_enabled) {
+		LogFullDebug(COMPONENT_MEM_ALLOC,
+			     "Total_Alloc_Calls: %ld, Total_Free_Calls: %ld, "
+			     "Total_Alloc_Bytes: %ld, Total_Freed_Bytes: %ld, "
+			     "Total_Current_Active_Bytes: %ld, "
+			     "Total_Peak_Active_Bytes: %ld, Last_Free_Size: %zu",
+			     gshMC[comp].total_alloc_calls,
+			     gshMC[comp].total_free_calls,
+			     gshMC[comp].total_alloc_bytes,
+			     gshMC[comp].total_freed_bytes,
+			     gshMC[comp].current_active_bytes,
+			     gshMC[comp].peak_active_bytes, size);
+	}
+}
 /** @} */

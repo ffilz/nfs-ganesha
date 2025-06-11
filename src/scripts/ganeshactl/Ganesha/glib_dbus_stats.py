@@ -1524,3 +1524,128 @@ class DumpFULLV4Stats(Report):
                 output += " %12.6f" % (self.stats[3][i][5])
                 i += 1
             return output
+
+class RetrieveMemoryStats():
+    def __init__(self):
+        self.dbus_service_name = "org.ganesha.nfsd"
+        self.dbus_memstats_name = "org.ganesha.nfsd.memstats"
+        self.mem_interface = "/org/ganesha/nfsd/MemMgr"
+
+        self.bus = dbus.SystemBus()
+        self.memmgrobj = self.bus.get_object(self.dbus_service_name,
+                                             self.mem_interface)
+
+    # get memory stats
+    def get_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("GetMemoryStats",
+                                                     self.dbus_memstats_name)
+        return DumpMemStats(stats_state())
+
+    # reset memory stats
+    def reset_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("ResetMemoryStats",
+                                                     self.dbus_memstats_name)
+        return StatsReset(stats_state())
+
+class DumpMemStats(Report):
+    def __init__(self, stats):
+        super().__init__(stats)
+
+        self.curtime = time.time()
+        self.success = stats[0]
+        self.status = stats[1]
+        if self.success:
+            self.timestamp = (stats[2][0], stats[2][1])
+
+    def fill_report(self, report):
+        op_table = [
+            'MEM_COMP_GANESHA',
+            'MEM_COMP_LIBNTIRPC',
+            'MEM_COMP_FSAL',
+            'MEM_COMP_CACHE',
+            'MEM_COMP_MISC'
+        ]
+        stats = self.result[3:]
+
+        def op_stats(stats):
+            counters = [
+                "Total_Alloc_Calls",
+                "Total_Free_Calls",
+                "Total_Alloc_Bytes",
+                "Total_Freed_Bytes",
+                "Total_Current_Active_Bytes",
+                "Total_Peak_Active_Bytes"
+            ]
+
+            result = {}
+            for i in range(len(stats)):
+                result[counters[i]] = dbus_to_std(stats[i])
+
+            return result
+
+        i = 0
+        ops = iter(op_table)
+
+        while i < len(stats):
+            if isinstance(stats[i], dbus.Boolean):
+                # Skip the availability flag since we're ignoring proto-level
+                i += 1
+                continue
+            op_name = next(ops)
+            report[op_name] = op_stats(stats[i])
+            i += 1
+
+    def __str__(self):
+        output = ""
+        if self.status != "OK":
+            return ("GANESHA RESPONSE STATUS: " + self.status)
+        else:
+            self.starttime = self.timestamp[0] + self.timestamp[1] / 1e9
+            self.duration = self.curtime - self.starttime
+            output += ("\nMemory Stats \nStats collected " +
+                       "since: " + time.ctime(self.timestamp[0]) +
+                       str(self.timestamp[1]) + " nsecs" +
+                       "\nDuration: " + "%.10f" % self.duration + " seconds")
+
+            output += ("\n\t\t Total_Alloc_Calls \t Total_Free_Calls" +
+                       "\t Total_Alloc_Bytes \t Total_Freed_Bytes" +
+                       "\t Total_Current_Active_Bytes " +
+                       "\t Total_Peak_Active_Bytes\n")
+
+            op_labels = [
+                'GANESHA',
+                'LIBNTIRPC',
+                'FSAL',
+                'CACHE',
+                'MISC'
+            ]
+
+            stats = self.result[3]
+
+            # self.stats is expected to be the array (a(sa(st)))
+            # So it's a list of tuples: (component_name, [(stat_name, value), ...])
+            #stats_dict = {name: dict(stat_list) for name, stat_list in self.stats}
+            stats_dict = {
+                name: dict(stat_list)
+                for item in stats
+                if isinstance(item, (list, tuple)) and len(item) == 2
+                for name, stat_list in [item]
+            }
+
+            for label in op_labels:
+                if label in stats_dict:
+                    stat_map = stats_dict[label]
+                    try:
+                        output += f"{label + ':':<12}"
+                        output += f"{int(stat_map['Total_Alloc_Calls']):>16} "
+                        output += f"{int(stat_map['Total_Free_Calls']):>20} "
+                        output += f"{int(stat_map['Total_Alloc_Bytes']):>26} "
+                        output += f"{int(stat_map['Total_Freed_Bytes']):>26} "
+                        output += f"{int(stat_map['Total_Current_Active_Bytes']):>30} "
+                        output += f"{int(stat_map['Total_Peak_Active_Bytes']):>30} \n"
+                    except KeyError:
+                        output += f"{label + ':':<12} {'<Missing Stat>':>16}\n"
+                else:
+                    output += f"{label + ':':<12} {'<Invalid Data>':>16}\n"
+
+        return output

@@ -42,6 +42,7 @@
 #define SERVER_STATS_PRIVATE_H
 
 #include "sal_data.h"
+#include <stdatomic.h>
 
 /**
  * @brief Server request statistics
@@ -452,5 +453,36 @@ void server_stats_allops_free(struct gsh_clnt_allops_stats *statsp);
 
 void server_stats_init(void);
 
+/*
+ * @brief Ganesha Memory Statistics
+ *
+ * @data member [total_alloc_bytes] - Total Allocated Memory
+ *      through out the Ganesha's life in Bytes
+ * @data member [total_cuurent_active_bytes] - Active Memory Usage
+ *      in Bytes
+ * @daya member [total_freed_bytes] - Total Freed Memory
+ *      through out the Ganesha's life in Bytes
+ */
+struct gsh_memory_stats {
+	uint64_t total_alloc_calls;
+	uint64_t total_free_calls;
+	uint64_t total_alloc_bytes;
+	uint64_t total_freed_bytes;
+	uint64_t current_active_bytes;
+	uint64_t peak_active_bytes;
+}; //GSH Memory Counters
+
+struct mem_stats_info {
+	const char *mem_stat_name; /* stat name */
+};
+
+/*
+ * If adding any new value to gsh_memory_stats
+ * structure then increment the MAX_MEMORY_STATS_FIELD_COUNT
+ */
+#define MAX_MEMORY_STATS_FIELD_COUNT 6
+
+void gsh_update_alloc_stats(mem_components_t comp, size_t alloc_size);
+void gsh_update_free_stats(mem_components_t comp, size_t alloc_size);
 #endif /* !SERVER_STATS_PRIVATE_H */
 /** @} */

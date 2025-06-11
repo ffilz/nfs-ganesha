@@ -310,6 +310,7 @@ static inline bool op_ctx_export_has_option_set(uint32_t option)
 void export_pkginit(void);
 #ifdef USE_DBUS
 void dbus_export_init(void);
+void dbus_mem_stats_init(void);
 #endif
 struct gsh_export *alloc_export(void);
 bool insert_gsh_export(struct gsh_export *a_export);

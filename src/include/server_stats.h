@@ -57,6 +57,7 @@ void server_stats_transport_done(struct gsh_client *client, uint64_t rx_bytes,
 				 uint64_t rx_pkt, uint64_t rx_err,
 				 uint64_t tx_bytes, uint64_t tx_pkt,
 				 uint64_t tx_err);
+void reset_mem_stats(void);
 
 /* For delegations */
 void inc_grants(struct gsh_client *client);
