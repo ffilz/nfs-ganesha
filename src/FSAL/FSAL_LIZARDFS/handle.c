@@ -426,7 +426,8 @@ static fsal_status_t lzfs_fsal_readlink(struct fsal_obj_handle *link_hdl,
 	}
 
 	rc = MIN(rc, LIZARDFS_MAX_READLINK_LENGTH);
-	content_buf->addr = gsh_strldup(result, rc, &content_buf->len);
+	content_buf->addr =
+		gsh_strldup(result, rc, &content_buf->len, MEM_COMP_FSAL);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }

@@ -68,7 +68,8 @@ struct kvsfs_fsal_obj_handle *kvsfs_alloc_handle(struct kvsfs_file_handle *fh,
 	my_module = container_of(exp_hdl->fsal, struct kvsfs_fsal_module, fsal);
 
 	hdl = gsh_malloc(sizeof(struct kvsfs_fsal_obj_handle) +
-			 sizeof(struct kvsfs_file_handle));
+				 sizeof(struct kvsfs_file_handle),
+			 MEM_COMP_FSAL);
 
 	memset(hdl, 0,
 	       (sizeof(struct kvsfs_fsal_obj_handle) +
@@ -83,7 +84,8 @@ struct kvsfs_fsal_obj_handle *kvsfs_alloc_handle(struct kvsfs_file_handle *fh,
 	if ((hdl->obj_handle.type == SYMBOLIC_LINK) && (link_content != NULL)) {
 		size_t len = strlen(link_content) + 1;
 
-		hdl->u.symlink.link_content = gsh_malloc(len);
+		hdl->u.symlink.link_content =
+			gsh_malloc(len, MEM_COMP_PROTOCOL);
 		memcpy(hdl->u.symlink.link_content, link_content, len);
 		hdl->u.symlink.link_size = len;
 	}
@@ -482,14 +484,14 @@ static fsal_status_t kvsfs_readsymlink(struct fsal_obj_handle *obj_hdl,
 	/* The link length should be cached in the file handle */
 
 	link_content->len = fsal_default_linksize;
-	link_content->addr = gsh_malloc(link_content->len);
+	link_content->addr = gsh_malloc(link_content->len, MEM_COMP_PROTOCOL);
 
 	retlink = kvsns_readlink(&cred, &myself->handle->kvsfs_handle,
 				 link_content->addr, &link_content->len);
 
 	if (retlink) {
 		fsal_error = posix2fsal_error(-retlink);
-		gsh_free(link_content->addr);
+		gsh_free(link_content->addr, MEM_COMP_PROTOCOL);
 		link_content->addr = NULL;
 		link_content->len = 0;
 		goto out;
@@ -910,7 +912,8 @@ static void kvsfs_release(struct fsal_obj_handle *obj_hdl)
 
 	if (type == SYMBOLIC_LINK) {
 		if (myself->u.symlink.link_content != NULL)
-			gsh_free(myself->u.symlink.link_content);
+			gsh_free(myself->u.symlink.link_content,
+				 MEM_COMP_PROTOCOL);
 	} else if (type == REGULAR_FILE) {
 		fsal_status_t st;
 
@@ -928,7 +931,7 @@ static void kvsfs_release(struct fsal_obj_handle *obj_hdl)
 
 	fsal_obj_handle_fini(obj_hdl, true);
 
-	gsh_free(myself);
+	gsh_free(myself, MEM_COMP_FSAL);
 }
 
 /* export methods that create object handles

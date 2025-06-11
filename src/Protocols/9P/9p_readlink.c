@@ -91,6 +91,6 @@ int _9p_readlink(struct _9p_request_data *req9p, u32 *plenout, char *preply)
 	LogDebug(COMPONENT_9P, "RREADLINK: tag=%u fid=%u link=%s", *msgtag,
 		 (u32)*fid, (char *)link_buffer.addr);
 
-	gsh_free(link_buffer.addr);
+	gsh_free(link_buffer.addr, MEM_COMP_PROTOCOL);
 	return 1;
 }
