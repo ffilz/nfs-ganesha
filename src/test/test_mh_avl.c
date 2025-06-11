@@ -257,7 +257,7 @@ static struct dir_data {
 
 void avl_unit_free_val(avl_unit_val_t *v)
 {
-	gsh_free(v);
+	gsh_free(v, MEM_COMP_MISC);
 }
 
 void avl_unit_clear_tree(struct avltree *t)
@@ -353,7 +353,7 @@ void inserts_tree_1(void)
 
 	ix = 0;
 	while ((s = dir_data[ix].name) != NULL) {
-		v = avl_unit_new_val(gsh_strdup(s));
+		v = avl_unit_new_val(gsh_strdup(s, MEM_COMP_GTEST));
 		code = qp_avl_insert(&avl_tree_1, v);
 		if (code == -1)
 			abort();
@@ -410,7 +410,7 @@ void inserts_tree_2(void)
 
 	for (ix = 0; ix < 100000; ++ix) {
 		sprintf(s, "file%d", ix);
-		v = avl_unit_new_val(gsh_strdup(s));
+		v = avl_unit_new_val(gsh_strdup(s, MEM_COMP_GTEST));
 		code = qp_avl_insert(&avl_tree_1, v);
 		if (code == -1)
 			abort();

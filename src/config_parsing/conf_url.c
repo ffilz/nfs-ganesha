@@ -179,7 +179,7 @@ static inline char *match_dup(regmatch_t *m, char *in)
 		int size;
 
 		size = m->rm_eo - m->rm_so + 1;
-		s = (char *)gsh_malloc(size);
+		s = (char *)gsh_malloc(size, MEM_COMP_CONFIG);
 		(void)snprintf(s, size, "%s", in + m->rm_so);
 	}
 	return s;
@@ -234,8 +234,8 @@ int config_url_fetch(const char *url, FILE **f, char **fbuf)
 	}
 	PTHREAD_RWLOCK_unlock(&url_rwlock);
 out:
-	gsh_free(url_type);
-	gsh_free(m_url);
+	gsh_free(url_type, MEM_COMP_CONFIG);
+	gsh_free(m_url, MEM_COMP_CONFIG);
 
 	return code;
 }

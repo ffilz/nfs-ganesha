@@ -76,7 +76,7 @@ void construct_handle(const struct ceph_statx *stx, struct Inode *i,
 
 	assert(i);
 
-	constructing = gsh_calloc(1, sizeof(struct ceph_handle));
+	constructing = gsh_calloc(1, sizeof(struct ceph_handle), MEM_COMP_FSAL);
 
 	constructing->key.hhdl.chk_ino = stx->stx_ino;
 #ifdef CEPH_NOSNAP
@@ -121,7 +121,7 @@ void deconstruct_handle(struct ceph_handle *obj)
 
 	fsal_obj_handle_fini(&obj->handle, true);
 
-	gsh_free(obj);
+	gsh_free(obj, MEM_COMP_FSAL);
 }
 
 unsigned int attrmask2ceph_want(attrmask_t mask)
@@ -249,7 +249,7 @@ int ceph_get_posix_acl(struct ceph_export *export,
 		return 0;
 	}
 
-	value = gsh_malloc(size);
+	value = gsh_malloc(size, MEM_COMP_FSAL);
 
 	/* Read extended attribute's value */
 	rc = fsal_ceph_ll_getxattr(export->cmount, objhandle->i, name, value,
@@ -275,7 +275,7 @@ int ceph_get_posix_acl(struct ceph_export *export,
 	*p_acl = acl_tmp;
 
 out:
-	gsh_free(value);
+	gsh_free(value, MEM_COMP_FSAL);
 	return rc;
 }
 
@@ -325,7 +325,7 @@ fsal_status_t ceph_set_acl(struct ceph_export *export,
 	count = acl_entries(acl);
 	if (count > 0) {
 		size = posix_acl_xattr_size(count);
-		value = gsh_malloc(size);
+		value = gsh_malloc(size, MEM_COMP_FSAL);
 
 		rc = posix_acl_2_xattr(acl, value, size);
 		if (rc < 0) {
@@ -348,7 +348,7 @@ out:
 	}
 
 	if (value) {
-		gsh_free(value);
+		gsh_free(value, MEM_COMP_FSAL);
 	}
 
 	return status;
@@ -422,9 +422,9 @@ int ceph_get_acl(struct ceph_export *export, struct ceph_handle *objhandle,
 	}
 
 	/* Reallocating acldata into the required size */
-	acldata.aces =
-		(fsal_ace_t *)gsh_realloc(acldata.aces,
-					  new_count * sizeof(fsal_ace_t));
+	acldata.aces = (fsal_ace_t *)gsh_realloc(acldata.aces,
+						 new_count * sizeof(fsal_ace_t),
+						 MEM_COMP_PROTOCOL);
 	acldata.naces = new_count;
 
 	attrs->acl = nfs4_acl_new_entry(&acldata, &aclstatus);

@@ -56,7 +56,7 @@ int vfs_readlink(struct vfs_fsal_obj_handle *myself, fsal_errors_t *fsal_error)
 #endif
 
 	if (myself->u.symlink.link_content != NULL) {
-		gsh_free(myself->u.symlink.link_content);
+		gsh_free(myself->u.symlink.link_content, MEM_COMP_MISC);
 		myself->u.symlink.link_content = NULL;
 		myself->u.symlink.link_size = 0;
 	}
@@ -79,7 +79,7 @@ int vfs_readlink(struct vfs_fsal_obj_handle *myself, fsal_errors_t *fsal_error)
 
 	myself->u.symlink.link_size = st.st_size + 1;
 	myself->u.symlink.link_content =
-		gsh_malloc(myself->u.symlink.link_size);
+		gsh_malloc(myself->u.symlink.link_size, MEM_COMP_FSAL);
 
 	retlink = vfs_readlink_by_handle(myself->handle, fd, "",
 					 myself->u.symlink.link_content,
@@ -100,7 +100,7 @@ error:
 	close(fd);
 #endif
 	if (myself->u.symlink.link_content != NULL) {
-		gsh_free(myself->u.symlink.link_content);
+		gsh_free(myself->u.symlink.link_content, MEM_COMP_MISC);
 		myself->u.symlink.link_content = NULL;
 		myself->u.symlink.link_size = 0;
 	}

@@ -554,7 +554,8 @@ nfsstat4 Process_nfs4_conflict(LOCK4denied *denied, state_owner_t *holder,
 
 	if (holder != NULL && holder->so_owner_len != 0) {
 		denied->owner.owner.owner_val =
-			gsh_malloc(holder->so_owner_len);
+			gsh_malloc(holder->so_owner_len,
+				   MEM_COMP_FILE_AND_STATE_LOCK);
 
 		denied->owner.owner.owner_len = holder->so_owner_len;
 
@@ -589,7 +590,8 @@ nfsstat4 Process_nfs4_conflict(LOCK4denied *denied, state_owner_t *holder,
 void Release_nfs4_denied(LOCK4denied *denied)
 {
 	if (denied->owner.owner.owner_val != unknown_owner.so_owner_val) {
-		gsh_free(denied->owner.owner.owner_val);
+		gsh_free(denied->owner.owner.owner_val,
+			 MEM_COMP_FILE_AND_STATE_LOCK);
 		denied->owner.owner.owner_val = NULL;
 	}
 }
@@ -607,7 +609,8 @@ void Copy_nfs4_denied(LOCK4denied *denied_dst, LOCK4denied *denied_src)
 	if (denied_src->owner.owner.owner_val != unknown_owner.so_owner_val &&
 	    denied_src->owner.owner.owner_val != NULL) {
 		denied_dst->owner.owner.owner_val =
-			gsh_malloc(denied_src->owner.owner.owner_len);
+			gsh_malloc(denied_src->owner.owner.owner_len,
+				   MEM_COMP_FILE_AND_STATE_LOCK);
 		LogFullDebug(COMPONENT_STATE,
 			     "denied_dst->owner.owner.owner_val = %p",
 			     denied_dst->owner.owner.owner_val);

@@ -62,8 +62,10 @@ struct gpfs_fsal_obj_handle *alloc_handle(struct gpfs_file_handle *fh,
 	struct gpfs_fsal_export *myself =
 		container_of(exp_hdl, struct gpfs_fsal_export, export);
 	struct gpfs_fsal_obj_handle *hdl =
-		gsh_calloc(1, sizeof(struct gpfs_fsal_obj_handle) +
-				      sizeof(struct gpfs_file_handle));
+		gsh_calloc(1,
+			   sizeof(struct gpfs_fsal_obj_handle) +
+				   sizeof(struct gpfs_file_handle),
+			   MEM_COMP_FSAL);
 
 	hdl->handle = (struct gpfs_file_handle *)&hdl[1];
 	hdl->obj_handle.fs = fs;
@@ -89,7 +91,8 @@ struct gpfs_fsal_obj_handle *alloc_handle(struct gpfs_file_handle *fh,
 		   link_content != NULL) {
 		size_t len = strlen(link_content) + 1;
 
-		hdl->u.symlink.link_content = gsh_malloc(len);
+		hdl->u.symlink.link_content = gsh_malloc(len,
+							 MEM_COMP_PROTOCOL);
 		memcpy(hdl->u.symlink.link_content, link_content, len);
 		hdl->u.symlink.link_size = len;
 	}
@@ -405,7 +408,8 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 		char link_buff[PATH_MAX];
 
 		if (myself->u.symlink.link_content != NULL) {
-			gsh_free(myself->u.symlink.link_content);
+			gsh_free(myself->u.symlink.link_content,
+				 MEM_COMP_PROTOCOL);
 			myself->u.symlink.link_content = NULL;
 			myself->u.symlink.link_size = 0;
 		}
@@ -416,7 +420,8 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 		if (FSAL_IS_ERROR(status))
 			return status;
 
-		myself->u.symlink.link_content = gsh_strdup(link_buff);
+		myself->u.symlink.link_content = gsh_strdup(link_buff,
+							    MEM_COMP_PROTOCOL);
 		myself->u.symlink.link_size = strlen(link_buff) + 1;
 	}
 
@@ -424,7 +429,8 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 		return fsalstat(ERR_FSAL_FAULT, 0);
 
 	link_content->len = myself->u.symlink.link_size;
-	link_content->addr = gsh_strdup(myself->u.symlink.link_content);
+	link_content->addr = gsh_strdup(myself->u.symlink.link_content,
+					MEM_COMP_PROTOCOL);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
@@ -750,7 +756,7 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 #define MAXCOUNT (1024 * 64)
-	buf = gsh_malloc(MAXCOUNT);
+	buf = gsh_malloc(MAXCOUNT, MEM_COMP_FSAL);
 
 	lxarg.mountdirfd = export_fd;
 	lxarg.handle = myself->handle;
@@ -845,7 +851,7 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 		     (unsigned long long)*la_cookie, *lr_eof);
 
 out:
-	gsh_free(buf);
+	gsh_free(buf, MEM_COMP_FSAL);
 	return status;
 }
 
@@ -972,9 +978,9 @@ static void release(struct fsal_obj_handle *obj_hdl)
 	fsal_obj_handle_fini(obj_hdl, true);
 
 	if (type == SYMBOLIC_LINK) {
-		gsh_free(myself->u.symlink.link_content);
+		gsh_free(myself->u.symlink.link_content, MEM_COMP_PROTOCOL);
 	}
-	gsh_free(myself);
+	gsh_free(myself, MEM_COMP_FSAL);
 }
 
 /**
@@ -1087,12 +1093,12 @@ fsal_status_t gpfs_lookup_path(struct fsal_export *exp_hdl, const char *path,
 			break;
 		case 1: /* first retry, don't free the old stack buffer */
 			acl_buflen = acl_buf->acl_len;
-			acl_buf = gsh_malloc(acl_buflen);
+			acl_buf = gsh_malloc(acl_buflen, MEM_COMP_FSAL);
 			break;
 		default: /* second or later retry, free the old heap buffer */
 			acl_buflen = acl_buf->acl_len;
-			gsh_free(acl_buf);
-			acl_buf = gsh_malloc(acl_buflen);
+			gsh_free(acl_buf, MEM_COMP_FSAL);
+			acl_buf = gsh_malloc(acl_buflen, MEM_COMP_FSAL);
 			break;
 		}
 
@@ -1123,7 +1129,7 @@ fsal_status_t gpfs_lookup_path(struct fsal_export *exp_hdl, const char *path,
 
 	if (acl_buflen != GPFS_ACL_BUF_SIZE) {
 		assert(acl_buf != (gpfs_acl_t *)buffxstat.buffacl);
-		gsh_free(acl_buf);
+		gsh_free(acl_buf, MEM_COMP_FSAL);
 	}
 
 	close(dir_fd);
@@ -1166,7 +1172,7 @@ xstat_err:
 	/* free if the acl buffer is from the heap */
 	if (acl_buflen != GPFS_ACL_BUF_SIZE) {
 		assert(acl_buf != (gpfs_acl_t *)buffxstat.buffacl);
-		gsh_free(acl_buf);
+		gsh_free(acl_buf, MEM_COMP_FSAL);
 	}
 
 fileerr:
