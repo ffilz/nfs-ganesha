@@ -1901,7 +1901,7 @@ fsal_status_t get_optional_attrs(struct fsal_obj_handle *obj_hdl,
 
 static void fsal_iov_release(void *release_data)
 {
-	gsh_free(release_data);
+	gsh_free(release_data, MEM_COMP_IO_BUFFER);
 }
 
 /**
@@ -1964,7 +1964,7 @@ not_nfs:
 		 * Don't return buffer_size, that is only necessary for RDMA,
 		 * in fact it seems to cause problems if set.
 		 */
-		return gsh_malloc(size);
+		return gsh_malloc(size, MEM_COMP_IO_BUFFER);
 	}
 }
 
@@ -2187,7 +2187,7 @@ next_name1:
 		goto out;
 	}
 
-	names = gsh_calloc(count, sizeof(*names));
+	names = gsh_calloc(count, sizeof(*names), MEM_COMP_PROTOCOL);
 
 	assert(start);
 	name = start;
@@ -2208,7 +2208,8 @@ next_name1:
 		name += XATTR_USER_PREFIX_LEN;
 		len -= XATTR_USER_PREFIX_LEN;
 
-		names[i].utf8string_val = gsh_memdup(name, len);
+		names[i].utf8string_val =
+			gsh_memdup(name, len, MEM_COMP_PROTOCOL);
 		names[i].utf8string_len = len;
 		++i;
 next_name2:
@@ -2229,8 +2230,8 @@ out:
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 out_error:
 	for (i = 0; i < count; ++i)
-		gsh_free(names[i].utf8string_val);
-	gsh_free(names);
+		gsh_free(names[i].utf8string_val, MEM_COMP_PROTOCOL);
+	gsh_free(names, MEM_COMP_PROTOCOL);
 	return status;
 }
 

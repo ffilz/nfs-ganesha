@@ -95,7 +95,7 @@ static int server_id_cmpf(const struct avltree_node *lhs,
 
 struct fsal_pnfs_ds *pnfs_ds_alloc(void)
 {
-	return gsh_calloc(1, sizeof(struct fsal_pnfs_ds));
+	return gsh_calloc(1, sizeof(struct fsal_pnfs_ds), MEM_COMP_FSAL);
 }
 
 /**
@@ -107,7 +107,7 @@ void pnfs_ds_free(struct fsal_pnfs_ds *pds)
 	if (!pds->ds_refcount)
 		return;
 
-	gsh_free(pds);
+	gsh_free(pds, MEM_COMP_FSAL);
 }
 
 /**

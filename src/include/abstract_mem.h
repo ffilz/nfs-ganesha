@@ -43,7 +43,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <malloc.h>
+#include "abstract_atomic.h"
+#include "mem_components.h"
 #include "log.h"
+
+struct mem_component_info {
+	const char *mem_comp_name; /* component name */
+	const char *mem_comp_str; /* shorter, more useful name */
+};
+
+/* Memory Statistics API's */
+extern void gsh_mem_stats_update_alloc(void *p, mem_components_t comp);
+extern void gsh_mem_stats_update_free(void *p, mem_components_t comp);
+
+#define GSH_MEM_STATS_UPDATE_ALLOC(p, comp) gsh_mem_stats_update_alloc(p, comp)
+#define GSH_MEM_STATS_UPDATE_FREE(p, comp) gsh_mem_stats_update_free(p, comp)
 
 #ifdef __cplusplus
 extern "C" {
@@ -82,8 +97,8 @@ extern "C" {
  *
  * @return Pointer to a block of memory.
  */
-static inline void *gsh_malloc__(size_t n, const char *file, int line,
-				 const char *function)
+static inline void *gsh_malloc__(size_t n, uint8_t comp, const char *file,
+				 int line, const char *function)
 {
 	void *p = malloc(n);
 
@@ -92,16 +107,19 @@ static inline void *gsh_malloc__(size_t n, const char *file, int line,
 		abort();
 	}
 
+	GSH_MEM_STATS_UPDATE_ALLOC(p, (mem_components_t)comp);
+
 	return p;
 }
 
-static inline void *gsh_malloc(size_t n)
+static inline void *gsh_malloc(size_t n, mem_components_t comp)
 {
 	void *p_ = malloc(n);
 
 	if (p_ == NULL) {
 		abort();
 	}
+	GSH_MEM_STATS_UPDATE_ALLOC(p_, comp);
 	return p_;
 }
 
@@ -120,8 +138,9 @@ static inline void *gsh_malloc(size_t n)
  *
  * @return Pointer to a block of memory or NULL.
  */
-static inline void *gsh_malloc_aligned__(size_t a, size_t n, const char *file,
-					 int line, const char *function)
+static inline void *gsh_malloc_aligned__(size_t a, size_t n, uint8_t comp,
+					 const char *file, int line,
+					 const char *function)
 {
 	void *p;
 
@@ -136,15 +155,18 @@ static inline void *gsh_malloc_aligned__(size_t a, size_t n, const char *file,
 		abort();
 	}
 
+	GSH_MEM_STATS_UPDATE_ALLOC(p, (mem_components_t)comp);
+
 	return p;
 }
 
-#define gsh_malloc_aligned(a, n)                      \
+#define gsh_malloc_aligned(a, n, comp)                \
 	({                                            \
 		void *p_;                             \
 		if (posix_memalign(&p_, a, n) != 0) { \
 			abort();                      \
 		}                                     \
+		GSH_MEM_STATS_UPDATE_ALLOC(p_, comp); \
 		p_;                                   \
 	})
 
@@ -161,7 +183,8 @@ static inline void *gsh_malloc_aligned__(size_t a, size_t n, const char *file,
  *
  * @return Pointer to a block of zeroed memory.
  */
-static inline void *gsh_calloc__(size_t n, size_t s, const char *file, int line,
+static inline void *gsh_calloc__(size_t n, size_t s, uint8_t comp,
+				 const char *file, int line,
 				 const char *function)
 {
 	void *p = calloc(n, s);
@@ -171,16 +194,19 @@ static inline void *gsh_calloc__(size_t n, size_t s, const char *file, int line,
 		abort();
 	}
 
+	GSH_MEM_STATS_UPDATE_ALLOC(p, (mem_components_t)comp);
+
 	return p;
 }
 
-#define gsh_calloc(n, s)                 \
-	({                               \
-		void *p_ = calloc(n, s); \
-		if (p_ == NULL) {        \
-			abort();         \
-		}                        \
-		p_;                      \
+#define gsh_calloc(n, s, comp)                        \
+	({                                            \
+		void *p_ = calloc(n, s);              \
+		if (p_ == NULL) {                     \
+			abort();                      \
+		}                                     \
+		GSH_MEM_STATS_UPDATE_ALLOC(p_, comp); \
+		p_;                                   \
 	})
 
 /**
@@ -200,9 +226,12 @@ static inline void *gsh_calloc__(size_t n, size_t s, const char *file, int line,
  *
  * @return Pointer to the address of the resized block.
  */
-static inline void *gsh_realloc__(void *p, size_t n, const char *file, int line,
+static inline void *gsh_realloc__(void *p, size_t n, uint8_t comp,
+				  const char *file, int line,
 				  const char *function)
 {
+	GSH_MEM_STATS_UPDATE_FREE(p, (mem_components_t)comp);
+
 	void *p2 = realloc(p, n);
 
 	if (n != 0 && p2 == NULL) {
@@ -210,26 +239,38 @@ static inline void *gsh_realloc__(void *p, size_t n, const char *file, int line,
 		abort();
 	}
 
+	GSH_MEM_STATS_UPDATE_ALLOC(p2, (mem_components_t)comp);
+
 	return p2;
 }
 
-static inline void *gsh_realloc(void *p, size_t n)
+static inline void *gsh_realloc(void *p, size_t n, mem_components_t comp)
 {
+	GSH_MEM_STATS_UPDATE_FREE(p, comp);
+
 	void *p2_ = realloc(p, n);
 
 	if (n != 0 && p2_ == NULL) {
 		abort();
 	}
+
+	GSH_MEM_STATS_UPDATE_ALLOC(p2_, comp);
+
 	return p2_;
 }
 
-static inline char *gsh_strdup(const char *s)
+static inline char *gsh_strdup(const char *s, mem_components_t comp)
 {
-	char *p_ = strdup(s);
+	const char *_src_ = (s);
+	size_t _len_ = strlen(_src_) + 1;
+	char *p_ = (char *)gsh_malloc(_len_, comp);
 
 	if (p_ == NULL) {
 		abort();
 	}
+
+	memcpy(p_, _src_, _len_);
+
 	return p_;
 }
 
@@ -244,9 +285,9 @@ static inline char *gsh_strdup(const char *s)
 	})
 #endif
 
-static inline void *gsh_memdup(const void *s, size_t l)
+static inline void *gsh_memdup(const void *s, size_t l, mem_components_t comp)
 {
-	void *p_ = gsh_malloc(l);
+	void *p_ = gsh_malloc(l, comp);
 
 	memcpy(p_, s, l);
 	return p_;
@@ -260,8 +301,10 @@ static inline void *gsh_memdup(const void *s, size_t l)
  *
  * @param[in] p Block of memory to free.
  */
-static inline void gsh_free(void *p)
+static inline void gsh_free(void *p, mem_components_t comp)
 {
+	GSH_MEM_STATS_UPDATE_FREE(p, comp);
+
 	free(p);
 }
 
@@ -275,8 +318,11 @@ static inline void gsh_free(void *p)
  * @param[in] p  Block of memory to free.
  * @param[in] n  Size of block (unused)
  */
-static inline void gsh_free_size(void *p, size_t n __attribute__((unused)))
+static inline void gsh_free_size(void *p, size_t n __attribute__((unused)),
+				 uint8_t comp)
 {
+	GSH_MEM_STATS_UPDATE_FREE(p, (mem_components_t)comp);
+
 	free(p);
 }
 
@@ -297,112 +343,12 @@ typedef struct pool {
 	size_t object_size; /*< The size of the objects created */
 } pool_t;
 
-/**
- * @brief Create a basic object pool
- *
- * This function creates a new object pool, given a name, object size,
- * constructor and destructor.
- *
- * This particular implementation throws the name away, but other
- * implementations that do tracking or keep counts of allocated or
- * de-allocated objects will likely wish to use it in log messages.
- *
- * This initializer function is expected to abort if it fails.
- *
- * @param[in] name             The name of this pool
- * @param[in] object_size      The size of objects to allocate
- * @param[in] file             Calling source file
- * @param[in] line             Calling source line
- * @param[in] function         Calling source function
- *
- * @return A pointer to the pool object.  This pointer must not be
- *         dereferenced.  It may be stored or supplied as an argument
- *         to the other pool functions.  It must not be supplied as an
- *         argument to gsh_free, rather it must be disposed of with
- *         pool_destroy.
- */
-
-static inline pool_t *pool_basic_init(const char *name, size_t object_size)
-{
-	pool_t *pool = (pool_t *)gsh_malloc(sizeof(pool_t));
-
-	pool->object_size = object_size;
-
-	if (name)
-		pool->name = gsh_strdup(name);
-	else
-		pool->name = NULL;
-
-	return pool;
-}
-
-/**
- * @brief Destroy a memory pool
- *
- * This function destroys a memory pool.  All objects must be returned
- * to the pool before this function is called.
- *
- * @param[in] pool The pool to be destroyed.
- */
-
-static inline void pool_destroy(pool_t *pool)
-{
-	gsh_free(pool->name);
-	gsh_free(pool);
-}
-
-/**
- * @brief Allocate an object from a pool
- *
- * This function allocates a single object from the pool and returns a
- * pointer to it.  If a constructor was specified at pool creation, it
- * is called on that pointer.  This function must be thread safe.  If
- * the underlying pool abstraction requires a lock, this function must
- * take and release it.
- *
- * This function returns void pointers.  Programmers who wish for more
- * type safety can easily create static inline wrappers (alloc_client
- * or similar) to return pointers of a specific type (and omitting the
- * pool parameter).
- *
- * This function aborts if no memory is available.
- *
- * @param[in] pool       The pool from which to allocate
- * @param[in] file       Calling source file
- * @param[in] line       Calling source line
- * @param[in] function   Calling source function
- *
- * @return A pointer to the allocated pool item.
- */
-
-#define pool_alloc(pool) gsh_calloc(1, (pool)->object_size)
-
-/**
- * @brief Return an entry to a pool
- *
- * This function returns a single object to the pool.  If a destructor
- * was defined at pool creation time, it is called before the object
- * is freed.  This function must be thread-safe.  If the underlying
- * pool abstract requires a lock, this function must take and release
- * it.
- *
- * @param[in] pool   Pool to which to return the object
- * @param[in] object The object to return.  This is a void pointer.
- *                   Programmers wishing more type safety could create
- *                   a static inline wrapper taking an object of a
- *                   specific type (and omitting the pool parameter.)
- */
-
-static inline void pool_free(pool_t *UNUSED(pool), void *object)
-{
-	gsh_free(object);
-}
-
-static inline char *gsh_concat(const char *p1, const char *p2)
+static inline char *gsh_concat(const char *p1, const char *p2,
+			       mem_components_t comp)
 {
 	size_t len1 = strlen(p1);
 	size_t len2 = strlen(p2);
-	char *path = (char *)gsh_malloc(len1 + len2 + 1);
+	char *path = (char *)gsh_malloc(len1 + len2 + 1, comp);
 
 	memcpy(path, p1, len1);
 	memcpy(path + len1, p2, len2 + 1);
@@ -410,11 +356,12 @@ static inline char *gsh_concat(const char *p1, const char *p2)
 	return path;
 }
 
-static inline char *gsh_concat_sep(const char *p1, char sep, const char *p2)
+static inline char *gsh_concat_sep(const char *p1, char sep, const char *p2,
+				   mem_components_t comp)
 {
 	size_t len1 = strlen(p1);
 	size_t len2 = strlen(p2);
-	char *path = (char *)gsh_malloc(len1 + 1 + len2 + 1);
+	char *path = (char *)gsh_malloc(len1 + 1 + len2 + 1, comp);
 
 	memcpy(path, p1, len1);
 	path[len1] = sep;

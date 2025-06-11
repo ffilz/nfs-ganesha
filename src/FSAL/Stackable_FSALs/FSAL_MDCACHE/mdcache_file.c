@@ -571,7 +571,7 @@ static void mdc_read_super_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 	else if (ret.major == ERR_FSAL_STALE)
 		mdcache_kill_entry(entry);
 	mdcache_lru_unref(entry, LRU_ACTIVE_REF);
-	gsh_free(arg);
+	gsh_free(arg, MEM_COMP_MDCACHE);
 }
 
 /**
@@ -613,7 +613,7 @@ void mdcache_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	struct mdc_async_arg *arg;
 
 	/* Set up async callback */
-	arg = gsh_calloc(1, sizeof(*arg));
+	arg = gsh_calloc(1, sizeof(*arg), MEM_COMP_MDCACHE);
 	arg->obj_hdl = obj_hdl;
 	arg->cb = done_cb;
 	arg->cb_arg = caller_arg;
@@ -661,7 +661,7 @@ static void mdc_write_super_cb(struct fsal_obj_handle *obj, fsal_status_t ret,
 
 	if (ret.major == ERR_FSAL_STALE)
 		mdcache_lru_unref(entry, LRU_ACTIVE_REF);
-	gsh_free(arg);
+	gsh_free(arg, MEM_COMP_MDCACHE);
 }
 
 /**
@@ -700,7 +700,7 @@ void mdcache_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	struct mdc_async_arg *arg;
 
 	/* Set up async callback */
-	arg = gsh_calloc(1, sizeof(*arg));
+	arg = gsh_calloc(1, sizeof(*arg), MEM_COMP_MDCACHE);
 	arg->obj_hdl = obj_hdl;
 	arg->cb = done_cb;
 	arg->cb_arg = caller_arg;
