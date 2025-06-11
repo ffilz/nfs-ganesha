@@ -64,6 +64,7 @@
 #include "prometheus_exposer.h"
 #endif
 #include "nfs_qos.h"
+#include "server_stats.h"
 
 /**
  * @brief Mutex protecting shutdown flag.
@@ -1014,6 +1015,9 @@ static void do_shutdown(void)
 
 	nfs4_recovery_shutdown();
 	nfs_rpc_cb_pkgshutdown();
+
+	/* Always capture Memory Stats in case of shutdown */
+	gsh_log_mem_stats();
 
 	if (disorderly) {
 		LogMajor(COMPONENT_MAIN,

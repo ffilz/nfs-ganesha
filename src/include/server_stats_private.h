@@ -42,6 +42,7 @@
 #define SERVER_STATS_PRIVATE_H
 
 #include "sal_data.h"
+#include <stdatomic.h>
 
 /**
  * @brief Server request statistics
@@ -451,6 +452,5 @@ void server_stats_free(struct gsh_stats *statsp);
 void server_stats_allops_free(struct gsh_clnt_allops_stats *statsp);
 
 void server_stats_init(void);
-
 #endif /* !SERVER_STATS_PRIVATE_H */
 /** @} */

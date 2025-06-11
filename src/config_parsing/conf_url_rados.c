@@ -218,7 +218,7 @@ static inline char *match_dup(regmatch_t *m, const char *in)
 		int size;
 
 		size = m->rm_eo - m->rm_so + 1;
-		s = (char *)gsh_malloc(size);
+		s = (char *)gsh_malloc(size, MEM_COMP_MISC);
 		memcpy(s, in + m->rm_so, size - 1);
 		s[size - 1] = '\0';
 	}
@@ -273,9 +273,9 @@ static int rados_url_parse(const char *url, char **pool, char **ns, char **obj)
 		}
 
 		/* If any of x1, x2, or x3 are not consumed, free them. */
-		gsh_free(x1);
-		gsh_free(x2);
-		gsh_free(x3);
+		gsh_free(x1, MEM_COMP_MISC);
+		gsh_free(x2, MEM_COMP_MISC);
+		gsh_free(x3, MEM_COMP_MISC);
 
 	} else if (ret == REG_NOMATCH) {
 		LogWarn(COMPONENT_CONFIG,
@@ -375,9 +375,9 @@ out:
 	}
 
 	/* allocated or NULL */
-	gsh_free(pool_name);
-	gsh_free(rados_ns);
-	gsh_free(object_name);
+	gsh_free(pool_name, MEM_COMP_MISC);
+	gsh_free(rados_ns, MEM_COMP_MISC);
+	gsh_free(object_name, MEM_COMP_MISC);
 
 	return ret;
 }
@@ -469,9 +469,9 @@ int rados_url_setup_watch(void)
 		obj = NULL;
 	}
 out:
-	gsh_free(pool);
-	gsh_free(ns);
-	gsh_free(obj);
+	gsh_free(pool, MEM_COMP_MISC);
+	gsh_free(ns, MEM_COMP_MISC);
+	gsh_free(obj, MEM_COMP_MISC);
 
 	return ret;
 }
@@ -489,7 +489,7 @@ void rados_url_shutdown_watch(void)
 
 		rados_ioctx_destroy(rados_watch_io_ctx);
 		rados_watch_io_ctx = NULL;
-		gsh_free(rados_watch_oid);
+		gsh_free(rados_watch_oid, MEM_COMP_MISC);
 		rados_watch_oid = NULL;
 		/* Leave teardown of client to the %url parser shutdown */
 	}

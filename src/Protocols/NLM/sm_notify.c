@@ -66,7 +66,7 @@ void *nsm_notify_1(notify *argp, CLIENT *clnt)
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
 
-	cc = gsh_malloc(sizeof(*cc));
+	cc = gsh_malloc(sizeof(*cc), MEM_COMP_FILE_AND_STATE_LOCK);
 	clnt_req_fill(cc, clnt, authnone_ncreate(), SM_NOTIFY,
 		      (xdrproc_t)xdr_notify, argp, (xdrproc_t)xdr_void,
 		      &clnt_res);
@@ -187,8 +187,8 @@ int main(int argc, char **argv)
 	nsm_notify_1(&arg, clnt);
 
 	/* free resources */
-	gsh_free(buf->buf);
-	gsh_free(buf);
+	gsh_free(buf->buf, MEM_COMP_LIBNTIRPC);
+	gsh_free(buf, MEM_COMP_LIBNTIRPC);
 	CLNT_DESTROY(clnt);
 
 	close(fd);

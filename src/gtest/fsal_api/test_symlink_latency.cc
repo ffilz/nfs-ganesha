@@ -90,7 +90,7 @@ class SymlinkEmptyLatencyTest : public gtest::GaneshaFSALBaseTest {
 	{
 		fsal_status_t status;
 
-		gsh_free(bfr_content.addr);
+		gsh_free(bfr_content.addr, MEM_COMP_GTEST);
 
 		status = root_entry->obj_ops->unlink(root_entry, test_symlink,
 						     TEST_SYMLINK, nullptr,
@@ -147,7 +147,7 @@ TEST_F(SymlinkEmptyLatencyTest, SIMPLE)
 			     link_content.len);
 	EXPECT_EQ(ret, 0);
 
-	gsh_free(link_content.addr);
+	gsh_free(link_content.addr, MEM_COMP_GTEST);
 
 	symlink->obj_ops->put_ref(symlink);
 	lookup->obj_ops->put_ref(lookup);
@@ -186,7 +186,7 @@ TEST_F(SymlinkEmptyLatencyTest, SIMPLE_BYPASS)
 			     link_content.len);
 	EXPECT_EQ(ret, 0);
 
-	gsh_free(link_content.addr);
+	gsh_free(link_content.addr, MEM_COMP_GTEST);
 
 	symlink->obj_ops->put_ref(symlink);
 	lookup->obj_ops->put_ref(lookup);

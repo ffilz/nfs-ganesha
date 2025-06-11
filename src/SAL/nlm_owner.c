@@ -733,14 +733,14 @@ void _inc_nsm_client_ref(state_nsm_client_t *client, char *file, int line,
  */
 void free_nsm_client(state_nsm_client_t *client)
 {
-	gsh_free(client->ssc_nlm_caller_name);
+	gsh_free(client->ssc_nlm_caller_name, MEM_COMP_MISC);
 
 	if (client->ssc_client != NULL)
 		put_gsh_client(client->ssc_client);
 
 	PTHREAD_MUTEX_destroy(&client->ssc_mutex);
 
-	gsh_free(client);
+	gsh_free(client, MEM_COMP_CLIENT);
 }
 
 /**
@@ -973,7 +973,7 @@ state_nsm_client_t *get_nsm_client(care_t care, char *caller_name)
 		return NULL;
 	}
 
-	pclient = gsh_malloc(sizeof(*pclient));
+	pclient = gsh_malloc(sizeof(*pclient), MEM_COMP_CLIENT);
 
 	/* Copy everything over */
 	memcpy(pclient, &key, sizeof(key));
@@ -1045,13 +1045,13 @@ void free_nlm_client(state_nlm_client_t *client)
 	if (client->slc_nsm_client != NULL)
 		dec_nsm_client_ref(client->slc_nsm_client);
 
-	gsh_free(client->slc_nlm_caller_name);
+	gsh_free(client->slc_nlm_caller_name, MEM_COMP_MISC);
 
 	/* free the callback client */
 	if (client->slc_callback_clnt != NULL)
 		CLNT_DESTROY(client->slc_callback_clnt);
 
-	gsh_free(client);
+	gsh_free(client, MEM_COMP_CLIENT);
 }
 
 /**
@@ -1261,7 +1261,7 @@ not_found:
 		return NULL;
 	}
 
-	pclient = gsh_malloc(sizeof(*pclient));
+	pclient = gsh_malloc(sizeof(*pclient), MEM_COMP_CLIENT);
 
 	/* Copy everything over */
 	memcpy(pclient, &key, sizeof(key));

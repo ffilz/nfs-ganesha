@@ -517,7 +517,8 @@ static state_lock_entry_t *create_state_lock_entry(
 {
 	state_lock_entry_t *new_entry;
 
-	new_entry = gsh_calloc(1, sizeof(*new_entry));
+	new_entry =
+		gsh_calloc(1, sizeof(*new_entry), MEM_COMP_FILE_AND_STATE_LOCK);
 
 	LogFullDebug(COMPONENT_STATE, "new_entry = %p owner %p", new_entry,
 		     owner);
@@ -658,7 +659,8 @@ void lock_entry_dec_ref(state_lock_entry_t *lock_entry)
 			glist_del(&lock_entry->sle_block_data->sbd_list);
 			PTHREAD_MUTEX_unlock(&blocked_locks_mutex);
 
-			gsh_free(lock_entry->sle_block_data);
+			gsh_free(lock_entry->sle_block_data,
+				 MEM_COMP_FILE_AND_STATE_LOCK);
 			lock_entry->sle_block_data = NULL;
 		}
 
@@ -686,7 +688,7 @@ void lock_entry_dec_ref(state_lock_entry_t *lock_entry)
 		lock_entry->sle_obj->obj_ops->put_ref(lock_entry->sle_obj);
 		put_gsh_export(lock_entry->sle_export);
 		PTHREAD_MUTEX_destroy(&lock_entry->sle_mutex);
-		gsh_free(lock_entry);
+		gsh_free(lock_entry, MEM_COMP_FILE_AND_STATE_LOCK);
 	}
 }
 
@@ -1373,8 +1375,8 @@ void free_cookie(state_cookie_entry_t *cookie_entry, bool unblock)
 	}
 
 	/* Free the memory for the cookie and the cookie entry */
-	gsh_free(cookie);
-	gsh_free(cookie_entry);
+	gsh_free(cookie, MEM_COMP_FILE_AND_STATE_LOCK);
+	gsh_free(cookie_entry, MEM_COMP_FILE_AND_STATE_LOCK);
 }
 
 /**
@@ -1438,9 +1440,10 @@ state_status_t state_add_grant_cookie(struct fsal_obj_handle *obj, void *cookie,
 		str_valid = true;
 	}
 
-	hash_entry = gsh_calloc(1, sizeof(*hash_entry));
+	hash_entry = gsh_calloc(1, sizeof(*hash_entry),
+				MEM_COMP_FILE_AND_STATE_LOCK);
 
-	buffkey.addr = gsh_malloc(cookie_size);
+	buffkey.addr = gsh_malloc(cookie_size, MEM_COMP_FILE_AND_STATE_LOCK);
 
 	hash_entry->sce_obj = obj;
 	hash_entry->sce_lock_entry = lock_entry;
@@ -1560,8 +1563,8 @@ state_status_t state_add_grant_cookie(struct fsal_obj_handle *obj, void *cookie,
 
 error:
 
-	gsh_free(hash_entry);
-	gsh_free(buffkey.addr);
+	gsh_free(hash_entry, MEM_COMP_FILE_AND_STATE_LOCK);
+	gsh_free(buffkey.addr, MEM_COMP_FILE_AND_STATE_LOCK);
 
 	if (str_valid)
 		LogFullDebug(COMPONENT_STATE, "Lock Cookie {%s} %s", str,
@@ -1690,7 +1693,8 @@ void grant_blocked_lock_immediate(struct state_hdl *ostate,
 			 */
 			memset(lock_entry->sle_block_data, 0,
 			       sizeof(*lock_entry->sle_block_data));
-			gsh_free(lock_entry->sle_block_data);
+			gsh_free(lock_entry->sle_block_data,
+				 MEM_COMP_FILE_AND_STATE_LOCK);
 			lock_entry->sle_block_data = NULL;
 		}
 	}
@@ -4119,12 +4123,14 @@ void cancel_all_nlm_blocked(void)
 		STATELOCK_unlock(found_entry->sle_obj);
 
 		if (pblock->sbd_blocked_cookie != NULL) {
-			gsh_free(pblock->sbd_blocked_cookie);
+			gsh_free(pblock->sbd_blocked_cookie,
+				 MEM_COMP_FILE_AND_STATE_LOCK);
 			pblock->sbd_blocked_cookie = NULL;
 		}
 
 		if (found_entry->sle_block_data != NULL) {
-			gsh_free(found_entry->sle_block_data);
+			gsh_free(found_entry->sle_block_data,
+				 MEM_COMP_FILE_AND_STATE_LOCK);
 			found_entry->sle_block_data = NULL;
 		}
 
@@ -4209,8 +4215,9 @@ state_status_t state_lock_init(void)
 
 	status = state_async_init();
 
-	state_owner_pool =
-		pool_basic_init("NFSv4 state owners", sizeof(state_owner_t));
+	state_owner_pool = pool_basic_init("NFSv4 state owners",
+					   sizeof(state_owner_t),
+					   MEM_COMP_NFS4_STATE_OWNER_POOL);
 
 	return status;
 }

@@ -414,7 +414,7 @@ bool is_loopback(sockaddr_t *addr)
 */
 CIDR *cidr_alloc(void)
 {
-	return gsh_calloc(1, sizeof(CIDR));
+	return gsh_calloc(1, sizeof(CIDR), MEM_COMP_MISC);
 }
 
 /**
@@ -424,7 +424,7 @@ CIDR *cidr_alloc(void)
  */
 void cidr_free(CIDR *cidr)
 {
-	gsh_free(cidr);
+	gsh_free(cidr, MEM_COMP_MISC);
 }
 
 /**
@@ -517,7 +517,7 @@ char *cidr_to_str(CIDR *cidr)
 {
 	char *cidr_string;
 
-	cidr_string = gsh_calloc(SOCK_NAME_MAX, sizeof(char));
+	cidr_string = gsh_calloc(SOCK_NAME_MAX, sizeof(char), MEM_COMP_MISC);
 
 	struct display_buffer dspbuf = { SOCK_NAME_MAX * sizeof(char),
 					 cidr_string, cidr_string };

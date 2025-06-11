@@ -257,7 +257,7 @@ static struct dir_data {
 
 void avl_unit_free_val(avl_unit_val_t *v)
 {
-	gsh_free(v);
+	gsh_free(v, MEM_COMP_MISC);
 }
 
 void avl_unit_clear_tree(struct avltree *t)

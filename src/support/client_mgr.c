@@ -173,7 +173,7 @@ struct gsh_client *get_gsh_client(sockaddr_t *client_ipaddr, bool lookup_only)
 	}
 	PTHREAD_RWLOCK_unlock(&client_by_ip.cip_lock);
 
-	server_st = gsh_calloc(1, sizeof(*server_st));
+	server_st = gsh_calloc(1, sizeof(*server_st), MEM_COMP_CLIENT);
 
 	cl = &server_st->client;
 	cl->cl_addrbuf = *client_ipaddr;
@@ -192,7 +192,8 @@ struct gsh_client *get_gsh_client(sockaddr_t *client_ipaddr, bool lookup_only)
 	PTHREAD_RWLOCK_wrlock(&client_by_ip.cip_lock);
 	node = avltree_insert(&cl->node_k, &client_by_ip.t);
 	if (node) {
-		gsh_free(server_st); /* somebody beat us to it */
+		gsh_free(server_st,
+			 MEM_COMP_CLIENT); /* somebody beat us to it */
 		cl = avltree_container_of(node, struct gsh_client, node_k);
 	} else {
 		PTHREAD_RWLOCK_init(&cl->client_lock, NULL);
@@ -273,7 +274,7 @@ out:
 		server_stats_allops_free(&server_st->c_all);
 		connection_manager__client_fini(&cl->connection_manager);
 		PTHREAD_RWLOCK_destroy(&cl->client_lock);
-		gsh_free(server_st);
+		gsh_free(server_st, MEM_COMP_CLIENT);
 	}
 	return removed;
 }
@@ -1215,7 +1216,8 @@ void client_pkginit(void)
 	avltree_init(&client_by_ip.t, client_ip_cmpf, 0);
 	client_by_ip.cache_sz = 32767;
 	client_by_ip.cache = gsh_calloc(client_by_ip.cache_sz,
-					sizeof(struct avltree_node *));
+					sizeof(struct avltree_node *),
+					MEM_COMP_CLIENT);
 	RegisterCleanup(&client_mgr_cleanup_element);
 }
 
@@ -1272,7 +1274,7 @@ int StrClient(struct display_buffer *dspbuf, struct base_client_entry *client)
 					client_types[client->type], paddr);
 	}
 
-	gsh_free(free_paddr);
+	gsh_free(free_paddr, MEM_COMP_MISC);
 
 	return b_left;
 }
@@ -1318,13 +1320,16 @@ void FreeClientList(struct glist_head *clients, client_free_func free_func)
 				cidr_free(client->client.network.cidr);
 			break;
 		case NETGROUP_CLIENT:
-			gsh_free(client->client.netgroup.netgroupname);
+			gsh_free(client->client.netgroup.netgroupname,
+				 MEM_COMP_MISC);
 			break;
 		case WILDCARDHOST_CLIENT:
-			gsh_free(client->client.wildcard.wildcard);
+			gsh_free(client->client.wildcard.wildcard,
+				 MEM_COMP_MISC);
 			break;
 		case GSSPRINCIPAL_CLIENT:
-			gsh_free(client->client.gssprinc.princname);
+			gsh_free(client->client.gssprinc.princname,
+				 MEM_COMP_MISC);
 			break;
 		case PROTO_CLIENT:
 		case MATCH_ANY_CLIENT:
@@ -1338,7 +1343,7 @@ void FreeClientList(struct glist_head *clients, client_free_func free_func)
 
 void *base_client_allocator(void)
 {
-	return gsh_calloc(1, sizeof(struct base_client_entry));
+	return gsh_calloc(1, sizeof(struct base_client_entry), MEM_COMP_CLIENT);
 }
 
 struct base_client_entry *is_base_client_exact_match(
@@ -1617,7 +1622,7 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	glist_add_tail(client_list, &cli->cle_list);
 	cli = NULL;
 out:
-	gsh_free(cli);
+	gsh_free(cli, MEM_COMP_CLIENT);
 
 exit:
 	return errcnt;
@@ -1658,10 +1663,10 @@ bool delete_base_client(enum log_components component,
 		cidr_free(cli->client.network.cidr);
 		break;
 	case NETGROUP_CLIENT:
-		gsh_free(cli->client.netgroup.netgroupname);
+		gsh_free(cli->client.netgroup.netgroupname, MEM_COMP_MISC);
 		break;
 	case WILDCARDHOST_CLIENT:
-		gsh_free(cli->client.wildcard.wildcard);
+		gsh_free(cli->client.wildcard.wildcard, MEM_COMP_MISC);
 		break;
 	case GSSPRINCIPAL_CLIENT:
 	case PROTO_CLIENT:
@@ -1672,7 +1677,7 @@ bool delete_base_client(enum log_components component,
 	}
 
 	glist_del(&cli->cle_list);
-	gsh_free(cli);
+	gsh_free(cli, MEM_COMP_CLIENT);
 
 	LogInfo(component, "Removed Base client: (%s)", client_tok);
 	deleted = true;

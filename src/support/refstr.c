@@ -29,7 +29,7 @@ struct gsh_refstr *gsh_refstr_alloc(size_t len)
 {
 	struct gsh_refstr *gr;
 
-	gr = gsh_malloc(sizeof(*gr) + len);
+	gr = gsh_malloc(sizeof(*gr) + len, MEM_COMP_MISC);
 	urcu_ref_init(&gr->gr_ref);
 	return gr;
 }
@@ -40,5 +40,5 @@ void gsh_refstr_release(struct urcu_ref *ref)
 
 	LogFullDebug(COMPONENT_EXPORT, "Releasing refstr %s", gr->gr_val);
 
-	gsh_free(gr);
+	gsh_free(gr, MEM_COMP_MISC);
 }

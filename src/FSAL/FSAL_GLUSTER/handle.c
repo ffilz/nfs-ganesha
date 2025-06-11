@@ -78,7 +78,7 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 	}
 
 	if (my_fd->creds.caller_garray) {
-		gsh_free(my_fd->creds.caller_garray);
+		gsh_free(my_fd->creds.caller_garray, MEM_COMP_FSAL);
 		my_fd->creds.caller_garray = NULL;
 	}
 
@@ -96,7 +96,7 @@ static void handle_release(struct fsal_obj_handle *obj_hdl)
 		destroy_fsal_fd(&my_fd->fsal_fd);
 
 	fsal_obj_handle_fini(&objhandle->handle, true);
-	gsh_free(objhandle);
+	gsh_free(objhandle, MEM_COMP_FSAL);
 
 #ifdef GLTIMING
 	now(&e_time);
@@ -238,7 +238,8 @@ static int glusterfs_fsal_get_sec_label(struct glusterfs_handle *glhandle,
 		}
 
 		attrs->sec_label.slai_data.slai_data_len = rc;
-		gsh_free(attrs->sec_label.slai_data.slai_data_val);
+		gsh_free(attrs->sec_label.slai_data.slai_data_val,
+			 MEM_COMP_MISC);
 		if (rc > 0) {
 			attrs->sec_label.slai_data.slai_data_val =
 				gsh_memdup(label, rc);
@@ -780,7 +781,13 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 #endif
 
 	link_content->len = MAXPATHLEN; /* Max link path */
-	link_content->addr = gsh_malloc(link_content->len);
+
+	/*
+	 * Component chosen here is miscellaneous instead of FSAL
+	 * because the same addr value is allocated by gsh_malloc
+	 * and gsh_strdup(which uses default MISC component)
+	 */
+	link_content->addr = gsh_malloc(link_content->len, MEM_COMP_MISC);
 
 	SET_GLUSTER_CREDS_OP_CTX(glfs_export);
 
@@ -806,7 +813,7 @@ static fsal_status_t readsymlink(struct fsal_obj_handle *obj_hdl,
 
 out:
 	if (status.major != ERR_FSAL_NO_ERROR) {
-		gsh_free(link_content->addr);
+		gsh_free(link_content->addr, MEM_COMP_MISC);
 		link_content->addr = NULL;
 		link_content->len = 0;
 	}
@@ -1177,13 +1184,15 @@ struct glfs_object *glusterfs_create_my_fd(
 
 	if ((*garray_copy) != NULL) {
 		/* Replace old creds */
-		gsh_free(*garray_copy);
+		/* Revisit needed for Memory component name */
+		gsh_free(*garray_copy, MEM_COMP_MISC);
 		*garray_copy = NULL;
 	}
 
 	if (op_ctx->creds.caller_glen) {
 		(*garray_copy) =
-			gsh_malloc(op_ctx->creds.caller_glen * sizeof(gid_t));
+			gsh_malloc(op_ctx->creds.caller_glen * sizeof(gid_t),
+				   MEM_COMP_FSAL);
 		memcpy((*garray_copy), op_ctx->creds.caller_garray,
 		       op_ctx->creds.caller_glen * sizeof(gid_t));
 	}
@@ -1246,7 +1255,8 @@ fsal_status_t glusterfs_close_my_fd(struct glusterfs_fd *my_fd)
 		my_fd->creds.caller_glen = 0;
 
 		if (my_fd->creds.caller_garray) {
-			gsh_free(my_fd->creds.caller_garray);
+			/* Revisit needed for Memory component name */
+			gsh_free(my_fd->creds.caller_garray, MEM_COMP_MISC);
 			my_fd->creds.caller_garray = NULL;
 		}
 	} else {
@@ -1362,7 +1372,8 @@ fsal_status_t glusterfs_reopen_func(struct fsal_obj_handle *obj_hdl,
 		}
 
 		/* Free the old creds */
-		gsh_free(my_fd->creds.caller_garray);
+		/* Revisit needed for Memory component name */
+		gsh_free(my_fd->creds.caller_garray, MEM_COMP_MISC);
 		my_fd->creds.caller_garray = NULL;
 	}
 
@@ -1377,7 +1388,8 @@ fsal_status_t glusterfs_reopen_func(struct fsal_obj_handle *obj_hdl,
 
 	if (op_ctx->creds.caller_glen) {
 		my_fd->creds.caller_garray =
-			gsh_malloc(op_ctx->creds.caller_glen * sizeof(gid_t));
+			gsh_malloc(op_ctx->creds.caller_glen * sizeof(gid_t),
+				   MEM_COMP_FSAL);
 
 		memcpy(my_fd->creds.caller_garray, op_ctx->creds.caller_garray,
 		       op_ctx->creds.caller_glen * sizeof(gid_t));
@@ -3150,7 +3162,7 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 	valstart = val;
 
 #define MAXCOUNT (1024 * 64)
-	buf = gsh_malloc(MAXCOUNT);
+	buf = gsh_malloc(MAXCOUNT, MEM_COMP_FSAL);
 
 	/* Log Message */
 	LogFullDebug(COMPONENT_FSAL, "in cookie %llu length %d",
@@ -3188,7 +3200,7 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 				     sizeof(component4) >
 			     la_maxcount) ||
 			    ((val - valstart) + (next - name) > la_maxcount)) {
-				gsh_free(buf);
+				gsh_free(buf, MEM_COMP_FSAL);
 				*lr_eof = false;
 
 				lr_names->xl4_count = entryCount - *la_cookie;
@@ -3226,7 +3238,7 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 	lr_names->xl4_count = entryCount - *la_cookie;
 	*la_cookie = 0;
 	*lr_eof = true;
-	gsh_free(buf);
+	gsh_free(buf, MEM_COMP_FSAL);
 
 	LogFullDebug(COMPONENT_FSAL, "out2 cookie %llu eof %d",
 		     (unsigned long long)*la_cookie, *lr_eof);

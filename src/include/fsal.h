@@ -446,7 +446,7 @@ static inline void fsal_release_attrs(struct fsal_attrlist *attrs)
 	}
 
 	attrs->sec_label.slai_data.slai_data_len = 0;
-	gsh_free(attrs->sec_label.slai_data.slai_data_val);
+	gsh_free(attrs->sec_label.slai_data.slai_data_val, MEM_COMP_MISC);
 	attrs->sec_label.slai_data.slai_data_val = NULL;
 }
 

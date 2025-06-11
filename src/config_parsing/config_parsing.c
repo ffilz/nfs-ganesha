@@ -280,7 +280,7 @@ int report_config_errors(struct config_error_type *err_type, void *dest,
 		}
 		count++;
 	}
-	gsh_free(err_type->diag_buf);
+	free(err_type->diag_buf);
 	err_type->diag_buf = NULL;
 	return count;
 }
@@ -1121,13 +1121,15 @@ static int do_block_load(struct config_node *blk, struct config_item *params,
 				break;
 			case CONFIG_STRING:
 				if (*(char **)param_addr != NULL)
-					gsh_free(*(char **)param_addr);
+					gsh_free(*(char **)param_addr,
+						 MEM_COMP_MISC);
 				*(char **)param_addr =
 					gsh_strdup(term_node->u.term.varvalue);
 				break;
 			case CONFIG_PATH:
 				if (*(char **)param_addr != NULL)
-					gsh_free(*(char **)param_addr);
+					gsh_free(*(char **)param_addr,
+						 MEM_COMP_MISC);
 				/** @todo validate path with access() */
 				*(char **)param_addr =
 					gsh_strdup(term_node->u.term.varvalue);
@@ -1541,9 +1543,9 @@ static void free_expr_parse_arg(struct expr_parse_arg *argp)
 		return;
 	for (arg = argp; arg != NULL; arg = nxtarg) {
 		nxtarg = arg->next;
-		gsh_free(arg->name);
-		gsh_free(arg->value);
-		gsh_free(arg);
+		gsh_free(arg->name, MEM_COMP_MISC);
+		gsh_free(arg->value, MEM_COMP_MISC);
+		gsh_free(arg, MEM_COMP_INIT);
 	}
 }
 
@@ -1559,9 +1561,9 @@ static void free_expr_parse(struct expr_parse *snode)
 		return;
 	for (node = snode; node != NULL; node = nxtnode) {
 		nxtnode = node->next;
-		gsh_free(node->name);
+		gsh_free(node->name, MEM_COMP_MISC);
 		free_expr_parse_arg(node->arg);
-		gsh_free(node);
+		gsh_free(node, MEM_COMP_INIT);
 	}
 }
 
@@ -1608,7 +1610,7 @@ static char *parse_args(char *arg_str, struct expr_parse_arg **argp)
 		return NULL;
 	saved_char = *sp;
 	*sp = '\0';
-	arg = gsh_calloc(1, sizeof(struct expr_parse_arg));
+	arg = gsh_calloc(1, sizeof(struct expr_parse_arg), MEM_COMP_INIT);
 	arg->name = gsh_strdup(name);
 	arg->value = gsh_strdup(val);
 	*argp = arg;
@@ -1655,7 +1657,8 @@ static char *parse_block(char *str, struct expr_parse **node)
 		goto errout;
 	sp = skip_white(sp);
 	if (*sp == ')') { /* name ( ... ) */
-		new_node = gsh_calloc(1, sizeof(struct expr_parse));
+		new_node =
+			gsh_calloc(1, sizeof(struct expr_parse), MEM_COMP_INIT);
 		new_node->name = gsh_strdup(name);
 		new_node->arg = arg;
 		*node = new_node;
@@ -1843,7 +1846,8 @@ again:
 				expr = expr->next;
 				goto again;
 			}
-			list = gsh_calloc(1, sizeof(struct config_node_list));
+			list = gsh_calloc(1, sizeof(struct config_node_list),
+					  MEM_COMP_INIT);
 			list->tree_node = sub_node;
 			if (*node_list == NULL)
 				*node_list = list;
@@ -2036,7 +2040,7 @@ int load_config_from_parse(config_file_t config, struct config_block *conf_blk,
 				  err_type->errors - prev_errs,
 				  errstr != NULL ? errstr : "unknown", blkname);
 		if (errstr != NULL)
-			gsh_free(errstr);
+			gsh_free(errstr, MEM_COMP_MISC);
 	}
 	return found;
 }

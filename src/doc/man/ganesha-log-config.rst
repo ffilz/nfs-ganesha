@@ -55,6 +55,9 @@ Match_Policy(token, default MATCH_ANY)
     MATCH_ALL
         Enable conditional logging only if both the client AND the export match.
 
+Mem_Stats_Enabled(bool, default false)
+    Flag to enable counting of memory statistics
+
 LOG { COMPONENTS {} }
 --------------------------------------------------------------------------------
 **Default_log_level(token,default EVENT)**

@@ -65,6 +65,7 @@
 #include "nfs_core.h"
 #include "config_parsing.h"
 #include "sal_functions.h"
+#include "server_stats.h"
 
 #define COMPONENT_ARG \
 	{ .name = "component_name", .type = "s", .direction = "in" }
@@ -750,7 +751,7 @@ int create_log_facility(const char *name, lf_function_t *log_func,
 		return -EEXIST;
 	}
 
-	facility = gsh_calloc(1, sizeof(*facility));
+	facility = gsh_calloc(1, sizeof(*facility), MEM_COMP_INIT);
 
 	facility->lf_name = gsh_strdup(name);
 	facility->lf_func = log_func;
@@ -809,9 +810,9 @@ void release_log_facility(const char *name)
 	glist_del(&facility->lf_list);
 	PTHREAD_RWLOCK_unlock(&log_rwlock);
 	if (facility->lf_func == log_to_file && facility->lf_private != NULL)
-		gsh_free(facility->lf_private);
-	gsh_free(facility->lf_name);
-	gsh_free(facility);
+		gsh_free(facility->lf_private, MEM_COMP_MISC);
+	gsh_free(facility->lf_name, MEM_COMP_MISC);
+	gsh_free(facility, MEM_COMP_INIT);
 }
 
 /**
@@ -996,9 +997,11 @@ int set_log_destination(const char *name, char *dest)
 				dest, strerror(errno));
 			return -errno;
 		}
+		PTHREAD_RWLOCK_unlock(&log_rwlock);
 		logfile = gsh_strdup(dest);
-		gsh_free(facility->lf_private);
+		gsh_free(facility->lf_private, MEM_COMP_MISC);
 		facility->lf_private = logfile;
+		goto out;
 	} else if (facility->lf_func == log_to_stream) {
 		FILE *out;
 
@@ -1021,6 +1024,8 @@ int set_log_destination(const char *name, char *dest)
 		return -EINVAL;
 	}
 	PTHREAD_RWLOCK_unlock(&log_rwlock);
+
+out:
 	return 0;
 }
 
@@ -2028,6 +2033,7 @@ struct logger_config {
 	bool disp_utc_timestamp;
 	cond_log_match_policies_t match_policy;
 	struct conditional_config conditional;
+	bool mem_stats_enabled;
 };
 
 /**
@@ -2090,15 +2096,15 @@ static void *format_init(void *link_mem, void *self_struct)
 	if (link_mem == NULL)
 		return NULL;
 	if (self_struct == NULL)
-		return gsh_calloc(1, sizeof(struct logfields));
+		return gsh_calloc(1, sizeof(struct logfields), MEM_COMP_INIT);
 	else {
 		struct logfields *lf = self_struct;
 
 		if (lf->user_date_fmt != NULL)
-			gsh_free(lf->user_date_fmt);
+			gsh_free(lf->user_date_fmt, MEM_COMP_MISC);
 		if (lf->user_time_fmt != NULL)
-			gsh_free(lf->user_time_fmt);
-		gsh_free(lf);
+			gsh_free(lf->user_time_fmt, MEM_COMP_MISC);
+		gsh_free(lf, MEM_COMP_INIT);
 		return NULL;
 	}
 }
@@ -2290,9 +2296,10 @@ static void *component_init(void *link_mem, void *self_struct)
 	if (link_mem == NULL)
 		return NULL;
 	if (self_struct == NULL)
-		return gsh_calloc(COMPONENT_COUNT, sizeof(log_levels_t));
+		return gsh_calloc(COMPONENT_COUNT, sizeof(log_levels_t),
+				  MEM_COMP_INIT);
 	else {
-		gsh_free(self_struct);
+		gsh_free(self_struct, MEM_COMP_INIT);
 		return NULL;
 	}
 }
@@ -2374,7 +2381,8 @@ static void *facility_init(void *link_mem, void *self_struct)
 		glist_init(&logger->facility_list);
 		return self_struct;
 	} else if (self_struct == NULL) {
-		facility = gsh_calloc(1, sizeof(struct facility_config));
+		facility = gsh_calloc(1, sizeof(struct facility_config),
+				      MEM_COMP_INIT);
 		return facility;
 	} else {
 		facility = self_struct;
@@ -2382,10 +2390,10 @@ static void *facility_init(void *link_mem, void *self_struct)
 		assert(glist_null(&facility->fac_list));
 
 		if (facility->facility_name != NULL)
-			gsh_free(facility->facility_name);
+			gsh_free(facility->facility_name, MEM_COMP_MISC);
 		if (facility->dest != NULL)
-			gsh_free(facility->dest);
-		gsh_free(self_struct);
+			gsh_free(facility->dest, MEM_COMP_MISC);
+		gsh_free(self_struct, MEM_COMP_INIT);
 	}
 	return NULL;
 }
@@ -2615,9 +2623,10 @@ static void *conditional_init(void *link_mem, void *self_struct)
 	if (link_mem == NULL)
 		return self_struct;
 	else if (self_struct == NULL)
-		return gsh_calloc(COMPONENT_COUNT, sizeof(log_levels_t));
+		return gsh_calloc(COMPONENT_COUNT, sizeof(log_levels_t),
+				  MEM_COMP_INIT);
 	else {
-		gsh_free(self_struct);
+		gsh_free(self_struct, MEM_COMP_INIT);
 		return NULL;
 	}
 }
@@ -2882,10 +2891,12 @@ done:
 				 "Changing definition of log fields");
 			if (logfields != &default_logfields) {
 				if (logfields->user_date_fmt != NULL)
-					gsh_free(logfields->user_date_fmt);
+					gsh_free(logfields->user_date_fmt,
+						 MEM_COMP_MISC);
 				if (logfields->user_time_fmt != NULL)
-					gsh_free(logfields->user_time_fmt);
-				gsh_free(logfields);
+					gsh_free(logfields->user_time_fmt,
+						 MEM_COMP_MISC);
+				gsh_free(logfields, MEM_COMP_INIT);
 			}
 			logfields = logger->logfields;
 
@@ -2915,21 +2926,23 @@ done:
 
 		disp_utc_timestamp = logger->disp_utc_timestamp;
 		rpc_debug_flags = logger->rpc_debug_flags;
+		gsh_mem_stats_enabled = logger->mem_stats_enabled;
+		gsh_mem_stats_logging_enabled = true;
 		SetNTIRPCLogLevel(component_log_level[COMPONENT_TIRPC]);
 	} else {
 		if (logger->logfields != NULL) {
 			struct logfields *lf = logger->logfields;
 
 			if (lf->user_date_fmt != NULL)
-				gsh_free(lf->user_date_fmt);
+				gsh_free(lf->user_date_fmt, MEM_COMP_MISC);
 			if (lf->user_time_fmt != NULL)
-				gsh_free(lf->user_time_fmt);
-			gsh_free(lf);
+				gsh_free(lf->user_time_fmt, MEM_COMP_MISC);
+			gsh_free(lf, MEM_COMP_INIT);
 		}
 	}
 
 	if (logger->comp_log_level != NULL)
-		gsh_free(logger->comp_log_level);
+		gsh_free(logger->comp_log_level, MEM_COMP_INIT);
 
 	logger->logfields = NULL;
 	logger->comp_log_level = NULL;
@@ -2955,6 +2968,8 @@ static struct config_item logging_params[] = {
 			cond_log_match_policies, logger_config, match_policy),
 	CONF_ITEM_BLOCK("Conditional", conditional_params, conditional_init,
 			conditional_commit, logger_config, conditional),
+	CONF_ITEM_BOOL("Mem_Stats_Enabled", false, logger_config,
+		       mem_stats_enabled),
 	CONFIG_EOL
 };
 
@@ -3634,7 +3649,7 @@ static bool dbus_conditional_log_export_disable(DBusMessageIter *args,
 	}
 
 	glist_del(&export_entry->export_id_glist);
-	gsh_free(&export_entry->export_id_glist);
+	gsh_free(&export_entry->export_id_glist, MEM_COMP_MISC);
 
 	LogEvent(COMPONENT_LOG,
 		 "Conditional Logging disabled for Export_Id: %d", export_id);

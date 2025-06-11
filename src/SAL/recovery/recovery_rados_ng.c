@@ -199,7 +199,7 @@ static void rados_ng_add_clid(nfs_client_id_t *clientid)
 	if (ret < 0) {
 		LogEvent(COMPONENT_CLIENTID, "Failed to add clid %lu",
 			 clientid->cid_clientid);
-		gsh_free(cval);
+		gsh_free(cval, MEM_COMP_MISC);
 	} else {
 		clientid->cid_recov_tag = cval;
 	}
@@ -239,7 +239,7 @@ void rados_ng_pop_clid_entry(char *key, char *val, size_t val_len,
 	add_rfh_entry_hook add_rfh_entry = pop_args->add_rfh_entry;
 
 	/* extract clid records */
-	dupval = gsh_malloc(val_len + 1);
+	dupval = gsh_malloc(val_len + 1, MEM_COMP_FILE_AND_STATE_LOCK);
 	memcpy(dupval, val, val_len);
 	dupval[val_len] = '\0';
 	cl_name = strtok(dupval, "#");
@@ -253,7 +253,7 @@ void rados_ng_pop_clid_entry(char *key, char *val, size_t val_len,
 		add_rfh_entry(clid_ent, rfh_name);
 		rfh_name = strtok(NULL, "#");
 	}
-	gsh_free(dupval);
+	gsh_free(dupval, MEM_COMP_MISC);
 }
 
 static void rados_ng_read_recov_clids_recover(

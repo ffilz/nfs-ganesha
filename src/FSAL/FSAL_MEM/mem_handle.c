@@ -124,7 +124,7 @@ static void mem_cleanup(struct mem_fsal_obj_handle *myself)
 		destroy_fsal_fd(&myself->mh_file.fd);
 		break;
 	case SYMBOLIC_LINK:
-		gsh_free(myself->mh_symlink.link_contents);
+		gsh_free(myself->mh_symlink.link_contents, MEM_COMP_MISC);
 		break;
 	case SOCKET_FILE:
 	case CHARACTER_FILE:
@@ -314,7 +314,7 @@ static void mem_insert_obj(struct mem_fsal_obj_handle *parent,
 	struct mem_dirent *dirent;
 	uint32_t numkids;
 
-	dirent = gsh_calloc(1, sizeof(*dirent));
+	dirent = gsh_calloc(1, sizeof(*dirent), MEM_COMP_FSAL);
 	dirent->hdl = child;
 	mem_int_get_ref(child);
 	dirent->dir = parent;
@@ -471,8 +471,8 @@ static void mem_remove_dirent_locked(struct mem_fsal_obj_handle *parent,
 		     numkids);
 
 	/* Free dirent */
-	gsh_free((char *)dirent->d_name);
-	gsh_free(dirent);
+	gsh_free((char *)dirent->d_name, MEM_COMP_MISC);
+	gsh_free(dirent, MEM_COMP_FSAL);
 
 	mem_int_put_ref(child);
 
@@ -714,7 +714,7 @@ static struct mem_fsal_obj_handle *_mem_alloc_handle(
 		isize += MEM.inode_size;
 	}
 
-	hdl = gsh_calloc(1, isize);
+	hdl = gsh_calloc(1, isize, MEM_COMP_FSAL);
 
 	/* Establish tree details for this directory */
 	hdl->m_name = gsh_strdup(name);
@@ -1523,7 +1523,7 @@ static fsal_status_t mem_rename(struct fsal_obj_handle *obj_hdl,
 
 	if (!strcmp(old_name, mem_obj->m_name)) {
 		/* Change base name */
-		gsh_free(mem_obj->m_name);
+		gsh_free(mem_obj->m_name, MEM_COMP_MISC);
 		mem_obj->m_name = gsh_strdup(new_name);
 	}
 
@@ -1952,7 +1952,7 @@ static void mem_async_complete(struct fridgethr_context *ctx)
 
 	release_op_context();
 
-	gsh_free(async_arg);
+	gsh_free(async_arg, MEM_COMP_FILE_AND_STATE_LOCK);
 }
 
 /**
@@ -2002,7 +2002,8 @@ void mem_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	/* We always meed async_arg because that's where temp_fd is located
 	 * and we may need temp_fd before we know we actually are going async.
 	 */
-	async_arg = gsh_calloc(1, sizeof(*async_arg));
+	async_arg =
+		gsh_calloc(1, sizeof(*async_arg), MEM_COMP_FILE_AND_STATE_LOCK);
 
 	init_fsal_fd(&async_arg->temp_fd, FSAL_FD_TEMP, op_ctx->fsal_export);
 
@@ -2104,7 +2105,7 @@ exit:
 	destroy_fsal_fd(&async_arg->temp_fd);
 
 	/* Now free the async arg since we are done with it. */
-	gsh_free(async_arg);
+	gsh_free(async_arg, MEM_COMP_FILE_AND_STATE_LOCK);
 
 bye:
 
@@ -2163,7 +2164,8 @@ void mem_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	/* We always meed async_arg because that's where temp_fd is located
 	 * and we may need temp_fd before we know we actually are going async.
 	 */
-	async_arg = gsh_calloc(1, sizeof(*async_arg));
+	async_arg =
+		gsh_calloc(1, sizeof(*async_arg), MEM_COMP_FILE_AND_STATE_LOCK);
 
 	init_fsal_fd(&async_arg->temp_fd, FSAL_FD_TEMP, op_ctx->fsal_export);
 
@@ -2223,7 +2225,8 @@ void mem_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 		/* Was MEM_FIXED, MEM_RANDOM, or MEM_RANDOM_OR_INLINE and we
 		 * scored a non-inline.
 		 */
-		async_arg = gsh_malloc(sizeof(*async_arg));
+		async_arg = gsh_malloc(sizeof(*async_arg),
+				       MEM_COMP_FILE_AND_STATE_LOCK);
 
 		async_arg->obj_hdl = obj_hdl;
 		async_arg->io_arg = write_arg;
@@ -2266,7 +2269,7 @@ exit:
 	destroy_fsal_fd(&async_arg->temp_fd);
 
 	/* Now free the async arg since we are done with it. */
-	gsh_free(async_arg);
+	gsh_free(async_arg, MEM_COMP_FILE_AND_STATE_LOCK);
 
 bye:
 
