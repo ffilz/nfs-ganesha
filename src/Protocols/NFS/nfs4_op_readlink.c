@@ -109,7 +109,7 @@ enum nfs_req_result nfs4_op_readlink(struct nfs_argop4 *op,
 	if (res_READLINK4->status != NFS4_OK) {
 		/* No room for response, free link. */
 		gsh_free(res_READLINK4->READLINK4res_u.resok4.link
-				 .utf8string_val);
+				 .utf8string_val, MEM_COMP_MISC);
 	}
 
 	data->op_resp_size = resp_size;
@@ -134,5 +134,6 @@ void nfs4_op_readlink_Free(nfs_resop4 *res)
 	READLINK4res *resp = &res->nfs_resop4_u.opreadlink;
 
 	if (resp->status == NFS4_OK)
-		gsh_free(resp->READLINK4res_u.resok4.link.utf8string_val);
+		gsh_free(resp->READLINK4res_u.resok4.link.utf8string_val,
+			MEM_COMP_MISC);
 }

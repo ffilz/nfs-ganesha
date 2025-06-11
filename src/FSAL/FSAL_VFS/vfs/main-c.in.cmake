@@ -165,7 +165,7 @@ static fsal_status_t init_config(struct fsal_module *vfs_fsal_module,
 			"Could not create file %s to test OFD locks",
 			temp_name);
 	}
-	gsh_free(temp_name);
+	gsh_free(temp_name, MEM_COMP_MISC);
 #endif
 
 	if (vfs_module->module.fs_info.lock_support)

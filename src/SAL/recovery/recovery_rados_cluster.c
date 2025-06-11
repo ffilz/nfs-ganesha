@@ -151,7 +151,7 @@ static int rados_cluster_init(void)
 out_shutdown:
 	rados_kv_shutdown();
 out_free_nodeid:
-	gsh_free(nodeid);
+	gsh_free(nodeid, MEM_COMP_MISC);
 	nodeid = NULL;
 	return ret;
 }
@@ -589,7 +589,7 @@ static void rados_cluster_shutdown(void)
 			 ret);
 
 	rados_kv_shutdown();
-	gsh_free(nodeid);
+	gsh_free(nodeid, MEM_COMP_MISC);
 	nodeid = NULL;
 }
 

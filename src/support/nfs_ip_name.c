@@ -208,7 +208,7 @@ int nfs_ip_name_add(sockaddr_t *ipaddr, char *hostname, size_t maxsize)
 	len = strlen(hn);
 	size = sizeof(nfs_ip_name_t) + len + 1;
 
-	nfs_ip_name = gsh_malloc(size);
+	nfs_ip_name = gsh_malloc(size, MEM_COMP_MISC);
 
 	nfs_ip_name->timestamp = time(NULL);
 	memcpy(nfs_ip_name->hostname, hn, len + 1);
@@ -238,8 +238,8 @@ int nfs_ip_name_add(sockaddr_t *ipaddr, char *hostname, size_t maxsize)
 		}
 
 		/* Release not required allocations */
-		gsh_free(nfs_ip_name);
-		gsh_free(buffkey.addr);
+		gsh_free(nfs_ip_name, MEM_COMP_MISC);
+		gsh_free(buffkey.addr, MEM_COMP_MISC);
 	}
 
 	return IP_NAME_SUCCESS;
@@ -288,7 +288,7 @@ int nfs_ip_name_get(sockaddr_t *ipaddr, char *hostname, size_t size)
 					     "Removing cache entry %s->%s",
 					     ipstring, nfs_ip_name->hostname);
 
-				gsh_free(nfs_ip_name);
+				gsh_free(nfs_ip_name, MEM_COMP_CLIENT);
 			}
 			return IP_NAME_NOT_FOUND;
 		}
@@ -343,7 +343,7 @@ int nfs_ip_name_remove(sockaddr_t *ipaddr)
 		LogFullDebug(COMPONENT_DISPATCH, "Cache remove hit for %s->%s",
 			     ipstring, nfs_ip_name->hostname);
 
-		gsh_free(nfs_ip_name);
+		gsh_free(nfs_ip_name, MEM_COMP_MISC);
 		return IP_NAME_SUCCESS;
 	}
 

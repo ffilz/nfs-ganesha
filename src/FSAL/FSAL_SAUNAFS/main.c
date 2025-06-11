@@ -184,7 +184,7 @@ static inline void releaseExport(struct SaunaFSExport *export)
 		if (export->cache)
 			destroyFileInfoCache(export->cache);
 
-		gsh_free(export);
+		gsh_free(export, MEM_COMP_FSAL);
 	}
 }
 
@@ -215,7 +215,7 @@ static fsal_status_t createExport(struct fsal_module *module, void *parseNode,
 	int retvalue = 0;
 
 	struct SaunaFSExport *export =
-		gsh_calloc(1, sizeof(struct SaunaFSExport));
+		gsh_calloc(1, sizeof(struct SaunaFSExport), MEM_COMP_FSAL);
 
 	fsal_export_init(&export->export);
 	exportOperationsInit(&export->export.exp_ops);

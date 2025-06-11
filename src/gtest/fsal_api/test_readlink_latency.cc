@@ -90,7 +90,7 @@ class ReadlinkEmptyLatencyTest : public gtest::GaneshaFSALBaseTest {
 	{
 		fsal_status_t status;
 
-		gsh_free(bfr_content.addr);
+		gsh_free(bfr_content.addr, MEM_COMP_GTEST);
 
 		status = symlink_test_root->obj_ops->unlink(root_entry,
 							    symlink_test_root,
@@ -140,7 +140,7 @@ TEST_F(ReadlinkEmptyLatencyTest, SIMPLE)
 			     link_content.len);
 	EXPECT_EQ(ret, 0);
 
-	gsh_free(link_content.addr);
+	gsh_free(link_content.addr, MEM_COMP_GTEST);
 }
 
 TEST_F(ReadlinkEmptyLatencyTest, SIMPLE_BYPASS)
@@ -159,7 +159,7 @@ TEST_F(ReadlinkEmptyLatencyTest, SIMPLE_BYPASS)
 			     link_content.len);
 	EXPECT_EQ(ret, 0);
 
-	gsh_free(link_content.addr);
+	gsh_free(link_content.addr, MEM_COMP_GTEST);
 }
 
 TEST_F(ReadlinkEmptyLatencyTest, LOOP)
@@ -174,7 +174,7 @@ TEST_F(ReadlinkEmptyLatencyTest, LOOP)
 		status = symlink_test_root->obj_ops->readlink(
 			symlink_test_root, &link_content, false);
 		EXPECT_EQ(status.major, 0);
-		gsh_free(link_content.addr);
+		gsh_free(link_content.addr, MEM_COMP_GTEST);
 	}
 
 	now(&e_time);
@@ -194,7 +194,7 @@ TEST_F(ReadlinkEmptyLatencyTest, FSALREADLINK)
 	for (int i = 0; i < LOOP_COUNT; ++i) {
 		status = fsal_readlink(symlink_test_root, &link_content);
 		EXPECT_EQ(status.major, 0);
-		gsh_free(link_content.addr);
+		gsh_free(link_content.addr, MEM_COMP_GTEST);
 	}
 
 	now(&e_time);
@@ -216,7 +216,7 @@ TEST_F(ReadlinkFullLatencyTest, BIG)
 			symlink_test_root, &link_content, false);
 		ASSERT_EQ(status.major, 0)
 			<< " failed to readlink " << TEST_ROOT_LINK;
-		gsh_free(link_content.addr);
+		gsh_free(link_content.addr, MEM_COMP_GTEST);
 	}
 
 	now(&e_time);
@@ -240,7 +240,7 @@ TEST_F(ReadlinkFullLatencyTest, BIG_BYPASS)
 						    false);
 		ASSERT_EQ(status.major, 0)
 			<< " failed to readlink " << TEST_ROOT_LINK;
-		gsh_free(link_content.addr);
+		gsh_free(link_content.addr, MEM_COMP_GTEST);
 	}
 
 	now(&e_time);

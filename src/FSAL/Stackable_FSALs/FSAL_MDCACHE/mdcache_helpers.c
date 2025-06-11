@@ -388,7 +388,7 @@ again:
 		return fsalstat(ERR_FSAL_STALE, ESTALE);
 	}
 
-	expmap = gsh_calloc(1, sizeof(*expmap));
+	expmap = gsh_calloc(1, sizeof(*expmap), MEM_COMP_CACHE);
 
 	/* If export_list is empty, store this export as first */
 	if (glist_empty(&entry->export_list)) {
@@ -1521,7 +1521,8 @@ fsal_status_t mdcache_dirent_add(mdcache_entry_t *parent, const char *name,
 #endif
 
 	/* in cache avl, we always insert on pentry_parent */
-	new_dir_entry = gsh_calloc(1, sizeof(mdcache_dir_entry_t) + namesize);
+	new_dir_entry = gsh_calloc(1, sizeof(mdcache_dir_entry_t) + namesize,
+				MEM_COMP_CACHE);
 	new_dir_entry->flags = DIR_ENTRY_FLAG_NONE;
 	allocated_dir_entry = new_dir_entry;
 
@@ -2188,7 +2189,8 @@ static enum fsal_dir_result mdc_readdir_chunk_object(
 			name, new_entry->sub_handle->fsal->name);
 
 	/* in cache avl, we always insert on state->dir */
-	new_dir_entry = gsh_calloc(1, sizeof(mdcache_dir_entry_t) + namesize);
+	new_dir_entry = gsh_calloc(1, sizeof(mdcache_dir_entry_t) + namesize,
+				MEM_COMP_CACHE);
 	new_dir_entry->flags = DIR_ENTRY_FLAG_NONE;
 	new_dir_entry->chunk = state->cur_chunk;
 	new_dir_entry->ck = cookie;
@@ -2633,7 +2635,7 @@ again:
 			mdc_readdir_chunked_cb, attrmask, eod_met));
 
 	if (free_whence) {
-		gsh_free(whence_ptr);
+		gsh_free(whence_ptr, MEM_COMP_MISC);
 	}
 
 	if (FSAL_IS_ERROR(readdir_status)) {
@@ -3077,7 +3079,7 @@ again:
 
 		name = mdc_lru_unmap_dirent(dirent->ck);
 		if (name)
-			gsh_free(name);
+			gsh_free(name, MEM_COMP_MISC);
 
 		LogFullDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_MDCACHE,
 				"found dirent in cached chunk %p dirent %p %s",
@@ -3499,7 +3501,7 @@ void mdc_update_attr_cache(mdcache_entry_t *entry, struct fsal_attrlist *attrs)
 		char *secdata = entry->attrs.sec_label.slai_data.slai_data_val;
 
 		if (attrs->sec_label.slai_data.slai_data_val != NULL) {
-			gsh_free(secdata);
+			gsh_free(secdata, MEM_COMP_MISC);
 		} else {
 			attrs->sec_label.slai_data.slai_data_len =
 				entry->attrs.sec_label.slai_data.slai_data_len;

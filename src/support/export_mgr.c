@@ -68,6 +68,8 @@
 #include "idmapper.h"
 #include "sal_functions.h"
 
+extern const char *mem_stat_names[];
+
 /** Mutex to serialize export admin operations.
  */
 pthread_mutex_t export_admin_mutex;
@@ -79,6 +81,7 @@ struct timespec v3_full_stats_time;
 struct timespec v4_full_stats_time;
 struct timespec auth_stats_time;
 struct timespec clnt_allops_stats_time;
+struct timespec mem_stats_time;
 /**
  * @brief Exports are stored in an AVL tree with front-end cache.
  *
@@ -214,7 +217,7 @@ struct gsh_export *alloc_export(void)
 	struct export_stats *export_st;
 	struct gsh_export *export;
 
-	export_st = gsh_calloc(1, sizeof(struct export_stats));
+	export_st = gsh_calloc(1, sizeof(struct export_stats), MEM_COMP_INIT);
 
 	export = &export_st->export;
 
@@ -730,7 +733,7 @@ void _put_gsh_export(struct gsh_export *export, bool config, char *file,
 	export_st = container_of(export, struct export_stats, export);
 	server_stats_free(&export_st->st);
 	PTHREAD_RWLOCK_destroy(&export->exp_lock);
-	gsh_free(export_st);
+	gsh_free(export_st, MEM_COMP_INIT);
 }
 
 /**
@@ -936,7 +939,8 @@ void nfs_init_stats_time(void)
 {
 	now(&nfs_stats_time);
 	fsal_stats_time = v3_full_stats_time = v4_full_stats_time =
-		auth_stats_time = clnt_allops_stats_time = nfs_stats_time;
+		auth_stats_time = clnt_allops_stats_time = mem_stats_time =
+			nfs_stats_time;
 }
 
 #ifdef USE_DBUS
@@ -1184,7 +1188,7 @@ static bool gsh_export_addexport(DBusMessageIter *args, DBusMessage *reply,
 			else if (!err_type.exists)
 				status = false;
 		}
-		gsh_free(lp);
+		gsh_free(lp, MEM_COMP_INIT);
 	}
 	(void)report_config_errors(&err_type, &conf_errs, config_errs_to_dbus);
 	if (conf_errs.fp != NULL)
@@ -1198,20 +1202,22 @@ static bool gsh_export_addexport(DBusMessageIter *args, DBusMessage *reply,
 			    strlen(conf_errs.buf) > 0) {
 				msg_size += (strlen(conf_errs.buf) +
 					     strlen(". Errors found:\n"));
-				message = gsh_calloc(1, msg_size);
+				message =
+					gsh_calloc(1, msg_size, MEM_COMP_MISC);
 				(void)snprintf(
 					message, msg_size,
 					"%d exports added. Errors found:\n%s",
 					exp_cnt, conf_errs.buf);
 			} else {
-				message = gsh_calloc(1, msg_size);
+				message =
+					gsh_calloc(1, msg_size, MEM_COMP_MISC);
 				(void)snprintf(message, msg_size,
 					       "%d exports added", exp_cnt);
 			}
 			dbus_message_iter_init_append(reply, &iter);
 			dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING,
 						       &message);
-			gsh_free(message);
+			gsh_free(message, MEM_COMP_MISC);
 		} else if (err_type.exists) {
 			LogWarn(COMPONENT_EXPORT,
 				"Selected entries in %s already active!!!",
@@ -1251,9 +1257,9 @@ out_unlock:
 
 out:
 	if (conf_errs.buf)
-		gsh_free(conf_errs.buf);
+		gsh_free(conf_errs.buf, MEM_COMP_MISC);
 	if (err_detail != NULL)
-		gsh_free(err_detail);
+		gsh_free(err_detail, MEM_COMP_MISC);
 	config_Free(config_struct);
 	return status;
 }
@@ -1838,7 +1844,7 @@ static bool gsh_export_update_export(DBusMessageIter *args, DBusMessage *reply,
 			else if (!err_type.exists)
 				status = false;
 		}
-		gsh_free(lp);
+		gsh_free(lp, MEM_COMP_INIT);
 	}
 	(void)report_config_errors(&err_type, &conf_errs, config_errs_to_dbus);
 	if (conf_errs.fp != NULL)
@@ -1852,20 +1858,22 @@ static bool gsh_export_update_export(DBusMessageIter *args, DBusMessage *reply,
 			    strlen(conf_errs.buf) > 0) {
 				msg_size += (strlen(conf_errs.buf) +
 					     strlen(". Errors found:\n"));
-				message = gsh_calloc(1, msg_size);
+				message =
+					gsh_calloc(1, msg_size, MEM_COMP_MISC);
 				(void)snprintf(
 					message, msg_size,
 					"%d exports updated. Errors found:\n%s",
 					exp_cnt, conf_errs.buf);
 			} else {
-				message = gsh_calloc(1, msg_size);
+				message =
+					gsh_calloc(1, msg_size, MEM_COMP_MISC);
 				(void)snprintf(message, msg_size,
 					       "%d exports updated", exp_cnt);
 			}
 			dbus_message_iter_init_append(reply, &iter);
 			dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING,
 						       &message);
-			gsh_free(message);
+			gsh_free(message, MEM_COMP_MISC);
 		} else if (err_type.exists) {
 			LogWarn(COMPONENT_EXPORT,
 				"Selected entries in %s already active!!!",
@@ -1901,9 +1909,9 @@ static bool gsh_export_update_export(DBusMessageIter *args, DBusMessage *reply,
 
 out:
 	if (conf_errs.buf)
-		gsh_free(conf_errs.buf);
+		gsh_free(conf_errs.buf, MEM_COMP_MISC);
 	if (err_detail != NULL)
-		gsh_free(err_detail);
+		gsh_free(err_detail, MEM_COMP_MISC);
 	config_Free(config_struct);
 	return status;
 }
@@ -3065,6 +3073,212 @@ static struct gsh_dbus_interface *export_interfaces[] = { &export_mgr_table,
 void dbus_export_init(void)
 {
 	gsh_dbus_register_path("ExportMgr", export_interfaces);
+}
+
+void get_comp_memory_statistics(DBusMessageIter *iter)
+{
+	uint32_t index;
+	uint64_t value;
+	mem_components_t comp;
+	DBusMessageIter outer_array_iter; // a(sa(st))
+	DBusMessageIter component_struct_iter; // (sa(st))
+	DBusMessageIter stats_array_iter; // a(st)
+	DBusMessageIter stat_entry_iter; // each (st)
+
+	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY, "(sa(st))",
+					 &outer_array_iter);
+
+	for (comp = MEM_COMP_INIT; comp < MEM_COMP_MAX; comp++) {
+		// Open struct for each component (sa(st))
+		dbus_message_iter_open_container(&outer_array_iter,
+						 DBUS_TYPE_STRUCT, NULL,
+						 &component_struct_iter);
+
+		// Add component name
+		const char *comp_name = gsh_mem_stats_get_mem_comp_str(comp);
+
+		dbus_message_iter_append_basic(&component_struct_iter,
+					       DBUS_TYPE_STRING, &comp_name);
+
+		// Open the stats array (a(st))
+		dbus_message_iter_open_container(&component_struct_iter,
+						 DBUS_TYPE_ARRAY, "(st)",
+						 &stats_array_iter);
+
+		// Add all stat (string, uint64) tuples
+		for (index = 0; index < MAX_MEMORY_STATS_FIELD_COUNT; index++) {
+			value = gsh_mem_stats_get_stat_by_index_and_comp(index,
+									 comp);
+
+			const char *stat_name = mem_stat_names[index];
+
+			dbus_message_iter_open_container(&stats_array_iter,
+							 DBUS_TYPE_STRUCT, NULL,
+							 &stat_entry_iter);
+			dbus_message_iter_append_basic(&stat_entry_iter,
+						       DBUS_TYPE_STRING,
+						       &stat_name);
+			dbus_message_iter_append_basic(&stat_entry_iter,
+						       DBUS_TYPE_UINT64,
+						       &value);
+			dbus_message_iter_close_container(&stats_array_iter,
+							  &stat_entry_iter);
+		}
+
+		// Close a(st) and (sa(st))
+		dbus_message_iter_close_container(&component_struct_iter,
+						  &stats_array_iter);
+		dbus_message_iter_close_container(&outer_array_iter,
+						  &component_struct_iter);
+	}
+
+	// Close a(sa(st))
+	dbus_message_iter_close_container(iter, &outer_array_iter);
+}
+
+static bool get_memory_statistics(DBusMessageIter *args, DBusMessage *reply,
+				  DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "OK";
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	gsh_dbus_status_reply(&iter, success, errormsg);
+	gsh_dbus_append_timestamp(&iter, &mem_stats_time);
+
+	get_comp_memory_statistics(&iter);
+
+	return success;
+}
+
+static bool reset_memory_statistics(DBusMessageIter *args, DBusMessage *reply,
+				    DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "Memory Statistics counters reset: Success";
+	DBusMessageIter iter;
+	struct timespec timestamp;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	/* update the stats counting time */
+	now(&timestamp);
+	mem_stats_time = timestamp;
+
+	/* Reset Memory Stats */
+	gsh_mem_stats_reset();
+
+	LogEvent(COMPONENT_MEM_ALLOC, "Memory Statistics counters reset");
+
+	gsh_dbus_status_reply(&iter, success, errormsg);
+	return success;
+}
+
+static bool enable_memory_statistics(DBusMessageIter *args, DBusMessage *reply,
+				     DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "Memory Statistics Counting Enable: Success";
+	DBusMessageIter iter;
+	struct timespec timestamp;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (!gsh_mem_stats_enabled) {
+		/* update the stats counting time */
+		now(&timestamp);
+		mem_stats_time = timestamp;
+
+		/* Set the global enable memory stats capturing */
+		gsh_mem_stats_enabled = true;
+
+		LogEvent(COMPONENT_MEM_ALLOC,
+			 "Memory Statistics Counting Enabled");
+	} else {
+		errormsg = "Memory Statistics Counting: Already Enabled";
+		LogEvent(COMPONENT_MEM_ALLOC,
+			 "Memory Statistics Counting Already Enabled");
+	}
+
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool disable_memory_statistics(DBusMessageIter *args, DBusMessage *reply,
+				      DBusError *error)
+{
+	bool success = true;
+	char *errormsg = "Memory Statistics Counting Disable: Success";
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	/* Clear the global enable memory stats capturing flag */
+	if (!gsh_mem_stats_enabled) {
+		errormsg = "Memory Statistics Counting Not Enabled";
+		LogEvent(COMPONENT_MEM_ALLOC,
+			 "Memory Statistics Counting Not Enabled");
+	} else {
+		gsh_mem_stats_enabled = false;
+
+		LogEvent(COMPONENT_MEM_ALLOC,
+			 "Memory Statistics Counting Disabled");
+	}
+
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+#define TOTAL_MEM_STATS_REPLY \
+	{ .name = "mem_stats", .type = "(a(sa(st)))", .direction = "out" }
+
+static struct gsh_dbus_method get_mem_statistics = {
+	.name = "GetMemoryStats",
+	.method = get_memory_statistics,
+	.args = { STATUS_REPLY, TIMESTAMP_REPLY, TOTAL_MEM_STATS_REPLY,
+		  END_ARG_LIST }
+};
+
+static struct gsh_dbus_method reset_mem_statistics = {
+	.name = "ResetMemoryStats",
+	.method = reset_memory_statistics,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method enable_mem_statistics = {
+	.name = "EnableMemoryStats",
+	.method = enable_memory_statistics,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method disable_mem_statistics = {
+	.name = "DisableMemoryStats",
+	.method = disable_memory_statistics,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method *mem_stats_methods[] = {
+	&get_mem_statistics, &reset_mem_statistics, &enable_mem_statistics,
+	&disable_mem_statistics, NULL
+};
+
+static struct gsh_dbus_interface mem_stats_table = {
+	.name = "org.ganesha.nfsd.memstats",
+	.methods = mem_stats_methods
+};
+
+/* DBUS list of interfaces on /org/ganesha/nfsd/MemMgr
+ */
+
+static struct gsh_dbus_interface *mem_interfaces[] = { &mem_stats_table, NULL };
+
+void dbus_mem_stats_init(void)
+{
+	gsh_dbus_register_path("MemMgr", mem_interfaces);
 }
 #endif /* USE_DBUS */
 

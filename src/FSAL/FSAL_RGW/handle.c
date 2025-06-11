@@ -1446,7 +1446,8 @@ struct state_t *rgw_alloc_state(struct fsal_export *exp_hdl,
 				enum state_type state_type,
 				struct state_t *related_state)
 {
-	return init_state(gsh_calloc(1, sizeof(struct rgw_open_state)), NULL,
+	return init_state(gsh_calloc(1, sizeof(struct rgw_open_state),
+				MEM_COMP_FILE_AND_STATE_LOCK), NULL,
 			  state_type, related_state);
 }
 
@@ -1837,7 +1838,8 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 
 	/* XXX: ffilz: the doc in fsal_api strongly implies this buffer is pre-allocated,
 	 * but it's not */
-	lr_names->xl4_entries = gsh_calloc(la_maxcount, sizeof(xattrlist4));
+	lr_names->xl4_entries = gsh_calloc(la_maxcount, sizeof(xattrlist4),
+					MEM_COMP_FSAL);
 	lr_names->xl4_count = 0; /* defensive */
 	cb_arg.names = lr_names;
 	cb_arg.max = la_maxcount;

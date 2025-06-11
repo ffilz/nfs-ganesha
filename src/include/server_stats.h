@@ -42,6 +42,38 @@
 
 #include <sys/types.h>
 
+extern bool gsh_mem_stats_logging_enabled;
+extern bool gsh_mem_stats_enabled;
+
+/*
+ * @brief Ganesha Memory Statistics
+ *
+ * @data member [total_alloc_bytes] - Total Allocated Memory
+ *      through out the Ganesha's life in Bytes
+ * @data member [total_cuurent_active_bytes] - Active Memory Usage
+ *      in Bytes
+ * @daya member [total_freed_bytes] - Total Freed Memory
+ *      through out the Ganesha's life in Bytes
+ */
+struct gsh_mem_stats {
+	uint64_t total_alloc_calls;
+	uint64_t total_free_calls;
+	uint64_t total_alloc_bytes;
+	uint64_t total_freed_bytes;
+	uint64_t current_active_bytes;
+	uint64_t peak_active_bytes;
+}; //GSH Memory Counters
+
+struct mem_stats_info {
+	const char *mem_stat_name; /* stat name */
+};
+
+/*
+ * If adding any new value to gsh_mem_stats
+ * structure then increment the MAX_MEMORY_STATS_FIELD_COUNT
+ */
+#define MAX_MEMORY_STATS_FIELD_COUNT 6
+
 void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup);
 
 #ifdef _USE_9P
@@ -64,6 +96,14 @@ void dec_grants(struct gsh_client *client);
 void inc_revokes(struct gsh_client *client);
 void inc_recalls(struct gsh_client *client);
 void inc_failed_recalls(struct gsh_client *client);
+
+void gsh_mem_stats_update_alloc(void *p, mem_components_t comp);
+void gsh_mem_stats_update_free(void *p, mem_components_t comp);
+uint64_t gsh_mem_stats_get_stat_by_index_and_comp(uint32_t index,
+						  mem_components_t comp);
+const char *gsh_mem_stats_get_mem_comp_str(mem_components_t comp);
+void gsh_log_mem_stats(void);
+void gsh_mem_stats_reset(void);
 
 #endif /* !SERVER_STATS_H */
 /** @} */

@@ -179,7 +179,7 @@ alloc_directory_handle(struct pseudo_fsal_obj_handle *parent, const char *name,
 	int rc;
 
 	hdl = gsh_calloc(1, sizeof(struct pseudo_fsal_obj_handle) +
-				    V4_FH_OPAQUE_SIZE);
+				    V4_FH_OPAQUE_SIZE, MEM_COMP_FSAL);
 
 	/* Establish tree details for this directory */
 	hdl->name = gsh_strdup(name);
@@ -287,9 +287,9 @@ alloc_directory_handle(struct pseudo_fsal_obj_handle *parent, const char *name,
 spcerr:
 
 	if (hdl->name != NULL)
-		gsh_free(hdl->name);
+		gsh_free(hdl->name, MEM_COMP_MISC);
 
-	gsh_free(hdl); /* elvis has left the building */
+	gsh_free(hdl, MEM_COMP_FSAL); /* elvis has left the building */
 	return NULL;
 }
 
@@ -685,9 +685,9 @@ static void release(struct fsal_obj_handle *obj_hdl)
 		 obj_hdl, myself, myself->name);
 
 	if (myself->name != NULL)
-		gsh_free(myself->name);
+		gsh_free(myself->name, MEM_COMP_MISC);
 
-	gsh_free(myself);
+	gsh_free(myself, MEM_COMP_FSAL);
 }
 
 void pseudofs_handle_ops_init(struct fsal_obj_ops *ops)

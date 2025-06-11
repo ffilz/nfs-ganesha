@@ -477,7 +477,7 @@ int ganeshun_yy_init_parser(char *srcfile, struct parser_state *st)
 	YY_BUFFER_STATE inbuf;
 	int rc = ENOMEM;
 
-	confroot = gsh_calloc(1, sizeof(struct config_root));
+	confroot = gsh_calloc(1, sizeof(struct config_root), MEM_COMP_INIT);
 
 	glist_init(&confroot->root.node);
 	glist_init(&confroot->root.u.nterm.sub_nodes);
@@ -608,8 +608,8 @@ static int process_dir(char *d_name, struct parser_state *st)
 errout:
 	closedir(d);
 out:
-	gsh_free(dir_path);
-	gsh_free(pattern);
+	gsh_free(dir_path, MEM_COMP_MISC);
+	gsh_free(pattern, MEM_COMP_MISC);
 	return rc;
 }
 
@@ -659,9 +659,9 @@ static int new_file(char *name_tok,
 			goto errout;
 		}
 	}
-	bs = gsh_calloc(1, sizeof(struct bufstack));
+	bs = gsh_calloc(1, sizeof(struct bufstack), MEM_COMP_INIT);
 
-	flist = gsh_calloc(1, sizeof(struct file_list));
+	flist = gsh_calloc(1, sizeof(struct file_list), MEM_COMP_INIT);
 
 	in_file = fopen(fullpath, "r" );
 	if (in_file == NULL) {
@@ -693,9 +693,9 @@ errout:
 	else
 		st->err_type->scan = true;
 
-	gsh_free(flist);
-	gsh_free(bs);
-	gsh_free(fullpath);
+	gsh_free(flist, MEM_COMP_INIT);
+	gsh_free(bs, MEM_COMP_INIT);
+	gsh_free(fullpath, MEM_COMP_MISC);
 
 	return rc;
 }
@@ -724,8 +724,8 @@ static int fetch_url(char *name_tok, struct parser_state *st)
 #endif
 	filename = gsh_strdup(name_tok);
 
-	bs = gsh_calloc(1, sizeof(struct bufstack));
-	flist = gsh_calloc(1, sizeof(struct file_list));
+	bs = gsh_calloc(1, sizeof(struct bufstack), MEM_COMP_INIT);
+	flist = gsh_calloc(1, sizeof(struct file_list), MEM_COMP_INIT);
 
 	rc = config_url_fetch(filename, &bs->f, &bs->fbuf);
 	if (bs->f == NULL) {
@@ -754,9 +754,9 @@ errout:
 	else
 		st->err_type->scan = true;
 
-	gsh_free(flist);
-	gsh_free(bs);
-	gsh_free(filename);
+	gsh_free(flist, MEM_COMP_INIT);
+	gsh_free(bs, MEM_COMP_INIT);
+	free(filename);
 
 	return rc;
 } /* fetch_url() */
@@ -778,7 +778,7 @@ static int pop_file(struct parser_state *st)
 	ganeshun_yy_delete_buffer(bs->bs, yyscanner);
 	prevbs = bs->prev;
 	st->curbs = prevbs;
-	gsh_free(bs);
+	gsh_free(bs, MEM_COMP_INIT);
 	if (prevbs == NULL)
 		return 0;
 	ganeshun_yy_switch_to_buffer(prevbs->bs, yyscanner);

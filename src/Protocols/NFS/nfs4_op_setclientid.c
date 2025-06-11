@@ -386,6 +386,7 @@ void nfs4_op_setclientid_Free(nfs_resop4 *res)
 
 	if (resp->status == NFS4ERR_CLID_INUSE) {
 		if (resp->SETCLIENTID4res_u.client_using.r_addr != NULL)
-			gsh_free(resp->SETCLIENTID4res_u.client_using.r_addr);
+			gsh_free(resp->SETCLIENTID4res_u.client_using.r_addr,
+				MEM_COMP_MISC);
 	}
 }

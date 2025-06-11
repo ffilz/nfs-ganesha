@@ -73,7 +73,8 @@ static inline bool vfs_handle_invalid(struct gsh_buffdesc *desc)
 
 #define vfs_malloc_handle(fh)                                         \
 	do {                                                          \
-		(fh) = gsh_calloc(1, sizeof(struct vfs_file_handle)); \
+		(fh) = gsh_calloc(1, sizeof(struct vfs_file_handle),  \
+				MEM_COMP_FSAL);                       \
 		(fh)->handle_len = VFS_HANDLE_LEN;                    \
 	} while (0)
 

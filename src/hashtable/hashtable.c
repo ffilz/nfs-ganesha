@@ -344,7 +344,7 @@ struct hash_table *hashtable_init(struct hash_param *hparam)
 
 	ht = gsh_calloc(1, sizeof(struct hash_table) +
 				   (sizeof(struct hash_partition) *
-				    hparam->index_size));
+				    hparam->index_size), MEM_COMP_CACHE);
 
 	/* Fixup entry size */
 	if (hparam->flags & HT_FLAG_CACHE) {
@@ -363,13 +363,16 @@ struct hash_table *hashtable_init(struct hash_param *hparam)
 
 		/* Allocate a cache if requested */
 		if (hparam->flags & HT_FLAG_CACHE)
-			partition->cache = gsh_calloc(1, cache_page_size(ht));
+			partition->cache = gsh_calloc(1, cache_page_size(ht),
+						MEM_COMP_CACHE);
 
 		completed++;
 	}
 
-	ht->node_pool = pool_basic_init(NULL, sizeof(rbt_node_t));
-	ht->data_pool = pool_basic_init(NULL, sizeof(struct hash_data));
+	ht->node_pool = pool_basic_init(NULL, sizeof(rbt_node_t),
+					MEM_COMP_NODE_POOL);
+	ht->data_pool = pool_basic_init(NULL, sizeof(struct hash_data),
+					MEM_COMP_DATA_POOL);
 
 	return ht;
 }
@@ -401,15 +404,18 @@ hash_error_t hashtable_destroy(struct hash_table *ht,
 
 	for (index = 0; index < ht->parameter.index_size; ++index) {
 		if (ht->partitions[index].cache) {
-			gsh_free(ht->partitions[index].cache);
+			gsh_free(ht->partitions[index].cache, MEM_COMP_CACHE);
 			ht->partitions[index].cache = NULL;
 		}
 
 		PTHREAD_RWLOCK_destroy(&(ht->partitions[index].ht_lock));
 	}
-	pool_destroy(ht->node_pool);
-	pool_destroy(ht->data_pool);
-	gsh_free(ht);
+
+	gsh_free(ht->node_pool->name, MEM_COMP_NODE_POOL);
+	gsh_free(ht->node_pool, MEM_COMP_NODE_POOL);
+	gsh_free(ht->data_pool->name, MEM_COMP_DATA_POOL);
+	gsh_free(ht->data_pool, MEM_COMP_DATA_POOL);
+	gsh_free(ht, MEM_COMP_CACHE);
 
 out:
 	return hrc;
@@ -692,9 +698,10 @@ hash_error_t hashtable_setlatched(struct hash_table *ht,
 
 	RBT_FIND(&ht->partitions[latch->index].rbt, locator, latch->rbt_hash);
 
-	mutator = pool_alloc(ht->node_pool);
+	mutator = gsh_calloc(1, ht->node_pool->object_size, MEM_COMP_NODE_POOL);
 
-	descriptors = pool_alloc(ht->data_pool);
+	descriptors =
+		gsh_calloc(1, ht->data_pool->object_size, MEM_COMP_DATA_POOL);
 
 	RBT_OPAQ(mutator) = descriptors;
 	RBT_VALUE(mutator) = latch->rbt_hash;
@@ -815,8 +822,8 @@ void hashtable_deletelatched(struct hash_table *ht, struct gsh_buffdesc *key,
 
 	/* Now remove the entry */
 	RBT_UNLINK(&partition->rbt, latch->locator);
-	pool_free(ht->data_pool, data);
-	pool_free(ht->node_pool, latch->locator);
+	gsh_free(data, MEM_COMP_DATA_POOL);
+	gsh_free(latch->locator, MEM_COMP_NODE_POOL);
 	--ht->partitions[latch->index].count;
 
 	/* Some callers re-use the latch to insert a record after this call,
@@ -876,8 +883,8 @@ hash_error_t hashtable_delall(struct hash_table *ht,
 			key = data->key;
 			val = data->val;
 
-			pool_free(ht->data_pool, data);
-			pool_free(ht->node_pool, holder);
+			gsh_free(data, MEM_COMP_DATA_POOL);
+			gsh_free(holder, MEM_COMP_NODE_POOL);
 			--ht->partitions[index].count;
 			rc = free_func(key, val);
 

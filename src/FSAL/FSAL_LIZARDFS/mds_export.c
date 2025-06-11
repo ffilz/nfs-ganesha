@@ -101,7 +101,8 @@ static liz_chunkserver_info_t *lzfs_int_get_randomized_chunkserver_list(
 	int rc;
 
 	chunkserver_info = gsh_malloc(LZFS_BIGGEST_STRIPE_COUNT *
-				      sizeof(liz_chunkserver_info_t));
+				      sizeof(liz_chunkserver_info_t),
+				      MEM_COMP_INIT);
 
 	rc = liz_get_chunkservers_info(lzfs_export->lzfs_instance,
 				       chunkserver_info,
@@ -109,7 +110,7 @@ static liz_chunkserver_info_t *lzfs_int_get_randomized_chunkserver_list(
 				       chunkserver_count);
 	if (rc < 0) {
 		*chunkserver_count = 0;
-		gsh_free(chunkserver_info);
+		gsh_free(chunkserver_info, MEM_COMP_INIT);
 		return NULL;
 	}
 
@@ -311,7 +312,7 @@ static nfsstat4 lzfs_fsal_getdeviceinfo(struct fsal_module *fsal_hdl,
 
 	// get the chunk list for file
 	chunk_info = gsh_malloc(LZFS_BIGGEST_STRIPE_COUNT *
-				sizeof(liz_chunk_info_t));
+				sizeof(liz_chunk_info_t), MEM_COMP_INIT);
 	rc = liz_cred_get_chunks_info(lzfs_export->lzfs_instance,
 				      &op_ctx->creds, deviceid->devid, 0,
 				      chunk_info, LZFS_BIGGEST_STRIPE_COUNT,
@@ -370,8 +371,8 @@ static nfsstat4 lzfs_fsal_getdeviceinfo(struct fsal_module *fsal_hdl,
 	}
 
 	liz_destroy_chunks_info(chunk_info);
-	gsh_free(chunk_info);
-	gsh_free(chunkserver_info);
+	gsh_free(chunk_info, MEM_COMP_INIT);
+	gsh_free(chunkserver_info, MEM_COMP_INIT);
 
 	return NFS4_OK;
 
@@ -384,11 +385,11 @@ encode_err:
 generic_err:
 	if (chunk_info) {
 		liz_destroy_chunks_info(chunk_info);
-		gsh_free(chunk_info);
+		gsh_free(chunk_info, MEM_COMP_INIT);
 	}
 
 	if (chunkserver_info) {
-		gsh_free(chunkserver_info);
+		gsh_free(chunkserver_info, MEM_COMP_INIT);
 	}
 
 	return NFS4ERR_SERVERFAULT;

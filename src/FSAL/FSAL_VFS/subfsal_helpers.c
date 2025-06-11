@@ -108,7 +108,8 @@ fsal_status_t vfs_get_fs_locations(struct vfs_fsal_obj_handle *hdl, int fd,
 	 * It gets storeded in attrs_out->fs_locations->locations
 	 */
 
-	xattr_content = gsh_calloc(XATTR_BUFFERSIZE, sizeof(char));
+	xattr_content = gsh_calloc(XATTR_BUFFERSIZE, sizeof(char),
+				MEM_COMP_FSAL);
 
 	st = vfs_getextattr_value(hdl, local_fd, "user.fs_location",
 				  xattr_content, XATTR_BUFFERSIZE, &attrsize);
@@ -134,9 +135,9 @@ fsal_status_t vfs_get_fs_locations(struct vfs_fsal_obj_handle *hdl, int fd,
 		}
 	}
 
-out:
-	gsh_free(xattr_content);
+	gsh_free(xattr_content, MEM_COMP_FSAL);
 
+out:
 	// Close the local_fd only if no fd was passed into the function and we
 	// opened the file in this function explicitly.
 	if (fd < 0 && local_fd > 0) {

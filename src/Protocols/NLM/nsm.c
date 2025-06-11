@@ -61,10 +61,10 @@ bool nsm_connect(void)
 		char *err = rpc_sperror(&nsm_clnt->cl_error, "failed");
 
 		LogEventLimited(COMPONENT_NLM, "connect to statd %s", err);
-		gsh_free(err);
+		gsh_free(err, MEM_COMP_LIBNTIRPC);
 		CLNT_DESTROY(nsm_clnt);
 		nsm_clnt = NULL;
-		gsh_free(nodename);
+		gsh_free(nodename, MEM_COMP_MISC);
 		nodename = NULL;
 	}
 
@@ -81,7 +81,7 @@ void nsm_disconnect(bool force)
 		nsm_clnt = NULL;
 		AUTH_DESTROY(nsm_auth);
 		nsm_auth = NULL;
-		gsh_free(nodename);
+		gsh_free(nodename, MEM_COMP_MISC);
 		nodename = NULL;
 	}
 }
@@ -126,7 +126,8 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 	/* Set this after we call nsm_connect() */
 	nsm_mon.mon_id.my_id.my_name = nodename;
 
-	cc = gsh_malloc(sizeof(*cc));
+	cc = gsh_malloc(sizeof(*cc),
+			MEM_COMP_FILE_AND_STATE_LOCK);
 	clnt_req_fill(cc, nsm_clnt, nsm_auth, SM_MON, (xdrproc_t)xdr_mon,
 		      &nsm_mon, (xdrproc_t)xdr_sm_stat_res, &res);
 	ret = clnt_req_setup(cc, tout);
@@ -138,7 +139,7 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogEventLimited(COMPONENT_NLM, "Monitor %s SM_MON %s",
 				nsm_mon.mon_id.mon_name, t);
-		gsh_free(t);
+		gsh_free(t, MEM_COMP_LIBNTIRPC);
 
 		clnt_req_release(cc);
 		nsm_disconnect(true);
@@ -219,7 +220,8 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 	/* Set this after we call nsm_connect() */
 	nsm_mon_id.my_id.my_name = nodename;
 
-	cc = gsh_malloc(sizeof(*cc));
+	cc = gsh_malloc(sizeof(*cc),
+			MEM_COMP_FILE_AND_STATE_LOCK);
 	clnt_req_fill(cc, nsm_clnt, nsm_auth, SM_UNMON, (xdrproc_t)xdr_mon_id,
 		      &nsm_mon_id, (xdrproc_t)xdr_sm_stat, &res);
 	ret = clnt_req_setup(cc, tout);
@@ -231,7 +233,7 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogEventLimited(COMPONENT_NLM, "Unmonitor %s SM_UNMON %s",
 				nsm_mon_id.mon_name, t);
-		gsh_free(t);
+		gsh_free(t, MEM_COMP_LIBNTIRPC);
 
 		clnt_req_release(cc);
 		nsm_disconnect(true);
@@ -291,7 +293,7 @@ void nsm_unmonitor_all(void)
 	/* Set this after we call nsm_connect() */
 	nsm_id.my_name = nodename;
 
-	cc = gsh_malloc(sizeof(*cc));
+	cc = gsh_malloc(sizeof(*cc), MEM_COMP_FILE_AND_STATE_LOCK);
 	clnt_req_fill(cc, nsm_clnt, nsm_auth, SM_UNMON_ALL,
 		      (xdrproc_t)xdr_my_id, &nsm_id, (xdrproc_t)xdr_sm_stat,
 		      &res);
@@ -303,7 +305,7 @@ void nsm_unmonitor_all(void)
 	if (ret != RPC_SUCCESS) {
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogEventLimited(COMPONENT_NLM, "Unmonitor all %s", t);
-		gsh_free(t);
+		gsh_free(t, MEM_COMP_LIBNTIRPC);
 		nsm_disconnect(true);
 	} else {
 		nsm_disconnect(false);
