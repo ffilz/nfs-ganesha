@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d17b65_d7c484a1",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "qos_free_mem will be called only when parent structure gsh_export/gsh_client going away, So no need to marking it as NULL.",
+      "parentUuid": "2445460a_d6b80daf",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f5ff4df_fe062233",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-05T20:50:14Z",
       "side": 1,
       "message": "You should set this pointer NULL after free.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46cfb4e4_df270962",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "qos_free_mem will be called only when parent structure gsh_export/gsh_client going away, So no need to marking it as NULL.",
+      "parentUuid": "7f5ff4df_fe062233",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "919f653c_fc128d15",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "qos_free_mem will be called only when parent structure gsh_export/gsh_client going away, So no need to marking it as NULL.",
+      "parentUuid": "417d3584_b17bb260",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "437f0645_0ab5353b",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-06-05T20:50:14Z",
       "side": 1,
       "message": "Separating out comment about the constant 5...\n\nI really feel like this constant 5 may need to be configurable.\n\nIf so, will it work to configure it to 0? Meaning we immediately disable the connection from epoll rather than suspend any requests.\n\nI\u0027m concerned about the memory consumption from suspended requests.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "796f3b9f_e822d1ea",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "Yes Frank, you are right, this value needs to be configurable.\nCurrently I have changes it to a MACRO, but in future will change it to configurable value from configuration file.\n\nMinimum configurable value should be 1 as per current implemnatation. Otherwise we have to keep the track if time when the recv is disable and enable it after 15 second. 1 entry in the queue avoids this timing calculation.",
+      "parentUuid": "437f0645_0ab5353b",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "275c287d_0c72967a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2147,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "updated to print the exportid from qos_export structure.",
+      "parentUuid": "a23dc6f3_d01b711b",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2917737_ec35e107",
@@ -99,6 +189,24 @@
       "writtenOn": "2025-06-05T20:50:14Z",
       "side": 1,
       "message": "You need to use proper access to path here, see tmp_get_exp_paths(), tmp_export_path(), and tmp_put_exp_paths(). It is not safe to access cfg_fullpath outside export config processing, the pointer can become invalid unexpectedly.",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e4b7ef_be7dc482",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2174,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "updated to print the exportid from qos_export structure.",
+      "parentUuid": "e2917737_ec35e107",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac175f3_38010ece",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18a2aa03_185a3e9d",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a038fcc8_3e31f14e",
@@ -137,6 +263,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "786356d9_daf16180",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2825,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a038fcc8_3e31f14e",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aa5b1e0_0ae95057",
@@ -150,6 +294,24 @@
       "writtenOn": "2025-06-05T20:50:14Z",
       "side": 1,
       "message": "Why do we need this? The gsh_client isn\u0027t going away, client may start a new session, we shouldn\u0027t flush the QoS data.\n\nAlso, client can have multiple sessions per clientid",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad9dd8bb_dea008d0",
+        "filename": "src/Protocols/NFS/nfs4_op_destroy_session.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-12T13:53:32Z",
+      "side": 1,
+      "message": "What i have seen in the testing is, this path gets called only if last session of client needs to be deleted.\nIn testing : I had 2 mount points mounted on same client (export1, export2). this path gets triggred only on 2nd umount and not 1st umount.\n\nI will recheck on this again. -Noted",
+      "parentUuid": "2aa5b1e0_0ae95057",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
