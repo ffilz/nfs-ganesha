@@ -210,19 +210,18 @@ struct hash_table *hashtable_init(struct hash_param *);
 hash_error_t hashtable_destroy(struct hash_table *,
 			       int (*)(struct gsh_buffdesc,
 				       struct gsh_buffdesc));
-hash_error_t hashtable_getlatch(struct hash_table *,
-				const struct gsh_buffdesc *,
+hash_error_t hashtable_getlatch(struct hash_table *, struct gsh_buffdesc *,
 				struct gsh_buffdesc *, bool,
 				struct hash_latch *);
 hash_error_t hashtable_acquire_latch(struct hash_table *ht,
-				     const struct gsh_buffdesc *key,
+				     struct gsh_buffdesc *key,
 				     struct hash_latch *latch);
 void hashtable_releaselatched(struct hash_table *, struct hash_latch *);
 hash_error_t hashtable_setlatched(struct hash_table *, struct gsh_buffdesc *,
 				  struct gsh_buffdesc *, struct hash_latch *,
 				  int, struct gsh_buffdesc *,
 				  struct gsh_buffdesc *);
-void hashtable_deletelatched(struct hash_table *, const struct gsh_buffdesc *,
+void hashtable_deletelatched(struct hash_table *, struct gsh_buffdesc *,
 			     struct hash_latch *, struct gsh_buffdesc *,
 			     struct gsh_buffdesc *);
 hash_error_t hashtable_delall(struct hash_table *,
@@ -248,7 +247,7 @@ void hashtable_log(log_components_t, struct hash_table *);
  */
 
 static inline hash_error_t HashTable_Get(struct hash_table *ht,
-					 const struct gsh_buffdesc *key,
+					 struct gsh_buffdesc *key,
 					 struct gsh_buffdesc *val)
 {
 	return hashtable_getlatch(ht, key, val, false, NULL);
@@ -305,7 +304,7 @@ static inline hash_error_t HashTable_Set(struct hash_table *ht,
  * @retval HASHTABLE_SUCCESS on deletion
  */
 static inline hash_error_t HashTable_Del(struct hash_table *ht,
-					 const struct gsh_buffdesc *key,
+					 struct gsh_buffdesc *key,
 					 struct gsh_buffdesc *stored_key,
 					 struct gsh_buffdesc *stored_val)
 {
