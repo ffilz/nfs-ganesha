@@ -135,9 +135,9 @@ const char *hash_table_err_to_str(hash_error_t err)
  * @retval HASHTABLE_SUCCESS if successful
  * @retval HASHTABLE_NO_SUCH_KEY if key was not found
  */
-static hash_error_t key_locate(struct hash_table *ht,
-			       const struct gsh_buffdesc *key, uint32_t index,
-			       uint64_t rbthash, struct rbt_node **node)
+static hash_error_t key_locate(struct hash_table *ht, struct gsh_buffdesc *key,
+			       uint32_t index, uint64_t rbthash,
+			       struct rbt_node **node)
 {
 	/* The current partition */
 	struct hash_partition *partition = &(ht->partitions[index]);
@@ -157,6 +157,22 @@ static hash_error_t key_locate(struct hash_table *ht,
 
 	*node = NULL;
 
+	if (isDebug(COMPONENT_HASHTABLE) &&
+	    isFullDebug(ht->parameter.ht_log_component)) {
+		char dispkey[HASHTABLE_DISPLAY_STRLEN];
+		struct display_buffer keybuf = { sizeof(dispkey), dispkey,
+						 dispkey };
+
+		if (ht->parameter.display_key != NULL)
+			ht->parameter.display_key(&keybuf, key);
+		else
+			dispkey[0] = '\0';
+
+		LogFullDebug(ht->parameter.ht_log_component,
+			     "Locate %s seeking Key=%p {%s}",
+			     ht->parameter.ht_name, key, dispkey);
+	}
+
 	if (partition->cache) {
 		void **cache_slot = (void **)&(
 			partition->cache[cache_offsetof(ht, rbthash)]);
@@ -167,6 +183,26 @@ static hash_error_t key_locate(struct hash_table *ht,
 			     cache_offsetof(ht, rbthash));
 		if (cursor) {
 			data = RBT_OPAQ(cursor);
+
+			if (isDebug(COMPONENT_HASHTABLE) &&
+			    isFullDebug(ht->parameter.ht_log_component)) {
+				char dispkey[HASHTABLE_DISPLAY_STRLEN];
+				struct display_buffer keybuf = {
+					sizeof(dispkey), dispkey, dispkey
+				};
+
+				if (ht->parameter.display_key != NULL)
+					ht->parameter.display_key(&keybuf,
+								  &data->key);
+				else
+					dispkey[0] = '\0';
+
+				LogFullDebug(ht->parameter.ht_log_component,
+					     "Locate %s comparing Key=%p {%s}",
+					     ht->parameter.ht_name,
+					     data->key.addr, dispkey);
+			}
+
 			if (ht->parameter.compare_key((struct gsh_buffdesc *)key,
 						      &(data->key)) == 0) {
 				goto out;
@@ -191,6 +227,24 @@ static hash_error_t key_locate(struct hash_table *ht,
 
 	while ((cursor != NULL) && (RBT_VALUE(cursor) == rbthash)) {
 		data = RBT_OPAQ(cursor);
+
+		if (isDebug(COMPONENT_HASHTABLE) &&
+		    isFullDebug(ht->parameter.ht_log_component)) {
+			char dispkey[HASHTABLE_DISPLAY_STRLEN];
+			struct display_buffer keybuf = { sizeof(dispkey),
+							 dispkey, dispkey };
+
+			if (ht->parameter.display_key != NULL)
+				ht->parameter.display_key(&keybuf, &data->key);
+			else
+				dispkey[0] = '\0';
+
+			LogFullDebug(ht->parameter.ht_log_component,
+				     "Locate %s comparing Key=%p {%s}",
+				     ht->parameter.ht_name, data->key.addr,
+				     dispkey);
+		}
+
 		if (ht->parameter.compare_key((struct gsh_buffdesc *)key,
 					      &(data->key)) == 0) {
 			if (partition->cache) {
@@ -238,8 +292,8 @@ out:
  */
 
 static inline hash_error_t compute(struct hash_table *ht,
-				   const struct gsh_buffdesc *key,
-				   uint32_t *index, uint64_t *rbt_hash)
+				   struct gsh_buffdesc *key, uint32_t *index,
+				   uint64_t *rbt_hash)
 {
 	/* Compute the partition index and red-black tree hash */
 	if (ht->parameter.hash_func_both) {
@@ -379,7 +433,7 @@ out:
  * with hashtable_releaselatched()
  */
 hash_error_t hashtable_acquire_latch(struct hash_table *ht,
-				     const struct gsh_buffdesc *key,
+				     struct gsh_buffdesc *key,
 				     struct hash_latch *latch)
 {
 	uint32_t index;
@@ -419,8 +473,7 @@ hash_error_t hashtable_acquire_latch(struct hash_table *ht,
  *         table is latched.
  * @retval Others, failure, the table is not latched.
  */
-hash_error_t hashtable_getlatch(struct hash_table *ht,
-				const struct gsh_buffdesc *key,
+hash_error_t hashtable_getlatch(struct hash_table *ht, struct gsh_buffdesc *key,
 				struct gsh_buffdesc *val, bool may_write,
 				struct hash_latch *latch)
 {
@@ -689,8 +742,7 @@ out:
  *
  */
 
-void hashtable_deletelatched(struct hash_table *ht,
-			     const struct gsh_buffdesc *key,
+void hashtable_deletelatched(struct hash_table *ht, struct gsh_buffdesc *key,
 			     struct hash_latch *latch,
 			     struct gsh_buffdesc *stored_key,
 			     struct gsh_buffdesc *stored_val)
