@@ -60,6 +60,9 @@
 #endif
 #include "conf_url.h"
 #include "nfs_rpc_callback.h"
+#ifdef USE_MONITORING
+#include "prometheus_exposer.h"
+#endif
 
 /**
  * @brief Mutex protecting shutdown flag.
@@ -868,6 +871,11 @@ static void do_shutdown(void)
 	LogEvent(COMPONENT_MAIN, "Unregistering ports used by NFS service");
 	/* finalize RPC package */
 	Clean_RPC();
+
+#ifdef USE_MONITORING
+	/* close monitoring service */
+	prometheus_exposer__stop(monitoring__get_registry_handle());
+#endif
 
 	LogEvent(COMPONENT_MAIN, "Shutting down RPC services");
 	(void)svc_shutdown(SVC_SHUTDOWN_FLAG_NONE);
