@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a9e00f1_96ed3a51",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "There is still value in setting the pointer to NULL. In the future we might support disabling QoS on a client or export without shutting down QoS completely. Doing so also makes sure that the freed memory is not referenced by buggy code that will segfault on the NULL pointer instead of a use after free situation.",
+      "parentUuid": "c5d17b65_d7c484a1",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f5ff4df_fe062233",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 18
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "qos_free_mem will be called only when parent structure gsh_export/gsh_client going away, So no need to marking it as NULL.",
       "parentUuid": "7f5ff4df_fe062233",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bcdb317_8062fe5e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "There is still value in setting the pointer to NULL. In the future we might support disabling QoS on a client or export without shutting down QoS completely. Doing so also makes sure that the freed memory is not referenced by buggy code that will segfault on the NULL pointer instead of a use after free situation.",
+      "parentUuid": "46cfb4e4_df270962",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -108,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "229bc233_ab4f8498",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "There is still value in setting the pointer to NULL. In the future we might support disabling QoS on a client or export without shutting down QoS completely. Doing so also makes sure that the freed memory is not referenced by buggy code that will segfault on the NULL pointer instead of a use after free situation.",
+      "parentUuid": "919f653c_fc128d15",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "437f0645_0ab5353b",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 18
@@ -137,6 +191,24 @@
       "side": 1,
       "message": "Yes Frank, you are right, this value needs to be configurable.\nCurrently I have changes it to a MACRO, but in future will change it to configurable value from configuration file.\n\nMinimum configurable value should be 1 as per current implemnatation. Otherwise we have to keep the track if time when the recv is disable and enable it after 15 second. 1 entry in the queue avoids this timing calculation.",
       "parentUuid": "437f0645_0ab5353b",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43dd9900_f736b9bc",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "I would like to at least see this configurable, ideally I\u0027d like to see the code handle the situation of setting it to 0 so we can experiment with different values. I\u0027m concerned that any suspending tasks will lead to excess memory usage.\n\nWe also need to explore whether this is sufficient, or if we really should do pre-decode and make QoS decisions before reading a complete request from the socket which could engage TCP back-pressure earloer.",
+      "parentUuid": "796f3b9f_e822d1ea",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -178,6 +250,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc9ba708_019f2805",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2147,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "This certainly is safe, though it may be confusing. Really it would be better to make the effort to display the path string.\n\nMinor nit: space between : and %d for easier reading log message.",
+      "parentUuid": "275c287d_0c72967a",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2917737_ec35e107",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 18
@@ -207,6 +297,24 @@
       "side": 1,
       "message": "updated to print the exportid from qos_export structure.",
       "parentUuid": "e2917737_ec35e107",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f601cf2_3a499004",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2174,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "same",
+      "parentUuid": "37e4b7ef_be7dc482",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -248,6 +356,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0dde224f_d872747f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Minor nit - please insert space between : and %s for easier reading (this may be something you want to globally examine the code for)",
+      "parentUuid": "aac175f3_38010ece",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a038fcc8_3e31f14e",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 18
@@ -283,6 +409,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cddb4c4_08fe72a4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2825,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "same",
+      "parentUuid": "786356d9_daf16180",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2aa5b1e0_0ae95057",
         "filename": "src/Protocols/NFS/nfs4_op_destroy_session.c",
         "patchSetId": 18
@@ -312,6 +456,24 @@
       "side": 1,
       "message": "What i have seen in the testing is, this path gets called only if last session of client needs to be deleted.\nIn testing : I had 2 mount points mounted on same client (export1, export2). this path gets triggred only on 2nd umount and not 1st umount.\n\nI will recheck on this again. -Noted",
       "parentUuid": "2aa5b1e0_0ae95057",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc00c45_54415b19",
+        "filename": "src/Protocols/NFS/nfs4_op_destroy_session.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Clients may CREATE and DESTROY sessions for a number of reasons while still having connections. Per the RFC, it is not only used when the client is done with the server. So we definitely should not release QoS resources at this time.\n\nI\u0027m not sure if we have anything to release gsh_client structures for clients that have no activity, but that may be something to look into.",
+      "parentUuid": "ad9dd8bb_dea008d0",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a5ab48_30183ad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "A bunch of comments... running out of time... Still a lot of review to go...",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ed9640_48084560",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Global comment: in log messages please use a space after : and not before.\n\nxyz: %d is much more readable than xyz:%d",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd541c3_5d382b32",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Another global comment for logging, in several places you log uint64_t values. Please use \"xyz: %\" PRIu64 for these. It assures the code compiles correctly no matter the target.\n\nOptionally instead, just type all of these unsigned long and then you can use %lu",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96631761_5a1192c8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Move the lock so the glist_empty is protected",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15393447_5446d55f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "The two following log messages look confusing. Displaying the pointer of the client address doesn\u0027t seem helpful, please use display_sockaddr_port to log the client address, and clarify \"for export %d\"\n\nActually, if instead of passing \u0026client-\u003ecl_addrbuf, you passed client, you would have access to the string form of the client address.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9e9c7ae_d8d06aaa",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Instead of passing a void * and a qos_class_type, just make two separate functions, one for CLIENT and one for EXPORT. The logic inside will be simpler and safer.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b068064_8e71de88",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "This is not safe without some kind of locking or use of atomics. Activity on an export is not suspended during export update.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6682a5b_c2838903",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "g_qos_lock is not held per the assumption of QoS_perExportInsert",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba51d7a_dff5b83a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "This is not safe without some kind of locking or use of atomics. Activity on an export is not suspended during export update.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a07492f_32d273d9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "See comments above about logging. Pay attention to types.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76c4a930_88a88c39",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Separate function for each type and then you aren\u0027t passing void *",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98953f7_5efb34e2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "The following three functions are so small, why not just code them straight? I think the code would be more clear. At least make them explicit inline.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5b5fb9_ed0cdc64",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Break into separate functions for each class to avoid passing void *\n\nAlso add comments about locks held to protect these updates",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f17f340_62e789e6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771a5295_849f7f5f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26331af_a93effb8",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "General comment for all structures: please add a short header to each structure member name, it makes using grep or cscope to find usage of any member easier. This is common practice in Ganesha code.\n\nEspecially avoid such common names as size, args, or glist.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35f4d42_f0c97e61",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "One more thing, while it is not consistent, we have been moving to not using typedef for structures and rather identifying \"struct foo a_foo;\" rather than \"foo_t a_foo;\". If you choose to keep the typedef, please use the typedef in all places (so note the advantage of using struct foo everywhere, you can declare a struct foo* a_foo in a structure definition without needing access to the typedef).\n\nBeing consistent assures that a grep or cscope finds all the places the struct is used.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d5dcf9b_826c2e76",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "General comment for all structures: It is standard practice to put glist_head at front of structures that are on lists. Also, good to document whether this is a head because the structure is on a list, or if this is a head of a list.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a98cb555_f60c22c4",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "One more general comment: consider alignment in laying out the members of a structure, try to keep pointers and 64 bit integers at the top and smaller items below.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1a3bcea_603a1945",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Before I had commented about using a single struct with a union for the two types, but I think you can actually break all the functions that deal with these into two functions, one to handle each type and then you don\u0027t have to use void * pointers and type casting.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e07bd7_af4c50fa",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Should you just have a pointer to the gsh_client? then users of this have access to both the sockaddr_t AND the string form",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea408e1e_20decae2",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "Should you just have a pointer to the gsh_export?",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab70af53_87d409d0",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-13T23:56:13Z",
+      "side": 1,
+      "message": "The following is the list of QoS_perClient_Class right? Clarify in comment.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
