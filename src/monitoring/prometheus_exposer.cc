@@ -227,6 +227,7 @@ void PrometheusExposer::start(const sockaddr_t *addr, uint16_t port)
 void PrometheusExposer::stop()
 {
 	const std::lock_guard<std::mutex> lock(mutex_);
+
 	if (running_) {
 		running_ = false;
 		shutdown(server_fd_, SHUT_RDWR); // Wakes up the thread
@@ -306,6 +307,19 @@ void prometheus_exposer__start(const sockaddr_t *addr, uint16_t port,
 	static PrometheusExposer exposer(*registry_ptr);
 	exposer.start(addr, port);
 	initialized = true;
+}
+
+void prometheus_exposer__stop(prometheus_registry_handle_t registry_handle)
+{
+	static bool stopped = false;
+
+	if (stopped)
+		return;
+	prometheus::Registry *registry_ptr =
+		static_cast<prometheus::Registry *>(registry_handle.registry);
+	static PrometheusExposer exposer(*registry_ptr);
+	exposer.stop();
+	stopped = true;
 }
 
 } /* extern "C" */

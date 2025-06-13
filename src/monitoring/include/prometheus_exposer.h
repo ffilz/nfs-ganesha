@@ -41,11 +41,10 @@ typedef struct sockaddr_storage sockaddr_t;
 #ifndef __cplusplus
 void prometheus_exposer__start(const sockaddr_t *addr, uint16_t port,
 			       prometheus_registry_handle_t registry_handle);
-
+void prometheus_exposer__stop(prometheus_registry_handle_t registry_handle);
 #else /* __cplusplus */
 
 #include <thread>
-
 #include "prometheus/histogram.h"
 #include "prometheus/text_serializer.h"
 #include "prometheus/registry.h"
@@ -53,6 +52,7 @@ void prometheus_exposer__start(const sockaddr_t *addr, uint16_t port,
 extern "C" {
 void prometheus_exposer__start(const sockaddr_t *addr, uint16_t port,
 			       prometheus_registry_handle_t registry_handle);
+void prometheus_exposer__stop(prometheus_registry_handle_t registry_handle);
 } /* extern "C" */
 
 namespace ganesha_monitoring
@@ -105,6 +105,9 @@ prometheus_exposer__start(const sockaddr_t *UNUSED(addr), uint16_t UNUSED(port),
 {
 }
 
+prometheus_exposer__stop(prometheus_registry_handle_t UNUSED(registry_handle))
+{
+}
 #endif /* USE_MONITORING */
 
 #endif /* PROMETHEUS_EXPOSER_H */
