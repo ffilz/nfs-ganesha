@@ -69,6 +69,24 @@
       "parentUuid": "3baa8828_f4c7a168",
       "revId": "826219125850bc5b5743d9b154270132eb366f2a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e2fe3cd_63a83d81",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-16T18:58:24Z",
+      "side": 1,
+      "message": "I played around with clang-format specifiers and could not find something that worked well.\n\nThis is an area where I find forced style frustrating... In the past, I have found good reasons to do some things one parameter per line while squashing others as tightly as possible, but even then, sometimes adding a \"non-ideal\" line break for clarity.",
+      "parentUuid": "5f70d3ed_8cd0aa66",
+      "revId": "826219125850bc5b5743d9b154270132eb366f2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
