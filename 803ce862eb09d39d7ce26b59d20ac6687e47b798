@@ -16,6 +16,40 @@
       "message": "Looks good to me!",
       "revId": "803ce862eb09d39d7ce26b59d20ac6687e47b798",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "490ce27f_dd6ef7de",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-17T20:58:44Z",
+      "side": 1,
+      "message": "Hmm, is there anywhere in documentation where SSSD is defined/spelled out? I\u0027m not familiar with it.",
+      "revId": "803ce862eb09d39d7ce26b59d20ac6687e47b798",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25886153_64a36366",
+        "filename": "src/idmapper/sss_nss_idmap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-17T20:58:44Z",
+      "side": 1,
+      "message": "Hnmm, what\u0027s with the code indented by just 2 characters instead of tab? Is clang-format not working?",
+      "revId": "803ce862eb09d39d7ce26b59d20ac6687e47b798",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
