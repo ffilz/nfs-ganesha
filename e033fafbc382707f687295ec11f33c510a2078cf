@@ -33,6 +33,23 @@
       "message": "Note following patch that adds a Prometheus metric to track if max is exceeded",
       "revId": "e033fafbc382707f687295ec11f33c510a2078cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e55f04_8da96799",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-17T23:37:52Z",
+      "side": 1,
+      "message": "Oh, right, this will also issue a LogWarn for ERANGE if max groups is actually exceeded. That should help. I wonder if we should issue a different message for ERANGE though?",
+      "revId": "e033fafbc382707f687295ec11f33c510a2078cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
