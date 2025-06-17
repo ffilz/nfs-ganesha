@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9363082_0e5d85db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-06-17T13:45:41Z",
+      "side": 1,
+      "message": "Work on the change suggested",
+      "revId": "e9fa7c5d04bb51ca9d40c43029e02380b50b2d51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92b169ca_8f38935c",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-06-17T13:45:41Z",
+      "side": 1,
+      "message": "This should be called from main function, and not from here.\nCheck how monitoring service is started/invoked from main \nElse you can have this call in init() function in file src/FSAL/FSAL_CEPH/main.c",
+      "revId": "e9fa7c5d04bb51ca9d40c43029e02380b50b2d51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
