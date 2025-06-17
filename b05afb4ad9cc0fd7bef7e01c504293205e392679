@@ -71,6 +71,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf5c8dda_12ba5ee7",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-17T23:33:23Z",
+      "side": 1,
+      "message": "Oh, right. I suppose 2000 is pretty large. If someone really has more groups this will trip them. Hopefully anyone who actually relies on so many groups actually has some tests that will find it and then they hopefully will see the config.",
+      "parentUuid": "6ffc0ace_ecf64251",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "794df935_7f6d802c",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Right, 1k is just the initial value when trying to fetch\n\nIf the user has more groups than that, it will feel the buffer with 1k groups and return ERANGE and ngroups will be set to the amount of groups the user has.\n\nI\u0027m taking the min here as if the configuration was set to 500 groups per user, we want to use the first 500 groups and not more than that.\n\n\nImportant to understand the API that is used. You allocate a buffer and provide an in/out parameter will the size of the buffer.\n\nIf the provider needs to feel the buffer further it will return ERANGE and use the ngroups as an OUT parameter to provide the number of groups if you want to increase the buffer size and call it again.\n\nThat\u0027s why there are two consecutive calls to the API",
       "parentUuid": "794df935_7f6d802c",
+      "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300b9ac5_acbac873",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-17T23:33:23Z",
+      "side": 1,
+      "message": "Right, sorry for forgetting that.",
+      "parentUuid": "c1cd218d_2117b150",
       "revId": "b05afb4ad9cc0fd7bef7e01c504293205e392679",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
