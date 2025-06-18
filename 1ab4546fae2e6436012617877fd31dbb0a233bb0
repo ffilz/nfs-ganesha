@@ -34,6 +34,24 @@
       "parentUuid": "02572e80_cc43ff0e",
       "revId": "1ab4546fae2e6436012617877fd31dbb0a233bb0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeaaa37b_ea215561",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-18T23:20:36Z",
+      "side": 1,
+      "message": "cr_server_addr is converting to a full sockaddr_t to have the full IPv6 address, see https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1212093?usp\u003dsearch. Please fixup this patch to do proper IPv6 addr stuff on top of the patch series that one is in.",
+      "parentUuid": "5e8f614d_22e13a64",
+      "revId": "1ab4546fae2e6436012617877fd31dbb0a233bb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
