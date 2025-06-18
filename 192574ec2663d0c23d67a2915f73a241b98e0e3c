@@ -16,6 +16,40 @@
       "message": "Bump",
       "revId": "192574ec2663d0c23d67a2915f73a241b98e0e3c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb7a132a_8adb3994",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-18T18:22:38Z",
+      "side": 1,
+      "message": "This looks good. Thanks.",
+      "revId": "192574ec2663d0c23d67a2915f73a241b98e0e3c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8585da18_8e39ec26",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-18T18:22:38Z",
+      "side": 1,
+      "message": "Is there a corresponding gsh_refstr_put? If not, updates will leak string references.",
+      "revId": "192574ec2663d0c23d67a2915f73a241b98e0e3c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
