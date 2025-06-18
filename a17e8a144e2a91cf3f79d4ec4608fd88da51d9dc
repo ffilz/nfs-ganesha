@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84479910_f57128c1",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-18T17:14:32Z",
+      "side": 1,
+      "message": "How do we get in a state of having a blocked lock_entry to cancel but there are no locks on the file?\n\nAnd how does this cause a crash?",
+      "revId": "a17e8a144e2a91cf3f79d4ec4608fd88da51d9dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
