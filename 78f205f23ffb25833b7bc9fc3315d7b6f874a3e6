@@ -16,6 +16,24 @@
       "message": "Hmm, how are we getting here? All fsal_obj_handles SHOULD have been released as part of shutting down exports which precedes shutting down FSALs.",
       "revId": "78f205f23ffb25833b7bc9fc3315d7b6f874a3e6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b167de_8fe67535",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-06-18T05:33:19Z",
+      "side": 1,
+      "message": "Shutdown path has below call stack\ndo_shutdown()\n  destroy_fsals()\n    shutdown_handles()\n      release() -\u003e ceph_fsal_release  \u003c\u003d for CEPH\nAnd the crash is in ceph_fsal_release",
+      "parentUuid": "df5e0b09_880ce37a",
+      "revId": "78f205f23ffb25833b7bc9fc3315d7b6f874a3e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
