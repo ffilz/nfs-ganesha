@@ -34,6 +34,24 @@
       "parentUuid": "df5e0b09_880ce37a",
       "revId": "78f205f23ffb25833b7bc9fc3315d7b6f874a3e6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebccd98d_4814e7e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-18T17:00:30Z",
+      "side": 1,
+      "message": "Any thoughts on why a fsal_obj_handle wasn\u0027t cleaned up as part of cleaning up exports? Do we have a refcount leak?",
+      "parentUuid": "92b167de_8fe67535",
+      "revId": "78f205f23ffb25833b7bc9fc3315d7b6f874a3e6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
