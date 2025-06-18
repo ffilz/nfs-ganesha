@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7507a99_960e8a08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-06-18T05:57:38Z",
+      "side": 1,
+      "message": "Reason to call register_nfs_service() function in rados_url_client_setup(void) is that, this rados_url_client_setup(void) is triggered only if RADOS_URLS block conigs are paresed properly and by the time we call reister_nfs_services() Rados initialzation is done.\n\ncan you confirm again to call in init() of FSAL_CEPH/main.c file ?",
+      "revId": "e9fa7c5d04bb51ca9d40c43029e02380b50b2d51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92b169ca_8f38935c",
         "filename": "src/config_parsing/conf_url_rados.c",
         "patchSetId": 1
