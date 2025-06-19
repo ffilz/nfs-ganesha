@@ -55,6 +55,58 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce2f88a3_7ffba397",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-06-19T03:27:35Z",
+      "side": 1,
+      "message": "Here is my view:\nIf the recovery database is not available / not operational (later on), I would treat this as server\u0027s functionality failure and it should stop working indicating that something is broken.\nIts not a question whether a particular client would really need to reclaim or not. Rather I would attribute it to NFS server\u0027s capability of being able to serve reclaim calls. And if that is at risk I would recommend stop NFS server \u0026 let the admin do required action.",
+      "parentUuid": "2733e015_b5e1ca0c",
+      "revId": "f26ce9d51b69a604907679db9446dcd6d3c1ecc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b14ff48_34abf29b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-06-19T03:27:35Z",
+      "side": 1,
+      "message": "Please look at the suggestion",
+      "revId": "f26ce9d51b69a604907679db9446dcd6d3c1ecc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5211058_e38360c8",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-06-19T03:27:35Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it return NFS4ERR_RESOURCE ?",
+      "revId": "f26ce9d51b69a604907679db9446dcd6d3c1ecc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84d7204c_868abefa",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 1
