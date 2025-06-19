@@ -51,6 +51,24 @@
       "parentUuid": "cf30fe13_034f1757",
       "revId": "373268d0c5ce0498925a11a7bee64951e40c03dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efe6eea0_dab9860e",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3913,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2025-06-19T05:42:01Z",
+      "side": 1,
+      "message": "The warning mentioned above doesn\u0027t cause any functional issues. It\u0027s a temporary condition that typically resolves on its own, possibly due to an mdcache refresh. I agree that we should investigate the root cause to understand it better. However, this issue has only occurred 2–4 times over the past couple of years and only for a single customer. Unfortunately, we haven\u0027t been able to collect debug logs during those instances. The customer\u0027s main concern is the rapid increase in log file size — it grows to several GB\u0027s within a minute.",
+      "parentUuid": "31bc72c5_7972839d",
+      "revId": "373268d0c5ce0498925a11a7bee64951e40c03dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
