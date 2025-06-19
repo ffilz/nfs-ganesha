@@ -16,6 +16,24 @@
       "message": "How do we get in a state of having a blocked lock_entry to cancel but there are no locks on the file?\n\nAnd how does this cause a crash?",
       "revId": "a17e8a144e2a91cf3f79d4ec4608fd88da51d9dc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3ee6d1_97d27705",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2025-06-19T05:55:56Z",
+      "side": 1,
+      "message": "This will happen if cancel(kill process in nfs client), release and file deletion happens at the same time. it is a race condition.",
+      "parentUuid": "84479910_f57128c1",
+      "revId": "a17e8a144e2a91cf3f79d4ec4608fd88da51d9dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
