@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31831270_017306ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2025-06-19T13:17:57Z",
+      "side": 1,
+      "message": "include/posix_acls.h includes sys/acl.h for the definition of things like acl_type_, acl_t, and acl_tag_t.   So it appears POSIX ACLs depend on this too.  This is conditional on USE_ACL_MAPPING for core ganesha.  Also, FSAL_CEPH, FSAL_GLUSTER, and FSAL_VFS depend on POSIX ACLs.",
+      "revId": "60fc1f8f6e9c4c68613dc05869504b8171fbd1da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
