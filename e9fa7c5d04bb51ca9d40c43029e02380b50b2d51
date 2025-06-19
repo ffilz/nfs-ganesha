@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39ec68b3_6e6830a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-06-19T07:24:07Z",
+      "side": 1,
+      "message": "this rados_service_register() is a librados library function same as rados_create() function used in this file.",
+      "revId": "e9fa7c5d04bb51ca9d40c43029e02380b50b2d51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdf8897b_878bd837",
         "filename": "src/config_parsing/conf_url_rados.c",
         "patchSetId": 1
