@@ -142,6 +142,24 @@
       "parentUuid": "d1f25a35_93e89484",
       "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2d95d6_89b41530",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-19T18:29:05Z",
+      "side": 1,
+      "message": "At this point, unless someone has a strong objection, I\u0027ll merge this patch as is. If subsequently we really do need to be able to exclude it, we can add all the cmake plumbing to properly determine when it is required.",
+      "parentUuid": "88fc1a0a_a83c6fa2",
+      "revId": "96422c5cd21bc94f506732dd66f6bb0ffe6ef0a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
