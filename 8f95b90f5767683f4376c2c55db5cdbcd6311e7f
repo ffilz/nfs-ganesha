@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "695b2a09_e8692f5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-19T17:49:48Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m not sure that\u0027s the right fix. I think we need to understand the NFS ACL protocol better and institute the right correctness checks.\n\nnfs3_acl_2_fsal_acl expects the pointers to be non-NULL and doesn\u0027t distinguish object type, so I think a null pointer dereference can still happen.\n\nReally I think there should be more validation done on the values, maybe even in the XDR decode (not sure it handles acl_access_count \u003d\u003d 0 for example...)",
+      "revId": "8f95b90f5767683f4376c2c55db5cdbcd6311e7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
