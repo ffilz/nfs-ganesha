@@ -16,6 +16,24 @@
       "message": "include/posix_acls.h includes sys/acl.h for the definition of things like acl_type_, acl_t, and acl_tag_t.   So it appears POSIX ACLs depend on this too.  This is conditional on USE_ACL_MAPPING for core ganesha.  Also, FSAL_CEPH, FSAL_GLUSTER, and FSAL_VFS depend on POSIX ACLs.",
       "revId": "60fc1f8f6e9c4c68613dc05869504b8171fbd1da",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c50ad5d_e56cf7db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-19T15:37:03Z",
+      "side": 1,
+      "message": "Should this then be dependent on some cmake options? This change appears to mean require libacl for any build of Ganesha.",
+      "parentUuid": "31831270_017306ab",
+      "revId": "60fc1f8f6e9c4c68613dc05869504b8171fbd1da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
