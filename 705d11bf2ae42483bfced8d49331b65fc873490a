@@ -26,6 +26,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3b61af6_a71c2a4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2025-06-20T05:47:50Z",
+      "side": 1,
+      "message": "This issue was identified by the Coverity scan and doesn\u0027t actually exist.\nAs you noted, an empty metric family should not be defined. To address the Coverity issue, we could either add an explicit check at the beginning of the function, or alternatively, we could mark it as a false positive.\n\nCould you please advise on your preferred approach\n@ffilzlnx@mindspring.com @roybabayov@gmail.com",
+      "parentUuid": "29cda019_1cc1a0f7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "705d11bf2ae42483bfced8d49331b65fc873490a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20317f92_4bbb7262",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2025-06-20T05:47:50Z",
+      "side": 1,
+      "message": "This issue was identified by the Coverity scan and doesn\u0027t actually exist.\nAs you noted, an empty metric family should not be defined. To address the Coverity issue, we could either add an explicit check at the beginning of the function, or alternatively, we could mark it as a false positive.\n\nCould you please advise on your preferred approach\n@ffilzlnx@mindspring.com, @roybabayov@gmail.com",
+      "parentUuid": "29cda019_1cc1a0f7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "705d11bf2ae42483bfced8d49331b65fc873490a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfa575f0_f71feb9a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
