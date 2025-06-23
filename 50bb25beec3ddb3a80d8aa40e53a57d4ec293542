@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6dd4f8_a91e0553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2025-06-23T22:26:19Z",
+      "side": 1,
+      "message": "Looks good.  Just the one question about IPv4-mapped IPv6 address canonicalisation.",
+      "revId": "50bb25beec3ddb3a80d8aa40e53a57d4ec293542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5323ca9f_5ac881de",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2025-06-23T22:26:19Z",
+      "side": 1,
+      "message": "Should this try convert_ipv6_to_ipv4() on server_addr first?  I figure that everywhere an IP address is either stored or passed to a search, it should be canonicalised.",
+      "range": {
+        "startLine": 2010,
+        "startChar": 1,
+        "endLine": 2010,
+        "endChar": 39
+      },
+      "revId": "50bb25beec3ddb3a80d8aa40e53a57d4ec293542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
