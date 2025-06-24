@@ -16,6 +16,24 @@
       "message": "Hmm, are these represented in ganesha_mgr.py? I don\u0027t think so.\n\n\nAlso, a problem with these being in localfs.c... CMakeLists.txt is supposed to not build localfs.c if FSAL_VFS, FSAL_GPFS, and FSAL_LUSTRE are not being built. So we need to move them out. I\u0027m pretty sure this will break conditional compile...\n\nSince they don\u0027t seem to be referenced by ganesha_mgr.py, it seems like moving them out would not disrupt things?\n\nOn the other hand, cachemgr_show_fs definitely needs to be part of localfs.c",
       "revId": "b6b43f5cfd9f264bfd0e4fc3a98c3ae80374cab6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebfbba53_32088015",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1945,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-24T18:37:00Z",
+      "side": 1,
+      "message": "OK, let\u0027s get these into ganesha_mgr.py\n\nWe will handle moving from localfs.c separately",
+      "parentUuid": "0e018459_695a00c5",
+      "revId": "b6b43f5cfd9f264bfd0e4fc3a98c3ae80374cab6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
