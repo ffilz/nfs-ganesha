@@ -16,6 +16,74 @@
       "message": "Rebased to latest upsteam and updated the changes as suggested in review comments",
       "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320aca6e_add76782",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Blank line here please\n\nAnd then a general comment - you have forward declarations for most (all?) of the functions. Instead of needing so many forward declarations, please re-arrange the functions so each function is defined before it is used the first time, and preferably close to where it is used the first time though logical grouping of functions may make sense.\n\nThis makes it much easier to review.",
+      "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e391f4_f646f914",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "These macros look great. Thanks",
+      "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e238713_3e39a341",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Pleaae don\u0027t define the string separately, that confuses things that verify printf parameters and scripts that pull out entire log function calls with all the parameters (see tools/findlog.sh)\n\nAlso, don\u0027t break up strings like that, it is OK to overflow a line with a long string\n\nAlso, not sure your types match (num_ios_waiting is unsigned int, but you use %d).",
+      "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee74a511_df06df00",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "So here, you are accessing gsh_export-\u003eqos_block with the export class lock held, but in copy_gsh_qos_conf, you are not holding the export class lock.\n\nIf, while a SIGHUP is updating exports, you also get this dbus command, a race will occur.\n\nCoverity should flag this.",
+      "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "383507b9_346ad539",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "There are still several instances in the patch, several in nfs_qos.c but also several scattered among the other files.",
+      "parentUuid": "9687351c_5f47a6c6",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96631761_5a1192c8",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Updated as suggested",
       "parentUuid": "15393447_5446d55f",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3689524b_6634461b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e896e923_7010ac4c",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -194,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0321b728_90084654",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "So (mostly) export-\u003eqos_block is not referenced past the QoS_perExportInsert call?\n\nBut there are dbus commands that access it that could race with export update.\n\nSince qos_block is really only used during config and by those dbus commands, the cost of a lock is minimal.\n\nHmm, also QoS_perExportInsert can be called for I/O, inserting the global QoS per export params. That could race with an export update.\n\nHmm, suggest you just take the g_qos_lock for this function and in the dbus commands. That should protect everything with minimal lock contention.",
+      "parentUuid": "d88214fe_6dc7ef73",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6682a5b_c2838903",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -229,6 +283,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee29db4c_9ccbef9f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "See concerns raised in comment above.",
+      "parentUuid": "2de91377_51892054",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aba51d7a_dff5b83a",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -258,6 +330,24 @@
       "side": 1,
       "message": "this is a configuration block, which is not getting used by any IO.\nthis block is used to applying the new values to running IO\u0027s which will be done later in QoS_perExportInsert(); which is already under lock.",
       "parentUuid": "aba51d7a_dff5b83a",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec368525_11b20798",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "See concerns raised in comment above.",
+      "parentUuid": "e4a1d6f5_9b18c99e",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -332,6 +422,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0893ccc1_dd25f9c4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ffa361f_70d03913",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e98953f7_5efb34e2",
@@ -384,6 +492,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e55f8d6e_b0fbf4cc",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0af84f51_22ac2647",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f17f340_62e789e6",
@@ -419,6 +545,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ed6fd7_19b05873",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20024222_b6866609",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "771a5295_849f7f5f",
@@ -450,6 +594,24 @@
       "side": 1,
       "message": "Updated, merged the structure",
       "parentUuid": "771a5295_849f7f5f",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac4cb2c_5fba3cd7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2584df74_85385997",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -613,6 +775,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "738f6d8e_c15b30c7",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "It sill would be good to put the glist_head as the first member of each stucture if that head is used to put the structure on a list.",
+      "parentUuid": "82d7bf06_d69c4d10",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2e206c0_cfbaae47",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5da6f7a9_0ab5fe48",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1a3bcea_603a1945",
         "filename": "src/include/nfs_qos.h",
         "patchSetId": 19
@@ -642,6 +840,24 @@
       "side": 1,
       "message": "Updated to use the single structure Qos_Class (qos_class_t), previous diffrent structure for export and client have been removed.",
       "parentUuid": "c1a3bcea_603a1945",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc0ddd3d_c593c104",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ce2e287_29f32fd4",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -681,6 +897,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f491f3_b3e7df2c",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9a9d5d_67a43f2c",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea408e1e_20decae2",
@@ -716,6 +950,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c6cf44_cb45c0ae",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21dfbbfa_39accc58",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab70af53_87d409d0",
@@ -747,6 +999,24 @@
       "side": 1,
       "message": "Added detailed comments in the new structure, which enitity holds what ..",
       "parentUuid": "ab70af53_87d409d0",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe2eb7c_8402f6cb",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T21:20:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "294d4cad_c846ae7d",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
