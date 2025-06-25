@@ -87,6 +87,30 @@
       },
       "revId": "50bb25beec3ddb3a80d8aa40e53a57d4ec293542",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8036db_cd083065",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-25T16:44:48Z",
+      "side": 1,
+      "message": "Thinking more about this specific instance, I don\u0027t think it matters if it is converted. If the client is appearing to Ganesha via IPv4 encapsulated in IPv6, we are only ever going to see IPv6 encapsulated addresses for the client (and thus the server in this case). It may even make sense to consider an unencapsulated IPv4 connection from the client as something separate (the only case where we would do a compare of cr_server_addr).",
+      "parentUuid": "81888573_25c40269",
+      "range": {
+        "startLine": 2010,
+        "startChar": 1,
+        "endLine": 2010,
+        "endChar": 39
+      },
+      "revId": "50bb25beec3ddb3a80d8aa40e53a57d4ec293542",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
