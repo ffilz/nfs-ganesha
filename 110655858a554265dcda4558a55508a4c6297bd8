@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9687351c_5f47a6c6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated as suggested",
+      "parentUuid": "c5ed9640_48084560",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96631761_5a1192c8",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -88,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e896e923_7010ac4c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated as suggested",
+      "parentUuid": "15393447_5446d55f",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9e9c7ae_d8d06aaa",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -99,6 +135,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "Instead of passing a void * and a qos_class_type, just make two separate functions, one for CLIENT and one for EXPORT. The logic inside will be simpler and safer.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3c44bb_c8d6232f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "For freeing of client and export entries, QOS has exposed the same API, which based up on the path should be used.\nfor example, client path gsh_client should be passed and qos_class_type should be QOS_CLIENT, the same is applicable for export as well(gsh_export and QOS_EXPORT).\nit is just to keep same free api (i.e gsh_free_mem) for export and client.\nQOS will try to map it to where the memory needs to be freed from based on the current qos_type enabled.",
+      "parentUuid": "a9e9c7ae_d8d06aaa",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -122,6 +176,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d88214fe_6dc7ef73",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "this is a configuration block, which is not getting used by any IO.\nthis block is used to applying the new values to running IO\u0027s which will be done later in QoS_perExportInsert(); which is lareday under lock",
+      "parentUuid": "3b068064_8e71de88",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6682a5b_c2838903",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -133,6 +205,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "g_qos_lock is not held per the assumption of QoS_perExportInsert",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de91377_51892054",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "g_qos_lock is used when populating the qos_class_t at run time. \ncurrent case is qos_class_t is already there, and we just have to apply the new values to exiting structure. so lock will be taken in QoS_perExportInsert, and is qos_class_t-\u003elock.",
+      "parentUuid": "e6682a5b_c2838903",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -156,6 +246,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4a1d6f5_9b18c99e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "this is a configuration block, which is not getting used by any IO.\nthis block is used to applying the new values to running IO\u0027s which will be done later in QoS_perExportInsert(); which is already under lock.",
+      "parentUuid": "aba51d7a_dff5b83a",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a07492f_32d273d9",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -173,6 +281,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a88d7eb_8aef3aac",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "5a07492f_32d273d9",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76c4a930_88a88c39",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -184,6 +310,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "Separate function for each type and then you aren\u0027t passing void *",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffa361f_70d03913",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated, merged the structure itself.",
+      "parentUuid": "76c4a930_88a88c39",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -224,6 +368,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0af84f51_22ac2647",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated, merged the structure.",
+      "parentUuid": "ce5b5fb9_ed0cdc64",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f17f340_62e789e6",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -241,6 +403,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20024222_b6866609",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated, merged the structure.",
+      "parentUuid": "2f17f340_62e789e6",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "771a5295_849f7f5f",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -252,6 +432,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "Same",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2584df74_85385997",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated, merged the structure",
+      "parentUuid": "771a5295_849f7f5f",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -343,6 +541,78 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a07844c8_3498b71f",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "There are few places still remaining. Will update in future to approprite names.",
+      "parentUuid": "d26331af_a93effb8",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da6f7a9_0ab5fe48",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Changes done in required places",
+      "parentUuid": "a98cb555_f60c22c4",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d7bf06_d69c4d10",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "2d5dcf9b_826c2e76",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df0e366a_98f06cd3",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "As of now, in all the places in qos code used qos_class_t which internally is struct Qos_Class.",
+      "parentUuid": "c35f4d42_f0c97e61",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1a3bcea_603a1945",
         "filename": "src/include/nfs_qos.h",
         "patchSetId": 19
@@ -354,6 +624,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "Before I had commented about using a single struct with a union for the two types, but I think you can actually break all the functions that deal with these into two functions, one to handle each type and then you don\u0027t have to use void * pointers and type casting.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce2e287_29f32fd4",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated to use the single structure Qos_Class (qos_class_t), previous diffrent structure for export and client have been removed.",
+      "parentUuid": "c1a3bcea_603a1945",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -377,6 +665,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a9a9d5d_67a43f2c",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Yes, that true. Updated the code to use the gsh_client and gsh_export pointers, which helped in a much more cleaner code.",
+      "parentUuid": "e8e07bd7_af4c50fa",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea408e1e_20decae2",
         "filename": "src/include/nfs_qos.h",
         "patchSetId": 19
@@ -394,6 +700,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21dfbbfa_39accc58",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated the code",
+      "parentUuid": "ea408e1e_20decae2",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab70af53_87d409d0",
         "filename": "src/include/nfs_qos.h",
         "patchSetId": 19
@@ -405,6 +729,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "The following is the list of QoS_perClient_Class right? Clarify in comment.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294d4cad_c846ae7d",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Added detailed comments in the new structure, which enitity holds what ..",
+      "parentUuid": "ab70af53_87d409d0",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

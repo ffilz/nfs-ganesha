@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d611e55c_a002438e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "ACK, done",
+      "parentUuid": "6bcdb317_8062fe5e",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "417d3584_b17bb260",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 18
@@ -156,6 +174,24 @@
       "side": 1,
       "message": "There is still value in setting the pointer to NULL. In the future we might support disabling QoS on a client or export without shutting down QoS completely. Doing so also makes sure that the freed memory is not referenced by buggy code that will segfault on the NULL pointer instead of a use after free situation.",
       "parentUuid": "919f653c_fc128d15",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a654a4c7_7e0a3114",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Ack, done",
+      "parentUuid": "229bc233_ab4f8498",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -215,6 +251,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c5324c8_4e40e9f2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Currently changed to macro, have plan to move the entries to proper place.",
+      "parentUuid": "43dd9900_f736b9bc",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a23dc6f3_d01b711b",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 18
@@ -262,6 +316,24 @@
       "side": 1,
       "message": "This certainly is safe, though it may be confusing. Really it would be better to make the effort to display the path string.\n\nMinor nit: space between : and %d for easier reading log message.",
       "parentUuid": "275c287d_0c72967a",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f879f4eb_9ad10f4d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2147,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated, added 3 macro\u0027s for debug printings in QOS",
+      "parentUuid": "cc9ba708_019f2805",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -321,6 +393,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af703d91_c5e75037",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2174,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "4f601cf2_3a499004",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18a2aa03_185a3e9d",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 18
@@ -368,6 +458,24 @@
       "side": 1,
       "message": "Minor nit - please insert space between : and %s for easier reading (this may be something you want to globally examine the code for)",
       "parentUuid": "aac175f3_38010ece",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7673f499_d9ff8716",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "0dde224f_d872747f",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -427,6 +535,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce6fc942_592aa73f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2825,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "9cddb4c4_08fe72a4",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2aa5b1e0_0ae95057",
         "filename": "src/Protocols/NFS/nfs4_op_destroy_session.c",
         "patchSetId": 18
@@ -474,6 +600,24 @@
       "side": 1,
       "message": "Clients may CREATE and DESTROY sessions for a number of reasons while still having connections. Per the RFC, it is not only used when the client is done with the server. So we definitely should not release QoS resources at this time.\n\nI\u0027m not sure if we have anything to release gsh_client structures for clients that have no activity, but that may be something to look into.",
       "parentUuid": "ad9dd8bb_dea008d0",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2feb43a_5fc85382",
+        "filename": "src/Protocols/NFS/nfs4_op_destroy_session.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-25T16:19:27Z",
+      "side": 1,
+      "message": "Since after initation of destroy_session by client, socket also gets cloesed, in this qos_class_t should be freed. If required we create this structure at runtime fi new gsh_client get allocated.\n\ncheck_session_conn :SESSIONS :F_DBG :Comparing addr ::ffff:XX.X.XXX.XX:830 for OP_SEQUENCE to Session bound addr ::ffff:XX.X.XXX.XX:830\nfree_nfs_request :DISP :DEBUG :SVC_DECODE on 0x7fffcc001b90 fd 19 (::ffff:XX.X.XXX.XX:830) xid\u003d3413674764 returned XPRT_IDLE\ncheck_session_conn :SESSIONS :F_DBG :Comparing addr ::ffff:XX.X.XXX.XX:830 for OP_DESTROY_SESSION to Session bound addr ::ffff:XX.X.XXX.XX:830\nqos_free_mem :QOS :DEBUG :trying to free from all exports CI: ::ffff:XX.X.XXX.XX:830\nqos_drain_ios :QOS :DEBUG :qos_drain_ios CI: ::ffff:XX.X.XXX.XX:830\nfree_nfs_request :DISP :DEBUG :SVC_DECODE on 0x7fffcc001b90 fd 19 (::ffff:XX.X.XXX.XX:830) xid\u003d3430451980 returned XPRT_IDLE\nfree_nfs_request :DISP :DEBUG :SVC_DECODE on 0x7fffcc001b90 fd 19 (::ffff:XX.X.XXX.XX:830) xid\u003d3447229196 returned XPRT_IDLE\ndissociate_custom_data_from_xprt :XPRT :DEBUG :About to un-reference custom-data from xprt with FD: 19, socket-addr: ::ffff:XX.X.XXX.XX:830\ndissociate_custom_data_from_xprt :XPRT :DEBUG :Done dissociating custom-data for xprt with FD: 19, socket-addr: ::ffff:XX.X.XXX.XX:830\ndestroy_custom_data_for_destroyed_xprt :XPRT :DEBUG :Processing custom data for destroyed xprt: 0x7fffcc001b90 with FD: 19, socket-addr: ::ffff:XX.X.XXX.XX:830",
+      "parentUuid": "fbc00c45_54415b19",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
