@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51b8e303_e6a861f8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "tried addressing most of them in current patch.",
+      "parentUuid": "383507b9_346ad539",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96631761_5a1192c8",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -101,6 +119,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "Move the lock so the glist_empty is protected",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ccb573_b913d99e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "This is just a check that current client which is going to delete is there in the glist or not. if the glist is empty that means no client are connected to that export and not even the current client which we are trying to delete from this export.\n\nI dont think we really require a lock here. while actually deleting the client from the list, we are taking the lock.\n\nin the new patch, config lock has been added which will be held in qos_free_mem() which makes sures that List is deleted under a config lock.",
+      "parentUuid": "96631761_5a1192c8",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -248,6 +284,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2b67cae_8b7183be",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Added this under config lock",
+      "parentUuid": "0321b728_90084654",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6682a5b_c2838903",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -295,6 +349,24 @@
       "side": 1,
       "message": "See concerns raised in comment above.",
       "parentUuid": "2de91377_51892054",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "159ae3ee_7b6c154d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ee29db4c_9ccbef9f",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -354,6 +426,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c8a66d0_b013cd73",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ec368525_11b20798",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a07492f_32d273d9",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -383,6 +473,24 @@
       "side": 1,
       "message": "Updated",
       "parentUuid": "5a07492f_32d273d9",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c3cd67_a2d6f610",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Updated as suggested",
+      "parentUuid": "6a88d7eb_8aef3aac",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -453,6 +561,24 @@
       "writtenOn": "2025-06-13T23:56:13Z",
       "side": 1,
       "message": "The following three functions are so small, why not just code them straight? I think the code would be more clear. At least make them explicit inline.",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dba91bf_3804f5b6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Acknowledged, updated the 3 functiosn to inline functions",
+      "parentUuid": "e98953f7_5efb34e2",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -805,6 +931,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "5da6f7a9_0ab5fe48",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f211e3_690a5a1f",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "updated the structure where headlist are there, rest of the list uses glist for traversal.\nreformatted some structures as suggested",
+      "parentUuid": "a07844c8_3498b71f",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

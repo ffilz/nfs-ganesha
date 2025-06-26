@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37ace386_7cd0bdde",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Tried removing most of the fwd declaration in new patchset",
+      "parentUuid": "320aca6e_add76782",
+      "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9e391f4_f646f914",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 21
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "612def0d_ed6fc39e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Acknowledged, because of the new changes, clang-format itself stripped this into new lines.",
+      "parentUuid": "6e238713_3e39a341",
+      "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee74a511_df06df00",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 21
@@ -82,6 +118,24 @@
       "writtenOn": "2025-06-25T21:20:23Z",
       "side": 1,
       "message": "So here, you are accessing gsh_export-\u003eqos_block with the export class lock held, but in copy_gsh_qos_conf, you are not holding the export class lock.\n\nIf, while a SIGHUP is updating exports, you also get this dbus command, a race will occur.\n\nCoverity should flag this.",
+      "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2bfb0b1_7336a575",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T15:25:56Z",
+      "side": 1,
+      "message": "Acknowledged, new config lock added to make sure that we access the qos_class_t under a lock",
+      "parentUuid": "ee74a511_df06df00",
       "revId": "3a985c27c340f2de0d5423df3d423d7fe39a46a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
