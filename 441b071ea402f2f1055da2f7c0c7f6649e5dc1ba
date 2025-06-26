@@ -35,6 +35,159 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "544b9d5b_0ad88164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "more stuff",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5304102c_ac04af19",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "I think at least the description needs to indicate *what* future interval is being calculated :) the intended use of the interval",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf6074f_b9b05d65",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "good use of constructor methods",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba32a069_949a6ff6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "frank would find these helper methods easier to read if the description explained the meaning of the \"_pe\", \"_pepc\" etc suffixes, I suspect",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f2e2c48_dc412bcc",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "what are the locking rules for this function?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb652b8_a84fc6a2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "locking rules?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8fd773d_0d5ba3bd",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "locking rules?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac3ab97_df418db8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "maybe this is safe to use unlocked?  I don\u0027t remember",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e03e289_2c6e9511",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T19:22:02Z",
+      "side": 1,
+      "message": "locking rules?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f6b866b_a7a4a449",
