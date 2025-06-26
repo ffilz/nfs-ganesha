@@ -126,6 +126,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d855ee49_bf6a6f2a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Addressed in all the places.",
+      "parentUuid": "478bed84_9e8c1665",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3648132c_c5c3c41b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "6cd541c3_5d382b32",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96631761_5a1192c8",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -173,6 +209,24 @@
       "side": 1,
       "message": "This can race with pepc_alloc_get_client.\n\nReally it\u0027s a trivial change to just take the lock before this test (and release it if returning true).",
       "parentUuid": "f7ccb573_b913d99e",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c08c09_d9d460de",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "b19f866a_65b47cda",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

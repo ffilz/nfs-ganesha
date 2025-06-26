@@ -122,6 +122,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9312131_a248f52a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Since the head is in the parent structure, caller should hold the lock while calling this function.",
+      "parentUuid": "0f2e2c48_dc412bcc",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afb652b8_a84fc6a2",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -133,6 +151,24 @@
       "writtenOn": "2025-06-26T19:22:02Z",
       "side": 1,
       "message": "locking rules?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b15c8b1_fc4c2367",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Parent structure holds this entry, so caller who has the parent structure access should hold the lock.",
+      "parentUuid": "afb652b8_a84fc6a2",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -156,6 +192,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "090a8122_dc59316c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "-\u003e Allocation of parent structure qos_class_t is under qos_config_lock \n-\u003e Runtime allocation of parent structure qos_class_t from IO uses g_qos_IO_path_lock under which qos_config_lock.\n-\u003e Configuration/Freeing are done under qos_config_lock\n-\u003e All the IO\u0027s are operated under bucket-\u003elock.",
+      "parentUuid": "e8fd773d_0d5ba3bd",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ac3ab97_df418db8",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -173,6 +227,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92c243a9_1498644b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "All the IO\u0027s are operated under bucket lock.\nAllocation of parent structure qos_class_t is under qos_config_lock \nRuntime allocation of parent structure qos_class_t from IO uses g_qos_IO_path_lock under which qos_config_lock.\nConfiguration/Freeing are done under respective qos_config_lock",
+      "parentUuid": "4ac3ab97_df418db8",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e03e289_2c6e9511",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -184,6 +256,24 @@
       "writtenOn": "2025-06-26T19:22:02Z",
       "side": 1,
       "message": "locking rules?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f570832d_c04e8aa5",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "-\u003e Allocation of parent structure qos_class_t is under qos_config_lock \n-\u003e Runtime allocation of parent structure qos_class_t from IO uses g_qos_IO_path_lock under which qos_config_lock.\n-\u003e Configuration/Freeing are done under qos_config_lock\n-\u003e All the IO\u0027s are operated under respective bucket-\u003elock.",
+      "parentUuid": "1e03e289_2c6e9511",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -243,6 +333,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca03f1ef_afd301e9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Reverted the change",
+      "parentUuid": "b5e38499_0468f29e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdbd7593_f423dbd6",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -254,6 +362,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Can this ever actually be called with gsh_client \u003d\u003d NULL? I think it would be better to check the assumptions of the caller, and actually avoid calling this function.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de38566_3197706c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "As per my understanding NO.",
+      "parentUuid": "cdbd7593_f423dbd6",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -295,6 +421,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "688ad78c_f0d91348",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "This function is suppose to hold the lock if there is a valid qos_class.\nin invalid case, it will release the lock and will return NULL.\n\nthe 1st if is independent of of 2nd if block, which is having else.\n\nin success case user need to release the lock after its operation by calling put_qos_config_lock()\n\nBut reverted the changes as suggested.",
+      "parentUuid": "13af7b27_f43601eb",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1622bec7_eb34ab05",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -306,6 +450,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Can this ever actually be called with gsh_export \u003d\u003d NULL? I think it would be better to check the assumptions of the caller, and actually avoid calling this function.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "180437c8_53c5533e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "As per my understanding No.",
+      "parentUuid": "1622bec7_eb34ab05",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -347,6 +509,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f51e3796_52b80107",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "But reverted the changes as suggested.",
+      "parentUuid": "3b004aee_148fca40",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "226b9f90_faa3dd11",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -358,6 +538,24 @@
       "writtenOn": "2025-06-26T18:53:04Z",
       "side": 1,
       "message": "defer",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d57c6ee_29e689d4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Code updated as suggested.",
+      "parentUuid": "226b9f90_faa3dd11",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -381,6 +579,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d66efb14_55514672",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "You are right, its already calculated, just need to pass the final value.\ncode changes done.",
+      "parentUuid": "1367c217_2d65f3f3",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aaf523c_1c9cc6cb",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -392,6 +608,24 @@
       "writtenOn": "2025-06-26T18:53:04Z",
       "side": 1,
       "message": "now here, in both cases, bucket-\u003ebw_ldct will be incremented by required_time (and optionally ctime) again?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63963d6f_9a915207",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Here, if we carefully go though the function bucket-\u003ebw_ldct is updated only once.\nAll the condition are about adjusting the time eg: IDLE condition, Backend slow drives, already reached the BW limits etc.\n\n-\u003e Main i.e 1st IF ELSE is about slowpath(TASK queued in QOS) and fastpath(TASK not queued in QOS). \n-\u003e Accounting will be done in both the cases,\n-\u003e But in fastpath accouting based on from IDLE to IO start case \n   or Backend drive is slower than configured value(in this case dont reschedule the IO in QOS queue).",
+      "parentUuid": "6aaf523c_1c9cc6cb",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -415,6 +649,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be6af451_2a4df593",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "e9247649_031f14ac",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a6e2b71_bfc379b7",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -432,6 +684,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "889b5fc5_acf08b21",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "9a6e2b71_bfc379b7",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f627cd5b_07afd86d",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -443,6 +713,24 @@
       "writtenOn": "2025-06-26T18:53:04Z",
       "side": 1,
       "message": "what motivates 15s?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c588a3ea_950f637f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "If reply doesnt goes to client within in 30 Sec, existing connection will be disconnected by client and a new session will get created by client.\nSo we have 30 Sec timeframe to reply to client, but wisley we choosen it to be 15 Sec based on inital discussion.",
+      "parentUuid": "f627cd5b_07afd86d",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -477,6 +765,24 @@
       "writtenOn": "2025-06-26T18:53:04Z",
       "side": 1,
       "message": "is this a potentially large critical section?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07fe40c8_ab7cf68a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2140,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "I would say as such its not that large, because read and write IO\u0027s are in different bucket, if combine is uses read and write goes to same bucket.\n\nLock is just syncing between producer and consumer for this specific buckets.",
+      "parentUuid": "c784be8c_ddcffa64",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -570,6 +876,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfc27bc9_13616bc9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2613,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "This is perExport_PerClient mode, here rescheduling of the IO from Client bucket to Export bucket happens, and from export bucket IO is resumed.\n\nThis is to entertain export limits along with client limits.\neg: export can have 100MBps but individual client can have only 10 MBps",
+      "parentUuid": "8b68924a_f7e4648e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fab379d_c6140bde",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -581,6 +905,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "It would be less confusing to take the q_qos_config_lock",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d135553f_94aed6fa",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "8fab379d_c6140bde",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -604,6 +946,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68b5dc8a_c31ed3fe",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "33398855_010604e7",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44a327d0_4437cec6",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -615,6 +975,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "And release it explicitly before return.\nAnd make return be:\nreturn client_qos !\u003d NULL",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbdba5e8_aa9950ff",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "44a327d0_4437cec6",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -638,6 +1016,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "828b931a_59623258",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "576d259f_b9cc2268",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77c8b8ac_1c7cf072",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -649,6 +1045,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "See comment about lock above",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21079320_6f970b39",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "77c8b8ac_1c7cf072",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -672,6 +1086,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86d54cee_c0e71aef",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "a9d86ebe_c02b45da",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a862eac1_3189e38e",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -683,6 +1115,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Similar comment about the lock",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02851ca_efd43c97",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "a862eac1_3189e38e",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -706,6 +1156,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ff01f81_33129825",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "2178fc6a_56c96623",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a297a084_c259925f",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -717,6 +1185,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Similar comment about lock",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e585b9bb_651318ab",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "a297a084_c259925f",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -740,6 +1226,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f1fd2d4_f3dfa98e",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "9972170a_8b141749",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eefca8f6_f224ceb4",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -751,6 +1255,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Similar comment about lock",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5f020ca_dfe32ccf",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "eefca8f6_f224ceb4",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -774,6 +1296,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0551f5ef_f8eb3213",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "9d3f4e64_6e3707bb",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba7217ef_e1db2eb0",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -785,6 +1325,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Similar comment about lock",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb376a3_d6880f63",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "ba7217ef_e1db2eb0",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -808,6 +1366,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3df829f2_c94bffb1",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "ce5d661a_ffb8e91c",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "954a2ea2_e7df9ef2",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -819,6 +1395,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Similar comment about lock, and structure code with else block",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37183ce8_66ef0342",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "954a2ea2_e7df9ef2",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -842,6 +1436,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dae6e588_f9c81c1a",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "89edf24a_5ca5ce2f",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e334399e_52c49f90",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -853,6 +1465,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Similar comment about lock",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991f9841_09359f64",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "e334399e_52c49f90",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -876,6 +1506,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b74d94a4_c6c08a54",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "2bd5dfcf_373b8f35",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7691705_57ff465c",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -887,6 +1535,24 @@
       "writtenOn": "2025-06-26T18:56:44Z",
       "side": 1,
       "message": "Similar comment about lock",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d6485ff_3333dc3e",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-06-26T21:15:18Z",
+      "side": 1,
+      "message": "Acknowledged, updated.",
+      "parentUuid": "e7691705_57ff465c",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
