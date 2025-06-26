@@ -34,6 +34,24 @@
       "parentUuid": "0e018459_695a00c5",
       "revId": "b6b43f5cfd9f264bfd0e4fc3a98c3ae80374cab6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f6177ed_bade1d96",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1945,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-06-26T13:34:54Z",
+      "side": 1,
+      "message": "I just looked at it and non of them has an aquivalent command in ganesha mgr.\n\nI won\u0027t make it to add it for them now as it requires some more work as their output is different than the rest.\n\nAs it is a debugging utility I think we can add that at a later phase and for now people can use it with the dbuscli utility",
+      "parentUuid": "ebfbba53_32088015",
+      "revId": "b6b43f5cfd9f264bfd0e4fc3a98c3ae80374cab6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
