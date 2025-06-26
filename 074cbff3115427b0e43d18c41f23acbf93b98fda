@@ -232,6 +232,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad11ab86_e8f89df8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a654a4c7_7e0a3114",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "437f0645_0ab5353b",
@@ -780,6 +798,24 @@
       "side": 1,
       "message": "In patchset 23, removed this code.\nNow, freeing of the qos_class_t for client will happen only on remove_gsh_client while freeing the server_stat structure i.e is just before destroying the gsh_client.",
       "parentUuid": "44bdb39a_93e11b68",
+      "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fff0890_a86f22b1",
+        "filename": "src/Protocols/NFS/nfs4_op_destroy_session.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "975564d8_c63eb6bf",
       "revId": "074cbff3115427b0e43d18c41f23acbf93b98fda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

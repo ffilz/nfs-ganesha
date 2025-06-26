@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "478bed84_9e8c1665",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "There are still a lot. I do a search for :% in the patch in gitk",
+      "parentUuid": "51b8e303_e6a861f8",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96631761_5a1192c8",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 19
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "This is just a check that current client which is going to delete is there in the glist or not. if the glist is empty that means no client are connected to that export and not even the current client which we are trying to delete from this export.\n\nI dont think we really require a lock here. while actually deleting the client from the list, we are taking the lock.\n\nin the new patch, config lock has been added which will be held in qos_free_mem() which makes sures that List is deleted under a config lock.",
       "parentUuid": "96631761_5a1192c8",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19f866a_65b47cda",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "This can race with pepc_alloc_get_client.\n\nReally it\u0027s a trivial change to just take the lock before this test (and release it if returning true).",
+      "parentUuid": "f7ccb573_b913d99e",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -491,6 +527,24 @@
       "side": 1,
       "message": "Updated as suggested",
       "parentUuid": "6a88d7eb_8aef3aac",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d9a0e6a_de7cad65",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40c3cd67_a2d6f610",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -949,6 +1003,42 @@
       "side": 1,
       "message": "updated the structure where headlist are there, rest of the list uses glist for traversal.\nreformatted some structures as suggested",
       "parentUuid": "a07844c8_3498b71f",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf5d152_fc9b719a",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "738f6d8e_c15b30c7",
+      "revId": "110655858a554265dcda4558a55508a4c6297bd8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b479f453_63429f2f",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84f211e3_690a5a1f",
       "revId": "110655858a554265dcda4558a55508a4c6297bd8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

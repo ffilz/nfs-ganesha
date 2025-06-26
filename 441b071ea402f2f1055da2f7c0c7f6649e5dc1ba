@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c4f1e2_d5ff3afe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Push some comments, still reviewing...",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f6b866b_a7a4a449",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Please don\u0027t use this function. It makes it harder to follow the code and may confuse Coverity.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13af7b27_f43601eb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Don\u0027t use an else... If this is called with gsh_client non-NULL and locked true, this function will return with the lock held, and it will never be released.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b004aee_148fca40",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T17:51:42Z",
+      "side": 1,
+      "message": "Don\u0027t use an else... If this is called with gsh_client non-NULL and locked true, this function will return with the lock held, and it will never be released.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
