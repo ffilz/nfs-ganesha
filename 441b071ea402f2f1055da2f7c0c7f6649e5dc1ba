@@ -105,6 +105,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6fd23ee_1628cdf8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T23:31:34Z",
+      "side": 1,
+      "message": "There\u0027s no need for this, glist_for_each has the same semantics as for which means the test for end of list (which is the same as an initial test for empty) is done before executing any statements.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f2e2c48_dc412bcc",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -134,6 +151,40 @@
       "side": 1,
       "message": "Since the head is in the parent structure, caller should hold the lock while calling this function.",
       "parentUuid": "0f2e2c48_dc412bcc",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d3fa89_a88fc5f6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T23:31:34Z",
+      "side": 1,
+      "message": "No need for this. Semantics of glist_for_each mean that for an empty list, the loop will be skipped, and on an empty list glist_add is the same as glist_add_tail",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee6fad46_7eb0ab68",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T23:31:34Z",
+      "side": 1,
+      "message": "No need for this function, glist_add_tail will properly add to an empty list, so just replace all calls to this with glist_add_tail",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -175,6 +226,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "852b7002_b2c07437",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T23:31:34Z",
+      "side": 1,
+      "message": "No need to check for NULL pointer, all calls pass a valid entry",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8fd773d_0d5ba3bd",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -204,6 +272,23 @@
       "side": 1,
       "message": "-\u003e Allocation of parent structure qos_class_t is under qos_config_lock \n-\u003e Runtime allocation of parent structure qos_class_t from IO uses g_qos_IO_path_lock under which qos_config_lock.\n-\u003e Configuration/Freeing are done under qos_config_lock\n-\u003e All the IO\u0027s are operated under bucket-\u003elock.",
       "parentUuid": "e8fd773d_0d5ba3bd",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a796d77_e20c3ba4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T23:31:34Z",
+      "side": 1,
+      "message": "No need for this, glist_for_each_safe will exit efficiently if list is empty",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -888,6 +973,23 @@
       "side": 1,
       "message": "This is perExport_PerClient mode, here rescheduling of the IO from Client bucket to Export bucket happens, and from export bucket IO is resumed.\n\nThis is to entertain export limits along with client limits.\neg: export can have 100MBps but individual client can have only 10 MBps",
       "parentUuid": "8b68924a_f7e4648e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ed8da3_a40646cc",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-26T23:31:34Z",
+      "side": 1,
+      "message": "Does this mean that in some cases, we will have suspended this request for a period of time, and then abandon it?",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
