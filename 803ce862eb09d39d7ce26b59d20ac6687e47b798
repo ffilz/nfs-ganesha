@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57bd434e_0fdf8a21",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-06-26T13:38:19Z",
+      "side": 1,
+      "message": "https://sssd.io/ - System Security Services Daemon\n\nIt is the underlying subsystem for nsswitch, it allows one to configure the server to use different idmapping from the one the system is using.\n\nWe can add a bit more info on it to the wiki pages of ganesha later",
+      "parentUuid": "490ce27f_dd6ef7de",
+      "revId": "803ce862eb09d39d7ce26b59d20ac6687e47b798",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25886153_64a36366",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-06-17T20:58:44Z",
       "side": 1,
       "message": "Hnmm, what\u0027s with the code indented by just 2 characters instead of tab? Is clang-format not working?",
+      "revId": "803ce862eb09d39d7ce26b59d20ac6687e47b798",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97340ea1_f08b2f08",
+        "filename": "src/idmapper/sss_nss_idmap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-06-26T13:38:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25886153_64a36366",
       "revId": "803ce862eb09d39d7ce26b59d20ac6687e47b798",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
