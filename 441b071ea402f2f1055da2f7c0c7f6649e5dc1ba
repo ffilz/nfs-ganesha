@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb7c707_2c39e43e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "partial review comments",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f6b866b_a7a4a449",
@@ -31,6 +48,24 @@
       "writtenOn": "2025-06-26T17:51:42Z",
       "side": 1,
       "message": "Please don\u0027t use this function. It makes it harder to follow the code and may confuse Coverity.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6046fa14_f3fabb5d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "right, we don\u0027t need to call into a function just to take a well-known (global) lock",
+      "parentUuid": "1f6b866b_a7a4a449",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -65,6 +100,193 @@
       "writtenOn": "2025-06-26T17:51:42Z",
       "side": 1,
       "message": "Don\u0027t use an else... If this is called with gsh_client non-NULL and locked true, this function will return with the lock held, and it will never be released.",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "226b9f90_faa3dd11",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "defer",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1367c217_2d65f3f3",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "due to assigment on l. 1508, bucket-\u003ebw_ldct has the same value as last_time + required time;  is the separate argument for it needed?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aaf523c_1c9cc6cb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "now here, in both cases, bucket-\u003ebw_ldct will be incremented by required_time (and optionally ctime) again?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9247649_031f14ac",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "defer",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6e2b71_bfc379b7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "defer",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f627cd5b_07afd86d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "what motivates 15s?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd9fef7_bc3126cf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "we should avoid this camelcase style, I guess;  there\u0027s other examples of it, above and below",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c784be8c_ddcffa64",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2140,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "is this a potentially large critical section?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363ba063_62970378",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2501,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "is there a clear set of rules for holding or taking the bucket lock?  I tend to prefer to move that into a flags argument (e.g., if not flags \u0026 FLAG_LOCKED, take the lock in whatever function is actually mutating bucket",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26946888_42bfeb1f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2551,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "I don\u0027t remember in what sense the iteration is safe;  is there no controlling lock?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b68924a_f7e4648e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2613,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-06-26T18:53:04Z",
+      "side": 1,
+      "message": "locks?",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
