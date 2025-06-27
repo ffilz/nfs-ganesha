@@ -16,6 +16,91 @@
       "message": "Patch 25 has the latest review comments addressed.",
       "revId": "79c40273a38bf8ea8d728fe2edc6f1c434983bce",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75169aec_93b71789",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Please rename param gsh_client...\n\nDo this for all other parameters that are gsh_client *client_addr",
+      "revId": "79c40273a38bf8ea8d728fe2edc6f1c434983bce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01389b3_e159be3b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "gsh_export can never be NULL... remove this test",
+      "revId": "79c40273a38bf8ea8d728fe2edc6f1c434983bce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4233f535_45538938",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "But gsh_export-\u003eqos_class COULD be NULL, so add:\n\nif (e_qos_class \u003d\u003d NULL)\n    return;\n    \n\n(btw: I prefer to see explicit test for \u003d\u003d NULL or !\u003d NULL rather than the implicit, but if you prefer implicit, your choice.",
+      "revId": "79c40273a38bf8ea8d728fe2edc6f1c434983bce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "253afa51_2ed7bd30",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 1970,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Please change qos_class_t variables to be another name than export or client so it\u0027s easy to know when a variable is a class vs. gsh_client/gsh_export.\n\nAnd really, let\u0027s use struct gsh_export *gsh_export instead of C++ reserved export\nAnd struct gsh_client *gsh_client instead of client",
+      "revId": "79c40273a38bf8ea8d728fe2edc6f1c434983bce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4e1835_8d2f5303",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Rename this field gsh_client...",
+      "revId": "79c40273a38bf8ea8d728fe2edc6f1c434983bce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

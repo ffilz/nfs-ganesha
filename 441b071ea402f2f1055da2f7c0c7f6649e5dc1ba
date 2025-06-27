@@ -434,6 +434,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c7f4ac_960fdea2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca03f1ef_afd301e9",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdbd7593_f423dbd6",
@@ -465,6 +483,24 @@
       "side": 1,
       "message": "As per my understanding NO.",
       "parentUuid": "cdbd7593_f423dbd6",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c93842_4795e82e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6de38566_3197706c",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -524,6 +560,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ed4cb90_3dc0e110",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Given gsh_client can never be NULL, calls to this function could be replaced with just accessing gsh_client-\u003eqos_class directly, making the calling code more readable.",
+      "parentUuid": "688ad78c_f0d91348",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1622bec7_eb34ab05",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -553,6 +607,24 @@
       "side": 1,
       "message": "As per my understanding No.",
       "parentUuid": "1622bec7_eb34ab05",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b72fdbc_a7442df0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "180437c8_53c5533e",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -606,6 +678,24 @@
       "side": 1,
       "message": "But reverted the changes as suggested.",
       "parentUuid": "3b004aee_148fca40",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1ec0c7_0fdb4ad3",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Given gsh_export can never be NULL, calls to this function could be replaced with just accessing gsh_export-\u003eqos_class directly, making the calling code more readable.",
+      "parentUuid": "f51e3796_52b80107",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -787,6 +877,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19d4160c_26ba99f9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1613,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "The comment should change since 15 is replaced with a #define",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f627cd5b_07afd86d",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -822,6 +929,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d44f997_99a770ed",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Is that 30 second disconnect really true? I thought TCP only dropped connection if there was no TCP ack?",
+      "parentUuid": "c588a3ea_950f637f",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8dd9fef7_bc3126cf",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -833,6 +958,24 @@
       "writtenOn": "2025-06-26T18:53:04Z",
       "side": 1,
       "message": "we should avoid this camelcase style, I guess;  there\u0027s other examples of it, above and below",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36ee8b8_f4e83ffe",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Yes, style bit, we have been trying to avoid CamelCase. Please consider all lower case, especially you have other identifiers that start with qos_",
+      "parentUuid": "8dd9fef7_bc3126cf",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -868,6 +1011,24 @@
       "side": 1,
       "message": "I would say as such its not that large, because read and write IO\u0027s are in different bucket, if combine is uses read and write goes to same bucket.\n\nLock is just syncing between producer and consumer for this specific buckets.",
       "parentUuid": "c784be8c_ddcffa64",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f016f09f_3d0b289e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2140,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Notably resume_timer_entry just calls svc_resume which just schedules the request for execution again, so there shouldn\u0027t be a lot of execution while holding the lock",
+      "parentUuid": "07fe40c8_ab7cf68a",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1029,6 +1190,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a623dd56_be5cb6d5",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d135553f_94aed6fa",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33398855_010604e7",
@@ -1060,6 +1239,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "33398855_010604e7",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3500e75_d88e9876",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68b5dc8a_c31ed3fe",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1099,6 +1296,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57eb8167_7a3977cf",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbdba5e8_aa9950ff",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "576d259f_b9cc2268",
@@ -1130,6 +1345,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "576d259f_b9cc2268",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a109c257_7f8810d4",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "828b931a_59623258",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1169,6 +1402,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61814155_561ec1b6",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21079320_6f970b39",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9d86ebe_c02b45da",
@@ -1204,6 +1455,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21df93f_c9ba0320",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86d54cee_c0e71aef",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a862eac1_3189e38e",
@@ -1235,6 +1504,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "a862eac1_3189e38e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d76e988a_1772b405",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a02851ca_efd43c97",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1276,6 +1563,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24165eb7_b530922d",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Sorry, I was suggesting following the logic of the earlier functions that do the stuff inside if (export) instead of an early return for if (!export)\n\nThat way all the lock and unlock are paired and a quick grep of g_qos_config_lock confirms lock and unlock are paired.",
+      "parentUuid": "0ff01f81_33129825",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a297a084_c259925f",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -1305,6 +1610,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "a297a084_c259925f",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "804029c6_a8b78208",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Sorry, I was suggesting structuring all of these to keep the action in the \"if export\" instead of having an early return for if (!export)",
+      "parentUuid": "e585b9bb_651318ab",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1346,6 +1669,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c154390_b0eb64f6",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "4f1fd2d4_f3dfa98e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eefca8f6_f224ceb4",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -1375,6 +1716,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "eefca8f6_f224ceb4",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5a44c0_7257f0a2",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "e5f020ca_dfe32ccf",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1416,6 +1775,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc256040_10ebe5e0",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "0551f5ef_f8eb3213",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba7217ef_e1db2eb0",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -1445,6 +1822,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "ba7217ef_e1db2eb0",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6119a345_b4cb4940",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "0eb376a3_d6880f63",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1486,6 +1881,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "faeaa5ee_05150bba",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "3df829f2_c94bffb1",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "954a2ea2_e7df9ef2",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -1515,6 +1928,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "954a2ea2_e7df9ef2",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb10d3d_8fd4bf0b",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "37183ce8_66ef0342",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1556,6 +1987,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93c18da0_4e684b80",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "dae6e588_f9c81c1a",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e334399e_52c49f90",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -1585,6 +2034,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "e334399e_52c49f90",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ade701e_e07c3588",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "991f9841_09359f64",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1626,6 +2093,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ce3f954_29364ba1",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "b74d94a4_c6c08a54",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7691705_57ff465c",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 23
@@ -1655,6 +2140,24 @@
       "side": 1,
       "message": "Acknowledged, updated.",
       "parentUuid": "e7691705_57ff465c",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5fbdfcc_30f7d35a",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-27T00:10:35Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "7d6485ff_3333dc3e",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
