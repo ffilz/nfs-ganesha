@@ -32,16 +32,17 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define GSH_CHECK_VERSION(major,minor,micro,libmajor,libminor,libmicro) \
-	((libmajor) > (major) || \
-	((libmajor) == (major) && (libminor) > (minor)) || \
-	((libmajor) == (major) && (libminor) == (minor) && (libmicro) >= (micro)))
+#define GSH_CHECK_VERSION(major, minor, micro, libmajor, libminor, libmicro) \
+	((libmajor) > (major) ||                                             \
+	 ((libmajor) == (major) && (libminor) > (minor)) ||                  \
+	 ((libmajor) == (major) && (libminor) == (minor) &&                  \
+	  (libmicro) >= (micro)))
 
-#define GANESHA_VERSION_MAJOR @GANESHA_MAJOR_VERSION@
-#define GANESHA_VERSION_MINOR @GANESHA_MINOR_VERSION@
-#define GANESHA_EXTRA_VERSION @GANESHA_EXTRA_VERSION@
+#define GANESHA_VERSION_MAJOR @GANESHA_MAJOR_VERSION @
+#define GANESHA_VERSION_MINOR @GANESHA_MINOR_VERSION @
+#define GANESHA_EXTRA_VERSION @GANESHA_EXTRA_VERSION @
 #define GANESHA_VERSION "@GANESHA_VERSION@"
-#define GANESHA_BUILD_RELEASE @GANESHA_BUILD_RELEASE@
+#define GANESHA_BUILD_RELEASE @GANESHA_BUILD_RELEASE @
 
 #define VERSION GANESHA_VERSION
 #define VERSION_COMMENT "@VERSION_COMMENT@"
@@ -120,7 +121,8 @@
 #cmakedefine USE_GLUSTER_STAT_FETCH_API 1
 #cmakedefine HAVE_URCU_REF_GET_UNLESS_ZERO 1
 #cmakedefine USE_BTRFSUTIL 1
-#cmakedefine USE_MONITORING 1
+#cmakedefine USE_MONITORING 0
+#cmakedefine USE_GRPC 1
 #define NFS_GANESHA 1
 
 #define GANESHA_CONFIG_PATH "@SYSCONFDIR@/ganesha/ganesha.conf"
