@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d9ca6d2_1f001925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-06-30T18:39:44Z",
+      "side": 1,
+      "message": "Is this an update of https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1213670?usp\u003dsearch?\n\nIn order to keep review comments connected, it is preferred to keep the ChangeID the same so Gerrithub recognizes the patches as the same. This also makes it easier on reviewers who can see how the patch changed and need not re-review code already examined.\n\nIf this is building on top of the other patch with additional functionality, it is preferred to submit as a \"branch\" with multiple patches, so the base gRPC functionality would be introduced by the other patch, and then this one is adding security.",
+      "revId": "09bb06eec9a60d6bff47e58d3157a874889cfcc3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
