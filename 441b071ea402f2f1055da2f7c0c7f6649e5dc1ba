@@ -193,6 +193,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21416f9c_ff357c9e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "You should make a note of that at the top of the description",
+      "parentUuid": "f9312131_a248f52a",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7d3fa89_a88fc5f6",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -1476,6 +1494,24 @@
       "side": 1,
       "message": "This is perExport_PerClient mode, here rescheduling of the IO from Client bucket to Export bucket happens, and from export bucket IO is resumed.\n\nThis is to entertain export limits along with client limits.\neg: export can have 100MBps but individual client can have only 10 MBps",
       "parentUuid": "8b68924a_f7e4648e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638caf51_0903f1df",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2613,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Matt was asking if io_list was protected by lock. I see the lock is taken, but it sould be taken outside the if so it protects the glist_empyt check also\n\nAlso, make sure there is no lock inversion between sbucket and cbucket locks...",
+      "parentUuid": "bfc27bc9_13616bc9",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

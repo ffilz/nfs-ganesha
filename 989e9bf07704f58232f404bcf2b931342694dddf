@@ -16,6 +16,788 @@
       "message": "Reviewed a bunch of updates still a lot to go...",
       "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11a4ce1_b2f50153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "A bunch more comments...",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393d6698_e34c540c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Spelling fix: initalized -\u003e initialized",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "594d9a2a_3a819589",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to make it clear this isn\u0027t a call back function itself, maybe name it:\n\nget_qos_resume_cb_func",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c67d3e3_281df653",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "This pointer sometimes seems to be somewhere in the middle of the list. Please clarify that and describe that action.\n\nCertainly one of the magic bits of glist is that you can start from the middle of a list for inserts.\n\nI assume the intent in calling it this way is we already know any subsequent insertion when used that way will come after this insertion because we are moving from one time sorted list to another.",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c10b17_181e4153",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Note that an entry may be a new entry, or it may be an entry being moved from another sorted list to this list.",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da0ed45b_cbf623b6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "OK, I see that use is sort of documented here, move this bit of documentation to the top of the description.\n\nAlso check doxygen in other files for consistency of specifying return value",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25212f7_8b8a47af",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e752a52_2557dd13",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "I\u0027m thinking we should replace \"defer\" with \"suspend\" (since we are using the RPC suspend/resume functionality) globally.",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8108ac_acd18ddb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1452,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5821a0f7_deccb84f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce59f4e_588dcaea",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf21b0f_52cafddb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the variabletype to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42127f30_a4c67827",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce0d6dc_5ae4fdbf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1707,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502088bb_98bd5588",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6acf56fb_d523f21f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f3cd1a4_7a7e4238",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1762,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the variable type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d195489e_798f689a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1796,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38495495_dc301463",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1943,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a0bf2ff_f06353f7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e37e478_7ee0e445",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 1991,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd3d8e1_a588ecfe",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2246,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2617ac39_4a965dc8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "811aac7a_c4ff4680",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587e9aa7_c8605a78",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ba35ea_81d72bcf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2421,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment in nfs_qos.h about the return value constants and change the return type to enum",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71e1af95_6ff6dada",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2492,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Add a blank line to call this out better and then start the next line with\n\nNOTE:",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c65876_28d2de30",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2494,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "See comment below about sbucket and cbucket names being too hard to distinguish\n\nhow about export_bucket and client_bucket as you just used in the line about locks..",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ae15a8_b9b8a443",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2529,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "You are intentially changing the head of the list? That is a bit confusing because insert_timer_entry_sorted suggests the glist head is the head of the list.\n\nI think this makes sense, but you should add comments here\n\nI see it\u0027s sort of documented in insert_timer_entry_sorted, but please add a comment here as well.",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2daeec07_e9387423",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2555,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "This would be less confusing if:\n\ndeclare the two qos_bucket_t variables on consecutive lines\ngive them names that are more distinguishable, the difference between cbucket and sbucket is hard to see.\n\nLooks like maybe call them export_bucket and client_bucket",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd7b49be_0fdddb74",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2571,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, io_list is immediately used, and only used once, eliminate the variable and just make:\n\nif (!glist_empty(\u0026cbucket-\u003eio_waitlist_qos_iops))",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4f918b_3770b37d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2629,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aebd7d3c_98e47a33",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2651,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2168617d_17d60604",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2672,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Blank line...",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e850a76_2ad98d62",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2673,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad44f6c3_2e71bfba",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2752,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Use atomic function to access qos_thread_running",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c2829f8_7a2490a6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2769,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "NOTE: if we ever support dynamically disabling QoS, we would need to immediately resume all suspended IOs... You might want to put a comment:\n\n/* @TODO: ... */",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40f3e6e_e4dff8a0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2801,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Use atomic function to manipulate qos_thread_running\n\nAlso, just set this once, and set it before the loop so it is true before the thread starts just in case the calling thread yields...",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6245d688_9f625591",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you initialize the mutexes inside the if?\n\nThough do we really need this test? I\u0027m not sure there wouldn\u0027t be more work to dynamically enable and disable QoS\n\nIn fact, there is a significant piece... If we ever dynamically disable QoS, we would need to immediately resume all suspended IOs.\n\nI think I would prefer remove any code that hints at dynamic enable/disable. If we want to implement that, let us solve the problems then.",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3860b63e_4179d027",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b5f0b9_14ca3378",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2841,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Hmm, to reduce confusion, rename this as an iterator function rather than a call back. That will separate it from callbacks from asyncronous events",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3695f782_9c625b6c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2861,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Description doesn\u0027t seem to match function name",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3785ad45_9d6593fb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2890,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Use atomic function to access qos_thread_running",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e91fdf1b_d6d5bc1b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2896,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Use atomic function to manipulate qos_thread_running",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a2518f_4b481be9",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "Please put these two values into an enum\n\nAlso, SCHEDULED really means \"suspended\" right? Maybe change to SUSPENDED/NOT_SUSPENDED",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f45d4eca_71e3cb3d",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T23:37:25Z",
+      "side": 1,
+      "message": "The two qos_process functions would be less confusing to use if the #define values above are used consistently (and changed to an enum).",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
