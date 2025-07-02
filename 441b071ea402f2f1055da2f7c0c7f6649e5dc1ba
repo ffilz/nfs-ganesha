@@ -122,6 +122,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "393b6ab4_d1b90549",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "Code changes done as suggested",
+      "parentUuid": "c6fd23ee_1628cdf8",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f2e2c48_dc412bcc",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -174,6 +192,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49f2e8c4_9c32cde4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "Code changes done as suggested",
+      "parentUuid": "a7d3fa89_a88fc5f6",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee6fad46_7eb0ab68",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -185,6 +221,24 @@
       "writtenOn": "2025-06-26T23:31:34Z",
       "side": 1,
       "message": "No need for this function, glist_add_tail will properly add to an empty list, so just replace all calls to this with glist_add_tail",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef87847e_d7c5fbc8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "In future if one wants to debug some corruption w.r.t QOS lists, One needs to add logs in all the places from which insert_timer_entry is getting called.\nSo request to not remove the insert_timer_entry function.",
+      "parentUuid": "ee6fad46_7eb0ab68",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -289,6 +343,24 @@
       "writtenOn": "2025-06-26T23:31:34Z",
       "side": 1,
       "message": "No need for this, glist_for_each_safe will exit efficiently if list is empty",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4895a5f0_ccca280a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "Code changes done as suggested",
+      "parentUuid": "0a796d77_e20c3ba4",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -894,6 +966,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "290ec446_f79373fd",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1613,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "removed the comment",
+      "parentUuid": "19d4160c_26ba99f9",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f627cd5b_07afd86d",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -982,6 +1072,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2267f21_d1a1206c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "Code changes done as suggested",
+      "parentUuid": "b36ee8b8_f4e83ffe",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c784be8c_ddcffa64",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -1029,6 +1137,24 @@
       "side": 1,
       "message": "Notably resume_timer_entry just calls svc_resume which just schedules the request for execution again, so there shouldn\u0027t be a lot of execution while holding the lock",
       "parentUuid": "07fe40c8_ab7cf68a",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "915f7745_426e6466",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2140,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "In future we directly call the svc_resume, but for time being considering debugging its not good to directly call the svc_resume. resume_timer_entry prints much needed info for debugging",
+      "parentUuid": "f016f09f_3d0b289e",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1151,6 +1277,24 @@
       "writtenOn": "2025-06-26T23:31:34Z",
       "side": 1,
       "message": "Does this mean that in some cases, we will have suspended this request for a period of time, and then abandon it?",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05f66e76_75160120",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-02T11:01:20Z",
+      "side": 1,
+      "message": "Yes, will return NFSERR_DELAY. Since there are nomore tokens available to consume.\ni.e Data Consumption limit reached by the user",
+      "parentUuid": "c8ed8da3_a40646cc",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
