@@ -138,6 +138,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a75b192_86582a6f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "393b6ab4_d1b90549",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f2e2c48_dc412bcc",
@@ -208,6 +226,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae77ab27_cec0fd86",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f2e8c4_9c32cde4",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee6fad46_7eb0ab68",
@@ -239,6 +275,24 @@
       "side": 1,
       "message": "In future if one wants to debug some corruption w.r.t QOS lists, One needs to add logs in all the places from which insert_timer_entry is getting called.\nSo request to not remove the insert_timer_entry function.",
       "parentUuid": "ee6fad46_7eb0ab68",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5df2b429_23507150",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "One thought, if the field was renamed from glist, it would be easy to find all the places it\u0027s used and then easy to add debug messages at that time in each place (and then also the debug message can indicate which call did the insert.\n\nIn the meantime, I think the code will be easier to read without this function.",
+      "parentUuid": "ef87847e_d7c5fbc8",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -280,6 +334,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37998f1b_2ccc7949",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Do add a comment on the lock expected to be held",
+      "parentUuid": "7b15c8b1_fc4c2367",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "852b7002_b2c07437",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -291,6 +363,24 @@
       "writtenOn": "2025-06-26T23:31:34Z",
       "side": 1,
       "message": "No need to check for NULL pointer, all calls pass a valid entry",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd142d2a_708c0d15",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Please do remove this check for NULL pointer",
+      "parentUuid": "852b7002_b2c07437",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -361,6 +451,24 @@
       "side": 1,
       "message": "Code changes done as suggested",
       "parentUuid": "0a796d77_e20c3ba4",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ededc3cd_c33c4b6e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4895a5f0_ccca280a",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -807,6 +915,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8786f3_dd1f1eab",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d57c6ee_29e689d4",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1367c217_2d65f3f3",
@@ -912,6 +1038,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47068b2b_e4549fe0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be6af451_2a4df593",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a6e2b71_bfc379b7",
@@ -947,6 +1091,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e19c79_9d95b648",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1599,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "889b5fc5_acf08b21",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19d4160c_26ba99f9",
@@ -978,6 +1140,24 @@
       "side": 1,
       "message": "removed the comment",
       "parentUuid": "19d4160c_26ba99f9",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e698ca1c_577d2622",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1613,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "290ec446_f79373fd",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1088,6 +1268,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab85dfe4_f3d8b5b4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "Thanks for these changes",
+      "parentUuid": "f2267f21_d1a1206c",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c784be8c_ddcffa64",
@@ -1155,6 +1353,24 @@
       "side": 1,
       "message": "In future we directly call the svc_resume, but for time being considering debugging its not good to directly call the svc_resume. resume_timer_entry prints much needed info for debugging",
       "parentUuid": "f016f09f_3d0b289e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2650d41_014cdae7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2140,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "resume_timer_entry is fine, I was pointing out that it doesn\u0027t do a lot of work, but do remove the check for NULL entry there, every caller passes a non-NULL pointer.",
+      "parentUuid": "915f7745_426e6466",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1295,6 +1511,24 @@
       "side": 1,
       "message": "Yes, will return NFSERR_DELAY. Since there are nomore tokens available to consume.\ni.e Data Consumption limit reached by the user",
       "parentUuid": "c8ed8da3_a40646cc",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f187486_380cfa3e",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-02T19:54:12Z",
+      "side": 1,
+      "message": "I\u0027d like more explanation of what is going on here. Why was the request suspended in the first place, only to later be discarded. That seems a waste of resources.",
+      "parentUuid": "05f66e76_75160120",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
