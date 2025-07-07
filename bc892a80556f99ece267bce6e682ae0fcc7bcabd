@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e25f85dc_fcb213de",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3303,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0a841067_bdd434a0",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa4c532a_53868a37",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c786724_0f6366bd",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3319,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fa4c532a_53868a37",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bfae843_201f3576",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2025-06-04T23:55:26Z",
       "side": 1,
       "message": "I think we need to add a function: set_op_context_client to set the client and enable/disable client logging. You will need to audit the code to find all the places we set the client in the op_context:\n\n[root@fedora src]# grep -n \u0027op_ctx..client \u003d \u0027 `find . -name \u0027*.[ch]\u0027`\n./Protocols/9P/9p_read.c:136:\t\t\top_ctx-\u003eclient \u003d req9p-\u003epconn-\u003eclient;\n./Protocols/9P/9p_write.c:158:\t\t\top_ctx-\u003eclient \u003d req9p-\u003epconn-\u003eclient;\n./Protocols/NLM/nlm_Sm_Notify.c:75:\top_ctx-\u003eclient \u003d NULL;\n./Protocols/NLM/nlm_Sm_Notify.c:87:\t\top_ctx-\u003eclient \u003d nsm_client-\u003essc_client;\n./Protocols/NLM/nlm_Sm_Notify.c:114:\t\top_ctx-\u003eclient \u003d original_client;\n./MainNFSD/nfs_worker_thread.c:663:\t\top_ctx-\u003eclient \u003d NULL;\n./MainNFSD/nfs_worker_thread.c:1015:\top_ctx-\u003eclient \u003d get_gsh_client(op_ctx-\u003ecaller_addr, false);\n./SAL/state_lock.c:2312:\t\top_ctx-\u003eclient \u003d owner_client;\n./SAL/state_lock.c:2318:\top_ctx-\u003eclient \u003d saved_client;",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15191be7_09dc37b7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3353,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9bfae843_201f3576",
       "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c9c7feb_5c80113d",
+        "filename": "src/MainNFSD/libganesha_nfsd.ver",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "10de41ae_d89996c6",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69caae98_58f4f062",
         "filename": "src/MainNFSD/nfs_admin_thread.c",
         "patchSetId": 1
@@ -99,6 +171,24 @@
       "writtenOn": "2025-06-04T23:55:26Z",
       "side": 1,
       "message": "You need to update all the scripts that use the dbus interface. In scripts/ganeshactl\n\nAlso need to document these interfaces in man pages",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf4e0b7_9994e023",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Updated the ganesha_mgr script. Somehow existing ganeshactl and manage_logger both are not working. Getting the PyQt5.QtGui and DBusQtMainLoop related issue while running the scripts respectively.",
+      "parentUuid": "69caae98_58f4f062",
       "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -122,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3abd14d6_82aa35f4",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "13d8a3b0_fa1023d9",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7aa34e6c_0ba546fc",
         "filename": "src/config_samples/config.txt",
         "patchSetId": 1
@@ -133,6 +241,24 @@
       "writtenOn": "2025-06-04T23:55:26Z",
       "side": 1,
       "message": "Need to also document in src/doc/man/ganesha-log-config.rst\n\nThat will need to clearly document what you do to use conditional logging.\n\nTo make sure I understand, specify the desired debug levels in the LOG COMPONENTS section. Then in the CONDITIONAL section, the component levels specified is the maximum log level that will be emitted UNLESS the client or export condition is met?",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3883599_ba6d4d8a",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7aa34e6c_0ba546fc",
       "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -156,6 +282,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dfc4501_69487ea9",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "71994ae1_4b4d3853",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dd4f5d1_e323ec1d",
         "filename": "src/include/log.h",
         "patchSetId": 1
@@ -167,6 +311,24 @@
       "writtenOn": "2025-06-04T23:55:26Z",
       "side": 1,
       "message": "glist_head should be first element - to assure alignment",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a220584a_c5d91ab2",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4dd4f5d1_e323ec1d",
       "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -190,6 +352,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7ac9138_bbdc96e7",
+        "filename": "src/include/log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3e422c30_9467f58f",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a3230f0_054c80f1",
         "filename": "src/include/nfs_init.h",
         "patchSetId": 1
@@ -201,6 +381,24 @@
       "writtenOn": "2025-06-04T23:55:26Z",
       "side": 1,
       "message": "If the lists are statically initialized, don\u0027t need this change",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9b8446_5e2bae66",
+        "filename": "src/include/nfs_init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1a3230f0_054c80f1",
       "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -224,6 +422,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6393fa89_271f7615",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e8ac98a8_a07e361b",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95dddf9d_d55e8850",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
@@ -235,6 +451,24 @@
       "writtenOn": "2025-06-04T23:55:26Z",
       "side": 1,
       "message": "I think this needs some comments.\n\nAdditionally, as suggested elsewhere, I think we need two conditional flags, one for export and one for client\n\nOtherwise, based on my assumption of the way the config is used from comment for config.txt, this looks good.",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d5ea87_6b4815af",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "95dddf9d_d55e8850",
       "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -258,6 +492,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f10cce89_bc6cd4d9",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2486,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e4285de_734442cc",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00c41281_80ceb545",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
@@ -275,6 +527,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c242253_cc5a01ec",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2787,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "00c41281_80ceb545",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd527508_95cb1e07",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
@@ -286,6 +556,24 @@
       "writtenOn": "2025-06-04T23:55:26Z",
       "side": 1,
       "message": "Just use CONF_ITEM_BLOCK - we shouldn\u0027t allow multiple CONDITIONAL blocks",
+      "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5bf1458_0e142cef",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2988,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-07-07T10:23:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bd527508_95cb1e07",
       "revId": "bc892a80556f99ece267bce6e682ae0fcc7bcabd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
