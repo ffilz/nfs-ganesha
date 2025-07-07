@@ -33,6 +33,24 @@
       "message": "Hmm, can op_ctx even be NULL here? Should we instead remove the check for NULL op_ctx? Or understand what path would get us here with a NULL op_ctx?",
       "revId": "99ac873f4e75fdcbbc9343fd1dc90fe1730edaa8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5f3ee9_9949661b",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2025-07-07T12:26:19Z",
+      "side": 1,
+      "message": "op_ctx is checked for NULL in some code paths and null check does not exist in some code paths.",
+      "parentUuid": "09026214_adab74f9",
+      "revId": "99ac873f4e75fdcbbc9343fd1dc90fe1730edaa8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
