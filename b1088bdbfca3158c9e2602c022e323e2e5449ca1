@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c683425_650bb335",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2025-07-07T11:10:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db36ea08_20ccbacc",
+      "revId": "b1088bdbfca3158c9e2602c022e323e2e5449ca1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b315b184_b16481aa",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-11T21:18:16Z",
       "side": 1,
       "message": "You state that if Protocols is specified in the CLIENT blocks, then we don\u0027t use the Protocols set in EXPORT_DEFAULTS, but this is procesed after.\n\nIt would help to have some clear examples of different combinations of Protocols and what the result is.\n\nThis function also only governs whether the export is present in the PseudoFS.",
+      "revId": "b1088bdbfca3158c9e2602c022e323e2e5449ca1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e28a5ef1_a842edca",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2025-07-07T11:10:06Z",
+      "side": 1,
+      "message": "I think we set only options that are set already here:\n\n/* And finally take any options not yet set from global defaults */\nperms.options |\u003d export_opt.def.options \u0026 ~perms.set;\n\nso settings/protocols options in Export_Defaults should be applicable/considered only if there are not set already.",
+      "parentUuid": "b315b184_b16481aa",
       "revId": "b1088bdbfca3158c9e2602c022e323e2e5449ca1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
