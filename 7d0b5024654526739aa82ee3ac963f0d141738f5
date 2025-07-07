@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "558012a6_55b2a063",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-07T16:07:48Z",
+      "side": 1,
+      "message": "I see what this is doing, that the Protocols considered for the export is the union of all Protocols specified for the EXPORT or any CLIENT blocks (factoring in EXPORT_DEFAULTS also).\n\n\nBut I\u0027m not sure of this, the expectation in the past was always that:\n\nNFS_CORE_PARAM Protocols was (at least) the union of all Protocols used in EXPORTs\n\nEXPORT Protocols was (at least) the union of all Protocols used in CLIENTs\n\nIs there a reason your use case can\u0027t just set the Protocols for the EXPORT to (at least) the union\u003e",
+      "revId": "7d0b5024654526739aa82ee3ac963f0d141738f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
