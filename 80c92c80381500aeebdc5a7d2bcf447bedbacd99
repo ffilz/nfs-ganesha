@@ -34,6 +34,24 @@
       "parentUuid": "2c07a8d7_7b93488c",
       "revId": "80c92c80381500aeebdc5a7d2bcf447bedbacd99",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41278a7c_696f5ca7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-07-07T00:22:28Z",
+      "side": 1,
+      "message": "The point is that we had a proliferation of slightly different IP string conversions functions.  Frank made the point in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1209432 and I think I also noted it at the time.  \n\nThe code is moving to IPv6.  This function works as a partner to  cmp_sockaddr().  It is already used twice in nfs4_recovery.c\n\nYou have ip_str_to_int  in recovery_ados_cluster.c - which is where I stole the basics from.  \n\nThere is now  hash_sockaddr() in rpc_tools used as well in recovery_ados_cluster.c .  The ipV4 bytes are in the reverse order there and the IPv6 bytes are different.  I see that the byte order in ip_str_to_int() is intuitive to read in the purpose it is used. \n\nI have some other work I was doing and will submit soon,  I had a copy of your ip_str_to_int(), so I thought that was a candidate for moving somewhere common.  I probably won\u0027t be using that now, when I revisit the code.",
+      "parentUuid": "715e3998_e196aa32",
+      "revId": "80c92c80381500aeebdc5a7d2bcf447bedbacd99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
