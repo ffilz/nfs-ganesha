@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17da30a4_a88271c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-08T14:51:24Z",
+      "side": 1,
+      "message": "A couple comments:\n\nFirst, these are FULL_DEBUG, I would hate to filter out any FULL_DEBUG\n\nSecond, log.h has a capacity for rate limiting messages, if we really want to rate limit, we should use that capability not some new capability.",
+      "revId": "655313a3a181cff37e12e0196ff2c43a0bdfc16c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
