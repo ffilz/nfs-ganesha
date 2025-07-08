@@ -1064,6 +1064,32 @@ void remove_client_from_expired_client_list(nfs_client_id_t *active_clientid)
 }
 
 /**
+ * @brief Only log if now is equal or greater than the next log time.
+ *
+ * @param[in] next_log The next log time.
+ *
+ * @retval true if the next log time is reached.
+ */
+static bool should_log(struct timespec next_log)
+{
+	struct timespec current_time;
+	now_mono(&current_time);
+
+	return gsh_time_cmp(&current_time, &next_log) >= 0;
+}
+
+/**
+ * @brief Update the next log time to be a second from now.
+ *
+ * @param[in] next_log The next log time.
+ */
+static void update_next_log_time(struct timespec *next_log)
+{
+	now_mono(next_log);
+	timespec_add_nsecs(NS_PER_SEC, next_log);
+}
+
+/**
  * @brief Client expires, need to take care of owners
  *
  * If there is a client_record attached to the clientid,
@@ -1212,6 +1238,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 	 * and it will spam the log with warnings... Such a refcount bug will
 	 * be quickly fixed :-).
 	 */
+	struct timespec next_log_time;
+	now_mono(&next_log_time);
 	while (true) {
 		state_owner_t *owner;
 		int32_t refcount;
@@ -1251,7 +1279,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 
 		refcount = atomic_fetch_int32_t(&owner->so_refcount);
 
-		if ((refcount > 1) || (isFullDebug(COMPONENT_CLIENTID))) {
+		if (((refcount > 1) || (isFullDebug(COMPONENT_CLIENTID))) &&
+		    should_log(next_log_time)) {
 			char str[LOG_BUFF_LEN] = "\0";
 			struct display_buffer dspbuf = { sizeof(str), str,
 							 str };
@@ -1267,9 +1296,14 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 					COMPONENT_CLIENTID,
 					"Expired State - Lock Owners, for {%s}",
 					str);
+			update_next_log_time(&next_log_time);
 		}
 
 		dec_state_owner_ref(owner);
+		if (refcount > 1) {
+			// Yield to allow other threads to proceed and release references.
+			sched_yield();
+		}
 	}
 
 	/* revoke layouts for this client*/
@@ -1281,6 +1315,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 	 * and it will spam the log with warnings... Such a refcount bug will
 	 * be quickly fixed :-).
 	 */
+	now_mono(&next_log_time);
 	while (true) {
 		state_owner_t *owner;
 		int32_t refcount;
@@ -1320,7 +1355,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 
 		refcount = atomic_fetch_int32_t(&owner->so_refcount);
 
-		if ((refcount > 1) || (isFullDebug(COMPONENT_CLIENTID))) {
+		if (((refcount > 1) || (isFullDebug(COMPONENT_CLIENTID))) &&
+		    should_log(next_log_time)) {
 			char str[LOG_BUFF_LEN] = "\0";
 			struct display_buffer dspbuf = { sizeof(str), str,
 							 str };
@@ -1336,9 +1372,14 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 					COMPONENT_CLIENTID,
 					"Expired State - Open Owners, for {%s}",
 					str);
+			update_next_log_time(&next_log_time);
 		}
 
 		dec_state_owner_ref(owner);
+		if (refcount > 1) {
+			// Yield to allow other threads to proceed and release references.
+			sched_yield();
+		}
 	}
 
 	/* revoke delegations for this client*/
