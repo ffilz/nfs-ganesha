@@ -220,6 +220,11 @@ typedef enum protos {
  * @brief Support GRPC
  */
 #define GRPC_PORT 50051
+#define GRPC_SERVER_CERTIFICATE "/usr/bin/ganesha_grpc_tls_cert/server.crt"
+#define GRPC_SERVER_KEY "/usr/bin/ganesha_grpc_tls_cert/server.key"
+#define GRPC_CLIENT_CERTIFICATE "/usr/bin/ganesha_grpc_tls_cert/client.crt"
+#define GRPC_CLIENT_KEY "/usr/bin/ganesha_grpc_tls_cert/client.key"
+#define GRPC_CA_CERTIFICATE "/usr/bin/ganesha_grpc_tls_cert/ca.crt"
 
 /**
  * @brief Support NFSv3 and NFSv4.
@@ -569,6 +574,14 @@ typedef struct nfs_core_param {
 #ifdef USE_GRPC
 	/** gRPC port number. */
 	int16_t grpc_port;
+	/** To secure grpc with mutual TLS, we need Absolute path of server
+	 *  certificate, server key, client certificate, client key and ca
+	 *  certificate */
+	char *grpc_server_cert;
+	char *grpc_client_cert;
+	char *grpc_ca_cert;
+	char *grpc_server_key;
+	char *grpc_client_key;
 #endif
 
 } nfs_core_parameter_t;
