@@ -220,6 +220,11 @@ typedef enum protos {
  * @brief Support GRPC
  */
 #define GRPC_PORT 50051
+#define GRPC_SERVER_CERTIFICATE "/usr/bin/ganesha_grpc_tls_cert/server.crt"
+#define GRPC_SERVER_KEY "/usr/bin/ganesha_grpc_tls_cert/server.key"
+#define GRPC_CLIENT_CERTIFICATE "/usr/bin/ganesha_grpc_tls_cert/client.crt"
+#define GRPC_CLIENT_KEY "/usr/bin/ganesha_grpc_tls_cert/client.key"
+#define GRPC_CA_CERTIFICATE "/usr/bin/ganesha_grpc_tls_cert/ca.crt"
 
 /**
  * @brief Support NFSv3 and NFSv4.
@@ -566,11 +571,6 @@ typedef struct nfs_core_param {
 	 * https://git.kernel.org/torvalds/p/8d19f1c8e1937baf74e1962aae9f90fa3aeab463 */
 	bool allow_set_io_flusher_fail;
 
-#ifdef USE_GRPC
-	/** gRPC port number. */
-	int16_t grpc_port;
-#endif
-
 } nfs_core_parameter_t;
 
 /** @} */
@@ -736,9 +736,22 @@ typedef struct directory_services_param {
 	bool pwutils_use_fully_qualified_names;
 } directory_services_param_t;
 
-/** @} */
+typedef struct grpc_parameter {
+	/** gRPC port number. */
+	int16_t grpc_port;
+	/** To secure grpc with mutual TLS, we need Absolute path of server
+	 * certificate, server key, client certificate, client key and ca
+	 * certificate */
+	char *grpc_server_cert;
+	char *grpc_client_cert;
+	char *grpc_ca_cert;
+	char *grpc_server_key;
+	char *grpc_client_key;
+} grpc_parameter_t
 
-typedef struct nfs_param {
+	/** @} */
+
+	typedef struct nfs_param {
 	/** NFS Core parameters, settable in the NFS_Core_Param
 	    stanza. */
 	nfs_core_parameter_t core_param;
@@ -751,6 +764,9 @@ typedef struct nfs_param {
 	/** Directory_services configuration, settable in the
 	    DIRECTORY_SERVICES stanza. */
 	directory_services_param_t directory_services_param;
+#ifdef USE_GRPC
+	grpc_parameter_t grpc_param;
+#endif
 } nfs_parameter_t;
 
 extern nfs_parameter_t nfs_param;

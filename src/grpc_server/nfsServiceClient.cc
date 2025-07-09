@@ -22,58 +22,93 @@
 #include <grpcpp/grpcpp.h>
 #include <nfsService.pb.h>
 #include <nfsService.grpc.pb.h>
+#include <nfsService.h>
 #include <string>
 
-void GetClientIds(const std::string &server_address)
+void GetClientIds(const std::string &server_address, const std::string &ca_crt,
+		  const std::string &client_cert, const std::string &client_key)
 {
-	// Creating an insecure channel to communicate with the server
-	std::shared_ptr<grpc::Channel> channel =
-		grpc::CreateChannel(server_address,
-				    grpc::InsecureChannelCredentials());
-	std::unique_ptr<nfsService::GetClientId::Stub> stub =
-		nfsService::GetClientId::NewStub(channel);
+	// For storing Client credentials
+	grpc::SslCredentialsOptions ssl_opts;
 
 	// Creating a request and response
 	nfsService::GetClientIdsRequest request;
 	nfsService::GetClientIdsResponse response;
 	grpc::ClientContext context;
 
+	ssl_opts.pem_root_certs = read_cert_file(ca_cert);
+	ssl_opts.pem_cert_chain = read_cert_file(client_cert);
+	ssl_opts.pem_private_key = read_cert_file(client_key);
+
+	auto creds = grpc::SslCredentials(ssl_opts);
+
+	// Creating an secure channel to communicate with the server
+	std::shared_ptr<grpc::Channel> channel =
+		grpc::CreateChannel(server_address, creds);
+
+	std::unique_ptr<nfsService::GetClientId::Stub> stub =
+		nfsService::GetClientId::NewStub(channel);
+
 	// Make the gRPC call
 	grpc::Status status = stub->GetClientIds(&context, request, &response);
 }
 
-void GetNfsGracePeriod(const std::string &server_address)
+void GetNfsGracePeriod(const std::string &server_address,
+		       const std::string &ca_crt,
+		       const std::string &client_cert,
+		       const std::string &client_key)
 {
-	// Creating a channel to communicate with the server
-	std::shared_ptr<grpc::Channel> channel =
-		grpc::CreateChannel(server_address,
-				    grpc::InsecureChannelCredentials());
-	std::unique_ptr<nfsService::GetNfsGrace::Stub> stub =
-		nfsService::GetNfsGrace::NewStub(channel);
+	// For storing Client credentials
+	grpc::SslCredentialsOptions ssl_opts;
+
+	ssl_opts.pem_root_certs = read_cert_file(ca_cert);
+	ssl_opts.pem_cert_chain = read_cert_file(client_cert);
+	ssl_opts.pem_private_key = read_cert_file(client_key);
 
 	// Creating a request and response
 	nfsService::GetNfsGraceRequest request;
 	nfsService::GetNfsGraceResponse response;
 	grpc::ClientContext context;
 
+	auto creds = grpc::SslCredentials(ssl_opts);
+
+	// Creating a secure channel to communicate with the server
+	std::shared_ptr<grpc::Channel> channel =
+		grpc::CreateChannel(server_address, creds);
+
+	std::unique_ptr<nfsService::GetNfsGrace::Stub> stub =
+		nfsService::GetNfsGrace::NewStub(channel);
+
 	// Make the gRPC call
 	grpc::Status status =
 		stub->GetGracePeriod(&context, request, &response);
 }
 
-void GetClientSessionIds(const std::string &server_address)
+void GetClientSessionIds(const std::string &server_address,
+			 const std::string &ca_crt,
+			 const std::string &client_cert,
+			 const std::string &client_key)
 {
-	// Creating a channel to communicate with the server
-	std::shared_ptr<grpc::Channel> channel =
-		grpc::CreateChannel(server_address,
-				    grpc::InsecureChannelCredentials());
-	std::unique_ptr<nfsService::GetSessionId::Stub> stub =
-		nfsService::GetSessionId::NewStub(channel);
+	// For storing Client credentials
+	grpc::SslCredentialsOptions ssl_opts;
+
+	ssl_opts.pem_root_certs = read_cert_file(ca_cert);
+	ssl_opts.pem_cert_chain = read_cert_file(client_cert);
+	ssl_opts.pem_private_key = read_cert_file(client_key);
 
 	// Creating a request and response
 	nfsService::GetSessionIdsRequest request;
 	nfsService::GetSessionIdsResponse response;
 	grpc::ClientContext context;
+
+	auto creds = grpc::SslCredentials(ssl_opts);
+
+	// Creating a secure channel to communicate with the server
+	std::shared_ptr<grpc::Channel> channel =
+		grpc::CreateChannel(server_address, creds);
+
+	std::unique_ptr<nfsService::GetSessionId::Stub> stub =
+		nfsService::GetSessionId::NewStub(channel);
 
 	// Make the gRPC call
 	grpc::Status status = stub->GetSessionIds(&context, request, &response);

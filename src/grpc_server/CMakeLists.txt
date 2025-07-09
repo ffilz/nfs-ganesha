@@ -21,9 +21,9 @@
 #-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 #gRPC server Cmake
 
-include_directories(${ PROTOBUF_INCLUDE_DIRS })
-include_directories(${gRPC_INCLUDE_DIRS })
-include_directories(${ CMAKE_CURRENT_SOURCE_DIR }/include)
+include_directories(${PROTOBUF_INCLUDE_DIRS})
+include_directories(${gRPC_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_BINARY_DIR}/proto)
 
 set(SOURCE_FILES ${CMAKE_SOURCE_DIR}/grpc_server/GrpcServer.cc

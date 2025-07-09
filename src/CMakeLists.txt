@@ -197,8 +197,7 @@ if(${HAS_MACRO_PREFIX_MAP_FLAG} AND USE_RELATIVE_FILE_PATHS_IN_LOGS)
   add_compile_options(-fmacro-prefix-map=${GANESHA_TOP_CMAKE_DIR}/=./)
 endif()
 
-#If we are in a git tree, \
-	then this CMakeLists.txt is in "src/" and go.git is in "src/.."
+#If we are in a git tree, then this CMakeLists.txt is in "src/" and go.git is in "src/.."
 IF( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
   message( STATUS "Compilation from within a git repository. Using git rev-parse HEAD")
   EXECUTE_PROCESS( COMMAND git rev-parse HEAD
@@ -423,8 +422,7 @@ if(USE_VSOCK)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DRPC_VSOCK")
 endif(USE_VSOCK)
 
-#This option will trigger \
-	"long distro name" aka name that contains git information
+#This option will trigger "long distro name" aka name that contains git information
 option(DISTNAME_HAS_GIT_DATA "Distribution package's name carries git data" OFF )
 
 #Build and package Python admin scripts for managing via DBus

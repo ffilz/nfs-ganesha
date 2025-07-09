@@ -44,6 +44,23 @@ extern "C" {
 }
 #endif
 
+// Utility function for reading key files
+static inline std::string read_cert_file(const char *filepath)
+{
+	std::ifstream file_stream(filepath, std::ios::in | std::ios::binary);
+	std::ostringstream buffer;
+
+	if (!file_stream.is_open()) {
+		LogAlways(COMPONENT_GRPC, "Failed to open file: %s", filepath);
+
+		return "";
+	}
+
+	buffer << file_stream.rdbuf();
+
+	return buffer.str();
+}
+
 class GetClientIdService final : public nfsService::GetClientId::Service {
     public:
 	grpc::Status
