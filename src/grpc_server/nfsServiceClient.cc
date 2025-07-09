@@ -24,12 +24,20 @@
 #include <nfsService.grpc.pb.h>
 #include <string>
 
-void GetClientIds(const std::string &server_address)
+void GetClientIds(const std::string &server_address, const std::string &ca_crt,
+		  const std::string &client_cert, const std::string &client_key)
 {
-	// Creating an insecure channel to communicate with the server
+	grpc::SslCredentialsOptions ssl_opts;
+
+	ssl_opts.pem_root_certs = ganesha_grpc_server.read_file(ca_cert);
+	ssl_opts.pem_cert_chain = ganesha_grpc_server.read_file(client_cert);
+	ssl_opts.pem_private_key = ganesha_grpc_server.read_file(client_key);
+
+	auto creds = grpc::SslCredentials(ssl_opts);
+
+	// Creating an secure channel to communicate with the server
 	std::shared_ptr<grpc::Channel> channel =
-		grpc::CreateChannel(server_address,
-				    grpc::InsecureChannelCredentials());
+		grpc::CreateChannel(server_address, creds);
 	std::unique_ptr<nfsService::GetClientId::Stub> stub =
 		nfsService::GetClientId::NewStub(channel);
 
@@ -42,12 +50,22 @@ void GetClientIds(const std::string &server_address)
 	grpc::Status status = stub->GetClientIds(&context, request, &response);
 }
 
-void GetNfsGracePeriod(const std::string &server_address)
+void GetNfsGracePeriod(const std::string &server_address,
+		       const std::string &ca_crt,
+		       const std::string &client_cert,
+		       const std::string &client_key)
 {
-	// Creating a channel to communicate with the server
+	grpc::SslCredentialsOptions ssl_opts;
+
+	ssl_opts.pem_root_certs = ganesha_grpc_server.read_file(ca_cert);
+	ssl_opts.pem_cert_chain = ganesha_grpc_server.read_file(client_cert);
+	ssl_opts.pem_private_key = ganesha_grpc_server.read_file(client_key);
+
+	auto creds = grpc::SslCredentials(ssl_opts);
+
+	// Creating a secure channel to communicate with the server
 	std::shared_ptr<grpc::Channel> channel =
-		grpc::CreateChannel(server_address,
-				    grpc::InsecureChannelCredentials());
+		grpc::CreateChannel(server_address, creds);
 	std::unique_ptr<nfsService::GetNfsGrace::Stub> stub =
 		nfsService::GetNfsGrace::NewStub(channel);
 
@@ -61,12 +79,22 @@ void GetNfsGracePeriod(const std::string &server_address)
 		stub->GetGracePeriod(&context, request, &response);
 }
 
-void GetClientSessionIds(const std::string &server_address)
+void GetClientSessionIds(const std::string &server_address,
+			 const std::string &ca_crt,
+			 const std::string &client_cert,
+			 const std::string &client_key)
 {
-	// Creating a channel to communicate with the server
+	grpc::SslCredentialsOptions ssl_opts;
+
+	ssl_opts.pem_root_certs = ganesha_grpc_server.read_file(ca_cert);
+	ssl_opts.pem_cert_chain = ganesha_grpc_server.read_file(client_cert);
+	ssl_opts.pem_private_key = ganesha_grpc_server.read_file(client_key);
+
+	auto creds = grpc::SslCredentials(ssl_opts);
+
+	// Creating a secure channel to communicate with the server
 	std::shared_ptr<grpc::Channel> channel =
-		grpc::CreateChannel(server_address,
-				    grpc::InsecureChannelCredentials());
+		grpc::CreateChannel(server_address, creds);
 	std::unique_ptr<nfsService::GetSessionId::Stub> stub =
 		nfsService::GetSessionId::NewStub(channel);
 

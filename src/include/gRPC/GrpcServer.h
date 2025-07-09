@@ -16,7 +16,8 @@ extern "C" {
 #endif
 
 /* Inits grpc module. */
-void grpc__init(uint16_t port);
+void grpc__init(uint16_t port, char *server_cert, char *server_key,
+		char *ca_cert);
 
 #ifdef __cplusplus
 }

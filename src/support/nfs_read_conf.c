@@ -378,6 +378,18 @@ static struct config_item core_params[] = {
 #ifdef USE_GRPC
 	CONF_ITEM_UI16("Grpc_Port", 0, UINT16_MAX, GRPC_PORT, nfs_core_param,
 		       grpc_port),
+	CONF_ITEM_PATH("Grpc_Server_Certificate", 1, MAXPATHLEN,
+		       GRPC_SERVER_CERTIFICATE, nfs_core_param,
+		       grpc_server_cert),
+	CONF_ITEM_PATH("Grpc_Server_Key", 1, MAXPATHLEN, GRPC_SERVER_KEY,
+		       nfs_core_param, grpc_server_key),
+	CONF_ITEM_PATH("Grpc_Client_Certificate", 1, MAXPATHLEN,
+		       GRPC_CLIENT_CERTIFICATE, nfs_core_param,
+		       grpc_client_cert),
+	CONF_ITEM_PATH("Grpc_Client_Key", 1, MAXPATHLEN, GRPC_CLIENT_KEY,
+		       nfs_core_param, grpc_client_key),
+	CONF_ITEM_PATH("Grpc_Ca_Certificate", 1, MAXPATHLEN,
+		       GRPC_CA_CERTIFICATE, nfs_core_param, grpc_ca_cert),
 #endif
 	CONF_ITEM_BOOL("enable_rpc_cred_fallback", false, nfs_core_param,
 		       enable_rpc_cred_fallback),

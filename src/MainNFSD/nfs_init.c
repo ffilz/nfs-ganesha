@@ -1011,7 +1011,10 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 #endif
 
 #ifdef USE_GRPC
-	grpc__init(nfs_param.core_param.grpc_port);
+	grpc__init(nfs_param.core_param.grpc_port,
+		   nfs_param.core_param.grpc_server_cert,
+		   nfs_param.core_param.grpc_server_key,
+		   nfs_param.core_param.grpc_ca_cert);
 #endif
 	/* initializing nfs ganesha metrics */
 	nfs_metrics__init();
