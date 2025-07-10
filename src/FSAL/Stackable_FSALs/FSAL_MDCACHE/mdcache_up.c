@@ -86,6 +86,16 @@ static fsal_status_t mdc_up_invalidate(const struct fsal_up_vector *vec,
 		PTHREAD_RWLOCK_unlock(&entry->content_lock);
 	}
 
+	if ((flags & FSAL_UP_INVALIDATE_ACL) && entry->attrs.acl) {
+		PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
+
+		nfs4_acl_release_entry(entry->attrs.acl);
+		entry->attrs.acl = NULL;
+		FSAL_UNSET_MASK(entry->attrs.valid_mask, ATTR_ACL);
+
+		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
+	}
+
 	mdcache_lru_unref(entry, LRU_ACTIVE_REF);
 
 out:
