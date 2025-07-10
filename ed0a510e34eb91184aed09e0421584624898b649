@@ -16,6 +16,24 @@
       "message": "apologies for not knowing already, but is FSAL_UP_INVALIDATE_ACL being introduced by this change? I don\u0027t see it declared",
       "revId": "ed0a510e34eb91184aed09e0421584624898b649",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d75c55_dcb1d023",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2025-07-10T23:46:20Z",
+      "side": 1,
+      "message": "It was alreay defined previously:\n/** Trust stored attributes */\n#define MDCACHE_TRUST_ATTRS FSAL_UP_INVALIDATE_ATTRS\n/** Trust stored ACL */\n#define MDCACHE_TRUST_ACL FSAL_UP_INVALIDATE_ACL\n/** Trust inode content (for the moment, directory and symlink) */\n#define MDCACHE_TRUST_CONTENT FSAL_UP_INVALIDATE_CONTENT\n/** The directory has been populated (negative lookups are meaningful) */\n#define MDCACHE_DIR_POPULATED FSAL_UP_INVALIDATE_DIR_POPULATED\n/** The directory chunks are considered valid */\n#define MDCACHE_TRUST_DIR_CHUNKS FSAL_UP_INVALIDATE_DIR_CHUNKS\n/** The fs_locations are considered valid */\n#define MDCACHE_TRUST_FS_LOCATIONS FSAL_UP_INVALIDATE_FS_LOCATIONS\n/** The sec_labels are considered valid */\n#define MDCACHE_TRUST_SEC_LABEL FSAL_UP_INVALIDATE_SEC_LABEL\n/** The entry has been removed, but not unhashed due to state */\nstatic const uint32_t MDCACHE_UNREACHABLE \u003d 0x100;",
+      "parentUuid": "d519bdd7_2508b703",
+      "revId": "ed0a510e34eb91184aed09e0421584624898b649",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
