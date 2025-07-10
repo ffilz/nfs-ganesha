@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3169abf_1b32f408",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-10T16:18:07Z",
+      "side": 1,
+      "message": "Added the comment as suggested",
+      "parentUuid": "5304102c_ac04af19",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acf6074f_b9b05d65",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -364,6 +382,24 @@
       "side": 1,
       "message": "Do add a comment on the lock expected to be held",
       "parentUuid": "7b15c8b1_fc4c2367",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e6c7892_95dc038f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-10T16:18:07Z",
+      "side": 1,
+      "message": "* Function to resume the given timerentry and free the resource\n * caller should hold bucket-\u003elock to which timer belongs.\n *",
+      "parentUuid": "37998f1b_2ccc7949",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
