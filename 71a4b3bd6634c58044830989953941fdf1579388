@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14289e9f_3208fe6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-11T23:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "679c2de2_f94256ca",
+      "revId": "71a4b3bd6634c58044830989953941fdf1579388",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "920f0b95_a0590a08",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-11T21:06:41Z",
       "side": 1,
       "message": "Hmm, the other FSALs that are checking for share conflict are only doing so if state \u003d\u003d NULL... And FSAL_VFS will only do the update_share_counters_locked at the end if state \u003d\u003d NULL. I think this state !\u003d NULL is actually wrong here and should be state \u003d\u003d NULL.\n\nYep, just looked at nfs4_op_setattr, it\u0027s already verified there is a state and it\u0027s open for write.\n\nPlease try changing to state \u003d\u003d NULL instead of open_correct.",
+      "revId": "71a4b3bd6634c58044830989953941fdf1579388",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6fb2fc_25bd5c58",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2791,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-11T23:05:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "920f0b95_a0590a08",
       "revId": "71a4b3bd6634c58044830989953941fdf1579388",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
