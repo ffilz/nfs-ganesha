@@ -2797,10 +2797,15 @@ static fsal_status_t ceph_fsal_setattr2(struct fsal_obj_handle *obj_hdl,
 			return fsalstat(ERR_FSAL_INVAL, EINVAL);
 		}
 
+		struct fsal_fd *state_fd = (struct fsal_fd *) (state + 1);
+
 		/* Now check the new share and establish if OK. */
-		status = check_share_conflict_and_update_locked(
-			obj_hdl, &myself->share, FSAL_O_CLOSED, FSAL_O_RDWR,
-			false);
+		if (!open_correct(state_fd->openflags, FSAL_O_RDWR)) {
+			status = check_share_conflict_and_update_locked(
+				obj_hdl, &myself->share, FSAL_O_CLOSED, FSAL_O_RDWR,
+				false);
+			need_share = true;
+		}
 
 		if (FSAL_IS_ERROR(status)) {
 			LogFullDebug(
@@ -2809,8 +2814,6 @@ static fsal_status_t ceph_fsal_setattr2(struct fsal_obj_handle *obj_hdl,
 				fsal_err_txt(status));
 			goto out;
 		}
-
-		need_share = true;
 	}
 
 	memset(&stx, 0, sizeof(stx));
