@@ -229,6 +229,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90e9ac90_31143fa3",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Added the note",
+      "parentUuid": "21416f9c_ff357c9e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7d3fa89_a88fc5f6",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -435,6 +453,24 @@
       "side": 1,
       "message": "Please do remove this check for NULL pointer",
       "parentUuid": "852b7002_b2c07437",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6949b1d_de43b331",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "fd142d2a_708c0d15",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1431,6 +1467,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f1f948e_384e1443",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2140,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "a2650d41_014cdae7",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "363ba063_62970378",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -2025,6 +2079,24 @@
       "side": 1,
       "message": "Sorry, I was suggesting following the logic of the earlier functions that do the stuff inside if (export) instead of an early return for if (!export)\n\nThat way all the lock and unlock are paired and a quick grep of g_qos_config_lock confirms lock and unlock are paired.",
       "parentUuid": "0ff01f81_33129825",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29262b93_0fff3925",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Updated as suggested",
+      "parentUuid": "24165eb7_b530922d",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

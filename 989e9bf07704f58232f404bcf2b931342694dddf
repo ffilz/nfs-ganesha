@@ -1838,6 +1838,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "661e2234_526c0a91",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2752,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Updated the code to use atomic functions",
+      "parentUuid": "ad44f6c3_2e71bfba",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c2829f8_7a2490a6",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 28
@@ -1872,6 +1890,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c206b4d_cd37cb09",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2801,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Got it, updated as suggested",
+      "parentUuid": "a40f3e6e_e4dff8a0",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6245d688_9f625591",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 28
@@ -1883,6 +1919,24 @@
       "writtenOn": "2025-07-02T23:37:25Z",
       "side": 1,
       "message": "Shouldn\u0027t you initialize the mutexes inside the if?\n\nThough do we really need this test? I\u0027m not sure there wouldn\u0027t be more work to dynamically enable and disable QoS\n\nIn fact, there is a significant piece... If we ever dynamically disable QoS, we would need to immediately resume all suspended IOs.\n\nI think I would prefer remove any code that hints at dynamic enable/disable. If we want to implement that, let us solve the problems then.",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b479cd23_fe943feb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2813,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Added a note in the qos_init function about the same",
+      "parentUuid": "6245d688_9f625591",
       "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2065,6 +2119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3be18d5e_a5a6a5af",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2890,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "3785ad45_9d6593fb",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e91fdf1b_d6d5bc1b",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 28
@@ -2076,6 +2148,24 @@
       "writtenOn": "2025-07-02T23:37:25Z",
       "side": 1,
       "message": "Use atomic function to manipulate qos_thread_running",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e0e201_2beb096e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2896,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-14T13:21:31Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "e91fdf1b_d6d5bc1b",
       "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
