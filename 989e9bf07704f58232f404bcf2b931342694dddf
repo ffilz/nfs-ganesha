@@ -1856,6 +1856,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b97803b8_76272b1b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2752,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Change to uint32_t",
+      "parentUuid": "661e2234_526c0a91",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c2829f8_7a2490a6",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 28
@@ -1937,6 +1955,24 @@
       "side": 1,
       "message": "Added a note in the qos_init function about the same",
       "parentUuid": "6245d688_9f625591",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8112ea94_9a3b26ab",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b479cd23_fe943feb",
       "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2137,6 +2173,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29343ed3_df36f42a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2890,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Don\u0027t test initialized, this should only be called if QoS configured\n\nYou need atomic test and clear of running to properly synchronize",
+      "parentUuid": "3be18d5e_a5a6a5af",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e91fdf1b_d6d5bc1b",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 28
@@ -2166,6 +2220,24 @@
       "side": 1,
       "message": "Updated",
       "parentUuid": "e91fdf1b_d6d5bc1b",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e9a23d_90f2ff9d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2896,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Note above - atomic test and clear",
+      "parentUuid": "43e0e201_2beb096e",
       "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a7c433_4e9d454e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Comments on latest changes. Still may have more review.\n\nAlso, still a lot of open comments to address.",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab28428_ce732890",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Check if qos is enabled",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8dd1fdb_2ce5ebac",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Please remove QOS_INITIALIZED, we don\u0027t currently support dynamic enable/disable so it just confuses things and may be wrong code.",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581fe6a0_0096a5c6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Just make this a unit32_t, I think it may make the atomic functions cleaner.",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e16b5bd_d93e4d40",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Don\u0027t test for initialized here\nDon\u0027t set initialized\nJust set runnable\nconvert to uint32_t",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748eaff8_55811ab0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2855,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Don\u0027t test for initialized, this is intended to only be run at start when initialized is not set anyway",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95afa5d4_372ede42",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2950,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-14T20:42:41Z",
+      "side": 1,
+      "message": "Need to destroy the mutexes (any that we explicitly create must be explicitly destroyed)",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
