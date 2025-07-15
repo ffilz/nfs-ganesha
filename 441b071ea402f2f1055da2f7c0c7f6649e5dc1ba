@@ -353,6 +353,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6a9fd0d_129910df",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Please do give each glist a unique name.",
+      "parentUuid": "5df2b429_23507150",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afb652b8_a84fc6a2",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -884,6 +902,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15d6485a_a901e4c5",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Unnecessary checks for NULL can entice Coverity to flag warnings. And it\u0027s code that can\u0027t be tested. It makes sense to test something that\u0027s an API to a different layer of code, but this is internal only.\n\nAnd really, please just replace calls to get_client_qos with client-\u003eqos_class. There is no need for this wrapper function that makes one have to go look at what the function does when all it is doing is getting a simple value.",
+      "parentUuid": "daa14f24_ab173a92",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1622bec7_eb34ab05",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -1020,6 +1056,24 @@
       "side": 1,
       "message": "get_export_qos is getting called from multiple places, tomorrow if some stats module uses this function with invalid export, this function should handle that.\ncurrently its acting as a precautionary check and its not effecting anything.",
       "parentUuid": "6f1ec0c7_0fdb4ad3",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13296514_87af9bac",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Same justification. Just get rid of this function.",
+      "parentUuid": "0f1b6bd8_8ecb0ae7",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

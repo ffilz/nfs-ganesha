@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8afc93e_bbf70348",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Since nfs_init checks the config and only if enabled calls qos_init, please mirror that behavior.",
+      "parentUuid": "7166c141_448a897a",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8dd1fdb_2ce5ebac",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 31
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Removed the QOS_INITIALIZED",
       "parentUuid": "d8dd1fdb_2ce5ebac",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae19b3ea_0c3e0439",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c5a498e_9aabb940",
       "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -123,6 +159,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e435f9_9a526663",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6d8ab0_7e9ae233",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e16b5bd_d93e4d40",
@@ -154,6 +208,24 @@
       "side": 1,
       "message": "Updated",
       "parentUuid": "7e16b5bd_d93e4d40",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b926c8c_340177ed",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28501f79_7129ecc2",
       "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -193,6 +265,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "379cbde1_e77ff5a6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2855,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bef99b9b_68264cef",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95afa5d4_372ede42",
@@ -224,6 +314,24 @@
       "side": 1,
       "message": "Updated",
       "parentUuid": "95afa5d4_372ede42",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c386ecc9_e137f24d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2950,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd3e6382_4eeaae0e",
       "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

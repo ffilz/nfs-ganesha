@@ -1572,6 +1572,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9507acc_eda5c24a",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2555,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Thanks, just looks cleaner and easier to see when variables of same type are adjacent.",
+      "parentUuid": "d5293c03_9f228134",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd7b49be_0fdddb74",
@@ -1904,6 +1922,24 @@
       "side": 1,
       "message": "Updated",
       "parentUuid": "b97803b8_76272b1b",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d188cc83_7b87efcd",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2752,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16907652_61baad06",
       "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2261,6 +2297,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2091c5b5_482fbda7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2890,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29343ed3_df36f42a",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e91fdf1b_d6d5bc1b",
@@ -2328,6 +2382,24 @@
       "side": 1,
       "message": "Updated",
       "parentUuid": "83e9a23d_90f2ff9d",
+      "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c6cba48_f80d1944",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 2896,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-15T23:06:45Z",
+      "side": 1,
+      "message": "Oh, right, without the initialized flag, no need to test.\n\nDone.",
+      "parentUuid": "31c1460e_db6b7abd",
       "revId": "989e9bf07704f58232f404bcf2b931342694dddf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
