@@ -866,6 +866,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "daa14f24_ab173a92",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "get_client_qos is getting called from multiple places, tomorrow if some stats module uses this function with invalid clientid, this function should handle that.\ncurrently its acting as a precautionary check and effecting anything.",
+      "parentUuid": "8ed4cb90_3dc0e110",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1622bec7_eb34ab05",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -984,6 +1002,24 @@
       "side": 1,
       "message": "Given gsh_export can never be NULL, calls to this function could be replaced with just accessing gsh_export-\u003eqos_class directly, making the calling code more readable.",
       "parentUuid": "f51e3796_52b80107",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1b6bd8_8ecb0ae7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "get_export_qos is getting called from multiple places, tomorrow if some stats module uses this function with invalid export, this function should handle that.\ncurrently its acting as a precautionary check and its not effecting anything.",
+      "parentUuid": "6f1ec0c7_0fdb4ad3",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

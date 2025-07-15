@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7166c141_448a897a",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "Added the check inside shutdown_qos()",
+      "parentUuid": "eab28428_ce732890",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8dd1fdb_2ce5ebac",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 31
@@ -48,6 +66,24 @@
       "writtenOn": "2025-07-14T20:42:41Z",
       "side": 1,
       "message": "Please remove QOS_INITIALIZED, we don\u0027t currently support dynamic enable/disable so it just confuses things and may be wrong code.",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c5a498e_9aabb940",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "Removed the QOS_INITIALIZED",
+      "parentUuid": "d8dd1fdb_2ce5ebac",
       "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f6d8ab0_7e9ae233",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "Updated to uint32_t",
+      "parentUuid": "581fe6a0_0096a5c6",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e16b5bd_d93e4d40",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 31
@@ -82,6 +136,24 @@
       "writtenOn": "2025-07-14T20:42:41Z",
       "side": 1,
       "message": "Don\u0027t test for initialized here\nDon\u0027t set initialized\nJust set runnable\nconvert to uint32_t",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28501f79_7129ecc2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "7e16b5bd_d93e4d40",
       "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bef99b9b_68264cef",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2855,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "748eaff8_55811ab0",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95afa5d4_372ede42",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 31
@@ -116,6 +206,24 @@
       "writtenOn": "2025-07-14T20:42:41Z",
       "side": 1,
       "message": "Need to destroy the mutexes (any that we explicitly create must be explicitly destroyed)",
+      "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3e6382_4eeaae0e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 2950,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-15T12:55:49Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "95afa5d4_372ede42",
       "revId": "fdc8da11cf89fa7ef21cb15423cc54ebee5e0aba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
