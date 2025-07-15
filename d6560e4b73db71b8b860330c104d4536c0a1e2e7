@@ -68,6 +68,24 @@
       "parentUuid": "b014facf_3cce00fe",
       "revId": "d6560e4b73db71b8b860330c104d4536c0a1e2e7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0b6cba_fbf4a49e",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2025-07-15T06:14:55Z",
+      "side": 1,
+      "message": "Please remove gsh_free(buf) in line#815.",
+      "parentUuid": "9f373688_3550e005",
+      "revId": "d6560e4b73db71b8b860330c104d4536c0a1e2e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
