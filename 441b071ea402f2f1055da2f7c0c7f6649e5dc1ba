@@ -121,6 +121,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d4f3130_dc0e8ec1",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-07-16T16:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba32a069_949a6ff6",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6fd23ee_1628cdf8",
@@ -241,6 +259,24 @@
       "side": 1,
       "message": "Added the note",
       "parentUuid": "21416f9c_ff357c9e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012ba21e_f741601f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-07-16T16:13:58Z",
+      "side": 1,
+      "message": "I don\u0027t see it.  Param [in] does not say \"LOCKED\" nor is it in the description and Note?",
+      "parentUuid": "90e9ac90_31143fa3",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -648,6 +684,24 @@
       "side": 1,
       "message": "All the IO\u0027s are operated under bucket lock.\nAllocation of parent structure qos_class_t is under qos_config_lock \nRuntime allocation of parent structure qos_class_t from IO uses g_qos_IO_path_lock under which qos_config_lock.\nConfiguration/Freeing are done under respective qos_config_lock",
       "parentUuid": "4ac3ab97_df418db8",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44576d73_397ea7fc",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-07-16T16:13:58Z",
+      "side": 1,
+      "message": "where does it say this in the source?  i.e., please create a comment in nfs_qos.h or nfs_qos.c on \"locking rules\"",
+      "parentUuid": "92c243a9_1498644b",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1257,6 +1311,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9acd478_e1bc4b4b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-07-16T16:13:58Z",
+      "side": 1,
+      "message": "I would put this info in a comment(s) to make the code easier to understand",
+      "parentUuid": "63963d6f_9a915207",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9247649_031f14ac",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -1659,6 +1731,24 @@
       "side": 1,
       "message": "Just need an ack from @mbenjamin@redhat.com",
       "parentUuid": "2f1f948e_384e1443",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95be0b57_97c97d54",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2140,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-07-16T16:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef5bff12_b5e21b23",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
