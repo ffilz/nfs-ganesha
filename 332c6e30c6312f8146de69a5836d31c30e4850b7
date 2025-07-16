@@ -16,6 +16,24 @@
       "message": "Please do this test in admin code not here.\n\nOne thing here, it will emit the log message when no log message indicated QoS was initialized.",
       "revId": "332c6e30c6312f8146de69a5836d31c30e4850b7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b90b6e74_6e693401",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 2925,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-16T11:32:10Z",
+      "side": 1,
+      "message": "Moved the qos_enabled check before calling shutdown_qos",
+      "parentUuid": "0d665f79_d8c829fc",
+      "revId": "332c6e30c6312f8146de69a5836d31c30e4850b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
