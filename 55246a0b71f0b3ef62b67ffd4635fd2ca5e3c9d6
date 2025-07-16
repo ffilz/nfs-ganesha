@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18801ffd_dda2b3cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-16T23:31:37Z",
+      "side": 1,
+      "message": "Part of what Matt is suggesting is a solid description of the locking protocol. \n\nA description of all the locks, the order they must be taken in, and what they protect in the header file would be good.\n\nAnd then where each lock is referenced, a summary of what it protects and any lock order considerations.\n\nWith any complex set of locks, this is necessary to:\n\n1. Code review to make sure the stated assumptions are true\n\n2. For future maintenance, someone modifying the code has one place to look for the rules so they can follow them without relying on trying to understand the code to implicate the rules.\n\nThis combined with the lock expectation for any function that assumes locks are held when called makes review and maintenance easier.",
+      "revId": "55246a0b71f0b3ef62b67ffd4635fd2ca5e3c9d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26221e75_477c6fc7",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 35
@@ -31,6 +48,24 @@
       "writtenOn": "2025-07-16T16:13:58Z",
       "side": 1,
       "message": "nice description of the function",
+      "revId": "55246a0b71f0b3ef62b67ffd4635fd2ca5e3c9d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ae936f3_f0308f0d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-16T23:31:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "26221e75_477c6fc7",
       "revId": "55246a0b71f0b3ef62b67ffd4635fd2ca5e3c9d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -48,6 +83,24 @@
       "writtenOn": "2025-07-16T16:13:58Z",
       "side": 1,
       "message": "excellent comments",
+      "revId": "55246a0b71f0b3ef62b67ffd4635fd2ca5e3c9d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09258fdd_e8ebf3bb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 2369,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-16T23:31:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cd6a967e_ef9c7ac4",
       "revId": "55246a0b71f0b3ef62b67ffd4635fd2ca5e3c9d6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
