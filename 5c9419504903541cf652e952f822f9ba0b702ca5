@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad78205c_005c0823",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "This should be a LogFatal for consistency",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87212fb8_2c858156",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Hmm, wondering about IPv6, but if this is always local address I guess it\u0027s OK. Is there ever a reason to be able to do GRPC from another host? It seems likely.",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac83249d_bb300d57",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0ee242_bcee9769",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abe53b82_3558686b",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f98996_a8b39530",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf6f58a_c4f4d990",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line after declarations please\n\nActually, can you move all the declarations to the top of the function?",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3258f93a_aeaa9087",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line here is helpful",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e12143e_529e9893",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank lines here are helpful.",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ba5bbf_c30365b3",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a82f8de_97eeb264",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78217bed_da085deb",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Blank line here please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97c53920_993df811",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:26:02Z",
+      "side": 1,
+      "message": "Given additional parameters will be added for security in the 2nd patch, I feel like maybe this should be a separate config block. The core param config block is getting overloaded.",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
