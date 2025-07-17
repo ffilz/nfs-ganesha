@@ -237,6 +237,23 @@
       "message": "Is this another clang-format change, if so, please remove this file from the patch",
       "revId": "8fdd2579e7d164be13049d9a5e1d251e230f8363",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ff64b1_158008af",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-17T23:15:31Z",
+      "side": 1,
+      "message": "These need to be documented in:\n\nsrc/config_samples/config.txt\n\nand\n\nsrc/doc/man/ganesha-core-config.rst",
+      "revId": "8fdd2579e7d164be13049d9a5e1d251e230f8363",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
