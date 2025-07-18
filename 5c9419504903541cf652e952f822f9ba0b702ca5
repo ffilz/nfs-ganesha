@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b86819fa_091243f9",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad78205c_005c0823",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87212fb8_2c858156",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-17T23:26:02Z",
       "side": 1,
       "message": "Hmm, wondering about IPv6, but if this is always local address I guess it\u0027s OK. Is there ever a reason to be able to do GRPC from another host? It seems likely.",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749e9caf_16093a71",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "I remember we wanted to communicate to other nodes as well when using HA.",
+      "parentUuid": "87212fb8_2c858156",
       "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b9fd425_5ec245e4",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac83249d_bb300d57",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc0ee242_bcee9769",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-07-17T23:26:02Z",
       "side": 1,
       "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a69f554_785a39f2",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc0ee242_bcee9769",
       "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "244bae16_e1810e77",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abe53b82_3558686b",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4f98996_a8b39530",
@@ -99,6 +189,24 @@
       "writtenOn": "2025-07-17T23:26:02Z",
       "side": 1,
       "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d8f426_9664b0b1",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4f98996_a8b39530",
       "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf7f17a2_4b1a463b",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baf6f58a_c4f4d990",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3258f93a_aeaa9087",
@@ -133,6 +259,24 @@
       "writtenOn": "2025-07-17T23:26:02Z",
       "side": 1,
       "message": "Blank line here is helpful",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "811903de_7e01d003",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3258f93a_aeaa9087",
       "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c698fc_2cdb57e4",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e12143e_529e9893",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63ba5bbf_c30365b3",
@@ -167,6 +329,24 @@
       "writtenOn": "2025-07-17T23:26:02Z",
       "side": 1,
       "message": "Blank line after declarations please",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f53be47b_55e3bdd5",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ba5bbf_c30365b3",
       "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -188,6 +368,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f4096cb_8f8c87b4",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a82f8de_97eeb264",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78217bed_da085deb",
@@ -205,6 +403,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c0de35_1d45fb3a",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78217bed_da085deb",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97c53920_993df811",
@@ -218,6 +434,24 @@
       "writtenOn": "2025-07-17T23:26:02Z",
       "side": 1,
       "message": "Given additional parameters will be added for security in the 2nd patch, I feel like maybe this should be a separate config block. The core param config block is getting overloaded.",
+      "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb9d8cd_916aef55",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-07-18T12:21:36Z",
+      "side": 1,
+      "message": "looking into it.",
+      "parentUuid": "97c53920_993df811",
       "revId": "5c9419504903541cf652e952f822f9ba0b702ca5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
