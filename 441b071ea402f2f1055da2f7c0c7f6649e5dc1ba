@@ -301,6 +301,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a23071a0_7fb0f01f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Added the detailed locking rules at the start of nfs_qos.c which should be applicable across the file.",
+      "parentUuid": "012ba21e_f741601f",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7d3fa89_a88fc5f6",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -638,6 +656,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e1bbee7_a7f7ee3e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Added the detailed locking rules at the start of nfs_qos.c.",
+      "parentUuid": "090a8122_dc59316c",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a796d77_e20c3ba4",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -744,6 +780,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20ef0793_685d6211",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Added the detailed locking rules at the start of nfs_qos.c which should be applicable across the file.",
+      "parentUuid": "44576d73_397ea7fc",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e03e289_2c6e9511",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -773,6 +827,24 @@
       "side": 1,
       "message": "-\u003e Allocation of parent structure qos_class_t is under qos_config_lock \n-\u003e Runtime allocation of parent structure qos_class_t from IO uses g_qos_IO_path_lock under which qos_config_lock.\n-\u003e Configuration/Freeing are done under qos_config_lock\n-\u003e All the IO\u0027s are operated under respective bucket-\u003elock.",
       "parentUuid": "1e03e289_2c6e9511",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ac9a5e_2bdfc94c",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Added the detailed locking rules at the start of nfs_qos.c.",
+      "parentUuid": "f570832d_c04e8aa5",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1348,6 +1420,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff073df3_09c818a3",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Last time I misunderstood the comment.\nyes we require seperate arg, because in the PEPC mode we don\u0027t update the bucket-\u003ebw_ldct in the IO submission path.\nthis gets updated in consumer logic to accomplish : client level Limits with export level limits.\nSo submission path cannot determine (not suppose to touch bw_ldct) when the IO needs to be expired.",
+      "parentUuid": "d66efb14_55514672",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aaf523c_1c9cc6cb",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 23
@@ -1395,6 +1485,24 @@
       "side": 1,
       "message": "I would put this info in a comment(s) to make the code easier to understand",
       "parentUuid": "63963d6f_9a915207",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "477cdd2b_3cd6abf7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Added the details in the code comments",
+      "parentUuid": "c9acd478_e1bc4b4b",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1625,6 +1733,24 @@
       "side": 1,
       "message": "Still looking for response here.",
       "parentUuid": "0d44f997_99a770ed",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e81107b_cd49db01",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Yes, If IO request are not responded in 30 Sec (Since here all the IO\u0027s are blocked for this client), will result in reconnection from client.\nAs per the NFS RFC NFS_ERR_DELAY client should only retry the IO after 10 or 15 sec , but in our testing we have seen clients immediately retrying the IO. So immediate retry from client will result in consuming unnecessary BW of the N/W. To avoid this we keep the IO for 15 sec and then returns the IO after time expiration results in Not hogging the N/W BW. Yes there is hard and soft mount, but I have tried only with the default mount and retry from client is happening immediately.",
+      "parentUuid": "cd3b1b9d_fcbed0b7",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1986,6 +2112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47a4b972_532e5796",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2613,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "glist_empty check under lock is not required. thread is again going to check this after sometime is there any IO in the list or not. Because under load QOS may have lot of IO\u0027s to churn (only 2 threads).  And if its not under load, code already have FastPath implementation which makes sure for IO to take the default path(No rescheduling), by just account the IO in QOS.",
+      "parentUuid": "5d30a6f0_c177c923",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8ed8da3_a40646cc",
         "filename": "src/Protocols/NFS/nfs4_op_read.c",
         "patchSetId": 23
@@ -2051,6 +2195,24 @@
       "side": 1,
       "message": "Still looking for response here.",
       "parentUuid": "3f187486_380cfa3e",
+      "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20eee399_8d66bdfe",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-07-21T14:15:54Z",
+      "side": 1,
+      "message": "Added the details about why IO is suspended in nfs_qos.c nfs4_op_read.c nfs4_op_write.c.",
+      "parentUuid": "984af3c7_c29ad649",
       "revId": "441b071ea402f2f1055da2f7c0c7f6649e5dc1ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
