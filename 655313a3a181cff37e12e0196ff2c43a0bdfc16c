@@ -34,6 +34,24 @@
       "parentUuid": "17da30a4_a88271c6",
       "revId": "655313a3a181cff37e12e0196ff2c43a0bdfc16c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6117910_fa16ff5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-07-21T18:40:44Z",
+      "side": 1,
+      "message": "If the existing rate limiting is insufficient, let\u0027s enhance that rather than adding a new method.\n\nThat said, I really don\u0027t want to unconditionally throttle full debug messages.\n\nOne consideration, we have a submission under review for conditional logging that might be another option for limiting log output.\n\nAnother option is to look at making more use of MID_DEBUG so FULL_DEBUG is used more for when you really want to see everything.",
+      "parentUuid": "baa78197_79104b92",
+      "revId": "655313a3a181cff37e12e0196ff2c43a0bdfc16c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
