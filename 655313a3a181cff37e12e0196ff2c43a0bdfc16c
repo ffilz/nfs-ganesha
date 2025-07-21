@@ -16,6 +16,24 @@
       "message": "A couple comments:\n\nFirst, these are FULL_DEBUG, I would hate to filter out any FULL_DEBUG\n\nSecond, log.h has a capacity for rate limiting messages, if we really want to rate limit, we should use that capability not some new capability.",
       "revId": "655313a3a181cff37e12e0196ff2c43a0bdfc16c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa78197_79104b92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-07-21T11:03:11Z",
+      "side": 1,
+      "message": "We do not filter them out, we just want to rate limit them.\nThe log is inside a while(true) loop which causes so many logs it basically locks any other place that tries to log.\nWe we weren\u0027t aware of the ganesha rate limit. although using it in this case is still sort of a bummer, because allot of in memory work will still be performed.\nBTW these limits both warn and full debug logs. but they will still be very visible....",
+      "parentUuid": "17da30a4_a88271c6",
+      "revId": "655313a3a181cff37e12e0196ff2c43a0bdfc16c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
