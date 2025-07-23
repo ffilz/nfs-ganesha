@@ -75,6 +75,17 @@
 #define IOPS_EXPORT_FU_IO (IOPS_DELAY_USEC * 5)
 #define IOPS_CLIENT_FU_IO (IOPS_EXPORT_FU_IO * 5)
 
+/* Monitoring related macros used for labeling*/
+#ifdef USE_MONITORING
+
+#define QOS_MAX_ADDR_STR_LEN 48
+#define QOS_MAX_LONG_STR_LEN 22
+#define MAX_LABEL_KEY_LEN 60
+#define MAX_METADATA_KEY_LEN 80
+#define MAX_METRIC_NAME_LEN 80
+
+#endif
+
 #define QOS_PRINT_EXPORT(str, gsh_export)                                     \
 	do {                                                                  \
 		struct tmp_export_paths tmp;                                  \
@@ -249,6 +260,7 @@ qos_class_t *allocate_qos_class(qos_class_type_t class_type)
 	qos_class_t *node = gsh_calloc(1, sizeof(qos_class_t));
 
 	node->type = class_type;
+	node->enabled_metric = false;
 	PTHREAD_MUTEX_init(&(node->lock), NULL);
 	PTHREAD_MUTEX_init(&(node->rbucket.lock), NULL);
 	PTHREAD_MUTEX_init(&(node->wbucket.lock), NULL);
@@ -751,6 +763,11 @@ void qos_drain_iops_ios(qos_class_t *qos_class)
 			release_wait_ios(&(wbucket->io_waitlist_qos_iops),
 					 &(wbucket->num_ios_waiting),
 					 &dummy_counter);
+		}
+		if (qos_class->enabled_metric) {
+			monitoring__gauge_set(rbucket->iops_metric_handler, 0);
+			monitoring__gauge_set(wbucket->iops_metric_handler, 0);
+			qos_class->enabled_metric = false;
 		}
 	}
 }
@@ -1293,6 +1310,219 @@ static void setNode_pc(qos_class_t *node, struct gsh_client *gsh_client,
 }
 
 /**
+ * register_metric - Registers a QoS-related gauge metric with
+ * the monitoring system.
+ *
+ * @class_type: Type of QoS class. Can be QOS_EXPORT, QOS_CLIENT,
+ * or defaulting to "pepc".
+ * @sub_type: A string indicating the subtype (e.g., "bw", "iops","tokens").
+ * @rd_wr: A string specifying whether the metric is for read or
+ *         write operations.
+ * @handle: Pointer to a gauge metric handle that will be initialized
+ *          upon successful registration.
+ * @lable: Array of metric labels. The second label (lable[1]) will be
+ *         populated with a key-value pair derived from class_type and sub_type.
+ * @value: The metric value to be set upon registration.
+ * @max_value: A string representing the maximum value associated with the
+ *             metric (used as label value).
+ *
+ * This function constructs metric names, labels, and metadata based
+ * on the input parameters, registers the gauge metric, and sets
+ * its initial value.
+ * It helps in dynamically tracking
+ * performance metrics per QoS class and operation type.
+**/
+
+static void register_metric(char *sub_type, char *rd_wr,
+			    struct gauge_metric_handle *handle,
+			    metric_label_t *lable, uint64_t value,
+			    char *max_value)
+{
+	char label_key[MAX_LABEL_KEY_LEN];
+	char *type =
+		(g_qos_config->qos_type == QOS_PER_EXPORT_ENABLED)   ? "export"
+		: (g_qos_config->qos_type == QOS_PER_CLIENT_ENABLED) ? "client"
+								     : "pepc";
+
+	snprintf(label_key, MAX_LABEL_KEY_LEN, "max_%s_of_%s", sub_type, type);
+	lable[1] = METRIC_LABEL(label_key, max_value);
+
+	char meta_data_key[MAX_METADATA_KEY_LEN];
+
+	snprintf(meta_data_key, MAX_METADATA_KEY_LEN,
+		 "%s bucket of %s with value of %s consumed", rd_wr, type,
+		 sub_type);
+	metric_metadata_t meta_data =
+		METRIC_METADATA(meta_data_key, METRIC_UNIT_NONE);
+
+	char metric_name[MAX_METRIC_NAME_LEN];
+
+	snprintf(metric_name, MAX_METRIC_NAME_LEN,
+		 "QoS_per_%s_%sbucket_%s_info", type, rd_wr, sub_type);
+
+	const metric_label_t labels[] = { lable[0], lable[1] };
+
+	(*handle) = monitoring__register_gauge(metric_name, meta_data, labels,
+					       ARRAY_SIZE(labels));
+
+	monitoring__gauge_set((*handle), value);
+}
+
+/**
+ * register_bucket_metrics - Register QoS bucket metrics for a class.
+ *
+ * Registers gauge metrics for bandwidth, IOPS, and token usage across
+ * read/write buckets of a QoS class. Metrics are added only if the respective
+ * features (bw, iops, tokens) are enabled in the class config.
+ *
+ * Uses `register_metric()` to construct and register each metric with the
+ * appropriate labels and initial values.
+ * @qos_class:   Pointer to a `qos_class_t` structure containing configuration
+ *               flags and the QoS class type (e.g., client, export).
+ * @rd_bucket:   Pointer to the QoS read bucket structure. Contains metrics and
+ *               maximum allowed values for bandwidth, IOPS, and tokens.
+ * @wr_bucket:   Pointer to the QoS write bucket structure. Similar to
+ *               `rd_bucket`, but for write operations.
+ * @label:       Array of metric labels passed to each registered metric. This
+ *               typically includes information like the export_path or clientid
+ *               or export_client.
+ */
+
+static void register_bucket_metrics(qos_class_t *qos_class,
+				    qos_bucket_t *rd_bucket,
+				    qos_bucket_t *wr_bucket,
+				    metric_label_t *label)
+{
+	char max_value[QOS_MAX_LONG_STR_LEN];
+	bool bw_enable = qos_class->bw_enabled;
+	bool iops_enable = qos_class->iops_enabled;
+	bool tokens_enable = qos_class->token_enabled;
+
+	// Register metrics for Bandwidth if enabled.
+	if (bw_enable) {
+		// Read bucket BW
+		snprintf(max_value, QOS_MAX_LONG_STR_LEN, "%ld",
+			 rd_bucket->max_bw_allowed);
+		register_metric("bw", "read", &(rd_bucket->bw_metric_handler),
+				label, rd_bucket->data_consumed, max_value);
+		// Write bucket BW
+		snprintf(max_value, QOS_MAX_LONG_STR_LEN, "%ld",
+			 wr_bucket->max_bw_allowed);
+		register_metric("bw", "write", &(wr_bucket->bw_metric_handler),
+				label, wr_bucket->data_consumed, max_value);
+	}
+	// Register metrics for IOPS if enabled.
+	if (iops_enable) {
+		// Read bucket IOPS
+		snprintf(max_value, QOS_MAX_LONG_STR_LEN, "%ld",
+			 rd_bucket->max_iops_allowed);
+		register_metric("iops", "read",
+				&(rd_bucket->iops_metric_handler), label,
+				rd_bucket->iops_consumed, max_value);
+		// Write bucket IOPS
+		snprintf(max_value, QOS_MAX_LONG_STR_LEN, "%ld",
+			 wr_bucket->max_iops_allowed);
+		register_metric("iops", "write",
+				&(wr_bucket->iops_metric_handler), label,
+				wr_bucket->iops_consumed, max_value);
+	}
+	// Register metrics for Tokens if enabled.
+	if (tokens_enable) {
+		// Read bucket Tokens
+		snprintf(max_value, QOS_MAX_LONG_STR_LEN, "%ld",
+			 rd_bucket->max_available_tokens);
+		register_metric("tokens", "read",
+				&(rd_bucket->tokens_metric_handler), label,
+				rd_bucket->tokens_consumed, max_value);
+		// Write bucket Tokens
+		snprintf(max_value, QOS_MAX_LONG_STR_LEN, "%ld",
+			 wr_bucket->max_available_tokens);
+		register_metric("tokens", "write",
+				&(wr_bucket->tokens_metric_handler), label,
+				wr_bucket->tokens_consumed, max_value);
+	}
+}
+
+/**
+ * register_qos_metrics - Register metrics for a given QoS class.
+ *
+ * Initializes and registers gauge metrics for the provided QoS class based on
+ * its type (EXPORT, CLIENT, or PEPC). For each type:
+ *
+ *   - EXPORT: Uses export path as a label.
+ *   - CLIENT: Uses client IP address as a label.
+ *   - PEPC: Iterates over associated client classes, combining export path and
+ *           client address as the label.
+ *
+ * Delegates per-bucket metric registration to `register_bucket_metrics()` with
+ * appropriate labels.
+ */
+
+static void register_qos_metrics(qos_class_t *qos_class)
+{
+	qos_bucket_t *rd_bucket = &(qos_class->rbucket);
+
+	qos_bucket_t *wr_bucket = &(qos_class->wbucket);
+
+	metric_label_t label[2];
+
+	if (g_qos_config->qos_type == QOS_PER_EXPORT_ENABLED) {
+		struct gsh_export *export = qos_class->gsh_export;
+
+		label[0] = METRIC_LABEL("export_path", export->cfg_fullpath);
+		register_bucket_metrics(qos_class, rd_bucket, wr_bucket, label);
+
+	} else if (g_qos_config->qos_type == QOS_PER_CLIENT_ENABLED) {
+		struct gsh_client *client = qos_class->gsh_client;
+
+		char client_addr[QOS_MAX_ADDR_STR_LEN];
+
+		sprint_sockip(&(client->cl_addrbuf), client_addr,
+			      QOS_MAX_ADDR_STR_LEN);
+		label[0] = METRIC_LABEL("client_Address", client_addr);
+		register_bucket_metrics(qos_class, rd_bucket, wr_bucket, label);
+	}
+
+	else if (g_qos_config->qos_type == QOS_PEREXPORT_PERCLIENT_ENABLED) {
+		struct glist_head *glist;
+		struct gsh_export *export = qos_class->gsh_export;
+		qos_class_t *client_qos_class;
+		char client_addr[QOS_MAX_ADDR_STR_LEN];
+
+		char *export_client;
+		int export_client_len;
+
+		glist_for_each(glist, &qos_class->clients) {
+			client_qos_class =
+				glist_entry(glist, qos_class_t, clients);
+
+			if (client_qos_class->enabled_metric) {
+				continue;
+			}
+
+			rd_bucket = &(client_qos_class->rbucket);
+			wr_bucket = &(client_qos_class->wbucket);
+
+			sprint_sockip(
+				&(client_qos_class->gsh_client->cl_addrbuf),
+				client_addr, QOS_MAX_ADDR_STR_LEN);
+
+			export_client_len = strlen(export->cfg_fullpath) +
+					    strlen(client_addr) + 2;
+			export_client = gsh_malloc(export_client_len);
+			snprintf(export_client, export_client_len, "%s_%s",
+				 export->cfg_fullpath, client_addr);
+			label[0] =
+				METRIC_LABEL("export_clientid", export_client);
+			register_bucket_metrics(client_qos_class, rd_bucket,
+						wr_bucket, label);
+			client_qos_class->enabled_metric = true;
+			gsh_free(export_client);
+		}
+	}
+}
+
+/**
  * Function to insert a new QoS configuration for a gsh_export and
  *		is used while updating new values at runtime.
  * g_qos_iopath_lock needs to be held, if getting called from IO path only.
@@ -1335,6 +1565,13 @@ void qos_perexport_insert(struct gsh_export *gsh_export,
 
 	PTHREAD_MUTEX_lock(&gsh_export->qos_class->lock);
 	setNode_pe(gsh_export->qos_class, gsh_export, lqos_block);
+#ifdef USE_MONITORING
+	if (qos_block->qos_type == QOS_PER_EXPORT_ENABLED &&
+	    !(gsh_export->qos_class->enabled_metric)) {
+		register_qos_metrics(gsh_export->qos_class);
+		gsh_export->qos_class->enabled_metric = true;
+	}
+#endif
 	PTHREAD_MUTEX_unlock(&gsh_export->qos_class->lock);
 }
 
@@ -1357,6 +1594,12 @@ void qos_perclientinsert(struct qos_block_config *qos_block,
 		lqos_block = qos_block;
 
 	client->qos_class = allocate_client(client, lqos_block);
+#ifdef USE_MONITORING
+	if (!(client->qos_class->enabled_metric)) {
+		register_qos_metrics(client->qos_class);
+		client->qos_class->enabled_metric = true;
+	}
+#endif
 }
 
 /**
@@ -1423,7 +1666,14 @@ static inline void qos_consume_token(qos_class_t *qos_class, uint64_t rsize,
 
 	if (bucket == NULL)
 		return;
-	return qos_consume_bucket_token(bucket, rsize);
+	qos_consume_bucket_token(bucket, rsize);
+#ifdef USE_MONITORING
+	if (qos_class->enabled_metric) {
+		monitoring__gauge_set(bucket->tokens_metric_handler,
+				      bucket->tokens_consumed);
+	}
+#endif
+	return;
 }
 
 /**
@@ -1812,6 +2062,10 @@ static inline qos_status_t qos_process_pepc(uint64_t rsize, void *caller_data,
 		ret = qos_check_pepc(qos_class, rsize, op_type, caller_data,
 				     data);
 	}
+#ifdef USE_MONITORING
+	register_qos_metrics(qos_class);
+#endif
+
 	return ret;
 }
 
@@ -1876,6 +2130,11 @@ static inline bool refresh_bucket_token(qos_class_t *qos_class,
 			 ltime, bucket->token_ldct, bucket->tokens_renew_time,
 			 (bucket->token_ldct + bucket->tokens_renew_time));
 		bucket->tokens_consumed = 0;
+#ifdef USE_MONITORING
+		if (qos_class->enabled_metric) {
+			monitoring__gauge_set(bucket->tokens_metric_handler, 0);
+		}
+#endif
 		return true;
 	} else {
 		return false;
@@ -2346,6 +2605,12 @@ qos_status_t qos_process_iops_pe(compound_data_t *data, uint32_t op_type)
 
 	PTHREAD_MUTEX_lock(&qos_class->lock);
 	ret = qos_iops_check(data, bucket);
+#ifdef USE_MONITORING
+	if (qos_class->enabled_metric) {
+		monitoring__gauge_set(bucket->iops_metric_handler,
+				      bucket->iops_consumed);
+	}
+#endif
 	PTHREAD_MUTEX_unlock(&qos_class->lock);
 out:
 	return ret;
@@ -2387,6 +2652,13 @@ qos_status_t qos_process_iops_pc(compound_data_t *data, uint32_t op_type)
 	}
 	PTHREAD_MUTEX_lock(&qos_class->lock);
 	ret = qos_iops_check(data, bucket);
+#ifdef USE_MONITORING
+	if (qos_class->enabled_metric) {
+		monitoring__gauge_set(bucket->iops_metric_handler,
+				      bucket->iops_consumed);
+	}
+#endif
+
 	PTHREAD_MUTEX_unlock(&qos_class->lock);
 out:
 	return ret;
@@ -2440,7 +2712,12 @@ qos_status_t qos_process_iops_pepc(compound_data_t *data, uint32_t op_type)
 		data->qos_flags |= IS_QOS_IOPS_ACCOUNTED;
 		qos_iops_suspend_task(bucket, data, data->argarray_len,
 				      get_time_in_usec());
-
+#ifdef USE_MONITORING
+		if (sub_qos_class->enabled_metric) {
+			monitoring__gauge_set(bucket->iops_metric_handler,
+					      bucket->iops_consumed);
+		}
+#endif
 		return QOS_TASK_SUSPENDED;
 	}
 
