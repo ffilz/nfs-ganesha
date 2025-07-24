@@ -47,7 +47,8 @@
  * @param[in]     bcount Buffer size
  * @param[in,out] basepp Offset into "file" after this read
  */
-int vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp)
+
+ int  vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp) 
 {
 	return getdirentries(fd, buf, bcount, basepp);
 }
