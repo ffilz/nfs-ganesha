@@ -116,6 +116,7 @@ static nfsstat4 acquire_layout_state(compound_data_t *data,
 		 * simply use it, return with the reference we just
 		 * acquired.
 		 */
+		inc_state_t_ref(supplied_state);
 		*layout_state = supplied_state;
 		goto out;
 	} else if ((supplied_state->state_type == STATE_TYPE_SHARE) ||
