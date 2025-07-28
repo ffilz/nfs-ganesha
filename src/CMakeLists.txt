@@ -1664,6 +1664,12 @@ else(USE_MAN_PAGE)
   set(BCOND_MAN_PAGE "%bcond_with")
 endif(USE_MAN_PAGE)
 
+if (ENABLE_QOS)
+  set(BCOND_QOS "%bcond_without")
+else(ENABLE_QOS)
+  set(BCOND_QOS "%bcond_with")
+endif(ENABLE_QOS)
+
 if(USE_RADOS_RECOV)
     set(BCOND_RADOS_RECOV "%bcond_without")
 else(USE_RADOS_RECOV)

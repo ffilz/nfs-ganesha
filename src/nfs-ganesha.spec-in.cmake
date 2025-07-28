@@ -758,7 +758,9 @@ exit 0
 %endif
 
 %if %{with qos}
+%if %{with man_page}
 %{_mandir}/*/ganesha-qos-config.8.gz
+%endif
 %endif
 
 %if %{with rados_urls}

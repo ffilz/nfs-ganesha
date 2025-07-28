@@ -1604,9 +1604,7 @@ static void qos_token_exausted_suspend_task(qos_class_t *qos_class,
 	    !client->epoll_disabled) {
 		client->epoll_disabled = 1;
 		QOS_PRINT_CLIENT("Suspending socket", op_ctx->client);
-		/*TODO: Need to uncomment once libntirpc changes
-		 * gets in by Animesh Javali */
-		/* svc_rqst_qos_suspend_socket(client->rq_xprt); */
+		svc_rqst_qos_suspend_socket(client->rq_xprt);
 	} else if (client->num_ios_waiting >= SUSPEND_SOCKET_IO_LIMIT &&
 		   client->epoll_disabled == 1) {
 		timeout = get_time_future_useconds(
@@ -1941,9 +1939,7 @@ static inline void refresh_qos_client(struct glist_head *clients,
 			glist_del(&client->token_ex_cl);
 			gsh_free(client);
 			if (epd) {
-				/* TODO: Need to uncomment once libntirpc
-				 * changes gets in by Animesh Javali */
-				/* svc_rqst_qos_resume_socket(rq_xprt); */
+				svc_rqst_qos_resume_socket(rq_xprt);
 				epd = 0;
 			}
 			rq_xprt = NULL;
