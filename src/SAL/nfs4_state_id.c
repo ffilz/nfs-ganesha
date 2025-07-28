@@ -807,6 +807,7 @@ nfsstat4 nfs4_Check_Stateid(stateid4 *stateid, struct fsal_obj_handle *fsal_obj,
 	clientid4 clientid;
 	nfs_client_id_t *pclientid;
 	int rc;
+	bool stateid_is_special = false;
 	nfsstat4 status;
 
 	if (isDebug(COMPONENT_STATE)) {
@@ -855,6 +856,7 @@ nfsstat4 nfs4_Check_Stateid(stateid4 *stateid, struct fsal_obj_handle *fsal_obj,
 
 			/* Copy current stateid in and proceed to checks */
 			*stateid = data->current_stateid;
+			stateid_is_special = true;
 			goto check_it;
 		}
 
@@ -1071,8 +1073,8 @@ check_it:
 
 	/* Whether stateid.seqid may be zero depends on the state type
 	   exclusively, See RFC 5661 pp. 161,287-288. */
-	if ((state2->state_type == STATE_TYPE_LAYOUT) ||
-	    (stateid->seqid != 0)) {
+	if (!stateid_is_special && ((state2->state_type == STATE_TYPE_LAYOUT) ||
+	    (stateid->seqid != 0))) {
 		/* Check seqid in stateid */
 
 		/**
