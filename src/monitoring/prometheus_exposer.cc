@@ -34,9 +34,10 @@
 #include <unistd.h>
 #include <streambuf>
 
+#ifdef USE_MONITORING
+
 #include "prometheus_exposer.h"
 
-#ifdef USE_MONITORING
 
 #define PERROR(MESSAGE)                                                    \
 	fprintf(stderr, "[%s:%d] %s: %s\n", __FILE__, __LINE__, (MESSAGE), \
