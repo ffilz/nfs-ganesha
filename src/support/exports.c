@@ -268,6 +268,26 @@ static int StrExportOptions(struct display_buffer *dspbuf,
 	if (b_left <= 0)
 		return b_left;
 
+#ifdef USE_TLS
+	if ((p_perms->set & EXPORT_OPTION_XPRT_TYPES) != 0) {
+		if ((p_perms->options & EXPORT_OPTION_TLS) != 0)
+			b_left = display_cat(dspbuf, ", tls");
+
+		if (b_left <= 0)
+			return b_left;
+
+		if ((p_perms->options & EXPORT_OPTION_MTLS) != 0)
+			b_left = display_cat(dspbuf, ", mtls");
+
+		if (b_left <= 0)
+			return b_left;
+	} else
+		b_left = display_cat(dspbuf, ",     ");
+
+	if (b_left <= 0)
+		return b_left;
+#endif
+
 	if ((p_perms->set & EXPORT_OPTION_AUTH_TYPES) != 0) {
 		if ((p_perms->options & EXPORT_OPTION_AUTH_NONE) != 0)
 			b_left = display_cat(dspbuf, ", none");
@@ -2085,6 +2105,24 @@ static struct config_item_list sec_types[] = {
 };
 
 /**
+ * @brief Transport security options list for XprtSec parameter
+ */
+
+#ifdef USE_TLS
+static struct config_item_list xprt_sec_types[] = {
+	CONFIG_LIST_TOK("none", 0), CONFIG_LIST_TOK("tls", EXPORT_OPTION_TLS),
+	CONFIG_LIST_TOK("mtls", EXPORT_OPTION_MTLS), CONFIG_LIST_EOL
+};
+
+#define CONF_XPRT_SEC_PARAM(_struct_, _perms_)                            \
+	CONF_ITEM_ENUM_BITS_SET("XprtSec", EXPORT_OPTION_XPRT_DEFAULTS,   \
+				EXPORT_OPTION_XPRT_TYPES, xprt_sec_types, \
+				_struct_, _perms_.options, _perms_.set),
+#else
+#define CONF_XPRT_SEC_PARAM(_struct_, _perms_) /* TLS not available */
+#endif
+
+/**
  * @brief Client UID squash item list for Squash parameter
  */
 
@@ -2141,72 +2179,75 @@ static struct config_item_list read_access_check_policy_type[] = {
 	CONFIG_LIST_TOK("all", READ_ACCESS_CHECK_POLICY_ALL), CONFIG_LIST_EOL
 };
 
-#define CONF_EXPORT_PERMS(_struct_, _perms_)                                             \
-	/* Note: Access_Type defaults to None on purpose */                              \
-	CONF_ITEM_ENUM_BITS_SET(                                                         \
-		"Access_Type", EXPORT_OPTION_NO_ACCESS,                                  \
-		EXPORT_OPTION_ACCESS_MASK, access_types, _struct_,                       \
-		_perms_.options,                                                         \
-		_perms_.set), /* Note: Protocols will now pick up from NFS Core Param */ \
-		CONF_ITEM_LIST_BITS_SET("Protocols",                                     \
-					EXPORT_OPTION_PROTO_DEFAULTS,                    \
-					EXPORT_OPTION_PROTOCOLS,                         \
-					nfs_protocols, _struct_,                         \
-					_perms_.options, _perms_.set),                   \
-		CONF_ITEM_LIST_BITS_SET("Transports",                                    \
-					EXPORT_OPTION_XPORT_DEFAULTS,                    \
-					EXPORT_OPTION_TRANSPORTS, transports,            \
-					_struct_, _perms_.options,                       \
-					_perms_.set),                                    \
-		CONF_ITEM_ANON_ID_SET("Anonymous_uid", ANON_UID, _struct_,               \
-				      _perms_.anonymous_uid,                             \
-				      EXPORT_OPTION_ANON_UID_SET,                        \
-				      _perms_.set),                                      \
-		CONF_ITEM_ANON_ID_SET("Anonymous_gid", ANON_GID, _struct_,               \
-				      _perms_.anonymous_gid,                             \
-				      EXPORT_OPTION_ANON_GID_SET,                        \
-				      _perms_.set),                                      \
-		CONF_ITEM_LIST_BITS_SET("SecType",                                       \
-					EXPORT_OPTION_AUTH_DEFAULTS,                     \
-					EXPORT_OPTION_AUTH_TYPES, sec_types,             \
-					_struct_, _perms_.options,                       \
-					_perms_.set),                                    \
-		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                           \
-				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_,           \
-				      _perms_.options, _perms_.set),                     \
-		CONF_ITEM_BOOLBIT_SET("Manage_Gids", false,                              \
-				      EXPORT_OPTION_MANAGE_GIDS, _struct_,               \
-				      _perms_.options, _perms_.set),                     \
-		CONF_ITEM_LIST_BITS_SET("Squash", EXPORT_OPTION_ROOT_SQUASH,             \
-					EXPORT_OPTION_SQUASH_TYPES,                      \
-					squash_types, _struct_,                          \
-					_perms_.options, _perms_.set),                   \
-		CONF_ITEM_BOOLBIT_SET("NFS_Commit", false,                               \
-				      EXPORT_OPTION_COMMIT, _struct_,                    \
-				      _perms_.options, _perms_.set),                     \
-		CONF_ITEM_ENUM_BITS_SET("Delegations",                                   \
-					EXPORT_OPTION_NO_DELEGATIONS,                    \
-					EXPORT_OPTION_DELEGATIONS,                       \
-					delegations, _struct_,                           \
+/* Note: Access_Type defaults to None on purpose */
+/* Note: Protocols will now pick up from NFS Core Param */
+#define CONF_EXPORT_PERMS(_struct_, _perms_)                                  \
+	CONF_ITEM_ENUM_BITS_SET("Access_Type", EXPORT_OPTION_NO_ACCESS,       \
+				EXPORT_OPTION_ACCESS_MASK, access_types,      \
+				_struct_, _perms_.options, _perms_.set),      \
+		CONF_ITEM_LIST_BITS_SET("Protocols",                          \
+					EXPORT_OPTION_PROTO_DEFAULTS,         \
+					EXPORT_OPTION_PROTOCOLS,              \
+					nfs_protocols, _struct_,              \
+					_perms_.options, _perms_.set),        \
+		CONF_ITEM_LIST_BITS_SET("Transports",                         \
+					EXPORT_OPTION_XPORT_DEFAULTS,         \
+					EXPORT_OPTION_TRANSPORTS, transports, \
+					_struct_, _perms_.options,            \
+					_perms_.set),                         \
+		CONF_ITEM_ANON_ID_SET("Anonymous_uid", ANON_UID, _struct_,    \
+				      _perms_.anonymous_uid,                  \
+				      EXPORT_OPTION_ANON_UID_SET,             \
+				      _perms_.set),                           \
+		CONF_ITEM_ANON_ID_SET("Anonymous_gid", ANON_GID, _struct_,    \
+				      _perms_.anonymous_gid,                  \
+				      EXPORT_OPTION_ANON_GID_SET,             \
+				      _perms_.set),                           \
+		CONF_ITEM_LIST_BITS_SET("SecType",                            \
+					EXPORT_OPTION_AUTH_DEFAULTS,          \
+					EXPORT_OPTION_AUTH_TYPES, sec_types,  \
+					_struct_, _perms_.options,            \
+					_perms_.set),                         \
+		CONF_XPRT_SEC_PARAM(_struct_, _perms_)                        \
+			CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,        \
+					      EXPORT_OPTION_PRIVILEGED_PORT,  \
+					      _struct_, _perms_.options,      \
+					      _perms_.set),                   \
+		CONF_ITEM_BOOLBIT_SET("Manage_Gids", false,                   \
+				      EXPORT_OPTION_MANAGE_GIDS, _struct_,    \
+				      _perms_.options, _perms_.set),          \
+		CONF_ITEM_LIST_BITS_SET("Squash", EXPORT_OPTION_ROOT_SQUASH,  \
+					EXPORT_OPTION_SQUASH_TYPES,           \
+					squash_types, _struct_,               \
+					_perms_.options, _perms_.set),        \
+		CONF_ITEM_BOOLBIT_SET("NFS_Commit", false,                    \
+				      EXPORT_OPTION_COMMIT, _struct_,         \
+				      _perms_.options, _perms_.set),          \
+		CONF_ITEM_ENUM_BITS_SET("Delegations",                        \
+					EXPORT_OPTION_NO_DELEGATIONS,         \
+					EXPORT_OPTION_DELEGATIONS,            \
+					delegations, _struct_,                \
 					_perms_.options, _perms_.set)
 
-#define CONF_PSEUDOFS_PERMS(_struct_, _perms_)                                 \
-	/* Note: Access_Type defaults to MD READ on purpose */                 \
-	/*       MD READ or NONE are the only access that makes sense. */      \
-	CONF_ITEM_ENUM_BITS_SET("Access_Type", EXPORT_OPTION_MD_READ_ACCESS,   \
-				EXPORT_OPTION_ACCESS_MASK, access_types,       \
-				_struct_, _perms_.options, _perms_.set),       \
-		CONF_ITEM_LIST_BITS_SET("Transports", EXPORT_OPTION_TCP,       \
-					EXPORT_OPTION_TRANSPORTS, transports,  \
-					_struct_, _perms_.options,             \
-					_perms_.set),                          \
-		CONF_ITEM_LIST_BITS_SET("SecType", EXPORT_OPTION_AUTH_TYPES,   \
-					EXPORT_OPTION_AUTH_TYPES, sec_types,   \
-					_struct_, _perms_.options,             \
-					_perms_.set),                          \
-		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                 \
-				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_, \
-				      _perms_.options, _perms_.set)
+#define CONF_PSEUDOFS_PERMS(_struct_, _perms_)                                \
+	/* Note: Access_Type defaults to MD READ on purpose */                \
+	/*       MD READ or NONE are the only access that makes sense. */     \
+	CONF_ITEM_ENUM_BITS_SET("Access_Type", EXPORT_OPTION_MD_READ_ACCESS,  \
+				EXPORT_OPTION_ACCESS_MASK, access_types,      \
+				_struct_, _perms_.options, _perms_.set),      \
+		CONF_ITEM_LIST_BITS_SET("Transports", EXPORT_OPTION_TCP,      \
+					EXPORT_OPTION_TRANSPORTS, transports, \
+					_struct_, _perms_.options,            \
+					_perms_.set),                         \
+		CONF_ITEM_LIST_BITS_SET("SecType", EXPORT_OPTION_AUTH_TYPES,  \
+					EXPORT_OPTION_AUTH_TYPES, sec_types,  \
+					_struct_, _perms_.options,            \
+					_perms_.set),                         \
+		CONF_XPRT_SEC_PARAM(_struct_, _perms_)                        \
+			CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,        \
+					      EXPORT_OPTION_PRIVILEGED_PORT,  \
+					      _struct_, _perms_.options,      \
+					      _perms_.set)
 
 void *export_client_allocator(void)
 {
