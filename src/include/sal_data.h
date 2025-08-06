@@ -845,11 +845,12 @@ struct nfs_client_record_t {
 						   one. */
 	sockaddr_t cr_server_addr; /*< Server IP address the client connected to
 				    */
-	uint32_t cr_pnfs_flags; /*< pNFS flags.  RFC 5661 allows us
+	uint32_t cr_flags; /*< pNFS flags.  RFC 5661 allows us
 				     to treat identical co_owners with
 				     different pNFS flags as
 				     disjoint. Linux client stupidity
 				     forces us to do so. */
+			   /* cr_flags also include TLS connection or NOT */
 	int cr_client_val_len; /*< Length of owner */
 	char cr_client_val[]; /*< Supplied co_owner */
 };

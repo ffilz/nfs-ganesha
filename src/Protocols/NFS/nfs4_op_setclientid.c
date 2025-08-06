@@ -78,6 +78,7 @@ enum nfs_req_result nfs4_op_setclientid(struct nfs_argop4 *op,
 	struct display_buffer dspbuf_clientid4 = { sizeof(str_clientid4),
 						   str_clientid4,
 						   str_clientid4 };
+	uint32_t server_flags = 0;
 	nfs_client_record_t *client_record;
 	nfs_client_id_t *conf;
 	nfs_client_id_t *unconf;
@@ -120,10 +121,17 @@ enum nfs_req_result nfs4_op_setclientid(struct nfs_argop4 *op,
 
 	/* server IP required for IP based recovery backend */
 	server_addr = svc_getrpclocal(data->req->rq_xprt);
-
+#ifdef USE_TLS
+	if (data->req->rq_xprt->xp_tls.tls_established) {
+		server_flags |= EXCHGID4_FLAG_TLS_ESTABLISHED;
+		if(data->req->rq_xprt->xp_tls.mtls)
+			server_flags |= EXCHGID4_FLAG_MTLS_ESTABLISHED;
+	}
+#endif
 	/* Do we already have one or more records for client id (x)? */
 	client_record = get_client_record(arg_SETCLIENTID4->client.id.id_val,
-					  arg_SETCLIENTID4->client.id.id_len, 0,
+					  arg_SETCLIENTID4->client.id.id_len,
+					  server_flags,
 					  server_addr);
 
 	if (client_record == NULL) {
