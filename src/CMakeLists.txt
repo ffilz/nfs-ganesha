@@ -391,6 +391,11 @@ endif(USE_GTEST)
 # Enable NFS Over RDMA Support
 option(USE_NFS_RDMA "enable NFS/RDMA support" OFF)
 
+# TLS configuration options
+option(USE_TLS "Enable TLS support" OFF)
+option(USE_OPENSSL "Use OpenSSL as TLS backend" OFF)
+option(USE_GNUTLS "Use GNUTLS as TLS backend" OFF)
+
 # Enable 9P Support
 option(USE_9P "enable 9P support" ON)
 option(USE_9P_RDMA "enable 9P_RDMA support" OFF)
@@ -506,6 +511,58 @@ IF(MOOSHIKA_PREFIX)
   set(MOOSHIKA_PREFIX ${MOOSHIKA_PREFIX} CACHE PATH "Path to Mooshika installation")
   set(ENV{PKG_CONFIG_PATH} "${PKG_CONFIG_PATH}:${MOOSHIKA_PREFIX}/lib/pkgconfig")
 ENDIF()
+
+# TLS backend selection - ensure only one is enabled
+if(USE_TLS)
+  if(USE_OPENSSL)
+    message(WARNING "TLS using OpenSSL.")
+    set(USE_GNUTLS OFF)
+  endif(USE_OPENSSL)
+
+  if(USE_GNUTLS)
+    message(WARNING "TLS using GNUTLS")
+    set(USE_OPENSSL OFF)
+  endif(USE_GNUTLS)
+
+endif(USE_TLS)
+
+# TLS prefix path
+if(TLS_PREFIX)
+  set(TLS_PREFIX ${TLS_PREFIX} CACHE PATH "Path to TLS installation")
+  list(APPEND CMAKE_PREFIX_PATH "${TLS_PREFIX}")
+  list(APPEND CMAKE_LIBRARY_PATH "${TLS_PREFIX}/lib")
+  list(APPEND CMAKE_LIBRARY_PATH "${TLS_PREFIX}/lib64")
+endif(TLS_PREFIX)
+
+# Find TLS libraries based on configuration
+if(USE_TLS)
+  set(TLS_COMPONENTS "")
+
+  if(USE_OPENSSL)
+    list(APPEND TLS_COMPONENTS "openssl")
+  endif(USE_OPENSSL)
+
+  if(USE_GNUTLS)
+    list(APPEND TLS_COMPONENTS "gnutls")
+  endif(USE_GNUTLS)
+
+  find_package(TLS REQUIRED ${TLS_COMPONENTS})
+
+  # Set appropriate compile definitions based on TLS backend
+  if(TLS_BACKEND STREQUAL "OPENSSL")
+    add_definitions(-DTLS_BACKEND_OPENSSL)
+  elseif(TLS_BACKEND STREQUAL "GNUTLS")
+    add_definitions(-DTLS_BACKEND_GNUTLS)
+  else(TLS_BACKEND)
+    set(USE_TLS OFF)
+    message(WARNING "Could not find TLS dependencies, disabling TLS Support")
+  endif(TLS_BACKEND)
+
+  # Add TLS libraries to system libraries
+  set(SYSTEM_LIBRARIES ${TLS_LIBRARIES} ${SYSTEM_LIBRARIES})
+  include_directories(${TLS_INCLUDE_DIRS})
+endif(USE_TLS)
+
 
 if(USE_NFS_RDMA OR USE_9P_RDMA)
   check_library_exists(rdmacm rdma_create_qp "" RDMACM_FOUND)
@@ -1450,6 +1507,10 @@ message(STATUS "RADOS_URLS = ${RADOS_URLS}")
 message(STATUS "USE_CUNIT = ${USE_CUNIT}")
 message(STATUS "USE_UNWIND = ${USE_UNWIND}")
 message(STATUS "SANITIZE_ADDRESS = ${SANITIZE_ADDRESS}")
+message(STATUS "USE_TLS = ${USE_TLS}")
+message(STATUS "USE_OPENSSL = ${USE_OPENSSL}")
+message(STATUS "USE_GNUTLS = ${USE_GNUTLS}")
+message(STATUS "TLS_BACKEND = ${TLS_BACKEND}")
 
 set(USE_CB_SIMULATOR ${USE_CB_SIMULATOR}
   CACHE BOOL
@@ -1639,6 +1700,25 @@ if(${ALLOCATOR} STREQUAL "tcmalloc")
 else(${ALLOCATOR} STREQUAL "tcmalloc")
     set(BCOND_TCMALLOC "%bcond_with")
 endif(${ALLOCATOR} STREQUAL "tcmalloc")
+
+if(USE_TLS)
+  set(BCOND_TLS "%bcond_without")
+else(USE_TLS)
+  set(BCOND_TLS "%bcond_with")
+endif(USE_TLS)
+
+if(USE_OPENSSL)
+  set(BCOND_OPENSSL "%bcond_without")
+else(USE_OPENSSL)
+  set(BCOND_OPENSSL "%bcond_with")
+endif(USE_OPENSSL)
+
+if(USE_GNUTLS)
+       set(BCOND_GNUTLS "%bcond_without")
+else(USE_GNUTLS)
+       set(BCOND_GNUTLS "%bcond_with")
+endif(USE_GNUTLS)
+
 
 if(USE_ADMIN_TOOLS)
     set(BCOND_UTILS "%bcond_without")
