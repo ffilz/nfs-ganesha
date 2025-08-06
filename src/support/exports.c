@@ -268,6 +268,26 @@ static int StrExportOptions(struct display_buffer *dspbuf,
 	if (b_left <= 0)
 		return b_left;
 
+#ifdef USE_TLS
+	if ((p_perms->set & EXPORT_OPTION_XPRT_TYPES) != 0) {
+		if ((p_perms->options & EXPORT_OPTION_TLS) != 0)
+			b_left = display_cat(dspbuf, ", tls");
+
+		if (b_left <= 0)
+			return b_left;
+
+		if ((p_perms->options & EXPORT_OPTION_MTLS) != 0)
+			b_left = display_cat(dspbuf, ", mtls");
+
+		if (b_left <= 0)
+			return b_left;
+	} else
+		b_left = display_cat(dspbuf, ",     ");
+
+	if (b_left <= 0)
+		return b_left;
+#endif
+
 	if ((p_perms->set & EXPORT_OPTION_AUTH_TYPES) != 0) {
 		if ((p_perms->options & EXPORT_OPTION_AUTH_NONE) != 0)
 			b_left = display_cat(dspbuf, ", none");
@@ -2073,6 +2093,28 @@ static struct config_item_list sec_types[] = {
 };
 
 /**
+ * @brief Transport security options list for XprtSec parameter
+ */
+
+#ifdef USE_TLS
+static struct config_item_list xprt_sec_types[] = {
+	CONFIG_LIST_TOK("none", 0),
+	CONFIG_LIST_TOK("tls", EXPORT_OPTION_TLS),
+	CONFIG_LIST_TOK("mtls", EXPORT_OPTION_MTLS),
+	CONFIG_LIST_EOL
+};
+
+#define CONF_XPRT_SEC_PARAM(_struct_, _perms_)                                 \
+	CONF_ITEM_ENUM_BITS_SET("XprtSec",                                     \
+				EXPORT_OPTION_XPRT_DEFAULTS,                   \
+				EXPORT_OPTION_XPRT_TYPES, xprt_sec_types,      \
+				_struct_, _perms_.options,                     \
+				_perms_.set),
+#else
+#define CONF_XPRT_SEC_PARAM(_struct_, _perms_) /* TLS not available */
+#endif
+
+/**
  * @brief Client UID squash item list for Squash parameter
  */
 
@@ -2159,6 +2201,7 @@ static struct config_item_list read_access_check_policy_type[] = {
 					EXPORT_OPTION_AUTH_TYPES, sec_types,             \
 					_struct_, _perms_.options,                       \
 					_perms_.set),                                    \
+		CONF_XPRT_SEC_PARAM(_struct_, _perms_)                                   \
 		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                           \
 				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_,           \
 				      _perms_.options, _perms_.set),                     \
@@ -2192,6 +2235,7 @@ static struct config_item_list read_access_check_policy_type[] = {
 					EXPORT_OPTION_AUTH_TYPES, sec_types,   \
 					_struct_, _perms_.options,             \
 					_perms_.set),                          \
+		CONF_XPRT_SEC_PARAM(_struct_, _perms_)                         \
 		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                 \
 				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_, \
 				      _perms_.options, _perms_.set)
