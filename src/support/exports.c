@@ -268,6 +268,26 @@ static int StrExportOptions(struct display_buffer *dspbuf,
 	if (b_left <= 0)
 		return b_left;
 
+#ifdef USE_TLS
+	if ((p_perms->set & EXPORT_OPTION_XPRT_TYPES) != 0) {
+		if ((p_perms->options & EXPORT_OPTION_TLS) != 0)
+			b_left = display_cat(dspbuf, ", tls");
+
+		if (b_left <= 0)
+			return b_left;
+
+		if ((p_perms->options & EXPORT_OPTION_MTLS) != 0)
+			b_left = display_cat(dspbuf, ", mtls");
+
+		if (b_left <= 0)
+			return b_left;
+	} else
+		b_left = display_cat(dspbuf, ",     ");
+
+	if (b_left <= 0)
+		return b_left;
+#endif
+
 	if ((p_perms->set & EXPORT_OPTION_AUTH_TYPES) != 0) {
 		if ((p_perms->options & EXPORT_OPTION_AUTH_NONE) != 0)
 			b_left = display_cat(dspbuf, ", none");
@@ -1952,7 +1972,10 @@ static struct config_item_list transports[] = {
 };
 
 /**
- * @brief Security options list for SecType parameter
+ * @brief Authentication options list for SecType parameter
+ *
+ * SecType now only accepts authentication methods. Transport security
+ * is handled separately by the XprtSec parameter.
  */
 
 static struct config_item_list sec_types[] = {
@@ -1963,6 +1986,28 @@ static struct config_item_list sec_types[] = {
 	CONFIG_LIST_TOK("krb5p", EXPORT_OPTION_RPCSEC_GSS_PRIV),
 	CONFIG_LIST_EOL
 };
+
+/**
+ * @brief Transport security options list for XprtSec parameter
+ */
+
+#ifdef USE_TLS
+static struct config_item_list xprt_sec_types[] = {
+	CONFIG_LIST_TOK("none", 0),
+	CONFIG_LIST_TOK("tls", EXPORT_OPTION_TLS),
+	CONFIG_LIST_TOK("mtls", EXPORT_OPTION_MTLS),
+	CONFIG_LIST_EOL
+};
+
+#define CONF_XPRT_SEC_PARAM(_struct_, _perms_)                                 \
+	CONF_ITEM_ENUM_BITS_SET("XprtSec",                                     \
+				EXPORT_OPTION_XPRT_DEFAULTS,                   \
+				EXPORT_OPTION_XPRT_TYPES, xprt_sec_types,      \
+				_struct_, _perms_.options,                     \
+				_perms_.set),
+#else
+#define CONF_XPRT_SEC_PARAM(_struct_, _perms_) /* TLS not available */
+#endif
 
 /**
  * @brief Client UID squash item list for Squash parameter
@@ -2051,6 +2096,7 @@ static struct config_item_list read_access_check_policy_type[] = {
 					EXPORT_OPTION_AUTH_TYPES, sec_types,             \
 					_struct_, _perms_.options,                       \
 					_perms_.set),                                    \
+		CONF_XPRT_SEC_PARAM(_struct_, _perms_)                                   \
 		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                           \
 				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_,           \
 				      _perms_.options, _perms_.set),                     \
@@ -2084,6 +2130,7 @@ static struct config_item_list read_access_check_policy_type[] = {
 					EXPORT_OPTION_AUTH_TYPES, sec_types,   \
 					_struct_, _perms_.options,             \
 					_perms_.set),                          \
+		CONF_XPRT_SEC_PARAM(_struct_, _perms_)                         \
 		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                 \
 				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_, \
 				      _perms_.options, _perms_.set)
@@ -2372,6 +2419,8 @@ static void *pseudofs_init(void *link_mem, void *self_struct)
 	 * Root is allowed
 	 * MD Read Access
 	 * Allow use of default auth types
+	 * if TLS required, user need to explicitly populate Sec=tls or mtls.
+	 *
 	 *
 	 * Allow non-privileged client ports to access pseudo export.
 	 */
