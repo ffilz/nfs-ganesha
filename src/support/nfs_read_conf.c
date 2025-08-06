@@ -55,6 +55,7 @@
 #include "config_parsing.h"
 #include "pwnam_wrappers.h"
 #include "nfs_qos.h"
+#include "gsh_tls.h"
 
 /**
  * @brief Core configuration parameters
@@ -697,3 +698,73 @@ struct config_block version4_param = {
 	.blk_desc.u.blk.params = version4_params,
 	.blk_desc.u.blk.commit = noop_conf_commit
 };
+
+#ifdef USE_TLS
+gsh_tls_config_t tls_config;
+
+/**
+ * @brief Validate TLS configuratione
+ */
+static int tls_config_commit(void *node, void *link_mem, void *self_struct,
+			     struct config_error_type *err_type)
+{
+	/* Validate TLS configuration parameters */
+	if (tls_config.enabled) {
+		LogInfo(COMPONENT_CONFIG, "TLS enabled");
+
+		/* Validate required TLS files are specified */
+		if (!tls_config.cert_file) {
+			LogCrit(COMPONENT_CONFIG,
+				"TLS_Cert_File required when TLS is enabled");
+			err_type->invalid = true;
+			return 1;
+		}
+
+		if (!tls_config.key_file) {
+			LogCrit(COMPONENT_CONFIG,
+				"TLS_Key_File required when TLS is enabled");
+			err_type->invalid = true;
+			return 1;
+		}
+
+		if (!tls_config.ca_file) {
+			LogCrit(COMPONENT_CONFIG,
+				"TLS_CA_File required when TLS is enabled");
+			err_type->invalid = true;
+			return 1;
+		}
+	} else {
+		LogInfo(COMPONENT_CONFIG, "TLS disabled");
+	}
+
+	return 0;
+}
+
+struct config_item tls_config_items[] = {
+	CONF_ITEM_BOOL("Enable_TLS", false, gsh_tls_config, enabled),
+	CONF_ITEM_PATH("TLS_CA_File", 1, MAXPATHLEN, TLS_CA_FILE,
+		       gsh_tls_config, ca_file),
+	CONF_ITEM_PATH("TLS_Cert_File", 1, MAXPATHLEN, TLS_CERT_FILE,
+		       gsh_tls_config, cert_file),
+	CONF_ITEM_PATH("TLS_Key_File", 1, MAXPATHLEN, TLS_KEY_FILE,
+		       gsh_tls_config, key_file),
+	CONF_ITEM_STR("TLS_Ciphers", 1, MAXPATHLEN, NULL, gsh_tls_config,
+		      ciphers),
+	CONF_ITEM_STR("TLS_Min_Version", 1, MAXPATHLEN, "TLSv1.3",
+		      gsh_tls_config, min_version),
+	CONF_ITEM_UI32("TLS_Session_Timeout", 1, 86400, 300, gsh_tls_config,
+		       session_timeout),
+	CONF_ITEM_BOOL("Enable_KTLS", false, gsh_tls_config, ktls),
+	CONF_ITEM_BOOL("Enable_debug", false, gsh_tls_config, debug),
+	CONFIG_EOL
+};
+
+struct config_block tls_core = {
+	.blk_desc.name = "TLS_CONFIG",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.flags = CONFIG_UNIQUE, /* too risky to have more */
+	.blk_desc.u.blk.init = noop_conf_init,
+	.blk_desc.u.blk.params = tls_config_items,
+	.blk_desc.u.blk.commit = tls_config_commit
+};
+#endif
