@@ -55,6 +55,9 @@ NLM_Port (uint16, range 0 to UINT16_MAX, default 0)
 NSM_Port (uint16, range 0 to UINT16_MAX, default 0)
     Port number used by NSM Protocol.
 
+PMAP_Port (uint16, range 0 to UINT16_MAX, default 111)
+    Port number used by PORTMAP/RPCBIND Protocol.
+
 Rquota_Port (uint16, range 0 to UINT16_MAX, default 875)
     Port number used by Rquota Protocol.
 
@@ -287,6 +290,10 @@ Allow_Set_Io_Flusher_Fail(bool, default false)
 Use_statd(bool, default true)
   If true, use external rpc.statd. If false, provide NSM protocol internally
   on NSM_Port.
+
+Use_rpcbind(bool, default true)
+  If true, use external rpcbind. If false, provide PORTMAP/RPCBIND protocol
+  internally on PMAP_Port.
 
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
