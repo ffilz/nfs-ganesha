@@ -320,7 +320,13 @@ static struct config_item core_params[] = {
 		       nfs_rdma_protocol_versions, nfs_core_param,
 		       nfs_rdma_supported_protocol_versions),
 #endif
-
+#ifdef _INTERNAL_RPCBIND
+	CONF_ITEM_UI16("PMAP_Port", PMAPPORT, PMAPPORT, PMAPPORT,
+		       nfs_core_param, port[P_RPCBIND]),
+	CONF_ITEM_BOOL("Use_rpcbind", true, nfs_core_param, use_rpcbind),
+	CONF_ITEM_UI32("PMAP_Program", PMAPPROG, PMAPPROG, PMAPPROG,
+		       nfs_core_param, program[P_RPCBIND]),
+#endif
 	CONF_ITEM_IP_ADDR("Bind_Addr", "0.0.0.0", nfs_core_param, bind_addr),
 	CONF_ITEM_STR("Interface_Name", 1, IF_NAMESIZE, NULL, nfs_core_param,
 		      interface_name),
