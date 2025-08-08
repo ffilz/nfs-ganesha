@@ -510,6 +510,188 @@ const nfs_function_desc_t nlm4_func_desc[] = {
 };
 #endif /* _USE_NLM */
 
+#ifdef _INTERNAL_RPCBIND
+const nfs_function_desc_t pmap_func_desc[] = {
+	[0] = { .service_function = rpcbind_proc_null,
+		.free_function = rpcbind_nothing_free,
+		.xdr_decode_func = (xdrproc_t)xdr_void,
+		.xdr_encode_func = (xdrproc_t)xdr_void,
+		.funcname = "PMAPPROC_NULL",
+		.dispatch_behaviour = NOTHING_SPECIAL },
+	[PMAPPROC_SET] = { .service_function = pmap_proc_set,
+			   .free_function = rpcbind_nothing_free,
+			   .xdr_decode_func = (xdrproc_t)xdr_pmap,
+			   .xdr_encode_func = (xdrproc_t)xdr_bool,
+			   .funcname = "PMAPPROC_SET",
+			   .dispatch_behaviour = NOTHING_SPECIAL },
+	[PMAPPROC_UNSET] = { .service_function = pmap_proc_unset,
+			     .free_function = rpcbind_nothing_free,
+			     .xdr_decode_func = (xdrproc_t)xdr_pmap,
+			     .xdr_encode_func = (xdrproc_t)xdr_bool,
+			     .funcname = "PMAPPROC_UNSET",
+			     .dispatch_behaviour = NOTHING_SPECIAL },
+	[PMAPPROC_GETPORT] = { .service_function = pmap_proc_getport,
+			       .free_function = rpcbind_nothing_free,
+			       .xdr_decode_func = (xdrproc_t)xdr_pmap,
+			       .xdr_encode_func = (xdrproc_t)xdr_uint32_t,
+			       .funcname = "PMAPPROC_GETPORT",
+			       .dispatch_behaviour = NOTHING_SPECIAL },
+	[PMAPPROC_DUMP] = { .service_function = pmap_proc_dump,
+			    .free_function = rpcbind_nothing_free,
+			    .xdr_decode_func = (xdrproc_t)xdr_void,
+			    .xdr_encode_func = (xdrproc_t)xdr_pmap_dump_res,
+			    .funcname = "PMAPPROC_DUMP",
+			    .dispatch_behaviour = NOTHING_SPECIAL },
+	[PMAPPROC_CALLIT] = { .service_function = pmap_proc_callit,
+			      .free_function = rpcbind_nothing_free,
+			      .xdr_decode_func = (xdrproc_t)xdr_rmtcall_args2,
+			      .xdr_encode_func = (xdrproc_t)xdr_void,
+			      .funcname = "PMAPPROC_CALLIT",
+			      .dispatch_behaviour = NOTHING_SPECIAL },
+};
+
+const nfs_function_desc_t rpcbind3_func_desc[] = {
+	[0] = { .service_function = rpcbind_proc_null,
+		.free_function = rpcbind_nothing_free,
+		.xdr_decode_func = (xdrproc_t)xdr_void,
+		.xdr_encode_func = (xdrproc_t)xdr_void,
+		.funcname = "PMAPPROC_NULL",
+		.dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_SET] = { .service_function = rpcbind_proc_set,
+			   .free_function = rpcbind_nothing_free,
+			   .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+			   .xdr_encode_func = (xdrproc_t)xdr_bool,
+			   .funcname = "RPCBPROC_SET",
+			   .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_UNSET] = { .service_function = rpcbind_proc_unset,
+			     .free_function = rpcbind_nothing_free,
+			     .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+			     .xdr_encode_func = (xdrproc_t)xdr_bool,
+			     .funcname = "RPCBPROC_UNSET",
+			     .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_GETADDR] = { .service_function = rpcbind_proc_getaddr,
+			       .free_function = rpcbind_res_uaddr_free,
+			       .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+			       .xdr_encode_func = (xdrproc_t)xdr_wrapstring,
+			       .funcname = "RPCBPROC_GETADDR",
+			       .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_DUMP] = { .service_function = rpcbind_proc_dump,
+			    .free_function = rpcbind_nothing_free,
+			    .xdr_decode_func = (xdrproc_t)xdr_void,
+			    .xdr_encode_func = (xdrproc_t)xdr_rpcbind_dump_res,
+			    .funcname = "RPCBPROC_DUMP",
+			    .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_CALLIT] = { .service_function = rpcbind_proc_callit,
+			      .free_function = rpcbind_nothing_free,
+			      .xdr_decode_func = (xdrproc_t)xdr_rmtcall_args2,
+			      .xdr_encode_func = (xdrproc_t)xdr_void,
+			      .funcname = "RPCBPROC_CALLIT",
+			      .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_GETTIME] = { .service_function = rpcbind_proc_gettime,
+			       .free_function = rpcbind_nothing_free,
+			       .xdr_decode_func = (xdrproc_t)xdr_void,
+			       .xdr_encode_func = (xdrproc_t)xdr_int32_t,
+			       .funcname = "RPCBPROC_GETTIME",
+			       .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_UADDR2TADDR] = { .service_function = rpcbind_proc_uaddr2taddr,
+				   .free_function = rpcbind_res_taddr_free,
+				   .xdr_decode_func = (xdrproc_t)xdr_wrapstring,
+				   .xdr_encode_func = (xdrproc_t)xdr_netbuf,
+				   .funcname = "RPCBPROC_UADDR2TADDR",
+				   .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_TADDR2UADDR] = { .service_function = rpcbind_proc_taddr2uaddr,
+				   .free_function = rpcbind_res_uaddr_free,
+				   .xdr_decode_func = (xdrproc_t)xdr_netbuf,
+				   .xdr_encode_func = (xdrproc_t)xdr_wrapstring,
+				   .funcname = "RPCBPROC_TADDR2UADDR",
+				   .dispatch_behaviour = NOTHING_SPECIAL },
+};
+
+const nfs_function_desc_t rpcbind4_func_desc[] = {
+	[0] = { .service_function = rpcbind_proc_null,
+		.free_function = rpcbind_nothing_free,
+		.xdr_decode_func = (xdrproc_t)xdr_void,
+		.xdr_encode_func = (xdrproc_t)xdr_void,
+		.funcname = "PMAPPROC_NULL",
+		.dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_SET] = { .service_function = rpcbind_proc_set,
+			   .free_function = rpcbind_nothing_free,
+			   .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+			   .xdr_encode_func = (xdrproc_t)xdr_bool,
+			   .funcname = "RPCBPROC_SET",
+			   .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_UNSET] = { .service_function = rpcbind_proc_unset,
+			     .free_function = rpcbind_nothing_free,
+			     .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+			     .xdr_encode_func = (xdrproc_t)xdr_bool,
+			     .funcname = "RPCBPROC_UNSET",
+			     .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_GETADDR] = { .service_function = rpcbind_proc_getaddr,
+			       .free_function = rpcbind_res_uaddr_free,
+			       .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+			       .xdr_encode_func = (xdrproc_t)xdr_wrapstring,
+			       .funcname = "RPCBPROC_GETADDR",
+			       .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_DUMP] = { .service_function = rpcbind_proc_dump,
+			    .free_function = rpcbind_nothing_free,
+			    .xdr_decode_func = (xdrproc_t)xdr_void,
+			    .xdr_encode_func = (xdrproc_t)xdr_rpcbind_dump_res,
+			    .funcname = "RPCBPROC_DUMP",
+			    .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_CALLIT] = { .service_function = rpcbind_proc_callit,
+			      .free_function = rpcbind_nothing_free,
+			      .xdr_decode_func = (xdrproc_t)xdr_rmtcall_args2,
+			      .xdr_encode_func = (xdrproc_t)xdr_void,
+			      .funcname = "RPCBPROC_CALLIT",
+			      .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_GETTIME] = { .service_function = rpcbind_proc_gettime,
+			       .free_function = rpcbind_nothing_free,
+			       .xdr_decode_func = (xdrproc_t)xdr_void,
+			       .xdr_encode_func = (xdrproc_t)xdr_int32_t,
+			       .funcname = "RPCBPROC_GETTIME",
+			       .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_UADDR2TADDR] = { .service_function = rpcbind_proc_uaddr2taddr,
+				   .free_function = rpcbind_res_taddr_free,
+				   .xdr_decode_func = (xdrproc_t)xdr_wrapstring,
+				   .xdr_encode_func = (xdrproc_t)xdr_netbuf,
+				   .funcname = "RPCBPROC_UADDR2TADDR",
+				   .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_TADDR2UADDR] = { .service_function = rpcbind_proc_taddr2uaddr,
+				   .free_function = rpcbind_res_uaddr_free,
+				   .xdr_decode_func = (xdrproc_t)xdr_netbuf,
+				   .xdr_encode_func = (xdrproc_t)xdr_wrapstring,
+				   .funcname = "RPCBPROC_TADDR2UADDR",
+				   .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_GETVERSADDR] = { .service_function = rpcbind_proc_getversaddr,
+				   .free_function = rpcbind_res_uaddr_free,
+				   .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+				   .xdr_encode_func = (xdrproc_t)xdr_wrapstring,
+				   .funcname = "RPCBPROC_GETVERSADDR",
+				   .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_INDIRECT] = { .service_function = rpcbind_proc_indirect,
+				.free_function = rpcbind_nothing_free,
+				.xdr_decode_func = (xdrproc_t)xdr_rmtcall_args2,
+				.xdr_encode_func = (xdrproc_t)xdr_void,
+				.funcname = "RPCBPROC_INDIRECT",
+				.dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_GETADDRLIST] = { .service_function = rpcbind_proc_getaddrlist,
+				   .free_function = rpcbind_nothing_free,
+				   .xdr_decode_func = (xdrproc_t)xdr_rpcb,
+				   .xdr_encode_func = (xdrproc_t)
+					   xdr_rpcbind_getaddrlist_res,
+				   .funcname = "RPCBPROC_GETADDRLIST",
+				   .dispatch_behaviour = NOTHING_SPECIAL },
+	[RPCBPROC_GETSTAT] = { .service_function = rpcbind_proc_getstat,
+			       .free_function = rpcbind_nothing_free,
+			       .xdr_decode_func = (xdrproc_t)xdr_void,
+			       .xdr_encode_func =
+				       (xdrproc_t)xdr_rpcb_statistics,
+			       .funcname = "RPCBPROC_GETSTAT",
+			       .dispatch_behaviour = NOTHING_SPECIAL },
+};
+
+#endif
+
 #ifdef _INTERNAL_STATD
 const nfs_function_desc_t smmon_func_desc[] = {
 	[0] = { .service_function = smmon_proc_null,
@@ -1729,6 +1911,61 @@ static enum xprt_stat nfs_rpc_noproc(nfs_request_t *reqdata)
 		     reqdata->svc.rq_msg.cb_prog);
 	return svcerr_noproc(&reqdata->svc);
 }
+
+#ifdef _INTERNAL_RPCBIND
+enum xprt_stat nfs_rpc_valid_RPCBIND(struct svc_req *req)
+{
+	nfs_request_t *reqdata = container_of(req, struct nfs_request, svc);
+
+	reqdata->funcdesc = &invalid_funcdesc;
+
+	LogFullDebug(COMPONENT_DISPATCH,
+		     "Program %" PRIu32 " RPCBIND Program %" PRIu32
+		     " Vers %" PRIu32,
+		     req->rq_msg.cb_prog, NFS_program[P_RPCBIND],
+		     req->rq_msg.cb_vers);
+
+	if (req->rq_msg.cb_prog != NFS_program[P_RPCBIND] ||
+	    NFS_pcp.use_rpcbind) {
+		return nfs_rpc_noprog(reqdata);
+	}
+
+	switch (req->rq_msg.cb_vers) {
+	case PMAPVERS:
+		LogFullDebug(COMPONENT_DISPATCH, "PORTMAP proc %" PRIu32,
+			     req->rq_msg.cb_proc);
+		/* PORTMAP/RPCBIND v2 */
+		if (req->rq_msg.cb_proc <= rpcb_highproc_2) {
+			reqdata->funcdesc =
+				&pmap_func_desc[req->rq_msg.cb_proc];
+			return nfs_rpc_process_request(reqdata, false);
+		}
+		return nfs_rpc_noproc(reqdata);
+
+#ifdef USE_RPCBIND_V34
+	case RPCBVERS_3:
+		/* RPCBIND v3 */
+		if (req->rq_msg.cb_proc <= rpcb_highproc_3) {
+			reqdata->funcdesc =
+				&rpcbind3_func_desc[req->rq_msg.cb_proc];
+			return nfs_rpc_process_request(reqdata, false);
+		}
+		return nfs_rpc_noproc(reqdata);
+
+	case RPCBVERS_4:
+		/* RPCBIND v4 */
+		if (req->rq_msg.cb_proc <= rpcb_highproc_4) {
+			reqdata->funcdesc =
+				&rpcbind4_func_desc[req->rq_msg.cb_proc];
+			return nfs_rpc_process_request(reqdata, false);
+		}
+		return nfs_rpc_noproc(reqdata);
+#endif
+	}
+
+	return nfs_rpc_novers(reqdata, PMAPVERS, PMAPVERS /* RPCBVERS_4 */);
+}
+#endif
 
 #ifdef _INTERNAL_STATD
 enum xprt_stat nfs_rpc_valid_SMMON(struct svc_req *req)

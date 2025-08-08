@@ -490,6 +490,44 @@ void rquota_setquota_Free(nfs_res_t *);
 void rquota_setactivequota_Free(nfs_res_t *);
 #endif
 
+#ifdef _INTERNAL_RPCBIND
+struct netconfig *rpcbind_get_conf(char *netid);
+
+int rpcbind_proc_null(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+void rpcbind_nothing_free(nfs_res_t *res);
+
+int pmap_proc_set(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int pmap_proc_unset(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int pmap_proc_getport(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int pmap_proc_dump(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+bool xdr_pmap_dump_res(XDR *xdrs, struct pmap *regs);
+int pmap_proc_callit(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+bool xdr_rmtcall_args2(XDR *xdrs, struct rpcb_rmtcallargs *cap);
+
+int rpcbind_proc_set(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int rpcbind_proc_unset(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int rpcbind_proc_getaddr(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+void rpcbind_res_uaddr_free(nfs_res_t *res);
+bool xdr_rpcbind_dump_res(XDR *xdrs, SVCXPRT **caller_xprt);
+bool xdr_rpcbind_getaddrlist_res(XDR *xdrs, nfs_request_t **req);
+int rpcbind_proc_dump(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int rpcbind_proc_callit(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int rpcbind_proc_gettime(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int rpcbind_proc_uaddr2taddr(nfs_arg_t *arg, struct svc_req *req,
+			     nfs_res_t *res);
+void rpcbind_res_taddr_free(nfs_res_t *res);
+int rpcbind_proc_taddr2uaddr(nfs_arg_t *arg, struct svc_req *req,
+			     nfs_res_t *res);
+int rpcbind_proc_getversaddr(nfs_arg_t *arg, struct svc_req *req,
+			     nfs_res_t *res);
+int rpcbind_proc_indirect(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+int rpcbind_proc_getaddrlist(nfs_arg_t *arg, struct svc_req *req,
+			     nfs_res_t *res);
+int rpcbind_proc_getstat(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
+bool xdr_rpcb_statistics(XDR *xdrs, rpcb_stat *objp);
+bool set_local_lockd_port(int port, bool is_udp);
+#endif
+
 #ifdef _INTERNAL_STATD
 int smmon_proc_null(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);
 void smmon_free(nfs_res_t *res);
