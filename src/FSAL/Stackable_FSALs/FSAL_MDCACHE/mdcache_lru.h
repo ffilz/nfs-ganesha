@@ -96,12 +96,6 @@ extern pool_t *mdcache_entry_pool;
 
 #define LRU_SENTINEL_REFCOUNT 1
 
-/**
- * The number of lanes comprising a logical queue.  This must be
- * prime.
- */
-#define LRU_N_Q_LANES 17
-
 fsal_status_t mdcache_lru_pkginit(void);
 fsal_status_t mdcache_lru_pkgshutdown(void);
 
