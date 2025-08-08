@@ -257,6 +257,8 @@ NFS_CORE_PARAM {}
 
 	Internal_statd(bool, default false)
 
+	Use_rpcbind(bool, default true)
+
 NFS_IP_NAME {}
 --------------
 
