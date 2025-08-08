@@ -178,6 +178,13 @@ if(USE_NLM)
   )
 endif(USE_NLM)
 
+if(INTERNAL_RPCBIND)
+  set(ganesha_nfsd_OBJS
+    ${ganesha_nfsd_OBJS}
+    $<TARGET_OBJECTS:rpcbind>
+  )
+endif(INTERNAL_RPCBIND)
+
 if(USE_RQUOTA)
   set(ganesha_nfsd_OBJS
     ${ganesha_nfsd_OBJS}

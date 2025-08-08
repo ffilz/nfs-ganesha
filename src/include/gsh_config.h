@@ -56,6 +56,9 @@
  */
 
 typedef enum protos {
+#ifdef _INTERNAL_RPCBIND
+	P_RPCBIND, /*< PORTMAP/RPCBIND */
+#endif
 	P_NFS, /*< NFS, of course. */
 #ifdef _USE_NFS3
 	P_MNT, /*< Mount (for v3) */
@@ -78,8 +81,14 @@ typedef enum protos {
 #ifdef _USE_NFS_RDMA
 	P_NFS_RDMA, /*< NFS over RPC/RDMA */
 #endif
+#ifdef _INTERNAL_RPCBIND
+	P_LOCAL_NLM, /*< place to hold info for local NLM - last because it
+			 doesn't show up in dispatch vectors. */
+#endif
 	P_COUNT /*< Number of protocols */
 } protos;
+
+#define MAX_PROTO_VERS 4
 
 /**
  * @defgroup config_core Structure and defaults for NFS_Core_Param
@@ -602,6 +611,9 @@ typedef struct nfs_core_param {
 #endif
 #ifdef _INTERNAL_STATD
 	bool internal_statd;
+#endif
+#ifdef _INTERNAL_RPCBIND
+	bool internal_rpcbind;
 #endif
 } nfs_core_parameter_t;
 
