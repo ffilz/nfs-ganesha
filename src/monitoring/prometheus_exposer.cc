@@ -33,7 +33,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <streambuf>
-
+#include <sys/time.h>
 #include "prometheus_exposer.h"
 
 #ifdef USE_MONITORING
@@ -47,6 +47,8 @@
 static const char kStatus[] = "status";
 static const char kSuccess[] = "success";
 static const char kFailure[] = "failure";
+
+struct timespec nfs_ServerBootTime;
 
 namespace ganesha_monitoring
 {
@@ -260,6 +262,8 @@ void *PrometheusExposer::server_thread(void *arg)
 	PrometheusExposer *const exposer =
 		static_cast<PrometheusExposer *>(arg);
 	char buffer[1024];
+	struct timeval current_time;
+	uint64_t elapsed_minutes;
 
 	while (exposer->running_) {
 		const int client_fd = TEMP_FAILURE_RETRY(
@@ -290,6 +294,11 @@ void *PrometheusExposer::server_thread(void *arg)
 			exposer->failureLatencies_.Observe(elapsed_ms);
 		else
 			exposer->successLatencies_.Observe(elapsed_ms);
+
+		gettimeofday(&current_time, nullptr);
+		elapsed_minutes =
+			(current_time.tv_sec - nfs_ServerBootTime.tv_sec) / 60;
+		update_g_info(elapsed_minutes);
 	}
 	return NULL;
 }
@@ -322,6 +331,10 @@ void prometheus_exposer__stop(prometheus_registry_handle_t registry_handle)
 	stopped = true;
 }
 
+void update_g_info(uint64_t elapsed_minutes)
+{
+	monitoring__gauge_set(ganesha_info, elapsed_minutes);
+}
 } /* extern "C" */
 
 } /* namespace ganesha_monitoring */
