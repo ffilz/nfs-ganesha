@@ -197,10 +197,10 @@ void register_ganesha_info_metrics(const char *server_scope)
 		METRIC_LABEL("SERVER_SCOPE", server_scope)
 	};
 	ganesha_info = monitoring__register_gauge(
-		"ganesha_build_info",
-		METRIC_METADATA("Current ganesha build info", METRIC_UNIT_NONE),
+		"ganesha_uptime_minutes",
+		METRIC_METADATA("No.of minutes ganesha has been running",
+				METRIC_UNIT_MINUTE),
 		labels, ARRAY_SIZE(labels));
-	monitoring__gauge_set(ganesha_info, 1);
 }
 static void register_nfsv4_operation_metrics(nfs_opnum4 opcode,
 					     enum nfsstat4_index statcode_index)

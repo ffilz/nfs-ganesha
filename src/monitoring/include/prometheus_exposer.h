@@ -55,6 +55,8 @@ void prometheus_exposer__start(const sockaddr_t *addr, uint16_t port,
 void prometheus_exposer__stop(prometheus_registry_handle_t registry_handle);
 
 void update_mem_info(void);
+
+void update_g_info(uint64_t elapsed_minutes);
 } /* extern "C" */
 
 namespace ganesha_monitoring
