@@ -197,10 +197,11 @@ void register_ganesha_info_metrics(const char *server_scope)
 		METRIC_LABEL("SERVER_SCOPE", server_scope)
 	};
 	ganesha_info = monitoring__register_gauge(
-		"ganesha_build_info",
-		METRIC_METADATA("Current ganesha build info", METRIC_UNIT_NONE),
+		"ganesha_uptime_minutes",
+		METRIC_METADATA("No.of minutes ganesha has been running",
+				METRIC_UNIT_NONE),
 		labels, ARRAY_SIZE(labels));
-	monitoring__gauge_set(ganesha_info, 1);
+	monitoring__gauge_set(ganesha_info, 0);
 }
 static void register_nfsv4_operation_metrics(nfs_opnum4 opcode,
 					     enum nfsstat4_index statcode_index)
@@ -362,10 +363,32 @@ void nfs_metrics__nfs4_request(uint32_t op, nsecs_elapsed_t request_time,
 					     client_ip);
 }
 
+void *time_monitor_thread(void *args)
+{
+	struct timeval start_time, current_time;
+	uint64_t elapsed_minutes;
+
+	gettimeofday(&start_time, NULL);
+	while (true) {
+		gettimeofday(&current_time, NULL);
+		elapsed_minutes =
+			(current_time.tv_sec - start_time.tv_sec) / 60;
+		sleep(60);
+		monitoring__gauge_set(ganesha_info, elapsed_minutes);
+	}
+}
+
 void nfs_metrics__init(void)
 {
+	pthread_t thread_for_time;
+
 	register_rpcs_metrics();
 	register_nfsv4_operations_metrics();
 	register_dropped_gss_requests_count_metric();
 	register_compound_operation_metrics();
+	if (pthread_create(&thread_for_time, NULL, time_monitor_thread, NULL) !=
+	    0) {
+		LogDebug(COMPONENT_THREAD,
+			 "time_monitor_thread not initialized");
+	}
 }
