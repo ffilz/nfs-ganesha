@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e8ea167_2c0a3230",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-08-12T14:33:17Z",
+      "side": 1,
+      "message": "Remove the changes which are not part of your changes.\nI know this has been screwed up by clang-format. Check for all places(Multiple are there)",
+      "revId": "1b2ce372e7073e66ad52f9f20008d3f9ecc5e5cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13dd4add_5902463b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-08-12T14:33:17Z",
+      "side": 1,
+      "message": "Change the checks to g_qos_config-\u003eqos_type\nqos_class can have only QOS_EXPORT/QOS_CLIENT",
+      "revId": "1b2ce372e7073e66ad52f9f20008d3f9ecc5e5cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

@@ -50,6 +50,24 @@
       "message": "Just checking if this line looks okay—I\u0027ve added it to ensure that the register_qos_metrics() function goes into the qos_class-\u003etype \u003d\u003d QOS_PEPC block.",
       "revId": "f1384d8cadb932b787b778626a3188308967bbda",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba03e5d_cadf440b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2061,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-08-12T14:33:17Z",
+      "side": 1,
+      "message": "qos_class-\u003etype will QOS_EXPORT or QOS_CLIENT.\nif you want to check which qos_type is enabled, check the global DS",
+      "parentUuid": "cb296c26_904b24f9",
+      "revId": "f1384d8cadb932b787b778626a3188308967bbda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
