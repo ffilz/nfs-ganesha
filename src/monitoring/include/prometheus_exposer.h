@@ -35,7 +35,6 @@
 #include "monitoring.h"
 
 typedef struct sockaddr_storage sockaddr_t;
-
 #ifdef USE_MONITORING
 
 #ifndef __cplusplus
@@ -55,6 +54,10 @@ void prometheus_exposer__start(const sockaddr_t *addr, uint16_t port,
 void prometheus_exposer__stop(prometheus_registry_handle_t registry_handle);
 
 void update_mem_info(void);
+extern gauge_metric_handle_t ganesha_info;
+extern struct timespec nfs_ServerBootTime;
+
+void update_g_info(uint64_t elapsed_minutes);
 } /* extern "C" */
 
 namespace ganesha_monitoring

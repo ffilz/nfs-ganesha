@@ -39,6 +39,7 @@
 #include <proc/readproc.h>
 #endif
 
+#include <sys/time.h>
 #include "prometheus_exposer.h"
 #include "dynamic_metrics.h"
 
@@ -53,6 +54,9 @@
 static const char kStatus[] = "status";
 static const char kSuccess[] = "success";
 static const char kFailure[] = "failure";
+
+gauge_metric_handle_t ganesha_info;
+struct timespec nfs_ServerBootTime;
 
 namespace ganesha_monitoring
 {
@@ -277,6 +281,8 @@ void *PrometheusExposer::server_thread(void *arg)
 	PrometheusExposer *const exposer =
 		static_cast<PrometheusExposer *>(arg);
 	char buffer[1024];
+	struct timeval current_time;
+	uint64_t elapsed_minutes;
 
 	while (exposer->running_) {
 		const int client_fd = TEMP_FAILURE_RETRY(
@@ -311,6 +317,10 @@ void *PrometheusExposer::server_thread(void *arg)
 #ifdef HAVE_PROCPS
 		update_mem_info();
 #endif
+		gettimeofday(&current_time, nullptr);
+		elapsed_minutes =
+			(current_time.tv_sec - nfs_ServerBootTime.tv_sec) / 60;
+		update_g_info(elapsed_minutes);
 	}
 	return NULL;
 }
@@ -360,6 +370,10 @@ void update_mem_info()
 }
 #endif
 
+void update_g_info(uint64_t elapsed_minutes)
+{
+	monitoring__gauge_set(ganesha_info, elapsed_minutes);
+}
 } /* extern "C" */
 
 } /* namespace ganesha_monitoring */
