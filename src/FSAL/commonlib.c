@@ -2663,10 +2663,58 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 			    bool bypass, struct fsal_share *share)
 {
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
-	struct fsal_fd *state_fd;
+	struct fsal_fd *state_fd, *related_fd;
+	struct state_t *openstate;
+	struct state_deleg *deleg;
 
 	if (state == NULL)
 		goto global;
+
+	/* Handling for delegation state */
+	if (state->state_type == STATE_TYPE_DELEG) {
+		deleg = &state->state_data.deleg;
+
+		LogFullDebug(COMPONENT_FSAL,
+				"Handling delegation, sd_state = %d",
+				deleg->sd_state);
+
+		/* If the delegation is granted, we need to retrieve
+		 * the open state related to this delegation
+		 */
+		if (deleg->sd_type == OPEN_DELEGATE_WRITE ||
+				deleg->sd_type == OPEN_DELEGATE_READ) {
+			/* Retrieve the open state related to the delegation */
+			openstate = nfs4_State_Get_Pointer(
+					state->state_data.deleg.openstate_key);
+			if (openstate == NULL) {
+				LogFullDebug(COMPONENT_FSAL,
+						"No openstate with delegation");
+				goto global;
+			}
+
+			related_fd = (struct fsal_fd *)(openstate + 1);
+
+			LogFullDebug(COMPONENT_FSAL, "related_fd: %p",
+					related_fd);
+
+			related_fd->openflags |= openflags;
+
+			status = wait_to_start_io(obj_hdl, related_fd,
+					openflags, false, false);
+
+			dec_state_t_ref(openstate);
+
+			if (!FSAL_IS_SUCCESS(status))
+				return status;
+
+			if (out_fd) {
+				*out_fd = related_fd;
+				if (reusing_open_state_fd)
+					*reusing_open_state_fd = true;
+			}
+			return status;
+		}
+	}
 
 	/* Check if we can use the fd in the state */
 	state_fd = (struct fsal_fd *)(state + 1);
@@ -2719,7 +2767,6 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 			 * again with it's openflags. Otherwise leave the
 			 * access error as is.
 			 */
-			struct state_t *openstate;
 
 			/** @todo FSF - interesting question - what do we do if
 			 *              openstate is being re-opened??? I think
@@ -2780,7 +2827,6 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 	 * that don't want to open a separate fd for lock states).
 	 */
 	if (state->state_type == STATE_TYPE_LOCK) {
-		struct state_t *openstate;
 		struct fsal_fd *related_fd;
 
 		openstate = nfs4_State_Get_Pointer(
