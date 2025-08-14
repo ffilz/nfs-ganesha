@@ -224,7 +224,7 @@ static void fs_verifier(struct fsal_export *exp_hdl,
 	int export_fd = exp->export_fd;
 
 	varg.fd = export_fd;
-	varg.buffer = (char *)verf_desc;
+	varg.buffer = (char *)verf_desc->addr;
 	varg.size = sizeof(struct gsh_buffdesc);
 
 	rc = gpfs_ganesha(OPENHANDLE_GET_VERIFIER, &varg);
