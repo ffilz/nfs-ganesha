@@ -2839,9 +2839,13 @@ void gsh_libunwind(void)
 	} while (unw_step(&cursor) > 0);
 
 	PTHREAD_RWLOCK_unlock(&log_rwlock);
+	if (fd != -1)
+		close(fd);
 	return;
 
 libunwind_failed:
+	if (fd != -1)
+		close(fd);
 	LogCrit(COMPONENT_INIT,
 		"unable to produce a stack trace with libunwind");
 }
