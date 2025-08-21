@@ -16,6 +16,23 @@
       "message": "can anyone help review this change?",
       "revId": "671c9eb50baaa2f62997af988b7b4f4ce4e1fbf2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e36653_4bc0ad25",
+        "filename": "src/Protocols/NFS/nfs4_op_layoutget.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-21T16:02:45Z",
+      "side": 1,
+      "message": "Rather that doing a spurious inc ref to offset the dec ref, let\u0027s just return nfs_status here. We don\u0027t need the unlock since we haven\u0027t locked yet.",
+      "revId": "671c9eb50baaa2f62997af988b7b4f4ce4e1fbf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
