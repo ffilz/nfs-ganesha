@@ -16,6 +16,23 @@
       "message": "Below is the test scenario:\nTestcase : multi-threaded locking senario.\nwhere threadA-\u003efile1  threadB-\u003efile1\nand 100\u0027s of files in parallel.\n\n[Client 1]\n  1. open(file, \"w+\")\n       -\u003e sends OPEN request to server\n  2. flock(LOCK_EX)\n       -\u003e server grants exclusive lock\n  3. sleep(wait)\n       -\u003e holding lock, file still open\n  5. lock_unlock(LOCKU)\n       -\u003e got delayed, processed after CLOSE\n  4. close(file)\n       -\u003e sends CLOSE to server\n\n[Client 2]\n  1. open(file, \"w+\")\n       -\u003e succeeds because CLOSE from Client 1 processed first.\n  2. flock(LOCK_EX)\n       -\u003e server puts request on \"wait/hold\" list\n          since Client 1’s LOCKU has not yet released the range.\n\n\n[Server Side View]\n  - Client 1 OPEN the file in write mode\n  - Client 1 takes the FCNTL lock\n  - Receives CLOSE before LOCKU from Client 1.\n  - Marks file closed for Client 1 session/slot.\n  - Client 2\u0027s open got accepted.\n  - Client 2 requested for lock.\n  - Client 2\u0027s lock added to request list.\n  - Client 1\u0027s unlock request (LOCKU) still pending.\n  - Client 1\u0027s  LOCKU received by server, lock released , called nfsv4_granted_callback for waiting entries.\n\nHere the actual sequence should have been unlock first then close. which makes sures the file doesnt open in w+ mode for client 2.\nBecause NFSv4.0 lacks session-based sequencing, operations like CLOSE and LOCKU can indeed interleave arbitrarily when both are in flight. In practice, a CLOSE request could be processed before an unlock (LOCKU) even if the client issued the unlock first — that\u0027s a valid race condition under NFSv4.0 semantics.\n\n  * Once the actual callback (nfsv4_grant_callback is called, since the nfsv4.0 doesn\u0027t have session and slot details, we just try to get the chan and do the RPC (basic construct as per my understanding)\n  * But for nfsv4.1 we do proper initializations(assignments) of the required elements, such as slot, sessions etc.\n  * So in  notify_granted_completion() we should avoid calling nfs41_release_single() which does the cleanup part of v4.1 (which uses session-\u003ecb_mutex etc).\n  * And for nfsv4.0 we don\u0027t require cleanup, since only rpc call needs to be free, which is getting freed automatically.\n\nNote this issue gets reproduced only if hundreds of file are involved in parallel. and is specific to nfsv4.0\n\nfor thi schanges : took reference from cbgetattr_completion_func()",
       "revId": "7750ee4cabf4fdc3725cb5a6b0af04d2164a3d47",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd51a36a_dd45a99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-21T15:57:24Z",
+      "side": 1,
+      "message": "Oops...\n\nGreat analysis and fix. Thanks.",
+      "revId": "7750ee4cabf4fdc3725cb5a6b0af04d2164a3d47",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
