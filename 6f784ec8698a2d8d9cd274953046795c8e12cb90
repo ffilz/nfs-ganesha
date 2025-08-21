@@ -33,6 +33,23 @@
       "message": "@ffilzlnx@mindspring.com @dang@redhat.com any other thoughts on this patch",
       "revId": "6f784ec8698a2d8d9cd274953046795c8e12cb90",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b51cda8_48672264",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-21T23:31:16Z",
+      "side": 1,
+      "message": "Please use the renamed LRU_DEFAULT_N_Q_LANES constant instead of straight coding 17.",
+      "revId": "6f784ec8698a2d8d9cd274953046795c8e12cb90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
