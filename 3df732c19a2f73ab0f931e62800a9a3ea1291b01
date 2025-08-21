@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe7a1cfa_f784e7e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-21T23:37:14Z",
+      "side": 1,
+      "message": "This is an example of how we need a better way to do metrics that can pull from other bits rather than Ganesha having to push data into the metrics sub-system. Dedicating a thread to polling the clock and pushing into the metrics system seems a horrid waste.",
+      "revId": "3df732c19a2f73ab0f931e62800a9a3ea1291b01",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671eee0a_1f59dc27",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-21T23:37:14Z",
+      "side": 1,
+      "message": "Change to METRIC_UNIT_MINUTE",
+      "revId": "3df732c19a2f73ab0f931e62800a9a3ea1291b01",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6661e3c_4fd73c24",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-21T23:37:14Z",
+      "side": 1,
+      "message": "Is there any way to make this metric refresh value when queried rather than dedicating a thread?",
+      "revId": "3df732c19a2f73ab0f931e62800a9a3ea1291b01",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
