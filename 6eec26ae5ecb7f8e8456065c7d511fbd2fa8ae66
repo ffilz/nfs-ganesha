@@ -89,6 +89,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb45d6d_72f7ae3a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "228672b7_5bb7696f",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a09cbf6a_595987e7",
@@ -102,6 +120,24 @@
       "writtenOn": "2025-05-12T21:03:51Z",
       "side": 1,
       "message": "Can openstate ever be NULL for a delegation?",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9289bd9_0b822173",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2691,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Code moved... New comment",
+      "parentUuid": "a09cbf6a_595987e7",
       "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -179,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb81fc9f_31c8bb03",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "I still don\u0027t fully understand, please expand an put a comment in the new code position.",
+      "parentUuid": "facfbf1c_fb490149",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa10d36a_89df2060",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
@@ -190,6 +244,24 @@
       "writtenOn": "2025-05-12T21:03:51Z",
       "side": 1,
       "message": "This should be a dec_state_t_ref (otherwise you will leak 2 references). See logic for decrementing the refcount below.",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e33f09a_652dff1c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2710,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa10d36a_89df2060",
       "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -211,6 +283,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "798a55fd_6aae395e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Code moved, new comment made.",
+      "parentUuid": "d6bf7b43_291922fd",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02876a59_f078d4f1",
@@ -224,6 +314,24 @@
       "writtenOn": "2025-05-12T21:03:51Z",
       "side": 1,
       "message": "We still need to do I/O during recall with the delegation stateid, so I\u0027m not sure why we need separate handling",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cee0a8d2_bf7fdf91",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2724,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Code removed.",
+      "parentUuid": "02876a59_f078d4f1",
       "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -245,6 +353,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3818e60a_4fe72c18",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2782,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4463a1a0_de58bc36",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9983b886_6d767f73",
@@ -258,6 +384,24 @@
       "writtenOn": "2025-05-12T21:03:51Z",
       "side": 1,
       "message": "Remove this declaration of openstate since you have declatation above",
+      "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d257560f_d9ec3d30",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2843,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9983b886_6d767f73",
       "revId": "6eec26ae5ecb7f8e8456065c7d511fbd2fa8ae66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

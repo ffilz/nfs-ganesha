@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859f1905_0cf9f644",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Please wrap the commit message to 80 columns",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e125967d_9b110279",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Please split into two patches",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3734fbad_57880824",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2689,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Can this really happen? If not, either assert(openstate) or LogCrit",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b81d473_63c66028",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2699,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Add a comment explaining why changing related_fd-\u003eopenflags",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db4c28c3_6c447801",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2701,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Instead of duplicating code, replace with a goto to the identical code below",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5505cb_e3cbf067",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Please split these changes into a new patch.",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "231b9d73_84764b44",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Please split these changes into a new patch.",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f95cd26c_0c961d38",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Please split these changes into a new patch.",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b0c065_bb17ecad",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-22T00:05:11Z",
+      "side": 1,
+      "message": "Please split these changes into a new patch.",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
