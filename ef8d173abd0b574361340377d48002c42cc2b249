@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6b5122_5f1e8413",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1544,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-08-24T08:18:47Z",
+      "side": 1,
+      "message": "As long as this is always the export path only and not the current IO path then this is okay.\n\nAs we don\u0027t want to increase the labels cardinality",
+      "range": {
+        "startLine": 1544,
+        "startChar": 0,
+        "endLine": 1544,
+        "endChar": 48
+      },
+      "revId": "ef8d173abd0b574361340377d48002c42cc2b249",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
