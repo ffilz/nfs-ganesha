@@ -318,6 +318,7 @@ static void reaper_run(struct fridgethr_context *ctx)
 #endif
 	}
 
+	op_ctx->reaper_run = true;
 	rst->count = reap_expired_client_list(NULL);
 	rst->count += (reap_hash_table(ht_confirmed_client_id) +
 		       reap_hash_table(ht_unconfirmed_client_id));
