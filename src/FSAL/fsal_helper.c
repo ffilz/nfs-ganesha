@@ -1501,7 +1501,8 @@ fsal_status_t fsal_remove(struct fsal_obj_handle *parent, const char *name,
 
 	if (nfs_param.nfsv4_param.preserve_unlinked &&
 	    op_ctx->fsal_export->exp_ops.fs_supports(op_ctx->fsal_export,
-						     fso_preserve_unlinked)) {
+						     fso_preserve_unlinked) &&
+	    to_remove_obj->type == REGULAR_FILE) {
 		STATELOCK_lock(to_remove_obj);
 		if (fsal_has_file_states(to_remove_obj))
 			op_ctx->is_unlink_with_states = true;
