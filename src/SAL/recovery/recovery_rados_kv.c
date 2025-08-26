@@ -413,6 +413,9 @@ int set_nodeid(void)
 	bool use_host_name = false;
 	bool prepend = false;
 	long maxlen = sysconf(_SC_HOST_NAME_MAX);
+	if(maxlen < 0){
+		maxlen = MAXNAMLEN;
+	}
 
 	nodeid = gsh_malloc(maxlen);
 
