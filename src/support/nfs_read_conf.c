@@ -375,6 +375,7 @@ static struct config_item core_params[] = {
 	CONF_ITEM_UI32("Malloc_trim_MinThreshold", 1, INT32_MAX, 15 * 1024,
 		       nfs_core_param, malloc_trim_minthreshold),
 #ifdef USE_MONITORING
+	CONF_ITEM_BOOL("Enable_Metrics", false, nfs_core_param, enable_metrics),
 	CONF_ITEM_IP_ADDR("Monitoring_Addr", "0.0.0.0", nfs_core_param,
 			  monitoring_addr),
 	CONF_ITEM_UI16("Monitoring_Port", 0, UINT16_MAX, MONITORING_PORT,
