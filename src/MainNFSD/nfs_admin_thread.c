@@ -917,7 +917,9 @@ static void do_shutdown(void)
 
 #ifdef USE_MONITORING
 	/* close monitoring service */
-	prometheus_exposer__stop(monitoring__get_registry_handle());
+	if (nfs_param.core_param.enable_metrics) {
+		prometheus_exposer__stop(monitoring__get_registry_handle());
+	}
 #endif
 
 	LogEvent(COMPONENT_MAIN, "Shutting down RPC services");

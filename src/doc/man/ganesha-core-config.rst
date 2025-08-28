@@ -77,6 +77,12 @@ Enable_Dynamic_Metrics (bool, default true)
     export name, etc. Provides more debugging information, but significantly
     reduces performance. Enabled by default for backward compatibility.
 
+Enable_Metrics (bool, default false)
+    Controls whether metrics collection is enabled, even when the
+    USE_MONITORING macro is defined. This option provides additional
+    flexibility to enable or disable the monitoring module based on
+    configuration, regardless of the compile-time macro setting.
+
 Bind_addr(IPv4 or IPv6 addr, default 0.0.0.0)
     The address to which to bind for our listening port.
 
