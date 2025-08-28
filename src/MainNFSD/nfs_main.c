@@ -597,18 +597,23 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef USE_MONITORING
-	if (nfs_param.core_param.enable_dynamic_metrics)
-		dynamic_metrics__init();
-	/* if monitoring_addr is not set, then make use of bind_addr */
-	if (if_ip_addr_any(&nfs_param.core_param.monitoring_addr)) {
-		LogEvent(COMPONENT_MAIN, "Using Bind_Addr as Monitoring_Addr");
-		prometheus_exposer__start(&nfs_param.core_param.bind_addr,
-					  nfs_param.core_param.monitoring_port,
-					  monitoring__get_registry_handle());
-	} else
-		prometheus_exposer__start(&nfs_param.core_param.monitoring_addr,
-					  nfs_param.core_param.monitoring_port,
-					  monitoring__get_registry_handle());
+	if (nfs_param.core_param.enable_metrics) {
+		if (nfs_param.core_param.enable_dynamic_metrics)
+			dynamic_metrics__init();
+		/* if monitoring_addr is not set, then make use of bind_addr */
+		if (if_ip_addr_any(&nfs_param.core_param.monitoring_addr)) {
+			LogEvent(COMPONENT_MAIN,
+				 "Using Bind_Addr as Monitoring_Addr");
+			prometheus_exposer__start(
+				&nfs_param.core_param.bind_addr,
+				nfs_param.core_param.monitoring_port,
+				monitoring__get_registry_handle());
+		} else
+			prometheus_exposer__start(
+				&nfs_param.core_param.monitoring_addr,
+				nfs_param.core_param.monitoring_port,
+				monitoring__get_registry_handle());
+	}
 #endif
 
 	/* initialize core subsystems and data structures */

@@ -534,6 +534,8 @@ typedef struct nfs_core_param {
 	 * performance.
 	*/
 	bool enable_dynamic_metrics;
+	/** Enable creating metrics and pushing to MONITORING IP address */
+	bool enable_metrics;
 #endif
 	/** if  Manage_Gids=True and group resolution fails,
 	 *  then use gid data from rpc request */

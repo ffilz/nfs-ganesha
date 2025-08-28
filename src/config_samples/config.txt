@@ -81,6 +81,8 @@ NFS_CORE_PARAM {}
 
 	Enable_Dynamic_Metrics (bool, default true)
 
+	Enable_Metrics (bool, default false)
+
 	Bind_Addr(IPv4 or IPv6 addr, default 0.0.0.0)
 
 	NFS_Program(uint32, range 1 to INT32_MAX, default  100003)
