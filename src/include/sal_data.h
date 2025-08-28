@@ -393,6 +393,11 @@ struct state_deleg {
 	uint32_t share_deny; /*< The NFSv4 Share Deny state */
 };
 
+struct revoked_delegation {
+	struct glist_head list; /* glist linkage */
+	stateid4 stateid; /* delegation stateid key */
+};
+
 /**
  * @brief Data for a set of layouts of a given type
  */
