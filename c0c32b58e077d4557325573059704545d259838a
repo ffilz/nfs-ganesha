@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6553a8d4_616c82c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-08-29T20:18:39Z",
+      "side": 1,
+      "message": "enable_dynamic_metrics only enables/disables the dynamic metrics, it is not a general enable/disable of Prometheus.\n\n\nThe intent here may require a new option.\n\nAlso, please reference the github issue.",
+      "revId": "c0c32b58e077d4557325573059704545d259838a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
