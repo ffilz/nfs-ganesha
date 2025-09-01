@@ -4093,7 +4093,11 @@ void cancel_all_nlm_blocked(void)
 
 		LogEntry("Blocked Lock found", found_entry);
 
+		STATELOCK_lock(found_entry->sle_obj);
+
 		cancel_blocked_lock(found_entry->sle_obj, found_entry);
+
+		STATELOCK_unlock(found_entry->sle_obj);
 
 		if (pblock->sbd_blocked_cookie != NULL) {
 			gsh_free(pblock->sbd_blocked_cookie);
