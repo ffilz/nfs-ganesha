@@ -1,0 +1,366 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f0df20_174ed208",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Please break this commit to few commits, it is hard to review a thousand lines commit\n\nBreak it to a commit that focus only on adding the grpc server first without changes to Ganesha and then build on top of it\n\nAlso see the comments I added for GrpcServer",
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0acf8c_f57d208f",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 1714,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "How\u0027s that related to this commit?",
+      "range": {
+        "startLine": 1708,
+        "startChar": 0,
+        "endLine": 1714,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d5dd9b1_012f6811",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Configuration files aren\u0027t placed in `/usr/bin` but in `/etc/`",
+      "range": {
+        "startLine": 1106,
+        "startChar": 0,
+        "endLine": 1114,
+        "endChar": 76
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8fb0ce6_db11820f",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Can we also add an option if we want to use TLS or not?",
+      "range": {
+        "startLine": 621,
+        "startChar": 51,
+        "endLine": 627,
+        "endChar": 45
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "584fa02d_6c1a037f",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Why do we need the grpc cliuent key?",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20634b2c_5d9a329f",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Same regarding configuration files as previous comment",
+      "range": {
+        "startLine": 628,
+        "startChar": 0,
+        "endLine": 641,
+        "endChar": 72
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb61479d_d13d083c",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Why that\u0027s not in a header file?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fd6a299_9aab5c14",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Why a member is public?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 28
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd733c2_5b3313d5",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Move to public",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e972371_5560930e",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Why the listen ip isn\u0027t in the configuration with a default?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 25
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "092f1d97_5ac571a3",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Prefer std::format",
+      "range": {
+        "startLine": 97,
+        "startChar": 28,
+        "endLine": 97,
+        "endChar": 63
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb8545ac_9a07acde",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Why do you need it?\nYou hold a mutex that won\u0027t be released as long as the server is up, if this function will be called again it will be stuck trying to acquire the mutex\n\nAlso you could just check the server_ unique ptr if it is set or not",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3a0d87_54106f74",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "`LogFatal` causes an `abort()`, do we want to abort if grpc failed? (legit if it was configured, just probably be documented)\n\nAlso no need to `return` after `LogFatal`",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 20
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ee8f07_c5d06841",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "This will block here until the server will shutdown",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 17
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c75b6ca_73435bf4",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "This can never be called when the server is running, as the mutex is held in the start call\n\nSo this will block trying to acquire the mutex without success",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f137de_067803e1",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-01T12:37:14Z",
+      "side": 1,
+      "message": "Why don\u0027t you spawn the thread from the start function and access class members from outside the class?",
+      "range": {
+        "startLine": 215,
+        "startChar": 21,
+        "endLine": 215,
+        "endChar": 35
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
