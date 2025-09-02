@@ -193,6 +193,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e5a650c_8c084bd1",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-09-02T16:29:11Z",
+      "side": 1,
+      "message": "openstate_key is used in delegation handling code in fsal_start_io() so thought of retaining it in this patch.",
+      "parentUuid": "a89d263d_c22adb0c",
+      "revId": "1314fe203f2dad40b51541e7c7b14621ce84bb48",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8b0c065_bb17ecad",
         "filename": "src/include/sal_functions.h",
         "patchSetId": 12
