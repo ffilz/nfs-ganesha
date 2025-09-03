@@ -345,9 +345,9 @@ static void rpcsec_gss_fetch_managed_groups(char *principal)
 			op_ctx->creds.caller_glen = 0;
 			return;
 		}
-		idmapper_monitoring__resolution(IDMAPPING_PRINCIPAL_TO_GROUPLIST,
-					     IDMAPPING_NFSIDMAP,
-					     IDMAPPING_STATUS_SUCCESS);
+		idmapper_monitoring__resolution(
+			IDMAPPING_PRINCIPAL_TO_GROUPLIST, IDMAPPING_NFSIDMAP,
+			IDMAPPING_STATUS_SUCCESS);
 #else
 		LogWarn(COMPONENT_DISPATCH,
 			"Unsupported code path for principal %s", principal);
@@ -517,7 +517,7 @@ nfsstat4 nfs_req_creds(struct svc_req *req)
 		/* Get the gss data to process them */
 		gd = SVCAUTH_PRIVATE(req->rq_auth);
 
-		principal_len = MIN(gd->cname.length, sizeof(principal));
+		principal_len = MIN(gd->cname.length, sizeof(principal) - 1);
 		memcpy(principal, gd->cname.value, principal_len);
 		principal[principal_len] = 0;
 		if (gd->cname.length >= sizeof(principal))

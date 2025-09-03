@@ -156,7 +156,7 @@ static void fs_create_clid_name(nfs_client_id_t *clientid)
 int fs_create_recov_dir(void)
 {
 	int err, root_len, dir_len, old_len, node_size = 0;
-	char node[15];
+	char node[15] = { 0 };
 
 	/* Note below - all the size tests below are >= which assures space for
 	 *              the terminating NUL.
@@ -390,7 +390,7 @@ void fs_reclaim_complete(nfs_client_id_t *clientid)
 			       clientid->cid_recov_tag + position, len);
 			path[pathpos + len] = '/';
 			memcpy(path + pathpos + len + 1,
-				reclaim_complete_marker, marker_len);
+			       reclaim_complete_marker, marker_len);
 			fd = creat(path, 0700);
 			if (fd < 0) {
 				LogEvent(
@@ -434,7 +434,7 @@ static void fs_rm_client_records(char *path)
 
 		/* only delete revoke file handles or reclaim_complete marker */
 		if (dentp->d_name[0] != '\x1' &&
-			strcmp(dentp->d_name, reclaim_complete_marker)) {
+		    strcmp(dentp->d_name, reclaim_complete_marker)) {
 			continue;
 		}
 
@@ -523,17 +523,16 @@ void fs_rm_clid(nfs_client_id_t *clientid)
 static bool fs_check_reclaim_complete(const char *clid_path)
 {
 	char path[PATH_MAX] = { 0 };
-	int rc = snprintf(path, sizeof(path), "%s/%s",
-		clid_path, reclaim_complete_marker);
+	int rc = snprintf(path, sizeof(path), "%s/%s", clid_path,
+			  reclaim_complete_marker);
 
 	if (unlikely(rc >= sizeof(path))) {
-		LogCrit(COMPONENT_CLIENTID,
-			"Path %s/%s too long", clid_path,
+		LogCrit(COMPONENT_CLIENTID, "Path %s/%s too long", clid_path,
 			reclaim_complete_marker);
 	} else if (unlikely(rc < 0)) {
 		LogCrit(COMPONENT_CLIENTID,
-			"Unexpected return from snprintf %d error %s (%d)",
-			rc, strerror(errno), errno);
+			"Unexpected return from snprintf %d error %s (%d)", rc,
+			strerror(errno), errno);
 	} else {
 		struct stat buffer;
 
@@ -541,7 +540,8 @@ static bool fs_check_reclaim_complete(const char *clid_path)
 			if (S_ISREG(buffer.st_mode))
 				return true;
 			else {
-				LogDebug(COMPONENT_CLIENTID,
+				LogDebug(
+					COMPONENT_CLIENTID,
 					"unexpected non-regular type of path %s",
 					path);
 			}
@@ -802,13 +802,14 @@ static int fs_read_recov_clids_impl(const char *parent_path, char *clid_str,
 				reclaim_complete =
 					fs_check_reclaim_complete(sub_path);
 				new_ent = add_clid_entry(build_clid,
-							reclaim_complete);
+							 reclaim_complete);
 				fs_cp_pop_revoked_delegs(new_ent, sub_path,
 							 tgtdir, !takeover,
 							 add_rfh_entry);
-				LogDebug(COMPONENT_CLIENTID,
-					 "added %s to clid list, reclaim_complete %d",
-					 new_ent->cl_name, reclaim_complete);
+				LogDebug(
+					COMPONENT_CLIENTID,
+					"added %s to clid list, reclaim_complete %d",
+					new_ent->cl_name, reclaim_complete);
 			}
 		}
 		gsh_free(build_clid);
@@ -964,8 +965,8 @@ void fs_clean_old_recov_dir_impl(char *parent_path)
 			/* and reclaim_complete marker now */
 			if (unlink(path) < 0) {
 				LogEvent(COMPONENT_CLIENTID,
-					"unlink of %s failed errno: %s (%d)",
-					path, strerror(errno), errno);
+					 "unlink of %s failed errno: %s (%d)",
+					 path, strerror(errno), errno);
 			}
 		} else if (dentp->d_type == DT_DIR) {
 			/* This is a directory, we need process files in it! */
@@ -980,8 +981,8 @@ void fs_clean_old_recov_dir_impl(char *parent_path)
 			}
 		} else {
 			LogEvent(COMPONENT_CLIENTID,
-				"unknown dentry type %c:%s",
-				dentp->d_type, path);
+				 "unknown dentry type %c:%s", dentp->d_type,
+				 path);
 		}
 		gsh_free(path);
 	}
