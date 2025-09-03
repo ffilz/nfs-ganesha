@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2563d17c_b7925e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-03T20:27:10Z",
+      "side": 1,
+      "message": "Just a general note - if committing a patch requires clang-format changes, it would be preferable to try and have a separate patch that fixes up the clang-format first and then the patch to fix the issue to make it easier to review.",
+      "revId": "395c3d5706ed99aa27681ebf8517e65a0dfd79ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
