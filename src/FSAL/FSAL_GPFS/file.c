@@ -124,9 +124,17 @@ fsal_status_t gpfs_close_func(struct fsal_obj_handle *obj_hdl,
 
 	my_fd = container_of(fsal_fd, struct gpfs_fd, fsal_fd);
 
-	status = fsal_internal_close(my_fd->fd, NULL, 0);
-	my_fd->fd = -1;
-	my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
+	if (my_fd->fd >= 0 && my_fd->fsal_fd.openflags != FSAL_O_CLOSED) {
+		LogFullDebug(
+			COMPONENT_FSAL,
+			"Closing Opened fd %d for fsal_fd(%p) with type(%d)",
+			my_fd->fd, &my_fd->fsal_fd, my_fd->fsal_fd.fd_type);
+		status = fsal_internal_close(my_fd->fd, NULL, 0);
+		my_fd->fd = -1;
+		my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
+	} else {
+		status = fsalstat(ERR_FSAL_NOT_OPENED, 0);
+	}
 
 	return status;
 }
