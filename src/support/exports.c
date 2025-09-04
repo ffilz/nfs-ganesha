@@ -689,6 +689,26 @@ static int client_commit(void *node, void *link_mem, void *self_struct,
 				 EXPORT_OPTION_TRANSPORTS);
 		}
 
+		/* Check if the client block has a delegation option set */
+		LogFullDebug(COMPONENT_CONFIG,
+			     "This client block delegations %d",
+			     (expcli->client_perms.options &
+			      EXPORT_OPTION_DELEGATIONS));
+
+		/* Accumulate the client delegation option here
+		 * so that the FSAL create_export method can set
+		 * the delegation time out if at all the CLIENT stanza
+		 * has set the deleagtion option.
+		 */
+		export->cli_deleg_option |= (expcli->client_perms.options &
+				EXPORT_OPTION_DELEGATIONS);
+
+		if (export->cli_deleg_option) {
+			/* Delegation bit is set in the CLIENT's stanza.*/
+			LogFullDebug(COMPONENT_CONFIG,
+				     "This client has enabled the delegations");
+		}
+
 		glist_splice_tail(&export->clients, &cli->cle_list);
 	}
 	if (errcnt == 0)
@@ -1153,6 +1173,45 @@ uint32_t export_check_options(struct gsh_export *exp)
 	PTHREAD_RWLOCK_unlock(&exp->exp_lock);
 
 	return perms.options;
+}
+
+/**
+ * @brief Check if the delegation option is set in the config file
+ *
+ * This method is used to check if the deleg option is parsed
+ * through any of the EXPORT, EXPORT_DEFAULTS or CLIENT stanzas.
+ *
+ * This is required so that enable_delegations method can set the
+ * deleg time out in Ceph.
+ *
+ * NOTE: This is NOT used to check if delegations are allowed for a
+ *       specific OPEN (from a specific client on the export).
+ *       We just need to detect if deleg option is set on the export at all.
+ *
+ * @param[in] exp Export handle
+ *
+ * @return Effective delegation option.
+ */
+uint32_t export_check_client_options(struct gsh_export *exp)
+{
+	uint32_t exp_options = 0;
+	uint32_t cli_options = 0;
+	uint32_t eff_options = 0;
+
+	if (!exp)
+		return 0;
+
+	/* Check the EXPORT, EXPORT_DEFAULTS options */
+	exp_options = export_check_options(exp);
+
+	/* Check the client delegation options */
+	if (exp->cli_deleg_option)
+		cli_options |= exp->cli_deleg_option;
+
+	/* Calculate the effective options */
+	eff_options = exp_options | cli_options;
+
+	return eff_options;
 }
 
 /**

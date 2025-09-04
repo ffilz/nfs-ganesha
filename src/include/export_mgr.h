@@ -229,6 +229,12 @@ struct gsh_export {
 	bool update_prune_unmount;
 	/** Due to an update, this export will need to be remounted. */
 	bool update_remount;
+	/* This is used to store the deleg option so that enable_delegations
+	 * method can make use of it while setting the delegation timeout.
+	 * This variable will be set in the client_commit method,
+	 * if a client has set the delegation option on the export.
+	 */
+	uint32_t cli_deleg_option;
 };
 
 /* Use macro to define this to get around include file order. */
