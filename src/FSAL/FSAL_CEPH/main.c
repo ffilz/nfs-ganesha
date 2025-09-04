@@ -316,7 +316,14 @@ static void enable_delegations(struct ceph_mount *cm)
 {
 	struct export_perms *export_perms = &op_ctx->ctx_export->export_perms;
 
-	if (export_perms->options & EXPORT_OPTION_DELEGATIONS) {
+	/* Check EXPORT, EXPORT_DEFAULTS, and CLIENT blocks for
+	 * delegation-related settings.
+	 * We only need to know if the delegation option is set in
+	 * any stanza, not which specific EXPORT or CLIENT enabled it.
+	 */
+	uint32_t eff_options = export_check_client_options(op_ctx->ctx_export);
+
+	if (eff_options & EXPORT_OPTION_DELEGATIONS) {
 		/*
 		 * Ganesha will time out delegations when the recall fails
 		 * for two lease periods. We add just a little bit above that
@@ -343,6 +350,8 @@ static void enable_delegations(struct ceph_mount *cm)
 				"Unable to set delegation timeout for %s. Disabling delegation support: %s",
 				CTX_FULLPATH(op_ctx), strerror(-ceph_status));
 		}
+	} else {
+		LogDebug(COMPONENT_FSAL, "No deleg option set in the config");
 	}
 }
 #else /* !USE_FSAL_CEPH_LL_DELEGATION */
