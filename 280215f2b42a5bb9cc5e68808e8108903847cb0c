@@ -52,6 +52,23 @@
       "parentUuid": "02288903_2eb8cd02",
       "revId": "280215f2b42a5bb9cc5e68808e8108903847cb0c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb4dbf7_ddb5ad0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-04T21:30:18Z",
+      "side": 1,
+      "message": "This patch caused a significant regression in pynfs 4.1 test cases, please use the latest from git://git.linux-nfs.org/projects/cdmackay/pynfs.git and address the failures other than:\n\nEFS_ATOMIC_CHANGE_INFO st_extra.testAtomicChangeInfo              : FAILURE\n           AttributeError: \u0027NoneType\u0027 object has no attribute\n           \u0027resok4\u0027\nDELEG2   st_delegation.testWriteDeleg                             : FAILURE\n           Could not get delegation\nDELEG23  st_delegation.testServerSelfConflict3                    : FAILURE\n           Could not get delegation\nDELEG1   st_delegation.testReadDeleg                              : FAILURE\n           Could not get delegation\nDELEG8   st_delegation.testDelegRevocation                        : FAILURE\n           Could not get delegation\nDELEG25  st_delegation.testCbGetattrWithChange                    : FAILURE\n           FATTR4_OPEN_ARGUMENTS not supported\nDELEG24  st_delegation.testCbGetattrNoChange                      : FAILURE\n           FATTR4_OPEN_ARGUMENTS not supported\nDELEG6   st_delegation.testCBSecParmsNull                         : FAILURE\n           Could not get delegation\nDELEG7   st_delegation.testCBSecParmsChange                       : FAILURE\n           Could not get delegation\nDELEG5   st_delegation.testCBSecParms                             : FAILURE\n           Could not get delegation\nDELEG3   st_delegation.testAnyDeleg                               : FAILURE\n           Could not get delegation\nSEQ6     st_sequence.testRequestTooBig                            : FAILURE\n           OP_LOOKUP should return NFS4ERR_REQ_TOO_BIG, instead\n           got NFS4ERR_NAMETOOLONG\nCSESS21  st_create_session.testCallbackVersion                    : FAILURE\n           No CB_NULL sent\nCSESS20  st_create_session.testCallbackProgram                    : FAILURE\n           No CB_NULL sent\nEID9     st_exchange_id.testLeasePeriod                           : FAILURE\n           OP_CREATE_SESSION should return\n           NFS4ERR_STALE_CLIENTID, instead got NFS4_OK",
+      "revId": "280215f2b42a5bb9cc5e68808e8108903847cb0c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
