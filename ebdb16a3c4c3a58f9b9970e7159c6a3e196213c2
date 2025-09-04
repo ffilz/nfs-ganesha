@@ -16,6 +16,24 @@
       "message": "Does not compile:\n\n/home/ffilz/ganesha/review/src/Protocols/NFS/nfs4_op_read.c:487:49: error: passing argument 1 of ‘get_buffer_for_io_response’ makes integer from pointer without a cast [-Werror\u003dint-conversion]\n  487 |         buffer \u003d get_buffer_for_io_response(data-\u003ereq, RNDUP(arg_READ4-\u003ecount));\n      |                                             ~~~~^~~~~\n      |                                                 |\n      |                                                 struct svc_req *\nIn file included from /home/ffilz/ganesha/review/src/include/uid2grp.h:46,\n                 from /home/ffilz/ganesha/review/src/include/fsal_types.h:43,\n                 from /home/ffilz/ganesha/review/src/include/fsal_api.h:45,\n                 from /home/ffilz/ganesha/review/src/include/fsal.h:63,\n                 from /home/ffilz/ganesha/review/src/Protocols/NFS/nfs4_op_read.c:40:\n/home/ffilz/ganesha/review/src/include/gsh_rpc.h:319:43: note: expected ‘uint64_t’ {aka ‘long unsigned int’} but argument is of type ‘struct svc_req *’\n  319 | void *get_buffer_for_io_response(uint64_t size, size_t *buffer_size);\n      |                                  ~~~~~~~~~^~~~\nIn file included from /home/ffilz/ganesha/review/src/libntirpc/ntirpc/rpc/xdr_inline.h:53,\n                 from /home/ffilz/ganesha/review/src/include/gsh_rpc.h:49,\n                 from /home/ffilz/ganesha/review/src/include/uid2grp.h:46,\n                 from /home/ffilz/ganesha/review/src/include/fsal_types.h:43,\n                 from /home/ffilz/ganesha/review/src/include/fsal_api.h:45,\n                 from /home/ffilz/ganesha/review/src/include/fsal.h:63,\n                 from /home/ffilz/ganesha/review/src/Protocols/NFS/nfs4_op_read.c:40:\n/home/ffilz/ganesha/review/src/libntirpc/ntirpc/rpc/xdr.h:114:51: error: passing argument 2 of ‘get_buffer_for_io_response’ makes pointer from integer without a cast [-Werror\u003dint-conversion]\n  114 | #define RNDUP(x)  (((x) + BYTES_PER_XDR_UNIT - 1) \u0026 ~(BYTES_PER_XDR_UNIT - 1))\n      |                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n      |                                                   |\n      |                                                   count4 {aka unsigned int}\n/home/ffilz/ganesha/review/src/Protocols/NFS/nfs4_op_read.c:487:56: note: in expansion of macro ‘RNDUP’\n  487 |         buffer \u003d get_buffer_for_io_response(data-\u003ereq, RNDUP(arg_READ4-\u003ecount));\n      |                                                        ^~~~~\nIn file included from /home/ffilz/ganesha/review/src/include/uid2grp.h:46,\n                 from /home/ffilz/ganesha/review/src/include/fsal_types.h:43,\n                 from /home/ffilz/ganesha/review/src/include/fsal_api.h:45,\n                 from /home/ffilz/ganesha/review/src/include/fsal.h:63,\n                 from /home/ffilz/ganesha/review/src/Protocols/NFS/nfs4_op_read.c:40:\n/home/ffilz/ganesha/review/src/include/gsh_rpc.h:319:57: note: expected ‘size_t *’ {aka ‘long unsigned int *’} but argument is of type ‘count4’ {aka ‘unsigned int’}\n  319 | void *get_buffer_for_io_response(uint64_t size, size_t *buffer_size);\n      |                                                 ~~~~~~~~^~~~~~~~~~~",
       "revId": "ebdb16a3c4c3a58f9b9970e7159c6a3e196213c2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1089ccfc_97f84803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015367
+      },
+      "writtenOn": "2025-09-04T06:23:12Z",
+      "side": 1,
+      "message": "@yanghh@gmail.com you need to port these changes on latest code, get_buffer_for_io_response is changed with this fix\ncommit f15c95ed4bdb5f4bd7f3c967078de8728b6e4d7d\nAuthor: Gaurav Gangalwar \u003cgaurav.gangalwar@gmail.com\u003e\nDate:   Fri Aug 16 02:16:07 2024 -0400\n\n    RDMA fixes to serve reads not aligned on BYTES_PER_XDR_UNIT\n    \n    For RDMA reads we can\u0027t use allocated buffer for padding bytes.\n    We should use registered buffer only for sending padding bytes also.\n    \n    For RDMA, buffer size is always aligned to BYTES_PER_XDR_UNIT, so just\n    check if iov has space left and use it for padding.\n    \n    Need tirpc pull\n    https://github.com/nfs-ganesha/ntirpc/pull/314\n    \n    Change-Id: Id6a931bccd53b4cc48bf5ed3dfae356023909544\n    Signed-off-by: Gaurav Gangalwar \u003cgaurav.gangalwar@gmail.com\u003e",
+      "parentUuid": "956bd013_1c227f9e",
+      "revId": "ebdb16a3c4c3a58f9b9970e7159c6a3e196213c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
