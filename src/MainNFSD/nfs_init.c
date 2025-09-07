@@ -361,6 +361,27 @@ static void handle_krb5_config_update(nfs_krb5_parameter_t new_krb5_param)
 
 #endif /* _HAVE_GSSAPI */
 
+/*
+ * Merges configuration flags that were moved from the NFSv4 section to
+ * NFSv4_Dynamic.
+ *
+ * Note that the new configuration should be loaded to a temporary variable
+ * before merging it back, so that if UTF8 validation is set to true in the old
+ * section, we won't temporarily overwrite it until we merge it back.
+ */
+static void merge_nfsv4_dynamic_config(
+	nfs_version4_dynamic_parameter_t *nfsv4_dynamic_param)
+{
+	if (nfs_param.nfsv4_param.enforce_utf8_vld) {
+		LogWarn(COMPONENT_CONFIG,
+			"Enforce_UTF8_Validation in NFSv4 config section will soon be "
+			"deprecated. Please define it under the NFSv4_Dynamic section instead.");
+		nfsv4_dynamic_param->enforce_utf8_vld = true;
+	}
+
+	nfs_param.nfsv4_dynamic_param = *nfsv4_dynamic_param;
+}
+
 bool reread_config(void)
 {
 	int status = 0;
@@ -414,6 +435,17 @@ bool reread_config(void)
 			"Error while parsing DIRECTORY_SERVICES configuration");
 		goto reread_error;
 	}
+
+	/* Reread NFSv4 dynamic configuration */
+	nfs_version4_dynamic_parameter_t nfsv4_dynamic_param;
+	(void)load_config_from_parse(config_struct, &version4_dynamic_param,
+				     &nfsv4_dynamic_param, true, &err_type);
+	if (!config_error_is_harmless(&err_type)) {
+		LogCrit(COMPONENT_INIT,
+			"Error while parsing NFSv4 dynamic configuration");
+		return -1;
+	}
+	merge_nfsv4_dynamic_config(&nfsv4_dynamic_param);
 
 	/* Set idmapping status based on directory_services configuration */
 	status = set_idmapping_status(
@@ -729,6 +761,19 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 			"Error while parsing NFSv4 specific configuration");
 		return -1;
 	}
+
+	/* NFSv4 dynamic configuration */
+	nfs_version4_dynamic_parameter_t nfsv4_dynamic_param;
+	(void)load_config_from_parse(parse_tree, &version4_dynamic_param,
+				     &nfsv4_dynamic_param, true, err_type);
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_INIT,
+			"Error while parsing NFSv4 dynamic configuration");
+		return -1;
+	}
+	/* This function must be called after we loaded version4_param. */
+	merge_nfsv4_dynamic_config(&nfsv4_dynamic_param);
+
 	/* Use `domainname` from `nfsv4` config section, if it is not set under
 	 * `directory_services` section. Otherwise, ignore the `nfsv4` value.
 	 */

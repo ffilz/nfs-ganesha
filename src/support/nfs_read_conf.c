@@ -693,3 +693,19 @@ struct config_block version4_param = {
 	.blk_desc.u.blk.params = version4_params,
 	.blk_desc.u.blk.commit = noop_conf_commit
 };
+
+static struct config_item version4_dynamic_params[] = {
+	CONF_ITEM_BOOL("Enforce_UTF8_Validation", false,
+		       nfs_version4_dynamic_parameter, enforce_utf8_vld),
+	CONFIG_EOL
+};
+
+struct config_block version4_dynamic_param = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.nfsv4dynamic",
+	.blk_desc.name = "NFSv4_Dynamic",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.flags = CONFIG_UNIQUE, /* too risky to have more */
+	.blk_desc.u.blk.init = noop_conf_init,
+	.blk_desc.u.blk.params = version4_dynamic_params,
+	.blk_desc.u.blk.commit = noop_conf_commit
+};

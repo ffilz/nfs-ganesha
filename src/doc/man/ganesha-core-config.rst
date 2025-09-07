@@ -556,7 +556,11 @@ Slot_Table_Size(uint32, range 1 to 1024, default 64)
     Size of the NFSv4.1 slot table
 
 Enforce_UTF8_Validation(bool, default false)
-    Set true to enforce valid UTF-8 for path components and compound tags
+    Set true to enforce valid UTF-8 for path components and compound tags.
+    This field is deprecated. Please use Nfsv4_Dynamic.Enforce_UTF8_Validation
+    instead.
+    If this value and Nfsv4_Dynamic.Enforce_UTF8_Validation are both defined,
+    the behavior is undefined.
 
 Max_Client_Ids(uint32, range 0 to UINT32_MAX, default 0)
     Specify a max limit on number of NFS4 ClientIDs supported by the
@@ -602,6 +606,14 @@ Max_Alive_Time_For_Expired_Client(uint64, range 0 to UINT64_MAX, default 86400)
     Specify the max amount of time till which to keep the unresponsive client
     in memory, beyond which Ganesha would start reaping and expire it off.
     Comes to play if the config Expired_Client_Threshold is not set to ZERO.
+
+NFSv4_Dynamic {}
+--------------------------------------------------------------------------------
+
+Enforce_UTF8_Validation(bool, default false)
+    Set true to enforce valid UTF-8 for path components and compound tags.
+    If this value and Nfsv4.Enforce_UTF8_Validation are both defined, the
+    behavior is undefined.
 
 RADOS_KV {}
 --------------------------------------------------------------------------------

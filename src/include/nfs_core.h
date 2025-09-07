@@ -159,6 +159,7 @@ extern struct config_block nfs_ip_name;
 extern struct config_block krb5_param;
 #endif
 extern struct config_block version4_param;
+extern struct config_block version4_dynamic_param;
 extern struct config_block directory_services_param;
 
 /* in nfs_admin_thread.c */

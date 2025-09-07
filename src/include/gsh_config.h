@@ -706,6 +706,12 @@ typedef struct nfs_version4_parameter {
 
 } nfs_version4_parameter_t;
 
+typedef struct nfs_version4_dynamic_parameter {
+	/** whether to skip utf8 validation. defaults to false and settable
+       with enforce_utf8_validation. */
+	bool enforce_utf8_vld;
+} nfs_version4_dynamic_parameter_t;
+
 typedef struct directory_services_param {
 	/** Domain to use if we aren't using the nfsidmap. Defaults
 	    to NULL and is set with DomainName. */
@@ -753,6 +759,8 @@ typedef struct nfs_param {
 	nfs_core_parameter_t core_param;
 	/** NFSv4 specific parameters, settable in the NFSv4 stanza. */
 	nfs_version4_parameter_t nfsv4_param;
+	/** NFSv4 dynamic parameters that can be updated by reread_config(). */
+	nfs_version4_dynamic_parameter_t nfsv4_dynamic_param;
 #ifdef _HAVE_GSSAPI
 	/** kerberos configuration.  Settable in the NFS_KRB5 stanza. */
 	nfs_krb5_parameter_t krb5_param;
