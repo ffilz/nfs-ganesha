@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "448aad02_449d7e82",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2025-09-08T20:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e465c3f_b99f4723",
+      "revId": "ed087bd01efd44351e6d31f080b6ea1ffc681a4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2582c78_4e36e025",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-08T20:52:44Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\t\t\tbool eof \u003d false;\n+\t\t\tread_data-\u003eqos_flag \u003d 0;",
+      "revId": "ed087bd01efd44351e6d31f080b6ea1ffc681a4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9329b7_a2c78498",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2025-09-08T20:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2582c78_4e36e025",
       "revId": "ed087bd01efd44351e6d31f080b6ea1ffc681a4b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63121693_409ac137",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2025-09-08T20:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15a5505a_5c079e66",
+      "revId": "ed087bd01efd44351e6d31f080b6ea1ffc681a4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24f16b6c_0a12327b",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-09-08T20:52:44Z",
       "side": 1,
       "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t compound_data_t *data, qos_op_type_t op_type, bool is_ds);",
+      "revId": "ed087bd01efd44351e6d31f080b6ea1ffc681a4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561deff9_51d9d9a2",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2025-09-08T20:56:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "24f16b6c_0a12327b",
       "revId": "ed087bd01efd44351e6d31f080b6ea1ffc681a4b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
