@@ -189,7 +189,7 @@ else (NOT CEPH_FS)
     message("Cannot find ceph_ll_nonblocking_readv_writev. Disabling zero copy.")
     set(USE_FSAL_CEPH_FS_ZEROCOPY_IO OFF)
   else(NOT CEPH_FS_ZEROCOPY_IO)
-    set(USE_FSAL_CEPH_FS_ZEROCOPY_IO ON)
+    set(USE_FSAL_CEPH_FS_ZEROCOPY_IO OFF)
   endif(NOT CEPH_FS_ZEROCOPY_IO)
 endif (NOT CEPH_FS)
 
