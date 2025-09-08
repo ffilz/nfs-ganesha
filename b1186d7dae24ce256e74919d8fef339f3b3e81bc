@@ -50,6 +50,24 @@
       "message": "I don\u0027t feel very comfortable with this, it feels like hard-coding a change that should be policy;  nobody likes super complex log logic, but maybe we should figure out a way to make the log schema(s) more flexible",
       "revId": "b1186d7dae24ce256e74919d8fef339f3b3e81bc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5c1a9b_2993033b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2025-09-08T05:53:16Z",
+      "side": 1,
+      "message": "I don’t want to confuse the customer with extra warnings in ganesha.log after the new release. If configuration parameter adjustments are required, the Ganesha upgrade process should be handled by the downstream code. Also, we don’t log all configured values at the EVENT level. When parameters are not explicitly set and default values are applied, that behavior is expected and documented. Therefore, there’s no need to display warning messages for unset values.\n\nI also prefer not to ask the customer to manually edit the configuration file, as it can easily introduce errors. Configuration migration should be handled automatically as part of the Ganesha upgrade process.",
+      "parentUuid": "08c2952b_783cbef2",
+      "revId": "b1186d7dae24ce256e74919d8fef339f3b3e81bc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
