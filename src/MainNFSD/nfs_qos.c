@@ -1239,6 +1239,7 @@ static void set_class_values(qos_class_t *qos_class,
 		in->enable_tokens = false;
 		in->enable_iops_control = false;
 		in->enable_bw_control = false;
+		in->enable_ds_control = false;
 	}
 
 	update_class_token_values(qos_class, in);
@@ -1821,14 +1822,18 @@ static inline qos_status_t qos_process_pepc(uint64_t rsize, void *caller_data,
  * @param [in] data Pointer to the compound_data_t structure containing
  *			the request data.
  * @param [in] op_type Type of the operation (read/write).
+ * @param [in] is_ds Whether caller is doing a DS read/write.
  * @return : QOS_TASK_NOT_SUSPENDED/ QOS_TASK_SUSPENDED
  */
 qos_status_t qos_process(uint64_t rsize, void *caller_data,
-			 compound_data_t *data, qos_op_type_t op_type)
+			 compound_data_t *data, qos_op_type_t op_type, bool is_ds)
 {
 	qos_status_t ret = QOS_TASK_NOT_SUSPENDED;
 
 	if (!g_qos_config->enable_qos)
+		return ret;
+
+	if (is_ds && !g_qos_config->enable_ds_control)
 		return ret;
 
 	switch (g_qos_config->qos_type) {
