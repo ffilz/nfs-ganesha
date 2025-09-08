@@ -101,6 +101,40 @@
       "message": "pytrigger",
       "revId": "c8982b7959c139de26fa8f316d512b77de031faa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1771a29_66b2bf18",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-08T08:57:33Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+ int  vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp) $",
+      "revId": "c8982b7959c139de26fa8f316d512b77de031faa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b95238_4e5a0a05",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-08T08:57:33Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ int  vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp) $",
+      "revId": "c8982b7959c139de26fa8f316d512b77de031faa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
