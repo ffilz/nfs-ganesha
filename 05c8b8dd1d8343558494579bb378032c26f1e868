@@ -16,6 +16,40 @@
       "message": "@jlayton@redhat.com I\u0027d like your thoughts on this.",
       "revId": "05c8b8dd1d8343558494579bb378032c26f1e868",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b09dc96b_9a5b161e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-09-08T09:19:30Z",
+      "side": 1,
+      "message": "Check comment.",
+      "revId": "05c8b8dd1d8343558494579bb378032c26f1e868",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd908d4_552adbc1",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-09-08T09:19:30Z",
+      "side": 1,
+      "message": "I would not recommend this change.\nExisting log provides info on how many clients were able to complete the reclaim (out of total clients records in the recovery db). So this information is useful to find out more information on client reclaim.\nIn case of client recovery mismatch, one can not ask for enabling debug logging and recreate the issue.",
+      "revId": "05c8b8dd1d8343558494579bb378032c26f1e868",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
