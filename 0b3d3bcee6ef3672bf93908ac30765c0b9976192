@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b60f2fcf_96027396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-09T16:58:03Z",
+      "side": 1,
+      "message": "Some more thoughts on this.\n\nI really do want to find some way where it is possible to see all the messages for this.\n\nSo there are 48 LogFullDebug(COMPONENT_CLIENTID... messages and no LogMidDebug...\n\nCould we make all of those LogMidDebug including this one, but this one make the logic:\n\nif ((refcount \u003e 1) || isFullDebug(COMPONENT_CLIENTID) || (isMidDebug(COMPONENT_CLIENTID) \u0026\u0026 should_log(next_log_time)))\n\nThus MidDebug gets rate limited, FullDebug gets everything?\n\nWe really should make more use of FullDebug, this is a good way to do so.",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f41918e9_1cfaec77",
         "filename": "src/SAL/nfs4_clientid.c",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2025-09-09T15:37:38Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tstruct timespec current_time;\n+\tnow_mono(\u0026current_time);",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4795920f_9fcfc7d8",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-09T16:58:03Z",
+      "side": 1,
+      "message": "Since other edits are required, if you want to keep checkpatch happy for the next run, go ahead and add the blank line.",
+      "parentUuid": "f41918e9_1cfaec77",
       "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -37,6 +72,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "259b1d43_8423f18a",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-09T16:58:03Z",
+      "side": 1,
+      "message": "I\u0027m not a great fan of variables declared inline, but at least add a blank line here (I\u0027d be OK if you add it between the now_mono and the while even though checkpatch wants it between the declaration and now_mono, but I find a set off of the while adds more to readability.",
+      "parentUuid": "3230f9b7_cbf14857",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03bfd80_43fbb1c6",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-09T16:58:03Z",
+      "side": 1,
+      "message": "Can we adjust this logic to not rate limit the warning:\n\nif ((refcount \u003e 1) || (isFullDebug(COMPONENT_CLIENTID) \u0026\u0026 should_log(next_log_time)))",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cf2b0c4_52168dc0",
         "filename": "src/SAL/nfs4_clientid.c",
         "patchSetId": 2
@@ -54,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5071fb02_6c8e0556",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-09T16:58:03Z",
+      "side": 1,
+      "message": "Wrap comment and use /* */ rather than //",
+      "parentUuid": "0cf2b0c4_52168dc0",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea6ff681_e514dd38",
         "filename": "src/SAL/nfs4_clientid.c",
         "patchSetId": 2
@@ -65,6 +153,24 @@
       "writtenOn": "2025-09-09T15:37:38Z",
       "side": 1,
       "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t// Yield to allow other threads to proceed and release references.",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fb4e8f6_2597a766",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-09T16:58:03Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "ea6ff681_e514dd38",
       "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
