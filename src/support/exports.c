@@ -2434,7 +2434,7 @@ static struct config_item pseudofs_params[] = {
 	CONF_PSEUDOFS_PARAMS(gsh_export),
 	CONF_PSEUDOFS_PERMS(gsh_export, export_perms),
 
-	/* NOTE: the Client sub-block must be the *last*
+/* NOTE: the Client sub-block must be the *last*
 	 * entry in the list.  This is so all other
 	 * parameters have been processed before this sub-block
 	 * is processed.
@@ -2457,7 +2457,7 @@ static struct config_item pseudofs_update_params[] = {
 	CONF_PSEUDOFS_PARAMS(gsh_export),
 	CONF_PSEUDOFS_PERMS(gsh_export, export_perms),
 
-	/* NOTE: the Client sub-block must be the *last*
+/* NOTE: the Client sub-block must be the *last*
 	 * entry in the list.  This is so all other
 	 * parameters have been processed before this sub-block
 	 * is processed.

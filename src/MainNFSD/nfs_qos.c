@@ -883,7 +883,8 @@ void qos_free_mem(void *gsh_ptr, qos_class_type_t class_type)
 			QOS_PRINT_CLIENT("trying to free from all exports",
 					 ((struct gsh_client *)gsh_ptr));
 			foreach_gsh_export(pepc_per_export_free_mem_iter, false,
-					   client);
+					   client)
+				;
 		}
 		break;
 	default:
@@ -1594,8 +1595,7 @@ static void qos_token_exausted_suspend_task(qos_class_t *qos_class,
 		qos_get_time_to_tokenrefresh(qos_class, op_type, ltime);
 
 	timeout = get_time_future_useconds(
-		ltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh),
-		0, 0);
+		ltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh), 0, 0);
 
 	client = get_and_insert_client_details(&(qos_class->client_entries),
 					       data);
@@ -1608,8 +1608,9 @@ static void qos_token_exausted_suspend_task(qos_class_t *qos_class,
 		svc_rqst_qos_suspend_socket(client->rq_xprt);
 	} else if (client->num_ios_waiting >= SUSPEND_SOCKET_IO_LIMIT &&
 		   client->epoll_disabled == 1) {
-		timeout = get_time_future_useconds(
-			ltime, TOKEN_NFS_ERR_DELAY_IMMED, 0, 0);
+		timeout = get_time_future_useconds(ltime,
+						   TOKEN_NFS_ERR_DELAY_IMMED, 0,
+						   0);
 	}
 
 	new_timer_entry = create_timer_entry(timeout,
@@ -2055,13 +2056,16 @@ static inline void refresh_qos_token(void)
 			 g_qos_config->qos_type);
 		break;
 	case QOS_PER_EXPORT_ENABLED:
-		foreach_gsh_export(ps_token_control_iter, false, &op_type);
+		foreach_gsh_export(ps_token_control_iter, false, &op_type)
+			;
 		break;
 	case QOS_PER_CLIENT_ENABLED:
-		foreach_gsh_client(pc_token_control_iter, &op_type);
+		foreach_gsh_client(pc_token_control_iter, &op_type)
+			;
 		break;
 	case QOS_PEREXPORT_PERCLIENT_ENABLED:
-		foreach_gsh_export(pepc_token_control_iter, false, &op_type);
+		foreach_gsh_export(pepc_token_control_iter, false, &op_type)
+			;
 		break;
 	default:
 		LogDebug(COMPONENT_QOS, " Something really wrong: %d",
@@ -2749,13 +2753,16 @@ static inline void resume_io(qos_op_type_t op_type)
 			 g_qos_config->qos_type);
 		break;
 	case QOS_PER_EXPORT_ENABLED:
-		foreach_gsh_export(ps_io_control_iter, false, &op_type);
+		foreach_gsh_export(ps_io_control_iter, false, &op_type)
+			;
 		break;
 	case QOS_PER_CLIENT_ENABLED:
-		foreach_gsh_client(pc_io_control_iter, &op_type);
+		foreach_gsh_client(pc_io_control_iter, &op_type)
+			;
 		break;
 	case QOS_PEREXPORT_PERCLIENT_ENABLED:
-		foreach_gsh_export(pepc_io_control_iter, false, &op_type);
+		foreach_gsh_export(pepc_io_control_iter, false, &op_type)
+			;
 		break;
 	default:
 		LogDebug(COMPONENT_QOS, " Something really wrong: %d",
@@ -2911,10 +2918,12 @@ static inline void stop_qos_io(void)
 		break;
 	case QOS_PEREXPORT_PERCLIENT_ENABLED:
 	case QOS_PER_EXPORT_ENABLED:
-		foreach_gsh_export(pe_stop_iter, false, NULL);
+		foreach_gsh_export(pe_stop_iter, false, NULL)
+			;
 		break;
 	case QOS_PER_CLIENT_ENABLED:
-		foreach_gsh_client(pc_stop_iter, NULL);
+		foreach_gsh_client(pc_stop_iter, NULL)
+			;
 		break;
 	}
 }

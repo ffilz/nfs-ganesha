@@ -1959,7 +1959,7 @@ static void cancel_blocked_lock(struct fsal_obj_handle *obj,
 	/* If lock list is empty, there really isn't any work for us to do. */
 	if (glist_empty(&obj->state_hdl->file.lock_list)) {
 		LogDebug(COMPONENT_STATE,
-			"Cancel success on file with no locks");
+			 "Cancel success on file with no locks");
 		return;
 	}
 

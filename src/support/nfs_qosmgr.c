@@ -1166,11 +1166,8 @@ static struct gsh_dbus_method qos_client_token_get = {
 };
 
 static struct gsh_dbus_method *qos_methods_pc[] = {
-	&qos_client_bw_get,
-	&qos_client_bw_set,
-	&qos_client_token_get,
-	&qos_client_token_set,
-	NULL
+	&qos_client_bw_get, &qos_client_bw_set, &qos_client_token_get,
+	&qos_client_token_set, NULL
 };
 
 static struct gsh_dbus_interface qos_interface = {
