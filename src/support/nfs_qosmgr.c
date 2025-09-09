@@ -22,6 +22,7 @@
  *
  * ---------------------------------------
  */
+#if ENABLE_QOS
 
 /**
  * @file nfs_qosmgr.c
@@ -1205,3 +1206,5 @@ void dbus_qosmgr_init(void)
 		gsh_dbus_register_path("QosMgr", dbus_qos_interface);
 	}
 }
+
+#endif

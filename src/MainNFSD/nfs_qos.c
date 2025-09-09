@@ -22,6 +22,7 @@
  *
  * ---------------------------------------
  */
+#if ENABLE_QOS
 
 /**
  * @file nfs_qos.c
@@ -2949,3 +2950,5 @@ void shutdown_qos(void)
 	PTHREAD_MUTEX_destroy(&g_qos_iopath_lock);
 	PTHREAD_MUTEX_destroy(&g_qos_config_lock);
 }
+
+#endif
