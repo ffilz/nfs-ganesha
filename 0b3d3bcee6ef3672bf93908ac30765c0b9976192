@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f41918e9_1cfaec77",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-09T15:37:38Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct timespec current_time;\n+\tnow_mono(\u0026current_time);",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3230f9b7_cbf14857",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-09T15:37:38Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct timespec next_log_time;\n+\tnow_mono(\u0026next_log_time);",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cf2b0c4_52168dc0",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-09T15:37:38Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t// Yield to allow other threads to proceed and release references.",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea6ff681_e514dd38",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-09T15:37:38Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t// Yield to allow other threads to proceed and release references.",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
