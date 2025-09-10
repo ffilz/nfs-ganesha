@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c63e87b3_068dae87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-10T12:10:15Z",
+      "side": 1,
+      "message": "When working with cmake, that\u0027s true\nBut we use bazel to compile and it compiles all the c files in the src directory\nSo it would be better to put that in if also",
+      "parentUuid": "fca29666_7897da2e",
+      "revId": "0f694c15903f6bc2d65a624af424582b46274253",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0a50a4d_3af728c7",
@@ -49,6 +67,24 @@
       "writtenOn": "2025-09-10T06:07:39Z",
       "side": 1,
       "message": "I think, the changes in src/MainNFSD/CMakeLists.txt\n+if(ENABLE_QOS)\n+  SET(MainServices_STAT_SRCS\n+    ${MainServices_STAT_SRCS}\n+    nfs_qos.c\n+   ../support/nfs_qosmgr.c\n+    )\n+endif(ENABLE_QOS)\n\ndoesn\u0027t doing the same ? i.e to not add/include this C file for compilation.\n\nAs per my understanding, QOS code doesn\u0027t get compiled if ENABLE_QOS is false.\nOr am I missing something here ?",
+      "revId": "0f694c15903f6bc2d65a624af424582b46274253",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41577abd_8f917a44",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-10T12:10:15Z",
+      "side": 1,
+      "message": "It does when working with cmake\nWe work with blaze, so it would be better to also add the if just in case",
+      "parentUuid": "f0a50a4d_3af728c7",
       "revId": "0f694c15903f6bc2d65a624af424582b46274253",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
