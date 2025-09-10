@@ -51,6 +51,24 @@
       "message": "I think, we should revert this change because in other places also code is following the initial pattern only.\neg: qos_methods_pepc, qos_methods_ps",
       "revId": "69a5c0c5423cef9f7bf2ce3c9f10d15ffa2c648d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "739462b6_409ab21a",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-10T12:17:26Z",
+      "side": 1,
+      "message": "We should not make manual changes to what clang format does, if we want a different formatting, we should edit and change the configuration of the `.clang-format` file",
+      "parentUuid": "7fb99f7f_e355a607",
+      "revId": "69a5c0c5423cef9f7bf2ce3c9f10d15ffa2c648d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
