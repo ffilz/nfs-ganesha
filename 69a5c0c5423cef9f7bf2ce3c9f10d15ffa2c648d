@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3472e3_ce9908c1",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2059,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-10T21:59:10Z",
+      "side": 1,
+      "message": "Yea, I didn\u0027t love that, but the option was better than other choices and the option impacts other loops.",
+      "parentUuid": "f2825300_4e8271db",
+      "revId": "69a5c0c5423cef9f7bf2ce3c9f10d15ffa2c648d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fb99f7f_e355a607",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "We should not make manual changes to what clang format does, if we want a different formatting, we should edit and change the configuration of the `.clang-format` file",
       "parentUuid": "7fb99f7f_e355a607",
+      "revId": "69a5c0c5423cef9f7bf2ce3c9f10d15ffa2c648d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "414a6e1d_f69c5d30",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-10T21:59:10Z",
+      "side": 1,
+      "message": "Agreed. There are compromises in clang-format configuration. I do wish there were things it would leave alone as long as they meet certain criteria, but given the way clang-format works, we need to accept what it does.\n\nIf something is REALLY bothersome, there is a clang-format macro that turns it off for a chunk of code. We SHOULD NOT use that (using the RFC meaning of all caps SHOULD NOT...) but it\u0027s available if something is truly unreadable without manual formatting.",
+      "parentUuid": "739462b6_409ab21a",
       "revId": "69a5c0c5423cef9f7bf2ce3c9f10d15ffa2c648d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
