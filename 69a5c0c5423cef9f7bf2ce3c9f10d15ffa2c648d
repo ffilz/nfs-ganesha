@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428af6b0_19a4aaf7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2059,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-09-10T06:29:17Z",
+      "side": 1,
+      "message": "Sometimes clang-format doesn\u0027t works as expected.\nCan you please revert the changes moving the \";\" unnecessarly to next line, which got modified by clang-format. Applicable in all the places foreach_gsh_*().",
+      "revId": "69a5c0c5423cef9f7bf2ce3c9f10d15ffa2c648d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb99f7f_e355a607",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-09-10T06:29:17Z",
+      "side": 1,
+      "message": "I think, we should revert this change because in other places also code is following the initial pattern only.\neg: qos_methods_pepc, qos_methods_ps",
+      "revId": "69a5c0c5423cef9f7bf2ce3c9f10d15ffa2c648d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
