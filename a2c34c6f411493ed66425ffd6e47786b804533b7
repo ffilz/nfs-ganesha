@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d2c85c7_2ce2ed47",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-10T22:03:41Z",
+      "side": 1,
+      "message": "Considering we have a state_mutex, a different name might be advisable.",
+      "parentUuid": "ff819b15_4ebbe959",
+      "revId": "a2c34c6f411493ed66425ffd6e47786b804533b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d82fb58_955ceb38",
         "filename": "src/monitoring/prometheus_exposer.cc",
         "patchSetId": 1
