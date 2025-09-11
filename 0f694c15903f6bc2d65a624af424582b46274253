@@ -106,6 +106,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7351cf_c0113225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-09-11T18:05:49Z",
+      "side": 1,
+      "message": "It is not just in case and not that blaze is unreliable.\nIt is that we don\u0027t configure blaze to use conditional source build.\nWe build all source codes and source codes should disable themselves in addition or rather then complicating the build.\n\nWe did the same when we added the monitoring, i.e - https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/monitoring/dynamic_metrics.cc#L34\n\nhttps://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/monitoring/prometheus_exposer.cc#L39\n\nI think that\u0027s a good practice for features that we want to disable in an hermetic way\n\nRight now it won\u0027t compile due to the header file, but imagine that accidentally it will compile and may have undesired side-effects just due to being compiled and linked to the binary.",
+      "parentUuid": "5cc72071_b159103a",
+      "revId": "0f694c15903f6bc2d65a624af424582b46274253",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0a50a4d_3af728c7",
