@@ -89,6 +89,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc72071_b159103a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2025-09-11T17:42:43Z",
+      "side": 1,
+      "message": "Since you say this is not really needed, it\u0027s for \"just in case\" or belt *AND* suspenders, I don\u0027t see the point really. Are you going to want to conditionalize everthing else that\u0027s conditionally built, just in case?\n\nIf think if blaze\u0027s conditional build feature doesn\u0027t work, it should be fixed.\n\nThis reminds me of a bug in gnu make many many years ago where gmake would fail to build X11 on SunOS. But SunOS make worked. People who were insisting that they wanted to build X with gmake. Ostensibly because they were using gmake on their linux boxes, where it did work. Nobody could figure out why gmake worked on x86 linux but not on Sparc SunOS.  We told them to use make and move on.\n\nEventually I did track it down. SunOS on Sparc did not initialize the local variables (on the stack) on function entry, versus on linux x86 where they were initialized. This cause gmake to not recurse down directory trees correctly.\n\nAnyway, if blaze is unreliable you should either fix it, or use cmake IMO, and not contort the source to work around unreliable tools.",
+      "revId": "0f694c15903f6bc2d65a624af424582b46274253",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0a50a4d_3af728c7",
