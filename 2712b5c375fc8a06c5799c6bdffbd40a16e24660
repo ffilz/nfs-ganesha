@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ef5a31_56a77f21",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-12T08:03:33Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tsockaddr_t *server_addr_conv;\n+\t\tsp-\u003ess_family \u003d AF_INET;",
+      "revId": "2712b5c375fc8a06c5799c6bdffbd40a16e24660",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
