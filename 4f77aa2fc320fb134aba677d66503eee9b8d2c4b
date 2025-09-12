@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00caa956_464f72a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-12T07:07:04Z",
+      "side": 1,
+      "message": "WARNING: \u0027addres\u0027 may be misspelled - perhaps \u0027address\u0027?\nsend on dbus from the old style character arrays for ip addres and\n                                                        ^^^^^^",
+      "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d6bfdc_e28bf0b6",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-12T07:07:04Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/support/ip_utils.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333751f7_73e5e0f2",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-12T07:07:04Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
