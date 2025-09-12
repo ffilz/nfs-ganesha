@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af42f3c4_eb75f5fa",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-12T22:47:03Z",
+      "side": 1,
+      "message": "What useless values? Confusing comment. Also, please don\u0027t use // comments in C files.",
+      "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85d6bfdc_e28bf0b6",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 1
@@ -48,6 +65,59 @@
       "writtenOn": "2025-09-12T07:07:04Z",
       "side": 1,
       "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f37798ad_53ad49de",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-12T22:47:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "333751f7_73e5e0f2",
+      "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b96c4f08_b8fecbbf",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-12T22:47:03Z",
+      "side": 1,
+      "message": "Except this is ONE place you MUST use a // comment... Yea, it totally doesn\u0027t make sense, but let\u0027s keep checkpatch happy..",
+      "parentUuid": "85d6bfdc_e28bf0b6",
+      "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f2c032_30ea8ded",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-12T22:47:03Z",
+      "side": 1,
+      "message": "Was any of this code lifted from libcidr? If so, it should have the right referencing of that. Copyright etc.",
       "revId": "4f77aa2fc320fb134aba677d66503eee9b8d2c4b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
