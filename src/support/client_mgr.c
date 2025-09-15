@@ -64,6 +64,7 @@
 #include "client_mgr.h"
 #include "export_mgr.h"
 #include "nfs_qos.h"
+#include "nfs_cluster_qos.h"
 #include "server_stats_private.h"
 #include "abstract_atomic.h"
 #include "gsh_intrinsic.h"
