@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c2e77da_eca271e8",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 1714,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "This Change is unrelated, removed it",
+      "parentUuid": "1d0acf8c_f57d208f",
+      "range": {
+        "startLine": 1708,
+        "startChar": 0,
+        "endLine": 1714,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d5dd9b1_012f6811",
         "filename": "src/config_samples/config.txt",
         "patchSetId": 5
@@ -54,6 +78,30 @@
       "writtenOn": "2025-09-01T12:37:14Z",
       "side": 1,
       "message": "Configuration files aren\u0027t placed in `/usr/bin` but in `/etc/`",
+      "range": {
+        "startLine": 1106,
+        "startChar": 0,
+        "endLine": 1114,
+        "endChar": 76
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8798b4b1_505c5525",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d5dd9b1_012f6811",
       "range": {
         "startLine": 1106,
         "startChar": 0,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8100d09f_55e4dcd9",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Will do it in the next release",
+      "parentUuid": "e8fb0ce6_db11820f",
+      "range": {
+        "startLine": 621,
+        "startChar": 51,
+        "endLine": 627,
+        "endChar": 45
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "584fa02d_6c1a037f",
         "filename": "src/doc/man/ganesha-core-config.rst",
         "patchSetId": 5
@@ -112,6 +184,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2f83a3a_5bf55e0e",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "We are implementing mutual TLS, hence we need client Certificate for authentication",
+      "parentUuid": "584fa02d_6c1a037f",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20634b2c_5d9a329f",
         "filename": "src/doc/man/ganesha-core-config.rst",
         "patchSetId": 5
@@ -123,6 +219,30 @@
       "writtenOn": "2025-09-01T12:37:14Z",
       "side": 1,
       "message": "Same regarding configuration files as previous comment",
+      "range": {
+        "startLine": 628,
+        "startChar": 0,
+        "endLine": 641,
+        "endChar": 72
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e15240_73d0a055",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20634b2c_5d9a329f",
       "range": {
         "startLine": 628,
         "startChar": 0,
@@ -158,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "288c0df4_42d98d3f",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Moved to header file",
+      "parentUuid": "fb61479d_d13d083c",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fd6a299_9aab5c14",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 5
@@ -169,6 +313,30 @@
       "writtenOn": "2025-09-01T12:37:14Z",
       "side": 1,
       "message": "Why a member is public?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 28
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51af94cd_f36847e3",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fd6a299_9aab5c14",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -202,6 +370,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "646143ba_1a35495d",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bd733c2_5b3313d5",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e972371_5560930e",
@@ -215,6 +407,30 @@
       "writtenOn": "2025-09-01T12:37:14Z",
       "side": 1,
       "message": "Why the listen ip isn\u0027t in the configuration with a default?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 25
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912296f4_4e66b3a5",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Have added it as a part of server class config.\nShould we add it at the same place as grpc_port and other config parameters?",
+      "parentUuid": "0e972371_5560930e",
       "range": {
         "startLine": 94,
         "startChar": 0,
@@ -296,6 +512,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47c7ae0d_f4557aa0",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Should we try to restart the server?",
+      "parentUuid": "cf3a0d87_54106f74",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 20
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1ee8f07_c5d06841",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 5
@@ -307,6 +547,30 @@
       "writtenOn": "2025-09-01T12:37:14Z",
       "side": 1,
       "message": "This will block here until the server will shutdown",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 17
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3621e50_79bbc82d",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Have updated the mutex scope",
+      "parentUuid": "a1ee8f07_c5d06841",
       "range": {
         "startLine": 184,
         "startChar": 0,
@@ -342,6 +606,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b2d68e7_f06be090",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "have updated the mutex scope in start",
+      "parentUuid": "6c75b6ca_73435bf4",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24f137de_067803e1",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 5
@@ -353,6 +641,30 @@
       "writtenOn": "2025-09-01T12:37:14Z",
       "side": 1,
       "message": "Why don\u0027t you spawn the thread from the start function and access class members from outside the class?",
+      "range": {
+        "startLine": 215,
+        "startChar": 21,
+        "endLine": 215,
+        "endChar": 35
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27eea960_65b7c377",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-09-15T13:31:32Z",
+      "side": 1,
+      "message": "Have changed the structure as per suggested",
+      "parentUuid": "24f137de_067803e1",
       "range": {
         "startLine": 215,
         "startChar": 21,
