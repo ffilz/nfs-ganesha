@@ -34,6 +34,24 @@
       "parentUuid": "359786e4_ada1cb53",
       "revId": "36bbdb68bf84c20bb88430b30368a7bb3e46abff",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6368c6b_19825e41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-18T23:34:05Z",
+      "side": 1,
+      "message": "And further, we are investigating incorporating rpc.statd into Ganesha.\n\nThough we should still revisit suspending requests that are blocking on external communication, especially if we want to ALSO support external rpc.statd",
+      "parentUuid": "d5f3e823_0407cf89",
+      "revId": "36bbdb68bf84c20bb88430b30368a7bb3e46abff",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
