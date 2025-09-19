@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ff9676_8b081da9",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2721,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:43:44Z",
+      "side": 1,
+      "message": "You can\u0027t just close the global fd like this, other threads might be using it.\n\nWhy are you ending up with the global fd anyway?",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccaaa09_70fc2863",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:43:44Z",
+      "side": 1,
+      "message": "Why did you make this change? op_ctx-\u003ectx_export-\u003eexport_perms.options already contains the \"merged\" delegations options from the CLIENT, EXPORT, and EXPORT_DEFAULTS blocks. We don\u0027t want to change that behavior.",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf6ff1a_9cf6d2c9",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:43:44Z",
+      "side": 1,
+      "message": "This function is confusing... So it is only used to determine at create_export time whether the export has delegations enabled in any way. That makes sense but you need to describe better what is going on.\n\nBUT - there is a problem here... We are sharing cmount among multiple exports... The export that does the initial cmount MAY be one that has delegations enabled...\n\nIs it OK to call ceph_set_deleg_timeout multiple times? If so, we could move the enable_delegations call so it is called for every create_export and if any export using the cmount has delegations, we do this (but then we might do this multiple times).",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8ee637_721d648c",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:43:44Z",
+      "side": 1,
+      "message": "Hmm, this won\u0027t really work...",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed4392b2_9e504642",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:43:44Z",
+      "side": 1,
+      "message": "Needs more explanation - this is being saved here so FSAL create_export can use it.",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9ab50c5_36e473a2",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:43:44Z",
+      "side": 1,
+      "message": "This is confusing, document that you are accumulating the client delegation options so FSAL create_export can check if delegations are enabled at all for the export.",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ec43f9_13f9ea4c",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:43:44Z",
+      "side": 1,
+      "message": "This needs to be made more clear, this is so the FSAL can check if delegations might be enabled at all on the export.\n\nIt should be made clear that this is NOT used to check if delegations are allowed for a specific OPEN (from a specific client on the export).",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
