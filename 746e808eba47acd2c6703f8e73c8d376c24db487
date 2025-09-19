@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82e4b8b5_3efd2211",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Seems like this could be open to a race. It would be better to take the revoked_delegations_lock and the cid_mutex for the whole check and clear sequence.",
+      "revId": "746e808eba47acd2c6703f8e73c8d376c24db487",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b02b186_9a9189c6",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Why did you remove the clientid? The line flow can be fixed to resolve the 80 column limit (or honestly, the original was OK, 81 isn\u0027t really that bad.",
+      "parentUuid": "938c0d5b_b592bd16",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d618ec77_8988d4f3",
         "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-19T07:51:06Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t-\u003eclientid_record-\u003ecid_clientid);",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9889958b_97316413",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Why did you remove the clientid? The line flow can be fixed to resolve the 80 column limit (or honestly, the original was OK, 81 isn\u0027t really that bad.",
+      "parentUuid": "d618ec77_8988d4f3",
       "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdc1a82e_eea41b5a",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "172c08f1_1c7f8db0",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5fc897e_1352a2da",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-09-19T07:51:06Z",
       "side": 1,
       "message": "WARNING: line length of 94 exceeds 80 columns\n+\t\t/* Check if there are actually any revoked delegations left for this client */",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f03bc1b_741f5c21",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5fc897e_1352a2da",
       "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b8896e1_47c1e67d",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72a4f22e_0cea2902",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c810700_5159948b",
@@ -99,6 +189,24 @@
       "writtenOn": "2025-09-19T07:51:06Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t/* No more revoked delegations, clear the session flag */",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f48c1b93_572cb34c",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c810700_5159948b",
       "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c12c8772_12ae10a8",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e83c30_2a0b914e",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "666ee3e1_391e4ecf",
@@ -137,6 +263,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d616e781_7824f6f5",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "666ee3e1_391e4ecf",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3e9ef23_3a0542be",
@@ -150,6 +294,24 @@
       "writtenOn": "2025-09-19T07:51:06Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t/* Since we can\u0027t easily check client ID here, we\u0027ll check if the",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "608230d0_1ab132fc",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-19T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3e9ef23_3a0542be",
       "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
