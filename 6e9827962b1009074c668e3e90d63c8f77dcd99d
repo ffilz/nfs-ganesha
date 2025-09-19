@@ -50,6 +50,23 @@
       "message": "anyone can help reivew",
       "revId": "6e9827962b1009074c668e3e90d63c8f77dcd99d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f714b50_41b476de",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-09-19T06:24:54Z",
+      "side": 1,
+      "message": "QOS currently support both global config and export/client level config.\n\nExample: If the global config enables QoS BW controls, an individual export config can still override it by setting enable_bw_control \u003d false, which disables QoS for that specific export, for rest of th exports it will be true util you proves a override value.\nif global values are false, overriding the values not allowed(i.e disable fully)\nSimilarly, global QoS values (e.g., enable/disable, BW limits, IOPS limits) can be overridden at the export/client level only if respective global settings are enabled.\n\nCurrent changes in review only handle the global setting and ignores the export/client level overrides.\nAs per my understanding, changes related to enable_ds_control must also be handled at the export/client level and not restrict it to global config only, which will give user the flexibility to enable/disable at export/client level also.\n\nw.r.t global only setting, current code changes are right, but need to handle for export/client level flexibility also.",
+      "revId": "6e9827962b1009074c668e3e90d63c8f77dcd99d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
