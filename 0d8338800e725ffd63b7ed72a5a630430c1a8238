@@ -35,6 +35,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0913185a_e540914e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-09-19T15:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90067960_7de331b1",
+      "revId": "0d8338800e725ffd63b7ed72a5a630430c1a8238",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3301bc_44f6b961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-09-19T15:38:29Z",
+      "side": 1,
+      "message": "clid_count remains same throughout the grace period. It will be zeroed out when grace is over. The rc_count will be decremented as and when a client sends the reclaim request. So overall it will be changing.\nHaving this information as an event is useful to find out whether Ganesha is in endless loop for grace to end OR not all clients were able to complete the reclaim.",
+      "parentUuid": "df96649c_341feca3",
+      "revId": "0d8338800e725ffd63b7ed72a5a630430c1a8238",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d6b78f1_795ee78f",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-09-09T17:05:00Z",
       "side": 1,
       "message": "Hmm, those strings should be combined on one line, it\u0027s OK for them to overflow 80 columns.",
+      "revId": "0d8338800e725ffd63b7ed72a5a630430c1a8238",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1e589bc_3ef2e14a",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-09-19T15:38:29Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0d6b78f1_795ee78f",
       "revId": "0d8338800e725ffd63b7ed72a5a630430c1a8238",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
