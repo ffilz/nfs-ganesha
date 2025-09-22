@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2bb4ccd_398a8d90",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2721,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-09-22T16:20:24Z",
+      "side": 1,
+      "message": "During delegreturn, the call chain\nnfs4_op_delegreturn → release_lease_lock → do_lease_op → ceph_fsal_lease_op2 → fsal_start_io\nrequires an FD. At this point, no related_fd is available because there is no open state associated with the delegation (CLIENT sends DELEGRETURN after CLOSE), so the code falls back to using a global FD.\n\nThis workaround was necessary when write delegations used FSAL_O_RDWR as the open flags. Otherwise, subsequent write delegation requests could trigger a STATE_LOCK_CONFLICT.\n\nSwitching to FSAL_O_ANY resolves the issue and removes the need for closing the global FD.",
+      "parentUuid": "a4ff9676_8b081da9",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ccaaa09_70fc2863",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "367392de_97a2e223",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-09-22T16:20:24Z",
+      "side": 1,
+      "message": "Currently, op_ctx-\u003ectx_export-\u003eexport_perms.options only reflects the delegation options merged from the EXPORT stanza, not from EXPORT_DEFAULTS or CLIENT stanzas. As a result, if a delegation option is set in those blocks, it is not detected before enable_delegations() is called and write delegation requests would end up in STATE_LOCK_CONFLICT.\n\nTo address this, we must check for delegation options earlier. By calling export_check_options() (via export_check_client_options) before enable_delegations(), we can detect whether delegation has been set in EXPORT_DEFAULTS or EXPORT stanzas. \n\nHowever, the options specified within a CLIENT block inside an export stanza are still not detected by this function alone. Hence, the detection logic is added so the FSAL can check if delegations might be enabled at all by any of the client blocks.",
+      "parentUuid": "7ccaaa09_70fc2863",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bf6ff1a_9cf6d2c9",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 5
@@ -65,6 +101,24 @@
       "writtenOn": "2025-09-19T22:43:44Z",
       "side": 1,
       "message": "This function is confusing... So it is only used to determine at create_export time whether the export has delegations enabled in any way. That makes sense but you need to describe better what is going on.\n\nBUT - there is a problem here... We are sharing cmount among multiple exports... The export that does the initial cmount MAY be one that has delegations enabled...\n\nIs it OK to call ceph_set_deleg_timeout multiple times? If so, we could move the enable_delegations call so it is called for every create_export and if any export using the cmount has delegations, we do this (but then we might do this multiple times).",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03574ddf_f8c52768",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-09-22T16:20:24Z",
+      "side": 1,
+      "message": "Current logic using op_ctx-\u003ectx_export-\u003eexport_perms.options only detects whether the delegation option has been set in the export being created via create_export. create_export is invoked sequentially for the all the export stanzas. \n\nThe order does not matter for enable_delegations to set the time out. It only needs to set the timeout once in Ceph if delegation has been enabled at all on the export.\n\nSimilarly, the client option parsing logic via export_check_client_options works the same way. When client_commit, called for any client, sets cli_deleg_option, whichever client block enables the delegation regardless of the order ensures the timeout is set.",
+      "parentUuid": "1bf6ff1a_9cf6d2c9",
       "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +157,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4a9edd_fa3db0c0",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-09-22T16:20:24Z",
+      "side": 1,
+      "message": "Added a descriptive comment to better describe its use.",
+      "parentUuid": "ed4392b2_9e504642",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9ab50c5_36e473a2",
@@ -120,6 +192,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6025dc5_4fff8d8a",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-09-22T16:20:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9ab50c5_36e473a2",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62ec43f9_13f9ea4c",
@@ -133,6 +223,24 @@
       "writtenOn": "2025-09-19T22:43:44Z",
       "side": 1,
       "message": "This needs to be made more clear, this is so the FSAL can check if delegations might be enabled at all on the export.\n\nIt should be made clear that this is NOT used to check if delegations are allowed for a specific OPEN (from a specific client on the export).",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981ebdda_918917d7",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-09-22T16:20:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62ec43f9_13f9ea4c",
       "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
