@@ -54,6 +54,8 @@
 #include "config.h"
 #include "gsh_types.h"
 #include "monitoring.h"
+
+#include <proc/readproc.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -94,6 +96,8 @@ void dynamic_metrics__mdcache_cache_hit(const char *operation,
 void dynamic_metrics__mdcache_cache_miss(const char *operation,
 					 export_id_t export_id);
 
+void dynamic_metrics__mem_info(proc_t proc_info);
+
 #else /* USE_MONITORING */
 
 #ifndef UNUSED
@@ -128,6 +132,9 @@ static inline void dynamic_metrics__mdcache_cache_hit(
 
 static inline void dynamic_metrics__mdcache_cache_miss(
 	const char *UNUSED(operation), export_id_t UNUSED(export_id))
+{
+}
+static inline void dynamic_metrics__mem_info(proc_t *UNUSED(proc_info))
 {
 }
 

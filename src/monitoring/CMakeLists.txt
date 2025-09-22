@@ -8,6 +8,8 @@ SET(ganesha_monitoring_SRCS
 )
 
 add_library(ganesha_monitoring SHARED ${ganesha_monitoring_SRCS})
+
+target_link_libraries(ganesha_monitoring procps)
 add_sanitizers(ganesha_monitoring)
 set_target_properties(ganesha_monitoring PROPERTIES COMPILE_FLAGS "-fPIC")
 target_include_directories(ganesha_monitoring     PRIVATE ${PROJECT_SOURCE_DIR}/libntirpc/src/monitoring/prometheus-cpp-lite/core/include)

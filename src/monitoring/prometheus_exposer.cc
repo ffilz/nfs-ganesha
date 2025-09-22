@@ -34,7 +34,9 @@
 #include <unistd.h>
 #include <streambuf>
 
+#include <proc/readproc.h>
 #include "prometheus_exposer.h"
+#include "dynamic_metrics.h"
 
 #ifdef USE_MONITORING
 
@@ -290,6 +292,7 @@ void *PrometheusExposer::server_thread(void *arg)
 			exposer->failureLatencies_.Observe(elapsed_ms);
 		else
 			exposer->successLatencies_.Observe(elapsed_ms);
+		update_mem_info();
 	}
 	return NULL;
 }
@@ -320,6 +323,21 @@ void prometheus_exposer__stop(prometheus_registry_handle_t registry_handle)
 	static PrometheusExposer exposer(*registry_ptr);
 	exposer.stop();
 	stopped = true;
+}
+
+void update_mem_info()
+{
+	pid_t ganesha_pid;
+	ganesha_pid = getpid();
+	pid_t pids[] = { ganesha_pid, 0 };
+	PROCTAB *proc = openproc(PROC_FILLMEM | PROC_FILLSTATUS |
+					 PROC_FILLSTAT | PROC_PID,
+				 pids);
+	proc_t proc_info;
+	memset(&proc_info, 0, sizeof(proc_info));
+
+	if (readproc(proc, &proc_info) != NULL)
+		dynamic_metrics__mem_info(proc_info);
 }
 
 } /* extern "C" */
