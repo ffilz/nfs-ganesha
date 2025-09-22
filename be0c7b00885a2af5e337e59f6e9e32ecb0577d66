@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff99c9d5_9284ca0f",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-09-22T10:00:05Z",
+      "side": 1,
+      "message": "Managed to print clientid within 80 column limit.",
+      "parentUuid": "1b02b186_9a9189c6",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d618ec77_8988d4f3",
         "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Why did you remove the clientid? The line flow can be fixed to resolve the 80 column limit (or honestly, the original was OK, 81 isn\u0027t really that bad.",
       "parentUuid": "d618ec77_8988d4f3",
+      "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c964f3b_12ce0590",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-09-22T10:00:05Z",
+      "side": 1,
+      "message": "Managed to print clientid within 80 column limit.",
+      "parentUuid": "9889958b_97316413",
       "revId": "be0c7b00885a2af5e337e59f6e9e32ecb0577d66",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
