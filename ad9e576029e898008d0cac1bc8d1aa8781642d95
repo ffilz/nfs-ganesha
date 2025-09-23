@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c575c2d8_d3051a7e",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-23T10:24:01Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                * offset, treat as EOF per RFC 7530 §12.2:$",
+      "revId": "ad9e576029e898008d0cac1bc8d1aa8781642d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "436d93d7_b2ce9c08",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-23T10:24:01Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                * return NFS4_OK with 0 bytes and eof\u003dTRUE.$",
+      "revId": "ad9e576029e898008d0cac1bc8d1aa8781642d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bb1ef1_50483178",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-23T10:24:01Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                */$",
+      "revId": "ad9e576029e898008d0cac1bc8d1aa8781642d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894c1ef6_a38862e2",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-23T10:24:01Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t/* Offset is beyond max readable offset – treat as EOF */",
+      "revId": "ad9e576029e898008d0cac1bc8d1aa8781642d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fda5da02_4e9ce3f5",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-23T10:24:01Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 * Use subtraction to avoid addition overflow.$",
+      "revId": "ad9e576029e898008d0cac1bc8d1aa8781642d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25af545a_a8ba1bde",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-23T10:24:01Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 */$",
+      "revId": "ad9e576029e898008d0cac1bc8d1aa8781642d95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
