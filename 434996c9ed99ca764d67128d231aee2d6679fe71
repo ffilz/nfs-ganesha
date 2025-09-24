@@ -16,6 +16,23 @@
       "message": "Updated the patch, please review",
       "revId": "434996c9ed99ca764d67128d231aee2d6679fe71",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c4b3db_90256495",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-09-24T23:13:59Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tret \u003d qos_process_pepc(rsize, caller_data, data, op_type, is_ds);",
+      "revId": "434996c9ed99ca764d67128d231aee2d6679fe71",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
