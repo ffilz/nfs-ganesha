@@ -41,6 +41,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbd8a88_dd02af70",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1797,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2025-09-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36749b13_d65b53f4",
+      "range": {
+        "startLine": 1797,
+        "startChar": 0,
+        "endLine": 1797,
+        "endChar": 41
+      },
+      "revId": "434996c9ed99ca764d67128d231aee2d6679fe71",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28c4b3db_90256495",
@@ -71,6 +95,30 @@
       "writtenOn": "2025-09-25T09:59:28Z",
       "side": 1,
       "message": "@ffilzlnx@mindspring.com, should we move this code block after the check to new function something like op_dsread_resume() ?",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 3
+      },
+      "revId": "434996c9ed99ca764d67128d231aee2d6679fe71",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb8787c_a54d974b",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2025-09-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f319a581_98679ac7",
       "range": {
         "startLine": 330,
         "startChar": 0,
