@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b19981b_6d3f72bf",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-26T17:44:18Z",
+      "side": 1,
+      "message": "Yes, that makes sense, but the description of what you\u0027re doing isn\u0027t clear.",
+      "parentUuid": "367392de_97a2e223",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bf6ff1a_9cf6d2c9",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 5
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Current logic using op_ctx-\u003ectx_export-\u003eexport_perms.options only detects whether the delegation option has been set in the export being created via create_export. create_export is invoked sequentially for the all the export stanzas. \n\nThe order does not matter for enable_delegations to set the time out. It only needs to set the timeout once in Ceph if delegation has been enabled at all on the export.\n\nSimilarly, the client option parsing logic via export_check_client_options works the same way. When client_commit, called for any client, sets cli_deleg_option, whichever client block enables the delegation regardless of the order ensures the timeout is set.",
       "parentUuid": "1bf6ff1a_9cf6d2c9",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f9cc0bb_af6573c0",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-26T17:44:18Z",
+      "side": 1,
+      "message": "The problem is that the first export that uses a particular cmount will do all the cmount stuff, including setting the timeout. So if the first export that uses a particular cmount doesn\u0027t have delegations enabled in any way, the timeout set will be skipped and subsequent exports that use the same cmount that DO have delegations enabled in any way will not benefit.\n\nThus my question if the timeout can be set multiple times, in which case you move setting the timeout to after the has_cmount label and then it will be set as soon as an export is configured that enables delegations in anyway.\n\nBUT one other bit - you need to consider accounting for this if an export update enables delegations where they had not been enabled before...",
+      "parentUuid": "03574ddf_f8c52768",
       "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
