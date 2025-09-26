@@ -16,6 +16,41 @@
       "message": "Its already declared extern in nfs_metrics.h file.",
       "revId": "4fd2f4a0904e95593a20e2c85aaa2702b3c54a8b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9c192f_927f4f6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-26T17:59:37Z",
+      "side": 1,
+      "message": "Not sure what this comment is in response to, please reply to the appropriate comment",
+      "parentUuid": "15c0cf1a_45dac5ab",
+      "revId": "4fd2f4a0904e95593a20e2c85aaa2702b3c54a8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de59abbf_6c53a995",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-26T17:59:37Z",
+      "side": 1,
+      "message": "Why are you declaring this here? You should include a header file with it and it should be declared extern.",
+      "revId": "4fd2f4a0904e95593a20e2c85aaa2702b3c54a8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
