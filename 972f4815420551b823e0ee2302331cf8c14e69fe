@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ccb00214_51d5ee89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-09-26T09:53:30Z",
+      "side": 1,
+      "message": "Modified the logic in export_check_client_options() for parsing client delegation options.\n\nRemoved cli_deleg_option variable and its logic.\n\nFSAL_CEPH-related changes will be uploaded separately.",
+      "parentUuid": "64b4f254_810bb2b5",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4ff9676_8b081da9",
         "filename": "src/FSAL/FSAL_CEPH/handle.c",
         "patchSetId": 5
