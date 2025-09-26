@@ -16,6 +16,23 @@
       "message": "please help review",
       "revId": "f7d960f61fdbf9b3868e1ee190ba63aaa5a89bed",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe749ab_095ff1a2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-09-26T07:25:11Z",
+      "side": 1,
+      "message": "it will be better if we add a comment saying ds_control requires respective parent control(BW/token) to be enabled first.",
+      "revId": "f7d960f61fdbf9b3868e1ee190ba63aaa5a89bed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
