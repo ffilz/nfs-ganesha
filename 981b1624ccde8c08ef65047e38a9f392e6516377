@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be11ffd0_eb9136d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-09-26T07:40:29Z",
+      "side": 1,
+      "message": "monitoring__gauge_set() is a function defined inside extern \"C\" {} of monitoring.cc file of libntirpc submodule. So we cant call this function here., It has to be called inside extern \"C\" {} of this prometheus_exposer.cc file.",
+      "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e73c8aa7_536120fa",
         "filename": "src/MainNFSD/nfs_metrics.c",
         "patchSetId": 3
