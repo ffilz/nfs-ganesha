@@ -16,6 +16,23 @@
       "message": "The function monitoring__gauge_set() is declared within an extern \"C\" block in monitoring.cc (part of the libntirpc submodule). Because of that, we can’t call it directly from regular C++ code here in prometheus_exposer.cc. To use it, this file would also need to declare the call inside an extern \"C\" block.",
       "revId": "e89248c220f008478fdd16f461b3409d64a60053",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "904c6027_a4fd0f57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-09-29T12:31:21Z",
+      "side": 1,
+      "message": "The function monitoring__gauge_set() is declared within an extern \"C\" block in monitoring.cc (part of the libntirpc submodule). Because of that, we can’t call it directly from regular C++ code here in prometheus_exposer.cc. To use it, this file would also need to declare the call inside an extern \"C\" block.",
+      "revId": "e89248c220f008478fdd16f461b3409d64a60053",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
