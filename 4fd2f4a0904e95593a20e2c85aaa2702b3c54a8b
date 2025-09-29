@@ -51,6 +51,24 @@
       "message": "Why are you declaring this here? You should include a header file with it and it should be declared extern.",
       "revId": "4fd2f4a0904e95593a20e2c85aaa2702b3c54a8b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623d0a27_18eb228f",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-09-29T12:38:53Z",
+      "side": 1,
+      "message": "nfs_ServerBootTime is defined as an extern variable in nfs_core.h, but since current file is a C++ (.cc) file, including nfs_core.h directly causes compilation issues due to C-specific constructs like named variadic macros, which aren\u0027t allowed in standard C++.\nTo avoid these errors, I’ve declared the variable manually, This allows me to reference the existing global variable without redefining it or pulling in incompatible headers.",
+      "parentUuid": "de59abbf_6c53a995",
+      "revId": "4fd2f4a0904e95593a20e2c85aaa2702b3c54a8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
