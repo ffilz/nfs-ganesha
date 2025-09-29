@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4302b40_fa16b00d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-29T20:28:53Z",
+      "side": 1,
+      "message": "This looks good for now. When we add more parameters that can be dynamically updated we should do something more like is done for EXPORT blocks, but for a single parameter, this is fine.",
+      "revId": "6286a1107a9603bf9ecc56b8a11a324cc006e564",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7686e6d0_ce19b052",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-29T20:28:53Z",
+      "side": 1,
+      "message": "A minor comment, we normally use atomic integers for parameters that can be updated dynamically, however, this is boolean and it\u0027s not hypercritical that it be synchronously updated.",
+      "revId": "6286a1107a9603bf9ecc56b8a11a324cc006e564",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d83c0d96_82af2188",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-09-29T20:28:53Z",
+      "side": 1,
+      "message": "Updates dynamically when a new configuration is loaded via SIGHUP.\n\nAlso please make a note in src/config_samples/config.txt.\n\nIt may also be worth documenting at the top of the block that the block is reloaded, however, only this one parameter is updated.",
+      "revId": "6286a1107a9603bf9ecc56b8a11a324cc006e564",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
