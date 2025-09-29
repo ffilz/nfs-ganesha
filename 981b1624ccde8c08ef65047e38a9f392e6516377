@@ -173,6 +173,24 @@
       "parentUuid": "99df23c3_97f98166",
       "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f5c79c_35b7ee28",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-09-29T12:32:45Z",
+      "side": 1,
+      "message": "The function monitoring__gauge_set() is declared within an extern \"C\" block in monitoring.cc (part of the libntirpc submodule). Because of that, we can’t call it directly from regular C++ code here in prometheus_exposer.cc. To use it, this file would also need to declare the call inside an extern \"C\" block.",
+      "parentUuid": "0d9d15b2_1c238b20",
+      "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
