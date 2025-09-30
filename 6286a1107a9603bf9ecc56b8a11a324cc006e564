@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fec74f1_d085dbb4",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2025-09-30T10:58:23Z",
+      "side": 1,
+      "message": "I did not add any kind of synchronization here since it is not that critical (as you said). and synchronization is not only done when writing the new value, but also when reading the value. Both come with a performance price, and IMHO it is not worth it.",
+      "parentUuid": "7686e6d0_ce19b052",
+      "revId": "6286a1107a9603bf9ecc56b8a11a324cc006e564",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d83c0d96_82af2188",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-09-29T20:28:53Z",
       "side": 1,
       "message": "Updates dynamically when a new configuration is loaded via SIGHUP.\n\nAlso please make a note in src/config_samples/config.txt.\n\nIt may also be worth documenting at the top of the block that the block is reloaded, however, only this one parameter is updated.",
+      "revId": "6286a1107a9603bf9ecc56b8a11a324cc006e564",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17d20fc6_eca97f52",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2025-09-30T10:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d83c0d96_82af2188",
       "revId": "6286a1107a9603bf9ecc56b8a11a324cc006e564",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
