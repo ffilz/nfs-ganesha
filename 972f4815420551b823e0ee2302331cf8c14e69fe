@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d2b7ff_62ef8f8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-01T20:31:49Z",
+      "side": 1,
+      "message": "Latest changes resolve this.",
+      "parentUuid": "ccb00214_51d5ee89",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4ff9676_8b081da9",
@@ -190,6 +208,24 @@
       "writtenOn": "2025-09-19T22:43:44Z",
       "side": 1,
       "message": "Hmm, this won\u0027t really work...",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd746a20_508629bc",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-01T20:31:49Z",
+      "side": 1,
+      "message": "This doesn\u0027t change the export_perms in the export, just the local export_perms.",
+      "parentUuid": "4e8ee637_721d648c",
       "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
