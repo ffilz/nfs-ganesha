@@ -16,6 +16,23 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nnfs_memory_resident_ram_size: Resident set size (physical RAM used by the process), in MB",
       "revId": "e85f4972f29e2deb1cacbc9945e015f4de4bb8ec",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e088a064_063af14b",
+        "filename": "src/monitoring/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-02T22:56:18Z",
+      "side": 1,
+      "message": "My understanding is that libprocps is Linux specific. Ganesha at least theoretically builds for freebsd and maybe Mac OSX, so we should not fire off a warning like this that may not be appropriate for those OS.",
+      "revId": "e85f4972f29e2deb1cacbc9945e015f4de4bb8ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
