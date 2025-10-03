@@ -16,6 +16,57 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis PR introduces structured support for QoS metrics across three categories:",
       "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46bf46dd_2a03fed0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-03T21:44:55Z",
+      "side": 1,
+      "message": "Also waiting for review from @deeraj.patil@ibm.com",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d39c439c_223ace99",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-03T21:44:55Z",
+      "side": 1,
+      "message": "I don\u0027t understand how this bool works, it\u0027s in the config block, but there is no config code for it.",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef2c343_c59fc4b0",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-03T21:44:55Z",
+      "side": 1,
+      "message": "I don\u0027t understand how this bool works, it\u0027s in the config block, but there is no config code for it.",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
