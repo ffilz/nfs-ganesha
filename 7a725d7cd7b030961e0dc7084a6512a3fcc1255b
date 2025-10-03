@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d836d834_80f23541",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2025-10-03T07:29:44Z",
+      "side": 1,
+      "message": "Looks like you\u0027ve already addressed some of the things I noticed.  You do have a few references to cerr \u0026 cout that should probably either go away or be log statements.\n\nAlso I\u0027m not sure this is part of your change, but you\u0027ve got a commit from ffilz that changes checkpatch.conf that\u0027s probably going to cause future grief with goto labels elsewhere in the code.",
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10617d11_5407e9c9",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2025-10-03T07:29:44Z",
+      "side": 1,
+      "message": "This use of std::cout (and others like this below) looks like a debug statement.  Probably remove, or if it\u0027s useful, use LogDebug and provide more information about what\u0027s going on.",
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1985718f_a01be2c1",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2025-10-03T07:29:44Z",
+      "side": 1,
+      "message": "std::cerr goes to stderr, here (and elsewhere below) this might not be useful.  Should probably use LogError()",
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
