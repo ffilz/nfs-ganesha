@@ -65,6 +65,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "310f2105_7b0ca71a",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 1714,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c2e77da_eca271e8",
+      "range": {
+        "startLine": 1708,
+        "startChar": 0,
+        "endLine": 1714,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d5dd9b1_012f6811",
@@ -159,6 +183,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6428f6_55af232d",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Acknowledged, Just note that in that case all the TLS files becomes irrelevant\n\nSo worth designing it for it",
+      "parentUuid": "8100d09f_55e4dcd9",
+      "range": {
+        "startLine": 621,
+        "startChar": 51,
+        "endLine": 627,
+        "endChar": 45
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "584fa02d_6c1a037f",
@@ -196,6 +244,30 @@
       "side": 1,
       "message": "We are implementing mutual TLS, hence we need client Certificate for authentication",
       "parentUuid": "584fa02d_6c1a037f",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 0
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc68d03e_a4e9ca65",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "We should allow also not to use mutual TLS (or no TLS at all), based on configuration",
+      "parentUuid": "d2f83a3a_5bf55e0e",
       "range": {
         "startLine": 634,
         "startChar": 0,
@@ -290,6 +362,30 @@
       "side": 1,
       "message": "Moved to header file",
       "parentUuid": "fb61479d_d13d083c",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54454459_3448de82",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "288c0df4_42d98d3f",
       "range": {
         "startLine": 43,
         "startChar": 0,
@@ -443,6 +539,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f607f0f_e9b761d3",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "IMO, yes",
+      "parentUuid": "912296f4_4e66b3a5",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 25
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "092f1d97_5ac571a3",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 5
@@ -524,6 +644,30 @@
       "side": 1,
       "message": "Should we try to restart the server?",
       "parentUuid": "cf3a0d87_54106f74",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 20
+      },
+      "revId": "ac1bb695786f0e161d2208b1f34dc0efbd783df7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef5e9aed_8aaf4c81",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "IDK if restart will help (only if the port was used and then was released)\n\nBut I think that its legit to abort if the user wanted grpc and we failed to started it",
+      "parentUuid": "47c7ae0d_f4557aa0",
       "range": {
         "startLine": 179,
         "startChar": 0,

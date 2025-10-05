@@ -20,6 +20,190 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfb7016b_5aa92026",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Can you rebase on latest Ganesha, it seems that there are changes here that are unrelated to this change",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea757db3_07927f7c",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Unrelated change",
+      "range": {
+        "startLine": 394,
+        "startChar": 46,
+        "endLine": 394,
+        "endChar": 49
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c9557e_695d3c63",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Do we want to add a handling on config_reload?",
+      "range": {
+        "startLine": 772,
+        "startChar": 0,
+        "endLine": 780,
+        "endChar": 6
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7e9e9c7_d512c26a",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Declared when it is assigned",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec0034a3_01926c7a",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "You can those as parameters to allow various options for tls",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 55
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8938c25_7add9f86",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "A better approach would be to extract it to a separate function",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "448e34f0_b1212e66",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Use `std::format`",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6216081f_512b45e3",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "It would be better to set the server state as running to true when we know it actually started",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10617d11_5407e9c9",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 6
@@ -37,6 +221,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6f4090c_c844a6be",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Remove debug couts",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 45
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0102159_9a289c82",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Remove debug prints",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 45
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7429f55b_4c1faa7a",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "In C++ prefer `const std::string\u0026` or `std::string_view` over char*\n\nAlso, assuming that in the future we will allow non TLS server, maybe there should be an encapsulating class for TLS configuration that would be optional",
+      "range": {
+        "startLine": 13,
+        "startChar": 26,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03ef315c_4340343c",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "This seems repeating itself, extract it to a function",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea62f1d_3b558be6",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Most of the code here is C code, I think the only things that can throw are `\t\t\tresponse-\u003eadd_client_ids(id);` and `client_ids.push_back(clientid);`\n\nPrefer catching the specific exceptions that can be thrown (if any) and handle them\n\nAlso add a log if there was such with the exception message (also consider returning it to the user)",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 21
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1985718f_a01be2c1",
         "filename": "src/grpc_server/nfsServiceServer.cc",
         "patchSetId": 6
@@ -48,6 +347,63 @@
       "writtenOn": "2025-10-03T07:29:44Z",
       "side": 1,
       "message": "std::cerr goes to stderr, here (and elsewhere below) this might not be useful.  Should probably use LogError()",
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fca83801_a0ba1bcd",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "nit: redundant change",
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a7aca6_e374d2b3",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "Add this component to the logging documentation",
+      "range": {
+        "startLine": 1669,
+        "startChar": 0,
+        "endLine": 1671,
+        "endChar": 23
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633294f9_f4fb89bd",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-05T11:37:14Z",
+      "side": 1,
+      "message": "redundant change",
       "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
