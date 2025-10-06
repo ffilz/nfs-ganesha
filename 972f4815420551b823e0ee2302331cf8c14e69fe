@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b27d40a_cacd5f24",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-10-06T15:44:11Z",
+      "side": 1,
+      "message": "I have addressed this by updating the comments. Please let me know if any other changes are required with respect to the comments and description.",
+      "parentUuid": "0b19981b_6d3f72bf",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bf6ff1a_9cf6d2c9",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 5
@@ -197,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "682a97b6_6b944909",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-10-06T15:44:11Z",
+      "side": 1,
+      "message": "I have addressed this issue by moving the enable_delegations() call to execute after the has_cmount label.",
+      "parentUuid": "8f9cc0bb_af6573c0",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e8ee637_721d648c",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 5
@@ -244,6 +280,24 @@
       "side": 1,
       "message": "I will reassign op_ctx-\u003ectx_export-\u003eexport_perms with the updated export_perms-\u003eoptions inside the if block.",
       "parentUuid": "cd746a20_508629bc",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16e26cc9_3c469a3d",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2025-10-06T15:44:11Z",
+      "side": 1,
+      "message": "I tested the existing code by deliberately forcing the condition ceph_status !\u003d 0 to be true, ensuring the execution entered the if block.\nAlthough export_perms is a local pointer, its options field refers to the same structure used by the export itself. Therefore, modifying it inside the block directly affects the options field of the export\u0027s export_perms.\n\nAs a result, when the line 345 is executed, delegation will not be granted.",
+      "parentUuid": "ef784df5_6ca5bbd4",
       "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
