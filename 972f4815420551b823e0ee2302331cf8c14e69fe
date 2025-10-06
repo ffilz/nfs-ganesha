@@ -160,6 +160,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d974d7_109c3103",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-06T20:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b27d40a_cacd5f24",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf6ff1a_9cf6d2c9",
@@ -231,6 +249,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7ef62ec_e6482c97",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-06T20:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "682a97b6_6b944909",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e8ee637_721d648c",
@@ -298,6 +334,24 @@
       "side": 1,
       "message": "I tested the existing code by deliberately forcing the condition ceph_status !\u003d 0 to be true, ensuring the execution entered the if block.\nAlthough export_perms is a local pointer, its options field refers to the same structure used by the export itself. Therefore, modifying it inside the block directly affects the options field of the export\u0027s export_perms.\n\nAs a result, when the line 345 is executed, delegation will not be granted.",
       "parentUuid": "ef784df5_6ca5bbd4",
+      "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bcebe8_d79f83d4",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-06T20:50:43Z",
+      "side": 1,
+      "message": "OK, I think I see more what you are doing. But this won\u0027t disable delegations if any CLIENT block enables delegations. And it will only disable delegations for the particular export, but the other exports on the same cmount may or may not have delegations.\n\nMaybe you need to track this in struct ceph_cmount, and then you could actually implement a once only call to ceph_set_deleg_timeout. If it fails, you can mark the cmount as not allowing delegations.\n\nThen later when granting a delegation, we would need a way to check the ceph_cmount structure.",
+      "parentUuid": "16e26cc9_3c469a3d",
       "revId": "972f4815420551b823e0ee2302331cf8c14e69fe",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
