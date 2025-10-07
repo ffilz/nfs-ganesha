@@ -396,8 +396,14 @@ bool should_we_grant_deleg(struct state_hdl *ostate, nfs_client_id_t *client,
 	 * are handled differently because if we are currently handling
 	 * OPEN4_SHARE_ACCESS_WRITE then we would have incremented the
 	 * counter before calling this function.
+	 *
+	 * We exclude clients requesting both read and write access
+	 * from read-only contention check to ensure they are treated
+	 * like write clients for delegation purposes, not read-only
+	 * clients.
 	 */
 	if ((args->share_access & OPEN4_SHARE_ACCESS_READ &&
+	     !(args->share_access & OPEN4_SHARE_ACCESS_WRITE) &&
 	     file_stats->fds_num_write_opens > 0) ||
 	    (args->share_access & OPEN4_SHARE_ACCESS_WRITE &&
 	     file_stats->fds_num_write_opens > 1)) {
