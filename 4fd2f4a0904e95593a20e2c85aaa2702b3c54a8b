@@ -87,6 +87,24 @@
       "parentUuid": "623d0a27_18eb228f",
       "revId": "4fd2f4a0904e95593a20e2c85aaa2702b3c54a8b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f3628b_3d8c3d17",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-10-07T07:23:34Z",
+      "side": 1,
+      "message": "Here is one of the errors we are encountering:\n/home/sreedhar/TASKS/ganesha_time/nfs-ganesha/src/include/log.h:173:29: error: ISO C++ does not permit named variadic macros [-Wvariadic-macros]\n  173 | #define LogTest(format, args...)                                              \\\n--------------------\n\nWe can resolve this error by updating the macro definition as follows:\n\n-#define LogTest(format, args...)                                              \\\n+#define LogTest(format, ...)                                              \\\n        DisplayLogComponentLevel(COMPONENT_ALL, __FILE__, __LINE__, __func__, \\\n-                                NIV_NULL, format, ##args)\n+                                NIV_NULL, format, ##__VA_ARGS__)\n\n\n\nThis change applies to all Log macros for consistency and compliance with ISO C++ standards.\n\n\nPlease advise if I should create a new PR for these macro fixes, or if you would prefer that I include these changes in the current PR, which is focused solely on the ganesha_uptime_minutes metric update.",
+      "parentUuid": "e5919bd0_4c86bc93",
+      "revId": "4fd2f4a0904e95593a20e2c85aaa2702b3c54a8b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
