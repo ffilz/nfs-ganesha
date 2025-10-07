@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f29dea7c_df3103c8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:51:25Z",
+      "side": 1,
+      "message": "Can this function ever actually be called with qos_class NULL? If not, just change the test to an assert or drop it entirely.",
+      "revId": "f01da9c2772c8e87a8124d1647ec94af3110243e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d320b62_071b61b0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:51:25Z",
+      "side": 1,
+      "message": "Did clang-format make this change and the next? Otherwise, let\u0027s not make unrelated code format changes in this patch.",
+      "revId": "f01da9c2772c8e87a8124d1647ec94af3110243e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "445cbb02_56ef55b0",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:51:25Z",
+      "side": 1,
+      "message": "Hmm, where are these macros used? Hiding flow control statements like return in a macro is a bit tricky... (if they REALLY make sense, one option would be to lowercase \"RETURN\" to \"return\" so searching the code for the next instance of \"return\" will find them (I often search for \"return: in following a complex function\u0027s flow).",
+      "revId": "f01da9c2772c8e87a8124d1647ec94af3110243e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1bc01ee_0cdae883",
         "filename": "src/support/nfs_qosmgr.c",
         "patchSetId": 2
@@ -14,6 +65,24 @@
       "writtenOn": "2025-10-07T12:15:22Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+ * ^I   false otherwise$",
+      "revId": "f01da9c2772c8e87a8124d1647ec94af3110243e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9db15cf_efd24d68",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:51:25Z",
+      "side": 1,
+      "message": "Please replace the tab with spaces, we typically do not use tabs within comments",
+      "parentUuid": "d1bc01ee_0cdae883",
       "revId": "f01da9c2772c8e87a8124d1647ec94af3110243e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
