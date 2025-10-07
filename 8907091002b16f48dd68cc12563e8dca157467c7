@@ -16,6 +16,24 @@
       "message": "WARNING: Unknown commit id \u00271b34f7727c64ff704ef6c691fa66d02f115153ba\u0027, maybe rebased or not pulled?\nCommit 1b34f7727c64ff704ef6c691fa66d02f115153ba only changed the",
       "revId": "8907091002b16f48dd68cc12563e8dca157467c7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83d69c9_26021e41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2025-10-07T11:06:26Z",
+      "side": 1,
+      "message": "\u003e WARNING: Unknown commit id \u00271b34f7727c64ff704ef6c691fa66d02f115153ba\u0027, maybe rebased or not pulled?\n\u003e Commit 1b34f7727c64ff704ef6c691fa66d02f115153ba only changed the\n\nYet again, not sure why checkpatch lint is complaining about that commit id in the commit mesage?  I have definitely rebased on `next`.  This is just 1 commit on top of next (aka `V7.3`).\n\n`1b34f7727c64ff704ef6c691fa66d02f115153ba` is `V7.3~5`, so `git show V7.3~5` shows it.  Is there a different way to refer to previous commits in a commit message?  Perhaps I need to abbreviate it? 😯\n\nI can change the commit message to say \"A recent commit only changed...\" but that just seems wrong... 😉",
+      "parentUuid": "5f76ac6f_0533f596",
+      "revId": "8907091002b16f48dd68cc12563e8dca157467c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
