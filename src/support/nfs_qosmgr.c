@@ -56,12 +56,16 @@ struct showclients_state {
 	DBusMessageIter client_iter;
 };
 
+/* Use the MACROs to directly return from function.
+ * Otherwise use the below functions equivalent to macros for checking
+ * and releasing the resource before returning */
+
 #define CHECK_DBUS_NEXT_ARG_OR_RETURN(args, type, iter, msg)        \
 	do {                                                        \
 		if (!dbus_message_iter_next(args) ||                \
 		    dbus_message_iter_get_arg_type(args) != type) { \
 			gsh_dbus_status_reply(&iter, false, msg);   \
-			return true;                                \
+			return false;                               \
 		}                                                   \
 	} while (0)
 
@@ -69,7 +73,7 @@ struct showclients_state {
 	do {                                                                 \
 		if (!args || dbus_message_iter_get_arg_type(args) != type) { \
 			gsh_dbus_status_reply(&iter, false, msg);            \
-			return true;                                         \
+			return false;                                        \
 		}                                                            \
 	} while (0)
 
@@ -77,9 +81,63 @@ struct showclients_state {
 	do {                                                      \
 		if (!args) {                                      \
 			gsh_dbus_status_reply(&iter, false, msg); \
-			return true;                              \
+			return false;                             \
 		}                                                 \
 	} while (0)
+
+/**
+ * @brief Check if the next argument is of the expected type.
+ * @param args DBusMessageIter pointer
+ * @param type expected type
+ * @param iter DBusMessageIter pointer
+ * @param msg error message
+ * @return true if the argument is of the expected type, false otherwise
+ */
+static bool check_dbus_next_arg(DBusMessageIter *args, int type,
+				DBusMessageIter *iter, char *msg)
+{
+	if (!dbus_message_iter_next(args) ||
+	    dbus_message_iter_get_arg_type(args) != type) {
+		gsh_dbus_status_reply(iter, false, msg);
+		return false;
+	}
+	return true;
+}
+
+/**
+ * @brief Check if the argument is valid and of the expected type.
+ * @param args DBusMessageIter pointer
+ * @param type expected type
+ * @param iter DBusMessageIter pointer
+ * @param msg error message
+ * @return true if the argument is valid and of the expected type,
+ * 	   false otherwise
+ */
+static bool check_dbus_arg(DBusMessageIter *args, int type,
+			   DBusMessageIter *iter, char *msg)
+{
+	if (!args || dbus_message_iter_get_arg_type(args) != type) {
+		gsh_dbus_status_reply(iter, false, msg);
+		return false;
+	}
+	return true;
+}
+
+/**
+ * @brief Check if the argument is not null.
+ * @param args pointer to check
+ * @param iter DBusMessageIter pointer
+ * @param msg error message
+ * @return true if the argument is not null, false otherwise
+ */
+static bool check_arg(void *args, DBusMessageIter *iter, char *msg)
+{
+	if (!args) {
+		gsh_dbus_status_reply(iter, false, msg);
+		return false;
+	}
+	return true;
+}
 
 /**
  * @brief Set bandwidth settings for a client.
@@ -580,11 +638,10 @@ static bool dbus_qos_export_default_client_bw_get(DBusMessageIter *args,
 
 	dbus_message_iter_get_basic(args, &export_id);
 	gsh_export = get_gsh_export(export_id);
-	if (!gsh_export)
-		return false;
-
+	CHECK_ARG_AND_RETURN(gsh_export, iter, "Export id not found");
 	PTHREAD_MUTEX_lock(&g_qos_config_lock);
 	qos_class = gsh_export->qos_class;
+
 	if (qos_class != NULL) {
 		PTHREAD_MUTEX_lock(&qos_class->lock);
 		dbus_message_iter_init_append(reply, &iter);
@@ -639,7 +696,6 @@ static bool dbus_qos_export_bw_set(DBusMessageIter *args, DBusMessage *reply,
 	qos_class_t *qos_class;
 	DBusMessageIter iter;
 	bool retval = false;
-
 	dbus_message_iter_init_append(reply, &iter);
 	CHECK_DBUS_ARG_OR_RETURN(args, DBUS_TYPE_UINT16, iter,
 				 "Invalid arg exportid");
@@ -647,11 +703,14 @@ static bool dbus_qos_export_bw_set(DBusMessageIter *args, DBusMessage *reply,
 	gsh_export = get_gsh_export(export_id);
 	CHECK_ARG_AND_RETURN(gsh_export, iter, "Export id not found");
 
-	CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-				      "Invalid arg read_bw");
+	if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+				 "Invalid arg read_bw"))
+		goto put_export;
 	dbus_message_iter_get_basic(args, &read_bw);
-	CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-				      "Invalid arg write_bw");
+
+	if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+				 "Invalid arg write_bw"))
+		goto put_export;
 	dbus_message_iter_get_basic(args, &write_bw);
 
 	PTHREAD_MUTEX_lock(&g_qos_config_lock);
@@ -666,11 +725,13 @@ static bool dbus_qos_export_bw_set(DBusMessageIter *args, DBusMessage *reply,
 		gsh_dbus_status_reply(&iter, false, "check config values");
 		retval = false;
 	}
+
 	PTHREAD_MUTEX_unlock(&g_qos_config_lock);
+
+put_export:
 	put_gsh_export(gsh_export);
 	return retval;
 }
-
 /**
  * @brief Set token settings for a export.
  *
@@ -700,11 +761,14 @@ static bool dbus_qos_export_token_set(DBusMessageIter *args, DBusMessage *reply,
 	gsh_export = get_gsh_export(export_id);
 	CHECK_ARG_AND_RETURN(gsh_export, iter, "Export id not found");
 
-	CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-				      "Invalid arg max_token");
+	if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+				 "Invalid arg max_token"))
+		goto put_export;
 	dbus_message_iter_get_basic(args, &max_tokens);
-	CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-				      "Invalid arg token_renewal");
+
+	if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+				 "Invalid arg token_renewal"))
+		goto put_export;
 	dbus_message_iter_get_basic(args, &token_renewal);
 
 	PTHREAD_MUTEX_lock(&g_qos_config_lock);
@@ -716,13 +780,14 @@ static bool dbus_qos_export_token_set(DBusMessageIter *args, DBusMessage *reply,
 		qos_class->rbucket.tokens_renew_time = token_renewal;
 		qos_class->wbucket.tokens_renew_time = token_renewal;
 		PTHREAD_MUTEX_unlock(&qos_class->lock);
-
 		retval = true;
 	} else {
 		gsh_dbus_status_reply(&iter, false, "check config values");
 		retval = false;
 	}
+
 	PTHREAD_MUTEX_unlock(&g_qos_config_lock);
+put_export:
 	put_gsh_export(gsh_export);
 	return retval;
 }
@@ -760,16 +825,22 @@ static bool dbus_qos_pepc_clients_bw_set(DBusMessageIter *args,
 	qos_class = gsh_export->qos_class;
 	if (qos_class != NULL) {
 		dbus_message_iter_next(args);
-		CHECK_DBUS_ARG_OR_RETURN(args, DBUS_TYPE_STRING, iter,
-					 "Invalid arg ClientIP");
-		gsh_client = lookup_client(args, &errormsg);
-		CHECK_ARG_AND_RETURN(gsh_client, iter, errormsg);
+		if (!check_dbus_arg(args, DBUS_TYPE_STRING, &iter,
+				    "Invalid arg ClientIP"))
+			goto out;
 
-		CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-					      "Invalid arg read_bw");
+		gsh_client = lookup_client(args, &errormsg);
+		if (!check_arg(gsh_client, &iter, "lookup client failed"))
+			goto out;
+
+		if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+					 "Invalid arg read_bw"))
+			goto out;
 		dbus_message_iter_get_basic(args, &read_bw);
-		CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-					      "Invalid arg write_bw");
+
+		if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+					 "Invalid arg write_bw"))
+			goto out;
 		dbus_message_iter_get_basic(args, &write_bw);
 
 		PTHREAD_MUTEX_lock(&qos_class->lock);
@@ -789,6 +860,8 @@ static bool dbus_qos_pepc_clients_bw_set(DBusMessageIter *args,
 		gsh_dbus_status_reply(&iter, false, "check config values");
 		retval = false;
 	}
+
+out:
 	PTHREAD_MUTEX_unlock(&g_qos_config_lock);
 	put_gsh_export(gsh_export);
 	return retval;
@@ -822,16 +895,18 @@ static bool dbus_qos_export_default_client_bw_set(DBusMessageIter *args,
 	dbus_message_iter_get_basic(args, &export_id);
 	gsh_export = get_gsh_export(export_id);
 	CHECK_ARG_AND_RETURN(gsh_export, iter, "Export id not found");
-
 	PTHREAD_MUTEX_lock(&g_qos_config_lock);
 	qos_class = gsh_export->qos_class;
 
 	if (qos_class != NULL) {
-		CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-					      "Invalid arg read_bw");
+		if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+					 "Invalid arg read_bw"))
+			goto out;
 		dbus_message_iter_get_basic(args, &read_bw);
-		CHECK_DBUS_NEXT_ARG_OR_RETURN(args, DBUS_TYPE_UINT64, iter,
-					      "Invalid arg write_bw");
+
+		if (!check_dbus_next_arg(args, DBUS_TYPE_UINT64, &iter,
+					 "Invalid arg write_bw"))
+			goto out;
 		dbus_message_iter_get_basic(args, &write_bw);
 
 		gsh_export->qos_block->max_client_read_bw = read_bw;
@@ -841,6 +916,8 @@ static bool dbus_qos_export_default_client_bw_set(DBusMessageIter *args,
 		gsh_dbus_status_reply(&iter, false, "check config values");
 		retval = false;
 	}
+
+out:
 	PTHREAD_MUTEX_unlock(&g_qos_config_lock);
 	put_gsh_export(gsh_export);
 	return retval;
@@ -1165,11 +1242,8 @@ static struct gsh_dbus_method qos_client_token_get = {
 };
 
 static struct gsh_dbus_method *qos_methods_pc[] = {
-	&qos_client_bw_get,
-	&qos_client_bw_set,
-	&qos_client_token_get,
-	&qos_client_token_set,
-	NULL
+	&qos_client_bw_get, &qos_client_bw_set, &qos_client_token_get,
+	&qos_client_token_set, NULL
 };
 
 static struct gsh_dbus_interface qos_interface = {
