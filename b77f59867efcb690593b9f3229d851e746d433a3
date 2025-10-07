@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c359e5ac_a6b23321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97edf83a_1dbbe1e7",
+      "revId": "b77f59867efcb690593b9f3229d851e746d433a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7ca59b3_1d9d56aa",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "952125c1_d2265e4c",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Moot now, code rework looks great.",
+      "parentUuid": "d7ca59b3_1d9d56aa",
+      "revId": "b77f59867efcb690593b9f3229d851e746d433a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7dc2158_ad21321f",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-09-02T16:06:53Z",
       "side": 1,
       "message": "This represents an error path, that something in Ganesha is messed up. We should probably LogFatal. Or at best, LogCrit and then proceed with freestateid as normal.",
+      "revId": "b77f59867efcb690593b9f3229d851e746d433a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6762291a_e25e14c1",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Moot now, code rework looks great.",
+      "parentUuid": "e7dc2158_ad21321f",
       "revId": "b77f59867efcb690593b9f3229d851e746d433a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

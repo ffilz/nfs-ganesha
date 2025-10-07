@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29db245a_c58d5042",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Why not move setting the status to just before the return",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9037353b_943fcd19",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Please move these declarations to top of function, we prefer not to have declarations interspersed through the code.",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87de19f1_c607699a",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "I think you can move declaration for revoked into the loop below",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8469f9f0_53ddfcee",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "This should be gsh_free",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b45025a_20c5644d",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Can\u0027t you just use glist_empty here? You break immediately, and you don\u0027t use revoked.",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b940e3a_deb1562b",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Move declarations to top of loop please",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f626cf_e13d2999",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-07T22:30:39Z",
+      "side": 1,
+      "message": "Declaration for session could be moved into the loop below.",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
