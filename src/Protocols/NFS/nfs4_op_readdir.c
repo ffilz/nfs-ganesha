@@ -311,7 +311,8 @@ not_junction:
 	memset(val_fh, 0, NFS4_FHSIZE);
 
 	/* See if we have space based on max_count. */
-	if (tracker->count == tracker->max_count) {
+	if ((tracker->max_count != 0) &&
+			(tracker->count == tracker->max_count)) {
 		LogDebug(COMPONENT_NFS_READDIR,
 			 "Skipping because we already have %d entries",
 			 tracker->count);
@@ -676,7 +677,14 @@ enum nfs_req_result nfs4_op_readdir(struct nfs_argop4 *op,
 
 	/* Prepare to read the entries */
 	tracker.mem_avail = maxcount - READDIR_RESOK_BASE_SIZE;
+#if 0
 	tracker.max_count = dircount;
+#else
+	/* TODO: dircount is a byte-size hint (RFC 8881), not an entry limit.
+	* For now, ignore it and use readdir_max_count (0 = no cap).
+	* Future: implement real byte accounting if needed.
+	*/
+	tracker.max_count = nfs_param.core_param.readdir_max_count;
 	tracker.entries = get_buffer_for_io_response(tracker.mem_avail, NULL);
 	/* If buffer was not assigned, let's allocate it */
 	if (tracker.entries == NULL)
