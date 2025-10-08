@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "788e78bd_453b1ad6",
+        "filename": "src/Protocols/NFS/nfs4_op_free_stateid.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:27:20Z",
+      "side": 1,
+      "message": "Status setting moved before we return.",
+      "parentUuid": "29db245a_c58d5042",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9037353b_943fcd19",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 9
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-07T22:30:39Z",
       "side": 1,
       "message": "Please move these declarations to top of function, we prefer not to have declarations interspersed through the code.",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "925db301_97fa1ef8",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:27:20Z",
+      "side": 1,
+      "message": "Declaration moved at the beginning of the function.",
+      "parentUuid": "9037353b_943fcd19",
       "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c7e6cc8_e995e701",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:27:20Z",
+      "side": 1,
+      "message": "Moved declaration for revoked into the loop.",
+      "parentUuid": "87de19f1_c607699a",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8469f9f0_53ddfcee",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 9
@@ -65,6 +119,24 @@
       "writtenOn": "2025-10-07T22:30:39Z",
       "side": 1,
       "message": "This should be gsh_free",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7271828_287636b4",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:27:20Z",
+      "side": 1,
+      "message": "Corrected it to gsh_free.",
+      "parentUuid": "8469f9f0_53ddfcee",
       "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13bbc934_2d816853",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:27:20Z",
+      "side": 1,
+      "message": "Changed it to glist_empty.",
+      "parentUuid": "6b45025a_20c5644d",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b940e3a_deb1562b",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 9
@@ -105,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c43c739_8fa33261",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:27:20Z",
+      "side": 1,
+      "message": "Moved the declaration at the top.",
+      "parentUuid": "3b940e3a_deb1562b",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60f626cf_e13d2999",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 9
@@ -116,6 +224,24 @@
       "writtenOn": "2025-10-07T22:30:39Z",
       "side": 1,
       "message": "Declaration for session could be moved into the loop below.",
+      "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306438c1_ba95bd15",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:27:20Z",
+      "side": 1,
+      "message": "Declaration for session moved into the loop.",
+      "parentUuid": "60f626cf_e13d2999",
       "revId": "e95cbfe06135cf15bc033909734a6d3047df0f98",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
