@@ -16,6 +16,24 @@
       "message": "Somehow this is still not quite clear to me from the comment above given the first part of the comment from the original code.",
       "revId": "ad439ee737824c5259fb6358a33795c76c74f4f3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b434e3_9bd2203b",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-08T07:59:52Z",
+      "side": 1,
+      "message": "When a client requests OPEN4_SHARE_ACCESS_READ | OPEN4_SHARE_ACCESS_WRITE, the fds_num_write_opens counter is incremented to 1 (because write access is requested).\n\nThe first condition (args-\u003eshare_access \u0026 OPEN4_SHARE_ACCESS_READ \u0026\u0026 file_stats-\u003efds_num_write_opens \u003e 0) evaluates to true because both the read bit is set AND there\u0027s a write open (the current one) and triggers the contention check and denies the delegation.\n\nThe new check !(args-\u003eshare_access \u0026 OPEN4_SHARE_ACCESS_WRITE) ensures that:\n- Read-only clients (OPEN4_SHARE_ACCESS_READ only): Still denied delegation when write clients exist.\n\n- Write-only clients (OPEN4_SHARE_ACCESS_WRITE only): Still denied delegation when multiple write clients exist.\n\n- Read+write clients (OPEN4_SHARE_ACCESS_READ | OPEN4_SHARE_ACCESS_WRITE): Treated like write clients, not read clients, so they can receive delegations when appropriate.\n\nSuch requests having mixed-access are used in PYNFS delegation test cases. I have changed the comment.",
+      "parentUuid": "242daad3_60f52ac7",
+      "revId": "ad439ee737824c5259fb6358a33795c76c74f4f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
