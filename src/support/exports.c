@@ -2271,6 +2271,9 @@ static struct config_item fsal_params[] = {
 		CONF_ITEM_BOOLBIT_SET("DisableReaddirPlus", false,             \
 				      EXPORT_OPTION_NO_READDIR_PLUS, _struct_, \
 				      options, options_set),                   \
+		CONF_ITEM_BOOLBIT_SET("DisableDirCaching", false,              \
+				      EXPORT_OPTION_NO_DIR_CACHING, _struct_,  \
+				      options, options_set),                   \
 		CONF_ITEM_BOOLBIT_SET(                                         \
 			"Trust_Readdir_Negative_Cache", false,                 \
 			EXPORT_OPTION_TRUST_READIR_NEGATIVE_CACHE, _struct_,   \
@@ -2420,6 +2423,9 @@ static void *pseudofs_init(void *link_mem, void *self_struct)
 				      _struct_, options, options_set),         \
 		CONF_ITEM_BOOLBIT_SET("DisableReaddirPlus", false,             \
 				      EXPORT_OPTION_NO_READDIR_PLUS, _struct_, \
+				      options, options_set),                   \
+		CONF_ITEM_BOOLBIT_SET("DisableDirCaching", false,              \
+				      EXPORT_OPTION_NO_DIR_CACHING, _struct_,  \
 				      options, options_set),                   \
 		CONF_ITEM_BOOLBIT_SET(                                         \
 			"Trust_Readdir_Negative_Cache", false,                 \
