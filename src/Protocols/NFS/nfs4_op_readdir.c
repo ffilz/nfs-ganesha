@@ -311,7 +311,8 @@ not_junction:
 	memset(val_fh, 0, NFS4_FHSIZE);
 
 	/* See if we have space based on max_count. */
-	if (tracker->count == tracker->max_count) {
+	if ((tracker->max_count != 0) && 
+			(tracker->count == tracker->max_count)) {
 		LogDebug(COMPONENT_NFS_READDIR,
 			 "Skipping because we already have %d entries",
 			 tracker->count);
