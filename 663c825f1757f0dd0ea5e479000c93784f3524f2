@@ -67,6 +67,24 @@
       "message": "I don\u0027t understand how this bool works, it\u0027s in the config block, but there is no config code for it.",
       "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff6e1ac_fa6cfecb",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-10-08T05:31:01Z",
+      "side": 1,
+      "message": "The purpose of this configuration flag is to indicate whether metrics collection is enabled. When this flag is set to true, the QoS values are read and included in the metrics. During the IOPS drain phase, this flag is set to false to disable further updates to the metrics. This control mechanism ensures that metrics are only updated when appropriate.",
+      "parentUuid": "cef2c343_c59fc4b0",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
