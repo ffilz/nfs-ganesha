@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6746666_d554f5fb",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-09T11:46:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t/* dircount accounting (cookie+name bytes, XDR sized). 0 \u003d unlimited (RFC). */",
+      "revId": "25f68526e5819cd3a7ff8a761e113e233cc9fec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98cee7e9_688becbc",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-09T11:46:08Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I/* Disable legacy entry count  limiting; enforce $",
+      "revId": "25f68526e5819cd3a7ff8a761e113e233cc9fec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
