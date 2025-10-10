@@ -57,6 +57,13 @@
 
 #ifdef HAVE_PROCPS
 #include <proc/readproc.h>
+#else
+// Dummy replacement when procps is not available
+
+// Define a stub for proc_t
+typedef struct {
+    // empty struct or dummy members
+} proc_t;
 #endif
 
 #ifdef __cplusplus
