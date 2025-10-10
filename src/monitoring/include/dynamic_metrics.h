@@ -111,6 +111,15 @@ void dynamic_metrics__mem_info(proc_t proc_info);
 #define UNUSED_(arg) NOT_USED_##arg UNUSED_ATTR
 #endif
 
+#ifndef HAVE_PROCPS
+// Dummy replacement when procps is not available
+
+// Define a stub for proc_t
+typedef struct {
+	// empty struct or dummy members
+} proc_t;
+#endif
+
 static inline void dynamic_metrics__init(void)
 {
 }
