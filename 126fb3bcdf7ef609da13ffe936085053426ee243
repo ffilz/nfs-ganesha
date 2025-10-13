@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd5b436e_28feab59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-13T20:58:43Z",
+      "side": 1,
+      "message": "Looks good overall, just a few comments",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c46ff9_3514675d",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-13T20:58:43Z",
+      "side": 1,
+      "message": "Comment wrong...",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa00fa5f_838a487d",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-13T20:58:43Z",
+      "side": 1,
+      "message": "Can this validation be done in the config commit function?",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c42f8247_2e5cb899",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-13T20:58:43Z",
+      "side": 1,
+      "message": "This check is going to need to be replicated in Protocols/NFS/nfs4_Compound.c",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66fa87b7_be042846",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-13T20:58:43Z",
+      "side": 1,
+      "message": "This header file needs a \"header\", also #ifdef GSH_TLS_H so it is only processed once",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e604b33a_4fe82bf0",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-13T20:58:43Z",
+      "side": 1,
+      "message": "Comments on the following two are wrong",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "291c249f_843ee27a",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-13T20:58:43Z",
+      "side": 1,
+      "message": "If you make the commit function not no-op, you can do the validation bits there.",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
