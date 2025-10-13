@@ -676,19 +676,31 @@ nfsstat4 handle_deleg_getattr(struct fsal_obj_handle *obj,
 	 */
 
 	cb_state = obj->state_hdl->file.cbgetattr.state;
+	LogDebug(COMPONENT_STATE, "CB_GETATTR cb_state=%d for obj %p", cb_state,
+		 obj);
+
 	switch (cb_state) {
 	case CB_GETATTR_RSP_OK:
 		/* got response for CB_GETATTR */
+		LogDebug(COMPONENT_STATE,
+			 "CB_GETATTR already completed successfully");
 		status = NFS4_OK;
 		goto out;
 	case CB_GETATTR_WIP:
 		/* wait for response */
+		LogDebug(COMPONENT_STATE,
+			 "CB_GETATTR in progress, waiting for completion");
 		goto out;
 	case CB_GETATTR_FAILED:
+		LogDebug(COMPONENT_STATE,
+			 "CB_GETATTR failed, recalling delegation");
 		goto deleg_recall;
 	default: /* CB_GETATTR_NONE */
+		LogDebug(COMPONENT_STATE,
+			 "No CB_GETATTR sent yet, sending now");
 		goto send_request;
 	}
+
 send_request:
 	LogDebug(COMPONENT_STATE, "sending CB_GETATTR");
 	rc = async_cbgetattr(general_fridge, obj, client);
@@ -697,7 +709,10 @@ send_request:
 			"Failed to start thread to send cb_getattr.");
 		goto deleg_recall;
 	}
+	/* Return EDELAY per RFC until CB_GETATTR completes */
+	status = NFS4ERR_DELAY;
 	goto out;
+
 deleg_recall:
 	LogDebug(COMPONENT_STATE, "CB_GETATTR is either not enabled or failed,"
 				  " recalling write delegation");
