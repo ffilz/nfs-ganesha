@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942aaaee_698dfd02",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:20:36Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+ * This function retrieves the current IOPS limits for clients under a pepc configuration.",
+      "revId": "cfa1b9609610a30dd16425af3d77c880fbf617b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539f925c_6548dc97",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:20:36Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+static struct gsh_dbus_method qos_export_enable_all_clients_iops_control_pepc \u003d {",
+      "revId": "cfa1b9609610a30dd16425af3d77c880fbf617b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba9776a_16d5016f",
+        "filename": "src/support/nfs_qosmgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1630,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:20:36Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+static struct gsh_dbus_method qos_export_disable_all_clients_iops_control_pepc \u003d {",
+      "revId": "cfa1b9609610a30dd16425af3d77c880fbf617b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
