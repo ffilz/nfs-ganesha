@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3842635b_4e1fae20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-13T10:34:19Z",
+      "side": 1,
+      "message": "As discussed, client retry code is added to _testCbGetattr() which gets called in DELEG24 and DELEG25 test cases.\n\nRetry code added - \n\n    # Handle NFS4ERR_DELAY - retry until we get NFS4_OK\n    retry_count \u003d 0\n    max_retries \u003d 10\n    while res.status \u003d\u003d NFS4ERR_DELAY and retry_count \u003c max_retries:\n        print(f\"Got NFS4ERR_DELAY, retrying... (attempt {retry_count + 1}/{max_retries})\")\n        time.sleep(0.1)  # Wait 100ms before retry\n        res \u003d sess2.compound([op.putfh(fh), op.getattr(1\u003c\u003cFATTR4_CHANGE | 1\u003c\u003cFATTR4_SIZE | 1\u003c\u003cFATTR4_TIME_ACCESS | 1\u003c\u003cFATTR4_TIME_MODIFY)])\n        retry_count +\u003d 1\n        print(f\"Retry {retry_count} status: {res.status}\")\n\n    if res.status \u003d\u003d NFS4ERR_DELAY:\n        fail(f\"GETATTR still returning DELAY after {max_retries} retries\")",
+      "revId": "cb0dc741e779216ad1486be64d1d2b5251f272c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a14f200_2c482622",
