@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45ef6117_dd502baa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:49:52Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nDELEG25 tests CB_GETATTR with the attribute changes (retry on NFS4ERR_DELAY).",
+      "revId": "1f3bcc77da839caf5a3927dfd1e11bea00fdc2d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab00dff4_f8765987",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:49:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 96 exceeds 80 columns\n+\t\t/* Only advertise NFSv4.2 delegation timestamp attributes for NFSv4.2 clients */",
+      "revId": "1f3bcc77da839caf5a3927dfd1e11bea00fdc2d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f181853_89f24a39",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:49:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 92 exceeds 80 columns\n+\t\t\t/* These are NFSv4.2-only attributes - only advertise for NFSv4.2 */",
+      "revId": "1f3bcc77da839caf5a3927dfd1e11bea00fdc2d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8a225d_5494c90f",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:49:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t      fattr4tab[attr].attrmask) !\u003d 0))) {",
+      "revId": "1f3bcc77da839caf5a3927dfd1e11bea00fdc2d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64eea3ce_dc1e08be",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2735,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-13T09:49:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t/* Set share access want flags to indicate delegation timestamps support */",
+      "revId": "1f3bcc77da839caf5a3927dfd1e11bea00fdc2d6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
