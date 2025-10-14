@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3d56c27_a0eef81d",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-14T07:31:31Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com, Currently monitoring is not supported at runtime and is a global configuration. So you are right that this enable_metric should not be there in qos_block_config",
+      "parentUuid": "d39c439c_223ace99",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cef2c343_c59fc4b0",
         "filename": "src/include/nfs_qos.h",
         "patchSetId": 10

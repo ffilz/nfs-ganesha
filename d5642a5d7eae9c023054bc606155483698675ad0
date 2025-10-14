@@ -16,6 +16,57 @@
       "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis PR introduces structured support for QoS metrics across three categories:",
       "revId": "d5642a5d7eae9c023054bc606155483698675ad0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e86ad2ca_97e5a698",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-14T07:31:31Z",
+      "side": 1,
+      "message": "Why this same disablement is not applicable to BW and TOKEN ?",
+      "revId": "d5642a5d7eae9c023054bc606155483698675ad0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b3c8d1_6c7e6111",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-14T07:31:31Z",
+      "side": 1,
+      "message": "Currently bucket metrics are registered based on what QOS subfeature is enabled.\nbut I don\u0027t see deregister based on the same.\n\nAnd one more thing is that metric bits should be there for each sub QOS entity, so that a runtime enablement/disablement of the feature can enable/disable the related metrics.",
+      "revId": "d5642a5d7eae9c023054bc606155483698675ad0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8595c50f_4ce94973",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-14T07:31:31Z",
+      "side": 1,
+      "message": "This bool should be specific to QOS sub feature, such as for BW, IOPS, TOKEN.\nreason being: user might configure any of the above entity and can enable disable at run time.",
+      "revId": "d5642a5d7eae9c023054bc606155483698675ad0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
