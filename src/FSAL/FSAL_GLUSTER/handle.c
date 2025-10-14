@@ -1109,7 +1109,7 @@ void glusterfs_copy_my_fd(struct glusterfs_fd *src_fd,
 		/* Need to LRU track global fd including incrementing
 		 * fsal_fd_global_counter.
 		 */
-		insert_fd_lru(&dst_fd->fsal_fd);
+		//insert_fd_lru(&dst_fd->fsal_fd);
 	} else {
 		dst_fd->glfd = src_fd->glfd;
 		dst_fd->creds.caller_garray = src_fd->creds.caller_garray;
@@ -1934,6 +1934,7 @@ glusterfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		 * fileerr. This also properly manages the glfd.
 		 */
 		my_fd = &myself->globalfd;
+		insert_fd_lru(&my_fd->fsal_fd);
 	}
 
 	LogFullDebug(COMPONENT_FSAL, "glusterfs_copy_my_fd %s returned %s",
