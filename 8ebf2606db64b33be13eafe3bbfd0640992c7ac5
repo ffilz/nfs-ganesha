@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e946e7c_ce4de6b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-14T20:23:04Z",
+      "side": 1,
+      "message": "Looks pretty good, just a couple questions.",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f9eef41_c29c670f",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-14T20:23:04Z",
+      "side": 1,
+      "message": "Trying to understand the RFC, but I think we need to set other bits. This looks like it supports the client query to determine which options OPEN supports.\n\nAnd it seems like we should do something with that flag set on an OPEN?",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f68430a_9f984346",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-14T20:23:04Z",
+      "side": 1,
+      "message": "Are these flags used somewhere? I would expect them to be processed by OPEN?",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
