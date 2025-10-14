@@ -2605,6 +2605,137 @@ static fattr_xdr_result decode_xattr_support(XDR *xdr,
 	return FATTR_XDR_NOOP;
 }
 
+/*
+ * NFSv4.2 Delegation Timestamp Extensions (RFC 9754)
+ */
+
+/*
+ * FATTR4_TIME_DELEG_ACCESS
+ */
+static fattr_xdr_result encode_time_deleg_access(XDR *xdr,
+						 struct xdr_attrs_args *args)
+{
+	nfstime4 time_deleg_access;
+
+	LogFullDebug(COMPONENT_NFS_V4, "Encoding FATTR4_TIME_DELEG_ACCESS");
+
+	/* For now, return the same time as FATTR4_TIME_ACCESS */
+	if (args->attrs && (args->attrs->valid_mask & ATTR_ATIME)) {
+		time_deleg_access.seconds = args->attrs->atime.tv_sec;
+		time_deleg_access.nseconds = args->attrs->atime.tv_nsec;
+		LogFullDebug(COMPONENT_NFS_V4, "Using atime: %ld.%u",
+			     time_deleg_access.seconds,
+			     time_deleg_access.nseconds);
+	} else {
+		/* Return current time if no access time available */
+		struct timespec now;
+
+		clock_gettime(CLOCK_REALTIME, &now);
+		time_deleg_access.seconds = now.tv_sec;
+		time_deleg_access.nseconds = now.tv_nsec;
+		LogFullDebug(COMPONENT_NFS_V4, "Using current time: %ld.%u",
+			     time_deleg_access.seconds,
+			     time_deleg_access.nseconds);
+	}
+
+	if (!xdr_nfstime4(xdr, &time_deleg_access)) {
+		LogWarn(COMPONENT_NFS_V4,
+			"Failed to encode FATTR4_TIME_DELEG_ACCESS");
+		return FATTR_XDR_FAILED;
+	}
+	LogFullDebug(COMPONENT_NFS_V4,
+		     "Successfully encoded FATTR4_TIME_DELEG_ACCESS");
+	return FATTR_XDR_SUCCESS;
+}
+
+static fattr_xdr_result decode_time_deleg_access(XDR *xdr,
+						 struct xdr_attrs_args *args)
+{
+	return FATTR_XDR_NOOP;
+}
+
+/*
+ * FATTR4_TIME_DELEG_MODIFY
+ */
+static fattr_xdr_result encode_time_deleg_modify(XDR *xdr,
+						 struct xdr_attrs_args *args)
+{
+	nfstime4 time_deleg_modify;
+
+	LogFullDebug(COMPONENT_NFS_V4, "Encoding FATTR4_TIME_DELEG_MODIFY");
+
+	/* For now, return the same time as FATTR4_TIME_MODIFY */
+	if (args->attrs && (args->attrs->valid_mask & ATTR_MTIME)) {
+		time_deleg_modify.seconds = args->attrs->mtime.tv_sec;
+		time_deleg_modify.nseconds = args->attrs->mtime.tv_nsec;
+		LogFullDebug(COMPONENT_NFS_V4, "Using mtime: %ld.%u",
+			     time_deleg_modify.seconds,
+			     time_deleg_modify.nseconds);
+	} else {
+		/* Return current time if no modification time available */
+		struct timespec now;
+
+		clock_gettime(CLOCK_REALTIME, &now);
+		time_deleg_modify.seconds = now.tv_sec;
+		time_deleg_modify.nseconds = now.tv_nsec;
+		LogFullDebug(COMPONENT_NFS_V4, "Using current time: %ld.%u",
+			     time_deleg_modify.seconds,
+			     time_deleg_modify.nseconds);
+	}
+
+	if (!xdr_nfstime4(xdr, &time_deleg_modify)) {
+		LogWarn(COMPONENT_NFS_V4,
+			"Failed to encode FATTR4_TIME_DELEG_MODIFY");
+		return FATTR_XDR_FAILED;
+	}
+	LogFullDebug(COMPONENT_NFS_V4,
+		     "Successfully encoded FATTR4_TIME_DELEG_MODIFY");
+	return FATTR_XDR_SUCCESS;
+}
+
+static fattr_xdr_result decode_time_deleg_modify(XDR *xdr,
+						 struct xdr_attrs_args *args)
+{
+	return FATTR_XDR_NOOP;
+}
+
+/*
+ * FATTR4_OPEN_ARGUMENTS
+ */
+static fattr_xdr_result encode_open_arguments(XDR *xdr,
+					      struct xdr_attrs_args *args)
+{
+	open_arguments4 open_args;
+
+	LogFullDebug(COMPONENT_NFS_V4, "Encoding FATTR4_OPEN_ARGUMENTS");
+
+	/* Initialize with empty/default values */
+	memset(&open_args, 0, sizeof(open_args));
+
+	/* Set share access want flags to indicate delegation timestamps
+	 * support.
+	 */
+	open_args.oa_share_access_want.bitmap4_len = 1;
+	open_args.oa_share_access_want.map[0] =
+		OPEN4_SHARE_ACCESS_WANT_DELEG_TIMESTAMPS;
+
+	/* For now, return open arguments with delegation timestamps support */
+	if (!xdr_open_arguments4(xdr, &open_args)) {
+		LogWarn(COMPONENT_NFS_V4,
+			"Failed to encode FATTR4_OPEN_ARGUMENTS");
+		return FATTR_XDR_FAILED;
+	}
+	LogFullDebug(COMPONENT_NFS_V4,
+		     "Successfully encoded FATTR4_OPEN_ARGUMENTS");
+	return FATTR_XDR_SUCCESS;
+}
+
+static fattr_xdr_result decode_open_arguments(XDR *xdr,
+					      struct xdr_attrs_args *args)
+{
+	return FATTR_XDR_NOOP;
+}
+
 /* NFS V4.0+ attributes
  * This array reflects the tables on page 39-46 of RFC3530
  * indexed by attribute number
@@ -3274,7 +3405,34 @@ const struct fattr4_dent fattr4tab[FATTR4_MAX_ATTR_INDEX + 1] = {
 				   .attrmask = 0,
 				   .encode = encode_xattr_support,
 				   .decode = decode_xattr_support,
-				   .access = FATTR4_ATTR_READ }
+				   .access = FATTR4_ATTR_READ },
+	[FATTR4_TIME_DELEG_ACCESS] = { .name = "FATTR4_TIME_DELEG_ACCESS",
+				       .supported = 1,
+				       .encoded = 1,
+				       .size_fattr4 =
+					       sizeof(fattr4_time_deleg_access),
+				       .attrmask = 0,
+				       .encode = encode_time_deleg_access,
+				       .decode = decode_time_deleg_access,
+				       .access = FATTR4_ATTR_READ },
+	[FATTR4_TIME_DELEG_MODIFY] = { .name = "FATTR4_TIME_DELEG_MODIFY",
+				       .supported = 1,
+				       .encoded = 1,
+				       .size_fattr4 =
+					       sizeof(fattr4_time_deleg_modify),
+				       .attrmask = 0,
+				       .encode = encode_time_deleg_modify,
+				       .decode = decode_time_deleg_modify,
+				       .access = FATTR4_ATTR_READ },
+	[FATTR4_OPEN_ARGUMENTS] = { .name = "FATTR4_OPEN_ARGUMENTS",
+				    .supported = 1,
+				    .encoded = 1,
+				    .size_fattr4 =
+					    sizeof(fattr4_open_arguments),
+				    .attrmask = 0,
+				    .encode = encode_open_arguments,
+				    .decode = decode_open_arguments,
+				    .access = FATTR4_ATTR_READ },
 };
 
 /* goes in a more global header?
@@ -3481,9 +3639,47 @@ nfsstat4 file_To_Fattr(compound_data_t *data, attrmask_t request_mask,
 	args.fileid = data->current_obj->fileid;
 	args.fsid = data->current_obj->fsid;
 
-	status = data->current_obj->obj_ops->getattrs(data->current_obj, attr);
-	if (FSAL_IS_ERROR(status))
-		return nfs4_Errno_status(status);
+	/* Check if we have callback attributes available from delegation */
+	LogDebug(
+		COMPONENT_NFS_V4,
+		"Checking callback attributes - type=%d, state_hdl=%p, cbgetattr_state=%d",
+		data->current_obj->type, data->current_obj->state_hdl,
+		data->current_obj->state_hdl
+			? data->current_obj->state_hdl->file.cbgetattr.state
+			: -1);
+
+	if (data->current_obj->type == REGULAR_FILE &&
+	    data->current_obj->state_hdl != NULL &&
+	    data->current_obj->state_hdl->file.cbgetattr.state ==
+		    CB_GETATTR_RSP_OK) {
+		LogDebug(COMPONENT_NFS_V4,
+			 "Using callback attributes instead of FSAL getattrs");
+
+		/* Use callback attributes instead of calling FSAL getattrs */
+		attr->valid_mask = ATTR_CHANGE | ATTR_SIZE | ATTR_MTIME |
+				   ATTR_CTIME;
+		attr->change =
+			data->current_obj->state_hdl->file.cbgetattr.change;
+		attr->filesize =
+			data->current_obj->state_hdl->file.cbgetattr.filesize;
+		attr->mtime.tv_sec = time(NULL);
+		attr->mtime.tv_nsec = 0;
+		attr->ctime.tv_sec = time(NULL);
+		attr->ctime.tv_nsec = 0;
+
+		LogDebug(COMPONENT_NFS_V4,
+			 "Using callback attributes - change=%llu, size=%llu",
+			 (unsigned long long)attr->change,
+			 (unsigned long long)attr->filesize);
+	} else {
+		/* Normal FSAL getattrs call */
+		LogDebug(COMPONENT_NFS_V4,
+			 "Using FSAL getattrs (not using callback attributes)");
+		status = data->current_obj->obj_ops->getattrs(data->current_obj,
+							      attr);
+		if (FSAL_IS_ERROR(status))
+			return nfs4_Errno_status(status);
+	}
 
 	/* Restore originally requested mask */
 	attr->request_mask = request_mask;
