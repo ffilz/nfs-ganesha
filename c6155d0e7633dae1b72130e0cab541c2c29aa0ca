@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc490f8_9ebcdbc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039021
+      },
+      "writtenOn": "2025-10-14T23:39:28Z",
+      "side": 1,
+      "message": "Thks，Your approach would certainly achieve the same result; it\u0027s just a matter of clarifying the meaning of state \u003d\u003d NULL versus state !\u003d NULL. However, I\u0027d prefer to stay consistent with FSAL_VFS. And I\u0027ve run multiple rounds of high-stress testing with vdbench consecutively.\n\nAdditionally, I re-read the vfs_open2(...) function in FSAL_VFS/file.c and believe my current approach is consistent with it. Could you please help me confirm this?",
+      "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34a3f013_815ad7ff",
@@ -26,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b39d9885_82a27c11",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1039021
+      },
+      "writtenOn": "2025-10-14T23:39:28Z",
+      "side": 1,
+      "message": "Thks，Your approach would certainly achieve the same result; it\u0027s just a matter of clarifying the meaning of state \u003d\u003d NULL versus state !\u003d NULL. However, I\u0027d prefer to stay consistent with FSAL_VFS. And I\u0027ve run multiple rounds of high-stress testing with vdbench consecutively.\n\nAdditionally, I re-read the vfs_open2(...) function in FSAL_VFS/file.c and believe my current approach is consistent with it. Could you please help me confirm this?",
+      "parentUuid": "34a3f013_815ad7ff",
+      "range": {
+        "startLine": 1112,
+        "startChar": 2,
+        "endLine": 1112,
+        "endChar": 36
+      },
+      "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c112c1ea_11a3e670",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 2
@@ -37,6 +78,30 @@
       "writtenOn": "2025-10-14T13:09:41Z",
       "side": 1,
       "message": "Even though this will fix the issue with NFSv3, it will create a problem with v4. If you run the same workload with v4, I believe the fd counter will again becomes to non-zero. We need to add the to lru list in both cases.",
+      "range": {
+        "startLine": 1937,
+        "startChar": 2,
+        "endLine": 1937,
+        "endChar": 33
+      },
+      "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58303ac_605a0aba",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1039021
+      },
+      "writtenOn": "2025-10-14T23:39:28Z",
+      "side": 1,
+      "message": "Thks，This is not an issue—when using GlusterFS, NFSv4 is typically not considered.Of course, I haven\u0027t tested it, so I\u0027m not sure if this has any impact on NFSv4.",
+      "parentUuid": "c112c1ea_11a3e670",
       "range": {
         "startLine": 1937,
         "startChar": 2,
