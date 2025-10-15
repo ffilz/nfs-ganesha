@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d38ec21_6e439811",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-15T02:15:17Z",
+      "side": 1,
+      "message": "Yes, let\u0027s be consistent with FSAL_VFS.",
+      "parentUuid": "b39d9885_82a27c11",
+      "range": {
+        "startLine": 1112,
+        "startChar": 2,
+        "endLine": 1112,
+        "endChar": 36
+      },
+      "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c112c1ea_11a3e670",
         "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
         "patchSetId": 2
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Thks，This is not an issue—when using GlusterFS, NFSv4 is typically not considered.Of course, I haven\u0027t tested it, so I\u0027m not sure if this has any impact on NFSv4.",
       "parentUuid": "c112c1ea_11a3e670",
+      "range": {
+        "startLine": 1937,
+        "startChar": 2,
+        "endLine": 1937,
+        "endChar": 33
+      },
+      "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3c900d_361ab632",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-15T02:15:17Z",
+      "side": 1,
+      "message": "Some folks may well use GlusterFS with NFSv4, Red Hat\u0027s Gluster product certainly does.",
+      "parentUuid": "b58303ac_605a0aba",
       "range": {
         "startLine": 1937,
         "startChar": 2,
