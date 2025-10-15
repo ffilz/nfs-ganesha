@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "155b2ac6_95c42c94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-15T13:35:16Z",
+      "side": 1,
+      "message": "The DELEG24/DELEG25 tests are currently passing because they seem to work fine with traditional delegation types (OPEN_DELEGATE_WRITE/READ) and as you mentioned we need to support other types as per NFSv4.2.\n\nI have responded with more information to both the comments on how we could address them. Please let me know if you\u0027d prefer a different approach!",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f9eef41_c29c670f",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c157be6_52664e84",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-15T13:35:16Z",
+      "side": 1,
+      "message": "Per RFC 9754 Section 3, this attribute allows clients to query server\ncapabilities before using optional OPEN features. The open_arguments4 structure\ncontains 5 bitmaps representing different aspects of OPEN support.\n\nCurrently, I\u0027m only setting oa_share_access_want with DELEG_TIMESTAMPS. \nI will update encode_open_arguments() to properly advertise:\n- oa_share_access: Supported access modes (READ, WRITE, BOTH)\n- oa_share_deny: Supported deny modes (NONE, READ, WRITE, BOTH)\n- oa_share_access_want: All supported delegation hints including timestamps\n- oa_open_claim: (can remain empty - supports all standard claim types)\n- oa_create_mode: (can remain empty - supports all standard create modes)",
+      "parentUuid": "8f9eef41_c29c670f",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f68430a_9f984346",
         "filename": "src/include/nfsv41.h",
         "patchSetId": 5
@@ -48,6 +83,24 @@
       "writtenOn": "2025-10-14T20:23:04Z",
       "side": 1,
       "message": "Are these flags used somewhere? I would expect them to be processed by OPEN?",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a835e0c3_5694479c",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-10-15T13:35:16Z",
+      "side": 1,
+      "message": "Yes, currently, the enum values are defined but not yet processed. \n\nAccording to RFC 9754, when a client requests delegation timestamps via the\nOPEN4_SHARE_ACCESS_WANT_DELEG_TIMESTAMPS flag, the server MUST set the\nappropriate delegation type in the response:\n- OPEN_DELEGATE_WRITE_ATTRS_DELEG (5) for write delegations\n- OPEN_DELEGATE_READ_ATTRS_DELEG (4) for read delegations\n\nI need to implement below pieces of code:\n1. Checking for OPEN4_SHARE_ACCESS_WANT_DELEG_TIMESTAMPS in get_delegation().\n2. Upgrading the delegation type when the flag is set and client is NFSv4.2.\n3. Updating all delegation code paths to handle the new types (state_deleg.c,\n   nfs4_state.c, commonlib.c).",
+      "parentUuid": "7f68430a_9f984346",
       "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
