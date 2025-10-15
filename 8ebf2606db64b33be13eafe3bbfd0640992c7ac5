@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a6eca65_751fa7b1",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-15T17:26:07Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "9c157be6_52664e84",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f68430a_9f984346",
         "filename": "src/include/nfsv41.h",
         "patchSetId": 5
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Yes, currently, the enum values are defined but not yet processed. \n\nAccording to RFC 9754, when a client requests delegation timestamps via the\nOPEN4_SHARE_ACCESS_WANT_DELEG_TIMESTAMPS flag, the server MUST set the\nappropriate delegation type in the response:\n- OPEN_DELEGATE_WRITE_ATTRS_DELEG (5) for write delegations\n- OPEN_DELEGATE_READ_ATTRS_DELEG (4) for read delegations\n\nI need to implement below pieces of code:\n1. Checking for OPEN4_SHARE_ACCESS_WANT_DELEG_TIMESTAMPS in get_delegation().\n2. Upgrading the delegation type when the flag is set and client is NFSv4.2.\n3. Updating all delegation code paths to handle the new types (state_deleg.c,\n   nfs4_state.c, commonlib.c).",
       "parentUuid": "7f68430a_9f984346",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7046662_42507331",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-15T17:26:07Z",
+      "side": 1,
+      "message": "Since I don\u0027t think there\u0027s an urgency to resolve the two pynfs tests, let\u0027s work towards a (mostly) complete 4.2 implementation.",
+      "parentUuid": "a835e0c3_5694479c",
       "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
