@@ -199,6 +199,30 @@
       },
       "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f19a558_a9a25ced",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1937,
+      "author": {
+        "id": 1038902
+      },
+      "writtenOn": "2025-10-15T08:01:21Z",
+      "side": 1,
+      "message": "I think nfs version 4 is very important, and we must support it. When we had the issue, I also had the fix similar to this, but then when we tested it, the crash happened. That is where I took deeper look into it and figured that we are are trying to remove the fd from lru in both cases, hence we must add them as well.\n\nTo summarize, I have already tested your patch with v4 and indeed it crashes with nfs version 4.\n\nMoreover before the patch https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1170468, the code was similar to your changes. So this change just revert the https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1170468 introduced to fix the crash https://github.com/nfs-ganesha/nfs-ganesha/issues/971",
+      "parentUuid": "9b1617f6_bd5ddfbe",
+      "range": {
+        "startLine": 1937,
+        "startChar": 2,
+        "endLine": 1937,
+        "endChar": 33
+      },
+      "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
