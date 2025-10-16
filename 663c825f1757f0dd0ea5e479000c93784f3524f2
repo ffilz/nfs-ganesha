@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ec6c576_7787be0e",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-10-16T08:20:12Z",
+      "side": 1,
+      "message": "Please review this code section: https://github.com/ffilz/nfs-ganesha/blob/next/src/Protocols/NFS/nfs4_Compound.c#L754-L758.\n\nBefore the QoS metrics are initialized, the QoS implementation jumps to the code at the above lines. In the function qos_process_iops(), it calls one of these functions: qos_process_iops_pe(), qos_process_iops_pc(), or qos_process_iops_pepc(). If you look at the changes in these functions, you\u0027ll notice that updates are being made to metric values that haven’t actually been created yet. Using the enabled_metrics configuration, we can determine whether the metric creation has been completed or not.",
+      "parentUuid": "d3d56c27_a0eef81d",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cef2c343_c59fc4b0",
         "filename": "src/include/nfs_qos.h",
         "patchSetId": 10
