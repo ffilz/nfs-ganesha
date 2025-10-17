@@ -88,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b504e884_c476f4ad",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2717,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-17T20:37:34Z",
+      "side": 1,
+      "message": "OK, now it\u0027s all clear. It was a bit confusing at first... It helps to see the full implementation.",
+      "parentUuid": "8a6eca65_751fa7b1",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f68430a_9f984346",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Since I don\u0027t think there\u0027s an urgency to resolve the two pynfs tests, let\u0027s work towards a (mostly) complete 4.2 implementation.",
       "parentUuid": "a835e0c3_5694479c",
+      "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50208825_dcafd7cc",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-17T20:37:34Z",
+      "side": 1,
+      "message": "Your work looks great, thanks for completing",
+      "parentUuid": "d7046662_42507331",
       "revId": "8ebf2606db64b33be13eafe3bbfd0640992c7ac5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

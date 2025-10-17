@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a53869e_57c9eb05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-17T20:37:34Z",
+      "side": 1,
+      "message": "Looks really good. One minor thing to fixup that one long line...",
+      "revId": "d084c62e94c139e8978f4347fe9d4b9107d2c664",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02e13ffc_c359c126",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 7
@@ -31,6 +48,24 @@
       "writtenOn": "2025-10-17T18:56:07Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t       deleg_stats-\u003efds_deleg_type \u003d\u003d OPEN_DELEGATE_WRITE_ATTRS_DELEG) \u0026\u0026",
+      "revId": "d084c62e94c139e8978f4347fe9d4b9107d2c664",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2377b79_6b8389d1",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-17T20:37:34Z",
+      "side": 1,
+      "message": "Let\u0027s fix this. deleg_stats-\u003efds_deleg_type is used  bunch, let\u0027s define a local variable to hold the value and then use that. It will reduce the line length on all the new lines in this patch.",
+      "parentUuid": "02e13ffc_c359c126",
       "revId": "d084c62e94c139e8978f4347fe9d4b9107d2c664",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

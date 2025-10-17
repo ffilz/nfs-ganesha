@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc3cb16a_2c9f416d",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-17T20:37:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc75a982_d0a3c946",
+      "revId": "56d37d140a89fd204907c3fa9e6d573f5a75b1ef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db960a79_59dd30bc",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-17T18:37:43Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t       deleg_stats-\u003efds_deleg_type \u003d\u003d OPEN_DELEGATE_WRITE_ATTRS_DELEG) \u0026\u0026",
+      "revId": "56d37d140a89fd204907c3fa9e6d573f5a75b1ef",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab7d757_b6ca0aef",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-17T20:37:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "db960a79_59dd30bc",
       "revId": "56d37d140a89fd204907c3fa9e6d573f5a75b1ef",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
