@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d953a11_97e19432",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-10-17T04:11:59Z",
+      "side": 1,
+      "message": "Overall looks good to me.\nHad suggestions, see if that suits.",
+      "revId": "d42a52de6cb781bb4f778c0800fe94a47d6cd0b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac29eaf_cea19bd3",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-10-17T04:11:59Z",
+      "side": 1,
+      "message": "```suggestion\n\tFSAL_RDDIR_CHUNK_ONLY,\n``` FSAL_RDDIR_ALWAYS_CHUNK",
+      "revId": "d42a52de6cb781bb4f778c0800fe94a47d6cd0b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2833e724_11538ecc",
+        "filename": "src/include/fsal_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-10-17T04:11:59Z",
+      "side": 1,
+      "message": "```suggestion\n\tFSAL_RDDIR_UNCHUNK_ONLY,\n``` FSAL_RDDIR_ALWAYS_UNCHUNK",
+      "revId": "d42a52de6cb781bb4f778c0800fe94a47d6cd0b4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
