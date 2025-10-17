@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06d8d322_274bb059",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-17T20:40:48Z",
+      "side": 1,
+      "message": "OK, I think we need a different solution than adding a field in the config struct that isn\u0027t part of the configuration.\n\nSo it\u0027s a sequencing problem of how config is processed?\n\n\nThis seems to be a symptom of a start up sequence that isn\u0027t quite right.",
+      "parentUuid": "7ec6c576_7787be0e",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cef2c343_c59fc4b0",
         "filename": "src/include/nfs_qos.h",
         "patchSetId": 10
