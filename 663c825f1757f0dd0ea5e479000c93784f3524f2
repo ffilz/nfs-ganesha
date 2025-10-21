@@ -106,6 +106,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f9959e5_6cdb62bf",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-21T22:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06d8d322_274bb059",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cef2c343_c59fc4b0",
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "Hmm, I understand a bit, but this doesn\u0027t belong in the config structure if it isn\u0027t a config parameter.\n\nAlso, we don\u0027t do this kind of thing for any other metric so I\u0027m confused why we are doing it for this metric.",
       "parentUuid": "cff6e1ac_fa6cfecb",
+      "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e65fd2c_59c42493",
+        "filename": "src/include/nfs_qos.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-21T22:23:00Z",
+      "side": 1,
+      "message": "OK, I think I\u0027ve got it now.",
+      "parentUuid": "d2b0f46a_374b0bf3",
       "revId": "663c825f1757f0dd0ea5e479000c93784f3524f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
