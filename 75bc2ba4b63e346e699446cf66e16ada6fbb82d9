@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "535d16f8_ef4ee897",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-21T08:34:33Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nThis PR introduces structured support for QoS metrics across three categories:",
+      "revId": "75bc2ba4b63e346e699446cf66e16ada6fbb82d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f699a83_dab34884",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-21T08:34:33Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tqos_bucket_t *wbucket \u003d qos_get_bucket(qos_class, QOS_WRITE);\n+\t\tmonitoring__gauge_set(rbucket-\u003etokens_metric_handler, 0);",
+      "revId": "75bc2ba4b63e346e699446cf66e16ada6fbb82d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
