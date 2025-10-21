@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a454e12_e27b4ea4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-21T14:36:53Z",
+      "side": 1,
+      "message": "Yes, that makes sense\n\nSo nfs_\u003csubsystem\u003e_\u003cmetric\u003e or rpc_\u003csubsystem\u003e_\u003cmetric\u003e or fsal_\u003csubsystem\u003e_\u003cmetric\u003e",
+      "parentUuid": "6687fef8_ce2899b5",
+      "revId": "8f4f5873a0a27d13c6931f5853e93267017a1be3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33fd6322_c060afd4",
         "filename": "src/idmapper/idmapper_monitoring.c",
         "patchSetId": 2
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "I\u0027d like to have a review of all our metric names before tagging V7.0. Maybe we should create a man page or a wiki page documenting our Prometheus interfact. In doing so, we can identify naming inconsistencies and suggest changes as a final sweep before tagging.\n\nIn the meantime, I will mark this patch as Work in Progress so we don\u0027t get hung up on it.",
       "parentUuid": "33fd6322_c060afd4",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 35
+      },
+      "revId": "8f4f5873a0a27d13c6931f5853e93267017a1be3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00c52180_fdbda33a",
+        "filename": "src/idmapper/idmapper_monitoring.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-21T14:36:53Z",
+      "side": 1,
+      "message": "Given we also have metrics in ntirpc that are exported with the same endpoint, I think it does make sense to have nfs_ and rpc_. Might even want FSAL metrics to be fsal_",
+      "parentUuid": "ad1de7bb_d242f7a3",
       "range": {
         "startLine": 174,
         "startChar": 3,
