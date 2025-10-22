@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e327aeb_bf73224f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-22T14:54:22Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh),\n    - \t       \t0, 0);\n→ to be replaced with:\n    + \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh), 0, 0);",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bd157ad_75aeafed",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 2
@@ -66,6 +83,23 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "8bd157ad_75aeafed",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a3f338_10faa5b6",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-22T14:54:22Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed\n    - Extra blank line to be removed",
       "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
