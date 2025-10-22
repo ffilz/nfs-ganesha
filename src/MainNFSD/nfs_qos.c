@@ -1620,7 +1620,7 @@ static void qos_token_exausted_suspend_task(qos_class_t *qos_class,
 		qos_get_time_to_tokenrefresh(qos_class, op_type, ltime);
 
 	timeout = get_time_future_useconds(
-		ltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh), 0, 0);
+		ltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh),0, 0);
 
 	client = get_and_insert_client_details(&(qos_class->client_entries),
 					       data);

@@ -79,6 +79,68 @@ struct cidr_addr {
  * @return hash value
  *
  */
+
+/**
+ *
+ * @brief Convert an IP address string to a sockaddr
+ *
+ * @param[in]  ip_str       String representation of IP address
+ * @param[out] sockaddr     Canonicalised to IPv4 if ip_str is IPv4
+ *
+ * @return 0 on success. EINVAL if ip_str is invalid
+ */
+
+/**
+ *
+ * @brief Compare 2 sockaddrs, including ports
+ *
+ * @param[in] addr_1      First address
+ * @param[in] addr_2      Second address
+ * @param[in] ignore_port Whether to ignore the port
+ *
+ * @return Comparator true/false,
+ */
+
+/**
+ * @brief Canonically compare 2 sockaddrs
+ *
+ * @param[in] addr1       First address
+ * @param[in] addr2       Second address
+ * @param[in] ignore_port Whether to ignore the port
+ *
+ * @return Comparator trichotomy
+ */
+
+	/* If the client socket is IPv4, then it is wrapped into a
+	 * ::ffff:a.b.c.d IPv6 address. We check this here.
+	 * This kind of address is shaped like this:
+	 * |---------------------------------------------------------------|
+	 * |   80 bits = 10 bytes  | 16 bits = 2 bytes | 32 bits = 4 bytes |
+	 * |---------------------------------------------------------------|
+	 * |            0          |        FFFF       |    IPv4 address   |
+	 * |---------------------------------------------------------------|
+	 *
+	 * An IPv4 loop back address is 127.b.c.d, so we only need to examine
+	 * the first byte past ::ffff, or s6_addr[12].
+	 *
+	 * Otherwise we compare to ::1
+	 */
+
+/**
+ * @brief Create a hash value based on the sockaddr_t structure
+ *
+ * This creates a native pointer size (unsigned long int) hash value
+ * from the sockaddr_t structure. It supports both IPv4 and IPv6,
+ * other types can be added in time.
+ *
+ * XXX is this hash...good?
+ *
+ * @param[in] addr        sockaddr_t address to hash
+ * @param[in] ignore_port Whether to ignore the port
+ *
+ * @return hash value
+ *
+ */
 uint64_t hash_sockaddr(sockaddr_t *addr, bool ignore_port)
 {
 	unsigned long addr_hash = 0;
