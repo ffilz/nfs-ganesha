@@ -105,6 +105,30 @@
       },
       "revId": "8f4f5873a0a27d13c6931f5853e93267017a1be3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1f695c_9c87dfee",
+        "filename": "src/idmapper/idmapper_monitoring.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-10-22T09:10:07Z",
+      "side": 1,
+      "message": "I see, that\u0027s an interesting idea\n\nMaybe `ganesha_` and `libntirpc_` prefixes?\n\nMaybe we can have multiple registries for each of them and add the prefix when we register or report it instead of for each metric?\n\nBTW, note that it means that users that already count on the metrics names for dashboards for example will need to redefine it after those changes\n\nSo it makes sense to do it once bumping a major version and announcing it as one of the changes",
+      "parentUuid": "00c52180_fdbda33a",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 35
+      },
+      "revId": "8f4f5873a0a27d13c6931f5853e93267017a1be3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
