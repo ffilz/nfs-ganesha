@@ -256,6 +256,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7747e220_6c9813db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038958
+      },
+      "writtenOn": "2025-10-23T10:24:33Z",
+      "side": 1,
+      "message": "recheck gpfs",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e327aeb_bf73224f",
@@ -495,6 +512,24 @@
       "writtenOn": "2025-10-23T10:11:17Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh),\n    - \t       \t0, 0);\n→ to be replaced with:\n    + \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh), 0, 0);",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f69370_59f45c58",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1038958
+      },
+      "writtenOn": "2025-10-23T10:24:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6348217c_ad169446",
       "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -739,6 +774,42 @@
       "writtenOn": "2025-10-23T10:11:17Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^I       ^I0, 0);$",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9fa1a80_50d0fec9",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1038958
+      },
+      "writtenOn": "2025-10-23T10:24:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a6c9706_af50d9ac",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44e91867_cc63153f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1038958
+      },
+      "writtenOn": "2025-10-23T10:24:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3047b6d_520252a0",
       "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1017,6 +1088,24 @@
       "writtenOn": "2025-10-23T10:11:17Z",
       "side": 1,
       "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed\n    - Extra blank line to be removed",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4bbe47d_b1bcd332",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1038958
+      },
+      "writtenOn": "2025-10-23T10:24:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6af9d769_6738f687",
       "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
