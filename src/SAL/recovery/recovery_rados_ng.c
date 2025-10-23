@@ -188,7 +188,7 @@ static void rados_ng_add_clid(nfs_client_id_t *clientid)
 	int ret;
 
 	rados_kv_create_key(clientid, ckey, sizeof(ckey));
-	cval = rados_kv_create_val(clientid, NULL);
+	cval = nfs4_create_clid_name(clientid, NULL);
 
 	LogDebug(COMPONENT_CLIENTID, "adding %s :: %s", ckey, cval);
 	rcu_read_lock();
