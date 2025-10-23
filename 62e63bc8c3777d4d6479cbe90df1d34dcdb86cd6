@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4b1f2a32_81591cd1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T10:29:21Z",
+      "side": 1,
+      "message": "WARNING: Possible unwrapped commit description (prefer a maximum 75 chars per line)\nMove IP related functions from rpc_tools. to ip_utils.c [Do not Review]: [DNM]: Test PR: revert test [Do not Review]: [DNM]: Test PR: revert test [Do not Review]: [DNM]: Test PR: revert test [Do not Review]: [DNM]: Test PR: revert test [Do not Review]: [DNM]: Test PR: revert test",
+      "revId": "62e63bc8c3777d4d6479cbe90df1d34dcdb86cd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9e998629_258ed04c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -14,6 +31,74 @@
       "writtenOn": "2025-10-23T10:26:54Z",
       "side": 1,
       "message": "recheck gpfs",
+      "revId": "62e63bc8c3777d4d6479cbe90df1d34dcdb86cd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0b576d_85297364",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T10:29:21Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh),\n    - \t       \t0, 0);\n→ to be replaced with:\n    + \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh), 0, 0);",
+      "revId": "62e63bc8c3777d4d6479cbe90df1d34dcdb86cd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40af744_80fea16d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T10:29:21Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+^I       ^I0, 0);$",
+      "revId": "62e63bc8c3777d4d6479cbe90df1d34dcdb86cd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0982c2c2_aac426f6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T10:29:21Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I       ^I0, 0);$",
+      "revId": "62e63bc8c3777d4d6479cbe90df1d34dcdb86cd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e88687c_a1402625",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T10:29:21Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed\n    - Extra blank line to be removed\n    - Extra blank line to be removed",
       "revId": "62e63bc8c3777d4d6479cbe90df1d34dcdb86cd6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
