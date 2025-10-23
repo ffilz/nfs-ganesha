@@ -129,6 +129,30 @@
       },
       "revId": "8f4f5873a0a27d13c6931f5853e93267017a1be3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b0521e_a3e20384",
+        "filename": "src/idmapper/idmapper_monitoring.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-23T14:57:27Z",
+      "side": 1,
+      "message": "Certainly any change in the metric names will require dashboard changes. I don\u0027t know if the impact of that pushes towards doing nothing.\n\nWithin Ganesha I think it\u0027s worth differentiating between the protocol layer and the FSAL layer, but I may be blowing smoke...",
+      "parentUuid": "bc1f695c_9c87dfee",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 35
+      },
+      "revId": "8f4f5873a0a27d13c6931f5853e93267017a1be3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
