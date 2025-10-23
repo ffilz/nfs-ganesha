@@ -294,6 +294,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87e6edf2_66e45f43",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T07:12:33Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh),\n    - \t       \t0, 0);\n→ to be replaced with:\n    + \t\tltime, MIN(TOKEN_NFS_ERR_DELAY_DEFAULT, time_to_refresh), 0, 0);",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9656bab6_332163da",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T07:12:33Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^I       ^I0, 0);$",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dc0ac11_22fa99a4",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T07:12:33Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+^I       ^I0, 0);$",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bd157ad_75aeafed",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 2
@@ -444,6 +495,23 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "545e9b01_a1ee259d",
+      "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cef8ef8_591cfe85",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-23T07:12:33Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed\n    - Extra blank line to be removed",
       "revId": "cb4dc6ccb8b1cca4ddb7b95dee64395f22bd4bad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
