@@ -80,108 +80,6 @@ struct config_block rados_kv_param_blk = {
 	.blk_desc.u.blk.commit = noop_conf_commit
 };
 
-static int convert_opaque_val(struct display_buffer *dspbuf, void *value,
-			      int len, int max)
-{
-	unsigned int i = 0;
-	int b_left = display_start(dspbuf);
-	int cpy = len;
-
-	if (b_left <= 0)
-		return 0;
-
-	/* Check that the length is ok
-	 * If the value is empty, display EMPTY value. */
-	if (len <= 0 || len > max)
-		return 0;
-
-	/* If the value is NULL, display NULL value. */
-	if (value == NULL)
-		return 0;
-
-	/* Determine if the value is entirely printable characters, */
-	/* and it contains no slash character (reserved for filename) */
-	for (i = 0; i < len; i++)
-		if ((!isprint(((char *)value)[i])) ||
-		    (((char *)value)[i] == '/'))
-			break;
-
-	if (i == len) {
-		/* Entirely printable character, so we will just copy the
-		 * characters into the buffer (to the extent there is room
-		 * for them).
-		 */
-		b_left = display_len_cat(dspbuf, value, cpy);
-	} else {
-		b_left = display_opaque_bytes(dspbuf, value, cpy);
-	}
-
-	if (b_left <= 0)
-		return 0;
-
-	return b_left;
-}
-
-char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *size)
-{
-	char *src = clientid->cid_client_record->cr_client_val;
-	int src_len = clientid->cid_client_record->cr_client_val_len;
-	const char *str_client_addr = "(unknown)";
-	char cidstr[PATH_MAX] = { 0, }, *val;
-	struct display_buffer dspbuf = { sizeof(cidstr), cidstr, cidstr };
-	char cidstr_lenx[5];
-	int total_len, cidstr_len, cidstr_lenx_len, str_client_addr_len;
-	int ret;
-	size_t lsize;
-
-	/* get the caller's IP addr */
-	if (clientid->gsh_client != NULL)
-		str_client_addr = clientid->gsh_client->hostaddr_str;
-
-	str_client_addr_len = strlen(str_client_addr);
-
-	ret = convert_opaque_val(&dspbuf, src, src_len, sizeof(cidstr));
-	assert(ret > 0);
-
-	cidstr_len = display_buffer_len(&dspbuf);
-
-	cidstr_lenx_len =
-		snprintf(cidstr_lenx, sizeof(cidstr_lenx), "%d", cidstr_len);
-
-	if (unlikely(cidstr_lenx_len >= sizeof(cidstr_lenx) ||
-		     cidstr_lenx_len < 0)) {
-		/* cidrstr can at most be PATH_MAX or 1024, so at most
-		 * 4 characters plus NUL are necessary, so we won't
-		 * overrun, nor can we get a -1 with EOVERFLOW or EINVAL
-		 */
-		LogFatal(COMPONENT_CLIENTID, "snprintf returned unexpected %d",
-			 cidstr_lenx_len);
-	}
-
-	lsize = str_client_addr_len + 2 + cidstr_lenx_len + 1 + cidstr_len + 2;
-
-	/* hold both long form clientid and IP */
-	val = gsh_malloc(lsize);
-	memcpy(val, str_client_addr, str_client_addr_len);
-	total_len = str_client_addr_len;
-	memcpy(val + total_len, "-(", 2);
-	total_len += 2;
-	memcpy(val + total_len, cidstr_lenx, cidstr_lenx_len);
-	total_len += cidstr_lenx_len;
-	val[total_len] = ':';
-	total_len += 1;
-	memcpy(val + total_len, cidstr, cidstr_len);
-	total_len += cidstr_len;
-	memcpy(val + total_len, ")", 2);
-
-	LogDebug(COMPONENT_CLIENTID, "Created client name [%s]", val);
-
-	if (size)
-		*size = lsize;
-
-	return val;
-}
-
 int rados_kv_put(char *key, char *val, char *object)
 {
 	int ret;
@@ -576,7 +474,7 @@ void rados_kv_add_clid_impl(nfs_client_id_t *clientid, char *recov_obj)
 
 	LogDebug(COMPONENT_CLIENTID, "Recovery object in use : %s", recov_obj);
 	rados_kv_create_key(clientid, ckey, sizeof(ckey));
-	cval = rados_kv_create_val(clientid, NULL);
+	cval = nfs4_create_clid_name(clientid, NULL);
 	ret = rados_kv_put(ckey, cval, recov_obj);
 	if (ret < 0) {
 		LogEvent(COMPONENT_CLIENTID, "Failed to add clid %lu",
