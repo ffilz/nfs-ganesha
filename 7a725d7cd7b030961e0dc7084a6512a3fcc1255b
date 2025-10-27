@@ -89,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8de89be2_6276e177",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2025-10-27T14:19:54Z",
+      "side": 1,
+      "message": "AIUI the only grpc config is the location/name of cert files. I would not expect them to change very often. Changing them would be a major event and should probably be limited to shutdown and restart, not a runtime config reload.",
+      "parentUuid": "29c9557e_695d3c63",
+      "range": {
+        "startLine": 772,
+        "startChar": 0,
+        "endLine": 780,
+        "endChar": 6
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7e9e9c7_d512c26a",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 6
@@ -146,6 +170,30 @@
       "writtenOn": "2025-10-05T11:37:14Z",
       "side": 1,
       "message": "A better approach would be to extract it to a separate function",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a04f8c83_4037a4ad",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2025-10-27T14:19:54Z",
+      "side": 1,
+      "message": "I don\u0027t understand what you\u0027re suggesting or asking for. Can you elaborate on what should be moved out?",
+      "parentUuid": "a8938c25_7add9f86",
       "range": {
         "startLine": 77,
         "startChar": 1,
