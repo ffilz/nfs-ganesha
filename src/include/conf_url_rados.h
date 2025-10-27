@@ -33,6 +33,6 @@
 
 int gsh_rados_url_setup_watch(void);
 void gsh_rados_url_shutdown_watch(void);
-
+void register_nfs_service(const char *nodeid);
 #endif /* RADOS_URLS */
 #endif /* CONF_URL_RADOS_H */

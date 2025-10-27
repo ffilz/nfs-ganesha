@@ -55,7 +55,6 @@
 #include "config_parsing.h"
 #include "pwnam_wrappers.h"
 #include "nfs_qos.h"
-
 /**
  * @brief Core configuration parameters
  */
@@ -305,6 +304,8 @@ static struct config_item core_params[] = {
 	CONF_ITEM_LIST("Protocols", DEFAULT_PROTOCOLS, protocols,
 		       nfs_core_param, core_options),
 	CONF_ITEM_BOOL("Clustered", true, nfs_core_param, clustered),
+	CONF_ITEM_STR("cluster_nodeid", 1, 255, NULL, nfs_core_param,
+		      cluster_nodeid),
 #ifdef _USE_NLM
 	CONF_ITEM_BOOL("Enable_NLM", true, nfs_core_param, enable_NLM),
 	CONF_ITEM_BOOL("Disable_NLM_SHARE", false, nfs_core_param,

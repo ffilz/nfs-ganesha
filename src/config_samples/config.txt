@@ -157,6 +157,8 @@ NFS_CORE_PARAM {}
 
 	Clustered(bool, default true)
 
+	Cluster_NodeId(string, default NULL)
+
 	Enable_NLM(bool, default true)
 
 	Disable_NLM_SHARE(bool, default false)

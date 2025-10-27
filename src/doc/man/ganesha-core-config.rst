@@ -177,6 +177,9 @@ Clustered(bool, default true)
     Whether this Ganesha is part of a cluster of Ganeshas. Its vendor specific
     option.
 
+cluster_nodeid(string, default NULL)
+    If Ganesha is part of cluster, ID of the ganesha's instance/daemon.
+
 fsid_device(bool, default false)
     Whether to use device major/minor for fsid.
 

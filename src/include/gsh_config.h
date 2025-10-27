@@ -417,6 +417,7 @@ typedef struct nfs_core_param {
 	    This is somewhat vendor-specific and should probably be
 	    moved somewhere else.  Settable with Clustered. */
 	bool clustered;
+	char *cluster_nodeid;
 #ifdef _USE_NLM
 	/** Whether to support the Network Lock Manager protocol.
 	    Defaults to true and is settable with Enable_NLM. */

@@ -23,7 +23,6 @@
  *
  * ---------------------------------------
  */
-
 /**
  * @file nfs_main.c
  * @brief The file that contain the 'main' routine for the nfsd.
@@ -160,6 +159,33 @@ static void load_lttng(void)
 }
 
 #endif /* USE_LTTNG */
+
+#ifdef RADOS_URLS
+static void register_nfs_to_cluster(void)
+{
+	if (nfs_param.core_param.cluster_nodeid == NULL) {
+		LogCrit(COMPONENT_MAIN, "cluster_nodeid is not set");
+	} else {
+		void *dl = NULL;
+#if defined(LINUX) && !defined(SANITIZE_ADDRESS)
+		dl = dlopen("libganesha_rados_urls.so",
+			    RTLD_NOW | RTLD_LOCAL | RTLD_DEEPBIND);
+#elif defined(BSDBASED) || defined(SANITIZE_ADDRESS)
+		dl = dlopen("libganesha_rados_urls.so", RTLD_NOW | RTLD_LOCAL);
+#endif
+		if (dl == NULL) {
+			fprintf(stderr,
+				"Failed to load libganesha_rados_urls.so\n");
+			exit(1);
+		}
+
+		void (*fnptr)(char *);
+
+		fnptr = dlsym(dl, "register_nfs_service");
+		fnptr(nfs_param.core_param.cluster_nodeid);
+	}
+}
+#endif /* RADOS_URL */
 
 #ifdef USE_MONITORING
 /* Function to check if the passed in sockaddr_t is holding INADDR_ANY */
@@ -606,6 +632,10 @@ int main(int argc, char *argv[])
 		}
 	}
 
+#endif
+
+#ifdef RADOS_URLS
+	register_nfs_to_cluster();
 #endif
 
 #ifdef USE_MONITORING
