@@ -1463,6 +1463,20 @@ static bool is_referral(struct fsal_obj_handle *obj_hdl,
 	return false;
 }
 
+/**
+ * @brief Default implementation of FSAL private operation
+ *
+ * @param[in] obj_hdl    The FSAL object handle to operate on
+ * @param[in] op_func    Function pointer to the private operation to execute
+ * @param[in] arg        Optional argument to pass to the private operation
+ */
+static void fsal_private_op(struct fsal_obj_handle *obj_hdl,
+			    void (*op_func)(struct fsal_obj_handle *, void *),
+			    void *arg)
+{
+	op_func(obj_hdl, arg);
+}
+
 /* Default fsal handle object method vector.
  * copied to allocated vector at register time
  */
@@ -1520,6 +1534,7 @@ struct fsal_obj_ops def_handle_ops = {
 	.setattr2 = setattr2,
 	.close2 = close2,
 	.is_referral = is_referral,
+	.fsal_private_op = fsal_private_op,
 };
 
 /* fsal_pnfs_ds common methods */

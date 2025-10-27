@@ -2820,6 +2820,21 @@ struct fsal_obj_ops {
 	/**@{*/
 
 	/**
+ * @brief Execute a private FSAL operation on an object handle
+ *
+ * @param[in] obj_hdl    The FSAL object handle to operate on
+ * @param[in] op_func    Function pointer to the private operation to execute
+ * @param[in] arg        Optional argument to pass to the private operation
+ *
+ */
+	void (*fsal_private_op)(struct fsal_obj_handle *obj_hdl,
+				void (*op_func)(struct fsal_obj_handle *,
+						void *),
+				void *arg);
+
+	/**@{*/
+
+	/**
  * ASYNC API functions.
  *
  * These are asynchronous versions of some of the API functions.  FSALs are

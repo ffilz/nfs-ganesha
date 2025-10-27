@@ -1504,6 +1504,25 @@ out:
 	return result;
 }
 
+/**
+ * @brief Execute a private FSAL operation on an object handle
+ *
+ * @param[in] obj_hdl    The mdcache object handle to operate on
+ * @param[in] op_func    Function pointer to the private operation to execute
+ * @param[in] arg        Optional argument to pass to the private operation
+ */
+static void mdcache_fsal_private_op(struct fsal_obj_handle *obj_hdl,
+				    void (*op_func)(struct fsal_obj_handle *,
+						    void *),
+				    void *arg)
+{
+	mdcache_entry_t *entry =
+		container_of(obj_hdl, mdcache_entry_t, obj_handle);
+
+	subcall(entry->sub_handle->obj_ops->fsal_private_op(entry->sub_handle,
+							    op_func, arg));
+}
+
 void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 {
 	fsal_default_obj_ops_init(ops);
@@ -1565,6 +1584,7 @@ void mdcache_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->listxattrs = mdcache_listxattrs;
 
 	ops->is_referral = mdcache_is_referral;
+	ops->fsal_private_op = mdcache_fsal_private_op;
 }
 
 /*
