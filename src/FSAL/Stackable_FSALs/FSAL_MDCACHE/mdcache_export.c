@@ -904,6 +904,25 @@ static void mdcache_prepare_unexport(struct fsal_export *exp_hdl)
 	subcall_raw(exp, sub_export->exp_ops.prepare_unexport(sub_export));
 }
 
+/**
+ * @brief Execute a private FSAL operation on an export
+ *
+ * @param[in] exp_hdl    The mdcache export to operate on
+ * @param[in] op_func    Function pointer to the private operation to execute
+ * @param[in] arg        Optional argument to pass to the private operation
+ */
+static void mdcache_fsal_private_op(struct fsal_export *exp_hdl,
+				    void (*op_func)(struct fsal_export *,
+						    void *),
+				    void *arg)
+{
+	struct mdcache_fsal_export *exp = mdc_export(exp_hdl);
+	struct fsal_export *sub_export = exp->mfe_exp.sub_export;
+
+	subcall_raw(exp, sub_export->exp_ops.fsal_private_op(sub_export,
+							     op_func, arg));
+}
+
 /* mdcache_export_ops_init
  * overwrite vector entries with the methods that we support
  */
@@ -944,6 +963,7 @@ void mdcache_export_ops_init(struct export_ops *ops)
 	ops->is_superuser = mdcache_is_superuser;
 	ops->fs_expiretimeparent = mdcache_fs_expiretimeparent;
 	ops->fs_readdir_mode = mdcache_fs_readdir_mode;
+	ops->fsal_private_op = mdcache_fsal_private_op;
 }
 
 #if 0

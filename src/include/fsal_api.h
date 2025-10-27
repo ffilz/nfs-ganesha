@@ -1394,6 +1394,17 @@ struct export_ops {
  */
 
 	enum fsal_readdir_mode (*fs_readdir_mode)(struct fsal_export *exp_hdl);
+
+	/**
+ * @brief Execute a private FSAL operation on an export
+ *
+ * @param[in] exp_hdl    The FSAL export to operate on
+ * @param[in] op_func    Function pointer to the private operation to execute
+ * @param[in] arg        Optional argument to pass to the private operation
+ */
+	void (*fsal_private_op)(struct fsal_export *exp_hdl,
+				void (*op_func)(struct fsal_export *, void *),
+				void *arg);
 };
 
 /**

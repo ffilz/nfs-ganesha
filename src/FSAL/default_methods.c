@@ -723,6 +723,14 @@ bool is_superuser(struct fsal_export *exp_hdl, const struct user_cred *creds)
 	return (creds->caller_uid == 0);
 }
 
+static void default_fsal_private_op(struct fsal_export *exp_hdl,
+				    void (*op_func)(struct fsal_export *,
+						    void *),
+				    void *arg)
+{
+	op_func(exp_hdl, arg);
+}
+
 /* Default fsal export method vector.
  * copied to allocated vector at register time
  */
@@ -762,6 +770,7 @@ struct export_ops def_export_ops = {
 	.is_superuser = is_superuser,
 	.fs_expiretimeparent = fs_expiretimeparent,
 	.fs_readdir_mode = fs_readdir_mode,
+	.fsal_private_op = default_fsal_private_op,
 };
 
 /* fsal_obj_handle common methods
