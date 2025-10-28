@@ -2120,6 +2120,7 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 			     struct fsal_fd *fsal_fd, bool can_start)
 {
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	fsal_openflags_t new_openflag = openflags;
 
 	/* Wait for lull in io work */
 	while (!can_start && atomic_fetch_int32_t(&fsal_fd->io_work) != 0) {
@@ -2143,17 +2144,35 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 	 * Then, in case any thread is asking for read combine that,
 	 * an in case any thread is asking for write, combine that.
 	 */
-	openflags |= fsal_fd->openflags & FSAL_O_RDWR;
+	new_openflag = openflags | (fsal_fd->openflags & FSAL_O_RDWR);
 
 	if (atomic_fetch_int32_t(&fsal_fd->want_read))
-		openflags |= FSAL_O_READ;
+		new_openflag = openflags | FSAL_O_READ;
 
 	if (atomic_fetch_int32_t(&fsal_fd->want_write))
-		openflags |= FSAL_O_WRITE;
+		new_openflag = openflags | FSAL_O_WRITE;
 
 	/* And THEN check the combined mode against the current mode. */
-	if (!open_correct(fsal_fd->openflags, openflags)) {
-		status = fsal_reopen_fd(obj_hdl, openflags, fsal_fd);
+	if (!open_correct(fsal_fd->openflags, new_openflag)) {
+		status = fsal_reopen_fd(obj_hdl, new_openflag, fsal_fd);
+		if (openflags != new_openflag &&
+		    IS_FSAL_PERMISSION_ERR(status)) {
+			LogDebug(COMPONENT_FSAL,
+				 "fsal_reopen_fd returned %s "
+				 "with flag %d, retrying again with flag %d",
+				 fsal_err_txt(status), new_openflag, openflags);
+
+			/* We modified the open flags, but the operation failed
+			 * with EACCES or EPERM. This can happen if file
+			 * permissions have changed in the backend after the
+			 * last open, In this case, an ACL evaluation could
+			 * results in EPERM or EACCES due to insufficient
+			 * access bits for non-root users. In this case,
+			 * retry the operation with the original open flags.
+			 */
+			status = fsal_reopen_fd(obj_hdl, openflags, fsal_fd);
+		}
+
 		LogDebug(COMPONENT_FSAL, "fsal_reopen_fd returned %s",
 			 fsal_err_txt(status));
 
@@ -2798,9 +2817,9 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 		if (FSAL_IS_ERROR(status)) {
 			LogCrit(COMPONENT_FSAL,
 				"Open for locking failed for access %s",
-				openflags == FSAL_O_RDWR   ? "Read/Write"
-				: openflags == FSAL_O_READ ? "Read"
-							   : "Write");
+                                openflags == FSAL_O_RDWR   ? "Read/Write"
+                                : openflags == FSAL_O_READ ? "Read"
+                                                           : "Write");
 		} else {
 			LogFullDebug(COMPONENT_FSAL, "Opened state_fd %p",
 				     state_fd);
