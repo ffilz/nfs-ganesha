@@ -341,6 +341,25 @@ int rados_load_config_from_parse(config_file_t parse_tree,
 	return 0;
 }
 
+static void register_nfs_service(void)
+{
+	if (!nodeid) {
+		LogEvent(COMPONENT_CONFIG, "%s: nodeid is NULL", __func__);
+		return;
+	}
+	size_t len = strlen(nodeid) + 5; // "nfs." + nodeid + '\0'
+	char daemon_instance[len];
+
+	snprintf(daemon_instance, len, "nfs.%s", nodeid);
+	int ret = rados_service_register(clnt, "nfs-ganesha", daemon_instance,
+					 "");
+	if (ret < 0) {
+		LogEvent(COMPONENT_CONFIG,
+			 "%s: Failed to register nfs-ganesha service",
+			 __func__);
+	}
+}
+
 int rados_kv_connect(rados_ioctx_t *io_ctx, const char *userid,
 		     const char *conf, const char *pool, const char *ns)
 {
@@ -365,6 +384,8 @@ int rados_kv_connect(rados_ioctx_t *io_ctx, const char *userid,
 		rados_shutdown(clnt);
 		return ret;
 	}
+
+	register_nfs_service();
 
 	ret = rados_pool_create(clnt, pool);
 	if (ret < 0 && ret != -EEXIST) {
