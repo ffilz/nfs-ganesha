@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c63d73_9168c4b2",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2820,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T21:13:53Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    -                                 openflags \u003d\u003d FSAL_O_RDWR   ? \"Read/Write\"\n    -                                 : openflags \u003d\u003d FSAL_O_READ ? \"Read\"\n    -                                                            : \"Write\");\n→ to be replaced with:\n    + \t\t\t\topenflags \u003d\u003d FSAL_O_RDWR   ? \"Read/Write\"\n    + \t\t\t\t: openflags \u003d\u003d FSAL_O_READ ? \"Read\"\n    + \t\t\t\t\t\t\t   : \"Write\");",
+      "revId": "fe055b28c449a99f1deca3e815225fb0b3940dcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d698c9eb_e50aad69",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2820,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T21:13:53Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                openflags \u003d\u003d FSAL_O_RDWR   ? \"Read/Write\"$",
+      "revId": "fe055b28c449a99f1deca3e815225fb0b3940dcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "538d00b8_59f89a23",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2820,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T21:13:53Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                openflags \u003d\u003d FSAL_O_RDWR   ? \"Read/Write\"$",
+      "revId": "fe055b28c449a99f1deca3e815225fb0b3940dcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e310f04_da955f44",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2821,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T21:13:53Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                : openflags \u003d\u003d FSAL_O_READ ? \"Read\"$",
+      "revId": "fe055b28c449a99f1deca3e815225fb0b3940dcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551276c3_92c540fb",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2821,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T21:13:53Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                : openflags \u003d\u003d FSAL_O_READ ? \"Read\"$",
+      "revId": "fe055b28c449a99f1deca3e815225fb0b3940dcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe5a0dd_a47fbde5",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T21:13:53Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                                           : \"Write\");$",
+      "revId": "fe055b28c449a99f1deca3e815225fb0b3940dcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13164836_a11d8d11",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T21:13:53Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                                           : \"Write\");$",
+      "revId": "fe055b28c449a99f1deca3e815225fb0b3940dcb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
