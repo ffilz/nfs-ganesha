@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad500e32_69a5b27b",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-28T13:09:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c4c46ff9_3514675d",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa00fa5f_838a487d",
         "filename": "src/MainNFSD/nfs_init.c",
         "patchSetId": 6
@@ -48,6 +66,24 @@
       "writtenOn": "2025-10-13T20:58:43Z",
       "side": 1,
       "message": "Can this validation be done in the config commit function?",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc9c214_44fe83ef",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-28T13:09:35Z",
+      "side": 1,
+      "message": "Ack, Updated as suggested",
+      "parentUuid": "aa00fa5f_838a487d",
       "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6c44cc5_88f94259",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-28T13:09:35Z",
+      "side": 1,
+      "message": "Since these are export specific checks, these checks should parts of mainly nfs_creds and is already handled in nfs_creds.c which covers most of the nfsv4 related part.\nand if I am not wrong mnt_Mnt.c should handle the v3 as well.\n\neg: currently export_check_access() are mainly in mnt_Mnt.c, nfs_creds.c, nfs_worker_thread.c\n\nI have tested the changes for v3 and v4 , and didn\u0027t seen anything suspicious.",
+      "parentUuid": "c42f8247_2e5cb899",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66fa87b7_be042846",
         "filename": "src/include/gsh_tls.h",
         "patchSetId": 6
@@ -82,6 +136,24 @@
       "writtenOn": "2025-10-13T20:58:43Z",
       "side": 1,
       "message": "This header file needs a \"header\", also #ifdef GSH_TLS_H so it is only processed once",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc708407_4be3ca83",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-28T13:09:35Z",
+      "side": 1,
+      "message": "Done the changes as suggested",
+      "parentUuid": "66fa87b7_be042846",
       "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e8ff96c_2a497d19",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-28T13:09:35Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "e604b33a_4fe82bf0",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "291c249f_843ee27a",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 6
@@ -116,6 +206,24 @@
       "writtenOn": "2025-10-13T20:58:43Z",
       "side": 1,
       "message": "If you make the commit function not no-op, you can do the validation bits there.",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "456fee40_91b90ddb",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-10-28T13:09:35Z",
+      "side": 1,
+      "message": "Ack, added new commit function for tls",
+      "parentUuid": "291c249f_843ee27a",
       "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
