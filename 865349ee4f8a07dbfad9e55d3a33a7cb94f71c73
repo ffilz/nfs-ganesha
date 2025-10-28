@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b48c8e66_585ed543",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-10-28T22:04:41Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\t       : \"Write\");\n→ to be replaced with:\n    + \t\t\t\t\t\t\t   : \"Write\");",
+      "revId": "865349ee4f8a07dbfad9e55d3a33a7cb94f71c73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
