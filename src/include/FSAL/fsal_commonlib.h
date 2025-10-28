@@ -49,6 +49,9 @@
 /* fsal_module to fsal_export helpers
  */
 
+#define IS_FSAL_PERMISSION_ERR(s) \
+	((s).major == ERR_FSAL_ACCESS || (s).major == ERR_FSAL_PERM)
+
 int fsal_attach_export(struct fsal_module *fsal_hdl,
 		       struct glist_head *obj_link);
 void fsal_detach_export(struct fsal_module *fsal_hdl,
