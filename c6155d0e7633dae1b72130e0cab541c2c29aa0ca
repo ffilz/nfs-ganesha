@@ -158,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96c6ce49_2db29bfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039021
+      },
+      "writtenOn": "2025-10-28T01:07:54Z",
+      "side": 1,
+      "message": "Based on my discussion and testing with @rafi.kavungal@iternity.com, this change reliably prevents the fsal_fd_global_counter underflow and associated crash in FSAL_GLUSTER under GlusterFS 6.0 + NFSv3 workloads.",
+      "parentUuid": "42dd6948_cee4e392",
+      "revId": "c6155d0e7633dae1b72130e0cab541c2c29aa0ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34a3f013_815ad7ff",

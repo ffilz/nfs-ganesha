@@ -33,6 +33,23 @@
       "message": "Sorry for the confusion — I’ll keep all further discussion here in this patch going forward.\n\nI appreciate your feedback, and I agree we should aim for a solid fix.",
       "revId": "6b11171d22211cb666819c1e0269401998d8ff36",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1e4ea8_2115ea9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039021
+      },
+      "writtenOn": "2025-10-28T01:07:54Z",
+      "side": 1,
+      "message": "Based on my discussion and testing with @rafi.kavungal@iternity.com, this change reliably prevents the fsal_fd_global_counter underflow and associated crash in FSAL_GLUSTER under GlusterFS 6.0 + NFSv3 workloads.",
+      "revId": "6b11171d22211cb666819c1e0269401998d8ff36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
