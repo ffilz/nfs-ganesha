@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f084af88_342cc35b",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-29T23:11:46Z",
+      "side": 1,
+      "message": "@sachin.punadikar@ibm.com This definitely does not belong in FSAL.\n\n\nI am confused though, is it used by rados URL config?",
+      "parentUuid": "48304ff5_86efa5ac",
+      "revId": "da28e678e3ef9eff45f3c58e12fa5d73e8b493cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d86d7b35_8a4e67a8",
         "filename": "src/SAL/recovery/recovery_rados_kv.c",
         "patchSetId": 1
