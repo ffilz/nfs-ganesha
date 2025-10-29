@@ -664,6 +664,9 @@ install -m 644 config_samples/gpfs.ganesha.nfsd.conf %{buildroot}%{_sysconfdir}/
 install -m 644 config_samples/gpfs.ganesha.main.conf %{buildroot}%{_sysconfdir}/ganesha
 install -m 644 config_samples/gpfs.ganesha.log.conf %{buildroot}%{_sysconfdir}/ganesha
 install -m 644 config_samples/gpfs.ganesha.exports.conf	%{buildroot}%{_sysconfdir}/ganesha
+%if %{with utils}
+install -m 755 scripts/gpfs-epoch/gpfs-epoch.py %{buildroot}%{_libexecdir}/ganesha/
+%endif
 %endif
 
 make DESTDIR=%{buildroot} install
@@ -675,11 +678,6 @@ install -p -m 644 selinux/ganesha.if %{buildroot}%{_selinux_store_path}/devel/in
 install -m 0644 selinux/ganesha.pp.bz2 %{buildroot}%{_selinux_store_path}/packages
 %endif
 
-%if ( ! 0%{?with_legacy_python_install} )
-%if ( 0%{?with_gpfs} )
-mv %{buildroot}/usr/bin/gpfs-epoch %{buildroot}/usr/libexec/ganesha/
-%endif
-%endif
 
 %if ( 0%{?rhel} && 0%{?rhel} < 8 )
 rm -rf %{buildroot}/%{python_sitelib}/gpfs*
@@ -845,7 +843,7 @@ exit 0
 %config(noreplace) %{_sysconfdir}/ganesha/gpfs.ganesha.log.conf
 %config(noreplace) %{_sysconfdir}/ganesha/gpfs.ganesha.exports.conf
 %if %{with utils}
-%{_libexecdir}/ganesha/gpfs-epoch
+%{_libexecdir}/ganesha/gpfs-epoch.py
 %endif
 %if %{with man_page}
 %{_mandir}/*/ganesha-gpfs-config.8.gz
