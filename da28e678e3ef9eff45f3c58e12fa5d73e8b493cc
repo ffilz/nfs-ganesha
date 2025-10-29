@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48304ff5_86efa5ac",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-10-29T15:57:47Z",
+      "side": 1,
+      "message": "If the service registration is moved out of the SAL, we would need to relocate it to the original logic in conf_url_rados.c. However, this is blocked because the necessary nodeid variable is not accessible within the scope of the RADOS_URLS{} block or the surrounding functions in that file.\n\nNote: We have only 2 rados cluster handlers in nfs codebase, one in conr_url_rados.c and other in recovery_rados_kv.c files.",
+      "parentUuid": "5dcd7b70_db4f60d4",
+      "revId": "da28e678e3ef9eff45f3c58e12fa5d73e8b493cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d86d7b35_8a4e67a8",
         "filename": "src/SAL/recovery/recovery_rados_kv.c",
         "patchSetId": 1
