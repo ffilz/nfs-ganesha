@@ -163,9 +163,13 @@ typedef struct hash_table {
 					 HashTable */
 	pool_t *node_pool; /*< Pool of RBT nodes */
 	pool_t *data_pool; /*< Pool of buffer pairs */
+#ifdef __cplusplus
+	struct hash_partition *partitions;
+#else
 	struct hash_partition partitions[]; /*< Parameter.index_size
 						partitions of the hash
 						table. */
+#endif
 } hash_table_t;
 
 /**

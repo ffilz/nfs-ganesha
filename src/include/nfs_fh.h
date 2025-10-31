@@ -57,8 +57,13 @@ typedef struct file_handle_v3 {
 	uint8_t fhflags1; /*< To replace things like ds_flag */
 	uint16_t exportid; /*< Must be correlated to exportlist_t::id */
 	uint8_t fs_len; /*< Actual length of opaque handle */
+#ifdef __cplusplus
+	uint8_t *fsopaque;
+#else
 	uint8_t fsopaque[]; /*< Persistent part of FSAL handle,
 				    <= 59 bytes */
+#endif
+
 } file_handle_v3_t;
 
 /**
@@ -75,7 +80,11 @@ typedef struct __attribute__((__packed__)) file_handle_v4 {
 		uint16_t servers; /*< FSAL servers, server_by_id */
 	} id;
 	uint8_t fs_len; /*< Length of opaque handle */
+#ifdef __cplusplus
+	uint8_t *fsopaque;
+#else
 	uint8_t fsopaque[]; /*< FSAL handle */
+#endif
 } file_handle_v4_t;
 
 #endif /* NFS_FH_H */

@@ -858,7 +858,12 @@ struct nfs_client_record_t {
 				     disjoint. Linux client stupidity
 				     forces us to do so. */
 	int cr_client_val_len; /*< Length of owner */
+#ifdef __cplusplus
+	char *cr_client_val;
+#else
 	char cr_client_val[]; /*< Supplied co_owner */
+
+#endif
 };
 
 extern pool_t *client_id_pool;

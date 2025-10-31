@@ -36,6 +36,12 @@
 #include "lttng_generator.h"
 #include <lttng/tracepoint.h>
 
+#ifndef UNUSED
+#define UNUSED_ATTR __attribute__((unused))
+#define UNUSED(...) UNUSED_(__VA_ARGS__)
+#define UNUSED_(arg) NOT_USED_##arg UNUSED_ATTR
+#endif
+
 extern __thread struct req_op_context *op_ctx;
 
 /* Note that __func__ is not a string literal (see http://shortn/_GQDGGpmvUd)
@@ -84,7 +90,7 @@ extern __thread struct req_op_context *op_ctx;
 
 /* We call the empty function with the variable args to avoid unused variables
  * warning when LTTNG traces are disabled */
-static inline void gsh_empty_function(const char *unused, ...)
+static inline void gsh_empty_function(const char *UNUSED(unused), ...)
 {
 }
 

@@ -313,7 +313,11 @@ struct _9p_xattr_desc {
 	u64 xattr_size;
 	u64 xattr_offset;
 	enum _9p_xattr_write xattr_write;
+#ifdef __cplusplus
+	char *xattr_content;
+#else
 	char xattr_content[];
+#endif
 };
 
 struct _9p_fid {
