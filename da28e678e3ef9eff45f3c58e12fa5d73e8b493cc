@@ -89,6 +89,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a04004_f8e87417",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-10-31T07:24:35Z",
+      "side": 1,
+      "message": "It is not used by rados URL config in anyway. This is for registering with cephadm, so no way related to URL. The only commonality is dependancy on RADOS connectivity. So it can be in separate file in tools as well.",
+      "parentUuid": "f084af88_342cc35b",
+      "revId": "da28e678e3ef9eff45f3c58e12fa5d73e8b493cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d86d7b35_8a4e67a8",

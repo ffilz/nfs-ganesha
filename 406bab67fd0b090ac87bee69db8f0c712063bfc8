@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdff4e90_10358b4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-10-31T07:24:35Z",
+      "side": 1,
+      "message": "Work on suggestions",
+      "revId": "406bab67fd0b090ac87bee69db8f0c712063bfc8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf29eb7_6b20373d",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-10-31T07:24:35Z",
+      "side": 1,
+      "message": "Instead of RADOS_RECOV, use CEPH as build time flag",
+      "revId": "406bab67fd0b090ac87bee69db8f0c712063bfc8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "895bf956_20d3e579",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1277,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-10-31T07:24:35Z",
+      "side": 1,
+      "message": "```suggestion\nstatic void register_nfs_to_cluster(void)\n```static void register_to_ceph_cluster(void)",
+      "revId": "406bab67fd0b090ac87bee69db8f0c712063bfc8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
