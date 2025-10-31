@@ -39,7 +39,11 @@ extern "C" {
  */
 struct gsh_refstr {
 	struct urcu_ref gr_ref; /* refcount */
+#ifdef __cplusplus
+	char gr_val[1];
+#else
 	char gr_val[]; /* buffer */
+#endif
 };
 
 /**
