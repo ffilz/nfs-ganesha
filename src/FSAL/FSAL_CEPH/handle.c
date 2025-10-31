@@ -690,8 +690,7 @@ static fsal_status_t ceph_fsal_readlink(struct fsal_obj_handle *link_pub,
 	/* XXX in Ceph through 1/2016, ceph_ll_readlink returns the
 	 * length of the path copied (truncated to 32 bits) in rc,
 	 * and it cannot exceed the passed buffer size */
-	content_buf->addr = gsh_strldup(content, MIN(rc, (PATH_MAX - 1)),
-					&content_buf->len);
+	copy_into_utf8string(content_buf, content, rc);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
