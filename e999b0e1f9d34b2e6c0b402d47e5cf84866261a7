@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c618fe49_e860c56f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-31T22:33:11Z",
+      "side": 1,
+      "message": "Needs to be new_openflag |\u003d FSAL_O_READ (otherwise it erases fsal_fd-\u003eopenflags includes FSAL_O_WRITE...",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0099a968_7cf99862",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-31T22:33:11Z",
+      "side": 1,
+      "message": "Same bit with |\u003d...\n\n\nIt seems like we should honor want_read and want_write, but obviously if one of them isn\u0027t in openflags and the open fails with permission error, the want_x that isn\u0027t in openflags may be the cause of open failure...",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5402cdf_bf0f779e",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-31T22:33:11Z",
+      "side": 1,
+      "message": "Hmm, is there any issue if fsal_fd-\u003eopenflags was FSAL_O_RDWR, openflags is FSAL_WRITE and file is now read-only? We sort of should leave the file open for read. But maybe that\u0027s OK. A subsequent read will re-open the file for FSAL_O_READ (only).",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0fdc47_68020fb7",
+        "filename": "src/include/FSAL/fsal_commonlib.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-10-31T22:33:11Z",
+      "side": 1,
+      "message": "Please move this to fsal_types.h with FSAL_IS_SUCCESS and FSAL_IS_ERROR.\n\n\nAlso rename it to FSAL_IS_PERMISSION_ERROR to match.",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
