@@ -8165,9 +8165,7 @@ static inline bool xdr_nfs_opnum4(XDR *xdrs, nfs_opnum4 *objp)
 
 static inline bool xdr_nfs_argop4(XDR *xdrs, nfs_argop4 *objp)
 {
-	struct nfs_request_lookahead slhd = { .flags = 0,
-					      .read = 0,
-					      .write = 0 };
+	struct nfs_request_lookahead slhd = { 0, 0, 0 };
 	struct nfs_request_lookahead *lkhd =
 		xdrs->x_public ? (struct nfs_request_lookahead *)xdrs->x_public
 			       : &slhd;
@@ -9760,8 +9758,29 @@ static inline bool xdr_CB_COMPOUND4res(XDR *xdrs, CB_COMPOUND4res *objp)
 	return true;
 }
 
+/**
+ * @brief Copy an arbitrary character array into a utf8string
+ *
+ * Our convention is that the utf8string is always NUL terminated. Do not assume
+ * input character array is NUL terminated, so handle that.
+ *
+ * @param[in/out] dest  The utf8string to fill
+ * @param[in]     src   The source character array
+ * @param[in]     len   The number of characters in the source array
+ *
+ */
+
+static inline void copy_into_utf8string(utf8string *dest, const char *src,
+					int len)
+{
+	dest->utf8string_val = (char *)gsh_malloc(len + 1);
+	dest->utf8string_len = len;
+	memcpy(dest->utf8string_val, src, len);
+	dest->utf8string_val[len] = '\0';
+}
+
 #ifdef __cplusplus
 }
-#endif
+#endif /* extern "C" */
 
 #endif /* !_NFSV41_H_RPCGEN */
