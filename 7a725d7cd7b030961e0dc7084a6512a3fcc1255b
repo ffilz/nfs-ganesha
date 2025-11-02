@@ -223,6 +223,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04b5b627_27c2fc0a",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2025-11-02T19:28:31Z",
+      "side": 1,
+      "message": "This function is very long and the logic can be broken to a few helped functions\n\nThis whole block is indented as we need it to be done while holding a lock, so I\u0027m suggesting to extract the logic that\u0027s expecting to be executed while holding a lock to a separate function to minimize the indentations and keep functions short",
+      "parentUuid": "a04f8c83_4037a4ad",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "448e34f0_b1212e66",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 6
