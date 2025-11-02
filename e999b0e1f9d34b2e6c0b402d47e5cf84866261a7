@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fb15574_1cc6811d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1038902
+      },
+      "writtenOn": "2025-11-02T01:45:51Z",
+      "side": 1,
+      "message": "You are right, my mistake. I have also changed the above line, since new_openflag is initialized as openflags, it is same as before.",
+      "parentUuid": "c618fe49_e860c56f",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0099a968_7cf99862",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 7
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-31T22:33:11Z",
       "side": 1,
       "message": "Same bit with |\u003d...\n\n\nIt seems like we should honor want_read and want_write, but obviously if one of them isn\u0027t in openflags and the open fails with permission error, the want_x that isn\u0027t in openflags may be the cause of open failure...",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2126e5ae_faa046c4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 1038902
+      },
+      "writtenOn": "2025-11-02T01:45:51Z",
+      "side": 1,
+      "message": "Yeah, it will fail in this case. But as you explained earlier, it is better we prioritize the general workload where we could save an open call if we have parallel read and write.",
+      "parentUuid": "0099a968_7cf99862",
       "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dde52310_69bc4639",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1038902
+      },
+      "writtenOn": "2025-11-02T01:45:51Z",
+      "side": 1,
+      "message": "IMO, With NFSv3, If it is a fresh write call, I think EACCES will fail before the write, so may be we won\u0027t even get into open with FSAL_O_WRITE on an existing cached fd. But, if the permission changes when a write was on going (EACCES is already done) then posix allow us to continue the write as we have already an open fd with write access, nfs-ganesha will also follow this as we do not requried to reopen.",
+      "parentUuid": "d5402cdf_bf0f779e",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c0fdc47_68020fb7",
         "filename": "src/include/FSAL/fsal_commonlib.h",
         "patchSetId": 7
@@ -65,6 +119,24 @@
       "writtenOn": "2025-10-31T22:33:11Z",
       "side": 1,
       "message": "Please move this to fsal_types.h with FSAL_IS_SUCCESS and FSAL_IS_ERROR.\n\n\nAlso rename it to FSAL_IS_PERMISSION_ERROR to match.",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1cac627_3cf93ca0",
+        "filename": "src/include/FSAL/fsal_commonlib.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038902
+      },
+      "writtenOn": "2025-11-02T01:45:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2c0fdc47_68020fb7",
       "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
