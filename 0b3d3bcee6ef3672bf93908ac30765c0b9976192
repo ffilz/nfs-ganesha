@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bf6f434_49bd0836",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-11-02T07:05:12Z",
+      "side": 1,
+      "message": "First. I am sorry for the late reply. I somehow missed the email.\n\nThe problem is we mostly want to limit the Warning, and I believe that most large scale systems that run in production will only leave warning on as otherwise the logs can be a toll. the problem with this specific warning is that it can fire at while loop rate without waiting, actually blocking the thing it waits for from being performed.\nI do think this notification should be a warning as when it genuinely happens it is a very severe case. which should not be ignored. but having it 100 or 100000000 times in logs serves the same purpose without overloading the logging system.\n\nwhat do you think if I change this cl to just rate limit the LogWarn lines we have in these while loops. with LogWarnLimited?",
+      "parentUuid": "a03bfd80_43fbb1c6",
+      "revId": "0b3d3bcee6ef3672bf93908ac30765c0b9976192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cf2b0c4_52168dc0",
         "filename": "src/SAL/nfs4_clientid.c",
         "patchSetId": 2
