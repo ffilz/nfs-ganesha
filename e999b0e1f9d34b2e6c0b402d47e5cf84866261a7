@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b323610_8ee1af85",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2150,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-03T19:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fb15574_1cc6811d",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0099a968_7cf99862",
@@ -71,6 +89,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba7e8e5_4a1b3e1d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2153,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-03T19:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2126e5ae_faa046c4",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5402cdf_bf0f779e",
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "IMO, With NFSv3, If it is a fresh write call, I think EACCES will fail before the write, so may be we won\u0027t even get into open with FSAL_O_WRITE on an existing cached fd. But, if the permission changes when a write was on going (EACCES is already done) then posix allow us to continue the write as we have already an open fd with write access, nfs-ganesha will also follow this as we do not requried to reopen.",
       "parentUuid": "d5402cdf_bf0f779e",
+      "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a1e30d_81d0907c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-03T19:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dde52310_69bc4639",
       "revId": "e999b0e1f9d34b2e6c0b402d47e5cf84866261a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
