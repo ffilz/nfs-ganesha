@@ -16,6 +16,24 @@
       "message": "What is the issue prompting this patch? The moving around of code doesn\u0027t make sense.",
       "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f551374b_358eee73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-04T17:06:29Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com  I made changes regarding the registration of NFS services to ceph cluster in the codebase. Previously, the unique identifier userid was defined under the RADOS_URLS {} block in ganesha.conf, but it was kept the same across all NFS services/daemons now.\n\nTo improve service uniqueness and management, We are using configuration nodeid under the RADOS_RECOVERY {} block, which is unique per service/daemon. Consequently, I moved the NFS service registration logic from the RADOS_URLS related code to the RADOS_RECOVERY related codebase, so that each service registration now aligns with the unique nodeid in the recovery configuration.",
+      "parentUuid": "cbd30f47_9701572b",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
