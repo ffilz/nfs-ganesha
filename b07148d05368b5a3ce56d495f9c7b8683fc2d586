@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71bea35_6686081a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-11-04T23:58:46Z",
+      "side": 1,
+      "message": "There is the compile option to jump to the version.\n\nWe handle the transitionin the nfs-ganesha-callout.py script from CTDB.  We copy the CLIDs at first in the existing method, mark the upgrade and then clean up the old files.\n\nIt has been thoroughly tested with a node by node upgrade and locks were maintained.  It has been through QA and has been in production for a bit.\n\nSince a helper program was required to copy the CLID files for the existing method, that was the approach we took.\n\nSo that script can be used for CTDB users or as an example.\n\nI do note that those changes haven\u0027t made it upstream yet - I think we were waiting until this was finally submitted and committed.",
+      "parentUuid": "b3e222be_2e2a9588",
+      "revId": "b07148d05368b5a3ce56d495f9c7b8683fc2d586",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36178730_e84b601e",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-04T19:41:46Z",
       "side": 1,
       "message": "Hmm, there\u0027s a mix of components in this file...\n\n\nLooks like the recovery directory files all use COMPONENT_CLIENTID, let\u0027s change all components in this file... (in a separate patch probably)",
+      "revId": "b07148d05368b5a3ce56d495f9c7b8683fc2d586",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a42019b_e5d30706",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-11-04T23:58:46Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "36178730_e84b601e",
       "revId": "b07148d05368b5a3ce56d495f9c7b8683fc2d586",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
