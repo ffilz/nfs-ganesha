@@ -299,7 +299,9 @@ enum nfs_req_result nfs4_op_sequence(struct nfs_argop4 *op,
 
 	res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_status_flags = 0;
 
-	if (nfs_rpc_get_chan(session->clientid_record, 0) == NULL) {
+	/* Check callback channel only if clientid_record exists */
+	if (session->clientid_record != NULL &&
+	    nfs_rpc_get_chan(session->clientid_record, 0) == NULL) {
 		res_SEQUENCE4->SEQUENCE4res_u.sr_resok4.sr_status_flags |=
 			SEQ4_STATUS_CB_PATH_DOWN;
 	}
