@@ -34,6 +34,24 @@
       "parentUuid": "cbd30f47_9701572b",
       "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7355a6d2_bb727925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-04T17:16:08Z",
+      "side": 1,
+      "message": "And coming to defining USE_FSAL_CEPH macro in config-h.in.cmake, It is helping to use the macro USE_FSAL_CEPH for conditional compilation in nfs_init.c file as sachin insisted to use USA_FSAL_CEPH instead of USE_RADOS_RECOV macro.",
+      "parentUuid": "f551374b_358eee73",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
