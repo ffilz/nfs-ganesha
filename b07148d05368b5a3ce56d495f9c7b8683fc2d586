@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e222be_2e2a9588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T19:41:46Z",
+      "side": 1,
+      "message": "This is a significant change, is there a migration path so a system using the old form will migrate to the new form?",
+      "revId": "b07148d05368b5a3ce56d495f9c7b8683fc2d586",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36178730_e84b601e",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T19:41:46Z",
+      "side": 1,
+      "message": "Hmm, there\u0027s a mix of components in this file...\n\n\nLooks like the recovery directory files all use COMPONENT_CLIENTID, let\u0027s change all components in this file... (in a separate patch probably)",
+      "revId": "b07148d05368b5a3ce56d495f9c7b8683fc2d586",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
