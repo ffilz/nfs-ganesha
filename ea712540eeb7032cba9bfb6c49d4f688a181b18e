@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c35536_4994eb4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T19:31:41Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure a session object can not be created with a NULL clientid_record.\n\n\nWhich Coverity CID is this from? I\u0027d like to check it\u0027s logic.\n\n\nWe should remove the other check in this file if we\u0027re sure it can never be NULL.",
+      "revId": "ea712540eeb7032cba9bfb6c49d4f688a181b18e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
