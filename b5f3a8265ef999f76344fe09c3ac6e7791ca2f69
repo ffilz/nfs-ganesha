@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674f072b_7153d66e",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-04T06:32:39Z",
+      "side": 1,
+      "message": "WARNING: \u0027Maxium\u0027 may be misspelled - perhaps \u0027Maximum\u0027?\n+ * @param[in]  path_size Maxium size of path\n                          ^^^^^^",
+      "revId": "b5f3a8265ef999f76344fe09c3ac6e7791ca2f69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fbc1f62_cdf845c6",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-04T06:32:39Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tint pathpos \u003d ip_recov_dir_len;\n+\t\t\tip_recov_dir[pathpos++] \u003d \u0027/\u0027;",
+      "revId": "b5f3a8265ef999f76344fe09c3ac6e7791ca2f69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edf3ea00_1ae66dfc",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-04T06:32:39Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tint err;\n+\terr \u003d mkdir(path, 0755);",
+      "revId": "b5f3a8265ef999f76344fe09c3ac6e7791ca2f69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
