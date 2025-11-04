@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d3a7f33_60704ec8",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T19:36:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "48529614_bcdcf4e4",
+      "revId": "b3ca1688b5f8a3225fe72ea40918e57dc474dcd3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4a1b792_320aeac5",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-04T06:38:24Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\t\t\tint pathpos \u003d ip_recov_dir_len;\n+\t\t\tip_recov_dir[pathpos++] \u003d \u0027/\u0027;",
+      "revId": "b3ca1688b5f8a3225fe72ea40918e57dc474dcd3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e72b14_176a21eb",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T19:36:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d4a1b792_320aeac5",
       "revId": "b3ca1688b5f8a3225fe72ea40918e57dc474dcd3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b935695_7bfeabcc",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T19:36:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8a8afc25_4a25ec1f",
+      "revId": "b3ca1688b5f8a3225fe72ea40918e57dc474dcd3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37f5545f_b1ea2588",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-11-04T06:38:24Z",
       "side": 1,
       "message": "ERROR: trailing whitespace\n+^I^Icid_confirmed_saved; /* hang on to cid_confirmed for $",
+      "revId": "b3ca1688b5f8a3225fe72ea40918e57dc474dcd3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4dee749_0a01fda6",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T19:36:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "37f5545f_b1ea2588",
       "revId": "b3ca1688b5f8a3225fe72ea40918e57dc474dcd3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
