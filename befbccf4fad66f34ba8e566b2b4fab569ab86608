@@ -52,6 +52,40 @@
       "parentUuid": "f551374b_358eee73",
       "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b232a0b_d4711be6",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T18:21:15Z",
+      "side": 1,
+      "message": "I really don\u0027t understand why we are loading different .so files here depending on compile options. Also not sure why register_nfs_service has to be in a separate .so, especially after moving the code.\n\n\nAlso, not clear that this won\u0027t try to run when Ganesha is compiled for Ceph but is not actually using any Ceph exports or rados URLs.",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5719d8f0_4dcca728",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-04T18:21:15Z",
+      "side": 1,
+      "message": "If this is used independent of recovery backend, it should not be in a recovery database source file.",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
