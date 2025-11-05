@@ -16,6 +16,24 @@
       "message": "I\u0027m pretty sure a session object can not be created with a NULL clientid_record.\n\n\nWhich Coverity CID is this from? I\u0027d like to check it\u0027s logic.\n\n\nWe should remove the other check in this file if we\u0027re sure it can never be NULL.",
       "revId": "ea712540eeb7032cba9bfb6c49d4f688a181b18e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d4c527_1f77edc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-11-05T11:53:49Z",
+      "side": 1,
+      "message": "This is Coverity CID 638307.\n\nOn examining the session creation code in nfs4_op_create_session.c (line 412), clientid_record is always set to a non-NULL value. Missed it earlier.\n\nThe code has been updated to remove the redundant null check in revoked delegation session handling (rather than adding one). The code now directly calls\nhas_revoked_delegations_for_client(session-\u003eclientid_record).",
+      "parentUuid": "39c35536_4994eb4d",
+      "revId": "ea712540eeb7032cba9bfb6c49d4f688a181b18e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
