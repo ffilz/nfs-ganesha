@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e75241f_8a699a00",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-05T17:04:51Z",
+      "side": 1,
+      "message": "Initially, I suggested using the macro USE_RADOS_RECOV (as seen in patchset 2). However, based on Sachin\u0027s suggestion to utilize the existing CEPH macro, I updated the code and created patchset 5.\n\nFurthermore, if you review patchset 1, you\u0027ll notice that calling functions from other files wasn\u0027t necessary because the rados_recov code automatically handles registration of NFS to the cluster.",
+      "parentUuid": "5f1618b0_acce29ce",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5719d8f0_4dcca728",
         "filename": "src/SAL/recovery/recovery_rados_kv.c",
         "patchSetId": 5
