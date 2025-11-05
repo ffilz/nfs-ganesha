@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f1618b0_acce29ce",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-05T16:53:29Z",
+      "side": 1,
+      "message": "With existing code of registering nfs in src/config_parsing/conf_url_rados.c\nis we are getting \u0027stray daemon\u0027 error message in ceph -s command\n\nDue to same userid for all services.\n\nAs RADOS_RECOVERY{} is having nodeid unique for all services we are moving code here.\n\n\nAs ganesha_rados_recov is built as MODULE(https://github.com/nfs-ganesha/nfs-ganesha/blob/6ac461ea252398b77e156ccd3227eb6749a9ad5c/src/SAL/CMakeLists.txt#L74) we need to call function like in code.",
+      "parentUuid": "7b232a0b_d4711be6",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5719d8f0_4dcca728",
         "filename": "src/SAL/recovery/recovery_rados_kv.c",
         "patchSetId": 5
