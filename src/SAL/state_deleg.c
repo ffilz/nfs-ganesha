@@ -903,39 +903,93 @@ bool state_deleg_conflict_impl(struct fsal_obj_handle *obj, bool write)
 		return false;
 
 	struct file_deleg_stats *deleg_stats;
-	struct gsh_client *deleg_client = NULL;
-	open_delegation_type4 deleg_type;
+	const nfs_client_id_t *deleg_clientid = NULL;
+	const uint64_t *current_clientid = NULL;
+	struct glist_head *glist;
+	state_t *state;
 	bool is_read_deleg;
 	bool is_write_deleg;
 
 	deleg_stats = &obj->state_hdl->file.fdeleg_stats;
-	deleg_type = deleg_stats->fds_deleg_type;
 
-	if (obj->state_hdl->file.write_delegated)
-		deleg_client =
-			obj->state_hdl->file.write_deleg_client->gsh_client;
+	/* Check delegation type - handle both standard and ATTRS variants */
+	is_read_deleg =
+		(deleg_stats->fds_deleg_type == OPEN_DELEGATE_READ ||
+		 deleg_stats->fds_deleg_type == OPEN_DELEGATE_READ_ATTRS_DELEG);
+	is_write_deleg = (deleg_stats->fds_deleg_type == OPEN_DELEGATE_WRITE ||
+			  deleg_stats->fds_deleg_type ==
+				  OPEN_DELEGATE_WRITE_ATTRS_DELEG);
 
-	/* Check delegation type - handles both standard and
-	 * ATTRS_DELEG types.
+	/* Retrieve the current client ID from op_ctx, if available.
+	 * This is used to determine whether the operation originates
+	 * from the same client that owns any active delegation.
 	 */
-	is_read_deleg = (deleg_type == OPEN_DELEGATE_READ ||
-			 deleg_type == OPEN_DELEGATE_READ_ATTRS_DELEG);
-	is_write_deleg = (deleg_type == OPEN_DELEGATE_WRITE ||
-			  deleg_type == OPEN_DELEGATE_WRITE_ATTRS_DELEG);
+	if (op_ctx != NULL && op_ctx->clientid != NULL)
+		current_clientid = op_ctx->clientid;
 
+	/* Look up the client ID of the active delegation, if any.
+	 * We scan the list_of_states to find the delegation state.
+	 * Works for both read and write delegations since we only
+	 * need to know which client currently holds it.
+	 */
+	if (deleg_stats->fds_curr_delegations > 0) {
+		glist_for_each(glist, &obj->state_hdl->file.list_of_states) {
+			state = glist_entry(glist, state_t, state_list);
+			if (state->state_type == STATE_TYPE_DELEG) {
+				deleg_clientid =
+					state->state_owner->so_owner
+						.so_nfs4_owner.so_clientrec;
+				break;
+			}
+		}
+	}
+
+	/* Log client IDs for debugging */
+	if (deleg_clientid != NULL) {
+		LogDebug(COMPONENT_STATE, "Delegation client ID: unique=0x%llx",
+			 (unsigned long long)deleg_clientid->cid_clientid);
+	} else {
+		LogDebug(COMPONENT_STATE, "Delegation client ID: NULL");
+	}
+
+	if (current_clientid != NULL) {
+		LogDebug(COMPONENT_STATE, "Current client ID: 0x%llx",
+			 (unsigned long long)*current_clientid);
+	} else {
+		LogDebug(COMPONENT_STATE, "Current client ID: NULL");
+	}
+
+	/* Check for conflicts with active delegations. */
 	if (deleg_stats->fds_curr_delegations > 0 &&
-	    ((is_read_deleg && write) ||
-	     (is_write_deleg && deleg_client != op_ctx->client))) {
-		LogDebug(
-			COMPONENT_STATE,
-			"While trying to perform a %s op, found a conflicting %s delegation",
-			write ? "write" : "read",
-			is_write_deleg ? "WRITE" : "READ");
+	    ((is_read_deleg && write) || (is_write_deleg && write) ||
+	     (is_write_deleg && !write))) {
+		/* Same-client case: no recall needed, allow operation.
+		 * Per NFS community: "activity from the holder of a delegation
+		 * is not considered conflicting"
+		 */
+		if (deleg_clientid != NULL && current_clientid != NULL &&
+		    deleg_clientid->cid_clientid == *current_clientid) {
+			LogDebug(COMPONENT_STATE,
+				 "Same client operation on delegated file");
+			return false;
+		}
+
+		/* Cross-client conflict: must trigger delegation recall.
+		 * All conflicting operations from different clients must
+		 * recall.
+		 */
+		LogDebug(COMPONENT_STATE,
+			 "While performing %s op found conflicting %s deleg",
+			 write ? "write" : "read",
+			 is_write_deleg ? "WRITE" : "READ");
+
 		if (async_delegrecall(general_fridge, obj) != 0)
 			LogCrit(COMPONENT_STATE,
 				"Failed to start thread to recall delegation from conflicting operation.");
 		return true;
 	}
+
+	/* No delegations present or no conflict with requested access */
 	return false;
 }
 
