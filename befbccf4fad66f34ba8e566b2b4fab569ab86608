@@ -104,6 +104,24 @@
       "message": "If this is used independent of recovery backend, it should not be in a recovery database source file.",
       "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e27b038_299a7b4a",
+        "filename": "src/SAL/recovery/recovery_rados_kv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-05T16:58:58Z",
+      "side": 1,
+      "message": "This function requires the clnt rados_t object because we use it to register with the Ceph cluster. Therefore, the function is defined here.",
+      "parentUuid": "5719d8f0_4dcca728",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
