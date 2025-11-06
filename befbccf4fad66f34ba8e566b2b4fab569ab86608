@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22110adc_a0529c2e",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-06T16:53:40Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com\nwhat if the code is like below :\n\n#if USE_FSAL_CEPH\n   #ifdef USE_RADOS_RECOV\n       static void register_to_ceph_cluster(void)\n       {\n       --- \n       ---\n       }\n   #endif\n #endif",
+      "parentUuid": "b420055f_4c864493",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5719d8f0_4dcca728",
         "filename": "src/SAL/recovery/recovery_rados_kv.c",
         "patchSetId": 5
