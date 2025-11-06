@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8a87d74_b0074529",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Maybe code as a single if:\n\nif ((op_ctx-\u003eexport_perms.options \u0026 EXPORT_OPTION_TLS) !\u003d 0 \u0026\u0026\n    !xprt-\u003exp_tls.tls_established) {\n\nWill help indentation.",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ddbf8a1_e0d7a8e9",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1047780b_156a9563",
         "filename": "src/doc/man/ganesha-export-config.rst",
         "patchSetId": 7
@@ -14,6 +48,58 @@
       "writtenOn": "2025-10-28T13:23:57Z",
       "side": 1,
       "message": "@ffilzlnx@mindspring.com : I think we should separate the tls, mtls option with a new config parameter entry: \"xprtsec\u003d\"  ?\n\nReason: currently user has to provide SecType\u003dsys,tls . if user provide SecType\u003dtls because the way we handle only tls gets enabled.\nSince the Sectype doesn\u0027t get defaulted to sys or none, causing the mount failure on validation, because mount checks for sys/none provided by user or not.\n\nlet me know your thoughts on this.\n\nor since user is populating the secType we can enforce the user to provide the details sys/node/krb5 along with tls/mts ?\n\nor we can have a small normalization function which makes sure when user provides SecType with tls or mtls only, apply the default sec also to the option i.e sys and none.",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e76dbde_2f1b34ef",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Yea, separate config makes sense. Maybe tls\u003d{..} options are none, tls, mtls, or both (as a list)?\n\nCan still be bits in the same field.",
+      "parentUuid": "1047780b_156a9563",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd27043c_db1f696f",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Maybe code as a single if:\n\nif ((op_ctx-\u003eexport_perms.options \u0026 EXPORT_OPTION_TLS) !\u003d 0 \u0026\u0026\n    !xprt-\u003exp_tls.tls_established) {\n\nWill help indentation.",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "187cd97f_b664a856",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Same",
       "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

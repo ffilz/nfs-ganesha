@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8678b64_4bf3a8fb",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad500e32_69a5b27b",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa00fa5f_838a487d",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Ack, Updated as suggested",
       "parentUuid": "aa00fa5f_838a487d",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44cb1ef4_3d388af3",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afc9c214_44fe83ef",
       "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -123,6 +159,41 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40f3f45_7fd2f46c",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "OK, I see the same check is in nfs4_export_check_access.\n\n\nHmm, we should look and see if we could consolidate to eliminate largely duplicate code... Something for another day...",
+      "parentUuid": "c6c44cc5_88f94259",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c1e042d_9c0d3eaf",
+        "filename": "src/Protocols/NFS/mnt_Mnt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Hmm, does this need to be earlier in the list? Note the comment above about preferred order. Also, does mtls use AUTH_TLS?",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66fa87b7_be042846",
@@ -154,6 +225,24 @@
       "side": 1,
       "message": "Done the changes as suggested",
       "parentUuid": "66fa87b7_be042846",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a29545_c68fca1d",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc708407_4be3ca83",
       "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -193,6 +282,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e31bdbe_0a3f9b0c",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e8ff96c_2a497d19",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "291c249f_843ee27a",
@@ -224,6 +331,24 @@
       "side": 1,
       "message": "Ack, added new commit function for tls",
       "parentUuid": "291c249f_843ee27a",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac01b1c_d7dbd497",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T19:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "456fee40_91b90ddb",
       "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
