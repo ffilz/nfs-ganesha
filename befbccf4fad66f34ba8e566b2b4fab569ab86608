@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d61f62e9_4ef96212",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-06T18:00:48Z",
+      "side": 1,
+      "message": "Do we only need the register if we use rados recovery? What if we use rados URL but not rados recovery?",
+      "parentUuid": "22110adc_a0529c2e",
+      "revId": "befbccf4fad66f34ba8e566b2b4fab569ab86608",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5719d8f0_4dcca728",
         "filename": "src/SAL/recovery/recovery_rados_kv.c",
         "patchSetId": 5
