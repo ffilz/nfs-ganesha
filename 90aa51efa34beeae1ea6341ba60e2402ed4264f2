@@ -16,6 +16,24 @@
       "message": "Is this fixing a Coverity issue? If so, please reference in title",
       "revId": "90aa51efa34beeae1ea6341ba60e2402ed4264f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79dae938_5c5d64c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-11-07T03:17:33Z",
+      "side": 1,
+      "message": "Yes, this change is for the coverity issue 583557.\nCoverity reported data race in get_tcp_drc_recycle_qlen().\n\nAlong with that, I have changed drc_st-\u003etcp_drc_recycle_qlen type to uint32_t to match the API and usage (this I found out while looking at this function and related structure).\n\nAdded the Coverity ID number in the title.",
+      "parentUuid": "695b7ad4_1c9c0f18",
+      "revId": "90aa51efa34beeae1ea6341ba60e2402ed4264f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
