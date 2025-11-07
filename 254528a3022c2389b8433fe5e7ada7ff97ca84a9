@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d756b5_afceb01d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T00:06:45Z",
+      "side": 1,
+      "message": "I would feel better if we only included it where necessary.",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c05527d_75a62903",
+        "filename": "src/FSAL/FSAL_CEPH/internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T00:06:45Z",
+      "side": 1,
+      "message": "The name suggests this should be a bool... Or is it actually a character that is stored?",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb1592b_3f924d37",
+        "filename": "src/cmake/modules/FindCEPHFS.cmake",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T00:06:45Z",
+      "side": 1,
+      "message": "Should we disable fscrypt if the linux header file isn\u0027t present?",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eefa929_5a8451b9",
+        "filename": "src/cmake/modules/FindCEPHFS.cmake",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T00:06:45Z",
+      "side": 1,
+      "message": "This seems to suggest the comment in the commit message about no way to ensure fscrypt is in libcephfs.",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
