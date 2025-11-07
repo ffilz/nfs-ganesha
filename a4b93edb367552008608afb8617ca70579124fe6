@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3771e70a_e51e9914",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T18:17:58Z",
+      "side": 1,
+      "message": "I think you just want to set a boolean true if there is a delegation from the same client",
+      "parentUuid": "d61f1913_19317675",
+      "revId": "a4b93edb367552008608afb8617ca70579124fe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75f500b6_7cf66b14",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2025-11-05T18:39:01Z",
       "side": 1,
       "message": "Wait, if client holds read delegation and starts writing, and other clients hold read delegation, don\u0027t we need to recall? Also, shouldn\u0027t we recall a read delegation of clients starts writing?",
+      "revId": "a4b93edb367552008608afb8617ca70579124fe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51421013_a71eec72",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T18:17:58Z",
+      "side": 1,
+      "message": "Then here, the test is\nif (deleg_stats-\u003efds_curr_delegations \u003d 1 and matching_deleg_found)\n\n\nThat will allow DELEG23 to pass but make sure if there are multiple read delegations that we at least recall those belonging to other clients. It will also recall the delegation belonging to this client but that\u0027s a harder case to handle and requires changing how delegrecall_impl works.",
+      "parentUuid": "75f500b6_7cf66b14",
       "revId": "a4b93edb367552008608afb8617ca70579124fe6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
