@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c9d05bb_e655a22b",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T00:18:20Z",
+      "side": 1,
+      "message": "I wonder if this should be a sub-directory of config_parsing? Or do you envision plugins in the future that are not config",
+      "revId": "02b80c2095ad4b6bbb96222f3e9ca988ec45c312",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "131060f1_085a9b73",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T00:18:20Z",
+      "side": 1,
+      "message": "The following change looks wonky...",
+      "revId": "02b80c2095ad4b6bbb96222f3e9ca988ec45c312",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "604a1ba3_183b2d01",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-07T00:18:20Z",
+      "side": 1,
+      "message": "Please don\u0027t use // comments in .c files",
+      "revId": "02b80c2095ad4b6bbb96222f3e9ca988ec45c312",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46b57240_49595613",
         "filename": "src/support/exports.c",
         "patchSetId": 2
