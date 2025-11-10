@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3bd4030c_c5c604b6",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-11-10T07:57:35Z",
+      "side": 1,
+      "message": "Removed the log.",
+      "parentUuid": "07966b8a_34689962",
+      "revId": "a4b93edb367552008608afb8617ca70579124fe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf62fb63_660f3ce5",
         "filename": "src/Protocols/NFS/nfs4_op_open.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-05T18:39:01Z",
       "side": 1,
       "message": "Please use LogFullDebug",
+      "revId": "a4b93edb367552008608afb8617ca70579124fe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5247512_65cd540b",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-11-10T07:57:35Z",
+      "side": 1,
+      "message": "Changed the log type to LogFullDebug.",
+      "parentUuid": "cf62fb63_660f3ce5",
       "revId": "a4b93edb367552008608afb8617ca70579124fe6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -72,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a4f86a4_584ef461",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-11-10T07:57:35Z",
+      "side": 1,
+      "message": "Have updated the code.",
+      "parentUuid": "3771e70a_e51e9914",
+      "revId": "a4b93edb367552008608afb8617ca70579124fe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75f500b6_7cf66b14",
         "filename": "src/SAL/state_deleg.c",
         "patchSetId": 1
@@ -101,6 +155,24 @@
       "side": 1,
       "message": "Then here, the test is\nif (deleg_stats-\u003efds_curr_delegations \u003d 1 and matching_deleg_found)\n\n\nThat will allow DELEG23 to pass but make sure if there are multiple read delegations that we at least recall those belonging to other clients. It will also recall the delegation belonging to this client but that\u0027s a harder case to handle and requires changing how delegrecall_impl works.",
       "parentUuid": "75f500b6_7cf66b14",
+      "revId": "a4b93edb367552008608afb8617ca70579124fe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bf75c2_cf9f061b",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-11-10T07:57:35Z",
+      "side": 1,
+      "message": "Have updated the code.",
+      "parentUuid": "51421013_a71eec72",
       "revId": "a4b93edb367552008608afb8617ca70579124fe6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
