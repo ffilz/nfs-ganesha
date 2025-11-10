@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16dc25bb_b376f58f",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-10T13:00:08Z",
+      "side": 1,
+      "message": "should this be SOCK_NAME_MAX ?",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fbb7379_65412baf",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-10T13:00:08Z",
+      "side": 1,
+      "message": "Since the function is token specific : should call : qos_get_token_bucket()",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56869336_22ee34fc",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-10T13:00:08Z",
+      "side": 1,
+      "message": "Check spelling : *label",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c18900fe_ee6d9fcb",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-10T13:00:08Z",
+      "side": 1,
+      "message": "To make is cross platform compatible, should use PRIu64, PRIu32 etc in all the required places",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef4c4ccd_2fb77c83",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2117,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-10T13:00:08Z",
+      "side": 1,
+      "message": "Since register_qos_metric is registered for export_bucket and client_bucket which is done in qos_perexport_insert and qos_perclient_insert. \nthis statement \"func()\" here doesnt seems to be valid.",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "413a5443_133cdd1e",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2771,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-10T13:00:08Z",
+      "side": 1,
+      "message": "Here we are updating the CLIENT bucket metrics but I don\u0027t see EXPORT bucket metrics getting updated in PerExport_PerClient mode.",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
