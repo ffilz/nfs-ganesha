@@ -52,6 +52,24 @@
       "parentUuid": "92be7fb3_06ed65f5",
       "revId": "c9923f15805b25dafc72fd073941f722140e4345",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e40892_c8a4a0f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038959
+      },
+      "writtenOn": "2025-11-10T04:59:30Z",
+      "side": 1,
+      "message": "we implement our fsal module under mdcache so it can leverage the caching. and our underlying fs is a distributed fs. e.g., when client setattr on a file, we need to do some operations on multiple nodes. there are chances that ganesha or node crashes after partial operations are done. so we use recovery log to continue the remaining operations after ganesha restarts.\n\nthe workflow is like below:\n\nnfs4_op_setattr\n    mdcache_setattr2\n        my_setattr2\n            start setattr transaction in recovery log\n            setattr on multiple nodes\n            mark setattr complete\n\nin recovery\n    import export\n    for each entry in recovery log\n        obj \u003d create_obj_handle from the info in the log\n        struct setattr_recover_arg arg{attr_info, ret_code};\n        obj-\u003eobj_ops-\u003efsal_private_op(obj, setattr_recover_func, \u0026arg);\n        mark setattr complete\n\nin setattr_recover_func (the obj is now our fsal obj)\n    mark obj is in recovery and block new access\n    continue remaining setattr operations on nodes\n    mark obj clean to allow new access\n\n\n\nthere are also other functions like setattr_recover_func for other ops, instead adding a new obj function for each op, i think maybe creating a single general function like fsal_private_op is more flexible.",
+      "parentUuid": "55812f40_ae9a8ede",
+      "revId": "c9923f15805b25dafc72fd073941f722140e4345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
