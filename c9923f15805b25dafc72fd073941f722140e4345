@@ -70,6 +70,23 @@
       "parentUuid": "55812f40_ae9a8ede",
       "revId": "c9923f15805b25dafc72fd073941f722140e4345",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc91669d_b8fd6c05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2025-11-11T13:05:13Z",
+      "side": 1,
+      "message": "the fsal only needs an op when -ganesha- code (which is general to all fsals) is going to call it.  is the problem that you\u0027re trying to call method exported in your private FSAL driver, from a private recovery driver?",
+      "revId": "c9923f15805b25dafc72fd073941f722140e4345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
