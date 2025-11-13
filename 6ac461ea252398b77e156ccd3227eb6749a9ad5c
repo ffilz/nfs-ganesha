@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b7b9e8_6fd13875",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T23:19:59Z",
+      "side": 0,
+      "message": "Why does this macro have to change to inline?\n\nThat\u0027s causing you to use a dangerous cast of (u_int *) to (size_t *)",
+      "revId": "6ac461ea252398b77e156ccd3227eb6749a9ad5c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
