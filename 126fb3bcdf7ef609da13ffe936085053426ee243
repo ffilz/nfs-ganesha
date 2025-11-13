@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bf31e5b_433d87b1",
+        "filename": "src/Protocols/NFS/mnt_Mnt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-13T13:52:05Z",
+      "side": 1,
+      "message": "Yes, tls/mtls use AUTH_TLS only.\nAs per my current understanding, order doesnt applies for AUTH_TLS.",
+      "parentUuid": "3c1e042d_9c0d3eaf",
+      "revId": "126fb3bcdf7ef609da13ffe936085053426ee243",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66fa87b7_be042846",
         "filename": "src/include/gsh_tls.h",
         "patchSetId": 6

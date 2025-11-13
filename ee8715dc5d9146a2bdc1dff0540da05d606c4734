@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76026ca5_03e773fe",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-13T13:52:05Z",
+      "side": 1,
+      "message": "Updated as suggested",
+      "parentUuid": "f8a87d74_b0074529",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ddbf8a1_e0d7a8e9",
         "filename": "src/MainNFSD/nfs_worker_thread.c",
         "patchSetId": 7
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-06T19:48:16Z",
       "side": 1,
       "message": "Same",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29912415_433da8ee",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-13T13:52:05Z",
+      "side": 1,
+      "message": "Updated as suggested in both the places",
+      "parentUuid": "7ddbf8a1_e0d7a8e9",
       "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -72,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67fea4d1_2c67c85f",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-13T13:52:05Z",
+      "side": 1,
+      "message": "Added new config option XprtSec\u003d{} none, tls, mts, which is inline with client mount option xprtsec\u003d\"tls\" or \"mtls\".\n\nSame bit fields used.",
+      "parentUuid": "3e76dbde_2f1b34ef",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd27043c_db1f696f",
         "filename": "src/support/nfs_creds.c",
         "patchSetId": 7
@@ -89,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02fea4e4_b603e43d",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-13T13:52:05Z",
+      "side": 1,
+      "message": "Code changes done as suggested",
+      "parentUuid": "bd27043c_db1f696f",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "187cd97f_b664a856",
         "filename": "src/support/nfs_creds.c",
         "patchSetId": 7
@@ -100,6 +172,24 @@
       "writtenOn": "2025-11-06T19:48:16Z",
       "side": 1,
       "message": "Same",
+      "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8aafb11_d21f8575",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-11-13T13:52:05Z",
+      "side": 1,
+      "message": "Code changes done as suggested",
+      "parentUuid": "187cd97f_b664a856",
       "revId": "ee8715dc5d9146a2bdc1dff0540da05d606c4734",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
