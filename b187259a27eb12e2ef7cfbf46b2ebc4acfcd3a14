@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8abb4ee4_7f7eb37b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T21:27:29Z",
+      "side": 1,
+      "message": "@liorsu@google.com - need some help with clang-format issues...",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6789bc92_2d363a5f",
         "filename": "src/MainNFSD/nfs_worker_thread.c",
         "patchSetId": 10
@@ -38,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3522f070_139ab8b5",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T21:27:29Z",
+      "side": 1,
+      "message": "Hmm, not sure how to resolve that. Currently, if clang-format and checkpatch don\u0027t pass, CI doesn\u0027t run other tests... Could change the string to just be \"not allowed on Export %\"...",
+      "parentUuid": "bc56a56a_72f3dd70",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcf28eeb_c1526938",
         "filename": "src/MainNFSD/nfs_worker_thread.c",
         "patchSetId": 10
@@ -67,6 +102,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "dcf28eeb_c1526938",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a629891_d80d181f",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T21:27:29Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "99a8de90_e9f9ab98",
       "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -213,6 +266,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74639905_70bb0908",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2101,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T21:27:29Z",
+      "side": 1,
+      "message": "Don\u0027t try and override clang-format. It\u0027s frustrating it sometimes leaves stuff unreadable, but it will be auto-formatted at some point anyway.\n\n\nPlus, clang-format failing causes CI not to run other tests (asking this to be fixed but in the meantime...)",
+      "parentUuid": "c0d63760_6a502895",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28258f12_dbf9621e",
         "filename": "src/support/exports.c",
         "patchSetId": 10
@@ -242,6 +313,24 @@
       "side": 1,
       "message": "Not related to current TLS changes",
       "parentUuid": "28258f12_dbf9621e",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1576d618_71bf197d",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2201,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T21:27:29Z",
+      "side": 1,
+      "message": "Hmm I\u0027ll ask Lior for help.",
+      "parentUuid": "a307d20f_d8ea76b6",
       "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -283,6 +372,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f410107_a2c2251d",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2204,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T21:27:29Z",
+      "side": 1,
+      "message": "Hmm I\u0027ll ask Lior for help.",
+      "parentUuid": "defdb355_d184dc4e",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ab5f8ca_2b0fca71",
         "filename": "src/support/exports.c",
         "patchSetId": 10
@@ -312,6 +419,24 @@
       "side": 1,
       "message": "Clang-format suggesting to change readable code to something.. So not considering changing the code according to clang-format.",
       "parentUuid": "1ab5f8ca_2b0fca71",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c302adf3_4f432563",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2221,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-13T21:27:29Z",
+      "side": 1,
+      "message": "Hmm I\u0027ll ask Lior for help.",
+      "parentUuid": "be7430f2_f755082f",
       "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
