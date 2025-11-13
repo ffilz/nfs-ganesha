@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "071026f0_6711afa9",
+        "filename": "src/include/9p.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-13T10:30:54Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com\n\nAck. You are absolutely right that changing it to a pointer (char *) breaks the intended memory layout.\nThe issue is that C++ compilers do not support Flexible Array Members (FAMs).\nSince the .cc files only include the header and do not actually use the structure, the most reliable cross-language workaround is using a one-element array placeholder to satisfy the C++ compiler:\n#ifdef __cplusplus\n\tchar xattr_content[1]; // Placeholder for C++ compatibility\n#else\n\tchar xattr_content[]; // Standard FAM for C compilation\n#endif\n\nthis approach maintains the memory layout required by the C files while providing a valid, near-identical size placeholder for the C++ compiler.",
+      "parentUuid": "decf2512_388ef8eb",
+      "revId": "2193e98fc27c48d71050175e19b81d97782048f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79f71eee_cd3a4adb",
         "filename": "src/include/gsh_refstr.h",
         "patchSetId": 1
