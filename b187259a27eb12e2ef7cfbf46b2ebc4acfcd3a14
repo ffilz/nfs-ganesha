@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6789bc92_2d363a5f",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t   \"[TLS] Auth not allowed on Export_Id %\" PRId32",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf28eeb_c1526938",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\"[TLS] NFS auth not allowed on Export_Id %\" PRId32",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "952fd13c_5a823036",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd91528b_7d08da96",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/include/gsh_tls.h\u0027, please use \u0027/*\u0027 instead\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8024bed_72a8fa6b",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1043451a_d111de5c",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2101,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tCONFIG_LIST_TOK(\"none\", 0),\n    - \tCONFIG_LIST_TOK(\"tls\", EXPORT_OPTION_TLS),\n    - \tCONFIG_LIST_TOK(\"mtls\", EXPORT_OPTION_MTLS),\n    - \tCONFIG_LIST_EOL\n    - #define CONF_XPRT_SEC_PARAM(_struct_, _perms_)                                 \\\n    - \tCONF_ITEM_ENUM_BITS_SET(\"XprtSec\",                                     \\\n    - \t\t\t\tEXPORT_OPTION_XPRT_DEFAULTS,                   \\\n    - \t\t\t\tEXPORT_OPTION_XPRT_TYPES, xprt_sec_types,      \\\n    - \t\t\t\t_struct_, _perms_.options,                     \\\n    - \t\t\t\t_perms_.set),\n→ to be replaced with:\n    + \tCONFIG_LIST_TOK(\"none\", 0), CONFIG_LIST_TOK(\"tls\", EXPORT_OPTION_TLS),\n    + \tCONFIG_LIST_TOK(\"mtls\", EXPORT_OPTION_MTLS), CONFIG_LIST_EOL\n    + #define CONF_XPRT_SEC_PARAM(_struct_, _perms_)                            \\\n    + \tCONF_ITEM_ENUM_BITS_SET(\"XprtSec\", EXPORT_OPTION_XPRT_DEFAULTS,   \\\n    + \t\t\t\tEXPORT_OPTION_XPRT_TYPES, xprt_sec_types, \\\n    + \t\t\t\t_struct_, _perms_.options, _perms_.set),",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28258f12_dbf9621e",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tCONF_ITEM_BOOLBIT_SET(\"PrivilegedPort\", false,                           \\\n    - \t\t\t\t      EXPORT_OPTION_PRIVILEGED_PORT, _struct_,           \\\n    - \t\t\t\t      _perms_.options, _perms_.set),                     \\\n→ to be replaced with:\n    + \t\t\tCONF_ITEM_BOOLBIT_SET(\"PrivilegedPort\", false,                   \\\n    + \t\t\t\t\t      EXPORT_OPTION_PRIVILEGED_PORT,             \\\n    + \t\t\t\t\t      _struct_, _perms_.options,                 \\\n    + \t\t\t\t\t      _perms_.set),                              \\",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04b6c871_6442b34f",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2204,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\tCONF_XPRT_SEC_PARAM(_struct_, _perms_)                                   \\",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab5f8ca_2b0fca71",
+        "filename": "src/support/exports.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2221,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-13T13:56:23Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - #define CONF_PSEUDOFS_PERMS(_struct_, _perms_)                                 \\\n    - \t/* Note: Access_Type defaults to MD READ on purpose */                 \\\n    - \t/*       MD READ or NONE are the only access that makes sense. */      \\\n    - \tCONF_ITEM_ENUM_BITS_SET(\"Access_Type\", EXPORT_OPTION_MD_READ_ACCESS,   \\\n    - \t\t\t\tEXPORT_OPTION_ACCESS_MASK, access_types,       \\\n    - \t\t\t\t_struct_, _perms_.options, _perms_.set),       \\\n    - \t\tCONF_ITEM_LIST_BITS_SET(\"Transports\", EXPORT_OPTION_TCP,       \\\n    - \t\t\t\t\tEXPORT_OPTION_TRANSPORTS, transports,  \\\n    - \t\t\t\t\t_struct_, _perms_.options,             \\\n    - \t\t\t\t\t_perms_.set),                          \\\n    - \t\tCONF_ITEM_LIST_BITS_SET(\"SecType\", EXPORT_OPTION_AUTH_TYPES,   \\\n    - \t\t\t\t\tEXPORT_OPTION_AUTH_TYPES, sec_types,   \\\n    - \t\t\t\t\t_struct_, _perms_.options,             \\\n    - \t\t\t\t\t_perms_.set),                          \\\n    - \t\tCONF_XPRT_SEC_PARAM(_struct_, _perms_)                         \\\n    - \t\tCONF_ITEM_BOOLBIT_SET(\"PrivilegedPort\", false,                 \\\n    - \t\t\t\t      EXPORT_OPTION_PRIVILEGED_PORT, _struct_, \\\n    - \t\t\t\t      _perms_.options, _perms_.set)\n→ to be replaced with:\n    + #define CONF_PSEUDOFS_PERMS(_struct_, _perms_)                                \\\n    + \t/* Note: Access_Type defaults to MD READ on purpose */                \\\n    + \t/*       MD READ or NONE are the only access that makes sense. */     \\\n    + \tCONF_ITEM_ENUM_BITS_SET(\"Access_Type\", EXPORT_OPTION_MD_READ_ACCESS,  \\\n    + \t\t\t\tEXPORT_OPTION_ACCESS_MASK, access_types,      \\\n    + \t\t\t\t_struct_, _perms_.options, _perms_.set),      \\\n    + \t\tCONF_ITEM_LIST_BITS_SET(\"Transports\", EXPORT_OPTION_TCP,      \\\n    + \t\t\t\t\tEXPORT_OPTION_TRANSPORTS, transports, \\\n    + \t\t\t\t\t_struct_, _perms_.options,            \\\n    + \t\t\t\t\t_perms_.set),                         \\\n    + \t\tCONF_ITEM_LIST_BITS_SET(\"SecType\", EXPORT_OPTION_AUTH_TYPES,  \\\n    + \t\t\t\t\tEXPORT_OPTION_AUTH_TYPES, sec_types,  \\\n    + \t\t\t\t\t_struct_, _perms_.options,            \\\n    + \t\t\t\t\t_perms_.set),                         \\\n    + \t\tCONF_XPRT_SEC_PARAM(_struct_, _perms_)                        \\\n    + \t\t\tCONF_ITEM_BOOLBIT_SET(\"PrivilegedPort\", false,        \\\n    + \t\t\t\t\t      EXPORT_OPTION_PRIVILEGED_PORT,  \\\n    + \t\t\t\t\t      _struct_, _perms_.options,      \\\n    + \t\t\t\t\t      _perms_.set)",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
