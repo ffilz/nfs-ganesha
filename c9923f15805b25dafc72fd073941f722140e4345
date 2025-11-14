@@ -87,6 +87,24 @@
       "message": "the fsal only needs an op when -ganesha- code (which is general to all fsals) is going to call it.  is the problem that you\u0027re trying to call method exported in your private FSAL driver, from a private recovery driver?",
       "revId": "c9923f15805b25dafc72fd073941f722140e4345",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "799abd05_0439deac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038959
+      },
+      "writtenOn": "2025-11-14T06:25:53Z",
+      "side": 1,
+      "message": "Yes, the private op is called by our recovery driver. However, we rely on mdcache (stackable FSAL) so that recovery and normal request paths share the same obj_hdl. Recovery sets flags on that handle to block client access while the object may be inconsistent.\nfsal_private_op provides a generic entry point that lets the recovery code invoke our FSAL logic through the same stacked FSAL layers.",
+      "parentUuid": "dc91669d_b8fd6c05",
+      "revId": "c9923f15805b25dafc72fd073941f722140e4345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
