@@ -35,6 +35,9 @@
 #include <streambuf>
 #include <mutex>
 #include "gsh_config.h"
+#include <vector>
+#include <map>
+
 #ifdef HAVE_PROCPS
 #include <proc/readproc.h>
 #endif
@@ -53,6 +56,9 @@
 static const char kStatus[] = "status";
 static const char kSuccess[] = "success";
 static const char kFailure[] = "failure";
+
+using MetricFamily = prometheus::MetricFamily;
+using MetricFamilies = std::vector<MetricFamily>;
 
 namespace ganesha_monitoring
 {
@@ -152,6 +158,53 @@ static bool is_metric_empty(prometheus::Metric::Type type,
 		return false;
 	}
 }
+
+// Restructuring metric names by adding the "nfs_" prefix while
+// performing specific substitutions:
+// - Replaces double underscores "__" with a single underscore "_"
+// - Changes "mdcache_cache" to "mdcache"
+// - Converts "nfsv4" to "v4"
+// Returns a new MetricFamilies object with the renamed metric family
+#ifndef LEGACY_METRICS
+static MetricFamilies rename_metric_names(const MetricFamilies &Families)
+{
+	// Cleaned hidden chars. Order matters: replace specific phrases before generic "__".
+	static constexpr
+		std::array<std::pair<std::string_view, std::string_view>, 3>
+			replacements = { { { "mdcache_cache", "mdcache" },
+					   { "nfsv4", "v4" },
+					   { "__", "_" } } };
+
+	MetricFamilies latest_families;
+	latest_families.reserve(Families.size());
+
+	for (const auto &family : Families) {
+		// 1. Start with the required prefix
+		std::string new_name = family.name;
+		if (family.name.rfind("nfs_", 0) != 0)
+			new_name.insert(0, "nfs_");
+
+		// 2. Perform substitutions on the combined string
+		for (const auto &[from, to] : replacements) {
+			size_t pos = new_name.find(from);
+			while (pos != std::string::npos) {
+				new_name.replace(pos, from.size(), to);
+				// Advance by to.size() to avoid checking inside the newly inserted text
+				pos = new_name.find(from, pos + to.size());
+			}
+		}
+
+		// 3. Move the family metadata but swap in the newly generated name string
+		MetricFamily mf =
+			family; // If MetricFamily supports moving its internals, leverage that instead
+		mf.name = std::move(new_name);
+
+		latest_families.push_back(std::move(mf));
+	}
+
+	return latest_families;
+}
+#endif
 
 // Removes empty metrics from family
 // Most metrics are empty or rarly used (for example consider
@@ -289,7 +342,11 @@ void *PrometheusExposer::server_thread(void *arg)
 		const uint64_t start_time = now_mono_ns();
 		recv(client_fd, buffer, sizeof(buffer), 0);
 
-		auto families = exposer->registry_.Collect();
+		MetricFamilies families = exposer->registry_.Collect();
+#ifndef LEGACY_METRICS
+		MetricFamilies updated_families = rename_metric_names(families);
+		families = updated_families;
+#endif
 		for (auto &family : families) {
 			compact_family(family);
 		}

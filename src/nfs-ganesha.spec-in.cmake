@@ -125,6 +125,9 @@ Requires: openSUSE-release
 @BCOND_MONITORING@ monitoring
 %global use_monitoring %{on_off_switch monitoring}
 
+@BCOND_MONITORING@ legacy_metrics
+%global legacy_metrics %{on_off_switch legacy_metrics}
+
 %global dev_version %{lua: s = string.gsub('@GANESHA_EXTRA_VERSION@', '^%-', ''); s2 = string.gsub(s, '%-', '.'); print((s2 ~= nil and s2 ~= '') and s2 or "0.1") }
 
 @BCOND_NFS_RDMA@ nfs_rdma
@@ -596,6 +599,7 @@ cmake3 .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DUSE_PRIO_INHERIT=%{use_prio_inherit}          \
 	-DUSE_OPENSSL=%{use_openssl}                    \
 	-DUSE_GNUTLS=%{use_gnutls}                      \
+	-DLEGACY_METRICS=%{legacy_metrics}		\
 	-DUSE_9P_RDMA=%{use_rdma}			\
 	-DUSE_LTTNG=%{use_lttng}			\
 	-DUSE_UNWIND=%{use_unwind}			\
