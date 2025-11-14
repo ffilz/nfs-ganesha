@@ -369,26 +369,34 @@ static nfsstat4 open4_claim_deleg(OPEN4args *arg, compound_data_t *data)
 	}
 
 find_state:
-	found_state = nfs4_State_Get_Pointer(rcurr_state->other);
+	/* Validate the delegation stateid before honoring
+	 * CLAIM_DELEGATE_CUR_FH.
+	 */
+	status = nfs4_Check_Stateid(rcurr_state, data->current_obj,
+				    &found_state, data, STATEID_NO_SPECIAL, 0,
+				    false, "OPEN(CLAIM_DELEGATE)");
+	if (status != NFS4_OK)
+		return status;
 
-	if (found_state == NULL) {
-		LogDebug(COMPONENT_NFS_V4,
-			 "state not found with CLAIM_DELEGATE_CUR");
+	if (found_state == NULL ||
+	    found_state->state_type != STATE_TYPE_DELEG) {
+		if (found_state != NULL)
+			dec_state_t_ref(found_state);
+
+		LogFullDebug(COMPONENT_NFS_V4,
+			     "CLAIM_DELEGATE_CUR stateid is not a delegation");
 		return NFS4ERR_BAD_STATEID;
-	} else {
-		/* FIXME: vet stateid here */
-		if (isFullDebug(COMPONENT_NFS_V4)) {
-			char str[LOG_BUFF_LEN] = "\0";
-			struct display_buffer dspbuf = { sizeof(str), str,
-							 str };
-
-			display_stateid(&dspbuf, found_state);
-
-			LogFullDebug(COMPONENT_NFS_V4, "found matching %s",
-				     str);
-		}
-		dec_state_t_ref(found_state);
 	}
+
+	if (isFullDebug(COMPONENT_NFS_V4)) {
+		char str[LOG_BUFF_LEN] = "\0";
+		struct display_buffer dspbuf = { sizeof(str), str, str };
+
+		display_stateid(&dspbuf, found_state);
+
+		LogFullDebug(COMPONENT_NFS_V4, "found matching %s", str);
+	}
+	dec_state_t_ref(found_state);
 
 	LogFullDebug(COMPONENT_NFS_V4, "done with CLAIM_DELEGATE_CUR");
 
