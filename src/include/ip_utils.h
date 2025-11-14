@@ -75,6 +75,12 @@ int get_port(sockaddr_t *);
 
 sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4);
 bool is_loopback(sockaddr_t *addr);
+bool is_inaddrany(sockaddr_t *addr);
+
+static inline bool is_af_local(sockaddr_t *addr)
+{
+	return addr->ss_family == AF_LOCAL;
+}
 
 int display_sockaddr_port(struct display_buffer *dspbuf, const sockaddr_t *addr,
 			  bool ignore_port);
