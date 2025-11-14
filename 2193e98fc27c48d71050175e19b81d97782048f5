@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38bdfa3a_8c598b9f",
+        "filename": "src/include/9p.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-14T00:49:07Z",
+      "side": 1,
+      "message": "In prometeus_exposer.cc file we indeed indirectly depend on the definitions in nfs_core.h. Furthermore, nfs_core.h includes 9p.h",
+      "parentUuid": "458ed964_b146f7b7",
+      "revId": "2193e98fc27c48d71050175e19b81d97782048f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79f71eee_cd3a4adb",
         "filename": "src/include/gsh_refstr.h",
         "patchSetId": 1
