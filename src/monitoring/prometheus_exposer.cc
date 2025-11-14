@@ -35,6 +35,9 @@
 #include <streambuf>
 #include <mutex>
 #include "gsh_config.h"
+#include <vector>
+#include <map>
+
 #ifdef HAVE_PROCPS
 #include <proc/readproc.h>
 #endif
@@ -53,6 +56,9 @@
 static const char kStatus[] = "status";
 static const char kSuccess[] = "success";
 static const char kFailure[] = "failure";
+
+using MetricFamily = prometheus::MetricFamily;
+using MetricFamilies = std::vector<MetricFamily>;
 
 namespace ganesha_monitoring
 {
@@ -153,6 +159,39 @@ static bool is_metric_empty(prometheus::Metric::Type type,
 	}
 }
 
+// Restructuring metric names by adding the "nfs_" prefix while
+// performing specific substitutions:
+// - Replaces double underscores "__" with a single underscore "_"
+// - Changes "mdcache_cache" to "mdcache"
+// - Converts "nfsv4" to "v4"
+#ifndef LEGACY_METRICS
+static MetricFamilies duplicate_metrics(MetricFamilies &Families)
+{
+	static const std::map<std::string, std::string> replacement_map = {
+		{ "mdcache_cache", "mdcache" }, { "nfsv4", "v4" }, { "__", "_" }
+	};
+	MetricFamilies latest_families;
+	auto sanitize_and_prefix = [&](std::string name) {
+		for (const auto &[key, val] : replacement_map) {
+			size_t pos = name.find(key);
+			while (pos != std::string::npos) {
+				name.replace(pos, key.size(), val);
+				pos = name.find(key, pos + val.size());
+			}
+		}
+		name = "nfs_" + name; // Unconditionally add prefix
+		return name;
+	};
+	for (const auto &family : Families) {
+		latest_families.push_back([&family, &sanitize_and_prefix]() {
+			MetricFamily mf = family;
+			mf.name = sanitize_and_prefix(mf.name);
+			return mf;
+		}());
+	}
+	return latest_families;
+}
+#endif
 // Removes empty metrics from family
 // Most metrics are empty or rarly used (for example consider
 // nfsv4__op_latency_bucket{op="REMOVEXATTR",status="NFS4ERR_REPLAY"})
@@ -289,7 +328,11 @@ void *PrometheusExposer::server_thread(void *arg)
 		const uint64_t start_time = now_mono_ns();
 		recv(client_fd, buffer, sizeof(buffer), 0);
 
-		auto families = exposer->registry_.Collect();
+		MetricFamilies families = exposer->registry_.Collect();
+#ifndef LEGACY_METRICS
+		MetricFamilies updated_families = duplicate_metrics(families);
+		families = updated_families;
+#endif
 		for (auto &family : families) {
 			compact_family(family);
 		}
