@@ -35,6 +35,9 @@
 #include <streambuf>
 #include <mutex>
 #include "gsh_config.h"
+#include <vector>
+#include <map>
+
 #ifdef HAVE_PROCPS
 #include <proc/readproc.h>
 #endif
@@ -53,6 +56,9 @@
 static const char kStatus[] = "status";
 static const char kSuccess[] = "success";
 static const char kFailure[] = "failure";
+
+using MetricFamily = prometheus::MetricFamily;
+using MetricFamilies = std::vector<MetricFamily>;
 
 namespace ganesha_monitoring
 {
@@ -152,6 +158,42 @@ static bool is_metric_empty(prometheus::Metric::Type type,
 		return false;
 	}
 }
+
+// Restructuring metric names by adding the "nfs_" prefix while
+// performing specific substitutions:
+// - Replaces double underscores "__" with a single underscore "_"
+// - Changes "mdcache_cache" to "mdcache"
+// - Converts "nfsv4" to "v4"
+// Returns a new MetricFamilies object with the renamed metric family
+#ifndef LEGACY_METRICS
+static MetricFamilies rename_metric_names(const MetricFamilies &Families)
+{
+	static constexpr
+		std::array<std::pair<std::string_view, std::string_view>, 3>
+			replacements = { { { "mdcache_cache", "mdcache" },
+					   { "nfsv4", "v4" },
+					   { "__", "_" } } };
+
+	MetricFamilies latest_families;
+	latest_families.reserve(Families.size());
+
+	for (const auto &family : Families) {
+		MetricFamily mf = family;
+
+		for (const auto &[from, to] : replacements) {
+			size_t pos = mf.name.find(from);
+			while (pos != std::string::npos) {
+				mf.name.replace(pos, from.size(), to);
+				pos = mf.name.find(from, pos + to.size());
+			}
+		}
+
+		mf.name = "nfs_" + mf.name;
+		latest_families.push_back(mf);
+	}
+	return latest_families;
+}
+#endif
 
 // Removes empty metrics from family
 // Most metrics are empty or rarly used (for example consider
@@ -289,7 +331,11 @@ void *PrometheusExposer::server_thread(void *arg)
 		const uint64_t start_time = now_mono_ns();
 		recv(client_fd, buffer, sizeof(buffer), 0);
 
-		auto families = exposer->registry_.Collect();
+		MetricFamilies families = exposer->registry_.Collect();
+#ifndef LEGACY_METRICS
+		MetricFamilies updated_families = rename_metric_names(families);
+		families = updated_families;
+#endif
 		for (auto &family : families) {
 			compact_family(family);
 		}
