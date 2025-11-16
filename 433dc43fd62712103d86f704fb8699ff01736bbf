@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \tint64_t __attribute__((unused))\n    - \tnew_refcnt \u003d atomic_dec_int64_t(\u0026client-\u003erefcnt);\n→ to be replaced with:\n    + \tint64_t __attribute__((unused)) new_refcnt \u003d\n    + \t\tatomic_dec_int64_t(\u0026client-\u003erefcnt);",
       "revId": "433dc43fd62712103d86f704fb8699ff01736bbf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16993d68_5f97d8fb",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2025-11-16T21:23:08Z",
+      "side": 1,
+      "message": "Is this just differences between versions of `clang-format`?",
+      "parentUuid": "e692ab96_b581b409",
+      "revId": "433dc43fd62712103d86f704fb8699ff01736bbf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
