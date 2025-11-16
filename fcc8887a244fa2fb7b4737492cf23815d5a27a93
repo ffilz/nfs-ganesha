@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af1b27b2_27c89d51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2025-11-16T21:30:29Z",
+      "side": 1,
+      "message": "An alternative would be to rename `cmp_sockaddr()` to `sockaddr_same()`, to keep a version that returns a `bool` (and actually make the return type `bool`).  That is possibly a little more readable than always having to compare to `0`.",
+      "revId": "fcc8887a244fa2fb7b4737492cf23815d5a27a93",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
