@@ -67,6 +67,40 @@
       "message": "ERROR: trailing whitespace\n+int vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp) $",
       "revId": "d8d283e92a41c6a29de3634c44aa233b94f30192",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7445baa_27013e90",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-17T09:12:57Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+int vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp) $",
+      "revId": "d8d283e92a41c6a29de3634c44aa233b94f30192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb1a9d9_1ac4650c",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-17T09:12:57Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - int vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp) \n→ to be replaced with:\n    + int vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp)",
+      "revId": "d8d283e92a41c6a29de3634c44aa233b94f30192",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
