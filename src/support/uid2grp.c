@@ -143,12 +143,14 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 			    "getgrouplist returned {}, ngroups={} ", ret,
 			    ngroups);
 
-	if (ret != 0) {
+	if (ret < 0) {
 		LogEvent(COMPONENT_IDMAPPER,
-			 "getgrouplist for user: %s failed, errno: %d, retrying", user, ret);
-		GSH_AUTO_TRACEPOINT(uid2grp, getgrouplist_failed, TRACE_INFO,
-				    "getgrouplist for user: {} failed, errno: {}, retrying",
-				    TP_STR(user), ret);
+			 "getgrouplist for user: %s failed, errno: %d, retrying",
+			 user, ret);
+		GSH_AUTO_TRACEPOINT(
+			uid2grp, getgrouplist_failed, TRACE_INFO,
+			"getgrouplist for user: {} failed, errno: {}, retrying",
+			TP_STR(user), ret);
 
 		gsh_free(groups);
 
@@ -167,7 +169,7 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 			IDMAPPING_USERNAME_TO_GROUPLIST, IDMAPPING_PWUTILS,
 			ret == 0, &s_time, &e_time);
 
-		if (ret != 0) {
+		if (ret < 0) {
 			LogWarn(COMPONENT_IDMAPPER,
 				"getgrouplist for user:%s failed, ngroups: %d, errno: %d",
 				user, ngroups, ret);
