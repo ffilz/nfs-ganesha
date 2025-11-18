@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9423ed1_069d96ba",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3159,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b8c905f7_38f2f121",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6ca4537_bbf414ec",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "No need for this, the caller already set client_conditional_flag to false",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41296866_f021ada4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3185,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c6ca4537_bbf414ec",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72c98615_1a955b81",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3257,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4605dbf0_bfb2c8f5",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a05745a_b357fb18",
@@ -82,6 +136,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "Since this is the only caller, the code will be easier to read if it is just included here instead of a separare function.",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10176570_a5a98cbf",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3367,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9a05745a_b357fb18",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0fa471_6e6b5797",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c9aaea2_07370ed9",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "457f711e_83cb177d",
@@ -116,6 +206,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "Add a comment that these are protected by cond_log_rwlock",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a4e0d0_dc0b6b67",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "457f711e_83cb177d",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +245,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1128be9e_f4d5bf6e",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "92695b36_bd743f20",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "762a33a0_680b5c7b",
@@ -150,6 +276,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "No need for this, use noop_conf_init instead.",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bab71ced_7526afa6",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2448,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "762a33a0_680b5c7b",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -171,6 +315,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e293d2f9_6bc5a7a0",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2514,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0f6b17de_a4e100ad",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f38028a1_901c363c",
@@ -184,6 +346,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "On the following, use noop_conf_init instead of adding an identical init function.",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42e69966_5babcb72",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f38028a1_901c363c",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -205,6 +385,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1023bd0a_b9885209",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3817,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "That\u0027s right, added a logic to remove enrty if there is exact of CIDR provided with existing one in the list, so if deletion is requested for specific IP which belongs to any existing subnet then entry will not get removed until an exact match provided for deletion.",
+      "parentUuid": "1e64a9df_1784bf47",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "176c8e7c_d3cf0f34",
@@ -218,6 +416,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "Why do you need this? You already have dbus_cond_log_prop_set",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a976a15_67dfe5ed",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3861,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "176c8e7c_d3cf0f34",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -239,6 +455,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bcc30fd_d55e7e6b",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3921,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8e73bbb5_b833baa5",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17374fe6_f189b970",
@@ -252,6 +486,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "Why do you need this? You already have dbus_cond_log_prop_set",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ce0aa7_53bc50df",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4091,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "17374fe6_f189b970",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -273,6 +525,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc77314_674d26ff",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4097,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c92ea36_c838838d",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abedee4f_0bc66b5c",
@@ -290,6 +560,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87b5fb89_d9b35489",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4120,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "abedee4f_0bc66b5c",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e444a43_3220a907",
@@ -303,6 +591,24 @@
       "writtenOn": "2025-09-18T23:29:33Z",
       "side": 1,
       "message": "What is the purpose of this change? If there is a problem with cidr_from_str, we should fix it.",
+      "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb4694d_77a87024",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-18T11:01:20Z",
+      "side": 1,
+      "message": "Removed, not required anymore.",
+      "parentUuid": "2e444a43_3220a907",
       "revId": "ca43cde560992cb5e8916b535e4f1724cccd5372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
