@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20f35976_5a1cd96d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "There are ip_utils files included in this patch that do not belong. Make sure you have rebased on next.",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2531feb_129eeae2",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 3
@@ -14,6 +31,24 @@
       "writtenOn": "2025-11-18T12:33:22Z",
       "side": 1,
       "message": "WARNING: externs should be avoided in .c files\n+extern struct export_id_list *",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4edc52_480553da",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Please resolve to avoid these externs",
+      "parentUuid": "a2531feb_129eeae2",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -37,6 +72,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8546a43_06729635",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2699,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Please make the requested change",
+      "parentUuid": "74a95a93_e72200e4",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d5465c1_25290452",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2701,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "I don\u0027t think this change should be part of this patch...",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afa02394_185ea0f0",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 3
@@ -48,6 +118,58 @@
       "writtenOn": "2025-11-18T12:33:22Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \treturn (op_ctx \u0026\u0026\n    - \t\t(op_ctx-\u003eclient_conditional_log ||\n    - \t\t op_ctx-\u003eexport_conditional_log));\n→ to be replaced with:\n    + \treturn (op_ctx \u0026\u0026 (op_ctx-\u003eclient_conditional_log ||\n    + \t\t\t   op_ctx-\u003eexport_conditional_log));",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4efa446f_9f038540",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3209,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Please resolve",
+      "parentUuid": "afa02394_185ea0f0",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1edbe0e_75e65dfc",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Why did you remove the unlikely? This is usually used for debug messages so should be unlikely.",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eddfcd3e_d2b81a99",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "This file definitely should not be in this patch...\n\nYou may need to properly rebase your patch on next",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +193,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95d5d9e6_0e372a0f",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Please resolve",
+      "parentUuid": "ba60752d_c3aa09f1",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "636b29ec_d4b7e030",
         "filename": "src/include/log.h",
         "patchSetId": 3
@@ -88,6 +228,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba26fc4d_f81afe25",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Please resolve",
+      "parentUuid": "636b29ec_d4b7e030",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86f91474_66235e58",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Please retain the likely and unlikely, or is that handled by the likely/unlikely in the return from isLevel?",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a125c1d_c4bf6afc",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 3
@@ -99,6 +274,41 @@
       "writtenOn": "2025-11-18T12:33:22Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - struct gsh_client *lookup_client(DBusMessageIter *args,\n    - \t\t\t\t char **errormsg, sockaddr_t *hostaddr)\n→ to be replaced with:\n    + struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg,\n    + \t\t\t\t sockaddr_t *hostaddr)",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f3c379_37702060",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "Please resolve",
+      "parentUuid": "7a125c1d_c4bf6afc",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59296a93_27aa7a57",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-18T23:15:31Z",
+      "side": 1,
+      "message": "This should not be in this patch",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
