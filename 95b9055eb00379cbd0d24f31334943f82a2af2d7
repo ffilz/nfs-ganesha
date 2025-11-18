@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2531feb_129eeae2",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-18T12:33:22Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+extern struct export_id_list *",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a95a93_e72200e4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2699,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-18T12:33:22Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tLogFullDebug(COMPONENT_FSAL, \"Open State \u003d %p, State Type \u003d %d\",\n    - \t\t     state, state-\u003estate_type);\n→ to be replaced with:\n    + \tLogFullDebug(COMPONENT_FSAL, \"Open State \u003d %p, State Type \u003d %d\", state,\n    + \t\t     state-\u003estate_type);",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa02394_185ea0f0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3209,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-18T12:33:22Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \treturn (op_ctx \u0026\u0026\n    - \t\t(op_ctx-\u003eclient_conditional_log ||\n    - \t\t op_ctx-\u003eexport_conditional_log));\n→ to be replaced with:\n    + \treturn (op_ctx \u0026\u0026 (op_ctx-\u003eclient_conditional_log ||\n    + \t\t\t   op_ctx-\u003eexport_conditional_log));",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba60752d_c3aa09f1",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-18T12:33:22Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - struct base_client_entry *\n    - conditional_logging_client_match(sockaddr_t *sockaddr);\n→ to be replaced with:\n    + struct base_client_entry *conditional_logging_client_match(sockaddr_t *sockaddr);",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636b29ec_d4b7e030",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-18T12:33:22Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tconditional_component_log_level[comp] \u003e\u003d lvl);\n→ to be replaced with:\n    + \t\t\t\t\t conditional_component_log_level[comp] \u003e\u003d\n    + \t\t\t\t\t lvl);",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a125c1d_c4bf6afc",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-18T12:33:22Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - struct gsh_client *lookup_client(DBusMessageIter *args,\n    - \t\t\t\t char **errormsg, sockaddr_t *hostaddr)\n→ to be replaced with:\n    + struct gsh_client *lookup_client(DBusMessageIter *args, char **errormsg,\n    + \t\t\t\t sockaddr_t *hostaddr)",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
