@@ -58,6 +58,7 @@
 
 #include "log.h"
 #include "abstract_mem.h"
+#include "common_utils.h"
 
 struct cidr_addr {
 	sockaddr_t ip_addr;
@@ -462,7 +463,10 @@ CIDR *cidr_from_str(const char *addr)
 	char *mask_str = NULL;
 	int ret;
 
-	strcpy(addr_str, addr);
+	if (strlcpy(addr_str, addr, sizeof(addr_str)) >= sizeof(addr_str)) {
+		errno = ENAMETOOLONG;
+		return NULL;
+	}
 
 	slash = strchr(addr_str, '/');
 
