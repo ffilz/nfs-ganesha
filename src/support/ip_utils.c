@@ -623,7 +623,7 @@ CIDR *cidr_from_inaddr(const struct in_addr *addr)
 
 	cidr = cidr_alloc();
 	memcpy(&((struct sockaddr_in *)&cidr->ip_addr)->sin_addr.s_addr, addr,
-	       sizeof(sockaddr_t));
+	       sizeof(struct in_addr));
 	cidr->ip_addr.ss_family = AF_INET;
 	cidr->mask = 32;
 
