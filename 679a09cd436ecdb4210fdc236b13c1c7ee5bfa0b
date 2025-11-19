@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be9f4315_b5d73bca",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-19T13:45:00Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        }$",
+      "revId": "679a09cd436ecdb4210fdc236b13c1c7ee5bfa0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5918472b_3102ebbe",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-19T13:45:00Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    -         }\n→ to be replaced with:\n    + \t}",
+      "revId": "679a09cd436ecdb4210fdc236b13c1c7ee5bfa0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc8c576a_d199ffcc",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-19T13:45:00Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        }$",
+      "revId": "679a09cd436ecdb4210fdc236b13c1c7ee5bfa0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
