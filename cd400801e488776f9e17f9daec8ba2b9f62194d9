@@ -191,6 +191,24 @@
       "message": "Here we are updating the CLIENT bucket metrics but I don\u0027t see EXPORT bucket metrics getting updated in PerExport_PerClient mode.",
       "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e23df6_294d42df",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2771,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-19T13:21:06Z",
+      "side": 1,
+      "message": "In PEPC mode, We register and update the metrics entirely through the Client QoS Handler. \nWhen I/O consumption occurs in PEPC mode, we update the client\u0027s QoS handler values (such as data_consumed and iops_consumed) accordingly.\n\nFor example, the metric\nQoS_per_pepc_readbucket_bw_info{export_clientid\u003d\"/home/sreedhar/nfs_ganesha/nfs_mount2/exp1_::ffff:10.8.159.40\",max_bw_of_pepc\u003d\"6242880\"}\nwhich includes the specific client and export in the label part and reflects the consumption managed by that central client handler.",
+      "parentUuid": "413a5443_133cdd1e",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
