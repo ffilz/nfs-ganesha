@@ -2688,11 +2688,11 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 	struct fsal_fd *state_fd;
 	struct state_t *openstate;
 
-	LogFullDebug(COMPONENT_FSAL, "Open State = %p, State Type = %d", state,
-		     state->state_type);
-
 	if (state == NULL)
 		goto global;
+
+	LogFullDebug(COMPONENT_FSAL, "Open State = %p, State Type = %d", state,
+		     state->state_type);
 
 	/* Handle delegation states: if this is a delegation (read or write),
 	 * retrieve the associated openstate. Use the fd from that openstate
