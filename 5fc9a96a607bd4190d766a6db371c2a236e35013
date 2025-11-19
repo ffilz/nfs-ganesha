@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb45e41f_00bf3392",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-19T12:59:26Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tqos_bucket_t *bucket \u003d qos_get_bw_bucket(qos_class, op_type);\n+\t\tmonitoring__gauge_set(bucket-\u003ebw_metric_handler,",
+      "revId": "5fc9a96a607bd4190d766a6db371c2a236e35013",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
