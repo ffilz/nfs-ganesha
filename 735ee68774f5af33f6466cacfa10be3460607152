@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ddebad_500380d4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T08:21:59Z",
+      "side": 1,
+      "message": "WARNING: externs should be avoided in .c files\n+extern struct export_id_list *",
+      "revId": "735ee68774f5af33f6466cacfa10be3460607152",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f7ccfc6_533694a0",
+        "filename": "src/include/log.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T08:21:59Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+struct base_client_entry *conditional_logging_client_match(sockaddr_t *sockaddr);",
+      "revId": "735ee68774f5af33f6466cacfa10be3460607152",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d81ad56_429d99c4",
+        "filename": "src/include/log.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T08:21:59Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t conditional_component_log_level[comp] \u003e\u003d",
+      "revId": "735ee68774f5af33f6466cacfa10be3460607152",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
