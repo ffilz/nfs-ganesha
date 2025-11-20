@@ -33,6 +33,42 @@
       "message": "clang-format expects formatting for these lines:\n    - \tLogWarn(COMPONENT_FSAL, \"Released %d extra file handles.\", handle_count);\n→ to be replaced with:\n    + \tLogWarn(COMPONENT_FSAL, \"Released %d extra file handles.\",\n    + \t\thandle_count);",
       "revId": "d30c1dbaa4c5a35b37eca4e722e9519ee33fc70c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c4cb9f_a0ebe844",
+        "filename": "src/FSAL/fsal_destroyer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-11-20T07:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bba8077a_207c7d46",
+      "revId": "d30c1dbaa4c5a35b37eca4e722e9519ee33fc70c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0742df3_f0e67d7d",
+        "filename": "src/FSAL/fsal_destroyer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2025-11-20T07:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df22de4_19083e2d",
+      "revId": "d30c1dbaa4c5a35b37eca4e722e9519ee33fc70c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
