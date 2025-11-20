@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b414017_61d32ce6",
+        "filename": "src/include/log.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T11:10:17Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\treturn (lvl \u003d\u003d NIV_FULL_DEBUG) ?\n    - \t\t\tlikely(conditional_component_log_level[comp] \u003e\u003d\n    - \t\t\t\tlvl) :\n    - \t\t\tunlikely(conditional_component_log_level[comp] \u003e\u003d\n    - \t\t\t\tlvl);\n→ to be replaced with:\n    + \t\treturn (lvl \u003d\u003d NIV_FULL_DEBUG)\n    + \t\t\t       ? likely(conditional_component_log_level[comp] \u003e\u003d\n    + \t\t\t\t\tlvl)\n    + \t\t\t       : unlikely(\n    + \t\t\t\t\t conditional_component_log_level[comp] \u003e\u003d\n    + \t\t\t\t\t lvl);",
+      "revId": "d1f1e82c1db2e951b65cc630ab5ba69a175887b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
