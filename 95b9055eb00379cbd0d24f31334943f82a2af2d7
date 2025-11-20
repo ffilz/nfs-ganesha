@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0930e4ac_87b20b6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Frank I am using the CIDR structure which is currently defined in ip_utils.h. I have shifted that definition from ip_utils.h to ip_utils.c, that\u0027s why these files got included in this patch.",
+      "parentUuid": "20f35976_5a1cd96d",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2531feb_129eeae2",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 3
@@ -90,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebca42bd_3f857685",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2699,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f8546a43_06729635",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d5465c1_25290452",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 3
@@ -101,6 +137,24 @@
       "writtenOn": "2025-11-18T23:15:31Z",
       "side": 1,
       "message": "I don\u0027t think this change should be part of this patch...",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33003da6_93b459ec",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2701,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6d5465c1_25290452",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -142,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "546073ab_8d861cf4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3209,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4efa446f_9f038540",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1edbe0e_75e65dfc",
         "filename": "src/include/fsal.h",
         "patchSetId": 3
@@ -159,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebf47b9f_5fea9900",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "likely and unlikely have been moved to isLevel funtion in this patch. If level is more than EVENT then it will be treated as unlikely else likely.",
+      "parentUuid": "d1edbe0e_75e65dfc",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eddfcd3e_d2b81a99",
         "filename": "src/include/ip_utils.h",
         "patchSetId": 3
@@ -170,6 +260,24 @@
       "writtenOn": "2025-11-18T23:15:31Z",
       "side": 1,
       "message": "This file definitely should not be in this patch...\n\nYou may need to properly rebase your patch on next",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb2282c3_f319fd3d",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "these files have been used to shift the CIDR structure which is being used in client ip list entry structure. I have moved this structure from .h to .c and also included ip_utils.h to log.h.",
+      "parentUuid": "eddfcd3e_d2b81a99",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -211,6 +319,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00846565_ab8f3fce",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "95d5d9e6_0e372a0f",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "636b29ec_d4b7e030",
         "filename": "src/include/log.h",
         "patchSetId": 3
@@ -246,6 +372,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76842e69_0b6371b1",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ba26fc4d_f81afe25",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86f91474_66235e58",
         "filename": "src/include/log.h",
         "patchSetId": 3
@@ -257,6 +401,24 @@
       "writtenOn": "2025-11-18T23:15:31Z",
       "side": 1,
       "message": "Please retain the likely and unlikely, or is that handled by the likely/unlikely in the return from isLevel?",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41982657_1879a525",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Yes frank that\u0027s correct likely and unlikely now will handle automatically in isLevel routine itself.",
+      "parentUuid": "86f91474_66235e58",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -298,6 +460,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a164e141_2d59a859",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "82f3c379_37702060",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59296a93_27aa7a57",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 3
@@ -309,6 +489,24 @@
       "writtenOn": "2025-11-18T23:15:31Z",
       "side": 1,
       "message": "This should not be in this patch",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ed989a_afb8ac56",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2025-11-20T08:16:22Z",
+      "side": 1,
+      "message": "these files have been used to shift the CIDR structure which is being used in client ip list entry structure. I have moved this structure from .h to .c and also included ip_utils.h to log.h. This is required for compilation with this patch.",
+      "parentUuid": "59296a93_27aa7a57",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
