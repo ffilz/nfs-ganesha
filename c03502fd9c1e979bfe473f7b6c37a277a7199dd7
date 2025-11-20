@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbd974a0_90d8c23c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T09:30:20Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed",
+      "revId": "c03502fd9c1e979bfe473f7b6c37a277a7199dd7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d808a1b4_3a8f6e2a",
+        "filename": "src/include/log.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T09:30:20Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tconditional_component_log_level[comp] \u003e\u003d\n    - \t\t\t\t\tlvl);\n→ to be replaced with:\n    + \t\t\t\t\t conditional_component_log_level[comp] \u003e\u003d\n    + \t\t\t\t\t lvl);",
+      "revId": "c03502fd9c1e979bfe473f7b6c37a277a7199dd7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
