@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2180a0e_4b3d2604",
+        "filename": "src/include/log.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T13:05:40Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t? likely(conditional_component_log_level[comp] \u003e\u003d\n    - \t\t\t\tlvl)\n    - \t\t\t: unlikely(\n    - \t\t\t\tconditional_component_log_level[comp] \u003e\u003d lvl);\n    - \treturn (lvl \u003e NIV_EVENT)\n    - \t\t? unlikely(component_log_level[comp] \u003e\u003d lvl)\n    - \t\t: likely(component_log_level[comp] \u003e\u003d lvl);\n→ to be replaced with:\n    + \t\t\t       ? likely(conditional_component_log_level[comp] \u003e\u003d\n    + \t\t\t\t\tlvl)\n    + \t\t\t       : unlikely(\n    + \t\t\t\t\t conditional_component_log_level[comp] \u003e\u003d\n    + \t\t\t\t\t lvl);\n    + \treturn (lvl \u003e NIV_EVENT) ? unlikely(component_log_level[comp] \u003e\u003d lvl)\n    + \t\t\t\t : likely(component_log_level[comp] \u003e\u003d lvl);",
+      "revId": "8a3c2bc7a5be4f858002a4262d1b4c547ff0076a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
