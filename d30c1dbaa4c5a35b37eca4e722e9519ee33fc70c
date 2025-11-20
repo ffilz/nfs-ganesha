@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bba8077a_207c7d46",
+        "filename": "src/FSAL/fsal_destroyer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T05:34:03Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tLogWarn(COMPONENT_FSAL, \"Released %d extra file handles.\", handle_count);",
+      "revId": "d30c1dbaa4c5a35b37eca4e722e9519ee33fc70c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df22de4_19083e2d",
+        "filename": "src/FSAL/fsal_destroyer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-20T05:34:03Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tLogWarn(COMPONENT_FSAL, \"Released %d extra file handles.\", handle_count);\n→ to be replaced with:\n    + \tLogWarn(COMPONENT_FSAL, \"Released %d extra file handles.\",\n    + \t\thandle_count);",
+      "revId": "d30c1dbaa4c5a35b37eca4e722e9519ee33fc70c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
