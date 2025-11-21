@@ -57,7 +57,6 @@ void admin_halt(void);
 
 namespace
 {
-
 char *ganesha_conf = nullptr;
 char *lpath = nullptr;
 int dlevel = -1;
