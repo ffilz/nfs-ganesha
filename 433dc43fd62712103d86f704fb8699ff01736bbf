@@ -34,6 +34,24 @@
       "parentUuid": "e692ab96_b581b409",
       "revId": "433dc43fd62712103d86f704fb8699ff01736bbf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e32d7c_906687f1",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T22:37:10Z",
+      "side": 1,
+      "message": "This shows an annoying bit with clang-format. If you have a sufficiently different version of clang-format from what the CI has, there will be un-solveable problems because your local clang-format will always insist on fixing things.",
+      "parentUuid": "e692ab96_b581b409",
+      "revId": "433dc43fd62712103d86f704fb8699ff01736bbf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
