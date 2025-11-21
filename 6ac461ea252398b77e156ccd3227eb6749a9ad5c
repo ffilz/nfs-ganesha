@@ -16,6 +16,24 @@
       "message": "Why does this macro have to change to inline?\n\nThat\u0027s causing you to use a dangerous cast of (u_int *) to (size_t *)",
       "revId": "6ac461ea252398b77e156ccd3227eb6749a9ad5c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45496f87_9ef50b61",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-21T07:01:12Z",
+      "side": 0,
+      "message": "The original macro uses GCC\u0027s statement expression extension ({ ... }), which is not supported by standard C++ compilers, causing compilation errors.\n\nAnd we can resolve the casting (u_int *) to (size_t *) with a temporary variable like below:\n\nsize_t tmp_len;\ncb_arg-\u003eutf8string_val \u003d gsh_strldup(attrs-\u003exattrs-\u003eval.val,\n                                     attrs-\u003exattrs-\u003eval.len,\n                                     \u0026tmp_len);\ncb_arg-\u003eutf8string_len \u003d (u_int)tmp_len; \n\n\nIs this change ok?",
+      "parentUuid": "61b7b9e8_6fd13875",
+      "revId": "6ac461ea252398b77e156ccd3227eb6749a9ad5c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
