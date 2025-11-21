@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dab85d5a_d2afed6f",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-21T22:15:53Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t/* Think about \u0027.\u0027 and \u0027..\u0027 */\n→ to be replaced with:\n    + \t/* Think about \u0027.\u0027 and \u0027..\u0027 */",
+      "revId": "1afd470f1d5e400a0964394e7cb155ed6d2e5e28",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "566b7908_bf367b44",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3185,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-21T22:15:53Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - struct fsal_ds_handle {\n    - };\n→ to be replaced with:\n    + struct fsal_ds_handle {};",
+      "revId": "1afd470f1d5e400a0964394e7cb155ed6d2e5e28",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74eb5877_396bb944",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3208,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-21T22:15:53Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tint32_t __attribute__((unused))\n    - \tref \u003d atomic_dec_int32_t(\u0026obj_hdl-\u003eexp_refcnt);\n→ to be replaced with:\n    + \tint32_t __attribute__((unused)) ref \u003d\n    + \t\tatomic_dec_int32_t(\u0026obj_hdl-\u003eexp_refcnt);",
+      "revId": "1afd470f1d5e400a0964394e7cb155ed6d2e5e28",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
