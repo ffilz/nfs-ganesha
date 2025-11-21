@@ -34,6 +34,24 @@
       "parentUuid": "61b7b9e8_6fd13875",
       "revId": "6ac461ea252398b77e156ccd3227eb6749a9ad5c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b898935_84831670",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T17:19:29Z",
+      "side": 0,
+      "message": "OK. But better solution...\n\nI just read all the uses of gsh_strldup, and we can easily re-write to eliminate it:\n\nFirst off, strldup doesn\u0027t limit the resulting string copy to MIN(strlen, l), it just copies l bytes, and NULL terminates.\n\n\nSome callers pass MIN(rc, maxlen) as l, but rc was already limited to maxlen... (some readlink callers).\n\nSome callers are using it to copy a val/len string into utf8strlen, but there the l+1 is actually wrong. utf8string has a {val, len} buffer structure, val is assumed to be NUL terminated, and len is the stringlen, so the buffer val is sized len+1. So putting l+1 into utf8strlen is technically wrong...\n\nI\u0027d have to re-validate if the readlink buffer length is supposed to be the value length or the buffer length (value length + 1 for NUL termination).\n\nWe do need to make sure all these strings are NUL terminated, so strldup may not be right.\n\nLet me make a quick patch to fix all this and eliminate gsh_strldup and then you can rebase your patch on top of mine.",
+      "parentUuid": "45496f87_9ef50b61",
+      "revId": "6ac461ea252398b77e156ccd3227eb6749a9ad5c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
