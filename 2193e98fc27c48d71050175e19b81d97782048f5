@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7cb11ffe_3f6a3dd7",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2025-11-21T07:02:56Z",
+      "side": 1,
+      "message": "we can resolve the casting (u_int *) to (size_t *) with a temporary variable like below:\n\nsize_t tmp_len;\ncb_arg-\u003eutf8string_val \u003d gsh_strldup(attrs-\u003exattrs-\u003eval.val,\n                                     attrs-\u003exattrs-\u003eval.len,\n                                     \u0026tmp_len);\ncb_arg-\u003eutf8string_len \u003d (u_int)tmp_len; \n\n\nIs this change ok?",
+      "parentUuid": "17965967_c8ff2890",
+      "revId": "2193e98fc27c48d71050175e19b81d97782048f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "decf2512_388ef8eb",
         "filename": "src/include/9p.h",
         "patchSetId": 1
