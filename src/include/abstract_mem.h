@@ -220,15 +220,6 @@ static inline void *gsh_realloc__(void *p, size_t n, const char *file, int line,
 		p_;                   \
 	})
 
-#define gsh_strldup(s, l, n)                          \
-	({                                            \
-		char *p_ = (char *)gsh_malloc(l + 1); \
-		memcpy(p_, s, l);                     \
-		p_[l] = '\0';                         \
-		*n = l + 1;                           \
-		p_;                                   \
-	})
-
 #if defined(__GLIBC__) && defined(_GNU_SOURCE)
 #define gsh_strdupa(src) strdupa(src)
 #else
