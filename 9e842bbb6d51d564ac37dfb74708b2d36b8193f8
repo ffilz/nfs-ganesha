@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3a1f498_0ce7eb0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "OK, I\u0027ve looked over, please continue to address the unresolved comments.\n\nParticularly, please use the common client list code to manage the list of conditionally logged clients.",
+      "parentUuid": "31e01ae8_fe842510",
+      "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69f9dabe_966aa800",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 8
@@ -31,6 +49,74 @@
       "writtenOn": "2025-11-20T23:43:37Z",
       "side": 1,
       "message": "BTW, you don\u0027t need the parenthesis around \"op_ctx-\u003eclient-\u003ecl_addrbuf\"",
+      "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0573982_13fb0888",
+        "filename": "src/include/log.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Please restore this blank line",
+      "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09518f26_a6fb2175",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Please use GLIST_HEAD_INIT initializer macro",
+      "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "182028bc_cdf176ff",
+        "filename": "src/scripts/ganeshactl/ganesha_mgr.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Fix indent",
+      "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fee34b5_3548c49a",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Why introduce this when we have sockaddr_cmpf above? The above functions handles if IPv4 addresses are encapsulated in IPv6",
       "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

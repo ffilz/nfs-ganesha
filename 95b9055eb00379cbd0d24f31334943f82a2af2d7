@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac0a8af_045d6e37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0930e4ac_87b20b6f",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2531feb_129eeae2",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Please resolve to avoid these externs",
       "parentUuid": "a2531feb_129eeae2",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f45d72e_f42f7243",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4edc52_480553da",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -173,6 +209,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "6d5465c1_25290452",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a3a827_6e235ab6",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2701,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33003da6_93b459ec",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -336,6 +390,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c51636_5078b969",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "OK, it looked like your patch included the whole file. Looks OK now.",
+      "parentUuid": "eb2282c3_f319fd3d",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba60752d_c3aa09f1",
@@ -385,6 +457,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "95d5d9e6_0e372a0f",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa1e555_9adb1469",
+        "filename": "src/include/log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00846565_ab8f3fce",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -615,6 +705,24 @@
       "side": 1,
       "message": "these files have been used to shift the CIDR structure which is being used in client ip list entry structure. I have moved this structure from .h to .c and also included ip_utils.h to log.h. This is required for compilation with this patch.",
       "parentUuid": "59296a93_27aa7a57",
+      "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afdf5d63_2ef35bd0",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-21T02:34:33Z",
+      "side": 1,
+      "message": "OK, it looked like your patch included the whole file, this looks OK now.",
+      "parentUuid": "88ed989a_afb8ac56",
       "revId": "95b9055eb00379cbd0d24f31334943f82a2af2d7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
