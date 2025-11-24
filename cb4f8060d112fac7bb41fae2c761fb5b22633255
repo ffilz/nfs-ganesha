@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5348ee74_0170e525",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-11-24T10:00:23Z",
+      "side": 1,
+      "message": "You have already allocated memory for link_content-\u003eutf8string_val above so you will get a memory leak.  You can remove 2 lines above since they are done in this function.",
+      "revId": "cb4f8060d112fac7bb41fae2c761fb5b22633255",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bc59883_d00d0571",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 9763,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-11-24T10:00:23Z",
+      "side": 1,
+      "message": "I am wondering if this function  and utf8string and a heap of other stuff in this file can go somewhere else (some sort of utils file, like we did for ip_utils) since it isn\u0027t strictly NFSv41 related.  Probably in another patch.  Looking at it, it could a big job.  NFSv4 stuff included in NFSv3 etc etc",
+      "revId": "cb4f8060d112fac7bb41fae2c761fb5b22633255",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
