@@ -1261,7 +1261,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			display_owner(&dspbuf, owner);
 
 			if (refcount > 1)
-				LogWarn(COMPONENT_CLIENTID,
+				LogWarnLimited(COMPONENT_CLIENTID,
 					"Expired State - Lock Owners, Possibly extra references to {%s}",
 					str);
 			else
@@ -1272,6 +1272,10 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 		}
 
 		dec_state_owner_ref(owner);
+		if (refcount > 1) {
+			// Allow other threads to proceed and release references.
+			sched_yield();
+		}
 	}
 
 	/* revoke layouts for this client*/
@@ -1330,7 +1334,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			display_owner(&dspbuf, owner);
 
 			if (refcount > 1)
-				LogWarn(COMPONENT_CLIENTID,
+				LogWarnLimited(COMPONENT_CLIENTID,
 					"Expired State - Open Owners, Possibly extra references to {%s}",
 					str);
 			else
@@ -1341,6 +1345,10 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 		}
 
 		dec_state_owner_ref(owner);
+		if (refcount > 1) {
+			// Allow other threads to proceed and release references.
+			sched_yield();
+		}
 	}
 
 	/* revoke delegations for this client*/
