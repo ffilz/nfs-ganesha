@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd482107_a8df80b9",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-24T14:52:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tlock_entry-\u003esle_block_data-\u003esbd_prot.sbd_v4.snbd_last_poll_time \u003d time(NULL);\n→ to be replaced with:\n    + \tlock_entry-\u003esle_block_data-\u003esbd_prot.sbd_v4.snbd_last_poll_time \u003d\n    + \t\ttime(NULL);",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "968c8367_0a4167bd",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-11-24T14:52:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\tlock_entry-\u003esle_block_data-\u003esbd_prot.sbd_v4.snbd_last_poll_time \u003d time(NULL);",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
