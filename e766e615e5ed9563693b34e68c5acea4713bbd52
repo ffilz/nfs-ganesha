@@ -16,6 +16,24 @@
       "message": "Do we really see too many of these? That suggests a bug we should fix.",
       "revId": "e766e615e5ed9563693b34e68c5acea4713bbd52",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9042be_fe794dac",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-11-25T09:06:49Z",
+      "side": 1,
+      "message": "There are edge cases where it takes some more time to release a client. the problem we had is that some flows try to trace as part of the release. but because this is a tight loop that prints. it essentially softlocks all print locations in the code",
+      "parentUuid": "2c75694a_3eb480d0",
+      "revId": "e766e615e5ed9563693b34e68c5acea4713bbd52",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
