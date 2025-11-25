@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a286c44_b8d6d46f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-11-25T10:20:59Z",
+      "side": 1,
+      "message": "This will just mean that after ganesha decided that first poll is needed, subsequent polls will happen every poll timeout and not every ganesha iteration.\nwhich test fails? as if it does it might mean a problem in test.\nthis change will in some cases increase the time it takes for lock to be polled, which is also responsible for the canceling flow. but this just make it work in a way that makes sense and conservers resources.\nimagine we have 100+ waiters for the same file, that will mean, that starting at first poll all ganesha will do is poll locks(and not actually allow taking the lock)",
+      "parentUuid": "0212b6c2_ad26aec3",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd482107_a8df80b9",
         "filename": "src/SAL/state_async.c",
         "patchSetId": 2
@@ -84,6 +102,42 @@
       "side": 1,
       "message": "This will need to be resolved.",
       "parentUuid": "cd482107_a8df80b9",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a1f0e64_fc619560",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-11-25T10:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39dcc120_b2f21c6d",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c44d6abe_1ef79693",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-11-25T10:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "968c8367_0a4167bd",
       "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
