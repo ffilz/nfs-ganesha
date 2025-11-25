@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0212b6c2_ad26aec3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-11-25T03:02:35Z",
+      "side": 1,
+      "message": "I may have  naively +1\u0027d this because the last polled time is currently only set the one time when the lock is taken and the patch that introduced this code was by Ofir and they were fixing an oversight.",
+      "parentUuid": "89c0359b_af181b80",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd482107_a8df80b9",
         "filename": "src/SAL/state_async.c",
         "patchSetId": 2
