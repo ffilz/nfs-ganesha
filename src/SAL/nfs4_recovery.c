@@ -43,6 +43,8 @@
 #include "bsd-base64.h"
 #include "client_mgr.h"
 #include "fsal.h"
+#include "nsm.h"
+#include "nfs_proto_functions.h"
 
 /* The grace_mutex protects current_grace, clid_list, and clid_count */
 static pthread_mutex_t grace_mutex;
@@ -215,6 +217,17 @@ void nfs4_cleanup_clid_entries(void)
 	}
 	assert(clid_count == 0);
 	atomic_store_int32_t(&reclaim_completes, 0);
+}
+
+bool parse_nlm_entry(char *entry, enum recovery_type recovery_type)
+{
+	if (recovery_type == NFS4_CLID_ENTRY ||
+	    recovery_type > NLM_CLIENT_ENTRY)
+		return false;
+
+	LogWarn(COMPONENT_NLM, "NLM Recovery Entry Invalid: %s", entry);
+
+	return false;
 }
 
 /*
@@ -1104,8 +1117,7 @@ static void nlm_release(state_nsm_client_t *nsm_cp)
 
 	err = state_nlm_notify(nsm_cp, false, 0);
 	if (err != STATE_SUCCESS)
-		LogDebug(COMPONENT_STATE, "state_nlm_notify failed with %d",
-			 err);
+		LogDebug(COMPONENT_NLM, "state_nlm_notify failed with %d", err);
 	dec_nsm_client_ref(nsm_cp);
 }
 #endif /* _USE_NLM */
