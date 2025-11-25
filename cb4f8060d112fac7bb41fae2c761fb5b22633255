@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8d38439_dd3172de",
+        "filename": "src/FSAL/FSAL_GLUSTER/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-25T00:53:53Z",
+      "side": 1,
+      "message": "Oops... Will fix with another go...",
+      "parentUuid": "5348ee74_0170e525",
+      "revId": "cb4f8060d112fac7bb41fae2c761fb5b22633255",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bc59883_d00d0571",
         "filename": "src/include/nfsv41.h",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-24T10:00:23Z",
       "side": 1,
       "message": "I am wondering if this function  and utf8string and a heap of other stuff in this file can go somewhere else (some sort of utils file, like we did for ip_utils) since it isn\u0027t strictly NFSv41 related.  Probably in another patch.  Looking at it, it could a big job.  NFSv4 stuff included in NFSv3 etc etc",
+      "revId": "cb4f8060d112fac7bb41fae2c761fb5b22633255",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ee3841_badbf708",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 9763,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-25T00:53:53Z",
+      "side": 1,
+      "message": "Yea, probably. Basically this makes utf8string a FSAL type.\n\nThe trick is doing it in a way that assures that the FSAL API definition matches the NFSv4 protocol definition. Though really the NFSv4 protocol definition is just an RPC string that can contain UTF8 characters, but they must be valid. So maybe it\u0027s not really different than XDR code converting RPC string to char *.",
+      "parentUuid": "1bc59883_d00d0571",
       "revId": "cb4f8060d112fac7bb41fae2c761fb5b22633255",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
