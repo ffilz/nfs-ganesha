@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0eeeb058_22fe5292",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-25T00:50:37Z",
+      "side": 1,
+      "message": "I would like a little more background on the cause here. Is there is github issue with details?",
+      "revId": "0957dbdb97d37effcfd508d62e81ca6b7c75d636",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa4f2413_27d4ca32",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2025-11-24T15:37:35Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\"lock request with stale state owner (state:)%p (owner:)%p (obj:)%p\",\n    - \t\t\t\tstate, owner, obj);\n→ to be replaced with:\n    + \t\t\t\"lock request with stale state owner (state:)%p (owner:)%p (obj:)%p\",\n    + \t\t\tstate, owner, obj);",
+      "revId": "0957dbdb97d37effcfd508d62e81ca6b7c75d636",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df793ba0_735eb64c",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2259,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-25T00:50:37Z",
+      "side": 1,
+      "message": "Need to fix as requested.",
+      "parentUuid": "aa4f2413_27d4ca32",
       "revId": "0957dbdb97d37effcfd508d62e81ca6b7c75d636",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
