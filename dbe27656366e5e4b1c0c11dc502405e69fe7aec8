@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c0359b_af181b80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-25T00:45:16Z",
+      "side": 1,
+      "message": "I\u0027m confused what this accomplishes. We are seeing some pynfs failures based on our interpretation of how long to wait for clients, is this extending the time we consider their waiting blocked lock valid?",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd482107_a8df80b9",
@@ -31,6 +48,24 @@
       "writtenOn": "2025-11-24T14:52:52Z",
       "side": 1,
       "message": "WARNING: line length of 85 exceeds 80 columns\n+\tlock_entry-\u003esle_block_data-\u003esbd_prot.sbd_v4.snbd_last_poll_time \u003d time(NULL);",
+      "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39dcc120_b2f21c6d",
+        "filename": "src/SAL/state_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-11-25T00:45:16Z",
+      "side": 1,
+      "message": "This will need to be resolved.",
+      "parentUuid": "cd482107_a8df80b9",
       "revId": "dbe27656366e5e4b1c0c11dc502405e69fe7aec8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
