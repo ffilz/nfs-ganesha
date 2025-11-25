@@ -52,6 +52,24 @@
       "parentUuid": "e692ab96_b581b409",
       "revId": "433dc43fd62712103d86f704fb8699ff01736bbf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4ac7386_713e6877",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2025-11-25T22:30:27Z",
+      "side": 1,
+      "message": "Yes, it seems to be undoing a change from commit `e9ec7d660e4f782bac11d8c08366048183c630ca`, which was just `clang-format` changes.\n\nIf I run `clang-format -i` on the file, without this commit, it makes no changes.  This is with:\n\n    $ clang-format --version\n    Debian clang-format version 19.1.7 (3+b1)\n\nSo, you must now be running a version (containing a \"regression\"?) between what you used in March and what I\u0027m running.  The CI version and your March version seem to agree with the version I\u0027m running.\n\nThis is hard to deal with.  😕\n\nPerhaps commits that just `clang-format` code should contain the `clang-format` version in the commit message?  Then it might be possible to track this insanity and spot problematic versions...",
+      "parentUuid": "80e32d7c_906687f1",
+      "revId": "433dc43fd62712103d86f704fb8699ff01736bbf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
