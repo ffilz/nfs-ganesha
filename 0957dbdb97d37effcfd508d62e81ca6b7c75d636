@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bd05801_f657d229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-11-25T10:21:04Z",
+      "side": 1,
+      "message": "it happened on our tests when running in a very high load for a single file.\nin that case packet can wait in queue for a long time for locks.\nas each lock request locks the entire file.\nfor a long waiting lock request for a client that already released its state it can cause a lock leak.",
+      "parentUuid": "0eeeb058_22fe5292",
+      "revId": "0957dbdb97d37effcfd508d62e81ca6b7c75d636",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa4f2413_27d4ca32",
         "filename": "src/SAL/state_lock.c",
         "patchSetId": 2
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Need to fix as requested.",
       "parentUuid": "aa4f2413_27d4ca32",
+      "revId": "0957dbdb97d37effcfd508d62e81ca6b7c75d636",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b96f034_75d07561",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2259,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2025-11-25T10:21:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df793ba0_735eb64c",
       "revId": "0957dbdb97d37effcfd508d62e81ca6b7c75d636",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
