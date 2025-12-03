@@ -76,6 +76,25 @@ int get_port(sockaddr_t *);
 sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4);
 bool is_loopback(sockaddr_t *addr);
 
+/* Function to check if the passed in sockaddr_t is holding INADDR_ANY */
+static inline bool is_inaddrany(const sockaddr_t *addr)
+{
+	if (addr->ss_family == AF_INET6) {
+		struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)addr;
+
+		for (int i = 0; i < 16; i++) {
+			if (addr6->sin6_addr.__in6_u.__u6_addr8[i] != 0) {
+				return false;
+			}
+		}
+	} else {
+		/* IPv4 */
+		if (((struct sockaddr_in *)addr)->sin_addr.s_addr != INADDR_ANY)
+			return false;
+	}
+	return true;
+}
+
 int display_sockaddr_port(struct display_buffer *dspbuf, const sockaddr_t *addr,
 			  bool ignore_port);
 
