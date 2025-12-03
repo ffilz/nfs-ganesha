@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f6b03e4_4e564618",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-12-03T06:14:12Z",
+      "side": 1,
+      "message": "SOCK_NAME_MAX is already available, my question was should we use that exiting macro and not MAX_SOCK_NAME_LEN",
+      "parentUuid": "84d5d69b_42100cc9",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fbb7379_65412baf",
         "filename": "src/MainNFSD/nfs_qos.c",
         "patchSetId": 13
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Updated.",
       "parentUuid": "4fbb7379_65412baf",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5f2c16_15a0049d",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-12-03T06:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad4a1d2_d0d6ee02",
       "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "Corrected.",
       "parentUuid": "56869336_22ee34fc",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6bce8c_f169b1b7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-12-03T06:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dff8bb55_38f04428",
       "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -159,6 +213,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81cf32e2_f53ebfa6",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-12-03T06:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba8d7e9c_013175e3",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef4c4ccd_2fb77c83",
@@ -207,6 +279,24 @@
       "side": 1,
       "message": "In PEPC mode, We register and update the metrics entirely through the Client QoS Handler. \nWhen I/O consumption occurs in PEPC mode, we update the client\u0027s QoS handler values (such as data_consumed and iops_consumed) accordingly.\n\nFor example, the metric\nQoS_per_pepc_readbucket_bw_info{export_clientid\u003d\"/home/sreedhar/nfs_ganesha/nfs_mount2/exp1_::ffff:10.8.159.40\",max_bw_of_pepc\u003d\"6242880\"}\nwhich includes the specific client and export in the label part and reflects the consumption managed by that central client handler.",
       "parentUuid": "413a5443_133cdd1e",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "801addfd_62c0ac9b",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2771,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2025-12-03T06:14:12Z",
+      "side": 1,
+      "message": "in PEPC mode export values are updated in pepc_reschedule_bw_io() corrected in latest patch.,\nand client values are updated in the submission path to client buckets(), which is correct.\n\nDone",
+      "parentUuid": "b4e23df6_294d42df",
       "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
