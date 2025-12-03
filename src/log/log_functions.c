@@ -1697,6 +1697,7 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_QOS] = NIV_EVENT,
 	[COMPONENT_RECOVERY] = NIV_EVENT,
 	[COMPONENT_RDMA] = NIV_EVENT,
+	[COMPONENT_GRPC] = NIV_EVENT,
 };
 
 /* Active set of log levels */
@@ -1752,7 +1753,8 @@ static log_levels_t default_conditional_log_levels[] = {
 	[COMPONENT_XPRT] = NIV_FULL_DEBUG,
 	[COMPONENT_QOS] = NIV_FULL_DEBUG,
 	[COMPONENT_RECOVERY] = NIV_FULL_DEBUG,
-	[COMPONENT_RDMA] = NIV_FULL_DEBUG
+	[COMPONENT_RDMA] = NIV_FULL_DEBUG,
+	[COMPONENT_GRPC] = NIV_FULL_DEBUG
 };
 
 CT_ASSERT(sizeof(default_conditional_log_levels) /
@@ -1893,6 +1895,9 @@ struct log_component_info LogComponents[] = {
 	[COMPONENT_RDMA] = {
 		.comp_name = "COMPONENT_RDMA",
 		.comp_str = "RDMA",},
+	[COMPONENT_GRPC] = {
+		.comp_name = "COMPONENT_GRPC",
+		.comp_str = "GRPC",},
 };
 
 CT_ASSERT(sizeof(LogComponents) / sizeof(LogComponents[0]) == COMPONENT_COUNT,
@@ -2063,6 +2068,7 @@ HANDLE_PROP(XPRT);
 HANDLE_PROP(QOS);
 HANDLE_PROP(RECOVERY);
 HANDLE_PROP(RDMA);
+HANDLE_PROP(GRPC);
 
 /* clang-format off */
 static struct gsh_dbus_prop *log_props[] = { LOG_PROPERTY_ITEM(ALL),
@@ -2105,6 +2111,7 @@ static struct gsh_dbus_prop *log_props[] = { LOG_PROPERTY_ITEM(ALL),
 					     LOG_PROPERTY_ITEM(QOS),
 					     LOG_PROPERTY_ITEM(RECOVERY),
 					     LOG_PROPERTY_ITEM(RDMA),
+					     LOG_PROPERTY_ITEM(GRPC),
 					     NULL };
 /* clang-format on */
 
@@ -2115,6 +2122,9 @@ struct gsh_dbus_interface log_interface = {
 	.methods = NULL,
 	.signals = NULL
 };
+
+CT_ASSERT(sizeof(log_props) / sizeof(log_props[0]) == COMPONENT_COUNT + 1,
+	  "log_props must contain all log components");
 
 #endif /* USE_DBUS */
 
@@ -2398,6 +2408,7 @@ static struct config_item component_levels[] = {
 	CONF_INDEX_TOKEN("RECOVERY", NB_LOG_LEVEL, log_levels,
 			 COMPONENT_RECOVERY, int),
 	CONF_INDEX_TOKEN("RDMA", NB_LOG_LEVEL, log_levels, COMPONENT_RDMA, int),
+	CONF_INDEX_TOKEN("GRPC", NB_LOG_LEVEL, log_levels, COMPONENT_GRPC, int),
 	CONFIG_EOL
 };
 
