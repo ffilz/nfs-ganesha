@@ -91,6 +91,25 @@ static inline int display_sockip(struct display_buffer *dspbuf,
 	return display_sockaddr_port(dspbuf, addr, true);
 }
 
+/* Function to check if the passed in sockaddr_t is holding INADDR_ANY */
+static inline bool if_ip_addr_any(const sockaddr_t *addr)
+{
+	if (addr->ss_family == AF_INET6) {
+		struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *)addr;
+
+		for (int i = 0; i < 16; i++) {
+			if (addr6->sin6_addr.__in6_u.__u6_addr8[i] != 0) {
+				return false;
+			}
+		}
+	} else {
+		/* IPv4 */
+		if (((struct sockaddr_in *)addr)->sin_addr.s_addr != INADDR_ANY)
+			return false;
+	}
+	return true;
+}
+
 #ifdef __cplusplus
 }
 #endif

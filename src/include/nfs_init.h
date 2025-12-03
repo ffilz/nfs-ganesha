@@ -53,6 +53,9 @@ extern struct nfs_init nfs_init;
 
 extern pthread_t gsh_dbus_thrid;
 
+/* Flag to indicate if V6 interfaces on the host are enabled */
+extern bool v6disabled;
+
 void nfs_prereq_init_mutexes(void);
 void nfs_init_init(void);
 void nfs_init_cleanup(void);
