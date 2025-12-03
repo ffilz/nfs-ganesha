@@ -1697,6 +1697,7 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_QOS] = NIV_EVENT,
 	[COMPONENT_RECOVERY] = NIV_EVENT,
 	[COMPONENT_RDMA] = NIV_EVENT,
+	[COMPONENT_GRPC] = NIV_EVENT,
 };
 
 /* Active set of log levels */
@@ -1893,6 +1894,9 @@ struct log_component_info LogComponents[] = {
 	[COMPONENT_RDMA] = {
 		.comp_name = "COMPONENT_RDMA",
 		.comp_str = "RDMA",},
+	[COMPONENT_GRPC] = {
+		.comp_name = "COMPONENT_GRPC",
+		.comp_str = "GRPC",},
 };
 
 CT_ASSERT(sizeof(LogComponents) / sizeof(LogComponents[0]) == COMPONENT_COUNT,
@@ -2398,6 +2402,7 @@ static struct config_item component_levels[] = {
 	CONF_INDEX_TOKEN("RECOVERY", NB_LOG_LEVEL, log_levels,
 			 COMPONENT_RECOVERY, int),
 	CONF_INDEX_TOKEN("RDMA", NB_LOG_LEVEL, log_levels, COMPONENT_RDMA, int),
+	CONF_INDEX_TOKEN("GRPC", NB_LOG_LEVEL, log_levels, COMPONENT_GRPC, int),
 	CONFIG_EOL
 };
 
