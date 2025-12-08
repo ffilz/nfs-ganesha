@@ -81,6 +81,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9811aecb_28bc0067",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea757db3_07927f7c",
+      "range": {
+        "startLine": 394,
+        "startChar": 46,
+        "endLine": 394,
+        "endChar": 49
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29c9557e_695d3c63",
@@ -164,6 +188,30 @@
       "writtenOn": "2025-10-05T11:37:14Z",
       "side": 1,
       "message": "You can those as parameters to allow various options for tls",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 55
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b773380_3379bc0c",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "please elaborate.",
+      "parentUuid": "ec0034a3_01926c7a",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -270,6 +318,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab813ddc_db56f37c",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "currently std::format is not supported by the compiler in use for redhat",
+      "parentUuid": "448e34f0_b1212e66",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6216081f_512b45e3",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 6
@@ -281,6 +353,30 @@
       "writtenOn": "2025-10-05T11:37:14Z",
       "side": 1,
       "message": "It would be better to set the server state as running to true when we know it actually started",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "783858f4_6bd0253c",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6216081f_512b45e3",
       "range": {
         "startLine": 100,
         "startChar": 0,
@@ -331,6 +427,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4329540_e4638994",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f4090c_c844a6be",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 45
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0102159_9a289c82",
@@ -344,6 +464,30 @@
       "writtenOn": "2025-10-05T11:37:14Z",
       "side": 1,
       "message": "Remove debug prints",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 45
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34999600_df1a5ddc",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0102159_9a289c82",
       "range": {
         "startLine": 147,
         "startChar": 0,
@@ -400,6 +544,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8ea24e_c66108d9",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03ef315c_4340343c",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ea62f1d_3b558be6",
@@ -425,6 +593,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cb48f45_fd32b7d4",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "We don\u0027t need the try catch block here, hence removed it completely",
+      "parentUuid": "1ea62f1d_3b558be6",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 21
+      },
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1985718f_a01be2c1",
         "filename": "src/grpc_server/nfsServiceServer.cc",
         "patchSetId": 6
@@ -436,6 +628,24 @@
       "writtenOn": "2025-10-03T07:29:44Z",
       "side": 1,
       "message": "std::cerr goes to stderr, here (and elsewhere below) this might not be useful.  Should probably use LogError()",
+      "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f9f3c87_bd57f122",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2025-12-08T13:23:17Z",
+      "side": 1,
+      "message": "we don\u0027t need a try catch block there, hence removed it completely",
+      "parentUuid": "1985718f_a01be2c1",
       "revId": "7a725d7cd7b030961e0dc7084a6512a3fcc1255b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
