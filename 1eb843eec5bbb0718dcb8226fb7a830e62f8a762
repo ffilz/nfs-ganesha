@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77b1eee_e63ae566",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-08T23:03:06Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tif (sockaddr_cmp(release_addr,\n    - \t\t\t\t\t \u0026nlm_cp-\u003eslc_server_addr, true) \u003d\u003d 0) {\n→ to be replaced with:\n    + \t\t\tif (sockaddr_cmp(release_addr, \u0026nlm_cp-\u003eslc_server_addr,\n    + \t\t\t\t\t true) \u003d\u003d 0) {",
+      "revId": "1eb843eec5bbb0718dcb8226fb7a830e62f8a762",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
