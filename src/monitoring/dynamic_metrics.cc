@@ -82,8 +82,6 @@ class DynamicMetrics {
 	CounterInt::Family &mdcacheCacheMissesTotal;
 	CounterInt::Family &mdcacheCacheHitsByExportTotal;
 	CounterInt::Family &mdcacheCacheMissesByExportTotal;
-	CounterInt::Family &rpcsReceivedTotal;
-	CounterInt::Family &rpcsCompletedTotal;
 	CounterInt::Family &errorsByVersionOperationStatus;
 
 	// Per client metrics.
@@ -94,7 +92,6 @@ class DynamicMetrics {
 	CounterInt::Family &clientBytesSentTotal;
 
 	// Gauges
-	GaugeInt::Family &rpcsInFlight;
 	GaugeInt::Family &lastClientUpdate;
 	GaugeDouble::Family &memoryrss;
 	GaugeDouble::Family &memoryvirtualsize;
