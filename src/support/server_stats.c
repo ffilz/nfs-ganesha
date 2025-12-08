@@ -1426,8 +1426,6 @@ void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
 	now(&current_time);
 	time_diff = timespec_diff(start_time, &current_time);
 
-	nfs_metrics__nfs4_op_completed(proto_op, status, time_diff);
-
 	if (nfs_param.core_param.enable_FULLV4STATS)
 		record_v4_full_stats(proto_op, time_diff, status);
 

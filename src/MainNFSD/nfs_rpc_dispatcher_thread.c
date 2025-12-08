@@ -77,8 +77,10 @@
 #define TCP_KEEPIDLE TCPCTL_KEEPIDLE
 #endif
 
+#ifdef USE_MONITORING
 #include "monitoring.h"
-#include "nfs_metrics.h"
+#include "dynamic_metrics.h"
+#endif
 
 #define NFS_options nfs_param.core_param.core_options
 #define NFS_program nfs_param.core_param.program

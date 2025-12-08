@@ -69,6 +69,9 @@ typedef uint16_t export_id_t;
 
 /* Inits monitoring module and exposes a Prometheus-format HTTP endpoint. */
 void dynamic_metrics__init(void);
+void nfs_metrics__rpc_received(void);
+void nfs_metrics__rpc_completed(void);
+void nfs_metrics__rpcs_in_flight(int64_t value);
 
 /*
  * The following two functions generate the following metrics,
@@ -112,6 +115,17 @@ void dynamic_metrics__mem_info(proc_t proc_info);
 #endif
 
 static inline void dynamic_metrics__init(void)
+{
+}
+
+static inline void nfs_metrics__rpc_received(void)
+{
+}
+
+static inline void nfs_metrics__rpc_completed(void)
+{
+}
+static inline void nfs_metrics__rpcs_in_flight(int64_t UNUSED(value))
 {
 }
 

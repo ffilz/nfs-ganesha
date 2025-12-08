@@ -155,15 +155,7 @@ enum nfsstat4_index {
 	FOREACH_NFS_STAT4(DEFINE_INDEX) NFSSTAT4_INDEX_LAST,
 };
 
-static counter_metric_handle_t rpcs_received_total;
-static counter_metric_handle_t rpcs_completed_total;
-static gauge_metric_handle_t rpcs_inflight;
 gauge_metric_handle_t ganesha_info;
-/* NFSv4 Operation Metrics */
-static histogram_metric_handle_t nfsv4_op_latency[NFS4_OP_LAST_ONE]
-						 [NFSSTAT4_INDEX_LAST];
-static counter_metric_handle_t nfsv4_op_count[NFS4_OP_LAST_ONE]
-					     [NFSSTAT4_INDEX_LAST];
 
 /* Compound procedure latency metric */
 static histogram_metric_handle_t compound_latency_metric[NFSSTAT4_INDEX_LAST];
@@ -201,38 +193,6 @@ void register_ganesha_info_metrics(const char *server_scope)
 		METRIC_METADATA("Current ganesha build info", METRIC_UNIT_NONE),
 		labels, ARRAY_SIZE(labels));
 	monitoring__gauge_set(ganesha_info, 1);
-}
-static void register_nfsv4_operation_metrics(nfs_opnum4 opcode,
-					     enum nfsstat4_index statcode_index)
-{
-	const metric_label_t labels[] = {
-		METRIC_LABEL("op", nfsop4_to_str(opcode)),
-		METRIC_LABEL("status",
-			     nfsstat4_to_str(index_to_nfsstat4[statcode_index]))
-	};
-
-	nfsv4_op_latency[opcode][statcode_index] =
-		monitoring__register_histogram(
-			"nfsv4__op_latency",
-			METRIC_METADATA("NFSv4 Operations Latency",
-					METRIC_UNIT_MILLISECOND),
-			labels, ARRAY_SIZE(labels), monitoring__buckets_exp2());
-
-	nfsv4_op_count[opcode][statcode_index] = monitoring__register_counter(
-		"nfsv4__op_count",
-		METRIC_METADATA("NFSv4 Operations Counter", METRIC_UNIT_NONE),
-		labels, ARRAY_SIZE(labels));
-}
-
-static void register_nfsv4_operations_metrics(void)
-{
-	for (nfs_opnum4 opcode = 0; opcode < NFS4_OP_LAST_ONE; opcode++) {
-		for (enum nfsstat4_index statcode_index = 0;
-		     statcode_index < NFSSTAT4_INDEX_LAST; statcode_index++) {
-			register_nfsv4_operation_metrics(opcode,
-							 statcode_index);
-		}
-	}
 }
 
 static void register_dropped_gss_requests_count_metric(void)
@@ -272,16 +232,6 @@ static void register_compound_operation_metrics(void)
 	}
 }
 
-void nfs_metrics__nfs4_op_completed(nfs_opnum4 opcode, nfsstat4 statcode,
-				    nsecs_elapsed_t latency)
-{
-	monitoring__histogram_observe(
-		nfsv4_op_latency[opcode][nfsstat4_to_index(statcode)],
-		latency / NS_PER_MSEC);
-	monitoring__counter_inc(
-		nfsv4_op_count[opcode][nfsstat4_to_index(statcode)], 1);
-}
-
 void nfs_metrics__gss_request_dropped(void)
 {
 	monitoring__counter_inc(dropped_gss_requests_count, 1);
@@ -294,42 +244,6 @@ void nfs_metrics__nfs4_compound_completed(nfsstat4 statcode,
 		compound_latency_metric[nfsstat4_to_index(statcode)],
 		latency / NS_PER_MSEC);
 	monitoring__histogram_observe(compound_ops_count_metric, num_ops);
-}
-
-static void register_rpcs_metrics(void)
-{
-	const metric_label_t labels[] = {};
-
-	rpcs_received_total = monitoring__register_counter(
-		"rpcs_received_total",
-		METRIC_METADATA("Number of NFS requests received",
-				METRIC_UNIT_NONE),
-		labels, ARRAY_SIZE(labels));
-	rpcs_completed_total = monitoring__register_counter(
-		"rpcs_completed_total",
-		METRIC_METADATA("Number of NFS requests completed",
-				METRIC_UNIT_NONE),
-		labels, ARRAY_SIZE(labels));
-	rpcs_inflight = monitoring__register_gauge(
-		"rpcs_in_flight",
-		METRIC_METADATA("Number of NFS requests received or in flight.",
-				METRIC_UNIT_NONE),
-		labels, ARRAY_SIZE(labels));
-}
-
-void nfs_metrics__rpc_received(void)
-{
-	monitoring__counter_inc(rpcs_received_total, 1);
-}
-
-void nfs_metrics__rpc_completed(void)
-{
-	monitoring__counter_inc(rpcs_completed_total, 1);
-}
-
-void nfs_metrics__rpcs_in_flight(int64_t value)
-{
-	monitoring__gauge_set(rpcs_inflight, value);
 }
 
 #ifdef _USE_NFS3
@@ -364,8 +278,6 @@ void nfs_metrics__nfs4_request(uint32_t op, nsecs_elapsed_t request_time,
 
 void nfs_metrics__init(void)
 {
-	register_rpcs_metrics();
-	register_nfsv4_operations_metrics();
 	register_dropped_gss_requests_count_metric();
 	register_compound_operation_metrics();
 }

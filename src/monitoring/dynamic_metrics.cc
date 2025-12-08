@@ -102,12 +102,12 @@ class DynamicMetrics {
 	GaugeDouble::Family &cpuutilization;
 
 	// Per {operation} NFS request metrics.
-	CounterInt::Family &requestsTotalByOperation;
+	CounterInt::Family &requestsByVersionOperationStatus;
 	CounterInt::Family &bytesReceivedTotalByOperation;
 	CounterInt::Family &bytesSentTotalByOperation;
 	HistogramInt::Family &requestSizeByOperation;
 	HistogramInt::Family &responseSizeByOperation;
-	HistogramDouble::Family &latencyByOperation;
+	HistogramDouble::Family &latencyByVersionOperationStatus;
 
 	// Per {operation, export_id} NFS request metrics.
 	CounterInt::Family &requestsTotalByOperationExport;
@@ -205,10 +205,10 @@ DynamicMetrics::DynamicMetrics(prometheus::Registry &registry)
 	,
 
 	// Per {operation} NFS request metrics.
-	requestsTotalByOperation(prometheus::Builder<CounterInt>()
-					 .Name("nfs_requests_total")
-					 .Help("Total requests.")
-					 .Register(registry))
+	requestsByVersionOperationStatus(prometheus::Builder<CounterInt>()
+						 .Name("nfs_requests_total")
+						 .Help("Total requests.")
+						 .Register(registry))
 	, bytesReceivedTotalByOperation(
 		  prometheus::Builder<CounterInt>()
 			  .Name("nfs_bytes_received_total")
@@ -226,10 +226,11 @@ DynamicMetrics::DynamicMetrics(prometheus::Registry &registry)
 					  .Name("nfs_response_size_bytes")
 					  .Help("Response size in bytes.")
 					  .Register(registry))
-	, latencyByOperation(prometheus::Builder<HistogramDouble>()
-				     .Name("nfs_latency_ms")
-				     .Help("Request latency in ms.")
-				     .Register(registry))
+	, latencyByVersionOperationStatus(
+		  prometheus::Builder<HistogramDouble>()
+			  .Name("nfs_latency_ms")
+			  .Help("Request latency in ms.")
+			  .Register(registry))
 	,
 
 	// Per {operation, export_id} NFS request metrics.
@@ -355,6 +356,21 @@ void dynamic_metrics__init(void)
 	initialized = true;
 }
 
+void nfs_metrics__rpc_received(void)
+{
+	dynamic_metrics->rpcsReceivedTotal.Add({}).Increment();
+}
+
+void nfs_metrics__rpc_completed(void)
+{
+	dynamic_metrics->rpcsCompletedTotal.Add({}).Increment();
+}
+
+void nfs_metrics__rpcs_in_flight(int64_t value)
+{
+	dynamic_metrics->rpcsInFlight.Add({}).Set(value);
+}
+
 void dynamic_metrics__observe_nfs_request(
 	const char *operation, nsecs_elapsed_t request_time,
 	const char *version, const char *status_label, export_id_t export_id,
@@ -387,11 +403,16 @@ void dynamic_metrics__observe_nfs_request(
 		.Increment();
 
 	// Observe metrics.
-	dynamic_metrics->requestsTotalByOperation
-		.Add({ { kOperation, operationLowerCase } })
+	dynamic_metrics->requestsByVersionOperationStatus
+		.Add({ { kVersion, version },
+		       { kOperation, operationLowerCase },
+		       { kStatus, status_label } })
 		.Increment();
-	dynamic_metrics->latencyByOperation
-		.Add({ { kOperation, operationLowerCase } }, latencyBuckets)
+	dynamic_metrics->latencyByVersionOperationStatus
+		.Add({ { kVersion, version },
+		       { kOperation, operationLowerCase },
+		       { kStatus, status_label } },
+		     latencyBuckets)
 		.Observe(latency_ms);
 
 	if (export_id == 0) {
