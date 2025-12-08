@@ -63,6 +63,61 @@
 		     (chan_attrs)->ca_maxrequests)
 
 /**
+ * Minimal async probe: send a single CB_NULL via existing callback stack
+ * Uses nfs_test_cb_chan() already implemented in nfs_rpc_callback.c.
+ * Spawn a detached thread, take a client-id ref for the worker, and
+ * call nfs_test_cb_chan(). Failures are logged but do not affect
+ * CREATE_SESSION outcome.
+*/
+
+static void *initial_cb_null_worker(void *arg)
+{
+	nfs_client_id_t *cl = (nfs_client_id_t *)arg;
+	enum clnt_stat st;
+
+	if (cl == NULL)
+		return NULL;
+
+	/* call existing helper that does CB_NULL on an available backchannel */
+	st = nfs_test_cb_chan(cl);
+
+	if (st == RPC_SUCCESS) {
+		LogInfo(COMPONENT_SESSIONS,
+			"initial_cb_null: CB_NULL succeeded for client (%p)",
+			cl);
+	} else {
+		LogWarn(COMPONENT_SESSIONS,
+			"initial_cb_null: CB_NULL failed for client (%p) rc=%d",
+			cl, st);
+	}
+
+	/* drop the reference taken before spawning the worker */
+	dec_client_id_ref(cl);
+	return NULL;
+}
+
+static void schedule_initial_cb_null(nfs_client_id_t *cl)
+{
+	pthread_t tid;
+
+	if (cl == NULL)
+		return;
+
+	/* take a ref so the clientid stays valid while thread runs */
+	inc_client_id_ref(cl);
+
+	if (pthread_create(&tid, NULL, initial_cb_null_worker, (void *)cl) !=
+	    0) {
+		LogWarn(COMPONENT_SESSIONS, "%s: pthread_create failed",
+			__func__);
+		/* undo ref when thread create fails */
+		dec_client_id_ref(cl);
+		return;
+	}
+	pthread_detach(tid);
+}
+
+/**
  * @brief Populate nfs41_session with callback params
  */
 static void populate_callback_params_in_session(
@@ -643,6 +698,7 @@ enum nfs_req_result nfs4_op_create_session(struct nfs_argop4 *op,
 			res_CREATE_SESSION4ok->csr_flags |=
 				CREATE_SESSION4_FLAG_CONN_BACK_CHAN;
 			LogDebug(component, "Session backchannel created");
+			schedule_initial_cb_null(found);
 		}
 	}
 
