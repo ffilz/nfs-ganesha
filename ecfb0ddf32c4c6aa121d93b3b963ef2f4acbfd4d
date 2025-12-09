@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cdb7bc7_ef83861f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-09T21:31:26Z",
+      "side": 1,
+      "message": "Interesting. NFSv4.0 does send CB_NULL as part of SETCLIENTID_CONFIRM processing, so not sure why we didn\u0027t do it for NFSv4.1. Note though for 4.0 we only do it if we allow delegations, so might want to consider that here too.",
+      "revId": "ecfb0ddf32c4c6aa121d93b3b963ef2f4acbfd4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
