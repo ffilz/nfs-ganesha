@@ -1728,9 +1728,13 @@ mdcache_entry_t *mdcache_lru_get(struct fsal_obj_handle *sub_handle,
 		/* we uniquely hold entry with a temp ref that we will
 		 * discard (with no negative consequence) below when we remake
 		 * the entry.
+		 *
+		 * NOTE: The entry has already been cleaned by
+		 * mdcache_lru_unref() in the cih_remove_latched() path,
+		 * so we should NOT call mdcache_lru_clean() again to
+		 * avoid double cleanup of st_lock.
 		 */
 		nentry = container_of(lru, mdcache_entry_t, lru);
-		mdcache_lru_clean(nentry);
 		memset(&nentry->attrs, 0, sizeof(nentry->attrs));
 		init_rw_locks(nentry);
 	} else {
