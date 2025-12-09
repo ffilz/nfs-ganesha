@@ -16,6 +16,23 @@
       "message": "Waiting for review from Marc Eshel",
       "revId": "072123f9080c1dc77e5f81035e67b081e25ee6ea",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ecc925_6b6e53b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038959
+      },
+      "writtenOn": "2025-12-09T00:20:32Z",
+      "side": 1,
+      "message": "to me it seems ganesha does not need to queue the recall into obj_hdl\u0027s layoutrecall_list, i could only find it is used to delete it when handling LAYOUTRETURN.",
+      "revId": "072123f9080c1dc77e5f81035e67b081e25ee6ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
