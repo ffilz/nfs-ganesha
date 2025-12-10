@@ -16,6 +16,23 @@
       "message": "Interesting. NFSv4.0 does send CB_NULL as part of SETCLIENTID_CONFIRM processing, so not sure why we didn\u0027t do it for NFSv4.1. Note though for 4.0 we only do it if we allow delegations, so might want to consider that here too.",
       "revId": "ecfb0ddf32c4c6aa121d93b3b963ef2f4acbfd4d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "009e1674_349cbe8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2025-12-10T05:54:35Z",
+      "side": 1,
+      "message": "Yes, I noticed that the SETCLIENTID_CONFIRM path for NFSv4.0 sends a CB_NULL only when delegations are enabled, and that logic wasn’t carried over into the NFSv4.1 CREATE_SESSION flow. For the pynfs CSESS20/21 tests, the client expects an initial CB_NULL purely to validate the callback program and version, so I implemented the minimal NFSv4.1 equivalent.\n\nDo you want me to align the behavior with the NFSv4.0 condition—i.e., send the CB_NULL only when delegations are supported?\n\nIf we follow that, then these pynfs tests would only pass for backends that support delegations (CephFS), and would still fail for GPFS and VFS since they do not support delegations. Is that the expected behavior, or should we send the CB_NULL unconditionally to satisfy pynfs?",
+      "revId": "ecfb0ddf32c4c6aa121d93b3b963ef2f4acbfd4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
