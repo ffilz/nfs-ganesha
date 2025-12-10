@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51fbc8cf_d797e655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2025-12-10T16:25:33Z",
+      "side": 1,
+      "message": "I\u0027m not sure I agree with the analysis.\n  lru_reap_impl() -\u003e cih_remove_latched() -\u003e mdcache_lru_unref(SENTINAL).\n\nmdcache_lru_unref() only calls mdcache_lru_clean() if the refcount goes to 0.  However, lru_reap_impl() only calls cih_remove_latched() if the refcount is 2 (SENTINAL plus the one it holds).  So refcnt can\u0027t go to 0 in this case, and mdcache_lru_clean() will not be called.\n\nIt\u0027s been a while since I analyzed these callpaths, and I may have missed something.",
+      "revId": "1659e27f65ae3ebf79534e3b66a7b8766b402376",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
