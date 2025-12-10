@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73182d81_2e5a2b8e",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\t\t\t\t/* Original caller was root. Allow setting owner to any UID",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5696180e_dc5cd470",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 89 exceeds 80 columns\n+\t\t\t\t * that root would normally be able to set (including the",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e9d2c4_cd09f8a0",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t\t * squashed UID). For root_squash, this allows root to set",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b07689_d28fefb8",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t/* Need permissions like WRITE_ACL or WRITE_ATTR (but not WRITE_OWNER",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ca86e1_7161fcad",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t/* WRITE_OWNER without ACL is only allowed for taking ownership,",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b76197_27093937",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t * which we already handled above. If we get here, it\u0027s for",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f49093_97b37176",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t/* For WRITE_ACL or WRITE_ATTR, check write permission as fallback */",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4161078_46a68bf3",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t/* If write permission check failed, check if the original",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512b9310_5e5f68c8",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t/* Original caller was root, allow the operation */",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409384a0_c3dcd4c4",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-10T13:44:12Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\tnote \u003d \" (checked mode, original caller was root)\";",
+      "revId": "4b3fa0fcfd7d6ed2bae1697be30fa8ac86abaac7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
