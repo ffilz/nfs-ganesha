@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80cf8218_da9c8551",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T16:01:16Z",
+      "side": 1,
+      "message": "We don\u0027t need to do this. pynfs failures are expected when run as root using root squash. All of these permission issues are exactly among the things expected to be blocked by root squash.",
+      "revId": "b3e780e911493fac5606d66d4075585e6f770860",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4637530d_504c1712",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 3
