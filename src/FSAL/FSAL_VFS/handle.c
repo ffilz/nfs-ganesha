@@ -836,10 +836,32 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl, const char *name,
 		goto direrr;
 	}
 
-	if (!vfs_set_credentials(&op_ctx->creds, dir_hdl->fsal)) {
-		retval = EPERM;
-		status = posix2fsal_status(retval);
-		goto direrr;
+	/* For block and character devices, we need CAP_MKNOD capability.
+	 * If the original caller was root (before squashing), use the original
+	 * credentials to preserve root capabilities. Otherwise, use the
+	 * squashed credentials.
+	 */
+	if ((nodetype == BLOCK_FILE || nodetype == CHARACTER_FILE) &&
+	    (op_ctx->cred_flags & UID_SQUASHED) != 0 &&
+	    op_ctx->original_creds.caller_uid == 0 &&
+	    op_ctx->fsal_export->exp_ops.is_superuser(
+		    op_ctx->fsal_export, &op_ctx->original_creds)) {
+		/* Original caller was root, use original credentials for
+		 * block/character device creation to preserve capabilities.
+		 */
+		if (!vfs_set_credentials(&op_ctx->original_creds,
+					 dir_hdl->fsal)) {
+			retval = EPERM;
+			status = posix2fsal_status(retval);
+			goto direrr;
+		}
+	} else {
+		/* Use normal (possibly squashed) credentials */
+		if (!vfs_set_credentials(&op_ctx->creds, dir_hdl->fsal)) {
+			retval = EPERM;
+			status = posix2fsal_status(retval);
+			goto direrr;
+		}
 	}
 
 	retval = mknodat(dir_fd, name, unix_mode, unix_dev);
