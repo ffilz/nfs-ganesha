@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "910ba3f1_3e2638b2",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2419,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T01:03:04Z",
+      "side": 1,
+      "message": "No need to treat empty list special, glist_for_each is like for, if list is empty, there will be no iterations.",
+      "revId": "3d07d3d35af14e4a296775871ad6570135e84f90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813d89f3_81707524",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T01:03:04Z",
+      "side": 1,
+      "message": "No need to treat empty list special, glist_for_each is like for, if list is empty, there will be no iterations.",
+      "revId": "3d07d3d35af14e4a296775871ad6570135e84f90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c053f1_838d5a01",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2476,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T01:03:04Z",
+      "side": 1,
+      "message": "Hmm, it seems the only purpose of this is to eliminate duplicates? Let\u0027s add duplicate elimination logic to add_client.",
+      "revId": "3d07d3d35af14e4a296775871ad6570135e84f90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5cc7b9c_ed895d0c",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3381,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T01:03:04Z",
+      "side": 1,
+      "message": "No need to treat empty list special, glist_for_each (as used in client_match) is like for, if list is empty, there will be no iterations.",
+      "revId": "3d07d3d35af14e4a296775871ad6570135e84f90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d206429c_9cc8a3da",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3720,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T01:03:04Z",
+      "side": 1,
+      "message": "No need to treat empty list special, glist_for_each is like for, if list is empty, there will be no iterations.",
+      "revId": "3d07d3d35af14e4a296775871ad6570135e84f90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78419d7d_a36d88f7",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3724,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T01:03:04Z",
+      "side": 1,
+      "message": "Again, let\u0027s put the duplicate elimination into add_client",
+      "revId": "3d07d3d35af14e4a296775871ad6570135e84f90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c207ae8_7fac811f",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3757,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-10T01:03:04Z",
+      "side": 1,
+      "message": "Let\u0027s add a generic client list remove function into client_mgr.c so if future client list applications need removal, they can use it",
+      "revId": "3d07d3d35af14e4a296775871ad6570135e84f90",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
