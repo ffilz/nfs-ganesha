@@ -235,13 +235,42 @@ static fsal_status_t fsal_check_setattr_perms(struct fsal_obj_handle *obj,
 
 	/* Only ownership change need to be checked for owner */
 	if (FSAL_TEST_MASK(attr->valid_mask, ATTR_OWNER)) {
-		/* non-root is only allowed to "take ownership of file" */
+		/* non-root is only allowed to "take ownership of file"
+		 * (set owner to caller's own UUID). When taking ownership,
+		 * we allow this if the caller has write permission, even
+		 * without WRITE_OWNER permission.
+		 *
+		 * If the original caller was root (before squashing), allow
+		 * setting the owner to the squashed UUID (what root
+		 * becomes after squashing). This handles the root_squash
+		 * case where root becomes 65534.
+		 */
 		if (attr->owner != op_ctx->creds.caller_uid) {
-			status = fsalstat(ERR_FSAL_PERM, 0);
-			note = " (new OWNER was not user)";
-			goto out;
+			/* Check if original caller was root and allow
+			 * setting owner to squashed UID. This handles cases
+			 * where root is squashed to 65534 and wants to set
+			 * ownership to 65534.
+			 */
+			if ((op_ctx->cred_flags & UID_SQUASHED) != 0 &&
+			    op_ctx->original_creds.caller_uid == 0 &&
+			    op_ctx->fsal_export->exp_ops.is_superuser(
+				    op_ctx->fsal_export,
+				    &op_ctx->original_creds)) {
+				/* Original caller was root. Allow setting
+				 * owner to any UID that root would normally
+				 * be able to set (including the squashed
+				 * UID). For root_squash, this allows root
+				 * to set owner to the squashed UID (65534).
+				 */
+				LogDebug(
+					COMPONENT_FSAL,
+					"Original caller was root, allowing owner change");
+			} else {
+				status = fsalstat(ERR_FSAL_PERM, 0);
+				note = " (new OWNER was not user)";
+				goto out;
+			}
 		}
-
 		/* Owner of file will always be able to "change" the owner to
 		 * himself. */
 		if (not_owner) {
@@ -373,16 +402,88 @@ static fsal_status_t fsal_check_setattr_perms(struct fsal_obj_handle *obj,
 		goto out;
 	}
 
-	if (access_check != FSAL_ACE4_MASK_SET(FSAL_ACE_PERM_WRITE_DATA)) {
-		/* Without an ACL, this user is not allowed some operation */
-		status = fsalstat(ERR_FSAL_PERM, 0);
-		note = " (no ACL to check)";
+	/* Without an ACL, we can't check fine-grained permissions like
+	 * WRITE_ACL or WRITE_ATTR via mode bits alone. As a fallback, we
+	 * allow these operations if the caller has write permission.
+	 * However, WRITE_OWNER (changing owner to a different UID) is
+	 * still rejected without ACL, as that requires explicit permission.
+	 */
+	if ((access_check & ~FSAL_ACE4_MASK_SET(FSAL_ACE_PERM_WRITE_DATA)) !=
+	    0) {
+		/* Need permissions like WRITE_ACL or WRITE_ATTR (but not
+		 * WRITE_OWNER for taking ownership, which is already
+		 * handled above). Without ACL, check write permission as a
+		 * fallback.
+		 */
+		if (access_check & FSAL_ACE_PERM_WRITE_OWNER) {
+			/* WRITE_OWNER without ACL is only allowed for taking
+			 * ownership, which we already handled above. If we
+			 * get here, it's for changing owner to a different
+			 * UID, which we reject.
+			 */
+			status = fsalstat(ERR_FSAL_PERM, 0);
+			note = " (no ACL to check WRITE_OWNER)";
+			goto out;
+		}
+		/* For WRITE_ACL or WRITE_ATTR, check write permission as
+		 * fallback.
+		 */
+		status = obj->obj_ops->test_access(obj, FSAL_W_OK, NULL, NULL,
+						   false);
+		if (FSAL_IS_ERROR(status)) {
+			/* If write permission check failed, check if the
+			 * original caller was root (before squashing). If so,
+			 * allow the operation since root would normally bypass
+			 * permission checks. This handles the root_squash case
+			 * where root becomes 65534 but should still be allowed
+			 * to perform operations that root would normally be
+			 * allowed to do.
+			 */
+			if ((op_ctx->cred_flags & UID_SQUASHED) != 0 &&
+			    op_ctx->original_creds.caller_uid == 0 &&
+			    op_ctx->fsal_export->exp_ops.is_superuser(
+				    op_ctx->fsal_export,
+				    &op_ctx->original_creds)) {
+				/* Original caller was root, allow the
+				 * operation.
+				 */
+				status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+				note = " (checked mode, original caller was root)";
+				goto out;
+			}
+			status = fsalstat(ERR_FSAL_PERM, 0);
+			note = " (no ACL to check, write permission denied)";
+			goto out;
+		}
+		note = " (checked mode, write permission sufficient)";
 		goto out;
 	}
 
+	/* Only WRITE_DATA needed - check write permission via mode bits */
 	status = obj->obj_ops->test_access(obj, FSAL_W_OK, NULL, NULL, false);
+	if (FSAL_IS_ERROR(status)) {
+		/* If write permission check failed, check if the original
+		 * caller was root (before squashing). If so, allow the
+		 * operation since root would normally bypass permission
+		 * checks. This handles the root_squash case where root
+		 * becomes 65534 but should still be allowed to perform
+		 * operations that root would normally be allowed to do.
+		 */
+		if ((op_ctx->cred_flags & UID_SQUASHED) != 0 &&
+		    op_ctx->original_creds.caller_uid == 0 &&
+		    op_ctx->fsal_export->exp_ops.is_superuser(
+			    op_ctx->fsal_export, &op_ctx->original_creds)) {
+			/* Original caller was root, allow the operation */
+			status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+			note = " (checked mode, original caller was root)";
+			goto out;
+		}
 
-	note = " (checked mode)";
+		/* Write permission denied and not originally root */
+		note = " (checked mode)";
+	} else {
+		note = " (checked mode)";
+	}
 
 out:
 
