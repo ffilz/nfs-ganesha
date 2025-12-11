@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be302b5a_02c4ad0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-12-11T06:35:00Z",
+      "side": 1,
+      "message": "Learnt on this working on these test cases. \n\nI have added below comment on BZ - https://bugzilla.redhat.com/show_bug.cgi?id\u003d2415390\n\nClient runs as root → Export has root_squash → Tests fail\nExpected. Root is mapped to an unprivileged user, which cannot create device nodes or change ownership.\n\nClient runs as root → Export has no_root_squash → Tests pass\nExpected. Root retains full privileges and can perform all operations required by the tests.\n\nClient runs as non-root → Export has no_root_squash → Tests fail\nExpected. Non-root users cannot set arbitrary ownership or create special files, so these tests naturally fail.\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nIf this looks all good, shall we abandon this PR?",
+      "parentUuid": "80cf8218_da9c8551",
+      "revId": "b3e780e911493fac5606d66d4075585e6f770860",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "241bbc60_9df53ccf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2025-12-11T06:35:00Z",
+      "side": 1,
+      "message": "Added a note on few of the cases tested with root squash enabled and disabled. Please, check.",
+      "revId": "b3e780e911493fac5606d66d4075585e6f770860",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4637530d_504c1712",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 3
