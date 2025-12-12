@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure I agree with the analysis.\n  lru_reap_impl() -\u003e cih_remove_latched() -\u003e mdcache_lru_unref(SENTINAL).\n\nmdcache_lru_unref() only calls mdcache_lru_clean() if the refcount goes to 0.  However, lru_reap_impl() only calls cih_remove_latched() if the refcount is 2 (SENTINAL plus the one it holds).  So refcnt can\u0027t go to 0 in this case, and mdcache_lru_clean() will not be called.\n\nIt\u0027s been a while since I analyzed these callpaths, and I may have missed something.",
       "revId": "1659e27f65ae3ebf79534e3b66a7b8766b402376",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5e5146f_2d1d5d48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2025-12-12T13:19:54Z",
+      "side": 1,
+      "message": "I agree that this isn\u0027t a double-free Mutex scenario, but I think this change is required. Based on my analysis, if the reference count is zero in this specific execution path, the state handle and its associated Mutex are cleaned up as expected by \"mdcache_lru_clean()\" function and If the count is positive (refcount \u003e 0), however, it\u0027s probable that the Mutex memory has been corrupted/overwritten. so, I think we should avoid attempting cleanup in this corrupted state,relying instead on the caller \"mdcache_alloc_handle()\" function to safely re-initialize the state handle.",
+      "parentUuid": "51fbc8cf_d797e655",
+      "revId": "1659e27f65ae3ebf79534e3b66a7b8766b402376",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
