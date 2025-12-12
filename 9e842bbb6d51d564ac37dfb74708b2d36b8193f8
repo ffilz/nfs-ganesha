@@ -227,6 +227,24 @@
       "parentUuid": "8fee34b5_3548c49a",
       "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fdf5719_480c6c0c",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2025-12-12T05:33:08Z",
+      "side": 1,
+      "message": "I don\u0027t really understand why we need it.  We only ever needed to determine of an IP address was in a CIDR range.  cidr_contains() does that.  \n\nThe difference with  sockaddr_cmpf was that it was used in a comparator loop and returned -1, 0, 1. cmp_sockaddr just returned boolean.\n\nNo functionality/utility has been lost and we have less confusing names.",
+      "parentUuid": "df720a0e_449decfe",
+      "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
