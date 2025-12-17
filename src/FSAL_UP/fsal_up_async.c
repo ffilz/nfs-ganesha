@@ -63,6 +63,7 @@
 #include "sal_functions.h"
 #include "pnfs_utils.h"
 
+#include "../FSAL/FSAL_CEPH/internal.h"
 /* Invalidate */
 
 struct invalidate_args {
@@ -462,6 +463,58 @@ struct delegrecall_args {
 	void *cb_arg;
 	char key[];
 };
+
+struct delegrecall_args_per_state {
+	struct fsal_obj_handle *obj;
+	struct state_t *state;
+};
+
+/* Delegrecall per state */
+static void queue_delegrecall_per_state(struct fridgethr_context *ctx)
+{
+	struct delegrecall_args_per_state *dctx = ctx->arg;
+	struct fsal_obj_handle *obj = dctx->obj;
+	state_t *state = dctx->state;
+
+	LogFullDebug(COMPONENT_FSAL, "obj %p state %p", obj, state);
+
+	STATELOCK_lock(obj);
+	/* Per state delegrecall */
+	delegrecall_impl_per_state(obj, state);
+	STATELOCK_unlock(obj);
+
+	obj->obj_ops->put_ref(obj);
+	dec_state_t_ref(state);
+	gsh_free(dctx);
+}
+
+int async_delegrecall_per_state(struct fridgethr *fr,
+				struct fsal_obj_handle *obj,
+				struct state_t *state)
+{
+	struct delegrecall_args_per_state *args = NULL;
+	int rc = 0;
+
+	args = gsh_malloc(sizeof(struct delegrecall_args_per_state));
+
+	/* get a ref to prevent races when delegrecall is called too late */
+	obj->obj_ops->get_ref(obj);
+	inc_state_t_ref(state);
+
+	args->obj = obj;
+	args->state = state;
+
+	/* Async processing of the delegrecall */
+	rc = fridgethr_submit(fr, queue_delegrecall_per_state, args);
+
+	if (rc != 0) {
+		obj->obj_ops->put_ref(obj);
+		dec_state_t_ref(state);
+		gsh_free(args);
+	}
+
+	return rc;
+}
 
 static void queue_delegrecall(struct fridgethr_context *ctx)
 {
