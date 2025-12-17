@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c4839b4_3d3826d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "Re-wrap so on a single line.",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e0510b_fe261cfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "Logic looks good.",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9858fc6_2948fdae",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "You should not need this include, please remove",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a6e29c8_43c976ab",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "This should assert obj is a regular file.",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c33aabba_b95c2a30",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "This MUST not be called with anything other than a regular file, so don\u0027t bother with this test. The callers must have STATELOCK_lock which MUST only be called on regular file.",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d05c733e_2cf68c85",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "I like to see blank lines before and after if statements to separate them out more (no need if comment just before if statement as above)",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e46a85_752fe526",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "I also like to see blank lines before an after mutex/rwlock macros (again, unless comment before), again to make them more visible",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e403299e_8955c2fa",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "Should assert this is a regular file",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99309248_2dbac38e",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "Blank line",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b27f25a_d077cc60",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-17T18:51:13Z",
+      "side": 1,
+      "message": "No need for else since previous \"then\" block is a goto...\n\nActually, can you re-organize so it\u0027s a single condition with an \"or\" between the two cases, and then get rid of the goto and continue?",
+      "revId": "f0dd0b20807254aa58f399abbafa6912b705f3b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
