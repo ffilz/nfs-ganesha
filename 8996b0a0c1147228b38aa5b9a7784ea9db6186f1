@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3e3994a_034624ee",
+        "filename": "src/include/client_mgr.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-18T17:07:20Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t       struct glist_head *client_list, const char *client_tok,\n    - \t\t       enum term_type type_hint);\n→ to be replaced with:\n    + \t\t\tstruct glist_head *client_list, const char *client_tok,\n    + \t\t\tenum term_type type_hint);",
+      "revId": "8996b0a0c1147228b38aa5b9a7784ea9db6186f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "456e72d2_c4e44b02",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2423,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-18T17:07:20Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tstruct export_id_list,\n    - \t\t\t\texport_id_glist);\n    - \t\t\t\texport_id_list_obj-\u003eexport_id) {\n→ to be replaced with:\n    + \t\t\t\t\t\t struct export_id_list,\n    + \t\t\t\t\t\t export_id_glist);\n    + \t\t    export_id_list_obj-\u003eexport_id) {",
+      "revId": "8996b0a0c1147228b38aa5b9a7784ea9db6186f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e777b084_8bca932a",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2439,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-18T17:07:20Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\u0026export_id_list-\u003eexport_id_glist);\n→ to be replaced with:\n    + \t\t       \u0026export_id_list-\u003eexport_id_glist);",
+      "revId": "8996b0a0c1147228b38aa5b9a7784ea9db6186f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d80ea6b9_f0e68e83",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3691,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-18T17:07:20Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t  \"client(%s) add failed with error(%d)\", arg_str, rc);\n→ to be replaced with:\n    + \t\t\t  \"client(%s) add failed with error(%d)\",\n    + \t\t\t  arg_str, rc);",
+      "revId": "8996b0a0c1147228b38aa5b9a7784ea9db6186f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72e4b2b4_a49793c8",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3730,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2025-12-18T17:07:20Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t  \"Entry not exist (%s)\", arg_str);\n→ to be replaced with:\n    + \t\t\t  \"Entry not exist (%s)\",\n    + \t\t\t  arg_str);",
+      "revId": "8996b0a0c1147228b38aa5b9a7784ea9db6186f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
