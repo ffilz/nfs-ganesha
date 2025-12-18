@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - /**\n→ to be replaced with:\n    + \t/**",
       "revId": "f8ddcc958d3ab897e4d98b183d9e2b680a31b101",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e50756cb_11b0500f",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2025-12-18T21:55:47Z",
+      "side": 1,
+      "message": "It\u0027s messed up, just accept the clang-format here. We need to go back and fix it, but the others are formatted the same way.",
+      "parentUuid": "8fa3f09e_16289931",
+      "revId": "f8ddcc958d3ab897e4d98b183d9e2b680a31b101",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
