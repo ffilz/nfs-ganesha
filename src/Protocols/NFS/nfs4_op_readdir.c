@@ -461,7 +461,10 @@ not_junction:
 skip:
 
 	if (args.rdattr_error != NFS4_OK) {
-		tracker->error = args.rdattr_error;
+		/* don't copy attr error to tracker if it's a referral. */
+		if (args.rdattr_error != NFS4ERR_MOVED) {
+			tracker->error = args.rdattr_error;
+		}
 		if (!attribute_is_set(tracker->req_attr, FATTR4_RDATTR_ERROR) &&
 		    !attribute_is_set(tracker->req_attr, FATTR4_FS_LOCATIONS)) {
 			LogDebug(
