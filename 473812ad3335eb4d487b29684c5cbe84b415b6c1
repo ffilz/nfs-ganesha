@@ -16,6 +16,24 @@
       "message": "The one question I would have is if we could overload the general_fridge with these. I\u0027ll have to look at what the general_fridge is used for and how many threads it has.",
       "revId": "473812ad3335eb4d487b29684c5cbe84b415b6c1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be89829d_f3e01fa6",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2710,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-01-08T17:23:01Z",
+      "side": 1,
+      "message": "I searched through the code and it looks like fridge has a maximum of 4 threads.\n\nsrc/support/fridgethr.c\nfrp.thr_max \u003d 4;\nfrp.thr_min \u003d 0;\nfrp.flavor \u003d fridgethr_flavor_worker;",
+      "parentUuid": "231cfc09_19102c5f",
+      "revId": "473812ad3335eb4d487b29684c5cbe84b415b6c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
