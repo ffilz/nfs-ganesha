@@ -3658,6 +3658,11 @@ void export_check_access(void)
 		exp_str[0] = '\0';
 	}
 
+	/* Copy export_perms atomically to avoid race conditions */
+	struct export_perms export_perms_snapshot;
+
+	export_perms_snapshot = op_ctx->ctx_export->export_perms;
+
 	if (glist_empty(&op_ctx->ctx_export->clients)) {
 		/* No client list so use the export defaults client list to
 		 * see if there's a match.
@@ -3693,30 +3698,26 @@ void export_check_access(void)
 	}
 
 	/* Any options not set by the client, take from the export */
-	op_ctx->export_perms.options |=
-		op_ctx->ctx_export->export_perms.options &
-		op_ctx->ctx_export->export_perms.set &
-		~op_ctx->export_perms.set;
+	op_ctx->export_perms.options |= export_perms_snapshot.options &
+					export_perms_snapshot.set &
+					~op_ctx->export_perms.set;
 
 	if ((op_ctx->export_perms.set & EXPORT_OPTION_ANON_UID_SET) == 0 &&
-	    (op_ctx->ctx_export->export_perms.set &
-	     EXPORT_OPTION_ANON_UID_SET) != 0)
+	    (export_perms_snapshot.set & EXPORT_OPTION_ANON_UID_SET) != 0)
 		op_ctx->export_perms.anonymous_uid =
-			op_ctx->ctx_export->export_perms.anonymous_uid;
+			export_perms_snapshot.anonymous_uid;
 
 	if ((op_ctx->export_perms.set & EXPORT_OPTION_ANON_GID_SET) == 0 &&
-	    (op_ctx->ctx_export->export_perms.set &
-	     EXPORT_OPTION_ANON_GID_SET) != 0)
+	    (export_perms_snapshot.set & EXPORT_OPTION_ANON_GID_SET) != 0)
 		op_ctx->export_perms.anonymous_gid =
-			op_ctx->ctx_export->export_perms.anonymous_gid;
+			export_perms_snapshot.anonymous_gid;
 
 	if ((op_ctx->export_perms.set & EXPORT_OPTION_EXPIRE_SET) == 0 &&
-	    (op_ctx->ctx_export->export_perms.set & EXPORT_OPTION_EXPIRE_SET) !=
-		    0)
+	    (export_perms_snapshot.set & EXPORT_OPTION_EXPIRE_SET) != 0)
 		op_ctx->export_perms.expire_time_attr =
-			op_ctx->ctx_export->export_perms.expire_time_attr;
+			export_perms_snapshot.expire_time_attr;
 
-	op_ctx->export_perms.set |= op_ctx->ctx_export->export_perms.set;
+	op_ctx->export_perms.set |= export_perms_snapshot.set;
 
 no_export:
 

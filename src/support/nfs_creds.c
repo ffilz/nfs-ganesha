@@ -79,11 +79,16 @@ uint32_t root_op_export_set =
 
 void squash_setattr(struct fsal_attrlist *attr)
 {
+	/* Check if any squash type is enabled for this export */
+	bool squash_enabled = (op_ctx->export_perms.options &
+			       EXPORT_OPTION_SQUASH_TYPES) != 0;
+
 	if (attr->valid_mask & ATTR_OWNER &&
 	    op_ctx->export_perms.anonymous_uid != 0) {
 		if (op_ctx->export_perms.options & EXPORT_OPTION_ALL_ANONYMOUS)
 			attr->owner = op_ctx->export_perms.anonymous_uid;
-		else if (((op_ctx->export_perms.options &
+		else if (squash_enabled &&
+			 ((op_ctx->export_perms.options &
 			   EXPORT_OPTION_ROOT_SQUASH) ||
 			  (op_ctx->export_perms.options &
 			   EXPORT_OPTION_ROOT_ID_SQUASH)) &&
@@ -102,7 +107,8 @@ void squash_setattr(struct fsal_attrlist *attr)
 		 */
 		if (op_ctx->export_perms.options & EXPORT_OPTION_ALL_ANONYMOUS)
 			attr->group = op_ctx->export_perms.anonymous_gid;
-		else if (((op_ctx->export_perms.options &
+		else if (squash_enabled &&
+			 ((op_ctx->export_perms.options &
 			   EXPORT_OPTION_ROOT_SQUASH) ||
 			  (op_ctx->export_perms.options &
 			   EXPORT_OPTION_ROOT_ID_SQUASH)) &&

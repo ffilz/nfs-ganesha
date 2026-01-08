@@ -853,6 +853,13 @@ static inline bool mdcache_is_attrs_valid(mdcache_entry_t *entry,
 {
 	bool file_deleg = false;
 	attrmask_t orig_mask = mask;
+	/* Use current export's expire_time_attr if available */
+	uint32_t expire_time_attr = entry->attrs.expire_time_attr;
+
+	if (op_ctx != NULL) {
+		/* Use the current export's expire_time_attr */
+		expire_time_attr = op_ctx->export_perms.expire_time_attr;
+	}
 
 	if (!mdcache_test_attrs_trust(entry, mask))
 		return false;
@@ -877,25 +884,23 @@ static inline bool mdcache_is_attrs_valid(mdcache_entry_t *entry,
 		mask = (mask & ~entry->attrs.valid_mask);
 	}
 
-	if ((orig_mask & ~ATTR_ACL) != 0 && entry->attrs.expire_time_attr == 0)
+	if ((orig_mask & ~ATTR_ACL) != 0 && expire_time_attr == 0)
 		return false;
 
-	if ((mask & ~ATTR_ACL) != 0 && entry->attrs.expire_time_attr > 0) {
+	if ((mask & ~ATTR_ACL) != 0 && expire_time_attr > 0) {
 		time_t current_time = time(NULL);
 
-		if (current_time - entry->attr_time >
-		    entry->attrs.expire_time_attr)
+		if (current_time - entry->attr_time > expire_time_attr)
 			return false;
 	}
 
-	if ((orig_mask & ATTR_ACL) != 0 && entry->attrs.expire_time_attr == 0)
+	if ((orig_mask & ATTR_ACL) != 0 && expire_time_attr == 0)
 		return false;
 
-	if ((mask & ATTR_ACL) != 0 && entry->attrs.expire_time_attr > 0) {
+	if ((mask & ATTR_ACL) != 0 && expire_time_attr > 0) {
 		time_t current_time = time(NULL);
 
-		if (current_time - entry->acl_time >
-		    entry->attrs.expire_time_attr)
+		if (current_time - entry->acl_time > expire_time_attr)
 			return false;
 	}
 
