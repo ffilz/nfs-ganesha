@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "231cfc09_19102c5f",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2710,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-01-08T00:17:46Z",
+      "side": 1,
+      "message": "The one question I would have is if we could overload the general_fridge with these. I\u0027ll have to look at what the general_fridge is used for and how many threads it has.",
+      "revId": "473812ad3335eb4d487b29684c5cbe84b415b6c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
