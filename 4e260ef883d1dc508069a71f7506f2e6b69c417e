@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41eea26c_0732cc51",
+        "filename": "src/FSAL/default_methods.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-01-09T21:32:55Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t       struct gsh_export *exp)\n→ to be replaced with:\n    + \t\t\t\t    struct gsh_export *exp)",
+      "revId": "4e260ef883d1dc508069a71f7506f2e6b69c417e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
