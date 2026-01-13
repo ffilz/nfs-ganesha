@@ -34,6 +34,24 @@
       "parentUuid": "6a3c0c98_0a2b5d95",
       "revId": "2bae209a4d9a67ac3a4f11fd16eba54314584776",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b770ddf_d406ae9b",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2026-01-13T07:30:00Z",
+      "side": 1,
+      "message": "You\u0027re right.  I just had a look up the stack and it could bomb there in the same situation.\n\nenum nfs_req_result nfs4_op_write_resume(struct nfs_argop4 *op,\n\t\t\t\t\t compound_data_t *data,\n\t\t\t\t\t struct nfs_resop4 *resp)\n{\n\tstruct nfs4_write_data *write_data \u003d data-\u003eop_data;\n\tenum nfs_req_result rc;\n\tuint32_t flags;\n\n#ifdef ENABLE_QOS\n\tif (write_data-\u003eqos_flag \u0026 IS_QOS_IO) {\n\t\tif (nfs4_Is_Fh_DSHandle(\u0026data-\u003ecurrentFH)) {\n\nand seemingly called from\n\nstatic enum xprt_stat nfs4_compound_resume(struct svc_req *req)\n\nin the equivalent fn for another op there is the qos_flag usage without a NULL check and freeing done without NULL check.\n\nand free without check in  nfs4_op_read_plus_resume\n\nOtherwise, it seems the default nfs4_default_resume is used for other ops.\n\nThe op_data is set up in the read and write ops and left there for a suspend.  Otherwise, it is cleaned up.  \n\nI had a bit of a look around and didn\u0027t spot why it would be NULL.",
+      "parentUuid": "6a3c0c98_0a2b5d95",
+      "revId": "2bae209a4d9a67ac3a4f11fd16eba54314584776",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
