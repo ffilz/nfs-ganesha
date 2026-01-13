@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a3c0c98_0a2b5d95",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-01-13T06:13:40Z",
+      "side": 1,
+      "message": "How is write_data/op_data used? It is immediately freed below on line 163.\n\nSomething is fishy here...",
+      "revId": "2bae209a4d9a67ac3a4f11fd16eba54314584776",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
