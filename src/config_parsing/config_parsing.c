@@ -1173,14 +1173,12 @@ static int do_block_load(struct config_node *blk, struct config_item *params,
 					*(uint32_t *)param_addr);
 				break;
 			case CONFIG_ENUM:
-				if (item->u.lst.def ==
-				    (*(uint32_t *)param_addr &
-				     item->u.lst.mask))
-					*(uint32_t *)param_addr &=
-						~item->u.lst.mask;
 				if (convert_enum(term_node, item, &num32,
 						 err_type)) {
-					*(uint32_t *)param_addr |= num32;
+					atomic_update_uint32_masked(
+						(uint32_t *)param_addr,
+						item->u.lst.mask, num32);
+
 					if (item->flags & CONFIG_MARK_SET) {
 						void *mask_addr;
 

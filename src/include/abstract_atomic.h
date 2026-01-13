@@ -1696,6 +1696,33 @@ static inline bool atomic_add_unless_int64_t(int64_t *var, int64_t addend,
 }
 
 /**
+ * @brief Atomically update masked bits of a uint32_t
+ *
+ * Atomically clears the bits specified by supplied clear_mask and
+ * sets the bits specified by supplied set_bits in the value pointed
+ * to by var.
+ * The update is performed using a compare-and-swap (CAS) loop
+ * to ensure correctness under concurrent modification.
+ *
+ * @param[in,out] var        Pointer to the value to update
+ * @param[in]     clear_mask Bit mask of bits to clear
+ * @param[in]     set_bits   Bits to set
+ */
+
+static inline void atomic_update_uint32_masked(uint32_t *var,
+					       uint32_t clear_mask,
+					       uint32_t set_bits)
+{
+	uint32_t cur, newv;
+
+	do {
+		cur = __atomic_load_n(var, __ATOMIC_SEQ_CST);
+		newv = (cur & ~clear_mask) | set_bits;
+	} while (!__atomic_compare_exchange_n(
+		var, &cur, newv, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST));
+}
+
+/**
  * @brief Atomically store an int64_t
  *
  * This function atomically fetches the value indicated by the
