@@ -158,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41efaee0_4b6327b5",
+        "filename": "src/support/exports.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-01-13T11:30:16Z",
+      "side": 1,
+      "message": "if we make it clang-format compatible, check patch saying exceed 80 columns.",
+      "parentUuid": "50e9543a_d018b3c5",
+      "revId": "720d98464fe3d0ff87ae3cb33a3e5b902d58fc33",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96bcfa64_22df625d",
@@ -171,6 +189,24 @@
       "writtenOn": "2025-12-03T12:36:26Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - #define CONF_PSEUDOFS_PERMS(_struct_, _perms_)                                 \\\n    - \t/* Note: Access_Type defaults to MD READ on purpose */                 \\\n    - \t/*       MD READ or NONE are the only access that makes sense. */      \\\n    - \tCONF_ITEM_ENUM_BITS_SET(\"Access_Type\", EXPORT_OPTION_MD_READ_ACCESS,   \\\n    - \t\t\t\tEXPORT_OPTION_ACCESS_MASK, access_types,       \\\n    - \t\t\t\t_struct_, _perms_.options, _perms_.set),       \\\n    - \t\tCONF_ITEM_LIST_BITS_SET(\"Transports\", EXPORT_OPTION_TCP,       \\\n    - \t\t\t\t\tEXPORT_OPTION_TRANSPORTS, transports,  \\\n    - \t\t\t\t\t_struct_, _perms_.options,             \\\n    - \t\t\t\t\t_perms_.set),                          \\\n    - \t\tCONF_ITEM_LIST_BITS_SET(\"SecType\", EXPORT_OPTION_AUTH_TYPES,   \\\n    - \t\t\t\t\tEXPORT_OPTION_AUTH_TYPES, sec_types,   \\\n    - \t\t\t\t\t_struct_, _perms_.options,             \\\n    - \t\t\t\t\t_perms_.set),                          \\\n    - \t\tCONF_XPRT_SEC_PARAM(_struct_, _perms_)                         \\\n    - \t\tCONF_ITEM_BOOLBIT_SET(\"PrivilegedPort\", false,                 \\\n    - \t\t\t\t      EXPORT_OPTION_PRIVILEGED_PORT, _struct_, \\\n    - \t\t\t\t      _perms_.options, _perms_.set)\n→ to be replaced with:\n    + #define CONF_PSEUDOFS_PERMS(_struct_, _perms_)                                \\\n    + \t/* Note: Access_Type defaults to MD READ on purpose */                \\\n    + \t/*       MD READ or NONE are the only access that makes sense. */     \\\n    + \tCONF_ITEM_ENUM_BITS_SET(\"Access_Type\", EXPORT_OPTION_MD_READ_ACCESS,  \\\n    + \t\t\t\tEXPORT_OPTION_ACCESS_MASK, access_types,      \\\n    + \t\t\t\t_struct_, _perms_.options, _perms_.set),      \\\n    + \t\tCONF_ITEM_LIST_BITS_SET(\"Transports\", EXPORT_OPTION_TCP,      \\\n    + \t\t\t\t\tEXPORT_OPTION_TRANSPORTS, transports, \\\n    + \t\t\t\t\t_struct_, _perms_.options,            \\\n    + \t\t\t\t\t_perms_.set),                         \\\n    + \t\tCONF_ITEM_LIST_BITS_SET(\"SecType\", EXPORT_OPTION_AUTH_TYPES,  \\\n    + \t\t\t\t\tEXPORT_OPTION_AUTH_TYPES, sec_types,  \\\n    + \t\t\t\t\t_struct_, _perms_.options,            \\\n    + \t\t\t\t\t_perms_.set),                         \\\n    + \t\tCONF_XPRT_SEC_PARAM(_struct_, _perms_)                        \\\n    + \t\t\tCONF_ITEM_BOOLBIT_SET(\"PrivilegedPort\", false,        \\\n    + \t\t\t\t\t      EXPORT_OPTION_PRIVILEGED_PORT,  \\\n    + \t\t\t\t\t      _struct_, _perms_.options,      \\\n    + \t\t\t\t\t      _perms_.set)",
+      "revId": "720d98464fe3d0ff87ae3cb33a3e5b902d58fc33",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26cc57fb_be713154",
+        "filename": "src/support/exports.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-01-13T11:30:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96bcfa64_22df625d",
       "revId": "720d98464fe3d0ff87ae3cb33a3e5b902d58fc33",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
