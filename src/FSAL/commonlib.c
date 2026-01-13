@@ -71,6 +71,7 @@
 #include "pnfs_utils.h"
 #include "atomic_utils.h"
 #include "sys_resource.h"
+
 #ifdef USE_DBUS
 #include "gsh_dbus.h"
 #endif
@@ -3189,7 +3190,7 @@ bool fsal_common_is_referral(struct fsal_obj_handle *obj_hdl,
 	if (!fsal_obj_handle_is(obj_hdl, DIRECTORY))
 		return false;
 
-	if (!is_sticky_bit_set(obj_hdl, attrs))
+	if (!attrs->fs_locations)
 		return false;
 
 	LogDebug(COMPONENT_FSAL, "Referral found for handle: %p", obj_hdl);

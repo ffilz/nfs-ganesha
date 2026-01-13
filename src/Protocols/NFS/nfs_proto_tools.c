@@ -4826,19 +4826,49 @@ int nfs4_Fattr_To_fsinfo(fsal_dynamicfsinfo_t *dinfo, fattr4 *Fattr)
  * @brief: is a directory's sticky bit set?
  *
  */
-bool is_sticky_bit_set(struct fsal_obj_handle *obj,
-		       const struct fsal_attrlist *attr)
+bool is_sticky_bit_set(struct fsal_obj_handle *obj)
 {
-	if (attr->mode & (S_IXUSR | S_IXGRP | S_IXOTH))
+	struct fsal_attrlist attrs;
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+
+	fsal_prepare_attrs(&attrs, ATTR_MODE | ATTR_OWNER | ATTR_TYPE);
+	status = obj->obj_ops->getattrs(obj, &attrs);
+
+	if (FSAL_IS_ERROR(status)) {
+		if (status.major == ERR_FSAL_STALE) {
+			LogDebug(COMPONENT_FSAL,
+				 "Failed to get attrs for referral, handle: %p (probably deleted),"
+				 "valid_mask: %" PRIx64
+				 ", request_mask: %" PRIx64
+				 ", supported: %" PRIx64 ", error: %s",
+				 obj, attrs.valid_mask, attrs.request_mask,
+				 attrs.supported, fsal_err_txt(status));
+		} else {
+			LogEventLimited(
+				COMPONENT_FSAL,
+				"Failed to get attrs for referral, handle: %p,"
+				" valid_mask: %" PRIx64
+				", request_mask: %" PRIx64
+				", supported: %" PRIx64 ", error: %s",
+				obj, attrs.valid_mask, attrs.request_mask,
+				attrs.supported, fsal_err_txt(status));
+		}
 		return false;
+	}
+	LogDebug(COMPONENT_NFSPROTO,
+		 "Checking attrs for sticky_bit property, handle: %p,"
+		 " valid_mask: %" PRIx64 ", request_mask: %" PRIx64
+		 ", supported: %" PRIx64,
+		 obj, attrs.valid_mask, attrs.request_mask, attrs.supported);
 
-	if (!(attr->mode & S_ISVTX))
-		return false;
+	if ((attrs.mode & S_ISVTX) &&
+	    (attrs.owner != op_ctx->creds.caller_uid)) {
+		LogDebug(COMPONENT_NFS_V4, "Sticky Bit SET on %" PRIi64,
+			 obj->fileid);
+		return true;
+	}
 
-	LogDebug(COMPONENT_NFS_V4, "sticky bit is set on %" PRIi64,
-		 obj->fileid);
-
-	return true;
+	return false;
 }
 
 #define COMPOUND_EXTRA_ROOM 4096

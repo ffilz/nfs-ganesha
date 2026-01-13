@@ -311,8 +311,7 @@ int nfs4_Fattr_cmp(fattr4 *, fattr4 *);
 bool nfs3_Fixup_FSALattr(struct fsal_obj_handle *obj,
 			 const struct fsal_attrlist *FSAL_attr);
 
-bool is_sticky_bit_set(struct fsal_obj_handle *obj,
-		       const struct fsal_attrlist *attr);
+bool is_sticky_bit_set(struct fsal_obj_handle *obj);
 
 bool nfs3_Sattr_To_FSALattr(struct fsal_attrlist *, sattr3 *);
 

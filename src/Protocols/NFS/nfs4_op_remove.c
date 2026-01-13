@@ -42,7 +42,7 @@
 #include "nfs_file_handle.h"
 #include "sal_functions.h"
 #include "fsal.h"
-
+#include "FSAL/fsal_commonlib.h"
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
 #include "gsh_lttng/generated_traces/nfs4.h"
@@ -67,6 +67,7 @@ enum nfs_req_result nfs4_op_remove(struct nfs_argop4 *op, compound_data_t *data,
 	REMOVE4args *const arg_REMOVE4 = &op->nfs_argop4_u.opremove;
 	REMOVE4res *const res_REMOVE4 = &resp->nfs_resop4_u.opremove;
 	struct fsal_obj_handle *parent_obj = NULL;
+	struct fsal_obj_handle *child_obj = NULL;
 	fsal_status_t fsal_status = { 0, 0 };
 	struct fsal_attrlist parent_pre_attrs, parent_post_attrs;
 	bool is_parent_pre_attrs_valid, is_parent_post_attrs_valid;
@@ -113,6 +114,30 @@ enum nfs_req_result nfs4_op_remove(struct nfs_argop4 *op, compound_data_t *data,
 	res_REMOVE4->REMOVE4res_u.resok4.cinfo.before =
 		fsal_get_changeid4(parent_obj);
 
+	/* check for sticky bit properties */
+
+	fsal_status =
+		parent_obj->obj_ops->lookup(parent_obj,
+					    arg_REMOVE4->target.utf8string_val,
+					    &child_obj, NULL);
+
+	if (FSAL_IS_ERROR(fsal_status) || child_obj == NULL) {
+		LogDebug(
+			COMPONENT_NFS_V4,
+			"REMOVE: lookup(target='%.*s') failed major=%d minor=%d",
+			(int)arg_REMOVE4->target.utf8string_len,
+			arg_REMOVE4->target.utf8string_val, fsal_status.major,
+			fsal_status.minor);
+		res_REMOVE4->status = nfs4_Errno_status(fsal_status);
+	}
+
+	if (fsal_obj_handle_is(child_obj, DIRECTORY) &&
+	    is_sticky_bit_set(child_obj)) {
+		res_REMOVE4->status = NFS4ERR_PERM;
+		goto out;
+	}
+	/* End of  sticky bit check*/
+
 	fsal_status = fsal_remove(parent_obj,
 				  arg_REMOVE4->target.utf8string_val,
 				  &parent_pre_attrs, &parent_post_attrs);
@@ -149,6 +174,7 @@ out_put_grace:
 
 	nfs_put_grace_status();
 out:
+	child_obj->obj_ops->put_ref(child_obj);
 	GSH_AUTO_TRACEPOINT(
 		nfs4, op_remove_end, TRACE_INFO,
 		"REMOVE res: status={} " TP_CINFO_FORMAT, res_REMOVE4->status,
