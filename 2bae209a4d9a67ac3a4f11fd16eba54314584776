@@ -52,6 +52,24 @@
       "parentUuid": "6a3c0c98_0a2b5d95",
       "revId": "2bae209a4d9a67ac3a4f11fd16eba54314584776",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34dbd875_7c5d3f48",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-01-13T08:01:17Z",
+      "side": 1,
+      "message": "Actually I missed the heading of this code review (Coverity):\n \"Coverity 638302: Fixed dereference before null check.\"\n\nWe should mark this coverity as false positive or @ffilzlnx@mindspring.com can take the decision.",
+      "parentUuid": "1b770ddf_d406ae9b",
+      "revId": "2bae209a4d9a67ac3a4f11fd16eba54314584776",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
