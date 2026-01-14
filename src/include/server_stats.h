@@ -52,7 +52,7 @@ void server_stats_io_done(size_t requested, size_t transferred, bool success,
 			  bool is_write);
 void server_stats_compound_done(int num_ops, int status);
 void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
-				int status);
+				int status, struct fsal_obj_handle *obj);
 void server_stats_transport_done(struct gsh_client *client, uint64_t rx_bytes,
 				 uint64_t rx_pkt, uint64_t rx_err,
 				 uint64_t tx_bytes, uint64_t tx_pkt,

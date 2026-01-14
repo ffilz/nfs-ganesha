@@ -64,6 +64,10 @@
 #include "nfs_convert.h"
 #include "nfs_metrics.h"
 
+#ifdef USE_MONITORING
+#include "dynamic_metrics.h"
+#endif
+
 #define NFS_pcp nfs_param.core_param
 #define NFS_program NFS_pcp.program
 
@@ -1409,11 +1413,16 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
  */
 
 void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
-				int status)
+				int status, struct fsal_obj_handle *obj)
 {
 	struct gsh_client *client = op_ctx->client;
 	struct timespec current_time;
 	nsecs_elapsed_t time_diff;
+#ifdef USE_MONITORING
+	fsal_dynamicfsinfo_t dynamicinfo;
+	fsal_status_t fsal_status = { 0, 0 };
+	const char *path = op_ctx_export_path(op_ctx);
+#endif
 
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		return;
@@ -1426,8 +1435,25 @@ void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
 	now(&current_time);
 	time_diff = timespec_diff(start_time, &current_time);
 
-	nfs_metrics__nfs4_op_completed(proto_op, status, time_diff);
+#ifdef USE_MONITORING
+	if (obj) {
+		fsal_status = fsal_statfs(obj, &dynamicinfo);
+		if (FSAL_IS_ERROR(fsal_status)) {
+			LogFullDebug(
+				COMPONENT_FSAL,
+				"fsal_statfs failed for path=%s, major=%d, minor=%d",
+				path, fsal_status.major, fsal_status.minor);
 
+		} else {
+			dynamic_metrics_export_info(path,
+						    dynamicinfo.total_bytes,
+						    dynamicinfo.avail_bytes,
+						    dynamicinfo.total_files,
+						    dynamicinfo.avail_files);
+		}
+	}
+	nfs_metrics__nfs4_op_completed(proto_op, status, time_diff);
+#endif
 	if (nfs_param.core_param.enable_FULLV4STATS)
 		record_v4_full_stats(proto_op, time_diff, status);
 

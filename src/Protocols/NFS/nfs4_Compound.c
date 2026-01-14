@@ -736,7 +736,8 @@ enum nfs_req_result complete_op(compound_data_t *data, nfsstat4 *status,
 
 out:
 
-	server_stats_nfsv4_op_done(data->opcode, &data->op_start_time, *status);
+	server_stats_nfsv4_op_done(data->opcode, &data->op_start_time, *status,
+				   data->current_obj);
 
 	return result;
 }
