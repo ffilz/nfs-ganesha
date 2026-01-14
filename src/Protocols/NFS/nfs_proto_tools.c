@@ -42,6 +42,9 @@
 #include "nfs4_acls.h"
 #include "idmapper.h"
 #include "export_mgr.h"
+#ifdef USE_MONITORING
+#include "dynamic_metrics.h"
+#endif
 
 /* Define mapping of NFS4 who name and type. */
 static struct {
@@ -1156,6 +1159,18 @@ static fattr_xdr_result encode_fetch_fsinfo(struct xdr_attrs_args *args)
 	if (args->data != NULL && args->data->current_obj != NULL) {
 		fsal_status = fsal_statfs(args->data->current_obj,
 					  &args->dynamicinfo);
+#ifdef USE_MONITORING
+/*
+		if (nfs_param.core_param.enable_metrics &&
+		    nfs_param.core_param.enable_dynamic_metrics)
+			dynamic_metrics_export_info(
+				op_ctx_export_path(op_ctx),
+				args->dynamicinfo.total_bytes,
+				args->dynamicinfo.avail_bytes,
+				args->dynamicinfo.total_files,
+				args->dynamicinfo.avail_files);
+*/
+#endif
 	} else {
 		/* We don't expect this to actually get used, but fill in
 		 * sensible values just as a precaution.
