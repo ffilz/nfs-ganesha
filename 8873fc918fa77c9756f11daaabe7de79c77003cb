@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa7c19a_8b6ee06d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-01-14T05:20:09Z",
+      "side": 1,
+      "message": "Check if the changes made in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1228768 are doing the same.",
+      "revId": "8873fc918fa77c9756f11daaabe7de79c77003cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac478f0a_7e026828",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-01-14T05:20:09Z",
+      "side": 1,
+      "message": "This change may not be required. PR - https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1228768 , takes care of clearing of the param_addr before assigning new value. Please check",
+      "revId": "8873fc918fa77c9756f11daaabe7de79c77003cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
