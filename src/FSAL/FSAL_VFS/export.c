@@ -55,6 +55,10 @@
 #include "subfsal.h"
 #include "gsh_config.h"
 
+#ifdef USE_MONITORING
+#include "dynamic_metrics.h"
+#endif
+
 /* helpers to/from other VFS objects
  */
 
@@ -138,6 +142,14 @@ static fsal_status_t get_dynamic_info(struct fsal_export *exp_hdl,
 	infop->avail_files = buffstatvfs.f_favail;
 	infop->time_delta.tv_sec = 0;
 	infop->time_delta.tv_nsec = FSAL_DEFAULT_TIME_DELTA_NSEC;
+
+#ifdef USE_MONITORING
+	const char *path = op_ctx_export_path(op_ctx);
+
+	dynamic_metrics_export_info(path, infop->total_bytes,
+				    infop->avail_bytes, infop->total_files,
+				    infop->avail_files);
+#endif
 
 out:
 	status = fsal_complete_io(obj_hdl, out_fd);
