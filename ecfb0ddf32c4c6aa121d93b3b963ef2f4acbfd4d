@@ -85,6 +85,24 @@
       "message": "Hmm, should we consider a Fridge Thread pool for this? We want to be a little careful of the potential of spawning a thread for every CREATE_SESSION as a denial of service exposure.\n\nAlso, if we do use pthread_create, we maybe should use PTHREAD_create which offers some default attributes for Ganesha including stack size (though maybe we also want to have a custom stack size for this?)",
       "revId": "ecfb0ddf32c4c6aa121d93b3b963ef2f4acbfd4d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90423319_00349c8f",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-01-14T03:10:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ae604b2_d6bf6cee",
+      "revId": "ecfb0ddf32c4c6aa121d93b3b963ef2f4acbfd4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
