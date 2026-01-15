@@ -72,6 +72,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "509b3d95_7cb76374",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-01-15T06:11:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fd38fe3_1db110dd",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fbb7379_65412baf",
@@ -262,6 +280,24 @@
       "writtenOn": "2025-11-10T13:00:08Z",
       "side": 1,
       "message": "Since register_qos_metric is registered for export_bucket and client_bucket which is done in qos_perexport_insert and qos_perclient_insert. \nthis statement \"func()\" here doesnt seems to be valid.",
+      "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f726d05_0f675295",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2117,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-01-15T06:11:26Z",
+      "side": 1,
+      "message": "sragraha@redhat.com verify by testing the code that changes are working properly as per the assumptions.",
+      "parentUuid": "ef4c4ccd_2fb77c83",
       "revId": "cd400801e488776f9e17f9daec8ba2b9f62194d9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
