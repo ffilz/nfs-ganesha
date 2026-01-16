@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38f3bb3e_51920159",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_int.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-01-16T02:56:04Z",
+      "side": 1,
+      "message": "Yeah, kind of unrelated for this patch .. may be I will raise another PR for this.\nThis helps in cases where export has different expire_time value associated.\nWill update this patch by removing this change.",
+      "parentUuid": "c5f79332_9e884346",
+      "revId": "2d9e8a356c325a3633e007a303d3a9196714ae5b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2096d379_81f5ae2d",
         "filename": "src/config_parsing/config_parsing.c",
         "patchSetId": 2
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1fabb94_c689ac52",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3661,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-01-16T02:56:04Z",
+      "side": 1,
+      "message": "Okay, will remove this",
+      "parentUuid": "7fd9cda2_ad517694",
+      "revId": "2d9e8a356c325a3633e007a303d3a9196714ae5b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "117a5ce9_3c7d17ce",
         "filename": "src/support/nfs_creds.c",
         "patchSetId": 2
@@ -82,6 +118,24 @@
       "writtenOn": "2026-01-14T20:37:26Z",
       "side": 1,
       "message": "Why is this necessary? If op_ctx-\u003eexport_perms.options \u0026 EXPORT_OPTION_ROOT_SQUASH is not zero or op_ctx-\u003eexport_perms.options \u0026 EXPORT_OPTION_ROOT_ID_SQUASH is not zero then squash_enabled will also be true",
+      "revId": "2d9e8a356c325a3633e007a303d3a9196714ae5b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e61810af_72e5438c",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-01-16T02:56:04Z",
+      "side": 1,
+      "message": "Agree, it was just additional check \nWill remove this.",
+      "parentUuid": "117a5ce9_3c7d17ce",
       "revId": "2d9e8a356c325a3633e007a303d3a9196714ae5b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
