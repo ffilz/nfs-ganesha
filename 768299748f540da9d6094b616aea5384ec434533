@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3421596c_05c111de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-01-16T19:22:09Z",
+      "side": 1,
+      "message": "Make the title one line, also, replace VFS with \"FSALs that don\u0027t support\"",
+      "revId": "768299748f540da9d6094b616aea5384ec434533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d383dc_b1633f5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-01-16T19:22:09Z",
+      "side": 1,
+      "message": "Looks good, just fix up the commit message (the fix isn\u0027t just for FSAL_VFS, but for any FSAL other than CEPH/FSALs that specifically support delegation transitions.",
+      "revId": "768299748f540da9d6094b616aea5384ec434533",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
