@@ -33,6 +33,24 @@
       "message": "This change may not be required. PR - https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1228768 , takes care of clearing of the param_addr before assigning new value. Please check",
       "revId": "8873fc918fa77c9756f11daaabe7de79c77003cb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "256ed643_d7c4f8f2",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2026-01-16T05:36:25Z",
+      "side": 1,
+      "message": "I had a discussion with Frank. The config_parsing.c code in the above PR would fix the issue. \n\nI will abandon this PR. Thanks",
+      "parentUuid": "ac478f0a_7e026828",
+      "revId": "8873fc918fa77c9756f11daaabe7de79c77003cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
