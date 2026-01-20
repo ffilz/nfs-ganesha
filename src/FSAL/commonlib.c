@@ -52,6 +52,8 @@
 #include <sys/types.h>
 #include <sys/statvfs.h>
 #include <os/quota.h>
+#include <os/mntent.h>
+#include <sys/xattr.h>
 
 #include "common_utils.h"
 #include "gsh_config.h"
@@ -71,6 +73,7 @@
 #include "pnfs_utils.h"
 #include "atomic_utils.h"
 #include "sys_resource.h"
+#include "FSAL_VFS/vfs_methods.h"
 #ifdef USE_DBUS
 #include "gsh_dbus.h"
 #endif
@@ -3141,57 +3144,39 @@ bool check_verifier_attrlist(struct fsal_attrlist *attrs,
  * mode bit combination on a directory for a junction. This routine tests for
  * that and returns true if it is a referral.
  */
+
 bool fsal_common_is_referral(struct fsal_obj_handle *obj_hdl,
 			     struct fsal_attrlist *attrs, bool cache_attrs)
 {
-	attrmask_t req_mask = ATTR_TYPE | ATTR_MODE;
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	struct fsal_fd *out_fd = NULL;
+	struct vfs_fd *my_fd;
+	struct vfs_fd temp_fd = { FSAL_FD_INIT, -1 };
 
-	LogDebug(COMPONENT_FSAL,
-		 "Checking attrs for referral, handle: %p, valid_mask: %" PRIx64
-		 ", request_mask: %" PRIx64 ", supported: %" PRIx64,
-		 obj_hdl, attrs->valid_mask, attrs->request_mask,
-		 attrs->supported);
-
-	if ((attrs->valid_mask & req_mask) != req_mask) {
-		/* Required attributes are not available, need to fetch them */
-		fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
-
-		attrs->request_mask |= req_mask;
-
-		status = obj_hdl->obj_ops->getattrs(obj_hdl, attrs);
-		if (FSAL_IS_ERROR(status)) {
-			/* Drop the message level to debug if referral belongs
-			 * to deleted file to avoid flood of messages.
-			 */
-			if (status.major == ERR_FSAL_STALE) {
-				LogDebug(
-					COMPONENT_FSAL,
-					"Failed to get attrs for referral, handle: %p (probably deleted), valid_mask: %" PRIx64
-					", request_mask: %" PRIx64
-					", supported: %" PRIx64 ", error: %s",
-					obj_hdl, attrs->valid_mask,
-					attrs->request_mask, attrs->supported,
-					fsal_err_txt(status));
-			} else {
-				LogEventLimited(
-					COMPONENT_FSAL,
-					"Failed to get attrs for referral, handle: %p, valid_mask: %" PRIx64
-					", request_mask: %" PRIx64
-					", supported: %" PRIx64 ", error: %s",
-					obj_hdl, attrs->valid_mask,
-					attrs->request_mask, attrs->supported,
-					fsal_err_txt(status));
-			}
-			return false;
-		}
-	}
+	if (FSAL_TEST_MASK(attrs->valid_mask, ATTR4_FS_LOCATIONS))
+		return true;
 
 	if (!fsal_obj_handle_is(obj_hdl, DIRECTORY))
 		return false;
 
-	if (!is_sticky_bit_set(obj_hdl, attrs))
-		return false;
+	status = obj_hdl->obj_ops->find_fd(&out_fd, obj_hdl, &temp_fd.fsal_fd,
+					   NULL, FSAL_O_ANY, false);
 
+	if (FSAL_IS_ERROR(status)) {
+		LogFullDebug(COMPONENT_FSAL,
+			     "is_referral: no fd for handle=%p (errno=%d)",
+			     obj_hdl, errno);
+		return false;
+	}
+
+	my_fd = container_of(out_fd, struct vfs_fd, fsal_fd);
+
+	if (fgetxattr(my_fd->fd, "user.fs_location", NULL, 0) <= 0) {
+		LogDebug(COMPONENT_FSAL, "Referral not found for handle: %p",
+			 obj_hdl);
+		return false;
+	}
+	FSAL_SET_MASK(attrs->valid_mask, ATTR4_FS_LOCATIONS);
 	LogDebug(COMPONENT_FSAL, "Referral found for handle: %p", obj_hdl);
 	return true;
 }

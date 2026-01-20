@@ -1463,6 +1463,15 @@ static bool is_referral(struct fsal_obj_handle *obj_hdl,
 	return false;
 }
 
+static fsal_status_t default_find_fd(struct fsal_fd **out_fd,
+				     struct fsal_obj_handle *obj_hdl,
+				     struct fsal_fd *tmp_fd,
+				     struct state_t *state,
+				     fsal_openflags_t openflags, bool bypass)
+{
+	return fsalstat(ERR_FSAL_NOTSUPP, 0);
+}
+
 /* Default fsal handle object method vector.
  * copied to allocated vector at register time
  */
@@ -1520,6 +1529,7 @@ struct fsal_obj_ops def_handle_ops = {
 	.setattr2 = setattr2,
 	.close2 = close2,
 	.is_referral = is_referral,
+	.find_fd = default_find_fd,
 };
 
 /* fsal_pnfs_ds common methods */

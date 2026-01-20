@@ -2832,6 +2832,25 @@ struct fsal_obj_ops {
 
 	/**@{*/
 
+	/* @brief Function to return file descriptor of fsal obj
+ * @param[in,out] out_fd         The fd to be used
+ * @param[in]     obj_hdl        The object being worked on
+ * @param[in]     tmp_fd         A temp fd the caller passes in to be used if
+ *                               a state fd or the global fd is not usable. Will
+ *                               be used for all non-regular files.
+ * @param[in]     state          The state if any.
+ * @param[in]     openflags      How the getattr or setattr needs the fd open
+ * @param[in]     bypass         If state doesn't indicate a share reservation,
+ *                               bypass any deny read
+ *
+ * @return FSAL status.
+ *
+ * */
+	fsal_status_t (*find_fd)(struct fsal_fd **out_fd,
+				 struct fsal_obj_handle *obj_hdl,
+				 struct fsal_fd *tmp_fd, struct state_t *state,
+				 fsal_openflags_t openflags, bool bypass);
+
 	/**
  * ASYNC API functions.
  *

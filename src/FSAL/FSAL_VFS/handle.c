@@ -1952,7 +1952,7 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->remove_extattr_by_name = vfs_remove_extattr_by_name;
 
 	ops->is_referral = fsal_common_is_referral;
-
+	ops->find_fd = find_fd;
 	ops->getxattrs = vfs_getxattrs;
 	ops->setxattrs = vfs_setxattrs;
 	ops->listxattrs = vfs_listxattrs;
