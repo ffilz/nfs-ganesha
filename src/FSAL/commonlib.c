@@ -52,6 +52,8 @@
 #include <sys/types.h>
 #include <sys/statvfs.h>
 #include <os/quota.h>
+#include <os/mntent.h>
+#include <sys/xattr.h>
 
 #include "common_utils.h"
 #include "gsh_config.h"
@@ -71,6 +73,7 @@
 #include "pnfs_utils.h"
 #include "atomic_utils.h"
 #include "sys_resource.h"
+#include "FSAL_VFS/vfs_methods.h"
 #ifdef USE_DBUS
 #include "gsh_dbus.h"
 #endif
@@ -3141,6 +3144,7 @@ bool check_verifier_attrlist(struct fsal_attrlist *attrs,
  * mode bit combination on a directory for a junction. This routine tests for
  * that and returns true if it is a referral.
  */
+
 bool fsal_common_is_referral(struct fsal_obj_handle *obj_hdl,
 			     struct fsal_attrlist *attrs, bool cache_attrs)
 {
