@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \t\tsocket_ostream \u003c\u003c \"Content-Type: text/plain; version\u003d0.0.4; charset\u003dutf-8\\r\\n\";\n→ to be replaced with:\n    + \t\tsocket_ostream\n    + \t\t\t\u003c\u003c \"Content-Type: text/plain; version\u003d0.0.4; charset\u003dutf-8\\r\\n\";",
       "revId": "6c5edc2937afef8e9785ad772d96778b2af14963",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe73561_23ca16c5",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1039202
+      },
+      "writtenOn": "2026-01-20T14:53:56Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "2f540d14_015c03a7",
+      "revId": "6c5edc2937afef8e9785ad772d96778b2af14963",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
