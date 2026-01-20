@@ -2342,3 +2342,33 @@ fsal_status_t vfs_close2(struct fsal_obj_handle *obj_hdl, struct state_t *state)
 
 	return close_fsal_fd(obj_hdl, &my_fd->fsal_fd, false);
 }
+
+/**
+ * @brief vfs_is_referral routine for VFS FSALs that check for attr
+ * user.fs_location if user set its value.
+ * @param[in]     obj_hdl       Handle on which to operate
+ * @param[in|out] attrs         Attributes of the handle
+ * @param[in]     cache_attrs   Cache the received attrs
+ *
+ */
+bool vfs_is_referral(struct fsal_obj_handle *obj_hdl,
+		     struct fsal_attrlist *attrs, bool cache_attrs)
+{
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	char buffer[PATH_MAX];
+	size_t attr_output_size = 0;
+	status = obj_hdl->obj_ops->getextattr_value_by_name(obj_hdl,
+							    "user.fs_location",
+							    buffer, PATH_MAX,
+							    &attr_output_size);
+
+	if (FSAL_IS_ERROR(status)) {
+		LogFullDebug(
+			COMPONENT_FSAL,
+			"is_referral: no user.fs_location for handle=%p (errno=%d)",
+			obj_hdl, errno);
+		return false;
+	}
+	LogFullDebug(COMPONENT_FSAL, "Referrance found as %s", buffer);
+	return true;
+}
