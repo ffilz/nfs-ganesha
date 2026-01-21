@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ce4b61_09145d93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-01-21T21:49:17Z",
+      "side": 1,
+      "message": "I\u0027m still very confused what this patch is necessary for and how it is expected to work in a general sense. It will load a rados recovery .so if Ganesha is built for Ceph whether using Ceph or not. I fear this will break my smoke testing of builds.",
+      "revId": "199c1dbae9d6157a2320de3616665b6792310c9b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
