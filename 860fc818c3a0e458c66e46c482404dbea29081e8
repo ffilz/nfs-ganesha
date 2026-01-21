@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cbf0b74_6382e9f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Corrected clang-format in uploaded patch 3.",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d5c84da_e6eb0afa",
@@ -14,6 +31,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200ad1ac_6dfc2729",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d5c84da_e6eb0afa",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -35,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be934ff3_3dd3f36d",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3af6621_4e3d4faa",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d3499b2_dd4c02f1",
@@ -48,6 +101,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tacldata.aces \u003d\n    - \t\t(fsal_ace_t *)gsh_realloc(acldata.aces,\n    - \t\t\t\t\t  new_count * sizeof(fsal_ace_t),\n    - \t\t\t\t\t  MEM_COMP_FSAL);\n→ to be replaced with:\n    + \tacldata.aces \u003d (fsal_ace_t *)gsh_realloc(acldata.aces,\n    + \t\t\t\t\t\t new_count * sizeof(fsal_ace_t),\n    + \t\t\t\t\t\t MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "009494f0_f1558bfe",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d3499b2_dd4c02f1",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +140,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "332b4d64_192c1691",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c59c3a63_dc432d4a",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b8f8421_711c4f32",
@@ -82,6 +171,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\t      MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e34e0f_15d7a8fc",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b8f8421_711c4f32",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +210,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16635898_7338586b",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1817ce0_64edb755",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13f06123_54f74c4e",
@@ -116,6 +241,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tglfsexport \u003d gsh_calloc(1, sizeof(struct glusterfs_export),\n    - \t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \tglfsexport \u003d\n    + \t\tgsh_calloc(1, sizeof(struct glusterfs_export), MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452f870f_9edcfdac",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f06123_54f74c4e",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +280,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91fff07e_4e338e7d",
+        "filename": "src/FSAL/FSAL_GLUSTER/gluster_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a836fd4_7232c315",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7489608_7d939132",
@@ -150,6 +311,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK),\n→ to be replaced with:\n    + \t\t\t\t      MEM_COMP_FILE_AND_STATE_LOCK),",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "757152f8_0464d212",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7489608_7d939132",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -171,6 +350,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "941d5ead_9986787c",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82e4bd9_8d7ef2c4",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8473f99a_3c28eaa9",
@@ -184,6 +381,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tgsh_calloc(1, sizeof(struct gpfs_fsal_obj_handle) +\n    - \t\t\t\t      sizeof(struct gpfs_file_handle),\n    - \t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \t\tgsh_calloc(1,\n    + \t\t\t   sizeof(struct gpfs_fsal_obj_handle) +\n    + \t\t\t\t   sizeof(struct gpfs_file_handle),\n    + \t\t\t   MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "181f78c1_304e58db",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8473f99a_3c28eaa9",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -205,6 +420,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9831dac_db900c67",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae249811_2f3d17e4",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fdc3d21_b7a98b45",
@@ -218,6 +451,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t sizeof(struct kvsfs_file_handle), MEM_COMP_FSAL);\n→ to be replaced with:\n    + \t\t\t\t sizeof(struct kvsfs_file_handle),\n    + \t\t\t MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a31bf7_03d285d5",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fdc3d21_b7a98b45",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -239,6 +490,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3257d85a_06ae3495",
+        "filename": "src/FSAL/FSAL_LIZARDFS/ds.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "166dfdfb_5ddf3a7c",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee554f80_b07d0e6f",
@@ -252,6 +521,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK),\n→ to be replaced with:\n    + \t\t\t\t      MEM_COMP_FILE_AND_STATE_LOCK),",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f9db0a_dc027ded",
+        "filename": "src/FSAL/FSAL_LIZARDFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee554f80_b07d0e6f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -273,6 +560,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95e6555_a613fa20",
+        "filename": "src/FSAL/FSAL_LIZARDFS/lzfs_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4f4ccdc_9ef9c363",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04b43e59_c80ec2e1",
@@ -286,6 +591,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tlzfs_export \u003d gsh_calloc(1, sizeof(struct lzfs_fsal_export),\n    - \t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \tlzfs_export \u003d\n    + \t\tgsh_calloc(1, sizeof(struct lzfs_fsal_export), MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cca38aa_f47fe383",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04b43e59_c80ec2e1",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -307,6 +630,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "294726ad_d8e4d692",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98438e8b_4b1c0597",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5198bde9_39856cb2",
@@ -320,6 +661,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tchunk_info \u003d gsh_malloc(LZFS_BIGGEST_STRIPE_COUNT *\n    - \t\t\t\tsizeof(liz_chunk_info_t), MEM_COMP_INIT);\n→ to be replaced with:\n    + \tchunk_info \u003d\n    + \t\tgsh_malloc(LZFS_BIGGEST_STRIPE_COUNT * sizeof(liz_chunk_info_t),\n    + \t\t\t   MEM_COMP_INIT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1075bbe8_69b74cc7",
+        "filename": "src/FSAL/FSAL_LIZARDFS/mds_export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5198bde9_39856cb2",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -341,6 +700,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26838405_ef6f9c39",
+        "filename": "src/FSAL/FSAL_MEM/mem_export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39ac5c79_7c49a9cb",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3401864a_fd0e461a",
@@ -354,6 +731,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tasync_arg \u003d gsh_calloc(1, sizeof(*async_arg),\n    - \t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \tasync_arg \u003d\n    + \t\tgsh_calloc(1, sizeof(*async_arg), MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d43cc2_7a22c2f7",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2005,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3401864a_fd0e461a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -375,6 +770,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d32914_9237137b",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2167,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5ce43c2_ab725f1c",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83349033_0615a68a",
@@ -388,6 +801,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t       MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84a1eca6_fc51d4ae",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83349033_0615a68a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -409,6 +840,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d08775_b8fff615",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2351,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42d92402_0b5a8551",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5acf4ad_49afccdf",
@@ -422,6 +871,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tstruct proxyv3_export *export \u003d gsh_calloc(1, sizeof(*export),\n    - \t\t\t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \tstruct proxyv3_export *export \u003d\n    + \t\tgsh_calloc(1, sizeof(*export), MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f454874_978bf09c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2530,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5acf4ad_49afccdf",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -443,6 +910,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ccd626c_b4eec04f",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4e0c4d3_8f0fe100",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f661ca96_871648c7",
@@ -456,6 +941,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tp_thr_info-\u003edbop_pool \u003d\n    - \t\tpool_basic_init(\"drop_pool\", sizeof(db_op_item_t),\n    - \t\t\t\tMEM_COMP_DROP_POOL);\n→ to be replaced with:\n    + \tp_thr_info-\u003edbop_pool \u003d pool_basic_init(\"drop_pool\",\n    + \t\t\t\t\t\tsizeof(db_op_item_t),\n    + \t\t\t\t\t\tMEM_COMP_DROP_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddac60e8_da0d5b9b",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f661ca96_871648c7",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -477,6 +980,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41f4c25a_d3c88cb4",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d0b2355_48d784cc",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7a0bf53_f227b19b",
@@ -490,6 +1011,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_DB_THREAD_POOL);\n→ to be replaced with:\n    + \t\t\t\t      MEM_COMP_DB_THREAD_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d370539_29a0584f",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7a0bf53_f227b19b",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -511,6 +1050,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6a37d0e_b9907420",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "698299ae_acf4857e",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce9bd964_36cf2c7f",
@@ -524,6 +1081,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \t\t\t    MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e7f0b4_b64e748a",
+        "filename": "src/FSAL/FSAL_PSEUDO/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce9bd964_36cf2c7f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -545,6 +1120,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea80b80_fe985572",
+        "filename": "src/FSAL/FSAL_PSEUDO/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf119380_e1468a67",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78e0da6b_55ffba25",
@@ -558,6 +1151,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK), NULL,\n    - \t\t\t  state_type, related_state);\n→ to be replaced with:\n    + \t\t\t\t     MEM_COMP_FILE_AND_STATE_LOCK),\n    + \t\t\t  NULL, state_type, related_state);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05ca79d3_a3dce6d5",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1450,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78e0da6b_55ffba25",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -579,6 +1190,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0fbaec6_cdd40bf2",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "686be3d5_fd3c0dd7",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ceb881_471596a2",
@@ -592,6 +1221,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tconf_path \u003d (char *)gsh_malloc(clen,\n    - \t\t\t\t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\tconf_path \u003d\n    + \t\t\t\t\t(char *)gsh_malloc(clen, MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14fb792d_eb13b051",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5ceb881_471596a2",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -613,6 +1260,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1510a2_9d188740",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b0ffed_fe441096",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85543e08_3f2b840a",
@@ -626,6 +1291,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tcluster \u003d (char *)gsh_malloc(clen,\n    - \t\t\t\t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\tcluster \u003d\n    + \t\t\t\t\t(char *)gsh_malloc(clen, MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c758200_89272243",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85543e08_3f2b840a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -647,6 +1330,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a09d5c6f_bba47e0b",
+        "filename": "src/FSAL/FSAL_SAUNAFS/ds.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9501e809_775dea58",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80c0e8ac_8f9b95af",
@@ -660,6 +1361,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK),\n→ to be replaced with:\n    + \t\t\t\t      MEM_COMP_FILE_AND_STATE_LOCK),",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea153f55_3ec884a7",
+        "filename": "src/FSAL/FSAL_SAUNAFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80c0e8ac_8f9b95af",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -681,6 +1400,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e2d2d0_c2944b24",
+        "filename": "src/FSAL/FSAL_SAUNAFS/fileinfo_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e40eea0_c0cf3228",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac417f23_9973ca1c",
@@ -694,6 +1431,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t     sizeof(sau_chunkserver_info_t),\n→ to be replaced with:\n    + \t\t\t\t\t     sizeof(sau_chunkserver_info_t),",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1668546_71c1c74f",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac417f23_9973ca1c",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -715,6 +1470,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "341545a6_5bfbadab",
+        "filename": "src/FSAL/FSAL_SAUNAFS/mds_export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a450d76_8c35525f",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7af86e34_6d68f513",
@@ -728,6 +1501,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \t\t\t\t   MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ade97cd_f2eb12ff",
+        "filename": "src/FSAL/FSAL_SAUNAFS/saunafs_internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af86e34_6d68f513",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -749,6 +1540,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8184d63d_43afa36c",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b355ac01_b1def52b",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d40a69d_c8b6aa4a",
@@ -762,6 +1571,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\thdl-\u003eu.unopenable.dir \u003d gsh_malloc(sizeof(vfs_file_handle_t),\n    - \t\t\t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\thdl-\u003eu.unopenable.dir \u003d\n    + \t\t\tgsh_malloc(sizeof(vfs_file_handle_t), MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea25fe8a_f9709a67",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d40a69d_c8b6aa4a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -783,6 +1610,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca55e1ec_acf3b75e",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896e05b5_e0b9f3b4",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e1ea5c5_167afbc8",
@@ -796,6 +1641,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t      MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8493d674_e7f02142",
+        "filename": "src/FSAL/FSAL_VFS/state.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e1ea5c5_167afbc8",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -817,6 +1680,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10666f58_58acc0f3",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896e473a_8a4c033a",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1beaf39e_1100f6e3",
@@ -830,6 +1711,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tacldata.aces \u003d\n    - \t\t(fsal_ace_t *)gsh_realloc(acldata.aces,\n    - \t\t\t\t\t  new_count * sizeof(fsal_ace_t),\n    - \t\t\t\t\t  MEM_COMP_FSAL);\n→ to be replaced with:\n    + \tacldata.aces \u003d (fsal_ace_t *)gsh_realloc(acldata.aces,\n    + \t\t\t\t\t\t new_count * sizeof(fsal_ace_t),\n    + \t\t\t\t\t\t MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff8c232_a5541d95",
+        "filename": "src/FSAL/FSAL_VFS/vfs/attrs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1beaf39e_1100f6e3",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -851,6 +1750,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a155f2_685c52fa",
+        "filename": "src/FSAL/FSAL_VFS/vfs/subfsal_vfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1cdea85_71e19779",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aa5dcc5_88d1ee5c",
@@ -864,6 +1781,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \thdl \u003d gsh_calloc(1, (sizeof(struct vfs_fsal_obj_handle) +\n    - \t\t\t     sizeof(vfs_file_handle_t)), MEM_COMP_FSAL);\n→ to be replaced with:\n    + \thdl \u003d gsh_calloc(1,\n    + \t\t\t (sizeof(struct vfs_fsal_obj_handle) +\n    + \t\t\t  sizeof(vfs_file_handle_t)),\n    + \t\t\t MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb50d40_7c433d17",
+        "filename": "src/FSAL/FSAL_VFS/xfs/subfsal_xfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6aa5dcc5_88d1ee5c",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -885,6 +1820,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6516e6ae_6e50ab7f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_hash.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ea603ba_b05d70db",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31181fbb_1c2da6ca",
@@ -898,6 +1851,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_CACHE);\n→ to be replaced with:\n    + \t\t\t\t   MEM_COMP_CACHE);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8add6217_85b9518e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31181fbb_1c2da6ca",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -919,6 +1890,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11eadd25_9d08f92f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9597b92_e7a5d6ab",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dffcb2da_abc0e337",
@@ -932,6 +1921,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_MDCACHE_POOL);\n→ to be replaced with:\n    + \t\t\t    MEM_COMP_MDCACHE_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eefe44b_6874eb8b",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1692,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dffcb2da_abc0e337",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -953,6 +1960,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf611b40_6de22ba8",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cfe6fe6_700f20ee",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e28dc519_9de48797",
@@ -966,6 +1991,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tmdcache_entry_pool \u003d\n    - \t\tpool_basic_init(\"MDCACHE Entry Pool\", sizeof(mdcache_entry_t),\n    - \t\t\t\tMEM_COMP_MDCACHE_POOL);\n→ to be replaced with:\n    + \tmdcache_entry_pool \u003d pool_basic_init(\"MDCACHE Entry Pool\",\n    + \t\t\t\t\t     sizeof(mdcache_entry_t),\n    + \t\t\t\t\t     MEM_COMP_MDCACHE_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cf63784_3b90d7e3",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e28dc519_9de48797",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -987,6 +2030,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "347fab8f_bf93ab57",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86597464_d4fd3abd",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20ef92dd_1bdf43b3",
@@ -1000,6 +2061,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tmyself \u003d gsh_calloc(1, sizeof(struct nullfs_fsal_export),\n    - \t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \tmyself \u003d\n    + \t\tgsh_calloc(1, sizeof(struct nullfs_fsal_export), MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9906801_966df311",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20ef92dd_1bdf43b3",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1021,6 +2100,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb32e52a_2bef8c8e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af535eee_d922030a",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9993d935_1134a055",
@@ -1034,6 +2131,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \t\t\t\t\t    MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a90ee4e5_9f979020",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9993d935_1134a055",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1055,6 +2170,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b1f9268_c58fb856",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1959,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa1467d5_f9dc0d2c",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e93da191_0fa60914",
@@ -1068,6 +2201,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tvoid *args \u003d gsh_calloc(1, sizeof(struct fsal_args),\n    - \t\t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \t\tvoid *args \u003d\n    + \t\t\tgsh_calloc(1, sizeof(struct fsal_args), MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ce5c41_e403e929",
+        "filename": "src/FSAL/fsal_manager.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e93da191_0fa60914",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1089,6 +2240,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "531dc85c_ef5118b5",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7be7d7c_9369dee7",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b004c0e_7594b387",
@@ -1102,6 +2271,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t  MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "151c33c5_497259da",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b004c0e_7594b387",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1123,6 +2310,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ba0dfb_60ec29bb",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cbf3b71_a039fa14",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dda04ff4_89b6e820",
@@ -1136,6 +2341,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t  MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4ebbf04_43e95922",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dda04ff4_89b6e820",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1157,6 +2380,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12ccb1fd_be509d8e",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ae2fa30_2b70abed",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4205467_1f86f418",
@@ -1170,6 +2411,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t  MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1882de5_6c1fd88c",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4205467_1f86f418",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1191,6 +2450,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cef53d1_54595628",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de90d24f_7228d734",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "000443f5_4a27da4d",
@@ -1204,6 +2481,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t  MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95b95296_04d238ae",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "000443f5_4a27da4d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1225,6 +2520,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "678b457a_96e2cbc6",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76fe1be3_daf8ba79",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7facbbb8_90c5c135",
@@ -1238,6 +2551,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t  MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "387c5d9e_18dbf531",
+        "filename": "src/FSAL_UP/fsal_up_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7facbbb8_90c5c135",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1259,6 +2590,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac8b4ce_8bdbb3b6",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1a834aa_03e85ca0",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a91b3579_6232fd2f",
@@ -1272,6 +2621,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t\t   MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba43a5e7_7b475c90",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a91b3579_6232fd2f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1293,6 +2660,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ef0c45_e464a305",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bec56cd0_51d98128",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80dcfb05_02c39f0f",
@@ -1306,6 +2691,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af631460_f0c19de9",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80dcfb05_02c39f0f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1327,6 +2730,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "058f9499_b2b75795",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf1ac801_6c4fec5b",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5307370a_d6870b3a",
@@ -1340,6 +2761,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t     MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5bd8d29_c169da48",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5307370a_d6870b3a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1361,6 +2800,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d77774c2_2d9d232f",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1982,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09c84a9a_354f3a46",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b615e72_e8f584ae",
@@ -1374,6 +2831,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t\t MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36ceb793_0273ee96",
+        "filename": "src/MainNFSD/9p_dispatcher.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b615e72_e8f584ae",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1395,6 +2870,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0f5fd6_e8b5409f",
+        "filename": "src/MainNFSD/9p_rdma_dispatcher.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44b34407_117fbe7a",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06ac274c_486b9373",
@@ -1408,6 +2901,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t   sizeof(*pernic-\u003erdata),\n    - \t\t\t\t   MEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\t\t\t   sizeof(*pernic-\u003erdata), MEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61c95d6_7a3d8a9f",
+        "filename": "src/MainNFSD/9p_rdma_dispatcher.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ac274c_486b9373",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1429,6 +2940,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5027d927_632dfe8d",
+        "filename": "src/MainNFSD/9p_rdma_dispatcher.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f132fa9_2a4cf4ce",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e8fabb2_bf55055f",
@@ -1442,6 +2971,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tqos_class_t *node \u003d gsh_calloc(1, sizeof(qos_class_t),\n    - \t\t\t\t\tMEM_COMP_SESSION);\n→ to be replaced with:\n    + \tqos_class_t *node \u003d\n    + \t\tgsh_calloc(1, sizeof(qos_class_t), MEM_COMP_SESSION);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ea9fa8_15f44ca2",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e8fabb2_bf55055f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1463,6 +3010,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7527fa2_2afaa068",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdd833a0_b210c7e6",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb687682_f459d15d",
@@ -1476,6 +3041,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \ttimer_entry_t *new_entry \u003d gsh_calloc(1, sizeof(timer_entry_t),\n    - \t\t\t\t\tMEM_COMP_SESSION);\n→ to be replaced with:\n    + \ttimer_entry_t *new_entry \u003d\n    + \t\tgsh_calloc(1, sizeof(timer_entry_t), MEM_COMP_SESSION);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "437604a0_121a3266",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb687682_f459d15d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1497,6 +3080,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a74d48_3a698321",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06221934_f0635476",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbdde0ea_9bc87775",
@@ -1510,6 +3111,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tstruct _rpc_call *call \u003d gsh_calloc(1, sizeof(struct _rpc_call),\n    - \t\t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tstruct _rpc_call *call \u003d\n    + \t\tgsh_calloc(1, sizeof(struct _rpc_call), MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d9d6ec1_c43f7062",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbdde0ea_9bc87775",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1531,6 +3150,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "836d867f_f34f5f61",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde8ef1a_793ab859",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9804b519_888a3d51",
@@ -1544,6 +3181,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f11ed23_092eae2f",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9804b519_888a3d51",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1565,6 +3220,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60ddf456_178d1e4b",
+        "filename": "src/MainNFSD/nfs_rpc_callback_simulator.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6d929cf_239e9294",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d6f1d00_a1ac459b",
@@ -1578,6 +3251,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tnfs_request_t *reqdata \u003d gsh_calloc(1, sizeof(nfs_request_t),\n    - \t\t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tnfs_request_t *reqdata \u003d\n    + \t\tgsh_calloc(1, sizeof(nfs_request_t), MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6afaf691_6da19004",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1595,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d6f1d00_a1ac459b",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1599,6 +3290,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "652162b7_7b0b4c51",
+        "filename": "src/Protocols/9P/9p_xattrcreate.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f0b6299_ce91214d",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f53059c_c4d733bd",
@@ -1612,6 +3321,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t   MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e63e9144_e5384926",
+        "filename": "src/Protocols/9P/9p_xattrwalk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f53059c_c4d733bd",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1633,6 +3360,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90170a9a_81d72602",
+        "filename": "src/Protocols/NFS/mnt_Export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45e6c4f3_77e41dd3",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7a1fb97_3b5a4a47",
@@ -1646,6 +3391,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t\t   MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e235719b_27ab417c",
+        "filename": "src/Protocols/NFS/mnt_Export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7a1fb97_3b5a4a47",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1667,6 +3430,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be6ca11a_cd611714",
+        "filename": "src/Protocols/NFS/mnt_Mnt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64ab24fc_aaa043c9",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15e99327_a751c98d",
@@ -1680,6 +3461,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tgsh_free(res-\u003eres_lookup3.LOOKUP3res_u.resok.object.data\n    - \t\t\t\t .data_val, MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\tgsh_free(\n    + \t\t\tres-\u003eres_lookup3.LOOKUP3res_u.resok.object.data.data_val,\n    + \t\t\tMEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2454ab54_b0586aee",
+        "filename": "src/Protocols/NFS/nfs3_lookup.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15e99327_a751c98d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1701,6 +3500,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b22bbc05_80453194",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48394438_fb275dcb",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc321a22_cd54bc1a",
@@ -1714,6 +3531,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tuio \u003d gsh_calloc(1, sizeof(struct xdr_uio) +\n    - \t\t\t\t\t    sizeof(struct xdr_uio),\n    - \t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\tuio \u003d gsh_calloc(\n    + \t\t\t1, sizeof(struct xdr_uio) + sizeof(struct xdr_uio),\n    + \t\t\tMEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e426c9c_2fa19f33",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc321a22_cd54bc1a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1735,6 +3570,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "428f9257_ff71150d",
+        "filename": "src/Protocols/NFS/nfs3_readdirplus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c7613a7_d7ab3acd",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ac84736_b1064954",
@@ -1748,6 +3601,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tuio \u003d gsh_calloc(1, sizeof(struct xdr_uio) +\n    - \t\t\t\t\t    sizeof(struct xdr_uio),\n    - \t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\tuio \u003d gsh_calloc(\n    + \t\t\t1, sizeof(struct xdr_uio) + sizeof(struct xdr_uio),\n    + \t\t\tMEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ea6294_e33d0dd7",
+        "filename": "src/Protocols/NFS/nfs3_readdirplus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ac84736_b1064954",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1769,6 +3640,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eaf30de_16394cb4",
+        "filename": "src/Protocols/NFS/nfs3_readdirplus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "672b3796_2bb8e4c5",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a88d67b0_22a9f77d",
@@ -1782,6 +3671,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0db9e47f_259dcfda",
+        "filename": "src/Protocols/NFS/nfs3_readlink.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88d67b0_22a9f77d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1803,6 +3710,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b49334eb_b0fb10a2",
+        "filename": "src/Protocols/NFS/nfs3_symlink.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2209831d_b7e0e1b5",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca4a5d4d_dd9eed2d",
@@ -1816,6 +3741,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t\t   MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa1d08d_0e94cc5d",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca4a5d4d_dd9eed2d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1837,6 +3780,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f26cd754_75320869",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e88c042_5ac911ee",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "345aa7fe_4b72873c",
@@ -1850,6 +3811,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t   MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a9c708_de7eda1a",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "345aa7fe_4b72873c",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1871,6 +3850,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c02308d_8c433e45",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5140c07_ddc44db8",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "201104f3_751ba1c2",
@@ -1884,6 +3881,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t\t    MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea6c74e_89eb5ef4",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "201104f3_751ba1c2",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1905,6 +3920,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "327a4d63_15e87fc1",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fac2e500_296a26fa",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0717f904_71b56003",
@@ -1918,6 +3951,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_NFSV4_SESSION_POOL);\n→ to be replaced with:\n    + \t\t\t\t   MEM_COMP_NFSV4_SESSION_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49419494_c2c5013c",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0717f904_71b56003",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1939,6 +3990,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a74150_5409d078",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76e9c0c8_59a5fcc3",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6d415f4_899bcecf",
@@ -1952,6 +4021,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39dbdfe7_cbd4aa64",
+        "filename": "src/Protocols/NFS/nfs4_op_getdeviceinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d415f4_899bcecf",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1973,6 +4060,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e710aca_74599877",
+        "filename": "src/Protocols/NFS/nfs4_op_getdevicelist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ac1f040_43acc3cb",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4374131a_9854fe16",
@@ -1986,6 +4091,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "789ef56c_daf268bc",
+        "filename": "src/Protocols/NFS/nfs4_op_getdevicelist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4374131a_9854fe16",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2007,6 +4130,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b318f6b_268af7eb",
+        "filename": "src/Protocols/NFS/nfs4_op_getfh.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9da5050_ea51289b",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53771541_a8879035",
@@ -2020,6 +4161,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0b3f59f_d084bf4f",
+        "filename": "src/Protocols/NFS/nfs4_op_layoutget.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53771541_a8879035",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2041,6 +4200,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "271886a4_c1c9a90f",
+        "filename": "src/Protocols/NFS/nfs4_op_layoutget.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "574a6cd4_9a457ec8",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80425346_563c73a9",
@@ -2054,6 +4231,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfff95c6_d209b69e",
+        "filename": "src/Protocols/NFS/nfs4_op_layoutget.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80425346_563c73a9",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2075,6 +4270,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c46a034_289694dd",
+        "filename": "src/Protocols/NFS/nfs4_op_layoutget.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d81503f_63456884",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a81a6d50_7bfaddbe",
@@ -2088,6 +4301,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t   MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c076bd08_84a72c28",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a81a6d50_7bfaddbe",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2109,6 +4340,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a6233b_715604b6",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca26836d_821ecf8f",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43a36936_e89eeeb3",
@@ -2122,6 +4371,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ba7ac8_ff373a79",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a36936_e89eeeb3",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2143,6 +4410,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "595bcc39_18da8498",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5709a5c_bf5a63ad",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "324efec4_dbda79f7",
@@ -2156,6 +4441,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tstruct nfs4_read_data *read_data \u003d gsh_calloc(1, sizeof(*read_data),\n    - \t\t\t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \tstruct nfs4_read_data *read_data \u003d\n    + \t\tgsh_calloc(1, sizeof(*read_data), MEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4e70ee_371c7dd0",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "324efec4_dbda79f7",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2177,6 +4480,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc22482_d13f0f2f",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95ae2531_dba6f034",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af79b440_54be501b",
@@ -2190,6 +4511,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\t\t\t\t MEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b2e96f_4a72915f",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af79b440_54be501b",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2211,6 +4550,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b4afa2_15a589ab",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ff89b37_ab81353d",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2dcf1b0_cde66982",
@@ -2224,6 +4581,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\t\t\t\t MEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ed1ebf_31b49d97",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2dcf1b0_cde66982",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2245,6 +4620,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a739cd63_4bbb1307",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "310897c5_765e1a8f",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbd0a01f_0006e5d2",
@@ -2258,6 +4651,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tuio \u003d gsh_calloc(1, sizeof(struct xdr_uio) +\n    - \t\t\t\t\t    sizeof(struct xdr_uio),\n    - \t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\tuio \u003d gsh_calloc(\n    + \t\t\t1, sizeof(struct xdr_uio) + sizeof(struct xdr_uio),\n    + \t\t\tMEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e63d45d3_d0ab1d00",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbd0a01f_0006e5d2",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2279,6 +4690,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9017a7a_2ff18684",
+        "filename": "src/Protocols/NFS/nfs4_op_readlink.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "548a04ef_b8676b2c",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36f53fa7_ca0bfe39",
@@ -2292,6 +4721,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a4ce0cc_5453722b",
+        "filename": "src/Protocols/NFS/nfs4_op_readlink.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36f53fa7_ca0bfe39",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2313,6 +4760,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5239ba0c_24b753de",
+        "filename": "src/Protocols/NFS/nfs4_op_secinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04ce18d4_48459a2e",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d449c58_1f22b945",
@@ -2326,6 +4791,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3187780_18eedd3c",
+        "filename": "src/Protocols/NFS/nfs4_op_secinfo_no_name.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d449c58_1f22b945",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2347,6 +4830,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0521c2b_5033b98a",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b29d1da_02f95c29",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74071b5f_9512faf6",
@@ -2360,6 +4861,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a0ed97_d16b8f74",
+        "filename": "src/Protocols/NFS/nfs4_op_test_stateid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74071b5f_9512faf6",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2381,6 +4900,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d242e31_ea8d52a2",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83f87995_3aff64df",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f31d9543_96680a4a",
@@ -2394,6 +4931,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\t\t   MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "add73208_36e09469",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f31d9543_96680a4a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2415,6 +4970,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8274bd6d_0041c8e9",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad345878_1881f452",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d0b4f76_d09a3e67",
@@ -2428,6 +5001,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e007fae3_da2a3fb9",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d0b4f76_d09a3e67",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2449,6 +5040,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "511363b2_f2cf864d",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b74c8539_65512d9e",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad9d1beb_c381438e",
@@ -2462,6 +5071,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tpathname4-\u003epathname4_val \u003d gsh_malloc(sizeof(component4),\n    - \t\t\t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\tpathname4-\u003epathname4_val \u003d\n    + \t\t\tgsh_malloc(sizeof(component4), MEM_COMP_PROTOCOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4156978_a3ed68db",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad9d1beb_c381438e",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2483,6 +5110,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc3c050f_80a3811a",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "615ac49b_df4f03dc",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fbadd71_c7e62503",
@@ -2496,6 +5141,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f90d94a_84caee7b",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fbadd71_c7e62503",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2517,6 +5180,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f3fefa6_e5aa1045",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4111,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c28dcd15_926fe377",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b081f134_703d6e4f",
@@ -2530,6 +5211,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tacldata.aces \u003d\n    - \t\t(fsal_ace_t *)gsh_realloc(acldata.aces,\n    - \t\t\t\t\t  new_count * sizeof(fsal_ace_t),\n    - \t\t\t\t\t  MEM_COMP_FSAL);\n→ to be replaced with:\n    + \tacldata.aces \u003d (fsal_ace_t *)gsh_realloc(acldata.aces,\n    + \t\t\t\t\t\t new_count * sizeof(fsal_ace_t),\n    + \t\t\t\t\t\t MEM_COMP_FSAL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16e84d9_cdf2f56e",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5228,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b081f134_703d6e4f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2551,6 +5250,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3293e0_80ca995d",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86765478_37ed22d3",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75c03894_bd29d123",
@@ -2564,6 +5281,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tstate_async_queue_t *arg \u003d gsh_malloc(sizeof(*arg),\n    - \t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \tstate_async_queue_t *arg \u003d\n    + \t\tgsh_malloc(sizeof(*arg), MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abd076a6_a7ccb7ec",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75c03894_bd29d123",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2585,6 +5320,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaaf0d86_4f792427",
+        "filename": "src/Protocols/NLM/nlm_util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9704a7f6_be00c696",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c746d111_db405c72",
@@ -2598,6 +5351,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0386f63_818b8a95",
+        "filename": "src/Protocols/NLM/nlm_util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c746d111_db405c72",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2619,6 +5390,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10986bb7_ee27375a",
+        "filename": "src/Protocols/NLM/nlm_util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29d27d01_c0aaa6d2",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a2f282f_df4f7384",
@@ -2632,6 +5421,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tcc \u003d gsh_malloc(sizeof(*cc),\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \tcc \u003d gsh_malloc(sizeof(*cc), MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbf3e143_00d425eb",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a2f282f_df4f7384",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2653,6 +5460,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08882204_bf96834a",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1da170d_e7976698",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05558629_84d4e2da",
@@ -2666,6 +5491,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\t\t\t\t MEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc52e2e_10c6c2f4",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1408,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05558629_84d4e2da",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2687,6 +5530,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e324cb_6409be58",
+        "filename": "src/Protocols/XDR/xdr_nfs23.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f24665e5_6632c95c",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73d4baea_f8c38b09",
@@ -2700,6 +5561,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_NFS_RES_POOL);\n    - \t\t\t\t\tMEM_COMP_TCP_DRC_POOL);\n→ to be replaced with:\n    + \t\t\t\t       MEM_COMP_NFS_RES_POOL);\n    + \t\t\t\t       MEM_COMP_TCP_DRC_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ac70be_b11a6e30",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73d4baea_f8c38b09",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2721,6 +5600,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac8b358c_7329319f",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef393725_5cb82b81",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e5bf370_4a3432b1",
@@ -2734,6 +5631,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_NFS_RES_POOL);\n→ to be replaced with:\n    + \t\t\t\t\t     MEM_COMP_NFS_RES_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73beb8cf_c7bbc218",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e5bf370_4a3432b1",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2755,6 +5670,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06a1e03f_a3f6f6d4",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "993d8747_6017dd3d",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "905aaefc_597f3dcb",
@@ -2768,6 +5701,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tuio \u003d gsh_calloc(1, sizeof(struct xdr_uio) +\n    - \t\t\t\t    count * sizeof(struct xdr_vio) + extra,\n    - \t\t\tMEM_COMP_IO_BUFFER);\n    - \t\tio_data *objp_copy \u003d gsh_calloc(1, sizeof(io_data),\n    - \t\t\t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \tuio \u003d gsh_calloc(1,\n    + \t\t\t sizeof(struct xdr_uio) +\n    + \t\t\t\t count * sizeof(struct xdr_vio) + extra,\n    + \t\t\t MEM_COMP_IO_BUFFER);\n    + \t\tio_data *objp_copy \u003d\n    + \t\t\tgsh_calloc(1, sizeof(io_data), MEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebf48681_e4e6ecdc",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "905aaefc_597f3dcb",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2789,6 +5740,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee2c1c47_c142322e",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf6ab06_83e2568b",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f153d523_37e93669",
@@ -2802,6 +5771,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tobjp-\u003eiov \u003d gsh_calloc(1, sizeof(*objp-\u003eiov),\n    - \t\t\t\tMEM_COMP_IO_BUFFER);\n→ to be replaced with:\n    + \t\tobjp-\u003eiov \u003d\n    + \t\t\tgsh_calloc(1, sizeof(*objp-\u003eiov), MEM_COMP_IO_BUFFER);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80b2b298_82b2c205",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f153d523_37e93669",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2823,6 +5810,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d2c1966_c27ff2ce",
+        "filename": "src/RPCAL/rpc_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e668edc_cb90cba7",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5fcb88d_f42393c4",
@@ -2836,6 +5841,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_SESSION);\n    - \t\t\t\t\tMEM_COMP_SESSION);\n→ to be replaced with:\n    + \t\t\t\t\t MEM_COMP_SESSION);\n    + \t\t\t\t\t MEM_COMP_SESSION);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "798e91eb_7bbd99a6",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5fcb88d_f42393c4",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2857,6 +5880,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc574f86_3eb990c7",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a05bf25_88bd1d9f",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7653096a_b1a78e40",
@@ -2870,6 +5911,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tclient_id_pool \u003d\n    - \t\tpool_basic_init(\"NFS4 Client ID Pool\", sizeof(nfs_client_id_t),\n    - \t\t\t\tMEM_COMP_NFS4_CLIENT_ID_POOL);\n→ to be replaced with:\n    + \tclient_id_pool \u003d pool_basic_init(\"NFS4 Client ID Pool\",\n    + \t\t\t\t\t sizeof(nfs_client_id_t),\n    + \t\t\t\t\t MEM_COMP_NFS4_CLIENT_ID_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8c25c6_e551a13e",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2353,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7653096a_b1a78e40",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2891,6 +5950,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "328d23ab_6ae4c1df",
+        "filename": "src/SAL/nfs4_owner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca9f5cb8_3fd6373e",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf1f638b_6f9bbb6e",
@@ -2904,6 +5981,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7165590_646e2db9",
+        "filename": "src/SAL/nfs4_owner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf1f638b_6f9bbb6e",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2925,6 +6020,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd76445_df0552d6",
+        "filename": "src/SAL/nfs4_owner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd122399_deb456d8",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce409f02_367a9ffe",
@@ -2938,6 +6051,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tclid_entry_t *new_ent \u003d gsh_malloc(sizeof(clid_entry_t),\n    - \t\t\t\t\tMEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tclid_entry_t *new_ent \u003d\n    + \t\tgsh_malloc(sizeof(clid_entry_t), MEM_COMP_CLIENT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10b45f28_278c901a",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce409f02_367a9ffe",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2959,6 +6090,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d89a6a23_f6116235",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0caca6aa_e93bd6dd",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59774573_1d674f4d",
@@ -2972,6 +6121,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f0163a1_260a6931",
+        "filename": "src/SAL/recovery/recovery_fs_ng.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59774573_1d674f4d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2993,6 +6160,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "211e73a2_31d34366",
+        "filename": "src/SAL/recovery/recovery_fs_ng.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77a8ee8e_08010d12",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f01d2b72_d64661a5",
@@ -3006,6 +6191,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb3e7242_ba5782c8",
+        "filename": "src/SAL/recovery/recovery_fs_ng.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f01d2b72_d64661a5",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3027,6 +6230,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6504b46_fa22c8b2",
+        "filename": "src/SAL/recovery/recovery_fs_ng.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b481a7f4_49696c01",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e3123b4_53e9bbe4",
@@ -3040,6 +6261,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tstruct revoked_delegation *entry \u003d gsh_malloc(sizeof(*entry),\n    - \t\t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \tstruct revoked_delegation *entry \u003d\n    + \t\tgsh_malloc(sizeof(*entry), MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df4f0d1_ac42d47d",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e3123b4_53e9bbe4",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3061,6 +6300,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a19f87bb_df5013b5",
+        "filename": "src/SAL/state_layout.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0923a8db_0eda24fd",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24a4da27_11eb0cdd",
@@ -3074,6 +6331,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tnew_entry \u003d gsh_calloc(1, sizeof(*new_entry),\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \tnew_entry \u003d\n    + \t\tgsh_calloc(1, sizeof(*new_entry), MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de9cec0c_1c8954cb",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24a4da27_11eb0cdd",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3095,6 +6370,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed98e4d_2b6664e7",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c417093c_b4fdeb66",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b27aa4bb_399b3a9d",
@@ -3108,6 +6401,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad39e1e_9dd37793",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27aa4bb_399b3a9d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3129,6 +6440,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dedda459_39995af6",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4127,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cca3bb10_a6ef58a4",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfeccf7c_fa3eabe1",
@@ -3142,6 +6471,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tstate_owner_pool \u003d\n    - \t\tpool_basic_init(\"NFSv4 state owners\", sizeof(state_owner_t),\n    - \t\t\t\tMEM_COMP_NFS4_STATE_OWNER_POOL);\n→ to be replaced with:\n    + \tstate_owner_pool \u003d pool_basic_init(\"NFSv4 state owners\",\n    + \t\t\t\t\t   sizeof(state_owner_t),\n    + \t\t\t\t\t   MEM_COMP_NFS4_STATE_OWNER_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8299c0d8_be841de1",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4218,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfeccf7c_fa3eabe1",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3163,6 +6510,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94dba5a_b7d60a19",
+        "filename": "src/SAL/state_misc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b16abc0_a681af53",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4e440ab_38c8b90f",
@@ -3176,6 +6541,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t\t\t\t MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85374482_00de52b1",
+        "filename": "src/SAL/state_misc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4e440ab_38c8b90f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3197,6 +6580,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee258ff_ef4c6ffe",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7a96fe7_512fa2c4",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38b0c11f_6d458da6",
@@ -3210,6 +6611,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\t\tMEM_COMP_MISC);\n    - \t\t\t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\t\t\t MEM_COMP_MISC);\n    + \t\t\t\t\t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66c391f3_064f15eb",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38b0c11f_6d458da6",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3231,6 +6650,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "712ea944_ec9f34bb",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1c6c07c_745a3171",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a18f3b26_b5f57638",
@@ -3244,6 +6681,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tMEM_COMP_INIT);\n→ to be replaced with:\n    + \t\t\t\t\t  MEM_COMP_INIT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b11d997_755c7117",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1839,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a18f3b26_b5f57638",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3265,6 +6720,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "827e0d19_a7e966bf",
+        "filename": "src/dbus/dbus_server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21dd4128_9f0e53ec",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dde8ae3f_fe1a4a5f",
@@ -3278,6 +6751,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tht \u003d gsh_calloc(1, sizeof(struct hash_table) +\n    - \t\t\t\t   (sizeof(struct hash_partition) *\n    - \t\t\t\t    hparam-\u003eindex_size), MEM_COMP_CACHE);\n→ to be replaced with:\n    + \tht \u003d gsh_calloc(1,\n    + \t\t\tsizeof(struct hash_table) +\n    + \t\t\t\t(sizeof(struct hash_partition) *\n    + \t\t\t\t hparam-\u003eindex_size),\n    + \t\t\tMEM_COMP_CACHE);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40cfecf2_3bb25de9",
+        "filename": "src/hashtable/hashtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dde8ae3f_fe1a4a5f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3299,6 +6790,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d02d5b15_69cac918",
+        "filename": "src/hashtable/hashtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31ee9439_60b8ec1e",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a9253bc_87051faf",
@@ -3312,6 +6821,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_CLIENT);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_CLIENT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09adee27_db84002a",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a9253bc_87051faf",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3333,6 +6860,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0c94f2b_47efc4ba",
+        "filename": "src/idmapper/idmapper_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55f57628_b08515fc",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "507dce9e_3d785750",
@@ -3346,6 +6891,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tnew_entity \u003d gsh_malloc(sizeof(negative_cache_entity_t),\n    - \t\t\t\tMEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tnew_entity \u003d\n    + \t\tgsh_malloc(sizeof(negative_cache_entity_t), MEM_COMP_CLIENT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ceb25f2_0b3e6c6b",
+        "filename": "src/idmapper/idmapper_negative_cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "507dce9e_3d785750",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3367,6 +6930,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7789634f_a949f1a9",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a676548f_bf61b5ca",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03fae136_8d875b67",
@@ -3380,6 +6961,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - #define gsh_malloc(n, comp)                               \\\n    - \t({                                                \\\n    - \t\tvoid *p_ \u003d malloc(n);                     \\\n    - \t\tif (p_ \u003d\u003d NULL) {                         \\\n    - \t\t\tabort();                          \\\n    - \t\t}                                         \\\n    - \t\tGSH_MEM_STATS_UPDATE_ALLOC(p_, comp);     \\\n    - \t\tp_;                                       \\\n→ to be replaced with:\n    + #define gsh_malloc(n, comp)                           \\\n    + \t({                                            \\\n    + \t\tvoid *p_ \u003d malloc(n);                 \\\n    + \t\tif (p_ \u003d\u003d NULL) {                     \\\n    + \t\t\tabort();                      \\\n    + \t\t}                                     \\\n    + \t\tGSH_MEM_STATS_UPDATE_ALLOC(p_, comp); \\\n    + \t\tp_;                                   \\",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c8d1eec_8b09d2c0",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03fae136_8d875b67",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3401,6 +7000,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a139aaf9_09336efa",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf1b1d6_5ce13a67",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e8f940e_8a2d473d",
@@ -3414,6 +7031,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - #define gsh_calloc(n, s, comp)                            \\\n    - \t({                                                \\\n    - \t\tvoid *p_ \u003d calloc(n, s);                  \\\n    - \t\tif (p_ \u003d\u003d NULL) {                         \\\n    - \t\t\tabort();                          \\\n    - \t\t}                                         \\\n    - \t\tGSH_MEM_STATS_UPDATE_ALLOC(p_, comp);     \\\n    - \t\tp_;                                       \\\n→ to be replaced with:\n    + #define gsh_calloc(n, s, comp)                        \\\n    + \t({                                            \\\n    + \t\tvoid *p_ \u003d calloc(n, s);              \\\n    + \t\tif (p_ \u003d\u003d NULL) {                     \\\n    + \t\t\tabort();                      \\\n    + \t\t}                                     \\\n    + \t\tGSH_MEM_STATS_UPDATE_ALLOC(p_, comp); \\\n    + \t\tp_;                                   \\",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca11826_778e28cd",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e8f940e_8a2d473d",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3435,6 +7070,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b513d9_18015047",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34144217_d86dbb8e",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b4f89f6_98edbfc5",
@@ -3448,6 +7101,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - #define vfs_malloc_handle(fh)                                         \\\n    - \tdo {                                                          \\\n    - \t\t(fh) \u003d gsh_calloc(1, sizeof(struct vfs_file_handle),  \\\n    - \t\t\t\tMEM_COMP_FSAL);                       \\\n    - \t\t(fh)-\u003ehandle_len \u003d VFS_HANDLE_LEN;                    \\\n→ to be replaced with:\n    + #define vfs_malloc_handle(fh)                                        \\\n    + \tdo {                                                         \\\n    + \t\t(fh) \u003d gsh_calloc(1, sizeof(struct vfs_file_handle), \\\n    + \t\t\t\t  MEM_COMP_FSAL);                    \\\n    + \t\t(fh)-\u003ehandle_len \u003d VFS_HANDLE_LEN;                   \\",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7581c9_d1e233ca",
+        "filename": "src/include/fsal_handle_syscalls.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b4f89f6_98edbfc5",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3469,6 +7140,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da58ffcd_07c66953",
+        "filename": "src/include/nfs_file_handle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb8ae6cf_b8cdcca5",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f5d0aa4_82a58f2a",
@@ -3482,6 +7171,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_INIT);\n→ to be replaced with:\n    + \t\t\t\t  MEM_COMP_INIT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac731661_9e6b2a68",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f5d0aa4_82a58f2a",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3503,6 +7210,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf5c9022_eaff8396",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2249,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "547740be_11cde939",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be42d776_083113e7",
@@ -3516,6 +7241,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\t\tMEM_COMP_MISC);\n    - \t\t\t\t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\t\t\t\t\t MEM_COMP_MISC);\n    + \t\t\t\t\t\t MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32df7a7f_ba920150",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be42d776_083113e7",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3537,6 +7280,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e166013_ed6a1b96",
+        "filename": "src/support/delayed_exec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37bb7e6c_f9311a09",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85f29048_70c1c5f4",
@@ -3550,6 +7311,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n    - \t\t\tMEM_COMP_FILE_AND_STATE_LOCK);\n→ to be replaced with:\n    + \t\t\t MEM_COMP_FILE_AND_STATE_LOCK);\n    + \t\t\t  MEM_COMP_FILE_AND_STATE_LOCK);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f36c5bf_98b15990",
+        "filename": "src/support/delayed_exec.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85f29048_70c1c5f4",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3571,6 +7350,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de9fc222_55689d77",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8c0c26e_2e9b6091",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96bed47f_324e6578",
@@ -3584,6 +7381,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_INIT);\n→ to be replaced with:\n    + \t\t\t\t       MEM_COMP_INIT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c830ab_f3c1af7b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96bed47f_324e6578",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3605,6 +7420,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "229a5f78_1e0edea5",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2218,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0cf4cd4_1e641743",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf7cb739_3a491dfb",
@@ -3618,6 +7451,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tfsal_acl_t *acl \u003d gsh_calloc(1, fsal_acl_pool-\u003eobject_size,\n    - \t\t\t\tMEM_COMP_ACL_POOL);\n→ to be replaced with:\n    + \tfsal_acl_t *acl \u003d\n    + \t\tgsh_calloc(1, fsal_acl_pool-\u003eobject_size, MEM_COMP_ACL_POOL);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d6e2bc_653aaa56",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf7cb739_3a491dfb",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3639,6 +7490,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b8b143_7db1545d",
+        "filename": "src/support/nfs4_fs_locations.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a80d806f_3b5f8fd9",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d125de0_1745fe56",
@@ -3652,6 +7521,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tgsh_free(fs_locations-\u003eserver[i].utf8string_val,\n    - \t\t\tMEM_COMP_MISC);\n→ to be replaced with:\n    + \t\tgsh_free(fs_locations-\u003eserver[i].utf8string_val, MEM_COMP_MISC);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "456c5abe_dd7c42fd",
+        "filename": "src/support/nfs4_fs_locations.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d125de0_1745fe56",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3673,6 +7560,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45d932c_281d3ab8",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d417b94d_c8d1cfa4",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "564f2112_4e4cea2c",
@@ -3686,6 +7591,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tLogWarn(COMPONENT_MEM_ALLOC, \"Memory statistics update\"\n    - \t\t\t\t\" alloc failed for Component: %d\", comp);\n→ to be replaced with:\n    + \t\t\tLogWarn(COMPONENT_MEM_ALLOC,\n    + \t\t\t\t\"Memory statistics update\"\n    + \t\t\t\t\" alloc failed for Component: %d\",\n    + \t\t\t\tcomp);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2910c6c2_70c0d0f3",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3280,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "564f2112_4e4cea2c",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3707,6 +7630,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a6fd314_d21577fc",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3331,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b328dc8_4c76ab6b",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "486d54d6_0de17cda",
@@ -3720,6 +7661,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tMEM_COMP_CLIENT);\n→ to be replaced with:\n    + \t\t\t\t     MEM_COMP_CLIENT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03cce26_d6a832f2",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "486d54d6_0de17cda",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3741,6 +7700,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4149108f_e0cfe020",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1a5caf2_5e87baff",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baaccd4e_994c122f",
@@ -3754,6 +7731,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_CLIENT);\n→ to be replaced with:\n    + \t\t\t   MEM_COMP_CLIENT);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f97869_5fc0de38",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baaccd4e_994c122f",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -3775,6 +7770,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8446ab86_61860eb8",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d158d26_b5a25dd9",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "932467e8_c223861b",
@@ -3792,6 +7805,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "906ca3d4_16dc1d79",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "932467e8_c223861b",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "404e7dbb_cd40b774",
@@ -3805,6 +7836,24 @@
       "writtenOn": "2026-01-20T12:54:50Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tMEM_COMP_SESSION);\n→ to be replaced with:\n    + \t\t\t       MEM_COMP_SESSION);",
+      "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0a4c9e_33465106",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-21T10:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "404e7dbb_cd40b774",
       "revId": "860fc818c3a0e458c66e46c482404dbea29081e8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
