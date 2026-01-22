@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f48dcf67_3a84f948",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-01-22T11:06:15Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\trc \u003d sockaddr_cmp(\u0026pkey1-\u003ecr_client_addr, \u0026pkey2-\u003ecr_client_addr, true);\n    - \t\t\t\tLogFullDebug(COMPONENT_CLIENTID, \"client sockaddr mismatch\");\n→ to be replaced with:\n    + \t\trc \u003d sockaddr_cmp(\u0026pkey1-\u003ecr_client_addr,\n    + \t\t\t\t  \u0026pkey2-\u003ecr_client_addr, true);\n    + \t\t\t\tLogFullDebug(COMPONENT_CLIENTID,\n    + \t\t\t\t\t     \"client sockaddr mismatch\");",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579ac645_8e8a1466",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-01-22T11:06:15Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\trc \u003d sockaddr_cmp(\u0026pkey1-\u003ecr_client_addr, \u0026pkey2-\u003ecr_client_addr, true);",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad51139_66cfa47e",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2039,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-01-22T11:06:15Z",
+      "side": 1,
+      "message": "WARNING: line length of 93 exceeds 80 columns\n+\t\t\t\tLogFullDebug(COMPONENT_CLIENTID, \"client sockaddr mismatch\");",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e950449_b6c1f4e3",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-01-22T11:06:15Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t       nfs_version4_parameter, ip_based_client_owner_separation),",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac2e70d_1b6e9263",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-01-22T11:06:15Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t       nfs_version4_parameter, ip_based_client_owner_separation),\n→ to be replaced with:\n    + \t\t       nfs_version4_parameter,\n    + \t\t       ip_based_client_owner_separation),",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
