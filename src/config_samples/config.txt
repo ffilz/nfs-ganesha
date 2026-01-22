@@ -308,6 +308,8 @@ NFSV4 {}
 
 	Blocking_Locks(bool, default true)
 
+	Ip_Based_Client_Separation(bool, default false)
+
 DIRECTORY_SERVICES {}
 ---------------------
 
