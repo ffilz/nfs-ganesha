@@ -289,6 +289,17 @@ static fsal_status_t fsal_reclaim_client(struct fsal_module *const fsal_hdl,
 	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
 }
 
+/**
+ * @brief Default FSAL wrapper for enable_delegations() function
+ * @param[in] orig       FSAL export
+ * @param[in] exp        GSH export
+ */
+static void fsal_enable_delegations(struct fsal_export *orig,
+				struct gsh_export *exp)
+{
+	LogDebug(COMPONENT_FSAL, "Invoking unsupported FSAL operation");
+}
+
 /* Default fsal module method vector.
  * copied to allocated vector at register time
  */
@@ -299,6 +310,7 @@ struct fsal_ops def_fsal_ops = {
 	.update_config = update_config,
 	.dump_config = dump_config,
 	.create_export = create_export,
+	.fsal_enable_delegations = fsal_enable_delegations,
 	.update_export = update_export,
 	.emergency_cleanup = emergency_cleanup,
 	.getdeviceinfo = getdeviceinfo,
