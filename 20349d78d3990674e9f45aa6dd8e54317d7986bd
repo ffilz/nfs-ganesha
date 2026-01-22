@@ -33,6 +33,24 @@
       "message": "Is v3 also supported?",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c31826bd_6ba81371",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-01-22T07:33:17Z",
+      "side": 1,
+      "message": "Yes can be used with nfsv3 also. only the data transfer channel will be encrypted.\nfor nfsv4.0 callback channel is not encrypted.\nfor nfsv4.1+ full support.\n\nHave plans to add these missing support in future.\n\nPlease have look at libntirpc changes required for this TLS : https://github.com/nfs-ganesha/ntirpc/pull/369",
+      "parentUuid": "a667000e_f4e49c19",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
