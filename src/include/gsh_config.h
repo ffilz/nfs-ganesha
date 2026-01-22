@@ -710,6 +710,10 @@ typedef struct nfs_version4_parameter {
 	/** Whether to allow blocking locks (READW_LT/WRITEW_LT). Defaults to
 	 * true and settable with Blocking_Locks. */
 	bool allow_blocking_locks;
+	/** Distinguish between clients based on their source iP address
+	 * in addition to their client owner.
+	 */
+	bool ip_based_client_owner_separation;
 
 } nfs_version4_parameter_t;
 

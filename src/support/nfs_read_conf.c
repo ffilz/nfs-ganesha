@@ -687,6 +687,8 @@ static struct config_item version4_params[] = {
 		       max_alive_time_for_expired_client),
 	CONF_ITEM_BOOL("Blocking_Locks", true, nfs_version4_parameter,
 		       allow_blocking_locks),
+	CONF_ITEM_BOOL("Ip_Based_Client_Owner_Separation", false,
+		       nfs_version4_parameter, ip_based_client_owner_separation),
 	CONFIG_EOL
 };
 

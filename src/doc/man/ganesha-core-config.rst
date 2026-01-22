@@ -621,6 +621,10 @@ Blocking_Locks(bool, default true)
     due to a conflict, the server will return NFS4ERR_DENIED instead of
     blocking the request and waiting for the lock to become available.
 
+Ip_Based_Client_Owner_Separation(bool, default false)
+    Whether to distinguish between clients based on their IP address in addition
+    to the client owner identifier provided by them for NFS4.1 and above.
+
 RADOS_KV {}
 --------------------------------------------------------------------------------
 
