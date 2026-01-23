@@ -108,6 +108,8 @@ static inline enum recovery_type entry_recovery_type(char *entry)
 #ifdef _INTERNAL_STATD
 
 extern struct glist_head local_nlm_info_list;
+extern struct local_nlm_info *nlm_callback_entry;
+extern struct local_nlm_info *nlm_rpcbind_entry;
 extern int cur_nsm_state;
 extern int recov_nsm_state;
 
