@@ -31,6 +31,31 @@
 #include "nlm4.h"
 #include "sal_functions.h"
 
+#ifdef _LOCAL_NLM
+unsigned int local_lockd_tcp_port;
+unsigned int local_lockd_udp_port;
+
+bool set_local_lockd_port(int port, bool is_udp)
+{
+	struct local_nlm_info info;
+
+	if (is_udp) {
+		local_lockd_udp_port = port;
+		info.recovery_type = NLM_RPCBIND_UDP_ENTRY;
+	} else {
+		local_lockd_tcp_port = port;
+		info.recovery_type = NLM_RPCBIND_TCP_ENTRY;
+	}
+
+	info.info_port = port;
+
+	if (port == 0)
+		return nlm_rm_entry(&info);
+	else
+		return nlm_add_entry(&info);
+}
+#endif
+
 static enum protos find_rpc_program(rpcprog_t pm_prog)
 {
 	enum protos proto;
@@ -284,6 +309,7 @@ void rpcbind_nothing_free(nfs_res_t *res)
 
 int pmap_proc_set(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 {
+#ifdef _LOCAL_NLM
 	sockaddr_t *caller = svc_getrpccaller(req->rq_xprt);
 
 	LogInfo(COMPONENT_DISPATCH, "REQUEST PROCESSING: Calling PMAPPROC_SET");
@@ -297,11 +323,47 @@ int pmap_proc_set(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		goto failure;
 	}
 
-	LogInfo(COMPONENT_DISPATCH, "PMAPPROC_SET not supported");
+	if (arg->arg_pmap.pm_prog == NLMPROG &&
+	    arg->arg_pmap.pm_vers == NLM4_VERS) {
+		/* We only accept PMAPPROC_SET for NLMv4 */
+		if (arg->arg_pmap.pm_prot == IPPROTO_TCP &&
+		    local_lockd_tcp_port == 0) {
+			LogInfo(COMPONENT_DISPATCH,
+				"Registering NLMv4 TCP for port %d",
+				arg->arg_pmap.pm_port);
+			res->res_pmap_set_unset =
+				set_local_lockd_port(arg->arg_pmap.pm_port,
+						     false);
+			goto out;
+		}
+		if (arg->arg_pmap.pm_prot == IPPROTO_UDP &&
+		    local_lockd_udp_port == 0) {
+			LogInfo(COMPONENT_DISPATCH,
+				"Registering NLMv4 UDP for port %d",
+				arg->arg_pmap.pm_port);
+			res->res_pmap_set_unset =
+				set_local_lockd_port(arg->arg_pmap.pm_port,
+						     true);
+			goto out;
+		}
+	}
+
+	if (arg->arg_pmap.pm_prog == NLMPROG) {
+		/* Any other set for NLM is quietly ignored. */
+		res->res_pmap_set_unset = true;
+		goto out;
+	}
 
 failure:
 
 	res->res_pmap_set_unset = false;
+
+out:
+#else
+	LogInfo(COMPONENT_DISPATCH, "PMAPPROC_SET not supported");
+
+	res->res_pmap_set_unset = false;
+#endif
 
 	rpcbs_set(req->rq_msg.cb_vers - PMAPVERS, res->res_pmap_set_unset);
 
@@ -318,6 +380,7 @@ failure:
 
 int pmap_proc_unset(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 {
+#ifdef _LOCAL_NLM
 	sockaddr_t *caller = svc_getrpccaller(req->rq_xprt);
 
 	LogInfo(COMPONENT_DISPATCH,
@@ -332,11 +395,38 @@ int pmap_proc_unset(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		goto failure;
 	}
 
-	LogInfo(COMPONENT_DISPATCH, "PMAPPROC_UNSET not supported");
+	if (arg->arg_pmap.pm_prog == NLMPROG &&
+	    arg->arg_pmap.pm_vers == NLM4_VERS) {
+		/* We only accept PMAPPROC_UNSET for NLMv4 */
+		if (arg->arg_pmap.pm_prot == IPPROTO_TCP) {
+			LogInfo(COMPONENT_DISPATCH, "Unregistering NLMv4 TCP");
+			res->res_pmap_set_unset =
+				set_local_lockd_port(0, false);
+			goto out;
+		}
+		if (arg->arg_pmap.pm_prot == IPPROTO_UDP) {
+			LogInfo(COMPONENT_DISPATCH, "Unregistering NLMv4 UDP");
+			res->res_pmap_set_unset = set_local_lockd_port(0, true);
+			goto out;
+		}
+	}
+
+	if (arg->arg_pmap.pm_prog == NLMPROG) {
+		/* Any other unset for NLM is quietly ignored. */
+		res->res_pmap_set_unset = true;
+		goto out;
+	}
 
 failure:
 
 	res->res_pmap_set_unset = false;
+
+out:
+#else
+	LogInfo(COMPONENT_DISPATCH, "PMAPPROC_UNSET not supported");
+
+	res->res_pmap_set_unset = false;
+#endif
 
 	rpcbs_unset(req->rq_msg.cb_vers - PMAPVERS, res->res_pmap_set_unset);
 
@@ -970,6 +1060,10 @@ bool xdr_rpcb_statistics(XDR *xdrs, rpcb_stat *objp)
 
 int rpcbind_proc_set(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 {
+#ifdef _LOCAL_NLM
+	int af, ip_proto, port;
+	struct netbuf *serv_nbp;
+	sockaddr_t *serv_sa;
 	sockaddr_t *caller = svc_getrpccaller(req->rq_xprt);
 
 	LogInfo(COMPONENT_DISPATCH, "REQUEST PROCESSING: Calling RPCBPROC_SET");
@@ -983,11 +1077,84 @@ int rpcbind_proc_set(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		goto failure;
 	}
 
-	LogInfo(COMPONENT_DISPATCH, "RPCBPROC_SET not supported");
+	if (arg->arg_rpcb.r_prog == NLMPROG &&
+	    arg->arg_rpcb.r_vers == NLM4_VERS) {
+		/* We only accept PMAPPROC_SET for NLMv4 */
+
+		if (strncasecmp(arg->arg_rpcb.r_netid, "tcp", 3) == 0) {
+			ip_proto = IPPROTO_TCP;
+
+			if (arg->arg_rpcb.r_netid[3] == '6')
+				af = AF_INET6;
+			else
+				af = AF_INET;
+		} else if (strncasecmp(arg->arg_rpcb.r_netid, "udp", 3) == 0) {
+			ip_proto = IPPROTO_UDP;
+
+			if (arg->arg_rpcb.r_netid[3] == '6')
+				af = AF_INET6;
+			else
+				af = AF_INET;
+		} else {
+			/* Any other netid set for NLM is quietly ignored. */
+			res->res_pmap_set_unset = true;
+			goto out;
+		}
+
+		/* Note we may not be running IPv6 (v6disabled is true), but all
+		 * we are interested in is the port number which will work just
+		 * fine for IPv4 so just get it from IPv6 address anyway.
+		 */
+
+		/* Convert r_addr into a sockaddr so we can extract the port. */
+		serv_nbp = __rpc_uaddr2taddr_af(af, arg->arg_rpcb.r_addr);
+
+		serv_sa = serv_nbp->buf;
+
+		if (serv_nbp == NULL)
+			goto failure;
+		if (af == AF_INET6)
+			port = SA2SIN6(serv_sa)->sin6_port;
+		else if (af == AF_INET)
+			port = SA2SIN(serv_sa)->sin_port;
+
+		gsh_free(serv_nbp->buf);
+		gsh_free(serv_nbp);
+
+		if (ip_proto == IPPROTO_TCP && local_lockd_tcp_port == 0) {
+			LogInfo(COMPONENT_DISPATCH,
+				"Registering NLMv4 TCP for port %d", port);
+			res->res_pmap_set_unset =
+				set_local_lockd_port(arg->arg_pmap.pm_port,
+						     false);
+			goto out;
+		} else if (ip_proto == IPPROTO_UDP &&
+			   local_lockd_udp_port == 0) {
+			LogInfo(COMPONENT_DISPATCH,
+				"Registering NLMv4 UDP for port %d", port);
+			res->res_pmap_set_unset =
+				set_local_lockd_port(arg->arg_pmap.pm_port,
+						     true);
+			goto out;
+		}
+	}
+
+	if (arg->arg_rpcb.r_prog == NLMPROG) {
+		/* Any other set for NLM is quietly ignored. */
+		res->res_pmap_set_unset = true;
+		goto out;
+	}
 
 failure:
 
 	res->res_pmap_set_unset = false;
+
+out:
+#else
+	LogInfo(COMPONENT_DISPATCH, "RPCBPROC_SET not supported");
+
+	res->res_pmap_set_unset = false;
+#endif
 
 	rpcbs_set(req->rq_msg.cb_vers - PMAPVERS, res->res_pmap_set_unset);
 
@@ -1004,6 +1171,7 @@ failure:
 
 int rpcbind_proc_unset(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 {
+#ifdef _LOCAL_NLM
 	sockaddr_t *caller = svc_getrpccaller(req->rq_xprt);
 
 	LogInfo(COMPONENT_DISPATCH,
@@ -1018,11 +1186,40 @@ int rpcbind_proc_unset(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		goto failure;
 	}
 
-	LogInfo(COMPONENT_DISPATCH, "RPCBPROC_UNSET not supported");
+	if (arg->arg_rpcb.r_prog == NLMPROG &&
+	    arg->arg_rpcb.r_vers == NLM4_VERS) {
+		/* We only accept RPCBPROC_UNSET for NLMv4 */
+
+		if (strncasecmp(arg->arg_rpcb.r_netid, "tcp", 3) == 0) {
+			/* TCP unset */
+			LogInfo(COMPONENT_DISPATCH, "Unregistering NLMv4 TCP");
+			res->res_pmap_set_unset =
+				set_local_lockd_port(0, false);
+			goto out;
+		} else if (strncasecmp(arg->arg_rpcb.r_netid, "udp", 3) == 0) {
+			/* UDP unset */
+			LogInfo(COMPONENT_DISPATCH, "Unregistering NLMv4 UDP");
+			res->res_pmap_set_unset = set_local_lockd_port(0, true);
+			goto out;
+		}
+	}
+
+	if (arg->arg_rpcb.r_prog == NLMPROG) {
+		/* Any other unset for NLM is quietly ignored. */
+		res->res_pmap_set_unset = true;
+		goto out;
+	}
 
 failure:
 
 	res->res_pmap_set_unset = false;
+
+out:
+#else
+	LogInfo(COMPONENT_DISPATCH, "RPCBPROC_UNSET not supported");
+
+	res->res_pmap_set_unset = false;
+#endif
 
 	rpcbs_unset(req->rq_msg.cb_vers - PMAPVERS, res->res_pmap_set_unset);
 
