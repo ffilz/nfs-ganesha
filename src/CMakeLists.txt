@@ -407,6 +407,7 @@ option(USE_NFS3 "enable NFSv3 support" ON)
 if(USE_NFS3)
     # Enable NLM Support
     option(USE_NLM "enable NLM support" ON)
+    option(INTERNAL_STATD "Provide internal rpc.statd if ON" OFF)
     # Enable NFSACL3 protocol extension support
     option(USE_NFSACL3 "enable NFSACLv3 support" ON)
 else(USE_NFS3)
@@ -1155,6 +1156,7 @@ set(_USE_9P ${USE_9P})
 set(_USE_9P_RDMA ${USE_9P_RDMA})
 set(_USE_NFS3 ${USE_NFS3})
 set(_USE_NLM ${USE_NLM})
+set(_INTERNAL_STATD ${INTERNAL_STATD})
 set(_USE_RQUOTA ${USE_RQUOTA})
 set(_USE_CB_SIMULATOR ${USE_CB_SIMULATOR})
 
@@ -1455,6 +1457,7 @@ message(STATUS "USE_NFS_RDMA = ${USE_NFS_RDMA}")
 message(STATUS "USE_RPC_RDMA = ${USE_RPC_RDMA}")
 message(STATUS "USE_NFS3 = ${USE_NFS3}")
 message(STATUS "USE_NLM = ${USE_NLM}")
+message(STATUS "INTERNAL_STATD = ${INTERNAL_STATD}")
 message(STATUS "USE_NFSACL3 = ${USE_NFSACL3}")
 message(STATUS "USE_ACL_MAPPING = ${USE_ACL_MAPPING}")
 message(STATUS "KRB5_PREFIX = ${KRB5_PREFIX}")
@@ -1545,6 +1548,11 @@ set(USE_NFS3 ${USE_NFS3}
 set(USE_NLM ${USE_NLM}
   CACHE BOOL
    "enable NLM support"
+   FORCE)
+
+set(INTERNAL_STATD ${INTERNAL_STATD}
+  CACHE BOOL
+   "enable Internal Statd support"
    FORCE)
 
 set(USE_NFS_RDMA ${USE_NFS_RDMA}
