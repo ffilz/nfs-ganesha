@@ -69,6 +69,8 @@ NFS_CORE_PARAM {}
 
 	NLM_Port (uint16, range 0 to UINT16_MAX, default 0)
 
+	NSM_Port (uint16, range 0 to UINT16_MAX, default 0)
+
 	Rquota_Port (uint16, range 0 to UINT16_MAX, default 875)
 
 	NFS_RDMA_Port (uint16, range 0 to UINT16_MAX, default 20049)
@@ -237,6 +239,8 @@ NFS_CORE_PARAM {}
 	Allow_Set_Io_Flusher_Fail(bool, default false)
 
 	Unmonitor_On_Shutdown(bool, default true)
+
+	Use_statd(bool, default true)
 
 NFS_IP_NAME {}
 --------------

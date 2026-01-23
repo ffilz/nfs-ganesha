@@ -56,6 +56,9 @@ MNT_Port (uint16, range 0 to UINT16_MAX, default 0)
 NLM_Port (uint16, range 0 to UINT16_MAX, default 0)
     Port number used by NLM Protocol.
 
+NSM_Port (uint16, range 0 to UINT16_MAX, default 0)
+    Port number used by NSM Protocol.
+
 Rquota_Port (uint16, range 0 to UINT16_MAX, default 875)
     Port number used by Rquota Protocol.
 
@@ -291,6 +294,10 @@ Unmonitor_On_Shutdown(bool, default true)
   monitoring of NLM clients on shutdown, allowing for the possibility of
   sending SM_NOTIFY on restart (if internal statd is used, Ganesha will send
   SM_NOTIFY on restart for any NLM clients still monitored).
+
+Use_statd(bool, default true)
+  If true, use external rpc.statd. If false, provide NSM protocol internally
+  on NSM_Port.
 
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
