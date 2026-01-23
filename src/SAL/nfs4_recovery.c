@@ -456,6 +456,214 @@ bool parse_nlm_client_entry(char *entry, struct local_nlm_info *info)
 	return true;
 }
 
+int nlm_create_local_nlm_cb_entry(struct display_buffer *dspbuf,
+				  struct local_nlm_info *info)
+{
+	struct my_id *local = &info->mon.mon_id.my_id;
+	int my_name_len, rc;
+
+	my_name_len = strlen(local->my_name);
+
+	/* Local NLM Callback Format:
+	 *
+	 *    LOCAL_NLM_CB(LSTR{my-name})(prog:ver:proc)
+	 *    "LOCAL_NLM_CB(%d:%s)(%d:%d:%d)
+	*/
+	rc = display_printf(dspbuf, "LOCAL_NLM_CB(%d:%s)(%d:%d:%d)",
+			    my_name_len, local->my_name, local->my_prog,
+			    local->my_vers);
+
+	if (rc <= 0)
+		LogCrit(COMPONENT_NLM,
+			"Failure to encode Local NLM Callback Entry");
+	else
+		LogDebug(COMPONENT_NLM, "Created Local NLM Callback Entry [%s]",
+			 dspbuf->b_start);
+
+	return rc;
+}
+
+bool parse_local_nlm_cb_entry(const char *entry, struct local_nlm_info *info)
+{
+	char *dupe = gsh_strdupa(entry);
+	char *my_name, *endstr;
+	int rc, prog, ver, proc;
+
+	endstr = parse_lstr(dupe + 11, &my_name);
+
+	if (endstr == NULL) {
+		LogFullDebug(COMPONENT_NLM, "Failed to parse my-name");
+		return false;
+	}
+
+	/* Descriptive format:
+	 *
+	 *    LOCAL_NLM_CB(LSTR{my-name})(prog:ver:proc)
+	 *
+	 * Format string used to produce:
+	 *    "LOCAL_NLM_CB(%d:%s)(%d:%d:%d)"
+	 *
+	 * Parse (prog:ver:proc)
+	 */
+	rc = sscanf(endstr, "(%d:%d:%d)", &prog, &ver, &proc);
+
+	if (rc != 3) {
+		LogFullDebug(COMPONENT_NLM,
+			     "LOCAL_NLM_CB invalid number of params %d", rc);
+		return false;
+	}
+
+	/* Now fill in my_id to be used later */
+	info->mon.mon_id.my_id.my_name = gsh_strdup(my_name);
+	info->mon.mon_id.my_id.my_prog = prog;
+	info->mon.mon_id.my_id.my_vers = ver;
+	info->mon.mon_id.my_id.my_proc = proc;
+
+	return true;
+}
+
+int nlm_create_local_mon_entry(struct display_buffer *dspbuf,
+			       struct local_nlm_info *info)
+{
+	char opaque[64];
+	struct display_buffer opbuf = { sizeof(opaque), opaque, opaque };
+	int rc, mon_name_len;
+
+	mon_name_len = strlen(info->mon.mon_id.mon_name);
+
+	/* Need to be able to decode private so just convert to bytes */
+	rc = display_opaque_bytes_flags(&opbuf, info->mon.priv,
+					sizeof(info->mon.priv),
+					OPAQUE_BYTES_RECOV_FLAGS);
+
+	if (rc <= 0) {
+		LogCrit(COMPONENT_NLM, "Failure to encode priv");
+		return rc;
+	}
+
+	/* Local NLM SM_MON Format:
+	 *
+	 *    LOCAL_SM_MON-<CLIENT-IP>-<SERV-IP>-(netid)((LSTR{mon-name})(priv)
+	 *    "LOCAL_SM_MON-%s-%s-(%s)(%d:%s)(%s)"
+	*/
+	rc = display_cat(dspbuf, "LOCAL_SM_MON-");
+
+	if (rc > 0)
+		rc = display_sockip(dspbuf, &info->client_address);
+
+	if (rc > 0)
+		rc = display_cat(dspbuf, "-");
+
+	if (rc > 0)
+		rc = display_sockip(dspbuf, &info->server_address);
+
+	if (rc > 0)
+		rc = display_printf(dspbuf, "-(%s)(%d:%s)(%s)",
+				    info->nconf->nc_netid, mon_name_len,
+				    info->mon.mon_id.mon_name, opaque);
+
+	if (rc <= 0)
+		LogCrit(COMPONENT_NLM, "Failure to encode Local SM_MON entry");
+	else
+		LogDebug(COMPONENT_NLM, "Created Local SM_MON encoding [%s]",
+			 dspbuf->b_start);
+
+	return rc;
+}
+
+bool parse_local_mon_entry(const char *entry, struct local_nlm_info *info)
+{
+	char *dupe = gsh_strdupa(entry);
+	char *endstr, *priv, *priv_decode = info->mon.priv;
+	int rc;
+
+	endstr = parse_cli_srv_netid_client(dupe + 13, info);
+
+	if (endstr == NULL) {
+		LogFullDebug(COMPONENT_NLM, "Parse of Local NLM SM_MON failed");
+		return false;
+	}
+
+	if (*endstr != '(') {
+		LogFullDebug(COMPONENT_NLM,
+			     "Missing open parenthesis for priv");
+		return false;
+	}
+
+	priv = endstr + 1;
+
+	endstr = strchr(priv, ')');
+
+	if (endstr == NULL) {
+		LogFullDebug(COMPONENT_NLM,
+			     "Missing close parenthesis for priv");
+		return false;
+	}
+
+	/* Now decode the hex string into 16 bytes */
+	rc = sscanf(
+		priv,
+		"%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx",
+		&priv_decode[0], &priv_decode[1], &priv_decode[2],
+		&priv_decode[3], &priv_decode[4], &priv_decode[5],
+		&priv_decode[6], &priv_decode[7], &priv_decode[8],
+		&priv_decode[9], &priv_decode[10], &priv_decode[11],
+		&priv_decode[12], &priv_decode[13], &priv_decode[14],
+		&priv_decode[15]);
+
+	if (rc != 16) {
+		LogFullDebug(COMPONENT_NLM,
+			     "priv did not have 16 bytes, decoded %d", rc);
+		return false;
+	}
+
+	return true;
+}
+
+int nlm_create_local_binding_entry(struct display_buffer *dspbuf,
+				   struct local_nlm_info *info, bool is_udp)
+{
+	int rc;
+	const char *label;
+
+	if (is_udp)
+		label = "LOCAL_NLM_BIND_UDP";
+	else
+		label = "LOCAL_NLM_BIND_TCP";
+
+	rc = display_printf(dspbuf, "%s(%d)", label, info->info_port);
+
+	if (rc <= 0)
+		LogCrit(COMPONENT_NLM, "Failure to encode Local NLM binding");
+
+	return rc;
+}
+
+bool parse_local_binding_entry(const char *entry, struct local_nlm_info *info,
+			       bool is_udp)
+{
+	int rc;
+	const char *fmt;
+
+	if (is_udp)
+		fmt = "LOCAL_NLM_BIND_UDP(%d)";
+	else
+		fmt = "LOCAL_NLM_BIND_TCP(%d)";
+
+	/* Descriptive format:
+	 *
+	 *    LOCAL_NLM_BIND_UDP(port)
+	 *    LOCAL_NLM_BIND_TCP(port)
+	 *
+	 * Format string used to produce:
+	 *    "LOCAL_NLM_BIND_UDP(%d)"
+	 *    "LOCAL_NLM_BIND_TCP(%d)"
+	 */
+	rc = sscanf(entry, fmt, &info->info_port);
+
+	return rc == 1;
+}
+
 int create_nlm_entry(struct display_buffer *dspbuf, struct local_nlm_info *info)
 {
 	switch (info->recovery_type) {
@@ -464,6 +672,18 @@ int create_nlm_entry(struct display_buffer *dspbuf, struct local_nlm_info *info)
 
 	case NLM_CLIENT_ENTRY:
 		return nlm_create_client_entry(dspbuf, info);
+
+	case NLM_CALLBACK_ENTRY:
+		return nlm_create_local_nlm_cb_entry(dspbuf, info);
+
+	case NLM_SM_MON_ENTRY:
+		return nlm_create_local_mon_entry(dspbuf, info);
+
+	case NLM_RPCBIND_UDP_ENTRY:
+		return nlm_create_local_binding_entry(dspbuf, info, true);
+
+	case NLM_RPCBIND_TCP_ENTRY:
+		return nlm_create_local_binding_entry(dspbuf, info, false);
 
 	default:
 		return -1;
@@ -479,7 +699,7 @@ bool parse_nlm_entry(char *entry, enum recovery_type recovery_type)
 	struct local_nlm_info *info;
 	bool rc;
 	if (recovery_type == NFS4_CLID_ENTRY ||
-	    recovery_type > NLM_CLIENT_ENTRY)
+	    recovery_type > NLM_RPCBIND_TCP_ENTRY)
 		goto bad_entry;
 
 	info = gsh_calloc(1, sizeof(*info));
@@ -506,6 +726,60 @@ bool parse_nlm_entry(char *entry, enum recovery_type recovery_type)
 			/* Keep a list of all the monitor entries */
 			glist_add_tail(&local_nlm_info_list, &info->infolist);
 		}
+		break;
+
+	case NLM_CALLBACK_ENTRY:
+#ifdef _LOCAL_NLM
+		rc = parse_local_nlm_cb_entry(entry, info);
+		if (rc) {
+			/* We need to remember the NLM_CALLBACK_ENTRY */
+			nlm_callback_entry = info;
+		}
+#else
+		/* Not supported */
+		rc = false;
+#endif
+		break;
+
+	case NLM_SM_MON_ENTRY:
+#ifdef _LOCAL_NLM
+		rc = parse_local_mon_entry(entry, info);
+		if (rc) {
+			/* Keep a list of all the monitor entries */
+			glist_add_tail(&local_nlm_info_list, &info->infolist);
+		}
+#else
+		/* Not supported */
+		rc = false;
+#endif
+		break;
+
+	case NLM_RPCBIND_UDP_ENTRY:
+#ifdef _LOCAL_NLM
+		rc = parse_local_binding_entry(entry, info, true);
+		if (rc) {
+			/* Go ahead and apply the binding now... */
+			local_lockd_udp_port = info->info_port;
+			local_nlm_info_free(info);
+		}
+#else
+		/* Not supported */
+		rc = false;
+#endif
+		break;
+
+	case NLM_RPCBIND_TCP_ENTRY:
+#ifdef _LOCAL_NLM
+		rc = parse_local_binding_entry(entry, info, false);
+		if (rc) {
+			/* Go ahead and apply the binding now... */
+			local_lockd_tcp_port = info->info_port;
+			local_nlm_info_free(info);
+		}
+#else
+		/* Not supported */
+		rc = false;
+#endif
 		break;
 
 	default:

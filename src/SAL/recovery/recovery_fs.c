@@ -1314,7 +1314,8 @@ static bool fs_add_nlm_entry(struct local_nlm_info *info)
 	if (rc <= 0)
 		return false;
 
-	if (info->recovery_type == NLM_CLIENT_ENTRY)
+	if (info->recovery_type == NLM_CLIENT_ENTRY ||
+	    info->recovery_type == NLM_SM_MON_ENTRY)
 		serv = &info->server_address;
 
 	rc = fs_make_path(entry, serv, path, sizeof(path), true, COMPONENT_NLM);
@@ -1335,7 +1336,8 @@ static bool fs_rm_nlm_entry(struct local_nlm_info *info)
 		return false;
 
 	if (nfs_param.nfsv4_param.recovery_backend_ipbased &&
-	    info->recovery_type == NLM_CLIENT_ENTRY) {
+	    (info->recovery_type == NLM_CLIENT_ENTRY ||
+	     info->recovery_type == NLM_SM_MON_ENTRY)) {
 		char dir[PATH_MAX];
 		int dir_len;
 

@@ -138,6 +138,9 @@ const char *tags[P_COUNT] = {
 #ifdef USE_NFSACL3
 	"NFSACL",
 #endif
+#ifdef _LOCAL_NLM
+	"LOCAL_NLM",
+#endif
 #ifdef RPC_VSOCK
 	"NFS_VSOCK",
 #endif
@@ -468,6 +471,9 @@ const svc_xprt_fun_t udp_dispatch[] = {
 #ifdef _USE_NFS_RDMA
 	NULL,
 #endif
+#ifdef _LOCAL_NLM
+	NULL, /*< place to hold info for local NLM */
+#endif
 };
 
 static enum xprt_stat nfs_rpc_dispatch_remote_addr_set_tcp(SVCXPRT *xprt)
@@ -645,6 +651,9 @@ const svc_xprt_fun_t tcp_dispatch[P_COUNT] = {
 #ifdef _USE_NFS_RDMA
 	nfs_rpc_dispatch_RDMA,
 #endif
+#ifdef _LOCAL_NLM
+	NULL, /*< place to hold info for local NLM */
+#endif
 };
 
 void Create_udp(protos prot)
@@ -662,6 +671,7 @@ void Create_udp(protos prot)
 		if (!NFS_pcp.use_rpcbind)
 			udp_xprt[prot]->xp_flags |= SVC_XPRT_FLAG_NO_SET;
 #endif
+
 		udp_xprt[prot]->xp_dispatch.rendezvous_cb = udp_dispatch[prot];
 
 		/* Hook xp_free_user_data (finalize/free private data) */

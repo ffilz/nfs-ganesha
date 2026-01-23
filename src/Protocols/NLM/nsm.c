@@ -475,15 +475,54 @@ int smmon_proc_stat(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 
 int smmon_proc_mon(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 {
+	struct local_nlm_info info;
+	sockaddr_t *local;
+	struct my_id *my_id = &arg->mon_args.mon_id.my_id;
+
 	LogFullDebug(COMPONENT_DISPATCH, "REQUEST PROCESSING: Calling SM_MON");
 
-	LogEvent(COMPONENT_NLM,
-		 "Client %s sent an SM_MON, not supported ignoring",
-		 op_ctx->client->hostaddr_str);
+	if (!is_loopback(op_ctx->caller_addr)) {
+		LogEvent(COMPONENT_NLM, "Client %s sent an SM_MON, ignoring",
+			 op_ctx->client->hostaddr_str);
 
-	res->sm_stat_res.res_stat = STAT_FAIL;
-	res->sm_stat_res.state = 0;
-	return NFS_REQ_ERROR;
+		res->sm_stat_res.res_stat = STAT_FAIL;
+		res->sm_stat_res.state = 0;
+		return NFS_REQ_ERROR;
+	}
+
+	local = svc_getrpclocal(req->rq_xprt);
+
+	info.client_address = *op_ctx->caller_addr;
+	info.server_address = *local;
+	info.nconf = nfs_Get_netconfig(req->rq_xprt->xp_netid);
+	info.mon.mon_id.mon_name = arg->mon_args.mon_id.mon_name;
+	info.mon.mon_id.my_id.my_name = my_id->my_name;
+	info.mon.mon_id.my_id.my_prog = my_id->my_prog;
+	info.mon.mon_id.my_id.my_vers = my_id->my_vers;
+	info.mon.mon_id.my_id.my_proc = my_id->my_proc;
+	memcpy(info.mon.priv, arg->mon_args.priv, sizeof(info.mon.priv));
+
+	info.recovery_type = NLM_CALLBACK_ENTRY;
+
+	if (!nlm_add_entry(&info)) {
+		LogEvent(COMPONENT_NLM, "Add NLM_CALLBACK_ENTRY failed");
+		res->sm_stat_res.res_stat = STAT_FAIL;
+		res->sm_stat_res.state = 0;
+		return NFS_REQ_ERROR;
+	}
+
+	info.recovery_type = NLM_SM_MON_ENTRY;
+
+	if (!nlm_add_entry(&info)) {
+		LogEvent(COMPONENT_NLM, "Add NLM_SM_MON_ENTRY failed");
+		res->sm_stat_res.res_stat = STAT_FAIL;
+		res->sm_stat_res.state = 0;
+		return NFS_REQ_ERROR;
+	}
+
+	res->sm_stat_res.res_stat = STAT_SUCC;
+	res->sm_stat_res.state = cur_nsm_state;
+	return NFS_REQ_OK;
 }
 
 /*******************************************************************************
@@ -1103,13 +1142,98 @@ retry:
 	glist_add_tail(&callback_wait_list, &info->infolist);
 }
 
+#ifdef _LOCAL_NLM
+/**
+ * @brief send local nlm callback for a particular LOCAL_SM_MON entry.
+ *
+ * @param[in] info  the LOCAL_SM_MON entry
+ */
+void send_local_nlm_callback(struct local_nlm_info *info)
+{
+	/* The call back prog, vers, and proc are in nlm_callback_entry */
+	struct my_id *cb_id = &nlm_callback_entry->mon.mon_id.my_id;
+	struct my_id *my_id = &info->mon.mon_id.my_id;
+
+	if (my_id->my_prog != cb_id->my_prog) {
+		/* Very first time processing this local_nlm_info.
+		 *
+		 * We saved the local NLM port in the recovery database when
+		 * it registered with RPCBIND, so we can send the notify
+		 * callback directly without using PORTMAP (which would be us in
+		 * any case.
+		 */
+		/* Now send local callback */
+		struct my_id *cb_id = &nlm_callback_entry->mon.mon_id.my_id;
+
+		/* Grab the local NLM UDP port restored from recovery DB. */
+		info->info_port = local_lockd_udp_port;
+
+		/* Copy my_id stuff from nlm_callback_entry, but
+		 * make copy of my_name. This sets up the
+		 * callback program, version, and proc. Also,
+		 * copy port.
+		 *
+		 * info_port, my_prog, and my_vers are used by
+		 * local_nlm_info_client_create().
+		 *
+		 * my_proc is used by req_call().
+		 */
+		*my_id = *cb_id;
+		my_id->my_name = gsh_strdup(cb_id->my_name);
+
+		/* Fill in callback args */
+		info->args.cb_args.name = info->mon.mon_id.mon_name;
+		info->args.cb_args.state = recov_nsm_state;
+		memcpy(info->args.cb_args.priv, info->mon.priv,
+		       sizeof(info->mon.priv));
+		info->xargs = (xdrproc_t)xdr_nlm4_sm_notifyargs;
+		info->xres = (xdrproc_t)xdr_void;
+	}
+
+	/* Get a CLIENT for the request */
+	if (info->rpc_client == NULL) {
+		/* We haven't set up a client yet. */
+		if (!local_nlm_info_client_create(info)) {
+			/* Since it failed, let's just retry in 5 seconds. If it
+			 * never succeeds, retry will be abandoned when grace
+			 * period runs out.
+			 */
+			goto retry;
+		}
+	}
+
+	/* Request options are all setup, actually set up the request */
+	if (!req_call(info)) {
+		/* Oops, problem, we're done with this entry */
+		return;
+	}
+
+	/* Continue through to wait for the request to complete */
+
+retry:
+
+	/* And put the request at the tail of the wait list with a due time 5
+	 * seconds from now.
+	 */
+	info->reply_due = time(NULL) + 5;
+
+	glist_del(&info->infolist);
+	glist_add_tail(&callback_wait_list, &info->infolist);
+}
+#endif
+
 void send_local_nlm_info(struct local_nlm_info *info)
 {
 	if (info->recovery_type == NLM_CLIENT_ENTRY ||
 	    info->recovery_type == NSM_FORWARD_NOTIFY) {
 		/* Handle SM_NOTIFY to remote NLM client */
 		send_sm_notify(info);
+	} else if (info->recovery_type == NLM_SM_MON_ENTRY) {
+#ifdef _LOCAL_NLM
+		/* Handle Notify to local NLM client */
+		send_local_nlm_callback(info);
 	} else {
+#endif
 		LogFatal(COMPONENT_NLM, "Unexpected recovery_type %d for %p",
 			 info->recovery_type, info);
 	}
@@ -1131,6 +1255,28 @@ void *nsm_notify_thread(void *unused)
 		LogFatal(COMPONENT_NLM,
 			 "Could not add NSM_STATE_ENTRY to recovery database");
 	}
+
+#ifdef _LOCAL_NLM
+	/* LOCAL_NLM_BIND_UDP to new recovery database */
+	sinfo.recovery_type = NLM_RPCBIND_UDP_ENTRY;
+	sinfo.info_port = local_lockd_udp_port;
+
+	if (sinfo.info_port != 0 && !nlm_add_entry(&sinfo)) {
+		LogFatal(
+			COMPONENT_NLM,
+			"Could not add NLM_RPCBIND_UDP_ENTRY to recovery database");
+	}
+
+	/* LOCAL_NLM_BIND_UDP to new recovery database */
+	sinfo.recovery_type = NLM_RPCBIND_TCP_ENTRY;
+	sinfo.info_port = local_lockd_tcp_port;
+
+	if (sinfo.info_port != 0 && !nlm_add_entry(&sinfo)) {
+		LogFatal(
+			COMPONENT_NLM,
+			"Could not add NLM_RPCBIND_TCP_ENTRY to recovery database");
+	}
+#endif
 
 	PTHREAD_MUTEX_lock(&nsm_mutex);
 
@@ -1154,7 +1300,11 @@ void *nsm_notify_thread(void *unused)
 		info = glist_first_entry(&local_nlm_info_list,
 					 struct local_nlm_info, infolist);
 
-		if (info->recovery_type != NLM_CLIENT_ENTRY) {
+		if (info->recovery_type != NLM_CLIENT_ENTRY
+#ifdef _LOCAL_NLM
+		    && info->recovery_type != NLM_SM_MON_ENTRY
+#endif
+		) {
 			/* Invalid recovery_type */
 			LogCrit(COMPONENT_NLM,
 				"Invalid recovery entry %d for entry %p",
