@@ -206,6 +206,11 @@ static struct config_item core_params[] = {
 #ifdef _USE_NLM
 	CONF_ITEM_UI16("NLM_Port", 0, UINT16_MAX, 0, nfs_core_param,
 		       port[P_NLM]),
+#ifdef _INTERNAL_STATD
+	CONF_ITEM_UI16("NSM_Port", 0, UINT16_MAX, 0, nfs_core_param,
+		       port[P_STATD]),
+	CONF_ITEM_BOOL("Use_statd", true, nfs_core_param, use_statd),
+#endif
 #endif
 #ifdef _USE_RQUOTA
 	CONF_ITEM_UI16("Rquota_Port", 0, UINT16_MAX, RQUOTA_PORT,

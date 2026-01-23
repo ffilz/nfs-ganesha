@@ -52,6 +52,9 @@ MNT_Port (uint16, range 0 to UINT16_MAX, default 0)
 NLM_Port (uint16, range 0 to UINT16_MAX, default 0)
     Port number used by NLM Protocol.
 
+NSM_Port (uint16, range 0 to UINT16_MAX, default 0)
+    Port number used by NSM Protocol.
+
 Rquota_Port (uint16, range 0 to UINT16_MAX, default 875)
     Port number used by Rquota Protocol.
 
@@ -273,6 +276,10 @@ Allow_Set_Io_Flusher_Fail(bool, default false)
   option and Ganesha will not fail on startup if it can't set it.
   For more info, see:
   https://git.kernel.org/torvalds/p/8d19f1c8e1937baf74e1962aae9f90fa3aeab463
+
+Use_statd(bool, default true)
+  If true, use external rpc.statd. If false, provide NSM protocol internally
+  on NSM_Port.
 
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
