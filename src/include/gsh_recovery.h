@@ -67,6 +67,25 @@ enum recovery_backend {
  *    NLM-<CLIENT-IP>-<SERV-IP>-(netid)(LSTR{caller-name})
  *    "NLM-%s-%s-(%s)(%d:%s)"
  *
+ * Local NLM Callback Format:
+ *
+ *    LOCAL_NLM_CB(LSTR{my-name})(prog:ver:proc)
+ *    "LOCAL_NLM_CB(%d:%s)(%d:%d:%d)"
+ *
+ * Local NLM SM_MON Format:
+ *
+ *    LOCAL_SM_MON-<CLIENT-IP>-<SERV-IP>-(netid)(LSTR{mon-name})(priv)
+ *    "LOCAL_SM_MON-%s-%s-(%s)(%d:%s)(%s)"
+ *
+ * Local NLM RPC Binding Format:
+ *
+ *    LOCAL_NLM_BIND_UDP(port)
+ *    "LOCAL_NLM_BIND_UDP(%d)"
+ *
+ *    LOCAL_NLM_BIND_TCP(port)
+ *    "LOCAL_NLM_BIND_TCP(%d)"
+ *
+ *
  ******************************************************************************/
 
 #endif /* GSH_RECOVERY_H */
