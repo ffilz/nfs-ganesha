@@ -408,6 +408,7 @@ if(USE_NFS3)
     # Enable NLM Support
     option(USE_NLM "enable NLM support" ON)
     option(INTERNAL_STATD "Provide internal rpc.statd if ON" OFF)
+    option(LOCAL_NLM "enable Local NLM support" OFF)
     # Enable NFSACL3 protocol extension support
     option(USE_NFSACL3 "enable NFSACLv3 support" ON)
 else(USE_NFS3)
@@ -415,6 +416,8 @@ else(USE_NFS3)
     set(USE_NLM OFF)
     # Disable NFSACL3 protocol extension support
     set(USE_NFSACL3 OFF)
+    # Disable Local NLM support
+    set(LOCAL_NLM OFF)
     # Disable Internal Statd support
     set(INTERNAL_STATD OFF)
 endif(USE_NFS3)
@@ -426,6 +429,18 @@ if(INTERNAL_STATD)
 endif(INTERNAL_STATD)
 
 option(INTERNAL_RPCBIND "Provide rpcbind if ON" OFF)
+
+if(LOCAL_NLM)
+    if(NOT USE_NLM)
+        message(FATAL_ERROR "Cannot set LOCAL_NLM without USE_NLM")
+    endif(NOT USE_NLM)
+    if(NOT INTERNAL_STATD)
+        message(FATAL_ERROR "Cannot set LOCAL_NLM without INTERNAL_STATD")
+    endif(NOT INTERNAL_STATD)
+    if(NOT INTERNAL_RPCBIND)
+        message(FATAL_ERROR "Cannot set LOCAL_NLM without INTERNAL_RPCBIND")
+    endif(NOT INTERNAL_RPCBIND)
+endif(LOCAL_NLM)
 
 if(INTERNAL_RPCBIND)
     if(USE_NLM)
@@ -1175,6 +1190,7 @@ set(_USE_9P_RDMA ${USE_9P_RDMA})
 set(_USE_NFS3 ${USE_NFS3})
 set(_USE_NLM ${USE_NLM})
 set(_INTERNAL_STATD ${INTERNAL_STATD})
+set(_LOCAL_NLM ${LOCAL_NLM})
 set(_INTERNAL_RPCBIND ${INTERNAL_RPCBIND})
 set(_USE_RQUOTA ${USE_RQUOTA})
 set(_USE_CB_SIMULATOR ${USE_CB_SIMULATOR})
@@ -1477,6 +1493,7 @@ message(STATUS "USE_RPC_RDMA = ${USE_RPC_RDMA}")
 message(STATUS "USE_NFS3 = ${USE_NFS3}")
 message(STATUS "USE_NLM = ${USE_NLM}")
 message(STATUS "INTERNAL_STATD = ${INTERNAL_STATD}")
+message(STATUS "LOCAL_NLM = ${LOCAL_NLM}")
 message(STATUS "INTERNAL_RPCBIND = ${INTERNAL_RPCBIND}")
 message(STATUS "USE_NFSACL3 = ${USE_NFSACL3}")
 message(STATUS "USE_ACL_MAPPING = ${USE_ACL_MAPPING}")
@@ -1573,6 +1590,11 @@ set(USE_NLM ${USE_NLM}
 set(INTERNAL_STATD ${INTERNAL_STATD}
   CACHE BOOL
    "enable Internal Statd support"
+   FORCE)
+
+set(LOCAL_NLM ${LOCAL_NLM}
+  CACHE BOOL
+   "enable Local NLM support"
    FORCE)
 
 set(INTERNAL_RPCBIND ${INTERNAL_RPCBIND}
