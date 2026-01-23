@@ -189,6 +189,50 @@ int find_peer_addr(char *caller_name, in_port_t sin_port, sockaddr_t *client)
 	return retval;
 }
 
+#ifdef _LOCAL_NLM
+static inline void setup_local_nlm_client(state_nlm_client_t *host)
+{
+	/* Handle loopback call. */
+	sockaddr_t client_addr = host->slc_client_addr;
+	struct sockaddr_in *in = (struct sockaddr_in *)&client_addr;
+	struct sockaddr_in6 *in6 = (struct sockaddr_in6 *)&client_addr;
+	struct netbuf cli_netbuf = { sizeof(sockaddr_t), sizeof(sockaddr_t),
+				     &client_addr };
+	struct netbuf srv_netbuf = { sizeof(sockaddr_t), sizeof(sockaddr_t),
+				     &host->slc_server_addr };
+	struct netconfig *nconf = NULL;
+
+	/* Need to set port in client_address for
+	 * complete sendback address
+	 */
+	switch (client_addr.ss_family) {
+	case AF_INET:
+		in->sin_port = local_lockd_udp_port;
+		nconf = netconfig_udpv4;
+		break;
+
+	case AF_INET6:
+		in6->sin6_port = local_lockd_udp_port;
+		nconf = netconfig_udpv6;
+		break;
+
+	default:
+		// handle unexpected case...
+	}
+
+	/* Note that we bind to server address and send to client address in
+	 * reverse of what might be expected. This is because the server
+	 * address is our (Ganesha's) address and the client address is the
+	 * kernel NLM address. This is because we are doing a callback from
+	 * the server (Ganesha) to the client, reversing the roles of server
+	 * and client.
+	 */
+	host->slc_callback_clnt = clnt_tli_ncreate(RPC_ANYFD, nconf,
+						   &srv_netbuf, &cli_netbuf,
+						   NLMPROG, NLM4_VERS, 0, 0);
+}
+#endif
+
 /* Client routine  to send the asynchronous response,
  * key is used to wait for a response
  */
@@ -199,7 +243,8 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 	struct timeval start, now;
 	struct timespec timeout;
 	int retval, retry;
-	char *caller_name = host->slc_nsm_client->ssc_nlm_caller_name;
+	state_nsm_client_t *nsm_host = host->slc_nsm_client;
+	char *caller_name = nsm_host->ssc_nlm_caller_name;
 	const char *client_type_str = xprt_type_to_str(host->slc_client_type);
 
 	for (retry = 0; retry < MAX_ASYNC_RETRY; retry++) {
@@ -207,6 +252,14 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 			LogFullDebug(COMPONENT_NLM, "clnt_ncreate %s",
 				     caller_name);
 
+#ifdef _LOCAL_NLM
+			if (!NFS_pcp.use_rpcbind &&
+			    is_loopback(&nsm_host->ssc_client->cl_addrbuf)) {
+				/* Handle loopback call. */
+				setup_local_nlm_client(host);
+				goto test_fail;
+			}
+#endif
 			if (host->slc_client_type == XPRT_TCP) {
 				int fd;
 				struct sockaddr_in6 server_addr;
@@ -305,6 +358,10 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 						     NLM4_VERS,
 						     (char *)client_type_str);
 			}
+
+#ifdef _LOCAL_NLM
+test_fail:
+#endif
 
 			if (CLNT_FAILURE(host->slc_callback_clnt)) {
 				char *err = rpc_sperror(
