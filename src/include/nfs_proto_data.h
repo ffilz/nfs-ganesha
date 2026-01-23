@@ -51,6 +51,11 @@
 #include "nfsacl.h"
 #include "nsm.h"
 
+#ifdef _LOCAL_NLM
+extern unsigned int local_lockd_tcp_port;
+extern unsigned int local_lockd_udp_port;
+#endif
+
 /* ------------------------------ Typedefs and structs----------------------- */
 
 typedef union nfs_arg__ {
