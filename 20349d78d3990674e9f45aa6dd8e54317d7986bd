@@ -51,6 +51,24 @@
       "parentUuid": "a667000e_f4e49c19",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1368d1f5_ca471f93",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2026-01-26T17:21:26Z",
+      "side": 1,
+      "message": "Thanks! Trying with the patch, while mounting with v3 with \u0027xprtsec\u003dtls\u0027, unlink v4 the linux nfs client(REHL10) did not send \u0027AUTH_TLS\u0027 in NULL call causing the \u0027tls_established\u0027 to be false, any idea on this.",
+      "parentUuid": "c31826bd_6ba81371",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
