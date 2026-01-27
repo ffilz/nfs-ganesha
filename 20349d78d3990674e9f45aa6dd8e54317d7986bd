@@ -69,6 +69,24 @@
       "parentUuid": "c31826bd_6ba81371",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feeee92f_d6c3225c",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-01-27T06:14:24Z",
+      "side": 1,
+      "message": "I am using CentOS9 and CentOS10 clients.\nMounts with AUTH_TLS for nfsv3 is working and can see in server logs AUTH_TLS requests from client.\n\nCheck is some config missing in ganesha.conf",
+      "parentUuid": "1368d1f5_ca471f93",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
