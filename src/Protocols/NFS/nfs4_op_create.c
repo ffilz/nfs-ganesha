@@ -245,9 +245,9 @@ enum nfs_req_result nfs4_op_create(struct nfs_argop4 *op, compound_data_t *data,
 	if (!(sattr.valid_mask & ATTR_MODE)) {
 		/* Make sure mode is set. */
 		if (type == DIRECTORY)
-			sattr.mode = 0700;
+			sattr.mode = 0755;
 		else
-			sattr.mode = 0600;
+			sattr.mode = 0644;
 		sattr.valid_mask |= ATTR_MODE;
 	}
 

@@ -143,7 +143,7 @@ int nfs3_create(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 
 	if (!(sattr.valid_mask & ATTR_MODE)) {
 		/* Make sure mode is set. */
-		sattr.mode = 0600;
+		sattr.mode = 0644;
 		sattr.valid_mask |= ATTR_MODE;
 	}
 

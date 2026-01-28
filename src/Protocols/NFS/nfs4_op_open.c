@@ -737,7 +737,7 @@ static void open4_ex_create_args(OPEN4args *arg, compound_data_t *data,
 
 	if (!(sattr->valid_mask & ATTR_MODE)) {
 		/* Make sure mode is set, even for exclusive create. */
-		sattr->mode = 0600;
+		sattr->mode = 0644;
 		sattr->valid_mask |= ATTR_MODE;
 	}
 }
