@@ -30,11 +30,12 @@
 #include <string.h>
 
 static regex_t url_regex;
-static rados_t cluster;
 static bool initialized;
 static rados_ioctx_t rados_watch_io_ctx;
 static uint64_t rados_watch_cookie;
 static char *rados_watch_oid;
+
+rados_t rados_cluster;
 
 static struct rados_url_parameter {
 	/** Path to ceph.conf */
@@ -125,26 +126,6 @@ static void cu_rados_url_early_init(void)
 
 extern struct config_error_type err_type;
 
-static void register_nfs_service(void)
-{
-	if (!rados_url_param.userid) {
-		LogEvent(COMPONENT_CONFIG, "%s: userid is NULL", __func__);
-		return;
-	}
-	size_t len =
-		strlen(rados_url_param.userid) + 5; // "nfs." + userid + '\0'
-	char daemon_instance[len];
-
-	snprintf(daemon_instance, len, "nfs.%s", rados_url_param.userid);
-	int ret = rados_service_register(cluster, "nfs-ganesha",
-					 daemon_instance, "");
-	if (ret < 0) {
-		LogEvent(COMPONENT_CONFIG,
-			 "%s: Failed to register nfs-ganesha service",
-			 __func__);
-	}
-}
-
 static int rados_url_client_setup(void)
 {
 	int ret;
@@ -152,29 +133,28 @@ static int rados_url_client_setup(void)
 	if (initialized)
 		return 0;
 
-	ret = rados_create(&cluster, rados_url_param.userid);
+	ret = rados_create(&rados_cluster, rados_url_param.userid);
 	if (ret < 0) {
 		LogEvent(COMPONENT_CONFIG, "%s: Failed in rados_create",
 			 __func__);
 		return ret;
 	}
 
-	ret = rados_conf_read_file(cluster, rados_url_param.ceph_conf);
+	ret = rados_conf_read_file(rados_cluster, rados_url_param.ceph_conf);
 	if (ret < 0) {
 		LogEvent(COMPONENT_CLIENTID, "%s: Failed to read ceph_conf",
 			 __func__);
-		rados_shutdown(cluster);
+		rados_shutdown(rados_cluster);
 		return ret;
 	}
 
-	ret = rados_connect(cluster);
+	ret = rados_connect(rados_cluster);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CONFIG, "%s: Failed to connect to cluster",
-			 __func__);
-		rados_shutdown(cluster);
+		LogEvent(COMPONENT_CONFIG,
+			 "%s: Failed to connect to rados_cluster", __func__);
+		rados_shutdown(rados_cluster);
 		return ret;
 	}
-	register_nfs_service();
 	init_url_regex();
 	initialized = true;
 	return 0;
@@ -204,7 +184,7 @@ static void cu_rados_url_init(void)
 static void cu_rados_url_shutdown(void)
 {
 	if (initialized) {
-		rados_shutdown(cluster);
+		rados_shutdown(rados_cluster);
 		regfree(&url_regex);
 		initialized = false;
 	}
@@ -316,7 +296,7 @@ static int cu_rados_url_fetch(const char *url, FILE **f, char **fbuf)
 	if (ret)
 		goto out;
 
-	ret = rados_ioctx_create(cluster, pool_name, &io_ctx);
+	ret = rados_ioctx_create(rados_cluster, pool_name, &io_ctx);
 	if (ret < 0) {
 		LogEvent(COMPONENT_CONFIG, "%s: Failed to create ioctx",
 			 __func__);
@@ -450,7 +430,7 @@ int rados_url_setup_watch(void)
 		goto out;
 
 	/* Set up an ioctx */
-	ret = rados_ioctx_create(cluster, pool, &rados_watch_io_ctx);
+	ret = rados_ioctx_create(rados_cluster, pool, &rados_watch_io_ctx);
 	if (ret < 0) {
 		LogEvent(COMPONENT_CONFIG, "%s: Failed to create ioctx",
 			 __func__);

@@ -213,6 +213,10 @@ if (USE_LTTNG)
 target_link_libraries(ganesha_nfsd ganesha_trace_symbols)
 endif (USE_LTTNG)
 
+if (RADOS_URLS)
+target_link_libraries(ganesha_nfsd ${RADOS_LIBRARIES})
+endif(RADOS_URLS)
+
 if(SANITIZE_ADDRESS)
   set(undef_flags ${LDFLAG_ALLOW_UNDEF})
 else(SANITIZE_ADDRESS)

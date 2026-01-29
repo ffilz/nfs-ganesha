@@ -820,6 +820,11 @@ struct fsal_ops {
 	fsal_status_t (*fsal_reclaim_client)(struct fsal_module *const fsal_hdl,
 					     char *nodeid);
 
+	/**
+ * This function returns nodeid of the current cluster nodeid
+ */
+	char *(*get_clusternodeid)(void);
+
 	/**@}*/
 };
 

@@ -71,9 +71,13 @@
 #include "pnfs_utils.h"
 #include "atomic_utils.h"
 #include "sys_resource.h"
+#include <rados/librados.h>
+
 #ifdef USE_DBUS
 #include "gsh_dbus.h"
 #endif
+
+static char *cluster_nodeid;
 
 /* fsal_attach_export
  * called from the FSAL's create_export method with a reference on the fsal.
@@ -3483,6 +3487,16 @@ void discard_op_context_export(struct saved_export_context *saved)
 		gsh_refstr_put(saved->saved_pseudopath);
 }
 
+void register_nfs_service(void)
+{
+#ifdef RADOS_URLS
+	if (cluster_nodeid) {
+		rados_service_register(rados_cluster, "nfs-ganesha",
+				       cluster_nodeid, "");
+	}
+#endif
+}
+
 /**
  * @brief Initialize an op_context.
  *
@@ -3529,6 +3543,7 @@ void init_op_context(struct req_op_context *ctx, struct gsh_export *exp,
 
 	/* Since this is a brand new op context, no need to release anything.
 	 */
+	cluster_nodeid = op_ctx->fsal_module->m_ops.get_clusternodeid();
 	set_op_context_export_fsal_no_release(exp, fsal_exp, NULL);
 
 	ctx->export_perms.set = root_op_export_set;
