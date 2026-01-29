@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d32c5de_4b01d0f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-29T11:30:35Z",
+      "side": 1,
+      "message": "Review comments incorporated in uploaded patch#12.",
+      "revId": "f937a2ed4f50559383240a062986712053ea0020",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2747b8c_8d863387",
@@ -14,6 +31,24 @@
       "writtenOn": "2025-12-19T00:28:56Z",
       "side": 1,
       "message": "This should not be necessary, the parsing should detect correct CIDR format, and not all client list types are CIDR.",
+      "revId": "f937a2ed4f50559383240a062986712053ea0020",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0bcd32c_7d41387c",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-29T11:30:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f2747b8c_8d863387",
       "revId": "f937a2ed4f50559383240a062986712053ea0020",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -35,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9986af2_4b68a1cb",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-29T11:30:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb51f2bb_080a6b67",
+      "revId": "f937a2ed4f50559383240a062986712053ea0020",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cb6cc0f_a37e6578",
@@ -48,6 +101,24 @@
       "writtenOn": "2025-12-19T00:28:56Z",
       "side": 1,
       "message": "Is a lock taken by caller? If so, let\u0027s indicate that requirement in the comment above.",
+      "revId": "f937a2ed4f50559383240a062986712053ea0020",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea45770_9308208f",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1595,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-29T11:30:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6cb6cc0f_a37e6578",
       "revId": "f937a2ed4f50559383240a062986712053ea0020",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "350ef4da_ccc2ef58",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1596,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-29T11:30:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb5244c3_5d6c7fbd",
+      "revId": "f937a2ed4f50559383240a062986712053ea0020",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15baae8d_48b6def0",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 11
@@ -82,6 +171,24 @@
       "writtenOn": "2025-12-19T00:28:56Z",
       "side": 1,
       "message": "Hmm, you should be able to create a \"is_match\" function that can be used both for duplicate detection and deletion (if you find a match for delete then you found the entry for deletion, if you find a match for add then it\u0027s a duplicate).\n\nIn any case, the match needs to consider all the client types",
+      "revId": "f937a2ed4f50559383240a062986712053ea0020",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1eb8b36_6c06b7f2",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-01-29T11:30:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "15baae8d_48b6def0",
       "revId": "f937a2ed4f50559383240a062986712053ea0020",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
