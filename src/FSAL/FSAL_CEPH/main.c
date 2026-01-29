@@ -38,6 +38,7 @@
 
 #include <stdlib.h>
 #include <assert.h>
+#include <dlfcn.h>
 #include "fsal.h"
 #include "fsal_types.h"
 #include "FSAL/fsal_init.h"
@@ -128,6 +129,9 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_BOOL("async", false, ceph_fsal_module, async),
 	CONF_ITEM_BOOL("zerocopy", false, ceph_fsal_module, zerocopy),
 	CONF_ITEM_BOOL("use_old_uuid", false, ceph_fsal_module, use_old_uuid),
+	CONF_ITEM_BOOL("register_service", false, ceph_fsal_module,
+		       register_service),
+	CONF_ITEM_STR("nodeid", 1, MAXPATHLEN, NULL, ceph_fsal_module, nodeid),
 	CONFIG_EOL
 };
 
@@ -1030,6 +1034,49 @@ error:
 }
 
 /**
+ * @brief Register nfs service to backend monitor service
+ *
+ * This function will register nfs service to RADOS library
+ * to monitor health of nfs-ganesha service
+ */
+
+static void ceph_register_nfs_service(void)
+{
+	if (!CephFSM.register_service)
+		return;
+
+	void (*register_nfs_fun_ptr)(char *);
+	void *dl = NULL;
+	char *err = NULL;
+
+#if defined(LINUX) && !defined(SANITIZE_ADDRESS)
+	dl = dlopen("libganesha_rados_urls.so",
+		    RTLD_NOW | RTLD_LOCAL | RTLD_DEEPBIND);
+#elif defined(BSDBASED) || defined(SANITIZE_ADDRESS)
+	dl = dlopen("libganesha_rados_urls.so", RTLD_NOW | RTLD_LOCAL);
+#endif
+	if (dl == NULL) {
+		fprintf(stderr, "Failed to load libganesha_rados_urls.so\n");
+		exit(1);
+	}
+
+	dlerror(); /* clear old errors */
+	register_nfs_fun_ptr = dlsym(
+		dl,
+		"register_service_to_ceph"); //Resolve symbol: get function pointer from shared library
+	err = dlerror();
+	if (err != NULL) {
+		LogDebug(
+			COMPONENT_FSAL,
+			"Unable to load register_service_to_ceph to register nfs service");
+		return;
+	}
+	register_nfs_fun_ptr(CephFSM.nodeid);
+
+	return;
+}
+
+/**
  * @brief Initialize and register the FSAL
  *
  * This function initializes the FSAL module handle, being called
@@ -1061,6 +1108,7 @@ MODULE_INIT void init(void)
 	myself->m_ops.init_config = init_config;
 	myself->m_ops.fsal_reclaim_client = node_takeover_reclaim;
 	myself->m_ops.fsal_enable_delegations = fsal_enable_delegations;
+	myself->m_ops.fsal_register_nfs_service = ceph_register_nfs_service;
 
 	/* Initialize the fsal_obj_handle ops for FSAL CEPH */
 	handle_ops_init(&CephFSM.handle_ops);
