@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <regex.h>
+#include <pthread.h>
 #include "log.h"
 #include "sal_functions.h"
 #include <string.h>
@@ -35,6 +36,7 @@ static bool initialized;
 static rados_ioctx_t rados_watch_io_ctx;
 static uint64_t rados_watch_cookie;
 static char *rados_watch_oid;
+static pthread_t service_update;
 
 static struct rados_url_parameter {
 	/** Path to ceph.conf */
@@ -125,24 +127,39 @@ static void cu_rados_url_early_init(void)
 
 extern struct config_error_type err_type;
 
-static void register_nfs_service(void)
+static void *rados_service_update(void *)
 {
-	if (!rados_url_param.userid) {
-		LogEvent(COMPONENT_CONFIG, "%s: userid is NULL", __func__);
-		return;
+	while (initialized) {
+		rados_service_update_status(cluster, "");
+		sleep(5);
 	}
-	size_t len =
-		strlen(rados_url_param.userid) + 5; // "nfs." + userid + '\0'
-	char daemon_instance[len];
+	return NULL;
+}
 
-	snprintf(daemon_instance, len, "nfs.%s", rados_url_param.userid);
+bool register_service_to_ceph(char *nodeid)
+{
+	if (!nodeid) {
+		LogEvent(COMPONENT_CONFIG, "%s: nodeid is NULL", __func__);
+		return false;
+	}
+	size_t len = strlen(nodeid) + 5; // "nfs." + nodeid + '\0'
+	char *daemon_instance = (char *)gsh_malloc(len);
+
+	snprintf(daemon_instance, len, "nfs.%s", nodeid);
 	int ret = rados_service_register(cluster, "nfs-ganesha",
 					 daemon_instance, "");
 	if (ret < 0) {
 		LogEvent(COMPONENT_CONFIG,
 			 "%s: Failed to register nfs-ganesha service",
 			 __func__);
+		return false;
 	}
+	if (pthread_create(&service_update, NULL, rados_service_update, NULL) !=
+	    0) {
+		LogEvent(COMPONENT_CONFIG,
+			 "Unable to start nfs service status update");
+	}
+	return true;
 }
 
 static int rados_url_client_setup(void)
@@ -174,7 +191,6 @@ static int rados_url_client_setup(void)
 		rados_shutdown(cluster);
 		return ret;
 	}
-	register_nfs_service();
 	init_url_regex();
 	initialized = true;
 	return 0;

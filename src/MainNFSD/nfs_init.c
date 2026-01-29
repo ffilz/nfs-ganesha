@@ -1333,6 +1333,8 @@ void nfs_start(nfs_start_info_t *p_start_info)
 	LogEvent(COMPONENT_INIT,
 		 "-------------------------------------------------");
 
+	register_nfs_service();
+
 	/* Set the time of NFS stat counting */
 	nfs_init_stats_time();
 
