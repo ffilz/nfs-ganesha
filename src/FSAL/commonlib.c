@@ -75,6 +75,11 @@
 #include "gsh_dbus.h"
 #endif
 
+/*
+ * Cached FSAL module for use when op_ctx is not available.
+ */
+static struct fsal_module *saved_fsal_module;
+
 /* fsal_attach_export
  * called from the FSAL's create_export method with a reference on the fsal.
  */
@@ -3264,6 +3269,8 @@ static void set_op_context_export_fsal_no_release(struct gsh_export *exp,
 		op_ctx->fsal_module = fsal_exp->fsal;
 	else if (!op_ctx->fsal_module && op_ctx->saved_op_ctx)
 		op_ctx->fsal_module = op_ctx->saved_op_ctx->fsal_module;
+
+	saved_fsal_module = op_ctx->fsal_module;
 }
 
 /** @brief Remove the current export from the op_context so the op_context has
@@ -3481,6 +3488,17 @@ void discard_op_context_export(struct saved_export_context *saved)
 
 	if (saved->saved_pseudopath != NULL)
 		gsh_refstr_put(saved->saved_pseudopath);
+}
+
+/**
+ * @brief
+ * Registers nfs server to backend FSAL layer monitoring
+ * services.
+ */
+
+void register_nfs_service(void)
+{
+	saved_fsal_module->m_ops.fsal_register_nfs_service();
 }
 
 /**
