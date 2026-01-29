@@ -128,6 +128,9 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_BOOL("async", false, ceph_fsal_module, async),
 	CONF_ITEM_BOOL("zerocopy", false, ceph_fsal_module, zerocopy),
 	CONF_ITEM_BOOL("use_old_uuid", false, ceph_fsal_module, use_old_uuid),
+	CONF_ITEM_BOOL("register_service", false, ceph_fsal_module,
+		       register_service),
+	CONF_ITEM_BOOL("nodeid", 1, MAXPATHLEN, ceph_fsal_module, nodeid),
 	CONFIG_EOL
 };
 
@@ -1030,6 +1033,18 @@ error:
 }
 
 /**
+ * @brief Returns the current cluster nodeid
+ */
+
+static char *fsal_get_clusternodeid(void)
+{
+	if (CephFSM.registerservice) {
+		return CephFSM.nodeid;
+	}
+	return NULL;
+}
+
+/**
  * @brief Initialize and register the FSAL
  *
  * This function initializes the FSAL module handle, being called
@@ -1061,6 +1076,7 @@ MODULE_INIT void init(void)
 	myself->m_ops.init_config = init_config;
 	myself->m_ops.fsal_reclaim_client = node_takeover_reclaim;
 	myself->m_ops.fsal_enable_delegations = fsal_enable_delegations;
+	myself->m_ops.get_clusternodeid = fsal_get_clusternodeid;
 
 	/* Initialize the fsal_obj_handle ops for FSAL CEPH */
 	handle_ops_init(&CephFSM.handle_ops);

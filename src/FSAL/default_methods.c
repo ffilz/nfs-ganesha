@@ -190,6 +190,16 @@ fsal_status_t update_export(struct fsal_module *fsal_hdl, void *parse_node,
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }
 
+/* get_nodeid
+ * Function helps to return the nodeid of the cluster of backgroung FSAL
+ */
+
+char *default_get_clusternodeid(void)
+{
+	LogCrit(COMPONENT_FSAL, "Invoking unsupported FSAL operation");
+	return NULL;
+}
+
 /**
  * @brief Default emergency cleanup method
  *
@@ -308,6 +318,7 @@ struct fsal_ops def_fsal_ops = {
 	.fsal_extract_stats = fsal_extract_stats,
 	.fsal_reset_stats = fsal_reset_stats,
 	.fsal_reclaim_client = fsal_reclaim_client,
+	.get_clusternodeid = default_get_clusternodeid,
 };
 
 /* get_name
