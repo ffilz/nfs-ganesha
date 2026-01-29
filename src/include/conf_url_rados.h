@@ -28,11 +28,13 @@
 #ifdef RADOS_URLS
 
 #include <stdio.h>
+#include <stdbool.h>
 #include "gsh_list.h"
 #include <rados/librados.h>
 
 int gsh_rados_url_setup_watch(void);
 void gsh_rados_url_shutdown_watch(void);
+bool register_service(char *nodeid);
 
 #endif /* RADOS_URLS */
 #endif /* CONF_URL_RADOS_H */

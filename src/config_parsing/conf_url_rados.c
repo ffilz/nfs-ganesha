@@ -125,24 +125,25 @@ static void cu_rados_url_early_init(void)
 
 extern struct config_error_type err_type;
 
-static void register_nfs_service(void)
+bool register_service(char *nodeid)
 {
-	if (!rados_url_param.userid) {
-		LogEvent(COMPONENT_CONFIG, "%s: userid is NULL", __func__);
-		return;
+	if (!nodeid) {
+		LogEvent(COMPONENT_CONFIG, "%s: nodeid is NULL", __func__);
+		return false;
 	}
-	size_t len =
-		strlen(rados_url_param.userid) + 5; // "nfs." + userid + '\0'
+	size_t len = strlen(nodeid) + 5; // "nfs." + userid + '\0'
 	char daemon_instance[len];
 
-	snprintf(daemon_instance, len, "nfs.%s", rados_url_param.userid);
+	snprintf(daemon_instance, len, "nfs.%s", nodeid);
 	int ret = rados_service_register(cluster, "nfs-ganesha",
 					 daemon_instance, "");
 	if (ret < 0) {
 		LogEvent(COMPONENT_CONFIG,
 			 "%s: Failed to register nfs-ganesha service",
 			 __func__);
+		return false;
 	}
+	return true;
 }
 
 static int rados_url_client_setup(void)
@@ -174,7 +175,7 @@ static int rados_url_client_setup(void)
 		rados_shutdown(cluster);
 		return ret;
 	}
-	register_nfs_service();
+	//	register_nfs_service();
 	init_url_regex();
 	initialized = true;
 	return 0;

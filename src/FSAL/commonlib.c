@@ -3483,6 +3483,11 @@ void discard_op_context_export(struct saved_export_context *saved)
 		gsh_refstr_put(saved->saved_pseudopath);
 }
 
+void register_nfs_service(void)
+{
+	op_ctx->fsal_module->m_ops.fsal_register_nfs_service();
+}
+
 /**
  * @brief Initialize an op_context.
  *
