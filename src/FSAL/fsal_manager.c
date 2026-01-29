@@ -56,7 +56,7 @@
 #include "pnfs_utils.h"
 #include "fsal_private.h"
 #include "FSAL/fsal_localfs.h"
-
+#include "FSAL/fsal_commonlib.h"
 /**
  * @brief List of loaded fsal modules
  *
@@ -695,6 +695,7 @@ int fsal_load_init(void *node, const char *name, struct fsal_module **fsal_hdl,
 		}
 	}
 
+	fsal_registration_try_register(*fsal_hdl);
 	return 0;
 }
 
