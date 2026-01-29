@@ -121,6 +121,7 @@ void save_op_context_export_and_set_export(struct saved_export_context *saved,
 void restore_op_context_export(struct saved_export_context *saved);
 void discard_op_context_export(struct saved_export_context *saved);
 void set_op_context_pnfs_ds(struct fsal_pnfs_ds *pds);
+void register_nfs_service(void);
 
 /******************************************************
  *                Structure used to define a fsal

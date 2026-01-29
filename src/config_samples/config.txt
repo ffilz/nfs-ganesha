@@ -1001,6 +1001,10 @@ CEPH {}
 
 	zerocopy(bool, default false)
 
+	register_service(bool, default false)
+
+	nodeid(string, no default)
+
 GPFS {}
 -------
 
