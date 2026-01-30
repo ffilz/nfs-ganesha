@@ -34,6 +34,24 @@
       "parentUuid": "bfda8b33_9d3722c5",
       "revId": "526014ded92e1d32f590f0d9ce9dc48d2f1b3317",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3034b7_f528a04d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-01-30T13:58:16Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. I’ve addressed this by switching away from the legacy attr/xattr.h and using the glibc xattr API from \u003csys/xattr.h\u003e with fgetxattr(), so there’s no additional dependency on libattr1.\n\nI considered vfs_getextattr_value(), but its signature requires a struct vfs_fsal_obj_handle *. In this path we only have a generic struct fsal_obj_handle * and we want to keep the function fsal_common_is_referral() with minimal changes. Using the standard \u003csys/xattr.h\u003e API keeps the change small and portable within Linux/glibc.",
+      "parentUuid": "6a959a75_378ac294",
+      "revId": "526014ded92e1d32f590f0d9ce9dc48d2f1b3317",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
