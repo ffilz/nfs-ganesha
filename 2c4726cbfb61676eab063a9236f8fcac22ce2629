@@ -70,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b4f5bb_29cf662f",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-02-01T14:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27d92852_669f7c52",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ad51139_66cfa47e",
@@ -105,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f953cdcb_9fc6924d",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2039,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-02-01T14:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f4bfece_3f60599e",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00079f38_73d73bc2",
@@ -122,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "255f05c7_4332729a",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-02-01T14:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00079f38_73d73bc2",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ba40d37_ad36f692",
@@ -135,6 +189,24 @@
       "writtenOn": "2026-01-22T21:36:34Z",
       "side": 1,
       "message": "Can we place next to virtual_server and name more similarly (I suppose we should have named virtual_server differently but we have that in production...\n\nvirtual_client sounds weird...",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a732a15_0319c5f2",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-02-01T14:42:45Z",
+      "side": 1,
+      "message": "I moved it to be next to virtual server, though I think the name here explicitly explains the feature, any other shorter name would mask what it actually is and will require the user to read the documentation to understand what it actually does",
+      "parentUuid": "7ba40d37_ad36f692",
       "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -187,6 +259,24 @@
       "side": 1,
       "message": "Fix this please",
       "parentUuid": "8e950449_b6c1f4e3",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62ae2757_57ccd511",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-02-01T14:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37832677_4d48643d",
       "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
