@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4657bae1_fa169d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-02-01T14:47:44Z",
+      "side": 1,
+      "message": "This is a major bug calling to a null referenced function\n\nIn addition, the change that added it changed the fsal api\n\n@ffilzlnx@mindspring.com I think that every time that we change that API we should increase the FSAL version to let fsal implementors know that there was a change that requires there attention",
+      "revId": "61ccd6feef744b31447b6ba17ab438e44cc27f67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
