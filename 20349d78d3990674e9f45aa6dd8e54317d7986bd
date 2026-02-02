@@ -105,6 +105,24 @@
       "parentUuid": "feeee92f_d6c3225c",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f87cbe_9b394ac7",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2026-02-02T23:24:12Z",
+      "side": 1,
+      "message": "In src/MainNFSD/nfs_worker_thread.c, I tried to skip the check for MNT, and I could mount with tls in v3 for export with \"XprtSec\u003dtls\" set:\n\t\t/* Test if export requires TLS  */\n\t\tif (((op_ctx-\u003eexport_perms.options \u0026 EXPORT_OPTION_TLS) !\u003d 0) \u0026\u0026\n\t\t    (!(xprt-\u003exp_tls.tls_established))) {\n\t\t\t/* For NFSv3, allow MOUNT requests even if TLS is not yet\n\t\t\t * established. MOUNT is needed to get the file handle before\n\t\t\t * TLS can be negotiated on subsequent NFS requests.\n\t\t\t */\n\t\t\tif (reqdata-\u003esvc.rq_msg.cb_prog \u003d\u003d NFS_program[P_MNT]) {\n\t\t\t\tLogDebug(COMPONENT_DISPATCH,\n\t\t\t\t\t \"[TLS] Allowing MOUNT request without TLS for ExportId %\" PRId32\n\t\t\t\t\t \" (TLS will be required for subsequent NFS operations)\",\n\t\t\t\t\t op_ctx-\u003ectx_export-\u003eexport_id);\n\t\t\t} else {\n\t\t\t\tLogInfoAlt(COMPONENT_DISPATCH, COMPONENT_EXPORT,\n\t\t\t\t\t   \"[TLS] Auth not allowed on ExportId %\" PRId32\n\t\t\t\t\t   \" %s for client %s - TLS required\",\n\t\t\t\t\t   op_ctx-\u003ectx_export-\u003eexport_id,\n\t\t\t\t\t   CTX_PSEUDOPATH(op_ctx),\n\t\t\t\t\t   op_ctx-\u003eclient ? op_ctx-\u003eclient-\u003ehostaddr_str\n\t\t\t\t\t\t\t  : \"unknown client\");\n\t\t\t\tauth_failure(reqdata, AUTH_TOOWEAK);\n\t\t\t\tgoto freeargs;\n\t\t\t}\n\t\t}\n\t\t\nplease correct me if this is expected or not",
+      "parentUuid": "782a76ff_dd5e1c34",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
