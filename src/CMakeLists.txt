@@ -415,7 +415,15 @@ else(USE_NFS3)
     set(USE_NLM OFF)
     # Disable NFSACL3 protocol extension support
     set(USE_NFSACL3 OFF)
+    # Disable Internal Statd support
+    set(INTERNAL_STATD OFF)
 endif(USE_NFS3)
+
+if(INTERNAL_STATD)
+    if(NOT USE_NLM)
+        message(FATAL_ERROR "Cannot set INTERNAL_STATD without USE_NLM")
+    endif(NOT USE_NLM)
+endif(INTERNAL_STATD)
 
 # Enable RQUOTA support
 option(USE_RQUOTA "enable RQUOTA support" ON)
