@@ -87,6 +87,24 @@
       "parentUuid": "1368d1f5_ca471f93",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "782a76ff_dd5e1c34",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2026-02-02T23:18:32Z",
+      "side": 1,
+      "message": "I am using ubuntu24 \u0026 rocky10, when the export has \"XprtSec\u003dNone\", both nfsv3/nfsv4 will be able to mount with tls.\nFrom pcap, the pattern is:\n(1) NFS NULL call with AUTH_NULL\n(2) 2 MOUNT NULL call with AUTH_NULL\n(3) MOUNT MNT call with AUTH_UNIX\n(4) NFS NULL call with AUTH_TLS\n\nwhen the export has \u0027XprtSec\u003dtls\u0027, step(3) will get denied.\nIs this expected behavior, or we want to skip the tls/mtls check during MOUNT request?",
+      "parentUuid": "feeee92f_d6c3225c",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
