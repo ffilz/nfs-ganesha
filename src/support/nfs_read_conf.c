@@ -212,6 +212,8 @@ static struct config_item core_params[] = {
 	CONF_ITEM_UI16("NSM_Port", 0, UINT16_MAX, 0, nfs_core_param,
 		       port[P_STATD]),
 	CONF_ITEM_BOOL("Use_statd", true, nfs_core_param, use_statd),
+	CONF_ITEM_UI32("NSM_Program", SM_PROG, SM_PROG, SM_PROG, nfs_core_param,
+		       program[P_STATD]),
 #endif
 #endif
 #ifdef _USE_RQUOTA

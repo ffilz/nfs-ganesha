@@ -37,6 +37,12 @@ SET(nlm_STAT_SRCS
    nsm.c
 )
 
+#if(INTERNAL_STATD)
+#  set(nlm_STAT_SRCS
+#    ${nlm_STAT_SRCS}
+#    )
+#endif(USE_STATD)
+
 add_library(nlm OBJECT ${nlm_STAT_SRCS})
 add_sanitizers(nlm)
 set_target_properties(nlm PROPERTIES COMPILE_FLAGS "-fPIC")

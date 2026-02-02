@@ -576,15 +576,12 @@ extern pthread_mutex_t all_state_v4_mutex;
  */
 
 typedef struct state_nsm_client_t {
-	pthread_mutex_t ssc_mutex; /*< Mutex protecting this
-					   structure */
+	pthread_mutex_t ssc_mutex; /*< Mutex protecting this structure */
 	struct glist_head ssc_lock_list; /*< All locks held by client */
 	struct glist_head ssc_share_list; /*< All share reservations */
 	struct gsh_client *ssc_client; /*< The client involved */
-	int32_t ssc_refcount; /*< Reference count to protect
-				   structure */
-	int32_t ssc_monitored; /*< If this client is actively
-				   monitored */
+	int32_t ssc_refcount; /*< Reference count to protect structure */
+	int32_t ssc_monitored; /*< If this client is actively monitored */
 	int32_t ssc_nlm_caller_name_len; /*< Length of identifier */
 	char *ssc_nlm_caller_name; /*< Client identifier */
 } state_nsm_client_t;
@@ -595,15 +592,16 @@ typedef struct state_nsm_client_t {
 
 struct state_nlm_client_t {
 	state_nsm_client_t *slc_nsm_client; /*< Related NSM client */
-	xprt_type_t slc_client_type; /*< The transport type to this
-					   client */
+	xprt_type_t slc_client_type; /*< The transport type to this client */
 	int32_t slc_refcount; /*< Reference count for disposal */
-	sockaddr_t slc_server_addr; /*< local addr when request is
-						     made */
+	sockaddr_t slc_client_addr; /*< Remote addr when request is made */
+	sockaddr_t slc_server_addr; /*< local addr when request is made */
 	int32_t slc_nlm_caller_name_len; /*< Length of client name */
 	char *slc_nlm_caller_name; /*< Client name */
 	CLIENT *slc_callback_clnt; /*< Callback for blocking locks */
 	AUTH *slc_callback_auth; /*< Authentication for callback */
+	bool slc_monitored; /*< Client is monitored */
+	struct netconfig *slc_nconf; /*< Client's netconfig */
 };
 
 /**
