@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99b944f5_0c687bf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-03T05:54:48Z",
+      "side": 1,
+      "message": "Overall looks good, suggested few edits",
+      "revId": "b276ce6ad53b64f784bbaf3c4a8f7de6e4501ac8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05804b74_838633b1",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-03T05:54:48Z",
+      "side": 1,
+      "message": "```suggestion\nbool register_service(char *nodeid)\n```bool register_service_to_ceph(char *nodeid)",
+      "revId": "b276ce6ad53b64f784bbaf3c4a8f7de6e4501ac8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
