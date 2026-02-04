@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e29360b_b7323986",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "This needs a problem description and how this fixes it.",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e652562_371539a1",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "Don\u0027t use braces for single line return.\n\nAlso, if registration is not necessary, return true.",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eafc93ad_b9e189cb",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "Blank line before and after this conditional block please.\n\nHmm, also looks like the difference between OS is just the flags, conditionally #define the flags and make the call unconditional. Also, do we actually support Ceph on BSD OS? What about other OS?",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff658b4e_62ca104a",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "I prefer to see declarations at the top of the function",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa5029b2_fa9206f4",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "What does register_nfs_fun_ptr do? What are the implications of failure?",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61ad810f_6f524d4f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3488,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "You have defined fsal_register_nfs_service as returning bool, but then you ignore the result. What is the implication of failure, and what should Ganesha do if registration fails.",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33f4ca93_9dad4815",
+        "filename": "src/FSAL/default_methods.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "Given that this is called unconditionally for all FSALs, the default should return true (no registration necessary). The log message should not say unsupported, but should simply report that registration was unnecessary.",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d1ef6a_ad98dd27",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "What does this function do? Why the need to call it periodically?",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf39dde8_7c0a0d8e",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T19:57:12Z",
+      "side": 1,
+      "message": "Do you need to do anything with this thread on shutdown?",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
