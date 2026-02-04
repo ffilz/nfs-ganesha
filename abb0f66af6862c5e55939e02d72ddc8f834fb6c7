@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d5478b9_f3ecd5b8",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-04T08:56:41Z",
+      "side": 1,
+      "message": "Do we need to update every second ?\nIf possible, make it 5 sec.",
+      "revId": "abb0f66af6862c5e55939e02d72ddc8f834fb6c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ac9908_d700b541",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-04T08:56:41Z",
+      "side": 1,
+      "message": "correct the comment - nodeid, not userid",
+      "revId": "abb0f66af6862c5e55939e02d72ddc8f834fb6c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732a6594_3d47aec1",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-04T08:56:41Z",
+      "side": 1,
+      "message": "This will not compile. .. it need to be static value.",
+      "revId": "abb0f66af6862c5e55939e02d72ddc8f834fb6c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f080607f_eae434e4",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-04T08:56:41Z",
+      "side": 1,
+      "message": "Remove this",
+      "revId": "abb0f66af6862c5e55939e02d72ddc8f834fb6c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9755dd_7425e3e7",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-04T08:56:41Z",
+      "side": 1,
+      "message": "default should be \"\"",
+      "revId": "abb0f66af6862c5e55939e02d72ddc8f834fb6c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73397246_f13134be",
+        "filename": "src/doc/man/ganesha-ceph-config.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-02-04T08:56:41Z",
+      "side": 1,
+      "message": "correct default",
+      "revId": "abb0f66af6862c5e55939e02d72ddc8f834fb6c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
