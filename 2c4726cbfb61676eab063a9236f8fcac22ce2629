@@ -231,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0397a535_5b980d52",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-04T20:14:06Z",
+      "side": 1,
+      "message": "Let\u0027s do keep this option next to virtual_server, but sorry, I got myself confused. This option is different in nature to virtual server. We always considered different server address for different major_id for NFSv4.1.\n\nThat said - in virtual_sever mode I think you ALSO want to include client address in major_id if using this new option.\n\nYou may hit the same trunking issues that resulted in the virtual_server option.",
+      "parentUuid": "5a732a15_0319c5f2",
+      "revId": "2c4726cbfb61676eab063a9236f8fcac22ce2629",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e950449_b6c1f4e3",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 1
