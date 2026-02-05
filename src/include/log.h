@@ -166,10 +166,6 @@ extern struct log_component_info LogComponents[COMPONENT_COUNT];
 
 /* clang-format off */
 
-#define LogAlways(component, format, args...)                             \
-	DisplayLogComponentLevel(component, __FILE__, __LINE__, __func__, \
-				 NIV_NULL, format, ##args)
-
 #define LogTest(format, args...)                                              \
 	DisplayLogComponentLevel(COMPONENT_ALL, __FILE__, __LINE__, __func__, \
 				 NIV_NULL, format, ##args)
