@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940bcaac_f72d6ca0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-05T17:57:23Z",
+      "side": 1,
+      "message": "Several problems with this.\n\nFirst, it breaks FSAL_GPFS (which is one of the IBM FSALs and a major FSAL in Ganesha production).\n\nSecond, it makes this function impossible to use by FSALs that don\u0027t use POSIX system calls. \n\nThird, it introduces POSIX system call code into commonlib.c all such code should go into localfs.c\n\nThe solution to this issue must be done in a generic way to be usable by any FSAL.",
+      "revId": "473a48325f3e66a176e27643b4e4b02eb3164fa8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
