@@ -35,6 +35,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec9cf0d_770c3feb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Resolved all the comments in patch#13",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "847ee76e_c999e58f",
@@ -52,6 +69,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d90ab85_0a3df583",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 12
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "847ee76e_c999e58f",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a6397c2_1ec46054",
@@ -65,6 +100,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "Use strcasecmp",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c91b87_a2bf989e",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5a6397c2_1ec46054",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dbe8f72_044c1c21",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2511,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9741e214_5fa94379",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fca52ef1_877a80d4",
         "filename": "src/log/log_functions.c",
         "patchSetId": 12
@@ -99,6 +170,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "Do not use LogAlways, this should be a LogCrit",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7887047a_b61323bb",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2519,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fca52ef1_877a80d4",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +209,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53c5925_f688c4c4",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2938,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f1a94ba_4cf2a871",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bc9e817_d76f6abd",
@@ -133,6 +240,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "There really isn\u0027t a need for this function, or if you want to have this function to hide bits from the caller, simply the function to return client_match(...) \n\nclient_match will quickly return NULL if the list is empty (glist_for_each skips any looping of the list is empty).",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3685f2be_6bf4c668",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3427,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6bc9e817_d76f6abd",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +279,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b53619b7_8a8bb451",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3648,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80ad7b78_5f5fed0c",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ebc26d_1cd14721",
@@ -167,6 +310,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "LogEvent",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fad2953_76b2d714",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3661,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d1ebc26d_1cd14721",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -190,6 +351,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37a12828_bd499615",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3710,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9ae74d60_cfafab7d",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae8fb0a5_9196c18d",
         "filename": "src/log/log_functions.c",
         "patchSetId": 12
@@ -201,6 +380,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "Set errormsg, no need to log, user get\u0027s feedback from DBUS command",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bde82bb_a17e024c",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3717,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ae8fb0a5_9196c18d",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -224,6 +421,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65fc8ff6_652f6bc1",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3726,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ba4d4a6a_b38a4cb2",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43497a1d_52dcb476",
         "filename": "src/log/log_functions.c",
         "patchSetId": 12
@@ -235,6 +450,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "No need for log, user gets feedback from DBUS command",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0363faa2_69691234",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3779,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "43497a1d_52dcb476",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -256,6 +489,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5234f540_57b66df6",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3792,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "29d99a35_c4555d21",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdac0778_7c89d32c",
@@ -269,6 +520,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "I really would like the duplicate checking to be part of add_client, the HAProxyHosts and EXPORT CLIENT Clients lists could also use dupe checking.",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a569d0_7b8330a8",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3799,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fdac0778_7c89d32c",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -290,6 +559,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375386b7_a1616481",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3804,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "652cf39f_6b0ec6c8",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e828c317_ed9c0373",
@@ -303,6 +590,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "LogEvent",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6d0c798_19faad52",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3811,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e828c317_ed9c0373",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -326,6 +631,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3cda776_2a0e20d7",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3850,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "92fb2646_506e69f1",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7db15ce_bc545d70",
         "filename": "src/log/log_functions.c",
         "patchSetId": 12
@@ -337,6 +660,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "LogEvent",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a913b126_30fedda3",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3858,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d7db15ce_bc545d70",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -358,6 +699,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19bd0fc8_5f1e6c04",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3892,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9089c13a_b66ec9bf",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea82692d_6258bdbc",
@@ -371,6 +730,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "No need for log, user gets feedback from DBUS command",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8aba41_68ef8a01",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3938,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ea82692d_6258bdbc",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -392,6 +769,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6d0e8b_46c8fbb1",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 3965,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "15372010_0f7c7367",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8c5b257_d19e44af",
@@ -405,6 +800,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "LogEvent",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4177ccb_41b9fac7",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 4011,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f8c5b257_d19e44af",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -426,6 +839,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "223812dd_f220eb87",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 4015,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2075e8d8_fb485f3d",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ac6e5d4_ad687eb6",
@@ -439,6 +870,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "This is a dbus show command, no need to also log",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "596094b5_66a19dff",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 4048,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0ac6e5d4_ad687eb6",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -460,6 +909,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d353c71_d9713d50",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "45f21819_e9610817",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a879996_31f72171",
@@ -473,6 +940,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "\u003c\u003d not \u003e?",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c71b8a_910c6d80",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4a879996_31f72171",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -494,6 +979,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5638a57c_77352539",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d32a185a_1f2538de",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3c4f089_cef6b3ad",
@@ -511,6 +1014,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65e0086_da0971bd",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c3c4f089_cef6b3ad",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cecb3419_7d243009",
@@ -524,6 +1045,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "LogCri",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8704b84d_df15d7ac",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cecb3419_7d243009",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -564,6 +1103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c574203_ae2ef67d",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "93fa8d6f_6f520635",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09b164f3_763586ca",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 12
@@ -575,6 +1132,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "LogInfo",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3ca1f13_a8a60a49",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "09b164f3_763586ca",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -596,6 +1171,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73e35a8_e7cb0767",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8580034e_383d3599",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4c07fa6_a048ebfb",
@@ -609,6 +1202,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "Is cidr_equals a bool or -1, 0, +1 function? If bool change the return type above",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2231ad98_e3972ccb",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c4c07fa6_a048ebfb",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -648,6 +1259,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de5747d_7e9e00de",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9b530609_ff382c82",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84b7418d_3632c55e",
@@ -661,6 +1290,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "Please add doxygen. Also not sure about the use of this function",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3417d25f_f724cac7",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-06T17:04:47Z",
+      "side": 1,
+      "message": "Added doxygen, The purpose of this routine to handle the broader subnet since it checks existing mask is broader than the newly requested mask do not add the client. If new mask is broader than existing mask then no duplicate entry so we can add the client.",
+      "parentUuid": "84b7418d_3632c55e",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
