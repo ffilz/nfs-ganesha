@@ -245,6 +245,24 @@
       "parentUuid": "df720a0e_449decfe",
       "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dead677_85d256a2",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-06T22:58:13Z",
+      "side": 1,
+      "message": "OK, the reason this is necessary is for duplicate detection and deletion of a client list entry. If the entry type has a CIDR, the CIDR has to be the same for dupe or delete.\n\nSo this function is good.",
+      "parentUuid": "6fdf5719_480c6c0c",
+      "revId": "9e842bbb6d51d564ac37dfb74708b2d36b8193f8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
