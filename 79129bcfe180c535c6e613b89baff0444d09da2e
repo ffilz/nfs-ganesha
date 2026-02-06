@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7422f41d_f3d5436b",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2026-02-06T13:03:43Z",
+      "side": 1,
+      "message": "did it compile before? in any case, yes, do not std::move(input), jut return it as a string in all cases",
+      "revId": "79129bcfe180c535c6e613b89baff0444d09da2e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
