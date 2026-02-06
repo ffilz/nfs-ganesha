@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1114b8a0_e027d2dc",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-06T18:46:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t    (strcasecmp(str,\n    - \t\t\t\tConditionalLogPolicy[i].policy_name) \u003d\u003d 0 ||\n→ to be replaced with:\n    + \t\t    (strcasecmp(str, ConditionalLogPolicy[i].policy_name) \u003d\u003d\n    + \t\t\t     0 ||",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a11971_36640a68",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3434,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-06T18:46:54Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1efc7b76_63e99887",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3657,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-06T18:46:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tLogEvent(COMPONENT_LOG,\n    - \t\t \"Conditional Logging Enabled for Export_Id: %d\",\n→ to be replaced with:\n    + \tLogEvent(COMPONENT_LOG, \"Conditional Logging Enabled for Export_Id: %d\",",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3c5a3b_a595d4d8",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3981,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-06T18:46:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t  ConditionalLogPolicy[match_policy].policy_name);\n→ to be replaced with:\n    + \t\t\t ConditionalLogPolicy[match_policy].policy_name);",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
