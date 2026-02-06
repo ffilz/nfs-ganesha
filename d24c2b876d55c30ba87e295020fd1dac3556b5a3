@@ -170,6 +170,24 @@
       "message": "Do you need to do anything with this thread on shutdown?",
       "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38bd7769_d0c4aa71",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-06T05:00:05Z",
+      "side": 1,
+      "message": "Nothing to do, If you observer the function rados_service_update(), We have variable saying initialized, which gets false at the time of RADOS SHUTDOWN leads to exit of thread.",
+      "parentUuid": "cf39dde8_7c0a0d8e",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
