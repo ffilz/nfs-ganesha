@@ -16,6 +16,57 @@
       "message": "Need to make sure review comments in https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1213670 have been resolved before abandoning that patch and accepting this patch.",
       "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "705d2559_e3b4ad56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-06T01:24:58Z",
+      "side": 1,
+      "message": "A couple comments, more coming for sure.",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3605a2_e3256298",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-06T01:24:58Z",
+      "side": 1,
+      "message": "Looking at the documentation, we should always use the IPv6 any address \"[::]:\u003cport\u003e\" rather than defaulting to an IPv4 address.",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a893b1d_36aa27f3",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-06T01:24:58Z",
+      "side": 1,
+      "message": "Use display_sockip instead of rolling your own conversion.",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
