@@ -139,6 +139,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3041d4ca_202f3608",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-06T02:19:46Z",
+      "side": 1,
+      "message": "rados_service_update_status(...) writes the service\u0027s status/heartbeat into the cluster so monitors and tooling can treat the service as currently active and it avoids errors like \u0027stray deamons or  stale/outdated info\u0027\n\nRef: https://github.com/ceph/ceph/blob/0b9fcd80bbdbcc604152c9a96bae005a1e16537a/src/test/librados/service.cc#L193",
+      "parentUuid": "55d1ef6a_ad98dd27",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf39dde8_7c0a0d8e",
         "filename": "src/config_parsing/conf_url_rados.c",
         "patchSetId": 5
