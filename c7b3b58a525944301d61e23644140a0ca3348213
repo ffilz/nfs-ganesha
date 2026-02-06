@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd4b137_68ed7a8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2026-02-06T06:49:36Z",
+      "side": 1,
+      "message": "This is a really good idea.  I\u0027d like to look it over some more after more comments.",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "847ee76e_c999e58f",
@@ -513,6 +530,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96e24efb_06f42120",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2026-02-06T06:49:36Z",
+      "side": 1,
+      "message": "This is a stylistic thing, but my eyes are seeing a lot of repeated code and extra nesting and maybe no reason.  With this check for cnode and err_type, cnode is checked in config_proc_err().  Is err_type ever null.  Certainly, where add_client is called from in exports.c  client_adder() from item-\u003eu.proc.handler in config_parsing.c:do_proc called from do_block_load() there are no checks for err_type.  If there is the possibility of it being null, then just check it before doing something like err_type-\u003einvalid \u003d true.\n\nI do see that you are building a separate list for the logging.  I haven\u0027t been able to workout where/how you call client_ip_list_adder",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93fa8d6f_6f520635",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 12
@@ -592,6 +626,24 @@
       "writtenOn": "2026-02-05T21:56:52Z",
       "side": 1,
       "message": "Can\u0027t we just directly compare the addresses now?",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b530609_ff382c82",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2026-02-06T06:49:36Z",
+      "side": 1,
+      "message": "I think we can just compare them. From memory, I don\u0027t clean up CIDRs if there is stuff after the masked portion.  But it will be masked off for any comparisons.",
+      "parentUuid": "dd925cd6_35135de8",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
