@@ -112,6 +112,77 @@ static void nfs4_recovery_load_clids(nfs_grace_start_t *gsp);
 static void nfs_release_nlm_state(char *release_ip);
 static void nfs_release_v4_clients(char *ip);
 
+#define OPAQUE_BYTES_RECOV_FLAGS                                  \
+	(OPAQUE_BYTES_0x | OPAQUE_BYTES_INVALID_LEN |             \
+	 OPAQUE_BYTES_INVALID_NULL | OPAQUE_BYTES_INVALID_EMPTY | \
+	 OPAQUE_BYTES_NO_TRUNC)
+
+static inline void convert_opaque_val(struct display_buffer *dspbuf,
+				      void *value, int len)
+{
+	int ret;
+
+	ret = display_opaque_value_max_impl(dspbuf, value, len, dspbuf->b_size,
+					    "/", OPAQUE_BYTES_RECOV_FLAGS);
+	assert(ret > 0);
+}
+
+/**
+ * @brief generate a name that identifies this client
+ *
+ * This name will be used to know that a client was talking to the
+ * server before a restart so that it will be allowed to do reclaims
+ * during grace period.
+ *
+ * @param[in] clientid  Client record
+ * @param[in/out] len   Length of resulting name
+ *
+ * @return NULL if failure or the created clid name string
+ */
+
+char *nfs4_create_clid_name(nfs_client_id_t *clientid, size_t *len)
+{
+	nfs_client_record_t *cl_rec = clientid->cid_client_record;
+	const char *str_client_addr = "(unknown)";
+	char cidstr[PATH_MAX], *encoded;
+	struct display_buffer dspbuf = { sizeof(cidstr), cidstr, cidstr };
+	int total_size, cidstr_len, str_client_addr_len, rc;
+
+	/* get the caller's IP addr */
+	if (clientid->gsh_client != NULL)
+		str_client_addr = clientid->gsh_client->hostaddr_str;
+
+	rc = display_opaque_value_max_impl(&dspbuf, cl_rec->cr_client_val,
+					   cl_rec->cr_client_val_len,
+					   dspbuf.b_size, "/",
+					   OPAQUE_BYTES_RECOV_FLAGS);
+
+	if (rc <= 0)
+		LogFatal(COMPONENT_CLIENTID, "Failure to encode clientid");
+
+	cidstr_len = display_buffer_len(&dspbuf);
+	str_client_addr_len = strlen(str_client_addr);
+
+	total_size = cidstr_len + str_client_addr_len + 5 + 4;
+
+	encoded = gsh_malloc(total_size);
+
+	dspbuf.b_size = total_size;
+	dspbuf.b_start = encoded;
+	dspbuf.b_current = encoded;
+
+	/* format is %s-(%d:%s) client_address-(cidstr_len:cid_str) */
+	rc = display_printf(&dspbuf, "%s-(%d:%s)", str_client_addr, cidstr_len,
+			    cidstr);
+
+	LogDebug(COMPONENT_CLIENTID, "Created clientid encoding [%s]", encoded);
+
+	if (len != NULL)
+		*len = display_buffer_len(&dspbuf);
+
+	return encoded;
+}
+
 clid_entry_t *nfs4_add_clid_entry(char *cl_name, bool reclaim_complete)
 {
 	clid_entry_t *new_ent = gsh_malloc(sizeof(clid_entry_t));

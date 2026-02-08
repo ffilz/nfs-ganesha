@@ -455,7 +455,7 @@ static void rados_set_client_cb(struct rbt_node *pn, void *arg)
 
 	kvp->keys[kvp->num] = gsh_strdup(ckey);
 	kvp->vals[kvp->num] =
-		rados_kv_create_val(clientid, &kvp->lens[kvp->num]);
+		nfs4_create_clid_name(clientid, &kvp->lens[kvp->num]);
 
 	++kvp->num;
 }
