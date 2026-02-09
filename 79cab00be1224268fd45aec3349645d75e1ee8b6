@@ -16,6 +16,24 @@
       "message": "What is the return type for sss_nss_getgrouplist_timeout?",
       "revId": "79cab00be1224268fd45aec3349645d75e1ee8b6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f28282a1_1ef6a2d7",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-02-09T17:20:57Z",
+      "side": 1,
+      "message": "This change is problematic as it is\n\nFor SSSD- \n\nhttps://github.com/SSSD/sssd/blob/0458e655673e5ad9ea7478582b79559ea1a3bbc7/src/sss_client/idmap/sss_nss_idmap.h#L397\n\n`0` on success and \n *  - ENOENT:    no user with the given name found (2)\n *  - ERANGE:    Insufficient buffer space supplied (34)\n *  - ETIMEDOUT: request timed out (110)\n on failure\n\nAnd for getgrouplist-\n\nhttps://man7.org/linux/man-pages/man3/getgrouplist.3.html\n\n\u003e 0 on success\nand -1 on failure\n\nSo I think that\u0027s a problem, we should wrap one of them with a function that standardize the return value to be able to distinguish between success and failure",
+      "parentUuid": "752c0591_995fdbf1",
+      "revId": "79cab00be1224268fd45aec3349645d75e1ee8b6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
