@@ -514,6 +514,9 @@ void dynamic_metrics__mdcache_cache_miss(const char *operation,
 #ifdef HAVE_PROCPS
 void dynamic_metrics__mem_info(proc_t proc_info)
 {
+	if (!dynamic_metrics)
+		return;
+
 	const double rss = (double)proc_info.vm_rss / 1024;
 	const double virtual_size = (double)proc_info.vm_size / (1024 * 1024);
 	const double swap_size = proc_info.vm_swap;
