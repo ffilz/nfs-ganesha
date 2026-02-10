@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be41176a_e461067a",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-10T18:11:04Z",
+      "side": 1,
+      "message": "Calls the CORE functionality in FSAL/FSAL_CEPH/main.c file.\nWe can just Log the Error and move further.\nUpdated in latest patch.",
+      "parentUuid": "fa5029b2_fa9206f4",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61ad810f_6f524d4f",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 5
