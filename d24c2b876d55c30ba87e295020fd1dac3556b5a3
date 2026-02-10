@@ -70,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "746202b8_37c45e19",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e652562_371539a1",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eafc93ad_b9e189cb",
@@ -105,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b51f6d_77790b2a",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "OK, maybe we should clean this up globally... Carry on for now...",
+      "parentUuid": "c3182d97_36e17425",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff658b4e_62ca104a",
@@ -136,6 +172,24 @@
       "side": 1,
       "message": "Done.",
       "parentUuid": "ff658b4e_62ca104a",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0c450ef_8f89dc80",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92f8747e_65be9b02",
       "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -177,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34ebc993_5fbbbfc1",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "Maybe a comment describing what this does?",
+      "parentUuid": "be41176a_e461067a",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61ad810f_6f524d4f",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 5
@@ -206,6 +278,24 @@
       "side": 1,
       "message": "We can just Log the Error and move further.\nUpdated in latest patch.",
       "parentUuid": "61ad810f_6f524d4f",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1bdc32_cccfe642",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3488,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4499cac_0f1b286c",
       "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -241,6 +331,24 @@
       "side": 1,
       "message": "We can just Log the Error and move further.\nUpdated in latest patch.",
       "parentUuid": "33f4ca93_9dad4815",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14fa4f63_f4bdcd27",
+        "filename": "src/FSAL/default_methods.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "No need for empty return statement",
+      "parentUuid": "107f0b89_aa50468f",
       "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -318,6 +426,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ffd8fe3_6e884e7e",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "Let\u0027s add some comments documenting what this does and why we do it.",
+      "parentUuid": "bba0f8ba_30204c91",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf39dde8_7c0a0d8e",
         "filename": "src/config_parsing/conf_url_rados.c",
         "patchSetId": 5
@@ -383,6 +509,24 @@
       "side": 1,
       "message": "Updated in latest patch.",
       "parentUuid": "d045fe08_6c29c099",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6282d9cf_c2b672c5",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T18:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d5789b2_55e10f9b",
       "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
