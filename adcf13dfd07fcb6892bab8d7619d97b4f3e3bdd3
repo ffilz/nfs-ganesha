@@ -67,6 +67,23 @@
       "message": "@Suhas.Athani@ibm.com,\ncheck these changes :\n\n git status\nOn branch next\nYour branch is up to date with \u0027origin/next\u0027.\n\nChanges not staged for commit:\n  (use \"git add \u003cfile\u003e...\" to update what will be committed)\n  (use \"git restore \u003cfile\u003e...\" to discard changes in working directory)\n\tmodified:   src/monitoring/dynamic_metrics.cc\n\tmodified:   src/monitoring/include/dynamic_metrics.h\n\tmodified:   src/monitoring/prometheus_exposer.cc\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\ngit diff\ndiff --git a/src/monitoring/dynamic_metrics.cc b/src/monitoring/dynamic_metrics.cc\nindex a4fbb2096..833aa347e 100644\n--- a/src/monitoring/dynamic_metrics.cc\n+++ b/src/monitoring/dynamic_metrics.cc\n@@ -266,7 +266,7 @@ DynamicMetrics::DynamicMetrics(prometheus::Registry \u0026registry)\n {\n }\n \n-static std::unique_ptr\u003cDynamicMetrics\u003e dynamic_metrics;\n+std::unique_ptr\u003cDynamicMetrics\u003e dynamic_metrics;\n \n static std::string trimIPv6Prefix(const std::string input)\n {\ndiff --git a/src/monitoring/include/dynamic_metrics.h b/src/monitoring/include/dynamic_metrics.h\nindex 136bfc93c..76d867ec1 100644\n--- a/src/monitoring/include/dynamic_metrics.h\n+++ b/src/monitoring/include/dynamic_metrics.h\n@@ -59,10 +59,19 @@\n #include \u003cproc/readproc.h\u003e\n #endif\n \n+#ifdef __cplusplus\n+namespace ganesha_monitoring {\n+class DynamicMetrics;\n+\n+extern std::unique_ptr\u003cDynamicMetrics\u003e dynamic_metrics;\n+}\n+#endif\n+\n #ifdef __cplusplus\n extern \"C\" {\n #endif\n \n+\n typedef uint16_t export_id_t;\n \n #ifdef USE_MONITORING\ndiff --git a/src/monitoring/prometheus_exposer.cc b/src/monitoring/prometheus_exposer.cc\nindex f545de5bb..c1f76f361 100644\n--- a/src/monitoring/prometheus_exposer.cc\n+++ b/src/monitoring/prometheus_exposer.cc\n@@ -312,7 +312,8 @@ void *PrometheusExposer::server_thread(void *arg)\n                        exposer-\u003esuccessLatencies_.Observe(elapsed_ms);\n \n #ifdef HAVE_PROCPS\n-               update_mem_info();\n+               if(dynamic_metrics)\n+                       update_mem_info();\n #endif\n        }\n        return NULL;\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nI Tested these changes.. you can create a patch with these changes.",
       "revId": "adcf13dfd07fcb6892bab8d7619d97b4f3e3bdd3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275f6267_264b57dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-02-10T11:26:49Z",
+      "side": 1,
+      "message": "I\u0027m thinking if just the below change would be sufficient - \n\nif (nfs_param.core_param.enable_dynamic_metrics)\n     update_mem_info();\n\n@ffilzlnx@mindspring.com, any suggestions?",
+      "revId": "adcf13dfd07fcb6892bab8d7619d97b4f3e3bdd3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
