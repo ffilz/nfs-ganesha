@@ -33,6 +33,23 @@
       "message": "This change is with respect to a reported github issue - https://github.com/nfs-ganesha/nfs-ganesha/issues/1367",
       "revId": "adcf13dfd07fcb6892bab8d7619d97b4f3e3bdd3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5463cc4_2afa80ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-10T00:17:26Z",
+      "side": 1,
+      "message": "A better place to fix this is to check for dynamic metrics here:\n\nmonitoring/prometheus_exposer.cc server_thread 315 update_mem_info();",
+      "revId": "adcf13dfd07fcb6892bab8d7619d97b4f3e3bdd3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
