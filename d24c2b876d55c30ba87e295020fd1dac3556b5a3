@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3182d97_36e17425",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1049,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-10T18:02:40Z",
+      "side": 1,
+      "message": "I followed these lines of code : https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/MainNFSD/nfs_main.c#L139-L144\n\nMy assumption is If the code worked there. It has to work here too.",
+      "parentUuid": "eafc93ad_b9e189cb",
+      "revId": "d24c2b876d55c30ba87e295020fd1dac3556b5a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff658b4e_62ca104a",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 5
