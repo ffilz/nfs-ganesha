@@ -296,6 +296,9 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 
 bool nsm_unmonitor(state_nsm_client_t *host)
 {
+	if (!nfs_param.core_param.unmonitor_on_shutdown && admin_shutdown)
+		return true;
+
 #ifdef _INTERNAL_STATD
 	if (!nfs_param.core_param.use_statd) {
 		/* Skip unmonitor, handled for nlm client */
@@ -315,6 +318,9 @@ bool nsm_unmonitor(state_nsm_client_t *host)
 
 bool nlm_unmonitor(state_nlm_client_t *host)
 {
+	if (!nfs_param.core_param.unmonitor_on_shutdown && admin_shutdown)
+		return true;
+
 #ifdef _INTERNAL_STATD
 	if (!nfs_param.core_param.use_statd) {
 		struct local_nlm_info info;
