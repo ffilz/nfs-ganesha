@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee00a98_43b7c110",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Don\u0027t use // style comment also comment should be withing 80 columns\n\n If comment is before call, the call will all fit on one line",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d892bb0_76290c43",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Blank line",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37d0e31b_4af3b185",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Blank line",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0279f1f4_b6921796",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Blank line here please",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "361a3d7a_8928f665",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3230,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Blank line please",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68894843_ee7b2da5",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3251,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Blank line please",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b774fe_c7310c2a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3273,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Maybe rename register_nfs_service_with_fsal_backend",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd821f5_cd6794d9",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3350,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:56:38Z",
+      "side": 1,
+      "message": "Hmm, do we need to do this here? This is going to try to register every time export is set in op_context, i.e. for every NFS operation and more...\n\nYou should be able to do these when the FSAL module is loaded",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
