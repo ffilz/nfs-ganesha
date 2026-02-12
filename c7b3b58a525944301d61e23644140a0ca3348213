@@ -247,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8882a8bd_0b0fa5b0",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2938,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8b71ac41_4a4ec919",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6bc9e817_d76f6abd",
         "filename": "src/log/log_functions.c",
         "patchSetId": 12
@@ -1176,6 +1194,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "565fd05e_b632aa9f",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged, We are just sending the err_type and cnode will be still null during dbus enable method, but that will not cause anything.",
+      "parentUuid": "7f91793b_5b629156",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93fa8d6f_6f520635",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 12
@@ -1434,6 +1470,24 @@
       "side": 1,
       "message": "OK, I think I understand now. See is the use case, I want to just use cidr_equals there so no need for this function.\n\nOh, and I see you use base_client_match for add that uses this and base_client_exact_match for delete...",
       "parentUuid": "3417d25f_f724cac7",
+      "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a94b7aa_3cfc7251",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "425185dd_9f09d040",
       "revId": "c7b3b58a525944301d61e23644140a0ca3348213",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

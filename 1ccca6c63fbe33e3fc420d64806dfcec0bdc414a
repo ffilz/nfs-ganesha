@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44d3b8c9_18ccaa1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Review comments incorporated in patchset#14",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1114b8a0_e027d2dc",
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "Please fix",
       "parentUuid": "1114b8a0_e027d2dc",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab4bb29_f43cef65",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f9fe0319_8577cac0",
       "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -73,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b3ad721_daf49136",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3434,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d7570799_6acfbd7f",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1efc7b76_63e99887",
         "filename": "src/log/log_functions.c",
         "patchSetId": 13
@@ -108,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f7f04c0_bb085fb7",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3657,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "896f54c4_a7672b3c",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d48bf756_5d82503a",
         "filename": "src/log/log_functions.c",
         "patchSetId": 13
@@ -119,6 +190,24 @@
       "writtenOn": "2026-02-06T22:58:13Z",
       "side": 1,
       "message": "Need to pass params to receive any error so you can send that to the user.",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d145a5_33664f25",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3780,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d48bf756_5d82503a",
       "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -142,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06af6279_80539d2e",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3782,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "05dd96e3_28cb5157",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66a30398_3a42184c",
         "filename": "src/log/log_functions.c",
         "patchSetId": 13
@@ -153,6 +260,24 @@
       "writtenOn": "2026-02-06T22:58:13Z",
       "side": 1,
       "message": "You probably need to access the config error here - you may have to set up config error processing, but that will allow reporting the errors from add_client properly back to DBUS user",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea3031b_1fb686ec",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3788,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "66a30398_3a42184c",
       "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -194,6 +319,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69d8e473_a38f91f4",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3981,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a6d4d710_cc588833",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "891c2b49_5ec13dc9",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 13
@@ -205,6 +348,24 @@
       "writtenOn": "2026-02-06T22:58:13Z",
       "side": 1,
       "message": "This needs to be just cidr_equals. \n\nSure, for some cases, there is a technical duplicate if you have two subnets, one encompassing the other. But EXPORT CLIENT list they may have different permissions. Like you can grant the smaller subnet different permissions or even a single address. So like you can have\n\n192.168.5.1 not allowed\n192.168.0.0/16 allowed\n\nI\u0027m not even sure how to specify the list that is allowed, but it\u0027s going to take more than 2 entries to do it. Now imagine the list of not allowed is 20 or 30 exceptions scattered about the address space...\n\nAnd when I delete, I want to be forced to delete the correct entry not just a super set or subset of it.\n\nSo I\u0027m OK with and inefficient list of:\n\n192.168.0.1, 192.168.0.0/16\n\nMaybe I\u0027m initially only looking at 192.168.0.1 and want to temporarily broaden to include the whole subnet, and then return to just tracing the single IP.\n\nActually, let\u0027s only use is_base_client_exact_match",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d383c086_ee2acc6f",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "891c2b49_5ec13dc9",
       "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -228,6 +389,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed95f867_7367f77f",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5c769471_bb278710",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffd24a78_da7eed20",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 13
@@ -239,6 +418,24 @@
       "writtenOn": "2026-02-06T22:58:13Z",
       "side": 1,
       "message": "Please see discussion above, please only use is_base_client_exact_match. There are good reasons for that for EXPORT_CLIENT (the primary and original user of client lists).\n\nDe-dupe is useful, but trying to deal with overlapping lists HAProxyHosts and conditional logging is overkill, usually those lists will be a single address, and at most a few or a single subnet.",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "969ac3d3_68206f18",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1499,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ffd24a78_da7eed20",
       "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -256,6 +453,24 @@
       "writtenOn": "2026-02-06T22:58:13Z",
       "side": 1,
       "message": "Please increment errcnt, returning -1 will break the API for this function for other callers.\n\nNeed to set err_type, use config_proc_error",
+      "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57557d2b_54da588c",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-12T10:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f718c8b4_7b0aff8b",
       "revId": "1ccca6c63fbe33e3fc420d64806dfcec0bdc414a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
