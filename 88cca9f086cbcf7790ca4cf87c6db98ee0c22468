@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f8d540c_7f4dbe27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Getting really close. Mostly just some minor tweaks on error handling.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e0d145_88114d0b",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2465,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "You may want to extract export_id into a uint16_t and do the allocation if there is no dupe.\n\nAlso consider using strtoull so you get a parsing error. Then report the same way add_client is reporting error with config_proc_error.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87cd0dca_37d3e721",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2478,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Combine string on one line. Also report dupe as error with config_proc_error.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a09ad0_fad3c0d1",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2508,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Might be worth a LogDebug here though, same as haproxy_host_adder",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeaa1257_11ab201d",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "No need for the following logging, the config error handling will log.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9929e040_91a36c60",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3625,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Hmm, let\u0027s not actually worry about checking the export exists. Without this check, we can use DBUS to enable conditional logging for export 53, then add export 53, and watch it get added (once it reaches the point the export has been set in op_context). That might be useful all for the cost of potentially having a nonexistent export_id in the conditional list.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebcfd587_f2242608",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3684,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Again, let\u0027s not make this check. Export may have been removed, we want to remove id from conditional list.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "967a05b3_7987ecba",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3744,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Use LOG_BUFF_LEN instead of 256",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e79f40f_492fc8ad",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3748,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Use init_error_type to set up an error stream. Then if an error occurs, err_type.diag_buff will be a string you can set as errormsg.\n\nOptionally rebase on top of this patch of mine: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1231196?usp\u003dsearch\n\nAnd add an additional locally defined buffer to add to err_type using the new init_error_type_static().",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7149dc68_ed0d9c50",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3773,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Set up a config_node with filename \u003d \"DBUS command\" and linenumber \u003d 1 and the error string produced will be reasonable\n\nWith my new patch you don\u0027t need to do this. You won\u0027t need a cnode.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d20ca13f_12efc247",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3795,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "This only needs to be done after init_error_type, otherwise rp and diag_buff are uninitialized...\n\nWith my new patch you won\u0027t need this, diag_buf will be a static buffer and fp will be NULL.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cbf1ca8_1f82e2f7",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "Please use convert_ipv6_to_ipv4 for this, something like:\n\nsockaddr_t ipv4, *result;\n\nresult \u003d  convert_ipv6_to_ipv4(\u0026cidr-\u003eip_addr, \u0026ipv4);\nif (result \u003d\u003d \u0026ipv4) {\n    cidr-\u003eip_addr \u003d ipv4;\n    // convert the mask the same way you do below\n}\n\nIf you want, rewrite convert_ipv6_to_ipv4 to use IN6_IS_ADDR_V4MAPPED...",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14c702bb_5e456336",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:33:04Z",
+      "side": 1,
+      "message": "This copies more bytes than v4 actually occupies.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
