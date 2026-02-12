@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3cddcd1_8bfb41ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-12T23:57:19Z",
+      "side": 1,
+      "message": "Hmm, you also need to handle unloading FSAL modules... and unregister?",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ee00a98_43b7c110",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 7
