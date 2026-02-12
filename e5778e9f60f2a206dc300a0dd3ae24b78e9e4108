@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bbdab3e_fe9d0eaa",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-12T11:20:10Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t 0 ||\n→ to be replaced with:\n    + \t\t\t     0 ||",
+      "revId": "e5778e9f60f2a206dc300a0dd3ae24b78e9e4108",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
