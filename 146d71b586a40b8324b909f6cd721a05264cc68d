@@ -54,6 +54,142 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d90db782_9eaf4837",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Match indent, actually why do we have Grpc_Port defined twice?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38970194_5907687c",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Why second definition of Grpc_Port?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "450bc13e_7b3d8800",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Why 2 definitions of Grpc_Port?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85675cc6_f74d6998",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Why 2 definitions of Grpc_Port?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45af90a_e31c6859",
+        "filename": "src/grpc_server/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "blank line?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ba0242_9bb7eab5",
+        "filename": "src/grpc_server/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "blank line?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "952899ef_3b75422c",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "SPDX license specifier on 1st line",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bd630c_06e7693d",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Can these simple methods just be in the header file?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f3605a2_e3256298",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 1
@@ -82,6 +218,210 @@
       "writtenOn": "2026-02-06T01:24:58Z",
       "side": 1,
       "message": "Use display_sockip instead of rolling your own conversion.",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95bd0ba0_6b800744",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Copyright statement",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db066800_b09f3c0f",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Blank line",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5807d905_7c14ffce",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "SPDX identifier on 1st line",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4454f42c_31f32f48",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "SPDX identifier on first line",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d742ab8_634a4e86",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Hmm, what is user going to do with the list of clientid4 values?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a255a0e4_21ac46cd",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "What exceptions do you expect? You aren\u0027t using try/catch with the above providers",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8438b68_83744a86",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Not sure what user is going to do with a list of 16 byte sessionids?",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79be1620_2174a279",
+        "filename": "src/include/gRPC/GrpcServerInit.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Let\u0027s not add a gRPC subdirectory of include for one file",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf78ccf_19d598d9",
+        "filename": "src/proto/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Why the addition of a new proto directory? That will be confusing with the Protocols directory.",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f508880_4df79987",
+        "filename": "src/proto/nfsService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Maybe some documentation of how this file is used",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c209db_dcfedce3",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "Remove addition of blank line here",
+      "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f40f5a_e2c7a629",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-13T18:54:20Z",
+      "side": 1,
+      "message": "This should default to IPv6 localhost addr?",
       "revId": "146d71b586a40b8324b909f6cd721a05264cc68d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
