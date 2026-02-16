@@ -224,6 +224,24 @@
       "message": "Hmm, do we need to do this here? This is going to try to register every time export is set in op_context, i.e. for every NFS operation and more...\n\nYou should be able to do these when the FSAL module is loaded",
       "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d91d98c_ed6d1c18",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3350,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-16T09:16:24Z",
+      "side": 1,
+      "message": "moved this function call to src/FSAL/fsal_manager.c file.",
+      "parentUuid": "9fd821f5_cd6794d9",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
