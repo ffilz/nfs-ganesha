@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "801979b9_311cd77a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "But you really do need to handle unloading of FSAL. If there\u0027s any need to unregister with backend, that needs to be handled, but at the least you need to remove from the registrations list, otherwise the list can reference unloaded FSALs... And you want to stop making the backend updates.",
+      "parentUuid": "d3cddcd1_8bfb41ac",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ee00a98_43b7c110",
         "filename": "src/FSAL/FSAL_CEPH/main.c",
         "patchSetId": 7
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Rectified in latest patchset.",
       "parentUuid": "5ee00a98_43b7c110",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d5f984_3eb1f4aa",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba99ed71_cad775bf",
       "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +124,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30bd3b9_42f9713b",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8111ef78_ffacf0e9",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37d0e31b_4af3b185",
@@ -101,6 +155,24 @@
       "writtenOn": "2026-02-12T23:56:38Z",
       "side": 1,
       "message": "Blank line",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f09f83b6_7eea21a7",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37d0e31b_4af3b185",
       "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -140,6 +212,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aeda5b4_5308e308",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93decd34_c204b385",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "361a3d7a_8928f665",
@@ -171,6 +261,24 @@
       "side": 1,
       "message": "updated.",
       "parentUuid": "361a3d7a_8928f665",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0d86a7_eb842146",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3230,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a06a72c_a77208d2",
       "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -210,6 +318,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c87e0edf_babb7ed0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3251,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b24f45e6_a08f8973",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53b774fe_c7310c2a",
@@ -245,6 +371,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa36bbec_601bcd6a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3273,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cec3a94_093faa05",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fd821f5_cd6794d9",
@@ -276,6 +420,24 @@
       "side": 1,
       "message": "moved this function call to src/FSAL/fsal_manager.c file.",
       "parentUuid": "9fd821f5_cd6794d9",
+      "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8fdb4ed_9158d5d4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3350,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T21:44:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d91d98c_ed6d1c18",
       "revId": "d022e4ec8948858bed588bd31dc1ac514b5632a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
