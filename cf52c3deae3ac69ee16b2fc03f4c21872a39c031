@@ -16,6 +16,24 @@
       "message": "Ah, can\u0027t make this a single global like this. We support loading multiple FSALs. Maybe should keep a list of FSALs that need the register and then when ready to register, loop through the list.\n\nALSO - due to export reload (SIGHUP) we can load a FSAL AFTER initialization.\n\nThis is a big one...",
       "revId": "cf52c3deae3ac69ee16b2fc03f4c21872a39c031",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5780c3a1_1ee30cc8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-16T09:17:21Z",
+      "side": 1,
+      "message": "Resolved in latest patchset.",
+      "parentUuid": "fa1677ee_998e7157",
+      "revId": "cf52c3deae3ac69ee16b2fc03f4c21872a39c031",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
