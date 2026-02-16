@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f8131bb_675ad797",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T22:54:32Z",
+      "side": 1,
+      "message": "I\u0027d like this to be reviewed by someone who understands the encryption stuff more",
+      "revId": "2d234bdb132bf15fcf62cde83021db5a0003b748",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b1299a_0b9d9a9e",
+        "filename": "src/PLUGIN/kmip/kmip_fscrypt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-16T22:54:32Z",
+      "side": 1,
+      "message": "Can we just define this macro above and avoid having to jerk clang-format around?",
+      "revId": "2d234bdb132bf15fcf62cde83021db5a0003b748",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ac67758_2d9e6b5d",
         "filename": "src/PLUGIN/kmip/kmip_fscrypt.c",
         "patchSetId": 2
