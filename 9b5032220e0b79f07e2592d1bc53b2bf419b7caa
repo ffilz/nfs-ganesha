@@ -16,6 +16,23 @@
       "message": "Please, review the below functions only for now in transparent_recovery.c for the TSM RPC callback implementation:\n\n- tsm_rpc_call_free\n- tsm_rpc_call_process\n- tsm_ensure_evchan\n- tsm_send_rpc_msg\n- tsm_send_rpc_state\n- tsm_create_rpc_client",
       "revId": "9b5032220e0b79f07e2592d1bc53b2bf419b7caa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1823828d_018206bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-02-17T11:03:50Z",
+      "side": 1,
+      "message": "Why I happen to use tsm_ensure_evchan() - \n\nCLNT_CALL_BACK() uses the TI‑RPC event channel to manage request expiry and to dispatch completion callbacks. If the client transport isn’t registered on an event channel (ev_p is NULL), libntirpc will crash when it tries to insert the request into the expiry/evchan structures. So with tsm_ensure_evchan() I\u0027m checking if transport is registered before the callback path is used.\n\nev_p is the event‑channel pointer in the client transport record. When it’s NULL, the callback path crashes because svc_rqst_expire_insert() dereferences it.\n\nsvc_rqst_expire_insert() expects ev_p to be valid and immediately dereferences it.\n\nIf sr_rec is NULL, the mutex_lock() segfaults. That’s why added tsm_ensure_evchan() before CLNT_CALL_BACK().\n\n\nvoid svc_rqst_expire_insert(struct clnt_req *cc)\n{\n     struct cx_data *cx \u003d CX_DATA(cc-\u003ecc_clnt);\n     struct svc_rqst_rec *sr_rec \u003d cx-\u003ecx_rec-\u003eev_p;\n     ...\n     mutex_lock(\u0026sr_rec-\u003eev_lock);\n     ...",
+      "revId": "9b5032220e0b79f07e2592d1bc53b2bf419b7caa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
