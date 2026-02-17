@@ -70,6 +70,24 @@
       "parentUuid": "1b770ddf_d406ae9b",
       "revId": "2bae209a4d9a67ac3a4f11fd16eba54314584776",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0624a216_c7f64de0",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T00:13:28Z",
+      "side": 1,
+      "message": "This code was introduced by this patch: b4d59650b663fb640cdb4d76395f5035080db9ca Support QoS DS read/write control\n\nThat patch looks messed up. Please go back to that patch and rework what it did to make sense. Along the way, this Coverity CID will get fixed...\n\nI\u0027m sorry I let that patch through...",
+      "parentUuid": "34dbd875_7c5d3f48",
+      "revId": "2bae209a4d9a67ac3a4f11fd16eba54314584776",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
