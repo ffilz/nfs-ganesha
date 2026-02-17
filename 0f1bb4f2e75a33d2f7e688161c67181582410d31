@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1b1eba_60dc319a",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-17T17:49:37Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tsize_t attr_output_size \u003d 0;\n+\tstatus \u003d obj_hdl-\u003eobj_ops-\u003egetextattr_value_by_name(obj_hdl,",
+      "revId": "0f1bb4f2e75a33d2f7e688161c67181582410d31",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
