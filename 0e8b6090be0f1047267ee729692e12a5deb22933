@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c287b0_984a1499",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3226,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-17T10:04:48Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - static fsal_registration_entry_t *\n    - __find_fsal_entry(struct fsal_module *fsal_mod)\n→ to be replaced with:\n    + static fsal_registration_entry_t *__find_fsal_entry(struct fsal_module *fsal_mod)",
+      "revId": "0e8b6090be0f1047267ee729692e12a5deb22933",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
