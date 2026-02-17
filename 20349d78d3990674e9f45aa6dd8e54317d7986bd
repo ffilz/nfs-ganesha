@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "058c5f23_5b74ec51",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "This needs to be a LogDebug, we don\u0027t want to blast for every TLS connect...\n\nAlso component should be DISPATCH",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c48a574_eb7be8fc",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Component should be DISPATCH\n\nAlso, not sure how we should log failed TLS connect, we don\u0027t want to open for denial of service attack on the logs.",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7eaf028e_c4c0be1a",
         "filename": "src/doc/man/ganesha-tls-config.rst",
         "patchSetId": 13
@@ -31,6 +65,24 @@
       "writtenOn": "2026-01-13T11:38:21Z",
       "side": 1,
       "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0403d99_8b074462",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7eaf028e_c4c0be1a",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -174,6 +226,142 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "222b76b0_9318b8c7",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa34b48_80d1611c",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Looks like this is defining some stuff used in ntirpc. The header should come from ntirpc, and should not be Ganesha (gsh) or NFS specific.",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5afe0d98_42692eba",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Could you do something to extract the clang-format fixes for existing code into a separate patch. This always adds extra challenge to review...",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d232edd4_897bd55e",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2108,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Are these flags actually defined in the RFC? They seem to only be used to identify client connections.",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95d7aad_ba1c656c",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Hmm, should we merge with cr_pnfs_flags and use cr_extra_flags as the name of the merged flags field?",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a740202d_ef76c855",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Merge flags fields?",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70c852a9_601c3b9d",
+        "filename": "src/support/exports.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Hmm, including the comma in this is causing weird clang-format stuff below.\n\nCan we find another way to make this conditional compiled?\n\nMaybe some kind of dummy if TLS is not configured?",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c523b56_c0922c1e",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Move this log to the end, so if there are errors we don\u0027t emit it",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e211110c_3c3d64e8",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-17T01:19:44Z",
+      "side": 1,
+      "message": "Let\u0027s make this a LogDebug, no need to add additional noise for existing configs that don\u0027t use TLS",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
