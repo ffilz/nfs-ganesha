@@ -16,6 +16,24 @@
       "message": "Why checking fs_locations ?",
       "revId": "34a5cd2b033724a4f475c929d4e4376c7a7bf34c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f29659_6d78802a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3193,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-17T16:03:44Z",
+      "side": 1,
+      "message": "For referencing a path, we use these commands:\nsetfattr -n user.fs_location -v 10.8.159.216:/exp1 /home/sreedhar/nfs_ganesha/nfs_mount2/exp1/dir_for_Sticky/\n\nThis command says, if you try to access \u0027/home/sreedhar/nfs_ganesha/nfs_mount2/exp1/dir_for_Sticky/\u0027 path, redirect it to 10.8.159.216:/exp1\n\n\nSo here , after giving above command, we set \u0027user.fs_location\u0027 value, thats the reason for checking any referance to that export path.",
+      "parentUuid": "40124900_f51491b0",
+      "revId": "34a5cd2b033724a4f475c929d4e4376c7a7bf34c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
