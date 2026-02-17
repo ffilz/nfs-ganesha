@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13097058_3e2bdd34",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2465,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87e0d145_88114d0b",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87cd0dca_37d3e721",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-02-12T23:33:04Z",
       "side": 1,
       "message": "Combine string on one line. Also report dupe as error with config_proc_error.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b09e404c_93434c85",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2478,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87cd0dca_37d3e721",
       "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99063542_44b94e3b",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2508,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e3a09ad0_fad3c0d1",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eeaa1257_11ab201d",
         "filename": "src/log/log_functions.c",
         "patchSetId": 15
@@ -82,6 +136,24 @@
       "writtenOn": "2026-02-12T23:33:04Z",
       "side": 1,
       "message": "No need for the following logging, the config error handling will log.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec935f8c_de6d740b",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 2512,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eeaa1257_11ab201d",
       "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc662699_a7f19ab1",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3625,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9929e040_91a36c60",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebcfd587_f2242608",
@@ -116,6 +206,24 @@
       "writtenOn": "2026-02-12T23:33:04Z",
       "side": 1,
       "message": "Again, let\u0027s not make this check. Export may have been removed, we want to remove id from conditional list.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7812b153_e0acfedb",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3684,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ebcfd587_f2242608",
       "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -139,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97a87051_84b98662",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3744,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "967a05b3_7987ecba",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e79f40f_492fc8ad",
         "filename": "src/log/log_functions.c",
         "patchSetId": 15
@@ -150,6 +276,24 @@
       "writtenOn": "2026-02-12T23:33:04Z",
       "side": 1,
       "message": "Use init_error_type to set up an error stream. Then if an error occurs, err_type.diag_buff will be a string you can set as errormsg.\n\nOptionally rebase on top of this patch of mine: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1231196?usp\u003dsearch\n\nAnd add an additional locally defined buffer to add to err_type using the new init_error_type_static().",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44adaee0_63cbb7ca",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3748,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7e79f40f_492fc8ad",
       "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -173,6 +317,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf5cf720_72bf8f21",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3773,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged, Rebased with your new patch.",
+      "parentUuid": "7149dc68_ed0d9c50",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d20ca13f_12efc247",
         "filename": "src/log/log_functions.c",
         "patchSetId": 15
@@ -184,6 +346,24 @@
       "writtenOn": "2026-02-12T23:33:04Z",
       "side": 1,
       "message": "This only needs to be done after init_error_type, otherwise rp and diag_buff are uninitialized...\n\nWith my new patch you won\u0027t need this, diag_buf will be a static buffer and fp will be NULL.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0088825e_499bdff1",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 3795,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d20ca13f_12efc247",
       "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -205,6 +385,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8eb26e_a1791a98",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8cbf1ca8_1f82e2f7",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14c702bb_5e456336",
@@ -218,6 +416,24 @@
       "writtenOn": "2026-02-12T23:33:04Z",
       "side": 1,
       "message": "This copies more bytes than v4 actually occupies.",
+      "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe68bcdb_ae6f2ebc",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-17T11:25:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "14c702bb_5e456336",
       "revId": "88cca9f086cbcf7790ca4cf87c6db98ee0c22468",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
