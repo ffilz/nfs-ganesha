@@ -16,6 +16,24 @@
       "message": "I\u0027m not clear where all of the bits of this solution actually happen. More comments would help.",
       "revId": "168b618193477e77f6b5ac557a289a8faab2b3ad",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5799afac_fae357c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-17T15:55:22Z",
+      "side": 1,
+      "message": "At a high level, the solution happens in three places:\n\n1) Service registration\nThe NFS service is now registered in the FSAL_CEPH RADOS_URLS module after\nrados_connect() completes (i.e., once the client is fully initialized).\nThis is where rados_service_register()(This is librados API) is called.\nPreviously this happened immediately after rados_create(), which meant\nthe mgr could see an instance(i.e nfs-ganesha) that wasn’t actually fully\ninitialized.\n\n2) Heartbeat thread startup\nAfter successful registration, a background thread is started. This thread\nis responsible for periodically refreshing the service state.\n\n3) Service status updates\nThe heartbeat thread calls rados_service_update_status() (this is librados API) at\na fixed interval to keep the service marked healthy. This prevents the mgr from\nconsidering the instance stale and reporting it as a stray daemon.",
+      "parentUuid": "52c51698_1d2e0e31",
+      "revId": "168b618193477e77f6b5ac557a289a8faab2b3ad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
