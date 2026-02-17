@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3493fefd_5c2a0176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-02-17T10:56:40Z",
+      "side": 1,
+      "message": "Please, review the below functions only for now in transparent_recovery.c for the TSM RPC callback implementation:\n\n- tsm_rpc_call_free\n- tsm_rpc_call_process\n- tsm_ensure_evchan\n- tsm_send_rpc_msg\n- tsm_send_rpc_state\n- tsm_create_rpc_client",
+      "revId": "9b5032220e0b79f07e2592d1bc53b2bf419b7caa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
