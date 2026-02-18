@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108efc3f_981c007a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T18:45:23Z",
+      "side": 1,
+      "message": "This looks generally good. I do have one concern. We are adding use of RPC messages between Ganesha nodes for transparent state migration. I haven\u0027t seen the code yet so I\u0027m not sure where it\u0027s setting up its socket, but if done through RPC dispatcher, we would want it binding to a different interface. Of course we could exclude that, but something to think about.\n\nAlso what about trunking that uses several interfaces? Or is there a virtual interface that handles the trunking?       \n\nOf course none of these concerns are any more than would apply to BindAddr...",
+      "revId": "c9c652407d2d3a060774c828bfcaffb3f07a774f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54871561_9e26d8e2",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T18:45:23Z",
+      "side": 1,
+      "message": "Need to also add to config_samples/config.txt",
+      "revId": "c9c652407d2d3a060774c828bfcaffb3f07a774f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
