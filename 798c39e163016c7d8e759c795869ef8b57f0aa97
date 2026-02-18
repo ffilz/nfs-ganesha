@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a05b5ba9_af1df00a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-18T08:44:13Z",
+      "side": 1,
+      "message": "Review comments incorporated in Patchset#18.",
+      "revId": "798c39e163016c7d8e759c795869ef8b57f0aa97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5f497d5_dbbcd8a0",
         "filename": "src/log/log_functions.c",
         "patchSetId": 19
@@ -31,6 +48,24 @@
       "writtenOn": "2026-02-17T18:13:14Z",
       "side": 1,
       "message": "You want to check endptr for errors.",
+      "revId": "798c39e163016c7d8e759c795869ef8b57f0aa97",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a70b80b_b707653c",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2465,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-02-18T08:44:13Z",
+      "side": 1,
+      "message": "Acknowledged, created a new checker named as parse_uint16_from_str for this.",
+      "parentUuid": "e5f497d5_dbbcd8a0",
       "revId": "798c39e163016c7d8e759c795869ef8b57f0aa97",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
