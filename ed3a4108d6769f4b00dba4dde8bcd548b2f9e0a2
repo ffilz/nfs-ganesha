@@ -16,6 +16,126 @@
       "message": "WARNING: line length of 81 exceeds 80 columns\n+static fsal_registration_entry_t *__find_fsal_entry(struct fsal_module *fsal_mod)",
       "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d21ad0_918fda9b",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3226,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T19:01:53Z",
+      "side": 1,
+      "message": "How about we fix by changing the name. Not sure why the leading double underscore, we generally don\u0027t use that. Getting rid of it or reducing to one would solve the problem.",
+      "parentUuid": "74276985_a5d00b52",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77681f2_d0a5896f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T19:01:53Z",
+      "side": 1,
+      "message": "Please don\u0027t use single character names g and e, use glist and entry instead",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35646ac1_0915c19f",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3244,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T19:01:53Z",
+      "side": 1,
+      "message": "Let\u0027s rename this unregister and add a default unregister method that does nothing...",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2852eb0_e2812c75",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3254,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T19:01:53Z",
+      "side": 1,
+      "message": "Actually, simplify this code:\n\nif (entry)\n   glist_del(\u0026entry-\u003elist) \n   \nIt\u0027s safe to gsh_free(entry) if entry is NULL.",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44fd8f1e_f885ca38",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3288,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T19:01:53Z",
+      "side": 1,
+      "message": "No need to test fsal_register_nfs_service is not NULL, it will never be NULL because you have default do nothing method.",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "760ea944_155296e6",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3303,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T19:01:53Z",
+      "side": 1,
+      "message": "Please don\u0027t use single character names g and e, use glist and entry instead",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ceee9e_471c4164",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3313,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-18T19:01:53Z",
+      "side": 1,
+      "message": "No need to test fsal_register_nfs_service is not NULL, it will never be NULL because you have default do nothing method.\n\nAlso, no need to test for e-\u003efsal_mod !\u003d NULL, you set it on allocation and insertion to list.",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
