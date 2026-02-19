@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8c717a5_6433a5bc",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3244,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-19T23:42:13Z",
+      "side": 1,
+      "message": "In librados API\u0027s we dont have any specific function to unregister the registered service.\nHere is the reference : https://github.com/ceph/ceph/blob/aa174fefddb414e32b276062c39d8107bf47e256/src/test/librados/service.cc#L187-L210\n\nThere is no corresponding \"unregister\" logic because the MgrClient (which lives inside the RadosClient object) is destroyed during shutdown(), which is the intended way to signal the end of a client\u0027s lifecycle.",
+      "parentUuid": "6588eeec_208a0575",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2852eb0_e2812c75",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 11
