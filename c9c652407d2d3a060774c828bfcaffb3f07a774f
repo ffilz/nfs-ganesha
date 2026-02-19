@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95fafa1e_18acfb2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039251
+      },
+      "writtenOn": "2026-02-19T08:58:12Z",
+      "side": 1,
+      "message": "Thanks for the review!\n\nTo answer your question about trunking: yes, the OS handles this by exposing a virtual interface (like bond0 or team0). The user would simply specify that virtual interface name in `Interface_Name`, and it will handle the underlying physical interfaces transparently. See https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/configuring-network-bonding_configuring-and-managing-networking for how it can be configured. I will note that I have not played around with this, and I don\u0027t know how it will affect.\n\nRegarding the upcoming state migration: Since this patch exactly mirrors the existing scope and limitations of `Bind_Addr`, any future migration features that need to bypass the global `NFS_CORE_PARAMS` parameters can just introduce their own dedicated config overrides when that code actually lands.",
+      "parentUuid": "108efc3f_981c007a",
+      "revId": "c9c652407d2d3a060774c828bfcaffb3f07a774f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54871561_9e26d8e2",
         "filename": "src/doc/man/ganesha-core-config.rst",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-18T18:45:23Z",
       "side": 1,
       "message": "Need to also add to config_samples/config.txt",
+      "revId": "c9c652407d2d3a060774c828bfcaffb3f07a774f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f020f1b6_f1c8464d",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1039251
+      },
+      "writtenOn": "2026-02-19T08:58:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54871561_9e26d8e2",
       "revId": "c9c652407d2d3a060774c828bfcaffb3f07a774f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
