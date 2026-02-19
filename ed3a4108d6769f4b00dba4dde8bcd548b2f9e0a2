@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd8aff7d_00697704",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3244,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-19T23:47:14Z",
+      "side": 1,
+      "message": "And Yes, We can add default unregister method which does nothing.. But thinking like why to waste memory if its not worth it? . Can you confirm me again to add default unregister method?",
+      "parentUuid": "f8c717a5_6433a5bc",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2852eb0_e2812c75",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 11
