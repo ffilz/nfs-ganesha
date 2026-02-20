@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a5507b4_17ac01b1",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "058c5f23_5b74ec51",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c48a574_eb7be8fc",
         "filename": "src/MainNFSD/nfs_worker_thread.c",
         "patchSetId": 13
@@ -48,6 +66,24 @@
       "writtenOn": "2026-02-17T01:19:44Z",
       "side": 1,
       "message": "Component should be DISPATCH\n\nAlso, not sure how we should log failed TLS connect, we don\u0027t want to open for denial of service attack on the logs.",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f78e1cf8_0e4f14ce",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "Moved to LogDebug and component as DISPATCH",
+      "parentUuid": "3c48a574_eb7be8fc",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -249,6 +285,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b0f0b30_a242e8fd",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "removed the header",
+      "parentUuid": "2aa34b48_80d1611c",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5afe0d98_42692eba",
         "filename": "src/include/nfs_exports.h",
         "patchSetId": 13
@@ -260,6 +314,24 @@
       "writtenOn": "2026-02-17T01:19:44Z",
       "side": 1,
       "message": "Could you do something to extract the clang-format fixes for existing code into a separate patch. This always adds extra challenge to review...",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78c590c_f779789f",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "If i extract the clang-format to other patch, exiting gate checks will fail for this code review.",
+      "parentUuid": "5afe0d98_42692eba",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -283,6 +355,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3f6453e_9ab3b287",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2108,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "Not used by RFC, these Flags are for internal identification of which type of client connection it is.\nbecause client can have TLS, MTLS, and NON-TLS mount points connection and code should not mixup the connect causing security violations.",
+      "parentUuid": "d232edd4_897bd55e",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b95d7aad_ba1c656c",
         "filename": "src/include/sal_data.h",
         "patchSetId": 13
@@ -294,6 +384,24 @@
       "writtenOn": "2026-02-17T01:19:44Z",
       "side": 1,
       "message": "Hmm, should we merge with cr_pnfs_flags and use cr_extra_flags as the name of the merged flags field?",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410650ec_8da990bf",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "As per the last discussion with the team, it was decided to not use the exiting flag bits and create new one",
+      "parentUuid": "b95d7aad_ba1c656c",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -317,6 +425,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efb29bd4_960094dc",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "As per the last discussion with team, it was decided to create a new flag and to not use the exiting bits.",
+      "parentUuid": "a740202d_ef76c855",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c852a9_601c3b9d",
         "filename": "src/support/exports.c",
         "patchSetId": 13
@@ -328,6 +454,24 @@
       "writtenOn": "2026-02-17T01:19:44Z",
       "side": 1,
       "message": "Hmm, including the comma in this is causing weird clang-format stuff below.\n\nCan we find another way to make this conditional compiled?\n\nMaybe some kind of dummy if TLS is not configured?",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6941d8c6_61999394",
+        "filename": "src/support/exports.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "70c852a9_601c3b9d",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -351,6 +495,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49803259_4b81c26e",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "This log is not required since TLS is not yet enabled. Log at wrong place.",
+      "parentUuid": "6c523b56_c0922c1e",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e211110c_3c3d64e8",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 13
@@ -362,6 +524,24 @@
       "writtenOn": "2026-02-17T01:19:44Z",
       "side": 1,
       "message": "Let\u0027s make this a LogDebug, no need to add additional noise for existing configs that don\u0027t use TLS",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26aeff7_0eb2b7e6",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-02-20T14:19:33Z",
+      "side": 1,
+      "message": "This is a 1 time print, atleast user should know code has been compiled with USE_TLS and is disabled by the config.\n\notherwise there is no way to get the details.",
+      "parentUuid": "e211110c_3c3d64e8",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
