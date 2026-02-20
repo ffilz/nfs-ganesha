@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfc8faa7_ffcda53a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3244,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-20T22:05:04Z",
+      "side": 1,
+      "message": "I get that currently it isn\u0027t used, but it would feel more symmetric if the method is included. Then unregister looks the same as register just in reverse.",
+      "parentUuid": "fd8aff7d_00697704",
+      "revId": "ed3a4108d6769f4b00dba4dde8bcd548b2f9e0a2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2852eb0_e2812c75",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 11
