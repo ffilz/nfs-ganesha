@@ -16,6 +16,24 @@
       "message": "Hmm, these metrics depend on clients issuing FSINFO calls.\n\n\nThis is an example of a metric that would be better as a \"pull\" metric than a \"push\" metric. Instead of and FSINFO call pushing data to the metric, better would be when this metric is scraped, to do an FSINFO call.\n\nBut we also need to consider the impact of making those calls depending on the scraping interval.",
       "revId": "4b66d86da057b80459e74337aeaaaf6d4500772a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866bcebb_db52754f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-02-23T07:56:31Z",
+      "side": 1,
+      "message": "Updated with latest code @ffilzlnx@mindspring.com , This time the info can be for any FSAL backend and also, for every NFS operation the metric gets updated.",
+      "parentUuid": "28abbf96_76e1c2b1",
+      "revId": "4b66d86da057b80459e74337aeaaaf6d4500772a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
