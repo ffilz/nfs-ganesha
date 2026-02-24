@@ -91,6 +91,7 @@ typedef enum log_components {
 	COMPONENT_NFS_MSK,
 	COMPONENT_XPRT,
 	COMPONENT_QOS,
+	COMPONENT_RDMA, /*< RPC/RDMA transport */
 	COMPONENT_COUNT
 } log_components_t;
 
