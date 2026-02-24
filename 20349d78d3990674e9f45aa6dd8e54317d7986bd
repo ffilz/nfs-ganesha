@@ -301,6 +301,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5e98e3_30f69a31",
+        "filename": "src/include/gsh_tls.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-24T21:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b0f0b30_a242e8fd",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5afe0d98_42692eba",
@@ -332,6 +350,24 @@
       "side": 1,
       "message": "If i extract the clang-format to other patch, exiting gate checks will fail for this code review.",
       "parentUuid": "5afe0d98_42692eba",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d8c948_d3f31a53",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-24T21:35:23Z",
+      "side": 1,
+      "message": "Trick is you structure your patches so the clang-format comes first, that passes, then your substantive patch is built on that and passes because all the problems were fixed by first patch.",
+      "parentUuid": "e78c590c_f779789f",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
