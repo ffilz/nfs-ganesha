@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ca2d7b_5776f2e3",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-24T21:42:25Z",
+      "side": 1,
+      "message": "Hmm, can we just use COMPONENT_DISPATCH and not add a new component?",
+      "revId": "cc8f21bc777bf8c535bdbd35fa85b020a0b41c6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5cd22bd_9bcffb20",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-02-24T21:42:25Z",
+      "side": 1,
+      "message": "Can we figure out how to not flip this block back and forth with clang-format? Every patch that touches this block shows the whole block changing...",
+      "revId": "cc8f21bc777bf8c535bdbd35fa85b020a0b41c6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
