@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "295c5157_752eed95",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-02-27T05:32:56Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \trc \u003d fridgethr_submit(general_fridge, initial_cb_null_call,\n    - \t\t\t      cl);\n→ to be replaced with:\n    + \trc \u003d fridgethr_submit(general_fridge, initial_cb_null_call, cl);",
+      "revId": "5be1d83636464ff7b63fd1c6b4969d72f7d89b52",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
