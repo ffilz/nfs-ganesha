@@ -192,6 +192,7 @@ mdcache_fsal_create_export(struct fsal_module *sub_fsal, void *parse_node,
 	glist_init(&myself->entry_list);
 	PTHREAD_MUTEX_init(&myself->mdc_exp_lock, NULL);
 	PTHREAD_MUTEX_init(&myself->dirent_map.dm_mtx, NULL);
+	PTHREAD_COND_init(&myself->cleanup_cond, NULL);
 
 	status = sub_fsal->m_ops.create_export(sub_fsal, parse_node, err_type,
 					       &myself->up_ops);
@@ -199,6 +200,7 @@ mdcache_fsal_create_export(struct fsal_module *sub_fsal, void *parse_node,
 		LogMajor(COMPONENT_FSAL,
 			 "Failed to call create_export on underlying FSAL %s",
 			 sub_fsal->name);
+		PTHREAD_COND_destroy(&myself->cleanup_cond);
 		gsh_free(myself->name);
 		gsh_free(myself);
 		return status;
@@ -216,6 +218,7 @@ mdcache_fsal_create_export(struct fsal_module *sub_fsal, void *parse_node,
 	status = dirmap_lru_init(myself);
 	if (FSAL_IS_ERROR(status)) {
 		LogMajor(COMPONENT_FSAL, "Failed to call dirmap_lru_init");
+		PTHREAD_COND_destroy(&myself->cleanup_cond);
 		gsh_free(myself->name);
 		gsh_free(myself);
 		return status;
