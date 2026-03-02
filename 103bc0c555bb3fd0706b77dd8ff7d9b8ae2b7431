@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9dd5af0_f1186d23",
+        "filename": "src/support/delayed_exec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-02T19:45:02Z",
+      "side": 1,
+      "message": "Can\u0027t we just check for delayed_stopping? We could take the mutex before the allocation to check.",
+      "revId": "103bc0c555bb3fd0706b77dd8ff7d9b8ae2b7431",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
