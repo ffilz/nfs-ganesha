@@ -2150,6 +2150,44 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 	}
 
 	fsal_openflags_t old_openflags = fsal_fd->openflags;
+
+	/* Fix stale fsal_export pointer before reopening.
+	 *
+	 * When an mdcache entry survives an unexport/reexport cycle (stays
+	 * in L1/L2 cache), fsal_fd->fsal_export may point to:
+	 *   1. Freed memory (exp_ops=NULL)  -> crash in insert_fd_lru or LRU
+	 *      reaper dereferencing owning_export.
+	 *   2. Reallocated memory for a different export -> FD accounted under
+	 *      the wrong export; silent access-control violation and data
+	 *      corruption.
+	 * eg: exportid 1 -> unexported -> re_exported with same id 1
+	 *
+	 * Key nested-export scenario: exportA is removed while exportB (which
+	 * shares the entry) stays alive.  Patch A's else-branch closes the FD.
+	 * If a close/reopen race leaves the FD still present,
+	 * op_ctx->fsal_export (set by the NFS layer for the current request)
+	 * is always the correct live pointer.
+	 * Detect the mismatch and update before insert_fd_lru.
+	 */
+	if (fsal_fd->fsal_export != op_ctx->fsal_export) {
+		LogEvent(COMPONENT_FSAL,
+			 "CRIT: stale fsal_export on fsal_fd %p", fsal_fd);
+		if (fsal_fd->fsal_export)
+			LogEvent(COMPONENT_FSAL,
+				 "(old exp=%p, id=%d) != (new exp=%p id=%d)",
+				 fsal_fd->fsal_export,
+				 fsal_fd->fsal_export->export_id,
+				 op_ctx->fsal_export,
+				 op_ctx->fsal_export->export_id);
+		else
+			LogEvent(COMPONENT_FSAL,
+				 "(old exp=NULL, id=-1) != (new exp=%p id=%d)",
+				 op_ctx->fsal_export,
+				 op_ctx->fsal_export->export_id);
+
+		fsal_fd->fsal_export = op_ctx->fsal_export;
+	}
+
 	/* Now that we are actually about to open or re-open, let's
 	 * make sure we get the file opened however desired.
 	 *
