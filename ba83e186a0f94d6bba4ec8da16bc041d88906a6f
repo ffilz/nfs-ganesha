@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2504c283_ae85afe6",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-02T19:16:53Z",
+      "side": 1,
+      "message": "Could you add some detail of how the flow of cleanup happens?\n\nI think an export can only ever have cleanup_export set once, but I\u0027d like to see a \"proof\". Also then, can cleanup_pending actually every be anything other than 0 or 1?\n\nAlso, can this ever happen AFTER mdcache_lru_clean starts processing the export, thus it skips the cond_wait?",
+      "revId": "ba83e186a0f94d6bba4ec8da16bc041d88906a6f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
