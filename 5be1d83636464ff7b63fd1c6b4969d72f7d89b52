@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \trc \u003d fridgethr_submit(general_fridge, initial_cb_null_call,\n    - \t\t\t      cl);\n→ to be replaced with:\n    + \trc \u003d fridgethr_submit(general_fridge, initial_cb_null_call, cl);",
       "revId": "5be1d83636464ff7b63fd1c6b4969d72f7d89b52",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c449cb64_95db35a6",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-02T19:46:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "295c5157_752eed95",
+      "revId": "5be1d83636464ff7b63fd1c6b4969d72f7d89b52",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
