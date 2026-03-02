@@ -16,6 +16,24 @@
       "message": "Can\u0027t we just check for delayed_stopping? We could take the mutex before the allocation to check.",
       "revId": "103bc0c555bb3fd0706b77dd8ff7d9b8ae2b7431",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74768ebe_f095de30",
+        "filename": "src/support/delayed_exec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1039084
+      },
+      "writtenOn": "2026-03-02T20:06:01Z",
+      "side": 1,
+      "message": "1. delayed_state is protected by dle_mutex\n2. If we take mutex before the allocation, it would lead to the same situation.\nAs there is a race for dle_mutex between delayed_shutdown() and delayed_submit().\n\nThere is a possibility that dle_mutex could get destroyed in delayed_shutdown() before we attempt to acquire it in delayed_submit() which would lead to the crash.",
+      "parentUuid": "a9dd5af0_f1186d23",
+      "revId": "103bc0c555bb3fd0706b77dd8ff7d9b8ae2b7431",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
