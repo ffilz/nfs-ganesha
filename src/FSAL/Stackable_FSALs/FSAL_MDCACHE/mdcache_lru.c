@@ -645,6 +645,21 @@ static inline void mdcache_lru_clean(mdcache_entry_t *entry)
 
 	if (entry->obj_handle.type == DIRECTORY)
 		PTHREAD_SPIN_destroy(&entry->fsobj.fsdir.fsd_spin);
+
+	/* If this entry was marked for an export's cleanup (unexport path),
+	 * decrement cleanup_pending so the export drain can proceed when all
+	 * entries finish. Signal if this was the last one.
+	 */
+	if (entry->cleanup_export != NULL) {
+		struct mdcache_fsal_export *cleanup_exp = entry->cleanup_export;
+
+		entry->cleanup_export = NULL;
+		PTHREAD_MUTEX_lock(&cleanup_exp->mdc_exp_lock);
+		cleanup_exp->cleanup_pending--;
+		if (cleanup_exp->cleanup_pending == 0)
+			PTHREAD_COND_signal(&cleanup_exp->cleanup_cond);
+		PTHREAD_MUTEX_unlock(&cleanup_exp->mdc_exp_lock);
+	}
 }
 
 /**
@@ -1070,6 +1085,12 @@ void mdcache_lru_cleanup_try_push(mdcache_entry_t *entry)
 		/* Drop the sentinel reference */
 		cih_remove_latched(entry, &latch, CIH_REMOVE_NONE);
 	} else {
+		/* Push failed (entry has active refs). The caller already set
+		 * entry->cleanup_export and incremented in
+		 * export->cleanup_pending.
+		 * Leave them set: the export drain will wait until refs drop
+		 * and mdcache_lru_clean eventually runs for this entry.
+		 */
 		PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 		QUNLOCK(qlane);
 	}
