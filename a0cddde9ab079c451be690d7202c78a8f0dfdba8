@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09d6b95d_6fb4d5a9",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2173,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-04T13:31:17Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "88f3bf55_f8e38158",
+      "revId": "a0cddde9ab079c451be690d7202c78a8f0dfdba8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1f54356_522d7f39",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2026-03-02T19:25:58Z",
       "side": 1,
       "message": "Why use LogEvent and then have \"CRIT\" in the message? What are we trying to communicate to sysadmin? Is this something they need to be alarmed about? Do they need to make a support call? Saying \"CRIT\" feels like it might trigger such support calls.",
+      "revId": "a0cddde9ab079c451be690d7202c78a8f0dfdba8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6753996_2cfb32a0",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2180,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-04T13:31:17Z",
+      "side": 1,
+      "message": "Corrected the CRIT msg, I was using this for debugging and missed out changing it.",
+      "parentUuid": "e1f54356_522d7f39",
       "revId": "a0cddde9ab079c451be690d7202c78a8f0dfdba8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "968c283a_e79d8f9d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2182,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-04T13:31:17Z",
+      "side": 1,
+      "message": "changed this to LogFullDebug",
+      "parentUuid": "37e04426_e97a82f7",
+      "revId": "a0cddde9ab079c451be690d7202c78a8f0dfdba8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a44031c_4fea0657",
         "filename": "src/FSAL/commonlib.c",
         "patchSetId": 2
@@ -82,6 +136,24 @@
       "writtenOn": "2026-03-02T19:25:58Z",
       "side": 1,
       "message": "So basically any reopen that uses a different export will change this? I think that\u0027s fine, but not sure we want to go around waving flags.\n\nWhat about a file that has hard links placing it in two exports rather than the nested export situation discussed above?",
+      "revId": "a0cddde9ab079c451be690d7202c78a8f0dfdba8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e785bd2d_87059a49",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2194,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-04T13:31:17Z",
+      "side": 1,
+      "message": "fsal_fd-\u003efsal_export is updated to the export the current request is authorized for which seems to be correct.\notherwise, in lru_try_one while repairing the FD, code will endup in point to a fsal_export which is not at all valid(removed).",
+      "parentUuid": "7a44031c_4fea0657",
       "revId": "a0cddde9ab079c451be690d7202c78a8f0dfdba8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
