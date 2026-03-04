@@ -34,6 +34,24 @@
       "parentUuid": "d2f1bde4_29fa26a7",
       "revId": "e201df02a7db7afe22797febbbfcef8da7cc6f54",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b799af3d_97eec762",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-04T18:53:21Z",
+      "side": 1,
+      "message": "You certainly don\u0027t need to repeat the function name effectively, but the \"during unexport\" bit may still help understand the log. Again, it is OK for a string to go past 80 columns, please don\u0027t be shy about doing so if it makes a message more readable in the log.\n\nThe reason to not split strings is that sometimes when trying to grep to find where the message is emitted, what is keyed on happens to be broken by the string split. Also, some tools that auto-process log calls may not properly follow broken strings.",
+      "parentUuid": "a0446f65_0f221e40",
+      "revId": "e201df02a7db7afe22797febbbfcef8da7cc6f54",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
