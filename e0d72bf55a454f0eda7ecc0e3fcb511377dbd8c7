@@ -34,6 +34,23 @@
       "parentUuid": "954fa2b4_82b50031",
       "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec7d8cf7_97c92ca7",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-03-05T12:04:03Z",
+      "side": 1,
+      "message": "Is it okay to assign op_ctx export, to fsal_export, even if it is NULL ? Shouldn\u0027t the fsal_fd be closed/removed ?",
+      "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
