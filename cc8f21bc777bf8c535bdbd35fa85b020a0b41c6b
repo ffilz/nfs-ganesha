@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f39331b_4c88391b",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-03-05T13:04:01Z",
+      "side": 1,
+      "message": "There are many places DISPATCH component has been used. I wanted to keep the RDMA logs separate and can be individually enabled with RDMA component. In future, I have a plan to use the RDMA component on all the RDMA code path logs.",
+      "parentUuid": "64ca2d7b_5776f2e3",
+      "revId": "cc8f21bc777bf8c535bdbd35fa85b020a0b41c6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5cd22bd_9bcffb20",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-24T21:42:25Z",
       "side": 1,
       "message": "Can we figure out how to not flip this block back and forth with clang-format? Every patch that touches this block shows the whole block changing...",
+      "revId": "cc8f21bc777bf8c535bdbd35fa85b020a0b41c6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25bb7b5b_57ad67e9",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-03-05T13:04:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b5cd22bd_9bcffb20",
       "revId": "cc8f21bc777bf8c535bdbd35fa85b020a0b41c6b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
