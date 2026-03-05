@@ -34,6 +34,29 @@
       "parentUuid": "4ac39e1b_7829a288",
       "revId": "cabf22bc2b71fd9becea8857172fc873758fcc04",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81d8535_6576aa37",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2026-03-05T18:06:54Z",
+      "side": 1,
+      "message": "A general question here, today the patch will support krb5p/krb5p + tls.\nFrom https://www.rfc-editor.org/rfc/rfc9289.html section 6.4, it suggest us to disable krb5i \u0026 krb5p when TLS is in use:\n\"RPCSEC_GSS provides integrity and privacy services that are largely redundant when TLS is in use. These services SHOULD be disabled in that case.\"\nWe have share level enforcement for TLS, but not enable/disable.\nAre we going to handle above suggestion?(like block with EACCESS when krb5p/i + (m)tls comes)",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 37
+      },
+      "revId": "cabf22bc2b71fd9becea8857172fc873758fcc04",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
