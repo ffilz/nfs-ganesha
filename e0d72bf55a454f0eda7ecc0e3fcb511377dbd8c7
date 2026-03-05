@@ -51,6 +51,24 @@
       "message": "Is it okay to assign op_ctx export, to fsal_export, even if it is NULL ? Shouldn\u0027t the fsal_fd be closed/removed ?",
       "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c02c1e_e91e6b37",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-05T12:27:13Z",
+      "side": 1,
+      "message": "In the current case, we are trying to reopen a FD which is already closed.\nSo the op_ctx should have the correct fsal_export associated with this reopen and fsal_export cannot be null in any case. I think we always populate the op_ctx before stating a work to track it properly",
+      "parentUuid": "ec7d8cf7_97c92ca7",
+      "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
