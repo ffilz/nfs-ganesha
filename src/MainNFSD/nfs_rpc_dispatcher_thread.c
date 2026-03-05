@@ -173,7 +173,6 @@ SVCXPRT *tcp_xprt[P_COUNT];
 /* Flag to indicate if V6 interfaces on the host are enabled */
 bool v6disabled;
 bool vsock;
-bool rdma;
 
 /**
  * @brief Unregister an RPC program.
@@ -657,7 +656,7 @@ void Create_SVCXPRTs(void)
 		Create_tcp(P_NFS_VSOCK);
 #endif /* RPC_VSOCK */
 #ifdef _USE_NFS_RDMA
-	if (rdma)
+	if (nfs_param.core_param.enable_rdma)
 		Create_RDMA(P_NFS_RDMA);
 #endif /* _USE_NFS_RDMA */
 }
@@ -965,6 +964,7 @@ int bind_sockets_vsock(void)
 void Bind_sockets(void)
 {
 	int rc = 0;
+	int rdma_enabled = 0;
 
 	/*
 	 * See Allocate_sockets(), which should already
@@ -991,9 +991,13 @@ void Bind_sockets(void)
 				 "AF_VSOCK bind failed (continuing startup)");
 	}
 #endif /* RPC_VSOCK */
+
+#ifdef _USE_NFS_RDMA
+	rdma_enabled = nfs_param.core_param.enable_rdma;
+#endif /* _USE_NFS_RDMA */
 	LogInfo(COMPONENT_DISPATCH,
 		"Bind sockets successful, v6disabled = %d, vsock = %d, rdma = %d",
-		v6disabled, vsock, rdma);
+		v6disabled, vsock, rdma_enabled);
 }
 
 /**
@@ -1406,9 +1410,6 @@ void nfs_Init_svc(void)
 #endif
 #ifdef RPC_VSOCK
 	vsock = NFS_options & CORE_OPTION_NFS_VSOCK;
-#endif
-#ifdef _USE_NFS_RDMA
-	rdma = NFS_options & CORE_OPTION_NFS_RDMA;
 #endif
 
 	/* New TI-RPC package init function */

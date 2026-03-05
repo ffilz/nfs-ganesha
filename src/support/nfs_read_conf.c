@@ -107,10 +107,6 @@ static struct config_item_list protocols[] = {
 #ifdef RPC_VSOCK
 	CONFIG_LIST_TOK("nfsvsock", CORE_OPTION_NFS_VSOCK),
 #endif
-#ifdef _USE_NFS_RDMA
-	CONFIG_LIST_TOK("nfsrdma", CORE_OPTION_NFS_RDMA),
-	CONFIG_LIST_TOK("rpcrdma", CORE_OPTION_NFS_RDMA),
-#endif
 #ifdef _USE_9P
 	CONFIG_LIST_TOK("9p", CORE_OPTION_9P),
 #endif
@@ -213,6 +209,7 @@ static struct config_item core_params[] = {
 		       nfs_core_param, port[P_RQUOTA]),
 #endif
 #ifdef _USE_NFS_RDMA
+	CONF_ITEM_BOOL("Enable_RDMA", false, nfs_core_param, enable_rdma),
 	CONF_ITEM_UI16("NFS_RDMA_Port", 0, UINT16_MAX, NFS_RDMA_PORT,
 		       nfs_core_param, port[P_NFS_RDMA]),
 	CONF_ITEM_LIST("NFS_RDMA_Protocol_Versions", NFS_RDMA_ENABLE_BY_DEFAULT,

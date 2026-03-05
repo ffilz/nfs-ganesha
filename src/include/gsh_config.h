@@ -213,11 +213,6 @@ typedef enum protos {
 #define CORE_OPTION_NFS_VSOCK 0x00000008 /*< AF_VSOCK NFS listener */
 
 /**
- * @brief Support RPC/RDMA v1
- */
-#define CORE_OPTION_NFS_RDMA 0x00000010 /*< RPC/RDMA v1 NFS listener */
-
-/**
  * @brief Support NFSv3 and NFSv4.
  */
 #ifdef _USE_NFS3
@@ -555,6 +550,8 @@ typedef struct nfs_core_param {
 	 */
 	uint32_t connection_manager_timeout_sec;
 #ifdef _USE_NFS_RDMA
+	/** Enable RDMA transport **/
+	bool enable_rdma;
 	/** NFS Versions to supported for NFSoRDMA.
 	    Defaults to NFS_RDMA_ENABLE_BY_DEFAULT and is settable with
 	    NFS_RDMA_Protocol_Versions

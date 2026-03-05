@@ -55,6 +55,9 @@ NLM_Port (uint16, range 0 to UINT16_MAX, default 0)
 Rquota_Port (uint16, range 0 to UINT16_MAX, default 875)
     Port number used by Rquota Protocol.
 
+Enable_RDMA (bool, default false)
+    Whether to support the RDMA transport.
+
 NFS_RDMA_Port (uint16, range 0 to UINT16_MAX, default 20049)
     Port number used by NFS Over RDMA Protocol.
 
