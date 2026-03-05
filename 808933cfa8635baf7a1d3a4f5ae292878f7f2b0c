@@ -16,6 +16,24 @@
       "message": "I sometimes code such constants as 10 * 1000 * 1000 so it\u0027s easier to count zeros... The 10 ms comment above definitely makes the intent clear though.\n\nHmm, do you think we really need to wait 10 ms? Really we should never have to wait very long right? The only impact is a slight delay in releasing the memory for an export since we block use of it once it\u0027s on it\u0027s way to cleanup so maybe 10 ms is a good wait since we won\u0027t actually be constantly polling.\n\nWhat thread is doing this wait? That might be a consideration for how long to wait.",
       "revId": "808933cfa8635baf7a1d3a4f5ae292878f7f2b0c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef62e7c_f8b04270",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-05T10:01:58Z",
+      "side": 1,
+      "message": "Thread : SigMgr",
+      "parentUuid": "aedbdaa2_9505efdf",
+      "revId": "808933cfa8635baf7a1d3a4f5ae292878f7f2b0c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
