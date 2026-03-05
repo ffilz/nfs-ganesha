@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c07277c_8c5b89f2",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-05T20:00:12Z",
+      "side": 1,
+      "message": "OK, one more thing, please don\u0027t split strings, our coding style prefers strings be unbroken and allows them to exceed 80 column limit.\n\n(hmm, I need to see why checkpatch isn\u0027t complaining anymore...)",
+      "parentUuid": "1f39331b_4c88391b",
+      "revId": "cc8f21bc777bf8c535bdbd35fa85b020a0b41c6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5cd22bd_9bcffb20",
         "filename": "src/log/log_functions.c",
         "patchSetId": 1
