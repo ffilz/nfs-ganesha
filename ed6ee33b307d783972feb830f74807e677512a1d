@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f704d83f_d5a479a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-03-06T05:34:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ed6ee33b307d783972feb830f74807e677512a1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdc8029e_ff844683",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "Concern with moving the CB_NULL scheduling into nfs_rpc_create_chan_v41() is that the function is also used from bind_conn_to_session_backchannel(). Triggering it there would cause a CB_NULL to be sent on every BIND_CONNECTION as well, which changes the current behavior.\n\nSince the intent of this patch is only to send the initial CB_NULL after CREATE_SESSION (to satisfy pynfs CSESS20/21 expectations), I kept the scheduling in the CREATE_SESSION path.",
       "parentUuid": "fdc8029e_ff844683",
+      "revId": "ed6ee33b307d783972feb830f74807e677512a1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cdac7f5_d94bcac6",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-03-06T05:34:41Z",
+      "side": 1,
+      "message": "okay, thanks for clarification",
+      "parentUuid": "4cfc88c8_70e99398",
       "revId": "ed6ee33b307d783972feb830f74807e677512a1d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
