@@ -105,6 +105,24 @@
       "parentUuid": "52c02c1e_e91e6b37",
       "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6639655e_28481eec",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-03-06T05:42:42Z",
+      "side": 1,
+      "message": "In that case should we handle \"fsal_fd \u003d\u003d NULL\" case separately ?\nAs per scenario 1 listed above, should we add coverage for freed memory (I am assuming that, after freeing it will be NULL) ?",
+      "parentUuid": "3445763b_ee559435",
+      "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
