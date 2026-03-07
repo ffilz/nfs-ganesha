@@ -39,6 +39,30 @@
       },
       "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd0b708_ea14c678",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-03-07T03:54:48Z",
+      "side": 1,
+      "message": "This change does not alter the existing RDMA functionality.\nIt only changes how RDMA transport is enabled in configuration, by replacing the CORE_OPTION_NFS_RDMA flag with the explicit Enable_RDMA configuration parameter.\n\nThe RDMA listener creation and protocol handling remain unchanged once RDMA is enabled. Therefore, the runtime behavior of NFS over RDMA remains the same.\n\nThe purpose of introducing Enable_RDMA is to address several design and configuration issues in the current implementation.\n\n1. RDMA is not an NFS protocol\n\nRDMA is a transport for RPC (RPC-over-RDMA), while the actual NFS protocol versions remain NFSv3 or NFSv4.x.\nThe NFS_Protocols configuration parameter is intended to control NFS protocol versions, not transport mechanisms.\n\nTherefore enabling RDMA through NFS_Protocols (via nfsrdma or rpcrdma) mixes transport configuration with protocol configuration, which is conceptually incorrect.\n\n2. nfsrdma and rpcrdma provide identical functionality\n\nCurrently both tokens map to the same flag:\n\nCONFIG_LIST_TOK(\"nfsrdma\", CORE_OPTION_NFS_RDMA)\nCONFIG_LIST_TOK(\"rpcrdma\", CORE_OPTION_NFS_RDMA)\n\nSince both set the same option, nfsrdma does not provide any additional functionality and effectively duplicates the behavior of rpcrdma.\n\n3. RDMA configuration is not documented\n\nThe nfsrdma and rpcrdma tokens are not referenced in the configuration documentation or sample configuration files:\n\nsrc/config_samples/config.txt\n\nsrc/doc/man/ganesha-core-config.rst\n\nThis makes RDMA enablement through NFS_Protocols difficult to discover for users.\n\nIntroducing Enable_RDMA provides a clear and documented configuration parameter for enabling RDMA transport.\n\n\n4. RDMA control is currently split across multiple mechanisms\n\nIn the existing implementation:\n\nRDMA listener creation is controlled through CORE_OPTION_NFS_RDMA\n\nRDMA protocol filtering is controlled through NFS_RDMA_Protocol_Versions\n\nBecause RDMA enablement is tied to NFS_Protocols, the transport configuration becomes indirectly coupled with protocol configuration, making the configuration harder to reason about.\n\n5. Enable_RDMA separates transport and protocol configuration\n\nIntroducing Enable_RDMA separates these responsibilities:\n\nEnable_RDMA → controls whether RDMA transport is enabled\n\nNFS_RDMA_Protocol_Versions → controls which NFS versions are allowed over RDMA\n\nThis keeps transport enablement and protocol selection clearly separated.\n\n6. The existing rdma variable is only used for listener creation\n\nThe global variable rdma was only used to determine whether the RDMA listener should be created during initialization:\n\nif (rdma)\nCreate_RDMA(...)\n\nReplacing this with nfs_param.core_param.enable_rdma removes the need for a global variable and makes the behavior entirely configuration-driven.",
+      "parentUuid": "f7d424b3_8880600d",
+      "range": {
+        "startLine": 554,
+        "startChar": 17,
+        "endLine": 554,
+        "endChar": 18
+      },
+      "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
