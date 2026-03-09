@@ -63,6 +63,30 @@
       },
       "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c23bc596_ce56cfca",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-03-09T08:48:14Z",
+      "side": 1,
+      "message": "Point - 3 : I will update the manual for the NFSv3 support \u0026 config both. Thanks for pointing out!\n\nPoint - 5: We are not providing the facility to enable or disable the RDMA.  Now onwards, by default Ganesha will be listening on RDMA port along with TCP/UDP, if RDMA is enable at protocol level w.r.t hardware support. User can decide to use or not at Export or Client level block.",
+      "parentUuid": "1dd0b708_ea14c678",
+      "range": {
+        "startLine": 554,
+        "startChar": 17,
+        "endLine": 554,
+        "endChar": 18
+      },
+      "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
