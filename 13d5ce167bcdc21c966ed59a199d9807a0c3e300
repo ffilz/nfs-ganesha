@@ -87,6 +87,30 @@
       },
       "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be9d68b0_2bc563fb",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-03-09T09:18:31Z",
+      "side": 1,
+      "message": "Enabling RDMA by default in config is not a good idea.",
+      "parentUuid": "c23bc596_ce56cfca",
+      "range": {
+        "startLine": 554,
+        "startChar": 17,
+        "endLine": 554,
+        "endChar": 18
+      },
+      "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
