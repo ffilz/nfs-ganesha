@@ -111,6 +111,30 @@
       },
       "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d95544f_6b24905b",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-03-10T09:48:22Z",
+      "side": 1,
+      "message": "Default means, once Ganesha is started with RDMA enabled, it should not be disabled since it requires Ganesha restart. RDMA control should be managed at the export and client levels for enabling or disabling. But again it depends on the application which manages the Ganesha config and if they want they can do it from their application while modifying the “Protocol”.",
+      "parentUuid": "be9d68b0_2bc563fb",
+      "range": {
+        "startLine": 554,
+        "startChar": 17,
+        "endLine": 554,
+        "endChar": 18
+      },
+      "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
