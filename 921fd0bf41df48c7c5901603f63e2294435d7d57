@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "107d99b1_17c1623a",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-11T23:17:35Z",
+      "side": 1,
+      "message": "True, though the error is actually essentially impossible. Also, I think the compiler will optimize it to effectively a jump to the LogCrit.\n\nStill, I could re-arrange as suggested.\n\nWould be interesting to compare the binary from both methods...",
+      "parentUuid": "c99d9e5e_8fcfbba6",
+      "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c690edb5_c76ca3d0",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-11T19:05:47Z",
       "side": 1,
       "message": "It should be \"return NULL\"",
+      "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fbdc04_691ee0fe",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-11T23:17:35Z",
+      "side": 1,
+      "message": "Oops... Surprised the compiler didn\u0027t catch that one... It must be generous with allowing any integer \"0\" as equivalent to NULL...",
+      "parentUuid": "c690edb5_c76ca3d0",
       "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
